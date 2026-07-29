@@ -1774,6 +1774,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Welli System sind für e CVE aafällig?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organisatione und aafälligi System um e Schwachstell ume.',
+  'Organisaties met kwetsbare systemen': 'Organisatione mit aafällige System',
+  'Kwetsbare systemen': 'Aafälligi Systeem',
   'Kritiek/hoog': 'kritisch/hoch',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Dä bestehend Bèrìcht cha nìt sicher aktualisiert wärde. Erstell dä Bèrìcht neu; s bestehend Deck blibt unverändert.',

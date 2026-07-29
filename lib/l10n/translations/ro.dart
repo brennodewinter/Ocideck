@@ -1788,6 +1788,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Ce sisteme sunt vulnerabile la un CVE?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organizații și sisteme vulnerabile în jurul unei vulnerabilități.',
+  'Organisaties met kwetsbare systemen': 'Organizații cu sisteme vulnerabile',
+  'Kwetsbare systemen': 'Sisteme vulnerabile',
   'Kritiek/hoog': 'Critic/ridicat',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Acest raport existent nu poate fi actualizat în siguranță. Creați raportul ca nou; deck-ul existent rămâne neschimbat.',

@@ -1793,6 +1793,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Кои системи са уязвими към CVE?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Организации и уязвими системи около една уязвимост.',
+  'Organisaties met kwetsbare systemen': 'Организации с уязвими системи',
+  'Kwetsbare systemen': 'Уязвими системи',
   'Kritiek/hoog': 'Критично/високо',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Този съществуващ доклад не може да бъде безопасно актуализиран. Създайте доклада като нов; съществуващият deck остава непроменен.',

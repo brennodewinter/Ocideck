@@ -1746,6 +1746,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?': 'CVE QobmoH patmey nuq?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'wa\' QobmoHghach DopDaq pat puj je DIvI\'mey.',
+  'Organisaties met kwetsbare systemen': 'pat puj ghajbogh DIvI\'mey',
+  'Kwetsbare systemen': 'pat puj',
   'Kritiek/hoog': 'Qobqu\'/Qob',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Qoylu\'be\'laH jupbogh reportvam. chu\' report chenmoH; qonta\'bogh deck choHbe\'.',

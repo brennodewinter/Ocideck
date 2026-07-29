@@ -730,6 +730,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Ki sistemanan ta vulnerabel pa un CVE?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organisashonnan i sistemanan vulnerabel rònt di un vulnerabilidat.',
+  'Organisaties met kwetsbare systemen':
+      'Organisashonnan ku sistemanan vulnerabel',
+  'Kwetsbare systemen': 'Sistemanan vulnerabel',
   'Kritiek/hoog': 'Krítiko/haltu',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'E informe existente aki no por wordo aktualisá di un manera sigur. Krea e informe komo nobo; e deck existente keda sin cambio.',

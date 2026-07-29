@@ -1773,6 +1773,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Kateri sistemi so ranljivi za CVE?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organizacije in ranljivi sistemi okoli ene ranljivosti.',
+  'Organisaties met kwetsbare systemen': 'Organizacije z ranljivimi sistemi',
+  'Kwetsbare systemen': 'Ranljivi sistemi',
   'Kritiek/hoog': 'Kritično/visoko',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Tega obstoječega poročila ni mogoče varno posodobiti. Ustvarite poročilo kot novo; obstoječi deck ostane nespremenjen.',

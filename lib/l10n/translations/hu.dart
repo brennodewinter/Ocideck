@@ -1775,6 +1775,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Mely rendszerek sebezhetők egy CVE által?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Szervezetek és sérülékeny rendszerek egy sebezhetőség körül.',
+  'Organisaties met kwetsbare systemen':
+      'Sérülékeny rendszerekkel rendelkező szervezetek',
+  'Kwetsbare systemen': 'Sérülékeny rendszerek',
   'Kritiek/hoog': 'Kritikus/magas',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Ez a meglévő jelentés nem frissíthető biztonságosan. Hozza létre a jelentést újként; a meglévő deck változatlan marad.',

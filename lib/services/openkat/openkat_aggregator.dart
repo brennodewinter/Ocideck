@@ -359,7 +359,7 @@ class OpenKatAggregator {
   /// Organisaties gerangschikt voor de actuele managementvraag.
   ///
   /// Dit is bewust geen samengestelde risicoscore: eerst telt de zwaarste
-  /// feitelijke ernst, daarna het aantal getroffen systemen en pas daarna het
+  /// feitelijke ernst, daarna het aantal kwetsbare systemen en pas daarna het
   /// totaal. De presentatie kan daardoor precies uitleggen waarom een
   /// organisatie bovenaan staat.
   List<OpenKatOrganizationAttention> organizationAttention(
@@ -742,7 +742,7 @@ String _dutchTrendFact(OpenKatTrendFact fact) {
     OpenKatTrendMetric.criticalFindings => 'kritieke findings',
     OpenKatTrendMetric.highFindings => 'hoge findings',
     OpenKatTrendMetric.mediumFindings => 'medium findings',
-    OpenKatTrendMetric.affectedSystems => 'getroffen systemen',
+    OpenKatTrendMetric.affectedSystems => 'kwetsbare systemen',
     OpenKatTrendMetric.controlCoverage => throw StateError(
       'control coverage is handled above',
     ),

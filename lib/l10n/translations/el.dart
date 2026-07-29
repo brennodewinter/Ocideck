@@ -1798,6 +1798,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Ποια συστήματα είναι ευάλωτα σε ένα CVE;',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Οργανισμοί και ευάλωτα συστήματα γύρω από μία ευπάθεια.',
+  'Organisaties met kwetsbare systemen': 'Οργανισμοί με ευάλωτα συστήματα',
+  'Kwetsbare systemen': 'Ευάλωτα συστήματα',
   'Kritiek/hoog': 'Κρίσιμο/υψηλό',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Αυτή η υπάρχουσα αναφορά δεν μπορεί να ενημερωθεί με ασφάλεια. Δημιουργήστε την αναφορά ως νέα· το υπάρχον deck παραμένει αμετάβλητο.',

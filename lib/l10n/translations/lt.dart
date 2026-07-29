@@ -1778,6 +1778,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Kurios sistemos pažeidžiamos CVE?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organizacijos ir pažeidžiamos sistemos aplink vieną pažeidžiamumą.',
+  'Organisaties met kwetsbare systemen':
+      'Organizacijos su pažeidžiamomis sistemomis',
+  'Kwetsbare systemen': 'Pažeidžiamos sistemos',
   'Kritiek/hoog': 'Kritinis/aukštas',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Šios esamos ataskaitos negalima saugiai atnaujinti. Sukurkite ataskaitą kaip naują; esamas deck lieka nepakeistas.',

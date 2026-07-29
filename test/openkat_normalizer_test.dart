@@ -80,7 +80,7 @@ OpenKatSnapshot _normalizeFinding(Map<String, dynamic> finding) {
 /// underdark.nl` — het netwerksegment bleef hangen, samengestelde types werden
 /// nooit tot hun host herleid, en bij een `IPPort` werd letterlijk het woord
 /// "internet" als systeem gekozen. Eén website telde daardoor als tientallen
-/// systemen, waardoor "89 getroffen systemen" boven de 45 systemen van het
+/// systemen, waardoor "89 kwetsbare systemen" boven de 45 systemen van het
 /// portfolio uitkwam.
 void main() {
   group('openKatSystemAnchor', () {

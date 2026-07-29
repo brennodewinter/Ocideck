@@ -12,7 +12,9 @@ String openKatScenarioTitle(
   OpenKatWizardScenarioId.organizationProgress => l10n.d(
     'Wat veranderde er bij één organisatie?',
   ),
-  OpenKatWizardScenarioId.cveExposure => l10n.d('Wie is geraakt door een CVE?'),
+  OpenKatWizardScenarioId.cveExposure => l10n.d(
+    'Welke systemen zijn kwetsbaar voor een CVE?',
+  ),
   OpenKatWizardScenarioId.dataQuality => l10n.d(
     'Zijn de metingen compleet en actueel?',
   ),
@@ -29,7 +31,7 @@ String openKatScenarioDescription(
     'Voortgang ten opzichte van een eerder meetmoment.',
   ),
   OpenKatWizardScenarioId.cveExposure => l10n.d(
-    'Getroffen organisaties en systemen rond één kwetsbaarheid.',
+    'Organisaties en kwetsbare systemen rond één kwetsbaarheid.',
   ),
   OpenKatWizardScenarioId.dataQuality => l10n.d(
     'Datakwaliteit, ontbrekende metingen en veroudering.',
@@ -63,7 +65,7 @@ String openKatBlockTitle(AppLocalizations l10n, OpenKatReportBlockKind kind) =>
         'Nieuwe en verdwenen bevindingen',
       ),
       OpenKatReportBlockKind.cveExposure => l10n.d(
-        'Getroffen organisaties en systemen',
+        'Organisaties met kwetsbare systemen',
       ),
       OpenKatReportBlockKind.monitoringChanges => l10n.d(
         'Veranderingen in monitoring',

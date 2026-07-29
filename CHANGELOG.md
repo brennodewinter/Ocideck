@@ -18,7 +18,7 @@ in Dutch, and it keeps growing on `main` between releases.
 
 - Het OpenKAT-managementrapport geeft bij een portfolio met meer dan één
   organisatie vroeg een tabel **Deze organisaties vragen aandacht**: transparant
-  gerangschikt op kritieke bevindingen, hoge bevindingen en getroffen systemen.
+  gerangschikt op kritieke bevindingen, hoge bevindingen en kwetsbare systemen.
   Bij niet-vergelijkbare meetdekking staat de beperking in gewone taal bij het
   verloop zelf, niet op een afzonderlijke technische waarschuwing. Nederlandse
   rapporten gebruiken Nederlandse labels voor ernst, bevindingen en
@@ -1685,7 +1685,7 @@ read a book to find out.
 
 - **De OpenKAT-import toonde systemen die geen systemen waren, en tellingen die
   elkaar tegenspraken.** Een uitdraai van drie organisaties meldde 295 findings
-  boven een ernstverdeling die er 218 verklaarde, en 89 getroffen systemen bij
+  boven een ernstverdeling die er 218 verklaarde, en 89 kwetsbare systemen bij
   45 systemen in totaal. In de tabellen stonden regels als
   `internet|185.73.32.3|tcp|443|https|internet|underdark.nl`.
 

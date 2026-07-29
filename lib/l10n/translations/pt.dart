@@ -1800,6 +1800,13 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Que sistemas são vulneráveis a uma CVE?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organizações e sistemas vulneráveis em torno de uma vulnerabilidade.',
+  'Organisaties met kwetsbare systemen':
+      'Organizações com sistemas vulneráveis',
+  'Kwetsbare systemen': 'Sistemas vulneráveis',
   'Kritiek/hoog': 'Crítico/alto',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Este relatório existente não pode ser atualizado com segurança. Crie o relatório como novo; o deck existente permanece inalterado.',

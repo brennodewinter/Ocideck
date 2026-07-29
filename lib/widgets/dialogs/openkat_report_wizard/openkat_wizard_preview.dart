@@ -73,7 +73,7 @@ class OpenKatWizardPreview extends StatelessWidget {
                           value: '${facts.criticalHighCount}',
                         ),
                         _Metric(
-                          label: l10n.d('Getroffen systemen'),
+                          label: l10n.d('Kwetsbare systemen'),
                           value: '${facts.systemCount}',
                         ),
                       ],

@@ -1806,7 +1806,7 @@ The wizard asks one question first and derives the report layout from it:
 | --- | --- |
 | **Welke organisaties vragen aandacht?** | The earlier measurement (the newest is current); optionally the organisations, language and title. |
 | **Wat veranderde er bij één organisatie?** | The organisation and its earlier measurement (the newest is current); optionally language and title. |
-| **Wie is geraakt door een CVE?** | A CVE found in the reports; optionally language and title. |
+| **Welke systemen zijn kwetsbaar voor een CVE?** | A CVE found in the reports; optionally language and title. |
 | **Zijn de metingen compleet en actueel?** | No required extra input; language and title remain optional. |
 
 The side-by-side preview and review step show the selected scenario and the
@@ -1840,15 +1840,15 @@ only the report data that was actually built for their audience.
 For the management question, a portfolio with more than one organisation first
 shows where attention is needed, then what changed and the detail. Its
 **Deze organisaties vragen aandacht** table is transparently ranked by critical
-findings, high findings and the systems affected by those findings. Organisations
+findings, high findings and the systems vulnerable to those findings. Organisations
 without either are omitted; when none qualify, the slide says so directly.
 In a Dutch report, severity, finding and control terms are Dutch too:
 
 | Slide | What it says |
 | --- | --- |
-| Deze organisaties vragen aandacht | Organisations ranked by critical findings, high findings and affected systems. It is absent for one organisation. |
+| Deze organisaties vragen aandacht | Organisations ranked by critical findings, high findings and vulnerable systems. It is absent for one organisation. |
 | Wat dit rapport zegt | The conclusion in words ("42 meer middelzware bevindingen"), and better/worse/mixed. It appears only when the measurements are demonstrably comparable; a first report has no change to report. |
-| Kerncijfers | A scorecard: each severity band and the number of affected systems, next to what it was, with the change coloured. |
+| Kerncijfers | A scorecard: each severity band and the number of vulnerable systems, next to what it was, with the change coloured. |
 | Verloop over de tijd | A line per severity band across every measurement date. With a single measurement it stays a bar chart of the current distribution. When measurement coverage is not comparable, this slide itself says not to read the series as a trend; no separate warning slide is added. |
 | Wat er in beeld is | The inventory — systems, hostnames, IPv4/IPv6, finding types. Kept apart from the figures that colour, because more systems in view is not bad news. |
 | Ernst per organisatie | A heatmap, one row per organisation, showing the full severity distribution behind the attention ranking. |

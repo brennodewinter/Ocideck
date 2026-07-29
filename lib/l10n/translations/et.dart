@@ -1762,6 +1762,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Millised süsteemid on CVE suhtes haavatavad?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organisatsioonid ja haavatavad süsteemid ühe haavatavuse ümber.',
+  'Organisaties met kwetsbare systemen':
+      'Haavatavate süsteemidega organisatsioonid',
+  'Kwetsbare systemen': 'Haavatavad süsteemid',
   'Kritiek/hoog': 'Kriitiline/kõrge',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Seda olemasolevat aruannet ei saa turvaliselt ajakohastada. Looge aruanne uuena; olemasolev deck jääb muutmata.',
