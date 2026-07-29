@@ -1793,6 +1793,72 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bord': 'Табло',
+  'Projectcharter': 'Проектна харта',
+  'CTQ-boom': 'CTQ дърво',
+  'Visgraat (Ishikawa)': 'Рибна кост (Ишикава)',
+  'Proceskaart': 'Карта на процеса',
+  'Impact / Inspanning': 'Въздействие / Усилие',
+  'Vier lijsten — één per kwadrant.': 'Четири списъка — един на квадрант.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Една страница, седем полета — кратко и четимо.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D се изчислява — не го въвеждайте ръчно.',
+  'Eén R per rij.': 'Едно R на ред.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Попълнете отдясно наляво — започнете от клиента.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Колоните са състояния; картите са задачи.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Обхват и критерии за успех първо — как по-късно.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'От нуждата на клиента (Y) към измерими CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Пет нива дълбоко — завърши с X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Шест М като кости — причини под тях.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Стъпки като заглавие :: вид :: атрибути.',
+  'Zet de rol in het lane=… kenmerk.': 'Сложете ролята в атрибута lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT на стъпка — сумите се изчисляват, не се съхраняват.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Списък на квадрант — не чертайте координати.',
+  'Intern': 'Вътрешен',
+  'Negatief': 'Негативен',
+  'Positief': 'Позитивен',
+  'Weinige inspanning': 'Ниско усилие',
+  'Veel inspanning': 'Високо усилие',
+  'Lage impact': 'Ниско въздействие',
+  'Hoge impact': 'Високо въздействие',
+  'Sterktes': 'Силни страни',
+  'Zwaktes': 'Слаби страни',
+  'Kansen': 'Възможности',
+  'Bedreigingen': 'Заплахи',
+  'Achtergrond': 'Предистория',
+  'Huidige situatie': 'Текуща ситуация',
+  'Oorzaakanalyse': 'Анализ на първопричините',
+  'Tegenmaatregelen': 'Противодействия',
+  'Opvolging': 'Проследяване',
+  'Bezig': 'В процес',
+  'Probleem': 'Проблем',
+  'Succescriteria': 'Критерии за успех',
+  'Snelle winst': 'Бързи победи',
+  'Grote projecten': 'Големи проекти',
+  'Opvullers': 'Запълващи',
+  'Ondankbaar': 'Неблагодарни',
+  'Processtap': 'Процесна стъпка',
+  'Faalwijze': 'Режим на отказ',
+  'Oorzaak': 'Причина',
+  'Beheersing': 'Контрол',
+  'Activiteit': 'Дейност',
+  'Leverancier': 'Доставчик',
+  'Klant': 'Клиент',
+  'Plan': 'План',
+  'Team': 'Екип',
+  'Input': 'Вход',
+  'Output': 'Изход',
+  'Effect': 'Ефект',
   'Businesscase / investeringsvoorstel':
       'Бизнес обосновка / инвестиционно предложение',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':

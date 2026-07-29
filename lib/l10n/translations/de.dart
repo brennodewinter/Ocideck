@@ -730,6 +730,72 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Bord': 'Board',
+  'Projectcharter': 'Projektcharta',
+  'CTQ-boom': 'CTQ-Baum',
+  'Visgraat (Ishikawa)': 'Fischgrätendiagramm (Ishikawa)',
+  'Proceskaart': 'Prozesskarte',
+  'Impact / Inspanning': 'Auswirkung / Aufwand',
+  'Vier lijsten — één per kwadrant.': 'Vier Listen — eine pro Quadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Eine Seite, sieben Felder — kurz und lesbar halten.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D wird berechnet — nicht selbst eingeben.',
+  'Eén R per rij.': 'Ein R pro Zeile.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Von rechts nach links ausfüllen — beim Kunden beginnen.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Spalten sind Status; Karten sind Aufgaben.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope und Erfolgskriterien zuerst — das Wie kommt später.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Vom Kundenwunsch (Y) zu messbaren CTQs.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Fünf Ebenen tief — mit einer X-ID enden.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Sechs M als Knochen — Ursachen darunter.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Schritte als Titel :: Art :: Eigenschaften.',
+  'Zet de rol in het lane=… kenmerk.': 'Rolle im lane=… Attribut setzen.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT pro Schritt — Summen werden berechnet, nicht gespeichert.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Eine Liste pro Quadrant — keine Koordinaten zeichnen.',
+  'Intern': 'Intern',
+  'Negatief': 'Negativ',
+  'Positief': 'Positiv',
+  'Weinige inspanning': 'Geringer Aufwand',
+  'Veel inspanning': 'Hoher Aufwand',
+  'Lage impact': 'Geringe Auswirkung',
+  'Hoge impact': 'Hohe Auswirkung',
+  'Sterktes': 'Stärken',
+  'Zwaktes': 'Schwächen',
+  'Kansen': 'Chancen',
+  'Bedreigingen': 'Risiken',
+  'Achtergrond': 'Hintergrund',
+  'Huidige situatie': 'Aktuelle Situation',
+  'Oorzaakanalyse': 'Ursachenanalyse',
+  'Tegenmaatregelen': 'Gegenmaßnahmen',
+  'Opvolging': 'Nachverfolgung',
+  'Bezig': 'In Arbeit',
+  'Probleem': 'Problem',
+  'Succescriteria': 'Erfolgskriterien',
+  'Snelle winst': 'Schnelle Erfolge',
+  'Grote projecten': 'Große Projekte',
+  'Opvullers': 'Lückenfüller',
+  'Ondankbaar': 'Undankbar',
+  'Processtap': 'Prozessschritt',
+  'Faalwijze': 'Versagensmodus',
+  'Oorzaak': 'Ursache',
+  'Beheersing': 'Kontrolle',
+  'Activiteit': 'Aktivität',
+  'Leverancier': 'Lieferant',
+  'Klant': 'Kunde',
+  'Plan': 'Plan',
+  'Team': 'Team',
+  'Input': 'Eingabe',
+  'Output': 'Ausgabe',
+  'Effect': 'Wirkung',
   'Businesscase / investeringsvoorstel': 'Businesscase / Investitionsvorschlag',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
       'Anlass, Optionen mit Kosten und Nutzen, Risiken und der erbetene Beschluss.',

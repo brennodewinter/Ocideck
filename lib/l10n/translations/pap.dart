@@ -730,6 +730,72 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bord': 'Bord',
+  'Projectcharter': 'Karta di proyecto',
+  'CTQ-boom': 'Yabi CTQ',
+  'Visgraat (Ishikawa)': 'Spina di piská (Ishikawa)',
+  'Proceskaart': 'Mapa di proseso',
+  'Impact / Inspanning': 'Impacto / Esfuerso',
+  'Vier lijsten — één per kwadrant.': 'Kuater lista — un pa kadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Un páhina, shete kaha — kòrtiku i leshibel.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D ta kalkulá — no skribí bo mes.',
+  'Eén R per rij.': 'Un R pa fila.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Yena di derechi pa man robes — kuminsá na e kliente.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Kolomnan ta status; kartanan ta tarea.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope i kriterio di éksito promé — kon ta bai despues.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Di nesesidat di kiente (Y) pa CTQ medibel.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Cinco nivel profundo — terminá ku un X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Seis M komo huesu — kousa bou di dje.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Pason komo título :: tipo :: atributonan.',
+  'Zet de rol in het lane=… kenmerk.': 'Pon e rol den e atributo lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT pa pas — total ta kalkulá, no ta warda.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Un lista pa kadrant — no dibui kordinadan.',
+  'Intern': 'Intern',
+  'Negatief': 'Negativo',
+  'Positief': 'Positivo',
+  'Weinige inspanning': 'Esfuerso abou',
+  'Veel inspanning': 'Esfuerso altu',
+  'Lage impact': 'Impacto abou',
+  'Hoge impact': 'Impacto altu',
+  'Sterktes': 'Fortesanan',
+  'Zwaktes': 'Deblesanan',
+  'Kansen': 'Oportunidatnan',
+  'Bedreigingen': 'Menasan',
+  'Achtergrond': 'Background',
+  'Huidige situatie': 'Situashon aktual',
+  'Oorzaakanalyse': 'Análisis di kousa di rais',
+  'Tegenmaatregelen': 'Kontramedidanan',
+  'Opvolging': 'Seguidi',
+  'Bezig': 'Den traha',
+  'Probleem': 'Problema',
+  'Succescriteria': 'Kriterio di éksito',
+  'Snelle winst': 'Gana rápido',
+  'Grote projecten': 'Proyecto grandi',
+  'Opvullers': 'Yenadó',
+  'Ondankbaar': 'Ingrato',
+  'Processtap': 'Pas di proseso',
+  'Faalwijze': 'Modo di falha',
+  'Oorzaak': 'Kousa',
+  'Beheersing': 'Kontrol',
+  'Activiteit': 'Aktividat',
+  'Leverancier': 'Suplídó',
+  'Klant': 'Kiente',
+  'Plan': 'Plan',
+  'Team': 'Team',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Efecto',
   'Businesscase / investeringsvoorstel':
       'Caso di negoshi / proposta di invershon',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':

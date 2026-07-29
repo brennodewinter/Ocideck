@@ -1806,6 +1806,73 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bord': 'Clár',
+  'Projectcharter': 'Cairt an tionscadail',
+  'CTQ-boom': 'Crann CTQ',
+  'Visgraat (Ishikawa)': 'Cnámh éisc (Ishikawa)',
+  'Proceskaart': 'Léarscáil phróisis',
+  'Impact / Inspanning': 'Tionchar / Dúshláin',
+  'Vier lijsten — één per kwadrant.':
+      'Ceithre liosta — ceann amháin sa cheathrú.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Leathanach amháin, seacht mbosca — gearr agus inléite.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'Ríomhtar RPN = S×O×D — ná cuir isteach é féin.',
+  'Eén R per rij.': 'R amháin sa sraith.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Líon ó dheis go clé — tosaigh ag an gcustaiméir.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Is stádasanna iad na colúin; is tascanna iad na cártaí.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scóip agus critéir ratha ar dtús — tagann an conas ina dhiaidh.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Ó riacht an chustaiméara (Y) go CTQ inmhéadaithe.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Cúig leibhéal domhain — críochnaigh le X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Sé M mar chnámha — cúiseanna faoi.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Céimeanna mar theideal :: cineál :: tréithe.',
+  'Zet de rol in het lane=… kenmerk.': 'Cuir an ról san tréith lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT in aghaidh an chéim — sonraítear iomláin, ní stóráiltear.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Liosta sa cheathrú — ná tarraing comhordanáidí.',
+  'Intern': 'Inmheánach',
+  'Negatief': 'Diúltach',
+  'Positief': 'Dearfach',
+  'Weinige inspanning': 'Dúshlán íseal',
+  'Veel inspanning': 'Dúshlán ard',
+  'Lage impact': 'Tionchar íseal',
+  'Hoge impact': 'Tionchar ard',
+  'Sterktes': 'Láidreachtaí',
+  'Zwaktes': 'Lagachtaí',
+  'Kansen': 'Deiseanna',
+  'Bedreigingen': 'Bagairtí',
+  'Achtergrond': 'Cúlra',
+  'Huidige situatie': 'An staid reatha',
+  'Oorzaakanalyse': 'Anailís fréimhe cúise',
+  'Tegenmaatregelen': 'Frithbhearta',
+  'Opvolging': 'Leanúnachas',
+  'Bezig': 'Ar siúl',
+  'Probleem': 'Fadhb',
+  'Succescriteria': 'Critéir ratha',
+  'Snelle winst': 'Buaillí tapa',
+  'Grote projecten': 'Tionscadail mhóra',
+  'Opvullers': 'Líontáin',
+  'Ondankbaar': 'Míbhuíoch',
+  'Processtap': 'Céim phróisis',
+  'Faalwijze': 'Mód teipe',
+  'Oorzaak': 'Cúis',
+  'Beheersing': 'Rialú',
+  'Activiteit': 'Gníomhaíocht',
+  'Leverancier': 'Soláthraí',
+  'Klant': 'Custaiméir',
+  'Plan': 'Plean',
+  'Team': 'Foireann',
+  'Input': 'Ionchur',
+  'Output': 'Aschur',
+  'Effect': 'Mais',
   'Businesscase / investeringsvoorstel': 'Cás gnó / togra infheistíochta',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
       'Cúlra, roghanna le costais agus tairbhí, rioscaí agus an cinneadh atá á iarraidh.',

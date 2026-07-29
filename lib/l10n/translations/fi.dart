@@ -1771,6 +1771,71 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bord': 'Taulu',
+  'Projectcharter': 'Projektikirja',
+  'CTQ-boom': 'CTQ-puu',
+  'Visgraat (Ishikawa)': 'Kalaluu (Ishikawa)',
+  'Proceskaart': 'Prosessikartta',
+  'Impact / Inspanning': 'Vaikutus / Vaiva',
+  'Vier lijsten — één per kwadrant.': 'Neljä listaa — yksi per neljännes.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Yksi sivu, seitsemän laatikkoa — pidä lyhyenä ja luettavana.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D lasketaan — älä syötä itse.',
+  'Eén R per rij.': 'Yksi R per rivi.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Täytä oikealta vasemmalle — aloita asiakkaasta.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Sarakkeet ovat tiloja; kortit ovat tehtäviä.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope ja onnistumiskriteerit ensin — miten tulee myöhemmin.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Asiakkaan tarpeesta (Y) mitattaviin CTQ:iin.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Viisi tasoa syvälle — päätä X-id:hen.',
+  'Zes M\'s als botten — oorzaken eronder.': 'Kuusi M:tä luina — syyt alla.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Vaiheet otsikkona :: tyyppi :: määritteet.',
+  'Zet de rol in het lane=… kenmerk.': 'Laita rooli lane=… määritteeseen.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT per vaihe — summat lasketaan, eivät tallenneta.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Lista per neljännes — älä piirrä koordinaatteja.',
+  'Intern': 'Sisäinen',
+  'Negatief': 'Negatiivinen',
+  'Positief': 'Positiivinen',
+  'Weinige inspanning': 'Pieni vaiva',
+  'Veel inspanning': 'Suuri vaiva',
+  'Lage impact': 'Pieni vaikutus',
+  'Hoge impact': 'Suuri vaikutus',
+  'Sterktes': 'Vahvuudet',
+  'Zwaktes': 'Heikkoudet',
+  'Kansen': 'Mahdollisuudet',
+  'Bedreigingen': 'Uhat',
+  'Achtergrond': 'Tausta',
+  'Huidige situatie': 'Nykytilanne',
+  'Oorzaakanalyse': 'Juuri­syyanalyysi',
+  'Tegenmaatregelen': 'Vastatoimenpiteet',
+  'Opvolging': 'Seuranta',
+  'Bezig': 'Käynnissä',
+  'Probleem': 'Ongelma',
+  'Succescriteria': 'Onnistumiskriteerit',
+  'Snelle winst': 'Nopeat voitot',
+  'Grote projecten': 'Suuret projektit',
+  'Opvullers': 'Täytteet',
+  'Ondankbaar': 'Kiittämätön',
+  'Processtap': 'Prosessivaihe',
+  'Faalwijze': 'Vikatila',
+  'Oorzaak': 'Syy',
+  'Beheersing': 'Valvonta',
+  'Activiteit': 'Toiminta',
+  'Leverancier': 'Toimittaja',
+  'Klant': 'Asiakas',
+  'Plan': 'Suunnitelma',
+  'Team': 'Tiimi',
+  'Input': 'Syöte',
+  'Output': 'Tuloste',
+  'Effect': 'Vaikutus',
   'Businesscase / investeringsvoorstel':
       'Liiketoimintaperustelu / investointiehdotus',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':

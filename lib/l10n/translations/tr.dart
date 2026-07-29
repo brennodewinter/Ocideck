@@ -2748,6 +2748,72 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Bord': 'Pano',
+  'Projectcharter': 'Proje sözleşmesi',
+  'CTQ-boom': 'CTQ ağacı',
+  'Visgraat (Ishikawa)': 'Balık kılçığı (Ishikawa)',
+  'Proceskaart': 'Süreç haritası',
+  'Impact / Inspanning': 'Etki / Çaba',
+  'Vier lijsten — één per kwadrant.': 'Dört liste — her kadran için bir.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Tek sayfa, yedi kutu — kısa ve okunabilir tutun.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D hesaplanır — kendiniz yazmayın.',
+  'Eén R per rij.': 'Her satır için bir R.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Sağdan sola doldurun — müşteriden başlayın.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Sütunlar durumlar; kartlar görevlerdir.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Kapsam ve başarı kriterleri önce — nasıl sonra gelir.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Müşteri ihtiyacından (Y) ölçülebilir CTQ\'lara.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Beş seviye derin — X-id ile bitir.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Altı M kemik olarak — altlarında nedenler.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Adımlar başlık olarak :: tür :: öznitelikler.',
+  'Zet de rol in het lane=… kenmerk.': 'Rolü lane=… özniteliğine koyun.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'Adım başına PT/LT — toplamlar hesaplanır, saklanmaz.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Kadran başına liste — koordinat çizmeyin.',
+  'Intern': 'Dahili',
+  'Negatief': 'Negatif',
+  'Positief': 'Pozitif',
+  'Weinige inspanning': 'Düşük çaba',
+  'Veel inspanning': 'Yüksek çaba',
+  'Lage impact': 'Düşük etki',
+  'Hoge impact': 'Yüksek etki',
+  'Sterktes': 'Güçlü yönler',
+  'Zwaktes': 'Zayıf yönler',
+  'Kansen': 'Fırsatlar',
+  'Bedreigingen': 'Tehditler',
+  'Achtergrond': 'Arka plan',
+  'Huidige situatie': 'Mevcut durum',
+  'Oorzaakanalyse': 'Kök neden analizi',
+  'Tegenmaatregelen': 'Karşı tedbirler',
+  'Opvolging': 'Takip',
+  'Bezig': 'Devam ediyor',
+  'Probleem': 'Problem',
+  'Succescriteria': 'Başarı kriterleri',
+  'Snelle winst': 'Hızlı kazanımlar',
+  'Grote projecten': 'Büyük projeler',
+  'Opvullers': 'Doldurucular',
+  'Ondankbaar': 'Nankör',
+  'Processtap': 'Süreç adımı',
+  'Faalwijze': 'Hata modu',
+  'Oorzaak': 'Neden',
+  'Beheersing': 'Kontrol',
+  'Activiteit': 'Faaliyet',
+  'Leverancier': 'Tedarikçi',
+  'Klant': 'Müşteri',
+  'Plan': 'Plan',
+  'Team': 'Ekip',
+  'Input': 'Girdi',
+  'Output': 'Çıktı',
+  'Effect': 'Etki',
   'Businesscase / investeringsvoorstel': 'İş gerekçesi / yatırım önerisi',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
       'Gerekçe, maliyet ve faydalarıyla seçenekler, riskler ve istenen karar.',

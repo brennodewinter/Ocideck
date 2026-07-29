@@ -1770,6 +1770,71 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bord': 'Anslagstavla',
+  'Projectcharter': 'Projektcharta',
+  'CTQ-boom': 'CTQ-träd',
+  'Visgraat (Ishikawa)': 'Fiskbensdiagram (Ishikawa)',
+  'Proceskaart': 'Processkarta',
+  'Impact / Inspanning': 'Effekt / Insats',
+  'Vier lijsten — één per kwadrant.': 'Fyra listor — en per kvadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'En sida, sju rutor — håll varje kort och läsbar.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D beräknas — skriv inte in det själv.',
+  'Eén R per rij.': 'Ett R per rad.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Fyll i höger-till-vänster — börja med kunden.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Kolumner är statusar; kort är uppgifter.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope och framgångskriterier först — hur kommer senare.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Från kundbehov (Y) till mätbara CTQs.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Fem nivåer djupt — sluta med ett X-id.',
+  'Zes M\'s als botten — oorzaken eronder.': 'Sex M som ben — orsaker under.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Steg som titel :: typ :: attribut.',
+  'Zet de rol in het lane=… kenmerk.': 'Sätt rollen i lane=… attributet.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT per steg — totaler beräknas, lagras inte.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'En lista per kvadrant — rita inte koordinater.',
+  'Intern': 'Intern',
+  'Negatief': 'Negativ',
+  'Positief': 'Positiv',
+  'Weinige inspanning': 'Låg insats',
+  'Veel inspanning': 'Hög insats',
+  'Lage impact': 'Låg effekt',
+  'Hoge impact': 'Hög effekt',
+  'Sterktes': 'Styrkor',
+  'Zwaktes': 'Svagheter',
+  'Kansen': 'Möjligheter',
+  'Bedreigingen': 'Hot',
+  'Achtergrond': 'Bakgrund',
+  'Huidige situatie': 'Nuvarande situation',
+  'Oorzaakanalyse': 'Rotorsaksanalys',
+  'Tegenmaatregelen': 'Motåtgärder',
+  'Opvolging': 'Uppföljning',
+  'Bezig': 'Pågående',
+  'Probleem': 'Problem',
+  'Succescriteria': 'Framgångskriterier',
+  'Snelle winst': 'Snabba vinster',
+  'Grote projecten': 'Stora projekt',
+  'Opvullers': 'Utfyllnader',
+  'Ondankbaar': 'Tacklös',
+  'Processtap': 'Processsteg',
+  'Faalwijze': 'Felfunktion',
+  'Oorzaak': 'Orsak',
+  'Beheersing': 'Kontroll',
+  'Activiteit': 'Aktivitet',
+  'Leverancier': 'Leverantör',
+  'Klant': 'Kund',
+  'Plan': 'Plan',
+  'Team': 'Team',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Effekt',
   'Businesscase / investeringsvoorstel': 'Businesscase / investeringsförslag',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
       'Bakgrund, alternativ med kostnader och nytta, risker och det begärda beslutet.',

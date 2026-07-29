@@ -1771,6 +1771,72 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bord': 'Papan',
+  'Projectcharter': 'Piagam proyek',
+  'CTQ-boom': 'Pohon CTQ',
+  'Visgraat (Ishikawa)': 'Tulang ikan (Ishikawa)',
+  'Proceskaart': 'Peta proses',
+  'Impact / Inspanning': 'Dampak / Usaha',
+  'Vier lijsten — één per kwadrant.': 'Empat daftar — satu per kuadran.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Satu halaman, tujuh kotak — singkat dan mudah dibaca.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D dihitung — jangan diketik sendiri.',
+  'Eén R per rij.': 'Satu R per baris.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Isi dari kanan ke kiri — mulai dari pelanggan.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Kolom adalah status; kartu adalah tugas.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope dan kriteria sukses dulu — bagaimana nanti.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Dari kebutuhan pelanggan (Y) ke CTQ yang terukur.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Lima tingkat dalam — akhiri dengan X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Enam M sebagai tulang — sebab di bawahnya.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Langkah sebagai judul :: jenis :: atribut.',
+  'Zet de rol in het lane=… kenmerk.': 'Letakkan peran di atribut lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT per langkah — total dihitung, tidak disimpan.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Daftar per kuadran — jangan plot koordinat.',
+  'Intern': 'Internal',
+  'Negatief': 'Negatif',
+  'Positief': 'Positif',
+  'Weinige inspanning': 'Usaha rendah',
+  'Veel inspanning': 'Usaha tinggi',
+  'Lage impact': 'Dampak rendah',
+  'Hoge impact': 'Dampak tinggi',
+  'Sterktes': 'Kekuatan',
+  'Zwaktes': 'Kelemahan',
+  'Kansen': 'Peluang',
+  'Bedreigingen': 'Ancaman',
+  'Achtergrond': 'Latar belakang',
+  'Huidige situatie': 'Situasi saat ini',
+  'Oorzaakanalyse': 'Analisis akar masalah',
+  'Tegenmaatregelen': 'Tindakan pencegahan',
+  'Opvolging': 'Tindak lanjut',
+  'Bezig': 'Sedang berjalan',
+  'Probleem': 'Masalah',
+  'Succescriteria': 'Kriteria sukses',
+  'Snelle winst': 'Kemenangan cepat',
+  'Grote projecten': 'Proyek besar',
+  'Opvullers': 'Pengisi',
+  'Ondankbaar': 'Tanpa terima kasih',
+  'Processtap': 'Langkah proses',
+  'Faalwijze': 'Mode kegagalan',
+  'Oorzaak': 'Penyebab',
+  'Beheersing': 'Kontrol',
+  'Activiteit': 'Aktivitas',
+  'Leverancier': 'Pemasok',
+  'Klant': 'Pelanggan',
+  'Plan': 'Rencana',
+  'Team': 'Tim',
+  'Input': 'Masukan',
+  'Output': 'Keluaran',
+  'Effect': 'Efek',
   'Businesscase / investeringsvoorstel': 'Kasus bisnis / proposal investasi',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
       'Latar belakang, opsi dengan biaya dan manfaat, risiko, dan keputusan yang diminta.',

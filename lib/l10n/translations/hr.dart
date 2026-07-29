@@ -1777,6 +1777,71 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bord': 'Ploča',
+  'Projectcharter': 'Povelja projekta',
+  'CTQ-boom': 'CTQ stablo',
+  'Visgraat (Ishikawa)': 'Riblja kost (Ishikawa)',
+  'Proceskaart': 'Karta procesa',
+  'Impact / Inspanning': 'Učinak / Napor',
+  'Vier lijsten — één per kwadrant.': 'Četiri liste — jedna po kvadrantu.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Jedna stranica, sedam polja — kratko i čitljivo.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D se izračunava — ne unosite ručno.',
+  'Eén R per rij.': 'Jedan R po retku.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Popunite zdesno ulijevo — krenite od kupca.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Stupci su statusi; kartice su zadaci.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Opseg i kriteriji uspjeha prvo — kako dolazi kasnije.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Od potrebe kupca (Y) prema mjerljivim CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Pet razina duboko — završi s X-id.',
+  'Zes M\'s als botten — oorzaken eronder.': 'Šest M kao kosti — uzroci ispod.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Koraci kao naslov :: vrsta :: atributi.',
+  'Zet de rol in het lane=… kenmerk.': 'Stavi ulogu u lane=… atribut.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT po koraku — ukupno se izračunava, ne pohranjuje.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Lista po kvadrantu — ne crtaj koordinate.',
+  'Intern': 'Interni',
+  'Negatief': 'Negativan',
+  'Positief': 'Pozitivan',
+  'Weinige inspanning': 'Mali napor',
+  'Veel inspanning': 'Veliki napor',
+  'Lage impact': 'Mali učinak',
+  'Hoge impact': 'Veliki učinak',
+  'Sterktes': 'Snage',
+  'Zwaktes': 'Slabosti',
+  'Kansen': 'Prilike',
+  'Bedreigingen': 'Prijetnje',
+  'Achtergrond': 'Pozadina',
+  'Huidige situatie': 'Trenutna situacija',
+  'Oorzaakanalyse': 'Analiza uzroka',
+  'Tegenmaatregelen': 'Protumjere',
+  'Opvolging': 'Praćenje',
+  'Bezig': 'U tijeku',
+  'Probleem': 'Problem',
+  'Succescriteria': 'Kriteriji uspjeha',
+  'Snelle winst': 'Brze pobjede',
+  'Grote projecten': 'Veliki projekti',
+  'Opvullers': 'Popunjivači',
+  'Ondankbaar': 'Nehvalan',
+  'Processtap': 'Korak procesa',
+  'Faalwijze': 'Način otkaza',
+  'Oorzaak': 'Uzrok',
+  'Beheersing': 'Kontrola',
+  'Activiteit': 'Aktivnost',
+  'Leverancier': 'Dobavljač',
+  'Klant': 'Kupac',
+  'Plan': 'Plan',
+  'Team': 'Tim',
+  'Input': 'Ulaz',
+  'Output': 'Izlaz',
+  'Effect': 'Učinak',
   'Businesscase / investeringsvoorstel': 'Poslovni slučaj / prijedlog ulaganja',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
       'Povod, opcije s troškovima i koristima, rizici i tražena odluka.',

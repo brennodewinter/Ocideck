@@ -1788,6 +1788,72 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bord': 'Дошка',
+  'Projectcharter': 'Статут проєкту',
+  'CTQ-boom': 'Дерево CTQ',
+  'Visgraat (Ishikawa)': 'Риб\'яча кістка (Ішікава)',
+  'Proceskaart': 'Карта процесу',
+  'Impact / Inspanning': 'Вплив / Зусилля',
+  'Vier lijsten — één per kwadrant.': 'Чотири списки — один на квадрант.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Одна сторінка, сім полів — коротко і читабельно.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D обчислюється — не вводьте вручну.',
+  'Eén R per rij.': 'Один R на рядок.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Заповнюйте справа наліво — почніть з клієнта.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Стовпці — це статуси; картки — це завдання.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Обсяг і критерії успіху спочатку — як пізніше.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Від потреби клієнта (Y) до вимірюваних CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'P\'ять рівнів углиб — закінчи X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Шість M як кістки — причини під ними.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Кроки як заголовок :: тип :: атрибути.',
+  'Zet de rol in het lane=… kenmerk.': 'Вкажіть роль у атрибуті lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT на крок — підсумки обчислюються, не зберігаються.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Список на квадрант — не малюйте координати.',
+  'Intern': 'Внутрішній',
+  'Negatief': 'Негативний',
+  'Positief': 'Позитивний',
+  'Weinige inspanning': 'Низькі зусилля',
+  'Veel inspanning': 'Високі зусилля',
+  'Lage impact': 'Низький вплив',
+  'Hoge impact': 'Високий вплив',
+  'Sterktes': 'Сильні сторони',
+  'Zwaktes': 'Слабкі сторони',
+  'Kansen': 'Можливості',
+  'Bedreigingen': 'Загрози',
+  'Achtergrond': 'Передумови',
+  'Huidige situatie': 'Поточна ситуація',
+  'Oorzaakanalyse': 'Аналіз першопричин',
+  'Tegenmaatregelen': 'Контрзаходи',
+  'Opvolging': 'Моніторинг',
+  'Bezig': 'В процесі',
+  'Probleem': 'Проблема',
+  'Succescriteria': 'Критерії успіху',
+  'Snelle winst': 'Швидкі перемоги',
+  'Grote projecten': 'Великі проєкти',
+  'Opvullers': 'Заповнювачі',
+  'Ondankbaar': 'Невдячні',
+  'Processtap': 'Крок процесу',
+  'Faalwijze': 'Режим відмови',
+  'Oorzaak': 'Причина',
+  'Beheersing': 'Контроль',
+  'Activiteit': 'Діяльність',
+  'Leverancier': 'Постачальник',
+  'Klant': 'Клієнт',
+  'Plan': 'План',
+  'Team': 'Команда',
+  'Input': 'Вхід',
+  'Output': 'Вихід',
+  'Effect': 'Ефект',
   'Businesscase / investeringsvoorstel':
       'Бізнес-кейс / інвестиційна пропозиція',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':

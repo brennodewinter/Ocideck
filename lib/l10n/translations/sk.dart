@@ -1778,6 +1778,72 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bord': 'Tabuľa',
+  'Projectcharter': 'Projektová charta',
+  'CTQ-boom': 'Strom CTQ',
+  'Visgraat (Ishikawa)': 'Išikawov diagram',
+  'Proceskaart': 'Mapa procesu',
+  'Impact / Inspanning': 'Dopad / Úsilie',
+  'Vier lijsten — één per kwadrant.': 'Štyri zoznamy — jeden na kvadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Jedna strana, sedem polí — krátko a čitateľne.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D sa počíta — nezadávajte ručne.',
+  'Eén R per rij.': 'Jedno R na riadok.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Vyplňte sprava doľava — začnite zákazníkom.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Stĺpce sú stavy; karty sú úlohy.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope a kritériá úspechu najprv — ako neskôr.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Od potreby zákazníka (Y) k merateľným CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Päť úrovní hlboko — ukonči X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Šesť M ako kosti — príčiny pod nimi.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Kroky ako názov :: typ :: atribúty.',
+  'Zet de rol in het lane=… kenmerk.': 'Vložte rolu do atribútu lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT na krok — súčty sa počítajú, neukladajú.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Zoznam na kvadrant — nekreslite súradnice.',
+  'Intern': 'Interný',
+  'Negatief': 'Negatívny',
+  'Positief': 'Pozitívny',
+  'Weinige inspanning': 'Nízke úsilie',
+  'Veel inspanning': 'Vysoké úsilie',
+  'Lage impact': 'Nízky dopad',
+  'Hoge impact': 'Vysoký dopad',
+  'Sterktes': 'Silné stránky',
+  'Zwaktes': 'Slabé stránky',
+  'Kansen': 'Príležitosti',
+  'Bedreigingen': 'Hrozby',
+  'Achtergrond': 'Pozadie',
+  'Huidige situatie': 'Súčasná situácia',
+  'Oorzaakanalyse': 'Analýza príčin',
+  'Tegenmaatregelen': 'Protiopatrenia',
+  'Opvolging': 'Sledovanie',
+  'Bezig': 'Prebieha',
+  'Probleem': 'Problém',
+  'Succescriteria': 'Kritériá úspechu',
+  'Snelle winst': 'Rýchle výhry',
+  'Grote projecten': 'Veľké projekty',
+  'Opvullers': 'Výplne',
+  'Ondankbaar': 'Nevdäčné',
+  'Processtap': 'Krok procesu',
+  'Faalwijze': 'Spôsob poruchy',
+  'Oorzaak': 'Príčina',
+  'Beheersing': 'Kontrola',
+  'Activiteit': 'Aktivita',
+  'Leverancier': 'Dodávateľ',
+  'Klant': 'Zákazník',
+  'Plan': 'Plán',
+  'Team': 'Tím',
+  'Input': 'Vstup',
+  'Output': 'Výstup',
+  'Effect': 'Efekt',
   'Businesscase / investeringsvoorstel': 'Business case / investičný návrh',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
       'Dôvod, možnosti s nákladmi a prínosmi, riziká a požadované rozhodnutie.',

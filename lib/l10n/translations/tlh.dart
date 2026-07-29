@@ -1746,6 +1746,70 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bord': 'woj',
+  'Projectcharter': 'project charter',
+  'CTQ-boom': 'CTQ Sor',
+  'Visgraat (Ishikawa)': 'ghot \'uS (Ishikawa)',
+  'Proceskaart': 'mIw mIr',
+  'Impact / Inspanning': 'Impact / mIw',
+  'Vier lijsten — één per kwadrant.': 'loS tlhoy — wa\' per quadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'wa\' nav, Soch yotlh — Qatlh je laDlu\'laH.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D calculation \'oH — nIDbe\'.',
+  'Eén R per rij.': 'wa\' R per row.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'nIHvo\' poSDI\' yIghItlh — customer Daq yItagh.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'column status ghotIh; card task ghotIh.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope je success criteria wa\' — vIH tlha\'.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'customer need (Y) vo\' measurable CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.': 'vagh level \'ugh — X-id tlho\'.',
+  'Zes M\'s als botten — oorzaken eronder.': 'jav M tlhoy — cause bNg.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'step title :: Segh :: attribute.',
+  'Zet de rol in het lane=… kenmerk.': 'role yIlan lane=… attribute.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT per step — total calculation, store ghobe\'.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'list per quadrant — coordinate mIwbe\'.',
+  'Intern': 'ngIq',
+  'Negatief': 'Qab',
+  'Positief': 'Dun',
+  'Weinige inspanning': 'mIw mach',
+  'Veel inspanning': 'mIw tIn',
+  'Lage impact': 'Impact mach',
+  'Hoge impact': 'Impact tIn',
+  'Sterktes': 'HoS',
+  'Zwaktes': 'puj',
+  'Kansen': 'yay',
+  'Bedreigingen': 'Qob',
+  'Achtergrond': 'vel',
+  'Huidige situatie': 'DaH situation',
+  'Oorzaakanalyse': 'cause analysis',
+  'Tegenmaatregelen': 'countermeasure',
+  'Opvolging': 'tlha',
+  'Bezig': 'vIH',
+  'Probleem': 'yap',
+  'Succescriteria': 'success criteria',
+  'Snelle winst': 'quick win',
+  'Grote projecten': 'project tIn',
+  'Opvullers': 'fill-in',
+  'Ondankbaar': 'tlho\'be\'',
+  'Processtap': 'process step',
+  'Faalwijze': 'failure mode',
+  'Oorzaak': 'cause',
+  'Beheersing': 'control',
+  'Activiteit': 'activity',
+  'Leverancier': 'supplier',
+  'Klant': 'customer',
+  'Plan': 'plan',
+  'Team': 'team',
+  'Input': 'input',
+  'Output': 'output',
+  'Effect': 'effect',
   'Businesscase / investeringsvoorstel': 'malja\' meq / Huch lanmeH chup',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
       'meq, DuHmey, Huch natlh chep je, Qobmey, wuqghach poQlu\'bogh je.',

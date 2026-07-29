@@ -1793,6 +1793,73 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bord': 'Bord',
+  'Projectcharter': 'Karta tal-proġett',
+  'CTQ-boom': 'Siġra CTQ',
+  'Visgraat (Ishikawa)': 'Spina tal-ħuta (Ishikawa)',
+  'Proceskaart': 'Mappa tal-proċess',
+  'Impact / Inspanning': 'Impatt / Sforz',
+  'Vier lijsten — één per kwadrant.':
+      'Erba\' listi — waħda għal kull kwadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Paġna waħda, seba\' kaxxi — qasir u faċli biex jinqara.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D jingħadd — daħħluhx inti stess.',
+  'Eén R per rij.': 'R wieħed għal kull ringiela.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Imli minn lemin għax-xellug — ibda mill-klijent.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Il-kolonni huma statusi; il-karti huma kompiti.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope u kriterji ta\' suċċess l-ewwel — kif jiġi wara.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Mill-bżonn tal-klijent (Y) għal CTQ li jistgħu jiġu mkejla.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Hames livelli fil-fond — spiċċa b\'X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Sitt M bħala għadam — kawżi taħt.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Passi bħala titolu :: tip :: attributi.',
+  'Zet de rol in het lane=… kenmerk.': 'Daħħal ir-rwol fl-attribut lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT għal kull pass — it-totali jiġu kkalkulati, mhux maħżuna.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Lista għal kull kwadrant — tiġbedx koordinati.',
+  'Intern': 'Intern',
+  'Negatief': 'Negattiv',
+  'Positief': 'Pożittiv',
+  'Weinige inspanning': 'Sforz baxx',
+  'Veel inspanning': 'Sforz għoli',
+  'Lage impact': 'Impatt baxx',
+  'Hoge impact': 'Impatt għoli',
+  'Sterktes': 'Saħħiet',
+  'Zwaktes': 'Dgħufijiet',
+  'Kansen': 'Opportunitajiet',
+  'Bedreigingen': 'Theddidiet',
+  'Achtergrond': 'Sfond',
+  'Huidige situatie': 'Is-sitwazzjoni attwali',
+  'Oorzaakanalyse': 'Analizi tal-kawża għerq',
+  'Tegenmaatregelen': 'Kontromiżuri',
+  'Opvolging': 'Segwitu',
+  'Bezig': 'Għaddej',
+  'Probleem': 'Problema',
+  'Succescriteria': 'Kriterji ta\' suċċess',
+  'Snelle winst': 'Rebħiet malajr',
+  'Grote projecten': 'Proġetti maġġuri',
+  'Opvullers': 'Miliela',
+  'Ondankbaar': 'Ingrat',
+  'Processtap': 'Pass tal-proċess',
+  'Faalwijze': 'Mod ta\' ħsara',
+  'Oorzaak': 'Kawża',
+  'Beheersing': 'Kontroll',
+  'Activiteit': 'Attività',
+  'Leverancier': 'Fornitur',
+  'Klant': 'Klijent',
+  'Plan': 'Pjan',
+  'Team': 'Tim',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Effett',
   'Businesscase / investeringsvoorstel':
       'Każ tan-negozju / proposta ta\' investiment',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':

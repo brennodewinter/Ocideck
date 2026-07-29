@@ -1775,6 +1775,71 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bord': 'Tábla',
+  'Projectcharter': 'Projektcharta',
+  'CTQ-boom': 'CTQ-fa',
+  'Visgraat (Ishikawa)': 'Halcsont (Ishikawa)',
+  'Proceskaart': 'Folyamattérkép',
+  'Impact / Inspanning': 'Hatás / Ráfordítás',
+  'Vier lijsten — één per kwadrant.': 'Négy lista — egyetlen négyzetenként.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Egy oldal, hét mező — tarts röviden és olvashatóan.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D számított — ne írd be kézzel.',
+  'Eén R per rij.': 'Egy R soronként.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Jobbról balra töltsd ki — kezdd a vevővel.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Az oszlopok státuszok; a kártyák feladatok.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope és sikerkritériumok először — a hogyan később.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'A vevői igényből (Y) mérhető CTQ-khoz.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Öt szint mélyen — X-id-re végződjön.',
+  'Zes M\'s als botten — oorzaken eronder.': 'Hat M csontként — okok alatta.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Lépések címként :: típus :: attribútumok.',
+  'Zet de rol in het lane=… kenmerk.': 'A szerepet a lane=… attribútumba tedd.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT lépésenként — összegek számítottak, nem tároltak.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Lista négyzetenként — ne rajzolj koordinátákat.',
+  'Intern': 'Belső',
+  'Negatief': 'Negatív',
+  'Positief': 'Pozitív',
+  'Weinige inspanning': 'Alacsony ráfordítás',
+  'Veel inspanning': 'Magas ráfordítás',
+  'Lage impact': 'Alacsony hatás',
+  'Hoge impact': 'Magas hatás',
+  'Sterktes': 'Erősségek',
+  'Zwaktes': 'Gyengeségek',
+  'Kansen': 'Lehetőségek',
+  'Bedreigingen': 'Veszélyek',
+  'Achtergrond': 'Háttér',
+  'Huidige situatie': 'Jelenlegi helyzet',
+  'Oorzaakanalyse': 'Okok elemzése',
+  'Tegenmaatregelen': 'Ellenintézkedések',
+  'Opvolging': 'Nyomon követés',
+  'Bezig': 'Folyamatban',
+  'Probleem': 'Probléma',
+  'Succescriteria': 'Sikerkritériumok',
+  'Snelle winst': 'Gyors győzelmek',
+  'Grote projecten': 'Nagy projektek',
+  'Opvullers': 'Kitöltők',
+  'Ondankbaar': 'Hálátlan',
+  'Processtap': 'Folyamatlépés',
+  'Faalwijze': 'Hibamód',
+  'Oorzaak': 'Ok',
+  'Beheersing': 'Ellenőrzés',
+  'Activiteit': 'Tevékenység',
+  'Leverancier': 'Beszállító',
+  'Klant': 'Vevő',
+  'Plan': 'Terv',
+  'Team': 'Csapat',
+  'Input': 'Bemenet',
+  'Output': 'Kimenet',
+  'Effect': 'Hatás',
   'Businesscase / investeringsvoorstel':
       'Üzleti indoklás / beruházási javaslat',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':

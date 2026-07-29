@@ -1778,6 +1778,72 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bord': 'Lenta',
+  'Projectcharter': 'Projekto chartija',
+  'CTQ-boom': 'CTQ medis',
+  'Visgraat (Ishikawa)': 'Žuvies kaulas (Išikava)',
+  'Proceskaart': 'Proceso žemėlapis',
+  'Impact / Inspanning': 'Poveikis / Pastangos',
+  'Vier lijsten — één per kwadrant.': 'Keturi sąrašai — vienas kvadrantui.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Vienas puslapis, septyni laukai — trumpai ir įskaitomai.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D skaičiuojamas — neįveskite rankiniu būdu.',
+  'Eén R per rij.': 'Vienas R eilutei.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Užpildykite iš dešinės į kairę — pradėkite nuo kliento.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Stulpeliai yra būsenos; kortelės yra užduotys.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Apimtis ir sėkmės kriterijai pirmiausia — kaip vėliau.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Iš kliento poreikio (Y) į išmatuojamus CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Penki lygiai giliai — baik su X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Šeši M kaip kaulai — priežastys po jais.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Žingsniai kaip pavadinimas :: tipas :: atributai.',
+  'Zet de rol in het lane=… kenmerk.': 'Įdėkite vaidmenį į lane=… atributą.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT žingsniui — sumos skaičiuojamos, nesaugomos.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Sąrašas kvadrantui — nebrėžkite koordinačių.',
+  'Intern': 'Vidinis',
+  'Negatief': 'Neigiamas',
+  'Positief': 'Teigiamas',
+  'Weinige inspanning': 'Mažos pastangos',
+  'Veel inspanning': 'Didelės pastangos',
+  'Lage impact': 'Mažas poveikis',
+  'Hoge impact': 'Didelis poveikis',
+  'Sterktes': 'Stiprybės',
+  'Zwaktes': 'Silpnybės',
+  'Kansen': 'Galimybės',
+  'Bedreigingen': 'Grėsmės',
+  'Achtergrond': 'Fonas',
+  'Huidige situatie': 'Dabartinė padėtis',
+  'Oorzaakanalyse': 'Priežasčių šaknų analizė',
+  'Tegenmaatregelen': 'Priešpriežinės priemonės',
+  'Opvolging': 'Stebėjimas',
+  'Bezig': 'Vykdoma',
+  'Probleem': 'Problema',
+  'Succescriteria': 'Sėkmės kriterijai',
+  'Snelle winst': 'Greitos pergalės',
+  'Grote projecten': 'Dideli projektai',
+  'Opvullers': 'Užpildai',
+  'Ondankbaar': 'Nedėkingas',
+  'Processtap': 'Proceso žingsnis',
+  'Faalwijze': 'Gedimo būdas',
+  'Oorzaak': 'Priežastis',
+  'Beheersing': 'Kontrolė',
+  'Activiteit': 'Veikla',
+  'Leverancier': 'Tiekėjas',
+  'Klant': 'Klientas',
+  'Plan': 'Planas',
+  'Team': 'Komanda',
+  'Input': 'Įvestis',
+  'Output': 'Išvestis',
+  'Effect': 'Efektas',
   'Businesscase / investeringsvoorstel':
       'Verslo pagrindimas / investicijų pasiūlymas',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':

@@ -731,6 +731,72 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bord': 'Boerd',
+  'Projectcharter': 'Projektcharter',
+  'CTQ-boom': 'CTQ-beam',
+  'Visgraat (Ishikawa)': 'Fiskegreat (Ishikawa)',
+  'Proceskaart': 'Prosessaart',
+  'Impact / Inspanning': 'Ympakt / Ynspanning',
+  'Vier lijsten — één per kwadrant.': 'Fjouwer listen — ien per kwadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Ien side, sân fakken — koart en lêsber hâlde.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D wurdt berekkene — typ it net sels.',
+  'Eén R per rij.': 'Ien R per rigel.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Fan rjochts nei links ynfolje — begjin by de klant.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Kolommen bin statussen; kaarten bin taken.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope en sukseskritearia earst — it hoe komt letter.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Fan klantwinsk (Y) nei mjittbere CTQs.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Fiif nivo\'s djip — einigje mei in X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Seis M as bonken — oarsaken derûnder.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Stappen as titel :: soarte :: eigenskippen.',
+  'Zet de rol in het lane=… kenmerk.': 'Set de rol yn it lane=… kenmerk.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT per stap — totalen wurde berekkene, net opslein.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'In list per kwadrant — gjin koördinaten tekenje.',
+  'Intern': 'Yntern',
+  'Negatief': 'Negatyf',
+  'Positief': 'Posityf',
+  'Weinige inspanning': 'Lytse ynspanning',
+  'Veel inspanning': 'Grutte ynspanning',
+  'Lage impact': 'Lech ympakt',
+  'Hoge impact': 'Heech ympakt',
+  'Sterktes': 'Sterktes',
+  'Zwaktes': 'Swakktes',
+  'Kansen': 'Kânsen',
+  'Bedreigingen': 'Bedrigingen',
+  'Achtergrond': 'Eftergrûn',
+  'Huidige situatie': 'Hjoeddeiske sitewaasje',
+  'Oorzaakanalyse': 'Oarsaakanalyze',
+  'Tegenmaatregelen': 'Tjinmaatregels',
+  'Opvolging': 'Opfolging',
+  'Bezig': 'Dwaande',
+  'Probleem': 'Probleem',
+  'Succescriteria': 'Sukseskritearia',
+  'Snelle winst': 'Flugge oerwinningen',
+  'Grote projecten': 'Grutte projekten',
+  'Opvullers': 'Opfolgers',
+  'Ondankbaar': 'Tankber',
+  'Processtap': 'Prosessaap',
+  'Faalwijze': 'Falingswize',
+  'Oorzaak': 'Oarsaak',
+  'Beheersing': 'Behearsking',
+  'Activiteit': 'Aktiviteit',
+  'Leverancier': 'Leveransier',
+  'Klant': 'Klant',
+  'Plan': 'Plan',
+  'Team': 'Team',
+  'Input': 'Ynfier',
+  'Output': 'Utfier',
+  'Effect': 'Effekt',
   'Businesscase / investeringsvoorstel':
       'Businesscase / ynvestearringsfoarstel',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':

@@ -1788,6 +1788,71 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bord': 'Tablă',
+  'Projectcharter': 'Carta proiectului',
+  'CTQ-boom': 'Arbore CTQ',
+  'Visgraat (Ishikawa)': 'Diagrama Ishikawa',
+  'Proceskaart': 'Hartă de proces',
+  'Impact / Inspanning': 'Impact / Efort',
+  'Vier lijsten — één per kwadrant.': 'Patru liste — una per cadran.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'O pagină, șapte casete — scurt și lizibil.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D se calculează — nu-l introduceți manual.',
+  'Eén R per rij.': 'Un R pe rând.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Completați de la dreapta la stânga — începeți cu clientul.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Coloanele sunt statusuri; cardurile sunt sarcini.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope și criterii de succes mai întâi — cum vine după.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'De la nevoia clientului (Y) la CTQ măsurabile.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Cinci niveluri în profunzime — termină cu un X-id.',
+  'Zes M\'s als botten — oorzaken eronder.': 'Șase M ca oase — cauze dedesubt.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Pași ca titlu :: tip :: atribute.',
+  'Zet de rol in het lane=… kenmerk.': 'Pune rolul în atributul lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT per pas — totalurile sunt calculate, nu stocate.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'O listă per cadran — nu desenați coordonate.',
+  'Intern': 'Intern',
+  'Negatief': 'Negativ',
+  'Positief': 'Pozitiv',
+  'Weinige inspanning': 'Efort mic',
+  'Veel inspanning': 'Efort mare',
+  'Lage impact': 'Impact mic',
+  'Hoge impact': 'Impact mare',
+  'Sterktes': 'Puncte forte',
+  'Zwaktes': 'Puncte slabe',
+  'Kansen': 'Oportunități',
+  'Bedreigingen': 'Amenințări',
+  'Achtergrond': 'Context',
+  'Huidige situatie': 'Situația curentă',
+  'Oorzaakanalyse': 'Analiza cauzei rădăcină',
+  'Tegenmaatregelen': 'Măsuri corective',
+  'Opvolging': 'Urmărire',
+  'Bezig': 'În curs',
+  'Probleem': 'Problemă',
+  'Succescriteria': 'Criterii de succes',
+  'Snelle winst': 'Câștiguri rapide',
+  'Grote projecten': 'Proiecte majore',
+  'Opvullers': 'Completoare',
+  'Ondankbaar': 'Ingrat',
+  'Processtap': 'Pas de proces',
+  'Faalwijze': 'Mod de eșec',
+  'Oorzaak': 'Cauză',
+  'Beheersing': 'Control',
+  'Activiteit': 'Activitate',
+  'Leverancier': 'Furnizor',
+  'Klant': 'Client',
+  'Plan': 'Plan',
+  'Team': 'Echipă',
+  'Input': 'Intrare',
+  'Output': 'Ieșire',
+  'Effect': 'Efect',
   'Businesscase / investeringsvoorstel':
       'Business case / propunere de investiție',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':

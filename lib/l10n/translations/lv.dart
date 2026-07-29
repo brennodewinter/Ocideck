@@ -1770,6 +1770,72 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bord': 'Tabula',
+  'Projectcharter': 'Projekta harta',
+  'CTQ-boom': 'CTQ koks',
+  'Visgraat (Ishikawa)': 'Zivs kauls (Išikava)',
+  'Proceskaart': 'Procesa karte',
+  'Impact / Inspanning': 'Ietekme / Pūliņi',
+  'Vier lijsten — één per kwadrant.': 'Četri saraksti — viens uz kvadrantu.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Viena lapa, septiņi lauki — īsi un salasāmi.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D tiek aprēķināts — neievadiet manuāli.',
+  'Eén R per rij.': 'Viens R uz rindu.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Aizpildiet no labās uz kreiso — sāciet ar klientu.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Kolonnas ir statusi; kartītes ir uzdevumi.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Tvērums un panākumu kritēriji vispirms — kā vēlāk.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'No klienta vajadzības (Y) uz mērāmiem CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Pieci līmeņi dziļi — beigt ar X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Seši M kā kauli — cēloņi zem tiem.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Soļi kā virsraksts :: veids :: atribūti.',
+  'Zet de rol in het lane=… kenmerk.': 'Lieciet lomu lane=… atribūtā.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT uz soli — kopsummas tiek aprēķinātas, neuzglabātas.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Saraksts uz kvadrantu — nezīmējiet koordinātes.',
+  'Intern': 'Iekšējs',
+  'Negatief': 'Negatīvs',
+  'Positief': 'Pozitīvs',
+  'Weinige inspanning': 'Zemi pūliņi',
+  'Veel inspanning': 'Augsti pūliņi',
+  'Lage impact': 'Zema ietekme',
+  'Hoge impact': 'Augsta ietekme',
+  'Sterktes': 'Stiprās puses',
+  'Zwaktes': 'Vājās puses',
+  'Kansen': 'Iespējas',
+  'Bedreigingen': 'Draudi',
+  'Achtergrond': 'Fons',
+  'Huidige situatie': 'Pašreizējā situācija',
+  'Oorzaakanalyse': 'Cēloņu analīze',
+  'Tegenmaatregelen': 'Pret pasākumi',
+  'Opvolging': 'Sekošana',
+  'Bezig': 'Notiek',
+  'Probleem': 'Problēma',
+  'Succescriteria': 'Panākumu kritēriji',
+  'Snelle winst': 'Ātri panākumi',
+  'Grote projecten': 'Lielie projekti',
+  'Opvullers': 'Aizpildītāji',
+  'Ondankbaar': 'Nepateicīgs',
+  'Processtap': 'Procesa solis',
+  'Faalwijze': 'Bojājuma veids',
+  'Oorzaak': 'Cēlonis',
+  'Beheersing': 'Kontrole',
+  'Activiteit': 'Aktivitāte',
+  'Leverancier': 'Piegādātājs',
+  'Klant': 'Klients',
+  'Plan': 'Plāns',
+  'Team': 'Komanda',
+  'Input': 'Ievade',
+  'Output': 'Izeja',
+  'Effect': 'Efekts',
   'Businesscase / investeringsvoorstel':
       'Biznesa pamatojums / investīciju priekšlikums',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':

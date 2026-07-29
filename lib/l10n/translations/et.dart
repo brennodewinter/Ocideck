@@ -1762,6 +1762,71 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bord': 'Tahvel',
+  'Projectcharter': 'Projekti põhikiri',
+  'CTQ-boom': 'CTQ-puu',
+  'Visgraat (Ishikawa)': 'Kalaluu (Ishikawa)',
+  'Proceskaart': 'Protsessikaart',
+  'Impact / Inspanning': 'Mõju / Panus',
+  'Vier lijsten — één per kwadrant.': 'Neli loendit — üks per kvadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Üks leht, seitse kasti — lühidalt ja loetavalt.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D arvutatakse — ära sisesta käsitsi.',
+  'Eén R per rij.': 'Üks R per rida.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Täida paremalt vasakule — alusta kliendist.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Veerud on olekud; kaardid on ülesanded.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Skoop ja edukriteeriumid esiteks — kuidas hiljem.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Kliendi vajadusest (Y) mõõdetavate CTQ-ni.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Viis taset sügavale — lõpeta X-id-ga.',
+  'Zes M\'s als botten — oorzaken eronder.': 'Kuus M luudena — põhjused all.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Sammud pealkirjana :: tüüp :: omadused.',
+  'Zet de rol in het lane=… kenmerk.': 'Pane roll lane=… atribuuti.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT sammu kohta — summad arvutatakse, ei salvestata.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Loend per kvadrant — ära joonista koordinaate.',
+  'Intern': 'Sisemine',
+  'Negatief': 'Negatiivne',
+  'Positief': 'Positiivne',
+  'Weinige inspanning': 'Väike panus',
+  'Veel inspanning': 'Suur panus',
+  'Lage impact': 'Väike mõju',
+  'Hoge impact': 'Suur mõju',
+  'Sterktes': 'Tugevused',
+  'Zwaktes': 'Nõrkused',
+  'Kansen': 'Võimalused',
+  'Bedreigingen': 'Ohud',
+  'Achtergrond': 'Taust',
+  'Huidige situatie': 'Praegune olukord',
+  'Oorzaakanalyse': 'Põhjuse analüüs',
+  'Tegenmaatregelen': 'Vastumeetmed',
+  'Opvolging': 'Jälgimine',
+  'Bezig': 'Käib',
+  'Probleem': 'Probleem',
+  'Succescriteria': 'Edukriteeriumid',
+  'Snelle winst': 'Kiired võidud',
+  'Grote projecten': 'Suured projektid',
+  'Opvullers': 'Täitjad',
+  'Ondankbaar': 'Tänamatu',
+  'Processtap': 'Protsessisamm',
+  'Faalwijze': 'Rikkimise viis',
+  'Oorzaak': 'Põhjus',
+  'Beheersing': 'Kontroll',
+  'Activiteit': 'Tegevus',
+  'Leverancier': 'Tarnija',
+  'Klant': 'Klient',
+  'Plan': 'Plaan',
+  'Team': 'Meeskond',
+  'Input': 'Sisend',
+  'Output': 'Väljund',
+  'Effect': 'Efekt',
   'Businesscase / investeringsvoorstel':
       'Äripõhjendus / investeerimisettepanek',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':

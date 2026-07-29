@@ -911,6 +911,72 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bord': 'Board',
+  'Projectcharter': 'Project charter',
+  'CTQ-boom': 'CTQ tree',
+  'Visgraat (Ishikawa)': 'Fishbone (Ishikawa)',
+  'Proceskaart': 'Process map',
+  'Impact / Inspanning': 'Impact / Effort',
+  'Vier lijsten — één per kwadrant.': 'Four lists — one per quadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'One page, seven boxes — keep each short and readable.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D is derived — never type it yourself.',
+  'Eén R per rij.': 'One R per row.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Fill right-to-left — start at the customer.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Columns are statuses; cards are tasks.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope and success criteria first — how comes later.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'From customer need (Y) to measurable CTQs.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Five levels deep — end with an X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Six Ms as bones — causes underneath.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Steps as title :: kind :: attributes.',
+  'Zet de rol in het lane=… kenmerk.': 'Put the role in the lane=… attribute.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT per step — totals are derived, never stored.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'A list per quadrant — do not plot coordinates.',
+  'Intern': 'Internal',
+  'Negatief': 'Negative',
+  'Positief': 'Positive',
+  'Weinige inspanning': 'Low effort',
+  'Veel inspanning': 'High effort',
+  'Lage impact': 'Low impact',
+  'Hoge impact': 'High impact',
+  'Sterktes': 'Strengths',
+  'Zwaktes': 'Weaknesses',
+  'Kansen': 'Opportunities',
+  'Bedreigingen': 'Threats',
+  'Achtergrond': 'Background',
+  'Huidige situatie': 'Current situation',
+  'Oorzaakanalyse': 'Root cause analysis',
+  'Tegenmaatregelen': 'Countermeasures',
+  'Opvolging': 'Follow-up',
+  'Bezig': 'Doing',
+  'Probleem': 'Problem',
+  'Succescriteria': 'Success criteria',
+  'Snelle winst': 'Quick wins',
+  'Grote projecten': 'Major projects',
+  'Opvullers': 'Fill-ins',
+  'Ondankbaar': 'Thankless',
+  'Processtap': 'Process step',
+  'Faalwijze': 'Failure mode',
+  'Oorzaak': 'Cause',
+  'Beheersing': 'Control',
+  'Activiteit': 'Activity',
+  'Leverancier': 'Supplier',
+  'Klant': 'Customer',
+  'Plan': 'Plan',
+  'Team': 'Team',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Effect',
   'Businesscase / investeringsvoorstel': 'Business case / investment proposal',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
       'Rationale, options with costs and benefits, risks and the requested decision.',

@@ -1770,6 +1770,72 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bord': 'Tavle',
+  'Projectcharter': 'Projektcharter',
+  'CTQ-boom': 'CTQ-træ',
+  'Visgraat (Ishikawa)': 'Fiskebensdiagram (Ishikawa)',
+  'Proceskaart': 'Proceskort',
+  'Impact / Inspanning': 'Effekt / Indsats',
+  'Vier lijsten — één per kwadrant.': 'Fire lister — én pr. kvadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Én side, syv felter — hold hver kort og læsbar.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D beregnes — indtast det ikke selv.',
+  'Eén R per rij.': 'Ét R pr. række.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Udfyld højre-til-venstre — start ved kunden.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Kolonner er statusser; kort er opgaver.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope og succeskriterier først — hvordan kommer senere.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Fra kundebehov (Y) til målbare CTQs.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Fem niveauer dybt — slut med et X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Seks M som knogler — årsager under.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Trin som titel :: type :: attributter.',
+  'Zet de rol in het lane=… kenmerk.': 'Sæt rollen i lane=… attributten.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT pr. trin — totaler beregnes, gemmes ikke.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'En liste pr. kvadrant — tegn ikke koordinater.',
+  'Intern': 'Intern',
+  'Negatief': 'Negativ',
+  'Positief': 'Positiv',
+  'Weinige inspanning': 'Lav indsats',
+  'Veel inspanning': 'Høj indsats',
+  'Lage impact': 'Lav effekt',
+  'Hoge impact': 'Høj effekt',
+  'Sterktes': 'Styrker',
+  'Zwaktes': 'Svagheder',
+  'Kansen': 'Muligheder',
+  'Bedreigingen': 'Trusler',
+  'Achtergrond': 'Baggrund',
+  'Huidige situatie': 'Nuværende situation',
+  'Oorzaakanalyse': 'Årsagsanalyse',
+  'Tegenmaatregelen': 'Modforanstaltninger',
+  'Opvolging': 'Opfølgning',
+  'Bezig': 'I gang',
+  'Probleem': 'Problem',
+  'Succescriteria': 'Succeskriterier',
+  'Snelle winst': 'Hurtige gevinster',
+  'Grote projecten': 'Store projekter',
+  'Opvullers': 'Udfyldere',
+  'Ondankbaar': 'Takløs',
+  'Processtap': 'Procestrin',
+  'Faalwijze': 'Fejlmåde',
+  'Oorzaak': 'Årsag',
+  'Beheersing': 'Kontrol',
+  'Activiteit': 'Aktivitet',
+  'Leverancier': 'Leverandør',
+  'Klant': 'Kunde',
+  'Plan': 'Plan',
+  'Team': 'Team',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Effekt',
   'Businesscase / investeringsvoorstel': 'Businesscase / investeringsforslag',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
       'Anledning, muligheder med omkostninger og gevinster, risici og den ønskede beslutning.',

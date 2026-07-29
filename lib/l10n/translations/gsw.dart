@@ -1774,6 +1774,72 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bord': 'Bord',
+  'Projectcharter': 'Projektcharta',
+  'CTQ-boom': 'CTQ-Boum',
+  'Visgraat (Ishikawa)': 'Fischgräte (Ishikawa)',
+  'Proceskaart': 'Prozesscharte',
+  'Impact / Inspanning': 'Uswirkig / Ufwand',
+  'Vier lijsten — één per kwadrant.': 'Vier Liste — ein pro Quadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Eis Site, sibe Fälder — churz und lääsbar bhalte.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D wird berächnet — nöd sälber igäh.',
+  'Eén R per rij.': 'Es R pro Zile.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Vo rächts nach links uusfülle — bim Kund aafah.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Spalte sind Status; Charte sind Uufgab.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope und Erfolgskriterie zerscht — s Wie chunt spöter.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Vom Kundewunsch (Y) zu messbare CTQs.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Füf Ebenä tüüf — mit eme X-id ufhööre.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Sächs M als Chnoche — Ursache drunder.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Schritt als Titel :: Art :: Eigäschaft.',
+  'Zet de rol in het lane=… kenmerk.': 'Setz d Rolle is lane=… Attribut.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT pro Schritt — Total berächnet, nöd gspicheret.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'E List pro Quadrant — kei Koordinate zeichne.',
+  'Intern': 'Intern',
+  'Negatief': 'Negativ',
+  'Positief': 'Positiv',
+  'Weinige inspanning': 'Tüüf Ufwand',
+  'Veel inspanning': 'Hoch Ufwand',
+  'Lage impact': 'Tüüf Uswirkig',
+  'Hoge impact': 'Hoch Uswirkig',
+  'Sterktes': 'Stärche',
+  'Zwaktes': 'Schwäche',
+  'Kansen': 'Chance',
+  'Bedreigingen': 'Risike',
+  'Achtergrond': 'Hintergrund',
+  'Huidige situatie': 'Aktuelle Situation',
+  'Oorzaakanalyse': 'Ursachäanalyse',
+  'Tegenmaatregelen': 'Gege Maßnahme',
+  'Opvolging': 'Nochverfolgig',
+  'Bezig': 'I Arbet',
+  'Probleem': 'Problem',
+  'Succescriteria': 'Erfolgskriterie',
+  'Snelle winst': 'Schnelli Erfolg',
+  'Grote projecten': 'Grossi Projekt',
+  'Opvullers': 'Lückefüller',
+  'Ondankbaar': 'Undankbar',
+  'Processtap': 'Prozessschritt',
+  'Faalwijze': 'Versagensmodus',
+  'Oorzaak': 'Ursach',
+  'Beheersing': 'Kontrolle',
+  'Activiteit': 'Aktivität',
+  'Leverancier': 'Leverant',
+  'Klant': 'Kund',
+  'Plan': 'Plan',
+  'Team': 'Team',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Wirkig',
   'Businesscase / investeringsvoorstel': 'Businesscase / Investitionsvorschlag',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
       'Aalass, Optione mit Köste und Nutze, Risike und dr verlangti Entscheid.',

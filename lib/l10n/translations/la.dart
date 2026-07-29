@@ -1787,6 +1787,71 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bord': 'Tabula',
+  'Projectcharter': 'Carta proiecti',
+  'CTQ-boom': 'Arbor CTQ',
+  'Visgraat (Ishikawa)': 'Spina piscis (Ishikawa)',
+  'Proceskaart': 'Mappa processus',
+  'Impact / Inspanning': 'Effectus / Conatus',
+  'Vier lijsten — één per kwadrant.': 'Quattuor indicia — unum per quadrantem.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Una pagina, septem casae — brevia et legibilia serva.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D computatur — noli ipsum scribere.',
+  'Eén R per rij.': 'Unum R per lineam.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Dextra ad sinistram scribe — a cliente incipe.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Columnae status sunt; cardines task sunt.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Ambitus et criteria successus primum — quomodo postea.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'A desiderio clientis (Y) ad CTQ mensurabilia.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Quinque gradus alte — X-id termina.',
+  'Zes M\'s als botten — oorzaken eronder.': 'Sex M ut ossa — causae sub.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Gradus ut titulus :: genus :: attributa.',
+  'Zet de rol in het lane=… kenmerk.': 'Pone personam in attributo lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT per gradum — summa computantur, non servantur.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Indicium per quadrantem — ne coordines ducas.',
+  'Intern': 'Internus',
+  'Negatief': 'Negativus',
+  'Positief': 'Positivus',
+  'Weinige inspanning': 'Conatus parvus',
+  'Veel inspanning': 'Conatus magnus',
+  'Lage impact': 'Effectus parvus',
+  'Hoge impact': 'Effectus magnus',
+  'Sterktes': 'Fortes',
+  'Zwaktes': 'Infirma',
+  'Kansen': 'Occasiones',
+  'Bedreigingen': 'Minaciae',
+  'Achtergrond': 'Contextus',
+  'Huidige situatie': 'Situs praesens',
+  'Oorzaakanalyse': 'Analysis causae radicis',
+  'Tegenmaatregelen': 'Contra mensurae',
+  'Opvolging': 'Secutio',
+  'Bezig': 'In cursu',
+  'Probleem': 'Problema',
+  'Succescriteria': 'Criteria successus',
+  'Snelle winst': 'Victoriae celeres',
+  'Grote projecten': 'Proiectus maiores',
+  'Opvullers': 'Implentes',
+  'Ondankbaar': 'Ingratus',
+  'Processtap': 'Gradus processus',
+  'Faalwijze': 'Modus defectus',
+  'Oorzaak': 'Causa',
+  'Beheersing': 'Control',
+  'Activiteit': 'Activitas',
+  'Leverancier': 'Furnitor',
+  'Klant': 'Clients',
+  'Plan': 'Consilium',
+  'Team': 'Turma',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Effectus',
   'Businesscase / investeringsvoorstel':
       'Ratio negotii / propositum collocandae pecuniae',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':

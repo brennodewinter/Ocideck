@@ -1798,6 +1798,72 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bord': 'Πίνακας',
+  'Projectcharter': 'Χάρτης έργου',
+  'CTQ-boom': 'Δέντρο CTQ',
+  'Visgraat (Ishikawa)': 'Διάγραμμα Ishikawa',
+  'Proceskaart': 'Χάρτης διαδικασίας',
+  'Impact / Inspanning': 'Αντίκτυπος / Προσπάθεια',
+  'Vier lijsten — één per kwadrant.': 'Τέσσερις λίστες — μία ανά τεταρτημόριο.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Μία σελίδα, επτά πλαίσια — κρατήστε τα σύντομα και ευανάγνωστα.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D υπολογίζεται — μην το πληκτρολογείτε μόνοι σας.',
+  'Eén R per rij.': 'Ένα R ανά γραμμή.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Συμπληρώστε δεξιά προς αριστερά — ξεκινήστε από τον πελάτη.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Οι στήλες είναι καταστάσεις; οι κάρτες είναι εργασίες.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Έκταση και κριτήρια επιτυχίας πρώτα — το πώς ακολουθεί.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Από την ανάγκη του πελάτη (Y) σε μετρήσιμα CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Πέντε επίπεδα βάθος — τελειώστε με X-id.',
+  'Zes M\'s als botten — oorzaken eronder.': 'Έξι M ως οστά — αιτίες από κάτω.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Βήματα ως τίτλος :: τύπος :: χαρακτηριστικά.',
+  'Zet de rol in het lane=… kenmerk.':
+      'Βάλτε τον ρόλο στο χαρακτηριστικό lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT ανά βήμα — τα σύνολα υπολογίζονται, δεν αποθηκεύονται.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Λίστα ανά τεταρτημόριο — μην σχεδιάζετε συντεταγμένες.',
+  'Intern': 'Εσωτερικό',
+  'Negatief': 'Αρνητικό',
+  'Positief': 'Θετικό',
+  'Weinige inspanning': 'Χαμηλή προσπάθεια',
+  'Veel inspanning': 'Υψηλή προσπάθεια',
+  'Lage impact': 'Χαμηλός αντίκτυπος',
+  'Hoge impact': 'Υψηλός αντίκτυπος',
+  'Sterktes': 'Δυνατά σημεία',
+  'Zwaktes': 'Αδύναμα σημεία',
+  'Kansen': 'Ευκαιρίες',
+  'Bedreigingen': 'Απειλές',
+  'Achtergrond': 'Υπόβαθρο',
+  'Huidige situatie': 'Τρέχουσα κατάσταση',
+  'Oorzaakanalyse': 'Ανάλυση ρίζας αιτίας',
+  'Tegenmaatregelen': 'Αντεπιμέθοδοι',
+  'Opvolging': 'Παρακολούθηση',
+  'Bezig': 'Σε εξέλιξη',
+  'Probleem': 'Πρόβλημα',
+  'Succescriteria': 'Κριτήρια επιτυχίας',
+  'Snelle winst': 'Γρήγορες νίκες',
+  'Grote projecten': 'Μεγάλα έργα',
+  'Opvullers': 'Γεμίσματα',
+  'Ondankbaar': 'Αχαρίστα',
+  'Processtap': 'Βήμα διαδικασίας',
+  'Faalwijze': 'Τρόπος αποτυχίας',
+  'Oorzaak': 'Αιτία',
+  'Beheersing': 'Έλεγχος',
+  'Activiteit': 'Δραστηριότητα',
+  'Leverancier': 'Προμηθευτής',
+  'Klant': 'Πελάτης',
+  'Plan': 'Σχέδιο',
+  'Team': 'Ομάδα',
+  'Input': 'Είσοδος',
+  'Output': 'Έξοδος',
+  'Effect': 'Αποτέλεσμα',
   'Businesscase / investeringsvoorstel':
       'Επιχειρηματική τεκμηρίωση / πρόταση επένδυσης',
   'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
