@@ -35,7 +35,10 @@ void main() {
     if (!tempDir.existsSync()) return;
     try {
       tempDir.deleteSync(recursive: true);
-    } on FileSystemException {}
+    } on FileSystemException {
+      // Opruimen is best-effort: een dwarsliggende temp-map mag een
+      // geslaagde test niet alsnog laten falen.
+    }
   });
 
   void clearLayoutNoise(WidgetTester tester) {
