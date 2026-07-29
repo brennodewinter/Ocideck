@@ -196,27 +196,31 @@ extension _SettingsSearch on _SettingsDialogState {
                 ),
               ),
             )
-          : ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              itemCount: hits.length,
-              itemBuilder: (context, i) {
-                final entry = hits[i];
-                final tab = entry.tab.label(l10n);
-                final section = entry.resolvedSection(l10n);
-                return ListTile(
-                  dense: true,
-                  title: Text(
-                    entry.resolvedLabel(l10n),
-                    style: const TextStyle(fontSize: 13),
-                  ),
-                  subtitle: Text(
-                    section.isEmpty ? tab : '$tab › $section',
-                    style: TextStyle(fontSize: 11, color: AppTheme.slate500),
-                  ),
-                  trailing: const Icon(Icons.arrow_forward, size: 16),
-                  onTap: () => _jumpToSetting(entry, l10n),
-                );
-              },
+          : _OverflowHints(
+              thumbColor: AppTheme.slate500,
+              builder: (context, controller) => ListView.builder(
+                controller: controller,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                itemCount: hits.length,
+                itemBuilder: (context, i) {
+                  final entry = hits[i];
+                  final tab = entry.tab.label(l10n);
+                  final section = entry.resolvedSection(l10n);
+                  return ListTile(
+                    dense: true,
+                    title: Text(
+                      entry.resolvedLabel(l10n),
+                      style: const TextStyle(fontSize: 13),
+                    ),
+                    subtitle: Text(
+                      section.isEmpty ? tab : '$tab › $section',
+                      style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+                    ),
+                    trailing: const Icon(Icons.arrow_forward, size: 16),
+                    onTap: () => _jumpToSetting(entry, l10n),
+                  );
+                },
+              ),
             ),
     );
   }
