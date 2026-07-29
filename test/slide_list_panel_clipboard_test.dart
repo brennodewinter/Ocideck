@@ -50,5 +50,4 @@ void main() {
       expect(find.text('Slide renderen…'), findsOneWidget);
     },
   );
-
 }

@@ -37,9 +37,7 @@ void main() {
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
 
-    return ProviderScope.containerOf(
-      tester.element(find.byType(MaterialApp)),
-    );
+    return ProviderScope.containerOf(tester.element(find.byType(MaterialApp)));
   }
 
   testWidgets('het profiel-menu toont de beschikbare profielen', (
@@ -61,10 +59,7 @@ void main() {
     addTearDown(container.dispose);
 
     // Typ een nieuwe naam in het tekstveld.
-    await tester.enterText(
-      find.byType(TextField).first,
-      'Mijn profiel',
-    );
+    await tester.enterText(find.byType(TextField).first, 'Mijn profiel');
     await tester.pump();
 
     // De naam is nu in het veld zichtbaar.
@@ -95,20 +90,19 @@ void main() {
     expect(after, greaterThan(before));
   });
 
-  testWidgets(
-    '"Profiel verwijderen" is ingeschakeld bij meerdere profielen',
-    (tester) async {
-      final container = await openAppearanceTab(tester);
-      addTearDown(container.dispose);
+  testWidgets('"Profiel verwijderen" is ingeschakeld bij meerdere profielen', (
+    tester,
+  ) async {
+    final container = await openAppearanceTab(tester);
+    addTearDown(container.dispose);
 
-      // Maak een tweede profiel aan zodat de verwijderknop actief is.
-      await tester.tap(find.byIcon(Icons.add).first);
-      await tester.pumpAndSettle();
+    // Maak een tweede profiel aan zodat de verwijderknop actief is.
+    await tester.tap(find.byIcon(Icons.add).first);
+    await tester.pumpAndSettle();
 
-      final btn = tester.widget<IconButton>(
-        find.widgetWithIcon(IconButton, Icons.delete_outline).first,
-      );
-      expect(btn.onPressed, isNotNull);
-    },
-  );
+    final btn = tester.widget<IconButton>(
+      find.widgetWithIcon(IconButton, Icons.delete_outline).first,
+    );
+    expect(btn.onPressed, isNotNull);
+  });
 }
