@@ -1778,6 +1778,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Ktoré systémy sú zraniteľné voči CVE?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organizácie a zraniteľné systémy okolo jednej zraniteľnosti.',
+  'Organisaties met kwetsbare systemen':
+      'Organizácie so zraniteľnými systémami',
+  'Kwetsbare systemen': 'Zraniteľné systémy',
   'Kritiek/hoog': 'Kritické/vysoké',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Túto existujúcu správu nemožno bezpečne aktualizovať. Vytvorte správu ako novú; existujúci deck zostane nezmenený.',

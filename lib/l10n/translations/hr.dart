@@ -1777,6 +1777,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Koji su sustavi ranjivi na CVE?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organizacije i ranjivi sustavi oko jedne ranjivosti.',
+  'Organisaties met kwetsbare systemen': 'Organizacije s ranjivim sustavima',
+  'Kwetsbare systemen': 'Ranjivi sustavi',
   'Kritiek/hoog': 'Kritično/visoko',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Ovo postojeće izvješće nije moguće sigurno ažurirati. Izradite izvješće kao novo; postojeći deck ostaje nepromijenjen.',

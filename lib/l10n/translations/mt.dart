@@ -1793,6 +1793,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Liema sistemi huma vulnerabbli għal CVE?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organizzazzjonijiet u sistemi vulnerabbli madwar vulnerabbiltà waħda.',
+  'Organisaties met kwetsbare systemen':
+      'Organizzazzjonijiet b\'sistemi vulnerabbli',
+  'Kwetsbare systemen': 'Sistemi vulnerabbli',
   'Kritiek/hoog': 'Kritika/għolja',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Dan ir-rapport eżistenti ma jistax jiġi aġġornat b\'mod sigur. Oħloq ir-rapport bħala ġdid; id-deck eżistenti jibqa\' mhux mibdul.',

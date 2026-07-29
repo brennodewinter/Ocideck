@@ -1771,6 +1771,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Mitkä järjestelmät ovat haavoittuvia CVE:lle?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organisaatiot ja haavoittuvat järjestelmät yhden haavoittuvuuden ympärillä.',
+  'Organisaties met kwetsbare systemen':
+      'Organisaatiot, joissa on haavoittuvia järjestelmiä',
+  'Kwetsbare systemen': 'Haavoittuvat järjestelmät',
   'Kritiek/hoog': 'Kriittinen/korkea',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Tätä olemassa olevaa raporttia ei voi päivittää turvallisesti. Luo raportti uutena; olemassa oleva esityspakka pysyy muuttumattomana.',

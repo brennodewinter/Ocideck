@@ -1787,6 +1787,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Quae systemata ad CVE vulnerabilia sunt?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Institutiones et systemata vulnerabilia circa unam vulnerabilitatem.',
+  'Organisaties met kwetsbare systemen':
+      'Institutiones cum systematibus vulnerabilibus',
+  'Kwetsbare systemen': 'Systemata vulnerabilia',
   'Kritiek/hoog': 'Critical/high',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Haec relatio iam exsistens tuto renovari non potest. Relationem novam crea; fasciculus exsistens immutatus manet.',

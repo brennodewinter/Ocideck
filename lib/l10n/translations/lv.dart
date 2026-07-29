@@ -1770,6 +1770,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Kuras sistēmas ir ievainojamas pret CVE?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organizācijas un ievainojamas sistēmas ap vienu ievainojamību.',
+  'Organisaties met kwetsbare systemen':
+      'Organizācijas ar ievainojamām sistēmām',
+  'Kwetsbare systemen': 'Ievainojamas sistēmas',
   'Kritiek/hoog': 'Kritisks/augsts',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Šo esošo ziņojumu nevar droši atjaunināt. Izveidojiet ziņojumu kā jaunu; esošais deck paliek nemainīgs.',

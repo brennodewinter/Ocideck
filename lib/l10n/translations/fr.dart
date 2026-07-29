@@ -730,6 +730,13 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Quels systèmes sont vulnérables à une CVE ?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Organisations et systèmes vulnérables autour d’une vulnérabilité.',
+  'Organisaties met kwetsbare systemen':
+      'Organisations avec des systèmes vulnérables',
+  'Kwetsbare systemen': 'Systèmes vulnérables',
   'Kritiek/hoog': 'Critique/élevé',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Ce rapport existant ne peut pas être mis à jour en toute sécurité. Créez le rapport comme nouveau ; le deck existant reste inchangé.',

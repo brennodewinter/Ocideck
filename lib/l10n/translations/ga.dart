@@ -1806,6 +1806,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?':
+      'Cé na córais atá leochaileach do CVE?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Eagraíochtaí agus córais leochaileacha thart ar leochaileacht amháin.',
+  'Organisaties met kwetsbare systemen': 'Eagraíochtaí le córais leochaileacha',
+  'Kwetsbare systemen': 'Córais leochaileacha',
   'Kritiek/hoog': 'Criticiúil/ard',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Ní féidir an tuarascáil reatha seo a nuashonrú go sábháilte. Cruthaigh an tuarascáil mar cheann nua; fanann an deck reatha gan athrú.',

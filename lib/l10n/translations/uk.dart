@@ -1788,6 +1788,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Welke systemen zijn kwetsbaar voor een CVE?': 'Які системи вразливі до CVE?',
+  'Organisaties en kwetsbare systemen rond één kwetsbaarheid.':
+      'Організації та вразливі системи навколо однієї вразливості.',
+  'Organisaties met kwetsbare systemen': 'Організації з вразливими системами',
+  'Kwetsbare systemen': 'Вразливі системи',
   'Kritiek/hoog': 'Критичний/високий',
   'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
       'Цей наявний звіт неможливо безпечно оновити. Створіть звіт як новий; наявний deck залишиться без змін.',
