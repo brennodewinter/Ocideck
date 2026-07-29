@@ -236,8 +236,9 @@ OpenKatReportResult generate(
 `OpenKatReportRequest` requires `scenarioId`, a typed
 `OpenKatReportScope.portfolio()` or `.organization(code)`, and `currentAsOf`.
 It optionally takes `previousAsOf`, `cveId`, `title`, a Dutch/English language,
-and `OpenKatReportPolicy(maximumSnapshotAge:, tableRowLimit:)`. An organisation
-scope rejects an empty code. The current scenarios are
+and `OpenKatReportPolicy(maximumSnapshotAge:, tableRowLimit:,
+historicalFindingWorkLimit:)`. An organisation scope rejects an empty code. The
+current scenarios are
 `management-overview`, `weekly-comparison`, `organization-overview`,
 `cve-exposure`, and `monitoring-changes`.
 
@@ -246,10 +247,10 @@ The result is machine-readable whether generation succeeds or fails: `deck`,
 `sourceTraces`. `generated` is false when an error prevents composition.
 Diagnostic codes include an unknown scenario/scope/organisation, missing current
 or previous snapshot, invalid snapshot chronology, malformed CVE ID, missing
-capability, an invalid report plan, stale snapshot, incomplete portfolio and
-incomparable measurement coverage. A diagnostic has a warning or error severity
-plus string arguments; callers should key behaviour on the code, not display
-text.
+capability, an invalid report plan or policy, an exceeded resource budget, stale
+snapshot, incomplete portfolio and incomparable measurement coverage. A
+diagnostic has a warning or error severity plus string arguments; callers
+should key behaviour on the code, not display text.
 
 Snapshot selection is canonical: the latest *usable* snapshot on or before an
 as-of date. If `previousAsOf` is omitted, the previous snapshot is selected
@@ -258,6 +259,13 @@ the exact source file/hash/schema, so a generated report remains auditable. If
 `previousAsOf` is present it must be strictly earlier than `currentAsOf`, and the
 historical capability additionally requires two actually different,
 chronological snapshots.
+
+Comparative management language is evidence-gated separately. Only snapshots
+that both declare `comparableMeasurementCoverage` with the same non-empty
+measurement-scope identity may produce directional conclusions, coloured
+deltas or “most improved” rankings. Otherwise the deck shows current values
+without normative comparison and includes a visible comparability warning; the
+typed result carries `incomparableMeasurementCoverage`.
 
 Report-block preconditions are intrinsic to the block kind and are checked after
 scenario composition. A custom registry cannot make CVE or monitoring evidence
@@ -275,10 +283,12 @@ Monitoring transitions require the same stable asset in both snapshots and two
 explicit statuses; a missing asset or `null` status is unknown, not a mutation.
 
 For lifecycle, CVE-exposure and monitoring-change tables, `tableRowLimit`
-controls construction as well as presentation. Queries stop after the configured
-budget plus one sentinel result, and a visible final row reports that more
-results were omitted. This prevents a small display policy from hiding
-unbounded deck materialisation.
+controls construction as well as presentation. It must be between 1 and 1,000.
+Queries stop after the configured budget plus one sentinel result, and a visible
+final row reports that more results were omitted. Lifecycle also refuses to
+build its historical identity index after `historicalFindingWorkLimit`
+inspections (default 250,000; supported maximum 1,000,000). Invalid policy
+values and exceeded work budgets return typed errors before composition.
 
 ### Privacy Projection API
 `lib/services/privacy/privacy_projection.dart` — applies redaction and audience

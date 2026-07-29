@@ -232,7 +232,11 @@ preconditions of CVE or monitoring blocks.
 monitoring-change tables. Those queries stop after enough rows to prove that the
 limit was exceeded, and the deck adds an explicit omission row instead of
 materialising every result. Other deck views retain their ordinary
-non-destructive `DisplayWindowSpec` projection.
+non-destructive `DisplayWindowSpec` projection. The engine validates the limit
+at runtime against a fixed maximum. A separate
+`historicalFindingWorkLimit` bounds the lifecycle identity scan before its set
+is materialised; exceeding it yields a typed error rather than a silently
+incomplete lifecycle classification.
 
 Capability assessment is deliberately separate from values that happen to be
 present in a snapshot. The engine records typed assessments and stable
@@ -248,6 +252,13 @@ absence and `null` remain unknown. Current import adapters do **not** declare re
 CVE references or monitoring status, so those two scenarios currently return an
 unavailable/missing-capability result rather than infer facts from incidental
 fields.
+
+Management comparisons are also projection-gated. A previous value, direction,
+delta colour or improvement ranking is composed only when both selected
+snapshots declare comparable measurement coverage with the same scope identity.
+Without that evidence, the deck retains neutral current standings and adds a
+visible warning; raw source text is neutralised for its Markdown, table or chart
+context before any slide is composed.
 
 Trend conclusions carry typed direction and metric deltas. Dutch and English
 wording is projected from those facts in the composer; no locale is parsed back
