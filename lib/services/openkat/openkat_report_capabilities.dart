@@ -1,0 +1,140 @@
+import '../../models/openkat/openkat_models.dart';
+import '../../models/openkat/openkat_reporting_models.dart';
+import 'openkat_report_facts.dart';
+
+/// Beoordeelt bronmogelijkheden op exact de meetmomenten van het verzoek.
+class OpenKatReportCapabilityService {
+  const OpenKatReportCapabilityService();
+
+  Map<OpenKatReportCapability, OpenKatCapabilityAssessment> assess(
+    OpenKatReportFacts facts,
+    OpenKatReportRequest request,
+  ) {
+    final selections = facts.selections(request);
+    final current = [for (final selection in selections) ?selection.current];
+    final compared = selections
+        .where(
+          (selection) =>
+              selection.current != null && selection.previous != null,
+        )
+        .toList();
+
+    return {
+      OpenKatReportCapability.multipleOrganizations: _binary(
+        OpenKatReportCapability.multipleOrganizations,
+        selections.length > 1,
+        {'organizationCount': '${selections.length}'},
+      ),
+      OpenKatReportCapability.historicalSnapshots: _binary(
+        OpenKatReportCapability.historicalSnapshots,
+        selections.isNotEmpty && compared.length == selections.length,
+        {
+          'comparedOrganizations': '${compared.length}',
+          'organizationCount': '${selections.length}',
+        },
+      ),
+      OpenKatReportCapability.reliableCveReferences: _sourceFeature(
+        OpenKatReportCapability.reliableCveReferences,
+        current,
+        OpenKatSourceFeature.reliableCveReferences,
+      ),
+      OpenKatReportCapability.reliableMonitoringStatus: _sourceFeature(
+        OpenKatReportCapability.reliableMonitoringStatus,
+        current,
+        OpenKatSourceFeature.reliableMonitoringStatus,
+      ),
+      OpenKatReportCapability.stableAssetIdentity: _binary(
+        OpenKatReportCapability.stableAssetIdentity,
+        current.isNotEmpty &&
+            current.every(
+              (snapshot) =>
+                  snapshot.sourceFeatures.contains(
+                    OpenKatSourceFeature.stableAssetIdentity,
+                  ) &&
+                  snapshot.systems.every((system) => system.stableIdentity),
+            ),
+      ),
+      OpenKatReportCapability.comparableMeasurementCoverage: _binary(
+        OpenKatReportCapability.comparableMeasurementCoverage,
+        compared.isNotEmpty && compared.every(facts.hasComparableCoverage),
+        {
+          'comparableOrganizations':
+              '${compared.where(facts.hasComparableCoverage).length}',
+          'comparedOrganizations': '${compared.length}',
+        },
+      ),
+      OpenKatReportCapability.findingLifecycle: _binary(
+        OpenKatReportCapability.findingLifecycle,
+        compared.isNotEmpty &&
+            compared.every(
+              (selection) =>
+                  selection.current!.findings.every(
+                    (finding) => finding.stableIdentity,
+                  ) &&
+                  selection.previous!.findings.every(
+                    (finding) => finding.stableIdentity,
+                  ),
+            ),
+      ),
+      OpenKatReportCapability.controlsWithDenominator: _binary(
+        OpenKatReportCapability.controlsWithDenominator,
+        current.any(
+          (snapshot) =>
+              snapshot.controls.isNotEmpty &&
+              snapshot.controls.values.every((score) => score.ratio != null),
+        ),
+      ),
+      OpenKatReportCapability.sufficientDataFreshness: _freshness(
+        facts,
+        request,
+      ),
+    };
+  }
+
+  OpenKatCapabilityAssessment _sourceFeature(
+    OpenKatReportCapability capability,
+    List<OpenKatSnapshot> snapshots,
+    OpenKatSourceFeature feature,
+  ) => _binary(
+    capability,
+    snapshots.isNotEmpty &&
+        snapshots.every(
+          (snapshot) => snapshot.sourceFeatures.contains(feature),
+        ),
+  );
+
+  OpenKatCapabilityAssessment _freshness(
+    OpenKatReportFacts facts,
+    OpenKatReportRequest request,
+  ) {
+    final maximum = request.policy.maximumSnapshotAge;
+    if (maximum == null) {
+      return const OpenKatCapabilityAssessment(
+        capability: OpenKatReportCapability.sufficientDataFreshness,
+        status: OpenKatCapabilityStatus.notAssessed,
+      );
+    }
+    final present = facts
+        .measurementUsages(request)
+        .where((measurement) => !measurement.missing)
+        .toList();
+    return _binary(
+      OpenKatReportCapability.sufficientDataFreshness,
+      present.isNotEmpty &&
+          present.every((measurement) => measurement.age! <= maximum),
+      {'maximumAgeDays': '${maximum.inDays}'},
+    );
+  }
+
+  OpenKatCapabilityAssessment _binary(
+    OpenKatReportCapability capability,
+    bool available, [
+    Map<String, String> arguments = const {},
+  ]) => OpenKatCapabilityAssessment(
+    capability: capability,
+    status: available
+        ? OpenKatCapabilityStatus.available
+        : OpenKatCapabilityStatus.unavailable,
+    arguments: arguments,
+  );
+}
