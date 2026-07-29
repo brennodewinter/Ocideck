@@ -99,8 +99,9 @@ void main() {
   ) async {
     final tmp = Directory.systemTemp.createTempSync('ocikat-actie-');
     addTearDown(() => tmp.deleteSync(recursive: true));
+    Directory(p.join(tmp.path, 'raw-data')).createSync();
     File(
-      p.join(tmp.path, 'org1_20240601000000.json'),
+      p.join(tmp.path, 'raw-data', 'org1_20240601000000.json'),
     ).writeAsStringSync(jsonEncode(rapport('org1')));
 
     final (container, ctx, ref) = await pump(tester);
@@ -149,8 +150,9 @@ void main() {
   ) async {
     final tmp = Directory.systemTemp.createTempSync('ocikat-her-');
     addTearDown(() => tmp.deleteSync(recursive: true));
+    Directory(p.join(tmp.path, 'raw-data')).createSync();
     File(
-      p.join(tmp.path, 'org1_20240601000000.json'),
+      p.join(tmp.path, 'raw-data', 'org1_20240601000000.json'),
     ).writeAsStringSync(jsonEncode(rapport('org1')));
 
     final (container, ctx, ref) = await pump(tester);
@@ -168,7 +170,7 @@ void main() {
 
     // Tweede run met een extra maand: zelfde tab, bijgewerkt deck.
     File(
-      p.join(tmp.path, 'org1_20240701000000.json'),
+      p.join(tmp.path, 'raw-data', 'org1_20240701000000.json'),
     ).writeAsStringSync(jsonEncode(rapport('org1')));
     await tester.runAsync(
       () => importOpenKatReports(ctx, ref, directoryOverride: tmp.path),
@@ -197,10 +199,13 @@ void main() {
     // actie de tellingen wél teruggeven.
     final tmp = Directory.systemTemp.createTempSync('ocikat-stil-');
     addTearDown(() => tmp.deleteSync(recursive: true));
+    Directory(p.join(tmp.path, 'raw-data')).createSync();
     File(
-      p.join(tmp.path, 'org1_20240601000000.json'),
+      p.join(tmp.path, 'raw-data', 'org1_20240601000000.json'),
     ).writeAsStringSync(jsonEncode(rapport('org1')));
-    File(p.join(tmp.path, 'geen-rapport.json')).writeAsStringSync('{"a":1}');
+    File(
+      p.join(tmp.path, 'raw-data', 'geen-rapport.json'),
+    ).writeAsStringSync('{"a":1}');
 
     final (container, ctx, ref) = await pump(tester);
     final uitkomst = await tester.runAsync(
