@@ -119,6 +119,7 @@ void main() {
         ModuleId.onlineStorage,
         ModuleId.imports,
         ModuleId.procesverbetering,
+        ModuleId.meetings,
       ]);
     });
   });
