@@ -1,5 +1,8 @@
+import 'dart:ui' show Locale;
+
 import 'package:flutter/foundation.dart';
 
+import '../l10n/app_localizations.dart';
 import '../models/deck.dart';
 import '../models/openkat/openkat_models.dart';
 import '../models/openkat/openkat_reporting_models.dart';
@@ -9,8 +12,6 @@ import '../services/openkat/openkat_deck_generator.dart';
 import '../utils/log.dart';
 
 class OpenKatWizardController extends ChangeNotifier {
-  static const dataQualityMaximumSnapshotAge = Duration(days: 30);
-
   final OpenKatWizardGateway gateway;
   final Deck? existingDeck;
   final OpenKatWizardRecipe? initialRecipe;
@@ -25,15 +26,18 @@ class OpenKatWizardController extends ChangeNotifier {
   Object? scanError;
   Object? buildError;
   bool get unsafeUpdate => buildError is OpenKatUnsafeUpdateException;
+  OpenKatReportFamilyId selectedFamilyId =
+      OpenKatReportFamilyId.organizationsManagement;
   OpenKatWizardScenarioId? selectedScenarioId;
   String? selectedOrganizationCode;
   Set<String> selectedOrganizationCodes = {};
   DateTime? currentAsOf;
   DateTime? previousAsOf;
   String? cveId;
-  OpenKatReportLanguage language = OpenKatReportLanguage.dutch;
+  OpenKatReportLanguage language;
   String reportTitle = '';
   bool moreSettingsExpanded = false;
+  bool moreRecipesExpanded = false;
   bool updateConfirmationVisible;
   OpenKatWizardBuildResult? result;
   OpenKatReportResult? _previewCache;
@@ -43,11 +47,18 @@ class OpenKatWizardController extends ChangeNotifier {
     required this.gateway,
     this.existingDeck,
     this.initialRecipe,
+    OpenKatReportLanguage? initialLanguage,
     DateTime Function()? now,
     void Function(String operation, Object error, StackTrace stack)? logFailure,
   }) : _now = now ?? DateTime.now,
        _logFailure = logFailure ?? _defaultLogFailure,
+       language = initialLanguage ?? _activeReportLanguage(),
        updateConfirmationVisible = existingDeck != null;
+
+  static OpenKatReportLanguage _activeReportLanguage() =>
+      const AppLocalizations(Locale('nl')).languageCode == 'nl'
+      ? OpenKatReportLanguage.dutch
+      : OpenKatReportLanguage.english;
 
   static void _defaultLogFailure(
     String operation,
@@ -74,26 +85,29 @@ class OpenKatWizardController extends ChangeNotifier {
     final scenario = selectedScenarioId;
     final current = currentAsOf;
     if (scenario == null || current == null) return null;
+    final descriptor = selectedScenario?.descriptor;
+    if (descriptor == null) return null;
     return OpenKatWizardRecipe(
       scenarioId: scenario,
-      organizationCode: scenario == OpenKatWizardScenarioId.organizationProgress
+      organizationCode:
+          descriptor.inputs.contains(OpenKatWizardInputKind.organization)
           ? selectedOrganizationCode
           : null,
-      organizationCodes: scenario == OpenKatWizardScenarioId.portfolio
+      organizationCodes:
+          descriptor.inputs.contains(OpenKatWizardInputKind.organizations)
           ? selectedOrganizationCodes
           : const {},
       currentAsOf: current,
       previousAsOf:
-          scenario == OpenKatWizardScenarioId.organizationProgress ||
-              scenario == OpenKatWizardScenarioId.portfolio
+          descriptor.inputs.contains(OpenKatWizardInputKind.previousAsOf)
           ? previousAsOf
           : null,
-      cveId: scenario == OpenKatWizardScenarioId.cveExposure ? cveId : null,
+      cveId: descriptor.inputs.contains(OpenKatWizardInputKind.cve)
+          ? cveId
+          : null,
       language: language,
       title: reportTitle,
-      maximumSnapshotAge: scenario == OpenKatWizardScenarioId.dataQuality
-          ? dataQualityMaximumSnapshotAge
-          : null,
+      maximumSnapshotAge: descriptor.maximumSnapshotAge,
     );
   }
 
@@ -120,14 +134,14 @@ class OpenKatWizardController extends ChangeNotifier {
   OpenKatWizardPreviewFacts? get selectedPreviewFacts {
     final prepared = scan;
     if (prepared == null) return null;
-    final selectedCodes = switch (selectedScenarioId) {
-      OpenKatWizardScenarioId.portfolio => selectedOrganizationCodes,
-      OpenKatWizardScenarioId.organizationProgress =>
-        selectedOrganizationCode == null
-            ? const <String>{}
-            : {selectedOrganizationCode!},
-      _ => prepared.organizationOptions.map((option) => option.code).toSet(),
-    };
+    final inputs = selectedScenario?.descriptor.inputs ?? const {};
+    final selectedCodes = inputs.contains(OpenKatWizardInputKind.organizations)
+        ? selectedOrganizationCodes
+        : inputs.contains(OpenKatWizardInputKind.organization)
+        ? selectedOrganizationCode == null
+              ? const <String>{}
+              : {selectedOrganizationCode!}
+        : prepared.organizationOptions.map((option) => option.code).toSet();
     final organizations = prepared.organizations
         .where((organization) => selectedCodes.contains(organization.code))
         .toList(growable: false);
@@ -179,13 +193,34 @@ class OpenKatWizardController extends ChangeNotifier {
   bool get canContinue {
     final selected = selectedScenario;
     if (selected == null || !selected.available) return false;
-    return switch (selected.descriptor.id) {
-      OpenKatWizardScenarioId.organizationProgress =>
-        selectedOrganizationCode != null && previousAsOf != null,
-      OpenKatWizardScenarioId.cveExposure =>
-        cveId != null && scan!.cveOptions.any((option) => option.id == cveId),
-      _ => true,
-    };
+    final inputs = selected.descriptor.inputs;
+    if (inputs.contains(OpenKatWizardInputKind.organization) &&
+        selectedOrganizationCode == null) {
+      return false;
+    }
+    if (inputs.contains(OpenKatWizardInputKind.organizations) &&
+        selectedOrganizationCodes.isEmpty) {
+      return false;
+    }
+    if (inputs.contains(OpenKatWizardInputKind.previousAsOf) &&
+        previousAsOf == null) {
+      return false;
+    }
+    if (inputs.contains(OpenKatWizardInputKind.cve) &&
+        (cveId == null ||
+            !scan!.cveOptions.any((option) => option.id == cveId))) {
+      return false;
+    }
+    return true;
+  }
+
+  bool get hasPrimaryInputs {
+    final inputs = selectedScenario?.descriptor.inputs ?? const {};
+    return inputs.any(
+      (input) =>
+          input != OpenKatWizardInputKind.language &&
+          input != OpenKatWizardInputKind.title,
+    );
   }
 
   Future<void> prepare(String directory) async {
@@ -238,6 +273,12 @@ class OpenKatWizardController extends ChangeNotifier {
               .where((item) => item.available)
               .map((item) => item.descriptor.id)
               .firstOrNull;
+    selectedFamilyId =
+        prepared.scenarios
+            .where((item) => item.descriptor.id == selectedScenarioId)
+            .map((item) => item.descriptor.family)
+            .firstOrNull ??
+        OpenKatReportFamilyId.organizationsManagement;
     final availableCodes = prepared.organizationOptions
         .map((item) => item.code)
         .toSet();
@@ -257,10 +298,19 @@ class OpenKatWizardController extends ChangeNotifier {
     selectedOrganizationCodes = rememberedCodes?.isNotEmpty ?? false
         ? rememberedCodes!
         : availableCodes;
-    language = inferred?.language ?? OpenKatReportLanguage.dutch;
+    language = inferred?.language ?? language;
     reportTitle = inferred?.title ?? '';
     cveId = inferred?.cveId ?? prepared.cveOptions.firstOrNull?.id;
     _selectDates(prepared, preferred: inferred?.previousAsOf);
+    final inputs = selectedScenario?.descriptor.inputs ?? const {};
+    if (existingDeck != null &&
+        remembered == null &&
+        inputs.contains(OpenKatWizardInputKind.organizations)) {
+      // Oude decks bevatten geen bewijs van de gekozen portfolioscope. Alle
+      // organisaties invullen en meteen bijwerken zou die scope stil verbreden.
+      // Laat de gebruiker daarom eerst de keuzes controleren.
+      updateConfirmationVisible = false;
+    }
   }
 
   OpenKatWizardRecipe? _inferRecipe(OpenKatWizardScan prepared) {
@@ -273,7 +323,14 @@ class OpenKatWizardController extends ChangeNotifier {
       orElse: () => OpenKatWizardScenarioId.portfolio,
     );
     String? organizationCode;
-    if (scenario == OpenKatWizardScenarioId.organizationProgress) {
+    final inferredDescriptor = prepared.scenarios
+        .where((item) => item.descriptor.id == scenario)
+        .map((item) => item.descriptor)
+        .firstOrNull;
+    if (inferredDescriptor?.inputs.contains(
+          OpenKatWizardInputKind.organization,
+        ) ??
+        false) {
       for (final option in prepared.organizationOptions) {
         final safe = option.code.toLowerCase().replaceAll(
           RegExp(r'[^a-z0-9]+'),
@@ -304,10 +361,15 @@ class OpenKatWizardController extends ChangeNotifier {
   }
 
   void _selectDates(OpenKatWizardScan prepared, {DateTime? preferred}) {
-    currentAsOf = selectedScenarioId == OpenKatWizardScenarioId.dataQuality
+    currentAsOf = (selectedScenario?.descriptor.currentAsOfUsesClock ?? false)
         ? _now().toUtc()
         : prepared.latestMeasurement!;
-    if (selectedScenarioId == OpenKatWizardScenarioId.portfolio) {
+    final inputs = selectedScenario?.descriptor.inputs ?? const {};
+    if (!inputs.contains(OpenKatWizardInputKind.previousAsOf)) {
+      previousAsOf = null;
+      return;
+    }
+    if (!inputs.contains(OpenKatWizardInputKind.organization)) {
       final dates = prepared.preview.measurementDates;
       final candidates = dates.where((date) => date.isBefore(currentAsOf!));
       previousAsOf = preferred != null && candidates.contains(preferred)
@@ -336,8 +398,34 @@ class OpenKatWizardController extends ChangeNotifier {
         .firstOrNull;
     if (availability == null || !availability.available || busy) return;
     selectedScenarioId = id;
+    selectedFamilyId = availability.descriptor.family;
     final prepared = scan;
     if (prepared != null) _selectDates(prepared);
+    buildError = null;
+    notifyListeners();
+  }
+
+  void chooseFamily(OpenKatReportFamilyId family) {
+    if (busy || selectedFamilyId == family) return;
+    selectedFamilyId = family;
+    final familyScenarios =
+        scan?.scenarios
+            .where((item) => item.descriptor.family == family)
+            .toList() ??
+        const <OpenKatWizardScenarioAvailability>[];
+    final preferred =
+        familyScenarios
+            .where((item) => item.available && item.descriptor.recommended)
+            .firstOrNull ??
+        familyScenarios.where((item) => item.available).firstOrNull ??
+        familyScenarios
+            .where((item) => item.descriptor.recommended)
+            .firstOrNull ??
+        familyScenarios.firstOrNull;
+    selectedScenarioId = preferred?.descriptor.id;
+    final prepared = scan;
+    if (prepared != null) _selectDates(prepared);
+    moreRecipesExpanded = false;
     buildError = null;
     notifyListeners();
   }
@@ -389,6 +477,11 @@ class OpenKatWizardController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void toggleMoreRecipes() {
+    moreRecipesExpanded = !moreRecipesExpanded;
+    notifyListeners();
+  }
+
   void changeUpdateChoices() {
     updateConfirmationVisible = false;
     notifyListeners();
@@ -397,8 +490,7 @@ class OpenKatWizardController extends ChangeNotifier {
   void next() {
     if (!canContinue || busy) return;
     step = switch (step) {
-      OpenKatWizardStep.scenario
-          when selectedScenarioId == OpenKatWizardScenarioId.dataQuality =>
+      OpenKatWizardStep.scenario when !hasPrimaryInputs =>
         OpenKatWizardStep.review,
       OpenKatWizardStep.scenario => OpenKatWizardStep.inputs,
       OpenKatWizardStep.inputs => OpenKatWizardStep.review,
@@ -410,8 +502,7 @@ class OpenKatWizardController extends ChangeNotifier {
   void back() {
     if (busy) return;
     step = switch (step) {
-      OpenKatWizardStep.review
-          when selectedScenarioId == OpenKatWizardScenarioId.dataQuality =>
+      OpenKatWizardStep.review when !hasPrimaryInputs =>
         OpenKatWizardStep.scenario,
       OpenKatWizardStep.review => OpenKatWizardStep.inputs,
       OpenKatWizardStep.inputs => OpenKatWizardStep.scenario,
