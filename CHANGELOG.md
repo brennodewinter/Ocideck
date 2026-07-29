@@ -28,6 +28,13 @@ in Dutch, and it keeps growing on `main` between releases.
   monitoringrapporten falen gesloten als de gebruikte adapter die respectievelijk
   betrouwbare CVE-verwijzingen of monitoringstatus niet expliciet garandeert;
   de huidige adapters doen die belofte niet.
+- Rapportblokken bewaken hun eigen capabilityvoorwaarden; vergelijkingsperioden
+  en werkelijk gekozen snapshots moeten chronologisch zijn. Lifecycleclaims
+  vereisen stabiele findingidentiteit en monitoringmutaties twee expliciete
+  statussen voor dezelfde stabiele asset.
+- OpenKAT-brontekst wordt als veilige, letterlijke Markdown gecomponeerd.
+  Rapporttabellen stoppen bij de gekozen beleidslimiet met een zichtbare
+  afkapmelding, en gelokaliseerde trends worden uit getypepte deltas opgebouwd.
 
 ## [0.1.3] — 2026-07-29
 

@@ -213,14 +213,26 @@ implicit previous measurement is the latest usable snapshot before the selected
 current one. It also emits the measurements actually used and source traces
 (organisation, role, report date, source filename, hash and schema). Scenario
 code cannot silently substitute a different definition of “previous”.
+An explicit previous as-of date must be strictly earlier than the current date,
+and a historical capability exists only when the selected previous snapshot is
+itself strictly older than the selected current snapshot.
 
 The registry currently supplies five plans: `management-overview`,
 `weekly-comparison`, `organization-overview`, `cve-exposure` and
 `monitoring-changes`. A plan is a small ordered list of management-overview,
 measurement-availability, finding-lifecycle, CVE-exposure or
 monitoring-changes blocks. The composer turns those blocks into normal OciDeck
-slides, including ordinary non-destructive `DisplayWindowSpec` limits; it does
-not introduce a new deck format or slide type.
+slides; it does not introduce a new deck format or slide type. Each block kind
+owns intrinsic request and capability preconditions, which the engine validates
+after scenario composition. Optional lifecycle blocks are omitted when stable
+finding identity is unavailable; a custom scenario cannot weaken the
+preconditions of CVE or monitoring blocks.
+
+`tableRowLimit` is also the construction budget for lifecycle, CVE-exposure and
+monitoring-change tables. Those queries stop after enough rows to prove that the
+limit was exceeded, and the deck adds an explicit omission row instead of
+materialising every result. Other deck views retain their ordinary
+non-destructive `DisplayWindowSpec` projection.
 
 Capability assessment is deliberately separate from values that happen to be
 present in a snapshot. The engine records typed assessments and stable
@@ -230,10 +242,17 @@ requires a capability reports `missingCapability` and fails closed. In
 particular, `cve-exposure` requires an adapter-declared
 `reliableCveReferences`, and `monitoring-changes` requires historical
 snapshots, stable asset identity and adapter-declared
-`reliableMonitoringStatus`. Current import adapters do **not** declare reliable
+`reliableMonitoringStatus`. A monitoring mutation additionally requires the
+same stable asset in both snapshots and two explicit, different statuses;
+absence and `null` remain unknown. Current import adapters do **not** declare reliable
 CVE references or monitoring status, so those two scenarios currently return an
 unavailable/missing-capability result rather than infer facts from incidental
 fields.
+
+Trend conclusions carry typed direction and metric deltas. Dutch and English
+wording is projected from those facts in the composer; no locale is parsed back
+out of free text. OpenKAT recommendation text is neutralised as literal text at
+the Markdown boundary.
 
 `OpenKatDeckGenerator` remains the compatibility façade for directory import and
 re-import. It builds the legacy `management-overview` plan and preserves the

@@ -245,15 +245,25 @@ The result is machine-readable whether generation succeeds or fails: `deck`,
 `plan`, selected `measurements`, typed `diagnostics`, `missingCapabilities` and
 `sourceTraces`. `generated` is false when an error prevents composition.
 Diagnostic codes include an unknown scenario/scope/organisation, missing current
-or previous snapshot, malformed CVE ID, missing capability, stale snapshot,
-incomplete portfolio and incomparable measurement coverage. A diagnostic has a
-warning or error severity plus string arguments; callers should key behaviour on
-the code, not display text.
+or previous snapshot, invalid snapshot chronology, malformed CVE ID, missing
+capability, an invalid report plan, stale snapshot, incomplete portfolio and
+incomparable measurement coverage. A diagnostic has a warning or error severity
+plus string arguments; callers should key behaviour on the code, not display
+text.
 
 Snapshot selection is canonical: the latest *usable* snapshot on or before an
 as-of date. If `previousAsOf` is omitted, the previous snapshot is selected
 strictly before the selected current one. Each used measurement and trace names
-the exact source file/hash/schema, so a generated report remains auditable.
+the exact source file/hash/schema, so a generated report remains auditable. If
+`previousAsOf` is present it must be strictly earlier than `currentAsOf`, and the
+historical capability additionally requires two actually different,
+chronological snapshots.
+
+Report-block preconditions are intrinsic to the block kind and are checked after
+scenario composition. A custom registry cannot make CVE or monitoring evidence
+optional. The weekly lifecycle block is intentionally conditional: it is
+omitted, and its capability recorded as missing, when stable finding identity is
+not demonstrable.
 
 Capabilities are explicit source contracts, not deductions from a non-empty
 field. `cve-exposure` requires `reliableCveReferences`; `monitoring-changes`
@@ -261,6 +271,14 @@ requires historical snapshots, stable asset identities and
 `reliableMonitoringStatus`. Current adapters do not declare the CVE or
 monitoring feature, therefore both scenarios fail closed with
 `missingCapability` until an adapter proves the relevant source fields.
+Monitoring transitions require the same stable asset in both snapshots and two
+explicit statuses; a missing asset or `null` status is unknown, not a mutation.
+
+For lifecycle, CVE-exposure and monitoring-change tables, `tableRowLimit`
+controls construction as well as presentation. Queries stop after the configured
+budget plus one sentinel result, and a visible final row reports that more
+results were omitted. This prevents a small display policy from hiding
+unbounded deck materialisation.
 
 ### Privacy Projection API
 `lib/services/privacy/privacy_projection.dart` — applies redaction and audience
