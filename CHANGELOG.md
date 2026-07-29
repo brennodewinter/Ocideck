@@ -16,6 +16,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Het instellingenvenster liet niet zien dat er meer stond dan er paste. Met
+  alle Uitbreidingen aan telt de zijbalk twaalf tabbladen; op een bescheiden
+  venster vielen de laatste onder de vouw, en niets verried dat — de
+  automatische scrollbalk verschijnt pas tíjdens het scrollen, en de vaste
+  merkvoet onder de lijst maakte de afsnijding onzichtbaar. De zijbalk toont
+  overloop nu met twee blijvende signalen: een altijd zichtbare duim zodra er
+  iets buiten beeld valt, en een randvervaging aan de kant waar meer inhoud
+  ligt (die onderaan verdwijnt, want daar eindigt de lijst écht). Het
+  inhoudspaneel en de zoeklijst kregen dezelfde blijvende duim.
 - Een git-handeling kon blijven staan zonder ooit iets te melden. OciDeck las
   de uitvoer van `git` tot de pijp sloot, en die sluit pas als élk proces dat
   hem geërfd heeft weg is — git start er zelf een paar, zoals een credential

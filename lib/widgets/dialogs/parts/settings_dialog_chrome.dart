@@ -14,6 +14,251 @@
 // is protected — vandaar dat de klasse die helper heeft.
 part of '../settings_dialog.dart';
 
+/// De duim van de zijbalk-scrollbalk: wit met doorschijnendheid, zodat het
+/// marineblauwe verloop erdoorheen blijft schemeren. De alpha is gekozen op
+/// WCAG 1.4.11 (niet-tekstcontrast ≥ 3:1) tegen *beide* uiteinden van het
+/// verloop — geborgd in `settings_sidebar_scroll_affordance_test.dart`.
+@visibleForTesting
+final Color settingsSidebarThumbColor = Colors.white.withValues(alpha: 0.45);
+
+/// Hoeveel pixels inhoud er hoogstens vervagen aan een rand waar meer achter
+/// ligt. Klein genoeg om geen leesruimte te kosten, groot genoeg om een item
+/// zichtbaar te laten "oplossen" in plaats van netjes te eindigen.
+const double _kScrollFadeExtent = 24;
+
+/// De vervaging per rand voor de gegeven scrollpositie.
+///
+/// Dit is de waarheidsregel van de randvervaging: er vervaagt alléén iets aan
+/// de kant waar werkelijk meer inhoud ligt, en de vervaging bouwt af naarmate
+/// het einde nadert (`extentAfter` zakt onder de maximale vervaging). Wie
+/// onderaan staat, ziet de lijst dus écht eindigen. Als los toetsbare functie
+/// buiten de widget, zodat de test de regel tegen echte render-metrics kan
+/// houden in plaats van tegen een nagebouwde schatting.
+@visibleForTesting
+({double top, double bottom}) settingsScrollFadeExtents(ScrollMetrics metrics) {
+  return (
+    top: math.min(metrics.extentBefore, _kScrollFadeExtent),
+    bottom: math.min(metrics.extentAfter, _kScrollFadeExtent),
+  );
+}
+
+/// Maakt de overloop van een scrollgebied zichtbaar vóórdat er gescrold wordt.
+///
+/// Twee passieve signalen: een blijvend zichtbare duim zodra er iets
+/// buiten beeld valt — past alles, dan tekent het framework niets — en
+/// optioneel een randvervaging aan de kant waar meer inhoud ligt. Beide staan
+/// hier omdat het venster zijn eigen automatische scrollbalk verbergt: die
+/// verschijnt pas tíjdens het scrollen, en wie niet al scrolt kreeg dus nooit
+/// een aanwijzing dat "Integraties" en "Documentatie" onder de vouw lagen.
+///
+/// Een [RawScrollbar] en geen [Scrollbar], want die laatste delegeert op macOS
+/// naar een Cupertino-duim met een vaste grijze kleur — vrijwel onzichtbaar op
+/// de marineblauwe zijbalk, en per platform anders. Deze duim is op alle vier
+/// de platformen dezelfde.
+class _OverflowHints extends StatefulWidget {
+  const _OverflowHints({
+    required this.thumbColor,
+    required this.builder,
+    this.fadeEdges = false,
+  });
+
+  final Color thumbColor;
+
+  /// Of de randen vervagen waar meer inhoud ligt. Alleen de zijbalk zet dit
+  /// aan: navigatie-items die onvindbaar onder de vouw liggen zijn een
+  /// verloren functie, terwijl doorlopende tekst in het inhoudspaneel zijn
+  /// voortzetting zelf al verraadt.
+  final bool fadeEdges;
+
+  /// Bouwt het scrollgebied met de controller die duim en vervaging delen.
+  final Widget Function(BuildContext context, ScrollController controller)
+  builder;
+
+  @override
+  State<_OverflowHints> createState() => _OverflowHintsState();
+}
+
+class _OverflowHintsState extends State<_OverflowHints> {
+  final ScrollController _controller = ScrollController();
+  double _fadeTop = 0;
+  double _fadeBottom = 0;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _syncFades(ScrollMetrics metrics) {
+    final fades = settingsScrollFadeExtents(metrics);
+    if (fades.top == _fadeTop && fades.bottom == _fadeBottom) return;
+    setState(() {
+      _fadeTop = fades.top;
+      _fadeBottom = fades.bottom;
+    });
+  }
+
+  Shader _fadeShader(Rect bounds) {
+    // Stops als fractie van de hoogte, begrensd zodat boven- en ondervervaging
+    // elkaar ook in een pathologisch laag venster nooit kruisen.
+    final top = bounds.height <= 0
+        ? 0.0
+        : (_fadeTop / bounds.height).clamp(0.0, 0.45);
+    final bottom = bounds.height <= 0
+        ? 0.0
+        : (_fadeBottom / bounds.height).clamp(0.0, 0.45);
+    // Een rand zonder vervaging krijgt géén doorzichtige stop op positie 0 of
+    // 1: twee stops op hetzelfde punt maken de uiterste pixelrij dubbelzinnig.
+    // Alleen de alpha telt (dstIn-masker); wit is hier dus geen kleurkeuze.
+    const dekkend = Colors.white;
+    final doorzichtig = Colors.white.withValues(alpha: 0);
+    return LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        if (top > 0) doorzichtig,
+        dekkend,
+        dekkend,
+        if (bottom > 0) doorzichtig,
+      ],
+      stops: [if (top > 0) 0, top, 1 - bottom, if (bottom > 0) 1],
+    ).createShader(bounds);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // De automatische desktop-scrollbalk gaat hier uit: die zou als tweede
+    // duim over de onze heen tekenen.
+    Widget child = ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+      child: widget.builder(context, _controller),
+    );
+    if (widget.fadeEdges) {
+      // Het ShaderMask staat er ook zonder actieve vervaging (dekkend verloop):
+      // een wisselende boomvorm zou de Scrollable hieronder herbouwen en zijn
+      // scrollpositie terugzetten. Depth 0, zodat een genest scrollgebied in de
+      // inhoud de vervaging van dit gebied niet kan aansturen.
+      child = NotificationListener<ScrollMetricsNotification>(
+        onNotification: (notification) {
+          if (notification.depth == 0) _syncFades(notification.metrics);
+          return false;
+        },
+        child: NotificationListener<ScrollNotification>(
+          onNotification: (notification) {
+            if (notification.depth == 0) _syncFades(notification.metrics);
+            return false;
+          },
+          child: ShaderMask(
+            shaderCallback: _fadeShader,
+            blendMode: BlendMode.dstIn,
+            child: child,
+          ),
+        ),
+      );
+    }
+    return RawScrollbar(
+      controller: _controller,
+      thumbVisibility: true,
+      interactive: true,
+      thumbColor: widget.thumbColor,
+      thickness: 6,
+      radius: const Radius.circular(3),
+      crossAxisMargin: 2,
+      mainAxisMargin: 2,
+      child: child,
+    );
+  }
+}
+
+/// Eén navigatieknop in de zijbalk. Een losse widget en geen methode op de
+/// dialoogstaat: hij heeft aan een sectie, een selectievlag en een tik-callback
+/// genoeg, en alles wat hij verder zou aanraken hoort hem niet aan te gaan.
+class _NavItem extends StatelessWidget {
+  const _NavItem({
+    required this.section,
+    required this.selected,
+    required this.label,
+    required this.onTap,
+  });
+
+  final SettingsSection section;
+  final bool selected;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(11),
+          onTap: onTap,
+          child: Tooltip(
+            message: label,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 150),
+              padding: const EdgeInsets.fromLTRB(12, 11, 14, 11),
+              decoration: BoxDecoration(
+                color: selected
+                    ? Colors.white.withValues(alpha: 0.13)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(11),
+              ),
+              child: Row(
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 150),
+                    width: 3,
+                    height: 18,
+                    margin: const EdgeInsets.only(right: 11),
+                    decoration: BoxDecoration(
+                      color: selected ? AppTheme.blue400 : Colors.transparent,
+                      borderRadius: BorderRadius.circular(3),
+                    ),
+                  ),
+                  Icon(
+                    section.icon,
+                    size: 19,
+                    color: selected
+                        ? Colors.white
+                        : Colors.white.withValues(alpha: 0.62),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    // Twee regels in plaats van afkappen. Bij 200% — een schaal
+                    // die dit product zelf aanbiedt als WCAG 1.4.4-instelling —
+                    // werden de labels "Einste…", "App-De…", "Präsent…": een
+                    // navigatie waar je niet meer op kunt navigeren. Een tooltip
+                    // eromheen vangt het uiterste geval, maar de tooltip is het
+                    // vangnet en niet de oplossing; die moet je immers eerst
+                    // ontdekken.
+                    child: Text(
+                      label,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: selected
+                            ? Colors.white
+                            : Colors.white.withValues(alpha: 0.72),
+                        fontSize: 13.5,
+                        fontWeight: selected
+                            ? FontWeight.w600
+                            : FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 extension _SettingsChrome on _SettingsDialogState {
   /// De breedte van de zijbalk bij de standaard tekstgrootte.
   static const double _sidebarWidth = 234;
@@ -93,30 +338,43 @@ extension _SettingsChrome on _SettingsDialogState {
             ),
           ),
           // "Over OciDeck" ontbreekt hier met opzet: dat tabblad wordt vanuit
-          // de merkvoet hieronder geopend. De lijst scrollt, zodat extra
+          // de merkvoet hieronder geopend. De lijst scrolt, zodat extra
           // tabbladen de zijbalk nooit doen overlopen; de voet blijft staan.
+          // Mét overloopsignalen, want juist die vaste voet maskeert de
+          // afsnijding: de zijbalk oogde compleet terwijl de laatste
+          // tabbladen onzichtbaar onder de vouw lagen.
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  for (final section in SettingsSection.navItems(
-                    infoSafetyRevealed: ref.watch(infoSafetyRevealProvider),
-                    hasChecklists: ref
-                        .watch(settingsProvider)
-                        .customChecklists
-                        .isNotEmpty,
-                    // Uit het formulier en niet uit de opgeslagen instelling:
-                    // zet je de module op Uitbreidingen aan, dan hoort het
-                    // tabblad meteen te verschijnen en niet pas na Opslaan.
-                    aiRevealed: _ai.revealsTab,
-                    importRevealed: ref.watch(importModuleRevealProvider),
-                    // Integraties is OpenKAT (desktop); op web reveal't de
-                    // module wél, maar zonder OpenKAT-tabblad.
-                    openKatAvailable: supportsLocalProjectFolders,
-                  ))
-                    _navItem(section, l10n),
-                ],
+            child: _OverflowHints(
+              thumbColor: settingsSidebarThumbColor,
+              fadeEdges: true,
+              builder: (context, controller) => SingleChildScrollView(
+                controller: controller,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    for (final section in SettingsSection.navItems(
+                      infoSafetyRevealed: ref.watch(infoSafetyRevealProvider),
+                      hasChecklists: ref
+                          .watch(settingsProvider)
+                          .customChecklists
+                          .isNotEmpty,
+                      // Uit het formulier en niet uit de opgeslagen instelling:
+                      // zet je de module op Uitbreidingen aan, dan hoort het
+                      // tabblad meteen te verschijnen en niet pas na Opslaan.
+                      aiRevealed: _ai.revealsTab,
+                      importRevealed: ref.watch(importModuleRevealProvider),
+                      // Integraties is OpenKAT (desktop); op web reveal't de
+                      // module wél, maar zonder OpenKAT-tabblad.
+                      openKatAvailable: supportsLocalProjectFolders,
+                    ))
+                      _NavItem(
+                        section: section,
+                        selected: _selectedTab == section,
+                        label: section.label(l10n),
+                        onTap: () => _rebuild(() => _selectedTab = section),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -185,80 +443,6 @@ extension _SettingsChrome on _SettingsDialogState {
                     color: selected
                         ? Colors.white
                         : Colors.white.withValues(alpha: 0.5),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _navItem(SettingsSection section, AppLocalizations l10n) {
-    final selected = _selectedTab == section;
-    final icon = section.icon;
-    final label = section.label(l10n);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(11),
-          onTap: () => _rebuild(() => _selectedTab = section),
-          child: Tooltip(
-            message: label,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 150),
-              padding: const EdgeInsets.fromLTRB(12, 11, 14, 11),
-              decoration: BoxDecoration(
-                color: selected
-                    ? Colors.white.withValues(alpha: 0.13)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(11),
-              ),
-              child: Row(
-                children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 150),
-                    width: 3,
-                    height: 18,
-                    margin: const EdgeInsets.only(right: 11),
-                    decoration: BoxDecoration(
-                      color: selected ? AppTheme.blue400 : Colors.transparent,
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                  ),
-                  Icon(
-                    icon,
-                    size: 19,
-                    color: selected
-                        ? Colors.white
-                        : Colors.white.withValues(alpha: 0.62),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    // Twee regels in plaats van afkappen. Bij 200% — een schaal
-                    // die dit product zelf aanbiedt als WCAG 1.4.4-instelling —
-                    // werden de labels "Einste…", "App-De…", "Präsent…": een
-                    // navigatie waar je niet meer op kunt navigeren. Een tooltip
-                    // eromheen vangt het uiterste geval, maar de tooltip is het
-                    // vangnet en niet de oplossing; die moet je immers eerst
-                    // ontdekken.
-                    child: Text(
-                      label,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: selected
-                            ? Colors.white
-                            : Colors.white.withValues(alpha: 0.72),
-                        fontSize: 13.5,
-                        fontWeight: selected
-                            ? FontWeight.w600
-                            : FontWeight.w500,
-                      ),
-                    ),
                   ),
                 ],
               ),
@@ -339,9 +523,18 @@ extension _SettingsChrome on _SettingsDialogState {
   }
 
   Widget _tabBody(Widget child) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(28, 22, 24, 22),
-      child: child,
+    // Zonder randvervaging: sectiekoppen en doorlopende tekst verraden hier
+    // zelf al dat er meer is, en de voetbalk met Opslaan is een bewuste vaste
+    // grens. Alleen de duim, zodat een lang tabblad als Beveiliging zijn
+    // overloop toont. Slate500 leest in beide thema's op slate50 (≥ 4,5:1) —
+    // ditzelfde paar draagt elders in dit venster al lopende tekst.
+    return _OverflowHints(
+      thumbColor: AppTheme.slate500,
+      builder: (context, controller) => SingleChildScrollView(
+        controller: controller,
+        padding: const EdgeInsets.fromLTRB(28, 22, 24, 22),
+        child: child,
+      ),
     );
   }
 }
