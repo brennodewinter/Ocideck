@@ -255,8 +255,9 @@ void main() {
       // een snackbar achter een modale dialoog leest niemand.
       final tmp = Directory.systemTemp.createTempSync('ocikat-knop-');
       addTearDown(() => tmp.deleteSync(recursive: true));
+      Directory(p.join(tmp.path, 'raw-data')).createSync();
       File(
-        p.join(tmp.path, 'org1_20240601000000.json'),
+        p.join(tmp.path, 'raw-data', 'org1_20240601000000.json'),
       ).writeAsStringSync(jsonEncode(rapportage('org1')));
 
       await open(
@@ -339,8 +340,9 @@ void main() {
     // teruggeven; komt er tóch een deck uit, dan kwam de map uit de instelling.
     final tmp = Directory.systemTemp.createTempSync('ocikat-vaste-map-');
     addTearDown(() => tmp.deleteSync(recursive: true));
+    Directory(p.join(tmp.path, 'raw-data')).createSync();
     File(
-      p.join(tmp.path, 'org1_20240601000000.json'),
+      p.join(tmp.path, 'raw-data', 'org1_20240601000000.json'),
     ).writeAsStringSync(jsonEncode(rapportage('org1')));
 
     SharedPreferences.setMockInitialValues({
