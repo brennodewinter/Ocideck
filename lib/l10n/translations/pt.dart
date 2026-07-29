@@ -1800,6 +1800,15 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Onlinevergaderingen': 'Reuniões online',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Participar numa reunião de outro fornecedor, com a sua apresentação como aquilo que partilha. Desativado por predefinição; com o módulo desativado, o OciDeck não contacta nenhum serviço de reuniões. Ainda não há nenhum fornecedor ligado, por isso ainda não é possível participar — isto lança as bases.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Há uma reunião em curso. Por isso, a janela da chamada continua acessível até que a abandone.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Ainda não há nenhum serviço de reuniões disponível ao qual aderir. Enquanto assim for, este interruptor não muda nada e nada sai para fora.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Cole uma ligação de reunião para participar. Quem será contactado e o que verá aparece no ecrã antes de participar.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Uma visão geral de gerenciamento ampla, mas factual, com momentos de medição rastreáveis.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

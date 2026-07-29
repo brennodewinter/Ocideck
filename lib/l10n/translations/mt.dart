@@ -1793,6 +1793,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Onlinevergaderingen': 'Laqgħat onlajn',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Tieħu sehem f\'laqgħa ta\' fornitur ieħor, bil-preżentazzjoni tiegħek bħala dak li taqsam. Mitfi b\'mod awtomatiku; bil-modulu mitfi, OciDeck ma jikkuntattja l-ebda servizz ta\' laqgħat. Għad m\'hemm l-ebda fornitur imqabbad, għalhekk għadek ma tistax tissieħeb — dan iqiegħed il-pedament.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Għaddejja laqgħa. Għalhekk it-tieqa tas-sejħa tibqa\' aċċessibbli sakemm titlaq minnha.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Għad m\'hemm l-ebda servizz ta\' laqgħat disponibbli biex tissieħeb fih. Sakemm dan ikun il-każ, dan is-swiċċ ma jibdel xejn u xejn ma joħroġ \'il barra.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Waħħal link ta\' laqgħa biex tissieħeb. Min se jiġi kkuntattjat u x\'se jara jidher fuq l-iskrin qabel ma tissieħeb.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Ħarsa ġenerali tal-ġestjoni wiesgħa iżda fattwali b\'mumenti ta\' kejl traċċabbli.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

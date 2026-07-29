@@ -1778,6 +1778,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Onlinevergaderingen': 'Online schôdzky',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Účasť na schôdzke iného poskytovateľa s vašou prezentáciou ako tým, čo zdieľate. Predvolene vypnuté; s vypnutým modulom OciDeck nekontaktuje žiadnu službu schôdzok. Zatiaľ nie je pripojený žiadny poskytovateľ, takže sa zatiaľ nedá pripojiť — toto kladie základ.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Prebieha schôdzka. Okno hovoru preto zostáva dostupné, kým ju neopustíte.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Zatiaľ nie je k dispozícii žiadna služba schôdzok, ku ktorej sa dá pripojiť. Kým je to tak, tento prepínač nič nemení a nič neodchádza von.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Vložte odkaz na schôdzku a pripojte sa. Koho sa osloví a čo uvidí, je uvedené na obrazovke skôr, než sa pripojíte.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Široký, ale faktický prehľad riadenia s vysledovateľnými momentmi merania.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

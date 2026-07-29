@@ -1770,6 +1770,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Onlinevergaderingen': 'Onlinemøder',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Deltag i et møde hos en anden udbyder, med din præsentation som det, du deler. Slået fra som standard; med modulet slået fra kontakter OciDeck ikke nogen mødetjeneste overhovedet. Der er endnu ingen udbyder tilsluttet, så deltagelse er ikke mulig endnu — dette lægger fundamentet.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Et møde er i gang. Samtalevinduet forbliver derfor tilgængeligt, indtil du forlader det.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Der er endnu ingen mødetjeneste tilgængelig at deltage i. Så længe det er tilfældet, ændrer denne kontakt intet, og intet sendes ud.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Indsæt et mødelink for at deltage. Hvem der kontaktes, og hvad de får at se, står på skærmen, før du deltager.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'En bred men saglig ledelsesoversigt med sporbare målemomenter.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

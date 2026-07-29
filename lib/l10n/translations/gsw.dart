@@ -1774,6 +1774,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Onlinevergaderingen': 'Online-Bsprechige',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'A menere Bsprechig vomene andere Aabieter teilnäh, mit Ihrere Presäntation als das, wo Sie teile. Standardmässig us; isch s Modul us, nimmt OciDeck mit keim einzige Bsprechigsdienscht Kontakt uf. Es isch no kei Aabieter aagschlosse, teilnäh gaht also no nid — das leit d Grundlag.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Es lauft e Bsprechig. S Gsprächsfänschter blibt drum erreichbar, bis Sie se verlönd.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Es git no kei Bsprechigsdienscht, wo me chönt bitrete. Solang das so isch, änderet dä Schalter nüt und es gaht nüt gege usse.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Füeged Sie en Bsprechigslink ii zum mitmache. Wär kontaktiert wird und was dä z gseh überchunnt, staht am Bildschirm, bevor Sie mitmached.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Ein umfassender, aber sachlicher Managementüberblick mit nachvollziehbaren Messmomenten.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

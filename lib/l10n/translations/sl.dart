@@ -1773,6 +1773,15 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Onlinevergaderingen': 'Spletni sestanki',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Sodelovanje na sestanku drugega ponudnika, pri čemer delite svojo predstavitev. Privzeto izklopljeno; z izklopljenim modulom OciDeck ne vzpostavi stika z nobeno storitvijo sestankov. Noben ponudnik še ni povezan, zato sodelovanje še ni mogoče — to postavlja temelje.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Sestanek poteka. Okno pogovora zato ostane dosegljivo, dokler ga ne zapustite.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Na voljo še ni nobene storitve sestankov, ki bi se ji lahko pridružili. Dokler je tako, to stikalo ničesar ne spremeni in nič ne gre navzven.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Prilepite povezavo do sestanka, da se pridružite. Kdo bo poklican in kaj bo videl, je prikazano na zaslonu, preden se pridružite.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Širok, a dejanski pregled upravljanja s sledljivimi merilnimi trenutki.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

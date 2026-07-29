@@ -1806,6 +1806,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Onlinevergaderingen': 'Cruinnithe ar líne',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Páirt a ghlacadh i gcruinniú de chuid soláthraí eile, agus do chur i láthair mar a roinneann tú. Múchta de réir réamhshocraithe; agus an modúl múchta, ní dhéanann OciDeck teagmháil le seirbhís chruinnithe ar bith. Níl aon soláthraí ceangailte fós, mar sin ní féidir páirt a ghlacadh go fóill — leagann sé seo an bhunchloch.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Tá cruinniú ar siúl. Fanann fuinneog an ghlao insroichte dá bhrí sin go dtí go bhfágann tú é.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Níl aon seirbhís chruinnithe ar fáil fós le páirt a ghlacadh inti. Fad is atá sé amhlaidh, ní athraíonn an lasc seo rud ar bith agus ní théann aon rud amach.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Greamaigh nasc cruinnithe le páirt a ghlacadh. Cé a ndéanfar teagmháil leis agus cad a fheicfidh sé, taispeántar ar an scáileán sula nglacann tú páirt.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Forbhreathnú bainistíochta leathan ach fíorasach le chuimhneacháin tomhais inrianaithe.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

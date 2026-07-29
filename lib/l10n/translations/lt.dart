@@ -1778,6 +1778,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Onlinevergaderingen': 'Internetiniai susitikimai',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Dalyvavimas kito teikėjo susitikime, dalijantis savo pateiktimi. Numatytai išjungta; kai modulis išjungtas, OciDeck nesikreipia į jokią susitikimų paslaugą. Kol kas neprijungtas joks teikėjas, todėl prisijungti dar negalima — tai padeda pagrindą.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Vyksta susitikimas. Todėl pokalbio langas lieka pasiekiamas, kol iš jo neišeisite.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Kol kas nėra susitikimų paslaugos, prie kurios būtų galima prisijungti. Kol taip yra, šis jungiklis nieko nekeičia ir niekas neišsiunčiama.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Įklijuokite susitikimo nuorodą, kad prisijungtumėte. Su kuo bus susisiekta ir ką jie matys, rodoma ekrane prieš jums prisijungiant.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Plati, bet faktinė valdymo apžvalga su atsekamomis matavimo akimirkomis.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

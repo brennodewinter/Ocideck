@@ -1,6 +1,6 @@
 # OciDeck — Microsoft Teams Guest Client (Design)
 
-> **Status:** design proposal — unbuilt · **Status last reviewed:** 2026-07-23 · **Published by:** Stichting LibreKAT
+> **Status:** design proposal — unbuilt · **Status last reviewed:** 2026-07-29 · **Published by:** Stichting LibreKAT
 
 > **A design proposal, not current behaviour.**
 > OciDeck cannot currently join a Microsoft Teams meeting. This document defines
@@ -23,6 +23,12 @@ the first provider-specific design: a separate, explicitly Microsoft-operated
 interoperability path. A Teams guest session is **not** a `CollabTransport`, does
 not weaken the collaboration design's E2EE invariant and must never be presented
 as providing OciDeck E2EE.
+
+Read §6 as the **shared** meeting interface rather than a Teams interface.
+Teams is the adapter that happens to be specified here first, and every later
+provider gets the same screens (T14). What stays Teams-specific in this
+document is the ACS bridge (§9), the token broker (§11) and the
+Microsoft-specific constraints in §3 — not how the feature looks or behaves.
 
 ---
 
@@ -65,8 +71,11 @@ vertical slice. Chat does not.
 - Azure Communication Services (ACS) bring-your-own-identity/external-user
   interoperability.
 - OciDeck web as an installable Progressive Web App (PWA).
+- An optional Uitbreidingen module that gates the whole feature (T13).
+- A provider-neutral meeting shell that later adapters reuse unchanged (T14).
 - Pre-join device selection and local preview.
-- Lobby, connected, reconnecting, denied, ended and failed states.
+- Waiting, connected, reconnecting, denied, ended and failed states, with
+  waiting reported in the chrome instead of a dedicated view (T15).
 - Incoming and outgoing audio.
 - Incoming and outgoing camera video.
 - Participant roster and active remote video tiles.
@@ -233,6 +242,69 @@ Controls appear enabled only if the runtime and call capability say the action
 is possible. A role, meeting policy, missing device or unsupported browser may
 change that at any time.
 
+### T13 — Optional module, off by default
+
+Calling is a `ModuleId` on the Uitbreidingen tab, next to Informatieveiligheid,
+AI-assistentie, Online opslag, Importeren and Procesverbetering. It follows the
+register's existing shape (`lib/state/module_registry.dart`): an `enabled`
+provider for the switch and a `revealed` provider for the gate that the rest of
+the app watches.
+
+Off means off: no shell action, no menu item, no bridge asset evaluated and no
+Microsoft or broker traffic. This is stronger than hiding a button, and it is
+what makes T8 verifiable for people who never want the feature at all.
+
+Reveal is `enabled || a session is active`, following the project rule that
+switching a module off must never make current work unreachable — here that is
+literal, because the alternative is silently dropping a call in progress. A
+running session keeps its controls and its `Leave`; only starting a new one
+disappears.
+
+There is one switch for calling as a whole, not one per provider. A user thinks
+"do I join meetings from here", not "do I want adapter number four";
+per-provider state belongs to the register in §7.1.2 of `COLLABORATION.md`,
+not to the settings tab.
+
+### T14 — One shell, many providers
+
+Every screen in §6 is provider-neutral and lives in `lib/widgets/meetings/`.
+Teams is an adapter behind the `MeetingProvider` contract
+(`COLLABORATION.md` §7.1.1), not the owner of the interface. The shell renders
+only what the contract gives it:
+
+- the provider's display name and recognised link family;
+- the egress disclosure text for that provider;
+- `MeetingCapabilities` for which controls exist at all; and
+- `MeetingRole` for the identity label shown next to the user.
+
+Nothing else may vary. The field order, the defaults (muted, camera off), the
+waiting behaviour of T15, the control bar layout and the leave sequence are the
+same whichever adapter is loaded, so that learning the interface once is enough.
+User-visible strings say "onlinevergadering", never a vendor name, except where
+naming the actual provider is the honest thing to report.
+
+A provider-specific screen is a design smell. If an adapter appears to need one,
+the missing concept belongs in the shared contract instead.
+
+### T15 — Waiting is ambient, never a screen
+
+Admission is the provider's business and can take minutes. OciDeck must not
+spend that time holding the user hostage in a dedicated waiting view: the deck
+stays in front and fully editable, and the wait is reported in the chrome.
+
+- The shell action becomes a status indicator — the meeting icon with a seated
+  cat — and blinks until the outcome is known.
+- One non-modal strip names what is being waited for and offers cancel, so
+  `Leave` stays reachable in this phase as §17 requires.
+- On admission the meeting workspace opens by itself; the user does not have to
+  return to a window and press anything.
+- The blink respects reduced-motion: the indicator keeps its distinct colour and
+  label without animating.
+
+This is a deliberate departure from the modal lobby that conferencing clients
+usually show, and it is the reason `MeetingPhase.lobby` is a chrome state here
+rather than a route.
+
 ---
 
 ## 5. System overview
@@ -266,8 +338,11 @@ the user supplies the meeting link — do not add Graph permissions to the MVP.*
 
 ### 6.1 Entry
 
-Add `Join online meeting…` as a root shell action. It is visible on native and
-web builds:
+Add `Onlinevergadering…` as a root shell action, shown only when the calling
+module is revealed (T13). The label names the activity, not the vendor: which
+provider it becomes follows from the link the user pastes (T14).
+
+When the module is revealed it is visible on native and web builds:
 
 - web/PWA opens the pre-join flow;
 - native desktop explains that the supported client opens in the OciDeck web
@@ -298,16 +373,24 @@ Order the flow so no permission or network request is surprising:
 Do not request device permission on initial page load. Browser permission prompts
 must follow a clear user gesture.
 
-### 6.3 Lobby
+### 6.3 Waiting for admission
 
-Show a real lobby view when the SDK reports `InLobby`:
+When the SDK reports `InLobby`, close the pre-join dialog and return the user to
+their deck. Do not open a waiting view (T15). Represent the wait in the chrome:
 
-- meeting title is unknown unless the service exposes a safe value; do not infer
-  it from the URL;
-- camera/microphone controls remain usable when the SDK permits;
-- `Leave` is always present;
-- say that an organiser must admit the participant;
+- the shell action becomes a blinking seated-cat meeting indicator;
+- one non-modal strip says an organiser must still admit the participant, and
+  carries the cancel action;
+- the meeting title is unknown unless the service exposes a safe value; do not
+  infer it from the URL;
+- camera/microphone stay at their pre-join values and are not offered again here
+  — there is no preview to adjust them against;
+- admission opens the workspace of §6.4 without further user action; and
 - do not poll the token broker or reload the call to escape the lobby.
+
+The wait must never read as success. The indicator is visibly distinct from the
+connected state in colour, label and icon, and announces the phase change
+through a live region rather than only through animation.
 
 ### 6.4 Connected workspace
 
@@ -372,18 +455,29 @@ lib/meetings/
 
 lib/state/
   meeting_session_provider.dart
+  meetings_module_provider.dart
 
 lib/widgets/meetings/
   meeting_join_dialog.dart
   meeting_prejoin_view.dart
-  meeting_lobby_view.dart
+  meeting_status_indicator.dart
+  meeting_waiting_strip.dart
   meeting_workspace.dart
   meeting_controls.dart
   meeting_device_picker.dart
   meeting_participant_tile.dart
   meeting_recording_banner.dart
   meeting_diagnostics_dialog.dart
+
+lib/widgets/dialogs/settings/
+  meetings_module_card.dart
 ```
+
+`meeting_status_indicator.dart` and `meeting_waiting_strip.dart` are what T15
+replaced the lobby route with; there is no `meeting_lobby_view.dart`. Register
+the module in `lib/state/module_registry.dart` and add its card to the
+Uitbreidingen tab — the tab's test counts on the register, so a module without
+a card fails rather than disappearing quietly.
 
 Use the same conditional-export pattern as `platform/presenter_fullscreen.dart`
 and `utils/file_download.dart`. `meeting_client_stub.dart` must compile on every
@@ -459,7 +553,9 @@ test/meeting_controller_test.dart
 test/meeting_event_contract_test.dart
 test/meeting_failure_localization_test.dart
 test/meeting_prejoin_view_test.dart
-test/meeting_lobby_view_test.dart
+test/meeting_waiting_indicator_test.dart
+test/meeting_module_gate_test.dart
+test/meeting_provider_neutral_shell_test.dart
 test/meeting_workspace_test.dart
 test/meeting_privacy_boundary_test.dart
 test/meeting_log_redaction_test.dart
@@ -1212,11 +1308,16 @@ With fake ACS emitters/objects:
 - No permission/network action before explicit gesture.
 - Join disabled until link/name/disclosure are valid.
 - Muted/camera-off defaults are visible and semantic.
-- Lobby never looks connected.
+- Waiting never looks connected, and the deck stays editable while waiting.
+- Admission opens the workspace without a further user action.
 - Recording/transcription banner remains visible in every layout.
 - Unsupported controls are absent/disabled with an explanation.
-- Leave is present in connecting, lobby, connected and reconnecting states.
+- Leave is present in connecting, waiting, connected and reconnecting states.
 - 200% scale and narrow desktop viewport retain core controls.
+- Module off: no shell action, no menu item, no bridge asset request.
+- Module switched off mid-session: the running session keeps its controls.
+- Two different fake providers render the same shell, differing only in the
+  fields §T14 allows to vary.
 
 ### 19.4 Broker tests
 
@@ -1379,7 +1480,7 @@ Chat or Teams-user authentication remains outside this phase plan.
 | Document | Required current-state update |
 | --- | --- |
 | `README.md` | Add feature only when its supported phase ships; name web/PWA boundary |
-| `docs/USER_GUIDE.md` | Join, permissions, lobby, controls, sharing, limits, costs/broker choice |
+| `docs/USER_GUIDE.md` | Switching the module on, join, permissions, waiting, controls, sharing, limits, costs/broker choice |
 | `docs/PRIVACY.md` | Exact broker/Microsoft egress, retention and no-media-through-broker claim |
 | `docs/SECURITY_DESIGN.md` | Trust boundaries, token lifecycle, CSP, abuse controls, non-E2EE boundary |
 | `docs/ARCHITECTURE.md` | Root meeting state, JS bridge and token broker runtime diagram |

@@ -1798,6 +1798,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Onlinevergaderingen': 'Διαδικτυακές συσκέψεις',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Συμμετοχή σε σύσκεψη άλλου παρόχου, με την παρουσίασή σας ως αυτό που μοιράζεστε. Απενεργοποιημένο από προεπιλογή· με τη μονάδα απενεργοποιημένη, το OciDeck δεν επικοινωνεί με καμία υπηρεσία συσκέψεων. Δεν έχει συνδεθεί ακόμη κανένας πάροχος, οπότε η συμμετοχή δεν είναι ακόμη δυνατή — αυτό θέτει τα θεμέλια.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Μια σύσκεψη βρίσκεται σε εξέλιξη. Το παράθυρο της κλήσης παραμένει γι\' αυτό προσβάσιμο μέχρι να την εγκαταλείψετε.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Δεν υπάρχει ακόμη διαθέσιμη υπηρεσία συσκέψεων για συμμετοχή. Όσο ισχύει αυτό, αυτός ο διακόπτης δεν αλλάζει τίποτα και τίποτα δεν βγαίνει προς τα έξω.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Επικολλήστε έναν σύνδεσμο σύσκεψης για να συμμετάσχετε. Ποιος θα ειδοποιηθεί και τι θα δει εμφανίζεται στην οθόνη πριν συμμετάσχετε.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Μια ευρεία αλλά τεκμηριωμένη επισκόπηση διαχείρισης με ανιχνεύσιμες στιγμές μέτρησης.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

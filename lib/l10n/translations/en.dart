@@ -911,6 +911,15 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Onlinevergaderingen': 'Online meetings',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Join a meeting run by another provider, with your presentation as what you share. Off by default; with the module off, OciDeck contacts no meeting service at all. No provider is connected yet, so joining is not possible yet — this lays the groundwork.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'A meeting is in progress. The call window therefore stays available until you leave it.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'There is no meeting service available to join yet. As long as that is so, this switch changes nothing and nothing leaves the app.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Paste a meeting link to join. Who will be contacted and what they will see is shown on screen before you join.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Summarizes the current status, measurements used, and key points of attention.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

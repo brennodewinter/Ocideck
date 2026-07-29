@@ -1762,6 +1762,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Onlinevergaderingen': 'Veebikoosolekud',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Osalemine teise teenusepakkuja koosolekul, jagades oma esitlust. Vaikimisi väljas; kui moodul on väljas, ei võta OciDeck ühendust ühegi koosolekuteenusega. Ühtegi teenusepakkujat pole veel ühendatud, seega osaleda veel ei saa — see paneb aluse.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Koosolek on pooleli. Seetõttu jääb kõneaken kättesaadavaks, kuni te sellest lahkute.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Ühtegi koosolekuteenust, millega liituda, pole veel saadaval. Kuni see nii on, ei muuda see lüliti midagi ja midagi ei lähe välja.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Kleepige koosoleku link, et osaleda. Kellega ühendust võetakse ja mida ta näeb, kuvatakse ekraanil enne, kui osalete.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'Lai, kuid faktiline juhtimisülevaade koos jälgitavate mõõtmishetkedega.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':

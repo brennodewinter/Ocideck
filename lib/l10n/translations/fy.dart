@@ -731,6 +731,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Onlinevergaderingen': 'Onlinegearkomsten',
+  'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
+      'Meidwaan oan in gearkomste fan in oare oanbieder, mei jo presintaasje as wat jo diele. Standert út; mei de module út nimt OciDeck mei gjin inkelde gearkomstetsjinst kontakt op. Der is noch gjin oanbieder oansletten, dus meidwaan kin noch net — dit leit de basis.',
+  'Er loopt een vergadering. Het gespreksvenster blijft daarom bereikbaar tot u die verlaat.':
+      'Der rint in gearkomste. It petearfinster bliuwt dêrom berikber oant jo dy ferlitte.',
+  'Er is nog geen vergaderdienst beschikbaar om aan mee te doen. Zolang dat zo is verandert deze schakelaar niets en gaat er niets naar buiten.':
+      'Der is noch gjin gearkomstetsjinst beskikber om oan mei te dwaan. Salang\'t dat sa is, feroaret dizze skeakel neat en giet der neat nei bûten.',
+  'Plak een vergaderlink om mee te doen. Wie er contact krijgt en wat die te zien krijgt, staat op het scherm voordat u meedoet.':
+      'Plak in gearkomstekeppeling om mei te dwaan. Wa\'t der kontakt krijt en wat dy te sjen krijt, stiet op it skerm foardat jo meidogge.',
   'Vat de huidige stand, gebruikte metingen en belangrijkste aandachtspunten samen.':
       'In breed mar feitlik behearoersjoch mei traceerbere mjitmominten.',
   'Laat zien waar de meeste en minste findings zijn gevonden; ontbrekende metingen staan apart.':
