@@ -41,10 +41,31 @@ import 'meeting_failure_text.dart';
 class MeetingJoinDialog extends ConsumerStatefulWidget {
   const MeetingJoinDialog({super.key});
 
-  static Future<void> show(BuildContext context) => showDialog<void>(
-    context: context,
-    builder: (_) => const MeetingJoinDialog(),
-  );
+  /// Open het venster, en ruim op wanneer de gebruiker niet is meegegaan.
+  ///
+  /// **Annuleren annuleert ook echt.** Op *Controleren* legt de notifier de
+  /// uitnodiging vast en gaat de fase naar `validating`; daarmee geldt de sessie
+  /// als actief. Bleef dat staan na het sluiten van dit venster, dan verbergt
+  /// het startpunt in de tabbalk zich (er loopt "al" een vergadering) terwijl de
+  /// wachtstrip zich in díe fase niet laat zien — een doodlopende weg waar
+  /// alleen een herstart uit hielp.
+  ///
+  /// Het opruimen staat hier en niet in `dispose` van de dialoogtoestand, om
+  /// twee redenen. Riverpod verbiedt het wijzigen van een provider tijdens het
+  /// afbreken van de boom, en hier is elke uitgang gedekt: de knop, Escape, en
+  /// een tik naast het venster komen alle drie langs deze `await`.
+  static Future<void> show(BuildContext context) async {
+    final container = ProviderScope.containerOf(context);
+    final joined = await showDialog<bool>(
+      context: context,
+      builder: (_) => const MeetingJoinDialog(),
+    );
+    if (joined == true) return;
+    final notifier = container.read(meetingSessionProvider.notifier);
+    // Alleen opruimen wanneer er werkelijk niets loopt: is er tegen alle
+    // verwachting toch een sessie, dan is weggooien het laatste wat mag.
+    if (notifier.session == null) notifier.reset();
+  }
 
   @override
   ConsumerState<MeetingJoinDialog> createState() => _MeetingJoinDialogState();
@@ -62,6 +83,11 @@ class _MeetingJoinDialogState extends ConsumerState<MeetingJoinDialog> {
 
   /// Er loopt een preflight of een join.
   bool _busy = false;
+
+  /// De notifier, één keer opgehaald.
+  late final MeetingSessionNotifier _notifier = ref.read(
+    meetingSessionProvider.notifier,
+  );
 
   @override
   void dispose() {
@@ -236,10 +262,9 @@ class _MeetingJoinDialogState extends ConsumerState<MeetingJoinDialog> {
   /// toestand.
   Future<void> _check() async {
     setState(() => _busy = true);
-    final notifier = ref.read(meetingSessionProvider.notifier);
-    final resolution = notifier.resolveLink(_linkController.text);
+    final resolution = _notifier.resolveLink(_linkController.text);
     final preflight = resolution is MeetingLinkRecognised
-        ? await notifier.preflight()
+        ? await _notifier.preflight()
         : null;
     if (!mounted) return;
     setState(() {
@@ -256,12 +281,12 @@ class _MeetingJoinDialogState extends ConsumerState<MeetingJoinDialog> {
   /// niet in een venster dat de presentatie afdekt (T15).
   Future<void> _join() async {
     setState(() => _busy = true);
-    final notifier = ref.read(meetingSessionProvider.notifier);
-    notifier.requestDevicePermission();
-    notifier.devicesReady();
-    await notifier.join(displayName: _nameController.text);
+    _notifier.requestDevicePermission();
+    _notifier.devicesReady();
+    await _notifier.join(displayName: _nameController.text);
     if (!mounted) return;
-    Navigator.of(context).pop();
+    // `true`: er loopt iets, dus [MeetingJoinDialog.show] ruimt niets op.
+    Navigator.of(context).pop(true);
   }
 }
 

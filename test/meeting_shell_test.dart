@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,6 +21,10 @@ void main() {
   setUp(() {
     AppLocalizations.setActiveLanguageCode('nl');
     SharedPreferences.setMockInitialValues({});
+    // Een test die eindigt met het gespreksvenster nog open laat de rem op
+    // 'zichtbaar' staan; zonder deze reset kan de volgende test er geen meer
+    // openen en hangt de uitkomst van de testvolgorde af.
+    debugResetMeetingWorkspaceVisible();
   });
 
   /// Pomp een paar frames in plaats van uit te settelen.
@@ -27,8 +33,8 @@ void main() {
   /// fasen, en dat is met opzet een animatie die niet stopt zolang de uitkomst
   /// onbekend is (T15). `pumpAndSettle` wacht op een boom die tot rust komt en
   /// loopt daarom af in een tijdslimiet — niet omdat er iets stuk is.
-  Future<void> settle(WidgetTester tester) async {
-    for (var i = 0; i < 4; i++) {
+  Future<void> settle(WidgetTester tester, {int frames = 4}) async {
+    for (var i = 0; i < frames; i++) {
       await tester.pump(const Duration(milliseconds: 50));
     }
   }
@@ -222,6 +228,76 @@ void main() {
       expect(button.onPressed, isNull);
     });
 
+    testWidgets('de hele reis: link, naam, controleren, meedoen', (
+      tester,
+    ) async {
+      final container = await pump(tester, const _DialogHost());
+      await tester.tap(find.text('Openen'));
+      await tester.pumpAndSettle();
+      const l10n = AppLocalizations(Locale('nl'));
+      await tester.enterText(
+        find.byType(TextField).first,
+        'https://$fakeMeetingHost/j/direct',
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10n.d('Controleren')));
+      await tester.pumpAndSettle();
+
+      // Een naam typen maakt Meedoen bruikbaar. Zonder deze stap zou een
+      // ontbrekende `onChanged` op het naamveld onopgemerkt blijven — en dan
+      // blijft de knop grijs en is meedoen onmogelijk.
+      await tester.enterText(find.byType(TextField).last, 'Kim');
+      await tester.pumpAndSettle();
+      final knop = tester.widget<FilledButton>(
+        find.widgetWithText(FilledButton, l10n.d('Meedoen')),
+      );
+      expect(knop.onPressed, isNotNull);
+
+      await tester.tap(find.text(l10n.d('Meedoen')));
+      await tester.pumpAndSettle();
+      // De adapter heeft het overgenomen, en het venster is weg: wat er daarna
+      // gebeurt hoort in de omlijsting (T15).
+      expect(
+        container.read(meetingSessionProvider.notifier).session,
+        isNotNull,
+      );
+      expect(find.byType(MeetingJoinDialog), findsNothing);
+      // De fasen van §6.2 zijn gezet — zonder die reeks zou `join` stil op de
+      // fasepoort afketsen en zou er niets gebeuren, ook niet zichtbaar.
+      expect(
+        container.read(meetingSessionProvider).phase,
+        MeetingPhase.provisioning,
+      );
+    });
+
+    testWidgets('annuleren annuleert ook echt: geen sessie blijft hangen', (
+      tester,
+    ) async {
+      final container = await pump(tester, const _DialogHost());
+      await tester.tap(find.text('Openen'));
+      await tester.pumpAndSettle();
+      const l10n = AppLocalizations(Locale('nl'));
+      await tester.enterText(
+        find.byType(TextField).first,
+        'https://$fakeMeetingHost/j/direct',
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10n.d('Controleren')));
+      await tester.pumpAndSettle();
+      // Na Controleren staat de uitnodiging in de sessie en geldt die als
+      // actief.
+      expect(container.read(meetingSessionActiveProvider), isTrue);
+
+      await tester.tap(find.text(l10n.d('Annuleren')));
+      await tester.pumpAndSettle();
+      // Zonder opruimen bleef de fase op `validating` staan: het startpunt in
+      // de tabbalk verbergt zich dan (er loopt "al" een vergadering) en de
+      // wachtstrip toont zich in die fase niet — een doodlopende weg waar
+      // alleen een herstart uit hielp.
+      expect(container.read(meetingSessionActiveProvider), isFalse);
+      expect(container.read(meetingSessionProvider).phase, MeetingPhase.idle);
+    });
+
     testWidgets('een geweigerde gast leest de reden in de bekendmaking', (
       tester,
     ) async {
@@ -342,6 +418,89 @@ void main() {
       await tester.tap(find.text(l10n.d('Sluiten')));
       await tester.pumpAndSettle();
       expect(container.read(meetingSessionActiveProvider), isFalse);
+    });
+  });
+
+  group('de toelatingswaker (§6.3)', () {
+    /// De waker moet in een boom mét Navigator staan, want hij opent een route.
+    Future<ProviderContainer> pumpWatcher(WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ProviderScope(
+          child: MaterialApp(home: Scaffold(body: MeetingAdmissionWatcher())),
+        ),
+      );
+      await tester.pumpAndSettle();
+      return ProviderScope.containerOf(tester.element(find.byType(Scaffold)));
+    }
+
+    Future<FakeMeetingSession> start(
+      ProviderContainer container,
+      String scenario,
+    ) async {
+      final notifier = container.read(meetingSessionProvider.notifier);
+      notifier.resolveLink('https://$fakeMeetingHost/j/$scenario');
+      notifier.requestDevicePermission();
+      notifier.devicesReady();
+      await notifier.join(displayName: 'Tester');
+      return notifier.session! as FakeMeetingSession;
+    }
+
+    testWidgets('toelating opent het gespreksvenster zonder dat de gebruiker '
+        'iets hoeft te doen', (tester) async {
+      final container = await pumpWatcher(tester);
+      final session = await start(container, 'lobby');
+      session.advance(); // connecting
+      session.advance(); // lobby
+      await settle(tester);
+      // Nog niets: er is niets om te zien zolang er gewacht wordt (T15).
+      expect(find.byType(MeetingWorkspaceDialog), findsNothing);
+
+      session.advanceAll(); // de organisator laat toe
+      await settle(tester);
+      // Zonder dit venster is een pictogramwissel van 16 pixels het enige
+      // signaal dat de gebruiker binnen is — mét een microfoon die volgens de
+      // dienst meedoet.
+      expect(find.byType(MeetingWorkspaceDialog), findsOneWidget);
+    });
+
+    testWidgets('een herverbinding dringt geen venster op', (tester) async {
+      final container = await pumpWatcher(tester);
+      final session = await start(container, 'reconnect');
+      session.advanceAll();
+      await settle(tester);
+      // Het verloop gaat connecting → connected → reconnecting → connected.
+      // Het eerste 'connected' opent het venster; sluit dat, en de terugkeer
+      // uit de herverbinding mag het niet opnieuw opdringen.
+      expect(find.byType(MeetingWorkspaceDialog), findsOneWidget);
+      final l10n = AppLocalizations(Locale('nl'));
+      await tester.tap(find.text(l10n.d('Venster sluiten')));
+      // Een route die wegschuift heeft meer dan vier frames nodig.
+      await settle(tester, frames: 12);
+      expect(find.byType(MeetingWorkspaceDialog), findsNothing);
+      expect(
+        container.read(meetingSessionProvider).phase,
+        MeetingPhase.connected,
+      );
+    });
+
+    testWidgets('er komt nooit een tweede venster op het eerste', (
+      tester,
+    ) async {
+      final container = await pumpWatcher(tester);
+      final session = await start(container, 'lobby');
+      // De gebruiker opent het venster zelf terwijl hij nog wacht. Niet
+      // awaiten: `show` keert pas terug als het venster weer dicht is, dus
+      // wachten zou de test laten hangen.
+      unawaited(
+        MeetingWorkspaceDialog.show(tester.element(find.byType(Scaffold))),
+      );
+      await settle(tester);
+      expect(find.byType(MeetingWorkspaceDialog), findsOneWidget);
+      // …en wordt daarna toegelaten. De waker mag er geen tweede bovenop
+      // zetten: Verlaten zou dan het onderste venster laten staan.
+      session.advanceAll();
+      await settle(tester);
+      expect(find.byType(MeetingWorkspaceDialog), findsOneWidget);
     });
   });
 

@@ -34,14 +34,48 @@ import '../../state/meeting_session_provider.dart';
 import '../../theme/app_theme.dart';
 import 'meeting_failure_text.dart';
 
+/// Of er al een gespreksvenster open staat.
+///
+/// Er is precies één gesprek (T6), dus er hoort precies één venster te zijn.
+/// Zonder deze rem stapelen ze: het lampje in de tabbalk opent er een, en de
+/// toelatingswaker opent er even later nog een bovenop — met als resultaat dat
+/// `Verlaten` het onderste venster laat staan en de gebruiker tegen een tweede
+/// exemplaar aankijkt dat niets meer betekent.
+///
+/// Buiten de klasse en per app in plaats van per widget, omdat de twee plekken
+/// die een venster openen (het lampje en de waker) elkaar niet kennen en ook
+/// niet hoeven te kennen.
+bool _workspaceVisible = false;
+
+/// Zet de rem terug op nul.
+///
+/// Nodig omdat een widgettest kan eindigen met het venster nog open: dan loopt
+/// de `finally` in [MeetingWorkspaceDialog.show] niet, en zou de volgende test
+/// in dezelfde procesruimte geen venster meer kunnen openen. In de app doet dit
+/// niets — daar sluit een venster altijd een keer.
+@visibleForTesting
+void debugResetMeetingWorkspaceVisible() => _workspaceVisible = false;
+
 /// Het gespreksvenster als dialoog.
 class MeetingWorkspaceDialog extends ConsumerWidget {
   const MeetingWorkspaceDialog({super.key});
 
-  static Future<void> show(BuildContext context) => showDialog<void>(
-    context: context,
-    builder: (_) => const MeetingWorkspaceDialog(),
-  );
+  /// Open het venster, of doe niets wanneer het al open staat.
+  static Future<void> show(BuildContext context) async {
+    if (_workspaceVisible) return;
+    _workspaceVisible = true;
+    try {
+      await showDialog<void>(
+        context: context,
+        builder: (_) => const MeetingWorkspaceDialog(),
+      );
+    } finally {
+      // In een `finally`, want het venster gaat ook weg met Escape, met een tik
+      // naast het venster, of doordat de route eronder verdwijnt. Bleef de vlag
+      // dan staan, dan was het venster daarna nooit meer te openen.
+      _workspaceVisible = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
