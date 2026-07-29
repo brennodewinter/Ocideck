@@ -526,7 +526,8 @@ Add a slide and pick a type: **title**, **section** divider, **bullets**, **two
 bullet columns**, **bullets + image**, **two images**, **large image**, **video**,
 **quote**, **table**, **source code**, **chart** (bar, horizontal
 bar, stacked bar, horizontal stacked bar, combo, line, area, pie, donut,
-spider/radar, scatter, waterfall, heatmap/risk matrix, or target-and-actual), **cockpit** (a
+spider/radar, scatter, waterfall, heatmap/risk matrix, or target-and-actual — plus
+six statistical types when the Procesverbetering module is on), **cockpit** (a
 dashboard of aviation-style instrument gauges),
 **question** (an interactive quiz slide, in six kinds), **timeline** (an animated timeline of
 dated events), **scorecard** (a few headline figures, each beside the figure from
@@ -2984,6 +2985,161 @@ available. While the module is off, none of those security types are offered
 anywhere, so the picker stays short for everyone who does not need them — but a
 report that already uses them always opens and renders correctly regardless (the
 file is the source of truth; the toggle only governs *authoring*).
+
+### Procesverbetering (process improvement)
+
+A fifth optional module on **Settings → Uitbreidingen (Extensions)**, off by
+default. It hosts Lean Six Sigma authoring artefacts (DMAIC, Kaizen, A3, and so
+on) — see [`docs/design/PROCESS_IMPROVEMENT.md`](design/PROCESS_IMPROVEMENT.md).
+The module is named *Procesverbetering* on purpose — "Lean Six Sigma" appears
+only as descriptive prose, never as the feature name. No certification or ISO
+conformance claims.
+
+**Statistical chart types.** With the module on, the chart slide's type list
+gains eight entries beside the ordinary ones:
+
+- **Regelkaart (control chart)** — your measurements in order, with the centre
+  line and the upper and lower control limits drawn from the data itself. Points
+  that break a control rule are marked in red, so "is this process behaving, or
+  did something change" is answered on sight. The Shewhart pair (I-MR by
+  default) is yours to pick; everything else follows from the numbers.
+- **Histogram** — the shape of the spread. Give it an upper and/or lower
+  specification limit and it draws them, with a Cpk figure and the
+  Anderson-Darling normality verdict beside it — that second number is not
+  decoration: a capability figure on skewed data flatters the process, and
+  seeing both keeps you honest.
+- **Pareto** — the categories sorted from largest to smallest with the running
+  cumulative line, and the "vital few" that together reach 80% highlighted.
+- **Run chart** — the simplest: the measurements in order against their mean.
+  Useful before you have enough data for a control chart.
+- **Boxplot** — median, quartiles, whiskers and outliers, one box per series, so
+  several groups can be compared side by side.
+- **Probability plot** — a normal Q-Q plot of the first series: sorted values
+  against theoretical normal quantiles, with an optional Anderson-Darling
+  p-value when there are at least eight points.
+- **Hoofdeffecten (main effects)** — one line per factor from coded low (−1) to
+  high (+1). The grid holds one series per factor (values −1 or +1) plus a final
+  **Y** response column; run order does not matter. **DOE-proefopzet…** in the
+  chart editor generates a full or fractional factorial table in Yates order.
+- **Interactie (interaction)** — paired lines for each two-factor pair at the
+  same grid convention.
+
+Most types read the **first** series (box plot: one box per series with at least
+four values; DOE plots: factor columns plus **Y**). Enter numbers by hand, link a
+data file, or **paste from the clipboard** — a spreadsheet column lands as a
+series without a detour.
+
+Two things are worth knowing about how these are stored. First, **not one
+computed value ends up in your file**: control limits, Cpk, bin edges, Pareto
+ranks, box hinges, factorial effects and interaction cell means are all worked
+out afresh each time the slide is drawn. Edit the data and derived lines move
+with it. What *is* saved is only what you decided — which control chart kind,
+and your specification limits. Second, **a deck that already contains one of
+these charts always opens and renders**, module on or off. The switch only
+governs what the type picker offers you; the file is the source of truth.
+
+When there is too little data to compute a chart honestly, the slide says so
+instead of drawing something. That is deliberate: a control chart from three
+measurements looks exactly as authoritative as one from a hundred.
+
+**Analysis tools (Phase 8).** With the module on, Settings → Uitbreidingen also
+offers three read-only calculators over the same local stats engine — no data
+leaves the device:
+
+- **Gage R&R…** — paste a Part × Operator × replicate table (or open from the
+  chart editor when the grid is laid out that way) and read % study variation,
+  ndc and optional % tolerance.
+- **Hypothesetoets…** — one-sample t, two-sample t (Welch) or one-way ANOVA;
+  too few observations yields a refusal message, not a number.
+- **Regressie…** — paste X and Y columns for slope, intercept and R².
+
+**Matrix slides.** With the module on, the add-slide picker also offers
+**Matrix** — a typed grid for improvement artefacts. Pick a template (SIPOC,
+FMEA, or RACI to start with); the columns come from the template, and anything
+the numbers can tell you is derived on the slide rather than stored. An FMEA's
+RPN (= S×O×D) is the clearest example: it appears in the preview and in the
+HTML export, sorted high-first so the risk is visible, but it is **never**
+written into the Markdown. Switching templates remaps cells by column key so a
+mis-click does not wipe work that still belongs. On disk the slide is a normal
+Markdown table plus `<!-- ocideck_template: fmea -->` (or `sipoc` / `raci`).
+A deck that already contains a matrix always opens and renders, module on or
+off — same rule as the statistical chart types.
+
+**Canvas slides.** With the module on, the add-slide picker also offers
+**Canvas** — fixed regions of Markdown for improvement artefacts. Pick a
+template (A3, project charter, Impact/Effort, SWOT, or a Kanban-style board);
+each region is a `##` heading in the file. On disk the slide is ordinary
+Markdown plus `<!-- ocideck_template: a3 -->` (or `charter` /
+`impact-effort` / `swot` / `board`). The engine lays out one Scene; preview and
+HTML export draw the same SVG. A deck that already contains a canvas always
+opens and renders, module on or off — same rule as matrix and the statistical
+chart types.
+
+**Tree slides.** With the module on, the add-slide picker also offers
+**Tree** — nested cause analysis or a fishbone diagram. Pick a template (5× Why,
+CTQ tree, or Ishikawa); depth is leading tabs on each bullet. Mark root causes
+inline as `**X-01**` (or `**Y-01**` for CTQ). On disk the slide is a bullet list
+plus `<!-- ocideck_template: five-whys -->` and `<!-- ocideck_layout: tree -->`
+(or `fishbone`). The engine lays out one Scene; preview and HTML export draw the
+same SVG. A deck that already contains a tree always opens and renders, module on
+or off — same rule as matrix and canvas.
+
+**Flow slides.** With the module on, the add-slide picker also offers
+**Flow** — a process map, swimlane or VSM. Pick a template (process map,
+swimlane or VSM); each step is one bullet as `title :: kind :: pt=…; lt=…`.
+On disk the slide is a bullet list plus `<!-- ocideck_template: process-map -->`
+and `<!-- ocideck_layout: flow -->` (or `swimlane` / `vsm`). Totals such as PCE
+and the bottleneck are derived when the slide is drawn, not stored. The engine
+lays out one Scene; preview and HTML export draw the same SVG. A deck that
+already contains a flow always opens and renders, module on or off — same rule
+as matrix, canvas and tree.
+
+**Phase gate slides.** With the module on, the add-slide picker also offers
+**Fasepoort** (`phaseGate`) — a gate checklist stored as bullets (`_class:
+phase-gate`). Use it at DMAIC phase boundaries to record scope, stakeholder
+sign-off and go/no-go before the next section. It serialises like an ordinary
+bullet slide and never blocks export on its own.
+
+**Project framework and golden thread (Phase 7).** A deck can declare its
+improvement framework (`dmaic`, `dmadv`, `kaizen`, `a3`, `8d`) and the primary
+**Y-01** metric in flat front-matter keys: `ocideck_improvement_y01` (name) plus
+optional `ocideck_improvement_y01_unit` / `_usl` / `_lsl` / `_target` /
+`_baseline` / `_goal`. Nested YAML is not used — the file stays one key per
+line. Inline ids `**Y-01**` / `**X-03**` on tree slides remain the canonical
+definitions in the body; the quality panel warns when an id is referenced
+elsewhere but missing on a tree (orphan) or defined on a tree but unused
+(informational).
+
+**Y-01 on charts.** A histogram or control chart may set `"yRef": "Y-01"` in its
+```chart``` JSON. Spec limits then come from the deck keys above at draw time —
+change USL once, every linked chart follows. Charts without `yRef` keep using
+their own local `usl`/`lsl` (older files and secondary plots). The chart editor
+offers **Y-01 (deck)** vs **local limits**; linking is never applied silently on
+open.
+
+**Artefact templates.** SIPOC, FMEA, A3, 5× Why and the other starters live as
+Markdown files under `assets/improvement/templates/`. Rebuild
+`assets/improvement/templates.json` with
+`dart run tool/build_improvement_templates.dart` after adding a file — no Dart
+catalog edit. Unknown `ocideck_template` ids still open from the stored table /
+headings.
+
+**New improvement project.** With the module on, the welcome screen offers
+*Nieuw verbeteringsproject* — a short wizard (framework, title, Y-01 name and
+spec limits, optional unit/target/baseline/goal) that scaffolds a deck with
+title slide, phase sections, project charter canvas, CTQ tree and SIPOC matrix.
+The template *Procesverbetering: DMAIC-project* in the new-presentation dialog
+builds the same DMAIC skeleton.
+
+**AI wording assist (Phase 10).** When **both** the AI-assistentie module and
+Procesverbetering are on, canvas, tree and flow editors show **Tekst voorstellen
+(AI)** under each text field. The model may polish wording only — never invent
+causes, conclusions or numbers. Any **X-nn** / **Y-nn** id, statistic (Cpk, RPN,
+%, measurements) or cause-list pattern the model emits is stripped or rejected;
+tree/fishbone fields get the strictest filter. Drafts carry the same **AI-concept**
+badge and `ocideck_ai_assisted` marker as pentest finding fields, so sealing
+stays blocked until you press **Nagekeken** on each one. See *AI drafting for
+finding text* under Informatieveiligheid for the shared backend settings.
 
 The same applies to the module's MIAUW record-keeping surfaces, so an ordinary
 presentation is not asked for pentest metadata it has no use for:

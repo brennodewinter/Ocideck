@@ -1866,6 +1866,47 @@ const _dutchSourceAddTlh = <String, String>{
   'organisaties geselecteerd': 'ghompu\' wIvwI\'',
   'rapportages gebruikt': 'ja\'chuqmey lo\'lu\'',
   'systemen': 'patmey',
+  'Nog geen specificatielimiet': 'wej Segh HeH tu\'lu\'',
+  'USL (bovengrens)': 'USL (Dung HeH)',
+  'LSL (ondergrens)': 'LSL (bIng HeH)',
+  'Optionele Y-01-velden': 'Y-01 yuvmey chaw\'',
+  'Procesdoel (target)': 'Qu\' ngoQ (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Y-01 Segh HeHmey (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Y-01 HeHmey ngaS deckvam. Dung chu\'wI\' yIchu\' — naDev mIwmo\' lo\', Daq mIwmo\' ghobe\'.',
+  'USL (bovengrens, optioneel)': 'USL (Dung HeH, chaw\')',
+  'LSL (ondergrens, optioneel)': 'LSL (bIng HeH, chaw\')',
+  'Procesdoel (optioneel)': 'Qu\' ngoQ (chaw\')',
+  'Fasepoort': 'mIw lojmIt',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'wa\' chronum (cha\' qechmey).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'cha\' chronum (cha\' qechmey per ghom).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'law\' ghom chronum (cha\' ghom, cha\' qechmey).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Part Operator Value (tab comma). cha\' parts, cha\' operators, cha\' measurements.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'X Y (wa\' mI\' per QonoS). wej pairs; engine jey.',
+  'Part × Operator interaction pooled into repeatability':
+      'Part × Operator interaction (pooled)',
+  'Part × Operator interaction kept separate':
+      'Part × Operator interaction (separate)',
+  'Te weinig gegevens voor een probability plot':
+      'tlhoy puS De\' probability plot',
   'Met dank aan': 'Satlho\'',
   'Fix alle problemen': 'Hoch Qaghmey yItI\'',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1939,6 +1980,78 @@ const _dutchSourceAddTlh = <String, String>{
   'kon niet worden gelezen en is overgeslagen': 'laDlu\'laHbe\' \'ej juSlu\'',
   'ontbrak in het bestand en is overgeslagen':
       'teywI\'Daq tu\'lu\'be\' \'ej juSlu\'',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'tlhoy puS De\' main-effects plot',
+  'Te weinig gegevens voor een interactieplot':
+      'tlhoy puS De\' interaction plot',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'chenmoH design chronum (−1/+1) empty Y.',
+  'Aantal factoren': 'Anzahl Faktoren',
+  'Volledig factorial (2^k)': 'Vollständiges faktorielles Design (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde':
+      'Läufe in standardmäßiger Yates-Reihenfolge',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'wa\' series per factor −1 +1; Qav series Y. rows experimental.',
+  'Golden-thread-id': 'Golden-thread ID',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'vay\' luj, \'ach Sor DabDaq tu\'lu\'be\' — CTQ pagh Ishikawa SorDaq ghun.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'Sor DabDaq \'oH, \'ach vay\' lulo\'be\' — mIr, mej pagh latlh DabDaq rar.',
+  'Nieuw verbeteringsproject': 'DubtaHghach Qu\' chu\'',
+  'Kader': 'rIn',
+  'Projecttitel': 'Qu\' pong',
+  'Primaire Y-metriek (Y-01)': 'wa\'DIch Y mIw (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'qaStaHvIS: order intake \'ab jen woch',
+  'Project starten': 'Qu\' tagh',
+  'Procesverbetering: DMAIC-project': 'Qu\' DubtaHghach: DMAIC Qu\'',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'DMAIC Degh: charter, CTQ Sor (Y-01), SIPOC je phasHommey.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'phasHom checklist: scope, stakeholders je go/no-go lujqa\' qaSpu\'DI\' vIH.',
+  'Stroom': 'mej',
+  'Zwembanen': 'qIvHom',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'mej mIw, qIvHom pagh VSM. mIw per nob :: Segh :: pt=…; lt=…. Sum (PCE, bottleneck) lIr je store ghobe\'.',
+  'Boom': 'Sor',
+  'Visgraat': 'ghot \'uS',
+  'Lay-out': 'mIr pat',
+  'Punten': 'mInmey',
+  'Inspringen': 'yIDIl',
+  'Uitspringen': 'yIDIlHa\'',
+  'Punt toevoegen': 'mIn chu\'',
+  'Punt verwijderen': 'mIn lo\'',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Sor pagh ghot \'uS (5× Why, CTQ, Ishikawa). tabmey Dung; ghun **X-01** inline.',
+  'Canvas': 'mIllogh',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'mIllogh reg (A3, charter, SWOT, mIr). nab yIwIv; ## mIn DIS mIllogh.',
+  'Matrix': 'mIr',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Segh typ (SIPOC, FMEA, RACI, …). nab yIwIv; rIn mIw like RPN lIr je store ghobe\'.',
+  'Regelkaart': 'che\' ghItlh',
+  'Histogram': 'mI\'mey ghItlh',
+  'Pareto': 'Pareto',
+  'Run chart': 'leng ghItlh',
+  'Boxplot': 'ngaSwI\' ghItlh',
+  'Plakken uit klembord': 'poltaHwI\'vo\' yIchel',
+  'Te weinig gegevens voor een regelkaart': 'che\' ghItlh De\' puS',
+  'Te weinig gegevens voor een histogram': 'mI\'mey ghItlh De\' puS',
+  'Te weinig gegevens voor een boxplot': 'ngaSwI\' ghItlh De\' puS',
+  'Procesverbetering': 'Qu\' DubtaHghach',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Dochmey Qu\' DubtaHghach je Lean Six Sigma Qu\'mey (DMAIC, Kaizen, A3) vaD. motlh chu\'Ha\'lu\'. module lo\'laH; Dochmey pIq poHmeyDaq chochtaH.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'module chu\'lu\'. mIw val naDev lo\'laH ({n} control chart mIwmey). cha\'nob Segh je nabmey chelbogh chaH rInpu\'DI\'.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'nav vam Qu\' DubtaHghach module Dochmey ngaS. Dochmeyvam yIchoHmeH module yIchu\'.',
   'Online media staat uit — aanzetten': 'online media mev — choq',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       'vangmeH De\' ngaS {bestand}; lI\'lu\'be\'.',

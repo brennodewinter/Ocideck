@@ -76,6 +76,14 @@ const Set<String> kOwnedFrontMatterKeys = {
   'ocideck_target_seconds',
   'ocideck_show_rehearsal_summary',
   'ocideck_play_only',
+  'ocideck_improvement_framework',
+  'ocideck_improvement_y01',
+  'ocideck_improvement_y01_unit',
+  'ocideck_improvement_y01_usl',
+  'ocideck_improvement_y01_lsl',
+  'ocideck_improvement_y01_target',
+  'ocideck_improvement_y01_baseline',
+  'ocideck_improvement_y01_goal',
 };
 
 /// Sleutels die OciDeck ooit schreef en nu niet meer, maar nog wél bezit.

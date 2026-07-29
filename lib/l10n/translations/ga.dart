@@ -1931,6 +1931,48 @@ const _dutchSourceAddGa = <String, String>{
   'organisaties geselecteerd': 'eagraíochtaí roghnaithe',
   'rapportages gebruikt': 'tuarascálacha a úsáideadh',
   'systemen': 'córais',
+  'Nog geen specificatielimiet': 'Níl teorainn sonraíochta fós',
+  'USL (bovengrens)': 'USL (teorainn uachtarach)',
+  'LSL (ondergrens)': 'LSL (teorainn íochtarach)',
+  'Optionele Y-01-velden': 'Réimsí Y-01 roghnacha',
+  'Procesdoel (target)': 'Sprioc próisis (target)',
+  'Specificatielimieten van Y-01 (deck)':
+      'Teorainneacha sonraíochta Y-01 (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Tá teorainneacha Y-01 ag an deck seo. Cas air an lasc thuas chun iad a úsáid in ionad luachanna áitiúla.',
+  'USL (bovengrens, optioneel)': 'USL (teorainn uachtarach, roghnach)',
+  'LSL (ondergrens, optioneel)': 'LSL (teorainn íochtarach, roghnach)',
+  'Procesdoel (optioneel)': 'Sprioc próisis (roghnach)',
+  'Fasepoort': 'Geata céime',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Colún amháin uimhreacha (2 bhreathnú ar a laghad).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Dhá cholún scartha le líne bhán (2 ar a laghad in aghaidh an ghrúpa).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Grúpaí iolracha, grúpa amháin in aghaidh an cholúin, scartha le líne bhán (2 ghrúpa ar a laghad, 2 bhreathnú in aghaidh an ghrúpa).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Greamaigh Part, Operator agus Value (táib nó camóg). Athdhéan sraitheanna le haghaidh macasamhlacha. 2 parts ar a laghad, 2 oibreoir, 2 thomhas in aghaidh na cille.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Greamaigh X agus Y (uimhir amháin in aghaidh na líne). 3 phéire ar a laghad; diúltaíonn an t-inneall nuair atá an iomarca breathnóireachtaí.',
+  'Part × Operator interaction pooled into repeatability':
+      'Idirghníomhú Part × Operator comhthiomsaithe i n-athráiteacht',
+  'Part × Operator interaction kept separate':
+      'Idirghníomhú Part × Operator coinnithe ar leith',
+  'Te weinig gegevens voor een probability plot':
+      'Níl go leor sonraí le haghaidh plota dóchúlachta',
   'Met dank aan': 'Le buíochas',
   'Fix alle problemen': 'Deisigh gach fadhb',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -2006,6 +2048,81 @@ const _dutchSourceAddGa = <String, String>{
       'níorbh fhéidir é a léamh agus fágadh ar lár é',
   'ontbrak in het bestand en is overgeslagen':
       'bhí sé ar iarraidh sa chomhad agus fágadh ar lár é',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Níl go leor sonraí le haghaidh plota príomhéifeachtaí',
+  'Te weinig gegevens voor een interactieplot':
+      'Níl go leor sonraí le haghaidh plota idirghníomhaíochta',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Gineann sé tábla dearaidh le tosca códaithe (−1/+1) agus colún Y folamh sa ghreille.',
+  'Aantal factoren': 'Anzahl Faktoren',
+  'Volledig factorial (2^k)': 'Vollständiges faktorielles Design (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde':
+      'Läufe in standardmäßiger Yates-Reihenfolge',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Sraith amháin in aghaidh an fhachtóra le leibhéil chóduithe −1 agus +1; is é an tsraith dheireanach an freagra (Y). Is ritheanna turgnamhacha iad na sraitheanna.',
+  'Golden-thread-id': 'Aitheantas golden thread',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'luitear air áit éigin ach níl sé ar sleamhnán crann — sainmhínigh é ar chrann CTQ nó Ishikawa.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'tá sé ar sleamhnán crann ach ní úsáidtear é in áit eile — nasc é le maitrís, sruth nó sleamhnán eile.',
+  'Nieuw verbeteringsproject': 'Tionscadal feabhsúcháin nua',
+  'Kader': 'Creat',
+  'Projecttitel': 'Teideal an tionscadail',
+  'Primaire Y-metriek (Y-01)': 'Príomh-mheicneoir Y (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Mar shampla: am order intake i laethanta oibre',
+  'Project starten': 'Tosaigh tionscadal',
+  'Procesverbetering: DMAIC-project': 'Feabhsú próiseas: tionscadal DMAIC',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'Creat DMAIC le charter, crann CTQ (Y-01), SIPOC agus rannóga céime.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Checklist geata céime: deimhnigh scope, lucht leasmhara agus go/no-go sula dtéann tú chuig an chéad chéim eile.',
+  'Stroom': 'Sreabh',
+  'Zwembanen': 'Bealaí',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Sreabh próisis, bealaí nó VSM. Céimeanna mar theideal :: cineál :: pt=…; lt=…. Ríomhtar iomláin (PCE, bottleneck) agus ní stóráiltear iad.',
+  'Boom': 'Crann',
+  'Visgraat': 'Eite iasc',
+  'Lay-out': 'Leagan amach',
+  'Punten': 'Pointí',
+  'Inspringen': 'Eang',
+  'Uitspringen': 'As-eang',
+  'Punt toevoegen': 'Cuir pointe leis',
+  'Punt verwijderen': 'Bain pointe',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Crann nó eite iasc (5× Why, CTQ, Ishikawa). Doimhneacht le cluaisíní; marcáil cúiseanna mar **X-01** sa líne.',
+  'Canvas': 'Canbhás',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Canbhás réigiún (A3, charter, SWOT, clár). Roghnaigh teimpléad; is iad na ceannteidil ## ar an diosca na boscaí.',
+  'Matrix': 'Maitrís',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Eangach cineálaithe (SIPOC, FMEA, RACI, …). Roghnaigh teimpléad; ríomhtar colúin dhíorthacha mar RPN agus ní stóráiltear iad.',
+  'Regelkaart': 'Cairt rialaithe',
+  'Histogram': 'Histeagram',
+  'Pareto': 'Pareto',
+  'Run chart': 'Cairt reatha',
+  'Boxplot': 'Bosca-léaráid',
+  'Plakken uit klembord': 'Greamaigh ón ghearrthaisce',
+  'Te weinig gegevens voor een regelkaart':
+      'Níl go leor sonraí ann do chairt rialaithe',
+  'Te weinig gegevens voor een histogram':
+      'Níl go leor sonraí ann do histeagram',
+  'Te weinig gegevens voor een boxplot':
+      'Níl go leor sonraí ann do bhosca-léaráid',
+  'Procesverbetering': 'Feabhsú próiseas',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Déantáin le haghaidh feabhsú próiseas agus tionscadail Lean Six Sigma (DMAIC, Kaizen, A3). Múchta de réir réamhshocraithe. Tá an modúl ar fáil; leanfaidh na déantáin sna céimeanna ina dhiaidh seo.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Tá an modúl ar siúl. Croílár ríomha ar fáil go háitiúil ({n} fachtóir control chart). Cuirfear cineálacha sleamhnán agus teimpléid leis a luaithe a bheidh siad réidh.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Tá codanna den mhodúl Feabhsú próiseas sa láithreoireacht seo. Cuir an modúl ar siúl chun iad a chur in eagar.',
   'Online media staat uit — aanzetten': 'Meáin ar líne as — cuir ar siúl',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       'Tá ábhar inrite i {bestand} agus ní dhéanfar é a iompórtáil.',

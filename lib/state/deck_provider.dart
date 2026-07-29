@@ -4,6 +4,7 @@ import '../models/annotation.dart';
 import '../models/asset_origin.dart';
 import '../models/checklist_spec.dart';
 import '../models/deck.dart';
+import '../models/improvement_y01.dart';
 import '../models/document_signature.dart';
 import '../models/scope_matrix_spec.dart';
 import '../models/settings.dart';
@@ -248,11 +249,25 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// slides (template content resolved by TemplateContentService, the first
   /// always a title slide carrying [title]); without them it is the classic
   /// single title slide.
-  void newDeck(String title, {String theme = 'ocideck', List<Slide>? slides}) {
+  void newDeck(
+    String title, {
+    String theme = 'ocideck',
+    List<Slide>? slides,
+    String improvementFramework = '',
+    String improvementY01 = '',
+    ImprovementY01Metric? improvementY01Metric,
+  }) {
+    final y01 =
+        improvementY01Metric ??
+        (improvementY01.isEmpty
+            ? ImprovementY01Metric.empty
+            : ImprovementY01Metric(name: improvementY01));
     final deck = Deck(
       title: title,
       theme: theme,
       themeProfile: _file.currentThemeProfile,
+      improvementFramework: improvementFramework,
+      improvementY01Metric: y01,
       slides: slides ?? [Slide.create(SlideType.title).copyWith(title: title)],
     );
     _clearHistory();

@@ -1896,6 +1896,47 @@ const _dutchSourceAddSl = <String, String>{
   'organisaties geselecteerd': 'izbranih organizacij',
   'rapportages gebruikt': 'uporabljenih poročil',
   'systemen': 'sistemi',
+  'Nog geen specificatielimiet': 'Še ni specifikacijske meje',
+  'USL (bovengrens)': 'USL (zgornja meja)',
+  'LSL (ondergrens)': 'LSL (spodnja meja)',
+  'Optionele Y-01-velden': 'Izbirna polja Y-01',
+  'Procesdoel (target)': 'Cilj procesa (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Y-01 specifikacijske meje (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Ta deck ima meje Y-01. Vklopite zgornje stikalo, da jih uporabite namesto lokalnih vrednosti.',
+  'USL (bovengrens, optioneel)': 'USL (zgornja meja, izbirno)',
+  'LSL (ondergrens, optioneel)': 'LSL (spodnja meja, izbirno)',
+  'Procesdoel (optioneel)': 'Cilj procesa (izbirno)',
+  'Fasepoort': 'Fazna vrata',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Dvouvýběrový t-test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'En stolpec števil (vsaj 2 opazovanji).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Dva stolpca, ločena s prazno vrstico (vsaj 2 na skupino).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Več skupin, vsaka skupina stolpec, ločene s prazno vrstico (vsaj 2 skupini, 2 opazovanji na skupino).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Prilepite Part, Operator in Value (tabulator ali vejica). Ponovite vrstice za replikate. Vsaj 2 parts, 2 operaterja, 2 meritvi na celico.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Prilepite X in Y (eno število na vrstico). Vsaj 3 pari; motor zavrne, če je opazovanj premalo.',
+  'Part × Operator interaction pooled into repeatability':
+      'Interakcija Part × Operator združena v ponovljivost',
+  'Part × Operator interaction kept separate':
+      'Interakcija Part × Operator ohranjena ločeno',
+  'Te weinig gegevens voor een probability plot':
+      'Premalo podatkov za verjetnostni grafikon',
   'Met dank aan': 'S hvaležnostjo',
   'Fix alle problemen': 'Odpravi vse težave',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1971,6 +2012,79 @@ const _dutchSourceAddSl = <String, String>{
       'ni bilo mogoče prebrati in je bilo preskočeno',
   'ontbrak in het bestand en is overgeslagen':
       'manjkalo je v datoteki in je bilo preskočeno',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Premalo podatkov za grafikon glavnih učinkov',
+  'Te weinig gegevens voor een interactieplot':
+      'Premalo podatkov za grafikon interakcij',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Ustvari oblikovalsko tabelo s kodiranimi faktorji (−1/+1) in praznim stolpcem Y v mreži.',
+  'Aantal factoren': 'Počet faktorů',
+  'Volledig factorial (2^k)': 'Úplný faktoriál (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'běhy ve standardním Yatesově pořadí',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Ena serija na faktor s kodiranimi nivoji −1 in +1; zadnja serija je odziv (Y). Vrstice so eksperimentalni zagoni.',
+  'Golden-thread-id': 'Golden-thread id',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'je omenjen nekje, vendar ni na diapozitivu drevesa — definirajte ga na CTQ ali Ishikawa drevesu.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'je na diapozitivu drevesa, a se drugje ne uporablja — povežite ga z matriko, tokom ali drugim diapozitivom.',
+  'Nieuw verbeteringsproject': 'Nov projekt izboljšav',
+  'Kader': 'Okvir',
+  'Projecttitel': 'Naslov projekta',
+  'Primaire Y-metriek (Y-01)': 'Primarna Y metrika (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Na primer: čas order intake v delovnih dneh',
+  'Project starten': 'Začni projekt',
+  'Procesverbetering: DMAIC-project': 'Izboljševanje procesov: projekt DMAIC',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'DMAIC okvir s charterjem, CTQ drevesom (Y-01), SIPOC in faznimi razdelki.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Checklist faznega vrat: potrdite scope, deležnike in go/no-go, preden nadaljujete v naslednjo fazo.',
+  'Stroom': 'Tok',
+  'Zwembanen': 'Steze',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Tok procesa, steze ali VSM. Koraki kot naslov :: vrsta :: pt=…; lt=…. Skupaj (PCE, bottleneck) se izračuna in se ne shrani.',
+  'Boom': 'Drevo',
+  'Visgraat': 'Ribja kost',
+  'Lay-out': 'Postavitev',
+  'Punten': 'Točke',
+  'Inspringen': 'Zamik',
+  'Uitspringen': 'Zmanjšaj zamik',
+  'Punt toevoegen': 'Dodaj točko',
+  'Punt verwijderen': 'Odstrani točko',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Drevo ali ribja kost (5× Why, CTQ, Ishikawa). Globina z tabulatorji; označite vzroke kot **X-01** inline.',
+  'Canvas': 'Platno',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Platno regij (A3, charter, SWOT, tabla). Izberite predlogo; naslovi ## na disku so polja.',
+  'Matrix': 'Matrika',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Tipizirana mreža (SIPOC, FMEA, RACI, …). Izberite predlogo; izpeljani stolpci, kot je RPN, se izračunajo in se ne shranijo.',
+  'Regelkaart': 'Kontrolna karta',
+  'Histogram': 'Histogram',
+  'Pareto': 'Pareto',
+  'Run chart': 'Diagram poteka',
+  'Boxplot': 'Škatlasti diagram',
+  'Plakken uit klembord': 'Prilepi iz odložišča',
+  'Te weinig gegevens voor een regelkaart':
+      'Premalo podatkov za kontrolno karto',
+  'Te weinig gegevens voor een histogram': 'Premalo podatkov za histogram',
+  'Te weinig gegevens voor een boxplot':
+      'Premalo podatkov za škatlasti diagram',
+  'Procesverbetering': 'Izboljševanje procesov',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefakti za izboljševanje procesov in projekte Lean Six Sigma (DMAIC, Kaizen, A3). Privzeto izklopljeno. Modul je na voljo; artefakti sledijo v naslednjih korakih.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Modul vklopljen. Računsko jedro na voljo lokalno ({n} faktorjev control chart). Vrste diapozitivov in predloge bodo dodane, ko bodo pripravljene.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Ta predstavitev vsebuje dele modula Izboljševanje procesov. Vklopite modul, da jih uredite.',
   'Online media staat uit — aanzetten': 'Spletni mediji izklopljeni — vklopi',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} vsebuje izvršljivo vsebino in ne bo uvožen.',

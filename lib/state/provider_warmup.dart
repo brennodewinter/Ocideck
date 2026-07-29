@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'improvement_provider.dart';
 import 'privacy_provider.dart';
 
 /// Houdt de van het deck afgeleide ketens warm zolang het tabblad leeft.
@@ -25,4 +26,5 @@ import 'privacy_provider.dart';
 /// `provider_warmup_test.dart` om.
 void warmTabDerivedProviders(WidgetRef ref) {
   ref.watch(privacyQualityIssuesProvider.select((_) => null));
+  ref.watch(improvementQualityIssuesProvider.select((_) => null));
 }

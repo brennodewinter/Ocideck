@@ -1884,6 +1884,47 @@ const _dutchSourceAddEt = <String, String>{
   'organisaties geselecteerd': 'valitud organisatsioonid',
   'rapportages gebruikt': 'kasutatud aruanded',
   'systemen': 'süsteemid',
+  'Nog geen specificatielimiet': 'Spetsifikatsioonipiiri veel pole',
+  'USL (bovengrens)': 'USL (ülemine piir)',
+  'LSL (ondergrens)': 'LSL (alumine piir)',
+  'Optionele Y-01-velden': 'Valikulised Y-01 väljad',
+  'Procesdoel (target)': 'Protsessi siht (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Y-01 spetsifikatsioonipiirid (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Sellel deckil on Y-01 piirid. Lülitage ülalolev lüliti sisse, et kasutada neid kohalike väärtuste asemel.',
+  'USL (bovengrens, optioneel)': 'USL (ülemine piir, valikuline)',
+  'LSL (ondergrens, optioneel)': 'LSL (alumine piir, valikuline)',
+  'Procesdoel (optioneel)': 'Protsessi siht (valikuline)',
+  'Fasepoort': 'Faasivärav',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Kahden otoksen t-testi (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Üks numbrisammas (vähemalt 2 vaatlust).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Kaks veergu tühja reaga eraldatuna (vähemalt 2 rühma kohta).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Mitu rühma, iga rühm veerg, eraldatud tühja reaga (vähemalt 2 rühma, 2 vaatlust rühma kohta).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Kleebi Part, Operator ja Value (tabeldusmärk või koma). Korda ridu korduste jaoks. Vähemalt 2 parts, 2 operaatorit, 2 mõõtmist lahtri kohta.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Kleebi X ja Y (üks number rea kohta). Vähemalt 3 paari; mootor keeldub liiga väheste vaatluste korral.',
+  'Part × Operator interaction pooled into repeatability':
+      'Part × Operator interaktsioon liidetud korratavusse',
+  'Part × Operator interaction kept separate':
+      'Part × Operator interaktsioon hoitud eraldi',
+  'Te weinig gegevens voor een probability plot':
+      'Liiga vähe andmeid tõenäosusgraafiku jaoks',
   'Met dank aan': 'Tänuga',
   'Fix alle problemen': 'Paranda kõik probleemid',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1959,6 +2000,80 @@ const _dutchSourceAddEt = <String, String>{
   'kon niet worden gelezen en is overgeslagen':
       'ei õnnestunud lugeda ja jäeti vahele',
   'ontbrak in het bestand en is overgeslagen': 'puudus failis ja jäeti vahele',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Liiga vähe andmeid peamõjude graafiku jaoks',
+  'Te weinig gegevens voor een interactieplot':
+      'Liiga vähe andmeid interaktsioonigraafiku jaoks',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Loob disainitabeli kodeeritud teguritega (−1/+1) ja tühja Y-veeruga ruudustikus.',
+  'Aantal factoren': 'Tekijöiden määrä',
+  'Volledig factorial (2^k)': 'Täysi faktoriaalinen (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'ajot standardissa Yates-järjestyksessä',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Üks seeria teguri kohta kodeeritud tasemetega −1 ja +1; viimane seeria on vastus (Y). Read on katsesõidud.',
+  'Golden-thread-id': 'Golden-thread id',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'mainitakse kuskil, kuid puu-slaidil puudub — määratlege see CTQ- või Ishikawa-puu peal.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'on puu-slaidil, kuid mujal ei kasutata — seo see maatriksiga, vooga või muu slaidiga.',
+  'Nieuw verbeteringsproject': 'Uus parendusprojekt',
+  'Kader': 'Raamistik',
+  'Projecttitel': 'Projekti pealkiri',
+  'Primaire Y-metriek (Y-01)': 'Peamine Y-mõõdik (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Näiteks: order intake läbimise aeg tööpäevades',
+  'Project starten': 'Alusta projekti',
+  'Procesverbetering: DMAIC-project': 'Protsesside parendamine: DMAIC projekt',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'DMAIC karkass charteriga, CTQ-puuga (Y-01), SIPOC-iga ja faasi sektsioonidega.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Faasi värava checklist: kinnita scope, huvigrupid ja go/no-go enne järgmisesse faasi liikumist.',
+  'Stroom': 'Voog',
+  'Zwembanen': 'Rajad',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Protsessivoog, rajad või VSM. Sammud pealkirjana :: liik :: pt=…; lt=…. Summad (PCE, bottleneck) arvutatakse ja ei salvestata.',
+  'Boom': 'Puu',
+  'Visgraat': 'Kalaluud',
+  'Lay-out': 'Paigutus',
+  'Punten': 'Punktid',
+  'Inspringen': 'Taanda',
+  'Uitspringen': 'Vähenda taanet',
+  'Punt toevoegen': 'Lisa punkt',
+  'Punt verwijderen': 'Eemalda punkt',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Puu või kalaluud (5× Why, CTQ, Ishikawa). Sügavus tabidega; märgi põhjused kui **X-01** reas.',
+  'Canvas': 'Lõuend',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Piirkondade lõuend (A3, charter, SWOT, tahvel). Vali mall; kettal olevad ## pealkirjad on lahtrid.',
+  'Matrix': 'Maatriks',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Tüübistatud ruudustik (SIPOC, FMEA, RACI, …). Vali mall; tuletatud veerud nagu RPN arvutatakse ja ei salvestata.',
+  'Regelkaart': 'Juhtimiskaart',
+  'Histogram': 'Histogramm',
+  'Pareto': 'Pareto',
+  'Run chart': 'Kulgemisdiagramm',
+  'Boxplot': 'Karpdiagramm',
+  'Plakken uit klembord': 'Kleebi lõikelaualt',
+  'Te weinig gegevens voor een regelkaart':
+      'Liiga vähe andmeid juhtimiskaardi jaoks',
+  'Te weinig gegevens voor een histogram':
+      'Liiga vähe andmeid histogrammi jaoks',
+  'Te weinig gegevens voor een boxplot':
+      'Liiga vähe andmeid karpdiagrammi jaoks',
+  'Procesverbetering': 'Protsesside parendamine',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefaktid protsesside parendamiseks ja Lean Six Sigma projektideks (DMAIC, Kaizen, A3). Vaikimisi väljas. Moodul on saadaval; artefaktid lisanduvad järgmistes etappides.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Moodul sees. Arvutustuum saadaval kohapeal ({n} control chart tegurit). Slaiditüübid ja mallid lisatakse, kui need on valmis.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'See esitlus sisaldab Protsesside parendamise mooduli osi. Lülita moodul sisse, et neid muuta.',
   'Online media staat uit — aanzetten': 'Veebimeedia on väljas — lülita sisse',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} sisaldab käivitatavat sisu ja seda ei impordita.',

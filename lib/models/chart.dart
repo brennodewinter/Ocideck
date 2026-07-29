@@ -34,6 +34,12 @@ const List<String> chartColorPalette = [
 /// - [heatmap] — a grid coloured by value (doubles as a risk matrix).
 /// - [horizontalStackedBar] — a [stackedBar] laid on its side: one bar per
 ///   label with the series stacked left-to-right (long labels / part-to-whole).
+/// - [controlChart], [histogram], [pareto], [runChart], [boxPlot],
+///   [probabilityPlot] — Procesverbetering statistical plots
+///   (PROCESS_IMPROVEMENT.md Phase 2/8). Control limits and Cpk are derived
+///   at render time and never stored.
+/// - [mainEffects], [interaction] — DOE plots (PROCESS_IMPROVEMENT.md Phase 9).
+///   Effects and cell means are derived from the grid at render time.
 enum ChartType {
   bar,
   stackedBar,
@@ -49,7 +55,35 @@ enum ChartType {
   heatmap,
   horizontalStackedBar,
   bullet,
+  controlChart,
+  histogram,
+  pareto,
+  runChart,
+  boxPlot,
+  probabilityPlot,
+  mainEffects,
+  interaction,
 }
+
+/// Which Shewhart pair a [ChartType.controlChart] draws. Stored as an author
+/// choice; the limits themselves are never stored.
+enum ControlChartKindSpec { imr, xbarR, xbarS, p, np, c, u }
+
+ControlChartKindSpec _controlKindFromName(String? name) => ControlChartKindSpec
+    .values
+    .firstWhere((k) => k.name == name, orElse: () => ControlChartKindSpec.imr);
+
+/// Chart types that belong to the Procesverbetering module and stay hidden in
+/// the type picker until that module is revealed.
+bool chartTypeRequiresProcesverbetering(ChartType type) =>
+    type == ChartType.controlChart ||
+    type == ChartType.histogram ||
+    type == ChartType.pareto ||
+    type == ChartType.runChart ||
+    type == ChartType.boxPlot ||
+    type == ChartType.probabilityPlot ||
+    type == ChartType.mainEffects ||
+    type == ChartType.interaction;
 
 ChartType _chartTypeFromName(String? name) => ChartType.values.firstWhere(
   (t) => t.name == name,
@@ -238,6 +272,22 @@ class ChartSpec {
   /// against, and a scale that changes per row is not a scale.
   final List<double> bands;
 
+  /// Shewhart pair for [ChartType.controlChart]. Ignored on other types.
+  final ControlChartKindSpec controlKind;
+
+  /// Spec limits for capability overlay on [ChartType.histogram]. Author
+  /// intent (what "in spec" means) — not control limits. Control limits are
+  /// always derived from the data and never stored.
+  final double? usl;
+  final double? lsl;
+  final double? processTarget;
+
+  /// Optional link to the deck's primary Y metric (`Y-01`). When set to
+  /// `Y-01`, [usl], [lsl] and [processTarget] on this chart are ignored at
+  /// derive/paint time — limits come from [Deck.improvementY01Metric] instead
+  /// and are never written back into the chart JSON.
+  final String? yRef;
+
   /// Whether the chart draws itself in (values grow from the baseline) when the
   /// slide is shown in presentation mode.
   final bool animateOnEnter;
@@ -257,6 +307,11 @@ class ChartSpec {
     this.maxBound,
     this.targets = const [],
     this.bands = const [],
+    this.controlKind = ControlChartKindSpec.imr,
+    this.usl,
+    this.lsl,
+    this.processTarget,
+    this.yRef,
     this.animateOnEnter = true,
     this.animationDurationMs,
   });
@@ -324,6 +379,15 @@ class ChartSpec {
     List<ChartSeries>? series,
     List<double>? targets,
     List<double>? bands,
+    ControlChartKindSpec? controlKind,
+    double? usl,
+    bool clearUsl = false,
+    double? lsl,
+    bool clearLsl = false,
+    double? processTarget,
+    bool clearProcessTarget = false,
+    String? yRef,
+    bool clearYRef = false,
     double? minBound,
     bool clearMinBound = false,
     double? maxBound,
@@ -340,6 +404,13 @@ class ChartSpec {
     series: series ?? this.series,
     targets: targets ?? this.targets,
     bands: bands ?? this.bands,
+    controlKind: controlKind ?? this.controlKind,
+    usl: clearUsl ? null : (usl ?? this.usl),
+    lsl: clearLsl ? null : (lsl ?? this.lsl),
+    processTarget: clearProcessTarget
+        ? null
+        : (processTarget ?? this.processTarget),
+    yRef: clearYRef ? null : (yRef ?? this.yRef),
     minBound: clearMinBound ? null : (minBound ?? this.minBound),
     maxBound: clearMaxBound ? null : (maxBound ?? this.maxBound),
     animateOnEnter: animateOnEnter ?? this.animateOnEnter,
@@ -368,6 +439,19 @@ class ChartSpec {
           for (final v in (data['bands'] as List? ?? const []))
             if (v is num) v.toDouble(),
         ],
+        controlKind: _controlKindFromName(
+          (data['controlChart'] is Map
+                  ? (data['controlChart'] as Map)['kind']
+                  : data['controlKind'])
+              ?.toString(),
+        ),
+        usl: (data['usl'] as num?)?.toDouble(),
+        lsl: (data['lsl'] as num?)?.toDouble(),
+        processTarget: (data['processTarget'] as num?)?.toDouble(),
+        yRef: () {
+          final raw = (data['yRef'] as String?)?.trim();
+          return raw == null || raw.isEmpty ? null : raw;
+        }(),
         maxBound: (data['maxBound'] as num?)?.toDouble(),
         animateOnEnter: data['animateOnEnter'] != false,
         animationDurationMs: (data['animationDurationMs'] as num?)?.round(),
@@ -405,6 +489,17 @@ class ChartSpec {
     if (type == ChartType.bullet) {
       if (targets.isNotEmpty) map['targets'] = targets;
       if (bands.isNotEmpty) map['bands'] = bands;
+    }
+    // Control limits are never written — only the author's kind choice and
+    // (for capability) the specification limits they typed.
+    if (type == ChartType.controlChart) {
+      map['controlChart'] = {'kind': controlKind.name};
+    }
+    if (type == ChartType.histogram || type == ChartType.controlChart) {
+      if (yRef != null && yRef!.isNotEmpty) map['yRef'] = yRef;
+      if (usl != null) map['usl'] = usl;
+      if (lsl != null) map['lsl'] = lsl;
+      if (processTarget != null) map['processTarget'] = processTarget;
     }
     if (!animateOnEnter) map['animateOnEnter'] = false;
     if (animationDurationMs != null) {

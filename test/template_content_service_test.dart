@@ -79,6 +79,17 @@ void main() {
       expect(slides.single.title, 'Kaal');
     });
 
+    test('procesverbetering-dmaic builds a non-empty scaffold', () async {
+      final slides = await TemplateContentService().loadSlides(
+        'procesverbetering-dmaic',
+        languageCode: 'nl',
+        deckTitle: 'Order intake',
+      );
+      expect(slides.first.title, 'Order intake');
+      expect(slides.any((s) => s.type == SlideType.tree), isTrue);
+      expect(slides.any((s) => s.type == SlideType.matrix), isTrue);
+    });
+
     test('the real bundle serves the template assets', () async {
       // Bewaakt de pubspec-registratie van assets/templates/: rootBundle moet
       // de documenten echt kunnen leveren, niet alleen het bestandssysteem.

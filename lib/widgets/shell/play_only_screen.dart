@@ -167,6 +167,7 @@ class _PlayOnlyScreen extends ConsumerWidget {
           tlp: deck.tlp,
           organization: deck.organization,
           showClassificationWatermark: settings.classificationWatermarkEnabled,
+          improvementY01: deck.improvementY01Metric,
         ),
       ),
     );

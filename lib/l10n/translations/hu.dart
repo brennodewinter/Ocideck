@@ -1897,6 +1897,47 @@ const _dutchSourceAddHu = <String, String>{
   'organisaties geselecteerd': 'kiválasztott szervezetek',
   'rapportages gebruikt': 'használt jelentések',
   'systemen': 'rendszerek',
+  'Nog geen specificatielimiet': 'Még nincs specifikációs határ',
+  'USL (bovengrens)': 'USL (felső határ)',
+  'LSL (ondergrens)': 'LSL (alsó határ)',
+  'Optionele Y-01-velden': 'Opcionális Y-01 mezők',
+  'Procesdoel (target)': 'Folyamatcél (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Y-01 specifikációs határok (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Ennek a decknek vannak Y-01 határai. Kapcsolja be a fenti kapcsolót, hogy azokat használja a helyi értékek helyett.',
+  'USL (bovengrens, optioneel)': 'USL (felső határ, opcionális)',
+  'LSL (ondergrens, optioneel)': 'LSL (alsó határ, opcionális)',
+  'Procesdoel (optioneel)': 'Folyamatcél (opcionális)',
+  'Fasepoort': 'Fáziskapu',
+  'Berekenen': 'Számítás',
+  'Gegevens': 'Adatok',
+  'Hellingscoëfficiënt': 'Meredekség',
+  'Hypothesetoets': 'Hipotézisvizsgálat',
+  'Hypothesetoets…': 'Hipotézisvizsgálat…',
+  'Hypothetisch gemiddelde': 'Feltételezett átlag',
+  'Lineaire regressie': 'Lineáris regresszió',
+  'Regressie…': 'Regresszió…',
+  'Meetdata': 'Mérési adatok',
+  'Toets': 'Teszt',
+  'Tolerantie (optioneel)': 'Tűrés (opcionális)',
+  'Eénsteeks t-toets': 'Egy mintás t-próba',
+  'Twee-steeks t-toets (Welch)': 'Két mintás t-próba (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Egy számoszlop (legalább 2 megfigyelés).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Két oszlop üres sorral elválasztva (csoportonként legalább 2).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Több csoport, csoportonként egy oszlop, üres sorral elválasztva (legalább 2 csoport, csoportonként 2 megfigyelés).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Illessze be a Part, Operator és Value értékeket (tabulátor vagy vessző). Ismételje a sorokat a replikákhoz. Legalább 2 part, 2 operátor, 2 mérés cellánként.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Illessze be X-et és Y-t (soronként egy szám). Legalább 3 pár; a motor túl kevés megfigyelésnél elutasít.',
+  'Part × Operator interaction pooled into repeatability':
+      'Part × Operator interakció az ismételhetőségbe olvasztva',
+  'Part × Operator interaction kept separate':
+      'Part × Operator interakció külön tartva',
+  'Te weinig gegevens voor een probability plot':
+      'Túl kevés adat a valószínűségi ábrához',
   'Met dank aan': 'Köszönettel',
   'Fix alle problemen': 'Minden probléma javítása',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1972,6 +2013,78 @@ const _dutchSourceAddHu = <String, String>{
       'nem sikerült beolvasni, ezért ki lett hagyva',
   'ontbrak in het bestand en is overgeslagen':
       'hiányzott a fájlból, ezért ki lett hagyva',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Túl kevés adat a főhatás ábrához',
+  'Te weinig gegevens voor een interactieplot':
+      'Túl kevés adat az interakciós ábrához',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Tervezési táblázatot készít kódolt tényezőkkel (−1/+1) és üres Y oszloppal a rácsban.',
+  'Aantal factoren': 'Tényezők száma',
+  'Volledig factorial (2^k)': 'Teljes faktoriális (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'futások standard Yates-sorrendben',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Tényezőnként egy sorozat kódolt −1 és +1 szintekkel; az utolsó sorozat a válasz (Y). A sorok kísérleti futások.',
+  'Golden-thread-id': 'Golden-thread azonosító',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'valahol szerepel, de nincs fa-dian — határozza meg CTQ- vagy Ishikawa-fán.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'fa-dian szerepel, de máshol nem használják — kapcsolja össze mátrixszal, folyamattal vagy más diával.',
+  'Nieuw verbeteringsproject': 'Új fejlesztési projekt',
+  'Kader': 'Keretrendszer',
+  'Projecttitel': 'Projekt címe',
+  'Primaire Y-metriek (Y-01)': 'Elsődleges Y-metrika (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Például: order intake átfutási idő munkanapokban',
+  'Project starten': 'Projekt indítása',
+  'Procesverbetering: DMAIC-project': 'Folyamatfejlesztés: DMAIC projekt',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'DMAIC váz charterrel, CTQ-fával (Y-01), SIPOC-cel és fázisszekciókkal.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Fáziskapu-checklist: erősítse meg a scope-ot, az érintetteket és a go/no-go-t a következő fázisba lépés előtt.',
+  'Stroom': 'Folyamat',
+  'Zwembanen': 'Sávok',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Folyamatáram, sávok vagy VSM. Lépések címként :: fajta :: pt=…; lt=…. Összesen (PCE, bottleneck) kiszámításra kerül és nem kerül mentésre.',
+  'Boom': 'Fa',
+  'Visgraat': 'Halcsont',
+  'Lay-out': 'Elrendezés',
+  'Punten': 'Pontok',
+  'Inspringen': 'Behúzás',
+  'Uitspringen': 'Kihúzás',
+  'Punt toevoegen': 'Pont hozzáadása',
+  'Punt verwijderen': 'Pont eltávolítása',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Fa vagy halcsont (5× Why, CTQ, Ishikawa). Mélység tabulátorokkal; jelölje az okokat **X-01** formában inline.',
+  'Canvas': 'Vászon',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Régiókból álló vászon (A3, charter, SWOT, tábla). Válasszon sablont; a lemezen lévő ## címsorok a mezők.',
+  'Matrix': 'Mátrix',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Típusos rács (SIPOC, FMEA, RACI, …). Válasszon sablont; a származtatott oszlopok, mint az RPN, kiszámításra kerülnek és nem kerülnek mentésre.',
+  'Regelkaart': 'Szabályozó kártya',
+  'Histogram': 'Hisztogram',
+  'Pareto': 'Pareto',
+  'Run chart': 'Lefutásdiagram',
+  'Boxplot': 'Dobozdiagram',
+  'Plakken uit klembord': 'Beillesztés vágólapról',
+  'Te weinig gegevens voor een regelkaart':
+      'Túl kevés adat a szabályozó kártyához',
+  'Te weinig gegevens voor een histogram': 'Túl kevés adat a hisztogramhoz',
+  'Te weinig gegevens voor een boxplot': 'Túl kevés adat a dobozdiagramhoz',
+  'Procesverbetering': 'Folyamatfejlesztés',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefaktumok a folyamatfejlesztéshez és Lean Six Sigma projektekhez (DMAIC, Kaizen, A3). Alapértelmezés szerint kikapcsolva. A modul elérhető; az artefaktumok a következő lépésekben érkeznek.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'A modul be van kapcsolva. A számítási mag helyben elérhető ({n} control chart tényező). A diatípusok és sablonok akkor jelennek meg, amikor elkészülnek.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Ez a bemutató a Folyamatfejlesztés modul elemeit tartalmazza. Kapcsold be a modult a szerkesztésükhöz.',
   'Online media staat uit — aanzetten': 'Online média kikapcsolva — bekapcsol',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       'A(z) {bestand} végrehajtható tartalommal rendelkezik, ezért nem lesz importálva.',

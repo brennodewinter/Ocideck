@@ -1915,6 +1915,48 @@ const _dutchSourceAddMt = <String, String>{
   'organisaties geselecteerd': 'organizzazzjonijiet magħżula',
   'rapportages gebruikt': 'rapporti użati',
   'systemen': 'sistemi',
+  'Nog geen specificatielimiet': 'Għad m\'hemmx limitu ta\' speċifikazzjoni',
+  'USL (bovengrens)': 'USL (limitu ta\' fuq)',
+  'LSL (ondergrens)': 'LSL (limitu t\'isfel)',
+  'Optionele Y-01-velden': 'Oqsma Y-01 fakultattivi',
+  'Procesdoel (target)': 'Mira tal-proċess (target)',
+  'Specificatielimieten van Y-01 (deck)':
+      'Limiti ta\' speċifikazzjoni Y-01 (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Dan id-deck għandu limiti Y-01. Ixgħel is-switch ta\' hawn fuq biex tużahom minflok valuri lokali.',
+  'USL (bovengrens, optioneel)': 'USL (limitu ta\' fuq, fakultattiv)',
+  'LSL (ondergrens, optioneel)': 'LSL (limitu t\'isfel, fakultattiv)',
+  'Procesdoel (optioneel)': 'Mira tal-proċess (fakultattiv)',
+  'Fasepoort': 'Phase gate',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Test t a due campioni (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Kolonna waħda ta\' numri (tal-inqas 2 osservazzjonijiet).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Żewġ kolonni separati b\'linja vojta (tal-inqas 2 għal kull grupp).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Gruppi multipli, kull grupp kolonna, separati b\'linja vojta (tal-inqas 2 gruppi, 2 osservazzjonijiet għal kull grupp).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Waħħal Part, Operator u Value (tab jew virgola). Irrepeti r-ringieli għar-repliki. Tal-inqas 2 parts, 2 operaturi, 2 kejl għal kull ċellola.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Waħħal X u Y (numru wieħed għal kull linja). Tal-inqas 3 pari; il-magna tirrifjuta meta jkun hemm ftit wisq osservazzjonijiet.',
+  'Part × Operator interaction pooled into repeatability':
+      'Interazzjoni Part × Operator magħquda fir-ripetibbiltà',
+  'Part × Operator interaction kept separate':
+      'Interazzjoni Part × Operator miżmuma separatament',
+  'Te weinig gegevens voor een probability plot':
+      'Data ftit wisq għal plot tal-probabbiltà',
   'Met dank aan': 'Ringrazzjamenti',
   'Fix alle problemen': 'Irranġa l-problemi kollha',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1990,6 +2032,79 @@ const _dutchSourceAddMt = <String, String>{
   'kon niet worden gelezen en is overgeslagen': 'ma setax jinqara u ġie maqbuż',
   'ontbrak in het bestand en is overgeslagen':
       'kien nieqes mill-fajl u ġie maqbuż',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Mhux biżżejjed data għal plot tal-effetti ewlenin',
+  'Te weinig gegevens voor een interactieplot':
+      'Mhux biżżejjed data għal plot tal-interazzjoni',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Jiġġenera tabella tad-disinn b\'fatturi kkodifikati (−1/+1) u kolonna Y vojta fil-grilja.',
+  'Aantal factoren': 'Numero di fattori',
+  'Volledig factorial (2^k)': 'Fattoriale completo (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'prove in ordine Yates standard',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Sensiela waħda għal kull fattur b\'livelli kkodifikati −1 u +1; l-aħħar sensiela hija r-risposta (Y). Ir-ringieli huma ġirjiet sperimentali.',
+  'Golden-thread-id': 'Id golden thread',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'imsemmi xi mkien imma mhux fuq diaposittiva siġra — iddefinih fuq siġra CTQ jew Ishikawa.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'jinsab fuq diaposittiva siġra imma ma jintużax f\'post ieħor — qabbdu ma\' matriċi, fluss jew diaposittiva oħra.',
+  'Nieuw verbeteringsproject': 'Proġett ġdid ta\' titjib',
+  'Kader': 'Qafas',
+  'Projecttitel': 'Titlu tal-proġett',
+  'Primaire Y-metriek (Y-01)': 'Metrika Y primarja (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Pereżempju: ħin ta\' order intake f\'jiem tax-xogħol',
+  'Project starten': 'Ibda proġett',
+  'Procesverbetering: DMAIC-project': 'Titjib tal-proċessi: proġett DMAIC',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'Skelet DMAIC b\'charter, siġra CTQ (Y-01), SIPOC u sezzjonijiet ta\' fażi.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Checklist ta\' fażi: ikkonferma scope, stakeholders u go/no-go qabel tmur għall-fażi li jmiss.',
+  'Stroom': 'Fluss',
+  'Zwembanen': 'Swimlanes',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Fluss ta\' proċess, swimlanes jew VSM. Passi bħala titlu :: tip :: pt=…; lt=…. Totali (PCE, bottleneck) jiġu kkalkulati u ma jiġux maħżuna.',
+  'Boom': 'Siġra',
+  'Visgraat': 'Għadma tal-ħut',
+  'Lay-out': 'Layout',
+  'Punten': 'Punti',
+  'Inspringen': 'Indent',
+  'Uitspringen': 'Neħħi indent',
+  'Punt toevoegen': 'Żid punt',
+  'Punt verwijderen': 'Neħħi punt',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Siġra jew għadma tal-ħut (5× Why, CTQ, Ishikawa). Fond b\'tabs; immarka l-kawżi bħala **X-01** inline.',
+  'Canvas': 'Kanvas',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Kanvas ta\' reġjuni (A3, charter, SWOT, bord). Agħżel template; l-intestaturi ## fuq id-disk huma l-kaxxi.',
+  'Matrix': 'Matriċi',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Grilja tipizzata (SIPOC, FMEA, RACI, …). Agħżel template; kolonni derivati bħal RPN jiġu kkalkulati u ma jiġux maħżuna.',
+  'Regelkaart': 'Ċart tal-kontroll',
+  'Histogram': 'Istogramma',
+  'Pareto': 'Pareto',
+  'Run chart': 'Ċart tal-andament',
+  'Boxplot': 'Dijagramma tal-kaxxa',
+  'Plakken uit klembord': 'Waħħal mill-clipboard',
+  'Te weinig gegevens voor een regelkaart':
+      'Data insuffiċjenti għal ċart tal-kontroll',
+  'Te weinig gegevens voor een histogram': 'Data insuffiċjenti għal istogramma',
+  'Te weinig gegevens voor een boxplot':
+      'Data insuffiċjenti għal dijagramma tal-kaxxa',
+  'Procesverbetering': 'Titjib tal-proċessi',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artifatti għat-titjib tal-proċessi u proġetti Lean Six Sigma (DMAIC, Kaizen, A3). Mitfi b\'mod default. Il-modulu huwa disponibbli; l-artifatti se jsegwu fil-passi li ġejjin.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Modulu mixgħul. Qalba tal-kalkolu disponibbli lokalment ({n} fatturi ta\' control chart). It-tipi ta\' slide u t-templates se jiżdiedu hekk kif ikunu lesti.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Din il-preżentazzjoni fiha partijiet mill-modulu tat-Titjib tal-proċessi. Ixgħel il-modulu biex teditjahom.',
   'Online media staat uit — aanzetten': 'Midja online mitfi — ixquq',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} fih kontenut eżegwibbli u mhux se jiġi impurtat.',

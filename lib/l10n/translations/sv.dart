@@ -1892,6 +1892,47 @@ const _dutchSourceAddSv = <String, String>{
   'organisaties geselecteerd': 'utvalda organisationer',
   'rapportages gebruikt': 'rapporter som används',
   'systemen': 'system',
+  'Nog geen specificatielimiet': 'Ingen specifikationsgräns ännu',
+  'USL (bovengrens)': 'USL (övre gräns)',
+  'LSL (ondergrens)': 'LSL (nedre gräns)',
+  'Optionele Y-01-velden': 'Valfria Y-01-fält',
+  'Procesdoel (target)': 'Processmål (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Y-01-specifikationsgränser (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Detta deck har Y-01-gränser. Slå på växeln ovan för att använda dem i stället för lokala värden.',
+  'USL (bovengrens, optioneel)': 'USL (övre gräns, valfritt)',
+  'LSL (ondergrens, optioneel)': 'LSL (nedre gräns, valfritt)',
+  'Procesdoel (optioneel)': 'Processmål (valfritt)',
+  'Fasepoort': 'Fasgrind',
+  'Berekenen': 'Beräkna',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Lutning',
+  'Hypothesetoets': 'Hypotestest',
+  'Hypothesetoets…': 'Hypotestest…',
+  'Hypothetisch gemiddelde': 'Hypotetiskt medelvärde',
+  'Lineaire regressie': 'Linjär regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Mätdata',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerans (valfritt)',
+  'Eénsteeks t-toets': 'Enstickprov-t-test',
+  'Twee-steeks t-toets (Welch)': 'Två stickprov-t-test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'En kolumn med tal (minst 2 observationer).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Två kolumner åtskilda av en tom rad (minst 2 per grupp).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Flera grupper, varje grupp en kolumn, åtskilda av en tom rad (minst 2 grupper, 2 observationer per grupp).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Klistra in Part, Operator och Value (tabb eller komma). Upprepa rader för replikat. Minst 2 parts, 2 operatörer, 2 mätningar per cell.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Klistra in X och Y (ett tal per rad). Minst 3 par; motorn vägrar vid för få observationer.',
+  'Part × Operator interaction pooled into repeatability':
+      'Part × Operator-interaktion sammanslagen med repeterbarhet',
+  'Part × Operator interaction kept separate':
+      'Part × Operator-interaktion hållen separat',
+  'Te weinig gegevens voor een probability plot':
+      'För lite data för ett sannolikhetsdiagram',
   'Met dank aan': 'Med tack',
   'Fix alle problemen': 'Åtgärda alla problem',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1968,6 +2009,77 @@ const _dutchSourceAddSv = <String, String>{
       'kunde inte läsas och hoppades över',
   'ontbrak in het bestand en is overgeslagen':
       'saknades i filen och hoppades över',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'För lite data för ett huvudeffektsdiagram',
+  'Te weinig gegevens voor een interactieplot':
+      'För lite data för ett interaktionsdiagram',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Skapar en designtabell med kodade faktorer (−1/+1) och en tom Y-kolumn i rutnätet.',
+  'Aantal factoren': 'Antal faktorer',
+  'Volledig factorial (2^k)': 'Full faktoriell (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'körningar i standard Yates-ordning',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'En serie per faktor med kodade nivåer −1 och +1; sista serien är responsen (Y). Rader är försökskörningar.',
+  'Golden-thread-id': 'Golden-thread-id',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'nämns någonstans men finns inte på ett träd-slide — definiera den på ett CTQ- eller Ishikawa-träd.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'finns på ett träd-slide men används inte någon annanstans — koppla den till en matris, flöde eller annat slide.',
+  'Nieuw verbeteringsproject': 'Nytt förbättringsprojekt',
+  'Kader': 'Ramverk',
+  'Projecttitel': 'Projekttitel',
+  'Primaire Y-metriek (Y-01)': 'Primär Y-metrik (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Till exempel: orderintake ledtid i arbetsdagar',
+  'Project starten': 'Starta projekt',
+  'Procesverbetering: DMAIC-project': 'Processförbättring: DMAIC-projekt',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'DMAIC-skelett med charter, CTQ-träd (Y-01), SIPOC och fasavsnitt.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'En fasport-checklista: bekräfta scope, intressenter och go/no-go innan du går vidare till nästa fas.',
+  'Stroom': 'Flöde',
+  'Zwembanen': 'Simbanor',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Ett processflöde, simbanor eller VSM. Steg som titel :: typ :: pt=…; lt=…. Totaler (PCE, bottleneck) beräknas och sparas inte.',
+  'Boom': 'Träd',
+  'Visgraat': 'Fiskben',
+  'Lay-out': 'Layout',
+  'Punten': 'Punkter',
+  'Inspringen': 'Öka indrag',
+  'Uitspringen': 'Minska indrag',
+  'Punt toevoegen': 'Lägg till punkt',
+  'Punt verwijderen': 'Ta bort punkt',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Ett träd eller fiskben (5× Why, CTQ, Ishikawa). Djup med tabbar; markera orsaker som **X-01** inline.',
+  'Canvas': 'Canvas',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'En canvas av regioner (A3, charter, SWOT, tavla). Välj en mall; ##-rubrikerna på disken är rutorna.',
+  'Matrix': 'Matris',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Ett typat rutnät (SIPOC, FMEA, RACI, …). Välj en mall; härledda kolumner som RPN beräknas och sparas inte.',
+  'Regelkaart': 'Styrdiagram',
+  'Histogram': 'Histogram',
+  'Pareto': 'Pareto',
+  'Run chart': 'Förloppsdiagram',
+  'Boxplot': 'Lådagram',
+  'Plakken uit klembord': 'Klistra in från urklipp',
+  'Te weinig gegevens voor een regelkaart': 'För lite data för ett styrdiagram',
+  'Te weinig gegevens voor een histogram': 'För lite data för ett histogram',
+  'Te weinig gegevens voor een boxplot': 'För lite data för ett lådagram',
+  'Procesverbetering': 'Processförbättring',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefakter för processförbättring och Lean Six Sigma-projekt (DMAIC, Kaizen, A3). Avstängd som standard. Modulen är tillgänglig; artefakterna kommer i senare steg.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Modulen är på. Beräkningskärna tillgänglig lokalt ({n} control chart-faktorer). Bildtyper och mallar läggs till när de är klara.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Den här presentationen innehåller delar av modulen Processförbättring. Aktivera modulen för att redigera dem.',
   'Online media staat uit — aanzetten': 'Onlinemedier är av — slå på',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} innehåller körbart innehåll och importeras inte.',

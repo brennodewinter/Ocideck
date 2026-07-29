@@ -91,6 +91,11 @@ const Set<String> uncoveredBaseline = {
   // NO EXECUTABLE LINES: idem voor de WSTG-index, sinds die uit
   // tool/build_wstg_catalog.dart komt in plaats van met de hand overgetikt.
   'lib/services/wstg_catalog_data.dart',
+  // NO EXECUTABLE LINES: gegenereerde Procesverbetering-sjabloonvloer — één
+  // const JSON-string. Wordt gelezen via ImprovementTemplateCatalog (en
+  // improvement_template_catalog_test.dart), maar lcov ziet niets om uit te
+  // voeren. Bron: tool/build_improvement_templates.dart.
+  'lib/services/improvement/improvement_templates_floor.g.dart',
   // NO EXECUTABLE LINES: de woordenlijst van de markdown-checker — een `part`
   // met alleen const sets (class-tokens, front-matter sleutels, directives).
   // Ruim gedekt via markdown_validator_test.dart, maar lcov ziet niets om uit

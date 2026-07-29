@@ -29,6 +29,24 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
           issues: issues,
           twoColumn: false,
         );
+      case SlideType.tree:
+      case SlideType.flow:
+      case SlideType.phaseGate:
+        _addFitScaleIssue(
+          issues,
+          index,
+          memoizedFitScale(
+            slide,
+            font,
+            () => bulletsSlideFitScale(slide: slide, font: font),
+          ),
+        );
+        _checkBulletReadability(
+          slide: slide,
+          index: index,
+          issues: issues,
+          twoColumn: false,
+        );
       case SlideType.twoBullets:
         _addFitScaleIssue(
           issues,
@@ -63,9 +81,23 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
         );
       case SlideType.table:
         issues.addAll(_tableDensityIssues(slide, index, font));
+      case SlideType.matrix:
+        // Een matrix is een tabel, dus dezelfde dichtheidstoets — maar hij toont
+        // een kolom méér dan hij bewaart (de afgeleide RPN). Zonder die
+        // meegeteld zou de zwaarste matrix van allemaal, een FMEA van negen
+        // kolommen, als achtkoloms worden gekeurd en net onder de klacht blijven.
+        issues.addAll(
+          _tableDensityIssues(
+            slide,
+            index,
+            font,
+            extraColumns: matrixHasDerivedColumn(slide) ? 1 : 0,
+          ),
+        );
       case SlideType.code:
         _checkCodeDensity(slide, index, issues);
       case SlideType.freeMarkdown:
+      case SlideType.canvas:
         _checkFreeMarkdownDensity(slide, index, issues);
       case SlideType.title:
         _checkTitleDensity(slide, index, issues);
@@ -510,11 +542,13 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
 List<SlideQualityIssue> _tableDensityIssues(
   Slide slide,
   int index,
-  String font,
-) {
+  String font, {
+  int extraColumns = 0,
+}) {
   final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
   if (rows.isEmpty) return const [];
-  final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
+  final colCount =
+      rows.fold<int>(0, (m, r) => r.length > m ? r.length : m) + extraColumns;
   final w = kReferenceSlideWidth;
   final cellSize = tableFit(
     rows: rows,

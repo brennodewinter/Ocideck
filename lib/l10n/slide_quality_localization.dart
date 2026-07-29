@@ -306,6 +306,7 @@ String slideQualityCategoryLabel(
     SlideQualityCategory.textDensity => l10n.d('Tekstdichtheid'),
     SlideQualityCategory.content => l10n.d('Inhoud'),
     SlideQualityCategory.privacy => l10n.d('Privacy'),
+    SlideQualityCategory.improvement => l10n.d('Procesverbetering'),
   };
 }
 
@@ -412,6 +413,12 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.privacyImageUnreadable => l10n.d(
       'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.',
     ),
+    SlideQualityIssueKind.improvementOrphanId =>
+      '${l10n.d('Golden-thread-id')} ${issue.args['id'] ?? ''} '
+          '${l10n.d('wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.')}',
+    SlideQualityIssueKind.improvementUnusedId =>
+      '${l10n.d('Golden-thread-id')} ${issue.args['id'] ?? ''} '
+          '${l10n.d('staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.')}',
   };
 }
 

@@ -1892,6 +1892,47 @@ const _dutchSourceAddLv = <String, String>{
   'organisaties geselecteerd': 'atlasītās organizācijas',
   'rapportages gebruikt': 'izmantotās atskaites',
   'systemen': 'sistēmas',
+  'Nog geen specificatielimiet': 'Vēl nav specifikācijas limitu',
+  'USL (bovengrens)': 'USL (augšējā robeža)',
+  'LSL (ondergrens)': 'LSL (apakšējā robeža)',
+  'Optionele Y-01-velden': 'Neobligātie Y-01 lauki',
+  'Procesdoel (target)': 'Procesa mērķis (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Y-01 specifikācijas limiti (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Šim deck ir Y-01 limiti. Ieslēdziet slēdzi augstāk, lai izmantotu tos vietā vietējo vērtību.',
+  'USL (bovengrens, optioneel)': 'USL (augšējā robeža, neobligāti)',
+  'LSL (ondergrens, optioneel)': 'LSL (apakšējā robeža, neobligāti)',
+  'Procesdoel (optioneel)': 'Procesa mērķis (neobligāti)',
+  'Fasepoort': 'Fāzes vārti',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Viens skaitļu stabiņš (vismaz 2 novērojumi).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Divas kolonnas, atdalītas ar tukšu rindu (vismaz 2 uz grupu).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Vairākas grupas, katra grupa kolonna, atdalītas ar tukšu rindu (vismaz 2 grupas, 2 novērojumi uz grupu).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Ielīmējiet Part, Operator un Value (tabulators vai komats). Atkārtojiet rindas replikām. Vismaz 2 parts, 2 operatori, 2 mērījumi uz šūnu.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Ielīmējiet X un Y (viens skaitlis rindā). Vismaz 3 pāri; dzinējs atsakās, ja novērojumu ir pārāk maz.',
+  'Part × Operator interaction pooled into repeatability':
+      'Part × Operator mijiedarbība apvienota atkārtojamībā',
+  'Part × Operator interaction kept separate':
+      'Part × Operator mijiedarbība saglabāta atsevišķi',
+  'Te weinig gegevens voor een probability plot':
+      'Pārāk maz datu varbūtības diagrammai',
   'Met dank aan': 'Ar pateicību',
   'Fix alle problemen': 'Labot visas problēmas',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1966,6 +2007,78 @@ const _dutchSourceAddLv = <String, String>{
   'kon niet worden gelezen en is overgeslagen':
       'nevarēja nolasīt un tika izlaists',
   'ontbrak in het bestand en is overgeslagen': 'trūka failā un tika izlaists',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Nepietiekami dati galveno efektu diagrammai',
+  'Te weinig gegevens voor een interactieplot':
+      'Nepietiekami dati mijiedarbības diagrammai',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Izveido dizaina tabulu ar kodētiem faktoriem (−1/+1) un tukšu Y kolonnu režģī.',
+  'Aantal factoren': 'Anzahl Faktoren',
+  'Volledig factorial (2^k)': 'Vollständiges faktorielles Design (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde':
+      'Läufe in standardmäßiger Yates-Reihenfolge',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Viena sērija uz faktoru ar kodētiem līmeņiem −1 un +1; pēdējā sērija ir atbilde (Y). Rindas ir eksperimentālie gājieni.',
+  'Golden-thread-id': 'Golden-thread id',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'kaut kur minēts, bet nav uz koka slaida — definējiet to CTQ vai Ishikawa kokā.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'atrodas uz koka slaida, bet citur netiek lietots — saistiet to ar matricu, plūsmu vai citu slaidu.',
+  'Nieuw verbeteringsproject': 'Jauns uzlabošanas projekts',
+  'Kader': 'Ietvars',
+  'Projecttitel': 'Projekta nosaukums',
+  'Primaire Y-metriek (Y-01)': 'Primārā Y metrika (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Piemēram: order intake cikla laiks darba dienās',
+  'Project starten': 'Sākt projektu',
+  'Procesverbetering: DMAIC-project': 'Procesu uzlabošana: DMAIC projekts',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'DMAIC skelets ar charter, CTQ koku (Y-01), SIPOC un fāžu sadaļām.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Fāzes vārtu checklist: apstipriniet scope, stakeholders un go/no-go pirms pārejas uz nākamo fāzi.',
+  'Stroom': 'Plūsma',
+  'Zwembanen': 'Ceļi',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Procesa plūsma, ceļi vai VSM. Soļi kā virsraksts :: veids :: pt=…; lt=…. Kopsummas (PCE, bottleneck) tiek aprēķinātas un netiek saglabātas.',
+  'Boom': 'Koks',
+  'Visgraat': 'Zivs kauls',
+  'Lay-out': 'Izkārtojums',
+  'Punten': 'Punkti',
+  'Inspringen': 'Palielināt ievilkumu',
+  'Uitspringen': 'Samazināt ievilkumu',
+  'Punt toevoegen': 'Pievienot punktu',
+  'Punt verwijderen': 'Noņemt punktu',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Koks vai zivs kauls (5× Why, CTQ, Ishikawa). Dziļums ar tabulatoriem; atzīmējiet cēloņus kā **X-01** inline.',
+  'Canvas': 'Audekls',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Reģionu audekls (A3, harta, SWOT, dēlis). Izvēlieties veidni; ## virsraksti diskā ir lauki.',
+  'Matrix': 'Matrica',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Tipizēts režģis (SIPOC, FMEA, RACI, …). Izvēlieties veidni; atvasinātas kolonnas, piemēram, RPN, tiek aprēķinātas un netiek saglabātas.',
+  'Regelkaart': 'Kontroles karte',
+  'Histogram': 'Histogramma',
+  'Pareto': 'Pareto',
+  'Run chart': 'Norises diagramma',
+  'Boxplot': 'Kastu diagramma',
+  'Plakken uit klembord': 'Ielīmēt no starpliktuves',
+  'Te weinig gegevens voor een regelkaart': 'Pārāk maz datu kontroles kartei',
+  'Te weinig gegevens voor een histogram': 'Pārāk maz datu histogrammai',
+  'Te weinig gegevens voor een boxplot': 'Pārāk maz datu kastu diagrammai',
+  'Procesverbetering': 'Procesu uzlabošana',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefakti procesu uzlabošanai un Lean Six Sigma projektiem (DMAIC, Kaizen, A3). Pēc noklusējuma izslēgts. Modulis ir pieejams; artefakti sekos nākamajos posmos.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Modulis ieslēgts. Aprēķinu kodols pieejams lokāli ({n} control chart faktori). Slaidu veidi un veidnes tiks pievienotas, tiklīdz būs gatavas.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Šī prezentācija satur Procesu uzlabošanas moduļa daļas. Ieslēdziet moduli, lai tās rediģētu.',
   'Online media staat uit — aanzetten':
       'Tiešsaistes multivide izslēgta — ieslēgt',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':

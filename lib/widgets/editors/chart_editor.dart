@@ -5,19 +5,43 @@ import 'dart:math' as math;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
+import '../../models/improvement_y01.dart';
+import '../../services/improvement/improvement_analysis_helpers.dart';
+import '../../services/improvement/chart_derivation.dart';
+import '../../state/procesverbetering_provider.dart';
 import '../../utils/error_snackbar.dart';
+import '../../utils/log.dart';
 import '../../utils/number_convention.dart';
+import '../../utils/table_clipboard.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import 'advanced_section.dart';
 import 'animation_duration_control.dart';
 import '_editor_field.dart';
 import '../../theme/app_theme.dart';
+import '../dialogs/improvement_msa_dialog.dart';
+import 'chart_doe_design_dialog.dart';
+import 'chart_histogram_limits.dart';
+import 'chart_type_toolbar.dart';
 
 part 'chart_editor_dialogs.dart';
 part 'chart_editor_grid.dart';
+
+bool _revealProcesverbetering(BuildContext context) {
+  try {
+    return ProviderScope.containerOf(
+      context,
+      listen: false,
+    ).read(procesverbeteringRevealProvider);
+  } catch (e, s) {
+    // Outside a ProviderScope (tests, early boot) the module is off.
+    logError('chart_editor._revealProcesverbetering', e, s);
+    return false;
+  }
+}
 
 /// The line shown after a CSV import that contained values which are not
 /// numbers: how many there were, and the first few verbatim so the user can
@@ -56,6 +80,9 @@ class ChartEditor extends StatefulWidget {
   final int themeAnimationDurationMs;
   final bool nestedInScrollView;
 
+  /// Deck-level Y-01 metric for histogram limit linking.
+  final ImprovementY01Metric deckY01;
+
   const ChartEditor({
     super.key,
     required this.slide,
@@ -64,6 +91,7 @@ class ChartEditor extends StatefulWidget {
     this.projectPath,
     required this.themeAnimationDurationMs,
     this.nestedInScrollView = false,
+    this.deckY01 = ImprovementY01Metric.empty,
   });
 
   @override
@@ -76,9 +104,13 @@ class _ChartEditorState extends State<ChartEditor> {
   late final TextEditingController _bands;
   late final TextEditingController _minBound;
   late final TextEditingController _maxBound;
+  late final TextEditingController _usl;
+  late final TextEditingController _lsl;
+  late final TextEditingController _processTarget;
   late ChartType _type;
   String? _source;
   late bool _animateOnEnter;
+  late bool _useDeckY01;
 
   /// Per-slide duration override; null = inherit the theme's duration.
   int? _animationOverrideMs;
@@ -110,12 +142,27 @@ class _ChartEditorState extends State<ChartEditor> {
     _bands = TextEditingController(text: _fmtList(spec.bands));
     _minBound = TextEditingController(text: _fmtBound(spec.minBound));
     _maxBound = TextEditingController(text: _fmtBound(spec.maxBound));
+    _usl = TextEditingController(text: _fmtBound(spec.usl));
+    _lsl = TextEditingController(text: _fmtBound(spec.lsl));
+    _processTarget = TextEditingController(text: _fmtBound(spec.processTarget));
+    _useDeckY01 = spec.yRef?.trim().toUpperCase() == 'Y-01';
     _targets.addListener(_emit);
     _bands.addListener(_emit);
     _minBound.addListener(_emit);
     _maxBound.addListener(_emit);
+    _usl.addListener(_emit);
+    _lsl.addListener(_emit);
+    _processTarget.addListener(_emit);
     _loadFromSpec(spec);
   }
+
+  bool get _isHistogram => _type == ChartType.histogram;
+
+  bool get _isYRefChart =>
+      _type == ChartType.histogram || _type == ChartType.controlChart;
+
+  bool get _deckHasY01 =>
+      !widget.deckY01.isEmpty || widget.deckY01.hasSpecLimits;
 
   /// Pie and donut share the "one circle per series, labels are the segments"
   /// data mapping, so the grid dims columns past the first two for both.
@@ -179,10 +226,14 @@ class _ChartEditorState extends State<ChartEditor> {
     _bands.dispose();
     _minBound.dispose();
     _maxBound.dispose();
+    _usl.dispose();
+    _lsl.dispose();
+    _processTarget.dispose();
     super.dispose();
   }
 
   ChartSpec _currentSpec() {
+    final useY01 = _useDeckY01 && _isYRefChart;
     final series = <ChartSeries>[
       for (var c = 0; c < _seriesNames.length; c++)
         ChartSeries(
@@ -210,9 +261,25 @@ class _ChartEditorState extends State<ChartEditor> {
       bands: _isBullet ? parseChartNumberList(_bands.text) : const [],
       minBound: _supportsBounds ? _parseBound(_minBound.text) : null,
       maxBound: _supportsBounds ? _parseBound(_maxBound.text) : null,
+      yRef: useY01 ? 'Y-01' : null,
+      usl: useY01 ? null : (_isYRefChart ? _parseBound(_usl.text) : null),
+      lsl: useY01 ? null : (_isYRefChart ? _parseBound(_lsl.text) : null),
+      processTarget: useY01
+          ? null
+          : (_isYRefChart ? _parseBound(_processTarget.text) : null),
       animateOnEnter: _animateOnEnter,
       animationDurationMs: _animationOverrideMs,
     );
+  }
+
+  void _applyDefaultYRefForType(ChartType type) {
+    if ((type == ChartType.histogram || type == ChartType.controlChart) &&
+        widget.deckY01.hasSpecLimits) {
+      _useDeckY01 = true;
+      _usl.clear();
+      _lsl.clear();
+      _processTarget.clear();
+    }
   }
 
   void _emit() {
@@ -224,7 +291,10 @@ class _ChartEditorState extends State<ChartEditor> {
   Future<void> _createVariants() async {
     final selected = await showDialog<List<ChartType>>(
       context: context,
-      builder: (context) => _ChartVariantsDialog(currentType: _type),
+      builder: (dialogContext) => _ChartVariantsDialog(
+        currentType: _type,
+        revealProcesverbetering: _revealProcesverbetering(dialogContext),
+      ),
     );
     if (selected == null || selected.isEmpty) return;
     final base = _currentSpec();
@@ -283,6 +353,27 @@ class _ChartEditorState extends State<ChartEditor> {
     _rowColors.removeAt(r);
     _values.removeAt(r);
     _bump();
+    _emit();
+  }
+
+  /// Plakt een spreadsheet-tabel in het raster (Phase 2). Enkele cel blijft
+  /// bij het platform — alleen herkende tabellen worden hier overgenomen.
+  Future<void> _pasteClipboardTable() async {
+    final data = await Clipboard.getData(Clipboard.kTextPlain);
+    final text = data?.text;
+    if (text == null || text.isEmpty) return;
+    final table = parseClipboardTable(text);
+    if (table == null) return;
+    final grid = chartGridFromClipboardTable(table);
+    if (grid == null) return;
+    setState(() {
+      _seriesNames = grid.seriesNames;
+      _seriesColors = List<String?>.filled(_seriesNames.length, null);
+      _xLabels = grid.xLabels;
+      _rowColors = List<String?>.filled(_xLabels.length, null);
+      _values = grid.values;
+      _rev++;
+    });
     _emit();
   }
 
@@ -443,14 +534,53 @@ class _ChartEditorState extends State<ChartEditor> {
         children: [
           EditorField(label: 'Titel (optioneel)', controller: _title),
           const SizedBox(height: 16),
-          _typeControls(l10n),
-          if (_typeHint(l10n) case final hint?)
+          ChartTypeToolbar(
+            l10n: l10n,
+            type: _type,
+            revealProcesverbetering: _revealProcesverbetering(context),
+            showVariants: widget.onAddVariants != null,
+            onTypeChanged: (v) {
+              setState(() {
+                _type = v;
+                _applyDefaultYRefForType(v);
+              });
+              _emit();
+            },
+            onGageRr: _openGageRr,
+            onDoeDesign: _openDoeDesign,
+            onCreateVariants: widget.onAddVariants != null
+                ? _createVariants
+                : null,
+            onPasteClipboard: _pasteClipboardTable,
+            onImportCsv: _importCsv,
+          ),
+          if (chartTypeHint(l10n, _type) case final hint?)
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(
                 hint,
                 style: TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),
+            ),
+          if (_isHistogram && _deckHasY01)
+            ChartHistogramY01Controls(
+              l10n: l10n,
+              useDeckY01: _useDeckY01,
+              deckY01: widget.deckY01,
+              usl: _usl,
+              lsl: _lsl,
+              processTarget: _processTarget,
+              onUseDeckY01Changed: (v) {
+                setState(() {
+                  _useDeckY01 = v;
+                  if (v) {
+                    _usl.clear();
+                    _lsl.clear();
+                    _processTarget.clear();
+                  }
+                });
+                _emit();
+              },
             ),
           if (linked) _linkedSourceRow(l10n),
           // Grenzen en animatie zijn verfijning; ingeklapt tenzij er al iets
@@ -462,10 +592,21 @@ class _ChartEditorState extends State<ChartEditor> {
               initiallyExpanded:
                   _animateOnEnter ||
                   _minBound.text.isNotEmpty ||
-                  _maxBound.text.isNotEmpty,
+                  _maxBound.text.isNotEmpty ||
+                  (!_useDeckY01 &&
+                      (_usl.text.isNotEmpty ||
+                          _lsl.text.isNotEmpty ||
+                          _processTarget.text.isNotEmpty)),
               children: [
                 if (_isBullet) _bulletControls(l10n),
                 if (_supportsBounds) _boundControls(l10n),
+                if (_isHistogram && !_useDeckY01)
+                  ChartHistogramLocalLimits(
+                    l10n: l10n,
+                    usl: _usl,
+                    lsl: _lsl,
+                    processTarget: _processTarget,
+                  ),
                 _animationControls(l10n),
               ],
             ),
@@ -644,123 +785,29 @@ class _ChartEditorState extends State<ChartEditor> {
     );
   }
 
-  /// Short explanation of the non-obvious data mapping for the current type,
-  /// or null for the self-explanatory ones (bar, line, …).
-  String? _typeHint(AppLocalizations l10n) {
-    if (_isPieLike) {
-      return l10n.d(
-        'Bij een cirkel worden maximaal de eerste twee reeksen getoond; de labels vormen de segmenten.',
-      );
-    }
-    return switch (_type) {
-      ChartType.radar => l10n.d(
-        'Een spider-diagram heeft minstens drie labels (assen) nodig; elke reeks vormt een vlak.',
-      ),
-      ChartType.combo => l10n.d(
-        'Laatste reeks als lijn op een tweede as; de rest als staven.',
-      ),
-      ChartType.waterfall => l10n.d(
-        'Eerste reeks: elke waarde is een op- of neerwaartse stap op het vorige totaal.',
-      ),
-      ChartType.heatmap => l10n.d(
-        'Reeks = rij, kolom = label, celkleur volgt de waarde. Label de assen kans en impact voor een risicomatrix.',
-      ),
-      _ => null,
-    };
+  Future<void> _openGageRr() async {
+    final nested = gageRrFromChartGrid(
+      partLabels: _xLabels,
+      operatorNames: _seriesNames,
+      cellValues: _values,
+    );
+    await ImprovementMsaDialog.show(context, initialMeasurements: nested);
   }
 
-  Widget _typeControls(AppLocalizations l10n) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 12,
-      runSpacing: 8,
-      children: [
-        Text(
-          l10n.d('Type grafiek'),
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-            color: AppTheme.slate500,
-          ),
-        ),
-        DropdownButton<ChartType>(
-          value: _type,
-          isDense: true,
-          borderRadius: BorderRadius.circular(6),
-          style: TextStyle(fontSize: 12, color: AppTheme.ink),
-          items: [
-            DropdownMenuItem(
-              value: ChartType.bar,
-              child: Text(l10n.d('Staaf')),
-            ),
-            DropdownMenuItem(
-              value: ChartType.horizontalBar,
-              child: Text(l10n.d('Horizontale staaf')),
-            ),
-            DropdownMenuItem(
-              value: ChartType.stackedBar,
-              child: Text(l10n.d('Gestapelde staaf')),
-            ),
-            DropdownMenuItem(
-              value: ChartType.horizontalStackedBar,
-              child: Text(l10n.d('Horizontale gestapelde staaf')),
-            ),
-            DropdownMenuItem(
-              value: ChartType.combo,
-              child: Text(l10n.d('Combo')),
-            ),
-            DropdownMenuItem(
-              value: ChartType.line,
-              child: Text(l10n.d('Lijn')),
-            ),
-            DropdownMenuItem(
-              value: ChartType.area,
-              child: Text(l10n.d('Vlak')),
-            ),
-            DropdownMenuItem(
-              value: ChartType.pie,
-              child: Text(l10n.d('Cirkel')),
-            ),
-            DropdownMenuItem(
-              value: ChartType.donut,
-              child: Text(l10n.d('Donut')),
-            ),
-            DropdownMenuItem(
-              value: ChartType.radar,
-              child: Text(l10n.d('Spider')),
-            ),
-            DropdownMenuItem(
-              value: ChartType.scatter,
-              child: Text(l10n.d('Spreiding')),
-            ),
-            DropdownMenuItem(
-              value: ChartType.waterfall,
-              child: Text(l10n.d('Waterval')),
-            ),
-            DropdownMenuItem(
-              value: ChartType.heatmap,
-              child: Text(l10n.d('Heatmap')),
-            ),
-          ],
-          onChanged: (v) {
-            if (v == null) return;
-            setState(() => _type = v);
-            _emit();
-          },
-        ),
-        if (widget.onAddVariants != null)
-          TextButton.icon(
-            key: const ValueKey('chart-create-variants'),
-            onPressed: _createVariants,
-            icon: const Icon(Icons.auto_awesome_motion, size: 16),
-            label: Text(l10n.d('Varianten')),
-          ),
-        TextButton.icon(
-          onPressed: _importCsv,
-          icon: const Icon(Icons.upload_file, size: 16),
-          label: Text(l10n.d('CSV importeren')),
-        ),
-      ],
+  Future<void> _openDoeDesign() async {
+    final grid = await showDialog<DoeDesignGrid>(
+      context: context,
+      builder: (_) => const DoeDesignDialog(),
     );
+    if (grid == null || !mounted) return;
+    setState(() {
+      _xLabels = List<String>.from(grid.xLabels);
+      _seriesNames = List<String>.from(grid.seriesNames);
+      _values = [for (final row in grid.cellValues) List<String>.from(row)];
+      _rowColors = List<String?>.filled(_xLabels.length, null);
+      _seriesColors = List<String?>.filled(_seriesNames.length, null);
+      _rev++;
+    });
+    _emit();
   }
 }

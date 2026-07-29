@@ -13,21 +13,16 @@ no application backend; all processing is local.
 **Deck** — a complete presentation: metadata, an ordered list of slides, a theme
 profile, and a TLP classification. Immutable model (`lib/models/deck.dart`).
 
-**Slide** — one immutable, strongly-typed slide. Its `SlideType` (24 values)
+**Slide** — one immutable, strongly-typed slide. Its `SlideType` (29 values)
 selects the layout: `title`, `section`, `bullets`, `twoBullets`, `bulletsImage`,
 `twoImages`, `image`, `video`, `quote`, `table`, `freeMarkdown`, `code`, `chart`,
-`cockpit`, `question`, `timeline`, `scorecard`, and the pentest layouts (`assets`,
+`cockpit`, `question`, `timeline`, `scorecard`, the pentest layouts (`assets`,
 `discoveries`, `finding`, `findingsSummary`, `checklist`, `scopeMatrix`,
-`signOff`). *Corrected 2026-07-21: this said 21 and left out `scorecard`,
-`assets` and `discoveries`.*
-`cockpit`, `question`, `timeline`, `scorecard`, and the seven
-information-security layouts that stay hidden until that module is enabled
-(`assets`, `discoveries`, `finding`, `findingsSummary`, `checklist`,
-`scopeMatrix`, `signOff`). *(Corrected 2026-07-22: this said 21 and omitted
-`scorecard`, `assets` and `discoveries`. The same count in
-[API_DOCUMENTATION.md](API_DOCUMENTATION.md) was held against the enum by
-`test/docs_enum_counts_test.dart` and stayed right; this copy was not, and
-drifted. It is now covered by that test too.)*
+`signOff`), and the Procesverbetering layouts (`matrix`, `canvas`, `tree`,
+`flow`, `phaseGate`). The seven
+information-security layouts stay hidden until that module is enabled; `matrix`,
+`canvas`, `tree`, `flow` and `phaseGate` follow the same authoring gate for Procesverbetering. *(Corrected
+2026-07-29: Phase 7 adds `phaseGate`; count held by `test/docs_enum_counts_test.dart`.)*
 
 **Marp** — the open Markdown-for-presentations format OciDeck reads and writes.
 Decks stay close to plain Marp Markdown, so they interoperate with other Marp

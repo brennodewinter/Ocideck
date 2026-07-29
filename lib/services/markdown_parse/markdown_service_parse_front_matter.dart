@@ -32,6 +32,14 @@ class _FrontMatter {
   int presentationTargetSeconds = 0;
   bool showRehearsalSummary = false;
   bool playOnly = false;
+  String improvementFramework = '';
+  String improvementY01 = '';
+  String improvementY01Unit = '';
+  double? improvementY01Usl;
+  double? improvementY01Lsl;
+  double? improvementY01Target;
+  double? improvementY01Baseline;
+  double? improvementY01Goal;
   bool finalized = false;
   String sealHash = '';
   String sealAlgo = '';
@@ -129,6 +137,22 @@ extension _MarkdownParseFrontMatter on MarkdownService {
               fm.showRehearsalSummary = value == 'true';
             case 'ocideck_play_only':
               fm.playOnly = value == 'true';
+            case 'ocideck_improvement_framework':
+              fm.improvementFramework = _parseScalar(value);
+            case 'ocideck_improvement_y01':
+              fm.improvementY01 = _parseScalar(value);
+            case 'ocideck_improvement_y01_unit':
+              fm.improvementY01Unit = _parseScalar(value);
+            case 'ocideck_improvement_y01_usl':
+              fm.improvementY01Usl = double.tryParse(value.trim());
+            case 'ocideck_improvement_y01_lsl':
+              fm.improvementY01Lsl = double.tryParse(value.trim());
+            case 'ocideck_improvement_y01_target':
+              fm.improvementY01Target = double.tryParse(value.trim());
+            case 'ocideck_improvement_y01_baseline':
+              fm.improvementY01Baseline = double.tryParse(value.trim());
+            case 'ocideck_improvement_y01_goal':
+              fm.improvementY01Goal = double.tryParse(value.trim());
             case 'ocideck_finalized':
               fm.finalized = value == 'true';
             case 'ocideck_seal_hash':

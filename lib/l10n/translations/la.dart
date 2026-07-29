@@ -1907,6 +1907,47 @@ const _dutchSourceAddLa = <String, String>{
   'organisaties geselecteerd': 'organizations electus',
   'rapportages gebruikt': 'tradit usus',
   'systemen': 'systems',
+  'Nog geen specificatielimiet': 'Nondum limes specificationis',
+  'USL (bovengrens)': 'USL (limes superior)',
+  'LSL (ondergrens)': 'LSL (limes inferior)',
+  'Optionele Y-01-velden': 'Agri Y-01 optionales',
+  'Procesdoel (target)': 'Scopus processus (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Limites specificationis Y-01 (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Haec deck limites Y-01 habet. Interruptorem supra accende ut eis pro valoribus localibus utaris.',
+  'USL (bovengrens, optioneel)': 'USL (limes superior, optionale)',
+  'LSL (ondergrens, optioneel)': 'LSL (limes inferior, optionale)',
+  'Procesdoel (optioneel)': 'Scopus processus (optionale)',
+  'Fasepoort': 'Porta phaseos',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Test t a due campioni (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Una columna numerorum (saltem 2 observationes).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Duae columnae linea vacua separatae (saltem 2 per gregem).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Plures greges, quisque grex una columna, linea vacua separati (saltem 2 greges, 2 observationes per gregem).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Insere Part, Operator et Value (tabula vel comma). Repete versus pro replicis. Saltem 2 parts, 2 operatores, 2 mensurae per cellulam.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Insere X et Y (unus numerus per versum). Saltem 3 paria; machina recusat cum observationes nimis paucae sint.',
+  'Part × Operator interaction pooled into repeatability':
+      'Interactio Part × Operator in repetibilitatem congregata',
+  'Part × Operator interaction kept separate':
+      'Interactio Part × Operator separatim servata',
+  'Te weinig gegevens voor een probability plot':
+      'Nimis pauca data pro schemate probabilitatis',
   'Met dank aan': 'Gratias agimus',
   'Fix alle problemen': 'Omnia problemata corrigere',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1982,6 +2023,78 @@ const _dutchSourceAddLa = <String, String>{
       'legi non potuit et praetermissum est',
   'ontbrak in het bestand en is overgeslagen':
       'in plica deerat et praetermissum est',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Non satis data pro schemate effectuum principalium',
+  'Te weinig gegevens voor een interactieplot':
+      'Non satis data pro schemate interactionis',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Generat tabulam consilii cum factoribus codicatis (−1/+1) et columna Y vacua in craticula.',
+  'Aantal factoren': 'Numero di fattori',
+  'Volledig factorial (2^k)': 'Fattoriale completo (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'prove in ordine Yates standard',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Una series per factorem cum gradibus codicatis −1 et +1; ultima series est responsio (Y). Versus sunt cursus experimentales.',
+  'Golden-thread-id': 'Id fili aurei',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'alicubi nominatur sed in tabula arboris non est — defini in arbore CTQ vel Ishikawa.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'in tabula arboris est sed alibi non adhibetur — coniunge ad matricem, fluxum vel aliam tabulam.',
+  'Nieuw verbeteringsproject': 'Novum propositum emendationis',
+  'Kader': 'Structura',
+  'Projecttitel': 'Titulus propositi',
+  'Primaire Y-metriek (Y-01)': 'Metrum Y primarium (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Exempli gratia: tempus per orderintake in diebus laboris',
+  'Project starten': 'Incipe propositum',
+  'Procesverbetering: DMAIC-project': 'Emendatio processuum: propositum DMAIC',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'Ossa DMAIC cum charta, arbore CTQ (Y-01), SIPOC et sectionibus phasium.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Index portae phasis: confirma ambitum, partes interessatas et go/no-go antequam ad phasem sequentem transeas.',
+  'Stroom': 'Fluxus',
+  'Zwembanen': 'Alvei',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Fluxus processus, alvei vel VSM. Gradus ut titulus :: genus :: pt=…; lt=…. Summae (PCE, bottleneck) computantur nec servantur.',
+  'Boom': 'Arbor',
+  'Visgraat': 'Spina piscis',
+  'Lay-out': 'Dispositio',
+  'Punten': 'Puncta',
+  'Inspringen': 'Indentare',
+  'Uitspringen': 'Exdentare',
+  'Punt toevoegen': 'Punctum adde',
+  'Punt verwijderen': 'Punctum remove',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Arbor vel spina piscis (5× Why, CTQ, Ishikawa). Altitudo per tabs; nota causas ut **X-01** inline.',
+  'Canvas': 'Tabula',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Tabula regionum (A3, charta, SWOT, tabula). Elige exemplar; rubricae ## in disco sunt cellae.',
+  'Matrix': 'Matrica',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Reticulum typis datum (SIPOC, FMEA, RACI, …). Elige exemplar; columnae derivatae ut RPN computantur nec servantur.',
+  'Regelkaart': 'Tabula moderationis',
+  'Histogram': 'Histogramma',
+  'Pareto': 'Pareto',
+  'Run chart': 'Tabula cursus',
+  'Boxplot': 'Tabula arcae',
+  'Plakken uit klembord': 'Ex tabula memoriae inserere',
+  'Te weinig gegevens voor een regelkaart':
+      'Nimis pauca data pro tabula moderationis',
+  'Te weinig gegevens voor een histogram': 'Nimis pauca data pro histogrammate',
+  'Te weinig gegevens voor een boxplot': 'Nimis pauca data pro tabula arcae',
+  'Procesverbetering': 'Emendatio processuum',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Instrumenta ad emendationem processuum et proposita Lean Six Sigma (DMAIC, Kaizen, A3). Ex praedefinito inactiva. Modulus praesto est; instrumenta gradibus sequentibus sequentur.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Modulus activus. Nucleus computationis in loco praesto est ({n} factores control chart). Genera diapositivarum et exemplaria addentur simul atque parata erunt.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Haec demonstratio partes moduli Emendationis processuum continet. Modulum activa ut eas recenseas.',
   'Online media staat uit — aanzetten': 'Media in linea exstincta — activa',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} contentum exsecutabile continet neque importabitur.',

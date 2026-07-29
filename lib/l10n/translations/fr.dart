@@ -853,6 +853,48 @@ const _dutchSourceAddFr = {
   'organisaties geselecteerd': 'organisations sélectionnées',
   'rapportages gebruikt': 'rapports utilisés',
   'systemen': 'systèmes',
+  'Nog geen specificatielimiet': 'Pas encore de limite de spécification',
+  'USL (bovengrens)': 'USL (limite supérieure)',
+  'LSL (ondergrens)': 'LSL (limite inférieure)',
+  'Optionele Y-01-velden': 'Champs Y-01 facultatifs',
+  'Procesdoel (target)': 'Cible de processus (target)',
+  'Specificatielimieten van Y-01 (deck)':
+      'Limites de spécification Y-01 (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Ce deck a des limites Y-01. Activez l\'interrupteur ci-dessus pour les utiliser à la place des valeurs locales.',
+  'USL (bovengrens, optioneel)': 'USL (limite supérieure, facultatif)',
+  'LSL (ondergrens, optioneel)': 'LSL (limite inférieure, facultatif)',
+  'Procesdoel (optioneel)': 'Cible de processus (facultatif)',
+  'Fasepoort': 'Phase gate',
+  'Berekenen': 'Calculer',
+  'Gegevens': 'Données',
+  'Hellingscoëfficiënt': 'Pente',
+  'Hypothesetoets': 'Test d’hypothèse',
+  'Hypothesetoets…': 'Test d’hypothèse…',
+  'Hypothetisch gemiddelde': 'Moyenne hypothétique',
+  'Lineaire regressie': 'Régression linéaire',
+  'Regressie…': 'Régression…',
+  'Meetdata': 'Données de mesure',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolérance (facultatif)',
+  'Eénsteeks t-toets': 'Test t à un échantillon',
+  'Twee-steeks t-toets (Welch)': 'Test t à deux échantillons (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Une colonne de nombres (au moins 2 observations).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Deux colonnes séparées par une ligne vide (au moins 2 par groupe).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Plusieurs groupes, chaque groupe une colonne, séparés par une ligne vide (au moins 2 groupes, 2 observations par groupe).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Collez Part, Operator et Value (tabulation ou virgule). Répétez les lignes pour les réplicats. Au moins 2 parts, 2 opérateurs, 2 mesures par cellule.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Collez X et Y (un nombre par ligne). Au moins 3 paires ; le moteur refuse s’il y a trop peu d’observations.',
+  'Part × Operator interaction pooled into repeatability':
+      'Interaction Part × Operator regroupée dans la répétabilité',
+  'Part × Operator interaction kept separate':
+      'Interaction Part × Operator conservée séparément',
+  'Te weinig gegevens voor een probability plot':
+      'Trop peu de données pour un probability plot',
   'Met dank aan': 'Avec gratitude',
   'Fix alle problemen': 'Corriger tous les problèmes',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -930,6 +972,81 @@ const _dutchSourceAddFr = {
       'n\'a pas pu être lu et a été ignoré',
   'ontbrak in het bestand en is overgeslagen':
       'était absent du fichier et a été ignoré',
+  'Hoofdeffecten': 'Effets principaux',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Pas assez de données pour un graphique d\'effets principaux',
+  'Te weinig gegevens voor een interactieplot':
+      'Pas assez de données pour un graphique d\'interaction',
+  'DOE-proefopzet…': 'Plan d\'expérience DOE…',
+  'DOE-proefopzet': 'Plan d\'expérience DOE',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Génère un tableau d\'expérience avec facteurs codés (−1/+1) et une colonne Y vide dans la grille.',
+  'Aantal factoren': 'Nombre de facteurs',
+  'Volledig factorial (2^k)': 'Factoriel complet (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractionnaire (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'essais en ordre Yates standard',
+  'In raster zetten': 'Remplir la grille',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Une série par facteur avec niveaux codés −1 et +1 ; la dernière série est la réponse (Y). Les lignes sont des essais.',
+  'Golden-thread-id': 'Identifiant golden thread',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'est mentionné ailleurs mais n\'apparaît pas sur une diapositive arbre — définissez-le sur un arbre CTQ ou Ishikawa.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'figure sur une diapositive arbre mais n\'est utilisé nulle part ailleurs — reliez-le à une matrice, un flux ou une autre diapositive.',
+  'Nieuw verbeteringsproject': 'Nouveau projet d\'amélioration',
+  'Kader': 'Cadre',
+  'Projecttitel': 'Titre du projet',
+  'Primaire Y-metriek (Y-01)': 'Métrique Y principale (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Par exemple : délai de traitement de la prise de commande en jours ouvrés',
+  'Project starten': 'Démarrer le projet',
+  'Procesverbetering: DMAIC-project':
+      'Amélioration des processus : projet DMAIC',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'Squelette DMAIC avec charte, arbre CTQ (Y-01), SIPOC et sections de phase.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Une checklist de porte de phase : confirmez le périmètre, les parties prenantes et le go/no-go avant de passer à la phase suivante.',
+  'Stroom': 'Flux',
+  'Zwembanen': 'Couloirs',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Un flux de processus, couloirs ou VSM. Étapes sous titre :: type :: pt=…; lt=…. Les totaux (PCE, bottleneck) sont calculés et non enregistrés.',
+  'Boom': 'Arbre',
+  'Visgraat': 'Arête de poisson',
+  'Lay-out': 'Disposition',
+  'Punten': 'Points',
+  'Inspringen': 'Indenter',
+  'Uitspringen': 'Désindenter',
+  'Punt toevoegen': 'Ajouter un point',
+  'Punt verwijderen': 'Supprimer le point',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Un arbre ou une arête de poisson (5× Why, CTQ, Ishikawa). Profondeur avec tabulations ; marquez les causes en **X-01** inline.',
+  'Canvas': 'Canevas',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Un canevas de régions (A3, charte, SWOT, tableau). Choisissez un modèle ; les titres ## sur disque sont les cases.',
+  'Matrix': 'Matrice',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Une grille typée (SIPOC, FMEA, RACI, …). Choisissez un modèle ; les colonnes dérivées comme RPN sont calculées et non enregistrées.',
+  'Regelkaart': 'Carte de contrôle',
+  'Histogram': 'Histogramme',
+  'Pareto': 'Pareto',
+  'Run chart': 'Graphique de séquence',
+  'Boxplot': 'Boîte à moustaches',
+  'Plakken uit klembord': 'Coller depuis le presse-papiers',
+  'Te weinig gegevens voor een regelkaart':
+      'Trop peu de données pour une carte de contrôle',
+  'Te weinig gegevens voor een histogram':
+      'Trop peu de données pour un histogramme',
+  'Te weinig gegevens voor een boxplot':
+      'Trop peu de données pour une boîte à moustaches',
+  'Procesverbetering': 'Amélioration des processus',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefacts pour l\'amélioration des processus et les projets Lean Six Sigma (DMAIC, Kaizen, A3). Désactivé par défaut. Le module est disponible ; les artefacts suivront dans les prochaines étapes.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Module activé. Noyau de calcul disponible localement ({n} facteurs de control chart). Les types de diapositives et les modèles seront ajoutés dès qu\'ils seront prêts.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Cette présentation contient des éléments du module Amélioration des processus. Activez le module pour les modifier.',
   'Online media staat uit — aanzetten': 'Médias en ligne désactivés — activer',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} contient du contenu exécutable et ne sera pas importé.',

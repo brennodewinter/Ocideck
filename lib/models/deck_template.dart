@@ -23,12 +23,19 @@ class DeckTemplate {
   /// true, so the flat catalogue stays uncluttered for everyone else.
   final bool requiresInfoSafety;
 
+  /// True for templates that only make sense with the "Procesverbetering"
+  /// module on (PROCESS_IMPROVEMENT.md Phase 0). Hidden until that module is
+  /// revealed. Temporary sibling of [requiresInfoSafety] — not a unified
+  /// `requiresModule` yet, on purpose (light Phase 0).
+  final bool requiresProcesverbetering;
+
   const DeckTemplate({
     required this.id,
     required this.title,
     required this.description,
     required this.icon,
     this.requiresInfoSafety = false,
+    this.requiresProcesverbetering = false,
   });
 }
 
@@ -532,6 +539,14 @@ final List<DeckTemplate> deckTemplates = [
         'managementsamenvatting, bevindingen, checklists en ondertekening.',
     icon: 'miauwReport',
     requiresInfoSafety: true,
+  ),
+  DeckTemplate(
+    id: 'procesverbetering-dmaic',
+    title: 'Procesverbetering: DMAIC-project',
+    description:
+        'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.',
+    icon: 'procesverbeteringDmaic',
+    requiresProcesverbetering: true,
   ),
 ];
 

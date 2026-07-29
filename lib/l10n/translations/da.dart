@@ -1893,6 +1893,47 @@ const _dutchSourceAddDa = <String, String>{
   'organisaties geselecteerd': 'udvalgte organisationer',
   'rapportages gebruikt': 'anvendte rapporter',
   'systemen': 'systemer',
+  'Nog geen specificatielimiet': 'Endnu ingen specifikationsgrænse',
+  'USL (bovengrens)': 'USL (øvre grænse)',
+  'LSL (ondergrens)': 'LSL (nedre grænse)',
+  'Optionele Y-01-velden': 'Valgfrie Y-01-felter',
+  'Procesdoel (target)': 'Procesmål (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Y-01-specifikationsgrænser (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Dette deck har Y-01-grænser. Tænd kontakten ovenfor for at bruge dem i stedet for lokale værdier.',
+  'USL (bovengrens, optioneel)': 'USL (øvre grænse, valgfrit)',
+  'LSL (ondergrens, optioneel)': 'LSL (nedre grænse, valgfrit)',
+  'Procesdoel (optioneel)': 'Procesmål (valgfrit)',
+  'Fasepoort': 'Phase gate',
+  'Berekenen': 'Beregn',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Hældning',
+  'Hypothesetoets': 'Hypotesetest',
+  'Hypothesetoets…': 'Hypotesetest…',
+  'Hypothetisch gemiddelde': 'Hypotetisk middelværdi',
+  'Lineaire regressie': 'Lineær regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Måledata',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (valgfrit)',
+  'Eénsteeks t-toets': 'Enstikprøve-t-test',
+  'Twee-steeks t-toets (Welch)': 'Tostikprøve-t-test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Én kolonne med tal (mindst 2 observationer).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'To kolonner adskilt af en tom linje (mindst 2 pr. gruppe).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Flere grupper, hver gruppe en kolonne, adskilt af en tom linje (mindst 2 grupper, 2 observationer pr. gruppe).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Indsæt Part, Operator og Value (tabulator eller komma). Gentag rækker for replikater. Mindst 2 parts, 2 operatører, 2 målinger pr. celle.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Indsæt X og Y (ét tal pr. linje). Mindst 3 par; motoren afviser ved for få observationer.',
+  'Part × Operator interaction pooled into repeatability':
+      'Part × Operator-interaktion samlet i gentagelighed',
+  'Part × Operator interaction kept separate':
+      'Part × Operator-interaktion holdt adskilt',
+  'Te weinig gegevens voor een probability plot':
+      'For få data til et sandsynlighedsplot',
   'Met dank aan': 'Med tak',
   'Fix alle problemen': 'Løs alle problemer',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1966,6 +2007,77 @@ const _dutchSourceAddDa = <String, String>{
       'kunne ikke læses og blev sprunget over',
   'ontbrak in het bestand en is overgeslagen':
       'manglede i filen og blev sprunget over',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'For få data til et hovedeffektplot',
+  'Te weinig gegevens voor een interactieplot':
+      'For få data til et interaktionsplot',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Opretter en designtabel med kodede faktorer (−1/+1) og en tom Y-kolonne i gitteret.',
+  'Aantal factoren': 'Antal faktorer',
+  'Volledig factorial (2^k)': 'Fuldt faktorialt (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'kørsler i standard Yates-rækkefølge',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Én serie pr. faktor med kodede niveauer −1 og +1; den sidste serie er responsen (Y). Rækker er forsøgskørsler.',
+  'Golden-thread-id': 'Golden-thread-id',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'nævnes et sted, men findes ikke på et træ-slide — definer den på et CTQ- eller Ishikawa-træ.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'findes på et træ-slide, men bruges ikke andre steder — kobl den til en matrix, flow eller andet slide.',
+  'Nieuw verbeteringsproject': 'Nyt forbedringsprojekt',
+  'Kader': 'Ramme',
+  'Projecttitel': 'Projekttitel',
+  'Primaire Y-metriek (Y-01)': 'Primær Y-metrik (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'For eksempel: orderintake gennemløbstid i arbejdsdage',
+  'Project starten': 'Start projekt',
+  'Procesverbetering: DMAIC-project': 'Procesforbedring: DMAIC-projekt',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'DMAIC-skelet med charter, CTQ-træ (Y-01), SIPOC og fasesektioner.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'En faseport-checkliste: bekræft scope, interessenter og go/no-go, før du går videre til næste fase.',
+  'Stroom': 'Flow',
+  'Zwembanen': 'Swimlanes',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Et procesflow, swimlanes eller VSM. Trin som titel :: type :: pt=…; lt=…. Totaler (PCE, bottleneck) beregnes og gemmes ikke.',
+  'Boom': 'Træ',
+  'Visgraat': 'Fiskeben',
+  'Lay-out': 'Layout',
+  'Punten': 'Punkter',
+  'Inspringen': 'Indryk',
+  'Uitspringen': 'Udryk',
+  'Punt toevoegen': 'Tilføj punkt',
+  'Punt verwijderen': 'Fjern punkt',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Et træ eller fiskeben (5× Why, CTQ, Ishikawa). Dybde med tabulatorer; markér årsager som **X-01** inline.',
+  'Canvas': 'Canvas',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Et canvas af regioner (A3, charter, SWOT, board). Vælg en skabelon; ##-overskrifterne på disken er felterne.',
+  'Matrix': 'Matrix',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Et typet gitter (SIPOC, FMEA, RACI, …). Vælg en skabelon; afledte kolonner som RPN beregnes og gemmes ikke.',
+  'Regelkaart': 'Kontroldiagram',
+  'Histogram': 'Histogram',
+  'Pareto': 'Pareto',
+  'Run chart': 'Forløbsdiagram',
+  'Boxplot': 'Boksplot',
+  'Plakken uit klembord': 'Indsæt fra udklipsholder',
+  'Te weinig gegevens voor een regelkaart': 'For få data til et kontroldiagram',
+  'Te weinig gegevens voor een histogram': 'For få data til et histogram',
+  'Te weinig gegevens voor een boxplot': 'For få data til et boksplot',
+  'Procesverbetering': 'Procesforbedring',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefakter til procesforbedring og Lean Six Sigma-projekter (DMAIC, Kaizen, A3). Slået fra som standard. Modulet er tilgængeligt; artefakterne følger i senere trin.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Modul til. Beregningskerne tilgængelig lokalt ({n} control chart-faktorer). Diastyper og skabeloner tilføjes, når de er klar.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Denne præsentation indeholder dele af modulet Procesforbedring. Slå modulet til for at redigere dem.',
   'Online media staat uit — aanzetten': 'Onlinemedier er slået fra — tænd',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} indeholder eksekverbart indhold og importeres ikke.',

@@ -1892,6 +1892,47 @@ const _dutchSourceAddCs = <String, String>{
   'organisaties geselecteerd': 'vybraných organizací',
   'rapportages gebruikt': 'použité zprávy',
   'systemen': 'systémy',
+  'Nog geen specificatielimiet': 'Zatím žádný limit specifikace',
+  'USL (bovengrens)': 'USL (horní mez)',
+  'LSL (ondergrens)': 'LSL (dolní mez)',
+  'Optionele Y-01-velden': 'Volitelná pole Y-01',
+  'Procesdoel (target)': 'Cíl procesu (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Limity specifikace Y-01 (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Tento deck má limity Y-01. Zapněte výše uvedený přepínač, abyste je použili místo místních hodnot.',
+  'USL (bovengrens, optioneel)': 'USL (horní mez, volitelné)',
+  'LSL (ondergrens, optioneel)': 'LSL (dolní mez, volitelné)',
+  'Procesdoel (optioneel)': 'Cíl procesu (volitelné)',
+  'Fasepoort': 'Fázová brána',
+  'Berekenen': 'Vypočítat',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Směrnice',
+  'Hypothesetoets': 'Test hypotézy',
+  'Hypothesetoets…': 'Test hypotézy…',
+  'Hypothetisch gemiddelde': 'Hypotetický průměr',
+  'Lineaire regressie': 'Lineární regrese',
+  'Regressie…': 'Regrese…',
+  'Meetdata': 'Naměřená data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (volitelné)',
+  'Eénsteeks t-toets': 'Jednovýběrový t-test',
+  'Twee-steeks t-toets (Welch)': 'Dvouvýběrový t-test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Jeden sloupec čísel (alespoň 2 pozorování).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Dva sloupce oddělené prázdným řádkem (alespoň 2 na skupinu).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Více skupin, každá skupina sloupec, oddělené prázdným řádkem (alespoň 2 skupiny, 2 pozorování na skupinu).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Vložte Part, Operator a Value (tabulátor nebo čárka). Opakujte řádky pro repliky. Alespoň 2 parts, 2 operátory, 2 měření na buňku.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Vložte X a Y (jedno číslo na řádek). Alespoň 3 páry; engine odmítne příliš málo pozorování.',
+  'Part × Operator interaction pooled into repeatability':
+      'Interakce Part × Operator sloučena do opakovatelnosti',
+  'Part × Operator interaction kept separate':
+      'Interakce Part × Operator udržena odděleně',
+  'Te weinig gegevens voor een probability plot':
+      'Příliš málo dat pro pravděpodobnostní graf',
   'Met dank aan': 'S poděkováním',
   'Fix alle problemen': 'Opravit všechny problémy',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1966,6 +2007,78 @@ const _dutchSourceAddCs = <String, String>{
       'nepodařilo se načíst a bylo přeskočeno',
   'ontbrak in het bestand en is overgeslagen':
       'chybělo v souboru a bylo přeskočeno',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Příliš málo dat pro graf hlavních efektů',
+  'Te weinig gegevens voor een interactieplot':
+      'Příliš málo dat pro graf interakce',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Vytvoří návrhovou tabulku s kódovanými faktory (−1/+1) a prázdným sloupcem Y v mřížce.',
+  'Aantal factoren': 'Počet faktorů',
+  'Volledig factorial (2^k)': 'Úplný faktoriál (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'běhy ve standardním Yatesově pořadí',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Jedna řada na faktor s kódovanými úrovněmi −1 a +1; poslední řada je odezva (Y). Řádky jsou experimentální běhy.',
+  'Golden-thread-id': 'Golden-thread id',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'je někde zmíněn, ale není na snímku stromu — definujte ho na CTQ nebo Ishikawa stromu.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'je na snímku stromu, ale jinde se nepoužívá — propojte ho s maticí, tokem nebo jiným snímkem.',
+  'Nieuw verbeteringsproject': 'Nový projekt zlepšování',
+  'Kader': 'Rámec',
+  'Projecttitel': 'Název projektu',
+  'Primaire Y-metriek (Y-01)': 'Primární Y metrika (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Například: průběh order intake v pracovních dnech',
+  'Project starten': 'Spustit projekt',
+  'Procesverbetering: DMAIC-project': 'Zlepšování procesů: projekt DMAIC',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'DMAIC kostra s charterem, CTQ stromem (Y-01), SIPOC a fázovými sekcemi.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Checklist fázové brány: potvrďte scope, stakeholdery a go/no-go před přechodem do další fáze.',
+  'Stroom': 'Tok',
+  'Zwembanen': 'Dráhy',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Tok procesu, dráhy nebo VSM. Kroky jako titul :: druh :: pt=…; lt=…. Součty (PCE, bottleneck) se počítají a neukládají.',
+  'Boom': 'Strom',
+  'Visgraat': 'Rybí kost',
+  'Lay-out': 'Rozvržení',
+  'Punten': 'Body',
+  'Inspringen': 'Odsadit',
+  'Uitspringen': 'Zmenšit odsazení',
+  'Punt toevoegen': 'Přidat bod',
+  'Punt verwijderen': 'Odebrat bod',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Strom nebo rybí kost (5× Why, CTQ, Ishikawa). Hloubka tabulátory; označte příčiny jako **X-01** inline.',
+  'Canvas': 'Plátno',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Plátno regionů (A3, charter, SWOT, nástěnka). Vyberte šablonu; nadpisy ## na disku jsou pole.',
+  'Matrix': 'Matice',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Typovaná mřížka (SIPOC, FMEA, RACI, …). Vyberte šablonu; odvozené sloupce jako RPN se počítají a neukládají.',
+  'Regelkaart': 'Regulační diagram',
+  'Histogram': 'Histogram',
+  'Pareto': 'Pareto',
+  'Run chart': 'Průběhový diagram',
+  'Boxplot': 'Krabicový graf',
+  'Plakken uit klembord': 'Vložit ze schránky',
+  'Te weinig gegevens voor een regelkaart':
+      'Příliš málo dat pro regulační diagram',
+  'Te weinig gegevens voor een histogram': 'Příliš málo dat pro histogram',
+  'Te weinig gegevens voor een boxplot': 'Příliš málo dat pro krabicový graf',
+  'Procesverbetering': 'Zlepšování procesů',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefakty pro zlepšování procesů a projekty Lean Six Sigma (DMAIC, Kaizen, A3). Ve výchozím nastavení vypnuto. Modul je k dispozici; artefakty budou následovat v dalších krocích.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Modul zapnutý. Výpočetní jádro dostupné lokálně ({n} faktorů control chart). Typy snímků a šablony přibudou, jakmile budou hotové.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Tato prezentace obsahuje části modulu Zlepšování procesů. Zapněte modul, abyste je mohli upravovat.',
   'Online media staat uit — aanzetten': 'Online média jsou vypnutá — zapnout',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} obsahuje spustitelný obsah a nebude importován.',

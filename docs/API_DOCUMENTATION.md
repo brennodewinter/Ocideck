@@ -60,12 +60,14 @@ Two of those fields exist **only while rendering** and never reach a saved file:
 rich-text body a copy draws. Neither is read back by the parser and neither is
 carried over by `Slide.duplicate`; see ARCHITECTURE § *Render-time pagination*.
 
-`SlideType` (24 values): `title, section, bullets, twoBullets, bulletsImage,
+`SlideType` (29 values): `title, section, bullets, twoBullets, bulletsImage,
 twoImages, image, video, quote, table, freeMarkdown, code, chart, cockpit,
 question, timeline, scorecard, assets, discoveries, finding, findingsSummary,
-checklist, scopeMatrix, signOff`.
-The last seven — from `assets` onward — are the informatieveiligheid
-(pentest-reporting) layouts, hidden until the module is enabled. Note the
+checklist, scopeMatrix, signOff, matrix, canvas, tree, flow, phaseGate`.
+The informatieveiligheid (pentest-reporting) layouts run from `assets` through
+`signOff`, hidden until that module is enabled. `matrix`, `canvas`, `tree`,
+`flow` and `phaseGate`
+belong to the optional Procesverbetering module (same authoring gate). Note the
 Marp `_class` token stored in Markdown can differ from the enum name (e.g. the
 `split` class maps to `SlideType.bulletsImage`).
 

@@ -16,7 +16,11 @@ String _color(ChartSpec spec, int i, ThemeProfile? theme) {
   return chartSeriesColor(series, i);
 }
 
-String _chartSvg(ChartSpec spec, ThemeProfile? theme) {
+String _chartSvg(
+  ChartSpec spec,
+  ThemeProfile? theme, {
+  ImprovementY01Metric y01 = ImprovementY01Metric.empty,
+}) {
   if (!spec.hasInlineData) {
     return '<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg"></svg>';
   }
@@ -76,13 +80,23 @@ String _chartSvg(ChartSpec spec, ThemeProfile? theme) {
       _waterfallSvg(b, spec, plotTop, theme);
     case ChartType.heatmap:
       _heatmapSvg(b, spec, plotTop, theme, textColor);
+    case ChartType.controlChart:
+    case ChartType.histogram:
+    case ChartType.pareto:
+    case ChartType.runChart:
+    case ChartType.boxPlot:
+    case ChartType.probabilityPlot:
+    case ChartType.mainEffects:
+    case ChartType.interaction:
+      _improvementChartSvg(b, spec, plotTop, theme, textColor, y01: y01);
   }
   // Pie/donut list their slices; heatmap and waterfall carry their own key
   // (colour scale / a single series), so they get no series legend.
   if (spec.isPieLike) {
     _pieLegendSvg(b, spec, textColor);
   } else if (spec.type != ChartType.heatmap &&
-      spec.type != ChartType.waterfall) {
+      spec.type != ChartType.waterfall &&
+      !chartTypeRequiresProcesverbetering(spec.type)) {
     _legendSvg(b, spec, theme, textColor);
   }
   b.write('</svg>');
@@ -415,4 +429,265 @@ void _lineSvg(
     }
   }
   _boundLinesSvg(b, spec, left, top, right, bottom, maxY, minY);
+}
+
+/// Compact SVG for Procesverbetering chart types. Limits/Cpk are derived here
+/// and never read from the stored block.
+void _improvementChartSvg(
+  StringBuffer b,
+  ChartSpec spec,
+  double top,
+  ThemeProfile? theme,
+  String textColor, {
+  ImprovementY01Metric y01 = ImprovementY01Metric.empty,
+}) {
+  final accent = theme?.accentColor ?? '#2563EB';
+  const left = 60.0;
+  const right = 760.0;
+  final bottom = 400.0;
+  final plotH = bottom - top;
+
+  void polyline(List<double> ys, String stroke, {List<int> mark = const []}) {
+    if (ys.isEmpty) return;
+    final minY = ys.reduce(math.min);
+    final maxY = ys.reduce(math.max);
+    final span = (maxY - minY).abs() < 1e-9 ? 1.0 : maxY - minY;
+    double xOf(int i) =>
+        left +
+        (ys.length <= 1
+            ? (right - left) / 2
+            : i * (right - left) / (ys.length - 1));
+    double yOf(double v) => bottom - ((v - minY) / span) * plotH;
+    final pts = [
+      for (var i = 0; i < ys.length; i++) '${xOf(i)},${yOf(ys[i])}',
+    ].join(' ');
+    b.write(
+      '<polyline points="$pts" fill="none" stroke="$stroke" '
+      'stroke-width="3" stroke-linejoin="round"/>',
+    );
+    for (var i = 0; i < ys.length; i++) {
+      final r = mark.contains(i) ? 6 : 4;
+      final fill = mark.contains(i) ? '#DC2626' : stroke;
+      b.write(
+        '<circle cx="${xOf(i)}" cy="${yOf(ys[i])}" r="$r" fill="$fill"/>',
+      );
+    }
+  }
+
+  switch (spec.type) {
+    case ChartType.controlChart:
+      final view = deriveIndividualsChart(spec);
+      if (view == null) return;
+      polyline(view.values, accent, mark: view.outOfControl.toList());
+      b.write(
+        '<text x="$left" y="${top - 8}" font-size="12" fill="$textColor">'
+        'UCL ${view.ucl.toStringAsFixed(2)} · CL ${view.center.toStringAsFixed(2)} · '
+        'LCL ${view.lcl.toStringAsFixed(2)}</text>',
+      );
+    case ChartType.runChart:
+      final values = chartPrimarySample(spec);
+      if (values.length < 2) return;
+      polyline(values, accent);
+    case ChartType.histogram:
+      _histogramImprovementSvg(
+        b,
+        spec,
+        y01: y01,
+        accent: accent,
+        textColor: textColor,
+        left: left,
+        right: right,
+        top: top,
+        bottom: bottom,
+        plotH: plotH,
+      );
+    case ChartType.pareto:
+      final view = derivePareto(spec);
+      if (view == null) return;
+      final maxV = view.values
+          .fold<double>(0, math.max)
+          .clamp(1e-9, double.infinity);
+      final n = view.values.length;
+      final barW = (right - left) / n;
+      for (var i = 0; i < n; i++) {
+        final h = (view.values[i] / maxV) * plotH;
+        final fill = i < view.vitalFewCount ? accent : '#93C5FD';
+        b.write(
+          '<rect x="${left + i * barW + 2}" y="${bottom - h}" '
+          'width="${barW - 4}" height="$h" fill="$fill" rx="2"/>',
+        );
+      }
+    case ChartType.boxPlot:
+      final view = deriveBoxPlot(spec);
+      if (view == null) return;
+      b.write(
+        '<text x="$left" y="${top + 20}" font-size="14" fill="$textColor">'
+        '${view.boxes.length} box(es)</text>',
+      );
+    case ChartType.probabilityPlot:
+      final view = deriveProbabilityPlot(spec);
+      if (view == null) return;
+      final xs = view.theoreticalQuantiles;
+      final ys = view.sortedValues;
+      final minX = xs.reduce(math.min);
+      final maxX = xs.reduce(math.max);
+      final minY = ys.reduce(math.min);
+      final maxY = ys.reduce(math.max);
+      final spanX = (maxX - minX).abs() < 1e-9 ? 1.0 : maxX - minX;
+      final spanY = (maxY - minY).abs() < 1e-9 ? 1.0 : maxY - minY;
+      double xOf(double v) => left + ((v - minX) / spanX) * (right - left);
+      double yOf(double v) => bottom - ((v - minY) / spanY) * plotH;
+      for (var i = 0; i < xs.length; i++) {
+        b.write(
+          '<circle cx="${xOf(xs[i])}" cy="${yOf(ys[i])}" r="4" fill="$accent"/>',
+        );
+      }
+      if (view.normalityPValue != null) {
+        b.write(
+          '<text x="$left" y="${top - 8}" font-size="12" fill="$textColor">'
+          'AD p=${view.normalityPValue!.toStringAsFixed(2)}</text>',
+        );
+      }
+    case ChartType.mainEffects:
+      final mainFx = deriveMainEffects(spec);
+      if (mainFx == null) return;
+      var meMinY = mainFx.grandMean;
+      var meMaxY = mainFx.grandMean;
+      for (final line in mainFx.lines) {
+        meMinY = math.min(meMinY, math.min(line.low, line.high));
+        meMaxY = math.max(meMaxY, math.max(line.low, line.high));
+      }
+      final meSpan = (meMaxY - meMinY).abs() < 1e-9 ? 1.0 : meMaxY - meMinY;
+      meMinY -= meSpan * 0.1;
+      meMaxY += meSpan * 0.1;
+      final meYSpan = meMaxY - meMinY;
+      double meYOf(double v) => bottom - ((v - meMinY) / meYSpan) * plotH;
+      b.write(
+        '<line x1="$left" y1="${meYOf(mainFx.grandMean)}" x2="$right" '
+        'y2="${meYOf(mainFx.grandMean)}" stroke="$textColor" stroke-opacity="0.25"/>',
+      );
+      final meSlot = (right - left) / mainFx.lines.length;
+      for (var i = 0; i < mainFx.lines.length; i++) {
+        final line = mainFx.lines[i];
+        final cx = left + (i + 0.5) * meSlot;
+        final xLow = cx - meSlot * 0.18;
+        final xHigh = cx + meSlot * 0.18;
+        final stroke = chartColorPalette[i % chartColorPalette.length];
+        b.write(
+          '<line x1="$xLow" y1="${meYOf(line.low)}" x2="$xHigh" '
+          'y2="${meYOf(line.high)}" stroke="$stroke" stroke-width="3"/>',
+        );
+        b.write(
+          '<circle cx="$xLow" cy="${meYOf(line.low)}" r="4" fill="$stroke"/>',
+        );
+        b.write(
+          '<circle cx="$xHigh" cy="${meYOf(line.high)}" r="4" fill="$stroke"/>',
+        );
+        b.write(
+          '<text x="${cx - 12}" y="${bottom + 16}" font-size="11" '
+          'fill="$textColor">${_esc(line.label)}</text>',
+        );
+      }
+    case ChartType.interaction:
+      final inter = deriveInteraction(spec);
+      if (inter == null) return;
+      var ixMinY = double.infinity;
+      var ixMaxY = double.negativeInfinity;
+      for (final panel in inter.panels) {
+        for (final line in panel.lines) {
+          ixMinY = math.min(
+            ixMinY,
+            math.min(line.atFactorLow, line.atFactorHigh),
+          );
+          ixMaxY = math.max(
+            ixMaxY,
+            math.max(line.atFactorLow, line.atFactorHigh),
+          );
+        }
+      }
+      if (!ixMinY.isFinite) return;
+      final ixSpan = (ixMaxY - ixMinY).abs() < 1e-9 ? 1.0 : ixMaxY - ixMinY;
+      ixMinY -= ixSpan * 0.1;
+      ixMaxY += ixSpan * 0.1;
+      final ixYSpan = ixMaxY - ixMinY;
+      double ixYOf(double v) => bottom - ((v - ixMinY) / ixYSpan) * plotH;
+      final ixSlot = (right - left) / inter.panels.length;
+      for (var pi = 0; pi < inter.panels.length; pi++) {
+        final panel = inter.panels[pi];
+        final cx = left + (pi + 0.5) * ixSlot;
+        final xLow = cx - ixSlot * 0.18;
+        final xHigh = cx + ixSlot * 0.18;
+        for (var li = 0; li < panel.lines.length; li++) {
+          final line = panel.lines[li];
+          final stroke = li == 0
+              ? accent
+              : chartColorPalette[(li + 1) % chartColorPalette.length];
+          b.write(
+            '<line x1="$xLow" y1="${ixYOf(line.atFactorLow)}" x2="$xHigh" '
+            'y2="${ixYOf(line.atFactorHigh)}" stroke="$stroke" stroke-width="3"/>',
+          );
+        }
+        b.write(
+          '<text x="${cx - 16}" y="${bottom + 14}" font-size="10" '
+          'fill="$textColor">${_esc(panel.label)}</text>',
+        );
+      }
+    default:
+      break;
+  }
+}
+
+/// Histogram bars plus Y-01/spec limit lines and Cpk label for HTML export.
+void _histogramImprovementSvg(
+  StringBuffer b,
+  ChartSpec spec, {
+  required ImprovementY01Metric y01,
+  required String accent,
+  required String textColor,
+  required double left,
+  required double right,
+  required double top,
+  required double bottom,
+  required double plotH,
+}) {
+  final view = deriveHistogram(spec, y01: y01);
+  if (view == null) return;
+  final maxC = view.counts.fold<int>(0, math.max).clamp(1, 1 << 30);
+  final n = view.counts.length;
+  final barW = (right - left) / n;
+  for (var i = 0; i < n; i++) {
+    final h = (view.counts[i] / maxC) * plotH;
+    b.write(
+      '<rect x="${left + i * barW + 1}" y="${bottom - h}" '
+      'width="${barW - 2}" height="$h" fill="$accent" rx="2"/>',
+    );
+  }
+  final limits = resolveChartSpecLimits(
+    yRef: spec.yRef,
+    localUsl: spec.usl,
+    localLsl: spec.lsl,
+    localProcessTarget: spec.processTarget,
+    y01: y01,
+  );
+  void specLine(double? v) {
+    if (v == null || view.edges.length < 2) return;
+    final minX = view.edges.first;
+    final maxX = view.edges.last;
+    final span = (maxX - minX).abs() < 1e-9 ? 1.0 : maxX - minX;
+    final x = left + ((v - minX) / span) * (right - left);
+    if (x < left || x > right) return;
+    b.write(
+      '<line x1="$x" y1="$top" x2="$x" y2="$bottom" '
+      'stroke="#DC2626" stroke-width="1.5"/>',
+    );
+  }
+
+  specLine(limits.lsl);
+  specLine(limits.usl);
+  if (view.cpk != null) {
+    b.write(
+      '<text x="$left" y="${top - 8}" font-size="12" fill="$textColor">'
+      'Cpk ${view.cpk!.toStringAsFixed(2)}</text>',
+    );
+  }
 }

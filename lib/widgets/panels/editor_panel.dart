@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../platform/platform_features.dart';
 import '../../models/deck.dart';
+import '../../models/improvement_y01.dart';
 import '../../models/display_window_spec.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/findings_summary_spec.dart';
@@ -18,6 +19,7 @@ import '../../state/editor_provider.dart';
 import '../../models/chart.dart';
 import '../../services/display_window_service.dart';
 import '../../state/info_safety_provider.dart';
+import '../../state/procesverbetering_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
@@ -60,9 +62,10 @@ class EditorPanel extends ConsumerWidget {
     void update(Slide updated) => deckNotifier.updateSlide(idx, updated);
 
     final settings = ref.watch(settingsProvider);
-    // Gate de informatieveiligheid-slidetypes in de TYPE-kiezer net als in
-    // 'Slide toevoegen', zodat beide plekken exact dezelfde types aanbieden.
+    // Gate module-slidetypes in the TYPE picker the same way as 'Slide
+    // toevoegen', so both places offer exactly the same types.
     final revealed = ref.watch(infoSafetyRevealProvider);
+    final revealProcesverbetering = ref.watch(procesverbeteringRevealProvider);
 
     // Zoekpaden voor de afbeeldingencarousel: projectmap eerst, dan alle
     // bibliotheken als (recursief gescande) zoekwortels.
@@ -91,6 +94,7 @@ class EditorPanel extends ConsumerWidget {
             activeProfile: deck.themeProfile,
             defaultProfile: settings.themeProfile,
             revealInfoSafety: revealed,
+            revealProcesverbetering: revealProcesverbetering,
             onTypeChanged: (newType) {
               if (newType == slide.type) return;
               update(_convertSlideType(slide, newType));
@@ -131,6 +135,7 @@ class EditorPanel extends ConsumerWidget {
                   deckResolvedCount: slide.type == SlideType.findingsSummary
                       ? deckRetestResolvedCount(deck.slides)
                       : 0,
+                  deckY01: deck.improvementY01Metric,
                   nestedInScrollView: true,
                   onSplitVideo: (atMs) {
                     deckNotifier.splitVideoSlide(idx, atMs);
@@ -334,6 +339,7 @@ class EditorPanel extends ConsumerWidget {
     VoidCallback? onSplitChapters,
     List<Cvss4Severity> deckFindingSeverities = const [],
     int deckResolvedCount = 0,
+    ImprovementY01Metric deckY01 = ImprovementY01Metric.empty,
   }) {
     return slideEditorBuilders[slide.type]!(
       SlideEditorContext(
@@ -351,6 +357,7 @@ class EditorPanel extends ConsumerWidget {
         onSplitChapters: onSplitChapters,
         deckFindingSeverities: deckFindingSeverities,
         deckResolvedCount: deckResolvedCount,
+        deckY01: deckY01,
       ),
     );
   }
@@ -384,4 +391,9 @@ const Map<SlideType, IconData> slideTypeIcons = {
   SlideType.checklist: Icons.checklist,
   SlideType.scopeMatrix: Icons.grid_on_outlined,
   SlideType.signOff: Icons.draw_outlined,
+  SlideType.matrix: Icons.grid_view_outlined,
+  SlideType.canvas: Icons.dashboard_outlined,
+  SlideType.tree: Icons.account_tree_outlined,
+  SlideType.flow: Icons.alt_route,
+  SlideType.phaseGate: Icons.door_front_door_outlined,
 };

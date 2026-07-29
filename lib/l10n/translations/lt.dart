@@ -1901,6 +1901,47 @@ const _dutchSourceAddLt = <String, String>{
   'organisaties geselecteerd': 'atrinktos organizacijos',
   'rapportages gebruikt': 'panaudotos ataskaitos',
   'systemen': 'sistemos',
+  'Nog geen specificatielimiet': 'Dar nėra specifikacijos ribos',
+  'USL (bovengrens)': 'USL (viršutinė riba)',
+  'LSL (ondergrens)': 'LSL (apatinė riba)',
+  'Optionele Y-01-velden': 'Pasirenkami Y-01 laukai',
+  'Procesdoel (target)': 'Proceso tikslas (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Y-01 specifikacijos ribos (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Šis deck turi Y-01 ribas. Įjunkite jungiklį aukščiau, kad jas naudotumėte vietoj vietinių reikšmių.',
+  'USL (bovengrens, optioneel)': 'USL (viršutinė riba, pasirenkama)',
+  'LSL (ondergrens, optioneel)': 'LSL (apatinė riba, pasirenkama)',
+  'Procesdoel (optioneel)': 'Proceso tikslas (pasirenkama)',
+  'Fasepoort': 'Fazės vartai',
+  'Berekenen': 'Calculate',
+  'Gegevens': 'Data',
+  'Hellingscoëfficiënt': 'Slope',
+  'Hypothesetoets': 'Hypothesis test',
+  'Hypothesetoets…': 'Hypothesis test…',
+  'Hypothetisch gemiddelde': 'Hypothesized mean',
+  'Lineaire regressie': 'Linear regression',
+  'Regressie…': 'Regression…',
+  'Meetdata': 'Measurement data',
+  'Toets': 'Test',
+  'Tolerantie (optioneel)': 'Tolerance (optional)',
+  'Eénsteeks t-toets': 'One-sample t-test',
+  'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Vienas skaičių stulpelis (bent 2 stebėjimai).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Du stulpeliai, atskirti tuščia eilute (bent 2 grupei).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Kelios grupės, kiekviena grupė stulpelis, atskirtos tuščia eilute (bent 2 grupės, 2 stebėjimai grupei).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Įklijuokite Part, Operator ir Value (tabuliavimo ženklas arba kablelis). Kartokite eilutes pakartojimams. Bent 2 parts, 2 operatoriai, 2 matavimai langeliui.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Įklijuokite X ir Y (vienas skaičius eilutėje). Bent 3 poros; variklis atsisako, kai stebėjimų per mažai.',
+  'Part × Operator interaction pooled into repeatability':
+      'Part × Operator sąveika sujungta su pakartojamumu',
+  'Part × Operator interaction kept separate':
+      'Part × Operator sąveika palaikoma atskirai',
+  'Te weinig gegevens voor een probability plot':
+      'Per mažai duomenų tikimybių grafikui',
   'Met dank aan': 'Su padėka',
   'Fix alle problemen': 'Taisyti visas problemas',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1977,6 +2018,80 @@ const _dutchSourceAddLt = <String, String>{
   'kon niet worden gelezen en is overgeslagen':
       'nepavyko nuskaityti ir praleista',
   'ontbrak in het bestand en is overgeslagen': 'trūko faile ir praleista',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Nepakanka duomenų pagrindinių efektų grafikui',
+  'Te weinig gegevens voor een interactieplot':
+      'Nepakanka duomenų sąveikos grafikui',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Sukuria projektavimo lentelę su koduotais veiksniais (−1/+1) ir tuščiu Y stulpeliu tinklelyje.',
+  'Aantal factoren': 'Anzahl Faktoren',
+  'Volledig factorial (2^k)': 'Vollständiges faktorielles Design (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde':
+      'Läufe in standardmäßiger Yates-Reihenfolge',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Viena serija veiksniui su koduotais lygiais −1 ir +1; paskutinė serija yra atsakas (Y). Eilutės yra eksperimentiniai paleidimai.',
+  'Golden-thread-id': 'Golden thread id',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'kur nors minimas, bet nėra medžio skaidlėje — apibrėžkite jį CTQ ar Ishikawa medyje.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'yra medžio skaidlėje, bet niekur kitur nenaudojamas — susiekite jį su matrica, srautu ar kita skaidle.',
+  'Nieuw verbeteringsproject': 'Naujas tobulinimo projektas',
+  'Kader': 'Sistema',
+  'Projecttitel': 'Projekto pavadinimas',
+  'Primaire Y-metriek (Y-01)': 'Pirminė Y metrika (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Pavyzdžiui: order intake trukmė darbo dienomis',
+  'Project starten': 'Pradėti projektą',
+  'Procesverbetering: DMAIC-project': 'Procesų tobulinimas: DMAIC projektas',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'DMAIC skeletas su charter, CTQ medžiu (Y-01), SIPOC ir fazių skyriais.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Fazės vartų checklist: patvirtinkite scope, suinteresuotąsias šalis ir go/no-go prieš pereinant į kitą fazę.',
+  'Stroom': 'Srautas',
+  'Zwembanen': 'Takai',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Proceso srautas, takai ar VSM. Žingsniai kaip pavadinimas :: rūšis :: pt=…; lt=…. Sumos (PCE, bottleneck) skaičiuojamos ir nesaugomos.',
+  'Boom': 'Medis',
+  'Visgraat': 'Žuvies kaulas',
+  'Lay-out': 'Išdėstymas',
+  'Punten': 'Taškai',
+  'Inspringen': 'Didinti įtrauką',
+  'Uitspringen': 'Sumažinti įtrauką',
+  'Punt toevoegen': 'Pridėti tašką',
+  'Punt verwijderen': 'Pašalinti tašką',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Medis ar žuvies kaulas (5× Why, CTQ, Ishikawa). Gylis tabais; pažymėkite priežastis kaip **X-01** inline.',
+  'Canvas': 'Drobė',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Regionų drobė (A3, chartija, SWOT, lenta). Pasirinkite šabloną; ## antraštės diske yra laukai.',
+  'Matrix': 'Matrica',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Tipizuotas tinklelis (SIPOC, FMEA, RACI, …). Pasirinkite šabloną; išvestiniai stulpeliai, pvz. RPN, skaičiuojami ir nesaugomi.',
+  'Regelkaart': 'Kontrolinė kortelė',
+  'Histogram': 'Histograma',
+  'Pareto': 'Pareto',
+  'Run chart': 'Eigos diagrama',
+  'Boxplot': 'Stačiakampė diagrama',
+  'Plakken uit klembord': 'Įklijuoti iš iškarpinės',
+  'Te weinig gegevens voor een regelkaart':
+      'Per mažai duomenų kontrolinei kortelei',
+  'Te weinig gegevens voor een histogram': 'Per mažai duomenų histogramai',
+  'Te weinig gegevens voor een boxplot':
+      'Per mažai duomenų stačiakampei diagramai',
+  'Procesverbetering': 'Procesų tobulinimas',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Artefaktai procesų tobulinimui ir Lean Six Sigma projektams (DMAIC, Kaizen, A3). Pagal numatytuosius nustatymus išjungta. Modulis pasiekiamas; artefaktai bus pridėti vėlesniais etapais.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Modulis įjungtas. Skaičiavimo branduolys pasiekiamas vietoje ({n} control chart faktoriai). Skaidrių tipai ir šablonai bus pridėti, kai bus paruošti.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Šioje pateiktyje yra Procesų tobulinimo modulio dalių. Įjunkite modulį, kad galėtumėte jas redaguoti.',
   'Online media staat uit — aanzetten': 'Internetinė medija išjungta — įjungti',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} turi vykdomojo turinio ir nebus importuotas.',

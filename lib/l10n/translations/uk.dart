@@ -1908,6 +1908,47 @@ const _dutchSourceAddUk = <String, String>{
   'organisaties geselecteerd': 'вибраних організацій',
   'rapportages gebruikt': 'використаних звітів',
   'systemen': 'системи',
+  'Nog geen specificatielimiet': 'Ще немає межі специфікації',
+  'USL (bovengrens)': 'USL (верхня межа)',
+  'LSL (ondergrens)': 'LSL (нижня межа)',
+  'Optionele Y-01-velden': 'Додаткові поля Y-01',
+  'Procesdoel (target)': 'Ціль процесу (target)',
+  'Specificatielimieten van Y-01 (deck)': 'Межі специфікації Y-01 (deck)',
+  'Dit deck heeft Y-01-limieten. Schakel bovenstaande schakelaar in om die te gebruiken in plaats van lokale waarden.':
+      'Цей deck має межі Y-01. Увімкніть перемикач вище, щоб використати їх замість локальних значень.',
+  'USL (bovengrens, optioneel)': 'USL (верхня межа, необов\'язково)',
+  'LSL (ondergrens, optioneel)': 'LSL (нижня межа, необов\'язково)',
+  'Procesdoel (optioneel)': 'Ціль процесу (необов\'язково)',
+  'Fasepoort': 'Фазовий шлюз',
+  'Berekenen': 'Обчислити',
+  'Gegevens': 'Дані',
+  'Hellingscoëfficiënt': 'Нахил',
+  'Hypothesetoets': 'Перевірка гіпотези',
+  'Hypothesetoets…': 'Перевірка гіпотези…',
+  'Hypothetisch gemiddelde': 'Гіпотетичне середнє',
+  'Lineaire regressie': 'Лінійна регресія',
+  'Regressie…': 'Регресія…',
+  'Meetdata': 'Дані вимірювань',
+  'Toets': 'Тест',
+  'Tolerantie (optioneel)': 'Допуск (необовʼязково)',
+  'Eénsteeks t-toets': 't-тест для однієї вибірки',
+  'Twee-steeks t-toets (Welch)': 't-тест для двох вибірок (Welch)',
+  'Één kolom getallen (minimaal 2 waarnemingen).':
+      'Один стовпець чисел (щонайменше 2 спостереження).',
+  'Twee kolommen gescheiden door een lege regel (minimaal 2 per groep).':
+      'Два стовпці, розділені порожнім рядком (щонайменше 2 на групу).',
+  'Meerdere groepen, elke groep een kolom, gescheiden door een lege regel (minimaal 2 groepen, 2 waarnemingen per groep).':
+      'Кілька груп, кожна група — стовпець, розділені порожнім рядком (щонайменше 2 групи, 2 спостереження на групу).',
+  'Plak Part, Operator en Value (tab of komma). Herhaal rijen voor replicaten. Minimaal 2 parts, 2 operators, 2 metingen per cel.':
+      'Вставте Part, Operator і Value (таб або кома). Повторіть рядки для реплікатів. Щонайменше 2 parts, 2 оператори, 2 вимірювання на комірку.',
+  'Plak X en Y (één getal per regel). Minimaal 3 paren; de engine weigert bij te weinig waarnemingen.':
+      'Вставте X і Y (одне число на рядок). Щонайменше 3 пари; рушій відхиляє занадто мало спостережень.',
+  'Part × Operator interaction pooled into repeatability':
+      'Взаємодію Part × Operator обʼєднано з повторюваністю',
+  'Part × Operator interaction kept separate':
+      'Взаємодію Part × Operator залишено окремо',
+  'Te weinig gegevens voor een probability plot':
+      'Замало даних для графіка ймовірності',
   'Met dank aan': 'З подякою',
   'Fix alle problemen': 'Виправити всі проблеми',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
@@ -1982,6 +2023,78 @@ const _dutchSourceAddUk = <String, String>{
   'kon niet worden gelezen en is overgeslagen':
       'не вдалося прочитати й пропущено',
   'ontbrak in het bestand en is overgeslagen': 'бракувало у файлі й пропущено',
+  'Hoofdeffecten': 'Main effects',
+  'Interactie': 'Interaction',
+  'Te weinig gegevens voor een hoofdeffectenplot':
+      'Замало даних для графіка головних ефектів',
+  'Te weinig gegevens voor een interactieplot':
+      'Замало даних для графіка взаємодії',
+  'DOE-proefopzet…': 'DOE design…',
+  'DOE-proefopzet': 'DOE design',
+  'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
+      'Створює таблицю плану з кодованими факторами (−1/+1) і порожнім стовпцем Y у сітці.',
+  'Aantal factoren': 'Кількість факторів',
+  'Volledig factorial (2^k)': 'Повний факторіальний (2^k)',
+  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
+  'Fractie p': 'Fraction p',
+  'runs in standaard Yates-volgorde': 'прогони в стандартному порядку Єйтса',
+  'In raster zetten': 'Fill grid',
+  'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
+      'Один ряд на фактор із кодованими рівнями −1 і +1; останній ряд — відгук (Y). Рядки — експериментальні прогони.',
+  'Golden-thread-id': 'Ідентифікатор golden thread',
+  'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
+      'згадується десь, але відсутній на слайді-дереві — визначте його на CTQ- або Ishikawa-дереві.',
+  'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
+      'є на слайді-дереві, але більше ніде не використовується — пов\'яжіть його з матрицею, потоком або іншим слайдом.',
+  'Nieuw verbeteringsproject': 'Новий проєкт удосконалення',
+  'Kader': 'Рамка',
+  'Projecttitel': 'Назва проєкту',
+  'Primaire Y-metriek (Y-01)': 'Основна Y-метрика (Y-01)',
+  'Bijvoorbeeld: doorlooptijd orderintake in werkdagen':
+      'Наприклад: час проходження order intake у робочих днях',
+  'Project starten': 'Розпочати проєкт',
+  'Procesverbetering: DMAIC-project': 'Удосконалення процесів: проєкт DMAIC',
+  'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.':
+      'Каркас DMAIC з charter, CTQ-деревом (Y-01), SIPOC і розділами фаз.',
+  'Een fasepoort-checklist: bevestig scope, stakeholders en go/no-go voordat je naar de volgende fase gaat.':
+      'Контрольний список фазових воріт: підтвердьте scope, stakeholders і go/no-go перед переходом до наступної фази.',
+  'Stroom': 'Потік',
+  'Zwembanen': 'Доріжки',
+  'Een processtroom, zwembanen of VSM. Stappen als titel :: soort :: pt=…; lt=…. Totalen (PCE, bottleneck) worden berekend, niet opgeslagen.':
+      'Потік процесу, доріжки або VSM. Кроки як заголовок :: тип :: pt=…; lt=…. Підсумки (PCE, bottleneck) обчислюються й не зберігаються.',
+  'Boom': 'Дерево',
+  'Visgraat': 'Риб\'яча кістка',
+  'Lay-out': 'Макет',
+  'Punten': 'Пункти',
+  'Inspringen': 'Відступ',
+  'Uitspringen': 'Зменшити відступ',
+  'Punt toevoegen': 'Додати пункт',
+  'Punt verwijderen': 'Видалити пункт',
+  'Een boom of visgraat (5× Why, CTQ, Ishikawa). Diepte met tabs; markeer oorzaken als **X-01** inline.':
+      'Дерево або риб\'яча кістка (5× Why, CTQ, Ishikawa). Глибина табами; позначайте причини як **X-01** inline.',
+  'Canvas': 'Полотно',
+  'Een canvas van regio\'s (A3, charter, SWOT, bord). Kies een sjabloon; de ##-koppen op schijf zijn de vakken.':
+      'Полотно регіонів (A3, charter, SWOT, дошка). Оберіть шаблон; заголовки ## на диску — це поля.',
+  'Matrix': 'Матриця',
+  'Een getypeerd raster (SIPOC, FMEA, RACI, …). Kies een sjabloon; afgeleide kolommen zoals RPN worden berekend en niet opgeslagen.':
+      'Типізована сітка (SIPOC, FMEA, RACI, …). Оберіть шаблон; похідні стовпці, такі як RPN, обчислюються й не зберігаються.',
+  'Regelkaart': 'Контрольна карта',
+  'Histogram': 'Гістограма',
+  'Pareto': 'Парето',
+  'Run chart': 'Графік послідовності',
+  'Boxplot': 'Діаграма розмаху',
+  'Plakken uit klembord': 'Вставити з буфера обміну',
+  'Te weinig gegevens voor een regelkaart':
+      'Замало даних для контрольної карти',
+  'Te weinig gegevens voor een histogram': 'Замало даних для гістограми',
+  'Te weinig gegevens voor een boxplot': 'Замало даних для діаграми розмаху',
+  'Procesverbetering': 'Удосконалення процесів',
+  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
+      'Артефакти для удосконалення процесів і проєктів Lean Six Sigma (DMAIC, Kaizen, A3). Вимкнено за замовчуванням. Модуль доступний; артефакти з\'являться на наступних етапах.',
+  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
+      'Модуль увімкнено. Обчислювальне ядро доступне локально ({n} факторів control chart). Типи слайдів і шаблони з\'являться, щойно будуть готові.',
+  'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
+      'Ця презентація містить елементи модуля «Удосконалення процесів». Увімкніть модуль, щоб редагувати їх.',
   'Online media staat uit — aanzetten': 'Онлайн-медіа вимкнено — увімкнути',
   '{bestand} bevat uitvoerbare inhoud en wordt niet geïmporteerd.':
       '{bestand} містить виконуваний вміст і не буде імпортований.',
