@@ -62,9 +62,9 @@ void main() {
   Finder appBarIcon(IconData icon) =>
       find.descendant(of: find.byType(AppBar), matching: find.byIcon(icon));
   Finder menuItemIcon(IconData icon) => find.descendant(
-        of: find.byWidgetPredicate((w) => w is PopupMenuItem),
-        matching: find.byIcon(icon),
-      );
+    of: find.byWidgetPredicate((w) => w is PopupMenuItem),
+    matching: find.byIcon(icon),
+  );
 
   Future<bool> settleAsync(
     WidgetTester tester,
@@ -114,13 +114,14 @@ void main() {
       find.textContaining(needle).evaluate().isNotEmpty;
 
   Deck deck() => Deck(
-        title: 'Kwartaalcijfers',
-        slides: [
-          Slide.create(SlideType.title).copyWith(title: 'Kwartaalcijfers'),
-          Slide.create(SlideType.bullets)
-              .copyWith(title: 'Bevindingen', bullets: const ['Een']),
-        ],
-      );
+    title: 'Kwartaalcijfers',
+    slides: [
+      Slide.create(SlideType.title).copyWith(title: 'Kwartaalcijfers'),
+      Slide.create(
+        SlideType.bullets,
+      ).copyWith(title: 'Bevindingen', bullets: const ['Een']),
+    ],
+  );
 
   Future<ProviderContainer> pumpShell(
     WidgetTester tester, {
@@ -153,12 +154,12 @@ void main() {
   }
 
   GitOrigin gitOrigin() => const GitOrigin(
-        connectionId: 'git-1',
-        config: config,
-        deckDir: 'decks/kwartaalcijfers',
-        baseSha: 'commit-main',
-        branch: 'main',
-      );
+    connectionId: 'git-1',
+    config: config,
+    deckDir: 'decks/kwartaalcijfers',
+    baseSha: 'commit-main',
+    branch: 'main',
+  );
 
   Future<void> openMenu(WidgetTester tester) async {
     await tester.tap(appBarIcon(Icons.more_vert));
@@ -193,7 +194,9 @@ void main() {
     expect(find.byType(AlertDialog), findsOneWidget);
   });
 
-  testWidgets('afbeeldingen in de repository opent het venster', (tester) async {
+  testWidgets('afbeeldingen in de repository opent het venster', (
+    tester,
+  ) async {
     await pumpShell(tester);
     await openMenu(tester);
 
@@ -207,8 +210,9 @@ void main() {
     expect(find.byType(AlertDialog), findsOneWidget);
   });
 
-  testWidgets('zonder git-herkomst staat de review-actie niet in het menu',
-      (tester) async {
+  testWidgets('zonder git-herkomst staat de review-actie niet in het menu', (
+    tester,
+  ) async {
     await pumpShell(tester);
     await openMenu(tester);
 
@@ -216,8 +220,9 @@ void main() {
     expect(menuItemIcon(Icons.merge_outlined), findsNothing);
   });
 
-  testWidgets('met git-herkomst op main staat review niet in het menu',
-      (tester) async {
+  testWidgets('met git-herkomst op main staat review niet in het menu', (
+    tester,
+  ) async {
     await pumpShell(tester, origin: gitOrigin());
     await openMenu(tester);
 
@@ -226,8 +231,9 @@ void main() {
     expect(menuItemIcon(Icons.merge_outlined), findsNothing);
   });
 
-  testWidgets('op een concept-branch staat de review-actie in het menu',
-      (tester) async {
+  testWidgets('op een concept-branch staat de review-actie in het menu', (
+    tester,
+  ) async {
     await pumpShell(
       tester,
       origin: const GitOrigin(
@@ -273,7 +279,9 @@ void main() {
     expect(find.text('Uitbrengen ter review'), findsNothing);
   });
 
-  testWidgets('merge-dialoog opent en toont de opruim-checkbox', (tester) async {
+  testWidgets('merge-dialoog opent en toont de opruim-checkbox', (
+    tester,
+  ) async {
     await pumpShell(
       tester,
       origin: const GitOrigin(
@@ -301,5 +309,4 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Concept mergen'), findsNothing);
   });
-
 }
