@@ -33,8 +33,42 @@ import 'support/temp_dir.dart';
 
 Uint8List _b(String s) => Uint8List.fromList(utf8.encode(s));
 
+/// Wat een git-subproces uit de omgeving mee moet krijgen om te kúnnen
+/// starten. Nodig omdat [debugSpawn] hieronder het milieu sluit
+/// (`includeParentEnvironment: false`, de kern van §10.2): op Windows faalt
+/// `CreateProcess` dan met "The parameter is incorrect" zonder SystemRoot en
+/// PATHEXT — dezelfde reden als bij `_smokeEnv` in git_cli_test (#926).
+const _erfelijkeOmgeving = [
+  'PATH',
+  'PATHEXT',
+  'SystemRoot',
+  'SYSTEMROOT',
+  'SystemDrive',
+  'COMSPEC',
+  'windir',
+  'TEMP',
+  'TMP',
+  'TMPDIR',
+  'HOME',
+];
+
+/// De git-aanroepen die een testgeval opbouwt: init, clone, commit, push.
+///
+/// Bewust via [debugSpawn] en niet via `Process.run`. Die laatste wacht
+/// onbegrensd tot de uitvoer-pijp sluit — en die sluit pas als élk proces dat
+/// hem geërfd heeft weg is. `clone` en `push` starten
+/// `git-upload-pack`/`git-receive-pack` als kleinkind; blijft er daar één van
+/// hangen, dan hangt deze hulp mee, en loopt het testgeval na drie minuten af
+/// zónder stack en zonder aanwijzing waar het bleef staan. Precies wat er op
+/// de Windows-CI gebeurde, elke draai bij een ánder geval — omdat vrijwel elke
+/// setUp hier langs `clone` en `push` komt.
+///
+/// `debugSpawn` is de gerepareerde vorm: die laat de pijp los als hij na twee
+/// seconden nog openstaat. De tijdslimiet hieronder is het tweede vangnet, voor
+/// een git die zélf niet meer terugkomt — ruim, want dit draait ook op een
+/// zwaarbelaste CI-machine, en een aflopende limiet moet iets betekenen.
 Future<void> _rawGit(List<String> args, String cwd) async {
-  final r = await Process.run(
+  final r = await debugSpawn(
     'git',
     [
       '-c',
@@ -47,12 +81,15 @@ Future<void> _rawGit(List<String> args, String cwd) async {
     ],
     workingDirectory: cwd,
     environment: {
+      for (final sleutel in _erfelijkeOmgeving)
+        sleutel: ?Platform.environment[sleutel],
       'GIT_TERMINAL_PROMPT': '0',
       'GIT_CONFIG_NOSYSTEM': '1',
-      'GIT_CONFIG_GLOBAL': '/dev/null',
+      'GIT_CONFIG_GLOBAL': Platform.isWindows ? 'NUL' : '/dev/null',
     },
+    timeout: const Duration(seconds: 120),
   );
-  if (r.exitCode != 0) {
+  if (!r.ok) {
     throw StateError('git ${args.join(' ')} → ${r.stderr}');
   }
 }
