@@ -16,6 +16,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Een git-handeling kon blijven staan zonder ooit iets te melden. OciDeck las
+  de uitvoer van `git` tot de pijp sloot, en die sluit pas als élk proces dat
+  hem geërfd heeft weg is — git start er zelf een paar, zoals een credential
+  helper of `git-remote-https`. Bleef zo'n hulpproces na afloop nog even
+  hangen, dan wachtte de app daar zonder grens op: geen fout, geen resultaat,
+  en de eigen tijdslimiet was al vervallen omdat git zélf wel klaar was.
+  Voortaan wordt er na afloop nog kort op de pijp gewacht en gaat de app
+  daarna verder met de uitvoer die er is.
 - Het OpenKAT-managementrapport geeft bij een portfolio met meer dan één
   organisatie vroeg een tabel **Deze organisaties vragen aandacht**: transparant
   gerangschikt op kritieke bevindingen, hoge bevindingen en kwetsbare systemen.
@@ -298,6 +306,22 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De faalmails van de GitHub-spiegel kwamen van vier oorzaken, en drie ervan
+  waren tests die op de klok gokten.** Veertien draaien teruggelezen: de
+  Windows-leg viel bijna elke keer om, maar telkens op een ánder testgeval —
+  het patroon van een machine die traag is, niet van code die stuk is.
+  `openkat_module_test` wachtte met een vaste lus van 800 ms op een mapscan
+  (nu `pumpUntil`, dat op de uitkomst wacht in plaats van op de klok),
+  `mermaid_render_pipeline_test` met tweehonderd rondes van 5 ms op het laden
+  van de mermaid-bundel (nu een wandklokgrens die meteen afbreekt zodra de
+  pagina er is), en `miauw_end_to_end_test` — sjabloon parsen, verzegelen,
+  versleutelde zip bouwen — kreeg alleen op Windows meer dan de standaard
+  dertig seconden, dezelfde afweging als in `native_git_mirror_test` (#933).
+  De vierde was géén testfout maar een echte vastloper in de git-laag; die
+  staat hierboven onder Fixed. Tot slot: de twee gepinde scannerdownloads
+  (gitleaks, trufflehog) herkansen nu bij een netwerkhikje — de poort strandde
+  twee keer op een TLS-handshake, tien minuten werk verderop, zonder dat er
+  iets met de code mis was. De sha256-controle blijft onveranderd.
 - **Procesverbetering: artefact-sjablonen als data, en Y-01-limieten die
   meereizen.** Starters (SIPOC, FMEA, A3, 5× Why, …) staan als Markdown onder
   `assets/improvement/templates/`; `tool/build_improvement_templates.dart`
