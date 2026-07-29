@@ -30,7 +30,7 @@
 - [What the browser version cannot do](#what-the-browser-version-cannot-do)
 - [Theming and language](#theming-and-language)
 
-*(Added 2026-07-22: this document is around 3,350 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not. Figure corrected 2026-07-24; it said 2,992, which was true when it was written.)*
+*(Added 2026-07-22: this document is around 3,800 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not. Figure corrected 2026-07-24 and again 2026-07-30; it said 2,992 and then 3,350, each true when written.)*
 
 OciDeck builds [Marp](https://marp.app/) presentations through a structured,
 slide-by-slide editor. You compose typed slides, preview them live, present them
@@ -58,26 +58,43 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
   look.
 - **Start from a template**: the new-presentation dialog offers a searchable
   catalogue of starting points — from an empty deck to shift briefings, security
-  and privacy work decks, crisis and flight-prep sessions, **role-specific
-  handover and safety** templates, and **conversation-preparation** templates.
-  The role-specific set follows recognised methods from safety-critical work:
-  medical and care handovers (SBAR, (A)MIST trauma, the WHO surgical safety
-  check, nursing shift handover and the multidisciplinary team meeting), the
-  onboarding and HR lifecycle (a 30-60-90 onboarding plan, first-day induction,
-  buddy/mentor plan and offboarding), aviation (the IMSAFE fitness check, a
-  crew/departure briefing and a just-culture occurrence report), physical
-  security and workplace safety (a toolbox/LMRA check, event and crowd-safety
-  briefing, evacuation drill and permit to work), emergency services (the
-  METHANE major-incident report and GRIP escalation) and the maritime bridge
-  passage briefing. The **conversation-preparation** templates help you prepare
-  for a difficult or
-  important talk (job interview, performance review, salary negotiation,
-  resolving a conflict, giving or receiving criticism, delivering bad news,
-  setting boundaries, a strained relationship, client and sales conversations,
-  supplier negotiations, a pitch, or getting buy-in in a meeting). The
-  high-stakes, emotional ones weave in the *Crucial Conversations* method; each
-  comes with fill-in preparation tables and a progress checklist. Everything is
-  placeholder text you overwrite with your own content.
+  and privacy work decks, crisis and flight-prep sessions, **decision and
+  budget** decks, **role-specific handover and safety** templates, **sector**
+  templates for the public sector, education and associations, and
+  **conversation-preparation** templates. The decision-and-budget set carries
+  the meetings where money and go/no-go are on the table: a business case /
+  investment proposal, a budget presentation, a decision-making meeting with a
+  decision list and owned actions, a sprint review/demo, and a threat-modeling
+  session (scope, data flows, trust boundaries and threats per STRIDE
+  category). The role-specific set follows recognised methods from
+  safety-critical work: medical, care and social-domain conversations (SBAR,
+  (A)MIST trauma, the WHO surgical safety check, nursing shift handover, the
+  multidisciplinary team meeting, a family conversation about care
+  and caregiving, and an anonymised social-domain case review), the onboarding
+  and HR lifecycle (a 30-60-90 onboarding plan, first-day induction,
+  buddy/mentor plan, offboarding, and a works-council advice request), aviation
+  (the IMSAFE fitness check, a crew/departure briefing, a passenger briefing
+  for small aircraft, a flight debrief with a TEM look-back, and a just-culture
+  occurrence report), physical security and workplace safety (a toolbox/LMRA
+  check, event and crowd-safety briefing, evacuation drill and permit to work),
+  emergency services (the METHANE major-incident report, GRIP escalation, a
+  fire-service briefing for deployments and exercises, and an after-action
+  review/debrief) and the maritime bridge passage briefing. The sector
+  templates cover a council/executive proposal and a residents' participation
+  meeting for the public sector, a parents' information evening and an
+  internship presentation for education, and a general members' assembly (ALV)
+  for associations. The **conversation-preparation** family opens with two
+  generic starting points — preparing any conversation you want to get right,
+  and preparing a *crucial* one (high stakes, strong emotions, following the
+  *Crucial Conversations* method) — next to the scenario-specific templates
+  (job interview, performance review, salary negotiation, asking for more
+  responsibility, raising a workplace issue, resolving a conflict, giving or
+  receiving criticism, delivering bad news, setting boundaries, a strained
+  relationship, client and sales conversations, supplier negotiations, a pitch,
+  or getting buy-in in a meeting). The
+  high-stakes, emotional scenarios weave in the same *Crucial Conversations*
+  method; each comes with fill-in preparation tables and a progress checklist.
+  Everything is placeholder text you overwrite with your own content.
 
   **The example slides in a template exist in Dutch and English.** A template's
   content is a bundled Markdown document per language, read by the same parser
