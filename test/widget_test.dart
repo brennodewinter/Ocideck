@@ -27,7 +27,9 @@ void main() {
   testWidgets('Welcome screen exposes settings', (WidgetTester tester) async {
     await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
     await tester.pumpAndSettle();
-    expect(find.byIcon(Icons.settings_outlined), findsOneWidget);
+    // Sinds de stille voettekst (geen knopvorm, geen icoon meer) is de tekst
+    // zelf de vindplaats, niet een icoon ernaast.
+    expect(find.text('Instellingen'), findsOneWidget);
   });
 
   testWidgets('het openscherm zegt wat dit is en waar de handleiding staat', (

@@ -29,24 +29,47 @@ class _WelcomeScreen extends ConsumerWidget {
             children: [
               // ── Midden: logo + knoppen ─────────────────────────────────
               Expanded(
-                // Scroll-safe: bij sterk vergrote interfacetekst (tot 200%)
-                // passen logo + knoppen niet meer op de hoogte; dan scrollt
-                // het in plaats van te overlopen. Bij genoeg ruimte blijft
-                // het gecentreerd.
-                child: LayoutBuilder(
-                  builder: (context, constraints) => SingleChildScrollView(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: constraints.maxHeight,
-                      ),
-                      child: Align(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: _startColumn(context, ref, l10n, palette),
+                // Twee lagen: de knoppenkolom (kan scrollen) en, los daarvan,
+                // een vaste voettekst onderaan. Stonden eerst ín de kolom,
+                // vlak onder de knoppen — zelfde formaat, zelfde blauw, dus
+                // las als een zesde en zevende "manier om te beginnen" in
+                // plaats van de bijzaak die het is. Nu een eigen laagje: qua
+                // afstand én stijl duidelijk een andere categorie.
+                child: Stack(
+                  children: [
+                    // Scroll-safe: bij sterk vergrote interfacetekst (tot
+                    // 200%) passen logo + knoppen niet meer op de hoogte; dan
+                    // scrollt het in plaats van te overlopen. Bij genoeg
+                    // ruimte blijft het gecentreerd.
+                    LayoutBuilder(
+                      builder: (context, constraints) => SingleChildScrollView(
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight,
+                          ),
+                          child: Align(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: _startColumn(
+                                context,
+                                ref,
+                                l10n,
+                                palette,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom: 12,
+                      child: Center(
+                        child: _footerLinks(context, l10n, palette),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               // ── Rechts: recente bestanden ────────────────────────────────
@@ -222,36 +245,50 @@ class _WelcomeScreen extends ConsumerWidget {
           ),
         ),
       ],
-      const SizedBox(height: 8),
-      _footerLinks(context, l10n),
+      // Ruimte voor de vaste voettekst die los van deze kolom, onderaan het
+      // scherm hangt (zie build()) — zonder deze marge zou het laatste
+      // knop bij een klein venster of vergrote interfacetekst er onder
+      // kunnen scrollen.
+      const SizedBox(height: 40),
     ];
   }
 
   /// De twee tekstlinks onderaan: handleiding en instellingen.
   ///
-  /// Losse methode om [_startColumn] onder de lengtegrens te houden — en het
-  /// is een afzonderlijk laagje: dit zijn geen manieren om te beginnen.
+  /// Bewust stil: klein, gedempte kleur, geen knopvorm en geen icoon. Ze
+  /// stonden eerst als [TextButton.icon] vlak onder de knoppenkolom — zelfde
+  /// blauw, bijna dezelfde lettergrootte — en lazen daardoor als een zesde en
+  /// zevende "manier om te beginnen" in plaats van de bijzaak die het is. Hoe
+  /// meer opties er even zwaar ogen, hoe langer het kiezen duurt (Hick-Hyman);
+  /// een stille, losstaande voettekst laat de knoppenkolom weer als dé keuze
+  /// staan.
   ///
   /// De handleiding stond alleen achter Instellingen → Documentatie: drie
   /// klikken diep, precies daar waar iemand die nog niets weet niet gaat
   /// kijken.
-  Widget _footerLinks(BuildContext context, AppLocalizations l10n) {
+  Widget _footerLinks(
+    BuildContext context,
+    AppLocalizations l10n,
+    AppPalette palette,
+  ) {
+    final style = TextStyle(fontSize: 11.5, color: palette.mutedText);
     return Wrap(
       alignment: WrapAlignment.center,
+      spacing: 20,
       children: [
-        TextButton.icon(
-          onPressed: () => DocumentReaderScreen.open(
+        _QuietLink(
+          label: l10n.d('Gebruikershandleiding'),
+          style: style,
+          onTap: () => DocumentReaderScreen.open(
             context,
             title: l10n.d('Gebruikershandleiding'),
             assetBase: 'docs/USER_GUIDE.md',
           ),
-          icon: const Icon(Icons.menu_book_outlined, size: 17),
-          label: Text(l10n.d('Gebruikershandleiding')),
         ),
-        TextButton.icon(
-          onPressed: () => SettingsDialog.show(context),
-          icon: const Icon(Icons.settings_outlined, size: 17),
-          label: Text(l10n.t('settings')),
+        _QuietLink(
+          label: l10n.t('settings'),
+          style: style,
+          onTap: () => SettingsDialog.show(context),
         ),
       ],
     );
@@ -374,6 +411,33 @@ class _VersionTag extends StatelessWidget {
             style: TextStyle(fontSize: 10.5, color: palette.mutedText),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// Eén tekstlinkje in de stille voettekst: geen knopvorm, geen icoon — de
+/// stijl van [style] (klein, gedempt) draagt het onderscheid met de echte
+/// knoppen erboven, niet padding of een rand.
+class _QuietLink extends StatelessWidget {
+  final String label;
+  final TextStyle style;
+  final VoidCallback onTap;
+
+  const _QuietLink({
+    required this.label,
+    required this.style,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(3),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+        child: Text(label, style: style),
       ),
     );
   }
