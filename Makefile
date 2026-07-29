@@ -189,8 +189,8 @@ coverage:
 coverage-per-file:
 	@echo "== OciDeck check: per-file coverage floor =="
 	@echo "Command: dart run tool/coverage_summary.dart --per-file-floor"
-	@echo "Covers: how many lib/ files run less than a fifth of their own lines — the worst case per file, which the overall average cannot show."
-	@echo "Failure means: minstens één lib/-bestand draait minder dan een vijfde van zijn eigen regels — schrijf er een test voor (of zet het met reden in uncoveredBaseline als het een platformhelft is)."
+	@echo "Covers: how many lib/ files run less than a third of their own lines — the worst case per file, which the overall average cannot show."
+	@echo "Failure means: minstens één lib/-bestand draait minder dan een derde van zijn eigen regels — schrijf er een test voor (of zet het met reden in uncoveredBaseline als het een platformhelft is)."
 	dart run tool/coverage_summary.dart --per-file-floor
 
 # Slide-renderer visual-regression goldens (test/golden/). Pixel- and
