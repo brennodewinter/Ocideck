@@ -253,7 +253,7 @@ const Set<String> uncoveredBaseline = {
 /// Zit een bestand hier echt niet zinnig te dekken, dan hoort het niet in een
 /// budget maar in [uncoveredBaseline] hierboven — en dat is een lijst met een
 /// reden per regel, geen teller.
-const int perFileFloorPercent = 20;
+const int perFileFloorPercent = 34;
 
 /// Translation data carries no logic; it is gated by the l10n tests instead.
 bool _isTranslationData(String path) => path.contains('lib/l10n/translations/');

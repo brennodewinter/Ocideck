@@ -1,9 +1,40 @@
 @TestOn('vm')
 library;
 
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/cve_transport.dart';
 import 'package:ocideck/services/cve_transport_io.dart';
+
+/// A real [HttpClient] wrapper that silently ignores `connectionFactory`
+/// (which [PinnedCveTransport] sets for SSRF pinning) and redirects `getUrl`
+/// to a local [HttpServer]. The SSRF guards in [PinnedCveTransport] still run
+/// against the original URI; only the actual socket is redirected.
+class _LocalRedirectClient implements HttpClient {
+  final HttpClient _real;
+  final String _host;
+  final int _port;
+
+  _LocalRedirectClient(this._real, this._host, this._port);
+
+  @override
+  set connectionFactory(_) {}
+
+  @override
+  set connectionTimeout(Duration? v) => _real.connectionTimeout = v;
+
+  @override
+  Future<HttpClientRequest> getUrl(Uri url) =>
+      _real.getUrl(url.replace(host: _host, port: _port, scheme: 'http'));
+
+  @override
+  void close({bool force = false}) => _real.close(force: force);
+
+  @override
+  dynamic noSuchMethod(Invocation i) => _real.noSuchMethod(i);
+}
+
 
 /// De SSRF-poort vóór de CVE-opzoeking. `network_sink_guard_test` bewijst dat
 /// dit bestand een netwerkuitgang *is* en dat de recepten erin staan; hier
@@ -84,5 +115,93 @@ void main() {
     // De reden is wat de aanroeper aan de gebruiker toont; een lege of
     // generieke tekst maakt elke melding hetzelfde.
     expect(const CveTransportException('host').toString(), contains('host'));
+  });
+
+  group('HTTP-pad', () {
+    late HttpServer server;
+    late HttpClient realClient;
+
+    setUp(() async {
+      server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+      realClient = HttpClient();
+    });
+
+    tearDown(() {
+      realClient.close(force: true);
+      server.close(force: true);
+    });
+
+    Future<String> fetch(String uri) => HttpOverrides.runZoned(
+          () => transport.getBody(Uri.parse(uri)),
+          createHttpClient: (_) =>
+              _LocalRedirectClient(realClient, '127.0.0.1', server.port),
+        );
+
+    test('200 OK levert de body als tekst', () async {
+      server.listen((req) {
+        req.response.statusCode = 200;
+        req.response.write('hello cve');
+        req.response.close();
+      });
+
+      // 8.8.8.8 is een publiek IP dat niet door NetGuard wordt geblokkeerd;
+      // de werkelijke verbinding gaat naar de lokale testserver.
+      expect(await fetch('http://8.8.8.8/cve'), 'hello cve');
+    });
+
+    test('non-200 wordt geweigerd met de statuscode in de reden', () async {
+      server.listen((req) {
+        req.response.statusCode = 404;
+        req.response.close();
+      });
+
+      await expectLater(
+        fetch('http://8.8.8.8/missing'),
+        throwsA(isA<CveTransportException>().having(
+          (e) => e.reason,
+          'reason',
+          contains('404'),
+        )),
+      );
+    });
+
+    test('redirects worden niet gevolgd (followRedirects = false)', () async {
+      server.listen((req) {
+        req.response.statusCode = 302;
+        req.response.headers.set('location', 'http://evil.invalid/');
+        req.response.close();
+      });
+
+      await expectLater(
+        fetch('http://8.8.8.8/redirect'),
+        throwsA(isA<CveTransportException>().having(
+          (e) => e.reason,
+          'reason',
+          contains('302'),
+        )),
+      );
+    });
+
+    test('body groter dan 2 MB wordt geweigerd', () async {
+      server.listen((req) {
+        req.response.statusCode = 200;
+        req.response.headers.contentType = ContentType.text;
+        // Stuur 3 MB aan data in stukken van 64 KB.
+        final chunk = List<int>.filled(64 * 1024, 0x41);
+        for (var i = 0; i < 48; i++) {
+          req.response.add(chunk);
+        }
+        req.response.close();
+      });
+
+      await expectLater(
+        fetch('http://8.8.8.8/huge'),
+        throwsA(isA<CveTransportException>().having(
+          (e) => e.reason,
+          'reason',
+          'too large',
+        )),
+      );
+    });
   });
 }
