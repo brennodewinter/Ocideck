@@ -1788,6 +1788,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Acest raport existent nu poate fi actualizat în siguranță. Creați raportul ca nou; deck-ul existent rămâne neschimbat.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Au fost găsite {reports} rapoarte pentru {organizations} organizații. Măsurătorile se desfășoară de la {firstDate} până la {lastDate}, inclusiv. Au fost omise {skipped} fișiere.',
   'Dubbel bestand overgeslagen': 'Fișier duplicat omis',

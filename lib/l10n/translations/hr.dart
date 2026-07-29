@@ -1777,6 +1777,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Ovo postojeće izvješće nije moguće sigurno ažurirati. Izradite izvješće kao novo; postojeći deck ostaje nepromijenjen.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Pronađeno je {reports} izvješća za {organizations} organizacija. Mjerenja obuhvaćaju razdoblje od {firstDate} do {lastDate} uključivo. Preskočeno je {skipped} datoteka.',
   'Dubbel bestand overgeslagen': 'Dvostruka datoteka preskočena',

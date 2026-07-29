@@ -1798,6 +1798,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Αυτή η υπάρχουσα αναφορά δεν μπορεί να ενημερωθεί με ασφάλεια. Δημιουργήστε την αναφορά ως νέα· το υπάρχον deck παραμένει αμετάβλητο.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Βρέθηκαν {reports} αναφορές για {organizations} οργανισμούς. Οι μετρήσεις εκτείνονται από {firstDate} έως και {lastDate}. Παραλείφθηκαν {skipped} αρχεία.',
   'Dubbel bestand overgeslagen': 'Το διπλό αρχείο παραλείφθηκε',

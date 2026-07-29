@@ -1762,6 +1762,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Seda olemasolevat aruannet ei saa turvaliselt ajakohastada. Looge aruanne uuena; olemasolev deck jääb muutmata.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Leiti {reports} aruannet {organizations} organisatsiooni kohta. Mõõtmised hõlmavad aega {firstDate} kuni {lastDate} kaasa arvatud. Vahele jäeti {skipped} faili.',
   'Dubbel bestand overgeslagen': 'Duplikaatfail jäeti vahele',

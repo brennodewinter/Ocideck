@@ -1773,6 +1773,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Tega obstoječega poročila ni mogoče varno posodobiti. Ustvarite poročilo kot novo; obstoječi deck ostane nespremenjen.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Najdenih je {reports} poročil za {organizations} organizacij. Meritve potekajo od {firstDate} do vključno {lastDate}. Preskočenih je bilo {skipped} datotek.',
   'Dubbel bestand overgeslagen': 'Podvojena datoteka preskočena',

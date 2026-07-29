@@ -726,6 +726,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Questo rapporto esistente non può essere aggiornato in sicurezza. Crea il rapporto come nuovo; il deck esistente rimane invariato.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Trovati {reports} rapporti per {organizations} organizzazioni. Le misurazioni vanno dal {firstDate} al {lastDate}. Sono stati saltati {skipped} file.',
   'Dubbel bestand overgeslagen': 'File duplicato saltato',

@@ -23,8 +23,11 @@ in Dutch, and it keeps growing on `main` between releases.
   zijn. De wizard toont alleen de invoer die voor die vraag nodig is en een
   voorvertoning op basis van de werkelijk gevonden rapportages. Een bestaand
   OpenKAT-rapport kan worden bijgewerkt of als nieuw rapport worden gemaakt;
-  bij bijwerken blijven handmatige dia's behouden. De route is niet aanwezig in
-  de webversie, omdat zij een lokale rapportagemap leest.
+  bij bijwerken blijven handmatige dia's en kopieën behouden. Een SHA-512 over
+  de canonieke dia-Markdown bewijst welk gegenereerd origineel veilig mag worden
+  vernieuwd of verwijderd; bij een legacydeck of een extern bewerkte kopie
+  stopt de update en biedt de wizard een nieuw rapport aan. De route is niet
+  aanwezig in de webversie, omdat zij een lokale rapportagemap leest.
 - De CVE-vraag is fail-closed: zij blijft niet beschikbaar zonder door de bron
   expliciet verklaarde betrouwbare CVE-verwijzingen. De huidige concrete
   OpenKAT-adapters verklaren die betrouwbaarheid niet, dus ook rapportages met

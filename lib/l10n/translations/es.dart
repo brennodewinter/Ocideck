@@ -727,6 +727,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Este informe existente no se puede actualizar de forma segura. Cree el informe como nuevo; el deck existente no se modifica.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Se encontraron {reports} informes para {organizations} organizaciones. Las mediciones abarcan desde {firstDate} hasta {lastDate}, ambos inclusive. Se omitieron {skipped} archivos.',
   'Dubbel bestand overgeslagen': 'Archivo duplicado omitido',

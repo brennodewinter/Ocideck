@@ -1789,8 +1789,9 @@ so the import does not ask for it every time. The import only reads that folder
 — nothing in it is changed or sent anywhere.
 
 Switching the module off later does not take the entry point away as long as a
-report folder is set: an existing OpenKAT deck stays updatable. What goes away
-is the tab and the menu item for someone who never imports anything.
+report folder is set: an existing OpenKAT deck can still be updated or safely
+recreated as a new report. What goes away is the tab and the menu item for
+someone who never imports anything.
 
 There are three ways to start the same desktop route: **Rapportages
 controleren…** in the Integrations tab, **OpenKAT-rapport maken…** on the
@@ -1821,6 +1822,10 @@ contains values that look like CVE IDs.
 With an OpenKAT report open, the wizard first asks whether to **update this
 report** or **make a new report**. Updating refreshes only generated OpenKAT
 views and keeps slides you added by hand; making a new report opens a new tab.
+OciDeck verifies the unchanged generated originals before replacing them. If a
+legacy deck or a slide copied and edited in another Markdown tool no longer
+proves which block is the generated original, the update stops and offers
+**Als nieuw rapport maken**; the existing deck remains unchanged.
 If building fails, the choices stay in place and the wizard offers **Opnieuw
 proberen**, **Keuzes wijzigen…**, and the import report instead of sending you
 back to the beginning.

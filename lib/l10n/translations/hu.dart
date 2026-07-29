@@ -1775,6 +1775,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Ez a meglévő jelentés nem frissíthető biztonságosan. Hozza létre a jelentést újként; a meglévő deck változatlan marad.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       '{reports} jelentés található {organizations} szervezethez. A mérések {firstDate} és {lastDate} közötti időszakot fedik le. {skipped} fájl kimaradt.',
   'Dubbel bestand overgeslagen': 'Duplikált fájl kihagyva',

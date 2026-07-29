@@ -147,6 +147,7 @@ class _OpenKatReportWizardState extends State<OpenKatReportWizard> {
                           child: OpenKatUpdateConfirmation(
                             controller: controller,
                             update: _build,
+                            createNew: () => _build(asNew: true),
                           ),
                         )
                       : _WizardBody(
@@ -464,7 +465,10 @@ class _Footer extends StatelessWidget {
                       : l10n.d('Annuleren'),
                 ),
               ),
-              if (sourceReady && review && controller.updating)
+              if (sourceReady &&
+                  review &&
+                  controller.updating &&
+                  !controller.unsafeUpdate)
                 OutlinedButton(
                   onPressed: controller.busy
                       ? null
@@ -477,7 +481,7 @@ class _Footer extends StatelessWidget {
                   onPressed: controller.busy || !controller.canContinue
                       ? null
                       : review
-                      ? () => onBuild(asNew: false)
+                      ? () => onBuild(asNew: controller.unsafeUpdate)
                       : controller.next,
                   icon:
                       controller.buildStatus ==
@@ -490,7 +494,9 @@ class _Footer extends StatelessWidget {
                       : Icon(review ? Icons.auto_awesome : Icons.arrow_forward),
                   label: Text(
                     review
-                        ? controller.buildError != null
+                        ? controller.unsafeUpdate
+                              ? l10n.d('Als nieuw rapport maken')
+                              : controller.buildError != null
                               ? l10n.d('Opnieuw proberen')
                               : controller.updating
                               ? l10n.d('Rapport bijwerken')

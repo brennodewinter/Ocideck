@@ -10,6 +10,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/openkat/openkat_reporting_models.dart';
 import 'package:ocideck/models/openkat/openkat_wizard_models.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/openkat/openkat_deck_generator.dart';
 import 'package:ocideck/services/openkat/openkat_wizard_service.dart';
 import 'package:ocideck/state/openkat_wizard_controller.dart';
 import 'package:ocideck/theme/app_theme.dart';
@@ -503,6 +504,54 @@ void main() {
       expect(find.text('Opnieuw proberen'), findsOneWidget);
       expect(find.text('Keuzes wijzigen…'), findsOneWidget);
       expect(find.text('Bekijk importverslag'), findsOneWidget);
+    });
+
+    testWidgets('onveilige update biedt een nieuw rapport als veilige uitweg', (
+      tester,
+    ) async {
+      _useViewport(tester, const Size(1280, 900));
+      final gateway = FakeOpenKatWizardGateway(
+        buildError: const OpenKatUnsafeUpdateException('legacy.view'),
+      );
+      final controller = OpenKatWizardController(
+        gateway: gateway,
+        existingDeck: const Deck(
+          title: 'Legacy',
+          slides: [
+            Slide(
+              id: 'legacy',
+              type: SlideType.title,
+              notes: '<!-- ocideck_openkat_view: legacy.view -->',
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(
+        _app(
+          OpenKatReportWizard(
+            controller: controller,
+            initialDirectory: '/reports',
+            chooseDirectory: () async => null,
+            onDirectorySelected: (_) {},
+          ),
+        ),
+      );
+      await _pumpFrames(tester);
+
+      await tester.tap(find.text('Rapport bijwerken'));
+      await _pumpFrames(tester);
+
+      expect(
+        find.textContaining('kan niet veilig worden bijgewerkt'),
+        findsOneWidget,
+      );
+      expect(find.text('Als nieuw rapport maken'), findsOneWidget);
+
+      gateway.buildError = null;
+      await tester.tap(find.text('Als nieuw rapport maken'));
+      await _pumpFrames(tester);
+
+      expect(gateway.lastExisting, isNull);
     });
 
     testWidgets('reviewwaarschuwingen noemen organisatie en ouderdom', (

@@ -1788,6 +1788,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Цей наявний звіт неможливо безпечно оновити. Створіть звіт як новий; наявний deck залишиться без змін.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Знайдено {reports} звітів для {organizations} організацій. Вимірювання охоплюють період від {firstDate} до {lastDate} включно. Пропущено {skipped} файлів.',
   'Dubbel bestand overgeslagen': 'Дублікат файлу пропущено',

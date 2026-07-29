@@ -1787,6 +1787,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Haec relatio iam exsistens tuto renovari non potest. Relationem novam crea; fasciculus exsistens immutatus manet.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       '{reports} relationes pro {organizations} institutis inventae sunt. Mensurae a {firstDate} usque ad {lastDate} pertinent. {skipped} fasciculi praetermissi sunt.',
   'Dubbel bestand overgeslagen': 'Fasciculus duplicatus praetermissus',

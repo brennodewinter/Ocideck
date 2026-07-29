@@ -1774,6 +1774,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Dä bestehend Bèrìcht cha nìt sicher aktualisiert wärde. Erstell dä Bèrìcht neu; s bestehend Deck blibt unverändert.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       '{reports} Bricht für {organizations} Organisatione gfunde. D Messige gönd vom {firstDate} bis und mit em {lastDate}. {skipped} Dateie sind übersprunge worde.',
   'Dubbel bestand overgeslagen': 'Doppleti Datei übersprunge',

@@ -1800,6 +1800,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Este relatório existente não pode ser atualizado com segurança. Crie o relatório como novo; o deck existente permanece inalterado.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Foram encontrados {reports} relatórios para {organizations} organizações. As medições vão de {firstDate} até {lastDate}, inclusive. Foram ignorados {skipped} ficheiros.',
   'Dubbel bestand overgeslagen': 'Ficheiro duplicado ignorado',

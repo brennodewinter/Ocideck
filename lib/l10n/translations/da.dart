@@ -1770,6 +1770,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Denne eksisterende rapport kan ikke opdateres sikkert. Opret rapporten som ny; det eksisterende deck forbliver uændret.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Der blev fundet {reports} rapporter for {organizations} organisationer. Målingerne går fra {firstDate} til og med {lastDate}. {skipped} filer blev sprunget over.',
   'Dubbel bestand overgeslagen': 'Dobbelt fil sprunget over',

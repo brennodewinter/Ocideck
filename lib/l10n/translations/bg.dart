@@ -1793,6 +1793,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Този съществуващ доклад не може да бъде безопасно актуализиран. Създайте доклада като нов; съществуващият deck остава непроменен.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Намерени са {reports} отчета за {organizations} организации. Измерванията са от {firstDate} до {lastDate} включително. Пропуснати са {skipped} файла.',
   'Dubbel bestand overgeslagen': 'Дублираният файл е пропуснат',

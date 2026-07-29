@@ -663,7 +663,9 @@ class OpenKatReviewStep extends StatelessWidget {
           _Message(
             icon: Icons.error_outline,
             text: l10n.d(
-              'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.',
+              controller.unsafeUpdate
+                  ? 'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.'
+                  : 'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.',
             ),
             error: true,
           ),
@@ -691,11 +693,13 @@ class OpenKatReviewStep extends StatelessWidget {
 class OpenKatUpdateConfirmation extends StatelessWidget {
   final OpenKatWizardController controller;
   final Future<void> Function() update;
+  final Future<void> Function() createNew;
 
   const OpenKatUpdateConfirmation({
     super.key,
     required this.controller,
     required this.update,
+    required this.createNew,
   });
 
   @override
@@ -731,7 +735,9 @@ class OpenKatUpdateConfirmation extends StatelessWidget {
                 _Message(
                   icon: Icons.error_outline,
                   text: l10n.d(
-                    'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.',
+                    controller.unsafeUpdate
+                        ? 'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.'
+                        : 'Het rapport kon niet worden gemaakt. Uw keuzes zijn behouden; controleer de waarschuwingen en probeer het opnieuw.',
                   ),
                   error: true,
                 ),
@@ -753,7 +759,11 @@ class OpenKatUpdateConfirmation extends StatelessWidget {
                       child: Text(l10n.d('Bekijk importverslag')),
                     ),
                   FilledButton.icon(
-                    onPressed: controller.busy ? null : update,
+                    onPressed: controller.busy
+                        ? null
+                        : controller.unsafeUpdate
+                        ? createNew
+                        : update,
                     icon: controller.busy
                         ? const SizedBox(
                             width: 18,
@@ -764,6 +774,8 @@ class OpenKatUpdateConfirmation extends StatelessWidget {
                     label: Text(
                       controller.buildError == null
                           ? l10n.d('Rapport bijwerken')
+                          : controller.unsafeUpdate
+                          ? l10n.d('Als nieuw rapport maken')
                           : l10n.d('Opnieuw proberen'),
                     ),
                   ),

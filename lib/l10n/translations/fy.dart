@@ -731,6 +731,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Dit besteande rapport kin net feilich bywurke wurde. Meitsje it rapport as nij; it besteande deck bliuwt ûnferoare.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       '{reports} rapporten fûn foar {organizations} organisaasjes. De mjittingen rinne fan {firstDate} oant en mei {lastDate}. {skipped} bestannen binne oerslein.',
   'Dubbel bestand overgeslagen': 'Dûbel bestân oerslein',

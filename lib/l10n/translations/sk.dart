@@ -1778,6 +1778,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Túto existujúcu správu nemožno bezpečne aktualizovať. Vytvorte správu ako novú; existujúci deck zostane nezmenený.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Našlo sa {reports} správ pre {organizations} organizácií. Merania prebiehajú od {firstDate} do {lastDate} vrátane. Preskočených bolo {skipped} súborov.',
   'Dubbel bestand overgeslagen': 'Duplicitný súbor preskočený',

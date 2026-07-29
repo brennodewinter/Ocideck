@@ -1778,6 +1778,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Šios esamos ataskaitos negalima saugiai atnaujinti. Sukurkite ataskaitą kaip naują; esamas deck lieka nepakeistas.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Rasta {reports} ataskaitų, skirtų {organizations} organizacijoms. Matavimai apima laikotarpį nuo {firstDate} iki {lastDate} imtinai. Praleista {skipped} failų.',
   'Dubbel bestand overgeslagen': 'Pasikartojantis failas praleistas',

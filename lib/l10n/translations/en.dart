@@ -911,6 +911,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'This existing report cannot be updated safely. Create the report as new; the existing deck remains unchanged.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       '{reports} reports found for {organizations} organizations. The measurements run from {firstDate} through {lastDate}. {skipped} files were skipped.',
   'Dubbel bestand overgeslagen': 'Duplicate file skipped',

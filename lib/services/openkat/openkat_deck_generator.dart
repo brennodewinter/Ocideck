@@ -6,6 +6,7 @@ import 'openkat_aggregator.dart';
 import 'openkat_report_composer.dart';
 import 'openkat_report_facts.dart';
 import 'openkat_report_scenarios.dart';
+import 'openkat_slide_provenance.dart';
 
 export 'openkat_report_engine.dart';
 
@@ -70,10 +71,7 @@ class OpenKatDeckGenerator {
         continue;
       }
       if (markedOrigins.length > 1) {
-        throw StateError(
-          'OpenKAT-view "$view" kan niet veilig worden bijgewerkt: '
-          'het gegenereerde origineel is niet ondubbelzinnig.',
-        );
+        throw OpenKatUnsafeUpdateException(view);
       }
       if (freshSlide != null) {
         final exact = candidates
@@ -87,10 +85,7 @@ class OpenKatDeckGenerator {
           continue;
         }
       }
-      throw StateError(
-        'OpenKAT-view "$view" kan niet veilig worden bijgewerkt: '
-        'het gegenereerde origineel is niet ondubbelzinnig.',
-      );
+      throw OpenKatUnsafeUpdateException(view);
     }
     final slides = <Slide>[];
     for (final slide in existing.slides) {
@@ -127,7 +122,7 @@ class OpenKatDeckGenerator {
       _viewMarker.firstMatch(slide.notes)?.group(1);
 
   bool _isGeneratedOrigin(Slide slide) =>
-      slide.notes.contains(openKatGeneratedOriginMarker);
+      OpenKatSlideProvenance.isUnchangedGeneratedOrigin(slide);
 
   DateTime _latestReportDate(List<OpenKatOrganization> organizations) {
     DateTime? latest;
@@ -141,4 +136,14 @@ class OpenKatDeckGenerator {
     }
     return latest ?? DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
   }
+}
+
+/// Een bestaand deck waarvan het gegenereerde origineel niet bewijsbaar is.
+///
+/// De UI biedt in dit geval een nieuw rapport aan; de bestaande dia's blijven
+/// volledig ongewijzigd.
+class OpenKatUnsafeUpdateException implements Exception {
+  final String viewId;
+
+  const OpenKatUnsafeUpdateException(this.viewId);
 }

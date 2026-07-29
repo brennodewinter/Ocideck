@@ -1771,6 +1771,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Laporan yang ada ini tidak dapat diperbarui dengan aman. Buat laporan sebagai baru; deck yang ada tetap tidak berubah.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       'Ditemukan {reports} laporan untuk {organizations} organisasi. Pengukuran berlangsung dari {firstDate} hingga {lastDate}. {skipped} berkas dilewati.',
   'Dubbel bestand overgeslagen': 'Berkas duplikat dilewati',

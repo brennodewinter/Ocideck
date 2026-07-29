@@ -645,10 +645,10 @@ void main() {
       expect(
         () => generator.updateGenerated(bestaand, vers),
         throwsA(
-          isA<StateError>().having(
-            (error) => error.message,
-            'message',
-            contains('niet ondubbelzinnig'),
+          isA<OpenKatUnsafeUpdateException>().having(
+            (error) => error.viewId,
+            'viewId',
+            'org.a.summary',
           ),
         ),
       );
@@ -675,7 +675,7 @@ void main() {
             bestaand,
             generator.generate([_orgMetVerloop('a')]),
           ),
-          throwsA(isA<StateError>()),
+          throwsA(isA<OpenKatUnsafeUpdateException>()),
         );
         expect(kopie.title, 'Mijn enige aangepaste analyse');
       },
@@ -705,9 +705,37 @@ void main() {
             bestaand,
             generator.generate([_orgMetVerloop('a')]),
           ),
-          throwsA(isA<StateError>()),
+          throwsA(isA<OpenKatUnsafeUpdateException>()),
         );
         expect(kopie.title, 'Mijn bewaarde analyse');
+      },
+    );
+
+    test(
+      'een extern gekopieerde en bewerkte Markdown-dia stopt fail-closed',
+      () {
+        final eerste = generator.generate([_orgMetVerloop('a')]);
+        final origineel = _view(eerste, 'org.a.summary');
+        final bron = MarkdownService().generateDeck(
+          eerste.copyWith(slides: [origineel]),
+        );
+        // Een volledige diablock kopiëren, het origineel verwijderen en daarna
+        // de kop bewerken laat op schijf precies dit ene bewerkte block over,
+        // inclusief de meegereisde provenancecomment.
+        final externBewerkt = bron.replaceFirst(
+          origineel.title,
+          'Mijn externe analyse',
+        );
+        final heropend = MarkdownService().parseDeck(externBewerkt)!;
+
+        expect(
+          () => generator.updateGenerated(
+            heropend,
+            generator.generate([_orgMetVerloop('a')]),
+          ),
+          throwsA(isA<OpenKatUnsafeUpdateException>()),
+        );
+        expect(_view(heropend, 'org.a.summary').title, 'Mijn externe analyse');
       },
     );
 

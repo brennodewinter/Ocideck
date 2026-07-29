@@ -1770,6 +1770,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Dit bestaande rapport kan niet veilig worden bijgewerkt. Maak het rapport als nieuw; het bestaande deck blijft ongewijzigd.':
+      'Den här befintliga rapporten kan inte uppdateras på ett säkert sätt. Skapa rapporten som ny; det befintliga däcket förblir oförändrat.',
   '{reports} rapportages gevonden voor {organizations} organisaties. De metingen lopen van {firstDate} tot en met {lastDate}. {skipped} bestanden zijn overgeslagen.':
       '{reports} rapporter hittades för {organizations} organisationer. Mätningarna sträcker sig från {firstDate} till och med {lastDate}. {skipped} filer hoppades över.',
   'Dubbel bestand overgeslagen': 'Dubblettfil hoppades över',

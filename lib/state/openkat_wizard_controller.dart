@@ -5,6 +5,7 @@ import '../models/openkat/openkat_models.dart';
 import '../models/openkat/openkat_reporting_models.dart';
 import '../models/openkat/openkat_wizard_models.dart';
 import '../services/openkat/openkat_wizard_service.dart';
+import '../services/openkat/openkat_deck_generator.dart';
 import '../utils/log.dart';
 
 class OpenKatWizardController extends ChangeNotifier {
@@ -23,6 +24,7 @@ class OpenKatWizardController extends ChangeNotifier {
   OpenKatWizardScan? scan;
   Object? scanError;
   Object? buildError;
+  bool get unsafeUpdate => buildError is OpenKatUnsafeUpdateException;
   OpenKatWizardScenarioId? selectedScenarioId;
   String? selectedOrganizationCode;
   Set<String> selectedOrganizationCodes = {};
