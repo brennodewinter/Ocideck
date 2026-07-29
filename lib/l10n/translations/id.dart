@@ -1771,6 +1771,133 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bord': 'Papan',
+  'Projectcharter': 'Piagam proyek',
+  'CTQ-boom': 'Pohon CTQ',
+  'Visgraat (Ishikawa)': 'Tulang ikan (Ishikawa)',
+  'Proceskaart': 'Peta proses',
+  'Impact / Inspanning': 'Dampak / Usaha',
+  'Vier lijsten — één per kwadrant.': 'Empat daftar — satu per kuadran.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Satu halaman, tujuh kotak — singkat dan mudah dibaca.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D dihitung — jangan diketik sendiri.',
+  'Eén R per rij.': 'Satu R per baris.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Isi dari kanan ke kiri — mulai dari pelanggan.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Kolom adalah status; kartu adalah tugas.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope dan kriteria sukses dulu — bagaimana nanti.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Dari kebutuhan pelanggan (Y) ke CTQ yang terukur.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Lima tingkat dalam — akhiri dengan X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Enam M sebagai tulang — sebab di bawahnya.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Langkah sebagai judul :: jenis :: atribut.',
+  'Zet de rol in het lane=… kenmerk.': 'Letakkan peran di atribut lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT per langkah — total dihitung, tidak disimpan.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Daftar per kuadran — jangan plot koordinat.',
+  'Intern': 'Internal',
+  'Negatief': 'Negatif',
+  'Positief': 'Positif',
+  'Weinige inspanning': 'Usaha rendah',
+  'Veel inspanning': 'Usaha tinggi',
+  'Lage impact': 'Dampak rendah',
+  'Hoge impact': 'Dampak tinggi',
+  'Sterktes': 'Kekuatan',
+  'Zwaktes': 'Kelemahan',
+  'Kansen': 'Peluang',
+  'Bedreigingen': 'Ancaman',
+  'Achtergrond': 'Latar belakang',
+  'Huidige situatie': 'Situasi saat ini',
+  'Oorzaakanalyse': 'Analisis akar masalah',
+  'Tegenmaatregelen': 'Tindakan pencegahan',
+  'Opvolging': 'Tindak lanjut',
+  'Bezig': 'Sedang berjalan',
+  'Probleem': 'Masalah',
+  'Succescriteria': 'Kriteria sukses',
+  'Snelle winst': 'Kemenangan cepat',
+  'Grote projecten': 'Proyek besar',
+  'Opvullers': 'Pengisi',
+  'Ondankbaar': 'Tanpa terima kasih',
+  'Processtap': 'Langkah proses',
+  'Faalwijze': 'Mode kegagalan',
+  'Oorzaak': 'Penyebab',
+  'Beheersing': 'Kontrol',
+  'Activiteit': 'Aktivitas',
+  'Leverancier': 'Pemasok',
+  'Klant': 'Pelanggan',
+  'Plan': 'Rencana',
+  'Team': 'Tim',
+  'Input': 'Masukan',
+  'Output': 'Keluaran',
+  'Effect': 'Efek',
+  'Businesscase / investeringsvoorstel': 'Kasus bisnis / proposal investasi',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Latar belakang, opsi dengan biaya dan manfaat, risiko, dan keputusan yang diminta.',
+  'Begroting / budgetpresentatie': 'Presentasi anggaran',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Asumsi, pos anggaran dengan perbandingan, ruang pilihan, risiko, dan titik keputusan.',
+  'Besluitvormend overleg': 'Rapat pengambilan keputusan',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Agenda, penjelasan per butir, daftar keputusan, dan tindakan dengan penanggung jawab.',
+  'Ledenvergadering (ALV)': 'Rapat umum anggota',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Agenda, laporan tahunan, komisi pemeriksa keuangan, anggaran, dan pemungutan suara untuk perkumpulan atau perhimpunan pemilik.',
+  'Ouderavond / informatieavond': 'Pertemuan orang tua / malam informasi',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Program tahunan, pendekatan, kesepakatan praktis, dan cara orang tua dapat membantu.',
+  'Familiegesprek zorg en mantelzorg':
+      'Pembicaraan keluarga tentang perawatan dan pendampingan',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Skenario, keinginan, pembagian tugas, dan kesepakatan untuk pembicaraan keluarga yang berat.',
+  'Raads- / collegevoorstel': 'Usulan untuk dewan / eksekutif',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Latar belakang, titik keputusan, argumen beserta catatan kritis, pendanaan, dan tindak lanjut.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Pertemuan warga / forum partisipasi',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Apa yang sudah pasti dan apa yang masih terbuka, angka, cara menanggapi, dan tindak lanjut.',
+  'Sprint review / demo': 'Sprint review / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Tujuan sprint, hasil kerja, demo, metrik, dan pandangan ke depan.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Briefing pemadam kebakaran (operasi dan latihan)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objek, akses, bahaya, kuadran, pasokan air, dan pembagian tugas.',
+  'Adviesaanvraag OR / medezeggenschap': 'Permintaan pendapat dewan karyawan',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Rencana keputusan, alasan, dampak bagi pegawai, dan proses permintaan pendapat.',
+  'Stagepresentatie': 'Presentasi magang',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Perusahaan, penugasan, pendekatan, hasil, tujuan pembelajaran, dan refleksi.',
+  'Debriefing / after-action review': 'Debriefing / tinjauan pasca-tindakan',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Apa yang direncanakan, apa yang terjadi, mengapa — dan kesepakatan apa yang kita buat.',
+  'Threat modeling-sessie': 'Sesi threat modeling',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Cakupan, aliran data, batas kepercayaan, ancaman per kategori STRIDE, dan langkah penanganan.',
+  'Casuïstiekbespreking sociaal domein': 'Pembahasan kasus bidang sosial',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Kasus yang dianonimkan: ranah kehidupan, keselamatan, kerangka hukum, dan koordinasi.',
+  'Gesprek voorbereiden': 'Menyiapkan percakapan',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Tujuan, lawan bicara, struktur, pertanyaan, dan kesepakatan untuk setiap percakapan yang ingin Anda siapkan dengan baik.',
+  'Cruciaal gesprek voorbereiden': 'Menyiapkan percakapan krusial',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Taruhan tinggi dan emosi kuat, menurut pendekatan percakapan krusial.',
+  'Vluchtdebriefing': 'Debriefing penerbangan',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Evaluasi diri, jalannya tiap fase, tinjauan TEM, dan poin pembelajaran setelah penerbangan atau pelajaran.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Briefing penumpang (penerbangan umum)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Sabuk pengaman, pintu, prosedur darurat, dan kesepakatan di dalam pesawat sebelum taxi.',
   'Onlinevergaderingen': 'Rapat daring',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Mengikuti rapat dari penyedia lain, dengan presentasi Anda sebagai yang Anda bagikan. Nonaktif secara bawaan; dengan modul nonaktif, OciDeck tidak menghubungi layanan rapat mana pun. Belum ada penyedia yang terhubung, jadi bergabung belum bisa — ini meletakkan dasarnya.',

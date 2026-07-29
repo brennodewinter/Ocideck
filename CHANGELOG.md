@@ -37,6 +37,26 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- Negentien nieuwe presentatiesjablonen. De catalogus dekte de professional
+  die verantwoording aflegt, maar miste de vergaderingen waarin geld en
+  besluiten op tafel liggen, en hele sectoren stonden op nul. Er zijn nu
+  sjablonen voor een businesscase of investeringsvoorstel, een begrotings- of
+  budgetpresentatie, een besluitvormend overleg met besluitenlijst, een sprint
+  review en een threat modeling-sessie langs de STRIDE-categorieën. Voor de
+  publieke sector kwamen een raads-/collegevoorstel en een bewonersavond of
+  participatiebijeenkomst; voor onderwijs en stage een ouderavond en een
+  stagepresentatie; voor de vereniging een ledenvergadering (ALV); voor zorg
+  en sociaal domein een familiegesprek over zorg en mantelzorg en een
+  geanonimiseerde casuïstiekbespreking; voor de medezeggenschap een
+  adviesaanvraag aan de OR; voor de hulpdiensten een brandweerbriefing (inzet
+  en oefening) en een debriefing/after-action review; en voor de luchtvaart
+  een vluchtdebriefing met TEM-terugblik en een passagiersbriefing voor de
+  kleine luchtvaart. De gespreksvleugel kende alleen vaste scenario's; daar
+  staan nu twee generieke voorbereidingen naast — een gewoon gesprek goed
+  voorbereiden, en een cruciaal gesprek volgens de aanpak die de
+  scenario-sjablonen al droegen. Elk sjabloon is een document per taal
+  (Nederlands en Engels), live invulbaar met werktabellen en een
+  voortgangschecklist; een eigen testgroep bewaakt alle negentien.
 - De eerste, aanbieder-neutrale laag van de onlinevergaderingen-functie
   (ontwerp: `docs/design/TEAMS_GUEST_CLIENT.md` en
   `docs/design/COLLABORATION.md` §7.1). Onder `lib/meetings/` staat nu de

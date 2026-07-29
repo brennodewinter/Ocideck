@@ -3,6 +3,7 @@
 // Template *data* lives in assets/improvement/templates/ (see catalog).
 library;
 
+import '../../l10n/app_localizations.dart';
 import 'improvement_template_catalog.dart';
 
 /// A typed grid artefact (SIPOC, FMEA, RACI, …) rendered by the matrix engine.
@@ -117,7 +118,6 @@ class ImprovementTemplate {
   List<MatrixColumn> get storedColumns =>
       columns.where((c) => !c.derived).toList();
 
-  String label(String lang) => lang.startsWith('nl') ? labelNl : labelEn;
-  String guidance(String lang) =>
-      lang.startsWith('nl') ? guidanceNl : guidanceEn;
+  String label(String lang) => AppLocalizations.sourceFor(lang, labelNl);
+  String guidance(String lang) => AppLocalizations.sourceFor(lang, guidanceNl);
 }

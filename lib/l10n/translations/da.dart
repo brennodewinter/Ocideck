@@ -1770,6 +1770,132 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bord': 'Tavle',
+  'Projectcharter': 'Projektcharter',
+  'CTQ-boom': 'CTQ-træ',
+  'Visgraat (Ishikawa)': 'Fiskebensdiagram (Ishikawa)',
+  'Proceskaart': 'Proceskort',
+  'Impact / Inspanning': 'Effekt / Indsats',
+  'Vier lijsten — één per kwadrant.': 'Fire lister — én pr. kvadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Én side, syv felter — hold hver kort og læsbar.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D beregnes — indtast det ikke selv.',
+  'Eén R per rij.': 'Ét R pr. række.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Udfyld højre-til-venstre — start ved kunden.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Kolonner er statusser; kort er opgaver.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope og succeskriterier først — hvordan kommer senere.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Fra kundebehov (Y) til målbare CTQs.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Fem niveauer dybt — slut med et X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Seks M som knogler — årsager under.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Trin som titel :: type :: attributter.',
+  'Zet de rol in het lane=… kenmerk.': 'Sæt rollen i lane=… attributten.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT pr. trin — totaler beregnes, gemmes ikke.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'En liste pr. kvadrant — tegn ikke koordinater.',
+  'Intern': 'Intern',
+  'Negatief': 'Negativ',
+  'Positief': 'Positiv',
+  'Weinige inspanning': 'Lav indsats',
+  'Veel inspanning': 'Høj indsats',
+  'Lage impact': 'Lav effekt',
+  'Hoge impact': 'Høj effekt',
+  'Sterktes': 'Styrker',
+  'Zwaktes': 'Svagheder',
+  'Kansen': 'Muligheder',
+  'Bedreigingen': 'Trusler',
+  'Achtergrond': 'Baggrund',
+  'Huidige situatie': 'Nuværende situation',
+  'Oorzaakanalyse': 'Årsagsanalyse',
+  'Tegenmaatregelen': 'Modforanstaltninger',
+  'Opvolging': 'Opfølgning',
+  'Bezig': 'I gang',
+  'Probleem': 'Problem',
+  'Succescriteria': 'Succeskriterier',
+  'Snelle winst': 'Hurtige gevinster',
+  'Grote projecten': 'Store projekter',
+  'Opvullers': 'Udfyldere',
+  'Ondankbaar': 'Takløs',
+  'Processtap': 'Procestrin',
+  'Faalwijze': 'Fejlmåde',
+  'Oorzaak': 'Årsag',
+  'Beheersing': 'Kontrol',
+  'Activiteit': 'Aktivitet',
+  'Leverancier': 'Leverandør',
+  'Klant': 'Kunde',
+  'Plan': 'Plan',
+  'Team': 'Team',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Effekt',
+  'Businesscase / investeringsvoorstel': 'Businesscase / investeringsforslag',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Anledning, muligheder med omkostninger og gevinster, risici og den ønskede beslutning.',
+  'Begroting / budgetpresentatie': 'Budgetpræsentation',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Forudsætninger, poster med sammenligning, råderum, risici og beslutningspunkter.',
+  'Besluitvormend overleg': 'Beslutningsmøde',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Dagsorden, forklaring pr. punkt, beslutningsliste og handlinger med ejer.',
+  'Ledenvergadering (ALV)': 'Generalforsamling',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Dagsorden, årsberetning, revisionsudvalg, budget og afstemninger for forening eller ejerforening.',
+  'Ouderavond / informatieavond': 'Forældremøde / informationsaften',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Årsprogram, tilgang, praktiske aftaler og hvordan forældre kan hjælpe.',
+  'Familiegesprek zorg en mantelzorg':
+      'Familiesamtale om pleje og pårørendeomsorg',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenarier, ønsker, opgavefordeling og aftaler til en svær familiesamtale.',
+  'Raads- / collegevoorstel': 'Indstilling til råd / udvalg',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Anledning, beslutningspunkter, argumenter og forbehold, finansiering og videre forløb.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Beboermøde / borgerinddragelsesmøde',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Hvad der ligger fast, og hvad der er åbent, tal, reaktionsmuligheder og videre forløb.',
+  'Sprint review / demo': 'Sprint review / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprintmål, leveret arbejde, demo, metrikker og fremadblik.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Brandvæsensbriefing (indsats og øvelse)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objekt, adgangsforhold, farer, kvadranter, vandforsyning og opgavefordeling.',
+  'Adviesaanvraag OR / medezeggenschap': 'Høring af samarbejdsudvalget',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Påtænkt beslutning, bevæggrunde, personalemæssige konsekvenser og høringsforløbet.',
+  'Stagepresentatie': 'Praktikpræsentation',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Virksomhed, opgave, tilgang, resultat, læringsmål og refleksion.',
+  'Debriefing / after-action review': 'Debriefing / after-action review',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Hvad der var planlagt, hvad der skete, hvorfor — og hvilke aftaler vi indgår.',
+  'Threat modeling-sessie': 'Threat modeling-session',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Scope, datastrømme, tillidsgrænser, trusler pr. STRIDE-kategori og tiltag.',
+  'Casuïstiekbespreking sociaal domein': 'Sagsgennemgang på socialområdet',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonymiseret sag: livsområder, sikkerhed, lovgrundlag og koordinering.',
+  'Gesprek voorbereiden': 'Forbered en samtale',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Mål, den anden, opbygning, spørgsmål og aftaler til enhver samtale, du vil forberede godt.',
+  'Cruciaal gesprek voorbereiden': 'Forbered en afgørende samtale',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Meget på spil og stærke følelser, efter tilgangen til afgørende samtaler.',
+  'Vluchtdebriefing': 'Flyvedebriefing',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Selvevaluering, forløb pr. fase, TEM-tilbageblik og læringspunkter efter en flyvning eller lektion.',
+  'Passagiersbriefing (kleine luchtvaart)': 'Passagerbriefing (almenflyvning)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Seler, døre, nødprocedurer og aftaler om bord før taxi.',
   'Onlinevergaderingen': 'Onlinemøder',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Deltag i et møde hos en anden udbyder, med din præsentation som det, du deler. Slået fra som standard; med modulet slået fra kontakter OciDeck ikke nogen mødetjeneste overhovedet. Der er endnu ingen udbyder tilsluttet, så deltagelse er ikke mulig endnu — dette lægger fundamentet.',
