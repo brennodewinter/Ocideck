@@ -52,6 +52,42 @@ The web build is designed to pull **zero third-party origins** at runtime.
   (`web/index.html:51`). Note a meta-delivered CSP cannot enforce
   `frame-ancestors` — serve it as a real HTTP header to control embedding (see
   [`HOSTING.md`](HOSTING.md)).
+- **`img-src`/`media-src` block remote deck media by design.** On web there is
+  no `net_guard` SSRF check (unlike desktop), so restricting these to
+  `'self' data: blob:` is what closes that hole. To allow remote media, add
+  `https:` to both directives in `web/index.html`.
+- **`connect-src` accepts `https:` (not `http:`) for user-initiated URL import,
+  and that is a one-way write channel, not just a read one.** The scheme is
+  restricted to `https:` so a plaintext, only-internally-reachable host stays
+  unreachable through it. The browser's CORS policy gates every cross-origin
+  *read*, so a non-cooperating host cannot be read back through this — but
+  CORS does not stop a `no-cors` POST: such a request is still sent, only the
+  response is opaque. That leaves an exfiltration path to any `https:` host,
+  accepted deliberately because closing it means removing URL import on web (a
+  feature the user asked for and initiates), and because reaching it requires
+  script execution in this origin — which `script-src 'self'` without
+  `'unsafe-inline'`/`'unsafe-eval'` is what actually prevents. The control here
+  is `script-src`, not `connect-src`; the latter only narrows the blast radius
+  if the former ever fails. If URL import ever moves behind a fixed set of
+  hosts, `connect-src` can name them instead of allowing `https:` wholesale.
+- **`child-src`/`frame-src` allow `blob:`/`data:` for the offscreen
+  render/embed WebViews.** On desktop this covers both the Mermaid renderer and
+  the video embed. On web the Mermaid renderer no longer needs a WebView — since
+  #851 it renders in-page via JS interop — but the video embed still loads its
+  player through a `data:` URI iframe, so the exemption stays needed for that
+  consumer.
+- **`form-action 'none'` is spelled out rather than omitted.** Unlike
+  `frame-ancestors`, `form-action` does **not** fall back to `default-src` —
+  leaving it out would leave form submission unrestricted even with
+  `default-src 'self'`. The app renders into a canvas and submits no HTML
+  forms, so nothing legitimate needs it.
+- **`Referrer-Policy: no-referrer` ships as a `<meta>` tag** (unlike
+  `frame-ancestors`, `no-referrer` *is* honoured from `<meta>`, so it does not
+  depend on the static host cooperating). It matters because `connect-src`
+  permits `https:`: a URL import fetches a host the user pasted, and without
+  this the deck's own URL would travel to that host in the `Referer` header —
+  the path of a deck link can itself be the sensitive part. See
+  [`HOSTING.md`](HOSTING.md) for the companion HTTP header.
 - **Self-hosted engine.** `make build-web` builds with
   `--no-web-resources-cdn --csp`, so CanvasKit is served from the same origin
   (never the gstatic CDN) and the bootstrap needs no inline/eval scripts
