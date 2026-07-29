@@ -157,7 +157,9 @@ void main() {
   });
 
   test('alle OpenKAT-bronvelden blijven data in geserialiseerde Markdown', () {
-    const attack = '<script>x()</script>\n---\n[x](javascript:alert(1))';
+    const attack =
+        '<script>x()</script>\n---\n'
+        '[x](javascript:alert(1))\r---\r# Onechte dia';
     const systemId = '<iframe src=x>](javascript:alert(1))';
     const features = {
       OpenKatSourceFeature.comparableMeasurementCoverage,

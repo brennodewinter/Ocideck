@@ -772,7 +772,7 @@ class OpenKatReportComposer {
 
   String _literal(String value) => sanitizeImportedText(value);
 
-  String _inline(String value) => sanitizeImportedInline(value);
+  String _inline(String value) => _safeTableText(value);
 
   String _iso(DateTime value) => _isoDate(value);
 
@@ -852,6 +852,10 @@ String _slideId(String seed) {
 
 String _safeCode(String value) =>
     value.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '-');
+
+String _safeTableText(String value) => sanitizeImportedInline(
+  value.replaceAll('\r\n', '\n').replaceAll('\r', '\n'),
+);
 
 String _isoDate(DateTime value) =>
     '${value.year.toString().padLeft(4, '0')}-'
@@ -966,7 +970,7 @@ List<List<String>> _systemsTable(
   for (var i = 0; i < stats.length; i++)
     [
       '${i + 1}',
-      sanitizeImportedInline(stats[i].systemId),
+      _safeTableText(stats[i].systemId),
       '${stats[i].total}',
       '${stats[i].critical}',
       '${stats[i].high}',
