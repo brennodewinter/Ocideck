@@ -3,7 +3,6 @@ import 'package:ocideck/meetings/meeting_event.dart';
 import 'package:ocideck/meetings/meeting_failure.dart';
 import 'package:ocideck/meetings/meeting_link.dart';
 import 'package:ocideck/meetings/meeting_models.dart';
-import 'package:ocideck/meetings/meeting_provider.dart';
 import 'package:ocideck/meetings/meeting_registry.dart';
 import 'package:ocideck/meetings/meeting_state.dart';
 import 'package:ocideck/meetings/providers/fake/fake_meeting_provider.dart';
