@@ -2,6 +2,11 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../app_shell.dart';
 
+/// Breedte van de knoppenkolom op het openscherm. 220 liet "Zoek op deze
+/// computer" onbedoeld naar een tweede regel omslaan, ongelijk aan de andere
+/// éénregelige knoppen ernaast — 240 past ruim genoeg om dat te voorkomen.
+const double _kButtonWidth = 240;
+
 class _WelcomeScreen extends ConsumerWidget {
   const _WelcomeScreen();
 
@@ -18,31 +23,52 @@ class _WelcomeScreen extends ConsumerWidget {
       // Wit i.p.v. het lichtgrijze scaffold-vlak, zodat het openscherm één
       // egaal wit oppervlak is dat aansluit op de (witte) recente-bestanden­kolom.
       backgroundColor: theme.colorScheme.surface,
-      body: Row(
+      body: Stack(
         children: [
-          // ── Midden: logo + knoppen ─────────────────────────────────────
-          Expanded(
-            // Scroll-safe: bij sterk vergrote interfacetekst (tot 200%) passen
-            // logo + knoppen niet meer op de hoogte; dan scrollt het in plaats
-            // van te overlopen. Bij genoeg ruimte blijft het gecentreerd.
-            child: LayoutBuilder(
-              builder: (context, constraints) => SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                  child: Align(
-                    alignment: const Alignment(-0.15, 0.12),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: _startColumn(context, ref, l10n, palette),
+          Row(
+            children: [
+              // ── Midden: logo + knoppen ─────────────────────────────────
+              Expanded(
+                // Scroll-safe: bij sterk vergrote interfacetekst (tot 200%)
+                // passen logo + knoppen niet meer op de hoogte; dan scrollt
+                // het in plaats van te overlopen. Bij genoeg ruimte blijft
+                // het gecentreerd.
+                child: LayoutBuilder(
+                  builder: (context, constraints) => SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
+                      child: Align(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: _startColumn(context, ref, l10n, palette),
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
+              // ── Rechts: recente bestanden ────────────────────────────────
+              if (recentFiles.isNotEmpty)
+                _recentFilesPanel(
+                  context,
+                  ref,
+                  theme,
+                  palette,
+                  l10n,
+                  recentFiles,
+                ),
+            ],
           ),
-          // ── Rechts: recente bestanden ──────────────────────────────────
-          if (recentFiles.isNotEmpty)
-            _recentFilesPanel(context, ref, theme, palette, l10n, recentFiles),
+          // Welk versienummer draait er? Vermeld in een SECURITY.md-melding
+          // (zie settings_dialog_about.dart) — hier alvast subtiel zichtbaar,
+          // zonder de rest van het scherm te belasten.
+          Positioned(
+            left: 16,
+            bottom: 12,
+            child: _VersionTag(palette: palette),
+          ),
         ],
       ),
     );
@@ -90,7 +116,7 @@ class _WelcomeScreen extends ConsumerWidget {
       ),
       const SizedBox(height: 22),
       SizedBox(
-        width: 220,
+        width: _kButtonWidth,
         child: ElevatedButton.icon(
           onPressed: () => _newDeck(context, ref),
           icon: const Icon(Icons.add, size: 18),
@@ -123,7 +149,7 @@ class _WelcomeScreen extends ConsumerWidget {
       ),
       const SizedBox(height: 12),
       SizedBox(
-        width: 220,
+        width: _kButtonWidth,
         child: OutlinedButton.icon(
           onPressed: () => _openWithSearch(context, ref),
           icon: const Icon(Icons.folder_open_outlined, size: 18),
@@ -139,7 +165,7 @@ class _WelcomeScreen extends ConsumerWidget {
       // bestandssysteem en kan op web niet.
       const SizedBox(height: 12),
       SizedBox(
-        width: 220,
+        width: _kButtonWidth,
         child: OutlinedButton.icon(
           onPressed: () => _importFromUrl(context, ref),
           icon: const Icon(Icons.cloud_download_outlined, size: 18),
@@ -149,7 +175,7 @@ class _WelcomeScreen extends ConsumerWidget {
       if (supportsLocalProjectFolders) ...[
         const SizedBox(height: 12),
         SizedBox(
-          width: 220,
+          width: _kButtonWidth,
           child: OutlinedButton.icon(
             onPressed: () => _scanLibrary(context, ref),
             icon: const Icon(Icons.travel_explore, size: 18),
@@ -166,7 +192,7 @@ class _WelcomeScreen extends ConsumerWidget {
           ref.watch(importModuleRevealProvider)) ...[
         const SizedBox(height: 12),
         SizedBox(
-          width: 220,
+          width: _kButtonWidth,
           child: OutlinedButton.icon(
             onPressed: () => importOpenKatReports(context, ref),
             icon: const Icon(Icons.radar_outlined, size: 18),
@@ -188,7 +214,7 @@ class _WelcomeScreen extends ConsumerWidget {
       if (_remoteConnections(ref).isNotEmpty) ...[
         const SizedBox(height: 12),
         SizedBox(
-          width: 220,
+          width: _kButtonWidth,
           child: OutlinedButton.icon(
             onPressed: () => _openFromConnection(context, ref),
             icon: const Icon(Icons.cloud_outlined, size: 18),
@@ -320,6 +346,36 @@ class _WelcomeScreen extends ConsumerWidget {
       // Het bestand bestaat niet meer: opruimen i.p.v. blijven aanbieden.
       await ref.read(settingsProvider.notifier).removeRecentFile(path);
     }
+  }
+}
+
+/// Het draaiende versienummer, in de hoek van het openscherm. Dezelfde
+/// `kOciDeckVersion` als op het About-tabblad — een tik erop opent dat
+/// tabblad meteen, want dat is precies het nummer dat bij een
+/// beveiligingsmelding hoort (zie settings_dialog_about.dart).
+class _VersionTag extends StatelessWidget {
+  final AppPalette palette;
+
+  const _VersionTag({required this.palette});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Tooltip(
+      message: l10n.t('settings'),
+      child: InkWell(
+        onTap: () =>
+            SettingsDialog.show(context, initialSection: SettingsSection.about),
+        borderRadius: BorderRadius.circular(3),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+          child: Text(
+            'v$kOciDeckVersion',
+            style: TextStyle(fontSize: 10.5, color: palette.mutedText),
+          ),
+        ),
+      ),
+    );
   }
 }
 
