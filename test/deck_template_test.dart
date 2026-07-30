@@ -100,7 +100,7 @@ void main() {
           .map((f) => f.uri.pathSegments.last)
           .toList();
       for (final name in files) {
-        final match = RegExp(r'^(.+)\.(nl|en|es)\.md$').firstMatch(name);
+        final match = RegExp(r'^(.+)\\.(nl|en|es|el)\\.md$').firstMatch(name);
         expect(match, isNotNull, reason: name);
         expect(known, contains(match!.group(1)), reason: name);
       }
