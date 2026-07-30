@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/deck_template.dart';
 import '../../models/settings.dart';
+import '../../services/template_content_service.dart';
 import '../../state/info_safety_provider.dart';
 import '../../state/procesverbetering_provider.dart';
 import '../../state/settings_provider.dart';
@@ -186,7 +187,8 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
   /// nodig heeft is hij ruis, en een melding die niets toevoegt leert mensen
   /// meldingen overslaan — daarom zwijgt hij in het Nederlands en het Engels.
   Widget _templateLanguageNotice(BuildContext context, AppLocalizations l10n) {
-    if (l10n.languageCode == 'nl' || l10n.languageCode == 'en') {
+    if (TemplateContentService.languagesWithContent
+        .contains(l10n.languageCode)) {
       return const SizedBox.shrink();
     }
     return Padding(
