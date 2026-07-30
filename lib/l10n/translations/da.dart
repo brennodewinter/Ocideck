@@ -1770,6 +1770,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Kun ejeren gemmer decket i en delt session; dine ændringer bliver i sessionen, indtil ejeren gemmer.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Ejeren er væk — nu holder du samarbejdet i gang; dine ændringer gemmes først, når ejeren vender tilbage.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Ejeren er tilbage og overtager samarbejdet igen.',
   'Samenwerking starten': 'Start samarbejde',
   'Deelnemen aan samenwerking': 'Deltag i samarbejde',
   'Samenwerking verlaten': 'Forlad samarbejde',

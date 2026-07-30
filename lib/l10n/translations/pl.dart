@@ -1783,6 +1783,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Tylko właściciel zapisuje deck we wspólnej sesji; twoje zmiany pozostają w sesji, dopóki właściciel nie zapisze.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Właściciel odszedł — teraz to ty podtrzymujesz współpracę; twoje zmiany zostaną zapisane dopiero, gdy właściciel wróci.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Właściciel wrócił i ponownie przejmuje współpracę.',
   'Samenwerking starten': 'Rozpocznij współpracę',
   'Deelnemen aan samenwerking': 'Dołącz do współpracy',
   'Samenwerking verlaten': 'Opuść współpracę',

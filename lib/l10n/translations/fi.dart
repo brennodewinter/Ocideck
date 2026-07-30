@@ -1771,6 +1771,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Vain omistaja tallentaa deckin jaetussa istunnossa; muutoksesi säilyvät istunnossa, kunnes omistaja tallentaa.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Omistaja on poissa — nyt sinä pidät yhteistyötä yllä; muutoksesi tallennetaan vasta, kun omistaja palaa.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Omistaja on palannut ja ottaa yhteistyön taas haltuunsa.',
   'Samenwerking starten': 'Aloita yhteistyö',
   'Deelnemen aan samenwerking': 'Liity yhteistyöhön',
   'Samenwerking verlaten': 'Poistu yhteistyöstä',

@@ -1778,6 +1778,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Bendroje sesijoje deką išsaugo tik savininkas; jūsų pakeitimai lieka sesijoje, kol savininkas neišsaugo.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Savininkas išėjo — dabar bendradarbiavimą palaikote jūs; jūsų pakeitimai išsaugomi tik tada, kai savininkas grįžta.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Savininkas grįžo ir vėl perima bendradarbiavimą.',
   'Samenwerking starten': 'Pradėti bendradarbiavimą',
   'Deelnemen aan samenwerking': 'Prisijungti prie bendradarbiavimo',
   'Samenwerking verlaten': 'Palikti bendradarbiavimą',

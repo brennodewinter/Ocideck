@@ -2748,6 +2748,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Paylaşılan bir oturumda sunumu yalnızca sahip kaydeder; değişiklikleriniz, sahip kaydedene kadar oturumda kalır.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Sahip ayrıldı — iş birliğini şimdi siz sürdürüyorsunuz; değişiklikleriniz yalnızca sahip geri döndüğünde kaydedilir.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Sahip geri döndü ve iş birliğini yeniden devralıyor.',
   'Samenwerking starten': 'İş birliği başlat',
   'Deelnemen aan samenwerking': 'İş birliğine katıl',
   'Samenwerking verlaten': 'İş birliğinden ayrıl',

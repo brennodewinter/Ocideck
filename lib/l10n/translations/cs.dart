@@ -1774,6 +1774,12 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Deck ve sdílené relaci ukládá pouze vlastník; tvoje změny zůstávají v relaci, dokud je vlastník neuloží.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Vlastník odešel — teď udržuješ spolupráci ty; tvoje změny se uloží až tehdy, když se vlastník vrátí.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Vlastník se vrátil a spolupráci opět přebírá.',
   'Samenwerking starten': 'Zahájit spolupráci',
   'Deelnemen aan samenwerking': 'Připojit se ke spolupráci',
   'Samenwerking verlaten': 'Opustit spolupráci',

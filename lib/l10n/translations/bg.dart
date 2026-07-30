@@ -1793,6 +1793,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Само собственикът запазва тестето в споделена сесия; вашите промени остават в сесията, докато собственикът не запази.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Собственикът излезе — сега вие поддържате сътрудничеството; вашите промени се запазват едва когато собственикът се върне.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Собственикът се върна и отново поема сътрудничеството.',
   'Samenwerking starten': 'Започни сътрудничество',
   'Deelnemen aan samenwerking': 'Присъедини се към сътрудничество',
   'Samenwerking verlaten': 'Напусни сътрудничество',

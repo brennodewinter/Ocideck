@@ -1746,6 +1746,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'tay\' vumDaq deck pol pIn neH; pIn polpa\' tay\' vumDaq ratlhtaH choHmeylIj.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'mejpu\' pIn — DaH tay\' vum DataHmoH SoH; pIn cheghDI\' neH pollu\' choHmeylIj.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'cheghpu\' pIn \'ej tay\' vum vu\'qa\' ghaH.',
   'Samenwerking starten': 'tay\' vum yItagh',
   'Deelnemen aan samenwerking': 'tay\' vumDaq yI\'el',
   'Samenwerking verlaten': 'tay\' vumvo\' yImej',

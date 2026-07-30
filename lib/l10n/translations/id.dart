@@ -1771,6 +1771,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Hanya pemilik yang menyimpan deck dalam sesi bersama; perubahan Anda tetap di sesi sampai pemilik menyimpan.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Pemilik telah pergi — kini Anda yang menjaga kolaborasi tetap berjalan; perubahan Anda baru disimpan saat pemilik kembali.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Pemilik telah kembali dan mengambil alih kolaborasi lagi.',
   'Samenwerking starten': 'Mulai kolaborasi',
   'Deelnemen aan samenwerking': 'Gabung ke kolaborasi',
   'Samenwerking verlaten': 'Tinggalkan kolaborasi',
