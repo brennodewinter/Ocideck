@@ -23,6 +23,20 @@ in Dutch, and it keeps growing on `main` between releases.
   hetzelfde deck reproduceert. Met een loopback-transport, een lock-tabel en de
   naad op `TabInfo` waar een latere genetwerkte fase (Matrix) de live sessie aan
   hangt. Puur Dart, geen netwerk, volledig getest; nog niet in de interface.
+- De eerste genetwerkte transportlaag: asynchroon co-auteuren over de
+  Nextcloud/WebDAV die de gebruiker al heeft (COLLABORATION.md Fase 0.5, #989).
+  `WebdavAsyncTransport` spreekt hetzelfde `CollabTransport`-contract als de
+  loopback, dus de sessie-autoriteit stuurt hem ongewijzigd aan. Bewerkingen
+  landen als getypte JSON-records in een append-only log-sidecar naast het deck;
+  een poll levert andermans records strikt op volgorde af en stopt bij een gat.
+  Twee schrijvers die om hetzelfde volgnummer strijden botsen op een
+  voorwaardelijke PUT (`If-None-Match: *`), zodat geen record een ander
+  overschrijft. Een deelnemer hoort zijn eigen verzending nooit. Het `.md` blijft
+  onaangeroerd (P2) — de log is een vergankelijke sidecar. Géén nieuwe
+  afhankelijkheid, geen AGPL, geen Rust (de aanbevolen stap uit #976/#991).
+  Geschreven tegen een store-naad en zo volledig getest zonder server;
+  snapshot-herbaselijning voor late deelnemers (§5.2) en de interface-bedrading
+  (§5.7) blijven vervolg, net als bij Fase 0. Nog niet in de interface.
 
 ### Fixed
 

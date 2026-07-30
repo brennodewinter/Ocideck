@@ -452,10 +452,15 @@ the data an improvement project collects — a tight spread far from zero.
 ## `lib/collab/` — real-time collaboration layer (design: `docs/design/COLLABORATION.md` §5)
 
 The transport-agnostic core of live co-authoring, Phase 0 of COLLABORATION.md
-(#975). Pure Dart, no network and no Flutter import, so the whole layer is
-unit-tested through a loopback with no infrastructure. The networked transports
-(Matrix, §6) and the UI wiring plug into it later; today it is reachable through
-`TabInfo.collabSession` (§5.7), `null` on every tab until a session exists.
+(#975), plus the first networked transport, Phase 0.5 (#989). The core
+(`deck_op`, `collab_transport`, `collab_session`) is pure Dart with no network
+and no Flutter import, unit-tested through a loopback with no infrastructure. The
+async WebDAV transport (§10) is written against a store seam for the same
+reason, so it too is tested with no server; its one networked dependency
+(`webdav_service`) is isolated in `collab_log_store.dart`. The real-time Matrix
+transport (§6) and the UI wiring plug in later; today the layer is reachable
+through `TabInfo.collabSession` (§5.7), `null` on every tab until a session
+exists.
 
 - `deck_op.dart` — the typed operation model (§5.1). A `DeckOp` is one
   authoritative change to the in-memory `Deck`, ordered by `version`: the sealed
@@ -479,6 +484,27 @@ unit-tested through a loopback with no infrastructure. The networked transports
   authority's deck. v1 has a follower edit round-trip (not optimistic under a
   lock); owner-drop handover (§5.3) and snapshot re-baselining (§5.2) are
   follow-ups.
+- `collab_codec.dart` — the JSON wire (de)serialiser for `DeckOp`s and
+  `LockEvent`s (§5.2, §5.6). JSON of the typed `Slide`/field model *by design*,
+  not a Markdown round-trip: re-parsing would regenerate slide ids (§5.5) and
+  re-derive escaping the op model exists to avoid (P5). Every decoder is
+  fail-closed (mirrors `applyOp`): unknown discriminator, missing field, wrong
+  type or unknown enum name throws rather than yielding a lossy op. The per-field
+  value kinds are guarded by a test over `SlideField.values`/`DeckMetaField.values`;
+  the full-`Slide` mapping (for `InsertSlide`) by an exhaustive round-trip.
+- `collab_log_store.dart` — the append-only log the async transport reads and
+  writes (§10). `CollabLogStore` is a numbered sequence of opaque records whose
+  only guarantee is that a taken sequence number cannot be silently overwritten;
+  `InMemoryCollabLogStore` is the loopback-equivalent for tests, and
+  `WebdavCollabLogStore` the production binding — one file per record in a
+  sidecar directory, appended with a conditional `PUT` (`If-None-Match: *`).
+- `webdav_async_transport.dart` — `WebdavAsyncTransport`, the Phase 0.5 async
+  transport (§10). Same `CollabTransport` pipe as the loopback, so the session
+  drives it unchanged; sends append to the log and a poll delivers others'
+  records strictly in sequence order, stopping at a gap (the version-order apply
+  in §5.3 needs no out-of-order delivery). A participant never hears its own
+  sends. Written against `CollabLogStore` so it is tested with no server. The
+  deck `.md` is untouched (P2) — the log is a transient sidecar.
 
 ## `lib/state/` — Riverpod providers
 
