@@ -1774,6 +1774,128 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'OciDeck nesmí používat váš mikrofon ani kameru. Udělte oprávnění v prohlížeči nebo v nastavení systému a zkuste to znovu.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'Nebyl nalezen žádný funkční mikrofon. Připojte nějaký nebo vyberte jiné zařízení.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'Nebyla nalezena žádná funkční kamera. Můžete se připojit bez obrazu.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'Služba, která vydává přístupové oprávnění, je nedostupná. Zkuste to později znovu; vaše prezentace mezitím zůstává otevřená.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'Služba, která vydává přístupové oprávnění, dosáhla zatím svého limitu. Zkuste to později znovu.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'Přístupové oprávnění k této schůzce vypršelo. Připojte se znovu pomocí stejného odkazu.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'Síť tuto schůzku nepropouští. Ve firemní síti takový provoz často blokuje firewall nebo proxy; jiné připojení obvykle funguje.',
+  'Deze vergadering is voorbij.': 'Tato schůzka už proběhla.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'Samotná služba schůzek není dostupná. Není to kvůli vašemu připojení; zkuste to později znovu.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Připojení se nepodařilo a služba neříká proč. Technický kód je u podrobností — zkuste to znovu a předejte ten kód, pokud to bude selhávat dál.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'Toto není použitelný odkaz na schůzku. Zkopírujte ho znovu z pozvánky — odkaz, který chatovací program zkrátil nebo změnil, často už nefunguje.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Tuto službu známe, ale tento druh schůzky ne. Webináře, vysílání a osobní jednací místnosti fungují jinak než běžná schůzka; otevřete tento odkaz v prohlížeči.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Tuto službu schůzek neznáme. OciDeck tedy ani neví, co se za tímto odkazem skrývá; můžete ho otevřít v prohlížeči, pokud odesílateli věříte.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'V této verzi OciDecku se připojit nelze. Použijte webovou verzi v prohlížeči.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'Tomuto prohlížeči chybí něco, co je pro připojení potřeba. Nedávná verze Chromu, Edge, Firefoxu nebo Safari obvykle funguje.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'Organizace této schůzky nepřipouští hosty bez účtu. Požádejte organizátora, aby vás pozval způsobem, který hosty umožňuje.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Připojení k této schůzce vyžaduje účet u poskytovatele. Otevřete odkaz v prohlížeči a přihlaste se tam.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'Tento poskytovatel pouští ke schůzce jen schválené programy a pro OciDeck takové schválení zatím neexistuje. Otevřete schůzku v prohlížeči.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'Organizátor vás nevpustil. Požádejte, aby vás vpustil, a pak to zkuste znovu.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'Tato schůzka je zamčená; nikdo další se už nepřipojí. Požádejte organizátora, aby zámek odstranil.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'Tato schůzka je šifrovaná mezi koncovými body, a proto nepřipouští externí účastníky. Je to volba organizátora; požádejte ho o běžnou schůzku, pokud u ní musíte být.',
+  '{plek} krijgt contact zodra u meedoet.':
+      'S {plek} se naváže kontakt, jakmile se připojíte.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Účastníte se pouze pod jménem, které sami zadáte; nejste přihlášeni jako tato osoba.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'Služba pro vás vytvoří dočasnou identitu hosta, která po schůzce zmizí.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Účastníte se jako host pod servisním účtem organizace.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'Organizátor pro vás připravil identitu.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Připojíte se pod svým vlastním účtem u tohoto poskytovatele.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'Poskytovatel vidí vaše síťové údaje a obraz i zvuk, které posíláte. Co sdílíte, sdílíte se všemi účastníky.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'Provoz je zašifrovaný na cestě ke službě; služba sama do něj může nahlédnout.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'Poskytovatel spravuje šifrování, a tedy i klíče.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'Poskytovatel to popisuje jako šifrované mezi koncovými body.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'O šifrování nebylo nic zjištěno. OciDeck tedy o něm nic neslibuje.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'Nejprve se dostanete do čekárny: organizátor vás musí vpustit. Vaši prezentaci můžete mezitím dál upravovat.',
+  'Deze vergadering vraagt om een wachtwoord.': 'Tato schůzka vyžaduje heslo.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'Tato schůzka vyžaduje registraci předem.',
+  'Vergadering wordt voorbereid': 'Schůzka se připravuje',
+  'Verbinden met de vergadering': 'Připojování ke schůzce',
+  'Wachten op toelating door de organisator':
+      'Čekání na vpuštění organizátorem',
+  'U doet mee aan de vergadering': 'Účastníte se schůzky',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'Připojení se přerušilo — připojuje se znovu',
+  'De vergadering wordt verlaten': 'Opouštění schůzky',
+  'De vergadering is beëindigd': 'Schůzka byla ukončena',
+  'Meedoen is niet gelukt': 'Připojení se nepodařilo',
+  'Deze vergadering wordt opgenomen.': 'Tato schůzka se nahrává.',
+  'Deze vergadering wordt uitgeschreven.': 'Tato schůzka se přepisuje.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'Tato schůzka se nahrává a přepisuje.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'Schůzka žádá váš výslovný souhlas, abyste se mohli dál účastnit.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'Organizátor vás ještě musí vpustit. Můžete klidně pracovat dál; jakmile budete uvnitř, okno hovoru se otevře.',
+  'Herkend als een vergadering bij {plek}.':
+      'Rozpoznáno jako schůzka na {plek}.',
+  '{uitleg} De link wijst naar {plek}.': '{uitleg} Odkaz míří na {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'Toto jméno si volíte sami; nikdo ho neověřuje. Ostatní vás vidí jako hosta.',
+  'Afsluiten': 'Ukončit',
+  'Camera aanzetten': 'Zapnout kameru',
+  'Camera uitzetten': 'Vypnout kameru',
+  'Microfoon aanzetten': 'Zapnout mikrofon',
+  'Microfoon dempen': 'Vypnout mikrofon',
+  'Presentatie delen': 'Sdílet prezentaci',
+  'Delen stoppen': 'Ukončit sdílení',
+  'Gespreksvenster': 'Okno hovoru',
+  'Venster sluiten': 'Zavřít okno',
+  'Meedoen': 'Připojit se',
+  'Meedoen aan een onlinevergadering': 'Připojení k online schůzce',
+  'Onlinevergadering': 'Online schůzka',
+  'Onlinevergadering…': 'Online schůzka…',
+  'Vergaderlink': 'Odkaz na schůzku',
+  'Plak hier de link uit de uitnodiging': 'Vložte sem odkaz z pozvánky',
+  'Uw naam, zoals de anderen die zien': 'Vaše jméno, jak ho vidí ostatní',
+  'Wat er gebeurt als u meedoet': 'Co se stane, když se připojíte',
+  'Verlaten': 'Opustit',
+  'Weigeren en verlaten': 'Odmítnout a opustit',
+  'Toestemming geven': 'Udělit souhlas',
+  'Technische code: {code}': 'Technický kód: {code}',
+  'Deelnemers ({aantal})': 'Účastníci ({aantal})',
+  'Nog geen deelnemers.': 'Zatím žádní účastníci.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'Tato schůzka neposkytuje seznam účastníků.',
+  'gast': 'host',
+  'deelnemer': 'účastník',
+  'presentator': 'přednášející',
+  'moderator': 'moderátor',
+  'organisator': 'organizátor',
+  'rol onbekend': 'role neznámá',
   'Bord': 'Tabule',
   'Projectcharter': 'Projektová charta',
   'CTQ-boom': 'Strom CTQ',

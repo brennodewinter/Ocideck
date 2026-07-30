@@ -1788,6 +1788,127 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'OciDeck не має дозволу використовувати ваш мікрофон або камеру. Надайте дозвіл у браузері або в налаштуваннях системи та спробуйте ще раз.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'Робочого мікрофона не знайдено. Підключіть його або виберіть інший пристрій.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'Робочої камери не знайдено. Ви можете приєднатися без зображення.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'Сервіс, який видає перепустку, недоступний. Спробуйте пізніше; ваша презентація тим часом просто залишається відкритою.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'Сервіс, який видає перепустку, поки що досяг свого обмеження. Спробуйте пізніше.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'Перепустка для цієї зустрічі втратила чинність. Приєднайтеся знову за тим самим посиланням.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'Мережа не пропускає цю зустріч. У корпоративній мережі брандмауер або проксі часто блокує такий трафік; інше з\'єднання зазвичай працює.',
+  'Deze vergadering is voorbij.': 'Ця зустріч уже минула.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'Сам сервіс зустрічей недоступний. Це не через ваше з\'єднання; спробуйте пізніше.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Приєднатися не вдалося, і сервіс не повідомляє чому. Технічний код указано в подробицях — спробуйте ще раз і передайте цей код, якщо проблема не зникне.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'Це не придатне посилання на зустріч. Скопіюйте його ще раз із запрошення — посилання, яке чат-програма обрізала або змінила, часто вже не працює.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Цей сервіс ми знаємо, а такий вид зустрічі — ні. Вебінари, трансляції та особисті кімнати для зустрічей працюють інакше, ніж звичайна зустріч; відкрийте це посилання у браузері.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Цього сервісу зустрічей ми не знаємо. Тому OciDeck також не знає, що стоїть за цим посиланням; ви можете відкрити його у браузері, якщо довіряєте відправнику.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'У цій збірці OciDeck приєднатися неможливо. Скористайтеся вебверсією у браузері.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'Цьому браузеру не вистачає чогось, потрібного для приєднання. Свіжий Chrome, Edge, Firefox або Safari зазвичай працює.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'Організація цієї зустрічі не допускає гостей без облікового запису. Попросіть організатора запросити вас у спосіб, який допускає гостей.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Для участі в цій зустрічі потрібен обліковий запис у постачальника. Відкрийте посилання у браузері та увійдіть там.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'Цей постачальник допускає лише схвалені програми, а такого схвалення для OciDeck ще немає. Відкрийте зустріч у браузері.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'Організатор вас не впустив. Попросіть впустити вас, а потім спробуйте ще раз.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'Ця зустріч заблокована; більше ніхто не приєднається. Попросіть організатора зняти блокування.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'Ця зустріч має наскрізне шифрування і тому не допускає зовнішніх учасників. Це вибір організатора; попросіть у нього звичайну зустріч, якщо вам потрібно бути присутнім.',
+  '{plek} krijgt contact zodra u meedoet.':
+      'З {plek} буде встановлено з\'єднання, щойно ви приєднаєтеся.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Ви берете участь лише під іменем, яке вказуєте самі; ви не увійшли як ця особа.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'Сервіс створює для вас тимчасову гостьову особу, яка зникає після зустрічі.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Ви берете участь як гість під службовим обліковим записом організації.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'Організатор підготував для вас особу.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Ви приєднуєтеся з власним обліковим записом у цього постачальника.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'Постачальник бачить ваші мережеві дані та зображення й звук, які ви надсилаєте. Те, чим ви ділитеся, ви ділитеся з усіма учасниками.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'Трафік зашифровано на шляху до сервісу; сам сервіс може його бачити.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'Постачальник керує шифруванням, а отже, і ключами.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'Постачальник описує це як наскрізне шифрування.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'Щодо шифрування нічого не встановлено. Тому OciDeck нічого про це не обіцяє.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'Спочатку ви потрапляєте до зали очікування: організатор має вас впустити. Тим часом вашу презентацію можна далі редагувати.',
+  'Deze vergadering vraagt om een wachtwoord.': 'Ця зустріч вимагає пароль.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'Ця зустріч вимагає попередньої реєстрації.',
+  'Vergadering wordt voorbereid': 'Підготовка зустрічі',
+  'Verbinden met de vergadering': 'Підключення до зустрічі',
+  'Wachten op toelating door de organisator':
+      'Очікування допуску від організатора',
+  'U doet mee aan de vergadering': 'Ви берете участь у зустрічі',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'З\'єднання втрачено — повторне підключення',
+  'De vergadering wordt verlaten': 'Вихід із зустрічі',
+  'De vergadering is beëindigd': 'Зустріч завершено',
+  'Meedoen is niet gelukt': 'Не вдалося приєднатися',
+  'Deze vergadering wordt opgenomen.': 'Цю зустріч записують.',
+  'Deze vergadering wordt uitgeschreven.': 'Цю зустріч транскрибують.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'Цю зустріч записують і транскрибують.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'Зустріч просить вашу чітку згоду, щоб ви могли брати участь далі.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'Організатор ще має вас впустити. Ви можете спокійно працювати далі; щойно ви ввійдете, вікно розмови відкриється.',
+  'Herkend als een vergadering bij {plek}.': 'Розпізнано як зустріч на {plek}.',
+  '{uitleg} De link wijst naar {plek}.': '{uitleg} Посилання вказує на {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'Це ім\'я ви вибираєте самі; ніхто його не перевіряє. Інші бачать вас як гостя.',
+  'Afsluiten': 'Завершити',
+  'Camera aanzetten': 'Увімкнути камеру',
+  'Camera uitzetten': 'Вимкнути камеру',
+  'Microfoon aanzetten': 'Увімкнути мікрофон',
+  'Microfoon dempen': 'Вимкнути мікрофон',
+  'Presentatie delen': 'Показати презентацію',
+  'Delen stoppen': 'Припинити показ',
+  'Gespreksvenster': 'Вікно розмови',
+  'Venster sluiten': 'Закрити вікно',
+  'Meedoen': 'Приєднатися',
+  'Meedoen aan een onlinevergadering': 'Приєднання до онлайн-зустрічі',
+  'Onlinevergadering': 'Онлайн-зустріч',
+  'Onlinevergadering…': 'Онлайн-зустріч…',
+  'Vergaderlink': 'Посилання на зустріч',
+  'Plak hier de link uit de uitnodiging': 'Вставте тут посилання із запрошення',
+  'Uw naam, zoals de anderen die zien': 'Ваше ім\'я, яким його бачать інші',
+  'Wat er gebeurt als u meedoet': 'Що відбувається, коли ви приєднуєтеся',
+  'Verlaten': 'Вийти',
+  'Weigeren en verlaten': 'Відмовитися та вийти',
+  'Toestemming geven': 'Надати згоду',
+  'Technische code: {code}': 'Технічний код: {code}',
+  'Deelnemers ({aantal})': 'Учасники ({aantal})',
+  'Nog geen deelnemers.': 'Учасників ще немає.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'Ця зустріч не надає списку учасників.',
+  'gast': 'гість',
+  'deelnemer': 'учасник',
+  'presentator': 'ведучий',
+  'moderator': 'модератор',
+  'organisator': 'організатор',
+  'rol onbekend': 'роль невідома',
   'Bord': 'Дошка',
   'Projectcharter': 'Статут проєкту',
   'CTQ-boom': 'Дерево CTQ',

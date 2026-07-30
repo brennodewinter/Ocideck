@@ -1798,6 +1798,132 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'Το OciDeck δεν επιτρέπεται να χρησιμοποιήσει το μικρόφωνο ή την κάμερά σας. Δώστε άδεια στο πρόγραμμα περιήγησης ή στις ρυθμίσεις συστήματος και δοκιμάστε ξανά.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'Δεν βρέθηκε μικρόφωνο που λειτουργεί. Συνδέστε ένα ή επιλέξτε άλλη συσκευή.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'Δεν βρέθηκε κάμερα που λειτουργεί. Μπορείτε να συμμετάσχετε χωρίς εικόνα.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'Η υπηρεσία που εκδίδει το διαπιστευτήριο πρόσβασης δεν είναι προσβάσιμη. Δοκιμάστε ξανά αργότερα· στο μεταξύ η παρουσίασή σας παραμένει απλώς ανοιχτή.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'Η υπηρεσία που εκδίδει το διαπιστευτήριο πρόσβασης έχει φτάσει προς το παρόν στο όριό της. Δοκιμάστε ξανά αργότερα.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'Το διαπιστευτήριο πρόσβασης για αυτήν τη σύσκεψη έχει λήξει. Συμμετάσχετε ξανά με τον ίδιο σύνδεσμο.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'Το δίκτυο δεν επιτρέπει τη διέλευση αυτής της σύσκεψης. Σε ένα εταιρικό δίκτυο, ένα τείχος προστασίας ή ένας διακομιστής μεσολάβησης συχνά μπλοκάρει αυτού του τύπου την κίνηση· με άλλη σύνδεση συνήθως λειτουργεί.',
+  'Deze vergadering is voorbij.': 'Αυτή η σύσκεψη έχει τελειώσει.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'Η υπηρεσία συσκέψεων η ίδια δεν είναι διαθέσιμη. Αυτό δεν οφείλεται στη σύνδεσή σας· δοκιμάστε ξανά αργότερα.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Η συμμετοχή απέτυχε και η υπηρεσία δεν λέει γιατί. Ο τεχνικός κωδικός βρίσκεται στις λεπτομέρειες — δοκιμάστε ξανά και δώστε αυτόν τον κωδικό αν το πρόβλημα συνεχιστεί.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'Αυτός δεν είναι χρησιμοποιήσιμος σύνδεσμος σύσκεψης. Αντιγράψτε τον ξανά από την πρόσκληση — ένας σύνδεσμος που έχει κοπεί ή αλλάξει από πρόγραμμα συνομιλίας συχνά δεν λειτουργεί πλέον.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Αυτή την υπηρεσία τη γνωρίζουμε, αλλά αυτό το είδος σύσκεψης όχι. Τα διαδικτυακά σεμινάρια, οι αναμεταδόσεις και οι προσωπικές αίθουσες συσκέψεων λειτουργούν διαφορετικά από μια συνηθισμένη σύσκεψη· ανοίξτε αυτόν τον σύνδεσμο στο πρόγραμμα περιήγησης.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Αυτή την υπηρεσία συσκέψεων δεν τη γνωρίζουμε. Έτσι το OciDeck δεν γνωρίζει τι κρύβεται πίσω από αυτόν τον σύνδεσμο· μπορείτε να τον ανοίξετε στο πρόγραμμα περιήγησής σας αν εμπιστεύεστε τον αποστολέα.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'Σε αυτήν την έκδοση του OciDeck η συμμετοχή δεν είναι δυνατή. Χρησιμοποιήστε την έκδοση web στο πρόγραμμα περιήγησής σας.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'Σε αυτό το πρόγραμμα περιήγησης λείπει κάτι που χρειάζεται για τη συμμετοχή. Ένα πρόσφατο Chrome, Edge, Firefox ή Safari συνήθως λειτουργεί.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'Ο οργανισμός αυτής της σύσκεψης δεν δέχεται επισκέπτες χωρίς λογαριασμό. Ζητήστε από τον διοργανωτή να σας προσκαλέσει με τρόπο που επιτρέπει επισκέπτες.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Η συμμετοχή σε αυτήν τη σύσκεψη απαιτεί λογαριασμό στον πάροχο. Ανοίξτε τον σύνδεσμο στο πρόγραμμα περιήγησής σας και συνδεθείτε εκεί.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'Αυτός ο πάροχος επιτρέπει τη συμμετοχή μόνο σε εγκεκριμένα προγράμματα, και αυτή η έγκριση δεν υπάρχει ακόμη για το OciDeck. Ανοίξτε τη σύσκεψη στο πρόγραμμα περιήγησής σας.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'Ο διοργανωτής δεν σας δέχτηκε. Ζητήστε να σας αφήσει να μπείτε και δοκιμάστε ξανά μετά.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'Αυτή η σύσκεψη είναι κλειδωμένη· δεν μπαίνει κανείς άλλος. Ζητήστε από τον διοργανωτή να την ξεκλειδώσει.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'Αυτή η σύσκεψη είναι κρυπτογραφημένη από άκρο σε άκρο και γι\' αυτό δεν δέχεται εξωτερικούς συμμετέχοντες. Αυτό είναι επιλογή του διοργανωτή· ζητήστε του μια συνηθισμένη σύσκεψη αν πρέπει να παρευρεθείτε.',
+  '{plek} krijgt contact zodra u meedoet.':
+      'Θα γίνει επικοινωνία με το {plek} μόλις συμμετάσχετε.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Συμμετέχετε μόνο με το όνομα που δηλώνετε εσείς· δεν έχετε συνδεθεί ως αυτό το πρόσωπο.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'Η υπηρεσία δημιουργεί για εσάς μια προσωρινή ταυτότητα επισκέπτη, η οποία εξαφανίζεται μετά τη σύσκεψη.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Συμμετέχετε ως επισκέπτης μέσω λογαριασμού υπηρεσίας ενός οργανισμού.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'Ο διοργανωτής έχει ετοιμάσει μια ταυτότητα για εσάς.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Η συμμετοχή γίνεται με τον δικό σας λογαριασμό σε αυτόν τον πάροχο.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'Ο πάροχος βλέπει τα δικτυακά σας δεδομένα και την εικόνα και τον ήχο που στέλνετε. Ό,τι μοιράζεστε, το μοιράζεστε με όλους τους συμμετέχοντες.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'Η κίνηση είναι κρυπτογραφημένη προς την υπηρεσία· η υπηρεσία η ίδια μπορεί να τη δει.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'Ο πάροχος διαχειρίζεται την κρυπτογράφηση και άρα και τα κλειδιά.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'Ο πάροχος το περιγράφει ως κρυπτογραφημένο από άκρο σε άκρο.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'Για την κρυπτογράφηση δεν έχει διαπιστωθεί τίποτε. Το OciDeck δεν υπόσχεται λοιπόν τίποτε σχετικά.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'Πρώτα μπαίνετε σε μια αίθουσα αναμονής: ένας διοργανωτής πρέπει να σας δεχτεί. Στο μεταξύ η παρουσίασή σας παραμένει πλήρως επεξεργάσιμη.',
+  'Deze vergadering vraagt om een wachtwoord.':
+      'Αυτή η σύσκεψη ζητά κωδικό πρόσβασης.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'Αυτή η σύσκεψη απαιτεί προεγγραφή.',
+  'Vergadering wordt voorbereid': 'Η σύσκεψη προετοιμάζεται',
+  'Verbinden met de vergadering': 'Σύνδεση με τη σύσκεψη',
+  'Wachten op toelating door de organisator':
+      'Αναμονή για αποδοχή από τον διοργανωτή',
+  'U doet mee aan de vergadering': 'Συμμετέχετε στη σύσκεψη',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'Η σύνδεση χάθηκε — επανασύνδεση',
+  'De vergadering wordt verlaten': 'Αποχώρηση από τη σύσκεψη',
+  'De vergadering is beëindigd': 'Η σύσκεψη έχει λήξει',
+  'Meedoen is niet gelukt': 'Η συμμετοχή απέτυχε',
+  'Deze vergadering wordt opgenomen.': 'Αυτή η σύσκεψη καταγράφεται.',
+  'Deze vergadering wordt uitgeschreven.': 'Αυτή η σύσκεψη απομαγνητοφωνείται.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'Αυτή η σύσκεψη καταγράφεται και απομαγνητοφωνείται.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'Η σύσκεψη ζητά τη ρητή συγκατάθεσή σας για να συνεχίσετε να συμμετέχετε.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'Ένας διοργανωτής πρέπει ακόμη να σας δεχτεί. Μπορείτε απλώς να συνεχίσετε να εργάζεστε· μόλις μπείτε, θα ανοίξει το παράθυρο κλήσης.',
+  'Herkend als een vergadering bij {plek}.':
+      'Αναγνωρίστηκε ως σύσκεψη στο {plek}.',
+  '{uitleg} De link wijst naar {plek}.':
+      '{uitleg} Ο σύνδεσμος οδηγεί στο {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'Αυτό το όνομα το επιλέγετε εσείς· κανείς δεν το ελέγχει. Οι άλλοι σας βλέπουν ως επισκέπτη.',
+  'Afsluiten': 'Τερματισμός',
+  'Camera aanzetten': 'Ενεργοποίηση κάμερας',
+  'Camera uitzetten': 'Απενεργοποίηση κάμερας',
+  'Microfoon aanzetten': 'Ενεργοποίηση μικροφώνου',
+  'Microfoon dempen': 'Σίγαση μικροφώνου',
+  'Presentatie delen': 'Κοινοποίηση παρουσίασης',
+  'Delen stoppen': 'Διακοπή κοινοποίησης',
+  'Gespreksvenster': 'Παράθυρο κλήσης',
+  'Venster sluiten': 'Κλείσιμο παραθύρου',
+  'Meedoen': 'Συμμετοχή',
+  'Meedoen aan een onlinevergadering': 'Συμμετοχή σε διαδικτυακή σύσκεψη',
+  'Onlinevergadering': 'Διαδικτυακή σύσκεψη',
+  'Onlinevergadering…': 'Διαδικτυακή σύσκεψη…',
+  'Vergaderlink': 'Σύνδεσμος σύσκεψης',
+  'Plak hier de link uit de uitnodiging':
+      'Επικολλήστε εδώ τον σύνδεσμο από την πρόσκληση',
+  'Uw naam, zoals de anderen die zien':
+      'Το όνομά σας, όπως το βλέπουν οι άλλοι',
+  'Wat er gebeurt als u meedoet': 'Τι συμβαίνει όταν συμμετέχετε',
+  'Verlaten': 'Αποχώρηση',
+  'Weigeren en verlaten': 'Άρνηση και αποχώρηση',
+  'Toestemming geven': 'Παροχή συγκατάθεσης',
+  'Technische code: {code}': 'Τεχνικός κωδικός: {code}',
+  'Deelnemers ({aantal})': 'Συμμετέχοντες ({aantal})',
+  'Nog geen deelnemers.': 'Δεν υπάρχουν ακόμη συμμετέχοντες.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'Αυτή η σύσκεψη δεν παρέχει λίστα συμμετεχόντων.',
+  'gast': 'επισκέπτης',
+  'deelnemer': 'συμμετέχων',
+  'presentator': 'παρουσιαστής',
+  'moderator': 'συντονιστής',
+  'organisator': 'διοργανωτής',
+  'rol onbekend': 'άγνωστος ρόλος',
   'Bord': 'Πίνακας',
   'Projectcharter': 'Χάρτης έργου',
   'CTQ-boom': 'Δέντρο CTQ',

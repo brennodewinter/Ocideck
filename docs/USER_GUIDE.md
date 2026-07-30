@@ -3279,13 +3279,44 @@ calling as a whole, not one per vendor (design:
 [`docs/design/COLLABORATION.md`](design/COLLABORATION.md) §7.1).
 
 **What the switch does today: nothing outward, and it says so.** The current
-release carries only the provider-neutral foundation — the vocabulary of a
-meeting (phases, roles, capabilities, typed failures) and the module gate. No
-meeting service is connected yet, so the card's own footer tells you that
-joining is not possible yet. Off means off in the strong sense: with the module
-off there is no shell action and no code path that could contact a meeting
+release carries the provider-neutral foundation and the screens on top of it,
+but **no meeting service is connected yet**, so the card's own footer tells you
+that joining is not possible. Off means off in the strong sense: with the module
+off there is no entry point and no code path that could contact a meeting
 service at all, and even with it on, this version of OciDeck sends nothing to
 any meeting provider.
+
+**What the screens look like, so the shape is not a surprise later.** With the
+module on, a meeting icon appears in the tab bar — deliberately there and not in
+a deck's toolbar, because joining a meeting has to work with no presentation
+open. It opens a single dialog:
+
+1. You paste the meeting link, and OciDeck tells you immediately what it is —
+   which service, or that it does not recognise the link, or why the link is
+   unusable. That check is local: it reads the link and compares it with a list
+   inside the app, so it costs nothing and nothing leaves your device.
+2. You enter the name others will see, with the plain statement that you chose
+   it yourself and nobody verified it.
+3. Only when you press **Controleren** does OciDeck ask the provider what is
+   possible — the first moment anything could leave the device.
+4. Before the **Meedoen** button you read what will happen: which origin gets
+   contacted, how you are identified, what the provider gets to see, what is
+   known about encryption (including a plain "nothing has been established"),
+   and whether a waiting room is expected.
+
+**Waiting for admission does not take over your screen.** If an organiser has to
+admit you, the dialog closes and you keep working on your presentation. The wait
+shows up in the chrome: the meeting icon changes colour and shape and blinks
+(and simply keeps its distinct colour and label if you have reduced motion
+switched on), and one non-modal strip above your work says what is being waited
+for and offers **Verlaten**. The moment you are admitted, the call window opens
+by itself — you do not have to go looking for it.
+
+**The call window only shows controls that actually work.** Microphone, camera
+and sharing appear only when the meeting permits them; if an organiser withdraws
+one mid-call, that button disappears and the call continues. **Verlaten** is
+never one of those conditional buttons. When a meeting is being recorded or
+transcribed, a banner says so and stays for as long as it is true.
 
 **Switching it off never strands a call.** Once real providers arrive, the
 project's fixed module rule applies literally here: a meeting that is running

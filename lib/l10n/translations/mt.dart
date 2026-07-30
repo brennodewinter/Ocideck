@@ -1793,6 +1793,130 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'OciDeck ma jitħalliex juża l-mikrofonu jew il-kamera tiegħek. Agħti l-permess fil-browser jew fis-settings tas-sistema u erġa\' pprova.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'Ma nstabx mikrofonu li jaħdem. Qabbad wieħed jew agħżel apparat ieħor.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'Ma nstabitx kamera li taħdem. Tista\' tissieħeb bla stampa.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'Is-servizz li joħroġ il-kredenzjal ta\' aċċess ma jistax jintlaħaq. Erġa\' pprova aktar tard; sadanittant il-preżentazzjoni tiegħek tibqa\' sempliċement miftuħa.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'Is-servizz li joħroġ il-kredenzjal ta\' aċċess laħaq il-limitu tiegħu għalissa. Erġa\' pprova aktar tard.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'Il-kredenzjal ta\' aċċess għal din il-laqgħa skada. Erġa\' ssieħeb bl-istess link.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'In-netwerk ma jħallix din il-laqgħa tgħaddi. Fuq netwerk ta\' kumpanija, firewall jew proxy spiss jimblokka dan it-tip ta\' traffiku; konnessjoni oħra normalment tirnexxi.',
+  'Deze vergadering is voorbij.': 'Din il-laqgħa spiċċat.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'Is-servizz tal-laqgħat innifsu mhuwiex disponibbli. Dan mhuwiex minħabba l-konnessjoni tiegħek; erġa\' pprova aktar tard.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Is-sħubija ma rnexxietx, u s-servizz ma jgħidx għaliex. Il-kodiċi tekniku jinsab mad-dettalji — erġa\' pprova, u għaddi dak il-kodiċi jekk il-problema tibqa\'.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'Dan mhuwiex link tal-laqgħa li jista\' jintuża. Erġa\' kkupjah mill-istedina — link li programm tal-chat qata\' jew biddel spiss ma jaħdimx aktar.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Dan is-servizz nafuh, imma dan it-tip ta\' laqgħa le. Il-webinars, ix-xandiriet u l-kmamar tal-laqgħat personali jaħdmu b\'mod differenti minn laqgħa ordinarja; iftaħ dan il-link fil-browser.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Dan is-servizz ta\' laqgħat ma nafuhx. Għalhekk OciDeck lanqas ma jaf x\'hemm wara dan il-link; tista\' tiftħu fil-browser tiegħek jekk tafda lil min bagħtu.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'F\'din il-verżjoni ta\' OciDeck ma tistax tissieħeb. Uża l-verżjoni tal-web fil-browser tiegħek.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'Dan il-browser jonqsu xi ħaġa li hija meħtieġa biex tissieħeb. Chrome, Edge, Firefox jew Safari riċenti normalment jaħdem.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'L-organizzazzjoni ta\' din il-laqgħa ma tħallix mistednin bla kont. Itlob lill-organizzatur jistiednek b\'mod li jħalli l-mistednin.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Biex tissieħeb f\'din il-laqgħa jeħtieġ kont mal-fornitur. Iftaħ il-link fil-browser tiegħek u illoggja hemm.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'Dan il-fornitur iħalli biss programmi approvati jissieħbu, u din l-approvazzjoni għad ma teżistix għal OciDeck. Iftaħ il-laqgħa fil-browser tiegħek.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'L-organizzatur ma daħħlekx. Itlob li jdaħħlek u mbagħad erġa\' pprova.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'Din il-laqgħa hija msakkra; ħadd aktar ma jista\' jidħol. Itlob lill-organizzatur ineħħi s-sokor.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'Din il-laqgħa hija kriptata minn tarf sa tarf u għalhekk ma tħallix parteċipanti esterni. Din hija għażla tal-organizzatur; itolbu laqgħa ordinarja jekk trid tkun preżenti.',
+  '{plek} krijgt contact zodra u meedoet.':
+      'Isir kuntatt ma\' {plek} hekk kif tissieħeb.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Tieħu sehem biss bl-isem li tagħti int; m\'intix illoggjat bħala dik il-persuna.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'Is-servizz joħloq għalik identità ta\' mistieden temporanja, li tisparixxi wara l-laqgħa.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Tieħu sehem bħala mistieden permezz ta\' kont ta\' servizz ta\' organizzazzjoni.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'L-organizzatur ħejja identità għalik.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Tissieħeb bil-kont tiegħek stess ma\' dan il-fornitur.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'Il-fornitur jara d-dettalji tan-netwerk tiegħek u l-istampa u l-ħoss li tibgħat. Dak li taqsam, taqsmu ma\' kull parteċipant.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'It-traffiku huwa kriptat sas-servizz; is-servizz innifsu jista\' jħares fih.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'Il-fornitur jamministra l-kriptaġġ u għalhekk ukoll iċ-ċwievet.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'Il-fornitur jiddeskrivi dan bħala kriptat minn tarf sa tarf.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'Dwar il-kriptaġġ ma ġie stabbilit xejn. Għalhekk OciDeck ma jwiegħed xejn dwaru.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'L-ewwel tidħol fi kamra tal-istennija: organizzatur irid idaħħlek. Sadanittant il-preżentazzjoni tiegħek tibqa\' tista\' tiġi editjata.',
+  'Deze vergadering vraagt om een wachtwoord.':
+      'Din il-laqgħa titlob password.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'Din il-laqgħa titlob reġistrazzjoni bil-quddiem.',
+  'Vergadering wordt voorbereid': 'Il-laqgħa qed titħejja',
+  'Verbinden met de vergadering': 'Qed jsir kuntatt mal-laqgħa',
+  'Wachten op toelating door de organisator':
+      'Qed jistenna li l-organizzatur idaħħlek',
+  'U doet mee aan de vergadering': 'Qed tieħu sehem fil-laqgħa',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'Il-konnessjoni waqgħet — qed jerġa\' jsir kuntatt',
+  'De vergadering wordt verlaten': 'Qed toħroġ mil-laqgħa',
+  'De vergadering is beëindigd': 'Il-laqgħa ntemmet',
+  'Meedoen is niet gelukt': 'Is-sħubija ma rnexxietx',
+  'Deze vergadering wordt opgenomen.': 'Din il-laqgħa qed tiġi rrekordjata.',
+  'Deze vergadering wordt uitgeschreven.': 'Din il-laqgħa qed tiġi traskritta.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'Din il-laqgħa qed tiġi rrekordjata u traskritta.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'Il-laqgħa titlob il-kunsens espliċitu tiegħek biex tkompli tieħu sehem.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'Organizzatur għad irid idaħħlek. Tista\' tkompli taħdem bil-kwiet; hekk kif tkun ġewwa, tinfetaħ it-tieqa tat-taħdita.',
+  'Herkend als een vergadering bij {plek}.':
+      'Magħrufa bħala laqgħa fuq {plek}.',
+  '{uitleg} De link wijst naar {plek}.':
+      '{uitleg} Il-link jipponta lejn {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'Dan l-isem tagħżlu int; ħadd ma jiċċekkjah. L-oħrajn jarawk bħala mistieden.',
+  'Afsluiten': 'Temm',
+  'Camera aanzetten': 'Ixgħel il-kamera',
+  'Camera uitzetten': 'Itfi l-kamera',
+  'Microfoon aanzetten': 'Ixgħel il-mikrofonu',
+  'Microfoon dempen': 'Itfi l-mikrofonu',
+  'Presentatie delen': 'Aqsam il-preżentazzjoni',
+  'Delen stoppen': 'Waqqaf il-qsim',
+  'Gespreksvenster': 'Tieqa tat-taħdita',
+  'Venster sluiten': 'Agħlaq it-tieqa',
+  'Meedoen': 'Issieħeb',
+  'Meedoen aan een onlinevergadering': 'Issieħeb fi laqgħa onlajn',
+  'Onlinevergadering': 'Laqgħa onlajn',
+  'Onlinevergadering…': 'Laqgħa onlajn…',
+  'Vergaderlink': 'Link tal-laqgħa',
+  'Plak hier de link uit de uitnodiging': 'Waħħal hawn il-link mill-istedina',
+  'Uw naam, zoals de anderen die zien': 'Ismek, kif jarawh l-oħrajn',
+  'Wat er gebeurt als u meedoet': 'X\'jiġri meta tissieħeb',
+  'Verlaten': 'Oħroġ',
+  'Weigeren en verlaten': 'Irrifjuta u oħroġ',
+  'Toestemming geven': 'Agħti l-kunsens',
+  'Technische code: {code}': 'Kodiċi tekniku: {code}',
+  'Deelnemers ({aantal})': 'Parteċipanti ({aantal})',
+  'Nog geen deelnemers.': 'Għad m\'hemm l-ebda parteċipant.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'Din il-laqgħa ma tagħtix lista tal-parteċipanti.',
+  'gast': 'mistieden',
+  'deelnemer': 'parteċipant',
+  'presentator': 'preżentatur',
+  'moderator': 'moderatur',
+  'organisator': 'organizzatur',
+  'rol onbekend': 'rwol mhux magħruf',
   'Bord': 'Bord',
   'Projectcharter': 'Karta tal-proġett',
   'CTQ-boom': 'Siġra CTQ',

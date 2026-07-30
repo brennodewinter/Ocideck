@@ -206,6 +206,24 @@ class FakeMeetingSession implements MeetingSession {
     while (advance()) {}
   }
 
+  /// Trek een recht in terwijl het gesprek loopt.
+  ///
+  /// Geen kunstgreep voor een test maar een pad dat `COLLABORATION.md` §7.1.1
+  /// uitdrukkelijk noemt: een organisator kan een deelnemer bevorderen,
+  /// degraderen of het delen van het scherm intrekken terwijl er gepraat wordt,
+  /// en de schil moet de verdwenen knop meteen weghalen **zonder** de sessie te
+  /// beëindigen. Zonder een adapter die dat kan melden, is dat gedrag niet te
+  /// tonen en niet te toetsen.
+  ///
+  /// Buiten het draaiboek om, want het is geen stap in een verloop maar iets wat
+  /// op elk moment kan gebeuren.
+  void changeCapabilities(MeetingCapabilities capabilities) =>
+      _emit(MeetingCapabilitiesChanged(capabilities));
+
+  /// Idem voor de rol: bevorderen of degraderen tijdens het gesprek.
+  void changeRole(MeetingRole role, {String? providerLabel}) =>
+      _emit(MeetingRoleChanged(role, providerLabel: providerLabel));
+
   @override
   Future<void> setMicrophone(bool enabled) async {
     // Rechten vóór knoppen (T12): wat niet mag, gebeurt niet — en er komt geen

@@ -549,6 +549,13 @@ Promotion to `supported` requires all of the following:
 
 #### 7.1.5 Delivery order
 
+*(Marked 2026-07-29, two decisions taken by the project owner that this order
+depends on: for Jitsi the stance on which deployments may be trusted is
+**liberal** — a user may add any deployment, with the shape and the limits set
+out in §7.1.6 under "Recognising a deployment whose URL carries no marker"; and
+a cooperating **Nextcloud** instance is available, so the Talk spike in step 5
+is no longer blocked on finding a server.)*
+
 1. Build `MeetingProvider`, `MeetingSession`, `MeetingLinkResolver`, typed events
    and a fake adapter without adding an external SDK.
 2. Add **Jitsi** as the smallest end-to-end proof through its official IFrame
@@ -604,6 +611,63 @@ class MeetingProviderProfile {
   approval before persisting or contacting a token broker.
 - Export/import of profiles excludes credentials and makes the receiving user
   re-approve private-network access.
+
+##### Recognising a deployment whose URL carries no marker (the Jitsi case)
+
+Teams links are recognisable: an exact host family plus a `/l/meetup-join/`
+path. Jitsi is the opposite, and it is the harder and more common case. A Jitsi
+room is `https://<host>/<RoomName>` — structurally identical to a blog post, a
+documentation page or a login screen. **No pattern over the URL can decide that
+a link is a Jitsi room.** Any design that claims otherwise is guessing.
+
+Three things therefore must not happen, and each is a rule rather than a
+preference:
+
+- **No probing.** Do not fetch the host, `/external_api.js`, or a
+  `.well-known` document to find out what a link is. A meeting link is
+  bearer-like data: contacting the host to identify it hands the link to that
+  host before the user has consented to anything, and §7.1.3 already forbids
+  trying an unknown invitation against configured providers.
+- **No blanket claim.** An adapter must not declare that it recognises every
+  HTTPS URL so that "liberal" becomes "everything is Jitsi". That would make
+  the at-most-one-adapter rule meaningless and would send arbitrary links into
+  a vendor iframe.
+- **No shape-based auto-decision.** A single path segment, no file extension,
+  a CamelCase or three-word room name and a `?jwt=` parameter are together a
+  decent *hint*. A hint may change which question the interface asks; it may
+  never stand in for the answer.
+
+What replaces guessing is three tiers of trust, all resolved locally:
+
+1. **Built-in public deployments** — a versioned list of exact hosts
+   (`meet.jit.si`, `8x8.vc`, and other well-known public instances), matched
+   suffix-safe on label boundaries as §7.1.3 already requires.
+2. **Deployments the user or administrator approved** — a
+   `MeetingProviderProfile` (above) naming an origin and its allowed join
+   paths. **This is where a liberal stance belongs:** there is no gatekeeping on
+   *which* deployment may be added, because an organisation's own Jitsi is as
+   legitimate as a public one. What stays strict is the act — a profile is
+   added deliberately, wins only for its exact origin, and never claims every
+   subdomain.
+3. **Unknown** — the interface says so and *asks*. Offering "treat this as a
+   Jitsi deployment" with the egress disclosure attached, and remembering it as
+   a profile on confirmation, is the honest form of liberal: the user supplies
+   the one fact no URL can carry. Declining leaves the official-browser
+   fallback, which is what an unrecognised link already gets.
+
+**Recognition runs while the user types, not after a button.** Parsing and
+comparing against these tiers costs nothing and touches no service, so the
+verdict — which deployment this is, or that it is unknown, or why it was
+rejected — belongs on screen as the link is pasted. Only `preflight()` waits for
+an explicit action (T8). Keeping those two steps apart is what lets recognition
+be immediate without anything leaving the device.
+
+**One Jitsi-specific hazard, in the fragment.** Jitsi honours URL fragment
+overrides (`#config.…`, `#userInfo.…`), so a crafted link can preset behaviour —
+including unmuting or a display name. `MeetingLinkResolver` strips the fragment
+before the link reaches an adapter, and for this family that is a security
+property rather than tidiness: the defaults of §13.2 (muted, camera off) must
+come from OciDeck, never from whoever sent the invitation.
 
 ##### Vendor SDK isolation
 

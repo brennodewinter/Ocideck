@@ -19,6 +19,24 @@ class _AppTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final palette = Theme.of(context).extension<AppPalette>()!;
+    // De vergaderstrip hangt direct onder de tabs en boven het werk: hij meldt
+    // het wachten zonder de presentatie af te dekken (T15). De waker tekent
+    // niets en opent het gespreksvenster bij toelating.
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _tabRow(context, l10n, palette),
+        const MeetingWaitingStrip(),
+        const MeetingAdmissionWatcher(),
+      ],
+    );
+  }
+
+  Widget _tabRow(
+    BuildContext context,
+    AppLocalizations l10n,
+    AppPalette palette,
+  ) {
     return Container(
       height: 36,
       color: palette.panel,
@@ -59,6 +77,12 @@ class _AppTabBar extends StatelessWidget {
               ),
             ),
           ),
+          // In de balk die er altijd is, en niet in een werkbalk die pas
+          // bestaat zodra er een presentatie open is (§6.1).
+          MeetingEntryPoint(
+            iconColour: palette.panelText.withValues(alpha: 0.55),
+          ),
+          const MeetingStatusIndicator(),
         ],
       ),
     );

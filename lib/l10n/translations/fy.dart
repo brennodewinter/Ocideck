@@ -731,6 +731,131 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'OciDeck mei jo mikrofoan of kamera net brûke. Jou tastimming yn jo browser of systeemynstellings en besykje it opnij.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'Der is gjin wurkjende mikrofoan fûn. Slút der ien oan of kies in oar apparaat.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'Der is gjin wurkjende kamera fûn. Jo kinne sûnder byld meidwaan.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'De tsjinst dy\'t it tagongsbewiis útjout is net te berikken. Besykje it letter opnij; jo presintaasje bliuwt yntusken gewoan iepen.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'De tsjinst dy\'t it tagongsbewiis útjout hat syn grins foar no berikt. Besykje it letter opnij.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'It tagongsbewiis foar dizze gearkomste is ferrûn. Doch opnij mei mei deselde keppeling.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'It netwurk lit dizze gearkomste net troch. Op in bedriuwsnetwurk blokkearret in firewall of proxy dit soarte ferkear faak; in oare ferbining slagget meastentiids wol.',
+  'Deze vergadering is voorbij.': 'Dizze gearkomste is foarby.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'De gearkomstetsjinst sels is net beskikber. Dat komt net troch jo ferbining; besykje it letter opnij.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Meidwaan is mislearre, en de tsjinst seit net wêrom. De technyske koade stiet by de details — besykje it opnij, en jou dy koade troch as it bliuwt misgean.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'Dit is gjin brûkbere gearkomstekeppeling. Kopiearje him opnij út de útnoeging — in keppeling dy\'t troch in chatprogramma ôfkapt of oanpast is, docht it faak net mear.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Dizze tsjinst kenne wy, mar dit soarte gearkomste net. Webinars, útstjoerings en persoanlike gearkomsteromten wurkje oars as in gewoane gearkomste; iepenje dizze keppeling yn de browser.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Dizze gearkomstetsjinst kenne wy net. OciDeck wit dus ek net wat der achter dizze keppeling sit; jo kinne him yn jo browser iepenje as jo de ôfstjoerder fertrouwe.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'Meidwaan kin yn dizze útfiering fan OciDeck net. Brûk de webferzje yn jo browser.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'Dizze browser mist wat foar meidwaan nedich is. In resinte Chrome, Edge, Firefox of Safari slagget yn \'e regel wol.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'De organisaasje fan dizze gearkomste lit gjin gasten sûnder akkount ta. Freegje de organisator om jo út te nûgjen op in wize dy\'t gasten talit.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Meidwaan oan dizze gearkomste freget in akkount by de oanbieder. Iepenje de keppeling yn jo browser en meld jo dêr oan.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'Dizze oanbieder lit allinnich goedkarde programma\'s meidwaan, en dy goedkarring is der foar OciDeck noch net. Iepenje de gearkomste yn jo browser.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'De organisator hat jo net talitten. Freegje oft hy jo binnenlit en besykje it dêrnei opnij.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'Dizze gearkomste sit op slot; der komt gjinien mear by. Freegje de organisator om it slot deraf te heljen.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'Dizze gearkomste is ein-tot-ein fersifere en lit dêrom gjin eksterne dielnimmers ta. Dat is in kar fan de organisator; freegje him om in gewoane gearkomste as jo derby wêze moatte.',
+  '{plek} krijgt contact zodra u meedoet.':
+      '{plek} wurdt kontakte sa gau as jo meidogge.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Jo dogge mei mei allinnich de namme dy\'t jo sels opjouwe; jo binne net oanmeld as dy persoan.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'De tsjinst makket in tydlike gastidentiteit foar jo, dy\'t nei de gearkomste ferdwynt.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Jo dogge mei as gast ûnder in tsjinstakkount fan in organisaasje.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'De organisator hat in identiteit foar jo klearset.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Meidwaan giet mei jo eigen akkount by dizze oanbieder.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'De oanbieder sjocht jo netwurkgegevens en it byld en lûd dat jo ferstjoere. Wat jo diele, diele jo mei alle dielnimmers.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'It ferkear is fersifere nei de tsjinst ta; de tsjinst sels kin meisjen.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'De oanbieder behearret de fersifering en dus ek de kaaien.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'De oanbieder beskriuwt dit as ein-tot-ein fersifere.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'Oer de fersifering is neat fêststeld. OciDeck taseit dêr dus neat oer.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'Jo komme earst yn in wachtromte: in organisator moat jo talitte. Jo presintaasje bliuwt yntusken gewoan te bewurkjen.',
+  'Deze vergadering vraagt om een wachtwoord.':
+      'Dizze gearkomste freget om in wachtwurd.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'Dizze gearkomste freget om oanmelding foarôf.',
+  'Vergadering wordt voorbereid': 'Gearkomste wurdt taret',
+  'Verbinden met de vergadering': 'Ferbine mei de gearkomste',
+  'Wachten op toelating door de organisator':
+      'Wachtsjen op talitting troch de organisator',
+  'U doet mee aan de vergadering': 'Jo dogge mei oan de gearkomste',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'De ferbining is fuortfallen — opnij ferbine',
+  'De vergadering wordt verlaten': 'De gearkomste wurdt ferlitten',
+  'De vergadering is beëindigd': 'De gearkomste is beëinige',
+  'Meedoen is niet gelukt': 'Meidwaan is mislearre',
+  'Deze vergadering wordt opgenomen.': 'Dizze gearkomste wurdt opnommen.',
+  'Deze vergadering wordt uitgeschreven.': 'Dizze gearkomste wurdt útskreaun.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'Dizze gearkomste wurdt opnommen en útskreaun.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'De gearkomste freget jo útdruklike tastimming om troch te gean mei meidwaan.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'In organisator moat jo noch talitte. Jo kinne gewoan trochwurkje; sa gau as jo binnen binne, giet it petearfinster iepen.',
+  'Herkend als een vergadering bij {plek}.':
+      'Erkend as in gearkomste by {plek}.',
+  '{uitleg} De link wijst naar {plek}.':
+      '{uitleg} De keppeling wiist nei {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'Dizze namme kieze jo sels; nimmen kontrolearret him. De oaren sjogge jo as gast.',
+  'Afsluiten': 'Ofslute',
+  'Camera aanzetten': 'Kamera oansette',
+  'Camera uitzetten': 'Kamera útsette',
+  'Microfoon aanzetten': 'Mikrofoan oansette',
+  'Microfoon dempen': 'Mikrofoan dimpe',
+  'Presentatie delen': 'Presintaasje diele',
+  'Delen stoppen': 'Diele stopje',
+  'Gespreksvenster': 'Petearfinster',
+  'Venster sluiten': 'Finster slute',
+  'Meedoen': 'Meidwaan',
+  'Meedoen aan een onlinevergadering': 'Meidwaan oan in onlinegearkomste',
+  'Onlinevergadering': 'Onlinegearkomste',
+  'Onlinevergadering…': 'Onlinegearkomste…',
+  'Vergaderlink': 'Gearkomstekeppeling',
+  'Plak hier de link uit de uitnodiging':
+      'Plak hjir de keppeling út de útnoeging',
+  'Uw naam, zoals de anderen die zien': 'Jo namme, sa\'t de oaren dy sjogge',
+  'Wat er gebeurt als u meedoet': 'Wat der bart as jo meidogge',
+  'Verlaten': 'Ferlitte',
+  'Weigeren en verlaten': 'Wegerje en ferlitte',
+  'Toestemming geven': 'Tastimming jaan',
+  'Technische code: {code}': 'Technyske koade: {code}',
+  'Deelnemers ({aantal})': 'Dielnimmers ({aantal})',
+  'Nog geen deelnemers.': 'Noch gjin dielnimmers.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'Dizze gearkomste jout gjin dielnimmerslist.',
+  'gast': 'gast',
+  'deelnemer': 'dielnimmer',
+  'presentator': 'presintator',
+  'moderator': 'moderator',
+  'organisator': 'organisator',
+  'rol onbekend': 'rol ûnbekend',
   'Bord': 'Boerd',
   'Projectcharter': 'Projektcharter',
   'CTQ-boom': 'CTQ-beam',

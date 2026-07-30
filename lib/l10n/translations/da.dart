@@ -1770,6 +1770,128 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'OciDeck må ikke bruge din mikrofon eller dit kamera. Giv tilladelse i din browser eller i systemindstillingerne og prøv igen.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'Der blev ikke fundet nogen fungerende mikrofon. Tilslut en, eller vælg en anden enhed.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'Der blev ikke fundet noget fungerende kamera. Du kan deltage uden billede.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'Tjenesten, der udsteder adgangsbeviset, kan ikke nås. Prøv igen senere; din præsentation bliver i mellemtiden bare ved med at være åben.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'Tjenesten, der udsteder adgangsbeviset, har nået sin grænse for nu. Prøv igen senere.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'Adgangsbeviset til dette møde er udløbet. Deltag igen med samme link.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'Netværket lader ikke dette møde komme igennem. På et virksomhedsnetværk blokerer en firewall eller proxy ofte den slags trafik; en anden forbindelse virker normalt.',
+  'Deze vergadering is voorbij.': 'Dette møde er forbi.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'Selve mødetjenesten er ikke tilgængelig. Det skyldes ikke din forbindelse; prøv igen senere.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Deltagelse mislykkedes, og tjenesten siger ikke hvorfor. Den tekniske kode står ved detaljerne — prøv igen, og videregiv koden, hvis det bliver ved med at gå galt.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'Dette er ikke et brugbart mødelink. Kopiér det igen fra invitationen — et link, som et chatprogram har afkortet eller ændret, virker ofte ikke længere.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Vi kender denne tjeneste, men ikke denne slags møde. Webinarer, udsendelser og personlige mødelokaler fungerer anderledes end et almindeligt møde; åbn dette link i browseren.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Vi kender ikke denne mødetjeneste. OciDeck ved derfor heller ikke, hvad der ligger bag dette link; du kan åbne det i din browser, hvis du har tillid til afsenderen.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'Deltagelse er ikke mulig i denne udgave af OciDeck. Brug webversionen i din browser.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'Denne browser mangler noget, der er nødvendigt for at deltage. En nyere Chrome, Edge, Firefox eller Safari virker som regel.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'Organisationen bag dette møde tillader ikke gæster uden konto. Bed arrangøren om at invitere dig på en måde, der tillader gæster.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Deltagelse i dette møde kræver en konto hos udbyderen. Åbn linket i din browser og log ind der.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'Denne udbyder lader kun godkendte programmer deltage, og den godkendelse findes endnu ikke for OciDeck. Åbn mødet i din browser.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'Arrangøren lukkede dig ikke ind. Bed om at blive lukket ind, og prøv derefter igen.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'Dette møde er låst; der kommer ikke flere ind. Bed arrangøren om at fjerne låsen.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'Dette møde er end-to-end-krypteret og tillader derfor ikke eksterne deltagere. Det er arrangørens valg; bed om et almindeligt møde, hvis du skal være med.',
+  '{plek} krijgt contact zodra u meedoet.':
+      'Der oprettes kontakt til {plek}, så snart du deltager.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Du deltager kun med det navn, du selv angiver; du er ikke logget ind som den person.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'Tjenesten opretter en midlertidig gæsteidentitet til dig, som forsvinder efter mødet.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Du deltager som gæst via en organisations tjenestekonto.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'Arrangøren har oprettet en identitet til dig.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Du deltager med din egen konto hos denne udbyder.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'Udbyderen ser dine netværksoplysninger og det billede og den lyd, du sender. Det, du deler, deler du med alle deltagere.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'Trafikken er krypteret hen til tjenesten; tjenesten selv kan se med.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'Udbyderen styrer krypteringen og dermed også nøglerne.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'Udbyderen beskriver dette som end-to-end-krypteret.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'Der er intet fastslået om krypteringen. OciDeck lover derfor ikke noget om den.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'Du kommer først i et venterum: en arrangør skal lukke dig ind. Din præsentation kan i mellemtiden stadig redigeres.',
+  'Deze vergadering vraagt om een wachtwoord.':
+      'Dette møde beder om en adgangskode.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'Dette møde kræver tilmelding på forhånd.',
+  'Vergadering wordt voorbereid': 'Mødet forberedes',
+  'Verbinden met de vergadering': 'Forbinder til mødet',
+  'Wachten op toelating door de organisator':
+      'Venter på at arrangøren lukker dig ind',
+  'U doet mee aan de vergadering': 'Du deltager i mødet',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'Forbindelsen blev afbrudt — forbinder igen',
+  'De vergadering wordt verlaten': 'Forlader mødet',
+  'De vergadering is beëindigd': 'Mødet er slut',
+  'Meedoen is niet gelukt': 'Deltagelse mislykkedes',
+  'Deze vergadering wordt opgenomen.': 'Dette møde bliver optaget.',
+  'Deze vergadering wordt uitgeschreven.': 'Dette møde bliver transskriberet.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'Dette møde bliver optaget og transskriberet.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'Mødet beder om dit udtrykkelige samtykke til fortsat at deltage.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'En arrangør skal stadig lukke dig ind. Du kan roligt arbejde videre; så snart du er inde, åbner samtalevinduet sig.',
+  'Herkend als een vergadering bij {plek}.': 'Genkendt som et møde hos {plek}.',
+  '{uitleg} De link wijst naar {plek}.': '{uitleg} Linket peger på {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'Dette navn vælger du selv; ingen kontrollerer det. De andre ser dig som gæst.',
+  'Afsluiten': 'Afslut',
+  'Camera aanzetten': 'Slå kamera til',
+  'Camera uitzetten': 'Slå kamera fra',
+  'Microfoon aanzetten': 'Slå mikrofon til',
+  'Microfoon dempen': 'Slå mikrofon fra',
+  'Presentatie delen': 'Del præsentationen',
+  'Delen stoppen': 'Stop deling',
+  'Gespreksvenster': 'Samtalevindue',
+  'Venster sluiten': 'Luk vinduet',
+  'Meedoen': 'Deltag',
+  'Meedoen aan een onlinevergadering': 'Deltag i et onlinemøde',
+  'Onlinevergadering': 'Onlinemøde',
+  'Onlinevergadering…': 'Onlinemøde…',
+  'Vergaderlink': 'Mødelink',
+  'Plak hier de link uit de uitnodiging': 'Indsæt linket fra invitationen her',
+  'Uw naam, zoals de anderen die zien': 'Dit navn, som de andre ser det',
+  'Wat er gebeurt als u meedoet': 'Hvad der sker, når du deltager',
+  'Verlaten': 'Forlad',
+  'Weigeren en verlaten': 'Afvis og forlad',
+  'Toestemming geven': 'Giv samtykke',
+  'Technische code: {code}': 'Teknisk kode: {code}',
+  'Deelnemers ({aantal})': 'Deltagere ({aantal})',
+  'Nog geen deelnemers.': 'Endnu ingen deltagere.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'Dette møde giver ingen deltagerliste.',
+  'gast': 'gæst',
+  'deelnemer': 'deltager',
+  'presentator': 'oplægsholder',
+  'moderator': 'moderator',
+  'organisator': 'arrangør',
+  'rol onbekend': 'rolle ukendt',
   'Bord': 'Tavle',
   'Projectcharter': 'Projektcharter',
   'CTQ-boom': 'CTQ-træ',

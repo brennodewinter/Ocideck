@@ -1788,6 +1788,130 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'OciDeck nu are permisiunea de a folosi microfonul sau camera dumneavoastră. Acordați permisiunea în browser sau în setările sistemului și încercați din nou.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'Nu a fost găsit niciun microfon funcțional. Conectați unul sau alegeți alt dispozitiv.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'Nu a fost găsită nicio cameră funcțională. Puteți participa fără imagine.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'Serviciul care emite credențialul de acces nu poate fi contactat. Încercați din nou mai târziu; între timp, prezentarea dumneavoastră rămâne pur și simplu deschisă.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'Serviciul care emite credențialul de acces și-a atins pentru moment limita. Încercați din nou mai târziu.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'Credențialul de acces pentru această întâlnire a expirat. Participați din nou cu același link.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'Rețeaua nu lasă această întâlnire să treacă. Într-o rețea de companie, un firewall sau un proxy blochează adesea acest tip de trafic; cu altă conexiune reușește de obicei.',
+  'Deze vergadering is voorbij.': 'Această întâlnire s-a terminat.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'Serviciul de întâlniri în sine nu este disponibil. Acest lucru nu ține de conexiunea dumneavoastră; încercați din nou mai târziu.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Participarea nu a reușit, iar serviciul nu spune de ce. Codul tehnic se află la detalii — încercați din nou și transmiteți acel cod dacă problema persistă.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'Acesta nu este un link de întâlnire utilizabil. Copiați-l din nou din invitație — un link pe care un program de chat l-a tăiat sau l-a modificat adesea nu mai funcționează.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Acest serviciu îl cunoaștem, dar acest tip de întâlnire nu. Webinariile, transmisiunile și sălile de întâlnire personale funcționează altfel decât o întâlnire obișnuită; deschideți acest link în browser.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Acest serviciu de întâlniri nu îl cunoaștem. Prin urmare, nici OciDeck nu știe ce se află în spatele acestui link; îl puteți deschide în browser dacă aveți încredere în expeditor.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'În această versiune de OciDeck nu se poate participa. Folosiți versiunea web în browser.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'Acestui browser îi lipsește ceva necesar pentru participare. Un Chrome, Edge, Firefox sau Safari recent funcționează de obicei.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'Organizația acestei întâlniri nu admite invitați fără cont. Cereți organizatorului să vă invite într-un mod care permite invitați.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Participarea la această întâlnire necesită un cont la furnizor. Deschideți linkul în browser și autentificați-vă acolo.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'Acest furnizor permite participarea numai programelor aprobate, iar această aprobare nu există încă pentru OciDeck. Deschideți întâlnirea în browser.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'Organizatorul nu v-a admis. Cereți să fiți lăsat să intrați și încercați din nou după aceea.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'Această întâlnire este blocată; nu mai intră nimeni. Cereți organizatorului să înlăture blocarea.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'Această întâlnire este criptată cap la cap și, prin urmare, nu admite participanți externi. Este o alegere a organizatorului; cereți-i o întâlnire obișnuită dacă trebuie să fiți prezent.',
+  '{plek} krijgt contact zodra u meedoet.':
+      'Se va lua legătura cu {plek} imediat ce participați.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Participați numai cu numele pe care îl introduceți dumneavoastră; nu sunteți autentificat ca acea persoană.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'Serviciul creează pentru dumneavoastră o identitate de invitat temporară, care dispare după întâlnire.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Participați ca invitat prin contul de serviciu al unei organizații.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'Organizatorul a pregătit o identitate pentru dumneavoastră.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Participați cu propriul cont la acest furnizor.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'Furnizorul vede datele dumneavoastră de rețea, precum și imaginea și sunetul pe care le trimiteți. Ceea ce partajați, îl partajați cu toți participanții.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'Traficul este criptat până la serviciu; serviciul însuși poate să îl vadă.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'Furnizorul gestionează criptarea și, prin urmare, și cheile.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'Furnizorul descrie acest lucru ca fiind criptat cap la cap.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'Despre criptare nu s-a stabilit nimic. Prin urmare, OciDeck nu promite nimic în această privință.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'Ajungeți mai întâi într-o sală de așteptare: un organizator trebuie să vă admită. Între timp, prezentarea dumneavoastră rămâne editabilă.',
+  'Deze vergadering vraagt om een wachtwoord.':
+      'Această întâlnire solicită o parolă.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'Această întâlnire necesită înscriere prealabilă.',
+  'Vergadering wordt voorbereid': 'Întâlnirea se pregătește',
+  'Verbinden met de vergadering': 'Se conectează la întâlnire',
+  'Wachten op toelating door de organisator':
+      'Se așteaptă admiterea de către organizator',
+  'U doet mee aan de vergadering': 'Participați la întâlnire',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'Conexiunea s-a întrerupt — se reconectează',
+  'De vergadering wordt verlaten': 'Se părăsește întâlnirea',
+  'De vergadering is beëindigd': 'Întâlnirea s-a încheiat',
+  'Meedoen is niet gelukt': 'Participarea nu a reușit',
+  'Deze vergadering wordt opgenomen.': 'Această întâlnire este înregistrată.',
+  'Deze vergadering wordt uitgeschreven.': 'Această întâlnire este transcrisă.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'Această întâlnire este înregistrată și transcrisă.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'Întâlnirea solicită consimțământul dumneavoastră explicit pentru a putea continua să participați.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'Un organizator trebuie încă să vă admită. Puteți lucra liniștit mai departe; imediat ce veți fi înăuntru, se va deschide fereastra apelului.',
+  'Herkend als een vergadering bij {plek}.':
+      'Recunoscută ca întâlnire la {plek}.',
+  '{uitleg} De link wijst naar {plek}.': '{uitleg} Linkul indică {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'Acest nume îl alegeți dumneavoastră; nimeni nu îl verifică. Ceilalți vă văd ca invitat.',
+  'Afsluiten': 'Încheie',
+  'Camera aanzetten': 'Pornește camera',
+  'Camera uitzetten': 'Oprește camera',
+  'Microfoon aanzetten': 'Pornește microfonul',
+  'Microfoon dempen': 'Oprește microfonul',
+  'Presentatie delen': 'Partajează prezentarea',
+  'Delen stoppen': 'Oprește partajarea',
+  'Gespreksvenster': 'Fereastra apelului',
+  'Venster sluiten': 'Închide fereastra',
+  'Meedoen': 'Participă',
+  'Meedoen aan een onlinevergadering': 'Participarea la o întâlnire online',
+  'Onlinevergadering': 'Întâlnire online',
+  'Onlinevergadering…': 'Întâlnire online…',
+  'Vergaderlink': 'Linkul întâlnirii',
+  'Plak hier de link uit de uitnodiging': 'Lipiți aici linkul din invitație',
+  'Uw naam, zoals de anderen die zien':
+      'Numele dumneavoastră, așa cum îl văd ceilalți',
+  'Wat er gebeurt als u meedoet': 'Ce se întâmplă când participați',
+  'Verlaten': 'Ieși',
+  'Weigeren en verlaten': 'Refuză și ieși',
+  'Toestemming geven': 'Acordă consimțământul',
+  'Technische code: {code}': 'Cod tehnic: {code}',
+  'Deelnemers ({aantal})': 'Participanți ({aantal})',
+  'Nog geen deelnemers.': 'Încă niciun participant.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'Această întâlnire nu oferă o listă a participanților.',
+  'gast': 'invitat',
+  'deelnemer': 'participant',
+  'presentator': 'prezentator',
+  'moderator': 'moderator',
+  'organisator': 'organizator',
+  'rol onbekend': 'rol necunoscut',
   'Bord': 'Tablă',
   'Projectcharter': 'Carta proiectului',
   'CTQ-boom': 'Arbore CTQ',

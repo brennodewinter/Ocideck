@@ -46,6 +46,23 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- De schil van de onlinevergaderingen-functie, aanbieder-neutraal en zonder
+  netwerk. Met de module aan staat er een vergaderpictogram in de tabbalk —
+  daar en niet in de werkbalk van een presentatie, want meedoen moet lukken
+  zonder deck. Het venster erachter herkent de geplakte link terwijl u typt
+  (lokaal, dus er gaat niets naar buiten), vraagt uw naam met de mededeling dat
+  niemand die controleert, en zet de bekendmaking vóór de knop: wie er contact
+  krijgt, hoe u zich aandient, wat de aanbieder ziet, en wat er over
+  versleuteling bekend is — inclusief "niets vastgesteld". Wachten op toelating
+  neemt het scherm níet over: de presentatie blijft in beeld en te bewerken,
+  het pictogram verandert van vorm en kleur (en knippert alleen als u beweging
+  niet hebt beperkt), en één strip meldt het wachten mét Verlaten. Bij
+  toelating opent het gespreksvenster zichzelf. Daarin verschijnen microfoon,
+  camera en delen alleen wanneer de vergadering ze toestaat — trekt een
+  organisator er een in, dan verdwijnt die knop zonder dat het gesprek eindigt
+  — en Verlaten staat er altijd. Opname en uitschrijven krijgen een banier die
+  blijft staan zolang het waar is. Er is nog geen vergaderdienst aangesloten,
+  dus meedoen kan nog niet; de kaart en het venster zeggen dat ook.
 - Negentien nieuwe presentatiesjablonen. De catalogus dekte de professional
   die verantwoording aflegt, maar miste de vergaderingen waarin geld en
   besluiten op tafel liggen, en hele sectoren stonden op nul. Er zijn nu

@@ -114,7 +114,7 @@ const Map<String, int> fileSizeBaseline = {
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
   'lib/models/slide.dart': 1004,
   // Procesverbetering module card / reveal wiring in the shell.
-  'lib/widgets/app_shell.dart': 1042,
+  'lib/widgets/app_shell.dart': 855,
   'lib/widgets/app_shell_main_layout.dart': 1010,
   // Procesverbetering category tab + engine types in the add-slide picker.
   'lib/widgets/dialogs/add_slide_dialog.dart': 1094,
