@@ -26,6 +26,54 @@ void main() {
       const s = CollabSessionState(phase: CollabPhase.failed, error: 'x');
       expect(s.copyWith(phase: CollabPhase.idle).error, isNull);
     });
+
+    test('only the owner persists in an active session (§5.3)', () {
+      // Idle: saving is unaffected.
+      expect(const CollabSessionState().canPersist, isTrue);
+      // Active host persists; active guest — even a temporary authority — does not.
+      expect(
+        const CollabSessionState(
+          phase: CollabPhase.active,
+          role: CollabRole.host,
+        ).canPersist,
+        isTrue,
+      );
+      expect(
+        const CollabSessionState(
+          phase: CollabPhase.active,
+          role: CollabRole.guest,
+        ).canPersist,
+        isFalse,
+      );
+      expect(
+        const CollabSessionState(
+          phase: CollabPhase.active,
+          role: CollabRole.guest,
+          isTemporaryAuthority: true,
+        ).canPersist,
+        isFalse,
+      );
+    });
+
+    test('copyWith carries the temporary-authority flag', () {
+      const s = CollabSessionState(
+        phase: CollabPhase.active,
+        role: CollabRole.guest,
+      );
+      expect(s.isTemporaryAuthority, isFalse);
+      expect(
+        s.copyWith(isTemporaryAuthority: true).isTemporaryAuthority,
+        isTrue,
+      );
+      // Unrelated copyWith keeps it.
+      expect(
+        s
+            .copyWith(isTemporaryAuthority: true)
+            .copyWith(error: 'y')
+            .isTemporaryAuthority,
+        isTrue,
+      );
+    });
   });
 
   group('the unbound root notifier (no tab)', () {

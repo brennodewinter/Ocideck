@@ -72,6 +72,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     final settings = ref.watch(settingsProvider);
     final l10n = context.l10n;
     final deckNotifier = ref.read(deckProvider.notifier);
+    listenCollabAuthorityChange(ref, context, l10n); // handover melding (§5.3)
 
     final isMarkdownMode = editor.mode == EditorMode.markdown;
 

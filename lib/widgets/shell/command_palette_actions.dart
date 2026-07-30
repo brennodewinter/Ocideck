@@ -285,6 +285,35 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
   }
 }
 
+/// Tell a co-author when owner-drop handover changes their role
+/// (COLLABORATION.md §5.3): a snackbar when the owner drops and they become the
+/// temporary authority (their edits keep the session alive but are not saved),
+/// and another when the owner returns and takes it back. Top-level, called once
+/// from the layout's `build`, so it stays off `_MainLayoutState` and fires on the
+/// transition rather than on every rebuild.
+void listenCollabAuthorityChange(
+  WidgetRef ref,
+  BuildContext context,
+  AppLocalizations l10n,
+) {
+  ref.listen(collabSessionProvider, (prev, next) {
+    if (prev?.isTemporaryAuthority == next.isTemporaryAuthority) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          next.isTemporaryAuthority
+              ? l10n.d(
+                  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.',
+                )
+              : l10n.d(
+                  'De eigenaar is terug en neemt de samenwerking weer over.',
+                ),
+        ),
+      ),
+    );
+  });
+}
+
 /// Collaboration actions for the command palette, shown only for a deck that
 /// lives on WebDAV — the sidecar log the async transport needs has to live
 /// somewhere (§5.7). While a session runs the only action is to leave it;
