@@ -95,8 +95,11 @@ in Dutch, and it keeps growing on `main` between releases.
   verraadt dat de autoriteit weg is. De overname is fail-closed: bij twijfel (een
   ontbrekend of onleesbaar baken, een leesfout) neemt niemand het over, want een
   sessie die de eigenaar kan herstellen is beter dan twee autoriteiten. Een
-  opvolger hervat de versies vanaf de hoogste die hij kent, zodat de reeks niet
-  botst. Alleen de eigenaar bewaart het gedeelde `.md`: probeert een gast op te
+  opvolger hervat de versies vanaf de hoogste die hij kent, zodat een enkele
+  overname de reeks niet doet botsen (het failover-randgeval van twee tegelijke
+  autoriteiten staat in COLLABORATION.md §5.3). Alleen de eigenaar bewaart het
+  gedeelde `.md` — een client-side coördinatiepoort, geen server-afdwinging:
+  probeert een gast op te
   slaan, dan blijft zijn werk in de sessie tot de eigenaar bewaart, en de
   interface meldt dat — net als het tijdelijk overnemen en de terugkeer van de
   eigenaar. Alle overdracht-metadata leeft in de sidecar; het `.md` blijft

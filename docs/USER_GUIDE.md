@@ -571,6 +571,14 @@ they take the session over again (a message announces it) and saving is theirs
 once more. A returning owner does not restart the session or lose the work done
 while they were away.
 
+This stand-in is best-effort, not a guarantee. If two people happen to take the
+session over in the same moment, one of them can end up with a view that has
+quietly drifted from everyone else's until they reopen the deck — so if a handover
+felt messy, reload to be sure you are seeing the shared state. And you are never
+stuck: a co-author who wants to keep their own copy can **leave the session** —
+saving is theirs again immediately — or **export a package** (`.ocideck`), which
+carries the full editable deck and its images regardless of who owns the session.
+
 ## Slide types
 
 Add a slide and pick a type: **title**, **section** divider, **bullets**, **two
