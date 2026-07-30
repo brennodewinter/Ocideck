@@ -206,7 +206,7 @@ now the only passing state.
 | [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | — |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
-| [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 20% of its own lines | ✅ | ✅ | — |
+| [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
 | [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
@@ -605,8 +605,11 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Runs:** `dart run tool/coverage_summary.dart --per-file-floor`, over the
   report `make coverage` just wrote — no second test run.
 - **Covers:** the worst case *per file* instead of the average: how many `lib/`
-  files execute less than `perFileFloorPercent` (currently **20%**) of their own
-  lines.
+  files execute less than `perFileFloorPercent` (currently **34%**) of their own
+  lines. The floor is a ratchet: it was raised on 2026-07-29, after tests were
+  written for every file that sat below the new bar. *(Corrected 2026-07-30:
+  this page still carried the starting value from 2026-07-21 after that
+  raise.)*
 - **Failure means:** at least one file sits below that floor. Write a test for
   it, or — only when it is a platform half or has no executable lines — put it
   in `uncoveredBaseline` with a reason.
@@ -621,8 +624,8 @@ also declares them, but see the [CI note](#continuous-integration).)
   `filesBelowFloorBudget` counting how many files were allowed below the floor:
   39 at the start, then 21, then 0. A number that reads zero is a number
   somebody can raise; a gate that fails on *every* file below the floor is not.
-  So the budget is gone: anything that drops below 20% is a test to write, not a
-  number to adjust. The only escape is `uncoveredBaseline`, and that is a list
+  So the budget is gone: anything that drops below the floor is a test to
+  write, not a number to adjust. The only escape is `uncoveredBaseline`, and that is a list
   with a reason per line — reserved for platform halves and files with no
   executable lines at all.
 

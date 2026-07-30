@@ -16,6 +16,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Het instellingenvenster liet niet zien dat er meer stond dan er paste. Met
+  alle Uitbreidingen aan telt de zijbalk twaalf tabbladen; op een bescheiden
+  venster vielen de laatste onder de vouw, en niets verried dat — de
+  automatische scrollbalk verschijnt pas tíjdens het scrollen, en de vaste
+  merkvoet onder de lijst maakte de afsnijding onzichtbaar. De zijbalk toont
+  overloop nu met twee blijvende signalen: een altijd zichtbare duim zodra er
+  iets buiten beeld valt, en een randvervaging aan de kant waar meer inhoud
+  ligt (die onderaan verdwijnt, want daar eindigt de lijst écht). Het
+  inhoudspaneel en de zoeklijst kregen dezelfde blijvende duim.
 - Een git-handeling kon blijven staan zonder ooit iets te melden. OciDeck las
   de uitvoer van `git` tot de pijp sloot, en die sluit pas als élk proces dat
   hem geërfd heeft weg is — git start er zelf een paar, zoals een credential
@@ -54,6 +63,26 @@ in Dutch, and it keeps growing on `main` between releases.
   — en Verlaten staat er altijd. Opname en uitschrijven krijgen een banier die
   blijft staan zolang het waar is. Er is nog geen vergaderdienst aangesloten,
   dus meedoen kan nog niet; de kaart en het venster zeggen dat ook.
+- Negentien nieuwe presentatiesjablonen. De catalogus dekte de professional
+  die verantwoording aflegt, maar miste de vergaderingen waarin geld en
+  besluiten op tafel liggen, en hele sectoren stonden op nul. Er zijn nu
+  sjablonen voor een businesscase of investeringsvoorstel, een begrotings- of
+  budgetpresentatie, een besluitvormend overleg met besluitenlijst, een sprint
+  review en een threat modeling-sessie langs de STRIDE-categorieën. Voor de
+  publieke sector kwamen een raads-/collegevoorstel en een bewonersavond of
+  participatiebijeenkomst; voor onderwijs en stage een ouderavond en een
+  stagepresentatie; voor de vereniging een ledenvergadering (ALV); voor zorg
+  en sociaal domein een familiegesprek over zorg en mantelzorg en een
+  geanonimiseerde casuïstiekbespreking; voor de medezeggenschap een
+  adviesaanvraag aan de OR; voor de hulpdiensten een brandweerbriefing (inzet
+  en oefening) en een debriefing/after-action review; en voor de luchtvaart
+  een vluchtdebriefing met TEM-terugblik en een passagiersbriefing voor de
+  kleine luchtvaart. De gespreksvleugel kende alleen vaste scenario's; daar
+  staan nu twee generieke voorbereidingen naast — een gewoon gesprek goed
+  voorbereiden, en een cruciaal gesprek volgens de aanpak die de
+  scenario-sjablonen al droegen. Elk sjabloon is een document per taal
+  (Nederlands en Engels), live invulbaar met werktabellen en een
+  voortgangschecklist; een eigen testgroep bewaakt alle negentien.
 - De eerste, aanbieder-neutrale laag van de onlinevergaderingen-functie
   (ontwerp: `docs/design/TEAMS_GUEST_CLIENT.md` en
   `docs/design/COLLABORATION.md` §7.1). Onder `lib/meetings/` staat nu de

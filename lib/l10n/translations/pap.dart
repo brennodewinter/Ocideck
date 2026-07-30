@@ -853,6 +853,135 @@ const _dutchSourceAddPap = {
   'moderator': 'moderadó',
   'organisator': 'organisadó',
   'rol onbekend': 'rol deskonosí',
+  'Bord': 'Bord',
+  'Projectcharter': 'Karta di proyecto',
+  'CTQ-boom': 'Yabi CTQ',
+  'Visgraat (Ishikawa)': 'Spina di piská (Ishikawa)',
+  'Proceskaart': 'Mapa di proseso',
+  'Impact / Inspanning': 'Impacto / Esfuerso',
+  'Vier lijsten — één per kwadrant.': 'Kuater lista — un pa kadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Un páhina, shete kaha — kòrtiku i leshibel.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D ta kalkulá — no skribí bo mes.',
+  'Eén R per rij.': 'Un R pa fila.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Yena di derechi pa man robes — kuminsá na e kliente.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Kolomnan ta status; kartanan ta tarea.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope i kriterio di éksito promé — kon ta bai despues.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Di nesesidat di kiente (Y) pa CTQ medibel.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Cinco nivel profundo — terminá ku un X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Seis M komo huesu — kousa bou di dje.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Pason komo título :: tipo :: atributonan.',
+  'Zet de rol in het lane=… kenmerk.': 'Pon e rol den e atributo lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT pa pas — total ta kalkulá, no ta warda.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Un lista pa kadrant — no dibui kordinadan.',
+  'Intern': 'Intern',
+  'Negatief': 'Negativo',
+  'Positief': 'Positivo',
+  'Weinige inspanning': 'Esfuerso abou',
+  'Veel inspanning': 'Esfuerso altu',
+  'Lage impact': 'Impacto abou',
+  'Hoge impact': 'Impacto altu',
+  'Sterktes': 'Fortesanan',
+  'Zwaktes': 'Deblesanan',
+  'Kansen': 'Oportunidatnan',
+  'Bedreigingen': 'Menasan',
+  'Achtergrond': 'Background',
+  'Huidige situatie': 'Situashon aktual',
+  'Oorzaakanalyse': 'Análisis di kousa di rais',
+  'Tegenmaatregelen': 'Kontramedidanan',
+  'Opvolging': 'Seguidi',
+  'Bezig': 'Den traha',
+  'Probleem': 'Problema',
+  'Succescriteria': 'Kriterio di éksito',
+  'Snelle winst': 'Gana rápido',
+  'Grote projecten': 'Proyecto grandi',
+  'Opvullers': 'Yenadó',
+  'Ondankbaar': 'Ingrato',
+  'Processtap': 'Pas di proseso',
+  'Faalwijze': 'Modo di falha',
+  'Oorzaak': 'Kousa',
+  'Beheersing': 'Kontrol',
+  'Activiteit': 'Aktividat',
+  'Leverancier': 'Suplídó',
+  'Klant': 'Kiente',
+  'Plan': 'Plan',
+  'Team': 'Team',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Efecto',
+  'Businesscase / investeringsvoorstel':
+      'Caso di negoshi / proposta di invershon',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Motibu, opshonnan ku gastu i benefisio, riesgonan i e desishon pidí.',
+  'Begroting / budgetpresentatie': 'Presentashon di presupuesto',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Puntonan di salida, postnan ku komparashon, espasio pa skohe, riesgonan i puntonan di desishon.',
+  'Besluitvormend overleg': 'Reunion pa tuma desishon',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Agenda, splikashon pa punto, lista di desishon i akshonnan ku doño.',
+  'Ledenvergadering (ALV)': 'Reunion general di miembronan',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Agenda, relato anual, komishon di kaha, presupuesto i votashonnan pa asosiashon òf VvE.',
+  'Ouderavond / informatieavond': 'Anochi di mayornan / anochi di informashon',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Programa di aña, enfoke, akuerdonan práktiko i kon mayornan por yuda.',
+  'Familiegesprek zorg en mantelzorg':
+      'Konversashon di famia tokante kuido i kuido informal',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenarionan, deseonan, partishon di tarea i akuerdonan pa un konversashon di famia pisá.',
+  'Raads- / collegevoorstel': 'Proposta pa konseho / ehekutivo',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Motibu, puntonan di desishon, argumentonan i reservanan, kobertura finansiero i siguiente pasonan.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Anochi di habitantenan / enkuentro di partisipashon',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Loke ta fiho i loke ta habrí, sifranan, posibilidatnan pa reakshoná i siguiente pasonan.',
+  'Sprint review / demo': 'Sprint review / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Meta di sprint, trabou entregá, demo, métrikanan i bista pa dilanti.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Briefing di bombero (akshon i ehersisio)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Edifisio, akseso, peligernan, kuadrantenan, suministro di awa i partishon di tarea.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Petishon di konseho na e konseho di empleadonan',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Desishon proponé, motibunan, konsekuensianan pa personal i e trayekto di konseho.',
+  'Stagepresentatie': 'Presentashon di stage',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Empresa, tarea, enfoke, resultado, metanan di siñansa i reflekshon.',
+  'Debriefing / after-action review': 'Debriefing / after-action review',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Kiko tabata planiá, kiko a pasa, pakiko — i ki akuerdonan nos ta traha.',
+  'Threat modeling-sessie': 'Seshon di threat modeling',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Alkanse, fluhonan di data, fronteranan di konfiansa, menasanan pa kategoria STRIDE i medidanan.',
+  'Casuïstiekbespreking sociaal domein': 'Diskushon di kaso den dominio soshal',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Kaso anonimisá: dominionan di bida, siguridat, kuadro legal i koordinashon.',
+  'Gesprek voorbereiden': 'Prepará un konversashon',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Meta, e otro persona, struktura, preguntanan i akuerdonan pa kada konversashon ku bo ke prepará bon.',
+  'Cruciaal gesprek voorbereiden': 'Prepará un konversashon krusial',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Interesnan haltu i emoshonnan fuerte, segun e enfoke di konversashonnan krusial.',
+  'Vluchtdebriefing': 'Debriefing di buelo',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Outoevaluashon, desaroyo pa fase, retrospektiva TEM i puntonan di siñansa despues di un buelo òf lès.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Briefing di pasahero (aviashon general)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Fahanan di seguridat, portanan, prosedurenan di emergensia i akuerdonan na bordo promé ku taxiamentu.',
   'Onlinevergaderingen': 'Reunionnan online',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Partisipá na un reunion di un otro proveedor, ku bo presentashon komo loke bo ta kompartí. Standard pagá; ku e módulo pagá OciDeck no ta tuma kontakto ku ningun servisio di reunion. Ainda no tin proveedor konektá, pues partisipá no ta posibel ainda — esaki ta pone e base.',

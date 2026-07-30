@@ -2873,6 +2873,133 @@ const _dutchSourceAddTr = <String, String>{
   'moderator': 'moderatör',
   'organisator': 'düzenleyen',
   'rol onbekend': 'rol bilinmiyor',
+  'Bord': 'Pano',
+  'Projectcharter': 'Proje sözleşmesi',
+  'CTQ-boom': 'CTQ ağacı',
+  'Visgraat (Ishikawa)': 'Balık kılçığı (Ishikawa)',
+  'Proceskaart': 'Süreç haritası',
+  'Impact / Inspanning': 'Etki / Çaba',
+  'Vier lijsten — één per kwadrant.': 'Dört liste — her kadran için bir.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Tek sayfa, yedi kutu — kısa ve okunabilir tutun.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D hesaplanır — kendiniz yazmayın.',
+  'Eén R per rij.': 'Her satır için bir R.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Sağdan sola doldurun — müşteriden başlayın.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Sütunlar durumlar; kartlar görevlerdir.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Kapsam ve başarı kriterleri önce — nasıl sonra gelir.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Müşteri ihtiyacından (Y) ölçülebilir CTQ\'lara.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Beş seviye derin — X-id ile bitir.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Altı M kemik olarak — altlarında nedenler.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Adımlar başlık olarak :: tür :: öznitelikler.',
+  'Zet de rol in het lane=… kenmerk.': 'Rolü lane=… özniteliğine koyun.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'Adım başına PT/LT — toplamlar hesaplanır, saklanmaz.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Kadran başına liste — koordinat çizmeyin.',
+  'Intern': 'Dahili',
+  'Negatief': 'Negatif',
+  'Positief': 'Pozitif',
+  'Weinige inspanning': 'Düşük çaba',
+  'Veel inspanning': 'Yüksek çaba',
+  'Lage impact': 'Düşük etki',
+  'Hoge impact': 'Yüksek etki',
+  'Sterktes': 'Güçlü yönler',
+  'Zwaktes': 'Zayıf yönler',
+  'Kansen': 'Fırsatlar',
+  'Bedreigingen': 'Tehditler',
+  'Achtergrond': 'Arka plan',
+  'Huidige situatie': 'Mevcut durum',
+  'Oorzaakanalyse': 'Kök neden analizi',
+  'Tegenmaatregelen': 'Karşı tedbirler',
+  'Opvolging': 'Takip',
+  'Bezig': 'Devam ediyor',
+  'Probleem': 'Problem',
+  'Succescriteria': 'Başarı kriterleri',
+  'Snelle winst': 'Hızlı kazanımlar',
+  'Grote projecten': 'Büyük projeler',
+  'Opvullers': 'Doldurucular',
+  'Ondankbaar': 'Nankör',
+  'Processtap': 'Süreç adımı',
+  'Faalwijze': 'Hata modu',
+  'Oorzaak': 'Neden',
+  'Beheersing': 'Kontrol',
+  'Activiteit': 'Faaliyet',
+  'Leverancier': 'Tedarikçi',
+  'Klant': 'Müşteri',
+  'Plan': 'Plan',
+  'Team': 'Ekip',
+  'Input': 'Girdi',
+  'Output': 'Çıktı',
+  'Effect': 'Etki',
+  'Businesscase / investeringsvoorstel': 'İş gerekçesi / yatırım önerisi',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Gerekçe, maliyet ve faydalarıyla seçenekler, riskler ve istenen karar.',
+  'Begroting / budgetpresentatie': 'Bütçe sunumu',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Varsayımlar, karşılaştırmalı kalemler, seçim alanı, riskler ve karar noktaları.',
+  'Besluitvormend overleg': 'Karar toplantısı',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Gündem, madde başına açıklama, karar listesi ve sahipli eylemler.',
+  'Ledenvergadering (ALV)': 'Genel kurul toplantısı',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Dernek veya kat malikleri kurulu için gündem, yıllık rapor, denetim kurulu, bütçe ve oylamalar.',
+  'Ouderavond / informatieavond': 'Veli toplantısı / bilgilendirme akşamı',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Yıllık program, yaklaşım, pratik anlaşmalar ve velilerin nasıl yardımcı olabileceği.',
+  'Familiegesprek zorg en mantelzorg':
+      'Bakım ve aile bakımı üzerine aile görüşmesi',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Zor bir aile görüşmesi için senaryolar, istekler, görev dağılımı ve anlaşmalar.',
+  'Raads- / collegevoorstel': 'Meclis / yürütme önerisi',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Gerekçe, karar noktaları, savlar ve çekinceler, mali karşılık ve sonraki adımlar.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Sakinler toplantısı / katılım buluşması',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Nelerin kesin, nelerin açık olduğu, rakamlar, tepki verme olanakları ve sonraki adımlar.',
+  'Sprint review / demo': 'Sprint incelemesi / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprint hedefi, teslim edilen iş, demo, metrikler ve ileriye bakış.',
+  'Brandweerbriefing (inzet en oefening)':
+      'İtfaiye brifingi (müdahale ve tatbikat)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Yapı, ulaşım, tehlikeler, kadranlar, su temini ve görev dağılımı.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Çalışan temsilciliğinden görüş talebi',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Tasarlanan karar, gerekçeler, personele etkileri ve görüş süreci.',
+  'Stagepresentatie': 'Staj sunumu',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Şirket, görev, yaklaşım, sonuç, öğrenme hedefleri ve değerlendirme.',
+  'Debriefing / after-action review': 'Debrifing / eylem sonrası inceleme',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Ne planlanmıştı, ne oldu, neden — ve hangi anlaşmaları yapıyoruz.',
+  'Threat modeling-sessie': 'Tehdit modelleme oturumu',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Kapsam, veri akışları, güven sınırları, STRIDE kategorisi başına tehditler ve önlemler.',
+  'Casuïstiekbespreking sociaal domein': 'Sosyal alanda vaka görüşmesi',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonimleştirilmiş vaka: yaşam alanları, güvenlik, yasal çerçeve ve koordinasyon.',
+  'Gesprek voorbereiden': 'Görüşme hazırlığı',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'İyi hazırlanmak istediğin her görüşme için amaç, karşı taraf, kurgu, sorular ve anlaşmalar.',
+  'Cruciaal gesprek voorbereiden': 'Kritik görüşme hazırlığı',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Yüksek çıkarlar ve güçlü duygular, kritik konuşmalar yaklaşımına göre.',
+  'Vluchtdebriefing': 'Uçuş debrifingi',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Bir uçuş veya ders sonrası öz değerlendirme, evre evre gidişat, TEM geriye bakışı ve öğrenme noktaları.',
+  'Passagiersbriefing (kleine luchtvaart)': 'Yolcu brifingi (genel havacılık)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Taksi öncesi kemerler, kapılar, acil durum prosedürleri ve uçak içi anlaşmalar.',
   'Onlinevergaderingen': 'Çevrimiçi toplantılar',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Başka bir sağlayıcının toplantısına, paylaştığınız içerik sununuz olacak şekilde katılın. Varsayılan olarak kapalı; modül kapalıyken OciDeck hiçbir toplantı hizmetiyle iletişim kurmaz. Henüz bağlı bir sağlayıcı yok, bu yüzden katılmak henüz mümkün değil — bu, temeli atar.',

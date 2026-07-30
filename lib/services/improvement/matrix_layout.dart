@@ -10,6 +10,7 @@
 // werelden uitkomen.
 library;
 
+import '../../l10n/app_localizations.dart';
 import '../scene/scene.dart';
 import 'matrix_spec.dart';
 
@@ -278,7 +279,7 @@ String _cellText(MatrixColumn column, List<String> row, MatrixSpec spec) {
 }
 
 String _columnLabel(MatrixColumn column, String languageCode) =>
-    languageCode.startsWith('nl') ? column.labelNl : column.labelEn;
+    AppLocalizations.sourceFor(languageCode, column.labelNl);
 
 /// Kolombreedtes: elke kolom krijgt naar rato van haar breedste inhoud, met een
 /// bodem zodat een smalle kolom (`S`, `O`, `D`) niet tot niets krimpt, en een

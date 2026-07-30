@@ -1903,6 +1903,135 @@ const _dutchSourceAddLt = <String, String>{
   'moderator': 'moderatorius',
   'organisator': 'organizatorius',
   'rol onbekend': 'nežinomas vaidmuo',
+  'Bord': 'Lenta',
+  'Projectcharter': 'Projekto chartija',
+  'CTQ-boom': 'CTQ medis',
+  'Visgraat (Ishikawa)': 'Žuvies kaulas (Išikava)',
+  'Proceskaart': 'Proceso žemėlapis',
+  'Impact / Inspanning': 'Poveikis / Pastangos',
+  'Vier lijsten — één per kwadrant.': 'Keturi sąrašai — vienas kvadrantui.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Vienas puslapis, septyni laukai — trumpai ir įskaitomai.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D skaičiuojamas — neįveskite rankiniu būdu.',
+  'Eén R per rij.': 'Vienas R eilutei.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Užpildykite iš dešinės į kairę — pradėkite nuo kliento.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Stulpeliai yra būsenos; kortelės yra užduotys.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Apimtis ir sėkmės kriterijai pirmiausia — kaip vėliau.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Iš kliento poreikio (Y) į išmatuojamus CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Penki lygiai giliai — baik su X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Šeši M kaip kaulai — priežastys po jais.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Žingsniai kaip pavadinimas :: tipas :: atributai.',
+  'Zet de rol in het lane=… kenmerk.': 'Įdėkite vaidmenį į lane=… atributą.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT žingsniui — sumos skaičiuojamos, nesaugomos.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Sąrašas kvadrantui — nebrėžkite koordinačių.',
+  'Intern': 'Vidinis',
+  'Negatief': 'Neigiamas',
+  'Positief': 'Teigiamas',
+  'Weinige inspanning': 'Mažos pastangos',
+  'Veel inspanning': 'Didelės pastangos',
+  'Lage impact': 'Mažas poveikis',
+  'Hoge impact': 'Didelis poveikis',
+  'Sterktes': 'Stiprybės',
+  'Zwaktes': 'Silpnybės',
+  'Kansen': 'Galimybės',
+  'Bedreigingen': 'Grėsmės',
+  'Achtergrond': 'Fonas',
+  'Huidige situatie': 'Dabartinė padėtis',
+  'Oorzaakanalyse': 'Priežasčių šaknų analizė',
+  'Tegenmaatregelen': 'Priešpriežinės priemonės',
+  'Opvolging': 'Stebėjimas',
+  'Bezig': 'Vykdoma',
+  'Probleem': 'Problema',
+  'Succescriteria': 'Sėkmės kriterijai',
+  'Snelle winst': 'Greitos pergalės',
+  'Grote projecten': 'Dideli projektai',
+  'Opvullers': 'Užpildai',
+  'Ondankbaar': 'Nedėkingas',
+  'Processtap': 'Proceso žingsnis',
+  'Faalwijze': 'Gedimo būdas',
+  'Oorzaak': 'Priežastis',
+  'Beheersing': 'Kontrolė',
+  'Activiteit': 'Veikla',
+  'Leverancier': 'Tiekėjas',
+  'Klant': 'Klientas',
+  'Plan': 'Planas',
+  'Team': 'Komanda',
+  'Input': 'Įvestis',
+  'Output': 'Išvestis',
+  'Effect': 'Efektas',
+  'Businesscase / investeringsvoorstel':
+      'Verslo pagrindimas / investicijų pasiūlymas',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Pagrindas, variantai su sąnaudomis ir nauda, rizikos ir prašomas sprendimas.',
+  'Begroting / budgetpresentatie': 'Biudžeto pristatymas',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Prielaidos, straipsniai su palyginimu, pasirinkimo erdvė, rizikos ir sprendimų punktai.',
+  'Besluitvormend overleg': 'Sprendimų priėmimo posėdis',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Darbotvarkė, paaiškinimas prie kiekvieno punkto, sprendimų sąrašas ir veiksmai su atsakingu asmeniu.',
+  'Ledenvergadering (ALV)': 'Visuotinis narių susirinkimas',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Darbotvarkė, metinė ataskaita, revizijos komisija, biudžetas ir balsavimai asociacijai ar bendrijai.',
+  'Ouderavond / informatieavond': 'Tėvų susirinkimas / informacinis vakaras',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Metų programa, požiūris, praktiniai susitarimai ir kaip tėvai gali padėti.',
+  'Familiegesprek zorg en mantelzorg':
+      'Šeimos pokalbis apie priežiūrą ir artimųjų slaugą',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenarijai, norai, užduočių pasidalijimas ir susitarimai sunkiam šeimos pokalbiui.',
+  'Raads- / collegevoorstel': 'Pasiūlymas tarybai / vykdomajai institucijai',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Pagrindas, sprendimų punktai, argumentai ir išlygos, finansavimas ir tolesni žingsniai.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Gyventojų vakaras / dalyvavimo susitikimas',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Kas jau nuspręsta ir kas dar atvira, skaičiai, galimybės reaguoti ir tolesni žingsniai.',
+  'Sprint review / demo': 'Sprinto apžvalga / demonstracija',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprinto tikslas, atliktas darbas, demonstracija, metrikos ir žvilgsnis į priekį.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Ugniagesių instruktažas (operacija ir pratybos)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objektas, privažiavimas, pavojai, kvadrantai, vandens tiekimas ir užduočių pasidalijimas.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Prašymas darbo tarybai pateikti nuomonę',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Numatomas sprendimas, motyvai, pasekmės darbuotojams ir nuomonės teikimo eiga.',
+  'Stagepresentatie': 'Praktikos pristatymas',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Įmonė, užduotis, požiūris, rezultatas, mokymosi tikslai ir refleksija.',
+  'Debriefing / after-action review': 'Debrifingas / analizė po veiksmų',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Kas buvo suplanuota, kas įvyko, kodėl — ir kokius susitarimus priimame.',
+  'Threat modeling-sessie': 'Grėsmių modeliavimo sesija',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Apimtis, duomenų srautai, pasitikėjimo ribos, grėsmės pagal STRIDE kategorijas ir priemonės.',
+  'Casuïstiekbespreking sociaal domein': 'Atvejų aptarimas socialinėje srityje',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Nuasmenintas atvejis: gyvenimo sritys, saugumas, teisinis pagrindas ir koordinavimas.',
+  'Gesprek voorbereiden': 'Pasiruošti pokalbiui',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Tikslas, pašnekovas, struktūra, klausimai ir susitarimai kiekvienam pokalbiui, kuriam nori gerai pasiruošti.',
+  'Cruciaal gesprek voorbereiden': 'Pasiruošti lemtingam pokalbiui',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Didelės svarbos ir stiprios emocijos, pagal lemtingų pokalbių metodą.',
+  'Vluchtdebriefing': 'Skrydžio aptarimas',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Įsivertinimas, eiga pagal fazes, TEM apžvalga ir išmoktos pamokos po skrydžio ar pamokos.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Keleivių instruktažas (bendroji aviacija)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Saugos diržai, durys, avarinės procedūros ir susitarimai orlaivyje prieš riedėjimą.',
   'Onlinevergaderingen': 'Internetiniai susitikimai',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Dalyvavimas kito teikėjo susitikime, dalijantis savo pateiktimi. Numatytai išjungta; kai modulis išjungtas, OciDeck nesikreipia į jokią susitikimų paslaugą. Kol kas neprijungtas joks teikėjas, todėl prisijungti dar negalima — tai padeda pagrindą.',

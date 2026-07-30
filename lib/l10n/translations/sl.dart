@@ -1895,6 +1895,133 @@ const _dutchSourceAddSl = <String, String>{
   'moderator': 'moderator',
   'organisator': 'organizator',
   'rol onbekend': 'neznana vloga',
+  'Bord': 'Tabla',
+  'Projectcharter': 'Listina projekta',
+  'CTQ-boom': 'Drevo CTQ',
+  'Visgraat (Ishikawa)': 'Ribja kost (Ishikawa)',
+  'Proceskaart': 'Zemljevid procesa',
+  'Impact / Inspanning': 'Vpliv / Trud',
+  'Vier lijsten — één per kwadrant.': 'Štiri liste — ena na kvadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Ena stran, sedem polj — kratko in berljivo.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D se izračuna — ne vnašajte ročno.',
+  'Eén R per rij.': 'Eno R na vrstico.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Izpolnite od desne proti levi — začnite pri stranki.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Stolpci so statusi; kartice so naloge.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Obseg in kriteriji uspeha najprej — kako pride pozneje.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Od potrebe stranke (Y) do merljivih CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Pet ravni globoko — končaj z X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Šest M kot kosti — vzroki pod njimi.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Koraki kot naslov :: vrsta :: atributi.',
+  'Zet de rol in het lane=… kenmerk.': 'Daj vlogo v atribut lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT na korak — vsote se izračunajo, ne shranjujejo.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Seznam na kvadrant — ne riši koordinat.',
+  'Intern': 'Notranji',
+  'Negatief': 'Negativen',
+  'Positief': 'Pozitiven',
+  'Weinige inspanning': 'Nizki trud',
+  'Veel inspanning': 'Visoki trud',
+  'Lage impact': 'Nizek vpliv',
+  'Hoge impact': 'Visok vpliv',
+  'Sterktes': 'Prednosti',
+  'Zwaktes': 'Slabosti',
+  'Kansen': 'Priložnosti',
+  'Bedreigingen': 'Grožnje',
+  'Achtergrond': 'Ozadje',
+  'Huidige situatie': 'Trenutno stanje',
+  'Oorzaakanalyse': 'Analiza koreninskih vzrokov',
+  'Tegenmaatregelen': 'Protimrežbe',
+  'Opvolging': 'Spremljanje',
+  'Bezig': 'V teku',
+  'Probleem': 'Težava',
+  'Succescriteria': 'Kriteriji uspeha',
+  'Snelle winst': 'Hitre zmage',
+  'Grote projecten': 'Veliki projekti',
+  'Opvullers': 'Polnila',
+  'Ondankbaar': 'Nehvaležno',
+  'Processtap': 'Korak procesa',
+  'Faalwijze': 'Način odpovedi',
+  'Oorzaak': 'Vzrok',
+  'Beheersing': 'Nadzor',
+  'Activiteit': 'Aktivnost',
+  'Leverancier': 'Dobavitelj',
+  'Klant': 'Stranka',
+  'Plan': 'Načrt',
+  'Team': 'Ekipa',
+  'Input': 'Vhod',
+  'Output': 'Izhod',
+  'Effect': 'Učinek',
+  'Businesscase / investeringsvoorstel': 'Poslovni primer / naložbeni predlog',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Povod, možnosti s stroški in koristmi, tveganja in zahtevana odločitev.',
+  'Begroting / budgetpresentatie': 'Predstavitev proračuna',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Izhodišča, postavke s primerjavo, manevrski prostor, tveganja in točke odločanja.',
+  'Besluitvormend overleg': 'Odločevalni sestanek',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Dnevni red, obrazložitev po točkah, seznam sklepov in ukrepi z nosilcem.',
+  'Ledenvergadering (ALV)': 'Občni zbor članov',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Dnevni red, letno poročilo, nadzorni odbor, proračun in glasovanja za društvo ali skupnost lastnikov.',
+  'Ouderavond / informatieavond': 'Roditeljski sestanek / informativni večer',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Letni program, pristop, praktični dogovori in kako lahko starši pomagajo.',
+  'Familiegesprek zorg en mantelzorg': 'Družinski pogovor o negi in oskrbi',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenariji, želje, razdelitev nalog in dogovori za težek družinski pogovor.',
+  'Raads- / collegevoorstel': 'Predlog za svet / izvršni organ',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Povod, točke odločanja, argumenti in zadržki, finančno kritje in nadaljnji koraki.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Večer za prebivalce / participativno srečanje',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Kaj je določeno in kaj odprto, številke, možnosti odziva in nadaljnji koraki.',
+  'Sprint review / demo': 'Pregled sprinta / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Cilj sprinta, opravljeno delo, demo, metrike in pogled naprej.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Gasilski briefing (intervencija in vaja)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objekt, dostop, nevarnosti, kvadranti, oskrba z vodo in razdelitev nalog.',
+  'Adviesaanvraag OR / medezeggenschap': 'Zahteva za mnenje sveta delavcev',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Nameravana odločitev, razlogi, posledice za zaposlene in postopek mnenja.',
+  'Stagepresentatie': 'Predstavitev prakse',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Podjetje, naloga, pristop, rezultat, učni cilji in refleksija.',
+  'Debriefing / after-action review': 'Debriefing / analiza po akciji',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Kaj je bilo načrtovano, kaj se je zgodilo, zakaj — in katere dogovore sklenemo.',
+  'Threat modeling-sessie': 'Seja modeliranja groženj',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Obseg, podatkovni tokovi, meje zaupanja, grožnje po kategorijah STRIDE in ukrepi.',
+  'Casuïstiekbespreking sociaal domein':
+      'Obravnava primerov na socialnem področju',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonimiziran primer: življenjska področja, varnost, pravni okvir in koordinacija.',
+  'Gesprek voorbereiden': 'Priprava pogovora',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Cilj, sogovornik, zgradba, vprašanja in dogovori za vsak pogovor, ki ga želiš dobro pripraviti.',
+  'Cruciaal gesprek voorbereiden': 'Priprava ključnega pogovora',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Veliko na kocki in močna čustva, po pristopu ključnih pogovorov.',
+  'Vluchtdebriefing': 'Debriefing leta',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Samoocena, potek po fazah, TEM pregled in naučene točke po letu ali uri.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Briefing potnikov (splošno letalstvo)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Pasovi, vrata, postopki v sili in dogovori na krovu pred taksiranjem.',
   'Onlinevergaderingen': 'Spletni sestanki',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Sodelovanje na sestanku drugega ponudnika, pri čemer delite svojo predstavitev. Privzeto izklopljeno; z izklopljenim modulom OciDeck ne vzpostavi stika z nobeno storitvijo sestankov. Noben ponudnik še ni povezan, zato sodelovanje še ni mogoče — to postavlja temelje.',

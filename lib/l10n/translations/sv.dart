@@ -1893,6 +1893,132 @@ const _dutchSourceAddSv = <String, String>{
   'moderator': 'moderator',
   'organisator': 'organisatör',
   'rol onbekend': 'roll okänd',
+  'Bord': 'Anslagstavla',
+  'Projectcharter': 'Projektcharta',
+  'CTQ-boom': 'CTQ-träd',
+  'Visgraat (Ishikawa)': 'Fiskbensdiagram (Ishikawa)',
+  'Proceskaart': 'Processkarta',
+  'Impact / Inspanning': 'Effekt / Insats',
+  'Vier lijsten — één per kwadrant.': 'Fyra listor — en per kvadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'En sida, sju rutor — håll varje kort och läsbar.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D beräknas — skriv inte in det själv.',
+  'Eén R per rij.': 'Ett R per rad.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Fyll i höger-till-vänster — börja med kunden.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Kolumner är statusar; kort är uppgifter.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope och framgångskriterier först — hur kommer senare.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Från kundbehov (Y) till mätbara CTQs.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Fem nivåer djupt — sluta med ett X-id.',
+  'Zes M\'s als botten — oorzaken eronder.': 'Sex M som ben — orsaker under.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Steg som titel :: typ :: attribut.',
+  'Zet de rol in het lane=… kenmerk.': 'Sätt rollen i lane=… attributet.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT per steg — totaler beräknas, lagras inte.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'En lista per kvadrant — rita inte koordinater.',
+  'Intern': 'Intern',
+  'Negatief': 'Negativ',
+  'Positief': 'Positiv',
+  'Weinige inspanning': 'Låg insats',
+  'Veel inspanning': 'Hög insats',
+  'Lage impact': 'Låg effekt',
+  'Hoge impact': 'Hög effekt',
+  'Sterktes': 'Styrkor',
+  'Zwaktes': 'Svagheter',
+  'Kansen': 'Möjligheter',
+  'Bedreigingen': 'Hot',
+  'Achtergrond': 'Bakgrund',
+  'Huidige situatie': 'Nuvarande situation',
+  'Oorzaakanalyse': 'Rotorsaksanalys',
+  'Tegenmaatregelen': 'Motåtgärder',
+  'Opvolging': 'Uppföljning',
+  'Bezig': 'Pågående',
+  'Probleem': 'Problem',
+  'Succescriteria': 'Framgångskriterier',
+  'Snelle winst': 'Snabba vinster',
+  'Grote projecten': 'Stora projekt',
+  'Opvullers': 'Utfyllnader',
+  'Ondankbaar': 'Tacklös',
+  'Processtap': 'Processsteg',
+  'Faalwijze': 'Felfunktion',
+  'Oorzaak': 'Orsak',
+  'Beheersing': 'Kontroll',
+  'Activiteit': 'Aktivitet',
+  'Leverancier': 'Leverantör',
+  'Klant': 'Kund',
+  'Plan': 'Plan',
+  'Team': 'Team',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Effekt',
+  'Businesscase / investeringsvoorstel': 'Businesscase / investeringsförslag',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Bakgrund, alternativ med kostnader och nytta, risker och det begärda beslutet.',
+  'Begroting / budgetpresentatie': 'Budgetpresentation',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Utgångspunkter, poster med jämförelse, valutrymme, risker och beslutspunkter.',
+  'Besluitvormend overleg': 'Beslutsmöte',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Dagordning, förklaring per punkt, beslutslista och åtgärder med ägare.',
+  'Ledenvergadering (ALV)': 'Årsmöte (föreningsstämma)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Dagordning, årsberättelse, revisorer, budget och omröstningar för förening eller bostadsrättsförening.',
+  'Ouderavond / informatieavond': 'Föräldramöte / informationskväll',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Årsprogram, arbetssätt, praktiska överenskommelser och hur föräldrar kan hjälpa till.',
+  'Familiegesprek zorg en mantelzorg':
+      'Familjesamtal om vård och anhörigomsorg',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenarier, önskemål, uppgiftsfördelning och överenskommelser inför ett svårt familjesamtal.',
+  'Raads- / collegevoorstel': 'Förslag till fullmäktige / styrelse',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Bakgrund, beslutspunkter, argument och förbehåll, finansiering och nästa steg.',
+  'Bewonersavond / participatiebijeenkomst': 'Boendemöte / medborgardialog',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Vad som är bestämt och vad som är öppet, siffror, möjligheter att reagera och nästa steg.',
+  'Sprint review / demo': 'Sprint review / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprintmål, levererat arbete, demo, mätetal och utblick.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Briefing för räddningstjänsten (insats och övning)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Objekt, framkomlighet, faror, kvadranter, vattenförsörjning och uppgiftsfördelning.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Begäran om yttrande från personalrådet',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Avsett beslut, motiv, konsekvenser för personalen och samrådsprocessen.',
+  'Stagepresentatie': 'Praktikpresentation',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Företag, uppdrag, arbetssätt, resultat, lärandemål och reflektion.',
+  'Debriefing / after-action review': 'Debriefing / utvärdering efter insats',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Vad som var planerat, vad som hände, varför — och vilka överenskommelser vi gör.',
+  'Threat modeling-sessie': 'Threat modeling-session',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Omfattning, dataflöden, förtroendegränser, hot per STRIDE-kategori och åtgärder.',
+  'Casuïstiekbespreking sociaal domein':
+      'Ärendegenomgång inom det sociala området',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonymiserat ärende: livsområden, säkerhet, rättslig ram och samordning.',
+  'Gesprek voorbereiden': 'Förbered ett samtal',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Mål, den andra parten, upplägg, frågor och överenskommelser för varje samtal du vill förbereda väl.',
+  'Cruciaal gesprek voorbereiden': 'Förbered ett avgörande samtal',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Mycket på spel och starka känslor, enligt metoden för avgörande samtal.',
+  'Vluchtdebriefing': 'Flygdebriefing',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Självutvärdering, förlopp per fas, TEM-återblick och lärdomar efter en flygning eller lektion.',
+  'Passagiersbriefing (kleine luchtvaart)': 'Passagerarbriefing (allmänflyg)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Bälten, dörrar, nödprocedurer och överenskommelser ombord före taxning.',
   'Onlinevergaderingen': 'Onlinemöten',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Delta i ett möte hos en annan leverantör, med din presentation som det du delar. Av som standard; med modulen av kontaktar OciDeck ingen mötestjänst alls. Ingen leverantör är ansluten ännu, så det går inte att delta än — detta lägger grunden.',

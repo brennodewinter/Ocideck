@@ -36,8 +36,7 @@ void main() {
     try {
       tempDir.deleteSync(recursive: true);
     } on FileSystemException {
-      // Opruimen is best-effort: een dwarsliggende temp-map mag een
-      // geslaagde test niet alsnog laten falen.
+      // Opruimen van een tijdelijke map is nooit een testoordeel waard.
     }
   });
 

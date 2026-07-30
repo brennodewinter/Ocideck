@@ -1917,6 +1917,138 @@ const _dutchSourceAddMt = <String, String>{
   'moderator': 'moderatur',
   'organisator': 'organizzatur',
   'rol onbekend': 'rwol mhux magħruf',
+  'Bord': 'Bord',
+  'Projectcharter': 'Karta tal-proġett',
+  'CTQ-boom': 'Siġra CTQ',
+  'Visgraat (Ishikawa)': 'Spina tal-ħuta (Ishikawa)',
+  'Proceskaart': 'Mappa tal-proċess',
+  'Impact / Inspanning': 'Impatt / Sforz',
+  'Vier lijsten — één per kwadrant.':
+      'Erba\' listi — waħda għal kull kwadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Paġna waħda, seba\' kaxxi — qasir u faċli biex jinqara.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D jingħadd — daħħluhx inti stess.',
+  'Eén R per rij.': 'R wieħed għal kull ringiela.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Imli minn lemin għax-xellug — ibda mill-klijent.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Il-kolonni huma statusi; il-karti huma kompiti.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope u kriterji ta\' suċċess l-ewwel — kif jiġi wara.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Mill-bżonn tal-klijent (Y) għal CTQ li jistgħu jiġu mkejla.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Hames livelli fil-fond — spiċċa b\'X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Sitt M bħala għadam — kawżi taħt.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Passi bħala titolu :: tip :: attributi.',
+  'Zet de rol in het lane=… kenmerk.': 'Daħħal ir-rwol fl-attribut lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT għal kull pass — it-totali jiġu kkalkulati, mhux maħżuna.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Lista għal kull kwadrant — tiġbedx koordinati.',
+  'Intern': 'Intern',
+  'Negatief': 'Negattiv',
+  'Positief': 'Pożittiv',
+  'Weinige inspanning': 'Sforz baxx',
+  'Veel inspanning': 'Sforz għoli',
+  'Lage impact': 'Impatt baxx',
+  'Hoge impact': 'Impatt għoli',
+  'Sterktes': 'Saħħiet',
+  'Zwaktes': 'Dgħufijiet',
+  'Kansen': 'Opportunitajiet',
+  'Bedreigingen': 'Theddidiet',
+  'Achtergrond': 'Sfond',
+  'Huidige situatie': 'Is-sitwazzjoni attwali',
+  'Oorzaakanalyse': 'Analizi tal-kawża għerq',
+  'Tegenmaatregelen': 'Kontromiżuri',
+  'Opvolging': 'Segwitu',
+  'Bezig': 'Għaddej',
+  'Probleem': 'Problema',
+  'Succescriteria': 'Kriterji ta\' suċċess',
+  'Snelle winst': 'Rebħiet malajr',
+  'Grote projecten': 'Proġetti maġġuri',
+  'Opvullers': 'Miliela',
+  'Ondankbaar': 'Ingrat',
+  'Processtap': 'Pass tal-proċess',
+  'Faalwijze': 'Mod ta\' ħsara',
+  'Oorzaak': 'Kawża',
+  'Beheersing': 'Kontroll',
+  'Activiteit': 'Attività',
+  'Leverancier': 'Fornitur',
+  'Klant': 'Klijent',
+  'Plan': 'Pjan',
+  'Team': 'Tim',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Effett',
+  'Businesscase / investeringsvoorstel':
+      'Każ tan-negozju / proposta ta\' investiment',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Raġuni, għażliet bl-ispejjeż u l-benefiċċji, riskji u d-deċiżjoni mitluba.',
+  'Begroting / budgetpresentatie': 'Preżentazzjoni tal-baġit',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Suppożizzjonijiet, entrati bi tqabbil, spazju għall-għażla, riskji u punti ta\' deċiżjoni.',
+  'Besluitvormend overleg': 'Laqgħa għat-teħid ta\' deċiżjonijiet',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Aġenda, spjegazzjoni għal kull punt, lista ta\' deċiżjonijiet u azzjonijiet b\'sid.',
+  'Ledenvergadering (ALV)': 'Laqgħa ġenerali (AGM)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Aġenda, rapport annwali, kumitat tal-verifika, baġit u votazzjonijiet għal assoċjazzjoni jew assoċjazzjoni tas-sidien.',
+  'Ouderavond / informatieavond':
+      'Lejla tal-ġenituri / lejla ta\' informazzjoni',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Programm tas-sena, approċċ, arranġamenti prattiċi u kif il-ġenituri jistgħu jgħinu.',
+  'Familiegesprek zorg en mantelzorg':
+      'Konversazzjoni tal-familja dwar il-kura u l-indukrar',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Xenarji, xewqat, tqassim tal-kompiti u ftehimiet għal konversazzjoni tal-familja diffiċli.',
+  'Raads- / collegevoorstel': 'Proposta lill-kunsill / lill-eżekuttiv',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Raġuni, punti ta\' deċiżjoni, argumenti u riżervi, kopertura finanzjarja u l-passi li jmiss.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Lejla tar-residenti / laqgħa ta\' parteċipazzjoni',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'X\'inhu deċiż u x\'għadu miftuħ, ċifri, modi kif tirreaġixxi u l-passi li jmiss.',
+  'Sprint review / demo': 'Reviżjoni tal-isprint / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Għan tal-isprint, xogħol ikkunsinnat, demo, metriċi u ħarsa \'l quddiem.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Briefing tas-servizz tat-tifi tan-nar (intervent u eżerċizzju)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Il-binja, l-aċċess, il-perikli, il-kwadranti, il-provvista tal-ilma u t-tqassim tal-kompiti.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Talba għal parir lill-kunsill tal-ħaddiema',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Deċiżjoni maħsuba, motivi, konsegwenzi għall-persunal u l-proċess tal-parir.',
+  'Stagepresentatie': 'Preżentazzjoni tal-internship',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Kumpanija, inkarigu, approċċ, riżultat, għanijiet ta\' tagħlim u riflessjoni.',
+  'Debriefing / after-action review': 'Debriefing / analiżi wara l-azzjoni',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'X\'kien ippjanat, x\'ġara, għaliex — u liema ftehimiet nagħmlu.',
+  'Threat modeling-sessie': 'Sessjoni ta\' threat modeling',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Ambitu, flussi tad-data, konfini ta\' fiduċja, theddid għal kull kategorija STRIDE u miżuri.',
+  'Casuïstiekbespreking sociaal domein':
+      'Reviżjoni ta\' każijiet fil-qasam soċjali',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Każ anonimizzat: oqsma tal-ħajja, sikurezza, qafas legali u koordinazzjoni.',
+  'Gesprek voorbereiden': 'Ipprepara konversazzjoni',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Għan, il-persuna l-oħra, struttura, mistoqsijiet u ftehimiet għal kull konversazzjoni li trid tipprepara sew.',
+  'Cruciaal gesprek voorbereiden': 'Ipprepara konversazzjoni kruċjali',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Interessi għoljin u emozzjonijiet qawwija, skont l-approċċ għal konversazzjonijiet kruċjali.',
+  'Vluchtdebriefing': 'Debriefing tat-titjira',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Awtovalutazzjoni, kif mar kull fażi, ħarsa lura TEM u punti ta\' tagħlim wara titjira jew lezzjoni.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Briefing tal-passiġġieri (avjazzjoni ġenerali)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Ċinturini, bibien, proċeduri ta\' emerġenza u ftehimiet abbord qabel it-taxiing.',
   'Onlinevergaderingen': 'Laqgħat onlajn',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Tieħu sehem f\'laqgħa ta\' fornitur ieħor, bil-preżentazzjoni tiegħek bħala dak li taqsam. Mitfi b\'mod awtomatiku; bil-modulu mitfi, OciDeck ma jikkuntattja l-ebda servizz ta\' laqgħat. Għad m\'hemm l-ebda fornitur imqabbad, għalhekk għadek ma tistax tissieħeb — dan iqiegħed il-pedament.',

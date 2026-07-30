@@ -1905,6 +1905,135 @@ const _dutchSourceAddPl = <String, String>{
   'moderator': 'moderator',
   'organisator': 'organizator',
   'rol onbekend': 'rola nieznana',
+  'Bord': 'Tablica',
+  'Projectcharter': 'Karta projektu',
+  'CTQ-boom': 'Drzewo CTQ',
+  'Visgraat (Ishikawa)': 'Diagram Ishikawy',
+  'Proceskaart': 'Mapa procesu',
+  'Impact / Inspanning': 'Wpływ / Wysiłek',
+  'Vier lijsten — één per kwadrant.': 'Cztery listy — po jednej na kwadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Jedna strona, siedem pól — krótko i czytelnie.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D jest obliczane — nie wpisuj ręcznie.',
+  'Eén R per rij.': 'Jedno R na wiersz.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Wypełnij od prawej do lewej — zacznij od klienta.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Kolumny to statusy; karty to zadania.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope i kryteria sukcesu najpierw — jak później.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Od potrzeby klienta (Y) do mierzalnych CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Pięć poziomów głęboko — zakończ X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Sześć M jako kości — przyczyny poniżej.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Kroki jako tytuł :: rodzaj :: atrybuty.',
+  'Zet de rol in het lane=… kenmerk.': 'Ustaw rolę w atrybucie lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT na krok — sumy są obliczane, nie przechowywane.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Lista na kwadrant — nie rysuj współrzędnych.',
+  'Intern': 'Wewnętrzny',
+  'Negatief': 'Negatywny',
+  'Positief': 'Pozytywny',
+  'Weinige inspanning': 'Niski wysiłek',
+  'Veel inspanning': 'Wysoki wysiłek',
+  'Lage impact': 'Niski wpływ',
+  'Hoge impact': 'Wysoki wpływ',
+  'Sterktes': 'Mocne strony',
+  'Zwaktes': 'Słabe strony',
+  'Kansen': 'Szanse',
+  'Bedreigingen': 'Zagrożenia',
+  'Achtergrond': 'Tło',
+  'Huidige situatie': 'Obecna sytuacja',
+  'Oorzaakanalyse': 'Analiza przyczyn źródłowych',
+  'Tegenmaatregelen': 'Działania zaradcze',
+  'Opvolging': 'Monitorowanie',
+  'Bezig': 'W toku',
+  'Probleem': 'Problem',
+  'Succescriteria': 'Kryteria sukcesu',
+  'Snelle winst': 'Szybkie wygrane',
+  'Grote projecten': 'Główne projekty',
+  'Opvullers': 'Wypełniacze',
+  'Ondankbaar': 'Niewdzięczne',
+  'Processtap': 'Krok procesu',
+  'Faalwijze': 'Tryb awarii',
+  'Oorzaak': 'Przyczyna',
+  'Beheersing': 'Kontrola',
+  'Activiteit': 'Aktywność',
+  'Leverancier': 'Dostawca',
+  'Klant': 'Klient',
+  'Plan': 'Plan',
+  'Team': 'Zespół',
+  'Input': 'Wejście',
+  'Output': 'Wyjście',
+  'Effect': 'Efekt',
+  'Businesscase / investeringsvoorstel':
+      'Uzasadnienie biznesowe / propozycja inwestycji',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Uzasadnienie, opcje z kosztami i korzyściami, ryzyka i wnioskowana decyzja.',
+  'Begroting / budgetpresentatie': 'Prezentacja budżetu',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Założenia, pozycje z porównaniem, przestrzeń wyboru, ryzyka i punkty decyzyjne.',
+  'Besluitvormend overleg': 'Narada decyzyjna',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Porządek obrad, omówienie każdego punktu, lista decyzji i działania z właścicielem.',
+  'Ledenvergadering (ALV)': 'Walne zebranie członków',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Porządek obrad, sprawozdanie roczne, komisja rewizyjna, budżet i głosowania dla stowarzyszenia lub wspólnoty mieszkaniowej.',
+  'Ouderavond / informatieavond': 'Zebranie rodziców / wieczór informacyjny',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Program roczny, podejście, praktyczne ustalenia i jak rodzice mogą pomóc.',
+  'Familiegesprek zorg en mantelzorg':
+      'Rozmowa rodzinna o opiece i opiece nieformalnej',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenariusze, życzenia, podział zadań i ustalenia na trudną rozmowę rodzinną.',
+  'Raads- / collegevoorstel': 'Projekt uchwały rady / zarządu',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Uzasadnienie, punkty decyzyjne, argumenty wraz z zastrzeżeniami, finansowanie i dalsze kroki.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Spotkanie mieszkańców / spotkanie partycypacyjne',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Co jest przesądzone, a co otwarte, liczby, możliwości reakcji i dalsze kroki.',
+  'Sprint review / demo': 'Przegląd sprintu / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Cel sprintu, dostarczona praca, demo, metryki i perspektywy.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Odprawa straży pożarnej (działania i ćwiczenia)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Obiekt, dojazd, zagrożenia, kwadranty, zaopatrzenie w wodę i podział zadań.',
+  'Adviesaanvraag OR / medezeggenschap': 'Wniosek o opinię rady pracowników',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Zamierzona decyzja, motywy, skutki kadrowe i przebieg konsultacji.',
+  'Stagepresentatie': 'Prezentacja z praktyk',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Firma, zadanie, podejście, wynik, cele nauki i refleksja.',
+  'Debriefing / after-action review': 'Debriefing / analiza po działaniu',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Co było zaplanowane, co się wydarzyło, dlaczego — i jakie ustalenia podejmujemy.',
+  'Threat modeling-sessie': 'Sesja modelowania zagrożeń',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Zakres, przepływy danych, granice zaufania, zagrożenia według kategorii STRIDE i środki zaradcze.',
+  'Casuïstiekbespreking sociaal domein':
+      'Omówienie przypadków w obszarze społecznym',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Zanonimizowany przypadek: sfery życia, bezpieczeństwo, ramy prawne i koordynacja.',
+  'Gesprek voorbereiden': 'Przygotowanie rozmowy',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Cel, druga osoba, struktura, pytania i ustalenia dla każdej rozmowy, którą chcesz dobrze przygotować.',
+  'Cruciaal gesprek voorbereiden': 'Przygotowanie kluczowej rozmowy',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Wysoka stawka i silne emocje, zgodnie z metodą kluczowych rozmów.',
+  'Vluchtdebriefing': 'Omówienie po locie',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Samoocena, przebieg każdej fazy, retrospekcja TEM i wnioski po locie lub lekcji.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Odprawa pasażerów (lotnictwo ogólne)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Pasy, drzwi, procedury awaryjne i ustalenia na pokładzie przed kołowaniem.',
   'Onlinevergaderingen': 'Spotkania online',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Udział w spotkaniu innego dostawcy, z Twoją prezentacją jako tym, co udostępniasz. Domyślnie wyłączone; przy wyłączonym module OciDeck nie kontaktuje się z żadną usługą spotkań. Żaden dostawca nie jest jeszcze podłączony, więc udział nie jest jeszcze możliwy — to kładzie fundament.',

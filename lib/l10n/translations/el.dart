@@ -1924,6 +1924,137 @@ const _dutchSourceAddEl = <String, String>{
   'moderator': 'συντονιστής',
   'organisator': 'διοργανωτής',
   'rol onbekend': 'άγνωστος ρόλος',
+  'Bord': 'Πίνακας',
+  'Projectcharter': 'Χάρτης έργου',
+  'CTQ-boom': 'Δέντρο CTQ',
+  'Visgraat (Ishikawa)': 'Διάγραμμα Ishikawa',
+  'Proceskaart': 'Χάρτης διαδικασίας',
+  'Impact / Inspanning': 'Αντίκτυπος / Προσπάθεια',
+  'Vier lijsten — één per kwadrant.': 'Τέσσερις λίστες — μία ανά τεταρτημόριο.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Μία σελίδα, επτά πλαίσια — κρατήστε τα σύντομα και ευανάγνωστα.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D υπολογίζεται — μην το πληκτρολογείτε μόνοι σας.',
+  'Eén R per rij.': 'Ένα R ανά γραμμή.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Συμπληρώστε δεξιά προς αριστερά — ξεκινήστε από τον πελάτη.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Οι στήλες είναι καταστάσεις; οι κάρτες είναι εργασίες.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Έκταση και κριτήρια επιτυχίας πρώτα — το πώς ακολουθεί.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Από την ανάγκη του πελάτη (Y) σε μετρήσιμα CTQ.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Πέντε επίπεδα βάθος — τελειώστε με X-id.',
+  'Zes M\'s als botten — oorzaken eronder.': 'Έξι M ως οστά — αιτίες από κάτω.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Βήματα ως τίτλος :: τύπος :: χαρακτηριστικά.',
+  'Zet de rol in het lane=… kenmerk.':
+      'Βάλτε τον ρόλο στο χαρακτηριστικό lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT ανά βήμα — τα σύνολα υπολογίζονται, δεν αποθηκεύονται.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Λίστα ανά τεταρτημόριο — μην σχεδιάζετε συντεταγμένες.',
+  'Intern': 'Εσωτερικό',
+  'Negatief': 'Αρνητικό',
+  'Positief': 'Θετικό',
+  'Weinige inspanning': 'Χαμηλή προσπάθεια',
+  'Veel inspanning': 'Υψηλή προσπάθεια',
+  'Lage impact': 'Χαμηλός αντίκτυπος',
+  'Hoge impact': 'Υψηλός αντίκτυπος',
+  'Sterktes': 'Δυνατά σημεία',
+  'Zwaktes': 'Αδύναμα σημεία',
+  'Kansen': 'Ευκαιρίες',
+  'Bedreigingen': 'Απειλές',
+  'Achtergrond': 'Υπόβαθρο',
+  'Huidige situatie': 'Τρέχουσα κατάσταση',
+  'Oorzaakanalyse': 'Ανάλυση ρίζας αιτίας',
+  'Tegenmaatregelen': 'Αντεπιμέθοδοι',
+  'Opvolging': 'Παρακολούθηση',
+  'Bezig': 'Σε εξέλιξη',
+  'Probleem': 'Πρόβλημα',
+  'Succescriteria': 'Κριτήρια επιτυχίας',
+  'Snelle winst': 'Γρήγορες νίκες',
+  'Grote projecten': 'Μεγάλα έργα',
+  'Opvullers': 'Γεμίσματα',
+  'Ondankbaar': 'Αχαρίστα',
+  'Processtap': 'Βήμα διαδικασίας',
+  'Faalwijze': 'Τρόπος αποτυχίας',
+  'Oorzaak': 'Αιτία',
+  'Beheersing': 'Έλεγχος',
+  'Activiteit': 'Δραστηριότητα',
+  'Leverancier': 'Προμηθευτής',
+  'Klant': 'Πελάτης',
+  'Plan': 'Σχέδιο',
+  'Team': 'Ομάδα',
+  'Input': 'Είσοδος',
+  'Output': 'Έξοδος',
+  'Effect': 'Αποτέλεσμα',
+  'Businesscase / investeringsvoorstel':
+      'Επιχειρηματική τεκμηρίωση / πρόταση επένδυσης',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Αφορμή, επιλογές με κόστη και οφέλη, κίνδυνοι και η ζητούμενη απόφαση.',
+  'Begroting / budgetpresentatie': 'Παρουσίαση προϋπολογισμού',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Παραδοχές, κονδύλια με σύγκριση, περιθώρια επιλογής, κίνδυνοι και σημεία απόφασης.',
+  'Besluitvormend overleg': 'Συνεδρίαση λήψης αποφάσεων',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Ημερήσια διάταξη, επεξήγηση ανά θέμα, κατάλογος αποφάσεων και ενέργειες με υπεύθυνο.',
+  'Ledenvergadering (ALV)': 'Γενική συνέλευση μελών',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Ημερήσια διάταξη, ετήσια έκθεση, εξελεγκτική επιτροπή, προϋπολογισμός και ψηφοφορίες για σύλλογο ή ένωση ιδιοκτητών.',
+  'Ouderavond / informatieavond': 'Βραδιά γονέων / ενημερωτική βραδιά',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Ετήσιο πρόγραμμα, προσέγγιση, πρακτικές συμφωνίες και πώς μπορούν να βοηθήσουν οι γονείς.',
+  'Familiegesprek zorg en mantelzorg':
+      'Οικογενειακή συζήτηση για τη φροντίδα και την άτυπη φροντίδα',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Σενάρια, επιθυμίες, κατανομή καθηκόντων και συμφωνίες για μια δύσκολη οικογενειακή συζήτηση.',
+  'Raads- / collegevoorstel':
+      'Πρόταση προς το συμβούλιο / την εκτελεστική αρχή',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Αφορμή, σημεία απόφασης, επιχειρήματα και επιφυλάξεις, κάλυψη δαπανών και επόμενα βήματα.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Βραδιά κατοίκων / συνάντηση συμμετοχής',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Τι είναι δεδομένο και τι ανοιχτό, αριθμοί, δυνατότητες αντίδρασης και επόμενα βήματα.',
+  'Sprint review / demo': 'Ανασκόπηση sprint / επίδειξη',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Στόχος του sprint, παραδοτέο έργο, επίδειξη, μετρικές και προοπτική.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Ενημέρωση πυροσβεστικής (επέμβαση και άσκηση)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Κτίριο, πρόσβαση, κίνδυνοι, τεταρτημόρια, υδροδότηση και κατανομή καθηκόντων.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Αίτημα γνωμοδότησης προς το συμβούλιο εργαζομένων',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Σχεδιαζόμενη απόφαση, κίνητρα, συνέπειες για το προσωπικό και η διαδικασία γνωμοδότησης.',
+  'Stagepresentatie': 'Παρουσίαση πρακτικής άσκησης',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Εταιρεία, ανάθεση, προσέγγιση, αποτέλεσμα, μαθησιακοί στόχοι και αναστοχασμός.',
+  'Debriefing / after-action review': 'Απολογισμός / ανασκόπηση μετά τη δράση',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Τι είχε σχεδιαστεί, τι συνέβη, γιατί — και ποιες συμφωνίες κάνουμε.',
+  'Threat modeling-sessie': 'Συνεδρία μοντελοποίησης απειλών',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Εύρος, ροές δεδομένων, όρια εμπιστοσύνης, απειλές ανά κατηγορία STRIDE και μέτρα.',
+  'Casuïstiekbespreking sociaal domein':
+      'Συζήτηση περιστατικών στον κοινωνικό τομέα',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Ανωνυμοποιημένο περιστατικό: τομείς ζωής, ασφάλεια, νομικό πλαίσιο και συντονισμός.',
+  'Gesprek voorbereiden': 'Προετοιμασία συζήτησης',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Στόχος, ο συνομιλητής, δομή, ερωτήσεις και συμφωνίες για κάθε συζήτηση που θέλεις να προετοιμάσεις καλά.',
+  'Cruciaal gesprek voorbereiden': 'Προετοιμασία κρίσιμης συζήτησης',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Υψηλά διακυβεύματα και έντονα συναισθήματα, σύμφωνα με την προσέγγιση για κρίσιμες συζητήσεις.',
+  'Vluchtdebriefing': 'Απολογισμός πτήσης',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Αυτοαξιολόγηση, εξέλιξη ανά φάση, ανασκόπηση TEM και σημεία μάθησης μετά από πτήση ή μάθημα.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Ενημέρωση επιβατών (γενική αεροπορία)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Ζώνες, πόρτες, διαδικασίες ανάγκης και συνεννοήσεις στο αεροσκάφος πριν από την τροχοδρόμηση.',
   'Onlinevergaderingen': 'Διαδικτυακές συσκέψεις',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Συμμετοχή σε σύσκεψη άλλου παρόχου, με την παρουσίασή σας ως αυτό που μοιράζεστε. Απενεργοποιημένο από προεπιλογή· με τη μονάδα απενεργοποιημένη, το OciDeck δεν επικοινωνεί με καμία υπηρεσία συσκέψεων. Δεν έχει συνδεθεί ακόμη κανένας πάροχος, οπότε η συμμετοχή δεν είναι ακόμη δυνατή — αυτό θέτει τα θεμέλια.',

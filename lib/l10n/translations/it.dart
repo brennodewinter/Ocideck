@@ -849,6 +849,137 @@ const _dutchSourceAddIt = {
   'moderator': 'moderatore',
   'organisator': 'organizzatore',
   'rol onbekend': 'ruolo sconosciuto',
+  'Bord': 'Tabellone',
+  'Projectcharter': 'Statuto di progetto',
+  'CTQ-boom': 'Albero CTQ',
+  'Visgraat (Ishikawa)': 'Diagramma a lisca di pesce (Ishikawa)',
+  'Proceskaart': 'Mappa di processo',
+  'Impact / Inspanning': 'Impatto / Sforzo',
+  'Vier lijsten — één per kwadrant.': 'Quattro liste — una per quadrante.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'Una pagina, sette riquadri — tieni ciascuno breve e leggibile.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D è calcolato — non digitarlo tu stesso.',
+  'Eén R per rij.': 'Un R per riga.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Compila da destra a sinistra — inizia dal cliente.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Le colonne sono stati; le schede sono attività.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope e criteri di successo prima — il come viene dopo.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'Dal bisogno del cliente (Y) a CTQ misurabili.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Cinque livelli di profondità — termina con un X-id.',
+  'Zes M\'s als botten — oorzaken eronder.': 'Sei M come ossa — cause sotto.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Passi come titolo :: tipo :: attributi.',
+  'Zet de rol in het lane=… kenmerk.':
+      'Inserisci il ruolo nell\'attributo lane=…',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT per passo — i totali sono calcolati, non memorizzati.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'Una lista per quadrante — non tracciare coordinate.',
+  'Intern': 'Interno',
+  'Negatief': 'Negativo',
+  'Positief': 'Positivo',
+  'Weinige inspanning': 'Sforzo basso',
+  'Veel inspanning': 'Sforzo elevato',
+  'Lage impact': 'Impatto basso',
+  'Hoge impact': 'Impatto elevato',
+  'Sterktes': 'Punti di forza',
+  'Zwaktes': 'Debolezze',
+  'Kansen': 'Opportunità',
+  'Bedreigingen': 'Minacce',
+  'Achtergrond': 'Contesto',
+  'Huidige situatie': 'Situazione attuale',
+  'Oorzaakanalyse': 'Analisi delle cause radice',
+  'Tegenmaatregelen': 'Contromisure',
+  'Opvolging': 'Follow-up',
+  'Bezig': 'In corso',
+  'Probleem': 'Problema',
+  'Succescriteria': 'Criteri di successo',
+  'Snelle winst': 'Vittorie rapide',
+  'Grote projecten': 'Progetti importanti',
+  'Opvullers': 'Riempitivi',
+  'Ondankbaar': 'Ingrato',
+  'Processtap': 'Fase di processo',
+  'Faalwijze': 'Modalità di guasto',
+  'Oorzaak': 'Causa',
+  'Beheersing': 'Controllo',
+  'Activiteit': 'Attività',
+  'Leverancier': 'Fornitore',
+  'Klant': 'Cliente',
+  'Plan': 'Plan',
+  'Team': 'Squadra',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Effetto',
+  'Businesscase / investeringsvoorstel':
+      'Business case / proposta di investimento',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Motivazione, opzioni con costi e benefici, rischi e la decisione richiesta.',
+  'Begroting / budgetpresentatie': 'Presentazione del budget',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Presupposti, voci con confronto, margini di scelta, rischi e punti di decisione.',
+  'Besluitvormend overleg': 'Riunione decisionale',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Ordine del giorno, spiegazione per punto, elenco delle decisioni e azioni con responsabile.',
+  'Ledenvergadering (ALV)': 'Assemblea dei soci (assemblea generale)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Ordine del giorno, relazione annuale, commissione di revisione, bilancio e votazioni per associazione o condominio.',
+  'Ouderavond / informatieavond':
+      'Riunione con i genitori / serata informativa',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Programma annuale, approccio, accordi pratici e come i genitori possono aiutare.',
+  'Familiegesprek zorg en mantelzorg':
+      'Colloquio familiare su cure e assistenza',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenari, desideri, suddivisione dei compiti e accordi per un colloquio familiare difficile.',
+  'Raads- / collegevoorstel': 'Proposta al consiglio / alla giunta',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Motivazione, punti di decisione, argomenti e riserve, copertura finanziaria e seguito.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Serata per i residenti / incontro di partecipazione',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'Cosa è già deciso e cosa è aperto, numeri, possibilità di reazione e seguito.',
+  'Sprint review / demo': 'Sprint review / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Obiettivo dello sprint, lavoro consegnato, demo, metriche e prospettive.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Briefing dei vigili del fuoco (intervento ed esercitazione)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'Edificio, accessibilità, pericoli, quadranti, approvvigionamento idrico e ripartizione dei compiti.',
+  'Adviesaanvraag OR / medezeggenschap':
+      'Richiesta di parere al consiglio aziendale',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Decisione prevista, motivazioni, conseguenze per il personale e l\'iter consultivo.',
+  'Stagepresentatie': 'Presentazione del tirocinio',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Azienda, incarico, approccio, risultato, obiettivi di apprendimento e riflessione.',
+  'Debriefing / after-action review': 'Debriefing / after-action review',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'Cosa era previsto, cosa è successo, perché — e quali accordi prendiamo.',
+  'Threat modeling-sessie': 'Sessione di threat modeling',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Ambito, flussi di dati, confini di fiducia, minacce per categoria STRIDE e contromisure.',
+  'Casuïstiekbespreking sociaal domein':
+      'Discussione di casi nel settore sociale',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Caso anonimizzato: ambiti di vita, sicurezza, quadro giuridico e regia.',
+  'Gesprek voorbereiden': 'Preparare una conversazione',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Obiettivo, l\'altra persona, struttura, domande e accordi per ogni conversazione che vuoi preparare bene.',
+  'Cruciaal gesprek voorbereiden': 'Preparare una conversazione cruciale',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'Interessi alti ed emozioni forti, secondo l\'approccio delle conversazioni cruciali.',
+  'Vluchtdebriefing': 'Debriefing del volo',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Autovalutazione, andamento per fase, retrospettiva TEM e punti di apprendimento dopo un volo o una lezione.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Briefing passeggeri (aviazione generale)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Cinture, porte, procedure di emergenza e accordi a bordo prima del rullaggio.',
   'Onlinevergaderingen': 'Riunioni online',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Partecipare a una riunione di un altro fornitore, con la propria presentazione come contenuto condiviso. Disattivato per impostazione predefinita; con il modulo disattivato OciDeck non contatta alcun servizio di riunioni. Nessun fornitore è ancora collegato, quindi partecipare non è ancora possibile — questo getta le basi.',

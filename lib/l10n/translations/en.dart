@@ -1035,6 +1035,133 @@ const _dutchSourceAddEn = {
   'moderator': 'moderator',
   'organisator': 'organiser',
   'rol onbekend': 'role unknown',
+  'Bord': 'Board',
+  'Projectcharter': 'Project charter',
+  'CTQ-boom': 'CTQ tree',
+  'Visgraat (Ishikawa)': 'Fishbone (Ishikawa)',
+  'Proceskaart': 'Process map',
+  'Impact / Inspanning': 'Impact / Effort',
+  'Vier lijsten — één per kwadrant.': 'Four lists — one per quadrant.',
+  'Eén blad, zeven vakken — kort en leesbaar houden.':
+      'One page, seven boxes — keep each short and readable.',
+  'RPN = S×O×D wordt berekend — typ hem niet zelf.':
+      'RPN = S×O×D is derived — never type it yourself.',
+  'Eén R per rij.': 'One R per row.',
+  'Vul rechts naar links in — begin bij de klant.':
+      'Fill right-to-left — start at the customer.',
+  'Kolommen zijn statussen; kaarten zijn taken.':
+      'Columns are statuses; cards are tasks.',
+  'Scope en succescriteria eerst — daarna pas het hoe.':
+      'Scope and success criteria first — how comes later.',
+  'Van klantwens (Y) naar meetbare CTQ\'s.':
+      'From customer need (Y) to measurable CTQs.',
+  'Vijf niveaus diep — eindig met een X-id.':
+      'Five levels deep — end with an X-id.',
+  'Zes M\'s als botten — oorzaken eronder.':
+      'Six Ms as bones — causes underneath.',
+  'Stappen als titel :: soort :: kenmerken.':
+      'Steps as title :: kind :: attributes.',
+  'Zet de rol in het lane=… kenmerk.': 'Put the role in the lane=… attribute.',
+  'PT/LT per stap — totalen worden berekend, niet opgeslagen.':
+      'PT/LT per step — totals are derived, never stored.',
+  'Lijst per kwadrant — geen coördinaten tekenen.':
+      'A list per quadrant — do not plot coordinates.',
+  'Intern': 'Internal',
+  'Negatief': 'Negative',
+  'Positief': 'Positive',
+  'Weinige inspanning': 'Low effort',
+  'Veel inspanning': 'High effort',
+  'Lage impact': 'Low impact',
+  'Hoge impact': 'High impact',
+  'Sterktes': 'Strengths',
+  'Zwaktes': 'Weaknesses',
+  'Kansen': 'Opportunities',
+  'Bedreigingen': 'Threats',
+  'Achtergrond': 'Background',
+  'Huidige situatie': 'Current situation',
+  'Oorzaakanalyse': 'Root cause analysis',
+  'Tegenmaatregelen': 'Countermeasures',
+  'Opvolging': 'Follow-up',
+  'Bezig': 'Doing',
+  'Probleem': 'Problem',
+  'Succescriteria': 'Success criteria',
+  'Snelle winst': 'Quick wins',
+  'Grote projecten': 'Major projects',
+  'Opvullers': 'Fill-ins',
+  'Ondankbaar': 'Thankless',
+  'Processtap': 'Process step',
+  'Faalwijze': 'Failure mode',
+  'Oorzaak': 'Cause',
+  'Beheersing': 'Control',
+  'Activiteit': 'Activity',
+  'Leverancier': 'Supplier',
+  'Klant': 'Customer',
+  'Plan': 'Plan',
+  'Team': 'Team',
+  'Input': 'Input',
+  'Output': 'Output',
+  'Effect': 'Effect',
+  'Businesscase / investeringsvoorstel': 'Business case / investment proposal',
+  'Aanleiding, opties met kosten en baten, risico\'s en het gevraagde besluit.':
+      'Rationale, options with costs and benefits, risks and the requested decision.',
+  'Begroting / budgetpresentatie': 'Budget presentation',
+  'Uitgangspunten, posten met vergelijking, keuzeruimte, risico\'s en beslispunten.':
+      'Assumptions, line items with comparison, room for choices, risks and decision points.',
+  'Besluitvormend overleg': 'Decision-making meeting',
+  'Agenda, toelichting per punt, besluitenlijst en acties met eigenaar.':
+      'Agenda, explanation per item, decision list and actions with owners.',
+  'Ledenvergadering (ALV)': 'General meeting (AGM)',
+  'Agenda, jaarverslag, kascommissie, begroting en stemmingen voor vereniging of VvE.':
+      'Agenda, annual report, audit committee, budget and votes for an association or homeowners\' association.',
+  'Ouderavond / informatieavond': 'Parents\' evening / information evening',
+  'Jaarprogramma, aanpak, praktische afspraken en hoe ouders kunnen helpen.':
+      'Year programme, approach, practical arrangements and how parents can help.',
+  'Familiegesprek zorg en mantelzorg':
+      'Family conversation on care and caregiving',
+  'Scenario\'s, wensen, taakverdeling en afspraken voor een zwaar familiegesprek.':
+      'Scenarios, wishes, division of tasks and agreements for a difficult family conversation.',
+  'Raads- / collegevoorstel': 'Council / executive proposal',
+  'Aanleiding, beslispunten, argumenten én kanttekeningen, dekking en vervolg.':
+      'Rationale, decision points, arguments and caveats, funding and next steps.',
+  'Bewonersavond / participatiebijeenkomst':
+      'Residents\' evening / participation meeting',
+  'Wat vaststaat en wat openligt, cijfers, reactiemogelijkheden en vervolg.':
+      'What is fixed and what is open, figures, ways to respond and next steps.',
+  'Sprint review / demo': 'Sprint review / demo',
+  'Sprintdoel, opgeleverd werk, demo, metrieken en vooruitblik.':
+      'Sprint goal, delivered work, demo, metrics and outlook.',
+  'Brandweerbriefing (inzet en oefening)':
+      'Fire service briefing (response and exercise)',
+  'Object, bereikbaarheid, gevaren, kwadranten, waterwinning en taakverdeling.':
+      'The building, access, hazards, quadrants, water supply and task assignment.',
+  'Adviesaanvraag OR / medezeggenschap': 'Works council advice request',
+  'Voorgenomen besluit, beweegredenen, personele gevolgen en het adviestraject.':
+      'Intended decision, motives, consequences for staff and the advice process.',
+  'Stagepresentatie': 'Internship presentation',
+  'Bedrijf, opdracht, aanpak, resultaat, leerdoelen en reflectie.':
+      'Company, assignment, approach, results, learning goals and reflection.',
+  'Debriefing / after-action review': 'Debriefing / after-action review',
+  'Wat was gepland, wat gebeurde er, waarom — en welke afspraken maken we.':
+      'What was planned, what happened, why — and what agreements we make.',
+  'Threat modeling-sessie': 'Threat modeling session',
+  'Scope, datastromen, vertrouwensgrenzen, dreigingen per STRIDE-categorie en maatregelen.':
+      'Scope, data flows, trust boundaries, threats per STRIDE category and mitigations.',
+  'Casuïstiekbespreking sociaal domein': 'Social domain case review',
+  'Geanonimiseerde casus: leefdomeinen, veiligheid, wettelijk kader en regie.':
+      'Anonymised case: life domains, safety, legal framework and case coordination.',
+  'Gesprek voorbereiden': 'Prepare a conversation',
+  'Doel, de ander, opbouw, vragen en afspraken voor elk gesprek dat je goed wilt voorbereiden.':
+      'Goal, the other person, structure, questions and agreements for any conversation you want to prepare well.',
+  'Cruciaal gesprek voorbereiden': 'Prepare a crucial conversation',
+  'Hoge belangen en sterke emoties, volgens de aanpak voor cruciale gesprekken.':
+      'High stakes and strong emotions, using the crucial-conversations approach.',
+  'Vluchtdebriefing': 'Flight debriefing',
+  'Zelfevaluatie, verloop per fase, TEM-terugblik en leerpunten na een vlucht of les.':
+      'Self-assessment, how each phase went, TEM review and lessons after a flight or lesson.',
+  'Passagiersbriefing (kleine luchtvaart)':
+      'Passenger briefing (general aviation)',
+  'Gordels, deuren, noodprocedures en afspraken aan boord vóór het taxiën.':
+      'Seat belts, doors, emergency procedures and agreements on board before taxiing.',
   'Onlinevergaderingen': 'Online meetings',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Join a meeting run by another provider, with your presentation as what you share. Off by default; with the module off, OciDeck contacts no meeting service at all. No provider is connected yet, so joining is not possible yet — this lays the groundwork.',
