@@ -648,6 +648,21 @@ class DeckNotifier extends StateNotifier<DeckState> {
   void setUserNotes(Map<String, String> notes) =>
       _updateSidecarLayer((d) => d.copyWith(userNotes: _nonEmptyNotes(notes)));
 
+  /// Replace the deck with one the collaboration layer produced — a co-author's
+  /// change already merged onto the local deck by `collab_session_controller`
+  /// (COLLABORATION.md §5.7). Kept out of undo/redo (Ctrl+Z should undo my own
+  /// edit, not a collaborator's), but it bumps [DeckState.revision] so the
+  /// editor's cached text fields re-read the incoming change, and marks the deck
+  /// dirty so it is saved. A no-op when no deck is open.
+  void applyCollabDeck(Deck deck) {
+    if (state.deck == null) return;
+    state = state.copyWith(
+      deck: deck,
+      isDirty: true,
+      revision: state.revision + 1,
+    );
+  }
+
   void setUserNoteForSlide(
     String slideId,
     String text, {
