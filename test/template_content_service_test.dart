@@ -33,17 +33,20 @@ void main() {
       expect(slides[1].title, 'Situation in brief');
     });
 
-    test('any other language falls back to the English document', () async {
-      // Inhoud bestaat in nl en en (bestand per taal); alle overige talen
-      // krijgen de Engelse variant — de interface blijft hun eigen taal.
-      final slides = await TemplateContentService().loadSlides(
-        'briefing',
-        languageCode: 'de',
-        deckTitle: 'Meine Präsentation',
-      );
-      expect(slides.first.title, 'Meine Präsentation');
-      expect(slides[1].title, 'Situation in brief');
-    });
+    test(
+      'an unsupported language falls back to the English document',
+      () async {
+        // Voor talen waarvoor geen sjabloonbestand bestand, valt de service
+        // terug naar het Engelse document.
+        final slides = await TemplateContentService().loadSlides(
+          'briefing',
+          languageCode: 'ja',
+          deckTitle: 'My presentation',
+        );
+        expect(slides.first.title, 'My presentation');
+        expect(slides[1].title, 'Situation in brief');
+      },
+    );
 
     test('every slide gets a fresh id per load', () async {
       final service = TemplateContentService();
