@@ -1,0 +1,87 @@
+---
+marp: true
+ocideck_format: 1
+theme: ocideck
+paginate: true
+title: Teknisk förklarare
+language: sv
+---
+
+<!-- _class: title -->
+
+# Teknisk förklarare
+
+---
+
+# Sammanhang och mål
+
+- Vad den här komponenten är till för: …
+- Vem är denna förklaring till: …
+- Vad du kommer att förstå i slutet: …
+
+---
+
+### Architecture overview
+
+```mermaid
+flowchart LR
+  Client --> API
+  API --> Service
+  Service --> Database[(Database)]
+```
+
+---
+
+<!-- _class: table -->
+
+# Komponenter och ansvar
+
+| Komponent | Ansvar | Ägare |
+| --- | --- | --- |
+| Klient | Presentation och input | Lag A |
+| API | Validering och routing | Lag B |
+| Service | Affärslogik | Lag B |
+| Databas | Lagring | Lag C |
+
+---
+
+# Dataflöde eller processflöde
+<!-- ocideck_list_style: numbered -->
+
+1. The user makes a request
+2. The API validates and routes it
+3. The service processes and stores it
+4. The result goes back to the user
+
+---
+
+<!-- _class: code -->
+
+# Kodexempel
+
+```dart
+/// Replace this example with the code you want to explain.
+Future<Result> handleRequest(Request request) async {
+  final input = validate(request);
+  final result = await service.process(input);
+  return result;
+}
+```
+
+---
+
+# Risker och avvägningar
+
+- Vald lösning: … — eftersom: …
+- Avvisat alternativ: … — på grund av: …
+- Känd risk: …
+
+---
+
+# Checklista för implementering
+<!-- ocideck_list_style: checklist -->
+
+- [ ] Design diskuteras med teamet
+- [ ] Tester skrivna
+- [ ] Dokumentationen uppdaterad
+- [ ] Uppsättning av övervakning

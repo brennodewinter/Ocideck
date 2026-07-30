@@ -3,50 +3,50 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: Short briefing
+title: Kurze Einweisung
 language: gsw
 ---
 
 <!-- _class: title -->
 
-# Short briefing
+# Kurze Einweisung
 
 ---
 
-# Situation in brief
+# Situation in Kürze
 
-- What is going on?
-- Since when has this been playing out?
-- Who is involved?
-
----
-
-# Key facts
-
-- Fact 1: …
-- Fact 2: …
-- Fact 3: …
+- Was ist los?
+- Seit wann spielt sich das ab?
+- Wer ist beteiligt?
 
 ---
 
-# Impact
+# Wichtige Fakten
 
-- For the organization: …
-- For employees or customers: …
-- Financial: …
-
----
-
-# Decision or action requested
-
-- Requested decision: …
-- Alternative: …
-- Consequence of postponing: …
+- Fakt 1: …
+- Fakt 2: …
+- Fakt 3: …
 
 ---
 
-# Next steps
+# Auswirkungen
 
-- Step 1: … (who, when)
-- Step 2: … (who, when)
-- Feedback: …
+- Für die Organisation: …
+- Für Mitarbeiter oder Kunden: …
+- Finanziell: …
+
+---
+
+# Entscheidung oder Massnahme angefordert
+
+- Beantragte Entscheidung: …
+- Alternativ: …
+- Folge der Verschiebung: …
+
+---
+
+# Nächste Schritte
+
+- Schritt 1: … (wer, wann)
+- Schritt 2: … (wer, wann)
+- Rückmeldung: …
