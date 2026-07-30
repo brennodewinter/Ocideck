@@ -207,6 +207,15 @@ binnen te halen (alternatief A), dus er is geen noodzaak de belofte te breken.
 
 ## Alternatieven (bij NO-GO)
 
+> **Aanvulling (2026-07-30).** De eerste versie van deze keuring zette alternatief
+> B te mager weg — als "zelf een minimale client bouwen op de kale crypto", een
+> beveiligingskritische DIY die terecht werd afgeraden. Dat miste de sterkere,
+> echte route: matrix.org's **eigen** volledige client (`matrix-rust-sdk`,
+> Apache-2.0), die je níet zelf schrijft. B is hieronder herschreven; de kost
+> verschuift van "DIY-crypto" naar "bouw en onderhoud een Dart-binding". De aparte
+> GO/NO-GO daarop is belegd in #991. (Waarde 9: de misser hoort navolgbaar in de
+> tekst, niet weggepoetst.)
+
 **A. Fase 0.5 — WebDAV-async-transport (aanbevolen).** Een `WebdavAsyncTransport`
 achter het bestaande `CollabTransport`-contract, over de Nextcloud/WebDAV die de
 gebruiker al heeft (`lib/services/webdav_service.dart`). Nul nieuwe
@@ -215,13 +224,31 @@ asynchroon co-auteuren (geen realtime, geen chat-presence). Al voorzien in
 `COLLABORATION.md` §10 als "near-free given Phase 0". Dit is de waarde-uitlijnende
 volgende stap: samenwerken op wat er al is.
 
-**B. Kleinere Matrix-client + directe binding van Apache-2.0-crypto.** Bind de
-upstream `vodozemac`-crate (Apache-2.0) of `libolm` (Apache-2.0) rechtstreeks en
-schrijf een minimale Matrix-client in Dart, buiten de AGPL-laag van famedly om.
-Ontwijkt de licentie, maar is een grote, beveiligingskritische DIY-onderneming
-(waarde 1 pleit ertegen), en houdt de Rust-toolchain (of het uitgefaseerde,
-onderhoudsarme `libolm`). Niet aanbevolen tenzij realtime-Matrix onmisbaar blijkt
-én de AGPL onaanvaardbaar.
+**B. Volledige Matrix via `matrix-rust-sdk` (Apache-2.0) achter een Dart-FFI-binding.**
+matrix.org onderhoudt zelf een volwaardige Matrix-client in Rust —
+[`matrix-rust-sdk`](https://github.com/matrix-org/matrix-rust-sdk), **Apache-2.0**,
+inclusief E2EE (`matrix-sdk-crypto`, dezelfde vodozemac maar dan de Apache-2.0-crate).
+Het draait in productie onder Element X (iOS/Android). Je schrijft dus niet zelf de
+client of de crypto — alleen de Dart↔Rust-binding (via `flutter_rust_bridge`). Dit
+**ontwijkt de AGPL volledig**: geen herlicensering, geen breuk met het
+licentiebeleid, OciDeck blijft EUPL-1.2 met permissieve deps, én je krijgt volledig
+real-time Matrix.
+
+De prijs verschuift, hij verdwijnt niet. De Rust-toolchain blijft (Bevinding 2) en
+de SBOM-tool moet alsnog `Cargo.lock` mee lopen (Bevinding 3) — beide zijn inherent
+aan vodozemac-E2EE uit welke bron dan ook. Nieuw is dat er **geen Dart-binding
+bestaat**: die bouw en onderhoud je zelf, een doorlopende verplichting die meebeweegt
+met de API van matrix-rust-sdk. En de platformverdeling is omgekeerd aan de intuïtie:
+de **losse apps** (macOS/Windows/Linux, iOS/Android) zijn het solide geval (native
+lib + FFI), het **web** is de moeilijke kant — de beproefde browserroute is een
+JS-client met alleen de crypto in WASM (`matrix-sdk-crypto-wasm`, "designed to run on
+a JavaScript host"); de volledige rust-sdk past niet netjes op Flutter-web/CanvasKit.
+Een serieus middenpad — aparte keuring in #991.
+
+*Niet* dit: de upstream `vodozemac`-crate of `libolm` rechtstreeks binden en zélf een
+Matrix-client schrijven. Dat ontwijkt de AGPL ook, maar is een grote,
+beveiligingskritische DIY-onderneming (waarde 1 pleit ertegen) — waar B hierboven
+juist de al-geschreven, in productie beproefde client van matrix.org gebruikt.
 
 **C. Uitstel.** Houd Fase 0 (loopback) en pak realtime pas op wanneer er een
 lichtere weg is of het beleidsbesluit genomen is. Kost niets en sluit niets af.
@@ -261,5 +288,9 @@ advies en de feiten; de knoop is aan de stichting.
 advies gevolgd. Realtime-Matrix (spoor B, #977) staat op pauze tot een expliciet
 beleidsbesluit; de volgende stap wordt Fase 0.5 (WebDAV-async), belegd in #989.
 Het licentiebeleid blijft ongewijzigd en er wordt niets herlicenseerd.
+
+De permissieve route naar vól Matrix *zonder* beleidswijziging — matrix.org's eigen
+`matrix-rust-sdk` (Apache-2.0) achter een Dart-binding, zie alternatief B — krijgt
+een eigen GO/NO-GO in #991. Die keuring staat los van deze NO-GO op de famedly-SDK.
 
 [issue #976]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/976
