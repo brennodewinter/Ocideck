@@ -505,6 +505,15 @@ exists.
   read counterparts `slideFieldValue`/`deckMetaValue` of `applyOp`'s setters. The
   v1 seam; the design's eventual model is the editor emitting ops under a lock
   (§5.4).
+- `collab_session_controller.dart` — the bridge between a tab's editable deck
+  and a session (§5.7). A local edit is diffed against the session and its ops
+  submitted; a change the session applies flows back, *merged* onto the local
+  deck so non-syncable fields (table rows, annotations) survive — the merge is
+  `applyOps(local, deckDiffToOps(local, session))`. Two guards stop the echo
+  loop: an `_applyingRemote` flag suppresses re-submission while writing a remote
+  change, and, belt-and-braces, an echoed deck diffs empty. Riverpod- and
+  Flutter-free (plain read/write callbacks), so the subtle part is unit-tested
+  headlessly; the provider that owns one per tab is the remaining app glue.
 - `collab_session_launch.dart` — the session lifecycle seam (§6.5):
   `hostCollabSession` posts the baseline, becomes the authority and starts
   polling; `joinCollabSession` reads the baseline, rebases the local deck onto
