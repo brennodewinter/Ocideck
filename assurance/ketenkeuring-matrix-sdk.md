@@ -257,4 +257,9 @@ De enige weg naar een GO loopt via voorwaarde 1: het licentiebeleid overrulen. D
 is een besluit van de beheerder, niet van de keuring. Deze keuring geeft het
 advies en de feiten; de knoop is aan de stichting.
 
+**Besloten (2026-07-30).** De beheerder heeft de knoop doorgehakt: **NO-GO**, het
+advies gevolgd. Realtime-Matrix (spoor B, #977) staat op pauze tot een expliciet
+beleidsbesluit; de volgende stap wordt Fase 0.5 (WebDAV-async), belegd in #989.
+Het licentiebeleid blijft ongewijzigd en er wordt niets herlicenseerd.
+
 [issue #976]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/976
