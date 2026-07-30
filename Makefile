@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -806,6 +806,20 @@ template-l10n-skeleton:
 	@[ -n "$(TEMPLATE)" ] || { echo "Usage: make template-l10n-skeleton TEMPLATE=afterActionReview LANG_=it"; exit 2; }
 	@[ -n "$(LANG_)" ] || { echo "Usage: make template-l10n-skeleton TEMPLATE=afterActionReview LANG_=it"; exit 2; }
 	dart run tool/template_l10n_po.dart skeleton $(TEMPLATE) $(LANG_)
+
+# Automatische vertaalstap: export → TRANSLATOR → import.
+# TRANSLATOR wordt aangeroepen als: $(TRANSLATOR) en <LANG_> <pot.json> <out.json>
+# Voorbeeld: make template-l10n-auto TEMPLATE=afterActionReview LANG_=it \
+#   TRANSLATOR='python3 tool/translate_with_argos.py'
+template-l10n-auto:
+	@[ -n "$(TEMPLATE)" ] || { echo "Usage: make template-l10n-auto TEMPLATE=afterActionReview LANG_=it TRANSLATOR='...'"; exit 2; }
+	@[ -n "$(LANG_)" ] || { echo "Usage: make template-l10n-auto TEMPLATE=afterActionReview LANG_=it TRANSLATOR='...'"; exit 2; }
+	@[ -n '$(TRANSLATOR)' ] || { echo "Usage: make template-l10n-auto TEMPLATE=... LANG_=... TRANSLATOR='...'"; exit 2; }
+	@POT=$$(mktemp -t template_l10n_pot); OUT=$$(mktemp -t template_l10n_out); \
+	trap "rm -f $$POT $$OUT" EXIT; \
+	dart run tool/template_l10n_po.dart export $(TEMPLATE) $$POT && \
+	$(TRANSLATOR) en $(LANG_) $$POT $$OUT && \
+	dart run tool/template_l10n_po.dart import $(TEMPLATE) $(LANG_) $$OUT
 
 l10n-check:
 	@echo "== OciDeck check: l10n =="
