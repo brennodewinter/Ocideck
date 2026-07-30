@@ -1,0 +1,103 @@
+---
+marp: true
+ocideck_format: 1
+theme: ocideck
+paginate: true
+title: Raport
+language: ro
+---
+
+<!-- _class: title -->
+
+# Raport
+
+---
+
+# Rezumat
+
+- Concluzia cheie:...
+- Cel mai mare risc sau abatere: …
+- Acțiune solicitată:…
+
+---
+
+<!-- _class: scorecard -->
+
+# Cifre cheie
+
+| Eticheta | Valoare | Anterior | Unitate | Polaritate |
+| --- | --- | --- | --- | --- |
+| Realizarea obiectivului | 72 | 65 | % | mai sus-mai bine |
+| Articole deschise | 18 | 12 |  | mai jos-mai bine |
+| Nivel de risc | 3.5 | 4.2 | /10 | mai jos-mai bine |
+| Perioada de graţie | 21 | 21 | zile | mai jos-mai bine |
+
+---
+
+<!-- _class: chart -->
+
+```chart
+{
+  "type": "line",
+  "x": [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun"
+  ],
+  "series": [
+    {
+      "name": "This year",
+      "data": [
+        12.0,
+        14.0,
+        13.0,
+        17.0,
+        19.0,
+        22.0
+      ]
+    },
+    {
+      "name": "Last year",
+      "data": [
+        10.0,
+        11.0,
+        13.0,
+        14.0,
+        15.0,
+        16.0
+      ]
+    }
+  ]
+}
+```
+
+---
+
+# Analiză și interpretare
+
+- Ce iese în evidență în cifre:…
+- Explicație:…
+- Ce înseamnă asta pentru obiectiv:…
+
+---
+
+# Riscuri și abateri
+
+- Abatere: … (cauză, scară)
+- Risc pentru perioada următoare:…
+- Măsura de control: …
+
+---
+
+<!-- _class: table -->
+
+# Acțiuni și decizii
+
+| Acţiune | Proprietar | Termen limită | Stare |
+| --- | --- | --- | --- |
+| Cu privire la ce cerem o decizie:... | … |  | Deschide |
+| Ce se desfășoară și cu cine:… | … |  | În curs |
+| Ce s-a blocat și necesită atenție:... | … |  | Deschide |
