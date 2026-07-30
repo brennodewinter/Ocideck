@@ -259,22 +259,22 @@ void main() {
 
   group('taal van de sjablooninhoud', () {
     // Titel en omschrijving lopen door l10n.d(), de dia-inhoud niet: die is
-    // een document per taal (nl en en, #622). Wie in een andere taal leest
-    // krijgt de Engelse variant, en dan moet de kiezer dat zeggen in plaats
-    // van het te laten ontdekken.
+    // een document per taal. Elke door de UI ondersteunde taal wordt geprobeerd;
+    // ontbrekende content valt terug naar het Engels. De melding zwijgt voor
+    // alle ondersteunde talen.
     tearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
 
     // Op de sleutel en niet op de tekst: de melding bestaat in 30 talen, en de
     // vertaling opzoeken zou de test laten meebewegen met wat hij bewaakt.
     final notice = find.byKey(const ValueKey('templateLanguageNotice'));
 
-    testWidgets('wordt gemeld zodra de inhoud niet in de eigen taal komt', (
+    testWidgets('zwijgt in een ondersteunde taal zonder eigen sjabloon', (
       tester,
     ) async {
       AppLocalizations.setActiveLanguageCode('tr');
       final harness = _Harness();
       await harness.open(tester);
-      expect(notice, findsOneWidget);
+      expect(notice, findsNothing);
     });
 
     testWidgets('zwijgt in het Nederlands', (tester) async {
