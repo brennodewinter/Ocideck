@@ -18,7 +18,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'info_safety_provider.dart';
-import 'meetings_module_provider.dart';
 import 'online_storage_provider.dart';
 import 'import_module_provider.dart';
 import 'procesverbetering_provider.dart';
@@ -26,14 +25,7 @@ import 'settings_provider.dart';
 
 /// De optionele modules, in de volgorde waarin het Uitbreidingen-tabblad ze
 /// toont.
-enum ModuleId {
-  infoSafety,
-  ai,
-  onlineStorage,
-  imports,
-  procesverbetering,
-  meetings,
-}
+enum ModuleId { infoSafety, ai, onlineStorage, imports, procesverbetering }
 
 /// Eén module in het register: wie hij is en waar zijn poorten staan.
 ///
@@ -107,10 +99,5 @@ final List<ModuleEntry> moduleRegistry = [
     id: ModuleId.procesverbetering,
     enabled: procesverbeteringEnabledProvider,
     revealed: procesverbeteringRevealProvider,
-  ),
-  ModuleEntry(
-    id: ModuleId.meetings,
-    enabled: meetingsModuleEnabledProvider,
-    revealed: meetingsModuleRevealProvider,
   ),
 ];
