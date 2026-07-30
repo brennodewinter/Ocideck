@@ -496,12 +496,20 @@ exists.
   type or unknown enum name throws rather than yielding a lossy op. The per-field
   value kinds are guarded by a test over `SlideField.values`/`DeckMetaField.values`;
   the full-`Slide` mapping (for `InsertSlide`) by an exhaustive round-trip.
+- `collab_snapshot.dart` — the session baseline (§5.2, §5.5). `CollabSnapshot`
+  is the authority's slides at an op version; a joiner adopts them so it shares
+  the authority's slide-id space (`Slide.id` is regenerated on every parse, §5.5,
+  so without this every op desyncs). It carries the slides, not the whole `Deck`:
+  the durable content lives in the shared `.md` (P2), and changed metadata rides
+  the op stream (`SetDeckMeta`). JSON of the model, fail-closed like the op codec.
 - `collab_log_store.dart` — the append-only log the async transport reads and
   writes (§10). `CollabLogStore` is a numbered sequence of opaque records whose
-  only guarantee is that a taken sequence number cannot be silently overwritten;
+  only guarantee is that a taken sequence number cannot be silently overwritten,
+  plus a single snapshot slot beside the log (`readSnapshot`/`writeSnapshot`, §5.2);
   `InMemoryCollabLogStore` is the loopback-equivalent for tests, and
   `WebdavCollabLogStore` the production binding — one file per record in a
-  sidecar directory, appended with a conditional `PUT` (`If-None-Match: *`).
+  sidecar directory, appended with a conditional `PUT` (`If-None-Match: *`), the
+  baseline written unconditionally by the authority.
 - `webdav_async_transport.dart` — `WebdavAsyncTransport`, the Phase 0.5 async
   transport (§10). Same `CollabTransport` pipe as the loopback, so the session
   drives it unchanged; sends append to the log and a poll delivers others'

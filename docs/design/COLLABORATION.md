@@ -880,10 +880,13 @@ Phase 0.5 (transport + codec landed, #989): `WebdavAsyncTransport` — async
 co-authoring over the Nextcloud a user already configured (`webdav_service.dart`),
 built on an append-only log sidecar (`collab_log_store.dart`, a conditional-`PUT`
 sequence) with the JSON wire codec in `collab_codec.dart`; near-free given Phase
-0, not real-time. The transport and its (de)serialiser are built and tested
-against an in-memory store; snapshot re-baselining for late joiners (§5.2, so a
-joiner shares the authority's slide ids per §5.5) and the provider/UI wiring
-(§5.7) remain the follow-ups that make it user-reachable.
+0, not real-time. The transport, its (de)serialiser and the session baseline
+(`collab_snapshot.dart`, §5.2/§5.5 — a joiner adopts the authority's slides so it
+shares their ids, plus a snapshot slot on the store, #996) are built and tested
+against an in-memory store. What remains to make it user-reachable (#996): the
+session bootstrap that writes/reads that snapshot on start/join, and the
+provider/UI wiring (§5.7) — `collab_session_provider.dart` with the per-tab
+override in `app_shell.dart`.
 
 ### Phase 1 — Matrix data plane + easy onboarding (leans on: homeserver account)
 Add the `matrix` SDK; in-app registration/login against a default-or-chosen

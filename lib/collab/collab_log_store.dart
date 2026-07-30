@@ -30,6 +30,16 @@ abstract interface class CollabLogStore {
   /// the caller then retries at a higher number. This is the whole concurrency
   /// contract: it makes the log an ordered sequence no write can clobber.
   Future<bool> append(int seq, String record);
+
+  /// The session baseline written by [writeSnapshot], or `null` if none has been
+  /// written yet (a joiner arriving before the owner posted one). The snapshot
+  /// is a single record beside the numbered log, not part of it (§5.2).
+  Future<String?> readSnapshot();
+
+  /// Write (or overwrite) the session baseline. Unlike an op append this is
+  /// unconditional: the authority owns the snapshot and re-bases it as it likes;
+  /// there is no racing writer to guard against (only the authority writes it).
+  Future<void> writeSnapshot(String snapshot);
 }
 
 /// An in-process log shared by several transports — the store equivalent of
@@ -54,6 +64,14 @@ class InMemoryCollabLogStore implements CollabLogStore {
     _records[seq] = record;
     return true;
   }
+
+  String? _snapshot;
+
+  @override
+  Future<String?> readSnapshot() async => _snapshot;
+
+  @override
+  Future<void> writeSnapshot(String snapshot) async => _snapshot = snapshot;
 }
 
 /// The production store: one small file per record in a sidecar directory on
@@ -73,6 +91,11 @@ class WebdavCollabLogStore implements CollabLogStore {
 
   String _pathFor(int seq) =>
       '$opsDir/${seq.toString().padLeft(12, '0')}$_suffix';
+
+  /// The baseline sits inside the ops directory under a non-numeric name, so
+  /// [listSequences] ignores it (it only accepts padded-integer records) while
+  /// it still travels with the log in the one sidecar.
+  String get _snapshotPath => '$opsDir/snapshot$_suffix';
 
   @override
   Future<List<int>> listSequences() async {
@@ -123,5 +146,23 @@ class WebdavCollabLogStore implements CollabLogStore {
       // error: the caller retries at the next free number.
       return false;
     }
+  }
+
+  @override
+  Future<String?> readSnapshot() async {
+    try {
+      final file = await service.download(_snapshotPath);
+      return utf8.decode(file.bytes);
+    } on WebdavException catch (e) {
+      if (e.kind == WebdavError.notFound) return null; // none posted yet
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> writeSnapshot(String snapshot) async {
+    // Unconditional overwrite: only the authority writes the baseline, so there
+    // is no If-Match/If-None-Match race to guard (unlike the op records).
+    await service.upload(_snapshotPath, utf8.encode(snapshot));
   }
 }

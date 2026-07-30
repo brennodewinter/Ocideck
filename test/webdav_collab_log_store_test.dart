@@ -163,5 +163,46 @@ void main() {
 
       expect(await _storeFor(fake.port).append(2, '{"x":2}'), isFalse);
     });
+
+    test('readSnapshot returns null before one is posted (404)', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 404;
+      });
+      addTearDown(fake.stop);
+
+      expect(await _storeFor(fake.port).readSnapshot(), isNull);
+      expect(fake.requests.last.path, '$_davRoot/ops/snapshot.json');
+    });
+
+    test('readSnapshot downloads the baseline when present', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 200;
+        req.response.headers.set(HttpHeaders.etagHeader, '"v1"');
+        req.response.write('{"version":3,"slides":[]}');
+      });
+      addTearDown(fake.stop);
+
+      expect(
+        await _storeFor(fake.port).readSnapshot(),
+        '{"version":3,"slides":[]}',
+      );
+    });
+
+    test('writeSnapshot puts the baseline unconditionally', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 201;
+      });
+      addTearDown(fake.stop);
+
+      await _storeFor(fake.port).writeSnapshot('{"version":1}');
+      final put = fake.requests.firstWhere((r) => r.method == 'PUT');
+      expect(put.path, '$_davRoot/ops/snapshot.json');
+      expect(
+        put.ifNoneMatch,
+        isNull,
+        reason: 'the authority owns the snapshot; no conditional guard',
+      );
+      expect(utf8.decode(put.body), '{"version":1}');
+    });
   });
 }
