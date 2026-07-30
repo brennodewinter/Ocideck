@@ -37,6 +37,12 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // NO EXECUTABLE LINES: `collab.dart` is the collaboration module's barrel —
+  // pure `export` directives, nothing for a line counter to reach. The files it
+  // re-exports (the codec, the log store, the async transport) each carry their
+  // own tests; see collab_codec_test, webdav_collab_log_store_test and
+  // webdav_async_transport_test.
+  'lib/collab/collab.dart',
   // NO EXECUTABLE LINES: `openkat_import_action.dart` is een kale
   // export-facade (één conditional export, patroon media_fetch). PLATFORM:
   // `openkat_import_action_web.dart` is de lege webromp — het menu-item
