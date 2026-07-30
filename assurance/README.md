@@ -32,6 +32,7 @@ onderdeel van wat het product over zichzelf beweert.
 | [`ASVS-5.0.0-afwijkingen.md`](ASVS-5.0.0-afwijkingen.md) | Eisen die bewust niet worden gehaald, en waarom dat de juiste keuze is. |
 | [`CRA-2024-2847-positie.md`](CRA-2024-2847-positie.md) | Waarom de Cyberweerbaarheidsverordening hier geen verplichting is, en waarom we hem tóch als leidraad aanhouden. |
 | [`risicoafweging.md`](risicoafweging.md) | Wat er mis kan gaan, hoe erg dat is voor wie het overkomt, en welke risico's bewust zijn aanvaard. Het document waar de aanvaarde afwijkingen elders in dit dossier hun kader vinden. |
+| [`ketenkeuring-matrix-sdk.md`](ketenkeuring-matrix-sdk.md) | De GO/NO-GO-keuring van de Matrix-Dart-SDK vóór spoor B (samenwerken) de netwerklaag in gaat: licenties, native toolchain, SBOM-gevolgen en de kernwaarde-toets. Uitkomst: NO-GO onder het huidige beleid (#976). |
 
 ## De bronnen, en waar het weten ophoudt
 
