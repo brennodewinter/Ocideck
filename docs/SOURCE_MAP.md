@@ -496,6 +496,14 @@ exists.
   type or unknown enum name throws rather than yielding a lossy op. The per-field
   value kinds are guarded by a test over `SlideField.values`/`DeckMetaField.values`;
   the full-`Slide` mapping (for `InsertSlide`) by an exhaustive round-trip.
+- `collab_session_launch.dart` — the session lifecycle seam (§6.5):
+  `hostCollabSession` posts the baseline, becomes the authority and starts
+  polling; `joinCollabSession` reads the baseline, rebases the local deck onto
+  the authority's slides (adopting their ids, §5.5), catches up on ops and
+  polls. Store-generic, so it runs over `InMemoryCollabLogStore` in tests and
+  `WebdavCollabLogStore` in production — nothing here touches a network. v1 host
+  = authority for the whole session; owner-drop handover (§5.3) and non-zero
+  re-baselining (§5.2) are follow-ups.
 - `collab_snapshot.dart` — the session baseline (§5.2, §5.5). `CollabSnapshot`
   is the authority's slides at an op version; a joiner adopts them so it shares
   the authority's slide-id space (`Slide.id` is regenerated on every parse, §5.5,
