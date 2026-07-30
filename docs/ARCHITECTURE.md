@@ -148,16 +148,9 @@ lib/
               # Each of those (except parts/) carries a header comment naming
               # what belongs in it and what does not; SOURCE_MAP.md lists which
               # file holds it.
-  meetings/   # online meetings: the provider-neutral domain of
-              # docs/design/TEAMS_GUEST_CLIENT.md §8 and COLLABORATION.md §7.1
-              # — adapter contract, link resolver, typed events, phase state
-              # machine, failure taxonomy, and providers/fake/ (the
-              # deterministic fake adapter, debug builds only). Free of
-              # Flutter and of any network route; a real adapter gets its
-              # own subdirectory and its own release gates.
   state/      # Riverpod providers (top-level + parts/): deck, editor,
               # settings, tabs, clipboard, webdav, s3, git, consent, privacy,
-              # info_safety, local_cve, deck_quality, meetings, …
+              # info_safety, local_cve, deck_quality, …
   platform/   # conditional-import platform abstraction (io/web halves)
   widgets/    # app shell, panels, dialogs, per-type editors, slides, presenter
   l10n/       # AppLocalizations + translations/<lang>.dart (32 languages)
