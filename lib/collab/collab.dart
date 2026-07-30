@@ -16,4 +16,5 @@ export 'collab_session_launch.dart';
 export 'collab_snapshot.dart';
 export 'collab_transport.dart';
 export 'deck_op.dart';
+export 'handover_coordinator.dart';
 export 'webdav_async_transport.dart';
