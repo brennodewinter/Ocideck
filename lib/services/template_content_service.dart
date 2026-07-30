@@ -4,6 +4,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../models/slide.dart';
 import '../services/improvement/improvement_project_scaffold.dart';
 import '../utils/log.dart';
+import '../l10n/app_localizations.dart';
 import 'markdown_service.dart';
 
 /// Loads the example content of a deck template from its bundled document.
@@ -19,10 +20,13 @@ class TemplateContentService {
 
   final Future<String> Function(String key) _loadAsset;
 
-  /// Languages that have their own template content files in
-  /// `assets/templates/`. The dialog uses this to decide whether the
-  /// "content is in English" notice should be shown.
-  static const languagesWithContent = {'nl', 'en', 'es', 'la', 'el'};
+  /// Languages for which the "content is in English" notice should not be shown.
+  ///
+  /// This is the set of locales the UI supports. Missing template content falls
+  /// back to English through [loadSlides].
+  static final Set<String> languagesWithContent = Set.of(
+    AppLocalizations.supportedLocales.map((l) => l.languageCode),
+  );
 
   /// Returns the fresh slides for a new deck from template [templateId], with
   /// the first (title) slide carrying [deckTitle]. Falls back to a bare title
