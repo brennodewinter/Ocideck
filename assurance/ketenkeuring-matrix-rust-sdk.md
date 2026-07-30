@@ -300,4 +300,11 @@ De permissieve route naar vól Matrix ís dus haalbaar zónder beleidswijziging 
 vraag van #991, en het antwoord is ja. Of en wanneer OciDeck de bijbehorende doorlopende
 verplichting aangaat, is een besluit van de beheerder, niet van de keuring.
 
+**Besloten (2026-07-30).** De beheerder heeft het advies gevolgd: **NO-GO om het nú te
+bouwen, principieel GO als de erkende toekomstige route** naar realtime-Matrix. De
+volgende stap blijft Fase 0.5 (WebDAV-async, #989); `matrix-rust-sdk` wordt pas opgepakt
+zodra de doorlopende bindings-/toolchainverplichting weloverwogen is aanvaard en de vier
+voorwaarden hierboven gebouwd zijn. Het licentiebeleid blijft ongewijzigd — deze route
+vergt geen beleidswijziging.
+
 [issue #991]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/991
