@@ -37,6 +37,15 @@ in Dutch, and it keeps growing on `main` between releases.
   Geschreven tegen een store-naad en zo volledig getest zonder server;
   snapshot-herbaselijning voor late deelnemers (§5.2) en de interface-bedrading
   (§5.7) blijven vervolg, net als bij Fase 0. Nog niet in de interface.
+- De sessie-baseline voor de asynchrone samenwerklaag (COLLABORATION.md §5.2,
+  §5.5, #996): een `CollabSnapshot` legt de slides van de autoriteit op een
+  op-versie vast, zodat een latere deelnemer dezelfde slide-id's overneemt —
+  zonder dat desynct elke bewerking, want `Slide.id` wordt bij elk parsen
+  opnieuw gegenereerd. De snapshot draagt de slides, niet het hele deck: de
+  duurzame inhoud staat in het gedeelde `.md` (P2) en gewijzigde metadata rijdt
+  mee op de op-stroom. Plus een snapshot-slot naast de op-log in dezelfde
+  sidecar (`readSnapshot`/`writeSnapshot`). JSON van het model, fail-closed. De
+  sessie-bedrading die dit gebruikt (§5.7) is het volgende increment.
 
 ### Fixed
 
