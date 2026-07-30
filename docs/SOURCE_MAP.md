@@ -462,6 +462,10 @@ transport (§6) and the UI wiring plug in later; today the layer is reachable
 through `TabInfo.collabSession` (§5.7), `null` on every tab until a session
 exists.
 
+- `collab.dart` — the module barrel: one `export` surface for the whole layer
+  (model, transports, session, codec, store). The state layer imports it for the
+  `CollabSession` seam on `TabInfo`, which keeps the transports and codec
+  reachable through the module they belong to rather than each file singly.
 - `deck_op.dart` — the typed operation model (§5.1). A `DeckOp` is one
   authoritative change to the in-memory `Deck`, ordered by `version`: the sealed
   ops `InsertSlide`/`RemoveSlide`/`ReorderSlide` and the field-level

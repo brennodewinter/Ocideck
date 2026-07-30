@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
-import '../collab/collab_session.dart';
+import '../collab/collab.dart' show CollabSession;
 import '../models/asset_origin.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
