@@ -84,6 +84,24 @@ class WebdavAsyncTransport implements CollabTransport {
   @override
   Stream<LockEvent> get locks => _locks.stream;
 
+  /// True when the last [poll] left no records unseen: every present sequence up
+  /// to the highest known one has been delivered (or skipped as this
+  /// participant's own). The [HandoverCoordinator] gates a takeover on this so a
+  /// successor only assigns versions once its [CollabSession.version] is the
+  /// highest anyone holds — resumed versions then cannot collide (§5.3).
+  ///
+  /// It reflects only what the *last* listing showed. WebDAV gives no
+  /// cross-client read-your-writes, so a record another participant just appended
+  /// may not be listed yet; the coordinator therefore also requires the known
+  /// maximum to hold *steady* across several polls before claiming, not just this
+  /// flag once. WebDAV-specific on purpose — it means nothing for the loopback or
+  /// a future Matrix transport, so it stays off [CollabTransport].
+  bool get isCaughtUp => _lastSeq >= _knownMaxSeq;
+
+  /// The highest sequence number any poll has seen present. The coordinator
+  /// watches this for the steadiness the previous getter describes.
+  int get knownMaxSeq => _knownMaxSeq;
+
   /// Begin polling on [pollInterval]. Idempotent; a no-op after [dispose].
   void start() {
     if (_disposed || _timer != null) return;
