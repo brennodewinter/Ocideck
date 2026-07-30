@@ -171,6 +171,12 @@ const unchangedInEnglish = {
   'P {pitch}  B {bank}',
   'ACT {value}°',
   'TGT {heading}°',
+  // De vergaderrol 'moderator' (lib/widgets/meetings/meeting_workspace.dart).
+  // Nederlands en Engels schrijven het leenwoord identiek, dus valt de Engelse
+  // vertaling samen met de bronstring. De overige dertig talen dragen hun eigen
+  // woord — Tsjechisch 'moderátor', Iers 'modhnóir', Klingon 'che'wI'' — en die
+  // dekking bewaakt de 'vertaald in elke taal'-test hierboven.
+  'moderator',
 };
 
 /// Idem, maar voor ALLE talen: termen die overal letterlijk gelijk blijven —
