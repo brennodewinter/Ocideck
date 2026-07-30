@@ -56,6 +56,15 @@ in Dutch, and it keeps growing on `main` between releases.
   autoriteit — eigenaarsoverdracht (§5.3) en herbaselijning op een niet-nul
   versie (§5.2) zijn vervolg. De interface die dit aanroept (§5.7) is de
   resterende stap.
+- De editor→op-brug voor de samenwerklaag (COLLABORATION.md §5.1, #996): de
+  editor vervangt bij elke bewerking het hele `Deck`, maar de laag synct
+  veld-ops (P5). `deckDiffToOps(before, after)` rekent een deck-brede bewerking
+  terug naar precies de ops die `after` reproduceren — veld-edits (op slide-id),
+  daarna verwijderingen, invoegingen (die de hele nieuwe slide meedragen) en
+  herordeningen. Exact voor het syncbare `SlideField`/`DeckMetaField`-oppervlak;
+  alles daarbuiten blijft ongemoeid, net als bij het op-model. Zuiver en getest
+  (de sterkste toets: na toepassen is een nieuwe diff leeg). De provider die dit
+  bij een lokale bewerking aanroept en de sessie voedt, is de volgende stap.
 
 ### Fixed
 
