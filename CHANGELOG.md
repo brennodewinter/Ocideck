@@ -65,6 +65,16 @@ in Dutch, and it keeps growing on `main` between releases.
   alles daarbuiten blijft ongemoeid, net als bij het op-model. Zuiver en getest
   (de sterkste toets: na toepassen is een nieuwe diff leeg). De provider die dit
   bij een lokale bewerking aanroept en de sessie voedt, is de volgende stap.
+- De brug tussen het tab-deck en een samenwerksessie (COLLABORATION.md §5.7,
+  #996): `CollabSessionController` dient een lokale bewerking als ops in en laat
+  een wijziging die de sessie toepast terugvloeien — *gemerged* op het lokale
+  deck, zodat niet-syncbare velden (tabelrijen, annotaties) behouden blijven (de
+  merge is `applyOps(local, diff(local, sessie))`). Twee waarborgen stoppen de
+  echo-lus: een vlag onderdrukt her-indienen tijdens het toepassen van een
+  wijziging op afstand, en een terug-geëchood deck levert sowieso een lege diff
+  op. Riverpod- en Flutter-vrij (met read/write-callbacks), dus het subtiele deel
+  is headless getest; de provider die er per tab één bezit is de resterende
+  app-lijm.
 
 ### Fixed
 
