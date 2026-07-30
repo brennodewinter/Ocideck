@@ -1,0 +1,78 @@
+---
+marp: true
+ocideck_format: 1
+theme: ocideck
+paginate: true
+title: Garis waktu proyek
+language: id
+---
+
+<!-- _class: title -->
+
+# Garis waktu proyek
+
+---
+
+# Tujuan proyek
+
+- Sasaran: …
+- Sponsor: …
+- Tanggal akhir target: …
+
+---
+
+# Fase proyek
+<!-- ocideck_list_style: numbered -->
+
+1. Preparation
+2. Design
+3. Build
+4. Test and acceptance
+5. Go-live and aftercare
+
+---
+
+<!-- _class: timeline -->
+
+# Garis Waktu
+
+- Q1 :: Persiapan :: Tugas dan tim diselesaikan.
+- Q2 :: Desain :: Desain disetujui.
+- Q3 :: Build :: Pengembangan dan pengujian.
+- Q4 :: Go-live :: Sedang diproduksi dan diserahkan.
+
+---
+
+# Ketergantungan
+
+- Tergantung pada: …
+- Pengiriman oleh pihak ketiga:…
+- Prasyarat:…
+
+---
+
+<!-- _class: table -->
+
+# Tonggak sejarah
+
+| Tonggak sejarah | Tanggal | Status |
+| --- | --- | --- |
+| Rencana proyek disetujui | … | Direncanakan |
+| Desain disetujui | … | Direncanakan |
+| Tayangkan langsung | … | Direncanakan |
+
+---
+
+# Poin keputusan
+
+- Boleh/tidak boleh buat pembangunan: … (tanggal)
+- Keputusan anggaran: … (tanggal)
+- Keputusan go-live: … (tanggal)
+
+---
+
+# Langkah selanjutnya
+
+- Apa: …
+- Siapa: …
+- Kapan: …
