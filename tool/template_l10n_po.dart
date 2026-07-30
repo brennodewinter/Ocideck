@@ -17,9 +17,38 @@ import 'dart:convert';
 import 'dart:io';
 
 const supportedLangs = [
-  'nl', 'en', 'it', 'de', 'fr', 'es', 'fy', 'pap', 'la', 'id', 'pl', 'uk',
-  'gsw', 'el', 'da', 'sv', 'hr', 'cs', 'fi', 'bg', 'lv', 'lt', 'mt', 'et',
-  'hu', 'ga', 'pt', 'ro', 'sl', 'sk', 'tlh', 'tr',
+  'nl',
+  'en',
+  'it',
+  'de',
+  'fr',
+  'es',
+  'fy',
+  'pap',
+  'la',
+  'id',
+  'pl',
+  'uk',
+  'gsw',
+  'el',
+  'da',
+  'sv',
+  'hr',
+  'cs',
+  'fi',
+  'bg',
+  'lv',
+  'lt',
+  'mt',
+  'et',
+  'hu',
+  'ga',
+  'pt',
+  'ro',
+  'sl',
+  'sk',
+  'tlh',
+  'tr',
 ];
 
 Never fail(String message) {
@@ -212,8 +241,7 @@ Template parseTemplate(String path) {
     if (bulletMatch != null) {
       final checkbox = bulletMatch.group(2);
       final text = bulletMatch.group(3)!;
-      final marker =
-          checkbox == null ? '- ' : '- [$checkbox] ';
+      final marker = checkbox == null ? '- ' : '- [$checkbox] ';
       final key = 's${slide}_b_${bulletCount++}';
       segments.add(Segment.bullet(text, marker, key));
       continue;
