@@ -1788,6 +1788,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Samenwerking starten': 'Почати співпрацю',
+  'Deelnemen aan samenwerking': 'Приєднатися до співпраці',
+  'Samenwerking verlaten': 'Залишити співпрацю',
+  'Samenwerking gestart.': 'Співпрацю розпочато.',
+  'Deelgenomen aan de samenwerking.': 'Приєднано до співпраці.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Для цієї колоди ще не розпочато співпрацю.',
+  'Samenwerking mislukt.': 'Співпраця не вдалася.',
+  'Samenwerking beëindigd.': 'Співпрацю завершено.',
   'Bord': 'Дошка',
   'Projectcharter': 'Статут проєкту',
   'CTQ-boom': 'Дерево CTQ',

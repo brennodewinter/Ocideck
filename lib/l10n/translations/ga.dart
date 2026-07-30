@@ -1806,6 +1806,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Samenwerking starten': 'Tosaigh comhoibriú',
+  'Deelnemen aan samenwerking': 'Glac páirt sa chomhoibriú',
+  'Samenwerking verlaten': 'Fág an comhoibriú',
+  'Samenwerking gestart.': 'Comhoibriú tosaithe.',
+  'Deelgenomen aan de samenwerking.': 'Glacadh páirt sa chomhoibriú.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Níor tosaíodh comhoibriú ar bith don deck seo go fóill.',
+  'Samenwerking mislukt.': 'Theip ar an gcomhoibriú.',
+  'Samenwerking beëindigd.': 'Comhoibriú críochnaithe.',
   'Bord': 'Clár',
   'Projectcharter': 'Cairt an tionscadail',
   'CTQ-boom': 'Crann CTQ',

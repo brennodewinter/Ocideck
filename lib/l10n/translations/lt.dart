@@ -1778,6 +1778,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Samenwerking starten': 'Pradėti bendradarbiavimą',
+  'Deelnemen aan samenwerking': 'Prisijungti prie bendradarbiavimo',
+  'Samenwerking verlaten': 'Palikti bendradarbiavimą',
+  'Samenwerking gestart.': 'Bendradarbiavimas pradėtas.',
+  'Deelgenomen aan de samenwerking.': 'Prisijungėte prie bendradarbiavimo.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Šiam dekui dar nepradėtas joks bendradarbiavimas.',
+  'Samenwerking mislukt.': 'Bendradarbiavimas nepavyko.',
+  'Samenwerking beëindigd.': 'Bendradarbiavimas baigtas.',
   'Bord': 'Lenta',
   'Projectcharter': 'Projekto chartija',
   'CTQ-boom': 'CTQ medis',

@@ -731,6 +731,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Samenwerking starten': 'Gearwurking begjinne',
+  'Deelnemen aan samenwerking': 'Meidwaan oan gearwurking',
+  'Samenwerking verlaten': 'Gearwurking ferlitte',
+  'Samenwerking gestart.': 'Gearwurking begûn.',
+  'Deelgenomen aan de samenwerking.': 'Meidien oan de gearwurking.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Foar dit deck is noch gjin gearwurking begûn.',
+  'Samenwerking mislukt.': 'Gearwurking mislearre.',
+  'Samenwerking beëindigd.': 'Gearwurking beëinige.',
   'Bord': 'Boerd',
   'Projectcharter': 'Projektcharter',
   'CTQ-boom': 'CTQ-beam',

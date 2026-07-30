@@ -1762,6 +1762,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Samenwerking starten': 'Alusta koostööd',
+  'Deelnemen aan samenwerking': 'Liitu koostööga',
+  'Samenwerking verlaten': 'Lahku koostööst',
+  'Samenwerking gestart.': 'Koostöö alustatud.',
+  'Deelgenomen aan de samenwerking.': 'Liitusid koostööga.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Selle decki jaoks pole veel koostööd alustatud.',
+  'Samenwerking mislukt.': 'Koostöö ebaõnnestus.',
+  'Samenwerking beëindigd.': 'Koostöö lõpetatud.',
   'Bord': 'Tahvel',
   'Projectcharter': 'Projekti põhikiri',
   'CTQ-boom': 'CTQ-puu',

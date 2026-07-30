@@ -1788,6 +1788,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Samenwerking starten': 'Începe colaborarea',
+  'Deelnemen aan samenwerking': 'Alătură-te colaborării',
+  'Samenwerking verlaten': 'Părăsește colaborarea',
+  'Samenwerking gestart.': 'Colaborare începută.',
+  'Deelgenomen aan de samenwerking.': 'Te-ai alăturat colaborării.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Nu a fost încă începută nicio colaborare pentru acest deck.',
+  'Samenwerking mislukt.': 'Colaborare eșuată.',
+  'Samenwerking beëindigd.': 'Colaborare încheiată.',
   'Bord': 'Tablă',
   'Projectcharter': 'Carta proiectului',
   'CTQ-boom': 'Arbore CTQ',

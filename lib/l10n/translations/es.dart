@@ -727,6 +727,15 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Samenwerking starten': 'Iniciar colaboración',
+  'Deelnemen aan samenwerking': 'Unirse a la colaboración',
+  'Samenwerking verlaten': 'Salir de la colaboración',
+  'Samenwerking gestart.': 'Colaboración iniciada.',
+  'Deelgenomen aan de samenwerking.': 'Te has unido a la colaboración.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Aún no se ha iniciado ninguna colaboración para este deck.',
+  'Samenwerking mislukt.': 'Error de colaboración.',
+  'Samenwerking beëindigd.': 'Colaboración finalizada.',
   'Bord': 'Tablero',
   'Projectcharter': 'Carta del proyecto',
   'CTQ-boom': 'Árbol CTQ',

@@ -1778,6 +1778,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Samenwerking starten': 'Spustiť spoluprácu',
+  'Deelnemen aan samenwerking': 'Pripojiť sa k spolupráci',
+  'Samenwerking verlaten': 'Opustiť spoluprácu',
+  'Samenwerking gestart.': 'Spolupráca spustená.',
+  'Deelgenomen aan de samenwerking.': 'Pripojili ste sa k spolupráci.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Pre tento deck sa ešte nezačala žiadna spolupráca.',
+  'Samenwerking mislukt.': 'Spolupráca zlyhala.',
+  'Samenwerking beëindigd.': 'Spolupráca ukončená.',
   'Bord': 'Tabuľa',
   'Projectcharter': 'Projektová charta',
   'CTQ-boom': 'Strom CTQ',

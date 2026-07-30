@@ -1798,6 +1798,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Samenwerking starten': 'Έναρξη συνεργασίας',
+  'Deelnemen aan samenwerking': 'Συμμετοχή σε συνεργασία',
+  'Samenwerking verlaten': 'Αποχώρηση από τη συνεργασία',
+  'Samenwerking gestart.': 'Η συνεργασία ξεκίνησε.',
+  'Deelgenomen aan de samenwerking.': 'Συμμετείχατε στη συνεργασία.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Δεν έχει ξεκινήσει ακόμη καμία συνεργασία για αυτό το deck.',
+  'Samenwerking mislukt.': 'Η συνεργασία απέτυχε.',
+  'Samenwerking beëindigd.': 'Η συνεργασία τερματίστηκε.',
   'Bord': 'Πίνακας',
   'Projectcharter': 'Χάρτης έργου',
   'CTQ-boom': 'Δέντρο CTQ',
