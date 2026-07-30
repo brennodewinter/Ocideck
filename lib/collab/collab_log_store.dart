@@ -40,6 +40,22 @@ abstract interface class CollabLogStore {
   /// unconditional: the authority owns the snapshot and re-bases it as it likes;
   /// there is no racing writer to guard against (only the authority writes it).
   Future<void> writeSnapshot(String snapshot);
+
+  /// The advisory authority beacon (§5.3), or `null` if none has been written
+  /// (a session predating owner-drop handover). Like the snapshot it is a single
+  /// named record beside the numbered log, not part of it. It names who currently
+  /// assigns versions and carries a liveness tick the authority bumps each poll;
+  /// a frozen tick is how a successor infers the authority dropped. It is
+  /// *advisory* — WebDAV write access is the only real gate on the sidecar, so a
+  /// reader treats the beacon as input, never as authorisation.
+  Future<String?> readBeacon();
+
+  /// Write (or overwrite) the authority beacon. Unconditional, like the snapshot:
+  /// the beacon is last-write-wins and holds no state the numbered log does not
+  /// already carry authoritatively, so a lost race just means the next poll reads
+  /// a fresher beacon. Convergence rests on the coordinator's read→decide→write
+  /// cycle, not on a conditional write here.
+  Future<void> writeBeacon(String beacon);
 }
 
 /// An in-process log shared by several transports — the store equivalent of
@@ -72,6 +88,14 @@ class InMemoryCollabLogStore implements CollabLogStore {
 
   @override
   Future<void> writeSnapshot(String snapshot) async => _snapshot = snapshot;
+
+  String? _beacon;
+
+  @override
+  Future<String?> readBeacon() async => _beacon;
+
+  @override
+  Future<void> writeBeacon(String beacon) async => _beacon = beacon;
 }
 
 /// The production store: one small file per record in a sidecar directory on
@@ -96,6 +120,10 @@ class WebdavCollabLogStore implements CollabLogStore {
   /// [listSequences] ignores it (it only accepts padded-integer records) while
   /// it still travels with the log in the one sidecar.
   String get _snapshotPath => '$opsDir/snapshot$_suffix';
+
+  /// The beacon sits beside the snapshot under its own non-numeric name, so
+  /// [listSequences] ignores it too.
+  String get _beaconPath => '$opsDir/beacon$_suffix';
 
   @override
   Future<List<int>> listSequences() async {
@@ -164,5 +192,23 @@ class WebdavCollabLogStore implements CollabLogStore {
     // Unconditional overwrite: only the authority writes the baseline, so there
     // is no If-Match/If-None-Match race to guard (unlike the op records).
     await service.upload(_snapshotPath, utf8.encode(snapshot));
+  }
+
+  @override
+  Future<String?> readBeacon() async {
+    try {
+      final file = await service.download(_beaconPath);
+      return utf8.decode(file.bytes);
+    } on WebdavException catch (e) {
+      if (e.kind == WebdavError.notFound) return null; // pre-handover session
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> writeBeacon(String beacon) async {
+    // Unconditional overwrite: the beacon is last-write-wins advisory state
+    // (§5.3). See the interface doc for why no conditional write is needed here.
+    await service.upload(_beaconPath, utf8.encode(beacon));
   }
 }
