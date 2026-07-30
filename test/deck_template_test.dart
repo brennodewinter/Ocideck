@@ -29,9 +29,9 @@ const werkdeckIds = [
   'retrospective',
 ];
 
-/// Beide inhoudstalen van de sjabloondocumenten. Interfaceteksten gaan via
+/// De inhoudstalen van de sjabloondocumenten. Interfaceteksten gaan via
 /// l10n in alle talen; de inhoud is een bestand per taal (#622).
-const contentLanguages = ['nl', 'en'];
+const contentLanguages = ['nl', 'en', 'es'];
 
 final _deckCache = <String, Deck>{};
 
@@ -100,7 +100,7 @@ void main() {
           .map((f) => f.uri.pathSegments.last)
           .toList();
       for (final name in files) {
-        final match = RegExp(r'^(.+)\.(nl|en)\.md$').firstMatch(name);
+        final match = RegExp(r'^(.+)\.(nl|en|es)\.md$').firstMatch(name);
         expect(match, isNotNull, reason: name);
         expect(known, contains(match!.group(1)), reason: name);
       }

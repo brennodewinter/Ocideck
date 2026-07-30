@@ -113,21 +113,21 @@ language: es
 
 # F-01 · Hallazgo de ejemplo
 
-**Objeto de alcance:** `<scope-object>`
+**Scope object:** `<scope-object>`
 
-## Descripción
+## Description
 
 Describe aquí, de forma factual y técnica, cuál es el problema de seguridad.
 
-## Confirmación (reproducción)
+## Confirmation (reproduction)
 
 Describe, de forma reproducible (con evidencia), cómo se estableció el hallazgo.
 
-## Posible impacto
+## Possible impact
 
 Describe el posible impacto técnico y de negocio.
 
-## Recomendación
+## Recommendation
 
 Describe la mitigación concreta y alcanzable.
 
