@@ -187,8 +187,9 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
   /// nodig heeft is hij ruis, en een melding die niets toevoegt leert mensen
   /// meldingen overslaan — daarom zwijgt hij in het Nederlands en het Engels.
   Widget _templateLanguageNotice(BuildContext context, AppLocalizations l10n) {
-    if (TemplateContentService.languagesWithContent
-        .contains(l10n.languageCode)) {
+    if (TemplateContentService.languagesWithContent.contains(
+      l10n.languageCode,
+    )) {
       return const SizedBox.shrink();
     }
     return Padding(

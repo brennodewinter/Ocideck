@@ -46,23 +46,6 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
-- De schil van de onlinevergaderingen-functie, aanbieder-neutraal en zonder
-  netwerk. Met de module aan staat er een vergaderpictogram in de tabbalk —
-  daar en niet in de werkbalk van een presentatie, want meedoen moet lukken
-  zonder deck. Het venster erachter herkent de geplakte link terwijl u typt
-  (lokaal, dus er gaat niets naar buiten), vraagt uw naam met de mededeling dat
-  niemand die controleert, en zet de bekendmaking vóór de knop: wie er contact
-  krijgt, hoe u zich aandient, wat de aanbieder ziet, en wat er over
-  versleuteling bekend is — inclusief "niets vastgesteld". Wachten op toelating
-  neemt het scherm níet over: de presentatie blijft in beeld en te bewerken,
-  het pictogram verandert van vorm en kleur (en knippert alleen als u beweging
-  niet hebt beperkt), en één strip meldt het wachten mét Verlaten. Bij
-  toelating opent het gespreksvenster zichzelf. Daarin verschijnen microfoon,
-  camera en delen alleen wanneer de vergadering ze toestaat — trekt een
-  organisator er een in, dan verdwijnt die knop zonder dat het gesprek eindigt
-  — en Verlaten staat er altijd. Opname en uitschrijven krijgen een banier die
-  blijft staan zolang het waar is. Er is nog geen vergaderdienst aangesloten,
-  dus meedoen kan nog niet; de kaart en het venster zeggen dat ook.
 - Negentien nieuwe presentatiesjablonen. De catalogus dekte de professional
   die verantwoording aflegt, maar miste de vergaderingen waarin geld en
   besluiten op tafel liggen, en hele sectoren stonden op nul. Er zijn nu
@@ -83,20 +66,6 @@ in Dutch, and it keeps growing on `main` between releases.
   scenario-sjablonen al droegen. Elk sjabloon is een document per taal
   (Nederlands en Engels), live invulbaar met werktabellen en een
   voortgangschecklist; een eigen testgroep bewaakt alle negentien.
-- De eerste, aanbieder-neutrale laag van de onlinevergaderingen-functie
-  (ontwerp: `docs/design/TEAMS_GUEST_CLIENT.md` en
-  `docs/design/COLLABORATION.md` §7.1). Onder `lib/meetings/` staat nu de
-  woordenschat die de schil en elke toekomstige adapter delen: het
-  `MeetingProvider`/`MeetingSession`-contract, de linkherkenner met harde
-  weigeringen en achtervoegselveilige hostkeuze, getypeerde gebeurtenissen,
-  de fasetabel met reducer, rechten en rollen, en de faaltaxonomie. Eén
-  nep-adapter (alleen in debugbouwen) doorloopt elk verloop deterministisch —
-  inclusief wachten op toelating, geweigerd, herverbinden en beëindigd — als
-  bewijs dat het contract volstaat. Op Instellingen → Uitbreidingen staat de
-  bijbehorende module **Onlinevergaderingen**, standaard uit; de kaart zegt
-  zelf dat meedoen nog niet kan, want er is nog geen vergaderdienst
-  aangesloten en er gaat in deze versie geen byte naar buiten. De schil-UI
-  (dialoog, wachtindicator, gespreksvenster) volgt in een eigen wijziging.
 - De desktoproute voor OpenKAT-rapportages is nu een scenario-wizard. Na een
   alleen-lezen controle van de gekozen map kiest de gebruiker eerst één van vier
   vraagfamilies en daarna een gericht rapportrecept. De catalogus bevat 22
