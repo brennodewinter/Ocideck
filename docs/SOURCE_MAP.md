@@ -449,6 +449,37 @@ the data an improvement project collects — a tight spread far from zero.
 
 - `scene.dart` — `Scene` and its sealed `SceneNode` family (`SceneRect`, `SceneLine`, `ScenePath`, `SceneText`, `SceneImageRef`): explicit positions in a fixed coordinate box, no style tree and no layout pass. The point is that a process-improvement engine (`matrix`, `canvas`; `tree` / `flow` later) does its placement maths **once** and hands the result to two thin backends, instead of writing the same layout twice for screen and export and watching the two drift. `sceneToSvg` is the export backend; `ScenePainter` is the screen one. Pure Dart with no Flutter import, which is what makes an engine's maths testable without a widget tree — hence `TextMeasurer`, the interface an engine measures text through, and `ApproximateTextMeasurer` for tests. `Scene.demo()` keeps the painter reachable for the dead-code gate.
 
+## `lib/collab/` — real-time collaboration layer (design: `docs/design/COLLABORATION.md` §5)
+
+The transport-agnostic core of live co-authoring, Phase 0 of COLLABORATION.md
+(#975). Pure Dart, no network and no Flutter import, so the whole layer is
+unit-tested through a loopback with no infrastructure. The networked transports
+(Matrix, §6) and the UI wiring plug into it later; today it is reachable through
+`TabInfo.collabSession` (§5.7), `null` on every tab until a session exists.
+
+- `deck_op.dart` — the typed operation model (§5.1). A `DeckOp` is one
+  authoritative change to the in-memory `Deck`, ordered by `version`: the sealed
+  ops `InsertSlide`/`RemoveSlide`/`ReorderSlide` and the field-level
+  `SetSlideField`/`SetDeckMeta` over the `SlideField`/`DeckMetaField` enums. Ops
+  act on the typed model, never on re-parsed Markdown (P5). `applyOp` is pure and
+  *fail-closed*: an op for a missing slide, an out-of-range index or a value of
+  the wrong type throws rather than silently no-op'ing, because a silent no-op
+  would desync the stream (P3). The enums (not the design's raw `String field`)
+  make `applyOp`'s switch exhaustive, so the compiler — not a test — guarantees
+  every syncable field is handled. `copyWithVersion` lets the authority stamp the
+  canonical version onto an intent before rebroadcast.
+- `collab_transport.dart` — the `CollabTransport` seam (P6) and `LoopbackHub`/
+  `LoopbackTransport`. A dumb pipe: it carries formed events between participants
+  and neither orders nor versions them (that is the session's job). `LockEvent`
+  carries a `forced` flag for the authority's `ForceUnlock` (§5.4).
+- `collab_session.dart` — the authority state machine and lock table (§5.3–5.4).
+  Exactly one session is the authority (P3); it assigns the monotonic version to
+  every op — its own edits and the intents it receives — and rebroadcasts the
+  authoritative op, so every replica applying in version order reproduces the
+  authority's deck. v1 has a follower edit round-trip (not optimistic under a
+  lock); owner-drop handover (§5.3) and snapshot re-baselining (§5.2) are
+  follow-ups.
+
 ## `lib/state/` — Riverpod providers
 
 - `consent_provider.dart` — `ConsentNotifier` managing consent acceptance/revocation with persistent storage.
