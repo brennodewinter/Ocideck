@@ -1806,6 +1806,133 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'Níl cead ag OciDeck do mhicreafón ná do cheamara a úsáid. Tabhair cead sa bhrabhsálaí nó i socruithe an chórais agus bain triail eile as.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'Níor aimsíodh micreafón atá ag obair. Ceangail ceann nó roghnaigh gléas eile.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'Níor aimsíodh ceamara atá ag obair. Is féidir leat páirt a ghlacadh gan íomhá.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'Ní féidir teacht ar an tseirbhís a eisíonn an dintiúr rochtana. Bain triail eile as níos déanaí; fanfaidh do chur i láthair oscailte idir an dá linn.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'Tá an tseirbhís a eisíonn an dintiúr rochtana tar éis a teorainn a bhaint amach faoi láthair. Bain triail eile as níos déanaí.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'Tá an dintiúr rochtana don chruinniú seo imithe in éag. Glac páirt arís leis an nasc céanna.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'Ní ligeann an líonra an cruinniú seo tríd. Ar líonra corparáideach is minic a chuireann balla dóiteáin nó seachfhreastalaí bac ar thrácht den chineál seo; oibríonn nasc eile go hiondúil.',
+  'Deze vergadering is voorbij.': 'Tá an cruinniú seo thart cheana.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'Níl an tseirbhís cruinnithe féin ar fáil. Ní le do nasc atá an locht; bain triail eile as níos déanaí.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Theip ar an nglacadh páirte, agus ní deir an tseirbhís cén fáth. Tá an cód teicniúil leis na sonraí — bain triail eile as, agus cuir an cód sin ar aghaidh má leanann an fhadhb.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'Ní nasc cruinnithe inúsáidte é seo. Cóipeáil arís é ón gcuireadh — is minic nach oibríonn nasc a ghiorraigh nó a d\'athraigh clár comhrá níos mó.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Tá aithne againn ar an tseirbhís seo, ach ní ar an gcineál cruinnithe seo. Oibríonn seimineáir ghréasáin, craoltaí agus seomraí cruinnithe pearsanta ar bhealach difriúil ó ghnáthchruinniú; oscail an nasc seo sa bhrabhsálaí.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Níl aithne againn ar an tseirbhís cruinnithe seo. Mar sin níl a fhios ag OciDeck ach oiread cad atá taobh thiar den nasc seo; is féidir leat é a oscailt i do bhrabhsálaí má tá muinín agat as an seoltóir.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'Ní féidir páirt a ghlacadh sa leagan seo d\'OciDeck. Úsáid an leagan gréasáin i do bhrabhsálaí.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'Tá rud éigin in easnamh ar an mbrabhsálaí seo atá riachtanach chun páirt a ghlacadh. Oibríonn Chrome, Edge, Firefox nó Safari nua go hiondúil.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'Ní cheadaíonn an eagraíocht atá i mbun an chruinnithe seo aíonna gan cuntas. Iarr ar an eagraí cuireadh a thabhairt duit ar bhealach a cheadaíonn aíonna.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Teastaíonn cuntas leis an soláthraí chun páirt a ghlacadh sa chruinniú seo. Oscail an nasc i do bhrabhsálaí agus sínigh isteach ansin.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'Ní ligeann an soláthraí seo isteach ach cláir cheadaithe, agus níl an ceadú sin ag OciDeck go fóill. Oscail an cruinniú i do bhrabhsálaí.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'Níor lig an eagraí isteach tú. Iarr go ligfí isteach tú agus bain triail eile as ina dhiaidh sin.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'Tá an cruinniú seo faoi ghlas; ní féidir le duine ar bith eile teacht isteach. Iarr ar an eagraí an glas a bhaint de.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'Tá an cruinniú seo criptithe ó cheann ceann agus ní cheadaíonn sé rannpháirtithe ón taobh amuigh dá bharr. Rogha an eagraí é sin; iarr gnáthchruinniú air má chaithfidh tú a bheith i láthair.',
+  '{plek} krijgt contact zodra u meedoet.':
+      'Déanfar teagmháil le {plek} a luaithe a ghlacann tú páirt.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Ní ghlacann tú páirt ach le hainm a chuireann tú isteach tú féin; níl tú sínithe isteach mar an duine sin.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'Cruthaíonn an tseirbhís aitheantas aoi sealadach duit, a imíonn tar éis an chruinnithe.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Glacann tú páirt mar aoi trí chuntas seirbhíse eagraíochta.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'Tá aitheantas curtha ar fáil duit ag an eagraí.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Glacann tú páirt le do chuntas féin ag an soláthraí seo.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'Feiceann an soláthraí do shonraí líonra agus an íomhá agus an fuaim a sheolann tú. An rud a roinneann tú, roinneann tú é le gach rannpháirtí.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'Tá an trácht criptithe ar an mbealach chuig an tseirbhís; is féidir leis an tseirbhís féin breathnú air.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'Déanann an soláthraí an criptiú a riar, agus na heochracha dá bharr.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'Cuireann an soláthraí síos air seo mar rud atá criptithe ó cheann ceann.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'Níor deimhníodh aon rud faoin gcriptiú. Dá bharr sin ní gheallann OciDeck aon rud faoi.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'Téann tú isteach i seomra feithimh ar dtús: ní mór d\'eagraí tú a ligean isteach. Idir an dá linn is féidir leat leanúint ag cur do chur i láthair in eagar.',
+  'Deze vergadering vraagt om een wachtwoord.':
+      'Iarrann an cruinniú seo pasfhocal.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'Iarrann an cruinniú seo clárú roimh ré.',
+  'Vergadering wordt voorbereid': 'An cruinniú á ullmhú',
+  'Verbinden met de vergadering': 'Ag nascadh leis an gcruinniú',
+  'Wachten op toelating door de organisator':
+      'Ag fanacht le cead isteach ón eagraí',
+  'U doet mee aan de vergadering': 'Tá tú páirteach sa chruinniú',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'Cailleadh an nasc — ag athnascadh',
+  'De vergadering wordt verlaten': 'Ag fágáil an chruinnithe',
+  'De vergadering is beëindigd': 'Tá an cruinniú thart',
+  'Meedoen is niet gelukt': 'Theip ar an nglacadh páirte',
+  'Deze vergadering wordt opgenomen.': 'Tá an cruinniú seo á thaifeadadh.',
+  'Deze vergadering wordt uitgeschreven.':
+      'Tá an cruinniú seo á thras-scríobh.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'Tá an cruinniú seo á thaifeadadh agus á thras-scríobh.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'Tá an cruinniú ag iarraidh do thoiliú sainráite chun leanúint ar aghaidh ag glacadh páirte.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'Ní mór d\'eagraí tú a ligean isteach fós. Is féidir leat leanúint ar aghaidh ag obair; a luaithe a bheidh tú istigh, osclóidh fuinneog an ghlaoigh.',
+  'Herkend als een vergadering bij {plek}.':
+      'Aitheanta mar chruinniú ag {plek}.',
+  '{uitleg} De link wijst naar {plek}.':
+      '{uitleg} Tá an nasc dírithe ar {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'Roghnaíonn tú an t-ainm seo tú féin; ní dhéanann aon duine é a fhíorú. Feiceann na daoine eile tú mar aoi.',
+  'Afsluiten': 'Críochnaigh',
+  'Camera aanzetten': 'Cas an ceamara air',
+  'Camera uitzetten': 'Múch an ceamara',
+  'Microfoon aanzetten': 'Cas an micreafón air',
+  'Microfoon dempen': 'Balbhaigh an micreafón',
+  'Presentatie delen': 'Comhroinn an cur i láthair',
+  'Delen stoppen': 'Stad den chomhroinnt',
+  'Gespreksvenster': 'Fuinneog an ghlaoigh',
+  'Venster sluiten': 'Dún an fhuinneog',
+  'Meedoen': 'Glac páirt',
+  'Meedoen aan een onlinevergadering': 'Páirt a ghlacadh i gcruinniú ar líne',
+  'Onlinevergadering': 'Cruinniú ar líne',
+  'Onlinevergadering…': 'Cruinniú ar líne…',
+  'Vergaderlink': 'Nasc an chruinnithe',
+  'Plak hier de link uit de uitnodiging':
+      'Greamaigh an nasc ón gcuireadh anseo',
+  'Uw naam, zoals de anderen die zien':
+      'D\'ainm, mar a fheiceann na daoine eile é',
+  'Wat er gebeurt als u meedoet': 'Cad a tharlaíonn nuair a ghlacann tú páirt',
+  'Verlaten': 'Fág',
+  'Weigeren en verlaten': 'Diúltaigh agus fág',
+  'Toestemming geven': 'Tabhair toiliú',
+  'Technische code: {code}': 'Cód teicniúil: {code}',
+  'Deelnemers ({aantal})': 'Rannpháirtithe ({aantal})',
+  'Nog geen deelnemers.': 'Níl aon rannpháirtí go fóill.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'Ní chuireann an cruinniú seo liosta rannpháirtithe ar fáil.',
+  'gast': 'aoi',
+  'deelnemer': 'rannpháirtí',
+  'presentator': 'láithreoir',
+  'moderator': 'modhnóir',
+  'organisator': 'eagraí',
+  'rol onbekend': 'ról anaithnid',
   'Onlinevergaderingen': 'Cruinnithe ar líne',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Páirt a ghlacadh i gcruinniú de chuid soláthraí eile, agus do chur i láthair mar a roinneann tú. Múchta de réir réamhshocraithe; agus an modúl múchta, ní dhéanann OciDeck teagmháil le seirbhís chruinnithe ar bith. Níl aon soláthraí ceangailte fós, mar sin ní féidir páirt a ghlacadh go fóill — leagann sé seo an bhunchloch.',

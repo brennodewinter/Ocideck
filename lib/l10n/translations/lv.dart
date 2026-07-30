@@ -1770,6 +1770,128 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'OciDeck nav atļauts izmantot jūsu mikrofonu vai kameru. Piešķiriet atļauju pārlūkprogrammā vai sistēmas iestatījumos un mēģiniet vēlreiz.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'Netika atrasts neviens darbojošs mikrofons. Pievienojiet to vai izvēlieties citu ierīci.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'Netika atrasta neviena darbojoša kamera. Varat pievienoties bez attēla.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'Pakalpojums, kas izsniedz piekļuves apliecinājumu, nav sasniedzams. Mēģiniet vēlāk vēlreiz; jūsu prezentācija pa to laiku vienkārši paliek atvērta.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'Pakalpojums, kas izsniedz piekļuves apliecinājumu, pagaidām ir sasniedzis savu ierobežojumu. Mēģiniet vēlāk vēlreiz.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'Šīs sapulces piekļuves apliecinājums ir beidzies. Pievienojieties vēlreiz ar to pašu saiti.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'Tīkls šo sapulci nelaiž caur. Uzņēmuma tīklā ugunsmūris vai starpniekserveris bieži bloķē šādu datu plūsmu; ar citu savienojumu parasti izdodas.',
+  'Deze vergadering is voorbij.': 'Šī sapulce ir pagājusi.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'Pats sapulču pakalpojums nav pieejams. Tas nav saistīts ar jūsu savienojumu; mēģiniet vēlāk vēlreiz.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Pievienošanās neizdevās, un pakalpojums nesaka, kāpēc. Tehniskais kods ir pie sīkākas informācijas — mēģiniet vēlreiz un nododiet šo kodu, ja neizdošanās turpinās.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'Šī nav lietojama sapulces saite. Kopējiet to vēlreiz no ielūguma — saite, ko tērzēšanas programma ir apcirpusi vai mainījusi, bieži vairs nedarbojas.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Šo pakalpojumu mēs pazīstam, bet šādu sapulces veidu nē. Tīmekļa semināri, pārraides un personīgās sapulču telpas darbojas citādi nekā parasta sapulce; atveriet šo saiti pārlūkprogrammā.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Šo sapulču pakalpojumu mēs nepazīstam. Tāpēc arī OciDeck nezina, kas ir aiz šīs saites; jūs varat to atvērt savā pārlūkprogrammā, ja uzticaties sūtītājam.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'Šajā OciDeck versijā pievienoties nav iespējams. Izmantojiet tīmekļa versiju savā pārlūkprogrammā.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'Šai pārlūkprogrammai trūkst kaut kā, kas nepieciešams pievienošanai. Jaunāka Chrome, Edge, Firefox vai Safari versija parasti darbojas.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'Šīs sapulces organizācija neatļauj viesus bez konta. Lūdziet organizatoram uzaicināt jūs veidā, kas viesus atļauj.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Lai pievienotos šai sapulcei, nepieciešams konts pie pakalpojumu sniedzēja. Atveriet saiti pārlūkprogrammā un piesakieties tur.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'Šis pakalpojumu sniedzējs ļauj pievienoties tikai apstiprinātām programmām, un OciDeck šāda apstiprinājuma vēl nav. Atveriet sapulci savā pārlūkprogrammā.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'Organizators jūs neielaida. Palūdziet, lai jūs ielaiž, un pēc tam mēģiniet vēlreiz.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'Šī sapulce ir aizslēgta; neviens vairs nevar pievienoties. Lūdziet organizatoram noņemt slēdzeni.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'Šī sapulce ir šifrēta no gala līdz galam un tāpēc neatļauj ārējos dalībniekus. Tā ir organizatora izvēle; palūdziet viņam parastu sapulci, ja jums tajā jābūt.',
+  '{plek} krijgt contact zodra u meedoet.':
+      'Ar {plek} tiks izveidots savienojums, tiklīdz pievienosieties.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Jūs piedalāties tikai ar vārdu, ko norādāt pats; jūs neesat pieteicies kā šī persona.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'Pakalpojums izveido jums pagaidu viesa identitāti, kas pēc sapulces izzūd.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Jūs piedalāties kā viesis, izmantojot organizācijas pakalpojuma kontu.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'Organizators ir sagatavojis jums identitāti.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Jūs pievienojaties ar savu kontu pie šī pakalpojumu sniedzēja.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'Pakalpojumu sniedzējs redz jūsu tīkla datus, kā arī attēlu un skaņu, ko sūtāt. To, ko kopīgojat, kopīgojat ar visiem dalībniekiem.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'Datu plūsma ir šifrēta ceļā uz pakalpojumu; pats pakalpojums to var redzēt.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'Pakalpojumu sniedzējs pārvalda šifrēšanu un tādējādi arī atslēgas.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'Pakalpojumu sniedzējs to apraksta kā šifrētu no gala līdz galam.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'Par šifrēšanu nekas nav konstatēts. Tāpēc OciDeck par to nesola neko.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'Vispirms nokļūstat gaidīšanas telpā: organizatoram jūs jāielaiž. Prezentāciju pa to laiku varat turpināt rediģēt.',
+  'Deze vergadering vraagt om een wachtwoord.': 'Šī sapulce pieprasa paroli.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'Šī sapulce pieprasa iepriekšēju reģistrāciju.',
+  'Vergadering wordt voorbereid': 'Sapulce tiek sagatavota',
+  'Verbinden met de vergadering': 'Notiek savienošana ar sapulci',
+  'Wachten op toelating door de organisator':
+      'Gaida organizatora atļauju ielaist',
+  'U doet mee aan de vergadering': 'Jūs piedalāties sapulcē',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'Savienojums pārtrūka — notiek atkārtota savienošana',
+  'De vergadering wordt verlaten': 'Notiek iziešana no sapulces',
+  'De vergadering is beëindigd': 'Sapulce ir beigusies',
+  'Meedoen is niet gelukt': 'Pievienošanās neizdevās',
+  'Deze vergadering wordt opgenomen.': 'Šī sapulce tiek ierakstīta.',
+  'Deze vergadering wordt uitgeschreven.': 'Šī sapulce tiek transkribēta.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'Šī sapulce tiek ierakstīta un transkribēta.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'Sapulce lūdz jūsu skaidru piekrišanu, lai varētu turpināt dalību.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'Organizatoram jūs vēl jāielaiž. Jūs varat mierīgi turpināt darbu; tiklīdz būsiet iekšā, atvērsies sarunas logs.',
+  'Herkend als een vergadering bij {plek}.':
+      'Atpazīta kā sapulce vietnē {plek}.',
+  '{uitleg} De link wijst naar {plek}.': '{uitleg} Saite norāda uz {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'Šo vārdu izvēlaties pats; neviens to nepārbauda. Citi jūs redz kā viesi.',
+  'Afsluiten': 'Pabeigt',
+  'Camera aanzetten': 'Ieslēgt kameru',
+  'Camera uitzetten': 'Izslēgt kameru',
+  'Microfoon aanzetten': 'Ieslēgt mikrofonu',
+  'Microfoon dempen': 'Izslēgt mikrofonu',
+  'Presentatie delen': 'Kopīgot prezentāciju',
+  'Delen stoppen': 'Beigt kopīgošanu',
+  'Gespreksvenster': 'Sarunas logs',
+  'Venster sluiten': 'Aizvērt logu',
+  'Meedoen': 'Pievienoties',
+  'Meedoen aan een onlinevergadering': 'Pievienošanās tiešsaistes sapulcei',
+  'Onlinevergadering': 'Tiešsaistes sapulce',
+  'Onlinevergadering…': 'Tiešsaistes sapulce…',
+  'Vergaderlink': 'Sapulces saite',
+  'Plak hier de link uit de uitnodiging': 'Ielīmējiet šeit saiti no ielūguma',
+  'Uw naam, zoals de anderen die zien': 'Jūsu vārds, kā to redz citi',
+  'Wat er gebeurt als u meedoet': 'Kas notiek, kad pievienojaties',
+  'Verlaten': 'Iziet',
+  'Weigeren en verlaten': 'Atteikties un iziet',
+  'Toestemming geven': 'Sniegt piekrišanu',
+  'Technische code: {code}': 'Tehniskais kods: {code}',
+  'Deelnemers ({aantal})': 'Dalībnieki ({aantal})',
+  'Nog geen deelnemers.': 'Vēl nav dalībnieku.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'Šī sapulce nesniedz dalībnieku sarakstu.',
+  'gast': 'viesis',
+  'deelnemer': 'dalībnieks',
+  'presentator': 'prezentētājs',
+  'moderator': 'moderators',
+  'organisator': 'organizators',
+  'rol onbekend': 'nezināma loma',
   'Onlinevergaderingen': 'Tiešsaistes sapulces',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Dalība cita pakalpojumu sniedzēja sapulcē, kopīgojot savu prezentāciju. Pēc noklusējuma izslēgts; ar izslēgtu moduli OciDeck nesazinās ne ar vienu sapulču pakalpojumu. Neviens pakalpojumu sniedzējs vēl nav pievienots, tāpēc pievienoties vēl nevar — tas liek pamatu.',

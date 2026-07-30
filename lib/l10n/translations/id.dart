@@ -1771,6 +1771,131 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'OciDeck tidak boleh menggunakan mikrofon atau kamera Anda. Berikan izin di peramban atau pengaturan sistem, lalu coba lagi.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'Tidak ditemukan mikrofon yang berfungsi. Sambungkan satu atau pilih perangkat lain.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'Tidak ditemukan kamera yang berfungsi. Anda bisa ikut tanpa gambar.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'Layanan yang menerbitkan bukti akses tidak dapat dihubungi. Coba lagi nanti; sementara itu presentasi Anda tetap terbuka.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'Layanan yang menerbitkan bukti akses telah mencapai batasnya untuk saat ini. Coba lagi nanti.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'Bukti akses untuk rapat ini sudah kedaluwarsa. Ikut lagi dengan tautan yang sama.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'Jaringan tidak meloloskan rapat ini. Pada jaringan perusahaan, firewall atau proxy sering memblokir lalu lintas semacam ini; sambungan lain biasanya berhasil.',
+  'Deze vergadering is voorbij.': 'Rapat ini sudah selesai.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'Layanan rapatnya sendiri tidak tersedia. Ini bukan karena sambungan Anda; coba lagi nanti.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Bergabung gagal, dan layanan tidak mengatakan mengapa. Kode teknis ada di bagian rincian — coba lagi, dan sampaikan kode itu jika terus gagal.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'Ini bukan tautan rapat yang bisa dipakai. Salin ulang dari undangan — tautan yang dipotong atau diubah oleh program obrolan sering kali tidak berfungsi lagi.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Layanan ini kami kenal, tetapi jenis rapat ini tidak. Webinar, siaran, dan ruang rapat pribadi bekerja berbeda dari rapat biasa; buka tautan ini di peramban.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Layanan rapat ini tidak kami kenal. Jadi OciDeck juga tidak tahu apa yang ada di balik tautan ini; Anda bisa membukanya di peramban jika Anda memercayai pengirimnya.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'Ikut serta tidak bisa dilakukan pada versi OciDeck ini. Gunakan versi web di peramban Anda.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'Peramban ini kurang sesuatu yang diperlukan untuk ikut serta. Chrome, Edge, Firefox, atau Safari versi baru biasanya bisa.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'Organisasi rapat ini tidak mengizinkan tamu tanpa akun. Mintalah penyelenggara mengundang Anda dengan cara yang mengizinkan tamu.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Untuk ikut rapat ini diperlukan akun pada penyedia. Buka tautan di peramban Anda dan masuk di sana.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'Penyedia ini hanya mengizinkan program yang disetujui untuk ikut, dan persetujuan itu belum ada untuk OciDeck. Buka rapat di peramban Anda.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'Penyelenggara tidak mengizinkan Anda masuk. Mintalah agar dipersilakan masuk, lalu coba lagi.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'Rapat ini terkunci; tidak ada lagi yang bisa masuk. Mintalah penyelenggara membuka kuncinya.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'Rapat ini terenkripsi ujung ke ujung sehingga tidak mengizinkan peserta dari luar. Itu pilihan penyelenggara; mintalah rapat biasa jika Anda memang harus hadir.',
+  '{plek} krijgt contact zodra u meedoet.':
+      '{plek} akan dihubungi begitu Anda ikut.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Anda ikut hanya dengan nama yang Anda isi sendiri; Anda tidak masuk sebagai orang itu.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'Layanan ini membuat identitas tamu sementara untuk Anda, yang hilang setelah rapat.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Anda ikut sebagai tamu melalui akun layanan sebuah organisasi.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'Penyelenggara telah menyiapkan identitas untuk Anda.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Anda ikut dengan akun Anda sendiri di penyedia ini.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'Penyedia melihat data jaringan Anda serta gambar dan suara yang Anda kirim. Apa yang Anda bagikan, Anda bagikan dengan semua peserta.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'Lalu lintas dienkripsi sampai ke layanan; layanan itu sendiri dapat melihatnya.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'Penyedia mengelola enkripsi dan karena itu juga kuncinya.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'Penyedia menyebut ini terenkripsi ujung ke ujung.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'Tidak ada yang dipastikan tentang enkripsi. Karena itu OciDeck tidak menjanjikan apa pun mengenai hal itu.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'Anda masuk dulu ke ruang tunggu: seorang penyelenggara harus mengizinkan Anda masuk. Sementara itu presentasi Anda tetap bisa disunting.',
+  'Deze vergadering vraagt om een wachtwoord.': 'Rapat ini meminta kata sandi.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'Rapat ini memerlukan pendaftaran terlebih dahulu.',
+  'Vergadering wordt voorbereid': 'Rapat sedang disiapkan',
+  'Verbinden met de vergadering': 'Menyambung ke rapat',
+  'Wachten op toelating door de organisator':
+      'Menunggu diizinkan masuk oleh penyelenggara',
+  'U doet mee aan de vergadering': 'Anda sedang mengikuti rapat',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'Sambungan terputus — menyambung ulang',
+  'De vergadering wordt verlaten': 'Keluar dari rapat',
+  'De vergadering is beëindigd': 'Rapat telah berakhir',
+  'Meedoen is niet gelukt': 'Gagal bergabung',
+  'Deze vergadering wordt opgenomen.': 'Rapat ini sedang direkam.',
+  'Deze vergadering wordt uitgeschreven.': 'Rapat ini sedang ditranskripsikan.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'Rapat ini sedang direkam dan ditranskripsikan.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'Rapat ini meminta persetujuan tegas Anda agar Anda dapat terus ikut.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'Penyelenggara masih harus mengizinkan Anda masuk. Anda bisa terus bekerja; begitu Anda masuk, jendela panggilan akan terbuka.',
+  'Herkend als een vergadering bij {plek}.':
+      'Dikenali sebagai rapat di {plek}.',
+  '{uitleg} De link wijst naar {plek}.':
+      '{uitleg} Tautan ini mengarah ke {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'Nama ini Anda pilih sendiri; tidak ada yang memeriksanya. Orang lain melihat Anda sebagai tamu.',
+  'Afsluiten': 'Selesai',
+  'Camera aanzetten': 'Nyalakan kamera',
+  'Camera uitzetten': 'Matikan kamera',
+  'Microfoon aanzetten': 'Nyalakan mikrofon',
+  'Microfoon dempen': 'Bisukan mikrofon',
+  'Presentatie delen': 'Bagikan presentasi',
+  'Delen stoppen': 'Hentikan berbagi',
+  'Gespreksvenster': 'Jendela panggilan',
+  'Venster sluiten': 'Tutup jendela',
+  'Meedoen': 'Gabung',
+  'Meedoen aan een onlinevergadering': 'Ikut rapat daring',
+  'Onlinevergadering': 'Rapat daring',
+  'Onlinevergadering…': 'Rapat daring…',
+  'Vergaderlink': 'Tautan rapat',
+  'Plak hier de link uit de uitnodiging':
+      'Tempelkan tautan dari undangan di sini',
+  'Uw naam, zoals de anderen die zien':
+      'Nama Anda, seperti yang dilihat orang lain',
+  'Wat er gebeurt als u meedoet': 'Apa yang terjadi jika Anda ikut',
+  'Verlaten': 'Keluar',
+  'Weigeren en verlaten': 'Tolak dan keluar',
+  'Toestemming geven': 'Berikan persetujuan',
+  'Technische code: {code}': 'Kode teknis: {code}',
+  'Deelnemers ({aantal})': 'Peserta ({aantal})',
+  'Nog geen deelnemers.': 'Belum ada peserta.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'Rapat ini tidak menyediakan daftar peserta.',
+  'gast': 'tamu',
+  'deelnemer': 'peserta',
+  'presentator': 'penyaji',
+  'moderator': 'moderator',
+  'organisator': 'penyelenggara',
+  'rol onbekend': 'peran tidak diketahui',
   'Onlinevergaderingen': 'Rapat daring',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Mengikuti rapat dari penyedia lain, dengan presentasi Anda sebagai yang Anda bagikan. Nonaktif secara bawaan; dengan modul nonaktif, OciDeck tidak menghubungi layanan rapat mana pun. Belum ada penyedia yang terhubung, jadi bergabung belum bisa — ini meletakkan dasarnya.',

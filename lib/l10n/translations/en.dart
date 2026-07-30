@@ -911,6 +911,130 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'OciDeck is not allowed to use your microphone or camera. Grant permission in your browser or system settings and try again.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'No working microphone was found. Connect one or choose another device.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'No working camera was found. You can join without video.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'The service that issues the access credential cannot be reached. Try again later; in the meantime your presentation simply stays open.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'The service that issues the access credential has reached its limit for now. Try again later.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'The access credential for this meeting has expired. Join again with the same link.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'The network is not letting this meeting through. On a corporate network a firewall or proxy often blocks this kind of traffic; another connection usually works.',
+  'Deze vergadering is voorbij.': 'This meeting is over.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'The meeting service itself is unavailable. This is not down to your connection; try again later.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Joining failed, and the service does not say why. The technical code is with the details — try again, and pass that code on if it keeps going wrong.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'This is not a usable meeting link. Copy it again from the invitation — a link that a chat program has truncated or altered often no longer works.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'We know this service, but not this kind of meeting. Webinars, broadcasts and personal meeting rooms work differently from an ordinary meeting; open this link in your browser.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'We do not know this meeting service. So OciDeck does not know what is behind this link either; you can open it in your browser if you trust the sender.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'Joining is not possible in this build of OciDeck. Use the web version in your browser.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'This browser is missing something that joining needs. A recent Chrome, Edge, Firefox or Safari usually works.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'The organisation running this meeting does not allow guests without an account. Ask the organiser to invite you in a way that does allow guests.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Joining this meeting requires an account with the provider. Open the link in your browser and sign in there.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'This provider only lets approved programs join, and that approval does not yet exist for OciDeck. Open the meeting in your browser.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'The organiser did not admit you. Ask to be let in and then try again.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'This meeting is locked; nobody else can join. Ask the organiser to unlock it.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'This meeting is end-to-end encrypted and therefore admits no external participants. That is the organiser\'s choice; ask for an ordinary meeting if you need to be there.',
+  '{plek} krijgt contact zodra u meedoet.':
+      '{plek} will be contacted as soon as you join.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'You take part with only the name you enter yourself; you are not signed in as that person.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'The service creates a temporary guest identity for you, which disappears after the meeting.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'You take part as a guest under an organisation\'s service account.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'The organiser has set up an identity for you.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'You join with your own account at this provider.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'The provider sees your network details and the video and audio you send. What you share, you share with all participants.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'The traffic is encrypted on its way to the service; the service itself can look in.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'The provider manages the encryption, and therefore the keys as well.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'The provider describes this as end-to-end encrypted.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'Nothing has been established about the encryption. OciDeck therefore promises nothing about it.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'You first enter a waiting room: an organiser has to admit you. In the meantime your presentation stays fully editable.',
+  'Deze vergadering vraagt om een wachtwoord.':
+      'This meeting asks for a password.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'This meeting asks for advance registration.',
+  'Vergadering wordt voorbereid': 'Preparing the meeting',
+  'Verbinden met de vergadering': 'Connecting to the meeting',
+  'Wachten op toelating door de organisator':
+      'Waiting for the organiser to admit you',
+  'U doet mee aan de vergadering': 'You are taking part in the meeting',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'The connection dropped — reconnecting',
+  'De vergadering wordt verlaten': 'Leaving the meeting',
+  'De vergadering is beëindigd': 'The meeting has ended',
+  'Meedoen is niet gelukt': 'Joining failed',
+  'Deze vergadering wordt opgenomen.': 'This meeting is being recorded.',
+  'Deze vergadering wordt uitgeschreven.': 'This meeting is being transcribed.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'This meeting is being recorded and transcribed.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'The meeting asks for your explicit consent for you to keep taking part.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'An organiser still has to admit you. You can simply carry on working; as soon as you are in, the call window opens.',
+  'Herkend als een vergadering bij {plek}.':
+      'Recognised as a meeting at {plek}.',
+  '{uitleg} De link wijst naar {plek}.': '{uitleg} The link points to {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'You choose this name yourself; nobody verifies it. The others see you as a guest.',
+  'Afsluiten': 'Finish',
+  'Camera aanzetten': 'Turn camera on',
+  'Camera uitzetten': 'Turn camera off',
+  'Microfoon aanzetten': 'Turn microphone on',
+  'Microfoon dempen': 'Mute microphone',
+  'Presentatie delen': 'Share presentation',
+  'Delen stoppen': 'Stop sharing',
+  'Gespreksvenster': 'Call window',
+  'Venster sluiten': 'Close window',
+  'Meedoen': 'Join',
+  'Meedoen aan een onlinevergadering': 'Join an online meeting',
+  'Onlinevergadering': 'Online meeting',
+  'Onlinevergadering…': 'Online meeting…',
+  'Vergaderlink': 'Meeting link',
+  'Plak hier de link uit de uitnodiging':
+      'Paste the link from the invitation here',
+  'Uw naam, zoals de anderen die zien': 'Your name, as the others see it',
+  'Wat er gebeurt als u meedoet': 'What happens when you join',
+  'Verlaten': 'Leave',
+  'Weigeren en verlaten': 'Refuse and leave',
+  'Toestemming geven': 'Give consent',
+  'Technische code: {code}': 'Technical code: {code}',
+  'Deelnemers ({aantal})': 'Participants ({aantal})',
+  'Nog geen deelnemers.': 'No participants yet.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'This meeting provides no participant list.',
+  'gast': 'guest',
+  'deelnemer': 'attendee',
+  'presentator': 'presenter',
+  'moderator': 'moderator',
+  'organisator': 'organiser',
+  'rol onbekend': 'role unknown',
   'Onlinevergaderingen': 'Online meetings',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Join a meeting run by another provider, with your presentation as what you share. Off by default; with the module off, OciDeck contacts no meeting service at all. No provider is connected yet, so joining is not possible yet — this lays the groundwork.',

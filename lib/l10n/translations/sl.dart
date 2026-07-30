@@ -1773,6 +1773,128 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'OciDeck ne sme uporabljati vašega mikrofona ali kamere. Dovoljenje dodelite v brskalniku ali sistemskih nastavitvah in poskusite znova.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'Delujočega mikrofona ni bilo mogoče najti. Priključite ga ali izberite drugo napravo.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'Delujoče kamere ni bilo mogoče najti. Pridružite se lahko brez slike.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'Storitev, ki izdaja dokazilo o dostopu, ni dosegljiva. Poskusite znova pozneje; vaša predstavitev medtem preprosto ostane odprta.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'Storitev, ki izdaja dokazilo o dostopu, je za zdaj dosegla svojo mejo. Poskusite znova pozneje.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'Dokazilo o dostopu za ta sestanek je poteklo. Znova se pridružite z isto povezavo.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'Omrežje tega sestanka ne prepusti. V poslovnem omrežju požarni zid ali posredniški strežnik pogosto blokira tak promet; z drugo povezavo običajno uspe.',
+  'Deze vergadering is voorbij.': 'Ta sestanek je mimo.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'Sama storitev za sestanke ni na voljo. To ni zaradi vaše povezave; poskusite znova pozneje.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Pridružitev ni uspela, storitev pa ne pove, zakaj. Tehnična koda je pri podrobnostih — poskusite znova in posredujte to kodo, če se težava ponavlja.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'To ni uporabna povezava do sestanka. Znova jo kopirajte iz vabila — povezava, ki jo je program za klepet skrajšal ali spremenil, pogosto ne deluje več.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'To storitev poznamo, te vrste sestanka pa ne. Spletni seminarji, prenosi in osebne sobe za sestanke delujejo drugače kot običajen sestanek; to povezavo odprite v brskalniku.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Te storitve za sestanke ne poznamo. OciDeck zato tudi ne ve, kaj je za to povezavo; odprete jo lahko v brskalniku, če zaupate pošiljatelju.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'V tej izvedbi OciDecka pridružitev ni mogoča. Uporabite spletno različico v brskalniku.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'Temu brskalniku manjka nekaj, kar je potrebno za pridružitev. Novejši Chrome, Edge, Firefox ali Safari običajno deluje.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'Organizacija tega sestanka ne dovoljuje gostov brez računa. Prosite organizatorja, naj vas povabi na način, ki goste dovoljuje.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Za pridružitev temu sestanku je potreben račun pri ponudniku. Odprite povezavo v brskalniku in se tam prijavite.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'Ta ponudnik dovoljuje sodelovanje samo odobrenim programom, tega odobrenja pa OciDeck še ni prejel. Sestanek odprite v brskalniku.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'Organizator vas ni spustil naprej. Prosite, naj vas spustijo, in nato poskusite znova.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'Ta sestanek je zaklenjen; nihče več ne more vstopiti. Prosite organizatorja, naj odstrani ključavnico.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'Ta sestanek je šifriran od konca do konca in zato ne dovoljuje zunanjih udeležencev. To je odločitev organizatorja; prosite ga za običajen sestanek, če morate biti navzoči.',
+  '{plek} krijgt contact zodra u meedoet.':
+      'S {plek} bo vzpostavljen stik takoj, ko se pridružite.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Sodelujete samo z imenom, ki ga navedete sami; niste prijavljeni kot ta oseba.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'Storitev za vas ustvari začasno identiteto gosta, ki po sestanku izgine.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Sodelujete kot gost prek storitvenega računa neke organizacije.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'Organizator je za vas pripravil identiteto.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Pridružite se s svojim računom pri tem ponudniku.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'Ponudnik vidi vaše omrežne podatke ter sliko in zvok, ki ju pošiljate. Kar delite, delite z vsemi udeleženci.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'Promet je šifriran do storitve; storitev sama lahko gleda.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'Ponudnik upravlja šifriranje in s tem tudi ključe.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'Ponudnik to opisuje kot šifrirano od konca do konca.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'O šifriranju ni bilo ugotovljeno nič. OciDeck zato o tem ne obljublja ničesar.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'Najprej pridete v čakalnico: organizator vas mora spustiti naprej. Svojo predstavitev lahko medtem še naprej urejate.',
+  'Deze vergadering vraagt om een wachtwoord.': 'Ta sestanek zahteva geslo.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'Ta sestanek zahteva predhodno prijavo.',
+  'Vergadering wordt voorbereid': 'Sestanek se pripravlja',
+  'Verbinden met de vergadering': 'Povezovanje s sestankom',
+  'Wachten op toelating door de organisator':
+      'Čakanje, da vas organizator spusti naprej',
+  'U doet mee aan de vergadering': 'Sodelujete na sestanku',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'Povezava je bila prekinjena — ponovno povezovanje',
+  'De vergadering wordt verlaten': 'Zapuščanje sestanka',
+  'De vergadering is beëindigd': 'Sestanek je končan',
+  'Meedoen is niet gelukt': 'Pridružitev ni uspela',
+  'Deze vergadering wordt opgenomen.': 'Ta sestanek se snema.',
+  'Deze vergadering wordt uitgeschreven.': 'Ta sestanek se prepisuje.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'Ta sestanek se snema in prepisuje.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'Sestanek prosi za vašo izrecno privolitev, da lahko še naprej sodelujete.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'Organizator vas mora še spustiti naprej. Lahko mirno delate naprej; takoj ko boste notri, se bo odprlo okno pogovora.',
+  'Herkend als een vergadering bij {plek}.':
+      'Prepoznano kot sestanek pri {plek}.',
+  '{uitleg} De link wijst naar {plek}.': '{uitleg} Povezava kaže na {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'To ime izberete sami; nihče ga ne preverja. Drugi vas vidijo kot gosta.',
+  'Afsluiten': 'Zaključi',
+  'Camera aanzetten': 'Vklopi kamero',
+  'Camera uitzetten': 'Izklopi kamero',
+  'Microfoon aanzetten': 'Vklopi mikrofon',
+  'Microfoon dempen': 'Izklopi mikrofon',
+  'Presentatie delen': 'Deli predstavitev',
+  'Delen stoppen': 'Ustavi deljenje',
+  'Gespreksvenster': 'Okno pogovora',
+  'Venster sluiten': 'Zapri okno',
+  'Meedoen': 'Pridruži se',
+  'Meedoen aan een onlinevergadering': 'Pridružitev spletnemu sestanku',
+  'Onlinevergadering': 'Spletni sestanek',
+  'Onlinevergadering…': 'Spletni sestanek…',
+  'Vergaderlink': 'Povezava do sestanka',
+  'Plak hier de link uit de uitnodiging': 'Sem prilepite povezavo iz vabila',
+  'Uw naam, zoals de anderen die zien': 'Vaše ime, kot ga vidijo drugi',
+  'Wat er gebeurt als u meedoet': 'Kaj se zgodi, ko se pridružite',
+  'Verlaten': 'Zapusti',
+  'Weigeren en verlaten': 'Zavrni in zapusti',
+  'Toestemming geven': 'Podaj privolitev',
+  'Technische code: {code}': 'Tehnična koda: {code}',
+  'Deelnemers ({aantal})': 'Udeleženci ({aantal})',
+  'Nog geen deelnemers.': 'Še ni udeležencev.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'Ta sestanek ne ponuja seznama udeležencev.',
+  'gast': 'gost',
+  'deelnemer': 'udeleženec',
+  'presentator': 'predstavitelj',
+  'moderator': 'moderator',
+  'organisator': 'organizator',
+  'rol onbekend': 'neznana vloga',
   'Onlinevergaderingen': 'Spletni sestanki',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Sodelovanje na sestanku drugega ponudnika, pri čemer delite svojo predstavitev. Privzeto izklopljeno; z izklopljenim modulom OciDeck ne vzpostavi stika z nobeno storitvijo sestankov. Noben ponudnik še ni povezan, zato sodelovanje še ni mogoče — to postavlja temelje.',

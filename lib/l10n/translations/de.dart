@@ -730,6 +730,132 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'OciDeck darf Ihr Mikrofon oder Ihre Kamera nicht verwenden. Erteilen Sie die Berechtigung in Ihrem Browser oder in den Systemeinstellungen und versuchen Sie es erneut.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'Es wurde kein funktionierendes Mikrofon gefunden. Schließen Sie eines an oder wählen Sie ein anderes Gerät.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'Es wurde keine funktionierende Kamera gefunden. Sie können ohne Bild teilnehmen.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'Der Dienst, der den Zugangsnachweis ausstellt, ist nicht erreichbar. Versuchen Sie es später erneut; Ihre Präsentation bleibt in der Zwischenzeit einfach geöffnet.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'Der Dienst, der den Zugangsnachweis ausstellt, hat sein Limit vorläufig erreicht. Versuchen Sie es später erneut.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'Der Zugangsnachweis für diese Besprechung ist abgelaufen. Nehmen Sie mit demselben Link erneut teil.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'Das Netzwerk lässt diese Besprechung nicht durch. In einem Firmennetzwerk blockiert eine Firewall oder ein Proxy solchen Verkehr häufig; mit einer anderen Verbindung klappt es meist.',
+  'Deze vergadering is voorbij.': 'Diese Besprechung ist vorbei.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'Der Besprechungsdienst selbst ist nicht verfügbar. Das liegt nicht an Ihrer Verbindung; versuchen Sie es später erneut.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Die Teilnahme ist fehlgeschlagen, und der Dienst sagt nicht, warum. Der technische Code steht bei den Details — versuchen Sie es erneut und geben Sie diesen Code weiter, wenn es weiter schiefgeht.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'Dies ist kein brauchbarer Besprechungslink. Kopieren Sie ihn erneut aus der Einladung — ein Link, den ein Chatprogramm abgeschnitten oder verändert hat, funktioniert oft nicht mehr.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Diesen Dienst kennen wir, diese Art von Besprechung jedoch nicht. Webinare, Übertragungen und persönliche Besprechungsräume funktionieren anders als eine gewöhnliche Besprechung; öffnen Sie diesen Link im Browser.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Diesen Besprechungsdienst kennen wir nicht. OciDeck weiß daher auch nicht, was hinter diesem Link steckt; Sie können ihn in Ihrem Browser öffnen, wenn Sie dem Absender vertrauen.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'In dieser Ausführung von OciDeck ist eine Teilnahme nicht möglich. Verwenden Sie die Webversion in Ihrem Browser.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'Diesem Browser fehlt etwas, was für die Teilnahme nötig ist. Ein aktuelles Chrome, Edge, Firefox oder Safari klappt in der Regel.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'Die Organisation dieser Besprechung lässt keine Gäste ohne Konto zu. Bitten Sie den Organisator, Sie auf eine Weise einzuladen, die Gäste zulässt.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Für die Teilnahme an dieser Besprechung ist ein Konto beim Anbieter erforderlich. Öffnen Sie den Link in Ihrem Browser und melden Sie sich dort an.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'Dieser Anbieter lässt nur genehmigte Programme teilnehmen, und diese Genehmigung gibt es für OciDeck noch nicht. Öffnen Sie die Besprechung in Ihrem Browser.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'Der Organisator hat Sie nicht zugelassen. Bitten Sie darum, hereingelassen zu werden, und versuchen Sie es danach erneut.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'Diese Besprechung ist gesperrt; es kommt niemand mehr hinzu. Bitten Sie den Organisator, die Sperre aufzuheben.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'Diese Besprechung ist Ende-zu-Ende-verschlüsselt und lässt daher keine externen Teilnehmer zu. Das ist eine Entscheidung des Organisators; bitten Sie ihn um eine gewöhnliche Besprechung, wenn Sie dabei sein müssen.',
+  '{plek} krijgt contact zodra u meedoet.':
+      '{plek} wird kontaktiert, sobald Sie teilnehmen.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Sie nehmen nur mit dem Namen teil, den Sie selbst angeben; Sie sind nicht als diese Person angemeldet.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'Der Dienst erstellt für Sie eine vorübergehende Gastidentität, die nach der Besprechung verschwindet.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Sie nehmen als Gast über ein Dienstkonto einer Organisation teil.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'Der Organisator hat eine Identität für Sie bereitgestellt.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Die Teilnahme erfolgt mit Ihrem eigenen Konto bei diesem Anbieter.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'Der Anbieter sieht Ihre Netzwerkdaten sowie Bild und Ton, die Sie senden. Was Sie teilen, teilen Sie mit allen Teilnehmern.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'Der Verkehr ist zum Dienst hin verschlüsselt; der Dienst selbst kann mitsehen.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'Der Anbieter verwaltet die Verschlüsselung und damit auch die Schlüssel.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'Der Anbieter beschreibt dies als Ende-zu-Ende-verschlüsselt.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'Über die Verschlüsselung ist nichts festgestellt. OciDeck verspricht dazu also nichts.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'Sie kommen zunächst in einen Warteraum: ein Organisator muss Sie zulassen. Ihre Präsentation bleibt in der Zwischenzeit ganz normal bearbeitbar.',
+  'Deze vergadering vraagt om een wachtwoord.':
+      'Diese Besprechung verlangt ein Passwort.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'Diese Besprechung verlangt eine vorherige Anmeldung.',
+  'Vergadering wordt voorbereid': 'Besprechung wird vorbereitet',
+  'Verbinden met de vergadering': 'Verbindung zur Besprechung wird aufgebaut',
+  'Wachten op toelating door de organisator':
+      'Warten auf die Zulassung durch den Organisator',
+  'U doet mee aan de vergadering': 'Sie nehmen an der Besprechung teil',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'Die Verbindung ist abgebrochen — es wird neu verbunden',
+  'De vergadering wordt verlaten': 'Die Besprechung wird verlassen',
+  'De vergadering is beëindigd': 'Die Besprechung ist beendet',
+  'Meedoen is niet gelukt': 'Teilnahme fehlgeschlagen',
+  'Deze vergadering wordt opgenomen.': 'Diese Besprechung wird aufgezeichnet.',
+  'Deze vergadering wordt uitgeschreven.':
+      'Diese Besprechung wird transkribiert.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'Diese Besprechung wird aufgezeichnet und transkribiert.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'Die Besprechung bittet um Ihre ausdrückliche Zustimmung, damit Sie weiter teilnehmen können.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'Ein Organisator muss Sie noch zulassen. Sie können einfach weiterarbeiten; sobald Sie drin sind, öffnet sich das Gesprächsfenster.',
+  'Herkend als een vergadering bij {plek}.':
+      'Als Besprechung bei {plek} erkannt.',
+  '{uitleg} De link wijst naar {plek}.':
+      '{uitleg} Der Link verweist auf {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'Diesen Namen wählen Sie selbst; niemand prüft ihn. Die anderen sehen Sie als Gast.',
+  'Afsluiten': 'Beenden',
+  'Camera aanzetten': 'Kamera einschalten',
+  'Camera uitzetten': 'Kamera ausschalten',
+  'Microfoon aanzetten': 'Mikrofon einschalten',
+  'Microfoon dempen': 'Mikrofon stummschalten',
+  'Presentatie delen': 'Präsentation teilen',
+  'Delen stoppen': 'Freigabe beenden',
+  'Gespreksvenster': 'Gesprächsfenster',
+  'Venster sluiten': 'Fenster schließen',
+  'Meedoen': 'Teilnehmen',
+  'Meedoen aan een onlinevergadering': 'An einer Onlinebesprechung teilnehmen',
+  'Onlinevergadering': 'Onlinebesprechung',
+  'Onlinevergadering…': 'Onlinebesprechung…',
+  'Vergaderlink': 'Besprechungslink',
+  'Plak hier de link uit de uitnodiging':
+      'Fügen Sie hier den Link aus der Einladung ein',
+  'Uw naam, zoals de anderen die zien': 'Ihr Name, wie die anderen ihn sehen',
+  'Wat er gebeurt als u meedoet': 'Was passiert, wenn Sie teilnehmen',
+  'Verlaten': 'Verlassen',
+  'Weigeren en verlaten': 'Ablehnen und verlassen',
+  'Toestemming geven': 'Zustimmung geben',
+  'Technische code: {code}': 'Technischer Code: {code}',
+  'Deelnemers ({aantal})': 'Teilnehmer ({aantal})',
+  'Nog geen deelnemers.': 'Noch keine Teilnehmer.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'Diese Besprechung stellt keine Teilnehmerliste bereit.',
+  'gast': 'Gast',
+  'deelnemer': 'Teilnehmer',
+  'presentator': 'Referent',
+  'moderator': 'Moderator',
+  'organisator': 'Organisator',
+  'rol onbekend': 'Rolle unbekannt',
   'Onlinevergaderingen': 'Onlinebesprechungen',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'An einer Besprechung eines anderen Anbieters teilnehmen, mit Ihrer Präsentation als dem, was Sie teilen. Standardmäßig aus; ist das Modul aus, nimmt OciDeck mit keinem einzigen Besprechungsdienst Kontakt auf. Es ist noch kein Anbieter angebunden, teilnehmen geht also noch nicht — dies legt die Grundlage.',

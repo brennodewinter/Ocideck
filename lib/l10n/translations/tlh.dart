@@ -1746,6 +1746,125 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'ghogh jan, mIllogh jan ghap lo\'meH chaw\'be\'lu\' OciDeck. browserDaq ghap De\'wI\' Se\'meyDaq chaw\' yInob, ghIq cha\'logh yInID.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'ghogh jan Qapbogh tu\'be\'lu\'. wa\' yIrar ghap latlh jan yIwIv.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'mIllogh jan Qapbogh tu\'be\'lu\'. mIllogh Hutlhbogh bImuvlaH.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'chaw\' nobbogh Qu\' SIchlaHbe\'lu\'. pIq yInIDqa\'; \'echletHommeylIj poStaH.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'DaH chaw\' nobbogh Qu\' veHDaj SIchpu\'. pIq yInIDqa\'.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'qepvam chaw\' rInpu\'. rar rap Dalo\'taHvIS yImuvqa\'.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'qepvam netwerq chaw\'be\'. qumHom netwerqDaq, firewall ghap proxy De\' vam motlh bot; latlh rar motlh Qap.',
+  'Deze vergadering is voorbij.': 'qepvam rInpu\'.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'qep Qu\' SIchlaHbe\'lu\'. rarlIj Qagh \'oHbe\'; pIq yInIDqa\'.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'muv Qaghpu\', \'ach meq ja\'be\' Qu\'. De\'mey tlhej De\' mI\' — cha\'logh yInID, \'ej Qagh taHchugh, mI\' yIja\'.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'rarvam lo\'laHbe\'. QInvo\' yIvelqa\' — ja\'chuq De\'wI\' Qu\' rar pe\'pu\'chugh ghap choHpu\'chugh, motlh Qapbe\'.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Qu\'vam wISov, \'ach qep Segh wISovbe\'. De\'wI\' ghojmoHghachmey, HaSta ngeHghachmey, nuv qep pa\'mey je pIm; browserDaq rarvam yIpoSmoH.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'qep Qu\'vam wISovbe\'. vaj rarvam \'emDaq nuq tu\'lu\' \'e\' Sovbe\' OciDeck; ngeHwI\' Davoqchugh, browserDaq yIpoSmoH.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'OciDeck Seghvamvo\' bImuvlaHbe\'. browserDaq De\'wI\' Segh yIlo\'.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'browservam Doch Hutlh; muvmeH Doch poQlu\'. Chrome, Edge, Firefox, Safari ghap chu\'qu\'chugh, motlh Qap.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'qepvam ghom mebpu\' pongna\' Hutlhbogh chaw\'be\'. qep DevwI\' yItlhob: mebpu\' chaw\'bogh mIw yIlo\'.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'qepvamDaq bImuvmeH, qum pongna\' poQlu\'. browserDaq rar yIpoSmoH \'ej pa\' yI\'el.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'De\'wI\' Qu\'mey chaw\'lu\'bogh neH muvmoH qumvam; OciDeck chaw\'be\'lu\'taH. browserDaq qep yIpoSmoH.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'qep DevwI\' Du\'elmoHbe\'pu\'. Du\'elmoHmeH yItlhob, ghIq cha\'logh yInID.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'qepvam ngaQ; latlh \'ellaHbe\'. qep DevwI\' yItlhob: ngaQHa\'moHjaj.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'ngeHwI\'vo\' HevwI\'Daq So\'lu\'taH qepvam; vaj nov muvwI\'pu\' chaw\'be\'. qep DevwI\' wIv \'oH; DaSaHnISchugh, qep motlh yItlhob.',
+  '{plek} krijgt contact zodra u meedoet.': 'bImuvDI\', {plek} rI\'lu\'.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'pong DawIvbogh neH Dalo\'taHvIS bImuv; ghaH Damojbe\'.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'meb qa\' taHbe\'bogh Qu\' chenmoH; qep rInDI\', ngab.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'ghom Qu\' pong Dalo\'taHvIS meb bIDa.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'qep DevwI\' qa\'lIj chenmoHta\'.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'qumvam pongna\'lIj Dalo\'taHvIS bImuv.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'netwerq De\'lIj, HaSta, ghogh je DangeHbogh legh qum. Da\'angbogh, muvwI\'pu\' Hoch Da\'ang.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'Qu\'Daq lengbogh De\' So\'lu\'; \'ach Qu\' De\' legh.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'So\'ghach che\' qum, vaj ngaQHa\'moHwI\'mey je che\'.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'ngeHwI\'vo\' HevwI\'Daq So\'lu\'taH \'e\' jatlh qum.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'So\'ghach ngoDmey Sovbe\'lu\'. vaj pagh \'Ip OciDeck.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'wa\'DIch loSpa\'Daq bIjaH: qep DevwI\' Du\'elmoHnIS. \'echletHommey DachoHtaHlaH.',
+  'Deze vergadering vraagt om een wachtwoord.': 'mu\'wIj poQ qepvam.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'bImuvpa\' pong Dalan net poQ.',
+  'Vergadering wordt voorbereid': 'qep ghuHmoHlu\'taH',
+  'Verbinden met de vergadering': 'qep rarlu\'taH',
+  'Wachten op toelating door de organisator': 'qep DevwI\' chaw\' loSlu\'taH',
+  'U doet mee aan de vergadering': 'qep bImuvtaH',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'rar Qaw\'lu\'pu\' — rarqa\'lu\'taH',
+  'De vergadering wordt verlaten': 'qep mejlu\'taH',
+  'De vergadering is beëindigd': 'qep rInpu\'',
+  'Meedoen is niet gelukt': 'muv Qaghpu\'',
+  'Deze vergadering wordt opgenomen.': 'qepvam qonlu\'taH.',
+  'Deze vergadering wordt uitgeschreven.': 'qepvam ghItlhlu\'taH.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'qepvam qonlu\'taH \'ej ghItlhlu\'taH.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'bImuvtaHmeH qepvam chaw\'lIj poQ.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'qep DevwI\' Du\'elmoHnIS. bIvumtaHlaH; bI\'elDI\', ja\'chuq Qorwagh poSchoH.',
+  'Herkend als een vergadering bij {plek}.': '{plek} qep \'oH \'e\' wIngu\'.',
+  '{uitleg} De link wijst naar {plek}.': '{uitleg} rar {plek} \'ang.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'pongvam DawIv; pagh \'ol. meb bIDa \'e\' lulegh latlhpu\'.',
+  'Afsluiten': 'yIrInmoH',
+  'Camera aanzetten': 'mIllogh jan yIchu\'',
+  'Camera uitzetten': 'mIllogh jan yIchu\'Ha\'',
+  'Microfoon aanzetten': 'ghogh jan yIchu\'',
+  'Microfoon dempen': 'ghogh jan yIchu\'Ha\'',
+  'Presentatie delen': '\'echletHommey yI\'ang',
+  'Delen stoppen': '\'echletHommey yI\'angHa\'',
+  'Gespreksvenster': 'ja\'chuq Qorwagh',
+  'Venster sluiten': 'Qorwagh yISoQmoH',
+  'Meedoen': 'yImuv',
+  'Meedoen aan een onlinevergadering': 'De\'wI\' qep yImuv',
+  'Onlinevergadering': 'De\'wI\' qep',
+  'Onlinevergadering…': 'De\'wI\' qep…',
+  'Vergaderlink': 'qep rar',
+  'Plak hier de link uit de uitnodiging': 'QIn rar naDev yIlan',
+  'Uw naam, zoals de anderen die zien': 'ponglIj: latlhpu\' lulegh',
+  'Wat er gebeurt als u meedoet': 'bImuvDI\' qaSbogh wanI\'mey',
+  'Verlaten': 'yImej',
+  'Weigeren en verlaten': 'yIlajQo\' \'ej yImej',
+  'Toestemming geven': 'chaw\' yInob',
+  'Technische code: {code}': 'De\' mI\': {code}',
+  'Deelnemers ({aantal})': 'muvwI\'pu\' ({aantal})',
+  'Nog geen deelnemers.': 'wej muvwI\'pu\' tu\'lu\'.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'qepvam muvwI\'pu\' tetlh ngeHbe\'.',
+  'gast': 'meb',
+  'deelnemer': 'muvwI\'',
+  'presentator': '\'aghwI\'',
+  'moderator': 'che\'wI\'',
+  'organisator': 'qep DevwI\'',
+  'rol onbekend': 'patlh Sovbe\'lu\'',
   'Onlinevergaderingen': 'De\'wI\' qepmey',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'latlh qum qep DamuvlaH, \'ej qonwI\'lIj Da\'ang. motlh chu\'Ha\'lu\'; chu\'Ha\'lu\'chugh, pagh qep Qu\' rI\' OciDeck. wej qum rarlu\', vaj wej muvlaH vay\' — mung cher wanI\'vam.',

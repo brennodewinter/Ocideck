@@ -730,6 +730,129 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'OciDeck mag uw microfoon of camera niet gebruiken. Geef toestemming in uw browser of systeeminstellingen en probeer het opnieuw.':
+      'OciDeck no tin permiso pa usa bo mikrófono òf kámara. Duna permiso den bo browser òf den e konfigurashon di sistema i purba atrobe.',
+  'Er is geen werkende microfoon gevonden. Sluit er een aan of kies een ander apparaat.':
+      'No a haña ningun mikrófono ku ta funshoná. Konektá un òf skohe un otro aparato.',
+  'Er is geen werkende camera gevonden. U kunt zonder beeld meedoen.':
+      'No a haña ningun kámara ku ta funshoná. Bo por partisipá sin imágen.',
+  'De dienst die het toegangsbewijs afgeeft is onbereikbaar. Probeer het later opnieuw; uw presentatie blijft ondertussen gewoon open.':
+      'E servisio ku ta duna e prueba di akseso no ta alkansabel. Purba atrobe despues; mientras tantu bo presentashon ta keda simplemente habrí.',
+  'De dienst die het toegangsbewijs afgeeft heeft zijn grens voor nu bereikt. Probeer het later opnieuw.':
+      'E servisio ku ta duna e prueba di akseso a yega su límite pa awor. Purba atrobe despues.',
+  'Het toegangsbewijs voor deze vergadering is verlopen. Doe opnieuw mee met dezelfde link.':
+      'E prueba di akseso pa e reunion akí a vense. Partisipá atrobe ku e mesun link.',
+  'Het netwerk laat deze vergadering niet door. Op een bedrijfsnetwerk blokkeert een firewall of proxy dit soort verkeer vaak; een andere verbinding lukt meestal wel.':
+      'E reda no ta laga e reunion akí pasa. Riba un reda di empresa un firewall òf proxy hopi biaha ta blòkia e sorto di tráfiko akí; ku un otro konekshon generalmente ta bai bon.',
+  'Deze vergadering is voorbij.': 'E reunion akí a kaba.',
+  'De vergaderdienst is zelf niet beschikbaar. Dit ligt niet aan uw verbinding; probeer het later opnieuw.':
+      'E servisio di reunion mes no ta disponibel. Esaki no ta pa motibu di bo konekshon; purba atrobe despues.',
+  'Meedoen is niet gelukt, en de dienst zegt niet waarom. De technische code staat bij de details — probeer het opnieuw, en geef die code door als het blijft misgaan.':
+      'Partisipashon a faya, i e servisio no ta bisa pakiko. E kódigo tékniko ta serka e detayenan — purba atrobe, i pasa e kódigo ei si e problema ta sigui.',
+  'Dit is geen bruikbare vergaderlink. Kopieer hem opnieuw uit de uitnodiging — een link die door een chatprogramma is afgekapt of aangepast, doet het vaak niet meer.':
+      'Esaki no ta un link di reunion uzabel. Kopia é di nobo for di e invitashon — un link ku un programa di chat a korta òf kambia, hopi biaha no ta traha mas.',
+  'Deze dienst kennen we, maar dit soort vergadering niet. Webinars, uitzendingen en persoonlijke vergaderkamers werken anders dan een gewone vergadering; open deze link in de browser.':
+      'Nos konosé e servisio akí, pero no e sorto di reunion akí. Webinar, transmishon i sala di reunion personal ta traha otro manera ku un reunion normal; habri e link akí den bo browser.',
+  'Deze vergaderdienst kennen we niet. OciDeck weet dus ook niet wat er achter deze link zit; u kunt hem in uw browser openen als u de afzender vertrouwt.':
+      'Nos no konosé e servisio di reunion akí. Pues OciDeck tampoko no sa kiko tin tras di e link akí; bo por habri é den bo browser si bo ta konfia e remitente.',
+  'Meedoen kan op deze uitvoering van OciDeck niet. Gebruik de webversie in uw browser.':
+      'Ku e vershon akí di OciDeck bo no por partisipá. Usa e vershon web den bo browser.',
+  'Deze browser mist iets wat voor meedoen nodig is. Een recente Chrome, Edge, Firefox of Safari lukt doorgaans wel.':
+      'E browser akí ta falta algu ku ta nesesario pa partisipá. Un Chrome, Edge, Firefox òf Safari resiente generalmente ta traha.',
+  'De organisatie van deze vergadering laat geen gasten zonder account toe. Vraag de organisator om u uit te nodigen op een manier die gasten toestaat.':
+      'E organisashon di e reunion akí no ta permití invitado sin kuenta. Pidi e organisadó pa invitá bo di un manera ku ta permití invitado.',
+  'Meedoen aan deze vergadering vereist een account bij de aanbieder. Open de link in uw browser en meld u daar aan.':
+      'Pa partisipá na e reunion akí bo mester tin un kuenta serka e proveedor. Habri e link den bo browser i login einan.',
+  'Deze aanbieder laat alleen goedgekeurde programma\'s meedoen, en die goedkeuring is er voor OciDeck nog niet. Open de vergadering in uw browser.':
+      'E proveedor akí ta laga solamente programanan aprobá partisipá, i e aprobashon ei ainda no tin pa OciDeck. Habri e reunion den bo browser.',
+  'De organisator heeft u niet toegelaten. Vraag of hij u binnenlaat en probeer het daarna opnieuw.':
+      'E organisadó no a laga bo drenta. Pidi si e ta laga bo drenta i purba atrobe despues.',
+  'Deze vergadering is op slot; er komt niemand meer bij. Vraag de organisator om het slot eraf te halen.':
+      'E reunion akí ta será; ningun hende no por drenta mas. Pidi e organisadó pa kita e sero.',
+  'Deze vergadering is eind-tot-eind versleuteld en laat daarom geen externe deelnemers toe. Dat is een keuze van de organisator; vraag hem om een gewone vergadering als u erbij moet zijn.':
+      'E reunion akí ta enkriptá di punta pa punta i pesei no ta permití partisipante eksterno. Esei ta un desishon di e organisadó; pidié un reunion normal si bo mester ta presente.',
+  '{plek} krijgt contact zodra u meedoet.':
+      '{plek} ta haña kontakto ora bo partisipá.',
+  'U doet mee met alleen de naam die u zelf opgeeft; u bent niet aangemeld als die persoon.':
+      'Bo ta partisipá ku solamente e nòmber ku bo mes ta duna; bo no ta login komo e persona ei.',
+  'De dienst maakt een tijdelijke gastidentiteit voor u, die na de vergadering verdwijnt.':
+      'E servisio ta krea un identidat di invitado temporal pa bo, ku ta disparsé despues di e reunion.',
+  'U doet mee als gast onder een dienstaccount van een organisatie.':
+      'Bo ta partisipá komo invitado bou di un kuenta di servisio di un organisashon.',
+  'De organisator heeft een identiteit voor u klaargezet.':
+      'E organisadó a prepará un identidat pa bo.',
+  'Meedoen gaat met uw eigen account bij deze aanbieder.':
+      'Bo ta partisipá ku bo mes kuenta serka e proveedor akí.',
+  'De aanbieder ziet uw netwerkgegevens en het beeld en geluid dat u verstuurt. Wat u deelt, deelt u met alle deelnemers.':
+      'E proveedor ta mira bo datonan di reda i e imágen i zonido ku bo ta manda. Loke bo ta kompartí, bo ta kompartí ku tur partisipante.',
+  'Het verkeer is versleuteld naar de dienst toe; de dienst zelf kan meekijken.':
+      'E tráfiko ta enkriptá te na e servisio; e servisio mes por wak kuné.',
+  'De aanbieder beheert de versleuteling en dus ook de sleutels.':
+      'E proveedor ta administrá e enkriptashon i pues tambe e yabinan.',
+  'De aanbieder beschrijft dit als eind-tot-eind versleuteld.':
+      'E proveedor ta deskribí esaki komo enkriptá di punta pa punta.',
+  'Over de versleuteling is niets vastgesteld. OciDeck belooft daar dus niets over.':
+      'No a wòrdu konstatá nada tokante e enkriptashon. Pues OciDeck no ta primintí nada tokante esei.',
+  'U komt eerst in een wachtruimte: een organisator moet u toelaten. Uw presentatie blijft ondertussen gewoon te bewerken.':
+      'Promé bo ta yega den un sala di espera: un organisadó mester laga bo drenta. Mientras tantu bo presentashon ta keda normal pa editá.',
+  'Deze vergadering vraagt om een wachtwoord.':
+      'E reunion akí ta pidi un kontraseña.',
+  'Deze vergadering vraagt om aanmelding vooraf.':
+      'E reunion akí ta pidi registrashon di antemano.',
+  'Vergadering wordt voorbereid': 'E reunion ta wòrdu prepará',
+  'Verbinden met de vergadering': 'Ta konektá ku e reunion',
+  'Wachten op toelating door de organisator':
+      'Ta warda pa e organisadó laga bo drenta',
+  'U doet mee aan de vergadering': 'Bo ta partisipando na e reunion',
+  'De verbinding is weggevallen — opnieuw verbinden':
+      'E konekshon a kai — ta rekonektá',
+  'De vergadering wordt verlaten': 'Ta sali for di e reunion',
+  'De vergadering is beëindigd': 'E reunion a kaba',
+  'Meedoen is niet gelukt': 'Partisipashon a faya',
+  'Deze vergadering wordt opgenomen.': 'E reunion akí ta wòrdu grabá.',
+  'Deze vergadering wordt uitgeschreven.': 'E reunion akí ta wòrdu transkribí.',
+  'Deze vergadering wordt opgenomen en uitgeschreven.':
+      'E reunion akí ta wòrdu grabá i transkribí.',
+  'De vergadering vraagt uw uitdrukkelijke toestemming om mee te blijven doen.':
+      'E reunion ta pidi bo konsentimentu ekspliseit pa bo sigui partisipá.',
+  'Een organisator moet u nog toelaten. U kunt gewoon doorwerken; zodra u binnen bent, opent het gespreksvenster zich.':
+      'Un organisadó mester laga bo drenta ainda. Bo por sigui traha normal; ora bo ta paden, e bentana di kombersashon ta habri.',
+  'Herkend als een vergadering bij {plek}.':
+      'Rekonosí komo un reunion na {plek}.',
+  '{uitleg} De link wijst naar {plek}.': '{uitleg} E link ta bai na {plek}.',
+  'Deze naam kiest u zelf; niemand controleert hem. De anderen zien u als gast.':
+      'Bo mes ta skohe e nòmber akí; ningun hende no ta verifik\'é. E otronan ta mira bo komo invitado.',
+  'Afsluiten': 'Finalisá',
+  'Camera aanzetten': 'Sende kámara',
+  'Camera uitzetten': 'Paga kámara',
+  'Microfoon aanzetten': 'Sende mikrófono',
+  'Microfoon dempen': 'Silensiá mikrófono',
+  'Presentatie delen': 'Kompartí presentashon',
+  'Delen stoppen': 'Stòp di kompartí',
+  'Gespreksvenster': 'Bentana di kombersashon',
+  'Venster sluiten': 'Sera bentana',
+  'Meedoen': 'Partisipá',
+  'Meedoen aan een onlinevergadering': 'Partisipá na un reunion online',
+  'Onlinevergadering': 'Reunion online',
+  'Onlinevergadering…': 'Reunion online…',
+  'Vergaderlink': 'Link di reunion',
+  'Plak hier de link uit de uitnodiging': 'Pega akinan e link di e invitashon',
+  'Uw naam, zoals de anderen die zien': 'Bo nòmber, manera e otronan ta mir\'é',
+  'Wat er gebeurt als u meedoet': 'Kiko ta pasa ora bo partisipá',
+  'Verlaten': 'Sali',
+  'Weigeren en verlaten': 'Rechasá i sali',
+  'Toestemming geven': 'Duna konsentimentu',
+  'Technische code: {code}': 'Kódigo tékniko: {code}',
+  'Deelnemers ({aantal})': 'Partisipantenan ({aantal})',
+  'Nog geen deelnemers.': 'Ainda no tin partisipante.',
+  'Deze vergadering geeft geen deelnemerslijst.':
+      'E reunion akí no ta duna un lista di partisipante.',
+  'gast': 'invitado',
+  'deelnemer': 'partisipante',
+  'presentator': 'presentadó',
+  'moderator': 'moderadó',
+  'organisator': 'organisadó',
+  'rol onbekend': 'rol deskonosí',
   'Onlinevergaderingen': 'Reunionnan online',
   'Meedoen aan een vergadering van een andere aanbieder, met uw presentatie als wat u deelt. Standaard uit; met de module uit neemt OciDeck met geen enkele vergaderdienst contact op. Er is nog geen aanbieder aangesloten, dus meedoen kan nog niet — dit legt de basis.':
       'Partisipá na un reunion di un otro proveedor, ku bo presentashon komo loke bo ta kompartí. Standard pagá; ku e módulo pagá OciDeck no ta tuma kontakto ku ningun servisio di reunion. Ainda no tin proveedor konektá, pues partisipá no ta posibel ainda — esaki ta pone e base.',
