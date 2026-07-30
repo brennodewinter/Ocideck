@@ -46,6 +46,16 @@ in Dutch, and it keeps growing on `main` between releases.
   mee op de op-stroom. Plus een snapshot-slot naast de op-log in dezelfde
   sidecar (`readSnapshot`/`writeSnapshot`). JSON van het model, fail-closed. De
   sessie-bedrading die dit gebruikt (§5.7) is het volgende increment.
+- De sessie-levenscyclus die de asynchrone samenwerklaag aan elkaar knoopt
+  (COLLABORATION.md §6.5, #996): `hostCollabSession` schrijft de baseline, wordt
+  de autoriteit en begint te pollen; `joinCollabSession` leest de baseline,
+  rebaset het lokaal geopende deck op de slides van de autoriteit (en neemt zo
+  hun id's over, §5.5), haalt de gemiste ops in en pollt verder. Store-generiek,
+  dus end-to-end getest over de in-memory store en in productie over WebDAV; er
+  komt hier geen netwerk aan te pas. In v1 blijft de host de hele sessie de
+  autoriteit — eigenaarsoverdracht (§5.3) en herbaselijning op een niet-nul
+  versie (§5.2) zijn vervolg. De interface die dit aanroept (§5.7) is de
+  resterende stap.
 
 ### Fixed
 
