@@ -203,6 +203,77 @@ stateDiagram-v2
 in receive order, assigns the next monotonic `version`, and rebroadcasts the
 authoritative op.*
 
+#### Owner-drop handover in Fase 0.5 (the async WebDAV realisation)
+
+Fase 0.5 has **no presence** (that is Fase 1 / Matrix, §6), so "the owner
+dropped" is *inferred*, not observed. The realisation
+(`lib/collab/handover_coordinator.dart`) keeps the mechanism
+(`CollabSession`, which just exposes `becomeAuthority` / `stepDown`) neutral and
+puts the policy in a WebDAV-specific coordinator, so the Matrix step can replace
+the coordinator without touching the session.
+
+- **The beacon.** A last-write-wins blob beside the numbered log
+  (`beacon.json`): `{authority, authorityIsOwner, tick}`. The current authority
+  bumps `tick` on every poll — a heartbeat. When its app closes or its network
+  drops, the poll timer stops and the tick freezes: that frozen tick is the drop
+  signal. The beacon is **advisory** — WebDAV write access is the only real gate
+  on the sidecar, so a reader treats it as data, never as authorisation.
+- **Detection is in poll counts, never wall-clock.** Each participant tracks how
+  many polls the tick has stayed frozen; past `staleThreshold` further reads
+  (the first read seeds the baseline) the authority is presumed gone. This is
+  what keeps every transition reproducible in tests by counting `syncNow()`s.
+- **`isOwner` is a launch fact, not a beacon field.** The host launches as owner
+  (`isOwner = true`), a joiner as guest. Only the owner persists (`saveDeck`);
+  the beacon's `authorityIsOwner` is a *coordination* label (owners reclaim from
+  guest stand-ins), never the source of the persist right. A returning owner
+  re-hosts: `hostCollabSession` is resume-aware — an existing baseline is adopted,
+  not reset, the owner catches up on the missed ops, and its coordinator reclaims.
+- **A successor resumes versioning from its own highest version.** Two guards
+  gate a takeover so a resumed version cannot collide: *caught up* (the last poll
+  left no record unseen) **and** *sequence-steady* (the highest known sequence has
+  not moved for a few polls). The second guard exists because WebDAV gives no
+  cross-client read-your-writes — a record the departing authority already wrote
+  may not be listed yet; waiting for the maximum to hold steady lets it surface
+  first. The hand-back path (owner reclaiming a *live* guest) needs only "caught
+  up", since a live guest keeps appending. One consequence, by design: while some
+  participant is *continuously* appending (typing without a pause), the sequence
+  never goes steady, so no successor takes over until a lull of a few polls — a
+  fail-closed trade, since those appends are unversioned intents piling up for
+  whoever next holds authority anyway.
+- **Deterministic successor order without a roster.** With no presence there is
+  no roster to sort, so successors stagger their claim by a stable hash of their
+  participant id (`staleThreshold + hash % spread` polls). The lowest-backoff
+  live successor claims first; if it too is gone, a later one's longer wait fires
+  (liveness). Once one claims, its fresh beacon tick tells the others the
+  authority is alive again and they defer.
+- **Fail-closed.** A malformed or absent beacon, a store read that throws, or a
+  beacon write that fails never yields authority — a stalled session the owner can
+  revive beats a split brain. Authority is claimed only *after* the beacon write
+  confirms, and an incumbent whose heartbeat write keeps failing steps down rather
+  than commit where no one can see it is the authority.
+- **Re-driving lost intents.** Intents a follower sent to the dropped authority
+  were never versioned. On every authority change each participant re-runs its
+  edit diff against the session, so an edit the old authority never echoed is
+  re-submitted to the new one (idempotent — an empty diff when nothing was lost).
+
+**Residuals accepted for Fase 0.5 (not "solved", documented).** This is leaderless
+async election with no consensus, so during a *failover window* the single-authority
+invariant (P3) can be briefly violated:
+
+- If two participants act as authority in the same poll window and both commit,
+  they assign the same `version`. Every replica that reads the log in canonical
+  order drops the duplicate and converges — but the **losing authority keeps its
+  own optimistic op**, so *its* deck diverges from the others until it reloads
+  (there is no mid-session re-baseline yet — that rides with §5.2). The common
+  single-successor path does not hit this. A full fix (apply-on-readback, or
+  mid-session re-baselining) is a follow-up tied to §5.2.
+- The heartbeat is a **liveness side-channel**: anyone with sidecar read access
+  learns "the owner is online" at poll resolution, even with no edits. Inherent to
+  a poll heartbeat; see the threat-model row in `SECURITY_DESIGN.md`.
+
+The steady state still holds P3: exactly one authority, exactly one writer of
+versions.
+
 ### 5.4 Locking
 
 Per-slide (optionally per-block) **soft locks** eliminate both conflict *and*

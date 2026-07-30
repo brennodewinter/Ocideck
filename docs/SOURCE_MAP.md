@@ -458,9 +458,12 @@ and no Flutter import, unit-tested through a loopback with no infrastructure. Th
 async WebDAV transport (§10) is written against a store seam for the same
 reason, so it too is tested with no server; its one networked dependency
 (`webdav_service`) is isolated in `collab_log_store.dart`. The real-time Matrix
-transport (§6) and the UI wiring plug in later; today the layer is reachable
-through `TabInfo.collabSession` (§5.7), `null` on every tab until a session
-exists.
+transport (§6) plugs in later; the per-tab provider and the command-palette
+actions now drive the layer (#1003), reachable through `TabInfo.collabSession`
+(§5.7), `null` on every tab until a session exists. Owner-drop authority handover
+(§5.3) is built (#1004): a `HandoverCoordinator` over the async transport flips
+the version-assigning role to a stand-in when the owner drops and hands it back
+when the owner returns.
 
 - `collab.dart` — the module barrel: one `export` surface for the whole layer
   (model, transports, session, codec, store). The state layer imports it for the
@@ -486,8 +489,12 @@ exists.
   every op — its own edits and the intents it receives — and rebroadcasts the
   authoritative op, so every replica applying in version order reproduces the
   authority's deck. v1 has a follower edit round-trip (not optimistic under a
-  lock); owner-drop handover (§5.3) and snapshot re-baselining (§5.2) are
-  follow-ups.
+  lock). The authority role is now *mutable*: `becomeAuthority`/`stepDown` flip it
+  after construction for owner-drop handover (§5.3), and version *resumes* from
+  the current one, so a successor that took over at the highest observed version
+  continues the sequence without a gap. This stays mechanism-neutral — it knows
+  nothing of the beacon or who the owner is; the `HandoverCoordinator` decides
+  *when* to flip it. Snapshot re-baselining (§5.2) is still a follow-up.
 - `collab_codec.dart` — the JSON wire (de)serialiser for `DeckOp`s and
   `LockEvent`s (§5.2, §5.6). JSON of the typed `Slide`/field model *by design*,
   not a Markdown round-trip: re-parsing would regenerate slide ids (§5.5) and
@@ -514,14 +521,35 @@ exists.
   change, and, belt-and-braces, an echoed deck diffs empty. Riverpod- and
   Flutter-free (plain read/write callbacks), so the subtle part is unit-tested
   headlessly; the provider that owns one per tab is the remaining app glue.
-- `collab_session_launch.dart` — the session lifecycle seam (§6.5):
-  `hostCollabSession` posts the baseline, becomes the authority and starts
-  polling; `joinCollabSession` reads the baseline, rebases the local deck onto
-  the authority's slides (adopting their ids, §5.5), catches up on ops and
-  polls. Store-generic, so it runs over `InMemoryCollabLogStore` in tests and
-  `WebdavCollabLogStore` in production — nothing here touches a network. v1 host
-  = authority for the whole session; owner-drop handover (§5.3) and non-zero
-  re-baselining (§5.2) are follow-ups.
+- `collab_session_launch.dart` — the session lifecycle seam (§6.5). Both helpers
+  return a `CollabLaunch {session, coordinator}` and each session gets a
+  `HandoverCoordinator` that owns the poll loop (so `isCaughtUp` is read straight
+  after its poll). `hostCollabSession` is *resume-aware*: fresh, it posts the
+  baseline, becomes the authority and writes the initial beacon; resuming (a
+  baseline already exists — a returning owner) it adopts that baseline, starts as
+  a follower, and lets its coordinator reclaim authority once caught up, without
+  resetting the baseline (§5.3 hand-back). `joinCollabSession` reads the baseline,
+  rebases the local deck onto the authority's slides (adopting their ids, §5.5),
+  catches up on ops and polls as a follower — a guest is never the owner. Store-
+  generic, so it runs over `InMemoryCollabLogStore` in tests and
+  `WebdavCollabLogStore` in production — nothing here touches a network. Non-zero
+  re-baselining (§5.2) is still a follow-up.
+- `handover_coordinator.dart` — the owner-drop handover *policy* over the async
+  WebDAV transport (§5.3), one per session (`CollabSession` is the mechanism, this
+  decides *when* to flip its role). Each `syncNow` polls the transport then
+  re-decides from the beacon — a last-write-wins `{authority, authorityIsOwner,
+  tick}` blob beside the log — so every transition is reproducible by counting
+  `syncNow`s with no wall-clock. A frozen `tick`, counted in polls, is how a
+  successor infers the authority dropped (Phase 0.5 has no presence). Fail-closed:
+  a missing, malformed or unreadable beacon, or a failed heartbeat write, never
+  takes authority, and a claim is durable (the beacon write confirms) before the
+  session acts as authority. A successor takes over only when caught up *and* the
+  known maximum sequence has held steady (the WebDAV list-lag guard), after a
+  deterministic per-participant backoff so successors do not all claim at once;
+  the hand-back to a returning owner needs only "caught up". The beacon is
+  *advisory* — persistence is gated on the launch role, never on it. WebDAV-
+  specific on purpose (it reads `isCaughtUp`/`knownMaxSeq`), so the Matrix step
+  (§6.2) can replace it without touching `CollabSession`.
 - `collab_snapshot.dart` — the session baseline (§5.2, §5.5). `CollabSnapshot`
   is the authority's slides at an op version; a joiner adopts them so it shares
   the authority's slide-id space (`Slide.id` is regenerated on every parse, §5.5,
@@ -531,22 +559,28 @@ exists.
 - `collab_log_store.dart` — the append-only log the async transport reads and
   writes (§10). `CollabLogStore` is a numbered sequence of opaque records whose
   only guarantee is that a taken sequence number cannot be silently overwritten,
-  plus a single snapshot slot beside the log (`readSnapshot`/`writeSnapshot`, §5.2);
+  plus two named slots beside the log: the snapshot (`readSnapshot`/`writeSnapshot`,
+  §5.2) and the advisory authority beacon (`readBeacon`/`writeBeacon`, §5.3), both
+  written unconditionally (last-write-wins, no racing writer to guard).
   `InMemoryCollabLogStore` is the loopback-equivalent for tests, and
   `WebdavCollabLogStore` the production binding — one file per record in a
   sidecar directory, appended with a conditional `PUT` (`If-None-Match: *`), the
-  baseline written unconditionally by the authority.
+  snapshot and beacon sitting under non-numeric names (`snapshot.json`,
+  `beacon.json`) so `listSequences` ignores them.
 - `webdav_async_transport.dart` — `WebdavAsyncTransport`, the Phase 0.5 async
   transport (§10). Same `CollabTransport` pipe as the loopback, so the session
   drives it unchanged; sends append to the log and a poll delivers others'
   records strictly in sequence order, stopping at a gap (the version-order apply
   in §5.3 needs no out-of-order delivery). A participant never hears its own
   sends. Written against `CollabLogStore` so it is tested with no server. The
-  deck `.md` is untouched (P2) — the log is a transient sidecar.
+  deck `.md` is untouched (P2) — the log is a transient sidecar. `isCaughtUp`
+  (the last poll left no record unseen) and `knownMaxSeq` are the two extra
+  getters the `HandoverCoordinator` gates a takeover on (§5.3); WebDAV-specific,
+  so they stay off the neutral `CollabTransport`.
 
 ## `lib/state/` — Riverpod providers
 
-- `collab_session_provider.dart` — the per-tab owner of a collaboration session (COLLABORATION.md §5.7), the app glue over `lib/collab/`. `CollabSessionNotifier.host`/`join` build a `WebdavCollabLogStore` from the tab's `webdavOrigin`, host or join a session, keep it on `TabInfo.collabSession`, and wire a `CollabSessionController` between the session and `deckProvider` (local edits out as ops, remote changes back via `DeckNotifier.applyCollabDeck`). Overridden per tab in `app_shell.dart`'s `_tabScope`, like `deckProvider`; the root is idle. `collabSidecarOpsDir` derives the sidecar folder beside the deck.
+- `collab_session_provider.dart` — the per-tab owner of a collaboration session (COLLABORATION.md §5.7), the app glue over `lib/collab/`. `CollabSessionNotifier.host`/`join` build a `WebdavCollabLogStore` from the tab's `webdavOrigin`, host or join a session, keep it on `TabInfo.collabSession`, own its `HandoverCoordinator`, and wire a `CollabSessionController` between the session and `deckProvider` (local edits out as ops, remote changes back via `DeckNotifier.applyCollabDeck`). It listens on the coordinator's `authorityChanged`: it re-drives any local edit the old authority never versioned to the new one, and refreshes `CollabSessionState.isTemporaryAuthority` (true when this *guest* is standing in as the authority after an owner drop, §5.3). `canPersist` gates saving — only the owner (host) may write the shared `.md`, so a guest, even one temporarily holding authority, cannot; the save path in `app_shell_main_layout.dart` reads it and the shell surfaces the transitions. Overridden per tab in `app_shell.dart`'s `_tabScope`, like `deckProvider`; the root is idle. `collabSidecarOpsDir` derives the sidecar folder beside the deck.
 - `consent_provider.dart` — `ConsentNotifier` managing consent acceptance/revocation with persistent storage.
 - `deck_provider.dart` — `DeckNotifier`: loaded deck, dirty state, undo/redo history, file path. Also `refreshEditorFields`, which bumps `DeckState.revision` without touching the deck: the editor's text fields cache their content in their own controllers and only re-read when that revision changes, so a change arriving from outside them (a table cell edited live while presenting) would otherwise sit behind stale text that the next keystroke writes back. `onChartDataWarnings` is the save-side counterpart of `onSweepWebAssets`: this notifier has no `Ref`, so it hands the chart-data complaints of a save up to `TabsNotifier`, which owns one.
 - `deck_provider_ai.dart` — `DeckNotifierAiAlt` extension: count/clear AI-generated image alt-texts.
