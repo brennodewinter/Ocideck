@@ -14,6 +14,16 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ## Unreleased
 
+### Added
+
+- De basis van live samenwerken (COLLABORATION.md Fase 0, #975): een
+  transportloze samenwerklaag onder `lib/collab/`. Een bewerking is een getypte
+  `DeckOp` op het Deck-model (geen Markdown-diff), die de sessie-autoriteit op
+  volgorde van een monotone versie toepast en herzendt, zodat elke deelnemer
+  hetzelfde deck reproduceert. Met een loopback-transport, een lock-tabel en de
+  naad op `TabInfo` waar een latere genetwerkte fase (Matrix) de live sessie aan
+  hangt. Puur Dart, geen netwerk, volledig getest; nog niet in de interface.
+
 ### Fixed
 
 - Het instellingenvenster liet niet zien dat er meer stond dan er paste. Met
