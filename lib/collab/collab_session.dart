@@ -13,8 +13,16 @@
 // intent and applied when the authoritative op echoes back) rather than being
 // applied optimistically under a held lock — the latency-hiding half of §5.4 is
 // a follow-up, and skipping it means there is never a local edit to roll back.
-// Owner-drop authority handover (§5.3) and snapshot re-baselining for late
-// joiners (§5.2) are also follow-ups; this file is the core loop they build on.
+// Snapshot re-baselining for late joiners (§5.2) is also a follow-up.
+//
+// Owner-drop authority handover (§5.3) is built here as *mutable* authority: the
+// role can flip after construction via [becomeAuthority] / [stepDown]. This class
+// stays mechanism-neutral — it knows nothing of the beacon, the poll cadence, or
+// who the owner is; a [HandoverCoordinator] one layer up decides *when* to flip it
+// (that policy needs the WebDAV store and time, which have no place in this pure
+// loop). Version *resumes* from the current [version]: a session that becomes the
+// authority stamps the next op `version + 1`, so a successor that took over at the
+// highest observed version continues the sequence without a gap or a collision.
 
 import 'dart:async';
 
@@ -26,16 +34,22 @@ class CollabSession {
   CollabSession({
     required Deck initialDeck,
     required this.transport,
-    required this.isAuthority,
-  }) : _deck = initialDeck {
+    required bool isAuthority,
+  }) : _deck = initialDeck,
+       _authority = isAuthority {
     _opSub = transport.ops.listen(_onRemoteOp);
     _lockSub = transport.locks.listen(_onRemoteLock);
   }
 
   final CollabTransport transport;
 
-  /// Whether this session assigns versions and persists (COLLABORATION.md §5.3).
-  final bool isAuthority;
+  /// Whether this session currently assigns versions (COLLABORATION.md §5.3).
+  /// Mutable: owner-drop handover flips it via [becomeAuthority] / [stepDown].
+  /// Persistence (only the owner may `saveDeck`) is gated on the launch *role*
+  /// one layer up, not on this flag — a temporary authority has `isAuthority`
+  /// true but must not persist.
+  bool _authority;
+  bool get isAuthority => _authority;
 
   Deck _deck;
   int _version = 0;
@@ -62,6 +76,24 @@ class CollabSession {
   Stream<Map<String, String>> get lockChanges => _lockChanges.stream;
 
   String get participantId => transport.participantId;
+
+  /// Take over version assignment (owner-drop handover, §5.3). Idempotent. New
+  /// commits resume from the current [version], so a successor that took over at
+  /// the highest observed version continues the sequence without a gap. Whether
+  /// this session is *allowed* to take over — caught up, the previous authority
+  /// really gone — is the [HandoverCoordinator]'s call; this only flips the role.
+  void becomeAuthority() {
+    if (_disposed) return;
+    _authority = true;
+  }
+
+  /// Relinquish version assignment and return to following the authority
+  /// (hand-back when the owner returns, §5.3). Idempotent. Applied authoritative
+  /// ops keep flowing in [version] order; [version] is left where it is.
+  void stepDown() {
+    if (_disposed) return;
+    _authority = false;
+  }
 
   /// Submit a local edit. Build [op] with `version: 0` (unassigned); the session
   /// fills the authoritative version. The authority commits immediately; a

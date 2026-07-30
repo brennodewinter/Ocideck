@@ -226,6 +226,134 @@ void main() {
     });
   });
 
+  group('CollabSession — mutable authority (owner-drop handover, §5.3)', () {
+    late LoopbackHub hub;
+    late Slide slide;
+    late CollabSession owner;
+    late CollabSession peer;
+
+    setUp(() {
+      hub = LoopbackHub();
+      slide = baseSlide();
+      owner = CollabSession(
+        initialDeck: deckWith(slide),
+        transport: hub.connect('owner'),
+        isAuthority: true,
+      );
+      peer = CollabSession(
+        initialDeck: deckWith(slide),
+        transport: hub.connect('peer'),
+        isAuthority: false,
+      );
+    });
+
+    tearDown(() async {
+      await owner.dispose();
+      await peer.dispose();
+    });
+
+    test('a promoted follower resumes versioning without a gap', () async {
+      // The owner drives the version up to 2, then drops.
+      await owner.submit(
+        SetSlideField(
+          version: 0,
+          authorId: 'owner',
+          slideId: slide.id,
+          field: SlideField.title,
+          value: 'A',
+        ),
+      );
+      await pumpEventQueue();
+      await owner.submit(
+        SetSlideField(
+          version: 0,
+          authorId: 'owner',
+          slideId: slide.id,
+          field: SlideField.title,
+          value: 'B',
+        ),
+      );
+      await pumpEventQueue();
+      expect(peer.version, 2, reason: 'the follower caught up to the owner');
+
+      // Hand over: the owner steps down, the peer takes over.
+      owner.stepDown();
+      peer.becomeAuthority();
+      expect(peer.isAuthority, isTrue);
+      expect(owner.isAuthority, isFalse);
+
+      // The new authority commits directly and resumes from version 2 — the next
+      // version is 3, not a reset-to-1 that would collide with history.
+      await peer.submit(
+        SetSlideField(
+          version: 0,
+          authorId: 'peer',
+          slideId: slide.id,
+          field: SlideField.title,
+          value: 'C',
+        ),
+      );
+      await pumpEventQueue();
+
+      expect(peer.version, 3, reason: 'resumed from 2, not reset');
+      expect(peer.deck.slides.single.title, 'C');
+      expect(
+        owner.version,
+        3,
+        reason: 'the former owner, now a follower, applied v3',
+      );
+      expect(owner.deck.slides.single.title, 'C');
+    });
+
+    test(
+      'after hand-over the former authority edits round-trip as intents',
+      () async {
+        owner.stepDown();
+        peer.becomeAuthority();
+
+        // The former owner is now a follower: its edit crosses as an intent for the
+        // new authority to version, rather than being committed locally.
+        await owner.submit(
+          SetSlideField(
+            version: 0,
+            authorId: 'owner',
+            slideId: slide.id,
+            field: SlideField.subtitle,
+            value: 'late note',
+          ),
+        );
+        await pumpEventQueue();
+
+        expect(
+          peer.deck.slides.single.subtitle,
+          'late note',
+          reason: 'the new authority versioned the former owner\'s intent',
+        );
+        expect(peer.version, 1);
+        expect(owner.deck.slides.single.subtitle, 'late note');
+        expect(owner.version, 1);
+      },
+    );
+
+    test('becomeAuthority and stepDown are idempotent', () async {
+      peer.becomeAuthority();
+      peer.becomeAuthority();
+      expect(peer.isAuthority, isTrue);
+      peer.stepDown();
+      peer.stepDown();
+      expect(peer.isAuthority, isFalse);
+    });
+
+    test(
+      'flipping authority on a disposed session is a no-op, not a throw',
+      () async {
+        await peer.dispose();
+        peer.becomeAuthority(); // no throw
+        expect(peer.isAuthority, isFalse);
+      },
+    );
+  });
+
   test('dispose is idempotent and blocks further use', () async {
     final hub = LoopbackHub();
     final session = CollabSession(
