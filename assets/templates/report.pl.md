@@ -27,10 +27,10 @@ language: pl
 
 | Etykieta | Wartość | Poprzedni | Jednostka | Biegunowość |
 | --- | --- | --- | --- | --- |
-| Osiągnięcie celu | 72 | 65 | % | wyżej-lepiej |
-| Otwórz elementy | 18 | 12 |  | niżej-lepiej |
-| Poziom ryzyka | 3.5 | 4.2 | /10 | niżej-lepiej |
-| Czas realizacji | 21 | 21 | dni | niżej-lepiej |
+| Osiągnięcie celu | 72 | 65 | % | higher-better |
+| Otwórz elementy | 18 | 12 |  | lower-better |
+| Poziom ryzyka | 3.5 | 4.2 | /10 | lower-better |
+| Czas realizacji | 21 | 21 | dni | lower-better |
 
 ---
 

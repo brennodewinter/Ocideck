@@ -27,10 +27,10 @@ language: hu
 
 | Címke | Érték | Előző | Egység | Polaritás |
 | --- | --- | --- | --- | --- |
-| A cél elérése | 72 | 65 | % | magasabb-jobb |
-| Nyissa meg az elemeket | 18 | 12 |  | alacsonyabb-jobb |
-| Kockázati szint | 3.5 | 4.2 | /10 | alacsonyabb-jobb |
-| Átfutási idő | 21 | 21 | napokon | alacsonyabb-jobb |
+| A cél elérése | 72 | 65 | % | higher-better |
+| Nyissa meg az elemeket | 18 | 12 |  | lower-better |
+| Kockázati szint | 3.5 | 4.2 | /10 | lower-better |
+| Átfutási idő | 21 | 21 | napokon | lower-better |
 
 ---
 

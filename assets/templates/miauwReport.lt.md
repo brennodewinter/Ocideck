@@ -115,19 +115,19 @@ language: lt
 
 **Scope object:** `<scope-object>`
 
-## Aprašymas
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Patvirtinimas (reprodukcija)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Galimas poveikis
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Rekomendacija
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

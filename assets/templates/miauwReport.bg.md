@@ -115,19 +115,19 @@ language: bg
 
 **Scope object:** `<scope-object>`
 
-## Описание
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Потвърждение (възпроизвеждане)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Възможно въздействие
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Препоръка
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

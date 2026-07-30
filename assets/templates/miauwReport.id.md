@@ -115,19 +115,19 @@ language: id
 
 **Scope object:** `<scope-object>`
 
-## Deskripsi
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Konfirmasi (reproduksi)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Kemungkinan dampaknya
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Rekomendasi
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

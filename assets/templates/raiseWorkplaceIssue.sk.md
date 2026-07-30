@@ -3,13 +3,13 @@ marp: true
 ocideck_format: 1
 theme: ocideck
 paginate: true
-title: 
+title: Otvorenie problému na pracovisku
 language: sk
 ---
 
 <!-- _class: title -->
 
-# 
+# Otvorenie problému na pracovisku
 ## Kto · Téma · Dátum
 
 ---
@@ -24,9 +24,9 @@ language: sk
 
 # O čo ide
 
-- 
-- 
-- 
+- Problém v jednej vete: …
+- Kedy a ako často sa vyskytuje: …
+- Vplyv na prácu alebo tím: …
 
 ---
 
@@ -111,5 +111,5 @@ language: sk
 - [ ] Rozhodnite sa spolu, ako sa rozhodnete (kto rozhoduje, kto radí)
 - [ ] Záznam: kto čo robí a kedy
 - [ ] Dohodnite sa na chvíľu, keď si to prečítate
-- [ ] 
-- [ ] 
+- [ ] Spoločne sme sa dohodli na prvom kroku alebo skúšobnom riešení
+- [ ] Určili sme, koho ďalšieho môže byť potrebné zapojiť

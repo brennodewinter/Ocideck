@@ -115,19 +115,19 @@ language: fy
 
 **Scope object:** `<scope-object>`
 
-## Beskriuwing
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Befêstiging (reproduksje)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Mooglike ynfloed
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Oanbefelling
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

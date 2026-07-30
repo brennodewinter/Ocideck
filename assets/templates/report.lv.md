@@ -27,10 +27,10 @@ language: lv
 
 | Etiķete | Vērtība | Iepriekšējais | Vienība | Polaritāte |
 | --- | --- | --- | --- | --- |
-| Mērķa sasniegšana | 72 | 65 | % | augstāks-labāks |
-| Atvērt vienumus | 18 | 12 |  | zemāks-labāks |
-| Riska līmenis | 3.5 | 4.2 | /10 | zemāks-labāks |
-| Izpildes laiks | 21 | 21 | dienas | zemāks-labāks |
+| Mērķa sasniegšana | 72 | 65 | % | higher-better |
+| Atvērt vienumus | 18 | 12 |  | lower-better |
+| Riska līmenis | 3.5 | 4.2 | /10 | lower-better |
+| Izpildes laiks | 21 | 21 | dienas | lower-better |
 
 ---
 

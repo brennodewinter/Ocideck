@@ -115,19 +115,19 @@ language: da
 
 **Scope object:** `<scope-object>`
 
-## Beskrivelse
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Bekræftelse (gengivelse)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Mulig påvirkning
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Anbefaling
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

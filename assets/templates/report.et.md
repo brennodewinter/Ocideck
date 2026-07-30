@@ -27,10 +27,10 @@ language: et
 
 | Silt | Väärtus | Eelmine | Üksus | Polaarsus |
 | --- | --- | --- | --- | --- |
-| Eesmärgi saavutamine | 72 | 65 | % | kõrgem-parem |
-| Ava üksused | 18 | 12 |  | madalam-parem |
-| Riski tase | 3.5 | 4.2 | /10 | madalam-parem |
-| Juhtimisaeg | 21 | 21 | päevadel | madalam-parem |
+| Eesmärgi saavutamine | 72 | 65 | % | higher-better |
+| Ava üksused | 18 | 12 |  | lower-better |
+| Riski tase | 3.5 | 4.2 | /10 | lower-better |
+| Juhtimisaeg | 21 | 21 | päevadel | lower-better |
 
 ---
 

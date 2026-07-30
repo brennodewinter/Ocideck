@@ -27,10 +27,10 @@ language: de
 
 | Etikett | Wert | Zurück | Einheit | Polarität |
 | --- | --- | --- | --- | --- |
-| Zielerreichung | 72 | 65 | % | höher-besser |
-| Offene Artikel | 18 | 12 |  | niedriger-besser |
-| Risikostufe | 3.5 | 4.2 | /10 | niedriger-besser |
-| Vorlaufzeit | 21 | 21 | Tage | niedriger-besser |
+| Zielerreichung | 72 | 65 | % | higher-better |
+| Offene Artikel | 18 | 12 |  | lower-better |
+| Risikostufe | 3.5 | 4.2 | /10 | lower-better |
+| Vorlaufzeit | 21 | 21 | Tage | lower-better |
 
 ---
 

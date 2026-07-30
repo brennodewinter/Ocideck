@@ -29,9 +29,12 @@ const werkdeckIds = [
   'retrospective',
 ];
 
-/// De inhoudstalen van de sjabloondocumenten. Interfaceteksten gaan via
-/// l10n in alle talen; de inhoud is een bestand per taal (#622).
-const contentLanguages = ['nl', 'en', 'es'];
+/// De inhoudstalen van de sjabloondocumenten. Klingon valt voorlopig terug op
+/// Engels totdat de inhoud betrouwbaar door een mens is vertaald.
+final contentLanguages = AppLocalizations.supportedLocales
+    .map((locale) => locale.languageCode)
+    .where((languageCode) => languageCode != 'tlh')
+    .toList(growable: false);
 
 final _deckCache = <String, Deck>{};
 

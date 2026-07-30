@@ -115,19 +115,19 @@ language: sv
 
 **Scope object:** `<scope-object>`
 
-## Beskrivning
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Bekräftelse (reproduktion)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Möjlig påverkan
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Rekommendation
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

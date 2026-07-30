@@ -27,10 +27,10 @@ language: pap
 
 | Label | Balor | Anterior | Unidat | Polaridat |
 | --- | --- | --- | --- | --- |
-| Logro di meta | 72 | 65 | % | mas haltu-mihó |
-| Artíkulonan habrí | 18 | 12 |  | mas abou-miho |
-| Nivel di riesgo | 3.5 | 4.2 | /10 | mas abou-miho |
-| Tempu di entrega | 21 | 21 | dianan | mas abou-miho |
+| Logro di meta | 72 | 65 | % | higher-better |
+| Artíkulonan habrí | 18 | 12 |  | lower-better |
+| Nivel di riesgo | 3.5 | 4.2 | /10 | lower-better |
+| Tempu di entrega | 21 | 21 | dianan | lower-better |
 
 ---
 

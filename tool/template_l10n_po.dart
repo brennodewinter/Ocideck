@@ -51,6 +51,18 @@ const supportedLangs = [
   'tr',
 ];
 
+// Machine-readable Markdown anchors and enum tokens are part of the document
+// format, not prose. Translating them makes findings and scorecards unreadable
+// by OciDeck even though the Markdown still parses.
+const stableContent = {
+  'Description',
+  'Confirmation (reproduction)',
+  'Possible impact',
+  'Recommendation',
+  'higher-better',
+  'lower-better',
+};
+
 Never fail(String message) {
   stderr.writeln('template_l10n_po: $message');
   exit(1);
@@ -106,6 +118,9 @@ class Template {
   Template(this.frontMatter, this.segments);
 
   String toMarkdown(String language, Map<String, String> translations) {
+    String translated(String key, String source) =>
+        stableContent.contains(source) ? source : translations[key] ?? source;
+
     final buf = StringBuffer();
     buf.writeln('---');
     for (final e in frontMatter.entries) {
@@ -124,18 +139,18 @@ class Template {
     for (final s in segments) {
       switch (s.type) {
         case 'h1':
-          final t = translations[s.key!] ?? s.text!;
+          final t = translated(s.key!, s.text!);
           buf.writeln('# $t');
         case 'h2':
-          final t = translations[s.key!] ?? s.text!;
+          final t = translated(s.key!, s.text!);
           buf.writeln('## $t');
         case 'bullet':
-          final t = translations[s.key!] ?? s.text!;
+          final t = translated(s.key!, s.text!);
           buf.writeln('${s.bulletMarker}$t');
         case 'tableRow':
           final cells = <String>[];
           for (var i = 0; i < s.cells!.length; i++) {
-            cells.add(translations[s.cellKeys![i]] ?? s.cells![i]);
+            cells.add(translated(s.cellKeys![i], s.cells![i]));
           }
           buf.writeln('| ${cells.join(' | ')} |');
         case 'tableDelimiter':

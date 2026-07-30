@@ -115,7 +115,7 @@ language: fr
 
 **Scope object:** `<scope-object>`
 
-## Descriptif
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
@@ -123,11 +123,11 @@ Describe here, factually and technically, what the security issue is.
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Impact possible
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Recommandation
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

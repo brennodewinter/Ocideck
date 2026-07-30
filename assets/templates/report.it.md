@@ -27,10 +27,10 @@ language: it
 
 | Etichetta | Valore | Precedente | Unità | Polarità |
 | --- | --- | --- | --- | --- |
-| Raggiungimento dell'obiettivo | 72 | 65 | % | più alto-meglio |
-| Elementi aperti | 18 | 12 |  | inferiore-migliore |
-| Livello di rischio | 3.5 | 4.2 | /10 | inferiore-migliore |
-| Tempo di consegna | 21 | 21 | giorni | inferiore-migliore |
+| Raggiungimento dell'obiettivo | 72 | 65 | % | higher-better |
+| Elementi aperti | 18 | 12 |  | lower-better |
+| Livello di rischio | 3.5 | 4.2 | /10 | lower-better |
+| Tempo di consegna | 21 | 21 | giorni | lower-better |
 
 ---
 

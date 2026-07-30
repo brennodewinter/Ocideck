@@ -115,19 +115,19 @@ language: la
 
 **Scope object:** `<scope-object>`
 
-## Descriptio
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Confirmatio (reproductio)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Potest impulsum
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Commendatio
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

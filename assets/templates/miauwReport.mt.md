@@ -115,19 +115,19 @@ language: mt
 
 **Scope object:** `<scope-object>`
 
-## Deskrizzjoni
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Konferma (riproduzzjoni)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Impatt possibbli
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Rakkomandazzjoni
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

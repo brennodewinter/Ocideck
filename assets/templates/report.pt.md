@@ -27,10 +27,10 @@ language: pt
 
 | Rótulo | Valor | Anterior | Unidade | Polaridade |
 | --- | --- | --- | --- | --- |
-| Alcance da meta | 72 | 65 | % | superior-melhor |
-| Itens abertos | 18 | 12 |  | inferior-melhor |
-| Nível de risco | 3.5 | 4.2 | /10 | inferior-melhor |
-| Tempo de espera | 21 | 21 | dias | inferior-melhor |
+| Alcance da meta | 72 | 65 | % | higher-better |
+| Itens abertos | 18 | 12 |  | lower-better |
+| Nível de risco | 3.5 | 4.2 | /10 | lower-better |
+| Tempo de espera | 21 | 21 | dias | lower-better |
 
 ---
 

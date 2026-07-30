@@ -115,19 +115,19 @@ language: cs
 
 **Scope object:** `<scope-object>`
 
-## Popis
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Potvrzení (reprodukce)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Možný dopad
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Doporučení
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

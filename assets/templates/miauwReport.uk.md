@@ -115,19 +115,19 @@ language: uk
 
 **Scope object:** `<scope-object>`
 
-## опис
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Підтвердження (відтворення)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Можливий вплив
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Рекомендація
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

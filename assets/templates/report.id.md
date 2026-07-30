@@ -27,10 +27,10 @@ language: id
 
 | Label | Nilai | Sebelumnya | Satuan | Polaritas |
 | --- | --- | --- | --- | --- |
-| Pencapaian tujuan | 72 | 65 | % | lebih tinggi-lebih baik |
-| Buka item | 18 | 12 |  | lebih rendah-lebih baik |
-| Tingkat risiko | 3.5 | 4.2 | /10 | lebih rendah-lebih baik |
-| Waktu memimpin | 21 | 21 | hari | lebih rendah-lebih baik |
+| Pencapaian tujuan | 72 | 65 | % | higher-better |
+| Buka item | 18 | 12 |  | lower-better |
+| Tingkat risiko | 3.5 | 4.2 | /10 | lower-better |
+| Waktu memimpin | 21 | 21 | hari | lower-better |
 
 ---
 

@@ -27,10 +27,10 @@ language: hr
 
 | Oznaka | Vrijednost | Prethodno | Jedinica | Polaritet |
 | --- | --- | --- | --- | --- |
-| Postizanje cilja | 72 | 65 | % | viši-bolji |
-| Otvorene stavke | 18 | 12 |  | niže-bolje |
-| Razina rizika | 3.5 | 4.2 | /10 | niže-bolje |
-| Vrijeme isporuke | 21 | 21 | dana | niže-bolje |
+| Postizanje cilja | 72 | 65 | % | higher-better |
+| Otvorene stavke | 18 | 12 |  | lower-better |
+| Razina rizika | 3.5 | 4.2 | /10 | lower-better |
+| Vrijeme isporuke | 21 | 21 | dana | lower-better |
 
 ---
 

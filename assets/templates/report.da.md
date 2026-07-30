@@ -27,10 +27,10 @@ language: da
 
 | Etiket | Værdi | Forrige | Enhed | Polaritet |
 | --- | --- | --- | --- | --- |
-| Målopfyldelse | 72 | 65 | % | højere-bedre |
-| Åbn elementer | 18 | 12 |  | lavere-bedre |
-| Risikoniveau | 3.5 | 4.2 | /10 | lavere-bedre |
-| Leveringstid | 21 | 21 | dage | lavere-bedre |
+| Målopfyldelse | 72 | 65 | % | higher-better |
+| Åbn elementer | 18 | 12 |  | lower-better |
+| Risikoniveau | 3.5 | 4.2 | /10 | lower-better |
+| Leveringstid | 21 | 21 | dage | lower-better |
 
 ---
 

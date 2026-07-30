@@ -200,12 +200,12 @@ language: sk
 
 ---
 
-# 
+# Inštruktáž cestujúcich
 <!-- ocideck_list_style: checklist -->
 
 - [ ] Bezpečnostné pásy a dvere
 - [ ] Headset a komunikácia
-- [ ] 
+- [ ] Sterilný kokpit
 - [ ] Nedotýkajte sa ovládacích prvkov
 - [ ] Okamžite oznámte nevoľnosť alebo nepohodlie
 - [ ] Núdzový východ a evakuácia
@@ -216,19 +216,19 @@ language: sk
 # Brífing o odchode
 <!-- ocideck_list_style: checklist -->
 
-- [ ] 
-- [ ] 
+- [ ] Dráha a vietor skontrolované
+- [ ] Bod prerušenia vzletu určený
 - [ ] Diskutovaná porucha motora pred vzletom
 - [ ] Diskutovaná porucha motora po vzlete
 - [ ] Počiatočný kurz a nadmorská výška sú známe
 - [ ] Kontrola tlmenia hluku
-- [ ] 
+- [ ] Počiatočná frekvencia nastavená
 
 ---
 
 <!-- _class: table table-editable -->
 
-# 
+# Inštruktáž pred príletom
 
 | Komponent | Hodnota | Poznámka |
 | --- | --- | --- |

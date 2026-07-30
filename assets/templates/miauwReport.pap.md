@@ -115,19 +115,19 @@ language: pap
 
 **Scope object:** `<scope-object>`
 
-## Deskripshon
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Konfirmashon (reprodukshon)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Posibel impakto
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Rekomendashon
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

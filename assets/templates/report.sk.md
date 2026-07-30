@@ -27,10 +27,10 @@ language: sk
 
 | Označenie | Hodnota | Predchádzajúce | Jednotka | Polarita |
 | --- | --- | --- | --- | --- |
-| Dosiahnutie cieľa | 72 | 65 | % | vyššie - lepšie |
-| Otvoriť položky | 18 | 12 |  | nižšie-lepšie |
-| Úroveň rizika | 3.5 | 4.2 | /10 | nižšie-lepšie |
-| Dodacia lehota | 21 | 21 | dní | nižšie-lepšie |
+| Dosiahnutie cieľa | 72 | 65 | % | higher-better |
+| Otvoriť položky | 18 | 12 |  | lower-better |
+| Úroveň rizika | 3.5 | 4.2 | /10 | lower-better |
+| Dodacia lehota | 21 | 21 | dní | lower-better |
 
 ---
 

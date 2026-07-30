@@ -27,10 +27,10 @@ language: tr
 
 | Etiket | Değer | Öncesi | Birim | Polarite |
 | --- | --- | --- | --- | --- |
-| Hedef başarısı | 72 | 65 | % | daha iyi |
-| Öğeleri aç | 18 | 12 |  | daha düşük-daha iyi |
-| Risk düzeyi | 3.5 | 4.2 | /10 | daha düşük-daha iyi |
-| Kurşun zamanı | 21 | 21 | günler | daha düşük-daha iyi |
+| Hedef başarısı | 72 | 65 | % | higher-better |
+| Öğeleri aç | 18 | 12 |  | lower-better |
+| Risk düzeyi | 3.5 | 4.2 | /10 | lower-better |
+| Kurşun zamanı | 21 | 21 | günler | lower-better |
 
 ---
 

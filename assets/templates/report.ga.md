@@ -27,10 +27,10 @@ language: ga
 
 | Lipéad | Luach | Roimhe Seo | Aonad | Polainnis |
 | --- | --- | --- | --- | --- |
-| Sprioc a bhaint amach | 72 | 65 | % | níos airde-níos fearr |
-| Míreanna oscailte | 18 | 12 |  | níos ísle-níos fearr |
-| Leibhéal riosca | 3.5 | 4.2 | /10 | níos ísle-níos fearr |
-| Am luaidhe | 21 | 21 | laethanta | níos ísle-níos fearr |
+| Sprioc a bhaint amach | 72 | 65 | % | higher-better |
+| Míreanna oscailte | 18 | 12 |  | lower-better |
+| Leibhéal riosca | 3.5 | 4.2 | /10 | lower-better |
+| Am luaidhe | 21 | 21 | laethanta | lower-better |
 
 ---
 

@@ -27,10 +27,10 @@ language: fy
 
 | Label | Wearde | Foarige | Unit | Polariteit |
 | --- | --- | --- | --- | --- |
-| Doelferwêzentliking | 72 | 65 | % | heger-better |
-| Iepenje items | 18 | 12 |  | leger-better |
-| Risikonivo | 3.5 | 4.2 | /10 | leger-better |
-| Lead tiid | 21 | 21 | dagen | leger-better |
+| Doelferwêzentliking | 72 | 65 | % | higher-better |
+| Iepenje items | 18 | 12 |  | lower-better |
+| Risikonivo | 3.5 | 4.2 | /10 | lower-better |
+| Lead tiid | 21 | 21 | dagen | lower-better |
 
 ---
 

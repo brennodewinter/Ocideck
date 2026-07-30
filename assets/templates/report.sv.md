@@ -27,10 +27,10 @@ language: sv
 
 | Märka | Värde | Tidigare | Enhet | Polaritet |
 | --- | --- | --- | --- | --- |
-| Måluppfyllelse | 72 | 65 | % | högre-bättre |
-| Öppna objekt | 18 | 12 |  | lägre-bättre |
-| Risknivå | 3.5 | 4.2 | /10 | lägre-bättre |
-| Ledtid | 21 | 21 | dagar | lägre-bättre |
+| Måluppfyllelse | 72 | 65 | % | higher-better |
+| Öppna objekt | 18 | 12 |  | lower-better |
+| Risknivå | 3.5 | 4.2 | /10 | lower-better |
+| Ledtid | 21 | 21 | dagar | lower-better |
 
 ---
 

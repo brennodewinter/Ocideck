@@ -115,19 +115,19 @@ language: fi
 
 **Scope object:** `<scope-object>`
 
-## Kuvaus
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Vahvistus (jäljennös)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Mahdollinen vaikutus
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Suositus
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

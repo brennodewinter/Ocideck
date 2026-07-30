@@ -27,10 +27,10 @@ language: fi
 
 | Label | Arvo | Edellinen | Yksikkö | Napaisuus |
 | --- | --- | --- | --- | --- |
-| Tavoitteen saavuttaminen | 72 | 65 | % | korkeampi-parempi |
-| Avaa kohteet | 18 | 12 |  | alempi-parempi |
-| Riskitaso | 3.5 | 4.2 | /10 | alempi-parempi |
-| läpimenoaika | 21 | 21 | päivää | alempi-parempi |
+| Tavoitteen saavuttaminen | 72 | 65 | % | higher-better |
+| Avaa kohteet | 18 | 12 |  | lower-better |
+| Riskitaso | 3.5 | 4.2 | /10 | lower-better |
+| läpimenoaika | 21 | 21 | päivää | lower-better |
 
 ---
 

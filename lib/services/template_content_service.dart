@@ -22,10 +22,13 @@ class TemplateContentService {
 
   /// Languages for which the "content is in English" notice should not be shown.
   ///
-  /// This is the set of locales the UI supports. Missing template content falls
-  /// back to English through [loadSlides].
+  /// Klingon remains on the English fallback until its template corpus has had
+  /// a reliable human translation. Missing template content falls back to
+  /// English through [loadSlides].
   static final Set<String> languagesWithContent = Set.of(
-    AppLocalizations.supportedLocales.map((l) => l.languageCode),
+    AppLocalizations.supportedLocales
+        .map((l) => l.languageCode)
+        .where((languageCode) => languageCode != 'tlh'),
   );
 
   /// Returns the fresh slides for a new deck from template [templateId], with

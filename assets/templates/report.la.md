@@ -27,10 +27,10 @@ language: la
 
 | Label | Precium | Antecedens | Unitas | Verticitas |
 | --- | --- | --- | --- | --- |
-| Finis factum | 72 | 65 | % | altior-melius |
-| Open items | 18 | 12 |  | inferiores, melius |
-| Periculum campester | 3.5 | 4.2 | /10 | inferiores, melius |
-| Duc tempus | 21 | 21 | diebus | inferiores, melius |
+| Finis factum | 72 | 65 | % | higher-better |
+| Open items | 18 | 12 |  | lower-better |
+| Periculum campester | 3.5 | 4.2 | /10 | lower-better |
+| Duc tempus | 21 | 21 | diebus | lower-better |
 
 ---
 

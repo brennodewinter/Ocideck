@@ -27,10 +27,10 @@ language: sl
 
 | Oznaka | Vrednost | Prejšnja | Enota | Polarnost |
 | --- | --- | --- | --- | --- |
-| Doseganje cilja | 72 | 65 | % | višje-boljše |
-| Odprti predmeti | 18 | 12 |  | nižje-boljše |
-| Stopnja tveganja | 3.5 | 4.2 | /10 | nižje-boljše |
-| Čas izvedbe | 21 | 21 | dni | nižje-boljše |
+| Doseganje cilja | 72 | 65 | % | higher-better |
+| Odprti predmeti | 18 | 12 |  | lower-better |
+| Stopnja tveganja | 3.5 | 4.2 | /10 | lower-better |
+| Čas izvedbe | 21 | 21 | dni | lower-better |
 
 ---
 

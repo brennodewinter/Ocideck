@@ -115,19 +115,19 @@ language: it
 
 **Scope object:** `<scope-object>`
 
-## Descrizione
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Conferma (riproduzione)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Possibile impatto
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Raccomandazione
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

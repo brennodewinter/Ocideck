@@ -9,7 +9,7 @@ language: sl
 
 <!-- _class: title -->
 
-# 
+# Stopnjevanje GRIP
 ## Incident · Datum in čas · Vodja · Trenutna stopnja GRIP
 
 ---
@@ -25,7 +25,7 @@ language: sl
 
 <!-- _class: table -->
 
-# 
+# Stopnje GRIP
 
 | Raven |  | Usklajevanje |
 | --- | --- | --- |

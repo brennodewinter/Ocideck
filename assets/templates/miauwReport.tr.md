@@ -115,19 +115,19 @@ language: tr
 
 **Scope object:** `<scope-object>`
 
-## Tanım
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Onay (çoğaltma)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Olası etki
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Tavsiye
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

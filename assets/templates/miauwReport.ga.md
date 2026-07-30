@@ -115,19 +115,19 @@ language: ga
 
 **Scope object:** `<scope-object>`
 
-## Cur síos
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Deimhniú (atáirgeadh)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Tionchar féideartha
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Moladh
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 

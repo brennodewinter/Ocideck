@@ -27,10 +27,10 @@ language: ro
 
 | Eticheta | Valoare | Anterior | Unitate | Polaritate |
 | --- | --- | --- | --- | --- |
-| Realizarea obiectivului | 72 | 65 | % | mai sus-mai bine |
-| Articole deschise | 18 | 12 |  | mai jos-mai bine |
-| Nivel de risc | 3.5 | 4.2 | /10 | mai jos-mai bine |
-| Perioada de graţie | 21 | 21 | zile | mai jos-mai bine |
+| Realizarea obiectivului | 72 | 65 | % | higher-better |
+| Articole deschise | 18 | 12 |  | lower-better |
+| Nivel de risc | 3.5 | 4.2 | /10 | lower-better |
+| Perioada de graţie | 21 | 21 | zile | lower-better |
 
 ---
 

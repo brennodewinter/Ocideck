@@ -260,21 +260,18 @@ void main() {
   group('taal van de sjablooninhoud', () {
     // Titel en omschrijving lopen door l10n.d(), de dia-inhoud niet: die is
     // een document per taal. Elke door de UI ondersteunde taal wordt geprobeerd;
-    // ontbrekende content valt terug naar het Engels. De melding zwijgt voor
-    // alle ondersteunde talen.
+    // ontbrekende content valt terug naar het Engels.
     tearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
 
     // Op de sleutel en niet op de tekst: de melding bestaat in 30 talen, en de
     // vertaling opzoeken zou de test laten meebewegen met wat hij bewaakt.
     final notice = find.byKey(const ValueKey('templateLanguageNotice'));
 
-    testWidgets('zwijgt in een ondersteunde taal zonder eigen sjabloon', (
-      tester,
-    ) async {
-      AppLocalizations.setActiveLanguageCode('tr');
+    testWidgets('meldt de Engelse fallback voor Klingon', (tester) async {
+      AppLocalizations.setActiveLanguageCode('tlh');
       final harness = _Harness();
       await harness.open(tester);
-      expect(notice, findsNothing);
+      expect(notice, findsOneWidget);
     });
 
     testWidgets('zwijgt in het Nederlands', (tester) async {

@@ -27,10 +27,10 @@ language: fr
 
 | Étiquette | Valeur | Précédent | Unité | Polarité |
 | --- | --- | --- | --- | --- |
-| Atteinte des objectifs | 72 | 65 | % | plus haut-meilleur |
-| Éléments ouverts | 18 | 12 |  | inférieur-meilleur |
-| Niveau de risque | 3.5 | 4.2 | /10 | inférieur-meilleur |
-| Délai | 21 | 21 | jours | inférieur-meilleur |
+| Atteinte des objectifs | 72 | 65 | % | higher-better |
+| Éléments ouverts | 18 | 12 |  | lower-better |
+| Niveau de risque | 3.5 | 4.2 | /10 | lower-better |
+| Délai | 21 | 21 | jours | lower-better |
 
 ---
 

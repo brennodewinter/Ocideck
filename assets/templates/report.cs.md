@@ -27,10 +27,10 @@ language: cs
 
 | Štítek | Hodnota | Předchozí | Jednotka | Polarita |
 | --- | --- | --- | --- | --- |
-| Dosažení cíle | 72 | 65 | % | vyšší-lepší |
-| Otevřete položky | 18 | 12 |  | nižší-lepší |
-| Úroveň rizika | 3.5 | 4.2 | /10 | nižší-lepší |
-| Dodací lhůta | 21 | 21 | dní | nižší-lepší |
+| Dosažení cíle | 72 | 65 | % | higher-better |
+| Otevřete položky | 18 | 12 |  | lower-better |
+| Úroveň rizika | 3.5 | 4.2 | /10 | lower-better |
+| Dodací lhůta | 21 | 21 | dní | lower-better |
 
 ---
 

@@ -27,10 +27,10 @@ language: lt
 
 | Etiketė | Vertė | Ankstesnis | Vienetas | Poliškumas |
 | --- | --- | --- | --- | --- |
-| Tikslo pasiekimas | 72 | 65 | % | aukštesnis-geresnis |
-| Atidaryti elementus | 18 | 12 |  | žemesnis-geresnis |
-| Rizikos lygis | 3.5 | 4.2 | /10 | žemesnis-geresnis |
-| Pristatymo laikas | 21 | 21 | dienų | žemesnis-geresnis |
+| Tikslo pasiekimas | 72 | 65 | % | higher-better |
+| Atidaryti elementus | 18 | 12 |  | lower-better |
+| Rizikos lygis | 3.5 | 4.2 | /10 | lower-better |
+| Pristatymo laikas | 21 | 21 | dienų | lower-better |
 
 ---
 

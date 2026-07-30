@@ -115,19 +115,19 @@ language: hr
 
 **Scope object:** `<scope-object>`
 
-## Opis
+## Description
 
 Describe here, factually and technically, what the security issue is.
 
-## Potvrda (reprodukcija)
+## Confirmation (reproduction)
 
 Describe, in a reproducible way (with evidence), how the finding was established.
 
-## Mogući utjecaj
+## Possible impact
 
 Describe the possible technical and business impact.
 
-## Preporuka
+## Recommendation
 
 Describe the concrete, achievable mitigation.
 
