@@ -496,6 +496,15 @@ exists.
   type or unknown enum name throws rather than yielding a lossy op. The per-field
   value kinds are guarded by a test over `SlideField.values`/`DeckMetaField.values`;
   the full-`Slide` mapping (for `InsertSlide`) by an exhaustive round-trip.
+- `collab_deck_diff.dart` — the editor→op seam (§5.1). The editor replaces the
+  whole `Deck` on every edit, but the layer syncs field-level ops (P5), so
+  `deckDiffToOps(before, after)` returns the ops that reproduce `after` exactly:
+  field edits (keyed by slide id), then removes, inserts (carrying the whole new
+  slide) and reorders. Exact for the syncable `SlideField`/`DeckMetaField`
+  surface, leaving everything outside it alone as the op model does. Also the
+  read counterparts `slideFieldValue`/`deckMetaValue` of `applyOp`'s setters. The
+  v1 seam; the design's eventual model is the editor emitting ops under a lock
+  (§5.4).
 - `collab_session_launch.dart` — the session lifecycle seam (§6.5):
   `hostCollabSession` posts the baseline, becomes the authority and starts
   polling; `joinCollabSession` reads the baseline, rebases the local deck onto
