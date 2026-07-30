@@ -61,6 +61,14 @@ class TabInfo {
     if (value != null || origin is S3Origin) origin = value;
   }
 
+  /// De actieve samenwerksessie van dit tabblad, of `null` wanneer het niet
+  /// samenwerkt — wat elk tabblad vandaag is (COLLABORATION.md §5.7: "Store the
+  /// active SessionRef on TabInfo"). De transportloze samenwerklaag onder
+  /// `lib/collab/` staat op zichzelf; dit veld is de naad waar een genetwerkte
+  /// fase (Matrix, §6) de live sessie aan een tabblad hangt. Muteerbaar zoals
+  /// [origin]: na het starten ingevuld, bij het einde weer op `null`.
+  CollabSession? collabSession;
+
   TabInfo({
     required this.id,
     required this.recoveryId,

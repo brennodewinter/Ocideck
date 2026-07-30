@@ -41,10 +41,18 @@ sealed class DeckOp {
   const DeckOp({required this.version, required this.authorId});
 
   /// Monotonic per session, assigned by the authority (COLLABORATION.md §5.3).
+  /// An op submitted by a non-authority carries [version] `0` (unassigned); the
+  /// authority stamps the canonical version with [copyWithVersion] on commit.
   final int version;
 
   /// The op's originator.
   final String authorId;
+
+  /// The same op with [version] replaced. Used by the session authority to
+  /// stamp a monotonic version onto an intent before it broadcasts the
+  /// authoritative op (COLLABORATION.md §5.3). Ops are immutable, so this
+  /// returns a new instance.
+  DeckOp copyWithVersion(int version);
 }
 
 /// Insert [slide] at [index] in the deck's slide list.
@@ -58,6 +66,14 @@ class InsertSlide extends DeckOp {
 
   final int index;
   final Slide slide;
+
+  @override
+  InsertSlide copyWithVersion(int version) => InsertSlide(
+    version: version,
+    authorId: authorId,
+    index: index,
+    slide: slide,
+  );
 }
 
 /// Remove the slide whose [Slide.id] is [slideId].
@@ -69,6 +85,10 @@ class RemoveSlide extends DeckOp {
   });
 
   final String slideId;
+
+  @override
+  RemoveSlide copyWithVersion(int version) =>
+      RemoveSlide(version: version, authorId: authorId, slideId: slideId);
 }
 
 /// Move the slide [slideId] to [newIndex] (its position after removal-and-
@@ -83,6 +103,14 @@ class ReorderSlide extends DeckOp {
 
   final String slideId;
   final int newIndex;
+
+  @override
+  ReorderSlide copyWithVersion(int version) => ReorderSlide(
+    version: version,
+    authorId: authorId,
+    slideId: slideId,
+    newIndex: newIndex,
+  );
 }
 
 /// Set a single typed field of the slide [slideId] to [value].
@@ -101,6 +129,15 @@ class SetSlideField extends DeckOp {
   final String slideId;
   final SlideField field;
   final Object? value;
+
+  @override
+  SetSlideField copyWithVersion(int version) => SetSlideField(
+    version: version,
+    authorId: authorId,
+    slideId: slideId,
+    field: field,
+    value: value,
+  );
 }
 
 /// Set a single typed deck-level metadata field to [value].
@@ -114,6 +151,14 @@ class SetDeckMeta extends DeckOp {
 
   final DeckMetaField field;
   final Object? value;
+
+  @override
+  SetDeckMeta copyWithVersion(int version) => SetDeckMeta(
+    version: version,
+    authorId: authorId,
+    field: field,
+    value: value,
+  );
 }
 
 /// The slide fields a [SetSlideField] op can carry. The expected value type is
