@@ -204,5 +204,64 @@ void main() {
       );
       expect(utf8.decode(put.body), '{"version":1}');
     });
+
+    test('readBeacon returns null before one is posted (404)', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 404;
+      });
+      addTearDown(fake.stop);
+
+      expect(await _storeFor(fake.port).readBeacon(), isNull);
+      expect(fake.requests.last.path, '$_davRoot/ops/beacon.json');
+    });
+
+    test('readBeacon downloads the beacon when present', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 200;
+        req.response.headers.set(HttpHeaders.etagHeader, '"v1"');
+        req.response.write(
+          '{"authority":"a","authorityIsOwner":true,"tick":4}',
+        );
+      });
+      addTearDown(fake.stop);
+
+      expect(
+        await _storeFor(fake.port).readBeacon(),
+        '{"authority":"a","authorityIsOwner":true,"tick":4}',
+      );
+    });
+
+    test('writeBeacon puts the beacon unconditionally', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 201;
+      });
+      addTearDown(fake.stop);
+
+      await _storeFor(fake.port).writeBeacon('{"tick":2}');
+      final put = fake.requests.firstWhere((r) => r.method == 'PUT');
+      expect(put.path, '$_davRoot/ops/beacon.json');
+      expect(
+        put.ifNoneMatch,
+        isNull,
+        reason: 'the beacon is last-write-wins advisory state; no guard',
+      );
+      expect(utf8.decode(put.body), '{"tick":2}');
+    });
+
+    test('listSequences ignores the beacon sibling', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 207;
+        req.response.write(
+          _multistatus(
+            _dirResp('$_davRoot/ops/') +
+                _fileResp('$_davRoot/ops/000000000001.json', 30) +
+                _fileResp('$_davRoot/ops/beacon.json', 50),
+          ),
+        );
+      });
+      addTearDown(fake.stop);
+
+      expect(await _storeFor(fake.port).listSequences(), [1]);
+    });
   });
 }

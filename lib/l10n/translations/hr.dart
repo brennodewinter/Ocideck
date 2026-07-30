@@ -1777,6 +1777,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Samo vlasnik sprema deck u zajedničkoj sesiji; tvoje izmjene ostaju u sesiji dok ih vlasnik ne spremi.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Vlasnik je otišao — sada ti održavaš suradnju; tvoje izmjene spremaju se tek kad se vlasnik vrati.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Vlasnik se vratio i ponovno preuzima suradnju.',
   'Samenwerking starten': 'Pokreni suradnju',
   'Deelnemen aan samenwerking': 'Pridruži se suradnji',
   'Samenwerking verlaten': 'Napusti suradnju',

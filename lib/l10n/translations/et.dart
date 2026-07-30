@@ -1762,6 +1762,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Ainult omanik salvestab decki jagatud seansis; sinu muudatused püsivad seansis, kuni omanik salvestab.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Omanik on lahkunud — nüüd hoiad koostööd sina; sinu muudatused salvestatakse alles siis, kui omanik naaseb.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Omanik on tagasi ja võtab koostöö taas üle.',
   'Samenwerking starten': 'Alusta koostööd',
   'Deelnemen aan samenwerking': 'Liitu koostööga',
   'Samenwerking verlaten': 'Lahku koostööst',

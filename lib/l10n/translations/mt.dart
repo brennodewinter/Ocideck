@@ -1793,6 +1793,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Is-sid biss jaħżen id-deck f\'sessjoni kondiviża; it-tibdil tiegħek jibqa\' fis-sessjoni sakemm is-sid jaħżen.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Is-sid telaq — issa int qed iżżomm il-kollaborazzjoni għaddejja; it-tibdil tiegħek jinħażen biss meta s-sid jerġa\' lura.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Is-sid reġa\' lura u qed jieħu f\'idejh il-kollaborazzjoni mill-ġdid.',
   'Samenwerking starten': 'Ibda kollaborazzjoni',
   'Deelnemen aan samenwerking': 'Ingħaqad mal-kollaborazzjoni',
   'Samenwerking verlaten': 'Itlaq mill-kollaborazzjoni',

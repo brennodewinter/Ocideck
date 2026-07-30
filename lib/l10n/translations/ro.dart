@@ -1788,6 +1788,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Doar proprietarul salvează deck-ul într-o sesiune partajată; modificările tale rămân în sesiune până când proprietarul salvează.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Proprietarul a plecat — acum tu menții colaborarea; modificările tale se salvează abia când proprietarul se întoarce.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Proprietarul s-a întors și preia din nou colaborarea.',
   'Samenwerking starten': 'Începe colaborarea',
   'Deelnemen aan samenwerking': 'Alătură-te colaborării',
   'Samenwerking verlaten': 'Părăsește colaborarea',

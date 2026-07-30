@@ -1788,6 +1788,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Лише власник зберігає колоду у спільному сеансі; ваші зміни залишаються в сеансі, доки власник не збереже.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Власник пішов — тепер саме ви підтримуєте співпрацю; ваші зміни буде збережено лише тоді, коли власник повернеться.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Власник повернувся й знову перебирає співпрацю на себе.',
   'Samenwerking starten': 'Почати співпрацю',
   'Deelnemen aan samenwerking': 'Приєднатися до співпраці',
   'Samenwerking verlaten': 'Залишити співпрацю',

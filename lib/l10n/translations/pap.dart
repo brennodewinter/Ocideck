@@ -730,6 +730,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Solamente e doño ta warda e deck den un seshon kompartí; bo kambionan ta keda den e seshon te ora e doño warda.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'E doño a bai — awor ta abo ta mantené e kolaborashon; bo kambionan ta wòrdu wardá solamente ora e doño bolbe.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'E doño a bolbe i ta tuma over di e kolaborashon atrobe.',
   'Samenwerking starten': 'Kuminsá kolaborashon',
   'Deelnemen aan samenwerking': 'Partisipá na kolaborashon',
   'Samenwerking verlaten': 'Bandoná kolaborashon',

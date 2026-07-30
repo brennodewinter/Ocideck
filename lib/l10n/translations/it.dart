@@ -726,6 +726,12 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Solo il proprietario salva il deck in una sessione condivisa; le tue modifiche restano nella sessione finché il proprietario non salva.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Il proprietario se n\'è andato — ora sei tu a mandare avanti la collaborazione; le tue modifiche vengono salvate solo quando il proprietario torna.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Il proprietario è tornato e riprende la collaborazione.',
   'Samenwerking starten': 'Avvia collaborazione',
   'Deelnemen aan samenwerking': 'Partecipa alla collaborazione',
   'Samenwerking verlaten': 'Abbandona la collaborazione',

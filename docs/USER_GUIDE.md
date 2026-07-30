@@ -11,6 +11,7 @@
 - [S3 bucket](#s3-bucket)
 - [Git repository](#git-repository)
 - [WebDAV](#webdav)
+- [Working on a deck together](#working-on-a-deck-together)
 - [Slide types](#slide-types)
 - [Organising the slide list](#organising-the-slide-list)
 - [Images and media travel with the presentation](#images-and-media-travel-with-the-presentation)
@@ -536,6 +537,47 @@ Nextcloud is the most common one, but any WebDAV server works.
   get a choice — *Save as* (keep both versions) or *Overwrite* (discard theirs).
   Nothing is overwritten silently. Servers that don't report a version (an
   `ETag`) can't be checked; there you keep the old behaviour of a plain write.
+
+## Working on a deck together
+
+Two or more people can edit the same deck at once, as long as it lives on a
+**WebDAV** source (Nextcloud, or any other WebDAV server). The command palette
+(`Ctrl/Cmd + K`) then offers **“Samenwerking starten”** (start a session others
+can join) and **“Deelnemen aan samenwerking”** (join one already started for this
+deck); picking *join* when no one has started a session yet simply tells you so.
+While a session runs, the palette instead offers only **“Samenwerking verlaten”**
+to leave. These entries appear only for a deck opened from WebDAV; a deck on your
+own disk, an S3 bucket or a git repository has no shared place to co-author
+through.
+
+The edits travel through a small working area beside the deck on the same WebDAV
+server, not through the `.md` itself, so the saved file is left untouched while a
+session runs. Because that working area is exchanged by polling, a co-author's
+change shows up after a short delay rather than the instant they type it. *(Added
+2026-07-31: this asynchronous, WebDAV-based form of co-authoring is what exists
+today.)*
+
+**Only the person who started the session saves the shared file.** Everyone
+else's edits are live in the session, but they reach the shared deck only when
+the starter — the *owner* — saves. If you joined and press save, OciDeck tells
+you so and keeps your work in the session until the owner saves it.
+
+**If the owner drops out** — closes the app, or loses their connection — one of
+the remaining participants steps in and keeps the session going, so the group can
+carry on editing. A short message tells that person they are now holding the
+session and that their changes are not being saved until the owner is back; in
+the meantime nothing is written to the shared file. **When the owner comes back**,
+they take the session over again (a message announces it) and saving is theirs
+once more. A returning owner does not restart the session or lose the work done
+while they were away.
+
+This stand-in is best-effort, not a guarantee. If two people happen to take the
+session over in the same moment, one of them can end up with a view that has
+quietly drifted from everyone else's until they reopen the deck — so if a handover
+felt messy, reload to be sure you are seeing the shared state. And you are never
+stuck: a co-author who wants to keep their own copy can **leave the session** —
+saving is theirs again immediately — or **export a package** (`.ocideck`), which
+carries the full editable deck and its images regardless of who owns the session.
 
 ## Slide types
 

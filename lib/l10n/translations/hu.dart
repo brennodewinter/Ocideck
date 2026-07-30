@@ -1775,6 +1775,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'A megosztott munkamenetben csak a tulajdonos menti a decket; a változtatásaid a munkamenetben maradnak, amíg a tulajdonos nem ment.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'A tulajdonos elment — most te tartod életben az együttműködést; a változtatásaid csak akkor mentődnek, amikor a tulajdonos visszatér.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'A tulajdonos visszatért, és újra átveszi az együttműködést.',
   'Samenwerking starten': 'Együttműködés indítása',
   'Deelnemen aan samenwerking': 'Csatlakozás az együttműködéshez',
   'Samenwerking verlaten': 'Együttműködés elhagyása',

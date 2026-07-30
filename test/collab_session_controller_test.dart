@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/collab/collab_log_store.dart';
-import 'package:ocideck/collab/collab_session.dart';
 import 'package:ocideck/collab/collab_session_controller.dart';
 import 'package:ocideck/collab/collab_session_launch.dart';
+import 'package:ocideck/collab/handover_coordinator.dart';
 import 'package:ocideck/collab/webdav_async_transport.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
@@ -18,14 +18,15 @@ Slide slide(
 /// A tab: a mutable deck plus the controller bridging it to a session. [edit]
 /// mutates the deck and feeds it to the controller, the way a notifier would.
 class _Tab {
-  _Tab(this.deck, CollabSession session) {
+  _Tab(this.deck, CollabLaunch launch) : _coordinator = launch.coordinator {
     ctrl = CollabSessionController(
-      session: session,
+      session: launch.session,
       readDeck: () => deck,
       writeDeck: (d) => deck = d,
     );
   }
   Deck deck;
+  final HandoverCoordinator _coordinator;
   late final CollabSessionController ctrl;
 
   void edit(Deck d) {
@@ -33,7 +34,10 @@ class _Tab {
     ctrl.onLocalEdit(d);
   }
 
-  Future<void> dispose() => ctrl.dispose();
+  Future<void> dispose() async {
+    await _coordinator.dispose();
+    await ctrl.dispose();
+  }
 }
 
 /// Drive the async log forward deterministically instead of waiting on timers.

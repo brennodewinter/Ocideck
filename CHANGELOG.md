@@ -82,8 +82,28 @@ in Dutch, and it keeps growing on `main` between releases.
   tussen de sessie en `deckProvider` — lokale bewerkingen stromen als ops naar
   buiten, wijzigingen op afstand vloeien terug via `DeckNotifier.applyCollabDeck`
   (buiten undo, met revisie-bump zodat editorvelden vernieuwen). Per tab
-  overschreven in `app_shell`, net als `deckProvider`. De start/deelnemen-actie
-  in de interface is de laatste stap.
+  overschreven in `app_shell`, net als `deckProvider`. *(Bijgewerkt 2026-07-31:
+  de acties om een samenwerking te starten, eraan deel te nemen of ze te verlaten
+  staan sinds #1003 in het opdrachtenpalet, en verschijnen alleen op een deck dat
+  op WebDAV staat.)*
+- Eigenaarsoverdracht wanneer de eigenaar wegvalt in de asynchrone samenwerklaag
+  (COLLABORATION.md §5.3, #1004). Valt de eigenaar weg, dan neemt een deelnemer
+  tijdelijk het toekennen van versies over zodat de sessie doorloopt; komt de
+  eigenaar terug, dan neemt die het weer over. Een `HandoverCoordinator` leidt dit
+  af uit een baken (`beacon.json`) in de samenwerk-sidecar: de autoriteit hoogt
+  elke poll een tik op, en een bevroren tik — geteld in polls, zonder wandklok —
+  verraadt dat de autoriteit weg is. De overname is fail-closed: bij twijfel (een
+  ontbrekend of onleesbaar baken, een leesfout) neemt niemand het over, want een
+  sessie die de eigenaar kan herstellen is beter dan twee autoriteiten. Een
+  opvolger hervat de versies vanaf de hoogste die hij kent, zodat een enkele
+  overname de reeks niet doet botsen (het failover-randgeval van twee tegelijke
+  autoriteiten staat in COLLABORATION.md §5.3). Alleen de eigenaar bewaart het
+  gedeelde `.md` — een client-side coördinatiepoort, geen server-afdwinging:
+  probeert een gast op te
+  slaan, dan blijft zijn werk in de sessie tot de eigenaar bewaart, en de
+  interface meldt dat — net als het tijdelijk overnemen en de terugkeer van de
+  eigenaar. Alle overdracht-metadata leeft in de sidecar; het `.md` blijft
+  onaangeroerd (P2).
 
 ### Fixed
 

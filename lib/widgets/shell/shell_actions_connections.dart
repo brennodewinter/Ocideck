@@ -82,6 +82,24 @@ Future<bool> saveDeckWithDestination(
   WidgetRef ref,
   DeckNotifier deckNotifier,
 ) async {
+  // In een gedeelde samenwerksessie bewaart alleen de eigenaar het deck naar de
+  // bron (COLLABORATION.md §5.3). Een gast — ook als die tijdelijk de autoriteit
+  // is — houdt zijn wijzigingen in de sessie; ze worden pas bewaard als de
+  // eigenaar opslaat. Deze poort staat op de enige plek waar élke opslaanroute
+  // langskomt, zodat geen enkele knop of sneltoets eromheen kan.
+  if (!ref.read(collabSessionProvider).canPersist) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.',
+          ),
+        ),
+      ),
+    );
+    return false;
+  }
+
   // Waar het vandaan komt, gaat het naartoe terug. Een deck dat van WebDAV, S3
   // of git is geopend, hoort met de gewone opslaanknop niet ineens als lokaal
   // bestand te landen: dan staat de bewerkte versie op de laptop en blijft de

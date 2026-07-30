@@ -727,6 +727,12 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Solo el propietario guarda el deck en una sesión compartida; tus cambios permanecen en la sesión hasta que el propietario guarda.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'El propietario se ha ido — ahora eres tú quien mantiene la colaboración; tus cambios solo se guardan cuando el propietario vuelve.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'El propietario ha vuelto y retoma la colaboración.',
   'Samenwerking starten': 'Iniciar colaboración',
   'Deelnemen aan samenwerking': 'Unirse a la colaboración',
   'Samenwerking verlaten': 'Salir de la colaboración',

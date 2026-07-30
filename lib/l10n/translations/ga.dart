@@ -1806,6 +1806,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Ní shábhálann ach an t-úinéir an deck i seisiún roinnte; fanann d\'athruithe sa seisiún go dtí go sábhálann an t-úinéir.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Tá an t-úinéir imithe — coinníonn tusa an comhoibriú ar siúl anois; ní shábháiltear d\'athruithe go dtí go bhfillfidh an t-úinéir.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Tá an t-úinéir ar ais agus glacann sé an comhoibriú ar láimh arís.',
   'Samenwerking starten': 'Tosaigh comhoibriú',
   'Deelnemen aan samenwerking': 'Glac páirt sa chomhoibriú',
   'Samenwerking verlaten': 'Fág an comhoibriú',

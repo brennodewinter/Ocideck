@@ -33,6 +33,7 @@ class CollabSessionState {
     this.phase = CollabPhase.idle,
     this.role,
     this.error,
+    this.isTemporaryAuthority = false,
   });
 
   final CollabPhase phase;
@@ -42,17 +43,31 @@ class CollabSessionState {
   /// the UI localises the message rather than showing a raw exception.
   final String? error;
 
+  /// True when this tab is a *guest* currently standing in as the authority
+  /// because the owner dropped (§5.3). It keeps the session alive but must not
+  /// persist; the UI surfaces this so the co-author knows their work is not being
+  /// saved to the shared source until the owner returns.
+  final bool isTemporaryAuthority;
+
   bool get isActive => phase == CollabPhase.active;
   bool get isConnecting => phase == CollabPhase.connecting;
+
+  /// Whether saving the deck to its shared source is allowed. Only the owner
+  /// persists (§5.3): a guest in an active session — including one temporarily
+  /// holding authority — must not write the shared `.md`. Outside a session
+  /// (idle) saving is unaffected.
+  bool get canPersist => !isActive || role == CollabRole.host;
 
   CollabSessionState copyWith({
     CollabPhase? phase,
     CollabRole? role,
     String? error,
+    bool? isTemporaryAuthority,
   }) => CollabSessionState(
     phase: phase ?? this.phase,
     role: role ?? this.role,
     error: error,
+    isTemporaryAuthority: isTemporaryAuthority ?? this.isTemporaryAuthority,
   );
 }
 
@@ -75,7 +90,9 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
   final TabInfo? _tab;
 
   CollabSessionController? _controller;
+  HandoverCoordinator? _coordinator;
   StreamSubscription<DeckState>? _deckSub;
+  StreamSubscription<void>? _authoritySub;
   bool _disposed = false;
 
   /// True when this tab can collaborate: its deck lives on a WebDAV source.
@@ -116,7 +133,7 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
         opsDir: collabSidecarOpsDir(origin.remotePath),
       );
       final id = '${origin.username}-${const Uuid().v4()}';
-      final session = role == CollabRole.host
+      final launch = role == CollabRole.host
           ? await hostCollabSession(store: store, deck: deck, participantId: id)
           : await joinCollabSession(
               store: store,
@@ -124,11 +141,13 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
               participantId: id,
             );
       if (_disposed) {
-        await session.dispose();
+        await launch.coordinator.dispose();
+        await launch.session.dispose();
         return;
       }
-      tab.collabSession = session;
-      _attach(session, deckNotifier);
+      tab.collabSession = launch.session;
+      _coordinator = launch.coordinator;
+      _attach(launch, deckNotifier, role);
       state = CollabSessionState(phase: CollabPhase.active, role: role);
     } catch (e) {
       state = state.copyWith(
@@ -138,7 +157,12 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
     }
   }
 
-  void _attach(CollabSession session, DeckNotifier deckNotifier) {
+  void _attach(
+    CollabLaunch launch,
+    DeckNotifier deckNotifier,
+    CollabRole role,
+  ) {
+    final session = launch.session;
     _controller = CollabSessionController(
       session: session,
       readDeck: () => deckNotifier.currentState.deck ?? session.deck,
@@ -147,6 +171,29 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
     _deckSub = deckNotifier.stream.listen((deckState) {
       final deck = deckState.deck;
       if (deck != null) _controller?.onLocalEdit(deck);
+    });
+    // When the session authority changes (an owner drops, a successor takes over,
+    // the owner hands back), re-drive any local edit the old authority never
+    // versioned to the new one, and refresh the "temporary owner" indicator.
+    _authoritySub = launch.coordinator.authorityChanged.listen((_) {
+      if (_disposed) return;
+      // Re-drive lost edits only when caught up. Diffing a session deck that
+      // still lags the log (WebDAV gives no cross-client read-your-writes) could
+      // re-emit an authoritative op still in flight and duplicate a
+      // non-idempotent one like InsertSlide — a distinct, contiguous version the
+      // in-order rule would not drop. A not-yet-caught-up follower recovers its
+      // lost edit on its next real edit instead, which is safe.
+      final transport = session.transport;
+      final caughtUp =
+          transport is! WebdavAsyncTransport || transport.isCaughtUp;
+      if (caughtUp) {
+        final deck = deckNotifier.currentState.deck;
+        if (deck != null) _controller?.onLocalEdit(deck);
+      }
+      final temporary = role == CollabRole.guest && session.isAuthority;
+      if (temporary != state.isTemporaryAuthority) {
+        state = state.copyWith(isTemporaryAuthority: temporary);
+      }
     });
   }
 
@@ -157,8 +204,12 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
   }
 
   Future<void> _teardown() async {
+    await _authoritySub?.cancel();
+    _authoritySub = null;
     await _deckSub?.cancel();
     _deckSub = null;
+    await _coordinator?.dispose();
+    _coordinator = null;
     await _controller?.dispose(); // disposes the session too
     _controller = null;
     _tab?.collabSession = null;
@@ -167,7 +218,9 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
   @override
   void dispose() {
     _disposed = true;
+    _authoritySub?.cancel();
     _deckSub?.cancel();
+    _coordinator?.dispose();
     _controller?.dispose();
     _tab?.collabSession = null;
     super.dispose();

@@ -1773,6 +1773,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Komplet v skupni seji shrani samo lastnik; tvoje spremembe ostanejo v seji, dokler jih lastnik ne shrani.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Lastnik je odšel — zdaj sodelovanje vzdržuješ ti; tvoje spremembe se shranijo šele, ko se lastnik vrne.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Lastnik se je vrnil in znova prevzema sodelovanje.',
   'Samenwerking starten': 'Začni sodelovanje',
   'Deelnemen aan samenwerking': 'Pridruži se sodelovanju',
   'Samenwerking verlaten': 'Zapusti sodelovanje',

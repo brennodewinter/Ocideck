@@ -1798,6 +1798,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Μόνο ο κάτοχος αποθηκεύει το deck σε μια κοινή συνεδρία· οι αλλαγές σας παραμένουν στη συνεδρία μέχρι ο κάτοχος να αποθηκεύσει.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Ο κάτοχος έφυγε — τώρα εσείς κρατάτε τη συνεργασία ζωντανή· οι αλλαγές σας αποθηκεύονται μόνο όταν ο κάτοχος επιστρέψει.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Ο κάτοχος επέστρεψε και αναλαμβάνει ξανά τη συνεργασία.',
   'Samenwerking starten': 'Έναρξη συνεργασίας',
   'Deelnemen aan samenwerking': 'Συμμετοχή σε συνεργασία',
   'Samenwerking verlaten': 'Αποχώρηση από τη συνεργασία',

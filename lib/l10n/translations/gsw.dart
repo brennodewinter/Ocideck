@@ -1774,6 +1774,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Nume dr Bsitzer speicheret s Deck in ere gmeinsame Sitzig; dini Änderige bliibe in dr Sitzig, bis dr Bsitzer speicheret.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'Dr Bsitzer isch weg — jetz haltisch du d Zämenarbet am Laufe; dini Änderige wärde ersch gspeicheret, wenn dr Bsitzer zrugg chunt.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'Dr Bsitzer isch zrugg und übernimmt d Zämenarbet wider.',
   'Samenwerking starten': 'Zämenarbet starte',
   'Deelnemen aan samenwerking': 'A dr Zämenarbet teilnäh',
   'Samenwerking verlaten': 'Zämenarbet verlah',

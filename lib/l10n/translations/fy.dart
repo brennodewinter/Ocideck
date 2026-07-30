@@ -731,6 +731,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
+      'Allinnich de eigner bewarret it deck yn in dielde sesje; dyn feroaringen bliuwe yn de sesje oant de eigner bewarret.',
+  'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
+      'De eigner is fuort — do hâldst de gearwurking no geande; dyn feroaringen wurde pas bewarre as de eigner weromkomt.',
+  'De eigenaar is terug en neemt de samenwerking weer over.':
+      'De eigner is werom en nimt de gearwurking wer oer.',
   'Samenwerking starten': 'Gearwurking begjinne',
   'Deelnemen aan samenwerking': 'Meidwaan oan gearwurking',
   'Samenwerking verlaten': 'Gearwurking ferlitte',
