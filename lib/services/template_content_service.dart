@@ -11,7 +11,7 @@ import 'markdown_service.dart';
 /// A template's content is a Markdown file per language
 /// (`assets/templates/<id>.<lang>.md`), parsed by the same service that opens
 /// any deck — a template is a document, not code. The requested language is
-/// loaded; when no file exists for it, English is the fallback. The picker's
+/// loaded; when no file exists for it, English is the fallback. The picker'
 /// names and descriptions stay on the l10n route with all languages.
 class TemplateContentService {
   TemplateContentService({Future<String> Function(String key)? loadAsset})
@@ -22,7 +22,7 @@ class TemplateContentService {
   /// Languages that have their own template content files in
   /// `assets/templates/`. The dialog uses this to decide whether the
   /// "content is in English" notice should be shown.
-  static const languagesWithContent = {'nl', 'en', 'es'};
+  static const languagesWithContent = {'nl', 'en', 'es', 'la', 'el'};
 
   /// Returns the fresh slides for a new deck from template [templateId], with
   /// the first (title) slide carrying [deckTitle]. Falls back to a bare title
