@@ -1770,6 +1770,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Samenwerking starten': 'Starta samarbete',
+  'Deelnemen aan samenwerking': 'Gå med i samarbete',
+  'Samenwerking verlaten': 'Lämna samarbete',
+  'Samenwerking gestart.': 'Samarbete startat.',
+  'Deelgenomen aan de samenwerking.': 'Gick med i samarbetet.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Inget samarbete har startats för det här decket ännu.',
+  'Samenwerking mislukt.': 'Samarbete misslyckades.',
+  'Samenwerking beëindigd.': 'Samarbete avslutat.',
   'Bord': 'Anslagstavla',
   'Projectcharter': 'Projektcharta',
   'CTQ-boom': 'CTQ-träd',

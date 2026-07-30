@@ -2748,6 +2748,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Samenwerking starten': 'İş birliği başlat',
+  'Deelnemen aan samenwerking': 'İş birliğine katıl',
+  'Samenwerking verlaten': 'İş birliğinden ayrıl',
+  'Samenwerking gestart.': 'İş birliği başlatıldı.',
+  'Deelgenomen aan de samenwerking.': 'İş birliğine katıldınız.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Bu sunum için henüz bir iş birliği başlatılmadı.',
+  'Samenwerking mislukt.': 'İş birliği başarısız oldu.',
+  'Samenwerking beëindigd.': 'İş birliği sonlandırıldı.',
   'Bord': 'Pano',
   'Projectcharter': 'Proje sözleşmesi',
   'CTQ-boom': 'CTQ ağacı',

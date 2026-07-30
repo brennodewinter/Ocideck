@@ -1773,6 +1773,15 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Samenwerking starten': 'Začni sodelovanje',
+  'Deelnemen aan samenwerking': 'Pridruži se sodelovanju',
+  'Samenwerking verlaten': 'Zapusti sodelovanje',
+  'Samenwerking gestart.': 'Sodelovanje začeto.',
+  'Deelgenomen aan de samenwerking.': 'Pridružili ste se sodelovanju.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Za ta komplet še ni bilo začeto nobeno sodelovanje.',
+  'Samenwerking mislukt.': 'Sodelovanje ni uspelo.',
+  'Samenwerking beëindigd.': 'Sodelovanje končano.',
   'Bord': 'Tabla',
   'Projectcharter': 'Listina projekta',
   'CTQ-boom': 'Drevo CTQ',

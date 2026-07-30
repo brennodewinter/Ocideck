@@ -1793,6 +1793,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Samenwerking starten': 'Ibda kollaborazzjoni',
+  'Deelnemen aan samenwerking': 'Ingħaqad mal-kollaborazzjoni',
+  'Samenwerking verlaten': 'Itlaq mill-kollaborazzjoni',
+  'Samenwerking gestart.': 'Kollaborazzjoni mibdija.',
+  'Deelgenomen aan de samenwerking.': 'Ingħaqadt mal-kollaborazzjoni.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Għadha ma nbdiet l-ebda kollaborazzjoni għal dan id-deck.',
+  'Samenwerking mislukt.': 'Il-kollaborazzjoni falliet.',
+  'Samenwerking beëindigd.': 'Il-kollaborazzjoni ntemmet.',
   'Bord': 'Bord',
   'Projectcharter': 'Karta tal-proġett',
   'CTQ-boom': 'Siġra CTQ',

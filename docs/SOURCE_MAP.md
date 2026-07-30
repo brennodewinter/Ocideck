@@ -546,6 +546,7 @@ exists.
 
 ## `lib/state/` — Riverpod providers
 
+- `collab_session_provider.dart` — the per-tab owner of a collaboration session (COLLABORATION.md §5.7), the app glue over `lib/collab/`. `CollabSessionNotifier.host`/`join` build a `WebdavCollabLogStore` from the tab's `webdavOrigin`, host or join a session, keep it on `TabInfo.collabSession`, and wire a `CollabSessionController` between the session and `deckProvider` (local edits out as ops, remote changes back via `DeckNotifier.applyCollabDeck`). Overridden per tab in `app_shell.dart`'s `_tabScope`, like `deckProvider`; the root is idle. `collabSidecarOpsDir` derives the sidecar folder beside the deck.
 - `consent_provider.dart` — `ConsentNotifier` managing consent acceptance/revocation with persistent storage.
 - `deck_provider.dart` — `DeckNotifier`: loaded deck, dirty state, undo/redo history, file path. Also `refreshEditorFields`, which bumps `DeckState.revision` without touching the deck: the editor's text fields cache their content in their own controllers and only re-read when that revision changes, so a change arriving from outside them (a table cell edited live while presenting) would otherwise sit behind stale text that the next keystroke writes back. `onChartDataWarnings` is the save-side counterpart of `onSweepWebAssets`: this notifier has no `Ref`, so it hands the chart-data complaints of a save up to `TabsNotifier`, which owns one.
 - `deck_provider_ai.dart` — `DeckNotifierAiAlt` extension: count/clear AI-generated image alt-texts.

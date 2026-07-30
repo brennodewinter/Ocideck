@@ -1775,6 +1775,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Samenwerking starten': 'Együttműködés indítása',
+  'Deelnemen aan samenwerking': 'Csatlakozás az együttműködéshez',
+  'Samenwerking verlaten': 'Együttműködés elhagyása',
+  'Samenwerking gestart.': 'Együttműködés elindítva.',
+  'Deelgenomen aan de samenwerking.': 'Csatlakozott az együttműködéshez.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Ehhez a deckhez még nem indult együttműködés.',
+  'Samenwerking mislukt.': 'Az együttműködés nem sikerült.',
+  'Samenwerking beëindigd.': 'Együttműködés befejezve.',
   'Bord': 'Tábla',
   'Projectcharter': 'Projektcharta',
   'CTQ-boom': 'CTQ-fa',

@@ -1770,6 +1770,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Samenwerking starten': 'Sākt sadarbību',
+  'Deelnemen aan samenwerking': 'Pievienoties sadarbībai',
+  'Samenwerking verlaten': 'Pamest sadarbību',
+  'Samenwerking gestart.': 'Sadarbība sākta.',
+  'Deelgenomen aan de samenwerking.': 'Pievienojāties sadarbībai.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Šim dekam vēl nav sākta neviena sadarbība.',
+  'Samenwerking mislukt.': 'Sadarbība neizdevās.',
+  'Samenwerking beëindigd.': 'Sadarbība beigta.',
   'Bord': 'Tabula',
   'Projectcharter': 'Projekta harta',
   'CTQ-boom': 'CTQ koks',

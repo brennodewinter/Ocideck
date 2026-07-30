@@ -1787,6 +1787,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Samenwerking starten': 'Cooperationem incipere',
+  'Deelnemen aan samenwerking': 'Cooperationi interesse',
+  'Samenwerking verlaten': 'Cooperationem relinquere',
+  'Samenwerking gestart.': 'Cooperatio incepta.',
+  'Deelgenomen aan de samenwerking.': 'Cooperationi interfuisti.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Nulla cooperatio adhuc huic fasciculo incepta est.',
+  'Samenwerking mislukt.': 'Cooperatio defecit.',
+  'Samenwerking beëindigd.': 'Cooperatio finita est.',
   'Bord': 'Tabula',
   'Projectcharter': 'Carta proiecti',
   'CTQ-boom': 'Arbor CTQ',

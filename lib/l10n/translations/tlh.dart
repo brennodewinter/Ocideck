@@ -1746,6 +1746,15 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Samenwerking starten': 'tay\' vum yItagh',
+  'Deelnemen aan samenwerking': 'tay\' vumDaq yI\'el',
+  'Samenwerking verlaten': 'tay\' vumvo\' yImej',
+  'Samenwerking gestart.': 'tay\' vum taghlu\'pu\'.',
+  'Deelgenomen aan de samenwerking.': 'tay\' vumDaq bI\'elpu\'.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'deck vamvaD tay\' vum taghlu\'pu\'be\'.',
+  'Samenwerking mislukt.': 'tay\' vum Qaghpu\'.',
+  'Samenwerking beëindigd.': 'tay\' vum mevpu\'.',
   'Bord': 'woj',
   'Projectcharter': 'project charter',
   'CTQ-boom': 'CTQ Sor',

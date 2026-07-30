@@ -1771,6 +1771,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Samenwerking starten': 'Aloita yhteistyö',
+  'Deelnemen aan samenwerking': 'Liity yhteistyöhön',
+  'Samenwerking verlaten': 'Poistu yhteistyöstä',
+  'Samenwerking gestart.': 'Yhteistyö aloitettu.',
+  'Deelgenomen aan de samenwerking.': 'Liityit yhteistyöhön.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Tälle deckille ei ole vielä aloitettu yhteistyötä.',
+  'Samenwerking mislukt.': 'Yhteistyö epäonnistui.',
+  'Samenwerking beëindigd.': 'Yhteistyö päättyi.',
   'Bord': 'Taulu',
   'Projectcharter': 'Projektikirja',
   'CTQ-boom': 'CTQ-puu',

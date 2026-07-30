@@ -730,6 +730,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Samenwerking starten': 'Kuminsá kolaborashon',
+  'Deelnemen aan samenwerking': 'Partisipá na kolaborashon',
+  'Samenwerking verlaten': 'Bandoná kolaborashon',
+  'Samenwerking gestart.': 'Kolaborashon a kuminsá.',
+  'Deelgenomen aan de samenwerking.': 'Bo a partisipá na e kolaborashon.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Ainda no a kuminsá ningun kolaborashon pa e deck aki.',
+  'Samenwerking mislukt.': 'Kolaborashon a faya.',
+  'Samenwerking beëindigd.': 'Kolaborashon a terminá.',
   'Bord': 'Bord',
   'Projectcharter': 'Karta di proyecto',
   'CTQ-boom': 'Yabi CTQ',

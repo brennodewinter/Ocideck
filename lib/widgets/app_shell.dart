@@ -66,6 +66,7 @@ import '../services/git/version_diff.dart';
 import '../services/git/native_git_mirror_api.dart';
 import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
+import '../state/collab_session_provider.dart';
 import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
 import '../state/image_contrast_provider.dart';
@@ -547,6 +548,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     overrides: [
       deckProvider.overrideWith((ref) => tab.deckNotifier),
       editorProvider.overrideWith((ref) => tab.editorNotifier),
+      collabSessionProvider.overrideWith(
+        (ref) => CollabSessionNotifier(ref, tab),
+      ),
       deckQualityRawProvider.overrideWith(computeDeckQualityRaw),
       deckQualityProvider.overrideWith(computeDeckQuality),
       imageContrastIssuesProvider.overrideWith(computeImageContrastIssues),

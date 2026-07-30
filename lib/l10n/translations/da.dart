@@ -1770,6 +1770,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Samenwerking starten': 'Start samarbejde',
+  'Deelnemen aan samenwerking': 'Deltag i samarbejde',
+  'Samenwerking verlaten': 'Forlad samarbejde',
+  'Samenwerking gestart.': 'Samarbejde startet.',
+  'Deelgenomen aan de samenwerking.': 'Deltaget i samarbejdet.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Der er endnu ikke startet et samarbejde for dette deck.',
+  'Samenwerking mislukt.': 'Samarbejde mislykkedes.',
+  'Samenwerking beëindigd.': 'Samarbejde afsluttet.',
   'Bord': 'Tavle',
   'Projectcharter': 'Projektcharter',
   'CTQ-boom': 'CTQ-træ',

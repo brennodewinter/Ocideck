@@ -1771,6 +1771,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Samenwerking starten': 'Mulai kolaborasi',
+  'Deelnemen aan samenwerking': 'Gabung ke kolaborasi',
+  'Samenwerking verlaten': 'Tinggalkan kolaborasi',
+  'Samenwerking gestart.': 'Kolaborasi dimulai.',
+  'Deelgenomen aan de samenwerking.': 'Bergabung ke kolaborasi.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Belum ada kolaborasi yang dimulai untuk deck ini.',
+  'Samenwerking mislukt.': 'Kolaborasi gagal.',
+  'Samenwerking beëindigd.': 'Kolaborasi diakhiri.',
   'Bord': 'Papan',
   'Projectcharter': 'Piagam proyek',
   'CTQ-boom': 'Pohon CTQ',

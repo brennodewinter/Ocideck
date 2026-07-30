@@ -880,16 +880,20 @@ Phase 0.5 (transport + codec landed, #989): `WebdavAsyncTransport` — async
 co-authoring over the Nextcloud a user already configured (`webdav_service.dart`),
 built on an append-only log sidecar (`collab_log_store.dart`, a conditional-`PUT`
 sequence) with the JSON wire codec in `collab_codec.dart`; near-free given Phase
-0, not real-time. The transport, its (de)serialiser, the session baseline
-(`collab_snapshot.dart`, §5.2/§5.5 — a joiner adopts the authority's slides so it
-shares their ids, plus a snapshot slot on the store, #996) and the session
-lifecycle (`collab_session_launch.dart` — `hostCollabSession`/`joinCollabSession`
-tie snapshot, transport and authority into start/join, §6.5, #996) are built and
-tested against an in-memory store. What remains to make it user-reachable (#996):
-the provider/UI wiring (§5.7) — `collab_session_provider.dart` with the per-tab
-override in `app_shell.dart`, and the start/join actions in the shell — plus the
-editor→op adapter that turns a wholesale deck edit into the field-level ops the
-session submits.
+0, not real-time. Built and tested end to end (#989, #996): the transport, its
+(de)serialiser, the session baseline (`collab_snapshot.dart`, §5.2/§5.5 — a joiner
+adopts the authority's slides so it shares their ids, plus a snapshot slot on the
+store), the session lifecycle (`collab_session_launch.dart` —
+`hostCollabSession`/`joinCollabSession` tie snapshot, transport and authority into
+start/join, §6.5), the editor→op adapter (`collab_deck_diff.dart` — a wholesale
+deck edit back to field-level ops), the bridge that carries edits both ways
+without an echo loop (`collab_session_controller.dart`, merging so non-syncable
+fields survive), and the app wiring (§5.7): `collab_session_provider.dart` owns a
+session per tab (overridden in `app_shell.dart`'s `_tabScope`, like `deckProvider`)
+and the command palette hosts/joins/leaves a session for a WebDAV deck. Real-time
+Matrix (Phase 1) stays parked on the licence decision (assurance/ketenkeuring-matrix-*.md).
+Follow-ups within Fase 0.5: owner-drop handover (§5.3) and non-zero re-baselining
+(§5.2).
 
 ### Phase 1 — Matrix data plane + easy onboarding (leans on: homeserver account)
 Add the `matrix` SDK; in-app registration/login against a default-or-chosen

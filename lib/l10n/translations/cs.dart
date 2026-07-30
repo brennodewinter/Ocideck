@@ -1774,6 +1774,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Samenwerking starten': 'Zahájit spolupráci',
+  'Deelnemen aan samenwerking': 'Připojit se ke spolupráci',
+  'Samenwerking verlaten': 'Opustit spolupráci',
+  'Samenwerking gestart.': 'Spolupráce zahájena.',
+  'Deelgenomen aan de samenwerking.': 'Připojili jste se ke spolupráci.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Pro tento deck zatím nebyla zahájena žádná spolupráce.',
+  'Samenwerking mislukt.': 'Spolupráce se nezdařila.',
+  'Samenwerking beëindigd.': 'Spolupráce ukončena.',
   'Bord': 'Tabule',
   'Projectcharter': 'Projektová charta',
   'CTQ-boom': 'Strom CTQ',

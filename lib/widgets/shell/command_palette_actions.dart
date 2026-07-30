@@ -117,6 +117,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
           enabled: deck.tlp != level,
           onInvoke: () => deckNotifier.updateInfo(tlp: level),
         ),
+      ...collabPaletteCommands(context, ref, l10n),
     ];
     CommandPalette.show(context, commands);
   }
@@ -282,4 +283,80 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
       SnackBar(content: Text(context.l10n.d('Bewijs-hashes gekopieerd'))),
     );
   }
+}
+
+/// Collaboration actions for the command palette, shown only for a deck that
+/// lives on WebDAV — the sidecar log the async transport needs has to live
+/// somewhere (§5.7). While a session runs the only action is to leave it;
+/// otherwise you can host one or join one an author already started for this
+/// deck. Top-level, not a `_MainLayoutState` method, so it stays off the class.
+List<PaletteCommand> collabPaletteCommands(
+  BuildContext context,
+  WidgetRef ref,
+  AppLocalizations l10n,
+) {
+  if (!ref.read(collabSessionProvider.notifier).canCollaborate) {
+    return const [];
+  }
+  if (ref.read(collabSessionProvider).isActive) {
+    return [
+      PaletteCommand(
+        label: l10n.d('Samenwerking verlaten'),
+        icon: Icons.link_off,
+        keywords: const ['collab', 'samenwerken', 'leave', 'stop'],
+        onInvoke: () => _leaveCollab(context, ref, l10n),
+      ),
+    ];
+  }
+  return [
+    PaletteCommand(
+      label: l10n.d('Samenwerking starten'),
+      icon: Icons.groups_outlined,
+      keywords: const ['collab', 'samenwerken', 'webdav', 'share', 'host'],
+      onInvoke: () => _beginCollab(context, ref, l10n, host: true),
+    ),
+    PaletteCommand(
+      label: l10n.d('Deelnemen aan samenwerking'),
+      icon: Icons.group_add_outlined,
+      keywords: const ['collab', 'samenwerken', 'join', 'webdav'],
+      onInvoke: () => _beginCollab(context, ref, l10n, host: false),
+    ),
+  ];
+}
+
+Future<void> _beginCollab(
+  BuildContext context,
+  WidgetRef ref,
+  AppLocalizations l10n, {
+  required bool host,
+}) async {
+  final messenger = ScaffoldMessenger.of(context);
+  final notifier = ref.read(collabSessionProvider.notifier);
+  host ? await notifier.host() : await notifier.join();
+  if (!context.mounted) return;
+  final state = ref.read(collabSessionProvider);
+  final String message;
+  if (state.isActive) {
+    message = host
+        ? l10n.d('Samenwerking gestart.')
+        : l10n.d('Deelgenomen aan de samenwerking.');
+  } else if (state.error == 'no-baseline') {
+    message = l10n.d('Nog geen samenwerking gestart voor dit deck.');
+  } else {
+    message = l10n.d('Samenwerking mislukt.');
+  }
+  messenger.showSnackBar(SnackBar(content: Text(message)));
+}
+
+Future<void> _leaveCollab(
+  BuildContext context,
+  WidgetRef ref,
+  AppLocalizations l10n,
+) async {
+  final messenger = ScaffoldMessenger.of(context);
+  await ref.read(collabSessionProvider.notifier).leave();
+  if (!context.mounted) return;
+  messenger.showSnackBar(
+    SnackBar(content: Text(l10n.d('Samenwerking beëindigd.'))),
+  );
 }

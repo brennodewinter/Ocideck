@@ -1774,6 +1774,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Samenwerking starten': 'Zämenarbet starte',
+  'Deelnemen aan samenwerking': 'A dr Zämenarbet teilnäh',
+  'Samenwerking verlaten': 'Zämenarbet verlah',
+  'Samenwerking gestart.': 'Zämenarbet gstartet.',
+  'Deelgenomen aan de samenwerking.': 'A dr Zämenarbet teilgnoh.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Für das Deck isch no kei Zämenarbet gstartet worde.',
+  'Samenwerking mislukt.': 'Zämenarbet fehlgschlage.',
+  'Samenwerking beëindigd.': 'Zämenarbet beendet.',
   'Bord': 'Bord',
   'Projectcharter': 'Projektcharta',
   'CTQ-boom': 'CTQ-Boum',

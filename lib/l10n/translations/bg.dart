@@ -1793,6 +1793,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Samenwerking starten': 'Започни сътрудничество',
+  'Deelnemen aan samenwerking': 'Присъедини се към сътрудничество',
+  'Samenwerking verlaten': 'Напусни сътрудничество',
+  'Samenwerking gestart.': 'Сътрудничеството е стартирано.',
+  'Deelgenomen aan de samenwerking.': 'Присъединихте се към сътрудничеството.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'За това тесте все още не е започнато сътрудничество.',
+  'Samenwerking mislukt.': 'Сътрудничеството не бе успешно.',
+  'Samenwerking beëindigd.': 'Сътрудничеството е прекратено.',
   'Bord': 'Табло',
   'Projectcharter': 'Проектна харта',
   'CTQ-boom': 'CTQ дърво',

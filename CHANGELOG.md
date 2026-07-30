@@ -75,6 +75,15 @@ in Dutch, and it keeps growing on `main` between releases.
   op. Riverpod- en Flutter-vrij (met read/write-callbacks), dus het subtiele deel
   is headless getest; de provider die er per tab één bezit is de resterende
   app-lijm.
+- De per-tab provider die een samenwerksessie beheert (COLLABORATION.md §5.7,
+  #996): `collabSessionProvider` bouwt bij "starten"/"deelnemen" een
+  WebDAV-log-store uit de bron van het tabblad, host of komt bij een sessie,
+  bewaart hem op `TabInfo.collabSession`, en koppelt een `CollabSessionController`
+  tussen de sessie en `deckProvider` — lokale bewerkingen stromen als ops naar
+  buiten, wijzigingen op afstand vloeien terug via `DeckNotifier.applyCollabDeck`
+  (buiten undo, met revisie-bump zodat editorvelden vernieuwen). Per tab
+  overschreven in `app_shell`, net als `deckProvider`. De start/deelnemen-actie
+  in de interface is de laatste stap.
 
 ### Fixed
 

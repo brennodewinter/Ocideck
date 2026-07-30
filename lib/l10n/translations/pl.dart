@@ -1783,6 +1783,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Samenwerking starten': 'Rozpocznij współpracę',
+  'Deelnemen aan samenwerking': 'Dołącz do współpracy',
+  'Samenwerking verlaten': 'Opuść współpracę',
+  'Samenwerking gestart.': 'Rozpoczęto współpracę.',
+  'Deelgenomen aan de samenwerking.': 'Dołączono do współpracy.',
+  'Nog geen samenwerking gestart voor dit deck.':
+      'Nie rozpoczęto jeszcze współpracy dla tego decka.',
+  'Samenwerking mislukt.': 'Współpraca nie powiodła się.',
+  'Samenwerking beëindigd.': 'Zakończono współpracę.',
   'Bord': 'Tablica',
   'Projectcharter': 'Karta projektu',
   'CTQ-boom': 'Drzewo CTQ',
