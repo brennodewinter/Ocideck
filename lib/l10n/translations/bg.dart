@@ -1794,6 +1794,15 @@ const _dutchSourceBg = {
 
 const _dutchSourceAddBg = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Шифрован ретранслатор (проект)',
+  'Meer documentatie op de repository': 'Повече документация в хранилището',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Пълната документация — включително архитектура, компилиране, изходен код и дизайн — е в хранилището.',
+  'Zoeken in document': 'Търсене в документа',
+  'Zoeken in dit document…': 'Търсене в този документ…',
+  'Geen treffers': 'Няма съвпадения',
+  'Vorige treffer': 'Предишно съвпадение',
+  'Volgende treffer': 'Следващо съвпадение',
+  'Zoeken sluiten': 'Затвори търсенето',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Само собственикът запазва тестето в споделена сесия; вашите промени остават в сесията, докато собственикът не запази.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

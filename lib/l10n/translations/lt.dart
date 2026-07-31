@@ -1780,6 +1780,15 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)':
       'Užšifruotas retransliatorius (projektas)',
+  'Meer documentatie op de repository': 'Daugiau dokumentacijos saugykloje',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Visa dokumentacija — įskaitant architektūrą, kūrimą, pirminį kodą ir dizainą — yra saugykloje.',
+  'Zoeken in document': 'Ieškoti dokumente',
+  'Zoeken in dit document…': 'Ieškoti šiame dokumente…',
+  'Geen treffers': 'Nėra atitikmenų',
+  'Vorige treffer': 'Ankstesnis atitikmuo',
+  'Volgende treffer': 'Kitas atitikmuo',
+  'Zoeken sluiten': 'Uždaryti paiešką',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Bendroje sesijoje deką išsaugo tik savininkas; jūsų pakeitimai lieka sesijoje, kol savininkas neišsaugo.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

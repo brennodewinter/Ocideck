@@ -731,6 +731,15 @@ const _dutchSourceFr = {
 
 const _dutchSourceAddFr = {
   'Versleuteld doorgeefluik (ontwerp)': 'Relais chiffré (conception)',
+  'Meer documentatie op de repository': 'Plus de documentation dans le dépôt',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'La documentation complète — y compris l\'architecture, la compilation, le code source et la conception — se trouve dans le dépôt.',
+  'Zoeken in document': 'Rechercher dans le document',
+  'Zoeken in dit document…': 'Rechercher dans ce document…',
+  'Geen treffers': 'Aucun résultat',
+  'Vorige treffer': 'Résultat précédent',
+  'Volgende treffer': 'Résultat suivant',
+  'Zoeken sluiten': 'Fermer la recherche',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Seul le propriétaire enregistre le deck dans une session partagée ; vos modifications restent dans la session jusqu\'à ce que le propriétaire enregistre.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

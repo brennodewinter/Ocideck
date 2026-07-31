@@ -1772,6 +1772,15 @@ const _dutchSourceFi = {
 
 const _dutchSourceAddFi = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Salattu välitin (suunnitelma)',
+  'Meer documentatie op de repository': 'Lisää dokumentaatiota tietovarastossa',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Täydellinen dokumentaatio — mukaan lukien arkkitehtuuri, koonti, lähdekoodi ja suunnittelu — on tietovarastossa.',
+  'Zoeken in document': 'Hae asiakirjasta',
+  'Zoeken in dit document…': 'Hae tästä asiakirjasta…',
+  'Geen treffers': 'Ei osumia',
+  'Vorige treffer': 'Edellinen osuma',
+  'Volgende treffer': 'Seuraava osuma',
+  'Zoeken sluiten': 'Sulje haku',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Vain omistaja tallentaa deckin jaetussa istunnossa; muutoksesi säilyvät istunnossa, kunnes omistaja tallentaa.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

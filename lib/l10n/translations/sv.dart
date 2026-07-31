@@ -1771,6 +1771,15 @@ const _dutchSourceSv = {
 
 const _dutchSourceAddSv = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Krypterat relä (design)',
+  'Meer documentatie op de repository': 'Mer dokumentation i repositoryt',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Den fullständiga dokumentationen — inklusive arkitektur, bygge, källkod och design — finns i repositoryt.',
+  'Zoeken in document': 'Sök i dokument',
+  'Zoeken in dit document…': 'Sök i det här dokumentet…',
+  'Geen treffers': 'Inga träffar',
+  'Vorige treffer': 'Föregående träff',
+  'Volgende treffer': 'Nästa träff',
+  'Zoeken sluiten': 'Stäng sökning',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Endast ägaren sparar decket i en delad session; dina ändringar stannar i sessionen tills ägaren sparar.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

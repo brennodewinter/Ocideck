@@ -732,6 +732,15 @@ const _dutchSourceFy = {
 
 const _dutchSourceAddFy = {
   'Versleuteld doorgeefluik (ontwerp)': 'Fersifere relais (ûntwerp)',
+  'Meer documentatie op de repository': 'Mear dokumintaasje yn it repository',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'De folsleine dokumintaasje — ek arsjitektuer, bou, boarnekoade en ûntwerp — stiet yn it repository.',
+  'Zoeken in document': 'Sykje yn dokumint',
+  'Zoeken in dit document…': 'Sykje yn dit dokumint…',
+  'Geen treffers': 'Gjin treffers',
+  'Vorige treffer': 'Foarige treffer',
+  'Volgende treffer': 'Folgjende treffer',
+  'Zoeken sluiten': 'Sykje slute',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Allinnich de eigner bewarret it deck yn in dielde sesje; dyn feroaringen bliuwe yn de sesje oant de eigner bewarret.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

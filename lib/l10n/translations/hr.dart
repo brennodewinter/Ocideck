@@ -1778,6 +1778,15 @@ const _dutchSourceHr = {
 
 const _dutchSourceAddHr = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Šifrirani relej (dizajn)',
+  'Meer documentatie op de repository': 'Više dokumentacije u repozitoriju',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Cjelovita dokumentacija — uključujući arhitekturu, izgradnju, izvorni kôd i dizajn — nalazi se u repozitoriju.',
+  'Zoeken in document': 'Pretraži u dokumentu',
+  'Zoeken in dit document…': 'Pretraži u ovom dokumentu…',
+  'Geen treffers': 'Nema podudaranja',
+  'Vorige treffer': 'Prethodno podudaranje',
+  'Volgende treffer': 'Sljedeće podudaranje',
+  'Zoeken sluiten': 'Zatvori pretraživanje',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Samo vlasnik sprema deck u zajedničkoj sesiji; tvoje izmjene ostaju u sesiji dok ih vlasnik ne spremi.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

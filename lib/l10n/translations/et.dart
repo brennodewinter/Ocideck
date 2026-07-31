@@ -1763,6 +1763,15 @@ const _dutchSourceEt = {
 
 const _dutchSourceAddEt = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Krüpteeritud relee (kavand)',
+  'Meer documentatie op de repository': 'Rohkem dokumentatsiooni hoidlas',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Täielik dokumentatsioon — sealhulgas arhitektuur, ehitus, lähtekood ja disain — asub hoidlas.',
+  'Zoeken in document': 'Otsi dokumendist',
+  'Zoeken in dit document…': 'Otsi sellest dokumendist…',
+  'Geen treffers': 'Vasteid pole',
+  'Vorige treffer': 'Eelmine vaste',
+  'Volgende treffer': 'Järgmine vaste',
+  'Zoeken sluiten': 'Sulge otsing',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Ainult omanik salvestab decki jagatud seansis; sinu muudatused püsivad seansis, kuni omanik salvestab.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

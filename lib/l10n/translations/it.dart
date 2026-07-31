@@ -727,6 +727,15 @@ const _dutchSourceIt = {
 
 const _dutchSourceAddIt = {
   'Versleuteld doorgeefluik (ontwerp)': 'Relay cifrato (progetto)',
+  'Meer documentatie op de repository': 'Altra documentazione nel repository',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'La documentazione completa — inclusi architettura, build, codice sorgente e progettazione — si trova nel repository.',
+  'Zoeken in document': 'Cerca nel documento',
+  'Zoeken in dit document…': 'Cerca in questo documento…',
+  'Geen treffers': 'Nessun risultato',
+  'Vorige treffer': 'Risultato precedente',
+  'Volgende treffer': 'Risultato successivo',
+  'Zoeken sluiten': 'Chiudi ricerca',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Solo il proprietario salva il deck in una sessione condivisa; le tue modifiche restano nella sessione finché il proprietario non salva.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

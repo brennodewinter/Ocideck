@@ -1789,6 +1789,15 @@ const _dutchSourceUk = {
 
 const _dutchSourceAddUk = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Зашифрований ретранслятор (проєкт)',
+  'Meer documentatie op de repository': 'Більше документації в репозиторії',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Повна документація — зокрема архітектура, збірка, вихідний код і дизайн — міститься в репозиторії.',
+  'Zoeken in document': 'Пошук у документі',
+  'Zoeken in dit document…': 'Пошук у цьому документі…',
+  'Geen treffers': 'Немає збігів',
+  'Vorige treffer': 'Попередній збіг',
+  'Volgende treffer': 'Наступний збіг',
+  'Zoeken sluiten': 'Закрити пошук',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Лише власник зберігає колоду у спільному сеансі; ваші зміни залишаються в сеансі, доки власник не збереже.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

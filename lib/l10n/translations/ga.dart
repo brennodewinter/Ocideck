@@ -1807,6 +1807,15 @@ const _dutchSourceGa = {
 
 const _dutchSourceAddGa = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Athsheachadán criptithe (dearadh)',
+  'Meer documentatie op de repository': 'Tuilleadh doiciméadaithe sa stór',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Tá an doiciméadú iomlán — lena n-áirítear ailtireacht, tógáil, cód foinseach agus dearadh — sa stór.',
+  'Zoeken in document': 'Cuardaigh sa cháipéis',
+  'Zoeken in dit document…': 'Cuardaigh sa cháipéis seo…',
+  'Geen treffers': 'Gan torthaí',
+  'Vorige treffer': 'An toradh roimhe seo',
+  'Volgende treffer': 'An chéad toradh eile',
+  'Zoeken sluiten': 'Dún an cuardach',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Ní shábhálann ach an t-úinéir an deck i seisiún roinnte; fanann d\'athruithe sa seisiún go dtí go sábhálann an t-úinéir.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

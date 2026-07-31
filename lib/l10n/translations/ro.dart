@@ -1789,6 +1789,15 @@ const _dutchSourceRo = {
 
 const _dutchSourceAddRo = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Releu criptat (proiectare)',
+  'Meer documentatie op de repository': 'Mai multă documentație în depozit',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Documentația completă — inclusiv arhitectura, compilarea, codul sursă și proiectarea — se află în depozit.',
+  'Zoeken in document': 'Caută în document',
+  'Zoeken in dit document…': 'Caută în acest document…',
+  'Geen treffers': 'Nicio potrivire',
+  'Vorige treffer': 'Potrivirea anterioară',
+  'Volgende treffer': 'Potrivirea următoare',
+  'Zoeken sluiten': 'Închide căutarea',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Doar proprietarul salvează deck-ul într-o sesiune partajată; modificările tale rămân în sesiune până când proprietarul salvează.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

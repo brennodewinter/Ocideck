@@ -1771,6 +1771,15 @@ const _dutchSourceLv = {
 
 const _dutchSourceAddLv = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Šifrēts retranslators (dizains)',
+  'Meer documentatie op de repository': 'Vairāk dokumentācijas repozitorijā',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Pilnā dokumentācija — tostarp arhitektūra, būvējums, pirmkods un dizains — atrodas repozitorijā.',
+  'Zoeken in document': 'Meklēt dokumentā',
+  'Zoeken in dit document…': 'Meklēt šajā dokumentā…',
+  'Geen treffers': 'Nav atbilstību',
+  'Vorige treffer': 'Iepriekšējā atbilstība',
+  'Volgende treffer': 'Nākamā atbilstība',
+  'Zoeken sluiten': 'Aizvērt meklēšanu',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Tikai īpašnieks saglabā deku koplietotā sesijā; jūsu izmaiņas paliek sesijā, līdz īpašnieks saglabā.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

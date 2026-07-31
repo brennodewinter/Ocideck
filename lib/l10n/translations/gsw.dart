@@ -1775,6 +1775,15 @@ const _dutchSourceGsw = {
 
 const _dutchSourceAddGsw = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Verschlüsslets Relais (Design)',
+  'Meer documentatie op de repository': 'Meh Dokumentation im Repository',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Di ganz Dokumentation — au Architektur, Build, Quellcode und Design — isch im Repository.',
+  'Zoeken in document': 'Im Dokument sueche',
+  'Zoeken in dit document…': 'I däm Dokument sueche…',
+  'Geen treffers': 'Kei Träffer',
+  'Vorige treffer': 'Vorherige Träffer',
+  'Volgende treffer': 'Nöchschti Träffer',
+  'Zoeken sluiten': 'Sueche zuemache',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Nume dr Bsitzer speicheret s Deck in ere gmeinsame Sitzig; dini Änderige bliibe in dr Sitzig, bis dr Bsitzer speicheret.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

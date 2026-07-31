@@ -2749,6 +2749,15 @@ const _dutchSourceTr = {
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Şifreli aktarıcı (tasarım)',
+  'Meer documentatie op de repository': 'Depoda daha fazla belge',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Tüm belgeler — mimari, derleme, kaynak kodu ve tasarım dâhil — depoda bulunur.',
+  'Zoeken in document': 'Belgede ara',
+  'Zoeken in dit document…': 'Bu belgede ara…',
+  'Geen treffers': 'Eşleşme yok',
+  'Vorige treffer': 'Önceki eşleşme',
+  'Volgende treffer': 'Sonraki eşleşme',
+  'Zoeken sluiten': 'Aramayı kapat',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Paylaşılan bir oturumda sunumu yalnızca sahip kaydeder; değişiklikleriniz, sahip kaydedene kadar oturumda kalır.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

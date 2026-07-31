@@ -1801,6 +1801,15 @@ const _dutchSourcePt = {
 
 const _dutchSourceAddPt = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Retransmissor encriptado (design)',
+  'Meer documentatie op de repository': 'Mais documentação no repositório',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'A documentação completa — incluindo arquitetura, compilação, código-fonte e design — está no repositório.',
+  'Zoeken in document': 'Procurar no documento',
+  'Zoeken in dit document…': 'Procurar neste documento…',
+  'Geen treffers': 'Sem correspondências',
+  'Vorige treffer': 'Correspondência anterior',
+  'Volgende treffer': 'Correspondência seguinte',
+  'Zoeken sluiten': 'Fechar pesquisa',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Só o proprietário guarda o deck numa sessão partilhada; as suas alterações permanecem na sessão até o proprietário guardar.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

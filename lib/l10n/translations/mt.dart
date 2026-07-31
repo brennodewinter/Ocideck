@@ -1794,6 +1794,15 @@ const _dutchSourceMt = {
 
 const _dutchSourceAddMt = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Relay kriptat (disinn)',
+  'Meer documentatie op de repository': 'Aktar dokumentazzjoni fir-repożitorju',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Id-dokumentazzjoni sħiħa — inklużi l-arkitettura, il-bini, il-kodiċi sors u d-disinn — tinsab fir-repożitorju.',
+  'Zoeken in document': 'Fittex fid-dokument',
+  'Zoeken in dit document…': 'Fittex f\'dan id-dokument…',
+  'Geen treffers': 'L-ebda riżultat',
+  'Vorige treffer': 'Riżultat ta\' qabel',
+  'Volgende treffer': 'Ir-riżultat li jmiss',
+  'Zoeken sluiten': 'Agħlaq it-tfittxija',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Is-sid biss jaħżen id-deck f\'sessjoni kondiviża; it-tibdil tiegħek jibqa\' fis-sessjoni sakemm is-sid jaħżen.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

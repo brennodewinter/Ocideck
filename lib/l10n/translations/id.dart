@@ -1772,6 +1772,16 @@ const _dutchSourceId = {
 
 const _dutchSourceAddId = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Relai terenkripsi (desain)',
+  'Meer documentatie op de repository':
+      'Dokumentasi selengkapnya di repositori',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Dokumentasi lengkap — termasuk arsitektur, build, kode sumber, dan desain — ada di repositori.',
+  'Zoeken in document': 'Cari dalam dokumen',
+  'Zoeken in dit document…': 'Cari dalam dokumen ini…',
+  'Geen treffers': 'Tidak ada hasil',
+  'Vorige treffer': 'Hasil sebelumnya',
+  'Volgende treffer': 'Hasil berikutnya',
+  'Zoeken sluiten': 'Tutup pencarian',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Hanya pemilik yang menyimpan deck dalam sesi bersama; perubahan Anda tetap di sesi sampai pemilik menyimpan.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

@@ -731,6 +731,15 @@ const _dutchSourcePap = {
 
 const _dutchSourceAddPap = {
   'Versleuteld doorgeefluik (ontwerp)': 'Relè enkriptá (diseño)',
+  'Meer documentatie op de repository': 'Mas dokumentashon den e repositorio',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'E dokumentashon kompleto — inkluso arkitektura, konstrukshon, kódigo fuente i diseño — ta den e repositorio.',
+  'Zoeken in document': 'Buska den dokumento',
+  'Zoeken in dit document…': 'Buska den e dokumento aki…',
+  'Geen treffers': 'No tin resultado',
+  'Vorige treffer': 'Resultado anterior',
+  'Volgende treffer': 'Resultado siguiente',
+  'Zoeken sluiten': 'Sera buskeda',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Solamente e doño ta warda e deck den un seshon kompartí; bo kambionan ta keda den e seshon te ora e doño warda.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

@@ -1788,6 +1788,15 @@ const _dutchSourceLa = {
 
 const _dutchSourceAddLa = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Transmissor cifratus (designatio)',
+  'Meer documentatie op de repository': 'Amplior documentatio in repositorio',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Documentatio plena — comprehensis architectura, compilatione, codice fontis et forma — in repositorio est.',
+  'Zoeken in document': 'In documento quaerere',
+  'Zoeken in dit document…': 'In hoc documento quaerere…',
+  'Geen treffers': 'Nihil inventum',
+  'Vorige treffer': 'Inventum praecedens',
+  'Volgende treffer': 'Inventum sequens',
+  'Zoeken sluiten': 'Claude quaesitionem',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'In sessione communi solus dominus fasciculum servat; mutationes tuae in sessione manent donec dominus servat.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

@@ -1779,6 +1779,15 @@ const _dutchSourceSk = {
 
 const _dutchSourceAddSk = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Zašifrovaný prenášač (návrh)',
+  'Meer documentatie op de repository': 'Viac dokumentácie v repozitári',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Úplná dokumentácia — vrátane architektúry, zostavenia, zdrojového kódu a návrhu — je v repozitári.',
+  'Zoeken in document': 'Hľadať v dokumente',
+  'Zoeken in dit document…': 'Hľadať v tomto dokumente…',
+  'Geen treffers': 'Žiadne zhody',
+  'Vorige treffer': 'Predchádzajúca zhoda',
+  'Volgende treffer': 'Ďalšia zhoda',
+  'Zoeken sluiten': 'Zavrieť hľadanie',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Deck v zdieľanej relácii ukladá iba vlastník; tvoje zmeny zostávajú v relácii, kým ich vlastník neuloží.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
