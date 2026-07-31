@@ -70,6 +70,7 @@ _Party _party(
   int heartbeatFailThreshold = 3,
   int rebaseEveryOps =
       100, // matches the default; the few-op tests never trip it
+  int maxDeletesPerCycle = 32,
   int initialVersion = 0,
   int initialSeq = 0,
 }) {
@@ -94,6 +95,7 @@ _Party _party(
     claimSpread: claimSpread,
     heartbeatFailThreshold: heartbeatFailThreshold,
     rebaseEveryOps: rebaseEveryOps,
+    maxDeletesPerCycle: maxDeletesPerCycle,
   );
   return _Party(session, transport, coordinator);
 }
@@ -114,6 +116,22 @@ SetSlideField _edit(String author, SlideField field, String value) =>
       field: field,
       value: value,
     );
+
+/// An authoritative op record (as the async transport writes it), for seeding a
+/// log directly in a compaction/strand test.
+String _opRecord(int version, String value) => jsonEncode({
+  'kind': 'op',
+  'from': 'host',
+  'op': deckOpToJson(
+    SetSlideField(
+      version: version,
+      authorId: 'host',
+      slideId: 'a',
+      field: SlideField.title,
+      value: value,
+    ),
+  ),
+});
 
 /// The op versions present in the numbered log, in sequence order — the
 /// invariant surface the tests assert on (a duplicate or a gap here is a real
@@ -725,6 +743,175 @@ void main() {
       expect(guest.session.deck.slides.single.title, 'v6');
     });
   });
+
+  group('HandoverCoordinator — log compaction (§5.2, #1007)', () {
+    test(
+      'the authority compacts records the previous baseline subsumes',
+      () async {
+        final store = InMemoryCollabLogStore();
+        await _seed(store, owner: 'host', tick: 1);
+        final host = _party(
+          store,
+          'host',
+          owner: true,
+          authority: true,
+          rebaseEveryOps: 3,
+        );
+        addTearDown(host.dispose);
+
+        // First interval: 3 ops → re-baseline #1 at seq 3. Nothing to delete yet
+        // (there is no *previous* baseline).
+        for (var i = 1; i <= 3; i++) {
+          await host.session.submit(_edit('host', SlideField.title, 'v$i'));
+        }
+        await host.sync();
+        expect(await store.listSequences(), [1, 2, 3]);
+
+        // Second interval: 3 more ops → re-baseline #2 at seq 6, which arms
+        // compaction of everything the *first* baseline (seq 3) subsumed.
+        for (var i = 4; i <= 6; i++) {
+          await host.session.submit(_edit('host', SlideField.title, 'v$i'));
+        }
+        await host.sync();
+        expect(
+          await store.listSequences(),
+          [4, 5, 6],
+          reason: 'records 1..3 (subsumed by the previous baseline) are gone',
+        );
+      },
+    );
+
+    test('a failed snapshot write compacts nothing (F1 stall guard)', () async {
+      final inner = InMemoryCollabLogStore();
+      final store = _FaultyStore(inner);
+      await _seed(store, owner: 'host', tick: 1);
+      final host = _party(
+        store,
+        'host',
+        owner: true,
+        authority: true,
+        rebaseEveryOps: 3,
+      );
+      addTearDown(host.dispose);
+
+      // The snapshot write fails on every re-baseline. Even after crossing the
+      // threshold several times, the delete window must never widen — deleting
+      // records the (still-current) older baseline does not subsume would strand
+      // a straggler that could not detect it.
+      store.failWriteSnapshot = true;
+      for (var i = 1; i <= 9; i++) {
+        await host.session.submit(_edit('host', SlideField.title, 'v$i'));
+      }
+      for (var i = 0; i < 4; i++) {
+        await host.sync();
+      }
+      expect(
+        store.deletes,
+        isEmpty,
+        reason: 'no durable snapshot ⇒ no compaction',
+      );
+    });
+
+    test(
+      'a participant stranded by a compacted gap recovers from the snapshot',
+      () async {
+        // The log has been compacted up to seq 10 (records 1..10 are gone), the
+        // baseline sits at version 10 / seq 10, and one fresh op (v11) is at seq 11.
+        final store = InMemoryCollabLogStore();
+        final baseDeck = _deck().copyWith(
+          slides: [Slide(id: 'a', type: SlideType.bullets, title: 'v10')],
+        );
+        await store.writeSnapshot(
+          jsonEncode(CollabSnapshot.capture(baseDeck, 10, 10).toJson()),
+        );
+        await store.append(11, _opRecord(11, 'v11'));
+
+        // A follower that read an older baseline (version 4 / seq 4) and fell behind:
+        // its next record (seq 5) was compacted away, so its poll stalls at the gap.
+        final guest = _party(
+          store,
+          'guest',
+          owner: false,
+          authority: false,
+          initialVersion: 4,
+          initialSeq: 4,
+        );
+        addTearDown(guest.dispose);
+
+        await guest.sync();
+        // Recovered forward to the latest baseline instead of waiting forever.
+        expect(guest.session.version, 10, reason: 'jumped to the snapshot');
+        expect(guest.session.deck.slides.single.title, 'v10');
+
+        await guest.sync();
+        // And then caught up on the fresh op above the baseline.
+        expect(guest.session.version, 11);
+        expect(guest.session.deck.slides.single.title, 'v11');
+      },
+    );
+
+    test(
+      'strand-recovery stays put on an unreadable snapshot (fail-closed)',
+      () async {
+        final store = InMemoryCollabLogStore();
+        await store.writeSnapshot('not valid json'); // a half-written baseline
+        await store.append(11, _opRecord(11, 'v11'));
+        final guest = _party(
+          store,
+          'guest',
+          owner: false,
+          authority: false,
+          initialVersion: 4,
+          initialSeq: 4,
+        );
+        addTearDown(guest.dispose);
+
+        await guest.sync();
+        await guest.sync();
+        expect(
+          guest.session.version,
+          4,
+          reason:
+              'a broken snapshot never rewinds or half-applies — stay stranded',
+        );
+      },
+    );
+
+    test('a large backlog is cleared over several bounded passes', () async {
+      final store = InMemoryCollabLogStore();
+      await _seed(store, owner: 'host', tick: 1);
+      // Cap at 2 deletes per pass: the 3 records the first baseline subsumes take
+      // more than one pass, so the "stay armed while a full batch remained" branch
+      // is exercised.
+      final host = _party(
+        store,
+        'host',
+        owner: true,
+        authority: true,
+        rebaseEveryOps: 3,
+        maxDeletesPerCycle: 2,
+      );
+      addTearDown(host.dispose);
+
+      for (var i = 1; i <= 3; i++) {
+        await host.session.submit(_edit('host', SlideField.title, 'v$i'));
+      }
+      await host.sync(); // re-baseline #1 at seq 3
+      for (var i = 4; i <= 6; i++) {
+        await host.session.submit(_edit('host', SlideField.title, 'v$i'));
+      }
+      await host
+          .sync(); // re-baseline #2 arms compaction of {1,2,3}; first pass
+      expect(
+        await store.listSequences(),
+        [3, 4, 5, 6],
+        reason: 'only 2 of the 3 subsumed records went in the first pass',
+      );
+
+      await host.sync(); // second pass clears the tail
+      expect(await store.listSequences(), [4, 5, 6]);
+    });
+  });
 }
 
 /// A store wrapper that fails a chosen operation on demand, to drive the
@@ -734,6 +921,8 @@ class _FaultyStore implements CollabLogStore {
   final CollabLogStore _inner;
   bool failReadBeacon = false;
   bool failWriteBeacon = false;
+  bool failWriteSnapshot = false;
+  final List<int> deletes = [];
 
   @override
   Future<String?> readBeacon() async {
@@ -748,6 +937,18 @@ class _FaultyStore implements CollabLogStore {
   }
 
   @override
+  Future<void> writeSnapshot(String snapshot) async {
+    if (failWriteSnapshot) throw StateError('snapshot write failed');
+    return _inner.writeSnapshot(snapshot);
+  }
+
+  @override
+  Future<void> delete(int seq) async {
+    deletes.add(seq);
+    return _inner.delete(seq);
+  }
+
+  @override
   Future<List<int>> listSequences() => _inner.listSequences();
   @override
   Future<String> read(int seq) => _inner.read(seq);
@@ -755,8 +956,6 @@ class _FaultyStore implements CollabLogStore {
   Future<bool> append(int seq, String record) => _inner.append(seq, record);
   @override
   Future<String?> readSnapshot() => _inner.readSnapshot();
-  @override
-  Future<void> writeSnapshot(String snapshot) => _inner.writeSnapshot(snapshot);
 }
 
 /// A store wrapper that delays the visibility of freshly appended sequences, to
@@ -786,6 +985,8 @@ class _LaggyStore implements CollabLogStore {
 
   @override
   Future<String> read(int seq) => _inner.read(seq);
+  @override
+  Future<void> delete(int seq) => _inner.delete(seq);
   @override
   Future<String?> readSnapshot() => _inner.readSnapshot();
   @override
