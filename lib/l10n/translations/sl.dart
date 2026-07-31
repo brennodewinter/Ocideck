@@ -1773,6 +1773,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)': 'Šifriran posredovalnik (zasnova)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Komplet v skupni seji shrani samo lastnik; tvoje spremembe ostanejo v seji, dokler jih lastnik ne shrani.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

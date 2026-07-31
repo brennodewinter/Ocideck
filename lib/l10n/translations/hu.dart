@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)': 'Titkosított továbbító (terv)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'A megosztott munkamenetben csak a tulajdonos menti a decket; a változtatásaid a munkamenetben maradnak, amíg a tulajdonos nem ment.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

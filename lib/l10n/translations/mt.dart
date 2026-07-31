@@ -1793,6 +1793,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)': 'Relay kriptat (disinn)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Is-sid biss jaħżen id-deck f\'sessjoni kondiviża; it-tibdil tiegħek jibqa\' fis-sessjoni sakemm is-sid jaħżen.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

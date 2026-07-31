@@ -1774,6 +1774,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)': 'Zašifrovaný přenašeč (návrh)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Deck ve sdílené relaci ukládá pouze vlastník; tvoje změny zůstávají v relaci, dokud je vlastník neuloží.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

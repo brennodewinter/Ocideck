@@ -1774,6 +1774,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)': 'Verschlüsslets Relais (Design)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Nume dr Bsitzer speicheret s Deck in ere gmeinsame Sitzig; dini Änderige bliibe in dr Sitzig, bis dr Bsitzer speicheret.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

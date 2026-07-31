@@ -1771,6 +1771,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)': 'Relai terenkripsi (desain)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Hanya pemilik yang menyimpan deck dalam sesi bersama; perubahan Anda tetap di sesi sampai pemilik menyimpan.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

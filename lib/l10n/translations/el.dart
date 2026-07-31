@@ -1798,6 +1798,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)':
+      'Κρυπτογραφημένος αναμεταδότης (σχεδίαση)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Μόνο ο κάτοχος αποθηκεύει το deck σε μια κοινή συνεδρία· οι αλλαγές σας παραμένουν στη συνεδρία μέχρι ο κάτοχος να αποθηκεύσει.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

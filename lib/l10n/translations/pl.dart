@@ -1783,6 +1783,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)': 'Zaszyfrowany przekaźnik (projekt)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Tylko właściciel zapisuje deck we wspólnej sesji; twoje zmiany pozostają w sesji, dopóki właściciel nie zapisze.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

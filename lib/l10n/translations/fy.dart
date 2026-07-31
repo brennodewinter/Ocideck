@@ -731,6 +731,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Versleuteld doorgeefluik (ontwerp)': 'Fersifere relais (ûntwerp)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Allinnich de eigner bewarret it deck yn in dielde sesje; dyn feroaringen bliuwe yn de sesje oant de eigner bewarret.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

@@ -730,6 +730,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Versleuteld doorgeefluik (ontwerp)': 'Relais chiffré (conception)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Seul le propriétaire enregistre le deck dans une session partagée ; vos modifications restent dans la session jusqu\'à ce que le propriétaire enregistre.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

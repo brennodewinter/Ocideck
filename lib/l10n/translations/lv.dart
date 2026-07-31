@@ -1770,6 +1770,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)': 'Šifrēts retranslators (dizains)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Tikai īpašnieks saglabā deku koplietotā sesijā; jūsu izmaiņas paliek sesijā, līdz īpašnieks saglabā.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

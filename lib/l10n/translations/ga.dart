@@ -1806,6 +1806,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)': 'Athsheachadán criptithe (dearadh)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Ní shábhálann ach an t-úinéir an deck i seisiún roinnte; fanann d\'athruithe sa seisiún go dtí go sábhálann an t-úinéir.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

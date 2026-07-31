@@ -291,9 +291,18 @@ versleuteld doorgeefluik met een eigen, minimaal E2EE-schema in pure Dart. Of en
 wanneer OciDeck de bijbehorende crypto-verantwoordelijkheid aangaat, is een besluit
 van de beheerder, niet van de keuring.
 
-*Nog niet besloten (opgesteld 2026-07-31).* Deze keuring legt het advies en de feiten
-neer; de knoop — eigen minimale sessie-crypto met externe toets aanvaarden, of voor
-de beproefde-crypto-route #991 kiezen — ligt bij de beheerder.
+**Besloten (2026-07-31).** De beheerder heeft de knoop doorgehakt: **GO voor deze
+route** als de aangewezen weg naar realtime-samenwerken. OciDeck bouwt een eigen,
+pure-Dart implementatie (de homeserver als versleuteld doorgeefluik met een eigen
+minimaal E2EE-schema), zodat EUPL-1.2 de licentie blijft; route #991 (matrix-rust-sdk)
+en de famedly-SDK (#976) worden niet gevolgd. De vier voorwaarden hierboven blijven
+staan als **bouwvoorwaarden**, met voorwaarde 1 (minimaal cryptoschema, geen eigen
+ratchet, externe toets) als de harde, want de hele reden dat deze route boven #991
+verkozen kan worden hangt aan die discipline. Het licentiebeleid blijft ongewijzigd;
+er wordt niets geherlicenseerd.
+
+Het uitgewerkte, bruikbare ontwerp dat op dit besluit volgt staat in
+[`docs/design/SELF_ENCRYPTED_RELAY.md`](../docs/design/SELF_ENCRYPTED_RELAY.md).
 
 [issue #977]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/977
 [#975]: https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/975
