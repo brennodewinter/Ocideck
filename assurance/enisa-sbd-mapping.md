@@ -71,7 +71,7 @@ Verwijzingen zijn naar **bestandsnaam plus symbool**, nooit naar een regelnummer
 
 | # | Playbook | Oordeel | Anker in OciDeck | Motivering / open |
 |---|---|---|---|---|
-| 01 | Trust boundaries & threat modelling | **Sterk (niet-poort)** | `docs/SECURITY_DESIGN.md` §Threat model (7 rijen, elk met restrisico + aanvaardingsdatum); `assurance/risicoafweging.md` (R1–R10); vertrouwensgrenzen ook in `docs/design/GIT_STORAGE.md`, `AI_ASSIST.md` | Model bestaat, gebruikt "trust boundary" expliciet en is per grens getoetst (`network_sink_guard_test`, `git_network_guard_test`, `privacy_scan_redact_parity_test`, de SSRF-serie in `AUDIT_RESPONSE.md`). Wat mist is de **verversingstrigger** uit de gate: er is geen automatische prikkel die bij een nieuwe interface om herziening vraagt. Zie [open punt O4](#de-open-punten). |
+| 01 | Trust boundaries & threat modelling | **Sterk (niet-poort)** | `docs/SECURITY_DESIGN.md` §Threat model (7 rijen, elk met restrisico + aanvaardingsdatum); `assurance/risicoafweging.md` (R1–R10); vertrouwensgrenzen ook in `docs/design/GIT_STORAGE.md`, `AI_ASSIST.md` | Model bestaat, gebruikt "trust boundary" expliciet en is per grens getoetst (`network_sink_guard_test`, `git_network_guard_test`, `privacy_scan_redact_parity_test`, de SSRF-serie in `AUDIT_RESPONSE.md`). Wat mist is de **verversingstrigger** uit de gate: er is geen automatische prikkel die bij een nieuwe interface om herziening vraagt. Zie [open punt O2](#de-open-punten) (#1015). |
 | 02 | Least privilege | **Deels** | OS-sleutelbos voor geheimen (`SECURITY_DESIGN.md` §13); git-subproces met `includeParentEnvironment:false`, lege `HOME`, `GIT_CONFIG_NOSYSTEM=1` (`GitCliIo`); default-deny netwerk (`NetGuard`) | Geen serverrollen, geen gedeelde productie-adminsleutels — omdat er geen server en geen accounts zijn. De gate-regel "geautomatiseerde autorisatietests" heeft geen onderwerp: `ClassificationEnforcementPolicy` is datagovernance, geen autorisatie (zie [`ASVS-5.0.0-scope.md`](ASVS-5.0.0-scope.md) V8). Wat wél geldt — geheimen, subproces, default-deny — is streng. |
 | 03 | Strong identity & authentication | **Buiten scope** | — | Geen accounts, geen inlog, geen sessie, geen identity provider (zie `ASVS-5.0.0-scope.md` V6/V7). De enige credential is een door de gebruiker geplakt git-token, in de OS-sleutelbos. Er is geen identiteitsdomein om te harden. |
 | 04 | Attack surface minimisation | **Afgedwongen** | `make check-web` (`tool/check_web_hardening.dart`); `check-dead-code`; `check-conventions` (verbiedt `print()`); de beveiligingsmodule is een schakelaar over ingebakken catalogi zonder netwerkuitgang | Productiebouw is minimaal; wees interfaces zijn de webbundel (gehard) en niets meer. Geen diagnostische gereedschappen in release. |
@@ -89,12 +89,12 @@ identiteits-playbooks hun onderwerp. Datzelfde argument keert terug bij 16, 18 e
 |---|---|---|---|---|
 | 07 | Life-cycle management | **Deels** | EOL-beleid in `SECURITY.md` (≥3 maanden aanzegging); `make deps-check` (OSV) + `make sbom`; `DiskTraces` voor buitenbedrijfstelling; aanvaarde restrisico's met eigenaar in `risicoafweging.md` + `AUDIT_RESPONSE.md` | Sterk op EOL, SBOM en restrisico. De gate-regel "secure update path" is **bewust afwezig** — zie 20. |
 | 08 | User-centric design | **Deels** | Veilige standaard (netwerk uit, module uit); `certificate_trust_dialog.dart`; OciWacht-bevindingen gemaskeerd getoond; `check-hardcoded-text` (elke zichtbare tekst via `l10n.d()`, dus vertaalbaar en te herschrijven); toetsing via de `gebruikerstest`-agent | Geen standaard-adminwachtwoord (n.v.t.). Beveiligingswaarschuwingen zijn handelingsgericht. |
-| 09 | Secure coding & verification | **Afgedwongen** | `make sast` (semgrep, per-PR), `make check-secrets` (gitleaks + trufflehog `--no-verification`, per-PR), `make sbom`, `analyze --fatal-infos`, dekkingsvloer, rood-één-keer-conventie (`PULL_REQUEST_TEMPLATE.md`) | Bijna 1:1 met de gate. Twee kanttekeningen, samen [open punt O2](#de-open-punten): **CODEOWNERS ontbreekt** (de peer-reviewregel leunt op de semgrep-grendels rond `net_guard`, `Process.run` en secret-RNG plus één onderhouder), en het mutatietesten is smal en handmatig (`make mutate`, één operator, niet in `check`). |
+| 09 | Secure coding & verification | **Afgedwongen** | `make sast` (semgrep, per-PR), `make check-secrets` (gitleaks + trufflehog `--no-verification`, per-PR), `make sbom`, `analyze --fatal-infos`, dekkingsvloer, rood-één-keer-conventie (`PULL_REQUEST_TEMPLATE.md`) | Bijna 1:1 met de gate. Twee kanttekeningen, geen van beide een openstaand gat: **CODEOWNERS ontbreekt**, maar de peer-review op de gevoelige modules is al belegd bij de enige onderhouder (`CONTRIBUTING.md` benoemt de busfactor-één) en wordt geschraagd door de semgrep-grendels rond `net_guard`, `Process.run`-inperking en secret-RNG; een `CODEOWNERS`-bestand formaliseert dat pas zinvol zodra een tweede onderhouder toetreedt (waar CONTRIBUTING de "self-merge stopt"-regel al aan hangt). En het mutatietesten is smal en handmatig (`make mutate`, één operator, niet in `check`) — al gevolgd in de CRA-positie. |
 | 10 | Logging, monitoring & alerting | **Buiten scope** | `lib/utils/log.dart` (één afvoer, `dart:developer`); `_safeError` houdt deckinhoud uit de log; weigeringen van `TabsProvider`/`GitCliIo`/`ExportService` laten een spoor zónder inhoud | Geen logverwerker, geen SIEM, geen tweede machine — centralisatie en alerting missen hun onderwerp (zie `ASVS-5.0.0-afwijkingen.md` V16.2.4/16.4.2/16.4.3). De **privacy**kant van logging is juist streng: bijzondere persoonsgegevens mogen niet in een log echoën. |
 | 11 | Configuration & change management | **Afgedwongen** | Alles in git + DCO (`dco.txt`, `PULL_REQUEST_TEMPLATE.md`); `test/pinned_versions_manifest_test.dart` (harde pin-poort) + `.github/pinned-ci-versions.json`; `make check-toolchain` | Sterk op versiebeheer, pins en toolchain-basislijn. De gate-regel "dev/test/prod gescheiden" heeft geen onderwerp: er is geen IaC en geen productieomgeving. |
-| 12 | Incident response & recovery | **Deels / Open** | `SECURITY.md` (rollen, escalatieadres `security@librekat.nl`, runbook detect→reproduce→tracker); SLA gemeten door `tool/check_service_norms.dart` (5/10/90 werkdagen); herstel via git-opslag + crash-recovery-snapshot | Intern proces bestaat en wordt gemeten. Het echte gat is de **externe meldroute**: er is geen route naar het CSIRT of ENISA voor een actief misbruikte kwetsbaarheid (al benoemd in [`CRA-2024-2847-positie.md`](CRA-2024-2847-positie.md) §artikel 24). Zie [open punt O1](#de-open-punten). |
+| 12 | Incident response & recovery | **Deels** | `SECURITY.md` (rollen, escalatieadres `security@librekat.nl`, runbook detect→reproduce→tracker); SLA gemeten door `tool/check_service_norms.dart` (5/10/90 werkdagen); herstel via git-opslag + crash-recovery-snapshot | Intern proces bestaat en wordt gemeten. De **externe meldroute** (CSIRT/ENISA) is géén openstaand gat: die hoort bij een fabrikants- of rentmeestersplicht, en [`CRA-2024-2847-positie.md`](CRA-2024-2847-positie.md) §artikel 24 concludeert dat geen van beide op LibreKAT rust. Komt die rol ooit alsnog, dan is het een adres en een afspraak — zie daar. |
 | 13 | Vulnerability & patch management | **Deels** | `make deps-check` (OSV over de gebundelde JS), `make sbom`, `make sast`, `make check-secrets`; triage vastgelegd in `risicoafweging.md`, `AUDIT_RESPONSE.md`, CHANGELOG; fix staat op `main` zodra gemerged | Proces en JS-graaf gedekt. Open: de **Dart-afhankelijkheidsgraaf** wordt niet automatisch afgezocht — Trivy draait adviserend, niet als poort (#517). |
-| 14 | Supply chain controls | **Afgedwongen** | `make sbom` (CycloneDX 1.6 + SPDX 2.3) + `sbom-verify`-poort + `test/sbom_test.dart`; leveranciersweging in `ketenkeuring-matrix-sdk.md` / `-rust-sdk.md` (GO/NO-GO); build-secrets minimaal in de workflows | Een uitschieter. Eén open regel: **artefactondertekening is asymmetrisch** — macOS is Developer-ID-getekend + genotariseerd (`scripts/notarize_macos.sh`), Windows/Linux leunen op `SHA256SUMS` (uitdrukkelijk "geen handtekening", `SECURITY.md`). Provenance/SLSA is niet geformaliseerd. Zie [open punt O3](#de-open-punten). |
+| 14 | Supply chain controls | **Afgedwongen** | `make sbom` (CycloneDX 1.6 + SPDX 2.3) + `sbom-verify`-poort + `test/sbom_test.dart`; leveranciersweging in `ketenkeuring-matrix-sdk.md` / `-rust-sdk.md` (GO/NO-GO); build-secrets minimaal in de workflows | Een uitschieter. Eén open regel: **artefactondertekening is asymmetrisch** — macOS is Developer-ID-getekend + genotariseerd (`scripts/notarize_macos.sh`), Windows/Linux leunen op `SHA256SUMS` (uitdrukkelijk "geen handtekening", `SECURITY.md`). Provenance/SLSA is niet geformaliseerd. Zie [open punt O1](#de-open-punten) (#1013, #1014). |
 
 ## Secure by Default — Default Hardening (15–18)
 
@@ -118,34 +118,36 @@ identiteits-playbooks hun onderwerp. Datzelfde argument keert terug bij 16, 18 e
 
 ## De open punten
 
-Vier echte gaten, gescheiden van de bewuste scope-outs. Privacy/beveiliging eerst.
-Elk hoort een eigen issue te krijgen; de uitwerking staat daar, niet hier.
+Twee echte gaten, elk met een issue. De uitwerking staat daar, niet hier.
 
-- **O1 — externe meldroute (CSIRT/ENISA).** Playbook 12. Er is een intern
-  disclosure-proces met gemeten termijnen, maar geen route naar het onder NIS2
-  aangewezen CSIRT of ENISA voor een actief misbruikte kwetsbaarheid. Dit is al
-  benoemd in [`CRA-2024-2847-positie.md`](CRA-2024-2847-positie.md) §artikel 24
-  als "de enige echte leemte, en hij is klein: een adres en een afspraak, geen
-  bouwwerk." Hij hoort er te staan vóórdat hij nodig is.
-
-- **O2 — peer-review op beveiligingsgevoelige modules formaliseren.** Playbook 09.
-  Er is geen `CODEOWNERS`; de reviewregel leunt op de semgrep-grendels rond
-  `net_guard.dart`, `lib/services/git/` en secret-RNG, plus één onderhouder
-  (`CONTRIBUTING.md` benoemt de busfactor-één zelf). Een `CODEOWNERS` die de
-  gevoelige verzameling (`net_guard.dart`, `lib/services/privacy/`,
-  `lib/services/git/`, `semgrep/`) benoemt, documenteert die grens ook als de
-  tweede onderhouder er komt. Klein, en het maakt de release-gate-regel expliciet.
-
-- **O3 — artefactondertekening symmetrisch maken.** Playbook 14/20. macOS is
+- **O1 — artefactondertekening symmetrisch maken.** Playbook 14. macOS is
   getekend + genotariseerd; Windows en Linux leunen op `SHA256SUMS` (geen
-  handtekening). Overlapt met #520 (veilige distributie); dit is de
-  ondertekeningshelft ervan, plus de vraag of provenance/SLSA haalbaar is.
+  handtekening). Eén issue per onbehandeld platform: **#1013** (Windows,
+  Authenticode) en **#1014** (Linux, detached signature), beide onder de
+  veilige-distributievraag **#520**. Provenance/SLSA is de vraag erachter.
 
-- **O4 — verversingstrigger voor het dreigingsmodel.** Playbook 01. Het model in
-  `docs/SECURITY_DESIGN.md` wordt met de hand ververst. De gate vraagt om een
-  prikkel bij een nieuwe interface, authenticatiewijziging of grote
-  afhankelijkheidswissel. Het lichtste dat werkt is een regel in de
-  `PULL_REQUEST_TEMPLATE.md`-checklist, geen nieuwe poort.
+- **O2 — verversingstrigger voor het dreigingsmodel.** Playbook 01. Het model in
+  `docs/SECURITY_DESIGN.md` wordt met de hand ververst. Het lichtste dat werkt is
+  een regel in de `PULL_REQUEST_TEMPLATE.md`-checklist, geen nieuwe poort.
+  **#1015**.
+
+### Na weging géén open punt
+
+Vastgelegd zodat de afweging terugvindbaar is — een stilzwijgend geschrapt punt
+is over een jaar niet te reconstrueren.
+
+- **Externe meldroute (CSIRT/ENISA), playbook 12.** De verplichting hoort bij een
+  fabrikant of een rentmeester; [`CRA-2024-2847-positie.md`](CRA-2024-2847-positie.md)
+  §artikel 24 concludeert dat geen van beide op Stichting LibreKAT rust. Zonder
+  CRA/NIS2-plicht is dit geen openstaand gat maar een voorwaardelijk punt — het
+  wordt pas een item als die rol kantelt, en dán is het een adres en een afspraak.
+
+- **CODEOWNERS op gevoelige modules, playbook 09.** De peer-review op die modules
+  is al belegd bij de enige onderhouder (busfactor-één, `CONTRIBUTING.md`) en
+  wordt geschraagd door de semgrep-grendels rond `net_guard`, de `Process.run`-
+  inperking en secret-RNG. Een `CODEOWNERS`-bestand formaliseert dat pas zinvol
+  zodra een tweede onderhouder toetreedt — precies het moment waarop CONTRIBUTING
+  de "self-merge stopt"-regel al laat ingaan.
 
 Al elders gevolgd, hier alleen genoemd: de Dart-graaf adviserend i.p.v. als poort
 (#517), en de smalle, handmatige mutatiedekking (§verificatiediepte in de
