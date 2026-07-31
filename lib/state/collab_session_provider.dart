@@ -12,12 +12,15 @@
 
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:uuid/uuid.dart';
 
 import '../collab/collab.dart';
 import 'deck_provider.dart';
+import 'matrix_client_provider.dart';
+import 'secret_store_provider.dart';
 import 'tabs_provider.dart';
 import 'webdav_provider.dart';
 
@@ -34,6 +37,7 @@ class CollabSessionState {
     this.role,
     this.error,
     this.isTemporaryAuthority = false,
+    this.inviteLink,
   });
 
   final CollabPhase phase;
@@ -49,6 +53,11 @@ class CollabSessionState {
   /// saved to the shared source until the owner returns.
   final bool isTemporaryAuthority;
 
+  /// The link to share so others can join, set only when *hosting* over Matrix
+  /// (a new room per session, §6.5). Null for a guest, and for WebDAV where
+  /// joining is by the deck's own source rather than a link.
+  final String? inviteLink;
+
   bool get isActive => phase == CollabPhase.active;
   bool get isConnecting => phase == CollabPhase.connecting;
 
@@ -63,11 +72,13 @@ class CollabSessionState {
     CollabRole? role,
     String? error,
     bool? isTemporaryAuthority,
+    String? inviteLink,
   }) => CollabSessionState(
     phase: phase ?? this.phase,
     role: role ?? this.role,
     error: error,
     isTemporaryAuthority: isTemporaryAuthority ?? this.isTemporaryAuthority,
+    inviteLink: inviteLink ?? this.inviteLink,
   );
 }
 
@@ -91,6 +102,7 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
 
   CollabSessionController? _controller;
   HandoverCoordinator? _coordinator;
+  MatrixCollabLaunch? _matrixLaunch;
   StreamSubscription<DeckState>? _deckSub;
   StreamSubscription<void>? _authoritySub;
   bool _disposed = false;
@@ -103,6 +115,16 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
 
   /// Join a session another author already started for this deck.
   Future<void> join() => _begin(CollabRole.guest);
+
+  /// Host a realtime session over the app-global Matrix account (§6): a fresh
+  /// encrypted room whose link — surfaced on [CollabSessionState.inviteLink] —
+  /// others paste into [joinMatrix]. Works for any deck; unlike WebDAV it does
+  /// not need the deck to live on a shared source.
+  Future<void> hostMatrix() => _beginMatrix(CollabRole.host);
+
+  /// Join the Matrix session named by [inviteLink].
+  Future<void> joinMatrix(String inviteLink) =>
+      _beginMatrix(CollabRole.guest, inviteLink: inviteLink);
 
   Future<void> _begin(CollabRole role) async {
     if (state.isActive || state.isConnecting) return;
@@ -157,12 +179,11 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
     }
   }
 
-  void _attach(
-    CollabLaunch launch,
-    DeckNotifier deckNotifier,
-    CollabRole role,
-  ) {
-    final session = launch.session;
+  /// Wire the controller both transports share: local deck edits flow out as ops
+  /// (via [DeckNotifier.stream]) and remote changes flow back merged (via
+  /// [DeckNotifier.applyCollabDeck]). The WebDAV path layers authority handover
+  /// on top ([_attach]); the Matrix path (§6, handover is P-E) does not.
+  void _attachController(CollabSession session, DeckNotifier deckNotifier) {
     _controller = CollabSessionController(
       session: session,
       readDeck: () => deckNotifier.currentState.deck ?? session.deck,
@@ -172,6 +193,138 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
       final deck = deckState.deck;
       if (deck != null) _controller?.onLocalEdit(deck);
     });
+  }
+
+  /// Host or join a realtime Matrix session (§6.5). Unlike [_begin] this needs no
+  /// WebDAV source — only the app-global Matrix account and, for a guest, an
+  /// invite link. A guest does not become active until the authority's baseline
+  /// arrives, so it drives the launch's sync loop and awaits its `sessionReady`.
+  Future<void> _beginMatrix(CollabRole role, {String? inviteLink}) async {
+    if (state.isActive || state.isConnecting) return;
+    final tab = _tab;
+    final deckNotifier = _ref.read(deckProvider.notifier);
+    final deck = deckNotifier.currentState.deck;
+    if (tab == null || deck == null) {
+      state = state.copyWith(phase: CollabPhase.failed, error: 'no-deck');
+      return;
+    }
+    final account = _ref.read(matrixAccountProvider);
+    if (account == null || !account.isConfigured) {
+      state = state.copyWith(
+        phase: CollabPhase.failed,
+        error: 'no-matrix-account',
+      );
+      return;
+    }
+    state = const CollabSessionState(phase: CollabPhase.connecting);
+    try {
+      final client = await _ref.read(matrixClientProvider.future);
+      if (_disposed) return;
+      if (client == null) {
+        state = state.copyWith(
+          phase: CollabPhase.failed,
+          error: 'no-matrix-account',
+        );
+        return;
+      }
+      final secrets = _ref.read(secretStoreProvider);
+      String? link;
+      final MatrixCollabLaunch launch;
+      if (role == CollabRole.host) {
+        final hosted = await hostMatrixCollab(
+          client: client,
+          secretStore: secrets,
+          account: account,
+          deck: deck,
+        );
+        launch = hosted.launch;
+        link = hosted.inviteLink;
+      } else {
+        launch = await joinMatrixCollab(
+          client: client,
+          secretStore: secrets,
+          account: account,
+          localDeck: deck,
+          inviteLink: inviteLink!,
+        );
+      }
+      if (_disposed) return await launch.dispose();
+      _matrixLaunch = launch;
+      launch.start();
+      // The session is live now for a host and once the baseline arrives for a
+      // guest. Finish off this call so `connecting` is observable and a guest
+      // does not block its caller while the baseline is in flight.
+      unawaited(_finishMatrix(launch, role, link, tab, deckNotifier));
+    } catch (e) {
+      await _teardown();
+      if (!_disposed) {
+        state = state.copyWith(
+          phase: CollabPhase.failed,
+          error: _matrixError(role, e),
+        );
+      }
+    }
+  }
+
+  /// Await the session becoming live (immediate for a host, baseline-gated for a
+  /// guest), then attach the controller and go active. Bounded so a dead host
+  /// fails the join rather than spinning forever.
+  Future<void> _finishMatrix(
+    MatrixCollabLaunch launch,
+    CollabRole role,
+    String? link,
+    TabInfo tab,
+    DeckNotifier deckNotifier,
+  ) async {
+    try {
+      final session = await launch.sessionReady.timeout(
+        const Duration(seconds: 45),
+      );
+      if (_disposed) return;
+      tab.collabSession = session;
+      _attachController(session, deckNotifier);
+      state = CollabSessionState(
+        phase: CollabPhase.active,
+        role: role,
+        inviteLink: link,
+      );
+    } on TimeoutException {
+      await _teardown();
+      if (!_disposed) {
+        state = state.copyWith(
+          phase: CollabPhase.failed,
+          error: 'join-timeout',
+        );
+      }
+    }
+  }
+
+  /// Drive one Matrix sync round now, so a test can advance the session without
+  /// waiting on the periodic loop. No-op outside a Matrix session.
+  @visibleForTesting
+  Future<void> debugMatrixSyncNow() async => _matrixLaunch?.syncNow();
+
+  /// Map a Matrix launch failure to a machine key the UI localises.
+  static String _matrixError(CollabRole role, Object e) {
+    if (e is MatrixException) {
+      return switch (e.kind) {
+        MatrixErrorKind.config =>
+          role == CollabRole.guest ? 'bad-invite' : 'matrix-config',
+        MatrixErrorKind.auth => 'matrix-auth',
+        MatrixErrorKind.network => 'matrix-network',
+        _ => 'matrix-failed',
+      };
+    }
+    return role == CollabRole.guest ? 'no-baseline' : 'failed';
+  }
+
+  void _attach(
+    CollabLaunch launch,
+    DeckNotifier deckNotifier,
+    CollabRole role,
+  ) {
+    final session = launch.session;
+    _attachController(session, deckNotifier);
     // When the session authority changes (an owner drops, a successor takes over,
     // the owner hands back), re-drive any local edit the old authority never
     // versioned to the new one, and refresh the "temporary owner" indicator.
@@ -212,6 +365,11 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
     _coordinator = null;
     await _controller?.dispose(); // disposes the session too
     _controller = null;
+    // Matrix owns its session through the launch (WebDAV owns it through the
+    // controller). Both dispose paths are idempotent, so disposing after the
+    // controller is safe; the launch also stops its sync loop and transport.
+    await _matrixLaunch?.dispose();
+    _matrixLaunch = null;
     _tab?.collabSession = null;
   }
 
@@ -222,6 +380,7 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
     _deckSub?.cancel();
     _coordinator?.dispose();
     _controller?.dispose();
+    _matrixLaunch?.dispose();
     _tab?.collabSession = null;
     super.dispose();
   }
