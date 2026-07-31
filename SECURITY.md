@@ -598,3 +598,28 @@ down.
 *(Corrected 2026-07-28: this said "the commit is the only version identifier
 that exists" — releases are tagged now, but the point about pinning the commit
 still stands because the version number is not bumped on every commit.)*
+
+### Release artifact integrity and signing
+
+*Added 2026-07-31.* Every release carries `SHA256SUMS` over all of its files. A
+checksum proves you have the bytes that were published here; on its own it is
+**not** a signature and says nothing about *who* published them. The stronger
+guarantee is deliberately asymmetric per platform:
+
+- **macOS** is signed with a Developer ID and notarised by Apple
+  (`scripts/notarize_macos.sh`), which attests the publisher.
+- **Windows and Linux** ship with `SHA256SUMS` and **no code signature**. For
+  Windows this is a weighed decision, not a gap (#1013, closed 2026-07-31): since
+  March 2024 no Authenticode certificate type — OV or EV — buys instant
+  SmartScreen trust, reputation is earned only by download volume, and every paid
+  route would put either a hardware token or a signing secret into the release
+  path, against the least-privilege line this project holds. Building from source
+  is the provenance route that needs no signature and no trust in our build
+  machine: the toolchain is pinned and every artifact comes from a workflow you
+  can read. Linux signing (#1014) remains an open question.
+
+If the SmartScreen warning ever becomes a real barrier, the fallback is an OV
+certificate signed by hand on a local machine — the same manual model as the
+macOS notarisation — never a secret in CI. The full account is in
+[`docs/KNOWN_LIMITATIONS.md`](docs/KNOWN_LIMITATIONS.md#releases-are-alpha-and-unsigned)
+and [`docs/BUILD.md`](docs/BUILD.md#signing-status-of-the-published-artifacts).

@@ -609,3 +609,18 @@ platform's note only once its published artifact is actually signed (macOS once 
 tag has been seen producing a notarised `.app`). `SHA256SUMS` proves you have the
 bytes that were published; it is not a signature and says nothing about who
 published them.
+
+**Windows signing was assessed and deliberately declined** (#1013, closed
+2026-07-31), so "not signed" here is a decision, not a to-do. Two facts drove it.
+Since March 2024 neither an OV nor an EV certificate grants instant SmartScreen
+trust — reputation accrues only with download volume — so signing would not
+silence the warning up front. And every publicly-trusted signing key must now
+live on a hardware token or a cloud-HSM, which for CI means a signing secret in
+the release runner, against this project's least-privilege line. The chosen
+posture is `SHA256SUMS` plus the source route as the provenance guarantee. The
+re-open trigger is recorded with the decision: if the warning ever becomes a real
+barrier, sign with an OV certificate by hand on a local machine (the
+macOS-notarisation model), not from CI. Linux (#1014) is a separate, still-open
+question. The full reasoning lives in
+[KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md#releases-are-alpha-and-unsigned) and
+[SECURITY.md](../SECURITY.md#release-artifact-integrity-and-signing).

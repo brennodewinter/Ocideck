@@ -94,7 +94,7 @@ identiteits-playbooks hun onderwerp. Datzelfde argument keert terug bij 16, 18 e
 | 11 | Configuration & change management | **Afgedwongen** | Alles in git + DCO (`dco.txt`, `PULL_REQUEST_TEMPLATE.md`); `test/pinned_versions_manifest_test.dart` (harde pin-poort) + `.github/pinned-ci-versions.json`; `make check-toolchain` | Sterk op versiebeheer, pins en toolchain-basislijn. De gate-regel "dev/test/prod gescheiden" heeft geen onderwerp: er is geen IaC en geen productieomgeving. |
 | 12 | Incident response & recovery | **Deels** | `SECURITY.md` (rollen, escalatieadres `security@librekat.nl`, runbook detect→reproduce→tracker); SLA gemeten door `tool/check_service_norms.dart` (5/10/90 werkdagen); herstel via git-opslag + crash-recovery-snapshot | Intern proces bestaat en wordt gemeten. De **externe meldroute** (CSIRT/ENISA) is géén openstaand gat: die hoort bij een fabrikants- of rentmeestersplicht, en [`CRA-2024-2847-positie.md`](CRA-2024-2847-positie.md) §artikel 24 concludeert dat geen van beide op LibreKAT rust. Komt die rol ooit alsnog, dan is het een adres en een afspraak — zie daar. |
 | 13 | Vulnerability & patch management | **Deels** | `make deps-check` (OSV over de gebundelde JS), `make sbom`, `make sast`, `make check-secrets`; triage vastgelegd in `risicoafweging.md`, `AUDIT_RESPONSE.md`, CHANGELOG; fix staat op `main` zodra gemerged | Proces en JS-graaf gedekt. Open: de **Dart-afhankelijkheidsgraaf** wordt niet automatisch afgezocht — Trivy draait adviserend, niet als poort (#517). |
-| 14 | Supply chain controls | **Afgedwongen** | `make sbom` (CycloneDX 1.6 + SPDX 2.3) + `sbom-verify`-poort + `test/sbom_test.dart`; leveranciersweging in `ketenkeuring-matrix-sdk.md` / `-rust-sdk.md` (GO/NO-GO); build-secrets minimaal in de workflows | Een uitschieter. Eén open regel: **artefactondertekening is asymmetrisch** — macOS is Developer-ID-getekend + genotariseerd (`scripts/notarize_macos.sh`), Windows/Linux leunen op `SHA256SUMS` (uitdrukkelijk "geen handtekening", `SECURITY.md`). Provenance/SLSA is niet geformaliseerd. Zie [open punt O1](#de-open-punten) (#1013, #1014). |
+| 14 | Supply chain controls | **Afgedwongen** | `make sbom` (CycloneDX 1.6 + SPDX 2.3) + `sbom-verify`-poort + `test/sbom_test.dart`; leveranciersweging in `ketenkeuring-matrix-sdk.md` / `-rust-sdk.md` (GO/NO-GO); build-secrets minimaal in de workflows | Een uitschieter. **Artefactondertekening is asymmetrisch** — macOS is Developer-ID-getekend + genotariseerd (`scripts/notarize_macos.sh`), Windows en Linux leunen op `SHA256SUMS` (geen handtekening; `SECURITY.md` §"Release artifact integrity and signing", `docs/BUILD.md`). Windows is na weging **bewust zo gelaten** (#1013, gesloten — SmartScreen-reputatie is sinds maart 2024 certtype-onafhankelijk en downloadvolume-gebonden, en elke betaalde route kost óf een hardware-token óf een secret in de release-runner); Linux blijft open (#1014). Provenance/SLSA is niet geformaliseerd. Zie [open punt O1](#de-open-punten). |
 
 ## Secure by Default — Default Hardening (15–18)
 
@@ -120,11 +120,12 @@ identiteits-playbooks hun onderwerp. Datzelfde argument keert terug bij 16, 18 e
 
 Twee echte gaten, elk met een issue. De uitwerking staat daar, niet hier.
 
-- **O1 — artefactondertekening symmetrisch maken.** Playbook 14. macOS is
-  getekend + genotariseerd; Windows en Linux leunen op `SHA256SUMS` (geen
-  handtekening). Eén issue per onbehandeld platform: **#1013** (Windows,
-  Authenticode) en **#1014** (Linux, detached signature), beide onder de
-  veilige-distributievraag **#520**. Provenance/SLSA is de vraag erachter.
+- **O1 — artefactondertekening symmetrisch maken (Linux).** Playbook 14. macOS is
+  getekend + genotariseerd; Linux leunt op `SHA256SUMS` (geen handtekening).
+  Open issue: **#1014** (Linux, detached signature), onder de
+  veilige-distributievraag **#520**. Provenance/SLSA is de vraag erachter. De
+  Windows-tak van dit punt is na weging bewust aanvaard — zie *Na weging géén
+  open punt* hieronder (#1013).
 
 - **O2 — verversingstrigger voor het dreigingsmodel.** Playbook 01. Het model in
   `docs/SECURITY_DESIGN.md` wordt met de hand ververst. Het lichtste dat werkt is
@@ -148,6 +149,17 @@ is over een jaar niet te reconstrueren.
   inperking en secret-RNG. Een `CODEOWNERS`-bestand formaliseert dat pas zinvol
   zodra een tweede onderhouder toetreedt — precies het moment waarop CONTRIBUTING
   de "self-merge stopt"-regel al laat ingaan.
+
+- **Windows Authenticode-ondertekening, playbook 14 (#1013, gesloten).** Bewust
+  geen ondertekening. Sinds maart 2024 bouwt elk certtype (OV én EV) SmartScreen-
+  reputatie alleen op via downloadvolume — geen enkele route neemt de
+  waarschuwing meteen weg — terwijl elke betaalde route óf terugkerende kosten +
+  een hardware-token, óf een clouddienst met een signeer-secret in de release-
+  runner meebrengt (dat laatste botst met least-privilege). De bronroute blijft
+  de herkomstgarantie; `SHA256SUMS` + heldere "Run anyway"-uitleg blijven.
+  Heroverweging: een OV-certificaat, lokaal-handmatig getekend (het macOS-model),
+  zodra downloadvolume dat rechtvaardigt. Uitgelegd in `SECURITY.md`,
+  `docs/KNOWN_LIMITATIONS.md` en `docs/BUILD.md`.
 
 Al elders gevolgd, hier alleen genoemd: de Dart-graaf adviserend i.p.v. als poort
 (#517), en de smalle, handmatige mutatiedekking (§verificatiediepte in de
