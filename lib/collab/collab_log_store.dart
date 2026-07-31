@@ -31,6 +31,13 @@ abstract interface class CollabLogStore {
   /// contract: it makes the log an ordered sequence no write can clobber.
   Future<bool> append(int seq, String record);
 
+  /// Delete the record at [seq] (§5.2 log compaction). Idempotent — deleting a
+  /// record that is already gone is not an error. Only the authority calls this,
+  /// and only for records an older baseline already subsumes; a delete that fails
+  /// leaves the record in place, which is always the safe state (a would-be
+  /// straggler recovers from the latest snapshot instead).
+  Future<void> delete(int seq);
+
   /// The session baseline written by [writeSnapshot], or `null` if none has been
   /// written yet (a joiner arriving before the owner posted one). The snapshot
   /// is a single record beside the numbered log, not part of it (§5.2).
@@ -80,6 +87,9 @@ class InMemoryCollabLogStore implements CollabLogStore {
     _records[seq] = record;
     return true;
   }
+
+  @override
+  Future<void> delete(int seq) async => _records.remove(seq);
 
   String? _snapshot;
 
@@ -175,6 +185,9 @@ class WebdavCollabLogStore implements CollabLogStore {
       return false;
     }
   }
+
+  @override
+  Future<void> delete(int seq) => service.delete(_pathFor(seq));
 
   @override
   Future<String?> readSnapshot() async {

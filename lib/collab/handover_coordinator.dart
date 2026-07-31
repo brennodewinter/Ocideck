@@ -6,7 +6,11 @@
 // pure session loop or the dumb transport pipe (§5.6). Being the authority's
 // periodic driver, it also owns §5.2 **re-baselining**: every `rebaseEveryOps`
 // op versions it publishes a fresh snapshot so a later joiner never replays the
-// whole op log (see [_maybeRebaseline]).
+// whole op log (see [_maybeRebaseline]). And it owns the two halves of §5.2
+// **log compaction**: as the authority it deletes old records a durable baseline
+// already subsumes (bounded per cycle, always one baseline behind — see
+// [_runCompaction]); as any participant it recovers from a compacted gap by
+// jumping forward to the latest snapshot ([_maybeRecoverFromGap]).
 //
 // WebDAV-specific on purpose. It reads `transport.isCaughtUp` / `knownMaxSeq` —
 // notions the loopback and a future Matrix transport do not share — so it is not
@@ -74,6 +78,7 @@ class HandoverCoordinator {
     this.heartbeatFailThreshold = 3,
     this.claimSpread = 8,
     this.rebaseEveryOps = 100,
+    this.maxDeletesPerCycle = 32,
   });
 
   final CollabSession session;
@@ -109,6 +114,12 @@ class HandoverCoordinator {
   /// snapshot writes; larger = the reverse.
   final int rebaseEveryOps;
 
+  /// The most op records a single compaction pass deletes (§5.2). Compaction runs
+  /// detached from the poll loop, so this does not gate liveness; it just keeps
+  /// each pass's work — and the window in which a delete could race a re-baseline
+  /// — small, with the rest cleared over the following passes.
+  final int maxDeletesPerCycle;
+
   String get participantId => session.participantId;
 
   Timer? _timer;
@@ -128,6 +139,16 @@ class HandoverCoordinator {
 
   // The op version at the last baseline this session published (§5.2 re-baseline).
   int _lastRebaseVersion = 0;
+
+  // §5.2 compaction. `_prevRebaseSeq` is the seq of the previous *durable*
+  // baseline; it advances only after a new snapshot write confirms, so a failed
+  // write can never widen the delete window (the permanent-stall guard).
+  // `_compactUpTo` is the ceiling records may be deleted at or below — always the
+  // previous baseline's seq, the one-interval safety margin.
+  int _prevRebaseSeq = 0;
+  int _compactUpTo = 0;
+  bool _compactionPending = false;
+  bool _compacting = false; // a detached compaction pass is in flight
 
   // The authority this coordinator last observed, to fire [authorityChanged].
   String? _lastAuthority;
@@ -163,10 +184,88 @@ class HandoverCoordinator {
     try {
       await transport.poll();
       if (_disposed) return;
+      // Before deciding the authority role: if a gap left by log compaction has
+      // stranded us behind the latest baseline, jump forward to it (§5.2).
+      await _maybeRecoverFromGap();
+      if (_disposed) return;
       await _decide();
+      if (_disposed) return;
+      // As the authority, clean up records an older baseline subsumes — but off
+      // this cycle's critical path (a detached run, not awaited under `_syncing`),
+      // so a batch of slow DELETEs can never delay the next poll or its heartbeat
+      // and make peers think the authority dropped.
+      if (session.isAuthority) _startCompactionIfIdle();
     } finally {
       _syncing = false;
     }
+  }
+
+  /// Kick off a compaction pass if one is due and none is already running. Fire-
+  /// and-forget by design — it must not hold up [syncNow] — with `_compacting`
+  /// guarding against overlap and [_runCompaction] swallowing its own errors, so
+  /// the detached future never surfaces an unhandled rejection.
+  void _startCompactionIfIdle() {
+    if (_compacting || !_compactionPending || _disposed) return;
+    _compacting = true;
+    _runCompaction().whenComplete(() => _compacting = false);
+  }
+
+  /// Strand-recovery (§5.2): a gap the poll could not cross (`!isCaughtUp`) whose
+  /// records the latest snapshot already subsumes (`snapshot.version >
+  /// session.version`) is a compacted gap, not a transient one. Re-read the
+  /// snapshot and jump the session and transport forward. Fail-closed: a snapshot
+  /// that is absent or half-written (a concurrent overwrite) leaves us where we
+  /// are to retry next poll — never a jump to a broken deck. The authority never
+  /// trips this (its version is at least every snapshot's).
+  Future<void> _maybeRecoverFromGap() async {
+    if (transport.isCaughtUp) return;
+    final CollabSnapshot snapshot;
+    try {
+      final raw = await transport.store.readSnapshot();
+      if (raw == null) return;
+      final decoded = jsonDecode(raw);
+      if (decoded is! Map<String, Object?>) return;
+      snapshot = CollabSnapshot.fromJson(decoded);
+    } catch (e) {
+      logWarning('collab.handover.recover.readSnapshot', e);
+      return;
+    }
+    if (snapshot.version <= session.version) return;
+    if (session.rebaseTo(snapshot.applyTo(session.deck), snapshot.version)) {
+      transport.jumpTo(snapshot.seq);
+    }
+  }
+
+  /// Delete a bounded batch of records at or below the *previous* baseline's
+  /// sequence — the one-interval margin that gives every participant a full
+  /// re-baseline interval to catch up before the records it needs disappear
+  /// (§5.2). Runs detached from the poll loop (see [_startCompactionIfIdle]), so
+  /// its DELETEs never delay a heartbeat; the batch is bounded only to keep each
+  /// pass small and the delete-vs-re-baseline race window short. Each delete is
+  /// best-effort (a failure logs and leaves the record, retried when a later pass
+  /// re-scans). A leftover record is inert — it sits below a durable baseline no
+  /// joiner starts from.
+  Future<void> _runCompaction() async {
+    if (!_compactionPending) return;
+    final List<int> present;
+    try {
+      present = await transport.store.listSequences();
+    } catch (e) {
+      logWarning('collab.handover.compact.list', e);
+      return;
+    }
+    final targets = present.where((s) => s <= _compactUpTo).toList()..sort();
+    for (final seq in targets.take(maxDeletesPerCycle)) {
+      if (_disposed) return;
+      try {
+        await transport.store.delete(seq);
+      } catch (e) {
+        logWarning('collab.handover.compact.delete', e);
+      }
+    }
+    // Stay armed only while a full batch remained; once the tail fits in one
+    // batch we have cleared it (leftovers from failures are inert).
+    _compactionPending = targets.length > maxDeletesPerCycle;
   }
 
   Future<void> _decide() async {
@@ -269,13 +368,23 @@ class HandoverCoordinator {
     );
     try {
       await transport.store.writeSnapshot(jsonEncode(snapshot.toJson()));
-      _lastRebaseVersion = session.version;
     } catch (e) {
       // A failed snapshot write is not fatal: the previous baseline still serves
-      // joiners, and the next threshold crossing retries. Leave _lastRebaseVersion
-      // where it is so the retry happens.
+      // joiners, and the next threshold crossing retries. Advance NOTHING — the
+      // delete window in particular must not widen without a durable snapshot, or
+      // records the (still-current) older baseline does not subsume could be
+      // deleted and strand a straggler that cannot detect it.
       logWarning('collab.handover.rebaseline', e);
+      return;
     }
+    // The new baseline is durable. Now, and only now, arm compaction of the
+    // records the *previous* baseline already subsumed (≤ its seq), and advance
+    // the previous-baseline marker to this snapshot. Records in (prev, this] are
+    // kept — that one-interval margin is what a straggler catches up within.
+    _lastRebaseVersion = session.version;
+    _compactUpTo = _prevRebaseSeq;
+    _prevRebaseSeq = snapshot.seq;
+    if (_compactUpTo > 0) _compactionPending = true;
   }
 
   void _observeAuthorityChange(String authority) {

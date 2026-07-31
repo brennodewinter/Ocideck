@@ -643,6 +643,49 @@ class WebdavService {
     }
   }
 
+  /// Verwijder het bestand op [remotePath] (HTTP DELETE). Idempotent: een al
+  /// weggehaald bestand (404) telt als succes. Gebruikt dezelfde beveiligde weg
+  /// als [upload]/[download] — de aan [_client] gepinde `HttpClient` (NetGuard-
+  /// resolve, https-only voor het herbruikbare wachtwoord, certificaatpin) en
+  /// [_openRequest] (`followRedirects=false`, zodat een 3xx de verwijdering niet
+  /// naar een ander adres kan verleggen; een 3xx valt via [_checkStatus] als
+  /// fout). **Alleen aanroepen met een pad dat je zelf hebt gebouwd** (in deze
+  /// codebase uitsluitend een genummerd collab-recordbestand): WebDAV-DELETE op
+  /// een map is recursief, dus geef dit nooit een door een deck of gebruiker
+  /// geleverd pad.
+  Future<void> delete(String remotePath) async {
+    final uri = server.uriFor(remotePath);
+    if (uri == null) {
+      throw WebdavException(WebdavError.config, 'Pad buiten de wortelmap');
+    }
+    final client = await _client();
+    try {
+      final request = await _openRequest(client, 'DELETE', uri);
+      final response = await request.close().timeout(
+        const Duration(seconds: 60),
+      );
+      final status = response.statusCode;
+      await response.drain<void>();
+      // 200/204 = weg; 404 = al weg (idempotent). Al het andere via _checkStatus,
+      // dat een 3xx als `redirect` gooit — een doorverwezen DELETE mag niet als
+      // succes wegvallen.
+      if (status == 200 || status == 204 || status == 404) return;
+      _checkStatus(status);
+      throw WebdavException(
+        WebdavError.server,
+        'Verwijderen gaf status $status',
+      );
+    } on WebdavException {
+      rethrow;
+    } on TimeoutException {
+      throw WebdavException(WebdavError.network, 'Time-out');
+    } catch (e) {
+      _asFailure('delete', e, 'Verwijderen mislukt');
+    } finally {
+      client.close(force: true);
+    }
+  }
+
   /// Maak elke bovenliggende map van [remotePath] aan (MKCOL). Een al
   /// bestaande map (405) wordt genegeerd.
   Future<void> _ensureParents(HttpClient client, String remotePath) async {
