@@ -58,6 +58,9 @@ class MatrixDeviceDirectory {
   /// The Matrix user id that owns [deviceId], for addressing a to-device
   /// key-share, or null if unknown.
   String? userOf(String deviceId) => _peers[deviceId]?.userId;
+
+  /// Every device id currently known — the authority walks this to key newcomers.
+  Iterable<String> get knownDevices => _peers.keys;
 }
 
 /// Publishes this device's keys, ingests peers', and distributes/installs epoch
@@ -83,6 +86,10 @@ class MatrixKeyExchange {
   final MatrixDeviceDirectory directory;
   final DevicePublicKeys _own;
 
+  /// Devices this authority has already handed the current epoch key to, so a
+  /// newcomer is keyed exactly once per epoch. Reset on [distributeEpoch].
+  final Set<String> _keyed = {};
+
   /// Publish this device's public keys as room state, keyed by device id (§6.1),
   /// so peers can address key-shares to it and verify its signed ops.
   Future<void> publishDeviceKeys() => _matrix.sendStateEvent(
@@ -98,22 +105,40 @@ class MatrixKeyExchange {
   /// member is skipped and logged rather than silently keyed out.
   Future<void> distributeEpoch(List<DevicePublicKeys> members) async {
     final result = await _e2ee.rekey(members);
+    _keyed.clear(); // a new epoch: everyone must be (re)keyed
     for (final wrap in result.wraps) {
-      final userId = directory.userOf(wrap.recipientDevice);
-      if (userId == null) {
-        logWarning(
-          'collab.matrix.keyshare.unaddressable',
-          wrap.recipientDevice,
-        );
-        continue;
-      }
-      await _matrix.sendToDevice(
-        type: keyshareType,
-        messages: {
-          userId: {wrap.recipientDevice: wrap.toJson()},
-        },
-      );
+      if (await _sendWrap(wrap)) _keyed.add(wrap.recipientDevice);
     }
+  }
+
+  /// Authority: hand the **current** epoch key to any known device not yet keyed
+  /// this epoch (a newcomer that just published its device state). Idempotent —
+  /// call it after each sync round; devices already keyed are skipped.
+  Future<void> ensureKeyed() async {
+    for (final deviceId in directory.knownDevices) {
+      if (deviceId == _e2ee.deviceId || _keyed.contains(deviceId)) continue;
+      final member = directory.resolve(deviceId);
+      if (member == null) continue;
+      final wrap = await _e2ee.wrapEpochTo(member);
+      if (await _sendWrap(wrap)) _keyed.add(deviceId);
+    }
+  }
+
+  /// Send one key-share to its recipient's user; returns whether it was sent
+  /// (false when the recipient's user id is not yet known — retried next round).
+  Future<bool> _sendWrap(WrappedKey wrap) async {
+    final userId = directory.userOf(wrap.recipientDevice);
+    if (userId == null) {
+      logWarning('collab.matrix.keyshare.unaddressable', wrap.recipientDevice);
+      return false;
+    }
+    await _matrix.sendToDevice(
+      type: keyshareType,
+      messages: {
+        userId: {wrap.recipientDevice: wrap.toJson()},
+      },
+    );
+    return true;
   }
 
   /// Wire to `MatrixRelayTransport.onSystemEvent`. Ingests a device-state event

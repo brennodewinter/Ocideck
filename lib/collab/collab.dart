@@ -20,6 +20,7 @@ export 'deck_op.dart';
 export 'matrix_client.dart';
 export 'matrix_key_exchange.dart';
 export 'matrix_relay_transport.dart';
+export 'matrix_session_launch.dart';
 export 'matrix_snapshot.dart';
 export 'handover_coordinator.dart';
 export 'webdav_async_transport.dart';

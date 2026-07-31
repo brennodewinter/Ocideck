@@ -532,7 +532,21 @@ when the owner returns.
   completes `firstSnapshot` — what a joiner awaits before starting its session so it
   adopts the authority's slide ids (§5.5). Fail-closed and bounded: a tampered
   (AEAD-caught), missing, malformed or oversized snapshot yields nothing, and the
-  pending-chunk buffers are capped against a flooding server.
+  pending-chunk buffers are capped against a flooding server. `retryPending`
+  re-opens a baseline that reassembled before its epoch key arrived (a joiner sees
+  the chunks before its key-share).
+- `matrix_session_launch.dart` — assembles a live Matrix session from the bricks
+  (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §6.5, phase P-D), the Matrix
+  mirror of `collab_session_launch.dart`. `hostMatrixSession` publishes device
+  keys, opens epoch 0, pushes the baseline and starts as authority;
+  `joinMatrixSession` publishes device keys and returns a `MatrixCollabLaunch`
+  whose `session` appears lazily once `syncNow` has received the key-share and
+  opened the baseline (the guest then adopts the authority's slide ids, §5.5).
+  `syncNow` drives one sync round plus its side effects — the host keys any
+  newcomer (`MatrixKeyExchange.ensureKeyed`), a guest retries a buffered snapshot —
+  handling the ordering hazard that a joiner sees the snapshot before its key.
+  `_wire` builds the directory, key exchange, snapshot channel and transport with
+  the single sync loop feeding both the exchange and the snapshot channel.
 - `collab_crypto.dart` — the end-to-end encryption seam (design:
   `docs/design/SELF_ENCRYPTED_RELAY.md` §4), the only file touching
   `package:cryptography`. A minimal group **key-wrapping** scheme, *not* a ratchet:
