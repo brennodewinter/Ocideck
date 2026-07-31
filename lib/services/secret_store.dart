@@ -236,6 +236,102 @@ class SecretStore {
     }
   }
 
+  /// Keychain key for a Matrix access token, namespaced and keyed on the
+  /// homeserver + user id so two accounts (or a WebDAV/git entry on the same
+  /// host) never collide. The token authenticates the collaboration session
+  /// (`docs/design/SELF_ENCRYPTED_RELAY.md` §8).
+  static String matrixTokenKey(String homeserver, String userId) {
+    final normalized = homeserver.trim().replaceAll(RegExp(r'/+$'), '');
+    return 'matrix_token::$normalized::${userId.trim()}';
+  }
+
+  Future<void> writeMatrixToken(
+    String homeserver,
+    String userId,
+    String token,
+  ) async {
+    _requireStorage('writeMatrixToken');
+    try {
+      await _storage.write(
+        key: matrixTokenKey(homeserver, userId),
+        value: token,
+      );
+    } catch (e) {
+      logError('SecretStore.writeMatrixToken: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  Future<String?> readMatrixToken(String homeserver, String userId) async {
+    if (!_canStore) return null;
+    try {
+      return await _storage.read(key: matrixTokenKey(homeserver, userId));
+    } catch (e) {
+      logError('SecretStore.readMatrixToken: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteMatrixToken(String homeserver, String userId) async {
+    if (!_canStore) return;
+    try {
+      await _storage.delete(key: matrixTokenKey(homeserver, userId));
+    } catch (e) {
+      logWarning('SecretStore.deleteMatrixToken: keychain delete failed', e);
+    }
+  }
+
+  /// Keychain key for the collaboration **device key material** (the Ed25519
+  /// identity + X25519 agreement seeds), keyed on the homeserver + user id. These
+  /// private seeds must never touch the prefs domain (§4.3); losing them only
+  /// costs a device its identity, which re-onboarding regenerates.
+  static String collabDeviceSeedsKey(String homeserver, String userId) {
+    final normalized = homeserver.trim().replaceAll(RegExp(r'/+$'), '');
+    return 'collab_devseeds::$normalized::${userId.trim()}';
+  }
+
+  Future<void> writeCollabDeviceSeeds(
+    String homeserver,
+    String userId,
+    String seeds,
+  ) async {
+    _requireStorage('writeCollabDeviceSeeds');
+    try {
+      await _storage.write(
+        key: collabDeviceSeedsKey(homeserver, userId),
+        value: seeds,
+      );
+    } catch (e) {
+      logError('SecretStore.writeCollabDeviceSeeds: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  Future<String?> readCollabDeviceSeeds(
+    String homeserver,
+    String userId,
+  ) async {
+    if (!_canStore) return null;
+    try {
+      return await _storage.read(key: collabDeviceSeedsKey(homeserver, userId));
+    } catch (e) {
+      logError('SecretStore.readCollabDeviceSeeds: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteCollabDeviceSeeds(String homeserver, String userId) async {
+    if (!_canStore) return;
+    try {
+      await _storage.delete(key: collabDeviceSeedsKey(homeserver, userId));
+    } catch (e) {
+      logWarning(
+        'SecretStore.deleteCollabDeviceSeeds: keychain delete failed',
+        e,
+      );
+    }
+  }
+
   /// Keychain-sleutel voor "je eigen gegevens" van de privacycontrole.
   ///
   /// Eén entry, want het gaat over de gebruiker van deze installatie en niet
