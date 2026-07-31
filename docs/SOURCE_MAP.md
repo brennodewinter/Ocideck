@@ -484,6 +484,19 @@ when the owner returns.
   `LoopbackTransport`. A dumb pipe: it carries formed events between participants
   and neither orders nor versions them (that is the session's job). `LockEvent`
   carries a `forced` flag for the authority's `ForceUnlock` (§5.4).
+- `matrix_client.dart` — the thin, pure-Dart Matrix client-server API client
+  (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §7.1, phase P-B): login/register
+  (surfacing User-Interactive Auth typed via `MatrixUiaRequired`), `/sync` (reduced
+  to the timeline/state/to-device events the relay reads, with `since` resume),
+  send timeline/state/to-device events, room create/invite/join, logout. It knows
+  nothing of ops, crypto or authority — it is the carriage `MatrixRelayTransport`
+  (P-C) will ride on. Egress is an injected `MatrixHttpTransport` (mirroring the AI
+  backend's `AiHttpTransport`), so this file opens no socket — the pinned/browser
+  transport is built at the wiring seam (P-D) — which keeps it off
+  `network_sink_guard_test` and fully testable against an in-Dart fake homeserver.
+  It refuses to send its bearer token in cleartext to a non-loopback host and maps
+  every non-2xx (incl. a refused 3xx) to a typed `MatrixException`. Pure Dart, so
+  it runs under `flutter test` and on web.
 - `collab_crypto.dart` — the end-to-end encryption seam (design:
   `docs/design/SELF_ENCRYPTED_RELAY.md` §4), the only file touching
   `package:cryptography`. A minimal group **key-wrapping** scheme, *not* a ratchet:
