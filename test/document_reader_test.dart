@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/documentation_service.dart';
@@ -130,6 +131,61 @@ void main() {
       // here (gesture wiring is covered by the inline_markdown tests).
       expect(tapped, isNull);
     });
+
+    // A minimal SVG that survives sanitizeMermaidSvg (svg + rect are allowed)
+    // and carries a viewBox so the reader can read its natural size.
+    const fakeSvg =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60">'
+        '<rect width="120" height="60"/></svg>';
+
+    testWidgets('draws a ```mermaid fence as a diagram, not source', (
+      tester,
+    ) async {
+      await pump(
+        tester,
+        DocumentMarkdownView(
+          '```mermaid\ngraph TD; A-->B;\n```\n',
+          mermaidRenderer: (_) async => fakeSvg,
+        ),
+      );
+      expect(find.byType(SvgPicture), findsOneWidget);
+      // Once it renders, the raw definition is no longer shown as text.
+      expect(find.textContaining('graph TD'), findsNothing);
+    });
+
+    testWidgets('a mermaid fence falls back to its source when render fails', (
+      tester,
+    ) async {
+      await pump(
+        tester,
+        DocumentMarkdownView(
+          '```mermaid\ngraph TD; A-->B;\n```\n',
+          mermaidRenderer: (_) async => null,
+        ),
+      );
+      expect(find.byType(SvgPicture), findsNothing);
+      expect(find.textContaining('graph TD'), findsOneWidget);
+    });
+
+    testWidgets('a non-mermaid fence stays a code block', (tester) async {
+      await pump(
+        tester,
+        DocumentMarkdownView(
+          '```dart\nvoid main() {}\n```\n',
+          // Even with a working renderer, only ```mermaid is drawn.
+          mermaidRenderer: (_) async => fakeSvg,
+        ),
+      );
+      expect(find.byType(SvgPicture), findsNothing);
+      expect(find.textContaining('void main'), findsOneWidget);
+    });
+
+    test('blockTexts returns one searchable string per block, in order', () {
+      final texts = DocumentMarkdownView.blockTexts(
+        '# Titel\n\nEen alinea.\n\n- item een\n- item twee\n',
+      );
+      expect(texts, ['Titel', 'Een alinea.', 'item een item twee']);
+    });
   });
 
   group('DocumentationService', () {
@@ -185,12 +241,10 @@ void main() {
       expect(find.byType(DocumentMarkdownView), findsOneWidget);
     });
 
-    testWidgets('bounds prose but lets the document use the wide column', (
-      tester,
-    ) async {
-      // A wide window: the content column is far wider than the old fixed
-      // narrow one, while prose is held to a readable measure via a
-      // ConstrainedBox — tables and code skip that bound.
+    testWidgets('fills the width but still bounds prose', (tester) async {
+      // A wide window: the content column now fills the full available width
+      // (no centred, capped column), while prose is held to a readable measure
+      // via a ConstrainedBox — tables and code skip that bound.
       tester.view.physicalSize = const Size(1600, 1000);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.resetPhysicalSize);
@@ -206,7 +260,7 @@ void main() {
               'Een tamelijk lange paragraaf die zonder begrenzing breder zou '
               'worden dan de leesbare maat, om het inperken te tonen.\n\n'
               // A deliberately wide table: it must overflow the prose measure
-              // and use the wider content column rather than being squeezed.
+              // and use the full content width rather than being squeezed.
               '| Kolom1 | Kolom2 | Kolom3 | Kolom4 | Kolom5 | Kolom6 | Kolom7 | Kolom8 | Kolom9 | Kolom10 |\n'
               '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n'
               '| aaaa | bbbb | cccc | dddd | eeee | ffff | gggg | hhhh | iiii | jjjj |\n',
@@ -217,11 +271,12 @@ void main() {
       await tester.pumpAndSettle();
 
       final viewWidth = tester.getSize(find.byType(DocumentMarkdownView)).width;
-      // The document view spans well beyond the old ~760 px column…
-      expect(viewWidth, greaterThan(900));
-      // …and prose blocks are wrapped in a bounding ConstrainedBox (860 px).
+      // The document view now fills the window minus the side padding (32 each
+      // side): ~1536 on a 1600 window, instead of a centred ~1200 column.
+      expect(viewWidth, greaterThan(1400));
+      // …and prose blocks are wrapped in a bounding ConstrainedBox (940 px).
       final bounded = find.byWidgetPredicate(
-        (w) => w is ConstrainedBox && w.constraints.maxWidth == 860,
+        (w) => w is ConstrainedBox && w.constraints.maxWidth == 940,
       );
       expect(bounded, findsWidgets);
     });
@@ -256,9 +311,64 @@ void main() {
       expect(scale(), closeTo(1.0, 1e-9));
     });
 
-    // #626: alle 24 gebundelde documenten bestaan alleen in het Engels, terwijl
-    // hun titels in 32 talen staan. Wie de app op Pools zet, ziet een Poolse
-    // titel en krijgt Engels — en de app wekte die verwachting zelf.
+    testWidgets(
+      'find-in-page counts hits, steps with wrap-around, and closes',
+      (tester) async {
+        await tester.pumpWidget(
+          wrap(
+            const DocumentReaderScreen(
+              title: 'Gids',
+              assetBase: 'x',
+              service: _FakeDocs(
+                '# Titel\n\n'
+                'Eerste blok noemt doelwit.\n\n'
+                'Tweede blok noemt doelwit weer.\n\n'
+                'Derde blok zonder dat woord.\n',
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        // No find bar until it is opened.
+        expect(find.byIcon(Icons.keyboard_arrow_down), findsNothing);
+        await tester.tap(find.byIcon(Icons.search));
+        await tester.pumpAndSettle();
+        expect(find.byIcon(Icons.keyboard_arrow_down), findsOneWidget);
+
+        // A term in two blocks → "1 / 2".
+        await tester.enterText(find.byType(TextField), 'doelwit');
+        await tester.pumpAndSettle();
+        expect(find.text('1 / 2'), findsOneWidget);
+
+        // Next advances, then wraps back to the first.
+        await tester.tap(find.byIcon(Icons.keyboard_arrow_down));
+        await tester.pumpAndSettle();
+        expect(find.text('2 / 2'), findsOneWidget);
+        await tester.tap(find.byIcon(Icons.keyboard_arrow_down));
+        await tester.pumpAndSettle();
+        expect(find.text('1 / 2'), findsOneWidget);
+
+        // Previous from the first wraps to the last.
+        await tester.tap(find.byIcon(Icons.keyboard_arrow_up));
+        await tester.pumpAndSettle();
+        expect(find.text('2 / 2'), findsOneWidget);
+
+        // A term in no block reports no hits.
+        await tester.enterText(find.byType(TextField), 'ditbestaatniet');
+        await tester.pumpAndSettle();
+        expect(find.text('Geen treffers'), findsOneWidget);
+
+        // Closing hides the bar again.
+        await tester.tap(find.byIcon(Icons.close));
+        await tester.pumpAndSettle();
+        expect(find.byIcon(Icons.keyboard_arrow_down), findsNothing);
+      },
+    );
+
+    // #626: de gebundelde documenten bestaan alleen in het Engels, terwijl hun
+    // titels in 32 talen staan. Wie de app op Pools zet, ziet een Poolse titel
+    // en krijgt Engels — en de app wekte die verwachting zelf.
     group('de melding dat een document alleen in het Engels bestaat', () {
       Future<void> open(
         WidgetTester tester, {
@@ -315,7 +425,7 @@ class _FakeDocs implements DocumentationService {
   final String markdown;
 
   /// Of dit "de Engelse basisversie" is. Standaard waar, want dat is wat elk
-  /// van de 24 gebundelde documenten vandaag is (#626).
+  /// gebundeld document vandaag is (#626).
   final bool isBaseVersion;
 
   @override

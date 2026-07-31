@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
 import '../slides/inline_markdown.dart';
+import '../slides/mermaid_diagram.dart' show MermaidRenderer;
+import 'doc_mermaid_view.dart';
 
 /// Renders a full Markdown document as widgets — headings, paragraphs, bullet
-/// and numbered lists, GFM task lists, block quotes, fenced code, horizontal
-/// rules and GFM pipe tables. Inline formatting (bold/italic/code/links) reuses
-/// the slide renderer's [InlineMarkdownText], which manages its own link
-/// recognisers.
+/// and numbered lists, GFM task lists, block quotes, fenced code, ```mermaid
+/// diagrams, horizontal rules and GFM pipe tables. Inline formatting
+/// (bold/italic/code/links) reuses the slide renderer's [InlineMarkdownText],
+/// which manages its own link recognisers.
 ///
 /// This is a pragmatic reader, not a full CommonMark engine: it covers what the
 /// bundled documentation uses. Anything it doesn't recognise falls back to a
@@ -19,15 +21,27 @@ import '../slides/inline_markdown.dart';
 ///
 /// Prose (paragraphs, headings, lists, quotes, rules) is bounded to
 /// [maxTextWidth] so the line length stays readable even in a wide window, while
-/// tables and code blocks are left unbounded: they use the full width they are
-/// given (and scroll horizontally beyond it), so wide tables are no longer
-/// squeezed into a narrow column. Pass `null` to bound nothing.
+/// tables, code blocks and diagrams are left unbounded: they use the full width
+/// they are given (and scroll horizontally beyond it), so wide tables and
+/// flowcharts are no longer squeezed into a narrow column. Pass `null` to bound
+/// nothing.
+///
+/// Find-in-page: parsing is separated from rendering ([blockTexts] exposes the
+/// searchable text of each block in render order), so the reader can locate the
+/// block that holds a search term, drive next/previous, and — via
+/// [activeMatchBlockIndex] and [activeMatchKey] — scroll it into view. Blocks
+/// whose text contains [searchTerm] are tinted; the active one is tinted more
+/// strongly and carries the key the reader scrolls to.
 class DocumentMarkdownView extends StatelessWidget {
   const DocumentMarkdownView(
     this.markdown, {
     super.key,
     this.onTapLink,
     this.maxTextWidth,
+    this.mermaidRenderer,
+    this.searchTerm,
+    this.activeMatchBlockIndex = -1,
+    this.activeMatchKey,
   });
 
   final String markdown;
@@ -37,11 +51,96 @@ class DocumentMarkdownView extends StatelessWidget {
   /// prose unbounded too (the whole document then fills the available width).
   final double? maxTextWidth;
 
+  /// Injectable Mermaid renderer for ```mermaid fences; defaults (via
+  /// [DocMermaidView]) to the shared render service. Tests pass a fake so the
+  /// diagram path can be exercised without a WebView.
+  final MermaidRenderer? mermaidRenderer;
+
+  /// Case-insensitive find-in-page term. When non-empty, every block whose text
+  /// contains it is tinted. `null`/empty means no search is active and the tree
+  /// is identical to the plain document (no wrappers), so non-search callers are
+  /// unaffected.
+  final String? searchTerm;
+
+  /// Absolute index (into [blockTexts]/the block list) of the block that is the
+  /// current find-in-page hit, or `-1` for none. That block is tinted more
+  /// strongly and carries [activeMatchKey].
+  final int activeMatchBlockIndex;
+
+  /// Attached to the active-match block so the reader can `ensureVisible` it.
+  final GlobalKey? activeMatchKey;
+
+  /// The searchable plain text of each block, in the same order [build] renders
+  /// them. The reader uses this to find which blocks contain a term and to map a
+  /// match ordinal to an absolute block index — sharing this one parser with
+  /// [build] keeps the indices aligned.
+  static List<String> blockTexts(String markdown) =>
+      _parse(markdown).map((b) => b.searchText).toList(growable: false);
+
   @override
   Widget build(BuildContext context) {
     final t = _Theme(Theme.of(context));
+    final blocks = _parse(markdown);
+    final term = (searchTerm ?? '').trim().toLowerCase();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (var i = 0; i < blocks.length; i++)
+          _decorated(t, blocks[i], i, term),
+      ],
+    );
+  }
+
+  /// Wraps a block in a search tint when it matches [term]; the active match
+  /// also carries [activeMatchKey] so the reader can scroll to it. With no term
+  /// the block is returned untouched, so a non-searching reader gets exactly the
+  /// old tree.
+  Widget _decorated(_Theme t, _Block b, int index, String term) {
+    final widget = _buildWidget(t, b);
+    if (term.isEmpty || !b.searchText.toLowerCase().contains(term)) {
+      return widget;
+    }
+    final active = index == activeMatchBlockIndex;
+    return Container(
+      key: active ? activeMatchKey : null,
+      decoration: BoxDecoration(
+        color: active ? t.findActive : t.findMatch,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: widget,
+    );
+  }
+
+  Widget _buildWidget(_Theme t, _Block b) => switch (b.kind) {
+    _Kind.heading => _bounded(_heading(t, b.level, b.text)),
+    _Kind.paragraph => _bounded(_paragraph(t, b.text)),
+    _Kind.list => _bounded(_list(t, b.items)),
+    _Kind.quote => _bounded(_blockQuote(t, b.text)),
+    _Kind.code => _codeBlock(t, b.text),
+    _Kind.mermaid => _mermaid(t, b.text),
+    _Kind.table => _table(t, b.rows),
+    _Kind.rule => _bounded(_rule(t)),
+  };
+
+  /// Keep prose within a readable measure; tables and code blocks skip this and
+  /// use the full width available to the document.
+  Widget _bounded(Widget child) {
+    final max = maxTextWidth;
+    if (max == null) return child;
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: max),
+      child: child,
+    );
+  }
+
+  // ── Parsing (pure; shared by build and blockTexts) ────────────────────────
+
+  /// Splits [markdown] into ordered block descriptors. Deterministic and free of
+  /// any BuildContext, so [build] (widgets) and [blockTexts] (search text) share
+  /// one classification and can never drift apart.
+  static List<_Block> _parse(String markdown) {
     final lines = markdown.replaceAll('\r\n', '\n').split('\n');
-    final blocks = <Widget>[];
+    final blocks = <_Block>[];
 
     var i = 0;
     while (i < lines.length) {
@@ -53,15 +152,21 @@ class DocumentMarkdownView extends StatelessWidget {
         continue;
       }
 
-      // Fenced code block: ``` … ``` (or ~~~).
+      // Fenced block: ``` … ``` (or ~~~). The info string after the opening
+      // fence selects the renderer: `mermaid` is drawn as a diagram, everything
+      // else is a monospace code block.
       final fence = _fenceMarker(trimmed);
       if (fence != null) {
+        final lang = trimmed.substring(fence.length).trim().toLowerCase();
         final start = i + 1;
         var end = start;
         while (end < lines.length && lines[end].trim() != fence) {
           end++;
         }
-        blocks.add(_codeBlock(t, lines.sublist(start, end).join('\n')));
+        final code = lines.sublist(start, end).join('\n');
+        blocks.add(
+          _Block(lang == 'mermaid' ? _Kind.mermaid : _Kind.code, text: code),
+        );
         i = end < lines.length ? end + 1 : end;
         continue;
       }
@@ -76,14 +181,14 @@ class DocumentMarkdownView extends StatelessWidget {
           rows.add(lines[j]);
           j++;
         }
-        blocks.add(_table(t, rows));
+        blocks.add(_Block(_Kind.table, rows: rows));
         i = j;
         continue;
       }
 
       // Horizontal rule: ---, *** or ___ (three or more).
       if (_isHorizontalRule(trimmed)) {
-        blocks.add(_bounded(_rule(t)));
+        blocks.add(const _Block(_Kind.rule));
         i++;
         continue;
       }
@@ -92,7 +197,11 @@ class DocumentMarkdownView extends StatelessWidget {
       final heading = _headingLevel(trimmed);
       if (heading > 0) {
         blocks.add(
-          _bounded(_heading(t, heading, trimmed.substring(heading).trim())),
+          _Block(
+            _Kind.heading,
+            level: heading,
+            text: trimmed.substring(heading).trim(),
+          ),
         );
         i++;
         continue;
@@ -105,7 +214,7 @@ class DocumentMarkdownView extends StatelessWidget {
           quote.add(lines[i].trimLeft().replaceFirst(RegExp(r'^>\s?'), ''));
           i++;
         }
-        blocks.add(_bounded(_blockQuote(t, quote.join('\n'))));
+        blocks.add(_Block(_Kind.quote, text: quote.join('\n')));
         continue;
       }
 
@@ -116,7 +225,7 @@ class DocumentMarkdownView extends StatelessWidget {
           items.add(_listItem(lines[i])!);
           i++;
         }
-        blocks.add(_bounded(_list(t, items)));
+        blocks.add(_Block(_Kind.list, items: items));
         continue;
       }
 
@@ -126,24 +235,10 @@ class DocumentMarkdownView extends StatelessWidget {
         para.add(lines[i].trim());
         i++;
       }
-      blocks.add(_bounded(_paragraph(t, para.join(' '))));
+      blocks.add(_Block(_Kind.paragraph, text: para.join(' ')));
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: blocks,
-    );
-  }
-
-  /// Keep prose within a readable measure; tables and code blocks skip this and
-  /// use the full width available to the document.
-  Widget _bounded(Widget child) {
-    final max = maxTextWidth;
-    if (max == null) return child;
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: max),
-      child: child,
-    );
+    return blocks;
   }
 
   // ── Block builders ────────────────────────────────────────────────────────
@@ -272,6 +367,16 @@ class DocumentMarkdownView extends StatelessWidget {
         ),
       ),
     ),
+  );
+
+  /// A ```mermaid fence, drawn as a diagram. Like code blocks it is full-width
+  /// (not bounded to the prose measure) so a wide flowchart has room; on a
+  /// render failure or under `flutter test` it falls back to the same code block
+  /// the source would otherwise have shown.
+  Widget _mermaid(_Theme t, String code) => DocMermaidView(
+    source: code,
+    fallback: _codeBlock(t, code),
+    renderer: mermaidRenderer,
   );
 
   Widget _rule(_Theme t) => Padding(
@@ -440,6 +545,45 @@ class DocumentMarkdownView extends StatelessWidget {
   }
 }
 
+/// The kind of a parsed Markdown block.
+enum _Kind { heading, paragraph, list, quote, code, mermaid, table, rule }
+
+/// One parsed block: its kind plus whatever that kind needs to render and to be
+/// searched. Kept as a plain data record so parsing is a pure step, decoupled
+/// from widget building.
+class _Block {
+  const _Block(
+    this.kind, {
+    this.text = '',
+    this.level = 0,
+    this.items = const [],
+    this.rows = const [],
+  });
+
+  final _Kind kind;
+
+  /// heading / paragraph / quote / code / mermaid content.
+  final String text;
+
+  /// Heading level 1–6 (0 otherwise).
+  final int level;
+
+  /// List item lines (for [_Kind.list]).
+  final List<_ListLine> items;
+
+  /// Raw table rows including the delimiter row (for [_Kind.table]).
+  final List<String> rows;
+
+  /// The plain text a find-in-page query matches against. Rules never match;
+  /// tables and lists flatten their cells/items into one searchable string.
+  String get searchText => switch (kind) {
+    _Kind.table => rows.join(' '),
+    _Kind.list => items.map((e) => e.text).join(' '),
+    _Kind.rule => '',
+    _ => text,
+  };
+}
+
 /// One parsed list line with its nesting depth and (for ordered lists) number.
 class _ListLine {
   const _ListLine({
@@ -486,7 +630,11 @@ class _Theme {
       codeText = theme.colorScheme.onSurface,
       tableHeaderBg = theme.colorScheme.surfaceContainerHighest.withValues(
         alpha: 0.7,
-      );
+      ),
+      // Find-in-page tints. A warm amber, alpha-blended so it reads on both a
+      // light and a dark surface; the active hit is stronger than the rest.
+      findMatch = const Color(0xFFFFC107).withValues(alpha: 0.22),
+      findActive = const Color(0xFFFF9800).withValues(alpha: 0.45);
 
   final TextStyle body;
   final Color heading;
@@ -500,4 +648,6 @@ class _Theme {
   final Color codeBg;
   final Color codeText;
   final Color tableHeaderBg;
+  final Color findMatch;
+  final Color findActive;
 }

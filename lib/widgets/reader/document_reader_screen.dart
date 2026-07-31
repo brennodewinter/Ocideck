@@ -10,12 +10,14 @@ import 'document_markdown_view.dart';
 
 /// A full-screen, accessible reader for a bundled Markdown document.
 ///
-/// The content fills the height and uses most of the window width: tables and
-/// code blocks span the full measure (so wide tables are no longer squeezed),
-/// while prose is kept to a readable line length. A subtle text-size control in
-/// the app bar enlarges or shrinks the document text; the choice is remembered
-/// (see [SettingsNotifier.setDocReaderTextScale]) independently of the app-wide
-/// interface scale. Text is selectable and links open externally. It sits above
+/// The content fills the height and the full available window width: tables,
+/// code blocks and Mermaid diagrams span the whole measure (so wide tables and
+/// flowcharts are no longer squeezed), while prose is kept to a readable line
+/// length within that width. A subtle text-size control in the app bar enlarges
+/// or shrinks the document text; the choice is remembered (see
+/// [SettingsNotifier.setDocReaderTextScale]) independently of the app-wide
+/// interface scale. Text is selectable and links open externally, and a
+/// find-in-page bar jumps between occurrences of a search term. It sits above
 /// dialogs (pushed on the root navigator), so it can be opened from the consent
 /// gate and the settings screen alike.
 class DocumentReaderScreen extends ConsumerStatefulWidget {
@@ -38,12 +40,15 @@ class DocumentReaderScreen extends ConsumerStatefulWidget {
 
   final DocumentationService service;
 
-  /// Prose is bounded to this measure; tables and code use the full width.
-  static const double _proseMaxWidth = 860;
+  /// Prose (paragraphs, headings, lists) is bounded to this measure so lines
+  /// stay a readable length; tables, code blocks and diagrams ignore it and use
+  /// the full width. The document column itself is not capped — it fills the
+  /// window (minus [_horizontalPadding]), which is what "use the whole width"
+  /// asked for.
+  static const double _proseMaxWidth = 940;
 
-  /// Cap the content column so ultra-wide windows don't stretch edge-to-edge,
-  /// yet far more of the width is used than the old fixed narrow column.
-  static const double _contentMaxWidth = 1200;
+  /// Breathing room on each side of the content column.
+  static const double _horizontalPadding = 32;
 
   @override
   ConsumerState<DocumentReaderScreen> createState() =>
@@ -75,9 +80,51 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
   // attach to there), and dragging throws "no ScrollPosition attached".
   final ScrollController _scrollController = ScrollController();
 
+  // Find-in-page state.
+  final TextEditingController _findController = TextEditingController();
+  final FocusNode _findFocus = FocusNode();
+
+  /// A single key that follows the *active* match block, so scrolling to the
+  /// current hit is just `ensureVisible` on its context.
+  final GlobalKey _activeMatchKey = GlobalKey();
+  bool _findVisible = false;
+  String _query = '';
+  int _activeMatch = 0;
+
+  /// The document loaded once per (asset, language), cached so a rebuild — every
+  /// keystroke in the find bar, every text-size nudge — does not re-read the
+  /// asset and flash the spinner.
+  late Future<({String text, bool isBaseVersion})> _docFuture;
+  String? _loadedLanguage;
+
+  /// The current document text, captured when [_docFuture] resolves, so the
+  /// find-bar handlers can recompute matches without awaiting a Future.
+  String _docText = '';
+
+  // Memoise the block-text split by source text: the parser runs once per
+  // document, not once per keystroke.
+  String? _blockTextsSource;
+  List<String> _blockTexts = const [];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final language = Localizations.localeOf(context).languageCode;
+    if (language == _loadedLanguage) return;
+    _loadedLanguage = language;
+    _resetFind();
+    _docFuture = widget.service.loadDetailed(widget.assetBase, language);
+    _docText = '';
+    _docFuture.then((loaded) {
+      if (mounted) _docText = loaded.text;
+    });
+  }
+
   @override
   void dispose() {
     _scrollController.dispose();
+    _findController.dispose();
+    _findFocus.dispose();
     super.dispose();
   }
 
@@ -93,6 +140,12 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
       appBar: AppBar(
         title: Semantics(header: true, child: Text(widget.title)),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: l10n.d('Zoeken in document'),
+            isSelected: _findVisible,
+            onPressed: _toggleFind,
+          ),
           ..._textSizeActions(context, ref, l10n, scale),
           if (widget.onlineUrl != null)
             IconButton(
@@ -103,7 +156,7 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
         ],
       ),
       body: FutureBuilder<({String text, bool isBaseVersion})>(
-        future: widget.service.loadDetailed(widget.assetBase, languageCode),
+        future: _docFuture,
         builder: (context, snap) {
           if (snap.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -117,19 +170,163 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
               ),
             );
           }
+          final text = loaded.text;
           // De titel van dit document staat in 32 talen, de inhoud in één. Dat
           // verschil hoort de lezer te horen vóór hij begint te lezen, niet
           // halverwege te ontdekken (#626).
           final showNotice = loaded.isBaseVersion && languageCode != 'nl';
+          // Which blocks contain the query, and which of those is the active
+          // hit. Computed here (text in hand) so both the find bar's counter and
+          // the document's highlight see the same result.
+          final matches = _matchesIn(text, _findVisible ? _query : '');
+          final activeBlock = matches.isEmpty
+              ? -1
+              : matches[_activeMatch.clamp(0, matches.length - 1)];
           return Column(
             children: [
               if (showNotice) _languageNotice(context, l10n),
-              Expanded(child: _body(context, loaded.text, scale)),
+              if (_findVisible) _findBar(context, l10n, matches.length),
+              Expanded(child: _body(context, text, scale, activeBlock)),
             ],
           );
         },
       ),
     );
+  }
+
+  /// The find-in-page bar: a query field, a `position / total` counter, and
+  /// previous/next/close. Enter jumps to the next hit.
+  Widget _findBar(BuildContext context, AppLocalizations l10n, int matchCount) {
+    final scheme = Theme.of(context).colorScheme;
+    final hasMatches = matchCount > 0;
+    final queryEmpty = _query.trim().isEmpty;
+    final position = hasMatches ? (_activeMatch % matchCount) + 1 : 0;
+    final counter = queryEmpty
+        ? ''
+        : (hasMatches ? '$position / $matchCount' : l10n.d('Geen treffers'));
+    return Material(
+      elevation: 1,
+      child: Container(
+        color: scheme.surfaceContainerHighest.withValues(alpha: 0.4),
+        padding: const EdgeInsets.fromLTRB(16, 6, 8, 6),
+        child: Row(
+          children: [
+            Icon(Icons.search, size: 18, color: scheme.onSurfaceVariant),
+            const SizedBox(width: 10),
+            Expanded(
+              child: TextField(
+                controller: _findController,
+                focusNode: _findFocus,
+                decoration: InputDecoration(
+                  isDense: true,
+                  border: InputBorder.none,
+                  hintText: l10n.d('Zoeken in dit document…'),
+                ),
+                onChanged: _onFindChanged,
+                onSubmitted: (_) => _step(1),
+              ),
+            ),
+            if (counter.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text(
+                  counter,
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    color: scheme.onSurfaceVariant,
+                  ),
+                ),
+              ),
+            IconButton(
+              icon: const Icon(Icons.keyboard_arrow_up),
+              iconSize: 20,
+              tooltip: l10n.d('Vorige treffer'),
+              onPressed: hasMatches ? () => _step(-1) : null,
+            ),
+            IconButton(
+              icon: const Icon(Icons.keyboard_arrow_down),
+              iconSize: 20,
+              tooltip: l10n.d('Volgende treffer'),
+              onPressed: hasMatches ? () => _step(1) : null,
+            ),
+            IconButton(
+              icon: const Icon(Icons.close),
+              iconSize: 20,
+              tooltip: l10n.d('Zoeken sluiten'),
+              onPressed: _toggleFind,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _toggleFind() {
+    setState(() {
+      _findVisible = !_findVisible;
+      if (!_findVisible) _resetFind();
+    });
+    if (_findVisible) _findFocus.requestFocus();
+  }
+
+  void _resetFind() {
+    _findController.clear();
+    _query = '';
+    _activeMatch = 0;
+  }
+
+  void _onFindChanged(String value) {
+    // A new query starts from the first hit again.
+    setState(() {
+      _query = value;
+      _activeMatch = 0;
+    });
+    _scrollToActive();
+  }
+
+  void _step(int delta) {
+    final matches = _matchesIn(_docText, _query);
+    if (matches.isEmpty) return;
+    // Dart's `%` keeps the result non-negative for a positive divisor, so
+    // stepping back from the first hit wraps to the last.
+    setState(() => _activeMatch = (_activeMatch + delta) % matches.length);
+    _scrollToActive();
+  }
+
+  /// Bring the active-match block into view after the frame that re-tinted it,
+  /// so [_activeMatchKey] is already attached to the new block.
+  void _scrollToActive() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final ctx = _activeMatchKey.currentContext;
+      if (ctx == null) return;
+      Scrollable.ensureVisible(
+        ctx,
+        alignment: 0.15,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
+  /// Absolute indices of the blocks whose text contains [query]
+  /// (case-insensitive), in document order. Empty for a blank query.
+  List<int> _matchesIn(String text, String query) {
+    final q = query.trim().toLowerCase();
+    if (q.isEmpty) return const [];
+    final texts = _textsFor(text);
+    return [
+      for (var i = 0; i < texts.length; i++)
+        if (texts[i].toLowerCase().contains(q)) i,
+    ];
+  }
+
+  /// The per-block search text for [text], parsed once and memoised.
+  List<String> _textsFor(String text) {
+    if (text != _blockTextsSource) {
+      _blockTexts = DocumentMarkdownView.blockTexts(text);
+      _blockTextsSource = text;
+    }
+    return _blockTexts;
   }
 
   /// The subtle "smaller / larger" pair, each disabled at its bound.
@@ -188,7 +385,12 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
     );
   }
 
-  Widget _body(BuildContext context, String markdown, double scale) {
+  Widget _body(
+    BuildContext context,
+    String markdown,
+    double scale,
+    int activeBlock,
+  ) {
     final media = MediaQuery.of(context);
     // The reader's own scale multiplies whatever the OS and the app-wide
     // interface scale already ask for, so all document text (tables included)
@@ -203,25 +405,30 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
         controller: _scrollController,
         child: SingleChildScrollView(
           controller: _scrollController,
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: DocumentReaderScreen._contentMaxWidth,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 28,
-                ),
-                // SelectionArea makes the whole document selectable/copyable
-                // while keeping links tappable.
-                child: SelectionArea(
-                  child: DocumentMarkdownView(
-                    markdown,
-                    onTapLink: openExternalUrl,
-                    maxTextWidth: DocumentReaderScreen._proseMaxWidth,
-                  ),
-                ),
+          // Fill the full available width (no centred, capped column): tables,
+          // code and diagrams get the whole measure, while prose is held to a
+          // readable line length by the bound below.
+          padding: const EdgeInsets.symmetric(
+            horizontal: DocumentReaderScreen._horizontalPadding,
+            vertical: 28,
+          ),
+          // Force the document column to the full available width (a vertical
+          // scroll otherwise hands its child a loose width, so the column would
+          // shrink-wrap to its widest block and leave the rest of the window
+          // unused). Prose stays bounded and left-aligned within it; wide
+          // tables, code and diagrams now get the whole measure.
+          child: SizedBox(
+            width: double.infinity,
+            // SelectionArea makes the whole document selectable/copyable while
+            // keeping links tappable.
+            child: SelectionArea(
+              child: DocumentMarkdownView(
+                markdown,
+                onTapLink: openExternalUrl,
+                maxTextWidth: DocumentReaderScreen._proseMaxWidth,
+                searchTerm: _findVisible ? _query : null,
+                activeMatchBlockIndex: activeBlock,
+                activeMatchKey: _activeMatchKey,
               ),
             ),
           ),
