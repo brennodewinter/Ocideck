@@ -68,6 +68,11 @@ enum MatrixErrorKind {
 
   /// The server returned 5xx or an unparseable body.
   server,
+
+  /// A transport-level failure before any HTTP status: TLS refusal, an
+  /// unreachable or blocked host, a dropped connection. Produced by the
+  /// production transport, not by the HTTP-status mapping.
+  network,
 }
 
 /// A typed Matrix failure. [errcode] is the server's `M_*` code when present.

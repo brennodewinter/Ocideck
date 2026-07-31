@@ -144,6 +144,10 @@ const Set<String> uncoveredBaseline = {
   // The io half is exercised by native_git_mirror_test.dart against a real repo.
   'lib/services/git/native_git_mirror_factory.dart',
   'lib/services/git/native_git_mirror_stub.dart',
+  // PLATFORM: the Matrix egress conditional-export facade — a one-line barrel with
+  // no executable lines. Both halves (matrix_http_transport_io/web) are exercised
+  // directly by matrix_http_transport_test.dart.
+  'lib/collab/matrix_http_transport.dart',
   // PLATFORM: the git draft store's conditional-export facade. Both halves
   // (FileDraftStore, PrefsDraftStore) are exercised by the DeckMirror contract
   // in test/git_deck_mirror_contract_test.dart; only this one-line barrel has no
