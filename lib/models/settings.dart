@@ -10,6 +10,7 @@ import 'storage_connection.dart';
 import 'git_settings.dart';
 import 's3_settings.dart';
 import 'webdav_settings.dart';
+import 'matrix_settings.dart';
 
 export 'ai_settings.dart';
 export 'checklist_template.dart';
@@ -746,6 +747,11 @@ class AppSettings {
   /// een API-sleutel (die staat in de keychain).
   final AiSettings aiSettings;
 
+  /// Het app-globale Matrix-account voor realtime samenwerken, of `null` als er
+  /// geen is ingesteld. Bevat nooit het access-token (dat staat in de keychain,
+  /// zie `SecretStore`) — alleen de niet-geheime homeserver/user/device-gegevens.
+  final MatrixServer? matrixAccount;
+
   const AppSettings({
     this.languageCode = 'nl',
     this.connections = const [],
@@ -779,6 +785,7 @@ class AppSettings {
     this.allowCveLookup = false,
     this.cveApiBaseUrl = defaultCveApiBaseUrl,
     this.aiSettings = const AiSettings(),
+    this.matrixAccount,
   });
 
   ThemeProfile get themeProfile {
@@ -862,6 +869,8 @@ class AppSettings {
     bool? allowCveLookup,
     String? cveApiBaseUrl,
     AiSettings? aiSettings,
+    MatrixServer? matrixAccount,
+    bool clearMatrixAccount = false,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
     bool clearMinRequiredExportTlp = false,
@@ -929,6 +938,9 @@ class AppSettings {
       allowCveLookup: allowCveLookup ?? this.allowCveLookup,
       cveApiBaseUrl: cveApiBaseUrl ?? this.cveApiBaseUrl,
       aiSettings: aiSettings ?? this.aiSettings,
+      matrixAccount: clearMatrixAccount
+          ? null
+          : (matrixAccount ?? this.matrixAccount),
     );
   }
 }
