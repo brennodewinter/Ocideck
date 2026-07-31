@@ -1771,6 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)': 'Salattu välitin (suunnitelma)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Vain omistaja tallentaa deckin jaetussa istunnossa; muutoksesi säilyvät istunnossa, kunnes omistaja tallentaa.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

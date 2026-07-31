@@ -726,6 +726,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Versleuteld doorgeefluik (ontwerp)': 'Relay cifrato (progetto)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Solo il proprietario salva il deck in una sessione condivisa; le tue modifiche restano nella sessione finché il proprietario non salva.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

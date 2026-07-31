@@ -727,6 +727,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Versleuteld doorgeefluik (ontwerp)': 'Retransmisor cifrado (diseño)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Solo el propietario guarda el deck en una sesión compartida; tus cambios permanecen en la sesión hasta que el propietario guarda.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

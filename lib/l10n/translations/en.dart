@@ -911,6 +911,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Versleuteld doorgeefluik (ontwerp)': 'Encrypted relay (design)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Only the owner saves the deck in a shared session; your changes stay in the session until the owner saves.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

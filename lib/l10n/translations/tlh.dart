@@ -1746,6 +1746,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)': 'labwI\' So\'lu\'pu\'bogh (nab)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'tay\' vumDaq deck pol pIn neH; pIn polpa\' tay\' vumDaq ratlhtaH choHmeylIj.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

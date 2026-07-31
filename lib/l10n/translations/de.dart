@@ -730,6 +730,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Versleuteld doorgeefluik (ontwerp)': 'Verschlüsseltes Relais (Design)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Nur der Eigentümer speichert das Deck in einer gemeinsamen Sitzung; deine Änderungen bleiben in der Sitzung, bis der Eigentümer speichert.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

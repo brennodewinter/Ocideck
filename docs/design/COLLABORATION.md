@@ -32,6 +32,18 @@
 > `CollabTransport`/Matrix session defined here and do not relax this document's
 > P4 E2EE invariant.
 
+> **Phase-1 transport update (2026-07-31).** §6 originally proposed the famedly
+> **`matrix`** Dart SDK. The chain-review turned that down (AGPL → de-facto
+> re-licence, #976). The foundation instead chose a **pure-Dart route** and it is
+> now decided (`assurance/ketenkeuring-self-encrypted-relay.md`, GO): the
+> homeserver as an **encrypted relay** with OciDeck's own minimal E2EE, no AGPL,
+> no Rust, EUPL-1.2 intact. The detailed, pick-up-cold implementation design is
+> [`SELF_ENCRYPTED_RELAY.md`](SELF_ENCRYPTED_RELAY.md); it **supersedes the SDK
+> mechanism in §6 and §9** while keeping every principle (§2) and the whole
+> transport-agnostic core (§5) unchanged. Read §6/§9 below as the conceptual
+> mapping (rooms, events, E2EE-by-default); read `SELF_ENCRYPTED_RELAY.md` for how
+> Phase 1 is actually built.
+
 ---
 
 ## 1. Purpose & scope
@@ -428,10 +440,18 @@ Riverpod is already the state layer (`flutter_riverpod: ^3.3.1`). Follow the
 
 ## 6. Matrix mapping (primary transport)
 
-Proposed dependency: the **`matrix`** Dart SDK (the one FluffyChat uses; mature
-on the messaging/E2EE side). Not yet in `pubspec.yaml` (today it has
-`flutter_riverpod`, `archive`, `http`, `flutter_secure_storage`, `crypto`; **no
-WebRTC/Matrix**).
+> **Superseded mechanism.** The `matrix`-SDK dependency proposed here is **not**
+> what gets built — see the Phase-1 transport update at the top of this document
+> and [`SELF_ENCRYPTED_RELAY.md`](SELF_ENCRYPTED_RELAY.md). The concept mapping in
+> §6.1 (session → room, op → custom event, snapshot chunking, ordering-for-free)
+> still holds; only the *carriage* changes: a thin pure-Dart CS client plus
+> OciDeck's own E2EE instead of the AGPL SDK's Olm/Megolm.
+
+Originally-proposed dependency: the **`matrix`** Dart SDK (the one FluffyChat
+uses; mature on the messaging/E2EE side) — **rejected** as AGPL (#976). Today
+`pubspec.yaml` has `flutter_riverpod`, `archive`, `http`, `flutter_secure_storage`,
+`crypto`; the self-encrypted-relay route adds one Apache-2.0 pure-Dart dependency
+(`cryptography`) and **no** Matrix SDK.
 
 ### 6.1 Concept mapping
 
@@ -1036,13 +1056,16 @@ Follow-ups within Fase 0.5: owner-drop handover (§5.3) and non-zero re-baselini
 (§5.2).
 
 ### Phase 1 — Matrix data plane + easy onboarding (leans on: homeserver account)
-Add the `matrix` SDK; in-app registration/login against a default-or-chosen
-homeserver (§8); `MatrixTransport` implementing §5.6 with the §6.1 mapping;
-session lifecycle (§6.5). Deliver real remote co-authoring + chat + presenter
-control. **Turn on room encryption here** (§9) — content is E2EE from the first
-networked byte.
-Web note: CSP `connect-src` must allow the homeserver `wss:` (see the web-build
-hardening note in project memory / `make build-web`).
+**Route decided (2026-07-31): the pure-Dart self-encrypted relay, not the `matrix`
+SDK** — full design in [`SELF_ENCRYPTED_RELAY.md`](SELF_ENCRYPTED_RELAY.md). In-app
+registration/login against a default-or-chosen homeserver (§8) over a thin pure-Dart
+CS client; `MatrixRelayTransport` implementing §5.6 with the §6.1 mapping; session
+lifecycle (§6.5). Deliver real remote co-authoring + chat + presenter control.
+**Content is E2EE from the first networked byte** (§9) via OciDeck's own minimal
+session-crypto (`CollabCrypto`, `package:cryptography` Apache-2.0), not Olm/Megolm.
+Web note: CSP `connect-src` must allow the homeserver **https** origin for the
+`/sync` long-poll (no `wss:` needed unless a streaming path is chosen — see
+`SELF_ENCRYPTED_RELAY.md` OQ-3); `make build-web` / `tool/check_web_hardening.dart`.
 
 ### Phase 2 — Identity hardening & provenance (pure client)
 Cross-signing/verification UX; SSSS recovery flow; optional owner-signature on the
@@ -1136,7 +1159,9 @@ introduces an infrastructure dependency (an SFU, still not run by OciDeck).
 
 **Dependencies to add (proposed, none present today):**
 
-- `matrix` (Dart SDK) — Phase 1.
+- ~~`matrix` (Dart SDK)~~ — **rejected** (AGPL, #976). Phase 1 uses
+  `cryptography` (Apache-2.0, pure Dart) instead — see
+  [`SELF_ENCRYPTED_RELAY.md`](SELF_ENCRYPTED_RELAY.md) §12.
 - `flutter_webrtc` — Phase 3.
 - `livekit_client` (or chosen SFU client) — Phase 4.
 - Pin new JS/native bundles in `MANIFEST.json` and keep `make deps-check` (OSV)

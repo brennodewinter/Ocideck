@@ -209,6 +209,7 @@ flutter:
     - docs/DEVELOPMENT_SETUP_GUIDE.md
     - docs/MIGRATION_GUIDE.md
     - docs/design/COLLABORATION.md
+    - docs/design/SELF_ENCRYPTED_RELAY.md
     - docs/design/TEAMS_GUEST_CLIENT.md
     - docs/design/GIT_STORAGE.md
     - docs/design/VERIFICATION.md

@@ -62,6 +62,7 @@ read that banner first. All eleven ship with the app.
 | Document | What it is |
 |---|---|
 | [COLLABORATION.md](design/COLLABORATION.md) | Design proposal, unbuilt: real-time collaboration, presenting, calls and a provider-adapter register spanning major, smaller and self-hosted meeting systems. |
+| [SELF_ENCRYPTED_RELAY.md](design/SELF_ENCRYPTED_RELAY.md) | Design proposal, unbuilt: the decided pure-Dart route for real-time collaboration (COLLABORATION Phase 1) — the homeserver as an encrypted relay with OciDeck's own minimal E2EE, no AGPL, no Rust, EUPL-1.2 intact. Supersedes the Matrix-SDK mechanism in COLLABORATION §6/§9. |
 | [TEAMS_GUEST_CLIENT.md](design/TEAMS_GUEST_CLIENT.md) | Design proposal, unbuilt: join supported Teams work/school meetings through an OciDeck web/PWA guest client without a Microsoft account. |
 | [GIT_STORAGE.md](design/GIT_STORAGE.md) | Design of the git storage plane; phases 0–6 have landed, what remains is verification. |
 | [PENTEST_MIAUW.md](design/PENTEST_MIAUW.md) | The original design for the MIAUW pentest module, which ships. Parts are contradicted by the code. |

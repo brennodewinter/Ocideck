@@ -1787,6 +1787,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Versleuteld doorgeefluik (ontwerp)': 'Transmissor cifratus (designatio)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'In sessione communi solus dominus fasciculum servat; mutationes tuae in sessione manent donec dominus servat.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

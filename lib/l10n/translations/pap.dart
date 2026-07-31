@@ -730,6 +730,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Versleuteld doorgeefluik (ontwerp)': 'Relè enkriptá (diseño)',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Solamente e doño ta warda e deck den un seshon kompartí; bo kambionan ta keda den e seshon te ora e doño warda.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':
