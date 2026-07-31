@@ -38,7 +38,9 @@ class MatrixCollabLaunch {
     required Deck deck,
     CollabSession? initialSession,
   }) : _localDeck = deck,
-       _session = initialSession;
+       _session = initialSession {
+    if (_session != null) _ready.complete(_session);
+  }
 
   final MatrixRelayTransport transport;
   final MatrixKeyExchange keyExchange;
@@ -49,6 +51,7 @@ class MatrixCollabLaunch {
   CollabSession? _session;
   Timer? _timer;
   bool _disposed = false;
+  final _ready = Completer<CollabSession>();
 
   /// The live session, or null for a guest still waiting for the baseline.
   CollabSession? get session => _session;
@@ -56,6 +59,11 @@ class MatrixCollabLaunch {
   /// Whether the session has started (always true for a host; true for a guest
   /// once it has received and opened the baseline).
   bool get isActive => _session != null;
+
+  /// Completes when the session starts — immediately for a host, and for a guest
+  /// once [syncNow] has opened the baseline. The provider awaits this to wire the
+  /// deck controller and mark the tab active without polling [isActive].
+  Future<CollabSession> get sessionReady => _ready.future;
 
   /// Run one sync round and its side effects: the host keys any newcomer it has
   /// learned; a guest retries a buffered snapshot and, once one opens, starts its
@@ -76,6 +84,7 @@ class MatrixCollabLaunch {
         isAuthority: false,
         initialVersion: snapshot.version,
       );
+      if (!_ready.isCompleted) _ready.complete(_session);
     }
   }
 

@@ -556,6 +556,20 @@ when the owner returns.
   handling the ordering hazard that a joiner sees the snapshot before its key.
   `_wire` builds the directory, key exchange, snapshot channel and transport with
   the single sync loop feeding both the exchange and the snapshot channel.
+  `MatrixCollabLaunch.sessionReady` completes when the session starts, so a
+  provider can wire the deck controller without polling.
+- `matrix_collab_launch.dart` — the app-level orchestration a provider calls
+  (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §6.5, phase P-D UX). `hostMatrixCollab`
+  loads (or generates) this device's keys from `SecretStore`, creates a fresh
+  private room, starts the session and returns a `MatrixCollabHost` with the
+  `matrix.to` invite link to share; `joinMatrixCollab` parses that link, joins the
+  room, and starts the guest session. The room model is "new room per session +
+  shareable link" (decided 2026-07-31): the room id in the link is the access
+  secret, content is E2EE by our own layer.
+- `matrix_invite.dart` — `buildMatrixInvite`/`parseMatrixInvite`: the shareable
+  `matrix.to` link a host shares and a guest pastes. Pure string work; the parser
+  refuses anything that is not a room id or alias rather than probing an unknown
+  link (bearer-like data, §7.1.3).
 - `collab_device_store.dart` — persists a device's collaboration key material
   (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §8, phase P-D). A device is
   defined by two random 32-byte seeds (`CollabDeviceSeeds`, from `Random.secure`);
