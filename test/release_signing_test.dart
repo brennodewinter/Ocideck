@@ -31,24 +31,37 @@ void main() {
       'RWRtQiPzYn5Gms/+PoSdQ2lFVHJBpovjvVenIJLYC5M2iqkKj+WC0rnD';
   const verwachteSleutelId = '9A467E62F323426D';
 
-  test('de publieke sleutel staat in de repo-root en is de gepinde sleutel', () {
-    expect(pub.existsSync(), isTrue,
-        reason: 'minisign.pub hoort in de repo-root te staan.');
-    final regels = pub
-        .readAsStringSync()
-        .split('\n')
-        .where((r) => r.trim().isNotEmpty)
-        .toList();
-    // Een minisign-publieke-sleutel is twee regels: een `untrusted comment:`-
-    // regel (met de sleutel-ID) en de base64-sleutel zelf.
-    expect(regels.length, 2,
-        reason: 'Een minisign-pubkey is een commentaarregel + de sleutelregel.');
-    expect(regels.first.toLowerCase(), contains('untrusted comment'));
-    expect(regels.first, contains(verwachteSleutelId));
-    expect(regels[1].trim(), verwachteSleutel,
-        reason: 'Een sleutelverwisseling moet de bouw laten falen, niet stil '
-            'doorkomen — pas deze regel alleen aan bij een bewuste rotatie.');
-  });
+  test(
+    'de publieke sleutel staat in de repo-root en is de gepinde sleutel',
+    () {
+      expect(
+        pub.existsSync(),
+        isTrue,
+        reason: 'minisign.pub hoort in de repo-root te staan.',
+      );
+      final regels = pub
+          .readAsStringSync()
+          .split('\n')
+          .where((r) => r.trim().isNotEmpty)
+          .toList();
+      // Een minisign-publieke-sleutel is twee regels: een `untrusted comment:`-
+      // regel (met de sleutel-ID) en de base64-sleutel zelf.
+      expect(
+        regels.length,
+        2,
+        reason: 'Een minisign-pubkey is een commentaarregel + de sleutelregel.',
+      );
+      expect(regels.first.toLowerCase(), contains('untrusted comment'));
+      expect(regels.first, contains(verwachteSleutelId));
+      expect(
+        regels[1].trim(),
+        verwachteSleutel,
+        reason:
+            'Een sleutelverwisseling moet de bouw laten falen, niet stil '
+            'doorkomen — pas deze regel alleen aan bij een bewuste rotatie.',
+      );
+    },
+  );
 
   test('de private sleutel is NIET in de repo terechtgekomen', () {
     // Het tegenovergestelde van de vorige toets: de publieke helft hoort erin,
@@ -60,10 +73,16 @@ void main() {
   test('het teken-script bestaat en gebruikt minisign', () {
     expect(script.existsSync(), isTrue);
     final inhoud = script.readAsStringSync();
-    expect(inhoud, contains('minisign -Sm'),
-        reason: 'Het script hoort de manifest met minisign te tekenen.');
-    expect(inhoud, contains('minisign -Vm'),
-        reason: 'Het script hoort de handtekening na te verifiëren.');
+    expect(
+      inhoud,
+      contains('minisign -Sm'),
+      reason: 'Het script hoort de manifest met minisign te tekenen.',
+    );
+    expect(
+      inhoud,
+      contains('minisign -Vm'),
+      reason: 'Het script hoort de handtekening na te verifiëren.',
+    );
   });
 
   test('make sign-release roept het script aan', () {
@@ -71,13 +90,15 @@ void main() {
     expect(makefile, contains('scripts/sign_release.sh'));
   });
 
-  test('de publieke sleutel is aangewezen in SECURITY.md en de release-tekst',
-      () {
-    // De sleutel moet vindbaar zijn langs de kanalen waar een ontvanger kijkt.
-    expect(security, contains('minisign.pub'));
-    expect(releaseBody, contains('minisign.pub'));
-    // En de verify-instructie zelf staat in de release-tekst, niet alleen de
-    // sleutel.
-    expect(releaseBody, contains('minisign -Vm SHA256SUMS'));
-  });
+  test(
+    'de publieke sleutel is aangewezen in SECURITY.md en de release-tekst',
+    () {
+      // De sleutel moet vindbaar zijn langs de kanalen waar een ontvanger kijkt.
+      expect(security, contains('minisign.pub'));
+      expect(releaseBody, contains('minisign.pub'));
+      // En de verify-instructie zelf staat in de release-tekst, niet alleen de
+      // sleutel.
+      expect(releaseBody, contains('minisign -Vm SHA256SUMS'));
+    },
+  );
 }
