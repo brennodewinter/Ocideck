@@ -371,8 +371,12 @@ jobs:
 
       # Eén lijst over alles wat aan deze release hangt. Wat dit wel is: een
       # controle dat je hebt wat er lag. Wat dit niet is: een handtekening —
-      # wie de lijst zelf niet vertrouwt, heeft er niets aan. Zolang er geen
-      # ondertekening is, zeggen we dat er ook zo bij.
+      # wie de lijst zelf niet vertrouwt, heeft er niets aan. Die handtekening
+      # zit er wél, maar buiten deze workflow: de manifest wordt ná publicatie
+      # lokaal en met de hand getekend met minisign (`make sign-release`), zodat
+      # de private sleutel niet als secret op de runner hoeft te staan. Het
+      # resultaat, `SHA256SUMS.minisig`, wordt daarna aan de release gehangen —
+      # zie docs/BUILD.md §"Signing the release manifest".
       - name: Checksums
         run: |
           set -eu

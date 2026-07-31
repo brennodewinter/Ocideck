@@ -94,7 +94,7 @@ identiteits-playbooks hun onderwerp. Datzelfde argument keert terug bij 16, 18 e
 | 11 | Configuration & change management | **Afgedwongen** | Alles in git + DCO (`dco.txt`, `PULL_REQUEST_TEMPLATE.md`); `test/pinned_versions_manifest_test.dart` (harde pin-poort) + `.github/pinned-ci-versions.json`; `make check-toolchain` | Sterk op versiebeheer, pins en toolchain-basislijn. De gate-regel "dev/test/prod gescheiden" heeft geen onderwerp: er is geen IaC en geen productieomgeving. |
 | 12 | Incident response & recovery | **Deels** | `SECURITY.md` (rollen, escalatieadres `security@librekat.nl`, runbook detect→reproduce→tracker); SLA gemeten door `tool/check_service_norms.dart` (5/10/90 werkdagen); herstel via git-opslag + crash-recovery-snapshot | Intern proces bestaat en wordt gemeten. De **externe meldroute** (CSIRT/ENISA) is géén openstaand gat: die hoort bij een fabrikants- of rentmeestersplicht, en [`CRA-2024-2847-positie.md`](CRA-2024-2847-positie.md) §artikel 24 concludeert dat geen van beide op LibreKAT rust. Komt die rol ooit alsnog, dan is het een adres en een afspraak — zie daar. |
 | 13 | Vulnerability & patch management | **Deels** | `make deps-check` (OSV over de gebundelde JS), `make sbom`, `make sast`, `make check-secrets`; triage vastgelegd in `risicoafweging.md`, `AUDIT_RESPONSE.md`, CHANGELOG; fix staat op `main` zodra gemerged | Proces en JS-graaf gedekt. Open: de **Dart-afhankelijkheidsgraaf** wordt niet automatisch afgezocht — Trivy draait adviserend, niet als poort (#517). |
-| 14 | Supply chain controls | **Afgedwongen** | `make sbom` (CycloneDX 1.6 + SPDX 2.3) + `sbom-verify`-poort + `test/sbom_test.dart`; leveranciersweging in `ketenkeuring-matrix-sdk.md` / `-rust-sdk.md` (GO/NO-GO); build-secrets minimaal in de workflows | Een uitschieter. **Artefactondertekening is asymmetrisch** — macOS is Developer-ID-getekend + genotariseerd (`scripts/notarize_macos.sh`), Windows en Linux leunen op `SHA256SUMS` (geen handtekening; `SECURITY.md` §"Release artifact integrity and signing", `docs/BUILD.md`). Windows is na weging **bewust zo gelaten** (#1013, gesloten — SmartScreen-reputatie is sinds maart 2024 certtype-onafhankelijk en downloadvolume-gebonden, en elke betaalde route kost óf een hardware-token óf een secret in de release-runner); Linux blijft open (#1014). Provenance/SLSA is niet geformaliseerd. Zie [open punt O1](#de-open-punten). |
+| 14 | Supply chain controls | **Afgedwongen** | `make sbom` (CycloneDX 1.6 + SPDX 2.3) + `sbom-verify`-poort + `test/sbom_test.dart`; leveranciersweging in `ketenkeuring-matrix-sdk.md` / `-rust-sdk.md` (GO/NO-GO); build-secrets minimaal in de workflows | Een uitschieter. De release-manifest `SHA256SUMS` draagt nu een **minisign detached signature** (`SHA256SUMS.minisig`, publieke sleutel `minisign.pub` in de repo-root, lokaal-handmatig getekend met `make sign-release`), die élk genoemd artefact verankert — alle platformen tegelijk (#1014, `SECURITY.md` §"Release artifact integrity and signing", `docs/BUILD.md`). macOS is daarbovenop Developer-ID-getekend + genotariseerd (`scripts/notarize_macos.sh`); per-binary Windows-ondertekening (Authenticode) is na weging **bewust aanvaard** (#1013, gesloten). Alleen **provenance/SLSA** is niet geformaliseerd. Zie [open punt O1](#de-open-punten). |
 
 ## Secure by Default — Default Hardening (15–18)
 
@@ -118,14 +118,19 @@ identiteits-playbooks hun onderwerp. Datzelfde argument keert terug bij 16, 18 e
 
 ## De open punten
 
-Twee echte gaten, elk met een issue. De uitwerking staat daar, niet hier.
+Nog één echt gat (O2). O1 — artefactondertekening — is gedicht; het blijft hier
+staan mét de uitkomst, want een stilzwijgend verdwenen punt is over een jaar niet
+te reconstrueren. De uitwerking staat bij de issues, niet hier.
 
-- **O1 — artefactondertekening symmetrisch maken (Linux).** Playbook 14. macOS is
-  getekend + genotariseerd; Linux leunt op `SHA256SUMS` (geen handtekening).
-  Open issue: **#1014** (Linux, detached signature), onder de
-  veilige-distributievraag **#520**. Provenance/SLSA is de vraag erachter. De
-  Windows-tak van dit punt is na weging bewust aanvaard — zie *Na weging géén
-  open punt* hieronder (#1013).
+- **O1 — artefactondertekening: gedicht via een getekende release-manifest.**
+  Playbook 14. De release-manifest `SHA256SUMS` draagt nu een minisign detached
+  signature (`SHA256SUMS.minisig`, publieke sleutel `minisign.pub` in de
+  repo-root), lokaal-handmatig getekend (`make sign-release`) — dat verankert élk
+  artefact dat de lijst noemt, alle platformen tegelijk (**#1014**). macOS is
+  daarbovenop Developer-ID-getekend + genotariseerd. De Windows-tak — per-binary
+  Authenticode — is na weging bewust aanvaard (**#1013**, zie *Na weging géén open
+  punt* hieronder). Residu, apart en later: **provenance/SLSA** is niet
+  geformaliseerd. Alles onder de veilige-distributievraag **#520**.
 
 - **O2 — verversingstrigger voor het dreigingsmodel.** Playbook 01. Het model in
   `docs/SECURITY_DESIGN.md` wordt met de hand ververst. Het lichtste dat werkt is

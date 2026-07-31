@@ -14,13 +14,15 @@ version in your browser. Your deck stays in the tab; nothing is uploaded.
 | Web bundle (self-hosting) | `ocideck-web-@VERSIE@.tar.gz` |
 
 Also attached: the Software Bill of Materials in CycloneDX
-(`ocideck-@VERSIE@.cdx.json`) and SPDX (`ocideck-@VERSIE@.spdx.json`), and
-`SHA256SUMS` over every file above.
+(`ocideck-@VERSIE@.cdx.json`) and SPDX (`ocideck-@VERSIE@.spdx.json`),
+`SHA256SUMS` over every file above, and `SHA256SUMS.minisig` — a minisign
+signature over that list.
 
 ## Opening the download on each platform
 
-The macOS build is signed and notarised; Windows and Linux are not, so those two
-warn on first launch. Verify the checksum below, then:
+The macOS build is signed and notarised; the Windows and Linux builds are not
+code-signed. Only Windows warns on first launch — a Linux tarball does not.
+Verify the download below, then:
 
 **macOS.** Signed with a Developer ID and notarised by Apple — it opens with a
 normal double-click, no workaround needed. (Check with `spctl -a -t exec
@@ -34,18 +36,35 @@ info**, then **Run anyway**.
 
 ## Verifying what you downloaded
 
+First check that the checksum list vouches for your files:
+
 ```
 sha256sum --ignore-missing -c SHA256SUMS
 ```
 
 (macOS: `shasum -a 256 -c SHA256SUMS --ignore-missing`.)
 
-`SHA256SUMS` tells you that you have the bytes that were published here. It is
-**not** a signature: on its own it proves nothing about who published them. The
-macOS build additionally carries an Apple notarisation, which does attest the
-publisher; for Windows and Linux, if you need that guarantee, build from source
-— every artifact above comes from a workflow in this repository that you can
-read, and `make check-toolchain` pins the exact Flutter release used.
+`SHA256SUMS` on its own tells you only that you have the bytes it lists — not who
+published them. The list itself is therefore signed. Verify that signature with
+[minisign](https://jedisct1.github.io/minisign/) and the project's public key
+([`minisign.pub`](https://pawprint.vigilis.online/LibreKAT/Ocideck/src/tag/@TAG@/minisign.pub)):
+
+```
+minisign -Vm SHA256SUMS -p minisign.pub
+```
+
+The key's ID is `9A467E62F323426D`. Since the key and the signature come from the
+same host as this download, cross-check that ID against an independent copy — the
+[source repository](https://pawprint.vigilis.online/LibreKAT/Ocideck) or the
+[GitHub mirror](https://github.com/brennodewinter/Ocideck) — before you trust it.
+
+Because `SHA256SUMS` covers every file above, one verified signature over the
+list anchors the whole release: tampering with any *listed* artifact breaks its
+checksum, and the signed list is what vouches for those checksums. The macOS build
+additionally carries an Apple notarisation attesting its publisher; for the
+strongest guarantee on any platform, build from source — every artifact above
+comes from a workflow in this repository that you can read, and `make
+check-toolchain` pins the exact Flutter release used.
 
 ## What is in it
 

@@ -601,25 +601,52 @@ still stands because the version number is not bumped on every commit.)*
 
 ### Release artifact integrity and signing
 
-*Added 2026-07-31.* Every release carries `SHA256SUMS` over all of its files. A
-checksum proves you have the bytes that were published here; on its own it is
-**not** a signature and says nothing about *who* published them. The stronger
-guarantee is deliberately asymmetric per platform:
+*Added 2026-07-31; release-manifest signature added 2026-07-31 (#1014).* Every
+release carries `SHA256SUMS` over all of its files, and a **minisign detached
+signature** `SHA256SUMS.minisig` over that list. A checksum on its own tells you
+that you have the bytes it lists — not *who* published them; the signature is
+what anchors the list to the publisher. Because `SHA256SUMS` covers every
+artifact (all four platforms and both SBOMs), one signature over the list covers
+them all: tampering with any artifact breaks its checksum, and the signed list is
+what vouches for those checksums.
 
-- **macOS** is signed with a Developer ID and notarised by Apple
-  (`scripts/notarize_macos.sh`), which attests the publisher.
-- **Windows and Linux** ship with `SHA256SUMS` and **no code signature**. For
+Verify the list before trusting it:
+
+    minisign -Vm SHA256SUMS -p minisign.pub
+
+The public key lives in the repository root ([`minisign.pub`](minisign.pub)), key
+ID `9A467E62F323426D`. That key and the signature travel from the same host as
+the release, so treat the key ID as the fixed anchor: cross-check it against an
+independent copy — the [GitHub mirror](https://github.com/brennodewinter/Ocideck),
+the git history, or the publisher's site — before trusting a `minisign.pub` you
+just downloaded. Whoever can replace the download can replace the key beside it;
+the out-of-band key ID is what a compromise of a single host cannot quietly
+change. The private key never leaves the maintainer's machine and is never a
+secret on a runner. The manifest is signed **by hand, locally**
+(`make sign-release`) — the same least-privilege model as the macOS notarisation,
+which also runs locally.
+
+The signature covers exactly the files listed in `SHA256SUMS`; a file that is not
+in the list is outside its guarantee (this is why the verify command uses
+`--ignore-missing` — you usually download one platform, not all of them).
+
+Per-platform binary signing sits on top of this signature and is deliberately
+asymmetric:
+
+- **macOS** is additionally signed with a Developer ID and notarised by Apple
+  (`scripts/notarize_macos.sh`), which attests the publisher of the `.app` itself.
+- **Windows and Linux** binaries carry **no per-platform code signature**. For
   Windows this is a weighed decision, not a gap (#1013, closed 2026-07-31): since
   March 2024 no Authenticode certificate type — OV or EV — buys instant
   SmartScreen trust, reputation is earned only by download volume, and every paid
   route would put either a hardware token or a signing secret into the release
-  path, against the least-privilege line this project holds. Building from source
-  is the provenance route that needs no signature and no trust in our build
-  machine: the toolchain is pinned and every artifact comes from a workflow you
-  can read. Linux signing (#1014) remains an open question.
+  path, against the least-privilege line this project holds. The minisign
+  signature over `SHA256SUMS` gives Windows and Linux downloads a verifiable
+  anchor without a per-binary certificate; building from source remains the route
+  that needs no signature at all.
 
 If the SmartScreen warning ever becomes a real barrier, the fallback is an OV
-certificate signed by hand on a local machine — the same manual model as the
-macOS notarisation — never a secret in CI. The full account is in
+certificate signed by hand on a local machine — never a secret in CI. The full
+account is in
 [`docs/KNOWN_LIMITATIONS.md`](docs/KNOWN_LIMITATIONS.md#releases-are-alpha-and-unsigned)
 and [`docs/BUILD.md`](docs/BUILD.md#signing-status-of-the-published-artifacts).

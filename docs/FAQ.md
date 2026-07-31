@@ -30,10 +30,13 @@ OciDeck supports information autonomy through several key principles:
 Yes. OciDeck is released under the EUPL-1.2 open-source licence, which costs
 nothing and lets you use, study, change and redistribute it.
 
-There is, however, **no signed build**. Releases are tagged (latest `0.1.1`,
-2026-07-27) and every release carries the app for all four platforms, but the
-binaries are unsigned — macOS and Windows will warn on first launch. You can
-download a release build or build from source; either way, see
+On signing: the release manifest `SHA256SUMS` is signed with minisign, so a
+download's provenance is verifiable (see
+[BUILD.md](BUILD.md#signing-status-of-the-published-artifacts)). Releases are
+tagged (latest `0.1.1`, 2026-07-27) and carry the app for all four platforms; the
+macOS build is additionally signed and notarised and opens normally, while the
+**Windows and Linux binaries are not code-signed** — Windows warns on first
+launch. You can download a release build or build from source; either way, see
 [BUILD.md](BUILD.md) and the *Getting started* section of the
 [README](../README.md). *Corrected 2026-07-28: this said "nothing to download
 yet" and "no version has been tagged" — stale since `0.1.0` on 2026-07-25.
