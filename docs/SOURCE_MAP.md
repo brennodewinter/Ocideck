@@ -497,6 +497,18 @@ when the owner returns.
   It refuses to send its bearer token in cleartext to a non-loopback host and maps
   every non-2xx (incl. a refused 3xx) to a typed `MatrixException`. Pure Dart, so
   it runs under `flutter test` and on web.
+- `matrix_relay_transport.dart` — the realtime `CollabTransport` over a Matrix room
+  used as an encrypted relay (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §7,
+  phase P-C). Composes `MatrixClient` (carriage, P-B) and `CollabCrypto` (seal/open,
+  P-A) behind the same seam `LoopbackTransport`/`WebdavAsyncTransport` implement, so
+  `CollabSession` drives it unchanged — only now events travel sealed through a
+  homeserver that sees ciphertext (P4). `sendOp`/`setLock` seal and PUT; `syncOnce`
+  pulls the next batch, drops own sends (by `sender_device`), opens the rest and
+  emits to the op/lock streams. Ordering is Matrix's canonical order (§6.2), so no
+  sequence bookkeeping. Fail-closed: a malformed/forged/un-openable event is logged
+  and dropped, never applied. `resolvePeer` maps a sender device to its keys
+  (backed by room device-state in P-D). Key establishment and presence handover are
+  P-D/P-E; this carries the op/lock data plane with keys the session already holds.
 - `collab_crypto.dart` — the end-to-end encryption seam (design:
   `docs/design/SELF_ENCRYPTED_RELAY.md` §4), the only file touching
   `package:cryptography`. A minimal group **key-wrapping** scheme, *not* a ratchet:
