@@ -93,6 +93,7 @@ branches enriched the same line and the merge kept both copies.
 - `storage_connection.dart` — `StorageConnection` (sealed: `LocalConnection`/`WebdavConnection`/`S3Connection`/`GitConnection`) — the single notion of "a place decks live". One list, user-ordered, replacing the old split between a libraries list and one-of-each network source. Each carries a stable `id` so renaming a connection or fixing a typo in its URL never detaches an open deck from its origin; secrets stay in the keychain, keyed on server + user, so two connections to one account share one password.
 - `s3_settings.dart` — `S3Bucket` for S3 source configuration: endpoint, region, bucket, access key id, prefix and addressing style. The endpoint is a free field rather than a list of AWS regions because the self-hosted (MinIO) and European providers are the interesting case; `S3AddressingStyle` decides whether the bucket goes in the host name (AWS) or the path (most self-hosted endpoints). `uriForKey` encodes the path with the strict AWS rules instead of leaving it to `Uri` — S3 compares our signature against a canonical form derived from the path it received, so what goes over the wire must match what was signed byte for byte.
 - `webdav_settings.dart` — `WebdavServer`/`WebdavOrigin` (the origin carries the `etag` a save is checked against, plus the `connectionId` that sends a save back to the connection it came from) for WebDAV source configuration (Nextcloud, ownCloud, or any other server).
+- `matrix_settings.dart` — `MatrixServer`: the non-secret config of a Matrix collaboration account (homeserver origin, user id, device id, `trustedInternal`/`pinnedCertSha256` — the same SSRF posture as WebDAV), persisted in prefs while the access token and device seeds go to `SecretStore` (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §8). `participantId` is `userId:deviceId`. Not a `StorageConnection` — a homeserver is a rendez-vous, not deck storage (P2).
 - `git_settings.dart` — `GitProvider`/`GitRepoConfig`/`GitRepoLayout`/`GitOrigin`: one git repository as a deck source. Deliberately mirrors `webdav_settings.dart` — the git backend *is* the WebDAV source with version control on top, so the same shape, the same SSRF opt-in, and the same split between configuration and secret (the token lives in the keychain, keyed on `baseUrl` + `owner`).
 - `library_folder.dart` — `LibraryFolder`: one storage location in the user's library, a free name plus a path on disk. The name lets the user tell two folders apart without reading the whole path; it doubles as the starting point for open/save and as the search root for the presentation and image libraries.
 - `recent_file.dart` — `RecentFile`: one entry in the recent-presentations list — the path plus the metadata that makes it findable again (when it was opened, how many slides, which TLP level, what it was last exported as). The metadata is refreshed on open and export; the file itself stays the source of the content.
@@ -497,6 +498,14 @@ when the owner returns.
   It refuses to send its bearer token in cleartext to a non-loopback host and maps
   every non-2xx (incl. a refused 3xx) to a typed `MatrixException`. Pure Dart, so
   it runs under `flutter test` and on web.
+- `matrix_http_transport.dart` — the conditional-export façade that picks the
+  production `MatrixHttpTransport` for `MatrixClient`: `matrix_http_transport_io.dart`
+  on desktop (an SSRF-pinned `dart:io` client — https-only so the token never goes
+  cleartext, homeserver host resolved + refused if internal, socket pinned against a
+  DNS rebind, redirects blocked, body capped; the only raw `HttpClient` in the
+  collab layer, on the network-sink allowlist) and `matrix_http_transport_web.dart`
+  on web (a browser-fetch client where the browser sandbox + page CSP are the host
+  gate). `createMatrixHttpTransport(MatrixServer)` builds the right one (§11, P-D).
 - `matrix_relay_transport.dart` — the realtime `CollabTransport` over a Matrix room
   used as an encrypted relay (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §7,
   phase P-C). Composes `MatrixClient` (carriage, P-B) and `CollabCrypto` (seal/open,

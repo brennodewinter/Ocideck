@@ -104,6 +104,9 @@ void main() {
     // hem door `_get` pinnen — één keer per redirect-hop.
     'lib/services/cve/local_cve_database_io.dart': 2,
     'lib/services/git/git_transport_io.dart': 1,
+    // Matrix relay egress (desktop): één gepinde client op de homeserver-origin,
+    // safeResolve(Trusted) + connectPinned + geen redirects + bytecap.
+    'lib/collab/matrix_http_transport_io.dart': 1,
   };
 
   test('media fetch sinks stay behind the NetGuard resolve gate', () {
@@ -159,6 +162,11 @@ void main() {
         // gelegd en hergebruikt; een URI buiten de geconfigureerde origin wordt
         // geweigerd, zodat de gepinde client nooit op een andere host uitkomt.
         'lib/services/git/git_transport_io.dart',
+        // Matrix relay egress (desktop): resolveConfigured met de
+        // trustedInternal-opt-in van de homeserver + socket-pin + geen redirects
+        // + bytecap. De pin ligt op de geconfigureerde origin; een URI buiten die
+        // origin wordt geweigerd vóór er verbonden wordt.
+        'lib/collab/matrix_http_transport_io.dart',
       },
       guidance:
           'New raw HttpClient. Resolve the host through NetGuard.safeResolve '
@@ -345,6 +353,13 @@ void main() {
         // gaat nooit door het same-origin fetch-hulppunt, zodat dat punt het
         // PAT nooit in handen krijgt.
         'lib/services/git/git_transport_web.dart',
+        // Matrix relay egress (WEB-tak). Zelfde redenering: op web bestaat de
+        // dart:io-pinning van matrix_http_transport_io.dart niet en kan ze niet
+        // draaien; de browser (CORS, mixed content) en de pagina-CSP
+        // (`connect-src`) zijn de gate. Dit bestand begrenst schema en omvang;
+        // de client die het token stuurt wordt lexicaal op https/loopback
+        // gecontroleerd in MatrixClient vóór dit transport wordt bereikt.
+        'lib/collab/matrix_http_transport_web.dart',
       },
       guidance:
           'New network egress primitive (package:http, dio, or a raw socket). '
