@@ -1771,6 +1771,15 @@ const _dutchSourceDa = {
 
 const _dutchSourceAddDa = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Krypteret relæ (design)',
+  'Meer documentatie op de repository': 'Mere dokumentation i repositoryet',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Den fulde dokumentation — herunder arkitektur, build, kildekode og design — findes i repositoryet.',
+  'Zoeken in document': 'Søg i dokument',
+  'Zoeken in dit document…': 'Søg i dette dokument…',
+  'Geen treffers': 'Ingen match',
+  'Vorige treffer': 'Forrige match',
+  'Volgende treffer': 'Næste match',
+  'Zoeken sluiten': 'Luk søgning',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Kun ejeren gemmer decket i en delt session; dine ændringer bliver i sessionen, indtil ejeren gemmer.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

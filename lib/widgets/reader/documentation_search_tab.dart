@@ -5,6 +5,7 @@ import '../../services/documentation_service.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/log.dart';
 import '../../utils/text_search.dart';
+import '../../utils/url_launcher_util.dart';
 import 'document_reader_screen.dart';
 
 /// One document row in the Settings → Documentation list: the icon and title
@@ -152,10 +153,17 @@ class DocumentationSearchTab extends StatefulWidget {
     super.key,
     required this.sections,
     this.service = const DocumentationService(),
+    this.repositoryDocsUrl,
   });
 
   final List<DocSection> sections;
   final DocumentationService service;
+
+  /// When set, a footer card links out to the repository for the documentation
+  /// that is deliberately not bundled (developer and design docs). Shown under
+  /// the list in every state — including an empty search result — so a user who
+  /// searched for an un-bundled doc still finds the way to it.
+  final String? repositoryDocsUrl;
 
   @override
   State<DocumentationSearchTab> createState() => _DocumentationSearchTabState();
@@ -231,7 +239,71 @@ class _DocumentationSearchTabState extends State<DocumentationSearchTab> {
           ..._unfilteredSections()
         else
           ..._filteredSections(l10n, terms),
+        if (widget.repositoryDocsUrl != null) _repositoryFooter(l10n),
       ],
+    );
+  }
+
+  /// A footer card pointing to the repository for the docs that are not bundled.
+  /// It leaves the app (opens the browser) rather than opening the in-app
+  /// reader, so it is styled as a distinct "go elsewhere" row with an
+  /// open-in-new affordance, not as a document tile.
+  Widget _repositoryFooter(AppLocalizations l10n) {
+    final url = widget.repositoryDocsUrl!;
+    return Padding(
+      padding: const EdgeInsets.only(top: 6),
+      child: Material(
+        color: AppTheme.paper,
+        borderRadius: BorderRadius.circular(10),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10),
+          onTap: () => openExternalUrl(url),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+            decoration: BoxDecoration(
+              border: Border.all(color: AppTheme.slate300),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.folder_open_outlined,
+                  size: 22,
+                  color: AppTheme.blue500,
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.d('Meer documentatie op de repository'),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.slate700,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        l10n.d(
+                          'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.',
+                        ),
+                        style: TextStyle(
+                          fontSize: 12.5,
+                          color: AppTheme.slate500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(Icons.open_in_new, size: 18, color: AppTheme.slate400),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 

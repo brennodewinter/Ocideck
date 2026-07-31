@@ -245,6 +245,9 @@ store local `usl`/`lsl` without `yRef` keep using those local values. Setting
 `yRef: "Y-01"` is opt-in (or the default for *new* histogram/control charts when
 the deck already has Y-01 limits). Opening a file never rewrites chart JSON
 silently.
+
+| Key | Type | Meaning |
+| --- | --- | --- |
 | `ocideck_style_profile` · `ocideck_miauw_waivers` · `ocideck_miauw_confirmations` · `ocideck_finalized` · `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` · `ocideck_seal_tsr` · `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | *retired* | **No longer written** as of 0.1.0 (§3.6). Still read, so an older file opens correctly; removed from the file on the next save. The seal and signature blocks now live in `<name>.seal.json` (§6.6). |
 
 Metadata fields are written only when they are not empty. Text is written as a

@@ -105,4 +105,44 @@ void main() {
     expect(find.text('Beta'), findsOneWidget);
     expect(find.text('Gamma'), findsOneWidget);
   });
+
+  Future<void> pumpWithRepo(WidgetTester tester, {String? url}) async {
+    final service = _FakeDocService({
+      'a.md': 'Alpha document.',
+      'b.md': 'Beta document.',
+      'c.md': 'Gamma document.',
+    });
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: DocumentationSearchTab(
+              sections: sections,
+              service: service,
+              repositoryDocsUrl: url,
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+  }
+
+  testWidgets('no repository footer unless a URL is provided', (tester) async {
+    await pumpWithRepo(tester);
+    expect(find.text('Meer documentatie op de repository'), findsNothing);
+  });
+
+  testWidgets('repository footer shows when a URL is provided, and survives an '
+      'empty search result', (tester) async {
+    await pumpWithRepo(tester, url: 'https://example.test/docs');
+    expect(find.text('Meer documentatie op de repository'), findsOneWidget);
+
+    // The whole point of the footer: a search for something only in the
+    // repository still leaves the way there. It stays put on an empty result.
+    await tester.enterText(find.byType(TextField), 'zzzznotpresent');
+    await tester.pumpAndSettle();
+    expect(find.text('Geen documenten gevonden'), findsOneWidget);
+    expect(find.text('Meer documentatie op de repository'), findsOneWidget);
+  });
 }

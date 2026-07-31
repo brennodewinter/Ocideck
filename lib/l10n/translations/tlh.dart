@@ -1747,6 +1747,15 @@ const _dutchSourceTlh = {
 
 const _dutchSourceAddTlh = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'labwI\' So\'lu\'pu\'bogh (nab)',
+  'Meer documentatie op de repository': 'qawHaqDaq ghItlhmey law\'',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'qawHaqDaq ghItlhmey naQ tu\'lu\': qach nab, chenmoH, De\'wI\' ghItlh, \'ej nab.',
+  'Zoeken in document': 'ghItlhDaq yInej',
+  'Zoeken in dit document…': 'ghItlhvamDaq yInej…',
+  'Geen treffers': 'Segh tu\'lu\'be\'',
+  'Vorige treffer': 'Segh wa\'Hu\'',
+  'Volgende treffer': 'Segh veb',
+  'Zoeken sluiten': 'nej yISoQmoH',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'tay\' vumDaq deck pol pIn neH; pIn polpa\' tay\' vumDaq ratlhtaH choHmeylIj.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

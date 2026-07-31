@@ -1776,6 +1776,15 @@ const _dutchSourceHu = {
 
 const _dutchSourceAddHu = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Titkosított továbbító (terv)',
+  'Meer documentatie op de repository': 'További dokumentáció a tárolóban',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'A teljes dokumentáció — beleértve az architektúrát, a fordítást, a forráskódot és a tervezést — a tárolóban található.',
+  'Zoeken in document': 'Keresés a dokumentumban',
+  'Zoeken in dit document…': 'Keresés ebben a dokumentumban…',
+  'Geen treffers': 'Nincs találat',
+  'Vorige treffer': 'Előző találat',
+  'Volgende treffer': 'Következő találat',
+  'Zoeken sluiten': 'Keresés bezárása',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'A megosztott munkamenetben csak a tulajdonos menti a decket; a változtatásaid a munkamenetben maradnak, amíg a tulajdonos nem ment.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

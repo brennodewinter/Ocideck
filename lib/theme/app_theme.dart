@@ -150,6 +150,13 @@ class AppTheme {
   static const ghBorder = Color(0xFFE1E4E8);
   static const ghInk = Color(0xFF24292E);
 
+  // Find-in-page highlight in the documentation reader: a warm amber for a
+  // match, a stronger orange for the active hit. The alpha is baked into the
+  // ARGB (0x38 ≈ 0.22, 0x73 ≈ 0.45) so it reads on both a light and a dark
+  // surface without a runtime withValues() call.
+  static const findHighlight = Color(0x38FFC107);
+  static const findHighlightActive = Color(0x73FF9800);
+
   /// De vaste donkere bak achter een grafiek-tooltip op een dia. Wit leest erop.
   ///
   /// Was `ink` — mode-afhankelijk, en in donkere modus bijna-wit (`#E8ECF3`),

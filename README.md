@@ -288,14 +288,17 @@ one if a string is missing in any language, and one — since #677 — if a
 most visible form of neglect, not quality. Corrections for a single language are
 among the most useful contributions this project can receive.
 
-**The 32 languages are the interface. The documentation is English.** All 24
-bundled documents — user guide, privacy, security, the lot — exist only in
-English, and the reader says so above any document you open in another language.
-The machinery for a translation is already there: drop `docs/USER_GUIDE.de.md`
-beside the original and the app picks it up. *(Written down 2026-07-22, #626: a
-translated title on an untranslated document raises an expectation the project
-does not meet, and that asymmetry is sharper than plainly having no
-documentation in your language.)*
+**The 32 languages are the interface. The documentation is English.** Every
+bundled document — user guide, privacy, security and the rest of the curated
+in-app set — exists only in English, and the reader says so above any document
+you open in another language. The machinery for a translation is already there:
+drop `docs/USER_GUIDE.de.md` beside the original and the app picks it up.
+*(Written down 2026-07-22, #626: a translated title on an untranslated document
+raises an expectation the project does not meet, and that asymmetry is sharper
+than plainly having no documentation in your language.)* *(Corrected 2026-07-31:
+this said "All 24 bundled documents … the lot"; the in-app reader now ships a
+curated subset of `docs/` — the developer and design docs live in the repository
+— so a fixed count and "the lot" no longer fit.)*
 
 ## License
 

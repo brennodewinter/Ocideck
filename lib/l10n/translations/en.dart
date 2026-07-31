@@ -912,6 +912,15 @@ const _dutchSourceEn = {
 
 const _dutchSourceAddEn = {
   'Versleuteld doorgeefluik (ontwerp)': 'Encrypted relay (design)',
+  'Meer documentatie op de repository': 'More documentation on the repository',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'The full documentation — including architecture, build, source code and design — is on the repository.',
+  'Zoeken in document': 'Search in document',
+  'Zoeken in dit document…': 'Search in this document…',
+  'Geen treffers': 'No matches',
+  'Vorige treffer': 'Previous match',
+  'Volgende treffer': 'Next match',
+  'Zoeken sluiten': 'Close search',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Only the owner saves the deck in a shared session; your changes stay in the session until the owner saves.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

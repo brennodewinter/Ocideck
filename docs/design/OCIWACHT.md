@@ -412,6 +412,9 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 > een Amex-nummer is vijftien cijfers met een geldige Luhn en dus op vorm niet
 > van een IMEI te onderscheiden. Daar zijn de bereiken 34/37 uitgesloten; hier
 > worden ze opgepakt. Precies één van de twee regels vuurt.
+
+| Regel-id | Wat | Validatie / FP-guard | Zekerheid | Std. |
+| --- | --- | --- | --- | --- |
 | `fin.bic` | BIC/SWIFT | formaat `AAAABBCC(XXX)`, geldige landcode. Los is dit bedrijfsdata → `info`; naast een IBAN → escaleert | waarschijnlijk | ✓ |
 | `fin.nl_bankrekening` | Oud NL-rekeningnummer | 9-10 cijfers, 11-proef | zeker | ◐ |
 | `fin.us_routing` | ABA routing number | mod-10-checksum | zeker | ◐ |

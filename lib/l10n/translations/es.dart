@@ -728,6 +728,15 @@ const _dutchSourceEs = {
 
 const _dutchSourceAddEs = {
   'Versleuteld doorgeefluik (ontwerp)': 'Retransmisor cifrado (diseño)',
+  'Meer documentatie op de repository': 'Más documentación en el repositorio',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'La documentación completa — incluidos la arquitectura, la compilación, el código fuente y el diseño — está en el repositorio.',
+  'Zoeken in document': 'Buscar en el documento',
+  'Zoeken in dit document…': 'Buscar en este documento…',
+  'Geen treffers': 'Sin coincidencias',
+  'Vorige treffer': 'Coincidencia anterior',
+  'Volgende treffer': 'Coincidencia siguiente',
+  'Zoeken sluiten': 'Cerrar búsqueda',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Solo el propietario guarda el deck en una sesión compartida; tus cambios permanecen en la sesión hasta que el propietario guarda.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

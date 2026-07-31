@@ -1774,6 +1774,15 @@ const _dutchSourceSl = {
 
 const _dutchSourceAddSl = <String, String>{
   'Versleuteld doorgeefluik (ontwerp)': 'Šifriran posredovalnik (zasnova)',
+  'Meer documentatie op de repository': 'Več dokumentacije v repozitoriju',
+  'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
+      'Celotna dokumentacija — vključno z arhitekturo, gradnjo, izvorno kodo in zasnovo — je v repozitoriju.',
+  'Zoeken in document': 'Išči v dokumentu',
+  'Zoeken in dit document…': 'Išči v tem dokumentu…',
+  'Geen treffers': 'Ni zadetkov',
+  'Vorige treffer': 'Prejšnji zadetek',
+  'Volgende treffer': 'Naslednji zadetek',
+  'Zoeken sluiten': 'Zapri iskanje',
   'Alleen de eigenaar bewaart het deck in een gedeelde sessie; jouw wijzigingen blijven in de sessie tot de eigenaar opslaat.':
       'Komplet v skupni seji shrani samo lastnik; tvoje spremembe ostanejo v seji, dokler jih lastnik ne shrani.',
   'De eigenaar is weg — jij houdt de samenwerking nu gaande; jouw wijzigingen worden pas bewaard als de eigenaar terugkomt.':

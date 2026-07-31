@@ -80,6 +80,9 @@ without its hash, not a hash and file changed together. The command above is the
 one that reaches outside. *(Added 2026-07-22: this property held but was written
 down nowhere, and "why should I believe you did not touch 3.5 MB of minified
 mermaid" is the first question a reviewer asks.)*
+
+| Group | Source of truth | Per-component data |
+| --- | --- | --- |
 | **Vendored plugin forks** | `pubspec.lock` (`third_party/`) | version, upstream VCS URL **pinned to the exact commit**, upstream revision, SHA-256 **tree hash** of the vendored directory, licence, supplier |
 | **Bundled fonts** | `pubspec.yaml` (`flutter.fonts`) + the OFL texts in `assets/fonts/` | file SHA-256, licence (OFL-1.1), supplier |
 | **Build SDKs** | `.tool-versions`, `pubspec.yaml` | Flutter version, Dart SDK constraint, supplier |

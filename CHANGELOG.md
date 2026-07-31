@@ -16,6 +16,33 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- Documentatie: de in-app documentatielezer (*Instellingen → Documentatie*)
+  levert voortaan een gecureerde selectie mee in plaats van élk document onder
+  `docs/`. Meegeleverd blijven de gebruikersdocumenten, de licentie- en
+  nalevingsdocumenten en de technische documenten die bij het gebruiken en
+  draaien van OciDeck spelen (prestaties, beveiligingsontwerp, hosting, migratie).
+  De ontwikkelaarsinterne documenten (architectuur, bouw, controles, broncodekaart,
+  API, bijdragen, ontwikkelomgeving) en de vooruitkijkende ontwerpnotities reizen
+  niet meer mee in elke build; onder de lijst staat nu een verwijzing — *Meer
+  documentatie op de repository* — naar de repository, waar de volledige
+  documentatie staat. Die verwijzing blijft ook zichtbaar wanneer een
+  zoekopdracht niets in de meegeleverde set vindt.
+- Documentatielezer: drie verbeteringen. `mermaid`-blokken worden nu als diagram
+  getekend in plaats van als platte broncode — via dezelfde renderdienst als de
+  dia's, en horizontaal scrollbaar wanneer een diagram breder is dan de kolom;
+  waar tekenen niet kan (zoals onder de tests) valt de lezer terug op de
+  broncode, zodat er niets verloren gaat. De lezer benut daarnaast de volledige
+  vensterbreedte, zodat brede tabellen, codeblokken en diagrammen de ruimte
+  krijgen terwijl lopende tekst op een leesbare regellengte blijft. En er is een
+  zoekbalk om binnen één geopend document te zoeken, met een treffer-teller,
+  vorige/volgende en een sprong naar de actieve treffer.
+- Release-poort die controleert dat de meegeleverde documentatie in een gebouwd
+  artefact byte-voor-byte gelijk is aan `docs/` op schijf. Omdat de app bewust
+  geen `flutter clean` draait tussen builds, zou een incrementele build anders
+  verouderde documentatie kunnen meenemen terwijl de rest actueel is; de poort
+  vangt dat en noemt de betrokken bestanden. Ingehaakt in `make check-web` en de
+  bouwdoelen voor macOS, Windows en Linux (en in de forge-workflows voor de
+  macOS- en Linux-build).
 - Samenwerken: log-compactie van de op-log (COLLABORATION.md §5.2, #1007). #1005
   maakte bijkomen snel maar liet de oude op-records staan, zodat de sidecar bleef
   groeien. De autoriteit ruimt die records nu op — één herbaselijn-interval
@@ -131,6 +158,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Documentatielezer: een document met een regel die met `|` begint maar geen
+  geldige tabel is (geen `|---|`-scheidingsregel) liet de lezer vastlopen — de
+  blokparser consumeerde die regel met geen enkele tak en schoof daardoor nooit
+  op, waardoor hij eindeloos lege blokken bouwde tot het geheugen op was. De
+  fallback naar een alinea schuift nu altijd op. Twee meegeleverde documenten
+  triggerden dit (`FILE_FORMAT.md`, `SBOM.md`); hun kapotte tabellen zijn ook
+  hersteld met een kop- en scheidingsregel (idem in het niet-meegeleverde
+  ontwerpdocument `OCIWACHT.md`).
 - Het instellingenvenster liet niet zien dat er meer stond dan er paste. Met
   alle Uitbreidingen aan telt de zijbalk twaalf tabbladen; op een bescheiden
   venster vielen de laatste onder de vouw, en niets verried dat — de

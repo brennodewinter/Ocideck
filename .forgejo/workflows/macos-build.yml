@@ -29,6 +29,12 @@ jobs:
       - name: macOS-release bouwen
         run: flutter build macos --release
 
+      # Deze runner is persistent (build/ blijft staan tussen runs), dus een
+      # incrementele build zou verouderde doc-assets kunnen meenemen. Toets dat
+      # de docs in de .app byte-voor-byte gelijk zijn aan docs/ op schijf.
+      - name: Gebundelde documentatie vers?
+        run: dart run tool/check_bundled_docs_fresh.dart build/macos
+
       - name: Bundel inpakken
         # ditto bewaart symlinks en resource forks — een .app die door een
         # gewone zip gaat, start niet meer.
