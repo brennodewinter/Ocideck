@@ -879,6 +879,11 @@ check-web: build-web
 	@echo "        and SHA256SUMS describes exactly the files that are there."
 	@echo "Failure means: something was added, changed or lost after packing."
 	dart run tool/pack_web_release.dart --check
+	@echo "== OciDeck check: bundled documentation is fresh =="
+	@echo "Command: dart run tool/check_bundled_docs_fresh.dart build/web"
+	@echo "Covers: the docs inside the built bundle match docs/ on disk, byte for byte."
+	@echo "Failure means: an incremental build shipped stale documentation — clean-rebuild."
+	dart run tool/check_bundled_docs_fresh.dart build/web
 
 # Native desktop release builds. Each target only works on its own OS — Flutter
 # cannot cross-compile a desktop bundle (a macOS .app needs macOS, a Windows
@@ -889,18 +894,24 @@ build-macos: sbom-verify
 	@echo "Command: flutter build macos --release"
 	@echo "Output: build/macos/Build/Products/Release/*.app"
 	flutter build macos --release
+	@echo "== OciDeck check: bundled documentation is fresh =="
+	dart run tool/check_bundled_docs_fresh.dart build/macos
 
 build-windows: sbom-verify
 	@echo "== OciDeck build: Windows app (.exe) =="
 	@echo "Command: flutter build windows --release"
 	@echo "Output: build/windows/x64/runner/Release"
 	flutter build windows --release
+	@echo "== OciDeck check: bundled documentation is fresh =="
+	dart run tool/check_bundled_docs_fresh.dart build/windows
 
 build-linux: sbom-verify
 	@echo "== OciDeck build: Linux bundle =="
 	@echo "Command: flutter build linux --release"
 	@echo "Output: build/linux/x64/release/bundle"
 	flutter build linux --release
+	@echo "== OciDeck check: bundled documentation is fresh =="
+	dart run tool/check_bundled_docs_fresh.dart build/linux
 
 # Build everything this machine CAN build: the hardened web bundle always, plus
 # the desktop target native to the current OS. Windows/Linux desktop bundles for

@@ -94,6 +94,12 @@ jobs:
       - name: Linux-release bouwen
         run: flutter build linux --release
 
+      # Toets dat de docs in de bundel byte-voor-byte gelijk zijn aan docs/ op
+      # schijf, zodat een incrementele build nooit verouderde documentatie
+      # meelevert.
+      - name: Gebundelde documentatie vers?
+        run: dart run tool/check_bundled_docs_fresh.dart build/linux
+
       - name: Bundel inpakken
         run: tar -C build/linux/x64/release/bundle -czf ocideck-linux-x64.tar.gz .
 
