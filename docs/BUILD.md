@@ -162,9 +162,62 @@ That catches a damaged download, a modified mirror, and a third party rehosting
 a changed bundle. It does **not** catch a compromise of our own publishing
 chain: whoever can change both the download and the announcement changes both,
 and you would see them agree. Only a signature or a reproducible build helps
-there, and OciDeck has neither today. Signed artefacts (Authenticode,
-notarisation, a detached signature) are a desktop-release concern and are not
-part of the web-only 0.1.0. See [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md).
+there, and OciDeck now has both: every release manifest carries a minisign
+signature (`SHA256SUMS.minisig`, #1014 — see [Signing the release
+manifest](#signing-the-release-manifest-minisign)), and the web bundle is
+content-reproducible within a fixed build environment (next section).
+
+### Reproducible builds (web)
+
+A signature says *who* stands behind the bytes. A reproducible build says
+something stronger: rebuild from the same source and you get the same bytes, so
+you need not trust our build machine at all. Building from source is already the
+route KNOWN_LIMITATIONS points to; this makes it *verifiably identical*.
+
+The hardened web bundle is content-reproducible **within a fixed build
+environment**: two clean builds of the same source produce byte-identical files —
+`main.dart.js`, CanvasKit, the service worker, the tree-shaken fonts and every
+asset. One value used to differ every build: `serviceWorkerVersion` in
+`flutter_bootstrap.js`, a random cache-buster for Flutter's (deprecated) service
+worker. `tool/pack_web_release.dart` now normalises it to a value derived from
+the service worker's own content — deterministic, and still a correct cache-buster
+(it changes exactly when the service worker changes). This sits beside the
+existing `.last_build_id` removal, which strips another build-machine-specific
+value for the same reason.
+
+**Verify it yourself.** Rebuild with the pinned toolchain and compare the
+bundle-internal `SHA256SUMS` (which hashes each file's content) against the one in
+the release you downloaded:
+
+```sh
+make build-web
+shasum -a 256 build/web/SHA256SUMS      # compare this against the downloaded bundle's
+```
+
+If they match, the published bundle's contents came from this source, without
+trusting our build machine. Verify the release-level `SHA256SUMS.minisig` on top
+(above) to confirm the archive you downloaded is the one we published.
+
+Set your expectations honestly: this is conclusive when you reproduce **our**
+build environment, and a first rebuild on a *different* machine may well differ on
+`main.dart.js` because of the unpinned native-assets layer (see *Scope, honestly*
+below). Until that layer is pinned, treat a **match** as the strong signal and a
+**mismatch** as "reproduce the environment more closely, then compare again" —
+not as proof of tampering.
+
+**Scope, honestly.** Reproducibility is always relative to a build environment,
+never "any machine, any tools". The Flutter toolchain is pinned
+(`make check-toolchain`) and dependencies are locked
+(`flutter pub get --enforce-lockfile` on the release lane). One further variable
+is **not** yet pinned: the native-assets layer (the `dartcv4` OpenCV build via
+CMake), which was observed to shift `main.dart.js` to a second, then-stable value.
+A mismatch in the recipe above therefore points at a build-environment difference
+rather than tampering. The reproducibility that *is* achieved covers the bundle
+**contents**, not the `.tar.gz` wrapper the release workflow adds (its mtimes and
+gzip header are not normalised — and need not be, since verification compares
+extracted contents). The full investigation and the per-platform weighing (why
+macOS and Windows are deliberately out of scope) live in the repository at
+`assurance/reproduceerbare-builds.md`.
 
 ### Response headers the host must add
 
