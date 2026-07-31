@@ -45,7 +45,9 @@ class WebdavAsyncTransport implements CollabTransport {
     required this.store,
     required this.participantId,
     this.pollInterval = const Duration(seconds: 5),
-  });
+    int initialSeq = 0,
+  }) : _lastSeq = initialSeq,
+       _knownMaxSeq = initialSeq;
 
   final CollabLogStore store;
 
@@ -60,11 +62,13 @@ class WebdavAsyncTransport implements CollabTransport {
   final _locks = StreamController<LockEvent>.broadcast();
 
   /// The highest sequence number delivered (or skipped) in strict order. The
-  /// next poll resumes at `_lastSeq + 1`.
-  int _lastSeq = 0;
+  /// next poll resumes at `_lastSeq + 1`. Starts at the constructor's
+  /// `initialSeq` — non-zero when a joiner begins from a re-baselined snapshot
+  /// (§5.2) and so must skip the records that snapshot already subsumes.
+  int _lastSeq;
 
   /// The highest sequence number seen at all, used to pick where to append.
-  int _knownMaxSeq = 0;
+  int _knownMaxSeq;
 
   /// Sequence numbers this transport wrote, so the poll skips fetching them back
   /// only to discard its own sends.
@@ -101,6 +105,12 @@ class WebdavAsyncTransport implements CollabTransport {
   /// The highest sequence number any poll has seen present. The coordinator
   /// watches this for the steadiness the previous getter describes.
   int get knownMaxSeq => _knownMaxSeq;
+
+  /// The highest sequence number processed in strict order — everything at or
+  /// below it has been delivered (or was this participant's own send). The
+  /// authority stamps this into a re-baselined snapshot (§5.2) so a later joiner
+  /// resumes just above it.
+  int get lastSeq => _lastSeq;
 
   /// Begin polling on [pollInterval]. Idempotent; a no-op after [dispose].
   void start() {

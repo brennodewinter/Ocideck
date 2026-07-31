@@ -13,7 +13,9 @@
 // intent and applied when the authoritative op echoes back) rather than being
 // applied optimistically under a held lock — the latency-hiding half of §5.4 is
 // a follow-up, and skipping it means there is never a local edit to roll back.
-// Snapshot re-baselining for late joiners (§5.2) is also a follow-up.
+// A joiner from a re-baselined snapshot (§5.2) starts at a non-zero version via
+// the constructor's `initialVersion`; from there the apply and resume rules below
+// are unchanged.
 //
 // Owner-drop authority handover (§5.3) is built here as *mutable* authority: the
 // role can flip after construction via [becomeAuthority] / [stepDown]. This class
@@ -35,8 +37,10 @@ class CollabSession {
     required Deck initialDeck,
     required this.transport,
     required bool isAuthority,
+    int initialVersion = 0,
   }) : _deck = initialDeck,
-       _authority = isAuthority {
+       _authority = isAuthority,
+       _version = initialVersion {
     _opSub = transport.ops.listen(_onRemoteOp);
     _lockSub = transport.locks.listen(_onRemoteLock);
   }
@@ -52,7 +56,12 @@ class CollabSession {
   bool get isAuthority => _authority;
 
   Deck _deck;
-  int _version = 0;
+
+  /// The highest version applied. Starts at the constructor's `initialVersion` —
+  /// non-zero when a joiner begins from a re-baselined snapshot (§5.2), so it
+  /// applies only ops above that version and (as authority) resumes assigning
+  /// from there.
+  int _version;
   final Map<String, String> _locks = {}; // slideId -> holding participantId
   late final StreamSubscription<DeckOp> _opSub;
   late final StreamSubscription<LockEvent> _lockSub;

@@ -354,6 +354,52 @@ void main() {
     );
   });
 
+  group('CollabSession — initial version (§5.2 re-baselining)', () {
+    test('a session started at a non-zero version resumes from there', () async {
+      // Both join from a baseline re-based at version 10 (a late joiner scenario).
+      final hub = LoopbackHub();
+      final slide = baseSlide();
+      final owner = CollabSession(
+        initialDeck: deckWith(slide),
+        transport: hub.connect('owner'),
+        isAuthority: true,
+        initialVersion: 10,
+      );
+      final peer = CollabSession(
+        initialDeck: deckWith(slide),
+        transport: hub.connect('peer'),
+        isAuthority: false,
+        initialVersion: 10,
+      );
+      expect(owner.version, 10);
+      expect(peer.version, 10);
+
+      // The authority's next op is version 11 (not 1), and the follower — also
+      // starting at 10 — accepts it as the next in line.
+      await owner.submit(
+        SetSlideField(
+          version: 0,
+          authorId: 'owner',
+          slideId: slide.id,
+          field: SlideField.title,
+          value: 'after rebaseline',
+        ),
+      );
+      await pumpEventQueue();
+
+      expect(
+        owner.version,
+        11,
+        reason: 'assigned from the start version, not 1',
+      );
+      expect(peer.version, 11);
+      expect(peer.deck.slides.single.title, 'after rebaseline');
+
+      await owner.dispose();
+      await peer.dispose();
+    });
+  });
+
   test('dispose is idempotent and blocks further use', () async {
     final hub = LoopbackHub();
     final session = CollabSession(
