@@ -8,6 +8,7 @@
 // #989). Real-time Matrix (§6) joins this list later behind the same seam.
 
 export 'collab_codec.dart';
+export 'collab_crypto.dart';
 export 'collab_deck_diff.dart';
 export 'collab_log_store.dart';
 export 'collab_session.dart';
