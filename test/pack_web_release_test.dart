@@ -32,6 +32,18 @@ void main() {
     File('${bundel.path}/canvaskit/canvaskit.wasm').writeAsBytesSync([0, 1, 2]);
     // Wat Flutter achterlaat en er niet hoort; zie [nietUitleveren].
     File('${bundel.path}/.last_build_id').writeAsStringSync('fb2348c4');
+    // Het bootstrap-bestand met een wíllekeurig serviceWorkerVersion-getal en de
+    // service-worker waarnaar dat als cache-buster verwijst. [pak] hoort dat
+    // getal deterministisch te maken; zie [normaliseerServiceWorkerVersie] (#1027).
+    File(
+      '${bundel.path}/$serviceWorkerBestand',
+    ).writeAsStringSync('// service-workerinhoud');
+    File('${bundel.path}/$bootstrapBestand').writeAsStringSync(
+      '_flutter.loader.load({\n'
+      '  serviceWorkerSettings: {\n'
+      '    serviceWorkerVersion: "1177672334" /* deprecated */\n'
+      '  }\n});\n',
+    );
   });
 
   tearDown(() => tijdelijk.deleteSync(recursive: true));
@@ -115,6 +127,85 @@ void main() {
       pak(bundel, wortel);
 
       expect(controleer(bundel), isEmpty);
+    });
+  });
+
+  group('service-workerversie deterministisch maken', () {
+    // Een minimale bundel met alleen de twee bestanden die de normalisatie raakt,
+    // zodat de afleiding los van het pak-geheel te toetsen is.
+    Directory mini(String naam, String startgetal, String swInhoud) {
+      final d = Directory('${tijdelijk.path}/$naam')..createSync();
+      File('${d.path}/$serviceWorkerBestand').writeAsStringSync(swInhoud);
+      File('${d.path}/$bootstrapBestand').writeAsStringSync(
+        'x();serviceWorkerVersion: "$startgetal" /* deprecated */\n',
+      );
+      return d;
+    }
+
+    String versieVan(Directory d) {
+      final m = RegExp(
+        r'serviceWorkerVersion: "(\d+)"',
+      ).firstMatch(File('${d.path}/$bootstrapBestand').readAsStringSync());
+      return m!.group(1)!;
+    }
+
+    test(
+      'de willekeurige versie wordt afgeleid van de service-workerinhoud',
+      () {
+        pak(bundel, wortel);
+        final verwacht = serviceWorkerVersieUit(
+          File('${bundel.path}/$serviceWorkerBestand').readAsBytesSync(),
+        );
+        final bootstrap = File(
+          '${bundel.path}/$bootstrapBestand',
+        ).readAsStringSync();
+        expect(bootstrap, contains('serviceWorkerVersion: "$verwacht"'));
+        // Het oude willekeurige getal is echt weg, niet er alleen naast gezet.
+        expect(bootstrap, isNot(contains('1177672334')));
+      },
+    );
+
+    test(
+      'dezelfde service-worker geeft dezelfde versie, ongeacht het startgetal',
+      () {
+        // De kern van de reproduceerbaarheid: twee schone builds beginnen met een
+        // ander willekeurig getal, maar de genormaliseerde waarde hangt alleen aan
+        // de inhoud, dus ze komen op precies hetzelfde uit.
+        final a = mini('mini_a', '111', 'zelfde inhoud');
+        final b = mini('mini_b', '999999999', 'zelfde inhoud');
+        normaliseerServiceWorkerVersie(a);
+        normaliseerServiceWorkerVersie(b);
+        expect(versieVan(a), versieVan(b));
+      },
+    );
+
+    test('een andere service-worker geeft een andere versie', () {
+      // Cache-busting blijft kloppen: verandert de service-worker, dan verandert
+      // de versie mee — anders zou een deterministische waarde een verouderde
+      // service-worker kunnen laten hangen.
+      final a = mini('mini_c', '111', 'inhoud een');
+      final b = mini('mini_d', '111', 'inhoud twee');
+      normaliseerServiceWorkerVersie(a);
+      normaliseerServiceWorkerVersie(b);
+      expect(versieVan(a), isNot(versieVan(b)));
+    });
+
+    test('zonder service-worker of versieregel gebeurt er niets', () {
+      // Het mechanisme is afgeschreven en mag verdwijnen; de reparatie mag nooit
+      // een build breken. Ontbreekt de service-worker, dan blijft de bootstrap
+      // ongemoeid in plaats van te crashen.
+      final d = Directory('${tijdelijk.path}/mini_geen_sw')..createSync();
+      const bootstrap = 'x();serviceWorkerVersion: "111" /* deprecated */\n';
+      File('${d.path}/$bootstrapBestand').writeAsStringSync(bootstrap);
+      normaliseerServiceWorkerVersie(d); // geen service-worker → no-op
+      expect(File('${d.path}/$bootstrapBestand').readAsStringSync(), bootstrap);
+    });
+
+    test('serviceWorkerVersieUit is een stabiel decimaal getal', () {
+      final een = serviceWorkerVersieUit('abc'.codeUnits);
+      final twee = serviceWorkerVersieUit('abc'.codeUnits);
+      expect(een, twee);
+      expect(een, matches(RegExp(r'^\d+$')));
     });
   });
 
