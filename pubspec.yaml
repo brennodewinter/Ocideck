@@ -181,19 +181,23 @@ flutter:
     # Full EUPL 1.2 licence text, shown verbatim in the consent screen.
     - LICENSE.md
     - CONTRIBUTORS.md
-    # User-facing documentation, shown in the in-app reader (Settings →
-    # Documentation). Source-language files; translated variants (e.g.
-    # docs/USER_GUIDE.de.md) can be added alongside and are picked up
-    # automatically by DocumentationService once declared here.
+    # Documentation shipped in the in-app reader (Settings → Documentation).
+    # A deliberately curated subset — not every doc under docs/. The app carries
+    # what a *user* reaches for: the user guide and reference, licence and
+    # compliance, and the technical docs that bear on using and running OciDeck
+    # (performance, security design, hosting, migration). Developer-internal docs
+    # (architecture, build, checks, source map, API, contributing, dev setup) and
+    # the forward-looking design specs (docs/design/**) are NOT bundled; they live
+    # in the repository, and the reader links there for the rest. The keep/repo
+    # split is enforced by test/docs_registration_test.dart — add a new doc to one
+    # side there, or the gate fails.
+    #
+    # Source-language files; translated variants (e.g. docs/USER_GUIDE.de.md) can
+    # be added alongside and are picked up automatically by DocumentationService
+    # once declared here.
     - docs/USER_GUIDE.md
     - docs/SHORTCUTS.md
     - docs/FILE_FORMAT.md
-    - docs/ARCHITECTURE.md
-    - docs/BUILD.md
-    - docs/CHECKS.md
-    - docs/SOURCE_MAP.md
-    - docs/LICENSE_COMPLIANCE.md
-    - docs/SBOM.md
     - docs/README.md
     - docs/FAQ.md
     - docs/TROUBLESHOOTING_GUIDE.md
@@ -201,25 +205,12 @@ flutter:
     - docs/ACCESSIBILITY.md
     - docs/KNOWN_LIMITATIONS.md
     - docs/GLOSSARY.md
-    - docs/API_DOCUMENTATION.md
+    - docs/LICENSE_COMPLIANCE.md
+    - docs/SBOM.md
     - docs/PERFORMANCE_GUIDE.md
     - docs/SECURITY_DESIGN.md
     - docs/HOSTING.md
-    - docs/CONTRIBUTING_GUIDELINES.md
-    - docs/DEVELOPMENT_SETUP_GUIDE.md
     - docs/MIGRATION_GUIDE.md
-    - docs/design/COLLABORATION.md
-    - docs/design/SELF_ENCRYPTED_RELAY.md
-    - docs/design/TEAMS_GUEST_CLIENT.md
-    - docs/design/GIT_STORAGE.md
-    - docs/design/VERIFICATION.md
-    - docs/design/PENTEST_MIAUW.md
-    - docs/design/AI_ASSIST.md
-    - docs/design/AGENTIC_BUILD_PLAN.md
-    - docs/design/LEXICON_LICENTIENAVRAAG.md
-    - docs/design/OCIWACHT.md
-    - docs/design/PROCESS_IMPROVEMENT.md
-    - docs/design/OPENKAT_DISTRIBUTIE.md
   fonts:
     - family: EB Garamond
       fonts:

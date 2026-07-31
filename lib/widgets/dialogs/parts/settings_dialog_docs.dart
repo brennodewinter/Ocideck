@@ -4,25 +4,32 @@
 // _SettingsDialogState — same library, same members, no behaviour change.
 part of '../settings_dialog.dart';
 
+/// The repository where the *full* documentation lives — including the
+/// developer-internal and forward-looking design docs that are deliberately not
+/// bundled with the app (see the curated asset list in pubspec.yaml). The reader
+/// links here so "the rest is on the repository" is one tap away, rather than
+/// shipping every doc inside every build. The `/docs` folder is the landing
+/// point; from there the whole tree is browsable.
+const String kRepositoryDocsUrl =
+    'https://pawprint.vigilis.online/LibreKAT/Ocideck/src/branch/main/docs';
+
 extension _SettingsDocs on _SettingsDialogState {
-  /// Lists the bundled user documentation; each row opens the full-screen
-  /// reader, and a search field filters the list by the words in each document.
-  /// The licence also offers its canonical online version.
+  /// Lists the bundled documentation; each row opens the full-screen reader, and
+  /// a search field filters the list by the words in each document. The licence
+  /// also offers its canonical online version, and a footer links to the
+  /// repository for the docs that are not bundled.
   ///
   /// Documents are grouped by audience so the list reads as named sections
   /// rather than one long flat run. Every group carries a heading (including the
   /// first), so no tile floats without a category. The `assetBase` string
   /// literals below are what docs_registration_test.dart greps for — keep them
-  /// as literals here when adding a document.
+  /// as literals here when adding a document, and mirror the keep/repo split in
+  /// that test and in pubspec.yaml.
   Widget _documentationTab() {
     final l10n = context.l10n;
     return DocumentationSearchTab(
-      sections: [
-        _userDocs(l10n),
-        _technicalDocs(l10n),
-        _licenceDocs(l10n),
-        _designDocs(l10n),
-      ],
+      sections: [_userDocs(l10n), _technicalDocs(l10n), _licenceDocs(l10n)],
+      repositoryDocsUrl: kRepositoryDocsUrl,
     );
   }
 }
@@ -90,34 +97,16 @@ DocSection _userDocs(AppLocalizations l10n) => DocSection(
   ],
 );
 
+// Only the technical docs that bear on *using and running* OciDeck are bundled:
+// performance (what limits a big deck hits), the security design (what the app
+// does and does not do with your content), hosting (serving the web build), and
+// migration (opening older decks). The developer-internal docs — architecture,
+// build, checks, source map, API, contributing, dev setup — are not shipped in
+// the app; they live in the repository and the footer links there. Moving one of
+// these across the line means updating pubspec.yaml and docs_registration_test.
 DocSection _technicalDocs(AppLocalizations l10n) => DocSection(
   label: l10n.d('Techniek'),
   entries: [
-    DocEntry(
-      icon: Icons.account_tree_outlined,
-      title: l10n.d('Architectuur'),
-      assetBase: 'docs/ARCHITECTURE.md',
-    ),
-    DocEntry(
-      icon: Icons.build_outlined,
-      title: l10n.d('Bouwinstructies'),
-      assetBase: 'docs/BUILD.md',
-    ),
-    DocEntry(
-      icon: Icons.fact_check_outlined,
-      title: l10n.d('Kwaliteitscontroles'),
-      assetBase: 'docs/CHECKS.md',
-    ),
-    DocEntry(
-      icon: Icons.map_outlined,
-      title: l10n.d('Broncodekaart'),
-      assetBase: 'docs/SOURCE_MAP.md',
-    ),
-    DocEntry(
-      icon: Icons.api_outlined,
-      title: l10n.d('API-documentatie'),
-      assetBase: 'docs/API_DOCUMENTATION.md',
-    ),
     DocEntry(
       icon: Icons.speed_outlined,
       title: l10n.d('Prestaties'),
@@ -132,16 +121,6 @@ DocSection _technicalDocs(AppLocalizations l10n) => DocSection(
       icon: Icons.cloud_outlined,
       title: l10n.d('Hosting en uitrol'),
       assetBase: 'docs/HOSTING.md',
-    ),
-    DocEntry(
-      icon: Icons.volunteer_activism_outlined,
-      title: l10n.d('Bijdragen'),
-      assetBase: 'docs/CONTRIBUTING_GUIDELINES.md',
-    ),
-    DocEntry(
-      icon: Icons.terminal_outlined,
-      title: l10n.d('Ontwikkelomgeving'),
-      assetBase: 'docs/DEVELOPMENT_SETUP_GUIDE.md',
     ),
     DocEntry(
       icon: Icons.swap_horiz_outlined,
@@ -169,75 +148,6 @@ DocSection _licenceDocs(AppLocalizations l10n) => DocSection(
       title: l10n.d('Licentie (EUPL 1.2)'),
       assetBase: 'LICENSE.md',
       onlineUrl: PrivacyStatementContent.licenseUrl,
-    ),
-  ],
-);
-
-// Design documents (docs/design/**) are their own class: forward-looking
-// specs rather than product/reference docs, so they sit under a separate
-// heading.
-DocSection _designDocs(AppLocalizations l10n) => DocSection(
-  label: l10n.d('Ontwerp'),
-  entries: [
-    DocEntry(
-      icon: Icons.privacy_tip_outlined,
-      title: l10n.d('OciWacht (ontwerp)'),
-      assetBase: 'docs/design/OCIWACHT.md',
-    ),
-    DocEntry(
-      icon: Icons.gavel_outlined,
-      title: l10n.d('Lexiconlicenties: wat er nog nagevraagd moet worden'),
-      assetBase: 'docs/design/LEXICON_LICENTIENAVRAAG.md',
-    ),
-    DocEntry(
-      icon: Icons.groups_outlined,
-      title: l10n.d('Samenwerking (ontwerp)'),
-      assetBase: 'docs/design/COLLABORATION.md',
-    ),
-    DocEntry(
-      icon: Icons.enhanced_encryption_outlined,
-      title: l10n.d('Versleuteld doorgeefluik (ontwerp)'),
-      assetBase: 'docs/design/SELF_ENCRYPTED_RELAY.md',
-    ),
-    DocEntry(
-      icon: Icons.video_call_outlined,
-      title: l10n.d('Teams-gastclient (ontwerp)'),
-      assetBase: 'docs/design/TEAMS_GUEST_CLIENT.md',
-    ),
-    DocEntry(
-      icon: Icons.commit_outlined,
-      title: l10n.d('Git-opslag (ontwerp)'),
-      assetBase: 'docs/design/GIT_STORAGE.md',
-    ),
-    DocEntry(
-      icon: Icons.fact_check_outlined,
-      title: l10n.d('Nog te verifiëren'),
-      assetBase: 'docs/design/VERIFICATION.md',
-    ),
-    DocEntry(
-      icon: Icons.shield_outlined,
-      title: l10n.d('Pentestrapportage (ontwerp)'),
-      assetBase: 'docs/design/PENTEST_MIAUW.md',
-    ),
-    DocEntry(
-      icon: Icons.smart_toy_outlined,
-      title: l10n.d('AI-assistentie (ontwerp)'),
-      assetBase: 'docs/design/AI_ASSIST.md',
-    ),
-    DocEntry(
-      icon: Icons.account_tree_outlined,
-      title: l10n.d('Agentisch bouwplan (ontwerp)'),
-      assetBase: 'docs/design/AGENTIC_BUILD_PLAN.md',
-    ),
-    DocEntry(
-      icon: Icons.trending_up_outlined,
-      title: l10n.d('Procesverbetering (ontwerp)'),
-      assetBase: 'docs/design/PROCESS_IMPROVEMENT.md',
-    ),
-    DocEntry(
-      icon: Icons.outgoing_mail,
-      title: l10n.d('Rapportagedistributie (ontwerp)'),
-      assetBase: 'docs/design/OPENKAT_DISTRIBUTIE.md',
     ),
   ],
 );
