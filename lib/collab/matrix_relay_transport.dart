@@ -52,6 +52,8 @@ class MatrixRelayTransport implements CollabTransport {
     required CollabCrypto crypto,
     required this.roomId,
     required PeerResolver resolvePeer,
+    this.onSystemEvent,
+    this.onToDevice,
     this.syncInterval = const Duration(seconds: 1),
   }) : _matrix = client,
        _e2ee = crypto,
@@ -64,6 +66,17 @@ class MatrixRelayTransport implements CollabTransport {
   final CollabCrypto _e2ee;
   final String roomId;
   final PeerResolver _resolver;
+
+  /// Called for each timeline event that is not an op or a lock — the room state
+  /// the session lifecycle cares about (device keys, authority beacon). The relay
+  /// owns the single sync loop, so it forwards these rather than each collaborator
+  /// running its own loop and fighting over the sync token. Null in the P-C tests,
+  /// wired to the key exchange (P-D) in a live session.
+  final Future<void> Function(MatrixTimelineEvent event)? onSystemEvent;
+
+  /// Called for each to-device message — the key-share carrier (§4.3). Same
+  /// single-loop reasoning as [onSystemEvent].
+  final Future<void> Function(MatrixToDeviceEvent event)? onToDevice;
 
   /// How often [start]'s loop syncs. Realtime-ish; the server long-polls, so this
   /// is the gap between rounds, not a busy-poll.
@@ -152,6 +165,10 @@ class MatrixRelayTransport implements CollabTransport {
         if (_disposed) return;
         await _dispatch(event);
       }
+      for (final event in result.toDevice) {
+        if (_disposed) return;
+        await onToDevice?.call(event);
+      }
     } on MatrixException catch (e) {
       // Transient server trouble: keep the since token and try next round.
       logWarning('collab.matrix.sync', e);
@@ -161,7 +178,12 @@ class MatrixRelayTransport implements CollabTransport {
   }
 
   Future<void> _dispatch(MatrixTimelineEvent event) async {
-    if (event.type != opEventType && event.type != lockEventType) return;
+    if (event.type != opEventType && event.type != lockEventType) {
+      // Not our data plane — hand room state (device keys, beacon) to whoever
+      // registered for it (the key exchange, P-D). Own errors are the handler's.
+      await onSystemEvent?.call(event);
+      return;
+    }
     try {
       final sealed = SealedEnvelope.fromContent(event.content);
       if (sealed.senderDevice == participantId) return; // own send

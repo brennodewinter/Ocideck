@@ -141,7 +141,10 @@ class FakeHomeserver implements MatrixHttpTransport {
       case ['account', 'whoami']:
         return _json(200, {'user_id': actor});
       case ['sync']:
-        return _json(200, _sync(_parseSince(url.queryParameters['since'])));
+        return _json(
+          200,
+          _sync(_parseSince(url.queryParameters['since']), actor),
+        );
       case ['createRoom']:
         final id = '!room${_rooms.length}:hs.example';
         _rooms.add(id);
@@ -150,9 +153,8 @@ class FakeHomeserver implements MatrixHttpTransport {
         return _sendEvent(room, type, txn, body, actor);
       case ['rooms', final room, 'state', final type, final stateKey]:
         return _sendState(room, type, stateKey, body, actor);
-      case ['sendToDevice', _, _]:
-        lastToDevice = _asToDevice(body['messages']);
-        return _json(200, const {});
+      case ['sendToDevice', final type, _]:
+        return _sendToDevice(type, body, actor);
       case ['rooms', final room, 'invite']:
         return _rooms.contains(room)
             ? _json(200, const {})
@@ -257,12 +259,35 @@ class FakeHomeserver implements MatrixHttpTransport {
     return _json(200, {'event_id': id});
   }
 
-  Map<String, Object?> _sync(int since) {
+  MatrixHttpResponse _sendToDevice(
+    String type,
+    Map<String, Object?> body,
+    String actor,
+  ) {
+    final messages = _asToDevice(body['messages']);
+    lastToDevice = messages;
+    messages.forEach((user, devices) {
+      devices.forEach((device, content) {
+        _log.add(
+          _Item(++_seq, 'todevice', null, {
+            'type': type,
+            'sender': actor,
+            'content': content,
+          }, recipient: user),
+        );
+      });
+    });
+    return _json(200, const {});
+  }
+
+  Map<String, Object?> _sync(int since, String actor) {
     final join = <String, Object?>{};
     final toDevice = <Map<String, Object?>>[];
     for (final item in _log.where((i) => i.seq > since)) {
       if (item.bucket == 'todevice') {
-        toDevice.add(item.event);
+        if (item.recipient == null || item.recipient == actor) {
+          toDevice.add(item.event);
+        }
         continue;
       }
       final room =
@@ -304,9 +329,14 @@ class FakeHomeserver implements MatrixHttpTransport {
 }
 
 class _Item {
-  _Item(this.seq, this.bucket, this.roomId, this.event);
+  _Item(this.seq, this.bucket, this.roomId, this.event, {this.recipient});
   final int seq;
   final String bucket; // 'timeline' | 'state' | 'todevice'
   final String? roomId;
   final Map<String, Object?> event;
+
+  /// For a to-device item: the user id it is addressed to (`null` = broadcast to
+  /// every syncing user, which the `pushToDevice` test helper uses). Ignored for
+  /// timeline/state items.
+  final String? recipient;
 }
