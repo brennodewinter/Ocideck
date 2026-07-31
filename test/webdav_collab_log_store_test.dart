@@ -263,5 +263,45 @@ void main() {
 
       expect(await _storeFor(fake.port).listSequences(), [1]);
     });
+
+    test('delete issues a DELETE at the padded record path', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 204;
+      });
+      addTearDown(fake.stop);
+
+      await _storeFor(fake.port).delete(5);
+      final del = fake.requests.firstWhere((r) => r.method == 'DELETE');
+      expect(
+        del.path,
+        '$_davRoot/ops/000000000005.json',
+        reason:
+            'only a numbered record file — never the snapshot, beacon or .md',
+      );
+    });
+
+    test('delete treats a 404 as success (idempotent)', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 404;
+      });
+      addTearDown(fake.stop);
+
+      // An already-gone record is not an error.
+      await _storeFor(fake.port).delete(7);
+    });
+
+    test('delete surfaces a redirect as a failure, not a success', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 302;
+        req.response.headers.set(HttpHeaders.locationHeader, 'http://evil/');
+      });
+      addTearDown(fake.stop);
+
+      // A 3xx must never be read as "deleted" — it could redirect the delete.
+      expect(
+        () => _storeFor(fake.port).delete(9),
+        throwsA(isA<WebdavException>()),
+      );
+    });
   });
 }

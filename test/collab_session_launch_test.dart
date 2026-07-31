@@ -342,6 +342,8 @@ class _CountingStore implements CollabLogStore {
   @override
   Future<bool> append(int seq, String record) => _inner.append(seq, record);
   @override
+  Future<void> delete(int seq) => _inner.delete(seq);
+  @override
   Future<String?> readSnapshot() => _inner.readSnapshot();
   @override
   Future<void> writeSnapshot(String snapshot) => _inner.writeSnapshot(snapshot);
