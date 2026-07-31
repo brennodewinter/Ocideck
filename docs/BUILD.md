@@ -606,9 +606,10 @@ assumes is signed. See the one-time setup above.
 Windows and Linux are **not** signed, so Windows shows a SmartScreen warning.
 `.forgejo/release-body.md` carries the per-platform open instructions; trim a
 platform's note only once its published artifact is actually signed (macOS once a
-tag has been seen producing a notarised `.app`). `SHA256SUMS` proves you have the
-bytes that were published; it is not a signature and says nothing about who
-published them.
+tag has been seen producing a notarised `.app`). `SHA256SUMS` itself proves only
+that you have the bytes that were published; *who* published them is attested
+separately, by a minisign signature over that list — see *Signing the release
+manifest* below.
 
 **Windows signing was assessed and deliberately declined** (#1013, closed
 2026-07-31), so "not signed" here is a decision, not a to-do. Two facts drove it.
@@ -620,7 +621,48 @@ the release runner, against this project's least-privilege line. The chosen
 posture is `SHA256SUMS` plus the source route as the provenance guarantee. The
 re-open trigger is recorded with the decision: if the warning ever becomes a real
 barrier, sign with an OV certificate by hand on a local machine (the
-macOS-notarisation model), not from CI. Linux (#1014) is a separate, still-open
-question. The full reasoning lives in
+macOS-notarisation model), not from CI. Linux artifact signing (#1014) is
+handled a level up — by a detached signature over the whole `SHA256SUMS` manifest
+rather than a per-binary certificate; see *Signing the release manifest* below.
+The full reasoning lives in
 [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md#releases-are-alpha-and-unsigned) and
 [SECURITY.md](../SECURITY.md#release-artifact-integrity-and-signing).
+
+#### Signing the release manifest (minisign)
+
+The release manifest `SHA256SUMS` carries a minisign detached signature
+`SHA256SUMS.minisig`. Because the manifest lists every artifact's checksum, one
+signature over it anchors the whole release — Windows, Linux and the SBOMs
+included — without a per-binary certificate. This is the answer to #1014, and it
+is done **by hand, locally**, so the signing key never becomes a runner secret.
+minisign is chosen over GPG for the same reason SSH is chosen over GPG for commit
+signing ([GIT_STORAGE.md](design/GIT_STORAGE.md)): it signs one small Ed25519 file
+with no keyring and no web-of-trust, and it has several compatible
+implementations.
+
+One-time setup:
+
+```sh
+brew install minisign            # macOS; Debian/Ubuntu: sudo apt install minisign
+minisign -G -p minisign.pub -s ~/.minisign/ocideck-release.key
+```
+
+Commit the public half (`minisign.pub`) to the repository root; keep the private
+half (`~/.minisign/ocideck-release.key`) local and never commit it — `.gitignore`
+guards the filename as a backstop. A password on the private key is **strongly
+recommended** — this key is a release root of trust, so one that can be read
+straight off disk lets anything that reads `~/.minisign/` forge signatures until
+the key is rotated. Add one with
+`minisign -C -s ~/.minisign/ocideck-release.key`; `make sign-release` then prompts
+for it at signing time.
+
+Per release, after the workflow has published the tag:
+
+1. Download `SHA256SUMS` from the published release into a working directory.
+2. `make sign-release SHA256SUMS=path/to/SHA256SUMS` (or run it where
+   `dist/SHA256SUMS` sits). The script signs and immediately verifies against
+   `minisign.pub`, refusing to leave a signature it cannot verify.
+3. Attach the resulting `SHA256SUMS.minisig` to the release, beside `SHA256SUMS`.
+
+A recipient verifies with `minisign -Vm SHA256SUMS -p minisign.pub`.
+`OCIDECK_RELEASE_KEY` overrides the key path for a different signer.

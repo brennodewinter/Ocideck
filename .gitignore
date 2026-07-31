@@ -53,3 +53,11 @@ app.*.map.json
 # ze getrackt waren, meldde een échte nieuwe fout zich als "modified" in plaats
 # van als een nieuw bestand.
 test/golden/failures/
+
+# De private minisign-sleutel waarmee de release-manifest (SHA256SUMS) wordt
+# ondertekend hoort NOOIT in de repo — hij woont lokaal (standaard ~/.minisign/).
+# De publieke helft `minisign.pub` staat wél in de repo-root en is openbaar.
+# Deze regels zijn een vangnet voor het geval hij per ongeluk hier belandt.
+ocideck-release.key
+*.minisign.key
+minisign.key

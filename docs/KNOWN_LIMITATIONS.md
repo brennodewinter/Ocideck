@@ -14,7 +14,10 @@ fits what you are doing.
 
 Releases are tagged (latest `0.1.1`, 2026-07-27) and every release carries the
 app for all four platforms — macOS, Windows, Linux and web — plus both SBOM
-formats and a `SHA256SUMS` list. The macOS build is signed with a Developer ID
+formats and a `SHA256SUMS` list. That list is itself signed with minisign
+(`SHA256SUMS.minisig`, public key `minisign.pub` in the repository root), so the
+checksum chain has a verifiable anchor — one signature over the list covers every
+artifact it names (#1014). The macOS build is signed with a Developer ID
 and notarised by Apple, so it opens normally; the **Windows and Linux builds are
 unsigned**, so Windows warns on first launch. The release notes explain how to
 open each one. Building from source remains the route where you do not have
@@ -28,11 +31,13 @@ closed 2026-07-31). Authenticode signing was assessed and declined. Since March
 reputation is earned only through download volume, so signing would not remove
 the warning up front. And every paid route costs either a hardware token the
 maintainer must hold or a signing secret living in the release runner, which the
-project's least-privilege stance rules out. `SHA256SUMS` plus building from
-source stay the provenance guarantee. If download volume ever turns the
+project's least-privilege stance rules out. The minisign-signed `SHA256SUMS`
+plus building from source stay the provenance guarantee. If download volume ever turns the
 SmartScreen warning into a real barrier, the fallback is an OV certificate signed
 by hand on a local machine — the same manual model as the macOS notarisation —
-never a secret in CI. Linux (#1014) is a separate, still-open question. →
+never a secret in CI. Linux artifact signing is handled a level up — by the
+minisign signature over `SHA256SUMS` (#1014) — so a per-binary certificate is not
+needed there either. →
 [BUILD.md](BUILD.md#signing-status-of-the-published-artifacts),
 [SECURITY.md](../SECURITY.md#release-artifact-integrity-and-signing)
 

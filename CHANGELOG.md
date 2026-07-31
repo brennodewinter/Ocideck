@@ -16,6 +16,16 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- Uitgifte/beveiliging: de release-manifest `SHA256SUMS` krijgt een **minisign
+  detached signature** (`SHA256SUMS.minisig`; publieke sleutel `minisign.pub` in
+  de repo-root), zodat de checksum-keten een verifieerbaar herkomst-anker heeft.
+  Eén handtekening over de lijst verankert élk artefact dat zij noemt — alle
+  platformen tegelijk (macOS, Windows, Linux, web en de SBOM's). Ondertekenen
+  gebeurt lokaal en met de hand (`make sign-release` → `scripts/sign_release.sh`);
+  de private sleutel komt nooit als secret op een runner — dezelfde
+  least-privilege-keuze als de macOS-notarisatie. Een ontvanger verifieert met
+  `minisign -Vm SHA256SUMS -p minisign.pub`. Lost #1014 op; de per-binary
+  Windows-ondertekening (Authenticode) is bewust niet gedaan (#1013).
 - Documentatie: de in-app documentatielezer (*Instellingen → Documentatie*)
   levert voortaan een gecureerde selectie mee in plaats van élk document onder
   `docs/`. Meegeleverd blijven de gebruikersdocumenten, de licentie- en
