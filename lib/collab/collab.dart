@@ -18,5 +18,6 @@ export 'collab_snapshot.dart';
 export 'collab_transport.dart';
 export 'deck_op.dart';
 export 'matrix_client.dart';
+export 'matrix_relay_transport.dart';
 export 'handover_coordinator.dart';
 export 'webdav_async_transport.dart';
