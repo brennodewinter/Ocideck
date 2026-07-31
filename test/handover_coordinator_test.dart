@@ -31,7 +31,7 @@ Future<void> _seed(
   int tick = 1,
 }) async {
   await store.writeSnapshot(
-    jsonEncode(CollabSnapshot.capture(_deck(), 0).toJson()),
+    jsonEncode(CollabSnapshot.capture(_deck(), 0, 0).toJson()),
   );
   await store.writeBeacon(
     jsonEncode({'authority': owner, 'authorityIsOwner': true, 'tick': tick}),
@@ -68,16 +68,22 @@ _Party _party(
   int seqSteadyThreshold = 2,
   int claimSpread = 1, // backoff 0 by default — deterministic thresholds
   int heartbeatFailThreshold = 3,
+  int rebaseEveryOps =
+      100, // matches the default; the few-op tests never trip it
+  int initialVersion = 0,
+  int initialSeq = 0,
 }) {
   final transport = WebdavAsyncTransport(
     store: store,
     participantId: pid,
     pollInterval: _noTick,
+    initialSeq: initialSeq,
   );
   final session = CollabSession(
     initialDeck: _deck(),
     transport: transport,
     isAuthority: authority,
+    initialVersion: initialVersion,
   );
   final coordinator = HandoverCoordinator(
     session: session,
@@ -87,12 +93,18 @@ _Party _party(
     seqSteadyThreshold: seqSteadyThreshold,
     claimSpread: claimSpread,
     heartbeatFailThreshold: heartbeatFailThreshold,
+    rebaseEveryOps: rebaseEveryOps,
   );
   return _Party(session, transport, coordinator);
 }
 
 Future<Map<String, Object?>> _beacon(CollabLogStore store) async =>
     jsonDecode((await store.readBeacon())!) as Map<String, Object?>;
+
+Future<CollabSnapshot> _snapshot(CollabLogStore store) async =>
+    CollabSnapshot.fromJson(
+      jsonDecode((await store.readSnapshot())!) as Map<String, Object?>,
+    );
 
 SetSlideField _edit(String author, SlideField field, String value) =>
     SetSlideField(
@@ -325,7 +337,7 @@ void main() {
     test('a malformed beacon is treated as absent: no claim, no throw', () async {
       final store = InMemoryCollabLogStore();
       await store.writeSnapshot(
-        jsonEncode(CollabSnapshot.capture(_deck(), 0).toJson()),
+        jsonEncode(CollabSnapshot.capture(_deck(), 0, 0).toJson()),
       );
       final guest = _party(store, 'guest', owner: false, authority: false);
       addTearDown(guest.dispose);
@@ -353,7 +365,7 @@ void main() {
     test('an absent beacon (a pre-handover session) is a no-op', () async {
       final store = InMemoryCollabLogStore();
       await store.writeSnapshot(
-        jsonEncode(CollabSnapshot.capture(_deck(), 0).toJson()),
+        jsonEncode(CollabSnapshot.capture(_deck(), 0, 0).toJson()),
       );
       final guest = _party(store, 'guest', owner: false, authority: false);
       addTearDown(guest.dispose);
@@ -620,6 +632,97 @@ void main() {
         greaterThanOrEqualTo(1),
         reason: 'the authority flip is signalled',
       );
+    });
+  });
+
+  group('HandoverCoordinator — re-baselining (§5.2)', () {
+    test(
+      'the authority publishes a fresh baseline past the ops threshold',
+      () async {
+        final store = InMemoryCollabLogStore();
+        await _seed(store, owner: 'host', tick: 1);
+        final host = _party(
+          store,
+          'host',
+          owner: true,
+          authority: true,
+          rebaseEveryOps: 3,
+        );
+        addTearDown(host.dispose);
+
+        // Two ops is below the threshold: one heartbeat poll leaves the baseline
+        // at version 0.
+        await host.session.submit(_edit('host', SlideField.title, 'v1'));
+        await host.session.submit(_edit('host', SlideField.subtitle, 'v2'));
+        await host.sync();
+        expect(
+          (await _snapshot(store)).version,
+          0,
+          reason: 'still below the re-baseline threshold',
+        );
+
+        // The third op crosses the threshold. A lock is also acquired — a record
+        // that advances the log sequence but NOT the op version — so the
+        // baseline's seq (4) and version (3) differ, pinning that the stamp is
+        // the transport's lastSeq and not the version.
+        await host.session.submit(_edit('host', SlideField.notes, 'v3'));
+        await host.session.acquireLock('a');
+        await host.sync();
+        final snap = await _snapshot(store);
+        expect(
+          snap.version,
+          3,
+          reason: 'baseline advanced to the current version',
+        );
+        expect(
+          snap.seq,
+          4,
+          reason: 'stamped the log sequence (3 ops + 1 lock), not the version',
+        );
+        expect(host.session.version, 3);
+      },
+    );
+
+    test('a guest resumed from a re-baselined snapshot converges', () async {
+      // The store already holds a baseline at version 5 / seq 5 and a fresh op at
+      // seq 6 (version 6). A guest built at that start point applies only the
+      // fresh op — it never sees versions 1..5.
+      final store = InMemoryCollabLogStore();
+      final baseDeck = _deck().copyWith(
+        slides: [Slide(id: 'a', type: SlideType.bullets, title: 'v5')],
+      );
+      await store.writeSnapshot(
+        jsonEncode(CollabSnapshot.capture(baseDeck, 5, 5).toJson()),
+      );
+      await store.append(
+        6,
+        jsonEncode({
+          'kind': 'op',
+          'from': 'host',
+          'op': deckOpToJson(
+            const SetSlideField(
+              version: 6,
+              authorId: 'host',
+              slideId: 'a',
+              field: SlideField.title,
+              value: 'v6',
+            ),
+          ),
+        }),
+      );
+      final guest = _party(
+        store,
+        'guest',
+        owner: false,
+        authority: false,
+        initialVersion: 5,
+        initialSeq: 5,
+      );
+      addTearDown(guest.dispose);
+
+      await guest.sync();
+      expect(guest.session.version, 6);
+      expect(guest.session.deck.slides.single.title, 'v6');
     });
   });
 }

@@ -3,7 +3,10 @@
 // can be told to become or step down from the authority, but it decides nothing.
 // This decides *when* to flip that role, from a beacon in the sidecar — because
 // that decision needs the store and the poll cadence, which have no place in the
-// pure session loop or the dumb transport pipe (§5.6).
+// pure session loop or the dumb transport pipe (§5.6). Being the authority's
+// periodic driver, it also owns §5.2 **re-baselining**: every `rebaseEveryOps`
+// op versions it publishes a fresh snapshot so a later joiner never replays the
+// whole op log (see [_maybeRebaseline]).
 //
 // WebDAV-specific on purpose. It reads `transport.isCaughtUp` / `knownMaxSeq` —
 // notions the loopback and a future Matrix transport do not share — so it is not
@@ -55,6 +58,7 @@ import 'dart:convert';
 
 import '../utils/log.dart';
 import 'collab_session.dart';
+import 'collab_snapshot.dart';
 import 'webdav_async_transport.dart';
 
 /// Drives owner-drop authority handover for one [CollabSession] over a
@@ -69,6 +73,7 @@ class HandoverCoordinator {
     this.seqSteadyThreshold = 2,
     this.heartbeatFailThreshold = 3,
     this.claimSpread = 8,
+    this.rebaseEveryOps = 100,
   });
 
   final CollabSession session;
@@ -98,6 +103,12 @@ class HandoverCoordinator {
   /// one from).
   final int claimSpread;
 
+  /// How many op versions the authority lets pass before publishing a fresh
+  /// baseline (§5.2). Threshold-driven in ops — no wall-clock — so a joiner never
+  /// replays more than roughly this many ops. Smaller = cheaper joins but more
+  /// snapshot writes; larger = the reverse.
+  final int rebaseEveryOps;
+
   String get participantId => session.participantId;
 
   Timer? _timer;
@@ -114,6 +125,9 @@ class HandoverCoordinator {
 
   // Consecutive failed heartbeat writes while this session is the authority.
   int _heartbeatFailures = 0;
+
+  // The op version at the last baseline this session published (§5.2 re-baseline).
+  int _lastRebaseVersion = 0;
 
   // The authority this coordinator last observed, to fire [authorityChanged].
   String? _lastAuthority;
@@ -233,6 +247,35 @@ class HandoverCoordinator {
     _lastTick = nextTick;
     _stalePolls = 0;
     session.becomeAuthority();
+    await _maybeRebaseline();
+  }
+
+  /// Publish a fresh baseline once enough op versions have passed since the last
+  /// one (§5.2), so a later joiner starts from it and never replays the whole op
+  /// log. Any authority does this — it writes the sidecar snapshot, not the `.md`,
+  /// so it is not the "persist" a temporary authority must avoid (§5.3). The seq
+  /// stamped in is the transport's `lastSeq` (the highest record processed); the
+  /// deck at `session.version` reflects everything up to it. It is fine if that
+  /// seq lags the version's own record slightly — a joiner starting there just
+  /// re-reads a few records and drops them at the version gate, since it applies
+  /// only versions above `session.version`. seq is a fetch hint, not a
+  /// correctness input.
+  Future<void> _maybeRebaseline() async {
+    if (session.version - _lastRebaseVersion < rebaseEveryOps) return;
+    final snapshot = CollabSnapshot.capture(
+      session.deck,
+      session.version,
+      transport.lastSeq,
+    );
+    try {
+      await transport.store.writeSnapshot(jsonEncode(snapshot.toJson()));
+      _lastRebaseVersion = session.version;
+    } catch (e) {
+      // A failed snapshot write is not fatal: the previous baseline still serves
+      // joiners, and the next threshold crossing retries. Leave _lastRebaseVersion
+      // where it is so the retry happens.
+      logWarning('collab.handover.rebaseline', e);
+    }
   }
 
   void _observeAuthorityChange(String authority) {
