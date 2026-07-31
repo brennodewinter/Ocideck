@@ -547,6 +547,14 @@ when the owner returns.
   handling the ordering hazard that a joiner sees the snapshot before its key.
   `_wire` builds the directory, key exchange, snapshot channel and transport with
   the single sync loop feeding both the exchange and the snapshot channel.
+- `collab_device_store.dart` — persists a device's collaboration key material
+  (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §8, phase P-D). A device is
+  defined by two random 32-byte seeds (`CollabDeviceSeeds`, from `Random.secure`);
+  `CollabDeviceKeys.fromSeeds` rebuilds the identical identity from them, so storing
+  the seeds equals storing the keys without exporting private material from
+  `CollabCrypto`. `loadOrCreateDeviceKeys` reads the seeds from `SecretStore`
+  (keychain) or generates + persists a fresh set; a changed/absent device id (a
+  fresh login) regenerates. The seeds are secret and never touch the prefs domain.
 - `collab_crypto.dart` — the end-to-end encryption seam (design:
   `docs/design/SELF_ENCRYPTED_RELAY.md` §4), the only file touching
   `package:cryptography`. A minimal group **key-wrapping** scheme, *not* a ratchet:
