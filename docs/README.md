@@ -57,7 +57,7 @@ documentation. Start here and jump to what you need.
 Design proposals, rationale and open work — historical or forward-looking, **not**
 current-state references. Where one disagrees with the code, the code wins. Each
 of these carries its own status banner saying how far it has been overtaken;
-read that banner first. None of these eleven ships inside the app: `docs/design/**`
+read that banner first. None of these ships inside the app: `docs/design/**`
 is repo-only, reachable from the reader's repository footer rather than bundled.
 
 *(Corrected 2026-07-31: this said "All eleven ship with the app". Since the in-app
