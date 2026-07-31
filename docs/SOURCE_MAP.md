@@ -494,7 +494,8 @@ when the owner returns.
   the current one, so a successor that took over at the highest observed version
   continues the sequence without a gap. This stays mechanism-neutral — it knows
   nothing of the beacon or who the owner is; the `HandoverCoordinator` decides
-  *when* to flip it. Snapshot re-baselining (§5.2) is still a follow-up.
+  *when* to flip it. A joiner from a re-baselined snapshot begins at a non-zero
+  `initialVersion` (§5.2); the apply and resume rules are otherwise unchanged.
 - `collab_codec.dart` — the JSON wire (de)serialiser for `DeckOp`s and
   `LockEvent`s (§5.2, §5.6). JSON of the typed `Slide`/field model *by design*,
   not a Markdown round-trip: re-parsing would regenerate slide ids (§5.5) and
@@ -530,10 +531,12 @@ when the owner returns.
   a follower, and lets its coordinator reclaim authority once caught up, without
   resetting the baseline (§5.3 hand-back). `joinCollabSession` reads the baseline,
   rebases the local deck onto the authority's slides (adopting their ids, §5.5),
-  catches up on ops and polls as a follower — a guest is never the owner. Store-
-  generic, so it runs over `InMemoryCollabLogStore` in tests and
-  `WebdavCollabLogStore` in production — nothing here touches a network. Non-zero
-  re-baselining (§5.2) is still a follow-up.
+  catches up on ops and polls as a follower — a guest is never the owner. Both a
+  joiner and a resuming owner start their session and transport at the *latest*
+  baseline's `version` and `seq` (§5.2), so they fetch only the records posted
+  since — never the whole log. Store-generic, so it runs over
+  `InMemoryCollabLogStore` in tests and `WebdavCollabLogStore` in production —
+  nothing here touches a network.
 - `handover_coordinator.dart` — the owner-drop handover *policy* over the async
   WebDAV transport (§5.3), one per session (`CollabSession` is the mechanism, this
   decides *when* to flip its role). Each `syncNow` polls the transport then
@@ -547,15 +550,21 @@ when the owner returns.
   known maximum sequence has held steady (the WebDAV list-lag guard), after a
   deterministic per-participant backoff so successors do not all claim at once;
   the hand-back to a returning owner needs only "caught up". The beacon is
-  *advisory* — persistence is gated on the launch role, never on it. WebDAV-
-  specific on purpose (it reads `isCaughtUp`/`knownMaxSeq`), so the Matrix step
-  (§6.2) can replace it without touching `CollabSession`.
+  *advisory* — persistence is gated on the launch role, never on it. It also
+  drives §5.2 **re-baselining**: as the authority, after every `rebaseEveryOps`
+  op versions it writes a fresh `CollabSnapshot` at the current version and
+  `transport.lastSeq`, so a later joiner starts from it — ops-triggered, no
+  wall-clock. WebDAV-specific on purpose (it reads `isCaughtUp`/`knownMaxSeq`/
+  `lastSeq`), so the Matrix step (§6.2) can replace it without touching
+  `CollabSession`.
 - `collab_snapshot.dart` — the session baseline (§5.2, §5.5). `CollabSnapshot`
-  is the authority's slides at an op version; a joiner adopts them so it shares
-  the authority's slide-id space (`Slide.id` is regenerated on every parse, §5.5,
-  so without this every op desyncs). It carries the slides, not the whole `Deck`:
-  the durable content lives in the shared `.md` (P2), and changed metadata rides
-  the op stream (`SetDeckMeta`). JSON of the model, fail-closed like the op codec.
+  is the authority's slides at an op `version`, plus the log `seq` the baseline
+  subsumes (so a joiner resumes just above it — §5.2 re-baselining; a missing
+  `seq` decodes as `0`). A joiner adopts the slides so it shares the authority's
+  slide-id space (`Slide.id` is regenerated on every parse, §5.5, so without this
+  every op desyncs). It carries the slides, not the whole `Deck`: the durable
+  content lives in the shared `.md` (P2), and changed metadata rides the op
+  stream (`SetDeckMeta`). JSON of the model, fail-closed like the op codec.
 - `collab_log_store.dart` — the append-only log the async transport reads and
   writes (§10). `CollabLogStore` is a numbered sequence of opaque records whose
   only guarantee is that a taken sequence number cannot be silently overwritten,
@@ -574,9 +583,12 @@ when the owner returns.
   in §5.3 needs no out-of-order delivery). A participant never hears its own
   sends. Written against `CollabLogStore` so it is tested with no server. The
   deck `.md` is untouched (P2) — the log is a transient sidecar. `isCaughtUp`
-  (the last poll left no record unseen) and `knownMaxSeq` are the two extra
-  getters the `HandoverCoordinator` gates a takeover on (§5.3); WebDAV-specific,
-  so they stay off the neutral `CollabTransport`.
+  (the last poll left no record unseen), `knownMaxSeq` and `lastSeq` are the
+  extra getters the `HandoverCoordinator` uses for a takeover and to stamp a
+  re-baselined snapshot (§5.3, §5.2); a constructor `initialSeq` lets a joiner
+  from a re-baselined snapshot start above the records it already subsumes, so it
+  never replays the whole log. WebDAV-specific, so they stay off the neutral
+  `CollabTransport`.
 
 ## `lib/state/` — Riverpod providers
 
