@@ -71,7 +71,7 @@ Verwijzingen zijn naar **bestandsnaam plus symbool**, nooit naar een regelnummer
 
 | # | Playbook | Oordeel | Anker in OciDeck | Motivering / open |
 |---|---|---|---|---|
-| 01 | Trust boundaries & threat modelling | **Sterk (niet-poort)** | `docs/SECURITY_DESIGN.md` §Threat model (7 rijen, elk met restrisico + aanvaardingsdatum); `assurance/risicoafweging.md` (R1–R10); vertrouwensgrenzen ook in `docs/design/GIT_STORAGE.md`, `AI_ASSIST.md` | Model bestaat, gebruikt "trust boundary" expliciet en is per grens getoetst (`network_sink_guard_test`, `git_network_guard_test`, `privacy_scan_redact_parity_test`, de SSRF-serie in `AUDIT_RESPONSE.md`). Wat mist is de **verversingstrigger** uit de gate: er is geen automatische prikkel die bij een nieuwe interface om herziening vraagt. Zie [open punt O2](#de-open-punten) (#1015). |
+| 01 | Trust boundaries & threat modelling | **Sterk (niet-poort)** | `docs/SECURITY_DESIGN.md` §Threat model (7 rijen, elk met restrisico + aanvaardingsdatum); `assurance/risicoafweging.md` (R1–R10); vertrouwensgrenzen ook in `docs/design/GIT_STORAGE.md`, `AI_ASSIST.md` | Model bestaat, gebruikt "trust boundary" expliciet en is per grens getoetst (`network_sink_guard_test`, `git_network_guard_test`, `privacy_scan_redact_parity_test`, de SSRF-serie in `AUDIT_RESPONSE.md`). De **verversingstrigger** uit de gate is nu belegd: een checklistregel in `.github/PULL_REQUEST_TEMPLATE.md` vraagt bij een rakende wijziging om herziening (#1015, gedicht) — bewust een checklist en geen poort, want of het model écht herzien is valt niet mechanisch te toetsen. Zie [open punt O2](#de-open-punten). |
 | 02 | Least privilege | **Deels** | OS-sleutelbos voor geheimen (`SECURITY_DESIGN.md` §13); git-subproces met `includeParentEnvironment:false`, lege `HOME`, `GIT_CONFIG_NOSYSTEM=1` (`GitCliIo`); default-deny netwerk (`NetGuard`) | Geen serverrollen, geen gedeelde productie-adminsleutels — omdat er geen server en geen accounts zijn. De gate-regel "geautomatiseerde autorisatietests" heeft geen onderwerp: `ClassificationEnforcementPolicy` is datagovernance, geen autorisatie (zie [`ASVS-5.0.0-scope.md`](ASVS-5.0.0-scope.md) V8). Wat wél geldt — geheimen, subproces, default-deny — is streng. |
 | 03 | Strong identity & authentication | **Buiten scope** | — | Geen accounts, geen inlog, geen sessie, geen identity provider (zie `ASVS-5.0.0-scope.md` V6/V7). De enige credential is een door de gebruiker geplakt git-token, in de OS-sleutelbos. Er is geen identiteitsdomein om te harden. |
 | 04 | Attack surface minimisation | **Afgedwongen** | `make check-web` (`tool/check_web_hardening.dart`); `check-dead-code`; `check-conventions` (verbiedt `print()`); de beveiligingsmodule is een schakelaar over ingebakken catalogi zonder netwerkuitgang | Productiebouw is minimaal; wees interfaces zijn de webbundel (gehard) en niets meer. Geen diagnostische gereedschappen in release. |
@@ -118,9 +118,10 @@ identiteits-playbooks hun onderwerp. Datzelfde argument keert terug bij 16, 18 e
 
 ## De open punten
 
-Nog één echt gat (O2). O1 — artefactondertekening — is gedicht; het blijft hier
-staan mét de uitkomst, want een stilzwijgend verdwenen punt is over een jaar niet
-te reconstrueren. De uitwerking staat bij de issues, niet hier.
+Geen open gaten meer: O1 (artefactondertekening) en O2 (verversingstrigger) zijn
+beide gedicht. Ze blijven hier staan mét de uitkomst, want een stilzwijgend
+verdwenen punt is over een jaar niet te reconstrueren. De uitwerking staat bij de
+issues, niet hier.
 
 - **O1 — artefactondertekening: gedicht via een getekende release-manifest.**
   Playbook 14. De release-manifest `SHA256SUMS` draagt nu een minisign detached
@@ -133,10 +134,14 @@ te reconstrueren. De uitwerking staat bij de issues, niet hier.
   build) is niet geformaliseerd — belegd in **#1027**. Alles onder de
   veilige-distributievraag **#520**.
 
-- **O2 — verversingstrigger voor het dreigingsmodel.** Playbook 01. Het model in
-  `docs/SECURITY_DESIGN.md` wordt met de hand ververst. Het lichtste dat werkt is
-  een regel in de `PULL_REQUEST_TEMPLATE.md`-checklist, geen nieuwe poort.
-  **#1015**.
+- **O2 — verversingstrigger voor het dreigingsmodel: gedicht.** Playbook 01. Het
+  model in `docs/SECURITY_DESIGN.md` wordt met de hand ververst; er staat nu een
+  checklistregel in `.github/PULL_REQUEST_TEMPLATE.md` die de indiener om een
+  herziening vraagt zodra de wijziging een interface, het vertrouwens- of
+  authenticatiemodel, nieuwe gevoelige data, een grote afhankelijkheidswissel, het
+  update-/distributiepad of een grote architectuurwijziging raakt (**#1015**).
+  Bewust geen poort — machine-afdwingen zou doen-alsof zijn: of het model écht
+  herzien is, valt niet mechanisch te toetsen.
 
 ### Na weging géén open punt
 

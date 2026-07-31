@@ -29,6 +29,14 @@
       traffic, or a promise made in the UI or the docs — I described the
       trade-off in the summary: which principle I gave precedence, why, and
       what would change my mind.
+- [ ] **Threat model still holds.** If this change touches any of — a new or
+      changed interface, the authentication/trust model, newly handled sensitive
+      data, a major dependency or supplier swap, the update/distribution path, or
+      a large architectural change — I re-read
+      [`docs/SECURITY_DESIGN.md`](../docs/SECURITY_DESIGN.md) (§Threat model) and
+      [`assurance/risicoafweging.md`](../assurance/risicoafweging.md) and either
+      confirmed they still hold or updated them. (No gate enforces this: whether
+      the model was genuinely revisited cannot be checked mechanically.)
 
 ## Notes for reviewers
 
