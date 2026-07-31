@@ -640,10 +640,10 @@ class _Theme {
       tableHeaderBg = theme.colorScheme.surfaceContainerHighest.withValues(
         alpha: 0.7,
       ),
-      // Find-in-page tints. A warm amber, alpha-blended so it reads on both a
-      // light and a dark surface; the active hit is stronger than the rest.
-      findMatch = const Color(0xFFFFC107).withValues(alpha: 0.22),
-      findActive = const Color(0xFFFF9800).withValues(alpha: 0.45);
+      // Find-in-page tints: a warm amber for a match, a stronger orange for the
+      // active hit (semantic tokens, so a palette change touches one place).
+      findMatch = AppTheme.findHighlight,
+      findActive = AppTheme.findHighlightActive;
 
   final TextStyle body;
   final Color heading;

@@ -84,8 +84,9 @@ class _DocMermaidViewState extends State<DocMermaidView> {
           // Only draw when we have both a clean SVG and its intrinsic size; a
           // sizeless SVG can't be laid out in the vertical column without a
           // height, so it falls through to the source rather than collapsing.
-          if (safe != null && size != null)
+          if (safe != null && size != null) {
             return _diagram(context, safe, size);
+          }
         }
         if (snap.connectionState != ConnectionState.done) return _loading();
         return widget.fallback;

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/documentation_service.dart';
 import 'package:ocideck/state/settings_provider.dart';
+import 'package:ocideck/widgets/reader/doc_mermaid_view.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/widgets/reader/document_reader_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -215,6 +218,77 @@ void main() {
       );
       expect(find.textContaining('stray'), findsOneWidget);
       expect(find.textContaining('After the table'), findsOneWidget);
+    });
+  });
+
+  group('DocMermaidView', () {
+    const smallSvg =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60">'
+        '<rect width="120" height="60"/></svg>';
+    // A viewBox far wider than any test surface, so the diagram overflows the
+    // column and the horizontal-scroll branch is taken.
+    const wideSvg =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4000 60">'
+        '<rect width="4000" height="60"/></svg>';
+
+    Future<void> pumpMermaid(
+      WidgetTester tester,
+      Future<String?> Function(String) renderer,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: DocMermaidView(
+                source: 'graph TD; A-->B;',
+                fallback: const Text('FALLBACK'),
+                renderer: renderer,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    testWidgets('a diagram that fits is centred, no scroller', (tester) async {
+      await pumpMermaid(tester, (_) async => smallSvg);
+      await tester.pumpAndSettle();
+      expect(find.byType(SvgPicture), findsOneWidget);
+      expect(find.byType(Scrollbar), findsNothing);
+      expect(find.text('FALLBACK'), findsNothing);
+    });
+
+    testWidgets('a diagram wider than the column scrolls horizontally', (
+      tester,
+    ) async {
+      await pumpMermaid(tester, (_) async => wideSvg);
+      await tester.pumpAndSettle();
+      expect(find.byType(SvgPicture), findsOneWidget);
+      // Overflow branch: a Scrollbar over a horizontal scroll view.
+      expect(find.byType(Scrollbar), findsOneWidget);
+    });
+
+    testWidgets('shows a spinner while rendering is in flight', (tester) async {
+      // A future that never completes stays in the loading branch.
+      await pumpMermaid(tester, (_) => Completer<String?>().future);
+      await tester.pump(); // one frame, not settle (the spinner animates)
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.byType(SvgPicture), findsNothing);
+      expect(find.text('FALLBACK'), findsNothing);
+    });
+
+    testWidgets('falls back when the SVG has no usable viewBox', (
+      tester,
+    ) async {
+      // No viewBox → no natural size → it cannot be laid out in the column, so
+      // the fallback is shown rather than a collapsed frame.
+      await pumpMermaid(
+        tester,
+        (_) async => '<svg xmlns="http://www.w3.org/2000/svg"><rect/></svg>',
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('FALLBACK'), findsOneWidget);
+      expect(find.byType(SvgPicture), findsNothing);
     });
   });
 
