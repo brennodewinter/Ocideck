@@ -16,6 +16,17 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- Samenwerken: snapshot-herbaselijning op een niet-nul versie (COLLABORATION.md
+  §5.2, #1005). Een deelnemer die bijkomt begon voorheen vanaf de basislijn bij
+  versie 0 en speelde de héle op-log opnieuw af; bij een lange sessie werd
+  bijkomen daardoor traag. Nu draagt de snapshot ook de log-positie (`seq`) die
+  hij al omvat, start een nieuwe deelnemer (en een terugkerende eigenaar) zijn
+  sessie en transport ná die positie — dus alleen de recente records — en schrijft
+  de autoriteit elke N ops een verse basislijn bij de huidige versie. Getriggerd
+  op een ops-teller, geen wandklok. Dit versnelt het *bijkomen*; de op-log zelf
+  blijft groeien. Log-compactie om de sidecar-*omvang* óók te begrenzen is een
+  apart vervolg (#1007): dat vraagt een WebDAV-DELETE en strand-recovery. Raakt
+  het `.md` niet (P2).
 - De basis van live samenwerken (COLLABORATION.md Fase 0, #975): een
   transportloze samenwerklaag onder `lib/collab/`. Een bewerking is een getypte
   `DeckOp` op het Deck-model (geen Markdown-diff), die de sessie-autoriteit op

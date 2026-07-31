@@ -173,6 +173,47 @@ class SetDeckMeta   extends DeckOp { String field; Object? value; ... } // title
 - Matrix events are capped at ~64 KiB, so large snapshots must be **chunked** or
   sent as an encrypted attachment, not a single state event (see §6.3).
 
+#### Re-baselining in Fase 0.5 (the async WebDAV realisation)
+
+Without this a joiner starts from the version-0 baseline and re-downloads the
+whole op log; on a long session that log grows without bound and joining gets
+slow. The realisation:
+
+- **The snapshot carries its log position.** `CollabSnapshot` is `{version, seq,
+  slides}`: `seq` is the highest log sequence number the baseline already
+  subsumes. A joiner starts its `CollabSession` at `initialVersion = version` and
+  its transport at `initialSeq = seq`, so it fetches only the records posted
+  *after* the baseline — never the whole log. (A pre-§5.2 snapshot with no `seq`
+  decodes as `0`, i.e. a version-0 baseline.) This is also what a resuming owner
+  uses (§5.3), so a returning owner catches up from the latest baseline rather
+  than replaying from zero.
+- **The authority re-baselines periodically.** Inside the `HandoverCoordinator`,
+  after every `rebaseEveryOps` op versions, the current authority writes a fresh
+  `CollabSnapshot.capture(deck, version, transport.lastSeq)`. The trigger is an
+  ops count, not a wall-clock, so it stays deterministically testable. `seq` is
+  the transport's `lastSeq`: the authority is caught up at that moment, so the
+  deck at `version` subsumes exactly the log up to that sequence. Any authority
+  does this — writing the sidecar snapshot is not the `saveDeck` a temporary
+  authority must avoid.
+- **`writeSnapshot` overwrites**, so there is always exactly one (the latest)
+  baseline; a joiner always gets the freshest one. Old op records are **kept**,
+  so the join race is harmless: a joiner holding a slightly older baseline still
+  finds every record it needs and just reads a few extra.
+- **Locks are not carried.** The snapshot holds only the slide state (§5.5), not
+  the lock table (§5.4), so a joiner from a re-baselined baseline reconstructs
+  locks only from the events *after* it — a slide someone locked before the
+  baseline reads as free until the next lock event. That is acceptable because
+  locks are advisory: the authority still serialises every edit, so this is a
+  stale UI hint, never a lost guard.
+
+**Deferred: log compaction.** Deleting the old op records a baseline subsumes
+(to bound the sidecar's *size*, not just join *speed*) is a separate follow-up.
+It needs two things this increment deliberately does not add: a WebDAV `DELETE`
+capability (a new data-mutating outbound operation, worth its own security
+review) and *strand-recovery* — a participant that hits a permanent gap (records
+deleted out from under it) must re-read the latest baseline and jump forward.
+Until then the log grows, but joins stay fast, which is the stated §5.2 goal.
+
 ### 5.3 Authority state machine
 
 The authority (owner, or a temporary stand-in) is the only writer of versions.

@@ -27,18 +27,30 @@ import 'collab_codec.dart';
 /// The authority's deck state at [version], enough for a joiner to share its
 /// slide-id space (§5.5) before replaying ops.
 class CollabSnapshot {
-  const CollabSnapshot({required this.version, required this.slides});
+  const CollabSnapshot({
+    required this.version,
+    required this.seq,
+    required this.slides,
+  });
 
-  /// The op version this baseline is taken at: a joiner applies only ops whose
-  /// version is higher (§5.3).
+  /// The op version this baseline is taken at: a joiner starts its session at
+  /// this version and applies only ops whose version is higher (§5.3).
   final int version;
+
+  /// The highest log **sequence number** this baseline already subsumes (§5.2
+  /// re-baselining). A joiner starts its transport just above this, so it fetches
+  /// only the records posted since the baseline instead of replaying the whole
+  /// log from the start. `0` for a fresh session (baseline at version 0).
+  final int seq;
 
   /// The authority's slides, ids included. A joiner adopts these verbatim.
   final List<Slide> slides;
 
-  /// Capture the current baseline of [deck] at [version].
-  factory CollabSnapshot.capture(Deck deck, int version) =>
-      CollabSnapshot(version: version, slides: deck.slides);
+  /// Capture the current baseline of [deck] at op [version], subsuming the log up
+  /// to [seq]. A fresh baseline is `capture(deck, 0, 0)`; a periodic re-baseline
+  /// is `capture(deck, currentVersion, transport.lastSeq)`.
+  factory CollabSnapshot.capture(Deck deck, int version, int seq) =>
+      CollabSnapshot(version: version, seq: seq, slides: deck.slides);
 
   /// Rebase [base] onto this snapshot: the same deck, but carrying the
   /// authority's slides (and thus their ids). Everything else about [base] —
@@ -47,15 +59,22 @@ class CollabSnapshot {
 
   Map<String, Object?> toJson() => {
     'version': version,
+    'seq': seq,
     'slides': slides.map(slideToJson).toList(),
   };
 
   /// Decode a snapshot written by [toJson]. Fail-closed: a malformed baseline
-  /// throws rather than yielding a half-built deck that would desync every op.
+  /// throws rather than yielding a half-built deck that would desync every op. A
+  /// missing `seq` decodes as `0` — a baseline written before §5.2 re-baselining
+  /// sat at version 0 and subsumed nothing.
   factory CollabSnapshot.fromJson(Map<String, Object?> json) {
     final version = json['version'];
     if (version is! int) {
       throw FormatException('snapshot "version" is not an int');
+    }
+    final rawSeq = json['seq'];
+    if (rawSeq != null && rawSeq is! int) {
+      throw FormatException('snapshot "seq" is not an int');
     }
     final rawSlides = json['slides'];
     if (rawSlides is! List) {
@@ -63,6 +82,7 @@ class CollabSnapshot {
     }
     return CollabSnapshot(
       version: version,
+      seq: (rawSeq as int?) ?? 0,
       slides: rawSlides.map((s) {
         if (s is Map<String, Object?>) return slideFromJson(s);
         if (s is Map) {

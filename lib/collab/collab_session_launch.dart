@@ -13,9 +13,13 @@
 // Owner-drop handover (§5.3) is wired here: the host writes an authority beacon,
 // every session gets a [HandoverCoordinator] that drives the poll+decide loop, and
 // the coordinator — not the transport's own timer — owns the poll cadence, so
-// `isCaughtUp` is always read straight after its poll. The baseline is still taken
-// at session start (version 0); re-baselining at a non-zero version (§5.2) needs
-// the session to accept a starting version and stays a follow-up.
+// `isCaughtUp` is always read straight after its poll.
+//
+// Snapshot re-baselining (§5.2) is wired here too: a joiner (and a resuming owner)
+// reads the *latest* baseline and starts its session and transport at that
+// baseline's version and sequence, so it fetches only the records posted since —
+// never the whole op log. The authority refreshes that baseline periodically from
+// inside the coordinator. A fresh session's first baseline is at version 0, seq 0.
 //
 // A returning owner re-hosts: [hostCollabSession] is resume-aware. If a baseline
 // already exists the host does not reset it — it adopts it, catches up on the ops
@@ -60,33 +64,44 @@ Future<CollabLaunch> hostCollabSession({
   final existing = await store.readSnapshot();
   final Deck baseDeck;
   final bool startAsAuthority;
+  final int initialVersion;
+  final int initialSeq;
   if (existing == null) {
     // Fresh session: publish the baseline before anyone can join (so a joiner
     // never sees ops without the snapshot they are relative to) and claim the
-    // authority beacon, then start as the authority.
+    // authority beacon, then start as the authority at version 0.
     await store.writeSnapshot(
-      jsonEncode(CollabSnapshot.capture(deck, 0).toJson()),
+      jsonEncode(CollabSnapshot.capture(deck, 0, 0).toJson()),
     );
     await store.writeBeacon(
       _initialBeacon(authority: participantId).encodeInitial(),
     );
     baseDeck = deck;
     startAsAuthority = true;
+    initialVersion = 0;
+    initialSeq = 0;
   } else {
     // Resuming ownership: adopt the existing baseline's slide-id space (§5.5) and
-    // start as a follower; the coordinator reclaims after catching up.
-    baseDeck = _snapshotFrom(existing).applyTo(deck);
+    // start as a follower *at the baseline's version and sequence* (§5.2), so the
+    // owner resumes from the latest re-baseline instead of replaying from zero.
+    // The coordinator reclaims authority after catching up.
+    final snapshot = _snapshotFrom(existing);
+    baseDeck = snapshot.applyTo(deck);
     startAsAuthority = false;
+    initialVersion = snapshot.version;
+    initialSeq = snapshot.seq;
   }
   final transport = WebdavAsyncTransport(
     store: store,
     participantId: participantId,
     pollInterval: pollInterval,
+    initialSeq: initialSeq,
   );
   final session = CollabSession(
     initialDeck: baseDeck,
     transport: transport,
     isAuthority: startAsAuthority,
+    initialVersion: initialVersion,
   );
   final coordinator = HandoverCoordinator(
     session: session,
@@ -116,16 +131,22 @@ Future<CollabLaunch> joinCollabSession({
   if (raw == null) {
     throw StateError('no collaboration baseline in this sidecar yet');
   }
-  final baseDeck = _snapshotFrom(raw).applyTo(localDeck);
+  // Start from the latest baseline's version and sequence (§5.2): the transport
+  // resumes just above the snapshot's seq, so the joiner fetches only the records
+  // posted since — never the whole op log.
+  final snapshot = _snapshotFrom(raw);
+  final baseDeck = snapshot.applyTo(localDeck);
   final transport = WebdavAsyncTransport(
     store: store,
     participantId: participantId,
     pollInterval: pollInterval,
+    initialSeq: snapshot.seq,
   );
   final session = CollabSession(
     initialDeck: baseDeck,
     transport: transport,
     isAuthority: false,
+    initialVersion: snapshot.version,
   );
   final coordinator = HandoverCoordinator(
     session: session,

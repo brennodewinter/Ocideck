@@ -14,8 +14,9 @@ void main() {
         title: 'd',
         slides: [slide('a', 'one'), slide('b', 'two')],
       );
-      final snap = CollabSnapshot.capture(deck, 5);
+      final snap = CollabSnapshot.capture(deck, 5, 12);
       expect(snap.version, 5);
+      expect(snap.seq, 12);
 
       final rebased = snap.applyTo(Deck(title: 'blank'));
       expect(rebased.slides.map((s) => s.id), ['a', 'b']);
@@ -25,9 +26,10 @@ void main() {
     test('round-trips through JSON, ids and content intact', () {
       final deck = Deck(title: 'd', slides: [slide('x', 'hi')]);
       final r = CollabSnapshot.fromJson(
-        CollabSnapshot.capture(deck, 2).toJson(),
+        CollabSnapshot.capture(deck, 2, 7).toJson(),
       );
       expect(r.version, 2);
+      expect(r.seq, 7, reason: 'the sequence position round-trips (§5.2)');
       expect(r.slides.single.id, 'x');
       expect(r.slides.single.title, 'hi');
       expect(r.slides.single.bullets, ['hi']);
@@ -39,7 +41,11 @@ void main() {
       final authority = Deck(title: 'd', slides: [slide('auth-1', 'intro')]);
       final joinerLocal = Deck(title: 'd', slides: [slide('join-9', 'intro')]);
 
-      final rebased = CollabSnapshot.capture(authority, 0).applyTo(joinerLocal);
+      final rebased = CollabSnapshot.capture(
+        authority,
+        0,
+        0,
+      ).applyTo(joinerLocal);
 
       expect(
         rebased.slides.single.id,
@@ -53,6 +59,7 @@ void main() {
       final rebased = CollabSnapshot.capture(
         Deck(title: 'other', slides: [slide('a', 'x')]),
         1,
+        4,
       ).applyTo(base);
       expect(rebased.title, 'keep-me');
       expect(rebased.theme, 'my-theme');
@@ -81,6 +88,17 @@ void main() {
           }),
           throwsFormatException,
         );
+      });
+      test('a non-int seq throws', () {
+        expect(
+          () =>
+              CollabSnapshot.fromJson({'version': 1, 'seq': 'x', 'slides': []}),
+          throwsFormatException,
+        );
+      });
+      test('a missing seq decodes as 0 (pre-§5.2 baseline)', () {
+        final r = CollabSnapshot.fromJson({'version': 0, 'slides': []});
+        expect(r.seq, 0);
       });
     });
   });
