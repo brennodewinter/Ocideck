@@ -509,6 +509,19 @@ when the owner returns.
   and dropped, never applied. `resolvePeer` maps a sender device to its keys
   (backed by room device-state in P-D). Key establishment and presence handover are
   P-D/P-E; this carries the op/lock data plane with keys the session already holds.
+  Two optional hooks (`onSystemEvent`, `onToDevice`) let the single sync loop feed
+  non-op/lock room state and to-device messages to the key exchange (P-D).
+- `matrix_key_exchange.dart` — establishes the session's keys over the room
+  (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §4.3, §8, phase P-D), turning the
+  relay from "keys pre-shared" into "keys established over the wire". Publishes this
+  device's public keys as `nl.ocideck.device` room state; `MatrixDeviceDirectory`
+  ingests peers' device state (rejecting any whose identity→agreement binding does
+  not verify — the relay-key-substitution defence, §5.3) and backs the transport's
+  `resolvePeer`; the authority `distributeEpoch`s the epoch key to each member via
+  an encrypted to-device key-share, and a member installs the one addressed to it —
+  verified against the sender's *directory-held* identity, never keys carried in the
+  message. The crypto (wrap/sign/unwrap) is `CollabCrypto`'s; this is only the
+  Matrix plumbing. `handleSystemEvent`/`handleToDevice` wire to the transport hooks.
 - `collab_crypto.dart` — the end-to-end encryption seam (design:
   `docs/design/SELF_ENCRYPTED_RELAY.md` §4), the only file touching
   `package:cryptography`. A minimal group **key-wrapping** scheme, *not* a ratchet:
