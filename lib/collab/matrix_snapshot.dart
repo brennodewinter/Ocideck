@@ -62,11 +62,28 @@ class MatrixSnapshotChannel {
 
   int _out = 0;
   final Map<String, Map<int, String>> _pending = {};
+
+  /// Snapshots that have fully reassembled but not yet opened — because the epoch
+  /// key had not arrived (a joiner sees the snapshot chunks before its key-share).
+  /// [retryPending] re-attempts these once a key may have been installed.
+  final Map<String, SealedEnvelope> _assembled = {};
   final _first = Completer<CollabSnapshot>();
 
   /// Completes with the first fully-reassembled, opened snapshot — what a joiner
   /// awaits before starting its session.
   Future<CollabSnapshot> get firstSnapshot => _first.future;
+
+  /// Whether a snapshot has been opened yet — a non-blocking check for a join
+  /// loop that syncs until it is true.
+  bool get hasSnapshot => _first.isCompleted;
+
+  /// Re-attempt opening any snapshot that reassembled before its epoch key was
+  /// available. Call after a sync round that may have installed a key-share.
+  Future<void> retryPending() async {
+    for (final id in _assembled.keys.toList()) {
+      await _tryOpen(id);
+    }
+  }
 
   /// Authority: seal [snapshot] and send it as chunked events. The AEAD covers
   /// the whole baseline; the signature makes it verifiably the authority's.
@@ -134,31 +151,48 @@ class MatrixSnapshotChannel {
       logWarning('collab.matrix.snapshot.notObject', id);
       return;
     }
-    final sealed = SealedEnvelope.fromContent(decoded);
+    _assembled[id] = SealedEnvelope.fromContent(decoded);
+    await _tryOpen(id);
+  }
+
+  /// Open a reassembled snapshot. Keeps it buffered when it cannot be opened yet
+  /// because the sender is unknown or the epoch key has not arrived (a joiner sees
+  /// the chunks before its key-share) — [retryPending] re-attempts it. Any other
+  /// failure (a genuinely bad tag/payload) drops it fail-closed.
+  Future<void> _tryOpen(String id) async {
+    if (_first.isCompleted) {
+      _assembled.remove(id);
+      return;
+    }
+    final sealed = _assembled[id];
+    if (sealed == null) return;
     final sender = directory.resolve(sealed.senderDevice);
-    if (sender == null) {
-      logWarning('collab.matrix.snapshot.unknownSender', sealed.senderDevice);
-      return;
+    if (sender == null) return; // sender not known yet — keep and retry
+    try {
+      final envelope = await _e2ee.open(
+        sealed,
+        room: roomId,
+        type: snapshotType,
+        sender: sender,
+        requireSignature: true,
+      );
+      _assembled.remove(id);
+      final raw = envelope['snapshot'];
+      if (raw is! String) {
+        logWarning('collab.matrix.snapshot.noPayload', id);
+        return;
+      }
+      final json = jsonDecode(raw);
+      if (json is! Map<String, Object?>) {
+        logWarning('collab.matrix.snapshot.badPayload', id);
+        return;
+      }
+      if (!_first.isCompleted) _first.complete(CollabSnapshot.fromJson(json));
+    } on CollabCryptoException catch (e) {
+      if (e.reason == 'unknown-epoch') return; // key not installed yet — keep
+      _assembled.remove(id); // a real failure (bad tag/signature): drop
+      logWarning('collab.matrix.snapshot.open', e);
     }
-    final envelope = await _e2ee.open(
-      sealed,
-      room: roomId,
-      type: snapshotType,
-      sender: sender,
-      requireSignature: true,
-    );
-    final raw = envelope['snapshot'];
-    if (raw is! String) {
-      logWarning('collab.matrix.snapshot.noPayload', id);
-      return;
-    }
-    final json = jsonDecode(raw);
-    if (json is! Map<String, Object?>) {
-      logWarning('collab.matrix.snapshot.badPayload', id);
-      return;
-    }
-    final snapshot = CollabSnapshot.fromJson(json);
-    if (!_first.isCompleted) _first.complete(snapshot);
   }
 
   List<String> _split(String s, int size) {
