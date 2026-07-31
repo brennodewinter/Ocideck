@@ -1,6 +1,6 @@
 # OciDeck — Known limitations
 
-> **Status:** current-state list of what is not there yet · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state list of what is not there yet · **Status last reviewed:** 2026-07-31 · **Published by:** Stichting LibreKAT
 
 This page exists so you do not have to assemble it yourself. Every item below
 was already written down somewhere in this repository; they were spread across
@@ -20,6 +20,20 @@ on each platform. Building from source remains the route where you do not have
 to trust our build machine — the toolchain is pinned, and `make check-web`
 asserts on your bundle what we assert on ours. → [BUILD.md](BUILD.md),
 [FAQ.md](FAQ.md#is-ocideck-free-to-use)
+
+**Windows staying unsigned is a weighed decision, not an oversight** (#1013,
+closed 2026-07-31). Authenticode signing was assessed and declined. Since March
+2024 no certificate type — neither OV nor EV — grants instant SmartScreen trust:
+reputation is earned only through download volume, so signing would not remove
+the warning up front. And every paid route costs either a hardware token the
+maintainer must hold or a signing secret living in the release runner, which the
+project's least-privilege stance rules out. `SHA256SUMS` plus building from
+source stay the provenance guarantee. If download volume ever turns the
+SmartScreen warning into a real barrier, the fallback is an OV certificate signed
+by hand on a local machine — the same manual model as the macOS notarisation —
+never a secret in CI. Linux (#1014) is a separate, still-open question. →
+[BUILD.md](BUILD.md#signing-status-of-the-published-artifacts),
+[SECURITY.md](../SECURITY.md#release-artifact-integrity-and-signing)
 
 *(Corrected 2026-07-28: this section said "Nothing is released" and described a
 scope decision where only a web bundle would ship. Releases have included all
