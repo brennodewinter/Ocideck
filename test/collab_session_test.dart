@@ -398,6 +398,36 @@ void main() {
       await owner.dispose();
       await peer.dispose();
     });
+
+    test('rebaseTo jumps forward only (§5.2 strand-recovery)', () async {
+      final hub = LoopbackHub();
+      final session = CollabSession(
+        initialDeck: deckWith(baseSlide()),
+        transport: hub.connect('p'),
+        isAuthority: false,
+        initialVersion: 5,
+      );
+
+      // A lower (or equal) version is ignored — a stale or half-read snapshot can
+      // never rewind the session or replay an op.
+      final backward = Deck(
+        title: 'x',
+        slides: [Slide.create(SlideType.bullets)],
+      );
+      expect(session.rebaseTo(backward, 3), isFalse);
+      expect(session.version, 5);
+
+      // A higher version jumps: adopt its deck and version.
+      final ahead = Deck(
+        title: 'x',
+        slides: [Slide.create(SlideType.bullets).copyWith(title: 'jumped')],
+      );
+      expect(session.rebaseTo(ahead, 12), isTrue);
+      expect(session.version, 12);
+      expect(session.deck.slides.single.title, 'jumped');
+
+      await session.dispose();
+    });
   });
 
   test('dispose is idempotent and blocks further use', () async {

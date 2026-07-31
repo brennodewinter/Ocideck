@@ -112,6 +112,15 @@ class WebdavAsyncTransport implements CollabTransport {
   /// resumes just above it.
   int get lastSeq => _lastSeq;
 
+  /// Resume polling above [seq], skipping a gap left by log compaction (§5.2
+  /// strand-recovery): when records this participant still needed were deleted,
+  /// the coordinator jumps it to the latest snapshot's sequence rather than let
+  /// it wait forever for a record that is gone. Forward-only — never rewinds.
+  void jumpTo(int seq) {
+    if (seq > _lastSeq) _lastSeq = seq;
+    if (seq > _knownMaxSeq) _knownMaxSeq = seq;
+  }
+
   /// Begin polling on [pollInterval]. Idempotent; a no-op after [dispose].
   void start() {
     if (_disposed || _timer != null) return;

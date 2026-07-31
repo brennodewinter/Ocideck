@@ -104,6 +104,19 @@ class CollabSession {
     _authority = false;
   }
 
+  /// Jump forward to a re-baselined snapshot (§5.2 strand-recovery): adopt its
+  /// [deck] (the authority's slides) at [version]. **Forward-only** — a version
+  /// at or below the current one is ignored, so a stale or half-read snapshot can
+  /// never rewind the session or replay an op. Emits [deckChanges] so the tab
+  /// re-reads the jumped-to state. Returns whether it jumped.
+  bool rebaseTo(Deck deck, int version) {
+    if (_disposed || version <= _version) return false;
+    _deck = deck;
+    _version = version;
+    _deckChanges.add(_deck);
+    return true;
+  }
+
   /// Submit a local edit. Build [op] with `version: 0` (unassigned); the session
   /// fills the authoritative version. The authority commits immediately; a
   /// non-authority sends the intent and applies the authoritative op when it
