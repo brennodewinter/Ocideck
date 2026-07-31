@@ -269,7 +269,7 @@ list below, which made "where does this belong" slower than it needed to be.)*
 - `web_asset_store.dart` — In-memory afbeeldingsopslag (`mem:`-paden) voor de webversie; per-pagina levensduur. `retain` ruimt de assets op die nergens meer gebruikt worden; `TabsNotifier.sweepWebAssets` stelt de complete levende verzameling samen (alle tabbladen + ongedaan/opnieuw + klembord) en roept dat aan na dia-verwijdering en opslag.
 - `s3/s3_sigv4.dart` — AWS Signature Version 4, written by hand rather than pulled from an SDK: an SDK brings its own HTTP stack and would connect around `NetGuard`, losing the socket pinning every other network source applies. Signing only, no network, so it is testable against fixed vectors (`test/s3_sigv4_test.dart`, cross-checked against botocore).
 - `s3/s3_service.dart` — Talks S3 (and S3-compatible endpoints) over a pinned, redirect-free `HttpClient` with SigV4. Lists with a delimiter so prefixes behave as folders. Conditional writes use `If-Match`, but not every S3-compatible endpoint supports them — AWS only since 2024 — so an endpoint that refuses the condition yields `S3Error.conditionalUnsupported` rather than silently overwriting.
-- `webdav_service.dart` — Talks WebDAV over a pinned, redirect-free `HttpClient`. Writes are guarded with `If-Match` so a file changed on the server surfaces as `WebdavConflictException` instead of a silent overwrite.
+- `webdav_service.dart` — Talks WebDAV over a pinned, redirect-free `HttpClient`. Writes are guarded with `If-Match` so a file changed on the server surfaces as `WebdavConflictException` instead of a silent overwrite. `delete` (the one data-mutating verb, for §5.2 log compaction) runs through the same pinned, `followRedirects=false` path and is idempotent (404 = already gone).
 - `net/transport_failure.dart` — Sorts a caught `dart:io` exception into what actually went wrong: certificate refused, host unreachable, connection dropped mid-flight, or something else. Shared by all three storage backends, because the question is the same for every one of them and the answer decides both what the user is told and whether a retry has any point. The *translation* into a backend's own exception type stays with that backend — the wording names the WebDAV server, the S3 endpoint or the forge, and those are not interchangeable.
 - `presentation_search/presentation_source.dart` — `PresentationSource`: one searchable source of decks for *Slide zoeken*. Local libraries are scanned straight off disk; this abstraction covers the ones that need the network, so the finder can walk them uniformly and in parallel. A source may be slow and may throw — the finder reports per source, so one unreachable connection does not block the rest or the local search.
 - `presentation_search/git_presentation_source.dart` — Searches every deck on a git repository's default branch. Reads each `deck.md` through the forge and puts it through the same safety gate as a normal open (scan → marp-sniff → parse), then resolves `repo:` images to in-memory `mem:` paths so previews work. An unreadable or refused deck is skipped, not fatal.
@@ -495,7 +495,9 @@ when the owner returns.
   continues the sequence without a gap. This stays mechanism-neutral — it knows
   nothing of the beacon or who the owner is; the `HandoverCoordinator` decides
   *when* to flip it. A joiner from a re-baselined snapshot begins at a non-zero
-  `initialVersion` (§5.2); the apply and resume rules are otherwise unchanged.
+  `initialVersion` (§5.2); `rebaseTo(deck, version)` jumps it *forward* to a later
+  snapshot in strand-recovery (§5.2, forward-only so a stale read never rewinds);
+  the apply and resume rules are otherwise unchanged.
 - `collab_codec.dart` — the JSON wire (de)serialiser for `DeckOp`s and
   `LockEvent`s (§5.2, §5.6). JSON of the typed `Slide`/field model *by design*,
   not a Markdown round-trip: re-parsing would regenerate slide ids (§5.5) and
@@ -554,9 +556,14 @@ when the owner returns.
   drives §5.2 **re-baselining**: as the authority, after every `rebaseEveryOps`
   op versions it writes a fresh `CollabSnapshot` at the current version and
   `transport.lastSeq`, so a later joiner starts from it — ops-triggered, no
-  wall-clock. WebDAV-specific on purpose (it reads `isCaughtUp`/`knownMaxSeq`/
-  `lastSeq`), so the Matrix step (§6.2) can replace it without touching
-  `CollabSession`.
+  wall-clock. It also owns both halves of §5.2 **log compaction**: as the
+  authority it deletes (bounded per cycle) the records the *previous* durable
+  baseline already subsumed — the delete window widens only after a snapshot write
+  confirms, so a failed write can never strand a straggler; as any participant it
+  recovers from a compacted gap by re-reading the latest snapshot and jumping the
+  session and transport forward (forward-only, fail-closed). WebDAV-specific on
+  purpose (it reads `isCaughtUp`/`knownMaxSeq`/`lastSeq`), so the Matrix step
+  (§6.2) can replace it without touching `CollabSession`.
 - `collab_snapshot.dart` — the session baseline (§5.2, §5.5). `CollabSnapshot`
   is the authority's slides at an op `version`, plus the log `seq` the baseline
   subsumes (so a joiner resumes just above it — §5.2 re-baselining; a missing
@@ -571,11 +578,12 @@ when the owner returns.
   plus two named slots beside the log: the snapshot (`readSnapshot`/`writeSnapshot`,
   §5.2) and the advisory authority beacon (`readBeacon`/`writeBeacon`, §5.3), both
   written unconditionally (last-write-wins, no racing writer to guard).
-  `InMemoryCollabLogStore` is the loopback-equivalent for tests, and
-  `WebdavCollabLogStore` the production binding — one file per record in a
-  sidecar directory, appended with a conditional `PUT` (`If-None-Match: *`), the
-  snapshot and beacon sitting under non-numeric names (`snapshot.json`,
-  `beacon.json`) so `listSequences` ignores them.
+  `delete(seq)` removes a record for §5.2 compaction (WebDAV binding: a `DELETE`
+  on the padded-seq path — only ever a numbered record). `InMemoryCollabLogStore`
+  is the loopback-equivalent for tests, and `WebdavCollabLogStore` the production
+  binding — one file per record in a sidecar directory, appended with a conditional
+  `PUT` (`If-None-Match: *`), the snapshot and beacon sitting under non-numeric
+  names (`snapshot.json`, `beacon.json`) so `listSequences` ignores them.
 - `webdav_async_transport.dart` — `WebdavAsyncTransport`, the Phase 0.5 async
   transport (§10). Same `CollabTransport` pipe as the loopback, so the session
   drives it unchanged; sends append to the log and a poll delivers others'
@@ -587,7 +595,8 @@ when the owner returns.
   extra getters the `HandoverCoordinator` uses for a takeover and to stamp a
   re-baselined snapshot (§5.3, §5.2); a constructor `initialSeq` lets a joiner
   from a re-baselined snapshot start above the records it already subsumes, so it
-  never replays the whole log. WebDAV-specific, so they stay off the neutral
+  never replays the whole log, and `jumpTo(seq)` moves it forward past a compacted
+  gap in strand-recovery (§5.2). WebDAV-specific, so they stay off the neutral
   `CollabTransport`.
 
 ## `lib/state/` — Riverpod providers

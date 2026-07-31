@@ -16,6 +16,19 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- Samenwerken: log-compactie van de op-log (COLLABORATION.md §5.2, #1007). #1005
+  maakte bijkomen snel maar liet de oude op-records staan, zodat de sidecar bleef
+  groeien. De autoriteit ruimt die records nu op — één herbaselijn-interval
+  achterlopend, en het verwijdervenster schuift pas op ná een bevestigd-duurzame
+  snapshot, zodat een trager bijkomende deelnemer nooit strandt. Wie tóch te ver
+  achterloopt en op een weggehaald record wacht, herbaselijnt zichzelf: hij leest
+  de laatste snapshot opnieuw en springt vooruit (alleen vooruit, fail-closed) —
+  hij neemt daarbij de autoritatieve staat over, zodat eventuele nog-niet-gedeelde
+  lokale wijzigingen wijken. De WebDAV-client krijgt hiervoor zijn eerste
+  verwijderende operatie (DELETE);
+  die raakt uitsluitend genummerde recordbestanden — nooit de snapshot, het baken
+  of het `.md` — en gaat langs dezelfde gepinde, redirect-vrije weg als upload.
+  Ontworpen na een security-architect-review. Raakt het `.md` niet (P2).
 - Samenwerken: snapshot-herbaselijning op een niet-nul versie (COLLABORATION.md
   §5.2, #1005). Een deelnemer die bijkomt begon voorheen vanaf de basislijn bij
   versie 0 en speelde de héle op-log opnieuw af; bij een lange sessie werd

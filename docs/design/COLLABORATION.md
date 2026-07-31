@@ -206,13 +206,41 @@ slow. The realisation:
   locks are advisory: the authority still serialises every edit, so this is a
   stale UI hint, never a lost guard.
 
-**Deferred: log compaction.** Deleting the old op records a baseline subsumes
-(to bound the sidecar's *size*, not just join *speed*) is a separate follow-up.
-It needs two things this increment deliberately does not add: a WebDAV `DELETE`
-capability (a new data-mutating outbound operation, worth its own security
-review) and *strand-recovery* — a participant that hits a permanent gap (records
-deleted out from under it) must re-read the latest baseline and jump forward.
-Until then the log grows, but joins stay fast, which is the stated §5.2 goal.
+#### Log compaction (#1007)
+
+Re-baselining keeps joins fast but leaves the old records in place, so the op-log
+grows without bound. Compaction deletes them — the sidecar's *size*, not just join
+*speed*:
+
+- **A WebDAV `DELETE`.** `WebdavService.delete` (the client's first data-mutating
+  outbound verb) goes through the *same* guarded path as `upload`/`download` — the
+  NetGuard-pinned client, `followRedirects = false` (a 3xx is a failure, never a
+  "deleted"), and `uriFor` containment. `CollabLogStore.delete(seq)` feeds it only
+  `_pathFor(seq)`, so the only thing it can ever remove is a numbered record file —
+  never the snapshot, the beacon, or the `.md`. A failed delete leaves the record,
+  which is always the safe state.
+- **The authority compacts one interval behind.** When it re-baselines at seq `S`,
+  it arms deletion of the records the *previous* baseline already subsumed (≤ that
+  baseline's seq) — and only after the new snapshot write **confirms durable**, so
+  a failed write can never widen the delete window. That one-interval margin gives
+  every participant a full re-baseline interval to catch up before the records it
+  needs disappear. The deletes run *detached* from the poll loop — a batch of slow
+  DELETEs (each its own connection) never holds up the next poll or its heartbeat,
+  so it cannot make peers think the authority dropped — and each pass is bounded to
+  keep the delete-vs-re-baseline race window short.
+- **Strand-recovery** is the net for a participant that still falls too far behind:
+  when its poll stalls at a gap (`!isCaughtUp`) whose records the latest snapshot
+  already subsumes (`snapshot.version > session.version`), it re-reads the snapshot
+  and jumps its session and transport **forward** to it. Forward-only and
+  fail-closed — a stale or half-written snapshot leaves it where it is to retry,
+  never a rewind or a half-applied deck. Acting is always safe: the snapshot
+  subsumes the gap, so the jump can never skip an op the version gate would keep.
+
+**Residual.** On the rare strand-recovery, a follower's local *un-echoed* edits
+(intents the dropped authority never versioned) are overwritten by the jump to the
+authoritative state — the same class as the §5.3 failover residual, acceptable
+because such a participant had fallen far behind and re-syncing beats staying
+stranded.
 
 ### 5.3 Authority state machine
 
