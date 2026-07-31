@@ -85,6 +85,7 @@ same answer `make licenses` and the SBOM give.
 | `pdf` | PDF export | Apache-2.0 |
 | `archive` | `.ocideck` bundles and PPTX export | MIT |
 | `crypto` | SHA-256/SHA-512 for the seal, evidence hashes and the SBOM generator | BSD-3-Clause |
+| `cryptography` | X25519/Ed25519/HKDF/XChaCha20-Poly1305 for the collaboration end-to-end encryption (self-encrypted relay, `docs/design/SELF_ENCRYPTED_RELAY.md`) | Apache-2.0 |
 | `video_player` | Video slides | BSD-3-Clause |
 | `characters` | Grapheme-correct text truncation | BSD-3-Clause |
 | `url_launcher` | External links (scheme allowlist) | BSD-3-Clause |

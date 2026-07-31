@@ -2,9 +2,9 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.1.3+4** (licence EUPL-1.2) and every third-party component it ships (210 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.1.3+4** (licence EUPL-1.2) and every third-party component it ships (211 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **710 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **716 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -12,7 +12,7 @@ The JSON documents carry **710 dependency relations** between these components: 
 | --- | ---: |
 | BSD-3-Clause | 135 |
 | MIT | 51 |
-| Apache-2.0 | 16 |
+| Apache-2.0 | 17 |
 | OFL-1.1 | 5 |
 | MPL-2.0 | 1 |
 | BSL-1.0 | 1 |
@@ -20,7 +20,7 @@ The JSON documents carry **710 dependency relations** between these components: 
 
 ## Components
 
-### Dart / Flutter packages (195)
+### Dart / Flutter packages (196)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -43,6 +43,7 @@ The JSON documents carry **710 dependency relations** between these components: 
 | coverage _(transitive)_ | 1.15.1 | BSD-3-Clause | dart-lang | `pkg:pub/coverage@1.15.1` |
 | cross_file _(transitive)_ | 0.3.5+4 | BSD-3-Clause | flutter | `pkg:pub/cross_file@0.3.5+4` |
 | crypto _(direct main)_ | 3.0.7 | BSD-3-Clause | dart-lang | `pkg:pub/crypto@3.0.7` |
+| cryptography _(direct main)_ | 2.9.0 | Apache-2.0 | dint-dev | `pkg:pub/cryptography@2.9.0` |
 | csslib _(transitive)_ | 1.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/csslib@1.0.2` |
 | cupertino_icons _(direct main)_ | 1.0.9 | MIT | flutter | `pkg:pub/cupertino_icons@1.0.9` |
 | dart_quill_delta _(transitive)_ | 10.8.3 | MIT | FlutterQuill | `pkg:pub/dart_quill_delta@10.8.3` |

@@ -59,6 +59,7 @@ dependencies:
   # hierheen; server-URL/gebruikersnaam blijven in het prefs-domein.
   flutter_secure_storage: ^10.3.1
   http: ^1.6.0
+  cryptography: ^2.9.0
 
 # dartcv4 2.x levert OpenCV modulair en sluit de meeste modules standaard UIT.
 # De README waarschuwt: "even a module is excluded, its dart code is still

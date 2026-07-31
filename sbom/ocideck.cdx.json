@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:38952624-3afa-5212-8f87-cb3e6f262049",
+  "serialNumber": "urn:uuid:20ecc3e4-4d3a-5526-8c32-e4d9558b0bf7",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-28T22:05:05.683853Z",
+    "timestamp": "2026-07-31T17:24:20.994365Z",
     "tools": {
       "components": [
         {
@@ -847,6 +847,48 @@
         {
           "type": "distribution",
           "url": "https://pub.dev/packages/crypto/versions/3.0.7"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/cryptography@2.9.0",
+      "type": "library",
+      "supplier": {
+        "name": "dint-dev",
+        "url": [
+          "https://github.com/dint-dev"
+        ]
+      },
+      "name": "cryptography",
+      "version": "2.9.0",
+      "purl": "pkg:pub/cryptography@2.9.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3eda3029d34ec9095a27a198ac9785630fe525c0eb6a49f3d575272f8e792ef0"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/cryptography/versions/2.9.0"
         }
       ],
       "properties": [
@@ -8766,6 +8808,7 @@
         "pkg:pub/archive@4.0.9",
         "pkg:pub/characters@1.4.1",
         "pkg:pub/crypto@3.0.7",
+        "pkg:pub/cryptography@2.9.0",
         "pkg:pub/cupertino_icons@1.0.9",
         "pkg:pub/dartcv4@2.2.1+4",
         "pkg:pub/desktop_drop@0.7.1",
@@ -8939,6 +8982,16 @@
     {
       "ref": "pkg:pub/crypto@3.0.7",
       "dependsOn": [
+        "pkg:pub/typed_data@1.4.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/cryptography@2.9.0",
+      "dependsOn": [
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/crypto@3.0.7",
+        "pkg:pub/ffi@2.2.0",
+        "pkg:pub/meta@1.18.0",
         "pkg:pub/typed_data@1.4.0"
       ]
     },

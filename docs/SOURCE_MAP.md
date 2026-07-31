@@ -484,6 +484,18 @@ when the owner returns.
   `LoopbackTransport`. A dumb pipe: it carries formed events between participants
   and neither orders nor versions them (that is the session's job). `LockEvent`
   carries a `forced` flag for the authority's `ForceUnlock` (§5.4).
+- `collab_crypto.dart` — the end-to-end encryption seam (design:
+  `docs/design/SELF_ENCRYPTED_RELAY.md` §4), the only file touching
+  `package:cryptography`. A minimal group **key-wrapping** scheme, *not* a ratchet:
+  each device has an Ed25519 identity key and an X25519 agreement key (the latter
+  signed by the former, so a relay cannot swap it); the authority mints one random
+  AEAD session key per **epoch** and wraps it to each member with an authenticated
+  ephemeral-ECDH sealed box; record payloads are sealed under the epoch key with
+  XChaCha20-Poly1305, the AAD binding room/type/epoch/sender. `seal`/`open` fail
+  closed (bad tag, wrong sender, AAD mismatch, missing-but-required signature,
+  unknown epoch); `rekey`/`wrapEpochTo`/`installEpochKey` manage epochs (a bump
+  locks out a removed member; a pure add reuses the epoch). Pure Dart, so it runs
+  under `flutter test` and on web alike.
 - `collab_session.dart` — the authority state machine and lock table (§5.3–5.4).
   Exactly one session is the authority (P3); it assigns the monotonic version to
   every op — its own edits and the intents it receives — and rebroadcasts the
