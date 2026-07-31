@@ -522,6 +522,17 @@ when the owner returns.
   verified against the sender's *directory-held* identity, never keys carried in the
   message. The crypto (wrap/sign/unwrap) is `CollabCrypto`'s; this is only the
   Matrix plumbing. `handleSystemEvent`/`handleToDevice` wire to the transport hooks.
+- `matrix_snapshot.dart` — delivers the session baseline over Matrix (design:
+  `docs/design/SELF_ENCRYPTED_RELAY.md` §6.3, phase P-D). A `CollabSnapshot` is
+  sealed once (its AEAD tag covers the whole baseline) and then chunked across
+  `nl.ocideck.snapshot.chunk` events, because a full-deck snapshot exceeds the
+  ~64 KiB event cap. `MatrixSnapshotChannel.sendSnapshot` (authority) seals + chunks;
+  `handleSystemEvent` (wired to the transport's `onSystemEvent`) reassembles by
+  chunk id, opens it (signature required — a snapshot is authoritative), and
+  completes `firstSnapshot` — what a joiner awaits before starting its session so it
+  adopts the authority's slide ids (§5.5). Fail-closed and bounded: a tampered
+  (AEAD-caught), missing, malformed or oversized snapshot yields nothing, and the
+  pending-chunk buffers are capped against a flooding server.
 - `collab_crypto.dart` — the end-to-end encryption seam (design:
   `docs/design/SELF_ENCRYPTED_RELAY.md` §4), the only file touching
   `package:cryptography`. A minimal group **key-wrapping** scheme, *not* a ratchet:
