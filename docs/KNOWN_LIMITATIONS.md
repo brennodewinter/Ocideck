@@ -14,9 +14,10 @@ fits what you are doing.
 
 Releases are tagged (latest `0.1.1`, 2026-07-27) and every release carries the
 app for all four platforms — macOS, Windows, Linux and web — plus both SBOM
-formats and a `SHA256SUMS` list. The binaries are **unsigned**, so macOS and
-Windows will warn on first launch; the release notes explain how to open them
-on each platform. Building from source remains the route where you do not have
+formats and a `SHA256SUMS` list. The macOS build is signed with a Developer ID
+and notarised by Apple, so it opens normally; the **Windows and Linux builds are
+unsigned**, so Windows warns on first launch. The release notes explain how to
+open each one. Building from source remains the route where you do not have
 to trust our build machine — the toolchain is pinned, and `make check-web`
 asserts on your bundle what we assert on ours. → [BUILD.md](BUILD.md),
 [FAQ.md](FAQ.md#is-ocideck-free-to-use)
@@ -38,8 +39,8 @@ never a secret in CI. Linux (#1014) is a separate, still-open question. →
 *(Corrected 2026-07-28: this section said "Nothing is released" and described a
 scope decision where only a web bundle would ship. Releases have included all
 four platforms since `0.1.0` on 2026-07-25. The signing and notarisation points
-remain true — the binaries are unsigned — but the claim that no binary exists
-is stale.)*
+remain true — the Windows and Linux binaries are unsigned, macOS is notarised —
+but the claim that no binary exists is stale.)*
 
 ## The exports are pictures, not documents
 
