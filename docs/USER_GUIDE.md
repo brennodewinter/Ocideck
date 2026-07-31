@@ -2827,14 +2827,29 @@ the editor half of it.
   still exactly what you present and export.
 - **Document reader** — the in-app reader for the bundled guides uses the full
   window width, so wide tables get room instead of being squeezed into a narrow
-  column, while running text stays at a comfortable line length. Its app bar has
-  a subtle **A−/A+** control to enlarge or shrink the document text; the choice
-  is remembered and is independent of the interface text size above.
-- **Searching the documentation** — *Settings → Documentation* has a search box
-  above the list. Type one or more words and the list narrows to the documents
-  whose title or body contains **all** of them, with a short excerpt showing
-  where each match sits and the words highlighted. Clearing the box restores the
-  full grouped list. The search runs over the documents in your current
+  column, while running text stays at a comfortable line length. ` ```mermaid `
+  diagrams are drawn as diagrams (the same way the slides render them), scrolling
+  sideways when a flowchart is wider than the column; where a diagram cannot be
+  drawn its source is shown instead, so nothing is lost. Its app bar has a subtle
+  **A−/A+** control to enlarge or shrink the document text; the choice is
+  remembered and is independent of the interface text size above. The search icon
+  opens a **find-in-page** bar that searches within the open document: it shows a
+  *position / total* counter, steps through the matches with the up/down arrows
+  (wrapping around at the ends), and scrolls the current match into view.
+- **Curated in-app set** — *Settings → Documentation* ships a selected set of
+  documents rather than everything under `docs/`: the user guides and reference,
+  the licence and compliance documents, and the technical documents that bear on
+  using and running OciDeck (performance, security design, hosting, migration).
+  The developer-internal documents (architecture, build, checks, source map, API,
+  contributing, development setup) and the forward-looking design notes are not
+  carried in the app; a footer under the list — **Meer documentatie op de
+  repository** — links to the repository, where the full documentation lives.
+- **Searching the documentation** — the same *Settings → Documentation* pane has
+  a search box above the list. Type one or more words and the list narrows to the
+  documents whose title or body contains **all** of them, with a short excerpt
+  showing where each match sits and the words highlighted. Clearing the box
+  restores the full grouped list, and the repository footer stays visible even
+  when nothing matches. The search runs over the documents in your current
   interface language.
 - **Keyboard** — the panel divider between the slide list and the editor can be
   focused with `Tab` and resized with `←`/`→`; the add-slide dialog is fully

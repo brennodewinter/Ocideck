@@ -241,9 +241,14 @@ Enforced inside `make test`: **localization in all 32 languages**, the
 **path/SSRF guards**, the **HTML-export sanitisation** invariants (strict
 export CSP + injected-`</script>` neutralisation; see
 [below](#enforced-behaviours-worth-calling-out)), and **documentation
-registration** — every `docs/**/*.md` (design docs are their own class) must be
-bundled in `pubspec.yaml` and surfaced in the in-app reader, so a new document
-cannot ship unreachable. The
+registration** — the deliberate split between the docs the app *bundles* and the
+docs that live *only in the repository*. A bundled doc must be declared in
+`pubspec.yaml` **and** surfaced in the in-app reader (so it cannot ship
+unreachable); a repo-only doc — the developer-internal set (architecture, build,
+checks, source map, API, contributing, dev setup) and every `docs/design/**`
+spec — must be in neither. A new `docs/*.md` defaults to *must be bundled*, so
+dropping one in fails the gate until it is either registered or listed as
+repo-only; the decision is forced, never silent. The
 [targeted test groups](#targeted-test-groups) (`make test-contracts`,
 `test-preview`, `test-export`, `test-state`, `test-services`, `test-presenter`)
 are subsets of `make test` for focused work — not separate gates.
@@ -722,9 +727,10 @@ also declares them, but see the [CI note](#continuous-integration).)
   binnen twee maanden permanent rood en gaat uit.
 
 ### `make check-web`
-- **Runs:** `make build-web`, then `dart run tool/check_web_hardening.dart` and
-  `dart run tool/pack_web_release.dart --check`.
-- **Covers:** two things about the built `build/web`.
+- **Runs:** `make build-web`, then `dart run tool/check_web_hardening.dart`,
+  `dart run tool/pack_web_release.dart --check` and
+  `dart run tool/check_bundled_docs_fresh.dart build/web`.
+- **Covers:** three things about the built `build/web`.
 
   *Hardening* — a strict CSP in `index.html` (`script-src 'self'
   'wasm-unsafe-eval'`, no `unsafe-inline`/`unsafe-eval`, `connect-src 'self'`,
@@ -739,10 +745,20 @@ also declares them, but see the [CI note](#continuous-integration).)
   packing as loudly as about one that changed, which is the case that actually
   bites: a later build step that drops something in would otherwise fall outside
   the list unnoticed.
+
+  *Bundled docs fresh* — every Markdown asset declared in `pubspec.yaml` (the
+  in-app documentation) matches its `docs/`/root source **byte for byte** in the
+  built bundle. The docs are plain assets, so a *clean* build always carries the
+  current text; but the project deliberately avoids `flutter clean` and the
+  forge's macOS runner is persistent, so an *incremental* build could ship stale
+  documentation while everything else is current. `check_bundled_docs_fresh.dart`
+  closes that gap by construction, naming any file that is stale or missing. It
+  rewrites nothing — the fix is a clean rebuild.
 - **Failure means:** a change weakened the CSP, re-introduced a CDN/font fetch,
-  or moved something in the bundle after it was sealed; the scripts list every
-  broken invariant. See [`BUILD.md`](BUILD.md) for the hardened build and for
-  what the checksum list does and does not prove.
+  moved something in the bundle after it was sealed, or an incremental build
+  shipped documentation older than `docs/`; the scripts list every broken
+  invariant. See [`BUILD.md`](BUILD.md) for the hardened build and for what the
+  checksum list does and does not prove.
 - **Note:** the packing logic itself is tested in
   `test/pack_web_release_test.dart`, which runs in `make check` — so a broken
   checksum list surfaces without waiting for a web build.
@@ -1321,10 +1337,13 @@ that reaches beyond `build/test_cache`.
 
 ### `.forgejo/workflows/linux-build.yml` — on demand (`workflow_dispatch`)
 - **build-linux** — same official pinned toolchain as the gate, plus the GTK
-  build dependencies; `flutter build linux --release`, and uploads the bundle
-  as the `ocideck-linux-x64` run artifact. This is a build, not a gate: it
-  proves the Linux target compiles and packages, nothing more — which is why
-  it stopped running on every push to `main` (#790). It cost 17.5 minutes of
+  build dependencies; `flutter build linux --release`, then
+  `check_bundled_docs_fresh.dart build/linux` (the same freshness gate
+  `check-web` runs — a persistent runner's incremental build must not ship docs
+  older than `docs/`), and uploads the bundle as the `ocideck-linux-x64` run
+  artifact. This is a build, not a gate: it proves the Linux target compiles and
+  packages, nothing more — which is why it stopped running on every push to
+  `main` (#790). It cost 17.5 minutes of
   runner time per merge, and `release.yml` on the GitHub mirror already builds
   Linux, macOS and Windows on every `v*` tag. Start it by hand when you want a
   bundle without cutting a tag.
@@ -1334,8 +1353,10 @@ that reaches beyond `build/test_cache`.
   host mode), not on the server: Apple licenses macOS for Apple hardware only,
   so there is no macOS job the Linux server could legitimately run. The job
   uses the Mac's own pinned toolchain (the one `check-toolchain` already
-  guards), builds `flutter build macos --release`, and uploads the `.app`
-  (zipped with `ditto`, which preserves what a plain zip destroys) as the
+  guards), builds `flutter build macos --release`, then runs
+  `check_bundled_docs_fresh.dart build/macos` (the persistent Mac runner is
+  exactly where an incremental build could carry stale docs), and uploads the
+  `.app` (zipped with `ditto`, which preserves what a plain zip destroys) as the
   `ocideck-macos` run artifact. On demand for the same reason as the Linux
   build (#790). When no Mac runner is online the run waits.
 
@@ -1409,8 +1430,9 @@ plain `curl`, so no GitHub credential is stored on the self-hosted runner.
   `make` is not reliably present on the Windows runner, so this job calls Flutter
   directly.
 - **Web hardening (Linux)** — `make check-web`: builds the web bundle and asserts
-  its hardening invariants, plus that the release artefacts travel with it and
-  `SHA256SUMS` still matches.
+  its hardening invariants, that the release artefacts travel with it and
+  `SHA256SUMS` still matches, and that the bundled documentation in the build is
+  byte-for-byte fresh against `docs/`.
 - **Docs links (Linux)** — `lychee --offline` validates internal Markdown links
   across the repo (external URLs are skipped so it can't flake).
 - **Supply-chain (Linux, advisory)** — the [`trivy-action`](https://github.com/aquasecurity/trivy-action)

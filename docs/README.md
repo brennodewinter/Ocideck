@@ -57,7 +57,13 @@ documentation. Start here and jump to what you need.
 Design proposals, rationale and open work — historical or forward-looking, **not**
 current-state references. Where one disagrees with the code, the code wins. Each
 of these carries its own status banner saying how far it has been overtaken;
-read that banner first. All eleven ship with the app.
+read that banner first. None of these eleven ships inside the app: `docs/design/**`
+is repo-only, reachable from the reader's repository footer rather than bundled.
+
+*(Corrected 2026-07-31: this said "All eleven ship with the app". Since the in-app
+reader was curated down to the user, licence/compliance and use-relevant technical
+docs, the design notes — and the developer-internal docs — are no longer bundled;
+they live in the repository. See [How these documents are maintained](#how-these-documents-are-maintained).)*
 
 | Document | What it is |
 |---|---|
@@ -78,6 +84,11 @@ read that banner first. All eleven ship with the app.
 `design/`; `VERIFICATION.md` and `LEXICON_LICENTIENAVRAAG.md` were missing while
 both are bundled as assets in `pubspec.yaml` and readable in the app. No test
 compares the two lists, so nothing caught it.)*
+
+*(Follow-up 2026-07-31: since then the in-app reader was curated and `docs/design/**`
+is no longer bundled — the "readable in the app" half of the note above is stale;
+these design notes are now repo-only. `test/docs_registration_test.dart` guards
+that they stay out of the bundle.)*
 
 ## New here?
 
@@ -142,17 +153,28 @@ Give it the day it was measured, as [CHECKS.md](CHECKS.md) and
 [LICENSE_COMPLIANCE.md](LICENSE_COMPLIANCE.md) do, or leave it out. An undated
 number is one nobody can tell has gone stale.
 
-**Registering a new document.** A new `docs/*.md` has to be known in three
-places, or `test/docs_registration_test.dart` fails `make check`:
+**Registering a new document.** The app bundles a *curated* subset of `docs/`,
+not everything under it: the user docs, licence/compliance, and the technical
+docs that bear on using and running OciDeck. The developer-internal docs
+(architecture, build, checks, source map, API, contributing, dev setup) and every
+`docs/design/**` spec are repo-only. `test/docs_registration_test.dart` fails
+`make check` unless a new `docs/*.md` lands cleanly on one side of that split.
+
+A new `docs/*.md` **defaults to bundled**, so a bundled document has to be known
+in three places:
 
 1. the asset list in `pubspec.yaml`;
 2. a reader tile in `lib/widgets/dialogs/parts/settings_dialog_docs.dart`;
 3. a title translated into **every** supported language.
 
 That third one is real work, so think twice before adding a file: in most cases
-the material belongs in a document that already exists. A `NAME.<lang>.md`
-translation of an existing document is the exception — it is picked up
-automatically and must *not* get its own asset line or tile.
+the material belongs in a document that already exists. If the document is
+developer-internal rather than something a user reaches for, make it repo-only
+instead — add it to `repoOnlyDocs` in the test (and leave it out of the asset
+list and the reader), or drop it under `docs/design/`, which is repo-only
+wholesale and needs no test change. A `NAME.<lang>.md` translation of an existing
+document is the exception — it is picked up automatically and must *not* get its
+own asset line or tile.
 
 **Examples must be unmistakably invented.** These documents ship inside the app,
 and the privacy scanner reads the whole folder as one document. A single
