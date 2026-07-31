@@ -54,6 +54,28 @@ const Map<String, String> releaseArtefacten = {
 /// code te maken heeft. De ontvanger heeft er bovendien niets aan.
 const List<String> nietUitleveren = ['.last_build_id'];
 
+/// Het bootstrap-bestand dat Flutter genereert, en het enige met een
+/// bouw-tot-bouw-verschil.
+///
+/// `flutter build web` schrijft in `flutter_bootstrap.js` één regel
+/// `serviceWorkerVersion: "<getal>"` met een **willekeurig** getal — twee schone
+/// builds van dezelfde bron verschillen gegarandeerd op dat ene getal en verder
+/// op niets. Empirisch getoetst: van 2854 bestanden was dit het enige dat
+/// afweek (#1027, `assurance/reproduceerbare-builds.md`). Dat getal is niets
+/// meer dan een cache-buster in de queryparameter `flutter_service_worker.js?v=…`
+/// van een inmiddels afgeschreven service-workermechanisme; het staat niet in de
+/// service-worker zelf (die is over builds heen byte-voor-byte gelijk).
+///
+/// Zonder dit weggewerkt kan iemand die zelf bouwt — precies wat
+/// KNOWN_LIMITATIONS aanraadt — de gepubliceerde bundeldigest nooit
+/// reproduceren, om een reden die niets met de code te maken heeft. Dezelfde
+/// grond als bij [nietUitleveren]; daarom hoort de reparatie hier, vóór
+/// [checksumBestand] wordt geschreven.
+const String bootstrapBestand = 'flutter_bootstrap.js';
+
+/// De service-worker waarnaar [bootstrapBestand]'s versie-cachebuster verwijst.
+const String serviceWorkerBestand = 'flutter_service_worker.js';
+
 /// De naam van de checksumlijst in de bundel.
 ///
 /// De inhoud is het formaat van `sha256sum` — `<hash><twee spaties><pad>` —
@@ -142,10 +164,51 @@ List<String> pak(Directory bundel, Directory wortel) {
     if (bestand.existsSync()) bestand.deleteSync();
   }
 
+  normaliseerServiceWorkerVersie(bundel);
+
   File(
     '${bundel.path}/$checksumBestand',
   ).writeAsStringSync(checksumLijst(bundel));
   return const [];
+}
+
+/// Vervangt het willekeurige `serviceWorkerVersion`-getal in [bootstrapBestand]
+/// door een waarde die afgeleid is van de inhoud van [serviceWorkerBestand], en
+/// haalt daarmee de laatste bouw-tot-bouw-variatie uit de bundel (#1027).
+///
+/// Waarom afgeleid en niet een vaste constante: dit getal is de cache-buster
+/// achter `flutter_service_worker.js?v=…`. Een vaste waarde zou het reproduceerbaar
+/// maken maar de cache-invalidatie breken — een terugkerende bezoeker zou na een
+/// nieuwe release een verouderde service-worker kunnen houden. Afgeleid van de
+/// service-workerinhoud verandert de waarde precies dan wanneer die inhoud
+/// verandert: reproduceerbaar én semantisch juist. Empirisch is de service-worker
+/// zelf al byte-voor-byte gelijk over builds, dus deze afleiding is stabiel.
+///
+/// Robuust tegen een toekomstige Flutter: ontbreekt het bootstrap-bestand, de
+/// service-worker of de versieregel, dan is dit een no-op — het mechanisme is
+/// afgeschreven en kan verdwijnen. De reparatie mag nooit een build breken.
+void normaliseerServiceWorkerVersie(Directory bundel) {
+  final bootstrap = File('${bundel.path}/$bootstrapBestand');
+  final serviceWorker = File('${bundel.path}/$serviceWorkerBestand');
+  if (!bootstrap.existsSync() || !serviceWorker.existsSync()) return;
+
+  final patroon = RegExp(r'(serviceWorkerVersion:\s*")\d+(")');
+  final inhoud = bootstrap.readAsStringSync();
+  if (!patroon.hasMatch(inhoud)) return;
+
+  final versie = serviceWorkerVersieUit(serviceWorker.readAsBytesSync());
+  bootstrap.writeAsStringSync(
+    inhoud.replaceAllMapped(patroon, (m) => '${m[1]}$versie${m[2]}'),
+  );
+}
+
+/// De deterministische service-workerversie voor [serviceWorkerInhoud]: de
+/// eerste 32 bits van de sha256 als decimaal getal. Dat houdt dezelfde vorm en
+/// grootteorde aan als het getal dat Flutter er zelf neerzette, zodat niets
+/// verderop over een onverwacht formaat struikelt.
+String serviceWorkerVersieUit(List<int> serviceWorkerInhoud) {
+  final hex = sha256.convert(serviceWorkerInhoud).toString().substring(0, 8);
+  return int.parse(hex, radix: 16).toString();
 }
 
 /// De checksumlijst over [bundel], in `sha256sum`-formaat, op pad gesorteerd.
@@ -230,9 +293,13 @@ List<String> controleer(Directory bundel) {
 ///
 /// Sorteren maakt de **volgorde** bepaald, zodat twee lijsten over dezelfde
 /// bestanden regel voor regel te vergelijken zijn. Of twee builds van dezelfde
-/// bron byte voor byte hetzelfde opleveren is een andere vraag —
-/// reproduceerbaarheid — en die is hier niet getoetst en wordt hier niet
-/// beweerd.
+/// bron byte voor byte dezelfde inhoud opleveren — reproduceerbaarheid — is nu
+/// getoetst: [normaliseerServiceWorkerVersie] haalt de enige *intrinsieke*
+/// bouw-tot-bouw-variatie weg, en binnen een vaste bouwomgeving zijn de bestanden
+/// die deze lijst dekt na `pak` per bestand identiek over schone builds heen
+/// (#1027). Wat dat "vaste bouwomgeving" nog omvat — de native-assetslaag — en
+/// waarom dit de bundelinhoud betreft en niet het tar.gz-omhulsel eromheen, staat
+/// in `assurance/reproduceerbare-builds.md`.
 List<String> bundelBestanden(Directory bundel) {
   // Paden relatief aan de bundel, altijd met '/' als scheidingsteken. Twee
   // redenen om hier te normaliseren en niet op de OS-scheiding te leunen: de
