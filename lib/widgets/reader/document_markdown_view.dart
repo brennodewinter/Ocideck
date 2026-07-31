@@ -229,8 +229,17 @@ class DocumentMarkdownView extends StatelessWidget {
         continue;
       }
 
-      // Paragraph: gather consecutive lines until a blank line or a block start.
-      final para = <String>[];
+      // Paragraph — the fallback for any line no earlier branch consumed. Take
+      // the current line UNCONDITIONALLY (advancing i), then gather following
+      // paragraph lines. Taking it unconditionally is what makes the fallback
+      // real: a line that starts with `|` but is not a valid GFM table (no
+      // delimiter row) satisfies no branch above and fails `_isParagraphLine`,
+      // so without consuming it here i would never advance — an infinite loop
+      // that built empty blocks until the app ran out of memory (it hung the
+      // reader on FILE_FORMAT.md and SBOM.md). "Anything it doesn't recognise
+      // falls back to a paragraph" only holds if the fallback always advances.
+      final para = <String>[lines[i].trim()];
+      i++;
       while (i < lines.length && _isParagraphLine(lines[i])) {
         para.add(lines[i].trim());
         i++;

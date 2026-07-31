@@ -186,6 +186,36 @@ void main() {
       );
       expect(texts, ['Titel', 'Een alinea.', 'item een item twee']);
     });
+
+    test('a pipe line that is not a valid table falls back to a paragraph', () {
+      // Regression: a line starting with `|` with no `|---|` delimiter row is
+      // consumed by no block branch and fails _isParagraphLine, so the parser
+      // must still advance and keep it as text. Before the fix this spun forever
+      // building empty blocks until the app ran out of memory — it hung the
+      // reader on the real FILE_FORMAT.md and SBOM.md. A parse-only probe so a
+      // regression fails by timeout rather than pumping a hung widget tree.
+      expect(
+        DocumentMarkdownView.blockTexts('| stray | pipe | line |\n\nAfter.\n'),
+        ['| stray | pipe | line |', 'After.'],
+      );
+      // Three pipe rows with no delimiter: each becomes its own paragraph, none
+      // dropped, and the parser terminates.
+      expect(
+        DocumentMarkdownView.blockTexts('| a | b |\n| c | d |\n| e | f |\n'),
+        ['| a | b |', '| c | d |', '| e | f |'],
+      );
+    });
+
+    testWidgets('renders a stray pipe line as text without hanging', (
+      tester,
+    ) async {
+      await pump(
+        tester,
+        const DocumentMarkdownView('| stray | pipe |\n\nAfter the table.\n'),
+      );
+      expect(find.textContaining('stray'), findsOneWidget);
+      expect(find.textContaining('After the table'), findsOneWidget);
+    });
   });
 
   group('DocumentationService', () {

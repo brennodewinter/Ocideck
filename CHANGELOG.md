@@ -158,6 +158,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Documentatielezer: een document met een regel die met `|` begint maar geen
+  geldige tabel is (geen `|---|`-scheidingsregel) liet de lezer vastlopen — de
+  blokparser consumeerde die regel met geen enkele tak en schoof daardoor nooit
+  op, waardoor hij eindeloos lege blokken bouwde tot het geheugen op was. De
+  fallback naar een alinea schuift nu altijd op. Twee meegeleverde documenten
+  triggerden dit (`FILE_FORMAT.md`, `SBOM.md`); hun kapotte tabellen zijn ook
+  hersteld met een kop- en scheidingsregel (idem in het niet-meegeleverde
+  ontwerpdocument `OCIWACHT.md`).
 - Het instellingenvenster liet niet zien dat er meer stond dan er paste. Met
   alle Uitbreidingen aan telt de zijbalk twaalf tabbladen; op een bescheiden
   venster vielen de laatste onder de vouw, en niets verried dat — de

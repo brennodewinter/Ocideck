@@ -39,6 +39,18 @@ slide-by-slide editor. You compose typed slides, preview them live, present them
 HTML file (one file, images and all — see [Exporting](#exporting)).
 Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
 
+At a glance, a deck moves through OciDeck like this:
+
+```mermaid
+flowchart LR
+    New[New or open a deck] --> Edit[Compose typed slides]
+    Edit --> Preview[Live preview]
+    Preview --> Edit
+    Edit --> Present[Present on one or two screens]
+    Edit --> Export[Export to Markdown, PDF, PPTX or offline HTML]
+    Export --> Reuse[Reopen in OciDeck or another Marp tool]
+```
+
 ## Creating and opening decks
 
 - **New / Open**: use the welcome screen or `Ctrl/Cmd + O`. Multiple decks open in
