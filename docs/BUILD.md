@@ -198,21 +198,32 @@ If they match, the published bundle's contents came from this source, without
 trusting our build machine. Verify the release-level `SHA256SUMS.minisig` on top
 (above) to confirm the archive you downloaded is the one we published.
 
-Set your expectations honestly: this is conclusive when you reproduce **our**
-build environment, and a first rebuild on a *different* machine may well differ on
-`main.dart.js` because of the unpinned native-assets layer (see *Scope, honestly*
-below). Until that layer is pinned, treat a **match** as the strong signal and a
-**mismatch** as "reproduce the environment more closely, then compare again" —
-not as proof of tampering.
+Set your expectations honestly: this is conclusive when you build with the pinned
+toolchain from the same source. `main.dart.js` is deterministic — clean rebuilds
+produce the same bytes, and the host OpenCV native-assets build does not enter the
+web output (see *Scope, honestly* below). What this project has **not**
+cross-checked is a build in a *different environment* — chiefly a different OS,
+but also any machine not yet compared (the largest machine-specific input, the
+absolute build path, was empirically found not to leak into the output, #1027;
+dart2js is expected to be platform-independent, but that has been measured on one
+machine only). So treat a **match** as the strong signal, and a **mismatch** as
+"confirm you matched the build environment — toolchain, OS, and try another clean
+checkout — then compare again", not as immediate proof of tampering.
 
 **Scope, honestly.** Reproducibility is always relative to a build environment,
 never "any machine, any tools". The Flutter toolchain is pinned
-(`make check-toolchain`) and dependencies are locked
-(`flutter pub get --enforce-lockfile` on the release lane). One further variable
-is **not** yet pinned: the native-assets layer (the `dartcv4` OpenCV build via
-CMake), which was observed to shift `main.dart.js` to a second, then-stable value.
-A mismatch in the recipe above therefore points at a build-environment difference
-rather than tampering. The reproducibility that *is* achieved covers the bundle
+(`make check-toolchain`), dependencies are locked
+(`flutter pub get --enforce-lockfile` on the release lane), and the source is
+committed — so a same-machine rebuild from the same source is byte-identical
+(verified). The native-assets layer (the `dartcv4` OpenCV build via CMake) builds
+a *host* FFI library; web has no `dart:ffi`, so it is **not** part of the web
+output and does not affect web reproducibility. (An earlier suspicion that it did
+was traced to a contaminated experiment — a concurrent edit to a `lib/` source
+file between builds — not the native-assets layer; #1033.) The edge that remains
+is a build in a *different environment* (a different OS, or a machine not yet
+cross-checked), so a mismatch in the recipe above points first at a
+build-environment difference, not tampering. The reproducibility that *is* achieved
+covers the bundle
 **contents**, not the `.tar.gz` wrapper the release workflow adds (its mtimes and
 gzip header are not normalised — and need not be, since verification compares
 extracted contents). The full investigation and the per-platform weighing (why

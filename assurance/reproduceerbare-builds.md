@@ -102,40 +102,57 @@ bundelinterne `SHA256SUMS`. Drie geïsoleerde builds achter elkaar gaven exact
 dezelfde `main.dart.js`. Herbouwen uit de bron geeft, in dezelfde bouwomgeving,
 precies dezelfde bytes.
 
-### Een tweede variabele: de bouwomgeving, niet de bron
+### Een tweede waarneming — en de correctie ervan
 
-Eén waarneming hoort er eerlijk bij, want zij bepaalt hoe sterk de claim mag
-zijn. Tijdens de toetsen nam `main.dart.js` op enig moment een **tweede**, daarna
-weer stabiele waarde aan — niet elke build een andere (dat zou willekeur zijn),
-maar één sprong naar een nieuwe waarde die vervolgens over drie geïsoleerde
-builds onveranderd bleef. De sprong viel samen met een gelijktijdige build voor
-het *host*-doel (een `flutter test`, die de native-assetslaag anders oplost dan
-de web-build). `flutter clean` zette die staat niet terug.
+> **Gecorrigeerd 2026-08-01 (#1033).** De eerste lezing weet een sprong in
+> `main.dart.js` aan de native-assetslaag en wees het pinnen daarvan aan als
+> sluitstuk. Een vervolgtoets vond een mundane oorzaak — bronvervuiling — en trekt
+> die conclusie in. De oorspronkelijke tekst is vervangen door wat er werkelijk
+> aan de hand was; de fout zelf blijft benoemd, want hem verzwijgen zou dezelfde
+> les een tweede keer laten kosten.
 
-Dat is geen willekeur per build maar een **gevoeligheid voor de bouwomgeving**:
-de resolutie van de afhankelijkheden en de native-assetslaag (de `dartcv4`-hook
-die OpenCV met CMake bouwt) is een variabele náást de bron. Dat is precies het
-obstakel dat de issue "niet-deterministische toolchain-stappen" noemt, en het is
-de normale situatie bij reproduceerbare builds: reproduceerbaarheid geldt altijd
-*ten opzichte van een vastgelegde bouwomgeving*, nooit "op elke machine met elk
-gereedschap".
+**Wat er tijdens #1027 werd gezien.** `main.dart.js` nam op enig moment een tweede,
+daarna stabiele waarde aan (`23ca67d6…` → `f04ac94e…`). Dat werd toegeschreven aan
+de native-assetslaag (de `dartcv4`/OpenCV-hook), omdat de sprong samenviel met een
+gelijktijdige host-build.
 
-Waar dit project staat op dat pinnen:
+**Wat #1033 vaststelde.** Die meting liep in een **gedeelde werkkopie** waarin een
+parallelle sessie een `lib/`-bestand (`preview_panel.dart`) bewerkte tussen builds
+door — en een `lib/`-wijziging gaat recht de dart2js-uitvoer in. Gecontroleerd
+nagebouwd in een geïsoleerde kopie op de ongewijzigde bron:
 
-- **Toolchain**: gepind en bewaakt (Flutter 3.44.8, `make check-toolchain`).
-- **Afhankelijkheden**: `pubspec.lock` gepind, en de release-tak haalt ze met
-  `flutter pub get --enforce-lockfile` (`.github/workflows/release.yml`), dus een
-  afwijkende versie faalt in plaats van stil iets anders te bouwen.
-- **Native-assetslaag**: *niet* vastgesteld reproduceerbaar. De `dartcv4`-hook
-  bouwt OpenCV lokaal met de CMake die op de machine staat; die build is niet
-  gepind en werd hier als de resterende variabele aangewezen — niet
-  dichtgetimmerd. Dit is het eerlijke "niet vastgesteld".
+- Drie schone build+pack-cycli gaven **elke keer** `23ca67d6…`, mét de
+  host-native-assets-hook (`dart run pack`) die elke cyclus draaide. dart2js is dus
+  deterministisch, en die hook raakt de web-uitvoer niet.
+- Precies díe ene `lib/`-edit toepassen en opnieuw bouwen gaf `f04ac94e…` — de
+  "tweede waarde" uit #1027.
 
-De winst van deze ronde is dus scherp te benoemen: de **intrinsieke** willekeur
-die élke build liet verschillen (de service-workerversie) is weg, en binnen een
-vaste bouwomgeving is de bundel nu aantoonbaar bit-voor-bit reproduceerbaar. Wat
-resteert voor reproduceerbaarheid over machines heen is het vastleggen van de
-native-assetslaag — aangewezen als de volgende stap, niet als gedaan gepresenteerd.
+De sprong was dus een **bronwijziging**, geen bouwomgevingsvariabele. En de
+native-assetslaag kán de web-uitvoer architectonisch niet eens raken: het is een
+*host*-FFI-bibliotheek, en web heeft geen `dart:ffi`, dus zij is geen invoer van
+de web-build.
+
+**De les.** Een reproduceerbaarheidstoets hoort in een geïsoleerde, schone
+werkkopie — nooit in een gedeelde map waar een andere sessie de bron onder je kan
+wijzigen. De #1027-conclusie "de native-assetslaag is de resterende variabele"
+was een artefact van een vervuilde meting en is hiermee ingetrokken.
+
+**Wat wél de eerlijke restrand is.** Reproduceerbaarheid geldt altijd ten opzichte
+van een vastgelegde bouwomgeving, nooit "op elke machine met elk gereedschap".
+Gepind/geborgd: de toolchain (Flutter 3.44.8, `make check-toolchain`), de
+afhankelijkheden (`pubspec.lock` + `--enforce-lockfile`), en de bron (gecommit) —
+zodat een herbouw op dezelfde machine uit dezelfde bron byte-identiek is
+(getoetst — drie cycli op één machine). *Niet* rechtstreeks getoetst is een
+build in een **andere bouwomgeving**: vooral een ander besturingssysteem, maar
+strikt genomen ook een andere machine (ander bouwpad, `HOME`, locale). De grootste
+machine-specifieke invoer — het absolute bouwpad — is empirisch uitgesloten (nul
+lekken, #1027), en dart2js hoort platformonafhankelijk te zijn, maar dat is op één
+machine gemeten. Dat is dezelfde restrand als het nog niet meten van de Linux-tak
+— klein, en van een andere orde dan "een ongepinde native-assetslaag".
+
+De winst blijft scherp: de **intrinsieke** willekeur die élke build liet
+verschillen (de service-workerversie) is weg, en binnen een vaste bouwomgeving is
+de bundel aantoonbaar bit-voor-bit reproduceerbaar.
 
 ### Twee lagen, en welke ertoe doet
 
@@ -168,7 +185,7 @@ iets anders uit" is. Daarom niet gedaan; vastgelegd als overwogen en gewogen.
 
 | Platform | Haalbaarheid bit-voor-bit | Oordeel |
 |---|---|---|
-| **Web** | Bereikt binnen een vaste bouwomgeving; native-assetslaag nog niet gepind | **Grotendeels** — intrinsieke willekeur weg en reproduceerbaar getoetst; het pinnen van de native-assetslaag rest |
+| **Web** | Bereikt binnen een vaste bouwomgeving (getoetst); alleen cross-OS niet gemeten | **Gedaan (web-inhoud)** — intrinsieke willekeur weg, determinisme getoetst; enige restrand is cross-OS |
 | **Linux** | Waarschijnlijk dichtbij; niet hier getoetst | **Gewogen: niet nu** — redelijke opbrengst, maar buiten deze meting |
 | **macOS** | Per definitie niet door een derde | **Gewogen: nee** — notarisatie is serverside |
 | **Windows** | Vergt buildvlaggen; cross-gebouwd op de spiegel | **Gewogen: niet nu** — hoge last, lage opbrengst |
@@ -176,9 +193,9 @@ iets anders uit" is. Daarom niet gedaan; vastgelegd als overwogen en gewogen.
 **Web** — zie boven. De tak waar bit-voor-bit binnen een vaste bouwomgeving
 haalbaar én goedkoop bleek, en die het dichtst bij de kernwaarde ligt (de
 webversie draait op librekat.nl; wie hem wantrouwt kan hem, mits dezelfde
-bouwomgeving, narekenen). De intrinsieke willekeur is weg; het sluitstuk voor
-reproduceerbaarheid over machines heen is het vastleggen van de native-assetslaag
-(zie boven), en dat is aangewezen, niet gedaan.
+toolchain, narekenen). De intrinsieke willekeur is weg en het determinisme is
+getoetst; de enige niet-gemeten restrand is een build op een ander
+besturingssysteem (zie [Een tweede waarneming](#een-tweede-waarneming--en-de-correctie-ervan)).
 
 **Linux** — niet in deze ronde gemeten, en dat staat er als "niet vastgesteld"
 in plaats van dichtgepraat. Wat bekend is: een Flutter-Linux-bundel is
@@ -249,9 +266,9 @@ Complementair aan de minisign-handtekening en de bronroute, geen vervanging.
   poort**: een dubbele schone build als `make check`-stap zou minuten kosten bij
   elke commit, en de toolchain is al gepind — het is een *uitvoerbare,
   gedocumenteerde* verificatie (zoals `pack_web_release.dart --check` en de
-  adviserende DAST), niet een stille claim. Open, en apart belegd: het pinnen van
-  de native-assetslaag (zie [Een tweede variabele](#een-tweede-variabele-de-bouwomgeving-niet-de-bron)),
-  het sluitstuk voor reproduceerbaarheid over machines heen.
+  adviserende DAST), niet een stille claim. Determinisme getoetst; de enige
+  niet-gemeten restrand is cross-OS (zie [Een tweede waarneming](#een-tweede-waarneming--en-de-correctie-ervan)).
+  De eerder hier aangewezen "native-assets pinnen" bleek een vals spoor (#1033).
 - **Desktop: gewogen weg** met heropen-trigger. Bit-repro is hoge inspanning en,
   voor macOS, principieel onmogelijk voor een derde; handtekening, notarisatie en
   de getekende manifest blijven de herkomstgarantie. Heropenen: als de Linux-tak
@@ -271,13 +288,17 @@ daarop.
 
 ## Het aangewezen vervolg
 
-Het sluitstuk voor web-reproduceerbaarheid over machines heen is het **pinnen van
-de native-assetslaag**: nagaan of de `dartcv4`-hook (OpenCV via CMake) bij een
-identieke bron en toolchain over machines heen hetzelfde oplevert, en zo niet, of
-dat te pinnen valt. Dat is een aparte, grotere en mogelijk upstream-rakende
-oefening dan deze issue draagt; hij hoort onder de veilige-distributievraag #520,
-naast dit residu. Bewust hier vastgelegd als aangewezen, niet stilzwijgend
-weggelaten.
+*(Herzien 2026-08-01, #1033.)* Eerder stond hier "pin de native-assetslaag" als
+sluitstuk voor web-reproduceerbaarheid over machines heen. Dat is ingetrokken: de
+native-assetslaag raakt de web-uitvoer niet (geen `dart:ffi` op web), en de
+waarneming die haar aanwees bleek bronvervuiling (zie [Een tweede
+waarneming](#een-tweede-waarneming--en-de-correctie-ervan)).
+
+Wat wél resteert voor web-reproduceerbaarheid over machines heen is smal: **het
+meten van een build op een ander besturingssysteem** (dart2js hoort
+platformonafhankelijk te zijn, maar dat is hier op één OS getoetst). Dat valt
+samen met het al bestaande punt "de Linux-tak meten" en hoort onder de
+veilige-distributievraag #520. Bewust vastgelegd, niet stilzwijgend weggelaten.
 
 ## Wanneer dit opnieuw langs moet
 
