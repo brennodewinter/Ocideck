@@ -9,6 +9,7 @@ import '../l10n/app_localizations.dart' show AppLocalizations;
 import '../models/deck.dart' show TlpLevel;
 import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
+import '../models/matrix_settings.dart';
 import '../models/settings.dart';
 import '../models/storage_connection.dart';
 import '../services/disk_traces.dart';
@@ -19,6 +20,7 @@ import '../utils/log.dart';
 
 part 'parts/settings_provider_connections.dart';
 part 'parts/settings_provider_git.dart';
+part 'parts/settings_provider_matrix.dart';
 part 'parts/settings_provider_privacy.dart';
 part 'parts/settings_provider_traces.dart';
 
@@ -40,6 +42,42 @@ String _startupLanguageCode() {
       AppLocalizations.preferredLanguageCode(
         PlatformDispatcher.instance.locales,
       );
+}
+
+/// Lees de opgeslagen AI-instellingen uit prefs, of de standaard.
+///
+/// Top-level (geen methode) om dezelfde reden als [_readMatrixAccount]: puur
+/// laadwerk, en [SettingsNotifier] zit aan haar regelplafond. Een onleesbare
+/// waarde degradeert naar de standaardinstellingen.
+AiSettings _readAiSettings(SharedPreferences prefs) {
+  final aiJson = prefs.getString('aiSettings');
+  if (aiJson == null) return const AiSettings();
+  try {
+    return AiSettings.fromJson(
+      Map<String, Object?>.from(jsonDecode(aiJson) as Map),
+    );
+  } catch (e) {
+    logWarning('SettingsNotifier: ongeldige aiSettings-prefs', e);
+    return const AiSettings();
+  }
+}
+
+/// Lees het opgeslagen app-globale Matrix-account uit prefs, of null.
+///
+/// Top-level (geen methode) omdat [SettingsNotifier] aan haar regelplafond zit
+/// en dit puur laadwerk is, geen toestand. Een onleesbare of corrupte waarde
+/// degradeert naar "geen account" in plaats van een crash bij het opstarten.
+MatrixServer? _readMatrixAccount(SharedPreferences prefs) {
+  final matrixJson = prefs.getString('matrixAccount');
+  if (matrixJson == null) return null;
+  try {
+    return MatrixServer.fromJson(
+      Map<String, Object?>.from(jsonDecode(matrixJson) as Map),
+    );
+  } catch (e) {
+    logWarning('SettingsNotifier: ongeldige matrixAccount-prefs', e);
+    return null;
+  }
 }
 
 /// The single owner of application-wide settings: everything in [AppSettings],
@@ -169,17 +207,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     final cockpitSchemes = _mergeCockpitSchemes(loadedCockpitSchemes);
     final selectedCockpit =
         prefs.getString('selectedCockpitColorSchemeName') ?? 'Standaard';
-    final aiJson = prefs.getString('aiSettings');
-    var ai = const AiSettings();
-    if (aiJson != null) {
-      try {
-        ai = AiSettings.fromJson(
-          Map<String, Object?>.from(jsonDecode(aiJson) as Map),
-        );
-      } catch (e) {
-        logWarning('SettingsNotifier: ongeldige aiSettings-prefs', e);
-      }
-    }
+    final ai = _readAiSettings(prefs);
+    final matrix = _readMatrixAccount(prefs);
     // Het laden is asynchroon; een scope die in die tussentijd verdwijnt — een
     // venster dat sluit, een test die afloopt — mag geen "gebruikt na dispose"
     // opleveren. Er valt dan ook niets meer bij te werken.
@@ -258,6 +287,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       cveApiBaseUrl:
           prefs.getString('cveApiBaseUrl') ?? AppSettings.defaultCveApiBaseUrl,
       aiSettings: ai,
+      matrixAccount: matrix,
     );
     _persistedLogoPaths = _referencedLogoPaths;
     // Niet awaiten: de sleutelbos mag de instellingen niet ophouden.

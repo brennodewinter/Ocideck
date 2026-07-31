@@ -191,7 +191,13 @@ const Map<String, int> classSizeBaseline = {
       2160,
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
   'lib/widgets/app_shell.dart#_MainLayoutState': 1449,
-  'lib/state/settings_provider.dart#SettingsNotifier': 1331,
+  // Bewust verhoogd van 1331 naar 1344: het app-globale Matrix-account
+  // (setMatrixAccount + de keychain-getters voor het access-token) spiegelt
+  // bewust de bestaande AI- en git-account-setters. Het gedrag staat in de
+  // part `settings_provider_matrix.dart`, maar telt mee voor de klasse; het
+  // laadwerk (aiSettings + matrixAccount) ging in dezelfde wijziging naar
+  // top-level helpers, wat de netto groei drukte.
+  'lib/state/settings_provider.dart#SettingsNotifier': 1344,
   // Bewust verhoogd van 1256 naar 1261 (#651): `setDismissals` is een nieuwe
   // openbare mogelijkheid, geen drift. In dezelfde wijziging ging er 24 regels
   // uit — de vier identieke regels die annotaties, notities en terzijdeleggingen
