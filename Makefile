@@ -956,6 +956,16 @@ notarize-macos:
 	@echo "== OciDeck release: sign + notarize macOS app =="
 	scripts/notarize_macos.sh
 
+# Sign the release manifest (SHA256SUMS) with a minisign detached signature, so
+# the checksum chain gets a verifiable anchor — one signature over SHA256SUMS
+# covers every artifact it lists (all four platforms + the SBOMs). A manual,
+# local step by design: the private key stays off the runner, the same
+# least-privilege choice as notarize-macos. Pass the path to SHA256SUMS, or run
+# it where dist/SHA256SUMS lives. Needs minisign and a key pair; see docs/BUILD.md.
+sign-release:
+	@echo "== OciDeck release: minisign detached signature over SHA256SUMS =="
+	scripts/sign_release.sh $(SHA256SUMS)
+
 # Full local quality gate. Intended for humans, CI logs, and LLM-assisted debugging.
 # `coverage` rather than `test`: it runs the same suite (one run, instrumented)
 # and additionally enforces the floor and the every-file-is-in-a-test rule.
