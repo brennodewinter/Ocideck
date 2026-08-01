@@ -227,40 +227,12 @@ class MarpHtmlService {
     final signature = docMeta.signature != null
         ? signatureFieldsOf(docMeta.signature!, sealedAt: docMeta.sealedAt)
         : signatureFields(embedded.markdown);
-    final exportY01 = _y01FromExportMarkdown(embedded.markdown);
-    final sections = StringBuffer();
-    for (final slide in marpSlides(embedded.markdown)) {
-      // De keten van omzettingen, van binnen naar buiten. Elke stap laat een
-      // dia die haar niet aangaat onveranderd, dus de volgorde is vrij; het
-      // rapportagetype gaat als eerste omdat het de hele body vervangt.
-      var body = renderReportingSlide(slide, theme: theme);
-      body = renderMatrixSlide(body, theme: theme);
-      body = renderCanvasSlide(body, theme: theme);
-      body = renderTreeSlide(body, theme: theme);
-      body = renderFlowSlide(body, theme: theme);
-      body = renderChartBlocks(body, theme: theme, y01: exportY01);
-      body = renderQuestionBlocks(body);
-      body = renderMediaRedacted(body);
-      body = renderVideoNotice(body);
-      body = renderTimelineBlocks(body);
-      body = renderSignOffBlock(
-        body,
-        signature,
-        sealedAt: signature['ocideck_seal_at'] ?? '',
-      );
-      final renderedBlocks = renderCockpitBlocks(
-        body,
-        theme: theme,
-        scheme: cockpitColorScheme,
-      );
-      final markerClass = _bulletMarkerSectionClass(slide);
-      final titleColorStyle = _titleColorSectionStyle(slide);
-      sections
-        ..write('<section class="slide$markerClass"$titleColorStyle>')
-        ..write('<script type="text/markdown">')
-        ..write(_guardMarkdown(renderedBlocks))
-        ..write('</script></section>');
-    }
+    final sections = _renderSections(
+      embedded.markdown,
+      theme: theme,
+      cockpitColorScheme: cockpitColorScheme,
+      signature: signature,
+    );
 
     // Elke ingesloten bundel krijgt een licentiebanner, ook als de geminificeerde
     // upstream-build er geen heeft. marked, highlight.js en DOMPurify dragen er

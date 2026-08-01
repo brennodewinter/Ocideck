@@ -86,6 +86,54 @@ final RegExp _scriptClose = RegExp(r'</(script)', caseSensitive: false);
 /// het geval voor `</script`, dat werd ontsnapt maar nooit hersteld.
 String _guardMarkdown(String s) => _guardScript(s).replaceAll('<!--', r'<\!--');
 
+/// Rendert elke dia uit [markdown] naar zijn `<section>` met inerte
+/// markdown-payload. De omzettingsketen loopt van binnen naar buiten: elke
+/// stap laat een dia die haar niet aangaat onveranderd, dus de volgorde is
+/// vrij; het rapportagetype gaat als eerste omdat het de hele body vervangt.
+String _renderSections(
+  String markdown, {
+  ThemeProfile? theme,
+  required CockpitColorScheme cockpitColorScheme,
+  required Map<String, String> signature,
+}) {
+  final exportY01 = MarpHtmlService._y01FromExportMarkdown(markdown);
+  final sections = StringBuffer();
+  for (final slide in MarpHtmlService.marpSlides(markdown)) {
+    var body = MarpHtmlService.renderReportingSlide(slide, theme: theme);
+    body = renderMatrixSlide(body, theme: theme);
+    body = renderCanvasSlide(body, theme: theme);
+    body = renderTreeSlide(body, theme: theme);
+    body = renderFlowSlide(body, theme: theme);
+    body = MarpHtmlService.renderChartBlocks(
+      body,
+      theme: theme,
+      y01: exportY01,
+    );
+    body = MarpHtmlService.renderQuestionBlocks(body);
+    body = MarpHtmlService.renderMediaRedacted(body);
+    body = MarpHtmlService.renderVideoNotice(body);
+    body = MarpHtmlService.renderTimelineBlocks(body);
+    body = MarpHtmlService.renderSignOffBlock(
+      body,
+      signature,
+      sealedAt: signature['ocideck_seal_at'] ?? '',
+    );
+    final renderedBlocks = MarpHtmlService.renderCockpitBlocks(
+      body,
+      theme: theme,
+      scheme: cockpitColorScheme,
+    );
+    final markerClass = _bulletMarkerSectionClass(slide);
+    final titleColorStyle = _titleColorSectionStyle(slide);
+    sections
+      ..write('<section class="slide$markerClass"$titleColorStyle>')
+      ..write('<script type="text/markdown">')
+      ..write(_guardMarkdown(renderedBlocks))
+      ..write('</script></section>');
+  }
+  return sections.toString();
+}
+
 /// Neutraliseert `</script` in échte JavaScript.
 ///
 /// Hier bewust géén `<!--`-behandeling: in JavaScript is `<!--` een geldige
