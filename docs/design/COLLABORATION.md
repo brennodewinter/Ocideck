@@ -1069,7 +1069,11 @@ Web note: CSP `connect-src` must allow the homeserver **https** origin for the
 
 ### Phase 2 — Identity hardening & provenance (pure client)
 Cross-signing/verification UX; SSSS recovery flow; optional owner-signature on the
-distributed deck tied to the classification gate.
+distributed deck tied to the classification gate. Along the self-encrypted-relay
+route these become: device-verification pinning + an unverified-device banner
+(Blok A), an exportable identity recovery key (Blok B), and a cryptographic owner
+*herkomstbewijs* in the seal sidecar (Blok C) —
+[`PROVENANCE_SIGNATURE.md`](PROVENANCE_SIGNATURE.md), issue #978.
 
 ### Phase 3 — Presenting + small-group audio (leans on: homeserver TURN)
 Presenter role as broadcast authority (data plane); P2P live audio via
