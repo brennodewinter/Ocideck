@@ -6,43 +6,16 @@ part of '../image_carousel_picker.dart';
 
 extension _CarouselActions on _ImageCarouselPickerState {
   Future<void> _loadImages() async {
-    final found = <String>{};
-    var scanFailed = false;
-
-    for (final path in widget.searchPaths) {
-      if (path.isEmpty) continue;
-      final dir = Directory(path);
-      if (!dir.existsSync()) continue;
-      try {
-        await for (final e in dir.list(recursive: true, followLinks: false)) {
-          if (e is File) {
-            final ext = p.extension(e.path).toLowerCase();
-            if (_ImageCarouselPickerState._exts.contains(ext)) {
-              found.add(e.path);
-            }
-          }
-        }
-      } catch (e) {
-        logWarning('_ImageCarouselPickerState._loadImages: directory scan', e);
-        scanFailed = true;
-      }
-    }
-
-    // Stat each file exactly once (instead of repeatedly inside the sort
-    // comparator) so large libraries stay responsive.
-    final withTimes = <(String, DateTime)>[];
-    for (final path in found) {
-      DateTime modified;
-      try {
-        modified = File(path).statSync().modified;
-      } catch (e) {
-        logWarning('_ImageCarouselPickerState._loadImages: statSync', e);
-        modified = DateTime.fromMillisecondsSinceEpoch(0);
-      }
-      withTimes.add((path, modified));
-    }
-    withTimes.sort((a, b) => b.$2.compareTo(a.$2));
-    final sorted = [for (final e in withTimes) e.$1];
+    // Begrensd, gebatcht en annuleerbaar via een aparte service (#1049): een
+    // grote of gemounte bibliotheek zou anders de interface lang blokkeren. Bij
+    // sluiten van de dialoog stopt de scan doordat `mounted` false wordt.
+    final result = await ImageLibraryScanner.scan(
+      widget.searchPaths,
+      isCancelled: () => !mounted,
+      extensions: _ImageCarouselPickerState._exts,
+    );
+    if (!mounted) return;
+    final sorted = result.paths;
 
     final descriptions = await widget.descriptionService.loadFor(sorted);
 
@@ -57,9 +30,21 @@ extension _CarouselActions on _ImageCarouselPickerState {
     });
     await _loadCaptionForSelection();
     _loadDescriptionForSelection();
+    // Een afgekapte bibliotheek zou anders stil doen alsof dit alles is.
+    if (result.truncated && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            context.l10n.d(
+              'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.',
+            ),
+          ),
+        ),
+      );
+    }
     // Een mislukte scan (bijv. onbereikbare netwerkmap) zou anders stil een
     // lege of onvolledige bibliotheek tonen.
-    if (scanFailed && mounted) {
+    if (result.failed && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

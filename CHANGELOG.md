@@ -193,6 +193,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- Prestaties: de afbeeldingskiezer doorzocht de zoekmappen onbegrensd recursief,
+  bewaarde alle paden, deed per bestand een synchrone `stat` op de UI-isolate en
+  sorteerde alles — een grote of gemounte bibliotheek met honderdduizenden
+  beelden kon de interface zo lang blokkeren. De scan zit nu in een aparte,
+  testbare `ImageLibraryScanner` met dezelfde bestands- en dieptegrens als de
+  deck-scan (20000 bestanden, diepte 32, gedeeld via `library_scan_limits`),
+  stat en sorteert in asynchrone batches, is annuleerbaar (stopt bij het sluiten
+  van de dialoog) en meldt het wanneer de lijst is afgekapt (#1049).
 - Prestaties: de startnummers van doorlopend genummerde lijsten worden nu in
   één lineaire pass per deck berekend (`numberedListStarts`) in plaats van per
   slide recursief de hele keten terug te lopen. De rail, presentatiemodus en

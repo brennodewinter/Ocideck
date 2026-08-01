@@ -8,6 +8,7 @@ import 'package:path/path.dart' as p;
 import '../../services/ai_client_service.dart';
 import '../../services/caption_service.dart';
 import '../../services/description_service.dart';
+import '../../services/image_library_scanner.dart';
 import '../../services/image_alt_ai_service.dart';
 import '../../services/image_dedup_service.dart';
 import '../../services/image_reference_service.dart';
