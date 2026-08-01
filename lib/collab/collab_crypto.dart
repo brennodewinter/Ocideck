@@ -99,6 +99,36 @@ class CollabDeviceKeys {
     return CollabDeviceKeys._(deviceId, identity, agreement);
   }
 
+  /// The raw Ed25519 identity public key — what a provenance block carries and
+  /// what [deviceFingerprint] renders.
+  Future<List<int>> identityKeyBytes() async =>
+      (await _identity.extractPublicKey()).bytes;
+
+  /// Sign a deck's **provenance** (COLLABORATION Phase 2 "Blok C";
+  /// `docs/design/PROVENANCE_SIGNATURE.md`): the owner attests that this exact
+  /// sealed deck — identified by [hash] under [algo]/[form], at [signedAt] —
+  /// came from this identity. The preimage is domain-separated and built *here*
+  /// (see [provenancePreimage]); this method never signs caller-chosen bytes, so
+  /// the identity key cannot be turned into a signing oracle across the other
+  /// message types it signs (§8, security-architect condition).
+  Future<List<int>> signProvenance({
+    required String form,
+    required String algo,
+    required String hash,
+    required String signedAt,
+  }) async {
+    final sig = await _ed25519.sign(
+      provenancePreimage(
+        form: form,
+        algo: algo,
+        hash: hash,
+        signedAt: signedAt,
+      ),
+      keyPair: _identity,
+    );
+    return sig.bytes;
+  }
+
   /// The public half others need, with the X25519 key signed by the identity key
   /// so a relay cannot swap it (§4.3, §5.3).
   Future<DevicePublicKeys> publicKeys() async {
@@ -113,6 +143,49 @@ class CollabDeviceKeys {
       agreementSignature: sig.bytes,
     );
   }
+}
+
+/// The domain tag for a provenance signature, signed as the first array element
+/// so this signature can never be confused with the device-binding, record or
+/// key-wrap messages the same identity key also signs (each of those starts with
+/// a different first byte). It is also the literal `preimage` value written in
+/// the `.seal.json` provenance block, so a third party reconstructs the signed
+/// bytes verbatim. See `docs/design/PROVENANCE_SIGNATURE.md` §2/§3.
+const String kProvenancePreimageTag = 'ocideck-provenance-v1';
+
+/// The exact bytes a provenance signature covers: a JSON array (structured
+/// encoding, not ad-hoc concatenation, so a delimiter can never be injected) of
+/// the domain tag and the seal's own fields. Reproducible with any SHA-512 and
+/// Ed25519 tool — no OciDeck needed to verify.
+List<int> provenancePreimage({
+  required String form,
+  required String algo,
+  required String hash,
+  required String signedAt,
+}) => utf8.encode(
+  jsonEncode([kProvenancePreimageTag, form, algo, hash, signedAt]),
+);
+
+/// Verify a provenance signature against the [identityKey] that produced it.
+/// Returns false on any mismatch rather than throwing, so a caller can render a
+/// plain "invalid" state. The [identityKey] is self-supplied (it travels in the
+/// block), so a true result proves only *this deck was signed by the holder of
+/// this key* — meaningful authorship needs that key pinned out-of-band (Blok A).
+Future<bool> verifyProvenance({
+  required List<int> identityKey,
+  required List<int> signature,
+  required String form,
+  required String algo,
+  required String hash,
+  required String signedAt,
+}) {
+  return _ed25519.verify(
+    provenancePreimage(form: form, algo: algo, hash: hash, signedAt: signedAt),
+    signature: Signature(
+      signature,
+      publicKey: SimplePublicKey(identityKey, type: KeyPairType.ed25519),
+    ),
+  );
 }
 
 /// The public keys of a device, as published to a room. [agreementSignature] is

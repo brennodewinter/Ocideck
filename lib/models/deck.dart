@@ -2,6 +2,7 @@ import '../services/front_matter_merge.dart';
 import 'privacy_disposition.dart';
 import 'annotation.dart';
 import 'document_signature.dart';
+import 'provenance_signature.dart';
 import 'improvement_y01.dart';
 import 'seal_record.dart';
 import 'slide.dart';
@@ -322,6 +323,13 @@ class Deck {
   /// Woont met het zegel in `<naam>.seal.json`.
   final DocumentSignature? signature;
 
+  /// Optioneel cryptografisch **herkomstbewijs** van de eigenaar: een
+  /// Ed25519-ondertekening over [sealHash] met de samenwerkingsidentiteit
+  /// (COLLABORATION Fase 2, Blok C). Losstaand van [signature]. Woont óók in
+  /// `<naam>.seal.json`; null wanneer niet ondertekend. Zie
+  /// [ProvenanceSignature] en `docs/design/PROVENANCE_SIGNATURE.md`.
+  final ProvenanceSignature? provenance;
+
   /// Annotatielaag: vrije-hand-tekeningen per slide, gekeyd op [Slide.id].
   /// Bewust géén onderdeel van de Marp-markdown — dit wordt los bewaard in een
   /// sidecar zodat het deck pure, uitwisselbare Marp blijft.
@@ -412,6 +420,7 @@ class Deck {
     this.sealTimestampNonce = '',
     this.fileHash = '',
     this.signature,
+    this.provenance,
     this.annotations = const {},
     this.userNotes = const {},
     this.dismissals,
@@ -455,6 +464,8 @@ class Deck {
     String? fileHash,
     DocumentSignature? signature,
     bool clearSignature = false,
+    ProvenanceSignature? provenance,
+    bool clearProvenance = false,
     Map<String, List<InkStroke>>? annotations,
     Map<String, String>? userNotes,
     DeckDismissals? dismissals,
@@ -499,6 +510,7 @@ class Deck {
       sealTimestampNonce: sealTimestampNonce ?? this.sealTimestampNonce,
       fileHash: fileHash ?? this.fileHash,
       signature: clearSignature ? null : (signature ?? this.signature),
+      provenance: clearProvenance ? null : (provenance ?? this.provenance),
       annotations: annotations ?? this.annotations,
       userNotes: userNotes ?? this.userNotes,
       dismissals: dismissals ?? this.dismissals,
