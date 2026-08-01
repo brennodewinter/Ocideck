@@ -911,6 +911,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Deelnemers verifiëren': 'Verify participants',
+  '(dit apparaat)': '(this device)',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
+      'Compare each device\'s fingerprint over a trusted channel — read it out to each other, or send it along a route you trust. If they match, you are working with the real devices and no one has slipped in between. If they differ, break off the collaboration.',
   'Dat is geen geldige uitnodigingslink.':
       'That is not a valid invitation link.',
   'De Matrix-homeserver is niet bereikbaar.':

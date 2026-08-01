@@ -1774,6 +1774,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deelnemers verifiëren': 'Teilnehmer verifiziere',
+  '(dit apparaat)': '(das Grät)',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
+      'Vergliich de Fingerabdruck vo jedem Grät über en vertroute Kanal — läsed en enand vor oder schick en über en Wäg, wo du em vertrousch. Stimmed si überii, schaffsch mit de echte Grät und niemer het sich dezwüsche gschobe. Wiiched si ab, denn brich d Zämenarbet ab.',
   'Dat is geen geldige uitnodigingslink.':
       'Das isch kei gültige Iiladigs-Link.',
   'De Matrix-homeserver is niet bereikbaar.':

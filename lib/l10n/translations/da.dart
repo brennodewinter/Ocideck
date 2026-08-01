@@ -1770,6 +1770,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Deelnemers verifiëren': 'Verificér deltagere',
+  '(dit apparaat)': '(denne enhed)',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
+      'Sammenlign hver enheds fingeraftryk via en betroet kanal — læs det op for hinanden, eller send det ad en vej, du stoler på. Passer de, arbejder du med de rigtige enheder, og ingen har blandet sig imellem. Afviger de, så afbryd samarbejdet.',
   'Dat is geen geldige uitnodigingslink.':
       'Det er ikke et gyldigt invitationslink.',
   'De Matrix-homeserver is niet bereikbaar.':

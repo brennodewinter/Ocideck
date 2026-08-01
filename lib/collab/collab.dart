@@ -10,6 +10,7 @@
 export 'collab_codec.dart';
 export 'collab_crypto.dart';
 export 'collab_device_store.dart';
+export 'collab_participant.dart';
 export 'collab_deck_diff.dart';
 export 'collab_log_store.dart';
 export 'collab_session.dart';

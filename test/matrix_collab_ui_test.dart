@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/collab/collab_participant.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/matrix_settings.dart';
 import 'package:ocideck/state/matrix_client_provider.dart';
@@ -112,6 +113,50 @@ void main() {
       await tester.pumpAndSettle();
       expect(copied, ['https://matrix.to/#/!room:hs']);
       expect(find.text('Uitnodigingslink gekopieerd.'), findsOneWidget);
+    });
+  });
+
+  group('showMatrixParticipantsDialog', () {
+    testWidgets('lists each device with its fingerprint, self first', (
+      tester,
+    ) async {
+      const participants = [
+        CollabParticipant(
+          userId: '@me:hs',
+          deviceId: 'DEV1',
+          fingerprint: 'AAAA BBBB',
+          isSelf: true,
+        ),
+        CollabParticipant(
+          userId: '@peer:hs',
+          deviceId: 'DEV2',
+          fingerprint: 'CCCC DDDD',
+          isSelf: false,
+        ),
+      ];
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => ElevatedButton(
+                onPressed: () => showMatrixParticipantsDialog(
+                  context,
+                  l10nOf(context),
+                  participants,
+                ),
+                child: const Text('go'),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('go'));
+      await tester.pumpAndSettle();
+      expect(find.text('AAAA BBBB'), findsOneWidget);
+      expect(find.text('CCCC DDDD'), findsOneWidget);
+      expect(find.textContaining('@me:hs'), findsOneWidget);
+      expect(find.textContaining('(dit apparaat)'), findsOneWidget);
+      expect(find.text('@peer:hs'), findsOneWidget);
     });
   });
 

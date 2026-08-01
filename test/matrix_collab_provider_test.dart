@@ -215,6 +215,27 @@ void main() {
       // The guest adopted the authority's slide-id space (§5.5).
       expect(guestTab.collabSession!.deck.slides.single.id, hostSlide.id);
 
+      // Both sides can list the session's devices for out-of-band verification
+      // (§4.3): itself first, then the verified peer, each with a fingerprint.
+      final hostParticipants = hostN.matrixParticipants();
+      expect(hostParticipants.first.isSelf, isTrue);
+      expect(hostParticipants.first.userId, '@host:hs.example');
+      expect(
+        hostParticipants.any((p) => p.userId == '@guest:hs.example'),
+        isTrue,
+      );
+      expect(hostParticipants.every((p) => p.fingerprint.isNotEmpty), isTrue);
+
+      final guestParticipants = guestN.matrixParticipants();
+      final guestSelf = guestParticipants.firstWhere((p) => p.isSelf);
+      final hostPeer = guestParticipants.firstWhere((p) => !p.isSelf);
+      // The guest sees the host's real identity-key fingerprint — the same value
+      // the host sees for itself. That equality is what an out-of-band compare
+      // confirms; a substituted key would break it.
+      expect(guestSelf.userId, '@guest:hs.example');
+      expect(hostPeer.userId, '@host:hs.example');
+      expect(hostPeer.fingerprint, hostParticipants.first.fingerprint);
+
       await hostN.leave();
       await guestN.leave();
     });

@@ -1775,6 +1775,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Deelnemers verifiëren': 'Résztvevők ellenőrzése',
+  '(dit apparaat)': '(ez az eszköz)',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
+      'Hasonlítsd össze minden eszköz ujjlenyomatát egy megbízható csatornán — olvassátok fel egymásnak, vagy küldd el olyan úton, amelyben megbízol. Ha egyeznek, a valódi eszközökkel dolgozol, és senki sem furakodott közétek. Ha eltérnek, szakítsd meg az együttműködést.',
   'Dat is geen geldige uitnodigingslink.':
       'Ez nem érvényes meghívó hivatkozás.',
   'De Matrix-homeserver is niet bereikbaar.':

@@ -727,6 +727,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Deelnemers verifiëren': 'Verificar participantes',
+  '(dit apparaat)': '(este dispositivo)',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
+      'Compara la huella de cada dispositivo por un canal de confianza — léela en voz alta el uno al otro o envíala por una vía en la que confíes. Si coinciden, estás trabajando con los dispositivos reales y nadie se ha interpuesto. Si difieren, interrumpe la colaboración.',
   'Dat is geen geldige uitnodigingslink.':
       'Este no es un enlace de invitación válido.',
   'De Matrix-homeserver is niet bereikbaar.':
