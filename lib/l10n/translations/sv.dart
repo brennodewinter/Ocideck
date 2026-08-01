@@ -1039,8 +1039,8 @@ const _dutchSourceSv = {
   'Vraag': 'Fråga',
   'Wat wil je vragen?': 'Vad vill du fråga?',
   'Antwoorden': 'Svar',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Markera de rätta svaren. Ingen gräns; vid presentation visas slumpmässigt ett rätt och resten fel.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Markera de rätta svaren. Högst åtta svar; vid presentation visas slumpmässigt ett rätt och resten fel.',
   'Antwoord': 'Svar',
   'Antwoord toevoegen': 'Lägg till svar',
   'Goed antwoord': 'Rätt svar',

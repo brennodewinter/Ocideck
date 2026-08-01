@@ -1046,8 +1046,8 @@ const _dutchSourcePl = {
   'Vraag': 'Pytanie',
   'Wat wil je vragen?': 'O co chcesz zapytać?',
   'Antwoorden': 'Odpowiedzi',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Zaznacz poprawne odpowiedzi. Bez limitu; podczas prezentacji losowo pokazywana jest jedna poprawna, a reszta błędnych odpowiedzi.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Zaznacz poprawne odpowiedzi. Maksymalnie osiem odpowiedzi; podczas prezentacji losowo pokazywana jest jedna poprawna, a reszta błędnych odpowiedzi.',
   'Antwoord': 'Odpowiedź',
   'Antwoord toevoegen': 'Dodaj odpowiedź',
   'Goed antwoord': 'Poprawna odpowiedź',

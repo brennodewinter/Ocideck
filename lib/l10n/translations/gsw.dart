@@ -1044,8 +1044,8 @@ const _dutchSourceGsw = {
   'Vraag': 'Frag',
   'Wat wil je vragen?': 'Was wotsch fröge?',
   'Antwoorden': 'Antworte',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Markier di richtige Antworte. Kei Limit; bim Präsentiere wird zuefällig eini richtig und de Rest falsch zeigt.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Markier di richtige Antworte. Höchschtens acht Antworte; bim Präsentiere wird zuefällig eini richtig und de Rest falsch zeigt.',
   'Antwoord': 'Antwort',
   'Antwoord toevoegen': 'Antwort hinzuefüege',
   'Goed antwoord': 'Richtigi Antwort',

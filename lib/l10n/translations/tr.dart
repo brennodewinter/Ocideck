@@ -2068,8 +2068,8 @@ const _dutchSourceTr = {
   'Vraag': 'Soru',
   'Wat wil je vragen?': 'Ne sormak istiyorsunuz?',
   'Antwoorden': 'Yanıtlar',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Doğru yanıtları işaretleyin. Sınır yok; sunum sırasında rastgele 1 doğru ve gerisi yanlış olarak gösterilir.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Doğru yanıtları işaretleyin. En fazla sekiz yanıt; sunum sırasında rastgele 1 doğru ve gerisi yanlış olarak gösterilir.',
   'Antwoord': 'Yanıt',
   'Antwoord toevoegen': 'Yanıt ekle',
   'Goed antwoord': 'Doğru yanıt',

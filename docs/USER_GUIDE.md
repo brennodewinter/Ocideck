@@ -1023,7 +1023,10 @@ Common options for every kind:
 - **Answer limit** — one question stores at most eight answer records. The add
   button stops at eight. A hand-edited deck containing more is shown as an
   invalid question before answer controls or slide options are built; OciDeck
-  keeps the original Markdown intact instead of silently dropping answers.
+  preserves every answer record and unknown JSON field instead of silently
+  dropping them. Saving may normalise the surrounding fence, whitespace or JSON
+  formatting; storage operations that rewrite image paths preserve the fields
+  but may likewise reformat the JSON.
 
 - **Answer time** (optional) — a countdown starts the moment the slide appears;
   running out counts as a wrong answer. A question that cannot be got right as it

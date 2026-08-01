@@ -1040,8 +1040,8 @@ const _dutchSourceSl = {
   'Vraag': 'Vprašanje',
   'Wat wil je vragen?': 'Kaj želite vprašati?',
   'Antwoorden': 'Odgovori',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Označite pravilne odgovore. Brez omejitve; pri predstavljanju se naključno prikaže en pravilen in ostali napačni.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Označite pravilne odgovore. Največ osem odgovorov; pri predstavljanju se naključno prikaže en pravilen in ostali napačni.',
   'Antwoord': 'Odgovor',
   'Antwoord toevoegen': 'Dodaj odgovor',
   'Goed antwoord': 'Pravilen odgovor',

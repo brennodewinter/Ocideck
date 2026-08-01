@@ -3192,8 +3192,8 @@ const _dutchSourceAddFy = {
   'Vraag': 'Fraach',
   'Wat wil je vragen?': 'Wat wolsto freegje?',
   'Antwoorden': 'Antwurden',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Markearje de goede antwurden. Gjin limyt; by it presintearjen wurde willekeurich 1 goed en de rest fout toand.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Markearje de goede antwurden. Maksimaal acht antwurden; by it presintearjen wurde willekeurich 1 goed en de rest fout toand.',
   'Antwoord': 'Antwurd',
   'Antwoord toevoegen': 'Antwurd tafoegje',
   'Goed antwoord': 'Goed antwurd',

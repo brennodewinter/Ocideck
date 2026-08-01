@@ -1043,8 +1043,8 @@ const _dutchSourceCs = {
   'Vraag': 'Otázka',
   'Wat wil je vragen?': 'Na co se chcete zeptat?',
   'Antwoorden': 'Odpovědi',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Označte správné odpovědi. Bez limitu; při prezentování se náhodně zobrazí jedna správná a zbytek nesprávných.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Označte správné odpovědi. Nejvýše osm odpovědí; při prezentování se náhodně zobrazí jedna správná a zbytek nesprávných.',
   'Antwoord': 'Odpověď',
   'Antwoord toevoegen': 'Přidat odpověď',
   'Goed antwoord': 'Správná odpověď',

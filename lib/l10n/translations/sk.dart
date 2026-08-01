@@ -1046,8 +1046,8 @@ const _dutchSourceSk = {
   'Vraag': 'Otázka',
   'Wat wil je vragen?': 'Na čo sa chcete opýtať?',
   'Antwoorden': 'Odpovede',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Označte správne odpovede. Bez limitu; pri prezentovaní sa náhodne zobrazí jedna správna a zvyšok nesprávnych.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Označte správne odpovede. Najviac osem odpovedí; pri prezentovaní sa náhodne zobrazí jedna správna a zvyšok nesprávnych.',
   'Antwoord': 'Odpoveď',
   'Antwoord toevoegen': 'Pridať odpoveď',
   'Goed antwoord': 'Správna odpoveď',

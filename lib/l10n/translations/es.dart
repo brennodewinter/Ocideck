@@ -3215,8 +3215,8 @@ const _dutchSourceAddEs = {
   'Vraag': 'Pregunta',
   'Wat wil je vragen?': '¿Qué quieres preguntar?',
   'Antwoorden': 'Respuestas',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Marca las respuestas correctas. Sin límite; al presentar se muestran al azar una correcta y el resto incorrectas.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Marca las respuestas correctas. Ocho respuestas como máximo; al presentar se muestran al azar una correcta y el resto incorrectas.',
   'Antwoord': 'Respuesta',
   'Antwoord toevoegen': 'Añadir respuesta',
   'Goed antwoord': 'Respuesta correcta',

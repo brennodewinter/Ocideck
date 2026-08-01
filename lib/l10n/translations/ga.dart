@@ -1063,8 +1063,8 @@ const _dutchSourceGa = {
   'Vraag': 'Ceist',
   'Wat wil je vragen?': 'Cad ba mhaith leat a fhiafraí?',
   'Antwoorden': 'Freagraí',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Marcáil na freagraí cearta. Gan teorainn; agus tú ag láithriú, taispeántar ceann amháin ceart agus an chuid eile mícheart go randamach.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Marcáil na freagraí cearta. Ocht bhfreagra ar a mhéad; agus tú ag láithriú, taispeántar ceann amháin ceart agus an chuid eile mícheart go randamach.',
   'Antwoord': 'Freagra',
   'Antwoord toevoegen': 'Cuir freagra leis',
   'Goed antwoord': 'Freagra ceart',

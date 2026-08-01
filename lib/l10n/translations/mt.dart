@@ -1052,8 +1052,8 @@ const _dutchSourceMt = {
   'Vraag': 'Mistoqsija',
   'Wat wil je vragen?': 'X\'trid tistaqsi?',
   'Antwoorden': 'Tweġibiet',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Immarka t-tweġibiet korretti. L-ebda limitu; waqt il-preżentazzjoni tintwera b\'mod każwali waħda korretta u l-bqija ħażina.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Immarka t-tweġibiet korretti. Mhux aktar minn tmien tweġibiet; waqt il-preżentazzjoni tintwera b\'mod każwali waħda korretta u l-bqija ħażina.',
   'Antwoord': 'Tweġiba',
   'Antwoord toevoegen': 'Żid tweġiba',
   'Goed antwoord': 'Tweġiba korretta',

@@ -371,7 +371,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
                   'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.',
                 )
               : l10n.d(
-                  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.',
+                  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.',
                 ),
           style: TextStyle(fontSize: 12, color: AppTheme.slate500),
         ),

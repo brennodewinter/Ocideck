@@ -1045,8 +1045,8 @@ const _dutchSourceHr = {
   'Vraag': 'Pitanje',
   'Wat wil je vragen?': 'Što želite pitati?',
   'Antwoorden': 'Odgovori',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Označite točne odgovore. Bez ograničenja; pri prezentiranju nasumično se prikazuje jedan točan i ostali netočni.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Označite točne odgovore. Najviše osam odgovora; pri prezentiranju nasumično se prikazuje jedan točan i ostali netočni.',
   'Antwoord': 'Odgovor',
   'Antwoord toevoegen': 'Dodaj odgovor',
   'Goed antwoord': 'Točan odgovor',

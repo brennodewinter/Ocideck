@@ -1035,8 +1035,8 @@ const _dutchSourceEt = {
   'Vraag': 'Küsimus',
   'Wat wil je vragen?': 'Mida soovid küsida?',
   'Antwoorden': 'Vastused',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Märgi õiged vastused. Piirangut pole; esitamisel näidatakse juhuslikult 1 õige ja ülejäänud valed.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Märgi õiged vastused. Kuni kaheksa vastust; esitamisel näidatakse juhuslikult 1 õige ja ülejäänud valed.',
   'Antwoord': 'Vastus',
   'Antwoord toevoegen': 'Lisa vastus',
   'Goed antwoord': 'Õige vastus',

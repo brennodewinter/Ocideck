@@ -3223,8 +3223,8 @@ const _dutchSourceAddIt = {
   'Vraag': 'Domanda',
   'Wat wil je vragen?': 'Cosa vuoi chiedere?',
   'Antwoorden': 'Risposte',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Contrassegna le risposte corrette. Nessun limite; durante la presentazione vengono mostrate a caso una giusta e le altre sbagliate.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Contrassegna le risposte corrette. Al massimo otto risposte; durante la presentazione vengono mostrate a caso una giusta e le altre sbagliate.',
   'Antwoord': 'Risposta',
   'Antwoord toevoegen': 'Aggiungi risposta',
   'Goed antwoord': 'Risposta corretta',

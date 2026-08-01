@@ -1054,8 +1054,8 @@ const _dutchSourceBg = {
   'Vraag': 'Въпрос',
   'Wat wil je vragen?': 'Какво искате да попитате?',
   'Antwoorden': 'Отговори',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Отбележете верните отговори. Без ограничение; при презентиране на случаен принцип се показват 1 верен и останалите грешни.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Отбележете верните отговори. Най-много осем отговора; при презентиране на случаен принцип се показват 1 верен и останалите грешни.',
   'Antwoord': 'Отговор',
   'Antwoord toevoegen': 'Добавяне на отговор',
   'Goed antwoord': 'Верен отговор',

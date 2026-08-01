@@ -1048,8 +1048,8 @@ const _dutchSourceRo = {
   'Vraag': 'Întrebare',
   'Wat wil je vragen?': 'Ce vrei să întrebi?',
   'Antwoorden': 'Răspunsuri',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Marchează răspunsurile corecte. Fără limită; la prezentare, se afișează aleatoriu unul corect și restul greșite.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Marchează răspunsurile corecte. Cel mult opt răspunsuri; la prezentare, se afișează aleatoriu unul corect și restul greșite.',
   'Antwoord': 'Răspuns',
   'Antwoord toevoegen': 'Adaugă răspuns',
   'Goed antwoord': 'Răspuns corect',

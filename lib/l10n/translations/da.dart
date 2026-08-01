@@ -1040,8 +1040,8 @@ const _dutchSourceDa = {
   'Vraag': 'Spørgsmål',
   'Wat wil je vragen?': 'Hvad vil du spørge om?',
   'Antwoorden': 'Svar',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Markér de rigtige svar. Ingen grænse; ved præsentation vises tilfældigt ét rigtigt og resten forkerte.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Markér de rigtige svar. Højst otte svar; ved præsentation vises tilfældigt ét rigtigt og resten forkerte.',
   'Antwoord': 'Svar',
   'Antwoord toevoegen': 'Tilføj svar',
   'Goed antwoord': 'Rigtigt svar',

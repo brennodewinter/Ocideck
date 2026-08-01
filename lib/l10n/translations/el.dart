@@ -1055,8 +1055,8 @@ const _dutchSourceEl = {
   'Vraag': 'Ερώτηση',
   'Wat wil je vragen?': 'Τι θέλετε να ρωτήσετε;',
   'Antwoorden': 'Απαντήσεις',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Επισημάνετε τις σωστές απαντήσεις. Χωρίς όριο· κατά την παρουσίαση εμφανίζεται τυχαία μία σωστή και οι υπόλοιπες λανθασμένες.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Επισημάνετε τις σωστές απαντήσεις. Έως οκτώ απαντήσεις· κατά την παρουσίαση εμφανίζεται τυχαία μία σωστή και οι υπόλοιπες λανθασμένες.',
   'Antwoord': 'Απάντηση',
   'Antwoord toevoegen': 'Προσθήκη απάντησης',
   'Goed antwoord': 'Σωστή απάντηση',

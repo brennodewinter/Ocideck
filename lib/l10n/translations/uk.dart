@@ -1050,8 +1050,8 @@ const _dutchSourceUk = {
   'Vraag': 'Питання',
   'Wat wil je vragen?': 'Що ви хочете запитати?',
   'Antwoorden': 'Відповіді',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Позначте правильні відповіді. Без обмежень; під час презентування випадково показується одна правильна, а решта — неправильні.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Позначте правильні відповіді. Щонайбільше вісім відповідей; під час презентування випадково показується одна правильна, а решта — неправильні.',
   'Antwoord': 'Відповідь',
   'Antwoord toevoegen': 'Додати відповідь',
   'Goed antwoord': 'Правильна відповідь',

@@ -1048,8 +1048,8 @@ const _dutchSourceLa = {
   'Vraag': 'Quaestio',
   'Wat wil je vragen?': 'Quid rogare vis?',
   'Antwoorden': 'Responsa',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Signa responsa recta. Nullus limes; cum praesentas, unum rectum et cetera falsa fortuito monstrantur.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Signa responsa recta. Ad summum octo responsa; cum praesentas, unum rectum et cetera falsa fortuito monstrantur.',
   'Antwoord': 'Responsum',
   'Antwoord toevoegen': 'Responsum addere',
   'Goed antwoord': 'Responsum rectum',
