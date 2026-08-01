@@ -1770,6 +1770,32 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Dat is geen geldige uitnodigingslink.': 'Šī nav derīga ielūguma saite.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Matrix homeserver nav sasniedzams.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Saimnieks neatbildēja laikā. Pārbaudiet saiti un to, vai saimnieks joprojām ir tiešsaistē.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Kopīgojiet šo saiti ar tiem, kurus vēlaties iesaistīt darbā. Ikviens, kam ir saite, var pievienoties sesijai — tāpēc kopīgojiet to tikai ar cilvēkiem, kuriem uzticaties. Saturs paliek pilnībā (end-to-end) šifrēts; homeserver redz tikai šifrētus datus.',
+  'Deelnemen': 'Pievienoties',
+  'Deelnemen via een link': 'Pievienoties, izmantojot saiti',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Jūsu Matrix konts tiek noraidīts — pārbaudiet piekļuves pilnvaru sadaļā Iestatījumi.',
+  'Je doet nu live mee aan de samenwerking.':
+      'Tagad jūs sadarbojaties tiešsaistē.',
+  'Nodig mede-auteurs uit': 'Uzaicināt līdzautorus',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Vispirms atveriet prezentāciju, lai sadarbotos.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Ielīmējiet ielūguma saiti, ko jums nosūtīja saimnieks. Tā jūs atverat to pašu prezentāciju un sadarbojaties tiešsaistē.',
+  'Realtime samenwerken is mislukt.': 'Sadarbība reāllaikā neizdevās.',
+  'Realtime samenwerken starten': 'Sākt sadarbību reāllaikā',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Vispirms iestatiet Matrix kontu sadaļā Iestatījumi → Sadarbība.',
+  'Uitnodigingslink': 'Ielūguma saite',
+  'Uitnodigingslink gekopieerd.': 'Ielūguma saite nokopēta.',
+  'Uitnodigingslink kopiëren': 'Kopēt ielūguma saiti',
+  'Verbinden met de samenwerking…': 'Notiek savienošana ar sadarbību…',
   'Access-token': 'Piekļuves pilnvara',
   'Apparaat-id': 'Ierīces ID',
   'Gebruikers-id': 'Lietotāja ID',

@@ -1788,6 +1788,30 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Dat is geen geldige uitnodigingslink.': 'Це недійсне посилання-запрошення.',
+  'De Matrix-homeserver is niet bereikbaar.': 'Homeserver Matrix недоступний.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Організатор не відповів вчасно. Перевірте посилання та чи організатор ще онлайн.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Поділіться цим посиланням з тими, кого хочете залучити до роботи. Будь-хто, хто має посилання, може приєднатися до сеансу — тож діліться ним лише з людьми, яким довіряєте. Вміст залишається зашифрованим наскрізно; homeserver бачить лише зашифровані дані.',
+  'Deelnemen': 'Приєднатися',
+  'Deelnemen via een link': 'Приєднатися за посиланням',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Ваш обліковий запис Matrix відхилено — перевірте токен доступу в Налаштуваннях.',
+  'Je doet nu live mee aan de samenwerking.': 'Тепер ви співпрацюєте наживо.',
+  'Nodig mede-auteurs uit': 'Запросити співавторів',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Спершу відкрийте презентацію, щоб співпрацювати.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Вставте посилання-запрошення, яке надіслав вам організатор. Так ви відкриєте ту саму презентацію та співпрацюватимете наживо.',
+  'Realtime samenwerken is mislukt.': 'Співпраця в реальному часі не вдалася.',
+  'Realtime samenwerken starten': 'Почати співпрацю в реальному часі',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Спершу налаштуйте обліковий запис Matrix у Налаштування → Співпраця.',
+  'Uitnodigingslink': 'Посилання-запрошення',
+  'Uitnodigingslink gekopieerd.': 'Посилання-запрошення скопійовано.',
+  'Uitnodigingslink kopiëren': 'Копіювати посилання-запрошення',
+  'Verbinden met de samenwerking…': 'Підключення до співпраці…',
   'Access-token': 'Токен доступу',
   'Apparaat-id': 'Ідентифікатор пристрою',
   'Gebruikers-id': 'Ідентифікатор користувача',

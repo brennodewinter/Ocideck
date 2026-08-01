@@ -1806,6 +1806,31 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Dat is geen geldige uitnodigingslink.': 'Ní nasc cuiridh bailí é sin.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Níl teacht ar an homeserver Matrix.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Níor fhreagair an t-óstach in am. Seiceáil an nasc agus an bhfuil an t-óstach fós ar líne.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Comhroinn an nasc seo le duine ar bith ar mhaith leat oibriú leis. Is féidir le duine ar bith a bhfuil an nasc aige dul isteach sa seisiún — mar sin ná comhroinn é ach le daoine a bhfuil muinín agat astu. Fanann an t-ábhar criptithe ó cheann go ceann; ní fheiceann an homeserver ach sonraí criptithe.',
+  'Deelnemen': 'Glac páirt',
+  'Deelnemen via een link': 'Glac páirt trí nasc',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Diúltaítear do chuntas Matrix — seiceáil an comhartha rochtana i Socruithe.',
+  'Je doet nu live mee aan de samenwerking.': 'Tá tú ag comhoibriú beo anois.',
+  'Nodig mede-auteurs uit': 'Tabhair cuireadh do chomhúdair',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Oscail láithreoireacht ar dtús chun comhoibriú.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Greamaigh an nasc cuiridh a sheol an t-óstach chugat. Osclaíonn sé sin an láithreoireacht chéanna agus comhoibríonn tú beo.',
+  'Realtime samenwerken is mislukt.': 'Theip ar an gcomhoibriú fíor-ama.',
+  'Realtime samenwerken starten': 'Tosaigh comhoibriú fíor-ama',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Socraigh cuntas Matrix ar dtús faoi Socruithe → Comhoibriú.',
+  'Uitnodigingslink': 'Nasc cuiridh',
+  'Uitnodigingslink gekopieerd.': 'Nasc cuiridh cóipeáilte.',
+  'Uitnodigingslink kopiëren': 'Cóipeáil an nasc cuiridh',
+  'Verbinden met de samenwerking…': 'Ag nascadh leis an gcomhoibriú…',
   'Access-token': 'Comhartha rochtana',
   'Apparaat-id': 'Aitheantas an ghléis',
   'Gebruikers-id': 'Aitheantas úsáideora',

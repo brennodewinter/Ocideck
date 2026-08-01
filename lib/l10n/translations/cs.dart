@@ -1774,6 +1774,31 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Dat is geen geldige uitnodigingslink.': 'To není platný odkaz s pozvánkou.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Homeserver Matrix není dostupný.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Hostitel neodpověděl včas. Zkontrolujte odkaz a zda je hostitel stále online.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Sdílejte tento odkaz s těmi, s nimiž chcete spolupracovat. Kdokoli s odkazem může vstoupit do relace — proto jej sdílejte jen s lidmi, kterým důvěřujete. Obsah zůstává šifrovaný end-to-end; homeserver vidí jen šifrovaná data.',
+  'Deelnemen': 'Připojit se',
+  'Deelnemen via een link': 'Připojit se přes odkaz',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Váš účet Matrix je odmítnut — zkontrolujte přístupový token v Nastavení.',
+  'Je doet nu live mee aan de samenwerking.': 'Nyní spolupracujete živě.',
+  'Nodig mede-auteurs uit': 'Pozvat spoluautory',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Nejprve otevřete prezentaci, abyste mohli spolupracovat.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Vložte odkaz s pozvánkou, který vám poslal hostitel. Tím otevřete stejnou prezentaci a budete spolupracovat živě.',
+  'Realtime samenwerken is mislukt.': 'Spolupráce v reálném čase se nezdařila.',
+  'Realtime samenwerken starten': 'Zahájit spolupráci v reálném čase',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Nejprve nastavte účet Matrix v Nastavení → Spolupráce.',
+  'Uitnodigingslink': 'Odkaz s pozvánkou',
+  'Uitnodigingslink gekopieerd.': 'Odkaz s pozvánkou zkopírován.',
+  'Uitnodigingslink kopiëren': 'Kopírovat odkaz s pozvánkou',
+  'Verbinden met de samenwerking…': 'Připojování ke spolupráci…',
   'Access-token': 'Přístupový token',
   'Apparaat-id': 'ID zařízení',
   'Gebruikers-id': 'ID uživatele',

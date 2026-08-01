@@ -911,6 +911,32 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Dat is geen geldige uitnodigingslink.':
+      'That is not a valid invitation link.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'The Matrix homeserver is unreachable.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'The host did not respond in time. Check the link and whether the host is still online.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Share this link with anyone you want to work with. Anyone who has the link can enter the session — so only share it with people you trust. The content stays end-to-end encrypted; the homeserver only sees encrypted data.',
+  'Deelnemen': 'Join',
+  'Deelnemen via een link': 'Join via a link',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Your Matrix account is refused — check the access token in Settings.',
+  'Je doet nu live mee aan de samenwerking.': 'You are now collaborating live.',
+  'Nodig mede-auteurs uit': 'Invite co-authors',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Open a presentation first to collaborate.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Paste the invitation link the host sent you. This opens the same presentation and lets you collaborate live.',
+  'Realtime samenwerken is mislukt.': 'Real-time collaboration failed.',
+  'Realtime samenwerken starten': 'Start real-time collaboration',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Set up a Matrix account first, under Settings → Collaboration.',
+  'Uitnodigingslink': 'Invitation link',
+  'Uitnodigingslink gekopieerd.': 'Invitation link copied.',
+  'Uitnodigingslink kopiëren': 'Copy invitation link',
+  'Verbinden met de samenwerking…': 'Connecting to the collaboration…',
   'Access-token': 'Access token',
   'Apparaat-id': 'Device ID',
   'Gebruikers-id': 'User ID',

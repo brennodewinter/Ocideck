@@ -1787,6 +1787,32 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Hic nexus invitationis validus non est.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Homeserver Matrix adiri non potest.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Hospes tempore non respondit. Nexum inspice et num hospes adhuc online sit.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Hunc nexum communica cum quibus collaborari vis. Quicumque nexum habet sessionem intrare potest — itaque eum tantum cum hominibus quibus confidis communica. Contentus a fine ad finem cifratus manet; homeserver tantum data cifrata videt.',
+  'Deelnemen': 'Interesse',
+  'Deelnemen via een link': 'Per nexum interesse',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Ratio tua Matrix respuitur — tesseram accessus in Optionibus inspice.',
+  'Je doet nu live mee aan de samenwerking.': 'Nunc viva cooperationi interes.',
+  'Nodig mede-auteurs uit': 'Coauctores invita',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Praesentationem primum aperi ut collabores.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Nexum invitationis quem hospes tibi misit insere. Ita eandem praesentationem aperis et viva collaboraris.',
+  'Realtime samenwerken is mislukt.': 'Cooperatio tempore reali defecit.',
+  'Realtime samenwerken starten': 'Cooperationem tempore reali incipere',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Rationem Matrix primum in Optionibus → Collaboratio institue.',
+  'Uitnodigingslink': 'Nexus invitationis',
+  'Uitnodigingslink gekopieerd.': 'Nexus invitationis copiatus.',
+  'Uitnodigingslink kopiëren': 'Nexum invitationis copiare',
+  'Verbinden met de samenwerking…': 'Ad cooperationem conectens…',
   'Access-token': 'Tessera accessus',
   'Apparaat-id': 'ID instrumenti',
   'Gebruikers-id': 'ID usoris',

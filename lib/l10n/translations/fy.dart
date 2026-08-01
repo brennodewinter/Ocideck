@@ -731,6 +731,33 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Dat is geen geldige uitnodigingslink.':
+      'Dat is gjin jildige útnûgingskeppeling.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'De Matrix-homeserver is net berikber.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'De gasthear reagearre net op \'e tiid. Kontrolearje de keppeling en oft de gasthear noch online is.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Diel dizze keppeling mei wa\'tst meiwurkje litte wolst. Wa\'t de keppeling hat, kin de sesje ynkomme — diel him dus allinne mei minsken dy\'tst fertrouwst. De ynhâld bliuwt end-to-end fersifere; de homeserver sjocht allinne fersifere gegevens.',
+  'Deelnemen': 'Meidwaan',
+  'Deelnemen via een link': 'Meidwaan fia in keppeling',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Dyn Matrix-account wurdt wegere — kontrolearje it tagongstoken by Ynstellings.',
+  'Je doet nu live mee aan de samenwerking.':
+      'Do dochst no live mei oan de gearwurking.',
+  'Nodig mede-auteurs uit': 'Mei-auteurs útnûgje',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Iepenje earst in presintaasje om gear te wurkjen.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Plak de útnûgingskeppeling dy\'t de gasthear dy stjoerd hat. Dêrmei iepenest deselde presintaasje en wurkest live mei.',
+  'Realtime samenwerken is mislukt.': 'Realtime gearwurkje is mislearre.',
+  'Realtime samenwerken starten': 'Realtime gearwurkje begjinne',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Stel earst in Matrix-account yn by Ynstellings → Gearwurking.',
+  'Uitnodigingslink': 'Útnûgingskeppeling',
+  'Uitnodigingslink gekopieerd.': 'Útnûgingskeppeling kopiearre.',
+  'Uitnodigingslink kopiëren': 'Útnûgingskeppeling kopiearje',
+  'Verbinden met de samenwerking…': 'Ferbine mei de gearwurking…',
   'Access-token': 'Tagongstoken',
   'Apparaat-id': 'Apparaat-id',
   'Gebruikers-id': 'Brûkers-id',

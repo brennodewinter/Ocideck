@@ -1771,6 +1771,33 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Ini bukan tautan undangan yang valid.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Homeserver Matrix tidak dapat dijangkau.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Host tidak merespons tepat waktu. Periksa tautan dan apakah host masih online.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Bagikan tautan ini dengan siapa pun yang ingin Anda ajak bekerja sama. Siapa pun yang memiliki tautan dapat masuk ke sesi — jadi bagikan hanya dengan orang yang Anda percayai. Kontennya tetap dienkripsi ujung ke ujung; homeserver hanya melihat data terenkripsi.',
+  'Deelnemen': 'Gabung',
+  'Deelnemen via een link': 'Gabung melalui tautan',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Akun Matrix Anda ditolak — periksa token akses di Pengaturan.',
+  'Je doet nu live mee aan de samenwerking.':
+      'Anda kini berkolaborasi secara langsung.',
+  'Nodig mede-auteurs uit': 'Undang rekan penulis',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Buka presentasi terlebih dahulu untuk berkolaborasi.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Tempel tautan undangan yang dikirim host kepada Anda. Ini membuka presentasi yang sama dan Anda berkolaborasi secara langsung.',
+  'Realtime samenwerken is mislukt.': 'Kolaborasi waktu nyata gagal.',
+  'Realtime samenwerken starten': 'Mulai kolaborasi waktu nyata',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Siapkan akun Matrix terlebih dahulu di Pengaturan → Kolaborasi.',
+  'Uitnodigingslink': 'Tautan undangan',
+  'Uitnodigingslink gekopieerd.': 'Tautan undangan disalin.',
+  'Uitnodigingslink kopiëren': 'Salin tautan undangan',
+  'Verbinden met de samenwerking…': 'Menghubungkan ke kolaborasi…',
   'Access-token': 'Token akses',
   'Apparaat-id': 'ID perangkat',
   'Gebruikers-id': 'ID pengguna',

@@ -324,11 +324,18 @@ List<PaletteCommand> collabPaletteCommands(
   WidgetRef ref,
   AppLocalizations l10n,
 ) {
-  if (!ref.read(collabSessionProvider.notifier).canCollaborate) {
-    return const [];
-  }
-  if (ref.read(collabSessionProvider).isActive) {
+  final session = ref.read(collabSessionProvider);
+  // A running or connecting session offers only to leave it — plus copying the
+  // invite link again when this tab is the Matrix host.
+  if (session.isActive || session.isConnecting) {
     return [
+      if (session.isMatrix && session.inviteLink != null)
+        PaletteCommand(
+          label: l10n.d('Uitnodigingslink kopiëren'),
+          icon: Icons.copy,
+          keywords: const ['invite', 'link', 'copy', 'matrix', 'uitnodiging'],
+          onInvoke: () => _copyInvite(context, ref, l10n),
+        ),
       PaletteCommand(
         label: l10n.d('Samenwerking verlaten'),
         icon: Icons.link_off,
@@ -337,21 +344,148 @@ List<PaletteCommand> collabPaletteCommands(
       ),
     ];
   }
+  // WebDAV collaboration needs the deck on a WebDAV source (the sidecar log,
+  // §5.7); realtime Matrix needs only the app-global account (§6). Either or both
+  // may be available — show what applies.
+  final canWebdav = ref.read(collabSessionProvider.notifier).canCollaborate;
+  final hasMatrix = ref.read(matrixAccountProvider)?.isConfigured ?? false;
   return [
-    PaletteCommand(
-      label: l10n.d('Samenwerking starten'),
-      icon: Icons.groups_outlined,
-      keywords: const ['collab', 'samenwerken', 'webdav', 'share', 'host'],
-      onInvoke: () => _beginCollab(context, ref, l10n, host: true),
-    ),
-    PaletteCommand(
-      label: l10n.d('Deelnemen aan samenwerking'),
-      icon: Icons.group_add_outlined,
-      keywords: const ['collab', 'samenwerken', 'join', 'webdav'],
-      onInvoke: () => _beginCollab(context, ref, l10n, host: false),
-    ),
+    if (canWebdav) ...[
+      PaletteCommand(
+        label: l10n.d('Samenwerking starten'),
+        icon: Icons.groups_outlined,
+        keywords: const ['collab', 'samenwerken', 'webdav', 'share', 'host'],
+        onInvoke: () => _beginCollab(context, ref, l10n, host: true),
+      ),
+      PaletteCommand(
+        label: l10n.d('Deelnemen aan samenwerking'),
+        icon: Icons.group_add_outlined,
+        keywords: const ['collab', 'samenwerken', 'join', 'webdav'],
+        onInvoke: () => _beginCollab(context, ref, l10n, host: false),
+      ),
+    ],
+    if (hasMatrix) ...[
+      PaletteCommand(
+        label: l10n.d('Realtime samenwerken starten'),
+        icon: Icons.cast_connected_outlined,
+        keywords: const [
+          'collab',
+          'matrix',
+          'realtime',
+          'live',
+          'host',
+          'samenwerken',
+        ],
+        onInvoke: () => _beginMatrixCollab(context, ref, l10n, host: true),
+      ),
+      PaletteCommand(
+        label: l10n.d('Deelnemen via een link'),
+        icon: Icons.link,
+        keywords: const [
+          'collab',
+          'matrix',
+          'realtime',
+          'live',
+          'join',
+          'link',
+          'samenwerken',
+        ],
+        onInvoke: () => _beginMatrixCollab(context, ref, l10n, host: false),
+      ),
+    ],
   ];
 }
+
+/// Start or join a realtime Matrix session. The outcome — the host's invite
+/// dialog, a guest going live, or a failure — is surfaced by [listenMatrixCollab]
+/// on the phase transition, because a guest only goes active once the baseline
+/// arrives over the sync loop, well after this returns.
+Future<void> _beginMatrixCollab(
+  BuildContext context,
+  WidgetRef ref,
+  AppLocalizations l10n, {
+  required bool host,
+}) async {
+  final notifier = ref.read(collabSessionProvider.notifier);
+  if (host) {
+    await notifier.hostMatrix();
+    return;
+  }
+  final link = await promptMatrixInvite(context, l10n);
+  if (link == null || !context.mounted) return;
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(l10n.d('Verbinden met de samenwerking…'))),
+  );
+  await notifier.joinMatrix(link);
+}
+
+/// Copy the current Matrix invite link again (the host may need to re-share it).
+Future<void> _copyInvite(
+  BuildContext context,
+  WidgetRef ref,
+  AppLocalizations l10n,
+) async {
+  final link = ref.read(collabSessionProvider).inviteLink;
+  if (link == null) return;
+  await Clipboard.setData(ClipboardData(text: link));
+  if (!context.mounted) return;
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(l10n.d('Uitnodigingslink gekopieerd.'))),
+  );
+}
+
+/// Surface the outcome of a Matrix session as it settles: the host's invite
+/// dialog when it goes active, a "you are live" note for a guest, and the
+/// localised reason on failure. Top-level and called once from the layout build,
+/// like [listenCollabAuthorityChange]; it ignores WebDAV sessions (`isMatrix`).
+void listenMatrixCollab(
+  WidgetRef ref,
+  BuildContext context,
+  AppLocalizations l10n,
+) {
+  ref.listen(collabSessionProvider, (prev, next) {
+    if (!next.isMatrix || prev?.phase == next.phase) return;
+    switch (next.phase) {
+      case CollabPhase.active:
+        if (next.role == CollabRole.host && next.inviteLink != null) {
+          showMatrixInviteDialog(context, l10n, next.inviteLink!);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(l10n.d('Je doet nu live mee aan de samenwerking.')),
+            ),
+          );
+        }
+      case CollabPhase.failed:
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(_matrixCollabError(next.error, l10n))),
+        );
+      case CollabPhase.connecting:
+      case CollabPhase.idle:
+        break;
+    }
+  });
+}
+
+/// A Matrix session failure key mapped to a message that says what to do next.
+String _matrixCollabError(
+  String? error,
+  AppLocalizations l10n,
+) => switch (error) {
+  'no-matrix-account' => l10n.d(
+    'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.',
+  ),
+  'no-deck' => l10n.d('Open eerst een presentatie om aan samen te werken.'),
+  'bad-invite' => l10n.d('Dat is geen geldige uitnodigingslink.'),
+  'join-timeout' => l10n.d(
+    'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.',
+  ),
+  'matrix-auth' => l10n.d(
+    'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.',
+  ),
+  'matrix-network' => l10n.d('De Matrix-homeserver is niet bereikbaar.'),
+  _ => l10n.d('Realtime samenwerken is mislukt.'),
+};
 
 Future<void> _beginCollab(
   BuildContext context,

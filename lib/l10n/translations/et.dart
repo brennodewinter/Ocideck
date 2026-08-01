@@ -1762,6 +1762,31 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Dat is geen geldige uitnodigingslink.': 'See ei ole kehtiv kutselink.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Matrixi homeserver ei ole kättesaadav.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Võõrustaja ei vastanud õigel ajal. Kontrolli linki ja seda, kas võõrustaja on veel võrgus.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Jaga seda linki nendega, keda soovid kaasata. Igaüks, kellel on link, saab seansiga liituda — nii et jaga seda ainult inimestega, keda usaldad. Sisu jääb otsast otsani krüpteerituks; homeserver näeb ainult krüpteeritud andmeid.',
+  'Deelnemen': 'Liitu',
+  'Deelnemen via een link': 'Liitu lingi kaudu',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Sinu Matrixi kontot ei aktsepteerita — kontrolli juurdepääsuluba jaotises Seaded.',
+  'Je doet nu live mee aan de samenwerking.': 'Teed nüüd reaalajas koostööd.',
+  'Nodig mede-auteurs uit': 'Kutsu kaasautoreid',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Ava esmalt esitlus, et koostööd teha.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Kleebi kutselink, mille võõrustaja sulle saatis. Nii avad sama esitluse ja teed reaalajas koostööd.',
+  'Realtime samenwerken is mislukt.': 'Reaalajas koostöö ebaõnnestus.',
+  'Realtime samenwerken starten': 'Alusta reaalajas koostööd',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Seadista esmalt Matrixi konto jaotises Seaded → Koostöö.',
+  'Uitnodigingslink': 'Kutselink',
+  'Uitnodigingslink gekopieerd.': 'Kutselink kopeeritud.',
+  'Uitnodigingslink kopiëren': 'Kopeeri kutselink',
+  'Verbinden met de samenwerking…': 'Ühendamine koostööga…',
   'Access-token': 'Juurdepääsuluba',
   'Apparaat-id': 'Seadme ID',
   'Gebruikers-id': 'Kasutaja ID',

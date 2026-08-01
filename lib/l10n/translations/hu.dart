@@ -1775,6 +1775,33 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Ez nem érvényes meghívó hivatkozás.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'A Matrix-homeserver nem érhető el.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'A házigazda nem válaszolt időben. Ellenőrizd a hivatkozást, és hogy a házigazda még elérhető-e.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Oszd meg ezt a hivatkozást azokkal, akikkel együtt szeretnél dolgozni. Bárki, akinél megvan a hivatkozás, beléphet a munkamenetbe — ezért csak olyanokkal oszd meg, akikben megbízol. A tartalom végponttól végpontig titkosított marad; a homeserver csak titkosított adatokat lát.',
+  'Deelnemen': 'Csatlakozás',
+  'Deelnemen via een link': 'Csatlakozás hivatkozással',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'A Matrix-fiókodat elutasítja — ellenőrizd a hozzáférési tokent a Beállításokban.',
+  'Je doet nu live mee aan de samenwerking.': 'Most élőben működsz együtt.',
+  'Nodig mede-auteurs uit': 'Társszerzők meghívása',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Először nyiss meg egy bemutatót az együttműködéshez.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Illeszd be a meghívó hivatkozást, amelyet a házigazda küldött. Ezzel ugyanazt a bemutatót nyitod meg, és élőben működsz együtt.',
+  'Realtime samenwerken is mislukt.':
+      'A valós idejű együttműködés nem sikerült.',
+  'Realtime samenwerken starten': 'Valós idejű együttműködés indítása',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Először állíts be egy Matrix-fiókot a Beállítások → Együttműködés menüben.',
+  'Uitnodigingslink': 'Meghívó hivatkozás',
+  'Uitnodigingslink gekopieerd.': 'Meghívó hivatkozás másolva.',
+  'Uitnodigingslink kopiëren': 'Meghívó hivatkozás másolása',
+  'Verbinden met de samenwerking…': 'Csatlakozás az együttműködéshez…',
   'Access-token': 'Hozzáférési token',
   'Apparaat-id': 'Eszközazonosító',
   'Gebruikers-id': 'Felhasználói azonosító',

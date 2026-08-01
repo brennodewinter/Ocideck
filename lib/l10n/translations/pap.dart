@@ -730,6 +730,33 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Dat is geen geldige uitnodigingslink.':
+      'Esaki no ta un link di invitashon válido.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'E homeserver di Matrix no ta alkansabel.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'E anfitrion no a reakshoná na tempu. Kontrolá e link i si e anfitrion ta ainda online.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Kompartí e link aki ku esnan ku bo ke laga kolaborá. Ken tin e link por drenta e seshon — p\'esei kompart\'é solamente ku hende ku bo ta konfia. E kontenido ta keda enkriptá end-to-end; e homeserver ta mira solamente datos enkriptá.',
+  'Deelnemen': 'Partisipá',
+  'Deelnemen via een link': 'Partisipá via un link',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Bo kuenta Matrix ta wòrdu rechasá — kontrolá e token di akseso na Konfigurashon.',
+  'Je doet nu live mee aan de samenwerking.':
+      'Awor bo ta partisipá na bibo den e kolaborashon.',
+  'Nodig mede-auteurs uit': 'Invitá ko-outornan',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Habri promé un presentashon pa kolaborá.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Pega e link di invitashon ku e anfitrion a mand\'é bo. Ku esaki bo ta habri e mesun presentashon i ta kolaborá na bibo.',
+  'Realtime samenwerken is mislukt.': 'Kolaborashon na tempu real a faya.',
+  'Realtime samenwerken starten': 'Kuminsá kolaborashon na tempu real',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Konfigurá promé un kuenta Matrix na Konfigurashon → Kolaborashon.',
+  'Uitnodigingslink': 'Link di invitashon',
+  'Uitnodigingslink gekopieerd.': 'Link di invitashon kopiá.',
+  'Uitnodigingslink kopiëren': 'Kopia link di invitashon',
+  'Verbinden met de samenwerking…': 'Konektando ku e kolaborashon…',
   'Access-token': 'Token di akseso',
   'Apparaat-id': 'ID di aparato',
   'Gebruikers-id': 'ID di usuario',

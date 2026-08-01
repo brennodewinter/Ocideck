@@ -1800,6 +1800,33 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Esta não é uma ligação de convite válida.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'O homeserver Matrix está inacessível.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'O anfitrião não respondeu a tempo. Verifica a ligação e se o anfitrião ainda está online.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Partilha esta ligação com quem queres pôr a colaborar. Quem tiver a ligação pode entrar na sessão — por isso, partilha-a apenas com pessoas em quem confias. O conteúdo permanece cifrado ponta a ponta; o homeserver só vê dados cifrados.',
+  'Deelnemen': 'Juntar-se',
+  'Deelnemen via een link': 'Juntar-se através de uma ligação',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'A tua conta Matrix é recusada — verifica o token de acesso nas Definições.',
+  'Je doet nu live mee aan de samenwerking.':
+      'Estás agora a colaborar ao vivo.',
+  'Nodig mede-auteurs uit': 'Convidar coautores',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Abre primeiro uma apresentação para colaborar.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Cola a ligação de convite que o anfitrião te enviou. Assim abres a mesma apresentação e colaboras ao vivo.',
+  'Realtime samenwerken is mislukt.': 'A colaboração em tempo real falhou.',
+  'Realtime samenwerken starten': 'Iniciar colaboração em tempo real',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Configura primeiro uma conta Matrix em Definições → Colaboração.',
+  'Uitnodigingslink': 'Ligação de convite',
+  'Uitnodigingslink gekopieerd.': 'Ligação de convite copiada.',
+  'Uitnodigingslink kopiëren': 'Copiar ligação de convite',
+  'Verbinden met de samenwerking…': 'A ligar à colaboração…',
   'Access-token': 'Token de acesso',
   'Apparaat-id': 'ID do dispositivo',
   'Gebruikers-id': 'ID de utilizador',

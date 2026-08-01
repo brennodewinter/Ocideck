@@ -1746,6 +1746,30 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Dat is geen geldige uitnodigingslink.': 'rI\'ghach link ngeb \'oH.',
+  'De Matrix-homeserver is niet bereikbaar.': 'SIchlaHbe\' Matrix homeserver.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'poH lI\'Daq jangbe\' pIn. link yInuD, \'ej online SaHtaH pIn \'e\' yInuD.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'DawI\'chuqmeH DaneHbogh nuvpu\'vaD link yInob. link ghajbogh nuv \'el laH Qu\'Daq — vaj Davoqbogh nuvpu\'vaD neH yInob. pat Hoch So\'lu\'taH ngaQtaH De\'; homeserver De\' So\'lu\'pu\' neH legh.',
+  'Deelnemen': 'yI\'el',
+  'Deelnemen via een link': 'link lo\'taHvIS yI\'el',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Dulajbe\' Matrix account — DuHmeyDaq \'elmeH token yInuD.',
+  'Je doet nu live mee aan de samenwerking.': 'DaH SIbI\' bItay\' vumtaH.',
+  'Nodig mede-auteurs uit': 'latlh ghItlhwI\'pu\' yIrI\'',
+  'Open eerst een presentatie om aan samen te werken.':
+      'bItay\' vummeH cha\'nob yIpoSmoH.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'pIn ngeHpu\'bogh rI\'ghach link yIghItlh. vaj cha\'nob rap DapoSmoH \'ej SIbI\' bItay\' vumtaH.',
+  'Realtime samenwerken is mislukt.': 'SIbI\' vumchuq lujpu\'.',
+  'Realtime samenwerken starten': 'SIbI\' vumchuq yItagh',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'wa\'DIch Matrix account yIcher: DuHmey → vumchuqghach.',
+  'Uitnodigingslink': 'rI\'ghach link',
+  'Uitnodigingslink gekopieerd.': 'rI\'ghach link vellu\'pu\'.',
+  'Uitnodigingslink kopiëren': 'rI\'ghach link yIvel',
+  'Verbinden met de samenwerking…': 'tay\' vum rarlu\'taH…',
   'Access-token': '\'elmeH token',
   'Apparaat-id': 'jan ID',
   'Gebruikers-id': 'lo\'wI\' ID',

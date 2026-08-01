@@ -730,6 +730,34 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Dat is geen geldige uitnodigingslink.':
+      'Ce n\'est pas un lien d\'invitation valide.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Le homeserver Matrix est injoignable.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'L\'hôte n\'a pas répondu à temps. Vérifiez le lien et si l\'hôte est encore en ligne.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Partagez ce lien avec les personnes que vous voulez faire collaborer. Quiconque possède le lien peut entrer dans la session — ne le partagez donc qu\'avec des personnes de confiance. Le contenu reste chiffré de bout en bout ; le homeserver ne voit que des données chiffrées.',
+  'Deelnemen': 'Rejoindre',
+  'Deelnemen via een link': 'Rejoindre via un lien',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Votre compte Matrix est refusé — vérifiez le jeton d\'accès dans les Paramètres.',
+  'Je doet nu live mee aan de samenwerking.':
+      'Vous collaborez maintenant en direct.',
+  'Nodig mede-auteurs uit': 'Inviter des coauteurs',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Ouvrez d\'abord une présentation pour collaborer.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Collez le lien d\'invitation que l\'hôte vous a envoyé. Vous ouvrez ainsi la même présentation et collaborez en direct.',
+  'Realtime samenwerken is mislukt.':
+      'Échec de la collaboration en temps réel.',
+  'Realtime samenwerken starten': 'Démarrer la collaboration en temps réel',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Configurez d\'abord un compte Matrix dans Paramètres → Collaboration.',
+  'Uitnodigingslink': 'Lien d\'invitation',
+  'Uitnodigingslink gekopieerd.': 'Lien d\'invitation copié.',
+  'Uitnodigingslink kopiëren': 'Copier le lien d\'invitation',
+  'Verbinden met de samenwerking…': 'Connexion à la collaboration…',
   'Access-token': 'Jeton d\'accès',
   'Apparaat-id': 'ID de l\'appareil',
   'Gebruikers-id': 'ID d\'utilisateur',
