@@ -1787,6 +1787,19 @@ const _dutchSourceAddCs = <String, String>{
   'Versturen': 'Odeslat',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Zatím žádné zprávy. Řekni něco svým spoluautorům.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Porovnej otisk každého zařízení přes důvěryhodný kanál — přečtěte si ho navzájem nahlas nebo ho pošli cestou, které důvěřuješ. Pokud souhlasí, označ zařízení jako ověřené; zůstane ověřené i v pozdější relaci. Pokud se liší, přeruš spolupráci.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Identita tohoto zařízení se liší od té, kterou jsi dříve ověřil — někdo může být uprostřed. Přeruš spolupráci, pokud si nejsi jistý, že bylo toto zařízení znovu nastaveno.',
+  'Geverifieerd': 'Ověřeno',
+  'Wijkt af': 'Liší se',
+  'Niet geverifieerd': 'Neověřeno',
+  'Markeer als geverifieerd': 'Označit jako ověřené',
+  'Verificatie intrekken': 'Zrušit ověření',
+  'Toch opnieuw vertrouwen': 'Přesto znovu důvěřovat',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Ještě není ověřeno každé zařízení v této spolupráci. Porovnej otisky, aby sis byl jistý, s kým pracuješ.',
+  'Verifiëren': 'Ověřit',
   'Deelnemers verifiëren': 'Ověřit účastníky',
   '(dit apparaat)': '(toto zařízení)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

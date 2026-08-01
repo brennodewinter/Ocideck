@@ -196,13 +196,13 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                   ...collabChatRail(ref),
                 ],
               );
-              if (!deck.finalized) return workspace;
-              // Read-only lock (§8 A1): een afgerond deck blijft zichtbaar en
-              // exporteerbaar, maar niet bewerkbaar. De banner maakt dat
-              // duidelijk; de harde grendel zit in DeckNotifier._mutate.
+              // Banners stack above the workspace: the collab verification
+              // prompt (self-hiding — see CollabVerifyBanner) and the read-only
+              // finalized lock.
               return Column(
                 children: [
-                  _finalizedBanner(context, l10n),
+                  const CollabVerifyBanner(),
+                  if (deck.finalized) _finalizedBanner(context, l10n),
                   Expanded(child: workspace),
                 ],
               );

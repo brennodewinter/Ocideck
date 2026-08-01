@@ -2761,6 +2761,19 @@ const _dutchSourceAddTr = <String, String>{
   'Versturen': 'Gönder',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Henüz mesaj yok. Ortak yazarlarına bir şeyler söyle.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Her cihazın parmak izini güvenilir bir kanaldan karşılaştırın — birbirinize okuyun ya da güvendiğiniz bir yoldan gönderin. Eşleşiyorsa cihazı doğrulanmış olarak işaretleyin; sonraki bir oturumda da doğrulanmış kalır. Farklıysa iş birliğini kesin.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Bu cihazın kimliği daha önce doğruladığınızdan farklı — araya biri girmiş olabilir. Bu cihazın yeniden kurulduğundan emin değilseniz iş birliğini kesin.',
+  'Geverifieerd': 'Doğrulandı',
+  'Wijkt af': 'Farklı',
+  'Niet geverifieerd': 'Doğrulanmadı',
+  'Markeer als geverifieerd': 'Doğrulanmış olarak işaretle',
+  'Verificatie intrekken': 'Doğrulamayı geri al',
+  'Toch opnieuw vertrouwen': 'Yine de tekrar güven',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Bu iş birliğindeki her cihaz henüz doğrulanmadı. Kiminle çalıştığınızdan emin olmak için parmak izlerini karşılaştırın.',
+  'Verifiëren': 'Doğrula',
   'Deelnemers verifiëren': 'Katılımcıları doğrula',
   '(dit apparaat)': '(bu cihaz)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

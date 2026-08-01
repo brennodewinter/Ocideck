@@ -1819,6 +1819,19 @@ const _dutchSourceAddGa = <String, String>{
   'Versturen': 'Seol',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Gan teachtaireachtaí go fóill. Abair rud éigin le do chomhúdair.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Cuir méarlorg gach gléis i gcomparáid trí bhealach iontaofa — léigí dá chéile é, nó seol é trí shlí a bhfuil muinín agat aisti. Má mheaitseálann sé, marcáil an gléas mar fhíoraithe; fanfaidh sé fíoraithe, i seisiún níos déanaí san áireamh. Má tá difríocht ann, bris an comhoibriú.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Tá aitheantas an ghléis seo difriúil ón méid a d\'fhíoraigh tú níos luaithe — b\'fhéidir go bhfuil duine éigin sa lár. Bris an comhoibriú, mura bhfuil tú cinnte gur socraíodh an gléas seo arís.',
+  'Geverifieerd': 'Fíoraithe',
+  'Wijkt af': 'Difriúil',
+  'Niet geverifieerd': 'Gan fíorú',
+  'Markeer als geverifieerd': 'Marcáil mar fhíoraithe',
+  'Verificatie intrekken': 'Cúlghair an fíorú',
+  'Toch opnieuw vertrouwen': 'Bíodh muinín agat arís mar sin féin',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Níl gach gléas sa chomhoibriú seo fíoraithe fós. Cuir na méarloirg i gcomparáid le bheith cinnte cé leis a bhfuil tú ag obair.',
+  'Verifiëren': 'Fíoraigh',
   'Deelnemers verifiëren': 'Fíoraigh na rannpháirtithe',
   '(dit apparaat)': '(an gléas seo)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

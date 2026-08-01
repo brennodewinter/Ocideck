@@ -17,6 +17,7 @@ export 'collab_session.dart';
 export 'collab_session_controller.dart';
 export 'collab_session_launch.dart';
 export 'collab_snapshot.dart';
+export 'collab_trust_store.dart';
 export 'collab_transport.dart';
 export 'deck_op.dart';
 export 'matrix_collab_launch.dart';

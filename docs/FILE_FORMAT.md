@@ -2114,6 +2114,18 @@ them together: a signature with no seal has nothing to anchor it, and a seal
 with no signer does not say who stands behind it. Two files would mainly mean
 one of them can go missing.
 
+> **Planned — cryptographic provenance (`provenance` key).** A designed, not yet
+> implemented, addition: an optional owner *herkomstbewijs* — an Ed25519 signature
+> from the collaboration device identity over this same `hash`, so a recipient who
+> verified that identity's fingerprint out-of-band can confirm the deck was signed
+> by that holder. It lands as a `provenance` key in this sidecar (opaque → beside
+> the file, never in the `.md`; added without raising `version`), independent of
+> the human `signature` block above. It is *herkomstbewijs*, not an eIDAS
+> electronic signature. Full design, preimage and test vector:
+> [`design/PROVENANCE_SIGNATURE.md`](design/PROVENANCE_SIGNATURE.md)
+> (COLLABORATION Phase 2, issue #978). This row is promoted into the table above
+> when the code ships.
+
 #### How to verify the seal yourself
 
 For `"form": "file-bytes-v1"` the hash is a plain SHA-512 over the **bytes of

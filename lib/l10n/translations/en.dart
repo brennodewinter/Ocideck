@@ -924,6 +924,19 @@ const _dutchSourceAddEn = {
   'Versturen': 'Send',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'No messages yet. Say something to your co-authors.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Compare each device\'s fingerprint over a trusted channel — read it out to each other, or send it by a route you trust. If it matches, mark the device as verified; it will then stay verified, including in a later session. If it differs, break off the collaboration.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'This device\'s identity differs from what you verified earlier — someone may be in the middle. Break off the collaboration, unless you are certain this device has been set up again.',
+  'Geverifieerd': 'Verified',
+  'Wijkt af': 'Differs',
+  'Niet geverifieerd': 'Not verified',
+  'Markeer als geverifieerd': 'Mark as verified',
+  'Verificatie intrekken': 'Revoke verification',
+  'Toch opnieuw vertrouwen': 'Trust again anyway',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Not every device in this collaboration is verified yet. Compare the fingerprints to be sure who you are working with.',
+  'Verifiëren': 'Verify',
   'Deelnemers verifiëren': 'Verify participants',
   '(dit apparaat)': '(this device)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

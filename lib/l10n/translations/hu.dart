@@ -1788,6 +1788,19 @@ const _dutchSourceAddHu = <String, String>{
   'Versturen': 'Küldés',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Még nincsenek üzenetek. Mondj valamit a társszerzőidnek.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Hasonlítsd össze minden eszköz ujjlenyomatát megbízható csatornán — olvassátok fel egymásnak, vagy küldd olyan úton, amelyben megbízol. Ha egyezik, jelöld az eszközt ellenőrzöttként; ezután ellenőrzött marad, egy későbbi munkamenetben is. Ha eltér, szakítsd meg az együttműködést.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Ennek az eszköznek az azonossága eltér attól, amit korábban ellenőriztél — lehet, hogy valaki közbeékelődött. Szakítsd meg az együttműködést, hacsak nem vagy biztos abban, hogy ezt az eszközt újra beállították.',
+  'Geverifieerd': 'Ellenőrizve',
+  'Wijkt af': 'Eltér',
+  'Niet geverifieerd': 'Nincs ellenőrizve',
+  'Markeer als geverifieerd': 'Megjelölés ellenőrzöttként',
+  'Verificatie intrekken': 'Ellenőrzés visszavonása',
+  'Toch opnieuw vertrouwen': 'Mégis bízz meg újra',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Ebben az együttműködésben még nem minden eszköz ellenőrzött. Hasonlítsd össze az ujjlenyomatokat, hogy biztos legyél, kivel dolgozol.',
+  'Verifiëren': 'Ellenőrzés',
   'Deelnemers verifiëren': 'Résztvevők ellenőrzése',
   '(dit apparaat)': '(ez az eszköz)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

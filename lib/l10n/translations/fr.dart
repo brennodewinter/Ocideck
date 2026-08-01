@@ -743,6 +743,19 @@ const _dutchSourceAddFr = {
   'Versturen': 'Envoyer',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Aucun message pour l\'instant. Dites quelque chose à vos coauteurs.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Comparez l\'empreinte de chaque appareil via un canal de confiance — lisez-la-vous mutuellement, ou envoyez-la par une voie que vous jugez sûre. Si elle correspond, marquez l\'appareil comme vérifié ; il restera vérifié, y compris lors d\'une session ultérieure. Si elle diffère, rompez la collaboration.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'L\'identité de cet appareil diffère de ce que vous aviez vérifié auparavant — quelqu\'un s\'est peut-être interposé. Rompez la collaboration, sauf si vous êtes certain que cet appareil a été reconfiguré.',
+  'Geverifieerd': 'Vérifié',
+  'Wijkt af': 'Diffère',
+  'Niet geverifieerd': 'Non vérifié',
+  'Markeer als geverifieerd': 'Marquer comme vérifié',
+  'Verificatie intrekken': 'Révoquer la vérification',
+  'Toch opnieuw vertrouwen': 'Faire confiance à nouveau malgré tout',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Tous les appareils de cette collaboration ne sont pas encore vérifiés. Comparez les empreintes pour être sûr de savoir avec qui vous travaillez.',
+  'Verifiëren': 'Vérifier',
   'Deelnemers verifiëren': 'Vérifier les participants',
   '(dit apparaat)': '(cet appareil)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

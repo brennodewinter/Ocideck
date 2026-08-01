@@ -1784,6 +1784,19 @@ const _dutchSourceAddId = <String, String>{
   'Versturen': 'Kirim',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Belum ada pesan. Katakan sesuatu kepada rekan penulismu.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Bandingkan sidik jari setiap perangkat melalui saluran tepercaya — bacakan satu sama lain, atau kirim lewat jalur yang kamu percaya. Jika cocok, tandai perangkat sebagai terverifikasi; perangkat akan tetap terverifikasi, termasuk pada sesi berikutnya. Jika berbeda, hentikan kolaborasi.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Identitas perangkat ini berbeda dari yang kamu verifikasi sebelumnya — mungkin ada seseorang di tengah. Hentikan kolaborasi, kecuali kamu yakin perangkat ini telah disiapkan ulang.',
+  'Geverifieerd': 'Terverifikasi',
+  'Wijkt af': 'Berbeda',
+  'Niet geverifieerd': 'Belum terverifikasi',
+  'Markeer als geverifieerd': 'Tandai sebagai terverifikasi',
+  'Verificatie intrekken': 'Cabut verifikasi',
+  'Toch opnieuw vertrouwen': 'Tetap percayai lagi',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Belum semua perangkat dalam kolaborasi ini terverifikasi. Bandingkan sidik jari untuk memastikan dengan siapa kamu bekerja.',
+  'Verifiëren': 'Verifikasi',
   'Deelnemers verifiëren': 'Verifikasi peserta',
   '(dit apparaat)': '(perangkat ini)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

@@ -100,16 +100,24 @@ class MatrixCollabLaunch {
       CollabParticipant(
         userId: ownUserId,
         deviceId: own.deviceId,
+        identityKey: own.identityKey,
         fingerprint: deviceFingerprint(own.identityKey),
         isSelf: true,
+        trust: TrustState.verified,
       ),
+      // A device publishes its own `nl.ocideck.device`, so the key exchange can
+      // read our own device back as a "peer". Drop it: it is already listed as
+      // self above, and left in it would show up as an unverified device you can
+      // never verify (and would keep the verification banner up forever).
       for (final peer in keyExchange.peers)
-        CollabParticipant(
-          userId: peer.userId,
-          deviceId: peer.keys.deviceId,
-          fingerprint: deviceFingerprint(peer.keys.identityKey),
-          isSelf: false,
-        ),
+        if (peer.keys.deviceId != own.deviceId)
+          CollabParticipant(
+            userId: peer.userId,
+            deviceId: peer.keys.deviceId,
+            identityKey: peer.keys.identityKey,
+            fingerprint: deviceFingerprint(peer.keys.identityKey),
+            isSelf: false,
+          ),
     ];
   }
 

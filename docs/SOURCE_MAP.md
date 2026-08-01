@@ -597,11 +597,20 @@ when the owner returns.
   re-opening them in `retryPending` (driven from `syncNow`), the same ordering
   fix the snapshot channel uses. Not authoritative — sealed without a signature.
 - `collab_participant.dart` — `CollabParticipant` (a device in a session: user id,
-  device id, fingerprint, is-self) and `deviceFingerprint`, the readable
-  uppercase-hex-in-groups-of-four rendering of an Ed25519 identity key. The
-  binding check already defeats a relay swapping *one* key before a peer enters
-  the directory; the fingerprint is the human out-of-band compare that also
-  catches a homeserver substituting *both* keys (SELF_ENCRYPTED_RELAY.md §4.3).
+  device id, raw identity key, fingerprint, is-self, and its `TrustState`) and
+  `deviceFingerprint`, the readable uppercase-hex-in-groups-of-four rendering of an
+  Ed25519 identity key. The binding check already defeats a relay swapping *one*
+  key before a peer enters the directory; the fingerprint is the human out-of-band
+  compare that also catches a homeserver substituting *both* keys
+  (SELF_ENCRYPTED_RELAY.md §4.3). `TrustState` is unverified / verified / mismatch.
+- `collab_trust_store.dart` — `CollabTrustStore`, the trust-on-first-use pin store
+  for device verification (COLLABORATION Phase 2 "Blok A"; SELF_ENCRYPTED_RELAY.md
+  §5.3). Per local account (keyed on homeserver + user id in the keychain), it
+  remembers which peer identity keys were pinned as verified, so a device compared
+  once stays verified across sessions. `evaluate` returns the `TrustState`; a
+  pinned device presenting a *different* key is a `mismatch`, the loud case. The
+  pinned values are public keys, co-located in the keychain only so the collab
+  layer keeps one persistence mechanism.
 - `collab_device_store.dart` — persists a device's collaboration key material
   (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §8, phase P-D). A device is
   defined by two random 32-byte seeds (`CollabDeviceSeeds`, from `Random.secure`);
@@ -870,6 +879,7 @@ when the owner returns.
 - `asset_origin_badge.dart` — `AssetOriginBadge`: makes visible what happens to a slide's media once the presentation is passed on. Says what the origin *means* rather than where the file sits, with the consequence and the way out in the tooltip. Deliberately confined to the editor — the rendered slide is also what the audience and the export see, and a work instruction does not belong there.
 - `privacy_badge.dart` — `PrivacyBadge`, the bare `PrivacyKatMark`, and the `privacyKatSvg` mark: the non-blocking marker (with an explanation on hover) for a spot where personal data is pointed at or something leaves the device. Used by the status bar's remote-origin badge, the export-readiness chip's privacy warnings, and the Security tab's online-CVE switch.
 - `privacy_statement_content.dart` — Privacy/license content shared by the consent and settings dialogs.
+- `collab_verify_banner.dart` — `CollabVerifyBanner` (provider-driven) and `CollabVerifyBannerView` (its look): the slim "not every device is verified yet" prompt above the workspace during a live realtime session, one tap opening the fingerprint comparison (COLLABORATION Phase 2 "Blok A"). Self-hiding — renders nothing unless a Matrix session is active and still has an unverified or mismatched peer; disappears once every device is pinned (`CollabSessionState.trustRevision`).
 - `language_flag.dart` — `languageFlag`/`languageOptionRow`: the small flag beside a language in the pickers. Most languages get a platform flag emoji; Frisian a bundled image of the Frisian flag (a regional flag, not a protected mark); Klingon a neutral letter badge with its ISO 639-3 code — the Klingon trefoil is someone else's emblem, and reproducing it as artwork in every distributed binary is not nominative use.
 - `duplicate_badges.dart` — The shared badges and `formatModifiedDate` for the duplicate lists: which copy is the newest, and which entries are name-mates rather than duplicates.
 - `document_signature_view.dart` — `DocumentSignatureView` plus the decoder for an embedded `data:…;base64,…` signature image. The decoded bytes are memoised per URI so every caller gets the *same* `Uint8List`: `cappedMemoryImage` then compares equal across the export precache and the preview, which is what lets a drawn signature paint on the very first frame the rasteriser captures.

@@ -461,10 +461,14 @@ void _verifyParticipants(
   WidgetRef ref,
   AppLocalizations l10n,
 ) {
-  final participants = ref
-      .read(collabSessionProvider.notifier)
-      .matrixParticipants();
-  showMatrixParticipantsDialog(context, l10n, participants);
+  final notifier = ref.read(collabSessionProvider.notifier);
+  showMatrixParticipantsDialog(
+    context,
+    l10n,
+    participants: notifier.matrixParticipants,
+    onPin: notifier.pinParticipant,
+    onUnpin: notifier.unpinParticipant,
+  );
 }
 
 /// Copy the current Matrix invite link again (the host may need to re-share it).

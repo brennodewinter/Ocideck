@@ -134,6 +134,7 @@ import 'panels/preview_panel.dart';
 import 'panels/collab_chat_panel.dart';
 import 'panels/slide_list_panel.dart';
 import 'privacy_badge.dart';
+import 'collab_verify_banner.dart';
 import 'presentation/fullscreen_presenter.dart';
 import 'slides/slide_preview.dart';
 

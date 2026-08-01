@@ -1787,6 +1787,19 @@ const _dutchSourceAddGsw = <String, String>{
   'Versturen': 'Schicke',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Na kei Nachrichte. Sag dine Mitautore öppis.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Vergliich de Fingerabdruck vo jedem Grät über en vertrouenswürdige Kanal — läset en enand vor oder schicket en über en Wäg, wo du vertrousch. Stimmt er überii, markier s Grät als verifiziert; es bliibt denn verifiziert, au i re spätere Sitzig. Wiicht er ab, denn brich d Zämmenarbet ab.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'D Identität vo däm Grät wiicht ab vo dem, wo du früener verifiziert häsch — villicht sitzt öpper dezwüsche. Brich d Zämmenarbet ab, usser du bisch sicher, ass das Grät nöi iigrichtet worde isch.',
+  'Geverifieerd': 'Verifiziert',
+  'Wijkt af': 'Wiicht ab',
+  'Niet geverifieerd': 'Nöd verifiziert',
+  'Markeer als geverifieerd': 'Als verifiziert markiere',
+  'Verificatie intrekken': 'Verifizierig zrugghole',
+  'Toch opnieuw vertrouwen': 'Trotzdäm wider vertroue',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Na nöd jedes Grät i dere Zämmenarbet isch verifiziert. Vergliich d Fingerabdrück, für sicher z sii, mit wem du schaffsch.',
+  'Verifiëren': 'Verifiziere',
   'Deelnemers verifiëren': 'Teilnehmer verifiziere',
   '(dit apparaat)': '(das Grät)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

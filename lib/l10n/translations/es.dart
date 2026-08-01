@@ -740,6 +740,19 @@ const _dutchSourceAddEs = {
   'Versturen': 'Enviar',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Aún no hay mensajes. Di algo a tus coautores.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Compara la huella de cada dispositivo a través de un canal de confianza — léansela mutuamente o envíala por una vía en la que confíes. Si coincide, marca el dispositivo como verificado; seguirá verificado, también en una sesión posterior. Si difiere, interrumpe la colaboración.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'La identidad de este dispositivo difiere de la que verificaste antes — puede que haya alguien en medio. Interrumpe la colaboración, salvo que tengas la certeza de que este dispositivo se ha vuelto a configurar.',
+  'Geverifieerd': 'Verificado',
+  'Wijkt af': 'Difiere',
+  'Niet geverifieerd': 'Sin verificar',
+  'Markeer als geverifieerd': 'Marcar como verificado',
+  'Verificatie intrekken': 'Revocar la verificación',
+  'Toch opnieuw vertrouwen': 'Confiar de nuevo de todos modos',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Todavía no todos los dispositivos de esta colaboración están verificados. Compara las huellas para estar seguro de con quién trabajas.',
+  'Verifiëren': 'Verificar',
   'Deelnemers verifiëren': 'Verificar participantes',
   '(dit apparaat)': '(este dispositivo)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

@@ -1791,6 +1791,19 @@ const _dutchSourceAddLt = <String, String>{
   'Versturen': 'Siųsti',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Kol kas žinučių nėra. Parašyk ką nors savo bendraautoriams.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Palygink kiekvieno įrenginio kontrolinį kodą per patikimą kanalą — perskaitykite jį vienas kitam arba atsiųsk keliu, kuriuo pasitiki. Jei sutampa, pažymėk įrenginį kaip patvirtintą; jis liks patvirtintas ir vėlesniame seanse. Jei skiriasi, nutrauk bendradarbiavimą.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Šio įrenginio tapatybė skiriasi nuo tos, kurią patvirtinai anksčiau — galbūt kažkas yra viduryje. Nutrauk bendradarbiavimą, nebent esi tikras, kad šis įrenginys buvo sukonfigūruotas iš naujo.',
+  'Geverifieerd': 'Patvirtinta',
+  'Wijkt af': 'Skiriasi',
+  'Niet geverifieerd': 'Nepatvirtinta',
+  'Markeer als geverifieerd': 'Žymėti kaip patvirtintą',
+  'Verificatie intrekken': 'Atšaukti patvirtinimą',
+  'Toch opnieuw vertrouwen': 'Vis tiek pasitikėti vėl',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Dar ne kiekvienas įrenginys šioje bendradarbystėje patvirtintas. Palygink kontrolinius kodus, kad būtum tikras, su kuo dirbi.',
+  'Verifiëren': 'Patvirtinti',
   'Deelnemers verifiëren': 'Patikrinti dalyvius',
   '(dit apparaat)': '(šis įrenginys)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

@@ -42,6 +42,7 @@ class CollabSessionState {
     this.isMatrix = false,
     this.presence = const [],
     this.chatMessages = const [],
+    this.trustRevision = 0,
   });
 
   final CollabPhase phase;
@@ -76,6 +77,11 @@ class CollabSessionState {
   /// and are sent; empty outside an active Matrix session.
   final List<ChatMessage> chatMessages;
 
+  /// Bumped whenever a device is pinned or unpinned, so the verification banner
+  /// and dialog re-read the trust store (the pins live in the store, not here —
+  /// this is only the change signal). Matrix, Blok A.
+  final int trustRevision;
+
   bool get isActive => phase == CollabPhase.active;
   bool get isConnecting => phase == CollabPhase.connecting;
 
@@ -94,6 +100,7 @@ class CollabSessionState {
     bool? isMatrix,
     List<PeerPresence>? presence,
     List<ChatMessage>? chatMessages,
+    int? trustRevision,
   }) => CollabSessionState(
     phase: phase ?? this.phase,
     role: role ?? this.role,
@@ -103,6 +110,7 @@ class CollabSessionState {
     isMatrix: isMatrix ?? this.isMatrix,
     presence: presence ?? this.presence,
     chatMessages: chatMessages ?? this.chatMessages,
+    trustRevision: trustRevision ?? this.trustRevision,
   );
 }
 
@@ -127,6 +135,7 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
   CollabSessionController? _controller;
   HandoverCoordinator? _coordinator;
   MatrixCollabLaunch? _matrixLaunch;
+  CollabTrustStore? _trustStore;
   StreamSubscription<DeckState>? _deckSub;
   StreamSubscription<void>? _authoritySub;
   StreamSubscription<EditorState>? _presenceSub;
@@ -283,6 +292,17 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
       }
       if (_disposed) return await launch.dispose();
       _matrixLaunch = launch;
+      // Load the pinned-identity trust store for this account so the
+      // verification UI can show verified/unverified/mismatch synchronously
+      // (Blok A). A failure to load degrades to "nothing verified yet".
+      final trust = CollabTrustStore(
+        secrets,
+        account.homeserverUrl,
+        account.userId,
+      );
+      await trust.load();
+      if (_disposed) return await launch.dispose();
+      _trustStore = trust;
       launch.start();
       // The session is live now for a host and once the baseline arrives for a
       // guest. Finish off this call so `connecting` is observable and a guest
@@ -391,7 +411,48 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
     final launch = _matrixLaunch;
     final account = _ref.read(matrixAccountProvider);
     if (launch == null || account == null) return const [];
-    return launch.participants(account.userId);
+    final raw = launch.participants(account.userId);
+    final trust = _trustStore;
+    if (trust == null) return raw;
+    return [
+      for (final p in raw)
+        p.isSelf
+            ? p
+            : p.copyWith(
+                trust: trust.evaluate(p.userId, p.deviceId, p.identityKey),
+              ),
+    ];
+  }
+
+  /// True when at least one peer is not yet pinned as verified — the signal the
+  /// live session uses to show its "unverified device" banner (Blok A). A
+  /// [TrustState.mismatch] also counts: it is the loudest reason to look.
+  bool get hasUnverifiedParticipants => matrixParticipants().any(
+    (p) => !p.isSelf && p.trust != TrustState.verified,
+  );
+
+  /// Pin [participant]'s identity key as verified for the running account, so it
+  /// stays verified across sessions. No-op outside a Matrix session. Bumps
+  /// [CollabSessionState.trustRevision] so the banner and any listeners re-read.
+  Future<void> pinParticipant(CollabParticipant participant) async {
+    await _trustStore?.pin(
+      participant.userId,
+      participant.deviceId,
+      participant.identityKey,
+    );
+    _bumpTrustRevision();
+  }
+
+  /// Drop the pin for [participant] (back to unverified). No-op outside a Matrix
+  /// session.
+  Future<void> unpinParticipant(CollabParticipant participant) async {
+    await _trustStore?.unpin(participant.userId, participant.deviceId);
+    _bumpTrustRevision();
+  }
+
+  void _bumpTrustRevision() {
+    if (_disposed) return;
+    state = state.copyWith(trustRevision: state.trustRevision + 1);
   }
 
   /// Map a Matrix launch failure to a machine key the UI localises.
@@ -462,6 +523,7 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
     // controller is safe; the launch also stops its sync loop and transport.
     await _matrixLaunch?.dispose();
     _matrixLaunch = null;
+    _trustStore = null;
     _tab?.collabSession = null;
   }
 

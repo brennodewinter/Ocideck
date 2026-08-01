@@ -1759,6 +1759,19 @@ const _dutchSourceAddTlh = <String, String>{
   'Versturen': 'yIngeH',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'QIn tu\'lu\'be\'. latlh ghItlhwI\'pu\'lI\' vay\' tIja\'.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Hoch jan nID DavItlh \'e\' yInob voqbogh Hef Dat — latlhvaD yIjatlh, pagh Hef voqbogh Hef DaDIchbogh yIngeH. rap chugh, jan yInob \'ej lulaj; lulaj taH, ghItlh qaStaHvIS latlh session je. pIm chugh, tlhInganpu\' vangbogh yImev.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'nIHvam jan nughmey pIm nughmey DavItlhpu\'bogh wa\'Hu\' — vaj wa\' nuv joj ratlh \'e\' DuH. tlhInganpu\' vangbogh yImev, \'ach jan vam chu\' cherlu\'pu\' \'e\' DaSovchugh vaj Qapla\'.',
+  'Geverifieerd': 'lulaj',
+  'Wijkt af': 'pIm',
+  'Niet geverifieerd': 'lujbe\'',
+  'Markeer als geverifieerd': 'lulaj \'e\' yICho\'',
+  'Verificatie intrekken': 'lulaj yIchID Ha\'',
+  'Toch opnieuw vertrouwen': '\'ach ghItlh voq',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'DaH tlhInganpu\' vangbogh Hoch jan lujpu\'be\'. jan nIDmey yIcompare, Du\' \'Iv vumtaH \'e\' yISovqu\'.',
+  'Verifiëren': 'yIlaj',
   'Deelnemers verifiëren': 'tay\' vumwI\'pu\' tIngu\'',
   '(dit apparaat)': '(jan vam)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
