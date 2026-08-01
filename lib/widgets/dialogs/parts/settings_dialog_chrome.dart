@@ -366,6 +366,9 @@ extension _SettingsChrome on _SettingsDialogState {
                       // Integraties is OpenKAT (desktop); op web reveal't de
                       // module wél, maar zonder OpenKAT-tabblad.
                       openKatAvailable: supportsLocalProjectFolders,
+                      collaborationRevealed: ref.watch(
+                        collaborationRevealProvider,
+                      ),
                     ))
                       _NavItem(
                         section: section,

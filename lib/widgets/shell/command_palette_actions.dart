@@ -380,7 +380,11 @@ List<PaletteCommand> collabPaletteCommands(
   // §5.7); realtime Matrix needs only the app-global account (§6). Either or both
   // may be available — show what applies.
   final canWebdav = ref.read(collabSessionProvider.notifier).canCollaborate;
-  final hasMatrix = ref.read(matrixAccountProvider)?.isConfigured ?? false;
+  // Matrix host/join only when the module and its Matrix transport are on
+  // *and* an account is configured to host/join with.
+  final hasMatrix =
+      ref.read(matrixCollabActiveProvider) &&
+      (ref.read(matrixAccountProvider)?.isConfigured ?? false);
   return [
     if (canWebdav) ...[
       PaletteCommand(

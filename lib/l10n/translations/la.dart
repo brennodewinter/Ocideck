@@ -1787,6 +1787,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Realtime samenwerken': 'Collaboratio tempore reali',
+  'Manieren van verbinden': 'Modi coniungendi',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'In praesentatione viva per relatorem cifratum collabora. Implicite inactivum. Contentus a fine ad finem clavibus propriis OciDeck cifratur; servitor tantum data cifrata videt.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Collaboratio per homeserver Matrix ut relatorem. Rationem in scheda Collaboratio instrue. (Jitsi et XMPP sequentur.)',
   'Chat': 'Colloquium',
   'Chat openen': 'Aperi colloquium',
   'Chat sluiten': 'Claude colloquium',

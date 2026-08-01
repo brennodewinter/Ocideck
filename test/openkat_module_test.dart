@@ -113,6 +113,7 @@ void main() {
       aiRevealed: false,
       importRevealed: importRevealed,
       openKatAvailable: openKatAvailable,
+      collaborationRevealed: false,
     );
 
     test('met de module uit staat het tabblad er niet', () {

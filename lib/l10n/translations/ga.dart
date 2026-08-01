@@ -1806,6 +1806,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Realtime samenwerken': 'Comhoibriú fíor-ama',
+  'Manieren van verbinden': 'Bealaí ceangail',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Comhoibrigh beo ar láithreoireacht trí athsheachadán criptithe. Múchta de réir réamhshocraithe. Déantar an t-ábhar a chriptiú ó cheann go ceann le heochracha OciDeck féin; ní fheiceann an freastalaí ach sonraí criptithe.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Comhoibriú trí homeserver Matrix mar athsheachadán. Socraigh an cuntas sa chluaisín Comhoibriú. (Tá Jitsi agus XMPP le teacht.)',
   'Chat': 'Comhrá',
   'Chat openen': 'Oscail an comhrá',
   'Chat sluiten': 'Dún an comhrá',

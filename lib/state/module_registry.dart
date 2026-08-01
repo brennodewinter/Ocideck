@@ -17,6 +17,7 @@
 // onbereikbaar maken (#648, #731, #570).
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'collaboration_provider.dart';
 import 'info_safety_provider.dart';
 import 'online_storage_provider.dart';
 import 'import_module_provider.dart';
@@ -25,7 +26,14 @@ import 'settings_provider.dart';
 
 /// De optionele modules, in de volgorde waarin het Uitbreidingen-tabblad ze
 /// toont.
-enum ModuleId { infoSafety, ai, onlineStorage, imports, procesverbetering }
+enum ModuleId {
+  infoSafety,
+  ai,
+  onlineStorage,
+  imports,
+  procesverbetering,
+  collaboration,
+}
 
 /// Eén module in het register: wie hij is en waar zijn poorten staan.
 ///
@@ -99,5 +107,10 @@ final List<ModuleEntry> moduleRegistry = [
     id: ModuleId.procesverbetering,
     enabled: procesverbeteringEnabledProvider,
     revealed: procesverbeteringRevealProvider,
+  ),
+  ModuleEntry(
+    id: ModuleId.collaboration,
+    enabled: collaborationEnabledProvider,
+    revealed: collaborationRevealProvider,
   ),
 ];

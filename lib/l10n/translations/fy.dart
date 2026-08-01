@@ -731,6 +731,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Realtime samenwerken': 'Realtime gearwurkje',
+  'Manieren van verbinden': 'Manieren om te ferbinen',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Wurkje live gear oan in presintaasje fia in fersifere trochjefte. Standert út. De ynhâld wurdt end-to-end fersifere mei OciDeck syn eigen kaaien; de server sjocht allinne fersifere gegevens.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Gearwurkje fia in Matrix-homeserver as trochjefte. Stel it account yn op it ljepblêd Gearwurking. (Jitsi en XMPP folgje.)',
   'Chat': 'Chat',
   'Chat openen': 'Chat iepenje',
   'Chat sluiten': 'Chat slute',

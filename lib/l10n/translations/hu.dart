@@ -1775,6 +1775,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Realtime samenwerken': 'Valós idejű együttműködés',
+  'Manieren van verbinden': 'Csatlakozási módok',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Működj együtt élőben egy bemutatón egy titkosított továbbítón keresztül. Alapértelmezetten kikapcsolva. A tartalom végponttól végpontig titkosított OciDeck saját kulcsaival; a kiszolgáló csak titkosított adatokat lát.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Együttműködés egy Matrix-homeserveren keresztül továbbítóként. Állítsd be a fiókot az Együttműködés lapon. (Jitsi és XMPP hamarosan.)',
   'Chat': 'Csevegés',
   'Chat openen': 'Csevegés megnyitása',
   'Chat sluiten': 'Csevegés bezárása',

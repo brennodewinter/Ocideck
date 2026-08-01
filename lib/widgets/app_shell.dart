@@ -72,6 +72,7 @@ import '../state/deck_quality_provider.dart';
 import '../state/image_contrast_provider.dart';
 import '../state/image_privacy_provider.dart';
 import '../state/improvement_provider.dart';
+import '../state/collaboration_provider.dart';
 import '../state/matrix_client_provider.dart';
 import '../state/privacy_provider.dart';
 import '../state/provider_warmup.dart';

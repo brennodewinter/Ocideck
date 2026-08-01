@@ -1770,6 +1770,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Realtime samenwerken': 'Samarbete i realtid',
+  'Manieren van verbinden': 'Anslutningssätt',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Samarbeta live på en presentation via ett krypterat relä. Av som standard. Innehållet krypteras änd-till-änd med OciDecks egna nycklar; servern ser bara krypterade data.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Samarbete via en Matrix-homeserver som relä. Ställ in kontot på fliken Samarbete. (Jitsi och XMPP kommer.)',
   'Chat': 'Chatt',
   'Chat openen': 'Öppna chatten',
   'Chat sluiten': 'Stäng chatten',

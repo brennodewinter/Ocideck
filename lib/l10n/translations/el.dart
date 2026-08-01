@@ -1798,6 +1798,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Realtime samenwerken': 'Συνεργασία σε πραγματικό χρόνο',
+  'Manieren van verbinden': 'Τρόποι σύνδεσης',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Συνεργαστείτε ζωντανά σε μια παρουσίαση μέσω ενός κρυπτογραφημένου αναμεταδότη. Ανενεργό από προεπιλογή. Το περιεχόμενο κρυπτογραφείται από άκρο σε άκρο με τα δικά κλειδιά του OciDeck· ο διακομιστής βλέπει μόνο κρυπτογραφημένα δεδομένα.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Συνεργασία μέσω ενός homeserver Matrix ως αναμεταδότη. Ρυθμίστε τον λογαριασμό στην καρτέλα Συνεργασία. (Jitsi και XMPP έρχονται.)',
   'Chat': 'Συνομιλία',
   'Chat openen': 'Άνοιγμα συνομιλίας',
   'Chat sluiten': 'Κλείσιμο συνομιλίας',

@@ -1788,6 +1788,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Realtime samenwerken': 'Співпраця в реальному часі',
+  'Manieren van verbinden': 'Способи підключення',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Співпрацюйте наживо над презентацією через зашифрований ретранслятор. Типово вимкнено. Вміст шифрується наскрізно власними ключами OciDeck; сервер бачить лише зашифровані дані.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Співпраця через homeserver Matrix як ретранслятор. Налаштуйте обліковий запис на вкладці Співпраця. (Jitsi та XMPP згодом.)',
   'Chat': 'Чат',
   'Chat openen': 'Відкрити чат',
   'Chat sluiten': 'Закрити чат',

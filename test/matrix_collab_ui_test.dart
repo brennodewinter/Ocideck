@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/collab/collab_participant.dart';
 import 'package:ocideck/collab/matrix_presence.dart';
+import 'package:ocideck/state/collaboration_provider.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/matrix_settings.dart';
 import 'package:ocideck/state/matrix_client_provider.dart';
@@ -231,10 +232,39 @@ void main() {
       return labels;
     }
 
-    testWidgets('offers Matrix host/join when an account is configured', (
+    testWidgets(
+      'offers Matrix host/join when the module is on and an account is set',
+      (tester) async {
+        final labels = await labelsWith(tester, [
+          matrixCollabActiveProvider.overrideWithValue(true),
+          matrixAccountProvider.overrideWithValue(
+            const MatrixServer(
+              homeserverUrl: 'https://hs.example',
+              userId: '@u:hs.example',
+              deviceId: 'DEV1',
+            ),
+          ),
+        ]);
+        expect(labels, contains('Realtime samenwerken starten'));
+        expect(labels, contains('Deelnemen via een link'));
+      },
+    );
+
+    testWidgets('offers no Matrix commands without an account', (tester) async {
+      final labels = await labelsWith(tester, [
+        matrixCollabActiveProvider.overrideWithValue(true),
+        matrixAccountProvider.overrideWithValue(null),
+      ]);
+      expect(labels, isNot(contains('Realtime samenwerken starten')));
+      expect(labels, isNot(contains('Deelnemen via een link')));
+    });
+
+    testWidgets('offers no Matrix commands when the module is off', (
       tester,
     ) async {
+      // Account configured, but the module (or its Matrix toggle) is off.
       final labels = await labelsWith(tester, [
+        matrixCollabActiveProvider.overrideWithValue(false),
         matrixAccountProvider.overrideWithValue(
           const MatrixServer(
             homeserverUrl: 'https://hs.example',
@@ -242,14 +272,6 @@ void main() {
             deviceId: 'DEV1',
           ),
         ),
-      ]);
-      expect(labels, contains('Realtime samenwerken starten'));
-      expect(labels, contains('Deelnemen via een link'));
-    });
-
-    testWidgets('offers no Matrix commands without an account', (tester) async {
-      final labels = await labelsWith(tester, [
-        matrixAccountProvider.overrideWithValue(null),
       ]);
       expect(labels, isNot(contains('Realtime samenwerken starten')));
       expect(labels, isNot(contains('Deelnemen via een link')));
