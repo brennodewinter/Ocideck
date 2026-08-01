@@ -333,15 +333,11 @@ class _QuestionEditorState extends State<QuestionEditor> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
-              Icons.error_outline,
-              color: AppTheme.dangerFg,
-              size: 32,
-            ),
+            Icon(Icons.error_outline, color: AppTheme.dangerFg, size: 32),
             const SizedBox(height: 8),
             Text(
               l10n.d('Ongeldige vraag'),
-              style: const TextStyle(
+              style: TextStyle(
                 color: AppTheme.dangerFg,
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
