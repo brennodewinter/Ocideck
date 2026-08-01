@@ -129,6 +129,22 @@ class MatrixSession {
   final String accessToken;
 }
 
+/// The answer to `/account/whoami`: who an access token belongs to, and — when
+/// the homeserver reports it — which device it is bound to. The device id matters
+/// beyond display: the collaboration key-share is a to-device message addressed
+/// to `userId:deviceId`, so the account must carry the *token's own* device id or
+/// a co-author's key never arrives (SELF_ENCRYPTED_RELAY.md §4.3). This is why
+/// the account form fills it from here rather than asking the user to guess it.
+class MatrixWhoami {
+  const MatrixWhoami({required this.userId, this.deviceId});
+
+  final String userId;
+
+  /// The token's device id, or null when the homeserver omits it (the field is
+  /// optional in the CS spec).
+  final String? deviceId;
+}
+
 /// One timeline event delivered by `/sync`, reduced to what the relay reads.
 class MatrixTimelineEvent {
   const MatrixTimelineEvent({
@@ -252,10 +268,15 @@ class MatrixClient {
     return _sessionFrom(_ok(resp, json));
   }
 
-  /// Confirm who the current access token belongs to (`/account/whoami`).
-  Future<String> whoami() async {
+  /// Confirm who the current access token belongs to (`/account/whoami`) and,
+  /// when the homeserver reports it, which device it is bound to.
+  Future<MatrixWhoami> whoami() async {
     final json = await _request('GET', _url(const ['account', 'whoami']));
-    return _string(json, 'user_id');
+    final device = json['device_id'];
+    return MatrixWhoami(
+      userId: _string(json, 'user_id'),
+      deviceId: device is String && device.isNotEmpty ? device : null,
+    );
   }
 
   /// Invalidate the current access token server-side.

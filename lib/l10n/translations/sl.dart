@@ -1773,6 +1773,39 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Access-token': 'Dostopni žeton',
+  'Apparaat-id': 'ID naprave',
+  'Gebruikers-id': 'ID uporabnika',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserver je vrnil napako. Poskusite znova pozneje.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserver ni dosegljiv ali potrdilu ni zaupanja.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserver preusmerja na drug naslov — iz varnostnih razlogov mu ne sledi. Neposredno vnesite končni naslov.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserver prosi za trenutek potrpljenja. Kmalu poskusite znova.',
+  'De homeserver weigert dit token.': 'Homeserver zavrne ta žeton.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Ta naslov se ne odziva kot homeserver Matrix. Ali je URL pravilen?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Homeserver mora biti https: dostopni žeton potuje z vsako zahtevo.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Dostopni žeton je zavrnjen — preverite, ali ste ga pravilno prepisali in ali ni bil preklican.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Ustvarite dostopni žeton v svojem odjemalcu Matrix (na primer v Elementu pod Vse nastavitve → Pomoč in informacije) ali na svojem homeserverju. "Preizkusi povezavo" potrdi žeton in izpolni vaš ID uporabnika in ID naprave.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Potrebno, kadar homeserver teče v zasebnem ali domačem omrežju. Brez te oznake varnostno preverjanje zavrne zasebni naslov.',
+  'Realtime samenwerken (Matrix)': 'Sodelovanje v realnem času (Matrix)',
+  'Samenwerken': 'Sodelovanje',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Povezava uspešna — ID uporabnika in ID naprave izpolnjena',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Povezava uspešna, a homeserver ni vrnil ID naprave — vnesite ga sami, sicer ključi soavtorjev ne bodo prispeli.',
+  'Vul een access-token in': 'Vnesite dostopni žeton',
+  'Vul een geldige homeserver-URL in': 'Vnesite veljaven URL homeserverja',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Sodelujte v živo pri predstavitvi prek homeserverja Matrix kot šifriranega posrednika. Vsebina je šifrirana od konca do konca z lastnimi ključi OciDecka; strežnik vidi samo šifrirane podatke. Vnesite homeserver in drugje ustvarjen dostopni žeton — OciDeck nikoli ne zahteva vašega gesla. Žeton je shranjen šifrirano v zbirki ključev, ne poleg drugih nastavitev.',
+  'wordt door de test ingevuld': 'izpolni preizkus',
   'Versleuteld doorgeefluik (ontwerp)': 'Šifriran posredovalnik (zasnova)',
   'Meer documentatie op de repository': 'Več dokumentacije v repozitoriju',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

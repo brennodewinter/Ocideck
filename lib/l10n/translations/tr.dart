@@ -2748,6 +2748,39 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Access-token': 'Erişim belirteci',
+  'Apparaat-id': 'Cihaz kimliği',
+  'Gebruikers-id': 'Kullanıcı kimliği',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserver bir hata döndürdü. Daha sonra tekrar deneyin.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserver\'a ulaşılamıyor veya sertifikaya güvenilmiyor.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserver başka bir adrese yönlendiriyor — güvenlik nedeniyle bu izlenmez. Nihai adresi doğrudan girin.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserver biraz beklemenizi istiyor. Birazdan tekrar deneyin.',
+  'De homeserver weigert dit token.': 'Homeserver bu belirteci reddediyor.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Bu adres bir Matrix homeserver\'ı gibi yanıt vermiyor. URL doğru mu?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Bir homeserver https olmalı: erişim belirteci her istekle birlikte gider.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Erişim belirteci reddediliyor — doğru kopyaladığınızı ve iptal edilmediğini denetleyin.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Matrix istemcinizde (örneğin Element\'te Tüm ayarlar → Yardım ve bilgi altında) veya homeserver\'ınızda bir erişim belirteci oluşturun. "Bağlantıyı test et" belirteci doğrular ve kullanıcı kimliğinizi ve cihaz kimliğinizi doldurur.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Homeserver özel bir ağda veya ev ağında çalışıyorsa gereklidir. Bu işaret olmadan güvenlik denetimi özel bir adresi reddeder.',
+  'Realtime samenwerken (Matrix)': 'Gerçek zamanlı iş birliği (Matrix)',
+  'Samenwerken': 'İş birliği',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Bağlantı başarılı — kullanıcı kimliği ve cihaz kimliği dolduruldu',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Bağlantı başarılı, ancak homeserver bir cihaz kimliği döndürmedi — bunu kendiniz girin, yoksa ortak yazarların anahtarları ulaşmaz.',
+  'Vul een access-token in': 'Bir erişim belirteci girin',
+  'Vul een geldige homeserver-URL in': 'Geçerli bir homeserver URL\'si girin',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Bir sunumda Matrix homeserver aracılığıyla şifreli aktarıcı olarak canlı iş birliği yapın. İçerik OciDeck\'in kendi anahtarlarıyla uçtan uca şifrelenir; sunucu yalnızca şifreli veriyi görür. Bir homeserver ve başka bir yerde oluşturulmuş bir erişim belirteci girin — OciDeck asla parolanızı istemez. Token, diğer ayarların yanında değil, anahtar zincirinde şifrelenmiş olarak saklanır.',
+  'wordt door de test ingevuld': 'test tarafından doldurulur',
   'Versleuteld doorgeefluik (ontwerp)': 'Şifreli aktarıcı (tasarım)',
   'Meer documentatie op de repository': 'Depoda daha fazla belge',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

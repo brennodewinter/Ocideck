@@ -1771,6 +1771,40 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Access-token': 'Käyttöpoletti',
+  'Apparaat-id': 'Laitetunnus',
+  'Gebruikers-id': 'Käyttäjätunnus',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserver palautti virheen. Yritä myöhemmin uudelleen.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserver ei ole tavoitettavissa tai varmenteeseen ei luoteta.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserver ohjaa toiseen osoitteeseen — turvallisuussyistä sitä ei seurata. Anna lopullinen osoite suoraan.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserver pyytää odottamaan hetken. Yritä pian uudelleen.',
+  'De homeserver weigert dit token.': 'Homeserver hylkää tämän poletin.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Tämä osoite ei vastaa Matrix-homeserverinä. Onko URL-osoite oikein?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Homeserverin on oltava https: käyttöpoletti kulkee mukana jokaisessa pyynnössä.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Käyttöpoletti hylätään — tarkista, että kopioit sen oikein eikä sitä ole peruutettu.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Luo käyttöpoletti Matrix-asiakasohjelmassasi (esimerkiksi Elementissä kohdassa Kaikki asetukset → Ohje ja tiedot) tai homeserverilläsi. "Testaa yhteys" vahvistaa poletin ja täyttää käyttäjätunnuksesi ja laitetunnuksesi.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Tarvitaan, kun homeserver on yksityisessä tai kotiverkossa. Ilman tätä merkintää turvatarkistus hylkää yksityisen osoitteen.',
+  'Realtime samenwerken (Matrix)': 'Reaaliaikainen yhteistyö (Matrix)',
+  'Samenwerken': 'Yhteistyö',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Yhteys onnistui — käyttäjätunnus ja laitetunnus täytetty',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Yhteys onnistui, mutta homeserver ei palauttanut laitetunnusta — täytä se itse, muuten kanssakirjoittajien avaimet eivät saavu.',
+  'Vul een access-token in': 'Anna käyttöpoletti',
+  'Vul een geldige homeserver-URL in':
+      'Anna kelvollinen homeserverin URL-osoite',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Tee reaaliaikaista yhteistyötä esityksestä Matrix-homeserverin kautta salattuna välittäjänä. Sisältö salataan päästä päähän OciDeckin omilla avaimilla; palvelin näkee vain salattua tietoa. Anna homeserver ja muualla luotu käyttöpoletti — OciDeck ei koskaan kysy salasanaasi. Tunnus tallennetaan salattuna avainnippuun, ei muiden asetusten joukkoon.',
+  'wordt door de test ingevuld': 'täytetään testillä',
   'Versleuteld doorgeefluik (ontwerp)': 'Salattu välitin (suunnitelma)',
   'Meer documentatie op de repository': 'Lisää dokumentaatiota tietovarastossa',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

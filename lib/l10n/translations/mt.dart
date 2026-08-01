@@ -1793,6 +1793,39 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Access-token': 'Token tal-aċċess',
+  'Apparaat-id': 'ID tal-apparat',
+  'Gebruikers-id': 'ID tal-utent',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Il-homeserver irritorna żball. Erġa\' pprova aktar tard.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Il-homeserver ma jistax jintlaħaq, jew iċ-ċertifikat mhuwiex fdat.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Il-homeserver jirridirezzjona lejn indirizz ieħor — għal raġunijiet ta\' sigurtà dan ma jiġix segwit. Daħħal l-indirizz finali direttament.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Il-homeserver jitlob li tistenna ftit. Erġa\' pprova dalwaqt.',
+  'De homeserver weigert dit token.': 'Il-homeserver jirrifjuta dan it-token.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Dan l-indirizz ma jweġibx bħala homeserver ta\' Matrix. L-URL huwa korrett?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Homeserver irid ikun https: it-token tal-aċċess jivvjaġġa ma\' kull talba.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'It-token tal-aċċess qed jiġi rrifjutat — iċċekkja li kkopjajtu sew u li ma ġiex revokat.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Oħloq token tal-aċċess fil-klijent Matrix tiegħek (pereżempju f\'Element taħt Is-settings kollha → Għajnuna u info), jew fuq il-homeserver tiegħek. "Ittestja l-konnessjoni" jikkonferma t-token u jimla l-ID tal-utent u l-ID tal-apparat tiegħek.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Meħtieġ meta l-homeserver taħdem fuq netwerk privat jew tad-dar. Mingħajr din il-bandiera l-kontroll tas-sigurtà jirrifjuta indirizz privat.',
+  'Realtime samenwerken (Matrix)': 'Kollaborazzjoni f\'ħin reali (Matrix)',
+  'Samenwerken': 'Kollaborazzjoni',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Konnessjoni rnexxiet — ID tal-utent u ID tal-apparat imtlew',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Konnessjoni rnexxiet, imma l-homeserver ma rritornax ID tal-apparat — daħħlu int stess, inkella ċ-ċwievet tal-koawturi mhux se jaslu.',
+  'Vul een access-token in': 'Daħħal token tal-aċċess',
+  'Vul een geldige homeserver-URL in': 'Daħħal URL validu tal-homeserver',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Ikkollabora fil-ħin reali fuq preżentazzjoni permezz ta\' homeserver Matrix bħala relay ikkriptat. Il-kontenut jiġi kkriptat minn tarf sa tarf biċ-ċwievet ta\' OciDeck stess; is-server jara biss data kkriptata. Daħħal homeserver u token tal-aċċess maħluq band\'oħra — OciDeck qatt ma jitlob il-password tiegħek. It-token jinħażen ikkriptat fiċ-ċavetta, mhux mal-issettjar l-ieħor.',
+  'wordt door de test ingevuld': 'jimtela mit-test',
   'Versleuteld doorgeefluik (ontwerp)': 'Relay kriptat (disinn)',
   'Meer documentatie op de repository': 'Aktar dokumentazzjoni fir-repożitorju',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

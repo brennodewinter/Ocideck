@@ -731,6 +731,39 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Access-token': 'Tagongstoken',
+  'Apparaat-id': 'Apparaat-id',
+  'Gebruikers-id': 'Brûkers-id',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'De homeserver joech in flater werom. Besykje it letter opnij.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'De homeserver is net berikber, of it sertifikaat wurdt net fertroud.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'De homeserver ferwiist troch nei in oar adres — dat wurdt om feiligensredenen net folge. Folje it definitive adres streekrjocht yn.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'De homeserver freget om even te wachtsjen. Besykje it aanst opnij.',
+  'De homeserver weigert dit token.': 'De homeserver wegeret dit token.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Dit adres antwurdet net as in Matrix-homeserver. Kloppet de URL?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'In homeserver moat https wêze: it tagongstoken reizget by elk fersyk mei.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'It tagongstoken wurdt wegere — kontrolearje oftst it goed oernaam hast en oft it net ynlutsen is.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Meitsje in tagongstoken oan yn dyn Matrix-client (bygelyks yn Element ûnder Alle ynstellingen → Help & ynfo), of op dyn homeserver. "Ferbining teste" befêstiget it token en follet dyn brûkers-id en apparaat-id yn.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Nedich as de homeserver op in privee- of thúsnetwurk draait. Sûnder dizze flagge wegeret de befeiliging in privee-adres.',
+  'Realtime samenwerken (Matrix)': 'Realtime gearwurkje (Matrix)',
+  'Samenwerken': 'Gearwurking',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Ferbining slagge — brûkers-id en apparaat-id ynfolle',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Ferbining slagge, mar de homeserver joech gjin apparaat-id werom — folje dy sels yn, oars komme kaaien fan mei-auteurs net oan.',
+  'Vul een access-token in': 'Folje in tagongstoken yn',
+  'Vul een geldige homeserver-URL in': 'Folje in jildige homeserver-URL yn',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Wurkje live gear oan in presintaasje fia in Matrix-homeserver as fersifere trochjefte. De ynhâld wurdt end-to-end fersifere mei OciDeck syn eigen kaaien; de server sjocht allinne fersifere gegevens. Folje in homeserver en in earne oars oanmakke tagongstoken yn — OciDeck freget nea om dyn wachtwurd. It token wurdt fersifere yn de kaaiketting bewarre, net by de oare ynstellingen.',
+  'wordt door de test ingevuld': 'wurdt troch de test ynfolle',
   'Versleuteld doorgeefluik (ontwerp)': 'Fersifere relais (ûntwerp)',
   'Meer documentatie op de repository': 'Mear dokumintaasje yn it repository',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

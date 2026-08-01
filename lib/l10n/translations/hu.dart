@@ -1775,6 +1775,39 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Access-token': 'Hozzáférési token',
+  'Apparaat-id': 'Eszközazonosító',
+  'Gebruikers-id': 'Felhasználói azonosító',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'A homeserver hibát adott vissza. Próbáld újra később.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'A homeserver nem érhető el, vagy a tanúsítvány nem megbízható.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'A homeserver átirányít egy másik címre — biztonsági okokból ezt nem követi a rendszer. Add meg közvetlenül a végleges címet.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'A homeserver arra kér, hogy várj egy pillanatot. Próbáld újra hamarosan.',
+  'De homeserver weigert dit token.': 'A homeserver elutasítja ezt a tokent.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Ez a cím nem Matrix-homeserverként válaszol. Helyes az URL?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'A homeservernek https-nek kell lennie: a hozzáférési token minden kéréssel utazik.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'A hozzáférési tokent elutasítja — ellenőrizd, hogy helyesen másoltad-e át, és hogy nem vonták-e vissza.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Hozz létre egy hozzáférési tokent a Matrix-kliensedben (például az Elementben a Minden beállítás → Súgó és információ alatt), vagy a homeservereden. A "Kapcsolat tesztelése" megerősíti a tokent, és kitölti a felhasználói azonosítódat és eszközazonosítódat.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Szükséges, ha a homeserver magán- vagy otthoni hálózaton fut. E jelölés nélkül a biztonsági ellenőrzés elutasít egy magáncímet.',
+  'Realtime samenwerken (Matrix)': 'Valós idejű együttműködés (Matrix)',
+  'Samenwerken': 'Együttműködés',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Sikeres kapcsolódás — felhasználói azonosító és eszközazonosító kitöltve',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Sikeres kapcsolódás, de a homeserver nem adott vissza eszközazonosítót — töltsd ki magad, különben a társszerzők kulcsai nem érkeznek meg.',
+  'Vul een access-token in': 'Adj meg egy hozzáférési tokent',
+  'Vul een geldige homeserver-URL in': 'Adj meg egy érvényes homeserver-URL-t',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Működj együtt élőben egy bemutatón egy Matrix-homeserveren keresztül titkosított továbbítóként. A tartalom végponttól végpontig titkosított OciDeck saját kulcsaival; a kiszolgáló csak titkosított adatokat lát. Adj meg egy homeservert és egy máshol létrehozott hozzáférési tokent — az OciDeck soha nem kéri a jelszavadat. A tokent titkosítva a kulcstartó őrzi, nem a többi beállítás mellett.',
+  'wordt door de test ingevuld': 'a teszt tölti ki',
   'Versleuteld doorgeefluik (ontwerp)': 'Titkosított továbbító (terv)',
   'Meer documentatie op de repository': 'További dokumentáció a tárolóban',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

@@ -730,6 +730,39 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Access-token': 'Zugriffstoken',
+  'Apparaat-id': 'Geräte-ID',
+  'Gebruikers-id': 'Benutzer-ID',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Der Homeserver hat einen Fehler zurückgegeben. Versuche es später erneut.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Der Homeserver ist nicht erreichbar oder dem Zertifikat wird nicht vertraut.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Der Homeserver leitet auf eine andere Adresse um — das wird aus Sicherheitsgründen nicht gefolgt. Gib die endgültige Adresse direkt ein.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Der Homeserver bittet um einen Moment Geduld. Versuche es gleich erneut.',
+  'De homeserver weigert dit token.': 'Der Homeserver verweigert dieses Token.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Diese Adresse antwortet nicht als Matrix-Homeserver. Stimmt die URL?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Ein Homeserver muss https sein: Das Zugriffstoken reist bei jeder Anfrage mit.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Das Zugriffstoken wird abgelehnt — prüfe, ob du es korrekt übernommen hast und ob es nicht widerrufen wurde.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Erstelle ein Zugriffstoken in deinem Matrix-Client (zum Beispiel in Element unter Alle Einstellungen → Hilfe & Info) oder auf deinem Homeserver. "Verbindung testen" bestätigt das Token und füllt deine Benutzer-ID und Geräte-ID aus.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Nötig, wenn der Homeserver in einem privaten oder Heimnetzwerk läuft. Ohne dieses Häkchen weist die Sicherheitsprüfung eine private Adresse ab.',
+  'Realtime samenwerken (Matrix)': 'Echtzeit-Zusammenarbeit (Matrix)',
+  'Samenwerken': 'Zusammenarbeit',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Verbindung erfolgreich — Benutzer-ID und Geräte-ID ausgefüllt',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Verbindung erfolgreich, aber der Homeserver hat keine Geräte-ID zurückgegeben — trage sie selbst ein, sonst kommen Schlüssel von Mitautoren nicht an.',
+  'Vul een access-token in': 'Gib ein Zugriffstoken ein',
+  'Vul een geldige homeserver-URL in': 'Gib eine gültige Homeserver-URL ein',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Arbeite live an einer Präsentation über einen Matrix-Homeserver als verschlüsseltes Weiterleitungsglied zusammen. Der Inhalt wird Ende-zu-Ende mit OciDecks eigenen Schlüsseln verschlüsselt; der Server sieht nur verschlüsselte Daten. Gib einen Homeserver und ein anderswo erstelltes Zugriffstoken ein — OciDeck fragt nie nach deinem Passwort. Das Token wird verschlüsselt im Schlüsselbund abgelegt, nicht bei den übrigen Einstellungen.',
+  'wordt door de test ingevuld': 'wird durch den Test ausgefüllt',
   'Versleuteld doorgeefluik (ontwerp)': 'Verschlüsseltes Relais (Design)',
   'Meer documentatie op de repository': 'Weitere Dokumentation im Repository',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

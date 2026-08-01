@@ -58,7 +58,11 @@ void main() {
       expect(session.userId, '@alice:hs.example');
       expect(session.accessToken, isNotEmpty);
       expect(client.accessToken, session.accessToken);
-      expect(await client.whoami(), '@alice:hs.example');
+      final who = await client.whoami();
+      expect(who.userId, '@alice:hs.example');
+      // The homeserver reports the token's device; the account form fills it
+      // from here so a co-author's key-share reaches the right device (§4.3).
+      expect(who.deviceId, session.deviceId);
     });
 
     test('a wrong password maps to a forbidden error', () async {

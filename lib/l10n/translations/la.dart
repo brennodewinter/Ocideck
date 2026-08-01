@@ -1787,6 +1787,39 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Access-token': 'Tessera accessus',
+  'Apparaat-id': 'ID instrumenti',
+  'Gebruikers-id': 'ID usoris',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserver errorem reddidit. Postea itera.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserver adiri non potest, vel testimonium non creditur.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserver ad aliam inscriptionem redirigit — ob securitatem non sequitur. Inscriptionem ultimam directe insere.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserver paulum exspectare petit. Mox itera.',
+  'De homeserver weigert dit token.': 'Homeserver hoc signum respuit.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Haec inscriptio non ut homeserver Matrix respondet. Estne URL recta?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Homeserver https esse debet: tessera accessus cum omni rogatione iter facit.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Tessera accessus respuitur — vide num recte transcripseris et num revocata non sit.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Tesseram accessus in cliente Matrix tuo crea (exempli gratia in Element sub Omnes optiones → Auxilium et informatio), vel in homeserver tuo. "Conexionem probare" signum confirmat et ID usoris tui et ID instrumenti implet.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Necessarium cum homeserver in rete privata vel domestica currit. Sine hoc signo custodia securitatis inscriptionem privatam respuit.',
+  'Realtime samenwerken (Matrix)': 'Collaboratio tempore reali (Matrix)',
+  'Samenwerken': 'Collaboratio',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Nexus feliciter factus — ID usoris et ID instrumenti impleta',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Nexus factus, sed homeserver nullum ID instrumenti reddidit — ipse insere, alioquin claves coauctorum non advenient.',
+  'Vul een access-token in': 'Tesseram accessus insere',
+  'Vul een geldige homeserver-URL in': 'URL homeserver validam insere',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'In praesentatione viva per homeserver Matrix ut relatorem cifratum collabora. Contentus a fine ad finem clavibus propriis OciDeck cifratur; servitor tantum data cifrata videt. Homeserver et tesseram accessus alibi creatam insere — OciDeck numquam verbum secretum tuum petit. Signum in clavium anulo cifratum conditur, non apud ceteras optiones.',
+  'wordt door de test ingevuld': 'a probatione impletur',
   'Versleuteld doorgeefluik (ontwerp)': 'Transmissor cifratus (designatio)',
   'Meer documentatie op de repository': 'Amplior documentatio in repositorio',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

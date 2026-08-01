@@ -1793,6 +1793,39 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Access-token': 'Токен за достъп',
+  'Apparaat-id': 'ИД на устройството',
+  'Gebruikers-id': 'Потребителски ИД',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserver върна грешка. Опитайте отново по-късно.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserver е недостъпен или сертификатът не е доверен.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserver пренасочва към друг адрес — от съображения за сигурност това не се следва. Въведете крайния адрес директно.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserver моли да изчакате малко. Опитайте отново скоро.',
+  'De homeserver weigert dit token.': 'Homeserver отхвърля този токен.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Този адрес не отговаря като Matrix homeserver. Верен ли е URL адресът?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Homeserver трябва да е https: токенът за достъп пътува с всяка заявка.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Токенът за достъп е отхвърлен — проверете дали сте го копирали правилно и дали не е отменен.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Създайте токен за достъп във вашия Matrix клиент (например в Element под Всички настройки → Помощ и информация) или на вашия homeserver. "Тест на връзката" потвърждава токена и попълва вашия потребителски ИД и ИД на устройството.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Нужно е, когато homeserver работи в частна или домашна мрежа. Без този флаг проверката за сигурност отхвърля частен адрес.',
+  'Realtime samenwerken (Matrix)': 'Съвместна работа в реално време (Matrix)',
+  'Samenwerken': 'Сътрудничество',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Връзката е успешна — потребителският ИД и ИД на устройството са попълнени',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Връзката е успешна, но homeserver не върна ИД на устройството — попълнете го сами, иначе ключовете от съавторите няма да пристигнат.',
+  'Vul een access-token in': 'Въведете токен за достъп',
+  'Vul een geldige homeserver-URL in': 'Въведете валиден URL на homeserver',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Работете съвместно на живо върху презентация чрез Matrix homeserver като криптиран препредавател. Съдържанието се криптира от край до край със собствените ключове на OciDeck; сървърът вижда само криптирани данни. Въведете homeserver и токен за достъп, създаден другаде — OciDeck никога не иска паролата ви. Токенът се пази криптиран в ключодържателя, а не при останалите настройки.',
+  'wordt door de test ingevuld': 'попълва се от теста',
   'Versleuteld doorgeefluik (ontwerp)': 'Шифрован ретранслатор (проект)',
   'Meer documentatie op de repository': 'Повече документация в хранилището',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

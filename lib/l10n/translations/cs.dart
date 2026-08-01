@@ -1774,6 +1774,39 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Access-token': 'Přístupový token',
+  'Apparaat-id': 'ID zařízení',
+  'Gebruikers-id': 'ID uživatele',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserver vrátil chybu. Zkuste to znovu později.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserver není dostupný nebo certifikát není důvěryhodný.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserver přesměrovává na jinou adresu — z bezpečnostních důvodů se to nesleduje. Zadejte konečnou adresu přímo.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserver žádá o chvíli strpení. Zkuste to za chvíli znovu.',
+  'De homeserver weigert dit token.': 'Homeserver tento token odmítá.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Tato adresa neodpovídá jako homeserver Matrix. Je URL správná?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Homeserver musí být https: přístupový token cestuje s každým požadavkem.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Přístupový token je odmítnut — zkontrolujte, zda jste jej správně opsali a zda nebyl zrušen.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Vytvořte přístupový token ve svém klientu Matrix (například v Elementu v části Všechna nastavení → Nápověda a informace) nebo na svém homeserveru. "Otestovat připojení" potvrdí token a vyplní vaše ID uživatele a ID zařízení.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Potřebné, když homeserver běží v privátní nebo domácí síti. Bez tohoto příznaku bezpečnostní kontrola odmítne privátní adresu.',
+  'Realtime samenwerken (Matrix)': 'Spolupráce v reálném čase (Matrix)',
+  'Samenwerken': 'Spolupráce',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Připojeno — ID uživatele a ID zařízení vyplněny',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Připojeno, ale homeserver nevrátil ID zařízení — vyplňte je sami, jinak klíče od spoluautorů nedorazí.',
+  'Vul een access-token in': 'Zadejte přístupový token',
+  'Vul een geldige homeserver-URL in': 'Zadejte platnou URL homeserveru',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Spolupracujte živě na prezentaci přes homeserver Matrix jako šifrovaný přenašeč. Obsah je šifrován end-to-end vlastními klíči OciDecku; server vidí jen šifrovaná data. Zadejte homeserver a přístupový token vytvořený jinde — OciDeck si nikdy neřekne o heslo. Token se ukládá zašifrovaný v klíčence, nikoli k ostatním nastavením.',
+  'wordt door de test ingevuld': 'vyplní test',
   'Versleuteld doorgeefluik (ontwerp)': 'Zašifrovaný přenašeč (návrh)',
   'Meer documentatie op de repository': 'Více dokumentace v repozitáři',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

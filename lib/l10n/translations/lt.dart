@@ -1778,6 +1778,39 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Access-token': 'Prieigos raktas',
+  'Apparaat-id': 'Įrenginio ID',
+  'Gebruikers-id': 'Naudotojo ID',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserver grąžino klaidą. Bandykite vėliau dar kartą.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserver nepasiekiamas arba sertifikatas nėra patikimas.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserver nukreipia į kitą adresą — saugumo sumetimais tai nesekama. Įveskite galutinį adresą tiesiogiai.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserver prašo šiek tiek palaukti. Netrukus bandykite dar kartą.',
+  'De homeserver weigert dit token.': 'Homeserver atmeta šį raktą.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Šis adresas neatsako kaip Matrix homeserver. Ar URL teisingas?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Homeserver turi būti https: prieigos raktas keliauja su kiekviena užklausa.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Prieigos raktas atmestas — patikrinkite, ar teisingai jį nukopijavote ir ar jis nebuvo atšauktas.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Sukurkite prieigos raktą savo Matrix kliente (pavyzdžiui, Element skiltyje Visi nustatymai → Pagalba ir informacija) arba savo homeserver. "Tikrinti ryšį" patvirtina raktą ir užpildo jūsų naudotojo ID ir įrenginio ID.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Reikalinga, kai homeserver veikia privačiame arba namų tinkle. Be šios žymos saugumo patikra atmeta privatų adresą.',
+  'Realtime samenwerken (Matrix)': 'Bendradarbiavimas tikruoju laiku (Matrix)',
+  'Samenwerken': 'Bendradarbiavimas',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Prisijungta — naudotojo ID ir įrenginio ID užpildyti',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Prisijungta, bet homeserver negrąžino įrenginio ID — įveskite jį patys, kitaip bendraautorių raktai neatkeliaus.',
+  'Vul een access-token in': 'Įveskite prieigos raktą',
+  'Vul een geldige homeserver-URL in': 'Įveskite galiojantį homeserver URL',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Bendradarbiaukite tiesiogiai rengdami pristatymą per Matrix homeserver kaip šifruotą perdavimo tašką. Turinys šifruojamas nuo galo iki galo pačios OciDeck raktais; serveris mato tik šifruotus duomenis. Įveskite homeserver ir kitur sukurtą prieigos raktą — OciDeck niekada neprašo jūsų slaptažodžio. Prieigos raktas laikomas užšifruotas raktinėje, o ne kartu su kitais nustatymais.',
+  'wordt door de test ingevuld': 'užpildo testas',
   'Versleuteld doorgeefluik (ontwerp)':
       'Užšifruotas retransliatorius (projektas)',
   'Meer documentatie op de repository': 'Daugiau dokumentacijos saugykloje',

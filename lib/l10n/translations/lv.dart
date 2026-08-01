@@ -1770,6 +1770,39 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Access-token': 'Piekļuves pilnvara',
+  'Apparaat-id': 'Ierīces ID',
+  'Gebruikers-id': 'Lietotāja ID',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserver atgrieza kļūdu. Vēlāk mēģiniet vēlreiz.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserver nav sasniedzams vai sertifikāts nav uzticams.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserver novirza uz citu adresi — drošības apsvērumu dēļ tas netiek sekots. Ievadiet galīgo adresi tieši.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserver lūdz mazliet pagaidīt. Drīz mēģiniet vēlreiz.',
+  'De homeserver weigert dit token.': 'Homeserver noraida šo pilnvaru.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Šī adrese neatbild kā Matrix homeserver. Vai URL ir pareizs?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Homeserver ir jābūt https: piekļuves pilnvara ceļo līdzi katram pieprasījumam.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Piekļuves pilnvara tiek noraidīta — pārbaudiet, vai to pareizi pārkopējāt un vai tā nav atsaukta.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Izveidojiet piekļuves pilnvaru savā Matrix klientā (piemēram, Element sadaļā Visi iestatījumi → Palīdzība un informācija) vai savā homeserver. "Pārbaudīt savienojumu" apstiprina pilnvaru un aizpilda jūsu lietotāja ID un ierīces ID.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Nepieciešams, kad homeserver darbojas privātā vai mājas tīklā. Bez šī karodziņa drošības pārbaude noraida privātu adresi.',
+  'Realtime samenwerken (Matrix)': 'Sadarbība reāllaikā (Matrix)',
+  'Samenwerken': 'Sadarbība',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Savienojums izveidots — lietotāja ID un ierīces ID aizpildīts',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Savienojums izveidots, bet homeserver neatgrieza ierīces ID — ievadiet to pats, citādi līdzautoru atslēgas nepienāks.',
+  'Vul een access-token in': 'Ievadiet piekļuves pilnvaru',
+  'Vul een geldige homeserver-URL in': 'Ievadiet derīgu homeserver URL',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Sadarbojieties tiešsaistē pie prezentācijas caur Matrix homeserver kā šifrētu retranslatoru. Saturs tiek pilnībā (end-to-end) šifrēts ar OciDeck paša atslēgām; serveris redz tikai šifrētus datus. Ievadiet homeserver un citur izveidotu piekļuves pilnvaru — OciDeck nekad neprasa jūsu paroli. Pilnvara tiek glabāta šifrēta atslēgu saišķī, nevis kopā ar pārējiem iestatījumiem.',
+  'wordt door de test ingevuld': 'aizpilda tests',
   'Versleuteld doorgeefluik (ontwerp)': 'Šifrēts retranslators (dizains)',
   'Meer documentatie op de repository': 'Vairāk dokumentācijas repozitorijā',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
