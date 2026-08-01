@@ -119,7 +119,9 @@ void main() {
       expect(find.textContaining('plain code line'), findsOneWidget);
     });
 
-    testWidgets('invokes onTapLink when a link is tapped', (tester) async {
+    testWidgets('invokes onTapLink with the href when a link is tapped', (
+      tester,
+    ) async {
       String? tapped;
       await pump(
         tester,
@@ -128,11 +130,29 @@ void main() {
           onTapLink: (url) => tapped = url,
         ),
       );
-      // The link renders as part of a rich paragraph.
-      expect(find.textContaining('the site'), findsOneWidget);
-      // Tapping is exercised via the recognizer; presence of the run suffices
-      // here (gesture wiring is covered by the inline_markdown tests).
-      expect(tapped, isNull);
+      // A real tap on the link text fires the recogniser — the regression this
+      // guards is a reader that renders links but does nothing on tap.
+      await tester.tapOnText(find.textRange.ofSubstring('the site'));
+      await tester.pump();
+      expect(tapped, 'https://example.com');
+    });
+
+    testWidgets('a tap fires even inside a SelectionArea', (tester) async {
+      // The reader wraps the document in a SelectionArea so it stays
+      // selectable; a link must remain tappable through it.
+      String? tapped;
+      await pump(
+        tester,
+        SelectionArea(
+          child: DocumentMarkdownView(
+            'See [the guide](USER_GUIDE.md) now.',
+            onTapLink: (url) => tapped = url,
+          ),
+        ),
+      );
+      await tester.tapOnText(find.textRange.ofSubstring('the guide'));
+      await tester.pump();
+      expect(tapped, 'USER_GUIDE.md');
     });
 
     // A minimal SVG that survives sanitizeMermaidSvg (svg + rect are allowed)
@@ -312,6 +332,18 @@ void main() {
         expect(base, isNotEmpty);
       },
     );
+
+    test('bundledDocAssets lists the shipped Markdown docs', () async {
+      final assets = await service.bundledDocAssets();
+      // The curated set the reader can open in-app: docs plus the root licence.
+      expect(assets, contains('docs/USER_GUIDE.md'));
+      expect(assets, contains('docs/FILE_FORMAT.md'));
+      expect(assets, contains('LICENSE.md'));
+      // A repo-only doc must not appear — it opens on the repository instead.
+      expect(assets, isNot(contains('docs/ARCHITECTURE.md')));
+      // Only Markdown, never fonts or data assets.
+      expect(assets.every((a) => a.endsWith('.md')), isTrue);
+    });
   });
 
   group('DocumentReaderScreen', () {
@@ -519,25 +551,144 @@ void main() {
         expect(melding(), findsNothing);
       });
     });
+
+    group('links', () {
+      testWidgets('een interne documentlink navigeert naar het doeldocument', (
+        tester,
+      ) async {
+        const top = 'docs/GIDS.md';
+        const target = 'docs/FORMAT.md';
+        await tester.pumpWidget(
+          wrap(
+            const DocumentReaderScreen(
+              title: 'Gids',
+              assetBase: top,
+              service: _FakeDocs(
+                '# Gids\n\nZie [het formaat](FORMAT.md) voor details.\n',
+                extraDocs: {
+                  target:
+                      '# Bestandsformaat\n\nDe inhoud van het formaat staat hier.\n',
+                },
+                bundled: {top, target},
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        // We beginnen op de gids.
+        expect(find.textContaining('Zie'), findsOneWidget);
+
+        await tester.tapOnText(find.textRange.ofSubstring('het formaat'));
+        await tester.pumpAndSettle();
+
+        // Een nieuw scherm toont het doeldocument — titel uit zijn eigen H1 —
+        // in plaats van niets te doen of een `https://FORMAT.md` te openen.
+        expect(find.text('Bestandsformaat'), findsWidgets);
+        expect(
+          find.textContaining('De inhoud van het formaat'),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('een niet-gebundeld doc valt terug op de repo in de browser', (
+        tester,
+      ) async {
+        // BUILD.md zit niet in de gebundelde set, dus de link hoort niet in-app
+        // te navigeren maar de repo-versie extern te openen. We toetsen dat er
+        // geen tweede lezer bovenop komt (navigatie zou dat wél doen).
+        await tester.pumpWidget(
+          wrap(
+            const DocumentReaderScreen(
+              title: 'Gids',
+              assetBase: 'docs/GIDS.md',
+              service: _FakeDocs(
+                '# Gids\n\nZie [de build](BUILD.md) elders.\n',
+                bundled: {'docs/GIDS.md'},
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        await tester.tapOnText(find.textRange.ofSubstring('de build'));
+        await tester.pumpAndSettle();
+        // Nog steeds op de gids: geen in-app navigatie naar een niet-gebundeld
+        // doc. (De externe open zelf loopt via openExternalUrl, apart getoetst.)
+        expect(find.textContaining('Zie'), findsOneWidget);
+      });
+
+      testWidgets('een ankerlink scrolt naar het kopje in hetzelfde document', (
+        tester,
+      ) async {
+        final filler = List.filled(
+          60,
+          'Vultekst die de pagina lang genoeg maakt om te kunnen scrollen.',
+        ).join('\n\n');
+        final md =
+            '# Boven\n\n[Ga naar het doel](#het-doel)\n\n$filler\n\n'
+            '## Het doel\n\nDe doeltekst onderaan.\n';
+        await tester.pumpWidget(
+          wrap(
+            DocumentReaderScreen(
+              title: 'Lang',
+              assetBase: 'docs/LANG.md',
+              service: _FakeDocs(md, bundled: const {'docs/LANG.md'}),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        // Het doelkopje staat aanvankelijk ver onder de vouw (scherm is 600 px).
+        final before = tester.getTopLeft(find.text('Het doel')).dy;
+        expect(before, greaterThan(600));
+
+        await tester.tapOnText(find.textRange.ofSubstring('Ga naar het doel'));
+        await tester.pumpAndSettle();
+
+        // Na de tik is het kopje naar boven gescrold, in beeld.
+        final after = tester.getTopLeft(find.text('Het doel')).dy;
+        expect(after, lessThan(before));
+        expect(after, lessThan(600));
+      });
+    });
   });
 }
 
 /// A stand-in documentation service that returns fixed markdown without any
 /// asset IO, so reader tests stay deterministic.
 class _FakeDocs implements DocumentationService {
-  const _FakeDocs(this.markdown, {this.isBaseVersion = true});
+  const _FakeDocs(
+    this.markdown, {
+    this.isBaseVersion = true,
+    this.extraDocs = const {},
+    this.bundled = const {},
+  });
   final String markdown;
 
   /// Of dit "de Engelse basisversie" is. Standaard waar, want dat is wat elk
   /// gebundeld document vandaag is (#626).
   final bool isBaseVersion;
 
+  /// Inhoud per asset-sleutel voor documenten waar een link naartoe navigeert;
+  /// een sleutel die hier niet in staat krijgt [markdown]. Zo kan één fake een
+  /// doc-naar-doc-sprong bedienen.
+  final Map<String, String> extraDocs;
+
+  /// De asset-sleutels die als "gebundeld" tellen, waarmee de resolver een
+  /// interne link in-app opent in plaats van naar de repo te sturen.
+  final Set<String> bundled;
+
+  String _contentFor(String asset) => extraDocs[asset] ?? markdown;
+
   @override
-  Future<String> load(String baseAsset, String languageCode) async => markdown;
+  Future<String> load(String baseAsset, String languageCode) async =>
+      _contentFor(baseAsset);
 
   @override
   Future<({String text, bool isBaseVersion})> loadDetailed(
     String baseAsset,
     String languageCode,
-  ) async => (text: markdown, isBaseVersion: isBaseVersion);
+  ) async => (text: _contentFor(baseAsset), isBaseVersion: isBaseVersion);
+
+  @override
+  Future<Set<String>> bundledDocAssets() async => bundled;
 }

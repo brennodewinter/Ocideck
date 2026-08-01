@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/app_theme.dart';
+import '../../utils/doc_link.dart' show headingSlug;
 import '../slides/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart' show MermaidRenderer;
 import 'doc_mermaid_view.dart';
@@ -42,10 +43,21 @@ class DocumentMarkdownView extends StatelessWidget {
     this.searchTerm,
     this.activeMatchBlockIndex = -1,
     this.activeMatchKey,
+    this.anchorBlockIndex = -1,
+    this.anchorKey,
   });
 
   final String markdown;
   final void Function(String url)? onTapLink;
+
+  /// Absolute block index the reader wants to scroll an `#anchor` link to (from
+  /// [headingBlockIndex]), or `-1` for none. That block carries [anchorKey] so
+  /// the reader can `ensureVisible` it — the same single-moving-key trick the
+  /// find-in-page scroll uses, which is why it stays attached reliably.
+  final int anchorBlockIndex;
+
+  /// Attached to the [anchorBlockIndex] block so the reader can scroll to it.
+  final GlobalKey? anchorKey;
 
   /// Maximum measure for prose blocks; tables and code ignore it. `null` leaves
   /// prose unbounded too (the whole document then fills the available width).
@@ -77,6 +89,20 @@ class DocumentMarkdownView extends StatelessWidget {
   static List<String> blockTexts(String markdown) =>
       _parse(markdown).map((b) => b.searchText).toList(growable: false);
 
+  /// The absolute block index (into the same block list [build] renders) of the
+  /// first heading whose [headingSlug] equals [slug], or `-1` when this document
+  /// has no such heading. The reader uses it to point [anchorBlockIndex] at the
+  /// section an `#anchor` link names. First match wins, mirroring how the anchor
+  /// key attaches to the first heading with a slug.
+  static int headingBlockIndex(String markdown, String slug) {
+    final blocks = _parse(markdown);
+    for (var i = 0; i < blocks.length; i++) {
+      final b = blocks[i];
+      if (b.kind == _Kind.heading && headingSlug(b.text) == slug) return i;
+    }
+    return -1;
+  }
+
   @override
   Widget build(BuildContext context) {
     final t = _Theme(Theme.of(context));
@@ -92,11 +118,17 @@ class DocumentMarkdownView extends StatelessWidget {
   }
 
   /// Wraps a block in a search tint when it matches [term]; the active match
-  /// also carries [activeMatchKey] so the reader can scroll to it. With no term
-  /// the block is returned untouched, so a non-searching reader gets exactly the
-  /// old tree.
+  /// carries [activeMatchKey] and the anchor target carries [anchorKey] so the
+  /// reader can scroll to either. With no term and no anchor the block is
+  /// returned untouched, so a non-searching, non-navigating reader gets exactly
+  /// the old tree.
   Widget _decorated(_Theme t, _Block b, int index, String term) {
-    final widget = _buildWidget(t, b);
+    var widget = _buildWidget(t, b);
+    // The anchor target carries its own key (one moving key, like the search
+    // scroll) so `#anchor` links land on the section.
+    if (index == anchorBlockIndex && anchorKey != null) {
+      widget = KeyedSubtree(key: anchorKey, child: widget);
+    }
     if (term.isEmpty || !b.searchText.toLowerCase().contains(term)) {
       return widget;
     }
