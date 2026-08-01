@@ -72,6 +72,15 @@ void main() {
     expect(other.evaluate('@a:hs', 'DEV', keyA), TrustState.unverified);
   });
 
+  test('isIdentityPinned matches a pinned key across any device', () async {
+    final store = newStore();
+    await store.load();
+    expect(store.isIdentityPinned(keyA), isFalse);
+    await store.pin('@a:hs', 'DEV', keyA);
+    expect(store.isIdentityPinned(keyA), isTrue);
+    expect(store.isIdentityPinned(keyB), isFalse);
+  });
+
   test('unpin returns a device to unverified', () async {
     final store = newStore();
     await store.load();

@@ -117,6 +117,22 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
           enabled: deck.tlp != level,
           onInvoke: () => deckNotifier.updateInfo(tlp: level),
         ),
+      // Herkomst ondertekenen (Blok C): alleen zinvol op een afgerond deck met
+      // een Matrix-identiteit om mee te tekenen.
+      if (deck.finalized &&
+          (ref.read(matrixAccountProvider)?.isConfigured ?? false))
+        PaletteCommand(
+          label: l10n.d('Herkomst ondertekenen'),
+          icon: Icons.workspace_premium_outlined,
+          keywords: const [
+            'provenance',
+            'herkomst',
+            'ondertekenen',
+            'sign',
+            'handtekening',
+          ],
+          onInvoke: _signProvenance,
+        ),
       ...collabPaletteCommands(context, ref, l10n),
     ];
     CommandPalette.show(context, commands);

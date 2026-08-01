@@ -132,6 +132,10 @@ class _DeckStatusBar extends StatelessWidget {
                     const _StatusDivider(),
                     _integrityBadge(l10n, deck),
                   ],
+                  if (deck.provenance != null) ...[
+                    const _StatusDivider(),
+                    _ProvenanceBadge(deck),
+                  ],
                 ],
               ),
             ),
@@ -377,6 +381,113 @@ class _GitQueueBadge extends ConsumerWidget {
         ),
       ],
     );
+  }
+}
+
+/// Herkomstbewijs-badge (Blok C): toont of een ondertekend deck cryptografisch
+/// klopt. Verifiëren is async (Ed25519), dus dit is een eigen widget die de
+/// uitkomst per deck-toestand berekent en cachet i.p.v. bij elke herbouw opnieuw.
+/// Geen pin-check hier (buiten een sessie is er geen trust-store geladen), dus
+/// een geldige handtekening leest als "ondertekend, nog niet geverifieerd" —
+/// bevestigen gebeurt via de deelnemers-verificatie in een sessie.
+class _ProvenanceBadge extends StatefulWidget {
+  const _ProvenanceBadge(this.deck);
+  final Deck deck;
+
+  @override
+  State<_ProvenanceBadge> createState() => _ProvenanceBadgeState();
+}
+
+class _ProvenanceBadgeState extends State<_ProvenanceBadge> {
+  ProvenanceOutcome? _outcome;
+
+  @override
+  void initState() {
+    super.initState();
+    _verify();
+  }
+
+  @override
+  void didUpdateWidget(_ProvenanceBadge old) {
+    super.didUpdateWidget(old);
+    // Re-verify only when the signature or the content it covers changed.
+    if (old.deck.provenance != widget.deck.provenance ||
+        old.deck.fileHash != widget.deck.fileHash ||
+        old.deck.sealHash != widget.deck.sealHash) {
+      _verify();
+    }
+  }
+
+  Future<void> _verify() async {
+    final outcome = await verifyDeckProvenance(widget.deck);
+    if (mounted) setState(() => _outcome = outcome);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final outcome = _outcome;
+    if (outcome == null) return const SizedBox.shrink();
+    final visual = provenanceBadgeVisual(outcome, AppLocalizations.of(context));
+    if (visual == null) return const SizedBox.shrink();
+    return _StatusItem(
+      icon: visual.icon,
+      label: visual.label,
+      tooltip: visual.tooltip,
+      color: visual.color,
+    );
+  }
+}
+
+/// The icon/label/tooltip/colour for a provenance [outcome], or null when there
+/// is nothing to show. Pure and public so the mapping is unit-testable without
+/// the private badge widget (Blok C).
+({IconData icon, String label, String tooltip, Color color})?
+provenanceBadgeVisual(ProvenanceOutcome outcome, AppLocalizations l10n) {
+  switch (outcome.status) {
+    case ProvenanceStatus.none:
+      return null;
+    case ProvenanceStatus.confirmed:
+      return (
+        icon: Icons.verified,
+        label: l10n.d('Herkomst bevestigd'),
+        tooltip: l10n.d(
+          'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.',
+        ),
+        color: AppTheme.successFg,
+      );
+    case ProvenanceStatus.valid:
+      return (
+        icon: Icons.workspace_premium_outlined,
+        label: l10n.d('Ondertekend'),
+        tooltip:
+            '${l10n.d('Ondertekend, nog niet geverifieerd. Vingerafdruk:')} ${outcome.fingerprint}',
+        color: AppTheme.slate600,
+      );
+    case ProvenanceStatus.contentChanged:
+      return (
+        icon: Icons.gpp_bad,
+        label: l10n.d('Gewijzigd na ondertekenen'),
+        tooltip: l10n.d(
+          'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.',
+        ),
+        color: AppTheme.dangerFg,
+      );
+    case ProvenanceStatus.invalid:
+      return (
+        icon: Icons.gpp_bad,
+        label: l10n.d('Herkomst ongeldig'),
+        tooltip: l10n.d('De herkomst-ondertekening klopt niet of is vervalst.'),
+        color: AppTheme.dangerFg,
+      );
+    case ProvenanceStatus.notVerifiableHere:
+      return (
+        icon: Icons.gpp_maybe_outlined,
+        label: l10n.d('Herkomst niet hier te controleren'),
+        tooltip: l10n.d(
+          'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.',
+        ),
+        color: AppTheme.slate600,
+      );
   }
 }
 
