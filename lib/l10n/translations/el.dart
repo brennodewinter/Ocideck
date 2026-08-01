@@ -1798,6 +1798,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bestaande identiteit vervangen?': 'Αντικατάσταση της υπάρχουσας ταυτότητας;',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Αυτή η συσκευή έχει ήδη ταυτότητα συνεργασίας. Η επαναφορά την αντικαθιστά με την ταυτότητα από το κλειδί. Αποθηκεύσατε κλειδί ανάκτησης για την τρέχουσα ταυτότητα; Χωρίς αντίγραφο ασφαλείας θα τη χάσετε.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Η μνήμη ιστού για πολυμέσα παρουσιάσεων είναι πλήρης (μέγιστο 256 MB). Αποθηκεύστε πρώτα την εργασία σας ως αρχείο .ocideck για να αποφύγετε την απώλεια δεδομένων. Έπειτα χρησιμοποιήστε λιγότερες ή μικρότερες εικόνες, βίντεο ή αρχεία ήχου, κλείστε άλλες παρουσιάσεις ή επαναφορτώστε χωρίς να ανοίξετε άλλες παρουσιάσεις.',
   'Ongeldige vraag': 'Μη έγκυρη ερώτηση',

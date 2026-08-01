@@ -1762,6 +1762,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bestaande identiteit vervangen?': 'Kas asendada olemasolev identiteet?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Sellel seadmel on juba koostööidentiteet. Taastamine asendab selle võtmes oleva identiteediga. Kas salvestasid praeguse identiteedi taasteklahvi? Ilma varukoopiata kaotad selle.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Esitlusmeedia veebimälu on täis (kuni 256 MB). Andmekao vältimiseks salvesta töö esmalt .ocideck-failina. Seejärel kasuta vähem või väiksemaid pilte, videoid või helifaile, sulge teised esitlused või laadi uuesti ilma teisi esitlusi avamata.',
   'Ongeldige vraag': 'Vigane küsimus',

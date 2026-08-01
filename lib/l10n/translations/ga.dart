@@ -1806,6 +1806,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bestaande identiteit vervangen?': 'Cuir aitheantas atá ann in ionad?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Tá aitheantas comhoibrithe ag an ngléas seo cheana féin. Cuireann an t-athchóiriú an t-aitheantas ón eochair ina ionad. Ar shábháil tú eochair aisghabhála don aitheantas reatha? Gan chúltaca caillfidh tú é.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Tá cuimhne gréasáin na meán láithreoireachta lán (uasmhéid 256 MB). Sábháil do chuid oibre mar chomhad .ocideck ar dtús chun caillteanas sonraí a chosc. Ansin úsáid níos lú íomhánna, físeán nó comhad fuaime, nó cinn níos lú, dún deiceanna eile, nó athlódáil gan deiceanna eile a oscailt.',
   'Ongeldige vraag': 'Ceist neamhbhailí',

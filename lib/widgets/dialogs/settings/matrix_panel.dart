@@ -237,9 +237,21 @@ class _MatrixPanelState extends State<MatrixPanel> {
   }
 
   /// Prompt for a recovery key and restore the identity from it, mapping a
-  /// malformed key to a plain message rather than a stack trace.
+  /// malformed key to a plain message rather than a stack trace. If this device
+  /// already has an identity, confirm first — restoring overwrites it, and an
+  /// unbacked-up identity would be lost silently otherwise (Blok B follow-up).
   Future<void> _restoreIdentity() async {
     final l10n = context.l10n;
+    final existing = await readDeviceSeeds(
+      secretStore: _secrets,
+      homeserver: _form.homeserver.text.trim(),
+      userId: _form.userId.text.trim(),
+    );
+    if (!mounted) return;
+    if (existing != null) {
+      final proceed = await _confirmOverwriteIdentity(l10n);
+      if (!proceed || !mounted) return;
+    }
     final key = await promptRecoveryKey(context, l10n);
     if (key == null || !mounted) return;
     try {
@@ -262,6 +274,32 @@ class _MatrixPanelState extends State<MatrixPanel> {
         ).showSnackBar(SnackBar(content: Text(_recoveryError(l10n, e.reason))));
       }
     }
+  }
+
+  /// Ask before replacing an existing identity. Returns true to proceed.
+  Future<bool> _confirmOverwriteIdentity(AppLocalizations l10n) async {
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.d('Bestaande identiteit vervangen?')),
+        content: Text(
+          l10n.d(
+            'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.',
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(l10n.d('Annuleren')),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(l10n.d('Vervangen')),
+          ),
+        ],
+      ),
+    );
+    return ok ?? false;
   }
 
   String _recoveryError(

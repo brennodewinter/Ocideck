@@ -1787,6 +1787,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bestaande identiteit vervangen?': 'Identitatem exsistentem substituere?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Hoc instrumentum iam identitatem cooperationis habet. Restitutio eam identitate ex clave substituit. Clavemne recuperationis identitatis praesentis servavisti? Sine exemplari eam amittes.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Memoria interretialis instrumentorum praesentationis plena est (summum 256 MB). Opus primum ut fasciculum .ocideck serva, ne data perdas. Deinde paucioribus minoribusve imaginibus, pelliculis aut fasciculis sonoris utere, alias collectiones claude, aut denuo onera sine aliis collectionibus apertis.',
   'Ongeldige vraag': 'Quaestio invalida',

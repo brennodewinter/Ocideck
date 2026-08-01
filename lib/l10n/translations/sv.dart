@@ -1770,6 +1770,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bestaande identiteit vervangen?': 'Ersätt befintlig identitet?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Den här enheten har redan en samarbetsidentitet. Återställning ersätter den med identiteten från nyckeln. Har du sparat en återställningsnyckel för den nuvarande identiteten? Utan säkerhetskopia förlorar du den.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Webbminnet för presentationsmedier är fullt (högst 256 MB). Spara först ditt arbete som en .ocideck-fil för att förhindra dataförlust. Använd sedan färre eller mindre bilder, videor eller ljudfiler, stäng andra bildspel eller läs in på nytt utan att öppna andra bildspel.',
   'Ongeldige vraag': 'Ogiltig fråga',

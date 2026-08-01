@@ -730,6 +730,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bestaande identiteit vervangen?': 'Reemplasá identidat eksistente?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'E aparato aki ya tin un identidat di kolaborashon. Restourashon ta reemplas\'é ku e identidat for di e yabi. Bo a warda un yabi di rekuperashon pa e identidat aktual? Sin un backup lo bo perd\'é.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'E memoria web pa media di presentashon ta yen (máksimo 256 MB). Warda bo trabou promé komo un archivo .ocideck pa evita pèrdida di dato. Despues usa ménos imágen, video òf archivo di audio, òf archivo mas chikí, sera otro decks òf karga di nobo sin habri otro decks.',
   'Ongeldige vraag': 'Pregunta inválido',

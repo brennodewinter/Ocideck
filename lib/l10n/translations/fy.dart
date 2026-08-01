@@ -731,6 +731,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bestaande identiteit vervangen?': 'Besteande identiteit ferfange?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Dit apparaat hat al in gearwurkingsidentiteit. Weromsette ferfangt dy troch de identiteit út de kaai. Hast fan de hjoeddeiske identiteit in herstelkaai bewarre? Sûnder reservekopy bist dy kwyt.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'It webûnthâld foar presintaasjemedia is fol (maksimaal 256 MB). Bewarje dyn wurk earst as in .ocideck-bestân om gegevensferlies foar te kommen. Brûk dêrnei minder of lytsere ôfbyldingen, fideo’s of audiobestannen, slút oare decks of laad opnij sûnder oare decks te iepenjen.',
   'Ongeldige vraag': 'Unjildige fraach',

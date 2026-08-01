@@ -1774,6 +1774,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bestaande identiteit vervangen?': 'Bestehendi Identität ersetze?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Das Grät hät scho en Zämmenarbetsidentität. S Widerhärstelle ersetzt si dur d Identität us em Schlüssel. Hesch für di aktuelli Identität en Widerhärstellschlüssel gsicheret? Ohni Backup isch si wäg.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Dr Webspicher für Präsentationsmedie isch voll (maximal 256 MB). Speicher dini Arbet zerscht als .ocideck-Datei, damit kei Date verlore gönd. Bruuch denn weniger oder chlineri Bilder, Videos oder Audiodateie, schliess anderi Decks oder lad neu, ohni anderi Decks z öffne.',
   'Ongeldige vraag': 'Ungültigi Frag',

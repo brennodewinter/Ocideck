@@ -1771,6 +1771,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bestaande identiteit vervangen?': 'Korvataanko nykyinen identiteetti?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Tällä laitteella on jo yhteistyöidentiteetti. Palautus korvaa sen avaimen identiteetillä. Tallensitko nykyisen identiteetin palautusavaimen? Ilman varmuuskopiota menetät sen.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Esitysmedian verkkosovellusmuisti on täynnä (enintään 256 Mt). Tallenna työsi ensin .ocideck-tiedostona tietojen menetyksen estämiseksi. Käytä sen jälkeen vähemmän tai pienempiä kuvia, videoita tai äänitiedostoja, sulje muut esitykset tai lataa uudelleen avaamatta muita esityksiä.',
   'Ongeldige vraag': 'Virheellinen kysymys',

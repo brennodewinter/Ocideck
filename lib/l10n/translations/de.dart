@@ -730,6 +730,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Bestaande identiteit vervangen?': 'Bestehende Identität ersetzen?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Dieses Gerät hat bereits eine Zusammenarbeitsidentität. Beim Wiederherstellen wird sie durch die Identität aus dem Schlüssel ersetzt. Hast du für die aktuelle Identität einen Wiederherstellungsschlüssel gesichert? Ohne Backup geht sie verloren.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Der Webspeicher für Präsentationsmedien ist voll (maximal 256 MB). Speichere deine Arbeit zuerst als .ocideck-Datei, um Datenverlust zu vermeiden. Verwende danach weniger oder kleinere Bilder, Videos oder Audiodateien, schließe andere Decks oder lade neu, ohne andere Decks zu öffnen.',
   'Ongeldige vraag': 'Ungültige Frage',
