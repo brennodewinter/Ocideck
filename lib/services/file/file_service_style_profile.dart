@@ -22,6 +22,7 @@ enum StyleProfileImportFailure {
   tooLarge,
   invalid,
   unsupportedVersion,
+  memoryBudgetExceeded,
 }
 
 /// Uitkomst van een import: het [profile] bij succes, anders een [failure].
@@ -41,6 +42,17 @@ class StyleProfileImportOutcome {
   const StyleProfileImportOutcome.failed(this.failure)
     : profile = null,
       logoOmitted = false;
+}
+
+Future<({String? path, bool budgetExceeded})> _materializeStyleLogoSafely(
+  Future<String?> Function() materialize,
+) async {
+  try {
+    return (path: await materialize(), budgetExceeded: false);
+  } on WebAssetBudgetExceeded catch (e) {
+    logWarning('FileService: webgeheugen voor stijllogo vol', e);
+    return (path: null, budgetExceeded: true);
+  }
 }
 
 /// Uitkomst van een export.
@@ -66,6 +78,30 @@ class StyleProfileBytes {
   const StyleProfileBytes(this.bytes, {required this.logoOmitted});
 }
 
+bool _withinLogoCap(Uint8List? bytes) =>
+    bytes != null &&
+    bytes.isNotEmpty &&
+    bytes.length <= FileService.maxStyleProfileLogoBytes;
+
+/// De ingesloten logo-bytes uit een envelope, of null wanneer er geen zijn of
+/// ze niet deugen. Het meegestuurde `mime`-veld wordt genegeerd: het type komt
+/// uit de bytes zelf, zodat een bestand geen ander formaat kan voorwenden.
+({Uint8List bytes, String mime})? _embeddedLogo(Object? raw) {
+  if (raw is! Map) return null;
+  final data = raw['data'];
+  if (data is! String) return null;
+  try {
+    final bytes = base64.decode(data);
+    if (!_withinLogoCap(bytes)) return null;
+    final mime = ImageService.imageMimeFromBytes(bytes);
+    if (mime == null) return null;
+    return (bytes: bytes, mime: mime);
+  } catch (e) {
+    logWarning('FileService: ingesloten logo onleesbaar', e);
+    return null;
+  }
+}
+
 extension FileServiceStyleProfile on FileService {
   /// Bestandsnaam-veilige variant van een profielnaam. Eigen sanitizer (net als
   /// `_safeThemeName`): een profielnaam is vrije invoer, dus `/` en `..` moeten
@@ -77,11 +113,6 @@ extension FileServiceStyleProfile on FileService {
         .trim();
     return cleaned.isEmpty ? 'stijlprofiel' : cleaned;
   }
-
-  bool _withinLogoCap(Uint8List? bytes) =>
-      bytes != null &&
-      bytes.isNotEmpty &&
-      bytes.length <= FileService.maxStyleProfileLogoBytes;
 
   /// De bytes achter een eigen logo, of null wanneer ze niet te lezen zijn:
   /// een verdwenen bestand, een lege mem:-store na een herlaad, of te groot.
@@ -192,25 +223,6 @@ extension FileServiceStyleProfile on FileService {
     );
   }
 
-  /// De ingesloten logo-bytes uit een envelope, of null wanneer er geen zijn of
-  /// ze niet deugen. Het meegestuurde `mime`-veld wordt genegeerd: het type komt
-  /// uit de bytes zelf, zodat een bestand geen ander formaat kan voorwenden.
-  ({Uint8List bytes, String mime})? _embeddedLogo(Object? raw) {
-    if (raw is! Map) return null;
-    final data = raw['data'];
-    if (data is! String) return null;
-    try {
-      final bytes = base64.decode(data);
-      if (!_withinLogoCap(bytes)) return null;
-      final mime = ImageService.imageMimeFromBytes(bytes);
-      if (mime == null) return null;
-      return (bytes: bytes, mime: mime);
-    } catch (e) {
-      logWarning('FileService: ingesloten logo onleesbaar', e);
-      return null;
-    }
-  }
-
   /// Zet ingesloten logo-bytes terug in opslag en geef het pad dat de renderlaag
   /// aankan; null wanneer dat niet lukte.
   ///
@@ -304,12 +316,20 @@ extension FileServiceStyleProfile on FileService {
     final rawLogo = envelope['logo'];
     final embedded = _embeddedLogo(rawLogo);
     if (embedded != null) {
-      final path = await _materializeLogo(
-        embedded.bytes,
-        embedded.mime,
-        profile.name,
-        logoBaseDir,
+      final materialized = await _materializeStyleLogoSafely(
+        () => _materializeLogo(
+          embedded.bytes,
+          embedded.mime,
+          profile.name,
+          logoBaseDir,
+        ),
       );
+      if (materialized.budgetExceeded) {
+        return const StyleProfileImportOutcome.failed(
+          StyleProfileImportFailure.memoryBudgetExceeded,
+        );
+      }
+      final path = materialized.path;
       profile = path == null
           ? profile.copyWith(clearLogo: true)
           : profile.copyWith(logoPath: path);

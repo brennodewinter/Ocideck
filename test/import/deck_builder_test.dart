@@ -49,7 +49,10 @@ SourceImage _img(
 
 void main() {
   setUp(WebAssetStore.clear);
-  tearDown(WebAssetStore.clear);
+  tearDown(() {
+    WebAssetStore.clear();
+    WebAssetStore.overrideTotalBudgetForTest(null);
+  });
 
   group('DeckBuilder maps slide types onto the real model', () {
     test('a first title-only slide becomes a title slide', () {
@@ -114,6 +117,32 @@ void main() {
       expect(slide.imagePath, startsWith('mem:'));
       expect(slide.imagePath2, startsWith('mem:'));
       expect(slide.imagePath, isNot(slide.imagePath2));
+    });
+
+    test('een budgetfout laat geen half gebouwd deck in de store achter', () {
+      WebAssetStore.overrideTotalBudgetForTest(1);
+
+      expect(
+        () => _build([
+          SourceSlide(
+            index: 1,
+            title: 'Eén',
+            images: [
+              _img([1]),
+            ],
+          ),
+          SourceSlide(
+            index: 2,
+            title: 'Twee',
+            images: [
+              _img([2]),
+            ],
+          ),
+        ]),
+        throwsA(isA<WebAssetBudgetExceeded>()),
+      );
+      expect(WebAssetStore.isEmpty, isTrue);
+      expect(WebAssetStore.totalBytes, 0);
     });
 
     test('a quote block becomes a quote slide with the title as author', () {

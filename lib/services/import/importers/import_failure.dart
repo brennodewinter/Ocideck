@@ -10,6 +10,9 @@ enum ImportFailureReason {
   /// Groter dan de toegestane invoerlimiet. args: `bestand`, `limiet`.
   tooLarge,
 
+  /// Het appbrede webgeheugen kan de ingebedde media niet meer opnemen.
+  memoryBudgetExceeded,
+
   /// Geen leesbaar zip-archief, of te klein — het is geen presentatie.
   /// args: `bestand`.
   notAPresentation,

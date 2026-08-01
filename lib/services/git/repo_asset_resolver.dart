@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:path/path.dart' as p;
 
 import '../../models/deck.dart';
@@ -31,6 +33,7 @@ Future<Deck> resolveRepoAssetsToMem(
   required String sourceName,
 }) async {
   final memFor = <String, String>{};
+  final pendingWebAssets = <String, ({Uint8List bytes, String name})>{};
 
   /// Media komt niet terug zoals een afbeelding. [WebAssetStore] is een map in
   /// het geheugen — prima voor een plaatje, verkeerd voor de gigabyte die
@@ -60,13 +63,15 @@ Future<Deck> resolveRepoAssetsToMem(
       // hash van de inhoud: twee dia's met dezelfde film delen één bestand, en
       // een tweede keer openen overschrijft hetzelfde pad in plaats van te
       // stapelen.
-      final staged = supportsLocalProjectFolders
-          ? await AssetStaging.stageBytes(
-              bytes,
-              subdir: 'repo-media',
-              filename: name,
-            )
-          : WebAssetStore.put(bytes, name: name);
+      if (!supportsLocalProjectFolders) {
+        pendingWebAssets[reference] = (bytes: bytes, name: name);
+        return null;
+      }
+      final staged = await AssetStaging.stageBytes(
+        bytes,
+        subdir: 'repo-media',
+        filename: name,
+      );
       if (staged == null) return null;
       memFor[reference] = staged;
       return staged;
@@ -90,10 +95,12 @@ Future<Deck> resolveRepoAssetsToMem(
         return null;
       }
       final path = GitRepoLayout.assetPathOf(reference);
-      final mem = WebAssetStore.put(
-        bytes,
-        name: path == null ? 'asset' : p.posix.basename(path),
-      );
+      final name = path == null ? 'asset' : p.posix.basename(path);
+      if (!supportsLocalProjectFolders) {
+        pendingWebAssets[reference] = (bytes: bytes, name: name);
+        return null;
+      }
+      final mem = WebAssetStore.put(bytes, name: name);
       memFor[reference] = mem;
       return mem;
     } on GitForgeException catch (e) {
@@ -120,7 +127,28 @@ Future<Deck> resolveRepoAssetsToMem(
     if (audio != null) next = next.copyWith(audioPath: audio);
     slides.add(next);
   }
-  return memFor.isEmpty ? deck : deck.copyWith(slides: slides);
+
+  WebAssetStore.atomic(() {
+    for (final entry in pendingWebAssets.entries) {
+      memFor[entry.key] = WebAssetStore.put(
+        entry.value.bytes,
+        name: entry.value.name,
+      );
+    }
+  });
+  if (pendingWebAssets.isEmpty) {
+    return memFor.isEmpty ? deck : deck.copyWith(slides: slides);
+  }
+  final rewritten = <Slide>[];
+  for (var slide in slides) {
+    slide = rewriteSlideImagePaths(slide, (path) => memFor[path]);
+    final video = memFor[slide.videoPath];
+    final audio = memFor[slide.audioPath];
+    if (video != null) slide = slide.copyWith(videoPath: video);
+    if (audio != null) slide = slide.copyWith(audioPath: audio);
+    rewritten.add(slide);
+  }
+  return deck.copyWith(slides: rewritten);
 }
 
 /// Waar de bytes van een afbeelding vandaan komen bij het schrijven naar een

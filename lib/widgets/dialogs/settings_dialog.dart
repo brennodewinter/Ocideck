@@ -45,6 +45,7 @@ import '../../theme/app_theme.dart';
 import '../../theme/brand_logo.dart';
 import '../../utils/error_snackbar.dart';
 import '../../utils/log.dart';
+import '../../utils/user_facing_error.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
@@ -872,15 +873,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         ),
       ),
     );
-  }
-
-  /// Zet de taal terug zoals ze bij het openen was wanneer het venster zonder
-  /// opslaan sluit. Alleen schrijven als er écht iets veranderde, zodat een
-  /// gewone Annuleren geen instellingen aanraakt.
-  void _restoreLanguageIfDiscarded() {
-    if (_saved) return;
-    if (ref.read(settingsProvider).languageCode == _initialLanguageCode) return;
-    ref.read(settingsProvider.notifier).setLanguageCode(_initialLanguageCode);
   }
 
   GlobalKey _themeFieldKey(String field) =>

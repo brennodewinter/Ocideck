@@ -17,6 +17,7 @@ import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/project_path.dart';
+import '../../utils/user_facing_error.dart';
 import '../asset_origin_badge.dart';
 import '../dialogs/image_carousel_picker.dart';
 import '../../theme/app_theme.dart';
@@ -892,9 +893,7 @@ void reportImageImportFailure(
       'Geen afbeelding op het klembord.',
     ),
     ImageImportFailure.writeFailed => l10n.d('Kon de afbeelding niet opslaan.'),
-    ImageImportFailure.memoryBudgetExceeded => l10n.d(
-      'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.',
-    ),
+    ImageImportFailure.memoryBudgetExceeded => webAssetBudgetMessage(l10n),
   };
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
 }

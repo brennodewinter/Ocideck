@@ -103,6 +103,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// de klasse. Zelfde truc als [DeckNotifier.currentState].
   TabsState get currentState => state;
 
+  set _replacementState(TabsState value) => state = value;
+
   /// Herbouw de tabbladlijst zodat luisteraars een mutatie ín een [TabInfo] —
   /// zoals een net ingevulde origin — daadwerkelijk zien. [TabInfo] is
   /// muteerbaar, dus zonder nieuwe lijst verandert er niets voor Riverpod.
@@ -660,7 +662,12 @@ class TabsNotifier extends StateNotifier<TabsState> {
     var deck = gated.deck;
     if (deck == null) return gated.failure;
 
-    deck = _attachPackageAssets(deck, entries, mdEntry.name);
+    try {
+      deck = _attachPackageAssets(deck, entries, mdEntry.name);
+    } on WebAssetBudgetExceeded catch (e) {
+      logWarning('TabsNotifier._openPackageFromBytes: webgeheugen vol', e);
+      return _failOpen(_ref, mounted, OpenFailure.memoryBudgetExceeded);
+    }
     deck = _attachPackageChartData(deck, entries, mdEntry.name);
     deck = _attachPackageSidecars(deck, entries, mdEntry.name);
     if (!mounted) return OpenResult.unreadable;
@@ -715,32 +722,39 @@ class TabsNotifier extends StateNotifier<TabsState> {
     return (deck: deck, failure: OpenResult.opened);
   }
 
-  /// Remove the unique folder an import extracted/downloaded into when the deck
-  /// was not opened (blocked or unreadable). Only ever deletes folders the
-  /// import itself just created — never a folder the user opened in place.
+  /// Selecteer een bestaand tabblad; ongeldige indices veranderen niets.
+  void selectTab(int index) => _selectTab(this, index);
 
-  void selectTab(int index) {
-    if (index >= 0 && index < state.tabs.length) {
-      state = state.copyWith(selectedIndex: index);
-    }
-  }
+  /// Sluit een tabblad en ruim daarna alle niet meer gebruikte webassets op.
+  void closeTab(int index) => _closeTab(this, index);
+}
 
-  /// Close the tab at [index].
-  /// If it is the only tab, just clears the deck (welcome screen remains).
-  void closeTab(int index) {
-    if (state.tabs.length == 1) {
-      _recovery.discard(state.tabs.first.recoveryId);
-      state.tabs.first.deckNotifier.closeDeck();
-      state = state.copyWith(tabs: List.from(state.tabs));
-      return;
-    }
-    final tab = state.tabs[index];
-    _recovery.discard(tab.recoveryId);
-    _disposeTab(tab);
-    final newTabs = List<TabInfo>.from(state.tabs)..removeAt(index);
-    final newSelected = index >= newTabs.length ? newTabs.length - 1 : index;
-    state = state.copyWith(tabs: newTabs, selectedIndex: newSelected);
+void _selectTab(TabsNotifier notifier, int index) {
+  final current = notifier.currentState;
+  if (index >= 0 && index < current.tabs.length) {
+    notifier._replacementState = current.copyWith(selectedIndex: index);
   }
+}
+
+void _closeTab(TabsNotifier notifier, int index) {
+  final current = notifier.currentState;
+  if (current.tabs.length == 1) {
+    notifier._recovery.discard(current.tabs.first.recoveryId);
+    current.tabs.first.deckNotifier.closeDeck();
+    notifier.refreshTabs();
+    notifier.sweepWebAssets();
+    return;
+  }
+  final tab = current.tabs[index];
+  notifier._recovery.discard(tab.recoveryId);
+  notifier._disposeTab(tab);
+  final newTabs = List<TabInfo>.from(current.tabs)..removeAt(index);
+  final newSelected = index >= newTabs.length ? newTabs.length - 1 : index;
+  notifier._replacementState = current.copyWith(
+    tabs: newTabs,
+    selectedIndex: newSelected,
+  );
+  notifier.sweepWebAssets();
 }
 
 // ── Provider ──────────────────────────────────────────────────────────────────

@@ -9,6 +9,7 @@ import '../../services/import/bulk_import_runner.dart';
 import '../../services/import/deck_builder.dart';
 import '../../services/import/importers/import_failure.dart';
 import '../../services/import/presentation_import_service.dart';
+import '../../services/web_asset_store.dart';
 import '../../state/deck_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
@@ -122,7 +123,14 @@ Future<void> importPresentation(
   // `null` betekent: de gebruiker breekt de hele import af.
   if (decisions == null || !context.mounted) return;
 
-  final built = prepared.build(policies: decisions);
+  final BuiltDeck built;
+  try {
+    built = prepared.build(policies: decisions);
+  } on WebAssetBudgetExceeded catch (e) {
+    logWarning('importPresentation: webgeheugen vol', e);
+    showErrorSnackBar(messenger, l10n, webAssetBudgetMessage(l10n));
+    return;
+  }
   // Fail-closed backstop (#876): draagt de gebouwde import na neutralisatie tóch
   // uitvoerbare inhoud, dan opent hij niet — hetzelfde alarm als bij een vreemd
   // bestand, in plaats van een deck dat bij het volgende openen wordt geweigerd.

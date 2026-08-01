@@ -5,6 +5,15 @@
 part of '../settings_dialog.dart';
 
 extension _SettingsGeneralTab on _SettingsDialogState {
+  /// Zet de taal terug zoals ze bij het openen was wanneer het venster zonder
+  /// opslaan sluit. Alleen schrijven als er écht iets veranderde, zodat een
+  /// gewone Annuleren geen instellingen aanraakt.
+  void _restoreLanguageIfDiscarded() {
+    if (_saved) return;
+    if (ref.read(settingsProvider).languageCode == _initialLanguageCode) return;
+    ref.read(settingsProvider.notifier).setLanguageCode(_initialLanguageCode);
+  }
+
   Widget _generalTab() {
     final l10n = context.l10n;
     final languageCode = ref.watch(

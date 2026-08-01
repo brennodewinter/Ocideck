@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import '../../models/deck.dart';
 import '../markdown_safety.dart';
 import '../markdown_service.dart';
+import '../web_asset_store.dart';
 import 'deck_builder.dart';
 import 'importers/import_failure.dart';
 import 'models/source_deck.dart';
@@ -194,7 +195,19 @@ class PresentationImportService {
     if (prepared == null) {
       return PresentationImportResult.failed(prep.failure!);
     }
-    final built = prepared.build(policies: policies);
+    final BuiltDeck built;
+    try {
+      built = prepared.build(policies: policies);
+    } on WebAssetBudgetExceeded catch (e) {
+      return PresentationImportResult.failed(
+        ImportFailure(
+          'Webgeheugen vol tijdens import van $filename.',
+          cause: e,
+          reason: ImportFailureReason.memoryBudgetExceeded,
+          args: {'bestand': filename},
+        ),
+      );
+    }
     if (built.safetyFindings.isNotEmpty) {
       return PresentationImportResult.failed(
         ImportFailure(

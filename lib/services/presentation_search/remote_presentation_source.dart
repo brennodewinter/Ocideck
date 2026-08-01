@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:path/path.dart' as p;
 
@@ -131,6 +132,8 @@ class RemotePresentationSource implements PresentationSource {
       if (deck == null) return null;
       final withImages = await _attachRemoteImages(deck, entry.path);
       return _scanned(entry, withImages, raw);
+    } on WebAssetBudgetExceeded {
+      rethrow;
     } catch (e) {
       logWarning('RemotePresentationSource: onleesbaar (${entry.path})', e);
       return null;
@@ -169,6 +172,8 @@ class RemotePresentationSource implements PresentationSource {
         attachPackageAssetsToMem(deck, entries, mdEntry.name),
         raw,
       );
+    } on WebAssetBudgetExceeded {
+      rethrow;
     } catch (e) {
       logWarning(
         'RemotePresentationSource: pakket onleesbaar (${entry.path})',
@@ -196,8 +201,7 @@ class RemotePresentationSource implements PresentationSource {
   /// pakket met een kapotte verwijzing.
   Future<Deck> _attachRemoteImages(Deck deck, String mdPath) async {
     final baseDir = p.posix.dirname(mdPath);
-    final memFor = <String, String>{};
-    Future<String?> memPath(String ref) async {
+    String? resolvedPath(String ref) {
       final trimmed = ref.trim();
       if (trimmed.isEmpty ||
           WebAssetStore.isMemPath(trimmed) ||
@@ -211,33 +215,51 @@ class RemotePresentationSource implements PresentationSource {
         baseDir == '.' ? trimmed : p.posix.join(baseDir, trimmed),
       );
       if (resolved.startsWith('..')) return null; // buiten de wortel
-      final cached = memFor[resolved];
-      if (cached != null) return cached;
-      try {
-        final bytes = await client.download(resolved);
-        if (bytes.isEmpty ||
-            bytes.length > ImageService.maxImageBytes ||
-            !ImageService.looksLikeImage(bytes)) {
-          return null;
+      return resolved;
+    }
+
+    final bytesFor = <String, Uint8List>{};
+    final names = <String, String>{};
+    for (final slide in deck.slides) {
+      for (final ref in [slide.imagePath, slide.imagePath2]) {
+        final resolved = resolvedPath(ref);
+        if (resolved == null || bytesFor.containsKey(resolved)) continue;
+        try {
+          final bytes = await client.download(resolved);
+          if (bytes.isEmpty ||
+              bytes.length > ImageService.maxImageBytes ||
+              !ImageService.looksLikeImage(bytes)) {
+            continue;
+          }
+          bytesFor[resolved] = bytes;
+          names[resolved] = p.posix.basename(resolved);
+        } catch (e) {
+          logWarning(
+            'RemotePresentationSource: afbeelding onbereikbaar ($resolved)',
+            e,
+          );
+          continue;
         }
-        final mem = WebAssetStore.put(bytes, name: p.posix.basename(resolved));
-        memFor[resolved] = mem;
-        return mem;
-      } catch (e) {
-        logWarning(
-          'RemotePresentationSource: afbeelding onbereikbaar ($resolved)',
-          e,
-        );
-        return null;
       }
     }
+
+    final memFor = <String, String>{};
+    WebAssetStore.atomic(() {
+      for (final entry in bytesFor.entries) {
+        memFor[entry.key] = WebAssetStore.put(
+          entry.value,
+          name: names[entry.key]!,
+        );
+      }
+    });
 
     final slides = <Slide>[];
     for (final slide in deck.slides) {
       slides.add(
         slide.copyWith(
-          imagePath: await memPath(slide.imagePath) ?? slide.imagePath,
-          imagePath2: await memPath(slide.imagePath2) ?? slide.imagePath2,
+          imagePath: memFor[resolvedPath(slide.imagePath)] ?? slide.imagePath,
+          imagePath2:
+              memFor[resolvedPath(slide.imagePath2)] ?? slide.imagePath2,
         ),
       );
     }

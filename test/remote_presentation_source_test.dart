@@ -96,7 +96,10 @@ RemotePresentationSource _source(_FakeClient client) =>
 
 void main() {
   setUp(WebAssetStore.clear);
-  tearDown(WebAssetStore.clear);
+  tearDown(() {
+    WebAssetStore.clear();
+    WebAssetStore.overrideTotalBudgetForTest(null);
+  });
 
   test('leest een los .md en haalt zijn afbeelding op als mem:', () async {
     final client = _FakeClient(
@@ -122,6 +125,30 @@ void main() {
     final withImage = deck.slides.firstWhere((s) => s.imagePath.isNotEmpty);
     expect(WebAssetStore.isMemPath(withImage.imagePath), isTrue);
     expect(WebAssetStore.bytesFor(withImage.imagePath), _png());
+  });
+
+  test('een budgetfout wordt niet als ontbrekend beeld ingeslikt', () async {
+    WebAssetStore.overrideTotalBudgetForTest(_png().length);
+    final second = _png()..[15] = 1;
+    final client = _FakeClient(
+      {
+        '': [_md('deck.md')],
+      },
+      {
+        'deck.md': _deckMarkdown(
+          'Te groot',
+          '# Eén\n\n![bg](images/a.png)\n\n---\n\n# Twee\n\n![bg](images/b.png)\n',
+        ),
+        'images/a.png': _png(),
+        'images/b.png': second,
+      },
+    );
+
+    await expectLater(
+      _source(client).scan(),
+      throwsA(isA<WebAssetBudgetExceeded>()),
+    );
+    expect(WebAssetStore.isEmpty, isTrue);
   });
 
   test(

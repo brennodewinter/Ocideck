@@ -21,6 +21,14 @@ Deck attachPackageAssetsToMem(
   Deck deck,
   List<PackageEntry> entries,
   String mdName,
+) => WebAssetStore.atomic(
+  () => _attachPackageAssetsToMem(deck, entries, mdName),
+);
+
+Deck _attachPackageAssetsToMem(
+  Deck deck,
+  List<PackageEntry> entries,
+  String mdName,
 ) {
   final mdDir = p.posix.dirname(mdName);
   final byName = {for (final e in entries) p.posix.normalize(e.name): e.bytes};

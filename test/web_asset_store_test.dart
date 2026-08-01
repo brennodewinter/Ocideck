@@ -69,6 +69,31 @@ void main() {
     expect(WebAssetStore.totalBytes, 0);
   });
 
+  test('een mislukte samengestelde put draait alleen nieuwe assets terug', () {
+    WebAssetStore.overrideTotalBudgetForTest(4);
+    final existing = WebAssetStore.put(
+      Uint8List.fromList([9]),
+      name: 'bestaand.png',
+    );
+
+    expect(
+      () => WebAssetStore.atomic(() {
+        WebAssetStore.put(Uint8List.fromList([1, 2]), name: 'eerste.png');
+        WebAssetStore.put(Uint8List.fromList([3, 4]), name: 'tweede.png');
+      }),
+      throwsA(isA<WebAssetBudgetExceeded>()),
+    );
+
+    expect(WebAssetStore.totalBytes, 1);
+    expect(WebAssetStore.bytesFor(existing), isNotNull);
+    expect(WebAssetStore.nameFor(existing), 'bestaand.png');
+  });
+
+  test('het productieplafond is buiten web niet actief', () {
+    WebAssetStore.overrideTotalBudgetForTest(null);
+    expect(WebAssetStore.budgetEnforced, isFalse);
+  });
+
   test('identieke inhoud deelt pad en telt maar eenmaal mee', () {
     final first = WebAssetStore.put(
       Uint8List.fromList([1, 2, 3, 4]),
@@ -131,10 +156,7 @@ void main() {
     expect(WebAssetStore.isEmpty, isTrue);
     expect(WebAssetStore.totalBytes, 0);
     expect(
-      () => WebAssetStore.put(
-        Uint8List.fromList([3, 4]),
-        name: 'opnieuw.bin',
-      ),
+      () => WebAssetStore.put(Uint8List.fromList([3, 4]), name: 'opnieuw.bin'),
       returnsNormally,
       reason: 'vrijgave geeft het volledige budget terug',
     );

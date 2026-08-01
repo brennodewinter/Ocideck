@@ -66,11 +66,17 @@ extension TabsNotifierGit on TabsNotifier {
     if (parsed == null) return gated.failure;
     if (!mounted) return OpenResult.unreadable;
 
-    final withAssets = await _withRepoAssets(
-      parsed,
-      AssetPool(forge: forge, branch: branch),
-      sourceName: label,
-    );
+    final Deck withAssets;
+    try {
+      withAssets = await _withRepoAssets(
+        parsed,
+        AssetPool(forge: forge, branch: branch),
+        sourceName: label,
+      );
+    } on WebAssetBudgetExceeded catch (e) {
+      logWarning('openDeckFromGit: webgeheugen vol', e);
+      return _failOpen(_ref, mounted, OpenFailure.memoryBudgetExceeded);
+    }
     final sidecars = await withRepoSidecars(
       withAssets,
       deckDir: deckDir,
@@ -162,11 +168,18 @@ extension TabsNotifierGit on TabsNotifier {
       return (deck: null, failure: OpenResult.unreadable, label: label);
     }
 
-    final withAssets = await _withRepoAssets(
-      parsed,
-      AssetPool(forge: forge, branch: tag),
-      sourceName: label,
-    );
+    final Deck withAssets;
+    try {
+      withAssets = await _withRepoAssets(
+        parsed,
+        AssetPool(forge: forge, branch: tag),
+        sourceName: label,
+      );
+    } on WebAssetBudgetExceeded catch (e) {
+      logWarning('readVersionDeck: webgeheugen vol', e);
+      _failOpen(_ref, mounted, OpenFailure.memoryBudgetExceeded);
+      return (deck: null, failure: OpenResult.unreadable, label: label);
+    }
     // Ook een uitgebrachte versie draagt dezelfde lagen: anders vergelijk je
     // straks twee versies met lege grafieken en elke notitie als "toegevoegd".
     final sidecars = await withRepoSidecars(

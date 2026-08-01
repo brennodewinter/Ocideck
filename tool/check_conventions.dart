@@ -125,7 +125,10 @@ const Map<String, int> fileSizeBaseline = {
   // +1: the collaboration_provider import (matrixCollabActive) gating the
   // realtime-collab palette commands on the module.
   // +1 (#978): the collab_verify_banner import for the device-verification banner.
-  'lib/widgets/app_shell.dart': 864,
+  // #1053: de web-dropafhandeling verhuisde naar shell_actions.dart, waardoor
+  // de bibliotheekkop alle nieuwe samenwerking-imports behoudt maar de file zelf
+  // weer onder het lagere plafond valt.
+  'lib/widgets/app_shell.dart': 830,
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
   // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
   // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped
@@ -173,7 +176,7 @@ const int maxClassLines = 1000;
 /// Een nieuwe regel hier is een bewuste beslissing en hoort een reden te hebben;
 /// het doel is minder en kleinere regels, niet meer.
 const Map<String, int> classSizeBaseline = {
-  'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 5989,
+  'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 5972,
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
@@ -186,7 +189,7 @@ const Map<String, int> classSizeBaseline = {
   // +1: Y-01-doorvoer naar SlidePreview in views/overlays (resolve-at-draw).
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
       3311,
-  'lib/services/file_service.dart#FileService': 2817,
+  'lib/services/file_service.dart#FileService': 2800,
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on
   // this State via chart_preview_improvement.dart. Raising rather than a
@@ -198,7 +201,7 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 2868,
   // Procesverbetering: improvement-slide discovery + save paths.
   // +4: Y-01/framework-args op newDeck + improvement-module-prompt.
-  'lib/state/tabs_provider.dart#TabsNotifier': 2244,
+  'lib/state/tabs_provider.dart#TabsNotifier': 2243,
   // Procesverbetering: matrix/canvas/tree/flow/phaseGate serialize/parse.
   // +33: Y-01 front-matter keys (name/unit/usl/lsl/target/baseline/goal).
   'lib/services/markdown_service.dart#MarkdownService': 2412,

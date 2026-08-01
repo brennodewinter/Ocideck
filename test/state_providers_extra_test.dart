@@ -152,10 +152,8 @@ void main() {
     tearDown(WebAssetStore.clear);
 
     var nextMemByte = 0;
-    String putMem() => WebAssetStore.put(
-      Uint8List.fromList([nextMemByte++]),
-      name: 'x.png',
-    );
+    String putMem() =>
+        WebAssetStore.put(Uint8List.fromList([nextMemByte++]), name: 'x.png');
     Slide imageSlide(String memPath) =>
         Slide.create(SlideType.image).copyWith(imagePath: memPath);
     DeckNotifier deckOf(ProviderContainer c) =>
@@ -243,9 +241,7 @@ void main() {
       );
       expect(duplicate, first, reason: 'de inhoud is gededupliceerd');
 
-      deckOf(container).loadDeck(
-        Deck(title: 'A', slides: [imageSlide(first)]),
-      );
+      deckOf(container).loadDeck(Deck(title: 'A', slides: [imageSlide(first)]));
       tabs.newDeckInNewTab('B');
       tabs.sweepWebAssets();
       expect(
@@ -255,11 +251,10 @@ void main() {
       );
 
       tabs.closeTab(0);
-      tabs.sweepWebAssets();
       expect(
         WebAssetStore.bytesFor(first),
         isNull,
-        reason: 'na het laatste gebruik komt het budget vrij',
+        reason: 'sluiten geeft het laatste gebruik automatisch vrij',
       );
     });
 

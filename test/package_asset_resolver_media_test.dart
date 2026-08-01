@@ -11,7 +11,10 @@ import 'package:ocideck/utils/mem_asset_blob.dart';
 /// [WebAssetStore] terecht, dus een `<video src="media/…">` wees naar een
 /// archief-intern pad dat daar geen URL is en er speelde niets.
 void main() {
-  tearDown(WebAssetStore.clear);
+  tearDown(() {
+    WebAssetStore.clear();
+    WebAssetStore.overrideTotalBudgetForTest(null);
+  });
 
   Uint8List fill(int v, int len) => Uint8List.fromList(List.filled(len, v));
 
@@ -68,6 +71,34 @@ void main() {
     );
     expect(out.slides[0].videoPath, 'media/ontbreekt.mp4');
   });
+
+  test(
+    'een pakket boven het resterende budget laat geen halve assets achter',
+    () {
+      WebAssetStore.overrideTotalBudgetForTest(80);
+      final video = fill(7, 64);
+      final audio = fill(9, 32);
+
+      expect(
+        () => attachPackageAssetsToMem(
+          deckWith([
+            Slide.create(SlideType.video).copyWith(videoPath: 'media/clip.mp4'),
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(audioPath: 'media/tune.mp3'),
+          ]),
+          <({String name, Uint8List bytes})>[
+            (name: 'media/clip.mp4', bytes: video),
+            (name: 'media/tune.mp3', bytes: audio),
+          ],
+          'demo.md',
+        ),
+        throwsA(isA<WebAssetBudgetExceeded>()),
+      );
+      expect(WebAssetStore.isEmpty, isTrue);
+      expect(WebAssetStore.totalBytes, 0);
+    },
+  );
 
   // Buiten de browser bestaat er geen blob-URL; de stub-helft van
   // mem_asset_blob levert dan null (de web-helft staat in de dekkingsbasislijn).
