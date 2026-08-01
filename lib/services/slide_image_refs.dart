@@ -12,7 +12,8 @@
 /// hem.
 library;
 
-import '../models/question.dart';
+import 'dart:convert';
+
 import '../models/slide.dart';
 
 /// Markdown-afbeelding: `![alt of directive](pad)`. Dezelfde vorm als
@@ -97,16 +98,18 @@ List<SlideImageRef> slideImageRefs(Slide slide) {
   // Een vraag-slide draagt zijn `question`-blok (JSON) in [Slide.customMarkdown],
   // niet vrije Markdown; de imagePair-antwoorden staan daar als `image`-velden,
   // niet als `![…](…)`. Daarom leest deze tak het blok in plaats van de inline
-  // regex — anders bleven de antwoord-afbeeldingen onzichtbaar (#853).
+  // regex — anders bleven de antwoord-afbeeldingen onzichtbaar (#853). Lees de
+  // ruwe records, niet QuestionSpec.answers: een te grote vraag wordt bewust
+  // niet uitvoerbaar gemaakt, maar opslag moet ook dan alle assets behouden.
   if (slide.type == SlideType.question) {
-    for (final answer in QuestionSpec.parse(slide.customMarkdown).answers) {
-      final image = answer.image.trim();
+    for (final answer in _questionAnswerMaps(slide.customMarkdown)) {
+      final image = (answer['image'] ?? '').toString().trim();
       if (image.isEmpty) continue;
       refs.add(
         SlideImageRef(
           path: image,
           slot: SlideImageSlot.questionImage,
-          alt: answer.text,
+          alt: (answer['text'] ?? '').toString(),
         ),
       );
     }
@@ -167,20 +170,39 @@ String _rewriteQuestionAnswerImages(
   String markdown,
   String? Function(String path) map,
 ) {
-  final spec = QuestionSpec.parse(markdown);
-  final answers = <QuestionAnswer>[];
+  final decoded = _questionJson(markdown);
+  if (decoded == null) return markdown;
+  final answers = decoded['answers'];
+  if (answers is! List<dynamic>) return markdown;
   var changed = false;
-  for (final answer in spec.answers) {
-    final image = answer.image.trim();
+  for (final answer in answers) {
+    if (answer is! Map<String, dynamic>) continue;
+    final image = (answer['image'] ?? '').toString().trim();
     final replacement = image.isEmpty ? null : map(image);
-    if (replacement == null || replacement == image) {
-      answers.add(answer);
-    } else {
-      answers.add(answer.copyWith(image: replacement));
-      changed = true;
-    }
+    if (replacement == null || replacement == image) continue;
+    answer['image'] = replacement;
+    changed = true;
   }
-  return changed ? spec.copyWith(answers: answers).toBlock() : markdown;
+  return changed
+      ? const JsonEncoder.withIndent('  ').convert(decoded)
+      : markdown;
+}
+
+Map<String, dynamic>? _questionJson(String markdown) {
+  try {
+    final decoded = jsonDecode(markdown.trim());
+    return decoded is Map<String, dynamic> ? decoded : null;
+  } on FormatException {
+    return null;
+  }
+}
+
+Iterable<Map<String, dynamic>> _questionAnswerMaps(String markdown) sync* {
+  final answers = _questionJson(markdown)?['answers'];
+  if (answers is! List<dynamic>) return;
+  for (final answer in answers) {
+    if (answer is Map<String, dynamic>) yield answer;
+  }
 }
 
 /// [slide] met élk afbeeldingspad vervangen door wat [map] ervan maakt — de

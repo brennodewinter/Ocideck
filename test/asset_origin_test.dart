@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:ocideck/models/asset_origin.dart';
@@ -187,6 +188,35 @@ void main() {
       );
 
       expect(into, {mem});
+    });
+
+    test('de sweep bewaart alle negen beelden uit een te grote vraag', () {
+      final paths = [
+        for (var i = 0; i < 9; i++)
+          WebAssetStore.put(Uint8List.fromList([i]), name: '$i.png'),
+      ];
+      final question = jsonEncode({
+        'kind': 'imagePair',
+        'prompt': 'Welke?',
+        'answers': [
+          for (var i = 0; i < paths.length; i++)
+            {'text': 'Beeld $i', 'correct': i.isEven, 'image': paths[i]},
+        ],
+      });
+      final deck = Deck(
+        title: 'D',
+        slides: [
+          Slide.create(SlideType.question).copyWith(customMarkdown: question),
+        ],
+      );
+
+      final live = deckMemoryAssetPaths(deck);
+      expect(live, paths.toSet());
+      expect(WebAssetStore.retain(live), 0);
+      expect(
+        paths.every((path) => WebAssetStore.bytesFor(path) != null),
+        isTrue,
+      );
     });
   });
 }

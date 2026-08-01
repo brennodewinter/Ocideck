@@ -138,6 +138,41 @@ void main() {
     expect(out.upserts[GitRepoLayout.assetPathOf(refFor(b2, 'png'))!], b2);
   });
 
+  test('git poolt alle negen afbeeldingen uit een te grote vraag', () async {
+    final bytesByPath = {
+      for (var i = 0; i < 9; i++) 'mem:antwoord-$i': png(20 + i),
+    };
+    final question = jsonEncode({
+      'kind': 'imagePair',
+      'prompt': 'Welke?',
+      'answers': [
+        for (var i = 0; i < 9; i++)
+          {'text': 'Beeld $i', 'correct': i.isEven, 'image': 'mem:antwoord-$i'},
+      ],
+    });
+    final repo = FakeRepo(branches: {'main': 'c0'}, files: {});
+
+    final out = await buildDeckRepoFiles(
+      deckWith([
+        Slide.create(SlideType.question).copyWith(customMarkdown: question),
+      ]),
+      md: md,
+      pool: poolFor(repo),
+      deckDir: deckDir,
+      resolveBytes: resolverFrom(bytesByPath),
+    );
+
+    expect(
+      out.upserts.keys.where((path) => path.startsWith('assets/')),
+      hasLength(9),
+    );
+    final deckMarkdown = utf8.decode(out.upserts['$deckDir/deck.md']!);
+    expect(deckMarkdown, isNot(contains('mem:antwoord-')));
+    for (final bytes in bytesByPath.values) {
+      expect(deckMarkdown, contains(refFor(bytes, 'png')));
+    }
+  });
+
   test(
     'video en audio worden gemeld, niet als kapotte ref geschreven',
     () async {
