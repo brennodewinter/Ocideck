@@ -1788,6 +1788,27 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Спершу завершіть і збережіть презентацію; після цього ви зможете підписати її походження.',
+  'Herkomst ondertekend.': 'Походження підписано.',
+  'De herkomst kon niet worden ondertekend.':
+      'Не вдалося підписати походження.',
+  'Herkomst ondertekenen': 'Підписати походження',
+  'Herkomst bevestigd': 'Походження підтверджено',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Підписано раніше підтвердженим ключем — ця презентація належить тому власнику.',
+  'Ondertekend': 'Підписано',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Підписано, ще не перевірено. Відбиток:',
+  'Gewijzigd na ondertekenen': 'Змінено після підписання',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Вміст відрізняється від підписаного — файл змінено після підписання.',
+  'Herkomst ongeldig': 'Походження недійсне',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Підпис походження неправильний або підроблений.',
+  'Herkomst niet hier te controleren': 'Походження тут не перевірити',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Підпис присутній, але його не можна перерахувати тут — звірте з оригінальним файлом `.md`.',
   'Bestaande identiteit vervangen?': 'Замінити наявну особу?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Цей пристрій уже має особу для спільної роботи. Відновлення замінить її особою з ключа. Ви зберегли ключ відновлення для поточної особи? Без резервної копії ви її втратите.',

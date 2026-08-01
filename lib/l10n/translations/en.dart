@@ -911,6 +911,27 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Finish and save the presentation first; then you can sign its provenance.',
+  'Herkomst ondertekend.': 'Provenance signed.',
+  'De herkomst kon niet worden ondertekend.':
+      'The provenance could not be signed.',
+  'Herkomst ondertekenen': 'Sign provenance',
+  'Herkomst bevestigd': 'Provenance confirmed',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Signed with a previously confirmed key — this deck comes from that owner.',
+  'Ondertekend': 'Signed',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Signed, not yet verified. Fingerprint:',
+  'Gewijzigd na ondertekenen': 'Changed after signing',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'The content differs from what was signed — the file was changed after signing.',
+  'Herkomst ongeldig': 'Provenance invalid',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'The provenance signature is incorrect or has been forged.',
+  'Herkomst niet hier te controleren': 'Provenance can\'t be checked here',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'The signature is present but can\'t be recomputed here — check it against the original `.md` file.',
   'Bestaande identiteit vervangen?': 'Replace existing identity?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'This device already has a collaboration identity. Restoring replaces it with the identity from the key. Did you save a recovery key for the current identity? Without a backup you will lose it.',

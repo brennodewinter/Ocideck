@@ -80,6 +80,15 @@ class CollabTrustStore {
         : TrustState.mismatch;
   }
 
+  /// True when [identityKey] is pinned for *any* device — the check a provenance
+  /// signature needs, since it carries only the signer's identity key, not which
+  /// user/device it was (Blok C). A pinned identity means "confirmed"; anything
+  /// else is at most "signed, not yet verified".
+  bool isIdentityPinned(List<int> identityKey) {
+    final wanted = base64.encode(identityKey);
+    return _pins.values.contains(wanted);
+  }
+
   /// True once this exact identity is pinned for this device.
   bool isPinned(String userId, String deviceId, List<int> identityKey) =>
       evaluate(userId, deviceId, identityKey) == TrustState.verified;

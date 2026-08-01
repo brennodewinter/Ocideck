@@ -1774,6 +1774,26 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Nejprve prezentaci dokončete a uložte; poté můžete podepsat její původ.',
+  'Herkomst ondertekend.': 'Původ podepsán.',
+  'De herkomst kon niet worden ondertekend.': 'Původ se nepodařilo podepsat.',
+  'Herkomst ondertekenen': 'Podepsat původ',
+  'Herkomst bevestigd': 'Původ potvrzen',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Podepsáno dříve potvrzeným klíčem — tato prezentace pochází od tohoto vlastníka.',
+  'Ondertekend': 'Podepsáno',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Podepsáno, dosud neověřeno. Otisk:',
+  'Gewijzigd na ondertekenen': 'Změněno po podpisu',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Obsah se liší od podepsaného — soubor byl po podpisu změněn.',
+  'Herkomst ongeldig': 'Původ neplatný',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Podpis původu je nesprávný nebo byl zfalšován.',
+  'Herkomst niet hier te controleren': 'Původ zde nelze ověřit',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Podpis je přítomen, ale zde jej nelze přepočítat — ověřte jej oproti původnímu souboru `.md`.',
   'Bestaande identiteit vervangen?': 'Nahradit stávající identitu?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Toto zařízení už má identitu pro spolupráci. Obnovení ji nahradí identitou z klíče. Uložili jste obnovovací klíč pro současnou identitu? Bez zálohy o ni přijdete.',

@@ -2119,17 +2119,42 @@ them together: a signature with no seal has nothing to anchor it, and a seal
 with no signer does not say who stands behind it. Two files would mainly mean
 one of them can go missing.
 
-> **Planned — cryptographic provenance (`provenance` key).** A designed, not yet
-> implemented, addition: an optional owner *herkomstbewijs* — an Ed25519 signature
-> from the collaboration device identity over this same `hash`, so a recipient who
-> verified that identity's fingerprint out-of-band can confirm the deck was signed
-> by that holder. It lands as a `provenance` key in this sidecar (opaque → beside
-> the file, never in the `.md`; added without raising `version`), independent of
-> the human `signature` block above. It is *herkomstbewijs*, not an eIDAS
-> electronic signature. Full design, preimage and test vector:
-> [`design/PROVENANCE_SIGNATURE.md`](design/PROVENANCE_SIGNATURE.md)
-> (COLLABORATION Phase 2, issue #978). This row is promoted into the table above
-> when the code ships.
+**Cryptographic provenance (`provenance` key).** An optional owner
+*herkomstbewijs*: an Ed25519 signature from the collaboration device identity over
+this same `hash`, so a recipient who verified that identity's fingerprint
+out-of-band can confirm the deck was signed by that holder. Opaque → it lives in
+this sidecar beside the file, never in the `.md`, and is added **without raising
+`version`** (an older build reads per key and ignores it, so the seal never goes
+missing over a key it does not need). Independent of the human `signature` block
+above. It is *herkomstbewijs*, **not** an eIDAS electronic signature — a
+self-generated key with no third-party identity binding.
+
+```json
+"provenance": {
+  "alg": "ed25519",
+  "preimage": "ocideck-provenance-v1",
+  "identity_key": "base64(Ed25519 public key)",
+  "signature": "base64(signature)",
+  "signed_at": "2026-08-01T12:00:00.000Z"
+}
+```
+
+The signature covers a documented, reproducible byte string — a JSON array of the
+domain tag and the seal's own fields, so a third party rebuilds it verbatim:
+
+```
+utf8( ["ocideck-provenance-v1", form, algo, hash, signed_at] )
+```
+
+(the array serialised as compact JSON). `form`/`algo`/`hash` are the seal fields
+above; `signed_at` is signed too, so the shown date cannot be altered without
+breaking the signature. To verify: recompute `hash` with `sha512sum` (see below),
+rebuild that array, and `Ed25519-verify(signature, identity_key)`. A valid
+signature proves *this exact sealed deck was signed by the holder of that key*;
+who that is becomes trustworthy only once you have compared the key's fingerprint
+out-of-band. Full design and rationale:
+[`design/PROVENANCE_SIGNATURE.md`](design/PROVENANCE_SIGNATURE.md) (COLLABORATION
+Phase 2, issue #978).
 
 #### How to verify the seal yourself
 

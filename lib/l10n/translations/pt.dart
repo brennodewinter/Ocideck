@@ -1800,6 +1800,27 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Conclua e guarde primeiro a apresentação; depois pode assinar a sua proveniência.',
+  'Herkomst ondertekend.': 'Proveniência assinada.',
+  'De herkomst kon niet worden ondertekend.':
+      'Não foi possível assinar a proveniência.',
+  'Herkomst ondertekenen': 'Assinar proveniência',
+  'Herkomst bevestigd': 'Proveniência confirmada',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Assinado com uma chave já confirmada — esta apresentação provém desse proprietário.',
+  'Ondertekend': 'Assinado',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Assinado, ainda não verificado. Impressão digital:',
+  'Gewijzigd na ondertekenen': 'Alterado após a assinatura',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'O conteúdo difere do que foi assinado — o ficheiro foi alterado após a assinatura.',
+  'Herkomst ongeldig': 'Proveniência inválida',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'A assinatura de proveniência está incorreta ou foi falsificada.',
+  'Herkomst niet hier te controleren': 'Proveniência não verificável aqui',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'A assinatura está presente mas não pode ser recalculada aqui — verifique-a com o ficheiro `.md` original.',
   'Bestaande identiteit vervangen?': 'Substituir a identidade existente?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Este dispositivo já tem uma identidade de colaboração. Restaurar substitui-a pela identidade da chave. Guardaste uma chave de recuperação da identidade atual? Sem uma cópia de segurança vais perdê-la.',

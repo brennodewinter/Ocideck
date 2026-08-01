@@ -1783,6 +1783,27 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Najpierw ukończ i zapisz prezentację; potem możesz podpisać jej pochodzenie.',
+  'Herkomst ondertekend.': 'Pochodzenie podpisane.',
+  'De herkomst kon niet worden ondertekend.':
+      'Nie udało się podpisać pochodzenia.',
+  'Herkomst ondertekenen': 'Podpisz pochodzenie',
+  'Herkomst bevestigd': 'Pochodzenie potwierdzone',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Podpisano wcześniej potwierdzonym kluczem — ta prezentacja pochodzi od tego właściciela.',
+  'Ondertekend': 'Podpisano',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Podpisano, jeszcze niezweryfikowane. Odcisk:',
+  'Gewijzigd na ondertekenen': 'Zmieniono po podpisaniu',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Treść różni się od podpisanej — plik zmieniono po podpisaniu.',
+  'Herkomst ongeldig': 'Pochodzenie nieprawidłowe',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Podpis pochodzenia jest nieprawidłowy lub został sfałszowany.',
+  'Herkomst niet hier te controleren': 'Pochodzenia nie można tu sprawdzić',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Podpis jest obecny, ale nie można go tu przeliczyć — sprawdź go z oryginalnym plikiem `.md`.',
   'Bestaande identiteit vervangen?': 'Zastąpić istniejącą tożsamość?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'To urządzenie ma już tożsamość współpracy. Przywracanie zastąpi ją tożsamością z klucza. Czy zapisałeś klucz odzyskiwania dla bieżącej tożsamości? Bez kopii zapasowej ją stracisz.',

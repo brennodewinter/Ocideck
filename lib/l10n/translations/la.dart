@@ -1787,6 +1787,26 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Praesentationem prius perfice et serva; deinde originem subscribere potes.',
+  'Herkomst ondertekend.': 'Origo subscripta.',
+  'De herkomst kon niet worden ondertekend.': 'Origo subscribi non potuit.',
+  'Herkomst ondertekenen': 'Originem subscribere',
+  'Herkomst bevestigd': 'Origo confirmata',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Clavi antea confirmata subscriptum — haec praesentatio ab illo domino venit.',
+  'Ondertekend': 'Subscriptum',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Subscriptum, nondum verificatum. Vestigium digiti:',
+  'Gewijzigd na ondertekenen': 'Post subscriptionem mutatum',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Contentus a subscripto differt — plica post subscriptionem mutata est.',
+  'Herkomst ongeldig': 'Origo irrita',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Subscriptio originis falsa aut adulterata est.',
+  'Herkomst niet hier te controleren': 'Origo hic probari non potest',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Subscriptio adest, sed hic recomputari non potest — cum plica `.md` originali confer.',
   'Bestaande identiteit vervangen?': 'Identitatem exsistentem substituere?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Hoc instrumentum iam identitatem cooperationis habet. Restitutio eam identitate ex clave substituit. Clavemne recuperationis identitatis praesentis servavisti? Sine exemplari eam amittes.',

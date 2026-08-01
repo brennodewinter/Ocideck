@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import '../models/document_signature.dart';
+import '../models/provenance_signature.dart';
 import '../models/seal_record.dart';
 import '../utils/log.dart';
 import 'sidecar_format.dart';
@@ -51,10 +52,17 @@ class SealCodec {
   static const String timestampNonceKey = 'timestamp_nonce';
   static const String signatureKey = 'signature';
 
+  /// Het cryptografische herkomstbewijs (Blok C). Toegevoegd zonder [version] te
+  /// verhogen — dezelfde bewuste keuze als [timestampNonceKey]: een oudere build
+  /// leest per sleutel en negeert deze, i.p.v. de hele sidecar (en dus het
+  /// zegel) te weigeren. Zie `docs/design/PROVENANCE_SIGNATURE.md` §2.
+  static const String provenanceKey = 'provenance';
+
   /// De JSON voor [record], of null wanneer er niets vast te leggen is.
   static String? encode(SealRecord record) {
     if (record.isEmpty) return null;
     final sig = record.signature;
+    final prov = record.provenance;
     return jsonEncode({
       kSidecarVersionKey: version,
       if (record.finalized) finalizedKey: true,
@@ -69,6 +77,7 @@ class SealCodec {
       if (record.timestampNonce.isNotEmpty)
         timestampNonceKey: record.timestampNonce,
       if (sig != null && sig.isNotEmpty) signatureKey: _signatureToJson(sig),
+      if (prov != null && prov.isNotEmpty) provenanceKey: prov.toJson(),
     });
   }
 
@@ -96,6 +105,10 @@ class SealCodec {
         timestampToken: _text(data[timestampTokenKey]),
         timestampNonce: _text(data[timestampNonceKey]),
         signature: _signatureFromJson(data[signatureKey]),
+        // Defensief per sleutel: ProvenanceSignature.fromJson gooit nooit en
+        // levert null bij een kapot blok, zodat een onleesbaar herkomstbewijs
+        // hooguit zichzelf verliest — nooit het omringende zegel (§8).
+        provenance: ProvenanceSignature.fromJson(data[provenanceKey]),
       );
       return record.isEmpty ? null : record;
     } catch (e, s) {

@@ -727,6 +727,27 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Termina y guarda primero la presentación; después podrás firmar su procedencia.',
+  'Herkomst ondertekend.': 'Procedencia firmada.',
+  'De herkomst kon niet worden ondertekend.':
+      'No se pudo firmar la procedencia.',
+  'Herkomst ondertekenen': 'Firmar procedencia',
+  'Herkomst bevestigd': 'Procedencia confirmada',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Firmado con una clave ya confirmada: esta presentación procede de ese propietario.',
+  'Ondertekend': 'Firmado',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Firmado, aún no verificado. Huella:',
+  'Gewijzigd na ondertekenen': 'Modificado tras la firma',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'El contenido difiere de lo firmado: el archivo se modificó tras la firma.',
+  'Herkomst ongeldig': 'Procedencia no válida',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'La firma de procedencia es incorrecta o ha sido falsificada.',
+  'Herkomst niet hier te controleren': 'Procedencia no verificable aquí',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'La firma está presente pero no puede recalcularse aquí — compárala con el archivo `.md` original.',
   'Bestaande identiteit vervangen?': '¿Sustituir la identidad existente?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Este dispositivo ya tiene una identidad de colaboración. Al restaurar se sustituye por la identidad de la clave. ¿Has guardado una clave de recuperación de la identidad actual? Sin copia de seguridad la perderás.',

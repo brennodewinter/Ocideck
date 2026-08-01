@@ -2748,6 +2748,26 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Önce sunuyu tamamlayıp kaydedin; ardından kökenini imzalayabilirsiniz.',
+  'Herkomst ondertekend.': 'Köken imzalandı.',
+  'De herkomst kon niet worden ondertekend.': 'Köken imzalanamadı.',
+  'Herkomst ondertekenen': 'Kökeni imzala',
+  'Herkomst bevestigd': 'Köken doğrulandı',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Daha önce doğrulanmış bir anahtarla imzalandı — bu sunu o sahibinden geliyor.',
+  'Ondertekend': 'İmzalandı',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'İmzalandı, henüz doğrulanmadı. Parmak izi:',
+  'Gewijzigd na ondertekenen': 'İmzalandıktan sonra değiştirildi',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'İçerik imzalanandan farklı — dosya imzalandıktan sonra değiştirildi.',
+  'Herkomst ongeldig': 'Köken geçersiz',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Köken imzası hatalı veya sahte.',
+  'Herkomst niet hier te controleren': 'Köken burada denetlenemez',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'İmza mevcut ancak burada yeniden hesaplanamıyor — özgün `.md` dosyasıyla karşılaştırın.',
   'Bestaande identiteit vervangen?': 'Mevcut kimlik değiştirilsin mi?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Bu cihazın zaten bir işbirliği kimliği var. Geri yükleme, onu anahtardaki kimlikle değiştirir. Mevcut kimlik için bir kurtarma anahtarı kaydettiniz mi? Yedek olmadan onu kaybedersiniz.',

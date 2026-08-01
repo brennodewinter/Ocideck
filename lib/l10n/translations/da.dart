@@ -1770,6 +1770,27 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Færdiggør og gem præsentationen først; derefter kan du signere dens oprindelse.',
+  'Herkomst ondertekend.': 'Oprindelse signeret.',
+  'De herkomst kon niet worden ondertekend.':
+      'Oprindelsen kunne ikke signeres.',
+  'Herkomst ondertekenen': 'Signér oprindelse',
+  'Herkomst bevestigd': 'Oprindelse bekræftet',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Signeret med en tidligere bekræftet nøgle — denne præsentation kommer fra den ejer.',
+  'Ondertekend': 'Signeret',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Signeret, endnu ikke verificeret. Fingeraftryk:',
+  'Gewijzigd na ondertekenen': 'Ændret efter signering',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Indholdet afviger fra det signerede — filen blev ændret efter signering.',
+  'Herkomst ongeldig': 'Oprindelse ugyldig',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Oprindelsessignaturen er forkert eller forfalsket.',
+  'Herkomst niet hier te controleren': 'Oprindelse kan ikke kontrolleres her',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Signaturen findes, men kan ikke genberegnes her — kontrollér den mod den oprindelige `.md`-fil.',
   'Bestaande identiteit vervangen?': 'Erstat eksisterende identitet?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Denne enhed har allerede en samarbejdsidentitet. Gendannelse erstatter den med identiteten fra nøglen. Har du gemt en gendannelsesnøgle for den nuværende identitet? Uden en sikkerhedskopi mister du den.',

@@ -1771,6 +1771,27 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Selesaikan dan simpan presentasi terlebih dahulu; setelah itu Anda dapat menandatangani asalnya.',
+  'Herkomst ondertekend.': 'Asal ditandatangani.',
+  'De herkomst kon niet worden ondertekend.':
+      'Asal tidak dapat ditandatangani.',
+  'Herkomst ondertekenen': 'Tanda tangani asal',
+  'Herkomst bevestigd': 'Asal dikonfirmasi',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Ditandatangani dengan kunci yang sudah dikonfirmasi — presentasi ini berasal dari pemilik itu.',
+  'Ondertekend': 'Ditandatangani',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Ditandatangani, belum diverifikasi. Sidik jari:',
+  'Gewijzigd na ondertekenen': 'Diubah setelah ditandatangani',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Isinya berbeda dari yang ditandatangani — berkas diubah setelah ditandatangani.',
+  'Herkomst ongeldig': 'Asal tidak valid',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Tanda tangan asal salah atau telah dipalsukan.',
+  'Herkomst niet hier te controleren': 'Asal tidak dapat diperiksa di sini',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Tanda tangan ada, tetapi tidak dapat dihitung ulang di sini — periksa terhadap berkas `.md` asli.',
   'Bestaande identiteit vervangen?': 'Ganti identitas yang ada?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Perangkat ini sudah memiliki identitas kolaborasi. Memulihkan akan menggantinya dengan identitas dari kunci. Apakah Anda menyimpan kunci pemulihan untuk identitas saat ini? Tanpa cadangan, Anda akan kehilangannya.',

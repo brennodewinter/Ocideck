@@ -73,6 +73,9 @@ import '../state/image_privacy_provider.dart';
 import '../state/improvement_provider.dart';
 import '../state/collaboration_provider.dart';
 import '../state/matrix_client_provider.dart';
+import '../state/secret_store_provider.dart';
+import '../collab/collab_device_store.dart';
+import '../services/provenance_service.dart';
 import '../state/privacy_provider.dart';
 import '../state/provider_warmup.dart';
 import '../state/save_progress_provider.dart';
@@ -144,6 +147,7 @@ part 'app_shell_menu.dart';
 
 // Shell sub-widgets and helpers, split into part files for navigability.
 // These parts share this library's imports and private scope.
+part 'shell/provenance_actions.dart';
 part 'shell/shell_actions.dart';
 part 'shell/shell_actions_present.dart';
 part 'shell/shell_actions_export.dart';

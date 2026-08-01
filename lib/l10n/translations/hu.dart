@@ -1775,6 +1775,27 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Előbb fejezd be és mentsd el a bemutatót; utána aláírhatod az eredetét.',
+  'Herkomst ondertekend.': 'Eredet aláírva.',
+  'De herkomst kon niet worden ondertekend.':
+      'Az eredetet nem sikerült aláírni.',
+  'Herkomst ondertekenen': 'Eredet aláírása',
+  'Herkomst bevestigd': 'Eredet megerősítve',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Korábban megerősített kulccsal aláírva — ez a bemutató attól a tulajdonostól származik.',
+  'Ondertekend': 'Aláírva',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Aláírva, még nem ellenőrizve. Ujjlenyomat:',
+  'Gewijzigd na ondertekenen': 'Aláírás után módosítva',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'A tartalom eltér az aláírttól — a fájlt az aláírás után módosították.',
+  'Herkomst ongeldig': 'Érvénytelen eredet',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Az eredet aláírása helytelen vagy hamisított.',
+  'Herkomst niet hier te controleren': 'Az eredet itt nem ellenőrizhető',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Az aláírás jelen van, de itt nem számolható újra — ellenőrizd az eredeti `.md` fájllal.',
   'Bestaande identiteit vervangen?': 'Lecseréli a meglévő identitást?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Ezen az eszközön már van együttműködési identitás. A visszaállítás lecseréli a kulcsban lévő identitásra. Mentetted a jelenlegi identitás helyreállítási kulcsát? Biztonsági másolat nélkül elveszíted.',

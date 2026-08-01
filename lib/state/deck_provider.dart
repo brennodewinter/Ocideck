@@ -4,6 +4,7 @@ import '../models/annotation.dart';
 import '../models/asset_origin.dart';
 import '../models/checklist_spec.dart';
 import '../models/deck.dart';
+import '../models/provenance_signature.dart';
 import '../models/improvement_y01.dart';
 import '../models/document_signature.dart';
 import '../models/scope_matrix_spec.dart';
@@ -571,6 +572,23 @@ class DeckNotifier extends StateNotifier<DeckState> {
     final sealed = DocumentIntegrity(_md).seal(deck, signature: signature);
     _clearHistory();
     state = state.copyWith(deck: sealed, isDirty: true);
+  }
+
+  /// Attach the owner's cryptographic provenance [signature] to the sealed deck
+  /// (COLLABORATION Phase 2 "Blok C"). Marks the deck dirty so the next save
+  /// writes it into `<name>.seal.json`; the signature is over the *saved*
+  /// `sealHash`, so the caller signs only a saved, finalised deck. Passing null
+  /// clears it.
+  void applyProvenance(ProvenanceSignature? signature) {
+    final deck = state.deck;
+    if (deck == null) return;
+    state = state.copyWith(
+      deck: deck.copyWith(
+        provenance: signature,
+        clearProvenance: signature == null,
+      ),
+      isDirty: true,
+    );
   }
 
   /// The 1-based slide numbers whose unreviewed AI-assist markers currently

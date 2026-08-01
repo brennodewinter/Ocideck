@@ -1806,6 +1806,27 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Críochnaigh agus sábháil an láithreoireacht ar dtús; ansin is féidir leat a bunús a shíniú.',
+  'Herkomst ondertekend.': 'Bunús sínithe.',
+  'De herkomst kon niet worden ondertekend.':
+      'Níorbh fhéidir an bunús a shíniú.',
+  'Herkomst ondertekenen': 'Sínigh bunús',
+  'Herkomst bevestigd': 'Bunús deimhnithe',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Sínithe le heochair a deimhníodh cheana — is ón úinéir sin a thagann an láithreoireacht seo.',
+  'Ondertekend': 'Sínithe',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Sínithe, gan fíorú fós. Méarlorg:',
+  'Gewijzigd na ondertekenen': 'Athraithe tar éis a shínithe',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Tá an t-ábhar difriúil ón méid a síníodh — athraíodh an comhad tar éis a shínithe.',
+  'Herkomst ongeldig': 'Bunús neamhbhailí',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Tá síniú an bhunúis mícheart nó rinneadh é a bhrionnú.',
+  'Herkomst niet hier te controleren': 'Ní féidir an bunús a sheiceáil anseo',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Tá an síniú i láthair ach ní féidir é a athríomh anseo — seiceáil in aghaidh an bhunchomhaid `.md` é.',
   'Bestaande identiteit vervangen?': 'Cuir aitheantas atá ann in ionad?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Tá aitheantas comhoibrithe ag an ngléas seo cheana féin. Cuireann an t-athchóiriú an t-aitheantas ón eochair ina ionad. Ar shábháil tú eochair aisghabhála don aitheantas reatha? Gan chúltaca caillfidh tú é.',

@@ -1746,6 +1746,27 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'wa\'DIch nab ta\'laH \'ej yhraS; ghIq Daqbogh SovmeH ghItlh DalaHlaH.',
+  'Herkomst ondertekend.': 'Daqbogh SovmeH ghItlh rap.',
+  'De herkomst kon niet worden ondertekend.':
+      'Daqbogh SovmeH ghItlh laH ta\'be\'lu\'.',
+  'Herkomst ondertekenen': 'Daqbogh SovmeH ghItlh yIqon',
+  'Herkomst bevestigd': 'Daqbogh SovmeH ngoq lu\'ol',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'ngoq lu\'olpu\'bogh SovmeH ghItlh — Dochvam ghaj pIn\'a\'.',
+  'Ondertekend': 'ghItlhlu\'pu\'',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'ghItlhlu\'pu\', not toblu\'pu\'. nItlhDu\' Qob:',
+  'Gewijzigd na ondertekenen': 'ghItlhlu\'pu\'DI\' choHlu\'pu\'',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'ghItlhlu\'pu\'bogh rurbe\' nab — ghItlhlu\'pu\'DI\' teywI\' choHlu\'pu\'.',
+  'Herkomst ongeldig': 'SovmeH ngoq lughbe\'',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'SovmeH ghItlh lughbe\' ghap ngeblu\'pu\'.',
+  'Herkomst niet hier te controleren': 'naDev SovmeH ngoq toblu\'laHbe\'',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'tu\'lu\' ghItlh \'ach naDev ngu\'qa\'laHbe\'lu\' — teywI\' `.md` Hemey tob.',
   'Bestaande identiteit vervangen?': 'qonwI\' DaH tu\'lu\'bogh DanaghmoH\'a\'?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'naDev De\'wI\'vam qonwI\' tu\'lu\'. qonwI\' choHDI\', naghvo\' qonwI\' choH. DaH qonwI\'vetlh choHmeH naghvam Dapolpu\'\'a\'? naghvam Dapolbe\'chugh, qonwI\' Daghor.',

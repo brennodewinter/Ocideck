@@ -730,6 +730,27 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Schließe die Präsentation zuerst ab und speichere sie; danach kannst du die Herkunft signieren.',
+  'Herkomst ondertekend.': 'Herkunft signiert.',
+  'De herkomst kon niet worden ondertekend.':
+      'Die Herkunft konnte nicht signiert werden.',
+  'Herkomst ondertekenen': 'Herkunft signieren',
+  'Herkomst bevestigd': 'Herkunft bestätigt',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Mit einem zuvor bestätigten Schlüssel signiert — diese Präsentation stammt von diesem Eigentümer.',
+  'Ondertekend': 'Signiert',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Signiert, noch nicht verifiziert. Fingerabdruck:',
+  'Gewijzigd na ondertekenen': 'Nach dem Signieren geändert',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Der Inhalt weicht vom Signierten ab — die Datei wurde nach dem Signieren geändert.',
+  'Herkomst ongeldig': 'Herkunft ungültig',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Die Herkunftssignatur ist falsch oder gefälscht.',
+  'Herkomst niet hier te controleren': 'Herkunft hier nicht prüfbar',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Die Signatur ist vorhanden, kann hier aber nicht nachgerechnet werden — prüfe sie gegen die ursprüngliche `.md`-Datei.',
   'Bestaande identiteit vervangen?': 'Bestehende Identität ersetzen?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Dieses Gerät hat bereits eine Zusammenarbeitsidentität. Beim Wiederherstellen wird sie durch die Identität aus dem Schlüssel ersetzt. Hast du für die aktuelle Identität einen Wiederherstellungsschlüssel gesichert? Ohne Backup geht sie verloren.',

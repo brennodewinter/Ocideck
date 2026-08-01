@@ -731,6 +731,27 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Meitsje de presintaasje earst ôf en bewarje har; dêrnei kinst it komôf ûndertekenje.',
+  'Herkomst ondertekend.': 'Komôf ûndertekene.',
+  'De herkomst kon niet worden ondertekend.':
+      'It komôf koe net ûndertekene wurde.',
+  'Herkomst ondertekenen': 'Komôf ûndertekenje',
+  'Herkomst bevestigd': 'Komôf befêstige',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Ûndertekene mei in earder befêstige kaai — dizze presintaasje komt fan dy eigener.',
+  'Ondertekend': 'Ûndertekene',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Ûndertekene, noch net ferifiearre. Fingerprint:',
+  'Gewijzigd na ondertekenen': 'Wizige nei it ûndertekenjen',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'De ynhâld wykt ôf fan wat ûndertekene is — it bestân is nei it ûndertekenjen wizige.',
+  'Herkomst ongeldig': 'Komôf ûnjildich',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'De komôf-ûndertekening kloppet net of is ferfalske.',
+  'Herkomst niet hier te controleren': 'Komôf hjir net te kontrolearjen',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'De ûndertekening is oanwêzich, mar kin hjir net neirekkene wurde — kontrolearje tsjin it oarspronklike `.md`-bestân.',
   'Bestaande identiteit vervangen?': 'Besteande identiteit ferfange?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Dit apparaat hat al in gearwurkingsidentiteit. Weromsette ferfangt dy troch de identiteit út de kaai. Hast fan de hjoeddeiske identiteit in herstelkaai bewarre? Sûnder reservekopy bist dy kwyt.',

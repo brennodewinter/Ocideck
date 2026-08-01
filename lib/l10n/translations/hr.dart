@@ -1777,6 +1777,27 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Prvo dovršite i spremite prezentaciju; zatim možete potpisati njezino podrijetlo.',
+  'Herkomst ondertekend.': 'Podrijetlo potpisano.',
+  'De herkomst kon niet worden ondertekend.':
+      'Podrijetlo nije bilo moguće potpisati.',
+  'Herkomst ondertekenen': 'Potpiši podrijetlo',
+  'Herkomst bevestigd': 'Podrijetlo potvrđeno',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Potpisano prethodno potvrđenim ključem — ova prezentacija dolazi od tog vlasnika.',
+  'Ondertekend': 'Potpisano',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Potpisano, još nije provjereno. Otisak:',
+  'Gewijzigd na ondertekenen': 'Promijenjeno nakon potpisivanja',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Sadržaj se razlikuje od potpisanog — datoteka je promijenjena nakon potpisivanja.',
+  'Herkomst ongeldig': 'Podrijetlo nevaljano',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Potpis podrijetla nije ispravan ili je krivotvoren.',
+  'Herkomst niet hier te controleren': 'Podrijetlo se ovdje ne može provjeriti',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Potpis postoji, ali se ovdje ne može ponovno izračunati — provjerite ga s izvornom datotekom `.md`.',
   'Bestaande identiteit vervangen?': 'Zamijeniti postojeći identitet?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Ovaj uređaj već ima identitet za suradnju. Vraćanje ga zamjenjuje identitetom iz ključa. Jeste li spremili ključ za oporavak trenutačnog identiteta? Bez sigurnosne kopije izgubit ćete ga.',

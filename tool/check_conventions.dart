@@ -127,7 +127,8 @@ const Map<String, int> fileSizeBaseline = {
   // +1 (#978): the collab_verify_banner import for the device-verification banner.
   // #1053 verplaatste de web-dropafhandeling naar shell_actions.dart; #1078
   // voegde daarna de cockpit-integratie op main toe.
-  'lib/widgets/app_shell.dart': 831,
+  'lib/widgets/app_shell.dart':
+      835, // +4 (#978 Blok C): imports + part 'provenance_actions'
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
   // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
   // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped
@@ -136,7 +137,8 @@ const Map<String, int> fileSizeBaseline = {
   // outcome — same one-line build-time listen, behaviour in the collab part file.
   // +4 (#977): the chat rail spread into the workspace row; its logic lives in
   // `collabChatRail` in collab_chat_panel.dart, only the spread + note remain.
-  'lib/widgets/app_shell_main_layout.dart': 1016,
+  'lib/widgets/app_shell_main_layout.dart':
+      1022, // +6 (#978 Blok C): _signProvenance-delegator (zware logica in provenance_actions.dart)
   // Procesverbetering category tab + engine types in the add-slide picker.
   'lib/widgets/dialogs/add_slide_dialog.dart': 1094,
   // chart_preview_improvement part registration + improvement ChartType switch.
@@ -222,7 +224,8 @@ const Map<String, int> classSizeBaseline = {
   // zetten van een notitie is top-level geworden. Wat overblijft raakt allemaal
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
-  'lib/state/deck_provider.dart#DeckNotifier': 1261,
+  'lib/state/deck_provider.dart#DeckNotifier':
+      1275, // +14 (#978 Blok C): applyProvenance
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1122,
   // Procesverbetering: Y-01-UI, type-toolbar, plaklogica en DOE-dialoog zijn

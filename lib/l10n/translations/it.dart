@@ -726,6 +726,27 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Completa e salva prima la presentazione; poi potrai firmarne la provenienza.',
+  'Herkomst ondertekend.': 'Provenienza firmata.',
+  'De herkomst kon niet worden ondertekend.':
+      'Non è stato possibile firmare la provenienza.',
+  'Herkomst ondertekenen': 'Firma provenienza',
+  'Herkomst bevestigd': 'Provenienza confermata',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Firmato con una chiave già confermata: questa presentazione proviene da quel proprietario.',
+  'Ondertekend': 'Firmato',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Firmato, non ancora verificato. Impronta:',
+  'Gewijzigd na ondertekenen': 'Modificato dopo la firma',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Il contenuto è diverso da quello firmato: il file è stato modificato dopo la firma.',
+  'Herkomst ongeldig': 'Provenienza non valida',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'La firma di provenienza non è corretta o è stata falsificata.',
+  'Herkomst niet hier te controleren': 'Provenienza non verificabile qui',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'La firma è presente ma non può essere ricalcolata qui — verificala rispetto al file `.md` originale.',
   'Bestaande identiteit vervangen?': 'Sostituire l\'identità esistente?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Questo dispositivo ha già un\'identità di collaborazione. Il ripristino la sostituisce con l\'identità contenuta nella chiave. Hai salvato una chiave di ripristino per l\'identità attuale? Senza un backup la perderai.',

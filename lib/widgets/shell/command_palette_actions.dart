@@ -117,6 +117,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
           enabled: deck.tlp != level,
           onInvoke: () => deckNotifier.updateInfo(tlp: level),
         ),
+      ...provenanceSignCommands(ref, l10n, deck, _signProvenance),
       ...collabPaletteCommands(context, ref, l10n),
     ];
     CommandPalette.show(context, commands);

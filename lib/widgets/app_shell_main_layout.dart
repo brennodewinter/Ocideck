@@ -854,6 +854,12 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     );
   }
 
+  /// Sign the finalised deck's provenance — delegates to the top-level
+  /// [runProvenanceSigning] (kept off `_MainLayoutState` for the class-size
+  /// ratchet), passing this widget's save path.
+  Future<void> _signProvenance() =>
+      runProvenanceSigning(context, ref, save: _saveDeck);
+
   Future<void> _openProperties() => editPresentationInfo(context, ref);
 
   Future<void> _importPackage() async {

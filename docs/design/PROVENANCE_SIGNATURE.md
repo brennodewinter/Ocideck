@@ -1,8 +1,11 @@
 # OciDeck — Herkomstbewijs: cryptografische ondertekening van het verspreide deck (Design)
 
-> **Status:** design proposal — unbuilt · **Status last reviewed:** 2026-08-01 · **Published by:** Stichting LibreKAT
+> **Status:** partly implemented (format + crypto + service on `main`; the signing/status UI is the next slice) · **Status last reviewed:** 2026-08-01 · **Published by:** Stichting LibreKAT
 
-> **A design proposal — not yet implemented.**
+> **Partly implemented.** The format (the `provenance` block in `.seal.json`), the
+> crypto (`collab_crypto.signProvenance`/`verifyProvenance`) and the service
+> (`provenance_service.dart`) are on `main` with tests. The UI that offers signing
+> and shows the open-time status is the next slice.
 > This is the pick-up-cold implementation design for the **owner provenance
 > signature** on a distributed deck — the third and last part of
 > [`COLLABORATION.md`](COLLABORATION.md) Phase 2 (identity hardening & provenance,

@@ -1798,6 +1798,27 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Ολοκληρώστε και αποθηκεύστε πρώτα την παρουσίαση· έπειτα μπορείτε να υπογράψετε την προέλευσή της.',
+  'Herkomst ondertekend.': 'Η προέλευση υπογράφηκε.',
+  'De herkomst kon niet worden ondertekend.':
+      'Δεν ήταν δυνατή η υπογραφή της προέλευσης.',
+  'Herkomst ondertekenen': 'Υπογραφή προέλευσης',
+  'Herkomst bevestigd': 'Η προέλευση επιβεβαιώθηκε',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Υπογράφηκε με ήδη επιβεβαιωμένο κλειδί — αυτή η παρουσίαση προέρχεται από εκείνον τον κάτοχο.',
+  'Ondertekend': 'Υπογεγραμμένο',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Υπογεγραμμένο, μη επαληθευμένο ακόμη. Αποτύπωμα:',
+  'Gewijzigd na ondertekenen': 'Τροποποιήθηκε μετά την υπογραφή',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Το περιεχόμενο διαφέρει από αυτό που υπογράφηκε — το αρχείο τροποποιήθηκε μετά την υπογραφή.',
+  'Herkomst ongeldig': 'Μη έγκυρη προέλευση',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Η υπογραφή προέλευσης είναι εσφαλμένη ή έχει πλαστογραφηθεί.',
+  'Herkomst niet hier te controleren': 'Η προέλευση δεν ελέγχεται εδώ',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Η υπογραφή υπάρχει αλλά δεν μπορεί να υπολογιστεί ξανά εδώ — ελέγξτε την με το αρχικό αρχείο `.md`.',
   'Bestaande identiteit vervangen?': 'Αντικατάσταση της υπάρχουσας ταυτότητας;',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Αυτή η συσκευή έχει ήδη ταυτότητα συνεργασίας. Η επαναφορά την αντικαθιστά με την ταυτότητα από το κλειδί. Αποθηκεύσατε κλειδί ανάκτησης για την τρέχουσα ταυτότητα; Χωρίς αντίγραφο ασφαλείας θα τη χάσετε.',

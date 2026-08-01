@@ -1,5 +1,6 @@
 import 'deck.dart';
 import 'document_signature.dart';
+import 'provenance_signature.dart';
 
 /// Waar de zegelhash over gaat. Het is het enige dat een ontvanger moet weten om
 /// hem na te rekenen, dus het staat in het bestand en niet in een release-noot.
@@ -51,6 +52,7 @@ class SealRecord {
   /// De nonce (hex) van het uitstaande verzoek; zie [Deck.sealTimestampNonce].
   final String timestampNonce;
   final DocumentSignature? signature;
+  final ProvenanceSignature? provenance;
 
   const SealRecord({
     this.finalized = false,
@@ -61,6 +63,7 @@ class SealRecord {
     this.timestampToken = '',
     this.timestampNonce = '',
     this.signature,
+    this.provenance,
   });
 
   /// Niets vast te leggen — dan hoort er ook geen sidecar te liggen.
@@ -70,7 +73,8 @@ class SealRecord {
       at.isEmpty &&
       timestampToken.isEmpty &&
       timestampNonce.isEmpty &&
-      (signature?.isEmpty ?? true);
+      (signature?.isEmpty ?? true) &&
+      (provenance?.isEmpty ?? true);
 
   /// De vaststelling zoals [deck] hem draagt.
   factory SealRecord.of(Deck deck) => SealRecord(
@@ -82,6 +86,7 @@ class SealRecord {
     timestampToken: deck.sealTimestampToken,
     timestampNonce: deck.sealTimestampNonce,
     signature: deck.signature,
+    provenance: deck.provenance,
   );
 
   /// [deck] met deze vaststelling erop. De sidecar is de waarheid: wat de
@@ -96,5 +101,7 @@ class SealRecord {
     sealTimestampNonce: timestampNonce,
     signature: signature,
     clearSignature: signature?.isEmpty ?? true,
+    provenance: provenance,
+    clearProvenance: provenance?.isEmpty ?? true,
   );
 }

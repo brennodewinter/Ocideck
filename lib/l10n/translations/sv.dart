@@ -1770,6 +1770,26 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Slutför och spara presentationen först; sedan kan du signera dess ursprung.',
+  'Herkomst ondertekend.': 'Ursprung signerat.',
+  'De herkomst kon niet worden ondertekend.': 'Ursprunget kunde inte signeras.',
+  'Herkomst ondertekenen': 'Signera ursprung',
+  'Herkomst bevestigd': 'Ursprung bekräftat',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Signerad med en tidigare bekräftad nyckel — den här presentationen kommer från den ägaren.',
+  'Ondertekend': 'Signerad',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Signerad, ännu inte verifierad. Fingeravtryck:',
+  'Gewijzigd na ondertekenen': 'Ändrad efter signering',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Innehållet skiljer sig från det signerade — filen ändrades efter signeringen.',
+  'Herkomst ongeldig': 'Ursprung ogiltigt',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Ursprungssignaturen är felaktig eller förfalskad.',
+  'Herkomst niet hier te controleren': 'Ursprung kan inte kontrolleras här',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Signaturen finns men kan inte beräknas om här — kontrollera den mot den ursprungliga `.md`-filen.',
   'Bestaande identiteit vervangen?': 'Ersätt befintlig identitet?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Den här enheten har redan en samarbetsidentitet. Återställning ersätter den med identiteten från nyckeln. Har du sparat en återställningsnyckel för den nuvarande identiteten? Utan säkerhetskopia förlorar du den.',
