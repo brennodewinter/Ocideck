@@ -54,6 +54,13 @@ app.*.map.json
 # van als een nieuw bestand.
 test/golden/failures/
 
+# Wegwerp-tests die een documentatiebeeld of golden vastleggen en zichzelf na
+# gebruik weer opruimen (naam begint met `.tmp_`). Zo'n bestand hoort nooit
+# getrackt te raken: het is een momentopname-hulpje, geen test. Toch lekte
+# `test/.tmp_cockpit_doc_capture_test.dart` ooit via een brede `git add -A` de
+# repo in en reisde via #1069 tot in main. Dit patroon vangt de hele klasse af.
+test/.tmp_*
+
 # De private minisign-sleutel waarmee de release-manifest (SHA256SUMS) wordt
 # ondertekend hoort NOOIT in de repo — hij woont lokaal (standaard ~/.minisign/).
 # De publieke helft `minisign.pub` staat wél in de repo-root en is openbaar.
