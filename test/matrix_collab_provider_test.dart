@@ -320,6 +320,15 @@ void main() {
       expect(pinned.trust, TrustState.verified);
       expect(hostN.hasUnverifiedParticipants, isFalse);
 
+      // Unpinning returns the guest to unverified within the same session.
+      await hostN.unpinParticipant(pinned);
+      expect(
+        hostN.matrixParticipants().firstWhere((p) => !p.isSelf).trust,
+        TrustState.unverified,
+      );
+      // Re-pin so the persistence-across-rehost check below is meaningful.
+      await hostN.pinParticipant(pinned);
+
       await hostN.leave();
 
       // A fresh session on the same account+device re-hosts and, once the guest

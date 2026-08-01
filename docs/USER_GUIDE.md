@@ -591,6 +591,18 @@ stuck: a co-author who wants to keep their own copy can **leave the session** �
 saving is theirs again immediately — or **export a package** (`.ocideck`), which
 carries the full editable deck and its images regardless of who owns the session.
 
+**Verifying who you work with.** In a realtime session, the palette offers
+**“Deelnemers verifiëren”**: it lists every device with a **fingerprint** — a
+readable rendering of that device's identity key. Compare a co-author's
+fingerprint over a channel you trust (read it aloud, or send it a way you know is
+theirs); if it matches, mark the device **verified**. That verification is
+remembered, so the same device stays verified in later sessions and does not ask
+again. If a device you verified before ever shows up with a *different* identity,
+OciDeck flags it as **mismatch** — the sign that something is impersonating your
+co-author, and a reason to break off the session rather than dismiss it. While any
+device is still unverified, a slim banner above the workspace reminds you, and one
+tap opens the comparison. *(Added 2026-08-01.)*
+
 ## Slide types
 
 Add a slide and pick a type: **title**, **section** divider, **bullets**, **two

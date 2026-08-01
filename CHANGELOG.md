@@ -16,6 +16,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- Samenwerken (realtime): **apparaatverificatie blijft nu bewaard**. Vergelijk je
+  de vingerafdruk van een mede-auteur en markeer je het apparaat als geverifieerd,
+  dan blijft het geverifieerd — ook na herstart en in een volgende sessie. Een
+  apparaat dat je eerder verifieerde maar dat opeens met een andere identiteit
+  opduikt, wordt luid als **afwijkend** gemarkeerd (mogelijk iemand ertussen). Zolang
+  nog niet elk apparaat geverifieerd is, herinnert een slanke banner boven de
+  werkruimte je eraan; één tik opent de vergelijking. Geen cryptische
+  "unable to decrypt"-toestanden (COLLABORATION Fase 2, Blok A; #978).
 - Uitgifte/beveiliging: de release-manifest `SHA256SUMS` krijgt een **minisign
   detached signature** (`SHA256SUMS.minisig`; publieke sleutel `minisign.pub` in
   de repo-root), zodat de checksum-keten een verifieerbaar herkomst-anker heeft.

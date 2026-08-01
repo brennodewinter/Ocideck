@@ -16,7 +16,10 @@ import 'package:ocideck/models/matrix_settings.dart';
 import 'package:ocideck/state/matrix_client_provider.dart';
 import 'package:ocideck/widgets/panels/slide_presence_dots.dart';
 import 'package:ocideck/widgets/app_shell.dart';
+import 'package:ocideck/widgets/collab_verify_banner.dart';
 import 'package:ocideck/widgets/dialogs/matrix_collab_dialogs.dart';
+
+void _noop() {}
 
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
@@ -229,6 +232,37 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Geverifieerd'), findsOneWidget);
       expect(find.text('Markeer als geverifieerd'), findsNothing);
+    });
+  });
+
+  group('CollabVerifyBannerView', () {
+    testWidgets('renders nothing when not visible', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: CollabVerifyBannerView(visible: false, onVerify: _noop),
+          ),
+        ),
+      );
+      expect(find.text('Verifiëren'), findsNothing);
+      expect(find.byType(InkWell), findsNothing);
+    });
+
+    testWidgets('shows the prompt and fires onVerify on tap', (tester) async {
+      var tapped = 0;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: CollabVerifyBannerView(
+              visible: true,
+              onVerify: () => tapped++,
+            ),
+          ),
+        ),
+      );
+      expect(find.textContaining('Nog niet elk apparaat'), findsOneWidget);
+      await tester.tap(find.text('Verifiëren'));
+      expect(tapped, 1);
     });
   });
 
