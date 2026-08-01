@@ -1748,6 +1748,8 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'nap vaj tINqu’ (512 MB ‘ay’ vI’). qaSpa’ OciDeck poSmoHlaHbe’. nagh beQ HInob, HaSta pat, ghantoH pat je puS ghap machqu’.',
+  'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
+      'wa\' HTML De\'wI\' nagh vaghlan (512 MB \'oH veH\'e\') tlhutlh mej HInob mej. puS pagh mach nagh yIlo\', ghap PDF ghap ngaSwI\' yIchenmoH.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'wa\'DIch nab ta\'laH \'ej yhraS; ghIq Daqbogh SovmeH ghItlh DalaHlaH.',
   'Herkomst ondertekend.': 'Daqbogh SovmeH ghItlh rap.',

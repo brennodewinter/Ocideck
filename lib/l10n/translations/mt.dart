@@ -1795,6 +1795,8 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'Dan il-pakkett huwa kbir wisq (massimu 512 MB). Inkella OciDeck ma jkunx jista’ jiftħu wara. Uża inqas jew iżgħar immaġini, vidjows jew fajls tal-awdjo.',
+  'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
+      'L-immaġni flimkien huma kbar wisq għal fajl HTML wieħed (massimu 512 MB). Uża inqas immaġni jew immaġni iżgħar, jew esporta bħala PDF jew pakkett.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Temm u ħażen il-preżentazzjoni l-ewwel; imbagħad tista\' tiffirma l-oriġini tagħha.',
   'Herkomst ondertekend.': 'L-oriġini ġiet iffirmata.',
