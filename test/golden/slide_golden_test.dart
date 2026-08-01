@@ -174,6 +174,26 @@ void main() {
     );
   });
 
+  testWidgets('finding with CVSS score card', (tester) async {
+    await _match(
+      tester,
+      'finding_cvss',
+      Slide.create(SlideType.finding).copyWith(
+        customMarkdown:
+            '# F-03 · SQL injection in the login form\n'
+            '\n'
+            '**Scope object:** `https://app.client.example/login`\n'
+            '**CVSS 4.0:** 9.3 (Critical) · '
+            '`CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/'
+            'SC:N/SI:N/SA:N`\n'
+            '**CWE:** [CWE-89](https://cwe.mitre.org/data/definitions/89.html)\n'
+            '\n'
+            '## Description\n\n'
+            'The login endpoint accepts unsanitized SQL input.\n',
+      ),
+    );
+  });
+
   testWidgets('image placeholder', (tester) async {
     await _match(
       tester,
