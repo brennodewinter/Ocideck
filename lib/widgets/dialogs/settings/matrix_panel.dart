@@ -10,11 +10,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../../collab/collab_device_store.dart';
+import '../../../collab/collab_recovery_key.dart';
 import '../../../collab/matrix_client.dart';
 import '../../../models/matrix_settings.dart';
+import '../../../services/secret_store.dart';
 import '../../../state/matrix_client_provider.dart';
 import '../../../theme/app_theme.dart';
 import '../../../utils/log.dart';
+import '../recovery_key_dialogs.dart';
 import 'matrix_form.dart';
 import 'settings_section_title.dart';
 import 'settings_text_field.dart';
@@ -35,11 +39,16 @@ class MatrixPanel extends StatefulWidget {
   /// Overschrijft [platformCanStoreSecrets] voor het tokenveld. Alleen voor tests.
   final bool? canStore;
 
+  /// De sleutelhanger voor de herstelsleutel-stroom. Injecteerbaar voor tests;
+  /// standaard de echte [SecretStore].
+  final SecretStore? secretStore;
+
   const MatrixPanel({
     super.key,
     required this.form,
     this.buildTestClient,
     this.canStore,
+    this.secretStore,
   });
 
   @override
@@ -48,6 +57,29 @@ class MatrixPanel extends StatefulWidget {
 
 class _MatrixPanelState extends State<MatrixPanel> {
   MatrixForm get _form => widget.form;
+
+  @override
+  void initState() {
+    super.initState();
+    // The recovery section appears once homeserver/user/device are filled, so
+    // the panel must rebuild as those fields change (whether typed or filled by
+    // the connection test). The form owns the controllers; we only listen.
+    for (final c in [_form.homeserver, _form.userId, _form.deviceId]) {
+      c.addListener(_onAccountFieldChanged);
+    }
+  }
+
+  @override
+  void dispose() {
+    for (final c in [_form.homeserver, _form.userId, _form.deviceId]) {
+      c.removeListener(_onAccountFieldChanged);
+    }
+    super.dispose();
+  }
+
+  void _onAccountFieldChanged() {
+    if (mounted) setState(() {});
+  }
 
   MatrixClient _client(MatrixServer account, String? token) =>
       (widget.buildTestClient ??
@@ -118,9 +150,132 @@ class _MatrixPanelState extends State<MatrixPanel> {
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
+        _recoverySection(l10n),
       ],
     );
   }
+
+  SecretStore get _secrets => widget.secretStore ?? SecretStore();
+
+  /// The identity recovery-key controls (Blok B). Shown once the account is
+  /// filled in — a device id is needed to mint or restore an identity, and it is
+  /// the connection test that fills it. Before that there is nothing to back up.
+  Widget _recoverySection(AppLocalizations l10n) {
+    final ready =
+        _form.homeserver.text.trim().isNotEmpty &&
+        _form.userId.text.trim().isNotEmpty &&
+        _form.deviceId.text.trim().isNotEmpty;
+    if (!ready) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(top: 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SettingsSectionTitle(l10n.d('Identiteit & herstelsleutel')),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Text(
+              l10n.d(
+                'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.',
+              ),
+              style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+            ),
+          ),
+          Wrap(
+            spacing: 8,
+            children: [
+              OutlinedButton.icon(
+                icon: const Icon(Icons.vpn_key_outlined, size: 16),
+                onPressed: _showRecoveryKey,
+                label: Text(l10n.d('Herstelsleutel tonen')),
+              ),
+              OutlinedButton.icon(
+                icon: const Icon(Icons.settings_backup_restore, size: 16),
+                onPressed: _restoreIdentity,
+                label: Text(l10n.d('Identiteit herstellen')),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Ensure this account has an identity (mint one if absent), then show its
+  /// recovery key to save.
+  Future<void> _showRecoveryKey() async {
+    final l10n = context.l10n;
+    final homeserver = _form.homeserver.text.trim();
+    final userId = _form.userId.text.trim();
+    final deviceId = _form.deviceId.text.trim();
+    try {
+      // Minting if absent is what makes "show me my recovery key" work before the
+      // first session; a later session reuses the very same seeds (same device id).
+      await loadOrCreateDeviceKeys(
+        secretStore: _secrets,
+        homeserver: homeserver,
+        userId: userId,
+        deviceId: deviceId,
+      );
+      final seeds = await readDeviceSeeds(
+        secretStore: _secrets,
+        homeserver: homeserver,
+        userId: userId,
+      );
+      if (!mounted || seeds == null) return;
+      await showRecoveryKeyDialog(context, l10n, seeds.recoveryKey());
+    } catch (e) {
+      logError('MatrixPanel._showRecoveryKey failed', e);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.d('De herstelsleutel kon niet worden gelezen.')),
+          ),
+        );
+      }
+    }
+  }
+
+  /// Prompt for a recovery key and restore the identity from it, mapping a
+  /// malformed key to a plain message rather than a stack trace.
+  Future<void> _restoreIdentity() async {
+    final l10n = context.l10n;
+    final key = await promptRecoveryKey(context, l10n);
+    if (key == null || !mounted) return;
+    try {
+      await importRecoveryKey(
+        secretStore: _secrets,
+        homeserver: _form.homeserver.text.trim(),
+        userId: _form.userId.text.trim(),
+        deviceId: _form.deviceId.text.trim(),
+        recoveryKey: key,
+      );
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.d('Identiteit hersteld.'))));
+      }
+    } on RecoveryKeyException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(_recoveryError(l10n, e.reason))));
+      }
+    }
+  }
+
+  String _recoveryError(
+    AppLocalizations l10n,
+    RecoveryKeyError reason,
+  ) => switch (reason) {
+    RecoveryKeyError.checksum => l10n.d(
+      'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.',
+    ),
+    RecoveryKeyError.format => l10n.d('Dit lijkt geen geldige herstelsleutel.'),
+    RecoveryKeyError.version => l10n.d(
+      'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.',
+    ),
+  };
 
   Widget _tokenHelp(AppLocalizations l10n) => Padding(
     padding: const EdgeInsets.only(top: 6),

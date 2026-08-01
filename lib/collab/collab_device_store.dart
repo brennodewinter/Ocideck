@@ -14,6 +14,7 @@ import 'dart:math';
 
 import '../services/secret_store.dart';
 import 'collab_crypto.dart';
+import 'collab_recovery_key.dart';
 
 /// The persisted form of a device's key material: an id and the two 32-byte
 /// seeds its keypairs derive from.
@@ -48,6 +49,11 @@ class CollabDeviceSeeds {
     ed25519Seed: ed25519Seed,
     x25519Seed: x25519Seed,
   );
+
+  /// This identity as a portable recovery key (Blok B). The device id is *not*
+  /// carried: recovery restores the identity keypairs, which a new device binds
+  /// to its own Matrix device id on import (§4.3). See [collab_recovery_key.dart].
+  String recoveryKey() => encodeRecoveryKey(ed25519Seed, x25519Seed);
 
   String toStored() => jsonEncode({
     'v': 1,
@@ -104,4 +110,50 @@ Future<CollabDeviceKeys> loadOrCreateDeviceKeys({
     fresh.toStored(),
   );
   return fresh.toDeviceKeys();
+}
+
+/// Read the stored device seeds for [homeserver]/[userId], or null when none
+/// exist yet or the entry is unreadable. Used to show the recovery key for
+/// export (Blok B) without minting a new identity the way [loadOrCreateDeviceKeys]
+/// would.
+Future<CollabDeviceSeeds?> readDeviceSeeds({
+  required SecretStore secretStore,
+  required String homeserver,
+  required String userId,
+}) async {
+  final stored = await secretStore.readCollabDeviceSeeds(homeserver, userId);
+  if (stored == null) return null;
+  try {
+    return CollabDeviceSeeds.fromStored(stored);
+  } on FormatException {
+    return null;
+  }
+}
+
+/// Restore an identity from a [recoveryKey] on this device (Blok B). The
+/// recovered seeds are bound to the current [deviceId] and written to the
+/// keychain, so the next [loadOrCreateDeviceKeys] reuses them — the device keeps
+/// its own Matrix device id but adopts the recovered identity keypairs (and thus
+/// the same fingerprint and provenance-signing key). Throws
+/// [RecoveryKeyException] on a malformed or mistyped key, before anything is
+/// written.
+Future<CollabDeviceKeys> importRecoveryKey({
+  required SecretStore secretStore,
+  required String homeserver,
+  required String userId,
+  required String deviceId,
+  required String recoveryKey,
+}) async {
+  final recovered = decodeRecoveryKey(recoveryKey);
+  final seeds = CollabDeviceSeeds(
+    deviceId: deviceId,
+    ed25519Seed: recovered.ed25519Seed,
+    x25519Seed: recovered.x25519Seed,
+  );
+  await secretStore.writeCollabDeviceSeeds(
+    homeserver,
+    userId,
+    seeds.toStored(),
+  );
+  return seeds.toDeviceKeys();
 }

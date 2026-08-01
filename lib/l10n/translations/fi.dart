@@ -1772,6 +1772,26 @@ const _dutchSourceFi = {
 
 const _dutchSourceAddFi = <String, String>{
   'Ongeldige vraag': 'Virheellinen kysymys',
+  'Herstelsleutel': 'Palautusavain',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Säilytä tämä palautusavain turvallisessa paikassa — esimerkiksi salasanaholvissasi. Se on ainoa tapa palauttaa sama identiteetti toiseen laitteeseen; ilman tätä avainta aloitat siellä uutena, vielä vahvistamattomana laitteena. Älä jaa sitä kenellekään.',
+  'Herstelsleutel gekopieerd.': 'Palautusavain kopioitu.',
+  'Identiteit herstellen': 'Palauta identiteetti',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Liitä aiemmin tallentamasi palautusavain. Tämä laite ottaa silloin saman identiteetin — aiemmin sinut vahvistaneet tekijätoverit tunnistavat sormenjälkesi taas.',
+  'Identiteit & herstelsleutel': 'Identiteetti ja palautusavain',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Laitteellasi on oma yhteistyöidentiteetti — sen tekijätoverit vahvistavat. Tallenna palautusavain, jotta voit myöhemmin palauttaa saman identiteetin toiseen laitteeseen; ilman sitä avainta aloitat siellä alusta.',
+  'Herstelsleutel tonen': 'Näytä palautusavain',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Palautusavainta ei voitu lukea.',
+  'Identiteit hersteld.': 'Identiteetti palautettu.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Tämä palautusavain ei ole oikea — tarkista, että kopioit sen kokonaan ja virheettömästi.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Tämä ei näytä kelvolliselta palautusavaimelta.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Tämä palautusavain on peräisin OciDeckin uudemmasta versiosta.',
   'Realtime samenwerken': 'Reaaliaikainen yhteistyö',
   'Manieren van verbinden': 'Yhdistämistavat',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

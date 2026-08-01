@@ -1788,6 +1788,26 @@ const _dutchSourceLa = {
 
 const _dutchSourceAddLa = <String, String>{
   'Ongeldige vraag': 'Quaestio invalida',
+  'Herstelsleutel': 'Clavis restitutionis',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Hanc clavem restitutionis in loco tuto serva — exempli gratia in armario tesserarum tuo. Sola via est eandem identitatem in alio instrumento restituendi; sine hac clave illic incipis ut novum instrumentum nondum probatum. Cum nemine eam communica.',
+  'Herstelsleutel gekopieerd.': 'Clavis restitutionis exscripta.',
+  'Identiteit herstellen': 'Identitatem restituere',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Clavem restitutionis quam antea servavisti insere. Hoc instrumentum tunc eandem identitatem suscipit — coauctores qui te antea probaverunt digitorum vestigium tuum iterum agnoscent.',
+  'Identiteit & herstelsleutel': 'Identitas et clavis restitutionis',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Instrumentum tuum propriam identitatem cooperationis habet — hanc coauctores probant. Clavem restitutionis serva ut eandem identitatem postea in alio instrumento restituas; sine ea clave illic denuo incipis.',
+  'Herstelsleutel tonen': 'Clavem restitutionis monstrare',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Clavis restitutionis legi non potuit.',
+  'Identiteit hersteld.': 'Identitas restituta.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Haec clavis restitutionis non recta est — inspice num eam integram et sine erroribus transcripseris.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Haec clavis restitutionis valida esse non videtur.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Haec clavis restitutionis ex recentiore versione OciDeck orta est.',
   'Realtime samenwerken': 'Collaboratio tempore reali',
   'Manieren van verbinden': 'Modi coniungendi',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

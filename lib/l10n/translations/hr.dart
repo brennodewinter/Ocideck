@@ -1778,6 +1778,26 @@ const _dutchSourceHr = {
 
 const _dutchSourceAddHr = <String, String>{
   'Ongeldige vraag': 'Nevaljano pitanje',
+  'Herstelsleutel': 'Ključ za oporavak',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Čuvajte ovaj ključ za oporavak na sigurnom mjestu — primjerice u svom trezoru lozinki. To je jedini način da vratite isti identitet na drugom uređaju; bez ovog ključa ondje počinjete kao novi, još neprovjereni uređaj. Ne dijelite ga ni s kim.',
+  'Herstelsleutel gekopieerd.': 'Ključ za oporavak kopiran.',
+  'Identiteit herstellen': 'Vrati identitet',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Zalijepite ključ za oporavak koji ste ranije spremili. Ovaj uređaj tada preuzima isti identitet — koautori koji su vas ranije provjerili ponovno će prepoznati vaš otisak.',
+  'Identiteit & herstelsleutel': 'Identitet i ključ za oporavak',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Vaš uređaj ima vlastiti identitet za suradnju — to je ono što koautori provjeravaju. Spremite ključ za oporavak da biste kasnije vratili isti identitet na drugom uređaju; bez tog ključa ondje počinjete ispočetka.',
+  'Herstelsleutel tonen': 'Prikaži ključ za oporavak',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Ključ za oporavak nije se mogao pročitati.',
+  'Identiteit hersteld.': 'Identitet vraćen.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Ovaj ključ za oporavak nije ispravan — provjerite jeste li ga prepisali u cijelosti i bez pogrešaka.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Ovo ne izgleda kao valjan ključ za oporavak.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Ovaj ključ za oporavak potječe iz novije verzije OciDecka.',
   'Realtime samenwerken': 'Suradnja u stvarnom vremenu',
   'Manieren van verbinden': 'Načini povezivanja',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

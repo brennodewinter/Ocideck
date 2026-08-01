@@ -1771,6 +1771,26 @@ const _dutchSourceSv = {
 
 const _dutchSourceAddSv = <String, String>{
   'Ongeldige vraag': 'Ogiltig fråga',
+  'Herstelsleutel': 'Återställningsnyckel',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Förvara den här återställningsnyckeln på ett säkert ställe — till exempel i ditt lösenordsvalv. Det är det enda sättet att återställa samma identitet på en annan enhet; utan den här nyckeln börjar du där som en ny, ännu inte verifierad enhet. Dela den inte med någon.',
+  'Herstelsleutel gekopieerd.': 'Återställningsnyckeln kopierad.',
+  'Identiteit herstellen': 'Återställ identitet',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Klistra in återställningsnyckeln du sparade tidigare. Den här enheten övertar då samma identitet — medförfattare som tidigare verifierade dig känner igen ditt fingeravtryck igen.',
+  'Identiteit & herstelsleutel': 'Identitet och återställningsnyckel',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Din enhet har en egen samarbetsidentitet — det är den som medförfattare verifierar. Spara återställningsnyckeln för att senare återställa samma identitet på en annan enhet; utan den nyckeln börjar du om där.',
+  'Herstelsleutel tonen': 'Visa återställningsnyckel',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Det gick inte att läsa återställningsnyckeln.',
+  'Identiteit hersteld.': 'Identitet återställd.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Den här återställningsnyckeln är inte korrekt — kontrollera att du kopierade den fullständigt och felfritt.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Detta ser inte ut som en giltig återställningsnyckel.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Den här återställningsnyckeln kommer från en nyare version av OciDeck.',
   'Realtime samenwerken': 'Samarbete i realtid',
   'Manieren van verbinden': 'Anslutningssätt',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

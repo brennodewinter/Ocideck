@@ -1784,6 +1784,26 @@ const _dutchSourcePl = {
 
 const _dutchSourceAddPl = <String, String>{
   'Ongeldige vraag': 'Nieprawidłowe pytanie',
+  'Herstelsleutel': 'Klucz odzyskiwania',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Przechowuj ten klucz odzyskiwania w bezpiecznym miejscu — na przykład w swoim menedżerze haseł. To jedyny sposób, aby odtworzyć tę samą tożsamość na innym urządzeniu; bez tego klucza zaczynasz tam jako nowe, jeszcze niezweryfikowane urządzenie. Nie udostępniaj go nikomu.',
+  'Herstelsleutel gekopieerd.': 'Skopiowano klucz odzyskiwania.',
+  'Identiteit herstellen': 'Odtwórz tożsamość',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Wklej klucz odzyskiwania, który wcześniej zapisałeś. To urządzenie przejmie wtedy tę samą tożsamość — współautorzy, którzy wcześniej cię zweryfikowali, ponownie rozpoznają twój odcisk.',
+  'Identiteit & herstelsleutel': 'Tożsamość i klucz odzyskiwania',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Twoje urządzenie ma własną tożsamość współpracy — to ją weryfikują współautorzy. Zapisz klucz odzyskiwania, aby później odtworzyć tę samą tożsamość na innym urządzeniu; bez tego klucza zaczynasz tam od nowa.',
+  'Herstelsleutel tonen': 'Pokaż klucz odzyskiwania',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Nie udało się odczytać klucza odzyskiwania.',
+  'Identiteit hersteld.': 'Tożsamość odtworzona.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Ten klucz odzyskiwania jest nieprawidłowy — sprawdź, czy skopiowałeś go w całości i bez błędów.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'To nie wygląda na prawidłowy klucz odzyskiwania.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Ten klucz odzyskiwania pochodzi z nowszej wersji OciDeck.',
   'Realtime samenwerken': 'Współpraca w czasie rzeczywistym',
   'Manieren van verbinden': 'Sposoby połączenia',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -731,6 +731,26 @@ const _dutchSourceDe = {
 
 const _dutchSourceAddDe = {
   'Ongeldige vraag': 'Ungültige Frage',
+  'Herstelsleutel': 'Wiederherstellungsschlüssel',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Bewahre diesen Wiederherstellungsschlüssel an einem sicheren Ort auf — zum Beispiel in deinem Passworttresor. Er ist die einzige Möglichkeit, dieselbe Identität auf einem anderen Gerät wiederherzustellen; ohne diesen Schlüssel beginnst du dort als neues, noch nicht verifiziertes Gerät. Teile ihn mit niemandem.',
+  'Herstelsleutel gekopieerd.': 'Wiederherstellungsschlüssel kopiert.',
+  'Identiteit herstellen': 'Identität wiederherstellen',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Füge den zuvor gespeicherten Wiederherstellungsschlüssel ein. Dieses Gerät übernimmt dann dieselbe Identität — Mitautoren, die dich zuvor verifiziert haben, erkennen deinen Fingerabdruck wieder.',
+  'Identiteit & herstelsleutel': 'Identität & Wiederherstellungsschlüssel',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Dein Gerät hat eine eigene Kollaborationsidentität — die verifizieren die Mitautoren. Speichere den Wiederherstellungsschlüssel, um dieselbe Identität später auf einem anderen Gerät wiederherzustellen; ohne diesen Schlüssel fängst du dort neu an.',
+  'Herstelsleutel tonen': 'Wiederherstellungsschlüssel anzeigen',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Der Wiederherstellungsschlüssel konnte nicht gelesen werden.',
+  'Identiteit hersteld.': 'Identität wiederhergestellt.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Dieser Wiederherstellungsschlüssel stimmt nicht — prüfe, ob du ihn vollständig und fehlerfrei übernommen hast.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Das sieht nicht nach einem gültigen Wiederherstellungsschlüssel aus.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Dieser Wiederherstellungsschlüssel stammt aus einer neueren Version von OciDeck.',
   'Realtime samenwerken': 'Echtzeit-Zusammenarbeit',
   'Manieren van verbinden': 'Verbindungsarten',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

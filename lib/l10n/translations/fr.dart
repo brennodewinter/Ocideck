@@ -731,6 +731,26 @@ const _dutchSourceFr = {
 
 const _dutchSourceAddFr = {
   'Ongeldige vraag': 'Question non valide',
+  'Herstelsleutel': 'Clé de récupération',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Conservez cette clé de récupération en lieu sûr — par exemple dans votre coffre-fort de mots de passe. C\'est le seul moyen de restaurer la même identité sur un autre appareil ; sans cette clé, vous y démarrez comme un nouvel appareil non encore vérifié. Ne la partagez avec personne.',
+  'Herstelsleutel gekopieerd.': 'Clé de récupération copiée.',
+  'Identiteit herstellen': 'Restaurer l\'identité',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Collez la clé de récupération que vous aviez enregistrée. Cet appareil reprend alors la même identité — les coauteurs qui vous avaient vérifié reconnaîtront à nouveau votre empreinte.',
+  'Identiteit & herstelsleutel': 'Identité et clé de récupération',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Votre appareil possède sa propre identité de collaboration — c\'est ce que vérifient les coauteurs. Enregistrez la clé de récupération pour restaurer plus tard cette même identité sur un autre appareil ; sans cette clé, vous y recommencez de zéro.',
+  'Herstelsleutel tonen': 'Afficher la clé de récupération',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Impossible de lire la clé de récupération.',
+  'Identiteit hersteld.': 'Identité restaurée.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Cette clé de récupération n\'est pas correcte — vérifiez que vous l\'avez copiée intégralement et sans erreur.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Cela ne ressemble pas à une clé de récupération valide.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Cette clé de récupération provient d\'une version plus récente d\'OciDeck.',
   'Realtime samenwerken': 'Collaboration en temps réel',
   'Manieren van verbinden': 'Moyens de connexion',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

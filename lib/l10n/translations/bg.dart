@@ -1794,6 +1794,26 @@ const _dutchSourceBg = {
 
 const _dutchSourceAddBg = <String, String>{
   'Ongeldige vraag': 'Невалиден въпрос',
+  'Herstelsleutel': 'Ключ за възстановяване',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Съхранявайте този ключ за възстановяване на сигурно място — например в хранилището си за пароли. Това е единственият начин да възстановите същата самоличност на друго устройство; без този ключ там започвате като ново, все още непроверено устройство. Не го споделяйте с никого.',
+  'Herstelsleutel gekopieerd.': 'Ключът за възстановяване е копиран.',
+  'Identiteit herstellen': 'Възстановяване на самоличност',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Поставете ключа за възстановяване, който запазихте по-рано. Това устройство тогава поема същата самоличност — съавторите, които са ви проверили по-рано, отново ще разпознаят вашия отпечатък.',
+  'Identiteit & herstelsleutel': 'Самоличност и ключ за възстановяване',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Вашето устройство има собствена самоличност за сътрудничество — това е, което съавторите проверяват. Запазете ключа за възстановяване, за да възстановите същата самоличност по-късно на друго устройство; без този ключ там започвате отначало.',
+  'Herstelsleutel tonen': 'Показване на ключа за възстановяване',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Ключът за възстановяване не можа да бъде прочетен.',
+  'Identiteit hersteld.': 'Самоличността е възстановена.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Този ключ за възстановяване не е правилен — проверете дали сте го въвели изцяло и без грешки.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Това не изглежда като валиден ключ за възстановяване.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Този ключ за възстановяване е от по-нова версия на OciDeck.',
   'Realtime samenwerken': 'Съвместна работа в реално време',
   'Manieren van verbinden': 'Начини на свързване',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

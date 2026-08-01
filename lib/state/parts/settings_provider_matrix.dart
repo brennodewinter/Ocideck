@@ -11,6 +11,7 @@ extension SettingsNotifierMatrix on SettingsNotifier {
   /// access-token, dat gaat via [setMatrixToken] naar de keychain. Wist enkel deze
   /// key, nooit het hele domein.
   Future<void> setMatrixAccount(MatrixServer? account) async {
+    final previous = currentState.matrixAccount;
     currentState = currentState.copyWith(
       matrixAccount: account,
       clearMatrixAccount: account == null,
@@ -22,6 +23,9 @@ extension SettingsNotifierMatrix on SettingsNotifier {
         await prefs.setString('matrixAccount', jsonEncode(account.toJson()));
       }
     });
+    if (account == null && previous != null) {
+      await sweepMatrixCollabSecrets(_secrets, previous);
+    }
   }
 
   /// Schrijf het Matrix-access-token versleuteld naar de keychain (gekeyd op de
@@ -49,4 +53,18 @@ extension SettingsNotifierMatrix on SettingsNotifier {
   /// Read the Matrix access token for [account] back from the keychain, or null.
   Future<String?> matrixToken(MatrixServer account) =>
       _secrets.readMatrixToken(account.homeserverUrl, account.userId);
+}
+
+/// Wis de samenwerkingsgeheimen van [account] uit de sleutelhanger: de
+/// apparaatsidentiteit-seeds én de gepinde-apparaten-vertrouwensstore. Zo blijft
+/// er niets persoonlijks achter voor een account dat de gebruiker bewust
+/// verwijdert; het access-token gaat langs [SettingsNotifierMatrix.setMatrixToken]
+/// op dezelfde verwijdering. Top-level (niet in de extensie) om de klasseomvang
+/// van [SettingsNotifier] niet te laten groeien.
+Future<void> sweepMatrixCollabSecrets(
+  SecretStore secrets,
+  MatrixServer account,
+) async {
+  await secrets.deleteCollabDeviceSeeds(account.homeserverUrl, account.userId);
+  await secrets.deleteCollabTrust(account.homeserverUrl, account.userId);
 }

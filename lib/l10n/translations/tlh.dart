@@ -1747,6 +1747,26 @@ const _dutchSourceTlh = {
 
 const _dutchSourceAddTlh = <String, String>{
   'Ongeldige vraag': 'yu\'vam lughbe\'',
+  'Herstelsleutel': 'cheghmoHwI\' ngoq',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'QaghHa\'ghach Daq Daqmey QanmoH cheghmoHwI\' ngoqvam — ghItlhwI\' mojaqmeywIj toghDaq. eb wa\'DIch neH \'oH, latlh jan Daq rap qup\'a\' choH; cheghmoHwI\' ngoq Hutlh, pa\' chu\' jan, ngeb qelHa\'lu\'bogh jan rur SoH. vay\' vebvaD yIʼangQo\'.',
+  'Herstelsleutel gekopieerd.': 'cheghmoHwI\' ngoq velqa\'lu\'pu\'.',
+  'Identiteit herstellen': 'qup\'a\' yIchegh',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'wa\'Hu\' DaqanmoHpu\'bogh cheghmoHwI\' ngoq yIlan. vaj janvam qup\'a\' rap Suq — nubelHa\'moHpu\'bogh qonwI\' latlh, DaʼangʼeghmeH nItlhDu\' cha\' tu\'qa\'.',
+  'Identiteit & herstelsleutel': 'qup\'a\' & cheghmoHwI\' ngoq',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'DIvI\' qup\'a\' ghaj janlIj — \'oH nubelHa\'moHpu\'bogh qonwI\' luqel. cheghmoHwI\' ngoq yIQan, latlh janDaq qup\'a\' rap DaqanmoHmeH tugh; ngoq Hutlh, pa\' Dataghqa\'.',
+  'Herstelsleutel tonen': 'cheghmoHwI\' ngoq yi\'ang',
+  'De herstelsleutel kon niet worden gelezen.':
+      'cheghmoHwI\' ngoq laDlaHbe\'lu\'.',
+  'Identiteit hersteld.': 'qup\'a\' cheghlu\'pu\'.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'lugh cheghmoHwI\' ngoqvam — yIlaD: naQ \'ej QaghHa\' Datermey\'\'a\'.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'cheghmoHwI\' ngoq lI\' rurbe\' lI\'.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'cheghmoHwI\' ngoqvam, OciDeck chu\'qu\' Ha\'DIbaHvo\' ghoS.',
   'Realtime samenwerken': 'SIbI\' vumchuq',
   'Manieren van verbinden': 'rarmeH mIwmey',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

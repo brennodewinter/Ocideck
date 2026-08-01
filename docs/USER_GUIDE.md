@@ -603,6 +603,18 @@ co-author, and a reason to break off the session rather than dismiss it. While a
 device is still unverified, a slim banner above the workspace reminds you, and one
 tap opens the comparison. *(Added 2026-08-01.)*
 
+**Keeping your identity when you switch devices.** Your device has its own
+collaboration identity — the thing co-authors verify. It lives only on this
+device, so a new device normally starts fresh (and shows up as unverified to
+everyone who had verified you). To carry the *same* identity over, open
+*Settings → Realtime samenwerken → Identiteit & herstelsleutel* and **show the
+recovery key** — a short grouped code. Save it somewhere safe, such as your
+password manager; it is the only way to restore this identity, so keep it and
+share it with no one. On the new device, open the same place and **restore** from
+that key: co-authors who verified you before recognise your fingerprint again.
+Removing the Matrix account also removes this identity and your saved
+verifications from the keychain. *(Added 2026-08-01.)*
+
 ## Slide types
 
 Add a slide and pick a type: **title**, **section** divider, **bullets**, **two

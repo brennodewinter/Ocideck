@@ -16,6 +16,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- Samenwerken (realtime): **herstelsleutel voor je apparaatsidentiteit**. Je
+  apparaat heeft een eigen samenwerkingsidentiteit (wat mede-auteurs verifiëren);
+  in Instellingen → Realtime samenwerken kun je die als leesbare herstelsleutel
+  bewaren en op een ander apparaat terugzetten, zodat dezelfde vingerafdruk — en
+  straks dezelfde herkomst-ondertekensleutel — meegaat. De sleutel is Crockford-
+  Base32 met een controlegetal tegen typefouten; niets verlaat het apparaat. Bij
+  het verwijderen van het Matrix-account worden de identiteitsseeds én de
+  vertrouwde-apparaten geveegd (COLLABORATION Fase 2, Blok B; #978).
 - Samenwerken (realtime): **apparaatverificatie blijft nu bewaard**. Vergelijk je
   de vingerafdruk van een mede-auteur en markeer je het apparaat als geverifieerd,
   dan blijft het geverifieerd — ook na herstart en in een volgende sessie. Een

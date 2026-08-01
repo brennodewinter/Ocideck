@@ -1789,6 +1789,26 @@ const _dutchSourceRo = {
 
 const _dutchSourceAddRo = <String, String>{
   'Ongeldige vraag': 'Întrebare nevalidă',
+  'Herstelsleutel': 'Cheie de recuperare',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Păstrează această cheie de recuperare într-un loc sigur — de exemplu, în seiful tău de parole. Este singura modalitate de a restaura aceeași identitate pe alt dispozitiv; fără această cheie, acolo pornești ca un dispozitiv nou, încă neverificat. Nu o împărtăși nimănui.',
+  'Herstelsleutel gekopieerd.': 'Cheie de recuperare copiată.',
+  'Identiteit herstellen': 'Restaurează identitatea',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Lipește cheia de recuperare pe care ai salvat-o anterior. Acest dispozitiv preia atunci aceeași identitate — coautorii care te-au verificat anterior îți vor recunoaște din nou amprenta.',
+  'Identiteit & herstelsleutel': 'Identitate și cheie de recuperare',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Dispozitivul tău are propria identitate de colaborare — asta verifică coautorii. Salvează cheia de recuperare pentru a restaura mai târziu aceeași identitate pe alt dispozitiv; fără acea cheie, acolo o iei de la capăt.',
+  'Herstelsleutel tonen': 'Afișează cheia de recuperare',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Cheia de recuperare nu a putut fi citită.',
+  'Identiteit hersteld.': 'Identitate restaurată.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Această cheie de recuperare nu este corectă — verifică dacă ai copiat-o complet și fără erori.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Aceasta nu pare o cheie de recuperare validă.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Această cheie de recuperare provine dintr-o versiune mai nouă de OciDeck.',
   'Realtime samenwerken': 'Colaborare în timp real',
   'Manieren van verbinden': 'Moduri de conectare',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

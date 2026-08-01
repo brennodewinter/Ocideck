@@ -1772,6 +1772,26 @@ const _dutchSourceId = {
 
 const _dutchSourceAddId = <String, String>{
   'Ongeldige vraag': 'Pertanyaan tidak valid',
+  'Herstelsleutel': 'Kunci pemulihan',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Simpan kunci pemulihan ini di tempat yang aman — misalnya di brankas kata sandi Anda. Ini satu-satunya cara untuk memulihkan identitas yang sama di perangkat lain; tanpa kunci ini, di sana Anda mulai sebagai perangkat baru yang belum terverifikasi. Jangan bagikan kepada siapa pun.',
+  'Herstelsleutel gekopieerd.': 'Kunci pemulihan disalin.',
+  'Identiteit herstellen': 'Pulihkan identitas',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Tempel kunci pemulihan yang Anda simpan sebelumnya. Perangkat ini kemudian mengambil alih identitas yang sama — rekan penulis yang telah memverifikasi Anda akan mengenali sidik jari Anda lagi.',
+  'Identiteit & herstelsleutel': 'Identitas & kunci pemulihan',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Perangkat Anda memiliki identitas kolaborasi sendiri — itulah yang diverifikasi rekan penulis. Simpan kunci pemulihan untuk memulihkan identitas yang sama nanti di perangkat lain; tanpa kunci itu, di sana Anda mulai dari awal.',
+  'Herstelsleutel tonen': 'Tampilkan kunci pemulihan',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Kunci pemulihan tidak dapat dibaca.',
+  'Identiteit hersteld.': 'Identitas dipulihkan.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Kunci pemulihan ini tidak benar — periksa apakah Anda menyalinnya secara lengkap dan tanpa kesalahan.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Ini sepertinya bukan kunci pemulihan yang valid.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Kunci pemulihan ini berasal dari versi OciDeck yang lebih baru.',
   'Realtime samenwerken': 'Kolaborasi waktu nyata',
   'Manieren van verbinden': 'Cara menyambung',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

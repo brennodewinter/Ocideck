@@ -1775,6 +1775,26 @@ const _dutchSourceGsw = {
 
 const _dutchSourceAddGsw = <String, String>{
   'Ongeldige vraag': 'Ungültigi Frag',
+  'Herstelsleutel': 'Wiederherstelligsschlüssel',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Bewahr dä Wiederherstelligsschlüssel an eme sichere Ort uf — zum Bischpil i dim Passwort-Tresor. Er isch di einzig Möglichkeit, di gliichi Identität uf eme andere Grät wiederherzstelle; ohni dä Schlüssel fangsch det als es nöis, no nöd verifiziärts Grät a. Teil en mit niemertem.',
+  'Herstelsleutel gekopieerd.': 'Wiederherstelligsschlüssel kopiärt.',
+  'Identiteit herstellen': 'Identität wiederherstelle',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Füeg dä Wiederherstelligsschlüssel i, wo du vorhär gspeicheret hesch. Das Grät übernimmt denn di gliichi Identität — Mitautore, wo di vorhär verifiziärt hei, erkenne dini Fingerprint wieder.',
+  'Identiteit & herstelsleutel': 'Identität & Wiederherstelligsschlüssel',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Dis Grät het e eigeni Zämmenarbeits-Identität — die verifiziäre d\'Mitautore. Speicher dä Wiederherstelligsschlüssel, zum die gliichi Identität spöter uf eme andere Grät wiederherzstelle; ohni dä Schlüssel fangsch det vo vorn a.',
+  'Herstelsleutel tonen': 'Wiederherstelligsschlüssel aazeige',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Dä Wiederherstelligsschlüssel het nöd chöne gläse werde.',
+  'Identiteit hersteld.': 'Identität wiederhergstellt.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Dä Wiederherstelligsschlüssel stimmt nöd — prüef, öb du en vollständig und fählerfrei übernoh hesch.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Das gseht nöd nach eme gültige Wiederherstelligsschlüssel us.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Dä Wiederherstelligsschlüssel chunnt vo ere nöiere Version vo OciDeck.',
   'Realtime samenwerken': 'Echtziit-Zämmenarbet',
   'Manieren van verbinden': 'Verbindigsarte',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -1774,6 +1774,26 @@ const _dutchSourceSl = {
 
 const _dutchSourceAddSl = <String, String>{
   'Ongeldige vraag': 'Neveljavno vprašanje',
+  'Herstelsleutel': 'Ključ za obnovitev',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Ta ključ za obnovitev shranite na varno mesto — na primer v svojo shrambo gesel. To je edini način, da isto identiteto obnovite v drugi napravi; brez tega ključa tam začnete kot nova, še nepreverjena naprava. Ne delite ga z nikomer.',
+  'Herstelsleutel gekopieerd.': 'Ključ za obnovitev je kopiran.',
+  'Identiteit herstellen': 'Obnovi identiteto',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Prilepite ključ za obnovitev, ki ste ga prej shranili. Ta naprava nato prevzame isto identiteto — soavtorji, ki so vas prej preverili, bodo znova prepoznali vaš prstni odtis.',
+  'Identiteit & herstelsleutel': 'Identiteta in ključ za obnovitev',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Vaša naprava ima svojo identiteto za sodelovanje — to preverjajo soavtorji. Shranite ključ za obnovitev, da boste isto identiteto pozneje obnovili v drugi napravi; brez tega ključa tam začnete znova.',
+  'Herstelsleutel tonen': 'Pokaži ključ za obnovitev',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Ključa za obnovitev ni bilo mogoče prebrati.',
+  'Identiteit hersteld.': 'Identiteta obnovljena.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Ta ključ za obnovitev ni pravilen — preverite, ali ste ga prepisali v celoti in brez napak.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'To ni videti kot veljaven ključ za obnovitev.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Ta ključ za obnovitev izvira iz novejše različice OciDecka.',
   'Realtime samenwerken': 'Sodelovanje v realnem času',
   'Manieren van verbinden': 'Načini povezovanja',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
