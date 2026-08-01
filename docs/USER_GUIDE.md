@@ -2848,6 +2848,13 @@ the editor half of it.
   opens a **find-in-page** bar that searches within the open document: it shows a
   *position / total* counter, steps through the matches with the up/down arrows
   (wrapping around at the ends), and scrolls the current match into view.
+- **Links in the reader** — a link inside a document now goes somewhere. A link
+  to another bundled document opens that document in the reader (the back button
+  walks the trail back); a link to a document that ships only on the repository
+  opens the repository version in your browser; a `#section` link scrolls to
+  that heading; and an ordinary web or `mailto:` link opens externally. The same
+  goes for a link written in slide text — it opens in your default browser while
+  you present.
 - **Curated in-app set** — *Settings → Documentation* ships a selected set of
   documents rather than everything under `docs/`: the user guides and reference,
   the licence and compliance documents, and the technical documents that bear on

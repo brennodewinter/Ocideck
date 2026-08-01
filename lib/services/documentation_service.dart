@@ -36,6 +36,38 @@ class DocumentationService {
     return (text: _stripLeadingComment(raw), isBaseVersion: key == baseAsset);
   }
 
+  /// The asset keys of every bundled Markdown document (`docs/*.md` and the
+  /// root `LICENSE.md`), drawn from the asset manifest. The reader uses this to
+  /// decide whether an internal link points at a doc that ships in the app
+  /// (open it in the reader) or one that lives only in the repository (open the
+  /// repo version in the browser). Translated `.<lang>.md` variants are folded
+  /// onto their base so a link to `FILE_FORMAT.md` is "bundled" regardless of
+  /// which language variant happens to ship.
+  Future<Set<String>> bundledDocAssets() async {
+    final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+    return manifest
+        .listAssets()
+        .where((a) => a.endsWith('.md'))
+        .map(_baseOfVariant)
+        .toSet();
+  }
+
+  /// `docs/USER_GUIDE.de.md` → `docs/USER_GUIDE.md`; a base key is unchanged.
+  /// A two-letter segment before the final `.md` is treated as a language code.
+  static String _baseOfVariant(String assetKey) {
+    final slash = assetKey.lastIndexOf('/');
+    final dir = slash < 0 ? '' : assetKey.substring(0, slash + 1);
+    final name = assetKey.substring(slash + 1);
+    final parts = name.split('.');
+    if (parts.length >= 3 &&
+        parts.last == 'md' &&
+        parts[parts.length - 2].length == 2) {
+      parts.removeAt(parts.length - 2);
+      return '$dir${parts.join('.')}';
+    }
+    return assetKey;
+  }
+
   /// Picks the localized variant key when it exists in the asset manifest,
   /// otherwise the base key. Uses the manifest (not a load-and-catch) so a
   /// missing variant is never an error path.

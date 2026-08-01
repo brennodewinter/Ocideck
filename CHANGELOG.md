@@ -168,6 +168,18 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Documentatielezer en slides: klikken op een link deed niets. Élke link ging
+  naar de externe-browser-route, die van een relatieve verwijzing als
+  `FILE_FORMAT.md` een `https://FILE_FORMAT.md` maakte — een adres dat de
+  hostpoort terecht weigerde, waarna er zichtbaar niets gebeurde (~188 zulke
+  interne verwijzingen in de meegeleverde documenten). Voortaan wordt een link
+  eerst geclassificeerd: een **interne documentlink** springt naar dat document
+  in de lezer (gebundeld) of opent de repo-versie in de browser (niet
+  gebundeld); een **anker** (`#kopje`, ook `DOC.md#kopje`) scrolt naar dat
+  kopje; een **externe link** (`http(s)://…`, `mailto:…`) opent in de
+  standaardbrowser. De terugknop loopt het leespad terug. Links in slide-tekst
+  openen nu op élk presentatieoppervlak extern (ook het vergrendelde
+  *alleen afspelen*-scherm, dat de tik-afhandeling niet doorgaf). Lost #1037 op.
 - Documentatielezer: een document met een regel die met `|` begint maar geen
   geldige tabel is (geen `|---|`-scheidingsregel) liet de lezer vastlopen — de
   blokparser consumeerde die regel met geen enkele tak en schoof daardoor nooit

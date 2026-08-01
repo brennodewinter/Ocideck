@@ -18,6 +18,9 @@ class _FakeDocService implements DocumentationService {
     String baseAsset,
     String languageCode,
   ) async => (text: await load(baseAsset, languageCode), isBaseVersion: true);
+
+  @override
+  Future<Set<String>> bundledDocAssets() async => bodies.keys.toSet();
 }
 
 void main() {

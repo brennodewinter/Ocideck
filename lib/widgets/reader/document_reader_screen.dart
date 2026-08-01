@@ -5,6 +5,8 @@ import '../../l10n/app_localizations.dart';
 import '../../services/documentation_service.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/doc_link.dart';
+import '../../utils/log.dart';
 import '../../utils/url_launcher_util.dart';
 import 'document_markdown_view.dart';
 
@@ -26,6 +28,7 @@ class DocumentReaderScreen extends ConsumerStatefulWidget {
     required this.title,
     required this.assetBase,
     this.onlineUrl,
+    this.initialAnchor,
     this.service = const DocumentationService(),
   });
 
@@ -37,6 +40,11 @@ class DocumentReaderScreen extends ConsumerStatefulWidget {
 
   /// Optional canonical online version, offered as an "open online" action.
   final String? onlineUrl;
+
+  /// A heading slug ([headingSlug]) to scroll to once the document has rendered
+  /// — set when this reader was opened by an internal link that carried an
+  /// anchor (`FILE_FORMAT.md#what-travels`). Null lands at the top.
+  final String? initialAnchor;
 
   final DocumentationService service;
 
@@ -60,6 +68,8 @@ class DocumentReaderScreen extends ConsumerStatefulWidget {
     required String title,
     required String assetBase,
     String? onlineUrl,
+    String? initialAnchor,
+    DocumentationService service = const DocumentationService(),
   }) {
     return Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute<void>(
@@ -67,6 +77,8 @@ class DocumentReaderScreen extends ConsumerStatefulWidget {
           title: title,
           assetBase: assetBase,
           onlineUrl: onlineUrl,
+          initialAnchor: initialAnchor,
+          service: service,
         ),
       ),
     );
@@ -91,6 +103,22 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
   String _query = '';
   int _activeMatch = 0;
 
+  /// The bundled doc asset keys, loaded once. Decides whether an internal link
+  /// opens in the reader (bundled) or in the browser (repo-only). Null until the
+  /// first load resolves; [_handleLink] loads on demand if a tap beats it.
+  Set<String>? _bundledAssets;
+
+  /// A single key that follows the block an anchor link points at, so scrolling
+  /// to a section is `ensureVisible` on its context — the same moving-key trick
+  /// as [_activeMatchKey]. [_anchorBlockIndex] is the block it currently marks
+  /// (`-1` for none).
+  final GlobalKey _anchorKey = GlobalKey();
+  int _anchorBlockIndex = -1;
+
+  /// Whether the one-shot [DocumentReaderScreen.initialAnchor] scroll has run,
+  /// so a rebuild (find-bar keystroke, text-size nudge) does not re-jump.
+  bool _didInitialAnchorScroll = false;
+
   /// The document loaded once per (asset, language), cached so a rebuild — every
   /// keystroke in the find bar, every text-size nudge — does not re-read the
   /// asset and flash the spinner.
@@ -105,6 +133,17 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
   // document, not once per keystroke.
   String? _blockTextsSource;
   List<String> _blockTexts = const [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Warm the bundled-doc set so a link tap classifies without waiting on I/O.
+    // A missing manifest (some minimal test bundles) is harmless: links then
+    // simply fall through to the browser instead of navigating in-app.
+    widget.service.bundledDocAssets().then((assets) {
+      if (mounted) _bundledAssets = assets;
+    }, onError: (Object _, StackTrace _) {});
+  }
 
   @override
   void didChangeDependencies() {
@@ -171,6 +210,21 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
             );
           }
           final text = loaded.text;
+          // One-shot landing on the anchor an internal link carried in, run
+          // after this frame so the target heading's key is attached. Guarded so
+          // a find-bar keystroke or text-size nudge does not re-jump.
+          final anchor = widget.initialAnchor;
+          if (anchor != null && !_didInitialAnchorScroll) {
+            _didInitialAnchorScroll = true;
+            // We are inside build, so mark the block directly (no setState); the
+            // _body below reads _anchorBlockIndex this same frame, then we scroll
+            // after it has attached the key.
+            final index = DocumentMarkdownView.headingBlockIndex(text, anchor);
+            if (index >= 0) {
+              _anchorBlockIndex = index;
+              _ensureAnchorVisible();
+            }
+          }
           // De titel van dit document staat in 32 talen, de inhoud in één. Dat
           // verschil hoort de lezer te horen vóór hij begint te lezen, niet
           // halverwege te ontdekken (#626).
@@ -308,6 +362,86 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
     });
   }
 
+  /// Routes a tapped link: an internal document link navigates (a bundled doc
+  /// opens in a new reader, a repo-only doc opens online), an `#anchor` scrolls
+  /// within this document, and anything external opens in the browser. This is
+  /// why the reader no longer hands every href to [openExternalUrl] — a relative
+  /// `.md` link would become `https://FILE_FORMAT.md` and die at the host gate.
+  Future<void> _handleLink(String href) async {
+    var bundled = _bundledAssets;
+    if (bundled == null) {
+      try {
+        bundled = await widget.service.bundledDocAssets();
+      } catch (e) {
+        // No manifest → no in-app navigation; links still open in the browser.
+        logWarning('doc reader: bundled asset list failed', e);
+        bundled = const <String>{};
+      }
+      if (!mounted) return;
+      _bundledAssets = bundled;
+    }
+    final target = resolveDocLink(
+      currentAsset: widget.assetBase,
+      href: href,
+      bundledAssets: bundled,
+    );
+    switch (target) {
+      case null:
+        return;
+      case ExternalDocLink(:final url):
+        await openExternalUrl(url);
+      case SameDocAnchorLink(:final anchor):
+        _scrollToAnchor(anchor);
+      case InAppDocLink():
+        await _openDocument(target);
+    }
+  }
+
+  /// Opens a bundled document in a new reader pushed over this one, so the back
+  /// button walks the reading trail. The title is the target's own first
+  /// heading — always right for the document that is actually shown, with the
+  /// file name as a bare fallback.
+  Future<void> _openDocument(InAppDocLink target) async {
+    final language = Localizations.localeOf(context).languageCode;
+    final text = await widget.service.load(target.assetBase, language);
+    if (!mounted) return;
+    final title =
+        firstHeadingText(text) ??
+        target.assetBase.split('/').last.replaceAll('.md', '');
+    await DocumentReaderScreen.open(
+      context,
+      title: title,
+      assetBase: target.assetBase,
+      initialAnchor: target.anchor,
+      service: widget.service,
+    );
+  }
+
+  /// Points [_anchorKey] at the heading named by [slug] and scrolls to it. Marks
+  /// the block via setState so the key attaches this frame, then scrolls after
+  /// it — the same path find-in-page uses, which is why it lands reliably. A
+  /// no-op when the slug names no heading in [_docText].
+  void _scrollToAnchor(String slug) {
+    final index = DocumentMarkdownView.headingBlockIndex(_docText, slug);
+    if (index < 0) return;
+    setState(() => _anchorBlockIndex = index);
+    _ensureAnchorVisible();
+  }
+
+  /// Brings [_anchorKey]'s block into view after the frame that attached it.
+  void _ensureAnchorVisible() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final ctx = _anchorKey.currentContext;
+      if (ctx == null) return;
+      Scrollable.ensureVisible(
+        ctx,
+        alignment: 0.1,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
   /// Absolute indices of the blocks whose text contains [query]
   /// (case-insensitive), in document order. Empty for a blank query.
   List<int> _matchesIn(String text, String query) {
@@ -424,11 +558,13 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
             child: SelectionArea(
               child: DocumentMarkdownView(
                 markdown,
-                onTapLink: openExternalUrl,
+                onTapLink: _handleLink,
                 maxTextWidth: DocumentReaderScreen._proseMaxWidth,
                 searchTerm: _findVisible ? _query : null,
                 activeMatchBlockIndex: activeBlock,
                 activeMatchKey: _activeMatchKey,
+                anchorBlockIndex: _anchorBlockIndex,
+                anchorKey: _anchorKey,
               ),
             ),
           ),
