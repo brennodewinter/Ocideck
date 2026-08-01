@@ -44,11 +44,7 @@ String _startupLanguageCode() {
       );
 }
 
-/// Lees de opgeslagen AI-instellingen uit prefs, of de standaard.
-///
-/// Top-level (geen methode) om dezelfde reden als [_readMatrixAccount]: puur
-/// laadwerk, en [SettingsNotifier] zit aan haar regelplafond. Een onleesbare
-/// waarde degradeert naar de standaardinstellingen.
+/// Lees de opgeslagen AI-instellingen; corrupte data degradeert veilig.
 AiSettings _readAiSettings(SharedPreferences prefs) {
   final aiJson = prefs.getString('aiSettings');
   if (aiJson == null) return const AiSettings();
@@ -78,6 +74,39 @@ MatrixServer? _readMatrixAccount(SharedPreferences prefs) {
     logWarning('SettingsNotifier: ongeldige matrixAccount-prefs', e);
     return null;
   }
+}
+
+({
+  List<CockpitColorScheme> schemes,
+  String selectedName,
+  CockpitVisualStyle visualStyle,
+})
+_loadCockpitSettings(
+  SharedPreferences prefs,
+  List<CockpitColorScheme> Function(List<CockpitColorScheme>) mergeSchemes,
+) {
+  final raw = prefs.getString('cockpitColorSchemes');
+  final loaded = raw == null
+      ? const <CockpitColorScheme>[]
+      : (jsonDecode(raw) as List)
+            .map(
+              (item) => CockpitColorScheme.fromJson(
+                Map<String, Object?>.from(item as Map),
+              ),
+            )
+            .toList();
+  final schemes = mergeSchemes(loaded);
+  final requested =
+      prefs.getString('selectedCockpitColorSchemeName') ?? 'Standaard';
+  return (
+    schemes: schemes,
+    selectedName: schemes.any((scheme) => scheme.name == requested)
+        ? requested
+        : 'Standaard',
+    visualStyle: CockpitVisualStyle.fromName(
+      prefs.getString('cockpitVisualStyle'),
+    ),
+  );
 }
 
 /// The single owner of application-wide settings: everything in [AppSettings],
@@ -194,19 +223,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     final appearances = _mergeAppearanceProfiles(loadedAppearances);
     final selectedAppearance =
         prefs.getString('selectedAppAppearanceProfileName') ?? 'Europa';
-    final cockpitJson = prefs.getString('cockpitColorSchemes');
-    final loadedCockpitSchemes = cockpitJson == null
-        ? const <CockpitColorScheme>[]
-        : (jsonDecode(cockpitJson) as List)
-              .map(
-                (item) => CockpitColorScheme.fromJson(
-                  Map<String, Object?>.from(item as Map),
-                ),
-              )
-              .toList();
-    final cockpitSchemes = _mergeCockpitSchemes(loadedCockpitSchemes);
-    final selectedCockpit =
-        prefs.getString('selectedCockpitColorSchemeName') ?? 'Standaard';
+    final cockpit = _loadCockpitSettings(prefs, _mergeCockpitSchemes);
     final ai = _readAiSettings(prefs);
     final matrix = _readMatrixAccount(prefs);
     // Het laden is asynchroon; een scope die in die tussentijd verdwijnt — een
@@ -228,11 +245,9 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           appearances.any((profile) => profile.name == selectedAppearance)
           ? selectedAppearance
           : 'Europa',
-      cockpitColorSchemes: cockpitSchemes,
-      selectedCockpitColorSchemeName:
-          cockpitSchemes.any((scheme) => scheme.name == selectedCockpit)
-          ? selectedCockpit
-          : 'Standaard',
+      cockpitColorSchemes: cockpit.schemes,
+      selectedCockpitColorSchemeName: cockpit.selectedName,
+      cockpitVisualStyle: cockpit.visualStyle,
       recentFiles: _loadRecentFiles(prefs),
       recentFileOrigins: _decodeRecentFileOrigins(
         prefs.getString('recentFileOrigins'),
@@ -739,6 +754,14 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _persist(
       'selectCockpitColorScheme',
       (prefs) => prefs.setString('selectedCockpitColorSchemeName', name),
+    );
+  }
+
+  Future<void> setCockpitVisualStyle(CockpitVisualStyle style) async {
+    state = state.copyWith(cockpitVisualStyle: style);
+    await _persist(
+      'setCockpitVisualStyle',
+      (prefs) => prefs.setString('cockpitVisualStyle', style.name),
     );
   }
 

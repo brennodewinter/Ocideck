@@ -31,8 +31,10 @@ tools. See [FILE_FORMAT.md](FILE_FORMAT.md).
 **Theme profile** — colours, fonts, logo, and footer settings for a deck. Shared
 as an `.ocideckstyle` file. Per-slide visual overrides live on the slide itself.
 
-**Cockpit** — a dashboard-style slide type showing several metrics/KPIs at a
-glance.
+**Cockpit** — a dashboard-style slide with up to six aviation instruments. Its
+authentic look is the default; the earlier classic cards remain selectable in
+app settings. The deck stores the readings and per-slide activation behaviour,
+not the globally selected look or semantic colour scheme.
 
 **Presenter mode** — the dual-screen presentation view: presenter notes, timer,
 and controls on one screen; the full slide on the other (desktop).

@@ -241,6 +241,19 @@ unsaved work. Save early if you work in a browser tab.
 
 ## Configuration and Settings
 
+### How do I choose the cockpit look?
+
+Open **Settings → Cockpit → Display**. **Authentic cockpit** is the default;
+**Classic** keeps the earlier card-style gauges. This is one app-wide choice,
+so every cockpit slide follows it — it is not stored in the deck. The cockpit
+colour scheme below the dropdown is a separate app-wide choice.
+
+The slide editor controls the entrance behaviour: **Animate on enter** enables
+the power-on sequence, and its duration can inherit the style profile or be
+overridden for that slide. A cockpit accepts up to six instruments chosen from
+seven types. The full list and the difference between presenter and static
+exports are in [Cockpit dashboards](USER_GUIDE.md#cockpit-dashboards).
+
 ### How does Git integration work?
 OciDeck supports Git repository storage:
 - Configure it as a connection under *Settings → Storage*, alongside folders,

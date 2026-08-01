@@ -1897,6 +1897,8 @@ const _dutchSourceAddEl = <String, String>{
       'Δεν έχει ξεκινήσει ακόμη καμία συνεργασία για αυτό το deck.',
   'Samenwerking mislukt.': 'Η συνεργασία απέτυχε.',
   'Samenwerking beëindigd.': 'Η συνεργασία τερματίστηκε.',
+  'Authentieke cockpit': 'Αυθεντικό πιλοτήριο',
+  'Klassiek': 'Κλασικό',
   'Bord': 'Πίνακας',
   'Projectcharter': 'Χάρτης έργου',
   'CTQ-boom': 'Δέντρο CTQ',

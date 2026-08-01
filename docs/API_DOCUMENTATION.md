@@ -392,11 +392,19 @@ StateNotifier<AppSettings>` handles application configuration:
 
 ```dart
 Future<void> saveThemeProfile(ThemeProfile profile, { /* … */ });
+Future<void> selectCockpitColorScheme(String name);
+Future<void> setCockpitVisualStyle(CockpitVisualStyle style);
 
 // Classification is set through granular setters, not one policy object:
 Future<void> setRequireClassificationOnExport(bool enabled);
 Future<void> setClassificationWatermarkEnabled(bool enabled);
 ```
+
+Cockpit styling has two independent settings. `CockpitColorScheme` owns the
+semantic palette; `CockpitVisualStyle.authentic` (the default/fallback) and
+`.classic` select the material painter. The `AppSettings.cockpitColorScheme`
+getter returns the selected palette with the global visual style applied, which
+is the value callers pass to preview, presenter and export.
 
 The `ClassificationEnforcementPolicy` used at export time is **built** from the
 current settings via `ClassificationEnforcementPolicy.fromAppSettings(...)`; it is

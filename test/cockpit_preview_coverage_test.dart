@@ -438,4 +438,22 @@ void main() {
     expect(find.text('Themed sky'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('classic cockpit style remains available', (tester) async {
+    const scheme = CockpitColorScheme(
+      name: 'Classic',
+      visualStyle: CockpitVisualStyle.classic,
+    );
+    const spec = CockpitSpec(
+      meters: [
+        CockpitMeterSpec(type: CockpitMeterType.speedometer, label: 'Legacy'),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec, scheme: scheme));
+    await tester.pump();
+
+    expect(find.text('Legacy'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 }

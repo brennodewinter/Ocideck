@@ -891,6 +891,54 @@ The available types:
 - Charts render in the preview, presenter, PDF, and PPTX, and as inline SVG in the
   HTML export.
 
+### Cockpit dashboards
+
+A cockpit slide puts several KPIs on one instrument panel. Add, remove and
+reorder the instruments in the slide editor; the counter beside
+**Cockpit meters** shows how many of the maximum **six** places are in use.
+Each instrument has its own label and the fields that make sense for its type:
+
+- **Speedometer**, **voltmeter**, **thermometer** and **altimeter** show a value
+  inside a minimum/maximum range, with a unit and green, amber, red and
+  below-range zones.
+- **Climb/descent** shows movement around a neutral band — useful for a trend
+  that may rise or fall.
+- **Artificial horizon** uses pitch and bank instead of a scalar value.
+- **Heading indicator** shows the current course, a separate target heading and
+  an optional marker label.
+
+The look is an application setting, not a property of one slide. Go to
+**Settings → Cockpit → Display** and choose:
+
+- **Authentic cockpit** — the default: a dark material panel, round machined
+  bezels, screw heads, instrument glass, ivory markings and small test lamps.
+- **Classic** — the previous lighter card-style gauges, retained for existing
+  visual preferences and decks designed around that appearance.
+
+The selected look applies immediately to every cockpit slide. The colour scheme
+below it is independent: it controls the semantic good, warning, critical,
+cold, sky and ground colours. You can copy the built-in scheme and name your own
+variant.
+
+**Power-on sequence.** With **Animate on enter** enabled, an authentic cockpit
+does not simply fade in. When the slide enters presenter mode, the instruments
+come alive one after another: their warning lamps test briefly, scalar needles
+sweep from minimum to maximum and settle on the real value, and the heading
+indicator makes a full turn before stopping on its course. The value read-outs
+follow the sweep. Use the duration control below the animation switch to inherit
+the style profile's shared duration or set one for this slide; switching the
+animation off shows the final readings immediately. The classic look keeps its
+original, simpler needle movement.
+
+The editor preview and static exports show the settled state. PDF and PPTX use
+the same Flutter renderer as the preview. Offline HTML embeds the selected look
+and colours as SVG; the authentic look performs a short, staggered
+brightness/power-up effect and honours the viewer's reduced-motion preference.
+Because the look and colour scheme are app settings, they are **not written to
+the deck Markdown**: an export freezes the current choice, while opening the
+same editable deck on another installation uses that installation's cockpit
+settings.
+
 ### Question slides
 
 A question slide turns the presentation into a short quiz. Pick **Question** in
@@ -3831,15 +3879,17 @@ find it.
   **interface font** — Roboto, Inter, Lora or EB Garamond, all bundled so the
   choice also holds on the web build) is configurable in settings. Create a
   custom app theme (the built-ins are read-only) to change them.
-- **Cockpit colour schemes** set the status colours of the cockpit instruments —
-  *good* (green), *warning* (amber), *critical* (red) and *too low/cold* (blue,
-  used below a meter's lower bound), plus the artificial horizon's *sky* (blue)
-  and *ground* (brown). Manage them on the **Cockpit** tab in
-  settings: the built-in *Standaard* scheme keeps the original colours, and you
-  can make a copy to create and name your own variants. The chosen scheme applies
-  to every cockpit slide — in the editor, the presenter and all exports. Like the
-  style profile, these colours are app settings and are not stored in the `.md`
-  file.
+- **Cockpit appearance and colour schemes** are managed on the **Cockpit** tab.
+  **Authentic cockpit** is the default appearance; **Classic** retains the
+  previous card-style meters. The colour scheme separately sets *good* (green),
+  *warning* (amber), *critical* (red) and *too low/cold* (blue, used below a
+  meter's lower bound), plus the artificial horizon's *sky* (blue) and *ground*
+  (brown). The built-in *Standaard* scheme keeps the original semantic colours,
+  and you can make a copy to create and name your own variants. Both choices
+  apply to every cockpit slide — in the editor, presenter and exports — and are
+  app settings, not fields stored in the `.md` file. See
+  [Cockpit dashboards](#cockpit-dashboards) for the instruments and power-on
+  sequence.
 - The interface is available in 32 languages — among them Dutch, English,
   German, French, Spanish, Italian, Portuguese, Polish, Ukrainian, Turkish,
   Greek, the Nordic and Baltic languages, Frisian and Papiamento. *Settings →

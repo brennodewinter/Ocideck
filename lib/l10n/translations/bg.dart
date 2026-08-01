@@ -1889,6 +1889,8 @@ const _dutchSourceAddBg = <String, String>{
       'За това тесте все още не е започнато сътрудничество.',
   'Samenwerking mislukt.': 'Сътрудничеството не бе успешно.',
   'Samenwerking beëindigd.': 'Сътрудничеството е прекратено.',
+  'Authentieke cockpit': 'Автентичен кокпит',
+  'Klassiek': 'Класически',
   'Bord': 'Табло',
   'Projectcharter': 'Проектна харта',
   'CTQ-boom': 'CTQ дърво',

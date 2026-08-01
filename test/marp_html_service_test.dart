@@ -416,6 +416,23 @@ void main() {}
     expect(html, contains('TGT 090'));
     expect(html, contains('Build'));
     expect(html, isNot(contains('```cockpit')));
+    expect(html, contains('class="cockpit-svg authentic"'));
+  });
+
+  test('cockpit SVG keeps the classic visual style available', () {
+    final block = const CockpitSpec(
+      meters: [CockpitMeterSpec(label: 'Classic meter')],
+    ).toBlock();
+    final html = MarpHtmlService.renderCockpitBlocks(
+      '```cockpit\n$block\n```',
+      scheme: const CockpitColorScheme(
+        name: 'Classic',
+        visualStyle: CockpitVisualStyle.classic,
+      ),
+    );
+
+    expect(html, contains('class="cockpit-svg classic"'));
+    expect(html, contains('Classic meter'));
   });
 
   test('cockpit SVG uses the active colour scheme', () {

@@ -1866,6 +1866,8 @@ const _dutchSourceAddSv = <String, String>{
       'Inget samarbete har startats för det här decket ännu.',
   'Samenwerking mislukt.': 'Samarbete misslyckades.',
   'Samenwerking beëindigd.': 'Samarbete avslutat.',
+  'Authentieke cockpit': 'Autentisk cockpit',
+  'Klassiek': 'Klassisk',
   'Bord': 'Anslagstavla',
   'Projectcharter': 'Projektcharta',
   'CTQ-boom': 'CTQ-träd',

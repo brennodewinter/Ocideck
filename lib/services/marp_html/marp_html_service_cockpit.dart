@@ -26,7 +26,8 @@ String _cockpitSvg(
   final b = StringBuffer()
     ..write(
       '<svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" '
-      'font-family="inherit" width="100%">',
+      'font-family="inherit" width="100%" class="cockpit-svg '
+      '${scheme.visualStyle.name}">',
     )
     ..write('<rect width="900" height="500" rx="26" fill="#07111F"/>')
     ..write(
@@ -42,6 +43,7 @@ String _cockpitSvg(
     final col = i % cols;
     final x = 50 + col * cellW;
     final y = 82 + row * cellH;
+    b.write('<g class="cockpit-meter" style="--meter-index:$i">');
     _cockpitInstrumentSvg(
       b,
       meters[i],
@@ -53,6 +55,7 @@ String _cockpitSvg(
       accent,
       scheme,
     );
+    b.write('</g>');
   }
   b.write('</svg>');
   return b.toString();
@@ -71,35 +74,69 @@ void _cockpitInstrumentSvg(
 ) {
   final colors = scheme;
   final cardH = math.max(80.0, h - 24);
+  final authentic = scheme.visualStyle == CockpitVisualStyle.authentic;
+  final gaugeCx = x + w * .43;
+  final gaugeCy = y + cardH * .50;
+  final gaugeR = math.min(w, cardH) * .36;
   b
     ..write(
       '<rect x="$x" y="$y" width="$w" height="$cardH" rx="18" '
-      'fill="#111827" stroke="#334155" stroke-width="1.5"/>',
+      'fill="${authentic ? '#202223' : '#111827'}" '
+      'stroke="${authentic ? '#45484A' : '#334155'}" stroke-width="1.5"/>',
     )
     ..write(
+      authentic
+          ? '<circle cx="$gaugeCx" cy="$gaugeCy" r="${gaugeR + 8}" '
+                'fill="#343739" stroke="#08090A" stroke-width="9"/>'
+                '<circle cx="$gaugeCx" cy="$gaugeCy" r="$gaugeR" '
+                'fill="#101314" stroke="#6A6D6E" stroke-opacity=".35"/>'
+          : '',
+    )
+    ..write(authentic ? _instrumentScrews(x, y, w, cardH) : '')
+    ..write(
       '<text x="${x + w / 2}" y="${y + h - 6}" text-anchor="middle" '
-      'font-size="13" font-weight="700" fill="#94A3B8">'
+      'font-size="13" font-weight="700" '
+      'fill="${authentic ? '#D9D1BD' : '#94A3B8'}">'
       '${_esc(meter.label.isEmpty ? 'Meter ${index + 1}' : meter.label)}</text>',
     );
+  final needle = authentic ? '#E8E0CA' : accent;
   switch (meter.type) {
     case CockpitMeterType.thermometer:
       _thermometerSvg(b, meter, x, y, w, cardH, colors);
       break;
     case CockpitMeterType.climbDescent:
-      _climbDescentSvg(b, meter, x, y, w, cardH, accent);
+      _climbDescentSvg(b, meter, x, y, w, cardH, needle);
       break;
     case CockpitMeterType.horizon:
       _horizonSvg(b, meter, index, x, y, w, cardH, colors);
       break;
     case CockpitMeterType.heading:
-      _headingSvg(b, meter, x, y, w, cardH, accent, colors);
+      _headingSvg(b, meter, x, y, w, cardH, needle, colors);
       break;
     case CockpitMeterType.speedometer:
     case CockpitMeterType.voltmeter:
     case CockpitMeterType.altimeter:
-      _arcGaugeSvg(b, meter, x, y, w, cardH, accent, colors);
+      _arcGaugeSvg(b, meter, x, y, w, cardH, needle, colors);
       break;
   }
+}
+
+String _instrumentScrews(double x, double y, double w, double h) {
+  final inset = math.min(w, h) * .065;
+  final points = [
+    (x + inset, y + inset),
+    (x + w - inset, y + inset),
+    (x + inset, y + h - inset),
+    (x + w - inset, y + h - inset),
+  ];
+  return points
+      .map(
+        (point) =>
+            '<circle cx="${point.$1}" cy="${point.$2}" r="4.5" '
+            'fill="#090A0B"/><circle cx="${point.$1}" cy="${point.$2}" '
+            'r="2.6" fill="#66696A"/>',
+      )
+      .join();
 }
 
 void _arcGaugeSvg(

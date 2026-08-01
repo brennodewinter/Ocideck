@@ -188,6 +188,13 @@ in Dutch, and it keeps growing on `main` between releases.
   triggerden dit (`FILE_FORMAT.md`, `SBOM.md`); hun kapotte tabellen zijn ook
   hersteld met een kop- en scheidingsregel (idem in het niet-meegeleverde
   ontwerpdocument `OCIWACHT.md`).
+- De authentieke cockpitmeters houden hun schaal en uitlezing nu uit elkaars
+  weg. Bij brede wijzerplaten staan minimum en maximum niet meer op de
+  kleurboog; de thermometer, inclusief waarde, blijft volledig binnen zijn
+  ronde bezel; en de stijg-/daalwaarde gebruikt de vrije linkerhelft in plaats
+  van over de onderste schaal te vallen. De voltmeter/`Signal quality`-indeling
+  was al goed en blijft ongewijzigd. Screenshot en visuele golden zijn opnieuw
+  uit de echte Flutter-renderer opgebouwd.
 - Het instellingenvenster liet niet zien dat er meer stond dan er paste. Met
   alle Uitbreidingen aan telt de zijbalk twaalf tabbladen; op een bescheiden
   venster vielen de laatste onder de vouw, en niets verried dat — de
@@ -218,6 +225,17 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- Cockpitdia's gebruiken standaard een nieuwe authentieke instrumentlook: een
+  donker materiaalpaneel met ronde bezels, schroeven, glas, ivoorkleurige
+  markeringen en testlampjes. Bij binnenkomst in de presenter schakelen de
+  meters na elkaar in; de lampen testen, de wijzers lopen van minimum via
+  maximum naar de echte waarde en de koersindicator maakt een volle slag.
+  **Instellingen → Cockpit → Weergave** laat de eerdere klassieke kaartmeters
+  kiezen, zodat bestaande visuele voorkeuren behouden blijven. De keuze geldt
+  voor alle cockpitdia's en export; alle zeven metertypen en maximaal zes
+  instrumenten per dia blijven beschikbaar. De vernieuwde screenshot en de
+  gebruikers-, FAQ-, toegankelijkheids-, bestandsformaat-, migratie- en
+  ontwikkelaarsdocumentatie beschrijven dezelfde keuze en grenzen.
 - Negentien nieuwe presentatiesjablonen. De catalogus dekte de professional
   die verantwoording aflegt, maar miste de vergaderingen waarin geld en
   besluiten op tafel liggen, en hele sectoren stonden op nul. Er zijn nu

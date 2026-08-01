@@ -1882,6 +1882,8 @@ const _dutchSourceAddUk = <String, String>{
       'Для цієї колоди ще не розпочато співпрацю.',
   'Samenwerking mislukt.': 'Співпраця не вдалася.',
   'Samenwerking beëindigd.': 'Співпрацю завершено.',
+  'Authentieke cockpit': 'Автентична кабіна',
+  'Klassiek': 'Класичний',
   'Bord': 'Дошка',
   'Projectcharter': 'Статут проєкту',
   'CTQ-boom': 'Дерево CTQ',

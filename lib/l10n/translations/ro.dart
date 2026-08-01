@@ -1884,6 +1884,8 @@ const _dutchSourceAddRo = <String, String>{
       'Nu a fost încă începută nicio colaborare pentru acest deck.',
   'Samenwerking mislukt.': 'Colaborare eșuată.',
   'Samenwerking beëindigd.': 'Colaborare încheiată.',
+  'Authentieke cockpit': 'Cockpit autentic',
+  'Klassiek': 'Clasic',
   'Bord': 'Tablă',
   'Projectcharter': 'Carta proiectului',
   'CTQ-boom': 'Arbore CTQ',

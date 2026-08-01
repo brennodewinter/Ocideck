@@ -828,6 +828,8 @@ const _dutchSourceAddFr = {
       'Aucune collaboration n\'a encore été démarrée pour ce deck.',
   'Samenwerking mislukt.': 'Échec de la collaboration.',
   'Samenwerking beëindigd.': 'Collaboration terminée.',
+  'Authentieke cockpit': 'Cockpit authentique',
+  'Klassiek': 'Classique',
   'Bord': 'Tableau',
   'Projectcharter': 'Charte de projet',
   'CTQ-boom': 'Arbre CTQ',

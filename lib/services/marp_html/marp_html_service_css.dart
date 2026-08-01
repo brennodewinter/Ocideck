@@ -41,6 +41,9 @@ html,body{margin:0;padding:0}
 .slide .media-redacted{display:flex;align-items:center;justify-content:center;min-height:200px;margin:.6em 0;background:#000;color:#fff;font-size:20px;letter-spacing:.05em;border-radius:4px;text-align:center;padding:24px}
 .slide .image-missing{display:inline-block;padding:14px 20px;border:2px dashed rgba(100,116,139,.5);border-radius:6px;font-size:19px;opacity:.6;font-style:italic}
 .slide .media-absent{display:flex;align-items:center;justify-content:center;min-height:180px;margin:.6em 0;border:2px dashed rgba(100,116,139,.5);border-radius:6px;font-size:20px;opacity:.6;font-style:italic;text-align:center;padding:24px}
+.slide .cockpit-svg.authentic .cockpit-meter{transform-box:fill-box;transform-origin:center;animation:cockpitPowerOn 1.55s cubic-bezier(.2,.75,.22,1) both;animation-delay:calc(var(--meter-index)*80ms)}
+@keyframes cockpitPowerOn{0%{opacity:.08;transform:scale(.965);filter:brightness(.18)}20%{opacity:.72;filter:brightness(1.6)}36%{opacity:1;filter:brightness(.72)}58%{filter:brightness(1.18)}100%{opacity:1;transform:scale(1);filter:brightness(1)}}
+@media (prefers-reduced-motion:reduce){.slide .cockpit-svg.authentic .cockpit-meter{animation:cockpitReducedMotion .25s ease-out both}@keyframes cockpitReducedMotion{from{opacity:.5}to{opacity:1}}}
 .slide .mermaid-error{margin:.6em 0;padding:16px 20px;border:1px solid #B91C1C;border-left-width:6px;border-radius:6px;background:#FEE2E2;color:#7F1D1D;text-align:left}
 .slide .mermaid-error-title{font-size:22px;font-weight:700;margin:0 0 .3em;color:#7F1D1D}
 .slide .mermaid-error-label{font-size:16px;font-weight:600;margin:.7em 0 .2em;opacity:.8;color:#7F1D1D}

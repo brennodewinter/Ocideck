@@ -60,6 +60,7 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 - **Privacy check and redaction (OciWacht)** — every slide is read for personal data, and what you mark is left out of display and export, not painted over.
 - **Live preview and fullscreen presenter** — presenter view, dual screens, a rehearsal clock, an annotation layer, and live table editing.
 - **Charts, timelines and quiz slides** — thirteen chart types from CSV or an in-app grid, animated timelines, and interactive question slides.
+- **Cockpit dashboards** — up to six aviation-style instruments, with an authentic panel look, a classic fallback and a staged power-on sequence in the presenter.
 - **Traffic Light Protocol** — deck-wide and per-slide classification, WYSIWYG marking, and optional export policy that fails closed.
 - **Import and export** — round-trips Marp Markdown, and exports to PDF, PPTX with speaker notes, and a self-contained offline HTML deck.
 - **Storage** — local project folders, a portable `.ocideck` package, Nextcloud/WebDAV, S3, or a git repository with history and releases.
@@ -82,7 +83,7 @@ A few of those, seen rather than described:
 
 | A heatmap as a risk matrix | A cockpit dashboard |
 |---|---|
-| ![A heatmap chart used as a probability-times-impact risk matrix: five classes each way, cells coloured from pale yellow to deep red with a colour scale below.](docs/images/risk-matrix.png) | ![A cockpit slide with four meters: a speedometer, a thermometer, a voltmeter and a climb/descent indicator, each with green and red zones.](docs/images/cockpit-dashboard.png) |
+| ![A heatmap chart used as a probability-times-impact risk matrix: five classes each way, cells coloured from pale yellow to deep red with a colour scale below.](docs/images/risk-matrix.png) | ![An authentic cockpit slide with four instruments mounted in a dark panel: a speedometer, thermometer, voltmeter and climb/descent indicator, with bezels, screws, warning lamps and coloured operating ranges.](docs/images/cockpit-dashboard.png) |
 
 | A timeline from a plain Markdown list | A question slide, answered live |
 |---|---|

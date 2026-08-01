@@ -1872,6 +1872,8 @@ const _dutchSourceAddHu = <String, String>{
       'Ehhez a deckhez még nem indult együttműködés.',
   'Samenwerking mislukt.': 'Az együttműködés nem sikerült.',
   'Samenwerking beëindigd.': 'Együttműködés befejezve.',
+  'Authentieke cockpit': 'Autentikus pilótafülke',
+  'Klassiek': 'Klasszikus',
   'Bord': 'Tábla',
   'Projectcharter': 'Projektcharta',
   'CTQ-boom': 'CTQ-fa',

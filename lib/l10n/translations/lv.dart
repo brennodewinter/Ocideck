@@ -1866,6 +1866,8 @@ const _dutchSourceAddLv = <String, String>{
       'Šim dekam vēl nav sākta neviena sadarbība.',
   'Samenwerking mislukt.': 'Sadarbība neizdevās.',
   'Samenwerking beëindigd.': 'Sadarbība beigta.',
+  'Authentieke cockpit': 'Autentiska kabīne',
+  'Klassiek': 'Klasisks',
   'Bord': 'Tabula',
   'Projectcharter': 'Projekta harta',
   'CTQ-boom': 'CTQ koks',

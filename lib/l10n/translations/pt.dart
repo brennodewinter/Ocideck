@@ -1897,6 +1897,8 @@ const _dutchSourceAddPt = <String, String>{
       'Ainda não foi iniciada nenhuma colaboração para este deck.',
   'Samenwerking mislukt.': 'Falha na colaboração.',
   'Samenwerking beëindigd.': 'Colaboração terminada.',
+  'Authentieke cockpit': 'Cockpit autêntico',
+  'Klassiek': 'Clássico',
   'Bord': 'Quadro',
   'Projectcharter': 'Carta do projeto',
   'CTQ-boom': 'Árvore CTQ',

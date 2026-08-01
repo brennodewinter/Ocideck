@@ -1883,6 +1883,8 @@ const _dutchSourceAddLa = <String, String>{
       'Nulla cooperatio adhuc huic fasciculo incepta est.',
   'Samenwerking mislukt.': 'Cooperatio defecit.',
   'Samenwerking beëindigd.': 'Cooperatio finita est.',
+  'Authentieke cockpit': 'Tabula gubernatoria authentica',
+  'Klassiek': 'Classicum',
   'Bord': 'Tabula',
   'Projectcharter': 'Carta proiecti',
   'CTQ-boom': 'Arbor CTQ',

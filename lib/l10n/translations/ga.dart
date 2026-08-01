@@ -1902,6 +1902,8 @@ const _dutchSourceAddGa = <String, String>{
       'Níor tosaíodh comhoibriú ar bith don deck seo go fóill.',
   'Samenwerking mislukt.': 'Theip ar an gcomhoibriú.',
   'Samenwerking beëindigd.': 'Comhoibriú críochnaithe.',
+  'Authentieke cockpit': 'Fíor-phainéal píolóta',
+  'Klassiek': 'Clasaiceach',
   'Bord': 'Clár',
   'Projectcharter': 'Cairt an tionscadail',
   'CTQ-boom': 'Crann CTQ',

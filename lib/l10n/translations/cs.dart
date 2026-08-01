@@ -1869,6 +1869,8 @@ const _dutchSourceAddCs = <String, String>{
       'Pro tento deck zatím nebyla zahájena žádná spolupráce.',
   'Samenwerking mislukt.': 'Spolupráce se nezdařila.',
   'Samenwerking beëindigd.': 'Spolupráce ukončena.',
+  'Authentieke cockpit': 'Autentický kokpit',
+  'Klassiek': 'Klasické',
   'Bord': 'Tabule',
   'Projectcharter': 'Projektová charta',
   'CTQ-boom': 'Strom CTQ',
