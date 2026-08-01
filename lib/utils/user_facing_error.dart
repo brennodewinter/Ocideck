@@ -17,6 +17,7 @@ import '../services/web_asset_store.dart';
 /// details horen in het log (logError/logWarning), niet bij de gebruiker.
 String userFacingError(AppLocalizations l10n, Object error) {
   if (error is WebAssetBudgetExceeded) return webAssetBudgetMessage(l10n);
+  if (error is PackageBudgetExceeded) return packageBudgetMessage(l10n);
   if (error is WebdavException) return webdavErrorMessage(l10n, error);
   if (error is S3Exception) return s3ErrorMessage(l10n, error);
   if (error is GitForgeException) return gitForgeErrorMessage(l10n, error);
@@ -48,6 +49,12 @@ String userFacingError(AppLocalizations l10n, Object error) {
 /// herladen maakt wel geheugen vrij, maar wist ook alle niet-opgeslagen media.
 String webAssetBudgetMessage(AppLocalizations l10n) => l10n.d(
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.',
+);
+
+/// Handelingsperspectief wanneer een pakket-export te groot wordt: het pakket
+/// zou de importgrens overschrijden en daarna niet meer te openen zijn.
+String packageBudgetMessage(AppLocalizations l10n) => l10n.d(
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.',
 );
 
 /// Begrijpelijke melding waarom een presentatie-import (pptx/odp/key) mislukte.

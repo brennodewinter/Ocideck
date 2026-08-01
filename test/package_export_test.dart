@@ -459,6 +459,67 @@ void main() {
       },
     );
   });
+
+  group('package budget (#1046)', () {
+    // A deck with one on-disk image, reused so the helpers have something to
+    // stat and pack.
+    Deck deckWithImage(int imageBytes) {
+      final img = File(p.join(tmp.path, 'big.bin'))
+        ..writeAsBytesSync(Uint8List(imageBytes));
+      return Deck(
+        title: 'Budget',
+        slides: [Slide.create(SlideType.image).copyWith(imagePath: img.path)],
+      );
+    }
+
+    test('a single asset larger than the budget is refused before read', () {
+      // The asset alone (1 KiB) tops a tiny budget, so the stat-before-read
+      // guard trips without materialising it.
+      final deck = deckWithImage(1024);
+      expect(
+        () => file.buildPackageBytes(deck, budgetBytes: 64),
+        throwsA(isA<PackageBudgetExceeded>()),
+      );
+    });
+
+    test(
+      'the cumulative budget holds at the grens and one byte over',
+      () async {
+        final deck = deckWithImage(4096);
+        // The true total of every member, learned with a generous budget.
+        final members = await file.buildPackageMembers(deck);
+        final total = members.values.fold<int>(0, (s, b) => s + b.length);
+
+        // Exactly on the grens: the whole package still fits.
+        final onLimit = await file.buildPackageBytes(deck, budgetBytes: total);
+        expect(onLimit, isNotEmpty);
+
+        // One byte under the total: the cumulative guard refuses it.
+        expect(
+          () => file.buildPackageBytes(deck, budgetBytes: total - 1),
+          throwsA(isA<PackageBudgetExceeded>()),
+        );
+      },
+    );
+
+    test('a package within budget exports and re-imports (contract)', () async {
+      final deck = deckWithImage(2048);
+      final zipPath = p.join(tmp.path, 'ok.ocideck');
+      await file.exportPackage(deck, zipPath);
+      // The written package is no larger than what the importer accepts, so the
+      // export/import contract holds by construction.
+      expect(
+        File(zipPath).lengthSync(),
+        lessThanOrEqualTo(FileService.maxPackageBytes),
+      );
+      final out = Directory(p.join(tmp.path, 'reimport'))..createSync();
+      final mdPath = await file.importPackageBytes(
+        File(zipPath).readAsBytesSync(),
+        out.path,
+      );
+      expect(mdPath, isNotNull);
+    });
+  });
 }
 
 /// De markdown uit een pakket, zonder aannames over de bestandsnaam.

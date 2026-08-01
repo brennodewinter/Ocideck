@@ -38,8 +38,13 @@ extension FileServicePackage on FileService {
     Deck deck,
     String destPath, {
     String? password,
+    int budgetBytes = FileService.maxPackageBytes,
   }) async {
-    final bytes = await buildPackageBytes(deck, password: password);
+    final bytes = await buildPackageBytes(
+      deck,
+      password: password,
+      budgetBytes: budgetBytes,
+    );
     await writeBytesAtomic(File(destPath), bytes);
   }
 
@@ -50,8 +55,12 @@ extension FileServicePackage on FileService {
   /// Met een niet-leeg [password] versleutelt de `ZipEncoder` elk lid met
   /// WinZip-AES-256. Een leeg/`null` wachtwoord levert een gewoon, onversleuteld
   /// pakket op (bestaand gedrag).
-  Future<Uint8List> buildPackageBytes(Deck deck, {String? password}) async {
-    final archive = await _buildPackageArchive(deck);
+  Future<Uint8List> buildPackageBytes(
+    Deck deck, {
+    String? password,
+    int budgetBytes = FileService.maxPackageBytes,
+  }) async {
+    final archive = await _buildPackageArchive(deck, budgetBytes: budgetBytes);
     final pw = (password != null && password.isNotEmpty) ? password : null;
     // Zip-compressie is CPU-zwaar (media-assets kunnen honderden MB zijn);
     // in een eigen isolate blijft de UI responsief tijdens het pakken. Op web
@@ -73,8 +82,11 @@ extension FileServicePackage on FileService {
   /// Pakket-leden (pad → bytes) zonder ze te zippen, zodat elk bestand los naar
   /// een WebDAV-map kan worden geüpload — een "platte" spiegel van het deck met
   /// dezelfde asset-mappen en herschreven relatieve paden als het pakket.
-  Future<Map<String, List<int>>> buildPackageMembers(Deck deck) async {
-    final archive = await _buildPackageArchive(deck);
+  Future<Map<String, List<int>>> buildPackageMembers(
+    Deck deck, {
+    int budgetBytes = FileService.maxPackageBytes,
+  }) async {
+    final archive = await _buildPackageArchive(deck, budgetBytes: budgetBytes);
     return {
       for (final f in archive.files)
         if (f.isFile) f.name: f.content,
@@ -107,9 +119,27 @@ extension FileServicePackage on FileService {
     return rel;
   }
 
-  Future<Archive> _buildPackageArchive(Deck deck) async {
+  Future<Archive> _buildPackageArchive(
+    Deck deck, {
+    int budgetBytes = FileService.maxPackageBytes,
+  }) async {
     final archive = Archive();
     final added = <String>{};
+    // Cumulative package budget, aligned to the importer's ceiling so a package
+    // this version writes is one this version can reopen (#1046). Every member's
+    // bytes are reserved here — file assets are stat'd before they are read, so
+    // an oversized one fails fast instead of being pulled fully into memory.
+    var packedBytes = 0;
+    void reserve(int n) {
+      if (packedBytes + n > budgetBytes) {
+        throw PackageBudgetExceeded(
+          usedBytes: packedBytes,
+          limitBytes: budgetBytes,
+        );
+      }
+      packedBytes += n;
+    }
+
     // Bronpad → archiefpad, zodat hetzelfde bestand één keer wordt opgenomen en
     // twéé verschillende bestanden met dezelfde naam allebei meegaan.
     final byAbsolutePath = <String, String>{};
@@ -126,6 +156,7 @@ extension FileServicePackage on FileService {
       final bytes = WebAssetStore.bytesFor(path);
       // Store leeg (bv. pagina herladen): niets om in te pakken.
       if (bytes == null) return null;
+      reserve(bytes.length);
       final original = WebAssetStore.nameFor(path) ?? 'afbeelding.png';
       final base = _safeName(p.basenameWithoutExtension(original));
       final ext = p.extension(original).toLowerCase();
@@ -169,6 +200,9 @@ extension FileServicePackage on FileService {
       final existing = byAbsolutePath[abs];
       if (existing != null) return existing;
       final rel = _freeArchivePath(added, subdir, abs);
+      // Stat before read: reserve the on-disk size so an oversized asset trips
+      // the budget without first being pulled into memory (#1046).
+      reserve(await file.length());
       final bytes = await file.readAsBytes();
       archive.add(ArchiveFile(rel, bytes.length, bytes));
       added.add(rel);
@@ -236,6 +270,18 @@ extension FileServicePackage on FileService {
       archive.add(
         ArchiveFile('themes/$themeName.css', cssBytes.length, cssBytes),
       );
+    }
+
+    // Cumulative guard over every member (markdown, sidecars, theme CSS and
+    // chart data on top of the reserved assets), so the total the importer will
+    // weigh cannot exceed its ceiling — the compressed zip is no larger than the
+    // sum of these raw bytes for the media that dominates a package (#1046).
+    final total = archive.files.fold<int>(
+      0,
+      (sum, f) => sum + f.content.length,
+    );
+    if (total > budgetBytes) {
+      throw PackageBudgetExceeded(usedBytes: total, limitBytes: budgetBytes);
     }
 
     return archive;
@@ -360,6 +406,29 @@ extension FileServicePackage on FileService {
 /// byte budget — the signal that a package entry is a decompression bomb.
 class _ExtractionLimitException implements Exception {
   const _ExtractionLimitException();
+}
+
+/// Thrown while building a package when the assets would push it past
+/// [FileService.maxPackageBytes] — the very limit the importer enforces
+/// ([tabs_provider_import]). Without this a single big video could produce a
+/// package OciDeck itself then refuses to reopen, and reading it would demand
+/// gigabytes of memory (#1046). Assets are stat'd before being read, so the
+/// export fails fast with this rather than after materialising the bytes.
+class PackageBudgetExceeded implements Exception {
+  const PackageBudgetExceeded({
+    required this.usedBytes,
+    required this.limitBytes,
+  });
+
+  /// Bytes already reserved for the package when the limit was hit.
+  final int usedBytes;
+
+  /// The cumulative ceiling, aligned to [FileService.maxPackageBytes].
+  final int limitBytes;
+
+  @override
+  String toString() =>
+      'PackageBudgetExceeded(used: $usedBytes, limit: $limitBytes)';
 }
 
 /// An [OutputStream] that refuses to grow past [limit] bytes. The archive

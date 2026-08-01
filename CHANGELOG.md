@@ -216,6 +216,14 @@ in Dutch, and it keeps growing on `main` between releases.
   gigabytes decodegeheugen per frame kon vragen. Een GIF loopt nu eerst langs
   een dimensieprobe (op de inhoud, niet de bestandsnaam): binnen de grens gaat
   hij ongewijzigd mee (beweging behouden), daarboven wordt hij geweigerd (#1044).
+- Export/geheugen: een pakket-export had geen cumulatief budget. Elke asset ging
+  volledig het archief in en daarna werd de hele ZIP gematerialiseerd, zodat één
+  toegestaan groot mediabestand een pakket kon opleveren dat OciDeck zelf weigert
+  te heropenen (de 512 MiB-importgrens) én gigabytes geheugen vroeg. De bouw
+  stat't nu elke asset vóór het lezen en dwingt een cumulatief pakketbudget af
+  dat op de importgrens aansluit, met een duidelijke gebruikersmelding vóór
+  geheugenuitputting; een geslaagd pakket is daardoor door dezelfde versie
+  herimporteerbaar (#1046).
 - Samenwerken (Matrix): een account zonder apparaat-id (`deviceId`) gold ten
   onrechte als geconfigureerd. Omdat de sleuteluitwisseling de device-id als
   state-key en als bestemming voor de to-device-keyshares gebruikt, kon een
