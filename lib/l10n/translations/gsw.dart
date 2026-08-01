@@ -1774,6 +1774,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modul aa. Rechechärn, Folielayouts und Vorlage sind lokal verfüegbar ({n} Regelchartfaktore).',
+  'SIPOC-procesoverzicht': 'SIPOC-Prozessübersicht',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Bestimm dr Umfang und d’Abhängigkeiten vo mene Prozess über Lieferante, Eingabe, Hauptschritt, Ausgabe und Chunde.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Hilfsmittel zur Prozessverbesserig (SIPOC, DMAIC, Kaizen und A3). Standardmässig us; aktivier d’Erweiterig, um d’zugehörige Vorlage und Folielayouts z’bruuche.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'D Bildbibliothek isch z gross; es wärde nume die nöischte Bilder azeigt.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2587,10 +2594,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Te weinig gegevens voor een histogram': 'Z wenig Date für e Histogramm',
   'Te weinig gegevens voor een boxplot': 'Z wenig Date für e Boxplot',
   'Procesverbetering': 'Prozessverbesserig',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefakt für d Prozessverbesserig und Lean-Six-Sigma-Projäkt (DMAIC, Kaizen, A3). Standardmässig us. S Modul isch verfüegbar; d Artefakt chömed i de nächschte Schritt.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modul aktiv. Rechekern lokal verfüegbar ({n} Control-Chart-Faktore). Foliearte und Vorlage chömed derzue, sobald si parat sind.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Die Präsentation enthaltet Teil vom Modul Prozessverbesserig. Aktivier s Modul, zum si bearbeite.',
   'Online media staat uit — aanzetten': 'Online-Media us — schalte y',

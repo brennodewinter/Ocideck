@@ -1778,6 +1778,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modulis įjungtas. Skaičiavimo branduolys, skaidrių išdėstymai ir šablonai pasiekiami vietoje ({n} kontrolinės diagramos koeficientų).',
+  'SIPOC-procesoverzicht': 'SIPOC proceso apžvalga',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Nustatykite proceso apimtį ir priklausomybes pagal tiekėjus, įvestis, pagrindinius žingsnius, išvestis ir klientus.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Procesų tobulinimo įrankiai (SIPOC, DMAIC, Kaizen ir A3). Pagal numatytuosius nustatymus išjungti; įjunkite plėtinį, kad galėtumėte naudoti susijusius šablonus ir skaidrių išdėstymus.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Vaizdų biblioteka per didelė; rodomi tik naujausi vaizdai.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2598,10 +2605,6 @@ const _dutchSourceAddLt = <String, String>{
   'Te weinig gegevens voor een boxplot':
       'Per mažai duomenų stačiakampei diagramai',
   'Procesverbetering': 'Procesų tobulinimas',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefaktai procesų tobulinimui ir Lean Six Sigma projektams (DMAIC, Kaizen, A3). Pagal numatytuosius nustatymus išjungta. Modulis pasiekiamas; artefaktai bus pridėti vėlesniais etapais.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modulis įjungtas. Skaičiavimo branduolys pasiekiamas vietoje ({n} control chart faktoriai). Skaidrių tipai ir šablonai bus pridėti, kai bus paruošti.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Šioje pateiktyje yra Procesų tobulinimo modulio dalių. Įjunkite modulį, kad galėtumėte jas redaguoti.',
   'Online media staat uit — aanzetten': 'Internetinė medija išjungta — įjungti',

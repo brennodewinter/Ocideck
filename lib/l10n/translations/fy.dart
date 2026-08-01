@@ -731,6 +731,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Module oan. Rekkenkearn, dia-yndielingen en sjabloanen binne lokaal beskikber ({n} kontrôlekaartfaktoaren).',
+  'SIPOC-procesoverzicht': 'SIPOC-prosesoersjoch',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Bepaal de omfang en ôfhinklikheden fan in proses oan ’e hân fan leveransiers, ynfier, haadstappen, útfier en klanten.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Helpmiddels foar prosesferbettering (SIPOC, DMAIC, Kaizen en A3). Standert út; skeakelje de útwreiding yn om de byhearrende sjabloanen en dia-yndielingen te brûken.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'De ôfbyldingsbibleteek is te grut; allinnich de nijste ôfbyldings wurde toand.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -1544,10 +1551,6 @@ const _dutchSourceAddFy = {
   'Te weinig gegevens voor een histogram': 'Te min gegevens foar in histogram',
   'Te weinig gegevens voor een boxplot': 'Te min gegevens foar in boksplot',
   'Procesverbetering': 'Prosesferbettering',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefakten foar prosesferbettering en Lean Six Sigma-projekten (DMAIC, Kaizen, A3). Standert út. De module is beskikber; de artefakten folgje yn folgjende stappen.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Module oan. Rekkenkearn lokaal beskikber ({n} control-chartfaktoaren). Slidetypen en sjabloanen komme derby sa gau as se klear binne.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Dizze presintaasje befettet ûnderdielen fan de Prosesferbettering-module. Set de module oan om se te bewurkjen.',
   'Online media staat uit — aanzetten': 'Online media steat út — oansette',

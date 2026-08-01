@@ -911,6 +911,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Module on. Calculation core, slide layouts and templates are available locally ({n} control-chart factors).',
+  'SIPOC-procesoverzicht': 'SIPOC process overview',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Define a process’s scope and dependencies through suppliers, inputs, main steps, outputs and customers.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Tools for process improvement (SIPOC, DMAIC, Kaizen and A3). Off by default; enable the extension to use the related templates and slide layouts.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'The image library is too large; only the newest images are shown.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -1722,10 +1729,6 @@ const _dutchSourceAddEn = {
   'Te weinig gegevens voor een histogram': 'Too little data for a histogram',
   'Te weinig gegevens voor een boxplot': 'Too little data for a box plot',
   'Procesverbetering': 'Process improvement',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefacts for process improvement and Lean Six Sigma projects (DMAIC, Kaizen, A3). Off by default. The module is available; the artefacts follow in later steps.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Module on. Calculation core available locally ({n} control-chart factors). Slide types and templates will appear when ready.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'This presentation contains parts of the Process improvement module. Turn the module on to edit them.',
   'Online media staat uit — aanzetten': 'Online media is off — turn on',

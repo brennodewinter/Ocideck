@@ -730,6 +730,13 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modul aktiv. Rechenkern, Folienlayouts und Vorlagen sind lokal verfügbar ({n} Regelkartenfaktoren).',
+  'SIPOC-procesoverzicht': 'SIPOC-Prozessübersicht',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Bestimmen Sie Umfang und Abhängigkeiten eines Prozesses anhand von Lieferanten, Eingaben, Hauptschritten, Ausgaben und Kunden.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Werkzeuge zur Prozessverbesserung (SIPOC, DMAIC, Kaizen und A3). Standardmäßig aus; aktivieren Sie die Erweiterung, um die zugehörigen Vorlagen und Folienlayouts zu verwenden.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Die Bildbibliothek ist zu groß; es werden nur die neuesten Bilder angezeigt.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -1547,10 +1554,6 @@ const _dutchSourceAddDe = {
   'Te weinig gegevens voor een histogram': 'Zu wenige Daten für ein Histogramm',
   'Te weinig gegevens voor een boxplot': 'Zu wenige Daten für einen Boxplot',
   'Procesverbetering': 'Prozessverbesserung',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefakte für Prozessverbesserung und Lean-Six-Sigma-Projekte (DMAIC, Kaizen, A3). Standardmäßig aus. Das Modul ist verfügbar; die Artefakte folgen in späteren Schritten.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modul aktiv. Rechenkern lokal verfügbar ({n} Control-Chart-Faktoren). Folienarten und Vorlagen kommen hinzu, sobald sie fertig sind.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Diese Präsentation enthält Bestandteile des Moduls Prozessverbesserung. Aktiviere das Modul, um sie zu bearbeiten.',
   'Online media staat uit — aanzetten': 'Online-Media aus — einschalten',

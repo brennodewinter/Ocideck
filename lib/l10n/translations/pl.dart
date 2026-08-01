@@ -1783,6 +1783,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Moduł włączony. Rdzeń obliczeniowy, układy slajdów i szablony są dostępne lokalnie ({n} współczynników karty kontrolnej).',
+  'SIPOC-procesoverzicht': 'Przegląd procesu SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Określ zakres i zależności procesu poprzez dostawców, dane wejściowe, główne kroki, wyniki i klientów.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Narzędzia do doskonalenia procesów (SIPOC, DMAIC, Kaizen i A3). Domyślnie wyłączone; włącz rozszerzenie, aby korzystać z powiązanych szablonów i układów slajdów.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Biblioteka obrazów jest za duża; wyświetlane są tylko najnowsze obrazy.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2600,10 +2607,6 @@ const _dutchSourceAddPl = <String, String>{
   'Te weinig gegevens voor een histogram': 'Za mało danych na histogram',
   'Te weinig gegevens voor een boxplot': 'Za mało danych na wykres pudełkowy',
   'Procesverbetering': 'Doskonalenie procesów',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefakty do doskonalenia procesów i projektów Lean Six Sigma (DMAIC, Kaizen, A3). Domyślnie wyłączone. Moduł jest dostępny; artefakty pojawią się w kolejnych krokach.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Moduł włączony. Rdzeń obliczeniowy dostępny lokalnie ({n} współczynników control chart). Typy slajdów i szablony pojawią się, gdy będą gotowe.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Ta prezentacja zawiera elementy modułu Doskonalenie procesów. Włącz moduł, aby je edytować.',
   'Online media staat uit — aanzetten': 'Media online wyłączone — włącz',

@@ -1777,6 +1777,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modul je uključen. Jezgra za izračun, rasporedi slajdova i predlošci dostupni su lokalno ({n} faktora kontrolne karte).',
+  'SIPOC-procesoverzicht': 'Pregled SIPOC procesa',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Odredite opseg i ovisnosti procesa putem dobavljača, ulaznih podataka, glavnih koraka, izlaznih podataka i kupaca.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Alati za poboljšanje procesa (SIPOC, DMAIC, Kaizen i A3). Prema zadanim postavkama isključeni; uključite proširenje za korištenje povezanih predložaka i rasporeda slajdova.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Biblioteka slika je prevelika; prikazuju se samo najnovije slike.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2587,10 +2594,6 @@ const _dutchSourceAddHr = <String, String>{
   'Te weinig gegevens voor een boxplot':
       'Premalo podataka za kutijasti dijagram',
   'Procesverbetering': 'Poboljšanje procesa',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefakti za poboljšanje procesa i Lean Six Sigma projekte (DMAIC, Kaizen, A3). Prema zadanim postavkama isključeno. Modul je dostupan; artefakti slijede u sljedećim koracima.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modul uključen. Izračunska jezgra dostupna lokalno ({n} faktora control chart). Vrste slajdova i predlošci pojavit će se čim budu spremni.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Ova prezentacija sadrži dijelove modula Poboljšanje procesa. Uključite modul da biste ih uređivali.',
   'Online media staat uit — aanzetten': 'Online medija isključena — uključi',

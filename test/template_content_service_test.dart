@@ -93,6 +93,17 @@ void main() {
       expect(slides.any((s) => s.type == SlideType.matrix), isTrue);
     });
 
+    test('procesverbetering-sipoc loads the typed matrix template', () async {
+      final slides = await TemplateContentService().loadSlides(
+        'procesverbetering-sipoc',
+        languageCode: 'nl',
+        deckTitle: 'Orderafhandeling',
+      );
+      final sipoc = slides.singleWhere((s) => s.type == SlideType.matrix);
+      expect(slides.first.title, 'Orderafhandeling');
+      expect(sipoc.improvementTemplateId, 'sipoc');
+    });
+
     test('the real bundle serves the template assets', () async {
       // Bewaakt de pubspec-registratie van assets/templates/: rootBundle moet
       // de documenten echt kunnen leveren, niet alleen het bestandssysteem.

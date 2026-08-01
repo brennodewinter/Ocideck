@@ -15,10 +15,8 @@ import '../improvement_regression_dialog.dart';
 /// Module card for Procesverbetering on Settings → Uitbreidingen
 /// (PROCESS_IMPROVEMENT.md Phase 0).
 ///
-/// Off by default. Phase 0 ships the switch and category only — no artefacts
-/// yet. The subtitle says so honestly rather than promising SIPOC/FMEA that
-/// are not there. Descriptive "Lean Six Sigma" prose is fine; the *name* of
-/// the module stays "Procesverbetering" (§19.7).
+/// Off by default. The card names the concrete tools the extension reveals,
+/// while the product name remains the broader "Procesverbetering" (§19.7).
 ///
 /// Reading [improvementStatsFactorRows] here is deliberate: the stats library
 /// must stay reachable from an entrypoint before Phase 2/3 UI lands, or the
@@ -66,7 +64,7 @@ class ProcesverbeteringModuleCard extends ConsumerWidget {
             ),
             subtitle: Text(
               l10n.d(
-                'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.',
+                'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.',
               ),
               style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
@@ -81,7 +79,7 @@ class ProcesverbeteringModuleCard extends ConsumerWidget {
                   Text(
                     l10n
                         .d(
-                          'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.',
+                          'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).',
                         )
                         .replaceAll('{n}', '$factorRows'),
                     style: TextStyle(fontSize: 11, color: AppTheme.slate500),

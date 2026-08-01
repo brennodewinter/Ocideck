@@ -1770,6 +1770,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modulen är på. Beräkningskärna, bildlayouter och mallar är tillgängliga lokalt ({n} styrdiagramfaktorer).',
+  'SIPOC-procesoverzicht': 'SIPOC-processöversikt',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Fastställ en process omfattning och beroenden genom leverantörer, indata, huvudsteg, utdata och kunder.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Verktyg för processförbättring (SIPOC, DMAIC, Kaizen och A3). Avstängda som standard; aktivera tillägget för att använda tillhörande mallar och bildlayouter.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Bildbiblioteket är för stort; endast de nyaste bilderna visas.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2578,10 +2585,6 @@ const _dutchSourceAddSv = <String, String>{
   'Te weinig gegevens voor een histogram': 'För lite data för ett histogram',
   'Te weinig gegevens voor een boxplot': 'För lite data för ett lådagram',
   'Procesverbetering': 'Processförbättring',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefakter för processförbättring och Lean Six Sigma-projekt (DMAIC, Kaizen, A3). Avstängd som standard. Modulen är tillgänglig; artefakterna kommer i senare steg.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modulen är på. Beräkningskärna tillgänglig lokalt ({n} control chart-faktorer). Bildtyper och mallar läggs till när de är klara.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Den här presentationen innehåller delar av modulen Processförbättring. Aktivera modulen för att redigera dem.',
   'Online media staat uit — aanzetten': 'Onlinemedier är av — slå på',

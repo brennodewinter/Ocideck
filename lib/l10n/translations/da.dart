@@ -1770,6 +1770,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modul slået til. Beregningskerne, diaslayouts og skabeloner er tilgængelige lokalt ({n} kontrolkortfaktorer).',
+  'SIPOC-procesoverzicht': 'SIPOC-procesoversigt',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Fastlæg et processes omfang og afhængigheder gennem leverandører, input, hovedtrin, output og kunder.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Værktøjer til procesforbedring (SIPOC, DMAIC, Kaizen og A3). Slået fra som standard; aktivér udvidelsen for at bruge de tilhørende skabeloner og diaslayouts.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Billedbiblioteket er for stort; kun de nyeste billeder vises.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2578,10 +2585,6 @@ const _dutchSourceAddDa = <String, String>{
   'Te weinig gegevens voor een histogram': 'For få data til et histogram',
   'Te weinig gegevens voor een boxplot': 'For få data til et boksplot',
   'Procesverbetering': 'Procesforbedring',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefakter til procesforbedring og Lean Six Sigma-projekter (DMAIC, Kaizen, A3). Slået fra som standard. Modulet er tilgængeligt; artefakterne følger i senere trin.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modul til. Beregningskerne tilgængelig lokalt ({n} control chart-faktorer). Diastyper og skabeloner tilføjes, når de er klar.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Denne præsentation indeholder dele af modulet Procesforbedring. Slå modulet til for at redigere dem.',
   'Online media staat uit — aanzetten': 'Onlinemedier er slået fra — tænd',

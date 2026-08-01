@@ -1,5 +1,5 @@
 // State for the "Procesverbetering" module (PROCESS_IMPROVEMENT.md Phase 0):
-// Lean Six Sigma authoring as an opt-in extension, off by default.
+// Process-improvement authoring as an opt-in extension, off by default.
 //
 // Same contract as Importeren / Online opslag: reveal when content already
 // exists, so switching off never strands a deck that already carries
