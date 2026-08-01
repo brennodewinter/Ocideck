@@ -174,6 +174,16 @@ in Dutch, and it keeps growing on `main` between releases.
   eigenaar. Alle overdracht-metadata leeft in de sidecar; het `.md` blijft
   onaangeroerd (P2).
 
+### Changed
+
+- Prestaties: de startnummers van doorlopend genummerde lijsten worden nu in
+  één lineaire pass per deck berekend (`numberedListStarts`) in plaats van per
+  slide recursief de hele keten terug te lopen. De rail, presentatiemodus en
+  export delen die ene pass. Voor een deck met een lange genummerde keten
+  (bijv. 5000 slides) schaalt dit lineair en vervalt het stack-overflowrisico
+  van de oude recursie; single-slide-oppervlakken houden `numberedListStartFor`,
+  nu recursievrij (#1050).
+
 ### Fixed
 
 - Beveiliging/geheugen: de mappenscan (`scanPresentations`) las ieder
