@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.1.3+4",
-  "documentNamespace": "https://ocideck.app/spdx/2dcbeba3-d2c9-500e-8690-90c0ba18d724",
+  "documentNamespace": "https://ocideck.app/spdx/e0590868-e805-5dc6-8cec-245d3dfa0fd2",
   "creationInfo": {
-    "created": "2026-07-31T17:24:20.994365Z",
+    "created": "2026-08-01T21:46:38.470199Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4722,7 +4722,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "fe22f07660dd67816872e33ac1cf67a505ac019e25a88997d8f5c9da180c87d0"
+          "checksumValue": "20c0afa41268559c8567f5f2c01f5456ffbfc937f0cb78176632350a449312f4"
         }
       ],
       "sourceInfo": "Vendored from https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window at commit 58a5868d1cb9031defa5db5868d6aaea0486d24a.",

@@ -1,7 +1,10 @@
 // NOTICE: This file was modified by the OciDeck project.
 // Original: desktop_multi_window (c) 2021 Mixin, Apache License 2.0 (see
 // ../../LICENSE), commit 58a5868d1cb9031defa5db5868d6aaea0486d24a.
-// Change: set mouseTrackingMode so non-key windows receive hover events.
+// Change: set mouseTrackingMode so non-key windows receive hover events;
+// skip the window being registered/created when broadcasting onWindowsChanged
+// (both AttachWindow and CreateWindow), whose engine handler is not installed
+// yet (avoids a kInvalidArguments platform-message error on start).
 // Modification notice per Apache-2.0 section 4(b); see ../../MODIFICATIONS.md.
 
 import Cocoa
@@ -100,7 +103,13 @@ class MultiWindowManager: NSObject {
         let channel = registerMultiWindowChannel(window: flutterWindow, with: registrar)
         flutterWindow.setChannel(channel)
 
-        notifyWindowsChanged()
+        // Same guard as CreateWindow: don't send onWindowsChanged to the window
+        // being attached. This runs during plugin registration at startup — the
+        // engine's platform-message handler is not installed yet, so notifying
+        // this window makes FlutterEngineSendPlatformMessage fail with
+        // kInvalidArguments / "Invalid engine handle" as the very first log line.
+        // Any *other* already-attached window is still notified.
+        notifyWindowsChanged(excluding: windowId)
     }
 
     func CreateWindow(arguments: [String: Any?]) -> WindowId {
@@ -136,7 +145,14 @@ class MultiWindowManager: NSObject {
         let channel = registerMultiWindowChannel(window: flutterWindow, with: registrar)
         flutterWindow.setChannel(channel)
 
-        notifyWindowsChanged()
+        // Notify the *existing* windows, but not the one just created. Its
+        // Flutter engine is not running yet — the Dart isolate has not set up
+        // its method-channel handler — so sending to it here makes
+        // FlutterEngineSendPlatformMessage fail with kInvalidArguments /
+        // "Invalid engine handle" on startup. The new window has no use for its
+        // own creation event anyway (a window queries getAllWindows on demand),
+        // so skipping it drops the failing message without losing behaviour.
+        notifyWindowsChanged(excluding: windowId)
 
         return windowId
     }
@@ -160,8 +176,8 @@ class MultiWindowManager: NSObject {
         }
     }
 
-    private func notifyWindowsChanged() {
-        for (_, window) in windows {
+    private func notifyWindowsChanged(excluding excludedId: WindowId? = nil) {
+        for (id, window) in windows where id != excludedId {
             window.notifyWindowEvent("onWindowsChanged", data: [:])
         }
     }
