@@ -861,7 +861,8 @@ void main() {
           '```question\n${questionBlockWithAnswers(9)}\n```',
         );
 
-        expect(out, contains('maximaal 8 antwoorden'));
+        expect(out, contains('Ongeldige vraag'));
+        expect(out, contains('Maximaal aantal items: 8'));
         expect(out, isNot(contains('<li>')));
         expect(out, isNot(contains('Antwoord 8')));
       },
