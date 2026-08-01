@@ -525,6 +525,11 @@ class FullscreenPresenter extends StatefulWidget {
   State<FullscreenPresenter> createState() => _FullscreenPresenterState();
 }
 
+void _replaceSlide(List<Slide> slides, int index, Slide replacement) {
+  slides[index] = replacement;
+  invalidateSplitRunLayout(slides);
+}
+
 class _FullscreenPresenterState extends State<FullscreenPresenter> {
   late int _index;
   late FocusNode _focusNode;
