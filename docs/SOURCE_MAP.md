@@ -1036,8 +1036,9 @@ when the owner returns.
 ### `lib/widgets/editors/` — per-slide-type editors
 
 - `_editor_field.dart` — Shared layout helpers for slide editors.
-- `ai_suggest_field.dart` — Per-field "suggest text (AI)" control + AI-concept badge/Nagekeken for finding free-text fields.
-- `improvement_ai_suggest_field.dart` — Same chrome for Procesverbetering canvas/tree/flow fields; gated on both AI and Procesverbetering modules (`improvement_ai_provider.dart`).
+- `ai_suggest_control.dart` — Shared "suggest text (AI)" control: confirmation, progress, error feedback and the AI-concept/Nagekeken provenance chrome.
+- `ai_suggest_field.dart` — Connects that shared control to finding free-text fields and their finding-specific AI service.
+- `improvement_ai_suggest_field.dart` — Connects the shared control to Procesverbetering canvas/tree/flow fields; gated on both AI and Procesverbetering modules (`improvement_ai_provider.dart`).
 - `alt_text_field.dart` — Per-image alt-text field with the optional "suggest alt-text (AI)" button and AI-draft badge.
 - `audio_attachment_editor.dart` — Edits a slide's audio file attachment.
 - `bullet_marker_selector.dart` — Per-slide bullet-marker override (dot or paw).
