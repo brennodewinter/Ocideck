@@ -1142,16 +1142,21 @@ Fields:
   - `openText` — the viewer types the answer; it counts as right when it is
     close enough to one of the answers marked `correct`.
 - `prompt` — the question, or the statement for `trueFalse`.
-- `answers` — the full pool; each has `text`, `correct` and optionally `image`.
-  Ignored for `trueFalse`. For `multipleChoice` and `ordering` the presentation
-  draws a random subset of `optionCount` from it; `multipleCorrect` shows every
-  filled-in answer, shuffled. For `ordering` the **list order is the correct
-  order** and the `correct` flags are ignored; the drawn subset keeps its relative
-  order as the right answer and is shown shuffled. For `imagePair` each round
-  draws **one** `correct: true` and **one** `correct: false` answer and shuffles
-  the pair, so the editor's two slots are the common case but a longer pool in the
-  file gives a fresh pair every round. For `openText` the entries with
-  `correct: true` are the accepted answers and the rest are ignored.
+- `answers` — the full pool, with at most **eight** records in a valid question;
+  each has `text`, `correct` and optionally `image`. A hand-edited block with
+  more than eight records is preserved but is invalid and is not executed: the
+  editor, preview, presenter and export do not build answer options from it.
+  Storage operations still retain every record, unknown JSON field and referenced
+  image; rewriting an image path may reformat the JSON. `answers` is ignored for
+  `trueFalse`. For `multipleChoice` and `ordering` the presentation draws a random
+  subset of `optionCount` from it; `multipleCorrect` shows every filled-in answer,
+  shuffled. For `ordering` the **list order is the correct order** and the
+  `correct` flags are ignored; the drawn subset keeps its relative order as the
+  right answer and is shown shuffled. For `imagePair` each round draws **one**
+  `correct: true` and **one** `correct: false` answer and shuffles the pair, so
+  the editor's two slots are the common case and a valid pool of up to eight can
+  provide a fresh pair every round. For `openText` the entries with `correct:
+  true` are the accepted answers and the rest are ignored.
 - `answers[].image` — a deck-relative image path, for `imagePair`: there the
   picture *is* the answer and `text` is only its caption. **Written only when it
   has a value**, so a text-only question keeps the two-key answer objects it

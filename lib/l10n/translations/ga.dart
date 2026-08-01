@@ -1063,8 +1063,8 @@ const _dutchSourceGa = {
   'Vraag': 'Ceist',
   'Wat wil je vragen?': 'Cad ba mhaith leat a fhiafraí?',
   'Antwoorden': 'Freagraí',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Marcáil na freagraí cearta. Gan teorainn; agus tú ag láithriú, taispeántar ceann amháin ceart agus an chuid eile mícheart go randamach.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Marcáil na freagraí cearta. Ocht bhfreagra ar a mhéad; agus tú ag láithriú, taispeántar ceann amháin ceart agus an chuid eile mícheart go randamach.',
   'Antwoord': 'Freagra',
   'Antwoord toevoegen': 'Cuir freagra leis',
   'Goed antwoord': 'Freagra ceart',
@@ -1806,6 +1806,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Ongeldige vraag': 'Ceist neamhbhailí',
   'Realtime samenwerken': 'Comhoibriú fíor-ama',
   'Manieren van verbinden': 'Bealaí ceangail',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

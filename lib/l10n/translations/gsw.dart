@@ -1044,8 +1044,8 @@ const _dutchSourceGsw = {
   'Vraag': 'Frag',
   'Wat wil je vragen?': 'Was wotsch fröge?',
   'Antwoorden': 'Antworte',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Markier di richtige Antworte. Kei Limit; bim Präsentiere wird zuefällig eini richtig und de Rest falsch zeigt.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Markier di richtige Antworte. Höchschtens acht Antworte; bim Präsentiere wird zuefällig eini richtig und de Rest falsch zeigt.',
   'Antwoord': 'Antwort',
   'Antwoord toevoegen': 'Antwort hinzuefüege',
   'Goed antwoord': 'Richtigi Antwort',
@@ -1774,6 +1774,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Ongeldige vraag': 'Ungültigi Frag',
   'Realtime samenwerken': 'Echtziit-Zämmenarbet',
   'Manieren van verbinden': 'Verbindigsarte',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

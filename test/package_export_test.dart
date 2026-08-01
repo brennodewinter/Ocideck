@@ -123,6 +123,42 @@ void main() {
     );
   });
 
+  test('package bundles all nine images from an oversized question', () async {
+    final paths = [
+      for (var i = 0; i < 9; i++)
+        (File(
+          p.join(tmp.path, 'antwoord-$i.png'),
+        )..writeAsBytesSync([0x89, 0x50, 0x4e, 0x47, i])).path,
+    ];
+    final question = const JsonEncoder.withIndent('  ').convert({
+      'kind': 'imagePair',
+      'prompt': 'Welke?',
+      'answers': [
+        for (var i = 0; i < paths.length; i++)
+          {'text': 'Beeld $i', 'correct': i.isEven, 'image': paths[i]},
+      ],
+    });
+    final deck = Deck(
+      title: 'Te grote vraag',
+      slides: [
+        Slide.create(SlideType.question).copyWith(customMarkdown: question),
+      ],
+    );
+
+    final zipPath = p.join(tmp.path, 'te-grote-vraag.ocideck');
+    await file.exportPackage(deck, zipPath);
+    final members = ZipDecoder()
+        .decodeBytes(File(zipPath).readAsBytesSync())
+        .files
+        .map((member) => member.name)
+        .toSet();
+
+    expect(
+      members,
+      containsAll([for (var i = 0; i < 9; i++) 'images/antwoord-$i.png']),
+    );
+  });
+
   test('export then import round-trips user notes sidecar', () async {
     final slide = Slide.create(SlideType.bullets).copyWith(title: 'Een');
     final deck = Deck(

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -157,6 +158,43 @@ void main() {
         identical(rewriteSlideImagePaths(slide, (_) => null), slide),
         true,
       );
+    });
+
+    test('negen antwoord-afbeeldingen blijven zichtbaar voor opslag', () {
+      final source = const JsonEncoder.withIndent('  ').convert({
+        'kind': 'imagePair',
+        'prompt': 'Welke?',
+        'answers': [
+          for (var i = 0; i < 9; i++)
+            {
+              'text': 'Beeld $i',
+              'correct': i.isEven,
+              'image': 'images/$i.png',
+              'extensionField': 'blijft-$i',
+            },
+        ],
+        'extensionRoot': {'blijft': true},
+      });
+      final slide = Slide.create(
+        SlideType.question,
+      ).copyWith(customMarkdown: source);
+
+      expect(slideImagePaths(slide), [
+        for (var i = 0; i < 9; i++) 'images/$i.png',
+      ]);
+
+      final rewritten = rewriteSlideImagePaths(
+        slide,
+        (path) => path == 'images/8.png' ? 'mem:acht' : null,
+      );
+      final json = jsonDecode(rewritten.customMarkdown) as Map<String, dynamic>;
+      final answers = json['answers'] as List<dynamic>;
+      expect((answers[8] as Map<String, dynamic>)['image'], 'mem:acht');
+      expect(
+        (answers[8] as Map<String, dynamic>)['extensionField'],
+        'blijft-8',
+      );
+      expect(json['extensionRoot'], {'blijft': true});
     });
 
     test('attachPackageAssetsToMem zet de antwoord-beelden in mem:', () {

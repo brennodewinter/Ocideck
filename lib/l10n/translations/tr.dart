@@ -2068,8 +2068,8 @@ const _dutchSourceTr = {
   'Vraag': 'Soru',
   'Wat wil je vragen?': 'Ne sormak istiyorsunuz?',
   'Antwoorden': 'Yanıtlar',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Doğru yanıtları işaretleyin. Sınır yok; sunum sırasında rastgele 1 doğru ve gerisi yanlış olarak gösterilir.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Doğru yanıtları işaretleyin. En fazla sekiz yanıt; sunum sırasında rastgele 1 doğru ve gerisi yanlış olarak gösterilir.',
   'Antwoord': 'Yanıt',
   'Antwoord toevoegen': 'Yanıt ekle',
   'Goed antwoord': 'Doğru yanıt',
@@ -2748,6 +2748,7 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Ongeldige vraag': 'Geçersiz soru',
   'Realtime samenwerken': 'Gerçek zamanlı iş birliği',
   'Manieren van verbinden': 'Bağlantı yöntemleri',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -1039,8 +1039,8 @@ const _dutchSourceLv = {
   'Vraag': 'Jautājums',
   'Wat wil je vragen?': 'Ko vēlaties jautāt?',
   'Antwoorden': 'Atbildes',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Atzīmējiet pareizās atbildes. Bez ierobežojuma; prezentējot nejauši tiek rādīta viena pareizā un pārējās nepareizās.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Atzīmējiet pareizās atbildes. Ne vairāk kā astoņas atbildes; prezentējot nejauši tiek rādīta viena pareizā un pārējās nepareizās.',
   'Antwoord': 'Atbilde',
   'Antwoord toevoegen': 'Pievienot atbildi',
   'Goed antwoord': 'Pareizā atbilde',
@@ -1770,6 +1770,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Ongeldige vraag': 'Nederīgs jautājums',
   'Realtime samenwerken': 'Sadarbība reāllaikā',
   'Manieren van verbinden': 'Savienojuma veidi',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -1041,8 +1041,8 @@ const _dutchSourceHu = {
   'Vraag': 'Kérdés',
   'Wat wil je vragen?': 'Mit szeretnél kérdezni?',
   'Antwoorden': 'Válaszok',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Jelöld meg a helyes válaszokat. Nincs korlát; előadáskor véletlenszerűen egy helyes és a többi hibás jelenik meg.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Jelöld meg a helyes válaszokat. Legfelj nyolc válasz; előadáskor véletlenszerűen egy helyes és a többi hibás jelenik meg.',
   'Antwoord': 'Válasz',
   'Antwoord toevoegen': 'Válasz hozzáadása',
   'Goed antwoord': 'Helyes válasz',
@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Ongeldige vraag': 'Érvénytelen kérdés',
   'Realtime samenwerken': 'Valós idejű együttműködés',
   'Manieren van verbinden': 'Csatlakozási módok',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

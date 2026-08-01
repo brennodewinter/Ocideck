@@ -10,6 +10,8 @@ import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/widgets/editors/_editor_field.dart';
 import 'package:ocideck/widgets/editors/question_editor.dart';
 
+import 'support/question_answer_limit_fixture.dart';
+
 /// Widget host mirroring the real editor panel: a fixed-size surface with the
 /// localization delegates the editor needs, wrapped in a [ProviderScope]
 /// because the image picker below the fold reads Riverpod providers.
@@ -113,6 +115,44 @@ void main() {
     await tester.pump();
 
     expect(QuestionSpec.parse(updated.customMarkdown).answers.length, 3);
+  });
+
+  testWidgets('exactly eight answers disables adding a ninth', (tester) async {
+    var updated = Slide.create(
+      SlideType.question,
+    ).copyWith(customMarkdown: questionBlockWithAnswers(8));
+
+    await _pump(tester, _host(updated, (s) => updated = s));
+
+    final add = tester.widget<TextButton>(
+      find.widgetWithText(TextButton, 'Antwoord toevoegen'),
+    );
+    expect(add.onPressed, isNull);
+    expect(QuestionSpec.parse(updated.customMarkdown).answers, hasLength(8));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('an oversized question is reported without answer editors', (
+    tester,
+  ) async {
+    final source = questionBlockWithAnswers(10000);
+    var updates = 0;
+    final slide = Slide.create(
+      SlideType.question,
+    ).copyWith(customMarkdown: source);
+
+    await _pump(tester, _host(slide, (_) => updates++));
+
+    expect(
+      find.byKey(const Key('invalid-question-answer-count')),
+      findsOneWidget,
+    );
+    expect(find.text('Ongeldige vraag'), findsOneWidget);
+    expect(find.textContaining('Maximaal aantal items: 8'), findsOneWidget);
+    expect(find.byType(TextField), findsNothing);
+    expect(updates, 0);
+    expect(slide.customMarkdown, source);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('checking an option marks it correct', (tester) async {

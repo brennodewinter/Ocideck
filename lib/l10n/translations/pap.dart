@@ -730,6 +730,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Ongeldige vraag': 'Pregunta inválido',
   'Realtime samenwerken': 'Kolaborashon na tempu real',
   'Manieren van verbinden': 'Manera di konektá',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
@@ -3208,8 +3209,8 @@ const _dutchSourceAddPap = {
   'Vraag': 'Pregunta',
   'Wat wil je vragen?': 'Kiko bo ke puntra?',
   'Antwoorden': 'Kontestanan',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Marka e kontestanan korekto. Sin límite; ora di presentá ta mustra na zar 1 korekto i e rest robes.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Marka e kontestanan korekto. Máksimo ocho kontesta; ora di presentá ta mustra na zar 1 korekto i e rest robes.',
   'Antwoord': 'Kontesta',
   'Antwoord toevoegen': 'Agregá kontesta',
   'Goed antwoord': 'Kontesta korekto',

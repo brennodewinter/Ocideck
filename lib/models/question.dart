@@ -4,7 +4,8 @@ import '../utils/log.dart';
 
 /// Limits keep a question slide sane and the random pick meaningful.
 const int questionMinOptionCount = 2;
-const int questionMaxOptionCount = 8;
+const int questionMaxAnswerCount = 8;
+const int questionMaxOptionCount = questionMaxAnswerCount;
 const int questionDefaultOptionCount = 4;
 const int questionMaxTimeLimitSeconds = 3600;
 
@@ -58,8 +59,9 @@ enum QuestionOnWrong { retry, lockAndContinue }
 QuestionOnWrong _onWrongFromName(String? name) => QuestionOnWrong.values
     .firstWhere((v) => v.name == name, orElse: () => QuestionOnWrong.retry);
 
-/// A single possible answer in the pool. The pool may hold any number of
-/// correct and incorrect answers; the presentation draws a random subset.
+/// A single possible answer in the pool. A question may hold at most
+/// [questionMaxAnswerCount] records; the presentation draws a subset where the
+/// selected question kind calls for one.
 class QuestionAnswer {
   final String text;
   final bool correct;
@@ -100,6 +102,13 @@ class QuestionSpec {
   final String prompt;
   final List<QuestionAnswer> answers;
 
+  /// The answer count found in a parsed source. Oversized sources deliberately
+  /// leave [answers] empty: this keeps them from turning into thousands of
+  /// model objects, editor controllers or widgets while [toBlock] preserves the
+  /// original JSON verbatim.
+  final int? _parsedAnswerCount;
+  final String? _preservedSource;
+
   /// Total number of options shown to the viewer (1 correct + the rest wrong),
   /// drawn at random from [answers]. Clamped to [questionMinOptionCount] ..
   /// [questionMaxOptionCount].
@@ -127,6 +136,20 @@ class QuestionSpec {
     this.onWrong = QuestionOnWrong.retry,
     this.statementIsTrue = true,
     this.similarityThreshold = questionDefaultSimilarity,
+  }) : _parsedAnswerCount = null,
+       _preservedSource = null;
+
+  const QuestionSpec._parsed({
+    required this.kind,
+    required this.prompt,
+    required this.answers,
+    required this.optionCount,
+    required this.timeLimitSeconds,
+    required this.onWrong,
+    required this.statementIsTrue,
+    required this.similarityThreshold,
+    required this._parsedAnswerCount,
+    required this._preservedSource,
   });
 
   /// A friendly starting point shown when a question slide is first created.
@@ -144,19 +167,26 @@ class QuestionSpec {
     try {
       final data = jsonDecode(raw.trim());
       if (data is! Map) return QuestionSpec.defaultMultipleChoice();
-      return QuestionSpec(
+      final rawAnswers = data['answers'];
+      final answerItems = rawAnswers is List ? rawAnswers : const <dynamic>[];
+      final oversized = answerItems.length > questionMaxAnswerCount;
+      return QuestionSpec._parsed(
         kind: _kindFromName(data['kind']?.toString()),
         prompt: (data['prompt'] ?? '').toString(),
-        answers: [
-          for (final item in (data['answers'] as List? ?? const []))
-            if (item is Map)
-              QuestionAnswer.fromJson(Map<String, dynamic>.from(item)),
-        ],
+        answers: oversized
+            ? const []
+            : [
+                for (final item in answerItems)
+                  if (item is Map)
+                    QuestionAnswer.fromJson(Map<String, dynamic>.from(item)),
+              ],
         optionCount: _clampOptionCount(data['optionCount']),
         timeLimitSeconds: _clampTimeLimit(data['timeLimitSeconds']),
         onWrong: _onWrongFromName(data['onWrong']?.toString()),
         statementIsTrue: data['statementIsTrue'] != false,
         similarityThreshold: _clampSimilarity(data['similarityThreshold']),
+        parsedAnswerCount: answerItems.length,
+        preservedSource: oversized ? raw.trim() : null,
       ).normalized();
     } catch (e, s) {
       logError('QuestionSpec.parse: decode question JSON block', e, s);
@@ -173,20 +203,46 @@ class QuestionSpec {
     QuestionOnWrong? onWrong,
     bool? statementIsTrue,
     double? similarityThreshold,
-  }) => QuestionSpec(
-    kind: kind ?? this.kind,
-    prompt: prompt ?? this.prompt,
-    answers: answers ?? this.answers,
-    optionCount: _clampOptionCount(optionCount ?? this.optionCount),
-    timeLimitSeconds: _clampTimeLimit(
+  }) {
+    final nextKind = kind ?? this.kind;
+    final nextPrompt = prompt ?? this.prompt;
+    final nextOptionCount = _clampOptionCount(optionCount ?? this.optionCount);
+    final nextTimeLimit = _clampTimeLimit(
       timeLimitSeconds ?? this.timeLimitSeconds,
-    ),
-    onWrong: onWrong ?? this.onWrong,
-    statementIsTrue: statementIsTrue ?? this.statementIsTrue,
-    similarityThreshold: _clampSimilarity(
+    );
+    final nextOnWrong = onWrong ?? this.onWrong;
+    final nextStatement = statementIsTrue ?? this.statementIsTrue;
+    final nextSimilarity = _clampSimilarity(
       similarityThreshold ?? this.similarityThreshold,
-    ),
-  );
+    );
+    if (!hasValidAnswerCount && _preservedSource != null) {
+      return QuestionSpec._parsed(
+        kind: nextKind,
+        prompt: nextPrompt,
+        answers: const [],
+        optionCount: nextOptionCount,
+        timeLimitSeconds: nextTimeLimit,
+        onWrong: nextOnWrong,
+        statementIsTrue: nextStatement,
+        similarityThreshold: nextSimilarity,
+        parsedAnswerCount: sourceAnswerCount,
+        preservedSource: _preservedSource,
+      );
+    }
+    return QuestionSpec(
+      kind: nextKind,
+      prompt: nextPrompt,
+      answers: answers ?? this.answers,
+      optionCount: nextOptionCount,
+      timeLimitSeconds: nextTimeLimit,
+      onWrong: nextOnWrong,
+      statementIsTrue: nextStatement,
+      similarityThreshold: nextSimilarity,
+    );
+  }
+
+  int get sourceAnswerCount => _parsedAnswerCount ?? answers.length;
+  bool get hasValidAnswerCount => sourceAnswerCount <= questionMaxAnswerCount;
 
   /// Whether an answer counts as filled in. Normally that means it has text;
   /// bij een beeldvraag ís de afbeelding het antwoord en is de tekst hooguit
@@ -209,6 +265,7 @@ class QuestionSpec {
   /// alleen een juist antwoord nodig (er valt niets fouts te tonen); the other
   /// kinds need at least one correct and one wrong answer.
   bool get isPresentable {
+    if (!hasValidAnswerCount) return false;
     if (kind == QuestionKind.trueFalse) return true;
     if (kind == QuestionKind.ordering) return filledAnswers.length >= 2;
     if (kind == QuestionKind.openText) return correctAnswers.isNotEmpty;
@@ -220,18 +277,37 @@ class QuestionSpec {
     return correctAnswers.isNotEmpty && wrongAnswers.isNotEmpty;
   }
 
-  QuestionSpec normalized() => QuestionSpec(
-    kind: kind,
-    prompt: prompt.trim(),
-    answers: answers,
-    optionCount: _clampOptionCount(optionCount),
-    timeLimitSeconds: _clampTimeLimit(timeLimitSeconds),
-    onWrong: onWrong,
-    statementIsTrue: statementIsTrue,
-    similarityThreshold: _clampSimilarity(similarityThreshold),
-  );
+  QuestionSpec normalized() {
+    if (!hasValidAnswerCount && _preservedSource != null) {
+      return QuestionSpec._parsed(
+        kind: kind,
+        prompt: prompt.trim(),
+        answers: const [],
+        optionCount: _clampOptionCount(optionCount),
+        timeLimitSeconds: _clampTimeLimit(timeLimitSeconds),
+        onWrong: onWrong,
+        statementIsTrue: statementIsTrue,
+        similarityThreshold: _clampSimilarity(similarityThreshold),
+        parsedAnswerCount: sourceAnswerCount,
+        preservedSource: _preservedSource,
+      );
+    }
+    return QuestionSpec(
+      kind: kind,
+      prompt: prompt.trim(),
+      answers: answers,
+      optionCount: _clampOptionCount(optionCount),
+      timeLimitSeconds: _clampTimeLimit(timeLimitSeconds),
+      onWrong: onWrong,
+      statementIsTrue: statementIsTrue,
+      similarityThreshold: _clampSimilarity(similarityThreshold),
+    );
+  }
 
   String toBlock() {
+    if (!hasValidAnswerCount && _preservedSource != null) {
+      return _preservedSource;
+    }
     final map = <String, dynamic>{
       'kind': kind.name,
       'prompt': prompt,

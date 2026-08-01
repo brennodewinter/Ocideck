@@ -142,7 +142,9 @@ extension _QuestionEditorKinds on _QuestionEditorState {
       Align(
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
-          onPressed: _addAnswer,
+          onPressed: _answers.length < questionMaxAnswerCount
+              ? _addAnswer
+              : null,
           icon: const Icon(Icons.add, size: 16),
           label: Text(l10n.d('Antwoord toevoegen')),
         ),

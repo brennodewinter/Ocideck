@@ -1044,8 +1044,8 @@ const _dutchSourceLt = {
   'Vraag': 'Klausimas',
   'Wat wil je vragen?': 'Ką norite paklausti?',
   'Antwoorden': 'Atsakymai',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Pažymėkite teisingus atsakymus. Ribos nėra; pristatant atsitiktinai rodomas 1 teisingas ir likę neteisingi.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Pažymėkite teisingus atsakymus. Daugiausia aštuoni atsakymai; pristatant atsitiktinai rodomas 1 teisingas ir likę neteisingi.',
   'Antwoord': 'Atsakymas',
   'Antwoord toevoegen': 'Pridėti atsakymą',
   'Goed antwoord': 'Teisingas atsakymas',
@@ -1778,6 +1778,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Ongeldige vraag': 'Netinkamas klausimas',
   'Realtime samenwerken': 'Bendradarbiavimas tikruoju laiku',
   'Manieren van verbinden': 'Prisijungimo būdai',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

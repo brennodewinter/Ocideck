@@ -957,21 +957,22 @@ A question slide turns the presentation into a short quiz. Pick **Question** in
 the chooser, then choose the **kind** in the editor:
 
 - **Multiple choice** — one correct answer is shown together with a random pick of
-  wrong ones. Add as many answers as you like (no limit) and tick the correct ones;
+  wrong ones. Add up to eight answers and tick the correct ones;
   set **how many options are shown** (default 4). At presentation time one correct
   answer plus random wrong ones are drawn, so each run differs.
 - **True / false** — the prompt is a statement; a switch in the editor sets whether
   it is **true or false**. The viewer picks *Juist* (true) or *Onjuist* (false).
 - **Multiple correct answers** — several answers may be correct. **Every** answer
-  you filled in is shown, in a random order; the viewer ticks **all** correct ones
-  and presses **Confirm**, and it is only right when exactly the correct set is
-  selected. Nothing is left out here, because "tick all correct ones" is
+  you filled in (up to eight) is shown, in a random order; the viewer ticks
+  **all** correct ones and presses **Confirm**, and it is only right when exactly
+  the correct set is selected. Nothing is left out here, because "tick all correct ones" is
   unanswerable in a set that had some of them randomly removed — so *how many
   options are shown* does not apply to this kind (*corrected 2026-07-21: it used
   to draw a random subset, which is what this guide described*).
 - **Ordering** — enter the answers **in the correct order** in the editor (the
-  up/down arrows rearrange them). At presentation time a random subset is drawn
-  (keeping its relative order as the right answer) and shown shuffled — never
+  up/down arrows rearrange them; at most eight fit in one question). At
+  presentation time a random subset is drawn (keeping its relative order as the
+  right answer) and shown shuffled — never
   accidentally already in the right order. The viewer taps the options in the
   order they think is correct — each tap assigns the next position number,
   tapping again removes it — and presses **Confirm** once every option has a
@@ -988,18 +989,18 @@ the chooser, then choose the **kind** in the editor:
   one" in a caption. This kind has no separate decorative image: the two answers
   *are* the pictures.
 
-  The editor offers two slots, but you may put more pairs in the Markdown by
-  hand. Each round then draws **one correct and one wrong** picture from the
-  pool, so a longer pool gives a fresh pair every time instead of always the
+  The editor offers two slots, but Markdown may contain a pool of at most eight
+  answer images. Each round then draws **one correct and one wrong** picture from
+  the pool, so a longer pool gives a fresh pair every time instead of always the
   first two. A missing answer image is reported by the file check like any other
   missing image — an empty tile where an answer belongs is something you would
   otherwise only notice in the room.
 - **Typed answer** — the viewer types instead of picking. Tick every answer that
-  should count as right (more than one is allowed) and set **how closely the typed
-  answer must match** with the slider: 85% by default, which lets a typo through
-  but not a different word. Capitals, leading/trailing spaces and doubled spaces
-  are ignored before comparing; punctuation is kept, because it is sometimes part
-  of the answer — a stray full stop rarely drops you below the threshold. The
+  should count as right (more than one is allowed, up to eight) and set **how
+  closely the typed answer must match** with the slider: 85% by default, which
+  lets a typo through but not a different word. Capitals, leading/trailing spaces
+  and doubled spaces are ignored before comparing; punctuation is kept, because
+  it is sometimes part of the answer — a stray full stop rarely drops you below the threshold. The
   viewer types on **your** screen; the beamer window mirrors what is typed but
   cannot be typed into.
 
@@ -1018,6 +1019,14 @@ the chooser, then choose the **kind** in the editor:
   list.
 
 Common options for every kind:
+
+- **Answer limit** — one question stores at most eight answer records. The add
+  button stops at eight. A hand-edited deck containing more is shown as an
+  invalid question before answer controls or slide options are built; OciDeck
+  preserves every answer record and unknown JSON field instead of silently
+  dropping them. Saving may normalise the surrounding fence, whitespace or JSON
+  formatting; storage operations that rewrite image paths preserve the fields
+  but may likewise reformat the JSON.
 
 - **Answer time** (optional) — a countdown starts the moment the slide appears;
   running out counts as a wrong answer. A question that cannot be got right as it

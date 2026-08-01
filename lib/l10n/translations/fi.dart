@@ -1039,8 +1039,8 @@ const _dutchSourceFi = {
   'Vraag': 'Kysymys',
   'Wat wil je vragen?': 'Mitä haluat kysyä?',
   'Antwoorden': 'Vastaukset',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Merkitse oikeat vastaukset. Ei rajaa; esitettäessä näytetään satunnaisesti yksi oikea ja loput väärät.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Merkitse oikeat vastaukset. Enintään kahdeksan vastausta; esitettäessä näytetään satunnaisesti yksi oikea ja loput väärät.',
   'Antwoord': 'Vastaus',
   'Antwoord toevoegen': 'Lisää vastaus',
   'Goed antwoord': 'Oikea vastaus',
@@ -1771,6 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Ongeldige vraag': 'Virheellinen kysymys',
   'Realtime samenwerken': 'Reaaliaikainen yhteistyö',
   'Manieren van verbinden': 'Yhdistämistavat',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

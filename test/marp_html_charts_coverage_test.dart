@@ -3,6 +3,8 @@ import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 
+import 'support/question_answer_limit_fixture.dart';
+
 /// Coverage for `lib/services/marp_html/marp_html_service_charts.dart`.
 ///
 /// Every chart kind reaches the SVG renderer through the public static entry
@@ -842,5 +844,28 @@ void main() {
       expect(out, contains('&lt;b&gt;vet&lt;/b&gt;'));
       expect(out, contains('a &amp; b'));
     });
+
+    test('exactly eight answers are included in static export', () {
+      final out = MarpHtmlService.renderQuestionBlocks(
+        '```question\n${questionBlockWithAnswers(8)}\n```',
+      );
+
+      expect(RegExp(r'<li>').allMatches(out), hasLength(8));
+      expect(out, contains('Antwoord 7'));
+    });
+
+    test(
+      'an oversized question exports a notice instead of answer widgets',
+      () {
+        final out = MarpHtmlService.renderQuestionBlocks(
+          '```question\n${questionBlockWithAnswers(9)}\n```',
+        );
+
+        expect(out, contains('Ongeldige vraag'));
+        expect(out, contains('Maximaal aantal items: 8'));
+        expect(out, isNot(contains('<li>')));
+        expect(out, isNot(contains('Antwoord 8')));
+      },
+    );
   });
 }

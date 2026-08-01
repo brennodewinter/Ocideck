@@ -1021,8 +1021,8 @@ const _dutchSourceTlh = {
   'Vraag': 'ghel',
   'Wat wil je vragen?': 'nuq DaghelnISqu\'?',
   'Antwoorden': 'jangmey',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'jangmey lugh yIper. veH pagh; jatlhtaHDI\' teblu\'be\'chugh wa\' lugh \'ej latlh Qagh cha\'lu\'.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'jangmey lugh yIper. chorgh jang neH; jatlhtaHDI\' teblu\'be\'chugh wa\' lugh \'ej latlh Qagh cha\'lu\'.',
   'Antwoord': 'jang',
   'Antwoord toevoegen': 'jang chel',
   'Goed antwoord': 'jang lugh',
@@ -1746,6 +1746,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Ongeldige vraag': 'yu\'vam lughbe\'',
   'Realtime samenwerken': 'SIbI\' vumchuq',
   'Manieren van verbinden': 'rarmeH mIwmey',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

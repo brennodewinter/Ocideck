@@ -730,6 +730,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Ongeldige vraag': 'Ungültige Frage',
   'Realtime samenwerken': 'Echtzeit-Zusammenarbeit',
   'Manieren van verbinden': 'Verbindungsarten',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
@@ -3210,8 +3211,8 @@ const _dutchSourceAddDe = {
   'Vraag': 'Frage',
   'Wat wil je vragen?': 'Was möchtest du fragen?',
   'Antwoorden': 'Antworten',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Markiere die richtigen Antworten. Kein Limit; beim Präsentieren werden zufällig eine richtige und die übrigen falsche Antworten gezeigt.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Markiere die richtigen Antworten. Höchstens acht Antworten; beim Präsentieren werden zufällig eine richtige und die übrigen falsche Antworten gezeigt.',
   'Antwoord': 'Antwort',
   'Antwoord toevoegen': 'Antwort hinzufügen',
   'Goed antwoord': 'Richtige Antwort',

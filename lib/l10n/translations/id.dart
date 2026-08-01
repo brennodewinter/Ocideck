@@ -1040,8 +1040,8 @@ const _dutchSourceId = {
   'Vraag': 'Pertanyaan',
   'Wat wil je vragen?': 'Apa yang ingin Anda tanyakan?',
   'Antwoorden': 'Jawaban',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Tandai jawaban yang benar. Tanpa batas; saat mempresentasikan, satu jawaban benar dan sisanya salah ditampilkan secara acak.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Tandai jawaban yang benar. Maksimal delapan jawaban; saat mempresentasikan, satu jawaban benar dan sisanya salah ditampilkan secara acak.',
   'Antwoord': 'Jawaban',
   'Antwoord toevoegen': 'Tambah jawaban',
   'Goed antwoord': 'Jawaban benar',
@@ -1771,6 +1771,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Ongeldige vraag': 'Pertanyaan tidak valid',
   'Realtime samenwerken': 'Kolaborasi waktu nyata',
   'Manieren van verbinden': 'Cara menyambung',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

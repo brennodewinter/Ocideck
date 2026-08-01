@@ -8,6 +8,8 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 
+import 'support/question_answer_limit_fixture.dart';
+
 /// Vraag-slides tijdens het presenteren: een quiz die de zaal vasthoudt tot er
 /// (juist) geantwoord is. Het blokkeren is het hele punt van de slide, dus het
 /// hoort getoetst: wie hier per ongeluk doorbladert, presenteert het antwoord
@@ -191,6 +193,44 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Daarna'), findsOneWidget);
 
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('exactly eight answers reach the full presenter', (tester) async {
+    final spec = QuestionSpec.parse(questionBlockWithAnswers(8));
+
+    await tester.pumpWidget(_host([_question(spec), after]));
+    await tester.pump();
+
+    for (var i = 0; i < 8; i++) {
+      expect(find.text('Antwoord $i'), findsOneWidget);
+    }
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('an oversized question reports invalid and never blocks', (
+    tester,
+  ) async {
+    final invalid = Slide(
+      id: 'q-invalid',
+      type: SlideType.question,
+      customMarkdown: questionBlockWithAnswers(9),
+    );
+
+    await tester.pumpWidget(_host([invalid, after]));
+    await tester.pump();
+
+    expect(
+      find.byKey(const Key('invalid-question-answer-count')),
+      findsOneWidget,
+    );
+    expect(find.text('Ongeldige vraag'), findsOneWidget);
+    expect(find.text('Antwoord 8'), findsNothing);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.pumpAndSettle();
+    expect(find.text('Daarna'), findsOneWidget);
     await tester.pumpWidget(const SizedBox());
   });
 

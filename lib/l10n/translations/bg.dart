@@ -1054,8 +1054,8 @@ const _dutchSourceBg = {
   'Vraag': 'Въпрос',
   'Wat wil je vragen?': 'Какво искате да попитате?',
   'Antwoorden': 'Отговори',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Отбележете верните отговори. Без ограничение; при презентиране на случаен принцип се показват 1 верен и останалите грешни.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Отбележете верните отговори. Най-много осем отговора; при презентиране на случаен принцип се показват 1 верен и останалите грешни.',
   'Antwoord': 'Отговор',
   'Antwoord toevoegen': 'Добавяне на отговор',
   'Goed antwoord': 'Верен отговор',
@@ -1793,6 +1793,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Ongeldige vraag': 'Невалиден въпрос',
   'Realtime samenwerken': 'Съвместна работа в реално време',
   'Manieren van verbinden': 'Начини на свързване',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

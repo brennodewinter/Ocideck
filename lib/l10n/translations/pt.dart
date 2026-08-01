@@ -1057,8 +1057,8 @@ const _dutchSourcePt = {
   'Vraag': 'Pergunta',
   'Wat wil je vragen?': 'O que quer perguntar?',
   'Antwoorden': 'Respostas',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Marque as respostas corretas. Sem limite; ao apresentar, é mostrada aleatoriamente uma correta e as restantes erradas.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Marque as respostas corretas. No máximo oito respostas; ao apresentar, é mostrada aleatoriamente uma correta e as restantes erradas.',
   'Antwoord': 'Resposta',
   'Antwoord toevoegen': 'Adicionar resposta',
   'Goed antwoord': 'Resposta correta',
@@ -1800,6 +1800,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Ongeldige vraag': 'Pergunta inválida',
   'Realtime samenwerken': 'Colaboração em tempo real',
   'Manieren van verbinden': 'Formas de ligação',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

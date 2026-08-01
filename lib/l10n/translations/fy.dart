@@ -731,6 +731,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Ongeldige vraag': 'Unjildige fraach',
   'Realtime samenwerken': 'Realtime gearwurkje',
   'Manieren van verbinden': 'Manieren om te ferbinen',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
@@ -3191,8 +3192,8 @@ const _dutchSourceAddFy = {
   'Vraag': 'Fraach',
   'Wat wil je vragen?': 'Wat wolsto freegje?',
   'Antwoorden': 'Antwurden',
-  'Markeer de goede antwoorden. Geen limiet; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
-      'Markearje de goede antwurden. Gjin limyt; by it presintearjen wurde willekeurich 1 goed en de rest fout toand.',
+  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.':
+      'Markearje de goede antwurden. Maksimaal acht antwurden; by it presintearjen wurde willekeurich 1 goed en de rest fout toand.',
   'Antwoord': 'Antwurd',
   'Antwoord toevoegen': 'Antwurd tafoegje',
   'Goed antwoord': 'Goed antwurd',

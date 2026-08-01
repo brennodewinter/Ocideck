@@ -32,6 +32,9 @@ class QuestionRoundBuilder {
     required String trueLabel,
     required String falseLabel,
   }) {
+    if (!spec.hasValidAnswerCount) {
+      return const QuestionView(answerable: false);
+    }
     final view = _byKind(spec, trueLabel: trueLabel, falseLabel: falseLabel);
     // Een vraag die niet te halen is, krijgt ook geen aftelling: die zou alleen
     // maar aftikken naar een fout die nergens toe leidt.

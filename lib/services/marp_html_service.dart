@@ -457,6 +457,15 @@ class MarpHtmlService {
   static String renderQuestionBlocks(String slideMarkdown) {
     return slideMarkdown.replaceAllMapped(_questionFence, (m) {
       final spec = QuestionSpec.parse(m.group(1)!);
+      if (!spec.hasValidAnswerCount) {
+        const l10n = AppLocalizations(Locale('nl'));
+        return '\n<div class="question question-invalid">'
+            '<p class="question-prompt">'
+            '${l10n.d('Ongeldige vraag')} · '
+            '${l10n.d('Maximaal aantal items')}: '
+            '$questionMaxAnswerCount · ${l10n.d('Antwoorden')}'
+            '</p></div>\n';
+      }
       final b = StringBuffer('\n<div class="question">');
       if (spec.prompt.trim().isNotEmpty) {
         b.write('<p class="question-prompt">${_htmlText(spec.prompt)}</p>');
