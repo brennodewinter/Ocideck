@@ -114,7 +114,10 @@ const Map<String, int> fileSizeBaseline = {
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
   'lib/models/slide.dart': 1004,
   // Procesverbetering module card / reveal wiring in the shell.
-  'lib/widgets/app_shell.dart': 858,
+  // +1 (#1037): the url_launcher_util import so the play-only landing can open
+  // slide links in the browser, like every other presentation surface. The file
+  // was already exactly at its ceiling; the behaviour itself is one shared call.
+  'lib/widgets/app_shell.dart': 859,
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
   // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
   // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped
