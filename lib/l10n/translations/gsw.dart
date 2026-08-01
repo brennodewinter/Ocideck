@@ -1774,6 +1774,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Chat': 'Chat',
+  'Chat openen': 'Chat ufmache',
+  'Chat sluiten': 'Chat zuemache',
+  'Bericht…': 'Nachricht…',
+  'Versturen': 'Schicke',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Na kei Nachrichte. Sag dine Mitautore öppis.',
   'Deelnemers verifiëren': 'Teilnehmer verifiziere',
   '(dit apparaat)': '(das Grät)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

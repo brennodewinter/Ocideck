@@ -1770,6 +1770,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Chat': 'Tērzēšana',
+  'Chat openen': 'Atvērt tērzēšanu',
+  'Chat sluiten': 'Aizvērt tērzēšanu',
+  'Bericht…': 'Ziņa…',
+  'Versturen': 'Sūtīt',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Vēl nav ziņu. Pasaki kaut ko saviem līdzautoriem.',
   'Deelnemers verifiëren': 'Pārbaudīt dalībniekus',
   '(dit apparaat)': '(šī ierīce)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

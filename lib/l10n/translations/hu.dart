@@ -1775,6 +1775,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Chat': 'Csevegés',
+  'Chat openen': 'Csevegés megnyitása',
+  'Chat sluiten': 'Csevegés bezárása',
+  'Bericht…': 'Üzenet…',
+  'Versturen': 'Küldés',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Még nincsenek üzenetek. Mondj valamit a társszerzőidnek.',
   'Deelnemers verifiëren': 'Résztvevők ellenőrzése',
   '(dit apparaat)': '(ez az eszköz)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

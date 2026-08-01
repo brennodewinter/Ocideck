@@ -22,6 +22,7 @@ import 'collab_crypto.dart';
 import 'collab_participant.dart';
 import 'collab_session.dart';
 import 'collab_snapshot.dart';
+import 'matrix_chat.dart';
 import 'matrix_client.dart';
 import 'matrix_key_exchange.dart';
 import 'matrix_presence.dart';
@@ -37,6 +38,7 @@ class MatrixCollabLaunch {
     required this.keyExchange,
     required this.snapshotChannel,
     required this.presence,
+    required this.chat,
     required this.isHost,
     required Deck deck,
     CollabSession? initialSession,
@@ -49,6 +51,7 @@ class MatrixCollabLaunch {
   final MatrixKeyExchange keyExchange;
   final MatrixSnapshotChannel snapshotChannel;
   final MatrixPresence presence;
+  final MatrixChat chat;
   final bool isHost;
   final Deck _localDeck;
 
@@ -61,6 +64,15 @@ class MatrixCollabLaunch {
 
   /// Set the callback fired when a peer's presence changes.
   set onPresenceChanged(void Function()? cb) => presence.onChanged = cb;
+
+  /// Send a chat message to the session (§6). Echoed locally at once.
+  Future<void> sendChat(String text) => chat.send(text);
+
+  /// The conversation so far, oldest first.
+  List<ChatMessage> get chatMessages => chat.messages;
+
+  /// Set the callback fired when the chat list grows.
+  set onChatChanged(void Function()? cb) => chat.onChanged = cb;
 
   CollabSession? _session;
   Timer? _timer;
@@ -110,6 +122,7 @@ class MatrixCollabLaunch {
     // Presence can arrive before its epoch key (same sync as the key-share, or an
     // earlier one) — retry the buffered ones each round, for host and guest alike.
     await presence.retryPending();
+    await chat.retryPending();
     if (isHost) {
       await keyExchange.ensureKeyed();
       return;
@@ -155,6 +168,7 @@ Future<MatrixCollabLaunch> hostMatrixSession({
   required MatrixClient client,
   required CollabCrypto crypto,
   required DevicePublicKeys ownKeys,
+  required String ownUserId,
   required String roomId,
   required Deck deck,
 }) async {
@@ -162,6 +176,7 @@ Future<MatrixCollabLaunch> hostMatrixSession({
     client: client,
     crypto: crypto,
     ownKeys: ownKeys,
+    ownUserId: ownUserId,
     roomId: roomId,
   );
   await parts.keyExchange.publishDeviceKeys();
@@ -177,6 +192,7 @@ Future<MatrixCollabLaunch> hostMatrixSession({
     keyExchange: parts.keyExchange,
     snapshotChannel: parts.snapshotChannel,
     presence: parts.presence,
+    chat: parts.chat,
     isHost: true,
     deck: deck,
     initialSession: session,
@@ -191,6 +207,7 @@ Future<MatrixCollabLaunch> joinMatrixSession({
   required MatrixClient client,
   required CollabCrypto crypto,
   required DevicePublicKeys ownKeys,
+  required String ownUserId,
   required String roomId,
   required Deck localDeck,
 }) async {
@@ -198,6 +215,7 @@ Future<MatrixCollabLaunch> joinMatrixSession({
     client: client,
     crypto: crypto,
     ownKeys: ownKeys,
+    ownUserId: ownUserId,
     roomId: roomId,
   );
   await parts.keyExchange.publishDeviceKeys();
@@ -206,6 +224,7 @@ Future<MatrixCollabLaunch> joinMatrixSession({
     keyExchange: parts.keyExchange,
     snapshotChannel: parts.snapshotChannel,
     presence: parts.presence,
+    chat: parts.chat,
     isHost: false,
     deck: localDeck,
   );
@@ -218,6 +237,7 @@ _SessionParts _wire({
   required MatrixClient client,
   required CollabCrypto crypto,
   required DevicePublicKeys ownKeys,
+  required String ownUserId,
   required String roomId,
 }) {
   final directory = MatrixDeviceDirectory();
@@ -240,6 +260,13 @@ _SessionParts _wire({
     roomId: roomId,
     directory: directory,
   );
+  final chat = MatrixChat(
+    client: client,
+    crypto: crypto,
+    roomId: roomId,
+    directory: directory,
+    ownUserId: ownUserId,
+  );
   final transport = MatrixRelayTransport(
     client: client,
     crypto: crypto,
@@ -249,6 +276,7 @@ _SessionParts _wire({
       await keyExchange.handleSystemEvent(event);
       await snapshotChannel.handleSystemEvent(event);
       await presence.handleSystemEvent(event);
+      await chat.handleSystemEvent(event);
     },
     onToDevice: keyExchange.handleToDevice,
   );
@@ -257,6 +285,7 @@ _SessionParts _wire({
     keyExchange: keyExchange,
     snapshotChannel: snapshotChannel,
     presence: presence,
+    chat: chat,
   );
 }
 
@@ -266,10 +295,12 @@ class _SessionParts {
     required this.keyExchange,
     required this.snapshotChannel,
     required this.presence,
+    required this.chat,
   });
 
   final MatrixRelayTransport transport;
   final MatrixKeyExchange keyExchange;
   final MatrixSnapshotChannel snapshotChannel;
   final MatrixPresence presence;
+  final MatrixChat chat;
 }

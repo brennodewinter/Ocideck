@@ -1783,6 +1783,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Chat': 'Czat',
+  'Chat openen': 'Otwórz czat',
+  'Chat sluiten': 'Zamknij czat',
+  'Bericht…': 'Wiadomość…',
+  'Versturen': 'Wyślij',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Nie ma jeszcze wiadomości. Napisz coś do swoich współautorów.',
   'Deelnemers verifiëren': 'Zweryfikuj uczestników',
   '(dit apparaat)': '(to urządzenie)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

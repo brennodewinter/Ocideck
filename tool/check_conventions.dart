@@ -121,14 +121,17 @@ const Map<String, int> fileSizeBaseline = {
   // `matrix_client_provider` (matrixAccountProvider) and `matrix_collab_dialogs`.
   // The commands themselves live in the collab part file, not here; only their
   // imports must sit in the library head.
-  'lib/widgets/app_shell.dart': 861,
+  // +1 (#977): the collab_chat_panel import for the chat rail.
+  'lib/widgets/app_shell.dart': 862,
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
   // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
   // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped
   // listen has to sit in build. The file was already exactly at its ceiling.
   // +1 (#977): the matching listenMatrixCollab hook for the realtime session
   // outcome — same one-line build-time listen, behaviour in the collab part file.
-  'lib/widgets/app_shell_main_layout.dart': 1012,
+  // +4 (#977): the chat rail spread into the workspace row; its logic lives in
+  // `collabChatRail` in collab_chat_panel.dart, only the spread + note remain.
+  'lib/widgets/app_shell_main_layout.dart': 1016,
   // Procesverbetering category tab + engine types in the add-slide picker.
   'lib/widgets/dialogs/add_slide_dialog.dart': 1094,
   // chart_preview_improvement part registration + improvement ChartType switch.

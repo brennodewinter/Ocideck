@@ -2748,6 +2748,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Chat': 'Sohbet',
+  'Chat openen': 'Sohbeti aç',
+  'Chat sluiten': 'Sohbeti kapat',
+  'Bericht…': 'Mesaj…',
+  'Versturen': 'Gönder',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Henüz mesaj yok. Ortak yazarlarına bir şeyler söyle.',
   'Deelnemers verifiëren': 'Katılımcıları doğrula',
   '(dit apparaat)': '(bu cihaz)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

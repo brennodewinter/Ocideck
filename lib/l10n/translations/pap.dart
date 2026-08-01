@@ -730,6 +730,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Chat': 'Chat',
+  'Chat openen': 'Habri chat',
+  'Chat sluiten': 'Sera chat',
+  'Bericht…': 'Mensahe…',
+  'Versturen': 'Manda',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'No tin mensahe ainda. Bisa algu na bo ko-outornan.',
   'Deelnemers verifiëren': 'Verifiká partisipantenan',
   '(dit apparaat)': '(e aparato aki)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

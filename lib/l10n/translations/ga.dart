@@ -1806,6 +1806,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Chat': 'Comhrá',
+  'Chat openen': 'Oscail an comhrá',
+  'Chat sluiten': 'Dún an comhrá',
+  'Bericht…': 'Teachtaireacht…',
+  'Versturen': 'Seol',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Gan teachtaireachtaí go fóill. Abair rud éigin le do chomhúdair.',
   'Deelnemers verifiëren': 'Fíoraigh na rannpháirtithe',
   '(dit apparaat)': '(an gléas seo)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

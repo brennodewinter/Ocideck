@@ -731,6 +731,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Chat': 'Chat',
+  'Chat openen': 'Chat iepenje',
+  'Chat sluiten': 'Chat slute',
+  'Bericht…': 'Berjocht…',
+  'Versturen': 'Ferstjoere',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Noch gjin berjochten. Sis wat tsjin dyn mei-auteurs.',
   'Deelnemers verifiëren': 'Dielnimmers ferifiearje',
   '(dit apparaat)': '(dit apparaat)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

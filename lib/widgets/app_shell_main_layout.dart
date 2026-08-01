@@ -170,6 +170,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                 });
               }
 
+              // The chat rail rides alongside the editor while a realtime Matrix
+              // session runs and the user has opened it (§6); non-modal, so
+              // editing continues. `collabChatRail` is empty otherwise.
               final workspace = Row(
                 children: [
                   SizedBox(
@@ -190,6 +193,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                     },
                   ),
                   const Expanded(child: EditorPanel()),
+                  ...collabChatRail(ref),
                 ],
               );
               if (!deck.finalized) return workspace;

@@ -1771,6 +1771,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Chat': 'Chat',
+  'Chat openen': 'Avaa chat',
+  'Chat sluiten': 'Sulje chat',
+  'Bericht…': 'Viesti…',
+  'Versturen': 'Lähetä',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Ei vielä viestejä. Sano jotain kanssakirjoittajillesi.',
   'Deelnemers verifiëren': 'Varmenna osallistujat',
   '(dit apparaat)': '(tämä laite)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

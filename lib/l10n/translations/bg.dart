@@ -1793,6 +1793,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Chat': 'Чат',
+  'Chat openen': 'Отвори чата',
+  'Chat sluiten': 'Затвори чата',
+  'Bericht…': 'Съобщение…',
+  'Versturen': 'Изпрати',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Все още няма съобщения. Кажи нещо на съавторите си.',
   'Deelnemers verifiëren': 'Провери участниците',
   '(dit apparaat)': '(това устройство)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

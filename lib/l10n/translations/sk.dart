@@ -1778,6 +1778,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Chat': 'Chat',
+  'Chat openen': 'Otvoriť chat',
+  'Chat sluiten': 'Zavrieť chat',
+  'Bericht…': 'Správa…',
+  'Versturen': 'Odoslať',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Zatiaľ žiadne správy. Povedz niečo svojim spoluautorom.',
   'Deelnemers verifiëren': 'Overiť účastníkov',
   '(dit apparaat)': '(toto zariadenie)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

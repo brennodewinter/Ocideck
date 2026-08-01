@@ -251,6 +251,20 @@ void main() {
         hostSlide.id,
       );
 
+      // Chat (§6): a signed, sealed message from the host, echoed to itself at
+      // once and delivered to the guest on the next sync.
+      await hostN.sendChatMessage('hallo daar');
+      await pumpEventQueue();
+      final hostChat = hostContainer.read(collabSessionProvider).chatMessages;
+      expect(hostChat.any((m) => m.text == 'hallo daar' && m.isSelf), isTrue);
+
+      await guestN.debugMatrixSyncNow();
+      await pumpEventQueue();
+      final guestChat = guestContainer.read(collabSessionProvider).chatMessages;
+      final received = guestChat.firstWhere((m) => m.text == 'hallo daar');
+      expect(received.isSelf, isFalse);
+      expect(received.userId, '@host:hs.example');
+
       await hostN.leave();
       await guestN.leave();
     });

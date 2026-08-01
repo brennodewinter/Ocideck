@@ -1778,6 +1778,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Chat': 'Pokalbis',
+  'Chat openen': 'Atverti pokalbį',
+  'Chat sluiten': 'Užverti pokalbį',
+  'Bericht…': 'Žinutė…',
+  'Versturen': 'Siųsti',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Kol kas žinučių nėra. Parašyk ką nors savo bendraautoriams.',
   'Deelnemers verifiëren': 'Patikrinti dalyvius',
   '(dit apparaat)': '(šis įrenginys)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

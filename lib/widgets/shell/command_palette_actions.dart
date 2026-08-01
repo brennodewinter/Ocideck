@@ -336,7 +336,24 @@ List<PaletteCommand> collabPaletteCommands(
           keywords: const ['invite', 'link', 'copy', 'matrix', 'uitnodiging'],
           onInvoke: () => _copyInvite(context, ref, l10n),
         ),
-      if (session.isMatrix && session.isActive)
+      if (session.isMatrix && session.isActive) ...[
+        PaletteCommand(
+          label: ref.read(collabChatOpenProvider)
+              ? l10n.d('Chat sluiten')
+              : l10n.d('Chat openen'),
+          icon: Icons.forum_outlined,
+          keywords: const [
+            'chat',
+            'bericht',
+            'message',
+            'matrix',
+            'samenwerken',
+          ],
+          onInvoke: () {
+            final open = ref.read(collabChatOpenProvider);
+            ref.read(collabChatOpenProvider.notifier).state = !open;
+          },
+        ),
         PaletteCommand(
           label: l10n.d('Deelnemers verifiëren'),
           icon: Icons.verified_user_outlined,
@@ -350,6 +367,7 @@ List<PaletteCommand> collabPaletteCommands(
           ],
           onInvoke: () => _verifyParticipants(context, ref, l10n),
         ),
+      ],
       PaletteCommand(
         label: l10n.d('Samenwerking verlaten'),
         icon: Icons.link_off,

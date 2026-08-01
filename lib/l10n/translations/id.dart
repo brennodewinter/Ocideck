@@ -1771,6 +1771,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Chat': 'Obrolan',
+  'Chat openen': 'Buka obrolan',
+  'Chat sluiten': 'Tutup obrolan',
+  'Bericht…': 'Pesan…',
+  'Versturen': 'Kirim',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Belum ada pesan. Katakan sesuatu kepada rekan penulismu.',
   'Deelnemers verifiëren': 'Verifikasi peserta',
   '(dit apparaat)': '(perangkat ini)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
