@@ -236,6 +236,21 @@ void main() {
       expect(hostPeer.userId, '@host:hs.example');
       expect(hostPeer.fingerprint, hostParticipants.first.fingerprint);
 
+      // Presence (§6, iedereen ziet iedereen): each side announced its slide on
+      // going active; one sync round each way carries it, so both see the other.
+      await hostN.debugMatrixSyncNow(); // host receives the guest's presence
+      await guestN.debugMatrixSyncNow(); // guest receives the host's presence
+      await pumpEventQueue();
+      final guestSees = guestContainer.read(collabSessionProvider).presence;
+      final hostSees = hostContainer.read(collabSessionProvider).presence;
+      expect(guestSees.any((p) => p.userId == '@host:hs.example'), isTrue);
+      expect(hostSees.any((p) => p.userId == '@guest:hs.example'), isTrue);
+      // The host is on the shared baseline slide; the guest sees it there.
+      expect(
+        guestSees.firstWhere((p) => p.userId == '@host:hs.example').slideId,
+        hostSlide.id,
+      );
+
       await hostN.leave();
       await guestN.leave();
     });

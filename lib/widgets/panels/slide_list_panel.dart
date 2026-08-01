@@ -34,7 +34,9 @@ import '../dialogs/import_slides_dialog.dart';
 import '../dialogs/slide_finder_dialog.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../slides/slide_preview.dart';
+import '../../state/collab_session_provider.dart';
 import '../slides/slide_thumbnail.dart';
+import 'slide_presence_dots.dart';
 
 part 'slide_list_panel_bars.dart';
 part 'slide_list_panel_add.dart';
@@ -561,8 +563,10 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     EditorNotifier editorNotifier,
   ) {
     final slide = deck.slides[index];
-    return SlideThumbnail(
-      key: _keyForSlide(slide),
+    // Co-authors' positions (§6 presence, Matrix only). Empty outside a live
+    // session, so the list — and its goldens — are unchanged the rest of the time.
+    final presence = ref.watch(collabSessionProvider).presence;
+    final thumb = SlideThumbnail(
       slide: slide,
       index: index,
       hasUserNotes: slideHasUserNotes(deck.userNotes, slide.id),
@@ -599,6 +603,14 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         // is verwijderd), niet terug naar het begin.
         editorNotifier.select((index - 1).clamp(0, deck.slides.length - 2));
       },
+    );
+    // The GlobalKey (scroll-to + reorder identity) moves to the wrapper so the
+    // presence dots can overlay without a second key in the subtree.
+    return slideWithPresence(
+      key: _keyForSlide(slide),
+      presence: presence,
+      slideId: slide.id,
+      child: thumb,
     );
   }
 

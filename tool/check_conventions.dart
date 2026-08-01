@@ -222,7 +222,11 @@ const Map<String, int> classSizeBaseline = {
   // chart_type_toolbar, table_clipboard, DoeDesignDialog). Plafond verlaagd
   // van 1198 naar 1081.
   'lib/widgets/editors/chart_editor.dart#_ChartEditorState': 1081,
-  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1024,
+  // +10 (#977): each thumbnail reads collab presence and wraps in the presence
+  // overlay. The overlay's real work (filter + Stack + dots) lives in the
+  // top-level `slideWithPresence` in slide_presence_dots.dart; only the per-item
+  // read and the wrap call remain in the state class.
+  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1034,
 };
 
 final _print = RegExp(r'(?<![\w.])print\(');

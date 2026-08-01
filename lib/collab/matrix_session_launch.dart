@@ -24,6 +24,7 @@ import 'collab_session.dart';
 import 'collab_snapshot.dart';
 import 'matrix_client.dart';
 import 'matrix_key_exchange.dart';
+import 'matrix_presence.dart';
 import 'matrix_relay_transport.dart';
 import 'matrix_snapshot.dart';
 
@@ -35,6 +36,7 @@ class MatrixCollabLaunch {
     required this.transport,
     required this.keyExchange,
     required this.snapshotChannel,
+    required this.presence,
     required this.isHost,
     required Deck deck,
     CollabSession? initialSession,
@@ -46,8 +48,19 @@ class MatrixCollabLaunch {
   final MatrixRelayTransport transport;
   final MatrixKeyExchange keyExchange;
   final MatrixSnapshotChannel snapshotChannel;
+  final MatrixPresence presence;
   final bool isHost;
   final Deck _localDeck;
+
+  /// Announce that this device is now viewing [slideId] (§6 presence). Safe to
+  /// call before the session is fully up; a redundant slide is a no-op.
+  Future<void> announcePresence(String slideId) => presence.announce(slideId);
+
+  /// Every peer's latest known position, for the presence UI.
+  List<PeerPresence> get presencePeers => presence.peers;
+
+  /// Set the callback fired when a peer's presence changes.
+  set onPresenceChanged(void Function()? cb) => presence.onChanged = cb;
 
   CollabSession? _session;
   Timer? _timer;
@@ -94,6 +107,9 @@ class MatrixCollabLaunch {
   Future<void> syncNow() async {
     if (_disposed) return;
     await transport.syncOnce();
+    // Presence can arrive before its epoch key (same sync as the key-share, or an
+    // earlier one) — retry the buffered ones each round, for host and guest alike.
+    await presence.retryPending();
     if (isHost) {
       await keyExchange.ensureKeyed();
       return;
@@ -160,6 +176,7 @@ Future<MatrixCollabLaunch> hostMatrixSession({
     transport: parts.transport,
     keyExchange: parts.keyExchange,
     snapshotChannel: parts.snapshotChannel,
+    presence: parts.presence,
     isHost: true,
     deck: deck,
     initialSession: session,
@@ -188,6 +205,7 @@ Future<MatrixCollabLaunch> joinMatrixSession({
     transport: parts.transport,
     keyExchange: parts.keyExchange,
     snapshotChannel: parts.snapshotChannel,
+    presence: parts.presence,
     isHost: false,
     deck: localDeck,
   );
@@ -216,6 +234,12 @@ _SessionParts _wire({
     roomId: roomId,
     directory: directory,
   );
+  final presence = MatrixPresence(
+    client: client,
+    crypto: crypto,
+    roomId: roomId,
+    directory: directory,
+  );
   final transport = MatrixRelayTransport(
     client: client,
     crypto: crypto,
@@ -224,6 +248,7 @@ _SessionParts _wire({
     onSystemEvent: (event) async {
       await keyExchange.handleSystemEvent(event);
       await snapshotChannel.handleSystemEvent(event);
+      await presence.handleSystemEvent(event);
     },
     onToDevice: keyExchange.handleToDevice,
   );
@@ -231,6 +256,7 @@ _SessionParts _wire({
     transport: transport,
     keyExchange: keyExchange,
     snapshotChannel: snapshotChannel,
+    presence: presence,
   );
 }
 
@@ -239,9 +265,11 @@ class _SessionParts {
     required this.transport,
     required this.keyExchange,
     required this.snapshotChannel,
+    required this.presence,
   });
 
   final MatrixRelayTransport transport;
   final MatrixKeyExchange keyExchange;
   final MatrixSnapshotChannel snapshotChannel;
+  final MatrixPresence presence;
 }

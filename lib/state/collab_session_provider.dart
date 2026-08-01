@@ -19,6 +19,7 @@ import 'package:uuid/uuid.dart';
 
 import '../collab/collab.dart';
 import 'deck_provider.dart';
+import 'editor_provider.dart';
 import 'matrix_client_provider.dart';
 import 'secret_store_provider.dart';
 import 'tabs_provider.dart';
@@ -39,6 +40,7 @@ class CollabSessionState {
     this.isTemporaryAuthority = false,
     this.inviteLink,
     this.isMatrix = false,
+    this.presence = const [],
   });
 
   final CollabPhase phase;
@@ -65,6 +67,10 @@ class CollabSessionState {
   /// device fingerprints are in play.
   final bool isMatrix;
 
+  /// Where each co-author is looking, for the presence UI (§6, Matrix only).
+  /// Updated as peers move; empty outside an active Matrix session.
+  final List<PeerPresence> presence;
+
   bool get isActive => phase == CollabPhase.active;
   bool get isConnecting => phase == CollabPhase.connecting;
 
@@ -81,6 +87,7 @@ class CollabSessionState {
     bool? isTemporaryAuthority,
     String? inviteLink,
     bool? isMatrix,
+    List<PeerPresence>? presence,
   }) => CollabSessionState(
     phase: phase ?? this.phase,
     role: role ?? this.role,
@@ -88,6 +95,7 @@ class CollabSessionState {
     isTemporaryAuthority: isTemporaryAuthority ?? this.isTemporaryAuthority,
     inviteLink: inviteLink ?? this.inviteLink,
     isMatrix: isMatrix ?? this.isMatrix,
+    presence: presence ?? this.presence,
   );
 }
 
@@ -114,6 +122,7 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
   MatrixCollabLaunch? _matrixLaunch;
   StreamSubscription<DeckState>? _deckSub;
   StreamSubscription<void>? _authoritySub;
+  StreamSubscription<EditorState>? _presenceSub;
   bool _disposed = false;
 
   /// True when this tab can collaborate: its deck lives on a WebDAV source.
@@ -306,6 +315,7 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
         inviteLink: link,
         isMatrix: true,
       );
+      _wirePresence(launch, deckNotifier);
     } on TimeoutException {
       await _teardown();
       if (!_disposed) {
@@ -315,6 +325,33 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
         );
       }
     }
+  }
+
+  /// Broadcast this tab's current slide to co-authors and reflect theirs (§6,
+  /// "iedereen ziet iedereen"). Announces the current selection at once, then on
+  /// every selection change; a peer's move refreshes [CollabSessionState.presence].
+  void _wirePresence(MatrixCollabLaunch launch, DeckNotifier deckNotifier) {
+    void refresh() {
+      if (_disposed) return;
+      state = state.copyWith(presence: launch.presencePeers);
+    }
+
+    // Seed from whatever already arrived: a peer's presence can open on the same
+    // sync that starts the session, before this callback is wired.
+    refresh();
+    launch.onPresenceChanged = refresh;
+    void announceCurrent() {
+      final deck = deckNotifier.currentState.deck;
+      final index = _ref.read(editorProvider).selectedIndex;
+      if (deck != null && index >= 0 && index < deck.slides.length) {
+        unawaited(launch.announcePresence(deck.slides[index].id));
+      }
+    }
+
+    announceCurrent();
+    _presenceSub = _ref.read(editorProvider.notifier).stream.listen((editor) {
+      announceCurrent();
+    });
   }
 
   /// Drive one Matrix sync round now, so a test can advance the session without
@@ -387,6 +424,8 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
   Future<void> _teardown() async {
     await _authoritySub?.cancel();
     _authoritySub = null;
+    await _presenceSub?.cancel();
+    _presenceSub = null;
     await _deckSub?.cancel();
     _deckSub = null;
     await _coordinator?.dispose();
@@ -405,6 +444,7 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
   void dispose() {
     _disposed = true;
     _authoritySub?.cancel();
+    _presenceSub?.cancel();
     _deckSub?.cancel();
     _coordinator?.dispose();
     _controller?.dispose();
