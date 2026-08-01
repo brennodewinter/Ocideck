@@ -730,6 +730,8 @@ const _dutchSourceAddIt = {
       'Questo pacchetto è troppo grande (massimo 512 MB). Altrimenti OciDeck non potrà più aprirlo. Usa immagini, video o file audio meno numerosi o più piccoli.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'Le immagini insieme sono troppo grandi per un unico file HTML (massimo 512 MB). Usa immagini in numero minore o più piccole, oppure esporta come PDF o pacchetto.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Questa esportazione contiene troppe diapositive a una risoluzione troppo elevata per essere resa in sicurezza. Esporta in più parti o usa il PDF compresso.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Completa e salva prima la presentazione; poi potrai firmarne la provenienza.',
   'Herkomst ondertekend.': 'Provenienza firmata.',

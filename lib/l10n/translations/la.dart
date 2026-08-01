@@ -1791,6 +1791,8 @@ const _dutchSourceAddLa = <String, String>{
       'Hoc fasciculus nimis magnus est (ad summum 512 MB). Aliter OciDeck eum postea aperire non poterit. Utere paucioribus vel minoribus imaginibus, pelliculis vel fasciculis sonoris.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'Imagines simul nimis magnae sunt pro uno fasciculo HTML (ad summum 512 MB). Pauciores vel minores imagines adhibe, vel ut PDF vel fasciculum exporta.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Haec exportatio nimium multas paginas nimia resolutione habet quam ut tuto reddi possint. Per partes exporta vel PDF compresso utere.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Praesentationem prius perfice et serva; deinde originem subscribere potes.',
   'Herkomst ondertekend.': 'Origo subscripta.',

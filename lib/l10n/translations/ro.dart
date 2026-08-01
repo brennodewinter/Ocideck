@@ -1792,6 +1792,8 @@ const _dutchSourceAddRo = <String, String>{
       'Acest pachet este prea mare (maximum 512 MB). Altfel, OciDeck nu îl va mai putea deschide după aceea. Folosește mai puține sau mai mici imagini, videoclipuri sau fișiere audio.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'Imaginile împreună sunt prea mari pentru un singur fișier HTML (maximum 512 MB). Folosiți mai puține sau imagini mai mici ori exportați ca PDF sau pachet.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Acest export are prea multe diapozitive la o rezoluție prea mare pentru a fi randat în siguranță. Exportați pe părți sau utilizați PDF-ul comprimat.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Finalizează și salvează mai întâi prezentarea; apoi îi poți semna proveniența.',
   'Herkomst ondertekend.': 'Proveniență semnată.',

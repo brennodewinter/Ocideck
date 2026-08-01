@@ -1775,6 +1775,8 @@ const _dutchSourceAddFi = <String, String>{
       'Tämä paketti on liian suuri (enintään 512 Mt). Muuten OciDeck ei voi enää avata sitä. Käytä vähemmän tai pienempiä kuvia, videoita tai äänitiedostoja.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'Kuvat ovat yhdessä liian suuria yhteen HTML-tiedostoon (enintään 512 Mt). Käytä vähemmän tai pienempiä kuvia tai vie PDF-tiedostona tai pakettina.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Tässä viennissä on liian monta diaa liian suurella tarkkuudella turvalliseen renderöintiin. Vie osissa tai käytä pakattua PDF:ää.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Viimeistele ja tallenna esitys ensin; sen jälkeen voit allekirjoittaa sen alkuperän.',
   'Herkomst ondertekend.': 'Alkuperä allekirjoitettu.',

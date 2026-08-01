@@ -1775,6 +1775,8 @@ const _dutchSourceAddId = <String, String>{
       'Paket ini terlalu besar (maksimal 512 MB). Jika tidak, OciDeck tidak akan bisa membukanya nanti. Gunakan gambar, video, atau berkas audio yang lebih sedikit atau lebih kecil.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'Gambar-gambar tersebut secara keseluruhan terlalu besar untuk satu berkas HTML (maksimum 512 MB). Gunakan lebih sedikit atau gambar yang lebih kecil, atau ekspor sebagai PDF atau paket.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Ekspor ini memiliki terlalu banyak slide dengan resolusi terlalu tinggi untuk dirender dengan aman. Ekspor secara bertahap atau gunakan PDF terkompresi.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Selesaikan dan simpan presentasi terlebih dahulu; setelah itu Anda dapat menandatangani asalnya.',
   'Herkomst ondertekend.': 'Asal ditandatangani.',

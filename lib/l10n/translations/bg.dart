@@ -1797,6 +1797,8 @@ const _dutchSourceAddBg = <String, String>{
       'Този пакет е твърде голям (най-много 512 MB). В противен случай OciDeck няма да може да го отвори след това. Използвайте по-малко или по-малки изображения, видео- или аудиофайлове.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'Изображенията заедно са твърде големи за един HTML файл (максимум 512 MB). Използвайте по-малко или по-малки изображения или експортирайте като PDF или пакет.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Този експорт има твърде много слайдове с твърде висока разделителна способност, за да се изобрази безопасно. Експортирайте на части или използвайте компресирания PDF.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Първо завършете и запазете презентацията; след това можете да подпишете произхода ѝ.',
   'Herkomst ondertekend.': 'Произходът е подписан.',

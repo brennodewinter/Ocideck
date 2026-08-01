@@ -1766,6 +1766,8 @@ const _dutchSourceAddEt = <String, String>{
       'See pakett on liiga suur (kõige rohkem 512 MB). Muidu ei saa OciDeck seda hiljem enam avada. Kasuta vähem või väiksemaid pilte, videoid või helifaile.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'Pildid on koos liiga suured ühe HTML-faili jaoks (kuni 512 MB). Kasutage vähem või väiksemaid pilte või eksportige PDF-i või paketina.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Sellel ekspordil on liiga palju slaide liiga suure resolutsiooniga, et neid saaks turvaliselt renderdada. Ekspordi osade kaupa või kasuta pakitud PDF-i.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Lõpeta ja salvesta esitlus kõigepealt; seejärel saad selle päritolu allkirjastada.',
   'Herkomst ondertekend.': 'Päritolu allkirjastatud.',
