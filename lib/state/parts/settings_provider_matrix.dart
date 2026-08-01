@@ -11,6 +11,7 @@ extension SettingsNotifierMatrix on SettingsNotifier {
   /// access-token, dat gaat via [setMatrixToken] naar de keychain. Wist enkel deze
   /// key, nooit het hele domein.
   Future<void> setMatrixAccount(MatrixServer? account) async {
+    final previous = currentState.matrixAccount;
     currentState = currentState.copyWith(
       matrixAccount: account,
       clearMatrixAccount: account == null,
@@ -22,6 +23,17 @@ extension SettingsNotifierMatrix on SettingsNotifier {
         await prefs.setString('matrixAccount', jsonEncode(account.toJson()));
       }
     });
+    // Removing the account sweeps its collaboration secrets too — the device
+    // identity seeds and the pinned-peer trust store — so nothing personal is
+    // left in the keychain for an account the user deliberately removed. The
+    // access token is cleared through setMatrixToken on the same removal.
+    if (account == null && previous != null) {
+      await _secrets.deleteCollabDeviceSeeds(
+        previous.homeserverUrl,
+        previous.userId,
+      );
+      await _secrets.deleteCollabTrust(previous.homeserverUrl, previous.userId);
+    }
   }
 
   /// Schrijf het Matrix-access-token versleuteld naar de keychain (gekeyd op de

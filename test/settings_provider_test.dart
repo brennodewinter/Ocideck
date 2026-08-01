@@ -874,5 +874,46 @@ void main() {
         expect(await notifier.matrixToken(account), isNull);
       },
     );
+
+    test(
+      'removing the account sweeps its collab secrets from the keychain',
+      () async {
+        SharedPreferences.setMockInitialValues({});
+        FlutterSecureStorage.setMockInitialValues({});
+        final secrets = SecretStore(
+          storage: const FlutterSecureStorage(),
+          canStore: true,
+        );
+        final notifier = SettingsNotifier(secretStore: secrets);
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+
+        await notifier.setMatrixAccount(account);
+        // Seed some collaboration secrets for this account, as a session would.
+        await secrets.writeCollabDeviceSeeds(
+          account.homeserverUrl,
+          account.userId,
+          'seeds-blob',
+        );
+        await secrets.writeCollabTrust(
+          account.homeserverUrl,
+          account.userId,
+          '{"@peer DEV":"key"}',
+        );
+
+        await notifier.setMatrixAccount(null);
+
+        expect(
+          await secrets.readCollabDeviceSeeds(
+            account.homeserverUrl,
+            account.userId,
+          ),
+          isNull,
+        );
+        expect(
+          await secrets.readCollabTrust(account.homeserverUrl, account.userId),
+          isNull,
+        );
+      },
+    );
   });
 }

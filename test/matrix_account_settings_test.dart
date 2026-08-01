@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/collab/collab_device_store.dart';
+import 'package:ocideck/collab/collab_recovery_key.dart';
 import 'package:ocideck/collab/matrix_client.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/matrix_settings.dart';
@@ -189,6 +191,128 @@ void main() {
         find.textContaining('access-token wordt geweigerd'),
         findsOneWidget,
       );
+    });
+  });
+
+  group('MatrixPanel — recovery key (Blok B)', () {
+    late MatrixForm form;
+    late SecretStore secrets;
+
+    setUp(() {
+      form = MatrixForm();
+      FlutterSecureStorage.setMockInitialValues({});
+      secrets = SecretStore(
+        storage: const FlutterSecureStorage(),
+        canStore: true,
+      );
+    });
+    tearDown(() => form.dispose());
+
+    Future<void> show(WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(800, 1400));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: MatrixPanel(
+                form: form,
+                canStore: true,
+                secretStore: secrets,
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+    }
+
+    testWidgets('the section is hidden until the account is filled', (
+      tester,
+    ) async {
+      await show(tester);
+      expect(find.text('Herstelsleutel tonen'), findsNothing);
+
+      form.homeserver.text = 'https://hs.example';
+      form.userId.text = '@u:hs.example';
+      form.deviceId.text = 'DEV1';
+      await tester.pump();
+      expect(find.text('Herstelsleutel tonen'), findsOneWidget);
+      expect(find.text('Identiteit herstellen'), findsOneWidget);
+    });
+
+    testWidgets('showing the recovery key mints and displays it', (
+      tester,
+    ) async {
+      form.homeserver.text = 'https://hs.example';
+      form.userId.text = '@u:hs.example';
+      form.deviceId.text = 'DEV1';
+      await show(tester);
+
+      await tester.tap(find.text('Herstelsleutel tonen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Herstelsleutel'), findsOneWidget);
+      // The identity now exists in the keychain.
+      final seeds = await readDeviceSeeds(
+        secretStore: secrets,
+        homeserver: 'https://hs.example',
+        userId: '@u:hs.example',
+      );
+      expect(seeds, isNotNull);
+      // The shown key round-trips.
+      expect(find.text(seeds!.recoveryKey()), findsOneWidget);
+    });
+
+    testWidgets('restoring from a key adopts that identity', (tester) async {
+      // A key exported elsewhere for a different device id.
+      final ed = [for (var i = 0; i < 32; i++) i];
+      final x = [for (var i = 0; i < 32; i++) (i * 3) & 0xff];
+      final exported = encodeRecoveryKey(ed, x);
+
+      form.homeserver.text = 'https://hs.example';
+      form.userId.text = '@u:hs.example';
+      form.deviceId.text = 'DEV-NEW';
+      await show(tester);
+
+      await tester.tap(find.text('Identiteit herstellen'));
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextField).last, exported);
+      await tester.tap(find.text('Herstellen'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Identiteit hersteld.'), findsOneWidget);
+      final seeds = await readDeviceSeeds(
+        secretStore: secrets,
+        homeserver: 'https://hs.example',
+        userId: '@u:hs.example',
+      );
+      expect(seeds!.ed25519Seed, ed);
+      expect(seeds.deviceId, 'DEV-NEW');
+    });
+
+    testWidgets('a mistyped key shows a plain checksum message', (
+      tester,
+    ) async {
+      // A valid key with one character flipped: right length, wrong CRC.
+      final valid = encodeRecoveryKey(
+        [for (var i = 0; i < 32; i++) i],
+        [for (var i = 0; i < 32; i++) i],
+      ).replaceAll('-', '');
+      final chars = valid.split('');
+      chars[5] = chars[5] == 'A' ? 'B' : 'A';
+      final corrupted = chars.join();
+
+      form.homeserver.text = 'https://hs.example';
+      form.userId.text = '@u:hs.example';
+      form.deviceId.text = 'DEV1';
+      await show(tester);
+
+      await tester.tap(find.text('Identiteit herstellen'));
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextField).last, corrupted);
+      await tester.tap(find.text('Herstellen'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('klopt niet'), findsOneWidget);
     });
   });
 
