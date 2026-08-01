@@ -1788,6 +1788,28 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Finalizează și salvează mai întâi prezentarea; apoi îi poți semna proveniența.',
+  'Herkomst ondertekend.': 'Proveniență semnată.',
+  'De herkomst kon niet worden ondertekend.':
+      'Proveniența nu a putut fi semnată.',
+  'Herkomst ondertekenen': 'Semnează proveniența',
+  'Herkomst bevestigd': 'Proveniență confirmată',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Semnat cu o cheie confirmată anterior — această prezentare provine de la acel proprietar.',
+  'Ondertekend': 'Semnat',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Semnat, încă neverificat. Amprentă:',
+  'Gewijzigd na ondertekenen': 'Modificat după semnare',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Conținutul diferă de cel semnat — fișierul a fost modificat după semnare.',
+  'Herkomst ongeldig': 'Proveniență nevalidă',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Semnătura de proveniență este incorectă sau a fost falsificată.',
+  'Herkomst niet hier te controleren':
+      'Proveniența nu poate fi verificată aici',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Semnătura este prezentă, dar nu poate fi recalculată aici — verific-o cu fișierul `.md` original.',
   'Bestaande identiteit vervangen?': 'Înlocuiți identitatea existentă?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Acest dispozitiv are deja o identitate de colaborare. Restaurarea o înlocuiește cu identitatea din cheie. Ați salvat o cheie de recuperare pentru identitatea curentă? Fără o copie de rezervă o veți pierde.',

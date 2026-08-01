@@ -1793,6 +1793,28 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Temm u ħażen il-preżentazzjoni l-ewwel; imbagħad tista\' tiffirma l-oriġini tagħha.',
+  'Herkomst ondertekend.': 'L-oriġini ġiet iffirmata.',
+  'De herkomst kon niet worden ondertekend.':
+      'L-oriġini ma setgħetx tiġi ffirmata.',
+  'Herkomst ondertekenen': 'Iffirma l-oriġini',
+  'Herkomst bevestigd': 'Oriġini kkonfermata',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Iffirmat b\'ċavetta diġà kkonfermata — din il-preżentazzjoni ġejja mingħand dak is-sid.',
+  'Ondertekend': 'Iffirmat',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Iffirmat, għadu mhux verifikat. Marka tas-saba\':',
+  'Gewijzigd na ondertekenen': 'Mibdul wara l-iffirmar',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Il-kontenut huwa differenti minn dak iffirmat — il-fajl inbidel wara l-iffirmar.',
+  'Herkomst ongeldig': 'Oriġini mhux valida',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Il-firma tal-oriġini mhix korretta jew ġiet iffalsifikata.',
+  'Herkomst niet hier te controleren':
+      'L-oriġini ma tistax tiġi ċċekkjata hawn',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Il-firma tinsab preżenti, imma ma tistax tiġi kkalkulata mill-ġdid hawn — iċċekkjaha mal-fajl `.md` oriġinali.',
   'Bestaande identiteit vervangen?': 'Tibdel l-identità eżistenti?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Dan l-apparat diġà għandu identità ta\' kollaborazzjoni. Ir-restawr jibdilha bl-identità mill-muftieħ. Ħżint ċavetta ta\' rkupru għall-identità attwali? Mingħajr backup titlifha.',

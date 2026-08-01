@@ -1774,6 +1774,27 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Mach d Präsentation zerscht fertig und speicher si; nachher chasch d Herkunft signiere.',
+  'Herkomst ondertekend.': 'Herkunft signiert.',
+  'De herkomst kon niet worden ondertekend.':
+      'D Herkunft het nöd chöne signiert werde.',
+  'Herkomst ondertekenen': 'Herkunft signiere',
+  'Herkomst bevestigd': 'Herkunft bestätigt',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Mit eme scho bestätigte Schlüssel signiert — die Präsentation chunt vo dem Bsitzer.',
+  'Ondertekend': 'Signiert',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Signiert, na nöd verifiziert. Fingerabdruck:',
+  'Gewijzigd na ondertekenen': 'Nach em Signiere gänderet',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'De Inhalt wiicht vom Signierte ab — d Datei isch nach em Signiere gänderet worde.',
+  'Herkomst ongeldig': 'Herkunft ungültig',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'D Herkunftssignatur stimmt nöd oder isch gfälscht.',
+  'Herkomst niet hier te controleren': 'Herkunft cha do nöd prüeft werde',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'D Signatur isch da, cha aber do nöd nachgrächnet werde — prüef si gäge d ursprünglich `.md`-Datei.',
   'Bestaande identiteit vervangen?': 'Bestehendi Identität ersetze?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Das Grät hät scho en Zämmenarbetsidentität. S Widerhärstelle ersetzt si dur d Identität us em Schlüssel. Hesch für di aktuelli Identität en Widerhärstellschlüssel gsicheret? Ohni Backup isch si wäg.',

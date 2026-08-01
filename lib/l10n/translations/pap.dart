@@ -730,6 +730,26 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Kaba i warda e presentashon promé; despues bo por firma su origen.',
+  'Herkomst ondertekend.': 'Origen firmá.',
+  'De herkomst kon niet worden ondertekend.': 'No por a firma e origen.',
+  'Herkomst ondertekenen': 'Firma origen',
+  'Herkomst bevestigd': 'Origen konfirmá',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Firmá ku un yabi konfirmá kaba — e presentashon aki ta bini di e doño ei.',
+  'Ondertekend': 'Firmá',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Firmá, no verifiká ainda. Fingerprint:',
+  'Gewijzigd na ondertekenen': 'Kambiá despues di firma',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'E kontenido ta diferente for di loke a wòrdu firmá — e archivo a wòrdu kambiá despues di firma.',
+  'Herkomst ongeldig': 'Origen inválido',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'E firma di origen no ta korekto òf a wòrdu falsifiká.',
+  'Herkomst niet hier te controleren': 'Origen no por wòrdu chèk akinan',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'E firma ta presente, pero no por wòrdu kalkulá di nobo akinan — chèk kontra e archivo `.md` original.',
   'Bestaande identiteit vervangen?': 'Reemplasá identidat eksistente?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'E aparato aki ya tin un identidat di kolaborashon. Restourashon ta reemplas\'é ku e identidat for di e yabi. Bo a warda un yabi di rekuperashon pa e identidat aktual? Sin un backup lo bo perd\'é.',

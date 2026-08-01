@@ -1773,6 +1773,27 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Najprej dokončajte in shranite predstavitev; nato lahko podpišete njen izvor.',
+  'Herkomst ondertekend.': 'Izvor podpisan.',
+  'De herkomst kon niet worden ondertekend.':
+      'Izvora ni bilo mogoče podpisati.',
+  'Herkomst ondertekenen': 'Podpiši izvor',
+  'Herkomst bevestigd': 'Izvor potrjen',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Podpisano s predhodno potrjenim ključem — ta predstavitev je od tega lastnika.',
+  'Ondertekend': 'Podpisano',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Podpisano, še ni preverjeno. Prstni odtis:',
+  'Gewijzigd na ondertekenen': 'Spremenjeno po podpisu',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Vsebina se razlikuje od podpisane — datoteka je bila spremenjena po podpisu.',
+  'Herkomst ongeldig': 'Izvor neveljaven',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Podpis izvora ni pravilen ali je ponarejen.',
+  'Herkomst niet hier te controleren': 'Izvora tukaj ni mogoče preveriti',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Podpis je prisoten, vendar ga tukaj ni mogoče znova izračunati — preverite ga z izvirno datoteko `.md`.',
   'Bestaande identiteit vervangen?': 'Zamenjati obstoječo identiteto?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Ta naprava že ima identiteto za sodelovanje. Obnovitev jo nadomesti z identiteto iz ključa. Ali ste shranili obnovitveni ključ za trenutno identiteto? Brez varnostne kopije jo boste izgubili.',

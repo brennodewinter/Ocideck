@@ -1778,6 +1778,26 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Pirmiausia užbaikite ir įrašykite pateiktį; tada galėsite pasirašyti jos kilmę.',
+  'Herkomst ondertekend.': 'Kilmė pasirašyta.',
+  'De herkomst kon niet worden ondertekend.': 'Kilmės pasirašyti nepavyko.',
+  'Herkomst ondertekenen': 'Pasirašyti kilmę',
+  'Herkomst bevestigd': 'Kilmė patvirtinta',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Pasirašyta anksčiau patvirtintu raktu — ši pateiktis yra iš to savininko.',
+  'Ondertekend': 'Pasirašyta',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Pasirašyta, dar nepatvirtinta. Kontrolinis kodas:',
+  'Gewijzigd na ondertekenen': 'Pakeista po pasirašymo',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Turinys skiriasi nuo pasirašyto — failas pakeistas po pasirašymo.',
+  'Herkomst ongeldig': 'Kilmė negalioja',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Kilmės parašas neteisingas arba suklastotas.',
+  'Herkomst niet hier te controleren': 'Kilmės čia patikrinti negalima',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Parašas yra, bet jo čia perskaičiuoti negalima — patikrinkite jį su pradiniu `.md` failu.',
   'Bestaande identiteit vervangen?': 'Pakeisti esamą tapatybę?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Šis įrenginys jau turi bendradarbiavimo tapatybę. Atkūrimas ją pakeis tapatybe iš rakto. Ar išsaugojote dabartinės tapatybės atkūrimo raktą? Be atsarginės kopijos ją prarasite.',

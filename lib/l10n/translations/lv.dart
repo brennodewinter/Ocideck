@@ -1770,6 +1770,26 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Vispirms pabeidziet un saglabājiet prezentāciju; pēc tam varat parakstīt tās izcelsmi.',
+  'Herkomst ondertekend.': 'Izcelsme parakstīta.',
+  'De herkomst kon niet worden ondertekend.': 'Izcelsmi neizdevās parakstīt.',
+  'Herkomst ondertekenen': 'Parakstīt izcelsmi',
+  'Herkomst bevestigd': 'Izcelsme apstiprināta',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Parakstīts ar iepriekš apstiprinātu atslēgu — šī prezentācija ir no šī īpašnieka.',
+  'Ondertekend': 'Parakstīts',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Parakstīts, vēl nav pārbaudīts. Nospiedums:',
+  'Gewijzigd na ondertekenen': 'Mainīts pēc parakstīšanas',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Saturs atšķiras no parakstītā — fails tika mainīts pēc parakstīšanas.',
+  'Herkomst ongeldig': 'Izcelsme nederīga',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Izcelsmes paraksts ir nepareizs vai viltots.',
+  'Herkomst niet hier te controleren': 'Izcelsmi šeit nevar pārbaudīt',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Paraksts ir klāt, taču to šeit nevar pārrēķināt — pārbaudiet to pret sākotnējo `.md` failu.',
   'Bestaande identiteit vervangen?': 'Aizstāt esošo identitāti?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Šai ierīcei jau ir sadarbības identitāte. Atjaunošana to aizstāj ar atslēgā ietverto identitāti. Vai saglabājāt pašreizējās identitātes atkopšanas atslēgu? Bez dublējuma jūs to zaudēsiet.',

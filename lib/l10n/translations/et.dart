@@ -1762,6 +1762,27 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Lõpeta ja salvesta esitlus kõigepealt; seejärel saad selle päritolu allkirjastada.',
+  'Herkomst ondertekend.': 'Päritolu allkirjastatud.',
+  'De herkomst kon niet worden ondertekend.':
+      'Päritolu ei õnnestunud allkirjastada.',
+  'Herkomst ondertekenen': 'Allkirjasta päritolu',
+  'Herkomst bevestigd': 'Päritolu kinnitatud',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Allkirjastatud varem kinnitatud võtmega — see esitlus pärineb sellelt omanikult.',
+  'Ondertekend': 'Allkirjastatud',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Allkirjastatud, veel kinnitamata. Sõrmejälg:',
+  'Gewijzigd na ondertekenen': 'Muudetud pärast allkirjastamist',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Sisu erineb allkirjastatust — faili muudeti pärast allkirjastamist.',
+  'Herkomst ongeldig': 'Päritolu kehtetu',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Päritolu allkiri on vale või võltsitud.',
+  'Herkomst niet hier te controleren': 'Päritolu ei saa siin kontrollida',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Allkiri on olemas, kuid seda ei saa siin uuesti arvutada — kontrolli seda algupärase `.md`-faili suhtes.',
   'Bestaande identiteit vervangen?': 'Kas asendada olemasolev identiteet?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Sellel seadmel on juba koostööidentiteet. Taastamine asendab selle võtmes oleva identiteediga. Kas salvestasid praeguse identiteedi taasteklahvi? Ilma varukoopiata kaotad selle.',

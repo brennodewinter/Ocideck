@@ -730,6 +730,27 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Terminez et enregistrez d\'abord la présentation ; vous pourrez ensuite en signer la provenance.',
+  'Herkomst ondertekend.': 'Provenance signée.',
+  'De herkomst kon niet worden ondertekend.':
+      'Impossible de signer la provenance.',
+  'Herkomst ondertekenen': 'Signer la provenance',
+  'Herkomst bevestigd': 'Provenance confirmée',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Signé avec une clé déjà confirmée — cette présentation provient de ce propriétaire.',
+  'Ondertekend': 'Signé',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Signé, pas encore vérifié. Empreinte :',
+  'Gewijzigd na ondertekenen': 'Modifié après la signature',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Le contenu diffère de ce qui a été signé — le fichier a été modifié après la signature.',
+  'Herkomst ongeldig': 'Provenance non valide',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'La signature de provenance est incorrecte ou a été falsifiée.',
+  'Herkomst niet hier te controleren': 'Provenance non vérifiable ici',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'La signature est présente mais ne peut pas être recalculée ici — vérifiez-la avec le fichier `.md` d\'origine.',
   'Bestaande identiteit vervangen?': 'Remplacer l\'identité existante ?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Cet appareil possède déjà une identité de collaboration. La restauration la remplace par l\'identité contenue dans la clé. Avez-vous sauvegardé une clé de récupération pour l\'identité actuelle ? Sans sauvegarde, vous la perdrez.',

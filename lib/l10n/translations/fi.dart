@@ -1771,6 +1771,27 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Viimeistele ja tallenna esitys ensin; sen jälkeen voit allekirjoittaa sen alkuperän.',
+  'Herkomst ondertekend.': 'Alkuperä allekirjoitettu.',
+  'De herkomst kon niet worden ondertekend.':
+      'Alkuperää ei voitu allekirjoittaa.',
+  'Herkomst ondertekenen': 'Allekirjoita alkuperä',
+  'Herkomst bevestigd': 'Alkuperä vahvistettu',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Allekirjoitettu aiemmin vahvistetulla avaimella — tämä esitys on tuolta omistajalta.',
+  'Ondertekend': 'Allekirjoitettu',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Allekirjoitettu, ei vielä varmennettu. Sormenjälki:',
+  'Gewijzigd na ondertekenen': 'Muutettu allekirjoituksen jälkeen',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Sisältö poikkeaa allekirjoitetusta — tiedostoa muutettiin allekirjoituksen jälkeen.',
+  'Herkomst ongeldig': 'Alkuperä virheellinen',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Alkuperän allekirjoitus on virheellinen tai väärennetty.',
+  'Herkomst niet hier te controleren': 'Alkuperää ei voi tarkistaa tässä',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Allekirjoitus on olemassa, mutta sitä ei voi laskea uudelleen tässä — tarkista se alkuperäisestä `.md`-tiedostosta.',
   'Bestaande identiteit vervangen?': 'Korvataanko nykyinen identiteetti?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
       'Tällä laitteella on jo yhteistyöidentiteetti. Palautus korvaa sen avaimen identiteetillä. Tallensitko nykyisen identiteetin palautusavaimen? Ilman varmuuskopiota menetät sen.',

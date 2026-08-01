@@ -1793,6 +1793,27 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
+      'Първо завършете и запазете презентацията; след това можете да подпишете произхода ѝ.',
+  'Herkomst ondertekend.': 'Произходът е подписан.',
+  'De herkomst kon niet worden ondertekend.':
+      'Произходът не можа да бъде подписан.',
+  'Herkomst ondertekenen': 'Подпиши произхода',
+  'Herkomst bevestigd': 'Произходът е потвърден',
+  'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
+      'Подписано с вече потвърден ключ — тази презентация е от този собственик.',
+  'Ondertekend': 'Подписано',
+  'Ondertekend, nog niet geverifieerd. Vingerafdruk:':
+      'Подписано, все още непроверено. Отпечатък:',
+  'Gewijzigd na ondertekenen': 'Променено след подписването',
+  'De inhoud wijkt af van wat is ondertekend — het bestand is na het ondertekenen gewijzigd.':
+      'Съдържанието се различава от подписаното — файлът е променен след подписването.',
+  'Herkomst ongeldig': 'Невалиден произход',
+  'De herkomst-ondertekening klopt niet of is vervalst.':
+      'Подписът на произхода е неправилен или е подправен.',
+  'Herkomst niet hier te controleren': 'Произходът не може да се провери тук',
+  'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
+      'Подписът е налице, но не може да се преизчисли тук — проверете го спрямо оригиналния `.md` файл.',
   'Bestaande identiteit vervangen?':
       'Да се замени ли съществуващата самоличност?',
   'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
