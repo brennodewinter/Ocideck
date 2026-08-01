@@ -38,6 +38,58 @@ void main() {
       expect(pages.length, greaterThan(1));
     });
 
+    test('a realistic finding uses three useful pages', () {
+      final description = 'Beschrijving: ${_lorem(8)}';
+      final confirmation = 'Bevestiging: ${_lorem(8)}';
+      final impact = 'Impact: ${_lorem(8)}';
+      final recommendation = 'Aanbeveling: ${_lorem(8)}';
+      final spec = FindingSpec(
+        heading: heading,
+        scopeObject: 'https://app.voorbeeld/login',
+        cvssVector: vector,
+        cweId: 89,
+        description: description,
+        confirmation: confirmation,
+        impact: impact,
+        recommendation: recommendation,
+      );
+
+      final pages = paginateFinding(spec);
+
+      expect(pages, hasLength(3));
+      expect(pages[0].description, description);
+      expect(pages[0].confirmation, isEmpty);
+      expect(pages[0].impact, isEmpty);
+      expect(pages[0].recommendation, isEmpty);
+      expect(pages[1].description, isEmpty);
+      expect(pages[1].confirmation, confirmation);
+      expect(pages[1].impact, impact);
+      expect(pages[1].recommendation, isEmpty);
+      expect(pages[2].description, isEmpty);
+      expect(pages[2].confirmation, isEmpty);
+      expect(pages[2].impact, isEmpty);
+      expect(pages[2].recommendation, recommendation);
+
+      // Reconstruct the authored section stream from the rendered pages. This
+      // makes the test fail if a section is dropped, duplicated or reordered,
+      // even when the page count and non-empty checks still happen to pass.
+      final renderedSections = [
+        for (final page in pages)
+          ...[
+            page.description,
+            page.confirmation,
+            page.impact,
+            page.recommendation,
+          ].where((section) => section.isNotEmpty),
+      ];
+      expect(renderedSections, [
+        description,
+        confirmation,
+        impact,
+        recommendation,
+      ]);
+    });
+
     test('a finding stays single until it would shrink past the scale floor', () {
       // The header card alone already fills most of a slide, so "fits one page"
       // means header + a short section that still renders at ≥0.70 width. That
@@ -51,41 +103,43 @@ void main() {
       expect(paginateFinding(big).length, greaterThan(1));
     });
 
-    test('an overflowing finding gets a header-only first page', () {
-      // The header card is taller than a slide, so nothing shares page 1 with
-      // it: page 1 carries the header (and its meta), the sections start on
-      // page 2. Without this the header + first section overflowed together and
-      // the whole page scaled down.
-      final pages = paginateFinding(bigFinding());
-      expect(pages.first.description, isEmpty);
+    test('an overflowing finding uses the room below its compact header', () {
+      final spec = bigFinding().copyWith(description: _lorem(8));
+      final pages = paginateFinding(spec);
+
+      expect(pages.first.description, isNotEmpty);
       expect(pages.first.confirmation, isEmpty);
-      expect(pages.first.impact, isEmpty);
-      expect(pages.first.recommendation, isEmpty);
-      // The meta still rides on page 1.
       expect(pages.first.scopeObject, isNotEmpty);
       expect(pages.first.cvssVector, isNotEmpty);
-      // Page 2 onward carries the sections.
-      expect(pages[1].description, isNotEmpty);
     });
 
     test('a paginated page serialises only its own section heading', () {
       // The render markdown must not carry the blanked sections' `##` headings:
       // the Marp/HTML export prints Markdown verbatim (the Flutter preview skips
       // empty `##` blocks, so present/PDF are fine either way).
-      final pages = paginateFinding(bigFinding());
-      final headingRe = RegExp(r'^## ', multiLine: true);
-      // Header-only first page: no section heading at all.
-      expect(
-        headingRe.allMatches(pages.first.toMarkdown(omitEmptySections: true)),
-        isEmpty,
+      final pages = paginateFinding(
+        bigFinding().copyWith(
+          description: _lorem(8),
+          confirmation: _lorem(8),
+          impact: _lorem(8),
+          recommendation: _lorem(8),
+        ),
       );
-      // Each continuation page: exactly the one section it carries.
+      final headingRe = RegExp(r'^## ', multiLine: true);
+      // Page 1 carries the first section below the compact header.
+      expect(
+        headingRe
+            .allMatches(pages.first.toMarkdown(omitEmptySections: true))
+            .length,
+        1,
+      );
+      // Continuation pages carry one or more complete sections.
       for (final page in pages.skip(1)) {
         final md = page.toMarkdown(omitEmptySections: true);
         expect(
           headingRe.allMatches(md).length,
-          1,
-          reason: 'one section heading expected, got:\n$md',
+          greaterThanOrEqualTo(1),
+          reason: 'at least one section heading expected, got:\n$md',
         );
       }
     });
