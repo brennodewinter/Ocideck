@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 void main() {
@@ -260,6 +261,54 @@ void main() {
           child: SizedBox(
             width: 640,
             child: SlidePreviewWidget(slide: slide, cockpitColorScheme: scheme),
+          ),
+        ),
+      ),
+    );
+
+    expect(tester.takeException(), isNull);
+    expect(find.byType(SlidePreviewWidget), findsOneWidget);
+  });
+
+  test('cockpitPaletteFor picks the instrument palette by slide brightness', () {
+    // A light slide gets the ivory-faced instrument, a dark slide the black
+    // one — so the authentic cockpit follows the theme instead of forcing dark.
+    expect(
+      AppTheme.cockpitPaletteFor(const Color(0xFFFFFFFF)),
+      AppTheme.cockpitLight,
+    );
+    expect(
+      AppTheme.cockpitPaletteFor(const Color(0xFFF5F5F5)),
+      AppTheme.cockpitLight,
+    );
+    expect(
+      AppTheme.cockpitPaletteFor(const Color(0xFF0F172A)),
+      AppTheme.cockpitDark,
+    );
+    expect(
+      AppTheme.cockpitPaletteFor(const Color(0xFF000000)),
+      AppTheme.cockpitDark,
+    );
+  });
+
+  testWidgets('authentic cockpit renders on a dark slide (dark palette path)', (
+    tester,
+  ) async {
+    final slide = Slide.create(
+      SlideType.cockpit,
+    ).copyWith(customMarkdown: CockpitSpec.samplePreset().toBlock());
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Center(
+          child: SizedBox(
+            width: 640,
+            child: SlidePreviewWidget(
+              slide: slide,
+              themeProfile: const ThemeProfile(
+                slideBackgroundColor: '#0F172A',
+                textColor: '#E5E7EB',
+              ),
+            ),
           ),
         ),
       ),
