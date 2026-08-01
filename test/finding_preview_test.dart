@@ -14,7 +14,7 @@ const _headerBody =
     '\n'
     '**Scope object:** `https://app.client.example/login`\n'
     '**CVSS 4.0:** 9.3 (Critical) · '
-    '`CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N`\n'
+    '`CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N`\n'
     '**CWE:** [CWE-89 — Improper Neutralization of SQL]'
     '(https://cwe.mitre.org/data/definitions/89.html)\n'
     '**CVE:** [CVE-2024-1234](https://nvd.nist.gov/vuln/detail/CVE-2024-1234)\n'
@@ -82,7 +82,14 @@ void main() {
     await tester.pump();
 
     expect(tester.takeException(), isNull);
-    // Base score is still shown (labelled), plus a CIA-weighted context score.
+    // De contextkaart toont de gewogen score als primaire waarde; de
+    // oorspronkelijke basisscore blijft daarnaast transparant zichtbaar.
+    expect(
+      find.byKey(const ValueKey('finding-cvss-score-card')),
+      findsOneWidget,
+    );
+    expect(find.text('8.9'), findsOneWidget);
+    expect(find.text('High'), findsOneWidget);
     expect(find.textContaining('Basis 9.3'), findsOneWidget);
     expect(find.textContaining('Context'), findsOneWidget);
   });
@@ -128,6 +135,7 @@ void main() {
 
     expect(tester.takeException(), isNull);
     expect(find.text('CVSS'), findsNothing);
+    expect(find.byKey(const ValueKey('finding-cvss-score-card')), findsNothing);
   });
 
   testWidgets('a finding linked to a test shows the test id chip (#8)', (
