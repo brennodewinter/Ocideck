@@ -1774,6 +1774,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
+      'D Bildbibliothek isch z gross; es wärde nume die nöischte Bilder azeigt.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'Das Paket isch z gross (maximal 512 MB). Susch cha OciDeck s nachhär nüme öffne. Bruuch weniger oder chlinneri Bilder, Videos oder Audiodateie.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':

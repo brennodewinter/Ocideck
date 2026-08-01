@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
 import '../utils/atomic_file.dart';
+import '../utils/library_scan_limits.dart';
 import '../utils/log.dart';
 
 /// Vindt en herschrijft afbeeldingsverwijzingen (`![…](pad)`) in
@@ -18,13 +19,10 @@ class ImageReferenceService {
     '.dart_tool',
   };
 
-  /// Diepte-plafond voor de walk: praktisch onbeperkt voor echte mappen, maar
-  /// een harde bovengrens tegen pathologische bomen.
-  static const _maxDepth = 32;
-
-  /// Bovengrens op het aantal gevonden `.md`-bestanden — een vangnet zodat een
-  /// extreem grote map de dedupe-/verwijzingsactie niet laat vastlopen.
-  static const _maxFiles = 20000;
+  /// Diepte- en aantalsplafond voor de walk — gedeeld met de afbeeldingskiezer
+  /// ([ImageLibraryScanner]) zodat beide een grote map even hard begrenzen.
+  static const _maxDepth = kLibraryScanMaxDepth;
+  static const _maxFiles = kLibraryScanMaxFiles;
 
   /// Markdown-afbeelding: `![alt of bg-directive](pad)`.
   static final _imageRef = RegExp(r'!\[([^\]]*)\]\(([^)\n]+)\)');

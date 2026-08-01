@@ -1762,6 +1762,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
+      'Pildikogu on liiga suur; kuvatakse ainult uusimad pildid.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'See pakett on liiga suur (kõige rohkem 512 MB). Muidu ei saa OciDeck seda hiljem enam avada. Kasuta vähem või väiksemaid pilte, videoid või helifaile.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':

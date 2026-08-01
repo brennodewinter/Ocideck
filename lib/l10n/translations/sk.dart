@@ -1778,6 +1778,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
+      'Knižnica obrázkov je príliš veľká; zobrazujú sa iba najnovšie obrázky.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'Tento balík je príliš veľký (najviac 512 MB). Inak ho OciDeck neskôr nebude môcť otvoriť. Použite menej alebo menšie obrázky, videá alebo zvukové súbory.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':

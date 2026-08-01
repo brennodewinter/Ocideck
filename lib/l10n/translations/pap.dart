@@ -730,6 +730,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
+      'E biblioteka di imágen ta muchu grandi; solamente e imágennan mas nobo ta wòrdu mustrá.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'E paket aki ta muchu grandi (máksimo 512 MB). Sino OciDeck lo no por hib’é despues. Usa ménos òf mas chikí imágen, video òf archivo di odio.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':

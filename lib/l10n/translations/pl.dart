@@ -1783,6 +1783,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
+      'Biblioteka obrazów jest za duża; wyświetlane są tylko najnowsze obrazy.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'Ten pakiet jest za duży (maksymalnie 512 MB). W przeciwnym razie OciDeck nie będzie mógł go później otworzyć. Użyj mniejszej liczby lub mniejszych obrazów, filmów lub plików audio.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':

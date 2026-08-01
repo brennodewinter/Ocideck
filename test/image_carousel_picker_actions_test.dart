@@ -222,6 +222,45 @@ void main() {
     expect(find.byType(ImageCarouselPicker), findsNothing);
   });
 
+  testWidgets('een onleesbare submap toont de "onvolledig"-melding', (
+    tester,
+  ) async {
+    // Een submap zonder leesrecht laat de scan struikelen: `result.failed`
+    // wordt waar en de kiezer waarschuwt dat de lijst onvolledig kan zijn.
+    final locked = Directory('${tempDir.path}/locked')..createSync();
+    Process.runSync('chmod', ['000', locked.path]);
+    addTearDown(() => Process.runSync('chmod', ['755', locked.path]));
+
+    await tester.binding.setSurfaceSize(const Size(1400, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.runAsync(() async {
+      await tester.pumpWidget(
+        ProviderScope(
+          child: MaterialApp(
+            home: Scaffold(
+              body: ImageCarouselPicker(
+                searchPaths: [tempDir.path],
+                captionService: CaptionService(),
+                descriptionService: DescriptionService(),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    await pumpUntil(
+      tester,
+      () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
+      reason: 'de mapscan van de afbeeldingkiezer bleef laden',
+    );
+    clearLayoutNoise(tester);
+    await settle(tester);
+
+    expect(find.byType(ImageCarouselPicker), findsOneWidget);
+    expect(find.byType(ErrorWidget), findsNothing);
+    expect(find.byType(SnackBar), findsOneWidget);
+  });
+
   testWidgets('Sluiten-knop sluit de dialoog zonder resultaat', (tester) async {
     await pumpPicker(tester);
 
