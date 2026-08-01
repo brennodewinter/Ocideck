@@ -92,6 +92,23 @@ void main() {
     expect(embeddedGif.bytes, gif);
   });
 
+  test('een GIF met een reusachtig canvas wordt niet ingesloten (#1044)', () {
+    // Een geldig, maar minuscuul GIF-bestand kan een logisch scherm van
+    // 30000×30000 declareren. Voorheen ging een GIF ongewijzigd mee vóór de
+    // dimensieprobe, zodat dit de decodeerbomgrens omzeilde en de ontvanger bij
+    // het openen gigabytes per frame kostte.
+    const w = 30000; // 0x7530
+    final oversized = Uint8List.fromList([
+      0x47, 0x49, 0x46, 0x38, 0x39, 0x61, // "GIF89a"
+      w & 0xff, (w >> 8) & 0xff, // logische breedte, little-endian
+      w & 0xff, (w >> 8) & 0xff, // logische hoogte, little-endian
+      0x00, 0x00, 0x00, // packed (geen GCT), achtergrond, aspect
+    ]);
+    // De probe moet het gedeclareerde canvas zien, niet de bestandsgrootte.
+    expect(oversized.length, lessThan(64));
+    expect(encodeForHtmlEmbed(oversized, 'bom.gif'), isNull);
+  });
+
   test('de EXIF van een foto reist niet mee naar de ontvanger', () {
     // Ruwe cameravorm insluiten zou de GPS-locatie, het tijdstip en het
     // serienummer van het toestel meesturen naar iedereen die het rapport
