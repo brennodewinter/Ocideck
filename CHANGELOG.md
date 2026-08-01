@@ -193,6 +193,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- Prestaties: het opruimen van dubbele afbeeldingen schaalde als een product.
+  `countReferences` vergeleek iedere gevonden verwijzing met ieder doelpad, en
+  het toepassen las voor iedere te verwijderen kopie opnieuw elk deckbestand.
+  Bij veel duplicaten en veel decks liep dat op tot honderden miljoenen
+  vergelijkingen of volledige decklezingen. De telling gebruikt nu één canonieke
+  lookup-map, en het toepassen bouwt één replacement-map en leest/schrijft elk
+  deckbestand hooguit één keer (`replaceReferencesMulti`), met behoud van
+  relatieve POSIX-paden en atomair schrijven — O(decks + verwijzingen + doelen)
+  in plaats van het product (#1052).
 - Prestaties: de afbeeldingskiezer doorzocht de zoekmappen onbegrensd recursief,
   bewaarde alle paden, deed per bestand een synchrone `stat` op de UI-isolate en
   sorteerde alles — een grote of gemounte bibliotheek met honderdduizenden
