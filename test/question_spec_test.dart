@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/question.dart';
 
+import 'support/question_answer_limit_fixture.dart';
+
 void main() {
   group('QuestionAnswer', () {
     test('round-trips through JSON and copyWith', () {
@@ -96,6 +98,35 @@ void main() {
         QuestionSpec.parse('{"statementIsTrue":false}').statementIsTrue,
         isFalse,
       );
+    });
+
+    test('accepts exactly eight answers', () {
+      final spec = QuestionSpec.parse(questionBlockWithAnswers(8));
+
+      expect(spec.hasValidAnswerCount, isTrue);
+      expect(spec.sourceAnswerCount, 8);
+      expect(spec.answers, hasLength(8));
+    });
+
+    test('rejects a ninth answer without changing the source', () {
+      final source = questionBlockWithAnswers(9);
+      final spec = QuestionSpec.parse(source);
+
+      expect(spec.hasValidAnswerCount, isFalse);
+      expect(spec.sourceAnswerCount, 9);
+      expect(spec.answers, isEmpty);
+      expect(spec.isPresentable, isFalse);
+      expect(spec.toBlock(), source);
+    });
+
+    test('does not materialise the 10,000-answer regression fixture', () {
+      final source = questionBlockWithAnswers(10000);
+      final spec = QuestionSpec.parse(source);
+
+      expect(spec.hasValidAnswerCount, isFalse);
+      expect(spec.sourceAnswerCount, 10000);
+      expect(spec.answers, isEmpty);
+      expect(spec.toBlock(), source);
     });
   });
 

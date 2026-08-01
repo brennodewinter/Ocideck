@@ -18,6 +18,7 @@ import 'package:ocideck/services/miauw_codec.dart';
 import 'package:ocideck/services/seal_codec.dart';
 
 import 'slide_fixtures.dart';
+import 'support/question_answer_limit_fixture.dart';
 
 /// Serialize a single slide to markdown and parse it straight back.
 Slide _roundTrip(Slide slide) {
@@ -934,6 +935,21 @@ void main() {
       expect(parsed.optionCount, 3);
       expect(parsed.timeLimitSeconds, 20);
       expect(parsed.onWrong, QuestionOnWrong.lockAndContinue);
+    });
+
+    test('oversized question keeps its complete source on open and save', () {
+      final source = questionBlockWithAnswers(9);
+      final out = _roundTrip(
+        Slide.create(
+          SlideType.question,
+        ).copyWith(title: 'Handmatig', customMarkdown: source),
+      );
+
+      expect(out.customMarkdown, source);
+      final parsed = QuestionSpec.parse(out.customMarkdown);
+      expect(parsed.hasValidAnswerCount, isFalse);
+      expect(parsed.sourceAnswerCount, 9);
+      expect(parsed.answers, isEmpty);
     });
 
     test('true/false question keeps kind and statement value', () {

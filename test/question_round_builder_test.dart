@@ -4,6 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/question.dart';
 import 'package:ocideck/services/question_round_builder.dart';
 
+import 'support/question_answer_limit_fixture.dart';
+
 /// De vraagronde-trekking is uit `_FullscreenPresenterState` gehaald naar
 /// [QuestionRoundBuilder] — pure rekenkunde over het model, dus hier zonder een
 /// presenter te pompen te toetsen. Een vaste [math.Random] maakt de trekking
@@ -116,6 +118,21 @@ void main() {
           ],
         ),
       );
+      expect(view.answerable, isFalse);
+    });
+
+    test('exactly eight answers all reach the presentation round', () {
+      final view = draw(QuestionSpec.parse(questionBlockWithAnswers(8)));
+
+      expect(view.options, hasLength(8));
+      expect(view.answerable, isTrue);
+    });
+
+    test('an oversized pool builds no presentation options', () {
+      final view = draw(QuestionSpec.parse(questionBlockWithAnswers(9)));
+
+      expect(view.options, isEmpty);
+      expect(view.correctIndices, isEmpty);
       expect(view.answerable, isFalse);
     });
   });
