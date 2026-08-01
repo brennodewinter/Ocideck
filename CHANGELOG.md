@@ -209,6 +209,13 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Samenwerken (Matrix): een account zonder apparaat-id (`deviceId`) gold ten
+  onrechte als geconfigureerd. Omdat de sleuteluitwisseling de device-id als
+  state-key en als bestemming voor de to-device-keyshares gebruikt, kon een
+  host/join dan starten terwijl de mede-auteur nooit een sleutel kreeg en bleef
+  wachten. `MatrixServer.isConfigured` eist nu ook een niet-lege device-id,
+  waardoor de client-provider, de sessie en de samenwerkingsknoppen zo'n account
+  niet meer als bruikbaar aanmerken (#1043).
 - Beveiliging/geheugen: de mappenscan (`scanPresentations`) las ieder
   markdownbestand eerst volledig met `readAsString` en gaf de string daarna als
   `content` aan `openDeck`, dat in dat pad de 32 MiB-bestandsgrens oversloeg. Eén
