@@ -32,6 +32,14 @@
 > `CollabTransport`/Matrix session defined here and do not relax this document's
 > P4 E2EE invariant.
 
+> Native-media sibling: [`NATIVE_CALLS.md`](NATIVE_CALLS.md) commits and specifies the
+> **fully-native** call route that §7 and §7.1 leave open — one backend-neutral call
+> interface with Jitsi and MatrixRTC as adapters over a shared `flutter_webrtc` core,
+> and the observation that a single XMPP spine can carry calls *and* this document's
+> data plane. It is gated on a chain review
+> ([`assurance/ketenkeuring-flutter-webrtc.md`](../../assurance/ketenkeuring-flutter-webrtc.md))
+> and a maintainer spine decision.
+
 > **Phase-1 transport update (2026-07-31).** §6 originally proposed the famedly
 > **`matrix`** Dart SDK. The chain-review turned that down (AGPL → de-facto
 > re-licence, #976). The foundation instead chose a **pure-Dart route** and it is
@@ -628,7 +636,7 @@ about the other.
 | Cisco Webex | Candidate through the Meetings Web SDK and Service App guest identity | Possible only within Webex's licensed service model | Browser SDK bridge; server-issued guest token; capability-gated UI | Spike required |
 | Pexip Infinity | Strong candidate for cooperating enterprise/government deployments | Yes, on a configured Infinity deployment | Official Infinity web packages expose local, remote and presentation streams plus conference signals | High-value spike |
 | Zoom Meetings | Candidate through Meeting SDK; external-account meetings require Zoom review and attributed authorisation under current policy | Possible within the app/service account model | Web Meeting SDK plus signature service; do not promise arbitrary links before approval | Policy spike required |
-| Jitsi Meet | Strong candidate for public or cooperating deployments | Yes, public, managed or self-hosted | Official IFrame API for the first slice; evaluate `lib-jitsi-meet` only for a fully native OciDeck layout | First proof of concept |
+| Jitsi Meet | Strong candidate for public or cooperating deployments | Yes, public, managed or self-hosted | Fully native OciDeck layout (`lib-jitsi-meet` signalling in Dart + `flutter_webrtc`), designed in [`NATIVE_CALLS.md`](NATIVE_CALLS.md) | Native design (`NATIVE_CALLS.md`); gated on chain review + spine decision |
 | BigBlueButton | Candidate when the operator supplies a valid join flow; arbitrary third-party server secrets are unavailable | Yes, on a cooperating/self-hosted server | Signed server-side join URL; redirect/embed official HTML5 client before custom media work | Spike required |
 | Nextcloud Talk | Candidate for public guest conversations and cooperating instances | Yes, on a configured Nextcloud instance | Talk participant/signalling APIs or a constrained official-client embed | Research |
 | OpenTalk | Candidate for a known SaaS or self-hosted deployment | Yes | Controller REST API plus meeting signalling; optional SIP component stays a separate capability | Sovereign-hosting candidate |
