@@ -223,6 +223,14 @@ in Dutch, and it keeps growing on `main` between releases.
   Elke client krijgt nu een unieke sessie-nonce (proces-teller plus wandklok) in
   het transactie-id, zodat automatische ids niet botsen over levenscycli heen;
   een expliciete `txnId` (de retry-weg) blijft idempotent (#1042).
+- Samenwerken (Matrix): meerdere op's uit één deckwijziging werden niet
+  geserialiseerd verzonden. Doordat zowel het verzegelen als de HTTP-PUT
+  asynchroon zijn, kon versie 2 vóór versie 1 op de homeserver belanden; een
+  volger accepteert alleen `versie + 1` en liet versie 2 dan definitief vallen,
+  waarna de decks divergeerden. De relay-transport serialiseert uitgaande sends
+  nu via een verzendketen (zoals de WebDAV-append-keten), zodat de aanmaak-/
+  versievolgorde behouden blijft; een verzendfout wordt gelogd en breekt de
+  keten voor latere op's niet (#1040).
 - Beveiliging/geheugen: de mappenscan (`scanPresentations`) las ieder
   markdownbestand eerst volledig met `readAsString` en gaf de string daarna als
   `content` aan `openDeck`, dat in dat pad de 32 MiB-bestandsgrens oversloeg. Eén

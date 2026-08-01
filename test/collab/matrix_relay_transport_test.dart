@@ -8,6 +8,7 @@
 // loopback, so the drive is explicit `syncOnce()` calls, exactly as the WebDAV
 // transport tests drive `poll()`.
 
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -27,6 +28,7 @@ void main() {
   late _Party owner;
   late _Party peer;
   late Slide slide;
+  late _GatingTransport ownerHttp;
 
   setUp(() async {
     hs = FakeHomeserver();
@@ -46,6 +48,10 @@ void main() {
     final directory = {'owner': ownerPub, 'peer': peerPub};
     Future<DevicePublicKeys?> resolve(String id) async => directory[id];
 
+    // The owner's egress is wrapped so a test can hold its first op PUT and
+    // prove the send chain keeps later ops behind it. Inert until armed, so
+    // every other test behaves exactly as before.
+    ownerHttp = _GatingTransport(hs);
     owner = await _Party.create(
       hs,
       'owner',
@@ -54,6 +60,7 @@ void main() {
       room,
       resolve,
       isAuthority: true,
+      httpTransport: ownerHttp,
     );
     peer = await _Party.create(
       hs,
@@ -187,6 +194,51 @@ void main() {
       expect(peer.session.version, 1);
     },
   );
+
+  test(
+    'overlapping authority sends reach the follower in version order (#1040)',
+    () async {
+      // Two authority edits in quick succession. `submit` commits synchronously
+      // for the authority, so both authoritative ops (v1 then v2) are handed to
+      // the transport before either PUT completes — the overlap the bug needs.
+      // The first op's PUT is held; without the serial send chain the second
+      // op's PUT would reach the room first, the follower would drop v2 (it only
+      // accepts version + 1) and land on v1 forever.
+      ownerHttp.holdFirstOpSend();
+      unawaited(
+        owner.session.submit(
+          SetSlideField(
+            version: 0,
+            authorId: 'owner',
+            slideId: slide.id,
+            field: SlideField.title,
+            value: 'first',
+          ),
+        ),
+      );
+      unawaited(
+        owner.session.submit(
+          SetSlideField(
+            version: 0,
+            authorId: 'owner',
+            slideId: slide.id,
+            field: SlideField.title,
+            value: 'second',
+          ),
+        ),
+      );
+      await _settle();
+      // v1's PUT is still parked; v2 must be queued behind it, not already sent.
+      ownerHttp.releaseFirstOpSend();
+      await _settle();
+
+      await peer.transport.syncOnce();
+      await _settle();
+
+      expect(peer.session.version, 2);
+      expect(peer.session.deck.slides.single.title, 'second');
+    },
+  );
 }
 
 Deck _deckWith(Slide s) => Deck(title: 'deck', slides: [s]);
@@ -228,9 +280,10 @@ class _Party {
     String room,
     PeerResolver resolve, {
     required bool isAuthority,
+    MatrixHttpTransport? httpTransport,
   }) async {
     final client = MatrixClient(
-      transport: hs,
+      transport: httpTransport ?? hs,
       homeserver: Uri.parse('https://hs.example'),
     );
     await client.login(user: user, password: password);
@@ -252,4 +305,38 @@ class _Party {
   }
 
   Future<void> dispose() => session.dispose(); // disposes the transport too
+}
+
+/// Wraps a homeserver transport and can park the *first* op-send PUT until
+/// released, so a test can force two overlapping sends to race at the egress.
+/// Inert until [holdFirstOpSend] is called; everything else is passed straight
+/// through, so it is invisible to the other tests.
+class _GatingTransport implements MatrixHttpTransport {
+  _GatingTransport(this._inner);
+
+  final MatrixHttpTransport _inner;
+  Completer<void>? _gate;
+  var _opSends = 0;
+
+  void holdFirstOpSend() => _gate = Completer<void>();
+  void releaseFirstOpSend() {
+    if (_gate?.isCompleted == false) _gate!.complete();
+  }
+
+  @override
+  Future<MatrixHttpResponse> send({
+    required String method,
+    required Uri url,
+    Map<String, String> headers = const {},
+    String? body,
+  }) async {
+    final isOpSend =
+        url.pathSegments.contains('send') &&
+        url.pathSegments.contains(MatrixRelayTransport.opEventType);
+    if (isOpSend && _gate != null) {
+      _opSends++;
+      if (_opSends == 1) await _gate!.future;
+    }
+    return _inner.send(method: method, url: url, headers: headers, body: body);
+  }
 }
