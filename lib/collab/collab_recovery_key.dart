@@ -66,8 +66,9 @@ String encodeRecoveryKey(List<int> ed25519Seed, List<int> x25519Seed) {
 /// caller never writes a half-valid identity.
 RecoveredSeeds decodeRecoveryKey(String input) {
   final framed = _base32Decode(input);
-  if (framed.length != 67)
+  if (framed.length != 67) {
     throw const RecoveryKeyException(RecoveryKeyError.format);
+  }
   final payload = framed.sublist(0, 65);
   final crc = (framed[65] << 8) | framed[66];
   if (crc != _crc16(payload)) {
