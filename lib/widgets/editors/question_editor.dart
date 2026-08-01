@@ -52,25 +52,31 @@ class _QuestionEditorState extends State<QuestionEditor> {
   late QuestionOnWrong _onWrong;
   late QuestionKind _kind;
   late bool _statementIsTrue;
+  late final bool _hasValidAnswerCount;
 
   @override
   void initState() {
     super.initState();
     final spec = QuestionSpec.parse(widget.slide.customMarkdown);
+    _hasValidAnswerCount = spec.hasValidAnswerCount;
     _title = TextEditingController(text: widget.slide.title);
-    _title.addListener(_emit);
     _prompt = TextEditingController(text: spec.prompt);
-    _prompt.addListener(_emit);
     _timeLimit = TextEditingController(
       text: spec.timeLimitSeconds > 0 ? '${spec.timeLimitSeconds}' : '',
     );
-    _timeLimit.addListener(_emit);
+    if (_hasValidAnswerCount) {
+      _title.addListener(_emit);
+      _prompt.addListener(_emit);
+      _timeLimit.addListener(_emit);
+    }
     _optionCount = spec.optionCount;
     _onWrong = spec.onWrong;
     _kind = spec.kind;
     _statementIsTrue = spec.statementIsTrue;
     _similarity = spec.similarityThreshold;
-    final answers = spec.answers.isEmpty
+    final answers = !_hasValidAnswerCount
+        ? const <QuestionAnswer>[]
+        : spec.answers.isEmpty
         ? [const QuestionAnswer()]
         : spec.answers;
     _answers = answers.map((a) => _makeCtrl(a.text)).toList();
@@ -117,6 +123,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
   }
 
   void _addAnswer() {
+    if (_answers.length >= questionMaxAnswerCount) return;
     setState(() {
       _answers.add(_makeCtrl(''));
       _correct.add(false);
@@ -170,6 +177,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    if (!_hasValidAnswerCount) return _invalidAnswerCountNotice(l10n);
     final isTrueFalse = _kind == QuestionKind.trueFalse;
     final isMulti = _kind == QuestionKind.multipleCorrect;
     final isOrdering = _kind == QuestionKind.ordering;
@@ -311,6 +319,46 @@ class _QuestionEditorState extends State<QuestionEditor> {
     );
   }
 
+  Widget _invalidAnswerCountNotice(AppLocalizations l10n) => Center(
+    child: Padding(
+      padding: const EdgeInsets.all(24),
+      child: Container(
+        key: const Key('invalid-question-answer-count'),
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: AppTheme.severityCritical.withValues(alpha: 0.08),
+          border: Border.all(color: AppTheme.severityCritical),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.error_outline,
+              color: AppTheme.severityCritical,
+              size: 32,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              l10n.d('Ongeldige vraag'),
+              style: const TextStyle(
+                color: AppTheme.severityCritical,
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              '${l10n.d('Maximaal aantal items')}: '
+              '$questionMaxAnswerCount · ${l10n.d('Antwoorden')}',
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+
   List<Widget> _answersSection(
     AppLocalizations l10n, {
     required bool isMulti,
@@ -337,7 +385,9 @@ class _QuestionEditorState extends State<QuestionEditor> {
       Align(
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
-          onPressed: _addAnswer,
+          onPressed: _answers.length < questionMaxAnswerCount
+              ? _addAnswer
+              : null,
           icon: const Icon(Icons.add, size: 16),
           label: Text(l10n.d('Antwoord toevoegen')),
         ),
@@ -388,7 +438,9 @@ class _QuestionEditorState extends State<QuestionEditor> {
       Align(
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
-          onPressed: _addAnswer,
+          onPressed: _answers.length < questionMaxAnswerCount
+              ? _addAnswer
+              : null,
           icon: const Icon(Icons.add, size: 16),
           label: Text(l10n.d('Antwoord toevoegen')),
         ),

@@ -1773,6 +1773,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Ongeldige vraag': 'Neveljavno vprašanje',
   'Realtime samenwerken': 'Sodelovanje v realnem času',
   'Manieren van verbinden': 'Načini povezovanja',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -1787,6 +1787,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Ongeldige vraag': 'Quaestio invalida',
   'Realtime samenwerken': 'Collaboratio tempore reali',
   'Manieren van verbinden': 'Modi coniungendi',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

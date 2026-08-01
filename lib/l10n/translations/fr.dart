@@ -730,6 +730,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Ongeldige vraag': 'Question non valide',
   'Realtime samenwerken': 'Collaboration en temps réel',
   'Manieren van verbinden': 'Moyens de connexion',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

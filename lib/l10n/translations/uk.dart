@@ -1788,6 +1788,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Ongeldige vraag': 'Недійсне запитання',
   'Realtime samenwerken': 'Співпраця в реальному часі',
   'Manieren van verbinden': 'Способи підключення',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

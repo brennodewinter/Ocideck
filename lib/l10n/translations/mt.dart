@@ -1793,6 +1793,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Ongeldige vraag': 'Mistoqsija invalida',
   'Realtime samenwerken': 'Kollaborazzjoni f\'ħin reali',
   'Manieren van verbinden': 'Modi ta\' konnessjoni',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
