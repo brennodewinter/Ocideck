@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import '../utils/atomic_file.dart';
 import '../utils/log.dart';
@@ -187,7 +186,3 @@ class ImageReferenceService {
     );
   }
 }
-
-final imageReferenceServiceProvider = Provider<ImageReferenceService>(
-  (_) => ImageReferenceService(),
-);

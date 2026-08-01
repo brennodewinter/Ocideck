@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:math' as math;
 import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart' show compute;
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../utils/log.dart';
 
 /// Isolate-werkfunctie: md5 per pad. Onleesbare bestanden vallen weg
@@ -127,7 +126,3 @@ class ImageDedupService {
     return merged.join(separator);
   }
 }
-
-final imageDedupServiceProvider = Provider<ImageDedupService>(
-  (_) => ImageDedupService(),
-);
