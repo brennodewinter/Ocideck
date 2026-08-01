@@ -127,8 +127,10 @@ const Map<String, int> fileSizeBaseline = {
   // +1 (#978): the collab_verify_banner import for the device-verification banner.
   // #1053 verplaatste de web-dropafhandeling naar shell_actions.dart; #1078
   // voegde daarna de cockpit-integratie op main toe.
+  // +4 (#1098): imports voor de uitbreidingspoort en het rechtenoverzicht voor
+  // afbeeldingen; het gedrag zelf blijft in losse providers en widgets.
   'lib/widgets/app_shell.dart':
-      835, // +4 (#978 Blok C): imports + part 'provenance_actions'
+      839, // +4 (#978 Blok C): imports + part 'provenance_actions'
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
   // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
   // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped
@@ -177,7 +179,9 @@ const int maxClassLines = 1000;
 /// Een nieuwe regel hier is een bewuste beslissing en hoort een reden te hebben;
 /// het doel is minder en kleinere regels, niet meer.
 const Map<String, int> classSizeBaseline = {
-  'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 5972,
+  // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
+  // modulelijst; de kaart zelf is een losse widget.
+  'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 5973,
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
@@ -209,7 +213,9 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2160,
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
-  'lib/widgets/app_shell.dart#_MainLayoutState': 1449,
+  // +7 (#1098): menu- en dialoogaanroepen voor het rechtenoverzicht; de scan en
+  // beoordeling leven buiten de State in providers en services.
+  'lib/widgets/app_shell.dart#_MainLayoutState': 1456,
   // Bewust verhoogd van 1331 naar 1344: het app-globale Matrix-account
   // (setMatrixAccount + de keychain-getters voor het access-token) spiegelt
   // bewust de bestaande AI- en git-account-setters. Het gedrag staat in de
