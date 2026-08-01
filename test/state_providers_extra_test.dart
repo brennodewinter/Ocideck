@@ -151,8 +151,11 @@ void main() {
   group('TabsNotifier.sweepWebAssets', () {
     tearDown(WebAssetStore.clear);
 
-    String putMem() =>
-        WebAssetStore.put(Uint8List.fromList([1, 2, 3]), name: 'x.png');
+    var nextMemByte = 0;
+    String putMem() => WebAssetStore.put(
+      Uint8List.fromList([nextMemByte++]),
+      name: 'x.png',
+    );
     Slide imageSlide(String memPath) =>
         Slide.create(SlideType.image).copyWith(imagePath: memPath);
     DeckNotifier deckOf(ProviderContainer c) =>

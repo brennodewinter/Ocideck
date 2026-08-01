@@ -53,7 +53,6 @@ import '../services/privacy/privacy_own_identity.dart';
 import '../services/export_bundle.dart';
 import '../services/privacy/privacy_projection.dart';
 import '../services/image_usage.dart';
-import '../services/web_asset_store.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
 import 'mermaid_render_host.dart';
@@ -450,7 +449,20 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
           );
           continue;
         }
-        images.add(WebAssetStore.put(bytes, name: file.name));
+        final outcome = ImageService.storeWebImage(bytes, name: file.name);
+        final path = outcome.path;
+        if (path != null) {
+          images.add(path);
+        } else if (mounted &&
+            outcome.failure == ImageImportFailure.memoryBudgetExceeded) {
+          showErrorSnackBar(
+            ScaffoldMessenger.of(context),
+            context.l10n,
+            context.l10n.d(
+              'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.',
+            ),
+          );
+        }
       }
     }
     if (images.isNotEmpty) _addImagesToActiveDeck(images);

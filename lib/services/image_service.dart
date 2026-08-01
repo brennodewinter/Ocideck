@@ -19,7 +19,13 @@ import 'web_asset_store.dart';
 /// Waarom een afbeelding kiezen/plakken géén pad opleverde. [cancelled] is een
 /// bewuste keuze van de gebruiker (geen melding tonen); de overige redenen
 /// verdienen uitleg in de UI in plaats van een stil mislukken.
-enum ImageImportFailure { cancelled, rejected, noClipboardImage, writeFailed }
+enum ImageImportFailure {
+  cancelled,
+  rejected,
+  noClipboardImage,
+  writeFailed,
+  memoryBudgetExceeded,
+}
 
 /// Uitkomst van een afbeelding kiezen/plakken: een [path] bij succes, anders
 /// een [failure] met de reden.
@@ -54,6 +60,22 @@ class ImageService {
   /// [imageMimeFromBytes] and [mediaMimeFromBytes].
   static const maxImageBytes = 64 * 1024 * 1024; // 64 MiB
   static const maxMediaBytes = 1024 * 1024 * 1024; // 1 GiB
+
+  /// Zet gevalideerde webbytes in de appbrede store en vertaalt een vol
+  /// geheugenbudget naar een uitkomst die de UI gericht kan uitleggen.
+  static ImageImportOutcome storeWebImage(
+    Uint8List bytes, {
+    required String name,
+  }) {
+    try {
+      return ImageImportOutcome.success(WebAssetStore.put(bytes, name: name));
+    } on WebAssetBudgetExceeded catch (e) {
+      logWarning('ImageService.storeWebImage: web asset budget exceeded', e);
+      return const ImageImportOutcome.failed(
+        ImageImportFailure.memoryBudgetExceeded,
+      );
+    }
+  }
 
   /// True when [path] is within the size cap and its leading bytes match a
   /// known raster image signature (PNG/JPEG/GIF/BMP/WebP).
@@ -244,9 +266,7 @@ class ImageService {
         );
         return const ImageImportOutcome.failed(ImageImportFailure.rejected);
       }
-      return ImageImportOutcome.success(
-        WebAssetStore.put(bytes, name: file.name),
-      );
+      return storeWebImage(bytes, name: file.name);
     }
     final result = await FilePicker.pickFiles(
       type: FileType.image,
@@ -394,9 +414,7 @@ class ImageService {
         if (!_looksLikeImage(bytes)) {
           return const ImageImportOutcome.failed(ImageImportFailure.rejected);
         }
-        return ImageImportOutcome.success(
-          WebAssetStore.put(bytes, name: 'geplakt.png'),
-        );
+        return storeWebImage(bytes, name: 'geplakt.png');
       }
       if (projectPath != null && projectPath.isNotEmpty) {
         final imagesDir = Directory(p.join(projectPath, 'images'));

@@ -892,6 +892,9 @@ void reportImageImportFailure(
       'Geen afbeelding op het klembord.',
     ),
     ImageImportFailure.writeFailed => l10n.d('Kon de afbeelding niet opslaan.'),
+    ImageImportFailure.memoryBudgetExceeded => l10n.d(
+      'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.',
+    ),
   };
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
 }

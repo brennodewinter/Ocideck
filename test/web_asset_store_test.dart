@@ -21,7 +21,7 @@ Future<Uint8List> _redPngBytes() async {
 }
 
 void main() {
-  setUp(() => WebAssetStore.overrideTotalBudgetForTest(8));
+  setUp(WebAssetStore.clear);
   tearDown(() {
     WebAssetStore.clear();
     WebAssetStore.overrideTotalBudgetForTest(null);
@@ -38,6 +38,7 @@ void main() {
   });
 
   test('accepteert exact het totaalbudget en weigert de volgende byte', () {
+    WebAssetStore.overrideTotalBudgetForTest(8);
     final exact = WebAssetStore.put(
       Uint8List.fromList([1, 2, 3, 4, 5, 6, 7, 8]),
       name: 'exact.png',
@@ -73,6 +74,7 @@ void main() {
   });
 
   test('een duplicaat past ook wanneer het budget al exact vol is', () {
+    WebAssetStore.overrideTotalBudgetForTest(8);
     final bytes = Uint8List.fromList([1, 2, 3, 4, 5, 6, 7, 8]);
     final first = WebAssetStore.put(bytes, name: 'eerste.png');
 
