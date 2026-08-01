@@ -403,6 +403,3 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     );
   }
 }
-
-/// Alias for the shared markdown editor.
-typedef MarkdownEditor = MarkdownNotesEditor;

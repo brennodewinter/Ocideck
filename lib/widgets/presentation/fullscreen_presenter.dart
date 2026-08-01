@@ -44,7 +44,7 @@ import '../../utils/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart';
 import '../slides/slide_preview.dart';
 import '../dialogs/settings_dialog.dart';
-import '../markdown_notes_editor.dart';
+import '../markdown_editor/markdown_editor.dart';
 import 'annotation_overlay.dart';
 import 'audience_controls_bar.dart';
 import 'audience_window.dart';
