@@ -4,6 +4,8 @@ import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
+import 'support/question_answer_limit_fixture.dart';
+
 Slide _questionSlide(QuestionSpec spec) =>
     Slide(id: 'q', type: SlideType.question, customMarkdown: spec.toBlock());
 
@@ -49,6 +51,27 @@ void main() {
     // the auto-fit (FittedBox) must keep everything on the fixed 16:9 surface.
     expect(tester.takeException(), isNull);
     expect(find.textContaining('Antwoordoptie nummer 8'), findsOneWidget);
+  });
+
+  testWidgets('10,000 answers show one invalid-question notice, not options', (
+    tester,
+  ) async {
+    final slide = Slide(
+      id: 'oversized',
+      type: SlideType.question,
+      customMarkdown: questionBlockWithAnswers(10000),
+    );
+
+    await _pump(tester, slide);
+
+    expect(
+      find.byKey(const Key('invalid-question-answer-count')),
+      findsOneWidget,
+    );
+    expect(find.text('Ongeldige vraag'), findsOneWidget);
+    expect(find.textContaining('Maximaal aantal items: 8'), findsOneWidget);
+    expect(find.textContaining('Antwoord 9999'), findsNothing);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('question with an image fits the narrower text column', (

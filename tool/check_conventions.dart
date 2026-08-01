@@ -221,7 +221,7 @@ const Map<String, int> classSizeBaseline = {
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
   'lib/state/deck_provider.dart#DeckNotifier': 1261,
-  'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1214,
+  'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1122,
   // Procesverbetering: Y-01-UI, type-toolbar, plaklogica en DOE-dialoog zijn
   // naar losse widgets/helpers getild (chart_histogram_limits,

@@ -22,6 +22,107 @@ typedef _VisualColors = ({
   double opacity,
 });
 
+/// A bounded failure surface for a hand-edited question with too many answer
+/// records. Kept outside [_QuestionPreview] so invalid input cannot enter any of
+/// that widget's option collection or text-measurement paths.
+class _InvalidQuestionAnswerCountNotice extends StatelessWidget {
+  final double width;
+  final String font;
+  final ThemeProfile profile;
+
+  const _InvalidQuestionAnswerCountNotice({
+    required this.width,
+    required this.font,
+    required this.profile,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final textColor = AppTheme.parseHexColor(profile.textColor);
+    return Container(
+      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+      alignment: Alignment.center,
+      padding: EdgeInsets.all(width * 0.06),
+      child: Semantics(
+        container: true,
+        label:
+            '${l10n.d('Ongeldige vraag')}. '
+            '${l10n.d('Maximaal aantal items')}: '
+            '$questionMaxAnswerCount. ${l10n.d('Antwoorden')}.',
+        child: Container(
+          key: const Key('invalid-question-answer-count'),
+          padding: EdgeInsets.symmetric(
+            horizontal: width * 0.05,
+            vertical: width * 0.035,
+          ),
+          decoration: BoxDecoration(
+            color: AppTheme.severityCritical.withValues(alpha: 0.08),
+            border: Border.all(
+              color: AppTheme.severityCritical,
+              width: width * 0.003,
+            ),
+            borderRadius: BorderRadius.circular(width * 0.018),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.error_outline,
+                color: AppTheme.severityCritical,
+                size: width * 0.07,
+              ),
+              SizedBox(height: width * 0.015),
+              Text(
+                l10n.d('Ongeldige vraag'),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: font,
+                  fontSize: width * 0.04,
+                  fontWeight: FontWeight.w700,
+                  color: AppTheme.severityCritical,
+                ),
+              ),
+              SizedBox(height: width * 0.008),
+              Text(
+                '${l10n.d('Maximaal aantal items')}: '
+                '$questionMaxAnswerCount · ${l10n.d('Antwoorden')}',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: font,
+                  fontSize: width * 0.026,
+                  color: textColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+Widget _invalidQuestionAnswerCountNotice(
+  double width,
+  String font,
+  ThemeProfile profile,
+) => _InvalidQuestionAnswerCountNotice(
+  width: width,
+  font: font,
+  profile: profile,
+);
+
+bool _questionIsInteractive(
+  bool presentationMode,
+  QuestionView? view,
+  ValueChanged<int>? onAnswerSelected,
+) =>
+    presentationMode &&
+    view != null &&
+    onAnswerSelected != null &&
+    !view.locked &&
+    !view.revealed;
+
 /// Renders a question slide. In the editor (when [view] is null) it shows the
 /// authoring view: the prompt plus every answer with the correct ones marked,
 /// and a hint summarising how it will be presented. During a presentation
@@ -56,15 +157,14 @@ class _QuestionPreview extends StatelessWidget {
   });
 
   bool get _interactive =>
-      presentationMode &&
-      view != null &&
-      onAnswerSelected != null &&
-      !view!.locked &&
-      !view!.revealed;
+      _questionIsInteractive(presentationMode, view, onAnswerSelected);
 
   @override
   Widget build(BuildContext context) {
     final spec = QuestionSpec.parse(slide.customMarkdown);
+    if (!spec.hasValidAnswerCount) {
+      return _invalidQuestionAnswerCountNotice(w, font, profile);
+    }
     final hasImage = slide.imagePath.isNotEmpty;
     final pad = w * 0.06;
 
