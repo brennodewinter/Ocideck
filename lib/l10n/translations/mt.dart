@@ -1797,6 +1797,7 @@ const _dutchSourceAddMt = <String, String>{
   '(dit apparaat)': '(dan l-apparat)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
       'Qabbel il-marka tas-swaba\' ta\' kull apparat permezz ta\' kanal fdat — aqrawha lil xulxin, jew ibgħatha minn triq li tafda. Jekk jaqblu, qed taħdem mal-apparati veri u ħadd ma daħal bejniethom. Jekk ikunu differenti, waqqaf il-kollaborazzjoni.',
+  'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Din mhijiex link tal-istedina valida.',
   'De Matrix-homeserver is niet bereikbaar.':

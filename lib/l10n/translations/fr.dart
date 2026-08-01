@@ -734,6 +734,7 @@ const _dutchSourceAddFr = {
   '(dit apparaat)': '(cet appareil)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
       'Comparez l\'empreinte de chaque appareil via un canal de confiance — lisez-la à voix haute l\'un à l\'autre, ou envoyez-la par une voie en laquelle vous avez confiance. Si elles correspondent, vous travaillez avec les vrais appareils et personne ne s\'est interposé. Si elles diffèrent, rompez la collaboration.',
+  'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Ce n\'est pas un lien d\'invitation valide.',
   'De Matrix-homeserver is niet bereikbaar.':

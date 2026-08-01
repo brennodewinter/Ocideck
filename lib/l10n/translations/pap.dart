@@ -734,6 +734,7 @@ const _dutchSourceAddPap = {
   '(dit apparaat)': '(e aparato aki)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
       'Kompará e wela di dede di kada aparato via un kanal di konfiansa — lesa e na otro, of manda e via un kaminda ku bo ta konfia. Si nan ta igual, bo ta traha ku e aparatonan real i ningun hende no a mete su kurpa meimei. Si nan ta diferente, kòrta e kolaborashon.',
+  'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Esaki no ta un link di invitashon válido.',
   'De Matrix-homeserver is niet bereikbaar.':

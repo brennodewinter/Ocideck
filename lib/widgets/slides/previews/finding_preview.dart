@@ -212,7 +212,9 @@ class _FindingPreview extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              ctxCvss == null ? 'CVSS' : '${context.l10n.d('Context')} CVSS',
+              ctxCvss == null
+                  ? context.l10n.d('CVSS')
+                  : '${context.l10n.d('Context')} ${context.l10n.d('CVSS')}',
               maxLines: 1,
               style: _applyFont(
                 font,

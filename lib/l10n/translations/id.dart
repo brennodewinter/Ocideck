@@ -1775,6 +1775,7 @@ const _dutchSourceAddId = <String, String>{
   '(dit apparaat)': '(perangkat ini)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
       'Bandingkan sidik jari setiap perangkat melalui saluran tepercaya — bacakan satu sama lain, atau kirim lewat jalur yang Anda percaya. Jika cocok, Anda bekerja dengan perangkat asli dan tidak ada yang menyelinap di antaranya. Jika berbeda, akhiri kolaborasi.',
+  'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Ini bukan tautan undangan yang valid.',
   'De Matrix-homeserver is niet bereikbaar.':
