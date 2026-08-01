@@ -220,6 +220,38 @@ void main() {
       expect(r.timeline.length, 1);
     });
 
+    test('two clients on the same token do not collide on automatic ids '
+        '(#1042)', () async {
+      // Simulate an app restart: a second client resumes the *same* stored
+      // access token. Both start their transaction counter at 0, so a bare
+      // `ocideck-0` would make the homeserver treat the second client's first
+      // send as a retry of the first — the new payload silently lost. Automatic
+      // ids must stay unique across the two lifecycles.
+      final token = client.accessToken;
+      final resumed = MatrixClient(
+        transport: hs,
+        homeserver: Uri.parse('https://hs.example'),
+        accessToken: token,
+      );
+
+      final id1 = await client.sendEvent(
+        roomId: '!r:hs.example',
+        type: 'nl.ocideck.op',
+        content: {'v': 1},
+      );
+      final id2 = await resumed.sendEvent(
+        roomId: '!r:hs.example',
+        type: 'nl.ocideck.op',
+        content: {'v': 2},
+      );
+
+      expect(id2, isNot(id1), reason: 'each send must be a distinct event');
+      final r = await client.sync();
+      final payloads = r.timeline.map((e) => e.content['v']).toList();
+      expect(payloads, containsAll(<Object?>[1, 2]));
+      expect(r.timeline.length, 2);
+    });
+
     test('percent-encodes room ids and event types in the path', () async {
       await client.sendEvent(
         roomId: '!weird/room:hs.example',
