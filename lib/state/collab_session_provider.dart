@@ -322,6 +322,16 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
   @visibleForTesting
   Future<void> debugMatrixSyncNow() async => _matrixLaunch?.syncNow();
 
+  /// The devices in the running Matrix session for the verification UI (§4.3):
+  /// this device plus every verified peer, each with its identity-key
+  /// fingerprint. Empty outside a Matrix session.
+  List<CollabParticipant> matrixParticipants() {
+    final launch = _matrixLaunch;
+    final account = _ref.read(matrixAccountProvider);
+    if (launch == null || account == null) return const [];
+    return launch.participants(account.userId);
+  }
+
   /// Map a Matrix launch failure to a machine key the UI localises.
   static String _matrixError(CollabRole role, Object e) {
     if (e is MatrixException) {

@@ -1770,6 +1770,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Deelnemers verifiëren': 'Pārbaudīt dalībniekus',
+  '(dit apparaat)': '(šī ierīce)',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
+      'Salīdziniet katras ierīces nospiedumu pa uzticamu kanālu — nolasiet to viens otram vai nosūtiet pa ceļu, kuram uzticaties. Ja tie sakrīt, jūs strādājat ar īstajām ierīcēm un neviens nav iejaucies. Ja tie atšķiras, pārtrauciet sadarbību.',
   'Dat is geen geldige uitnodigingslink.': 'Šī nav derīga ielūguma saite.',
   'De Matrix-homeserver is niet bereikbaar.':
       'Matrix homeserver nav sasniedzams.',

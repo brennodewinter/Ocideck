@@ -1793,6 +1793,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Deelnemers verifiëren': 'Провери участниците',
+  '(dit apparaat)': '(това устройство)',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
+      'Сравнете отпечатъка на всяко устройство през надежден канал — прочетете си го един на друг или го изпратете по път, на който имате доверие. Ако съвпадат, работите с истинските устройства и никой не се е вмъкнал между вас. Ако се различават, прекъснете сътрудничеството.',
   'Dat is geen geldige uitnodigingslink.':
       'Това не е валидна връзка за покана.',
   'De Matrix-homeserver is niet bereikbaar.': 'Matrix homeserver е недостъпен.',

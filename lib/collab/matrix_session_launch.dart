@@ -19,6 +19,7 @@ import 'dart:async';
 
 import '../models/deck.dart';
 import 'collab_crypto.dart';
+import 'collab_participant.dart';
 import 'collab_session.dart';
 import 'collab_snapshot.dart';
 import 'matrix_client.dart';
@@ -64,6 +65,28 @@ class MatrixCollabLaunch {
   /// once [syncNow] has opened the baseline. The provider awaits this to wire the
   /// deck controller and mark the tab active without polling [isActive].
   Future<CollabSession> get sessionReady => _ready.future;
+
+  /// The devices in this session for the verification UI (§4.3): this device
+  /// first (labelled with [ownUserId]), then every verified peer, each with the
+  /// fingerprint of its identity key to compare out-of-band.
+  List<CollabParticipant> participants(String ownUserId) {
+    final own = keyExchange.ownKeys;
+    return [
+      CollabParticipant(
+        userId: ownUserId,
+        deviceId: own.deviceId,
+        fingerprint: deviceFingerprint(own.identityKey),
+        isSelf: true,
+      ),
+      for (final peer in keyExchange.peers)
+        CollabParticipant(
+          userId: peer.userId,
+          deviceId: peer.keys.deviceId,
+          fingerprint: deviceFingerprint(peer.keys.identityKey),
+          isSelf: false,
+        ),
+    ];
+  }
 
   /// Run one sync round and its side effects: the host keys any newcomer it has
   /// learned; a guest retries a buffered snapshot and, once one opens, starts its

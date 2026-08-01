@@ -1773,6 +1773,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Deelnemers verifiëren': 'Preveri udeležence',
+  '(dit apparaat)': '(ta naprava)',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
+      'Primerjaj prstni odtis vsake naprave prek zaupanja vrednega kanala — preberita si ga med seboj ali ga pošlji po poti, ki ji zaupaš. Če se ujemata, delaš s pravimi napravami in nihče se ni vrinil vmes. Če se razlikujeta, prekini sodelovanje.',
   'Dat is geen geldige uitnodigingslink.':
       'To ni veljavna povezava za povabilo.',
   'De Matrix-homeserver is niet bereikbaar.': 'Homeserver Matrix ni dosegljiv.',

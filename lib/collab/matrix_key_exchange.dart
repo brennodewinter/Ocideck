@@ -61,6 +61,9 @@ class MatrixDeviceDirectory {
 
   /// Every device id currently known — the authority walks this to key newcomers.
   Iterable<String> get knownDevices => _peers.keys;
+
+  /// Every known peer, for the verification UI to list and fingerprint.
+  Iterable<PeerDevice> get peers => _peers.values;
 }
 
 /// Publishes this device's keys, ingests peers', and distributes/installs epoch
@@ -85,6 +88,13 @@ class MatrixKeyExchange {
   final String roomId;
   final MatrixDeviceDirectory directory;
   final DevicePublicKeys _own;
+
+  /// This device's own public keys — the verification UI fingerprints them as the
+  /// "you" entry co-authors compare against.
+  DevicePublicKeys get ownKeys => _own;
+
+  /// Every known peer device, verified into the directory.
+  Iterable<PeerDevice> get peers => directory.peers;
 
   /// Devices this authority has already handed the current epoch key to, so a
   /// newcomer is keyed exactly once per epoch. Reset on [distributeEpoch].

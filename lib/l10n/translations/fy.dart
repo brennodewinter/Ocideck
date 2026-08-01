@@ -731,6 +731,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Deelnemers verifiëren': 'Dielnimmers ferifiearje',
+  '(dit apparaat)': '(dit apparaat)',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
+      'Ferlykje de fingerprint fan elk apparaat fia in fertroud kanaal — lês him inoar foar, of stjoer him lâns in wei dy\'tsto fertrouwst. Komme se oerien, dan wurkesto mei de echte apparaten en hat nimmen dertusken sitten. Wike se ôf, ferbrek dan de gearwurking.',
   'Dat is geen geldige uitnodigingslink.':
       'Dat is gjin jildige útnûgingskeppeling.',
   'De Matrix-homeserver is niet bereikbaar.':

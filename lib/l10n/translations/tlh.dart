@@ -1746,6 +1746,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Deelnemers verifiëren': 'tay\' vumwI\'pu\' tIngu\'',
+  '(dit apparaat)': '(jan vam)',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
+      'Hoch jan nItlhDu\' Segh pat yIrar, voqbogh QIn He yIlo\'. rap chugh, jan teH \'oH \'ej pagh joj \'elpu\'. rapbe\' chugh, tay\' vum yImev.',
   'Dat is geen geldige uitnodigingslink.': 'rI\'ghach link ngeb \'oH.',
   'De Matrix-homeserver is niet bereikbaar.': 'SIchlaHbe\' Matrix homeserver.',
   'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':

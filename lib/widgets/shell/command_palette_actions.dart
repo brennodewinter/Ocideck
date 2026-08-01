@@ -336,6 +336,20 @@ List<PaletteCommand> collabPaletteCommands(
           keywords: const ['invite', 'link', 'copy', 'matrix', 'uitnodiging'],
           onInvoke: () => _copyInvite(context, ref, l10n),
         ),
+      if (session.isMatrix && session.isActive)
+        PaletteCommand(
+          label: l10n.d('Deelnemers verifiëren'),
+          icon: Icons.verified_user_outlined,
+          keywords: const [
+            'verify',
+            'verifiëren',
+            'fingerprint',
+            'vingerafdruk',
+            'matrix',
+            'apparaat',
+          ],
+          onInvoke: () => _verifyParticipants(context, ref, l10n),
+        ),
       PaletteCommand(
         label: l10n.d('Samenwerking verlaten'),
         icon: Icons.link_off,
@@ -417,6 +431,18 @@ Future<void> _beginMatrixCollab(
     SnackBar(content: Text(l10n.d('Verbinden met de samenwerking…'))),
   );
   await notifier.joinMatrix(link);
+}
+
+/// Show the session's devices and their fingerprints for out-of-band comparison.
+void _verifyParticipants(
+  BuildContext context,
+  WidgetRef ref,
+  AppLocalizations l10n,
+) {
+  final participants = ref
+      .read(collabSessionProvider.notifier)
+      .matrixParticipants();
+  showMatrixParticipantsDialog(context, l10n, participants);
 }
 
 /// Copy the current Matrix invite link again (the host may need to re-share it).

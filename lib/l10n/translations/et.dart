@@ -1762,6 +1762,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deelnemers verifiëren': 'Kinnita osalejad',
+  '(dit apparaat)': '(see seade)',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
+      'Võrdle iga seadme sõrmejälge usaldusväärse kanali kaudu — lugege see üksteisele ette või saada see teed pidi, mida usaldad. Kui need kattuvad, töötad päris seadmetega ja keegi pole vahele pugenud. Kui need erinevad, katkesta koostöö.',
   'Dat is geen geldige uitnodigingslink.': 'See ei ole kehtiv kutselink.',
   'De Matrix-homeserver is niet bereikbaar.':
       'Matrixi homeserver ei ole kättesaadav.',

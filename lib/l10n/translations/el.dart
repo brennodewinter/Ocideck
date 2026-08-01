@@ -1798,6 +1798,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Deelnemers verifiëren': 'Επαλήθευση συμμετεχόντων',
+  '(dit apparaat)': '(αυτή η συσκευή)',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
+      'Σύγκρινε το αποτύπωμα κάθε συσκευής μέσω ενός έμπιστου καναλιού — διαβάστε το ο ένας στον άλλον ή στείλ\' το από μια οδό που εμπιστεύεσαι. Αν ταιριάζουν, δουλεύεις με τις πραγματικές συσκευές και κανείς δεν παρεμβλήθηκε. Αν διαφέρουν, διέκοψε τη συνεργασία.',
   'Dat is geen geldige uitnodigingslink.':
       'Αυτός δεν είναι έγκυρος σύνδεσμος πρόσκλησης.',
   'De Matrix-homeserver is niet bereikbaar.':
