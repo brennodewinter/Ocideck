@@ -854,55 +854,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     );
   }
 
-  /// Sign the finalised, saved deck's provenance with the collaboration identity
-  /// (COLLABORATION Phase 2 "Blok C"): a recipient who verified this identity's
-  /// fingerprint can confirm the deck came from its owner. The signature is over
-  /// the saved seal hash, so the deck must be finalised and saved with no pending
-  /// edits; then it is written into `<name>.seal.json` by the save below.
-  Future<void> _signProvenance() async {
-    final l10n = context.l10n;
-    final deckState = ref.read(deckProvider);
-    final deck = deckState.deck;
-    final account = ref.read(matrixAccountProvider);
-    if (deck == null || account == null) return;
-    if (!deck.finalized || deck.sealHash.isEmpty || deckState.isDirty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            l10n.d(
-              'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.',
-            ),
-          ),
-        ),
-      );
-      return;
-    }
-    try {
-      final keys = await loadOrCreateDeviceKeys(
-        secretStore: ref.read(secretStoreProvider),
-        homeserver: account.homeserverUrl,
-        userId: account.userId,
-        deviceId: account.deviceId,
-      );
-      final signed = await signDeckProvenance(deck, keys);
-      if (!mounted) return;
-      ref.read(deckProvider.notifier).applyProvenance(signed.provenance);
-      await _saveDeck();
-      if (!mounted) return;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(l10n.d('Herkomst ondertekend.'))));
-    } catch (e) {
-      logError('signProvenance failed', e);
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(l10n.d('De herkomst kon niet worden ondertekend.')),
-          ),
-        );
-      }
-    }
-  }
+  /// Sign the finalised deck's provenance — delegates to the top-level
+  /// [runProvenanceSigning] (kept off `_MainLayoutState` for the class-size
+  /// ratchet), passing this widget's save path.
+  Future<void> _signProvenance() =>
+      runProvenanceSigning(context, ref, save: _saveDeck);
 
   Future<void> _openProperties() => editPresentationInfo(context, ref);
 
