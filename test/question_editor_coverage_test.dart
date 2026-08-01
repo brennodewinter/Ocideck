@@ -135,7 +135,7 @@ void main() {
   testWidgets('an oversized question is reported without answer editors', (
     tester,
   ) async {
-    final source = questionBlockWithAnswers(9);
+    final source = questionBlockWithAnswers(10000);
     var updates = 0;
     final slide = Slide.create(
       SlideType.question,
