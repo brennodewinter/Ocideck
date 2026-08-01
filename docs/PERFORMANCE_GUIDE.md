@@ -39,6 +39,10 @@ optimisation.
 ## Rendering
 
 - Slides render as native Flutter widgets for preview and presentation.
+- Split-run boundaries and their shared text-fit scale are computed once per
+  slide-list/theme/font revision and weakly cached (`lib/services/split_run.dart`).
+  The slide strip, preview, presenter, audience window and raster export then do
+  constant-time index lookups instead of remeasuring every run member per slide.
 - Charts use the `fl_chart` library; the categorical palette is **10 colours**
   and cycles (`index % 10`) beyond that (`lib/models/chart.dart:10`), and legend
   tiles lay out in **≤ 6 columns × 1–3 rows** (`marp_html_service_charts.dart`, `maxColumns`).

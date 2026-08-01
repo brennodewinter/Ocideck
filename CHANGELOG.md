@@ -191,6 +191,12 @@ in Dutch, and it keeps growing on `main` between releases.
   (bijv. 5000 slides) schaalt dit lineair en vervalt het stack-overflowrisico
   van de oude recursie; single-slide-oppervlakken houden `numberedListStartFor`,
   nu recursievrij (#1050).
+- Prestaties/layout: de grenzen en gedeelde tekstgrootte van een reeks
+  gesplitste bulletslides worden voortaan één keer per deck-, thema- en
+  lettertyperevisie berekend. De slidestrook, hoofdpreview, presentatiemodus,
+  het publieksvenster en PDF/PPTX-rasterexport lezen daarna dezelfde
+  voorberekende index, zodat een reeks niet meer voor iedere slide opnieuw alle
+  pagina's met `TextPainter` meet. Lost #1051 op.
 
 ### Fixed
 
