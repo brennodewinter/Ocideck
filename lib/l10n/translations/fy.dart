@@ -790,6 +790,29 @@ const _dutchSourceAddFy = {
       'It webûnthâld foar ôfbyldingen is fol (maksimaal 256 MB). Bewarje dyn wurk earst as in .ocideck-bestân om gegevensferlies foar te kommen. Brûk dêrnei minder of lytsere ôfbyldingen, slút oare decks of laad opnij sûnder oare decks te iepenjen.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'It webûnthâld foar ôfbyldingen is fol (maksimaal 256 MB). Bewarje dyn wurk as in .ocideck-bestân en laad de side opnij foardatst mear ôfbyldingen tafoegest.',
+  'Afbeeldingsrechten': 'Afbeeldingsrechten',
+  'Afbeeldingsrechten controleren…': 'Afbeeldingsrechten controleren…',
+  'Afdoening': 'Afdoening',
+  'Afdoening vastleggen': 'Afdoening vastleggen',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.',
+  'Geen openstaande aanwijzingen.': 'Geen openstaande aanwijzingen.',
+  'Geldige rechten aangetoond': 'Geldige rechten aangetoond',
+  'Mogelijke auteursrechtelijke risico’s':
+      'Mogelijke auteursrechtelijke risico’s',
+  'Niet gebruiken': 'Niet gebruiken',
+  'Notitie (optioneel)': 'Notitie (optioneel)',
+  'Onterechte signalering': 'Onterechte signalering',
+  'afbeeldingen vragen om beoordeling': 'afbeeldingen vragen om beoordeling',
+  'bestanden konden niet veilig worden beoordeeld':
+      'bestanden konden niet veilig worden beoordeeld',
+  'nieuw gescand': 'nieuw gescand',
   'Realtime samenwerken': 'Realtime gearwurkje',
   'Manieren van verbinden': 'Manieren om te ferbinen',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

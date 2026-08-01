@@ -1828,6 +1828,28 @@ const _dutchSourceAddSv = <String, String>{
       'Webbminnet för bilder är fullt (högst 256 MB). Spara först ditt arbete som en .ocideck-fil för att förhindra dataförlust. Använd sedan färre eller mindre bilder, stäng andra bildspel eller läs in på nytt utan att öppna andra bildspel.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Webbminnet för bilder är fullt (högst 256 MB). Spara arbetet som en .ocideck-fil och läs in sidan igen innan du lägger till fler bilder.',
+  'Afbeeldingsrechten': 'Bildrättigheter',
+  'Afbeeldingsrechten controleren…': 'Kontrollera bildrättigheter...',
+  'Afdoening': 'Lösning',
+  'Afdoening vastleggen': 'Rekorduppgörelse',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Till exempel en faktura, licens eller filreferens',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Kontrollerar bilder lokalt för eventuella upphovsrättsrisker. Nya arkivbilder och hela tillgångspoolen kan skannas; en administratör hanterar varningar. Detta är en varning, inte en juridisk åsikt, och inga bilder kommer att skickas till tredje part.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Bosättningen gick inte att rädda. Skanna om och försök igen.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Detta är en teknisk varning, inte en juridisk åsikt. En administratör granskar instruktionerna.',
+  'Geen openstaande aanwijzingen.': 'Inga enastående ledtrådar.',
+  'Geldige rechten aangetoond': 'Giltiga rättigheter uppvisade',
+  'Mogelijke auteursrechtelijke risico’s': 'Möjliga upphovsrättsliga risker',
+  'Niet gebruiken': 'Använd inte',
+  'Notitie (optioneel)': 'Obs (valfritt)',
+  'Onterechte signalering': 'Felaktig signalering',
+  'afbeeldingen vragen om beoordeling': 'bilder kräver granskning',
+  'bestanden konden niet veilig worden beoordeeld':
+      'filer kunde inte granskas säkert',
+  'nieuw gescand': 'nyskannade',
   'Realtime samenwerken': 'Samarbete i realtid',
   'Manieren van verbinden': 'Anslutningssätt',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -48,6 +48,7 @@ import '../utils/log.dart';
 import 'deck_provider.dart';
 import 'editor_provider.dart';
 import 'settings_provider.dart';
+import 'asset_rights_module_provider.dart';
 import 'slide_clipboard_provider.dart';
 import '../services/classification_policy.dart';
 import 'package:flutter/widgets.dart';
@@ -98,9 +99,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   Timer? _autosaveTimer;
   int _nextId = 0;
 
-  /// Leesbare state voor de part-extensies van deze library (zie
-  /// `tabs_provider_git.dart`): `state` zelf is protected en mag alleen binnen
-  /// de klasse. Zelfde truc als [DeckNotifier.currentState].
+  /// State voor part-extensies; `state` zelf is protected binnen deze klasse.
   TabsState get currentState => state;
 
   set _replacementState(TabsState value) => state = value;

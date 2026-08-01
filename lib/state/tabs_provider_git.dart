@@ -255,6 +255,7 @@ extension TabsNotifierGit on TabsNotifier {
       deckDir: deckDir,
       resolveBytes: repoAssetBytes(deck.projectPath),
       read: repoFileReaderFor(forge, branch),
+      scanAssetRights: _ref.read(assetRightsModuleEnabledProvider),
     );
   }
 

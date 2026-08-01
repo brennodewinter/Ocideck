@@ -1828,6 +1828,28 @@ const _dutchSourceAddLv = <String, String>{
       'Attēlu tīmekļa atmiņa ir pilna (ne vairāk kā 256 MB). Vispirms saglabājiet darbu kā .ocideck failu, lai novērstu datu zudumu. Pēc tam izmantojiet mazāk attēlu vai mazākus attēlus, aizveriet citas prezentācijas vai pārlādējiet, neatverot citas prezentācijas.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Attēliem paredzētā tīmekļa atmiņa ir pilna (ne vairāk kā 256 MB). Saglabājiet darbu kā .ocideck failu un pārlādējiet lapu, pirms pievienojat citus attēlus.',
+  'Afbeeldingsrechten': 'Attēla tiesības',
+  'Afbeeldingsrechten controleren…': 'Pārbaudiet attēla tiesības…',
+  'Afdoening': 'Norēķins',
+  'Afdoening vastleggen': 'Ieraksta norēķins',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Piemēram, rēķins, licence vai faila atsauce',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Lokāli pārbauda attēlus, lai noteiktu iespējamos autortiesību riskus. Var skenēt jaunus repozitorija attēlus un visu līdzekļu kopu; administrators apstrādā brīdinājumus. Šis ir brīdinājums, nevis juridisks atzinums, un attēli netiks nosūtīti trešajām pusēm.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Apmetni nevarēja saglabāt. Atkārtoti skenējiet un mēģiniet vēlreiz.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Šis ir tehnisks brīdinājums, nevis juridisks atzinums. Administrators izskata instrukcijas.',
+  'Geen openstaande aanwijzingen.': 'Nav izcilu pavedienu.',
+  'Geldige rechten aangetoond': 'Uzrādītas derīgas tiesības',
+  'Mogelijke auteursrechtelijke risico’s': 'Iespējamie autortiesību riski',
+  'Niet gebruiken': 'Nelietot',
+  'Notitie (optioneel)': 'Piezīme (pēc izvēles)',
+  'Onterechte signalering': 'Nepareiza signalizācija',
+  'afbeeldingen vragen om beoordeling': 'attēli ir jāpārskata',
+  'bestanden konden niet veilig worden beoordeeld':
+      'failus nevarēja droši pārskatīt',
+  'nieuw gescand': 'tikko skenēts',
   'Realtime samenwerken': 'Sadarbība reāllaikā',
   'Manieren van verbinden': 'Savienojuma veidi',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -742,6 +742,38 @@ Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
   );
 }
 
+/// Scan de gedeelde assetpool lokaal op aanwijzingen rond gebruiksrechten en
+/// laat een beheerder die per signaal afdoen. De scan verstuurt geen beelden
+/// naar derden; alleen de reeds ingestelde forge wordt gelezen en geschreven.
+Future<void> _showAssetRights(BuildContext context, WidgetRef ref) async {
+  if (!ref.read(assetRightsModuleEnabledProvider)) return;
+  final connection = await _pickGitConnection(context, ref);
+  if (connection == null || !context.mounted) return;
+  final forge = await ref.read(gitForgeProvider(connection.id).future);
+  if (!context.mounted) return;
+  if (forge == null) {
+    _gitNotConfigured(context);
+    return;
+  }
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  final index = RepoAssetRightsIndex(
+    forge: forge,
+    branch: connection.repo.defaultBranch,
+  );
+  try {
+    final snapshot = await index.scanAndPersist();
+    if (!context.mounted) return;
+    await showDialog<void>(
+      context: context,
+      builder: (_) => AssetRightsDialog(index: index, initial: snapshot),
+    );
+  } on GitForgeException catch (e) {
+    if (!context.mounted) return;
+    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
+  }
+}
+
 /// Zoek over alle decks in de repo en open de gekozen vindplaats.
 Future<void> _searchDecks(BuildContext context, WidgetRef ref) async {
   // Zie _showAssetUsage: repo-breed, dus eerst de verbinding vaststellen.

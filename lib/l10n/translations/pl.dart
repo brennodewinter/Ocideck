@@ -1842,6 +1842,29 @@ const _dutchSourceAddPl = <String, String>{
       'Pamięć internetowa na obrazy jest pełna (maksymalnie 256 MB). Najpierw zapisz pracę jako plik .ocideck, aby zapobiec utracie danych. Następnie użyj mniejszej liczby obrazów lub mniejszych obrazów, zamknij inne talie albo przeładuj stronę bez otwierania innych talii.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Pamięć internetowa na obrazy jest pełna (maksymalnie 256 MB). Zapisz pracę jako plik .ocideck i odśwież stronę przed dodaniem kolejnych obrazów.',
+  'Afbeeldingsrechten': 'Prawa do wizerunku',
+  'Afbeeldingsrechten controleren…': 'Sprawdź prawa do obrazu…',
+  'Afdoening': 'Osada',
+  'Afdoening vastleggen': 'Rekordowe rozliczenie',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Na przykład faktura, licencja lub odniesienie do pliku',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Sprawdza obrazy lokalnie pod kątem możliwych zagrożeń związanych z prawami autorskimi. Można skanować nowe obrazy repozytorium i całą pulę zasobów; administrator obsługuje alerty. To jest ostrzeżenie, a nie opinia prawna i żadne zdjęcia nie będą przesyłane osobom trzecim.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Osady nie udało się uratować. Przeskanuj ponownie i spróbuj ponownie.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'To jest alert techniczny, a nie opinia prawna. Administrator przegląda instrukcje.',
+  'Geen openstaande aanwijzingen.': 'Żadnych wyjątkowych wskazówek.',
+  'Geldige rechten aangetoond': 'Wykazano ważne prawa',
+  'Mogelijke auteursrechtelijke risico’s':
+      'Możliwe zagrożenia związane z prawami autorskimi',
+  'Niet gebruiken': 'Nie używać',
+  'Notitie (optioneel)': 'Uwaga (opcjonalnie)',
+  'Onterechte signalering': 'Błędna sygnalizacja',
+  'afbeeldingen vragen om beoordeling': 'obrazy wymagają sprawdzenia',
+  'bestanden konden niet veilig worden beoordeeld':
+      'plików nie można było bezpiecznie przeglądać',
+  'nieuw gescand': 'nowo zeskanowane',
   'Realtime samenwerken': 'Współpraca w czasie rzeczywistym',
   'Manieren van verbinden': 'Sposoby połączenia',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

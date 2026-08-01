@@ -24,9 +24,12 @@ import 'dart:io';
 
 /// Files to treat as alive regardless of the import graph — deliberate dynamic
 /// entrypoints the static walk can't follow. Add an entry only with a reason;
-/// the goal is to keep this empty. Paths are lib-relative, forward-slash.
+/// keep this list as small as possible. Paths are lib-relative, forward-slash.
 const Set<String> deadCodeAllowlist = {
-  // Empty on purpose — keep it that way. An entry here is a promise that the
+  // CLI-entrypoint `tool/scan_asset_rights.dart` imports this package library;
+  // the checker starts at Flutter mains and therefore cannot see that edge.
+  'services/asset_rights_repository_scanner.dart',
+  // An entry here is a promise that the
   // file is reached by a mechanism the static walk cannot follow; it is not a
   // parking spot for "not wired up yet". `services/cvss/cvss4.dart` sat here
   // from the day the CVSS 4.0 engine shipped ahead of its consumer, and stayed

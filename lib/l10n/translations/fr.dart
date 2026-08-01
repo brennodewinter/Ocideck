@@ -789,6 +789,29 @@ const _dutchSourceAddFr = {
       'La mémoire web réservée aux images est pleine (256 Mo maximum). Enregistrez d’abord votre travail dans un fichier .ocideck pour éviter toute perte de données. Utilisez ensuite moins d’images ou des images plus petites, fermez les autres decks ou rechargez sans ouvrir d’autres decks.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'La mémoire web pour les images est pleine (256 Mo maximum). Enregistrez votre travail dans un fichier .ocideck et rechargez la page avant d’ajouter d’autres images.',
+  'Afbeeldingsrechten': 'Droits à l\'image',
+  'Afbeeldingsrechten controleren…': 'Vérifiez les droits à l’image…',
+  'Afdoening': 'Règlement',
+  'Afdoening vastleggen': 'Règlement record',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Par exemple, une facture, une licence ou une référence de fichier',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Vérifie les images localement pour détecter d\'éventuels risques de droits d\'auteur. Les nouvelles images du référentiel et l\'ensemble du pool d\'actifs peuvent être analysés ; un administrateur gère les alertes. Il s\'agit d\'une alerte, pas d\'un avis juridique, et aucune image ne sera transmise à des tiers.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Le règlement n\'a pas pu être sauvé. Effectuez une nouvelle analyse et réessayez.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Il s\'agit d\'une alerte technique et non d\'un avis juridique. Un administrateur examine les instructions.',
+  'Geen openstaande aanwijzingen.': 'Aucun indice remarquable.',
+  'Geldige rechten aangetoond': 'Droits valides démontrés',
+  'Mogelijke auteursrechtelijke risico’s':
+      'Risques possibles en matière de droits d\'auteur',
+  'Niet gebruiken': 'Ne pas utiliser',
+  'Notitie (optioneel)': 'Remarque (facultatif)',
+  'Onterechte signalering': 'Signalisation erronée',
+  'afbeeldingen vragen om beoordeling': 'les images doivent être révisées',
+  'bestanden konden niet veilig worden beoordeeld':
+      'les fichiers n\'ont pas pu être examinés en toute sécurité',
+  'nieuw gescand': 'nouvellement numérisé',
   'Realtime samenwerken': 'Collaboration en temps réel',
   'Manieren van verbinden': 'Moyens de connexion',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

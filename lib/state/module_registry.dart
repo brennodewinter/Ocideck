@@ -23,6 +23,7 @@ import 'online_storage_provider.dart';
 import 'import_module_provider.dart';
 import 'procesverbetering_provider.dart';
 import 'settings_provider.dart';
+import 'asset_rights_module_provider.dart';
 
 /// De optionele modules, in de volgorde waarin het Uitbreidingen-tabblad ze
 /// toont.
@@ -33,6 +34,7 @@ enum ModuleId {
   imports,
   procesverbetering,
   collaboration,
+  assetRights,
 }
 
 /// Eén module in het register: wie hij is en waar zijn poorten staan.
@@ -112,5 +114,10 @@ final List<ModuleEntry> moduleRegistry = [
     id: ModuleId.collaboration,
     enabled: collaborationEnabledProvider,
     revealed: collaborationRevealProvider,
+  ),
+  ModuleEntry(
+    id: ModuleId.assetRights,
+    enabled: assetRightsModuleEnabledProvider,
+    revealed: assetRightsModuleRevealProvider,
   ),
 ];

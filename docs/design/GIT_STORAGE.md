@@ -340,6 +340,9 @@ repo/
   assets/
     3f9a1c8e….png        # filename = hash of the bytes
     b27e0433….mp4
+  .ocideck/
+    asset-assessments/
+      3f9a1c8e….json     # optional rights signals + review decisions
   decks/
     kwartaalcijfers/
       deck.md            # references  repo:assets/3f9a1c8e….png
@@ -413,6 +416,35 @@ across the repo, delete unreferenced `assets/*`) reclaims it. It is *not*
 automatic: in a versioned store an asset unreferenced on `main` may still be used
 by another branch, an older commit, **or a release tag** (§9.4), and silent
 deletion would be wrong (P2 — never lose durable content without intent).
+
+### 6.3 Optional image-rights assessments
+
+When the default-off **Afbeeldingsrechten** extension is enabled, OciDeck writes
+one assessment per supported pooled image to
+`.ocideck/asset-assessments/<sha256>.json`. The scope is repository-wide rather
+than deck-local: the pool is shared, so duplicating a judgement in every deck
+would create contradictory answers for identical bytes.
+
+The scanner is deliberately local and heuristic. It records the asset hash,
+MIME type, byte length, dimensions, scanner version and time; optional source,
+creator and licence evidence; stable signals; and append-only administrator
+dispositions. It checks missing/expired licence evidence, embedded rights
+metadata and stock-library filename markers. It neither uploads bytes nor makes
+a legal conclusion, and no reverse-image search is implied.
+
+The signal identity is `rule + fingerprint`. A current, non-revoked `accepted`
+or `resolved` disposition suppresses that exact warning without deleting its
+history; `rejected` and `deferred` remain active. A changed observation gets a
+new fingerprint and therefore needs a new decision. New pool images and their
+assessments travel in one commit. A whole-repository scan reuses sidecars made
+by the current scanner and commits only missing or outdated results. Unreadable
+or newer-format sidecars fail safe: they are not treated as accepted and are
+not overwritten.
+
+The module switch controls entry points and future scans, not durable data.
+Turning it off hides the repository action and stops scan-on-add, while existing
+sidecars and decisions remain versioned. This also makes reviews auditable and
+mergeable through ordinary git history.
 
 ---
 

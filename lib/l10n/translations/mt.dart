@@ -1853,6 +1853,29 @@ const _dutchSourceAddMt = <String, String>{
       'Il-memorja tal-web għall-immaġnijiet hija mimlija (massimu ta’ 256 MB). L-ewwel issejvja x-xogħol tiegħek bħala fajl .ocideck biex tevita t-telf tad-data. Imbagħad uża inqas immaġnijiet jew immaġnijiet iżgħar, agħlaq decks oħra, jew erġa’ tella’ mingħajr ma tiftaħ decks oħra.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Il-memorja tal-web għall-istampi hija mimlija (massimu ta’ 256 MB). Issejvja x-xogħol bħala fajl .ocideck u erġa’ tella’ l-paġna qabel iżżid aktar stampi.',
+  'Afbeeldingsrechten': 'Diritti di immagine',
+  'Afbeeldingsrechten controleren…': 'Controlla i diritti dell\'immagine...',
+  'Afdoening': 'Insediamento',
+  'Afdoening vastleggen': 'Liquidazione record',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Ad esempio, una fattura, una licenza o un riferimento al file',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Controlla le immagini localmente per possibili rischi di copyright. È possibile scansionare nuove immagini del repository e l\'intero pool di risorse; un amministratore gestisce gli avvisi. Questo è un avviso, non un parere legale e nessuna immagine verrà inviata a terzi.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Non è stato possibile salvare l\'accordo. Eseguire nuovamente la scansione e riprovare.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Si tratta di un avviso tecnico, non di un parere legale. Un amministratore esamina le istruzioni.',
+  'Geen openstaande aanwijzingen.': 'Nessun indizio eccezionale.',
+  'Geldige rechten aangetoond': 'Diritti validi dimostrati',
+  'Mogelijke auteursrechtelijke risico’s':
+      'Possibili rischi legati al diritto d\'autore',
+  'Niet gebruiken': 'Non utilizzare',
+  'Notitie (optioneel)': 'Nota (facoltativa)',
+  'Onterechte signalering': 'Segnalazione errata',
+  'afbeeldingen vragen om beoordeling': 'le immagini richiedono una revisione',
+  'bestanden konden niet veilig worden beoordeeld':
+      'non è stato possibile rivedere i file in modo sicuro',
+  'nieuw gescand': 'appena scansionato',
   'Realtime samenwerken': 'Kollaborazzjoni f\'ħin reali',
   'Manieren van verbinden': 'Modi ta\' konnessjoni',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

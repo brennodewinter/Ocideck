@@ -1836,6 +1836,28 @@ const _dutchSourceAddHr = <String, String>{
       'Web-memorija za slike je puna (najviše 256 MB). Najprije spremite svoj rad kao datoteku .ocideck kako biste spriječili gubitak podataka. Zatim upotrijebite manje slika ili slike manje veličine, zatvorite druge prezentacije ili ponovno učitajte bez otvaranja drugih prezentacija.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Web-memorija za slike je puna (najviše 256 MB). Spremite rad kao datoteku .ocideck i ponovno učitajte stranicu prije dodavanja novih slika.',
+  'Afbeeldingsrechten': 'Pravice do slike',
+  'Afbeeldingsrechten controleren…': 'Preverite pravice do slike ...',
+  'Afdoening': 'Poravnava',
+  'Afdoening vastleggen': 'Rekordna poravnava',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Na primer račun, licenca ali referenca datoteke',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Lokalno preveri slike glede možnih tveganj glede avtorskih pravic. Skenirati je mogoče nove slike repozitorija in celotno skupino sredstev; skrbnik obravnava opozorila. To je opozorilo, ne pravno mnenje, in nobena slika ne bo poslana tretjim osebam.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Naselbine ni bilo mogoče rešiti. Ponovno skenirajte in poskusite znova.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'To je tehnično opozorilo, ne pravno mnenje. Administrator pregleda navodila.',
+  'Geen openstaande aanwijzingen.': 'Brez izjemnih namigov.',
+  'Geldige rechten aangetoond': 'Izkazane veljavne pravice',
+  'Mogelijke auteursrechtelijke risico’s': 'Možna tveganja avtorskih pravic',
+  'Niet gebruiken': 'Ne uporabljajte',
+  'Notitie (optioneel)': 'Opomba (neobvezno)',
+  'Onterechte signalering': 'Napačna signalizacija',
+  'afbeeldingen vragen om beoordeling': 'slike zahtevajo pregled',
+  'bestanden konden niet veilig worden beoordeeld':
+      'datotek ni bilo mogoče varno pregledati',
+  'nieuw gescand': 'na novo skenirano',
   'Realtime samenwerken': 'Suradnja u stvarnom vremenu',
   'Manieren van verbinden': 'Načini povezivanja',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

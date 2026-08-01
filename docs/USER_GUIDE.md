@@ -1,6 +1,6 @@
 # OciDeck — User Guide
 
-> **Status:** current-state user manual · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state user manual · **Status last reviewed:** 2026-08-02 · **Published by:** Stichting LibreKAT
 
 ## Contents
 
@@ -10,6 +10,7 @@
 - [Storage](#storage)
 - [S3 bucket](#s3-bucket)
 - [Git repository](#git-repository)
+- [Image-rights check](#image-rights-check)
 - [WebDAV](#webdav)
 - [Working on a deck together](#working-on-a-deck-together)
 - [Slide types](#slide-types)
@@ -489,6 +490,50 @@ saved version stays retrievable, which a plain folder cannot give you.
   level — the forge's permissions are what separate them, not OciDeck.
 
 Unlike WebDAV, this also works in the browser version.
+
+## Image-rights check
+
+The optional **Afbeeldingsrechten** extension helps a repository administrator
+find images that may need a rights review. Enable it under *Settings →
+Uitbreidingen (Extensions) → Afbeeldingsrechten*. It is off by default.
+
+This is a warning system, not a copyright verdict. The check runs locally,
+does not upload image bytes and does not perform reverse-image search. It can
+recognise missing or expired licence evidence, embedded author/copyright/licence
+metadata and familiar stock-library markers in filenames. It cannot establish
+authorship, the territorial scope of a licence, quotation rights, consent or
+fair use. A clean result therefore means only that these local rules found no
+reason to warn.
+
+There are two ways an assessment is created:
+
+- **On addition.** While the extension is enabled, an image newly added to the
+  shared pool during a git save is assessed in the same commit.
+- **Across the repository.** Choose *Afbeeldingsrechten controleren…* in the
+  `…` menu, select a configured git repository, and OciDeck checks every
+  supported image under `assets/` on its default branch. Missing or outdated
+  assessments are committed as *Scan afbeeldingsrechten*; current results are
+  reused.
+
+The review dialog is a queue, not a modal blocker. For each exact signal an
+administrator can record **Valid rights demonstrated**, **False positive**, or
+**Do not use** and may add a note. The first two decisions remove that warning;
+*Do not use* deliberately leaves it visible. OciDeck appends the decision to the
+assessment and commits it as *Beoordeel afbeeldingsrechten*, so another
+administrator sees the same outcome and the audit history remains available.
+If a later scan finds a materially different signal, that new signal is not
+silenced by the earlier acceptance.
+
+Switching the extension off hides the menu action and stops assessment on newly
+added images. Existing assessments and administrator decisions remain in the
+repository; turning off a user-interface extension never deletes audit data.
+The records live at `.ocideck/asset-assessments/<sha256>.json`, separate from a
+deck because one pooled image can be used by several decks.
+
+For maintenance or CI, run `dart run tool/scan_asset_rights.dart [repository]`.
+Add `--json` (or `--format=json`) for machine-readable output. Open findings do
+not make the command fail: they require human judgement. Exit status 2 means
+one or more image files could not be read, so the round was incomplete.
 
 ## WebDAV
 

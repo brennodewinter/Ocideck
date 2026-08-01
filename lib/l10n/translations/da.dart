@@ -1829,6 +1829,28 @@ const _dutchSourceAddDa = <String, String>{
       'Webhukommelsen til billeder er fuld (maks. 256 MB). Gem først dit arbejde som en .ocideck-fil for at undgå datatab. Brug derefter færre eller mindre billeder, luk andre decks, eller genindlæs uden at åbne andre decks.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Webhukommelsen til billeder er fuld (maks. 256 MB). Gem dit arbejde som en .ocideck-fil, og genindlæs siden, før du tilføjer flere billeder.',
+  'Afbeeldingsrechten': 'Billedrettigheder',
+  'Afbeeldingsrechten controleren…': 'Tjek billedrettigheder...',
+  'Afdoening': 'Afregning',
+  'Afdoening vastleggen': 'Rekordopgør',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'For eksempel en faktura, licens eller filreference',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Kontrollerer billeder lokalt for mulige copyright-risici. Nye depotbilleder og hele aktivpuljen kan scannes; en administrator håndterer advarsler. Dette er en advarsel, ikke en juridisk udtalelse, og ingen billeder vil blive sendt til tredjeparter.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Bebyggelsen kunne ikke reddes. Scan igen og prøv igen.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Dette er en teknisk advarsel, ikke en juridisk udtalelse. En administrator gennemgår instruktionerne.',
+  'Geen openstaande aanwijzingen.': 'Ingen udestående spor.',
+  'Geldige rechten aangetoond': 'Gyldige rettigheder demonstreret',
+  'Mogelijke auteursrechtelijke risico’s': 'Mulige ophavsretlige risici',
+  'Niet gebruiken': 'Må ikke bruges',
+  'Notitie (optioneel)': 'Bemærk (valgfrit)',
+  'Onterechte signalering': 'Forkert signalering',
+  'afbeeldingen vragen om beoordeling': 'billeder kræver gennemgang',
+  'bestanden konden niet veilig worden beoordeeld':
+      'filer kunne ikke gennemses sikkert',
+  'nieuw gescand': 'nyscannet',
   'Realtime samenwerken': 'Samarbejde i realtid',
   'Manieren van verbinden': 'Forbindelsesmåder',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

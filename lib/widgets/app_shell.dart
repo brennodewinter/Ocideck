@@ -58,6 +58,7 @@ import '../services/recovery_service.dart';
 import 'mermaid_render_host.dart';
 import '../models/git_settings.dart';
 import '../services/git/asset_index.dart';
+import '../services/git/asset_rights_index.dart';
 import '../services/git/deck_merge.dart';
 import '../services/git/deck_search.dart';
 import '../services/git/git_forge.dart';
@@ -81,6 +82,7 @@ import '../state/provider_warmup.dart';
 import '../state/save_progress_provider.dart';
 import '../state/info_safety_provider.dart';
 import '../state/import_module_provider.dart';
+import '../state/asset_rights_module_provider.dart';
 import '../state/procesverbetering_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
@@ -97,6 +99,7 @@ import '../theme/brand_logo.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/slide_quality_localization.dart';
 import 'dialogs/asset_usage_dialog.dart';
+import 'dialogs/asset_rights_dialog.dart';
 import 'dialogs/command_palette.dart';
 import 'dialogs/duplicate_cleanup_dialog.dart';
 import 'dialogs/management_summary_dialog.dart';
@@ -816,6 +819,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     // werkruimte publiceert zelf wat ze kan zodra ze er is.
     final commands = ref.watch(shellDeckCommandsProvider);
     if (commands == null) return null;
+
     return AppDeckMenuActions(
       save: commands.save,
       export: commands.export,

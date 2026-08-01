@@ -1,6 +1,4 @@
-// Part of the app_shell library — see app_shell.dart.
-// Split out for navigability (the main editor/preview layout); all imports
-// live in the main library file. Top-level widgets relocate verbatim.
+// Main editor/preview layout; imports and private scope live in app_shell.dart.
 part of 'app_shell.dart';
 
 class _MainLayout extends ConsumerStatefulWidget {
@@ -448,6 +446,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _searchDecks(context, ref);
             case 'assets_git':
               _showAssetUsage(context, ref);
+            case 'rights_git':
+              _showAssetRights(context, ref);
             case 'versions_git':
               _showGitVersions(context, ref);
             case 'review_git':

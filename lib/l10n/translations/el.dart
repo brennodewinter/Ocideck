@@ -1857,6 +1857,29 @@ const _dutchSourceAddEl = <String, String>{
       'Η μνήμη ιστού για εικόνες είναι πλήρης (μέγιστο 256 MB). Αποθηκεύστε πρώτα την εργασία σας ως αρχείο .ocideck για να αποφύγετε την απώλεια δεδομένων. Έπειτα χρησιμοποιήστε λιγότερες ή μικρότερες εικόνες, κλείστε άλλες παρουσιάσεις ή επαναφορτώστε χωρίς να ανοίξετε άλλες παρουσιάσεις.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Η μνήμη web για εικόνες είναι πλήρης (μέγιστο 256 MB). Αποθηκεύστε την εργασία σας ως αρχείο .ocideck και επαναφορτώστε τη σελίδα πριν προσθέσετε περισσότερες εικόνες.',
+  'Afbeeldingsrechten': 'Δικαιώματα εικόνας',
+  'Afbeeldingsrechten controleren…': 'Ελέγξτε τα δικαιώματα εικόνας…',
+  'Afdoening': 'Επίλυση',
+  'Afdoening vastleggen': 'Ρεκόρ τακτοποίησης',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Για παράδειγμα, ένα τιμολόγιο, άδεια ή αναφορά αρχείου',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Ελέγχει τις εικόνες τοπικά για πιθανούς κινδύνους πνευματικών δικαιωμάτων. Μπορούν να σαρωθούν νέες εικόνες αποθετηρίου και ολόκληρο το σύνολο στοιχείων. ένας διαχειριστής χειρίζεται ειδοποιήσεις. Αυτή είναι μια ειδοποίηση, όχι μια νομική γνώμη και δεν θα σταλούν εικόνες σε τρίτους.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Δεν ήταν δυνατή η αποθήκευση του οικισμού. Εκ νέου σάρωση και δοκιμάστε ξανά.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Αυτή είναι μια τεχνική προειδοποίηση, όχι μια νομική γνώμη. Ένας διαχειριστής εξετάζει τις οδηγίες.',
+  'Geen openstaande aanwijzingen.': 'Χωρίς εξαιρετικές ενδείξεις.',
+  'Geldige rechten aangetoond': 'Αποδεδειγμένα έγκυρα δικαιώματα',
+  'Mogelijke auteursrechtelijke risico’s':
+      'Πιθανοί κίνδυνοι πνευματικών δικαιωμάτων',
+  'Niet gebruiken': 'Μην χρησιμοποιείτε',
+  'Notitie (optioneel)': 'Σημείωση (προαιρετικό)',
+  'Onterechte signalering': 'Λανθασμένη σηματοδότηση',
+  'afbeeldingen vragen om beoordeling': 'οι εικόνες απαιτούν έλεγχο',
+  'bestanden konden niet veilig worden beoordeeld':
+      'Τα αρχεία δεν ήταν δυνατό να ελεγχθούν με ασφάλεια',
+  'nieuw gescand': 'πρόσφατα σαρώθηκε',
   'Realtime samenwerken': 'Συνεργασία σε πραγματικό χρόνο',
   'Manieren van verbinden': 'Τρόποι σύνδεσης',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

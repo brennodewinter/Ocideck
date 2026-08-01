@@ -1830,6 +1830,28 @@ const _dutchSourceAddId = <String, String>{
       'Memori web untuk gambar penuh (maksimum 256 MB). Simpan pekerjaan Anda terlebih dahulu sebagai berkas .ocideck untuk mencegah kehilangan data. Setelah itu gunakan gambar yang lebih sedikit atau lebih kecil, tutup deck lain, atau muat ulang tanpa membuka deck lain.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Memori web untuk gambar penuh (maksimum 256 MB). Simpan pekerjaan Anda sebagai berkas .ocideck dan muat ulang halaman sebelum menambahkan gambar lagi.',
+  'Afbeeldingsrechten': 'Hak gambar',
+  'Afbeeldingsrechten controleren…': 'Periksa hak gambar…',
+  'Afdoening': 'Hunian',
+  'Afdoening vastleggen': 'Rekam penyelesaian',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Misalnya, faktur, lisensi, atau referensi file',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Memeriksa gambar secara lokal untuk kemungkinan risiko hak cipta. Gambar repositori baru dan seluruh kumpulan aset dapat dipindai; seorang administrator menangani peringatan. Ini adalah peringatan, bukan opini hukum, dan tidak ada gambar yang akan dikirim ke pihak ketiga.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Pemukiman itu tidak dapat diselamatkan. Pindai ulang dan coba lagi.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Ini adalah peringatan teknis, bukan opini hukum. Administrator meninjau instruksinya.',
+  'Geen openstaande aanwijzingen.': 'Tidak ada petunjuk luar biasa.',
+  'Geldige rechten aangetoond': 'Hak yang sah ditunjukkan',
+  'Mogelijke auteursrechtelijke risico’s': 'Kemungkinan risiko hak cipta',
+  'Niet gebruiken': 'Jangan gunakan',
+  'Notitie (optioneel)': 'Catatan (opsional)',
+  'Onterechte signalering': 'Sinyal yang salah',
+  'afbeeldingen vragen om beoordeling': 'gambar memerlukan peninjauan',
+  'bestanden konden niet veilig worden beoordeeld':
+      'file tidak dapat ditinjau dengan aman',
+  'nieuw gescand': 'baru dipindai',
   'Realtime samenwerken': 'Kolaborasi waktu nyata',
   'Manieren van verbinden': 'Cara menyambung',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

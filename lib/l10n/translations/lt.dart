@@ -1836,6 +1836,28 @@ const _dutchSourceAddLt = <String, String>{
       'Vaizdams skirta žiniatinklio atmintis pilna (daugiausia 256 MB). Pirmiausia įrašykite darbą kaip .ocideck failą, kad neprarastumėte duomenų. Tada naudokite mažiau arba mažesnių vaizdų, užverkite kitas pateiktis arba įkelkite iš naujo neatverdami kitų pateikčių.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Vaizdams skirta žiniatinklio atmintis pilna (daugiausia 256 MB). Įrašykite darbą kaip .ocideck failą ir prieš pridėdami daugiau vaizdų iš naujo įkelkite puslapį.',
+  'Afbeeldingsrechten': 'Vaizdo teisės',
+  'Afbeeldingsrechten controleren…': 'Patikrinkite vaizdo teises…',
+  'Afdoening': 'Atsiskaitymas',
+  'Afdoening vastleggen': 'Rekordinis atsiskaitymas',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Pavyzdžiui, sąskaita faktūra, licencija arba failo nuoroda',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Vietoje tikrina vaizdus dėl galimos autorių teisių rizikos. Galima nuskaityti naujus saugyklos vaizdus ir visą išteklių telkinį; administratorius tvarko įspėjimus. Tai yra įspėjimas, o ne teisinė nuomonė, ir jokie vaizdai nebus siunčiami trečiosioms šalims.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Gyvenvietės nepavyko išsaugoti. Iš naujo nuskaitykite ir bandykite dar kartą.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Tai techninis įspėjimas, o ne teisinė nuomonė. Administratorius peržiūri instrukcijas.',
+  'Geen openstaande aanwijzingen.': 'Jokių išskirtinių įkalčių.',
+  'Geldige rechten aangetoond': 'Parodytos galiojančios teisės',
+  'Mogelijke auteursrechtelijke risico’s': 'Galimas autorių teisių pavojus',
+  'Niet gebruiken': 'Nenaudoti',
+  'Notitie (optioneel)': 'Pastaba (neprivaloma)',
+  'Onterechte signalering': 'Neteisingas signalizavimas',
+  'afbeeldingen vragen om beoordeling': 'vaizdus reikia peržiūrėti',
+  'bestanden konden niet veilig worden beoordeeld':
+      'failų nepavyko saugiai peržiūrėti',
+  'nieuw gescand': 'naujai nuskaitytas',
   'Realtime samenwerken': 'Bendradarbiavimas tikruoju laiku',
   'Manieren van verbinden': 'Prisijungimo būdai',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -1859,6 +1859,29 @@ const _dutchSourceAddPt = <String, String>{
       'A memória web para imagens está cheia (máximo de 256 MB). Primeiro, guarde o seu trabalho como ficheiro .ocideck para evitar a perda de dados. Depois, use menos imagens ou imagens menores, feche outros decks ou recarregue sem abrir outros decks.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'A memória web para imagens está cheia (máximo de 256 MB). Guarde o trabalho como ficheiro .ocideck e recarregue a página antes de adicionar mais imagens.',
+  'Afbeeldingsrechten': 'Direitos de imagem',
+  'Afbeeldingsrechten controleren…': 'Verifique os direitos da imagem…',
+  'Afdoening': 'Povoado',
+  'Afdoening vastleggen': 'Liquidação recorde',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Por exemplo, uma fatura, licença ou referência de arquivo',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Verifica as imagens localmente em busca de possíveis riscos de direitos autorais. Novas imagens do repositório e todo o conjunto de ativos podem ser verificados; um administrador lida com alertas. Este é um alerta, não uma opinião jurídica, e nenhuma imagem será enviada a terceiros.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'O assentamento não pôde ser salvo. Digitalize novamente e tente novamente.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Este é um alerta técnico, não uma opinião jurídica. Um administrador analisa as instruções.',
+  'Geen openstaande aanwijzingen.': 'Nenhuma pista pendente.',
+  'Geldige rechten aangetoond': 'Direitos válidos demonstrados',
+  'Mogelijke auteursrechtelijke risico’s':
+      'Possíveis riscos de direitos autorais',
+  'Niet gebruiken': 'Não use',
+  'Notitie (optioneel)': 'Nota (opcional)',
+  'Onterechte signalering': 'Sinalização errada',
+  'afbeeldingen vragen om beoordeling': 'imagens requerem revisão',
+  'bestanden konden niet veilig worden beoordeeld':
+      'os arquivos não puderam ser revisados ​​com segurança',
+  'nieuw gescand': 'recentemente digitalizado',
   'Realtime samenwerken': 'Colaboração em tempo real',
   'Manieren van verbinden': 'Formas de ligação',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

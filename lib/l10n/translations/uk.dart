@@ -1847,6 +1847,28 @@ const _dutchSourceAddUk = <String, String>{
       'Вебпам’ять для зображень заповнена (максимум 256 МБ). Спочатку збережіть роботу як файл .ocideck, щоб запобігти втраті даних. Потім використайте менше зображень або зображення меншого розміру, закрийте інші колоди чи перезавантажте сторінку, не відкриваючи інших колод.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Вебпам’ять для зображень заповнена (максимум 256 МБ). Збережіть роботу як файл .ocideck і перезавантажте сторінку, перш ніж додавати інші зображення.',
+  'Afbeeldingsrechten': 'Права на зображення',
+  'Afbeeldingsrechten controleren…': 'Перевірити права на зображення…',
+  'Afdoening': 'Поселення',
+  'Afdoening vastleggen': 'Рекордне поселення',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Наприклад, рахунок-фактура, ліцензія або посилання на файл',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Перевіряє зображення локально на можливі ризики авторського права. Можна сканувати нові зображення репозиторію та весь пул ресурсів; сповіщеннями обробляє адміністратор. Це попередження, а не юридичний висновок, і жодні зображення не надсилатимуться третім особам.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Врятувати поселення не вдалося. Перескануйте та повторіть спробу.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Це технічне попередження, а не юридичний висновок. Адміністратор переглядає інструкції.',
+  'Geen openstaande aanwijzingen.': 'Немає видатних підказок.',
+  'Geldige rechten aangetoond': 'Продемонстровано дійсні права',
+  'Mogelijke auteursrechtelijke risico’s': 'Можливі ризики авторського права',
+  'Niet gebruiken': 'Не використовувати',
+  'Notitie (optioneel)': 'Примітка (необов\'язково)',
+  'Onterechte signalering': 'Неправильна сигналізація',
+  'afbeeldingen vragen om beoordeling': 'зображення потребують перегляду',
+  'bestanden konden niet veilig worden beoordeeld':
+      'Файли не можна безпечно переглянути',
+  'nieuw gescand': 'щойно відскановані',
   'Realtime samenwerken': 'Співпраця в реальному часі',
   'Manieren van verbinden': 'Способи підключення',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

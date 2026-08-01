@@ -104,6 +104,10 @@ so they cost the ordinary user nothing.
 
 - **Information-security reporting (MIAUW)** — reports structured to the MIAUW methodology: finding, checklist, scope-matrix and sign-off slides, a CVSS 4.0 builder, an offline CWE picker, sealing and an encrypted audit dossier. All reference data ships with the app; nothing goes out. See [the User Guide](docs/USER_GUIDE.md#information-security-module-pentest-reports).
 - **AI assistance** — an optional local model or consented endpoint that drafts finding text and image alt-text. AI-drafted content is marked and blocks sealing until a human reviews it. See [AI_ASSIST.md](docs/design/AI_ASSIST.md).
+- **Image-rights check** — locally flags repository images that may need a
+  copyright or licence review, then stores the administrator's decision beside
+  the shared asset. It is an indication, never a legal conclusion. See [the
+  User Guide](docs/USER_GUIDE.md#image-rights-check).
 
 ## Requirements
 

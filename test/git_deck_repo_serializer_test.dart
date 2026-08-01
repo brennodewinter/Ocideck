@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image/image.dart' as img;
 import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
@@ -14,6 +15,7 @@ import 'package:ocideck/services/git/asset_pool.dart';
 import 'package:ocideck/services/git/deck_repo_serializer.dart';
 import 'package:ocideck/services/git/repo_asset_resolver.dart';
 import 'package:ocideck/services/annotation_codec.dart';
+import 'package:ocideck/services/asset_rights_store.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/miauw_codec.dart';
 import 'package:ocideck/services/privacy/dismissal_codec.dart';
@@ -103,6 +105,28 @@ void main() {
     expect(utf8.decode(out.upserts['$deckDir/deck.md']!), contains(ref));
     expect(out.upserts.containsKey(poolPath), isFalse);
     expect(out.upserts.keys, ['$deckDir/deck.md']);
+  });
+
+  test('de ingeschakelde uitbreiding scant een nieuwe afbeelding', () async {
+    final bytes = Uint8List.fromList(
+      img.encodePng(img.Image(width: 2, height: 2)),
+    );
+    const memPath = 'mem:rechten';
+    final ref = refFor(bytes, 'png');
+    final hash = sha256.convert(bytes).toString();
+    final repo = FakeRepo(branches: {'main': 'c0'}, files: {});
+
+    final out = await buildDeckRepoFiles(
+      deckWith([imageSlide(memPath)]),
+      md: md,
+      pool: poolFor(repo),
+      deckDir: deckDir,
+      resolveBytes: resolverFrom({memPath: bytes}),
+      scanAssetRights: true,
+    );
+
+    expect(utf8.decode(out.upserts['$deckDir/deck.md']!), contains(ref));
+    expect(out.upserts, contains(AssetRightsStore.repoPathFor(hash)));
   });
 
   test('twee slides met dezelfde afbeelding leveren één blob', () async {
