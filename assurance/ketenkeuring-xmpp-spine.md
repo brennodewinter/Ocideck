@@ -91,9 +91,14 @@ plaats van een Matrix-event. Dezelfde `CollabCrypto`, hetzelfde `package:cryptog
   de rode lijn. Die gebruiken we dus **niet**; we gebruiken het eigen minimale schema,
   net als bij de relay.
 - **Gevolg:** de zwaarste post uit de relay-keuring (eigen crypto in beheer, externe
-  toets) wordt niet twee keer betaald. De externe review die voor de relay al een
-  bouwvoorwaarde is, dekt beide dragers. Dat is een reëel argument *vóór* de XMPP-spine:
-  één crypto-kern, twee transporten.
+  toets) wordt niet twee keer betaald — het *schema* en de primitieven zijn hergebruikt.
+  Eén crypto-kern, twee transporten: een reëel argument *vóór* de XMPP-spine. Maar "geen
+  nieuw schema" is niet "geen nieuwe review": de **transport-binding is per drager
+  nieuw** — herordening/replay (Matrix `/sync` vs. XMPP MUC/MAM/PubSub verschillen),
+  ledenwissel→hersleutelen (Matrix-membership vs. MUC-affiliaties/presence), en
+  associated-data die sessie én mode aan de ciphertext bindt zodat een Matrix-mode-
+  ciphertext niet in XMPP-mode herbruikbaar is. Die binding hoort expliciet in de
+  externe review-scope (voorwaarde 2).
 
 ## Bevinding 3 — Relatie tot de relay-GO: aanvullend, niet vervangend
 
@@ -135,6 +140,14 @@ kan in-app, zoals `COLLABORATION.md` §8 voor Matrix beschrijft — bring-your-o
 (P1). Metadata blijft zichtbaar voor de server (wie in welke MUC, wanneer), net als bij
 Matrix (§9.3) — geen verslechtering.
 
+Twee eerlijke toevoegingen. **(a)** De XMPP-cliënt is technisch een *tweede
+netwerkstack* — Dart-sockets/`web_socket_channel`, niet het `http`-pakket. Net als bij
+`flutter_webrtc` breekt dat de belofte *"the only HTTP client dependency is `http`"*
+(`docs/ARCHITECTURE.md`); die zin wordt eerlijk bijgewerkt vóór de code landt
+(voorwaarde 4). **(b)** Een zelfgebouwde stanza-parser leest *onvertrouwde XML* van het
+net: naast begrensde afmetingen horen entiteitsexpansie-/XXE-weren en
+namespace-verwarring bij de begrenzingen (voorwaarde 4).
+
 ## Bevinding 6 — Backend-exclusiviteit als beveiligings- en soevereiniteitseigenschap
 
 Dat een sessie op precies één familie draait, is geen beperking maar een eigenschap.
@@ -146,6 +159,11 @@ gebruiker dat één-op-één kan overzien. De invariant sluit dat uit. Zij hoort
 niet alleen in de UI-laag maar als expliciete regel in het ontwerp
 (`NATIVE_CALLS.md`), en als toets: geen codepad koppelt een `MeetingSession` van familie
 A aan een `CollabTransport` van familie B.
+
+De kostenkant, eerlijkheidshalve: er is **geen cross-familie-hergebruik**. Een
+Matrix-native gebruiker die andermans publieke Jitsi joint, draait voor díe sessie een
+*aparte* XMPP-data-plane en kan zijn Matrix-vertrouwen (verificaties, identiteit) er niet
+in meenemen — de keerzijde van de leesbaarheid (§5, "publieke Jitsi ≠ jouw XMPP-server").
 
 ## Kernwaarde-toets (bewaker)
 
@@ -190,16 +208,21 @@ voorwaarden vooraf en weloverwogen zijn vervuld — elk echt werk, geen vinkje:
 1. **XMPP-lib-keuze + licentie-/SBOM-bevestiging.** Fork (bv. `moxxmpp`) of from-scratch
    beslist; een echte `pub add` gevolgd door groene `make licenses` en `make sbom` over
    de hele boom (Bevinding 1).
-2. **Crypto = het relay-schema, extern getoetst.** Geen nieuw schema: dezelfde minimale
-   `CollabCrypto` als `SELF_ENCRYPTED_RELAY.md`, met testvectoren en mutatie-getoetste
-   tests, en de externe review die voor de relay al voorwaarde is. **Rode lijn: geen
-   ratchet, dus geen OMEMO** (Bevinding 2).
+2. **Crypto = het relay-schema, extern getoetst — óók de tweede drager.** Geen nieuw
+   schema: dezelfde minimale `CollabCrypto` als `SELF_ENCRYPTED_RELAY.md`, met
+   testvectoren en mutatie-getoetste tests. De externe review moet **de
+   XMPP-transport-binding expliciet dekken**, niet alleen de relay: herordening/replay
+   via MUC/MAM/PubSub, ledenwissel→hersleutelen via MUC-affiliaties/presence, en
+   mode/sessie-bindende associated-data. **Rode lijn: geen ratchet, dus geen OMEMO**
+   (Bevinding 2).
 3. **Backend-exclusiviteit als invariant vastgelegd en getoetst.** Eén sessie = één
    familie; een test die aantoont dat geen codepad een `MeetingSession` en
    `CollabTransport` van verschillende families koppelt (Bevinding 6).
-4. **Verdedigende begrenzingen doorgetrokken.** `NetGuard`/SSRF-houding voor de
-   Prosody-origin; begrensde stanza-/event-afmetingen; geen redirects; CSP `connect-src`
-   voor de web-build (Bevinding 5).
+4. **Verdedigende begrenzingen + eerlijke belofte.** `NetGuard`/SSRF-houding voor de
+   Prosody-origin; begrensde stanza-/event-afmetingen; entiteitsexpansie-/XXE-weren in de
+   stanza-parser; geen redirects; CSP `connect-src` voor de web-build. En: de "enige
+   `http`-dependency"-belofte in `ARCHITECTURE.md` bijgewerkt, want de XMPP-cliënt is een
+   tweede netwerkstack (Bevinding 5).
 
 Anders dan bij #976 zit er geen licentie-/beleidsvoorwaarde in, en anders dan bij #991
 geen Rust-/Cargo-/WASM-voorwaarde. De centrale voorwaarden zijn hier de **lib-keuze**
@@ -211,10 +234,15 @@ relay-voorwaarde.
 **Principieel GO — XMPP is de juiste primaire enkelvoudige spine voor realtime-
 samenwerken plus Jitsi-calls; NO-GO om de code nú te bouwen tot de vier voorwaarden
 vervuld zijn en de media-dep-GO (`ketenkeuring-flutter-webrtc.md`) genomen is.** De
-route is pure-Dart/permissief en hergebruikt de al aanvaarde crypto-discipline; de
-relay-GO blijft staan als de Matrix-mode-spine, en backend-exclusiviteit houdt beide
-gescheiden. Deze keuze houdt elke huidige publieke belofte overeind: er wordt niets
-geherlicenseerd en geen poort omzeild.
+route is *licentie- en toolchain-technisch* licht (pure-Dart/permissief, geen Rust) en
+hergebruikt de al aanvaarde crypto-discipline; in code-oppervlak is zij juist de
+zwáárste van de vier routes (XMPP-core + Jingle/Colibri2 + `flutter_webrtc`), wat het
+onderhoudsbeslag (waarde 10) bij de bouw-GO reëel maakt. De relay-GO blijft staan als de
+Matrix-mode-spine, en backend-exclusiviteit houdt beide gescheiden. Deze keuze
+herlicenseert niets en omzeilt geen poort — maar zij houdt *niet* vanzelf elke belofte
+overeind: de XMPP-cliënt is een tweede netwerkstack (geen `http`), dus de belofte *"the
+only HTTP client dependency is `http`"* in `ARCHITECTURE.md` wordt eerlijk bijgewerkt,
+net als bij `flutter_webrtc` (voorwaarde 4).
 
 **Besloten (2026-08-02).** De beheerder heeft de knoop doorgehakt: **de enkelvoudige
 XMPP-spine wordt de primaire route.** De self-encrypted relay (#977) blijft de
