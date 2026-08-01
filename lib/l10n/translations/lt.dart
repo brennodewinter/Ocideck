@@ -1778,6 +1778,34 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Tai nėra galiojanti pakvietimo nuoroda.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Matrix homeserver nepasiekiamas.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Šeimininkas neatsakė laiku. Patikrinkite nuorodą ir ar šeimininkas vis dar prisijungęs.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Bendrinkite šią nuorodą su tais, kuriuos norite įtraukti į darbą. Bet kas, turintis nuorodą, gali įeiti į sesiją — todėl bendrinkite ją tik su žmonėmis, kuriais pasitikite. Turinys lieka šifruotas nuo galo iki galo; homeserver mato tik šifruotus duomenis.',
+  'Deelnemen': 'Prisijungti',
+  'Deelnemen via een link': 'Prisijungti naudojant nuorodą',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Jūsų Matrix paskyra atmesta — patikrinkite prieigos raktą skiltyje Nustatymai.',
+  'Je doet nu live mee aan de samenwerking.':
+      'Dabar bendradarbiaujate tiesiogiai.',
+  'Nodig mede-auteurs uit': 'Pakviesti bendraautorius',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Pirmiausia atverkite pristatymą, kad galėtumėte bendradarbiauti.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Įklijuokite pakvietimo nuorodą, kurią jums atsiuntė šeimininkas. Taip atversite tą patį pristatymą ir bendradarbiausite tiesiogiai.',
+  'Realtime samenwerken is mislukt.':
+      'Bendradarbiavimas tikruoju laiku nepavyko.',
+  'Realtime samenwerken starten': 'Pradėti bendradarbiavimą tikruoju laiku',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Pirmiausia nustatykite Matrix paskyrą skiltyje Nustatymai → Bendradarbiavimas.',
+  'Uitnodigingslink': 'Pakvietimo nuoroda',
+  'Uitnodigingslink gekopieerd.': 'Pakvietimo nuoroda nukopijuota.',
+  'Uitnodigingslink kopiëren': 'Kopijuoti pakvietimo nuorodą',
+  'Verbinden met de samenwerking…': 'Jungiamasi prie bendradarbiavimo…',
   'Access-token': 'Prieigos raktas',
   'Apparaat-id': 'Įrenginio ID',
   'Gebruikers-id': 'Naudotojo ID',

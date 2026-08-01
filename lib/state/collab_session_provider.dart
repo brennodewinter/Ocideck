@@ -38,6 +38,7 @@ class CollabSessionState {
     this.error,
     this.isTemporaryAuthority = false,
     this.inviteLink,
+    this.isMatrix = false,
   });
 
   final CollabPhase phase;
@@ -58,6 +59,12 @@ class CollabSessionState {
   /// joining is by the deck's own source rather than a link.
   final String? inviteLink;
 
+  /// True for a realtime Matrix session (§6), false for a WebDAV one. Set from
+  /// the moment connecting starts, so the UX layer can tell the two apart across
+  /// the whole lifecycle — which feedback to show, and whether an invite link and
+  /// device fingerprints are in play.
+  final bool isMatrix;
+
   bool get isActive => phase == CollabPhase.active;
   bool get isConnecting => phase == CollabPhase.connecting;
 
@@ -73,12 +80,14 @@ class CollabSessionState {
     String? error,
     bool? isTemporaryAuthority,
     String? inviteLink,
+    bool? isMatrix,
   }) => CollabSessionState(
     phase: phase ?? this.phase,
     role: role ?? this.role,
     error: error,
     isTemporaryAuthority: isTemporaryAuthority ?? this.isTemporaryAuthority,
     inviteLink: inviteLink ?? this.inviteLink,
+    isMatrix: isMatrix ?? this.isMatrix,
   );
 }
 
@@ -205,7 +214,11 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
     final deckNotifier = _ref.read(deckProvider.notifier);
     final deck = deckNotifier.currentState.deck;
     if (tab == null || deck == null) {
-      state = state.copyWith(phase: CollabPhase.failed, error: 'no-deck');
+      state = state.copyWith(
+        phase: CollabPhase.failed,
+        error: 'no-deck',
+        isMatrix: true,
+      );
       return;
     }
     final account = _ref.read(matrixAccountProvider);
@@ -213,10 +226,14 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
       state = state.copyWith(
         phase: CollabPhase.failed,
         error: 'no-matrix-account',
+        isMatrix: true,
       );
       return;
     }
-    state = const CollabSessionState(phase: CollabPhase.connecting);
+    state = const CollabSessionState(
+      phase: CollabPhase.connecting,
+      isMatrix: true,
+    );
     try {
       final client = await _ref.read(matrixClientProvider.future);
       if (_disposed) return;
@@ -287,6 +304,7 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
         phase: CollabPhase.active,
         role: role,
         inviteLink: link,
+        isMatrix: true,
       );
     } on TimeoutException {
       await _teardown();

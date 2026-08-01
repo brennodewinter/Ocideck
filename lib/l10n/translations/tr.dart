@@ -2748,6 +2748,34 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Bu geçerli bir davet bağlantısı değil.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Matrix homeserver\'a ulaşılamıyor.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Oturum sahibi zamanında yanıt vermedi. Bağlantıyı ve oturum sahibinin hâlâ çevrimiçi olup olmadığını kontrol edin.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Bu bağlantıyı birlikte çalışmak istediğiniz kişilerle paylaşın. Bağlantıya sahip olan herkes oturuma girebilir — bu yüzden yalnızca güvendiğiniz kişilerle paylaşın. İçerik uçtan uca şifreli kalır; homeserver yalnızca şifreli veriyi görür.',
+  'Deelnemen': 'Katıl',
+  'Deelnemen via een link': 'Bağlantı ile katıl',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Matrix hesabınız reddediliyor — Ayarlar\'daki erişim belirtecini kontrol edin.',
+  'Je doet nu live mee aan de samenwerking.':
+      'Artık canlı olarak birlikte çalışıyorsunuz.',
+  'Nodig mede-auteurs uit': 'Ortak yazarları davet et',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Birlikte çalışmak için önce bir sunum açın.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Oturum sahibinin size gönderdiği davet bağlantısını yapıştırın. Böylece aynı sunumu açar ve canlı olarak birlikte çalışırsınız.',
+  'Realtime samenwerken is mislukt.':
+      'Gerçek zamanlı iş birliği başarısız oldu.',
+  'Realtime samenwerken starten': 'Gerçek zamanlı iş birliği başlat',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Önce Ayarlar → İş birliği bölümünde bir Matrix hesabı ayarlayın.',
+  'Uitnodigingslink': 'Davet bağlantısı',
+  'Uitnodigingslink gekopieerd.': 'Davet bağlantısı kopyalandı.',
+  'Uitnodigingslink kopiëren': 'Davet bağlantısını kopyala',
+  'Verbinden met de samenwerking…': 'İş birliğine bağlanılıyor…',
   'Access-token': 'Erişim belirteci',
   'Apparaat-id': 'Cihaz kimliği',
   'Gebruikers-id': 'Kullanıcı kimliği',

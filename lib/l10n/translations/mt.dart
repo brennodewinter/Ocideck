@@ -1793,6 +1793,34 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Din mhijiex link tal-istedina valida.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Il-homeserver Matrix ma jistax jintlaħaq.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'L-ospitanti ma weġibx fil-ħin. Iċċekkja l-link u jekk l-ospitanti għadux online.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Aqsam dan il-link ma\' min trid taħdem miegħu. Kull min għandu l-link jista\' jidħol fis-sessjoni — mela aqsmu biss ma\' nies li tafda. Il-kontenut jibqa\' kkriptat minn tarf sa tarf; il-homeserver jara biss data kkriptata.',
+  'Deelnemen': 'Ingħaqad',
+  'Deelnemen via een link': 'Ingħaqad permezz ta\' link',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Il-kont Matrix tiegħek qed jiġi rrifjutat — iċċekkja t-token tal-aċċess fl-Issettjar.',
+  'Je doet nu live mee aan de samenwerking.':
+      'Issa qed tikkollabora fil-ħin reali.',
+  'Nodig mede-auteurs uit': 'Stieden koawturi',
+  'Open eerst een presentatie om aan samen te werken.':
+      'L-ewwel iftaħ preżentazzjoni biex tikkollabora.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Waħħal il-link tal-istedina li bagħatlek l-ospitanti. B\'hekk tiftaħ l-istess preżentazzjoni u tikkollabora fil-ħin reali.',
+  'Realtime samenwerken is mislukt.':
+      'Il-kollaborazzjoni fil-ħin reali falliet.',
+  'Realtime samenwerken starten': 'Ibda kollaborazzjoni fil-ħin reali',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'L-ewwel issettja kont Matrix fl-Issettjar → Kollaborazzjoni.',
+  'Uitnodigingslink': 'Link tal-istedina',
+  'Uitnodigingslink gekopieerd.': 'Il-link tal-istedina ġie kkupjat.',
+  'Uitnodigingslink kopiëren': 'Ikkopja l-link tal-istedina',
+  'Verbinden met de samenwerking…': 'Qed jgħaqqad mal-kollaborazzjoni…',
   'Access-token': 'Token tal-aċċess',
   'Apparaat-id': 'ID tal-apparat',
   'Gebruikers-id': 'ID tal-utent',

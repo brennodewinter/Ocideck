@@ -1774,6 +1774,32 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Das isch kei gültige Iiladigs-Link.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Dr Matrix-Homeserver isch nid erreichbar.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Dr Host het nid rächtziitig gantwortet. Prüef dr Link und öb dr Host no online isch.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Teil dä Link mit allne, wo mitschaffe sölle. Wär dr Link het, cha i d Sitzig cho — drum teil ne nu mit Lüt, wo du vertrousch. Dr Inhalt bliibt Änd-zu-Änd verschlüsslet; dr Homeserver gseht nu verschlüsselti Date.',
+  'Deelnemen': 'Teilnäh',
+  'Deelnemen via een link': 'Über en Link teilnäh',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Dis Matrix-Konto wird abglehnt — prüef s Zuegriffstoken i de Istellige.',
+  'Je doet nu live mee aan de samenwerking.': 'Du schaffsch jetz live mit.',
+  'Nodig mede-auteurs uit': 'Mitautore iilade',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Mach zerscht e Präsentation uf, zum zämenarbeite.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Füeg dr Iiladigs-Link i, wo dr Host dir gschickt het. Damit machsch di gliichi Präsentation uf und schaffsch live mit.',
+  'Realtime samenwerken is mislukt.': 'Echtziit-Zämenarbet isch fehlgschlage.',
+  'Realtime samenwerken starten': 'Echtziit-Zämenarbet starte',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Richt zerscht es Matrix-Konto i under Istellige → Zämmenarbet.',
+  'Uitnodigingslink': 'Iiladigs-Link',
+  'Uitnodigingslink gekopieerd.': 'Iiladigs-Link kopiert.',
+  'Uitnodigingslink kopiëren': 'Iiladigs-Link kopiere',
+  'Verbinden met de samenwerking…': 'Verbindig zur Zämenarbet…',
   'Access-token': 'Zuegriffstoken',
   'Apparaat-id': 'Grät-ID',
   'Gebruikers-id': 'Benutzer-ID',

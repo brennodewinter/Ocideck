@@ -1777,6 +1777,33 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'To nije valjana poveznica pozivnice.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Matrix homeserver nije dostupan.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Domaćin nije odgovorio na vrijeme. Provjerite poveznicu i je li domaćin još na mreži.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Podijelite ovu poveznicu s onima koje želite uključiti u rad. Svatko tko ima poveznicu može ući u sesiju — stoga je dijelite samo s ljudima kojima vjerujete. Sadržaj ostaje end-to-end šifriran; homeserver vidi samo šifrirane podatke.',
+  'Deelnemen': 'Pridruži se',
+  'Deelnemen via een link': 'Pridruži se putem poveznice',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Vaš Matrix račun je odbijen — provjerite pristupni token u Postavkama.',
+  'Je doet nu live mee aan de samenwerking.': 'Sada surađujete uživo.',
+  'Nodig mede-auteurs uit': 'Pozovi suautore',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Najprije otvorite prezentaciju za suradnju.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Zalijepite poveznicu pozivnice koju vam je poslao domaćin. Time otvarate istu prezentaciju i surađujete uživo.',
+  'Realtime samenwerken is mislukt.':
+      'Suradnja u stvarnom vremenu nije uspjela.',
+  'Realtime samenwerken starten': 'Pokreni suradnju u stvarnom vremenu',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Najprije postavite Matrix račun u Postavke → Suradnja.',
+  'Uitnodigingslink': 'Poveznica pozivnice',
+  'Uitnodigingslink gekopieerd.': 'Poveznica pozivnice kopirana.',
+  'Uitnodigingslink kopiëren': 'Kopiraj poveznicu pozivnice',
+  'Verbinden met de samenwerking…': 'Povezivanje sa suradnjom…',
   'Access-token': 'Pristupni token',
   'Apparaat-id': 'ID uređaja',
   'Gebruikers-id': 'ID korisnika',

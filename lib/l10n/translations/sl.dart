@@ -1773,6 +1773,31 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'To ni veljavna povezava za povabilo.',
+  'De Matrix-homeserver is niet bereikbaar.': 'Homeserver Matrix ni dosegljiv.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Gostitelj ni odgovoril pravočasno. Preverite povezavo in ali je gostitelj še povezan.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Delite to povezavo s tistimi, ki jih želite vključiti v delo. Vsak, ki ima povezavo, lahko vstopi v sejo — zato jo delite le z ljudmi, ki jim zaupate. Vsebina ostaja šifrirana od konca do konca; homeserver vidi samo šifrirane podatke.',
+  'Deelnemen': 'Pridruži se',
+  'Deelnemen via een link': 'Pridruži se prek povezave',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Vaš račun Matrix je zavrnjen — preverite dostopni žeton v Nastavitvah.',
+  'Je doet nu live mee aan de samenwerking.': 'Zdaj sodelujete v živo.',
+  'Nodig mede-auteurs uit': 'Povabi soavtorje',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Najprej odprite predstavitev za sodelovanje.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Prilepite povezavo za povabilo, ki vam jo je poslal gostitelj. Tako odprete isto predstavitev in sodelujete v živo.',
+  'Realtime samenwerken is mislukt.': 'Sodelovanje v realnem času ni uspelo.',
+  'Realtime samenwerken starten': 'Začni sodelovanje v realnem času',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Najprej nastavite račun Matrix v Nastavitve → Sodelovanje.',
+  'Uitnodigingslink': 'Povezava za povabilo',
+  'Uitnodigingslink gekopieerd.': 'Povezava za povabilo kopirana.',
+  'Uitnodigingslink kopiëren': 'Kopiraj povezavo za povabilo',
+  'Verbinden met de samenwerking…': 'Povezovanje s sodelovanjem…',
   'Access-token': 'Dostopni žeton',
   'Apparaat-id': 'ID naprave',
   'Gebruikers-id': 'ID uporabnika',

@@ -1771,6 +1771,33 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Tämä ei ole kelvollinen kutsulinkki.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Matrix-homeserver ei ole tavoitettavissa.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Isäntä ei vastannut ajoissa. Tarkista linkki ja se, onko isäntä yhä paikalla.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Jaa tämä linkki niiden kanssa, jotka haluat mukaan työskentelemään. Kuka tahansa, jolla on linkki, voi liittyä istuntoon — joten jaa se vain luottamillesi ihmisille. Sisältö pysyy päästä päähän salattuna; homeserver näkee vain salattua tietoa.',
+  'Deelnemen': 'Liity',
+  'Deelnemen via een link': 'Liity linkin kautta',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Matrix-tiliäsi ei hyväksytä — tarkista käyttöpoletti Asetuksista.',
+  'Je doet nu live mee aan de samenwerking.':
+      'Teet nyt yhteistyötä reaaliajassa.',
+  'Nodig mede-auteurs uit': 'Kutsu kanssakirjoittajia',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Avaa ensin esitys, jotta voit tehdä yhteistyötä.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Liitä kutsulinkki, jonka isäntä lähetti sinulle. Näin avaat saman esityksen ja teet yhteistyötä reaaliajassa.',
+  'Realtime samenwerken is mislukt.': 'Reaaliaikainen yhteistyö epäonnistui.',
+  'Realtime samenwerken starten': 'Aloita reaaliaikainen yhteistyö',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Määritä ensin Matrix-tili kohdassa Asetukset → Yhteistyö.',
+  'Uitnodigingslink': 'Kutsulinkki',
+  'Uitnodigingslink gekopieerd.': 'Kutsulinkki kopioitu.',
+  'Uitnodigingslink kopiëren': 'Kopioi kutsulinkki',
+  'Verbinden met de samenwerking…': 'Yhdistetään yhteistyöhön…',
   'Access-token': 'Käyttöpoletti',
   'Apparaat-id': 'Laitetunnus',
   'Gebruikers-id': 'Käyttäjätunnus',

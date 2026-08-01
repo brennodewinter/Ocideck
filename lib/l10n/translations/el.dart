@@ -1798,6 +1798,33 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Αυτός δεν είναι έγκυρος σύνδεσμος πρόσκλησης.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Ο homeserver Matrix δεν είναι προσβάσιμος.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Ο οικοδεσπότης δεν απάντησε εγκαίρως. Ελέγξτε τον σύνδεσμο και αν ο οικοδεσπότης είναι ακόμη συνδεδεμένος.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Μοιραστείτε αυτόν τον σύνδεσμο με όσους θέλετε να συνεργαστούν. Όποιος έχει τον σύνδεσμο μπορεί να μπει στη συνεδρία — γι\' αυτό μοιραστείτε τον μόνο με ανθρώπους που εμπιστεύεστε. Το περιεχόμενο παραμένει κρυπτογραφημένο από άκρο σε άκρο· ο homeserver βλέπει μόνο κρυπτογραφημένα δεδομένα.',
+  'Deelnemen': 'Συμμετοχή',
+  'Deelnemen via een link': 'Συμμετοχή μέσω συνδέσμου',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Ο λογαριασμός σας Matrix απορρίπτεται — ελέγξτε το διακριτικό πρόσβασης στις Ρυθμίσεις.',
+  'Je doet nu live mee aan de samenwerking.': 'Τώρα συνεργάζεστε ζωντανά.',
+  'Nodig mede-auteurs uit': 'Πρόσκληση συν-συντακτών',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Ανοίξτε πρώτα μια παρουσίαση για να συνεργαστείτε.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Επικολλήστε τον σύνδεσμο πρόσκλησης που σας έστειλε ο οικοδεσπότης. Έτσι ανοίγετε την ίδια παρουσίαση και συνεργάζεστε ζωντανά.',
+  'Realtime samenwerken is mislukt.':
+      'Η συνεργασία σε πραγματικό χρόνο απέτυχε.',
+  'Realtime samenwerken starten': 'Έναρξη συνεργασίας σε πραγματικό χρόνο',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Ρυθμίστε πρώτα έναν λογαριασμό Matrix στις Ρυθμίσεις → Συνεργασία.',
+  'Uitnodigingslink': 'Σύνδεσμος πρόσκλησης',
+  'Uitnodigingslink gekopieerd.': 'Ο σύνδεσμος πρόσκλησης αντιγράφηκε.',
+  'Uitnodigingslink kopiëren': 'Αντιγραφή συνδέσμου πρόσκλησης',
+  'Verbinden met de samenwerking…': 'Σύνδεση με τη συνεργασία…',
   'Access-token': 'Διακριτικό πρόσβασης',
   'Apparaat-id': 'Αναγνωριστικό συσκευής',
   'Gebruikers-id': 'Αναγνωριστικό χρήστη',

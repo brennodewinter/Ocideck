@@ -1788,6 +1788,32 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Acesta nu este un link de invitație valid.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Homeserverul Matrix este inaccesibil.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Gazda nu a răspuns la timp. Verifică linkul și dacă gazda este încă online.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Distribuie acest link celor cu care vrei să colaborezi. Oricine are linkul poate intra în sesiune — așa că distribuie-l doar persoanelor în care ai încredere. Conținutul rămâne criptat cap la cap; homeserverul vede doar date criptate.',
+  'Deelnemen': 'Alătură-te',
+  'Deelnemen via een link': 'Alătură-te printr-un link',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Contul tău Matrix este respins — verifică tokenul de acces în Setări.',
+  'Je doet nu live mee aan de samenwerking.': 'Acum colaborezi în direct.',
+  'Nodig mede-auteurs uit': 'Invită coautori',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Deschide mai întâi o prezentare pentru a colabora.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Lipește linkul de invitație pe care ți l-a trimis gazda. Astfel deschizi aceeași prezentare și colaborezi în direct.',
+  'Realtime samenwerken is mislukt.': 'Colaborarea în timp real a eșuat.',
+  'Realtime samenwerken starten': 'Începe colaborarea în timp real',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Configurează mai întâi un cont Matrix în Setări → Colaborare.',
+  'Uitnodigingslink': 'Link de invitație',
+  'Uitnodigingslink gekopieerd.': 'Link de invitație copiat.',
+  'Uitnodigingslink kopiëren': 'Copiază linkul de invitație',
+  'Verbinden met de samenwerking…': 'Se conectează la colaborare…',
   'Access-token': 'Token de acces',
   'Apparaat-id': 'ID dispozitiv',
   'Gebruikers-id': 'ID utilizator',

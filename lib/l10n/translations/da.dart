@@ -1770,6 +1770,32 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Det er ikke et gyldigt invitationslink.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Matrix-homeserveren kan ikke nås.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Værten svarede ikke i tide. Tjek linket, og om værten stadig er online.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Del dette link med dem, du vil samarbejde med. Enhver med linket kan komme ind i sessionen — så del det kun med folk, du stoler på. Indholdet forbliver ende-til-ende-krypteret; homeserveren ser kun krypterede data.',
+  'Deelnemen': 'Deltag',
+  'Deelnemen via een link': 'Deltag via et link',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Din Matrix-konto afvises — tjek adgangstokenet i Indstillinger.',
+  'Je doet nu live mee aan de samenwerking.': 'Du samarbejder nu live.',
+  'Nodig mede-auteurs uit': 'Inviter medforfattere',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Åbn først en præsentation for at samarbejde.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Indsæt invitationslinket, som værten sendte dig. Dermed åbner du den samme præsentation og samarbejder live.',
+  'Realtime samenwerken is mislukt.': 'Samarbejde i realtid mislykkedes.',
+  'Realtime samenwerken starten': 'Start samarbejde i realtid',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Opsæt først en Matrix-konto under Indstillinger → Samarbejde.',
+  'Uitnodigingslink': 'Invitationslink',
+  'Uitnodigingslink gekopieerd.': 'Invitationslink kopieret.',
+  'Uitnodigingslink kopiëren': 'Kopiér invitationslink',
+  'Verbinden met de samenwerking…': 'Opretter forbindelse til samarbejdet…',
   'Access-token': 'Adgangstoken',
   'Apparaat-id': 'Enheds-id',
   'Gebruikers-id': 'Bruger-id',

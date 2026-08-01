@@ -1793,6 +1793,32 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Това не е валидна връзка за покана.',
+  'De Matrix-homeserver is niet bereikbaar.': 'Matrix homeserver е недостъпен.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Домакинът не отговори навреме. Проверете връзката и дали домакинът е още онлайн.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Споделете тази връзка с онези, които искате да включите в работата. Всеки, който има връзката, може да влезе в сесията — затова я споделяйте само с хора, на които имате доверие. Съдържанието остава криптирано от край до край; homeserver вижда само криптирани данни.',
+  'Deelnemen': 'Присъедини се',
+  'Deelnemen via een link': 'Присъедини се чрез връзка',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Вашият акаунт в Matrix е отхвърлен — проверете токена за достъп в Настройки.',
+  'Je doet nu live mee aan de samenwerking.': 'Сега си сътрудничите на живо.',
+  'Nodig mede-auteurs uit': 'Покани съавтори',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Първо отворете презентация, за да си сътрудничите.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Поставете връзката за покана, която домакинът ви изпрати. Така отваряте същата презентация и си сътрудничите на живо.',
+  'Realtime samenwerken is mislukt.':
+      'Съвместната работа в реално време е неуспешна.',
+  'Realtime samenwerken starten': 'Започни съвместна работа в реално време',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Първо настройте акаунт в Matrix в Настройки → Сътрудничество.',
+  'Uitnodigingslink': 'Връзка за покана',
+  'Uitnodigingslink gekopieerd.': 'Връзката за покана е копирана.',
+  'Uitnodigingslink kopiëren': 'Копирай връзката за покана',
+  'Verbinden met de samenwerking…': 'Свързване със сътрудничеството…',
   'Access-token': 'Токен за достъп',
   'Apparaat-id': 'ИД на устройството',
   'Gebruikers-id': 'Потребителски ИД',

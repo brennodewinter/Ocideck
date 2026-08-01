@@ -1770,6 +1770,32 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Dat is geen geldige uitnodigingslink.':
+      'Det här är inte en giltig inbjudningslänk.',
+  'De Matrix-homeserver is niet bereikbaar.':
+      'Matrix-homeservern går inte att nå.',
+  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
+      'Värden svarade inte i tid. Kontrollera länken och om värden fortfarande är online.',
+  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
+      'Dela den här länken med dem du vill samarbeta med. Alla som har länken kan gå in i sessionen — dela den därför bara med personer du litar på. Innehållet förblir änd-till-änd-krypterat; homeservern ser bara krypterade data.',
+  'Deelnemen': 'Gå med',
+  'Deelnemen via een link': 'Gå med via en länk',
+  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
+      'Ditt Matrix-konto avvisas — kontrollera åtkomsttoken i Inställningar.',
+  'Je doet nu live mee aan de samenwerking.': 'Du samarbetar nu live.',
+  'Nodig mede-auteurs uit': 'Bjud in medförfattare',
+  'Open eerst een presentatie om aan samen te werken.':
+      'Öppna först en presentation för att samarbeta.',
+  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
+      'Klistra in inbjudningslänken som värden skickade till dig. Då öppnar du samma presentation och samarbetar live.',
+  'Realtime samenwerken is mislukt.': 'Samarbete i realtid misslyckades.',
+  'Realtime samenwerken starten': 'Starta samarbete i realtid',
+  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
+      'Ställ först in ett Matrix-konto under Inställningar → Samarbete.',
+  'Uitnodigingslink': 'Inbjudningslänk',
+  'Uitnodigingslink gekopieerd.': 'Inbjudningslänk kopierad.',
+  'Uitnodigingslink kopiëren': 'Kopiera inbjudningslänk',
+  'Verbinden met de samenwerking…': 'Ansluter till samarbetet…',
   'Access-token': 'Åtkomsttoken',
   'Apparaat-id': 'Enhets-id',
   'Gebruikers-id': 'Användar-id',

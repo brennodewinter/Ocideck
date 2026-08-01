@@ -117,12 +117,18 @@ const Map<String, int> fileSizeBaseline = {
   // +1 (#1037): the url_launcher_util import so the play-only landing can open
   // slide links in the browser, like every other presentation surface. The file
   // was already exactly at its ceiling; the behaviour itself is one shared call.
-  'lib/widgets/app_shell.dart': 859,
+  // +2 (#977): the two imports the realtime-Matrix collaboration commands need —
+  // `matrix_client_provider` (matrixAccountProvider) and `matrix_collab_dialogs`.
+  // The commands themselves live in the collab part file, not here; only their
+  // imports must sit in the library head.
+  'lib/widgets/app_shell.dart': 861,
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
   // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
   // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped
   // listen has to sit in build. The file was already exactly at its ceiling.
-  'lib/widgets/app_shell_main_layout.dart': 1011,
+  // +1 (#977): the matching listenMatrixCollab hook for the realtime session
+  // outcome — same one-line build-time listen, behaviour in the collab part file.
+  'lib/widgets/app_shell_main_layout.dart': 1012,
   // Procesverbetering category tab + engine types in the add-slide picker.
   'lib/widgets/dialogs/add_slide_dialog.dart': 1094,
   // chart_preview_improvement part registration + improvement ChartType switch.
