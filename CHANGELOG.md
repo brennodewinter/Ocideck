@@ -209,6 +209,13 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Export/geheugen: de HTML-export liet een GIF ongewijzigd door vóór de
+  dimensiecontrole. Een klein, geldig GIF-bestand kan echter een enorm logisch
+  scherm declareren (bijv. 30000×30000), waardoor het de decode-bomgrens
+  (`kMaxImageDecodeDimension`) omzeilde en bij het openen van de export
+  gigabytes decodegeheugen per frame kon vragen. Een GIF loopt nu eerst langs
+  een dimensieprobe (op de inhoud, niet de bestandsnaam): binnen de grens gaat
+  hij ongewijzigd mee (beweging behouden), daarboven wordt hij geweigerd (#1044).
 - Samenwerken (Matrix): een account zonder apparaat-id (`deviceId`) gold ten
   onrechte als geconfigureerd. Omdat de sleuteluitwisseling de device-id als
   state-key en als bestemming voor de to-device-keyshares gebruikt, kon een

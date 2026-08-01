@@ -27,9 +27,12 @@ typedef HtmlEmbeddedImage = ({String mime, Uint8List bytes});
 
 /// De extensies die ONGEWIJZIGD meegaan, met hun mediatype.
 ///
-/// SVG is tekst en heeft geen pixels om te verkleinen; een GIF verliest zijn
-/// beweging zodra je hem opnieuw codeert. Beide zijn in de praktijk klein.
-const _passThrough = {'.svg': 'image/svg+xml', '.gif': 'image/gif'};
+/// SVG is tekst en heeft geen pixels om te verkleinen. Een GIF gaat óók
+/// ongewijzigd mee (opnieuw coderen zou de beweging wissen), maar niet
+/// onvoorwaardelijk: die loopt eerst langs een dimensiecontrole, zie
+/// [_embedGifIfBounded]. Een klein GIF-bestand kan een enorm logisch scherm
+/// declareren (30000×30000) en zou anders de decode-bomgrens omzeilen (#1044).
+const _passThrough = {'.svg': 'image/svg+xml'};
 
 /// Zet de bytes van een afbeelding om in de vorm waarin ze het document in gaat,
 /// of geeft null wanneer er niets bruikbaars in zit.
@@ -56,6 +59,12 @@ HtmlEmbeddedImage? encodeForHtmlEmbed(Uint8List bytes, String source) {
   if (bytes.isEmpty) return null;
   final passThrough = _passThroughFor(source);
   if (passThrough != null) return (mime: passThrough, bytes: bytes);
+
+  // A GIF is kept as-is to preserve its animation, but only once its declared
+  // canvas is known to be within the decode cap — the SVG-style unconditional
+  // pass-through above skipped that check and let an oversized GIF through
+  // (#1044).
+  if (_looksLikeGif(bytes)) return _embedGifIfBounded(bytes, source);
 
   try {
     final probe = img.findDecoderForData(bytes)?.startDecode(bytes);
@@ -104,6 +113,41 @@ HtmlEmbeddedImage? encodeForHtmlEmbed(Uint8List bytes, String source) {
           );
   } catch (e) {
     logWarning('encodeForHtmlEmbed: could not re-encode image', e);
+    return null;
+  }
+}
+
+/// Of [bytes] met een GIF-magisch getal begint (`GIF87a`/`GIF89a`). Op de
+/// inhoud, niet op de bestandsnaam: de bron heeft niet altijd een `.gif`-naam,
+/// en een verkeerd benoemd bestand mag de dimensiecontrole niet ontlopen.
+bool _looksLikeGif(Uint8List bytes) =>
+    bytes.length >= 6 &&
+    bytes[0] == 0x47 && // G
+    bytes[1] == 0x49 && // I
+    bytes[2] == 0x46 && // F
+    bytes[3] == 0x38 && // 8
+    (bytes[4] == 0x37 || bytes[4] == 0x39) && // 7 of 9
+    bytes[5] == 0x61; // a
+
+/// Sluit een GIF ongewijzigd in — met behoud van de beweging — mits zijn
+/// logische scherm binnen [kMaxImageDecodeDimension] valt. Een groter canvas
+/// wordt geweigerd: opnieuw coderen zou de animatie wissen, en insluiten zou de
+/// ontvanger bij het openen gigabytes decodegeheugen per frame kosten (#1044).
+HtmlEmbeddedImage? _embedGifIfBounded(Uint8List bytes, String source) {
+  try {
+    final probe = img.findDecoderForData(bytes)?.startDecode(bytes);
+    if (probe == null) return null;
+    if (probe.width > kMaxImageDecodeDimension ||
+        probe.height > kMaxImageDecodeDimension) {
+      logWarning(
+        'encodeForHtmlEmbed: GIF exceeds the decode cap, not embedded',
+        source,
+      );
+      return null;
+    }
+    return (mime: 'image/gif', bytes: bytes);
+  } catch (e) {
+    logWarning('encodeForHtmlEmbed: could not probe GIF', e);
     return null;
   }
 }
