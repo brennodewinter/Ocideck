@@ -21,6 +21,7 @@ part of '../settings_dialog.dart';
 enum SettingsSection {
   general(Icons.tune),
   storage(Icons.inventory_2_outlined),
+  collaboration(Icons.groups_outlined),
   appearance(Icons.format_paint_outlined),
   presentation(Icons.slideshow_outlined),
   cockpit(Icons.speed_outlined),
@@ -44,6 +45,7 @@ enum SettingsSection {
   String label(AppLocalizations l10n) => switch (this) {
     SettingsSection.general => l10n.t('settingsGeneral'),
     SettingsSection.storage => l10n.d('Opslag'),
+    SettingsSection.collaboration => l10n.d('Samenwerken'),
     SettingsSection.appearance => l10n.d('App-thema'),
     SettingsSection.presentation => l10n.d('Presentatiestijl'),
     SettingsSection.cockpit => l10n.d('Cockpit'),

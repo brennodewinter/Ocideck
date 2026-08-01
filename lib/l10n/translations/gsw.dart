@@ -1774,6 +1774,39 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Access-token': 'Zuegriffstoken',
+  'Apparaat-id': 'Grät-ID',
+  'Gebruikers-id': 'Benutzer-ID',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Dr Homeserver het en Fähler zrugggäh. Probier\'s spöter nomol.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Dr Homeserver isch nid erreichbar, oder em Zertifikat wird nid vertrout.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Dr Homeserver leitet uf en anderi Adrässe um — us Sicherheitsgründ wird das nöd gfolget. Gib d ändgültigi Adrässe direkt y.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Dr Homeserver bittet um es bitzeli Geduld. Probier\'s grad nomol.',
+  'De homeserver weigert dit token.': 'Dr Homeserver wyst das Token ab.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Die Adrässe antwortet nöd als Matrix-Homeserver. Stimmt d URL?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'E Homeserver mues https sy: s Zuegriffstoken reist bi jedere Aafrog mit.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'S Zuegriffstoken wird abglehnt — prüef, öb du\'s rächt übernoh häsch und öb\'s nöd widerruefe worde isch.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Erstell es Zuegriffstoken i dym Matrix-Client (zum Byspil in Element under Alli Iistellige → Hilf & Info), oder uf dym Homeserver. "Verbindig teste" bestätigt s Token und füllt dyn Benutzer-ID und Grät-ID uus.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Bruucht\'s, wenn dr Homeserver im private oder Heimnetz lauft. Ohni dä Haken wyst d Sicherheitsprüefig e privati Adrässe ab.',
+  'Realtime samenwerken (Matrix)': 'Echtziit-Zämmenarbet (Matrix)',
+  'Samenwerken': 'Zämmenarbet',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Verbindig glunge — Benutzer-ID und Grät-ID uusgfüllt',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Verbindig glunge, aber dr Homeserver het kei Grät-ID zrugggäh — trag si sälber y, susch chömed d Schlüssel vo de Mitautore nöd a.',
+  'Vul een access-token in': 'Gib es Zuegriffstoken y',
+  'Vul een geldige homeserver-URL in': 'Gib e gültigi Homeserver-URL y',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Schaff live zäme an ere Präsentation über en Matrix-Homeserver als verschlüsslets Wiiterleitigsglid. Dr Inhalt wird Änd-zu-Änd mit OciDeck sine eigene Schlüssel verschlüsslet; dr Server gseht nu verschlüsselti Date. Gib en Homeserver und es andersch erstellts Zuegriffstoken y — OciDeck fragt nie nach dym Passwort. S Token wird verschlüsslet im Schlüsselbund abgleit, nöd bi de andere Iistellige.',
+  'wordt door de test ingevuld': 'wird dur de Test uusgfüllt',
   'Versleuteld doorgeefluik (ontwerp)': 'Verschlüsslets Relais (Design)',
   'Meer documentatie op de repository': 'Meh Dokumentation im Repository',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

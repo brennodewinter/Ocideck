@@ -1788,6 +1788,39 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Access-token': 'Токен доступу',
+  'Apparaat-id': 'Ідентифікатор пристрою',
+  'Gebruikers-id': 'Ідентифікатор користувача',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserver повернув помилку. Спробуйте пізніше.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserver недоступний, або сертифікат не є довіреним.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserver перенаправляє на іншу адресу — з міркувань безпеки це не відстежується. Введіть кінцеву адресу безпосередньо.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserver просить трохи зачекати. Спробуйте за мить.',
+  'De homeserver weigert dit token.': 'Homeserver відхиляє цей токен.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Ця адреса не відповідає як homeserver Matrix. URL правильний?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Homeserver має бути https: токен доступу передається з кожним запитом.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Токен доступу відхилено — перевірте, чи правильно ви його скопіювали та чи не було його відкликано.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Створіть токен доступу у вашому клієнті Matrix (наприклад, в Element у розділі Усі налаштування → Довідка та інформація) або на вашому homeserver. "Перевірити підключення" підтверджує токен і заповнює ваш ідентифікатор користувача та ідентифікатор пристрою.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Потрібно, коли homeserver працює у приватній або домашній мережі. Без цього прапорця перевірка безпеки відхиляє приватну адресу.',
+  'Realtime samenwerken (Matrix)': 'Співпраця в реальному часі (Matrix)',
+  'Samenwerken': 'Співпраця',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'З\'єднання встановлено — ідентифікатор користувача та ідентифікатор пристрою заповнено',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'З\'єднання встановлено, але homeserver не повернув ідентифікатор пристрою — введіть його самостійно, інакше ключі співавторів не надійдуть.',
+  'Vul een access-token in': 'Введіть токен доступу',
+  'Vul een geldige homeserver-URL in': 'Введіть дійсний URL homeserver',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Співпрацюйте наживо над презентацією через homeserver Matrix як зашифрований ретранслятор. Вміст шифрується наскрізно власними ключами OciDeck; сервер бачить лише зашифровані дані. Введіть homeserver і створений деінде токен доступу — OciDeck ніколи не запитує ваш пароль. Токен зберігається зашифрованим у сховищі ключів, а не разом з іншими налаштуваннями.',
+  'wordt door de test ingevuld': 'заповнюється тестом',
   'Versleuteld doorgeefluik (ontwerp)': 'Зашифрований ретранслятор (проєкт)',
   'Meer documentatie op de repository': 'Більше документації в репозиторії',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

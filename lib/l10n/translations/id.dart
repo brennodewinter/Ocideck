@@ -1771,6 +1771,39 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Access-token': 'Token akses',
+  'Apparaat-id': 'ID perangkat',
+  'Gebruikers-id': 'ID pengguna',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserver mengembalikan kesalahan. Coba lagi nanti.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserver tidak dapat dijangkau, atau sertifikat tidak tepercaya.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserver mengalihkan ke alamat lain — demi keamanan hal ini tidak diikuti. Masukkan alamat akhir secara langsung.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserver meminta menunggu sebentar. Coba lagi sebentar lagi.',
+  'De homeserver weigert dit token.': 'Homeserver menolak token ini.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Alamat ini tidak merespons sebagai homeserver Matrix. Apakah URL-nya benar?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Homeserver harus https: token akses ikut serta pada setiap permintaan.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Token akses ditolak — periksa apakah Anda menyalinnya dengan benar dan apakah tidak dicabut.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Buat token akses di klien Matrix Anda (misalnya di Element pada Semua pengaturan → Bantuan & info), atau di homeserver Anda. "Uji koneksi" mengonfirmasi token dan mengisi ID pengguna dan ID perangkat Anda.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Diperlukan ketika homeserver berjalan di jaringan privat atau rumah. Tanpa tanda ini, pemeriksaan keamanan menolak alamat privat.',
+  'Realtime samenwerken (Matrix)': 'Kolaborasi waktu nyata (Matrix)',
+  'Samenwerken': 'Kolaborasi',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Terhubung — ID pengguna dan ID perangkat terisi',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Terhubung, tetapi homeserver tidak mengembalikan ID perangkat — isi sendiri, jika tidak kunci dari rekan penulis tidak akan sampai.',
+  'Vul een access-token in': 'Masukkan token akses',
+  'Vul een geldige homeserver-URL in': 'Masukkan URL homeserver yang valid',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Berkolaborasi secara langsung pada presentasi melalui homeserver Matrix sebagai relai terenkripsi. Kontennya dienkripsi ujung ke ujung dengan kunci milik OciDeck sendiri; server hanya melihat data terenkripsi. Masukkan homeserver dan token akses yang dibuat di tempat lain — OciDeck tidak pernah meminta kata sandi Anda. Token disimpan terenkripsi di gantungan kunci, bukan bersama pengaturan lain.',
+  'wordt door de test ingevuld': 'diisi oleh pengujian',
   'Versleuteld doorgeefluik (ontwerp)': 'Relai terenkripsi (desain)',
   'Meer documentatie op de repository':
       'Dokumentasi selengkapnya di repositori',

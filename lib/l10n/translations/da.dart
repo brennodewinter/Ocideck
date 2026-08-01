@@ -1770,6 +1770,39 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Access-token': 'Adgangstoken',
+  'Apparaat-id': 'Enheds-id',
+  'Gebruikers-id': 'Bruger-id',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserveren returnerede en fejl. Prøv igen senere.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserveren kan ikke nås, eller certifikatet er ikke betroet.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserveren omdirigerer til en anden adresse — af sikkerhedshensyn følges det ikke. Indtast den endelige adresse direkte.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserveren beder om at vente et øjeblik. Prøv igen om lidt.',
+  'De homeserver weigert dit token.': 'Homeserveren afviser dette token.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Denne adresse svarer ikke som en Matrix-homeserver. Er URL\'en korrekt?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'En homeserver skal være https: adgangstokenet følger med hver forespørgsel.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Adgangstokenet afvises — tjek, at du har kopieret det korrekt, og at det ikke er tilbagekaldt.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Opret et adgangstoken i din Matrix-klient (for eksempel i Element under Alle indstillinger → Hjælp og info) eller på din homeserver. "Test forbindelse" bekræfter tokenet og udfylder dit bruger-id og enheds-id.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Nødvendigt, når homeserveren kører på et privat- eller hjemmenetværk. Uden dette flag afviser sikkerhedstjekket en privat adresse.',
+  'Realtime samenwerken (Matrix)': 'Samarbejde i realtid (Matrix)',
+  'Samenwerken': 'Samarbejde',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Forbindelse oprettet — bruger-id og enheds-id udfyldt',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Forbindelse oprettet, men homeserveren returnerede ikke noget enheds-id — udfyld det selv, ellers når nøgler fra medforfattere ikke frem.',
+  'Vul een access-token in': 'Indtast et adgangstoken',
+  'Vul een geldige homeserver-URL in': 'Indtast en gyldig homeserver-URL',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Samarbejd live om en præsentation via en Matrix-homeserver som krypteret relæ. Indholdet krypteres ende-til-ende med OciDecks egne nøgler; serveren ser kun krypterede data. Indtast en homeserver og et adgangstoken oprettet et andet sted — OciDeck beder aldrig om din adgangskode. Token gemmes krypteret i nøgleringen, ikke sammen med de øvrige indstillinger.',
+  'wordt door de test ingevuld': 'udfyldes af testen',
   'Versleuteld doorgeefluik (ontwerp)': 'Krypteret relæ (design)',
   'Meer documentatie op de repository': 'Mere dokumentation i repositoryet',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

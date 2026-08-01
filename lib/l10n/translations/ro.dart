@@ -1788,6 +1788,39 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Access-token': 'Token de acces',
+  'Apparaat-id': 'ID dispozitiv',
+  'Gebruikers-id': 'ID utilizator',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserverul a returnat o eroare. Încearcă din nou mai târziu.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserverul este inaccesibil sau certificatul nu este de încredere.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserverul redirecționează către o altă adresă — din motive de securitate acest lucru nu este urmat. Introdu direct adresa finală.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserverul cere să aștepți puțin. Încearcă din nou în scurt timp.',
+  'De homeserver weigert dit token.': 'Homeserverul refuză acest token.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Această adresă nu răspunde ca un homeserver Matrix. URL-ul este corect?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Un homeserver trebuie să fie https: tokenul de acces călătorește cu fiecare cerere.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Tokenul de acces este refuzat — verifică dacă l-ai copiat corect și dacă nu a fost revocat.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Creează un token de acces în clientul tău Matrix (de exemplu, în Element la Toate setările → Ajutor și informații), sau pe homeserverul tău. "Testează conexiunea" confirmă tokenul și completează ID-ul tău de utilizator și ID-ul dispozitivului.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Necesar când homeserverul rulează într-o rețea privată sau de acasă. Fără această opțiune, verificarea de securitate refuză o adresă privată.',
+  'Realtime samenwerken (Matrix)': 'Colaborare în timp real (Matrix)',
+  'Samenwerken': 'Colaborare',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Conectare reușită — ID utilizator și ID dispozitiv completate',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Conectare reușită, dar homeserverul nu a returnat niciun ID de dispozitiv — completează-l tu, altfel cheile coautorilor nu vor ajunge.',
+  'Vul een access-token in': 'Introdu un token de acces',
+  'Vul een geldige homeserver-URL in': 'Introdu un URL de homeserver valid',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Colaborează în direct la o prezentare printr-un homeserver Matrix ca releu criptat. Conținutul este criptat cap la cap cu cheile proprii OciDeck; serverul vede doar date criptate. Introdu un homeserver și un token de acces creat în altă parte — OciDeck nu îți cere niciodată parola. Jetonul este stocat criptat în inelul de chei, nu alături de celelalte setări.',
+  'wordt door de test ingevuld': 'completat de test',
   'Versleuteld doorgeefluik (ontwerp)': 'Releu criptat (proiectare)',
   'Meer documentatie op de repository': 'Mai multă documentație în depozit',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

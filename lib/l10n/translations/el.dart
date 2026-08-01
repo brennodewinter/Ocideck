@@ -1798,6 +1798,40 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Access-token': 'Διακριτικό πρόσβασης',
+  'Apparaat-id': 'Αναγνωριστικό συσκευής',
+  'Gebruikers-id': 'Αναγνωριστικό χρήστη',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Ο homeserver επέστρεψε σφάλμα. Δοκιμάστε ξανά αργότερα.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Ο homeserver δεν είναι προσβάσιμος ή το πιστοποιητικό δεν είναι έμπιστο.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Ο homeserver ανακατευθύνει σε άλλη διεύθυνση — για λόγους ασφαλείας δεν ακολουθείται. Καταχωρίστε απευθείας την τελική διεύθυνση.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Ο homeserver ζητά να περιμένετε λίγο. Δοκιμάστε ξανά σε λίγο.',
+  'De homeserver weigert dit token.':
+      'Ο homeserver απορρίπτει αυτό το διακριτικό.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Αυτή η διεύθυνση δεν απαντά ως homeserver του Matrix. Είναι σωστό το URL;',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Ένας homeserver πρέπει να είναι https: το διακριτικό πρόσβασης ταξιδεύει με κάθε αίτημα.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Το διακριτικό πρόσβασης απορρίπτεται — ελέγξτε αν το αντιγράψατε σωστά και αν δεν έχει ανακληθεί.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Δημιουργήστε ένα διακριτικό πρόσβασης στον πελάτη Matrix σας (για παράδειγμα στο Element, στο Όλες οι ρυθμίσεις → Βοήθεια & πληροφορίες), ή στον homeserver σας. Το "Δοκιμή σύνδεσης" επιβεβαιώνει το διακριτικό και συμπληρώνει το αναγνωριστικό χρήστη και το αναγνωριστικό συσκευής σας.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Χρειάζεται όταν ο homeserver τρέχει σε ιδιωτικό ή οικιακό δίκτυο. Χωρίς αυτή τη σήμανση ο έλεγχος ασφαλείας απορρίπτει ιδιωτική διεύθυνση.',
+  'Realtime samenwerken (Matrix)': 'Συνεργασία σε πραγματικό χρόνο (Matrix)',
+  'Samenwerken': 'Συνεργασία',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Επιτυχής σύνδεση — συμπληρώθηκαν αναγνωριστικό χρήστη και αναγνωριστικό συσκευής',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Επιτυχής σύνδεση, αλλά ο homeserver δεν επέστρεψε αναγνωριστικό συσκευής — συμπληρώστε το μόνοι σας, αλλιώς τα κλειδιά των συν-συντακτών δεν θα φτάσουν.',
+  'Vul een access-token in': 'Εισαγάγετε ένα διακριτικό πρόσβασης',
+  'Vul een geldige homeserver-URL in': 'Εισαγάγετε ένα έγκυρο URL homeserver',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Συνεργαστείτε ζωντανά σε μια παρουσίαση μέσω ενός homeserver Matrix ως κρυπτογραφημένου αναμεταδότη. Το περιεχόμενο κρυπτογραφείται από άκρο σε άκρο με τα δικά κλειδιά του OciDeck· ο διακομιστής βλέπει μόνο κρυπτογραφημένα δεδομένα. Εισαγάγετε έναν homeserver και ένα διακριτικό πρόσβασης που δημιουργήθηκε αλλού — το OciDeck δεν ζητά ποτέ τον κωδικό σας. Το διακριτικό αποθηκεύεται κρυπτογραφημένο στην κλειδοθήκη, όχι μαζί με τις υπόλοιπες ρυθμίσεις.',
+  'wordt door de test ingevuld': 'συμπληρώνεται από τον έλεγχο',
   'Versleuteld doorgeefluik (ontwerp)':
       'Κρυπτογραφημένος αναμεταδότης (σχεδίαση)',
   'Meer documentatie op de repository': 'Περισσότερη τεκμηρίωση στο αποθετήριο',

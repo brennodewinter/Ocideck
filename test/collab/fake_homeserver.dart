@@ -17,6 +17,7 @@ class FakeHomeserver implements MatrixHttpTransport {
   final Map<String, String> _passwords = {}; // username -> password
   final Map<String, String> _userIds = {}; // username -> user id
   final Map<String, String> _tokens = {}; // access token -> user id
+  final Map<String, String> _tokenDevices = {}; // access token -> device id
   final List<_Item> _log = [];
   final Map<String, String> _txns = {}; // txnId -> event_id
   final Set<String> _rooms = {};
@@ -38,7 +39,10 @@ class FakeHomeserver implements MatrixHttpTransport {
 
   void rateLimitNext({required int retryMs}) => _rateLimitMs = retryMs;
   void redirectNext() => _redirect = true;
-  void revokeTokens() => _tokens.clear();
+  void revokeTokens() {
+    _tokens.clear();
+    _tokenDevices.clear();
+  }
 
   void pushTimeline(
     String roomId, {
@@ -114,8 +118,16 @@ class FakeHomeserver implements MatrixHttpTransport {
       url.pathSegments.indexOf('v3') + 1,
     ); // after /_matrix/client/v3
     final data = body == null ? const <String, Object?>{} : jsonDecode(body);
-    final actor = _tokens[_bearer(headers)];
-    return _route(method, seg, data as Map<String, Object?>, actor, url);
+    final bearer = _bearer(headers);
+    final actor = _tokens[bearer];
+    return _route(
+      method,
+      seg,
+      data as Map<String, Object?>,
+      actor,
+      _tokenDevices[bearer],
+      url,
+    );
   }
 
   MatrixHttpResponse _route(
@@ -123,6 +135,7 @@ class FakeHomeserver implements MatrixHttpTransport {
     List<String> seg,
     Map<String, Object?> body,
     String? actor,
+    String? actorDevice,
     Uri url,
   ) {
     switch (seg) {
@@ -139,7 +152,7 @@ class FakeHomeserver implements MatrixHttpTransport {
     }
     switch (seg) {
       case ['account', 'whoami']:
-        return _json(200, {'user_id': actor});
+        return _json(200, {'user_id': actor, 'device_id': ?actorDevice});
       case ['sync']:
         return _json(
           200,
@@ -201,12 +214,10 @@ class FakeHomeserver implements MatrixHttpTransport {
 
   Map<String, Object?> _issueToken(String userId) {
     final token = 'tok${_tokens.length}';
+    final device = 'DEV${_tokens.length}';
     _tokens[token] = userId;
-    return {
-      'user_id': userId,
-      'device_id': 'DEV${_tokens.length}',
-      'access_token': token,
-    };
+    _tokenDevices[token] = device;
+    return {'user_id': userId, 'device_id': device, 'access_token': token};
   }
 
   MatrixHttpResponse _sendEvent(

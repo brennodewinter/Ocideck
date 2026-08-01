@@ -1746,6 +1746,39 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Access-token': '\'elmeH token',
+  'Apparaat-id': 'jan ID',
+  'Gebruikers-id': 'lo\'wI\' ID',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Qagh homeserver. tugh yInID.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'SIchlaHbe\' homeserver, ghap teywI\' voqlu\'be\'.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'latlh Sumo\' jula\' homeserver — Hung meqmey tlha\'lu\'be\'. Sum bertlham yIghItlh.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'loS homeserver \'e\' poQ. tugh yInID.',
+  'De homeserver weigert dit token.': 'token vam lajQo\' homeserver.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Matrix homeserver rur Sum vam jangbe\'. lugh\'a\' URL?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'https ghaH homeserver \'e\' poQlu\': Hoch tlhobmeH lengtaH \'elmeH token.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      '\'elmeH token luvoqHa\'lu\' — yIlaD: bIqonta\'\'a\' \'ej teqlu\'be\'\'a\'?',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Matrix client (Element: Hoch Iistellige → QaH & De\') ghap homeserverlIjDaq \'elmeH token yImoj. "rar yInoH" token \'ol \'ej lo\'wI\' ID jan ID je buhtaH.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'privé ghap juH Sammey homeserver vangDI\' poQlu\'. vam degh Hutlhchugh, Hung waw\' privé inscription lajQo\'.',
+  'Realtime samenwerken (Matrix)': 'SIbI\' vumchuq (Matrix)',
+  'Samenwerken': 'vumchuqghach',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'rar — lo\'wI\' ID jan ID je buhta\'',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'rar, \'ach jan ID nobbe\' homeserver — SoH yIghItlh, HIchDaq latlh ghItlhwI\'pu\' ngaQHa\'ghachmey pawbe\'.',
+  'Vul een access-token in': '\'elmeH token yIghItlh',
+  'Vul een geldige homeserver-URL in': 'lugh homeserver URL yIghItlh',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Matrix homeserver So\'wI\' Da lo\'lu\'taHvIS \'echlet DawI\'chuq. OciDeck ngaQmoHwI\'mey lo\'lu\' \'ej pat Hoch So\'lu\'; De\' So\'lu\'pu\' neH legh Server. homeserver \'ej latlhDaq chenmoHlu\'pu\'bogh \'elmeH token yIghItlh — not mu\'wIj pegh Datlhob OciDeck. QulHom So\'lu\'pu\'bogh \'oH nuHmey qawHaqDaq polluvtaH, latlh chuqmey tlhejbe\'.',
+  'wordt door de test ingevuld': 'poj polmoH',
   'Versleuteld doorgeefluik (ontwerp)': 'labwI\' So\'lu\'pu\'bogh (nab)',
   'Meer documentatie op de repository': 'qawHaqDaq ghItlhmey law\'',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

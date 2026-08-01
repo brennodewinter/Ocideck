@@ -1762,6 +1762,39 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Access-token': 'Juurdepääsuluba',
+  'Apparaat-id': 'Seadme ID',
+  'Gebruikers-id': 'Kasutaja ID',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Homeserver tagastas vea. Proovi hiljem uuesti.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Homeserver ei ole kättesaadav või sertifikaati ei usaldata.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Homeserver suunab teisele aadressile — turvakaalutlustel seda ei järgita. Sisesta lõplik aadress otse.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Homeserver palub veidi oodata. Proovi varsti uuesti.',
+  'De homeserver weigert dit token.': 'Homeserver lükkab selle loa tagasi.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'See aadress ei vasta Matrixi homeserverina. Kas URL on õige?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Homeserver peab olema https: juurdepääsuluba liigub kaasa iga päringuga.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Juurdepääsuluba lükatakse tagasi — kontrolli, kas kopeerisid selle õigesti ja kas seda pole tühistatud.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Loo juurdepääsuluba oma Matrixi kliendis (näiteks Elementis jaotises Kõik seaded → Abi ja teave) või oma homeserveris. "Testi ühendust" kinnitab loa ning täidab sinu kasutaja ID ja seadme ID.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Vajalik, kui homeserver töötab privaat- või koduvõrgus. Ilma selle liputa keeldub turvakontroll privaataadressist.',
+  'Realtime samenwerken (Matrix)': 'Reaalajas koostöö (Matrix)',
+  'Samenwerken': 'Koostöö',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Ühendus loodud — kasutaja ID ja seadme ID täidetud',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Ühendus loodud, kuid homeserver ei tagastanud seadme ID-d — sisesta see ise, muidu kaasautorite võtmed ei jõua kohale.',
+  'Vul een access-token in': 'Sisesta juurdepääsuluba',
+  'Vul een geldige homeserver-URL in': 'Sisesta kehtiv homeserveri URL',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Tee esitluse kallal reaalajas koostööd Matrixi homeserveri kaudu krüpteeritud edastajana. Sisu krüpteeritakse otsast otsani OciDecki enda võtmetega; server näeb ainult krüpteeritud andmeid. Sisesta homeserver ja mujal loodud juurdepääsuluba — OciDeck ei küsi kunagi sinu parooli. Luba hoitakse krüpteerituna võtmehoidjas, mitte koos muude seadetega.',
+  'wordt door de test ingevuld': 'täidetakse testiga',
   'Versleuteld doorgeefluik (ontwerp)': 'Krüpteeritud relee (kavand)',
   'Meer documentatie op de repository': 'Rohkem dokumentatsiooni hoidlas',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

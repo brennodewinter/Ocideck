@@ -911,6 +911,39 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Access-token': 'Access token',
+  'Apparaat-id': 'Device ID',
+  'Gebruikers-id': 'User ID',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'The homeserver returned an error. Try again later.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'The homeserver is unreachable, or the certificate is not trusted.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'The homeserver redirects to another address — this is not followed for security reasons. Enter the final address directly.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'The homeserver asks you to wait a moment. Try again shortly.',
+  'De homeserver weigert dit token.': 'The homeserver refuses this token.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'This address does not respond as a Matrix homeserver. Is the URL correct?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'A homeserver must be https: the access token travels with every request.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'The access token is refused — check that you copied it correctly and that it hasn\'t been revoked.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Create an access token in your Matrix client (for example in Element under All settings → Help & About), or on your homeserver. "Test connection" confirms the token and fills in your user ID and device ID.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Needed when the homeserver runs on a private or home network. Without this flag the security check refuses a private address.',
+  'Realtime samenwerken (Matrix)': 'Real-time collaboration (Matrix)',
+  'Samenwerken': 'Collaboration',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Connected — user ID and device ID filled in',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Connected, but the homeserver returned no device ID — fill it in yourself, otherwise keys from co-authors won\'t arrive.',
+  'Vul een access-token in': 'Enter an access token',
+  'Vul een geldige homeserver-URL in': 'Enter a valid homeserver URL',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Collaborate live on a presentation through a Matrix homeserver as an encrypted relay. The content is end-to-end encrypted with OciDeck\'s own keys; the server only sees encrypted data. Enter a homeserver and an access token created elsewhere — OciDeck never asks for your password. The token is stored encrypted in the keychain, not alongside the other settings.',
+  'wordt door de test ingevuld': 'filled in by the test',
   'Versleuteld doorgeefluik (ontwerp)': 'Encrypted relay (design)',
   'Meer documentatie op de repository': 'More documentation on the repository',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

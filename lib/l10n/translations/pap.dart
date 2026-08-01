@@ -730,6 +730,39 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Access-token': 'Token di akseso',
+  'Apparaat-id': 'ID di aparato',
+  'Gebruikers-id': 'ID di usuario',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'E homeserver a duna un eror. Purba atrobe despues.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'E homeserver no ta alkansabel, of e sertifikado no ta konfiá.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'E homeserver ta redirigí na un otro adrès — pa motibunan di siguridat esaki no ta wòrdu sigí. Yena e adrès final direktamente.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'E homeserver ta pidi pa warda un ratu. Purba atrobe pronto.',
+  'De homeserver weigert dit token.': 'E homeserver ta rechasá e token aki.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'E adrès aki no ta kontestá manera un homeserver di Matrix. E URL ta korekto?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Un homeserver mester ta https: e token di akseso ta biaha ku kada petishon.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'E token di akseso ta wòrdu rechasá — kontrolá si bo a kopié korektamente i si e no a wòrdu revoká.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Traha un token di akseso den bo kliente Matrix (por ehèmpel den Element bou di Tur konfigurashon → Yudansa & informashon), of riba bo homeserver. "Testa konekshon" ta konfirmá e token i ta yena bo ID di usuario i ID di aparato.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Nesesario ora e homeserver ta kore riba un red privá of di kas. Sin e bandera aki e kontrol di siguridat ta rechasá un adrès privá.',
+  'Realtime samenwerken (Matrix)': 'Kolaborashon na tempu real (Matrix)',
+  'Samenwerken': 'Kolaborashon',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Konekshon a logra — ID di usuario i ID di aparato yená',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Konekshon a logra, pero e homeserver no a duna un ID di aparato bèk — yen\'é bo mes, sino e yabinan di ko-outornan lo no yega.',
+  'Vul een access-token in': 'Yena un token di akseso',
+  'Vul een geldige homeserver-URL in': 'Yena un URL di homeserver válido',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Kolaborá na bibo riba un presentashon via un homeserver di Matrix komo un relè enkriptá. E kontenido ta wòrdu enkriptá end-to-end ku OciDeck su mes yabinan; e server ta mira solamente datos enkriptá. Yena un homeserver i un token di akseso trahá na un otro lugá — OciDeck nunka ta pidi bo kontrasenja. E token ta wòrdu wardá enkriptá den e yabero, no huntu ku e otro konfigurashonnan.',
+  'wordt door de test ingevuld': 'ta wòrdu yená pa e tèst',
   'Versleuteld doorgeefluik (ontwerp)': 'Relè enkriptá (diseño)',
   'Meer documentatie op de repository': 'Mas dokumentashon den e repositorio',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

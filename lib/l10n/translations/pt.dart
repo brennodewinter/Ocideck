@@ -1800,6 +1800,39 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Access-token': 'Token de acesso',
+  'Apparaat-id': 'ID do dispositivo',
+  'Gebruikers-id': 'ID de utilizador',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'O homeserver devolveu um erro. Tenta novamente mais tarde.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'O homeserver está inacessível, ou o certificado não é fidedigno.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'O homeserver redireciona para outro endereço — por motivos de segurança não é seguido. Introduz diretamente o endereço final.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'O homeserver pede para aguardar um momento. Tenta novamente em breve.',
+  'De homeserver weigert dit token.': 'O homeserver recusa este token.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Este endereço não responde como um homeserver Matrix. O URL está correto?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Um homeserver deve ser https: o token de acesso viaja com cada pedido.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'O token de acesso é recusado — verifica se o copiaste corretamente e se não foi revogado.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Cria um token de acesso no teu cliente Matrix (por exemplo, no Element em Todas as definições → Ajuda e informações), ou no teu homeserver. "Testar ligação" confirma o token e preenche o teu ID de utilizador e ID do dispositivo.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Necessário quando o homeserver corre numa rede privada ou doméstica. Sem esta opção, a verificação de segurança recusa um endereço privado.',
+  'Realtime samenwerken (Matrix)': 'Colaboração em tempo real (Matrix)',
+  'Samenwerken': 'Colaboração',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Ligação bem-sucedida — ID de utilizador e ID do dispositivo preenchidos',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Ligação bem-sucedida, mas o homeserver não devolveu qualquer ID de dispositivo — preenche-o tu mesmo, caso contrário as chaves dos coautores não chegarão.',
+  'Vul een access-token in': 'Introduz um token de acesso',
+  'Vul een geldige homeserver-URL in': 'Introduz um URL de homeserver válido',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Colabora ao vivo numa apresentação através de um homeserver Matrix como retransmissor cifrado. O conteúdo é cifrado ponta a ponta com as próprias chaves do OciDeck; o servidor só vê dados cifrados. Introduz um homeserver e um token de acesso criado noutro lugar — o OciDeck nunca pede a tua palavra-passe. O token é guardado cifrado no porta-chaves, não junto às restantes definições.',
+  'wordt door de test ingevuld': 'preenchido pelo teste',
   'Versleuteld doorgeefluik (ontwerp)': 'Retransmissor encriptado (design)',
   'Meer documentatie op de repository': 'Mais documentação no repositório',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

@@ -730,6 +730,39 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Access-token': 'Jeton d\'accès',
+  'Apparaat-id': 'ID de l\'appareil',
+  'Gebruikers-id': 'ID d\'utilisateur',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Le homeserver a renvoyé une erreur. Réessayez plus tard.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Le homeserver est injoignable, ou le certificat n\'est pas approuvé.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Le homeserver redirige vers une autre adresse — cela n\'est pas suivi pour des raisons de sécurité. Saisissez directement l\'adresse finale.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Le homeserver demande de patienter un instant. Réessayez dans un moment.',
+  'De homeserver weigert dit token.': 'Le homeserver refuse ce jeton.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Cette adresse ne répond pas comme un homeserver Matrix. L\'URL est-elle correcte ?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Un homeserver doit être en https : le jeton d\'accès voyage avec chaque requête.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Le jeton d\'accès est refusé — vérifiez que vous l\'avez copié correctement et qu\'il n\'a pas été révoqué.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Créez un jeton d\'accès dans votre client Matrix (par exemple dans Element sous Tous les paramètres → Aide et informations), ou sur votre homeserver. "Tester la connexion" confirme le jeton et renseigne votre ID d\'utilisateur et votre ID d\'appareil.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Nécessaire lorsque le homeserver est sur un réseau privé ou domestique. Sans cette option, le contrôle de sécurité refuse une adresse privée.',
+  'Realtime samenwerken (Matrix)': 'Collaboration en temps réel (Matrix)',
+  'Samenwerken': 'Collaboration',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'Connexion réussie — ID d\'utilisateur et ID d\'appareil renseignés',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'Connexion réussie, mais le homeserver n\'a renvoyé aucun ID d\'appareil — saisissez-le vous-même, sinon les clés des coauteurs n\'arriveront pas.',
+  'Vul een access-token in': 'Saisissez un jeton d\'accès',
+  'Vul een geldige homeserver-URL in': 'Saisissez une URL de homeserver valide',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Collaborez en direct sur une présentation via un homeserver Matrix servant de relais chiffré. Le contenu est chiffré de bout en bout avec les propres clés d\'OciDeck ; le serveur ne voit que des données chiffrées. Saisissez un homeserver et un jeton d\'accès créé ailleurs — OciDeck ne demande jamais votre mot de passe. Le jeton est stocké chiffré dans le trousseau, pas avec les autres réglages.',
+  'wordt door de test ingevuld': 'renseigné par le test',
   'Versleuteld doorgeefluik (ontwerp)': 'Relais chiffré (conception)',
   'Meer documentatie op de repository': 'Plus de documentation dans le dépôt',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

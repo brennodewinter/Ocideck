@@ -1806,6 +1806,40 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Access-token': 'Comhartha rochtana',
+  'Apparaat-id': 'Aitheantas an ghléis',
+  'Gebruikers-id': 'Aitheantas úsáideora',
+  'De homeserver gaf een fout. Probeer het later opnieuw.':
+      'Sheol an homeserver earráid ar ais. Bain triail eile as níos déanaí.',
+  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
+      'Níl teacht ar an homeserver, nó níl muinín as an teastas.',
+  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
+      'Atreoraíonn an homeserver chuig seoladh eile — ar chúiseanna slándála ní leantar é sin. Cuir isteach an seoladh deiridh go díreach.',
+  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
+      'Iarrann an homeserver ort fanacht nóiméad. Bain triail eile as ar ball.',
+  'De homeserver weigert dit token.':
+      'Diúltaíonn an homeserver an comhartha seo.',
+  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
+      'Ní fhreagraíonn an seoladh seo mar homeserver Matrix. An bhfuil an URL ceart?',
+  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
+      'Ní mór don homeserver a bheith https: taistealaíonn an comhartha rochtana le gach iarratas.',
+  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
+      'Diúltaítear an comhartha rochtana — deimhnigh gur chóipeáil tú i gceart é agus nár cúlghaireadh é.',
+  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
+      'Cruthaigh comhartha rochtana i do chliant Matrix (mar shampla in Element faoi Gach socrú → Cabhair agus eolas), nó ar do homeserver. Deimhníonn "Tástáil an nasc" an comhartha agus líonann sé isteach d\'aitheantas úsáideora agus d\'aitheantas gléis.',
+  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Ag teastáil nuair a ritheann an homeserver ar líonra príobháideach nó baile. Gan an bhratach seo diúltaíonn an tseiceáil slándála seoladh príobháideach.',
+  'Realtime samenwerken (Matrix)': 'Comhoibriú fíor-ama (Matrix)',
+  'Samenwerken': 'Comhoibriú',
+  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
+      'D\'éirigh leis an nasc — aitheantas úsáideora agus aitheantas gléis líonta',
+  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
+      'D\'éirigh leis an nasc, ach níor sheol an homeserver aitheantas gléis ar ais — cuir isteach tú féin é, nó ní shroichfidh eochracha ó chomhúdair.',
+  'Vul een access-token in': 'Cuir isteach comhartha rochtana',
+  'Vul een geldige homeserver-URL in': 'Cuir isteach URL bailí homeserver',
+  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Comhoibrigh beo ar láithreoireacht trí homeserver Matrix mar athsheachadán criptithe. Déantar an t-ábhar a chriptiú ó cheann go ceann le heochracha OciDeck féin; ní fheiceann an freastalaí ach sonraí criptithe. Cuir isteach homeserver agus comhartha rochtana a cruthaíodh in áit eile — ní iarrann OciDeck do phasfhocal riamh. Stóráiltear an ceadchomhartha criptithe san eochairslabhra, ní in aice leis na socruithe eile.',
+  'wordt door de test ingevuld': 'líonann an tástáil isteach é',
   'Versleuteld doorgeefluik (ontwerp)': 'Athsheachadán criptithe (dearadh)',
   'Meer documentatie op de repository': 'Tuilleadh doiciméadaithe sa stór',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
