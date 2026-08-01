@@ -1,5 +1,6 @@
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../utils/lru_cache.dart';
 import 'rich_text_layout.dart';
 import 'slide_layout_metrics.dart';
 
@@ -116,15 +117,119 @@ double? sharedSplitFitScale(
   ThemeProfile profile,
   String font,
 ) {
-  final (start, end) = splitRunRange(slides, index);
-  if (start == end) return null; // één pagina — niets te delen
+  return splitRunLayoutIndex(slides, profile, font).fitScaleFor(index);
+}
 
-  var minScale = double.infinity;
-  for (var i = start; i <= end; i++) {
-    final s = splitRunMemberScale(slides[i], profile, font);
-    if (s < minScale) minScale = s;
+/// De voor één deck-/thema-/lettertyperevisie voorberekende split-runlayout.
+///
+/// Zowel de grenzen als de gedeelde minimumschaal staan per slide klaar. Een
+/// thumbnail, presenter-rebuild of exportlus doet daardoor alleen nog een
+/// indexlookup; het deck wordt niet opnieuw doorlopen en geen runlid wordt
+/// opnieuw met TextPainter gemeten.
+class SplitRunLayoutIndex {
+  final List<(int, int)> _ranges;
+  final List<double?> _fitScales;
+
+  const SplitRunLayoutIndex._(this._ranges, this._fitScales);
+
+  (int, int) rangeFor(int index) =>
+      index < 0 || index >= _ranges.length ? (index, index) : _ranges[index];
+
+  double? fitScaleFor(int index) =>
+      index < 0 || index >= _fitScales.length ? null : _fitScales[index];
+}
+
+class _SplitRunLayoutMemo {
+  final indexes = LruCache<(ThemeProfile, String), SplitRunLayoutIndex>(8);
+}
+
+/// Zwak gekoppeld aan de slidelijst: normale deckbewerkingen leveren een verse
+/// lijst en dus vanzelf een verse revisie, terwijl een oude deckrevisie samen
+/// met haar cache kan worden opgeruimd. [ThemeProfile] is immutable en wordt op
+/// identiteit vergeleken; een themawijziging levert een nieuw profiel. [font]
+/// staat apart in de sleutel, ook wanneer een aanroeper een override gebruikt.
+/// Per slidelijst blijven de acht recentste combinaties warm, zodat een undo of
+/// terugkeer uit de themavoorvertoning niet meteen alle tekst opnieuw meet en
+/// langdurig thema uitproberen de cache tegelijk niet onbegrensd laat groeien.
+final Expando<_SplitRunLayoutMemo> _splitRunLayoutCache =
+    Expando<_SplitRunLayoutMemo>('splitRunLayout');
+
+/// Geeft de gedeelde, voorberekende index voor deze deck-/themarevisie.
+SplitRunLayoutIndex splitRunLayoutIndex(
+  List<Slide> slides,
+  ThemeProfile profile,
+  String font,
+) {
+  final memo = _splitRunLayoutCache[slides] ?? _SplitRunLayoutMemo();
+  _splitRunLayoutCache[slides] = memo;
+  final key = (profile, font);
+  final cached = memo.indexes[key];
+  if (cached != null) return cached;
+  final index = buildSplitRunLayoutIndex(slides, profile, font);
+  memo.indexes[key] = index;
+  return index;
+}
+
+/// Vergeet de index na een zeldzame in-place wijziging van [slides].
+///
+/// Deckbewerkingen in de editor vervangen de lijst en hoeven dit niet aan te
+/// roepen. De live presentator en het publieksvenster houden om sessieredenen
+/// dezelfde lijst vast en roepen dit direct na hun in-place wijziging aan.
+void invalidateSplitRunLayout(List<Slide> slides) {
+  _splitRunLayoutCache[slides] = null;
+}
+
+/// Bouwt grenzen en gedeelde schalen in één lineaire gang door [slides].
+///
+/// [measureMember] is injecteerbaar zodat de prestatietest het exacte aantal
+/// dure lidmetingen kan bewaken zonder op wandkloktijden te vertrouwen.
+SplitRunLayoutIndex buildSplitRunLayoutIndex(
+  List<Slide> slides,
+  ThemeProfile profile,
+  String font, {
+  double Function(Slide slide, ThemeProfile profile, String font)?
+  measureMember,
+}) {
+  final ranges = <(int, int)>[for (var i = 0; i < slides.length; i++) (i, i)];
+  final fitScales = List<double?>.filled(slides.length, null);
+  final measure = measureMember ?? splitRunMemberScale;
+
+  var start = 0;
+  while (start < slides.length) {
+    final first = slides[start];
+    if (!isSplitRunType(first.type)) {
+      start++;
+      continue;
+    }
+
+    var end = start;
+    while (end + 1 < slides.length) {
+      final next = slides[end + 1];
+      if (!next.continuesSplit ||
+          next.type != slides[end].type ||
+          next.listStyle != slides[end].listStyle) {
+        break;
+      }
+      end++;
+    }
+
+    if (end > start) {
+      var shared = double.infinity;
+      for (var i = start; i <= end; i++) {
+        ranges[i] = (start, end);
+        final own = measure(slides[i], profile, font);
+        if (own < shared) shared = own;
+      }
+      if (shared.isFinite) {
+        for (var i = start; i <= end; i++) {
+          fitScales[i] = shared;
+        }
+      }
+    }
+    start = end + 1;
   }
-  return minScale.isFinite ? minScale : null;
+
+  return SplitRunLayoutIndex._(ranges, fitScales);
 }
 
 /// De schaal waarop één pagina van een run zijn tekst rendert, op
