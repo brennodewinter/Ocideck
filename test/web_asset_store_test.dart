@@ -113,16 +113,21 @@ void main() {
   });
 
   test('retain met een lege verzameling maakt de store leeg', () {
+    WebAssetStore.overrideTotalBudgetForTest(2);
     WebAssetStore.put(Uint8List.fromList([1]), name: 'a.png');
     WebAssetStore.put(Uint8List.fromList([2]), name: 'b.png');
     expect(WebAssetStore.retain(<String>{}), 2);
     expect(WebAssetStore.isEmpty, isTrue);
     expect(WebAssetStore.totalBytes, 0);
     expect(
-      () => WebAssetStore.put(Uint8List(8), name: 'opnieuw.bin'),
+      () => WebAssetStore.put(
+        Uint8List.fromList([3, 4]),
+        name: 'opnieuw.bin',
+      ),
       returnsNormally,
       reason: 'vrijgave geeft het volledige budget terug',
     );
+    expect(WebAssetStore.totalBytes, 2);
   });
 
   test('retain van een gedeeld pad bewaart de bytes en hashadministratie', () {

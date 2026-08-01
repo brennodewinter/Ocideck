@@ -232,6 +232,37 @@ void main() {
       expect(WebAssetStore.bytesFor(b), isNotNull, reason: 'tab B gebruikt b');
     });
 
+    test('gedeelde inhoud leeft tot het laatste tabblad is gesloten', () {
+      final container = _container();
+      final tabs = container.read(tabsProvider.notifier);
+      final bytes = Uint8List.fromList([42, 43]);
+      final first = WebAssetStore.put(bytes, name: 'a.png');
+      final duplicate = WebAssetStore.put(
+        Uint8List.fromList(bytes),
+        name: 'b.png',
+      );
+      expect(duplicate, first, reason: 'de inhoud is gededupliceerd');
+
+      deckOf(container).loadDeck(
+        Deck(title: 'A', slides: [imageSlide(first)]),
+      );
+      tabs.newDeckInNewTab('B');
+      tabs.sweepWebAssets();
+      expect(
+        WebAssetStore.bytesFor(first),
+        isNotNull,
+        reason: 'tab A houdt het gedeelde pad levend',
+      );
+
+      tabs.closeTab(0);
+      tabs.sweepWebAssets();
+      expect(
+        WebAssetStore.bytesFor(first),
+        isNull,
+        reason: 'na het laatste gebruik komt het budget vrij',
+      );
+    });
+
     test('een asset op het klembord wordt niet weggeveegd', () {
       final container = _container();
       final c = putMem();
