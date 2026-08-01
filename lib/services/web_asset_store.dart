@@ -65,13 +65,23 @@ class WebAssetStore {
   /// Bij een nieuwe inhoud wordt het appbrede budget gecontroleerd vóór enige
   /// map verandert; overschrijding gooit [WebAssetBudgetExceeded].
   static String put(Uint8List bytes, {required String name}) {
+    final maximum = _totalBudgetOverride ?? maxTotalBytes;
+    // Een asset groter dan de hele store kan onmogelijk al aanwezig zijn: zo'n
+    // asset is nooit toegelaten. Weiger hem dus vóór de lineaire hashronde.
+    if (bytes.length > maximum) {
+      throw WebAssetBudgetExceeded(
+        usedBytes: _totalBytes,
+        requestedBytes: bytes.length,
+        maximumBytes: maximum,
+      );
+    }
+
     final hash = sha256.convert(bytes).toString();
     for (final candidate in _pathsForHash[hash] ?? const <String>[]) {
       final stored = _bytes[candidate];
       if (stored != null && _sameBytes(stored, bytes)) return candidate;
     }
 
-    final maximum = _totalBudgetOverride ?? maxTotalBytes;
     if (bytes.length > maximum - _totalBytes) {
       throw WebAssetBudgetExceeded(
         usedBytes: _totalBytes,

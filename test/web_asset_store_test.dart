@@ -58,6 +58,17 @@ void main() {
     expect(WebAssetStore.bytesFor(exact), isNotNull);
   });
 
+  test('weigert één asset groter dan het hele budget zonder opslag', () {
+    WebAssetStore.overrideTotalBudgetForTest(8);
+
+    expect(
+      () => WebAssetStore.put(Uint8List(9), name: 'veel-te-groot.bin'),
+      throwsA(isA<WebAssetBudgetExceeded>()),
+    );
+    expect(WebAssetStore.isEmpty, isTrue);
+    expect(WebAssetStore.totalBytes, 0);
+  });
+
   test('identieke inhoud deelt pad en telt maar eenmaal mee', () {
     final first = WebAssetStore.put(
       Uint8List.fromList([1, 2, 3, 4]),
