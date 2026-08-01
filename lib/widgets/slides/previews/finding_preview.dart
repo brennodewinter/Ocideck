@@ -180,10 +180,10 @@ class _FindingPreview extends StatelessWidget {
     );
   }
 
-  /// De effectieve CVSS-score als rustige typografische kaart. De oude
-  /// cockpitmeter schilderde de waarde in een wijzerplaat en herhaalde daarmee
-  /// de scorebadge; gewone widgettekst blijft ook op kleine previews leesbaar en
-  /// toegankelijk voor hulptechnologie (#1059).
+  /// De effectieve CVSS-score als leesbare tekst naast een rustige visuele
+  /// schaal. De score staat bewust buiten de meter: zo blijft de waarde ook in
+  /// de slidestrook leesbaar, terwijl de positie tussen 0 en 10 in één oogopslag
+  /// zichtbaar blijft (#1059).
   Widget _severityScoreCard(
     BuildContext context,
     FindingSpec spec,
@@ -197,7 +197,7 @@ class _FindingPreview extends StatelessWidget {
       padding: EdgeInsets.only(left: w * 0.02),
       child: Container(
         key: const ValueKey('finding-cvss-score-card'),
-        width: w * 0.15,
+        width: w * 0.21,
         padding: EdgeInsets.fromLTRB(
           w * 0.018,
           w * 0.014,
@@ -228,43 +228,138 @@ class _FindingPreview extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: w * 0.004),
-            Text(
-              cvss.score.toStringAsFixed(1),
-              style: _applyFont(
-                font,
-                TextStyle(
-                  color: textColor,
-                  fontSize: w * 0.052,
-                  fontWeight: FontWeight.w800,
-                  height: 1,
+            SizedBox(height: w * 0.006),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  cvss.score.toStringAsFixed(1),
+                  style: _applyFont(
+                    font,
+                    TextStyle(
+                      color: textColor,
+                      fontSize: w * 0.052,
+                      fontWeight: FontWeight.w800,
+                      height: 1,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(height: w * 0.008),
-            Container(
-              width: w * 0.032,
-              height: w * 0.005,
-              decoration: BoxDecoration(
-                color: severity,
-                borderRadius: BorderRadius.circular(w * 0.003),
-              ),
-            ),
-            SizedBox(height: w * 0.008),
-            Text(
-              cvss.severity.label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: _applyFont(
-                font,
-                TextStyle(
-                  color: textColor,
-                  fontSize: w * 0.021,
-                  fontWeight: FontWeight.w700,
+                SizedBox(width: w * 0.01),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: w * 0.004),
+                    child: Text(
+                      cvss.severity.label,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: _applyFont(
+                        font,
+                        TextStyle(
+                          color: textColor,
+                          fontSize: w * 0.021,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
+            ),
+            SizedBox(height: w * 0.012),
+            _cvssMeter(cvss, severity, textColor, context.l10n.d('CVSS')),
+            SizedBox(height: w * 0.002),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _meterEndpoint('0', textColor),
+                _meterEndpoint('10', textColor),
+              ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _cvssMeter(
+    Cvss4 cvss,
+    Color severity,
+    Color textColor,
+    String semanticsLabel,
+  ) {
+    final position = (cvss.score / 10).clamp(0.0, 1.0);
+    final markerSize = w * 0.018;
+    return Semantics(
+      label: semanticsLabel,
+      value: '${cvss.score.toStringAsFixed(1)} / 10 · ${cvss.severity.label}',
+      child: ExcludeSemantics(
+        child: SizedBox(
+          key: const ValueKey('finding-cvss-meter'),
+          height: markerSize,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return Stack(
+                alignment: Alignment.centerLeft,
+                children: [
+                  Container(
+                    height: w * 0.008,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(w * 0.004),
+                      gradient: LinearGradient(
+                        colors: [
+                          AppTheme.success700.withValues(alpha: 0.72),
+                          AppTheme.success700.withValues(alpha: 0.72),
+                          AppTheme.amber500.withValues(alpha: 0.78),
+                          AppTheme.amber500.withValues(alpha: 0.78),
+                          AppTheme.danger600.withValues(alpha: 0.82),
+                          AppTheme.danger600.withValues(alpha: 0.82),
+                        ],
+                        stops: const [0, 0.39, 0.4, 0.69, 0.7, 1],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: (constraints.maxWidth * position - markerSize / 2)
+                        .clamp(0.0, constraints.maxWidth - markerSize),
+                    child: Container(
+                      key: const ValueKey('finding-cvss-meter-marker'),
+                      width: markerSize,
+                      height: markerSize,
+                      decoration: BoxDecoration(
+                        color: severity,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: textColor.withValues(alpha: 0.95),
+                          width: w * 0.0025,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: severity.withValues(alpha: 0.32),
+                            blurRadius: w * 0.008,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _meterEndpoint(String value, Color textColor) {
+    return Text(
+      value,
+      style: _applyFont(
+        font,
+        TextStyle(
+          color: textColor.withValues(alpha: 0.58),
+          fontSize: w * 0.014,
+          fontWeight: FontWeight.w600,
+          height: 1,
         ),
       ),
     );
