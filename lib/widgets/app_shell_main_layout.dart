@@ -196,17 +196,85 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                   ...collabChatRail(ref),
                 ],
               );
-              if (!deck.finalized) return workspace;
-              // Read-only lock (§8 A1): een afgerond deck blijft zichtbaar en
-              // exporteerbaar, maar niet bewerkbaar. De banner maakt dat
-              // duidelijk; de harde grendel zit in DeckNotifier._mutate.
+              // Banners stack above the workspace: the collab
+              // verification prompt (an active Matrix session still has an
+              // unverified or mismatched peer) and the read-only finalized lock.
+              final banners = <Widget>[
+                if (_showVerifyBanner()) _verifyBanner(context, l10n),
+                if (deck.finalized) _finalizedBanner(context, l10n),
+              ];
+              if (banners.isEmpty) return workspace;
               return Column(
-                children: [
-                  _finalizedBanner(context, l10n),
-                  Expanded(child: workspace),
-                ],
+                children: [...banners, Expanded(child: workspace)],
               );
             },
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Whether an active Matrix session still has a peer to verify — an unverified
+  /// device (trust-on-first-use) or, worse, one whose identity key changed
+  /// (mismatch). Watched via [collabSessionProvider] so pinning a device (which
+  /// bumps `trustRevision`) hides the banner (Blok A).
+  bool _showVerifyBanner() {
+    final collab = ref.watch(collabSessionProvider);
+    if (!collab.isMatrix || !collab.isActive) return false;
+    return ref.read(collabSessionProvider.notifier).hasUnverifiedParticipants;
+  }
+
+  /// Verification banner for a live Matrix session (Blok A;
+  /// SELF_ENCRYPTED_RELAY §5.3): a clear, dismissible-by-verifying prompt rather
+  /// than a cryptic "unable to decrypt" — one tap opens the fingerprint
+  /// comparison. Amber for an unverified peer; the mismatch case is spelled out
+  /// inside the dialog itself.
+  Widget _verifyBanner(BuildContext context, AppLocalizations l10n) {
+    final theme = Theme.of(context);
+    return Material(
+      color: AppTheme.amber600.withValues(alpha: 0.14),
+      child: InkWell(
+        onTap: () => showMatrixParticipantsDialog(
+          context,
+          l10n,
+          participants: ref.read(collabSessionProvider.notifier).matrixParticipants,
+          onPin: ref.read(collabSessionProvider.notifier).pinParticipant,
+          onUnpin: ref.read(collabSessionProvider.notifier).unpinParticipant,
+        ),
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: theme.colorScheme.outlineVariant),
+            ),
+          ),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.shield_outlined,
+                size: 16,
+                color: AppTheme.amber600,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  l10n.d(
+                    'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.',
+                  ),
+                  style: const TextStyle(fontSize: 12.5),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                l10n.d('Verifiëren'),
+                style: const TextStyle(
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.w600,
+                  color: AppTheme.amber700,
+                ),
+              ),
+            ],
           ),
         ),
       ),
