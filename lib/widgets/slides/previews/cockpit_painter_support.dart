@@ -6,6 +6,25 @@ part of '../slide_preview.dart';
 /// metertype-geometrie zodat `cockpit_preview.dart` onder de bestandsgrens
 /// blijft en de klassieke schildercode overzichtelijk blijft.
 extension _CockpitInstrumentPainterSupport on _CockpitInstrumentPainter {
+  bool get _authentic => visualStyle == CockpitVisualStyle.authentic;
+
+  double get _power => !_authentic
+      ? 1
+      : Curves.easeOut.transform(((progress - 0.03) / 0.30).clamp(0.0, 1.0));
+
+  /// Instrumentpalet voor de authentieke stand, gekozen op de helderheid van
+  /// de dia-achtergrond zodat een lichte dia een licht instrument krijgt.
+  CockpitPalette get _palette => AppTheme.cockpitPaletteFor(surface);
+
+  Color get _instrumentInk => _authentic ? _palette.ink : textColor;
+
+  Color get _instrumentMuted =>
+      _authentic ? _palette.inkMuted.withValues(alpha: 0.72) : mutedColor;
+
+  /// Structural lines (gauge tracks, ticks, glass) derive from the instrument
+  /// ink at low opacity so they read on any slide background.
+  Color _line(double alpha) => _instrumentInk.withValues(alpha: alpha * _power);
+
   Offset _arcScaleLabel(
     Offset center,
     double radius,
@@ -29,16 +48,16 @@ extension _CockpitInstrumentPainterSupport on _CockpitInstrumentPainter {
       radius * 1.03,
       Paint()..color = Colors.black.withValues(alpha: 0.60),
     );
-    canvas.drawCircle(c, radius, Paint()..color = AppTheme.cockpitBezel);
+    canvas.drawCircle(c, radius, Paint()..color = _palette.bezel);
     canvas.drawCircle(
       c,
       radius * 0.93,
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = math.max(2, size.shortestSide * 0.025)
-        ..color = AppTheme.cockpitBezelDark,
+        ..color = _palette.bezelDark,
     );
-    canvas.drawCircle(c, radius * 0.88, Paint()..color = AppTheme.cockpitFace);
+    canvas.drawCircle(c, radius * 0.88, Paint()..color = _palette.face);
     canvas.drawCircle(
       c,
       radius * 0.86,
@@ -56,17 +75,13 @@ extension _CockpitInstrumentPainterSupport on _CockpitInstrumentPainter {
       Offset(size.width - inset, size.height - inset),
     ]) {
       final sr = math.max(2.2, size.shortestSide * 0.025);
-      canvas.drawCircle(screw, sr, Paint()..color = AppTheme.cockpitScrew);
-      canvas.drawCircle(
-        screw,
-        sr * 0.72,
-        Paint()..color = AppTheme.cockpitScrewMetal,
-      );
+      canvas.drawCircle(screw, sr, Paint()..color = _palette.screw);
+      canvas.drawCircle(screw, sr * 0.72, Paint()..color = _palette.screwMetal);
       canvas.drawLine(
         screw + Offset(-sr * 0.45, -sr * 0.45),
         screw + Offset(sr * 0.45, sr * 0.45),
         Paint()
-          ..color = AppTheme.cockpitScrewSlot
+          ..color = _palette.screwSlot
           ..strokeWidth = math.max(1, sr * 0.25),
       );
     }
@@ -156,22 +171,10 @@ extension _CockpitInstrumentPainterSupport on _CockpitInstrumentPainter {
 
   void _hub(Canvas canvas, Offset c, double s) {
     if (_authentic) {
-      canvas.drawCircle(c, s * 0.052, Paint()..color = AppTheme.cockpitHub);
-      canvas.drawCircle(
-        c,
-        s * 0.038,
-        Paint()..color = AppTheme.cockpitHubMetal,
-      );
-      canvas.drawCircle(
-        c,
-        s * 0.022,
-        Paint()..color = AppTheme.cockpitHubInner,
-      );
-      canvas.drawCircle(
-        c,
-        s * 0.009,
-        Paint()..color = AppTheme.cockpitHubHighlight,
-      );
+      canvas.drawCircle(c, s * 0.052, Paint()..color = _palette.hub);
+      canvas.drawCircle(c, s * 0.038, Paint()..color = _palette.hubMetal);
+      canvas.drawCircle(c, s * 0.022, Paint()..color = _palette.hubInner);
+      canvas.drawCircle(c, s * 0.009, Paint()..color = _palette.hubHighlight);
       return;
     }
     canvas.drawCircle(c, s * 0.05, Paint()..color = accent);

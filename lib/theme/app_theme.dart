@@ -75,6 +75,27 @@ class AppPalette extends ThemeExtension<AppPalette> {
   }
 }
 
+/// Materiaalkleuren voor de authentieke cockpitmeter, als één set zodat de
+/// painter licht/donker in één keuze omschakelt in plaats van per kleur.
+typedef CockpitPalette = ({
+  Color panel,
+  Color panelBorder,
+  Color shadow,
+  Color ink,
+  Color inkMuted,
+  Color label,
+  Color bezel,
+  Color bezelDark,
+  Color face,
+  Color screw,
+  Color screwMetal,
+  Color screwSlot,
+  Color hub,
+  Color hubMetal,
+  Color hubInner,
+  Color hubHighlight,
+});
+
 class AppTheme {
   /// Of de app-chrome in donkere modus staat. Wordt in [OciDeckApp.build]
   /// gelijkgezet aan het gekozen app-appearance-profiel (`appearance.isDark`),
@@ -342,24 +363,55 @@ class AppTheme {
   static const darkNeutral = Color(0xFF242424);
 
   // ── Analoge cockpitinstrumenten ──────────────────────────────────────────
-  // Vaste materiaalkleuren: de meterbehuizing is een object óp de dia en
-  // blijft daarom identiek in preview, presenter en headless export.
-  static const cockpitPanel = Color(0xFF202223);
-  static const cockpitPanelBorder = Color(0xFF3A3D3F);
-  static const cockpitShadow = Color(0x55000000);
-  static const cockpitInk = Color(0xFFE8E0CA);
-  static const cockpitInkMuted = Color(0xFFC8BEA5);
-  static const cockpitLabel = Color(0xFFD9D1BD);
-  static const cockpitBezel = Color(0xFF343739);
-  static const cockpitBezelDark = Color(0xFF08090A);
-  static const cockpitFace = Color(0xFF101314);
-  static const cockpitScrew = Color(0xFF090A0B);
-  static const cockpitScrewMetal = Color(0xFF5A5D5E);
-  static const cockpitScrewSlot = Color(0xFF181A1B);
-  static const cockpitHub = Color(0xFF070809);
-  static const cockpitHubMetal = Color(0xFF777A78);
-  static const cockpitHubInner = Color(0xFF1C1E1F);
-  static const cockpitHubHighlight = Color(0xFFB9B9B2);
+  // De meterbehuizing is een object óp de dia en volgt daarom het dia-thema:
+  // een donkere dia krijgt het zwarte instrument, een lichte dia het lichte
+  // (ivoren wijzerplaat, donkere markeringen). [cockpitPaletteFor] kiest.
+
+  /// Zwart instrument met ivoren markeringen — voor donkere dia's.
+  static const cockpitDark = (
+    panel: Color(0xFF202223),
+    panelBorder: Color(0xFF3A3D3F),
+    shadow: Color(0x55000000),
+    ink: Color(0xFFE8E0CA),
+    inkMuted: Color(0xFFC8BEA5),
+    label: Color(0xFFD9D1BD),
+    bezel: Color(0xFF343739),
+    bezelDark: Color(0xFF08090A),
+    face: Color(0xFF101314),
+    screw: Color(0xFF090A0B),
+    screwMetal: Color(0xFF5A5D5E),
+    screwSlot: Color(0xFF181A1B),
+    hub: Color(0xFF070809),
+    hubMetal: Color(0xFF777A78),
+    hubInner: Color(0xFF1C1E1F),
+    hubHighlight: Color(0xFFB9B9B2),
+  );
+
+  /// Licht instrument: crème wijzerplaat met donkere markeringen en een
+  /// zilveren bezel — voor lichte dia's, zodat de meter met de dia meekleurt.
+  static const cockpitLight = (
+    panel: Color(0xFFCED2D6),
+    panelBorder: Color(0xFFAAB0B5),
+    shadow: Color(0x33000000),
+    ink: Color(0xFF23262B),
+    inkMuted: Color(0xFF585D64),
+    label: Color(0xFF40454B),
+    bezel: Color(0xFFB9BDC1),
+    bezelDark: Color(0xFF888D91),
+    face: Color(0xFFEDE8DA),
+    screw: Color(0xFF888D91),
+    screwMetal: Color(0xFFC0C4C7),
+    screwSlot: Color(0xFF696D71),
+    hub: Color(0xFF888D91),
+    hubMetal: Color(0xFFC0C4C7),
+    hubInner: Color(0xFF696D71),
+    hubHighlight: Color(0xFFECECE8),
+  );
+
+  /// Kiest het instrumentpalet voor een dia-achtergrond: een lichte
+  /// achtergrond krijgt het lichte instrument, een donkere het zwarte.
+  static CockpitPalette cockpitPaletteFor(Color surface) =>
+      surface.computeLuminance() > 0.5 ? cockpitLight : cockpitDark;
 
   // ── Goud/brons-accent (o.a. LibreKAT-thema, badges) ───────────────────────
   static const gold = Color(0xFFD4A24E);

@@ -216,17 +216,18 @@ class _CockpitGrid extends StatelessWidget {
       },
     );
     if (scheme.visualStyle == CockpitVisualStyle.classic) return grid;
+    final palette = AppTheme.cockpitPaletteFor(surface);
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppTheme.cockpitPanel,
+        color: palette.panel,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppTheme.cockpitPanelBorder, width: 1.5),
-        boxShadow: const [
+        border: Border.all(color: palette.panelBorder, width: 1.5),
+        boxShadow: [
           BoxShadow(
-            color: AppTheme.cockpitShadow,
+            color: palette.shadow,
             blurRadius: 18,
-            offset: Offset(0, 8),
+            offset: const Offset(0, 8),
           ),
         ],
       ),
@@ -321,7 +322,9 @@ class _CockpitInstrument extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: visualStyle == CockpitVisualStyle.authentic
-                    ? AppTheme.cockpitLabel.withValues(alpha: 0.82)
+                    ? AppTheme.cockpitPaletteFor(
+                        surface,
+                      ).label.withValues(alpha: 0.82)
                     : mutedColor,
                 fontSize: labelSize,
                 fontFamily: font,
@@ -380,22 +383,6 @@ class _CockpitInstrumentPainter extends CustomPainter {
     required this.font,
     required this.faceText,
   });
-
-  /// Structural lines (gauge tracks, ticks, glass) derive from the slide text
-  /// colour at low opacity so the instruments read on any slide background.
-  bool get _authentic => visualStyle == CockpitVisualStyle.authentic;
-
-  double get _power => !_authentic
-      ? 1
-      : Curves.easeOut.transform(((progress - 0.03) / 0.30).clamp(0.0, 1.0));
-
-  Color get _instrumentInk => _authentic ? AppTheme.cockpitInk : textColor;
-
-  Color get _instrumentMuted => _authentic
-      ? AppTheme.cockpitInkMuted.withValues(alpha: 0.72)
-      : mutedColor;
-
-  Color _line(double alpha) => _instrumentInk.withValues(alpha: alpha * _power);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -580,12 +567,15 @@ class _CockpitInstrumentPainter extends CustomPainter {
     // authentic instrument is a round bezel: derive the tube from that circle
     // instead of from the whole (wide) cell, otherwise both tube and bulb land
     // outside the glass.
-    final cx = _authentic ? dialCenter.dx - s * 0.16 : w * 0.30;
+    // Authentic: centre the tube on the bezel axis with the digital readout
+    // below it, so the instrument reads as centred instead of shoved left to
+    // make room for a value beside it.
+    final cx = _authentic ? dialCenter.dx : w * 0.30;
     final tubeWidth = s * (_authentic ? 0.11 : 0.14);
     final bulbRadius = tubeWidth * (_authentic ? 0.82 : 0.95);
-    final topY = _authentic ? dialCenter.dy - s * 0.30 : h * 0.16;
+    final topY = _authentic ? dialCenter.dy - s * 0.32 : h * 0.16;
     final bulbCenter = _authentic
-        ? Offset(cx, dialCenter.dy + s * 0.24)
+        ? Offset(cx, dialCenter.dy + s * 0.10)
         : Offset(cx, h * 0.82);
     final channelTop = topY + tubeWidth * 0.5;
     final channelBottom = bulbCenter.dy;
@@ -698,9 +688,9 @@ class _CockpitInstrumentPainter extends CustomPainter {
     _valueText(
       canvas,
       _authentic
-          ? Offset(dialCenter.dx + s * 0.18, dialCenter.dy)
+          ? Offset(dialCenter.dx, dialCenter.dy + s * 0.31)
           : Offset(w * 0.72, h * 0.5),
-      _authentic ? s * 0.135 : w * 0.092,
+      _authentic ? s * 0.12 : w * 0.092,
       number: _fmt(_animatedValue(meter.value)),
       unit: meter.unit,
     );
@@ -921,8 +911,10 @@ class _CockpitInstrumentPainter extends CustomPainter {
         '{value}',
         _fmt(_animatedHeading(meter.value) % 360).padLeft(3, '0'),
       ),
+      // Stack the readouts in the clear right column instead of over the
+      // compass rose, where they collided with the S label and the ticks.
       _authentic
-          ? Offset(size.width * 0.50, size.height * 0.70)
+          ? Offset(size.width * 0.80, size.height * 0.42)
           : Offset(size.width * 0.76, size.height * 0.43),
       size.width * (_authentic ? 0.038 : 0.05),
       _instrumentInk,
@@ -937,7 +929,7 @@ class _CockpitInstrumentPainter extends CustomPainter {
         _fmt(meter.heading).padLeft(3, '0'),
       ),
       _authentic
-          ? Offset(size.width * 0.50, size.height * 0.80)
+          ? Offset(size.width * 0.80, size.height * 0.56)
           : Offset(size.width * 0.76, size.height * 0.59),
       size.width * (_authentic ? 0.029 : 0.038),
       _instrumentMuted,
@@ -949,7 +941,9 @@ class _CockpitInstrumentPainter extends CustomPainter {
       _text(
         canvas,
         meter.markerLabel,
-        Offset(size.width * 0.76, size.height * 0.72),
+        _authentic
+            ? Offset(size.width * 0.80, size.height * 0.70)
+            : Offset(size.width * 0.76, size.height * 0.72),
         size.width * 0.032,
         _instrumentMuted,
         align: TextAlign.center,
