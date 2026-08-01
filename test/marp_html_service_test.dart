@@ -1040,6 +1040,57 @@ void _imageEmbedTests() {
     expect(html, contains("uri.indexOf('data:image/')===0"));
     expect(html, contains('OCIDECK_IMG'));
   });
+
+  test('het cumulatieve insluitbudget valt op de grens en één byte '
+      'erover (#1045)', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    const md =
+        '# A\n\n![one](images/a.png)\n\n---\n\n# B\n\n![two](images/b.png)\n';
+    const uri = 'data:image/png;base64,AAAA';
+    Future<String?> resolve(String s) async => uri;
+    final total = uri.length * 2; // twee verschillende bronnen
+
+    // Precies op de grens: het hele document wordt gebouwd.
+    final ok = await service.build(
+      md,
+      embedImage: resolve,
+      maxEmbedBytes: total,
+    );
+    expect(ok, contains('OCIDECK_IMG'));
+
+    // Eén byte minder: de export weigert vóór geheugenuitputting.
+    expect(
+      () => service.build(md, embedImage: resolve, maxEmbedBytes: total - 1),
+      throwsA(isA<HtmlEmbedBudgetExceeded>()),
+    );
+  });
+
+  test(
+    'een hergebruikt beeld telt één keer tegen het budget (#1045)',
+    () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      // Dezelfde bron op twee dia's.
+      const md =
+          '# A\n\n![bg](images/zelfde.png)\n\n---\n\n'
+          '# B\n\n![bg](images/zelfde.png)\n';
+      const uri = 'data:image/png;base64,AAAA';
+      var calls = 0;
+      Future<String?> resolve(String s) async {
+        calls++;
+        return uri;
+      }
+
+      // Een budget voor één beeld volstaat: dedup telt de bron één keer, dus de
+      // grens ziet niet twee kopieën.
+      final html = await service.build(
+        md,
+        embedImage: resolve,
+        maxEmbedBytes: uri.length,
+      );
+      expect(calls, 1);
+      expect(html, contains('OCIDECK_IMG'));
+    },
+  );
 }
 
 // ── Video ──────────────────────────────────────────────────────────────────
