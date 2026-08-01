@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
@@ -221,6 +222,59 @@ void main() {
 
     expect(find.byType(FullDeckPreview), findsOneWidget);
     expect(find.textContaining('Slide 1'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('FullDeckPreview lists every rendered finding page', (
+    tester,
+  ) async {
+    final body = List.filled(8, 'lorem ipsum dolor sit amet').join(' ');
+    final finding = Slide.create(SlideType.finding).copyWith(
+      customMarkdown: FindingSpec(
+        heading: 'F-03 · SQL-injectie',
+        scopeObject: 'https://app.voorbeeld/login',
+        cvssVector:
+            'CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N',
+        description: body,
+        confirmation: body,
+        impact: body,
+        recommendation: body,
+      ).toMarkdown(),
+    );
+    final container = _deckWith([finding]);
+    addTearDown(container.dispose);
+    final deck = container.read(deckProvider).deck!;
+    final numberedProfile = deck.themeProfile.copyWith(
+      footerShowPageNumbers: true,
+    );
+
+    await tester.binding.setSurfaceSize(const Size(1000, 1800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          theme: AppTheme.light,
+          home: FullDeckPreview(deck: deck, themeProfile: numberedProfile),
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+
+    // Starter title + three rendered pages for the authored finding. Both the
+    // list labels and the in-slide footers count the expanded render list, just
+    // like presenter/export, rather than the two authored slides.
+    for (var page = 1; page <= 4; page++) {
+      expect(find.text('Slide $page'), findsOneWidget);
+    }
+    expect(find.text('2 / 4'), findsOneWidget);
+    expect(find.text('3 / 4'), findsOneWidget);
+    expect(find.text('4 / 4'), findsOneWidget);
+    expect(find.textContaining('Slide 5'), findsNothing);
+    expect(find.textContaining('(1/3)'), findsOneWidget);
+    expect(find.textContaining('(2/3)'), findsOneWidget);
+    expect(find.textContaining('(3/3)'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 

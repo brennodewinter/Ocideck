@@ -596,6 +596,21 @@ class FullDeckPreview extends ConsumerWidget {
     final showWatermark = ref
         .watch(settingsProvider)
         .classificationWatermarkEnabled;
+    // Render-time pagination: a long finding presents across several full-size
+    // slides (see [expandFindingsForRender]). The full-deck preview is a
+    // what-you-present view, so it must expand findings exactly like the
+    // presenter and the export — otherwise an overflowing finding renders here
+    // as one slide scaled down to a fraction of the width, while it actually
+    // presents full-width across several pages. Number over the expanded list,
+    // matching the presenter's slide counter.
+    final renderSlides = expandFindingsForRender(
+      deck.slides,
+      profile: themeProfile,
+    );
+    // The scope→CIA index keys on the finding id (page 1 keeps it), so it is
+    // derived once from the source slides and shared across every page — it was
+    // rebuilt per item before, an O(n²) walk of the deck on each build.
+    final scopeCia = deckScopeCiaIndex(deck.slides);
     return Scaffold(
       backgroundColor: AppTheme.panelBg,
       appBar: AppBar(
@@ -609,7 +624,7 @@ class FullDeckPreview extends ConsumerWidget {
       ),
       body: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 40),
-        itemCount: deck.slides.length,
+        itemCount: renderSlides.length,
         itemBuilder: (_, i) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 24),
@@ -632,7 +647,7 @@ class FullDeckPreview extends ConsumerWidget {
                     ],
                   ),
                   child: SlidePreviewWidget(
-                    slide: deck.slides[i],
+                    slide: renderSlides[i],
                     projectPath: deck.projectPath,
                     themeProfile: themeProfile,
                     cockpitColorScheme: ref
@@ -643,8 +658,8 @@ class FullDeckPreview extends ConsumerWidget {
                         .allowRemoteMedia,
                     onLinkTap: openExternalUrl,
                     slideNumber: i + 1,
-                    slideCount: deck.slides.length,
-                    scopeCia: deckScopeCiaIndex(deck.slides),
+                    slideCount: renderSlides.length,
+                    scopeCia: scopeCia,
                     reportLanguage: deck.language,
                     improvementY01: deck.improvementY01Metric,
                     tlp: deck.tlp,
