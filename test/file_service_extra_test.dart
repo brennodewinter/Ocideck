@@ -137,6 +137,71 @@ void main() {
     expect(all.single.deck.title, 'Diep');
   });
 
+  test('scanPresentations skips a file over the markdown cap', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_scan_huge_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    // A normal deck alongside one that blows past the 32 MiB cap.
+    File(p.join(temp.path, 'ok.md')).writeAsStringSync(
+      '---\nmarp: true\ntheme: ocideck\ntitle: Ok\n---\n\n# Ok\n',
+    );
+    final huge = File(p.join(temp.path, 'huge.md'));
+    final filler = 'x' * 1024;
+    final sink = huge.openWrite();
+    sink.write('---\nmarp: true\n---\n\n# Big\n\n');
+    final chunks = (FileService.maxDeckMarkdownBytes ~/ filler.length) + 8;
+    for (var i = 0; i < chunks; i++) {
+      sink.write(filler);
+    }
+    await sink.flush();
+    await sink.close();
+    expect(await huge.length(), greaterThan(FileService.maxDeckMarkdownBytes));
+
+    final service = makeService();
+    final names = (await service.scanPresentations(
+      temp.path,
+    )).map((s) => s.fileName).toSet();
+    expect(names, contains('ok.md'));
+    expect(names, isNot(contains('huge.md')));
+  });
+
+  test('scanPresentations stops at the cumulative scan budget', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_scan_budget_');
+    addTearDown(() async {
+      if (await temp.exists()) await temp.delete(recursive: true);
+    });
+
+    // Five equally-sized valid decks; the budget only admits the first two.
+    final body = 'x' * 900; // padded so every file is the same, known size.
+    late int fileSize;
+    for (var i = 0; i < 5; i++) {
+      final f = File(p.join(temp.path, 'deck_$i.md'));
+      f.writeAsStringSync(
+        '---\nmarp: true\ntheme: ocideck\ntitle: Deck$i\n---\n\n# Deck$i\n\n- $body\n',
+      );
+      fileSize = f.lengthSync();
+    }
+
+    final service = makeService();
+    // Room for two files, not the third (2*size ≤ budget < 3*size).
+    final budget = fileSize * 2 + fileSize ~/ 2;
+    final results = await service.scanPresentations(
+      temp.path,
+      maxScanBytes: budget,
+    );
+    expect(results.length, 2);
+  });
+
+  test('openDeck refuses provided content over the markdown cap', () async {
+    final service = makeService();
+    final oversized =
+        '---\nmarp: true\n---\n\n# Big\n\n${'x' * (FileService.maxDeckMarkdownBytes + 1)}';
+    final result = await service.openDeck('memory.md', content: oversized);
+    expect(result, isNull);
+  });
+
   test('scanPresentations returns empty for a missing directory', () async {
     final service = makeService();
     final result = await service.scanPresentations(

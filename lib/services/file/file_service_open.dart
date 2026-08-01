@@ -41,6 +41,19 @@ class DeckOpenResult {
       skippedSidecars = const <String>[];
 }
 
+/// True when [content] handed to [FileService.openDeckDetailed] is over the
+/// markdown cap. A UTF-16 code unit is always ≥ 1 UTF-8 byte, so a code-unit
+/// count over the cap guarantees the byte size is over it too — a cheap, O(1)
+/// conservative guard that never has to encode the whole string to reject.
+bool _providedContentOverCap(String content) {
+  if (content.length <= FileService.maxDeckMarkdownBytes) return false;
+  logWarning(
+    'FileService.openDeck: provided content exceeds '
+    '${FileService.maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
+  );
+  return true;
+}
+
 extension _FileServiceOpen on FileService {
   /// True when [raw] opens with a complete frontmatter block but carries no
   /// slide body after it, while [parsed] degraded to the single placeholder

@@ -86,7 +86,13 @@ hang the app:
 |---|---|---|
 | Image-reference scan | **20 000** files, depth **32** | `lib/services/image_reference_service.dart:24,28` |
 | Deck listing | **5 000** files, depth **32** | `file_service.dart`, `listDecks` defaults |
+| Presentation scan (parse) | **5 000** files, depth **32**, **256 MiB** retained | `file_service.dart`, `scanPresentations` defaults |
 | Content search | **20 000** files, depth **8** | `file_service.dart`, `searchDecks` defaults |
+
+`scanPresentations` also stats each `.md` and skips any file over the 32 MiB
+markdown cap *before* reading it, and stops once the retained sources would cross
+the 256 MiB budget — so neither one giant file nor many valid ones can exhaust
+memory.
 
 **Optimisation tips:** compress high-resolution photos before import; keep chart
 series modest (the palette cycles after 10); split very large decks; and keep

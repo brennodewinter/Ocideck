@@ -346,24 +346,28 @@ class FileService {
     '.dart_tool',
   };
 
-  /// Recursively scan [directory] for Marp markdown presentations and parse
-  /// them into decks. [excludePath] (typically the currently open file) is
-  /// skipped. Directories such as images/ and themes/ are ignored. The walk
-  /// descends the full tree (up to [maxDepth], effectively unbounded for real
-  /// folders) but is capped at [maxFilesVisited] parsed decks so a pathological
-  /// tree can't hang the UI — each `.md` here is fully read and parsed, which is
-  /// costlier than the frontmatter probe used by [scanKnownLocations].
+  /// Recursively scan [directory] for Marp markdown presentations and parse them
+  /// into decks. [excludePath] (typically the currently open file) is skipped.
+  /// Directories such as images/ and themes/ are ignored. The walk descends the
+  /// full tree (up to [maxDepth], effectively unbounded for real folders) but is
+  /// capped at [maxFilesVisited] parsed decks so a pathological tree can't hang
+  /// the UI — each `.md` here is fully read and parsed, which is costlier than
+  /// the frontmatter probe used by [scanKnownLocations]. Two size guards
+  /// ([maxDeckMarkdownBytes] per file, [maxScanBytes] cumulative) keep a
+  /// pathological tree from exhausting memory; see [_scanOneFile].
   Future<List<ScannedPresentation>> scanPresentations(
     String directory, {
     String? excludePath,
     int maxDepth = 32,
     int maxFilesVisited = 5000,
+    int maxScanBytes = 256 * 1024 * 1024,
   }) async {
     final root = Directory(directory);
     if (!await root.exists()) return [];
 
     final results = <ScannedPresentation>[];
     var visited = 0;
+    var scannedBytes = 0;
     var capped = false;
     Future<void> walk(Directory dir, int depth) async {
       if (capped) return;
@@ -392,30 +396,20 @@ class FileService {
             );
             return;
           }
-          String content;
-          try {
-            content = await entity.readAsString();
-          } catch (e) {
-            logWarning('FileService.scanPresentations: file not readable', e);
-            continue;
+          final outcome = await _scanOneFile(
+            this,
+            entity,
+            scannedBytes,
+            maxScanBytes,
+          );
+          if (outcome.stop) {
+            capped = true;
+            return;
           }
-          final deck = await openDeck(entity.path, content: content);
-          if (deck != null && deck.slides.isNotEmpty) {
-            DateTime? modified;
-            try {
-              modified = (await entity.stat()).modified;
-            } catch (e) {
-              logWarning('FileService.scanPresentations: stat failed', e);
-            }
-            results.add(
-              ScannedPresentation(
-                path: entity.path,
-                fileName: p.basename(entity.path),
-                deck: deck,
-                content: content,
-                modified: modified,
-              ),
-            );
+          final pres = outcome.presentation;
+          if (pres != null) {
+            scannedBytes += outcome.bytes;
+            results.add(pres);
           }
         } else if (entity is Directory && depth < maxDepth) {
           final name = p.basename(entity.path);
@@ -610,6 +604,10 @@ class FileService {
   }) async {
     String raw;
     if (content != null) {
+      // Provided content bypasses the on-disk stat, so apply an equivalent cap.
+      if (_providedContentOverCap(content)) {
+        return const DeckOpenResult.failed(OpenFailure.tooLarge);
+      }
       raw = content;
     } else {
       final file = File(filePath);

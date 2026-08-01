@@ -4,6 +4,76 @@
 // helpers of the public scan API, which stays on the class.
 part of '../file_service.dart';
 
+/// Outcome of processing one candidate `.md` file during a broad scan: either a
+/// presentation to keep (with its on-disk byte size), a file to skip, or a
+/// signal to stop the walk because the cumulative budget is exhausted.
+class _ScanFileOutcome {
+  const _ScanFileOutcome.skip() : presentation = null, bytes = 0, stop = false;
+  const _ScanFileOutcome.stop() : presentation = null, bytes = 0, stop = true;
+  const _ScanFileOutcome.keep(this.presentation, this.bytes) : stop = false;
+
+  final ScannedPresentation? presentation;
+  final int bytes;
+  final bool stop;
+}
+
+/// Stats, size-gates, reads and parses one candidate `.md` file. The two size
+/// guards keep a pathological tree from exhausting memory: a file over
+/// [FileService.maxDeckMarkdownBytes] is skipped on its stat alone (never read),
+/// and once adding it would cross [maxScanBytes] the walk is told to stop.
+Future<_ScanFileOutcome> _scanOneFile(
+  FileService service,
+  File entity,
+  int scannedBytes,
+  int maxScanBytes,
+) async {
+  // Stat first so an oversized file is rejected on its size alone, never read
+  // into memory. stat() also gives the modified time we keep below.
+  FileStat stat;
+  try {
+    stat = await entity.stat();
+  } catch (e) {
+    logWarning('FileService.scanPresentations: stat failed', e);
+    return const _ScanFileOutcome.skip();
+  }
+  if (stat.size > FileService.maxDeckMarkdownBytes) {
+    logWarning(
+      'FileService.scanPresentations: file exceeds '
+      '${FileService.maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap — skipped',
+      entity.path,
+    );
+    return const _ScanFileOutcome.skip();
+  }
+  // Stop before crossing the cumulative budget so the retained sources can't
+  // add up past [maxScanBytes], even when every file is valid.
+  if (scannedBytes + stat.size > maxScanBytes) {
+    logWarning(
+      'FileService.scanPresentations: scan budget reached '
+      '(${maxScanBytes ~/ (1024 * 1024)} MiB) — results truncated',
+    );
+    return const _ScanFileOutcome.stop();
+  }
+  String content;
+  try {
+    content = await entity.readAsString();
+  } catch (e) {
+    logWarning('FileService.scanPresentations: file not readable', e);
+    return const _ScanFileOutcome.skip();
+  }
+  final deck = await service.openDeck(entity.path, content: content);
+  if (deck == null || deck.slides.isEmpty) return const _ScanFileOutcome.skip();
+  return _ScanFileOutcome.keep(
+    ScannedPresentation(
+      path: entity.path,
+      fileName: p.basename(entity.path),
+      deck: deck,
+      content: content,
+      modified: stat.modified,
+    ),
+    stat.size,
+  );
+}
+
 extension _FileServiceScan on FileService {
   /// Frontmatter probe for one file: reads at most [_scanHeadBytes], and returns
   /// a [ScanHit] only when the file declares `marp: true`. Oversized or

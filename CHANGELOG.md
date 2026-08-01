@@ -176,6 +176,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Beveiliging/geheugen: de mappenscan (`scanPresentations`) las ieder
+  markdownbestand eerst volledig met `readAsString` en gaf de string daarna als
+  `content` aan `openDeck`, dat in dat pad de 32 MiB-bestandsgrens oversloeg. Eén
+  reusachtig `.md` werd zo volledig ingelezen vóór weigering, en veel geldige
+  decks konden samen gigabytes strings in geheugen houden. Voortaan wordt elk
+  bestand eerst gestat en boven de 32 MiB-grens overgeslagen vóór het lezen,
+  krijgt aangeleverde `content` in `openDeck` een gelijkwaardige bytegrens, en
+  stopt de scan zodra de bewaarde bronnen samen het cumulatieve budget (256 MiB)
+  zouden overschrijden. Lost #1048 op.
 - Documentatielezer en slides: klikken op een link deed niets. Élke link ging
   naar de externe-browser-route, die van een relatieve verwijzing als
   `FILE_FORMAT.md` een `https://FILE_FORMAT.md` maakte — een adres dat de
