@@ -172,51 +172,97 @@ class _FindingPreview extends StatelessWidget {
               ],
             ),
           ),
-          _severityGauge(spec, ctxCvss),
+          _severityScoreCard(context, spec, ctxCvss, severity),
         ],
       ),
     );
   }
 
-  /// A compact cockpit speedometer for the finding's effective CVSS score
-  /// (feedback #3): the context score when the scope object is rated, else the
-  /// base score. Empty when there is no valid vector. Colours are deterministic
-  /// (profile + fixed AppTheme severity colours) so it renders identically in an
-  /// export isolate, like the badges.
-  Widget _severityGauge(FindingSpec spec, Cvss4? ctxCvss) {
+  /// De effectieve CVSS-score als rustige typografische kaart. De oude
+  /// cockpitmeter schilderde de waarde in een wijzerplaat en herhaalde daarmee
+  /// de scorebadge; gewone widgettekst blijft ook op kleine previews leesbaar en
+  /// toegankelijk voor hulptechnologie (#1059).
+  Widget _severityScoreCard(
+    BuildContext context,
+    FindingSpec spec,
+    Cvss4? ctxCvss,
+    Color severity,
+  ) {
     final cvss = ctxCvss ?? spec.cvss;
     if (cvss == null) return const SizedBox.shrink();
-    final meter = CockpitMeterSpec(
-      type: CockpitMeterType.speedometer,
-      label: 'CVSS',
-      unit: '',
-      min: 0,
-      max: 10,
-      greenFrom: 0,
-      greenTo: 4,
-      redFrom: 7,
-      value: cvss.score,
-    );
     final textColor = AppTheme.parseHexColor(profile.textColor);
     return Padding(
       padding: EdgeInsets.only(left: w * 0.02),
-      child: SizedBox(
-        width: w * 0.16,
-        height: w * 0.16,
-        child: _CockpitInstrument(
-          meter: meter,
-          progress: 1,
-          accent: AppTheme.parseHexColor(profile.accentColor),
-          surface: AppTheme.parseHexColor(profile.slideBackgroundColor),
-          textColor: textColor,
-          mutedColor: textColor.withValues(alpha: 0.62),
-          good: AppTheme.success700,
-          warning: AppTheme.amber500,
-          critical: AppTheme.danger600,
-          cold: AppTheme.success700,
-          sky: AppTheme.slideRule,
-          ground: AppTheme.slideInkSoft,
-          font: font,
+      child: Container(
+        key: const ValueKey('finding-cvss-score-card'),
+        width: w * 0.15,
+        padding: EdgeInsets.fromLTRB(
+          w * 0.018,
+          w * 0.014,
+          w * 0.018,
+          w * 0.016,
+        ),
+        decoration: BoxDecoration(
+          color: severity.withValues(alpha: 0.09),
+          border: Border.all(color: severity.withValues(alpha: 0.42)),
+          borderRadius: BorderRadius.circular(w * 0.012),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              ctxCvss == null
+                  ? context.l10n.d('CVSS')
+                  : '${context.l10n.d('Context')} ${context.l10n.d('CVSS')}',
+              maxLines: 1,
+              style: _applyFont(
+                font,
+                TextStyle(
+                  color: textColor.withValues(alpha: 0.68),
+                  fontSize: w * 0.018,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: w * 0.0015,
+                ),
+              ),
+            ),
+            SizedBox(height: w * 0.004),
+            Text(
+              cvss.score.toStringAsFixed(1),
+              style: _applyFont(
+                font,
+                TextStyle(
+                  color: textColor,
+                  fontSize: w * 0.052,
+                  fontWeight: FontWeight.w800,
+                  height: 1,
+                ),
+              ),
+            ),
+            SizedBox(height: w * 0.008),
+            Container(
+              width: w * 0.032,
+              height: w * 0.005,
+              decoration: BoxDecoration(
+                color: severity,
+                borderRadius: BorderRadius.circular(w * 0.003),
+              ),
+            ),
+            SizedBox(height: w * 0.008),
+            Text(
+              cvss.severity.label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: _applyFont(
+                font,
+                TextStyle(
+                  color: textColor,
+                  fontSize: w * 0.021,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -242,15 +288,10 @@ class _FindingPreview extends StatelessWidget {
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         if (base != null && ctxCvss != null) ...[
-          // The CIA-weighted context score leads (it is the "correct" score),
-          // with the base score alongside for transparency.
-          _filledBadge(badge(l10n.d('Context'), ctxCvss), band(ctxCvss)),
+          // De contextscore staat al als primaire scorekaart rechts. Alleen de
+          // basisscore blijft hier ter vergelijking staan, zonder verdubbeling.
           _filledBadge(badge(l10n.d('Basis'), base), band(base)),
-        ] else if (base != null)
-          _filledBadge(
-            '${base.score.toStringAsFixed(1)} · ${base.severity.label}',
-            band(base),
-          ),
+        ],
         if (spec.cweId != null) _outlinedChip('${l10n.d('CWE')}-${spec.cweId}'),
         // MASWE naast CWE, niet in plaats van: een mobiele bevinding hoort in
         // beide talen leesbaar te zijn, en de zwakheid verwijst zelf ook naar

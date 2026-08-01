@@ -1810,6 +1810,7 @@ const _dutchSourceAddGa = <String, String>{
   '(dit apparaat)': '(an gléas seo)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
       'Cuir méarlorg gach gléis i gcomparáid trí bhealach iontaofa — léigh amach dá chéile é, nó seol é ar shlí a bhfuil muinín agat aisti. Má tá siad mar an gcéanna, tá tú ag obair leis na fíorghléasanna agus níor tháinig aon duine eatarthu. Má tá siad éagsúil, cuir deireadh leis an gcomhoibriú.',
+  'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.': 'Ní nasc cuiridh bailí é sin.',
   'De Matrix-homeserver is niet bereikbaar.':
       'Níl teacht ar an homeserver Matrix.',

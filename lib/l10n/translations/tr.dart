@@ -2752,6 +2752,7 @@ const _dutchSourceAddTr = <String, String>{
   '(dit apparaat)': '(bu cihaz)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
       'Her cihazın parmak izini güvenilir bir kanaldan karşılaştırın — birbirinize okuyun ya da güvendiğiniz bir yoldan gönderin. Eşleşiyorlarsa gerçek cihazlarla çalışıyorsunuz ve kimse araya girmemiş demektir. Farklıysalar iş birliğini sonlandırın.',
+  'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Bu geçerli bir davet bağlantısı değil.',
   'De Matrix-homeserver is niet bereikbaar.':

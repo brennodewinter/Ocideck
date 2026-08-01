@@ -1791,6 +1791,7 @@ const _dutchSourceAddLa = <String, String>{
   '(dit apparaat)': '(hoc instrumentum)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
       'Cuiusque instrumenti vestigium per canalem fidum compara — invicem recitate, vel per viam cui confidis mitte. Si congruunt, cum veris instrumentis laboras neque quisquam se interposuit. Si discrepant, cooperationem rumpe.',
+  'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Hic nexus invitationis validus non est.',
   'De Matrix-homeserver is niet bereikbaar.':

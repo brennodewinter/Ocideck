@@ -1804,6 +1804,7 @@ const _dutchSourceAddPt = <String, String>{
   '(dit apparaat)': '(este dispositivo)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
       'Compara a impressão digital de cada dispositivo por um canal de confiança — leiam-na um ao outro, ou envia-a por uma via em que confies. Se coincidirem, estás a trabalhar com os dispositivos reais e ninguém se meteu no meio. Se diferirem, interrompe a colaboração.',
+  'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Esta não é uma ligação de convite válida.',
   'De Matrix-homeserver is niet bereikbaar.':

@@ -1782,6 +1782,7 @@ const _dutchSourceAddLt = <String, String>{
   '(dit apparaat)': '(šis įrenginys)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
       'Palyginkite kiekvieno įrenginio kontrolinį kodą patikimu kanalu — perskaitykite jį vienas kitam arba atsiųskite keliu, kuriuo pasitikite. Jei sutampa, dirbate su tikrais įrenginiais ir niekas neįsiterpė. Jei skiriasi, nutraukite bendradarbiavimą.',
+  'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Tai nėra galiojanti pakvietimo nuoroda.',
   'De Matrix-homeserver is niet bereikbaar.':

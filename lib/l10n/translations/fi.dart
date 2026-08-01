@@ -1775,6 +1775,7 @@ const _dutchSourceAddFi = <String, String>{
   '(dit apparaat)': '(tämä laite)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
       'Vertaa jokaisen laitteen sormenjälkeä luotettavan kanavan kautta — lukekaa se toisillenne tai lähetä se reittiä, johon luotat. Jos ne täsmäävät, työskentelet oikeiden laitteiden kanssa eikä kukaan ole tunkeutunut väliin. Jos ne eroavat, katkaise yhteistyö.',
+  'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'Tämä ei ole kelvollinen kutsulinkki.',
   'De Matrix-homeserver is niet bereikbaar.':

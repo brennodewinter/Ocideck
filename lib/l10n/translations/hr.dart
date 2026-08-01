@@ -1781,6 +1781,7 @@ const _dutchSourceAddHr = <String, String>{
   '(dit apparaat)': '(ovaj uređaj)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
       'Usporedite otisak svakog uređaja putem pouzdanog kanala — pročitajte ga jedni drugima ili ga pošaljite putem kojem vjerujete. Ako se podudaraju, radite s pravim uređajima i nitko se nije umiješao. Ako se razlikuju, prekinite suradnju.',
+  'CVSS': 'CVSS',
   'Dat is geen geldige uitnodigingslink.':
       'To nije valjana poveznica pozivnice.',
   'De Matrix-homeserver is niet bereikbaar.':

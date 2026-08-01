@@ -14,7 +14,7 @@ const _headerBody =
     '\n'
     '**Scope object:** `https://app.client.example/login`\n'
     '**CVSS 4.0:** 9.3 (Critical) · '
-    '`CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N`\n'
+    '`CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N`\n'
     '**CWE:** [CWE-89 — Improper Neutralization of SQL]'
     '(https://cwe.mitre.org/data/definitions/89.html)\n'
     '**CVE:** [CVE-2024-1234](https://nvd.nist.gov/vuln/detail/CVE-2024-1234)\n'
@@ -46,15 +46,16 @@ Slide _finding(String body) => Slide.create(
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
-  testWidgets('finding renders a derived CVSS badge and CWE/CVE chips', (
+  testWidgets('finding renders a derived CVSS score and CWE/CVE chips', (
     tester,
   ) async {
     await tester.pumpWidget(_host(_finding(_headerBody)));
     await tester.pump();
 
     expect(tester.takeException(), isNull);
-    // Score + severity band are derived from the vector, not read from text.
-    expect(find.text('9.3 · Critical'), findsOneWidget);
+    // Score + severity are derived from the vector, not read from text.
+    expect(find.text('9.3'), findsOneWidget);
+    expect(find.text('Critical'), findsOneWidget);
     expect(find.text('CWE-89'), findsOneWidget);
     expect(find.text('CVE-2024-1234'), findsOneWidget);
     expect(
@@ -81,7 +82,14 @@ void main() {
     await tester.pump();
 
     expect(tester.takeException(), isNull);
-    // Base score is still shown (labelled), plus a CIA-weighted context score.
+    // De contextkaart toont de gewogen score als primaire waarde; de
+    // oorspronkelijke basisscore blijft daarnaast transparant zichtbaar.
+    expect(
+      find.byKey(const ValueKey('finding-cvss-score-card')),
+      findsOneWidget,
+    );
+    expect(find.text('8.9'), findsOneWidget);
+    expect(find.text('High'), findsOneWidget);
     expect(find.textContaining('Basis 9.3'), findsOneWidget);
     expect(find.textContaining('Context'), findsOneWidget);
   });
@@ -100,24 +108,34 @@ void main() {
     expect(find.textContaining('Opgelost na hertest'), findsOneWidget);
   });
 
-  testWidgets('a finding with a CVSS shows the severity speedometer (#3)', (
+  testWidgets('a finding shows CVSS as text without a painted meter (#1059)', (
     tester,
   ) async {
     await tester.pumpWidget(_host(_finding(_headerBody)));
     await tester.pump();
 
     expect(tester.takeException(), isNull);
-    // The cockpit speedometer beside the header carries a 'CVSS' label.
+    // De score is gewone, selecteerbare widgettekst en zit niet langer
+    // verstopt in een decoratieve cockpitmeter.
     expect(find.text('CVSS'), findsOneWidget);
+    expect(find.text('9.3'), findsOneWidget);
+    expect(find.text('Critical'), findsOneWidget);
+    final scoreCard = find.byKey(const ValueKey('finding-cvss-score-card'));
+    expect(scoreCard, findsOneWidget);
+    expect(
+      find.descendant(of: scoreCard, matching: find.byType(CustomPaint)),
+      findsNothing,
+    );
   });
 
-  testWidgets('a finding without a CVSS shows no speedometer', (tester) async {
+  testWidgets('a finding without a CVSS shows no score card', (tester) async {
     final md = const FindingSpec(heading: 'F-1 · Geen score').toMarkdown();
     await tester.pumpWidget(_host(_finding(md)));
     await tester.pump();
 
     expect(tester.takeException(), isNull);
     expect(find.text('CVSS'), findsNothing);
+    expect(find.byKey(const ValueKey('finding-cvss-score-card')), findsNothing);
   });
 
   testWidgets('a finding linked to a test shows the test id chip (#8)', (
