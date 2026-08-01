@@ -2805,6 +2805,28 @@ const _dutchSourceAddTr = <String, String>{
       'Görseller için web belleği dolu (en fazla 256 MB). Veri kaybını önlemek için önce çalışmanızı bir .ocideck dosyası olarak kaydedin. Ardından daha az veya daha küçük görsel kullanın, diğer sunumları kapatın ya da başka sunumları açmadan yeniden yükleyin.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Görseller için web belleği dolu (en fazla 256 MB). Daha fazla görsel eklemeden önce çalışmanızı bir .ocideck dosyası olarak kaydedin ve sayfayı yeniden yükleyin.',
+  'Afbeeldingsrechten': 'Resim hakları',
+  'Afbeeldingsrechten controleren…': 'Resim haklarını kontrol edin…',
+  'Afdoening': 'Yerleşim',
+  'Afdoening vastleggen': 'Kayıt yerleşimi',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Örneğin bir fatura, lisans veya dosya referansı',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Olası telif hakkı risklerine karşı görüntüleri yerel olarak kontrol eder. Yeni veri havuzu görüntüleri ve varlık havuzunun tamamı taranabilir; uyarıları bir yönetici yönetir. Bu bir uyarıdır, hukuki bir görüş değildir ve üçüncü şahıslara hiçbir resim gönderilmeyecektir.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Yerleşim kurtarılamadı. Yeniden tarayın ve tekrar deneyin.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Bu hukuki bir görüş değil, teknik bir uyarıdır. Bir yönetici talimatları gözden geçirir.',
+  'Geen openstaande aanwijzingen.': 'Olağanüstü ipucu yok.',
+  'Geldige rechten aangetoond': 'Geçerli haklar gösterildi',
+  'Mogelijke auteursrechtelijke risico’s': 'Olası telif hakkı riskleri',
+  'Niet gebruiken': 'Kullanma',
+  'Notitie (optioneel)': 'Not (isteğe bağlı)',
+  'Onterechte signalering': 'Yanlış sinyal verme',
+  'afbeeldingen vragen om beoordeling': 'görsellerin incelenmesi gerekiyor',
+  'bestanden konden niet veilig worden beoordeeld':
+      'dosyalar güvenli bir şekilde incelenemedi',
+  'nieuw gescand': 'yeni tarandı',
   'Realtime samenwerken': 'Gerçek zamanlı iş birliği',
   'Manieren van verbinden': 'Bağlantı yöntemleri',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

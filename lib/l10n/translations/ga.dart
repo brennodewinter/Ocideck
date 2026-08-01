@@ -1865,6 +1865,29 @@ const _dutchSourceAddGa = <String, String>{
       'Tá cuimhne gréasáin na n-íomhánna lán (uasmhéid 256 MB). Sábháil do chuid oibre mar chomhad .ocideck ar dtús chun caillteanas sonraí a chosc. Ansin úsáid níos lú íomhánna nó íomhánna níos lú, dún deiceanna eile, nó athlódáil gan deiceanna eile a oscailt.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Tá an chuimhne ghréasáin d’íomhánna lán (uasmhéid 256 MB). Sábháil do chuid oibre mar chomhad .ocideck agus athlódáil an leathanach sula gcuireann tú tuilleadh íomhánna leis.',
+  'Afbeeldingsrechten': 'Cearta íomhá',
+  'Afbeeldingsrechten controleren…': 'Seiceáil cearta íomhá…',
+  'Afdoening': 'Socrú',
+  'Afdoening vastleggen': 'Socrú taifead',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Mar shampla, sonrasc, ceadúnas nó tagairt comhaid',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Seiceálann sé íomhánna go háitiúil le haghaidh rioscaí féideartha cóipchirt. Is féidir íomhánna stórtha nua agus an linn sócmhainní iomlána a scanadh; láimhseálann riarthóir foláirimh. Foláireamh é seo, ní tuairim dhlíthiúil, agus ní sheolfar aon íomhánna chuig tríú páirtithe.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Níorbh fhéidir an socrú a shábháil. Athscan agus bain triail eile as.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Foláireamh teicniúil é seo, ní tuairim dhlíthiúil. Déanann riarthóir athbhreithniú ar na treoracha.',
+  'Geen openstaande aanwijzingen.': 'Níl aon leideanna gan íoc.',
+  'Geldige rechten aangetoond': 'Cearta bailí léirithe',
+  'Mogelijke auteursrechtelijke risico’s': 'Rioscaí cóipchirt féideartha',
+  'Niet gebruiken': 'Ná húsáid',
+  'Notitie (optioneel)': 'Nóta (roghnach)',
+  'Onterechte signalering': 'Comharthaíocht mícheart',
+  'afbeeldingen vragen om beoordeling':
+      'is gá athbhreithniú a dhéanamh ar íomhánna',
+  'bestanden konden niet veilig worden beoordeeld':
+      'níorbh fhéidir na comhaid a athbhreithniú go sábháilte',
+  'nieuw gescand': 'nua-scagtha',
   'Realtime samenwerken': 'Comhoibriú fíor-ama',
   'Manieren van verbinden': 'Bealaí ceangail',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

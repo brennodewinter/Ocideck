@@ -1832,6 +1832,28 @@ const _dutchSourceAddCs = <String, String>{
       'Webová paměť pro obrázky je plná (maximálně 256 MB). Nejprve uložte svou práci jako soubor .ocideck, abyste předešli ztrátě dat. Poté použijte méně obrázků nebo menší obrázky, zavřete ostatní prezentace nebo načtěte stránku znovu bez otevření dalších prezentací.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Webová paměť pro obrázky je plná (nejvýše 256 MB). Uložte práci jako soubor .ocideck a před přidáním dalších obrázků stránku znovu načtěte.',
+  'Afbeeldingsrechten': 'Obrazová práva',
+  'Afbeeldingsrechten controleren…': 'Zkontrolujte práva k obrázku…',
+  'Afdoening': 'Vyrovnání',
+  'Afdoening vastleggen': 'Rekordní vyrovnání',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Například faktura, licence nebo odkaz na soubor',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Lokálně kontroluje obrázky z hlediska možných rizik autorských práv. Nové obrazy úložiště a celý fond aktiv lze skenovat; upozornění zpracovává administrátor. Toto je upozornění, nikoli právní názor, a žádné obrázky nebudou zasílány třetím stranám.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Osadu se nepodařilo zachránit. Znovu naskenujte a zkuste to znovu.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Toto je technická výstraha, nikoli právní názor. Správce zkontroluje pokyny.',
+  'Geen openstaande aanwijzingen.': 'Žádné nevyřešené stopy.',
+  'Geldige rechten aangetoond': 'Prokázána platná práva',
+  'Mogelijke auteursrechtelijke risico’s': 'Možná rizika autorských práv',
+  'Niet gebruiken': 'Nepoužívejte',
+  'Notitie (optioneel)': 'Poznámka (volitelné)',
+  'Onterechte signalering': 'Špatná signalizace',
+  'afbeeldingen vragen om beoordeling': 'obrázky vyžadují kontrolu',
+  'bestanden konden niet veilig worden beoordeeld':
+      'soubory nebylo možné bezpečně zkontrolovat',
+  'nieuw gescand': 'nově naskenované',
   'Realtime samenwerken': 'Spolupráce v reálném čase',
   'Manieren van verbinden': 'Způsoby připojení',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -1848,6 +1848,29 @@ const _dutchSourceAddRo = <String, String>{
       'Memoria web pentru imagini este plină (maximum 256 MB). Salvați mai întâi lucrul ca fișier .ocideck pentru a preveni pierderea datelor. Apoi utilizați mai puține imagini sau imagini mai mici, închideți celelalte prezentări ori reîncărcați fără a deschide alte prezentări.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Memoria web pentru imagini este plină (maximum 256 MB). Salvați lucrarea ca fișier .ocideck și reîncărcați pagina înainte de a adăuga alte imagini.',
+  'Afbeeldingsrechten': 'Drepturi de imagine',
+  'Afbeeldingsrechten controleren…': 'Verificați drepturile de imagine...',
+  'Afdoening': 'Așezarea',
+  'Afdoening vastleggen': 'Decontare record',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'De exemplu, o referință pentru factură, licență sau fișier',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Verifică imaginile la nivel local pentru posibile riscuri legate de drepturile de autor. Noile imagini din depozit și întregul grup de active pot fi scanate; un administrator se ocupă de alerte. Aceasta este o alertă, nu o opinie juridică și nicio imagine nu va fi trimisă către terți.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Așezarea nu a putut fi salvată. Scanați din nou și încercați din nou.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Aceasta este o alertă tehnică, nu o opinie juridică. Un administrator examinează instrucțiunile.',
+  'Geen openstaande aanwijzingen.': 'Fără indicii remarcabile.',
+  'Geldige rechten aangetoond': 'Drepturi valabile demonstrate',
+  'Mogelijke auteursrechtelijke risico’s':
+      'Posibile riscuri legate de drepturile de autor',
+  'Niet gebruiken': 'Nu utilizați',
+  'Notitie (optioneel)': 'Notă (opțional)',
+  'Onterechte signalering': 'Semnalizare greșită',
+  'afbeeldingen vragen om beoordeling': 'imaginile necesită revizuire',
+  'bestanden konden niet veilig worden beoordeeld':
+      'fișierele nu au putut fi examinate în siguranță',
+  'nieuw gescand': 'nou scanat',
   'Realtime samenwerken': 'Colaborare în timp real',
   'Manieren van verbinden': 'Moduri de conectare',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

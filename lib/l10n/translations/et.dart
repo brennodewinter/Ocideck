@@ -1821,6 +1821,28 @@ const _dutchSourceAddEt = <String, String>{
       'Piltide veebimälu on täis (kuni 256 MB). Andmekao vältimiseks salvesta töö esmalt .ocideck-failina. Seejärel kasuta vähem või väiksemaid pilte, sulge teised esitlused või laadi uuesti ilma teisi esitlusi avamata.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Piltide veebimälu on täis (kuni 256 MB). Salvesta töö .ocideck-failina ja laadi leht enne uute piltide lisamist uuesti.',
+  'Afbeeldingsrechten': 'Pildi õigused',
+  'Afbeeldingsrechten controleren…': 'Kontrolli pildi õigusi…',
+  'Afdoening': 'Arveldamine',
+  'Afdoening vastleggen': 'Arvelduse rekord',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Näiteks arve, litsents või failiviide',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Kontrollib pilte kohapeal võimalike autoriõigustega seotud riskide suhtes. Saate skannida uusi hoidla pilte ja kogu varade kogumit; hoiatustega tegeleb administraator. See on hoiatus, mitte juriidiline arvamus ja pilte ei saadeta kolmandatele isikutele.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Asulat ei õnnestunud päästa. Kontrollige uuesti ja proovige uuesti.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'See on tehniline hoiatus, mitte juriidiline arvamus. Administraator vaatab juhised üle.',
+  'Geen openstaande aanwijzingen.': 'Silmapaistvaid vihjeid pole.',
+  'Geldige rechten aangetoond': 'Kehtivad õigused on näidatud',
+  'Mogelijke auteursrechtelijke risico’s': 'Võimalikud autoriõiguse riskid',
+  'Niet gebruiken': 'Ärge kasutage',
+  'Notitie (optioneel)': 'Märkus (valikuline)',
+  'Onterechte signalering': 'Vale signaalimine',
+  'afbeeldingen vragen om beoordeling': 'pildid vajavad ülevaatamist',
+  'bestanden konden niet veilig worden beoordeeld':
+      'faile ei saanud ohutult üle vaadata',
+  'nieuw gescand': 'äsja skaneeritud',
   'Realtime samenwerken': 'Reaalajas koostöö',
   'Manieren van verbinden': 'Ühendusviisid',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

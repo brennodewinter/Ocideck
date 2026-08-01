@@ -1830,6 +1830,28 @@ const _dutchSourceAddFi = <String, String>{
       'Kuvien verkkosovellusmuisti on täynnä (enintään 256 Mt). Tallenna työsi ensin .ocideck-tiedostona tietojen menetyksen estämiseksi. Käytä sen jälkeen vähemmän tai pienempiä kuvia, sulje muut esitykset tai lataa uudelleen avaamatta muita esityksiä.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Kuville varattu verkkosovelluksen muisti on täynnä (enintään 256 Mt). Tallenna työ .ocideck-tiedostona ja lataa sivu uudelleen ennen uusien kuvien lisäämistä.',
+  'Afbeeldingsrechten': 'Kuvan oikeudet',
+  'Afbeeldingsrechten controleren…': 'Tarkista kuvan oikeudet…',
+  'Afdoening': 'Ratkaisu',
+  'Afdoening vastleggen': 'Ennätysratkaisu',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Esimerkiksi lasku, lisenssi tai tiedostoviite',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Tarkistaa kuvat paikallisesti mahdollisten tekijänoikeusriskien varalta. Uudet arkiston kuvat ja koko omaisuusvarasto voidaan skannata; järjestelmänvalvoja käsittelee hälytyksiä. Tämä on hälytys, ei oikeudellinen lausunto, eikä kuvia lähetetä kolmansille osapuolille.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Asutusta ei voitu pelastaa. Skannaa uudelleen ja yritä uudelleen.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Tämä on tekninen hälytys, ei oikeudellinen lausunto. Järjestelmänvalvoja tarkistaa ohjeet.',
+  'Geen openstaande aanwijzingen.': 'Ei merkittäviä vihjeitä.',
+  'Geldige rechten aangetoond': 'Voimassa olevat oikeudet osoitettu',
+  'Mogelijke auteursrechtelijke risico’s': 'Mahdolliset tekijänoikeusriskit',
+  'Niet gebruiken': 'Älä käytä',
+  'Notitie (optioneel)': 'Huomautus (valinnainen)',
+  'Onterechte signalering': 'Väärä signalointi',
+  'afbeeldingen vragen om beoordeling': 'kuvat vaativat tarkistuksen',
+  'bestanden konden niet veilig worden beoordeeld':
+      'tiedostoja ei voitu tarkistaa turvallisesti',
+  'nieuw gescand': 'juuri skannattu',
   'Realtime samenwerken': 'Reaaliaikainen yhteistyö',
   'Manieren van verbinden': 'Yhdistämistavat',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

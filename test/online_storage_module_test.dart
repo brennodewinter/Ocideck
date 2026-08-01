@@ -120,6 +120,7 @@ void main() {
         ModuleId.imports,
         ModuleId.procesverbetering,
         ModuleId.collaboration,
+        ModuleId.assetRights,
       ]);
     });
   });

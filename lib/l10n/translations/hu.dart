@@ -1834,6 +1834,28 @@ const _dutchSourceAddHu = <String, String>{
       'A képek webes memóriája megtelt (legfeljebb 256 MB). Az adatvesztés elkerüléséhez először mentse a munkáját .ocideck-fájlként. Ezután használjon kevesebb vagy kisebb képet, zárja be a többi bemutatót, vagy töltsön újra más bemutatók megnyitása nélkül.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'A képek webes memóriája megtelt (legfeljebb 256 MB). Mentse a munkáját .ocideck-fájlként, és további képek hozzáadása előtt töltse újra az oldalt.',
+  'Afbeeldingsrechten': 'Képjogok',
+  'Afbeeldingsrechten controleren…': 'Ellenőrizze a képjogokat…',
+  'Afdoening': 'Település',
+  'Afdoening vastleggen': 'Rekordelszámolás',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Például egy számla, licenc vagy fájl hivatkozás',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Helyben ellenőrzi a képeket a lehetséges szerzői jogi kockázatok szempontjából. Az új tárképek és a teljes eszközkészlet beolvasható; a rendszergazda kezeli a riasztásokat. Ez egy figyelmeztetés, nem jogi vélemény, és nem küldünk képeket harmadik félnek.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'A települést nem sikerült megmenteni. Olvassa be újra, és próbálja újra.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Ez technikai riasztás, nem jogi vélemény. A rendszergazda áttekinti az utasításokat.',
+  'Geen openstaande aanwijzingen.': 'Nincsenek kiemelkedő nyomok.',
+  'Geldige rechten aangetoond': 'Érvényes jogok bemutatva',
+  'Mogelijke auteursrechtelijke risico’s': 'Lehetséges szerzői jogi kockázatok',
+  'Niet gebruiken': 'Ne használja',
+  'Notitie (optioneel)': 'Megjegyzés (nem kötelező)',
+  'Onterechte signalering': 'Helytelen jelzés',
+  'afbeeldingen vragen om beoordeling': 'a képek felülvizsgálatot igényelnek',
+  'bestanden konden niet veilig worden beoordeeld':
+      'a fájlokat nem lehetett biztonságosan áttekinteni',
+  'nieuw gescand': 'újonnan szkennelve',
   'Realtime samenwerken': 'Valós idejű együttműködés',
   'Manieren van verbinden': 'Csatlakozási módok',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

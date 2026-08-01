@@ -1833,6 +1833,28 @@ const _dutchSourceAddGsw = <String, String>{
       'Dr Webspicher für Bilder isch voll (maximal 256 MB). Speicher dini Arbet zerscht als .ocideck-Datei, damit kei Date verlore gönd. Bruuch denn weniger oder chlineri Bilder, schliess anderi Decks oder lad neu, ohni anderi Decks z öffne.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Dr Webspicher für Bilder isch voll (maximal 256 MB). Speicher dini Arbet als .ocideck-Datei und lad d Syte neu, bevor du wyteri Bilder hinzufüegsch.',
+  'Afbeeldingsrechten': 'Bildrechte',
+  'Afbeeldingsrechten controleren…': 'Bildrechte prüfen…',
+  'Afdoening': 'Siedlung',
+  'Afdoening vastleggen': 'Rekordabrechnung',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Zum Beispiel eine Rechnung, eine Lizenz oder eine Aktenreferenz',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Überprüft Bilder vor Ort auf mögliche Urheberrechtsrisiken. Neue Repository-Images und der gesamte Asset-Pool können gescannt werden; Ein Administrator kümmert sich um Warnungen. Dies ist eine Warnung, kein Rechtsgutachten und es werden keine Bilder an Dritte gesendet.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Die Siedlung konnte nicht gerettet werden. Scannen Sie erneut und versuchen Sie es erneut.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Hierbei handelt es sich um eine technische Warnung, nicht um eine Rechtsauffassung. Ein Administrator überprüft die Anweisungen.',
+  'Geen openstaande aanwijzingen.': 'Keine ausstehenden Hinweise.',
+  'Geldige rechten aangetoond': 'Gültige Rechte nachgewiesen',
+  'Mogelijke auteursrechtelijke risico’s': 'Mögliche Urheberrechtsrisiken',
+  'Niet gebruiken': 'Nicht verwenden',
+  'Notitie (optioneel)': 'Hinweis (optional)',
+  'Onterechte signalering': 'Falsche Signalisierung',
+  'afbeeldingen vragen om beoordeling': 'Bilder bedürfen einer Überprüfung',
+  'bestanden konden niet veilig worden beoordeeld':
+      'Dateien konnten nicht sicher überprüft werden',
+  'nieuw gescand': 'neu gescannt',
   'Realtime samenwerken': 'Echtziit-Zämmenarbet',
   'Manieren van verbinden': 'Verbindigsarte',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

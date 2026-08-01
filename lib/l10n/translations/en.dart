@@ -970,6 +970,28 @@ const _dutchSourceAddEn = {
       'The web image memory is full (maximum 256 MB). First save your work as an .ocideck file to prevent data loss. Then use fewer or smaller images, close other decks, or reload without opening other decks.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'The web image memory is full (maximum 256 MB). Save your work as an .ocideck file and reload the page before adding more images.',
+  'Afbeeldingsrechten': 'Image rights',
+  'Afbeeldingsrechten controleren…': 'Check image rights…',
+  'Afdoening': 'Settlement',
+  'Afdoening vastleggen': 'Record settlement',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'For example, an invoice, license or file reference',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Checks images locally for possible copyright risks. New repository images and the entire asset pool can be scanned; an administrator handles alerts. This is an alert, not a legal opinion, and no images will be sent to third parties.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'The settlement could not be saved. Rescan and try again.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'This is a technical alert, not a legal opinion. An administrator reviews the instructions.',
+  'Geen openstaande aanwijzingen.': 'No outstanding clues.',
+  'Geldige rechten aangetoond': 'Valid rights demonstrated',
+  'Mogelijke auteursrechtelijke risico’s': 'Possible copyright risks',
+  'Niet gebruiken': 'Do not use',
+  'Notitie (optioneel)': 'Note (optional)',
+  'Onterechte signalering': 'Wrongful signaling',
+  'afbeeldingen vragen om beoordeling': 'images require review',
+  'bestanden konden niet veilig worden beoordeeld':
+      'files could not be safely reviewed',
+  'nieuw gescand': 'newly scanned',
   'Realtime samenwerken': 'Real-time collaboration',
   'Manieren van verbinden': 'Ways to connect',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

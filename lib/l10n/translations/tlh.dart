@@ -1805,6 +1805,29 @@ const _dutchSourceAddTlh = <String, String>{
       'naghmeyvaDvaD De\'wI\' QulmeH qawHaq teblu\' (256 MB \'oH veH\'e\'). De\' Dachbe\'meH, wa\'DIch .ocideck De\' QaywI\' rur Qu\'lIj pol. ghIq nagh puS pagh nagh mach lo\', latlh muchmey SoQmoH, pagh latlh muchmey poSmoHbe\'taHvIS chu\'qa\'.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'mIllogh web qawHaq teblu’ (256 MB ‘aqroS). latlh mIllogh Dachelpa’ .ocideck De’ ‘angghalDaq Qu’lIj yIpol ’ej nav yIQayqa’.',
+  'Afbeeldingsrechten': 'Image rights — tlhIngan Hol',
+  'Afbeeldingsrechten controleren…': 'Check image rights… — tlhIngan Hol',
+  'Afdoening': 'Settlement — tlhIngan Hol',
+  'Afdoening vastleggen': 'Record settlement — tlhIngan Hol',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'For example, an invoice, license or file reference — tlhIngan Hol',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Checks images locally for possible copyright risks. New repository images and the entire asset pool can be scanned; an administrator handles alerts. This is an alert, not a legal opinion, and no images will be sent to third parties. — tlhIngan Hol',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'The settlement could not be saved. Rescan and try again. — tlhIngan Hol',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'This is a technical alert, not a legal opinion. An administrator reviews the instructions. — tlhIngan Hol',
+  'Geen openstaande aanwijzingen.': 'No outstanding clues. — tlhIngan Hol',
+  'Geldige rechten aangetoond': 'Valid rights demonstrated — tlhIngan Hol',
+  'Mogelijke auteursrechtelijke risico’s':
+      'Possible copyright risks — tlhIngan Hol',
+  'Niet gebruiken': 'Do not use — tlhIngan Hol',
+  'Notitie (optioneel)': 'Note (optional) — tlhIngan Hol',
+  'Onterechte signalering': 'Wrongful signaling — tlhIngan Hol',
+  'afbeeldingen vragen om beoordeling': 'images require review — tlhIngan Hol',
+  'bestanden konden niet veilig worden beoordeeld':
+      'files could not be safely reviewed — tlhIngan Hol',
+  'nieuw gescand': 'newly scanned — tlhIngan Hol',
   'Realtime samenwerken': 'SIbI\' vumchuq',
   'Manieren van verbinden': 'rarmeH mIwmey',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

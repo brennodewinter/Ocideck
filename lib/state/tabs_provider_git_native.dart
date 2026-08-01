@@ -148,6 +148,7 @@ extension TabsNotifierGitNative on TabsNotifier {
       pool: null, // native: git ontdubbelt zelf, dus alle blobs mee
       deckDir: deckDir,
       resolveBytes: repoAssetBytes(deck.projectPath),
+      scanAssetRights: _ref.read(assetRightsModuleEnabledProvider),
     );
 
     final result = await mirror.commitDeck(

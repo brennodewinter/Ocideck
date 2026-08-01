@@ -36,6 +36,7 @@ extension _SettingsModules on _SettingsDialogState {
             ),
             ModuleId.procesverbetering => const ProcesverbeteringModuleCard(),
             ModuleId.collaboration => const CollaborationModuleCard(),
+            ModuleId.assetRights => const AssetRightsModuleCard(),
           },
         ],
       ],

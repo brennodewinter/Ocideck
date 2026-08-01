@@ -61,6 +61,12 @@ extension _MainLayoutMenu on _MainLayoutState {
         Icons.photo_library_outlined,
         l10n.d('Afbeeldingen in de repository…'),
       ),
+      if (ref.watch(assetRightsModuleEnabledProvider))
+        _menuItem(
+          'rights_git',
+          Icons.copyright_outlined,
+          l10n.d('Afbeeldingsrechten controleren…'),
+        ),
       if (hasLocalClone)
         _menuItem('history_git', Icons.history, l10n.d('Git-geschiedenis…')),
       // Versies (release-tags) werken op elk plane, ook op web: het is een

@@ -10,6 +10,9 @@ import '../../models/slide.dart';
 import '../../models/chart.dart';
 import '../../utils/log.dart';
 import '../annotation_codec.dart';
+import '../asset_rights_scanner.dart';
+import '../asset_rights_store.dart';
+import '../image_service.dart';
 import '../markdown_service.dart';
 import '../miauw_codec.dart';
 import '../privacy/dismissal_codec.dart';
@@ -298,6 +301,7 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
   /// is geen reden om te wissen) maar wél geschreven: anders zouden de notities
   /// op het native pad, dat geen lezer meegeeft, nooit reizen.
   RepoFileReader? read,
+  bool scanAssetRights = false,
 }) async {
   final refForMem = <String, String>{}; // bronpad → repo:-verwijzing (dedup)
   final bytesForRef = <String, Uint8List>{}; // repo:-verwijzing → bytes
@@ -395,9 +399,36 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
       ? const <String>{}
       : await pool.existing(bytesForRef.keys);
   for (final entry in bytesForRef.entries) {
-    if (already.contains(entry.key)) continue;
     final poolPath = GitRepoLayout.assetPathOf(entry.key);
-    if (poolPath != null) upserts[poolPath] = entry.value;
+    if (poolPath != null && !already.contains(entry.key)) {
+      upserts[poolPath] = entry.value;
+    }
+    // Nieuwe beelden krijgen in dezelfde commit een lokale rechtencontrole.
+    // Een bestaande sidecar kan menselijke afdoeningen bevatten en wordt hier
+    // daarom nooit stil overschreven.
+    if (scanAssetRights &&
+        poolPath != null &&
+        ImageService.looksLikeImage(entry.value.take(16).toList())) {
+      final hash = p.posix.basenameWithoutExtension(poolPath);
+      final assessmentPath = AssetRightsStore.repoPathFor(hash);
+      final existing = read == null ? null : await read(assessmentPath);
+      if (existing == null) {
+        try {
+          final assessment = await const AssetRightsScanner().scan(
+            entry.value,
+            filename: p.posix.basename(poolPath),
+          );
+          upserts[assessmentPath] = Uint8List.fromList(
+            utf8.encode('${assessment.encode()}\n'),
+          );
+        } on FormatException {
+          // De bestaande importpoort controleert magic bytes; een beschadigd
+          // beeld kan die alsnog halen maar niet decoderen. Dat maakt de scan
+          // "niet gekeken", niet de gehele deckopslag onmogelijk.
+          // De aparte repositoryscan toont dit later als "niet gekeken".
+        }
+      }
+    }
   }
 
   return RepoDeckFiles(

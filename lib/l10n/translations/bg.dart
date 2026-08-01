@@ -1853,6 +1853,28 @@ const _dutchSourceAddBg = <String, String>{
       'Уеб паметта за изображения е пълна (максимум 256 MB). Първо запазете работата си като .ocideck файл, за да предотвратите загуба на данни. След това използвайте по-малко или по-малки изображения, затворете другите презентации или презаредете, без да отваряте други презентации.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Уеб паметта за изображения е пълна (максимум 256 MB). Запазете работата си като файл .ocideck и презаредете страницата, преди да добавите още изображения.',
+  'Afbeeldingsrechten': 'Права за изображения',
+  'Afbeeldingsrechten controleren…': 'Проверете правата на изображението...',
+  'Afdoening': 'Уреждане',
+  'Afdoening vastleggen': 'Рекордно уреждане',
+  'Bijvoorbeeld een factuur-, licentie- of dossierverwijzing':
+      'Например фактура, лиценз или препратка към файл',
+  'Controleert afbeeldingen lokaal op mogelijke auteursrechtelijke risico’s. Nieuwe repositoryafbeeldingen en de volledige assetpool kunnen worden gescand; een beheerder handelt waarschuwingen af. Dit is een signalering, geen juridisch oordeel, en er worden geen afbeeldingen naar derden gestuurd.':
+      'Проверява изображенията локално за възможни рискове за авторски права. Могат да се сканират нови изображения на хранилище и целия пул от активи; администратор обработва предупрежденията. Това е предупреждение, а не правно становище и изображения няма да бъдат изпращани на трети страни.',
+  'De afdoening kon niet worden opgeslagen. Scan opnieuw en probeer het nogmaals.':
+      'Селището не можа да бъде спасено. Сканирайте отново и опитайте отново.',
+  'Dit is een technische signalering, geen juridisch oordeel. Een beheerder beoordeelt de aanwijzingen.':
+      'Това е техническо предупреждение, а не правно становище. Администратор преглежда инструкциите.',
+  'Geen openstaande aanwijzingen.': 'Няма забележителни улики.',
+  'Geldige rechten aangetoond': 'Демонстрирани валидни права',
+  'Mogelijke auteursrechtelijke risico’s': 'Възможни рискове за авторски права',
+  'Niet gebruiken': 'Не използвайте',
+  'Notitie (optioneel)': 'Забележка (по избор)',
+  'Onterechte signalering': 'Неправилно сигнализиране',
+  'afbeeldingen vragen om beoordeling': 'изображенията изискват преглед',
+  'bestanden konden niet veilig worden beoordeeld':
+      'файлове не можаха да бъдат прегледани безопасно',
+  'nieuw gescand': 'наскоро сканиран',
   'Realtime samenwerken': 'Съвместна работа в реално време',
   'Manieren van verbinden': 'Начини на свързване',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

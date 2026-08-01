@@ -2484,6 +2484,73 @@ merge. The scanner itself does not change.
 
 ---
 
+### 6.8 Repository Asset-rights Assessments
+
+A repository may carry one assessment per content-addressed image at
+`.ocideck/asset-assessments/<sha256>.json`. The filename and the `asset.sha256`
+field must both match the bytes in `assets/<sha256>.<ext>`.
+
+The version-1 object records technical metadata, optional provenance, the local
+scanner version and timestamp, stable signals, and append-only administrative
+dispositions. A disposition identifies one signal by `rule + fingerprint`;
+therefore accepting one observation does not suppress a different observation
+found by a later scan. `accepted` and `resolved` remove the active warning,
+while the record remains available for audit. `rejected` and `deferred` remain
+visible.
+
+This is a risk indication, not a claim that infringement occurred. The local
+scanner does not upload image bytes. An unreadable or newer sidecar is not
+overwritten and never counts as an accepted assessment.
+
+```json
+{
+  "version": 1,
+  "asset": {
+    "sha256": "<64 lowercase hex characters>",
+    "mime_type": "image/png",
+    "bytes": 12345,
+    "width": 1280,
+    "height": 720
+  },
+  "provenance": {
+    "source_url": "https://example.invalid/image",
+    "creator": "Example creator",
+    "license": "Example licence",
+    "license_evidence": "invoice-or-register-reference",
+    "license_expires_at": "2027-01-01T00:00:00.000Z"
+  },
+  "assessment": {
+    "scanner_version": "local-1",
+    "scanned_at": "2026-08-02T10:00:00.000Z",
+    "signals": [{
+      "rule": "rights.missing_evidence",
+      "risk": "review",
+      "message": "Er is geen licentie met bewijsstuk vastgelegd.",
+      "fingerprint": "<sha256 of rule and observed evidence>"
+    }]
+  },
+  "dispositions": [{
+    "signal": "rights.missing_evidence <fingerprint>",
+    "status": "accepted",
+    "reason": "licensed",
+    "note": "Optional administrator note",
+    "decided_by": "Optional actor label",
+    "decided_at": "2026-08-02T11:00:00.000Z"
+  }]
+}
+```
+
+`width`, `height`, every provenance field, `evidence` on a signal, `note`,
+`decided_by`, `revoked`, and the complete `dispositions` member are optional.
+Known risks are `clear`, `review`, and `high`; known disposition states are
+`accepted`, `resolved`, `rejected`, and `deferred`. Readers select the latest
+disposition by `decided_at` for one signal key. A revoked disposition never
+suppresses a warning. The asset identity is the bytes, not the extension or
+original filename, so renaming an identical pooled image does not create a
+second assessment.
+
+---
+
 ## 7. Portable Package (`.ocideck`)
 
 `Export package` writes one **zip file** (extension `.ocideck`; `.zip` is also
