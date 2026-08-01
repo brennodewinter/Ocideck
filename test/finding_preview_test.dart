@@ -46,15 +46,16 @@ Slide _finding(String body) => Slide.create(
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
-  testWidgets('finding renders a derived CVSS badge and CWE/CVE chips', (
+  testWidgets('finding renders a derived CVSS score and CWE/CVE chips', (
     tester,
   ) async {
     await tester.pumpWidget(_host(_finding(_headerBody)));
     await tester.pump();
 
     expect(tester.takeException(), isNull);
-    // Score + severity band are derived from the vector, not read from text.
-    expect(find.text('9.3 · Critical'), findsOneWidget);
+    // Score + severity are derived from the vector, not read from text.
+    expect(find.text('9.3'), findsOneWidget);
+    expect(find.text('Critical'), findsOneWidget);
     expect(find.text('CWE-89'), findsOneWidget);
     expect(find.text('CVE-2024-1234'), findsOneWidget);
     expect(
@@ -100,18 +101,27 @@ void main() {
     expect(find.textContaining('Opgelost na hertest'), findsOneWidget);
   });
 
-  testWidgets('a finding with a CVSS shows the severity speedometer (#3)', (
+  testWidgets('a finding shows CVSS as text without a painted meter (#1059)', (
     tester,
   ) async {
     await tester.pumpWidget(_host(_finding(_headerBody)));
     await tester.pump();
 
     expect(tester.takeException(), isNull);
-    // The cockpit speedometer beside the header carries a 'CVSS' label.
+    // De score is gewone, selecteerbare widgettekst en zit niet langer
+    // verstopt in een decoratieve cockpitmeter.
     expect(find.text('CVSS'), findsOneWidget);
+    expect(find.text('9.3'), findsOneWidget);
+    expect(find.text('Critical'), findsOneWidget);
+    final scoreCard = find.byKey(const ValueKey('finding-cvss-score-card'));
+    expect(scoreCard, findsOneWidget);
+    expect(
+      find.descendant(of: scoreCard, matching: find.byType(CustomPaint)),
+      findsNothing,
+    );
   });
 
-  testWidgets('a finding without a CVSS shows no speedometer', (tester) async {
+  testWidgets('a finding without a CVSS shows no score card', (tester) async {
     final md = const FindingSpec(heading: 'F-1 · Geen score').toMarkdown();
     await tester.pumpWidget(_host(_finding(md)));
     await tester.pump();
