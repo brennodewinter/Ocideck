@@ -53,7 +53,6 @@ import '../services/privacy/privacy_own_identity.dart';
 import '../services/export_bundle.dart';
 import '../services/privacy/privacy_projection.dart';
 import '../services/image_usage.dart';
-import '../services/web_asset_store.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
 import 'mermaid_render_host.dart';
@@ -423,38 +422,6 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     '.tiff',
     '.tif',
   };
-
-  /// Drag-drop op web: er is geen pad, alleen inhoud. Een `.md` of
-  /// `.ocideck`-pakket wordt via het in-memory pad geopend (zelfde
-  /// security-gate; pakketten worden in het geheugen uitgepakt);
-  /// afbeeldingen gaan na dezelfde validatie als pickImage de WebAssetStore
-  /// in en worden slides met een mem:-pad. Overige typen worden — net als op
-  /// desktop — genegeerd.
-  Future<void> _onWebFilesDropped(List<DropItem> files) async {
-    final tabs = ref.read(tabsProvider.notifier);
-    final images = <String>[];
-    for (final file in files) {
-      final ext = p.extension(file.name.toLowerCase());
-      if (ext == '.md' || ext == '.ocideck' || ext == '.zip') {
-        final bytes = await file.readAsBytes();
-        await tabs.openDeckFromBytes(bytes, file.name);
-      } else if (_imageExtensions.contains(ext)) {
-        final bytes = await file.readAsBytes();
-        if (bytes.isEmpty ||
-            bytes.length > ImageService.maxImageBytes ||
-            !ImageService.looksLikeImage(bytes)) {
-          logWarning(
-            'AppShell._onWebFilesDropped: afbeelding geweigerd '
-            '(te groot of geen afbeelding)',
-            file.name,
-          );
-          continue;
-        }
-        images.add(WebAssetStore.put(bytes, name: file.name));
-      }
-    }
-    if (images.isNotEmpty) _addImagesToActiveDeck(images);
-  }
 
   /// Verwerk gesleepte bestanden: presentaties/pakketten openen, afbeeldingen
   /// als nieuwe slide(s) toevoegen aan het actieve deck.

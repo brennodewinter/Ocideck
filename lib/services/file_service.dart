@@ -146,6 +146,9 @@ enum OpenFailure {
   /// The file is larger than the deck-size cap.
   tooLarge,
 
+  /// De browserstore heeft geen ruimte meer voor de assets uit dit deck.
+  memoryBudgetExceeded,
+
   /// The file could not be read (stat failed, not valid UTF-8, …).
   unreadable,
 

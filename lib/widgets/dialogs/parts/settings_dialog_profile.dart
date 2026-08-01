@@ -7,6 +7,21 @@
 // een extension aan te roepen.
 part of '../settings_dialog.dart';
 
+String _importFailureText(
+  AppLocalizations l10n,
+  StyleProfileImportFailure failure,
+) => switch (failure) {
+  StyleProfileImportFailure.tooLarge => l10n.d(
+    'Dit bestand is te groot voor een stijlprofiel',
+  ),
+  StyleProfileImportFailure.unsupportedVersion => l10n.d(
+    'Dit stijlprofiel komt uit een nieuwere versie van OciDeck',
+  ),
+  StyleProfileImportFailure.memoryBudgetExceeded => webAssetBudgetMessage(l10n),
+  // cancelled komt hier nooit: dat handelt _importProfile stil af.
+  _ => l10n.d('Dit is geen geldig stijlprofiel-bestand'),
+};
+
 extension _SettingsProfile on _SettingsDialogState {
   Widget _profileSelector(List<ThemeProfile> profiles) {
     final l10n = context.l10n;
@@ -144,22 +159,6 @@ extension _SettingsProfile on _SettingsDialogState {
         l10n.d('Stijlprofiel exporteren mislukt'),
       );
     }
-  }
-
-  String _importFailureText(
-    AppLocalizations l10n,
-    StyleProfileImportFailure f,
-  ) {
-    return switch (f) {
-      StyleProfileImportFailure.tooLarge => l10n.d(
-        'Dit bestand is te groot voor een stijlprofiel',
-      ),
-      StyleProfileImportFailure.unsupportedVersion => l10n.d(
-        'Dit stijlprofiel komt uit een nieuwere versie van OciDeck',
-      ),
-      // cancelled komt hier nooit: dat handelt _importProfile stil af.
-      _ => l10n.d('Dit is geen geldig stijlprofiel-bestand'),
-    };
   }
 
   /// Lees een los profielbestand in, bewaar het als nieuw profiel en zet het

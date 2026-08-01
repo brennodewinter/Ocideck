@@ -7,8 +7,10 @@ import '../../services/file_service.dart';
 import '../../services/presentation_search/presentation_source.dart';
 import '../../services/slide_dedup_service.dart';
 import '../../services/slide_image_refs.dart';
+import '../../services/web_asset_store.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/log.dart';
+import '../../utils/user_facing_error.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
 import 'slide_diff_dialog.dart';
@@ -105,6 +107,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
   /// voortgangs- en foutmelding boven het raster.
   final Set<String> _remotePending = {};
   final Set<String> _remoteFailed = {};
+  bool _budgetErrorShown = false;
 
   String _query = '';
   int _addedCount = 0;
@@ -177,6 +180,12 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
         e,
       );
       if (!mounted) return;
+      if (e is WebAssetBudgetExceeded && !_budgetErrorShown) {
+        _budgetErrorShown = true;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(webAssetBudgetMessage(context.l10n))),
+        );
+      }
       setState(() {
         _remotePending.remove(source.label);
         _remoteFailed.add(source.label);

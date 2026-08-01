@@ -1774,6 +1774,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Dr Webspicher für Präsentationsmedie isch voll (maximal 256 MB). Speicher dini Arbet zerscht als .ocideck-Datei, damit kei Date verlore gönd. Bruuch denn weniger oder chlineri Bilder, Videos oder Audiodateie, schliess anderi Decks oder lad neu, ohni anderi Decks z öffne.',
   'Ongeldige vraag': 'Ungültigi Frag',
   'Herstelsleutel': 'Wiederherstelligsschlüssel',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
@@ -1795,6 +1797,10 @@ const _dutchSourceAddGsw = <String, String>{
       'Das gseht nöd nach eme gültige Wiederherstelligsschlüssel us.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Dä Wiederherstelligsschlüssel chunnt vo ere nöiere Version vo OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Dr Webspicher für Bilder isch voll (maximal 256 MB). Speicher dini Arbet zerscht als .ocideck-Datei, damit kei Date verlore gönd. Bruuch denn weniger oder chlineri Bilder, schliess anderi Decks oder lad neu, ohni anderi Decks z öffne.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Dr Webspicher für Bilder isch voll (maximal 256 MB). Speicher dini Arbet als .ocideck-Datei und lad d Syte neu, bevor du wyteri Bilder hinzufüegsch.',
   'Realtime samenwerken': 'Echtziit-Zämmenarbet',
   'Manieren van verbinden': 'Verbindigsarte',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

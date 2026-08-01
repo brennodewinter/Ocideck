@@ -29,6 +29,59 @@ void _reportOpenFailure(
   }
 }
 
+extension _DropActions on _AppShellState {
+  /// Drag-drop op web: er is geen pad, alleen inhoud. Een `.md` of
+  /// `.ocideck`-pakket wordt via het in-memory pad geopend (zelfde
+  /// security-gate; pakketten worden in het geheugen uitgepakt);
+  /// afbeeldingen gaan na dezelfde validatie als pickImage de WebAssetStore
+  /// in en worden slides met een mem:-pad. Overige typen worden — net als op
+  /// desktop — genegeerd.
+  Future<void> _onWebFilesDropped(List<DropItem> files) async {
+    final tabs = ref.read(tabsProvider.notifier);
+    final images = <String>[];
+    for (final file in files) {
+      final ext = p.extension(file.name.toLowerCase());
+      if (ext == '.md' || ext == '.ocideck' || ext == '.zip') {
+        final bytes = await file.readAsBytes();
+        final result = await tabs.openDeckFromBytes(bytes, file.name);
+        if (mounted) {
+          _reportOpenFailure(
+            ScaffoldMessenger.of(context),
+            context.l10n,
+            result,
+            reason: ref.read(openFailureProvider),
+          );
+        }
+      } else if (_AppShellState._imageExtensions.contains(ext)) {
+        final bytes = await file.readAsBytes();
+        if (bytes.isEmpty ||
+            bytes.length > ImageService.maxImageBytes ||
+            !ImageService.looksLikeImage(bytes)) {
+          logWarning(
+            'AppShell._onWebFilesDropped: afbeelding geweigerd '
+            '(te groot of geen afbeelding)',
+            file.name,
+          );
+          continue;
+        }
+        final outcome = ImageService.storeWebImage(bytes, name: file.name);
+        final path = outcome.path;
+        if (path != null) {
+          images.add(path);
+        } else if (mounted &&
+            outcome.failure == ImageImportFailure.memoryBudgetExceeded) {
+          showErrorSnackBar(
+            ScaffoldMessenger.of(context),
+            context.l10n,
+            webAssetBudgetMessage(context.l10n),
+          );
+        }
+      }
+    }
+    if (images.isNotEmpty) _addImagesToActiveDeck(images);
+  }
+}
+
 /// Wat er misging, zo precies als het openpad het wist.
 ///
 /// "Kon dit bestand niet openen." stond hier voor vier verschillende dingen,
@@ -41,6 +94,7 @@ String _unreadableMessage(
 ) => switch (reason) {
   OpenFailure.notFound => l10n.d('Dit bestand bestaat niet meer op deze plek.'),
   OpenFailure.tooLarge => l10n.d('Dit bestand is te groot om te openen.'),
+  OpenFailure.memoryBudgetExceeded => webAssetBudgetMessage(l10n),
   OpenFailure.corrupt => l10n.d(
     'Deze presentatie is beschadigd of half opgeslagen.',
   ),
@@ -170,6 +224,7 @@ Future<void> _importUrlWeb(
   final l10n = context.l10n;
   OpenResult result;
   try {
+    ref.read(openFailureProvider.notifier).state = null;
     result = await ref.read(tabsProvider.notifier).importFromUrlWeb(url);
   } catch (e, s) {
     logError('_importUrlWeb: import failed', e, s);
@@ -182,6 +237,11 @@ Future<void> _importUrlWeb(
   if (result == OpenResult.opened ||
       result == OpenResult.blocked ||
       result == OpenResult.passwordCancelled) {
+    return;
+  }
+  final reason = ref.read(openFailureProvider);
+  if (reason == OpenFailure.memoryBudgetExceeded) {
+    _reportOpenFailure(messenger, l10n, result, reason: reason);
     return;
   }
   // Op web is de meest voorkomende oorzaak geen tikfout maar CORS: de
@@ -232,6 +292,7 @@ Future<void> _openFromGit(
   final l10n = context.l10n;
   try {
     final notifier = ref.read(tabsProvider.notifier);
+    ref.read(openFailureProvider.notifier).state = null;
     final result = native != null
         ? await notifier.openDeckFromGitNative(
             native,
@@ -248,7 +309,12 @@ Future<void> _openFromGit(
             branch: config.defaultBranch,
             connectionId: chosen0.id,
           );
-    _reportOpenFailure(messenger, l10n, result);
+    _reportOpenFailure(
+      messenger,
+      l10n,
+      result,
+      reason: ref.read(openFailureProvider),
+    );
   } on GitForgeException catch (e) {
     // De uitzondering draagt al een uitlegbare tekst; die is voor de gebruiker
     // bedoeld, dus toon hem in plaats van een eigen samenvatting.

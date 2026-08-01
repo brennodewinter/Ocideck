@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/image_service.dart';
+import 'package:ocideck/services/web_asset_store.dart';
 import 'package:path/path.dart' as p;
 
 /// A minimal PNG signature so `looksLikeImage` accepts the bytes.
@@ -18,7 +19,27 @@ void main() {
 
   late Directory tmp;
   setUp(() => tmp = Directory.systemTemp.createTempSync('ocideck_img_'));
-  tearDown(() => tmp.deleteSync(recursive: true));
+  tearDown(() {
+    tmp.deleteSync(recursive: true);
+    WebAssetStore.clear();
+    WebAssetStore.overrideTotalBudgetForTest(null);
+  });
+
+  group('webgeheugenbudget', () {
+    test('meldt een apart importprobleem wanneer de store vol is', () {
+      WebAssetStore.overrideTotalBudgetForTest(8);
+      WebAssetStore.put(Uint8List(8), name: 'vol.png');
+
+      final outcome = ImageService.storeWebImage(
+        Uint8List.fromList([1]),
+        name: 'te-veel.png',
+      );
+
+      expect(outcome.path, isNull);
+      expect(outcome.failure, ImageImportFailure.memoryBudgetExceeded);
+      expect(WebAssetStore.totalBytes, 8);
+    });
+  });
 
   group('looksLikeImage', () {
     test('accepts known raster signatures', () {

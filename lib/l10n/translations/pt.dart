@@ -1800,6 +1800,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'A memória web para multimédia da apresentação está cheia (máximo de 256 MB). Primeiro, guarde o seu trabalho como ficheiro .ocideck para evitar a perda de dados. Depois, use menos imagens, vídeos ou ficheiros de áudio, ou ficheiros menores, feche outros decks ou recarregue sem abrir outros decks.',
   'Ongeldige vraag': 'Pergunta inválida',
   'Herstelsleutel': 'Chave de recuperação',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
@@ -1821,6 +1823,10 @@ const _dutchSourceAddPt = <String, String>{
       'Isto não parece uma chave de recuperação válida.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Esta chave de recuperação vem de uma versão mais recente do OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'A memória web para imagens está cheia (máximo de 256 MB). Primeiro, guarde o seu trabalho como ficheiro .ocideck para evitar a perda de dados. Depois, use menos imagens ou imagens menores, feche outros decks ou recarregue sem abrir outros decks.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'A memória web para imagens está cheia (máximo de 256 MB). Guarde o trabalho como ficheiro .ocideck e recarregue a página antes de adicionar mais imagens.',
   'Realtime samenwerken': 'Colaboração em tempo real',
   'Manieren van verbinden': 'Formas de ligação',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

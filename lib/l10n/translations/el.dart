@@ -1798,6 +1798,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Η μνήμη ιστού για πολυμέσα παρουσιάσεων είναι πλήρης (μέγιστο 256 MB). Αποθηκεύστε πρώτα την εργασία σας ως αρχείο .ocideck για να αποφύγετε την απώλεια δεδομένων. Έπειτα χρησιμοποιήστε λιγότερες ή μικρότερες εικόνες, βίντεο ή αρχεία ήχου, κλείστε άλλες παρουσιάσεις ή επαναφορτώστε χωρίς να ανοίξετε άλλες παρουσιάσεις.',
   'Ongeldige vraag': 'Μη έγκυρη ερώτηση',
   'Herstelsleutel': 'Κλειδί ανάκτησης',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
@@ -1819,6 +1821,10 @@ const _dutchSourceAddEl = <String, String>{
       'Αυτό δεν μοιάζει με έγκυρο κλειδί ανάκτησης.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Αυτό το κλειδί ανάκτησης προέρχεται από νεότερη έκδοση του OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Η μνήμη ιστού για εικόνες είναι πλήρης (μέγιστο 256 MB). Αποθηκεύστε πρώτα την εργασία σας ως αρχείο .ocideck για να αποφύγετε την απώλεια δεδομένων. Έπειτα χρησιμοποιήστε λιγότερες ή μικρότερες εικόνες, κλείστε άλλες παρουσιάσεις ή επαναφορτώστε χωρίς να ανοίξετε άλλες παρουσιάσεις.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Η μνήμη web για εικόνες είναι πλήρης (μέγιστο 256 MB). Αποθηκεύστε την εργασία σας ως αρχείο .ocideck και επαναφορτώστε τη σελίδα πριν προσθέσετε περισσότερες εικόνες.',
   'Realtime samenwerken': 'Συνεργασία σε πραγματικό χρόνο',
   'Manieren van verbinden': 'Τρόποι σύνδεσης',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

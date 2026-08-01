@@ -911,6 +911,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'The web memory for presentation media is full (maximum 256 MB). First save your work as an .ocideck file to prevent data loss. Then use fewer or smaller images, videos, or audio files, close other decks, or reload without opening other decks.',
   'Ongeldige vraag': 'Invalid question',
   'Herstelsleutel': 'Recovery key',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
@@ -932,6 +934,10 @@ const _dutchSourceAddEn = {
       'This doesn\'t look like a valid recovery key.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'This recovery key comes from a newer version of OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'The web image memory is full (maximum 256 MB). First save your work as an .ocideck file to prevent data loss. Then use fewer or smaller images, close other decks, or reload without opening other decks.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'The web image memory is full (maximum 256 MB). Save your work as an .ocideck file and reload the page before adding more images.',
   'Realtime samenwerken': 'Real-time collaboration',
   'Manieren van verbinden': 'Ways to connect',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -1746,6 +1746,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'much De’ lIwvaD De’wI’ QulmeH qawHaq teblu’ (256 MB ’oH veH’e’). De’ Dachbe’meH, wa’DIch .ocideck De’ QaywI’ rur Qu’lIj pol. GhIq nagh, HaSta pagh wab De’ QaywI’ puS pagh mach lo’, latlh muchmey SoQmoH, pagh latlh muchmey poSmoHbe’taHvIS chu’qa’.',
   'Ongeldige vraag': 'yu\'vam lughbe\'',
   'Herstelsleutel': 'cheghmoHwI\' ngoq',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
@@ -1767,6 +1769,10 @@ const _dutchSourceAddTlh = <String, String>{
       'cheghmoHwI\' ngoq lI\' rurbe\' lI\'.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'cheghmoHwI\' ngoqvam, OciDeck chu\'qu\' Ha\'DIbaHvo\' ghoS.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'naghmeyvaDvaD De\'wI\' QulmeH qawHaq teblu\' (256 MB \'oH veH\'e\'). De\' Dachbe\'meH, wa\'DIch .ocideck De\' QaywI\' rur Qu\'lIj pol. ghIq nagh puS pagh nagh mach lo\', latlh muchmey SoQmoH, pagh latlh muchmey poSmoHbe\'taHvIS chu\'qa\'.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'mIllogh web qawHaq teblu’ (256 MB ‘aqroS). latlh mIllogh Dachelpa’ .ocideck De’ ‘angghalDaq Qu’lIj yIpol ’ej nav yIQayqa’.',
   'Realtime samenwerken': 'SIbI\' vumchuq',
   'Manieren van verbinden': 'rarmeH mIwmey',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

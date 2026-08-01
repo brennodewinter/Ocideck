@@ -9,6 +9,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/git/asset_pool.dart';
+import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/recovery_service.dart';
 import 'package:ocideck/services/web_asset_store.dart';
@@ -44,8 +45,13 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     AssetPool.clearCache();
     WebAssetStore.clear();
+    WebAssetStore.overrideTotalBudgetForTest(null);
   });
-  tearDown(AssetPool.clearCache);
+  tearDown(() {
+    AssetPool.clearCache();
+    WebAssetStore.clear();
+    WebAssetStore.overrideTotalBudgetForTest(null);
+  });
 
   const config = GitRepoConfig(
     baseUrl: 'https://git.example.org',
@@ -156,6 +162,33 @@ void main() {
     final mems = slides.map((s) => s.imagePath).where(WebAssetStore.isMemPath);
     expect(mems.length, 2);
     expect(mems.toSet().length, 1, reason: 'one asset, one mem: path');
+  });
+
+  test('budget failure rolls back git assets and records its cause', () async {
+    final otherPng = Uint8List.fromList([..._png]..last = 0x01);
+    final firstRef = _ref(_png);
+    final secondRef = _ref(otherPng);
+    final (container, tabs) = build();
+    WebAssetStore.overrideTotalBudgetForTest(_png.length);
+
+    final result = await open(
+      tabs,
+      repoWith(
+        markdown: deckMarkdown([firstRef, secondRef]),
+        assets: {
+          GitRepoLayout.assetPathOf(firstRef)!: _png,
+          GitRepoLayout.assetPathOf(secondRef)!: otherPng,
+        },
+      ),
+    );
+
+    expect(result, OpenResult.unreadable);
+    expect(
+      container.read(openFailureProvider),
+      OpenFailure.memoryBudgetExceeded,
+    );
+    expect(WebAssetStore.isEmpty, isTrue, reason: 'git-open is atomic');
+    expect(WebAssetStore.totalBytes, 0);
   });
 
   test(

@@ -1770,6 +1770,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Webbminnet för presentationsmedier är fullt (högst 256 MB). Spara först ditt arbete som en .ocideck-fil för att förhindra dataförlust. Använd sedan färre eller mindre bilder, videor eller ljudfiler, stäng andra bildspel eller läs in på nytt utan att öppna andra bildspel.',
   'Ongeldige vraag': 'Ogiltig fråga',
   'Herstelsleutel': 'Återställningsnyckel',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
@@ -1791,6 +1793,10 @@ const _dutchSourceAddSv = <String, String>{
       'Detta ser inte ut som en giltig återställningsnyckel.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Den här återställningsnyckeln kommer från en nyare version av OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Webbminnet för bilder är fullt (högst 256 MB). Spara först ditt arbete som en .ocideck-fil för att förhindra dataförlust. Använd sedan färre eller mindre bilder, stäng andra bildspel eller läs in på nytt utan att öppna andra bildspel.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Webbminnet för bilder är fullt (högst 256 MB). Spara arbetet som en .ocideck-fil och läs in sidan igen innan du lägger till fler bilder.',
   'Realtime samenwerken': 'Samarbete i realtid',
   'Manieren van verbinden': 'Anslutningssätt',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

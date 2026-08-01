@@ -151,8 +151,9 @@ void main() {
   group('TabsNotifier.sweepWebAssets', () {
     tearDown(WebAssetStore.clear);
 
+    var nextMemByte = 0;
     String putMem() =>
-        WebAssetStore.put(Uint8List.fromList([1, 2, 3]), name: 'x.png');
+        WebAssetStore.put(Uint8List.fromList([nextMemByte++]), name: 'x.png');
     Slide imageSlide(String memPath) =>
         Slide.create(SlideType.image).copyWith(imagePath: memPath);
     DeckNotifier deckOf(ProviderContainer c) =>
@@ -227,6 +228,34 @@ void main() {
 
       expect(WebAssetStore.bytesFor(a), isNotNull, reason: 'tab A gebruikt a');
       expect(WebAssetStore.bytesFor(b), isNotNull, reason: 'tab B gebruikt b');
+    });
+
+    test('gedeelde inhoud leeft tot het laatste tabblad is gesloten', () {
+      final container = _container();
+      final tabs = container.read(tabsProvider.notifier);
+      final bytes = Uint8List.fromList([42, 43]);
+      final first = WebAssetStore.put(bytes, name: 'a.png');
+      final duplicate = WebAssetStore.put(
+        Uint8List.fromList(bytes),
+        name: 'b.png',
+      );
+      expect(duplicate, first, reason: 'de inhoud is gededupliceerd');
+
+      deckOf(container).loadDeck(Deck(title: 'A', slides: [imageSlide(first)]));
+      tabs.newDeckInNewTab('B');
+      tabs.sweepWebAssets();
+      expect(
+        WebAssetStore.bytesFor(first),
+        isNotNull,
+        reason: 'tab A houdt het gedeelde pad levend',
+      );
+
+      tabs.closeTab(0);
+      expect(
+        WebAssetStore.bytesFor(first),
+        isNull,
+        reason: 'sluiten geeft het laatste gebruik automatisch vrij',
+      );
     });
 
     test('een asset op het klembord wordt niet weggeveegd', () {

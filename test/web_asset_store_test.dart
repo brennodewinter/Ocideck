@@ -21,7 +21,11 @@ Future<Uint8List> _redPngBytes() async {
 }
 
 void main() {
-  tearDown(WebAssetStore.clear);
+  setUp(WebAssetStore.clear);
+  tearDown(() {
+    WebAssetStore.clear();
+    WebAssetStore.overrideTotalBudgetForTest(null);
+  });
 
   test('bewaart bytes onder een mem:-pad en vindt ze terug', () {
     final bytes = Uint8List.fromList([1, 2, 3]);
@@ -30,8 +34,91 @@ void main() {
     expect(WebAssetStore.isMemPath(path), isTrue);
     expect(WebAssetStore.bytesFor(path), same(bytes));
     expect(WebAssetStore.nameFor(path), 'foto.png');
-    // Twee puts delen nooit een pad.
-    expect(WebAssetStore.put(bytes, name: 'foto.png'), isNot(path));
+    expect(WebAssetStore.totalBytes, bytes.length);
+  });
+
+  test('accepteert exact het totaalbudget en weigert de volgende byte', () {
+    WebAssetStore.overrideTotalBudgetForTest(8);
+    final exact = WebAssetStore.put(
+      Uint8List.fromList([1, 2, 3, 4, 5, 6, 7, 8]),
+      name: 'exact.png',
+    );
+
+    expect(WebAssetStore.totalBytes, 8);
+    expect(
+      () => WebAssetStore.put(Uint8List.fromList([9]), name: 'te-veel.png'),
+      throwsA(
+        isA<WebAssetBudgetExceeded>()
+            .having((e) => e.usedBytes, 'usedBytes', 8)
+            .having((e) => e.requestedBytes, 'requestedBytes', 1)
+            .having((e) => e.maximumBytes, 'maximumBytes', 8),
+      ),
+    );
+    expect(WebAssetStore.totalBytes, 8, reason: 'weigeren is atomair');
+    expect(WebAssetStore.bytesFor(exact), isNotNull);
+  });
+
+  test('weigert één asset groter dan het hele budget zonder opslag', () {
+    WebAssetStore.overrideTotalBudgetForTest(8);
+
+    expect(
+      () => WebAssetStore.put(Uint8List(9), name: 'veel-te-groot.bin'),
+      throwsA(isA<WebAssetBudgetExceeded>()),
+    );
+    expect(WebAssetStore.isEmpty, isTrue);
+    expect(WebAssetStore.totalBytes, 0);
+  });
+
+  test('een mislukte samengestelde put draait alleen nieuwe assets terug', () {
+    WebAssetStore.overrideTotalBudgetForTest(4);
+    final existing = WebAssetStore.put(
+      Uint8List.fromList([9]),
+      name: 'bestaand.png',
+    );
+
+    expect(
+      () => WebAssetStore.atomic(() {
+        WebAssetStore.put(Uint8List.fromList([1, 2]), name: 'eerste.png');
+        WebAssetStore.put(Uint8List.fromList([3, 4]), name: 'tweede.png');
+      }),
+      throwsA(isA<WebAssetBudgetExceeded>()),
+    );
+
+    expect(WebAssetStore.totalBytes, 1);
+    expect(WebAssetStore.bytesFor(existing), isNotNull);
+    expect(WebAssetStore.nameFor(existing), 'bestaand.png');
+  });
+
+  test('het productieplafond is buiten web niet actief', () {
+    WebAssetStore.overrideTotalBudgetForTest(null);
+    expect(WebAssetStore.budgetEnforced, isFalse);
+  });
+
+  test('identieke inhoud deelt pad en telt maar eenmaal mee', () {
+    final first = WebAssetStore.put(
+      Uint8List.fromList([1, 2, 3, 4]),
+      name: 'eerste.png',
+    );
+    final duplicate = WebAssetStore.put(
+      Uint8List.fromList([1, 2, 3, 4]),
+      name: 'kopie.png',
+    );
+
+    expect(duplicate, first);
+    expect(WebAssetStore.totalBytes, 4);
+    expect(WebAssetStore.nameFor(first), 'eerste.png');
+  });
+
+  test('een duplicaat past ook wanneer het budget al exact vol is', () {
+    WebAssetStore.overrideTotalBudgetForTest(8);
+    final bytes = Uint8List.fromList([1, 2, 3, 4, 5, 6, 7, 8]);
+    final first = WebAssetStore.put(bytes, name: 'eerste.png');
+
+    expect(
+      WebAssetStore.put(Uint8List.fromList(bytes), name: 'kopie.png'),
+      first,
+    );
+    expect(WebAssetStore.totalBytes, 8);
   });
 
   test('onbekende of niet-mem-paden leveren niets op', () {
@@ -58,13 +145,41 @@ void main() {
     expect(WebAssetStore.bytesFor(keep), isNotNull);
     expect(WebAssetStore.bytesFor(drop), isNull);
     expect(WebAssetStore.nameFor(drop), isNull, reason: 'ook de naam is weg');
+    expect(WebAssetStore.totalBytes, 1);
   });
 
   test('retain met een lege verzameling maakt de store leeg', () {
+    WebAssetStore.overrideTotalBudgetForTest(2);
     WebAssetStore.put(Uint8List.fromList([1]), name: 'a.png');
     WebAssetStore.put(Uint8List.fromList([2]), name: 'b.png');
     expect(WebAssetStore.retain(<String>{}), 2);
     expect(WebAssetStore.isEmpty, isTrue);
+    expect(WebAssetStore.totalBytes, 0);
+    expect(
+      () => WebAssetStore.put(Uint8List.fromList([3, 4]), name: 'opnieuw.bin'),
+      returnsNormally,
+      reason: 'vrijgave geeft het volledige budget terug',
+    );
+    expect(WebAssetStore.totalBytes, 2);
+  });
+
+  test('retain van een gedeeld pad bewaart de bytes en hashadministratie', () {
+    final first = WebAssetStore.put(
+      Uint8List.fromList([1, 2, 3]),
+      name: 'a.png',
+    );
+    final duplicate = WebAssetStore.put(
+      Uint8List.fromList([1, 2, 3]),
+      name: 'b.png',
+    );
+
+    expect(WebAssetStore.retain({duplicate}), 0);
+    expect(WebAssetStore.bytesFor(first), isNotNull);
+    expect(
+      WebAssetStore.put(Uint8List.fromList([1, 2, 3]), name: 'c.png'),
+      first,
+    );
+    expect(WebAssetStore.totalBytes, 3);
   });
 
   testWidgets('een slide met mem:-pad rendert uit de store', (tester) async {

@@ -241,6 +241,7 @@ void main() {
         ImageImportFailure.rejected,
         ImageImportFailure.noClipboardImage,
         ImageImportFailure.writeFailed,
+        ImageImportFailure.memoryBudgetExceeded,
       ]) {
         final ctx = await pumpContext(tester);
         reportImageImportFailure(ctx, failure);

@@ -1788,6 +1788,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Memoria web pentru conținutul media al prezentării este plină (maximum 256 MB). Salvați mai întâi lucrul ca fișier .ocideck pentru a preveni pierderea datelor. Apoi utilizați mai puține imagini, videoclipuri sau fișiere audio ori fișiere mai mici, închideți celelalte prezentări sau reîncărcați fără a deschide alte prezentări.',
   'Ongeldige vraag': 'Întrebare nevalidă',
   'Herstelsleutel': 'Cheie de recuperare',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
@@ -1809,6 +1811,10 @@ const _dutchSourceAddRo = <String, String>{
       'Aceasta nu pare o cheie de recuperare validă.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Această cheie de recuperare provine dintr-o versiune mai nouă de OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Memoria web pentru imagini este plină (maximum 256 MB). Salvați mai întâi lucrul ca fișier .ocideck pentru a preveni pierderea datelor. Apoi utilizați mai puține imagini sau imagini mai mici, închideți celelalte prezentări ori reîncărcați fără a deschide alte prezentări.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Memoria web pentru imagini este plină (maximum 256 MB). Salvați lucrarea ca fișier .ocideck și reîncărcați pagina înainte de a adăuga alte imagini.',
   'Realtime samenwerken': 'Colaborare în timp real',
   'Manieren van verbinden': 'Moduri de conectare',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

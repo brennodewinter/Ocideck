@@ -2748,6 +2748,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Sunum medyası için web belleği dolu (en fazla 256 MB). Veri kaybını önlemek için önce çalışmanızı bir .ocideck dosyası olarak kaydedin. Ardından daha az veya daha küçük görsel, video ya da ses dosyası kullanın, diğer sunumları kapatın veya başka sunumları açmadan yeniden yükleyin.',
   'Ongeldige vraag': 'Geçersiz soru',
   'Herstelsleutel': 'Kurtarma anahtarı',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
@@ -2768,6 +2770,10 @@ const _dutchSourceAddTr = <String, String>{
       'Bu geçerli bir kurtarma anahtarına benzemiyor.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Bu kurtarma anahtarı OciDeck\'in daha yeni bir sürümünden geliyor.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Görseller için web belleği dolu (en fazla 256 MB). Veri kaybını önlemek için önce çalışmanızı bir .ocideck dosyası olarak kaydedin. Ardından daha az veya daha küçük görsel kullanın, diğer sunumları kapatın ya da başka sunumları açmadan yeniden yükleyin.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Görseller için web belleği dolu (en fazla 256 MB). Daha fazla görsel eklemeden önce çalışmanızı bir .ocideck dosyası olarak kaydedin ve sayfayı yeniden yükleyin.',
   'Realtime samenwerken': 'Gerçek zamanlı iş birliği',
   'Manieren van verbinden': 'Bağlantı yöntemleri',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

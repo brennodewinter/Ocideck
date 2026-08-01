@@ -1771,6 +1771,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Memori web untuk media presentasi penuh (maksimum 256 MB). Simpan pekerjaan Anda terlebih dahulu sebagai berkas .ocideck untuk mencegah kehilangan data. Setelah itu gunakan gambar, video, atau berkas audio yang lebih sedikit atau lebih kecil, tutup deck lain, atau muat ulang tanpa membuka deck lain.',
   'Ongeldige vraag': 'Pertanyaan tidak valid',
   'Herstelsleutel': 'Kunci pemulihan',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
@@ -1792,6 +1794,10 @@ const _dutchSourceAddId = <String, String>{
       'Ini sepertinya bukan kunci pemulihan yang valid.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Kunci pemulihan ini berasal dari versi OciDeck yang lebih baru.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Memori web untuk gambar penuh (maksimum 256 MB). Simpan pekerjaan Anda terlebih dahulu sebagai berkas .ocideck untuk mencegah kehilangan data. Setelah itu gunakan gambar yang lebih sedikit atau lebih kecil, tutup deck lain, atau muat ulang tanpa membuka deck lain.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Memori web untuk gambar penuh (maksimum 256 MB). Simpan pekerjaan Anda sebagai berkas .ocideck dan muat ulang halaman sebelum menambahkan gambar lagi.',
   'Realtime samenwerken': 'Kolaborasi waktu nyata',
   'Manieren van verbinden': 'Cara menyambung',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

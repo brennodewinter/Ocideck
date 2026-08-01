@@ -1,6 +1,7 @@
 import '../../models/deck.dart';
 import '../../models/slide.dart';
 import '../markdown_safety.dart';
+import '../web_asset_store.dart';
 import 'import_loss.dart';
 import 'models/slide_failure_policy.dart';
 import 'models/source_deck.dart';
@@ -95,6 +96,15 @@ class DeckBuilder {
     List<ClassifiedSlide> classified, {
     required String title,
     Map<int, SlideFailurePolicy> policies = const {},
+  }) => WebAssetStore.atomic(
+    () => _build(sourceDeck, classified, title: title, policies: policies),
+  );
+
+  BuiltDeck _build(
+    SourceDeck sourceDeck,
+    List<ClassifiedSlide> classified, {
+    required String title,
+    required Map<int, SlideFailurePolicy> policies,
   }) {
     final slides = <Slide>[];
     final problemSlides = <ProblemSlide>[];

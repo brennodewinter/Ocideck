@@ -1,6 +1,6 @@
 # OciDeck — Performance Guide
 
-> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-08-01 · **Published by:** Stichting LibreKAT
 
 This document describes OciDeck's performance characteristics using the **actual
 limits and sizes enforced in the codebase** (with `file:line` citations), plus a
@@ -17,8 +17,9 @@ Images are the dominant memory cost, so decoding is bounded up front:
 | What | Limit | Source |
 |---|---|---|
 | Max image decode dimension (per axis) | **4096 px** | `lib/utils/image_limits.dart:16` (`kMaxImageDecodeDimension`) |
-| Max in-memory image bytes | **64 MiB** *(bij het importeren, per bestand — niet een plafond voor alles wat tegelijk gedecodeerd in beeld staat)* | `lib/services/image_service.dart:40` |
-| Max media (video/audio) bytes | **1 GiB** | `lib/services/image_service.dart:41` |
+| Max in-memory image bytes | **64 MiB** *(bij het importeren, per bestand — niet een plafond voor alles wat tegelijk gedecodeerd in beeld staat)* | `lib/services/image_service.dart` (`maxImageBytes`) |
+| Web `mem:` asset store (all tabs together) | **256 MiB encoded bytes** | `lib/services/web_asset_store.dart` (`maxTotalBytes`) |
+| Max media (video/audio) bytes | **1 GiB** | `lib/services/image_service.dart` (`maxMediaBytes`) |
 | Luminance sampling decode | **48 × 48 px** | `lib/utils/image_luminance.dart:54` |
 | Carousel thumbnail / preview / full decode | `cacheWidth` **360 / 720 / 1000** | `image_carousel_picker_grid.dart`, `..._preview.dart` |
 | Slide-strip thumbnail decode | **512 px** langste zijde | `slide_thumbnail.dart` (`decodeMaxEdge`) |
@@ -32,9 +33,16 @@ optimisation.
 - Project assets live in dedicated subfolders (`images/`, `data/`, `logos/`,
   `themes/`); assets outside the project directory are refused on the
   render/present/export paths (containment, not just convention).
-- On the web build, images are held in an in-memory store (`mem:` scheme,
+- On the web build, presentation media (images, video and audio) are held in an
+  in-memory store (`mem:` scheme,
   `lib/services/web_asset_store.dart`) — so large decks consume browser tab
-  memory rather than disk.
+  memory rather than disk. The store has one **256 MiB** budget for the whole
+  app/page, including every open deck and its undo/redo history plus the slide
+  clipboard. Identical encoded content is SHA-256-deduplicated and charged only
+  once. Unreferenced content returns its budget during the liveness sweep; a
+  new unique asset is refused atomically before this total would be exceeded.
+  This app-wide budget is enforced only in the browser; desktop imports can use
+  the same temporary `mem:` paths but are not subject to the browser cap.
 
 ## Rendering
 

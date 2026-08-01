@@ -727,6 +727,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'La memoria web para medios de presentación está llena (máximo 256 MB). Guarda primero tu trabajo como archivo .ocideck para evitar perder datos. Después, usa menos imágenes, vídeos o archivos de audio, o archivos más pequeños; cierra otros decks o recarga sin abrir otros decks.',
   'Ongeldige vraag': 'Pregunta no válida',
   'Herstelsleutel': 'Clave de recuperación',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
@@ -748,6 +750,10 @@ const _dutchSourceAddEs = {
       'Esto no parece una clave de recuperación válida.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Esta clave de recuperación procede de una versión más reciente de OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'La memoria web para imágenes está llena (máximo 256 MB). Guarda primero tu trabajo como archivo .ocideck para evitar perder datos. Después, usa menos imágenes o imágenes más pequeñas, cierra otros decks o recarga sin abrir otros decks.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'La memoria web para imágenes está llena (máximo 256 MB). Guarda tu trabajo como archivo .ocideck y recarga la página antes de añadir más imágenes.',
   'Realtime samenwerken': 'Colaboración en tiempo real',
   'Manieren van verbinden': 'Formas de conexión',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
