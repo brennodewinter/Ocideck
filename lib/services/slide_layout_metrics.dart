@@ -179,17 +179,37 @@ int _topLevelNumberedCount(Slide slide) => slide.bullets
     )
     .length;
 
-/// The first number a numbered list should show on slide [index]. Returns 1
-/// unless the slide opts in via [Slide.continueNumbering] and the preceding
-/// slide is itself a numbered list, in which case it continues past that
-/// slide's last number (walking the whole chain of continued slides).
+/// The first number a numbered list should show on every slide, in one linear
+/// pass. Entry [i] is the start number for slide [i]: 1 unless the slide opts in
+/// via [Slide.continueNumbering] and the preceding slide is itself a numbered
+/// list, in which case it continues past that slide's last number. Because each
+/// slide only needs its predecessor's already-computed start, the whole deck
+/// resolves left-to-right — no recursion and no per-slide chain walk, so cost is
+/// linear in the deck length however long the continued chain grows. Compute
+/// once per deck/revision and share the list across all surfaces (rail,
+/// presenter, audience, export) instead of calling [numberedListStartFor] per
+/// slide.
+List<int> numberedListStarts(List<Slide> slides) {
+  final starts = List<int>.filled(slides.length, 1);
+  for (var i = 1; i < slides.length; i++) {
+    final slide = slides[i];
+    final prev = slides[i - 1];
+    if (slide.continueNumbering &&
+        isNumberedListSlide(slide) &&
+        isNumberedListSlide(prev)) {
+      starts[i] = starts[i - 1] + _topLevelNumberedCount(prev);
+    }
+  }
+  return starts;
+}
+
+/// The first number a numbered list should show on slide [index]. Convenience
+/// for surfaces that render a single slide; multi-slide surfaces should call
+/// [numberedListStarts] once and index into it. Kept linear (no recursion) by
+/// delegating to the single-pass computation.
 int numberedListStartFor(List<Slide> slides, int index) {
   if (index <= 0 || index >= slides.length) return 1;
-  final slide = slides[index];
-  if (!slide.continueNumbering || !isNumberedListSlide(slide)) return 1;
-  final prev = slides[index - 1];
-  if (!isNumberedListSlide(prev)) return 1;
-  return numberedListStartFor(slides, index - 1) + _topLevelNumberedCount(prev);
+  return numberedListStarts(slides)[index];
 }
 
 String _bulletMarkerForLevel(int level) {

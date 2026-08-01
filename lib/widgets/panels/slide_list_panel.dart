@@ -542,12 +542,18 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       );
     }
 
+    final numberStarts = numberedListStarts(deck.slides);
     return ListView.builder(
       controller: _scrollController,
       padding: const EdgeInsets.symmetric(vertical: 4),
       itemCount: matches.length,
-      itemBuilder: (_, i) =>
-          _slideThumbnail(deck, matches[i], notifier, editorNotifier),
+      itemBuilder: (_, i) => _slideThumbnail(
+        deck,
+        matches[i],
+        notifier,
+        editorNotifier,
+        numberStarts,
+      ),
     );
   }
 
@@ -561,6 +567,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     int index,
     DeckNotifier notifier,
     EditorNotifier editorNotifier,
+    List<int> numberStarts,
   ) {
     final slide = deck.slides[index];
     // Co-authors' positions (§6 presence, Matrix only). Empty outside a live
@@ -581,7 +588,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         deck.themeProfile,
         deck.themeProfile.fontFamily,
       ),
-      numberStart: numberedListStartFor(deck.slides, index),
+      numberStart: numberStarts[index],
       scopeCia: deckScopeCiaIndex(deck.slides),
       reportLanguage: deck.language,
       onTap: () => _onSlideTap(index),
@@ -624,6 +631,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     if (searching) {
       return _buildFilteredList(deck, query, notifier, editorNotifier);
     }
+    final numberStarts = numberedListStarts(deck.slides);
     return ReorderableListView.builder(
       // Rebuild when slides are bulk-added/removed — the list's internal
       // bookkeeping can otherwise keep showing the old item count until restart.
@@ -634,41 +642,18 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       padding: const EdgeInsets.symmetric(vertical: 4),
       buildDefaultDragHandles: false,
       itemCount: deck.slides.length,
-      onReorderItem: (old, nw) {
-        final editor = ref.read(editorProvider);
-        // Sleep je één slide uit een multiselectie, dan verhuist het hele blok
-        // in één keer; de selectie volgt het blok naar de nieuwe plek.
-        if (editor.hasMultiSelection && editor.selection.contains(old)) {
-          final start = notifier.moveSlides(editor.selection, old, nw);
-          if (start >= 0) {
-            final count = editor.selection.length;
-            final primaryOffset = editor.selection
-                .where((i) => i < editor.selectedIndex)
-                .length;
-            editorNotifier.selectBlock(
-              start,
-              count,
-              primary: start + primaryOffset,
-            );
-          }
-          return;
-        }
-        notifier.reorderSlides(old, nw);
-        // Adjust selection when active slide moved
-        final selIdx = editor.selectedIndex;
-        int newSel = selIdx;
-        if (old == selIdx) {
-          newSel = nw;
-        } else if (old < selIdx && nw >= selIdx) {
-          newSel = selIdx - 1;
-        } else if (old > selIdx && nw <= selIdx) {
-          newSel = selIdx + 1;
-        }
-        editorNotifier.select(newSel.clamp(0, deck.slides.length - 1));
-      },
+      onReorderItem: (old, nw) => applySlideReorder(
+        old,
+        nw,
+        editor: ref.read(editorProvider),
+        notifier: notifier,
+        editorNotifier: editorNotifier,
+        slideCount: deck.slides.length,
+      ),
       proxyDecorator: (child, index, animation) =>
           Material(color: Colors.transparent, child: child),
-      itemBuilder: (_, i) => _slideThumbnail(deck, i, notifier, editorNotifier),
+      itemBuilder: (_, i) =>
+          _slideThumbnail(deck, i, notifier, editorNotifier, numberStarts),
     );
   }
 

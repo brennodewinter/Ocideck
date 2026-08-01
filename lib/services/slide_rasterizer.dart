@@ -194,28 +194,19 @@ class SlideRasterizer {
       if (!context.mounted) return results;
 
       // The sign-off's drawn signature is a deck-level embedded image, not a
-      // slide path — precache it (as the same MemoryImage the preview uses, via
-      // the shared decoder's stable bytes) so it paints on the first captured
-      // frame instead of decoding a beat too late.
-      final sigBytes = signature == null
-          ? null
-          : decodeEmbeddedSignatureImage(signature.imagePath);
-      if (sigBytes != null) {
-        await precacheImage(
-          cappedMemoryImage(sigBytes),
-          context,
-          onError: (_, _) {},
-        );
-        if (!context.mounted) return results;
-      }
+      // slide path — precache it so it paints on the first captured frame
+      // instead of decoding a beat too late.
+      await _precacheSignatureImage(context, signature);
+      if (!context.mounted) return results;
 
+      final numberStarts = numberedListStarts(slides);
       for (var i = 0; i < slides.length; i++) {
         if (isCancelled?.call() ?? false) break;
         onStage?.call('prepare', i, slides.length);
         hostKey.currentState!.showSlide(
           slides[i],
           i + 1,
-          numberStart: numberedListStartFor(slides, i),
+          numberStart: numberStarts[i],
           fitScaleOverride: sharedSplitFitScale(
             slides,
             i,
@@ -238,6 +229,23 @@ class SlideRasterizer {
       imageCache.maximumSizeBytes = prevMaxBytes;
     }
     return results;
+  }
+
+  /// Precache the deck's drawn sign-off signature (a deck-level embedded image,
+  /// via the same stable-bytes MemoryImage the preview uses) so it paints on the
+  /// first captured frame. No-op when the deck is unsigned.
+  static Future<void> _precacheSignatureImage(
+    BuildContext context,
+    DocumentSignature? signature,
+  ) async {
+    if (signature == null) return;
+    final sigBytes = decodeEmbeddedSignatureImage(signature.imagePath);
+    if (sigBytes == null) return;
+    await precacheImage(
+      cappedMemoryImage(sigBytes),
+      context,
+      onError: (_, _) {},
+    );
   }
 
   static Future<Uint8List> _capture(

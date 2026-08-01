@@ -104,6 +104,55 @@ void main() {
     });
   });
 
+  group('numberedListStarts', () {
+    Slide numbered(List<String> bullets, {bool continueNumbering = false}) =>
+        Slide.create(SlideType.bullets).copyWith(
+          listStyle: ListStyle.numbered,
+          continueNumbering: continueNumbering,
+          bullets: bullets,
+        );
+
+    test('agrees with numberedListStartFor for every slide', () {
+      final slides = [
+        numbered(['a', 'b']),
+        numbered(['c', 'd', 'e'], continueNumbering: true),
+        numbered(['f'], continueNumbering: true),
+        Slide.create(SlideType.bullets).copyWith(bullets: ['x']),
+        numbered(['g', 'h'], continueNumbering: true),
+      ];
+      final starts = numberedListStarts(slides);
+      expect(starts, [1, 3, 6, 1, 1]);
+      for (var i = 0; i < slides.length; i++) {
+        expect(starts[i], numberedListStartFor(slides, i));
+      }
+    });
+
+    test('a break resets the chain and a later chain restarts from 1', () {
+      final slides = [
+        numbered(['a', 'b']),
+        numbered(['c'], continueNumbering: true), // continues → 3
+        numbered(['d']), // continueNumbering false → break, back to 1
+        numbered(['e', 'f'], continueNumbering: true), // continues from break
+      ];
+      expect(numberedListStarts(slides), [1, 3, 1, 2]);
+    });
+
+    test('scales linearly over a long continued chain without recursion', () {
+      // A 5000-slide chain would blow the recursive implementation's stack;
+      // the single pass resolves it and each start is its predecessor's + 1.
+      final slides = [
+        numbered(['a']),
+        for (var i = 1; i < 5000; i++) numbered(['x'], continueNumbering: true),
+      ];
+      final starts = numberedListStarts(slides);
+      expect(starts.length, 5000);
+      expect(starts.first, 1);
+      expect(starts.last, 5000); // one top-level item per slide, accumulated
+      // The convenience accessor resolves the deepest slide without recursing.
+      expect(numberedListStartFor(slides, 4999), 5000);
+    });
+  });
+
   group('tableColumnFlexWeights', () {
     test(
       'weighs each column by its longest trimmed cell, clamped to [1,80]',

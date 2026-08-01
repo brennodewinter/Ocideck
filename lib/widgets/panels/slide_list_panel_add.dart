@@ -32,3 +32,42 @@ extension _SlideListPanelAddSlide on _SlideListPanelState {
     }
   }
 }
+
+/// Verplaatst een dia (of een heel multiselectie-blok) na een sleepactie en laat
+/// de selectie de nieuwe plek volgen. Losgetrokken uit [_SlideListPanelState]
+/// omdat de State-klasse anders het regelplafond overschrijdt; het gedrag is
+/// onveranderd.
+void applySlideReorder(
+  int old,
+  int nw, {
+  required EditorState editor,
+  required DeckNotifier notifier,
+  required EditorNotifier editorNotifier,
+  required int slideCount,
+}) {
+  // Sleep je één slide uit een multiselectie, dan verhuist het hele blok in één
+  // keer; de selectie volgt het blok naar de nieuwe plek.
+  if (editor.hasMultiSelection && editor.selection.contains(old)) {
+    final start = notifier.moveSlides(editor.selection, old, nw);
+    if (start >= 0) {
+      final count = editor.selection.length;
+      final primaryOffset = editor.selection
+          .where((i) => i < editor.selectedIndex)
+          .length;
+      editorNotifier.selectBlock(start, count, primary: start + primaryOffset);
+    }
+    return;
+  }
+  notifier.reorderSlides(old, nw);
+  // Adjust selection when active slide moved.
+  final selIdx = editor.selectedIndex;
+  int newSel = selIdx;
+  if (old == selIdx) {
+    newSel = nw;
+  } else if (old < selIdx && nw >= selIdx) {
+    newSel = selIdx - 1;
+  } else if (old > selIdx && nw <= selIdx) {
+    newSel = selIdx + 1;
+  }
+  editorNotifier.select(newSel.clamp(0, slideCount - 1));
+}
