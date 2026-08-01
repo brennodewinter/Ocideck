@@ -147,10 +147,13 @@ class CollabDeviceKeys {
 
 /// The domain tag for a provenance signature, signed as the first array element
 /// so this signature can never be confused with the device-binding, record or
-/// key-wrap messages the same identity key also signs (each of those starts with
-/// a different first byte). It is also the literal `preimage` value written in
-/// the `.seal.json` provenance block, so a third party reconstructs the signed
-/// bytes verbatim. See `docs/design/PROVENANCE_SIGNATURE.md` §2/§3.
+/// key-wrap messages the same identity key also signs. Every signed message is a
+/// JSON array (all begin with `[` — the separation is not in the first *byte* but
+/// in the first *element*): `["rec",…]`, `["wrap",…]`, the device-binding tag,
+/// and `["ocideck-provenance-v1",…]` here — those tags are disjoint, so no
+/// cross-protocol confusion is reachable. It is also the literal `preimage` value
+/// written in the `.seal.json` provenance block, so a third party reconstructs
+/// the signed bytes verbatim. See `docs/design/PROVENANCE_SIGNATURE.md` §2/§3.
 const String kProvenancePreimageTag = 'ocideck-provenance-v1';
 
 /// The exact bytes a provenance signature covers: a JSON array (structured

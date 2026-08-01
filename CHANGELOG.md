@@ -16,6 +16,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- Samenwerken (realtime): **cryptografisch herkomstbewijs** op een verspreid deck
+  (fundament). De eigenaar kan een deck met de samenwerkingsidentiteit
+  ondertekenen (Ed25519 over de zegelhash); een ontvanger die die identiteit via
+  de vingerafdruk verifieerde, kan bevestigen dat dít exacte deck van die persoon
+  komt. Het herkomstbewijs woont in `<naam>.seal.json` (nooit in de `.md`, zonder
+  de sidecar-versie te verhogen) en is door derden na te rekenen. Dit is
+  *herkomstbewijs*, geen juridische handtekening. Deze release landt het formaat,
+  de crypto en de verificatie; de onderteken-knop en de statusweergave volgen
+  (COLLABORATION Fase 2, Blok C; #978).
 - Samenwerken (realtime): **herstelsleutel voor je apparaatsidentiteit**. Je
   apparaat heeft een eigen samenwerkingsidentiteit (wat mede-auteurs verifiëren);
   in Instellingen → Realtime samenwerken kun je die als leesbare herstelsleutel
