@@ -17,9 +17,9 @@ Images are the dominant memory cost, so decoding is bounded up front:
 | What | Limit | Source |
 |---|---|---|
 | Max image decode dimension (per axis) | **4096 px** | `lib/utils/image_limits.dart:16` (`kMaxImageDecodeDimension`) |
-| Max in-memory image bytes | **64 MiB** *(bij het importeren, per bestand — niet een plafond voor alles wat tegelijk gedecodeerd in beeld staat)* | `lib/services/image_service.dart:40` |
+| Max in-memory image bytes | **64 MiB** *(bij het importeren, per bestand — niet een plafond voor alles wat tegelijk gedecodeerd in beeld staat)* | `lib/services/image_service.dart` (`maxImageBytes`) |
 | Web `mem:` asset store (all tabs together) | **256 MiB encoded bytes** | `lib/services/web_asset_store.dart` (`maxTotalBytes`) |
-| Max media (video/audio) bytes | **1 GiB** | `lib/services/image_service.dart:41` |
+| Max media (video/audio) bytes | **1 GiB** | `lib/services/image_service.dart` (`maxMediaBytes`) |
 | Luminance sampling decode | **48 × 48 px** | `lib/utils/image_luminance.dart:54` |
 | Carousel thumbnail / preview / full decode | `cacheWidth` **360 / 720 / 1000** | `image_carousel_picker_grid.dart`, `..._preview.dart` |
 | Slide-strip thumbnail decode | **512 px** langste zijde | `slide_thumbnail.dart` (`decodeMaxEdge`) |
