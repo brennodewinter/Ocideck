@@ -1793,6 +1793,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Il-modulu attiv. Il-qalba tal-kalkolu, it-taqsimiet ta’ slides u l-mudelli huma disponibbli lokalment ({n} fatturi ta’ chart ta’ kontroll).',
+  'SIPOC-procesoverzicht': 'Ħarsa ġenerali lejn il-proċess SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Iddefinixxi l-ambitu u d-dipendenzi ta’ proċess permezz ta’ fornituri, inputs, passi ewlenin, outputs u klijenti.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Għodod għat-titjib tal-proċessi (SIPOC, DMAIC, Kaizen u A3). Mitfija b’mod awtomatiku; attiva l-estensjoni biex tuża l-mudelli u t-taqsimiet ta’ slides relatati.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Il-librerija tal-immaġni hija kbira wisq; jintwerew biss l-aktar immaġni riċenti.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2618,10 +2625,6 @@ const _dutchSourceAddMt = <String, String>{
   'Te weinig gegevens voor een boxplot':
       'Data insuffiċjenti għal dijagramma tal-kaxxa',
   'Procesverbetering': 'Titjib tal-proċessi',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artifatti għat-titjib tal-proċessi u proġetti Lean Six Sigma (DMAIC, Kaizen, A3). Mitfi b\'mod default. Il-modulu huwa disponibbli; l-artifatti se jsegwu fil-passi li ġejjin.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modulu mixgħul. Qalba tal-kalkolu disponibbli lokalment ({n} fatturi ta\' control chart). It-tipi ta\' slide u t-templates se jiżdiedu hekk kif ikunu lesti.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Din il-preżentazzjoni fiha partijiet mill-modulu tat-Titjib tal-proċessi. Ixgħel il-modulu biex teditjahom.',
   'Online media staat uit — aanzetten': 'Midja online mitfi — ixquq',

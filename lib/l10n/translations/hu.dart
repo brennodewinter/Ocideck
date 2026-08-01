@@ -1775,6 +1775,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'A modul be van kapcsolva. A számítási mag, a diaelrendezések és a sablonok helyben elérhetők ({n} szabályozókártya-tényező).',
+  'SIPOC-procesoverzicht': 'SIPOC folyamatáttekintés',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Határozza meg egy folyamat hatókörét és függőségeit a szállítók, bemenetek, fő lépések, kimenetek és ügyfelek alapján.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Eszközök folyamatfejlesztéshez (SIPOC, DMAIC, Kaizen és A3). Alapértelmezés szerint ki vannak kapcsolva; a kapcsolódó sablonok és diaelrendezések használatához engedélyezze a bővítményt.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'A képtár túl nagy; csak a legújabb képek jelennek meg.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2588,10 +2595,6 @@ const _dutchSourceAddHu = <String, String>{
   'Te weinig gegevens voor een histogram': 'Túl kevés adat a hisztogramhoz',
   'Te weinig gegevens voor een boxplot': 'Túl kevés adat a dobozdiagramhoz',
   'Procesverbetering': 'Folyamatfejlesztés',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefaktumok a folyamatfejlesztéshez és Lean Six Sigma projektekhez (DMAIC, Kaizen, A3). Alapértelmezés szerint kikapcsolva. A modul elérhető; az artefaktumok a következő lépésekben érkeznek.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'A modul be van kapcsolva. A számítási mag helyben elérhető ({n} control chart tényező). A diatípusok és sablonok akkor jelennek meg, amikor elkészülnek.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Ez a bemutató a Folyamatfejlesztés modul elemeit tartalmazza. Kapcsold be a modult a szerkesztésükhöz.',
   'Online media staat uit — aanzetten': 'Online média kikapcsolva — bekapcsol',

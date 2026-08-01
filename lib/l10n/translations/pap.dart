@@ -730,6 +730,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Módulo prendé. Núkleo di kalkulashon, diseñonan di diapositiva i plantianan ta disponibel lokalmente ({n} faktornan di karta di kontrol).',
+  'SIPOC-procesoverzicht': 'Resumen di proseso SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Determiná e alkanse i dependensianan di un proseso mediante proveedónan, entrada, pasonan prinsipal, salida i klientenan.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Hulpmidinan pa mehoramentu di proseso (SIPOC, DMAIC, Kaizen i A3). Standardmente apagá; aktivá e ekstensión pa usa e plantianan i diseñonan di diapositiva relashoná.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'E biblioteka di imágen ta muchu grandi; solamente e imágennan mas nobo ta wòrdu mustrá.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -1549,10 +1556,6 @@ const _dutchSourceAddPap = {
   'Te weinig gegevens voor een histogram': 'Muy poko dato pa un histograma',
   'Te weinig gegevens voor een boxplot': 'Muy poko dato pa un diagrama di kaha',
   'Procesverbetering': 'Mehoramentu di proseso',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefaktonan pa mehoramentu di proseso i proyektonan Lean Six Sigma (DMAIC, Kaizen, A3). Standardmente apagá. E módulo ta disponibel; e artefaktonan lo bini den pasonan siguiente.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Módulo aktivá. Nukleo di kalkulashon disponibel lokalmente ({n} factor di control chart). Tiponan di slide i plantianan lo bini asina ku nan ta kla.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'E presentashon aki ta kontené elementonan di e módulo di Mehoramentu di proseso. Aktivá e módulo pa editá nan.',
   'Online media staat uit — aanzetten': 'Media online ta apa — ké',

@@ -1788,6 +1788,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Модуль увімкнено. Обчислювальне ядро, макети слайдів і шаблони доступні локально ({n} коефіцієнтів контрольної карти).',
+  'SIPOC-procesoverzicht': 'Огляд процесу SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Визначте межі та залежності процесу через постачальників, входи, основні кроки, виходи й клієнтів.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Інструменти для вдосконалення процесів (SIPOC, DMAIC, Kaizen і A3). Вимкнено за замовчуванням; увімкніть розширення, щоб користуватися пов’язаними шаблонами й макетами слайдів.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Бібліотека зображень завелика; показуються лише найновіші зображення.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2594,10 +2601,6 @@ const _dutchSourceAddUk = <String, String>{
   'Te weinig gegevens voor een histogram': 'Замало даних для гістограми',
   'Te weinig gegevens voor een boxplot': 'Замало даних для діаграми розмаху',
   'Procesverbetering': 'Удосконалення процесів',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Артефакти для удосконалення процесів і проєктів Lean Six Sigma (DMAIC, Kaizen, A3). Вимкнено за замовчуванням. Модуль доступний; артефакти з\'являться на наступних етапах.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Модуль увімкнено. Обчислювальне ядро доступне локально ({n} факторів control chart). Типи слайдів і шаблони з\'являться, щойно будуть готові.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Ця презентація містить елементи модуля «Удосконалення процесів». Увімкніть модуль, щоб редагувати їх.',
   'Online media staat uit — aanzetten': 'Онлайн-медіа вимкнено — увімкнути',

@@ -1746,6 +1746,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'chu\' module. De\'wI\' mIw, slide patmey je template-mey Daq SumDaq tu\'lu\' ({n} control-chartfactor).',
+  'SIPOC-procesoverzicht': 'SIPOC ghu\'vam',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'ghu\'vam \'ej ghaytanHa\'ghachmey SIPOC Daqel: lIlwI\', \'el, wa\'DIch mIw, mej, je ghotpu\'.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'mIw DubmeH janmey (SIPOC, DMAIC, Kaizen je A3). motlh chu\'Ha\'lu\'; template slide De\' patmey je lo\'laHmeH extension chu\'.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'tlhoy tIn mIllogh qul; mIllogh chu\' neH boch.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2559,10 +2566,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Te weinig gegevens voor een histogram': 'mI\'mey ghItlh De\' puS',
   'Te weinig gegevens voor een boxplot': 'ngaSwI\' ghItlh De\' puS',
   'Procesverbetering': 'Qu\' DubtaHghach',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Dochmey Qu\' DubtaHghach je Lean Six Sigma Qu\'mey (DMAIC, Kaizen, A3) vaD. motlh chu\'Ha\'lu\'. module lo\'laH; Dochmey pIq poHmeyDaq chochtaH.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'module chu\'lu\'. mIw val naDev lo\'laH ({n} control chart mIwmey). cha\'nob Segh je nabmey chelbogh chaH rInpu\'DI\'.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'nav vam Qu\' DubtaHghach module Dochmey ngaS. Dochmeyvam yIchoHmeH module yIchu\'.',
   'Online media staat uit — aanzetten': 'online media mev — choq',

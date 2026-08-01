@@ -155,6 +155,7 @@ const Map<String, IconData> templatePickerIcons = {
   'passengerBriefing': Icons.airline_seat_recline_normal,
   'miauwReport': Icons.bug_report_outlined,
   'procesverbeteringDmaic': Icons.trending_up,
+  'procesverbeteringSipoc': Icons.account_tree_outlined,
 };
 
 class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
@@ -217,19 +218,19 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
     // Module-only templates stay hidden until their module is revealed.
     final secRevealed = ref.watch(infoSafetyRevealProvider);
     final impRevealed = ref.watch(procesverbeteringRevealProvider);
-    bool visible(DeckTemplate t) {
-      if (t.requiresInfoSafety && !secRevealed) return false;
-      if (t.requiresProcesverbetering && !impRevealed) return false;
-      return true;
-    }
-
     bool matches(DeckTemplate t) => [
       l10n.d(t.title),
       l10n.d(t.description),
       t.title,
       t.description,
     ].any((text) => text.toLowerCase().contains(query));
-    final catalogue = deckTemplates.where(visible);
+    final catalogue = deckTemplates.where(
+      (template) => deckTemplateVisible(
+        template,
+        infoSafetyRevealed: secRevealed,
+        procesverbeteringRevealed: impRevealed,
+      ),
+    );
     final base = query.isEmpty ? catalogue : catalogue.where(matches);
     return sortTemplatesForDisplay(base, (t) => l10n.d(t.title));
   }
@@ -425,12 +426,26 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      l10n.d(template.title),
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            l10n.d(template.title),
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        if (template.requiresInfoSafety)
+                          _moduleBadge(
+                            template,
+                            l10n.d('Informatieveiligheid'),
+                          ),
+                        if (template.requiresProcesverbetering)
+                          _moduleBadge(template, l10n.d('Procesverbetering')),
+                      ],
                     ),
                     Text(
                       l10n.d(template.description),
@@ -454,6 +469,28 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _moduleBadge(DeckTemplate template, String label) {
+    final colors = Theme.of(context).colorScheme;
+    return Container(
+      key: ValueKey('templateModuleBadge-${template.id}'),
+      margin: const EdgeInsets.only(left: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(
+        color: colors.secondaryContainer,
+        border: Border.all(color: colors.secondary, width: 0.7),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: colors.onSecondaryContainer,
+          fontSize: 10,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );

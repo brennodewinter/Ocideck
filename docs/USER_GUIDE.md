@@ -3264,21 +3264,22 @@ same optional, off-by-default backend used elsewhere.
 
 Turn it on under **Settings → Uitbreidingen (Extensions)**. Once enabled, the
 security slide types appear in a dedicated *Informatieveiligheid* tab of the
-add-slide and **change-type** pickers, the MIAUW template appears in the
-new-presentation dialog, and the module's command-palette actions become
-available. While the module is off, none of those security types are offered
-anywhere, so the picker stays short for everyone who does not need them — but a
-report that already uses them always opens and renders correctly regardless (the
-file is the source of truth; the toggle only governs *authoring*).
+add-slide and **change-type** pickers, and the MIAUW report plus the specialised
+information-security templates appear in the new-presentation catalogue. Each
+of those templates carries an **Informatieveiligheid** badge, so its dependency
+is visible before you choose it; while the module is off, none is offered.
+The module's command-palette actions also become available. A report that
+already uses those types always opens and renders correctly regardless (the file
+is the source of truth; the toggle only governs *authoring*).
 
 ### Procesverbetering (process improvement)
 
 A fifth optional module on **Settings → Uitbreidingen (Extensions)**, off by
-default. It hosts Lean Six Sigma authoring artefacts (DMAIC, Kaizen, A3, and so
-on) — see [`docs/design/PROCESS_IMPROVEMENT.md`](design/PROCESS_IMPROVEMENT.md).
-The module is named *Procesverbetering* on purpose — "Lean Six Sigma" appears
-only as descriptive prose, never as the feature name. No certification or ISO
-conformance claims.
+default. It provides authoring tools for methods such as DMAIC, Kaizen, A3,
+SIPOC, FMEA and RACI — see
+[`docs/design/PROCESS_IMPROVEMENT.md`](design/PROCESS_IMPROVEMENT.md). The
+module is named *Procesverbetering*; it makes no certification, conformance or
+affiliation claim.
 
 **Statistical chart types.** With the module on, the chart slide's type list
 gains eight entries beside the ordinary ones:
@@ -3409,12 +3410,14 @@ Markdown files under `assets/improvement/templates/`. Rebuild
 catalog edit. Unknown `ocideck_template` ids still open from the stored table /
 headings.
 
-**New improvement project.** With the module on, the welcome screen offers
-*Nieuw verbeteringsproject* — a short wizard (framework, title, Y-01 name and
-spec limits, optional unit/target/baseline/goal) that scaffolds a deck with
-title slide, phase sections, project charter canvas, CTQ tree and SIPOC matrix.
-The template *Procesverbetering: DMAIC-project* in the new-presentation dialog
-builds the same DMAIC skeleton.
+**Starting templates.** With the module on, **New presentation** exposes its
+process-improvement starting points in the ordinary template catalogue, each
+with a **Procesverbetering** badge. *Procesverbetering: DMAIC-project* supplies
+the DMAIC skeleton. *SIPOC-procesoverzicht* is a standalone five-slide overview:
+it explains supplier, input, process, output and customer; contains a typed,
+editable SIPOC matrix; compares the overview with a detailed flowchart; and
+guides you from customer back to supplier. Keep the process column to 4–7
+high-level activities, then fill the matrix from right to left.
 
 **AI wording assist (Phase 10).** When **both** the AI-assistentie module and
 Procesverbetering are on, canvas, tree and flow editors show **Tekst voorstellen

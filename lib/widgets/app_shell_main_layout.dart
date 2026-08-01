@@ -989,34 +989,3 @@ Future<void> _createDeckFromDialog(
     );
   }
 }
-
-/// Start a process-improvement project from the dedicated wizard.
-Future<void> _createImprovementProjectFromWizard(
-  BuildContext context,
-  WidgetRef ref, {
-  required bool inNewTab,
-}) async {
-  final choice = await ImprovementProjectWizard.show(context);
-  if (choice == null) return;
-  final slides = buildImprovementProjectSlides(
-    projectTitle: choice.title,
-    framework: choice.framework,
-    y01Description: choice.y01Description,
-  );
-  final tabs = ref.read(tabsProvider.notifier);
-  if (inNewTab) {
-    tabs.newDeckInNewTab(
-      choice.title,
-      slides: slides,
-      improvementFramework: choice.framework,
-      improvementY01Metric: choice.y01,
-    );
-  } else {
-    tabs.newDeckInCurrentTab(
-      choice.title,
-      slides: slides,
-      improvementFramework: choice.framework,
-      improvementY01Metric: choice.y01,
-    );
-  }
-}

@@ -4,23 +4,30 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
+import 'package:ocideck/state/procesverbetering_provider.dart';
 import 'package:ocideck/widgets/dialogs/new_deck_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Pompt een minimale app met een "open"-knop en opent de dialoog. De
 /// uiteindelijke uitkomst landt in [_Harness.choice] zodra de dialoog sluit.
 class _Harness {
-  _Harness({this.reveal = false});
+  _Harness({this.reveal = false, this.revealProcesverbetering = false});
 
   /// Whether the Informatieveiligheid module is revealed (gates MIAUW-only
   /// templates). Off by default, matching a fresh install.
   final bool reveal;
+  final bool revealProcesverbetering;
   NewDeckChoice? choice;
 
   Future<void> open(WidgetTester tester) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [infoSafetyRevealProvider.overrideWithValue(reveal)],
+        overrides: [
+          infoSafetyRevealProvider.overrideWithValue(reveal),
+          procesverbeteringRevealProvider.overrideWithValue(
+            revealProcesverbetering,
+          ),
+        ],
         child: MaterialApp(
           localizationsDelegates: const [AppLocalizations.delegate],
           home: Builder(
@@ -182,6 +189,38 @@ void main() {
       maxScrolls: 200,
     );
     expect(find.text(miauw.title), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey('templateModuleBadge-miauwReport')),
+      findsOneWidget,
+    );
+    expect(find.text('Informatieveiligheid'), findsWidgets);
+  });
+
+  testWidgets('process templates appear with a badge only after reveal', (
+    tester,
+  ) async {
+    final sipoc = deckTemplates.firstWhere(
+      (t) => t.id == 'procesverbetering-sipoc',
+    );
+
+    await _Harness().open(tester);
+    expect(find.text(sipoc.title), findsNothing);
+    await tester.tap(find.text('Annuleren'));
+    await tester.pumpAndSettle();
+
+    await _Harness(revealProcesverbetering: true).open(tester);
+    await tester.scrollUntilVisible(
+      find.text(sipoc.title),
+      60,
+      scrollable: find.byType(Scrollable).last,
+      maxScrolls: 200,
+    );
+    expect(find.text(sipoc.title), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey('templateModuleBadge-procesverbetering-sipoc')),
+      findsOneWidget,
+    );
+    expect(find.text('Procesverbetering'), findsWidgets);
   });
 
   testWidgets('every template has a picker icon', (tester) async {

@@ -1762,6 +1762,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Moodul on sisse lülitatud. Arvutustuum, slaidipaigutused ja mallid on kohalikult saadaval ({n} kontrollkaardi tegurit).',
+  'SIPOC-procesoverzicht': 'SIPOC-protsessi ülevaade',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Määratlege protsessi ulatus ja sõltuvused tarnijate, sisendite, põhietappide, väljundite ja klientide kaudu.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Protsesside parendamise tööriistad (SIPOC, DMAIC, Kaizen ja A3). Vaikimisi välja lülitatud; seotud mallide ja slaidipaigutuste kasutamiseks lubage laiendus.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Pildikogu on liiga suur; kuvatakse ainult uusimad pildid.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2572,10 +2579,6 @@ const _dutchSourceAddEt = <String, String>{
   'Te weinig gegevens voor een boxplot':
       'Liiga vähe andmeid karpdiagrammi jaoks',
   'Procesverbetering': 'Protsesside parendamine',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefaktid protsesside parendamiseks ja Lean Six Sigma projektideks (DMAIC, Kaizen, A3). Vaikimisi väljas. Moodul on saadaval; artefaktid lisanduvad järgmistes etappides.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Moodul sees. Arvutustuum saadaval kohapeal ({n} control chart tegurit). Slaiditüübid ja mallid lisatakse, kui need on valmis.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'See esitlus sisaldab Protsesside parendamise mooduli osi. Lülita moodul sisse, et neid muuta.',
   'Online media staat uit — aanzetten': 'Veebimeedia on väljas — lülita sisse',

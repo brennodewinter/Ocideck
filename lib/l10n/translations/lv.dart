@@ -1770,6 +1770,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modulis ir ieslēgts. Aprēķinu kodols, slaidu izkārtojumi un veidnes ir pieejamas lokāli ({n} kontroles diagrammas koeficienti).',
+  'SIPOC-procesoverzicht': 'SIPOC procesa pārskats',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Nosakiet procesa tvērumu un atkarības, izmantojot piegādātājus, ievaddatus, galvenos soļus, rezultātus un klientus.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Rīki procesu uzlabošanai (SIPOC, DMAIC, Kaizen un A3). Pēc noklusējuma izslēgti; iespējojiet paplašinājumu, lai izmantotu saistītās veidnes un slaidu izkārtojumus.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Attēlu bibliotēka ir pārāk liela; tiek rādīti tikai jaunākie attēli.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2582,10 +2589,6 @@ const _dutchSourceAddLv = <String, String>{
   'Te weinig gegevens voor een histogram': 'Pārāk maz datu histogrammai',
   'Te weinig gegevens voor een boxplot': 'Pārāk maz datu kastu diagrammai',
   'Procesverbetering': 'Procesu uzlabošana',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefakti procesu uzlabošanai un Lean Six Sigma projektiem (DMAIC, Kaizen, A3). Pēc noklusējuma izslēgts. Modulis ir pieejams; artefakti sekos nākamajos posmos.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modulis ieslēgts. Aprēķinu kodols pieejams lokāli ({n} control chart faktori). Slaidu veidi un veidnes tiks pievienotas, tiklīdz būs gatavas.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Šī prezentācija satur Procesu uzlabošanas moduļa daļas. Ieslēdziet moduli, lai tās rediģētu.',
   'Online media staat uit — aanzetten':

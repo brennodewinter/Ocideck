@@ -730,6 +730,13 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Module activé. Le moteur de calcul, les mises en page de diapositives et les modèles sont disponibles localement ({n} facteurs de carte de contrôle).',
+  'SIPOC-procesoverzicht': 'Vue d’ensemble du processus SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Définissez le périmètre et les dépendances d’un processus au moyen des fournisseurs, entrées, étapes principales, sorties et clients.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Outils d’amélioration des processus (SIPOC, DMAIC, Kaizen et A3). Désactivés par défaut ; activez l’extension pour utiliser les modèles et mises en page de diapositives associés.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'La bibliothèque d’images est trop volumineuse ; seules les images les plus récentes sont affichées.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -1556,10 +1563,6 @@ const _dutchSourceAddFr = {
   'Te weinig gegevens voor een boxplot':
       'Trop peu de données pour une boîte à moustaches',
   'Procesverbetering': 'Amélioration des processus',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefacts pour l\'amélioration des processus et les projets Lean Six Sigma (DMAIC, Kaizen, A3). Désactivé par défaut. Le module est disponible ; les artefacts suivront dans les prochaines étapes.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Module activé. Noyau de calcul disponible localement ({n} facteurs de control chart). Les types de diapositives et les modèles seront ajoutés dès qu\'ils seront prêts.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Cette présentation contient des éléments du module Amélioration des processus. Activez le module pour les modifier.',
   'Online media staat uit — aanzetten': 'Médias en ligne désactivés — activer',
