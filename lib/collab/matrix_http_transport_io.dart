@@ -98,7 +98,10 @@ class PinnedMatrixHttpTransport implements MatrixHttpTransport {
     if (existing != null) return existing;
 
     final origin = server.origin;
-    if (!server.isConfigured || origin == null) {
+    // Alleen een bereikbare homeserver-origin is nodig: de whoami-aanroep die
+    // hierlangs loopt is juist hóé het device-id na de login binnenkomt, dus we
+    // eisen hier geen (sinds #1043 verplicht) device-id via isConfigured.
+    if (origin == null) {
       throw const MatrixException(
         MatrixErrorKind.config,
         'homeserver not configured',

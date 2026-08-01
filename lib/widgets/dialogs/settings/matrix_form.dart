@@ -76,7 +76,12 @@ class MatrixForm {
   /// via een eigen melding getoond), net als bij de git- en WebDAV-formulieren.
   void saveSecret(SettingsNotifier notifier) {
     final current = config;
-    if (!current.isConfigured) return;
+    // De sleutelhanger-identiteit is homeserver|user-id; het device-id hoort er
+    // niet bij en komt vaak pas ná de login terug. Daarom bewaken we hier op de
+    // identiteitsvelden, niet op de (sinds #1043 device-id-strenge) isConfigured.
+    if (current.homeserverUrl.trim().isEmpty || current.userId.trim().isEmpty) {
+      return;
+    }
     if (token.shouldWrite(identityOf(current.homeserverUrl, current.userId))) {
       notifier.setMatrixToken(
         current.homeserverUrl,
