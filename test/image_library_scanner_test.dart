@@ -12,7 +12,7 @@ void main() {
     if (tmp.existsSync()) tmp.deleteSync(recursive: true);
   });
 
-  File _img(String relative) {
+  File makeImg(String relative) {
     final f = File(p.join(tmp.path, relative));
     f.parent.createSync(recursive: true);
     f.writeAsBytesSync(const [0x89, 0x50, 0x4e, 0x47]);
@@ -21,7 +21,7 @@ void main() {
 
   test('caps the number of files and reports truncation', () async {
     for (var i = 0; i < 10; i++) {
-      _img('pic$i.png');
+      makeImg('pic$i.png');
     }
     final result = await ImageLibraryScanner.scan([tmp.path], maxFiles: 5);
     expect(result.paths, hasLength(5));
@@ -30,8 +30,8 @@ void main() {
 
   test('honours the depth ceiling', () async {
     // Een afbeelding drie niveaus diep; met maxDepth 1 wordt hij niet bereikt.
-    _img(p.join('a', 'b', 'c', 'deep.png'));
-    _img('shallow.png');
+    makeImg(p.join('a', 'b', 'c', 'deep.png'));
+    makeImg('shallow.png');
 
     final shallow = await ImageLibraryScanner.scan([tmp.path], maxDepth: 1);
     expect(shallow.paths.map(p.basename), contains('shallow.png'));
@@ -49,7 +49,7 @@ void main() {
 
   test('overlapping search paths yield each image once', () async {
     final sub = Directory(p.join(tmp.path, 'sub'))..createSync();
-    _img(p.join('sub', 'one.png'));
+    makeImg(p.join('sub', 'one.png'));
 
     // Zowel de wortel als de submap doorzoeken: `sub/one.png` valt onder beide.
     final result = await ImageLibraryScanner.scan([tmp.path, sub.path]);
@@ -59,7 +59,7 @@ void main() {
 
   test('a cancelled scan stops and returns nothing', () async {
     for (var i = 0; i < 10; i++) {
-      _img('pic$i.png');
+      makeImg('pic$i.png');
     }
     // Meteen annuleren: er komt niets uit, en zeker geen volledige lijst.
     final result = await ImageLibraryScanner.scan([
@@ -70,10 +70,10 @@ void main() {
   });
 
   test('non-image files are ignored and results are newest first', () async {
-    _img('a.png');
+    makeImg('a.png');
     File(p.join(tmp.path, 'notes.txt')).writeAsStringSync('geen afbeelding');
     // Maak een tweede, nieuwere afbeelding.
-    final newer = _img('b.png');
+    final newer = makeImg('b.png');
     newer.setLastModifiedSync(DateTime.now().add(const Duration(hours: 1)));
 
     final result = await ImageLibraryScanner.scan([tmp.path]);

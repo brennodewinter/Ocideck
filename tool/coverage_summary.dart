@@ -37,6 +37,11 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // NO EXECUTABLE LINES: `library_scan_limits.dart` holds only two const upper
+  // bounds shared by the deck scan and the image picker (#1049) — lcov emits no
+  // record for a file with nothing to execute. The values are exercised through
+  // ImageLibraryScanner (image_library_scanner_test.dart).
+  'lib/utils/library_scan_limits.dart',
   // NO EXECUTABLE LINES: `collab.dart` is the collaboration module's barrel —
   // pure `export` directives, nothing for a line counter to reach. The files it
   // re-exports (the codec, the log store, the async transport) each carry their
