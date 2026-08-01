@@ -551,11 +551,13 @@ when the owner returns.
   `joinMatrixSession` publishes device keys and returns a `MatrixCollabLaunch`
   whose `session` appears lazily once `syncNow` has received the key-share and
   opened the baseline (the guest then adopts the authority's slide ids, §5.5).
-  `syncNow` drives one sync round plus its side effects — the host keys any
-  newcomer (`MatrixKeyExchange.ensureKeyed`), a guest retries a buffered snapshot —
-  handling the ordering hazard that a joiner sees the snapshot before its key.
-  `_wire` builds the directory, key exchange, snapshot channel and transport with
-  the single sync loop feeding both the exchange and the snapshot channel.
+  `syncNow` drives one sync round plus its side effects — retry buffered presence,
+  the host keys any newcomer (`MatrixKeyExchange.ensureKeyed`), a guest retries a
+  buffered snapshot — handling the ordering hazard that a joiner sees the snapshot
+  (and a peer's presence) before its key. `announcePresence`/`presencePeers`/
+  `onPresenceChanged` expose the presence plane. `_wire` builds the directory, key
+  exchange, snapshot channel, presence and transport with the single sync loop
+  feeding them all.
   `MatrixCollabLaunch.sessionReady` completes when the session starts, so a
   provider can wire the deck controller without polling.
 - `matrix_collab_launch.dart` — the app-level orchestration a provider calls
@@ -570,6 +572,14 @@ when the owner returns.
   `matrix.to` link a host shares and a guest pastes. Pure string work; the parser
   refuses anything that is not a room id or alias rather than probing an unknown
   link (bearer-like data, §7.1.3).
+- `matrix_presence.dart` — `MatrixPresence` + `PeerPresence`: the presence plane
+  (§6, "iedereen ziet iedereen", decided 2026-08-01). `announce(slideId)` seals
+  this device's current slide into a room **state** event keyed by device id, so
+  its latest position replaces the previous one instead of piling up in the
+  timeline; the homeserver sees only ciphertext. `handleSystemEvent` ingests
+  peers', buffering any that arrive before their epoch key or sender is known and
+  re-opening them in `retryPending` (driven from `syncNow`), the same ordering
+  fix the snapshot channel uses. Not authoritative — sealed without a signature.
 - `collab_participant.dart` — `CollabParticipant` (a device in a session: user id,
   device id, fingerprint, is-self) and `deviceFingerprint`, the readable
   uppercase-hex-in-groups-of-four rendering of an Ed25519 identity key. The
@@ -874,7 +884,8 @@ when the owner returns.
 - `preview_panel.dart` — Zoomable slide preview with rich-text page navigation. On a slide whose effective disposition is *redact* it shows the notice that says what will be left out (findings blacked out **and** all of that slide's media), with an *audience view* toggle (`audiencePreviewProvider`, off by default) that runs the current slide through `audiencePreviewSlide`. Off by default because the author has to see his own text to be able to edit it; the switch is there to check, not to work in.
 - `slide_list_panel_clipboard.dart` — Copy-slide-as-image: an egress path, so it runs the same classification gate and privacy projection as a real export.
 - `slide_list_panel_bars.dart` — The bars above the list (`part of slide_list_panel.dart`): `_SkipBanner` (how many slides are skipped, with *Alles tonen* to clear the marks), `_WithheldBanner` (how many are held back by their TLP) and `_BulkActionBar` for a multi-selection. Two separate banners on purpose: withholding is not a per-slide choice the author made and cannot be cleared by a button, so the withheld bar carries no action — raising the deck's level belongs with the TLP chip, not with a tidy-up in a sidebar.
-- `slide_list_panel.dart` — Searchable, reorderable thumbnail list with import/paste/add controls.
+- `slide_list_panel.dart` — Searchable, reorderable thumbnail list with import/paste/add controls. During a live Matrix session each thumbnail overlays `SlidePresenceDots` for the co-authors on that slide (§6 presence); the overlay renders only when a session is active, so the list is unchanged — and the goldens untouched — the rest of the time.
+- `slide_presence_dots.dart` — `SlidePresenceDots`: the little coloured, initialled markers on a slide showing which co-authors are viewing it (§6, presence). A stable colour per device, a tooltip of the user id, and a "+N" once the row is full.
 - `slide_quality_panel.dart` — Slide accessibility/quality checks with issue filtering. Carries the **Fix all problems** button (#915), shown only when something is actually auto-fixable; it runs `DeckNotifier.fixAllStructuralIssues` (one undo step) and reports back that what remains needs a choice.
 - `slide_quality_actions.dart` — `SlideQualityAction`: the concrete *do it* button beside a quality finding ("split this slide", "raise the contrast", "add alt text"), so the assistant does not only point at a problem but offers the fix.
 

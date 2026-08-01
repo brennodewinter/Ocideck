@@ -9,9 +9,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/collab/collab_participant.dart';
+import 'package:ocideck/collab/matrix_presence.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/matrix_settings.dart';
 import 'package:ocideck/state/matrix_client_provider.dart';
+import 'package:ocideck/widgets/panels/slide_presence_dots.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:ocideck/widgets/dialogs/matrix_collab_dialogs.dart';
 
@@ -157,6 +159,47 @@ void main() {
       expect(find.textContaining('@me:hs'), findsOneWidget);
       expect(find.textContaining('(dit apparaat)'), findsOneWidget);
       expect(find.text('@peer:hs'), findsOneWidget);
+    });
+  });
+
+  group('SlidePresenceDots', () {
+    PeerPresence peer(String user, String device) =>
+        PeerPresence(userId: user, deviceId: device, slideId: 's1');
+
+    testWidgets('shows a dot per peer with an initial', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SlidePresenceDots([
+              peer('@alice:hs', 'D1'),
+              peer('@bob:hs', 'D2'),
+            ]),
+          ),
+        ),
+      );
+      expect(find.text('A'), findsOneWidget);
+      expect(find.text('B'), findsOneWidget);
+    });
+
+    testWidgets('caps the row and shows a +N overflow', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SlidePresenceDots([
+              for (var i = 0; i < 5; i++) peer('@u$i:hs', 'D$i'),
+            ], maxShown: 3),
+          ),
+        ),
+      );
+      // 2 shown + a "+3" overflow chip = 3 markers total.
+      expect(find.text('+3'), findsOneWidget);
+    });
+
+    testWidgets('renders nothing when empty', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(home: Scaffold(body: SlidePresenceDots([]))),
+      );
+      expect(find.byType(Tooltip), findsNothing);
     });
   });
 

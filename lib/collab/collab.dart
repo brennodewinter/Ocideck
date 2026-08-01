@@ -24,6 +24,7 @@ export 'matrix_invite.dart';
 export 'matrix_client.dart';
 export 'matrix_http_transport.dart';
 export 'matrix_key_exchange.dart';
+export 'matrix_presence.dart';
 export 'matrix_relay_transport.dart';
 export 'matrix_session_launch.dart';
 export 'matrix_snapshot.dart';

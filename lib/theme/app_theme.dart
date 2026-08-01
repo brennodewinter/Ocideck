@@ -256,6 +256,22 @@ class AppTheme {
   static const slideRule = Color(0xFFCBD5E1); // slate300-licht
   static const slideRuleSoft = Color(0xFFE2E8F0); // slate200-licht
 
+  // ── Aanwezigheid bij samenwerken ─────────────────────────────────────────
+  // Een kwalitatief palet om mede-auteurs uit elkaar te houden (presence,
+  // §6): acht onderscheidende, contrastrijke tinten, toegewezen op apparaat-id.
+  // Categorisch, niet semantisch — daarom één benoemde lijst in plaats van acht
+  // rol-tokens; dít is de plek waar de kleurwaarden dan wél mogen staan.
+  static const List<Color> presencePalette = [
+    Color(0xFF3B82F6), // blauw
+    Color(0xFFEF4444), // rood
+    Color(0xFF10B981), // groen
+    Color(0xFFF59E0B), // amber
+    Color(0xFF8B5CF6), // violet
+    Color(0xFFEC4899), // roze
+    Color(0xFF14B8A6), // teal
+    Color(0xFFF97316), // oranje
+  ];
+
   // ── Bevinding-ernst (FIRST CVSS-banden) ───────────────────────────────────
   // Deterministische const-tokens zodat een `finding` identiek rendert in de
   // on-screen preview én in een headless export-isolate (PENTEST_MIAUW §11).
