@@ -41,7 +41,9 @@ void main() {
     expect(svg, contains('<div class="cockpit">'));
     expect(svg, contains('<svg'));
     expect(svg, contains('</svg>'));
-    expect(svg, contains('COCKPIT VIEW'));
+    // De hardgecodeerde Engelse header is uit de export gehaald (stond niet in
+    // de app-render); de export volgt nu het dia-thema.
+    expect(svg, isNot(contains('COCKPIT VIEW')));
     // Preset carries a "Capacity used" speedometer — domain-neutral since
     // #646, because this fallback also reaches the exported HTML.
     expect(svg, contains('Capacity used'));
