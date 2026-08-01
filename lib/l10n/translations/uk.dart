@@ -1789,6 +1789,26 @@ const _dutchSourceUk = {
 
 const _dutchSourceAddUk = <String, String>{
   'Ongeldige vraag': 'Недійсне запитання',
+  'Herstelsleutel': 'Ключ відновлення',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Зберігайте цей ключ відновлення в безпечному місці — наприклад, у сховищі паролів. Це єдиний спосіб відновити ту саму особу на іншому пристрої; без цього ключа ви починаєте там як новий, ще не перевірений пристрій. Не діліться ним ні з ким.',
+  'Herstelsleutel gekopieerd.': 'Ключ відновлення скопійовано.',
+  'Identiteit herstellen': 'Відновити особу',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Вставте ключ відновлення, який ви зберегли раніше. Цей пристрій тоді перебере ту саму особу — співавтори, які перевіряли вас раніше, знову впізнають ваш відбиток.',
+  'Identiteit & herstelsleutel': 'Особа та ключ відновлення',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Ваш пристрій має власну ідентичність для співпраці — саме її перевіряють співавтори. Збережіть ключ відновлення, щоб пізніше відновити цю саму особу на іншому пристрої; без цього ключа ви починаєте там заново.',
+  'Herstelsleutel tonen': 'Показати ключ відновлення',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Не вдалося прочитати ключ відновлення.',
+  'Identiteit hersteld.': 'Особу відновлено.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Цей ключ відновлення неправильний — перевірте, чи ви скопіювали його повністю й без помилок.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Це не схоже на дійсний ключ відновлення.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Цей ключ відновлення походить із новішої версії OciDeck.',
   'Realtime samenwerken': 'Співпраця в реальному часі',
   'Manieren van verbinden': 'Способи підключення',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

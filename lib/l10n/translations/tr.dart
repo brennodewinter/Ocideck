@@ -2749,6 +2749,25 @@ const _dutchSourceTr = {
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
   'Ongeldige vraag': 'Geçersiz soru',
+  'Herstelsleutel': 'Kurtarma anahtarı',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Bu kurtarma anahtarını güvenli bir yerde saklayın — örneğin parola kasanızda. Aynı kimliği başka bir cihazda geri yüklemenin tek yolu budur; bu anahtar olmadan orada yeni, henüz doğrulanmamış bir cihaz olarak başlarsınız. Kimseyle paylaşmayın.',
+  'Herstelsleutel gekopieerd.': 'Kurtarma anahtarı kopyalandı.',
+  'Identiteit herstellen': 'Kimliği geri yükle',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Daha önce kaydettiğiniz kurtarma anahtarını yapıştırın. Bu cihaz o zaman aynı kimliği devralır — sizi daha önce doğrulayan ortak yazarlar parmak izinizi yeniden tanır.',
+  'Identiteit & herstelsleutel': 'Kimlik ve kurtarma anahtarı',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Cihazınızın kendi iş birliği kimliği vardır — ortak yazarların doğruladığı budur. Aynı kimliği daha sonra başka bir cihazda geri yüklemek için kurtarma anahtarını kaydedin; o anahtar olmadan orada baştan başlarsınız.',
+  'Herstelsleutel tonen': 'Kurtarma anahtarını göster',
+  'De herstelsleutel kon niet worden gelezen.': 'Kurtarma anahtarı okunamadı.',
+  'Identiteit hersteld.': 'Kimlik geri yüklendi.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Bu kurtarma anahtarı doğru değil — tam ve hatasız kopyaladığınızdan emin olun.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Bu geçerli bir kurtarma anahtarına benzemiyor.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Bu kurtarma anahtarı OciDeck\'in daha yeni bir sürümünden geliyor.',
   'Realtime samenwerken': 'Gerçek zamanlı iş birliği',
   'Manieren van verbinden': 'Bağlantı yöntemleri',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

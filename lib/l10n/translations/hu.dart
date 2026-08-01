@@ -1776,6 +1776,26 @@ const _dutchSourceHu = {
 
 const _dutchSourceAddHu = <String, String>{
   'Ongeldige vraag': 'Érvénytelen kérdés',
+  'Herstelsleutel': 'Helyreállítási kulcs',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Tartsd ezt a helyreállítási kulcsot biztonságos helyen — például a jelszószéfedben. Ez az egyetlen módja annak, hogy egy másik eszközön visszaállítsd ugyanazt az identitást; e kulcs nélkül ott új, még nem ellenőrzött eszközként kezdesz. Ne oszd meg senkivel.',
+  'Herstelsleutel gekopieerd.': 'Helyreállítási kulcs másolva.',
+  'Identiteit herstellen': 'Identitás visszaállítása',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Illeszd be a korábban elmentett helyreállítási kulcsot. Ez az eszköz ekkor átveszi ugyanazt az identitást — a téged korábban ellenőrző társszerzők ismét felismerik az ujjlenyomatodat.',
+  'Identiteit & herstelsleutel': 'Identitás és helyreállítási kulcs',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Az eszközödnek saját együttműködési identitása van — ezt ellenőrzik a társszerzők. Mentsd el a helyreállítási kulcsot, hogy ugyanazt az identitást később egy másik eszközön visszaállíthasd; e kulcs nélkül ott elölről kezded.',
+  'Herstelsleutel tonen': 'Helyreállítási kulcs megjelenítése',
+  'De herstelsleutel kon niet worden gelezen.':
+      'A helyreállítási kulcsot nem sikerült beolvasni.',
+  'Identiteit hersteld.': 'Identitás visszaállítva.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Ez a helyreállítási kulcs nem helyes — ellenőrizd, hogy teljesen és hibátlanul másoltad-e át.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Ez nem tűnik érvényes helyreállítási kulcsnak.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Ez a helyreállítási kulcs az OciDeck egy újabb verziójából származik.',
   'Realtime samenwerken': 'Valós idejű együttműködés',
   'Manieren van verbinden': 'Csatlakozási módok',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

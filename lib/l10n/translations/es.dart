@@ -728,6 +728,26 @@ const _dutchSourceEs = {
 
 const _dutchSourceAddEs = {
   'Ongeldige vraag': 'Pregunta no válida',
+  'Herstelsleutel': 'Clave de recuperación',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Guarda esta clave de recuperación en un lugar seguro, por ejemplo en tu bóveda de contraseñas. Es la única forma de restaurar la misma identidad en otro dispositivo; sin esta clave, allí empiezas como un dispositivo nuevo y aún no verificado. No la compartas con nadie.',
+  'Herstelsleutel gekopieerd.': 'Clave de recuperación copiada.',
+  'Identiteit herstellen': 'Restaurar identidad',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Pega la clave de recuperación que guardaste antes. Este dispositivo asumirá entonces la misma identidad — los coautores que te verificaron antes reconocerán de nuevo tu huella.',
+  'Identiteit & herstelsleutel': 'Identidad y clave de recuperación',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Tu dispositivo tiene su propia identidad de colaboración — es lo que verifican los coautores. Guarda la clave de recuperación para restaurar esa misma identidad más adelante en otro dispositivo; sin esa clave, allí empiezas de nuevo.',
+  'Herstelsleutel tonen': 'Mostrar clave de recuperación',
+  'De herstelsleutel kon niet worden gelezen.':
+      'No se pudo leer la clave de recuperación.',
+  'Identiteit hersteld.': 'Identidad restaurada.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Esta clave de recuperación no es correcta — comprueba que la copiaste completa y sin errores.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Esto no parece una clave de recuperación válida.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Esta clave de recuperación procede de una versión más reciente de OciDeck.',
   'Realtime samenwerken': 'Colaboración en tiempo real',
   'Manieren van verbinden': 'Formas de conexión',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

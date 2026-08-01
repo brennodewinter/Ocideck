@@ -727,6 +727,26 @@ const _dutchSourceIt = {
 
 const _dutchSourceAddIt = {
   'Ongeldige vraag': 'Domanda non valida',
+  'Herstelsleutel': 'Chiave di ripristino',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Conserva questa chiave di ripristino in un luogo sicuro, ad esempio nella tua cassaforte delle password. È l\'unico modo per ripristinare la stessa identità su un altro dispositivo; senza questa chiave, lì inizi come un dispositivo nuovo e non ancora verificato. Non condividerla con nessuno.',
+  'Herstelsleutel gekopieerd.': 'Chiave di ripristino copiata.',
+  'Identiteit herstellen': 'Ripristina identità',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Incolla la chiave di ripristino che hai salvato in precedenza. Questo dispositivo assume così la stessa identità — i coautori che ti avevano verificato riconosceranno di nuovo la tua impronta.',
+  'Identiteit & herstelsleutel': 'Identità e chiave di ripristino',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Il tuo dispositivo ha una propria identità di collaborazione — è ciò che i coautori verificano. Salva la chiave di ripristino per ripristinare in seguito la stessa identità su un altro dispositivo; senza quella chiave lì ricominci da capo.',
+  'Herstelsleutel tonen': 'Mostra chiave di ripristino',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Impossibile leggere la chiave di ripristino.',
+  'Identiteit hersteld.': 'Identità ripristinata.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Questa chiave di ripristino non è corretta — verifica di averla copiata per intero e senza errori.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Questa non sembra una chiave di ripristino valida.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Questa chiave di ripristino proviene da una versione più recente di OciDeck.',
   'Realtime samenwerken': 'Collaborazione in tempo reale',
   'Manieren van verbinden': 'Modi di connessione',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

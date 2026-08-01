@@ -1771,6 +1771,26 @@ const _dutchSourceDa = {
 
 const _dutchSourceAddDa = <String, String>{
   'Ongeldige vraag': 'Ugyldigt spørgsmål',
+  'Herstelsleutel': 'Gendannelsesnøgle',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Opbevar denne gendannelsesnøgle et sikkert sted — for eksempel i dit adgangskodehvælv. Det er den eneste måde at gendanne den samme identitet på en anden enhed; uden denne nøgle starter du der som en ny, endnu ikke verificeret enhed. Del den ikke med nogen.',
+  'Herstelsleutel gekopieerd.': 'Gendannelsesnøgle kopieret.',
+  'Identiteit herstellen': 'Gendan identitet',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Indsæt den gendannelsesnøgle, du gemte tidligere. Denne enhed overtager så den samme identitet — medforfattere, der tidligere verificerede dig, genkender dit fingeraftryk igen.',
+  'Identiteit & herstelsleutel': 'Identitet & gendannelsesnøgle',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Din enhed har sin egen samarbejdsidentitet — det er den, medforfattere verificerer. Gem gendannelsesnøglen for senere at gendanne den samme identitet på en anden enhed; uden den nøgle starter du forfra der.',
+  'Herstelsleutel tonen': 'Vis gendannelsesnøgle',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Gendannelsesnøglen kunne ikke læses.',
+  'Identiteit hersteld.': 'Identitet gendannet.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Denne gendannelsesnøgle er ikke korrekt — kontrollér, at du har kopieret den fuldstændigt og fejlfrit.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Dette ligner ikke en gyldig gendannelsesnøgle.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Denne gendannelsesnøgle stammer fra en nyere version af OciDeck.',
   'Realtime samenwerken': 'Samarbejde i realtid',
   'Manieren van verbinden': 'Forbindelsesmåder',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

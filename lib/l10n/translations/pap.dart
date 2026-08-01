@@ -731,6 +731,26 @@ const _dutchSourcePap = {
 
 const _dutchSourceAddPap = {
   'Ongeldige vraag': 'Pregunta inválido',
+  'Herstelsleutel': 'Yabi di rekuperashon',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Warda e yabi di rekuperashon aki na un lugá sigur — por ehèmpel den bo kluis di kontraseña. Ta e úniko manera pa restorá e mesun identidat riba un otro aparato; sin e yabi aki bo ta kuminsá einan komo un aparato nobo, ku ainda no a wòrdu verifiká. No kompartié kuné ku ningun hende.',
+  'Herstelsleutel gekopieerd.': 'Yabi di rekuperashon kopiá.',
+  'Identiteit herstellen': 'Restorá identidat',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Pega e yabi di rekuperashon ku bo a warda anteriormente. E aparato aki ta asumí e mesun identidat — ko-outornan ku a verifiká bo antes lo rekonosé bo fingerprint atrobe.',
+  'Identiteit & herstelsleutel': 'Identidat i yabi di rekuperashon',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Bo aparato tin su propio identidat di kolaborashon — esei ta loke ko-outornan ta verifiká. Warda e yabi di rekuperashon pa restorá e mesun identidat mas lat riba un otro aparato; sin e yabi ei bo ta kuminsá di nobo einan.',
+  'Herstelsleutel tonen': 'Mustra yabi di rekuperashon',
+  'De herstelsleutel kon niet worden gelezen.':
+      'No por a lesa e yabi di rekuperashon.',
+  'Identiteit hersteld.': 'Identidat restorá.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'E yabi di rekuperashon aki no ta korekto — chèk si bo a kopié kompletamente i sin fout.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Esaki no ta parse un yabi di rekuperashon válido.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'E yabi di rekuperashon aki ta bini di un vershon mas nobo di OciDeck.',
   'Realtime samenwerken': 'Kolaborashon na tempu real',
   'Manieren van verbinden': 'Manera di konektá',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

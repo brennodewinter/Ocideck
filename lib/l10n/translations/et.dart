@@ -1763,6 +1763,26 @@ const _dutchSourceEt = {
 
 const _dutchSourceAddEt = <String, String>{
   'Ongeldige vraag': 'Vigane küsimus',
+  'Herstelsleutel': 'Taastevõti',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Hoia see taastevõti turvalises kohas — näiteks oma paroolihoidlas. See on ainus viis sama identiteedi taastamiseks teises seadmes; ilma selle võtmeta alustad seal uue, veel kinnitamata seadmena. Ära jaga seda kellegagi.',
+  'Herstelsleutel gekopieerd.': 'Taastevõti kopeeritud.',
+  'Identiteit herstellen': 'Taasta identiteet',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Kleebi taastevõti, mille varem salvestasid. Seejärel võtab see seade üle sama identiteedi — kaasautorid, kes sind varem kinnitasid, tunnevad su sõrmejälje taas ära.',
+  'Identiteit & herstelsleutel': 'Identiteet ja taastevõti',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Sinu seadmel on oma koostööidentiteet — just seda kaasautorid kinnitavad. Salvesta taastevõti, et sama identiteet hiljem teises seadmes taastada; ilma selle võtmeta alustad seal otsast peale.',
+  'Herstelsleutel tonen': 'Näita taastevõtit',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Taastevõtit ei õnnestunud lugeda.',
+  'Identiteit hersteld.': 'Identiteet taastatud.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'See taastevõti pole õige — kontrolli, kas kopeerisid selle täielikult ja veatult.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'See ei tundu olevat kehtiv taastevõti.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'See taastevõti pärineb OciDecki uuemast versioonist.',
   'Realtime samenwerken': 'Reaalajas koostöö',
   'Manieren van verbinden': 'Ühendusviisid',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

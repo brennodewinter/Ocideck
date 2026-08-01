@@ -1794,6 +1794,26 @@ const _dutchSourceMt = {
 
 const _dutchSourceAddMt = <String, String>{
   'Ongeldige vraag': 'Mistoqsija invalida',
+  'Herstelsleutel': 'Ċavetta ta\' rkupru',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Żomm din iċ-ċavetta ta\' rkupru f\'post sigur — pereżempju fil-kaxxaforti tal-passwords tiegħek. Hija l-uniku mod biex terġa\' tikseb l-istess identità fuq apparat ieħor; mingħajr din iċ-ċavetta hemmhekk tibda bħala apparat ġdid li għadu mhux verifikat. Taqsamha ma\' ħadd.',
+  'Herstelsleutel gekopieerd.': 'Iċ-ċavetta ta\' rkupru ġiet ikkupjata.',
+  'Identiteit herstellen': 'Irkupra l-identità',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Waħħal iċ-ċavetta ta\' rkupru li ħżint qabel. Dan l-apparat imbagħad jieħu l-istess identità — kittieba sħab li vverifikawk qabel jerġgħu jagħrfu l-marka tas-swaba\' tiegħek.',
+  'Identiteit & herstelsleutel': 'Identità u ċavetta ta\' rkupru',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'L-apparat tiegħek għandu identità ta\' kollaborazzjoni tiegħu stess — dik hi li jivverifikaw il-kittieba sħab. Ħżin iċ-ċavetta ta\' rkupru biex terġa\' tikseb l-istess identità aktar tard fuq apparat ieħor; mingħajr dik iċ-ċavetta hemmhekk tibda mill-ġdid.',
+  'Herstelsleutel tonen': 'Uri ċ-ċavetta ta\' rkupru',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Iċ-ċavetta ta\' rkupru ma setgħetx tinqara.',
+  'Identiteit hersteld.': 'L-identità ġiet irkuprata.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Din iċ-ċavetta ta\' rkupru mhijiex korretta — iċċekkja li kkupjajtha kollha u mingħajr żbalji.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Din ma tidhirx bħal ċavetta ta\' rkupru valida.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Din iċ-ċavetta ta\' rkupru ġejja minn verżjoni aktar ġdida ta\' OciDeck.',
   'Realtime samenwerken': 'Kollaborazzjoni f\'ħin reali',
   'Manieren van verbinden': 'Modi ta\' konnessjoni',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

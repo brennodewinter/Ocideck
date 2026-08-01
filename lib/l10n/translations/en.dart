@@ -912,6 +912,26 @@ const _dutchSourceEn = {
 
 const _dutchSourceAddEn = {
   'Ongeldige vraag': 'Invalid question',
+  'Herstelsleutel': 'Recovery key',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Keep this recovery key somewhere safe — for example in your password vault. It\'s the only way to restore the same identity on another device; without this key you start there as a new, not-yet-verified device. Don\'t share it with anyone.',
+  'Herstelsleutel gekopieerd.': 'Recovery key copied.',
+  'Identiteit herstellen': 'Restore identity',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Paste the recovery key you saved earlier. This device then takes over the same identity — co-authors who verified you earlier will recognise your fingerprint again.',
+  'Identiteit & herstelsleutel': 'Identity & recovery key',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Your device has its own collaboration identity — that\'s what co-authors verify. Save the recovery key to restore that same identity on another device later; without that key you start over there.',
+  'Herstelsleutel tonen': 'Show recovery key',
+  'De herstelsleutel kon niet worden gelezen.':
+      'The recovery key could not be read.',
+  'Identiteit hersteld.': 'Identity restored.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'This recovery key is not correct — check that you copied it completely and without errors.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'This doesn\'t look like a valid recovery key.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'This recovery key comes from a newer version of OciDeck.',
   'Realtime samenwerken': 'Real-time collaboration',
   'Manieren van verbinden': 'Ways to connect',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -1775,6 +1775,26 @@ const _dutchSourceCs = {
 
 const _dutchSourceAddCs = <String, String>{
   'Ongeldige vraag': 'Neplatná otázka',
+  'Herstelsleutel': 'Klíč pro obnovení',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Uchovávejte tento klíč pro obnovení na bezpečném místě — například ve svém trezoru hesel. Je to jediný způsob, jak obnovit stejnou identitu na jiném zařízení; bez tohoto klíče tam začínáte jako nové, dosud neověřené zařízení. S nikým jej nesdílejte.',
+  'Herstelsleutel gekopieerd.': 'Klíč pro obnovení zkopírován.',
+  'Identiteit herstellen': 'Obnovit identitu',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Vložte klíč pro obnovení, který jste dříve uložili. Toto zařízení pak převezme stejnou identitu — spoluautoři, kteří vás dříve ověřili, znovu rozpoznají váš otisk.',
+  'Identiteit & herstelsleutel': 'Identita a klíč pro obnovení',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Vaše zařízení má vlastní identitu spolupráce — tu spoluautoři ověřují. Uložte klíč pro obnovení, abyste stejnou identitu později obnovili na jiném zařízení; bez tohoto klíče tam začínáte znovu.',
+  'Herstelsleutel tonen': 'Zobrazit klíč pro obnovení',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Klíč pro obnovení nelze přečíst.',
+  'Identiteit hersteld.': 'Identita obnovena.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Tento klíč pro obnovení není správný — zkontrolujte, zda jste jej opsali celý a bez chyb.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Toto nevypadá jako platný klíč pro obnovení.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Tento klíč pro obnovení pochází z novější verze OciDecku.',
   'Realtime samenwerken': 'Spolupráce v reálném čase',
   'Manieren van verbinden': 'Způsoby připojení',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

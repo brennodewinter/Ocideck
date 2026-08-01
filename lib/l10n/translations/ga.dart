@@ -1807,6 +1807,26 @@ const _dutchSourceGa = {
 
 const _dutchSourceAddGa = <String, String>{
   'Ongeldige vraag': 'Ceist neamhbhailí',
+  'Herstelsleutel': 'Eochair aisghabhála',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Coinnigh an eochair aisghabhála seo in áit shábháilte — mar shampla i do stóras pasfhocal. Is é an t-aon bhealach é chun an aitheantas céanna a aisghabháil ar ghléas eile; gan an eochair seo, tosaíonn tú ansin mar ghléas nua nár fíoraíodh fós. Ná roinn le duine ar bith é.',
+  'Herstelsleutel gekopieerd.': 'Cóipeáladh an eochair aisghabhála.',
+  'Identiteit herstellen': 'Aisghabh aitheantas',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Greamaigh an eochair aisghabhála a shábháil tú níos luaithe. Glacann an gléas seo an t-aitheantas céanna ansin — aithneoidh comhúdair a d\'fhíoraigh thú níos luaithe do mhéarlorg arís.',
+  'Identiteit & herstelsleutel': 'Aitheantas & eochair aisghabhála',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Tá a aitheantas comhoibrithe féin ag do ghléas — sin a fhíoraíonn comhúdair. Sábháil an eochair aisghabhála chun an t-aitheantas céanna a aisghabháil ar ghléas eile níos déanaí; gan an eochair sin, tosaíonn tú as an nua ansin.',
+  'Herstelsleutel tonen': 'Taispeáin an eochair aisghabhála',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Níorbh fhéidir an eochair aisghabhála a léamh.',
+  'Identiteit hersteld.': 'Aitheantas aisghafa.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Níl an eochair aisghabhála seo ceart — seiceáil gur chóipeáil tú go hiomlán agus gan earráidí í.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Ní cosúil gur eochair aisghabhála bhailí é seo.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Tagann an eochair aisghabhála seo ó leagan níos nuaí de OciDeck.',
   'Realtime samenwerken': 'Comhoibriú fíor-ama',
   'Manieren van verbinden': 'Bealaí ceangail',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

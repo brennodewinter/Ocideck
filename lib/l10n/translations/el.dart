@@ -1799,6 +1799,26 @@ const _dutchSourceEl = {
 
 const _dutchSourceAddEl = <String, String>{
   'Ongeldige vraag': 'Μη έγκυρη ερώτηση',
+  'Herstelsleutel': 'Κλειδί ανάκτησης',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Φυλάξτε αυτό το κλειδί ανάκτησης σε ασφαλές μέρος — για παράδειγμα στο θησαυροφυλάκιο κωδικών σας. Είναι ο μόνος τρόπος να επαναφέρετε την ίδια ταυτότητα σε άλλη συσκευή· χωρίς αυτό το κλειδί, εκεί ξεκινάτε ως νέα, μη επαληθευμένη ακόμη συσκευή. Μην το μοιραστείτε με κανέναν.',
+  'Herstelsleutel gekopieerd.': 'Το κλειδί ανάκτησης αντιγράφηκε.',
+  'Identiteit herstellen': 'Επαναφορά ταυτότητας',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Επικολλήστε το κλειδί ανάκτησης που αποθηκεύσατε νωρίτερα. Αυτή η συσκευή αναλαμβάνει τότε την ίδια ταυτότητα — οι συν-συγγραφείς που σας είχαν επαληθεύσει θα αναγνωρίσουν ξανά το αποτύπωμά σας.',
+  'Identiteit & herstelsleutel': 'Ταυτότητα & κλειδί ανάκτησης',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Η συσκευή σας έχει τη δική της ταυτότητα συνεργασίας — αυτήν επαληθεύουν οι συν-συγγραφείς. Αποθηκεύστε το κλειδί ανάκτησης για να επαναφέρετε αργότερα την ίδια ταυτότητα σε άλλη συσκευή· χωρίς αυτό το κλειδί ξεκινάτε εκεί από την αρχή.',
+  'Herstelsleutel tonen': 'Εμφάνιση κλειδιού ανάκτησης',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Δεν ήταν δυνατή η ανάγνωση του κλειδιού ανάκτησης.',
+  'Identiteit hersteld.': 'Η ταυτότητα επαναφέρθηκε.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Αυτό το κλειδί ανάκτησης δεν είναι σωστό — ελέγξτε ότι το αντιγράψατε πλήρως και χωρίς σφάλματα.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Αυτό δεν μοιάζει με έγκυρο κλειδί ανάκτησης.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Αυτό το κλειδί ανάκτησης προέρχεται από νεότερη έκδοση του OciDeck.',
   'Realtime samenwerken': 'Συνεργασία σε πραγματικό χρόνο',
   'Manieren van verbinden': 'Τρόποι σύνδεσης',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -1779,6 +1779,26 @@ const _dutchSourceLt = {
 
 const _dutchSourceAddLt = <String, String>{
   'Ongeldige vraag': 'Netinkamas klausimas',
+  'Herstelsleutel': 'Atkūrimo raktas',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Laikykite šį atkūrimo raktą saugioje vietoje — pavyzdžiui, savo slaptažodžių saugykloje. Tai vienintelis būdas atkurti tą pačią tapatybę kitame įrenginyje; be šio rakto ten pradedate kaip naujas, dar nepatvirtintas įrenginys. Su niekuo juo nesidalykite.',
+  'Herstelsleutel gekopieerd.': 'Atkūrimo raktas nukopijuotas.',
+  'Identiteit herstellen': 'Atkurti tapatybę',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Įklijuokite atkūrimo raktą, kurį anksčiau išsaugojote. Tada šis įrenginys perima tą pačią tapatybę — bendraautoriai, kurie jus anksčiau patvirtino, vėl atpažins jūsų atspaudą.',
+  'Identiteit & herstelsleutel': 'Tapatybė ir atkūrimo raktas',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Jūsų įrenginys turi savo bendradarbiavimo tapatybę — būtent ją tikrina bendraautoriai. Išsaugokite atkūrimo raktą, kad vėliau atkurtumėte tą pačią tapatybę kitame įrenginyje; be to rakto ten pradedate iš naujo.',
+  'Herstelsleutel tonen': 'Rodyti atkūrimo raktą',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Nepavyko nuskaityti atkūrimo rakto.',
+  'Identiteit hersteld.': 'Tapatybė atkurta.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Šis atkūrimo raktas neteisingas — patikrinkite, ar jį nukopijavote visą ir be klaidų.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Tai nepanašu į galiojantį atkūrimo raktą.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Šis atkūrimo raktas yra iš naujesnės OciDeck versijos.',
   'Realtime samenwerken': 'Bendradarbiavimas tikruoju laiku',
   'Manieren van verbinden': 'Prisijungimo būdai',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

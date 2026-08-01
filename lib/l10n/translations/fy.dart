@@ -732,6 +732,26 @@ const _dutchSourceFy = {
 
 const _dutchSourceAddFy = {
   'Ongeldige vraag': 'Unjildige fraach',
+  'Herstelsleutel': 'Herstelkaai',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Bewarje dizze herstelkaai op in feilich plak — bygelyks yn dyn wachtwurdklús. It is de iennige manier om deselde identiteit op in oar apparaat werom te setten; sûnder dizze kaai begjinsto dêr as in nij, noch net ferifiearre apparaat. Diel him mei nimmen.',
+  'Herstelsleutel gekopieerd.': 'Herstelkaai kopiearre.',
+  'Identiteit herstellen': 'Identiteit weromsette',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Plak de herstelkaai dy\'tsto earder bewarre hast. Dit apparaat nimt dan deselde identiteit oer — mei-auteurs dy\'t dy earder ferifiearre ha, werkenne dyn fingerprint wer.',
+  'Identiteit & herstelsleutel': 'Identiteit & herstelkaai',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Dyn apparaat hat in eigen gearwurkingsidentiteit — dat is wat mei-auteurs ferifiearje. Bewarje de herstelkaai om deselde identiteit letter op in oar apparaat werom te setten; sûnder dy kaai begjinsto dêr opnij.',
+  'Herstelsleutel tonen': 'Herstelkaai toane',
+  'De herstelsleutel kon niet worden gelezen.':
+      'De herstelkaai koe net lêzen wurde.',
+  'Identiteit hersteld.': 'Identiteit weromset.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Dizze herstelkaai kloppet net — kontrolearje oftsto him folslein en flaterfrij oernommen hast.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Dit liket gjin jildige herstelkaai.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Dizze herstelkaai komt út in nijere ferzje fan OciDeck.',
   'Realtime samenwerken': 'Realtime gearwurkje',
   'Manieren van verbinden': 'Manieren om te ferbinen',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

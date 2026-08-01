@@ -1771,6 +1771,26 @@ const _dutchSourceLv = {
 
 const _dutchSourceAddLv = <String, String>{
   'Ongeldige vraag': 'Nederīgs jautājums',
+  'Herstelsleutel': 'Atkopšanas atslēga',
+  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
+      'Glabājiet šo atkopšanas atslēgu drošā vietā — piemēram, savā paroļu glabātavā. Tas ir vienīgais veids, kā atjaunot to pašu identitāti citā ierīcē; bez šīs atslēgas tur sāksiet kā jauna, vēl nepārbaudīta ierīce. Nedodiet to nevienam.',
+  'Herstelsleutel gekopieerd.': 'Atkopšanas atslēga nokopēta.',
+  'Identiteit herstellen': 'Atjaunot identitāti',
+  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
+      'Ielīmējiet atkopšanas atslēgu, ko saglabājāt agrāk. Šī ierīce tad pārņem to pašu identitāti — līdzautori, kuri jūs agrāk pārbaudīja, atkal atpazīs jūsu nospiedumu.',
+  'Identiteit & herstelsleutel': 'Identitāte un atkopšanas atslēga',
+  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
+      'Jūsu ierīcei ir sava sadarbības identitāte — tieši to pārbauda līdzautori. Saglabājiet atkopšanas atslēgu, lai vēlāk atjaunotu to pašu identitāti citā ierīcē; bez šīs atslēgas tur sākat no jauna.',
+  'Herstelsleutel tonen': 'Rādīt atkopšanas atslēgu',
+  'De herstelsleutel kon niet worden gelezen.':
+      'Atkopšanas atslēgu nevarēja nolasīt.',
+  'Identiteit hersteld.': 'Identitāte atjaunota.',
+  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
+      'Šī atkopšanas atslēga nav pareiza — pārbaudiet, vai to pārrakstījāt pilnībā un bez kļūdām.',
+  'Dit lijkt geen geldige herstelsleutel.':
+      'Šī neizskatās pēc derīgas atkopšanas atslēgas.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Šī atkopšanas atslēga ir no jaunākas OciDeck versijas.',
   'Realtime samenwerken': 'Sadarbība reāllaikā',
   'Manieren van verbinden': 'Savienojuma veidi',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
