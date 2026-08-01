@@ -2514,6 +2514,16 @@ On import:
   magic `PK\x03\x04`, it is treated as a package; otherwise it is saved as plain
   Markdown.
 
+Export honours the same ceiling as import. *(Added 2026-08-01.)* A package this
+version writes must be one this version can reopen, so building a package
+enforces a cumulative budget aligned to `FileService.maxPackageBytes` (512 MiB).
+Every file asset is `stat`'d before it is read, so an oversized one fails fast —
+with the user-facing `packageBudgetMessage` — instead of first being pulled fully
+into memory; the running total covers the Markdown, sidecars, theme CSS and chart
+data on top of the assets. Overshooting throws `PackageBudgetExceeded`. Without
+this a single (individually allowed) large video could produce a package OciDeck
+itself then refused to reopen (#1046).
+
 ### 7.1 Encrypted packages (optional)
 
 When exporting a package you may protect it with a password. Encryption is
@@ -2839,6 +2849,12 @@ whole, with a reason, and nothing partial is ever read into a deck.
 | Package, **unpacked** | — | 512 MiB total across all entries | same `maxPackageBytes`, applied to the running total |
 | Style profile | `.ocideckstyle` | 16 MiB | `maxStyleProfileBytes` |
 | Logo embedded in a style profile | PNG/JPEG/GIF/BMP/WebP by magic bytes | 8 MiB | `maxStyleProfileLogoBytes` |
+
+The package cap is not only an import guard: *(added 2026-08-01)* writing a
+package enforces the same 512 MiB budget so an export cannot produce a file the
+importer would then refuse (`PackageBudgetExceeded`, §7). Assets are `stat`'d
+before being read, so an oversized package is rejected before its bytes reach
+memory.
 
 The unpacked cap deserves its own row because it is the one a crafted archive
 attacks. A zip bomb understates its declared size, so the declared figure is only

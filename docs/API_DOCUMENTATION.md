@@ -174,6 +174,26 @@ nowhere but the open window — which is why `whileSaving` rides along on
 `ChartDataWarning` and the shell shows an error rather than a note. `path` is
 null when the user dismissed the file picker.
 
+### Package export (FileServicePackage)
+`lib/services/file/file_service_package.dart` — the `FileServicePackage`
+extension writes an `.ocideck` package:
+
+```dart
+Future<void>      exportPackage(Deck deck, String destPath,
+    {String? password, int budgetBytes = FileService.maxPackageBytes});
+Future<Uint8List> buildPackageBytes(Deck deck,
+    {String? password, int budgetBytes = FileService.maxPackageBytes});
+Future<Map<String, List<int>>> buildPackageMembers(Deck deck,
+    {int budgetBytes = FileService.maxPackageBytes});
+```
+
+`budgetBytes` is a cumulative ceiling over every member, defaulting to the
+importer's own `FileService.maxPackageBytes` (512 MiB) so a package this code
+writes is one the importer can reopen. Each file asset is `stat`'d before it is
+read; an overshoot throws `PackageBudgetExceeded(usedBytes, limitBytes)` before
+the bytes are pulled into memory, and `userFacingError` renders it through
+`packageBudgetMessage` (#1046).
+
 ### ExportService
 `lib/services/export_service.dart` — export to PDF, PPTX, and HTML:
 

@@ -730,6 +730,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
+      'E paket aki ta muchu grandi (máksimo 512 MB). Sino OciDeck lo no por hib’é despues. Usa ménos òf mas chikí imágen, video òf archivo di odio.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Kaba i warda e presentashon promé; despues bo por firma su origen.',
   'Herkomst ondertekend.': 'Origen firmá.',

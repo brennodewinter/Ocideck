@@ -1770,6 +1770,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
+      'Det här paketet är för stort (högst 512 MB). Annars kan OciDeck inte öppna det efteråt. Använd färre eller mindre bilder, videor eller ljudfiler.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Slutför och spara presentationen först; sedan kan du signera dess ursprung.',
   'Herkomst ondertekend.': 'Ursprung signerat.',

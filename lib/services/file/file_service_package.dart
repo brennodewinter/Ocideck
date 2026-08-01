@@ -6,28 +6,6 @@
 part of '../file_service.dart';
 
 extension FileServicePackage on FileService {
-  String _safeName(String title) {
-    final cleaned = title
-        .replaceAll(RegExp(r'[^\w\s-]'), '')
-        .replaceAll(RegExp(r'\s+'), '_')
-        .trim();
-    return cleaned.isEmpty ? 'presentatie' : cleaned;
-  }
-
-  /// Sanitize a deck-supplied theme name before it becomes a file name. The
-  /// `theme:` front-matter value is attacker-controlled, so `../` and other
-  /// separators must be stripped or a write could escape the project's
-  /// `themes/` directory (p.join collapses `../` on join). Falls back to
-  /// `ocideck`. Strips the same characters as [_safeName]; `.` and `/` are not
-  /// in `[\w\s-]`, so any traversal sequence is flattened away.
-  String _safeThemeName(String themeName) {
-    final cleaned = themeName
-        .replaceAll(RegExp(r'[^\w\s-]'), '')
-        .replaceAll(RegExp(r'\s+'), '_')
-        .trim();
-    return cleaned.isEmpty ? 'ocideck' : cleaned;
-  }
-
   /// Schrijf een zelfstandig pakket (zip): de markdown + álle gebruikte assets
   /// (afbeeldingen, media, logo) en de thema-CSS, met onderling relatieve
   /// paden. Werkt ongeacht of het deck al is opgeslagen.
@@ -38,8 +16,13 @@ extension FileServicePackage on FileService {
     Deck deck,
     String destPath, {
     String? password,
+    int budgetBytes = FileService.maxPackageBytes,
   }) async {
-    final bytes = await buildPackageBytes(deck, password: password);
+    final bytes = await buildPackageBytes(
+      deck,
+      password: password,
+      budgetBytes: budgetBytes,
+    );
     await writeBytesAtomic(File(destPath), bytes);
   }
 
@@ -50,8 +33,12 @@ extension FileServicePackage on FileService {
   /// Met een niet-leeg [password] versleutelt de `ZipEncoder` elk lid met
   /// WinZip-AES-256. Een leeg/`null` wachtwoord levert een gewoon, onversleuteld
   /// pakket op (bestaand gedrag).
-  Future<Uint8List> buildPackageBytes(Deck deck, {String? password}) async {
-    final archive = await _buildPackageArchive(deck);
+  Future<Uint8List> buildPackageBytes(
+    Deck deck, {
+    String? password,
+    int budgetBytes = FileService.maxPackageBytes,
+  }) async {
+    final archive = await _buildPackageArchive(deck, budgetBytes: budgetBytes);
     final pw = (password != null && password.isNotEmpty) ? password : null;
     // Zip-compressie is CPU-zwaar (media-assets kunnen honderden MB zijn);
     // in een eigen isolate blijft de UI responsief tijdens het pakken. Op web
@@ -73,43 +60,30 @@ extension FileServicePackage on FileService {
   /// Pakket-leden (pad → bytes) zonder ze te zippen, zodat elk bestand los naar
   /// een WebDAV-map kan worden geüpload — een "platte" spiegel van het deck met
   /// dezelfde asset-mappen en herschreven relatieve paden als het pakket.
-  Future<Map<String, List<int>>> buildPackageMembers(Deck deck) async {
-    final archive = await _buildPackageArchive(deck);
+  Future<Map<String, List<int>>> buildPackageMembers(
+    Deck deck, {
+    int budgetBytes = FileService.maxPackageBytes,
+  }) async {
+    final archive = await _buildPackageArchive(deck, budgetBytes: budgetBytes);
     return {
       for (final f in archive.files)
         if (f.isFile) f.name: f.content,
     };
   }
 
-  /// Schrijf de data van één grafiek als lid onder `data/` en geef het lidpad
-  /// terug; [added] houdt naamconflicten uit elkaar.
-  ///
-  /// Bewust uit het geheugen, en niet door het bestand van schijf te kopiëren.
-  /// Het deck in de editor kan bewerkingen bevatten die nog niet zijn
-  /// opgeslagen; dan is het bestand op schijf verouderd en zou exporteren
-  /// stilzwijgend de oude cijfers meesturen.
-  String _addChartDataTo(
-    Archive archive,
-    Set<String> added,
-    String name,
-    String content,
-  ) {
-    final base = _safeName(p.basenameWithoutExtension(name));
-    final ext = p.extension(name).toLowerCase() == '.csv' ? '.csv' : '.json';
-    var rel = p.posix.join(chartDataDirName, '$base$ext');
-    var i = 2;
-    while (added.contains(rel)) {
-      rel = p.posix.join(chartDataDirName, '$base (${i++})$ext');
-    }
-    final bytes = utf8.encode(content);
-    archive.add(ArchiveFile(rel, bytes.length, bytes));
-    added.add(rel);
-    return rel;
-  }
-
-  Future<Archive> _buildPackageArchive(Deck deck) async {
+  Future<Archive> _buildPackageArchive(
+    Deck deck, {
+    int budgetBytes = FileService.maxPackageBytes,
+  }) async {
     final archive = Archive();
     final added = <String>{};
+    // Cumulative package budget, aligned to the importer's ceiling so a package
+    // this version writes is one this version can reopen (#1046). Every member's
+    // bytes are reserved here — file assets are stat'd before they are read, so
+    // an oversized one fails fast instead of being pulled fully into memory.
+    final budget = _PackageBudget(budgetBytes);
+    void reserve(int n) => budget.reserve(n);
+
     // Bronpad → archiefpad, zodat hetzelfde bestand één keer wordt opgenomen en
     // twéé verschillende bestanden met dezelfde naam allebei meegaan.
     final byAbsolutePath = <String, String>{};
@@ -126,6 +100,7 @@ extension FileServicePackage on FileService {
       final bytes = WebAssetStore.bytesFor(path);
       // Store leeg (bv. pagina herladen): niets om in te pakken.
       if (bytes == null) return null;
+      reserve(bytes.length);
       final original = WebAssetStore.nameFor(path) ?? 'afbeelding.png';
       final base = _safeName(p.basenameWithoutExtension(original));
       final ext = p.extension(original).toLowerCase();
@@ -169,6 +144,9 @@ extension FileServicePackage on FileService {
       final existing = byAbsolutePath[abs];
       if (existing != null) return existing;
       final rel = _freeArchivePath(added, subdir, abs);
+      // Stat before read: reserve the on-disk size so an oversized asset trips
+      // the budget without first being pulled into memory (#1046).
+      reserve(await file.length());
       final bytes = await file.readAsBytes();
       archive.add(ArchiveFile(rel, bytes.length, bytes));
       added.add(rel);
@@ -229,16 +207,33 @@ extension FileServicePackage on FileService {
     _addSidecarMembers(archive, packDeck, _safeName(deck.title));
 
     // Thema-CSS (zodat het pakket ook in Marp/CLI bruikbaar is).
-    final css = await _packageThemeCss(packDeck.theme, profile, logoRel);
-    if (css != null) {
-      final cssBytes = utf8.encode(css);
-      final themeName = _safeThemeName(packDeck.theme);
-      archive.add(
-        ArchiveFile('themes/$themeName.css', cssBytes.length, cssBytes),
-      );
-    }
+    await _addThemeCssMember(archive, packDeck, profile, logoRel);
+
+    // Cumulative guard over every member (markdown, sidecars, theme CSS and
+    // chart data on top of the reserved assets), so the total the importer will
+    // weigh cannot exceed its ceiling — the compressed zip is no larger than the
+    // sum of these raw bytes for the media that dominates a package (#1046).
+    _assertArchiveWithinBudget(archive, budgetBytes);
 
     return archive;
+  }
+
+  /// Voeg de thema-CSS als lid `themes/<naam>.css` toe, zodat het pakket ook in
+  /// Marp/CLI bruikbaar blijft. Zonder gebundeld thema-asset ([_packageThemeCss]
+  /// gaf `null`) blijft het pakket zonder CSS.
+  Future<void> _addThemeCssMember(
+    Archive archive,
+    Deck packDeck,
+    ThemeProfile profile,
+    String? logoRel,
+  ) async {
+    final css = await _packageThemeCss(packDeck.theme, profile, logoRel);
+    if (css == null) return;
+    final cssBytes = utf8.encode(css);
+    final themeName = _safeThemeName(packDeck.theme);
+    archive.add(
+      ArchiveFile('themes/$themeName.css', cssBytes.length, cssBytes),
+    );
   }
 
   /// Voeg de sidecar-leden van [packDeck] toe onder [base]: dezelfde
@@ -272,47 +267,6 @@ extension FileServicePackage on FileService {
 
   /// Voeg een méégebundelde asset (asset:-pad, bv. het logo van een ingebouwd
   /// profiel) vanuit de rootBundle toe aan het pakket-archief.
-  /// Een nog vrije plek in het archief voor [abs], onder [subdir].
-  ///
-  /// Twee bestanden met dezelfde naam uit verschillende mappen — een
-  /// `screenshot.png` van het bureaublad en één uit Downloads — kregen dezelfde
-  /// plek. De tweede werd dan niet geschreven maar kreeg wél dat pad terug, dus
-  /// beide dia's wezen naar de inhoud van de eerste: het bewijs van de ene dia
-  /// stond onder de andere, en van het origineel zat niets in het pakket. De
-  /// `mem:`-tak hiernaast telde al door; deze niet.
-  /// De dia's die in een pakket horen te belanden.
-  ///
-  /// Dit pad serialiseerde `deck.slides` rechtstreeks, en een pakket is de meest
-  /// complete uitvoer die de app kent: de volledige markdown plus élke asset.
-  /// Een dia die de auteur op *overslaan* zette, of waarvan de eigen TLP
-  /// strenger is dan die van het deck, is onzichtbaar in de presenter, op het
-  /// zaalscherm én in de PDF — en ging hier gewoon mee. Daar was geen
-  /// instelling voor nodig: dit gebeurde bij een standaardinstallatie.
-  ///
-  /// Dezelfde regel als overal elders ([slideReachesAudience]), zodat er niet
-  /// opnieuw een tweede exemplaar van het predicaat ontstaat.
-  static List<Slide> _packSlides(Deck deck) => [
-    for (final s in deck.slides)
-      if (slideReachesAudience(
-        s,
-        presentationTlp: deck.tlp,
-        includeDetail: true,
-      ))
-        s,
-  ];
-
-  static String _freeArchivePath(Set<String> added, String subdir, String abs) {
-    final base = p.basenameWithoutExtension(abs);
-    final ext = p.extension(abs);
-    var rel = p.posix.join(subdir, '$base$ext');
-    var i = 2;
-    while (added.contains(rel)) {
-      rel = p.posix.join(subdir, '$base ($i)$ext');
-      i++;
-    }
-    return rel;
-  }
-
   Future<String?> _addBundledAssetTo(
     Archive archive,
     Set<String> added,
@@ -356,10 +310,137 @@ extension FileServicePackage on FileService {
   }
 }
 
+/// Cumulative byte budget for a package under construction. Reserving a
+/// member's bytes before it is materialised lets an oversized asset trip
+/// [PackageBudgetExceeded] fast, without first pulling it into memory (#1046).
+class _PackageBudget {
+  _PackageBudget(this.limitBytes);
+
+  final int limitBytes;
+  int _used = 0;
+
+  void reserve(int n) {
+    if (_used + n > limitBytes) {
+      throw PackageBudgetExceeded(usedBytes: _used, limitBytes: limitBytes);
+    }
+    _used += n;
+  }
+}
+
+/// Final cumulative guard over every archive member, so the total the importer
+/// will weigh cannot exceed its ceiling (#1046).
+void _assertArchiveWithinBudget(Archive archive, int budgetBytes) {
+  final total = archive.files.fold<int>(0, (sum, f) => sum + f.content.length);
+  if (total > budgetBytes) {
+    throw PackageBudgetExceeded(usedBytes: total, limitBytes: budgetBytes);
+  }
+}
+
+/// Maak van een deck-titel een veilige bestandsnaam-stam: strip alles buiten
+/// `[\w\s-]`, spaties naar `_`. Valt terug op `presentatie`. Top-level in de
+/// library, zodat élk `part`-bestand hem deelt zonder de FileService-klasse te
+/// laten groeien.
+String _safeName(String title) {
+  final cleaned = title
+      .replaceAll(RegExp(r'[^\w\s-]'), '')
+      .replaceAll(RegExp(r'\s+'), '_')
+      .trim();
+  return cleaned.isEmpty ? 'presentatie' : cleaned;
+}
+
+/// Sanitize a deck-supplied theme name before it becomes a file name. The
+/// `theme:` front-matter value is attacker-controlled, so `../` and other
+/// separators must be stripped or a write could escape the project's
+/// `themes/` directory (p.join collapses `../` on join). Falls back to
+/// `ocideck`. Strips the same characters as [_safeName]; `.` and `/` are not
+/// in `[\w\s-]`, so any traversal sequence is flattened away.
+String _safeThemeName(String themeName) {
+  final cleaned = themeName
+      .replaceAll(RegExp(r'[^\w\s-]'), '')
+      .replaceAll(RegExp(r'\s+'), '_')
+      .trim();
+  return cleaned.isEmpty ? 'ocideck' : cleaned;
+}
+
+/// Schrijf de data van één grafiek als lid onder `data/` en geef het lidpad
+/// terug; [added] houdt naamconflicten uit elkaar.
+///
+/// Bewust uit het geheugen, en niet door het bestand van schijf te kopiëren.
+/// Het deck in de editor kan bewerkingen bevatten die nog niet zijn
+/// opgeslagen; dan is het bestand op schijf verouderd en zou exporteren
+/// stilzwijgend de oude cijfers meesturen.
+String _addChartDataTo(
+  Archive archive,
+  Set<String> added,
+  String name,
+  String content,
+) {
+  final base = _safeName(p.basenameWithoutExtension(name));
+  final ext = p.extension(name).toLowerCase() == '.csv' ? '.csv' : '.json';
+  var rel = p.posix.join(chartDataDirName, '$base$ext');
+  var i = 2;
+  while (added.contains(rel)) {
+    rel = p.posix.join(chartDataDirName, '$base (${i++})$ext');
+  }
+  final bytes = utf8.encode(content);
+  archive.add(ArchiveFile(rel, bytes.length, bytes));
+  added.add(rel);
+  return rel;
+}
+
+/// De dia's die in een pakket horen te belanden — dezelfde regel als overal
+/// elders ([slideReachesAudience]), zodat er niet opnieuw een tweede exemplaar
+/// van het predicaat ontstaat. Een dia op *overslaan*, of met een strengere
+/// eigen TLP dan het deck, is onzichtbaar in presenter, zaalscherm en PDF en
+/// hoort dus ook niet in het pakket.
+List<Slide> _packSlides(Deck deck) => [
+  for (final s in deck.slides)
+    if (slideReachesAudience(s, presentationTlp: deck.tlp, includeDetail: true))
+      s,
+];
+
+/// Een nog vrije plek in het archief voor [abs], onder [subdir]. Twee bestanden
+/// met dezelfde naam uit verschillende mappen krijgen allebei een eigen lid via
+/// een oplopend volgnummer.
+String _freeArchivePath(Set<String> added, String subdir, String abs) {
+  final base = p.basenameWithoutExtension(abs);
+  final ext = p.extension(abs);
+  var rel = p.posix.join(subdir, '$base$ext');
+  var i = 2;
+  while (added.contains(rel)) {
+    rel = p.posix.join(subdir, '$base ($i)$ext');
+    i++;
+  }
+  return rel;
+}
+
 /// Thrown by [_CappedOutputStream] when a decompressed entry would exceed its
 /// byte budget — the signal that a package entry is a decompression bomb.
 class _ExtractionLimitException implements Exception {
   const _ExtractionLimitException();
+}
+
+/// Thrown while building a package when the assets would push it past
+/// [FileService.maxPackageBytes] — the very limit the importer enforces
+/// ([tabs_provider_import]). Without this a single big video could produce a
+/// package OciDeck itself then refuses to reopen, and reading it would demand
+/// gigabytes of memory (#1046). Assets are stat'd before being read, so the
+/// export fails fast with this rather than after materialising the bytes.
+class PackageBudgetExceeded implements Exception {
+  const PackageBudgetExceeded({
+    required this.usedBytes,
+    required this.limitBytes,
+  });
+
+  /// Bytes already reserved for the package when the limit was hit.
+  final int usedBytes;
+
+  /// The cumulative ceiling, aligned to [FileService.maxPackageBytes].
+  final int limitBytes;
+
+  @override
+  String toString() =>
+      'PackageBudgetExceeded(used: $usedBytes, limit: $limitBytes)';
 }
 
 /// An [OutputStream] that refuses to grow past [limit] bytes. The archive

@@ -1775,6 +1775,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
+      'Ez a csomag túl nagy (legfeljebb 512 MB). Különben az OciDeck utána nem tudja megnyitni. Használj kevesebb vagy kisebb képet, videót vagy hangfájlt.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Előbb fejezd be és mentsd el a bemutatót; utána aláírhatod az eredetét.',
   'Herkomst ondertekend.': 'Eredet aláírva.',

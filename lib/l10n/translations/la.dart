@@ -1787,6 +1787,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
+      'Hoc fasciculus nimis magnus est (ad summum 512 MB). Aliter OciDeck eum postea aperire non poterit. Utere paucioribus vel minoribus imaginibus, pelliculis vel fasciculis sonoris.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Praesentationem prius perfice et serva; deinde originem subscribere potes.',
   'Herkomst ondertekend.': 'Origo subscripta.',

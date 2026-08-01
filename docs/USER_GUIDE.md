@@ -2789,7 +2789,11 @@ Export to:
   stored as. *Updated 2026-07-22: images and those six slide types used to be
   the export's blind spots.*
 - **Portable package** (`.ocideck`) — a single zip with the Markdown and all
-  assets, to hand the whole deck to someone else.
+  assets, to hand the whole deck to someone else. A package this version writes
+  is one it can reopen: if the assets together would push it past the 512 MB the
+  importer accepts, the export stops with a message before it fills memory
+  (*added 2026-08-01*). Use fewer or smaller images, videos or audio files if you
+  hit it.
 
 **Password-protecting a package (optional).** When you export a package, a dialog
 lets you switch on **AES-256 encryption** and set a password. Encryption is off by

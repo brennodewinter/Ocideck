@@ -1770,6 +1770,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
+      'Šī pakotne ir pārāk liela (ne vairāk kā 512 MB). Pretējā gadījumā OciDeck to vēlāk vairs nevarēs atvērt. Izmantojiet mazāk vai mazākus attēlus, video vai audio failus.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Vispirms pabeidziet un saglabājiet prezentāciju; pēc tam varat parakstīt tās izcelsmi.',
   'Herkomst ondertekend.': 'Izcelsme parakstīta.',

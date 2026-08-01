@@ -1788,6 +1788,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
+      'Цей пакунок завеликий (максимум 512 МБ). Інакше OciDeck згодом не зможе його відкрити. Використовуйте менше або менші зображення, відео чи аудіофайли.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Спершу завершіть і збережіть презентацію; після цього ви зможете підписати її походження.',
   'Herkomst ondertekend.': 'Походження підписано.',

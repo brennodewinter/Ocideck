@@ -1806,6 +1806,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
+      'Tá an pacáiste seo rómhór (512 MB ar a mhéad). Seachas sin ní bheidh OciDeck in ann é a oscailt ina dhiaidh sin. Úsáid íomhánna, físeáin nó comhaid fuaime níos lú ó thaobh líon nó méide.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Críochnaigh agus sábháil an láithreoireacht ar dtús; ansin is féidir leat a bunús a shíniú.',
   'Herkomst ondertekend.': 'Bunús sínithe.',

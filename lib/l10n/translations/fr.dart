@@ -730,6 +730,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
+      'Ce paquet est trop volumineux (512 Mo maximum). Sinon, OciDeck ne pourra plus l’ouvrir ensuite. Utilisez moins d’images, de vidéos ou de fichiers audio, ou des fichiers plus petits.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Terminez et enregistrez d\'abord la présentation ; vous pourrez ensuite en signer la provenance.',
   'Herkomst ondertekend.': 'Provenance signée.',
