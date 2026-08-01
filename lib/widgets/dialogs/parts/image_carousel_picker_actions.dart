@@ -391,6 +391,10 @@ extension _CarouselActions on _ImageCarouselPickerState {
   }) async {
     var removed = 0;
     final updatedDeckFiles = <String>{};
+    // Eén replacement-map over het hele plan: iedere te verwijderen kopie → haar
+    // keeper. Zo hoeft elk deckbestand maar één keer gelezen en geschreven te
+    // worden, ongeacht hoeveel kopieën er verdwijnen (#1052).
+    final replacements = <String, String>{};
     for (final entry in plan) {
       // Keeper eerst, zodat zijn eigen tekst vooraan blijft staan.
       final ordered = [entry.keeper, ...entry.remove];
@@ -413,16 +417,9 @@ extension _CarouselActions on _ImageCarouselPickerState {
         );
       }
       for (final path in entry.remove) {
+        replacements[path] = entry.keeper;
+        // Open decks in het geheugen meteen mee laten wijzen.
         await widget.onReplaceUsages?.call(path, entry.keeper);
-        // Ook niet-geopende presentaties op schijf laten meewijzen.
-        for (final deckFile in deckFiles) {
-          final updated = await refs.replaceReferences(
-            deckFile,
-            path,
-            entry.keeper,
-          );
-          if (updated) updatedDeckFiles.add(deckFile);
-        }
         try {
           final file = File(path);
           if (file.existsSync()) await file.delete();
@@ -433,6 +430,13 @@ extension _CarouselActions on _ImageCarouselPickerState {
         await widget.descriptionService.removeDescription(path);
         _descriptions.remove(path);
         removed++;
+      }
+    }
+    // Ook niet-geopende presentaties op schijf laten meewijzen — nu één pass per
+    // deckbestand, met alle vervangingen tegelijk.
+    for (final deckFile in deckFiles) {
+      if (await refs.replaceReferencesMulti(deckFile, replacements)) {
+        updatedDeckFiles.add(deckFile);
       }
     }
     return (removed, updatedDeckFiles);

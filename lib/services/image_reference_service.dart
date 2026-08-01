@@ -72,7 +72,13 @@ class ImageReferenceService {
     Iterable<String> deckFiles,
     Iterable<String> targets,
   ) async {
-    final wanted = {for (final t in targets) p.normalize(t)};
+    // Eén canonieke lookup-map in plaats van elke gevonden verwijzing tegen
+    // iedere target aan te leggen met `p.equals` (O(verwijzingen × targets), in
+    // het maximum honderden miljoenen vergelijkingen). `p.canonicalize` doet
+    // dezelfde normalisatie als `p.equals`, maar nu als hash-sleutel (#1052).
+    final canonicalToTarget = <String, String>{
+      for (final t in targets) p.canonicalize(t): t,
+    };
     final counts = <String, int>{};
     for (final deckFile in deckFiles) {
       String content;
@@ -86,12 +92,8 @@ class ImageReferenceService {
       for (final match in _imageRef.allMatches(content)) {
         final resolved = _resolve(match.group(2)!, mdDir);
         if (resolved == null) continue;
-        for (final target in wanted) {
-          if (p.equals(resolved, target)) {
-            counts[target] = (counts[target] ?? 0) + 1;
-            break;
-          }
-        }
+        final target = canonicalToTarget[p.canonicalize(resolved)];
+        if (target != null) counts[target] = (counts[target] ?? 0) + 1;
       }
     }
     return counts;
@@ -133,13 +135,33 @@ class ImageReferenceService {
     String deckFile,
     String fromAbsolute,
     String toAbsolute,
+  ) => replaceReferencesMulti(deckFile, {fromAbsolute: toAbsolute});
+
+  /// Herschrijf in [deckFile] elke verwijzing volgens [replacements] (een map
+  /// van-absoluut → naar-absoluut) in één lees-/schrijfpass: het bestand wordt
+  /// één keer gelezen, alle doelen worden in die pass omgezet, en er wordt
+  /// hooguit één keer geschreven (atomair, in situ). Zo kost het opruimen van
+  /// veel duplicaten niet één volledige deck-herschrijving per kopie (#1052).
+  /// Geeft true wanneer het bestand daadwerkelijk is gewijzigd.
+  Future<bool> replaceReferencesMulti(
+    String deckFile,
+    Map<String, String> replacements,
   ) async {
+    if (replacements.isEmpty) return false;
+    // Canonieke sleutels, zodat een gevonden verwijzing in O(1) haar
+    // vervanging vindt in plaats van tegen elk bronpad te worden vergeleken.
+    final canonical = <String, String>{
+      for (final e in replacements.entries) p.canonicalize(e.key): e.value,
+    };
     final file = File(deckFile);
     String content;
     try {
       content = await file.readAsString();
     } catch (e) {
-      logWarning('ImageReferenceService.replaceReferences: read deck file', e);
+      logWarning(
+        'ImageReferenceService.replaceReferencesMulti: read deck file',
+        e,
+      );
       return false;
     }
     final mdDir = p.dirname(deckFile);
@@ -147,9 +169,9 @@ class ImageReferenceService {
     final updated = content.replaceAllMapped(_imageRef, (m) {
       final ref = m.group(2)!;
       final resolved = _resolve(ref, mdDir);
-      if (resolved == null || !p.equals(resolved, fromAbsolute)) {
-        return m.group(0)!;
-      }
+      if (resolved == null) return m.group(0)!;
+      final toAbsolute = canonical[p.canonicalize(resolved)];
+      if (toAbsolute == null) return m.group(0)!;
       changed = true;
       // Blijf relatief schrijven als de verwijzing dat al was en het nieuwe
       // pad binnen de projectmap ligt; anders absoluut.
@@ -170,7 +192,10 @@ class ImageReferenceService {
       // Atomair: dit herschrijft het deck-bestand van de gebruiker in situ.
       await writeStringAtomic(file, updated);
     } catch (e) {
-      logWarning('ImageReferenceService.replaceReferences: write deck file', e);
+      logWarning(
+        'ImageReferenceService.replaceReferencesMulti: write deck file',
+        e,
+      );
       return false;
     }
     return true;

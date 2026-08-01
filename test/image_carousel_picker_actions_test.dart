@@ -277,4 +277,68 @@ void main() {
     // De dialoog is gesloten.
     expect(find.byType(ImageCarouselPicker), findsNothing);
   });
+
+  testWidgets('Duplicaten opruimen ontdubbelt byte-identieke afbeeldingen', (
+    tester,
+  ) async {
+    // De drie fixture-bestanden dragen dezelfde bytes, dus ze vormen één
+    // duplicaatgroep: na het opruimen blijft er één staan (#1052-pad). De
+    // afrondende SnackBar vraagt om een Scaffold in de boom, wat er in productie
+    // altijd is (de kiezer opent boven de app) maar in dit harnas zelf staat.
+    await tester.binding.setSurfaceSize(const Size(1400, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.runAsync(() async {
+      await tester.pumpWidget(
+        ProviderScope(
+          child: MaterialApp(
+            home: Scaffold(
+              body: ImageCarouselPicker(
+                searchPaths: [tempDir.path],
+                captionService: CaptionService(),
+                descriptionService: DescriptionService(),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    await pumpUntil(
+      tester,
+      () => find.byType(CircularProgressIndicator).evaluate().isEmpty,
+      reason: 'de mapscan van de afbeeldingkiezer bleef laden',
+    );
+    clearLayoutNoise(tester);
+
+    final dedupeButton = find.text('Duplicaten opruimen');
+    expect(dedupeButton, findsOneWidget);
+
+    // De vergelijking (md5) en de mapscan lopen op echte file-IO.
+    await tester.runAsync(() async {
+      await tester.tap(dedupeButton, warnIfMissed: false);
+      await Future<void>.delayed(const Duration(milliseconds: 300));
+    });
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    clearLayoutNoise(tester);
+
+    // De bevestigingsdialoog verschijnt met de "Opruimen"-knop.
+    final confirm = find.widgetWithText(ElevatedButton, 'Opruimen');
+    expect(confirm, findsOneWidget);
+
+    await tester.runAsync(() async {
+      await tester.tap(confirm, warnIfMissed: false);
+      await Future<void>.delayed(const Duration(milliseconds: 300));
+    });
+    await settle(tester);
+
+    // Er blijft één bestand op schijf staan; twee kopieën zijn verwijderd.
+    final remaining = tempDir
+        .listSync()
+        .whereType<File>()
+        .where((f) => f.path.endsWith('.png'))
+        .length;
+    expect(remaining, 1);
+    expect(find.byType(ImageCarouselPicker), findsOneWidget);
+    expect(find.byType(ErrorWidget), findsNothing);
+  });
 }
