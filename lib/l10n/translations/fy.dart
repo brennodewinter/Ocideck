@@ -744,6 +744,19 @@ const _dutchSourceAddFy = {
   'Versturen': 'Ferstjoere',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Noch gjin berjochten. Sis wat tsjin dyn mei-auteurs.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Ferlykje de fingerprint fan elk apparaat fia in fertroud kanaal — lês him elkoar foar, of stjoer him fia in wei dy\'tsto fertrouwst. Komt er oerien, markearje it apparaat dan as ferifiearre; it bliuwt dan ferifiearre, ek yn in folgjende sesje. Wykt er ôf, ferbrek dan de gearwurking.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'De identiteit fan dit apparaat wykt ôf fan wat do earder ferifiearre hast — mooglik sit der ien tuskenyn. Ferbrek de gearwurking, útsein asto wis witst dat dit apparaat opnij ynsteld is.',
+  'Geverifieerd': 'Ferifiearre',
+  'Wijkt af': 'Wykt ôf',
+  'Niet geverifieerd': 'Net ferifiearre',
+  'Markeer als geverifieerd': 'Markearje as ferifiearre',
+  'Verificatie intrekken': 'Ferifikaasje ynlûke',
+  'Toch opnieuw vertrouwen': 'Dochs opnij fertrouwe',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Noch net elk apparaat yn dizze gearwurking is ferifiearre. Ferlykje de fingerprints om wis te wêzen mei wa\'tsto wurkest.',
+  'Verifiëren': 'Ferifiearje',
   'Deelnemers verifiëren': 'Dielnimmers ferifiearje',
   '(dit apparaat)': '(dit apparaat)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

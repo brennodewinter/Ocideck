@@ -1801,6 +1801,19 @@ const _dutchSourceAddRo = <String, String>{
   'Versturen': 'Trimite',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Încă nu există mesaje. Spune ceva coautorilor tăi.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Compară amprenta fiecărui dispozitiv printr-un canal de încredere — citiți-o unul altuia sau trimite-o pe o cale în care ai încredere. Dacă se potrivește, marchează dispozitivul ca verificat; va rămâne verificat, inclusiv într-o sesiune ulterioară. Dacă diferă, întrerupe colaborarea.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Identitatea acestui dispozitiv diferă de cea pe care ai verificat-o anterior — s-ar putea să fie cineva la mijloc. Întrerupe colaborarea, cu excepția cazului în care ești sigur că acest dispozitiv a fost configurat din nou.',
+  'Geverifieerd': 'Verificat',
+  'Wijkt af': 'Diferă',
+  'Niet geverifieerd': 'Neverificat',
+  'Markeer als geverifieerd': 'Marchează ca verificat',
+  'Verificatie intrekken': 'Revocă verificarea',
+  'Toch opnieuw vertrouwen': 'Totuși, ai încredere din nou',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Nu toate dispozitivele din această colaborare sunt încă verificate. Compară amprentele pentru a fi sigur cu cine lucrezi.',
+  'Verifiëren': 'Verifică',
   'Deelnemers verifiëren': 'Verifică participanții',
   '(dit apparaat)': '(acest dispozitiv)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

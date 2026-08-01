@@ -1784,6 +1784,19 @@ const _dutchSourceAddFi = <String, String>{
   'Versturen': 'Lähetä',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Ei vielä viestejä. Sano jotain kanssakirjoittajillesi.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Vertaa kunkin laitteen sormenjälkeä luotettua kanavaa pitkin — lukekaa se toisillenne ääneen tai lähetä se reittiä, johon luotat. Jos se täsmää, merkitse laite vahvistetuksi; se pysyy vahvistettuna myös myöhemmässä istunnossa. Jos se poikkeaa, katkaise yhteistyö.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Tämän laitteen identiteetti poikkeaa siitä, minkä aiemmin vahvistit — joku voi olla välissä. Katkaise yhteistyö, ellet ole varma, että tämä laite on määritetty uudelleen.',
+  'Geverifieerd': 'Vahvistettu',
+  'Wijkt af': 'Poikkeaa',
+  'Niet geverifieerd': 'Ei vahvistettu',
+  'Markeer als geverifieerd': 'Merkitse vahvistetuksi',
+  'Verificatie intrekken': 'Peru vahvistus',
+  'Toch opnieuw vertrouwen': 'Luota silti uudelleen',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Kaikkia tämän yhteistyön laitteita ei ole vielä vahvistettu. Vertaa sormenjälkiä varmistuaksesi, kenen kanssa työskentelet.',
+  'Verifiëren': 'Vahvista',
   'Deelnemers verifiëren': 'Varmenna osallistujat',
   '(dit apparaat)': '(tämä laite)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

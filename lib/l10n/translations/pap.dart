@@ -743,6 +743,19 @@ const _dutchSourceAddPap = {
   'Versturen': 'Manda',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'No tin mensahe ainda. Bisa algu na bo ko-outornan.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Kompará e wela-di-dede di kada aparato via un kanal di konfiansa — lesa é otro na bos, òf mand\'é via un kaminda ku bo ta konfia. Si e ta koresponde, marká e aparato komo verifiká; e ta keda verifiká, tambe den un sesion despues. Si e ta diferente, kòrta e kolaborashon.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'E identidat di e aparato aki ta diferente for di loke bo a verifiká promé — kisas tin un hende meimei. Kòrta e kolaborashon, a menos ku bo ta sigur ku e aparato aki a wòrdu konfigurá di nobo.',
+  'Geverifieerd': 'Verifiká',
+  'Wijkt af': 'Ta diferente',
+  'Niet geverifieerd': 'No verifiká',
+  'Markeer als geverifieerd': 'Marká komo verifiká',
+  'Verificatie intrekken': 'Retirá e verifikashon',
+  'Toch opnieuw vertrouwen': 'Konfia atrobe tòg',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Ainda no tur aparato den e kolaborashon aki ta verifiká. Kompará e wela-di-dede pa bo ta sigur ku ken bo ta traha.',
+  'Verifiëren': 'Verifiká',
   'Deelnemers verifiëren': 'Verifiká partisipantenan',
   '(dit apparaat)': '(e aparato aki)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

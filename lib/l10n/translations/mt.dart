@@ -1806,6 +1806,19 @@ const _dutchSourceAddMt = <String, String>{
   'Versturen': 'Ibgħat',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Għad m\'hemm l-ebda messaġġ. Għid xi ħaġa lill-koawturi tiegħek.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Qabbel il-marka tas-swaba\' ta\' kull apparat permezz ta\' kanal fdat — aqrawha lil xulxin, jew ibgħatha minn triq li tafda. Jekk taqbel, immarka l-apparat bħala verifikat; jibqa\' verifikat, anke f\'sessjoni aktar tard. Jekk tvarja, aqta\' l-kollaborazzjoni.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'L-identità ta\' dan l-apparat tvarja minn dik li vverifikajt qabel — jista\' jkun hemm xi ħadd fin-nofs. Aqta\' l-kollaborazzjoni, sakemm ma tkunx ċert li dan l-apparat ġie ssettjat mill-ġdid.',
+  'Geverifieerd': 'Verifikat',
+  'Wijkt af': 'Tvarja',
+  'Niet geverifieerd': 'Mhux verifikat',
+  'Markeer als geverifieerd': 'Immarka bħala verifikat',
+  'Verificatie intrekken': 'Irrevoka l-verifika',
+  'Toch opnieuw vertrouwen': 'Xorta erġa\' afda',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Għadu mhux kull apparat f\'din il-kollaborazzjoni verifikat. Qabbel il-marki tas-swaba\' biex tkun ċert ma\' min qed taħdem.',
+  'Verifiëren': 'Ivverifika',
   'Deelnemers verifiëren': 'Verifika l-parteċipanti',
   '(dit apparaat)': '(dan l-apparat)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

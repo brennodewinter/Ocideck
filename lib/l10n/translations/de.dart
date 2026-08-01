@@ -743,6 +743,19 @@ const _dutchSourceAddDe = {
   'Versturen': 'Senden',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Noch keine Nachrichten. Sag deinen Mitautoren etwas.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Vergleiche den Fingerabdruck jedes Geräts über einen vertrauenswürdigen Kanal — lest ihn euch gegenseitig vor oder schickt ihn über einen Weg, dem du vertraust. Stimmt er überein, markiere das Gerät als verifiziert; es bleibt dann verifiziert, auch in einer späteren Sitzung. Weicht er ab, brich die Zusammenarbeit ab.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Die Identität dieses Geräts weicht von dem ab, was du zuvor verifiziert hast — womöglich sitzt jemand dazwischen. Brich die Zusammenarbeit ab, es sei denn, du bist sicher, dass dieses Gerät neu eingerichtet wurde.',
+  'Geverifieerd': 'Verifiziert',
+  'Wijkt af': 'Weicht ab',
+  'Niet geverifieerd': 'Nicht verifiziert',
+  'Markeer als geverifieerd': 'Als verifiziert markieren',
+  'Verificatie intrekken': 'Verifizierung widerrufen',
+  'Toch opnieuw vertrouwen': 'Trotzdem erneut vertrauen',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Noch nicht jedes Gerät in dieser Zusammenarbeit ist verifiziert. Vergleiche die Fingerabdrücke, um sicher zu sein, mit wem du arbeitest.',
+  'Verifiëren': 'Verifizieren',
   'Deelnemers verifiëren': 'Teilnehmer verifizieren',
   '(dit apparaat)': '(dieses Gerät)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

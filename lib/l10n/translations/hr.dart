@@ -1790,6 +1790,19 @@ const _dutchSourceAddHr = <String, String>{
   'Versturen': 'Pošalji',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Još nema poruka. Reci nešto svojim suautorima.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Usporedi otisak svakog uređaja preko pouzdanog kanala — pročitajte ga jedni drugima ili ga pošalji putem kojem vjeruješ. Ako se podudara, označi uređaj kao provjeren; ostat će provjeren, i u sljedećoj sesiji. Ako se razlikuje, prekini suradnju.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Identitet ovog uređaja razlikuje se od onoga što si ranije provjerio — možda je netko u sredini. Prekini suradnju, osim ako si siguran da je ovaj uređaj ponovno postavljen.',
+  'Geverifieerd': 'Provjereno',
+  'Wijkt af': 'Razlikuje se',
+  'Niet geverifieerd': 'Nije provjereno',
+  'Markeer als geverifieerd': 'Označi kao provjereno',
+  'Verificatie intrekken': 'Opozovi provjeru',
+  'Toch opnieuw vertrouwen': 'Ipak ponovno vjeruj',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Nije još svaki uređaj u ovoj suradnji provjeren. Usporedi otiske da budeš siguran s kim radiš.',
+  'Verifiëren': 'Provjeri',
   'Deelnemers verifiëren': 'Provjeri sudionike',
   '(dit apparaat)': '(ovaj uređaj)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

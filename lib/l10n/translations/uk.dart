@@ -1801,6 +1801,19 @@ const _dutchSourceAddUk = <String, String>{
   'Versturen': 'Надіслати',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Повідомлень ще немає. Напишіть щось своїм співавторам.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Порівняйте відбиток кожного пристрою через довірений канал — зачитайте його одне одному або надішліть шляхом, якому ви довіряєте. Якщо збігається, позначте пристрій як перевірений; він залишиться перевіреним, зокрема й у наступному сеансі. Якщо відрізняється, припиніть співпрацю.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Особистість цього пристрою відрізняється від тієї, яку ви перевіряли раніше — можливо, хтось посередині. Припиніть співпрацю, якщо ви не впевнені, що цей пристрій було налаштовано заново.',
+  'Geverifieerd': 'Перевірено',
+  'Wijkt af': 'Відрізняється',
+  'Niet geverifieerd': 'Не перевірено',
+  'Markeer als geverifieerd': 'Позначити як перевірене',
+  'Verificatie intrekken': 'Скасувати перевірку',
+  'Toch opnieuw vertrouwen': 'Усе одно довіритися знову',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Ще не кожен пристрій у цій співпраці перевірено. Порівняйте відбитки, щоб бути впевненими, з ким ви працюєте.',
+  'Verifiëren': 'Перевірити',
   'Deelnemers verifiëren': 'Перевірити учасників',
   '(dit apparaat)': '(цей пристрій)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

@@ -1800,6 +1800,19 @@ const _dutchSourceAddLa = <String, String>{
   'Versturen': 'Mitte',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Nulla adhuc nuntia. Dic aliquid coauctoribus tuis.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Confer indicium digiti cuiusque machinae per canalem fidum — vobis invicem recitate, aut per viam cui confidis mittite. Si congruit, machinam ut probatam nota; probata manebit, etiam in sessione posteriore. Si discrepat, cooperationem rumpe.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Identitas huius machinae discrepat ab eo quod antea probavisti — fortasse aliquis interest. Cooperationem rumpe, nisi certus es hanc machinam denuo constitutam esse.',
+  'Geverifieerd': 'Probatum',
+  'Wijkt af': 'Discrepat',
+  'Niet geverifieerd': 'Non probatum',
+  'Markeer als geverifieerd': 'Ut probatum nota',
+  'Verificatie intrekken': 'Probationem revoca',
+  'Toch opnieuw vertrouwen': 'Nihilominus iterum confide',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Nondum omnis machina in hac cooperatione probata est. Indicia digitorum confer ut certo scias quocum labores.',
+  'Verifiëren': 'Proba',
   'Deelnemers verifiëren': 'Participes probare',
   '(dit apparaat)': '(hoc instrumentum)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

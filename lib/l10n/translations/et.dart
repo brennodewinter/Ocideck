@@ -1775,6 +1775,19 @@ const _dutchSourceAddEt = <String, String>{
   'Versturen': 'Saada',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Sõnumeid veel pole. Ütle oma kaasautoritele midagi.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Võrdle iga seadme sõrmejälge usaldusväärse kanali kaudu — lugege see teineteisele ette või saada see teed, mida usaldad. Kui see klapib, märgi seade kinnitatuks; see jääb kinnitatuks ka järgmises seansis. Kui see erineb, katkesta koostöö.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Selle seadme identiteet erineb sellest, mille varem kinnitasid — võib-olla on keegi vahel. Katkesta koostöö, kui sa pole kindel, et see seade on uuesti seadistatud.',
+  'Geverifieerd': 'Kinnitatud',
+  'Wijkt af': 'Erineb',
+  'Niet geverifieerd': 'Kinnitamata',
+  'Markeer als geverifieerd': 'Märgi kinnitatuks',
+  'Verificatie intrekken': 'Tühista kinnitus',
+  'Toch opnieuw vertrouwen': 'Usalda siiski uuesti',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Selles koostöös pole veel iga seade kinnitatud. Võrdle sõrmejälgi, et olla kindel, kellega töötad.',
+  'Verifiëren': 'Kinnita',
   'Deelnemers verifiëren': 'Kinnita osalejad',
   '(dit apparaat)': '(see seade)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

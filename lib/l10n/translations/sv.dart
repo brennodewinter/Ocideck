@@ -1783,6 +1783,19 @@ const _dutchSourceAddSv = <String, String>{
   'Versturen': 'Skicka',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Inga meddelanden än. Säg något till dina medförfattare.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Jämför varje enhets fingeravtryck via en betrodd kanal — läs upp det för varandra, eller skicka det via en väg du litar på. Om det stämmer, markera enheten som verifierad; den förblir då verifierad, även i en senare session. Om det avviker, avbryt samarbetet.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Den här enhetens identitet avviker från den du verifierade tidigare — någon kan sitta i mitten. Avbryt samarbetet, om du inte är säker på att enheten har konfigurerats om.',
+  'Geverifieerd': 'Verifierad',
+  'Wijkt af': 'Avviker',
+  'Niet geverifieerd': 'Inte verifierad',
+  'Markeer als geverifieerd': 'Markera som verifierad',
+  'Verificatie intrekken': 'Återkalla verifiering',
+  'Toch opnieuw vertrouwen': 'Lita på den igen ändå',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Alla enheter i det här samarbetet är inte verifierade ännu. Jämför fingeravtrycken för att vara säker på vem du arbetar med.',
+  'Verifiëren': 'Verifiera',
   'Deelnemers verifiëren': 'Verifiera deltagare',
   '(dit apparaat)': '(den här enheten)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

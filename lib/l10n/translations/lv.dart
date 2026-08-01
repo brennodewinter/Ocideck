@@ -1783,6 +1783,19 @@ const _dutchSourceAddLv = <String, String>{
   'Versturen': 'Sūtīt',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Vēl nav ziņu. Pasaki kaut ko saviem līdzautoriem.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Salīdzini katras ierīces ciparnospiedumu pa uzticamu kanālu — nolasiet to viens otram vai nosūti to pa ceļu, kuram uzticies. Ja tas sakrīt, atzīmē ierīci kā pārbaudītu; tā paliks pārbaudīta arī nākamajā sesijā. Ja tas atšķiras, pārtrauc sadarbību.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Šīs ierīces identitāte atšķiras no tās, ko pārbaudīji agrāk — iespējams, kāds ir pa vidu. Pārtrauc sadarbību, ja vien neesi pārliecināts, ka šī ierīce ir iestatīta no jauna.',
+  'Geverifieerd': 'Pārbaudīts',
+  'Wijkt af': 'Atšķiras',
+  'Niet geverifieerd': 'Nav pārbaudīts',
+  'Markeer als geverifieerd': 'Atzīmēt kā pārbaudītu',
+  'Verificatie intrekken': 'Atsaukt pārbaudi',
+  'Toch opnieuw vertrouwen': 'Tomēr uzticēties atkal',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'Šajā sadarbībā vēl nav pārbaudīta katra ierīce. Salīdzini ciparnospiedumus, lai zinātu droši, ar ko strādā.',
+  'Verifiëren': 'Pārbaudīt',
   'Deelnemers verifiëren': 'Pārbaudīt dalībniekus',
   '(dit apparaat)': '(šī ierīce)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

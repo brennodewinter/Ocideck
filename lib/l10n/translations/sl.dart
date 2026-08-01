@@ -1786,6 +1786,19 @@ const _dutchSourceAddSl = <String, String>{
   'Versturen': 'Pošlji',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Še ni sporočil. Povej kaj svojim soavtorjem.',
+  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
+      'Primerjaj prstni odtis vsake naprave prek zaupanja vrednega kanala — preberita si ga drug drugemu ali ga pošlji po poti, ki ji zaupaš. Če se ujema, označi napravo kot preverjeno; ostala bo preverjena tudi v naslednji seji. Če se razlikuje, prekini sodelovanje.',
+  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
+      'Istovetnost te naprave se razlikuje od tiste, ki si jo prej preveril — morda je nekdo vmes. Prekini sodelovanje, razen če si prepričan, da je bila ta naprava znova nastavljena.',
+  'Geverifieerd': 'Preverjeno',
+  'Wijkt af': 'Se razlikuje',
+  'Niet geverifieerd': 'Ni preverjeno',
+  'Markeer als geverifieerd': 'Označi kot preverjeno',
+  'Verificatie intrekken': 'Prekliči preverjanje',
+  'Toch opnieuw vertrouwen': 'Vseeno znova zaupaj',
+  'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
+      'V tem sodelovanju še ni preverjena vsaka naprava. Primerjaj prstne odtise, da boš prepričan, s kom delaš.',
+  'Verifiëren': 'Preveri',
   'Deelnemers verifiëren': 'Preveri udeležence',
   '(dit apparaat)': '(ta naprava)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':
