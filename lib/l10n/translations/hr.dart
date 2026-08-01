@@ -1867,6 +1867,8 @@ const _dutchSourceAddHr = <String, String>{
       'Za ovaj deck još nije pokrenuta nijedna suradnja.',
   'Samenwerking mislukt.': 'Suradnja nije uspjela.',
   'Samenwerking beëindigd.': 'Suradnja završena.',
+  'Authentieke cockpit': 'Autentični kokpit',
+  'Klassiek': 'Klasično',
   'Bord': 'Ploča',
   'Projectcharter': 'Povelja projekta',
   'CTQ-boom': 'CTQ stablo',

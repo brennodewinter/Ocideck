@@ -84,8 +84,7 @@ import '../../utils/inline_markdown.dart';
 import 'inline_markdown.dart';
 import 'image_zoom_dialog.dart';
 
-// Slide preview widgets, split into part files by slide type for
-// navigability. These parts share this library's imports and private scope.
+// Slide previews split by type; parts share this library's private scope.
 part 'previews/preview_scaffold.dart';
 part 'previews/text_previews.dart';
 part 'previews/bullets_previews.dart';
@@ -103,6 +102,7 @@ part 'previews/chart_preview_extra.dart';
 part 'previews/chart_preview_bullet.dart';
 part 'previews/chart_preview_improvement.dart';
 part 'previews/cockpit_preview.dart';
+part 'previews/cockpit_painter_support.dart';
 part 'previews/question_preview.dart';
 part 'previews/question_preview_answers.dart';
 part 'previews/timeline_preview.dart';

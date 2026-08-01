@@ -1862,6 +1862,8 @@ const _dutchSourceAddId = <String, String>{
       'Belum ada kolaborasi yang dimulai untuk deck ini.',
   'Samenwerking mislukt.': 'Kolaborasi gagal.',
   'Samenwerking beëindigd.': 'Kolaborasi diakhiri.',
+  'Authentieke cockpit': 'Kokpit autentik',
+  'Klassiek': 'Klasik',
   'Bord': 'Papan',
   'Projectcharter': 'Piagam proyek',
   'CTQ-boom': 'Pohon CTQ',

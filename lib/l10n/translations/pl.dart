@@ -1873,6 +1873,8 @@ const _dutchSourceAddPl = <String, String>{
       'Nie rozpoczęto jeszcze współpracy dla tego decka.',
   'Samenwerking mislukt.': 'Współpraca nie powiodła się.',
   'Samenwerking beëindigd.': 'Zakończono współpracę.',
+  'Authentieke cockpit': 'Autentyczny kokpit',
+  'Klassiek': 'Klasyczny',
   'Bord': 'Tablica',
   'Projectcharter': 'Karta projektu',
   'CTQ-boom': 'Drzewo CTQ',

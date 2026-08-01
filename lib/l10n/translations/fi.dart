@@ -1862,6 +1862,8 @@ const _dutchSourceAddFi = <String, String>{
       'Tälle deckille ei ole vielä aloitettu yhteistyötä.',
   'Samenwerking mislukt.': 'Yhteistyö epäonnistui.',
   'Samenwerking beëindigd.': 'Yhteistyö päättyi.',
+  'Authentieke cockpit': 'Aito ohjaamo',
+  'Klassiek': 'Klassinen',
   'Bord': 'Taulu',
   'Projectcharter': 'Projektikirja',
   'CTQ-boom': 'CTQ-puu',

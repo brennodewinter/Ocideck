@@ -1833,6 +1833,8 @@ const _dutchSourceAddTlh = <String, String>{
       'deck vamvaD tay\' vum taghlu\'pu\'be\'.',
   'Samenwerking mislukt.': 'tay\' vum Qaghpu\'.',
   'Samenwerking beëindigd.': 'tay\' vum mevpu\'.',
+  'Authentieke cockpit': 'nItlh cockpit',
+  'Klassiek': 'motlh',
   'Bord': 'woj',
   'Projectcharter': 'project charter',
   'CTQ-boom': 'CTQ Sor',

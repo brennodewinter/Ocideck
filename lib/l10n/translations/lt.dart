@@ -1870,6 +1870,8 @@ const _dutchSourceAddLt = <String, String>{
       'Šiam dekui dar nepradėtas joks bendradarbiavimas.',
   'Samenwerking mislukt.': 'Bendradarbiavimas nepavyko.',
   'Samenwerking beëindigd.': 'Bendradarbiavimas baigtas.',
+  'Authentieke cockpit': 'Autentiška kabina',
+  'Klassiek': 'Klasikinis',
   'Bord': 'Lenta',
   'Projectcharter': 'Projekto chartija',
   'CTQ-boom': 'CTQ medis',

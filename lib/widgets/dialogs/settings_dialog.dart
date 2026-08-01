@@ -184,6 +184,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late CockpitColorScheme _cockpitScheme;
   late String _originalCockpitName;
   late TextEditingController _cockpitName;
+  late CockpitVisualStyle _cockpitVisualStyle;
 
   /// The saved name of the profile currently being edited. Used as a stable
   /// identity so renaming updates the existing profile instead of creating a
@@ -279,6 +280,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _cockpitScheme = settings.cockpitColorScheme;
     _originalCockpitName = _cockpitScheme.name;
     _cockpitName = TextEditingController(text: _cockpitScheme.name);
+    _cockpitVisualStyle = settings.cockpitVisualStyle;
     _originalName = _themeProfile.name;
     _profileName = TextEditingController(text: _themeProfile.name);
     _logoSize = TextEditingController(text: _themeProfile.logoSize.toString());
@@ -722,6 +724,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         previousName: _originalCockpitName,
       );
     }
+    notifier.setCockpitVisualStyle(_cockpitVisualStyle);
 
     // Apply the chosen/edited profile to the presentation that is currently
     // open, so the change is visible immediately. Only when the user actually

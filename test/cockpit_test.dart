@@ -126,6 +126,7 @@ void main() {
   test('CockpitColorScheme round-trips through JSON', () {
     const scheme = CockpitColorScheme(
       name: 'Koud thema',
+      visualStyle: CockpitVisualStyle.classic,
       good: '#11AA22',
       warning: '#FFAA00',
       critical: '#CC0000',
@@ -138,12 +139,23 @@ void main() {
 
     expect(back.name, 'Koud thema');
     expect(back.isBuiltIn, isFalse);
+    expect(back.visualStyle, CockpitVisualStyle.classic);
     expect(back.good, '#11AA22');
     expect(back.warning, '#FFAA00');
     expect(back.critical, '#CC0000');
     expect(back.cold, '#0066FF');
     expect(back.sky, '#0EA5E9');
     expect(back.ground, '#7C4A12');
+  });
+
+  test('the authentic cockpit look is the default', () {
+    const settings = AppSettings();
+
+    expect(settings.cockpitVisualStyle, CockpitVisualStyle.authentic);
+    expect(
+      settings.cockpitColorScheme.visualStyle,
+      CockpitVisualStyle.authentic,
+    );
   });
 
   group('CockpitSpec parse and copyWith', () {

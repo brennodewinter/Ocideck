@@ -821,6 +821,8 @@ const _dutchSourceAddFy = {
       'Foar dit deck is noch gjin gearwurking begûn.',
   'Samenwerking mislukt.': 'Gearwurking mislearre.',
   'Samenwerking beëindigd.': 'Gearwurking beëinige.',
+  'Authentieke cockpit': 'Autentike cockpit',
+  'Klassiek': 'Klassyk',
   'Bord': 'Boerd',
   'Projectcharter': 'Projektcharter',
   'CTQ-boom': 'CTQ-beam',

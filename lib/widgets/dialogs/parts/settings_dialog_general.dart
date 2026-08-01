@@ -315,6 +315,29 @@ extension _SettingsGeneralTab on _SettingsDialogState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _sectionTitle(l10n.d('Weergave')),
+        DropdownButtonFormField<CockpitVisualStyle>(
+          initialValue: _cockpitVisualStyle,
+          decoration: InputDecoration(
+            labelText: l10n.d('Weergave'),
+            isDense: true,
+            prefixIcon: const Icon(Icons.speed_outlined, size: 18),
+          ),
+          items: [
+            DropdownMenuItem(
+              value: CockpitVisualStyle.authentic,
+              child: Text(l10n.d('Authentieke cockpit')),
+            ),
+            DropdownMenuItem(
+              value: CockpitVisualStyle.classic,
+              child: Text(l10n.d('Klassiek')),
+            ),
+          ],
+          onChanged: (style) {
+            if (style != null) _rebuild(() => _cockpitVisualStyle = style);
+          },
+        ),
+        const SizedBox(height: 20),
         _sectionTitle(l10n.d('Cockpit-kleurschema')),
         Text(
           l10n.d(

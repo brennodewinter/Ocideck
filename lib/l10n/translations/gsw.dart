@@ -1863,6 +1863,8 @@ const _dutchSourceAddGsw = <String, String>{
       'Für das Deck isch no kei Zämenarbet gstartet worde.',
   'Samenwerking mislukt.': 'Zämenarbet fehlgschlage.',
   'Samenwerking beëindigd.': 'Zämenarbet beendet.',
+  'Authentieke cockpit': 'Authentischs Cockpit',
+  'Klassiek': 'Klassisch',
   'Bord': 'Bord',
   'Projectcharter': 'Projektcharta',
   'CTQ-boom': 'CTQ-Boum',

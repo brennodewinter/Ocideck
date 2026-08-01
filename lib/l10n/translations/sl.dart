@@ -1861,6 +1861,8 @@ const _dutchSourceAddSl = <String, String>{
       'Za ta komplet še ni bilo začeto nobeno sodelovanje.',
   'Samenwerking mislukt.': 'Sodelovanje ni uspelo.',
   'Samenwerking beëindigd.': 'Sodelovanje končano.',
+  'Authentieke cockpit': 'Pristna pilotska kabina',
+  'Klassiek': 'Klasično',
   'Bord': 'Tabla',
   'Projectcharter': 'Listina projekta',
   'CTQ-boom': 'Drevo CTQ',

@@ -1850,6 +1850,8 @@ const _dutchSourceAddEt = <String, String>{
       'Selle decki jaoks pole veel koostööd alustatud.',
   'Samenwerking mislukt.': 'Koostöö ebaõnnestus.',
   'Samenwerking beëindigd.': 'Koostöö lõpetatud.',
+  'Authentieke cockpit': 'Autentne kokpit',
+  'Klassiek': 'Klassikaline',
   'Bord': 'Tahvel',
   'Projectcharter': 'Projekti põhikiri',
   'CTQ-boom': 'CTQ-puu',

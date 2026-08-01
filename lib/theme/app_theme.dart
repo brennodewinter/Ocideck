@@ -337,6 +337,26 @@ class AppTheme {
   static const darkSlate500 = Color(0xFF4A4F5B);
   static const darkNeutral = Color(0xFF242424);
 
+  // ── Analoge cockpitinstrumenten ──────────────────────────────────────────
+  // Vaste materiaalkleuren: de meterbehuizing is een object óp de dia en
+  // blijft daarom identiek in preview, presenter en headless export.
+  static const cockpitPanel = Color(0xFF202223);
+  static const cockpitPanelBorder = Color(0xFF3A3D3F);
+  static const cockpitShadow = Color(0x55000000);
+  static const cockpitInk = Color(0xFFE8E0CA);
+  static const cockpitInkMuted = Color(0xFFC8BEA5);
+  static const cockpitLabel = Color(0xFFD9D1BD);
+  static const cockpitBezel = Color(0xFF343739);
+  static const cockpitBezelDark = Color(0xFF08090A);
+  static const cockpitFace = Color(0xFF101314);
+  static const cockpitScrew = Color(0xFF090A0B);
+  static const cockpitScrewMetal = Color(0xFF5A5D5E);
+  static const cockpitScrewSlot = Color(0xFF181A1B);
+  static const cockpitHub = Color(0xFF070809);
+  static const cockpitHubMetal = Color(0xFF777A78);
+  static const cockpitHubInner = Color(0xFF1C1E1F);
+  static const cockpitHubHighlight = Color(0xFFB9B9B2);
+
   // ── Goud/brons-accent (o.a. LibreKAT-thema, badges) ───────────────────────
   static const gold = Color(0xFFD4A24E);
   static const goldDark = Color(0xFF8A6D3B);

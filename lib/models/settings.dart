@@ -418,9 +418,21 @@ class ThemeProfile {
   }
 }
 
+enum CockpitVisualStyle {
+  authentic,
+  classic;
+
+  static CockpitVisualStyle fromName(String? name) =>
+      CockpitVisualStyle.values.firstWhere(
+        (style) => style.name == name,
+        orElse: () => CockpitVisualStyle.authentic,
+      );
+}
+
 class CockpitColorScheme {
   final String name;
   final bool isBuiltIn;
+  final CockpitVisualStyle visualStyle;
   final String good;
   final String warning;
   final String critical;
@@ -431,6 +443,7 @@ class CockpitColorScheme {
   const CockpitColorScheme({
     required this.name,
     this.isBuiltIn = false,
+    this.visualStyle = CockpitVisualStyle.authentic,
     this.good = '#22C55E',
     this.warning = '#F59E0B',
     this.critical = '#EF4444',
@@ -449,6 +462,7 @@ class CockpitColorScheme {
   CockpitColorScheme copyWith({
     String? name,
     bool? isBuiltIn,
+    CockpitVisualStyle? visualStyle,
     String? good,
     String? warning,
     String? critical,
@@ -459,6 +473,7 @@ class CockpitColorScheme {
     return CockpitColorScheme(
       name: name ?? this.name,
       isBuiltIn: isBuiltIn ?? this.isBuiltIn,
+      visualStyle: visualStyle ?? this.visualStyle,
       good: good ?? this.good,
       warning: warning ?? this.warning,
       critical: critical ?? this.critical,
@@ -472,6 +487,7 @@ class CockpitColorScheme {
     return {
       'name': name,
       'isBuiltIn': isBuiltIn,
+      'visualStyle': visualStyle.name,
       'good': good,
       'warning': warning,
       'critical': critical,
@@ -485,6 +501,7 @@ class CockpitColorScheme {
     return CockpitColorScheme(
       name: json['name'] as String? ?? 'Eigen schema',
       isBuiltIn: json['isBuiltIn'] as bool? ?? false,
+      visualStyle: CockpitVisualStyle.fromName(json['visualStyle'] as String?),
       good: json['good'] as String? ?? standard.good,
       warning: json['warning'] as String? ?? standard.warning,
       critical: json['critical'] as String? ?? standard.critical,
@@ -574,6 +591,7 @@ class AppSettings {
   /// colours are styling and live here, not in the deck `.md`.
   final List<CockpitColorScheme> cockpitColorSchemes;
   final String selectedCockpitColorSchemeName;
+  final CockpitVisualStyle cockpitVisualStyle;
   final List<RecentFile> recentFiles;
 
   /// Herkomst van remote opgehaalde recente bestanden: lokaal pad → bron
@@ -763,6 +781,7 @@ class AppSettings {
     this.selectedAppAppearanceProfileName = 'Europa',
     this.cockpitColorSchemes = CockpitColorScheme.builtIns,
     this.selectedCockpitColorSchemeName = 'Standaard',
+    this.cockpitVisualStyle = CockpitVisualStyle.authentic,
     this.recentFiles = const [],
     this.recentFileOrigins = const {},
     this.maxReleaseExportTlpKey,
@@ -803,11 +822,13 @@ class AppSettings {
   }
 
   CockpitColorScheme get cockpitColorScheme {
-    if (cockpitColorSchemes.isEmpty) return CockpitColorScheme.standard;
-    return cockpitColorSchemes.firstWhere(
-      (s) => s.name == selectedCockpitColorSchemeName,
-      orElse: () => cockpitColorSchemes.first,
-    );
+    final selected = cockpitColorSchemes.isEmpty
+        ? CockpitColorScheme.standard
+        : cockpitColorSchemes.firstWhere(
+            (s) => s.name == selectedCockpitColorSchemeName,
+            orElse: () => cockpitColorSchemes.first,
+          );
+    return selected.copyWith(visualStyle: cockpitVisualStyle);
   }
 
   static const availableFonts = [
@@ -847,6 +868,7 @@ class AppSettings {
     String? selectedAppAppearanceProfileName,
     List<CockpitColorScheme>? cockpitColorSchemes,
     String? selectedCockpitColorSchemeName,
+    CockpitVisualStyle? cockpitVisualStyle,
     List<RecentFile>? recentFiles,
     Map<String, String>? recentFileOrigins,
     String? maxReleaseExportTlpKey,
@@ -906,6 +928,7 @@ class AppSettings {
       cockpitColorSchemes: cockpitColorSchemes ?? this.cockpitColorSchemes,
       selectedCockpitColorSchemeName:
           selectedCockpitColorSchemeName ?? this.selectedCockpitColorSchemeName,
+      cockpitVisualStyle: cockpitVisualStyle ?? this.cockpitVisualStyle,
       recentFiles: recentFiles ?? this.recentFiles,
       recentFileOrigins: recentFileOrigins ?? this.recentFileOrigins,
       maxReleaseExportTlpKey: clearMaxReleaseExportTlp

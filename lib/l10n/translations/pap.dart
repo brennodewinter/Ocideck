@@ -820,6 +820,8 @@ const _dutchSourceAddPap = {
       'Ainda no a kuminsá ningun kolaborashon pa e deck aki.',
   'Samenwerking mislukt.': 'Kolaborashon a faya.',
   'Samenwerking beëindigd.': 'Kolaborashon a terminá.',
+  'Authentieke cockpit': 'Kabina auténtiko',
+  'Klassiek': 'Klásiko',
   'Bord': 'Bord',
   'Projectcharter': 'Karta di proyecto',
   'CTQ-boom': 'Yabi CTQ',

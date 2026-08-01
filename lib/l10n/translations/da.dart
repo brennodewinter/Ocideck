@@ -1859,6 +1859,8 @@ const _dutchSourceAddDa = <String, String>{
       'Der er endnu ikke startet et samarbejde for dette deck.',
   'Samenwerking mislukt.': 'Samarbejde mislykkedes.',
   'Samenwerking beëindigd.': 'Samarbejde afsluttet.',
+  'Authentieke cockpit': 'Autentisk cockpit',
+  'Klassiek': 'Klassisk',
   'Bord': 'Tavle',
   'Projectcharter': 'Projektcharter',
   'CTQ-boom': 'CTQ-træ',

@@ -1884,6 +1884,8 @@ const _dutchSourceAddMt = <String, String>{
       'Għadha ma nbdiet l-ebda kollaborazzjoni għal dan id-deck.',
   'Samenwerking mislukt.': 'Il-kollaborazzjoni falliet.',
   'Samenwerking beëindigd.': 'Il-kollaborazzjoni ntemmet.',
+  'Authentieke cockpit': 'Kabina awtentika',
+  'Klassiek': 'Klassiku',
   'Bord': 'Bord',
   'Projectcharter': 'Karta tal-proġett',
   'CTQ-boom': 'Siġra CTQ',

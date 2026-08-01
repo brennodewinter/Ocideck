@@ -2839,6 +2839,8 @@ const _dutchSourceAddTr = <String, String>{
       'Bu sunum için henüz bir iş birliği başlatılmadı.',
   'Samenwerking mislukt.': 'İş birliği başarısız oldu.',
   'Samenwerking beëindigd.': 'İş birliği sonlandırıldı.',
+  'Authentieke cockpit': 'Özgün kokpit',
+  'Klassiek': 'Klasik',
   'Bord': 'Pano',
   'Projectcharter': 'Proje sözleşmesi',
   'CTQ-boom': 'CTQ ağacı',

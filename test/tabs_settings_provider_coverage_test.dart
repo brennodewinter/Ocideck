@@ -432,6 +432,7 @@ void main() {
       expect(n.state.cveApiBaseUrl, AppSettings.defaultCveApiBaseUrl);
       expect(n.state.aiSettings.enabled, isFalse);
       expect(n.state.selectedCockpitColorSchemeName, 'Standaard');
+      expect(n.state.cockpitVisualStyle, CockpitVisualStyle.authentic);
       expect(
         n.state.cockpitColorSchemes.map((s) => s.name),
         contains('Standaard'),
@@ -588,6 +589,21 @@ void main() {
     });
 
     group('cockpit colour schemes', () {
+      test('visual style persists and classic remains selectable', () async {
+        SharedPreferences.setMockInitialValues({});
+        final n = await loaded();
+
+        await n.setCockpitVisualStyle(CockpitVisualStyle.classic);
+        expect(n.state.cockpitVisualStyle, CockpitVisualStyle.classic);
+        expect(
+          n.state.cockpitColorScheme.visualStyle,
+          CockpitVisualStyle.classic,
+        );
+
+        final reloaded = await loaded();
+        expect(reloaded.state.cockpitVisualStyle, CockpitVisualStyle.classic);
+      });
+
       test('create, edit, select and delete round-trip', () async {
         final n = await loaded();
         expect(n.state.cockpitColorSchemes.map((s) => s.name), ['Standaard']);

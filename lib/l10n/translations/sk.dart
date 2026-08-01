@@ -1866,6 +1866,8 @@ const _dutchSourceAddSk = <String, String>{
       'Pre tento deck sa ešte nezačala žiadna spolupráca.',
   'Samenwerking mislukt.': 'Spolupráca zlyhala.',
   'Samenwerking beëindigd.': 'Spolupráca ukončená.',
+  'Authentieke cockpit': 'Autentický kokpit',
+  'Klassiek': 'Klasické',
   'Bord': 'Tabuľa',
   'Projectcharter': 'Projektová charta',
   'CTQ-boom': 'Strom CTQ',
