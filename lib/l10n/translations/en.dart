@@ -911,6 +911,12 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Realtime samenwerken': 'Real-time collaboration',
+  'Manieren van verbinden': 'Ways to connect',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Collaborate live on a presentation through an encrypted relay. Off by default. The content is end-to-end encrypted with OciDeck\'s own keys; the server only sees encrypted data.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Collaboration through a Matrix homeserver as a relay. Set up the account in the Collaboration tab. (Jitsi and XMPP are coming.)',
   'Chat': 'Chat',
   'Chat openen': 'Open chat',
   'Chat sluiten': 'Close chat',

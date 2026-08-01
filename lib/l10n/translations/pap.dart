@@ -730,6 +730,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Realtime samenwerken': 'Kolaborashon na tempu real',
+  'Manieren van verbinden': 'Manera di konektá',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Kolaborá na bibo riba un presentashon via un relè enkriptá. Apagá pa defekto. E kontenido ta wòrdu enkriptá end-to-end ku OciDeck su mes yabinan; e server ta mira solamente datos enkriptá.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Kolaborashon via un homeserver di Matrix komo relè. Konfigurá e kuenta na e tab Kolaborashon. (Jitsi i XMPP ta bin.)',
   'Chat': 'Chat',
   'Chat openen': 'Habri chat',
   'Chat sluiten': 'Sera chat',

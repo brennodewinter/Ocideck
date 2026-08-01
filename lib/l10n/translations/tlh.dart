@@ -1746,6 +1746,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Realtime samenwerken': 'SIbI\' vumchuq',
+  'Manieren van verbinden': 'rarmeH mIwmey',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'So\'wI\' \'echlet lo\'lu\'taHvIS SIbI\' bovumchuq. motlh chu\'be\'lu\'. OciDeck ngaQmoHwI\'mey lo\'lu\' \'ej pat Hoch So\'lu\'; De\' So\'lu\'pu\' neH legh Server.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Matrix homeserver \'echlet Da. vumchuqghach HaSta\'Daq lo\'wI\' yIcher. (Jitsi XMPP je tugh.)',
   'Chat': 'ja\'chuq',
   'Chat openen': 'ja\'chuq yIpoSmoH',
   'Chat sluiten': 'ja\'chuq yISoQmoH',

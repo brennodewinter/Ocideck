@@ -2748,6 +2748,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Realtime samenwerken': 'Gerçek zamanlı iş birliği',
+  'Manieren van verbinden': 'Bağlantı yöntemleri',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Bir sunumda şifreli bir aktarıcı aracılığıyla canlı iş birliği yapın. Varsayılan olarak kapalı. İçerik OciDeck\'in kendi anahtarlarıyla uçtan uca şifrelenir; sunucu yalnızca şifreli veriyi görür.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Matrix homeserver aracılığıyla aktarıcı olarak iş birliği. Hesabı İş birliği sekmesinde ayarlayın. (Jitsi ve XMPP yakında.)',
   'Chat': 'Sohbet',
   'Chat openen': 'Sohbeti aç',
   'Chat sluiten': 'Sohbeti kapat',

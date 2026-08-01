@@ -1774,6 +1774,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Realtime samenwerken': 'Echtziit-Zämmenarbet',
+  'Manieren van verbinden': 'Verbindigsarte',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Schaff live zäme an ere Präsentation über es verschlüsslets Wiiterleitigsglid. Standardmässig us. Dr Inhalt wird Änd-zu-Änd mit OciDeck sine eigene Schlüssel verschlüsslet; dr Server gseht nu verschlüsselti Date.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Zämmenarbet über en Matrix-Homeserver als Wiiterleitigsglid. Richt s Konto im Reiter Zämmenarbet y. (Jitsi und XMPP chömed no.)',
   'Chat': 'Chat',
   'Chat openen': 'Chat ufmache',
   'Chat sluiten': 'Chat zuemache',

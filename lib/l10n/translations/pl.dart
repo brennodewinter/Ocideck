@@ -1783,6 +1783,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Realtime samenwerken': 'Współpraca w czasie rzeczywistym',
+  'Manieren van verbinden': 'Sposoby połączenia',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Współpracuj na żywo nad prezentacją przez zaszyfrowany przekaźnik. Domyślnie wyłączone. Treść jest szyfrowana end-to-end własnymi kluczami OciDeck; serwer widzi tylko zaszyfrowane dane.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Współpraca przez homeserver Matrix jako przekaźnik. Skonfiguruj konto na karcie Współpraca. (Jitsi i XMPP wkrótce.)',
   'Chat': 'Czat',
   'Chat openen': 'Otwórz czat',
   'Chat sluiten': 'Zamknij czat',

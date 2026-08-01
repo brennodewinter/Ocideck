@@ -1778,6 +1778,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Realtime samenwerken': 'Bendradarbiavimas tikruoju laiku',
+  'Manieren van verbinden': 'Prisijungimo būdai',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Bendradarbiaukite tiesiogiai rengdami pristatymą per šifruotą perdavimo tašką. Pagal numatytuosius nustatymus išjungta. Turinys šifruojamas nuo galo iki galo pačios OciDeck raktais; serveris mato tik šifruotus duomenis.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Bendradarbiavimas per Matrix homeserver kaip perdavimo taškas. Nustatykite paskyrą skirtuke Bendradarbiavimas. (Jitsi ir XMPP netrukus.)',
   'Chat': 'Pokalbis',
   'Chat openen': 'Atverti pokalbį',
   'Chat sluiten': 'Užverti pokalbį',

@@ -1771,6 +1771,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Realtime samenwerken': 'Kolaborasi waktu nyata',
+  'Manieren van verbinden': 'Cara menyambung',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Berkolaborasi secara langsung pada presentasi melalui relai terenkripsi. Nonaktif secara bawaan. Kontennya dienkripsi ujung ke ujung dengan kunci milik OciDeck sendiri; server hanya melihat data terenkripsi.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Kolaborasi melalui homeserver Matrix sebagai relai. Siapkan akun di tab Kolaborasi. (Jitsi dan XMPP menyusul.)',
   'Chat': 'Obrolan',
   'Chat openen': 'Buka obrolan',
   'Chat sluiten': 'Tutup obrolan',

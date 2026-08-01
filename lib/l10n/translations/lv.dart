@@ -1770,6 +1770,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Realtime samenwerken': 'Sadarbība reāllaikā',
+  'Manieren van verbinden': 'Savienojuma veidi',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Sadarbojieties tiešsaistē pie prezentācijas caur šifrētu retranslatoru. Pēc noklusējuma izslēgts. Saturs tiek pilnībā (end-to-end) šifrēts ar OciDeck paša atslēgām; serveris redz tikai šifrētus datus.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Sadarbība caur Matrix homeserver kā retranslatoru. Iestatiet kontu cilnē Sadarbība. (Jitsi un XMPP sekos.)',
   'Chat': 'Tērzēšana',
   'Chat openen': 'Atvērt tērzēšanu',
   'Chat sluiten': 'Aizvērt tērzēšanu',

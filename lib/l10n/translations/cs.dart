@@ -1774,6 +1774,12 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Realtime samenwerken': 'Spolupráce v reálném čase',
+  'Manieren van verbinden': 'Způsoby připojení',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Spolupracujte živě na prezentaci přes šifrovaný přenašeč. Ve výchozím nastavení vypnuto. Obsah je šifrován end-to-end vlastními klíči OciDecku; server vidí jen šifrovaná data.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Spolupráce přes homeserver Matrix jako přenašeč. Nastavte účet na kartě Spolupráce. (Jitsi a XMPP budou následovat.)',
   'Chat': 'Chat',
   'Chat openen': 'Otevřít chat',
   'Chat sluiten': 'Zavřít chat',

@@ -1793,6 +1793,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Realtime samenwerken': 'Съвместна работа в реално време',
+  'Manieren van verbinden': 'Начини на свързване',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Работете съвместно на живо върху презентация чрез криптиран препредавател. По подразбиране изключено. Съдържанието се криптира от край до край със собствените ключове на OciDeck; сървърът вижда само криптирани данни.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Съвместна работа чрез Matrix homeserver като препредавател. Настройте акаунта в раздела Сътрудничество. (Jitsi и XMPP предстоят.)',
   'Chat': 'Чат',
   'Chat openen': 'Отвори чата',
   'Chat sluiten': 'Затвори чата',

@@ -122,7 +122,9 @@ const Map<String, int> fileSizeBaseline = {
   // The commands themselves live in the collab part file, not here; only their
   // imports must sit in the library head.
   // +1 (#977): the collab_chat_panel import for the chat rail.
-  'lib/widgets/app_shell.dart': 862,
+  // +1: the collaboration_provider import (matrixCollabActive) gating the
+  // realtime-collab palette commands on the module.
+  'lib/widgets/app_shell.dart': 863,
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
   // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
   // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped

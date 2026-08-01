@@ -1788,6 +1788,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Realtime samenwerken': 'Colaborare în timp real',
+  'Manieren van verbinden': 'Moduri de conectare',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Colaborează în direct la o prezentare printr-un releu criptat. Dezactivat implicit. Conținutul este criptat cap la cap cu cheile proprii OciDeck; serverul vede doar date criptate.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Colaborare printr-un homeserver Matrix ca releu. Configurează contul în fila Colaborare. (Jitsi și XMPP urmează.)',
   'Chat': 'Chat',
   'Chat openen': 'Deschide chatul',
   'Chat sluiten': 'Închide chatul',

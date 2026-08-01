@@ -93,12 +93,14 @@ enum SettingsSection {
     required bool aiRevealed,
     required bool importRevealed,
     required bool openKatAvailable,
+    required bool collaborationRevealed,
   }) => values.where((s) {
     if (s == SettingsSection.about) return false;
     if (s == SettingsSection.checklists) {
       return infoSafetyRevealed || hasChecklists;
     }
     if (s == SettingsSection.ai) return aiRevealed;
+    if (s == SettingsSection.collaboration) return collaborationRevealed;
     if (s == SettingsSection.integrations) {
       return importRevealed && openKatAvailable;
     }

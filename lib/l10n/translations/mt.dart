@@ -1793,6 +1793,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Realtime samenwerken': 'Kollaborazzjoni f\'ħin reali',
+  'Manieren van verbinden': 'Modi ta\' konnessjoni',
+  'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
+      'Ikkollabora fil-ħin reali fuq preżentazzjoni permezz ta\' relay ikkriptat. Mitfi b\'mod prestabilit. Il-kontenut jiġi kkriptat minn tarf sa tarf biċ-ċwievet ta\' OciDeck stess; is-server jara biss data kkriptata.',
+  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
+      'Kollaborazzjoni permezz ta\' homeserver Matrix bħala relay. Issettja l-kont fit-tab Kollaborazzjoni. (Jitsi u XMPP ġejjin.)',
   'Chat': 'Chat',
   'Chat openen': 'Iftaħ iċ-chat',
   'Chat sluiten': 'Agħlaq iċ-chat',

@@ -13,6 +13,7 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'Matrix',
   // Het chatpaneel: het Engels houdt het leenwoord 'Chat', maar andere talen
   // vertalen het wél (Grieks Συνομιλία, Hongaars Csevegés, Sloveens Klepet, …),
   // dus alleen op de Engelse witte lijst — niet op unchangedInAllLanguages.
@@ -200,6 +201,7 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'Matrix',
   'CVSS',
   'https://matrix.to/#/…',
   'https://matrix.example.org',
