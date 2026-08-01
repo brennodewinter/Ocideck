@@ -199,9 +199,11 @@ class MatrixClient {
     required MatrixHttpTransport transport,
     required Uri homeserver,
     String? accessToken,
+    String? sessionNonce,
   }) : _http = transport,
        _homeserver = homeserver,
-       _token = accessToken {
+       _token = accessToken,
+       _sessionNonce = sessionNonce ?? _freshSessionNonce() {
     if (!_maySendSecretTo(homeserver)) {
       throw const MatrixException(
         MatrixErrorKind.config,
@@ -216,8 +218,24 @@ class MatrixClient {
 
   /// A per-client monotonic transaction counter. Matrix requires transaction ids
   /// unique per access token; a counter is sufficient and deterministic, which is
-  /// also what lets a test assert idempotent retries.
+  /// also what lets a test assert idempotent retries. The counter alone is *not*
+  /// enough across client lifecycles: a bare counter restarts at 0, so the first
+  /// send after an app restart with the same stored token would reuse an old
+  /// transaction id and the homeserver would treat it as a retry (#1042). The
+  /// per-lifecycle [_sessionNonce] disambiguates those.
   int _txn = 0;
+
+  /// Unique per [MatrixClient] instance, so automatic transaction ids never
+  /// collide between two lifecycles that share one access token. Combines a
+  /// process-global sequence (distinct instances within one run) with a
+  /// wall-clock stamp (distinct across app restarts). Injectable for tests.
+  final String _sessionNonce;
+
+  /// Distinguishes [MatrixClient] instances constructed within a single process.
+  static int _instanceSeq = 0;
+
+  static String _freshSessionNonce() =>
+      '${DateTime.now().microsecondsSinceEpoch}-${_instanceSeq++}';
 
   String? get accessToken => _token;
 
@@ -383,7 +401,7 @@ class MatrixClient {
 
   // --- internals -----------------------------------------------------------
 
-  String _nextTxn() => 'ocideck-${_txn++}';
+  String _nextTxn() => 'ocideck-$_sessionNonce-${_txn++}';
 
   /// Build a CS-API v3 URL, percent-encoding each dynamic [segments] entry (room
   /// ids and event types contain `!`, `:` and `.`). Preserves any base path the

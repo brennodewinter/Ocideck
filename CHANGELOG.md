@@ -216,6 +216,13 @@ in Dutch, and it keeps growing on `main` between releases.
   wachten. `MatrixServer.isConfigured` eist nu ook een niet-lege device-id,
   waardoor de client-provider, de sessie en de samenwerkingsknoppen zo'n account
   niet meer als bruikbaar aanmerken (#1043).
+- Samenwerken (Matrix): de transactie-teller van de client begon per
+  levenscyclus opnieuw bij `ocideck-0`. Bij hervatten met hetzelfde opgeslagen
+  access-token na een appherstart kon de homeserver de eerste nieuwe verzending
+  daardoor als retry van een oude transactie zien en de payload stil weglaten.
+  Elke client krijgt nu een unieke sessie-nonce (proces-teller plus wandklok) in
+  het transactie-id, zodat automatische ids niet botsen over levenscycli heen;
+  een expliciete `txnId` (de retry-weg) blijft idempotent (#1042).
 - Beveiliging/geheugen: de mappenscan (`scanPresentations`) las ieder
   markdownbestand eerst volledig met `readAsString` en gaf de string daarna als
   `content` aan `openDeck`, dat in dat pad de 32 MiB-bestandsgrens oversloeg. Eén
