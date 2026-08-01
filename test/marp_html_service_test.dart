@@ -410,7 +410,9 @@ void main() {}
     final html = MarpHtmlService.renderCockpitBlocks(slide);
 
     expect(html, contains('<svg'));
-    expect(html, contains('COCKPIT VIEW'));
+    // Geen hardgecodeerde Engelse header meer: die stond niet in de app-render
+    // en is uit de export gehaald (#COCKPIT-export volgt nu het dia-thema).
+    expect(html, isNot(contains('COCKPIT VIEW')));
     expect(html, contains('Overall risk'));
     expect(html, contains('ACT 187'));
     expect(html, contains('TGT 090'));
@@ -1131,5 +1133,40 @@ void _videoTests() {
   test('een dia zonder video blijft ongemoeid', () {
     const md = '# Gewone dia\n\nTekst.\n';
     expect(MarpHtmlService.renderVideoNotice(md), md);
+  });
+
+  test('cockpit-export volgt het dia-thema (licht vs donker)', () async {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    const deck =
+        '# Cockpit\n\n'
+        '```cockpit\n'
+        '{"meters":[{"type":"speedometer","label":"Cap","value":78},'
+        '{"type":"heading","label":"Koers","value":187,"heading":90}]}\n'
+        '```\n';
+    final light = await service.build(
+      deck,
+      theme: const ThemeProfile(slideBackgroundColor: '#FFFFFF'),
+      fallbackTitle: 'deck',
+    );
+    final dark = await service.build(
+      deck,
+      theme: const ThemeProfile(slideBackgroundColor: '#0F172A'),
+      fallbackTitle: 'deck',
+    );
+
+    // Beide renderen een cockpit-SVG.
+    expect(light, contains('class="cockpit-svg'));
+    expect(dark, contains('class="cockpit-svg'));
+
+    // Lichte dia → licht instrumentpaneel; donkere dia → het zwarte. De
+    // export volgt zo hetzelfde dia-thema als de app-render.
+    expect(light, contains('#E9EBEE'));
+    expect(light, isNot(contains('#07111F')));
+    expect(dark, contains('#07111F'));
+    expect(dark, isNot(contains('#E9EBEE')));
+
+    // De hardgecodeerde Engelse header hoort nergens meer te staan.
+    expect(light, isNot(contains('COCKPIT VIEW')));
+    expect(dark, isNot(contains('COCKPIT VIEW')));
   });
 }
