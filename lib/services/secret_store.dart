@@ -332,6 +332,56 @@ class SecretStore {
     }
   }
 
+  /// Keychain key for the collaboration **device trust store**: the peer
+  /// identity keys this local account has pinned as verified (trust-on-first-use,
+  /// SELF_ENCRYPTED_RELAY §5.3, COLLABORATION Phase 2 Blok A). Keyed on the local
+  /// homeserver + user id, so each account keeps its own pins.
+  ///
+  /// Unlike the device seeds these values are **public** keys, not secrets — but
+  /// they are co-located in the keychain so the collaboration layer has one
+  /// persistence mechanism rather than two, and so a pin cannot be silently
+  /// rewritten from the plain prefs domain.
+  static String collabTrustKey(String homeserver, String userId) {
+    final normalized = homeserver.trim().replaceAll(RegExp(r'/+$'), '');
+    return 'collab_trust::$normalized::${userId.trim()}';
+  }
+
+  Future<void> writeCollabTrust(
+    String homeserver,
+    String userId,
+    String trust,
+  ) async {
+    _requireStorage('writeCollabTrust');
+    try {
+      await _storage.write(
+        key: collabTrustKey(homeserver, userId),
+        value: trust,
+      );
+    } catch (e) {
+      logError('SecretStore.writeCollabTrust: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  Future<String?> readCollabTrust(String homeserver, String userId) async {
+    if (!_canStore) return null;
+    try {
+      return await _storage.read(key: collabTrustKey(homeserver, userId));
+    } catch (e) {
+      logError('SecretStore.readCollabTrust: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteCollabTrust(String homeserver, String userId) async {
+    if (!_canStore) return;
+    try {
+      await _storage.delete(key: collabTrustKey(homeserver, userId));
+    } catch (e) {
+      logWarning('SecretStore.deleteCollabTrust: keychain delete failed', e);
+    }
+  }
+
   /// Keychain-sleutel voor "je eigen gegevens" van de privacycontrole.
   ///
   /// Eén entry, want het gaat over de gebruiker van deze installatie en niet

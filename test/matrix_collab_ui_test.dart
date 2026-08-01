@@ -120,23 +120,16 @@ void main() {
   });
 
   group('showMatrixParticipantsDialog', () {
-    testWidgets('lists each device with its fingerprint, self first', (
-      tester,
-    ) async {
-      const participants = [
-        CollabParticipant(
-          userId: '@me:hs',
-          deviceId: 'DEV1',
-          fingerprint: 'AAAA BBBB',
-          isSelf: true,
-        ),
-        CollabParticipant(
-          userId: '@peer:hs',
-          deviceId: 'DEV2',
-          fingerprint: 'CCCC DDDD',
-          isSelf: false,
-        ),
-      ];
+    final keyA = [for (var i = 0; i < 32; i++) i];
+    final keyB = [for (var i = 0; i < 32; i++) 255 - i];
+
+    Future<void> openDialog(
+      WidgetTester tester, {
+      required List<CollabParticipant> Function() participants,
+      List<CollabParticipant> Function(CollabParticipant)? onPin,
+      List<CollabParticipant> Function(CollabParticipant)? onUnpin,
+      void Function(CollabParticipant)? onPinCalled,
+    }) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -145,7 +138,9 @@ void main() {
                 onPressed: () => showMatrixParticipantsDialog(
                   context,
                   l10nOf(context),
-                  participants,
+                  participants: participants,
+                  onPin: (p) async => onPinCalled?.call(p),
+                  onUnpin: (p) async {},
                 ),
                 child: const Text('go'),
               ),
@@ -155,11 +150,85 @@ void main() {
       );
       await tester.tap(find.text('go'));
       await tester.pumpAndSettle();
+    }
+
+    testWidgets('lists each device with its fingerprint, self first', (
+      tester,
+    ) async {
+      final participants = [
+        CollabParticipant(
+          userId: '@me:hs',
+          deviceId: 'DEV1',
+          identityKey: keyA,
+          fingerprint: 'AAAA BBBB',
+          isSelf: true,
+          trust: TrustState.verified,
+        ),
+        CollabParticipant(
+          userId: '@peer:hs',
+          deviceId: 'DEV2',
+          identityKey: keyB,
+          fingerprint: 'CCCC DDDD',
+          isSelf: false,
+        ),
+      ];
+      await openDialog(tester, participants: () => participants);
       expect(find.text('AAAA BBBB'), findsOneWidget);
       expect(find.text('CCCC DDDD'), findsOneWidget);
       expect(find.textContaining('@me:hs'), findsOneWidget);
       expect(find.textContaining('(dit apparaat)'), findsOneWidget);
       expect(find.text('@peer:hs'), findsOneWidget);
+      // An unverified peer offers a "mark verified" action; self does not.
+      expect(find.text('Markeer als geverifieerd'), findsOneWidget);
+    });
+
+    testWidgets('a mismatch shows the warning, not a plain verify button', (
+      tester,
+    ) async {
+      final participants = [
+        CollabParticipant(
+          userId: '@peer:hs',
+          deviceId: 'DEV2',
+          identityKey: keyB,
+          fingerprint: 'CCCC DDDD',
+          isSelf: false,
+          trust: TrustState.mismatch,
+        ),
+      ];
+      await openDialog(tester, participants: () => participants);
+      expect(find.text('Wijkt af'), findsOneWidget);
+      expect(
+        find.textContaining('mogelijk zit er iemand tussen'),
+        findsOneWidget,
+      );
+      expect(find.text('Markeer als geverifieerd'), findsNothing);
+    });
+
+    testWidgets('marking a peer verified re-reads and updates the row', (
+      tester,
+    ) async {
+      // A mutable list the pin callback flips, mirroring the trust store.
+      var trust = TrustState.unverified;
+      List<CollabParticipant> current() => [
+        CollabParticipant(
+          userId: '@peer:hs',
+          deviceId: 'DEV2',
+          identityKey: keyB,
+          fingerprint: 'CCCC DDDD',
+          isSelf: false,
+          trust: trust,
+        ),
+      ];
+      await openDialog(
+        tester,
+        participants: current,
+        onPinCalled: (_) => trust = TrustState.verified,
+      );
+      expect(find.text('Markeer als geverifieerd'), findsOneWidget);
+      await tester.tap(find.text('Markeer als geverifieerd'));
+      await tester.pumpAndSettle();
+      expect(find.text('Geverifieerd'), findsOneWidget);
+      expect(find.text('Markeer als geverifieerd'), findsNothing);
     });
   });
 

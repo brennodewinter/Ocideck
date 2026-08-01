@@ -100,13 +100,16 @@ class MatrixCollabLaunch {
       CollabParticipant(
         userId: ownUserId,
         deviceId: own.deviceId,
+        identityKey: own.identityKey,
         fingerprint: deviceFingerprint(own.identityKey),
         isSelf: true,
+        trust: TrustState.verified,
       ),
       for (final peer in keyExchange.peers)
         CollabParticipant(
           userId: peer.userId,
           deviceId: peer.keys.deviceId,
+          identityKey: peer.keys.identityKey,
           fingerprint: deviceFingerprint(peer.keys.identityKey),
           isSelf: false,
         ),

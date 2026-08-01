@@ -9,17 +9,33 @@
 // fingerprint over a trusted channel (reading it aloud, a signed message) can.
 // This is that fingerprint.
 
+/// Where a peer device stands against the local trust store (Blok A). The self
+/// device is always [verified] — you do not verify yourself. A peer starts
+/// [unverified] (trust-on-first-use, shown with a dismissible banner), becomes
+/// [verified] once its fingerprint is pinned, and turns to [mismatch] if a
+/// device we pinned later presents a *different* identity key — the one state
+/// that must never be dismissed, because it is the signature of an impersonating
+/// relay (§5.3).
+enum TrustState { unverified, verified, mismatch }
+
 /// One device in a session, as the verification dialog lists it.
 class CollabParticipant {
   const CollabParticipant({
     required this.userId,
     required this.deviceId,
+    required this.identityKey,
     required this.fingerprint,
     required this.isSelf,
+    this.trust = TrustState.unverified,
   });
 
   final String userId;
   final String deviceId;
+
+  /// The raw Ed25519 identity key bytes — what the trust store pins, and what the
+  /// [fingerprint] is a readable rendering of. Carried so the verification UI can
+  /// pin without recomputing it from the fingerprint string.
+  final List<int> identityKey;
 
   /// The readable fingerprint of this device's identity key — see
   /// [deviceFingerprint].
@@ -27,6 +43,18 @@ class CollabParticipant {
 
   /// True for this device (the one running the app), shown first and labelled so.
   final bool isSelf;
+
+  /// This device's standing against the local trust store — see [TrustState].
+  final TrustState trust;
+
+  CollabParticipant copyWith({TrustState? trust}) => CollabParticipant(
+    userId: userId,
+    deviceId: deviceId,
+    identityKey: identityKey,
+    fingerprint: fingerprint,
+    isSelf: isSelf,
+    trust: trust ?? this.trust,
+  );
 }
 
 /// A readable fingerprint of an Ed25519 identity key: uppercase hex in groups of
