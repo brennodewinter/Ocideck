@@ -1796,6 +1796,8 @@ const _dutchSourceAddHu = <String, String>{
       'Ez nem tűnik érvényes helyreállítási kulcsnak.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Ez a helyreállítási kulcs az OciDeck egy újabb verziójából származik.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'A képek webes memóriája megtelt (legfeljebb 256 MB). Mentse a munkáját .ocideck-fájlként, és további képek hozzáadása előtt töltse újra az oldalt.',
   'Realtime samenwerken': 'Valós idejű együttműködés',
   'Manieren van verbinden': 'Csatlakozási módok',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

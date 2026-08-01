@@ -752,6 +752,8 @@ const _dutchSourceAddFy = {
       'Dit liket gjin jildige herstelkaai.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Dizze herstelkaai komt út in nijere ferzje fan OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'It webûnthâld foar ôfbyldingen is fol (maksimaal 256 MB). Bewarje dyn wurk as in .ocideck-bestân en laad de side opnij foardatst mear ôfbyldingen tafoegest.',
   'Realtime samenwerken': 'Realtime gearwurkje',
   'Manieren van verbinden': 'Manieren om te ferbinen',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

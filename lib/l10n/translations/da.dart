@@ -1791,6 +1791,8 @@ const _dutchSourceAddDa = <String, String>{
       'Dette ligner ikke en gyldig gendannelsesnøgle.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Denne gendannelsesnøgle stammer fra en nyere version af OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Webhukommelsen til billeder er fuld (maks. 256 MB). Gem dit arbejde som en .ocideck-fil, og genindlæs siden, før du tilføjer flere billeder.',
   'Realtime samenwerken': 'Samarbejde i realtid',
   'Manieren van verbinden': 'Forbindelsesmåder',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

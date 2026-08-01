@@ -1821,6 +1821,8 @@ const _dutchSourceAddPt = <String, String>{
       'Isto não parece uma chave de recuperação válida.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Esta chave de recuperação vem de uma versão mais recente do OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'A memória web para imagens está cheia (máximo de 256 MB). Guarde o trabalho como ficheiro .ocideck e recarregue a página antes de adicionar mais imagens.',
   'Realtime samenwerken': 'Colaboração em tempo real',
   'Manieren van verbinden': 'Formas de ligação',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -1791,6 +1791,8 @@ const _dutchSourceAddLv = <String, String>{
       'Šī neizskatās pēc derīgas atkopšanas atslēgas.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Šī atkopšanas atslēga ir no jaunākas OciDeck versijas.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Attēliem paredzētā tīmekļa atmiņa ir pilna (ne vairāk kā 256 MB). Saglabājiet darbu kā .ocideck failu un pārlādējiet lapu, pirms pievienojat citus attēlus.',
   'Realtime samenwerken': 'Sadarbība reāllaikā',
   'Manieren van verbinden': 'Savienojuma veidi',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

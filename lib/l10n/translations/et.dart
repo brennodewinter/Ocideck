@@ -1783,6 +1783,8 @@ const _dutchSourceAddEt = <String, String>{
       'See ei tundu olevat kehtiv taastevõti.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'See taastevõti pärineb OciDecki uuemast versioonist.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Piltide veebimälu on täis (kuni 256 MB). Salvesta töö .ocideck-failina ja laadi leht enne uute piltide lisamist uuesti.',
   'Realtime samenwerken': 'Reaalajas koostöö',
   'Manieren van verbinden': 'Ühendusviisid',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -1794,6 +1794,8 @@ const _dutchSourceAddSl = <String, String>{
       'To ni videti kot veljaven ključ za obnovitev.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Ta ključ za obnovitev izvira iz novejše različice OciDecka.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Spletni pomnilnik za slike je poln (največ 256 MB). Shranite delo kot datoteko .ocideck in znova naložite stran, preden dodate več slik.',
   'Realtime samenwerken': 'Sodelovanje v realnem času',
   'Manieren van verbinden': 'Načini povezovanja',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

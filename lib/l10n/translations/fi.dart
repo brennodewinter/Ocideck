@@ -1792,6 +1792,8 @@ const _dutchSourceAddFi = <String, String>{
       'Tämä ei näytä kelvolliselta palautusavaimelta.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Tämä palautusavain on peräisin OciDeckin uudemmasta versiosta.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Kuville varattu verkkosovelluksen muisti on täynnä (enintään 256 Mt). Tallenna työ .ocideck-tiedostona ja lataa sivu uudelleen ennen uusien kuvien lisäämistä.',
   'Realtime samenwerken': 'Reaaliaikainen yhteistyö',
   'Manieren van verbinden': 'Yhdistämistavat',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

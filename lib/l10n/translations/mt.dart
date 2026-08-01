@@ -1814,6 +1814,8 @@ const _dutchSourceAddMt = <String, String>{
       'Din ma tidhirx bħal ċavetta ta\' rkupru valida.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Din iċ-ċavetta ta\' rkupru ġejja minn verżjoni aktar ġdida ta\' OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Il-memorja tal-web għall-istampi hija mimlija (massimu ta’ 256 MB). Issejvja x-xogħol bħala fajl .ocideck u erġa’ tella’ l-paġna qabel iżżid aktar stampi.',
   'Realtime samenwerken': 'Kollaborazzjoni f\'ħin reali',
   'Manieren van verbinden': 'Modi ta\' konnessjoni',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

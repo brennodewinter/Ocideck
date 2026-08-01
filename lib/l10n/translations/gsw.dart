@@ -1795,6 +1795,8 @@ const _dutchSourceAddGsw = <String, String>{
       'Das gseht nöd nach eme gültige Wiederherstelligsschlüssel us.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Dä Wiederherstelligsschlüssel chunnt vo ere nöiere Version vo OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Dr Webspicher für Bilder isch voll (maximal 256 MB). Speicher dini Arbet als .ocideck-Datei und lad d Syte neu, bevor du wyteri Bilder hinzufüegsch.',
   'Realtime samenwerken': 'Echtziit-Zämmenarbet',
   'Manieren van verbinden': 'Verbindigsarte',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

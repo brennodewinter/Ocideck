@@ -1808,6 +1808,8 @@ const _dutchSourceAddLa = <String, String>{
       'Haec clavis restitutionis valida esse non videtur.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Haec clavis restitutionis ex recentiore versione OciDeck orta est.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Memoria interretialis imaginum plena est (summum 256 MB). Opus tuum ut fasciculum .ocideck serva et paginam renova antequam plures imagines addas.',
   'Realtime samenwerken': 'Collaboratio tempore reali',
   'Manieren van verbinden': 'Modi coniungendi',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

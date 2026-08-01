@@ -1798,6 +1798,8 @@ const _dutchSourceAddHr = <String, String>{
       'Ovo ne izgleda kao valjan ključ za oporavak.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Ovaj ključ za oporavak potječe iz novije verzije OciDecka.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Web-memorija za slike je puna (najviše 256 MB). Spremite rad kao datoteku .ocideck i ponovno učitajte stranicu prije dodavanja novih slika.',
   'Realtime samenwerken': 'Suradnja u stvarnom vremenu',
   'Manieren van verbinden': 'Načini povezivanja',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

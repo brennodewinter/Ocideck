@@ -1819,6 +1819,8 @@ const _dutchSourceAddEl = <String, String>{
       'Αυτό δεν μοιάζει με έγκυρο κλειδί ανάκτησης.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Αυτό το κλειδί ανάκτησης προέρχεται από νεότερη έκδοση του OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Η μνήμη web για εικόνες είναι πλήρης (μέγιστο 256 MB). Αποθηκεύστε την εργασία σας ως αρχείο .ocideck και επαναφορτώστε τη σελίδα πριν προσθέσετε περισσότερες εικόνες.',
   'Realtime samenwerken': 'Συνεργασία σε πραγματικό χρόνο',
   'Manieren van verbinden': 'Τρόποι σύνδεσης',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

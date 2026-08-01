@@ -1767,6 +1767,8 @@ const _dutchSourceAddTlh = <String, String>{
       'cheghmoHwI\' ngoq lI\' rurbe\' lI\'.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'cheghmoHwI\' ngoqvam, OciDeck chu\'qu\' Ha\'DIbaHvo\' ghoS.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'mIllogh web qawHaq teblu’ (256 MB ‘aqroS). latlh mIllogh Dachelpa’ .ocideck De’ ‘angghalDaq Qu’lIj yIpol ’ej nav yIQayqa’.',
   'Realtime samenwerken': 'SIbI\' vumchuq',
   'Manieren van verbinden': 'rarmeH mIwmey',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

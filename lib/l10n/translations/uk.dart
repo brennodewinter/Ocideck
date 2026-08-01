@@ -1809,6 +1809,8 @@ const _dutchSourceAddUk = <String, String>{
       'Це не схоже на дійсний ключ відновлення.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Цей ключ відновлення походить із новішої версії OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Вебпам’ять для зображень заповнена (максимум 256 МБ). Збережіть роботу як файл .ocideck і перезавантажте сторінку, перш ніж додавати інші зображення.',
   'Realtime samenwerken': 'Співпраця в реальному часі',
   'Manieren van verbinden': 'Способи підключення',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -1795,6 +1795,8 @@ const _dutchSourceAddCs = <String, String>{
       'Toto nevypadá jako platný klíč pro obnovení.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Tento klíč pro obnovení pochází z novější verze OciDecku.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
+      'Webová paměť pro obrázky je plná (nejvýše 256 MB). Uložte práci jako soubor .ocideck a před přidáním dalších obrázků stránku znovu načtěte.',
   'Realtime samenwerken': 'Spolupráce v reálném čase',
   'Manieren van verbinden': 'Způsoby připojení',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':

@@ -18,6 +18,7 @@ Images are the dominant memory cost, so decoding is bounded up front:
 |---|---|---|
 | Max image decode dimension (per axis) | **4096 px** | `lib/utils/image_limits.dart:16` (`kMaxImageDecodeDimension`) |
 | Max in-memory image bytes | **64 MiB** *(bij het importeren, per bestand — niet een plafond voor alles wat tegelijk gedecodeerd in beeld staat)* | `lib/services/image_service.dart:40` |
+| Web `mem:` asset store (all tabs together) | **256 MiB encoded bytes** | `lib/services/web_asset_store.dart` (`maxTotalBytes`) |
 | Max media (video/audio) bytes | **1 GiB** | `lib/services/image_service.dart:41` |
 | Luminance sampling decode | **48 × 48 px** | `lib/utils/image_luminance.dart:54` |
 | Carousel thumbnail / preview / full decode | `cacheWidth` **360 / 720 / 1000** | `image_carousel_picker_grid.dart`, `..._preview.dart` |
@@ -34,7 +35,11 @@ optimisation.
   render/present/export paths (containment, not just convention).
 - On the web build, images are held in an in-memory store (`mem:` scheme,
   `lib/services/web_asset_store.dart`) — so large decks consume browser tab
-  memory rather than disk.
+  memory rather than disk. The store has one **256 MiB** budget for the whole
+  app/page, including every open deck and its undo/redo history plus the slide
+  clipboard. Identical encoded content is SHA-256-deduplicated and charged only
+  once. Unreferenced content returns its budget during the liveness sweep; a
+  new unique asset is refused atomically before this total would be exceeded.
 
 ## Rendering
 
