@@ -44,6 +44,43 @@ class SlideRasterizerNoFrameException implements Exception {
       'de voorgrond.';
 }
 
+/// Bovengrens op de geschatte totale renderbytes van één raster-export.
+///
+/// De rasterizer houdt alle gerenderde PNG's in een lijst vast en verhoogt de
+/// image-cache tot 1 GB; PDF/PPTX-assemblage begint pas als álles gerasteriseerd
+/// is. Honderden hoog-entropische dia's kunnen zo meerdere gigabytes aan renders
+/// tegelijk vasthouden (#1047). Boven dit onderbouwde totaalbudget weigert de
+/// export vóóraf — vóór er ook maar één dia getekend is — met een duidelijke
+/// melding, in plaats van gaandeweg het geheugen uit te putten. De schatting is
+/// een bovengrens: `dia's × breedte × hoogte × 4` (rauwe RGBA per capture; de
+/// PNG is doorgaans kleiner). 4 GiB laat een royaal deck toe en vangt alleen het
+/// pathologische geval.
+const int kMaxRasterExportBytes = 4 * 1024 * 1024 * 1024; // 4 GiB
+
+/// Gegooid wanneer een raster-export [kMaxRasterExportBytes] zou overschrijden.
+/// De UI vertaalt dit via `userFacingError`.
+class RasterExportBudgetExceeded implements Exception {
+  const RasterExportBudgetExceeded({
+    required this.slideCount,
+    required this.estimatedBytes,
+    required this.limitBytes,
+  });
+
+  /// Aantal dia's in de geweigerde export.
+  final int slideCount;
+
+  /// De geschatte totale renderbytes (bovengrens).
+  final int estimatedBytes;
+
+  /// Het plafond ([kMaxRasterExportBytes], tenzij overschreven).
+  final int limitBytes;
+
+  @override
+  String toString() =>
+      'RasterExportBudgetExceeded(slides: $slideCount, '
+      'estimated: $estimatedBytes, limit: $limitBytes)';
+}
+
 /// Renders the exact on-screen slide previews to PNG images so exports look
 /// identical to what the user sees (WYSIWYG).
 ///
@@ -97,15 +134,25 @@ class SlideRasterizer {
     int targetWidth = 1920,
     void Function(int done, int total)? onProgress,
     void Function(String phase, int done, int total)? onStage,
-    // Polled tussen slides: true = stoppen. De aanroeper krijgt dan een
-    // onvolledige lijst terug en hoort die weg te gooien.
+    // Polled tussen slides: true = stoppen. Een afgebroken export levert dan
+    // een lege lijst op — de deels verzamelde renders worden opgeruimd zodat er
+    // niets blijft rondslingeren (#1047).
     bool Function()? isCancelled,
     // Injecteerbaar zodat de blokkade-weg toetsbaar is: met de echte 20s zou
     // elke test die hem raakt twintig seconden stilstaan.
     Duration frameTimeout = SlideRasterizer.frameTimeout,
+    // Injecteerbaar zodat de budgetweigering toetsbaar is zonder een deck van
+    // honderden dia's te hoeven bouwen.
+    int maxExportBytes = kMaxRasterExportBytes,
   }) async {
     final slides = audience.slides;
     if (slides.isEmpty) return const [];
+
+    _enforceExportBudget(
+      slideCount: slides.length,
+      targetWidth: targetWidth,
+      maxExportBytes: maxExportBytes,
+    );
 
     // Alles wat de render nodig heeft, komt uit het geprojecteerde deck — niet
     // uit los meegegeven velden die per ongeluk van de bron konden komen.
@@ -113,9 +160,6 @@ class SlideRasterizer {
     final themeProfile = deck.themeProfile;
     final projectPath = deck.projectPath;
     final signature = deck.signature;
-    final sealedAt = deck.sealAt;
-    final tlp = deck.tlp;
-    final organization = deck.organization;
 
     final overlay = Overlay.of(context, rootOverlay: true);
     final pixelRatio = targetWidth / logicalSize.width;
@@ -151,31 +195,16 @@ class SlideRasterizer {
 
     final repaintKey = GlobalKey();
     final hostKey = GlobalKey<_RasterSlideHostState>();
-    final entry = OverlayEntry(
-      builder: (_) => Positioned(
-        left: -logicalSize.width - 100,
-        top: -logicalSize.height - 100,
-        child: _RasterSlideHost(
-          key: hostKey,
-          repaintKey: repaintKey,
-          initialSlide: slides.first,
-          projectPath: projectPath,
-          themeProfile: themeProfile,
-          cockpitColorScheme: cockpitColorScheme,
-          slideCount: slides.length,
-          signature: signature,
-          sealedAt: sealedAt,
-          tlp: tlp,
-          showClassificationWatermark: showClassificationWatermark,
-          organization: organization,
-          scopeCia: deckScopeCiaIndex(slides),
-          reportLanguage: audience.deck.language,
-          improvementY01: deck.improvementY01Metric,
-        ),
-      ),
+    final entry = _buildRasterOverlayEntry(
+      hostKey: hostKey,
+      repaintKey: repaintKey,
+      audience: audience,
+      cockpitColorScheme: cockpitColorScheme,
+      showClassificationWatermark: showClassificationWatermark,
     );
 
     final results = <Uint8List>[];
+    var cancelled = false;
     try {
       overlay.insert(entry);
       // De eerste melding staat vóór het eerste wachten, en dat is opzet.
@@ -201,7 +230,10 @@ class SlideRasterizer {
 
       final numberStarts = numberedListStarts(slides);
       for (var i = 0; i < slides.length; i++) {
-        if (isCancelled?.call() ?? false) break;
+        if (isCancelled?.call() ?? false) {
+          cancelled = true;
+          break;
+        }
         onStage?.call('prepare', i, slides.length);
         hostKey.currentState!.showSlide(
           slides[i],
@@ -227,8 +259,74 @@ class SlideRasterizer {
       entry.remove();
       imageCache.maximumSize = prevMaxSize;
       imageCache.maximumSizeBytes = prevMaxBytes;
+      // Ruim de tijdens de export gedecodeerde afbeeldingen meteen op in plaats
+      // van ze in de (nu weer kleine) cache te laten uitzweven; ze zijn na de
+      // capture niet meer nodig. Bij annulering gaan ook de deels verzamelde
+      // renders eraan, zodat een afgebroken export niets laat rondslingeren.
+      imageCache.clear();
+      imageCache.clearLiveImages();
+      if (cancelled) results.clear();
     }
     return results;
+  }
+
+  /// Weigert een export vóóraf op een onderbouwd totaalbudget: honderden
+  /// hoog-entropische dia's zouden anders gaandeweg gigabytes aan renders
+  /// vasthouden vóór de PDF/PPTX-assemblage begint (#1047). De schatting is een
+  /// bovengrens op de rauwe capture per dia; hier is nog niets getekend, dus de
+  /// weigering kost geen geheugen.
+  static void _enforceExportBudget({
+    required int slideCount,
+    required int targetWidth,
+    required int maxExportBytes,
+  }) {
+    final targetHeight = (targetWidth * logicalSize.height / logicalSize.width)
+        .round();
+    final estimatedBytes = slideCount * targetWidth * targetHeight * 4;
+    if (estimatedBytes > maxExportBytes) {
+      throw RasterExportBudgetExceeded(
+        slideCount: slideCount,
+        estimatedBytes: estimatedBytes,
+        limitBytes: maxExportBytes,
+      );
+    }
+  }
+
+  /// Bouwt de off-screen overlay-entry die het te rasteren dia-oppervlak host.
+  /// Uitgesplitst uit [rasterize] zodat die methode onder de lengte-ratchet
+  /// blijft; alle velden komen uit het geprojecteerde [audience]-deck.
+  static OverlayEntry _buildRasterOverlayEntry({
+    required GlobalKey<_RasterSlideHostState> hostKey,
+    required GlobalKey repaintKey,
+    required AudienceDeck audience,
+    required CockpitColorScheme cockpitColorScheme,
+    required bool showClassificationWatermark,
+  }) {
+    final deck = audience.deck;
+    final slides = audience.slides;
+    return OverlayEntry(
+      builder: (_) => Positioned(
+        left: -logicalSize.width - 100,
+        top: -logicalSize.height - 100,
+        child: _RasterSlideHost(
+          key: hostKey,
+          repaintKey: repaintKey,
+          initialSlide: slides.first,
+          projectPath: deck.projectPath,
+          themeProfile: deck.themeProfile,
+          cockpitColorScheme: cockpitColorScheme,
+          slideCount: slides.length,
+          signature: deck.signature,
+          sealedAt: deck.sealAt,
+          tlp: deck.tlp,
+          showClassificationWatermark: showClassificationWatermark,
+          organization: deck.organization,
+          scopeCia: deckScopeCiaIndex(slides),
+          reportLanguage: deck.language,
+          improvementY01: deck.improvementY01Metric,
+        ),
+      ),
+    );
   }
 
   /// Precache the deck's drawn sign-off signature (a deck-level embedded image,

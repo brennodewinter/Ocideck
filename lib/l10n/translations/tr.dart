@@ -2752,6 +2752,8 @@ const _dutchSourceAddTr = <String, String>{
       'Bu paket çok büyük (en fazla 512 MB). Aksi hâlde OciDeck sonrasında bunu açamaz. Daha az veya daha küçük görsel, video ya da ses dosyası kullanın.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'Görseller birlikte tek bir HTML dosyası için çok büyük (en fazla 512 MB). Daha az veya daha küçük görsel kullanın ya da PDF veya paket olarak dışa aktarın.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Bu dışa aktarmada güvenli bir şekilde işlenemeyecek kadar çok ve çok yüksek çözünürlüklü slayt var. Parçalar hâlinde dışa aktarın ya da sıkıştırılmış PDF’i kullanın.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Önce sunuyu tamamlayıp kaydedin; ardından kökenini imzalayabilirsiniz.',
   'Herkomst ondertekend.': 'Köken imzalandı.',

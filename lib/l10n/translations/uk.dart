@@ -1792,6 +1792,8 @@ const _dutchSourceAddUk = <String, String>{
       'Цей пакунок завеликий (максимум 512 МБ). Інакше OciDeck згодом не зможе його відкрити. Використовуйте менше або менші зображення, відео чи аудіофайли.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'Зображення разом завеликі для одного файлу HTML (максимум 512 МБ). Використайте менше або менші зображення, або експортуйте як PDF чи пакунок.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Цей експорт містить забагато слайдів із надто високою роздільною здатністю для безпечного рендерингу. Експортуйте частинами або скористайтеся стиснутим PDF.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Спершу завершіть і збережіть презентацію; після цього ви зможете підписати її походження.',
   'Herkomst ondertekend.': 'Походження підписано.',

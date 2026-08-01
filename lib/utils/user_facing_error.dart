@@ -11,6 +11,7 @@ import '../services/import/importers/import_failure.dart' as pres;
 import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
 import '../services/marp_html_service.dart';
+import '../services/slide_rasterizer.dart';
 import '../services/web_asset_store.dart';
 
 /// Vertaal een gevangen [error] naar een korte melding met
@@ -20,6 +21,9 @@ String userFacingError(AppLocalizations l10n, Object error) {
   if (error is WebAssetBudgetExceeded) return webAssetBudgetMessage(l10n);
   if (error is PackageBudgetExceeded) return packageBudgetMessage(l10n);
   if (error is HtmlEmbedBudgetExceeded) return htmlEmbedBudgetMessage(l10n);
+  if (error is RasterExportBudgetExceeded) {
+    return rasterExportBudgetMessage(l10n);
+  }
   if (error is WebdavException) return webdavErrorMessage(l10n, error);
   if (error is S3Exception) return s3ErrorMessage(l10n, error);
   if (error is GitForgeException) return gitForgeErrorMessage(l10n, error);
@@ -51,6 +55,12 @@ String userFacingError(AppLocalizations l10n, Object error) {
 /// worden voor een self-contained HTML-export.
 String htmlEmbedBudgetMessage(AppLocalizations l10n) => l10n.d(
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.',
+);
+
+/// Handelingsperspectief wanneer een PDF/PPTX-export te veel dia's op te hoge
+/// resolutie bevat om veilig in het geheugen te rasteriseren.
+String rasterExportBudgetMessage(AppLocalizations l10n) => l10n.d(
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.',
 );
 
 /// Handelingsperspectief bij het appbrede webassetbudget. Eerst veiligstellen:

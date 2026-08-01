@@ -1778,6 +1778,8 @@ const _dutchSourceAddGsw = <String, String>{
       'Das Paket isch z gross (maximal 512 MB). Susch cha OciDeck s nachhär nüme öffne. Bruuch weniger oder chlinneri Bilder, Videos oder Audiodateie.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'D Bilder sind zäme z gross für ei einzeligi HTML-Datei (maximal 512 MB). Bruuch weniger oder chlyneri Bilder, oder exportier as PDF oder Paket.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Dä Export het z vil Folie mit z hocher Uflösig, zum sicher rendere. Exportier i Teil oder bruuch s komprimierte PDF.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Mach d Präsentation zerscht fertig und speicher si; nachher chasch d Herkunft signiere.',
   'Herkomst ondertekend.': 'Herkunft signiert.',

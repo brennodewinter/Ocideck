@@ -209,6 +209,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Export/geheugen: een PDF/PPTX-raster-export hield alle gerenderde PNG's in het
+  geheugen en verhoogde de image-cache tot 1 GB, terwijl de assemblage pas begon
+  nadat álles gerasteriseerd was — honderden hoog-entropische dia's konden zo
+  meerdere gigabytes aan renders tegelijk vasthouden. De export weigert nu
+  vóóraf, vóór er iets getekend is, op een onderbouwd totaalbudget
+  (`kMaxRasterExportBytes`, 4 GiB geschatte renderbytes) met een duidelijke
+  melding, en de image-cache plus tussenresultaten worden na afloop én bij
+  annulering altijd opgeruimd (#1047).
 - Export/geheugen: de HTML-export liet een GIF ongewijzigd door vóór de
   dimensiecontrole. Een klein, geldig GIF-bestand kan echter een enorm logisch
   scherm declareren (bijv. 30000×30000), waardoor het de decode-bomgrens

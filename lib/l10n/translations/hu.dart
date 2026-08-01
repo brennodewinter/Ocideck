@@ -1779,6 +1779,8 @@ const _dutchSourceAddHu = <String, String>{
       'Ez a csomag túl nagy (legfeljebb 512 MB). Különben az OciDeck utána nem tudja megnyitni. Használj kevesebb vagy kisebb képet, videót vagy hangfájlt.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'A képek együtt túl nagyok egyetlen HTML-fájlhoz (legfeljebb 512 MB). Használjon kevesebb vagy kisebb képet, vagy exportáljon PDF-ként vagy csomagként.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Ez az exportálás túl sok diát tartalmaz túl nagy felbontásban ahhoz, hogy biztonságosan megjeleníthető legyen. Exportáljon részletekben, vagy használja a tömörített PDF-et.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Előbb fejezd be és mentsd el a bemutatót; utána aláírhatod az eredetét.',
   'Herkomst ondertekend.': 'Eredet aláírva.',

@@ -1774,6 +1774,8 @@ const _dutchSourceAddLv = <String, String>{
       'Šī pakotne ir pārāk liela (ne vairāk kā 512 MB). Pretējā gadījumā OciDeck to vēlāk vairs nevarēs atvērt. Izmantojiet mazāk vai mazākus attēlus, video vai audio failus.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'Attēli kopā ir pārāk lieli vienam HTML failam (ne vairāk kā 512 MB). Izmantojiet mazāk vai mazākus attēlus vai eksportējiet kā PDF vai pakotni.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Šajā eksportā ir pārāk daudz slaidu ar pārāk augstu izšķirtspēju, lai to varētu droši renderēt. Eksportējiet pa daļām vai izmantojiet saspiesto PDF.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Vispirms pabeidziet un saglabājiet prezentāciju; pēc tam varat parakstīt tās izcelsmi.',
   'Herkomst ondertekend.': 'Izcelsme parakstīta.',

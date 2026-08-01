@@ -1777,6 +1777,8 @@ const _dutchSourceAddSl = <String, String>{
       'Ta paket je prevelik (največ 512 MB). Sicer ga OciDeck pozneje ne bo mogel odpreti. Uporabite manj ali manjše slike, videoposnetke ali zvočne datoteke.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'Slike so skupaj prevelike za eno datoteko HTML (največ 512 MB). Uporabite manj ali manjše slike ali pa izvozite kot PDF ali paket.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'Ta izvoz ima preveč diapozitivov v previsoki ločljivosti, da bi jih bilo mogoče varno upodobiti. Izvozite po delih ali uporabite stisnjeni PDF.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Najprej dokončajte in shranite predstavitev; nato lahko podpišete njen izvor.',
   'Herkomst ondertekend.': 'Izvor podpisan.',

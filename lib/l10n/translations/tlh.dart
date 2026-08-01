@@ -1750,6 +1750,8 @@ const _dutchSourceAddTlh = <String, String>{
       'nap vaj tINqu’ (512 MB ‘ay’ vI’). qaSpa’ OciDeck poSmoHlaHbe’. nagh beQ HInob, HaSta pat, ghantoH pat je puS ghap machqu’.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'wa\' HTML De\'wI\' nagh vaghlan (512 MB \'oH veH\'e\') tlhutlh mej HInob mej. puS pagh mach nagh yIlo\', ghap PDF ghap ngaSwI\' yIchenmoH.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'HaSta law’qu’ ’ej jen law’qu’ ghaj export vam; vaj QaQ render laHbe’. HuvDaj export, pagh PDF Sun lo’.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'wa\'DIch nab ta\'laH \'ej yhraS; ghIq Daqbogh SovmeH ghItlh DalaHlaH.',
   'Herkomst ondertekend.': 'Daqbogh SovmeH ghItlh rap.',

@@ -734,6 +734,8 @@ const _dutchSourceAddPap = {
       'E paket aki ta muchu grandi (máksimo 512 MB). Sino OciDeck lo no por hib’é despues. Usa ménos òf mas chikí imágen, video òf archivo di odio.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
       'E imagennan huntu ta muchu grandi pa un solo archivo HTML (máksimo 512 MB). Usa ménos òf mas chikí imagen, òf eksportá komo PDF òf paket.',
+  'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
+      'E eksportashon aki tin muchu diapositiva na un resolushon muchu haltu pa rendere di manera sigur. Eksportá na parti of usa e PDF komprimí.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Kaba i warda e presentashon promé; despues bo por firma su origen.',
   'Herkomst ondertekend.': 'Origen firmá.',
