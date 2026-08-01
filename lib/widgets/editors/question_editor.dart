@@ -335,14 +335,14 @@ class _QuestionEditorState extends State<QuestionEditor> {
           children: [
             const Icon(
               Icons.error_outline,
-              color: AppTheme.severityCritical,
+              color: AppTheme.dangerFg,
               size: 32,
             ),
             const SizedBox(height: 8),
             Text(
               l10n.d('Ongeldige vraag'),
               style: const TextStyle(
-                color: AppTheme.severityCritical,
+                color: AppTheme.dangerFg,
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
               ),
