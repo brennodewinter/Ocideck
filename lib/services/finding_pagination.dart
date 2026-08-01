@@ -29,24 +29,21 @@ enum _Section { description, confirmation, impact, recommendation }
 ///
 /// The numbers below are **measured** against the live `_FindingPreview` at
 /// `SlidePreviewWidget` — a 16:9 slide, no logo — not eyeballed. At that width a
-/// slide is [_linesPerSlide] line-units tall; the header card (severity band,
-/// CVSS gauge, wrapping heading, badges, scope) already spends [_headerCardCost]
-/// of them — *more than a whole slide* — which is why a paginated finding gets a
-/// header-only first page: nothing else fits beside it. A continuation page keeps
-/// the heading (its "(i/N)" marker) but drops the meta, costing [_contHeadingCost].
+/// slide is [_linesPerSlide] line-units tall. The compact CVSS score card leaves
+/// enough room for a normal first section below the finding header. A
+/// continuation page keeps the heading (its "(i/N)" marker) but drops the meta,
+/// costing [_contHeadingCost].
 /// A section adds [_sectionHeadingCost] for its `##` heading plus one unit per
 /// wrapped body line at [_charsPerLine] characters each.
 ///
-/// The earlier values (22 / 4 / 1.4 / 94) modelled a slide holding ~22 body
-/// lines with a 4-line header. The real header is ~4× that, so nearly every
-/// multi-section finding overflowed yet the model thought it fit — it never
-/// split, and shrank to a third of the width instead. These are calibrated so a
-/// genuinely overflowing finding splits into (near-)full-width pages while one
-/// that already renders close to full width ([_minSinglePageScale]) stays single.
+/// The previous calibration still described the removed cockpit-style CVSS
+/// meter. It reserved more than a page for the header and nearly a page for a
+/// continuation heading, producing five sparse pages for content that renders
+/// legibly on three. These values are calibrated against that real fixture.
 const double _linesPerSlide = 19.5;
-const double _headerCardCost = 21.7;
-const double _contHeadingCost = 11.9;
-const double _sectionHeadingCost = 3.1;
+const double _headerCardCost = 17.5;
+const double _contHeadingCost = 6.0;
+const double _sectionHeadingCost = 2.5;
 const double _charsPerLine = 40.0;
 
 /// The lowest render scale at which a finding is still left on one slide. A
@@ -135,25 +132,29 @@ List<FindingSpec> paginateFinding(
   final total =
       _headerCardCost +
       present.fold<double>(0, (a, s) => a + _sectionCost(spec, s));
-  if (total <= linesPerSlide / _minSinglePageScale) return [spec];
+  final pageCapacity = linesPerSlide / _minSinglePageScale;
+  if (total <= pageCapacity) return [spec];
 
-  // Greedy pack. Page 1 carries the header card, whose cost alone exceeds a
-  // slide — so its section budget is negative and it ends up header-only, the
-  // sections starting on page 2. Continuation pages carry the (meta-less)
-  // heading, so they too reserve room before any section. A section that on its
-  // own overflows a page still gets its own page (it renders slightly scaled
-  // rather than being dropped), but never shares an already-full page.
+  // Greedy pack. The usable capacity includes the same bounded scale-down that
+  // decides whether a finding may stay on one page. This lets the compact header
+  // share page 1 with a normal section and lets related short sections share a
+  // continuation page, without ever shrinking below the readability floor.
+  // A section that on its own overflows a page still gets its own page (it
+  // renders slightly scaled rather than being dropped), but never shares an
+  // already-full page.
   final pages = <List<_Section>>[];
   var current = <_Section>[];
   var isFirstPage = true;
-  var budget = linesPerSlide - _headerCardCost;
+  var budget = pageCapacity - _headerCardCost;
   for (final s in present) {
     final cost = _sectionCost(spec, s);
     if (cost > budget && (current.isNotEmpty || isFirstPage)) {
-      pages.add(current); // page 1 may be empty here → a header-only page
+      // An exceptionally large first section may still leave page 1 as a
+      // header-only identity page; ordinary sections now use that space.
+      pages.add(current);
       current = <_Section>[];
       isFirstPage = false;
-      budget = linesPerSlide - _contHeadingCost;
+      budget = pageCapacity - _contHeadingCost;
     }
     current.add(s);
     budget -= cost;

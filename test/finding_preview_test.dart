@@ -224,19 +224,20 @@ void main() {
     for (var i = 0; i < pages.length; i++) {
       final frac = await renderWidthFraction(tester, pages[i].toMarkdown());
       if (i == 0) {
-        // Page 1 is the header card, taller than a slide on its own: close to,
-        // not exactly, full width.
+        // Page 1 now uses the room below the compact score card for the first
+        // section. It may scale modestly, but never past the readability floor.
         expect(
           frac,
-          greaterThan(0.85),
-          reason: 'header page should be near-full width, was $frac',
+          greaterThan(0.70),
+          reason: 'header page should remain readable, was $frac',
         );
       } else {
-        // Content pages use essentially the whole slide width.
+        // Related complete sections may share a continuation page. They remain
+        // comfortably above the same readability floor.
         expect(
           frac,
-          greaterThan(0.95),
-          reason: 'content page ${i + 1} should be full width, was $frac',
+          greaterThan(0.70),
+          reason: 'content page ${i + 1} should remain readable, was $frac',
         );
       }
     }
@@ -259,4 +260,23 @@ void main() {
       expect(find.textContaining(' · Critical'), findsNothing);
     },
   );
+
+  testWidgets('page 1 without metadata still renders the finding header', (
+    tester,
+  ) async {
+    final firstPage = const FindingSpec(
+      heading: 'F-08 · Bevinding zonder metadata (1/2)',
+      description: 'De eerste pagina heeft bewust geen CVSS of scope.',
+    );
+
+    await tester.pumpWidget(_host(_finding(firstPage.toMarkdown())));
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    expect(find.byKey(const ValueKey('finding-header-card')), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey('finding-continuation-heading')),
+      findsNothing,
+    );
+  });
 }

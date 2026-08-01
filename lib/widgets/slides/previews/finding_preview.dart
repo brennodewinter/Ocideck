@@ -74,21 +74,22 @@ class _FindingPreview extends StatelessWidget {
 
   /// The "(i/N)" page marker that [paginateFinding] appends to a split finding's
   /// heading — the only place it is ever added.
-  static final RegExp _pageMarker = RegExp(r'\(\d+/\d+\)\s*$');
+  static final RegExp _pageMarker = RegExp(r'\((\d+)/\d+\)\s*$');
 
-  /// Whether this page is a paginated *continuation*: it carries the page marker
-  /// but no header meta (that all lives on page 1). Page 1 of a split finding
-  /// also carries the marker, but keeps its meta, so it is not matched here.
-  bool _isContinuationPage(FindingSpec spec) =>
-      _pageMarker.hasMatch(spec.heading) &&
-      !_hasBadges(spec) &&
-      spec.scopeObject.isEmpty;
+  /// Whether this page is a paginated *continuation*. The page number is the
+  /// authority: page 1 must keep the finding card even when an author supplied
+  /// no CVSS, scope or other metadata.
+  bool _isContinuationPage(FindingSpec spec) {
+    final marker = _pageMarker.firstMatch(spec.heading);
+    return marker != null && int.tryParse(marker.group(1) ?? '') != 1;
+  }
 
   /// A continuation page's heading: the same title (with its "(i/N)" marker), as
   /// a plain line rather than the severity card, so the section below it uses the
   /// full slide width.
   Widget _continuationHeading(FindingSpec spec) {
     return Padding(
+      key: const ValueKey('finding-continuation-heading'),
       padding: EdgeInsets.only(bottom: w * 0.025),
       child: Text(
         spec.heading,
@@ -111,6 +112,7 @@ class _FindingPreview extends StatelessWidget {
     Cvss4? ctxCvss,
   ) {
     return Container(
+      key: const ValueKey('finding-header-card'),
       padding: EdgeInsets.all(w * 0.03),
       decoration: BoxDecoration(
         color: severity.withValues(alpha: 0.06),
