@@ -19,10 +19,12 @@
 > is the pure-Dart data-plane relay. This document is the **native media plane** and
 > the **backend-neutral call interface** that unifies Jitsi and Matrix.
 >
-> **Gated.** This design does not authorise adding a WebRTC dependency. The
-> media-plane dependency (`flutter_webrtc`) must pass a chain review first —
-> [`assurance/ketenkeuring-flutter-webrtc.md`](../../assurance/ketenkeuring-flutter-webrtc.md) —
-> and the **spine decision** (§5) is a maintainer call. Both precede any code.
+> **Gated.** This design does not authorise adding a dependency. Two chain reviews set
+> the build-conditions and precede any code: the media-plane
+> [`ketenkeuring-flutter-webrtc.md`](../../assurance/ketenkeuring-flutter-webrtc.md) and
+> the spine [`ketenkeuring-xmpp-spine.md`](../../assurance/ketenkeuring-xmpp-spine.md).
+> The **spine decision (§5) is taken** (2026-08-02): the single XMPP spine, with
+> **backend exclusivity** (§1).
 
 ---
 
@@ -135,6 +137,16 @@ room*, not per UI. An OciDeck webinar runs on a Jitsi deployment the user contro
 **or** on MatrixRTC (which reuses the self-encrypted-relay account). Joining someone
 else's Jitsi uses the same interface. The user sees the same thing every time.
 
+**One session, one backend family (invariant).** "Backend choice per room" is
+*exclusive*: a session runs **entirely** on one family — **either** XMPP/Jitsi (calls
+*and* data plane over one XMPP connection, §5) **or** Matrix (self-encrypted relay +
+MatrixRTC). The two never intermingle: never Jitsi media with a Matrix data plane,
+never XMPP data with MatrixRTC media. Hosting "via the Matrix backend" (F5) is a
+wholly-Matrix session, separate from an XMPP/Jitsi session. The UI is identical across
+both; the plumbing under any one session is single-family. This keeps the trust model
+legible — you always know which single server sees a given session's ciphertext and
+metadata, because per session there is exactly one.
+
 ---
 
 ## 4. What "reimplementing the protocol" means technically
@@ -156,7 +168,7 @@ desktop target — unsuitable (OciDeck: own interface, macOS-primary). Jitsi its
 
 ---
 
-## 5. XMPP as a candidate single spine (data + media)
+## 5. XMPP as the single spine (data + media) — decided
 
 `lib/xmpp/` is **not** a Jitsi detail; it is standalone infrastructure. XMPP is open,
 federated and bring-your-own-server — a match for **P1**. And because **Jitsi already
@@ -209,10 +221,21 @@ dealbreakers):
 it is the detour. For "join and host equally", this favours **XMPP as the single
 spine**.
 
-**This is a maintainer-level spine decision** (as the relay choice was) and warrants
-its own chain review. It is Open Question 0 (§10); nothing here bakes it in silently.
-The interface of §3 is unaffected either way — the spine choice changes which
-`CollabTransport` carries the data plane, not the call UI.
+**Decided (2026-08-02).** The maintainer chose the **single XMPP spine** as the primary
+route; the chain review is
+[`ketenkeuring-xmpp-spine.md`](../../assurance/ketenkeuring-xmpp-spine.md) (principled
+GO, build-conditions pending). Consequences, all consistent with the §1 backend-
+exclusivity invariant:
+
+- **The relay is not overruled.** The self-encrypted relay stays the spine for the
+  *Matrix mode*; XMPP becomes the primary spine for the *Jitsi mode*. They coexist as
+  separate, non-mixing modes; which is built first is §7 phasing.
+- **The crypto is shared, not new.** E2EE over XMPP is the *same* minimal
+  X25519→AES-GCM scheme as the relay (`SELF_ENCRYPTED_RELAY.md`), carried on an XMPP
+  event type instead of a Matrix event — no own ratchet, so **not OMEMO**. One
+  `CollabCrypto`, two transports.
+- **The interface of §3 is unaffected.** The spine choice changes which
+  `CollabTransport` carries the data plane, not the call UI.
 
 ---
 
@@ -233,6 +256,9 @@ specific to external calls, from §7.1:
 - The call UI renders controls **only** from live `MeetingCapabilities`; it never
   imitates a control the adapter cannot perform, and it removes lost controls
   immediately when role/capability changes arrive.
+- **Backend exclusivity (§1).** A session runs on exactly one backend family; no code
+  path pairs a `MeetingSession` of one family with a `CollabTransport` of another.
+  XMPP/Jitsi mode and Matrix mode never intermingle within a session.
 
 ---
 
@@ -249,7 +275,7 @@ proof-of-concept — the end state is the native client; no vendor UI ever appea
 | **F2 — XMPP core** | `lib/xmpp/`: connect, SASL (anon + token), MUC join, presence, chat. **Immediately usable standalone** as a channel (§5). | stanza parsers against vectors; integration test against a local `docker-jitsi-meet` |
 | **F3 — Jitsi media** | Jingle + ICE + Colibri2 on `lib/xmpp/`; `MeetingSession` for Jitsi; receive remote tracks into OciDeck tiles; camera/mic uplink; **screen share**. Covers **joining**. | Docker room with a second client; functional test |
 | **F4 — Presenting** | The **slide into the call** as an own video track via `SlideRasterizer` **through the projection boundary** (`AudienceDeck`, §8). Presenter layout (slide large + tiles); presenter-sync over the data plane (§5). Covers **presenting**. | image review of the layout; projection-boundary test |
-| **F5 — Hosting + Matrix backend + E2EE** | Host via `MeetingProviderProfile` (own/public Jitsi, bring-your-own-URL). **MatrixRTC/LiveKit adapter** behind the same `MeetingSession` (ties into the relay phases) → Matrix calls identical to Jitsi calls. Optional media E2EE (SFrame / frame cryptor) — **macOS caveat** (§10). Covers **hosting** on both backends. | host test; security review |
+| **F5 — Hosting + Matrix mode + E2EE** | Host an **XMPP/Jitsi-mode** session on a Jitsi deployment you control (`MeetingProviderProfile`, bring-your-own-URL), *or* a **wholly-Matrix-mode** session (self-encrypted relay + **MatrixRTC/LiveKit adapter** behind the same `MeetingSession`). Per §1 the two never mix; the UI is identical. Optional media E2EE (SFrame / frame cryptor) — **macOS caveat** (§10). Covers **hosting** in either mode. | host test; security review |
 
 Native Jitsi covers both joining and hosting: hosting = point at a Jitsi deployment
 you control. LiveKit/MatrixRTC remains the cleaner backend for a *pure* own SFU
@@ -345,11 +371,12 @@ host; run any crypto in an isolate with static helpers.
 
 ## 10. Open questions (decide in/before F0–F1)
 
-0. **Spine (fundamental, maintainer decision — §5).** One XMPP spine for data and
-   media, or the two-spine split (Matrix relay for data + Jitsi/LiveKit for media)
-   that COLLABORATION.md §6 decided? "Join and host equally" leans single-XMPP; it
-   touches the already-approved relay route and warrants its own chain review. **This
-   decision shapes the whole design** and precedes the rest.
+0. **Spine — DECIDED (2026-08-02): the single XMPP spine.** See §5 and
+   [`ketenkeuring-xmpp-spine.md`](../../assurance/ketenkeuring-xmpp-spine.md) (principled
+   GO). The Matrix relay stays the Matrix-mode spine; the two modes never mix (§1
+   backend exclusivity). Remaining build-conditions are in that chain review: XMPP-lib
+   choice, shared crypto + external review, the exclusivity invariant as a test, and
+   NetGuard on the signalling origin.
 1. **XMPP library** — fork a permissive core (e.g. `moxxmpp`) vs. `lib/xmpp/` from
    scratch. Jingle/Colibri2/Jitsi-presence are net-new either way.
 2. **E2EE on macOS** — `flutter_webrtc` frame cryptor is known to crash on iOS/macOS
