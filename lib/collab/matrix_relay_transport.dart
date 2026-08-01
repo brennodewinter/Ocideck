@@ -43,6 +43,18 @@ import 'matrix_client.dart';
 /// event fail-closed.
 typedef PeerResolver = Future<DevicePublicKeys?> Function(String senderDevice);
 
+/// What [MatrixRelayTransport._tryApply] decided about one op/lock event.
+enum _ApplyOutcome { applied, permanentDrop, retryLater }
+
+/// An op/lock event held back because its key-state was not yet in hand,
+/// carrying how many sync rounds it has already waited (see the backlog cap).
+class _DeferredEvent {
+  _DeferredEvent(this.event, this.rounds);
+
+  final MatrixTimelineEvent event;
+  final int rounds;
+}
+
 /// A [CollabTransport] over an encrypted Matrix room. Construct one per
 /// participant against a shared [roomId]; [crypto] must already hold the session
 /// epoch key (see the P-C scope note above).
@@ -98,6 +110,20 @@ class MatrixRelayTransport implements CollabTransport {
   /// so the reordered op is dropped and the decks diverge (#1040). Matrix has no
   /// numbered append-chain like WebDAV; this queue is the equivalent.
   Future<void> _sendChain = Future<void>.value();
+
+  /// Op/lock events that arrived before the key-state needed to open them — the
+  /// sender's device keys or the epoch key-share — e.g. an authority edit made
+  /// before the joiner was keyed. At an initial sync the timeline op and the
+  /// key-state can land in the same round, and the since-cursor advances past
+  /// the op regardless; without this backlog a valid op would be dropped as an
+  /// "unknown sender" and lost for good, leaving the guest a version behind
+  /// (#1041). Retried in arrival order after each sync once more key-state is
+  /// processed. Bounded, and each entry is dropped fail-closed after
+  /// [_maxDeferralRounds] fruitless retries so a hostile homeserver cannot pin
+  /// memory by replaying undecryptable events.
+  final List<_DeferredEvent> _deferred = [];
+  static const int _maxDeferred = 256;
+  static const int _maxDeferralRounds = 16;
 
   /// The participant id is this device's id — the same value the crypto stamps
   /// into every sealed envelope as `sender_device`, so own-echo suppression and
@@ -190,14 +216,27 @@ class MatrixRelayTransport implements CollabTransport {
     try {
       final result = await _matrix.sync(since: _since);
       _since = result.nextBatch;
+      // Key-state before data. Room state (device keys, authority beacon) and
+      // to-device key-shares are handled first, so a sealed op that depends on
+      // them can be opened in the same round rather than dropped as an unknown
+      // sender while the cursor moves past it (#1041). Op/lock events are set
+      // aside and dispatched after, replaying any earlier backlog first.
+      final data = <MatrixTimelineEvent>[];
       for (final event in result.timeline) {
         if (_disposed) return;
-        await _dispatch(event);
+        if (event.type == opEventType || event.type == lockEventType) {
+          data.add(event);
+        } else {
+          // Room state — device keys, beacon — for the key exchange (P-D). Its
+          // own errors are the handler's.
+          await onSystemEvent?.call(event);
+        }
       }
       for (final event in result.toDevice) {
         if (_disposed) return;
         await onToDevice?.call(event);
       }
+      await _dispatchData(data);
     } on MatrixException catch (e) {
       // Transient server trouble: keep the since token and try next round.
       logWarning('collab.matrix.sync', e);
@@ -206,21 +245,57 @@ class MatrixRelayTransport implements CollabTransport {
     }
   }
 
-  Future<void> _dispatch(MatrixTimelineEvent event) async {
-    if (event.type != opEventType && event.type != lockEventType) {
-      // Not our data plane — hand room state (device keys, beacon) to whoever
-      // registered for it (the key exchange, P-D). Own errors are the handler's.
-      await onSystemEvent?.call(event);
-      return;
+  /// Dispatch op/lock events: the deferred backlog first (so cross-sync order is
+  /// preserved), then the [fresh] ones. An event that still cannot be opened —
+  /// its sender or epoch key not yet in hand — is re-deferred, bounded by count
+  /// and by retry rounds, rather than dropped and lost.
+  Future<void> _dispatchData(List<MatrixTimelineEvent> fresh) async {
+    final backlog = List<_DeferredEvent>.from(_deferred);
+    _deferred.clear();
+    final queue = <MatrixTimelineEvent>[
+      for (final d in backlog) d.event,
+      ...fresh,
+    ];
+    final rounds = {for (final d in backlog) d.event.eventId: d.rounds};
+    for (final event in queue) {
+      if (_disposed) return;
+      if (await _tryApply(event) == _ApplyOutcome.retryLater) {
+        final next = (rounds[event.eventId] ?? 0) + 1;
+        if (next <= _maxDeferralRounds) {
+          _deferred.add(_DeferredEvent(event, next));
+        } else {
+          // Exhausted its retries: a forged event, or key-state that never came.
+          // Drop it fail-closed rather than retry forever (§11).
+          logWarning('collab.matrix.deferred.expired', event.eventId);
+        }
+      }
+    }
+    if (_deferred.length > _maxDeferred) {
+      _deferred.removeRange(0, _deferred.length - _maxDeferred);
+    }
+  }
+
+  /// Try to open and emit one op/lock event. Distinguishes a permanent drop
+  /// (malformed, or our own echo) from a retryable miss (sender not yet known,
+  /// or the sealed envelope not yet openable because the epoch key is still in
+  /// flight). Forged and not-yet-keyed both surface as retryable — they are
+  /// indistinguishable here — so the caller bounds how long they are retried.
+  Future<_ApplyOutcome> _tryApply(MatrixTimelineEvent event) async {
+    final SealedEnvelope sealed;
+    try {
+      sealed = SealedEnvelope.fromContent(event.content);
+    } on Exception catch (e) {
+      logWarning('collab.matrix.malformed', e);
+      return _ApplyOutcome.permanentDrop;
+    }
+    if (sealed.senderDevice == participantId) {
+      return _ApplyOutcome.permanentDrop; // own send
+    }
+    final sender = await _resolver(sealed.senderDevice);
+    if (sender == null) {
+      return _ApplyOutcome.retryLater; // device-state not seen yet
     }
     try {
-      final sealed = SealedEnvelope.fromContent(event.content);
-      if (sealed.senderDevice == participantId) return; // own send
-      final sender = await _resolver(sealed.senderDevice);
-      if (sender == null) {
-        logWarning('collab.matrix.unknownSender', sealed.senderDevice);
-        return;
-      }
       final envelope = await _e2ee.open(
         sealed,
         room: roomId,
@@ -228,11 +303,11 @@ class MatrixRelayTransport implements CollabTransport {
         sender: sender,
       );
       _emit(event.type, envelope);
+      return _ApplyOutcome.applied;
     } on Exception catch (e) {
-      // Malformed/forged/un-openable: drop it fail-closed. One poison event must
-      // not wedge the stream or desync the session (§11). A well-formed peer
-      // never produces one; this fires on corruption or an attack.
-      logWarning('collab.matrix.dispatch', e);
+      // Not-yet-installed epoch key (retry) or a forged/corrupt event (drop).
+      logWarning('collab.matrix.open', e);
+      return _ApplyOutcome.retryLater;
     }
   }
 

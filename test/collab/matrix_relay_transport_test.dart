@@ -239,6 +239,87 @@ void main() {
       expect(peer.session.deck.slides.single.title, 'second');
     },
   );
+
+  test(
+    'an op that arrives before its sender is known is retried, not lost (#1041)',
+    () async {
+      // The initial-sync race: at a joiner's first sync a timeline op can be
+      // delivered before the sender's device-state has registered the sender's
+      // keys, and the since-cursor advances past the op regardless. A follower
+      // that dropped it there would lose the edit forever and stay a version
+      // behind. Two identities sharing epoch 0; the joiner's directory is blind
+      // to the authority until its device-state is "processed", which
+      // `resolvePeer` returning null models.
+      final hs2 = FakeHomeserver()
+        ..addUser('auth', 'pw', userId: '@auth:hs.example')
+        ..addUser('join', 'pw', userId: '@join:hs.example');
+      final authKeys = await _device('auth');
+      final joinKeys = await _device('join');
+      final authCrypto = CollabCrypto(authKeys);
+      final joinCrypto = CollabCrypto(joinKeys);
+      final authPub = await authKeys.publicKeys();
+      final joinPub = await joinKeys.publicKeys();
+      final rk = await authCrypto.rekey([joinPub]);
+      await joinCrypto.installEpochKey(rk.wraps.single, authPub);
+      final dir = {'auth': authPub, 'join': joinPub};
+
+      var knowsAuth = false;
+      Future<DevicePublicKeys?> authResolve(String id) async => dir[id];
+      Future<DevicePublicKeys?> joinResolve(String id) async =>
+          (id == 'auth' && !knowsAuth) ? null : dir[id];
+
+      final authority = await _Party.create(
+        hs2,
+        'auth',
+        'pw',
+        authCrypto,
+        room,
+        authResolve,
+        isAuthority: true,
+      );
+      final joiner = await _Party.create(
+        hs2,
+        'join',
+        'pw',
+        joinCrypto,
+        room,
+        joinResolve,
+        isAuthority: false,
+      );
+      addTearDown(authority.dispose);
+      addTearDown(joiner.dispose);
+      final s = Slide.create(SlideType.bullets).copyWith(title: 'start');
+      authority.startSession(_deckWith(s), isAuthority: true);
+      joiner.startSession(_deckWith(s), isAuthority: false);
+
+      // The authority edits before the joiner can resolve it.
+      await authority.session.submit(
+        SetSlideField(
+          version: 0,
+          authorId: 'auth',
+          slideId: s.id,
+          field: SlideField.title,
+          value: 'early',
+        ),
+      );
+      await _settle();
+
+      // First sync: the op arrives, its sender is unknown, so it is held (not
+      // dropped). The version does not advance yet — but the edit is not lost.
+      await joiner.transport.syncOnce();
+      await _settle();
+      expect(joiner.session.version, 0);
+      expect(joiner.session.deck.slides.single.title, 'start');
+
+      // The device-state is now processed; a further sync (empty timeline)
+      // replays the backlog and the held op finally applies.
+      knowsAuth = true;
+      await joiner.transport.syncOnce();
+      await _settle();
+      expect(joiner.session.version, 1);
+      expect(joiner.session.deck.slides.single.title, 'early');
+    },
+  );
 }
 
 Deck _deckWith(Slide s) => Deck(title: 'deck', slides: [s]);
