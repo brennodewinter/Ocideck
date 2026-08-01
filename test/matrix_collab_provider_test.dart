@@ -9,6 +9,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/collab/collab_participant.dart';
 import 'package:ocideck/collab/matrix_client.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/matrix_settings.dart';
@@ -264,6 +265,77 @@ void main() {
       final received = guestChat.firstWhere((m) => m.text == 'hallo daar');
       expect(received.isSelf, isFalse);
       expect(received.userId, '@host:hs.example');
+
+      await hostN.leave();
+      await guestN.leave();
+    });
+
+    test('the host can pin the guest, and the pin survives a rejoin', () async {
+      final hs = FakeHomeserver()
+        ..addUser('host', 'pw', userId: '@host:hs.example')
+        ..addUser('guest', 'pw', userId: '@guest:hs.example');
+      final hostSlide = Slide.create(SlideType.bullets).copyWith(title: 's');
+      final hostDeckN = deckWith(Deck(title: 'd', slides: [hostSlide]));
+      final hostTab = tabFor(hostDeckN);
+      final hostContainer = containerFor(
+        account: account('@host:hs.example', 'hostdev'),
+        client: await login(hs, 'host'),
+        deckN: hostDeckN,
+        tab: hostTab,
+      );
+      final hostN = hostContainer.read(collabSessionProvider.notifier);
+      await hostN.hostMatrix();
+      await pumpEventQueue();
+      final link = hostContainer.read(collabSessionProvider).inviteLink!;
+
+      final guestDeckN = deckWith(oneSlide('s'));
+      final guestTab = tabFor(guestDeckN);
+      final guestContainer = containerFor(
+        account: account('@guest:hs.example', 'guestdev'),
+        client: await login(hs, 'guest'),
+        deckN: guestDeckN,
+        tab: guestTab,
+      );
+      final guestN = guestContainer.read(collabSessionProvider.notifier);
+      await guestN.joinMatrix(link);
+      await pumpEventQueue();
+      await hostN.debugMatrixSyncNow();
+      await guestN.debugMatrixSyncNow();
+      await pumpEventQueue();
+
+      // The host's own device is listed once (as self), never also as a peer.
+      expect(
+        hostN.matrixParticipants().where((p) => p.deviceId == 'hostdev').length,
+        1,
+      );
+
+      // The guest starts unverified, so the host has an unverified participant.
+      final guest = hostN.matrixParticipants().firstWhere((p) => !p.isSelf);
+      expect(guest.trust, TrustState.unverified);
+      expect(hostN.hasUnverifiedParticipants, isTrue);
+
+      // Pin it: the guest turns verified and the banner condition clears.
+      await hostN.pinParticipant(guest);
+      final pinned = hostN.matrixParticipants().firstWhere((p) => !p.isSelf);
+      expect(pinned.trust, TrustState.verified);
+      expect(hostN.hasUnverifiedParticipants, isFalse);
+
+      await hostN.leave();
+
+      // A fresh session on the same account+device re-hosts and, once the guest
+      // rejoins, the guest is already verified — the pin persisted.
+      await hostN.hostMatrix();
+      await pumpEventQueue();
+      final link2 = hostContainer.read(collabSessionProvider).inviteLink!;
+      await guestN.leave();
+      await guestN.joinMatrix(link2);
+      await pumpEventQueue();
+      await hostN.debugMatrixSyncNow();
+      await guestN.debugMatrixSyncNow();
+      await pumpEventQueue();
+
+      final rejoined = hostN.matrixParticipants().firstWhere((p) => !p.isSelf);
+      expect(rejoined.trust, TrustState.verified);
 
       await hostN.leave();
       await guestN.leave();
