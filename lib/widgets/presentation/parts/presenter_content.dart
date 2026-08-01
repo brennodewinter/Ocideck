@@ -198,7 +198,7 @@ extension _PresenterContent on _FullscreenPresenterState {
     final updated = column == 1
         ? slide.copyWith(bullets2: updatedItems)
         : slide.copyWith(bullets: updatedItems);
-    _rebuild(() => widget.slides[slideIndex] = updated);
+    _rebuild(() => _replaceSlide(widget.slides, slideIndex, updated));
     widget.onSlideChanged?.call(updated);
     if (_dual) {
       audienceChannel
@@ -240,7 +240,7 @@ extension _PresenterContent on _FullscreenPresenterState {
     if (!outcome.changed) return;
     // Het beamervenster rendert vanuit zijn eigen markdown-kopie: dat kanaal is
     // te smal voor een gewijzigd aantal dia's, dus krijgt het de verse reeks.
-    _rebuild(() {});
+    _rebuild(() => invalidateSplitRunLayout(widget.slides));
     if (_dual) {
       _lastSentIndex = null; // dwing een verse positie-sync af na de herbouw
       sendDeckReplaceToAudience(

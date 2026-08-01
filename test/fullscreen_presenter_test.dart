@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/split_run.dart';
 import 'package:ocideck/widgets/presentation/annotation_overlay.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 
@@ -387,12 +388,14 @@ void main() {
     );
     // Groeibare lijst: de presenter voegt de vervolgpagina's er in-place bij.
     final slides = <Slide>[slide];
+    const profile = ThemeProfile();
+    final before = splitRunLayoutIndex(slides, profile, profile.fontFamily);
     await tester.pumpWidget(
       MaterialApp(
         home: FullscreenPresenter(
           slides: slides,
           projectPath: null,
-          themeProfile: const ThemeProfile(),
+          themeProfile: profile,
           initialIndex: 0,
           onSlideSplit: (id) => splitId = id,
         ),
@@ -408,6 +411,11 @@ void main() {
     expect(splitId, slide.id);
     expect(slides.length, greaterThan(1));
     expect(slides.fold<int>(0, (sum, s) => sum + s.bullets.length), 20);
+    expect(
+      splitRunLayoutIndex(slides, profile, profile.fontFamily),
+      isNot(same(before)),
+      reason: 'de in-place live-fix moet de geprimeerde layoutindex vergeten',
+    );
 
     await tester.pumpWidget(const SizedBox());
   });

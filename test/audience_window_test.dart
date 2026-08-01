@@ -372,6 +372,51 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('an in-place audience update invalidates the split-run fit', (
+    tester,
+  ) async {
+    final full = [
+      for (var i = 0; i < 18; i++) '- Een lange volle bullet nummer $i',
+    ].join('\n');
+    final splitDeck =
+        '---\n'
+        'title: Split run\n'
+        '---\n'
+        '# Volle pagina\n\n'
+        '$full\n\n'
+        '---\n\n'
+        '# Vervolg\n'
+        '<!-- ocideck_continue_split: true -->\n\n'
+        '- Kort\n';
+    _mockBridge(tester);
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': splitDeck,
+      'index': 0,
+    });
+    await tester.pumpAndSettle();
+    final before = tester
+        .widget<SlidePreviewWidget>(find.byType(SlidePreviewWidget))
+        .fitScaleOverride;
+
+    // Het venster bewaart dezelfde List<Slide>-identiteit. Zonder expliciete
+    // invalidatie zou de al geprimeerde split-run-index dus de oude volle
+    // eerste pagina blijven gebruiken.
+    await _fromPresenter(tester, 'checklistUpdate', {
+      'slideIndex': 0,
+      'bullets': ['Nu kort'],
+      'bullets2': <String>[],
+    });
+    await tester.pump();
+    final after = tester
+        .widget<SlidePreviewWidget>(find.byType(SlidePreviewWidget))
+        .fitScaleOverride;
+
+    expect(before, isNotNull);
+    expect(after, greaterThan(before!));
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets(
     'replaceDeck vervangt de reeks en springt naar de meegestuurde positie (#914)',
     (tester) async {

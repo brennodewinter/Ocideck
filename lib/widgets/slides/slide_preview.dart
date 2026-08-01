@@ -62,7 +62,7 @@ import '../../services/rich_text_layout.dart';
 // `SlidePreviewWidget.fitScaleOverride`.
 import '../../services/split_run.dart';
 export '../../services/split_run.dart'
-    show sharedSplitFitScale, splitRunMemberScale;
+    show invalidateSplitRunLayout, sharedSplitFitScale, splitRunMemberScale;
 import '../../services/web_asset_store.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/image_focal.dart';

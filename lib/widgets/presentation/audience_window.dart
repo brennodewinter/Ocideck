@@ -223,6 +223,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
             bullets: List<String>.from(m['bullets'] as List? ?? const []),
             bullets2: List<String>.from(m['bullets2'] as List? ?? const []),
           );
+          invalidateSplitRunLayout(_slides);
         });
       case 'tableUpdate':
         final m = Map<String, dynamic>.from(call.arguments as Map);
@@ -239,6 +240,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
             .toList();
         setState(() {
           _slides[i] = _slides[i].copyWith(tableRows: rows);
+          invalidateSplitRunLayout(_slides);
         });
       case 'replaceDeck':
         // Een live-fix tijdens presenteren (#914) kan het aantal dia's

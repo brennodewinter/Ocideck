@@ -1,15 +1,30 @@
+import 'dart:io';
+
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/slide_layout_metrics.dart';
-import 'package:ocideck/widgets/slides/slide_preview.dart';
+import 'package:ocideck/services/split_run.dart';
 
 void main() {
   // Layout measurement uses TextPainter, so the binding must be up.
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  const profile = ThemeProfile();
+  const profile = ThemeProfile(fontFamily: 'Roboto');
   final font = profile.fontFamily;
+
+  setUpAll(() async {
+    for (final (family, path) in const [
+      ('Roboto', 'assets/fonts/Roboto-Variable.ttf'),
+      ('EB Garamond', 'assets/fonts/EBGaramond-Variable.ttf'),
+    ]) {
+      final bytes = File(path).readAsBytesSync();
+      await (FontLoader(
+        family,
+      )..addFont(Future.value(ByteData.view(bytes.buffer)))).load();
+    }
+  });
 
   Slide bullets(List<String> items, {bool continuesSplit = false}) =>
       Slide.create(
@@ -111,5 +126,173 @@ void main() {
         expect(sharedSplitFitScale(slides, 1, profile, font), isNull);
       },
     );
+
+    test('caches each deck, theme and font revision', () {
+      final full = List.generate(
+        14,
+        (i) => 'Een wat langere bullet nummer $i voor een zichtbare meting',
+      );
+      final slides = [
+        bullets(full),
+        bullets(['vervolg'], continuesSplit: true),
+      ];
+      final otherProfile = profile.copyWith(
+        name: 'Andere stijl',
+        logoPath: 'logo.png',
+        logoSize: 384,
+      );
+
+      final first = splitRunLayoutIndex(slides, profile, font);
+      expect(splitRunLayoutIndex(slides, profile, font), same(first));
+
+      final themed = splitRunLayoutIndex(slides, otherProfile, font);
+      expect(themed, isNot(same(first)));
+      expect(
+        themed.fitScaleFor(0),
+        isNot(first.fitScaleFor(0)),
+        reason: 'de grotere logostrook verkleint de beschikbare teksthoogte',
+      );
+      expect(
+        splitRunLayoutIndex(slides, profile, font),
+        same(first),
+        reason: 'terugkeren naar een bekende themarevisie is een cachehit',
+      );
+
+      final otherFont = splitRunLayoutIndex(slides, profile, 'EB Garamond');
+      expect(otherFont, isNot(same(first)));
+      expect(
+        otherFont.fitScaleFor(0),
+        isNot(first.fitScaleFor(0)),
+        reason: 'de geladen fonts hebben aantoonbaar andere tekstmaten',
+      );
+      expect(
+        splitRunLayoutIndex(slides, profile, font),
+        same(first),
+        reason: 'terugkeren naar een bekende fontrevisie is een cachehit',
+      );
+    });
+
+    test('a new deck revision refreshes content and run boundaries', () {
+      final full = List.generate(14, (i) => 'Een lange bullet nummer $i');
+      final slides = [
+        bullets(full),
+        bullets(['kort'], continuesSplit: true),
+      ];
+      final first = splitRunLayoutIndex(slides, profile, font);
+      final firstScale = first.fitScaleFor(0);
+
+      final changedContent = [
+        bullets(['kort']),
+        bullets(['ook kort'], continuesSplit: true),
+      ];
+      final contentIndex = splitRunLayoutIndex(changedContent, profile, font);
+      expect(contentIndex, isNot(same(first)));
+      expect(contentIndex.fitScaleFor(0), isNot(firstScale));
+
+      final changedBoundary = [
+        slides[0],
+        slides[1].copyWith(continuesSplit: false),
+      ];
+      final boundaryIndex = splitRunLayoutIndex(changedBoundary, profile, font);
+      expect(boundaryIndex, isNot(same(first)));
+      expect(boundaryIndex.rangeFor(0), (0, 0));
+      expect(boundaryIndex.fitScaleFor(0), isNull);
+    });
+
+    test('explicit invalidation covers in-place presenter content changes', () {
+      final slides = [
+        bullets(List.generate(12, (i) => 'Lange regel $i')),
+        bullets(['kort'], continuesSplit: true),
+      ];
+      final before = splitRunLayoutIndex(slides, profile, font);
+
+      slides[0] = bullets(['nu kort']);
+      invalidateSplitRunLayout(slides);
+      final after = splitRunLayoutIndex(slides, profile, font);
+
+      expect(after, isNot(same(before)));
+      expect(after.fitScaleFor(0), isNot(before.fitScaleFor(0)));
+    });
+
+    test('explicit invalidation covers an in-place run-boundary change', () {
+      final slides = [
+        bullets(['eerste']),
+        bullets(['vervolg'], continuesSplit: true),
+      ];
+      final before = splitRunLayoutIndex(slides, profile, font);
+      expect(before.rangeFor(0), (0, 1));
+      expect(before.fitScaleFor(0), isNotNull);
+
+      slides[1] = slides[1].copyWith(continuesSplit: false);
+      invalidateSplitRunLayout(slides);
+      final after = splitRunLayoutIndex(slides, profile, font);
+
+      expect(after, isNot(same(before)));
+      expect(after.rangeFor(0), (0, 0));
+      expect(after.fitScaleFor(0), isNull);
+    });
+
+    test('computes boundaries separately for each type and list style', () {
+      final slides = [
+        bullets(['a']),
+        bullets(['a'], continuesSplit: true),
+        bullets([
+          'b',
+        ]).copyWith(listStyle: ListStyle.numbered, continuesSplit: true),
+        bullets([
+          'b',
+        ]).copyWith(listStyle: ListStyle.numbered, continuesSplit: true),
+        Slide.create(SlideType.title),
+      ];
+      var measurements = 0;
+
+      final index = buildSplitRunLayoutIndex(
+        slides,
+        profile,
+        font,
+        measureMember: (_, _, _) {
+          measurements++;
+          return 1 - measurements / 1000;
+        },
+      );
+
+      expect(index.rangeFor(0), (0, 1));
+      expect(index.rangeFor(1), (0, 1));
+      expect(index.rangeFor(2), (2, 3));
+      expect(index.rangeFor(3), (2, 3));
+      expect(index.rangeFor(4), (4, 4));
+      expect(measurements, 4, reason: 'losse en ongeschikte slides meten niet');
+    });
+
+    test('measures a 150-page run once, independent of index lookups', () {
+      final slides = [
+        bullets(['pagina 0']),
+        for (var i = 1; i < 150; i++)
+          bullets(['pagina $i'], continuesSplit: true),
+      ];
+      var measurements = 0;
+
+      final index = buildSplitRunLayoutIndex(
+        slides,
+        profile,
+        font,
+        measureMember: (_, _, _) {
+          measurements++;
+          return 1 - measurements / 1000;
+        },
+      );
+
+      expect(index.rangeFor(0), (0, 149));
+      expect(index.rangeFor(149), (0, 149));
+      expect(measurements, 150, reason: 'één meting per runlid, dus lineair');
+      for (var i = 0; i < slides.length; i++) {
+        index.fitScaleFor(i);
+      }
+      expect(
+        measurements,
+        150,
+        reason: 'alle oppervlakken lezen alleen de index',
+      );
+    });
   });
 }

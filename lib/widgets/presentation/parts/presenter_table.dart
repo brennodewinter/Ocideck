@@ -71,7 +71,7 @@ extension _PresenterTable on _FullscreenPresenterState {
     }
     rows[row][col] = value;
     final updated = slide.copyWith(tableRows: rows);
-    _rebuild(() => widget.slides[slideIndex] = updated);
+    _rebuild(() => _replaceSlide(widget.slides, slideIndex, updated));
     widget.onSlideChanged?.call(updated);
     _pushTableToAudience(slideIndex, updated);
   }
@@ -107,7 +107,7 @@ extension _PresenterTable on _FullscreenPresenterState {
     rows.add(List<String>.filled(colCount, ''));
     final updated = slide.copyWith(tableRows: rows);
     _rebuild(() {
-      widget.slides[slideIndex] = updated;
+      _replaceSlide(widget.slides, slideIndex, updated);
       _tableEditRow = rows.length - 1;
       _tableEditCol = 0;
     });
