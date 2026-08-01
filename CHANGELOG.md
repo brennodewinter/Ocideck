@@ -188,6 +188,13 @@ in Dutch, and it keeps growing on `main` between releases.
   triggerden dit (`FILE_FORMAT.md`, `SBOM.md`); hun kapotte tabellen zijn ook
   hersteld met een kop- en scheidingsregel (idem in het niet-meegeleverde
   ontwerpdocument `OCIWACHT.md`).
+- De authentieke cockpitmeters houden hun schaal en uitlezing nu uit elkaars
+  weg. Bij brede wijzerplaten staan minimum en maximum niet meer op de
+  kleurboog; de thermometer, inclusief waarde, blijft volledig binnen zijn
+  ronde bezel; en de stijg-/daalwaarde gebruikt de vrije linkerhelft in plaats
+  van over de onderste schaal te vallen. De voltmeter/`Signal quality`-indeling
+  was al goed en blijft ongewijzigd. Screenshot en visuele golden zijn opnieuw
+  uit de echte Flutter-renderer opgebouwd.
 - Het instellingenvenster liet niet zien dat er meer stond dan er paste. Met
   alle Uitbreidingen aan telt de zijbalk twaalf tabbladen; op een bescheiden
   venster vielen de laatste onder de vouw, en niets verried dat — de

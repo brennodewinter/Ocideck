@@ -44,11 +44,7 @@ String _startupLanguageCode() {
       );
 }
 
-/// Lees de opgeslagen AI-instellingen uit prefs, of de standaard.
-///
-/// Top-level (geen methode) om dezelfde reden als [_readMatrixAccount]: puur
-/// laadwerk, en [SettingsNotifier] zit aan haar regelplafond. Een onleesbare
-/// waarde degradeert naar de standaardinstellingen.
+/// Lees de opgeslagen AI-instellingen; corrupte data degradeert veilig.
 AiSettings _readAiSettings(SharedPreferences prefs) {
   final aiJson = prefs.getString('aiSettings');
   if (aiJson == null) return const AiSettings();

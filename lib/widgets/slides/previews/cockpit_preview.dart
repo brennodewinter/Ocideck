@@ -550,18 +550,12 @@ class _CockpitInstrumentPainter extends CustomPainter {
       unit: meter.unit,
     );
     if (_authentic) {
-      // A 250°/300° dial ends in the lower corners. Putting the end values at
-      // the generic voltmeter positions writes them directly across the colour
-      // bands; pull only those wide-sweep labels inward. The 180° voltmeter
-      // keeps its existing positions — its end points sit left/right and the
-      // lower row is already clear.
-      final wideSweep = sweep > 220;
-      final scaleX = radius * (wideSweep ? 0.62 : 0.78);
-      final scaleY = radius * (wideSweep ? 0.40 : 0.54);
+      final minLabel = _arcScaleLabel(c, radius, sweep, right: false);
+      final maxLabel = _arcScaleLabel(c, radius, sweep, right: true);
       _text(
         canvas,
         _fmt(meter.min),
-        c + Offset(-scaleX, scaleY),
+        minLabel,
         size.width * 0.032,
         _instrumentMuted,
         anchor: _Anchor.center,
@@ -569,7 +563,7 @@ class _CockpitInstrumentPainter extends CustomPainter {
       _text(
         canvas,
         _fmt(meter.max),
-        c + Offset(scaleX, scaleY),
+        maxLabel,
         size.width * 0.032,
         _instrumentMuted,
         anchor: _Anchor.center,

@@ -6,6 +6,21 @@ part of '../slide_preview.dart';
 /// metertype-geometrie zodat `cockpit_preview.dart` onder de bestandsgrens
 /// blijft en de klassieke schildercode overzichtelijk blijft.
 extension _CockpitInstrumentPainterSupport on _CockpitInstrumentPainter {
+  Offset _arcScaleLabel(
+    Offset center,
+    double radius,
+    double sweep, {
+    required bool right,
+  }) {
+    // A 250°/300° dial ends in the lower corners. Pull those labels inward so
+    // they do not cross the colour bands; the clear lower row of the 180°
+    // voltmeter keeps its existing positions.
+    final wideSweep = sweep > 220;
+    final x = radius * (wideSweep ? 0.62 : 0.78) * (right ? 1 : -1);
+    final y = radius * (wideSweep ? 0.40 : 0.54);
+    return center + Offset(x, y);
+  }
+
   void _authenticFrame(Canvas canvas, Size size) {
     final c = Offset(size.width / 2, size.height / 2);
     final radius = size.shortestSide * 0.465;
