@@ -27,14 +27,6 @@ final gitConnectionsProvider = Provider<List<GitConnection>>(
   (ref) => ref.watch(settingsProvider).connectionsOf<GitConnection>(),
 );
 
-/// De verbinding waarmee de app werkt als er niet is gevraagd te kiezen: de
-/// bovenste bruikbare git-verbinding, of `null`.
-final primaryGitConnectionProvider = Provider<GitConnection?>(
-  (ref) =>
-      ref.watch(settingsProvider).primaryOf(StorageConnectionKind.git)
-          as GitConnection?,
-);
-
 /// De configuratie van één git-verbinding, of `null` als hij niet (meer)
 /// bestaat of half is ingevuld.
 final gitConfigProvider = Provider.family<GitRepoConfig?, String>((
