@@ -9,6 +9,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/storage_connection.dart';
+import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -184,6 +185,10 @@ void main() {
     // het netwerk op te gaan.
     await type(tester, 'http://127.0.0.1:9/deck.md');
     expect(fetchEnabled(tester), isTrue);
+    // Een eerdere, andere openpoging mag deze CORS/netwerkfout niet als een
+    // vol mediabudget laten lezen.
+    container.read(openFailureProvider.notifier).state =
+        OpenFailure.memoryBudgetExceeded;
 
     var reached = false;
     await tester.runAsync(() async {
@@ -210,6 +215,7 @@ void main() {
       find.textContaining('Kon van deze URL geen presentatie ophalen'),
       findsOneWidget,
     );
+    expect(find.textContaining('presentatiemedia is vol'), findsNothing);
     expect(
       container.read(tabsProvider).tabs,
       hasLength(1),

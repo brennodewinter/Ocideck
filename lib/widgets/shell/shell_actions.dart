@@ -224,6 +224,7 @@ Future<void> _importUrlWeb(
   final l10n = context.l10n;
   OpenResult result;
   try {
+    ref.read(openFailureProvider.notifier).state = null;
     result = await ref.read(tabsProvider.notifier).importFromUrlWeb(url);
   } catch (e, s) {
     logError('_importUrlWeb: import failed', e, s);
