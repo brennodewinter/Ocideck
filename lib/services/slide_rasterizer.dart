@@ -44,6 +44,43 @@ class SlideRasterizerNoFrameException implements Exception {
       'de voorgrond.';
 }
 
+/// Bovengrens op de geschatte totale renderbytes van één raster-export.
+///
+/// De rasterizer houdt alle gerenderde PNG's in een lijst vast en verhoogt de
+/// image-cache tot 1 GB; PDF/PPTX-assemblage begint pas als álles gerasteriseerd
+/// is. Honderden hoog-entropische dia's kunnen zo meerdere gigabytes aan renders
+/// tegelijk vasthouden (#1047). Boven dit onderbouwde totaalbudget weigert de
+/// export vóóraf — vóór er ook maar één dia getekend is — met een duidelijke
+/// melding, in plaats van gaandeweg het geheugen uit te putten. De schatting is
+/// een bovengrens: `dia's × breedte × hoogte × 4` (rauwe RGBA per capture; de
+/// PNG is doorgaans kleiner). 4 GiB laat een royaal deck toe en vangt alleen het
+/// pathologische geval.
+const int kMaxRasterExportBytes = 4 * 1024 * 1024 * 1024; // 4 GiB
+
+/// Gegooid wanneer een raster-export [kMaxRasterExportBytes] zou overschrijden.
+/// De UI vertaalt dit via `userFacingError`.
+class RasterExportBudgetExceeded implements Exception {
+  const RasterExportBudgetExceeded({
+    required this.slideCount,
+    required this.estimatedBytes,
+    required this.limitBytes,
+  });
+
+  /// Aantal dia's in de geweigerde export.
+  final int slideCount;
+
+  /// De geschatte totale renderbytes (bovengrens).
+  final int estimatedBytes;
+
+  /// Het plafond ([kMaxRasterExportBytes], tenzij overschreven).
+  final int limitBytes;
+
+  @override
+  String toString() =>
+      'RasterExportBudgetExceeded(slides: $slideCount, '
+      'estimated: $estimatedBytes, limit: $limitBytes)';
+}
+
 /// Renders the exact on-screen slide previews to PNG images so exports look
 /// identical to what the user sees (WYSIWYG).
 ///
@@ -103,9 +140,28 @@ class SlideRasterizer {
     // Injecteerbaar zodat de blokkade-weg toetsbaar is: met de echte 20s zou
     // elke test die hem raakt twintig seconden stilstaan.
     Duration frameTimeout = SlideRasterizer.frameTimeout,
+    // Injecteerbaar zodat de budgetweigering toetsbaar is zonder een deck van
+    // honderden dia's te hoeven bouwen.
+    int maxExportBytes = kMaxRasterExportBytes,
   }) async {
     final slides = audience.slides;
     if (slides.isEmpty) return const [];
+
+    // Weiger vóóraf op een onderbouwd totaalbudget: honderden hoog-entropische
+    // dia's zouden anders gaandeweg gigabytes aan renders vasthouden vóór de
+    // PDF/PPTX-assemblage begint (#1047). De schatting is een bovengrens op de
+    // rauwe capture per dia; hier is nog niets getekend, dus de weigering kost
+    // geen geheugen.
+    final targetHeight = (targetWidth * logicalSize.height / logicalSize.width)
+        .round();
+    final estimatedBytes = slides.length * targetWidth * targetHeight * 4;
+    if (estimatedBytes > maxExportBytes) {
+      throw RasterExportBudgetExceeded(
+        slideCount: slides.length,
+        estimatedBytes: estimatedBytes,
+        limitBytes: maxExportBytes,
+      );
+    }
 
     // Alles wat de render nodig heeft, komt uit het geprojecteerde deck — niet
     // uit los meegegeven velden die per ongeluk van de bron konden komen.
@@ -176,6 +232,7 @@ class SlideRasterizer {
     );
 
     final results = <Uint8List>[];
+    var cancelled = false;
     try {
       overlay.insert(entry);
       // De eerste melding staat vóór het eerste wachten, en dat is opzet.
@@ -201,7 +258,10 @@ class SlideRasterizer {
 
       final numberStarts = numberedListStarts(slides);
       for (var i = 0; i < slides.length; i++) {
-        if (isCancelled?.call() ?? false) break;
+        if (isCancelled?.call() ?? false) {
+          cancelled = true;
+          break;
+        }
         onStage?.call('prepare', i, slides.length);
         hostKey.currentState!.showSlide(
           slides[i],
@@ -227,6 +287,13 @@ class SlideRasterizer {
       entry.remove();
       imageCache.maximumSize = prevMaxSize;
       imageCache.maximumSizeBytes = prevMaxBytes;
+      // Ruim de tijdens de export gedecodeerde afbeeldingen meteen op in plaats
+      // van ze in de (nu weer kleine) cache te laten uitzweven; ze zijn na de
+      // capture niet meer nodig. Bij annulering gaan ook de deels verzamelde
+      // renders eraan, zodat een afgebroken export niets laat rondslingeren.
+      imageCache.clear();
+      imageCache.clearLiveImages();
+      if (cancelled) results.clear();
     }
     return results;
   }

@@ -91,6 +91,7 @@ Future<List<Uint8List>> _rasterize(
   void Function(int done, int total)? onProgress,
   void Function(String phase, int done, int total)? onStage,
   bool Function()? isCancelled,
+  int maxExportBytes = kMaxRasterExportBytes,
 }) async {
   final context = await _hostContext(tester);
   final audience = PrivacyProjection.forAudience(deck);
@@ -106,6 +107,7 @@ Future<List<Uint8List>> _rasterize(
         onProgress: onProgress,
         onStage: onStage,
         isCancelled: isCancelled,
+        maxExportBytes: maxExportBytes,
       ).then(
         (value) => result = value,
         onError: (Object error) => failure = error,
@@ -204,6 +206,53 @@ int _distinctColours(Uint8List rgba) {
 }
 
 void main() {
+  testWidgets(
+    'een export boven het totaalbudget wordt vooraf geweigerd (#1047)',
+    (tester) async {
+      // De budgetweigering staat vóór het inhangen van de diahost en de
+      // precache, dus bij een te krap budget wordt er geen enkele dia getekend
+      // — dat is precies wat het piekgeheugen begrenst. We bewaken hier dus niet
+      // dát de export eindigt, maar dát hij niets rendert.
+      final context = await _hostContext(tester);
+      final audience = PrivacyProjection.forAudience(_deck());
+      final fasen = <String>[];
+      Object? fout;
+      await tester.runAsync(() async {
+        try {
+          await SlideRasterizer.rasterize(
+            context: context,
+            audience: audience,
+            targetWidth: 640,
+            onStage: (fase, _, _) => fasen.add(fase),
+            maxExportBytes: 1024, // veel kleiner dan één capture
+          );
+        } catch (e) {
+          fout = e;
+        }
+      });
+      expect(fout, isA<RasterExportBudgetExceeded>());
+      expect(
+        fasen,
+        isEmpty,
+        reason: 'geen enkele dia mag gerenderd zijn bij een budgetweigering',
+      );
+    },
+  );
+
+  testWidgets('precies op het totaalbudget rendert de export nog (#1047)', (
+    tester,
+  ) async {
+    final deck = _deck();
+    // De schatting is een bovengrens: dia's × breedte × hoogte × 4 (16:9).
+    final estimate = deck.slides.length * 640 * 360 * 4;
+    final images = await _rasterize(tester, deck, maxExportBytes: estimate);
+    expect(
+      images,
+      hasLength(deck.slides.length),
+      reason: 'op de grens (niet erover) hoort de export gewoon door te gaan',
+    );
+  });
+
   testWidgets('levert per dia decodeerbare PNG-bytes in 16:9', (tester) async {
     final deck = _deck();
     final images = await _rasterize(tester, deck);
