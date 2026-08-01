@@ -24,7 +24,11 @@
 > [`ketenkeuring-flutter-webrtc.md`](../../assurance/ketenkeuring-flutter-webrtc.md) and
 > the spine [`ketenkeuring-xmpp-spine.md`](../../assurance/ketenkeuring-xmpp-spine.md).
 > The **spine decision (§5) is taken** (2026-08-02): the single XMPP spine, with
-> **backend exclusivity** (§1).
+> **backend exclusivity** (§1). The maintainer also gave **GO to build** (2026-08-02),
+> with the sub-choices in §10: `lib/xmpp/` from scratch, and media E2EE uniform across
+> platforms until the upstream fix. The dependencies still land only after the
+> build-conditions; **F1** (the provider-neutral interface + a fake adapter, no
+> dependency) is under way.
 
 ---
 
@@ -377,11 +381,16 @@ host; run any crypto in an isolate with static helpers.
    backend exclusivity). Remaining build-conditions are in that chain review: XMPP-lib
    choice, shared crypto + external review, the exclusivity invariant as a test, and
    NetGuard on the signalling origin.
-1. **XMPP library** — fork a permissive core (e.g. `moxxmpp`) vs. `lib/xmpp/` from
-   scratch. Jingle/Colibri2/Jitsi-presence are net-new either way.
-2. **E2EE on macOS** — `flutter_webrtc` frame cryptor is known to crash on iOS/macOS
-   (OciDeck's primary target). Is media E2EE v1-blocking, or does it land on
-   Linux/Windows/web first?
+1. **XMPP library — DECIDED (2026-08-02): `lib/xmpp/` from scratch** (no fork),
+   preferring own code over a dependency and keeping the trust/maintenance surface
+   smallest. Jingle/Colibri2/Jitsi-presence are net-new regardless.
+2. **Media E2EE — DECIDED (2026-08-02): uniform across all platforms until the upstream
+   fix lands.** The `flutter_webrtc` frame cryptor crashes on iOS/macOS; rather than a
+   per-platform split, media E2EE stays uniformly off (with honest `MeetingPreflight`
+   disclosure everywhere) and flips on everywhere once the fix is merged **and** released
+   **and** verified on Apple hardware (a two-peer call on a Mac + two devices with a
+   forced decrypt failure). Upstream fix in flight: `flutter-webrtc/flutter-webrtc#2135`
+   (a Darwin state-delivery/lifetime fix; not yet merged or live-verified).
 3. **Web parity** — how much media on the web build (CSP, `flutter_webrtc` web
    maturity)? (COLLABORATION.md open question 6.)
 4. **Signalling depth for v1** — simulcast/SVC/lastN/dominant-speaker as a later
