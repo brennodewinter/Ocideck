@@ -224,6 +224,15 @@ in Dutch, and it keeps growing on `main` between releases.
   dat op de importgrens aansluit, met een duidelijke gebruikersmelding vóór
   geheugenuitputting; een geslaagd pakket is daardoor door dezelfde versie
   herimporteerbaar (#1046).
+- Export/geheugen: de self-contained HTML-export had wel een grens per
+  afbeelding, maar geen grens over het geheel. Alle unieke beelden werden als
+  base64 verzameld, ge-JSON-encodeerd en tot één HTML-document samengevoegd —
+  twintig toegestane GIF's van 64 MiB leverden zo ~1,67 GiB base64 op, op web
+  nog op de hoofd-isolate. Er is nu een expliciet cumulatief bytebudget
+  (`kMaxHtmlEmbedTotalBytes`, 512 MiB, aansluitend op de overige
+  export-plafonds) dat vóór geheugenuitputting faalt met een duidelijke
+  gebruikersmelding; hergebruikte beelden tellen door de bestaande deduplicatie
+  één keer mee (#1045).
 - Samenwerken (Matrix): een account zonder apparaat-id (`deviceId`) gold ten
   onrechte als geconfigureerd. Omdat de sleuteluitwisseling de device-id als
   state-key en als bestemming voor de to-device-keyshares gebruikt, kon een

@@ -1776,6 +1776,8 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'Das Paket isch z gross (maximal 512 MB). Susch cha OciDeck s nachhär nüme öffne. Bruuch weniger oder chlinneri Bilder, Videos oder Audiodateie.',
+  'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
+      'D Bilder sind zäme z gross für ei einzeligi HTML-Datei (maximal 512 MB). Bruuch weniger oder chlyneri Bilder, oder exportier as PDF oder Paket.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Mach d Präsentation zerscht fertig und speicher si; nachher chasch d Herkunft signiere.',
   'Herkomst ondertekend.': 'Herkunft signiert.',

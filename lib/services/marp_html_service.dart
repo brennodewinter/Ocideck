@@ -67,6 +67,34 @@ part 'marp_html/marp_html_service_markup.dart';
 /// mee te exporteren, hoort bij de laag die het bestandssysteem kent.
 typedef HtmlImageResolver = Future<String?> Function(String source);
 
+/// Cumulatief plafond op de ingesloten `data:`-URI-bytes van één self-contained
+/// HTML-export. Elke afbeelding heeft al een grens per stuk, maar de som was
+/// onbegrensd: twintig toegestane GIF's van 64 MiB bouwen samen ~1,67 GiB base64
+/// op — op web nog op de hoofd-isolate, vóór het einddocument als String bestaat
+/// (#1045). Boven dit plafond faalt de export met een duidelijke melding in
+/// plaats van het geheugen uit te putten. 512 MiB sluit aan op de overige
+/// export-plafonds (`FileService.maxPackageBytes`).
+const int kMaxHtmlEmbedTotalBytes = 512 * 1024 * 1024; // 512 MiB
+
+/// Gegooid wanneer de ingesloten afbeeldingen samen [kMaxHtmlEmbedTotalBytes]
+/// zouden overschrijden. De UI vertaalt dit via `userFacingError`.
+class HtmlEmbedBudgetExceeded implements Exception {
+  const HtmlEmbedBudgetExceeded({
+    required this.usedBytes,
+    required this.limitBytes,
+  });
+
+  /// Bytes al gereserveerd voor ingesloten afbeeldingen toen de grens viel.
+  final int usedBytes;
+
+  /// Het cumulatieve plafond ([kMaxHtmlEmbedTotalBytes], tenzij overschreven).
+  final int limitBytes;
+
+  @override
+  String toString() =>
+      'HtmlEmbedBudgetExceeded(used: $usedBytes, limit: $limitBytes)';
+}
+
 /// The third-party notices for one HTML export: a licence banner per inlined
 /// script (keyed by npm package name) and the collapsible block that carries the
 /// full licence texts.
@@ -147,6 +175,7 @@ class MarpHtmlService {
     ExportDocumentMetadata? metadata,
     String fallbackTitle = 'Presentatie',
     HtmlImageResolver? embedImage,
+    int maxEmbedBytes = kMaxHtmlEmbedTotalBytes,
   }) async {
     // De zes bundel-assets en de themed CSS zijn onafhankelijk; sequentieel
     // wachten stapelde hun laadtijden op.
@@ -185,7 +214,11 @@ class MarpHtmlService {
       List<int>.generate(16, (_) => rng.nextInt(256)),
     );
 
-    final embedded = await _embedImages(deckMarkdown, embedImage);
+    final embedded = await _embedImages(
+      deckMarkdown,
+      embedImage,
+      maxEmbedBytes,
+    );
     // De ondertekening komt van het deck mee (het zegelblok staat sinds 0.1.0
     // niet meer in de front matter). Een `.md` van vóór die verhuizing draagt
     // hem nog wél in de kop, en die blijft leesbaar: [signatureFields] is het
@@ -194,40 +227,12 @@ class MarpHtmlService {
     final signature = docMeta.signature != null
         ? signatureFieldsOf(docMeta.signature!, sealedAt: docMeta.sealedAt)
         : signatureFields(embedded.markdown);
-    final exportY01 = _y01FromExportMarkdown(embedded.markdown);
-    final sections = StringBuffer();
-    for (final slide in marpSlides(embedded.markdown)) {
-      // De keten van omzettingen, van binnen naar buiten. Elke stap laat een
-      // dia die haar niet aangaat onveranderd, dus de volgorde is vrij; het
-      // rapportagetype gaat als eerste omdat het de hele body vervangt.
-      var body = renderReportingSlide(slide, theme: theme);
-      body = renderMatrixSlide(body, theme: theme);
-      body = renderCanvasSlide(body, theme: theme);
-      body = renderTreeSlide(body, theme: theme);
-      body = renderFlowSlide(body, theme: theme);
-      body = renderChartBlocks(body, theme: theme, y01: exportY01);
-      body = renderQuestionBlocks(body);
-      body = renderMediaRedacted(body);
-      body = renderVideoNotice(body);
-      body = renderTimelineBlocks(body);
-      body = renderSignOffBlock(
-        body,
-        signature,
-        sealedAt: signature['ocideck_seal_at'] ?? '',
-      );
-      final renderedBlocks = renderCockpitBlocks(
-        body,
-        theme: theme,
-        scheme: cockpitColorScheme,
-      );
-      final markerClass = _bulletMarkerSectionClass(slide);
-      final titleColorStyle = _titleColorSectionStyle(slide);
-      sections
-        ..write('<section class="slide$markerClass"$titleColorStyle>')
-        ..write('<script type="text/markdown">')
-        ..write(_guardMarkdown(renderedBlocks))
-        ..write('</script></section>');
-    }
+    final sections = _renderSections(
+      embedded.markdown,
+      theme: theme,
+      cockpitColorScheme: cockpitColorScheme,
+      signature: signature,
+    );
 
     // Elke ingesloten bundel krijgt een licentiebanner, ook als de geminificeerde
     // upstream-build er geen heeft. marked, highlight.js en DOMPurify dragen er

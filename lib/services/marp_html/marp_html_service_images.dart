@@ -35,6 +35,7 @@ const _imagePlaceholder = '#ocideck-img-';
 Future<({String markdown, List<String> dataUris})> _embedImages(
   String markdown,
   HtmlImageResolver? resolve,
+  int maxEmbedBytes,
 ) async {
   const unchanged = <String>[];
   if (resolve == null) return (markdown: markdown, dataUris: unchanged);
@@ -45,12 +46,24 @@ Future<({String markdown, List<String> dataUris})> _embedImages(
 
   final index = <String, int>{};
   final dataUris = <String>[];
+  // Cumulatief budget over de héle export. [sources] is een set, dus elke unieke
+  // afbeelding telt precies één keer mee — een achtergrond op veertig dia's
+  // belast het budget niet veertig keer (#1045). De grens valt vóór het volgende
+  // beeld wordt opgehaald, zodat het geheugen niet eerst volloopt.
+  var embeddedBytes = 0;
   for (final source in sources) {
     // Een bron die al een data:-URI is (of een lege verwijzing) hoeft niets:
     // die reist per definitie al mee.
     if (source.isEmpty || source.startsWith('data:')) continue;
     final uri = await resolve(source);
     if (uri == null) continue;
+    embeddedBytes += uri.length;
+    if (embeddedBytes > maxEmbedBytes) {
+      throw HtmlEmbedBudgetExceeded(
+        usedBytes: embeddedBytes,
+        limitBytes: maxEmbedBytes,
+      );
+    }
     index[source] = dataUris.length;
     dataUris.add(uri);
   }
