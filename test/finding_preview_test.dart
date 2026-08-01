@@ -43,6 +43,16 @@ Slide _finding(String body) => Slide.create(
   SlideType.finding,
 ).copyWith(customMarkdown: body, findingId: 'F-03');
 
+double _meterPosition(WidgetTester tester) {
+  final meterBox = tester.getRect(
+    find.byKey(const ValueKey('finding-cvss-meter')),
+  );
+  final markerCenter = tester.getCenter(
+    find.byKey(const ValueKey('finding-cvss-meter-marker')),
+  );
+  return (markerCenter.dx - meterBox.left) / meterBox.width;
+}
+
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
@@ -92,6 +102,9 @@ void main() {
     expect(find.text('High'), findsOneWidget);
     expect(find.textContaining('Basis 9.3'), findsOneWidget);
     expect(find.textContaining('Context'), findsOneWidget);
+    // De schaal hoort bij de primaire contextscore (8,9), niet bij de
+    // daarnaast getoonde basisscore (9,3).
+    expect(_meterPosition(tester), closeTo(0.89, 0.015));
   });
 
   testWidgets('a resolved-after-retest finding shows a retest badge', (
@@ -108,24 +121,29 @@ void main() {
     expect(find.textContaining('Opgelost na hertest'), findsOneWidget);
   });
 
-  testWidgets('a finding shows CVSS as text without a painted meter (#1059)', (
+  testWidgets('CVSS score stays outside its visual meter (#1059)', (
     tester,
   ) async {
     await tester.pumpWidget(_host(_finding(_headerBody)));
     await tester.pump();
 
     expect(tester.takeException(), isNull);
-    // De score is gewone, selecteerbare widgettekst en zit niet langer
-    // verstopt in een decoratieve cockpitmeter.
+    // De score blijft gewone widgettekst. De schaal is een aparte visuele
+    // meter en mag de waarde dus niet opnieuw in zichzelf schilderen.
     expect(find.text('CVSS'), findsOneWidget);
     expect(find.text('9.3'), findsOneWidget);
     expect(find.text('Critical'), findsOneWidget);
     final scoreCard = find.byKey(const ValueKey('finding-cvss-score-card'));
+    final meter = find.byKey(const ValueKey('finding-cvss-meter'));
+    final marker = find.byKey(const ValueKey('finding-cvss-meter-marker'));
     expect(scoreCard, findsOneWidget);
+    expect(meter, findsOneWidget);
+    expect(marker, findsOneWidget);
     expect(
-      find.descendant(of: scoreCard, matching: find.byType(CustomPaint)),
+      find.descendant(of: meter, matching: find.text('9.3')),
       findsNothing,
     );
+    expect(_meterPosition(tester), closeTo(0.93, 0.015));
   });
 
   testWidgets('a finding without a CVSS shows no score card', (tester) async {
@@ -136,6 +154,26 @@ void main() {
     expect(tester.takeException(), isNull);
     expect(find.text('CVSS'), findsNothing);
     expect(find.byKey(const ValueKey('finding-cvss-score-card')), findsNothing);
+    expect(find.byKey(const ValueKey('finding-cvss-meter')), findsNothing);
+    expect(
+      find.byKey(const ValueKey('finding-cvss-meter-marker')),
+      findsNothing,
+    );
+  });
+
+  testWidgets('the CVSS meter exposes its score and range to assistive tech', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+
+    await tester.pumpWidget(_host(_finding(_headerBody)));
+    await tester.pump();
+
+    expect(
+      tester.getSemantics(find.byKey(const ValueKey('finding-cvss-meter'))),
+      isSemantics(label: 'CVSS', value: '9.3 / 10 · Critical'),
+    );
+    semantics.dispose();
   });
 
   testWidgets('a finding linked to a test shows the test id chip (#8)', (
