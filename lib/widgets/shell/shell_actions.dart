@@ -43,7 +43,15 @@ extension _DropActions on _AppShellState {
       final ext = p.extension(file.name.toLowerCase());
       if (ext == '.md' || ext == '.ocideck' || ext == '.zip') {
         final bytes = await file.readAsBytes();
-        await tabs.openDeckFromBytes(bytes, file.name);
+        final result = await tabs.openDeckFromBytes(bytes, file.name);
+        if (mounted) {
+          _reportOpenFailure(
+            ScaffoldMessenger.of(context),
+            context.l10n,
+            result,
+            reason: ref.read(openFailureProvider),
+          );
+        }
       } else if (_AppShellState._imageExtensions.contains(ext)) {
         final bytes = await file.readAsBytes();
         if (bytes.isEmpty ||
@@ -230,6 +238,11 @@ Future<void> _importUrlWeb(
       result == OpenResult.passwordCancelled) {
     return;
   }
+  final reason = ref.read(openFailureProvider);
+  if (reason == OpenFailure.memoryBudgetExceeded) {
+    _reportOpenFailure(messenger, l10n, result, reason: reason);
+    return;
+  }
   // Op web is de meest voorkomende oorzaak geen tikfout maar CORS: de
   // browser mag alleen lezen van servers die dat expliciet toestaan.
   messenger.showSnackBar(
@@ -278,6 +291,7 @@ Future<void> _openFromGit(
   final l10n = context.l10n;
   try {
     final notifier = ref.read(tabsProvider.notifier);
+    ref.read(openFailureProvider.notifier).state = null;
     final result = native != null
         ? await notifier.openDeckFromGitNative(
             native,
@@ -294,7 +308,12 @@ Future<void> _openFromGit(
             branch: config.defaultBranch,
             connectionId: chosen0.id,
           );
-    _reportOpenFailure(messenger, l10n, result);
+    _reportOpenFailure(
+      messenger,
+      l10n,
+      result,
+      reason: ref.read(openFailureProvider),
+    );
   } on GitForgeException catch (e) {
     // De uitzondering draagt al een uitlegbare tekst; die is voor de gebruiker
     // bedoeld, dus toon hem in plaats van een eigen samenvatting.

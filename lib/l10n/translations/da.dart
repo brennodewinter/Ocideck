@@ -1770,6 +1770,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Webhukommelsen til præsentationsmedier er fuld (maks. 256 MB). Gem først dit arbejde som en .ocideck-fil for at undgå datatab. Brug derefter færre eller mindre billeder, videoer eller lydfiler, luk andre decks, eller genindlæs uden at åbne andre decks.',
   'Ongeldige vraag': 'Ugyldigt spørgsmål',
   'Herstelsleutel': 'Gendannelsesnøgle',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':

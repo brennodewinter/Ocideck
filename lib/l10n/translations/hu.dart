@@ -1775,6 +1775,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'A prezentációs média webes memóriája megtelt (legfeljebb 256 MB). Az adatvesztés elkerüléséhez először mentse a munkáját .ocideck-fájlként. Ezután használjon kevesebb vagy kisebb képet, videót vagy hangfájlt, zárja be a többi bemutatót, vagy töltsön újra más bemutatók megnyitása nélkül.',
   'Ongeldige vraag': 'Érvénytelen kérdés',
   'Herstelsleutel': 'Helyreállítási kulcs',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':

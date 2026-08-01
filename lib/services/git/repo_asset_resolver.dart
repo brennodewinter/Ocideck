@@ -96,13 +96,12 @@ Future<Deck> resolveRepoAssetsToMem(
       }
       final path = GitRepoLayout.assetPathOf(reference);
       final name = path == null ? 'asset' : p.posix.basename(path);
-      if (!supportsLocalProjectFolders) {
-        pendingWebAssets[reference] = (bytes: bytes, name: name);
-        return null;
-      }
-      final mem = WebAssetStore.put(bytes, name: name);
-      memFor[reference] = mem;
-      return mem;
+      // Eerst alle asynchrone forge-reads afronden; daarna materialiseert de
+      // synchrone atomic-scope hieronder alles-of-niets. Ook desktop gebruikt
+      // voor afbeeldingen `mem:` (zonder productieplafond), zodat dezelfde
+      // route in VM-tests bewijsbaar blijft.
+      pendingWebAssets[reference] = (bytes: bytes, name: name);
+      return null;
     } on GitForgeException catch (e) {
       logWarning('resolveRepoAssetsToMem: asset onbereikbaar ($sourceName)', e);
       return null;

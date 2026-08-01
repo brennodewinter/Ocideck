@@ -21,6 +21,18 @@ void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
   group('userFacingError', () {
+    test('webassetbudget benoemt alle media en veiligstellen eerst', () {
+      final message = webAssetBudgetMessage(l10n);
+      expect(message, contains('presentatiemedia'));
+      expect(message, contains('afbeeldingen'));
+      expect(message, contains('video'));
+      expect(message, contains('audio'));
+      expect(
+        message.indexOf('Sla je werk eerst op'),
+        lessThan(message.indexOf('sluit andere decks')),
+      );
+    });
+
     test('maps filesystem permission errors to a "no write rights" hint', () {
       for (final code in [1, 13]) {
         final e = FileSystemException('denied', '/x', OSError('EACCES', code));

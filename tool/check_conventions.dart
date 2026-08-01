@@ -125,10 +125,9 @@ const Map<String, int> fileSizeBaseline = {
   // +1: the collaboration_provider import (matrixCollabActive) gating the
   // realtime-collab palette commands on the module.
   // +1 (#978): the collab_verify_banner import for the device-verification banner.
-  // #1053: de web-dropafhandeling verhuisde naar shell_actions.dart, waardoor
-  // de bibliotheekkop alle nieuwe samenwerking-imports behoudt maar de file zelf
-  // weer onder het lagere plafond valt.
-  'lib/widgets/app_shell.dart': 830,
+  // #1053 verplaatste de web-dropafhandeling naar shell_actions.dart; #1078
+  // voegde daarna de cockpit-integratie op main toe.
+  'lib/widgets/app_shell.dart': 831,
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
   // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
   // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped

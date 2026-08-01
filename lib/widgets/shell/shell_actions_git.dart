@@ -413,6 +413,7 @@ Future<void> _showGitVersions(BuildContext context, WidgetRef ref) async {
   final chosen = action.open;
   if (chosen == null) return;
   try {
+    ref.read(openFailureProvider.notifier).state = null;
     final result = await ref
         .read(tabsProvider.notifier)
         .openVersionFromGit(
@@ -421,7 +422,12 @@ Future<void> _showGitVersions(BuildContext context, WidgetRef ref) async {
           deckDir: origin.deckDir,
           tag: chosen.name,
         );
-    _reportOpenFailure(messenger, l10n, result);
+    _reportOpenFailure(
+      messenger,
+      l10n,
+      result,
+      reason: ref.read(openFailureProvider),
+    );
   } on GitForgeException catch (e) {
     logWarning('shell_actions_git: forge-aanroep mislukt', e);
     messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
@@ -450,25 +456,30 @@ Future<void> _compareVersions(
     final beforeTag = olderFirst ? pair.a : pair.b;
     final afterTag = olderFirst ? pair.b : pair.a;
 
+    ref.read(openFailureProvider.notifier).state = null;
     final before = await notifier.readVersionDeck(
       forge,
       config: origin.config,
       deckDir: origin.deckDir,
       tag: beforeTag.name,
     );
+    final beforeReason = ref.read(openFailureProvider);
+    if (!context.mounted) return;
+    if (before.deck == null) {
+      _reportOpenFailure(messenger, l10n, before.failure, reason: beforeReason);
+      return;
+    }
+    ref.read(openFailureProvider.notifier).state = null;
     final after = await notifier.readVersionDeck(
       forge,
       config: origin.config,
       deckDir: origin.deckDir,
       tag: afterTag.name,
     );
+    final afterReason = ref.read(openFailureProvider);
     if (!context.mounted) return;
-    if (before.deck == null || after.deck == null) {
-      _reportOpenFailure(
-        messenger,
-        l10n,
-        before.deck == null ? before.failure : after.failure,
-      );
+    if (after.deck == null) {
+      _reportOpenFailure(messenger, l10n, after.failure, reason: afterReason);
       return;
     }
 

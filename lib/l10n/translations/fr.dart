@@ -730,6 +730,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'La mémoire web réservée aux médias de présentation est pleine (256 Mo maximum). Enregistrez d’abord votre travail dans un fichier .ocideck pour éviter toute perte de données. Utilisez ensuite moins d’images, de vidéos ou de fichiers audio, ou des fichiers plus petits, fermez les autres decks ou rechargez sans ouvrir d’autres decks.',
   'Ongeldige vraag': 'Question non valide',
   'Herstelsleutel': 'Clé de récupération',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':

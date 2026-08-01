@@ -1806,6 +1806,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Tá cuimhne gréasáin na meán láithreoireachta lán (uasmhéid 256 MB). Sábháil do chuid oibre mar chomhad .ocideck ar dtús chun caillteanas sonraí a chosc. Ansin úsáid níos lú íomhánna, físeán nó comhad fuaime, nó cinn níos lú, dún deiceanna eile, nó athlódáil gan deiceanna eile a oscailt.',
   'Ongeldige vraag': 'Ceist neamhbhailí',
   'Herstelsleutel': 'Eochair aisghabhála',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':

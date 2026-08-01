@@ -1770,6 +1770,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Prezentāciju multivides tīmekļa atmiņa ir pilna (ne vairāk kā 256 MB). Vispirms saglabājiet darbu kā .ocideck failu, lai novērstu datu zudumu. Pēc tam izmantojiet mazāk vai mazākus attēlus, video vai audio failus, aizveriet citas prezentācijas vai pārlādējiet, neatverot citas prezentācijas.',
   'Ongeldige vraag': 'Nederīgs jautājums',
   'Herstelsleutel': 'Atkopšanas atslēga',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':

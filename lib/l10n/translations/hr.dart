@@ -1777,6 +1777,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Web-memorija za prezentacijske medije je puna (najviše 256 MB). Najprije spremite svoj rad kao datoteku .ocideck kako biste spriječili gubitak podataka. Zatim upotrijebite manje ili manje slike, videozapise ili zvučne datoteke, zatvorite druge prezentacije ili ponovno učitajte bez otvaranja drugih prezentacija.',
   'Ongeldige vraag': 'Nevaljano pitanje',
   'Herstelsleutel': 'Ključ za oporavak',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':

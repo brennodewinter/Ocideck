@@ -731,6 +731,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'It webûnthâld foar presintaasjemedia is fol (maksimaal 256 MB). Bewarje dyn wurk earst as in .ocideck-bestân om gegevensferlies foar te kommen. Brûk dêrnei minder of lytsere ôfbyldingen, fideo’s of audiobestannen, slút oare decks of laad opnij sûnder oare decks te iepenjen.',
   'Ongeldige vraag': 'Unjildige fraach',
   'Herstelsleutel': 'Herstelkaai',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':

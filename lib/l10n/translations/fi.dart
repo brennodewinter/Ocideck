@@ -1771,6 +1771,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Esitysmedian verkkosovellusmuisti on täynnä (enintään 256 Mt). Tallenna työsi ensin .ocideck-tiedostona tietojen menetyksen estämiseksi. Käytä sen jälkeen vähemmän tai pienempiä kuvia, videoita tai äänitiedostoja, sulje muut esitykset tai lataa uudelleen avaamatta muita esityksiä.',
   'Ongeldige vraag': 'Virheellinen kysymys',
   'Herstelsleutel': 'Palautusavain',
   'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':

@@ -47,7 +47,7 @@ String userFacingError(AppLocalizations l10n, Object error) {
 /// Handelingsperspectief bij het appbrede webassetbudget. Eerst veiligstellen:
 /// herladen maakt wel geheugen vrij, maar wist ook alle niet-opgeslagen media.
 String webAssetBudgetMessage(AppLocalizations l10n) => l10n.d(
-  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.',
+  'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.',
 );
 
 /// Begrijpelijke melding waarom een presentatie-import (pptx/odp/key) mislukte.

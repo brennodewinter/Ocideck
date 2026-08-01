@@ -33,7 +33,8 @@ optimisation.
 - Project assets live in dedicated subfolders (`images/`, `data/`, `logos/`,
   `themes/`); assets outside the project directory are refused on the
   render/present/export paths (containment, not just convention).
-- On the web build, images are held in an in-memory store (`mem:` scheme,
+- On the web build, presentation media (images, video and audio) are held in an
+  in-memory store (`mem:` scheme,
   `lib/services/web_asset_store.dart`) — so large decks consume browser tab
   memory rather than disk. The store has one **256 MiB** budget for the whole
   app/page, including every open deck and its undo/redo history plus the slide
