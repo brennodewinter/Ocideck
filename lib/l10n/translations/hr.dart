@@ -1777,6 +1777,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bestaande identiteit vervangen?': 'Zamijeniti postojeći identitet?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Ovaj uređaj već ima identitet za suradnju. Vraćanje ga zamjenjuje identitetom iz ključa. Jeste li spremili ključ za oporavak trenutačnog identiteta? Bez sigurnosne kopije izgubit ćete ga.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Web-memorija za prezentacijske medije je puna (najviše 256 MB). Najprije spremite svoj rad kao datoteku .ocideck kako biste spriječili gubitak podataka. Zatim upotrijebite manje ili manje slike, videozapise ili zvučne datoteke, zatvorite druge prezentacije ili ponovno učitajte bez otvaranja drugih prezentacija.',
   'Ongeldige vraag': 'Nevaljano pitanje',

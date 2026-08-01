@@ -1771,6 +1771,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bestaande identiteit vervangen?': 'Ganti identitas yang ada?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Perangkat ini sudah memiliki identitas kolaborasi. Memulihkan akan menggantinya dengan identitas dari kunci. Apakah Anda menyimpan kunci pemulihan untuk identitas saat ini? Tanpa cadangan, Anda akan kehilangannya.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Memori web untuk media presentasi penuh (maksimum 256 MB). Simpan pekerjaan Anda terlebih dahulu sebagai berkas .ocideck untuk mencegah kehilangan data. Setelah itu gunakan gambar, video, atau berkas audio yang lebih sedikit atau lebih kecil, tutup deck lain, atau muat ulang tanpa membuka deck lain.',
   'Ongeldige vraag': 'Pertanyaan tidak valid',

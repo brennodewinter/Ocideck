@@ -1778,6 +1778,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bestaande identiteit vervangen?': 'Pakeisti esamą tapatybę?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Šis įrenginys jau turi bendradarbiavimo tapatybę. Atkūrimas ją pakeis tapatybe iš rakto. Ar išsaugojote dabartinės tapatybės atkūrimo raktą? Be atsarginės kopijos ją prarasite.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Pateikties medijai skirta žiniatinklio atmintis pilna (daugiausia 256 MB). Pirmiausia įrašykite darbą kaip .ocideck failą, kad neprarastumėte duomenų. Tada naudokite mažiau arba mažesnių vaizdų, vaizdo įrašų ar garso failų, užverkite kitas pateiktis arba įkelkite iš naujo neatverdami kitų pateikčių.',
   'Ongeldige vraag': 'Netinkamas klausimas',

@@ -1775,6 +1775,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bestaande identiteit vervangen?': 'Lecseréli a meglévő identitást?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Ezen az eszközön már van együttműködési identitás. A visszaállítás lecseréli a kulcsban lévő identitásra. Mentetted a jelenlegi identitás helyreállítási kulcsát? Biztonsági másolat nélkül elveszíted.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'A prezentációs média webes memóriája megtelt (legfeljebb 256 MB). Az adatvesztés elkerüléséhez először mentse a munkáját .ocideck-fájlként. Ezután használjon kevesebb vagy kisebb képet, videót vagy hangfájlt, zárja be a többi bemutatót, vagy töltsön újra más bemutatók megnyitása nélkül.',
   'Ongeldige vraag': 'Érvénytelen kérdés',

@@ -2748,6 +2748,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Bestaande identiteit vervangen?': 'Mevcut kimlik değiştirilsin mi?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Bu cihazın zaten bir işbirliği kimliği var. Geri yükleme, onu anahtardaki kimlikle değiştirir. Mevcut kimlik için bir kurtarma anahtarı kaydettiniz mi? Yedek olmadan onu kaybedersiniz.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Sunum medyası için web belleği dolu (en fazla 256 MB). Veri kaybını önlemek için önce çalışmanızı bir .ocideck dosyası olarak kaydedin. Ardından daha az veya daha küçük görsel, video ya da ses dosyası kullanın, diğer sunumları kapatın veya başka sunumları açmadan yeniden yükleyin.',
   'Ongeldige vraag': 'Geçersiz soru',

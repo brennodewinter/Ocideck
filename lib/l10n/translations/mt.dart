@@ -1793,6 +1793,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bestaande identiteit vervangen?': 'Tibdel l-identità eżistenti?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Dan l-apparat diġà għandu identità ta\' kollaborazzjoni. Ir-restawr jibdilha bl-identità mill-muftieħ. Ħżint ċavetta ta\' rkupru għall-identità attwali? Mingħajr backup titlifha.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Il-memorja tal-web għall-midja tal-preżentazzjoni hija mimlija (massimu ta’ 256 MB). L-ewwel issejvja x-xogħol tiegħek bħala fajl .ocideck biex tevita t-telf tad-data. Imbagħad uża inqas immaġnijiet, vidjows jew fajls tal-awdjo, jew fajls iżgħar, agħlaq decks oħra, jew erġa’ tella’ mingħajr ma tiftaħ decks oħra.',
   'Ongeldige vraag': 'Mistoqsija invalida',

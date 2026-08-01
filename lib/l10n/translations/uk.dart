@@ -1788,6 +1788,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bestaande identiteit vervangen?': 'Замінити наявну особу?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Цей пристрій уже має особу для спільної роботи. Відновлення замінить її особою з ключа. Ви зберегли ключ відновлення для поточної особи? Без резервної копії ви її втратите.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Вебпам’ять для медіа презентації заповнена (максимум 256 МБ). Спочатку збережіть роботу як файл .ocideck, щоб запобігти втраті даних. Потім використайте менше або менші зображення, відео чи аудіофайли, закрийте інші колоди або перезавантажте сторінку, не відкриваючи інших колод.',
   'Ongeldige vraag': 'Недійсне запитання',

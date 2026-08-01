@@ -1746,6 +1746,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bestaande identiteit vervangen?': 'qonwI\' DaH tu\'lu\'bogh DanaghmoH\'a\'?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'naDev De\'wI\'vam qonwI\' tu\'lu\'. qonwI\' choHDI\', naghvo\' qonwI\' choH. DaH qonwI\'vetlh choHmeH naghvam Dapolpu\'\'a\'? naghvam Dapolbe\'chugh, qonwI\' Daghor.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'much De’ lIwvaD De’wI’ QulmeH qawHaq teblu’ (256 MB ’oH veH’e’). De’ Dachbe’meH, wa’DIch .ocideck De’ QaywI’ rur Qu’lIj pol. GhIq nagh, HaSta pagh wab De’ QaywI’ puS pagh mach lo’, latlh muchmey SoQmoH, pagh latlh muchmey poSmoHbe’taHvIS chu’qa’.',
   'Ongeldige vraag': 'yu\'vam lughbe\'',

@@ -1770,6 +1770,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bestaande identiteit vervangen?': 'Aizstāt esošo identitāti?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Šai ierīcei jau ir sadarbības identitāte. Atjaunošana to aizstāj ar atslēgā ietverto identitāti. Vai saglabājāt pašreizējās identitātes atkopšanas atslēgu? Bez dublējuma jūs to zaudēsiet.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Prezentāciju multivides tīmekļa atmiņa ir pilna (ne vairāk kā 256 MB). Vispirms saglabājiet darbu kā .ocideck failu, lai novērstu datu zudumu. Pēc tam izmantojiet mazāk vai mazākus attēlus, video vai audio failus, aizveriet citas prezentācijas vai pārlādējiet, neatverot citas prezentācijas.',
   'Ongeldige vraag': 'Nederīgs jautājums',

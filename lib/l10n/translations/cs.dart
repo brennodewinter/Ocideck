@@ -1774,6 +1774,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Bestaande identiteit vervangen?': 'Nahradit stávající identitu?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Toto zařízení už má identitu pro spolupráci. Obnovení ji nahradí identitou z klíče. Uložili jste obnovovací klíč pro současnou identitu? Bez zálohy o ni přijdete.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Webová paměť pro prezentační média je plná (maximálně 256 MB). Nejprve uložte svou práci jako soubor .ocideck, abyste předešli ztrátě dat. Poté použijte méně nebo menší obrázky, videa či zvukové soubory, zavřete ostatní prezentace nebo načtěte stránku znovu bez otevření dalších prezentací.',
   'Ongeldige vraag': 'Neplatná otázka',

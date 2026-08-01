@@ -290,6 +290,78 @@ void main() {
       expect(seeds.deviceId, 'DEV-NEW');
     });
 
+    testWidgets(
+      'restoring over an existing identity asks first, then replaces',
+      (tester) async {
+        form.homeserver.text = 'https://hs.example';
+        form.userId.text = '@u:hs.example';
+        form.deviceId.text = 'DEV1';
+        // Mint an identity first, so a restore would overwrite it.
+        await loadOrCreateDeviceKeys(
+          secretStore: secrets,
+          homeserver: 'https://hs.example',
+          userId: '@u:hs.example',
+          deviceId: 'DEV1',
+        );
+        await show(tester);
+
+        final ed = [for (var i = 0; i < 32; i++) 9];
+        final exported = encodeRecoveryKey(ed, [
+          for (var i = 0; i < 32; i++) 3,
+        ]);
+
+        await tester.tap(find.text('Identiteit herstellen'));
+        await tester.pumpAndSettle();
+        // The overwrite confirmation appears before the key prompt.
+        expect(find.text('Bestaande identiteit vervangen?'), findsOneWidget);
+        await tester.tap(find.text('Vervangen'));
+        await tester.pumpAndSettle();
+
+        await tester.enterText(find.byType(TextField).last, exported);
+        await tester.tap(find.text('Herstellen'));
+        await tester.pumpAndSettle();
+        expect(find.text('Identiteit hersteld.'), findsOneWidget);
+        final seeds = await readDeviceSeeds(
+          secretStore: secrets,
+          homeserver: 'https://hs.example',
+          userId: '@u:hs.example',
+        );
+        expect(seeds!.ed25519Seed, ed);
+      },
+    );
+
+    testWidgets('cancelling the overwrite keeps the existing identity', (
+      tester,
+    ) async {
+      form.homeserver.text = 'https://hs.example';
+      form.userId.text = '@u:hs.example';
+      form.deviceId.text = 'DEV1';
+      final original = await loadOrCreateDeviceKeys(
+        secretStore: secrets,
+        homeserver: 'https://hs.example',
+        userId: '@u:hs.example',
+        deviceId: 'DEV1',
+      );
+      final originalKey = (await original.publicKeys()).identityKey;
+      await show(tester);
+
+      await tester.tap(find.text('Identiteit herstellen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Bestaande identiteit vervangen?'), findsOneWidget);
+      await tester.tap(find.text('Annuleren'));
+      await tester.pumpAndSettle();
+
+      // No key prompt appeared, and the identity is untouched.
+      expect(find.text('Herstellen'), findsNothing);
+      final seeds = await readDeviceSeeds(
+        secretStore: secrets,
+        homeserver: 'https://hs.example',
+        userId: '@u:hs.example',
+      );
+      final still = await seeds!.toDeviceKeys();
+      expect((await still.publicKeys()).identityKey, originalKey);
+    });
+
     testWidgets('a mistyped key shows a plain checksum message', (
       tester,
     ) async {

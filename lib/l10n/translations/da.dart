@@ -1770,6 +1770,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bestaande identiteit vervangen?': 'Erstat eksisterende identitet?',
+  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
+      'Denne enhed har allerede en samarbejdsidentitet. Gendannelse erstatter den med identiteten fra nøglen. Har du gemt en gendannelsesnøgle for den nuværende identitet? Uden en sikkerhedskopi mister du den.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Webhukommelsen til præsentationsmedier er fuld (maks. 256 MB). Gem først dit arbejde som en .ocideck-fil for at undgå datatab. Brug derefter færre eller mindre billeder, videoer eller lydfiler, luk andre decks, eller genindlæs uden at åbne andre decks.',
   'Ongeldige vraag': 'Ugyldigt spørgsmål',
