@@ -359,7 +359,7 @@ void main() {
     expect(stages, containsAll(['precache', 'prepare', 'render', 'done']));
   });
 
-  testWidgets('afbreken stopt en geeft een onvolledige lijst terug', (
+  testWidgets('afbreken stopt en ruimt de deels verzamelde renders op', (
     tester,
   ) async {
     final deck = _deck();
@@ -373,12 +373,10 @@ void main() {
       isCancelled: () => rendered >= 1,
     );
 
-    expect(images, hasLength(1));
-    expect(
-      images.length,
-      lessThan(deck.slides.length),
-      reason: 'de aanroeper hoort een onvolledige lijst te herkennen',
-    );
+    // Een afgebroken export laat niets rondslingeren: de partiële renders zijn
+    // opgeruimd, dus de aanroeper krijgt een lege lijst i.p.v. gigabytes aan
+    // half werk (#1047).
+    expect(images, isEmpty);
   });
 
   testWidgets('een deck zonder dias levert niets op', (tester) async {
