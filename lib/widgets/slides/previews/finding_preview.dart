@@ -266,7 +266,7 @@ class _FindingPreview extends StatelessWidget {
               ],
             ),
             SizedBox(height: w * 0.012),
-            _cvssMeter(cvss, severity, textColor),
+            _cvssMeter(cvss, severity, textColor, context.l10n.d('CVSS')),
             SizedBox(height: w * 0.002),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -281,11 +281,16 @@ class _FindingPreview extends StatelessWidget {
     );
   }
 
-  Widget _cvssMeter(Cvss4 cvss, Color severity, Color textColor) {
+  Widget _cvssMeter(
+    Cvss4 cvss,
+    Color severity,
+    Color textColor,
+    String semanticsLabel,
+  ) {
     final position = (cvss.score / 10).clamp(0.0, 1.0);
     final markerSize = w * 0.018;
     return Semantics(
-      label: 'CVSS',
+      label: semanticsLabel,
       value: '${cvss.score.toStringAsFixed(1)} / 10 · ${cvss.severity.label}',
       child: ExcludeSemantics(
         child: SizedBox(
