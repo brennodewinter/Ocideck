@@ -26,14 +26,39 @@ void main() {
     expect(back.pinnedCertSha256, '');
   });
 
-  test('isConfigured needs both a homeserver and a user id', () {
+  test('isConfigured needs a homeserver, a user id and a device id', () {
     expect(server.isConfigured, isTrue);
     expect(
-      const MatrixServer(homeserverUrl: 'https://hs', userId: '').isConfigured,
+      const MatrixServer(
+        homeserverUrl: 'https://hs',
+        userId: '',
+        deviceId: 'D',
+      ).isConfigured,
       isFalse,
     );
     expect(
-      const MatrixServer(homeserverUrl: '', userId: '@a:hs').isConfigured,
+      const MatrixServer(
+        homeserverUrl: '',
+        userId: '@a:hs',
+        deviceId: 'D',
+      ).isConfigured,
+      isFalse,
+    );
+    // An empty or whitespace-only device id leaves the key exchange without a
+    // valid state-key / keyshare destination, so it must not count as ready.
+    expect(
+      const MatrixServer(
+        homeserverUrl: 'https://hs',
+        userId: '@a:hs',
+      ).isConfigured,
+      isFalse,
+    );
+    expect(
+      const MatrixServer(
+        homeserverUrl: 'https://hs',
+        userId: '@a:hs',
+        deviceId: '   ',
+      ).isConfigured,
       isFalse,
     );
   });

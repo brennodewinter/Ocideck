@@ -136,6 +136,19 @@ void main() {
       addTearDown(container.dispose);
       expect(await container.read(matrixClientProvider.future), isNull);
     });
+
+    test('is null when the account has no device id (#1043)', () async {
+      // An account without a device id is not usable for the key exchange, so
+      // the provider must not resolve a client — otherwise a session could start
+      // that silently never keys its co-authors.
+      final container = ProviderContainer(
+        overrides: [
+          matrixAccountProvider.overrideWithValue(account('@u:hs.example', '')),
+        ],
+      );
+      addTearDown(container.dispose);
+      expect(await container.read(matrixClientProvider.future), isNull);
+    });
   });
 
   group('CollabSessionNotifier — Matrix', () {

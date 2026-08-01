@@ -41,9 +41,14 @@ class MatrixServer {
     this.pinnedCertSha256 = '',
   });
 
-  /// Ready to use once a homeserver and a user id are set.
+  /// Ready to use once a homeserver, a user id and a device id are set. The
+  /// device id is not optional: [MatrixKeyExchange] uses it as the state-key and
+  /// as the to-device destination for keyshares, so an empty one silently leaves
+  /// co-authors unkeyed (see #1043).
   bool get isConfigured =>
-      homeserverUrl.trim().isNotEmpty && userId.trim().isNotEmpty;
+      homeserverUrl.trim().isNotEmpty &&
+      userId.trim().isNotEmpty &&
+      deviceId.trim().isNotEmpty;
 
   /// The parsed homeserver origin, or null when [homeserverUrl] is unparseable.
   Uri? get origin {
