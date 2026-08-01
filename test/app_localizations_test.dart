@@ -13,6 +13,10 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  // Het chatpaneel: het Engels houdt het leenwoord 'Chat', maar andere talen
+  // vertalen het wél (Grieks Συνομιλία, Hongaars Csevegés, Sloveens Klepet, …),
+  // dus alleen op de Engelse witte lijst — niet op unchangedInAllLanguages.
+  'Chat',
   'CVSS',
   'https://matrix.to/#/…',
   'https://matrix.example.org',

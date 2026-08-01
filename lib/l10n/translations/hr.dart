@@ -1777,6 +1777,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Chat': 'Razgovor',
+  'Chat openen': 'Otvori razgovor',
+  'Chat sluiten': 'Zatvori razgovor',
+  'Bericht…': 'Poruka…',
+  'Versturen': 'Pošalji',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Još nema poruka. Reci nešto svojim suautorima.',
   'Deelnemers verifiëren': 'Provjeri sudionike',
   '(dit apparaat)': '(ovaj uređaj)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

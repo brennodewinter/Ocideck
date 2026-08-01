@@ -1788,6 +1788,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Chat': 'Чат',
+  'Chat openen': 'Відкрити чат',
+  'Chat sluiten': 'Закрити чат',
+  'Bericht…': 'Повідомлення…',
+  'Versturen': 'Надіслати',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Повідомлень ще немає. Напишіть щось своїм співавторам.',
   'Deelnemers verifiëren': 'Перевірити учасників',
   '(dit apparaat)': '(цей пристрій)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

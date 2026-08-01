@@ -1788,6 +1788,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Chat': 'Chat',
+  'Chat openen': 'Deschide chatul',
+  'Chat sluiten': 'Închide chatul',
+  'Bericht…': 'Mesaj…',
+  'Versturen': 'Trimite',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Încă nu există mesaje. Spune ceva coautorilor tăi.',
   'Deelnemers verifiëren': 'Verifică participanții',
   '(dit apparaat)': '(acest dispozitiv)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

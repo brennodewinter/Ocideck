@@ -47,6 +47,7 @@ void main() {
       client: hostClient,
       crypto: hostCrypto,
       ownKeys: hostPub,
+      ownUserId: '@host:hs.example',
       roomId: room,
       deck: Deck(title: 'deck', slides: [hostSlide]),
     );
@@ -62,6 +63,7 @@ void main() {
       client: guestClient,
       crypto: guestCrypto,
       ownKeys: guestPub,
+      ownUserId: '@guest:hs.example',
       roomId: room,
       localDeck: guestLocal,
     );
@@ -121,6 +123,7 @@ void main() {
       client: hostClient,
       crypto: hostCrypto,
       ownKeys: hostPub,
+      ownUserId: '@host:hs.example',
       roomId: room,
       deck: Deck(title: 'deck', slides: [Slide.create(SlideType.bullets)]),
     );
@@ -128,6 +131,7 @@ void main() {
       client: guestClient,
       crypto: guestCrypto,
       ownKeys: guestPub,
+      ownUserId: '@guest:hs.example',
       roomId: room,
       localDeck: Deck(title: 'deck', slides: [Slide.create(SlideType.bullets)]),
     );

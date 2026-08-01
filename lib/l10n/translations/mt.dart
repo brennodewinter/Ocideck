@@ -1793,6 +1793,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Chat': 'Chat',
+  'Chat openen': 'Iftaħ iċ-chat',
+  'Chat sluiten': 'Agħlaq iċ-chat',
+  'Bericht…': 'Messaġġ…',
+  'Versturen': 'Ibgħat',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Għad m\'hemm l-ebda messaġġ. Għid xi ħaġa lill-koawturi tiegħek.',
   'Deelnemers verifiëren': 'Verifika l-parteċipanti',
   '(dit apparaat)': '(dan l-apparat)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

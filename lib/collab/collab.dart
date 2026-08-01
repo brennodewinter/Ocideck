@@ -21,6 +21,7 @@ export 'collab_transport.dart';
 export 'deck_op.dart';
 export 'matrix_collab_launch.dart';
 export 'matrix_invite.dart';
+export 'matrix_chat.dart';
 export 'matrix_client.dart';
 export 'matrix_http_transport.dart';
 export 'matrix_key_exchange.dart';

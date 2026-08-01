@@ -1800,6 +1800,13 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Chat': 'Conversa',
+  'Chat openen': 'Abrir conversa',
+  'Chat sluiten': 'Fechar conversa',
+  'Bericht…': 'Mensagem…',
+  'Versturen': 'Enviar',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Ainda não há mensagens. Diz algo aos teus coautores.',
   'Deelnemers verifiëren': 'Verificar participantes',
   '(dit apparaat)': '(este dispositivo)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

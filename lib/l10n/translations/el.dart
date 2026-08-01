@@ -1798,6 +1798,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Chat': 'Συνομιλία',
+  'Chat openen': 'Άνοιγμα συνομιλίας',
+  'Chat sluiten': 'Κλείσιμο συνομιλίας',
+  'Bericht…': 'Μήνυμα…',
+  'Versturen': 'Αποστολή',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Δεν υπάρχουν ακόμη μηνύματα. Πες κάτι στους συν-συντάκτες σου.',
   'Deelnemers verifiëren': 'Επαλήθευση συμμετεχόντων',
   '(dit apparaat)': '(αυτή η συσκευή)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

@@ -41,6 +41,7 @@ class CollabSessionState {
     this.inviteLink,
     this.isMatrix = false,
     this.presence = const [],
+    this.chatMessages = const [],
   });
 
   final CollabPhase phase;
@@ -71,6 +72,10 @@ class CollabSessionState {
   /// Updated as peers move; empty outside an active Matrix session.
   final List<PeerPresence> presence;
 
+  /// The session chat, oldest first (§6, Matrix only). Grows as messages arrive
+  /// and are sent; empty outside an active Matrix session.
+  final List<ChatMessage> chatMessages;
+
   bool get isActive => phase == CollabPhase.active;
   bool get isConnecting => phase == CollabPhase.connecting;
 
@@ -88,6 +93,7 @@ class CollabSessionState {
     String? inviteLink,
     bool? isMatrix,
     List<PeerPresence>? presence,
+    List<ChatMessage>? chatMessages,
   }) => CollabSessionState(
     phase: phase ?? this.phase,
     role: role ?? this.role,
@@ -96,6 +102,7 @@ class CollabSessionState {
     inviteLink: inviteLink ?? this.inviteLink,
     isMatrix: isMatrix ?? this.isMatrix,
     presence: presence ?? this.presence,
+    chatMessages: chatMessages ?? this.chatMessages,
   );
 }
 
@@ -316,6 +323,7 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
         isMatrix: true,
       );
       _wirePresence(launch, deckNotifier);
+      _wireChat(launch);
     } on TimeoutException {
       await _teardown();
       if (!_disposed) {
@@ -352,6 +360,23 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
     _presenceSub = _ref.read(editorProvider.notifier).stream.listen((editor) {
       announceCurrent();
     });
+  }
+
+  /// Reflect the session chat into the state as it grows (§6). Seeds from
+  /// whatever already arrived before this callback was wired.
+  void _wireChat(MatrixCollabLaunch launch) {
+    void refresh() {
+      if (_disposed) return;
+      state = state.copyWith(chatMessages: launch.chatMessages);
+    }
+
+    refresh();
+    launch.onChatChanged = refresh;
+  }
+
+  /// Send a chat message to the active Matrix session (§6). No-op otherwise.
+  Future<void> sendChatMessage(String text) async {
+    await _matrixLaunch?.sendChat(text);
   }
 
   /// Drive one Matrix sync round now, so a test can advance the session without
@@ -453,6 +478,11 @@ class CollabSessionNotifier extends StateNotifier<CollabSessionState> {
     super.dispose();
   }
 }
+
+/// Whether the collaboration chat panel is open. App-wide (one tab's session is
+/// in view at a time); toggled from the command palette, shown only while a
+/// Matrix session runs.
+final collabChatOpenProvider = StateProvider<bool>((ref) => false);
 
 /// The per-tab collaboration session. Overridden in `app_shell.dart`'s
 /// `_tabScope`; the root is an idle, tab-less notifier.

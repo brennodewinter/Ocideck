@@ -130,6 +130,7 @@ import 'shell/openkat_import_action.dart';
 import 'shell/presentation_import_action.dart';
 import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
+import 'panels/collab_chat_panel.dart';
 import 'panels/slide_list_panel.dart';
 import 'privacy_badge.dart';
 import 'presentation/fullscreen_presenter.dart';

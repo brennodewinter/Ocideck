@@ -54,6 +54,7 @@ Future<MatrixCollabHost> hostMatrixCollab({
     client: client,
     crypto: device.crypto,
     ownKeys: device.publicKeys,
+    ownUserId: account.userId,
     roomId: roomId,
     deck: deck,
   );
@@ -86,6 +87,7 @@ Future<MatrixCollabLaunch> joinMatrixCollab({
     client: client,
     crypto: device.crypto,
     ownKeys: device.publicKeys,
+    ownUserId: account.userId,
     roomId: roomId,
     localDeck: localDeck,
   );

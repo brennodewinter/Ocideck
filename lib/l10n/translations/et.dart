@@ -1762,6 +1762,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Chat': 'Vestlus',
+  'Chat openen': 'Ava vestlus',
+  'Chat sluiten': 'Sulge vestlus',
+  'Bericht…': 'Sõnum…',
+  'Versturen': 'Saada',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Sõnumeid veel pole. Ütle oma kaasautoritele midagi.',
   'Deelnemers verifiëren': 'Kinnita osalejad',
   '(dit apparaat)': '(see seade)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

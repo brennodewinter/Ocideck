@@ -1746,6 +1746,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Chat': 'ja\'chuq',
+  'Chat openen': 'ja\'chuq yIpoSmoH',
+  'Chat sluiten': 'ja\'chuq yISoQmoH',
+  'Bericht…': 'QIn…',
+  'Versturen': 'yIngeH',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'QIn tu\'lu\'be\'. latlh ghItlhwI\'pu\'lI\' vay\' tIja\'.',
   'Deelnemers verifiëren': 'tay\' vumwI\'pu\' tIngu\'',
   '(dit apparaat)': '(jan vam)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

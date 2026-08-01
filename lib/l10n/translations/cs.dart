@@ -1774,6 +1774,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Chat': 'Chat',
+  'Chat openen': 'Otevřít chat',
+  'Chat sluiten': 'Zavřít chat',
+  'Bericht…': 'Zpráva…',
+  'Versturen': 'Odeslat',
+  'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
+      'Zatím žádné zprávy. Řekni něco svým spoluautorům.',
   'Deelnemers verifiëren': 'Ověřit účastníky',
   '(dit apparaat)': '(toto zařízení)',
   'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komen ze overeen, dan werk je met de echte apparaten en heeft niemand ertussen gezeten. Wijken ze af, verbreek dan de samenwerking.':

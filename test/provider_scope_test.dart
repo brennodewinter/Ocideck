@@ -37,6 +37,11 @@ void main() {
         // dan de detectie zelf. Per tab overriden zou het model per tab opnieuw
         // inlezen zonder dat er iets tab-specifieks aan is.
         'imageFaceScannerProvider',
+        // De chat-open-vlag is bewust app-globaal (er is één actief tabblad in
+        // beeld); hij leest het deck niet. Woont in dezelfde file als
+        // collabSessionProvider, dat het deck wél leest en per tab wordt
+        // overriden.
+        'collabChatOpenProvider',
       };
 
       final appShell = File('lib/widgets/app_shell.dart').readAsStringSync();
