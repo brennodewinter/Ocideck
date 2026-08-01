@@ -1791,6 +1791,8 @@ const _dutchSourceAddLv = <String, String>{
       'Šī neizskatās pēc derīgas atkopšanas atslēgas.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Šī atkopšanas atslēga ir no jaunākas OciDeck versijas.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Attēlu tīmekļa atmiņa ir pilna (ne vairāk kā 256 MB). Vispirms saglabājiet darbu kā .ocideck failu, lai novērstu datu zudumu. Pēc tam izmantojiet mazāk attēlu vai mazākus attēlus, aizveriet citas prezentācijas vai pārlādējiet, neatverot citas prezentācijas.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Attēliem paredzētā tīmekļa atmiņa ir pilna (ne vairāk kā 256 MB). Saglabājiet darbu kā .ocideck failu un pārlādējiet lapu, pirms pievienojat citus attēlus.',
   'Realtime samenwerken': 'Sadarbība reāllaikā',

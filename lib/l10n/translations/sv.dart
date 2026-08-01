@@ -1791,6 +1791,8 @@ const _dutchSourceAddSv = <String, String>{
       'Detta ser inte ut som en giltig återställningsnyckel.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Den här återställningsnyckeln kommer från en nyare version av OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Webbminnet för bilder är fullt (högst 256 MB). Spara först ditt arbete som en .ocideck-fil för att förhindra dataförlust. Använd sedan färre eller mindre bilder, stäng andra bildspel eller läs in på nytt utan att öppna andra bildspel.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Webbminnet för bilder är fullt (högst 256 MB). Spara arbetet som en .ocideck-fil och läs in sidan igen innan du lägger till fler bilder.',
   'Realtime samenwerken': 'Samarbete i realtid',

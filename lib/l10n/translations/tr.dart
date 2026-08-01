@@ -2768,6 +2768,8 @@ const _dutchSourceAddTr = <String, String>{
       'Bu geçerli bir kurtarma anahtarına benzemiyor.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Bu kurtarma anahtarı OciDeck\'in daha yeni bir sürümünden geliyor.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Görseller için web belleği dolu (en fazla 256 MB). Veri kaybını önlemek için önce çalışmanızı bir .ocideck dosyası olarak kaydedin. Ardından daha az veya daha küçük görsel kullanın, diğer sunumları kapatın ya da başka sunumları açmadan yeniden yükleyin.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Görseller için web belleği dolu (en fazla 256 MB). Daha fazla görsel eklemeden önce çalışmanızı bir .ocideck dosyası olarak kaydedin ve sayfayı yeniden yükleyin.',
   'Realtime samenwerken': 'Gerçek zamanlı iş birliği',

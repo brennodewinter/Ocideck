@@ -1809,6 +1809,8 @@ const _dutchSourceAddRo = <String, String>{
       'Aceasta nu pare o cheie de recuperare validă.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Această cheie de recuperare provine dintr-o versiune mai nouă de OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Memoria web pentru imagini este plină (maximum 256 MB). Salvați mai întâi lucrul ca fișier .ocideck pentru a preveni pierderea datelor. Apoi utilizați mai puține imagini sau imagini mai mici, închideți celelalte prezentări ori reîncărcați fără a deschide alte prezentări.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Memoria web pentru imagini este plină (maximum 256 MB). Salvați lucrarea ca fișier .ocideck și reîncărcați pagina înainte de a adăuga alte imagini.',
   'Realtime samenwerken': 'Colaborare în timp real',

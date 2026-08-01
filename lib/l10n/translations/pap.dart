@@ -751,6 +751,8 @@ const _dutchSourceAddPap = {
       'Esaki no ta parse un yabi di rekuperashon válido.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'E yabi di rekuperashon aki ta bini di un vershon mas nobo di OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'E memoria web pa imágen ta yen (máksimo 256 MB). Warda bo trabou promé komo un archivo .ocideck pa evita pèrdida di dato. Despues usa ménos imágen òf imágen mas chikí, sera otro decks òf karga di nobo sin habri otro decks.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'E memoria web pa imágenen ta yen (máksimo 256 MB). Warda bo trabou komo un fail .ocideck i karga e página di nobo promé ku bo agregá mas imágenen.',
   'Realtime samenwerken': 'Kolaborashon na tempu real',

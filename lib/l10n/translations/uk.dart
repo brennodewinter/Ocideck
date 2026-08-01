@@ -1809,6 +1809,8 @@ const _dutchSourceAddUk = <String, String>{
       'Це не схоже на дійсний ключ відновлення.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Цей ключ відновлення походить із новішої версії OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Вебпам’ять для зображень заповнена (максимум 256 МБ). Спочатку збережіть роботу як файл .ocideck, щоб запобігти втраті даних. Потім використайте менше зображень або зображення меншого розміру, закрийте інші колоди чи перезавантажте сторінку, не відкриваючи інших колод.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Вебпам’ять для зображень заповнена (максимум 256 МБ). Збережіть роботу як файл .ocideck і перезавантажте сторінку, перш ніж додавати інші зображення.',
   'Realtime samenwerken': 'Співпраця в реальному часі',

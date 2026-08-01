@@ -1804,6 +1804,8 @@ const _dutchSourceAddPl = <String, String>{
       'To nie wygląda na prawidłowy klucz odzyskiwania.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Ten klucz odzyskiwania pochodzi z nowszej wersji OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Pamięć internetowa na obrazy jest pełna (maksymalnie 256 MB). Najpierw zapisz pracę jako plik .ocideck, aby zapobiec utracie danych. Następnie użyj mniejszej liczby obrazów lub mniejszych obrazów, zamknij inne talie albo przeładuj stronę bez otwierania innych talii.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Pamięć internetowa na obrazy jest pełna (maksymalnie 256 MB). Zapisz pracę jako plik .ocideck i odśwież stronę przed dodaniem kolejnych obrazów.',
   'Realtime samenwerken': 'Współpraca w czasie rzeczywistym',

@@ -1814,6 +1814,8 @@ const _dutchSourceAddBg = <String, String>{
       'Това не изглежда като валиден ключ за възстановяване.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Този ключ за възстановяване е от по-нова версия на OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Уеб паметта за изображения е пълна (максимум 256 MB). Първо запазете работата си като .ocideck файл, за да предотвратите загуба на данни. След това използвайте по-малко или по-малки изображения, затворете другите презентации или презаредете, без да отваряте други презентации.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Уеб паметта за изображения е пълна (максимум 256 MB). Запазете работата си като файл .ocideck и презаредете страницата, преди да добавите още изображения.',
   'Realtime samenwerken': 'Съвместна работа в реално време',

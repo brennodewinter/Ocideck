@@ -1827,6 +1827,8 @@ const _dutchSourceAddGa = <String, String>{
       'Ní cosúil gur eochair aisghabhála bhailí é seo.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Tagann an eochair aisghabhála seo ó leagan níos nuaí de OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Tá cuimhne gréasáin na n-íomhánna lán (uasmhéid 256 MB). Sábháil do chuid oibre mar chomhad .ocideck ar dtús chun caillteanas sonraí a chosc. Ansin úsáid níos lú íomhánna nó íomhánna níos lú, dún deiceanna eile, nó athlódáil gan deiceanna eile a oscailt.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Tá an chuimhne ghréasáin d’íomhánna lán (uasmhéid 256 MB). Sábháil do chuid oibre mar chomhad .ocideck agus athlódáil an leathanach sula gcuireann tú tuilleadh íomhánna leis.',
   'Realtime samenwerken': 'Comhoibriú fíor-ama',

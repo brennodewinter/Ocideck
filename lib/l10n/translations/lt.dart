@@ -1799,6 +1799,8 @@ const _dutchSourceAddLt = <String, String>{
       'Tai nepanašu į galiojantį atkūrimo raktą.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Šis atkūrimo raktas yra iš naujesnės OciDeck versijos.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Vaizdams skirta žiniatinklio atmintis pilna (daugiausia 256 MB). Pirmiausia įrašykite darbą kaip .ocideck failą, kad neprarastumėte duomenų. Tada naudokite mažiau arba mažesnių vaizdų, užverkite kitas pateiktis arba įkelkite iš naujo neatverdami kitų pateikčių.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Vaizdams skirta žiniatinklio atmintis pilna (daugiausia 256 MB). Įrašykite darbą kaip .ocideck failą ir prieš pridėdami daugiau vaizdų iš naujo įkelkite puslapį.',
   'Realtime samenwerken': 'Bendradarbiavimas tikruoju laiku',

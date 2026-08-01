@@ -747,6 +747,8 @@ const _dutchSourceAddIt = {
       'Questa non sembra una chiave di ripristino valida.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Questa chiave di ripristino proviene da una versione più recente di OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'La memoria web per le immagini è piena (massimo 256 MB). Prima salva il lavoro come file .ocideck per evitare perdite di dati. Poi usa meno immagini o immagini più piccole, chiudi gli altri deck oppure ricarica senza aprire altri deck.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'La memoria web per le immagini è piena (massimo 256 MB). Salva il lavoro come file .ocideck e ricarica la pagina prima di aggiungere altre immagini.',
   'Realtime samenwerken': 'Collaborazione in tempo reale',

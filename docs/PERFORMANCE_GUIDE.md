@@ -1,6 +1,6 @@
 # OciDeck — Performance Guide
 
-> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-08-01 · **Published by:** Stichting LibreKAT
 
 This document describes OciDeck's performance characteristics using the **actual
 limits and sizes enforced in the codebase** (with `file:line` citations), plus a
@@ -40,6 +40,8 @@ optimisation.
   clipboard. Identical encoded content is SHA-256-deduplicated and charged only
   once. Unreferenced content returns its budget during the liveness sweep; a
   new unique asset is refused atomically before this total would be exceeded.
+  This app-wide budget is enforced only in the browser; desktop imports can use
+  the same temporary `mem:` paths but are not subject to the browser cap.
 
 ## Rendering
 

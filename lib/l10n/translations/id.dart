@@ -1792,6 +1792,8 @@ const _dutchSourceAddId = <String, String>{
       'Ini sepertinya bukan kunci pemulihan yang valid.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Kunci pemulihan ini berasal dari versi OciDeck yang lebih baru.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Memori web untuk gambar penuh (maksimum 256 MB). Simpan pekerjaan Anda terlebih dahulu sebagai berkas .ocideck untuk mencegah kehilangan data. Setelah itu gunakan gambar yang lebih sedikit atau lebih kecil, tutup deck lain, atau muat ulang tanpa membuka deck lain.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Memori web untuk gambar penuh (maksimum 256 MB). Simpan pekerjaan Anda sebagai berkas .ocideck dan muat ulang halaman sebelum menambahkan gambar lagi.',
   'Realtime samenwerken': 'Kolaborasi waktu nyata',

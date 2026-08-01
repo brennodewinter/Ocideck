@@ -1767,6 +1767,8 @@ const _dutchSourceAddTlh = <String, String>{
       'cheghmoHwI\' ngoq lI\' rurbe\' lI\'.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'cheghmoHwI\' ngoqvam, OciDeck chu\'qu\' Ha\'DIbaHvo\' ghoS.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'naghmeyvaDvaD De\'wI\' QulmeH qawHaq teblu\' (256 MB \'oH veH\'e\'). De\' Dachbe\'meH, wa\'DIch .ocideck De\' QaywI\' rur Qu\'lIj pol. ghIq nagh puS pagh nagh mach lo\', latlh muchmey SoQmoH, pagh latlh muchmey poSmoHbe\'taHvIS chu\'qa\'.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'mIllogh web qawHaq teblu’ (256 MB ‘aqroS). latlh mIllogh Dachelpa’ .ocideck De’ ‘angghalDaq Qu’lIj yIpol ’ej nav yIQayqa’.',
   'Realtime samenwerken': 'SIbI\' vumchuq',

@@ -751,6 +751,8 @@ const _dutchSourceAddDe = {
       'Das sieht nicht nach einem gültigen Wiederherstellungsschlüssel aus.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'Dieser Wiederherstellungsschlüssel stammt aus einer neueren Version von OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'Der Webspeicher für Bilder ist voll (maximal 256 MB). Speichere deine Arbeit zuerst als .ocideck-Datei, um Datenverlust zu vermeiden. Verwende danach weniger oder kleinere Bilder, schließe andere Decks oder lade neu, ohne andere Decks zu öffnen.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'Der Webspeicher für Bilder ist voll (maximal 256 MB). Speichere deine Arbeit als .ocideck-Datei und lade die Seite neu, bevor du weitere Bilder hinzufügst.',
   'Realtime samenwerken': 'Echtzeit-Zusammenarbeit',

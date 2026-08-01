@@ -932,6 +932,8 @@ const _dutchSourceAddEn = {
       'This doesn\'t look like a valid recovery key.',
   'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
       'This recovery key comes from a newer version of OciDeck.',
+  'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, sluit andere decks of herlaad zonder andere decks te openen.':
+      'The web image memory is full (maximum 256 MB). First save your work as an .ocideck file to prevent data loss. Then use fewer or smaller images, close other decks, or reload without opening other decks.',
   'Het webgeheugen voor afbeeldingen is vol (maximaal 256 MB). Sla je werk op als .ocideck en herlaad de pagina voordat je meer afbeeldingen toevoegt.':
       'The web image memory is full (maximum 256 MB). Save your work as an .ocideck file and reload the page before adding more images.',
   'Realtime samenwerken': 'Real-time collaboration',
