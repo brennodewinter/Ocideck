@@ -215,8 +215,6 @@ const Set<String> uncoveredBaseline = {
   // entries themselves are asserted in test/settings_search_test.dart, which
   // also guards that every section title in here is still rendered.
   'lib/widgets/dialogs/parts/settings_dialog_search_index.dart',
-  // NO EXECUTABLE LINES: a single `export`.
-  'lib/widgets/markdown_notes_editor.dart',
   // NO EXECUTABLE LINES: an abstract interface (the local CVE database as the
   // UI sees it). Its two implementations are covered separately.
   'lib/services/cve/local_cve_database_api.dart',
