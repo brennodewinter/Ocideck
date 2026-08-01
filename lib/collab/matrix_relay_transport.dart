@@ -90,6 +90,15 @@ class MatrixRelayTransport implements CollabTransport {
   bool _syncing = false;
   bool _disposed = false;
 
+  /// Serialises this transport's own sends so the sealed PUTs reach the room in
+  /// the order the ops were created, even when [sendOp]/[setLock] calls overlap.
+  /// The seal and the HTTP PUT are both async, so two fire-and-forget sends (the
+  /// authority rebroadcasts several ops per edit without awaiting) could race and
+  /// commit version 2 before version 1 — a follower only accepts `version + 1`,
+  /// so the reordered op is dropped and the decks diverge (#1040). Matrix has no
+  /// numbered append-chain like WebDAV; this queue is the equivalent.
+  Future<void> _sendChain = Future<void>.value();
+
   /// The participant id is this device's id — the same value the crypto stamps
   /// into every sealed envelope as `sender_device`, so own-echo suppression and
   /// the collab layer's participant identity line up.
@@ -103,21 +112,37 @@ class MatrixRelayTransport implements CollabTransport {
   Stream<LockEvent> get locks => _locks.stream;
 
   @override
-  Future<void> sendOp(DeckOp op) async {
+  Future<void> sendOp(DeckOp op) {
     _ensureLive();
-    final sealed = await _e2ee.seal(
-      {'kind': 'op', 'from': participantId, 'op': deckOpToJson(op)},
-      room: roomId,
-      type: opEventType,
-      // Authoritative ops (version assigned) carry the authority's signature
-      // (P3 anti-impersonation); a follower's intent (version 0) need not.
-      signed: op.version > 0,
+    return _serializeSend('op', () async {
+      final sealed = await _e2ee.seal(
+        {'kind': 'op', 'from': participantId, 'op': deckOpToJson(op)},
+        room: roomId,
+        type: opEventType,
+        // Authoritative ops (version assigned) carry the authority's signature
+        // (P3 anti-impersonation); a follower's intent (version 0) need not.
+        signed: op.version > 0,
+      );
+      await _matrix.sendEvent(
+        roomId: roomId,
+        type: opEventType,
+        content: sealed.toContent(),
+      );
+    });
+  }
+
+  /// Append [send] to the serial [_sendChain] so it runs strictly after every
+  /// earlier send this transport issued. A failure is logged (controlled
+  /// reporting, not a silent drop) and does not wedge the chain — a later send
+  /// still runs — while the returned future still surfaces the error to a caller
+  /// that awaits it.
+  Future<void> _serializeSend(String kind, Future<void> Function() send) {
+    final done = _sendChain.then((_) => send());
+    _sendChain = done.then(
+      (_) {},
+      onError: (Object e) => logWarning('collab.matrix.send.$kind', e),
     );
-    await _matrix.sendEvent(
-      roomId: roomId,
-      type: opEventType,
-      content: sealed.toContent(),
-    );
+    return done;
   }
 
   @override
@@ -125,7 +150,7 @@ class MatrixRelayTransport implements CollabTransport {
     String slideId, {
     required bool held,
     bool forced = false,
-  }) async {
+  }) {
     _ensureLive();
     final event = LockEvent(
       slideId: slideId,
@@ -133,17 +158,21 @@ class MatrixRelayTransport implements CollabTransport {
       participantId: participantId,
       forced: forced,
     );
-    final sealed = await _e2ee.seal(
-      {'kind': 'lock', 'from': participantId, 'lock': lockEventToJson(event)},
-      room: roomId,
-      type: lockEventType,
-      signed: false,
-    );
-    await _matrix.sendEvent(
-      roomId: roomId,
-      type: lockEventType,
-      content: sealed.toContent(),
-    );
+    // Locks share the serial chain with ops so their relative order is preserved
+    // too (a lock and the edit it guards must not cross on the wire).
+    return _serializeSend('lock', () async {
+      final sealed = await _e2ee.seal(
+        {'kind': 'lock', 'from': participantId, 'lock': lockEventToJson(event)},
+        room: roomId,
+        type: lockEventType,
+        signed: false,
+      );
+      await _matrix.sendEvent(
+        roomId: roomId,
+        type: lockEventType,
+        content: sealed.toContent(),
+      );
+    });
   }
 
   /// Begin syncing on [syncInterval]. Idempotent; a no-op after [dispose].
