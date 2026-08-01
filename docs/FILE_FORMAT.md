@@ -480,11 +480,13 @@ these fields (with defaults):
 
 Unknown or missing fields fall back to defaults, so older files migrate cleanly.
 
-> **Cockpit status colours are not part of the style profile or the file.** The
-> cockpit instruments use a named *cockpit colour scheme* (good / warning /
-> critical / cold) that is an app-level setting, selected globally and applied at
-> render time. It is intentionally kept out of the deck `.md` so the file stays
-> pure content.
+> **Cockpit appearance and status colours are not part of the style profile or
+> the file.** The authentic/classic look and the named *cockpit colour scheme*
+> (good / warning / critical / cold / sky / ground) are app-level settings,
+> selected globally and applied at render time. They are intentionally kept out
+> of the deck `.md` so the file stays pure content. Therefore the same editable
+> deck may follow another installation's cockpit settings; an exported
+> PDF/PPTX/HTML freezes the choices that were active during that export.
 
 ### 3.3 Standalone Style Profile (`.ocideckstyle`)
 
@@ -1039,6 +1041,70 @@ Fields:
   entirely; `series` disappears too *unless* a series carries a `color`, in
   which case the block keeps a stripped `series` array of names and colours
   (no `data`) — the colours are styling and have nowhere else to live.
+
+**Cockpit** (`cockpit`) — an optional heading plus a fenced
+```cockpit``` JSON block. The block stores the instruments and their
+behaviour, but deliberately not the globally selected authentic/classic look or
+cockpit colour scheme (see §3.2).
+
+````markdown
+# Operational overview
+
+```cockpit
+{
+  "layout": "auto",
+  "animateOnEnter": true,
+  "animationDurationMs": 2800,
+  "meters": [
+    {
+      "type": "speedometer",
+      "label": "Capacity used",
+      "unit": "%",
+      "min": 0,
+      "max": 100,
+      "greenFrom": 0,
+      "greenTo": 40,
+      "redFrom": 70,
+      "value": 78
+    },
+    {
+      "type": "horizon",
+      "label": "Stability",
+      "pitch": 8,
+      "bank": -12
+    },
+    {
+      "type": "heading",
+      "label": "Course",
+      "value": 187,
+      "heading": 90,
+      "markerLabel": "Target"
+    }
+  ]
+}
+```
+````
+
+- `meters` contains at most six objects. Extra objects are ignored on parse
+  and are not written back.
+- `type` is one of `speedometer`, `voltmeter`, `thermometer`,
+  `altimeter`, `climbDescent`, `horizon` or `heading`; an unknown value
+  falls back to `speedometer`.
+- The four scalar gauge types use `min`, `max`, `greenFrom`, `greenTo`,
+  `redFrom` and `value`. `label` and `unit` are optional strings.
+  A non-increasing range is normalised to a one-unit span, and values and band
+  boundaries are clamped into the range.
+- `climbDescent` uses `min`, `max`, `neutralFrom`, `neutralTo` and
+  `value`. `horizon` uses `pitch` (clamped to −45…45) and `bank`
+  (−60…60). `heading` uses `value` for the current course, `heading` for
+  the target marker and optional `markerLabel`; both angles wrap at 360°.
+- `animateOnEnter` defaults to `true`. `animationDurationMs` is an optional
+  per-slide override, clamped to 600…30,000 ms; when absent the slide inherits
+  the style profile's `animationDurationMs`.
+- `layout` round-trips and defaults to `auto`. Current renderers arrange the
+  instruments from their count (one column for one, two through four in two
+  columns, five or six in three); non-`auto` values are retained for
+  compatibility but do not currently change that grid.
 
 **Question** (`question`) — a fenced ```question``` block with the quiz
 specification as **JSON**, optionally preceded by a `# title`, an `![](image)`

@@ -420,13 +420,26 @@ fingerprint, not by id.*
   session. Anything persisted that must survive a reload (annotations) re-anchors
   by slide order + a content fingerprint rather than by id.
 - **`CockpitColorScheme`** is a named set of cockpit status colours (good /
-  warning / critical / cold). Schemes live in `AppSettings` (a managed list plus
-  a globally selected name, mirroring `ThemeProfile`/`AppAppearanceProfile`), not
-  in the deck — the colours are styling. The active scheme is resolved from
-  settings and threaded into `SlidePreviewWidget` and the export chain alongside
-  `themeProfile`; the cockpit painter and the export SVG read the four colours
-  from it instead of hardcoded constants. For the beamer window it travels in the
+  warning / critical / cold, plus horizon sky / ground). Schemes live in
+  `AppSettings` as a managed list plus a globally selected name, mirroring
+  `ThemeProfile`/`AppAppearanceProfile`. **`CockpitVisualStyle`** is the
+  separate global appearance choice: `authentic` is the fallback/default and
+  `classic` preserves the earlier card-style painter. `SettingsNotifier`
+  persists it under `cockpitVisualStyle`; `AppSettings.cockpitColorScheme`
+  resolves the selected palette and copies the global visual style onto that
+  effective scheme. Neither choice belongs to the deck — both are styling.
+  The effective scheme is threaded into `SlidePreviewWidget` and the export
+  chain alongside `themeProfile`; for the beamer window it travels in the
   transient audience payload, like the inlined style profile.
+- **Cockpit activation is render state, not document state.** In presentation
+  mode `_CockpitPreviewState` drives one controller and staggers each meter.
+  The authentic painter runs its lamp test, minimum→maximum→target sweep (a
+  360° sweep for heading) and rolling read-out; outside presentation mode the
+  controller stays at its settled value. `animateOnEnter` and an optional
+  duration override remain in `CockpitSpec`. PDF/PPTX rasterise the settled
+  Flutter widget. HTML writes the effective style as an SVG class and uses
+  `cockpitPowerOn` for the authentic stagger, with a
+  `prefers-reduced-motion` fallback.
 - **`ThemeProfile` travels three ways**, all through the same `toJson` /
   `fromJson` pair: in `AppSettings` as the managed list of profiles (persisted to
   preferences), inlined in a deck's front matter (base64url), and — since it must

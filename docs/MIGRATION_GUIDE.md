@@ -37,6 +37,13 @@ are folded into one ordered `storageConnections` list. Libraries come first in
 their existing order, then WebDAV, then git — so whatever was the default before
 is still the default after.
 
+The cockpit appearance is a deliberate **default change, not a migration**.
+Installations without the `cockpitVisualStyle` key resolve it as `authentic`,
+so an upgrade adopts the new instrument panel without rewriting any deck or
+preference. Choosing **Classic** writes the key explicitly and keeps that choice
+on later starts. Cockpit appearance is not deck content; there is therefore no
+Markdown or style-profile migration.
+
 ## The rules these migrations follow
 
 These are the conventions to keep to when you add the next one. They are the

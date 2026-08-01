@@ -92,6 +92,13 @@ so the two lines still read apart for anyone who tells red and green apart
 poorly. On an image-pair question the two pictures carry an **A**/**B** badge
 that becomes a ✓ or ✗, rather than only a green or red border.
 
+**Reduced motion in an exported cockpit.** The authentic cockpit's offline-HTML
+power-on sequence has a `prefers-reduced-motion` branch: it becomes a short
+opacity change instead of the full brightness pulse and stagger. An author can
+also switch **Animate on enter** off per cockpit slide, which makes the presenter
+show the settled readings immediately. PDF and PPTX are static images and never
+carry the sequence.
+
 **Contrast checking of the deck you are making.** The slide-quality panel checks
 body text, titles, table text and headers, code colours and the accent colour
 against their backgrounds at WCAG 2.1 AA, and flags what fails. This helps the

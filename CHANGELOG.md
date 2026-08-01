@@ -218,6 +218,17 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- Cockpitdia's gebruiken standaard een nieuwe authentieke instrumentlook: een
+  donker materiaalpaneel met ronde bezels, schroeven, glas, ivoorkleurige
+  markeringen en testlampjes. Bij binnenkomst in de presenter schakelen de
+  meters na elkaar in; de lampen testen, de wijzers lopen van minimum via
+  maximum naar de echte waarde en de koersindicator maakt een volle slag.
+  **Instellingen → Cockpit → Weergave** laat de eerdere klassieke kaartmeters
+  kiezen, zodat bestaande visuele voorkeuren behouden blijven. De keuze geldt
+  voor alle cockpitdia's en export; alle zeven metertypen en maximaal zes
+  instrumenten per dia blijven beschikbaar. De vernieuwde screenshot en de
+  gebruikers-, FAQ-, toegankelijkheids-, bestandsformaat-, migratie- en
+  ontwikkelaarsdocumentatie beschrijven dezelfde keuze en grenzen.
 - Negentien nieuwe presentatiesjablonen. De catalogus dekte de professional
   die verantwoording aflegt, maar miste de vergaderingen waarin geld en
   besluiten op tafel liggen, en hele sectoren stonden op nul. Er zijn nu

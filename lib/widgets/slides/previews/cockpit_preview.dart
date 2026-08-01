@@ -550,10 +550,18 @@ class _CockpitInstrumentPainter extends CustomPainter {
       unit: meter.unit,
     );
     if (_authentic) {
+      // A 250°/300° dial ends in the lower corners. Putting the end values at
+      // the generic voltmeter positions writes them directly across the colour
+      // bands; pull only those wide-sweep labels inward. The 180° voltmeter
+      // keeps its existing positions — its end points sit left/right and the
+      // lower row is already clear.
+      final wideSweep = sweep > 220;
+      final scaleX = radius * (wideSweep ? 0.62 : 0.78);
+      final scaleY = radius * (wideSweep ? 0.40 : 0.54);
       _text(
         canvas,
         _fmt(meter.min),
-        c + Offset(-radius * 0.78, radius * 0.54),
+        c + Offset(-scaleX, scaleY),
         size.width * 0.032,
         _instrumentMuted,
         anchor: _Anchor.center,
@@ -561,7 +569,7 @@ class _CockpitInstrumentPainter extends CustomPainter {
       _text(
         canvas,
         _fmt(meter.max),
-        c + Offset(radius * 0.78, radius * 0.54),
+        c + Offset(scaleX, scaleY),
         size.width * 0.032,
         _instrumentMuted,
         anchor: _Anchor.center,
@@ -572,11 +580,19 @@ class _CockpitInstrumentPainter extends CustomPainter {
   void _thermometer(Canvas canvas, Size size) {
     final w = size.width;
     final h = size.height;
-    final cx = w * 0.30;
-    final tubeWidth = math.min(w, h) * 0.14;
-    final bulbRadius = tubeWidth * 0.95;
-    final topY = h * 0.16;
-    final bulbCenter = Offset(cx, h * 0.82);
+    final s = math.min(w, h);
+    final dialCenter = Offset(w * 0.50, h * 0.50);
+    // The classic card reserved its left column for a tall thermometer. An
+    // authentic instrument is a round bezel: derive the tube from that circle
+    // instead of from the whole (wide) cell, otherwise both tube and bulb land
+    // outside the glass.
+    final cx = _authentic ? dialCenter.dx - s * 0.16 : w * 0.30;
+    final tubeWidth = s * (_authentic ? 0.11 : 0.14);
+    final bulbRadius = tubeWidth * (_authentic ? 0.82 : 0.95);
+    final topY = _authentic ? dialCenter.dy - s * 0.30 : h * 0.16;
+    final bulbCenter = _authentic
+        ? Offset(cx, dialCenter.dy + s * 0.24)
+        : Offset(cx, h * 0.82);
     final channelTop = topY + tubeWidth * 0.5;
     final channelBottom = bulbCenter.dy;
     final span = channelBottom - channelTop;
@@ -687,8 +703,10 @@ class _CockpitInstrumentPainter extends CustomPainter {
 
     _valueText(
       canvas,
-      Offset(w * (_authentic ? 0.65 : 0.72), h * 0.5),
-      w * (_authentic ? 0.070 : 0.092),
+      _authentic
+          ? Offset(dialCenter.dx + s * 0.18, dialCenter.dy)
+          : Offset(w * 0.72, h * 0.5),
+      _authentic ? s * 0.135 : w * 0.092,
       number: _fmt(_animatedValue(meter.value)),
       unit: meter.unit,
     );
@@ -756,9 +774,12 @@ class _CockpitInstrumentPainter extends CustomPainter {
     _valueText(
       canvas,
       _authentic
-          ? Offset(size.width * 0.50, size.height * 0.72)
+          // The complete left semicircle is intentionally free of scale ticks;
+          // use it as the read-out window instead of printing through the
+          // bottom ticks and the minus marker.
+          ? c + Offset(-r * 0.48, r * 0.12)
           : Offset(size.width * 0.77, size.height * 0.50),
-      size.width * (_authentic ? 0.070 : 0.092),
+      _authentic ? size.shortestSide * 0.13 : size.width * 0.092,
       number: '${shown > 0 ? '+' : ''}${_fmt(shown)}',
       unit: meter.unit,
     );
