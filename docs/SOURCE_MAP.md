@@ -603,6 +603,11 @@ when the owner returns.
   key before a peer enters the directory; the fingerprint is the human out-of-band
   compare that also catches a homeserver substituting *both* keys
   (SELF_ENCRYPTED_RELAY.md §4.3). `TrustState` is unverified / verified / mismatch.
+- `collab_recovery_key.dart` — `encodeRecoveryKey`/`decodeRecoveryKey` and
+  `RecoveryKeyException`: a device identity's two 32-byte seeds framed with a
+  version byte and a CRC-16, rendered as grouped Crockford Base32 — the readable
+  recovery key that carries the identity to another device (COLLABORATION Phase 2
+  "Blok B"). No dependency; the CRC catches a typo before an identity is written.
 - `collab_trust_store.dart` — `CollabTrustStore`, the trust-on-first-use pin store
   for device verification (COLLABORATION Phase 2 "Blok A"; SELF_ENCRYPTED_RELAY.md
   §5.3). Per local account (keyed on homeserver + user id in the keychain), it
@@ -619,6 +624,10 @@ when the owner returns.
   `CollabCrypto`. `loadOrCreateDeviceKeys` reads the seeds from `SecretStore`
   (keychain) or generates + persists a fresh set; a changed/absent device id (a
   fresh login) regenerates. The seeds are secret and never touch the prefs domain.
+  `CollabDeviceSeeds.recoveryKey()`, `readDeviceSeeds` and `importRecoveryKey`
+  make the identity portable (Blok B): export the seeds as a recovery key, or
+  restore them on another device — bound there to that device's own id, so the
+  fingerprint and provenance-signing key carry over (`collab_recovery_key.dart`).
 - `collab_crypto.dart` — the end-to-end encryption seam (design:
   `docs/design/SELF_ENCRYPTED_RELAY.md` §4), the only file touching
   `package:cryptography`. A minimal group **key-wrapping** scheme, *not* a ratchet:
@@ -951,6 +960,11 @@ when the owner returns.
 - `asset_usage_dialog.dart` — `AssetUsageDialog`: the shared image-pool overview — per image who references it, in three states (a deck uses it / only a released version still does / found nowhere). The cleanup section shows what could not be read instead of a candidate list when the round was incomplete, and calls a complete list a proposal rather than a verdict: another branch may still use what looks orphaned here. A dialog of its own rather than a `part` of the shell library, so that rule can be driven with a snapshot on its own.
 - `hex_color_dialog.dart` — `HexColorDialog`: typing a custom colour as hex, with a swatch that follows the field. `normalize` is public because it is the whole rule: the hash may be omitted, case and spaces do not matter, but a half colour (`#33FF`) is not a colour and must not reach the theme profile. A dialog of its own for the same reason as `git_search_dialog.dart`.
 - `git_search_dialog.dart` — `GitSearchDialog`: the cross-deck search UI. A button rather than search-as-you-type, since each round reads N files over REST. Picking a hit returns its deck dir to `_searchDecks`, which opens it through the ordinary `_openFromGit` path. A dialog of its own rather than a `part` of the shell library, so it can be driven with a `DeckSearch` on its own.
+- `recovery_key_dialogs.dart` — `showRecoveryKeyDialog` (shows the identity's
+  recovery key to save, with a copy button and the plain warning that losing it
+  means losing the identity on a device switch) and `promptRecoveryKey` (takes a
+  key to restore). Decoupled from the settings panel so both are widget-testable
+  (COLLABORATION Phase 2 "Blok B").
 - `matrix_collab_dialogs.dart` — The dialogs of a realtime Matrix session (§6.5): `showMatrixInviteDialog` shows the host's shareable link with a one-tap copy; `promptMatrixInvite` asks a guest to paste one; `showMatrixParticipantsDialog` lists the session's devices with their identity-key fingerprints for out-of-band comparison (§4.3). The link is the room secret, so it carries session access — but not content access, which stays E2EE by our own keys.
 - `package_encrypt_dialog.dart` — Optional password protection when exporting a package: strength meter, generator, copy.
 - `package_password_dialog.dart` — Prompts for the password when opening an encrypted package (with wrong-password retry).
