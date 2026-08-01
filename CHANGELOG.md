@@ -223,6 +223,15 @@ in Dutch, and it keeps growing on `main` between releases.
   Elke client krijgt nu een unieke sessie-nonce (proces-teller plus wandklok) in
   het transactie-id, zodat automatische ids niet botsen over levenscycli heen;
   een expliciete `txnId` (de retry-weg) blijft idempotent (#1042).
+- Samenwerken (Matrix): bij de eerste sync van een mede-auteur kon een
+  versleutelde op vóór de bijbehorende sleutelstate binnenkomen (device-keys of
+  de epoch-keyshare), waarna hij als "onbekende afzender" werd gedropt terwijl
+  de sync-cursor er al voorbij schoof — de wijziging was definitief weg en de
+  mede-auteur bleef een versie achter. De relay-transport verwerkt sleutelstate
+  en to-device-keyshares nu vóór de op/lock-events, en bewaart een op die nog
+  niet te openen is in een begrensde wachtrij die na elke sync opnieuw wordt
+  geprobeerd (na een limiet fail-closed verworpen), zodat een geldige op niet
+  meer verloren gaat (#1041).
 - Samenwerken (Matrix): meerdere op's uit één deckwijziging werden niet
   geserialiseerd verzonden. Doordat zowel het verzegelen als de HTTP-PUT
   asynchroon zijn, kon versie 2 vóór versie 1 op de homeserver belanden; een
