@@ -1778,6 +1778,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
+      'Vaizdų biblioteka per didelė; rodomi tik naujausi vaizdai.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'Šis paketas per didelis (daugiausiai 512 MB). Priešingu atveju OciDeck vėliau nebegalės jo atidaryti. Naudokite mažiau arba mažesnių paveikslėlių, vaizdo ar garso failų.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':

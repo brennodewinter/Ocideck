@@ -731,6 +731,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
+      'De ôfbyldingsbibleteek is te grut; allinnich de nijste ôfbyldings wurde toand.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'Dit pakket is te grut (maksimaal 512 MB). Oars kin OciDeck it dêrnei net mear iepenje. Brûk minder of lytsere ôfbyldings, fideo’s of audiobestannen.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':

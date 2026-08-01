@@ -1788,6 +1788,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
+      'Biblioteca de imagini este prea mare; sunt afișate doar cele mai noi imagini.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'Acest pachet este prea mare (maximum 512 MB). Altfel, OciDeck nu îl va mai putea deschide după aceea. Folosește mai puține sau mai mici imagini, videoclipuri sau fișiere audio.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':

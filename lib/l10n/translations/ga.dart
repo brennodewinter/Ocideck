@@ -1806,6 +1806,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
+      'Tá an leabharlann íomhánna rómhór; ní thaispeántar ach na híomhánna is nuaí.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'Tá an pacáiste seo rómhór (512 MB ar a mhéad). Seachas sin ní bheidh OciDeck in ann é a oscailt ina dhiaidh sin. Úsáid íomhánna, físeáin nó comhaid fuaime níos lú ó thaobh líon nó méide.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':

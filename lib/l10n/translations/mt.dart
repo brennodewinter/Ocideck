@@ -1793,6 +1793,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
+      'Il-librerija tal-immaġni hija kbira wisq; jintwerew biss l-aktar immaġni riċenti.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
       'Dan il-pakkett huwa kbir wisq (massimu 512 MB). Inkella OciDeck ma jkunx jista’ jiftħu wara. Uża inqas jew iżgħar immaġini, vidjows jew fajls tal-awdjo.',
   'De afbeeldingen samen zijn te groot voor één HTML-bestand (maximaal 512 MB). Gebruik minder of kleinere afbeeldingen, of exporteer als PDF of pakket.':
