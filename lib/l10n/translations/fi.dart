@@ -1771,6 +1771,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
+      'Tämä paketti on liian suuri (enintään 512 Mt). Muuten OciDeck ei voi enää avata sitä. Käytä vähemmän tai pienempiä kuvia, videoita tai äänitiedostoja.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Viimeistele ja tallenna esitys ensin; sen jälkeen voit allekirjoittaa sen alkuperän.',
   'Herkomst ondertekend.': 'Alkuperä allekirjoitettu.',

@@ -1788,6 +1788,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
+      'Acest pachet este prea mare (maximum 512 MB). Altfel, OciDeck nu îl va mai putea deschide după aceea. Folosește mai puține sau mai mici imagini, videoclipuri sau fișiere audio.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Finalizează și salvează mai întâi prezentarea; apoi îi poți semna proveniența.',
   'Herkomst ondertekend.': 'Proveniență semnată.',

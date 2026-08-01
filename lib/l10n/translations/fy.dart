@@ -731,6 +731,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
+      'Dit pakket is te grut (maksimaal 512 MB). Oars kin OciDeck it dêrnei net mear iepenje. Brûk minder of lytsere ôfbyldings, fideo’s of audiobestannen.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Meitsje de presintaasje earst ôf en bewarje har; dêrnei kinst it komôf ûndertekenje.',
   'Herkomst ondertekend.': 'Komôf ûndertekene.',

@@ -2748,6 +2748,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
+      'Bu paket çok büyük (en fazla 512 MB). Aksi hâlde OciDeck sonrasında bunu açamaz. Daha az veya daha küçük görsel, video ya da ses dosyası kullanın.',
   'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
       'Önce sunuyu tamamlayıp kaydedin; ardından kökenini imzalayabilirsiniz.',
   'Herkomst ondertekend.': 'Köken imzalandı.',
