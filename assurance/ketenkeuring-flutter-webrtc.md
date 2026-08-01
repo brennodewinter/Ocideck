@@ -85,7 +85,11 @@ Eén reële kanttekening: `flutter_webrtc` bindt doorgaans een **voorgebouwd
 libwebrtc-artefact** in plaats van het uit bron te bouwen. Dat is een groot binair
 toeleveringsoppervlak op een gevoelige component. Meewegen en vastpinnen in de SBOM
 (versie + herkomst + hash waar haalbaar), zoals elke andere binaire afhankelijkheid;
-geen blokkade, wel een bewust vertrouwenspunt.
+geen blokkade, wel een bewust vertrouwenspunt. Tegen **waarde 2 (openheid)** is dit
+bovendien de mínst inspecteerbare dep in de boom — een binaire blob lees je niet na
+zoals pure-Dart-bron. De pin en hash borgen *dat je krijgt wat je verwacht*, niet
+*dat je kunt zien wat erin zit*; dat is hier een bewust aanvaard vertrouwenspunt, geen
+opgelost punt.
 
 ## Bevinding 3 — Netwerkbeheersing: media omzeilt NetGuard (de kern, waarde 1)
 

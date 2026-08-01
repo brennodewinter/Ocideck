@@ -293,7 +293,7 @@ you control. LiveKit/MatrixRTC remains the cleaner backend for a *pure* own SFU
   access to a collaboration room (COLLABORATION.md §7.1.6). The meeting session is
   root-scoped (`lib/state/meeting_session_provider.dart`), deliberately outside the
   per-tab collab scope.
-- **The usual ratchets.** l10n for every `l10n.d('…')` (31 languages, `make add-l10n`);
+- **The usual ratchets.** l10n for every `l10n.d('…')` (all 30 non-NL languages, `make add-l10n`);
   files ≤ 1000 lines (`part`/`part-of`); methods ≤ 150; no `catch(_)`/`print`; atomic
   writes; every new `lib/` file referenced by a test (coverage gate); documentation
   duty (USER_GUIDE/SOURCE_MAP/FILE_FORMAT/CHANGELOG) per shipped phase.
