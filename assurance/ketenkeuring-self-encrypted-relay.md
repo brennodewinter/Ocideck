@@ -2,6 +2,12 @@
 
 > **Status:** vastgesteld 2026-07-31 · Stichting LibreKAT · intern werkdocument
 >
+> **Bijgesteld 2026-08-02:** na het XMPP-spine-besluit
+> ([`ketenkeuring-xmpp-spine.md`](ketenkeuring-xmpp-spine.md)) is deze relay niet langer
+> *de* primaire realtime-route, maar de spine voor de **Matrix-mode**. De GO blijft; de
+> positionering is versmald. Backend-exclusiviteit houdt de XMPP- en de Matrix-mode
+> gescheiden (`docs/design/NATIVE_CALLS.md` §1).
+>
 > Geen conformiteitsclaim en geen auditrapport. Zie [`README.md`](README.md).
 >
 > Deze keuring is opgesteld terwijl [issue #977] (Fase 1 — Matrix-dataplane)

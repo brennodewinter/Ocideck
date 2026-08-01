@@ -38,7 +38,10 @@
 > and the observation that a single XMPP spine can carry calls *and* this document's
 > data plane. It is gated on a chain review
 > ([`assurance/ketenkeuring-flutter-webrtc.md`](../../assurance/ketenkeuring-flutter-webrtc.md))
-> and a maintainer spine decision.
+> and a maintainer spine decision — **taken 2026-08-02: the single XMPP spine**
+> ([`assurance/ketenkeuring-xmpp-spine.md`](../../assurance/ketenkeuring-xmpp-spine.md)),
+> with backend exclusivity (an OciDeck session runs entirely on XMPP/Jitsi *or* Matrix,
+> never mixed). This relay/§6 stays the **Matrix-mode** spine; it is not overruled.
 
 > **Phase-1 transport update (2026-07-31).** §6 originally proposed the famedly
 > **`matrix`** Dart SDK. The chain-review turned that down (AGPL → de-facto
