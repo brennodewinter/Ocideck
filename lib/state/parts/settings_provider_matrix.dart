@@ -23,16 +23,8 @@ extension SettingsNotifierMatrix on SettingsNotifier {
         await prefs.setString('matrixAccount', jsonEncode(account.toJson()));
       }
     });
-    // Removing the account sweeps its collaboration secrets too — the device
-    // identity seeds and the pinned-peer trust store — so nothing personal is
-    // left in the keychain for an account the user deliberately removed. The
-    // access token is cleared through setMatrixToken on the same removal.
     if (account == null && previous != null) {
-      await _secrets.deleteCollabDeviceSeeds(
-        previous.homeserverUrl,
-        previous.userId,
-      );
-      await _secrets.deleteCollabTrust(previous.homeserverUrl, previous.userId);
+      await sweepMatrixCollabSecrets(_secrets, previous);
     }
   }
 
@@ -61,4 +53,18 @@ extension SettingsNotifierMatrix on SettingsNotifier {
   /// Read the Matrix access token for [account] back from the keychain, or null.
   Future<String?> matrixToken(MatrixServer account) =>
       _secrets.readMatrixToken(account.homeserverUrl, account.userId);
+}
+
+/// Wis de samenwerkingsgeheimen van [account] uit de sleutelhanger: de
+/// apparaatsidentiteit-seeds én de gepinde-apparaten-vertrouwensstore. Zo blijft
+/// er niets persoonlijks achter voor een account dat de gebruiker bewust
+/// verwijdert; het access-token gaat langs [SettingsNotifierMatrix.setMatrixToken]
+/// op dezelfde verwijdering. Top-level (niet in de extensie) om de klasseomvang
+/// van [SettingsNotifier] niet te laten groeien.
+Future<void> sweepMatrixCollabSecrets(
+  SecretStore secrets,
+  MatrixServer account,
+) async {
+  await secrets.deleteCollabDeviceSeeds(account.homeserverUrl, account.userId);
+  await secrets.deleteCollabTrust(account.homeserverUrl, account.userId);
 }
