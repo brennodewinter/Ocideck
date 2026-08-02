@@ -1807,6 +1807,9 @@ const _dutchSourceAddId = <String, String>{
   'kolom': 'kolom',
   'schrijftips': 'tip menulis',
   'tekens': 'karakter',
+  'Persoonsgegevens weggelaten': 'Data pribadi dihilangkan',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Data pribadi ditandai untuk penerima',
   'Voortgang per sectie': 'Kemajuan per bagian',
   'Nog te doen': 'Belum selesai',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

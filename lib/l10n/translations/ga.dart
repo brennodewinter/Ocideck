@@ -1842,6 +1842,9 @@ const _dutchSourceAddGa = <String, String>{
   'kolom': 'colún',
   'schrijftips': 'leideanna scríbhneoireachta',
   'tekens': 'carachtair',
+  'Persoonsgegevens weggelaten': 'Sonraí pearsanta fágtha ar lár',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Sonraí pearsanta marcáilte don fhaighteoir',
   'Voortgang per sectie': 'Dul chun cinn de réir rannóige',
   'Nog te doen': 'Le déanamh',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

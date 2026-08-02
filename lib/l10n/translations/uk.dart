@@ -1824,6 +1824,9 @@ const _dutchSourceAddUk = <String, String>{
   'kolom': 'колонка',
   'schrijftips': 'поради щодо написання',
   'tekens': 'персонажів',
+  'Persoonsgegevens weggelaten': 'Персональні дані вилучено',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Персональні дані позначено для отримувача',
   'Voortgang per sectie': 'Прогрес за розділами',
   'Nog te doen': 'Залишилося',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

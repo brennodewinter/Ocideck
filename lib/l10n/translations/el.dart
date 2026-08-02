@@ -1834,6 +1834,9 @@ const _dutchSourceAddEl = <String, String>{
   'kolom': 'στήλη',
   'schrijftips': 'συμβουλές γραφής',
   'tekens': 'χαρακτήρες',
+  'Persoonsgegevens weggelaten': 'Τα προσωπικά δεδομένα παραλείφθηκαν',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Τα προσωπικά δεδομένα επισημάνθηκαν για τον παραλήπτη',
   'Voortgang per sectie': 'Πρόοδος ανά ενότητα',
   'Nog te doen': 'Απομένει',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

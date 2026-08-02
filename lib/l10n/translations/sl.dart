@@ -1809,6 +1809,9 @@ const _dutchSourceAddSl = <String, String>{
   'kolom': 'stolpec',
   'schrijftips': 'nasveti za pisanje',
   'tekens': 'znakov',
+  'Persoonsgegevens weggelaten': 'Osebni podatki izpuščeni',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Osebni podatki označeni za prejemnika',
   'Voortgang per sectie': 'Napredek po razdelkih',
   'Nog te doen': 'Preostalo',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

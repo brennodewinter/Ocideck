@@ -946,6 +946,9 @@ const _dutchSourceAddEn = {
   'kolom': 'column',
   'schrijftips': 'writing tips',
   'tekens': 'characters',
+  'Persoonsgegevens weggelaten': 'Personal data left out',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Personal data flagged for the recipient',
   'Voortgang per sectie': 'Progress by section',
   'Nog te doen': 'Remaining',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

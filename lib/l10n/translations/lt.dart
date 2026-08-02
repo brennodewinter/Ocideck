@@ -1814,6 +1814,9 @@ const _dutchSourceAddLt = <String, String>{
   'kolom': 'stulpelyje',
   'schrijftips': 'rašymo patarimai',
   'tekens': 'simbolių',
+  'Persoonsgegevens weggelaten': 'Asmens duomenys praleisti',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Asmens duomenys pažymėti gavėjui',
   'Voortgang per sectie': 'Pažanga pagal skyrius',
   'Nog te doen': 'Liko',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

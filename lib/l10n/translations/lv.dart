@@ -1806,6 +1806,9 @@ const _dutchSourceAddLv = <String, String>{
   'kolom': 'kolonnu',
   'schrijftips': 'rakstīšanas padomi',
   'tekens': 'rakstzīmes',
+  'Persoonsgegevens weggelaten': 'Personas dati izlaisti',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Personas dati atzīmēti saņēmējam',
   'Voortgang per sectie': 'Progress pa sadaļām',
   'Nog te doen': 'Atlikušais',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

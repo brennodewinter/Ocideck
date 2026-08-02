@@ -1823,6 +1823,9 @@ const _dutchSourceAddLa = <String, String>{
   'kolom': 'columnae',
   'schrijftips': 'scribebat tips',
   'tekens': 'characteribus',
+  'Persoonsgegevens weggelaten': 'Data personalia omissa',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Data personalia pro accipiente notata',
   'Voortgang per sectie': 'Progressus per sectiones',
   'Nog te doen': 'Restans',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

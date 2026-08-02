@@ -763,6 +763,9 @@ const _dutchSourceAddEs = {
   'kolom': 'columna',
   'schrijftips': 'consejos de escritura',
   'tekens': 'personajes',
+  'Persoonsgegevens weggelaten': 'Datos personales omitidos',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Datos personales marcados para el destinatario',
   'Voortgang per sectie': 'Progreso por sección',
   'Nog te doen': 'Pendiente',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

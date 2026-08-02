@@ -1836,6 +1836,9 @@ const _dutchSourceAddPt = <String, String>{
   'kolom': 'coluna',
   'schrijftips': 'dicas de escrita',
   'tekens': 'personagens',
+  'Persoonsgegevens weggelaten': 'Dados pessoais omitidos',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Dados pessoais assinalados para o destinatário',
   'Voortgang per sectie': 'Progresso por secção',
   'Nog te doen': 'Pendente',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

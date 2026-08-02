@@ -1824,6 +1824,9 @@ const _dutchSourceAddRo = <String, String>{
   'kolom': 'coloana',
   'schrijftips': 'sfaturi de scris',
   'tekens': 'personaje',
+  'Persoonsgegevens weggelaten': 'Date cu caracter personal omise',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Date cu caracter personal marcate pentru destinatar',
   'Voortgang per sectie': 'Progres pe secțiuni',
   'Nog te doen': 'Rămas',
   'Voortgangsoverzicht en -grafiek bijgewerkt':
