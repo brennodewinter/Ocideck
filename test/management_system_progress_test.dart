@@ -195,7 +195,8 @@ void main() {
           .where(
             (s) =>
                 s.type == SlideType.chart &&
-                ChartSpec.parse(s.customMarkdown).title == 'Voortgang per sectie',
+                ChartSpec.parse(s.customMarkdown).title ==
+                    'Voortgang per sectie',
           )
           .toList();
       expect(charts, hasLength(1));
@@ -205,7 +206,8 @@ void main() {
           .where(
             (s) =>
                 s.type == SlideType.chart &&
-                ChartSpec.parse(s.customMarkdown).title == 'Voortgang per sectie',
+                ChartSpec.parse(s.customMarkdown).title ==
+                    'Voortgang per sectie',
           )
           .toList();
       expect(charts, hasLength(1));

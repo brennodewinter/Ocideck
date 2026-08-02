@@ -103,9 +103,7 @@ int generateManagementSystemChart(
   if (existing >= 0) {
     slides[existing] = slides[existing].copyWith(customMarkdown: block);
   } else {
-    slides.add(
-      Slide.create(SlideType.chart).copyWith(customMarkdown: block),
-    );
+    slides.add(Slide.create(SlideType.chart).copyWith(customMarkdown: block));
   }
   notifier._mutate(deck.copyWith(slides: slides), bumpRevision: true);
   return 1;
@@ -147,10 +145,13 @@ int generateManagementReview(
       .replaceAll('{impl}', '${progress.implemented}')
       .replaceAll('{app}', '${progress.applicable}');
 
-  final inputMd = '$kManagementReviewMarker\n# $inputTitle\n\n${fill(inputBody)}\n';
+  final inputMd =
+      '$kManagementReviewMarker\n# $inputTitle\n\n${fill(inputBody)}\n';
   final outputMd = '# $outputTitle\n\n${fill(outputBody)}\n';
   final slides = List<Slide>.from(deck.slides)
-    ..add(Slide.create(SlideType.freeMarkdown).copyWith(customMarkdown: inputMd))
+    ..add(
+      Slide.create(SlideType.freeMarkdown).copyWith(customMarkdown: inputMd),
+    )
     ..add(
       Slide.create(SlideType.freeMarkdown).copyWith(customMarkdown: outputMd),
     );
