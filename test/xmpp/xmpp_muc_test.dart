@@ -184,23 +184,26 @@ void main() {
     ch.drop();
   });
 
-  test('a stray error presence after join does not tear down the roster', () async {
-    final ch = FakeChannel();
-    final muc = mucOf(ch);
-    final joining = muc.join();
-    ch.inject(_presence('me', codes: ['110']));
-    await joining;
+  test(
+    'a stray error presence after join does not tear down the roster',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+      final joining = muc.join();
+      ch.inject(_presence('me', codes: ['110']));
+      await joining;
 
-    var rosterClosed = false;
-    muc.occupants.listen((_) {}, onDone: () => rosterClosed = true);
-    // A buggy/hostile server must not be able to silently close a live roster.
-    ch.inject(_errorPresence('conflict'));
-    await Future<void>.delayed(Duration.zero);
+      var rosterClosed = false;
+      muc.occupants.listen((_) {}, onDone: () => rosterClosed = true);
+      // A buggy/hostile server must not be able to silently close a live roster.
+      ch.inject(_errorPresence('conflict'));
+      await Future<void>.delayed(Duration.zero);
 
-    expect(rosterClosed, isFalse);
-    expect(muc.roster.map((o) => o.nick), contains('me'));
-    await muc.leave();
-  });
+      expect(rosterClosed, isFalse);
+      expect(muc.roster.map((o) => o.nick), contains('me'));
+      await muc.leave();
+    },
+  );
 
   test('leave after a failed join sends no unavailable presence', () async {
     final ch = FakeChannel();

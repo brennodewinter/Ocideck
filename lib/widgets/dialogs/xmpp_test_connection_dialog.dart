@@ -24,7 +24,11 @@ import '../../xmpp/xmpp_session.dart';
 /// The result of a test: the session outcome, plus — if a room was given — who
 /// was present (nicks) or why joining failed.
 class XmppTestOutcome {
-  const XmppTestOutcome({required this.result, this.occupants, this.joinFailure});
+  const XmppTestOutcome({
+    required this.result,
+    this.occupants,
+    this.joinFailure,
+  });
   final XmppSessionResult result;
 
   /// Room nicks, non-null iff a room was joined successfully.
@@ -231,8 +235,11 @@ class _OutcomeView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _line(ok ? Icons.check_circle_outline : Icons.error_outline, color,
-            sessionText),
+        _line(
+          ok ? Icons.check_circle_outline : Icons.error_outline,
+          color,
+          sessionText,
+        ),
         if (outcome.occupants != null)
           Padding(
             padding: const EdgeInsets.only(top: 8),
@@ -267,40 +274,40 @@ class _OutcomeView extends StatelessWidget {
   );
 }
 
-String _failureText(AppLocalizations l10n, XmppSessionFailure failure) =>
-    switch (failure) {
-      XmppSessionFailure.noUsableMechanism => l10n.d(
-        'De server biedt geen inlogmethode die OciDeck ondersteunt.',
-      ),
-      XmppSessionFailure.badCredentials => l10n.d(
-        'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.',
-      ),
-      XmppSessionFailure.mutualAuthFailed => l10n.d(
-        'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).',
-      ),
-      XmppSessionFailure.serverRedirect => l10n.d(
-        'De server wilde de verbinding omleiden naar een andere host; geweigerd.',
-      ),
-      XmppSessionFailure.resourceBindFailed => l10n.d(
-        'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).',
-      ),
-      XmppSessionFailure.timeout => l10n.d('De server reageerde niet op tijd.'),
-      XmppSessionFailure.transportRefused => l10n.d(
-        'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.',
-      ),
-      XmppSessionFailure.serverError || XmppSessionFailure.handshake => l10n.d(
-        'De verbinding met de server mislukte.',
-      ),
-    };
+String _failureText(
+  AppLocalizations l10n,
+  XmppSessionFailure failure,
+) => switch (failure) {
+  XmppSessionFailure.noUsableMechanism => l10n.d(
+    'De server biedt geen inlogmethode die OciDeck ondersteunt.',
+  ),
+  XmppSessionFailure.badCredentials => l10n.d(
+    'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.',
+  ),
+  XmppSessionFailure.mutualAuthFailed => l10n.d(
+    'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).',
+  ),
+  XmppSessionFailure.serverRedirect => l10n.d(
+    'De server wilde de verbinding omleiden naar een andere host; geweigerd.',
+  ),
+  XmppSessionFailure.resourceBindFailed => l10n.d(
+    'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).',
+  ),
+  XmppSessionFailure.timeout => l10n.d('De server reageerde niet op tijd.'),
+  XmppSessionFailure.transportRefused => l10n.d(
+    'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.',
+  ),
+  XmppSessionFailure.serverError || XmppSessionFailure.handshake => l10n.d(
+    'De verbinding met de server mislukte.',
+  ),
+};
 
 String _joinFailureText(AppLocalizations l10n, MucJoinFailure failure) =>
     switch (failure) {
       MucJoinFailure.nickConflict => l10n.d(
         'De bijnaam is al in gebruik in de kamer.',
       ),
-      MucJoinFailure.membersOnly => l10n.d(
-        'Deze kamer is alleen voor leden.',
-      ),
+      MucJoinFailure.membersOnly => l10n.d('Deze kamer is alleen voor leden.'),
       MucJoinFailure.passwordRequired => l10n.d(
         'Deze kamer vereist een wachtwoord.',
       ),
@@ -308,5 +315,7 @@ String _joinFailureText(AppLocalizations l10n, MucJoinFailure failure) =>
       MucJoinFailure.banned ||
       MucJoinFailure.roomFull ||
       MucJoinFailure.notAllowed ||
-      MucJoinFailure.sessionClosed => l10n.d('De kamer kon niet worden betreden.'),
+      MucJoinFailure.sessionClosed => l10n.d(
+        'De kamer kon niet worden betreden.',
+      ),
     };
