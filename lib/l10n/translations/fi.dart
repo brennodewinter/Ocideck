@@ -1771,6 +1771,42 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Actueel': 'Nykyinen',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Lähdetila suojaa häviöttömästi muotoiluja, joita visuaalinen editori ei vielä tue.',
+  'Codeblok': 'Koodilohko',
+  'Controleren…': 'Tarkista…',
+  'Documentoverzicht': 'Asiakirjan yleiskatsaus',
+  'Doorgaan met bewerken': 'Jatka muokkaamista',
+  'Geen opdrachten gevonden': 'Tehtäviä ei löytynyt',
+  'Genummerde lijst': 'Numeroitu luettelo',
+  'Huidig concept': 'Nykyinen konsepti',
+  'Invoegen of opmaken': 'Lisää tai muotoile',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Lisää tai muotoile (Ctrl/Cmd+välilyönti)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Muutoksiasi ei ole vielä otettu käyttöön. Haluatko hylätä ne?',
+  'Kop 1': 'Otsikko 1',
+  'Kop 2': 'Otsikko 2',
+  'Kop 3': 'Otsikko 3',
+  'Markdown-broneditor': 'Markdown-lähdeeditori',
+  'Niet toegepast': 'Ei käytössä',
+  'Niet-toegepaste wijzigingen': 'Käyttämättömät muutokset',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Ota käyttöön tai hylkää nykyiset muutokset ennen laajuuksien vaihtamista.',
+  'Problemen gevonden': 'Ongelmia löydetty',
+  'Schrijftips': 'Kirjoitusvinkkejä',
+  'Snel herstellen': 'Toivu nopeasti',
+  'Taak': 'Tehtävä',
+  'Toegepaste versie': 'Sovellettu versio',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Visuaalinen muokkaus on poistettu käytöstä, koska tätä merkintää ei voida muuntaa häviöttömästi.',
+  'Wijzigingen vergelijken': 'Vertaa muutoksia',
+  'Wijzigingen verwerpen': 'Hylkää muutokset',
+  'Zoek een opdracht…': 'Etsi tehtävä…',
+  'kolom': 'sarakkeessa',
+  'schrijftips': 'kirjoitusvinkkejä',
+  'tekens': 'hahmoja',
   'Voortgang per sectie': 'Edistyminen osioittain',
   'Nog te doen': 'Jäljellä',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

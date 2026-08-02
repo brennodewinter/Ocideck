@@ -1800,6 +1800,42 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Actueel': 'Atual',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'O modo de origem protege a formatação que o editor visual ainda não suporta sem perdas.',
+  'Codeblok': 'Bloco de código',
+  'Controleren…': 'Verifique…',
+  'Documentoverzicht': 'Visão geral do documento',
+  'Doorgaan met bewerken': 'Continuar editando',
+  'Geen opdrachten gevonden': 'Nenhuma tarefa encontrada',
+  'Genummerde lijst': 'Lista numerada',
+  'Huidig concept': 'Conceito atual',
+  'Invoegen of opmaken': 'Inserir ou formatar',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Inserir ou formatar (Ctrl/Cmd+Espaço)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Suas alterações ainda não foram aplicadas. Você quer rejeitá-los?',
+  'Kop 1': 'Título 1',
+  'Kop 2': 'Título 2',
+  'Kop 3': 'Título 3',
+  'Markdown-broneditor': 'Editor de fonte Markdown',
+  'Niet toegepast': 'Não aplicado',
+  'Niet-toegepaste wijzigingen': 'Alterações não aplicadas',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Aplique ou rejeite as alterações atuais antes de mudar de escopo.',
+  'Problemen gevonden': 'Problemas encontrados',
+  'Schrijftips': 'Dicas de escrita',
+  'Snel herstellen': 'Recupere rapidamente',
+  'Taak': 'Tarefa',
+  'Toegepaste versie': 'Versão aplicada',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'A edição visual está desabilitada porque este Markdown não pode ser convertido sem perdas.',
+  'Wijzigingen vergelijken': 'Comparar alterações',
+  'Wijzigingen verwerpen': 'Rejeitar alterações',
+  'Zoek een opdracht…': 'Encontre uma tarefa…',
+  'kolom': 'coluna',
+  'schrijftips': 'dicas de escrita',
+  'tekens': 'personagens',
   'Voortgang per sectie': 'Progresso por secção',
   'Nog te doen': 'Pendente',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

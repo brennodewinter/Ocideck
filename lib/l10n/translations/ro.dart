@@ -1788,6 +1788,42 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Actueel': 'Curent',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Modul sursă protejează formatarea pe care editorul vizual nu o acceptă încă fără pierderi.',
+  'Codeblok': 'Bloc de cod',
+  'Controleren…': 'Verificați…',
+  'Documentoverzicht': 'Prezentare generală a documentului',
+  'Doorgaan met bewerken': 'Continuați editarea',
+  'Geen opdrachten gevonden': 'Nu s-au găsit sarcini',
+  'Genummerde lijst': 'Lista numerotata',
+  'Huidig concept': 'Conceptul actual',
+  'Invoegen of opmaken': 'Inserați sau formatați',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Inserați sau formatați (Ctrl/Cmd+Spațiu)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Modificările dvs. nu au fost încă aplicate. Vrei să le respingi?',
+  'Kop 1': 'Titlul 1',
+  'Kop 2': 'Titlul 2',
+  'Kop 3': 'Titlul 3',
+  'Markdown-broneditor': 'Editor sursă Markdown',
+  'Niet toegepast': 'Nu se aplică',
+  'Niet-toegepaste wijzigingen': 'Modificări neaplicate',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Aplicați sau respingeți modificările curente înainte de a schimba domeniul de aplicare.',
+  'Problemen gevonden': 'Probleme găsite',
+  'Schrijftips': 'Sfaturi de scriere',
+  'Snel herstellen': 'Recuperează-te repede',
+  'Taak': 'Sarcina',
+  'Toegepaste versie': 'Versiune aplicată',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Editarea vizuală este dezactivată deoarece acest Markdown nu poate fi convertit fără pierderi.',
+  'Wijzigingen vergelijken': 'Comparați modificările',
+  'Wijzigingen verwerpen': 'Respingeți modificările',
+  'Zoek een opdracht…': 'Găsiți o misiune...',
+  'kolom': 'coloana',
+  'schrijftips': 'sfaturi de scris',
+  'tekens': 'personaje',
   'Voortgang per sectie': 'Progres pe secțiuni',
   'Nog te doen': 'Rămas',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

@@ -1773,6 +1773,42 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Actueel': 'Trenutno',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Izvorni način ščiti oblikovanje, ki ga vizualni urejevalnik še ne podpira brez izgub.',
+  'Codeblok': 'Kodni blok',
+  'Controleren…': 'Preverite ...',
+  'Documentoverzicht': 'Pregled dokumenta',
+  'Doorgaan met bewerken': 'Nadaljujte z urejanjem',
+  'Geen opdrachten gevonden': 'Ni najdenih nalog',
+  'Genummerde lijst': 'Oštevilčen seznam',
+  'Huidig concept': 'Trenutni koncept',
+  'Invoegen of opmaken': 'Vstavi ali oblikuj',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Vstavi ali oblikuj (Ctrl/Cmd+preslednica)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Vaše spremembe še niso bile uporabljene. Ali jih želite zavrniti?',
+  'Kop 1': 'Naslov 1',
+  'Kop 2': 'Naslov 2',
+  'Kop 3': 'Naslov 3',
+  'Markdown-broneditor': 'Markdown urejevalnik vira',
+  'Niet toegepast': 'Ni uporabljeno',
+  'Niet-toegepaste wijzigingen': 'Neuporabljene spremembe',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Uporabite ali zavrnite trenutne spremembe, preden preklopite obsege.',
+  'Problemen gevonden': 'Najdene težave',
+  'Schrijftips': 'Nasveti za pisanje',
+  'Snel herstellen': 'Hitro si opomore',
+  'Taak': 'Naloga',
+  'Toegepaste versie': 'Uporabljena različica',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Vizualno urejanje je onemogočeno, ker tega Markdowna ni mogoče pretvoriti brez izgub.',
+  'Wijzigingen vergelijken': 'Primerjaj spremembe',
+  'Wijzigingen verwerpen': 'Zavrni spremembe',
+  'Zoek een opdracht…': 'Poiščite nalogo …',
+  'kolom': 'stolpec',
+  'schrijftips': 'nasveti za pisanje',
+  'tekens': 'znakov',
   'Voortgang per sectie': 'Napredek po razdelkih',
   'Nog te doen': 'Preostalo',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

@@ -731,6 +731,42 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Actueel': 'Aktueel',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Boarne modus beskermet opmaak dat de fisuele bewurker noch net losslessly stipet.',
+  'Codeblok': 'Koade blok',
+  'Controleren…': 'Kontrolearje…',
+  'Documentoverzicht': 'Dokumint oersjoch',
+  'Doorgaan met bewerken': 'Trochgean mei bewurkjen',
+  'Geen opdrachten gevonden': 'Gjin opdrachten fûn',
+  'Genummerde lijst': 'Nûmere list',
+  'Huidig concept': 'Aktueel konsept',
+  'Invoegen of opmaken': 'Ynfoegje of opmaak',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Ynfoegje of opmaak (Ctrl/Cmd+Space)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Jo wizigingen binne noch net tapast. Wolle jo se ôfwize?',
+  'Kop 1': 'Koptekst 1',
+  'Kop 2': 'Koptekst 2',
+  'Kop 3': 'Opskrift 3',
+  'Markdown-broneditor': 'Markdown boarne bewurker',
+  'Niet toegepast': 'Net tapast',
+  'Niet-toegepaste wijzigingen': 'Net tapaste feroarings',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Aktuele wizigingen tapasse of ôfwize foardat jo berikken wikselje.',
+  'Problemen gevonden': 'Problemen fûn',
+  'Schrijftips': 'Skriuwtips',
+  'Snel herstellen': 'Herstellen fluch',
+  'Taak': 'Taak',
+  'Toegepaste versie': 'Applied ferzje',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Fisuele bewurking is útskeakele om\'t dizze Markdown kin net sûnder ferlies konvertearre wurde.',
+  'Wijzigingen vergelijken': 'Ferlykje feroarings',
+  'Wijzigingen verwerpen': 'Feroarje feroarings',
+  'Zoek een opdracht…': 'Sykje in opdracht ...',
+  'kolom': 'kolom',
+  'schrijftips': 'skriuwen tips',
+  'tekens': 'karakters',
   'Voortgang per sectie': 'Fuortgong per seksje',
   'Nog te doen': 'Noch te dwaan',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

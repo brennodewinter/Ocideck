@@ -1774,6 +1774,42 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Actueel': 'Aktuální',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Zdrojový režim bezztrátově chrání formátování, které vizuální editor zatím nepodporuje.',
+  'Codeblok': 'Blok kódu',
+  'Controleren…': 'Zkontrolujte…',
+  'Documentoverzicht': 'Přehled dokumentů',
+  'Doorgaan met bewerken': 'Pokračujte v úpravách',
+  'Geen opdrachten gevonden': 'Nebyly nalezeny žádné úkoly',
+  'Genummerde lijst': 'Číslovaný seznam',
+  'Huidig concept': 'Současný koncept',
+  'Invoegen of opmaken': 'Vložit nebo naformátovat',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Vložit nebo formátovat (Ctrl/Cmd+Mezerník)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Vaše změny ještě nebyly použity. Chcete je odmítnout?',
+  'Kop 1': 'Nadpis 1',
+  'Kop 2': 'Nadpis 2',
+  'Kop 3': 'Nadpis 3',
+  'Markdown-broneditor': 'Editor zdroje Markdown',
+  'Niet toegepast': 'Neuplatněno',
+  'Niet-toegepaste wijzigingen': 'Nepoužité změny',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Před přepnutím rozsahů použijte nebo odmítněte změny proudu.',
+  'Problemen gevonden': 'Problémy nalezeny',
+  'Schrijftips': 'Tipy na psaní',
+  'Snel herstellen': 'Rychle se zotavte',
+  'Taak': 'Úkol',
+  'Toegepaste versie': 'Aplikovaná verze',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Vizuální úpravy jsou zakázány, protože tento Markdown nelze převést bezeztrátově.',
+  'Wijzigingen vergelijken': 'Porovnejte změny',
+  'Wijzigingen verwerpen': 'Odmítnout změny',
+  'Zoek een opdracht…': 'Najít úkol…',
+  'kolom': 'sloupec',
+  'schrijftips': 'tipy na psaní',
+  'tekens': 'postavy',
   'Voortgang per sectie': 'Pokrok podle sekcí',
   'Nog te doen': 'Zbývá',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

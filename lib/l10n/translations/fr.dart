@@ -730,6 +730,42 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Actueel': 'Actuel',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Le mode source protège sans perte le formatage que l’éditeur visuel ne prend pas encore en charge.',
+  'Codeblok': 'Bloc de code',
+  'Controleren…': 'Vérifiez…',
+  'Documentoverzicht': 'Aperçu des documents',
+  'Doorgaan met bewerken': 'Continuer la modification',
+  'Geen opdrachten gevonden': 'Aucune mission trouvée',
+  'Genummerde lijst': 'Liste numérotée',
+  'Huidig concept': 'Concept actuel',
+  'Invoegen of opmaken': 'Insérer ou formater',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Insérer ou formater (Ctrl/Cmd+Espace)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Vos modifications n\'ont pas encore été appliquées. Voulez-vous les rejeter ?',
+  'Kop 1': 'Titre 1',
+  'Kop 2': 'Titre 2',
+  'Kop 3': 'Titre 3',
+  'Markdown-broneditor': 'Éditeur de sources Markdown',
+  'Niet toegepast': 'Non appliqué',
+  'Niet-toegepaste wijzigingen': 'Modifications non appliquées',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Appliquez ou rejetez les modifications actuelles avant de changer de portée.',
+  'Problemen gevonden': 'Problèmes trouvés',
+  'Schrijftips': 'Conseils d\'écriture',
+  'Snel herstellen': 'Récupérez rapidement',
+  'Taak': 'Tâche',
+  'Toegepaste versie': 'Version appliquée',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'L\'édition visuelle est désactivée car ce Markdown ne peut pas être converti sans perte.',
+  'Wijzigingen vergelijken': 'Comparer les modifications',
+  'Wijzigingen verwerpen': 'Rejeter les modifications',
+  'Zoek een opdracht…': 'Trouver une mission…',
+  'kolom': 'colonne',
+  'schrijftips': 'conseils d\'écriture',
+  'tekens': 'personnages',
   'Voortgang per sectie': 'Progression par section',
   'Nog te doen': 'Restant',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

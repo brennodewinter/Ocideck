@@ -1771,6 +1771,42 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Actueel': 'Saat ini',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Mode sumber melindungi pemformatan yang belum didukung oleh editor visual tanpa kehilangan.',
+  'Codeblok': 'Blok kode',
+  'Controleren…': 'Periksa…',
+  'Documentoverzicht': 'Ikhtisar dokumen',
+  'Doorgaan met bewerken': 'Lanjutkan mengedit',
+  'Geen opdrachten gevonden': 'Tidak ada tugas yang ditemukan',
+  'Genummerde lijst': 'Daftar bernomor',
+  'Huidig concept': 'Konsep saat ini',
+  'Invoegen of opmaken': 'Sisipkan atau format',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Sisipkan atau format (Ctrl/Cmd+Spasi)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Perubahan Anda belum diterapkan. Apakah Anda ingin menolaknya?',
+  'Kop 1': 'Judul 1',
+  'Kop 2': 'Judul 2',
+  'Kop 3': 'Pos 3',
+  'Markdown-broneditor': 'Editor sumber penurunan harga',
+  'Niet toegepast': 'Tidak diterapkan',
+  'Niet-toegepaste wijzigingen': 'Perubahan yang belum diterapkan',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Terapkan atau tolak perubahan saat ini sebelum berpindah cakupan.',
+  'Problemen gevonden': 'Masalah ditemukan',
+  'Schrijftips': 'Tip menulis',
+  'Snel herstellen': 'Pulihkan dengan cepat',
+  'Taak': 'Tugas',
+  'Toegepaste versie': 'Versi terapan',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Pengeditan visual dinonaktifkan karena penurunan harga ini tidak dapat dikonversi tanpa kehilangan.',
+  'Wijzigingen vergelijken': 'Bandingkan perubahan',
+  'Wijzigingen verwerpen': 'Tolak perubahan',
+  'Zoek een opdracht…': 'Temukan tugas…',
+  'kolom': 'kolom',
+  'schrijftips': 'tip menulis',
+  'tekens': 'karakter',
   'Voortgang per sectie': 'Kemajuan per bagian',
   'Nog te doen': 'Belum selesai',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

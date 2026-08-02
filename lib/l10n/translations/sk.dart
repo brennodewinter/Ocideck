@@ -1778,6 +1778,42 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Actueel': 'Aktuálne',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Zdrojový režim bezstratovo chráni formátovanie, ktoré vizuálny editor zatiaľ nepodporuje.',
+  'Codeblok': 'Blok kódu',
+  'Controleren…': 'Skontrolujte…',
+  'Documentoverzicht': 'Prehľad dokumentov',
+  'Doorgaan met bewerken': 'Pokračujte v úpravách',
+  'Geen opdrachten gevonden': 'Nenašli sa žiadne úlohy',
+  'Genummerde lijst': 'Číslovaný zoznam',
+  'Huidig concept': 'Súčasná koncepcia',
+  'Invoegen of opmaken': 'Vložiť alebo naformátovať',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Vložiť alebo naformátovať (Ctrl/Cmd+medzerník)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Vaše zmeny ešte neboli použité. Chcete ich odmietnuť?',
+  'Kop 1': 'Nadpis 1',
+  'Kop 2': 'Nadpis 2',
+  'Kop 3': 'Nadpis 3',
+  'Markdown-broneditor': 'Editor zdroja Markdown',
+  'Niet toegepast': 'Neuplatňuje sa',
+  'Niet-toegepaste wijzigingen': 'Neaplikované zmeny',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Pred prepnutím rozsahov použite alebo odmietnite aktuálne zmeny.',
+  'Problemen gevonden': 'Našli sa problémy',
+  'Schrijftips': 'Tipy na písanie',
+  'Snel herstellen': 'Rýchlo sa zotavte',
+  'Taak': 'Úloha',
+  'Toegepaste versie': 'Aplikovaná verzia',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Vizuálne úpravy sú zakázané, pretože tento Markdown nie je možné konvertovať bez straty.',
+  'Wijzigingen vergelijken': 'Porovnajte zmeny',
+  'Wijzigingen verwerpen': 'Odmietnuť zmeny',
+  'Zoek een opdracht…': 'Nájdite úlohu…',
+  'kolom': 'stĺpec',
+  'schrijftips': 'tipy na písanie',
+  'tekens': 'postavy',
   'Voortgang per sectie': 'Pokrok podľa sekcií',
   'Nog te doen': 'Zostáva',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

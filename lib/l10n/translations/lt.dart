@@ -1778,6 +1778,42 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Actueel': 'Dabartinė',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Šaltinio režimas be nuostolių apsaugo formatavimą, kurio vaizdo redaktorius dar nepalaiko.',
+  'Codeblok': 'Kodo blokas',
+  'Controleren…': 'Patikrinkite…',
+  'Documentoverzicht': 'Dokumento apžvalga',
+  'Doorgaan met bewerken': 'Tęsti redagavimą',
+  'Geen opdrachten gevonden': 'Užduočių nerasta',
+  'Genummerde lijst': 'Sunumeruotas sąrašas',
+  'Huidig concept': 'Dabartinė koncepcija',
+  'Invoegen of opmaken': 'Įterpti arba formatuoti',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Įterpti arba formatuoti („Ctrl“ / „Cmd“ + tarpas)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Jūsų pakeitimai dar nepritaikyti. Ar norite juos atmesti?',
+  'Kop 1': '1 antraštė',
+  'Kop 2': '2 antraštė',
+  'Kop 3': '3 antraštė',
+  'Markdown-broneditor': 'Markdown šaltinio redaktorius',
+  'Niet toegepast': 'Netaikoma',
+  'Niet-toegepaste wijzigingen': 'Netaikomi pakeitimai',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Prieš perjungdami taikymo sritį, pritaikykite arba atmeskite dabartinius pakeitimus.',
+  'Problemen gevonden': 'Rastos problemos',
+  'Schrijftips': 'Rašymo patarimai',
+  'Snel herstellen': 'Greitai atsigauti',
+  'Taak': 'Užduotis',
+  'Toegepaste versie': 'Taikoma versija',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Vaizdinis redagavimas išjungtas, nes šio žymėjimo negalima konvertuoti be nuostolių.',
+  'Wijzigingen vergelijken': 'Palyginkite pakeitimus',
+  'Wijzigingen verwerpen': 'Atmesti pakeitimus',
+  'Zoek een opdracht…': 'Rasti užduotį…',
+  'kolom': 'stulpelyje',
+  'schrijftips': 'rašymo patarimai',
+  'tekens': 'simbolių',
   'Voortgang per sectie': 'Pažanga pagal skyrius',
   'Nog te doen': 'Liko',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

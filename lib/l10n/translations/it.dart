@@ -726,6 +726,42 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Actueel': 'Corrente',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'La modalità sorgente protegge la formattazione che l\'editor visivo non supporta ancora senza perdita di dati.',
+  'Codeblok': 'Blocco di codice',
+  'Controleren…': 'Controlla…',
+  'Documentoverzicht': 'Panoramica del documento',
+  'Doorgaan met bewerken': 'Continua a modificare',
+  'Geen opdrachten gevonden': 'Nessun compito trovato',
+  'Genummerde lijst': 'Elenco numerato',
+  'Huidig concept': 'Concetto attuale',
+  'Invoegen of opmaken': 'Inserisci o formatta',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Inserisci o formatta (Ctrl/Cmd+Spazio)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Le tue modifiche non sono ancora state applicate. Vuoi rifiutarli?',
+  'Kop 1': 'Rubrica 1',
+  'Kop 2': 'Rubrica 2',
+  'Kop 3': 'Rubrica 3',
+  'Markdown-broneditor': 'Editor di origine Markdown',
+  'Niet toegepast': 'Non applicato',
+  'Niet-toegepaste wijzigingen': 'Modifiche non applicate',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Applicare o rifiutare le modifiche correnti prima di cambiare ambito.',
+  'Problemen gevonden': 'Problemi riscontrati',
+  'Schrijftips': 'Suggerimenti per la scrittura',
+  'Snel herstellen': 'Recupera rapidamente',
+  'Taak': 'Compito',
+  'Toegepaste versie': 'Versione applicata',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'La modifica visiva è disabilitata perché questo Markdown non può essere convertito senza perdita di dati.',
+  'Wijzigingen vergelijken': 'Confronta i cambiamenti',
+  'Wijzigingen verwerpen': 'Rifiutare le modifiche',
+  'Zoek een opdracht…': 'Trova un compito...',
+  'kolom': 'colonna',
+  'schrijftips': 'consigli di scrittura',
+  'tekens': 'personaggi',
   'Voortgang per sectie': 'Avanzamento per sezione',
   'Nog te doen': 'Rimanente',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

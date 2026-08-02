@@ -2748,6 +2748,42 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Actueel': 'Mevcut',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Kaynak modu, görsel düzenleyicinin henüz desteklemediği biçimlendirmeyi kayıpsız bir şekilde korur.',
+  'Codeblok': 'Kod bloğu',
+  'Controleren…': 'Kontrol et…',
+  'Documentoverzicht': 'Belgeye genel bakış',
+  'Doorgaan met bewerken': 'Düzenlemeye devam et',
+  'Geen opdrachten gevonden': 'Hiçbir ödev bulunamadı',
+  'Genummerde lijst': 'Numaralı liste',
+  'Huidig concept': 'Güncel konsept',
+  'Invoegen of opmaken': 'Ekle veya biçimlendir',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Ekle veya biçimlendir (Ctrl/Cmd+Boşluk)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Değişiklikleriniz henüz uygulanmadı. Onları reddetmek mi istiyorsunuz?',
+  'Kop 1': 'Başlık 1',
+  'Kop 2': 'Başlık 2',
+  'Kop 3': 'Başlık 3',
+  'Markdown-broneditor': 'Markdown kaynak düzenleyicisi',
+  'Niet toegepast': 'Uygulanmadı',
+  'Niet-toegepaste wijzigingen': 'Uygulanmayan değişiklikler',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Kapsamları değiştirmeden önce mevcut değişiklikleri uygulayın veya reddedin.',
+  'Problemen gevonden': 'Bulunan sorunlar',
+  'Schrijftips': 'Yazma ipuçları',
+  'Snel herstellen': 'Hızlı bir şekilde kurtarın',
+  'Taak': 'Görev',
+  'Toegepaste versie': 'Uygulanan sürüm',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Bu İşaretleme kayıpsız olarak dönüştürülemediğinden görsel düzenleme devre dışı bırakıldı.',
+  'Wijzigingen vergelijken': 'Değişiklikleri karşılaştır',
+  'Wijzigingen verwerpen': 'Değişiklikleri reddet',
+  'Zoek een opdracht…': 'Bir görev bulun…',
+  'kolom': 'sütun',
+  'schrijftips': 'ipuçları yazma',
+  'tekens': 'karakterler',
   'Voortgang per sectie': 'Bölüme göre ilerleme',
   'Nog te doen': 'Kalan',
   'Voortgangsoverzicht en -grafiek bijgewerkt':
