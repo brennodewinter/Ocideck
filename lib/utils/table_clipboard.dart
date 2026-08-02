@@ -140,8 +140,11 @@ List<List<String>>? _parseMarkdownTable(String text) {
         .split(_reUnescapedPipe)
         .map((c) => _unescapeClipboardCell(c.trim()))
         .toList();
-    // Alignment/separator row (|---|:--:|) carries no data.
-    if (cells.every((c) => RegExp(r'^:?-{2,}:?$').hasMatch(c))) continue;
+    // Alignment/separator row (|---|:--:|) carries no data. GFM allows a
+    // single dash per cell; this must match markdown_table_codec.dart (see
+    // _separatorCell there), otherwise one module reads a row as a separator
+    // and the other as data.
+    if (cells.every((c) => RegExp(r'^:?-+:?$').hasMatch(c))) continue;
     rows.add(cells);
   }
   if (rows.isEmpty || rows.first.length < 2) return null;

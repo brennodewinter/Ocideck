@@ -12,6 +12,17 @@
 /// delete-then-rename; the only non-atomic gap there contains no content write
 /// and a crash inside it leaves the fully-written `.tmp` behind as a recovery
 /// source.
+///
+/// ponytail: `flush: true` calls `fsync()` on POSIX and `FlushFileBuffers`
+/// on Windows — on Linux that suffices. On macOS, however, `fsync()` only
+/// flushes to the disk cache, not to the platter; `fcntl(fd, F_FULLFSYNC, 0)`
+/// is needed for that. Additionally, there is no `fsync` of the parent
+/// directory after the `rename`, so the rename metadata may not be persistent
+/// after power loss. Both require a `dart:ffi` call to the native syscall
+/// (Dart's `dart:io` exposes no file descriptor or `fcntl`). Ceiling: after
+/// power loss on macOS, a "saved" deck may not actually be on disk. Upgrade
+/// path: a `dart:ffi` helper that calls `F_FULLFSYNC` on macOS and
+/// `fsync(dir_fd)` on the parent directory after rename.
 library;
 
 import 'dart:convert';
@@ -38,9 +49,15 @@ Future<void> writeBytesAtomic(File target, List<int> bytes) async {
     try {
       await tmp.rename(target.path);
     } on FileSystemException {
-      // Windows: rename onto an existing file fails. Remove the target and
-      // retry — the original is only at risk for this brief, content-free gap,
-      // and the written .tmp survives a crash here.
+      // ponytail: Windows: rename onto an existing file fails. Remove the
+      // target and retry — the original is only at risk for this brief,
+      // content-free gap, and the written .tmp survives a crash here. A truly
+      // atomic replace on Windows requires `MoveFileEx` with
+      // `MOVEFILE_REPLACE_EXISTING` via `dart:ffi`; Dart's `rename` uses
+      // `MoveFile` without that flag. Ceiling: on a crash between `delete`
+      // and `rename` the target is briefly absent from disk (the `.tmp`
+      // survives as recovery). Upgrade path: `dart:ffi` call to
+      // `MoveFileExW`.
       if (await target.exists()) {
         await target.delete();
         await tmp.rename(target.path);
