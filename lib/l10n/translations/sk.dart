@@ -1778,6 +1778,28 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'XMPP-server testen': 'Otestovať server XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Zadajte server XMPP, Jabber ID a heslo a otestujte pripojenie. Nič sa neukladá; toto len overí, či účet funguje. Pre anonymný prístup ponechajte Jabber ID prázdne.',
+  'Serveradres (wss://…)': 'Adresa servera (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (používateľ@doména)',
+  'Verbinden…': 'Pripájanie…',
+  'Verbonden — authenticatie geslaagd via': 'Pripojené — overené pomocou',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Server neponúka spôsob prihlásenia, ktorý OciDeck podporuje.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Používateľské meno alebo heslo nebolo prijaté.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Server nedokázal preukázať svoju totožnosť (vzájomné overenie zlyhalo).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Server chcel presmerovať pripojenie na iného hostiteľa; odmietnuté.',
+  'De server reageerde niet op tijd.': 'Server neodpovedal včas.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'K serveru sa nepodarilo pripojiť. Použite wss:// a platnú adresu.',
+  'De verbinding met de server mislukte.': 'Pripojenie k serveru zlyhalo.',
+  'XMPP-verbinding testen': 'Otestovať pripojenie XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Skontrolujte, či sa OciDeck dokáže pripojiť k serveru XMPP a prihlásiť sa pomocou vášho účtu. Nič sa neukladá.',
   'Actueel': 'Aktuálne',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Zdrojový režim bezstratovo chráni formátovanie, ktoré vizuálny editor zatiaľ nepodporuje.',

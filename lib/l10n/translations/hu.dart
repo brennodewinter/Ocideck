@@ -1775,6 +1775,30 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'XMPP-server testen': 'XMPP-kiszolgáló tesztelése',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Adjon meg egy XMPP-kiszolgálót, egy Jabber-azonosítót és egy jelszót, majd tesztelje a kapcsolatot. Semmi nem kerül mentésre; ez csak azt ellenőrzi, hogy a fiók működik-e. Névtelen hozzáféréshez hagyja üresen a Jabber-azonosítót.',
+  'Serveradres (wss://…)': 'Kiszolgáló címe (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber-azonosító (felhasználó@tartomány)',
+  'Verbinden…': 'Csatlakozás…',
+  'Verbonden — authenticatie geslaagd via':
+      'Csatlakozva — hitelesítés sikeres a következővel:',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'A kiszolgáló nem kínál az OciDeck által támogatott bejelentkezési módot.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'A rendszer nem fogadta el a felhasználónevet vagy a jelszót.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'A kiszolgáló nem tudta igazolni magát (a kölcsönös hitelesítés sikertelen).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'A kiszolgáló át akarta irányítani a kapcsolatot egy másik gazdagépre; elutasítva.',
+  'De server reageerde niet op tijd.': 'A kiszolgáló nem válaszolt időben.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Nem sikerült csatlakozni a kiszolgálóhoz. Használjon wss:// előtagot és érvényes címet.',
+  'De verbinding met de server mislukte.':
+      'A kiszolgálóhoz való kapcsolódás sikertelen volt.',
+  'XMPP-verbinding testen': 'XMPP-kapcsolat tesztelése',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Ellenőrizze, hogy az OciDeck el tud-e érni egy XMPP-kiszolgálót, és be tud-e jelentkezni a fiókjával. Semmi nem kerül mentésre.',
   'Actueel': 'Aktuális',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'A Forrás mód veszteségmentesen védi azokat a formázásokat, amelyeket a vizuális szerkesztő még nem támogat.',

@@ -1774,6 +1774,31 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'XMPP-server testen': 'XMPP-Server teste',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Gib en XMPP-Server, e Jabber-ID und es Passwort i und teste d Verbindig. Es wird nüt gspeicheret; das prüeft nu, öb s Konto funktioniert. Lass d Jabber-ID für en anonyme Zuegang leer.',
+  'Serveradres (wss://…)': 'Serveradrässe (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber-ID (Benutzer@Domäne)',
+  'Verbinden…': 'Verbinde…',
+  'Verbonden — authenticatie geslaagd via':
+      'Verbunde — Authentifizierig erfolgriich über',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'De Server bietet kei Amäldmethode a, wo OciDeck unterstützt.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'De Benutzername oder s Passwort isch nöd akzeptiert worde.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'De Server het sich nöd chöne uswiise (gägesiitigi Verifizierig fehlgschlage).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'De Server het d Verbindig uf en andere Host wele umleite; abglehnt.',
+  'De server reageerde niet op tijd.':
+      'De Server het nöd rächtziitig gantwortet.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'S het kei Verbindig zum Server chöne mache. Bruch wss:// und e gültigi Adrässe.',
+  'De verbinding met de server mislukte.':
+      'D Verbindig zum Server isch fehlgschlage.',
+  'XMPP-verbinding testen': 'XMPP-Verbindig teste',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Prüef, öb OciDeck en XMPP-Server erreiche und sich mit dim Konto amälde cha. Es wird nüt gspeicheret.',
   'Actueel': 'Aktuell',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Der Quellmodus schützt Formatierungen, die der visuelle Editor noch nicht unterstützt, verlustfrei.',

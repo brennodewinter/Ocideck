@@ -1783,6 +1783,30 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'XMPP-server testen': 'Przetestuj serwer XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Wprowadź serwer XMPP, Jabber ID i hasło, a następnie przetestuj połączenie. Nic nie jest zapisywane; sprawdza to tylko, czy konto działa. Pozostaw Jabber ID puste, aby uzyskać dostęp anonimowy.',
+  'Serveradres (wss://…)': 'Adres serwera (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (użytkownik@domena)',
+  'Verbinden…': 'Łączenie…',
+  'Verbonden — authenticatie geslaagd via':
+      'Połączono — uwierzytelniono za pomocą',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Serwer nie oferuje metody logowania obsługiwanej przez OciDeck.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Nazwa użytkownika lub hasło nie zostały zaakceptowane.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Serwer nie mógł potwierdzić swojej tożsamości (uwierzytelnianie wzajemne nie powiodło się).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Serwer chciał przekierować połączenie na inny host; odrzucono.',
+  'De server reageerde niet op tijd.': 'Serwer nie odpowiedział na czas.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Nie można połączyć się z serwerem. Użyj wss:// i prawidłowego adresu.',
+  'De verbinding met de server mislukte.':
+      'Połączenie z serwerem nie powiodło się.',
+  'XMPP-verbinding testen': 'Przetestuj połączenie XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Sprawdź, czy OciDeck może połączyć się z serwerem XMPP i zalogować się na Twoim koncie. Nic nie jest zapisywane.',
   'Actueel': 'Aktualny',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Tryb źródłowy chroni formatowanie, którego edytor wizualny nie obsługuje jeszcze bezstratnie.',

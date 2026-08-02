@@ -1770,6 +1770,29 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'XMPP-server testen': 'Test XMPP-server',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Indtast en XMPP-server, et Jabber-ID og en adgangskode, og test forbindelsen. Der gemmes intet; dette kontrollerer kun, om kontoen virker. Lad Jabber-ID\'et stå tomt for anonym adgang.',
+  'Serveradres (wss://…)': 'Serveradresse (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber-ID (bruger@domæne)',
+  'Verbinden…': 'Forbinder…',
+  'Verbonden — authenticatie geslaagd via': 'Forbundet — godkendt via',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Serveren tilbyder ingen loginmetode, som OciDeck understøtter.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Brugernavnet eller adgangskoden blev ikke accepteret.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Serveren kunne ikke bevise sin identitet (gensidig godkendelse mislykkedes).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Serveren ville omdirigere forbindelsen til en anden vært; afvist.',
+  'De server reageerde niet op tijd.': 'Serveren svarede ikke i tide.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Kunne ikke oprette forbindelse til serveren. Brug wss:// og en gyldig adresse.',
+  'De verbinding met de server mislukte.':
+      'Forbindelsen til serveren mislykkedes.',
+  'XMPP-verbinding testen': 'Test XMPP-forbindelse',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Kontrollér, om OciDeck kan nå en XMPP-server og logge ind med din konto. Der gemmes intet.',
   'Actueel': 'Nuværende',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Kildetilstand beskytter formatering, som den visuelle editor endnu ikke understøtter tabsfrit.',

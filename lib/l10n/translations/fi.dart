@@ -1771,6 +1771,29 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'XMPP-server testen': 'Testaa XMPP-palvelin',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Anna XMPP-palvelin, Jabber-tunnus ja salasana ja testaa yhteys. Mitään ei tallenneta; tämä vain tarkistaa, toimiiko tili. Jätä Jabber-tunnus tyhjäksi anonyymiä käyttöä varten.',
+  'Serveradres (wss://…)': 'Palvelimen osoite (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber-tunnus (käyttäjä@verkkotunnus)',
+  'Verbinden…': 'Yhdistetään…',
+  'Verbonden — authenticatie geslaagd via':
+      'Yhdistetty — todennus onnistui menetelmällä',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Palvelin ei tarjoa OciDeckin tukemaa kirjautumistapaa.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Käyttäjätunnusta tai salasanaa ei hyväksytty.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Palvelin ei voinut todistaa henkilöllisyyttään (molemminpuolinen todennus epäonnistui).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Palvelin halusi ohjata yhteyden toiselle isännälle; hylättiin.',
+  'De server reageerde niet op tijd.': 'Palvelin ei vastannut ajoissa.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Palvelimeen ei saatu yhteyttä. Käytä wss:// ja kelvollista osoitetta.',
+  'De verbinding met de server mislukte.': 'Yhteys palvelimeen epäonnistui.',
+  'XMPP-verbinding testen': 'Testaa XMPP-yhteys',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Tarkista, tavoittaako OciDeck XMPP-palvelimen ja voiko se kirjautua sisään tililläsi. Mitään ei tallenneta.',
   'Actueel': 'Nykyinen',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Lähdetila suojaa häviöttömästi muotoiluja, joita visuaalinen editori ei vielä tue.',

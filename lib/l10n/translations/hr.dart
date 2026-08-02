@@ -1777,6 +1777,30 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'XMPP-server testen': 'Testiraj XMPP poslužitelj',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Unesite XMPP poslužitelj, Jabber ID i lozinku te testirajte vezu. Ništa se ne pohranjuje; ovo samo provjerava radi li račun. Ostavite Jabber ID praznim za anonimni pristup.',
+  'Serveradres (wss://…)': 'Adresa poslužitelja (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (korisnik@domena)',
+  'Verbinden…': 'Povezivanje…',
+  'Verbonden — authenticatie geslaagd via':
+      'Povezano — autentifikacija uspješna putem',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Poslužitelj ne nudi način prijave koji OciDeck podržava.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Korisničko ime ili lozinka nisu prihvaćeni.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Poslužitelj nije mogao dokazati svoj identitet (uzajamna provjera nije uspjela).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Poslužitelj je htio preusmjeriti vezu na drugo računalo; odbijeno.',
+  'De server reageerde niet op tijd.': 'Poslužitelj nije odgovorio na vrijeme.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Nije moguće povezati se s poslužiteljem. Upotrijebite wss:// i valjanu adresu.',
+  'De verbinding met de server mislukte.':
+      'Povezivanje s poslužiteljem nije uspjelo.',
+  'XMPP-verbinding testen': 'Testiraj XMPP vezu',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Provjerite može li OciDeck doći do XMPP poslužitelja i prijaviti se s vašim računom. Ništa se ne pohranjuje.',
   'Actueel': 'Trenutni',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Izvorni način rada štiti oblikovanje koje vizualni uređivač još ne podržava bez gubitaka.',

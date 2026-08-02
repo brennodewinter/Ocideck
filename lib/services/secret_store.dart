@@ -281,6 +281,50 @@ class SecretStore {
     }
   }
 
+  /// Keychain key for an XMPP account password, keyed on the WebSocket endpoint +
+  /// bare JID so two accounts/servers never collide (F2, `NATIVE_CALLS.md` §5).
+  /// The password authenticates the XMPP stream (SASL); it never touches prefs.
+  static String xmppPasswordKey(String serverUrl, String jid) {
+    final normalized = serverUrl.trim().replaceAll(RegExp(r'/+$'), '');
+    return 'xmpp_password::$normalized::${jid.trim()}';
+  }
+
+  Future<void> writeXmppPassword(
+    String serverUrl,
+    String jid,
+    String password,
+  ) async {
+    _requireStorage('writeXmppPassword');
+    try {
+      await _storage.write(
+        key: xmppPasswordKey(serverUrl, jid),
+        value: password,
+      );
+    } catch (e) {
+      logError('SecretStore.writeXmppPassword: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  Future<String?> readXmppPassword(String serverUrl, String jid) async {
+    if (!_canStore) return null;
+    try {
+      return await _storage.read(key: xmppPasswordKey(serverUrl, jid));
+    } catch (e) {
+      logError('SecretStore.readXmppPassword: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteXmppPassword(String serverUrl, String jid) async {
+    if (!_canStore) return;
+    try {
+      await _storage.delete(key: xmppPasswordKey(serverUrl, jid));
+    } catch (e) {
+      logWarning('SecretStore.deleteXmppPassword: keychain delete failed', e);
+    }
+  }
+
   /// Keychain key for the collaboration **device key material** (the Ed25519
   /// identity + X25519 agreement seeds), keyed on the homeserver + user id. These
   /// private seeds must never touch the prefs domain (§4.3); losing them only

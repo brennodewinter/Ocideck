@@ -1774,6 +1774,28 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'XMPP-server testen': 'Otestovat server XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Zadejte server XMPP, Jabber ID a heslo a otestujte připojení. Nic se neukládá; toto pouze ověří, zda účet funguje. Pro anonymní přístup ponechte Jabber ID prázdné.',
+  'Serveradres (wss://…)': 'Adresa serveru (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (uživatel@doména)',
+  'Verbinden…': 'Připojování…',
+  'Verbonden — authenticatie geslaagd via': 'Připojeno — ověřeno pomocí',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Server nenabízí žádnou metodu přihlášení, kterou OciDeck podporuje.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Uživatelské jméno nebo heslo nebylo přijato.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Server nedokázal ověřit svou identitu (vzájemné ověření selhalo).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Server chtěl přesměrovat připojení na jiného hostitele; odmítnuto.',
+  'De server reageerde niet op tijd.': 'Server neodpověděl včas.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'K serveru se nepodařilo připojit. Použijte wss:// a platnou adresu.',
+  'De verbinding met de server mislukte.': 'Připojení k serveru selhalo.',
+  'XMPP-verbinding testen': 'Otestovat připojení XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Zkontrolujte, zda se OciDeck může připojit k serveru XMPP a přihlásit se pomocí vašeho účtu. Nic se neukládá.',
   'Actueel': 'Aktuální',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Zdrojový režim bezztrátově chrání formátování, které vizuální editor zatím nepodporuje.',

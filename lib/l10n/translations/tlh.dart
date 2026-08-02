@@ -1746,6 +1746,28 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'XMPP-server testen': 'XMPP server yIwaH',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'XMPP server, Jabber-ID \'ej mu\'qaD yIghItlh, rar yIwaH. pagh pollu\'; account Qap\'a\' neH nuD. anonymous \'elmeH Jabber-ID yIchImmoH.',
+  'Serveradres (wss://…)': 'server Del (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber-ID (lo\'wI\'@domain)',
+  'Verbinden…': 'rartaH…',
+  'Verbonden — authenticatie geslaagd via': 'rarlu\'ta\' — nuHwI\' via',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'OciDeck Sovbogh \'el mIw luqawbe\' server.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'lo\'wI\'pong pagh mu\'qaD lajbe\'lu\'.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'server \'oS\'eghlaHbe\' (mutual authentication luj).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'latlh hostvaD rar choHmeH neH server; lajQo\'.',
+  'De server reageerde niet op tijd.': 'poHvamDaq jangbe\' server.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'serverDaq rarlaHbe\'. wss:// \'ej ngoDHom lo\'.',
+  'De verbinding met de server mislukte.': 'serverDaq rar luj.',
+  'XMPP-verbinding testen': 'XMPP rar yIwaH',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'XMPP server SamlaH\'a\' OciDeck \'ej accountlIj lo\'taHvIS \'el\'a\'? yInuD. pagh pollu\'.',
   'Actueel': 'DaH Qap',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Hal Segh pat vIlo\'taHvIS, ghItlh Segh\'e\' polmeH mIw Qan.',

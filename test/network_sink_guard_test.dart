@@ -107,6 +107,10 @@ void main() {
     // Matrix relay egress (desktop): één gepinde client op de homeserver-origin,
     // safeResolve(Trusted) + connectPinned + geen redirects + bytecap.
     'lib/collab/matrix_http_transport_io.dart': 1,
+    // XMPP-over-WebSocket egress (desktop): één gepinde client op de
+    // wss-endpoint-origin, resolveConfigured + connectPinned + een fail-closed
+    // schema-assert; WebSocket.connect gebruikt deze customClient.
+    'lib/xmpp/xmpp_frame_transport_io.dart': 1,
   };
 
   test('media fetch sinks stay behind the NetGuard resolve gate', () {
@@ -167,6 +171,11 @@ void main() {
         // + bytecap. De pin ligt op de geconfigureerde origin; een URI buiten die
         // origin wordt geweigerd vóór er verbonden wordt.
         'lib/collab/matrix_http_transport_io.dart',
+        // XMPP-over-WebSocket egress (desktop): resolveConfigured met de
+        // trustedInternal-opt-in + socket-pin via connectPinned, plus een
+        // fail-closed schema-assert die een ongepinde (niet-https) socket weigert
+        // i.p.v. TLS te droppen. De enige uitgaande socket van lib/xmpp/.
+        'lib/xmpp/xmpp_frame_transport_io.dart',
       },
       guidance:
           'New raw HttpClient. Resolve the host through NetGuard.safeResolve '
@@ -306,9 +315,19 @@ void main() {
     // een NIEUWE verbinding naar een adres dat nooit gekeurd is — en dan was
     // het pinnen voor niets.
     final setsIt = RegExp(r'followRedirects\s*=\s*false');
+    // Bewust vrijgesteld: de XMPP-WebSocket-uitgang. `WebSocket.connect(
+    // customClient:)` bouwt het HTTP-upgrade-verzoek intern, dus de app kan
+    // `request.followRedirects` niet zetten. In plaats daarvan pint de
+    // connectionFactory ELKE verbinding — ook een 3xx-sprong — aan het door
+    // `resolveConfigured` goedgekeurde IP (de closure vangt datzelfde `pinned`),
+    // en weigert de fail-closed https-assert een downgrade-hop. Een omleiding
+    // bereikt zo nooit een nieuwe, ongekeurde host; een 3xx is bovendien geen 101
+    // en laat de upgrade sowieso mislukken. Zie xmpp_frame_transport_io.dart.
+    const redirectsPinnedNotRefused = {'lib/xmpp/xmpp_frame_transport_io.dart'};
     final missing = <String>[];
     for (final path in pinnedClientCount.keys) {
       if (pinnedClientCount[path] == 0) continue; // net_guard maakt er geen
+      if (redirectsPinnedNotRefused.contains(path)) continue;
       final source = File(path).readAsStringSync();
       if (!setsIt.hasMatch(source)) missing.add(path);
     }
@@ -360,6 +379,11 @@ void main() {
         // de client die het token stuurt wordt lexicaal op https/loopback
         // gecontroleerd in MatrixClient vóór dit transport wordt bereikt.
         'lib/collab/matrix_http_transport_web.dart',
+        // XMPP-over-WebSocket egress (desktop): ruwe WebSocket.connect met een
+        // NetGuard-gepinde customClient (zie de raw-HttpClient-allowlist hierboven,
+        // plus de fail-closed schema-assert). Bewust WebSocket.connect en niet
+        // IOWebSocketChannel, zodat deze scan de socket wél ziet.
+        'lib/xmpp/xmpp_frame_transport_io.dart',
       },
       guidance:
           'New network egress primitive (package:http, dio, or a raw socket). '

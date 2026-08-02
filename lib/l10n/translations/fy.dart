@@ -731,6 +731,29 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'XMPP-server testen': 'XMPP-server teste',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Fier in XMPP-server, in Jabber-ID en in wachtwurd yn en test de ferbining. Der wurdt neat bewarre; dit kontrolearret allinnich oft it akkount wurket. Lit de Jabber-ID leech foar anonime tagong.',
+  'Serveradres (wss://…)': 'Serveradres (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber-ID (brûker@domein)',
+  'Verbinden…': 'Ferbine…',
+  'Verbonden — authenticatie geslaagd via': 'Ferbûn — autentikaasje slagge fia',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'De server biedt gjin oanmeldmetoade dy\'t OciDeck stipet.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'De brûkersnamme of it wachtwurd waard net akseptearre.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'De server koe himsels net bewize (wjersidige ferifikaasje mislearre).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'De server woe de ferbining omliede nei in oare host; wegere.',
+  'De server reageerde niet op tijd.': 'De server reagearre net op tiid.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Koe gjin ferbining meitsje mei de server. Brûk wss:// en in jildich adres.',
+  'De verbinding met de server mislukte.':
+      'De ferbining mei de server is mislearre.',
+  'XMPP-verbinding testen': 'XMPP-ferbining teste',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Kontrolearje oft OciDeck in XMPP-server berikke kin en mei jo akkount ynlogge kin. Der wurdt neat bewarre.',
   'Actueel': 'Aktueel',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Boarne modus beskermet opmaak dat de fisuele bewurker noch net losslessly stipet.',

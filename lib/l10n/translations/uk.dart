@@ -1788,6 +1788,29 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'XMPP-server testen': 'Перевірити сервер XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Введіть XMPP-сервер, Jabber ID і пароль та перевірте з\'єднання. Нічого не зберігається; це лише перевіряє, чи працює обліковий запис. Залиште Jabber ID порожнім для анонімного доступу.',
+  'Serveradres (wss://…)': 'Адреса сервера (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (користувач@домен)',
+  'Verbinden…': 'З\'єднання…',
+  'Verbonden — authenticatie geslaagd via':
+      'З\'єднано — автентифікація виконана через',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Сервер не пропонує способу входу, який підтримує OciDeck.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Ім\'я користувача або пароль не прийнято.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Сервер не зміг підтвердити свою автентичність (взаємна перевірка не вдалася).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Сервер намагався перенаправити з\'єднання на інший хост; відхилено.',
+  'De server reageerde niet op tijd.': 'Сервер не відповів вчасно.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Не вдалося підключитися до сервера. Використовуйте wss:// і дійсну адресу.',
+  'De verbinding met de server mislukte.': 'Не вдалося з\'єднатися з сервером.',
+  'XMPP-verbinding testen': 'Перевірити з\'єднання XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Перевірте, чи може OciDeck дістатися до XMPP-сервера й увійти з вашим обліковим записом. Нічого не зберігається.',
   'Actueel': 'поточний',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Режим вихідного коду захищає форматування, яке візуальний редактор ще не підтримує без втрат.',
