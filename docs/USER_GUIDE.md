@@ -1478,7 +1478,7 @@ names and descriptions.
 
 You can also open the library **without any presentation open**, straight from
 the start screen: once you have one or more library folders configured, a
-desktop-only **Image library** button appears there. Opened this way it runs in a
+desktop-only **Manage images** button appears there. Opened this way it runs in a
 **management mode** — there is no slide to pick an image *for*, so the *Choose*
 and *Browse* actions fall away and only the maintenance actions remain: cleaning
 up duplicates and deleting images. It searches your configured library folders,

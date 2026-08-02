@@ -19,7 +19,7 @@ in Dutch, and it keeps growing on `main` between releases.
 - **Afbeeldingenbibliotheek als onderhoudsscherm vanaf het beginscherm** — de
   bibliotheek was alleen te openen met een presentatie erbij (om er een
   afbeelding voor een dia uit te kiezen). Op het beginscherm staat nu een knop
-  **Afbeeldingenbibliotheek** — op desktop en zodra je bibliotheekmappen hebt
+  **Afbeeldingen beheren** — op desktop en zodra je bibliotheekmappen hebt
   ingesteld — die de bibliotheek in een **beheermodus** opent: het kiezen (de
   knoppen *Kiezen* en *Bladeren*) vervalt en alleen het onderhoud blijft over,
   duplicaten opruimen en afbeeldingen verwijderen. Zo ruim je je
