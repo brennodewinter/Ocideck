@@ -14,6 +14,17 @@ language: et
 
 ---
 
+<!-- skip -->
+
+# Selle malliga töötate nii
+
+- Kasutage SIPOC-i, et mõista ühe protsessi ulatust ja sõltuvusi, mitte iga toimingu salvestamiseks.
+- Kasutage kontrollnimekirjana abi ja näiterida; sisestage oma vastused **Protsessi piirid** ja tühja **SIPOC** maatriksisse.
+- Eelistatavalt töötage kliendilt tarnijale, kasutades nimisõnu sisendi ja väljundi ning tegusõnadega protsessi etappe.
+- Esitlusest ja ekspordist jäetakse välja ainult slaidid, millel on silt **Vahele jäetud**. Lülitage **Jäta vahele** sisse või välja, et näha selgitusi, mida teie vaatajaskond võib vajada või mitte.
+
+---
+
 # Mida SIPOC kaardistab?
 
 - **Tarnija:** pakub protsessi jaoks vajalikku teavet või ressursse.
@@ -36,7 +47,21 @@ language: et
 
 ---
 
-# Täitke see paremalt vasakule
+<!-- skip -->
+
+# Kontrollnimekiri – millal on piirid piisavalt selged?
+
+- **Protsess:** andke sellele äratuntav nimi koos tegusõna ja teemaga, näiteks "Registreeri tellimus".
+- **Lähtepunkt:** nimetage üks jälgitav sündmus, näiteks "Taotlus on vastu võetud".
+- **Lõpp-punkt:** nimetage üks demonstreeritav tulemus, näiteks "Tellimuse kinnitus saadetud".
+- Valige piirid, mille ümber meeskond saab sisukaid kokkuleppeid sõlmida.
+- Liiguta erandid ja külgnevad protsessid maatriksist väljapoole; kirjutage need eraldi üles.
+
+---
+
+<!-- skip -->
+
+# Kontrollnimekiri – täitke paremalt vasakule
 
 1. Määrake protsessile selged algus- ja lõpp-punktid.
 2. Nimetage kliendid, kes sõltuvad tulemusest.
@@ -44,6 +69,21 @@ language: et
 4. Tehke protsess kokku 4 kuni 7 kõrgetasemelise tegevusega.
 5. Tehke kindlaks, milliseid sisendeid need tegevused vajavad.
 6. Linkige iga sisend tarnijaga, kes selle kättesaadavaks teeb.
+
+---
+
+<!-- skip -->
+<!-- _class: table -->
+
+# Kontrollnimekiri – ühe ühendatud rea näide
+
+| Supplier | Input | Process | Output | Customer |
+| --- | --- | --- | --- | --- |
+| Müük | Heakskiidetud taotlus | Kontrolli tellimust → registreeri → kinnita | Tellimuse kinnitus | Taotleja |
+
+- Loe rida ühe ahelana: tarnija annab sisendi, protsess muudab selle kliendi jaoks väljundiks.
+- Lisage uus rida ainult siis, kui kett on oluliselt erinev.
+- Kontrollige asjaosalistega, et ükski oluline tarnija, sisend, väljund või klient ei oleks puudu.
 
 ---
 

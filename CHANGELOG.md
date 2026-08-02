@@ -21,9 +21,15 @@ in Dutch, and it keeps growing on `main` between releases.
   vervallen. Zet de uitbreiding aan en kies in **Nieuwe presentatie** een
   sjabloon met de badge *Procesverbetering*: DMAIC, DMADV, Kaizen, A3, 8D of het
   zelfstandige **SIPOC-procesoverzicht**. De projectvormen vragen na de keuze om
-  de optionele primaire Y-metriek en limieten. SIPOC bevat zes dia's, waaronder
-  een bewerkbare procesafbakening en matrix; de instructie om van klant naar
-  leverancier te werken staat vóór de lege matrix. Sjablonen voor MIAUW en voor
+  de optionele primaire Y-metriek en limieten. Elk projectsjabloon bevat nu per
+  fase een korte hulpdia met concrete invulvragen; charter, CTQ-boom en SIPOC
+  leggen eveneens uit welke informatie nodig is. Die hulpdia's zijn standaard
+  als **Checklist** en overgeslagen gemarkeerd: de maker zet antwoorden op
+  gewone dia's erna, vervangt de charter- en CTQ-vraagtekst en voorkomt zo dat
+  werknotities ongemerkt uit presentatie of export verdwijnen. Het zelfstandige
+  SIPOC-sjabloon bevat daarnaast procesafbakening, een voorbeeldketen en de
+  instructie om van klant naar leverancier te werken vóór de lege matrix.
+  Sjablonen voor MIAUW en voor
   de geselecteerde
   informatieveiligheidswerkvormen volgen dezelfde catalogusregel: zij zijn pas
   zichtbaar met *Informatieveiligheid* aan en dragen daar de badge van.

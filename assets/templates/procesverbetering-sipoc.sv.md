@@ -14,6 +14,17 @@ language: sv
 
 ---
 
+<!-- skip -->
+
+# Så här arbetar du med den här mallen
+
+- Använd SIPOC för att förstå omfattningen och beroenden av en process, inte för att registrera varje åtgärd.
+- Använd hjälpen och exempelraden som en checklista; skriv in dina svar på **Processgränser** och i den tomma **SIPOC**-matrisen.
+- Arbeta helst från kund till leverantör, med substantiv för input och output och verb för processsteg.
+- Endast bilder märkta **Hoppade över** kommer att utelämnas från presentation och export. Aktivera eller inaktivera **Hoppa över** för förklaringar som din publik kanske behöver eller inte behöver.
+
+---
+
 # Vad kartlägger SIPOC?
 
 - **Leverantör:** tillhandahåller den information eller resurser som processen behöver.
@@ -36,7 +47,21 @@ language: sv
 
 ---
 
-# Slutför det från höger till vänster
+<!-- skip -->
+
+# Checklista — När är gränserna tillräckligt tydliga?
+
+- **Process:** ge det ett igenkännbart namn med verb och ämne, till exempel "Registrera beställning".
+- **Utgångspunkt:** Nämn en observerbar händelse, till exempel "Begäran har tagits emot".
+- **Slutpunkt:** nämn ett påvisbart resultat, till exempel "Orderbekräftelse har skickats".
+- Välj gränser runt vilka teamet kan göra meningsfulla överenskommelser.
+- Flytta undantag och angränsande processer utanför matrisen; skriv ner dem separat.
+
+---
+
+<!-- skip -->
+
+# Checklista — Fyll i från höger till vänster
 
 1. Ange tydliga start- och slutpunkter för processen.
 2. Nämn de kunder som är beroende av resultatet.
@@ -44,6 +69,21 @@ language: sv
 4. Sammanfatta processen i 4 till 7 aktiviteter på hög nivå.
 5. Bestäm vilka insatser dessa aktiviteter behöver.
 6. Koppla varje ingång till leverantören som gör den tillgänglig.
+
+---
+
+<!-- skip -->
+<!-- _class: table -->
+
+# Checklista — Exempel på en ansluten rad
+
+| Supplier | Input | Process | Output | Customer |
+| --- | --- | --- | --- | --- |
+| Försäljning | Godkänd begäran | Kontrollera beställning → registrera → bekräfta | Orderbekräftelse | Sökande |
+
+- Läs raden som en kedja: leverantören ger input, processen förvandlar det till output för kunden.
+- Lägg bara till en ny rad om kedjan är väsentligt annorlunda.
+- Kontrollera med de inblandade för att säkerställa att ingen viktig leverantör, input, output eller kund saknas.
 
 ---
 

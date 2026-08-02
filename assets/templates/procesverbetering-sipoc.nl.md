@@ -14,6 +14,17 @@ language: nl
 
 ---
 
+<!-- skip -->
+
+# Zo werk je met dit sjabloon
+
+- Gebruik SIPOC om de scope en afhankelijkheden van één proces te begrijpen, niet om elke handeling vast te leggen.
+- Gebruik de hulp en de voorbeeldrij als checklist; vul je antwoorden in op **Procesgrenzen** en in de lege **SIPOC**-matrix.
+- Werk bij voorkeur van klant naar leverancier, met zelfstandige naamwoorden voor input en output en werkwoorden voor processtappen.
+- Alleen dia's met het label **Overgeslagen** blijven buiten presentatie en export. Zet **Overslaan** zelf aan of uit voor uitleg die je publiek wel of niet nodig heeft.
+
+---
+
 # Wat brengt SIPOC in kaart?
 
 - **Supplier (Leverancier):** levert benodigde informatie of middelen.
@@ -36,7 +47,21 @@ language: nl
 
 ---
 
-# Invullen van rechts naar links
+<!-- skip -->
+
+# Checklist — Wanneer zijn de grenzen duidelijk genoeg?
+
+- **Proces:** geef het een herkenbare naam met werkwoord en onderwerp, bijvoorbeeld “Order registreren”.
+- **Startpunt:** benoem één waarneembare gebeurtenis, bijvoorbeeld “Aanvraag ontvangen”.
+- **Eindpunt:** benoem één aantoonbaar resultaat, bijvoorbeeld “Orderbevestiging verstuurd”.
+- Kies grenzen waarover het team zinvolle afspraken kan maken.
+- Zet uitzonderingen en aangrenzende processen buiten de matrix; noteer ze apart.
+
+---
+
+<!-- skip -->
+
+# Checklist — Invullen van rechts naar links
 
 1. Baken het proces af met een duidelijk start- en eindpunt.
 2. Benoem de klanten die op het resultaat wachten.
@@ -44,6 +69,21 @@ language: nl
 4. Vat het proces samen in 4 tot 7 hoofdactiviteiten.
 5. Bepaal welke inputs daarvoor nodig zijn.
 6. Koppel iedere input aan de leverancier die hem beschikbaar maakt.
+
+---
+
+<!-- skip -->
+<!-- _class: table -->
+
+# Checklist — Voorbeeld van één samenhangende rij
+
+| Supplier | Input | Process | Output | Customer |
+| --- | --- | --- | --- | --- |
+| Verkoop | Goedgekeurde aanvraag | Order controleren → registreren → bevestigen | Orderbevestiging | Aanvrager |
+
+- Lees de rij als één keten: de leverancier levert input, het proces verandert die in output voor de klant.
+- Voeg alleen een nieuwe rij toe als de keten wezenlijk anders is.
+- Controleer met betrokkenen of geen belangrijke leverancier, input, output of klant ontbreekt.
 
 ---
 

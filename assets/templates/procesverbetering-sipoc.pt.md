@@ -14,6 +14,17 @@ language: pt
 
 ---
 
+<!-- skip -->
+
+# É assim que você trabalha com este modelo
+
+- Use o SIPOC para compreender o escopo e as dependências de um processo, não para registrar todas as ações.
+- Use a ajuda e a linha de exemplo como lista de verificação; insira suas respostas em **Limites do processo** e na matriz **SIPOC** vazia.
+- De preferência, trabalhe do cliente para o fornecedor, com substantivos para entrada e saída e verbos para etapas do processo.
+- Somente os slides rotulados como **Ignorados** serão deixados de fora da apresentação e da exportação. Ative ou desative **Pular** para explicações que seu público pode ou não precisar.
+
+---
+
 # O que o SIPOC mapeia?
 
 - **Fornecedor:** fornece as informações ou recursos que o processo precisa.
@@ -36,7 +47,21 @@ language: pt
 
 ---
 
-# Complete da direita para a esquerda
+<!-- skip -->
+
+# Lista de verificação — Quando os limites são suficientemente claros?
+
+- **Processo:** dê um nome reconhecível com verbo e sujeito, por exemplo “Registrar pedido”.
+- **Ponto de partida:** Nomeie um evento observável, por exemplo “Solicitação recebida”.
+- **Endpoint:** nomeie um resultado demonstrável, por exemplo “Confirmação do pedido enviado”.
+- Escolha limites em torno dos quais a equipe possa fazer acordos significativos.
+- Mova exceções e processos adjacentes para fora da matriz; anote-os separadamente.
+
+---
+
+<!-- skip -->
+
+# Lista de verificação - Preencher da direita para a esquerda
 
 1. Defina pontos de início e fim claros para o processo.
 2. Nomeie os clientes que dependem do resultado.
@@ -44,6 +69,21 @@ language: pt
 4. Resuma o processo em 4 a 7 atividades de alto nível.
 5. Determine quais insumos essas atividades precisam.
 6. Vincule cada insumo ao fornecedor que o disponibiliza.
+
+---
+
+<!-- skip -->
+<!-- _class: table -->
+
+# Lista de verificação — Exemplo de uma linha conectada
+
+| Supplier | Input | Process | Output | Customer |
+| --- | --- | --- | --- | --- |
+| Oferta | Solicitação aprovada | Verifique o pedido → registre-se → confirme | Confirmação do pedido | Requerente |
+
+- Leia a linha como uma cadeia: o fornecedor fornece a entrada, o processo a transforma em saída para o cliente.
+- Adicione uma nova linha apenas se a cadeia for significativamente diferente.
+- Verifique com os envolvidos se não falta nenhum fornecedor, insumo, saída ou cliente importante.
 
 ---
 
