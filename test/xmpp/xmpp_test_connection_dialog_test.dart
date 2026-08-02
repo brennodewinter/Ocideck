@@ -9,7 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/xmpp_settings.dart';
 import 'package:ocideck/widgets/dialogs/xmpp_test_connection_dialog.dart';
-import 'package:ocideck/xmpp/xmpp_connection.dart';
+import 'package:ocideck/xmpp/xmpp_session.dart';
 
 Future<void> pumpDialog(WidgetTester tester, XmppConnectTest connect) async {
   await tester.pumpWidget(
@@ -46,7 +46,10 @@ void main() {
     await pumpDialog(tester, (settings, password) async {
       seenSettings = settings;
       seenPassword = password;
-      return const XmppAuthResult.success('SCRAM-SHA-256');
+      return const XmppSessionResult.ok(
+        mechanism: 'SCRAM-SHA-256',
+        boundJid: 'a@example/ocideck-1',
+      );
     });
     await fillAndTest(tester);
 
@@ -54,15 +57,17 @@ void main() {
     expect(seenSettings?.serverUrl, 'wss://xmpp.example/xmpp-websocket');
     expect(seenSettings?.jid, 'a@example');
     expect(seenPassword, 'pencil');
-    // The success line names the mechanism (locale-independent protocol name).
+    // The success line names the mechanism (locale-independent protocol name)
+    // and the bound full JID.
     expect(find.textContaining('SCRAM-SHA-256'), findsOneWidget);
+    expect(find.textContaining('a@example/ocideck-1'), findsOneWidget);
   });
 
   testWidgets('maps a failure code to a translated message', (tester) async {
     await pumpDialog(
       tester,
       (settings, password) async =>
-          const XmppAuthResult.failed(XmppAuthFailure.badCredentials),
+          const XmppSessionResult.failed(XmppSessionFailure.badCredentials),
     );
     await fillAndTest(tester);
     expect(find.textContaining('wachtwoord'), findsWidgets);
@@ -74,7 +79,10 @@ void main() {
     var called = false;
     await pumpDialog(tester, (settings, password) async {
       called = true;
-      return const XmppAuthResult.success('ANONYMOUS');
+      return const XmppSessionResult.ok(
+        mechanism: 'ANONYMOUS',
+        boundJid: 'anon@example/x',
+      );
     });
     await fillAndTest(tester);
     expect(called, isTrue);
