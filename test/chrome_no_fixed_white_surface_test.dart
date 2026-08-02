@@ -27,10 +27,11 @@ void main() {
 
     // Bestanden met een bewust wit oppervlak. Per plek de reden.
     const allowlist = <String>{
-      // De duim van de aangepaste schakelaar in de vind-en-vervang-balk: een
-      // licht schijfje op zijn gekleurde spoor, geen kaart. Een schakelaar-duim
-      // is per Material-conventie licht in beide modi.
-      'lib/widgets/editors/markdown_deck_editor.dart',
+      // De duim van de aangepaste scope-schakelaar: een licht schijfje op zijn
+      // gekleurde spoor, geen kaart. Een schakelaar-duim is per Material-
+      // conventie licht in beide modi. (De schakelaar verhuisde met de overige
+      // hulpwidgets naar markdown_deck_editor_widgets.dart.)
+      'lib/widgets/editors/markdown_deck_editor_widgets.dart',
     };
 
     final dirs = [

@@ -643,7 +643,12 @@ class TabsNotifier extends StateNotifier<TabsState> {
   }) async {
     _clearOpenFailure(_ref, mounted);
     if (FileService.looksLikeZipBytes(bytes)) {
-      return _openPackageFromBytes(bytes, name, remoteOrigin: remoteOrigin);
+      return _openPackageFromBytes(
+        this,
+        bytes,
+        name,
+        remoteOrigin: remoteOrigin,
+      );
     }
     if (bytes.length > FileService.maxDeckMarkdownBytes) {
       return _failOpen(_ref, mounted, OpenFailure.tooLarge);
@@ -659,67 +664,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final deck = gated.deck;
     if (deck == null) return gated.failure;
     if (!mounted) return OpenResult.unreadable;
-    _warnUnfilledChartData(deck);
-    _placeDeckInTab(deck, remoteOrigin: remoteOrigin);
-    return OpenResult.opened;
-  }
-
-  /// Pak een `.ocideck`/zip-pakket volledig in het geheugen uit en open het:
-  /// de hoofd-markdown gaat door dezelfde security-gate als elk bytes-open,
-  /// afbeeldings-leden gaan (na de pickImage-validatie) de [WebAssetStore] in
-  /// en de slidepaden worden naar hun mem:-pad herschreven, en de sidecars
-  /// (annotaties, sprekersnotities) reizen mee. Er raakt geen bestandssysteem
-  /// aan te pas, dus dit werkt ook in de webversie.
-  Future<OpenResult> _openPackageFromBytes(
-    Uint8List bytes,
-    String name, {
-    String? remoteOrigin,
-  }) async {
-    // Versleuteld pakket: vraag (met retry) het wachtwoord vóór het decoderen.
-    String? password;
-    if (FileService.isEncryptedPackage(bytes)) {
-      final resolver = packagePasswordResolver;
-      if (resolver == null) return OpenResult.passwordCancelled;
-      var retry = false;
-      while (true) {
-        final pw = await resolver(retry: retry);
-        if (pw == null || !mounted) return OpenResult.passwordCancelled;
-        if (_file.canDecodePackage(bytes, pw)) {
-          password = pw;
-          break;
-        }
-        retry = true;
-      }
-    }
-    final entries = _file.decodePackageEntries(bytes, password: password);
-    if (entries == null) return OpenResult.unreadable;
-    final mdEntry = FileService.mainMarkdownEntry(entries);
-    if (mdEntry == null) return OpenResult.notAPresentation;
-    final String raw;
-    try {
-      raw = utf8.decode(mdEntry.bytes);
-    } on FormatException catch (e) {
-      logWarning('TabsNotifier._openPackageFromBytes: md not UTF-8', e);
-      return OpenResult.unreadable;
-    }
-    final gated = _gateAndParseContent(
-      raw,
-      sourceName: '$name → ${mdEntry.name}',
-    );
-    var deck = gated.deck;
-    if (deck == null) return gated.failure;
-
-    try {
-      deck = _attachPackageAssets(deck, entries, mdEntry.name);
-    } on WebAssetBudgetExceeded catch (e) {
-      logWarning('TabsNotifier._openPackageFromBytes: webgeheugen vol', e);
-      return _failOpen(_ref, mounted, OpenFailure.memoryBudgetExceeded);
-    }
-    deck = _attachPackageChartData(deck, entries, mdEntry.name);
-    deck = _attachPackageSidecars(deck, entries, mdEntry.name);
-    if (!mounted) return OpenResult.unreadable;
-    // Ná het aanhaken: wat het pakket wél meebracht is nu ingevuld, dus wat
-    // hier nog leeg is, ontbrak echt.
     _warnUnfilledChartData(deck);
     _placeDeckInTab(deck, remoteOrigin: remoteOrigin);
     return OpenResult.opened;
