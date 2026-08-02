@@ -962,31 +962,40 @@ Future<void> _createDeckFromDialog(
   final languageCode = context.l10n.languageCode;
   final choice = await NewDeckDialog.show(context);
   if (choice == null) return;
+  if (!context.mounted) return;
+  var y01 = ImprovementY01Metric.empty;
+  if (choice.template.improvementFramework.isNotEmpty) {
+    final enteredY01 = await ImprovementProjectSetupDialog.show(context);
+    if (enteredY01 == null) return;
+    if (!context.mounted) return;
+    y01 = enteredY01;
+  }
   // Profielkeuze is globaal (het actieve profiel bepaalt de stijl van elk
   // deck); eerst selecteren, dan aanmaken zodat het nieuwe deck hem erft.
   await ref
       .read(settingsProvider.notifier)
       .selectThemeProfile(choice.profileName);
-  final slides = await TemplateContentService().loadSlides(
+  var slides = await TemplateContentService().loadSlides(
     choice.template.id,
     languageCode: languageCode,
     deckTitle: choice.title,
   );
-  final improvementFramework = choice.template.id == 'procesverbetering-dmaic'
-      ? 'dmaic'
-      : '';
+  slides = applyImprovementY01ToSlides(slides, y01);
+  final improvementFramework = choice.template.improvementFramework;
   final tabs = ref.read(tabsProvider.notifier);
   if (inNewTab) {
     tabs.newDeckInNewTab(
       choice.title,
       slides: slides,
       improvementFramework: improvementFramework,
+      improvementY01Metric: y01,
     );
   } else {
     tabs.newDeckInCurrentTab(
       choice.title,
       slides: slides,
       improvementFramework: improvementFramework,
+      improvementY01Metric: y01,
     );
   }
 }

@@ -24,6 +24,29 @@ language: pap
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Pone e fronteranan di e proseso
+
+| Frontera | Balor |
+| --- | --- |
+| Nòmber di proseso |  |
+| Punto di salida |  |
+| Punto final |  |
+
+---
+
+# Complétalo de derecha a izquierda.
+
+1. Pone puntonan di inisio i final kla pa e proseso.
+2. Menshoná e klientenan ku ta dependé di e resultado.
+3. Deskribí e resultadonan ku nan ta risibí.
+4. Resumí e proseso den 4 pa 7 aktividat di nivel haltu.
+5. Determiná kua entrada e aktividatnan ei mester.
+6. Link kada entrada na e proveedó ku ta hasié disponibel.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: pap
 | Detalle | 4 a 7 actividades de alto nivel | Puede contener docenas de pasos. |
 | Enfocar | Proveedores, insumos, productos y clientes. | Secuencia, traspasos y puntos de decisión. |
 | Usar | Inicio de un esfuerzo de mejora | Ejecución y análisis de fallos. |
-
----
-
-# Complétalo de derecha a izquierda.
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

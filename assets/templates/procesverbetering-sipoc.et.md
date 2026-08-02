@@ -24,6 +24,29 @@ language: et
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Määrake protsessi piirid
+
+| Piir | Väärtus |
+| --- | --- |
+| Protsessi nimi |  |
+| Alguspunkt |  |
+| Lõpp-punkt |  |
+
+---
+
+# Täitke see paremalt vasakule
+
+1. Määrake protsessile selged algus- ja lõpp-punktid.
+2. Nimetage kliendid, kes sõltuvad tulemusest.
+3. Kirjeldage väljundeid, mida nad saavad.
+4. Tehke protsess kokku 4 kuni 7 kõrgetasemelise tegevusega.
+5. Tehke kindlaks, milliseid sisendeid need tegevused vajavad.
+6. Linkige iga sisend tarnijaga, kes selle kättesaadavaks teeb.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: et
 | Detail | 4 kuni 7 kõrgetasemelist tegevust | Võib sisaldada kümneid samme |
 | Keskendu | Tarnijad, sisendid, väljundid ja kliendid | Järjestus, üleandmised ja otsustuspunktid |
 | Kasuta | Parandustegevuse algus | Teostus ja rikete analüüs |
-
----
-
-# Täitke see paremalt vasakule
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

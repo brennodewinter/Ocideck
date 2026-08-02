@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart' show FlutterError;
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../models/improvement_y01.dart';
 import '../models/slide.dart';
-import '../services/improvement/improvement_project_scaffold.dart';
 import '../utils/log.dart';
 import '../l10n/app_localizations.dart';
 import 'markdown_service.dart';
@@ -40,14 +40,6 @@ class TemplateContentService {
     required String languageCode,
     required String deckTitle,
   }) async {
-    if (templateId == 'procesverbetering-dmaic') {
-      return buildImprovementProjectSlides(
-        projectTitle: deckTitle,
-        framework: 'dmaic',
-        y01Description: '',
-      );
-    }
-
     final Slide bareTitle = Slide.create(
       SlideType.title,
     ).copyWith(title: deckTitle);
@@ -70,4 +62,23 @@ class TemplateContentService {
     slides[0] = slides[0].copyWith(title: deckTitle);
     return slides;
   }
+}
+
+/// Seeds the CTQ tree of an improvement-project template with the Y-01 name
+/// entered in the setup step. The remaining starter branches stay intact.
+List<Slide> applyImprovementY01ToSlides(
+  List<Slide> slides,
+  ImprovementY01Metric y01,
+) {
+  if (y01.name.trim().isEmpty) return slides;
+  final index = slides.indexWhere(
+    (slide) => slide.improvementTemplateId == 'ctq-tree',
+  );
+  if (index < 0 || slides[index].bullets.isEmpty) return slides;
+
+  final result = List<Slide>.of(slides);
+  final bullets = List<String>.of(result[index].bullets);
+  bullets[0] = '${y01.name.trim()} — **Y-01**';
+  result[index] = result[index].copyWith(bullets: bullets);
+  return result;
 }

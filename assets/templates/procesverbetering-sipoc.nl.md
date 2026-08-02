@@ -24,6 +24,29 @@ language: nl
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Stel de procesgrenzen vast
+
+| Afbakening | Waarde |
+| --- | --- |
+| Proces |  |
+| Startpunt |  |
+| Eindpunt |  |
+
+---
+
+# Invullen van rechts naar links
+
+1. Baken het proces af met een duidelijk start- en eindpunt.
+2. Benoem de klanten die op het resultaat wachten.
+3. Beschrijf welke outputs zij ontvangen.
+4. Vat het proces samen in 4 tot 7 hoofdactiviteiten.
+5. Bepaal welke inputs daarvoor nodig zijn.
+6. Koppel iedere input aan de leverancier die hem beschikbaar maakt.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: nl
 | Detail | 4 tot 7 hoofdlijnen | Tientallen stappen mogelijk |
 | Focus | Leveranciers, input, output en klanten | Volgorde, overdrachten en beslismomenten |
 | Gebruik | Start van een verbetertraject | Uitvoering en foutenanalyse |
-
----
-
-# Invullen van rechts naar links
-
-1. Baken het proces af met een duidelijk start- en eindpunt.
-2. Benoem de klanten die op het resultaat wachten.
-3. Beschrijf welke outputs zij ontvangen.
-4. Vat het proces samen in 4 tot 7 hoofdactiviteiten.
-5. Bepaal welke inputs daarvoor nodig zijn.
-6. Koppel iedere input aan de leverancier die hem beschikbaar maakt.

@@ -24,6 +24,29 @@ language: fr
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Définir les limites du processus
+
+| Limite | Valeur |
+| --- | --- |
+| Nom du processus |  |
+| Point de départ |  |
+| Point final |  |
+
+---
+
+# Complétez-le de droite à gauche
+
+1. Définissez des points de début et de fin clairs pour le processus.
+2. Nommez les clients qui dépendent du résultat.
+3. Décrivez les résultats qu’ils reçoivent.
+4. Résumez le processus en 4 à 7 activités de haut niveau.
+5. Déterminez les intrants dont ces activités ont besoin.
+6. Liez chaque entrée au fournisseur qui la met à disposition.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: fr
 | Détail | 4 à 7 activités de haut niveau | Peut contenir des dizaines d'étapes |
 | Se concentrer | Fournisseurs, intrants, extrants et clients | Séquence, transferts et points de décision |
 | Utiliser | Début d’un effort d’amélioration | Exécution et analyse des défauts |
-
----
-
-# Complétez-le de droite à gauche
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

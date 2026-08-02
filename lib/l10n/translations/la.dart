@@ -1787,6 +1787,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Procesverbetering: DMADV-project': 'Processus emendationem: DMADV project',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'sceletum DMADV ad novum processum excogitandum et comprobandum.',
+  'Procesverbetering: Kaizen-project': 'Processus emendationem: Kaizen project',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Foedus emendationem propositi cum Plan, Fac et Compesce augmenta.',
+  'Procesverbetering: A3-project': 'Processus emendationem: A3 project',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 osseus problema, analysis et actus emendandi.',
+  'Procesverbetering: 8D-project': 'Processus emendationem: 8D project',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D Ossa problemata descriptio, causarum et certitudinum.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modulus activus. Nucleus computationis, dispositiones diapositivarum et exemplaria localiter praesto sunt ({n} factores chartae moderationis).',
   'SIPOC-procesoverzicht': 'Conspectus processus SIPOC',

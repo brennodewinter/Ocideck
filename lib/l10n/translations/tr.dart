@@ -2748,6 +2748,18 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Procesverbetering: DMADV-project': 'Süreç iyileştirme: DMADV projesi',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Yeni bir sürecin tasarlanması ve doğrulanması için DMADV iskeleti.',
+  'Procesverbetering: Kaizen-project': 'Süreç iyileştirme: Kaizen projesi',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Planla, Yap ve Kontrol aşamalarını içeren kompakt iyileştirme projesi.',
+  'Procesverbetering: A3-project': 'Süreç iyileştirme: A3 projesi',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Sorun, analiz ve iyileştirme eylemleri için A3 iskeleti.',
+  'Procesverbetering: 8D-project': 'Süreç iyileştirme: 8D projesi',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Sorunun tanımı, nedenleri ve güvencesi için 8D iskelet.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modül açık. Hesaplama çekirdeği, slayt düzenleri ve şablonlar yerel olarak kullanılabilir ({n} kontrol grafiği faktörü).',
   'SIPOC-procesoverzicht': 'SIPOC süreç genel görünümü',

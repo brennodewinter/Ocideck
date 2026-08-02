@@ -29,6 +29,25 @@ const werkdeckIds = [
   'retrospective',
 ];
 
+/// De vijf projectvormen en het kader dat het nieuwe deck in de frontmatter
+/// moet meekrijgen. SIPOC is een los hulpmiddel en heeft daarom geen kader.
+const improvementProjectFrameworks = {
+  'procesverbetering-dmaic': 'dmaic',
+  'procesverbetering-dmadv': 'dmadv',
+  'procesverbetering-kaizen': 'kaizen',
+  'procesverbetering-a3': 'a3',
+  'procesverbetering-8d': '8d',
+};
+
+const improvementTemplateIds = [
+  'procesverbetering-dmaic',
+  'procesverbetering-dmadv',
+  'procesverbetering-kaizen',
+  'procesverbetering-a3',
+  'procesverbetering-8d',
+  'procesverbetering-sipoc',
+];
+
 /// De inhoudstalen van de sjabloondocumenten. Klingon valt voorlopig terug op
 /// Engels totdat de inhoud betrouwbaar door een mens is vertaald.
 final contentLanguages = AppLocalizations.supportedLocales
@@ -87,7 +106,6 @@ void main() {
     test('module visibility follows the template requirement', () {
       final ordinary = deckTemplateById('briefing')!;
       final security = deckTemplateById('miauwReport')!;
-      final improvement = deckTemplateById('procesverbetering-sipoc')!;
 
       bool visible(
         DeckTemplate template, {
@@ -102,8 +120,24 @@ void main() {
       expect(visible(ordinary), isTrue);
       expect(visible(security), isFalse);
       expect(visible(security, sec: true), isTrue);
-      expect(visible(improvement), isFalse);
-      expect(visible(improvement, imp: true), isTrue);
+      for (final id in improvementTemplateIds) {
+        final improvement = deckTemplateById(id)!;
+        expect(visible(improvement), isFalse, reason: id);
+        expect(visible(improvement, imp: true), isTrue, reason: id);
+      }
+    });
+
+    test('every improvement project declares its framework', () {
+      for (final entry in improvementProjectFrameworks.entries) {
+        final template = deckTemplateById(entry.key);
+        expect(template, isNotNull, reason: entry.key);
+        expect(template!.requiresProcesverbetering, isTrue, reason: entry.key);
+        expect(template.improvementFramework, entry.value, reason: entry.key);
+      }
+      expect(
+        deckTemplateById('procesverbetering-sipoc')!.improvementFramework,
+        isEmpty,
+      );
     });
   });
 
@@ -796,9 +830,77 @@ void main() {
       }
     });
 
+    test(
+      'puts boundary fields and completion instructions before the matrix',
+      () {
+        const expectedRows = {
+          'nl': [
+            ['Afbakening', 'Waarde'],
+            ['Proces', ''],
+            ['Startpunt', ''],
+            ['Eindpunt', ''],
+          ],
+          'en': [
+            ['Boundary', 'Value'],
+            ['Process', ''],
+            ['Start point', ''],
+            ['End point', ''],
+          ],
+        };
+        const instructionTitles = {
+          'nl': 'Invullen van rechts naar links',
+          'en': 'Complete it from right to left',
+        };
+
+        for (final language in expectedRows.keys) {
+          final slides = slidesOf(
+            'procesverbetering-sipoc',
+            language: language,
+          );
+          final matrixIndex = slides.indexWhere(
+            (slide) => slide.type == SlideType.matrix,
+          );
+          final boundaryIndex = slides.indexWhere(
+            (slide) =>
+                slide.type == SlideType.table &&
+                slide.tableEditable &&
+                slide.tableRows.length == 4,
+          );
+          final instructionIndex = slides.indexWhere(
+            (slide) => slide.title == instructionTitles[language],
+          );
+
+          expect(matrixIndex, greaterThan(0), reason: language);
+          expect(
+            boundaryIndex,
+            inInclusiveRange(1, matrixIndex - 1),
+            reason: language,
+          );
+          expect(
+            instructionIndex,
+            inInclusiveRange(boundaryIndex + 1, matrixIndex - 1),
+            reason: language,
+          );
+          expect(
+            slides[boundaryIndex].tableRows,
+            expectedRows[language],
+            reason: language,
+          );
+          final instruction = slides[instructionIndex];
+          expect(instruction.listStyle, ListStyle.numbered, reason: language);
+          expect(instruction.bullets, hasLength(6), reason: language);
+          expect(
+            instruction.bullets.every((step) => step.trim().isNotEmpty),
+            isTrue,
+            reason: language,
+          );
+        }
+      },
+    );
+
     test('teaches scope, comparison and right-to-left completion', () {
       final slides = slidesOf('procesverbetering-sipoc');
-      expect(slides, hasLength(5));
+      expect(slides, hasLength(6));
       expect(
         slides.any((slide) => slide.title.contains('gedetailleerde flowchart')),
         isTrue,

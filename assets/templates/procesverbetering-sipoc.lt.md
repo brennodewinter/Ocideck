@@ -24,6 +24,29 @@ language: lt
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Nustatykite proceso ribas
+
+| Riba | Vertė |
+| --- | --- |
+| Proceso pavadinimas |  |
+| Pradžios taškas |  |
+| Pabaigos taškas |  |
+
+---
+
+# Užpildykite iš dešinės į kairę
+
+1. Nustatykite aiškius proceso pradžios ir pabaigos taškus.
+2. Įvardinkite klientus, kurie priklauso nuo rezultato.
+3. Apibūdinkite jų gaunamus rezultatus.
+4. Apibendrinkite procesą į 4–7 aukšto lygio veiklas.
+5. Nustatykite, kokių įnašų reikia tai veiklai.
+6. Kiekvieną įvestį susiekite su tiekėju, kuris ją pateikia.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: lt
 | Detalė | Nuo 4 iki 7 aukšto lygio veiklos | Gali būti dešimtys žingsnių |
 | Fokusas | Tiekėjai, įvestis, produkcija ir klientai | Seka, perdavimas ir sprendimo taškai |
 | Naudokite | Tobulinimo pastangų pradžia | Vykdymas ir gedimų analizė |
-
----
-
-# Užpildykite iš dešinės į kairę
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

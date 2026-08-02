@@ -1746,6 +1746,18 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Procesverbetering: DMADV-project': 'DMADV: gher\'ID QI\'meH mIq',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'cherghmeH je olmeH chu\' gher\'ID DMADV qel.',
+  'Procesverbetering: Kaizen-project': 'Kaizen: gher\'ID QI\'meH mIq',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'mIq mach: nab, ta\' je leghmeH mIw.',
+  'Procesverbetering: A3-project': 'A3: gher\'ID QI\'meH mIq',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Qagh, leghlaHghach je QI\'meH ta\' A3 qel.',
+  'Procesverbetering: 8D-project': '8D: gher\'ID QI\'meH mIq',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Qagh Del, motlh je qaDmoHmeH 8D qel.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'chu\' module. De\'wI\' mIw, slide patmey je template-mey Daq SumDaq tu\'lu\' ({n} control-chartfactor).',
   'SIPOC-procesoverzicht': 'SIPOC ghu\'vam',

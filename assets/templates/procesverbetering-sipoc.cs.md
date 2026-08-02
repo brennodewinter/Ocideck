@@ -24,6 +24,29 @@ language: cs
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Nastavte hranice procesu
+
+| Hranice | Hodnota |
+| --- | --- |
+| Název procesu |  |
+| Výchozí bod |  |
+| Koncový bod |  |
+
+---
+
+# Dokončete to zprava doleva
+
+1. Nastavte jasné počáteční a koncové body procesu.
+2. Vyjmenujte zákazníky, kteří jsou na výsledku závislí.
+3. Popište výstupy, které dostávají.
+4. Shrňte proces do 4 až 7 činností na vysoké úrovni.
+5. Určete, které vstupy tyto činnosti potřebují.
+6. Propojte každý vstup s dodavatelem, který jej zpřístupňuje.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: cs
 | Detail | 4 až 7 aktivit na vysoké úrovni | Může obsahovat desítky kroků |
 | Soustředit | Dodavatelé, vstupy, výstupy a zákazníci | Posloupnost, předávání a rozhodovací body |
 | Použití | Začátek snahy o zlepšení | Analýza provedení a chyb |
-
----
-
-# Dokončete to zprava doleva
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

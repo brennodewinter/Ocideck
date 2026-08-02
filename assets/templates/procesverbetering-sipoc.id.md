@@ -24,6 +24,29 @@ language: id
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Tetapkan batasan proses
+
+| Batas | Nilai |
+| --- | --- |
+| Nama proses |  |
+| Titik awal |  |
+| Titik akhir |  |
+
+---
+
+# Lengkapi dari kanan ke kiri
+
+1. Tetapkan titik awal dan akhir yang jelas untuk proses tersebut.
+2. Sebutkan pelanggan yang bergantung pada hasilnya.
+3. Jelaskan keluaran yang mereka terima.
+4. Ringkaslah proses dalam 4 hingga 7 aktivitas tingkat tinggi.
+5. Tentukan input apa yang dibutuhkan aktivitas tersebut.
+6. Tautkan setiap masukan ke pemasok yang menyediakannya.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: id
 | Detil | 4 hingga 7 aktivitas tingkat tinggi | Mungkin berisi lusinan langkah |
 | Fokus | Pemasok, input, output dan pelanggan | Urutan, serah terima, dan poin keputusan |
 | Menggunakan | Mulai dari upaya perbaikan | Eksekusi dan analisis kesalahan |
-
----
-
-# Lengkapi dari kanan ke kiri
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

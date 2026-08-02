@@ -1771,6 +1771,19 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Procesverbetering: DMADV-project': 'Prosessin parantaminen: DMADV-projekti',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV-runko uuden prosessin suunnitteluun ja tarkistamiseen.',
+  'Procesverbetering: Kaizen-project':
+      'Prosessin parantaminen: Kaizen-projekti',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompakti parannusprojekti Plan, Do ja Check -vaiheilla.',
+  'Procesverbetering: A3-project': 'Prosessin parannus: A3-projekti',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3-runko ongelma-, analyysi- ja parannustoimiin.',
+  'Procesverbetering: 8D-project': 'Prosessin parannus: 8D-projekti',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D-runko ongelman kuvausta, syitä ja varmuutta varten.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Moduuli on käytössä. Laskentaydin, diojen asettelut ja mallit ovat käytettävissä paikallisesti ({n} ohjauskorttikerrointa).',
   'SIPOC-procesoverzicht': 'SIPOC-prosessin yleiskatsaus',

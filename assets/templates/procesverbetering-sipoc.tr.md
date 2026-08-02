@@ -24,6 +24,29 @@ language: tr
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Süreç sınırlarını belirleyin
+
+| Sınır | Değer |
+| --- | --- |
+| İşlem adı |  |
+| Başlangıç ​​noktası |  |
+| Bitiş noktası |  |
+
+---
+
+# Sağdan sola doğru tamamlayın
+
+1. Süreç için net başlangıç ​​ve bitiş noktaları belirleyin.
+2. Sonuca bağlı olan müşterileri adlandırın.
+3. Aldıkları çıktıları açıklayın.
+4. Süreci 4 ila 7 üst düzey aktiviteyle özetleyin.
+5. Bu faaliyetlerin hangi girdilere ihtiyaç duyduğunu belirleyin.
+6. Her girdiyi onu kullanıma sunan tedarikçiye bağlayın.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: tr
 | Detay | 4 ila 7 üst düzey aktivite | Onlarca adım içerebilir |
 | Odak | Tedarikçiler, girdiler, çıktılar ve müşteriler | Sıra, devretmeler ve karar noktaları |
 | Kullanmak | İyileştirme çabasının başlangıcı | Uygulama ve hata analizi |
-
----
-
-# Sağdan sola doğru tamamlayın
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

@@ -24,6 +24,29 @@ language: fy
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Stel de prosesgrinzen yn
+
+| Grins | Wearde |
+| --- | --- |
+| Proses namme |  |
+| Begjinpunt |  |
+| Einpunt |  |
+
+---
+
+# Folje it fan rjochts nei lofts
+
+1. Stel dúdlike begjin- en einpunten foar it proses yn.
+2. Neam de klanten dy't ôfhinklik binne fan it resultaat.
+3. Beskriuw de útgongen dy't se ûntfange.
+4. Gearfetsje it proses yn 4 oant 7 aktiviteiten op heech nivo.
+5. Bepale hokker ynputs dy aktiviteiten nedich binne.
+6. Keppelje elke ynput oan de leveransier dy't it beskikber stelt.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: fy
 | Detail | 4 oan 7 aktiviteiten op hege nivo | Kin tsientallen stappen befetsje |
 | Fokus | Leveransiers, ynputs, útgongen en klanten | Folchoarder, hand-offs en beslút punten |
 | Gebrûk | Begjin fan in ferbettering ynspannings | Utfiering en fout analyze |
-
----
-
-# Folje it fan rjochts nei lofts
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

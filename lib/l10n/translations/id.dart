@@ -1771,6 +1771,18 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Procesverbetering: DMADV-project': 'Peningkatan proses: proyek DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Kerangka DMADV untuk merancang dan memverifikasi proses baru.',
+  'Procesverbetering: Kaizen-project': 'Peningkatan proses: proyek Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Proyek peningkatan kompak dengan fase Rencana, Lakukan, dan Periksa.',
+  'Procesverbetering: A3-project': 'Peningkatan proses: proyek A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Kerangka A3 untuk masalah, analisis dan tindakan perbaikan.',
+  'Procesverbetering: 8D-project': 'Peningkatan proses: proyek 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Kerangka 8D untuk deskripsi masalah, penyebab dan jaminan.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul aktif. Inti perhitungan, tata letak slide, dan templat tersedia secara lokal ({n} faktor peta kendali).',
   'SIPOC-procesoverzicht': 'Ringkasan proses SIPOC',

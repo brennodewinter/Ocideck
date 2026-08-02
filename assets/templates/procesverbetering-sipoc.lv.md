@@ -24,6 +24,29 @@ language: lv
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Nosakiet procesa robežas
+
+| Robeža | Vērtība |
+| --- | --- |
+| Procesa nosaukums |  |
+| Sākuma punkts |  |
+| Beigu punkts |  |
+
+---
+
+# Aizpildiet to no labās uz kreiso pusi
+
+1. Iestatiet skaidrus procesa sākuma un beigu punktus.
+2. Nosauciet klientus, kuri ir atkarīgi no rezultāta.
+3. Aprakstiet rezultātus, ko viņi saņem.
+4. Apkopojiet procesu 4 līdz 7 augsta līmeņa aktivitātēs.
+5. Nosakiet, kādi ieguldījumi šīm darbībām ir nepieciešami.
+6. Saistiet katru ievadi ar piegādātāju, kurš to dara pieejamu.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: lv
 | Detaļas | 4 līdz 7 augsta līmeņa aktivitātes | Var saturēt desmitiem soļu |
 | Fokuss | Piegādātāji, ievade, izvade un klienti | Secība, nodošana un lēmumu pieņemšanas punkti |
 | Izmantot | Uzlabošanas centienu sākums | Izpilde un kļūdu analīze |
-
----
-
-# Aizpildiet to no labās uz kreiso pusi
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

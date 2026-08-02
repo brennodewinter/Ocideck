@@ -1788,6 +1788,19 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Procesverbetering: DMADV-project': 'Îmbunătățirea procesului: proiect DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Schelet DMADV pentru proiectarea și verificarea unui nou proces.',
+  'Procesverbetering: Kaizen-project':
+      'Îmbunătățirea procesului: proiect Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Proiect compact de îmbunătățire cu faze de Planificare, Efectuare și Verificare.',
+  'Procesverbetering: A3-project': 'Îmbunătățirea procesului: proiect A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Schelet A3 pentru probleme, analize și acțiuni de îmbunătățire.',
+  'Procesverbetering: 8D-project': 'Îmbunătățirea procesului: proiect 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Schelet 8D pentru descrierea problemei, cauze și asigurare.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul activat. Nucleul de calcul, aspectele diapozitivelor și șabloanele sunt disponibile local ({n} factori ai diagramei de control).',
   'SIPOC-procesoverzicht': 'Prezentare generală a procesului SIPOC',

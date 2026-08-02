@@ -24,6 +24,29 @@ language: la
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Processus terminos constitue
+
+| Terminus | Precium |
+| --- | --- |
+| Processus nomine |  |
+| Satus punctum |  |
+| Finis punctum |  |
+
+---
+
+# Perficere a dextra ad sinistram
+
+1. Initium et finem pro processu puncta manifesta pone.
+2. Nomen elit qui ex effectu.
+3. Outputs describunt accipiunt.
+4. Summatim processum in 4 ad 7 gradus actionum summus.
+5. Determinare quae inputationes actiones necessariae sunt.
+6. Singulas initus coniungas ad supplementum qui promptum facit.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: la
 | Detail | IV ad VII summus gradu actiones | Sit continere gradus dozens |
 | Focus | Suppliers, initibus, outputibus et clientibus | Sequentia, manus peracti et decisionis puncta |
 | Usus | Ad initium emendatio conatus | Executio et culpa analysis |
-
----
-
-# Perficere a dextra ad sinistram
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

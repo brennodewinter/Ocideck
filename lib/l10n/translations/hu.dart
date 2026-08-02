@@ -1775,6 +1775,18 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Procesverbetering: DMADV-project': 'Folyamatfejlesztés: DMADV projekt',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV váz egy új folyamat tervezéséhez és ellenőrzéséhez.',
+  'Procesverbetering: Kaizen-project': 'Folyamatfejlesztés: Kaizen projekt',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompakt fejlesztési projekt Tervezés, Csináld és Ellenőrizd fázisokkal.',
+  'Procesverbetering: A3-project': 'Folyamatfejlesztés: A3 projekt',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3-as váz a problémákhoz, elemzésekhez és fejlesztésekhez.',
+  'Procesverbetering: 8D-project': 'Folyamatfejlesztés: 8D projekt',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D-s csontváz a probléma leírásához, az okokhoz és a biztosítékhoz.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'A modul be van kapcsolva. A számítási mag, a diaelrendezések és a sablonok helyben elérhetők ({n} szabályozókártya-tényező).',
   'SIPOC-procesoverzicht': 'SIPOC folyamatáttekintés',

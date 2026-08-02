@@ -24,6 +24,29 @@ language: sv
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Sätt processgränserna
+
+| Gräns | Värde |
+| --- | --- |
+| Processnamn |  |
+| Startpunkt |  |
+| Slutpunkt |  |
+
+---
+
+# Slutför det från höger till vänster
+
+1. Ange tydliga start- och slutpunkter för processen.
+2. Nämn de kunder som är beroende av resultatet.
+3. Beskriv utdata de får.
+4. Sammanfatta processen i 4 till 7 aktiviteter på hög nivå.
+5. Bestäm vilka insatser dessa aktiviteter behöver.
+6. Koppla varje ingång till leverantören som gör den tillgänglig.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: sv
 | Detalj | 4 till 7 aktiviteter på hög nivå | Kan innehålla dussintals steg |
 | Fokus | Leverantörer, input, output och kunder | Sekvens, överlämningar och beslutspunkter |
 | Använda | Start av ett förbättringsarbete | Utförande och felanalys |
-
----
-
-# Slutför det från höger till vänster
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

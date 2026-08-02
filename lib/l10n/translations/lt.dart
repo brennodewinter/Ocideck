@@ -1778,6 +1778,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Procesverbetering: DMADV-project': 'Proceso tobulinimas: DMADV projektas',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV skeletas, skirtas naujam procesui kurti ir tikrinti.',
+  'Procesverbetering: Kaizen-project': 'Proceso tobulinimas: Kaizen projektas',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompaktiškas tobulinimo projektas su planavimo, darymo ir patikrinimo etapais.',
+  'Procesverbetering: A3-project': 'Proceso tobulinimas: A3 projektas',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 griaučiai problemoms, analizei ir tobulinimo veiksmams.',
+  'Procesverbetering: 8D-project': 'Proceso tobulinimas: 8D projektas',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D skeletas, skirtas problemos aprašymui, priežastims ir patikinimui.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modulis įjungtas. Skaičiavimo branduolys, skaidrių išdėstymai ir šablonai pasiekiami vietoje ({n} kontrolinės diagramos koeficientų).',
   'SIPOC-procesoverzicht': 'SIPOC proceso apžvalga',
