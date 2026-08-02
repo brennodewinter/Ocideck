@@ -51,14 +51,31 @@ jobs:
       image: ubuntu:24.04
     steps:
       # Vóór de checkout: actions/checkout is een node-actie, en dit kale image
-      # brengt geen node mee. De build-toolchain (cmake/ninja/clang/gtk/gcc) staat
-      # erbij omdat élke `dart run tool/…` de native-assets-hook van dartcv4
-      # bouwt — zonder gcc/g++ faalt die hook op "CMAKE_C_COMPILER: gcc not found".
-      - name: Gereedschap installeren
+      # brengt geen node mee, en actions/cache is óók een node-actie. Installeer
+      # daarom eerst alleen node (+ ca-certificates), zodat de apt-cache kan draaien
+      # vóór de zware build-toolchain (cmake/ninja/clang/gtk/gcc) — die staat erbij
+      # omdat élke `dart run tool/…` de native-assets-hook van dartcv4 bouwt, en
+      # zonder gcc/g++ faalt die hook op "CMAKE_C_COMPILER: gcc not found".
+      - name: Node voor de cache-acties
         run: |
           apt-get update
+          apt-get install -y --no-install-recommends nodejs ca-certificates
+          printf 'Binary::apt::APT::Keep-Downloaded-Packages "true";\n' \
+            > /etc/apt/apt.conf.d/99keep-debs
+
+      # Dezelfde vaste .deb-lijst als de linux-gate; dezelfde sleutel, zodat één
+      # cache beide poorten bedient. Bump `-v1` als de pakketlijst verandert.
+      - name: Build-tools uit de apt-cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt/archives
+          key: apt-linux-2404-buildtools-v1
+
+      - name: Gereedschap installeren
+        run: |
           apt-get install -y --no-install-recommends \
-            nodejs make git curl ca-certificates xz-utils jq unzip \
+            make git curl xz-utils jq unzip \
             cmake ninja-build clang pkg-config libgtk-3-dev \
             build-essential
 
@@ -126,6 +143,24 @@ jobs:
 
       - name: Afhankelijkheden ophalen
         run: flutter pub get
+
+      # De dartcv4-hook compileert OpenCV bij élke `dart run tool/…` in
+      # `make check-static` — op een verse checkout ~1 GB bron+build onder
+      # `.dart_tool/hooks_runner` en veruit de duurste stap van deze poort. De
+      # build is inhoud-geadresseerd op zijn inputs, dus een herstelde cache laat
+      # de hook de recompile overslaan; wijkt er iets af, dan bouwt hij gewoon
+      # opnieuw — geen controle vervangen. Dezelfde sleutel als de linux-gate (ook
+      # Linux, dezelfde build-hash), zodat één cache beide poorten bedient.
+      - name: dartcv4 native OpenCV-build uit de cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: |
+            .dart_tool/hooks_runner
+            build/native_assets
+          key: dartcv-linux-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            dartcv-linux-
 
       # De commando's zelf staan in de Makefile: `make check-static` is precies de
       # statische deelverzameling die een bijdrager lokaal in `make check` draait.
