@@ -1746,6 +1746,41 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Actueel': 'DaH Qap',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Hal Segh pat vIlo\'taHvIS, ghItlh Segh\'e\' polmeH mIw Qan.',
+  'Codeblok': 'ngoq \'ay\'',
+  'Controleren…': 'DaqIn…',
+  'Documentoverzicht': 'ghItlh naQ legh',
+  'Doorgaan met bewerken': 'choHtaH',
+  'Geen opdrachten gevonden': 'ra\'ghom tu\'be\'lu\'',
+  'Genummerde lijst': 'mI\' tetlh',
+  'Huidig concept': 'DaH ghItlh',
+  'Invoegen of opmaken': 'chel pagh chenmoH',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)': 'chel pagh chenmoH (Ctrl/Cmd+Space)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'choHmeylIj lo\'be\'lu\'. DapolHa\' DaneH\'a\'?',
+  'Kop 1': 'nach 1',
+  'Kop 2': 'nach 2',
+  'Kop 3': 'nach 3',
+  'Markdown-broneditor': 'Markdown Hal choHwI\'',
+  'Niet toegepast': 'lo\'be\'lu\'',
+  'Niet-toegepaste wijzigingen': 'choHmey lo\'be\'lu\'bogh',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Daq choHpa\', choHmey DaH lo\' pagh polHa\'.',
+  'Problemen gevonden': 'Qaghmey tu\'lu\'',
+  'Schrijftips': 'ghItlh qeS',
+  'Snel herstellen': 'nom tI\'',
+  'Taak': 'Qu\'',
+  'Toegepaste versie': 'mIw lo\'lu\'bogh',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Markdownvam choHlu\'DI\' De\' chIlmo\', mIllogh choHwI\' Qotlhlu\'.',
+  'Wijzigingen vergelijken': 'choHmey rapHa\' legh',
+  'Wijzigingen verwerpen': 'choHmey polHa\'',
+  'Zoek een opdracht…': 'ra\'ghom nej…',
+  'kolom': 'tut',
+  'schrijftips': 'ghItlh qeS',
+  'tekens': 'Deghmey',
   'Voortgang per sectie': '\'ay\' Qap',
   'Nog te doen': 'ratlhtaHbogh',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

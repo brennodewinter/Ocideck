@@ -1770,6 +1770,42 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Actueel': 'Aktuell',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Källläge skyddar formatering som den visuella redigeraren ännu inte stöder förlustfritt.',
+  'Codeblok': 'Kodblock',
+  'Controleren…': 'Kontrollera...',
+  'Documentoverzicht': 'Dokumentöversikt',
+  'Doorgaan met bewerken': 'Fortsätt redigera',
+  'Geen opdrachten gevonden': 'Inga uppdrag hittades',
+  'Genummerde lijst': 'Numrerad lista',
+  'Huidig concept': 'Nuvarande koncept',
+  'Invoegen of opmaken': 'Infoga eller formatera',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Infoga eller formatera (Ctrl/Cmd+Mellanslag)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Dina ändringar har inte tillämpats ännu. Vill du avvisa dem?',
+  'Kop 1': 'Rubrik 1',
+  'Kop 2': 'Rubrik 2',
+  'Kop 3': 'Rubrik 3',
+  'Markdown-broneditor': 'Markdown källredigerare',
+  'Niet toegepast': 'Inte tillämpat',
+  'Niet-toegepaste wijzigingen': 'Ej tillämpade ändringar',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Tillämpa eller avvisa aktuella ändringar innan du byter scope.',
+  'Problemen gevonden': 'Problem hittades',
+  'Schrijftips': 'Skrivtips',
+  'Snel herstellen': 'Återhämta dig snabbt',
+  'Taak': 'Uppgift',
+  'Toegepaste versie': 'Tillämpad version',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Visuell redigering är inaktiverad eftersom denna Markdown inte kan konverteras förlustfritt.',
+  'Wijzigingen vergelijken': 'Jämför förändringar',
+  'Wijzigingen verwerpen': 'Avvisa ändringar',
+  'Zoek een opdracht…': 'Hitta ett uppdrag...',
+  'kolom': 'kolumn',
+  'schrijftips': 'skrivtips',
+  'tekens': 'tecken',
   'Voortgang per sectie': 'Framsteg per sektion',
   'Nog te doen': 'Återstår',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

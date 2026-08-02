@@ -911,6 +911,41 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Actueel': 'Current',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Source mode protects formatting that the visual editor does not yet support losslessly.',
+  'Codeblok': 'Code block',
+  'Controleren…': 'Check…',
+  'Documentoverzicht': 'Document overview',
+  'Doorgaan met bewerken': 'Continue editing',
+  'Geen opdrachten gevonden': 'No assignments found',
+  'Genummerde lijst': 'Numbered list',
+  'Huidig concept': 'Current concept',
+  'Invoegen of opmaken': 'Insert or format',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)': 'Insert or format (Ctrl/Cmd+Space)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Your changes have not yet been applied. Do you want to reject them?',
+  'Kop 1': 'Heading 1',
+  'Kop 2': 'Heading 2',
+  'Kop 3': 'Heading 3',
+  'Markdown-broneditor': 'Markdown source editor',
+  'Niet toegepast': 'Not applied',
+  'Niet-toegepaste wijzigingen': 'Unapplied changes',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Apply or reject current changes before switching scopes.',
+  'Problemen gevonden': 'Problems found',
+  'Schrijftips': 'Writing tips',
+  'Snel herstellen': 'Recover quickly',
+  'Taak': 'Task',
+  'Toegepaste versie': 'Applied version',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Visual editing is disabled because this Markdown cannot be converted losslessly.',
+  'Wijzigingen vergelijken': 'Compare changes',
+  'Wijzigingen verwerpen': 'Reject changes',
+  'Zoek een opdracht…': 'Find an assignment…',
+  'kolom': 'column',
+  'schrijftips': 'writing tips',
+  'tekens': 'characters',
   'Voortgang per sectie': 'Progress by section',
   'Nog te doen': 'Remaining',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

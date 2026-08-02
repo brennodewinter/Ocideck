@@ -1777,6 +1777,42 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Actueel': 'Trenutni',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Izvorni način rada štiti oblikovanje koje vizualni uređivač još ne podržava bez gubitaka.',
+  'Codeblok': 'Blok koda',
+  'Controleren…': 'Provjerite…',
+  'Documentoverzicht': 'Pregled dokumenta',
+  'Doorgaan met bewerken': 'Nastavite s uređivanjem',
+  'Geen opdrachten gevonden': 'Nije pronađen nijedan zadatak',
+  'Genummerde lijst': 'Numerirani popis',
+  'Huidig concept': 'Trenutni koncept',
+  'Invoegen of opmaken': 'Umetnite ili formatirajte',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Umetni ili formatiraj (Ctrl/Cmd+razmaknica)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Vaše promjene još nisu primijenjene. Želite li ih odbiti?',
+  'Kop 1': 'Naslov 1',
+  'Kop 2': 'Naslov 2',
+  'Kop 3': 'Naslov 3',
+  'Markdown-broneditor': 'Markdown uređivač izvora',
+  'Niet toegepast': 'Nije primijenjeno',
+  'Niet-toegepaste wijzigingen': 'Neprimijenjene promjene',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Primijenite ili odbacite trenutne promjene prije prebacivanja opsega.',
+  'Problemen gevonden': 'Pronađeni problemi',
+  'Schrijftips': 'Savjeti za pisanje',
+  'Snel herstellen': 'Brzo se oporavi',
+  'Taak': 'zadatak',
+  'Toegepaste versie': 'Primijenjena verzija',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Vizualno uređivanje je onemogućeno jer se ovaj Markdown ne može pretvoriti bez gubitaka.',
+  'Wijzigingen vergelijken': 'Usporedite promjene',
+  'Wijzigingen verwerpen': 'Odbaci promjene',
+  'Zoek een opdracht…': 'Pronađite zadatak…',
+  'kolom': 'stupac',
+  'schrijftips': 'savjeti za pisanje',
+  'tekens': 'likovi',
   'Voortgang per sectie': 'Napredak po odjeljku',
   'Nog te doen': 'Preostalo',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

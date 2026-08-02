@@ -1793,6 +1793,42 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Actueel': 'Kurrenti',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Il-mod tas-sors jipproteġi l-ifformattjar li l-editur viżwali għadu ma jappoġġjax mingħajr telf.',
+  'Codeblok': 'Blokk tal-kodiċi',
+  'Controleren…': 'Iċċekkja...',
+  'Documentoverzicht': 'Ħarsa ġenerali tad-dokument',
+  'Doorgaan met bewerken': 'Kompli editja',
+  'Geen opdrachten gevonden': 'Ma nstab l-ebda inkarigu',
+  'Genummerde lijst': 'Lista numerata',
+  'Huidig concept': 'Kunċett kurrenti',
+  'Invoegen of opmaken': 'Daħħal jew format',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Daħħal jew format (Ctrl/Cmd+Spazju)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Il-bidliet tiegħek għadhom ma ġewx applikati. Trid tirrifjutahom?',
+  'Kop 1': 'Intestatura 1',
+  'Kop 2': 'Intestatura 2',
+  'Kop 3': 'Intestatura 3',
+  'Markdown-broneditor': 'Editur tas-sors Markdown',
+  'Niet toegepast': 'Mhux applikat',
+  'Niet-toegepaste wijzigingen': 'Bidliet mhux applikati',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Applika jew irrifjuta bidliet kurrenti qabel taqleb l-ambitu.',
+  'Problemen gevonden': 'Problemi misjuba',
+  'Schrijftips': 'Kitba pariri',
+  'Snel herstellen': 'Jirkupra malajr',
+  'Taak': 'Kompitu',
+  'Toegepaste versie': 'Verżjoni applikata',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'L-editjar viżwali huwa diżattivat minħabba li dan Markdown ma jistax jiġi kkonvertit mingħajr telf.',
+  'Wijzigingen vergelijken': 'Qabbel il-bidliet',
+  'Wijzigingen verwerpen': 'Tiċħad il-bidliet',
+  'Zoek een opdracht…': 'Sib inkarigu...',
+  'kolom': 'kolonna',
+  'schrijftips': 'kitba pariri',
+  'tekens': 'karattri',
   'Voortgang per sectie': 'Progress skont it-taqsima',
   'Nog te doen': 'Fadal',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

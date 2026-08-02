@@ -1787,6 +1787,42 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Actueel': 'Current',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Fons modus servat formatting quod editor visualis nondum incommodum sustinet.',
+  'Codeblok': 'Code obstructionum',
+  'Controleren…': 'Reprehendo…',
+  'Documentoverzicht': 'Documentum overview',
+  'Doorgaan met bewerken': 'Continue recensere',
+  'Geen opdrachten gevonden': 'Nulla provincias reperit',
+  'Genummerde lijst': 'Numerus index',
+  'Huidig concept': 'Vena conceptum',
+  'Invoegen of opmaken': 'Inserta seu forma',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Inserta seu forma (Ctrl/Cmd + Space)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Mutationes tuae nondum applicatae sunt. Visne eos repudiare?',
+  'Kop 1': 'Petere 1',
+  'Kop 2': 'Petere 2',
+  'Kop 3': 'Petere III "',
+  'Markdown-broneditor': 'Editor fontis Markdown',
+  'Niet toegepast': 'Non applicantur',
+  'Niet-toegepaste wijzigingen': 'Unapplied mutationes',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Applicare vel rejicere current mutationes ante commutatione scopes.',
+  'Problemen gevonden': 'Problemata invenerunt',
+  'Schrijftips': 'Scribere tips',
+  'Snel herstellen': 'Recuperet cito',
+  'Taak': 'Negotium',
+  'Toegepaste versie': 'Acta version',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Visual recensio debilitata est quia Markdown haec detrimento converti non potest.',
+  'Wijzigingen vergelijken': 'Compare mutationes',
+  'Wijzigingen verwerpen': 'Repudiare mutationes',
+  'Zoek een opdracht…': 'Invenire assignationem ...',
+  'kolom': 'columnae',
+  'schrijftips': 'scribebat tips',
+  'tekens': 'characteribus',
   'Voortgang per sectie': 'Progressus per sectiones',
   'Nog te doen': 'Restans',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

@@ -1762,6 +1762,42 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Actueel': 'Praegune',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Allikarežiim kaitseb kadudeta vormindamist, mida visuaalne redaktor veel ei toeta.',
+  'Codeblok': 'Koodiplokk',
+  'Controleren…': 'Kontrolli…',
+  'Documentoverzicht': 'Dokumendi ülevaade',
+  'Doorgaan met bewerken': 'Jätkake redigeerimist',
+  'Geen opdrachten gevonden': 'Ülesandeid ei leitud',
+  'Genummerde lijst': 'Nummerdatud loend',
+  'Huidig concept': 'Praegune kontseptsioon',
+  'Invoegen of opmaken': 'Sisesta või vorminda',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Sisestamine või vormindamine (Ctrl/Cmd+tühik)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Teie muudatusi pole veel rakendatud. Kas soovite need tagasi lükata?',
+  'Kop 1': 'Pealkiri 1',
+  'Kop 2': 'Pealkiri 2',
+  'Kop 3': '3. pealkiri',
+  'Markdown-broneditor': 'Markdowni allika redaktor',
+  'Niet toegepast': 'Ei rakendata',
+  'Niet-toegepaste wijzigingen': 'Rakendamata muudatused',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Enne ulatuse vahetamist rakendage või lükake praegused muudatused tagasi.',
+  'Problemen gevonden': 'Probleemid leitud',
+  'Schrijftips': 'Kirjutamise näpunäited',
+  'Snel herstellen': 'Kiiresti taastuda',
+  'Taak': 'Ülesanne',
+  'Toegepaste versie': 'Rakendatud versioon',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Visuaalne redigeerimine on keelatud, kuna seda Markdowni ei saa kadudeta teisendada.',
+  'Wijzigingen vergelijken': 'Võrrelge muudatusi',
+  'Wijzigingen verwerpen': 'Keeldu muudatustest',
+  'Zoek een opdracht…': 'Leia ülesanne…',
+  'kolom': 'veerus',
+  'schrijftips': 'kirjutamise näpunäiteid',
+  'tekens': 'tegelased',
   'Voortgang per sectie': 'Edenemine jaotiste kaupa',
   'Nog te doen': 'Tegemata',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

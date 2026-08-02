@@ -1775,6 +1775,42 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Actueel': 'Aktuális',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'A Forrás mód veszteségmentesen védi azokat a formázásokat, amelyeket a vizuális szerkesztő még nem támogat.',
+  'Codeblok': 'Kódblokk',
+  'Controleren…': 'Ellenőrizze…',
+  'Documentoverzicht': 'Dokumentum áttekintése',
+  'Doorgaan met bewerken': 'Folytassa a szerkesztést',
+  'Geen opdrachten gevonden': 'Nem találhatók feladatok',
+  'Genummerde lijst': 'Számozott lista',
+  'Huidig concept': 'Jelenlegi koncepció',
+  'Invoegen of opmaken': 'Beszúrás vagy formázás',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Beszúrás vagy formázás (Ctrl/Cmd+szóköz)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'A módosításokat még nem alkalmaztuk. El akarod utasítani őket?',
+  'Kop 1': '1. címsor',
+  'Kop 2': '2. címsor',
+  'Kop 3': '3. címsor',
+  'Markdown-broneditor': 'Markdown forrásszerkesztő',
+  'Niet toegepast': 'Nincs alkalmazva',
+  'Niet-toegepaste wijzigingen': 'Nem alkalmazott módosítások',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'A hatókör váltása előtt alkalmazza vagy utasítsa el a jelenlegi módosításokat.',
+  'Problemen gevonden': 'Problémák találhatók',
+  'Schrijftips': 'Írási tippek',
+  'Snel herstellen': 'Gyorsan felépülni',
+  'Taak': 'Feladat',
+  'Toegepaste versie': 'Alkalmazott változat',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'A vizuális szerkesztés le van tiltva, mert ez a Markdown nem konvertálható veszteségmentesen.',
+  'Wijzigingen vergelijken': 'Hasonlítsa össze a változásokat',
+  'Wijzigingen verwerpen': 'Módosítások elutasítása',
+  'Zoek een opdracht…': 'Feladat keresése…',
+  'kolom': 'oszlopban',
+  'schrijftips': 'írási tippek',
+  'tekens': 'karakterek',
   'Voortgang per sectie': 'Előrehaladás szakaszonként',
   'Nog te doen': 'Hátralévő',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

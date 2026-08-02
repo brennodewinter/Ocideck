@@ -730,6 +730,42 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Actueel': 'Aktual',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Modo di fuente ta protehá formato ku e editor visual no por konvertí ainda sin pèrdida.',
+  'Codeblok': 'Blòki di kódigo',
+  'Controleren…': 'Kontrolando…',
+  'Documentoverzicht': 'Resúmen di dokumento',
+  'Doorgaan met bewerken': 'Sigui editá',
+  'Geen opdrachten gevonden': 'No a haña komando',
+  'Genummerde lijst': 'Lista numerá',
+  'Huidig concept': 'Konsepto aktual',
+  'Invoegen of opmaken': 'Insertá òf formatá',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Insertá òf formatá (Ctrl/Cmd+Spasio)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Bo kambionan no a wordu apliká ainda. Bo ke deskartá nan?',
+  'Kop 1': 'Título 1',
+  'Kop 2': 'Título 2',
+  'Kop 3': 'Título 3',
+  'Markdown-broneditor': 'Editor di fuente Markdown',
+  'Niet toegepast': 'No apliká',
+  'Niet-toegepaste wijzigingen': 'Kambionan no apliká',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Apliká òf deskartá e kambionan aktual promé ku bo kambia e alkanse.',
+  'Problemen gevonden': 'Problemanan hañá',
+  'Schrijftips': 'Konsehonan pa skirbi',
+  'Snel herstellen': 'Drecha lihé',
+  'Taak': 'Tarea',
+  'Toegepaste versie': 'Vershon apliká',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Edishon visual ta desaktivá pasobra e Markdown akí no por wordu konvertí sin pèrdida.',
+  'Wijzigingen vergelijken': 'Kompará kambionan',
+  'Wijzigingen verwerpen': 'Deskartá kambionan',
+  'Zoek een opdracht…': 'Buska un komando…',
+  'kolom': 'kolòm',
+  'schrijftips': 'konsehonan pa skirbi',
+  'tekens': 'karakternan',
   'Voortgang per sectie': 'Progreso pa sekshon',
   'Nog te doen': 'Falta pa hasi',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

@@ -1770,6 +1770,42 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Actueel': 'Nuværende',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Kildetilstand beskytter formatering, som den visuelle editor endnu ikke understøtter tabsfrit.',
+  'Codeblok': 'Kodeblok',
+  'Controleren…': 'Tjek...',
+  'Documentoverzicht': 'Dokumentoversigt',
+  'Doorgaan met bewerken': 'Fortsæt med at redigere',
+  'Geen opdrachten gevonden': 'Ingen opgaver fundet',
+  'Genummerde lijst': 'Nummereret liste',
+  'Huidig concept': 'Nuværende koncept',
+  'Invoegen of opmaken': 'Indsæt eller formater',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Indsæt eller formater (Ctrl/Cmd+Mellemrum)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Dine ændringer er endnu ikke blevet anvendt. Vil du afvise dem?',
+  'Kop 1': 'Overskrift 1',
+  'Kop 2': 'Overskrift 2',
+  'Kop 3': 'Overskrift 3',
+  'Markdown-broneditor': 'Markdown kildeeditor',
+  'Niet toegepast': 'Ikke anvendt',
+  'Niet-toegepaste wijzigingen': 'Ikke-anvendte ændringer',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Anvend eller afvis aktuelle ændringer, før du skifter scope.',
+  'Problemen gevonden': 'Problemer fundet',
+  'Schrijftips': 'Skrivetips',
+  'Snel herstellen': 'Kom sig hurtigt',
+  'Taak': 'Opgave',
+  'Toegepaste versie': 'Anvendt version',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Visuel redigering er deaktiveret, fordi denne Markdown ikke kan konverteres tabsfrit.',
+  'Wijzigingen vergelijken': 'Sammenlign ændringer',
+  'Wijzigingen verwerpen': 'Afvis ændringer',
+  'Zoek een opdracht…': 'Find en opgave...',
+  'kolom': 'kolonne',
+  'schrijftips': 'skrivetips',
+  'tekens': 'tegn',
   'Voortgang per sectie': 'Fremskridt pr. sektion',
   'Nog te doen': 'Mangler',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

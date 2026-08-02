@@ -1793,6 +1793,42 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Actueel': 'Текущ',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Режимът на източника защитава форматирането, което визуалният редактор все още не поддържа без загуби.',
+  'Codeblok': 'Кодов блок',
+  'Controleren…': 'Проверете...',
+  'Documentoverzicht': 'Преглед на документа',
+  'Doorgaan met bewerken': 'Продължете с редактирането',
+  'Geen opdrachten gevonden': 'Няма намерени задания',
+  'Genummerde lijst': 'Номериран списък',
+  'Huidig concept': 'Актуална концепция',
+  'Invoegen of opmaken': 'Вмъкнете или форматирайте',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Вмъкване или форматиране (Ctrl/Cmd+интервал)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Вашите промени все още не са приложени. Искате ли да ги отхвърлите?',
+  'Kop 1': 'Заглавие 1',
+  'Kop 2': 'Заглавие 2',
+  'Kop 3': 'Заглавие 3',
+  'Markdown-broneditor': 'Редактор на източника Markdown',
+  'Niet toegepast': 'Не се прилага',
+  'Niet-toegepaste wijzigingen': 'Неприложени промени',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Приложете или отхвърлете текущите промени, преди да смените обхвата.',
+  'Problemen gevonden': 'Открити проблеми',
+  'Schrijftips': 'Съвети за писане',
+  'Snel herstellen': 'Възстановявайте се бързо',
+  'Taak': 'Задача',
+  'Toegepaste versie': 'Приложна версия',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Визуалното редактиране е деактивирано, защото този Markdown не може да се конвертира без загуби.',
+  'Wijzigingen vergelijken': 'Сравнете промените',
+  'Wijzigingen verwerpen': 'Отхвърляне на промените',
+  'Zoek een opdracht…': 'Намерете задача...',
+  'kolom': 'колона',
+  'schrijftips': 'съвети за писане',
+  'tekens': 'герои',
   'Voortgang per sectie': 'Напредък по раздели',
   'Nog te doen': 'Оставащо',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

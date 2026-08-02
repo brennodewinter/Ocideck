@@ -1806,6 +1806,42 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Actueel': 'Reatha',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Cosnaíonn mód foinse formáidiú nach dtacaíonn an t-eagarthóir amhairc go fóill gan chailliúint.',
+  'Codeblok': 'Bloc cód',
+  'Controleren…': 'Seiceáil…',
+  'Documentoverzicht': 'Forbhreathnú doiciméad',
+  'Doorgaan met bewerken': 'Lean ar aghaidh leis an eagarthóireacht',
+  'Geen opdrachten gevonden': 'Níor aimsíodh aon tascanna',
+  'Genummerde lijst': 'Liosta uimhrithe',
+  'Huidig concept': 'Coincheap reatha',
+  'Invoegen of opmaken': 'Ionsáigh nó formáid',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Ionsáigh nó formáid (Ctrl/Cmd+Space)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Níor cuireadh d\'athruithe i bhfeidhm go fóill. Ar mhaith leat iad a dhiúltú?',
+  'Kop 1': 'Ceannteideal 1',
+  'Kop 2': 'Ceannteideal 2',
+  'Kop 3': 'Ceannteideal 3',
+  'Markdown-broneditor': 'Markdown eagarthóir foinse',
+  'Niet toegepast': 'Ní chuirtear i bhfeidhm',
+  'Niet-toegepaste wijzigingen': 'Athruithe neamhfheidhmithe',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Cuir athruithe reatha i bhfeidhm nó diúltaigh dóibh sula n-athraítear scóip.',
+  'Problemen gevonden': 'Fadhbanna aimsithe',
+  'Schrijftips': 'Leideanna scríbhneoireachta',
+  'Snel herstellen': 'Ghnóthú go tapa',
+  'Taak': 'Tasc',
+  'Toegepaste versie': 'Leagan feidhmithe',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Tá an eagarthóireacht amhairc díchumasaithe toisc nach féidir an Markdown seo a thiontú gan chailliúint.',
+  'Wijzigingen vergelijken': 'Déan comparáid idir athruithe',
+  'Wijzigingen verwerpen': 'Diúltaigh athruithe',
+  'Zoek een opdracht…': 'Aimsigh tasc…',
+  'kolom': 'colún',
+  'schrijftips': 'leideanna scríbhneoireachta',
+  'tekens': 'carachtair',
   'Voortgang per sectie': 'Dul chun cinn de réir rannóige',
   'Nog te doen': 'Le déanamh',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

@@ -1798,6 +1798,42 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Actueel': 'Τρέχον',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Η λειτουργία πηγής προστατεύει τη μορφοποίηση που το οπτικό πρόγραμμα επεξεργασίας δεν υποστηρίζει ακόμη χωρίς απώλειες.',
+  'Codeblok': 'Μπλοκ κωδικών',
+  'Controleren…': 'Ελέγξτε…',
+  'Documentoverzicht': 'Επισκόπηση εγγράφου',
+  'Doorgaan met bewerken': 'Συνεχίστε την επεξεργασία',
+  'Geen opdrachten gevonden': 'Δεν βρέθηκαν εργασίες',
+  'Genummerde lijst': 'Αριθμημένη λίστα',
+  'Huidig concept': 'Τρέχουσα έννοια',
+  'Invoegen of opmaken': 'Εισαγωγή ή μορφοποίηση',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Εισαγωγή ή μορφοποίηση (Ctrl/Cmd+Space)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Οι αλλαγές σας δεν έχουν ακόμη εφαρμοστεί. Θέλετε να τους απορρίψετε;',
+  'Kop 1': 'Επικεφαλίδα 1',
+  'Kop 2': 'Επικεφαλίδα 2',
+  'Kop 3': 'Επικεφαλίδα 3',
+  'Markdown-broneditor': 'Πρόγραμμα επεξεργασίας πηγών Markdown',
+  'Niet toegepast': 'Δεν εφαρμόζεται',
+  'Niet-toegepaste wijzigingen': 'Μη εφαρμοσμένες αλλαγές',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Εφαρμόστε ή απορρίψτε τις τρέχουσες αλλαγές πριν αλλάξετε το εύρος.',
+  'Problemen gevonden': 'Βρέθηκαν προβλήματα',
+  'Schrijftips': 'Συμβουλές γραφής',
+  'Snel herstellen': 'Ανάρρωση γρήγορα',
+  'Taak': 'Εργασία',
+  'Toegepaste versie': 'Εφαρμοσμένη έκδοση',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Η οπτική επεξεργασία είναι απενεργοποιημένη επειδή αυτό το Markdown δεν μπορεί να μετατραπεί χωρίς απώλειες.',
+  'Wijzigingen vergelijken': 'Συγκρίνετε τις αλλαγές',
+  'Wijzigingen verwerpen': 'Απόρριψη αλλαγών',
+  'Zoek een opdracht…': 'Βρείτε μια εργασία…',
+  'kolom': 'στήλη',
+  'schrijftips': 'συμβουλές γραφής',
+  'tekens': 'χαρακτήρες',
   'Voortgang per sectie': 'Πρόοδος ανά ενότητα',
   'Nog te doen': 'Απομένει',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

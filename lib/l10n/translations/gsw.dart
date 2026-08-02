@@ -1774,6 +1774,42 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Actueel': 'Aktuell',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Der Quellmodus schützt Formatierungen, die der visuelle Editor noch nicht unterstützt, verlustfrei.',
+  'Codeblok': 'Codeblock',
+  'Controleren…': 'Überprüfen Sie…',
+  'Documentoverzicht': 'Dokumentenübersicht',
+  'Doorgaan met bewerken': 'Bearbeiten Sie weiter',
+  'Geen opdrachten gevonden': 'Keine Aufgaben gefunden',
+  'Genummerde lijst': 'Nummerierte Liste',
+  'Huidig concept': 'Aktuelles Konzept',
+  'Invoegen of opmaken': 'Einfügen oder formatieren',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Einfügen oder formatieren (Strg/Befehl+Leertaste)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Ihre Änderungen wurden noch nicht übernommen. Möchten Sie sie ablehnen?',
+  'Kop 1': 'Überschrift 1',
+  'Kop 2': 'Überschrift 2',
+  'Kop 3': 'Überschrift 3',
+  'Markdown-broneditor': 'Markdown-Quelleneditor',
+  'Niet toegepast': 'Nicht angewendet',
+  'Niet-toegepaste wijzigingen': 'Nicht angewendete Änderungen',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Übernehmen Sie aktuelle Änderungen oder lehnen Sie sie ab, bevor Sie den Bereich wechseln.',
+  'Problemen gevonden': 'Probleme gefunden',
+  'Schrijftips': 'Schreibtipps',
+  'Snel herstellen': 'Erholen Sie sich schnell',
+  'Taak': 'Aufgabe',
+  'Toegepaste versie': 'Angewandte Version',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Die visuelle Bearbeitung ist deaktiviert, da dieser Markdown nicht verlustfrei konvertiert werden kann.',
+  'Wijzigingen vergelijken': 'Vergleichen Sie Änderungen',
+  'Wijzigingen verwerpen': 'Änderungen ablehnen',
+  'Zoek een opdracht…': 'Finden Sie eine Aufgabe…',
+  'kolom': 'Spalte',
+  'schrijftips': 'Schreibtipps',
+  'tekens': 'Charaktere',
   'Voortgang per sectie': 'Fortschritt pro Abschnitt',
   'Nog te doen': 'Ussteend',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

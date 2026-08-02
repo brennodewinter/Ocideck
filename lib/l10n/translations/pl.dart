@@ -1783,6 +1783,42 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Actueel': 'Aktualny',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'Tryb źródłowy chroni formatowanie, którego edytor wizualny nie obsługuje jeszcze bezstratnie.',
+  'Codeblok': 'Blok kodu',
+  'Controleren…': 'Sprawdź…',
+  'Documentoverzicht': 'Przegląd dokumentu',
+  'Doorgaan met bewerken': 'Kontynuuj edycję',
+  'Geen opdrachten gevonden': 'Nie znaleziono żadnych zadań',
+  'Genummerde lijst': 'Lista numerowana',
+  'Huidig concept': 'Aktualna koncepcja',
+  'Invoegen of opmaken': 'Wstaw lub sformatuj',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Wstaw lub sformatuj (Ctrl/Cmd+Spacja)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Twoje zmiany nie zostały jeszcze zastosowane. Czy chcesz je odrzucić?',
+  'Kop 1': 'Nagłówek 1',
+  'Kop 2': 'Nagłówek 2',
+  'Kop 3': 'Nagłówek 3',
+  'Markdown-broneditor': 'Edytor źródeł Markdown',
+  'Niet toegepast': 'Nie zastosowano',
+  'Niet-toegepaste wijzigingen': 'Niezastosowane zmiany',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Zastosuj lub odrzuć bieżące zmiany przed przełączeniem zakresów.',
+  'Problemen gevonden': 'Znaleziono problemy',
+  'Schrijftips': 'Wskazówki dotyczące pisania',
+  'Snel herstellen': 'Szybko wyzdrowiej',
+  'Taak': 'Zadanie',
+  'Toegepaste versie': 'Wersja stosowana',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'Edycja wizualna jest wyłączona, ponieważ tego Markdown nie można przekonwertować bezstratnie.',
+  'Wijzigingen vergelijken': 'Porównaj zmiany',
+  'Wijzigingen verwerpen': 'Odrzuć zmiany',
+  'Zoek een opdracht…': 'Znajdź zadanie…',
+  'kolom': 'kolumna',
+  'schrijftips': 'pisanie wskazówek',
+  'tekens': 'postacie',
   'Voortgang per sectie': 'Postęp według sekcji',
   'Nog te doen': 'Pozostało',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

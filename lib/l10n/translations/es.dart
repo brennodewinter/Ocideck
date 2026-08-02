@@ -727,6 +727,42 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Actueel': 'Actual',
+  'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
+      'El modo fuente protege el formato que el editor visual aún no admite sin pérdidas.',
+  'Codeblok': 'bloque de código',
+  'Controleren…': 'Comprobar…',
+  'Documentoverzicht': 'Resumen del documento',
+  'Doorgaan met bewerken': 'Continuar editando',
+  'Geen opdrachten gevonden': 'No se encontraron asignaciones',
+  'Genummerde lijst': 'lista numerada',
+  'Huidig concept': 'Concepto actual',
+  'Invoegen of opmaken': 'Insertar o formatear',
+  'Invoegen of opmaken (Ctrl/Cmd+Spatie)':
+      'Insertar o formatear (Ctrl/Cmd+Espacio)',
+  'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?':
+      'Sus cambios aún no se han aplicado. ¿Quieres rechazarlos?',
+  'Kop 1': 'Título 1',
+  'Kop 2': 'Título 2',
+  'Kop 3': 'Título 3',
+  'Markdown-broneditor': 'Editor de código fuente de rebajas',
+  'Niet toegepast': 'No aplicado',
+  'Niet-toegepaste wijzigingen': 'Cambios no aplicados',
+  'Pas de huidige wijzigingen eerst toe of verwerp ze voordat je van bereik wisselt.':
+      'Aplique o rechace los cambios actuales antes de cambiar de ámbito.',
+  'Problemen gevonden': 'Problemas encontrados',
+  'Schrijftips': 'Consejos de escritura',
+  'Snel herstellen': 'Recuperarse rápidamente',
+  'Taak': 'Tarea',
+  'Toegepaste versie': 'Versión aplicada',
+  'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.':
+      'La edición visual está deshabilitada porque este Markdown no se puede convertir sin pérdidas.',
+  'Wijzigingen vergelijken': 'Comparar cambios',
+  'Wijzigingen verwerpen': 'Rechazar cambios',
+  'Zoek een opdracht…': 'Encuentra una tarea...',
+  'kolom': 'columna',
+  'schrijftips': 'consejos de escritura',
+  'tekens': 'personajes',
   'Voortgang per sectie': 'Progreso por sección',
   'Nog te doen': 'Pendiente',
   'Voortgangsoverzicht en -grafiek bijgewerkt':
