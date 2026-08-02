@@ -1778,6 +1778,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL konferencie (voliteľné): zobrazí companion miestnosť OciDeck',
+  'Companion-kamer': 'Companion miestnosť',
   'Kamer testen (optioneel): kamer@service':
       'Test miestnosti (voliteľné): miestnosť@služba',
   'Aanwezig in de kamer': 'Prítomní v miestnosti',

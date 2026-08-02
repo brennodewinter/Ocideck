@@ -1800,6 +1800,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL da conferência (opcional): mostra a sala companion do OciDeck',
+  'Companion-kamer': 'Sala companion',
   'Kamer testen (optioneel): kamer@service':
       'Testar sala (opcional): sala@serviço',
   'Aanwezig in de kamer': 'Presentes na sala',

@@ -1770,6 +1770,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konference-URL (valgfrit): viser OciDeck-companion-rummet',
+  'Companion-kamer': 'Companion-rum',
   'Kamer testen (optioneel): kamer@service':
       'Test rum (valgfrit): rum@tjeneste',
   'Aanwezig in de kamer': 'Til stede i rummet',

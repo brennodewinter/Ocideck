@@ -1788,6 +1788,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL-ul conferinței (opțional): afișează camera companion OciDeck',
+  'Companion-kamer': 'Cameră companion',
   'Kamer testen (optioneel): kamer@service':
       'Testare cameră (opțional): cameră@serviciu',
   'Aanwezig in de kamer': 'Prezenți în cameră',

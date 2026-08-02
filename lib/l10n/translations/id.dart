@@ -1771,6 +1771,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL konferensi (opsional): menampilkan ruang companion OciDeck',
+  'Companion-kamer': 'Ruang companion',
   'Kamer testen (optioneel): kamer@service':
       'Uji ruang (opsional): ruang@layanan',
   'Aanwezig in de kamer': 'Hadir di ruang',

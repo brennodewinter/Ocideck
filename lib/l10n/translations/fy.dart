@@ -731,6 +731,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konferinsje-URL (opsjoneel): lit de OciDeck-companion-keamer sjen',
+  'Companion-kamer': 'Companion-keamer',
   'Kamer testen (optioneel): kamer@service':
       'Keamer teste (opsjoneel): keamer@tsjinst',
   'Aanwezig in de kamer': 'Oanwêzich yn de keamer',

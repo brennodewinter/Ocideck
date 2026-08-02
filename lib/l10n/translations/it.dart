@@ -726,6 +726,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL conferenza (opzionale): mostra la stanza companion di OciDeck',
+  'Companion-kamer': 'Stanza companion',
   'Kamer testen (optioneel): kamer@service':
       'Prova stanza (opzionale): stanza@servizio',
   'Aanwezig in de kamer': 'Presenti nella stanza',

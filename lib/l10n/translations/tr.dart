@@ -2748,6 +2748,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konferans URL adresi (isteğe bağlı): OciDeck companion odasını gösterir',
+  'Companion-kamer': 'Companion oda',
   'Kamer testen (optioneel): kamer@service':
       'Oda testi (isteğe bağlı): oda@servis',
   'Aanwezig in de kamer': 'Odada bulunanlar',

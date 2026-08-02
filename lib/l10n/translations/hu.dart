@@ -1775,6 +1775,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konferencia-URL (opcionális): megjeleníti az OciDeck companion szobáját',
+  'Companion-kamer': 'Companion szoba',
   'Kamer testen (optioneel): kamer@service':
       'Szoba tesztelése (opcionális): szoba@szolgáltatás',
   'Aanwezig in de kamer': 'A szobában jelenlévők',

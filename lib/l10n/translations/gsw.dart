@@ -1774,6 +1774,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konferänz-URL (optional): zeigt de OciDeck-Companion-Ruum',
+  'Companion-kamer': 'Companion-Ruum',
   'Kamer testen (optioneel): kamer@service':
       'Ruum teste (optional): ruum@dienscht',
   'Aanwezig in de kamer': 'Aawäsend im Ruum',

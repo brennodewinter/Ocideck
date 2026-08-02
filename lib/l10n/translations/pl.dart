@@ -1783,6 +1783,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Adres URL konferencji (opcjonalnie): pokazuje pokój companion OciDeck',
+  'Companion-kamer': 'Pokój companion',
   'Kamer testen (optioneel): kamer@service':
       'Test pokoju (opcjonalnie): pokój@usługa',
   'Aanwezig in de kamer': 'Obecni w pokoju',

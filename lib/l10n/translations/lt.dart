@@ -1778,6 +1778,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konferencijos URL (nebūtina): rodo OciDeck companion kambarį',
+  'Companion-kamer': 'Companion kambarys',
   'Kamer testen (optioneel): kamer@service':
       'Tikrinti kambarį (nebūtina): kambarys@paslauga',
   'Aanwezig in de kamer': 'Esantys kambaryje',

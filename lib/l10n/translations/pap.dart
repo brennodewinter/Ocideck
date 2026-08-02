@@ -730,6 +730,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL di konferensia (opcional): ta mustra e sala companion di OciDeck',
+  'Companion-kamer': 'Sala companion',
   'Kamer testen (optioneel): kamer@service':
       'Testia sala (opcional): sala@servisio',
   'Aanwezig in de kamer': 'Presente den e sala',

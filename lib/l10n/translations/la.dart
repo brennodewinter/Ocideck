@@ -1787,6 +1787,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL colloquii (ad libitum): cubiculum companion OciDeck monstrat',
+  'Companion-kamer': 'Cubiculum companion',
   'Kamer testen (optioneel): kamer@service':
       'Cubiculum probare (ad libitum): cubiculum@servitium',
   'Aanwezig in de kamer': 'Praesentes in cubiculo',

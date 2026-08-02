@@ -1762,6 +1762,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konverentsi URL (valikuline): näitab OciDecki companion-tuba',
+  'Companion-kamer': 'Companion-tuba',
   'Kamer testen (optioneel): kamer@service':
       'Testi tuba (valikuline): tuba@teenus',
   'Aanwezig in de kamer': 'Toas viibijad',
