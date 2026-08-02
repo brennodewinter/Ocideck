@@ -1021,6 +1021,32 @@ check-static: $(STATIC_GATES)
 	@echo "Validated: formatting, static analysis, the toolchain, conventions, the privacy projection boundary, method length, dead-code, hardcoded visible text, comment language, and improvement templates."
 	@echo "NOT validated here: the full test suite, the coverage floor and the per-file coverage floor — those run in 'make check'."
 
+# De registratie-invarianten: de handvol *snelle* tests die betrappen wanneer een
+# nieuw bestand, docs-pagina, afhankelijkheid of UI-string niet geregistreerd is.
+# Bedoeld als aanvulling op $(STATIC_GATES) in de per-PR-poort
+# (`static-gate.yml`): $(STATIC_GATES) vangt de statische drift (bestands-/klasse-/
+# methodegrootte, opmaak, hardgecodeerde tekst), maar deze poorten zíjn tests en
+# draaiden dus nergens vóór de merge — precies waardoor #1123 (source_map) stil
+# op main kon landen. Het zijn platte tests (geen widget-render), dus seconden per
+# stuk; de volle suite en de dekkingsvloer blijven bewust in `make check`.
+#
+# LET OP — dit is een handmatige lijst, geen automatische. Komt er een nieuwe
+# registratie-/invariantpoort bij als test, voeg hem hier toe; een gemiste test is
+# opnieuw een stil gat. De vier hieronder dekken: lib-bestand → SOURCE_MAP, docs
+# → registratie, pubspec → SBOM, en nieuwe `l10n.d`-string → vertaald.
+REGISTRATION_TESTS := \
+	test/source_map_coverage_test.dart \
+	test/docs_registration_test.dart \
+	test/sbom_test.dart \
+	test/l10n_untranslated_test.dart
+
+check-registrations:
+	@echo "== OciDeck registration invariants =="
+	@echo "Command: flutter test $(REGISTRATION_TESTS)"
+	@echo "Covers: new lib file in SOURCE_MAP, new docs registered, SBOM fresh vs pubspec, new l10n.d string translated."
+	@echo "Failure means: something new landed without its registration — the class of drift that is a *test*, not a static gate."
+	flutter test $(REGISTRATION_TESTS) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
 check-full: check check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated

@@ -132,3 +132,11 @@ jobs:
       # Ze hier overtypen zou twee waarheden opleveren die uit elkaar gaan lopen.
       - name: De statische poort
         run: make check-static
+
+      # De registratie-invarianten (#1123): een handvol snelle tests die betrappen
+      # wanneer een nieuw bestand/docs/afhankelijkheid/UI-string niet geregistreerd
+      # is. Die poorten zíjn tests, dus `check-static` ziet ze niet — en zonder deze
+      # stap kon zulke drift (bv. source_map) tóch per PR passeren. Zelfde job, dus
+      # dezelfde status-check-context; alleen deze stap erbij, geen tweede lijst.
+      - name: De registratie-invarianten
+        run: make check-registrations

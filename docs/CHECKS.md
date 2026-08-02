@@ -11,17 +11,26 @@ these checks. The Forgejo remote has an Actions runner since 2026-07-23, and
 (#741/#751/#790/#797). That is `make check`
 with the full test suite intact but without the coverage instrumentation —
 worth roughly 13 minutes off a 46-minute gate on that runner. Since #1118 the
-**static gates** — `$(STATIC_GATES)`, seconds each — also run on **every pull
+**static gates** — `$(STATIC_GATES)`, seconds each — run on **every pull
 request** (`.forgejo/workflows/static-gate.yml`, [`make check-static`](#make-check-static)),
-so that class of drift no longer waits for a tag. And since #1123 the **full
-test suite** runs once more on **every push to `main`** (`linux-gate.yml`, `make
-check-no-coverage`), so a registration or invariant gate that is *a test* — the
-kind `static-gate` deliberately skips — can no longer sit silently red on `main`
-between releases. But read the rest literally, twice over: that main-push run is
-**detection after the merge, not a merge block**, and the **coverage floors still
-run nowhere but on your own machine**. CI is the release gate, the per-PR static
-gate is a safety net, the main-push gate is a smoke alarm, and you are still the
-merge gate.
+and since #1123 that same per-PR job also runs `make check-registrations` — the
+fast registration/invariant tests (`SOURCE_MAP`, docs, SBOM, l10n) that are
+*tests* and so escaped the static subset. **Since #1123 that `static-gate` check
+is a required status check** (branch protection on `main`): a PR does not merge
+until it passes, via the web UI or the REST/`tea` merge API. That is the
+prevention layer — drift is stopped at the PR instead of landing. Two things it
+still does **not** cover, on purpose: the **full test suite** and the **coverage
+floors**. The full suite runs post-merge on every push to `main`
+(`linux-gate.yml`, `make check-no-coverage`) as a smoke alarm — detection, not a
+block — and the coverage floors still run nowhere but in `make check` on your own
+machine. So: the per-PR gate blocks, the main-push gate alarms, the tag is the
+release gate, and you are still the coverage gate.
+
+> **Escape hatch.** If the runner is down or saturated and a green PR cannot
+> merge because its required `static-gate` check never ran, a repo admin removes
+> or edits the branch-protection rule (Settings → Branches, or the
+> `branch_protections` API) — the rule is server state, not in a commit, so
+> lifting it is immediate and reversible.
 
 **Two workflows already run per pull request, each for its own deliberate
 reason.** The older is `.forgejo/workflows/scans.yml`, which runs the
@@ -1360,8 +1369,19 @@ that reaches beyond `build/test_cache`.
 - **static-gate** — the same bare `ubuntu:24.04` container and pinned-Flutter
   setup as `linux-gate.yml` (version read from `.tool-versions`, tarball
   sha256-verified against the official manifest, `/opt/flutter` and `~/.pub-cache`
-  cached), then `flutter pub get` and [`make check-static`](#make-check-static) —
-  `$(STATIC_GATES)` and nothing else, no test suite and no coverage.
+  cached), then `flutter pub get`, [`make check-static`](#make-check-static)
+  (`$(STATIC_GATES)`) **and `make check-registrations`** — the handful of *fast*
+  registration/invariant tests (#1123).
+- **Why `check-registrations` too (#1123).** `check-static` catches the *static*
+  drift (file/class/method size, formatting, hardcoded text) but the
+  registration gates — new lib file in `SOURCE_MAP`, new docs registered, SBOM
+  fresh vs `pubspec`, new `l10n.d` string translated — **are tests**, so they ran
+  nowhere before the merge and that class (e.g. `source_map_coverage_test`) could
+  still land red. These four are plain tests (no widget render), seconds each, in
+  the same job — so the required-check context stays `static-gate / static-gate`.
+  The list in `REGISTRATION_TESTS` is hand-maintained: a new invariant *test*
+  must be added there or it is a silent gap again. The full suite and the
+  coverage floors still stay in `make check`.
 - **Why it exists (#1118).** The release gate runs on a `v*` tag and the Linux
   gate only on demand, so between releases nothing held the static ratchets on a
   pull request. `main` drifted silently red — a run of merges pushed files,
