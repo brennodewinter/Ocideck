@@ -1788,6 +1788,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Перевірка кімнати (необовʼязково): кімната@сервіс',
+  'Aanwezig in de kamer': 'Присутні в кімнаті',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Псевдонім уже використовується в кімнаті.',
+  'Deze kamer is alleen voor leden.': 'Ця кімната лише для учасників.',
+  'Deze kamer vereist een wachtwoord.': 'Ця кімната потребує пароль.',
+  'De kamer kon niet worden betreden.': 'Не вдалося увійти до кімнати.',
   'Sessie actief als': 'Сеанс активний як',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Вхід виконано, але сервер не зміг створити сеанс (не вдалося прив\'язати ресурс).',

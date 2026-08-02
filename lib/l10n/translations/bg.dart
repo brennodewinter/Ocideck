@@ -1793,6 +1793,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Проверка на стая (по избор): стая@услуга',
+  'Aanwezig in de kamer': 'Присъстващи в стаята',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Псевдонимът вече се използва в стаята.',
+  'Deze kamer is alleen voor leden.': 'Тази стая е само за членове.',
+  'Deze kamer vereist een wachtwoord.': 'Тази стая изисква парола.',
+  'De kamer kon niet worden betreden.':
+      'Не беше възможно да се влезе в стаята.',
   'Sessie actief als': 'Активна сесия като',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Влизането е успешно, но сървърът не можа да създаде сесия (обвързването на ресурса е неуспешно).',

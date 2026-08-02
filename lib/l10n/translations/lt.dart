@@ -1778,6 +1778,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Tikrinti kambarį (nebūtina): kambarys@paslauga',
+  'Aanwezig in de kamer': 'Esantys kambaryje',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Slapyvardis kambaryje jau naudojamas.',
+  'Deze kamer is alleen voor leden.': 'Šis kambarys skirtas tik nariams.',
+  'Deze kamer vereist een wachtwoord.': 'Šiam kambariui reikia slaptažodžio.',
+  'De kamer kon niet worden betreden.': 'Nepavyko įeiti į kambarį.',
   'Sessie actief als': 'Seansas aktyvus kaip',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Prisijungta, bet serveris negalėjo sukurti seanso (nepavyko susieti ištekliaus).',

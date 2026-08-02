@@ -1771,6 +1771,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Testaa huone (valinnainen): huone@palvelu',
+  'Aanwezig in de kamer': 'Läsnä huoneessa',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Kutsumanimi on jo käytössä huoneessa.',
+  'Deze kamer is alleen voor leden.': 'Tämä huone on vain jäsenille.',
+  'Deze kamer vereist een wachtwoord.': 'Tämä huone vaatii salasanan.',
+  'De kamer kon niet worden betreden.': 'Huoneeseen ei voitu liittyä.',
   'Sessie actief als': 'Istunto aktiivinen käyttäjänä',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Kirjauduttu sisään, mutta palvelin ei voinut muodostaa istuntoa (resurssin sidonta epäonnistui).',

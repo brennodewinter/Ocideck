@@ -1777,6 +1777,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Provjera sobe (neobavezno): soba@usluga',
+  'Aanwezig in de kamer': 'Prisutni u sobi',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Nadimak je već u upotrebi u sobi.',
+  'Deze kamer is alleen voor leden.': 'Ova soba je samo za članove.',
+  'Deze kamer vereist een wachtwoord.': 'Ova soba zahtijeva lozinku.',
+  'De kamer kon niet worden betreden.': 'Nije bilo moguće ući u sobu.',
   'Sessie actief als': 'Sesija aktivna kao',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Prijava uspješna, ali poslužitelj nije mogao uspostaviti sesiju (povezivanje resursa nije uspjelo).',

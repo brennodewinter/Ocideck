@@ -88,10 +88,26 @@ class XmppSessionResult {
   final String? detail;
 }
 
+/// The stanza-level surface of a live session: what the layers above (MUC, later
+/// Jingle) actually need — send a stanza, watch inbound ones, know the bound JID.
+/// [XmppSession] is the real implementation; a test drives those layers against a
+/// fake channel without standing up a whole session.
+abstract interface class XmppStanzaChannel {
+  /// The bound full JID (`localpart@domain/resource`), or null before connect.
+  String? get boundJid;
+
+  /// Inbound stanzas once live (broadcast: subscribe before the work expecting
+  /// replies). Completes when the stream drops.
+  Stream<Stanza> get stanzas;
+
+  /// Send a stanza on the live session. A no-op once closed.
+  void sendStanza(Stanza stanza);
+}
+
 /// Drives one stream from open through SASL and resource binding to a live
 /// session. Call [connect] once; on success use [stanzas]/[sendStanza] until
 /// [close].
-class XmppSession {
+class XmppSession implements XmppStanzaChannel {
   XmppSession({
     required this.transport,
     required this.settings,
@@ -119,11 +135,13 @@ class XmppSession {
 
   /// The full JID the server bound (`localpart@domain/resource`), or null before
   /// a successful [connect].
+  @override
   String? get boundJid => _boundJid;
 
   /// Inbound stanzas, once the session is live. Broadcast, so a late listener
   /// only sees stanzas from the moment it subscribes — subscribe before the work
   /// that expects replies (e.g. join a room, then read presence).
+  @override
   Stream<Stanza> get stanzas => _inbound.stream;
 
   /// Open the stream, authenticate, and bind a resource. Returns a failed result
@@ -442,6 +460,7 @@ class XmppSession {
   }
 
   /// Send a stanza on the live session. A no-op once closed.
+  @override
   void sendStanza(Stanza stanza) {
     if (_closed || !_live) return;
     transport.send(stanza.toXmlString());

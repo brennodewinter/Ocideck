@@ -1798,6 +1798,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Δοκιμή δωματίου (προαιρετικό): δωμάτιο@υπηρεσία',
+  'Aanwezig in de kamer': 'Παρόντες στο δωμάτιο',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Το ψευδώνυμο χρησιμοποιείται ήδη στο δωμάτιο.',
+  'Deze kamer is alleen voor leden.': 'Αυτό το δωμάτιο είναι μόνο για μέλη.',
+  'Deze kamer vereist een wachtwoord.':
+      'Αυτό το δωμάτιο απαιτεί κωδικό πρόσβασης.',
+  'De kamer kon niet worden betreden.':
+      'Δεν ήταν δυνατή η είσοδος στο δωμάτιο.',
   'Sessie actief als': 'Ενεργή συνεδρία ως',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Έγινε σύνδεση, αλλά ο διακομιστής δεν μπόρεσε να δημιουργήσει συνεδρία (η δέσμευση πόρου απέτυχε).',

@@ -1800,6 +1800,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Testar sala (opcional): sala@serviço',
+  'Aanwezig in de kamer': 'Presentes na sala',
+  'De bijnaam is al in gebruik in de kamer.':
+      'A alcunha já está em uso na sala.',
+  'Deze kamer is alleen voor leden.': 'Esta sala é apenas para membros.',
+  'Deze kamer vereist een wachtwoord.': 'Esta sala requer uma palavra-passe.',
+  'De kamer kon niet worden betreden.': 'Não foi possível entrar na sala.',
   'Sessie actief als': 'Sessão ativa como',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Autenticado, mas o servidor não conseguiu estabelecer uma sessão (a vinculação de recurso falhou).',

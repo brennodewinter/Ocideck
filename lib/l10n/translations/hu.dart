@@ -1775,6 +1775,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Szoba tesztelése (opcionális): szoba@szolgáltatás',
+  'Aanwezig in de kamer': 'A szobában jelenlévők',
+  'De bijnaam is al in gebruik in de kamer.':
+      'A becenév már használatban van a szobában.',
+  'Deze kamer is alleen voor leden.': 'Ez a szoba csak tagoknak való.',
+  'Deze kamer vereist een wachtwoord.': 'Ez a szoba jelszót igényel.',
+  'De kamer kon niet worden betreden.': 'A szobába nem sikerült belépni.',
   'Sessie actief als': 'Munkamenet aktív mint',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Bejelentkezve, de a kiszolgáló nem tudott munkamenetet létrehozni (az erőforrás-hozzárendelés sikertelen).',

@@ -1762,6 +1762,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Testi tuba (valikuline): tuba@teenus',
+  'Aanwezig in de kamer': 'Toas viibijad',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Hüüdnimi on toas juba kasutusel.',
+  'Deze kamer is alleen voor leden.': 'See tuba on ainult liikmetele.',
+  'Deze kamer vereist een wachtwoord.': 'See tuba nõuab parooli.',
+  'De kamer kon niet worden betreden.': 'Tuppa ei õnnestunud siseneda.',
   'Sessie actief als': 'Seanss aktiivne kasutajana',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Sisse logitud, kuid server ei suutnud seanssi luua (ressursi sidumine ebaõnnestus).',

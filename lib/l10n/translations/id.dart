@@ -1771,6 +1771,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Uji ruang (opsional): ruang@layanan',
+  'Aanwezig in de kamer': 'Hadir di ruang',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Nama panggilan sudah digunakan di ruang ini.',
+  'Deze kamer is alleen voor leden.': 'Ruang ini hanya untuk anggota.',
+  'Deze kamer vereist een wachtwoord.': 'Ruang ini memerlukan kata sandi.',
+  'De kamer kon niet worden betreden.': 'Ruang tidak dapat dimasuki.',
   'Sessie actief als': 'Sesi aktif sebagai',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Berhasil masuk, tetapi server tidak dapat menyiapkan sesi (pengikatan sumber daya gagal).',

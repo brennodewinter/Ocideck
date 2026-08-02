@@ -1793,6 +1793,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Ittestja kamra (mhux obbligatorju): kamra@servizz',
+  'Aanwezig in de kamer': 'Preżenti fil-kamra',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Il-laqam diġà qed jintuża fil-kamra.',
+  'Deze kamer is alleen voor leden.': 'Din il-kamra hija għall-membri biss.',
+  'Deze kamer vereist een wachtwoord.': 'Din il-kamra teħtieġ password.',
+  'De kamer kon niet worden betreden.': 'Ma kienx possibbli tidħol fil-kamra.',
   'Sessie actief als': 'Sessjoni attiva bħala',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Illoggjat, imma s-server ma setax joħloq sessjoni (l-irbit tar-riżorsa falla).',

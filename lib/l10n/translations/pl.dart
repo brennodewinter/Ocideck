@@ -1783,6 +1783,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Test pokoju (opcjonalnie): pokój@usługa',
+  'Aanwezig in de kamer': 'Obecni w pokoju',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Pseudonim jest już używany w pokoju.',
+  'Deze kamer is alleen voor leden.': 'Ten pokój jest tylko dla członków.',
+  'Deze kamer vereist een wachtwoord.': 'Ten pokój wymaga hasła.',
+  'De kamer kon niet worden betreden.': 'Nie udało się wejść do pokoju.',
   'Sessie actief als': 'Sesja aktywna jako',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Zalogowano, ale serwer nie mógł utworzyć sesji (powiązanie zasobu nie powiodło się).',

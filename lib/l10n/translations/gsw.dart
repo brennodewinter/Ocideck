@@ -1774,6 +1774,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Ruum teste (optional): ruum@dienscht',
+  'Aanwezig in de kamer': 'Aawäsend im Ruum',
+  'De bijnaam is al in gebruik in de kamer.':
+      'De Spitzname wird im Ruum scho bruucht.',
+  'Deze kamer is alleen voor leden.': 'Dä Ruum isch nume für Mitglider.',
+  'Deze kamer vereist een wachtwoord.': 'Dä Ruum bruucht es Passwort.',
+  'De kamer kon niet worden betreden.': 'Me het de Ruum nöd chöne betrete.',
   'Sessie actief als': 'Sitzig aktiv als',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Aagmäldet, aber de Server het kei Sitzig chöne ufboue (Ressourcebindig fehlgschlage).',
