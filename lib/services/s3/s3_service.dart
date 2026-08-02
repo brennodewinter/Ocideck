@@ -24,6 +24,7 @@ import 'package:xml/xml.dart';
 import '../../models/s3_settings.dart';
 import '../../utils/log.dart';
 import '../../utils/net_guard.dart';
+import '../../utils/pinned_http_client.dart';
 import '../file_service.dart';
 import '../net/transport_failure.dart';
 import 's3_sigv4.dart';
@@ -220,13 +221,10 @@ class S3Service {
       };
     }
     final pinned = resolved.addresses!.first;
-    return HttpClient()
-      ..connectionTimeout = const Duration(seconds: 15)
-      ..connectionFactory = (u, proxyHost, proxyPort) => NetGuard.connectPinned(
-        pinned,
-        u,
-        onBadCertificate: NetGuard.pinnedCertCheck(bucket.pinnedCertSha256),
-      );
+    return buildPinnedHttpClient(
+      pinned,
+      pinnedCertSha256: bucket.pinnedCertSha256,
+    );
   }
 
   /// De `Host`-header zoals `HttpClient` hem zal versturen. Moet exact zo mee

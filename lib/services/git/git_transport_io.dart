@@ -4,6 +4,7 @@ import 'dart:typed_data' show BytesBuilder;
 import '../../models/git_settings.dart';
 import '../../utils/log.dart';
 import '../../utils/net_guard.dart';
+import '../../utils/pinned_http_client.dart';
 import '../net/transport_failure.dart';
 import 'git_forge.dart';
 import 'git_transport.dart';
@@ -191,13 +192,10 @@ class PinnedGitTransport implements GitTransport {
       };
     }
     final pinned = resolved.addresses!.first;
-    final client = HttpClient()
-      ..connectionTimeout = const Duration(seconds: 15)
-      ..connectionFactory = (u, _, _) => NetGuard.connectPinned(
-        pinned,
-        u,
-        onBadCertificate: NetGuard.pinnedCertCheck(config.pinnedCertSha256),
-      );
+    final client = buildPinnedHttpClient(
+      pinned,
+      pinnedCertSha256: config.pinnedCertSha256,
+    );
     _client = client;
     return client;
   }

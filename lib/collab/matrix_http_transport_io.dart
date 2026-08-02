@@ -18,6 +18,7 @@ import 'dart:typed_data' show BytesBuilder;
 import '../models/matrix_settings.dart';
 import '../services/net/transport_failure.dart';
 import '../utils/net_guard.dart';
+import '../utils/pinned_http_client.dart';
 import 'matrix_client.dart';
 
 /// The platform transport on dart:io targets.
@@ -142,13 +143,10 @@ class PinnedMatrixHttpTransport implements MatrixHttpTransport {
       };
     }
     final pinned = resolved.addresses!.first;
-    final client = HttpClient()
-      ..connectionTimeout = const Duration(seconds: 15)
-      ..connectionFactory = (u, _, _) => NetGuard.connectPinned(
-        pinned,
-        u,
-        onBadCertificate: NetGuard.pinnedCertCheck(server.pinnedCertSha256),
-      );
+    final client = buildPinnedHttpClient(
+      pinned,
+      pinnedCertSha256: server.pinnedCertSha256,
+    );
     _client = client;
     return client;
   }
