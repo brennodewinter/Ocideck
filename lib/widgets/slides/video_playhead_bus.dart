@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/scheduler.dart';
 
 /// The current playhead of the video that is playing in the active slide
 /// preview. [slideId] ties the reading to a specific slide so the editor's
@@ -41,7 +42,22 @@ class VideoPlayheadBus {
   }
 
   /// Clears the published playhead if it belongs to [slideId] (on dispose).
+  ///
+  /// Dispose usually runs while Flutter is finalising the frame's element tree,
+  /// which locks the tree. Writing to [current] then would notify the editor's
+  /// "cut here" [ValueListenableBuilder], whose `setState` throws under that
+  /// lock ("widget tree was locked"). So when a frame is in flight we clear
+  /// right after it instead; the [slideId] guard turns the deferred clear into
+  /// a no-op if another slide has meanwhile published its own playhead.
   static void clearFor(String slideId) {
-    if (current.value?.slideId == slideId) current.value = null;
+    if (current.value?.slideId != slideId) return;
+    final binding = SchedulerBinding.instance;
+    if (binding.schedulerPhase == SchedulerPhase.persistentCallbacks) {
+      binding.addPostFrameCallback((_) {
+        if (current.value?.slideId == slideId) current.value = null;
+      });
+    } else {
+      current.value = null;
+    }
   }
 }
