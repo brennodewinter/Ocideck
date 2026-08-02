@@ -1783,6 +1783,18 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Media (WebRTC)': 'Multimedia (WebRTC)',
+  'Media-stack testen': 'Przetestuj stos multimediów',
+  'De media-stack werkt op dit apparaat.':
+      'Stos multimediów działa na tym urządzeniu.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Nie udało się załadować stosu multimediów na tym urządzeniu.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Szyfrowanie multimediów (E2EE): wyłączone na tej platformie.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Szyfrowanie multimediów (E2EE): jeszcze niedostępne.',
+  'Media-versleuteling (E2EE): aan.':
+      'Szyfrowanie multimediów (E2EE): włączone.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'Adres URL konferencji (opcjonalnie): pokazuje pokój companion OciDeck',
   'Companion-kamer': 'Pokój companion',

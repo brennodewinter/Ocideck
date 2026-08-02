@@ -1771,6 +1771,17 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Media (WebRTC)': 'Media (WebRTC)',
+  'Media-stack testen': 'Uji stack media',
+  'De media-stack werkt op dit apparaat.':
+      'Stack media berfungsi di perangkat ini.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Stack media tidak dapat dimuat di perangkat ini.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Enkripsi media (E2EE): nonaktif di platform ini.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Enkripsi media (E2EE): belum tersedia.',
+  'Media-versleuteling (E2EE): aan.': 'Enkripsi media (E2EE): aktif.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL konferensi (opsional): menampilkan ruang companion OciDeck',
   'Companion-kamer': 'Ruang companion',

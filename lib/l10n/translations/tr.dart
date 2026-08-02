@@ -2748,6 +2748,16 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Media (WebRTC)': 'Medya (WebRTC)',
+  'Media-stack testen': 'Medya yığınını test et',
+  'De media-stack werkt op dit apparaat.': 'Medya yığını bu cihazda çalışıyor.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Medya yığını bu cihazda yüklenemedi.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Medya şifrelemesi (E2EE): bu platformda kapalı.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Medya şifrelemesi (E2EE): henüz kullanılamıyor.',
+  'Media-versleuteling (E2EE): aan.': 'Medya şifrelemesi (E2EE): açık.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'Konferans URL adresi (isteğe bağlı): OciDeck companion odasını gösterir',
   'Companion-kamer': 'Companion oda',

@@ -1762,6 +1762,16 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Media (WebRTC)': 'Meedia (WebRTC)',
+  'Media-stack testen': 'Testi meediapinu',
+  'De media-stack werkt op dit apparaat.': 'Meediapinu töötab selles seadmes.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Meediapinu ei õnnestunud selles seadmes laadida.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Meedia krüpteerimine (E2EE): sellel platvormil välja lülitatud.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Meedia krüpteerimine (E2EE): pole veel saadaval.',
+  'Media-versleuteling (E2EE): aan.': 'Meedia krüpteerimine (E2EE): sees.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'Konverentsi URL (valikuline): näitab OciDecki companion-tuba',
   'Companion-kamer': 'Companion-tuba',

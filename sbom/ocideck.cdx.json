@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:83bff8f6-6666-5e0d-87a6-e13cb829abde",
+  "serialNumber": "urn:uuid:a7e8e0da-da83-591b-8525-f828f2d42044",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-01T21:46:38.470199Z",
+    "timestamp": "2026-08-02T16:53:31.562966Z",
     "tools": {
       "components": [
         {
@@ -1015,6 +1015,48 @@
         {
           "type": "distribution",
           "url": "https://pub.dev/packages/dart_quill_delta/versions/10.8.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/dart_webrtc@1.8.1",
+      "type": "library",
+      "supplier": {
+        "name": "flutter-webrtc",
+        "url": [
+          "https://github.com/flutter-webrtc"
+        ]
+      },
+      "name": "dart_webrtc",
+      "version": "1.8.1",
+      "purl": "pkg:pub/dart_webrtc@1.8.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f6d615bddea5e458ce180a914f3055c234ffb52fb7397a51b3491e76d6d7edb2"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/dart_webrtc/versions/1.8.1"
         }
       ],
       "properties": [
@@ -2580,6 +2622,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/flutter_webrtc@1.5.2",
+      "type": "library",
+      "supplier": {
+        "name": "cloudwebrtc",
+        "url": [
+          "https://github.com/cloudwebrtc"
+        ]
+      },
+      "name": "flutter_webrtc",
+      "version": "1.5.2",
+      "purl": "pkg:pub/flutter_webrtc@1.5.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0f89dee7f4c35dab5611f351c3897a3bfe9f7057720cc7da209b52455af4316e"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/flutter_webrtc/versions/1.5.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/frontend_server_client@4.0.0",
       "type": "library",
       "supplier": {
@@ -3276,6 +3360,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/js@0.7.2",
+      "type": "library",
+      "supplier": {
+        "name": "dart-lang",
+        "url": [
+          "https://github.com/dart-lang"
+        ]
+      },
+      "name": "js",
+      "version": "0.7.2",
+      "purl": "pkg:pub/js@0.7.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "53385261521cc4a0c4658fd0ad07a7d14591cf8fc33abbceae306ddb974888dc"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/js/versions/0.7.2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/json_annotation@4.12.0",
       "type": "library",
       "supplier": {
@@ -3514,6 +3640,48 @@
         {
           "type": "distribution",
           "url": "https://pub.dev/packages/listen/versions/1.0.0-beta.4"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/logger@2.7.0",
+      "type": "library",
+      "supplier": {
+        "name": "SourceHorizon",
+        "url": [
+          "https://github.com/SourceHorizon"
+        ]
+      },
+      "name": "logger",
+      "version": "2.7.0",
+      "purl": "pkg:pub/logger@2.7.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "25aee487596a6257655a1e091ec2ae66bc30e7af663592cc3a27e6591e05035c"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/logger/versions/2.7.0"
         }
       ],
       "properties": [
@@ -6375,6 +6543,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/synchronized@3.4.1+1",
+      "type": "library",
+      "supplier": {
+        "name": "tekartik",
+        "url": [
+          "https://github.com/tekartik"
+        ]
+      },
+      "name": "synchronized",
+      "version": "3.4.1+1",
+      "purl": "pkg:pub/synchronized@3.4.1+1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "61894a1956de6b4fc1aefd0892e109514a1a706cbece3ac59decd90ff5a7a423"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/synchronized/versions/3.4.1+1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/term_glyph@1.2.2",
       "type": "library",
       "supplier": {
@@ -7803,6 +8013,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/webrtc_interface@1.5.1",
+      "type": "library",
+      "supplier": {
+        "name": "flutter-webrtc.org",
+        "url": [
+          "https://flutter-webrtc.org"
+        ]
+      },
+      "name": "webrtc_interface",
+      "version": "1.5.1",
+      "purl": "pkg:pub/webrtc_interface@1.5.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c6f100eac5057d9a817a60473126f9828c796d42884d498af4f339c97b21014f"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/webrtc_interface/versions/1.5.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/webview_flutter@4.14.1",
       "type": "library",
       "supplier": {
@@ -8822,6 +9074,7 @@
         "pkg:pub/flutter_riverpod@3.4.1",
         "pkg:pub/flutter_secure_storage@10.3.1",
         "pkg:pub/flutter_svg@2.3.0",
+        "pkg:pub/flutter_webrtc@1.5.2",
         "pkg:pub/highlight@0.7.0",
         "pkg:pub/http@1.6.0",
         "pkg:pub/image@4.9.1",
@@ -9011,6 +9264,18 @@
         "pkg:pub/collection@1.19.1",
         "pkg:pub/diff_match_patch@0.4.1",
         "pkg:pub/quiver@3.2.2"
+      ]
+    },
+    {
+      "ref": "pkg:pub/dart_webrtc@1.8.1",
+      "dependsOn": [
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/js@0.7.2",
+        "pkg:pub/logging@1.3.0",
+        "pkg:pub/meta@1.18.0",
+        "pkg:pub/synchronized@3.4.1+1",
+        "pkg:pub/web@1.1.1",
+        "pkg:pub/webrtc_interface@1.5.1"
       ]
     },
     {
@@ -9351,6 +9616,18 @@
       ]
     },
     {
+      "ref": "pkg:pub/flutter_webrtc@1.5.2",
+      "dependsOn": [
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/dart_webrtc@1.8.1",
+        "pkg:pub/logger@2.7.0",
+        "pkg:pub/path_provider@2.1.6",
+        "pkg:pub/web@1.1.1",
+        "pkg:pub/webrtc_interface@1.5.1",
+        "sdk:flutter@0.0.0"
+      ]
+    },
+    {
       "ref": "pkg:pub/frontend_server_client@4.0.0",
       "dependsOn": [
         "pkg:pub/async@2.13.1",
@@ -9491,6 +9768,10 @@
       ]
     },
     {
+      "ref": "pkg:pub/js@0.7.2",
+      "dependsOn": []
+    },
+    {
       "ref": "pkg:pub/json_annotation@4.12.0",
       "dependsOn": [
         "pkg:pub/meta@1.18.0"
@@ -9531,6 +9812,13 @@
     {
       "ref": "pkg:pub/listen@1.0.0-beta.4",
       "dependsOn": [
+        "pkg:pub/meta@1.18.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/logger@2.7.0",
+      "dependsOn": [
+        "pkg:pub/clock@1.1.2",
         "pkg:pub/meta@1.18.0"
       ]
     },
@@ -10083,6 +10371,10 @@
       "dependsOn": []
     },
     {
+      "ref": "pkg:pub/synchronized@3.4.1+1",
+      "dependsOn": []
+    },
+    {
       "ref": "pkg:pub/term_glyph@1.2.2",
       "dependsOn": []
     },
@@ -10379,6 +10671,10 @@
       "dependsOn": [
         "pkg:pub/logging@1.3.0"
       ]
+    },
+    {
+      "ref": "pkg:pub/webrtc_interface@1.5.1",
+      "dependsOn": []
     },
     {
       "ref": "pkg:pub/webview_flutter@4.14.1",

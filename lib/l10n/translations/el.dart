@@ -1798,6 +1798,17 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Media (WebRTC)': 'Πολυμέσα (WebRTC)',
+  'Media-stack testen': 'Δοκιμή στοίβας πολυμέσων',
+  'De media-stack werkt op dit apparaat.':
+      'Η στοίβα πολυμέσων λειτουργεί σε αυτήν τη συσκευή.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Δεν ήταν δυνατή η φόρτωση της στοίβας πολυμέσων σε αυτήν τη συσκευή.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Κρυπτογράφηση πολυμέσων (E2EE): ανενεργή σε αυτήν την πλατφόρμα.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Κρυπτογράφηση πολυμέσων (E2EE): δεν είναι ακόμη διαθέσιμη.',
+  'Media-versleuteling (E2EE): aan.': 'Κρυπτογράφηση πολυμέσων (E2EE): ενεργή.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL διάσκεψης (προαιρετικό): εμφανίζει το companion δωμάτιο του OciDeck',
   'Companion-kamer': 'Companion δωμάτιο',

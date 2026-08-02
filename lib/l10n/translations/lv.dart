@@ -1770,6 +1770,17 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Media (WebRTC)': 'Multivide (WebRTC)',
+  'Media-stack testen': 'Pārbaudīt multivides steku',
+  'De media-stack werkt op dit apparaat.':
+      'Multivides steks darbojas šajā ierīcē.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Multivides steku nevarēja ielādēt šajā ierīcē.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Multivides šifrēšana (E2EE): izslēgta šajā platformā.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Multivides šifrēšana (E2EE): vēl nav pieejama.',
+  'Media-versleuteling (E2EE): aan.': 'Multivides šifrēšana (E2EE): ieslēgta.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'Konferences URL (neobligāti): rāda OciDeck companion istabu',
   'Companion-kamer': 'Companion istaba',

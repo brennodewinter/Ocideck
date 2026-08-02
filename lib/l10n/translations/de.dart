@@ -730,6 +730,17 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Media (WebRTC)': 'Medien (WebRTC)',
+  'Media-stack testen': 'Medien-Stack testen',
+  'De media-stack werkt op dit apparaat.':
+      'Der Medien-Stack funktioniert auf diesem Gerät.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Der Medien-Stack konnte auf diesem Gerät nicht geladen werden.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Medienverschlüsselung (E2EE): auf dieser Plattform deaktiviert.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Medienverschlüsselung (E2EE): noch nicht verfügbar.',
+  'Media-versleuteling (E2EE): aan.': 'Medienverschlüsselung (E2EE): aktiv.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'Konferenz-URL (optional): zeigt den OciDeck-Companion-Raum',
   'Companion-kamer': 'Companion-Raum',

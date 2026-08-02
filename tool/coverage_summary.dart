@@ -37,6 +37,21 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // UNTESTABLE NATIVE BINDING (F3, ketenkeuring-flutter-webrtc.md; user-approved
+  // new category, 2026-08-02): `meeting_media_core_webrtc.dart` is the one thin
+  // binding to `flutter_webrtc` (libwebrtc). It differs from a platform half —
+  // it is present on every platform, not split io/web — but shares the reason
+  // those sit here: it cannot run in a headless test VM. libwebrtc needs a real
+  // device (camera/mic, ICE, a live peer), so this binding is verified LIVE, not
+  // by a unit test. No test imports this file at all — doing so would only cover
+  // the two trivial delegations (the constructor and the `mediaE2ee` getter, which
+  // just forwards to the pure, tested `mediaE2eeFor`) while `selfTest`'s libwebrtc
+  // call stays uncovered, landing the file at ~33% and tripping the per-file floor
+  // (which does not exempt this list). So the whole file is left un-instrumented,
+  // its only real decision — the E2EE fact — is proven directly on `mediaE2eeFor`
+  // in meeting_media_core_test.dart, and no decision logic hides here. Keep this
+  // list to genuine such bindings, not a hiding place for logic testable via a fake.
+  'lib/meetings/meeting_media_core_webrtc.dart',
   // NO EXECUTABLE LINES: `library_scan_limits.dart` holds only two const upper
   // bounds shared by the deck scan and the image picker (#1049) — lcov emits no
   // record for a file with nothing to execute. The values are exercised through
@@ -403,6 +418,14 @@ bool _checkPerFileFloor(File report) {
   final below =
       _perFile(report)
           .where((f) => !_isTranslationData(f.path))
+          // Honour uncoveredBaseline here too, like _checkInstrumented and the
+          // average floor. It never mattered before: those entries are platform
+          // *other*-halves (a `_web` half on this io VM), never compiled here, so
+          // they had no report record to floor-check. The F3 native-media binding
+          // is different — it IS compiled on every platform, so an import (via the
+          // preflight tile) puts it in the report at 0%. Without this skip the
+          // approved exemption would be defeated by this one floor.
+          .where((f) => !uncoveredBaseline.contains(f.path))
           .where((f) => f.hit * 100 < perFileFloorPercent * f.found)
           .toList()
         ..sort((a, b) {

@@ -731,6 +731,17 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Media (WebRTC)': 'Media (WebRTC)',
+  'Media-stack testen': 'Media-stack teste',
+  'De media-stack werkt op dit apparaat.':
+      'De media-stack wurket op dit apparaat.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'De media-stack koe net lade op dit apparaat.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Media-fersifering (E2EE): út op dit platfoarm.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Media-fersifering (E2EE): noch net beskikber.',
+  'Media-versleuteling (E2EE): aan.': 'Media-fersifering (E2EE): oan.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'Konferinsje-URL (opsjoneel): lit de OciDeck-companion-keamer sjen',
   'Companion-kamer': 'Companion-keamer',

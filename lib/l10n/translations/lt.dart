@@ -1778,6 +1778,17 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Media (WebRTC)': 'Medija (WebRTC)',
+  'Media-stack testen': 'Išbandyti medijos steką',
+  'De media-stack werkt op dit apparaat.':
+      'Medijos stekas veikia šiame įrenginyje.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Nepavyko įkelti medijos steko šiame įrenginyje.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Medijos šifravimas (E2EE): išjungtas šioje platformoje.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Medijos šifravimas (E2EE): dar negalimas.',
+  'Media-versleuteling (E2EE): aan.': 'Medijos šifravimas (E2EE): įjungtas.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'Konferencijos URL (nebūtina): rodo OciDeck companion kambarį',
   'Companion-kamer': 'Companion kambarys',

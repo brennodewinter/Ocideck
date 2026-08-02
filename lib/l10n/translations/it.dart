@@ -726,6 +726,17 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Media (WebRTC)': 'Media (WebRTC)',
+  'Media-stack testen': 'Prova lo stack multimediale',
+  'De media-stack werkt op dit apparaat.':
+      'Lo stack multimediale funziona su questo dispositivo.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Impossibile caricare lo stack multimediale su questo dispositivo.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Crittografia dei media (E2EE): disattivata su questa piattaforma.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Crittografia dei media (E2EE): non ancora disponibile.',
+  'Media-versleuteling (E2EE): aan.': 'Crittografia dei media (E2EE): attiva.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL conferenza (opzionale): mostra la stanza companion di OciDeck',
   'Companion-kamer': 'Stanza companion',

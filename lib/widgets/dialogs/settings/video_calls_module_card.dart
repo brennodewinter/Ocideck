@@ -5,6 +5,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../state/meeting_session_provider.dart';
 import '../../../theme/app_theme.dart';
 import '../xmpp_test_connection_dialog.dart';
+import 'media_preflight_tile.dart';
 
 /// The Uitbreidingen-tab card for the optional video-calls module
 /// (`docs/design/NATIVE_CALLS.md` §7). Same toggle shape as the other module
@@ -67,6 +68,8 @@ class VideoCallsModuleCard extends ConsumerWidget {
                 builder: (_) => const XmppTestConnectionDialog(),
               ),
             ),
+            Divider(height: 1, color: AppTheme.iceBlue),
+            const MediaPreflightTile(),
           ],
         ],
       ),

@@ -1771,6 +1771,16 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Media (WebRTC)': 'Media (WebRTC)',
+  'Media-stack testen': 'Testaa mediapino',
+  'De media-stack werkt op dit apparaat.': 'Mediapino toimii tässä laitteessa.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Mediapinoa ei voitu ladata tässä laitteessa.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Median salaus (E2EE): pois käytöstä tällä alustalla.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Median salaus (E2EE): ei vielä käytettävissä.',
+  'Media-versleuteling (E2EE): aan.': 'Median salaus (E2EE): käytössä.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'Konferenssin URL (valinnainen): näyttää OciDeckin companion-huoneen',
   'Companion-kamer': 'Companion-huone',

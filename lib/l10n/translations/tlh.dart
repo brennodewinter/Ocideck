@@ -1746,6 +1746,16 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Media (WebRTC)': 'Media (WebRTC)',
+  'Media-stack testen': 'media stack yIwaH',
+  'De media-stack werkt op dit apparaat.': 'jan vamDaq Qap media stack.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'jan vamDaq chu\'laHbe\' media stack.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'media ngoq (E2EE): platform vamDaq chu\'Ha\'.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'media ngoq (E2EE): DaH lo\'laHbe\'.',
+  'Media-versleuteling (E2EE): aan.': 'media ngoq (E2EE): chu\'.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'qep URL (\'e\' DaneH chugh): OciDeck companion pa\' cha\'',
   'Companion-kamer': 'companion pa\'',

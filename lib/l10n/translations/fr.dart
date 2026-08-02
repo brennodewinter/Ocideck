@@ -730,6 +730,17 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Media (WebRTC)': 'Médias (WebRTC)',
+  'Media-stack testen': 'Tester la pile média',
+  'De media-stack werkt op dit apparaat.':
+      'La pile média fonctionne sur cet appareil.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Impossible de charger la pile média sur cet appareil.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Chiffrement des médias (E2EE) : désactivé sur cette plateforme.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Chiffrement des médias (E2EE) : pas encore disponible.',
+  'Media-versleuteling (E2EE): aan.': 'Chiffrement des médias (E2EE) : activé.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL de conférence (optionnel) : affiche le salon companion OciDeck',
   'Companion-kamer': 'Salon companion',
