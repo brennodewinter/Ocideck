@@ -28,8 +28,13 @@ class WebrtcMediaCore implements MeetingMediaCore {
   @override
   Future<bool> selfTest() async {
     // Bring up a throwaway peer connection with no ICE servers to confirm
-    // libwebrtc loaded on this device, then tear it down. Nothing is captured and
-    // nothing is sent — this reaches no network.
+    // libwebrtc loaded on this device, then tear it down. This reaches NO network,
+    // and that invariant rests on four things — changing ANY one starts ICE
+    // gathering, and with it `.local` mDNS multicast on the LAN, even with no ICE
+    // servers: the empty `iceServers`, no `iceCandidatePoolSize` (default 0), no
+    // offer (`createOffer`/`setLocalDescription`), and no track/transceiver/
+    // datachannel. Keep selfTest a bare create-and-close (this file is in
+    // uncoveredBaseline, so no test guards the invariant — this comment is it).
     try {
       final pc = await createPeerConnection(const {'iceServers': <Object>[]});
       await pc.close();

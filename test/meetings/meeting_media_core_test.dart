@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/meetings/meeting_media_core.dart';
+import 'package:ocideck/meetings/meeting_media_core_webrtc.dart';
 import 'package:ocideck/meetings/meeting_provider.dart';
 
 void main() {
@@ -17,5 +18,19 @@ void main() {
     expect(mediaE2eeFor(TargetPlatform.linux), MeetingE2eeStatus.unknown);
     expect(mediaE2eeFor(TargetPlatform.windows), MeetingE2eeStatus.unknown);
     expect(mediaE2eeFor(TargetPlatform.fuchsia), MeetingE2eeStatus.unknown);
+  });
+
+  test('WebrtcMediaCore delegates the E2EE fact to the pure function', () {
+    // Constructing the real core and reading its E2EE fact touches no libwebrtc
+    // platform channel (only selfTest does), so the delegation is testable — which
+    // narrows the untestable surface to selfTest alone.
+    expect(
+      WebrtcMediaCore(platform: TargetPlatform.macOS).mediaE2ee,
+      MeetingE2eeStatus.off,
+    );
+    expect(
+      WebrtcMediaCore(platform: TargetPlatform.linux).mediaE2ee,
+      MeetingE2eeStatus.unknown,
+    );
   });
 }

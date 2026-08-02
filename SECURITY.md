@@ -373,7 +373,10 @@ OciDeck constrains what an opened deck can do:
   kind of gap as the native `git` subprocess, but broader (a continuous realtime
   stream, not a brief fetch). It is bounded rather than open: the media follows the
   NetGuard-validated **signalling** origin (the Prosody/Matrix the user configured,
-  guarded like WebDAV via `MeetingProviderProfile`), and a media core reaches only
+  guarded like WebDAV — `NetGuard.resolveConfigured` + socket pinning in
+  `xmpp_frame_transport_io.dart`; a meeting-provider profile carrying that posture
+  is the planned config shape, not a type in `lib/` yet), and a media core reaches
+  only
   the TURN/SFU origins that validated signalling hands it — never an arbitrary host
   from a pasted link (enforced where the adapter configures ICE, with the Jitsi
   media join); the module is default-off, so no media code runs until the user
