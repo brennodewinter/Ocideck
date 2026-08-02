@@ -315,9 +315,21 @@ void main() {
     // een NIEUWE verbinding naar een adres dat nooit gekeurd is — en dan was
     // het pinnen voor niets.
     final setsIt = RegExp(r'followRedirects\s*=\s*false');
+    // Bewust vrijgesteld: de XMPP-WebSocket-uitgang. `WebSocket.connect(
+    // customClient:)` bouwt het HTTP-upgrade-verzoek intern, dus de app kan
+    // `request.followRedirects` niet zetten. In plaats daarvan pint de
+    // connectionFactory ELKE verbinding — ook een 3xx-sprong — aan het door
+    // `resolveConfigured` goedgekeurde IP (de closure vangt datzelfde `pinned`),
+    // en weigert de fail-closed https-assert een downgrade-hop. Een omleiding
+    // bereikt zo nooit een nieuwe, ongekeurde host; een 3xx is bovendien geen 101
+    // en laat de upgrade sowieso mislukken. Zie xmpp_frame_transport_io.dart.
+    const redirectsPinnedNotRefused = {
+      'lib/xmpp/xmpp_frame_transport_io.dart',
+    };
     final missing = <String>[];
     for (final path in pinnedClientCount.keys) {
       if (pinnedClientCount[path] == 0) continue; // net_guard maakt er geen
+      if (redirectsPinnedNotRefused.contains(path)) continue;
       final source = File(path).readAsStringSync();
       if (!setsIt.hasMatch(source)) missing.add(path);
     }

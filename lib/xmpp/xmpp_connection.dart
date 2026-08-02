@@ -16,6 +16,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:xml/xml.dart';
 
@@ -328,13 +329,12 @@ class XmppConnection {
   }
 
   static String _defaultNonce() {
-    // A per-authentication nonce. Uniqueness (not unpredictability) is what SCRAM
-    // needs of the client nonce; microsecond time plus a hashCode is enough and
-    // avoids pulling in a CSPRNG dependency here.
-    final now = DateTime.now().microsecondsSinceEpoch;
-    return base64Url
-        .encode(utf8.encode('$now.${Object().hashCode}'))
-        .replaceAll('=', '');
+    // SCRAM wants a client nonce that is both unique and unpredictable
+    // (RFC 5802 §5.1). Random.secure() is a CSPRNG in dart:math — no dependency.
+    // 24 random bytes, base64url (its alphabet has no ',', which SCRAM forbids).
+    final rng = Random.secure();
+    final bytes = List<int>.generate(24, (_) => rng.nextInt(256));
+    return base64Url.encode(bytes).replaceAll('=', '');
   }
 }
 

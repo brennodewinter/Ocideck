@@ -59,7 +59,8 @@ XMPP-over-WebSocket (`wss://`) connection to a **user-configured** server (Jitsi
 Prosody or a Matrix bridge), opened via `dart:io`'s `WebSocket`/`HttpClient` — not
 the `http` package — and reached only when that module is on and the user connects.
 It is NetGuard-guarded like every other egress (TLS pinned to the validated
-address, internal targets refused, stream redirects rejected) and is desktop-only —
+address, internal targets refused unless the user opts in per server as for WebDAV,
+stream redirects rejected) and is desktop-only —
 the web build fails closed, so it never touches the CSP below. And
 `web/index.html` ships a strict CSP (`default-src 'self'`; `connect-src 'self'
 https:`) with no third-party scripts. The app never phones home. (The only

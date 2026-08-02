@@ -51,6 +51,15 @@ Future<XmppFrameTransport> openXmppFrameTransport(XmppSettings settings) async {
   final client = HttpClient()
     ..connectionTimeout = const Duration(seconds: 15)
     ..connectionFactory = (uri, _, _) {
+      // Redirects can't run past the host check here even though the app cannot
+      // set `followRedirects = false` — `WebSocket.connect` builds the upgrade
+      // request internally. This factory is called for EVERY hop, including a 3xx
+      // redirect, and pins each to the one `resolveConfigured`-approved address
+      // (the closure captures `pinned`), so a redirect never reaches a new,
+      // unvetted host; the https assert below also refuses a downgrade hop, and a
+      // 3xx is not a 101 so the upgrade fails regardless. This is the documented
+      // exception in `network_sink_guard_test.dart`'s redirect ratchet.
+      //
       // Fail closed on the SDK-internal wss→https rewrite: NetGuard.connectPinned
       // drops to a PLAIN (un-TLS'd) socket for any non-https scheme, which would
       // strip TLS and leak the SASL password. dart:io rewrites wss→https before
