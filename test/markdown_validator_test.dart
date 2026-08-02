@@ -464,6 +464,37 @@ marp: true
       );
     });
 
+    test('flags an unknown slide-level privacy directive (typo → warn-leak)', () {
+      // `redat` is een typfout voor `redact`; zonder deze check valt de
+      // parser stil terug op `warn` en redigeert de export niets weg.
+      const md =
+          '---\nmarp: true\n---\n\n# Slide\n\n<!-- ocideck_privacy: redat -->\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any((i) => i.message.contains('onbekende privacy-stand')),
+        isTrue,
+      );
+    });
+
+    test('accepts a valid slide-level privacy directive', () {
+      const md =
+          '---\nmarp: true\n---\n\n# Slide\n\n<!-- ocideck_privacy: redact -->\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.where((i) => i.message.contains('privacy-stand')),
+        isEmpty,
+      );
+    });
+
+    test('flags an unknown deck-level privacy front-matter value', () {
+      const md = '---\nmarp: true\nprivacy: shild\n---\n\n# Slide\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any((i) => i.message.contains('Onbekende privacy-stand')),
+        isTrue,
+      );
+    });
+
     test('flags a non-numeric advance comment', () {
       const md = '---\nmarp: true\n---\n\n# Slide\n\n<!-- advance: abc -->\n';
       final result = validator.validate(md);

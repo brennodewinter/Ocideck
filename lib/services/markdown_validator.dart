@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../models/deck.dart';
 import '../models/markdown_validation.dart';
+import '../models/privacy_disposition.dart';
 import 'front_matter_merge.dart';
 import 'markdown_service.dart';
 import '../utils/log.dart';
@@ -166,6 +167,22 @@ class MarkdownValidator {
               severity: MarkdownValidationSeverity.error,
               message:
                   'Onbekend TLP-niveau "$value". Gebruik clear, green, amber, amber+strict of red.',
+            ),
+          );
+        }
+      } else if (key == 'privacy') {
+        // Spiegel van de TLP-tak: de parser valt bij een onbekende waarde
+        // stil terug op `warn` (PrivacyDispositionX.fromKey), de minst
+        // beschermende stand — een typfout verlaagt stilletjes de
+        // redactie-belofte. Vang dat hier, vóór de export.
+        final value = line.substring(line.indexOf(':') + 1).trim();
+        if (!_isValidPrivacyKey(value)) {
+          issues.add(
+            MarkdownValidationIssue(
+              line: i + 1,
+              severity: MarkdownValidationSeverity.error,
+              message:
+                  'Onbekende privacy-stand "$value". Gebruik accept, shield, redact of warn.',
             ),
           );
         }
@@ -396,6 +413,28 @@ class MarkdownValidator {
     return inside;
   }
 
+  /// Toetst één `<!-- prefix: value -->` directive op een slideregel.
+  void _validateSlideDirective({
+    required String trimmed,
+    required String prefix,
+    required bool Function(String) isValid,
+    required String Function(String) issueMessage,
+    required int line,
+    required List<MarkdownValidationIssue> issues,
+  }) {
+    if (!trimmed.startsWith(prefix)) return;
+    final value = trimmed.substring(prefix.length).replaceAll('-->', '').trim();
+    if (!isValid(value)) {
+      issues.add(
+        MarkdownValidationIssue(
+          line: line,
+          severity: MarkdownValidationSeverity.error,
+          message: issueMessage(value),
+        ),
+      );
+    }
+  }
+
   void _validateBlockLines({
     required List<String> blockLines,
     required List<String> classTokens,
@@ -409,21 +448,26 @@ class MarkdownValidator {
       final line = blockLines[i];
       final trimmed = line.trim();
 
-      if (trimmed.startsWith('<!-- tlp:')) {
-        final value = trimmed
-            .substring('<!-- tlp:'.length)
-            .replaceAll('-->', '')
-            .trim();
-        if (!_isValidTlpKey(value)) {
-          issues.add(
-            MarkdownValidationIssue(
-              line: lineNo(i),
-              severity: MarkdownValidationSeverity.error,
-              message: 'Slide $slideNumber: onbekend TLP-niveau "$value".',
-            ),
-          );
-        }
-      }
+      _validateSlideDirective(
+        trimmed: trimmed,
+        prefix: '<!-- tlp:',
+        isValid: _isValidTlpKey,
+        issueMessage: (v) => 'Slide $slideNumber: onbekend TLP-niveau "$v".',
+        line: lineNo(i),
+        issues: issues,
+      );
+      _validateSlideDirective(
+        trimmed: trimmed,
+        // `ocideck_privacy` is de per-slide directive (de deck-wide key in
+        // front matter heet `privacy`). Zelfde warn-fallback als TLP, zelfde
+        // stil-datalek-risico bij een typfout.
+        prefix: '<!-- ocideck_privacy:',
+        isValid: _isValidPrivacyKey,
+        issueMessage: (v) =>
+            'Slide $slideNumber: onbekende privacy-stand "$v".',
+        line: lineNo(i),
+        issues: issues,
+      );
 
       if (trimmed.startsWith('<!-- advance:')) {
         final value = trimmed
@@ -873,6 +917,12 @@ class MarkdownValidator {
     final normalized = raw.trim().toLowerCase();
     if (normalized.isEmpty || normalized == 'none') return true;
     return TlpLevel.values.any((level) => level.key == normalized);
+  }
+
+  bool _isValidPrivacyKey(String raw) {
+    final normalized = raw.trim().toLowerCase();
+    if (normalized.isEmpty) return true; // leeg = deck-stand geldt, geen fout
+    return PrivacyDisposition.values.any((d) => d.key == normalized);
   }
 
   bool _isValidEncodedPayload(String prefix, String encoded) {
