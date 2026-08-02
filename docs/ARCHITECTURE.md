@@ -53,7 +53,14 @@ run. Deck content is never shipped to a server to be processed.
 There is **no telemetry, analytics, or tracking** of any kind. The only HTTP
 client dependency is `http` (see `pubspec.yaml`) — no Firebase/Sentry/GA/PostHog.
 `video_player` and `webview_flutter` also reach the network, for remote media
-behind the Online-media gate. And
+behind the Online-media gate. The optional, default-off *Videovergaderingen*
+module (`docs/design/NATIVE_CALLS.md`) adds a **second outbound stack**: an
+XMPP-over-WebSocket (`wss://`) connection to a **user-configured** server (Jitsi's
+Prosody or a Matrix bridge), opened via `dart:io`'s `WebSocket`/`HttpClient` — not
+the `http` package — and reached only when that module is on and the user connects.
+It is NetGuard-guarded like every other egress (TLS pinned to the validated
+address, internal targets refused, stream redirects rejected) and is desktop-only —
+the web build fails closed, so it never touches the CSP below. And
 `web/index.html` ships a strict CSP (`default-src 'self'`; `connect-src 'self'
 https:`) with no third-party scripts. The app never phones home. (The only
 `tracking` strings in `lib/` belong to the *privacy detector*, which flags
