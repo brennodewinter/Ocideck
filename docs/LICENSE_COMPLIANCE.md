@@ -135,6 +135,35 @@ locally and what is recorded here cannot drift apart:
 > only in prose here — and prose cannot be checked, which is how a catalogue goes
 > stale unnoticed.
 
+## Bundled reference data (managementsysteem module)
+
+The *Managementsysteem* module (ISO 27001 / 9001 / 42001 progress reporting,
+[`docs/design/ISO_MANAGEMENTSYSTEEM.md`](design/ISO_MANAGEMENTSYSTEEM.md))
+bundles the **index** of three ISO management-system standards — clause/control
+numbers and their short canonical titles — as `const` data.
+
+Unlike the OWASP catalogs (CC-BY-SA-4.0) or CWE (MITRE terms), **ISO standards
+are copyrighted and sold** by ISO/NEN. So only the index is bundled — the same
+factual list every ISMS/QMS tool shows ("A.5.1 — Policies for information
+security"), which is too short and too factual for copyright to attach to the
+individual line. **The normative requirement text, guidance and notes are not
+bundled.** A reader who wants the requirement buys the standard; the `url` in the
+register points at the official ISO publication.
+
+| Dataset | Where | Upstream | Licence / terms |
+|---|---|---|---|
+| ISO/IEC 27001 Annex A index (93 control ids + short titles, 4 themes) | `lib/services/management_system_catalog.dart` | ISO/IEC 27001:**2022** (iso.org) | **ISO copyright — index only.** Numbers + short titles as factual reference; normative text **not** bundled |
+| ISO 9001 clause index (28 sub-clauses 4–10 + short titles) | `lib/services/management_system_catalog.dart` | ISO 9001:**2015** (iso.org) | **ISO copyright — index only.** Numbers + short titles as factual reference; normative text **not** bundled |
+| ISO/IEC 42001 Annex A index (38 control ids + short titles, objectives A.2–A.10) | `lib/services/management_system_catalog.dart` | ISO/IEC 42001:**2023** (iso.org) | **ISO copyright — index only.** Numbers + short titles as factual reference; normative text **not** bundled |
+
+> The editions in this table are mirrored from
+> [`lib/services/reference_standards.dart`](../lib/services/reference_standards.dart)
+> (`iso27001BundledEdition` etc.), the single source of truth for what this build
+> bundles. `reference_standards_test.dart` fails if the two disagree. Because ISO
+> is sold and blocks automated fetches, the freshness probe (`isoEdition`) usually
+> reports *onbekend* rather than a false *actueel* — a human checks the edition on
+> iso.org when a new one is announced.
+
 ### OWASP WSTG, MASTG and MASWE — attribution and share-alike
 
 All three bundled OWASP datasets carry the same licence and the same reasoning; the
