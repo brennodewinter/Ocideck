@@ -1774,6 +1774,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Sessie actief als': 'Sitzig aktiv als',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Aagmäldet, aber de Server het kei Sitzig chöne ufboue (Ressourcebindig fehlgschlage).',
   'XMPP-server testen': 'XMPP-Server teste',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Gib en XMPP-Server, e Jabber-ID und es Passwort i und teste d Verbindig. Es wird nüt gspeicheret; das prüeft nu, öb s Konto funktioniert. Lass d Jabber-ID für en anonyme Zuegang leer.',

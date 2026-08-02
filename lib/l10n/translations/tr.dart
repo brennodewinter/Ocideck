@@ -2748,6 +2748,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Sessie actief als': 'Oturum şu kimlikle etkin:',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Oturum açıldı, ancak sunucu bir oturum kuramadı (kaynak bağlama başarısız).',
   'XMPP-server testen': 'XMPP sunucusunu test et',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Bir XMPP sunucusu, bir Jabber ID ve bir parola girin ve bağlantıyı test edin. Hiçbir şey saklanmaz; bu yalnızca hesabın çalışıp çalışmadığını kontrol eder. Anonim erişim için Jabber ID\'yi boş bırakın.',

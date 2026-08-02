@@ -1788,6 +1788,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Sessie actief als': 'Сеанс активний як',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Вхід виконано, але сервер не зміг створити сеанс (не вдалося прив\'язати ресурс).',
   'XMPP-server testen': 'Перевірити сервер XMPP',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Введіть XMPP-сервер, Jabber ID і пароль та перевірте з\'єднання. Нічого не зберігається; це лише перевіряє, чи працює обліковий запис. Залиште Jabber ID порожнім для анонімного доступу.',

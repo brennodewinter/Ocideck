@@ -730,6 +730,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Sessie actief als': 'Seshon aktivo komo',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'A logu in, pero e servidó no por a establesé un seshon (binding di rekurso a faya).',
   'XMPP-server testen': 'Test e servidó XMPP',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Introdusí un servidó XMPP, un Jabber ID i un kontraseña i test e konekshon. No ta wòrdu warda nada; esaki ta kontrolá solamente si e kuenta ta funshoná. Laga e Jabber ID bashí pa akseso anónimo.',

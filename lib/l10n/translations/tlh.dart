@@ -1746,6 +1746,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Sessie actief als': 'session vumtaH — pong:',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      '\'elpu\', \'ach session chenmoHlaHbe\' server (resource binding luj).',
   'XMPP-server testen': 'XMPP server yIwaH',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'XMPP server, Jabber-ID \'ej mu\'qaD yIghItlh, rar yIwaH. pagh pollu\'; account Qap\'a\' neH nuD. anonymous \'elmeH Jabber-ID yIchImmoH.',

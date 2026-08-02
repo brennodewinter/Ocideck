@@ -1771,6 +1771,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Sessie actief als': 'Sesi aktif sebagai',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Berhasil masuk, tetapi server tidak dapat menyiapkan sesi (pengikatan sumber daya gagal).',
   'XMPP-server testen': 'Uji server XMPP',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Masukkan server XMPP, Jabber ID, dan kata sandi, lalu uji koneksinya. Tidak ada yang disimpan; ini hanya memeriksa apakah akun berfungsi. Biarkan Jabber ID kosong untuk akses anonim.',

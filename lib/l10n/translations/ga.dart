@@ -1806,6 +1806,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Sessie actief als': 'Seisiún gníomhach mar',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Logáilte isteach, ach níor éirigh leis an bhfreastalaí seisiún a bhunú (theip ar cheangal na hacmhainne).',
   'XMPP-server testen': 'Tástáil freastalaí XMPP',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Iontráil freastalaí XMPP, Jabber ID agus pasfhocal, agus tástáil an nasc. Ní stóráiltear aon rud; ní dhéanann sé seo ach seiceáil an bhfuil an cuntas ag obair. Fág an Jabber ID folamh le haghaidh rochtana gan ainm.',

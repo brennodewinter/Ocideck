@@ -730,6 +730,9 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Sessie actief als': 'Session active en tant que',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Connexion réussie, mais le serveur n\'a pas pu établir de session (échec de la liaison de ressource).',
   'XMPP-server testen': 'Tester le serveur XMPP',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Saisissez un serveur XMPP, un identifiant Jabber et un mot de passe, puis testez la connexion. Rien n\'est enregistré ; cela vérifie uniquement si le compte fonctionne. Laissez l\'identifiant Jabber vide pour un accès anonyme.',
