@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -1088,3 +1088,24 @@ check-release: check-full
 	  echo "DAST overgeslagen — geen container-runtime (macOS: brew install colima docker && colima start), draai daarna 'make dast DAST_URL=$(DAST_LIVE_URL)'."; \
 	fi
 	@echo "== Klaar. Weeg de DAST-bevindingen; is alles vastgelegd of bewust aanvaard, dan is dit ready for tagging. =="
+
+# --- Voorgebakken CI-basisimage (docs/CHECKS.md) -----------------------------
+# Bouwt en publiceert .forgejo/ci-image/Dockerfile naar de eigen Forgejo-registry,
+# getagd op de Flutter-pin. De betrouwbare handmatige route naast de
+# ci-image.yml-workflow: cross-buildt naar linux/amd64 (de runner is amd64) via
+# buildx, wat op een arm64-Mac met colima werkt. De pin komt uit .tool-versions,
+# zodat image-tag en repo-pin niet uiteenlopen.
+#
+# Eenmalig vooraf: `docker login pawprint.vigilis.online` met een token dat
+# `write:package` heeft. Zet het package daarna op PUBLIEK, anders kunnen de
+# gate-workflows het niet pullen. Zie docs/CHECKS.md "Voorgebakken CI-image".
+CI_IMAGE_REPO ?= pawprint.vigilis.online/librekat/ocideck-ci
+CI_IMAGE_FLUTTER := $(shell sed -n 's/^flutter \(.*\)-stable$$/\1/p' .tool-versions)
+ci-image-publish:
+	@test -n "$(CI_IMAGE_FLUTTER)" || { echo "Geen Flutter-pin in .tool-versions"; exit 1; }
+	@echo "== CI-image bouwen+pushen: $(CI_IMAGE_REPO):flutter-$(CI_IMAGE_FLUTTER) (linux/amd64) =="
+	docker buildx build --platform linux/amd64 --push \
+	  --build-arg FLUTTER_VERSION=$(CI_IMAGE_FLUTTER) \
+	  -t $(CI_IMAGE_REPO):flutter-$(CI_IMAGE_FLUTTER) \
+	  -f .forgejo/ci-image/Dockerfile .forgejo/ci-image
+	@echo "== Gepubliceerd. Zet het package op publiek als dat nog niet zo is. =="

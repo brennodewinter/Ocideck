@@ -1366,12 +1366,16 @@ that reaches beyond `build/test_cache`.
   still fail.
 
 ### `.forgejo/workflows/static-gate.yml` — the static gate, per pull request
-- **static-gate** — the same bare `ubuntu:24.04` container and pinned-Flutter
-  setup as `linux-gate.yml` (version read from `.tool-versions`, tarball
-  sha256-verified against the official manifest, `/opt/flutter` and `~/.pub-cache`
-  cached), then `flutter pub get`, [`make check-static`](#make-check-static)
+- **static-gate** — runs on the prebaked CI image
+  (`pawprint.vigilis.online/librekat/ocideck-ci:flutter-<pin>`, same as
+  `linux-gate.yml`), so the OS, node, build-toolchain and the pinned,
+  sha256-verified Flutter (+ precache) are baked in — no per-run install. Only the
+  repo-coupled artifacts (`~/.pub-cache` and the dartcv OpenCV build) stay on
+  `actions/cache`. Then `flutter pub get`, [`make check-static`](#make-check-static)
   (`$(STATIC_GATES)`) **and `make check-registrations`** — the handful of *fast*
-  registration/invariant tests (#1123).
+  registration/invariant tests (#1123). The image tag *is* the pin, so a stale
+  image fails `check-toolchain` (fail-closed) rather than drifting silently — see
+  the `ci-image.yml` section.
 - **Why `check-registrations` too (#1123).** `check-static` catches the *static*
   drift (file/class/method size, formatting, hardcoded text) but the
   registration gates — new lib file in `SOURCE_MAP`, new docs registered, SBOM
@@ -1406,15 +1410,16 @@ that reaches beyond `build/test_cache`.
   aborted one would have seen.
 
 ### `.forgejo/workflows/linux-gate.yml` — on demand (`workflow_dispatch`) **and on every push to `main`** (#1123)
-- **gate-linux** — the gate that `ci.yml` used to be: a bare `ubuntu:24.04`
-  container in which the workflow installs the **official** Flutter stable
-  release: the version is *read from `.tool-versions`* (so a pin bump has no
-  second place to forget) and the tarball is sha256-verified against the
-  official release manifest, with `actions/cache` over `/opt/flutter` and
-  `~/.pub-cache`. Then `flutter pub get` and `make check-no-coverage`. A
-  prebuilt third-party Flutter image was rejected here: the cirruslabs image
-  shipped channel `[user-branch]` from an unknown source, exactly what
-  `check-toolchain` exists to catch.
+- **gate-linux** — the gate that `ci.yml` used to be, now on the prebaked CI
+  image (`pawprint.vigilis.online/librekat/ocideck-ci:flutter-<pin>`, same as
+  `static-gate.yml`): the OS, node, build-toolchain and the **official**,
+  sha256-verified pinned Flutter (+ precache) are baked in, so there is no per-run
+  install. `~/.pub-cache` and the dartcv OpenCV build stay on `actions/cache`. Then
+  `flutter pub get` and `make check-no-coverage`. Provenance is unchanged — the
+  sha256 check moved to image-build time — and `check-toolchain` still runs on the
+  baked Flutter, so a *prebuilt third-party* image (the cirruslabs one shipped
+  channel `[user-branch]`) still falls over on it; our own image carries only the
+  pinned stable release. The tag *is* the pin, so a stale image fails fail-closed.
 - **When to press it:** before a release, and whenever a change touches paths,
   subprocesses or `git` invocations.
 - **Why it also fires on `push` to `main` (#1123):** `static-gate.yml` runs the
@@ -1431,6 +1436,59 @@ that reaches beyond `build/test_cache`.
   Concurrency is scoped by event, so a manual dispatch and a merge never cancel
   each other; rapid merges do supersede one another (the latest run tests the
   newest tip, which is what "is `main` green?" asks).
+
+### `.forgejo/workflows/ci-image.yml` — the prebaked Linux CI image (`workflow_dispatch` + on pin/Dockerfile change)
+
+The three Linux workflows above each run in a bare `ubuntu:24.04` and rebuild
+the same environment every run: install the apt build-tools, fetch and unpack
+the official Flutter, precache the Linux desktop artifacts. That is identical
+work with an identical result — so it is baked once instead of repeated. This
+workflow builds `.forgejo/ci-image/Dockerfile` and pushes it to the project's
+own Forgejo registry as
+`pawprint.vigilis.online/librekat/ocideck-ci:flutter-<pin>`.
+
+- **What the image carries:** the *slow-changing* toolchain — the OS, the fixed
+  apt `.deb` list, the pinned Flutter (official stable, sha256-verified **at
+  build time** against the release manifest), and `flutter precache --linux`.
+  What it deliberately does **not** carry: the repo-coupled artifacts (pub
+  packages, the dartcv OpenCV build), which move with `pubspec.lock` and stay on
+  `actions/cache` in the gate workflows — a toolchain image must not need a
+  rebuild on every dependency change.
+- **Provenance is unchanged.** The sha256 verification the gates did at download
+  time moved into the image build; `check-toolchain` still runs *in the gate* on
+  the baked Flutter and still demands channel `stable`, official origin and
+  equality with the pin. An image carrying anything else falls over on the same
+  gate that once rejected the cirruslabs image.
+- **Pin coupling.** The Flutter version is a build-arg read from `.tool-versions`,
+  and the image tag *is* that version (`flutter-<pin>`). A pin bump publishes a
+  new tag; the workflow fires automatically on a change to the Dockerfile or
+  `.tool-versions`, so the image cannot silently lag the pin. The gate workflows
+  reference that same tag (see the follow-up that switches them over).
+- **Trust boundary.** Same as the runner and the existing `actions/cache`: our
+  own job builds the image on our own runner and pushes it to our own registry —
+  no new party.
+- **One-time setup** (either route): for the workflow, a repo secret
+  `CI_IMAGE_TOKEN` (a Forgejo token with `write:package`) **and** a repo variable
+  `CI_IMAGE_USER` (the token owner's login — the workflow logs in as that user,
+  not as whoever triggered the run); **or** `make ci-image-publish` from a machine
+  with docker/colima (it uses your own `docker login` and cross-builds
+  `linux/amd64`, since the runner is amd64). Then set the published package to
+  **public** so the gate workflows can pull it without credentials (fase 2 may
+  instead configure pull-credentials on the runner — see below). Until the image
+  exists and the gates are switched over (a separate PR), the gates keep
+  installing the toolchain per run as before — introducing the image cannot break
+  CI on its own.
+- **Two conditions the follow-up (fase 2) must honour** (raised by the
+  kernwaardenbewaker on #1141): (1) **continuity** — a `container: image:` pointing
+  at the registry is a hard dependency; a registry outage or an accidentally
+  *private* package would stop the gate job from starting, where fase 1 needs no
+  registry. Fase 2 must degrade to per-run install (or configure runner
+  pull-credentials so *private* still works), not to a blocked CI. (2)
+  **single-source pin↔tag** — an `image:` field cannot interpolate the pin at
+  runtime, so the tag is hardcoded in the gate workflow; a pin bump must update
+  `.tool-versions` **and** the gate tag in the same commit, and the ordering must
+  ensure `ci-image` has published the new tag before a gate tries to pull it, so a
+  bump cannot race `main` red.
 
 ### `.forgejo/workflows/linux-build.yml` — on demand (`workflow_dispatch`)
 - **build-linux** — same official pinned toolchain as the gate, plus the GTK
