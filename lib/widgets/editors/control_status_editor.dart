@@ -6,6 +6,7 @@ import '../../models/control_status_spec.dart';
 import '../../models/management_system.dart';
 import '../../models/slide.dart';
 import '../../services/management_system_catalog.dart';
+import '../../state/deck_provider.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
 
@@ -169,7 +170,46 @@ class _ControlStatusEditorState extends ConsumerState<ControlStatusEditor> {
             ),
           ),
         ),
+        const SizedBox(height: 12),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Tooltip(
+            message: l10n.d(
+              'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).',
+            ),
+            child: OutlinedButton.icon(
+              onPressed: _generateOverview,
+              icon: const Icon(Icons.summarize_outlined, size: 16),
+              label: Text(l10n.d('Genereer voortgangsoverzicht')),
+            ),
+          ),
+        ),
       ],
+    );
+  }
+
+  /// Regenerate the deck-wide progress overview from every `controlStatus`
+  /// slide, then report the outcome via a SnackBar.
+  void _generateOverview() {
+    final l10n = context.l10n;
+    final made = ref
+        .read(deckProvider.notifier)
+        .generateManagementSystemOverview(
+          overviewTitle: l10n.d('Voortgang managementsysteem'),
+          sectionHeader: l10n.d('Sectie'),
+          applicableHeader: l10n.d('Van toepassing'),
+          implementedHeader: l10n.d('Geïmplementeerd'),
+          progressHeader: l10n.d('Voortgang'),
+          totalLabel: l10n.d('Totaal'),
+        );
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          made > 0
+              ? l10n.d('Voortgangsoverzicht bijgewerkt')
+              : l10n.d('Nog geen beheersmaatregel-dia\'s om samen te vatten'),
+        ),
+      ),
     );
   }
 
