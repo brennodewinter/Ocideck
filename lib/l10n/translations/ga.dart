@@ -1809,8 +1809,6 @@ const _dutchSourceAddGa = <String, String>{
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL comhdhála (roghnach): taispeánann sé seomra companion OciDeck',
   'Companion-kamer': 'Seomra companion',
-  'Kamer testen (optioneel): kamer@service':
-      'Tástáil seomra (roghnach): seomra@seirbhís',
   'Aanwezig in de kamer': 'I láthair sa seomra',
   'De bijnaam is al in gebruik in de kamer.':
       'Tá an leasainm in úsáid sa seomra cheana.',

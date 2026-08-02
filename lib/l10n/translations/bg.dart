@@ -1796,8 +1796,6 @@ const _dutchSourceAddBg = <String, String>{
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL адрес на конференцията (по избор): показва companion стаята на OciDeck',
   'Companion-kamer': 'Companion стая',
-  'Kamer testen (optioneel): kamer@service':
-      'Проверка на стая (по избор): стая@услуга',
   'Aanwezig in de kamer': 'Присъстващи в стаята',
   'De bijnaam is al in gebruik in de kamer.':
       'Псевдонимът вече се използва в стаята.',

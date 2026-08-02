@@ -1796,8 +1796,6 @@ const _dutchSourceAddMt = <String, String>{
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL tal-konferenza (mhux obbligatorju): juri l-kamra companion ta\' OciDeck',
   'Companion-kamer': 'Kamra companion',
-  'Kamer testen (optioneel): kamer@service':
-      'Ittestja kamra (mhux obbligatorju): kamra@servizz',
   'Aanwezig in de kamer': 'Preżenti fil-kamra',
   'De bijnaam is al in gebruik in de kamer.':
       'Il-laqam diġà qed jintuża fil-kamra.',

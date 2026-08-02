@@ -2751,8 +2751,6 @@ const _dutchSourceAddTr = <String, String>{
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'Konferans URL adresi (isteğe bağlı): OciDeck companion odasını gösterir',
   'Companion-kamer': 'Companion oda',
-  'Kamer testen (optioneel): kamer@service':
-      'Oda testi (isteğe bağlı): oda@servis',
   'Aanwezig in de kamer': 'Odada bulunanlar',
   'De bijnaam is al in gebruik in de kamer.':
       'Takma ad odada zaten kullanılıyor.',

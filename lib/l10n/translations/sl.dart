@@ -1776,8 +1776,6 @@ const _dutchSourceAddSl = <String, String>{
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL konference (izbirno): prikaže sobo companion OciDeck',
   'Companion-kamer': 'Companion soba',
-  'Kamer testen (optioneel): kamer@service':
-      'Preizkus sobe (izbirno): soba@storitev',
   'Aanwezig in de kamer': 'Prisotni v sobi',
   'De bijnaam is al in gebruik in de kamer.': 'Vzdevek je v sobi že v uporabi.',
   'Deze kamer is alleen voor leden.': 'Ta soba je samo za člane.',
