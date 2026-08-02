@@ -1841,6 +1841,9 @@ const _dutchSourceAddGsw = <String, String>{
   'Persoonsgegevens weggelaten': 'Persöönlichi Date wegglah',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Persöönlichi Date für de Empfänger markiert',
+  'Afbeeldingen beheren': 'Bilder verwalte',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'I dine Bibliotheksordner het\'s na kei Bilder.',
   'Voortgang per sectie': 'Fortschritt pro Abschnitt',
   'Nog te doen': 'Ussteend',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

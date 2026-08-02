@@ -1841,6 +1841,9 @@ const _dutchSourceAddHu = <String, String>{
   'Persoonsgegevens weggelaten': 'Személyes adat kihagyva',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Személyes adat megjelölve a címzettnek',
+  'Afbeeldingen beheren': 'Képek kezelése',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'A könyvtármappáidban még nincsenek képek.',
   'Voortgang per sectie': 'Előrehaladás szakaszonként',
   'Nog te doen': 'Hátralévő',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

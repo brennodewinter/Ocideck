@@ -1864,6 +1864,9 @@ const _dutchSourceAddPt = <String, String>{
   'Persoonsgegevens weggelaten': 'Dados pessoais omitidos',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Dados pessoais assinalados para o destinatário',
+  'Afbeeldingen beheren': 'Gerir imagens',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Ainda não há imagens nas pastas da tua biblioteca.',
   'Voortgang per sectie': 'Progresso por secção',
   'Nog te doen': 'Pendente',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

@@ -1827,6 +1827,9 @@ const _dutchSourceAddEt = <String, String>{
   'Persoonsgegevens weggelaten': 'Isikuandmed välja jäetud',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Isikuandmed märgitud vastuvõtjale',
+  'Afbeeldingen beheren': 'Halda pilte',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Sinu teegi kaustades pole veel pilte.',
   'Voortgang per sectie': 'Edenemine jaotiste kaupa',
   'Nog te doen': 'Tegemata',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

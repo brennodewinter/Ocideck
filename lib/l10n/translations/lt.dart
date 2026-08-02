@@ -1843,6 +1843,9 @@ const _dutchSourceAddLt = <String, String>{
   'Persoonsgegevens weggelaten': 'Asmens duomenys praleisti',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Asmens duomenys pažymėti gavėjui',
+  'Afbeeldingen beheren': 'Tvarkyti paveikslėlius',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Tavo bibliotekos aplankuose dar nėra paveikslėlių.',
   'Voortgang per sectie': 'Pažanga pagal skyrius',
   'Nog te doen': 'Liko',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

@@ -1837,6 +1837,9 @@ const _dutchSourceAddSl = <String, String>{
   'Persoonsgegevens weggelaten': 'Osebni podatki izpuščeni',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Osebni podatki označeni za prejemnika',
+  'Afbeeldingen beheren': 'Upravljaj slike',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'V mapah tvoje knjižnice še ni slik.',
   'Voortgang per sectie': 'Napredek po razdelkih',
   'Nog te doen': 'Preostalo',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

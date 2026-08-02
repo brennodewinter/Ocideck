@@ -796,6 +796,9 @@ const _dutchSourceAddFy = {
   'Persoonsgegevens weggelaten': 'Persoansgegevens weilitten',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Persoansgegevens markearre foar de ûntfanger',
+  'Afbeeldingen beheren': 'Ôfbyldings beheare',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Der steane noch gjin ôfbyldings yn dyn bibleteekmappen.',
   'Voortgang per sectie': 'Fuortgong per seksje',
   'Nog te doen': 'Noch te dwaan',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

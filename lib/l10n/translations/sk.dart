@@ -1842,6 +1842,9 @@ const _dutchSourceAddSk = <String, String>{
   'Persoonsgegevens weggelaten': 'Osobné údaje vynechané',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Osobné údaje označené pre príjemcu',
+  'Afbeeldingen beheren': 'Spravovať obrázky',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'V priečinkoch tvojej knižnice zatiaľ nie sú žiadne obrázky.',
   'Voortgang per sectie': 'Pokrok podľa sekcií',
   'Nog te doen': 'Zostáva',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

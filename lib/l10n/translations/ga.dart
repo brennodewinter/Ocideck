@@ -1871,6 +1871,9 @@ const _dutchSourceAddGa = <String, String>{
   'Persoonsgegevens weggelaten': 'Sonraí pearsanta fágtha ar lár',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Sonraí pearsanta marcáilte don fhaighteoir',
+  'Afbeeldingen beheren': 'Bainistigh íomhánna',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Níl aon íomhá i bhfillteáin do leabharlainne go fóill.',
   'Voortgang per sectie': 'Dul chun cinn de réir rannóige',
   'Nog te doen': 'Le déanamh',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

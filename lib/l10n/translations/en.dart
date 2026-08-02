@@ -975,6 +975,9 @@ const _dutchSourceAddEn = {
   'Persoonsgegevens weggelaten': 'Personal data left out',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Personal data flagged for the recipient',
+  'Afbeeldingen beheren': 'Manage images',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'There are no images in your library folders yet.',
   'Voortgang per sectie': 'Progress by section',
   'Nog te doen': 'Remaining',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

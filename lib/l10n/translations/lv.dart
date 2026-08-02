@@ -1835,6 +1835,9 @@ const _dutchSourceAddLv = <String, String>{
   'Persoonsgegevens weggelaten': 'Personas dati izlaisti',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Personas dati atzīmēti saņēmējam',
+  'Afbeeldingen beheren': 'Pārvaldīt attēlus',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Tavas bibliotēkas mapēs vēl nav attēlu.',
   'Voortgang per sectie': 'Progress pa sadaļām',
   'Nog te doen': 'Atlikušais',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

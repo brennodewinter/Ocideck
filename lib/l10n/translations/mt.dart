@@ -1858,6 +1858,9 @@ const _dutchSourceAddMt = <String, String>{
   'Persoonsgegevens weggelaten': 'Data personali mħollija barra',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Data personali mmarkata għar-riċevitur',
+  'Afbeeldingen beheren': 'Immaniġġja l-immaġni',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Għad m\'hemmx immaġni fil-kartelli tal-librerija tiegħek.',
   'Voortgang per sectie': 'Progress skont it-taqsima',
   'Nog te doen': 'Fadal',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

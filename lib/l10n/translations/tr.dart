@@ -2813,6 +2813,9 @@ const _dutchSourceAddTr = <String, String>{
   'Persoonsgegevens weggelaten': 'Kişisel veriler çıkarıldı',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Kişisel veriler alıcı için işaretlendi',
+  'Afbeeldingen beheren': 'Görselleri yönet',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Kitaplık klasörlerinizde henüz görsel yok.',
   'Voortgang per sectie': 'Bölüme göre ilerleme',
   'Nog te doen': 'Kalan',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

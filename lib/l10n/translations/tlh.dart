@@ -1809,6 +1809,9 @@ const _dutchSourceAddTlh = <String, String>{
   'Persoonsgegevens weggelaten': 'nuv De\' teqlu\'',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'HevwI\'vaD nuv De\' \'anglu\'',
+  'Afbeeldingen beheren': 'mIlloghmey yISeH',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'qol\'om DaqmeylIjDaq mIllogh tu\'lu\'be\'taH.',
   'Voortgang per sectie': '\'ay\' Qap',
   'Nog te doen': 'ratlhtaHbogh',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

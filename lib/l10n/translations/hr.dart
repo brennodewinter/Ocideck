@@ -1843,6 +1843,9 @@ const _dutchSourceAddHr = <String, String>{
   'Persoonsgegevens weggelaten': 'Osobni podaci izostavljeni',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Osobni podaci označeni za primatelja',
+  'Afbeeldingen beheren': 'Upravljaj slikama',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'U mapama tvoje biblioteke još nema slika.',
   'Voortgang per sectie': 'Napredak po odjeljku',
   'Nog te doen': 'Preostalo',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

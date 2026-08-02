@@ -1853,6 +1853,9 @@ const _dutchSourceAddUk = <String, String>{
   'Persoonsgegevens weggelaten': 'Персональні дані вилучено',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Персональні дані позначено для отримувача',
+  'Afbeeldingen beheren': 'Керувати зображеннями',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'У теках вашої бібліотеки ще немає зображень.',
   'Voortgang per sectie': 'Прогрес за розділами',
   'Nog te doen': 'Залишилося',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

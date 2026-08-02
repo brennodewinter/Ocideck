@@ -1864,6 +1864,9 @@ const _dutchSourceAddEl = <String, String>{
   'Persoonsgegevens weggelaten': 'Τα προσωπικά δεδομένα παραλείφθηκαν',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Τα προσωπικά δεδομένα επισημάνθηκαν για τον παραλήπτη',
+  'Afbeeldingen beheren': 'Διαχείριση εικόνων',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Δεν υπάρχουν ακόμη εικόνες στους φακέλους της βιβλιοθήκης σας.',
   'Voortgang per sectie': 'Πρόοδος ανά ενότητα',
   'Nog te doen': 'Απομένει',
   'Voortgangsoverzicht en -grafiek bijgewerkt':
