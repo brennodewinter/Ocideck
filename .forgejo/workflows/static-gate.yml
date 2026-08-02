@@ -20,15 +20,23 @@
 # op de machine van de committer, vóór main — die twee vangt deze workflow
 # bewust niet, en dat staat ook in docs/CHECKS.md.
 #
-# **Waarom op de Linux-container en niet op de Mac.** Zelfde afweging als
-# `scans.yml`: deze workflow vuurt bij élke PR, en de Mac is sinds #797 zowel de
-# uitbrengpoort als de werkmachine van de committer. In een container op de
-# server neemt hij geen kernen weg van een `make check` die daar op dat moment
-# draait. De toolchain komt — net als in `linux-gate.yml` — als officiële,
-# sha256-geverifieerde stable uit de pin in `.tool-versions`, zodat
-# `check-toolchain` onverkort binnen `make check-static` meedraait: een
-# kant-en-klaar Flutter-image zou kanaal `[user-branch]` kunnen dragen, precies
-# wat die poort afkeurt.
+# **Waarom op het voorgebakken CI-image en niet op een kaal ubuntu.** Deze
+# workflow vuurt bij élke PR, en bouwde de omgeving voorheen per run opnieuw op
+# (apt-toolchain + Flutter-download). Dat is nu voorgebakken in
+# `pawprint.vigilis.online/librekat/ocideck-ci:flutter-<pin>` (zie
+# `.forgejo/ci-image/Dockerfile` en `docs/CHECKS.md`): OS, node, de
+# build-toolchain en de gepinde, sha256-geverifieerde Flutter (+ precache) zitten
+# er al in, dus de per-run-installatie vervalt. Alleen de repo-gekoppelde dingen
+# (pub-pakketten en de dartcv OpenCV-build) blijven op `actions/cache`.
+#
+# **Pin-koppeling.** Het image-tag ís de Flutter-pin (`flutter-3.44.8`). Loopt het
+# image achter op `.tool-versions`, dan draagt het een andere Flutter dan de pin
+# en valt `check-toolchain` (dat onverkort binnen `make check-static` meedraait)
+# om — fail-closed, geen stille drift. Een pin-bump werkt daarom `.tool-versions`
+# én dit tag in dezelfde commit bij; `ci-image.yml` publiceert het nieuwe tag
+# automatisch bij een `.tool-versions`-wijziging. Het image is anoniem pullbaar
+# (publieke org), en de dind heeft het lokaal; valt de registry toch weg, dan
+# start de job niet — dezelfde beschikbaarheidsgrens als de runner zelf.
 name: static-gate
 
 on:
@@ -48,87 +56,17 @@ jobs:
   static-gate:
     runs-on: docker
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.44.8
     steps:
-      # Vóór de checkout: actions/checkout is een node-actie, en dit kale image
-      # brengt geen node mee, en actions/cache is óók een node-actie. Installeer
-      # daarom eerst alleen node (+ ca-certificates), zodat de apt-cache kan draaien
-      # vóór de zware build-toolchain (cmake/ninja/clang/gtk/gcc) — die staat erbij
-      # omdat élke `dart run tool/…` de native-assets-hook van dartcv4 bouwt, en
-      # zonder gcc/g++ faalt die hook op "CMAKE_C_COMPILER: gcc not found".
-      - name: Node voor de cache-acties
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends nodejs ca-certificates
-          printf 'Binary::apt::APT::Keep-Downloaded-Packages "true";\n' \
-            > /etc/apt/apt.conf.d/99keep-debs
-
-      # Dezelfde vaste .deb-lijst als de linux-gate; dezelfde sleutel, zodat één
-      # cache beide poorten bedient. Bump `-v1` als de pakketlijst verandert.
-      - name: Build-tools uit de apt-cache
-        continue-on-error: true
-        uses: actions/cache@v4
-        with:
-          path: /var/cache/apt/archives
-          key: apt-linux-2404-buildtools-v1
-
-      - name: Gereedschap installeren
-        run: |
-          apt-get install -y --no-install-recommends \
-            make git curl xz-utils jq unzip \
-            cmake ninja-build clang pkg-config libgtk-3-dev \
-            build-essential
-
       - uses: actions/checkout@v4
 
-      # De repo is van een andere uid dan root; zonder dit weigert git bewerkingen
-      # en falen controles die de werkkopie via git bekijken op iets dat niets met
-      # de poort te maken heeft.
-      - name: De werkkopie vertrouwen
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
-      # De pin is de cachesleutel, dus hij wordt één keer gelezen en hergebruikt.
-      - name: Gepinde Flutter-versie lezen
-        id: pin
+      # De werkkopie is van een andere uid dan root; zonder dit weigert git
+      # bewerkingen. `/opt/flutter` (ingebakken) heeft dezelfde behandeling nodig,
+      # want Flutter draait git op zijn eigen checkout.
+      - name: Werkkopie en Flutter vertrouwen
         run: |
           set -eu
-          VERSION="$(sed -n 's/^flutter \(.*\)-stable$/\1/p' .tool-versions)"
-          test -n "$VERSION"
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-
-      # Sleutel = de gepinde versie; een pin-bump is automatisch een nieuwe cache.
-      # De cache vervangt geen controle: `check-toolchain` draait op de herstelde
-      # boom en eist onverkort kanaal `stable`, de officiële herkomst en gelijkheid
-      # met de pin.
-      - name: Flutter uit de cache
-        id: flutter-cache
-        continue-on-error: true
-        uses: actions/cache@v4
-        with:
-          path: /opt/flutter
-          key: flutter-linux-${{ steps.pin.outputs.version }}-stable
-
-      - name: Officiële Flutter volgens de pin
-        if: steps.flutter-cache.outputs.cache-hit != 'true'
-        run: |
-          set -eu
-          VERSION="${{ steps.pin.outputs.version }}"
-          ARCHIVE="flutter_linux_${VERSION}-stable.tar.xz"
-          BASE="https://storage.googleapis.com/flutter_infra_release/releases"
-          curl -fsSLo /tmp/releases.json "$BASE/releases_linux.json"
-          SHA=$(jq -r --arg v "$VERSION" \
-            '.releases[] | select(.channel=="stable" and .version==$v) | .sha256' \
-            /tmp/releases.json)
-          test -n "$SHA"
-          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/stable/linux/$ARCHIVE"
-          echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
-          tar -xJf "/tmp/$ARCHIVE" -C /opt
-          rm "/tmp/$ARCHIVE"
-
-      # Apart van de installatie: dit moet óók gebeuren als de cache raak was.
-      - name: Flutter op het pad
-        run: |
-          set -eu
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --global --add safe.directory /opt/flutter
           echo "/opt/flutter/bin" >> "$GITHUB_PATH"
 
@@ -150,7 +88,8 @@ jobs:
       # build is inhoud-geadresseerd op zijn inputs, dus een herstelde cache laat
       # de hook de recompile overslaan; wijkt er iets af, dan bouwt hij gewoon
       # opnieuw — geen controle vervangen. Dezelfde sleutel als de linux-gate (ook
-      # Linux, dezelfde build-hash), zodat één cache beide poorten bedient.
+      # Linux, dezelfde build-hash), zodat één cache beide poorten bedient. Dit
+      # blijft op `actions/cache` (niet in het image): het volgt `pubspec.lock`.
       - name: dartcv4 native OpenCV-build uit de cache
         continue-on-error: true
         uses: actions/cache@v4

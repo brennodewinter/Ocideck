@@ -69,67 +69,21 @@ concurrency:
 jobs:
   gate-linux:
     runs-on: docker
+    # Voorgebakken CI-image (zie de kop van `static-gate.yml` en docs/CHECKS.md):
+    # OS + node + build-toolchain + de gepinde, sha256-geverifieerde Flutter
+    # (+ precache) zitten erin, dus de per-run-installatie vervalt. Het tag ís de
+    # pin; loopt het image achter, dan valt `check-toolchain` (binnen
+    # `make check-no-coverage`) om — fail-closed. Alleen de repo-gekoppelde dingen
+    # (pub + dartcv OpenCV-build) blijven op `actions/cache`.
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.44.8
     steps:
-      # Vóór de checkout: actions/checkout is een node-actie, en dit kale
-      # image brengt geen node mee.
-      - name: Gereedschap installeren
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends \
-            nodejs make git curl ca-certificates xz-utils jq unzip \
-            cmake ninja-build clang pkg-config libgtk-3-dev \
-            build-essential
-          # build-essential (gcc/g++): dartcv4's native OpenCV-build (#870)
-          # zoekt de standaard gcc/g++, niet de aanwezige clang — zonder dit
-          # faalt de hook op "CMAKE_C_COMPILER: gcc ... not found".
-
       - uses: actions/checkout@v4
 
-      # De pin is de cachesleutel, dus hij wordt één keer gelezen en daarna
-      # hergebruikt — niet twee keer met hetzelfde `sed`.
-      - name: Gepinde Flutter-versie lezen
-        id: pin
+      - name: Werkkopie en Flutter vertrouwen
         run: |
           set -eu
-          VERSION="$(sed -n 's/^flutter \(.*\)-stable$/\1/p' .tool-versions)"
-          test -n "$VERSION"
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-
-      # Sleutel = de gepinde versie. Een pin-bump is dus automatisch een nieuwe
-      # cache; er is geen sleutel die stil bij een oude toolchain blijft staan.
-      # Deze cache draagt óók wat Flutter tijdens de run zelf binnenhaalt
-      # (bin/cache), want dat zit onder hetzelfde pad.
-      - name: Flutter uit de cache
-        id: flutter-cache
-        continue-on-error: true
-        uses: actions/cache@v4
-        with:
-          path: /opt/flutter
-          key: flutter-linux-${{ steps.pin.outputs.version }}-stable
-
-      - name: Officiële Flutter volgens de pin
-        if: steps.flutter-cache.outputs.cache-hit != 'true'
-        run: |
-          set -eu
-          VERSION="${{ steps.pin.outputs.version }}"
-          ARCHIVE="flutter_linux_${VERSION}-stable.tar.xz"
-          BASE="https://storage.googleapis.com/flutter_infra_release/releases"
-          curl -fsSLo /tmp/releases.json "$BASE/releases_linux.json"
-          SHA=$(jq -r --arg v "$VERSION" \
-            '.releases[] | select(.channel=="stable" and .version==$v) | .sha256' \
-            /tmp/releases.json)
-          test -n "$SHA"
-          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/stable/linux/$ARCHIVE"
-          echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
-          tar -xJf "/tmp/$ARCHIVE" -C /opt
-          rm "/tmp/$ARCHIVE"
-
-      # Apart van de installatie: dit moet óók gebeuren als de cache raak was.
-      - name: Flutter op het pad
-        run: |
-          set -eu
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --global --add safe.directory /opt/flutter
           echo "/opt/flutter/bin" >> "$GITHUB_PATH"
 
@@ -148,6 +102,21 @@ jobs:
 
       - name: Afhankelijkheden ophalen
         run: flutter pub get
+
+      # De dartcv4-hook compileert OpenCV (native OpenCV-binding, #870) — veruit de
+      # duurste stap na de tests. Blijft bewust op `actions/cache` (volgt
+      # `pubspec.lock`), niet in het image; zelfde sleutel als static-gate, zodat
+      # één cache beide poorten bedient.
+      - name: dartcv4 native OpenCV-build uit de cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: |
+            .dart_tool/hooks_runner
+            build/native_assets
+          key: dartcv-linux-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            dartcv-linux-
 
       # `check-no-coverage` en niet `check`: de volledige suite draait onverkort,
       # alleen zonder `--coverage`. Die instrumentatie houdt per test een
