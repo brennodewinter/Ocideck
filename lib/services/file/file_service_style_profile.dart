@@ -103,16 +103,11 @@ bool _withinLogoCap(Uint8List? bytes) =>
 }
 
 extension FileServiceStyleProfile on FileService {
-  /// Bestandsnaam-veilige variant van een profielnaam. Eigen sanitizer (net als
-  /// `_safeThemeName`): een profielnaam is vrije invoer, dus `/` en `..` moeten
-  /// weg voordat hij een pad wordt.
-  String _safeProfileFileName(String name) {
-    final cleaned = name
-        .replaceAll(RegExp(r'[^\w\s-]'), '')
-        .replaceAll(RegExp(r'\s+'), '_')
-        .trim();
-    return cleaned.isEmpty ? 'stijlprofiel' : cleaned;
-  }
+  /// Bestandsnaam-veilige variant van een profielnaam. Gedeelde sanitizer uit
+  /// `lib/utils/safe_filename.dart`; een profielnaam is vrije invoer, dus `/`
+  /// en `..` moeten weg voordat hij een pad wordt.
+  String _safeProfileFileName(String name) =>
+      sanitizeFilename(name, fallback: 'stijlprofiel');
 
   /// De bytes achter een eigen logo, of null wanneer ze niet te lezen zijn:
   /// een verdwenen bestand, een lege mem:-store na een herlaad, of te groot.

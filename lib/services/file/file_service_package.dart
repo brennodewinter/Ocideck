@@ -336,17 +336,10 @@ void _assertArchiveWithinBudget(Archive archive, int budgetBytes) {
   }
 }
 
-/// Maak van een deck-titel een veilige bestandsnaam-stam: strip alles buiten
-/// `[\w\s-]`, spaties naar `_`. Valt terug op `presentatie`. Top-level in de
-/// library, zodat élk `part`-bestand hem deelt zonder de FileService-klasse te
-/// laten groeien.
-String _safeName(String title) {
-  final cleaned = title
-      .replaceAll(RegExp(r'[^\w\s-]'), '')
-      .replaceAll(RegExp(r'\s+'), '_')
-      .trim();
-  return cleaned.isEmpty ? 'presentatie' : cleaned;
-}
+/// Maak van een deck-titel een veilige bestandsnaam-stam. Gedeelde
+/// sanitizer uit `lib/utils/safe_filename.dart`; valt terug op `presentatie`.
+String _safeName(String title) =>
+    sanitizeFilename(title, fallback: 'presentatie');
 
 /// Sanitize a deck-supplied theme name before it becomes a file name. The
 /// `theme:` front-matter value is attacker-controlled, so `../` and other
@@ -354,13 +347,8 @@ String _safeName(String title) {
 /// `themes/` directory (p.join collapses `../` on join). Falls back to
 /// `ocideck`. Strips the same characters as [_safeName]; `.` and `/` are not
 /// in `[\w\s-]`, so any traversal sequence is flattened away.
-String _safeThemeName(String themeName) {
-  final cleaned = themeName
-      .replaceAll(RegExp(r'[^\w\s-]'), '')
-      .replaceAll(RegExp(r'\s+'), '_')
-      .trim();
-  return cleaned.isEmpty ? 'ocideck' : cleaned;
-}
+String _safeThemeName(String themeName) =>
+    sanitizeFilename(themeName, fallback: 'ocideck');
 
 /// Schrijf de data van één grafiek als lid onder `data/` en geef het lidpad
 /// terug; [added] houdt naamconflicten uit elkaar.
