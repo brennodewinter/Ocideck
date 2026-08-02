@@ -363,6 +363,25 @@ OciDeck constrains what an opened deck can do:
   player's own "Watch on YouTube" link cannot navigate the frame onto the
   tracking origin.
 
+- **WebRTC media bypasses NetGuard (native calls).** The optional, default-off
+  *Videovergaderingen* module (`docs/design/NATIVE_CALLS.md`,
+  `assurance/ketenkeuring-flutter-webrtc.md`) opens a media plane through
+  `flutter_webrtc` (libwebrtc). Its traffic — ICE/STUN/TURN over UDP and the SRTP
+  media streams to the SFU and to peers — is opened by libwebrtc, **not** by an
+  `http` client, so `NetGuard.safeResolve`/`connectPinned` neither resolve-guard
+  nor pin it. This is the one traffic class outside the central choke — the same
+  kind of gap as the native `git` subprocess, but broader (a continuous realtime
+  stream, not a brief fetch). It is bounded rather than open: the media follows the
+  NetGuard-validated **signalling** origin (the Prosody/Matrix the user configured,
+  guarded like WebDAV via `MeetingProviderProfile`), and a media core reaches only
+  the TURN/SFU origins that validated signalling hands it — never an arbitrary host
+  from a pasted link (enforced where the adapter configures ICE, with the Jitsi
+  media join); the module is default-off, so no media code runs until the user
+  enables it and joins;
+  and if the guarded signalling fails, no media channel opens (the guard stays the
+  gate one layer up). Media E2EE is off on iOS/macOS (a known `flutter_webrtc`
+  frame-cryptor crash, flutter-webrtc#2135) and is reported as such, never claimed.
+
 Known residual hardening: the render-path symlink cache is keyed by path for the
 session, so a symlink swapped *after* its first render isn't re-checked (a
 narrow TOCTOU on an already-open deck).
