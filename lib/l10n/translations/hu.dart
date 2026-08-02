@@ -1811,6 +1811,9 @@ const _dutchSourceAddHu = <String, String>{
   'kolom': 'oszlopban',
   'schrijftips': 'írási tippek',
   'tekens': 'karakterek',
+  'Persoonsgegevens weggelaten': 'Személyes adat kihagyva',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Személyes adat megjelölve a címzettnek',
   'Voortgang per sectie': 'Előrehaladás szakaszonként',
   'Nog te doen': 'Hátralévő',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

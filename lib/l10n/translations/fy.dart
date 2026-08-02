@@ -767,6 +767,9 @@ const _dutchSourceAddFy = {
   'kolom': 'kolom',
   'schrijftips': 'skriuwen tips',
   'tekens': 'karakters',
+  'Persoonsgegevens weggelaten': 'Persoansgegevens weilitten',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Persoansgegevens markearre foar de ûntfanger',
   'Voortgang per sectie': 'Fuortgong per seksje',
   'Nog te doen': 'Noch te dwaan',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

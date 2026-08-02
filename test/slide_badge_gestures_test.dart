@@ -136,7 +136,9 @@ void main() {
       privacy: PrivacyDisposition.redact,
     );
 
-    await doubleTap(tester, find.byTooltip('Persoonsgegevens geaccepteerd'));
+    // Een weggelaten dia heet ook "weggelaten", niet "geaccepteerd": zie de
+    // groep hieronder. De grijze badge staat er, dubbelklikken doet er niets.
+    await doubleTap(tester, find.byTooltip('Persoonsgegevens weggelaten'));
 
     expect(privacyOf(container), PrivacyDisposition.redact);
   });
@@ -155,5 +157,48 @@ void main() {
       QualityDisposition.accept,
     );
     expect(privacyOf(container), PrivacyDisposition.warn);
+  });
+
+  // #1112: de grijze badge dekt drie standen af (accepteren, waarschuwen,
+  // weglaten). Vroeger zei hij op alle drie "geaccepteerd" — onwaar voor een
+  // weggelaten dia, waar niets is geaccepteerd. Elke stand hoort zijn eigen woord.
+  group('de badge noemt de wérkelijke privacy-stand', () {
+    testWidgets('accepteren → geaccepteerd', (tester) async {
+      await pumpThumbnail(
+        tester,
+        bullet: _iban,
+        privacy: PrivacyDisposition.accept,
+      );
+      expect(find.byTooltip('Persoonsgegevens geaccepteerd'), findsOneWidget);
+    });
+
+    testWidgets('waarschuwen → gemarkeerd voor de ontvanger', (tester) async {
+      await pumpThumbnail(
+        tester,
+        bullet: _iban,
+        privacy: PrivacyDisposition.shield,
+      );
+      expect(
+        find.byTooltip('Persoonsgegevens gemarkeerd voor de ontvanger'),
+        findsOneWidget,
+      );
+      expect(find.byTooltip('Persoonsgegevens geaccepteerd'), findsNothing);
+    });
+
+    testWidgets('weglaten → weggelaten, níét geaccepteerd', (tester) async {
+      await pumpThumbnail(
+        tester,
+        bullet: _iban,
+        privacy: PrivacyDisposition.redact,
+      );
+      expect(find.byTooltip('Persoonsgegevens weggelaten'), findsOneWidget);
+      // De kern van de bug: een weggelaten dia zei "geaccepteerd".
+      expect(find.byTooltip('Persoonsgegevens geaccepteerd'), findsNothing);
+    });
+
+    testWidgets('nog niet beslist → gevonden', (tester) async {
+      await pumpThumbnail(tester, bullet: _iban);
+      expect(find.byTooltip('Persoonsgegevens gevonden'), findsOneWidget);
+    });
   });
 }

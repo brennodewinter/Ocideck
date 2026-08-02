@@ -1813,6 +1813,9 @@ const _dutchSourceAddHr = <String, String>{
   'kolom': 'stupac',
   'schrijftips': 'savjeti za pisanje',
   'tekens': 'likovi',
+  'Persoonsgegevens weggelaten': 'Osobni podaci izostavljeni',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Osobni podaci označeni za primatelja',
   'Voortgang per sectie': 'Napredak po odjeljku',
   'Nog te doen': 'Preostalo',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

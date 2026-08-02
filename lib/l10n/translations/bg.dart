@@ -1829,6 +1829,9 @@ const _dutchSourceAddBg = <String, String>{
   'kolom': 'колона',
   'schrijftips': 'съвети за писане',
   'tekens': 'герои',
+  'Persoonsgegevens weggelaten': 'Личните данни са пропуснати',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Личните данни са отбелязани за получателя',
   'Voortgang per sectie': 'Напредък по раздели',
   'Nog te doen': 'Оставащо',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

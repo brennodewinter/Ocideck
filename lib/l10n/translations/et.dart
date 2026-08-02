@@ -1798,6 +1798,9 @@ const _dutchSourceAddEt = <String, String>{
   'kolom': 'veerus',
   'schrijftips': 'kirjutamise näpunäiteid',
   'tekens': 'tegelased',
+  'Persoonsgegevens weggelaten': 'Isikuandmed välja jäetud',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Isikuandmed märgitud vastuvõtjale',
   'Voortgang per sectie': 'Edenemine jaotiste kaupa',
   'Nog te doen': 'Tegemata',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

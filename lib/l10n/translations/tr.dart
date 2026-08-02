@@ -2784,6 +2784,9 @@ const _dutchSourceAddTr = <String, String>{
   'kolom': 'sütun',
   'schrijftips': 'ipuçları yazma',
   'tekens': 'karakterler',
+  'Persoonsgegevens weggelaten': 'Kişisel veriler çıkarıldı',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Kişisel veriler alıcı için işaretlendi',
   'Voortgang per sectie': 'Bölüme göre ilerleme',
   'Nog te doen': 'Kalan',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

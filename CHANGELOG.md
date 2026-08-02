@@ -270,6 +270,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Privacy/UI: de privacy-badge op de dia-thumbnails zei bij aanwijzen altijd
+  "Persoonsgegevens geaccepteerd", ook op een dia die was ingesteld op *weglaten*
+  of *accepteren + waarschuwen*. De grijze badge dekt namelijk drie standen af,
+  maar noemde er maar één — en "geaccepteerd" op een weggelaten dia is onwaar,
+  want daar wordt juist niets geaccepteerd, het wordt weggehaald. De badge én het
+  schermlezer-label noemen nu de wérkelijke stand, in de geest van het
+  instellingenpaneel: *geaccepteerd*, *gemarkeerd voor de ontvanger* of
+  *weggelaten* (#1112).
 - Export/geheugen: een PDF/PPTX-raster-export hield alle gerenderde PNG's in het
   geheugen en verhoogde de image-cache tot 1 GB, terwijl de assemblage pas begon
   nadat álles gerasteriseerd was — honderden hoog-entropische dia's konden zo

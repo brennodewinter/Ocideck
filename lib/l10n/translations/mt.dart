@@ -1829,6 +1829,9 @@ const _dutchSourceAddMt = <String, String>{
   'kolom': 'kolonna',
   'schrijftips': 'kitba pariri',
   'tekens': 'karattri',
+  'Persoonsgegevens weggelaten': 'Data personali mħollija barra',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Data personali mmarkata għar-riċevitur',
   'Voortgang per sectie': 'Progress skont it-taqsima',
   'Nog te doen': 'Fadal',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

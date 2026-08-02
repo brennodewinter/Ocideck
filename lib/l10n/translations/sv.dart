@@ -1806,6 +1806,9 @@ const _dutchSourceAddSv = <String, String>{
   'kolom': 'kolumn',
   'schrijftips': 'skrivtips',
   'tekens': 'tecken',
+  'Persoonsgegevens weggelaten': 'Personuppgifter utelämnade',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Personuppgifter markerade för mottagaren',
   'Voortgang per sectie': 'Framsteg per sektion',
   'Nog te doen': 'Återstår',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

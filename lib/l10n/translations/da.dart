@@ -1806,6 +1806,9 @@ const _dutchSourceAddDa = <String, String>{
   'kolom': 'kolonne',
   'schrijftips': 'skrivetips',
   'tekens': 'tegn',
+  'Persoonsgegevens weggelaten': 'Personoplysninger udeladt',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Personoplysninger markeret for modtageren',
   'Voortgang per sectie': 'Fremskridt pr. sektion',
   'Nog te doen': 'Mangler',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

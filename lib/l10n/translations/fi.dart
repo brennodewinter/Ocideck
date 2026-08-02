@@ -1807,6 +1807,9 @@ const _dutchSourceAddFi = <String, String>{
   'kolom': 'sarakkeessa',
   'schrijftips': 'kirjoitusvinkkejä',
   'tekens': 'hahmoja',
+  'Persoonsgegevens weggelaten': 'Henkilötiedot jätetty pois',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Henkilötiedot merkitty vastaanottajalle',
   'Voortgang per sectie': 'Edistyminen osioittain',
   'Nog te doen': 'Jäljellä',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

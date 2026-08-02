@@ -766,6 +766,9 @@ const _dutchSourceAddDe = {
   'kolom': 'Spalte',
   'schrijftips': 'Schreibtipps',
   'tekens': 'Charaktere',
+  'Persoonsgegevens weggelaten': 'Personenbezogene Daten weggelassen',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Personenbezogene Daten für den Empfänger markiert',
   'Voortgang per sectie': 'Fortschritt pro Abschnitt',
   'Nog te doen': 'Ausstehend',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

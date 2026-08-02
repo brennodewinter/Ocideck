@@ -1810,6 +1810,9 @@ const _dutchSourceAddCs = <String, String>{
   'kolom': 'sloupec',
   'schrijftips': 'tipy na psaní',
   'tekens': 'postavy',
+  'Persoonsgegevens weggelaten': 'Osobní údaje vynechány',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Osobní údaje označeny pro příjemce',
   'Voortgang per sectie': 'Pokrok podle sekcí',
   'Nog te doen': 'Zbývá',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

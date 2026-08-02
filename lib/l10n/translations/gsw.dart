@@ -1810,6 +1810,9 @@ const _dutchSourceAddGsw = <String, String>{
   'kolom': 'Spalte',
   'schrijftips': 'Schreibtipps',
   'tekens': 'Charaktere',
+  'Persoonsgegevens weggelaten': 'Persöönlichi Date wegglah',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Persöönlichi Date für de Empfänger markiert',
   'Voortgang per sectie': 'Fortschritt pro Abschnitt',
   'Nog te doen': 'Ussteend',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

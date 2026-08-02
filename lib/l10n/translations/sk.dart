@@ -1814,6 +1814,9 @@ const _dutchSourceAddSk = <String, String>{
   'kolom': 'stĺpec',
   'schrijftips': 'tipy na písanie',
   'tekens': 'postavy',
+  'Persoonsgegevens weggelaten': 'Osobné údaje vynechané',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Osobné údaje označené pre príjemcu',
   'Voortgang per sectie': 'Pokrok podľa sekcií',
   'Nog te doen': 'Zostáva',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

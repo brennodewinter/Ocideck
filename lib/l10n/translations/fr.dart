@@ -766,6 +766,9 @@ const _dutchSourceAddFr = {
   'kolom': 'colonne',
   'schrijftips': 'conseils d\'écriture',
   'tekens': 'personnages',
+  'Persoonsgegevens weggelaten': 'Données personnelles retirées',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Données personnelles signalées au destinataire',
   'Voortgang per sectie': 'Progression par section',
   'Nog te doen': 'Restant',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

@@ -766,6 +766,9 @@ const _dutchSourceAddPap = {
   'kolom': 'kolòm',
   'schrijftips': 'konsehonan pa skirbi',
   'tekens': 'karakternan',
+  'Persoonsgegevens weggelaten': 'Datonan personal kitá',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'Datonan personal marká pa e destinataro',
   'Voortgang per sectie': 'Progreso pa sekshon',
   'Nog te doen': 'Falta pa hasi',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

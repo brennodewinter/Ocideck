@@ -40,12 +40,29 @@ String _withheldTooltip(AppLocalizations l10n, TlpLevel slideTlp) =>
     '${l10n.d('Achtergehouden: strenger geclassificeerd dan de presentatie')} '
     '(${slideTlp.label})';
 
-String _privacyBadgeTooltip(AppLocalizations l10n, SlideBadgeTone tone) =>
-    switch (tone) {
-      SlideBadgeTone.hint => l10n.d('Mogelijk persoonsgegevens'),
-      SlideBadgeTone.accepted => l10n.d('Persoonsgegevens geaccepteerd'),
-      _ => l10n.d('Persoonsgegevens gevonden'),
-    };
+/// De tekst onder de privacy-badge. De grijze [SlideBadgeTone.accepted] dekt
+/// drie standen af — accepteren, waarschuwen én weglaten — en die zijn niet
+/// hetzelfde: "geaccepteerd" op een weggelaten dia is onwaar, want daar is niets
+/// geaccepteerd, het wordt juist weggehaald. Dus noemt de badge wélke stand het
+/// is, in de geest van het instellingenpaneel — "geaccepteerd" en "weggelaten"
+/// zijn er letterlijk uit, "gemarkeerd voor de ontvanger" is een preciezere
+/// parafrase van het paneelwoord "gewaarschuwd".
+String _privacyBadgeTooltip(
+  AppLocalizations l10n,
+  SlideBadgeTone tone,
+  PrivacyDisposition disposition,
+) => switch (tone) {
+  SlideBadgeTone.hint => l10n.d('Mogelijk persoonsgegevens'),
+  SlideBadgeTone.accepted => switch (disposition) {
+    PrivacyDisposition.redact => l10n.d('Persoonsgegevens weggelaten'),
+    PrivacyDisposition.shield => l10n.d(
+      'Persoonsgegevens gemarkeerd voor de ontvanger',
+    ),
+    // accept — en, defensief, warn (die de grijze toon niet voortbrengt).
+    _ => l10n.d('Persoonsgegevens geaccepteerd'),
+  },
+  _ => l10n.d('Persoonsgegevens gevonden'),
+};
 
 /// Het badge-plaatje zelf: een gekleurd blokje met een icoon, dat antwoord geeft.
 ///
@@ -192,15 +209,10 @@ class SlideThumbnail extends ConsumerWidget {
   ///
   /// Selects op kleine waarden i.p.v. het hele resultaat: anders herbouwt élke
   /// thumbnail bij elke wijziging waar dan ook in het deck.
-  (SlideBadgeTone, SlideBadgeTone) _badgeTones(WidgetRef ref) {
-    final privacyDone = ref.watch(
-      deckProvider.select(
-        (state) => effectivePrivacyDisposition(
-          deck: state.deck?.privacy ?? PrivacyDisposition.warn,
-          slide: slide.privacy,
-        ).isResolved,
-      ),
-    );
+  (SlideBadgeTone, SlideBadgeTone) _badgeTones(
+    WidgetRef ref,
+    bool privacyDone,
+  ) {
     final qualityAccepted = slide.quality.isResolved;
     final syncQualityTone = ref.watch(
       deckQualityRawProvider.select(
@@ -255,7 +267,21 @@ class SlideThumbnail extends ConsumerWidget {
         (s) => (s.selection.contains(index), s.selectedIndex == index),
       ),
     );
-    final (qualityTone, privacyTone) = _badgeTones(ref);
+    // De effectieve privacy-stand van deze dia (het deck, tenzij de dia hem
+    // overschrijft). Bepaalt niet alleen óf de badge grijs is, maar ook wélke
+    // tekst hij draagt: geaccepteerd, gewaarschuwd of weggelaten.
+    final privacyDisposition = ref.watch(
+      deckProvider.select(
+        (state) => effectivePrivacyDisposition(
+          deck: state.deck?.privacy ?? PrivacyDisposition.warn,
+          slide: slide.privacy,
+        ),
+      ),
+    );
+    final (qualityTone, privacyTone) = _badgeTones(
+      ref,
+      privacyDisposition.isResolved,
+    );
     final showWatermark = ref.watch(
       settingsProvider.select((s) => s.classificationWatermarkEnabled),
     );
@@ -297,7 +323,7 @@ class SlideThumbnail extends ConsumerWidget {
         // "Kwaliteitsprobleem" zou een schermlezergebruiker precies de vraag
         // laten staan die de badges nu net beantwoorden: wélk soort probleem.
         '${qualityTone.isVisible ? ' (${_qualityBadgeTooltip(l10n, qualityTone)})' : ''}'
-        '${privacyTone.isVisible ? ' (${_privacyBadgeTooltip(l10n, privacyTone)})' : ''}';
+        '${privacyTone.isVisible ? ' (${_privacyBadgeTooltip(l10n, privacyTone, privacyDisposition)})' : ''}';
 
     return Semantics(
       button: true,
@@ -324,6 +350,7 @@ class SlideThumbnail extends ConsumerWidget {
                 showWatermark: showWatermark,
                 qualityTone: qualityTone,
                 privacyTone: privacyTone,
+                privacyDisposition: privacyDisposition,
                 improvementY01: improvementY01,
               ),
               // Footer: slide number, type label, action buttons
@@ -394,6 +421,7 @@ class SlideThumbnail extends ConsumerWidget {
     required bool showWatermark,
     required SlideBadgeTone qualityTone,
     required SlideBadgeTone privacyTone,
+    required PrivacyDisposition privacyDisposition,
     required ImprovementY01Metric improvementY01,
   }) {
     return ExcludeSemantics(
@@ -498,7 +526,11 @@ class SlideThumbnail extends ConsumerWidget {
                       if (privacyTone.isVisible)
                         _SlideBadge(
                           tone: privacyTone,
-                          message: _privacyBadgeTooltip(l10n, privacyTone),
+                          message: _privacyBadgeTooltip(
+                            l10n,
+                            privacyTone,
+                            privacyDisposition,
+                          ),
                           slideIndex: index,
                           family: SlideBadgeFamily.privacy,
                           child: SvgPicture.string(

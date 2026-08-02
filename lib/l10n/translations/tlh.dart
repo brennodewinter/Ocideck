@@ -1781,6 +1781,9 @@ const _dutchSourceAddTlh = <String, String>{
   'kolom': 'tut',
   'schrijftips': 'ghItlh qeS',
   'tekens': 'Deghmey',
+  'Persoonsgegevens weggelaten': 'nuv De\' teqlu\'',
+  'Persoonsgegevens gemarkeerd voor de ontvanger':
+      'HevwI\'vaD nuv De\' \'anglu\'',
   'Voortgang per sectie': '\'ay\' Qap',
   'Nog te doen': 'ratlhtaHbogh',
   'Voortgangsoverzicht en -grafiek bijgewerkt':
