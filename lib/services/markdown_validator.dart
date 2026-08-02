@@ -468,41 +468,27 @@ class MarkdownValidator {
         line: lineNo(i),
         issues: issues,
       );
-
-      if (trimmed.startsWith('<!-- advance:')) {
-        final value = trimmed
-            .substring('<!-- advance:'.length)
-            .replaceAll('-->', '')
-            .trim();
-        final parsed = double.tryParse(value);
-        if (parsed == null || !parsed.isFinite) {
-          issues.add(
-            MarkdownValidationIssue(
-              line: lineNo(i),
-              severity: MarkdownValidationSeverity.error,
-              message:
-                  'Slide $slideNumber: advance-waarde "$value" is geen getal.',
-            ),
-          );
-        }
-      }
-
-      if (trimmed.startsWith('<!-- ocideck_list_style:')) {
-        final value = trimmed
-            .substring('<!-- ocideck_list_style:'.length)
-            .replaceAll('-->', '')
-            .trim();
-        if (!_validListStyles.contains(value)) {
-          issues.add(
-            MarkdownValidationIssue(
-              line: lineNo(i),
-              severity: MarkdownValidationSeverity.error,
-              message:
-                  'Slide $slideNumber: onbekende lijststijl "$value". Gebruik bullets, numbered, checklist of richText.',
-            ),
-          );
-        }
-      }
+      _validateSlideDirective(
+        trimmed: trimmed,
+        prefix: '<!-- advance:',
+        isValid: (v) {
+          final parsed = double.tryParse(v);
+          return parsed != null && parsed.isFinite;
+        },
+        issueMessage: (v) =>
+            'Slide $slideNumber: advance-waarde "$v" is geen getal.',
+        line: lineNo(i),
+        issues: issues,
+      );
+      _validateSlideDirective(
+        trimmed: trimmed,
+        prefix: '<!-- ocideck_list_style:',
+        isValid: _validListStyles.contains,
+        issueMessage: (v) =>
+            'Slide $slideNumber: onbekende lijststijl "$v". Gebruik bullets, numbered, checklist of richText.',
+        line: lineNo(i),
+        issues: issues,
+      );
 
       for (final prefix in const [
         'ocideck_two_bullets_left:',
@@ -510,22 +496,15 @@ class MarkdownValidator {
         'ocideck_two_bullets_left_title:',
         'ocideck_two_bullets_right_title:',
       ]) {
-        if (trimmed.startsWith('<!-- $prefix')) {
-          final encoded = trimmed
-              .substring('<!-- $prefix'.length)
-              .replaceAll('-->', '')
-              .trim();
-          if (!_isValidEncodedPayload(prefix, encoded)) {
-            issues.add(
-              MarkdownValidationIssue(
-                line: lineNo(i),
-                severity: MarkdownValidationSeverity.error,
-                message:
-                    'Slide $slideNumber: `$prefix`-commentaar bevat ongeldige base64/JSON.',
-              ),
-            );
-          }
-        }
+        _validateSlideDirective(
+          trimmed: trimmed,
+          prefix: '<!-- $prefix',
+          isValid: (v) => _isValidEncodedPayload(prefix, v),
+          issueMessage: (v) =>
+              'Slide $slideNumber: `$prefix`-commentaar bevat ongeldige base64/JSON.',
+          line: lineNo(i),
+          issues: issues,
+        );
       }
 
       // The remaining checks are for real markup; inside a fenced code block an

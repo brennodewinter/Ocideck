@@ -112,7 +112,7 @@ const int maxFileLines = 1000;
 /// `lib/l10n/translations/*` is exempt — those files grow with every UI string.
 const Map<String, int> fileSizeBaseline = {
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
-  'lib/models/slide.dart': 1004,
+  'lib/models/slide.dart': 975,
   // Procesverbetering module card / reveal wiring in the shell.
   // +1 (#1037): the url_launcher_util import so the play-only landing can open
   // slide links in the browser, like every other presentation surface. The file
@@ -130,7 +130,7 @@ const Map<String, int> fileSizeBaseline = {
   // +4 (#1098): imports voor de uitbreidingspoort en het rechtenoverzicht voor
   // afbeeldingen; het gedrag zelf blijft in losse providers en widgets.
   'lib/widgets/app_shell.dart':
-      840, // +4 (#978 Blok C): imports + part 'provenance_actions'; +1 (video-calls F1): call_panel import
+      806, // +4 (#978 Blok C): imports + part 'provenance_actions'; +1 (video-calls F1): call_panel import
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
   // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
   // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped
@@ -140,12 +140,12 @@ const Map<String, int> fileSizeBaseline = {
   // +4 (#977): the chat rail spread into the workspace row; its logic lives in
   // `collabChatRail` in collab_chat_panel.dart, only the spread + note remain.
   'lib/widgets/app_shell_main_layout.dart':
-      1023, // +6 (#978 Blok C): _signProvenance-delegator (zware logica in provenance_actions.dart); +1 (video-calls F1): callRail spread
+      985, // +6 (#978 Blok C): _signProvenance-delegator (zware logica in provenance_actions.dart); +1 (video-calls F1): callRail spread
   // Procesverbetering category tab + engine types in the add-slide picker.
-  'lib/widgets/dialogs/add_slide_dialog.dart': 1094,
+  'lib/widgets/dialogs/add_slide_dialog.dart': 1084,
   // chart_preview_improvement part registration + improvement ChartType switch.
   // +Y-01-parameter; improvement cases in improvement_dispatch.dart (part).
-  'lib/widgets/slides/slide_preview.dart': 1039,
+  'lib/widgets/slides/slide_preview.dart': 1037,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -182,7 +182,7 @@ const Map<String, int> classSizeBaseline = {
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
-      5974, // +1 (video-calls F1): ModuleId.videoCalls switch-case
+      5913, // +1 (video-calls F1): ModuleId.videoCalls switch-case
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
@@ -195,7 +195,7 @@ const Map<String, int> classSizeBaseline = {
   // +1: Y-01-doorvoer naar SlidePreview in views/overlays (resolve-at-draw).
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
       3311,
-  'lib/services/file_service.dart#FileService': 2800,
+  'lib/services/file_service.dart#FileService': 2747,
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on
   // this State via chart_preview_improvement.dart. Raising rather than a
@@ -207,24 +207,24 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 2868,
   // Procesverbetering: improvement-slide discovery + save paths.
   // +4: Y-01/framework-args op newDeck + improvement-module-prompt.
-  'lib/state/tabs_provider.dart#TabsNotifier': 2243,
+  'lib/state/tabs_provider.dart#TabsNotifier': 2235,
   // Procesverbetering: matrix/canvas/tree/flow/phaseGate serialize/parse.
   // +33: Y-01 front-matter keys (name/unit/usl/lsl/target/baseline/goal).
-  'lib/services/markdown_service.dart#MarkdownService': 2412,
+  'lib/services/markdown_service.dart#MarkdownService': 2407,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
-      2160,
+      2145,
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
   // +7 (#1098): menu- en dialoogaanroepen voor het rechtenoverzicht; de scan en
   // beoordeling leven buiten de State in providers en services.
   'lib/widgets/app_shell.dart#_MainLayoutState':
-      1457, // +1 (video-calls F1): callRail spread
+      1449, // +1 (video-calls F1): callRail spread
   // Bewust verhoogd van 1331 naar 1344: het app-globale Matrix-account
   // (setMatrixAccount + de keychain-getters voor het access-token) spiegelt
   // bewust de bestaande AI- en git-account-setters. Het gedrag staat in de
   // part `settings_provider_matrix.dart`, maar telt mee voor de klasse; het
   // laadwerk (aiSettings + matrixAccount) ging in dezelfde wijziging naar
   // top-level helpers, wat de netto groei drukte.
-  'lib/state/settings_provider.dart#SettingsNotifier': 1344,
+  'lib/state/settings_provider.dart#SettingsNotifier': 1342,
   // Bewust verhoogd van 1256 naar 1261 (#651): `setDismissals` is een nieuwe
   // openbare mogelijkheid, geen drift. In dezelfde wijziging ging er 24 regels
   // uit — de vier identieke regels die annotaties, notities en terzijdeleggingen
@@ -235,7 +235,7 @@ const Map<String, int> classSizeBaseline = {
   'lib/state/deck_provider.dart#DeckNotifier':
       1275, // +14 (#978 Blok C): applyProvenance
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
-  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1122,
+  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1120,
   // Procesverbetering: Y-01-UI, type-toolbar, plaklogica en DOE-dialoog zijn
   // naar losse widgets/helpers getild (chart_histogram_limits,
   // chart_type_toolbar, table_clipboard, DoeDesignDialog). Plafond verlaagd
@@ -245,7 +245,7 @@ const Map<String, int> classSizeBaseline = {
   // overlay. The overlay's real work (filter + Stack + dots) lives in the
   // top-level `slideWithPresence` in slide_presence_dots.dart; only the per-item
   // read and the wrap call remain in the state class.
-  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1034,
+  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1024,
 };
 
 final _print = RegExp(r'(?<![\w.])print\(');

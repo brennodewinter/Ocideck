@@ -529,13 +529,9 @@ Future<_RemoteConflict?> _showRemoteConflictDialog(BuildContext context) {
 }
 
 /// Maak een veilige bestandsnaam (zonder extensie) uit een deck-titel.
-String _safeRemoteName(String title) {
-  final cleaned = title
-      .replaceAll(RegExp(r'[^\w\s-]'), '')
-      .replaceAll(RegExp(r'\s+'), '_')
-      .trim();
-  return cleaned.isEmpty ? 'presentatie' : cleaned;
-}
+/// Gedeelde sanitizer uit `lib/utils/safe_filename.dart`.
+String _safeRemoteName(String title) =>
+    sanitizeFilename(title, fallback: 'presentatie');
 
 /// Keuze uit het opslaan-dialoog: formaat plus doelpad (zonder extensie,
 /// relatief aan de wortelmap).

@@ -336,17 +336,10 @@ void _assertArchiveWithinBudget(Archive archive, int budgetBytes) {
   }
 }
 
-/// Maak van een deck-titel een veilige bestandsnaam-stam: strip alles buiten
-/// `[\w\s-]`, spaties naar `_`. Valt terug op `presentatie`. Top-level in de
-/// library, zodat élk `part`-bestand hem deelt zonder de FileService-klasse te
-/// laten groeien.
-String _safeName(String title) {
-  final cleaned = title
-      .replaceAll(RegExp(r'[^\w\s-]'), '')
-      .replaceAll(RegExp(r'\s+'), '_')
-      .trim();
-  return cleaned.isEmpty ? 'presentatie' : cleaned;
-}
+/// Maak van een deck-titel een veilige bestandsnaam-stam. Gedeelde
+/// sanitizer uit `lib/utils/safe_filename.dart`; valt terug op `presentatie`.
+String _safeName(String title) =>
+    sanitizeFilename(title, fallback: 'presentatie');
 
 /// Sanitize a deck-supplied theme name before it becomes a file name. The
 /// `theme:` front-matter value is attacker-controlled, so `../` and other
@@ -354,13 +347,8 @@ String _safeName(String title) {
 /// `themes/` directory (p.join collapses `../` on join). Falls back to
 /// `ocideck`. Strips the same characters as [_safeName]; `.` and `/` are not
 /// in `[\w\s-]`, so any traversal sequence is flattened away.
-String _safeThemeName(String themeName) {
-  final cleaned = themeName
-      .replaceAll(RegExp(r'[^\w\s-]'), '')
-      .replaceAll(RegExp(r'\s+'), '_')
-      .trim();
-  return cleaned.isEmpty ? 'ocideck' : cleaned;
-}
+String _safeThemeName(String themeName) =>
+    sanitizeFilename(themeName, fallback: 'ocideck');
 
 /// Schrijf de data van één grafiek als lid onder `data/` en geef het lidpad
 /// terug; [added] houdt naamconflicten uit elkaar.
@@ -414,12 +402,6 @@ String _freeArchivePath(Set<String> added, String subdir, String abs) {
   return rel;
 }
 
-/// Thrown by [_CappedOutputStream] when a decompressed entry would exceed its
-/// byte budget — the signal that a package entry is a decompression bomb.
-class _ExtractionLimitException implements Exception {
-  const _ExtractionLimitException();
-}
-
 /// Thrown while building a package when the assets would push it past
 /// [FileService.maxPackageBytes] — the very limit the importer enforces
 /// ([tabs_provider_import]). Without this a single big video could produce a
@@ -452,7 +434,7 @@ class _CappedOutputStream extends OutputMemoryStream {
   final int limit;
 
   void _guard(int add) {
-    if (length + add > limit) throw const _ExtractionLimitException();
+    if (length + add > limit) throw const ExtractionLimitException();
   }
 
   @override

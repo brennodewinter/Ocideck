@@ -8,6 +8,7 @@ import 'package:xml/xml.dart';
 import '../models/webdav_settings.dart';
 import '../utils/log.dart';
 import '../utils/net_guard.dart';
+import '../utils/pinned_http_client.dart';
 import 'file_service.dart';
 import 'net/transport_failure.dart';
 
@@ -242,13 +243,7 @@ class WebdavService {
       };
     }
     final pinned = resolved.addresses!.first;
-    return HttpClient()
-      ..connectionTimeout = const Duration(seconds: 15)
-      ..connectionFactory = (u, proxyHost, proxyPort) => NetGuard.connectPinned(
-        pinned,
-        u,
-        onBadCertificate: NetGuard.pinnedCertCheck(server.pinnedCertSha256),
-      );
+    return buildPinnedClient(pinned, pinnedCertSha256: server.pinnedCertSha256);
   }
 
   Future<HttpClientRequest> _openRequest(

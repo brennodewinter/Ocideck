@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:image/image.dart' as img;
 
 import '../utils/image_limits.dart';
+import '../utils/image_resize.dart';
 import '../utils/log.dart';
 
 /// De langste zijde waarop een afbeelding het HTML-document in gaat.
@@ -82,22 +83,7 @@ HtmlEmbeddedImage? encodeForHtmlEmbed(Uint8List bytes, String source) {
     }
     final decoded = img.decodeImage(bytes);
     if (decoded == null) return null;
-    final longest = decoded.width >= decoded.height
-        ? decoded.width
-        : decoded.height;
-    final scaled = longest <= kHtmlEmbedMaxEdge
-        ? decoded
-        : (decoded.width >= decoded.height
-              ? img.copyResize(
-                  decoded,
-                  width: kHtmlEmbedMaxEdge,
-                  interpolation: img.Interpolation.average,
-                )
-              : img.copyResize(
-                  decoded,
-                  height: kHtmlEmbedMaxEdge,
-                  interpolation: img.Interpolation.average,
-                ));
+    final scaled = resizeLongestEdge(decoded, kHtmlEmbedMaxEdge);
     // De metadata er expliciet afhalen. Opnieuw coderen doet dat NIET vanzelf:
     // de decoder leest de EXIF in en de encoder schrijft hem gewoon terug, dus
     // zonder deze twee regels reisde het cameramodel — en met een echte foto de

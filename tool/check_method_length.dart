@@ -40,16 +40,16 @@ const Map<String, int> methodLengthBaseline = {
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,
   // +1: Y-01 uit export-markdown voor resolve-at-draw in chart SVG.
-  'lib/services/marp_html_service.dart::MarpHtmlService.build': 155,
+  'lib/services/marp_html_service.dart::MarpHtmlService.build': 132,
   // Procesverbetering engine thumbnails in the add-slide picker.
   'lib/widgets/dialogs/add_slide_dialog.dart::SlideTypePreviewPainter.paint':
-      157,
+      126,
   // Procesverbetering project-wizard entry on the welcome column.
-  'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen._startColumn': 165,
+  'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen._startColumn': 118,
   // Procesverbetering preview switch for matrix/canvas/tree/flow/phaseGate.
   // Verlaagd van 165: improvement-cases naar improvement_dispatch.dart.
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
-      153,
+      148,
 };
 
 bool _isTranslationData(String path) =>

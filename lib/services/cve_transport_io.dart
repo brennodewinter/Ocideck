@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:typed_data' show BytesBuilder;
 
 import '../utils/net_guard.dart';
+import '../utils/pinned_http_client.dart';
 import 'cve_transport.dart';
 
 /// The platform transport on dart:io targets (desktop/mobile).
@@ -31,9 +31,10 @@ class PinnedCveTransport implements CveTransport {
     }
     final pinned = safe.first;
 
-    final client = HttpClient()
-      ..connectionTimeout = const Duration(seconds: 12)
-      ..connectionFactory = (u, _, _) => NetGuard.connectPinned(pinned, u);
+    final client = buildPinnedClient(
+      pinned,
+      connectionTimeout: const Duration(seconds: 12),
+    );
     try {
       final request = await client.getUrl(uri);
       request.followRedirects = false;

@@ -93,20 +93,24 @@ void main() {
     // net_guard.dart staat wél op de allowlist hierboven maar construeert zelf
     // geen client — het levert de `connectionFactory` die de andere gebruiken.
     'lib/utils/net_guard.dart': 0,
+    // De gedeelde pinning-helper: bouwt de HttpClient die de vijf transports
+    // (cve, git, matrix, webdav, s3) delen. De resolve + scheme-check +
+    // body-cap blijven per transport; alleen het recept staat hier.
+    'lib/utils/pinned_http_client.dart': 1,
     // De gepinde fetch achter guardedNetworkImage.
     'lib/utils/media_fetch_io.dart': 1,
     'lib/services/file/file_service_import.dart': 1,
-    'lib/services/webdav_service.dart': 1,
-    'lib/services/s3/s3_service.dart': 1,
+    'lib/services/webdav_service.dart': 0,
+    'lib/services/s3/s3_service.dart': 0,
     'lib/services/ai_client_service.dart': 1,
-    'lib/services/cve_transport_io.dart': 1,
+    'lib/services/cve_transport_io.dart': 0,
     // Twee: `getJson` en `download` openen elk hun eigen client, en beide laten
     // hem door `_get` pinnen — één keer per redirect-hop.
     'lib/services/cve/local_cve_database_io.dart': 2,
-    'lib/services/git/git_transport_io.dart': 1,
+    'lib/services/git/git_transport_io.dart': 0,
     // Matrix relay egress (desktop): één gepinde client op de homeserver-origin,
     // safeResolve(Trusted) + connectPinned + geen redirects + bytecap.
-    'lib/collab/matrix_http_transport_io.dart': 1,
+    'lib/collab/matrix_http_transport_io.dart': 0,
     // XMPP-over-WebSocket egress (desktop): één gepinde client op de
     // wss-endpoint-origin, resolveConfigured + connectPinned + een fail-closed
     // schema-assert; WebSocket.connect gebruikt deze customClient.
@@ -139,6 +143,10 @@ void main() {
       sink: RegExp(r'HttpClient\('),
       allowedFiles: {
         'lib/utils/net_guard.dart',
+        // De gedeelde pinning-helper die de vijf transports delen. De resolve
+        // + scheme-check + body-cap blijven per transport; alleen het
+        // HttpClient-bouw-recept staat hier.
+        'lib/utils/pinned_http_client.dart',
         // guardedNetworkImage: haalt de bytes van een remote dia-afbeelding
         // zélf op — safeResolve + connectPinned + geen redirects + bytecap —
         // in plaats van NetworkImage de hostnaam nóg eens te laten opzoeken.
