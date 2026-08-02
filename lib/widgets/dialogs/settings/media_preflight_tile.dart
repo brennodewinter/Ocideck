@@ -22,7 +22,10 @@ typedef MediaCoreFactory = MeetingMediaCore Function();
 MeetingMediaCore _defaultMediaCore() => WebrtcMediaCore();
 
 class MediaPreflightTile extends StatefulWidget {
-  const MediaPreflightTile({super.key, this.createMediaCore = _defaultMediaCore});
+  const MediaPreflightTile({
+    super.key,
+    this.createMediaCore = _defaultMediaCore,
+  });
 
   final MediaCoreFactory createMediaCore;
 
