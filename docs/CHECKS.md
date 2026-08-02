@@ -1432,6 +1432,44 @@ that reaches beyond `build/test_cache`.
   each other; rapid merges do supersede one another (the latest run tests the
   newest tip, which is what "is `main` green?" asks).
 
+### `.forgejo/workflows/ci-image.yml` — the prebaked Linux CI image (`workflow_dispatch` + on pin/Dockerfile change)
+
+The three Linux workflows above each run in a bare `ubuntu:24.04` and rebuild
+the same environment every run: install the apt build-tools, fetch and unpack
+the official Flutter, precache the Linux desktop artifacts. That is identical
+work with an identical result — so it is baked once instead of repeated. This
+workflow builds `.forgejo/ci-image/Dockerfile` and pushes it to the project's
+own Forgejo registry as
+`pawprint.vigilis.online/librekat/ocideck-ci:flutter-<pin>`.
+
+- **What the image carries:** the *slow-changing* toolchain — the OS, the fixed
+  apt `.deb` list, the pinned Flutter (official stable, sha256-verified **at
+  build time** against the release manifest), and `flutter precache --linux`.
+  What it deliberately does **not** carry: the repo-coupled artifacts (pub
+  packages, the dartcv OpenCV build), which move with `pubspec.lock` and stay on
+  `actions/cache` in the gate workflows — a toolchain image must not need a
+  rebuild on every dependency change.
+- **Provenance is unchanged.** The sha256 verification the gates did at download
+  time moved into the image build; `check-toolchain` still runs *in the gate* on
+  the baked Flutter and still demands channel `stable`, official origin and
+  equality with the pin. An image carrying anything else falls over on the same
+  gate that once rejected the cirruslabs image.
+- **Pin coupling.** The Flutter version is a build-arg read from `.tool-versions`,
+  and the image tag *is* that version (`flutter-<pin>`). A pin bump publishes a
+  new tag; the workflow fires automatically on a change to the Dockerfile or
+  `.tool-versions`, so the image cannot silently lag the pin. The gate workflows
+  reference that same tag (see the follow-up that switches them over).
+- **Trust boundary.** Same as the runner and the existing `actions/cache`: our
+  own job builds the image on our own runner and pushes it to our own registry —
+  no new party.
+- **One-time setup** (either route): a repo secret `CI_IMAGE_TOKEN` (a Forgejo
+  token with `write:package`) for the workflow, **or** `make ci-image-publish`
+  from a machine with docker/colima (it cross-builds `linux/amd64`, since the
+  runner is amd64); then set the published package to **public** so the gate
+  workflows can pull it without credentials. Until the image exists and the gates
+  are switched over (a separate PR), the gates keep installing the toolchain per
+  run as before — introducing the image cannot break CI on its own.
+
 ### `.forgejo/workflows/linux-build.yml` — on demand (`workflow_dispatch`)
 - **build-linux** — same official pinned toolchain as the gate, plus the GTK
   build dependencies; `flutter build linux --release`, then
