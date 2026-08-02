@@ -243,10 +243,7 @@ class WebdavService {
       };
     }
     final pinned = resolved.addresses!.first;
-    return buildPinnedHttpClient(
-      pinned,
-      pinnedCertSha256: server.pinnedCertSha256,
-    );
+    return buildPinnedClient(pinned, pinnedCertSha256: server.pinnedCertSha256);
   }
 
   Future<HttpClientRequest> _openRequest(

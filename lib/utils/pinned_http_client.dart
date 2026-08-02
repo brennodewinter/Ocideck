@@ -12,7 +12,10 @@ import 'net_guard.dart';
 /// wijziging aan het pinning-recept is hier één diff in plaats van vijf, wat
 /// precies de fout is die duplicaat van beveiligingscode maakt: één kopie die
 /// niet meekomt bij een fix.
-HttpClient buildPinnedHttpClient(
+///
+/// De aanroeper zet per request `followRedirects = false` — een 3xx mag niet
+/// om de hostcontrole heen lopen (zie network_sink_guard_test).
+HttpClient buildPinnedClient(
   InternetAddress pinnedAddress, {
   Duration connectionTimeout = const Duration(seconds: 15),
   String? pinnedCertSha256,

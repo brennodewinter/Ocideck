@@ -31,7 +31,7 @@ class PinnedCveTransport implements CveTransport {
     }
     final pinned = safe.first;
 
-    final client = buildPinnedHttpClient(
+    final client = buildPinnedClient(
       pinned,
       connectionTimeout: const Duration(seconds: 12),
     );

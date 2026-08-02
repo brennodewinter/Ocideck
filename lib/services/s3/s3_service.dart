@@ -221,10 +221,7 @@ class S3Service {
       };
     }
     final pinned = resolved.addresses!.first;
-    return buildPinnedHttpClient(
-      pinned,
-      pinnedCertSha256: bucket.pinnedCertSha256,
-    );
+    return buildPinnedClient(pinned, pinnedCertSha256: bucket.pinnedCertSha256);
   }
 
   /// De `Host`-header zoals `HttpClient` hem zal versturen. Moet exact zo mee

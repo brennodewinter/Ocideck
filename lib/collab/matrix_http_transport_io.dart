@@ -143,7 +143,7 @@ class PinnedMatrixHttpTransport implements MatrixHttpTransport {
       };
     }
     final pinned = resolved.addresses!.first;
-    final client = buildPinnedHttpClient(
+    final client = buildPinnedClient(
       pinned,
       pinnedCertSha256: server.pinnedCertSha256,
     );

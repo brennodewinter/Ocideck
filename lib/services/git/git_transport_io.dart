@@ -192,7 +192,7 @@ class PinnedGitTransport implements GitTransport {
       };
     }
     final pinned = resolved.addresses!.first;
-    final client = buildPinnedHttpClient(
+    final client = buildPinnedClient(
       pinned,
       pinnedCertSha256: config.pinnedCertSha256,
     );
