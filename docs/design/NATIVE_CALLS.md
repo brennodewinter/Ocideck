@@ -241,6 +241,39 @@ exclusivity invariant:
 - **The interface of §3 is unaffected.** The spine choice changes which
   `CollabTransport` carries the data plane, not the call UI.
 
+### 5.1 Companion channel — OciDeck's control plane rides a *separate* room (decided 2026-08-02)
+
+OciDeck's data plane (presenter-sync, ops, chat, presence) does **not** go into
+the Jitsi conference's own MUC. It rides a **separate companion MUC** on the same
+XMPP server, paired with the conference. This keeps OciDeck's traffic out of the
+call the rest of the participants are in:
+
+- **Non-OciDeck participants are undisturbed.** They are in the Jitsi conference
+  room only and never see OciDeck's `nl.ocideck.*` events, presence extensions or
+  ops. A plain Jitsi/browser user in the same call notices nothing — no stray
+  presence, no unknown messages.
+- **OciDeck participants discover each other.** Presence in the companion room is
+  exactly "who in this call also runs OciDeck." Presenter-sync, follow-mode and
+  co-authoring run among *those* participants; everyone else just sees the shared
+  screen/video like any Jitsi call.
+- **The two streams stay apart.** Media and roster are the Jitsi conference
+  (`MeetingSession`, §3); the OciDeck control plane is the companion room
+  (`CollabTransport` over XMPP, §5). Same server, same connection, **two MUCs** —
+  the two-seams model (§1) expressed as two rooms rather than one shared room.
+- **Backend exclusivity holds (§8).** Both rooms are XMPP/Jitsi-mode; nothing
+  crosses into a Matrix room. In Matrix mode the analogue is a separate Matrix
+  room for the control plane alongside the MatrixRTC call — the same shape.
+
+**Pairing (open detail for F3).** The companion room must be findable without a
+central registry (P1). The natural default is a **deterministic derivation from
+the already-shared conference URL** (e.g. a stable hash of the conference host +
+room into a companion room name), so two OciDeck clients that hold the same Jitsi
+link compute the same companion room and meet there. A later refinement can let
+the presenter announce/verify the companion room explicitly. The derivation must
+not leak the conference identity to anyone who doesn't already hold the link, and
+the companion room inherits the same `MeetingProviderProfile`/NetGuard posture as
+the signalling origin (§8).
+
 ---
 
 ## 6. Design principles (inherited)
