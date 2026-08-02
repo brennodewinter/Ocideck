@@ -21,39 +21,43 @@ class BulletMarkerSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           l10n.d('Opsommingsteken'),
           style: Theme.of(context).textTheme.bodyMedium,
         ),
-        const SizedBox(width: 12),
-        SegmentedButton<String>(
-          segments: [
-            ButtonSegment(
-              value: _inherit,
-              icon: const Icon(Icons.brush_outlined, size: 18),
-              label: Text(l10n.d('Thema')),
-            ),
-            ButtonSegment(
-              value: BulletMarker.dot.name,
-              icon: const Icon(Icons.fiber_manual_record, size: 12),
-              label: Text(l10n.d('Stip')),
-            ),
-            ButtonSegment(
-              value: BulletMarker.paw.name,
-              icon: const Icon(Icons.pets, size: 18),
-              label: Text(l10n.d('Pootje')),
-            ),
-          ],
-          selected: {value?.name ?? _inherit},
-          showSelectedIcon: false,
-          onSelectionChanged: (selection) {
-            final picked = selection.first;
-            onChanged(
-              picked == _inherit ? null : BulletMarker.values.byName(picked),
-            );
-          },
+        const SizedBox(height: 8),
+        SizedBox(
+          width: double.infinity,
+          child: SegmentedButton<String>(
+            segments: [
+              ButtonSegment(
+                value: _inherit,
+                icon: const Icon(Icons.brush_outlined, size: 18),
+                label: Text(l10n.d('Thema')),
+              ),
+              ButtonSegment(
+                value: BulletMarker.dot.name,
+                icon: const Icon(Icons.fiber_manual_record, size: 12),
+                label: Text(l10n.d('Stip')),
+              ),
+              ButtonSegment(
+                value: BulletMarker.paw.name,
+                icon: const Icon(Icons.pets, size: 18),
+                label: Text(l10n.d('Pootje')),
+              ),
+            ],
+            selected: {value?.name ?? _inherit},
+            showSelectedIcon: false,
+            onSelectionChanged: (selection) {
+              final picked = selection.first;
+              onChanged(
+                picked == _inherit ? null : BulletMarker.values.byName(picked),
+              );
+            },
+          ),
         ),
       ],
     );
