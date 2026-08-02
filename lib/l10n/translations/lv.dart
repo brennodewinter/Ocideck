@@ -1770,6 +1770,29 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'XMPP-server testen': 'Pārbaudīt XMPP serveri',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Ievadiet XMPP serveri, Jabber ID un paroli un pārbaudiet savienojumu. Nekas netiek saglabāts; tas tikai pārbauda, vai konts darbojas. Atstājiet Jabber ID tukšu anonīmai piekļuvei.',
+  'Serveradres (wss://…)': 'Servera adrese (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (lietotājs@domēns)',
+  'Verbinden…': 'Savienojas…',
+  'Verbonden — authenticatie geslaagd via':
+      'Savienots — autentifikācija veiksmīga, izmantojot',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Serveris nepiedāvā pieteikšanās metodi, ko atbalsta OciDeck.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Lietotājvārds vai parole netika pieņemta.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Serveris nevarēja apliecināt savu identitāti (savstarpējā autentifikācija neizdevās).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Serveris vēlējās novirzīt savienojumu uz citu resursdatoru; atteikts.',
+  'De server reageerde niet op tijd.': 'Serveris neatbildēja laikā.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Neizdevās izveidot savienojumu ar serveri. Izmantojiet wss:// un derīgu adresi.',
+  'De verbinding met de server mislukte.': 'Savienojums ar serveri neizdevās.',
+  'XMPP-verbinding testen': 'Pārbaudīt XMPP savienojumu',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Pārbaudiet, vai OciDeck var sasniegt XMPP serveri un pieteikties ar jūsu kontu. Nekas netiek saglabāts.',
   'Actueel': 'Pašreizējais',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Avota režīms bez zudumiem aizsargā formatējumu, ko vizuālais redaktors vēl neatbalsta.',

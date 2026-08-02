@@ -1771,6 +1771,29 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'XMPP-server testen': 'Uji server XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Masukkan server XMPP, Jabber ID, dan kata sandi, lalu uji koneksinya. Tidak ada yang disimpan; ini hanya memeriksa apakah akun berfungsi. Biarkan Jabber ID kosong untuk akses anonim.',
+  'Serveradres (wss://…)': 'Alamat server (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (pengguna@domain)',
+  'Verbinden…': 'Menghubungkan…',
+  'Verbonden — authenticatie geslaagd via':
+      'Terhubung — autentikasi berhasil melalui',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Server tidak menawarkan metode masuk yang didukung OciDeck.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Nama pengguna atau kata sandi tidak diterima.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Server tidak dapat membuktikan identitasnya (autentikasi timbal balik gagal).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Server ingin mengalihkan koneksi ke host lain; ditolak.',
+  'De server reageerde niet op tijd.': 'Server tidak merespons tepat waktu.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Tidak dapat terhubung ke server. Gunakan wss:// dan alamat yang valid.',
+  'De verbinding met de server mislukte.': 'Koneksi ke server gagal.',
+  'XMPP-verbinding testen': 'Uji koneksi XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Periksa apakah OciDeck dapat menjangkau server XMPP dan masuk dengan akun Anda. Tidak ada yang disimpan.',
   'Actueel': 'Saat ini',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Mode sumber melindungi pemformatan yang belum didukung oleh editor visual tanpa kehilangan.',

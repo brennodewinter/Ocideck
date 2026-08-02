@@ -911,6 +911,29 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'XMPP-server testen': 'Test XMPP server',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Enter an XMPP server, a Jabber ID and a password, and test the connection. Nothing is stored; this only checks whether the account works. Leave the Jabber ID empty for anonymous access.',
+  'Serveradres (wss://…)': 'Server address (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (user@domain)',
+  'Verbinden…': 'Connecting…',
+  'Verbonden — authenticatie geslaagd via': 'Connected — authenticated via',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'The server offers no login method that OciDeck supports.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'The username or password was not accepted.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'The server could not prove itself (mutual authentication failed).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'The server tried to redirect the connection to another host; refused.',
+  'De server reageerde niet op tijd.': 'The server did not respond in time.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Could not connect to the server. Use wss:// and a valid address.',
+  'De verbinding met de server mislukte.':
+      'The connection to the server failed.',
+  'XMPP-verbinding testen': 'Test XMPP connection',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Check whether OciDeck can reach an XMPP server and log in with your account. Nothing is stored.',
   'Actueel': 'Current',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Source mode protects formatting that the visual editor does not yet support losslessly.',

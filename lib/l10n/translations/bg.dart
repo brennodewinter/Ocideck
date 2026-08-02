@@ -1793,6 +1793,29 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'XMPP-server testen': 'Тест на XMPP сървър',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Въведете XMPP сървър, Jabber ID и парола и тествайте връзката. Нищо не се съхранява; това само проверява дали акаунтът работи. Оставете Jabber ID празно за анонимен достъп.',
+  'Serveradres (wss://…)': 'Адрес на сървъра (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (потребител@домейн)',
+  'Verbinden…': 'Свързване…',
+  'Verbonden — authenticatie geslaagd via':
+      'Свързано — удостоверяването е успешно чрез',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Сървърът не предлага метод за вход, поддържан от OciDeck.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Потребителското име или паролата не бяха приети.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Сървърът не можа да докаже самоличността си (взаимното удостоверяване е неуспешно).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Сървърът поиска да пренасочи връзката към друг хост; отказано.',
+  'De server reageerde niet op tijd.': 'Сървърът не отговори навреме.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Не може да се установи връзка със сървъра. Използвайте wss:// и валиден адрес.',
+  'De verbinding met de server mislukte.': 'Връзката със сървъра е неуспешна.',
+  'XMPP-verbinding testen': 'Тест на XMPP връзка',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Проверете дали OciDeck може да достигне до XMPP сървър и да влезе с вашия акаунт. Нищо не се съхранява.',
   'Actueel': 'Текущ',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Режимът на източника защитава форматирането, което визуалният редактор все още не поддържа без загуби.',

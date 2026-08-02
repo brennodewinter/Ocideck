@@ -1798,6 +1798,30 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'XMPP-server testen': 'Δοκιμή διακομιστή XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Εισαγάγετε έναν διακομιστή XMPP, ένα Jabber ID και έναν κωδικό πρόσβασης και δοκιμάστε τη σύνδεση. Δεν αποθηκεύεται τίποτα· αυτό ελέγχει μόνο αν λειτουργεί ο λογαριασμός. Αφήστε το Jabber ID κενό για ανώνυμη πρόσβαση.',
+  'Serveradres (wss://…)': 'Διεύθυνση διακομιστή (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (χρήστης@τομέας)',
+  'Verbinden…': 'Σύνδεση…',
+  'Verbonden — authenticatie geslaagd via':
+      'Συνδέθηκε — επιτυχής έλεγχος ταυτότητας μέσω',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Ο διακομιστής δεν προσφέρει μέθοδο σύνδεσης που υποστηρίζει το OciDeck.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Το όνομα χρήστη ή ο κωδικός πρόσβασης δεν έγιναν δεκτά.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Ο διακομιστής δεν μπόρεσε να αποδείξει την ταυτότητά του (η αμοιβαία επαλήθευση απέτυχε).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Ο διακομιστής θέλησε να ανακατευθύνει τη σύνδεση σε άλλον κεντρικό υπολογιστή· απορρίφθηκε.',
+  'De server reageerde niet op tijd.': 'Ο διακομιστής δεν απάντησε εγκαίρως.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Δεν ήταν δυνατή η σύνδεση με τον διακομιστή. Χρησιμοποιήστε wss:// και μια έγκυρη διεύθυνση.',
+  'De verbinding met de server mislukte.':
+      'Η σύνδεση με τον διακομιστή απέτυχε.',
+  'XMPP-verbinding testen': 'Δοκιμή σύνδεσης XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Ελέγξτε αν το OciDeck μπορεί να προσεγγίσει έναν διακομιστή XMPP και να συνδεθεί με τον λογαριασμό σας. Δεν αποθηκεύεται τίποτα.',
   'Actueel': 'Τρέχον',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Η λειτουργία πηγής προστατεύει τη μορφοποίηση που το οπτικό πρόγραμμα επεξεργασίας δεν υποστηρίζει ακόμη χωρίς απώλειες.',

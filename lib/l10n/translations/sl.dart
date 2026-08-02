@@ -1773,6 +1773,28 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'XMPP-server testen': 'Preizkusi strežnik XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Vnesite strežnik XMPP, Jabber ID in geslo ter preizkusite povezavo. Nič se ne shrani; to samo preveri, ali račun deluje. Za anonimni dostop pustite Jabber ID prazen.',
+  'Serveradres (wss://…)': 'Naslov strežnika (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (uporabnik@domena)',
+  'Verbinden…': 'Povezovanje…',
+  'Verbonden — authenticatie geslaagd via': 'Povezano — overjeno prek',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Strežnik ne ponuja načina prijave, ki ga OciDeck podpira.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Uporabniško ime ali geslo ni bilo sprejeto.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Strežnik ni mogel dokazati svoje istovetnosti (obojestransko preverjanje ni uspelo).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Strežnik je hotel preusmeriti povezavo na drugega gostitelja; zavrnjeno.',
+  'De server reageerde niet op tijd.': 'Strežnik ni odgovoril pravočasno.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Povezava s strežnikom ni bila mogoča. Uporabite wss:// in veljaven naslov.',
+  'De verbinding met de server mislukte.': 'Povezava s strežnikom ni uspela.',
+  'XMPP-verbinding testen': 'Preizkusi povezavo XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Preverite, ali OciDeck lahko doseže strežnik XMPP in se prijavi z vašim računom. Nič se ne shrani.',
   'Actueel': 'Trenutno',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Izvorni način ščiti oblikovanje, ki ga vizualni urejevalnik še ne podpira brez izgub.',

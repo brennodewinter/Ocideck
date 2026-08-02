@@ -1778,6 +1778,29 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'XMPP-server testen': 'Tikrinti XMPP serverį',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Įveskite XMPP serverį, Jabber ID ir slaptažodį ir patikrinkite ryšį. Niekas neįrašoma; tai tik patikrina, ar paskyra veikia. Palikite Jabber ID tuščią anoniminei prieigai.',
+  'Serveradres (wss://…)': 'Serverio adresas (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (naudotojas@domenas)',
+  'Verbinden…': 'Jungiamasi…',
+  'Verbonden — authenticatie geslaagd via':
+      'Prisijungta — tapatybė patvirtinta naudojant',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Serveris nesiūlo prisijungimo būdo, kurį palaiko OciDeck.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Naudotojo vardas arba slaptažodis nebuvo priimtas.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Serveris negalėjo patvirtinti savo tapatybės (abipusis tapatybės nustatymas nepavyko).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Serveris norėjo peradresuoti ryšį į kitą serverį; atsisakyta.',
+  'De server reageerde niet op tijd.': 'Serveris neatsakė laiku.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Nepavyko prisijungti prie serverio. Naudokite wss:// ir galiojantį adresą.',
+  'De verbinding met de server mislukte.': 'Ryšys su serveriu nepavyko.',
+  'XMPP-verbinding testen': 'Tikrinti XMPP ryšį',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Patikrinkite, ar OciDeck gali pasiekti XMPP serverį ir prisijungti su jūsų paskyra. Niekas neįrašoma.',
   'Actueel': 'Dabartinė',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Šaltinio režimas be nuostolių apsaugo formatavimą, kurio vaizdo redaktorius dar nepalaiko.',

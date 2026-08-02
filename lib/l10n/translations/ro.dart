@@ -1788,6 +1788,28 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'XMPP-server testen': 'Testează serverul XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Introduceți un server XMPP, un Jabber ID și o parolă și testați conexiunea. Nu se stochează nimic; aceasta verifică doar dacă contul funcționează. Lăsați Jabber ID gol pentru acces anonim.',
+  'Serveradres (wss://…)': 'Adresa serverului (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (utilizator@domeniu)',
+  'Verbinden…': 'Se conectează…',
+  'Verbonden — authenticatie geslaagd via': 'Conectat — autentificat prin',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Serverul nu oferă nicio metodă de autentificare acceptată de OciDeck.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Numele de utilizator sau parola nu au fost acceptate.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Serverul nu și-a putut dovedi identitatea (autentificarea reciprocă a eșuat).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Serverul a vrut să redirecționeze conexiunea către altă gazdă; refuzat.',
+  'De server reageerde niet op tijd.': 'Serverul nu a răspuns la timp.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Nu s-a putut conecta la server. Folosiți wss:// și o adresă validă.',
+  'De verbinding met de server mislukte.': 'Conexiunea la server a eșuat.',
+  'XMPP-verbinding testen': 'Testează conexiunea XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Verificați dacă OciDeck poate ajunge la un server XMPP și se poate autentifica cu contul dvs. Nu se stochează nimic.',
   'Actueel': 'Curent',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Modul sursă protejează formatarea pe care editorul vizual nu o acceptă încă fără pierderi.',

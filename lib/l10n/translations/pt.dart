@@ -1800,6 +1800,28 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'XMPP-server testen': 'Testar servidor XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Insira um servidor XMPP, um Jabber ID e uma palavra-passe e teste a ligação. Nada é armazenado; isto apenas verifica se a conta funciona. Deixe o Jabber ID vazio para acesso anónimo.',
+  'Serveradres (wss://…)': 'Endereço do servidor (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (utilizador@domínio)',
+  'Verbinden…': 'A ligar…',
+  'Verbonden — authenticatie geslaagd via': 'Ligado — autenticado através de',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'O servidor não oferece nenhum método de início de sessão suportado pelo OciDeck.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'O nome de utilizador ou a palavra-passe não foi aceite.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'O servidor não conseguiu provar a sua identidade (falhou a autenticação mútua).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'O servidor quis redirecionar a ligação para outro anfitrião; recusado.',
+  'De server reageerde niet op tijd.': 'O servidor não respondeu a tempo.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Não foi possível ligar ao servidor. Utilize wss:// e um endereço válido.',
+  'De verbinding met de server mislukte.': 'A ligação ao servidor falhou.',
+  'XMPP-verbinding testen': 'Testar ligação XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Verifique se o OciDeck consegue alcançar um servidor XMPP e iniciar sessão com a sua conta. Nada é armazenado.',
   'Actueel': 'Atual',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'O modo de origem protege a formatação que o editor visual ainda não suporta sem perdas.',

@@ -730,6 +730,28 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'XMPP-server testen': 'Test e servidó XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Introdusí un servidó XMPP, un Jabber ID i un kontraseña i test e konekshon. No ta wòrdu warda nada; esaki ta kontrolá solamente si e kuenta ta funshoná. Laga e Jabber ID bashí pa akseso anónimo.',
+  'Serveradres (wss://…)': 'Adres di servidó (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (usuario@dominio)',
+  'Verbinden…': 'Konektando…',
+  'Verbonden — authenticatie geslaagd via': 'Konektá — outentikashon lográ via',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'E servidó no ta ofresé ningun método di login ku OciDeck ta soportá.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'E number di usuario òf e kontraseña no a wòrdu aseptá.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'E servidó no por a proba su identidat (verifikashon mutuo a faya).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'E servidó kier a redirigí e konekshon pa un otro host; rechasá.',
+  'De server reageerde niet op tijd.': 'E servidó no a reakshoná na tempu.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'No por a konektá ku e servidó. Usa wss:// i un adres válido.',
+  'De verbinding met de server mislukte.': 'E konekshon ku e servidó a faya.',
+  'XMPP-verbinding testen': 'Test e konekshon XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Kontrolá si OciDeck por yega na un servidó XMPP i login ku bo kuenta. No ta wòrdu warda nada.',
   'Actueel': 'Aktual',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Modo di fuente ta protehá formato ku e editor visual no por konvertí ainda sin pèrdida.',

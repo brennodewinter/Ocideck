@@ -727,6 +727,29 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'XMPP-server testen': 'Probar el servidor XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Introduzca un servidor XMPP, un Jabber ID y una contraseña y pruebe la conexión. No se guarda nada; esto solo comprueba si la cuenta funciona. Deje el Jabber ID vacío para el acceso anónimo.',
+  'Serveradres (wss://…)': 'Dirección del servidor (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (usuario@dominio)',
+  'Verbinden…': 'Conectando…',
+  'Verbonden — authenticatie geslaagd via':
+      'Conectado — autenticación correcta mediante',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'El servidor no ofrece ningún método de inicio de sesión compatible con OciDeck.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'No se aceptó el nombre de usuario o la contraseña.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'El servidor no pudo demostrar su identidad (falló la autenticación mutua).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'El servidor quiso redirigir la conexión a otro host; rechazado.',
+  'De server reageerde niet op tijd.': 'El servidor no respondió a tiempo.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'No se pudo conectar con el servidor. Use wss:// y una dirección válida.',
+  'De verbinding met de server mislukte.': 'La conexión con el servidor falló.',
+  'XMPP-verbinding testen': 'Probar la conexión XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Compruebe si OciDeck puede llegar a un servidor XMPP e iniciar sesión con su cuenta. No se guarda nada.',
   'Actueel': 'Actual',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'El modo fuente protege el formato que el editor visual aún no admite sin pérdidas.',

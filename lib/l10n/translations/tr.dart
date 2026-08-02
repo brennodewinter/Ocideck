@@ -2748,6 +2748,29 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'XMPP-server testen': 'XMPP sunucusunu test et',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Bir XMPP sunucusu, bir Jabber ID ve bir parola girin ve bağlantıyı test edin. Hiçbir şey saklanmaz; bu yalnızca hesabın çalışıp çalışmadığını kontrol eder. Anonim erişim için Jabber ID\'yi boş bırakın.',
+  'Serveradres (wss://…)': 'Sunucu adresi (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (kullanıcı@alanadı)',
+  'Verbinden…': 'Bağlanıyor…',
+  'Verbonden — authenticatie geslaagd via':
+      'Bağlandı — kimlik doğrulaması şu yöntemle başarılı:',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Sunucu, OciDeck\'in desteklediği bir oturum açma yöntemi sunmuyor.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Kullanıcı adı veya parola kabul edilmedi.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Sunucu kimliğini kanıtlayamadı (karşılıklı kimlik doğrulama başarısız).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Sunucu bağlantıyı başka bir ana bilgisayara yönlendirmek istedi; reddedildi.',
+  'De server reageerde niet op tijd.': 'Sunucu zamanında yanıt vermedi.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Sunucuya bağlanılamadı. wss:// ve geçerli bir adres kullanın.',
+  'De verbinding met de server mislukte.': 'Sunucuya bağlantı başarısız oldu.',
+  'XMPP-verbinding testen': 'XMPP bağlantısını test et',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'OciDeck\'in bir XMPP sunucusuna ulaşıp ulaşamadığını ve hesabınızla oturum açıp açamadığını kontrol edin. Hiçbir şey saklanmaz.',
   'Actueel': 'Mevcut',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Kaynak modu, görsel düzenleyicinin henüz desteklemediği biçimlendirmeyi kayıpsız bir şekilde korur.',

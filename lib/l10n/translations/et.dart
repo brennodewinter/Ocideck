@@ -1762,6 +1762,29 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'XMPP-server testen': 'Testi XMPP-serverit',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Sisestage XMPP-server, Jabber ID ja parool ning testige ühendust. Midagi ei salvestata; see üksnes kontrollib, kas konto töötab. Anonüümseks juurdepääsuks jätke Jabber ID tühjaks.',
+  'Serveradres (wss://…)': 'Serveri aadress (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (kasutaja@domeen)',
+  'Verbinden…': 'Ühendamine…',
+  'Verbonden — authenticatie geslaagd via':
+      'Ühendatud — autentimine õnnestus meetodiga',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Server ei paku ühtegi sisselogimisviisi, mida OciDeck toetab.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Kasutajanime või parooli ei aktsepteeritud.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Server ei suutnud oma identiteeti tõestada (vastastikune autentimine ebaõnnestus).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Server soovis suunata ühenduse teise hosti; keeldutud.',
+  'De server reageerde niet op tijd.': 'Server ei vastanud õigeaegselt.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Serveriga ei õnnestunud ühendust luua. Kasutage wss:// ja kehtivat aadressi.',
+  'De verbinding met de server mislukte.': 'Ühendus serveriga ebaõnnestus.',
+  'XMPP-verbinding testen': 'Testi XMPP-ühendust',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Kontrollige, kas OciDeck jõuab XMPP-serverini ja saab teie kontoga sisse logida. Midagi ei salvestata.',
   'Actueel': 'Praegune',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Allikarežiim kaitseb kadudeta vormindamist, mida visuaalne redaktor veel ei toeta.',

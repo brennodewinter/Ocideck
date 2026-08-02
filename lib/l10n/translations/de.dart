@@ -730,6 +730,31 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'XMPP-server testen': 'XMPP-Server testen',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Geben Sie einen XMPP-Server, eine Jabber-ID und ein Passwort ein und testen Sie die Verbindung. Es wird nichts gespeichert; dies prüft nur, ob das Konto funktioniert. Lassen Sie die Jabber-ID für anonymen Zugang leer.',
+  'Serveradres (wss://…)': 'Serveradresse (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber-ID (benutzer@domäne)',
+  'Verbinden…': 'Verbinden…',
+  'Verbonden — authenticatie geslaagd via':
+      'Verbunden — Authentifizierung erfolgreich über',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Der Server bietet keine von OciDeck unterstützte Anmeldemethode.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Benutzername oder Passwort wurde nicht akzeptiert.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Der Server konnte sich nicht ausweisen (gegenseitige Authentifizierung fehlgeschlagen).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Der Server wollte die Verbindung auf einen anderen Host umleiten; abgelehnt.',
+  'De server reageerde niet op tijd.':
+      'Der Server hat nicht rechtzeitig geantwortet.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Es konnte keine Verbindung zum Server hergestellt werden. Verwenden Sie wss:// und eine gültige Adresse.',
+  'De verbinding met de server mislukte.':
+      'Die Verbindung zum Server ist fehlgeschlagen.',
+  'XMPP-verbinding testen': 'XMPP-Verbindung testen',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Prüfen Sie, ob OciDeck einen XMPP-Server erreichen und sich mit Ihrem Konto anmelden kann. Es wird nichts gespeichert.',
   'Actueel': 'Aktuell',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Der Quellmodus schützt Formatierungen, die der visuelle Editor noch nicht unterstützt, verlustfrei.',

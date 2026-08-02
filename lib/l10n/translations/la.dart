@@ -1787,6 +1787,29 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'XMPP-server testen': 'Server XMPP probare',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Servrum XMPP, Jabber-ID et tesseram insere ac nexum proba. Nihil servatur; hoc tantum probat num ratio operetur. Jabber-ID vacuam relinque ad accessum anonymum.',
+  'Serveradres (wss://…)': 'Inscriptio servri (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber-ID (usor@dominium)',
+  'Verbinden…': 'Conectens…',
+  'Verbonden — authenticatie geslaagd via':
+      'Conexum — authenticatio successit per',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Server nullam rationem ineundi praebet quam OciDeck sustinet.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Nomen usoris vel tessera non accepta est.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Server se probare non potuit (mutua authenticatio defecit).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Server nexum ad alium hospitem deflectere voluit; recusatum.',
+  'De server reageerde niet op tijd.': 'Server tempore non respondit.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Nexus cum servro fieri non potuit. Utere wss:// et inscriptione valida.',
+  'De verbinding met de server mislukte.': 'Nexus cum servro defecit.',
+  'XMPP-verbinding testen': 'Nexum XMPP probare',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Proba num OciDeck servrum XMPP attingere et ratione tua inire possit. Nihil servatur.',
   'Actueel': 'Current',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Fons modus servat formatting quod editor visualis nondum incommodum sustinet.',

@@ -1793,6 +1793,29 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'XMPP-server testen': 'Ittestja s-server XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Daħħal server XMPP, Jabber ID u password u ttestja l-konnessjoni. Ma jinħażen xejn; dan jiċċekkja biss jekk il-kont jaħdimx. Ħalli l-Jabber ID vojt għal aċċess anonimu.',
+  'Serveradres (wss://…)': 'Indirizz tas-server (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (utent@dominju)',
+  'Verbinden…': 'Qed jgħaqqad…',
+  'Verbonden — authenticatie geslaagd via':
+      'Konness — awtentikazzjoni rnexxiet permezz ta\'',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Is-server ma joffri l-ebda metodu ta\' login li OciDeck jappoġġja.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'L-isem tal-utent jew il-password ma ġewx aċċettati.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Is-server ma setax jipprova l-identità tiegħu (l-awtentikazzjoni reċiproka falliet).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Is-server ried jerġa\' jidderieġi l-konnessjoni għal host ieħor; irrifjutat.',
+  'De server reageerde niet op tijd.': 'Is-server ma weġibx fil-ħin.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Ma setax jsir kollegament mas-server. Uża wss:// u indirizz validu.',
+  'De verbinding met de server mislukte.': 'Il-konnessjoni mas-server falliet.',
+  'XMPP-verbinding testen': 'Ittestja l-konnessjoni XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Iċċekkja jekk OciDeck jistax jilħaq server XMPP u jidħol bil-kont tiegħek. Ma jinħażen xejn.',
   'Actueel': 'Kurrenti',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Il-mod tas-sors jipproteġi l-ifformattjar li l-editur viżwali għadu ma jappoġġjax mingħajr telf.',

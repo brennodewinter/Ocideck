@@ -726,6 +726,30 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'XMPP-server testen': 'Prova il server XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Inserisci un server XMPP, un Jabber ID e una password e prova la connessione. Non viene memorizzato nulla; questo verifica solo se l\'account funziona. Lascia vuoto il Jabber ID per l\'accesso anonimo.',
+  'Serveradres (wss://…)': 'Indirizzo del server (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (utente@dominio)',
+  'Verbinden…': 'Connessione…',
+  'Verbonden — authenticatie geslaagd via':
+      'Connesso — autenticazione riuscita tramite',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Il server non offre alcun metodo di accesso supportato da OciDeck.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Nome utente o password non accettati.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Il server non è riuscito a dimostrare la propria identità (autenticazione reciproca non riuscita).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Il server ha tentato di reindirizzare la connessione a un altro host; rifiutato.',
+  'De server reageerde niet op tijd.': 'Il server non ha risposto in tempo.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Impossibile connettersi al server. Usa wss:// e un indirizzo valido.',
+  'De verbinding met de server mislukte.':
+      'La connessione al server non è riuscita.',
+  'XMPP-verbinding testen': 'Prova la connessione XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Verifica se OciDeck riesce a raggiungere un server XMPP e ad accedere con il tuo account. Non viene memorizzato nulla.',
   'Actueel': 'Corrente',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'La modalità sorgente protegge la formattazione che l\'editor visivo non supporta ancora senza perdita di dati.',

@@ -1806,6 +1806,29 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'XMPP-server testen': 'Tástáil freastalaí XMPP',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Iontráil freastalaí XMPP, Jabber ID agus pasfhocal, agus tástáil an nasc. Ní stóráiltear aon rud; ní dhéanann sé seo ach seiceáil an bhfuil an cuntas ag obair. Fág an Jabber ID folamh le haghaidh rochtana gan ainm.',
+  'Serveradres (wss://…)': 'Seoladh an fhreastalaí (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber ID (úsáideoir@fearann)',
+  'Verbinden…': 'Ag nascadh…',
+  'Verbonden — authenticatie geslaagd via': 'Ceangailte — fíordheimhníodh trí',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Ní thairgeann an freastalaí modh logála isteach a dtacaíonn OciDeck leis.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Níor glacadh leis an ainm úsáideora ná leis an bhfocal faire.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Níor éirigh leis an bhfreastalaí é féin a chruthú (theip ar an bhfíordheimhniú frithpháirteach).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Theastaigh ón bhfreastalaí an nasc a atreorú chuig óstach eile; diúltaíodh.',
+  'De server reageerde niet op tijd.': 'Níor fhreagair an freastalaí in am.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Níorbh fhéidir ceangal leis an bhfreastalaí. Úsáid wss:// agus seoladh bailí.',
+  'De verbinding met de server mislukte.':
+      'Theip ar an nasc leis an bhfreastalaí.',
+  'XMPP-verbinding testen': 'Tástáil nasc XMPP',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Seiceáil an féidir le OciDeck freastalaí XMPP a bhaint amach agus logáil isteach le do chuntas. Ní stóráiltear aon rud.',
   'Actueel': 'Reatha',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Cosnaíonn mód foinse formáidiú nach dtacaíonn an t-eagarthóir amhairc go fóill gan chailliúint.',

@@ -1770,6 +1770,29 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'XMPP-server testen': 'Testa XMPP-server',
+  'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
+      'Ange en XMPP-server, ett Jabber-ID och ett lösenord och testa anslutningen. Ingenting sparas; detta kontrollerar bara om kontot fungerar. Lämna Jabber-ID:t tomt för anonym åtkomst.',
+  'Serveradres (wss://…)': 'Serveradress (wss://…)',
+  'Jabber-ID (gebruiker@domein)': 'Jabber-ID (användare@domän)',
+  'Verbinden…': 'Ansluter…',
+  'Verbonden — authenticatie geslaagd via': 'Ansluten — autentiserad via',
+  'De server biedt geen inlogmethode die OciDeck ondersteunt.':
+      'Servern erbjuder ingen inloggningsmetod som OciDeck stöder.',
+  'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.':
+      'Användarnamnet eller lösenordet godkändes inte.',
+  'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).':
+      'Servern kunde inte bevisa sin identitet (ömsesidig autentisering misslyckades).',
+  'De server wilde de verbinding omleiden naar een andere host; geweigerd.':
+      'Servern ville omdirigera anslutningen till en annan värd; nekades.',
+  'De server reageerde niet op tijd.': 'Servern svarade inte i tid.',
+  'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.':
+      'Kunde inte ansluta till servern. Använd wss:// och en giltig adress.',
+  'De verbinding met de server mislukte.':
+      'Anslutningen till servern misslyckades.',
+  'XMPP-verbinding testen': 'Testa XMPP-anslutning',
+  'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
+      'Kontrollera om OciDeck kan nå en XMPP-server och logga in med ditt konto. Ingenting sparas.',
   'Actueel': 'Aktuell',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Källläge skyddar formatering som den visuella redigeraren ännu inte stöder förlustfritt.',
