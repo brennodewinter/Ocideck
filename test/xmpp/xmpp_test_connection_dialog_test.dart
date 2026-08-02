@@ -68,7 +68,9 @@ void main() {
     expect(find.textContaining('wachtwoord'), findsWidgets);
   });
 
-  testWidgets('the injected call is what runs — no real socket', (tester) async {
+  testWidgets('the injected call is what runs — no real socket', (
+    tester,
+  ) async {
     var called = false;
     await pumpDialog(tester, (settings, password) async {
       called = true;

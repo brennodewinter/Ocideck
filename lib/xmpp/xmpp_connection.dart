@@ -289,7 +289,9 @@ class XmppConnection {
           );
           if (!scram.verifyServerFinal(serverFinal)) {
             // The server did not prove it holds the password: refuse the login.
-            return const XmppAuthResult.failed(XmppAuthFailure.mutualAuthFailed);
+            return const XmppAuthResult.failed(
+              XmppAuthFailure.mutualAuthFailed,
+            );
           }
         }
         return XmppAuthResult.success(mechanism);

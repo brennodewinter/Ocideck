@@ -25,9 +25,18 @@ void main() {
     });
 
     test('a different account or server yields a different key', () {
-      final a = SecretStore.xmppPasswordKey('wss://x.example/ws', 'a@x.example');
-      final b = SecretStore.xmppPasswordKey('wss://x.example/ws', 'b@x.example');
-      final c = SecretStore.xmppPasswordKey('wss://y.example/ws', 'a@x.example');
+      final a = SecretStore.xmppPasswordKey(
+        'wss://x.example/ws',
+        'a@x.example',
+      );
+      final b = SecretStore.xmppPasswordKey(
+        'wss://x.example/ws',
+        'b@x.example',
+      );
+      final c = SecretStore.xmppPasswordKey(
+        'wss://y.example/ws',
+        'a@x.example',
+      );
       expect(a, isNot(b));
       expect(a, isNot(c));
     });

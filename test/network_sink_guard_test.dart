@@ -323,9 +323,7 @@ void main() {
     // en weigert de fail-closed https-assert een downgrade-hop. Een omleiding
     // bereikt zo nooit een nieuwe, ongekeurde host; een 3xx is bovendien geen 101
     // en laat de upgrade sowieso mislukken. Zie xmpp_frame_transport_io.dart.
-    const redirectsPinnedNotRefused = {
-      'lib/xmpp/xmpp_frame_transport_io.dart',
-    };
+    const redirectsPinnedNotRefused = {'lib/xmpp/xmpp_frame_transport_io.dart'};
     final missing = <String>[];
     for (final path in pinnedClientCount.keys) {
       if (pinnedClientCount[path] == 0) continue; // net_guard maakt er geen

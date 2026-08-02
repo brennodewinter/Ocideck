@@ -174,25 +174,27 @@ class _ResultLine extends StatelessWidget {
   }
 }
 
-String _failureText(AppLocalizations l10n, XmppAuthFailure failure) =>
-    switch (failure) {
-      XmppAuthFailure.noUsableMechanism => l10n.d(
-        'De server biedt geen inlogmethode die OciDeck ondersteunt.',
-      ),
-      XmppAuthFailure.badCredentials => l10n.d(
-        'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.',
-      ),
-      XmppAuthFailure.mutualAuthFailed => l10n.d(
-        'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).',
-      ),
-      XmppAuthFailure.serverRedirect => l10n.d(
-        'De server wilde de verbinding omleiden naar een andere host; geweigerd.',
-      ),
-      XmppAuthFailure.timeout => l10n.d('De server reageerde niet op tijd.'),
-      XmppAuthFailure.transportRefused => l10n.d(
-        'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.',
-      ),
-      XmppAuthFailure.serverError ||
-      XmppAuthFailure.streamClosed ||
-      XmppAuthFailure.handshake => l10n.d('De verbinding met de server mislukte.'),
-    };
+String _failureText(
+  AppLocalizations l10n,
+  XmppAuthFailure failure,
+) => switch (failure) {
+  XmppAuthFailure.noUsableMechanism => l10n.d(
+    'De server biedt geen inlogmethode die OciDeck ondersteunt.',
+  ),
+  XmppAuthFailure.badCredentials => l10n.d(
+    'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.',
+  ),
+  XmppAuthFailure.mutualAuthFailed => l10n.d(
+    'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).',
+  ),
+  XmppAuthFailure.serverRedirect => l10n.d(
+    'De server wilde de verbinding omleiden naar een andere host; geweigerd.',
+  ),
+  XmppAuthFailure.timeout => l10n.d('De server reageerde niet op tijd.'),
+  XmppAuthFailure.transportRefused => l10n.d(
+    'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.',
+  ),
+  XmppAuthFailure.serverError ||
+  XmppAuthFailure.streamClosed ||
+  XmppAuthFailure.handshake => l10n.d('De verbinding met de server mislukte.'),
+};
