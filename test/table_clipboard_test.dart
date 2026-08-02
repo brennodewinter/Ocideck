@@ -84,6 +84,17 @@ void main() {
       ]);
     });
 
+    test('drops a GFM separator row with a single dash per cell', () {
+      // GFM allows a single dash per cell. The clipboard path required
+      // at least two dashes (`-{2,}`), so `| - | - |` was read as data
+      // instead of a separator — inconsistent with markdown_table_codec.dart
+      // which uses `-+`.
+      expect(parseClipboardTable('| A | B |\n| - | - |\n| 1 | 2 |'), [
+        ['A', 'B'],
+        ['1', '2'],
+      ]);
+    });
+
     test('plain text is not a table', () {
       expect(parseClipboardTable('gewoon wat tekst'), isNull);
       expect(parseClipboardTable('regel een\nregel twee'), isNull);
