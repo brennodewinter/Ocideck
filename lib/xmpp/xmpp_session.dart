@@ -348,8 +348,8 @@ class XmppSession {
         .map((e) => e.name.local)
         .firstWhere((n) => n != 'text', orElse: () => 'not-authorized');
     return switch (condition) {
-      'not-authorized' || 'account-disabled' =>
-        XmppSessionFailure.badCredentials,
+      'not-authorized' ||
+      'account-disabled' => XmppSessionFailure.badCredentials,
       _ => XmppSessionFailure.serverError,
     };
   }
@@ -421,19 +421,16 @@ class XmppSession {
   /// Hand every remaining and future frame to [stanzas] as a parsed [Stanza].
   /// A frame that is not a valid stanza (or carries a DTD) is dropped, not fatal.
   void _startDispatch() {
-    _reader.drain(
-      (frame) {
-        if (_closed) return;
-        final Stanza stanza;
-        try {
-          stanza = Stanza.parse(frame);
-        } on FormatException {
-          return; // not a stanza (or a DTD) — ignore, never fatal
-        }
-        if (!_inbound.isClosed) _inbound.add(stanza);
-      },
-      onClosed: _onStreamDropped,
-    );
+    _reader.drain((frame) {
+      if (_closed) return;
+      final Stanza stanza;
+      try {
+        stanza = Stanza.parse(frame);
+      } on FormatException {
+        return; // not a stanza (or a DTD) — ignore, never fatal
+      }
+      if (!_inbound.isClosed) _inbound.add(stanza);
+    }, onClosed: _onStreamDropped);
   }
 
   /// The server ended the stream on a live session (EOF or error). Mark it dead
@@ -555,10 +552,7 @@ class _FrameReader {
   /// Switch to push mode: flush what is buffered and route every future frame to
   /// [onFrame]; [onClosed] fires once when the stream ends or errors. Pull-mode
   /// [next] must not be used after this.
-  void drain(
-    void Function(String frame) onFrame, {
-    void Function()? onClosed,
-  }) {
+  void drain(void Function(String frame) onFrame, {void Function()? onClosed}) {
     _drain = onFrame;
     _onClosed = onClosed;
     final buffered = List<String>.of(_queue);

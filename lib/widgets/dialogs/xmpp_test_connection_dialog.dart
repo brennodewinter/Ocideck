@@ -181,29 +181,30 @@ class _ResultLine extends StatelessWidget {
   }
 }
 
-String _failureText(AppLocalizations l10n, XmppSessionFailure failure) =>
-    switch (failure) {
-      XmppSessionFailure.noUsableMechanism => l10n.d(
-        'De server biedt geen inlogmethode die OciDeck ondersteunt.',
-      ),
-      XmppSessionFailure.badCredentials => l10n.d(
-        'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.',
-      ),
-      XmppSessionFailure.mutualAuthFailed => l10n.d(
-        'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).',
-      ),
-      XmppSessionFailure.serverRedirect => l10n.d(
-        'De server wilde de verbinding omleiden naar een andere host; geweigerd.',
-      ),
-      XmppSessionFailure.resourceBindFailed => l10n.d(
-        'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).',
-      ),
-      XmppSessionFailure.timeout => l10n.d('De server reageerde niet op tijd.'),
-      XmppSessionFailure.transportRefused => l10n.d(
-        'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.',
-      ),
-      XmppSessionFailure.serverError ||
-      XmppSessionFailure.handshake => l10n.d(
-        'De verbinding met de server mislukte.',
-      ),
-    };
+String _failureText(
+  AppLocalizations l10n,
+  XmppSessionFailure failure,
+) => switch (failure) {
+  XmppSessionFailure.noUsableMechanism => l10n.d(
+    'De server biedt geen inlogmethode die OciDeck ondersteunt.',
+  ),
+  XmppSessionFailure.badCredentials => l10n.d(
+    'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.',
+  ),
+  XmppSessionFailure.mutualAuthFailed => l10n.d(
+    'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).',
+  ),
+  XmppSessionFailure.serverRedirect => l10n.d(
+    'De server wilde de verbinding omleiden naar een andere host; geweigerd.',
+  ),
+  XmppSessionFailure.resourceBindFailed => l10n.d(
+    'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).',
+  ),
+  XmppSessionFailure.timeout => l10n.d('De server reageerde niet op tijd.'),
+  XmppSessionFailure.transportRefused => l10n.d(
+    'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.',
+  ),
+  XmppSessionFailure.serverError || XmppSessionFailure.handshake => l10n.d(
+    'De verbinding met de server mislukte.',
+  ),
+};

@@ -207,35 +207,38 @@ void main() {
     expect(auth, contains('mechanism="SCRAM-SHA-1"'));
   });
 
-  test('the default client nonce is fresh each run (no injected factory)', () async {
-    final nonces = <String>{};
-    for (var i = 0; i < 2; i++) {
-      final t = FakeXmppTransport((frame) {
-        if (frame.contains('<open')) {
-          return [
-            _openReply,
-            _features(['SCRAM-SHA-1']),
-          ];
-        }
-        if (frame.contains('<auth')) {
-          return ['<failure xmlns="$_sasl"><not-authorized/></failure>'];
-        }
-        return const [];
-      });
-      await XmppSession(
-        transport: t,
-        settings: account(),
-        password: 'pencil',
-      ).connect();
-      final auth = t.sent.firstWhere((f) => f.contains('<auth'));
-      final payload = RegExp(r'>([^<]+)<').firstMatch(auth)!.group(1)!;
-      final clientFirst = utf8.decode(base64.decode(payload));
-      final nonce = RegExp(r'r=([^,]+)').firstMatch(clientFirst)!.group(1)!;
-      expect(nonce.length, greaterThan(20));
-      nonces.add(nonce);
-    }
-    expect(nonces.length, 2);
-  });
+  test(
+    'the default client nonce is fresh each run (no injected factory)',
+    () async {
+      final nonces = <String>{};
+      for (var i = 0; i < 2; i++) {
+        final t = FakeXmppTransport((frame) {
+          if (frame.contains('<open')) {
+            return [
+              _openReply,
+              _features(['SCRAM-SHA-1']),
+            ];
+          }
+          if (frame.contains('<auth')) {
+            return ['<failure xmlns="$_sasl"><not-authorized/></failure>'];
+          }
+          return const [];
+        });
+        await XmppSession(
+          transport: t,
+          settings: account(),
+          password: 'pencil',
+        ).connect();
+        final auth = t.sent.firstWhere((f) => f.contains('<auth'));
+        final payload = RegExp(r'>([^<]+)<').firstMatch(auth)!.group(1)!;
+        final clientFirst = utf8.decode(base64.decode(payload));
+        final nonce = RegExp(r'r=([^,]+)').firstMatch(clientFirst)!.group(1)!;
+        expect(nonce.length, greaterThan(20));
+        nonces.add(nonce);
+      }
+      expect(nonces.length, 2);
+    },
+  );
 
   test('reports a not-authorized failure as bad credentials', () async {
     final t = FakeXmppTransport((frame) {
@@ -388,32 +391,35 @@ void main() {
     session.sendStanza(Stanza(kind: StanzaKind.presence));
   });
 
-  test('a DTD-bearing inbound frame is dropped; the session stays live', () async {
-    final t = happyServer(
-      mechanisms: ['PLAIN'],
-      sasl: (_) => ['<success xmlns="$_sasl"/>'],
-    );
-    final session = XmppSession(
-      transport: t,
-      settings: account(),
-      password: 'pencil',
-    );
-    await session.connect();
-    final inbound = <Stanza>[];
-    session.stanzas.listen(inbound.add);
+  test(
+    'a DTD-bearing inbound frame is dropped; the session stays live',
+    () async {
+      final t = happyServer(
+        mechanisms: ['PLAIN'],
+        sasl: (_) => ['<success xmlns="$_sasl"/>'],
+      );
+      final session = XmppSession(
+        transport: t,
+        settings: account(),
+        password: 'pencil',
+      );
+      await session.connect();
+      final inbound = <Stanza>[];
+      session.stanzas.listen(inbound.add);
 
-    // A DOCTYPE on the live path (XXE probe) must be dropped, not crash the
-    // session — and a valid stanza right after it must still get through.
-    t.inject(
-      '<!DOCTYPE message [<!ENTITY x "boom">]>'
-      '<message><body>&x;</body></message>',
-    );
-    t.inject('<message from="r@conf.example.org"><body>ok</body></message>');
-    await Future<void>.delayed(Duration.zero);
+      // A DOCTYPE on the live path (XXE probe) must be dropped, not crash the
+      // session — and a valid stanza right after it must still get through.
+      t.inject(
+        '<!DOCTYPE message [<!ENTITY x "boom">]>'
+        '<message><body>&x;</body></message>',
+      );
+      t.inject('<message from="r@conf.example.org"><body>ok</body></message>');
+      await Future<void>.delayed(Duration.zero);
 
-    expect(inbound, hasLength(1));
-    expect(inbound.single.child('body')?.innerText, 'ok');
+      expect(inbound, hasLength(1));
+      expect(inbound.single.child('body')?.innerText, 'ok');
 
-    await session.close();
-  });
+      await session.close();
+    },
+  );
 }
