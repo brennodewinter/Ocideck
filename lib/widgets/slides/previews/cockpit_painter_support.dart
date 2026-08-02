@@ -338,16 +338,25 @@ const double kCockpitAuthenticFaceFactor = kCockpitAuthenticBezelFactor * 0.88;
 class CockpitHeadingReadouts {
   const CockpitHeadingReadouts({
     required this.anchorRight,
+    required this.align,
     required this.maxWidth,
     required this.actualCenter,
     required this.targetCenter,
     required this.markerCenter,
+    required this.actualFont,
+    required this.targetFont,
+    required this.markerFont,
     this.window,
   });
 
   /// True: regels rechts uitgelijnd op hun anker (klassieke rechterkolom).
   /// False: regels gecentreerd op hun anker (authentiek venster).
   final bool anchorRight;
+
+  /// Tekstuitlijning per regel (rechts in de klassieke kolom, gecentreerd in
+  /// het authentieke venster). Het bijpassende `_Anchor` leidt de tekenkant zelf
+  /// af uit [anchorRight]; dat is een privé-type en hoort niet in deze API.
+  final TextAlign align;
 
   /// Breedtegrens per regel; langere tekst krijgt een ellipsis.
   final double maxWidth;
@@ -357,6 +366,12 @@ class CockpitHeadingReadouts {
   final Offset actualCenter;
   final Offset targetCenter;
   final Offset markerCenter;
+
+  /// Lettergroottes van de drie regels, afgestemd op stijl en instrumentmaat
+  /// (klassiek breedte-, authentiek kortste-zijde-gebaseerd).
+  final double actualFont;
+  final double targetFont;
+  final double markerFont;
 
   /// Alleen authentiek: het uitleesvenster dat de roos-streepjes eronder afdekt.
   /// Null in de klassieke stand.
@@ -394,10 +409,14 @@ CockpitHeadingReadouts cockpitHeadingReadouts(
     );
     return CockpitHeadingReadouts(
       anchorRight: false,
+      align: TextAlign.center,
       maxWidth: winW - faceR * 0.14,
       actualCenter: Offset(winCenter.dx, window.top + winH * 0.26),
       targetCenter: Offset(winCenter.dx, winCenter.dy),
       markerCenter: Offset(winCenter.dx, window.bottom - winH * 0.24),
+      actualFont: size.shortestSide * 0.058,
+      targetFont: size.shortestSide * 0.045,
+      markerFont: size.shortestSide * 0.047,
       window: window,
     );
   }
@@ -407,10 +426,14 @@ CockpitHeadingReadouts cockpitHeadingReadouts(
   final freeLeft = center.dx + radius + size.width * _headingReadoutGap;
   return CockpitHeadingReadouts(
     anchorRight: true,
+    align: TextAlign.right,
     maxWidth: rightEdge - freeLeft,
     actualCenter: Offset(rightEdge, size.height * 0.43),
     targetCenter: Offset(rightEdge, size.height * 0.59),
     markerCenter: Offset(rightEdge, size.height * 0.72),
+    actualFont: size.width * 0.05,
+    targetFont: size.width * 0.038,
+    markerFont: size.width * 0.032,
   );
 }
 

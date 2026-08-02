@@ -912,16 +912,6 @@ class _CockpitInstrumentPainter extends CustomPainter {
     final window = readouts.window;
     if (window != null) _drawReadoutWindow(canvas, size, window);
     final anchor = readouts.anchorRight ? _Anchor.centerRight : _Anchor.center;
-    final align = readouts.anchorRight ? TextAlign.right : TextAlign.center;
-    final actualFont = _authentic
-        ? size.shortestSide * 0.058
-        : size.width * 0.05;
-    final targetFont = _authentic
-        ? size.shortestSide * 0.045
-        : size.width * 0.038;
-    final markerFont = _authentic
-        ? size.shortestSide * 0.047
-        : size.width * 0.032;
     _text(
       canvas,
       faceText.actual.replaceAll(
@@ -929,9 +919,9 @@ class _CockpitInstrumentPainter extends CustomPainter {
         _fmt(_animatedHeading(meter.value) % 360).padLeft(3, '0'),
       ),
       readouts.actualCenter,
-      actualFont,
+      readouts.actualFont,
       _instrumentInk,
-      align: align,
+      align: readouts.align,
       anchor: anchor,
       weight: FontWeight.w800,
       maxWidth: readouts.maxWidth,
@@ -943,9 +933,9 @@ class _CockpitInstrumentPainter extends CustomPainter {
         _fmt(meter.heading).padLeft(3, '0'),
       ),
       readouts.targetCenter,
-      targetFont,
+      readouts.targetFont,
       _instrumentMuted,
-      align: align,
+      align: readouts.align,
       anchor: anchor,
       weight: FontWeight.w600,
       maxWidth: readouts.maxWidth,
@@ -955,9 +945,9 @@ class _CockpitInstrumentPainter extends CustomPainter {
         canvas,
         meter.markerLabel,
         readouts.markerCenter,
-        markerFont,
+        readouts.markerFont,
         _instrumentMuted,
-        align: align,
+        align: readouts.align,
         anchor: anchor,
         maxWidth: readouts.maxWidth,
       );
