@@ -3082,7 +3082,7 @@ and someone looking at a contrast warning could think it was about personal data
 | **Red** | An error is included | — |
 | **Amber** | Warnings | A finding we are reasonably sure about |
 | **Slate** | — | A finding we are *not* sure about |
-| **Grey** | You accepted these findings | You accepted these findings |
+| **Grey** | You accepted these findings | You handled these findings (accepted, marked for the recipient, or left out) |
 | *(none)* | Only tips, or nothing found | Nothing found |
 
 The asymmetry in the slate row is deliberate. A quality tip is advice about
@@ -3097,6 +3097,12 @@ thumbnail, and afterwards that slide looked exactly like a slide with nothing on
 it. Accepting had become the same as hiding. The badge now stays and turns grey —
 it says *there is something here, and you know about it*. The panel does go quiet,
 which is right: a decision already made should not keep nagging.
+
+For privacy the grey badge also **names the decision you made**. Hovering it reads
+*Personal data accepted*, *Personal data flagged for the recipient*, or *Personal
+data left out*, matching the disposition set on that slide. Those are not the same
+thing — a slide whose data is *left out* is not one you accepted — so the badge
+does not claim you did.
 
 ### Reading and answering a badge
 
