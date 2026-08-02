@@ -70,13 +70,31 @@ jobs:
       TRUFFLEHOG_VERSION: 3.95.9
       SEMGREP_VERSION: 1.171.0
     steps:
-      # Vóór de checkout: actions/checkout is een node-actie, en dit kale image
-      # brengt geen node mee.
-      - name: Gereedschap installeren
+      # Vóór de checkout: actions/checkout én actions/cache zijn node-acties, en
+      # dit kale image brengt geen node mee. Node eerst, dan de apt-cache, dan de
+      # rest — zodat `apt-get install` de download (niet de installatie) overslaat.
+      - name: Node voor de cache-acties
         run: |
           apt-get update
+          apt-get install -y --no-install-recommends nodejs ca-certificates
+          printf 'Binary::apt::APT::Keep-Downloaded-Packages "true";\n' \
+            > /etc/apt/apt.conf.d/99keep-debs
+
+      # Eigen sleutel: deze poort heeft een lichtere pakketlijst dan de build-gates
+      # (geen cmake/gtk). Bump `-v1` als de lijst verandert. De scanner-binaries en
+      # de semgrep-venv worden hier bewust NIET gecachet — dat is een aparte, iets
+      # delicatere stap (gepinde download + verificatie) voor een volgende keer.
+      - name: Scan-tools uit de apt-cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt/archives
+          key: apt-linux-2404-scans-v1
+
+      - name: Gereedschap installeren
+        run: |
           apt-get install -y --no-install-recommends \
-            nodejs make git curl ca-certificates tar python3 python3-venv
+            make git curl tar python3 python3-venv
 
       - uses: actions/checkout@v4
         with:
