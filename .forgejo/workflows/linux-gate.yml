@@ -12,28 +12,23 @@
 # subprocessen of `git`-aanroepen komt. Wie hem nooit draait, draait hem nooit —
 # dat is een bewuste afweging en geen ongeluk, en ze staat ook in docs/CHECKS.md.
 #
-# **De toolchain.** De Flutter-versie komt uit .tool-versions — de workflow
-# leest de pin, dus een pin-bump heeft hier geen tweede plek om te vergeten — en
-# de tarball is de officiële stable-release, sha256-geverifieerd tegen het
-# release-manifest. Een kant-en-klaar Flutter-image (cirruslabs) is bewust
-# vermeden: dat bleek kanaal "[user-branch]" uit onbekende bron te bevatten, en
-# check-toolchain keurt precies dat af.
+# **De toolchain.** De omgeving komt uit het voorgebakken CI-image
+# `pawprint.vigilis.online/librekat/ocideck-ci:flutter-<pin>` (zie
+# `.forgejo/ci-image/Dockerfile` en `static-gate.yml`): OS + node + de
+# build-toolchain + de gepinde, sha256-geverifieerde stable-Flutter (+ precache)
+# zitten erin, dus de per-run-installatie vervalt. De provenance is gelijk
+# gebleven — de sha256-toets verhuisde naar bouwtijd — en `check-toolchain` draait
+# onverkort in de suite op de ingebakken Flutter: kanaal `stable`, officiële
+# herkomst, gelijkheid met de pin. Een kant-en-klaar cirruslabs-image (kanaal
+# "[user-branch]") zou daar nog steeds op omvallen. Het tag ís de pin, dus
+# achterlopen valt fail-closed om i.p.v. stil.
 #
-# **Waarom er gecachet wordt.** Een fors deel van de runtijd ging elke keer
-# opnieuw op aan dezelfde tarball ophalen en met `xz` uitpakken — werk dat per
-# definitie hetzelfde resultaat geeft, want de sleutel is de gepinde versie. De
-# cache neemt die stap weg en vervangt géén controle: `check-toolchain` draait
-# op de herstelde boom en eist onverkort kanaal `stable`, de officiële herkomst
-# en gelijkheid met de pin. Een cache die iets anders bevat valt dus om op
-# dezelfde poort die destijds het cirruslabs-image afkeurde.
-#
-# De eerlijke grens daarbij: die cache wordt geschreven door onze eigen jobs op
-# onze eigen runner. Wie de runner beheert, beheert de cache — dat is dezelfde
-# vertrouwensgrens als de runner zelf, niet een nieuwe.
-#
-# De cachestappen staan op `continue-on-error`. Spreekt de forge de cache-API
-# van deze actie niet, dan verliezen we de versnelling en verder niets: de
-# installatiestap draait dan gewoon, en de poort blijft de poort.
+# **Wat er nog wél op `actions/cache` staat.** De repo-gekoppelde artefacten die
+# met `pubspec.lock` meebewegen en niet in een toolchain-image horen: de
+# pub-pakketten en de dartcv OpenCV-build (veruit de duurste stap na de tests).
+# Zelfde vertrouwensgrens als de runner — wie de runner beheert, beheert de cache.
+# Op `continue-on-error`: valt de cache-API weg, dan compileert/haalt de stap
+# gewoon opnieuw, en de poort blijft de poort.
 #
 # **Waarom óók op `push` naar `main` (#1123).** `static-gate.yml` vangt de
 # statische poorten per PR, maar bewust niet de testsuite — precies de reden dat

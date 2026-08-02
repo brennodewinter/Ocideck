@@ -1366,12 +1366,16 @@ that reaches beyond `build/test_cache`.
   still fail.
 
 ### `.forgejo/workflows/static-gate.yml` — the static gate, per pull request
-- **static-gate** — the same bare `ubuntu:24.04` container and pinned-Flutter
-  setup as `linux-gate.yml` (version read from `.tool-versions`, tarball
-  sha256-verified against the official manifest, `/opt/flutter` and `~/.pub-cache`
-  cached), then `flutter pub get`, [`make check-static`](#make-check-static)
+- **static-gate** — runs on the prebaked CI image
+  (`pawprint.vigilis.online/librekat/ocideck-ci:flutter-<pin>`, same as
+  `linux-gate.yml`), so the OS, node, build-toolchain and the pinned,
+  sha256-verified Flutter (+ precache) are baked in — no per-run install. Only the
+  repo-coupled artifacts (`~/.pub-cache` and the dartcv OpenCV build) stay on
+  `actions/cache`. Then `flutter pub get`, [`make check-static`](#make-check-static)
   (`$(STATIC_GATES)`) **and `make check-registrations`** — the handful of *fast*
-  registration/invariant tests (#1123).
+  registration/invariant tests (#1123). The image tag *is* the pin, so a stale
+  image fails `check-toolchain` (fail-closed) rather than drifting silently — see
+  the `ci-image.yml` section.
 - **Why `check-registrations` too (#1123).** `check-static` catches the *static*
   drift (file/class/method size, formatting, hardcoded text) but the
   registration gates — new lib file in `SOURCE_MAP`, new docs registered, SBOM
@@ -1406,15 +1410,16 @@ that reaches beyond `build/test_cache`.
   aborted one would have seen.
 
 ### `.forgejo/workflows/linux-gate.yml` — on demand (`workflow_dispatch`) **and on every push to `main`** (#1123)
-- **gate-linux** — the gate that `ci.yml` used to be: a bare `ubuntu:24.04`
-  container in which the workflow installs the **official** Flutter stable
-  release: the version is *read from `.tool-versions`* (so a pin bump has no
-  second place to forget) and the tarball is sha256-verified against the
-  official release manifest, with `actions/cache` over `/opt/flutter` and
-  `~/.pub-cache`. Then `flutter pub get` and `make check-no-coverage`. A
-  prebuilt third-party Flutter image was rejected here: the cirruslabs image
-  shipped channel `[user-branch]` from an unknown source, exactly what
-  `check-toolchain` exists to catch.
+- **gate-linux** — the gate that `ci.yml` used to be, now on the prebaked CI
+  image (`pawprint.vigilis.online/librekat/ocideck-ci:flutter-<pin>`, same as
+  `static-gate.yml`): the OS, node, build-toolchain and the **official**,
+  sha256-verified pinned Flutter (+ precache) are baked in, so there is no per-run
+  install. `~/.pub-cache` and the dartcv OpenCV build stay on `actions/cache`. Then
+  `flutter pub get` and `make check-no-coverage`. Provenance is unchanged — the
+  sha256 check moved to image-build time — and `check-toolchain` still runs on the
+  baked Flutter, so a *prebuilt third-party* image (the cirruslabs one shipped
+  channel `[user-branch]`) still falls over on it; our own image carries only the
+  pinned stable release. The tag *is* the pin, so a stale image fails fail-closed.
 - **When to press it:** before a release, and whenever a change touches paths,
   subprocesses or `git` invocations.
 - **Why it also fires on `push` to `main` (#1123):** `static-gate.yml` runs the
