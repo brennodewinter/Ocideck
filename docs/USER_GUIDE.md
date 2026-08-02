@@ -2715,6 +2715,12 @@ A deck locked as **play only** never shows this summary, whatever the per-deck
 switch says: it is meant to be played, and whoever plays it should not be handed
 a measurement report about themselves.
 
+When you return to the editor, the **slide you stopped on** is selected — the one
+that was on screen when you pressed `Esc`, not the one you started from. If you
+paused on a particular slide to check or fix something, that is where you land. A
+long finding that presented across several pages returns to its single source
+slide, and a slide deleted mid-presentation leaves the selection where it was.
+
 ### Two screens (beamer + laptop)
 
 When a second display is connected on **macOS, Windows, or Linux**, OciDeck
