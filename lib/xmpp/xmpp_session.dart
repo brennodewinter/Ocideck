@@ -144,7 +144,7 @@ class XmppSession {
     } on XmppConnectException catch (e) {
       return _fail(XmppSessionFailure.transportRefused, detail: e.message);
     } on _BindException catch (e) {
-      return _fail(XmppSessionFailure.resourceBindFailed, detail: e.message);
+      return _fail(e.failure, detail: e.message);
     } catch (e) {
       logWarning('XmppSession.connect failed', e);
       return _fail(XmppSessionFailure.handshake);
@@ -403,7 +403,13 @@ class XmppSession {
       if (element == null) continue;
       switch (element.name.local) {
         case 'error':
-          throw const _BindException('stream error before bind');
+          // A post-auth <see-other-host> is still refused, never followed;
+          // classify it as precisely as a pre-auth one (same fail-closed
+          // posture — never re-connect to a server-named host).
+          throw _BindException(
+            'stream error before bind',
+            _streamErrorFailure(element),
+          );
         case 'features':
           return;
       }
@@ -415,16 +421,27 @@ class XmppSession {
   /// Hand every remaining and future frame to [stanzas] as a parsed [Stanza].
   /// A frame that is not a valid stanza (or carries a DTD) is dropped, not fatal.
   void _startDispatch() {
-    _reader.drain((frame) {
-      if (_closed) return;
-      final Stanza stanza;
-      try {
-        stanza = Stanza.parse(frame);
-      } on FormatException {
-        return; // not a stanza (or a DTD) — ignore
-      }
-      if (!_inbound.isClosed) _inbound.add(stanza);
-    });
+    _reader.drain(
+      (frame) {
+        if (_closed) return;
+        final Stanza stanza;
+        try {
+          stanza = Stanza.parse(frame);
+        } on FormatException {
+          return; // not a stanza (or a DTD) — ignore, never fatal
+        }
+        if (!_inbound.isClosed) _inbound.add(stanza);
+      },
+      onClosed: _onStreamDropped,
+    );
+  }
+
+  /// The server ended the stream on a live session (EOF or error). Mark it dead
+  /// and let [stanzas] complete, so a consumer (the MUC layer) learns the room
+  /// is gone; the caller still owns the final [close].
+  void _onStreamDropped() {
+    _live = false;
+    if (!_inbound.isClosed) _inbound.close();
   }
 
   /// Send a stanza on the live session. A no-op once closed.
@@ -468,8 +485,12 @@ class XmppSession {
 }
 
 class _BindException implements Exception {
-  const _BindException(this.message);
+  const _BindException(
+    this.message, [
+    this.failure = XmppSessionFailure.resourceBindFailed,
+  ]);
   final String message;
+  final XmppSessionFailure failure;
   @override
   String toString() => 'XMPP bind failed: $message';
 }
@@ -492,6 +513,7 @@ class _FrameReader {
   late final StreamSubscription<String> _sub;
   bool _done = false;
   void Function(String frame)? _drain;
+  void Function()? _onClosed;
 
   void _onData(String frame) {
     if (_drain != null) {
@@ -505,6 +527,7 @@ class _FrameReader {
 
   void _onDone() {
     _done = true;
+    _onClosed?.call(); // in drain mode, tell the session the stream ended
     for (final w in _waiters) {
       w.completeError(const XmppConnectException('the XMPP stream closed'));
     }
@@ -512,6 +535,7 @@ class _FrameReader {
   }
 
   void _onError(Object error, StackTrace stack) {
+    _onClosed?.call(); // a live-session error is a stream drop too
     for (final w in _waiters) {
       w.completeError(error, stack);
     }
@@ -529,14 +553,20 @@ class _FrameReader {
   }
 
   /// Switch to push mode: flush what is buffered and route every future frame to
-  /// [onFrame]. Pull-mode [next] must not be used after this.
-  void drain(void Function(String frame) onFrame) {
+  /// [onFrame]; [onClosed] fires once when the stream ends or errors. Pull-mode
+  /// [next] must not be used after this.
+  void drain(
+    void Function(String frame) onFrame, {
+    void Function()? onClosed,
+  }) {
     _drain = onFrame;
+    _onClosed = onClosed;
     final buffered = List<String>.of(_queue);
     _queue.clear();
     for (final frame in buffered) {
       onFrame(frame);
     }
+    if (_done) onClosed?.call(); // stream already ended before we drained
   }
 
   Future<void> cancel() => _sub.cancel();
