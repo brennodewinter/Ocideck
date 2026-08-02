@@ -153,7 +153,10 @@ class XmppMuc {
     final occNick = _resourceOf(from);
 
     if (stanza.type == 'error') {
-      _finishJoin(MucJoinResult.failed(_joinErrorOf(stanza)));
+      // Only an error DURING join is a join failure. A stray error-presence
+      // after we are in is ignored — a buggy or hostile server must not be able
+      // to silently tear down a live roster.
+      if (!_joined) _finishJoin(MucJoinResult.failed(_joinErrorOf(stanza)));
       return;
     }
 
@@ -240,6 +243,9 @@ class XmppMuc {
   }
 
   Future<void> _teardown() async {
+    // Once torn down (join failure, session drop, or leave) a later leave() must
+    // not send a fresh presence to a room we are no longer in.
+    _left = true;
     await _sub?.cancel();
     _sub = null;
     if (!_roster.isClosed) await _roster.close();
