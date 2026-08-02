@@ -87,6 +87,7 @@ same answer `make licenses` and the SBOM give.
 | `crypto` | SHA-256/SHA-512 for the seal, evidence hashes and the SBOM generator | BSD-3-Clause |
 | `cryptography` | X25519/Ed25519/HKDF/XChaCha20-Poly1305 for the collaboration end-to-end encryption (self-encrypted relay, `docs/design/SELF_ENCRYPTED_RELAY.md`) | Apache-2.0 |
 | `video_player` | Video slides | BSD-3-Clause |
+| `flutter_webrtc` | WebRTC media (audio/video, ICE/SRTP via libwebrtc) for native calls — the media plane behind the meeting adapters (`docs/design/NATIVE_CALLS.md`), reached only through the default-off Videovergaderingen module | MIT |
 | `characters` | Grapheme-correct text truncation | BSD-3-Clause |
 | `url_launcher` | External links (scheme allowlist) | BSD-3-Clause |
 | `desktop_drop` | Drag-and-drop of files onto the deck | Apache-2.0 |
