@@ -1493,7 +1493,7 @@ plain `curl`, so no GitHub credential is stored on the self-hosted runner.
   all — unverified code from a moving pointer, setting up tools that silently
   redefined what green meant. They now come from a pinned release, sha256-checked
   against the published manifest, in the same shape the Flutter tarball already
-  used in [`linux-gate.yml`](#forgejoworkflowslinux-gateyml--on-demand-workflow_dispatch)
+  used in [`linux-gate.yml`](#forgejoworkflowslinux-gateyml--on-demand-workflow_dispatch-and-on-every-push-to-main-1123)
   — `test -n "$SHA"` included, so a renamed release asset fails loudly instead of
   turning the check into a complaint about `sha256sum`'s input. The checkout also
   gained `fetch-depth: 0`: two of the four passes in `make check-secrets` read

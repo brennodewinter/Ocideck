@@ -33,6 +33,24 @@ void main() {
     expect(scalerAtShell().scale(10), 20);
   });
 
+  testWidgets('the wide welcome screen fits at 200% interface text', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+    await tester.pumpAndSettle();
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(AppShell)),
+    );
+
+    await container.read(settingsProvider.notifier).setUiTextScale(2);
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('the slide canvas opts out of text scaling', (tester) async {
     final slide = Slide.create(
       SlideType.bullets,

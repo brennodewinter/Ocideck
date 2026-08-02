@@ -59,14 +59,21 @@ class _WelcomeScreen extends ConsumerWidget {
     BoxConstraints viewport,
   ) {
     final wide = viewport.maxWidth >= 820;
-    final hubHeight = (viewport.maxHeight - 88).clamp(460, 590).toDouble();
+    final baseHubHeight = (viewport.maxHeight - 88).clamp(460, 590).toDouble();
+    final requiredBrandHeight = _requiredBrandPanelHeight(context, theme, l10n);
+    final hubHeight = requiredBrandHeight > baseHubHeight
+        ? requiredBrandHeight
+        : baseHubHeight;
     final hub = wide
         ? SizedBox(
             height: hubHeight,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(width: 340, child: _brandPanel(context, theme, l10n)),
+                SizedBox(
+                  width: 340,
+                  child: _brandPanel(context, theme, l10n, fillHeight: true),
+                ),
                 Expanded(child: _actionsPanel(context, ref, l10n, palette)),
                 if (recentFiles.isNotEmpty)
                   SizedBox(
@@ -86,7 +93,10 @@ class _WelcomeScreen extends ConsumerWidget {
         : Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: 360, child: _brandPanel(context, theme, l10n)),
+              SizedBox(
+                width: double.infinity,
+                child: _brandPanel(context, theme, l10n, fillHeight: false),
+              ),
               SizedBox(
                 height: 520,
                 child: _actionsPanel(context, ref, l10n, palette),
@@ -127,11 +137,47 @@ class _WelcomeScreen extends ConsumerWidget {
     );
   }
 
-  Widget _brandPanel(
+  double _requiredBrandPanelHeight(
     BuildContext context,
     ThemeData theme,
     AppLocalizations l10n,
   ) {
+    final scaler = MediaQuery.textScalerOf(context);
+    final direction = Directionality.of(context);
+
+    double textHeight(String text, TextStyle? style) {
+      final painter = TextPainter(
+        text: TextSpan(text: text, style: style),
+        textDirection: direction,
+        textScaler: scaler,
+      )..layout(maxWidth: 272);
+      return painter.height;
+    }
+
+    return 68 +
+        170 +
+        textHeight(l10n.d('Welkom bij OciDeck'), _brandHeadingStyle(theme)) +
+        12 +
+        textHeight(
+          l10n.d(
+            'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.',
+          ),
+          _brandBodyStyle(theme),
+        );
+  }
+
+  TextStyle? _brandHeadingStyle(ThemeData theme) =>
+      theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600);
+
+  TextStyle? _brandBodyStyle(ThemeData theme) => theme.textTheme.bodyMedium
+      ?.copyWith(color: theme.colorScheme.onSurfaceVariant, height: 1.45);
+
+  Widget _brandPanel(
+    BuildContext context,
+    ThemeData theme,
+    AppLocalizations l10n, {
+    required bool fillHeight,
+  }) {
     return Container(
       padding: const EdgeInsets.all(34),
       decoration: BoxDecoration(
@@ -156,7 +202,7 @@ class _WelcomeScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(12),
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppTheme.paper,
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
@@ -167,28 +213,20 @@ class _WelcomeScreen extends ConsumerWidget {
                 ],
               ),
               child: Image.asset(
-                BrandLogo.ociDeck.lightAsset,
+                BrandLogo.ociDeck.assetKey,
                 fit: BoxFit.contain,
                 filterQuality: FilterQuality.high,
               ),
             ),
           ),
-          const Spacer(),
-          Text(
-            l10n.d('Welkom bij OciDeck'),
-            style: theme.textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          if (fillHeight) const Spacer() else const SizedBox(height: 48),
+          Text(l10n.d('Welkom bij OciDeck'), style: _brandHeadingStyle(theme)),
           const SizedBox(height: 12),
           Text(
             l10n.d(
               'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.',
             ),
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-              height: 1.45,
-            ),
+            style: _brandBodyStyle(theme),
           ),
         ],
       ),

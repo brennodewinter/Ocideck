@@ -153,6 +153,11 @@ const Set<String> uncoveredBaseline = {
   // no executable lines. Both halves (matrix_http_transport_io/web) are exercised
   // directly by matrix_http_transport_test.dart.
   'lib/collab/matrix_http_transport.dart',
+  // PLATFORM: de XMPP-transportfacade is eveneens één kale conditional export
+  // zonder uitvoerbare regels. De io-helft wordt door de verbindingstests
+  // geraakt; de fail-closed webhelft wordt rechtstreeks getoetst in
+  // xmpp_frame_transport_web_test.dart.
+  'lib/xmpp/xmpp_frame_transport_platform.dart',
   // PLATFORM: the git draft store's conditional-export facade. Both halves
   // (FileDraftStore, PrefsDraftStore) are exercised by the DeckMirror contract
   // in test/git_deck_mirror_contract_test.dart; only this one-line barrel has no
