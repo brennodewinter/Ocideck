@@ -41,6 +41,7 @@ import '../../models/document_signature.dart';
 import '../../models/finding_spec.dart';
 import '../../models/findings_summary_spec.dart';
 import '../../models/question.dart';
+import '../../models/control_status_spec.dart';
 import '../../models/scope_matrix_spec.dart';
 import '../../models/asset_overview_spec.dart';
 import '../../models/discoveries_spec.dart';
@@ -113,6 +114,7 @@ part 'previews/discoveries_preview.dart';
 part 'previews/checklist_preview.dart';
 part 'previews/finding_preview.dart';
 part 'previews/scope_matrix_preview.dart';
+part 'previews/control_status_preview.dart';
 part 'previews/findings_summary_preview.dart';
 part 'previews/signoff_preview.dart';
 part 'previews/matrix_preview.dart';
@@ -864,6 +866,13 @@ class SlidePreviewWidget extends StatelessWidget {
       case SlideType.flow:
       case SlideType.phaseGate:
         return _improvementPreview(slide, w);
+      case SlideType.controlStatus:
+        return _ControlStatusPreview(
+          slide: slide,
+          w: w,
+          font: fontFamily,
+          profile: themeProfile,
+        );
     }
   }
 
@@ -1029,6 +1038,7 @@ double _contentLeftInset(Slide slide, double w) {
         SlideType.findingsSummary ||
         SlideType.checklist ||
         SlideType.scopeMatrix ||
+        SlideType.controlStatus ||
         SlideType.signOff ||
         SlideType.matrix ||
         SlideType.canvas ||

@@ -481,6 +481,7 @@ class SlideQualityAnalyzer {
           SlideType.findingsSummary ||
           SlideType.checklist ||
           SlideType.scopeMatrix ||
+          SlideType.controlStatus ||
           SlideType.signOff ||
           SlideType.matrix ||
           SlideType.canvas ||
@@ -561,6 +562,7 @@ class SlideQualityAnalyzer {
       case SlideType.findingsSummary:
       case SlideType.checklist:
       case SlideType.scopeMatrix:
+      case SlideType.controlStatus:
       case SlideType.signOff:
       // Een matrix draagt geen media; zijn cellen zijn de inhoud zelf.
       case SlideType.matrix:
@@ -761,6 +763,7 @@ class SlideQualityAnalyzer {
       case SlideType.findingsSummary:
       case SlideType.checklist:
       case SlideType.scopeMatrix:
+      case SlideType.controlStatus:
       case SlideType.signOff:
       case SlideType.matrix:
       case SlideType.canvas:

@@ -16,6 +16,7 @@ import 'quality_disposition.dart';
 import 'finding_spec.dart';
 import 'findings_summary_spec.dart';
 import 'question.dart';
+import 'control_status_spec.dart';
 import 'scope_matrix_spec.dart';
 import 'scorecard_spec.dart';
 import 'settings.dart';
@@ -62,6 +63,11 @@ enum SlideType {
   tree,
   flow,
   phaseGate,
+  // Managementsysteem-module (ISO 27001/9001/42001-voortgang,
+  // ISO_MANAGEMENTSYSTEEM §4). `controlStatus` draagt een per-control
+  // implementatiestatus als gewone Markdown-tabel (dus [backedByTable]); de
+  // managementreview en verbeteracties leunen op de bestaande `canvas`/`matrix`.
+  controlStatus,
 }
 
 /// Broad grouping a [SlideType] belongs to, used by the add-slide picker to
@@ -70,7 +76,12 @@ enum SlideType {
 /// [SlideCategory.procesverbetering]. The picker derives its tab bar from the
 /// categories actually present, so a tab appears only once the module reveals
 /// its types.
-enum SlideCategory { general, informationSecurity, procesverbetering }
+enum SlideCategory {
+  general,
+  informationSecurity,
+  procesverbetering,
+  managementsysteem,
+}
 
 /// Hoeveel kolommen *doorlopende* bullettekst een [SlideType] toont — de vorm
 /// die zich over pagina's laat verdelen.
@@ -329,6 +340,14 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     marpClass: 'phase-gate',
     category: SlideCategory.procesverbetering,
     bulletColumns: BulletColumns.one,
+  ),
+  // Managementsysteem-module (ISO_MANAGEMENTSYSTEEM §4). Per-control
+  // implementatiestatus als gewone Markdown-tabel, dus [backedByTable].
+  SlideType.controlStatus: SlideTypeMeta(
+    label: 'Beheersmaatregel-status',
+    marpClass: 'control-status',
+    category: SlideCategory.managementsysteem,
+    backedByTable: true,
   ),
 };
 
@@ -748,6 +767,10 @@ class Slide {
           : type == SlideType.discoveries
           // Alleen de vaste kop; de editor deelt de eerste lege regel uit.
           ? const DiscoveriesSpec().toTableRows()
+          : type == SlideType.controlStatus
+          // Alleen de vaste kop + één lege regel; de importer vult de controls
+          // uit een ISO-index, of de auteur voegt ze zelf toe.
+          ? const ControlStatusSpec(rows: [ControlStatusRow()]).toTableRows()
           : type == SlideType.matrix
           // De kop van het startsjabloon plus één lege regel, zodat de matrix
           // meteen invulbaar is in plaats van als leeg raster te openen.

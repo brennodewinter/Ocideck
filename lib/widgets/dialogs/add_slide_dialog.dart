@@ -81,6 +81,9 @@ class AddSlideDialog extends StatefulWidget {
     SlideType.tree,
     SlideType.flow,
     SlideType.phaseGate,
+    // Managementsysteem-module — eigen tabblad zodra de module de types
+    // onthult (ISO_MANAGEMENTSYSTEEM §5).
+    SlideType.controlStatus,
   ];
 
   @override
@@ -178,6 +181,8 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
         return l10n.d('Informatieveiligheid');
       case SlideCategory.procesverbetering:
         return l10n.d('Procesverbetering');
+      case SlideCategory.managementsysteem:
+        return l10n.d('Managementsysteem');
     }
   }
 
@@ -759,6 +764,10 @@ class SlideTypePreviewPainter extends CustomPainter {
         _paintFlowWireframe(canvas);
       case SlideType.phaseGate:
         _paintSecurityWireframe(canvas, SlideType.checklist);
+      case SlideType.controlStatus:
+        // Per-control status als rijen met statusvakjes — visueel gelijk aan de
+        // checklist-wireframe.
+        _paintSecurityWireframe(canvas, SlideType.checklist);
     }
   }
 
@@ -998,7 +1007,8 @@ class SlideTypePreviewPainter extends CustomPainter {
           SlideType.canvas ||
           SlideType.tree ||
           SlideType.flow ||
-          SlideType.phaseGate:
+          SlideType.phaseGate ||
+          SlideType.controlStatus:
         break;
     }
   }
