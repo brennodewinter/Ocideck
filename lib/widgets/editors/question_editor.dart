@@ -202,47 +202,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
     return editorScrollList(
       nestedInScrollView: widget.nestedInScrollView,
       children: [
-        DropdownButtonFormField<QuestionKind>(
-          initialValue: _kind,
-          decoration: InputDecoration(
-            labelText: l10n.d('Soort vraag'),
-            isDense: true,
-          ),
-          items: [
-            DropdownMenuItem(
-              value: QuestionKind.multipleChoice,
-              child: Text(l10n.d('Meerkeuze')),
-            ),
-            DropdownMenuItem(
-              value: QuestionKind.trueFalse,
-              child: Text(l10n.d('Juist / Onjuist')),
-            ),
-            DropdownMenuItem(
-              value: QuestionKind.multipleCorrect,
-              child: Text(l10n.d('Meerdere juiste antwoorden')),
-            ),
-            DropdownMenuItem(
-              value: QuestionKind.ordering,
-              child: Text(l10n.d('Volgorde')),
-            ),
-            DropdownMenuItem(
-              value: QuestionKind.imagePair,
-              child: Text(l10n.d('Twee afbeeldingen')),
-            ),
-            DropdownMenuItem(
-              value: QuestionKind.openText,
-              child: Text(l10n.d('Getypt antwoord')),
-            ),
-          ],
-          onChanged: (value) {
-            if (value == null) return;
-            setState(() {
-              _kind = value;
-              if (value == QuestionKind.imagePair) _ensureImagePairSlots();
-            });
-            _emit();
-          },
-        ),
+        _questionKindField(l10n),
         const SizedBox(height: 16),
         MarkdownEditorField(
           label: isTrueFalse ? l10n.d('Stelling') : l10n.d('Vraag'),
@@ -338,6 +298,52 @@ class _QuestionEditorState extends State<QuestionEditor> {
         // de drie het antwoord is.
         if (!isImagePair) ..._imageSection(),
       ],
+    );
+  }
+
+  /// Het keuzeveld voor de vraagsoort. Losgetrokken uit [build] zodat die
+  /// methode onder de lengtegrens blijft; de zes soorten zijn puur presentatie.
+  Widget _questionKindField(AppLocalizations l10n) {
+    return DropdownButtonFormField<QuestionKind>(
+      initialValue: _kind,
+      decoration: InputDecoration(
+        labelText: l10n.d('Soort vraag'),
+        isDense: true,
+      ),
+      items: [
+        DropdownMenuItem(
+          value: QuestionKind.multipleChoice,
+          child: Text(l10n.d('Meerkeuze')),
+        ),
+        DropdownMenuItem(
+          value: QuestionKind.trueFalse,
+          child: Text(l10n.d('Juist / Onjuist')),
+        ),
+        DropdownMenuItem(
+          value: QuestionKind.multipleCorrect,
+          child: Text(l10n.d('Meerdere juiste antwoorden')),
+        ),
+        DropdownMenuItem(
+          value: QuestionKind.ordering,
+          child: Text(l10n.d('Volgorde')),
+        ),
+        DropdownMenuItem(
+          value: QuestionKind.imagePair,
+          child: Text(l10n.d('Twee afbeeldingen')),
+        ),
+        DropdownMenuItem(
+          value: QuestionKind.openText,
+          child: Text(l10n.d('Getypt antwoord')),
+        ),
+      ],
+      onChanged: (value) {
+        if (value == null) return;
+        setState(() {
+          _kind = value;
+          if (value == QuestionKind.imagePair) _ensureImagePairSlots();
+        });
+        _emit();
+      },
     );
   }
 

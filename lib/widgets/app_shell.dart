@@ -162,6 +162,7 @@ part 'shell/shell_actions_git.dart';
 part 'shell/shell_actions_git_dialogs.dart';
 part 'shell/ai_actions.dart';
 part 'shell/command_palette_actions.dart';
+part 'shell/main_layout_shortcuts.dart';
 part 'shell/menu_commands.dart';
 part 'shell/module_prompts.dart';
 part 'shell/tab_bar.dart';
@@ -548,43 +549,6 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     ],
     child: const _TabContent(),
   );
-
-  /// Een grafiek kon zijn databestand niet lezen of niet schrijven: ontbrekend,
-  /// onleesbaar, buiten de projectmap, of intussen buiten de app gewijzigd.
-  ///
-  /// Melden is hier het hele punt. Bij het openen tekent zo'n grafiek leeg, en
-  /// een lege grafiek is niet te onderscheiden van een grafiek waar nog geen
-  /// cijfers in staan. Bij het opslaan weegt het zwaarder: de markdown draagt
-  /// dan alleen nog de verwijzing, dus die cijfers bestaan enkel nog in dit
-  /// venster — een geslaagde opslag melden zou ronduit misleidend zijn. Vandaar
-  /// twee teksten, en bij het opslaan de foutkleur.
-  void _listenChartDataWarning(BuildContext context, WidgetRef ref) {
-    ref.listen<ChartDataWarning?>(chartDataWarningProvider, (_, warning) {
-      if (warning == null) return;
-      ref.read(chartDataWarningProvider.notifier).state = null;
-      final l10n = context.l10n;
-      final messenger = ScaffoldMessenger.of(context);
-      final sources = warning.sources.join(', ');
-      if (warning.whileSaving) {
-        showErrorSnackBar(
-          messenger,
-          l10n,
-          '${l10n.d('Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:')} '
-          '$sources',
-        );
-        return;
-      }
-      messenger.showSnackBar(
-        SnackBar(
-          duration: const Duration(seconds: 8),
-          content: Text(
-            '${l10n.d('Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:')} '
-            '$sources',
-          ),
-        ),
-      );
-    });
-  }
 
   /// Een laag naast het deck is niet ingelezen omdat hij te groot was.
   ///

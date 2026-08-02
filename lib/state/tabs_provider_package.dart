@@ -176,3 +176,72 @@ extension _TabsPackageAssets on TabsNotifier {
     return result;
   }
 }
+
+/// Pak een `.ocideck`/zip-pakket volledig in het geheugen uit en open het:
+/// de hoofd-markdown gaat door dezelfde security-gate als elk bytes-open,
+/// afbeeldings-leden gaan (na de pickImage-validatie) de [WebAssetStore] in
+/// en de slidepaden worden naar hun mem:-pad herschreven, en de sidecars
+/// (annotaties, sprekersnotities) reizen mee. Er raakt geen bestandssysteem
+/// aan te pas, dus dit werkt ook in de webversie.
+Future<OpenResult> _openPackageFromBytes(
+  TabsNotifier notifier,
+  Uint8List bytes,
+  String name, {
+  String? remoteOrigin,
+}) async {
+  // Versleuteld pakket: vraag (met retry) het wachtwoord vóór het decoderen.
+  String? password;
+  if (FileService.isEncryptedPackage(bytes)) {
+    final resolver = notifier.packagePasswordResolver;
+    if (resolver == null) return OpenResult.passwordCancelled;
+    var retry = false;
+    while (true) {
+      final pw = await resolver(retry: retry);
+      if (pw == null || !notifier.mounted) return OpenResult.passwordCancelled;
+      if (notifier._file.canDecodePackage(bytes, pw)) {
+        password = pw;
+        break;
+      }
+      retry = true;
+    }
+  }
+  final entries = notifier._file.decodePackageEntries(
+    bytes,
+    password: password,
+  );
+  if (entries == null) return OpenResult.unreadable;
+  final mdEntry = FileService.mainMarkdownEntry(entries);
+  if (mdEntry == null) return OpenResult.notAPresentation;
+  final String raw;
+  try {
+    raw = utf8.decode(mdEntry.bytes);
+  } on FormatException catch (e) {
+    logWarning('TabsNotifier._openPackageFromBytes: md not UTF-8', e);
+    return OpenResult.unreadable;
+  }
+  final gated = notifier._gateAndParseContent(
+    raw,
+    sourceName: '$name → ${mdEntry.name}',
+  );
+  var deck = gated.deck;
+  if (deck == null) return gated.failure;
+
+  try {
+    deck = notifier._attachPackageAssets(deck, entries, mdEntry.name);
+  } on WebAssetBudgetExceeded catch (e) {
+    logWarning('TabsNotifier._openPackageFromBytes: webgeheugen vol', e);
+    return _failOpen(
+      notifier._ref,
+      notifier.mounted,
+      OpenFailure.memoryBudgetExceeded,
+    );
+  }
+  deck = notifier._attachPackageChartData(deck, entries, mdEntry.name);
+  deck = notifier._attachPackageSidecars(deck, entries, mdEntry.name);
+  if (!notifier.mounted) return OpenResult.unreadable;
+  // Ná het aanhaken: wat het pakket wél meebracht is nu ingevuld, dus wat
+  // hier nog leeg is, ontbrak echt.
+  notifier._warnUnfilledChartData(deck);
+  notifier._placeDeckInTab(deck, remoteOrigin: remoteOrigin);
+  return OpenResult.opened;
+}

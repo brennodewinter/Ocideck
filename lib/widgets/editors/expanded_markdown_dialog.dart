@@ -393,7 +393,7 @@ class _ExpandedMarkdownDialogState extends State<ExpandedMarkdownDialog> {
                   children: [
                     Expanded(
                       child: Text(
-                        '$previewShortcut · Esc',
+                        '$previewShortcut · ${context.l10n.d('Esc')}',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ),

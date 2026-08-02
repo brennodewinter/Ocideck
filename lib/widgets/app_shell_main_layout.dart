@@ -107,7 +107,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         return KeyEventResult.ignored;
       },
       child: CallbackShortcuts(
-        bindings: _shortcutBindings(deckNotifier),
+        bindings: _shortcutBindings(this, deckNotifier),
         child: Scaffold(
           appBar: _appBar(
             deck,
@@ -242,47 +242,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         ),
       ),
     );
-  }
-
-  /// Sneltoetsen van het hoofdscherm (opslaan, undo/redo, zoeken).
-  Map<ShortcutActivator, VoidCallback> _shortcutBindings(
-    DeckNotifier deckNotifier,
-  ) {
-    return {
-      const SingleActivator(LogicalKeyboardKey.keyS, control: true): _saveDeck,
-      const SingleActivator(LogicalKeyboardKey.keyS, meta: true): _saveDeck,
-      // Ongedaan maken / opnieuw. Vuren alleen wanneer de focus niet in een
-      // tekstveld zit (dat handelt z'n eigen undo af), dus geen conflict.
-      const SingleActivator(LogicalKeyboardKey.keyZ, control: true): () =>
-          _undo(deckNotifier),
-      const SingleActivator(LogicalKeyboardKey.keyZ, meta: true): () =>
-          _undo(deckNotifier),
-      const SingleActivator(
-        LogicalKeyboardKey.keyZ,
-        control: true,
-        shift: true,
-      ): () =>
-          _redo(deckNotifier),
-      const SingleActivator(
-        LogicalKeyboardKey.keyZ,
-        meta: true,
-        shift: true,
-      ): () =>
-          _redo(deckNotifier),
-      const SingleActivator(LogicalKeyboardKey.keyY, control: true): () =>
-          _redo(deckNotifier),
-      const SingleActivator(LogicalKeyboardKey.keyF, control: true): _openFind,
-      const SingleActivator(LogicalKeyboardKey.keyF, meta: true): _openFind,
-      const SingleActivator(LogicalKeyboardKey.keyH, control: true):
-          _openFindReplace,
-      const SingleActivator(LogicalKeyboardKey.keyH, meta: true):
-          _openFindReplace,
-      // Commandopalet: doorzoekbare lijst van alle acties.
-      const SingleActivator(LogicalKeyboardKey.keyK, control: true):
-          _openCommandPalette,
-      const SingleActivator(LogicalKeyboardKey.keyK, meta: true):
-          _openCommandPalette,
-    };
   }
 
   /// De samengevatte exportstatus plus de onderliggende kwaliteitsmeldingen.
