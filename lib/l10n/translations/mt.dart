@@ -1793,6 +1793,25 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Voortgang per sectie': 'Progress skont it-taqsima',
+  'Nog te doen': 'Fadal',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'L-istampa ġenerali u l-graff tal-progress ġew aġġornati',
+  'Genereer managementreview (9.3)': 'Iġġenera reviżjoni mill-maniġment (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Iżid mudell mimli minn qabel għar-reviżjoni mill-maniġment (klawżola ISO 9.3), bil-progress attwali.',
+  'Managementreview (clausule 9.3) — Input':
+      'Reviżjoni mill-maniġment (klawżola 9.3) — Input',
+  'Managementreview (clausule 9.3) — Output':
+      'Reviżjoni mill-maniġment (klawżola 9.3) — Output',
+  'Managementreview (9.3) toegevoegd':
+      'Ir-reviżjoni mill-maniġment (9.3) miżjuda',
+  'Er staat al een managementreview in dit deck':
+      'Dan id-deck diġà fih reviżjoni mill-maniġment',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Input (9.3.2)\n\n- **a.** L-istat tal-azzjonijiet minn reviżjonijiet mill-maniġment preċedenti\n- **b.** Bidliet fil-kwistjonijiet interni u esterni li jaffettwaw is-sistema ta\' ġestjoni\n- **c.** Bidliet fil-ħtiġijiet u l-aspettattivi tal-partijiet interessati\n- **d.** Prestazzjoni u effettività — {p}% implimentat ({impl}/{app} kontrolli applikabbli)\n    - Xejriet fin-nuqqasijiet ta\' konformità u l-azzjonijiet korrettivi\n    - Riżultati tal-monitoraġġ u l-kejl\n    - Riżultati tal-verifiki\n- **e.** L-adegwatezza tar-riżorsi\n- **f.** L-effettività tal-azzjonijiet meħuda kontra r-riskji u l-opportunitajiet\n- **g.** Opportunitajiet għal titjib',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Output (9.3.3)\n\n- Deċiżjonijiet dwar opportunitajiet ta\' titjib kontinwu\n- Deċiżjonijiet dwar kwalunkwe bidla fis-sistema ta\' ġestjoni\n- Ħtiġijiet ta\' riżorsi\n\n_Imla d-deċiżjonijiet, l-azzjonijiet u s-sidien hawn taħt._',
   'Procesverbetering: DMADV-project': 'Titjib tal-proċess: proġett DMADV',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'Skeletru DMADV għat-tfassil u l-verifika ta \'proċess ġdid.',

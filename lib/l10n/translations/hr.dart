@@ -1777,6 +1777,24 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Voortgang per sectie': 'Napredak po odjeljku',
+  'Nog te doen': 'Preostalo',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Pregled i grafikon napretka ažurirani',
+  'Genereer managementreview (9.3)': 'Generiraj upravinu ocjenu (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Dodaje unaprijed ispunjeni predložak za upravinu ocjenu (ISO točka 9.3) s trenutnim napretkom.',
+  'Managementreview (clausule 9.3) — Input':
+      'Upravina ocjena (točka 9.3) — Ulazni podaci',
+  'Managementreview (clausule 9.3) — Output':
+      'Upravina ocjena (točka 9.3) — Izlazni podaci',
+  'Managementreview (9.3) toegevoegd': 'Upravina ocjena (9.3) dodana',
+  'Er staat al een managementreview in dit deck':
+      'Ovaj deck već sadrži upravinu ocjenu',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Ulazni podaci (9.3.2)\n\n- **a.** Status radnji iz prethodnih upravinih ocjena\n- **b.** Promjene u unutarnjim i vanjskim pitanjima koja utječu na sustav upravljanja\n- **c.** Promjene u potrebama i očekivanjima zainteresiranih strana\n- **d.** Performanse i djelotvornost — {p}% implementirano ({impl}/{app} primjenjivih kontrola)\n    - Trendovi u nesukladnostima i korektivnim radnjama\n    - Rezultati praćenja i mjerenja\n    - Rezultati audita\n- **e.** Primjerenost resursa\n- **f.** Djelotvornost radnji poduzetih za rizike i prilike\n- **g.** Prilike za poboljšanje',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Izlazni podaci (9.3.3)\n\n- Odluke o prilikama za kontinuirano poboljšanje\n- Odluke o eventualnim promjenama sustava upravljanja\n- Potrebe za resursima\n\n_Ispod unesite odluke, radnje i vlasnike._',
   'Procesverbetering: DMADV-project': 'Poboljšanje procesa: DMADV projekt',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV kostur za projektiranje i provjeru novog procesa.',

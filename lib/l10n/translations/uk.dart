@@ -1788,6 +1788,24 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Voortgang per sectie': 'Прогрес за розділами',
+  'Nog te doen': 'Залишилося',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Огляд і графік прогресу оновлено',
+  'Genereer managementreview (9.3)': 'Створити аналіз з боку керівництва (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Додає попередньо заповнений шаблон аналізу з боку керівництва (пункт ISO 9.3) з поточним прогресом.',
+  'Managementreview (clausule 9.3) — Input':
+      'Аналіз з боку керівництва (пункт 9.3) — Вхідні дані',
+  'Managementreview (clausule 9.3) — Output':
+      'Аналіз з боку керівництва (пункт 9.3) — Вихідні дані',
+  'Managementreview (9.3) toegevoegd': 'Аналіз з боку керівництва (9.3) додано',
+  'Er staat al een managementreview in dit deck':
+      'У цій колоді вже є аналіз з боку керівництва',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Вхідні дані (9.3.2)\n\n- **a.** Стан дій за результатами попередніх аналізів з боку керівництва\n- **b.** Зміни у внутрішніх і зовнішніх чинниках, що впливають на систему управління\n- **c.** Зміни в потребах і очікуваннях зацікавлених сторін\n- **d.** Результативність та ефективність — {p}% впроваджено (застосовних контролів: {impl}/{app})\n    - Тенденції невідповідностей і коригувальних дій\n    - Результати моніторингу та вимірювань\n    - Результати аудитів\n- **e.** Достатність ресурсів\n- **f.** Результативність дій щодо ризиків і можливостей\n- **g.** Можливості для покращення',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Вихідні дані (9.3.3)\n\n- Рішення щодо можливостей постійного покращення\n- Рішення щодо будь-яких змін у системі управління\n- Потреби в ресурсах\n\n_Нижче впишіть рішення, дії та відповідальних._',
   'Procesverbetering: DMADV-project': 'Удосконалення процесу: проект DMADV',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'Скелет DMADV для розробки та перевірки нового процесу.',

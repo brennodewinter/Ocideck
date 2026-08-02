@@ -1806,6 +1806,25 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Voortgang per sectie': 'Dul chun cinn de réir rannóige',
+  'Nog te doen': 'Le déanamh',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Nuashonraíodh an forbhreathnú agus an chairt dul chun cinn',
+  'Genereer managementreview (9.3)': 'Gin athbhreithniú bainistíochta (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Cuireann sé teimpléad réamhlíonta leis don athbhreithniú bainistíochta (clásal ISO 9.3), leis an dul chun cinn reatha.',
+  'Managementreview (clausule 9.3) — Input':
+      'Athbhreithniú bainistíochta (clásal 9.3) — Ionchur',
+  'Managementreview (clausule 9.3) — Output':
+      'Athbhreithniú bainistíochta (clásal 9.3) — Aschur',
+  'Managementreview (9.3) toegevoegd':
+      'Cuireadh athbhreithniú bainistíochta (9.3) leis',
+  'Er staat al een managementreview in dit deck':
+      'Tá athbhreithniú bainistíochta sa deck seo cheana féin',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Ionchur (9.3.2)\n\n- **a.** Stádas na ngníomhartha ó athbhreithnithe bainistíochta roimhe seo\n- **b.** Athruithe ar shaincheisteanna inmheánacha agus seachtracha a bhaineann leis an gcóras bainistíochta\n- **c.** Athruithe ar riachtanais agus ionchais na bpáirtithe leasmhara\n- **d.** Feidhmíocht agus éifeachtacht — {p}% curtha i bhfeidhm ({impl}/{app} rialú infheidhme)\n    - Treochtaí i neamhréireachtaí agus i ngníomhartha ceartaitheacha\n    - Torthaí faireacháin agus tomhais\n    - Torthaí iniúchóireachta\n- **e.** Leordhóthanacht na n-acmhainní\n- **f.** Éifeachtacht na ngníomhartha i leith rioscaí agus deiseanna\n- **g.** Deiseanna feabhsúcháin',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Aschur (9.3.3)\n\n- Cinntí faoi dheiseanna feabhsúcháin leanúnaigh\n- Cinntí faoi aon athruithe ar an gcóras bainistíochta\n- Riachtanais acmhainní\n\n_Líon isteach na cinntí, na gníomhartha agus na húinéirí thíos._',
   'Procesverbetering: DMADV-project': 'Feabhsú próisis: tionscadal DMADV',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'Creat DMADV chun próiseas nua a dhearadh agus a fhíorú.',

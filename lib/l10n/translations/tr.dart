@@ -2748,6 +2748,24 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Voortgang per sectie': 'Bölüme göre ilerleme',
+  'Nog te doen': 'Kalan',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'İlerleme özeti ve grafiği güncellendi',
+  'Genereer managementreview (9.3)': 'Yönetim gözden geçirmesi oluştur (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Yönetim gözden geçirmesi için (ISO madde 9.3) mevcut ilerlemeyi içeren önceden doldurulmuş bir şablon ekler.',
+  'Managementreview (clausule 9.3) — Input':
+      'Yönetim gözden geçirmesi (madde 9.3) — Girdi',
+  'Managementreview (clausule 9.3) — Output':
+      'Yönetim gözden geçirmesi (madde 9.3) — Çıktı',
+  'Managementreview (9.3) toegevoegd': 'Yönetim gözden geçirmesi (9.3) eklendi',
+  'Er staat al een managementreview in dit deck':
+      'Bu sunumda zaten bir yönetim gözden geçirmesi var',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Girdi (9.3.2)\n\n- **a.** Önceki yönetim gözden geçirmelerinden gelen faaliyetlerin durumu\n- **b.** Yönetim sistemini etkileyen iç ve dış konulardaki değişiklikler\n- **c.** İlgili tarafların ihtiyaç ve beklentilerindeki değişiklikler\n- **d.** Performans ve etkinlik — %{p} uygulandı ({impl}/{app} uygulanabilir kontrol)\n    - Uygunsuzluklar ve düzeltici faaliyetlerdeki eğilimler\n    - İzleme ve ölçme sonuçları\n    - Denetim sonuçları\n- **e.** Kaynakların yeterliliği\n- **f.** Riskler ve fırsatlara yönelik faaliyetlerin etkinliği\n- **g.** İyileştirme fırsatları',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Çıktı (9.3.3)\n\n- Sürekli iyileştirme fırsatlarına ilişkin kararlar\n- Yönetim sistemindeki olası değişikliklere ilişkin kararlar\n- Kaynak ihtiyaçları\n\n_Kararları, faaliyetleri ve sorumluları aşağıya girin._',
   'Procesverbetering: DMADV-project': 'Süreç iyileştirme: DMADV projesi',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'Yeni bir sürecin tasarlanması ve doğrulanması için DMADV iskeleti.',

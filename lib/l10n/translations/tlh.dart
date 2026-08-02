@@ -1746,6 +1746,22 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Voortgang per sectie': '\'ay\' Qap',
+  'Nog te doen': 'ratlhtaHbogh',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Qap much Qap HaSta je chu\'moHlu\'pu\'',
+  'Genereer managementreview (9.3)': 'che\'wI\' nuD yIchenmoH (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'che\'wI\' nuD (ISO chut 9.3) buq\'Ir chellu\', DaH Qap tebbogh.',
+  'Managementreview (clausule 9.3) — Input': 'che\'wI\' nuD (chut 9.3) — \'el',
+  'Managementreview (clausule 9.3) — Output': 'che\'wI\' nuD (chut 9.3) — mej',
+  'Managementreview (9.3) toegevoegd': 'che\'wI\' nuD (9.3) chellu\'pu\'',
+  'Er staat al een managementreview in dit deck':
+      'deck vamDaq che\'wI\' nuD tu\'lu\'bej',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## \'el (9.3.2)\n\n- **a.** che\'wI\' nuD ben vo\' vangtaHghachmey Dotlh\n- **b.** pat luqaHbogh Sum \'ej Hop Doch\'e\' choHmey\n- **c.** ngoq ghajwI\'pu\' poQmey \'ej pIHmey choHmey\n- **d.** Qapla\' \'ej lI\'taHghach — {p}% rInpu\' ({impl}/{app} Hubmey lo\'laH)\n    - qarHa\'ghachmey \'ej DubmeH vangtaHghachmey tlheghmey\n    - ghoQ \'ej juvtaHghach De\'mey\n    - nuDtaHghach De\'mey\n- **e.** jo naQ\n- **f.** Qob \'ej \'eb luSammeH vangtaHghachmey lI\'taHghach\n- **g.** DubmeH \'ebmey',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## mej (9.3.3)\n\n- taHtaHbogh DubmeH \'ebmey wIvmey\n- che\'meH pat choHmey wIvmey\n- poQlu\'bogh jo\n\n_bIngDaq wIvmey, vangtaHghachmey \'ej ghajwI\'pu\' yIghItlh._',
   'Procesverbetering: DMADV-project': 'DMADV: gher\'ID QI\'meH mIq',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'cherghmeH je olmeH chu\' gher\'ID DMADV qel.',

@@ -730,6 +730,24 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Voortgang per sectie': 'Progreso pa sekshon',
+  'Nog te doen': 'Falta pa hasi',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Resúmen i gráfiko di progreso aktualisá',
+  'Genereer managementreview (9.3)': 'Generá revishon di gerensia (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Ta agregá un plantilla yená pa e revishon di gerensia (klousula ISO 9.3), ku e progreso aktual aden.',
+  'Managementreview (clausule 9.3) — Input':
+      'Revishon di gerensia (klousula 9.3) — Entrada',
+  'Managementreview (clausule 9.3) — Output':
+      'Revishon di gerensia (klousula 9.3) — Salida',
+  'Managementreview (9.3) toegevoegd': 'Revishon di gerensia (9.3) agregá',
+  'Er staat al een managementreview in dit deck':
+      'E deck aki tin kaba un revishon di gerensia',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Entrada (9.3.2)\n\n- **a.** Estado di e akshonnan di revishonnan di gerensia anterior\n- **b.** Kambionan den asuntunan interno i eksterno ku ta afektá e sistema di gestion\n- **c.** Kambionan den e nesesidat i ekspektativa di e partidonan interesá\n- **d.** Rendimentu i efektividat — {p}% implementá ({impl}/{app} kontrol aplikabel)\n    - Tendensia den no-konformidat i akshon korektivo\n    - Resultado di monitoreo i midimentu\n    - Resultado di ouditoria\n- **e.** Adekuashon di rekurso\n- **f.** Efektividat di e akshonnan kontra riesgo i oportunidat\n- **g.** Oportunidat pa mehoramentu',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Salida (9.3.3)\n\n- Desishon tokante oportunidat pa mehoramentu kontinuo\n- Desishon tokante kualke kambio na e sistema di gestion\n- Nesesidat di rekurso\n\n_Yena e desishon, akshon i doñonan abou._',
   'Procesverbetering: DMADV-project': 'Mehorashon di proseso: proyekto DMADV',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'Skeleton di DMADV pa diseñá i verifiká un proseso nobo.',

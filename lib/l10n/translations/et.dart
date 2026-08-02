@@ -1762,6 +1762,25 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Voortgang per sectie': 'Edenemine jaotiste kaupa',
+  'Nog te doen': 'Tegemata',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Edenemise ülevaade ja diagramm on uuendatud',
+  'Genereer managementreview (9.3)': 'Loo juhtkonnapoolne ülevaatus (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Lisab eeltäidetud malli juhtkonnapoolse ülevaatuse jaoks (ISO punkt 9.3) koos praeguse edenemisega.',
+  'Managementreview (clausule 9.3) — Input':
+      'Juhtkonnapoolne ülevaatus (punkt 9.3) — Sisend',
+  'Managementreview (clausule 9.3) — Output':
+      'Juhtkonnapoolne ülevaatus (punkt 9.3) — Väljund',
+  'Managementreview (9.3) toegevoegd':
+      'Juhtkonnapoolne ülevaatus (9.3) lisatud',
+  'Er staat al een managementreview in dit deck':
+      'Selles deckis on juba juhtkonnapoolne ülevaatus',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Sisend (9.3.2)\n\n- **a.** Varasemate juhtkonnapoolsete ülevaatuste tegevuste olek\n- **b.** Muudatused sisemistes ja välistes teemades, mis mõjutavad juhtimissüsteemi\n- **c.** Muudatused huvitatud osapoolte vajadustes ja ootustes\n- **d.** Tulemuslikkus ja tõhusus — {p}% rakendatud ({impl}/{app} kohaldatavat meedet)\n    - Mittevastavuste ja parandusmeetmete suundumused\n    - Seire ja mõõtmise tulemused\n    - Auditite tulemused\n- **e.** Ressursside piisavus\n- **f.** Riskide ja võimalustega tegelemiseks võetud meetmete tõhusus\n- **g.** Parendusvõimalused',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Väljund (9.3.3)\n\n- Otsused pideva parendamise võimaluste kohta\n- Otsused juhtimissüsteemi võimalike muudatuste kohta\n- Ressursivajadused\n\n_Sisestage allpool otsused, tegevused ja vastutajad._',
   'Procesverbetering: DMADV-project': 'Protsessi täiustamine: DMADV projekt',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV skelett uue protsessi kavandamiseks ja kontrollimiseks.',

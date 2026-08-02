@@ -730,6 +730,24 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Voortgang per sectie': 'Fortschritt pro Abschnitt',
+  'Nog te doen': 'Ausstehend',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Fortschrittsübersicht und -diagramm aktualisiert',
+  'Genereer managementreview (9.3)': 'Managementbewertung generieren (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Fügt eine vorausgefüllte Vorlage für die Managementbewertung (ISO-Abschnitt 9.3) hinzu, mit dem aktuellen Fortschritt darin.',
+  'Managementreview (clausule 9.3) — Input':
+      'Managementbewertung (Abschnitt 9.3) — Eingaben',
+  'Managementreview (clausule 9.3) — Output':
+      'Managementbewertung (Abschnitt 9.3) — Ergebnisse',
+  'Managementreview (9.3) toegevoegd': 'Managementbewertung (9.3) hinzugefügt',
+  'Er staat al een managementreview in dit deck':
+      'In diesem Deck ist bereits eine Managementbewertung vorhanden',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Eingaben (9.3.2)\n\n- **a.** Status der Maßnahmen aus früheren Managementbewertungen\n- **b.** Änderungen bei internen und externen Themen, die das Managementsystem betreffen\n- **c.** Änderungen der Erfordernisse und Erwartungen interessierter Parteien\n- **d.** Leistung und Wirksamkeit — {p}% umgesetzt ({impl}/{app} Maßnahmen anwendbar)\n    - Trends bei Abweichungen und Korrekturmaßnahmen\n    - Ergebnisse der Überwachung und Messung\n    - Auditergebnisse\n- **e.** Angemessenheit der Ressourcen\n- **f.** Wirksamkeit der Maßnahmen gegen Risiken und Chancen\n- **g.** Möglichkeiten zur Verbesserung',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Ergebnisse (9.3.3)\n\n- Entscheidungen zu Möglichkeiten der kontinuierlichen Verbesserung\n- Entscheidungen über etwaige Änderungen am Managementsystem\n- Ressourcenbedarf\n\n_Tragen Sie unten die Entscheidungen, Maßnahmen und Verantwortlichen ein._',
   'Procesverbetering: DMADV-project': 'Prozessverbesserung: DMADV-Projekt',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV-Gerüst zum Entwerfen und Verifizieren eines neuen Prozesses.',

@@ -1770,6 +1770,24 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Voortgang per sectie': 'Progress pa sadaļām',
+  'Nog te doen': 'Atlikušais',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Progresa pārskats un diagramma atjaunināti',
+  'Genereer managementreview (9.3)': 'Ģenerēt vadības pārskatīšanu (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Pievieno iepriekš aizpildītu vadības pārskatīšanas veidni (ISO 9.3. punkts) ar pašreizējo progresu.',
+  'Managementreview (clausule 9.3) — Input':
+      'Vadības pārskatīšana (9.3. punkts) — Ievaddati',
+  'Managementreview (clausule 9.3) — Output':
+      'Vadības pārskatīšana (9.3. punkts) — Izvaddati',
+  'Managementreview (9.3) toegevoegd': 'Vadības pārskatīšana (9.3) pievienota',
+  'Er staat al een managementreview in dit deck':
+      'Šajā dekā jau ir vadības pārskatīšana',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Ievaddati (9.3.2)\n\n- **a.** Darbību statuss no iepriekšējām vadības pārskatīšanām\n- **b.** Izmaiņas iekšējos un ārējos jautājumos, kas ietekmē pārvaldības sistēmu\n- **c.** Izmaiņas ieinteresēto pušu vajadzībās un gaidās\n- **d.** Veiktspēja un rezultativitāte — {p}% ieviests (piemērojamas kontroles: {impl}/{app})\n    - Neatbilstību un koriģējošo darbību tendences\n    - Uzraudzības un mērījumu rezultāti\n    - Auditu rezultāti\n- **e.** Resursu pietiekamība\n- **f.** Risku un iespēju risināšanai veikto darbību rezultativitāte\n- **g.** Uzlabošanas iespējas',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Izvaddati (9.3.3)\n\n- Lēmumi par nepārtrauktas uzlabošanas iespējām\n- Lēmumi par jebkādām izmaiņām pārvaldības sistēmā\n- Nepieciešamie resursi\n\n_Zemāk ierakstiet lēmumus, darbības un atbildīgos._',
   'Procesverbetering: DMADV-project': 'Procesa uzlabošana: DMADV projekts',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV skelets jauna procesa projektēšanai un pārbaudei.',

@@ -731,6 +731,24 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Voortgang per sectie': 'Fuortgong per seksje',
+  'Nog te doen': 'Noch te dwaan',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Fuortgongsoersjoch en -grafyk bywurke',
+  'Genereer managementreview (9.3)': 'Managementbeoardieling generearje (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Foeget in ynfolde sjabloan foar de managementbeoardieling (ISO-klausule 9.3) ta, mei de aktuele fuortgong deryn.',
+  'Managementreview (clausule 9.3) — Input':
+      'Managementbeoardieling (klausule 9.3) — Ynfier',
+  'Managementreview (clausule 9.3) — Output':
+      'Managementbeoardieling (klausule 9.3) — Utfier',
+  'Managementreview (9.3) toegevoegd': 'Managementbeoardieling (9.3) tafoege',
+  'Er staat al een managementreview in dit deck':
+      'Yn dit deck stiet al in managementbeoardieling',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Ynfier (9.3.2)\n\n- **a.** Status fan aksjes út eardere managementbeoardielingen\n- **b.** Feroarings yn ynterne en eksterne ûnderwerpen dy\'t it behearsysteem reitsje\n- **c.** Feroarings yn behoeften en ferwachtings fan belanghawwenden\n- **d.** Prestaasjes en doeltreffendheid — {p}% ymplementearre ({impl}/{app} behearsmaatregels fan tapassing)\n    - Trends yn ôfwikings en korrizjearjende maatregels\n    - Monitoring- en mjittingsresultaten\n    - Auditresultaten\n- **e.** Genôchheid fan middels\n- **f.** Doeltreffendheid fan maatregels tsjin risiko\'s en kânsen\n- **g.** Kânsen foar ferbettering',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Utfier (9.3.3)\n\n- Beslissings oer kânsen foar trochgeande ferbettering\n- Beslissings oer eventuele feroarings oan it behearsysteem\n- Nedige middels\n\n_Folje hjirûnder de beslissings, aksjes en eigners yn._',
   'Procesverbetering: DMADV-project': 'Prosesferbettering: DMADV-projekt',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV skelet foar it ûntwerpen en ferifiearjen fan in nij proses.',

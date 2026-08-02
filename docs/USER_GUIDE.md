@@ -3857,18 +3857,48 @@ flatters or deflates the figure).
 ### Generating a progress overview
 
 **Genereer voortgangsoverzicht** rolls up every Beheersmaatregel-status slide in
-the deck into one **overview table** ("Voortgang managementsysteem"): one row per
-section with its applicable count, implemented count and percentage, plus a totals
-row. The overview is **derived** from the detail slides — regenerate it after a
-change and it stays consistent; there is no second figure that can drift. Running
-it again refreshes the existing overview in place rather than adding a second one.
-If there are no control-status slides yet, it tells you so instead of writing an
-empty table.
+the deck and draws **two** derived slides. The first is the **overview table**
+("Voortgang managementsysteem"): one row per section with its applicable count,
+implemented count and percentage, plus a totals row. The second is a **burn-up
+chart** ("Voortgang per sectie"): a horizontal stacked bar per section, its length
+the section's applicable controls, split into the part that is implemented (green)
+and the part still to do (grey), so at a glance you see how far each section has
+burned up toward done. Not-applicable controls are already out of the applicable
+base, so a section that is entirely out of scope shows an empty bar rather than a
+misleadingly full one.
 
-> **Not yet built.** This first version reports per-control status and the derived
-> overview. A management-review (clause 9.3) template, a burn-up chart of progress
-> over time, and period/trend metadata are on the roadmap but not in the app yet;
-> see [`docs/design/ISO_MANAGEMENTSYSTEEM.md`](design/ISO_MANAGEMENTSYSTEEM.md).
+Both are **derived** from the detail slides — regenerate them after a change and
+they stay consistent; there is no second figure that can drift. Running the action
+again refreshes the existing table and chart in place rather than adding a second
+copy (the chart is matched on its own title, "Voortgang per sectie"). If there are
+no control-status slides yet, it tells you so instead of writing empty slides. The
+burn-up is a **snapshot** of the deck as it stands, not a trend over time; a
+comparison against a previous review period is part of the period/trend work that
+is not built yet (see below).
+
+### Generating a management review (clause 9.3)
+
+**Genereer managementreview (9.3)** adds a two-slide template for the ISO
+management review, pre-filled with the current progress. The first slide is the
+**input** following clause 9.3.2 (status of earlier actions, changes in the
+organisation's context and in the stakeholders, performance and effectiveness —
+with the percentage implemented and the implemented-of-applicable count filled in
+— adequacy of resources, effectiveness against risks and opportunities, and
+opportunities for improvement). The second is the **output** following clause
+9.3.3 (decisions on continual improvement, on changes to the management system,
+and on the resources needed).
+
+These are ordinary editable slides (free Markdown), not a locked form, so you
+write your decisions, actions and owners straight into them. Running the action
+again does **not** add a second copy: an invisible marker on the first slide
+guards your answers, and OciDeck tells you a review is already present instead of
+overwriting it. If you want a fresh template, delete the existing review slides
+first.
+
+> **Not yet built.** Period/trend metadata — which review period a deck reports
+> on, and comparing progress against the previous period — is on the roadmap but
+> not in the app yet; see
+> [`docs/design/ISO_MANAGEMENTSYSTEEM.md`](design/ISO_MANAGEMENTSYSTEEM.md).
 > OciDeck reports progress — it makes no certification or conformance claim and is
 > not a substitute for an auditor.
 

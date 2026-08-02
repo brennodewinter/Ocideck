@@ -26,16 +26,22 @@ in Dutch, and it keeps growing on `main` between releases.
   (*Niet gestart* / *Gepland* / *Deels* / *Geïmplementeerd* / *Niet van
   toepassing*), een optioneel volwassenheidsniveau (0–5), een eigenaar, een
   streefdatum, een bewijsverwijzing en een notitie vast. De voortgangsbalk en de
-  actie **Genereer voortgangsoverzicht** (een tabel-dia per sectie met totalen)
-  worden altijd **afgeleid** uit de dia's, dus ze lopen nooit uit de pas met de
-  details. Op schijf is het een gewone Markdown-tabel met taalonafhankelijke
-  Engelse statuswoorden, dus een rapport reist verliesvrij mee en opent overal.
-  Alles is offline: alleen de **index** van de normen is meegeleverd (nummer +
-  korte titel), niet de auteursrechtelijk beschermde normtekst. OciDeck
-  rapporteert voortgang; het doet geen certificerings- of conformiteitsuitspraak.
-  **Nog niet gebouwd** (bewust uitgesteld): een managementreview-sjabloon
-  (clausule 9.3), een burn-up-grafiek van de voortgang over de tijd, en de
-  periode/trend-frontmatter. Zie
+  actie **Genereer voortgangsoverzicht** worden altijd **afgeleid** uit de dia's,
+  dus ze lopen nooit uit de pas met de details; die actie zet nu naast de
+  overzichtstabel (per sectie met totalen) óók een **burn-up-grafiek** neer — een
+  horizontale staaf per sectie, gesplitst in geïmplementeerd (groen) en nog te
+  doen (grijs). Met de nieuwe actie **Genereer managementreview (9.3)** voeg je een
+  ingevuld sjabloon voor de directiebeoordeling toe: twee dia's (input volgens
+  9.3.2 en output volgens 9.3.3) met de huidige voortgangscijfers erin. Die dia's
+  zijn gewone, direct te bewerken dia's; een tweede druk laat een bestaande review
+  ongemoeid, zodat je eigen antwoorden blijven staan. Op schijf is de statuslijst
+  een gewone Markdown-tabel met taalonafhankelijke Engelse statuswoorden, dus een
+  rapport reist verliesvrij mee en opent overal. Alles is offline: alleen de
+  **index** van de normen is meegeleverd (nummer + korte titel), niet de
+  auteursrechtelijk beschermde normtekst. OciDeck rapporteert voortgang; het doet
+  geen certificerings- of conformiteitsuitspraak. **Nog niet gebouwd** (bewust
+  uitgesteld): de periode/trend-frontmatter, waarmee een deck een reviewperiode
+  draagt en de voortgang zich tegen een vorige periode laat vergelijken. Zie
   [`docs/design/ISO_MANAGEMENTSYSTEEM.md`](docs/design/ISO_MANAGEMENTSYSTEEM.md).
 - **Procesverbetering via sjablonen** — de losse actie *Nieuw
   verbeteringsproject* op het welkomstscherm en de bijbehorende wizard zijn

@@ -5,13 +5,18 @@ managementsysteem** rapporteert: ISO/IEC 27001 (ISMS), ISO 9001 (QMS) en
 ISO/IEC 42001 (AIMS). Verslag richting directie, bestuur, of een certificerende
 instantie.*
 
-> **Status:** Blok A–C gebouwd (2026-08-02) — de gebundelde ISO-index-catalogi,
-> het `controlStatus`-slidetype met editor/preview/ISO-importer, en de
-> voortgangsanalyzer met de *Genereer voortgangsoverzicht*-actie draaien. Het
-> managementreview-sjabloon (9.3), de burn-up-grafiek via chart-derivation en de
-> periode/trend-frontmatter (`ocideck_ms_*`) zijn bewust **uitgesteld** — zie de
-> sectie *Nog te doen* onder §8. · **Laatst herzien:** 2026-08-02 · **Uitgegeven
-> door:** Stichting LibreKAT
+> **Status:** Blok A–C gebouwd, inclusief twee eerder uitgestelde onderdelen
+> (2026-08-02) — de gebundelde ISO-index-catalogi, het `controlStatus`-slidetype
+> met editor/preview/ISO-importer, en de voortgangsanalyzer draaien. De *Genereer
+> voortgangsoverzicht*-actie tekent nu naast de overzichtstabel óók een
+> **burn-up-grafiek**, en er is een *Genereer managementreview (9.3)*-actie
+> bijgekomen. Twee ontwerpkeuzes zijn daarbij bewust bijgesteld: de
+> managementreview komt als **gegenereerde `freeMarkdown`-dia's** in plaats van
+> een `canvas`-sjabloon (§4), en de burn-up als een **gegenereerde `chart`-dia**
+> (een snapshot) in plaats van chart-derivation via `yRef` (§6) — de afwijkingen
+> zijn daar toegelicht. Alleen de periode/trend-frontmatter (`ocideck_ms_*`) is
+> nog bewust **uitgesteld** — zie de sectie *Nog te doen* onder §8. · **Laatst
+> herzien:** 2026-08-02 · **Uitgegeven door:** Stichting LibreKAT
 
 > **Dit spiegelt bewust twee bestaande modules.** De informatieveiligheid-module
 > ([`PENTEST_MIAUW.md`](PENTEST_MIAUW.md)) rapporteert een *pentest* tegen een
@@ -166,9 +171,24 @@ picker, `management_summary`-switch, l10n-labels, tests).
 - **`controlStatus`** — de statustabel uit §3.1. Tabel-gedragen (in
   `_tableBackedTypes`), eigen editor + preview, `_class`-token `controlStatus`.
   Draagt `SlideCategory.managementsysteem`.
-- **Managementreview (9.3)** — géén nieuw slidetype. Een **`canvas`-sjabloon**
-  (drop-in Markdown onder `assets/`, nul Dart) met de vaste 9.3-secties. Hergebruik
-  van de procesverbetering-machinerie.
+- **Managementreview (9.3)** — géén nieuw slidetype. *(Gebouwd, 2026-08-02, met
+  een bewuste afwijking van dit ontwerp.)* De actie *Genereer managementreview
+  (9.3)* (`generateManagementReview` in
+  [`deck_provider_managementsysteem.dart`](../../lib/state/deck_provider_managementsysteem.dart))
+  voegt twee **`freeMarkdown`-dia's** toe — input 9.3.2 en output 9.3.3 — vooraf
+  gevuld met de huidige voortgangscijfers (`{p}`/`{impl}`/`{app}`-plaatsvervangers
+  uit `deckManagementSystemProgress`). Een onzichtbare marker (`<!-- ocideck_ms_review -->`,
+  een private-use HTML-comment die Marp negeert en die verliesvrij rondreist) op
+  de eerste dia houdt een tweede kopie tegen, zodat een herdraai de antwoorden van
+  de auteur beschermt in plaats van te overschrijven. **Afwijking:** dit ontwerp
+  koos een `canvas`-sjabloon. Dat is bewust `freeMarkdown` geworden, omdat het
+  `canvas`-slidetype in `SlideCategory.procesverbetering` zit
+  ([slide.dart](../../lib/models/slide.dart)) en dus achter de
+  procesverbetermodule staat — een managementreview zou dan alleen te maken en te
+  renderen zijn met die aparte module aan. `freeMarkdown` is een basiswerkvorm die
+  overal opent en direct te bewerken is, wat beter past bij een sjabloon dat de
+  auteur invult. Het CAPA-hergebruik uit de procesverbetermodule (clausule 10)
+  blijft ongebouwd.
 - **Verbeteracties / CAPA (clausule 10)** — hergebruik de procesverbetering-module
   (A3, 8D, PDCA) via `Slide.improvementTemplateId`. Geen nieuwe code.
 - **KPI's & trend** — hergebruik `scorecard` (waarde vs. vorige, polariteit) en
@@ -179,10 +199,10 @@ Alleen `controlStatus` is dus écht nieuw; de rest is compositie.
 
 > **Stand 2026-08-02.** `controlStatus` is gebouwd: de volledige
 > `nieuw-slidetype`-ketting, een eigen editor met ISO-importer en een preview met
-> afgeleide voortgangsbalk. De compositiedelen zijn nog **niet meegeleverd**: er
-> is nog geen managementreview-`canvas`-sjabloon onder `assets/`, en het
-> hergebruik van `scorecard`/`timeline`/CAPA voor deze module is nog niet als
-> sjabloon of wizard ontsloten.
+> afgeleide voortgangsbalk. De managementreview is inmiddels gebouwd, maar als
+> `freeMarkdown`-generatie (zie hierboven), niet als het oorspronkelijk beoogde
+> `canvas`-sjabloon. Het hergebruik van `scorecard`/`timeline`/CAPA voor deze
+> module is nog **niet** als sjabloon of wizard ontsloten.
 
 ### 4.1 Wizard
 
@@ -245,24 +265,53 @@ Idempotent: een bestaand overzicht met die titel wordt ter plekke vernieuwd,
 anders komt er een nieuwe achteraan. Altijd **on demand afgeleid**, nooit
 opgeslagen.
 
+*(Gebouwd, 2026-08-02.)* Dezelfde actie tekent naast de tabel óók een
+**burn-up-grafiek**. De pure bouwer leeft als
+[`management_system_artefacts.dart`](../../lib/services/management_system_artefacts.dart)
+(`buildManagementSystemProgressChart`), de dia-plaatsing als
+`generateManagementSystemChart` in
+[`deck_provider_managementsysteem.dart`](../../lib/state/deck_provider_managementsysteem.dart).
+Het is een `chart`-dia van het type horizontale gestapelde staaf, één staaf per
+`controlStatus`-sectie, gesplitst in geïmplementeerd (groen) en nog te doen
+(grijs, `applicable − implemented`). De staaflengte is het aantal
+van-toepassing-controls, zodat het groene deel toont hoe ver de sectie naar
+"klaar" is opgelopen; een sectie geheel buiten scope levert een lege staaf. De
+kleuren zijn vaste hexwaarden (geen serie-palet), zodat de betekenis van
+geïmplementeerd versus nog te doen ook in een export-isolate overeind blijft.
+Idempotent op de eigen grafiektitel ("Voortgang per sectie"): een tweede druk
+vernieuwt de bestaande grafiek ter plekke.
+
+> **Afwijking van het ontwerp.** §6.2 hieronder schetste de burn-up als een
+> *chart-derivation* via het `yRef`-mechanisme uit de procesverbetermodule
+> (resolve-at-draw-time). Dat is bewust een **gegenereerde `chart`-dia** (een
+> snapshot, net als de overzichtstabel) geworden: `yRef` overschrijft alleen
+> bestaande control-chart-limieten en kan geen eigen serie *afleiden* uit de
+> `controlStatus`-dia's, wat hier juist nodig is. De snapshot is idempotent —
+> opnieuw genereren ververst hem — dus "bestand = waarheid" blijft intact.
+
 > **Nog niet gebouwd (2026-08-02).** De verdeling die ook open afwijkingen uit
 > `finding`-dia's meetelt, en een dedicated managementsamenvatting-render (in
 > plaats van een gewone tabel-dia), staan nog open.
 
 ### 6.2 Trend — deck-per-periode
 
-> **Nog niet gebouwd (2026-08-02).** Deze sectie is ontwerp; noch de
-> scorecard-koppeling, noch de burn-up-grafiek via chart-derivation is gebouwd.
-> Het hangt aan de uitgestelde `ocideck_ms_period`-front-matter (§3.2).
+> **Nog niet gebouwd (2026-08-02).** Deze sectie is ontwerp. De burn-up-grafiek
+> is inmiddels gebouwd, maar als een **snapshot per sectie** (§6.1), niet als de
+> trend-over-de-tijd die hieronder staat. De scorecard-koppeling "vs. vorige" en
+> de deck-per-periode-delta's zijn nog niet gebouwd; ze hangen aan de uitgestelde
+> `ocideck_ms_period`-front-matter (§3.2).
 
 Voortgang is inherent periodiek (managementreview-cadans). Aanbevolen model:
-**één deck per reviewcyclus** (`ocideck_ms_period`). Trend komt op twee manieren:
+**één deck per reviewcyclus** (`ocideck_ms_period`). Trend over de tijd komt op
+twee manieren:
 
 - **Scorecard "vs. vorige"** — al aanwezig ([scorecard_spec.dart](../../lib/models/scorecard_spec.dart)):
   %geïmplementeerd nu vs. vorig kwartaal, met de goede kleurpijl.
-- **Burn-up-grafiek** — via het bestaande **chart-derivation**-mechanisme uit de
-  procesverbetermodule (`yRef`, resolve-at-draw-time): een `chart`-dia die het
-  %geïmplementeerd over de `controlStatus`-dia's afleidt.
+- **Burn-up over de tijd** — de trendvorm van de burn-up: %geïmplementeerd per
+  opeenvolgende reviewperiode. De *snapshot*-burn-up per sectie is gebouwd (§6.1);
+  een burn-up óver periodes vergt de periode-front-matter en is nog niet gebouwd.
+  Het oorspronkelijke idee — chart-derivation via `yRef` — bleek daarvoor
+  ongeschikt (zie de afwijkingsnoot in §6.1).
 
 Zo blijft "bestand = waarheid" intact: geen verborgen tijdreeks-database, elk deck
 staat op zichzelf en is los te lezen. Een lichte helper kan de "vorige"-waarden uit
@@ -313,12 +362,16 @@ Markdown-tabel, [`control_status_spec.dart`](../../lib/models/control_status_spe
 + editor met ISO-importer + preview + de volledige `nieuw-slidetype`-ketting +
 afgeleide voortgang in de titel. *Levert:* per-control rapporteren end-to-end.
 
-**Blok C — Overzicht. *(Deels gebouwd.)*** De voortgangsanalyzer
-([`management_system_progress.dart`](../../lib/services/management_system_progress.dart))
-en de *Genereer voortgangsoverzicht*-actie (een afgeleide `table`-dia,
-[`deck_provider_managementsysteem.dart`](../../lib/state/deck_provider_managementsysteem.dart))
-zijn gebouwd. **Nog niet gebouwd:** de managementreview-`canvas`-sjabloon,
-CAPA-hergebruik, de burn-up-grafiek via chart-derivation en een dedicated
+**Blok C — Overzicht. *(Grotendeels gebouwd.)*** De voortgangsanalyzer
+([`management_system_progress.dart`](../../lib/services/management_system_progress.dart)),
+de burn-up-bouwer
+([`management_system_artefacts.dart`](../../lib/services/management_system_artefacts.dart))
+en de acties in
+[`deck_provider_managementsysteem.dart`](../../lib/state/deck_provider_managementsysteem.dart)
+draaien: *Genereer voortgangsoverzicht* zet een afgeleide `table`-dia én een
+burn-up-`chart`-dia neer, en *Genereer managementreview (9.3)* voegt twee
+`freeMarkdown`-dia's toe. Twee van die onderdelen wijken bewust af van dit
+ontwerp (§4 en §6.1). **Nog niet gebouwd:** het CAPA-hergebruik en een dedicated
 managementsamenvatting-render.
 
 **Blok D — Trend & afronding. *(Nog te doen.)*** Deck-per-periode-delta's +
@@ -328,18 +381,17 @@ lopen mee met de code.
 
 ### Nog te doen
 
-Wat bewust is uitgesteld en niet in Blok A–C zit:
+Wat bewust is uitgesteld en niet in Blok A–C zit. *(De managementreview en de
+burn-up zijn op 2026-08-02 alsnog gebouwd — met een afwijking van het ontwerp,
+zie §4 en §6.1 — en daarom hieronder verwijderd.)*
 
-1. **Managementreview-sjabloon (9.3).** Een `canvas`-sjabloon met de vaste
-   9.3-secties onder `assets/`, plus het CAPA-hergebruik uit de
-   procesverbetermodule (§4).
-2. **Burn-up-grafiek.** Een `chart`-dia die het %geïmplementeerd over de
-   `controlStatus`-dia's afleidt via het bestaande chart-derivation-mechanisme
-   (§6.2).
-3. **Periode/trend-frontmatter (`ocideck_ms_*`).** De platte sleutels uit §3.2
-   (`ocideck_ms_standard` / `_period` / `_scope`), de trend "vs. vorige" en de
-   deck-per-periode-delta's (§6.2).
-4. **Wizard (§4.1)** en een **Statement of Applicability**-render (open vraag 3).
+1. **Periode/trend-frontmatter (`ocideck_ms_*`).** De platte sleutels uit §3.2
+   (`ocideck_ms_standard` / `_period` / `_scope`), de trend "vs. vorige", de
+   burn-up óver periodes en de deck-per-periode-delta's (§6.2).
+2. **Compositie-delen.** Het CAPA-hergebruik uit de procesverbetermodule
+   (clausule 10, §4) en een dedicated managementsamenvatting-render in plaats van
+   een gewone tabel-dia (§6.1).
+3. **Wizard (§4.1)** en een **Statement of Applicability**-render (open vraag 3).
 
 ### Open vragen
 

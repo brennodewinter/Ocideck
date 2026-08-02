@@ -1793,6 +1793,26 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Voortgang per sectie': 'Напредък по раздели',
+  'Nog te doen': 'Оставащо',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Прегледът и графиката на напредъка са актуализирани',
+  'Genereer managementreview (9.3)':
+      'Генериране на преглед от ръководството (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Добавя предварително попълнен шаблон за преглед от ръководството (ISO клауза 9.3) с текущия напредък.',
+  'Managementreview (clausule 9.3) — Input':
+      'Преглед от ръководството (клауза 9.3) — Входни данни',
+  'Managementreview (clausule 9.3) — Output':
+      'Преглед от ръководството (клауза 9.3) — Изходни данни',
+  'Managementreview (9.3) toegevoegd':
+      'Прегледът от ръководството (9.3) е добавен',
+  'Er staat al een managementreview in dit deck':
+      'В това тесте вече има преглед от ръководството',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Входни данни (9.3.2)\n\n- **a.** Състояние на действията от предишни прегледи от ръководството\n- **b.** Промени във вътрешните и външните въпроси, засягащи системата за управление\n- **c.** Промени в потребностите и очакванията на заинтересованите страни\n- **d.** Резултатност и ефикасност — {p}% внедрено (приложими контроли: {impl}/{app})\n    - Тенденции при несъответствията и коригиращите действия\n    - Резултати от наблюдение и измерване\n    - Резултати от одити\n- **e.** Достатъчност на ресурсите\n- **f.** Ефикасност на действията спрямо рисковете и възможностите\n- **g.** Възможности за подобряване',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Изходни данни (9.3.3)\n\n- Решения относно възможностите за непрекъснато подобряване\n- Решения относно евентуални промени в системата за управление\n- Необходими ресурси\n\n_Попълнете по-долу решенията, действията и отговорниците._',
   'Procesverbetering: DMADV-project': 'Подобряване на процеса: проект DMADV',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV скелет за проектиране и проверка на нов процес.',
