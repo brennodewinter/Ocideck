@@ -34,10 +34,37 @@
 # De cachestappen staan op `continue-on-error`. Spreekt de forge de cache-API
 # van deze actie niet, dan verliezen we de versnelling en verder niets: de
 # installatiestap draait dan gewoon, en de poort blijft de poort.
+#
+# **Waarom óók op `push` naar `main` (#1123).** `static-gate.yml` vangt de
+# statische poorten per PR, maar bewust niet de testsuite — precies de reden dat
+# een registratiepoort die *een test* is (bijv. `source_map_coverage_test`, of de
+# docs-registratie, SBOM- en l10n-invarianten) tóch stil op `main` kon landen.
+# Die klasse drift ziet geen enkele poort vóór de merge, en tussen releases
+# draait er niets de volle suite. Deze workflow vult dat gat: bij elke push naar
+# `main` draait `make check-no-coverage` — dezelfde volle suite als op afroep —
+# zodat een rood geworden `main` binnen ~een halfuur een gefaalde run (en mail)
+# oplevert in plaats van pas boven te komen als iemand er een fix op wil landen.
+# Het is een detectie-, geen preventievangnet: de merge wordt niet geblokkeerd
+# (dat zou de volle suite vóór élke PR eisen, wat op deze runner te traag is —
+# zie `static-gate.yml`), maar `main` kan niet meer stil rood blijven. De
+# dekkingsvloer blijft ook hier weg (`check-no-coverage`); die hoort op de
+# machine van de committer, zie docs/CHECKS.md.
 name: linux-gate
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+
+# Landen er snel achter elkaar merges, dan zet elke nieuwe de lopende
+# `main`-run opzij: de laatste run toetst de nieuwste tip, en dat is wat "staat
+# `main` groen?" vraagt. De handmatige (`workflow_dispatch`) run zit in een eigen
+# groep — via `github.event_name` — zodat een druk-op-de-knop en een merge elkaar
+# nooit afbreken. Een afgebroken run meldt zich als `failure` (kan mailen); dat
+# het er bijna geen zijn, is de bedoeling.
+concurrency:
+  group: linux-gate-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   gate-linux:

@@ -13,10 +13,15 @@ with the full test suite intact but without the coverage instrumentation —
 worth roughly 13 minutes off a 46-minute gate on that runner. Since #1118 the
 **static gates** — `$(STATIC_GATES)`, seconds each — also run on **every pull
 request** (`.forgejo/workflows/static-gate.yml`, [`make check-static`](#make-check-static)),
-so that class of drift no longer waits for a tag. But read the rest literally,
-twice over: the **full test suite and the coverage floors still run nowhere but
-on your own machine**. CI is the release gate, the per-PR static gate is a safety
-net, and you are still the merge gate.
+so that class of drift no longer waits for a tag. And since #1123 the **full
+test suite** runs once more on **every push to `main`** (`linux-gate.yml`, `make
+check-no-coverage`), so a registration or invariant gate that is *a test* — the
+kind `static-gate` deliberately skips — can no longer sit silently red on `main`
+between releases. But read the rest literally, twice over: that main-push run is
+**detection after the merge, not a merge block**, and the **coverage floors still
+run nowhere but on your own machine**. CI is the release gate, the per-PR static
+gate is a safety net, the main-push gate is a smoke alarm, and you are still the
+merge gate.
 
 **Two workflows already run per pull request, each for its own deliberate
 reason.** The older is `.forgejo/workflows/scans.yml`, which runs the
@@ -1380,7 +1385,7 @@ that reaches beyond `build/test_cache`.
   reads the whole tree at the newest commit, so a later run covers everything an
   aborted one would have seen.
 
-### `.forgejo/workflows/linux-gate.yml` — on demand (`workflow_dispatch`)
+### `.forgejo/workflows/linux-gate.yml` — on demand (`workflow_dispatch`) **and on every push to `main`** (#1123)
 - **gate-linux** — the gate that `ci.yml` used to be: a bare `ubuntu:24.04`
   container in which the workflow installs the **official** Flutter stable
   release: the version is *read from `.tool-versions`* (so a pin bump has no
@@ -1391,8 +1396,21 @@ that reaches beyond `build/test_cache`.
   shipped channel `[user-branch]` from an unknown source, exactly what
   `check-toolchain` exists to catch.
 - **When to press it:** before a release, and whenever a change touches paths,
-  subprocesses or `git` invocations. Nobody presses it automatically — that is
-  the deliberate trade for the release gate being fast, not an oversight.
+  subprocesses or `git` invocations.
+- **Why it also fires on `push` to `main` (#1123):** `static-gate.yml` runs the
+  static gates per PR but **not** the test suite, so a registration gate that is
+  *a test* (`source_map_coverage_test`, the docs-registration, SBOM and l10n
+  invariants) could still land red on `main` — and between releases nothing ran
+  the full suite. Now every merge to `main` runs `make check-no-coverage`, so a
+  `main` that went red surfaces as a failed run (and mail) within ~half an hour
+  instead of only when someone tries to land a fix on top of it. It is a
+  **detection** net, not prevention: the merge is not blocked (that would need
+  the full suite before every PR, too slow on this runner), but `main` can no
+  longer sit **silently** red. The coverage floor still stays out
+  (`check-no-coverage`); it belongs on the committer's machine (see above).
+  Concurrency is scoped by event, so a manual dispatch and a merge never cancel
+  each other; rapid merges do supersede one another (the latest run tests the
+  newest tip, which is what "is `main` green?" asks).
 
 ### `.forgejo/workflows/linux-build.yml` — on demand (`workflow_dispatch`)
 - **build-linux** — same official pinned toolchain as the gate, plus the GTK
