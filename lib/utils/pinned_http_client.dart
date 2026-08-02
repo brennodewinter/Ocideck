@@ -17,9 +17,9 @@ HttpClient buildPinnedHttpClient(
   Duration connectionTimeout = const Duration(seconds: 15),
   String? pinnedCertSha256,
 }) => HttpClient()
-    ..connectionTimeout = connectionTimeout
-    ..connectionFactory = (u, _, _) => NetGuard.connectPinned(
-      pinnedAddress,
-      u,
-      onBadCertificate: NetGuard.pinnedCertCheck(pinnedCertSha256 ?? ''),
-    );
+  ..connectionTimeout = connectionTimeout
+  ..connectionFactory = (u, _, _) => NetGuard.connectPinned(
+    pinnedAddress,
+    u,
+    onBadCertificate: NetGuard.pinnedCertCheck(pinnedCertSha256 ?? ''),
+  );
