@@ -1770,6 +1770,17 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Media (WebRTC)': 'Media (WebRTC)',
+  'Media-stack testen': 'Testa mediestacken',
+  'De media-stack werkt op dit apparaat.':
+      'Mediestacken fungerar på den här enheten.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Mediestacken kunde inte läsas in på den här enheten.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Mediekryptering (E2EE): av på den här plattformen.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Mediekryptering (E2EE): inte tillgänglig ännu.',
+  'Media-versleuteling (E2EE): aan.': 'Mediekryptering (E2EE): på.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'Konferens-URL (valfritt): visar OciDeck-companion-rummet',
   'Companion-kamer': 'Companion-rum',

@@ -1793,6 +1793,17 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Media (WebRTC)': 'Media (WebRTC)',
+  'Media-stack testen': 'Ittestja l-istack tal-media',
+  'De media-stack werkt op dit apparaat.':
+      'L-istack tal-media jaħdem fuq dan l-apparat.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'L-istack tal-media ma setax jitgħabba fuq dan l-apparat.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Kriptaġġ tal-media (E2EE): mitfi fuq din il-pjattaforma.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Kriptaġġ tal-media (E2EE): għadu mhux disponibbli.',
+  'Media-versleuteling (E2EE): aan.': 'Kriptaġġ tal-media (E2EE): mixgħul.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL tal-konferenza (mhux obbligatorju): juri l-kamra companion ta\' OciDeck',
   'Companion-kamer': 'Kamra companion',

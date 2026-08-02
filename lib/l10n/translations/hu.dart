@@ -1775,6 +1775,17 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Media (WebRTC)': 'Média (WebRTC)',
+  'Media-stack testen': 'Médiaverem tesztelése',
+  'De media-stack werkt op dit apparaat.':
+      'A médiaverem működik ezen az eszközön.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'A médiaverem nem tölthető be ezen az eszközön.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Médiatitkosítás (E2EE): kikapcsolva ezen a platformon.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Médiatitkosítás (E2EE): még nem érhető el.',
+  'Media-versleuteling (E2EE): aan.': 'Médiatitkosítás (E2EE): bekapcsolva.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'Konferencia-URL (opcionális): megjeleníti az OciDeck companion szobáját',
   'Companion-kamer': 'Companion szoba',

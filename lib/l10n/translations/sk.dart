@@ -1778,6 +1778,17 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Media (WebRTC)': 'Médiá (WebRTC)',
+  'Media-stack testen': 'Otestovať mediálny zásobník',
+  'De media-stack werkt op dit apparaat.':
+      'Mediálny zásobník na tomto zariadení funguje.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Mediálny zásobník sa na tomto zariadení nepodarilo načítať.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Šifrovanie médií (E2EE): na tejto platforme vypnuté.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Šifrovanie médií (E2EE): zatiaľ nedostupné.',
+  'Media-versleuteling (E2EE): aan.': 'Šifrovanie médií (E2EE): zapnuté.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL konferencie (voliteľné): zobrazí companion miestnosť OciDeck',
   'Companion-kamer': 'Companion miestnosť',

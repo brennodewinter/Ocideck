@@ -1806,6 +1806,17 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Media (WebRTC)': 'Meáin (WebRTC)',
+  'Media-stack testen': 'Tástáil an chruach meán',
+  'De media-stack werkt op dit apparaat.':
+      'Oibríonn an chruach meán ar an ngléas seo.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Níorbh fhéidir an chruach meán a lódáil ar an ngléas seo.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Criptiú meán (E2EE): múchta ar an ardán seo.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Criptiú meán (E2EE): níl sé ar fáil go fóill.',
+  'Media-versleuteling (E2EE): aan.': 'Criptiú meán (E2EE): ar siúl.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL comhdhála (roghnach): taispeánann sé seomra companion OciDeck',
   'Companion-kamer': 'Seomra companion',

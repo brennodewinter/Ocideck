@@ -1787,6 +1787,17 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Media (WebRTC)': 'Media (WebRTC)',
+  'Media-stack testen': 'Proba compagem mediorum',
+  'De media-stack werkt op dit apparaat.':
+      'Compages mediorum in hoc instrumento operatur.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Compages mediorum in hoc instrumento onerari non potuit.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Encryptio mediorum (E2EE): in hoc suggestu inactiva.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Encryptio mediorum (E2EE): nondum praesto.',
+  'Media-versleuteling (E2EE): aan.': 'Encryptio mediorum (E2EE): activa.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL colloquii (ad libitum): cubiculum companion OciDeck monstrat',
   'Companion-kamer': 'Cubiculum companion',

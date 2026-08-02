@@ -1773,6 +1773,18 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Media (WebRTC)': 'Predstavnost (WebRTC)',
+  'Media-stack testen': 'Preizkusi predstavnostni sklad',
+  'De media-stack werkt op dit apparaat.':
+      'Predstavnostni sklad deluje na tej napravi.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Predstavnostnega sklada ni bilo mogoče naložiti na tej napravi.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Šifriranje predstavnosti (E2EE): izklopljeno na tej platformi.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Šifriranje predstavnosti (E2EE): še ni na voljo.',
+  'Media-versleuteling (E2EE): aan.':
+      'Šifriranje predstavnosti (E2EE): vklopljeno.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL konference (izbirno): prikaže sobo companion OciDeck',
   'Companion-kamer': 'Companion soba',

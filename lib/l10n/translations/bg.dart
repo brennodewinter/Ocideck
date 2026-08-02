@@ -1793,6 +1793,17 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Media (WebRTC)': 'Медия (WebRTC)',
+  'Media-stack testen': 'Тест на медийния стек',
+  'De media-stack werkt op dit apparaat.':
+      'Медийният стек работи на това устройство.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Медийният стек не можа да се зареди на това устройство.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Шифроване на медията (E2EE): изключено на тази платформа.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Шифроване на медията (E2EE): все още не е налично.',
+  'Media-versleuteling (E2EE): aan.': 'Шифроване на медията (E2EE): включено.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL адрес на конференцията (по избор): показва companion стаята на OciDeck',
   'Companion-kamer': 'Companion стая',

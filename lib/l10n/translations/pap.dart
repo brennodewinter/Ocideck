@@ -730,6 +730,17 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Media (WebRTC)': 'Media (WebRTC)',
+  'Media-stack testen': 'Testa e stack di media',
+  'De media-stack werkt op dit apparaat.':
+      'E stack di media ta funshoná riba e aparato aki.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'No por a karga e stack di media riba e aparato aki.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Enkriptashon di media (E2EE): desaktivá riba e plataforma aki.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Enkriptashon di media (E2EE): ainda no disponibel.',
+  'Media-versleuteling (E2EE): aan.': 'Enkriptashon di media (E2EE): aktivá.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL di konferensia (opcional): ta mustra e sala companion di OciDeck',
   'Companion-kamer': 'Sala companion',

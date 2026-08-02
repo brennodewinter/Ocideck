@@ -23,6 +23,11 @@ const unchangedInEnglish = {
   // vertalen het wél (Grieks Συνομιλία, Hongaars Csevegés, Sloveens Klepet, …),
   // dus alleen op de Engelse witte lijst — niet op unchangedInAllLanguages.
   'Chat',
+  // De media-preflighttegel: het Engels houdt 'Media (WebRTC)' identiek aan het
+  // Nederlands, maar andere talen vertalen 'Media' wél (Duits Medien, Frans
+  // Médias, Grieks Πολυμέσα, …), dus alleen op de Engelse witte lijst — niet op
+  // unchangedInAllLanguages.
+  'Media (WebRTC)',
   'CVSS',
   'https://matrix.to/#/…',
   'https://matrix.example.org',

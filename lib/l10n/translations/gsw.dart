@@ -1774,6 +1774,16 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Media (WebRTC)': 'Medie (WebRTC)',
+  'Media-stack testen': 'Medie-Stack teste',
+  'De media-stack werkt op dit apparaat.': 'De Medie-Stack lauft uf dem Grät.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'De Medie-Stack het uf dem Grät nöd chöne lade.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Medie-Verschlüsselig (E2EE): uf dere Plattform us.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Medie-Verschlüsselig (E2EE): no nöd verfüegbar.',
+  'Media-versleuteling (E2EE): aan.': 'Medie-Verschlüsselig (E2EE): a.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'Konferänz-URL (optional): zeigt de OciDeck-Companion-Ruum',
   'Companion-kamer': 'Companion-Ruum',

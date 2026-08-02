@@ -1788,6 +1788,17 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Media (WebRTC)': 'Медіа (WebRTC)',
+  'Media-stack testen': 'Перевірити медіастек',
+  'De media-stack werkt op dit apparaat.':
+      'Медіастек працює на цьому пристрої.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Не вдалося завантажити медіастек на цьому пристрої.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Шифрування медіа (E2EE): вимкнено на цій платформі.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Шифрування медіа (E2EE): ще недоступне.',
+  'Media-versleuteling (E2EE): aan.': 'Шифрування медіа (E2EE): увімкнено.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL-адреса конференції (необовʼязково): показує companion-кімнату OciDeck',
   'Companion-kamer': 'Companion-кімната',

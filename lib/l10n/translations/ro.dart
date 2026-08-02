@@ -1788,6 +1788,17 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Media (WebRTC)': 'Media (WebRTC)',
+  'Media-stack testen': 'Testează stiva media',
+  'De media-stack werkt op dit apparaat.':
+      'Stiva media funcționează pe acest dispozitiv.',
+  'De media-stack kon niet laden op dit apparaat.':
+      'Stiva media nu a putut fi încărcată pe acest dispozitiv.',
+  'Media-versleuteling (E2EE): uit op dit platform.':
+      'Criptarea media (E2EE): dezactivată pe această platformă.',
+  'Media-versleuteling (E2EE): nog niet beschikbaar.':
+      'Criptarea media (E2EE): încă indisponibilă.',
+  'Media-versleuteling (E2EE): aan.': 'Criptarea media (E2EE): activată.',
   'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
       'URL-ul conferinței (opțional): afișează camera companion OciDeck',
   'Companion-kamer': 'Cameră companion',
