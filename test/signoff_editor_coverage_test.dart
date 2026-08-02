@@ -8,6 +8,7 @@ import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/editors/_editor_field.dart';
+import 'package:ocideck/widgets/editors/markdown_editor_field.dart';
 import 'package:ocideck/widgets/editors/signoff_editor.dart';
 
 /// Coverage for the [SignOffEditor]: the attestation fields author the
@@ -62,7 +63,11 @@ void main() {
   }
 
   Finder fieldByLabel(String label) => find.descendant(
-    of: find.byWidgetPredicate((w) => w is EditorField && w.label == label),
+    of: find.byWidgetPredicate(
+      (w) =>
+          (w is EditorField && w.label == label) ||
+          (w is MarkdownEditorField && w.label == label),
+    ),
     matching: find.byType(TextField),
   );
 

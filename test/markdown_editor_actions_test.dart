@@ -16,4 +16,35 @@ void main() {
     MarkdownEditorActions.toggleBullet(ctrl);
     expect(ctrl.text, '- item one\nitem two');
   });
+
+  test('indentSelection indents every selected line', () {
+    final ctrl = TextEditingController(text: '- een\n- twee');
+    ctrl.selection = const TextSelection(baseOffset: 0, extentOffset: 12);
+
+    MarkdownEditorActions.indentSelection(ctrl);
+
+    expect(ctrl.text, '  - een\n  - twee');
+  });
+
+  test('outdentSelection removes up to two spaces', () {
+    final ctrl = TextEditingController(text: '  - een\n - twee');
+    ctrl.selection = TextSelection(
+      baseOffset: 0,
+      extentOffset: ctrl.text.length,
+    );
+
+    MarkdownEditorActions.outdentSelection(ctrl);
+
+    expect(ctrl.text, '- een\n- twee');
+  });
+
+  test('insertTable inserts a complete valid Markdown table skeleton', () {
+    final ctrl = TextEditingController(text: 'ervoor\nerna');
+    ctrl.selection = const TextSelection.collapsed(offset: 7);
+
+    MarkdownEditorActions.insertTable(ctrl);
+
+    expect(ctrl.text, contains('| Kolom 1 | Kolom 2 |'));
+    expect(ctrl.text, contains('| --- | --- |'));
+  });
 }

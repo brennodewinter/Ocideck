@@ -8,6 +8,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/widgets/editors/_editor_field.dart';
 import 'package:ocideck/widgets/editors/finding_editor.dart';
+import 'package:ocideck/widgets/editors/markdown_editor_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Field-editing coverage for the pentest [FindingEditor] header: every text
@@ -49,9 +50,13 @@ void main() {
     addTearDown(() => tester.binding.setSurfaceSize(null));
   }
 
-  // The labelled EditorField's inner TextField.
+  // The labelled plain or Markdown editor field's inner TextField.
   Finder fieldByLabel(String label) => find.descendant(
-    of: find.byWidgetPredicate((w) => w is EditorField && w.label == label),
+    of: find.byWidgetPredicate(
+      (w) =>
+          (w is EditorField && w.label == label) ||
+          (w is MarkdownEditorField && w.label == label),
+    ),
     matching: find.byType(TextField),
   );
 

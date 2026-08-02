@@ -792,11 +792,36 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     );
   }
 
-  void _toggleMarkdownMode() {
+  Future<void> _toggleMarkdownMode() async {
     final editorNotifier = ref.read(editorProvider.notifier);
     final deckNotifier = ref.read(deckProvider.notifier);
-    final isMarkdownMode = ref.read(editorProvider).mode == EditorMode.markdown;
+    final editor = ref.read(editorProvider);
+    final isMarkdownMode = editor.mode == EditorMode.markdown;
     if (isMarkdownMode) {
+      if (editor.hasMarkdownDraft) {
+        final discard = await showDialog<bool>(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text(ctx.l10n.d('Niet-toegepaste wijzigingen')),
+            content: Text(
+              ctx.l10n.d(
+                'Je wijzigingen zijn nog niet toegepast. Wil je ze verwerpen?',
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: Text(ctx.l10n.d('Doorgaan met bewerken')),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(ctx, true),
+                child: Text(ctx.l10n.d('Wijzigingen verwerpen')),
+              ),
+            ],
+          ),
+        );
+        if (discard != true || !mounted) return;
+      }
       editorNotifier.setMode(EditorMode.visual);
     } else {
       editorNotifier.setMode(

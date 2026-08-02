@@ -176,24 +176,31 @@ class _LineNumberCell extends StatelessWidget {
       MarkdownValidationSeverity.informational => AppTheme.slate200,
       null => Colors.transparent,
     };
-    return GestureDetector(
+    return Semantics(
+      button: true,
+      label: '${context.l10n.d('Regel')} $line',
       onTap: () => onTap(line),
-      child: Container(
-        height: _MarkdownDeckEditorState._lineHeight,
-        color: bg,
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 8),
-        child: Text(
-          '$line',
-          style: TextStyle(
-            fontFamily: 'monospace',
-            fontSize: 11,
-            height: 1.5,
-            color: severity == MarkdownValidationSeverity.error
-                ? AppTheme.dangerFg
-                : severity == MarkdownValidationSeverity.warning
-                ? AppTheme.warningFg
-                : AppTheme.slate400,
+      child: ExcludeSemantics(
+        child: GestureDetector(
+          onTap: () => onTap(line),
+          child: Container(
+            height: _MarkdownDeckEditorState._lineHeight,
+            color: bg,
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(right: 8),
+            child: Text(
+              '$line',
+              style: TextStyle(
+                fontFamily: 'monospace',
+                fontSize: 11,
+                height: 1.5,
+                color: severity == MarkdownValidationSeverity.error
+                    ? AppTheme.dangerFg
+                    : severity == MarkdownValidationSeverity.warning
+                    ? AppTheme.warningFg
+                    : AppTheme.slate400,
+              ),
+            ),
           ),
         ),
       ),

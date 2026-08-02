@@ -4,6 +4,8 @@ import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/markdown_paste_cleanup.dart';
+import '../../utils/markdown_visual_compatibility.dart';
+import '../../l10n/app_localizations.dart';
 import 'markdown_editor_theme.dart';
 import 'markdown_editor_toolbar.dart';
 import 'notes_editor_mode.dart';
@@ -138,7 +140,15 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   /// wijzigt, houdt nu letterlijk wat er stond.
   bool _visualEdited = false;
 
-  NotesEditorMode get _effectiveMode => widget.mode ?? _mode;
+  NotesEditorMode get _requestedMode => widget.mode ?? _mode;
+
+  Set<MarkdownVisualLimitation> get _visualLimitations =>
+      markdownVisualLimitations(widget.controller.text);
+
+  NotesEditorMode get _effectiveMode =>
+      _requestedMode == NotesEditorMode.visual && _visualLimitations.isNotEmpty
+      ? NotesEditorMode.markdown
+      : _requestedMode;
 
   FocusNode get _focusNode => widget.focusNode ?? _ownedFocusNode!;
 
@@ -146,6 +156,11 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   void initState() {
     super.initState();
     _mode = widget.initialMode;
+    if (widget.mode == null &&
+        _mode == NotesEditorMode.visual &&
+        _visualLimitations.isNotEmpty) {
+      _mode = NotesEditorMode.markdown;
+    }
     _markdownSnapshot = widget.controller.text;
     if (widget.focusNode == null) {
       _ownedFocusNode = FocusNode();
@@ -158,17 +173,17 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   @override
   void didUpdateWidget(MarkdownNotesEditor oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final oldMode = oldWidget.mode ?? _mode;
-    final newMode = widget.mode ?? _mode;
-    if (newMode != oldMode) {
-      _transitionMode(from: oldMode, to: newMode);
-      if (widget.mode == null) {
-        _mode = newMode;
-      }
+    final target = _effectiveMode;
+    if (target == NotesEditorMode.visual && _quillController == null) {
+      _openVisualEditor();
+    } else if (target == NotesEditorMode.markdown && _quillController != null) {
+      // An externally supplied unsupported construct must never be overwritten
+      // by flushing the older rich-text projection back to Markdown.
+      _closeVisualEditor(flush: _visualLimitations.isEmpty);
     }
     if (widget.controller.text != _markdownSnapshot &&
         !_syncingMarkdown &&
-        newMode == NotesEditorMode.visual) {
+        target == NotesEditorMode.visual) {
       _reloadVisualFromMarkdown();
     }
   }
@@ -272,6 +287,18 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   }
 
   void _onModeSelected(NotesEditorMode mode) {
+    if (mode == NotesEditorMode.visual && _visualLimitations.isNotEmpty) {
+      ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+        SnackBar(
+          content: Text(
+            context.l10n.d(
+              'Visuele bewerking is uitgeschakeld omdat deze Markdown niet verliesvrij kan worden omgezet.',
+            ),
+          ),
+        ),
+      );
+      return;
+    }
     final current = _effectiveMode;
     if (mode == current) return;
     _transitionMode(from: current, to: mode);
@@ -372,32 +399,67 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (widget.showModeToggle) ...[
-          NotesModeToggle(
-            mode: _effectiveMode,
-            onModeChanged: _onModeSelected,
-            style: widget.modeToggleStyle,
-            foregroundColor: widget.editorTheme.toolbarIcon,
-            accentColor: widget.editorTheme.accent,
+          MediaQuery.withClampedTextScaling(
+            maxScaleFactor: 1.5,
+            child: NotesModeToggle(
+              mode: _effectiveMode,
+              onModeChanged: _onModeSelected,
+              style: widget.modeToggleStyle,
+              foregroundColor: widget.editorTheme.toolbarIcon,
+              accentColor: widget.editorTheme.accent,
+            ),
           ),
           const SizedBox(height: 6),
         ],
         if (widget.showToolbar) ...[
           if (_effectiveMode == NotesEditorMode.markdown)
-            MarkdownEditorToolbar(
-              controller: widget.controller,
-              focusNode: _focusNode,
-              theme: widget.editorTheme,
-              compact: widget.compactToolbar,
+            MediaQuery.withClampedTextScaling(
+              maxScaleFactor: 1.5,
+              child: MarkdownEditorToolbar(
+                controller: widget.controller,
+                focusNode: _focusNode,
+                theme: widget.editorTheme,
+                compact: widget.compactToolbar,
+              ),
             )
           else if (quill != null)
-            WysiwygNotesToolbar(
-              controller: quill,
-              focusNode: _focusNode,
-              theme: widget.editorTheme,
-              compact: widget.compactToolbar,
+            MediaQuery.withClampedTextScaling(
+              maxScaleFactor: 1.5,
+              child: WysiwygNotesToolbar(
+                controller: quill,
+                focusNode: _focusNode,
+                theme: widget.editorTheme,
+                compact: widget.compactToolbar,
+              ),
             ),
           const SizedBox(height: 6),
         ],
+        if (_visualLimitations.isNotEmpty &&
+            _effectiveMode == NotesEditorMode.markdown)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.shield_outlined,
+                  size: 14,
+                  color: widget.editorTheme.toolbarIcon,
+                ),
+                const SizedBox(width: 5),
+                Expanded(
+                  child: Text(
+                    context.l10n.d(
+                      'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.',
+                    ),
+                    style: widget.editorTheme.hintStyle.copyWith(
+                      fontSize: 10.5,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         _buildEditorSurface(),
       ],
     );

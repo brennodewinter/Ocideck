@@ -76,4 +76,22 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.widgetWithText(TextField, 'DECK-MD'), findsOneWidget);
   });
+
+  testWidgets('scope cannot change while source edits are unapplied', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      const _ScopeHost(deckContent: 'DECK-MD', slideContent: 'SLIDE-MD'),
+    );
+    await tester.enterText(find.byType(TextField).last, 'CONCEPT');
+
+    await tester.tap(find.textContaining('Deze slide'));
+    await tester.pump();
+
+    expect(find.widgetWithText(TextField, 'CONCEPT'), findsOneWidget);
+    expect(
+      find.textContaining('Pas de huidige wijzigingen eerst toe'),
+      findsOneWidget,
+    );
+  });
 }

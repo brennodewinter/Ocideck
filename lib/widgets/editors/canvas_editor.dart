@@ -9,6 +9,8 @@ import '../../services/improvement_ai_service.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
 import 'improvement_ai_suggest_field.dart';
+import 'markdown_editor_field.dart';
+import 'editor_slide_preview.dart';
 
 /// Editor for a Procesverbetering `canvas` slide (PROCESS_IMPROVEMENT §3.2).
 ///
@@ -190,7 +192,26 @@ class _CanvasEditorState extends ConsumerState<CanvasEditor> {
             ).textTheme.labelLarge?.copyWith(color: AppTheme.accentFg),
           ),
           const SizedBox(height: 4),
-          EditorField(controller: r.body, label: '', maxLines: 4),
+          MarkdownEditorField(
+            controller: r.body,
+            label: l10n.d('Inhoud'),
+            minLines: 2,
+            maxLines: 4,
+            previewBuilder: (_, markdown) => editorSlidePreview(
+              widget.slide.copyWith(
+                title: _title.text,
+                customMarkdown: canvasMarkdownFromRegions([
+                  for (final region in _regions)
+                    CanvasRegionContent(
+                      key: region.key,
+                      heading: region.heading,
+                      body: identical(region, r) ? markdown : region.body.text,
+                    ),
+                ]),
+                improvementTemplateId: _templateId,
+              ),
+            ),
+          ),
           ImprovementAiSuggestField(
             field: ImprovementAiField.canvasRegion,
             fieldKey: _fieldKey(r.key),

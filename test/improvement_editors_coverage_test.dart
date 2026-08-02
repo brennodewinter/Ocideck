@@ -15,11 +15,16 @@ import 'package:ocideck/widgets/editors/_editor_field.dart';
 import 'package:ocideck/widgets/editors/canvas_editor.dart';
 import 'package:ocideck/widgets/editors/flow_editor.dart';
 import 'package:ocideck/widgets/editors/matrix_editor.dart';
+import 'package:ocideck/widgets/editors/markdown_editor_field.dart';
 import 'package:ocideck/widgets/editors/tree_editor.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 
 Finder fieldByLabel(String label) => find.descendant(
-  of: find.byWidgetPredicate((w) => w is EditorField && w.label == label),
+  of: find.byWidgetPredicate(
+    (w) =>
+        (w is EditorField && w.label == label) ||
+        (w is MarkdownEditorField && w.label == label),
+  ),
   matching: find.byType(TextField),
 );
 

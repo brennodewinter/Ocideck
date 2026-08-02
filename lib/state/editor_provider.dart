@@ -20,6 +20,7 @@ class EditorState {
   /// Of de markdown-modus de hele presentatie of alleen de actieve slide toont.
   final MarkdownScope markdownScope;
   final String markdownBuffer;
+  final String markdownBaseline;
   final bool parseError;
 
   /// When set, the active slide editor should focus this field once (see
@@ -47,6 +48,7 @@ class EditorState {
     this.mode = EditorMode.visual,
     this.markdownScope = MarkdownScope.deck,
     this.markdownBuffer = '',
+    this.markdownBaseline = '',
     this.parseError = false,
     this.focusQualityField,
     this.focusQualitySpan,
@@ -55,6 +57,8 @@ class EditorState {
   });
 
   bool get hasMultiSelection => selection.length > 1;
+  bool get hasMarkdownDraft =>
+      mode == EditorMode.markdown && markdownBuffer != markdownBaseline;
 
   EditorState copyWith({
     int? selectedIndex,
@@ -62,6 +66,7 @@ class EditorState {
     EditorMode? mode,
     MarkdownScope? markdownScope,
     String? markdownBuffer,
+    String? markdownBaseline,
     bool? parseError,
     String? focusQualityField,
     SlideQualitySpan? focusQualitySpan,
@@ -75,6 +80,7 @@ class EditorState {
       mode: mode ?? this.mode,
       markdownScope: markdownScope ?? this.markdownScope,
       markdownBuffer: markdownBuffer ?? this.markdownBuffer,
+      markdownBaseline: markdownBaseline ?? this.markdownBaseline,
       parseError: parseError ?? this.parseError,
       focusQualityField: clearFocusQualityField
           ? null
@@ -183,6 +189,15 @@ class EditorNotifier extends StateNotifier<EditorState> {
     state = state.copyWith(
       mode: mode,
       markdownBuffer: initialMarkdown ?? state.markdownBuffer,
+      markdownBaseline: initialMarkdown ?? state.markdownBaseline,
+      parseError: false,
+    );
+  }
+
+  void loadMarkdownSource(String content) {
+    state = state.copyWith(
+      markdownBuffer: content,
+      markdownBaseline: content,
       parseError: false,
     );
   }

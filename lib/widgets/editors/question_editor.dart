@@ -5,6 +5,8 @@ import '../../models/question.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '_editor_field.dart';
+import 'markdown_editor_field.dart';
+import 'editor_slide_preview.dart';
 import '../../theme/app_theme.dart';
 
 part 'question_editor_kinds.dart';
@@ -242,13 +244,33 @@ class _QuestionEditorState extends State<QuestionEditor> {
           },
         ),
         const SizedBox(height: 16),
-        EditorField(
+        MarkdownEditorField(
           label: isTrueFalse ? l10n.d('Stelling') : l10n.d('Vraag'),
           controller: _prompt,
           hint: isTrueFalse
               ? l10n.d('Formuleer een stelling die juist of onjuist is')
               : l10n.d('Wat wil je vragen?'),
           maxLines: 3,
+          previewBuilder: (_, markdown) {
+            final spec = _buildSpec();
+            final previewSpec = QuestionSpec(
+              kind: spec.kind,
+              prompt: markdown,
+              answers: spec.answers,
+              optionCount: spec.optionCount,
+              timeLimitSeconds: spec.timeLimitSeconds,
+              onWrong: spec.onWrong,
+              statementIsTrue: spec.statementIsTrue,
+              similarityThreshold: spec.similarityThreshold,
+            );
+            return editorSlidePreview(
+              widget.slide.copyWith(
+                title: _title.text,
+                customMarkdown: previewSpec.toBlock(),
+              ),
+              projectPath: widget.captionBasePath,
+            );
+          },
         ),
         const SizedBox(height: 16),
         if (isTrueFalse)

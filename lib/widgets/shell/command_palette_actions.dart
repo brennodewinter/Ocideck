@@ -17,6 +17,14 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
 
     final commands = <PaletteCommand>[
       PaletteCommand(
+        label: l10n.d('Bewerken'),
+        icon: Icons.open_in_full,
+        shortcut: shortcutLabel(l10n, 'Enter', shift: true),
+        keywords: const ['markdown', 'editor', 'wysiwyg'],
+        enabled: MarkdownEditorField.openActiveEditor != null,
+        onInvoke: () => MarkdownEditorField.openActiveEditor?.call(),
+      ),
+      PaletteCommand(
         label: l10n.d('Presenteren'),
         icon: Icons.play_circle_outline,
         keywords: const ['present', 'slideshow', 'F5'],

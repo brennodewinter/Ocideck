@@ -8,6 +8,7 @@ import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/widgets/editors/_editor_field.dart';
+import 'package:ocideck/widgets/editors/markdown_editor_field.dart';
 import 'package:ocideck/widgets/editors/question_editor.dart';
 
 import 'support/question_answer_limit_fixture.dart';
@@ -284,9 +285,9 @@ void main() {
 
     await _pump(tester, _host(updated, (s) => updated = s));
 
-    // EditorFields in order: [prompt, time-limit].
+    // The prompt is a MarkdownEditorField; the time limit stays an EditorField.
     final timeLimitField = find.descendant(
-      of: find.byType(EditorField).at(1),
+      of: find.byType(EditorField).first,
       matching: find.byType(TextField),
     );
     await tester.ensureVisible(timeLimitField);
@@ -432,7 +433,7 @@ void main() {
     await _pump(tester, _host(updated, (s) => updated = s));
 
     final promptField = find.descendant(
-      of: find.byType(EditorField).first,
+      of: find.byType(MarkdownEditorField).first,
       matching: find.byType(TextField),
     );
     await tester.enterText(promptField, 'Nieuwe vraag');

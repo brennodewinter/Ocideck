@@ -31,23 +31,24 @@ class MarkdownEditorToolbar extends StatelessWidget {
       required IconData icon,
       required VoidCallback onPressed,
     }) {
-      return Tooltip(
-        message: tooltip,
-        child: InkWell(
-          onTap: () {
-            onPressed();
-            final target = focusNode;
-            if (target != null) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                if (target.canRequestFocus) target.requestFocus();
-              });
-            }
-          },
-          borderRadius: BorderRadius.circular(4),
-          child: Padding(
-            padding: padding,
-            child: Icon(icon, size: iconSize, color: theme.toolbarIcon),
-          ),
+      return IconButton(
+        tooltip: tooltip,
+        onPressed: () {
+          onPressed();
+          final target = focusNode;
+          if (target != null) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (target.canRequestFocus) target.requestFocus();
+            });
+          }
+        },
+        icon: Icon(icon, color: theme.toolbarIcon),
+        iconSize: iconSize,
+        padding: padding,
+        visualDensity: VisualDensity.compact,
+        constraints: BoxConstraints(
+          minWidth: compact ? 24 : 30,
+          minHeight: compact ? 24 : 30,
         ),
       );
     }
@@ -126,6 +127,34 @@ class MarkdownEditorToolbar extends StatelessWidget {
               icon: Icons.format_list_numbered,
               onPressed: () => MarkdownEditorActions.toggleNumbered(controller),
             ),
+            if (!compact) ...[
+              button(
+                tooltip: l10n.d('Citaat'),
+                icon: Icons.format_quote,
+                onPressed: () => MarkdownEditorActions.toggleQuote(controller),
+              ),
+              button(
+                tooltip: l10n.d('Code'),
+                icon: Icons.data_object,
+                onPressed: () =>
+                    MarkdownEditorActions.insertCodeBlock(controller),
+              ),
+              button(
+                tooltip: l10n.d('Taak'),
+                icon: Icons.check_box_outlined,
+                onPressed: () => MarkdownEditorActions.insertTask(controller),
+              ),
+              button(
+                tooltip: l10n.d('Afbeelding'),
+                icon: Icons.image_outlined,
+                onPressed: () => MarkdownEditorActions.insertImage(controller),
+              ),
+              button(
+                tooltip: l10n.d('Tabel'),
+                icon: Icons.table_chart_outlined,
+                onPressed: () => MarkdownEditorActions.insertTable(controller),
+              ),
+            ],
           ],
         ),
       ),
