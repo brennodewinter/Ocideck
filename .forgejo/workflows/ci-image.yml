@@ -64,6 +64,19 @@ jobs:
             echo "publish=yes" >> "$GITHUB_OUTPUT"
           fi
 
+      # De job draait in een kaal ubuntu:24.04 (de runner-default), zonder node —
+      # en `actions/checkout`/`actions/cache` zijn node-acties. Installeer daarom
+      # eerst node, plus de docker-CLI om het image te bouwen en te pushen (de
+      # dind-runner levert de daemon). `git` erbij zodat checkout via git werkt.
+      - name: Gereedschap in de container (node + docker-CLI)
+        if: steps.guard.outputs.publish == 'yes'
+        run: |
+          set -eu
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            nodejs ca-certificates git docker.io
+          docker version || echo "LET OP: docker-daemon niet bereikbaar vanuit de job"
+
       - if: steps.guard.outputs.publish == 'yes'
         uses: actions/checkout@v4
 
