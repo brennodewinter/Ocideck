@@ -1788,6 +1788,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Testare cameră (opțional): cameră@serviciu',
+  'Aanwezig in de kamer': 'Prezenți în cameră',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Porecla este deja folosită în cameră.',
+  'Deze kamer is alleen voor leden.': 'Această cameră este doar pentru membri.',
+  'Deze kamer vereist een wachtwoord.': 'Această cameră necesită o parolă.',
+  'De kamer kon niet worden betreden.': 'Nu s-a putut intra în cameră.',
   'Sessie actief als': 'Sesiune activă ca',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Autentificat, dar serverul nu a putut stabili o sesiune (asocierea resursei a eșuat).',

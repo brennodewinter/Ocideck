@@ -726,6 +726,15 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Kamer testen (optioneel): kamer@service':
+      'Prova stanza (opzionale): stanza@servizio',
+  'Aanwezig in de kamer': 'Presenti nella stanza',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Il soprannome è già in uso nella stanza.',
+  'Deze kamer is alleen voor leden.': 'Questa stanza è riservata ai membri.',
+  'Deze kamer vereist een wachtwoord.': 'Questa stanza richiede una password.',
+  'De kamer kon niet worden betreden.':
+      'Non è stato possibile entrare nella stanza.',
   'Sessie actief als': 'Sessione attiva come',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Accesso riuscito, ma il server non è riuscito a creare una sessione (binding della risorsa non riuscito).',

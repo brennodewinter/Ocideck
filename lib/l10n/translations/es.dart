@@ -727,6 +727,14 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Kamer testen (optioneel): kamer@service':
+      'Probar sala (opcional): sala@servicio',
+  'Aanwezig in de kamer': 'Presentes en la sala',
+  'De bijnaam is al in gebruik in de kamer.':
+      'El apodo ya está en uso en la sala.',
+  'Deze kamer is alleen voor leden.': 'Esta sala es solo para miembros.',
+  'Deze kamer vereist een wachtwoord.': 'Esta sala requiere una contraseña.',
+  'De kamer kon niet worden betreden.': 'No se pudo entrar en la sala.',
   'Sessie actief als': 'Sesión activa como',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Sesión iniciada, pero el servidor no pudo establecer una sesión (falló la vinculación de recurso).',

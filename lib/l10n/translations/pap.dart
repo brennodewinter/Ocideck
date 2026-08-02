@@ -730,6 +730,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Kamer testen (optioneel): kamer@service':
+      'Testia sala (opcional): sala@servisio',
+  'Aanwezig in de kamer': 'Presente den e sala',
+  'De bijnaam is al in gebruik in de kamer.':
+      'E sobrenòmber ta na uso kaba den e sala.',
+  'Deze kamer is alleen voor leden.': 'E sala aki ta pa miembronan so.',
+  'Deze kamer vereist een wachtwoord.': 'E sala aki ta rekerí un kontraseña.',
+  'De kamer kon niet worden betreden.': 'No por a drenta e sala.',
   'Sessie actief als': 'Seshon aktivo komo',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'A logu in, pero e servidó no por a establesé un seshon (binding di rekurso a faya).',

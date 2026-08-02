@@ -911,6 +911,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Kamer testen (optioneel): kamer@service':
+      'Test room (optional): room@service',
+  'Aanwezig in de kamer': 'Present in the room',
+  'De bijnaam is al in gebruik in de kamer.':
+      'The nickname is already in use in the room.',
+  'Deze kamer is alleen voor leden.': 'This room is members-only.',
+  'Deze kamer vereist een wachtwoord.': 'This room requires a password.',
+  'De kamer kon niet worden betreden.': 'The room could not be entered.',
   'Sessie actief als': 'Session active as',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Logged in, but the server could not set up a session (resource binding failed).',

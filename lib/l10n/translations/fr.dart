@@ -730,6 +730,14 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Kamer testen (optioneel): kamer@service':
+      'Tester le salon (optionnel) : salon@service',
+  'Aanwezig in de kamer': 'Présents dans le salon',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Ce pseudonyme est déjà utilisé dans le salon.',
+  'Deze kamer is alleen voor leden.': 'Ce salon est réservé aux membres.',
+  'Deze kamer vereist een wachtwoord.': 'Ce salon nécessite un mot de passe.',
+  'De kamer kon niet worden betreden.': 'Impossible d\'entrer dans le salon.',
   'Sessie actief als': 'Session active en tant que',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Connexion réussie, mais le serveur n\'a pas pu établir de session (échec de la liaison de ressource).',

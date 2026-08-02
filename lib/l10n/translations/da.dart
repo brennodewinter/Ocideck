@@ -1770,6 +1770,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Test rum (valgfrit): rum@tjeneste',
+  'Aanwezig in de kamer': 'Til stede i rummet',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Kaldenavnet er allerede i brug i rummet.',
+  'Deze kamer is alleen voor leden.': 'Dette rum er kun for medlemmer.',
+  'Deze kamer vereist een wachtwoord.': 'Dette rum kræver en adgangskode.',
+  'De kamer kon niet worden betreden.': 'Kunne ikke komme ind i rummet.',
   'Sessie actief als': 'Session aktiv som',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Logget ind, men serveren kunne ikke oprette en session (ressourcebinding mislykkedes).',

@@ -1770,6 +1770,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Pārbaudīt istabu (neobligāti): istaba@serviss',
+  'Aanwezig in de kamer': 'Klātesošie istabā',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Segvārds istabā jau tiek izmantots.',
+  'Deze kamer is alleen voor leden.': 'Šī istaba ir tikai biedriem.',
+  'Deze kamer vereist een wachtwoord.': 'Šai istabai ir nepieciešama parole.',
+  'De kamer kon niet worden betreden.': 'Istabā neizdevās ieiet.',
   'Sessie actief als': 'Sesija aktīva kā',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Pieteikšanās veiksmīga, taču serveris nevarēja izveidot sesiju (resursa piesaiste neizdevās).',

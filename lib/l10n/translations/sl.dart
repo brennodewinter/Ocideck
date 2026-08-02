@@ -1773,6 +1773,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Preizkus sobe (izbirno): soba@storitev',
+  'Aanwezig in de kamer': 'Prisotni v sobi',
+  'De bijnaam is al in gebruik in de kamer.': 'Vzdevek je v sobi že v uporabi.',
+  'Deze kamer is alleen voor leden.': 'Ta soba je samo za člane.',
+  'Deze kamer vereist een wachtwoord.': 'Ta soba zahteva geslo.',
+  'De kamer kon niet worden betreden.': 'V sobo ni bilo mogoče vstopiti.',
   'Sessie actief als': 'Seja aktivna kot',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Prijava uspešna, vendar strežnik ni mogel vzpostaviti seje (vezava vira ni uspela).',

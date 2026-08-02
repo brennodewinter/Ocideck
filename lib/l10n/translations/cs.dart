@@ -1774,6 +1774,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Test místnosti (volitelné): místnost@služba',
+  'Aanwezig in de kamer': 'Přítomní v místnosti',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Přezdívka se v místnosti již používá.',
+  'Deze kamer is alleen voor leden.': 'Tato místnost je jen pro členy.',
+  'Deze kamer vereist een wachtwoord.': 'Tato místnost vyžaduje heslo.',
+  'De kamer kon niet worden betreden.': 'Do místnosti se nepodařilo vstoupit.',
   'Sessie actief als': 'Relace aktivní jako',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Přihlášeno, ale server nedokázal vytvořit relaci (navázání prostředku selhalo).',

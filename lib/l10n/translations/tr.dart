@@ -2748,6 +2748,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Oda testi (isteğe bağlı): oda@servis',
+  'Aanwezig in de kamer': 'Odada bulunanlar',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Takma ad odada zaten kullanılıyor.',
+  'Deze kamer is alleen voor leden.': 'Bu oda yalnızca üyelere açık.',
+  'Deze kamer vereist een wachtwoord.': 'Bu oda parola gerektiriyor.',
+  'De kamer kon niet worden betreden.': 'Odaya girilemedi.',
   'Sessie actief als': 'Oturum şu kimlikle etkin:',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Oturum açıldı, ancak sunucu bir oturum kuramadı (kaynak bağlama başarısız).',

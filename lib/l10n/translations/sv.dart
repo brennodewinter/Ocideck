@@ -1770,6 +1770,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Kamer testen (optioneel): kamer@service': 'Testa rum (valfritt): rum@tjänst',
+  'Aanwezig in de kamer': 'Närvarande i rummet',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Smeknamnet används redan i rummet.',
+  'Deze kamer is alleen voor leden.': 'Det här rummet är endast för medlemmar.',
+  'Deze kamer vereist een wachtwoord.': 'Det här rummet kräver ett lösenord.',
+  'De kamer kon niet worden betreden.': 'Det gick inte att gå in i rummet.',
   'Sessie actief als': 'Session aktiv som',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Inloggad, men servern kunde inte upprätta en session (resursbindning misslyckades).',

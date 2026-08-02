@@ -1806,6 +1806,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Tástáil seomra (roghnach): seomra@seirbhís',
+  'Aanwezig in de kamer': 'I láthair sa seomra',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Tá an leasainm in úsáid sa seomra cheana.',
+  'Deze kamer is alleen voor leden.': 'Níl an seomra seo ach do bhaill.',
+  'Deze kamer vereist een wachtwoord.':
+      'Tá pasfhocal ag teastáil don seomra seo.',
+  'De kamer kon niet worden betreden.': 'Níorbh fhéidir dul isteach sa seomra.',
   'Sessie actief als': 'Seisiún gníomhach mar',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Logáilte isteach, ach níor éirigh leis an bhfreastalaí seisiún a bhunú (theip ar cheangal na hacmhainne).',

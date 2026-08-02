@@ -1787,6 +1787,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Kamer testen (optioneel): kamer@service':
+      'Cubiculum probare (ad libitum): cubiculum@servitium',
+  'Aanwezig in de kamer': 'Praesentes in cubiculo',
+  'De bijnaam is al in gebruik in de kamer.':
+      'Cognomen in cubiculo iam adhibetur.',
+  'Deze kamer is alleen voor leden.': 'Hoc cubiculum sodalibus tantum patet.',
+  'Deze kamer vereist een wachtwoord.': 'Hoc cubiculum tesseram requirit.',
+  'De kamer kon niet worden betreden.': 'In cubiculum intrari non potuit.',
   'Sessie actief als': 'Sessio activa ut',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Ingressus es, sed server sessionem instituere non potuit (colligatio facultatis defecit).',

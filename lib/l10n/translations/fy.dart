@@ -731,6 +731,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Kamer testen (optioneel): kamer@service':
+      'Keamer teste (opsjoneel): keamer@tsjinst',
+  'Aanwezig in de kamer': 'Oanwêzich yn de keamer',
+  'De bijnaam is al in gebruik in de kamer.':
+      'De bynamme is al yn gebrûk yn de keamer.',
+  'Deze kamer is alleen voor leden.': 'Dizze keamer is allinne foar leden.',
+  'Deze kamer vereist een wachtwoord.': 'Dizze keamer freget om in wachtwurd.',
+  'De kamer kon niet worden betreden.': 'De keamer koe net betreden wurde.',
   'Sessie actief als': 'Sesje aktyf as',
   'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
       'Ynlogd, mar de server koe gjin sesje opsette (resource-binding mislearre).',
