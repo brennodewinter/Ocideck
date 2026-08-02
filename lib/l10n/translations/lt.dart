@@ -1790,6 +1790,43 @@ const _dutchSourceAddLt = <String, String>{
   'Procesverbetering: 8D-project': 'Proceso tobulinimas: 8D projektas',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D skeletas, skirtas problemos aprašymui, priežastims ir patikinimui.',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Tik straipsnių rodyklė 4–10 (28 pastraipos + trumpi pavadinimai). ISO 9001 neturi Annex A. Standarto tekstas NĖRA įtrauktas.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Tik Annex A rodyklė (38 kontrolių identifikatoriai + trumpi pavadinimai) ir devynios tikslų antraštės A.2–A.10. Standarto tekstas NĖRA įtrauktas.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Tik Annex A rodyklė (93 kontrolių identifikatoriai + trumpi pavadinimai) ir keturios teminės antraštės. Standarto tekstas NĖRA įtrauktas.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Kiekvienos ISO standarto kontrolės įgyvendinimo būsena (27001/9001/42001). Įkelkite kontroles iš standarto ir užpildykite būseną, savininką ir įrodymą.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO autorių teisės — rodyklė kaip faktinė nuoroda, standarto tekstas neįtrauktas',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Sukuria arba atnaujina apžvalgos skaidrę su pažanga pagal skyrius (išvesta iš visų kontrolių skaidrių).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Prideda ISO standarto kontroles (tik rodyklė; tik nauji identifikatoriai).',
+  'Alle secties': 'Visi skyriai',
+  'Beheersmaatregel': 'Kontrolė',
+  'Beheersmaatregel toevoegen': 'Pridėti kontrolę',
+  'Beheersmaatregelen laden…': 'Įkelti kontroles…',
+  'Genereer voortgangsoverzicht': 'Generuoti pažangos apžvalgą',
+  'Geïmplementeerd': 'Įgyvendinta',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizaciniai (A.5)',
+  'Kies een norm': 'Pasirinkite standartą',
+  'Managementsysteem': 'Valdymo sistema',
+  'Niet gescoord': 'Neįvertinta',
+  'Niveau': 'Lygis',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Kol kas nėra kontrolių skaidrių, kurias būtų galima apibendrinti',
+  'Sectie': 'Skyrius',
+  'Streefdatum': 'Tikslinė data',
+  'Van toepassing': 'Taikoma',
+  'Voortgang': 'Pažanga',
+  'Voortgang managementsysteem': 'Valdymo sistemos pažanga',
+  'Voortgangsoverzicht bijgewerkt': 'Pažangos apžvalga atnaujinta',
+  'Welk deel?': 'Kuri dalis?',
+  'beheersmaatregelen geladen': 'kontrolių įkelta',
+  'geïmplementeerd': 'įgyvendinta',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modulis įjungtas. Skaičiavimo branduolys, skaidrių išdėstymai ir šablonai pasiekiami vietoje ({n} kontrolinės diagramos koeficientų).',
   'SIPOC-procesoverzicht': 'SIPOC proceso apžvalga',

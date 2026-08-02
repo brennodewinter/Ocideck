@@ -1805,6 +1805,43 @@ const _dutchSourceAddBg = <String, String>{
   'Procesverbetering: 8D-project': 'Подобряване на процеса: 8D проект',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D скелет за описание на проблема, причини и увереност.',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Само индексът на клаузите 4–10 (28 подклаузи + кратки заглавия). ISO 9001 няма Annex A. Текстът на стандарта НЕ е включен.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Само индексът на Annex A (38 идентификатора на контроли + кратки заглавия) и деветте заглавия на целите A.2–A.10. Текстът на стандарта НЕ е включен.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Само индексът на Annex A (93 идентификатора на контроли + кратки заглавия) и четирите тематични заглавия. Текстът на стандарта НЕ е включен.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Статусът на внедряване за всяка контрола на стандарт ISO (27001/9001/42001). Заредете контролите от стандарт и попълнете статус, отговорник и доказателство.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Авторско право на ISO — индекс като фактическа справка, текстът на стандарта не е включен',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Създава или обновява обзорен слайд с напредъка по раздели (извлечен от всички слайдове с контроли).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Добавя контролите на стандарт ISO (само индекса; само нови идентификатори).',
+  'Alle secties': 'Всички раздели',
+  'Beheersmaatregel': 'Контрола',
+  'Beheersmaatregel toevoegen': 'Добавяне на контрола',
+  'Beheersmaatregelen laden…': 'Зареждане на контроли…',
+  'Genereer voortgangsoverzicht': 'Генериране на преглед на напредъка',
+  'Geïmplementeerd': 'Внедрено',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Организационни (A.5)',
+  'Kies een norm': 'Изберете стандарт',
+  'Managementsysteem': 'Система за управление',
+  'Niet gescoord': 'Не е оценено',
+  'Niveau': 'Ниво',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Все още няма слайдове с контроли за обобщаване',
+  'Sectie': 'Раздел',
+  'Streefdatum': 'Целева дата',
+  'Van toepassing': 'Приложимо',
+  'Voortgang': 'Напредък',
+  'Voortgang managementsysteem': 'Напредък на системата за управление',
+  'Voortgangsoverzicht bijgewerkt': 'Прегледът на напредъка е обновен',
+  'Welk deel?': 'Коя част?',
+  'beheersmaatregelen geladen': 'контроли заредени',
+  'geïmplementeerd': 'внедрено',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Модулът е включен. Изчислителното ядро, оформленията на слайдовете и шаблоните са налични локално ({n} фактора за контролна карта).',
   'SIPOC-procesoverzicht': 'Преглед на процеса SIPOC',

@@ -739,6 +739,43 @@ const _dutchSourceAddEs = {
   'Procesverbetering: 8D-project': 'Mejora de procesos: proyecto 8D',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Esqueleto 8D para descripción, causas y seguridad del problema.',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Solo el índice de cláusulas 4–10 (28 subcláusulas + títulos breves). ISO 9001 no tiene Annex A. El texto de la norma NO se incluye.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Solo el índice del Annex A (38 identificadores de control + títulos breves) y los nueve encabezados de objetivos A.2–A.10. El texto de la norma NO se incluye.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Solo el índice del Annex A (93 identificadores de control + títulos breves) y los cuatro encabezados temáticos. El texto de la norma NO se incluye.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'El estado de implementación por control de una norma ISO (27001/9001/42001). Carga los controles de una norma y rellena el estado, el responsable y la evidencia.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Copyright de ISO — índice como referencia factual, texto de la norma no incluido',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Crea o actualiza una diapositiva de resumen con el progreso por sección (derivado de todas las diapositivas de controles).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Añade los controles de una norma ISO (solo el índice; solo identificadores nuevos).',
+  'Alle secties': 'Todas las secciones',
+  'Beheersmaatregel': 'Control',
+  'Beheersmaatregel toevoegen': 'Añadir control',
+  'Beheersmaatregelen laden…': 'Cargar controles…',
+  'Genereer voortgangsoverzicht': 'Generar resumen de progreso',
+  'Geïmplementeerd': 'Implementado',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizativo (A.5)',
+  'Kies een norm': 'Elige una norma',
+  'Managementsysteem': 'Sistema de gestión',
+  'Niet gescoord': 'Sin evaluar',
+  'Niveau': 'Nivel',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Aún no hay diapositivas de controles que resumir',
+  'Sectie': 'Sección',
+  'Streefdatum': 'Fecha objetivo',
+  'Van toepassing': 'Aplicable',
+  'Voortgang': 'Progreso',
+  'Voortgang managementsysteem': 'Progreso del sistema de gestión',
+  'Voortgangsoverzicht bijgewerkt': 'Resumen de progreso actualizado',
+  'Welk deel?': '¿Qué parte?',
+  'beheersmaatregelen geladen': 'controles cargados',
+  'geïmplementeerd': 'implementado',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Módulo activado. El núcleo de cálculo, los diseños de diapositivas y las plantillas están disponibles localmente ({n} factores de gráfico de control).',
   'SIPOC-procesoverzicht': 'Resumen del proceso SIPOC',

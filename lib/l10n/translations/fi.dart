@@ -1784,6 +1784,43 @@ const _dutchSourceAddFi = <String, String>{
   'Procesverbetering: 8D-project': 'Prosessin parannus: 8D-projekti',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D-runko ongelman kuvausta, syitä ja varmuutta varten.',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Vain lausekeindeksi 4–10 (28 alalauseketta + lyhyet otsikot). ISO 9001:ssä ei ole Annex A:ta. Standardin tekstiä EI ole mukana.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Vain Annex A -indeksi (38 hallintakeinon tunnusta + lyhyet otsikot) ja yhdeksän tavoiteotsikkoa A.2–A.10. Standardin tekstiä EI ole mukana.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Vain Annex A -indeksi (93 hallintakeinon tunnusta + lyhyet otsikot) ja neljä teemaotsikkoa. Standardin tekstiä EI ole mukana.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Toteutuksen tila hallintakeinoittain ISO-standardissa (27001/9001/42001). Lataa hallintakeinot standardista ja täytä tila, omistaja ja näyttö.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO-tekijänoikeus — indeksi tosiasiaviitteenä, standardin tekstiä ei ole mukana',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Luo tai päivittää yhteenvetodian, jossa on edistyminen osioittain (johdettu kaikista hallintakeinodioista).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Lisää ISO-standardin hallintakeinot (vain indeksi; vain uudet tunnukset).',
+  'Alle secties': 'Kaikki osiot',
+  'Beheersmaatregel': 'Hallintakeino',
+  'Beheersmaatregel toevoegen': 'Lisää hallintakeino',
+  'Beheersmaatregelen laden…': 'Lataa hallintakeinot…',
+  'Genereer voortgangsoverzicht': 'Luo edistymisyhteenveto',
+  'Geïmplementeerd': 'Toteutettu',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisatoriset (A.5)',
+  'Kies een norm': 'Valitse standardi',
+  'Managementsysteem': 'Hallintajärjestelmä',
+  'Niet gescoord': 'Ei arvioitu',
+  'Niveau': 'Taso',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Ei vielä hallintakeinodioja koottavaksi',
+  'Sectie': 'Osio',
+  'Streefdatum': 'Tavoitepäivä',
+  'Van toepassing': 'Sovellettavissa',
+  'Voortgang': 'Edistyminen',
+  'Voortgang managementsysteem': 'Hallintajärjestelmän edistyminen',
+  'Voortgangsoverzicht bijgewerkt': 'Edistymisyhteenveto päivitetty',
+  'Welk deel?': 'Mikä osa?',
+  'beheersmaatregelen geladen': 'hallintakeinoa ladattu',
+  'geïmplementeerd': 'toteutettu',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Moduuli on käytössä. Laskentaydin, diojen asettelut ja mallit ovat käytettävissä paikallisesti ({n} ohjauskorttikerrointa).',
   'SIPOC-procesoverzicht': 'SIPOC-prosessin yleiskatsaus',

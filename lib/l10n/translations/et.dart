@@ -1774,6 +1774,43 @@ const _dutchSourceAddEt = <String, String>{
   'Procesverbetering: 8D-project': 'Protsessi täiustamine: 8D projekt',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D skelett probleemi kirjeldamiseks, põhjusteks ja kinnituseks.',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Ainult klauslite register 4–10 (28 alaklauslit + lühipealkirjad). ISO 9001-l puudub Annex A. Standardi teksti EI ole kaasas.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Ainult Annex A register (38 meetme ID-d + lühipealkirjad) ja üheksa eesmärgipealkirja A.2–A.10. Standardi teksti EI ole kaasas.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Ainult Annex A register (93 meetme ID-d + lühipealkirjad) ja neli teemapealkirja. Standardi teksti EI ole kaasas.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Rakendamise olek iga ISO-standardi meetme kohta (27001/9001/42001). Laadi meetmed standardist ning täida olek, omanik ja tõend.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO autoriõigus — register faktiviitena, standardi tekst pole kaasas',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Loob või värskendab ülevaateslaidi edenemisega jaotiste kaupa (tuletatud kõigist meetmete slaididest).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Lisab ISO-standardi meetmed (ainult register; ainult uued ID-d).',
+  'Alle secties': 'Kõik jaotised',
+  'Beheersmaatregel': 'Meede',
+  'Beheersmaatregel toevoegen': 'Lisa meede',
+  'Beheersmaatregelen laden…': 'Laadi meetmed…',
+  'Genereer voortgangsoverzicht': 'Loo edenemise ülevaade',
+  'Geïmplementeerd': 'Rakendatud',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisatsioonilised (A.5)',
+  'Kies een norm': 'Valige standard',
+  'Managementsysteem': 'Juhtimissüsteem',
+  'Niet gescoord': 'Hindamata',
+  'Niveau': 'Tase',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Kokkuvõtteks pole veel ühtki meetmete slaidi',
+  'Sectie': 'Jaotis',
+  'Streefdatum': 'Sihtkuupäev',
+  'Van toepassing': 'Kohaldatav',
+  'Voortgang': 'Edenemine',
+  'Voortgang managementsysteem': 'Juhtimissüsteemi edenemine',
+  'Voortgangsoverzicht bijgewerkt': 'Edenemise ülevaade uuendatud',
+  'Welk deel?': 'Milline osa?',
+  'beheersmaatregelen geladen': 'meedet laaditud',
+  'geïmplementeerd': 'rakendatud',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Moodul on sisse lülitatud. Arvutustuum, slaidipaigutused ja mallid on kohalikult saadaval ({n} kontrollkaardi tegurit).',
   'SIPOC-procesoverzicht': 'SIPOC-protsessi ülevaade',

@@ -1782,6 +1782,43 @@ const _dutchSourceAddSv = <String, String>{
   'Procesverbetering: 8D-project': 'Processförbättring: 8D-projekt',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D-skelett för problembeskrivning, orsaker och försäkran.',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Endast klausulindexet 4–10 (28 underklausuler + korta titlar). ISO 9001 har ingen Annex A. Standardtexten ingår INTE.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Endast Annex A-indexet (38 åtgärds-id:n + korta titlar) och de nio målrubrikerna A.2–A.10. Standardtexten ingår INTE.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Endast Annex A-indexet (93 åtgärds-id:n + korta titlar) och de fyra temarubrikerna. Standardtexten ingår INTE.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Implementeringsstatus per åtgärd i en ISO-standard (27001/9001/42001). Läs in åtgärderna från en standard och fyll i status, ägare och bevis.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO-upphovsrätt — index som faktareferens, standardtext ingår inte',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Skapar eller uppdaterar en översiktsbild med framstegen per avsnitt (härledd från alla åtgärdsbilder).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Lägger till åtgärderna från en ISO-standard (endast indexet; endast nya id:n).',
+  'Alle secties': 'Alla avsnitt',
+  'Beheersmaatregel': 'Åtgärd',
+  'Beheersmaatregel toevoegen': 'Lägg till åtgärd',
+  'Beheersmaatregelen laden…': 'Läs in åtgärder…',
+  'Genereer voortgangsoverzicht': 'Skapa framstegsöversikt',
+  'Geïmplementeerd': 'Implementerad',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisatorisk (A.5)',
+  'Kies een norm': 'Välj en standard',
+  'Managementsysteem': 'Ledningssystem',
+  'Niet gescoord': 'Ej bedömd',
+  'Niveau': 'Nivå',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Inga åtgärdsbilder att sammanfatta ännu',
+  'Sectie': 'Avsnitt',
+  'Streefdatum': 'Måldatum',
+  'Van toepassing': 'Tillämplig',
+  'Voortgang': 'Framsteg',
+  'Voortgang managementsysteem': 'Ledningssystemets framsteg',
+  'Voortgangsoverzicht bijgewerkt': 'Framstegsöversikten uppdaterad',
+  'Welk deel?': 'Vilken del?',
+  'beheersmaatregelen geladen': 'åtgärder inlästa',
+  'geïmplementeerd': 'implementerat',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modulen är på. Beräkningskärna, bildlayouter och mallar är tillgängliga lokalt ({n} styrdiagramfaktorer).',
   'SIPOC-procesoverzicht': 'SIPOC-processöversikt',

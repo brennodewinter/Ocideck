@@ -5,7 +5,13 @@ managementsysteem** rapporteert: ISO/IEC 27001 (ISMS), ISO 9001 (QMS) en
 ISO/IEC 42001 (AIMS). Verslag richting directie, bestuur, of een certificerende
 instantie.*
 
-> **Status:** ontwerp (nog niet gebouwd) · **Laatst herzien:** 2026-08-02 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** Blok A–C gebouwd (2026-08-02) — de gebundelde ISO-index-catalogi,
+> het `controlStatus`-slidetype met editor/preview/ISO-importer, en de
+> voortgangsanalyzer met de *Genereer voortgangsoverzicht*-actie draaien. Het
+> managementreview-sjabloon (9.3), de burn-up-grafiek via chart-derivation en de
+> periode/trend-frontmatter (`ocideck_ms_*`) zijn bewust **uitgesteld** — zie de
+> sectie *Nog te doen* onder §8. · **Laatst herzien:** 2026-08-02 · **Uitgegeven
+> door:** Stichting LibreKAT
 
 > **Dit spiegelt bewust twee bestaande modules.** De informatieveiligheid-module
 > ([`PENTEST_MIAUW.md`](PENTEST_MIAUW.md)) rapporteert een *pentest* tegen een
@@ -132,6 +138,11 @@ het importeren; een auteur mag ze overschrijven (bv. een eigen vertaling), en de
 
 ### 3.2 Deck-metadata (front matter)
 
+> **Nog niet gebouwd (2026-08-02).** De `ocideck_ms_*`-sleutels hieronder zijn
+> ontwerp; ze horen bij het uitgestelde periode/trend-werk (Blok D). De gebouwde
+> module leest ze nog niet — een `controlStatus`-dia staat op zichzelf en draagt
+> zijn norm in de titeltekst, niet in de front matter.
+
 Platte front-mattersleutels (nested is verboden, zie [`FILE_FORMAT.md`](../FILE_FORMAT.md)):
 
 ```yaml
@@ -166,7 +177,20 @@ picker, `management_summary`-switch, l10n-labels, tests).
 
 Alleen `controlStatus` is dus écht nieuw; de rest is compositie.
 
+> **Stand 2026-08-02.** `controlStatus` is gebouwd: de volledige
+> `nieuw-slidetype`-ketting, een eigen editor met ISO-importer en een preview met
+> afgeleide voortgangsbalk. De compositiedelen zijn nog **niet meegeleverd**: er
+> is nog geen managementreview-`canvas`-sjabloon onder `assets/`, en het
+> hergebruik van `scorecard`/`timeline`/CAPA voor deze module is nog niet als
+> sjabloon of wizard ontsloten.
+
 ### 4.1 Wizard
+
+> **Nog niet gebouwd (2026-08-02).** De wizard hieronder is ontwerp; er is nog
+> geen "Nieuw managementsysteem-rapport"-startpunt in **Nieuwe presentatie**. Een
+> auteur voegt vandaag een `controlStatus`-dia toe via de gewone dia-picker
+> (tabblad *Managementsysteem*) en laadt de controls met de ISO-importer in de
+> editor.
 
 Eén "Nieuw managementsysteem-rapport"-wizard: kies norm → scope + periode →
 genereer een skelet: titeldia, één `controlStatus`-dia per thema/clausule
@@ -190,20 +214,35 @@ zodra de module iets levert — identiek aan hoe `informationSecurity` en
 
 ### 6.1 Het overzicht
 
-Een `ManagementSystemAnalyzer` naar het patroon van
+*(Gebouwd, Blok C.)* De analyzer leeft als
+[`management_system_progress.dart`](../../lib/services/management_system_progress.dart)
+(`ManagementSystemProgress` / `ControlSectionProgress` +
+`deckManagementSystemProgress`), naar het patroon van
 [`MiauwComplianceAnalyzer`](../../lib/services/miauw_compliance_analyzer.dart) en
-[`management_summary.dart`](../../lib/services/management_summary.dart): leest alle
-`controlStatus`-dia's, telt per status en per thema/clausule, en levert:
+[`management_summary.dart`](../../lib/services/management_summary.dart). Hij leest
+alle `controlStatus`-dia's in dia-volgorde en telt per sectie het aantal
+controls, het aantal *van toepassing* (alles behalve `NotApplicable`), het aantal
+geïmplementeerd en het aantal deels, plus de deck-brede totalen. Het
+**% geïmplementeerd** is Implemented / applicable (een sectie geheel buiten scope
+levert 0, geen deling-door-nul).
 
-- totaal **% geïmplementeerd** (Implemented / (totaal − NotApplicable));
-- een verdeling per thema (Annex A) of clausule (9001);
-- het aantal open afwijkingen (uit aanwezige `finding`-dia's, hergebruik);
-- de "standaarden gebruikt"-regel uit de norm-front-matter.
+De *Genereer voortgangsoverzicht*-actie
+([`deck_provider_managementsysteem.dart`](../../lib/state/deck_provider_managementsysteem.dart))
+zet die roll-up neer als een gewone **`table`-dia** ("Voortgang managementsysteem":
+sectie · van toepassing · geïmplementeerd · voortgang, met een totaalrij).
+Idempotent: een bestaand overzicht met die titel wordt ter plekke vernieuwd,
+anders komt er een nieuwe achteraan. Altijd **on demand afgeleid**, nooit
+opgeslagen.
 
-Altijd **on demand afgeleid**, nooit opgeslagen. Een managementsamenvatting-dia
-rendert deze roll-up.
+> **Nog niet gebouwd (2026-08-02).** De verdeling die ook open afwijkingen uit
+> `finding`-dia's meetelt, en een dedicated managementsamenvatting-render (in
+> plaats van een gewone tabel-dia), staan nog open.
 
 ### 6.2 Trend — deck-per-periode
+
+> **Nog niet gebouwd (2026-08-02).** Deze sectie is ontwerp; noch de
+> scorecard-koppeling, noch de burn-up-grafiek via chart-derivation is gebouwd.
+> Het hangt aan de uitgestelde `ocideck_ms_period`-front-matter (§3.2).
 
 Voortgang is inherent periodiek (managementreview-cadans). Aanbevolen model:
 **één deck per reviewcyclus** (`ocideck_ms_period`). Trend komt op twee manieren:
@@ -238,7 +277,7 @@ url:            'https://www.iso.org/standard/27001'   // EIS-4.8.2.3-stijl bron
 bundled:        'Alleen de index van Annex A (control-id + korte titel + thema) '
                 'en de clausulekoppen 4–10. De normtekst is NIET gebundeld.'
 licence:        'ISO copyright — index als feitreferentie, normtekst niet meegeleverd'
-probe:          UpstreamProbe.<n.t.b.>   // zie open vraag §8
+probe:          UpstreamProbe.isoEdition  // gebouwd in Blok A (zie §8)
 advisory:       true                      // een editiewissel is geen bouwblokkade
 ```
 
@@ -250,30 +289,55 @@ een `controlStatus`-dia vullen met alle controls op `NotStarted`.
 
 ## 8. Gefaseerd plan & open vragen
 
-**Blok A — Fundament & catalogi.** De drie index-catalogi + `ReferenceStandard`-
-entries + licentienota in [`LICENSE_COMPLIANCE.md`](../LICENSE_COMPLIANCE.md) en
-`THIRD_PARTY_NOTICES.md`. Verouderingspoort-koppeling. *Levert:* control-lijsten
-importeerbaar, juridisch schoon.
+**Blok A — Fundament & catalogi. *(Gebouwd, 2026-08-02.)*** De drie
+index-catalogi ([`management_system_catalog.dart`](../../lib/services/management_system_catalog.dart)
++ [`management_system.dart`](../../lib/models/management_system.dart)) + de drie
+`ReferenceStandard`-entries met de nieuwe `UpstreamProbe.isoEdition` (advisory) +
+de licentienota in [`LICENSE_COMPLIANCE.md`](../LICENSE_COMPLIANCE.md).
+Verouderingspoort-koppeling via `tool/check_reference_data.dart`. *Levert:*
+control-lijsten importeerbaar, juridisch schoon.
 
-**Blok B — Statusmodel.** `controlStatus`-slidetype (view over Markdown-tabel) +
-editor + preview + de volledige `nieuw-slidetype`-ketting + afgeleide voortgang in
-de titel. *Levert:* per-control rapporteren end-to-end.
+**Blok B — Statusmodel. *(Gebouwd.)*** Het `controlStatus`-slidetype (view over
+Markdown-tabel, [`control_status_spec.dart`](../../lib/models/control_status_spec.dart))
++ editor met ISO-importer + preview + de volledige `nieuw-slidetype`-ketting +
+afgeleide voortgang in de titel. *Levert:* per-control rapporteren end-to-end.
 
-**Blok C — Overzicht & review.** `ManagementSystemAnalyzer` + managementsamenvatting-
-render + managementreview-`canvas`-sjabloon + CAPA-hergebruik + burn-up via
-chart-derivation. *Levert:* een compleet reviewrapport.
+**Blok C — Overzicht. *(Deels gebouwd.)*** De voortgangsanalyzer
+([`management_system_progress.dart`](../../lib/services/management_system_progress.dart))
+en de *Genereer voortgangsoverzicht*-actie (een afgeleide `table`-dia,
+[`deck_provider_managementsysteem.dart`](../../lib/state/deck_provider_managementsysteem.dart))
+zijn gebouwd. **Nog niet gebouwd:** de managementreview-`canvas`-sjabloon,
+CAPA-hergebruik, de burn-up-grafiek via chart-derivation en een dedicated
+managementsamenvatting-render.
 
-**Blok D — Trend & afronding.** Deck-per-periode-delta's + provenance/sign-off-
-hergebruik + docs (USER_GUIDE / SOURCE_MAP / FILE_FORMAT / CHANGELOG) + l10n (31
-talen) + tests + groene poorten.
+**Blok D — Trend & afronding. *(Nog te doen.)*** Deck-per-periode-delta's +
+provenance/sign-off-hergebruik. De docs (USER_GUIDE / SOURCE_MAP / FILE_FORMAT /
+API / CHANGELOG) zijn voor Blok A–C bijgewerkt; l10n (31 talen), tests en poorten
+lopen mee met de code.
+
+### Nog te doen
+
+Wat bewust is uitgesteld en niet in Blok A–C zit:
+
+1. **Managementreview-sjabloon (9.3).** Een `canvas`-sjabloon met de vaste
+   9.3-secties onder `assets/`, plus het CAPA-hergebruik uit de
+   procesverbetermodule (§4).
+2. **Burn-up-grafiek.** Een `chart`-dia die het %geïmplementeerd over de
+   `controlStatus`-dia's afleidt via het bestaande chart-derivation-mechanisme
+   (§6.2).
+3. **Periode/trend-frontmatter (`ocideck_ms_*`).** De platte sleutels uit §3.2
+   (`ocideck_ms_standard` / `_period` / `_scope`), de trend "vs. vorige" en de
+   deck-per-periode-delta's (§6.2).
+4. **Wizard (§4.1)** en een **Statement of Applicability**-render (open vraag 3).
 
 ### Open vragen
 
-1. **Verouderingsprobe voor ISO.** ISO publiceert geen GitHub-releases. Opties:
-   een handmatige `bundledVersion` (editiejaar) met een `advisory`-poort die de
-   mens eraan herinnert periodiek te controleren, of een `successorDocument`-achtige
-   probe tegen de ISO-catalogus-URL. Bewust `advisory: true`: een nieuwe editie is
-   een *inhoudelijke migratie*, geen bouwblokkade. (Vergelijk de MASWE-afweging in
+1. **Verouderingsprobe voor ISO.** *(Beslist, Blok A.)* Er is een eigen
+   `UpstreamProbe.isoEdition` gekomen die op ISO's publieke cataloguspagina mikt;
+   ISO verkoopt de norm en blokkeert geautomatiseerd ophalen, dus in de praktijk
+   levert de probe meestal "onbekend" — een eerlijke uitkomst, geen valse groen.
+   De drie ISO-entries staan op `advisory: true`: een nieuwe editie is een
+   *inhoudelijke migratie*, geen bouwblokkade. (Vergelijk de MASWE-afweging in
    [reference_standard.dart](../../lib/models/reference_standard.dart).)
 2. **Volwassenheidsschaal.** 0–5 (CMMI-achtig) optioneel, of weglaten in v1 en
    later toevoegen? Voorstel: optioneel meenemen, want de kolom is goedkoop en veel

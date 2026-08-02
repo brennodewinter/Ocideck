@@ -28,6 +28,7 @@
 - [Exporting](#exporting)
 - [Accessibility](#accessibility)
 - [Information security module (pentest reports)](#information-security-module-pentest-reports)
+- [Management-system module (ISO progress reporting)](#management-system-module-iso-progress-reporting)
 - [Markdown mode](#markdown-mode)
 - [What the browser version cannot do](#what-the-browser-version-cannot-do)
 - [Theming and language](#theming-and-language)
@@ -3795,6 +3796,80 @@ A built-in **Security** theme profile ships a clean, professional report look an
 severity colour tokens (Critical / High / Medium / Low / Informational). The
 tokens drive finding cards, CVSS badges and the findings-summary chart, and can be
 retuned per profile under *Settings → presentation style → Severity (bevindingen)*.
+
+## Management-system module (ISO progress reporting)
+
+OciDeck can report the **progress of your own management system** against an ISO
+standard: ISO/IEC 27001 (information security), ISO 9001 (quality) or ISO/IEC
+42001 (AI). It is aimed at a periodic report to the board, management or a
+certification body — which controls are implemented, which are still planned, who
+owns them and what the evidence is. Everything is offline; nothing is downloaded.
+
+Unlike the Informatieveiligheid and Procesverbetering modules, this one has **no
+toggle to switch on**. Its single slide type is always available: in **Add slide**
+you will find a **Managementsysteem** tab with **Beheersmaatregel-status**
+(control status).
+
+> **What is bundled, and what is not.** OciDeck ships only the **index** of the
+> three standards — the clause/control numbers with their short canonical titles.
+> ISO standards are copyrighted and sold by ISO/NEN, so the **normative
+> requirement text is deliberately not included**; to read a requirement, buy the
+> standard. The bundled index covers ISO/IEC 27001:2022 (the 93 Annex A controls
+> in four themes), ISO 9001:2015 (clauses 4–10, no Annex A) and ISO/IEC 42001:2023
+> (the 38 Annex A controls). See
+> [`docs/LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md).
+
+### Loading the controls of a standard
+
+Add a **Beheersmaatregel-status** slide and give it a heading (the section it
+covers, e.g. *ISO 27001 · Annex A — Organisatorisch (A.5)*). Rather than typing
+93 control ids by hand, press **Beheersmaatregelen laden…**: pick a standard, then
+either **Alle secties** (all sections) or one section (e.g. *A.5 · Organizational
+controls*). OciDeck appends every control from the bundled index whose id is not
+already on the slide — existing rows are never touched, and a single empty starter
+row is replaced so a fresh slide fills cleanly. Each added row arrives with its id
+and canonical title filled in and its status at *not started*, for you to work
+through. You can also add, remove and reorder rows by hand.
+
+### Filling in the status
+
+Each control row carries a **status**, an optional **maturity**, an **owner**, a
+**target** date or period, an **evidence** reference and a free **note**:
+
+- **Status** is one of *Niet gestart* (not started), *Gepland* (planned), *Deels*
+  (partial), *Geïmplementeerd* (implemented) or *Niet van toepassing* (not
+  applicable). Choose *Niet van toepassing* for a control you exclude — a
+  Statement-of-Applicability exclusion — and put the reason in the note.
+- **Niveau (maturity)** is optional, 0–5; *Niet gescoord* (0) means no one has
+  rated it yet. It is a second, finer view — the progress figure counts status,
+  never maturity.
+- **Owner**, **target** and **evidence** are free text and may be left blank.
+
+On disk the slide is a plain Markdown table with stable English status words
+(`NotStarted` / `Planned` / `Partial` / `Implemented` / `NotApplicable`), so a
+report round-trips regardless of interface language and opens and renders on any
+install — the file is the source of truth. The preview shows a **progress bar**:
+the share of controls that are implemented, out of the ones that are *applicable*
+(not-applicable controls are left out of the sum, so excluding a control never
+flatters or deflates the figure).
+
+### Generating a progress overview
+
+**Genereer voortgangsoverzicht** rolls up every Beheersmaatregel-status slide in
+the deck into one **overview table** ("Voortgang managementsysteem"): one row per
+section with its applicable count, implemented count and percentage, plus a totals
+row. The overview is **derived** from the detail slides — regenerate it after a
+change and it stays consistent; there is no second figure that can drift. Running
+it again refreshes the existing overview in place rather than adding a second one.
+If there are no control-status slides yet, it tells you so instead of writing an
+empty table.
+
+> **Not yet built.** This first version reports per-control status and the derived
+> overview. A management-review (clause 9.3) template, a burn-up chart of progress
+> over time, and period/trend metadata are on the roadmap but not in the app yet;
+> see [`docs/design/ISO_MANAGEMENTSYSTEEM.md`](design/ISO_MANAGEMENTSYSTEEM.md).
+> OciDeck reports progress — it makes no certification or conformance claim and is
+> not a substitute for an auditor.
 
 ## Markdown mode
 

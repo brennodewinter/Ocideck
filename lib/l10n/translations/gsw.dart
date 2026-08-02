@@ -1786,6 +1786,43 @@ const _dutchSourceAddGsw = <String, String>{
   'Procesverbetering: 8D-project': 'Prozessverbesserung: 8D-Projekt',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D-Skelett zur Problembeschreibung, Ursachen und Absicherung.',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Nume de Klausle-Index 4–10 (28 Unterklausle + churzi Titel). ISO 9001 het kein Annex A. De Normtext isch NÖD debii.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Nume de Annex-A-Index (38 Massnahme-IDs + churzi Titel) und di nün Ziel-Überschrifte A.2–A.10. De Normtext isch NÖD debii.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Nume de Annex-A-Index (93 Massnahme-IDs + churzi Titel) und di vier Thema-Überschrifte. De Normtext isch NÖD debii.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'De Umsetzigsstatus pro Massnahme vo ere ISO-Norm (27001/9001/42001). Lad d Massnahme us ere Norm und trag Status, Verantwortliche und Nochwiis ii.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO-Copyright — Index als Faktereferänz, Normtext nöd debii',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Erstellt oder aktualisiert e Übersichtsfolie mit em Fortschritt pro Abschnitt (usem alli Massnahme-Folie abgleitet).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Fügt d Massnahme vo ere ISO-Norm dezue (nume de Index; nume nöii IDs).',
+  'Alle secties': 'Alli Abschnitt',
+  'Beheersmaatregel': 'Massnahme',
+  'Beheersmaatregel toevoegen': 'Massnahme hinzuefüege',
+  'Beheersmaatregelen laden…': 'Massnahme lade…',
+  'Genereer voortgangsoverzicht': 'Fortschrittsübersicht generiere',
+  'Geïmplementeerd': 'Umgsetzt',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisatorisch (A.5)',
+  'Kies een norm': 'Norm uswähle',
+  'Managementsysteem': 'Managementsystem',
+  'Niet gescoord': 'Nöd bewertet',
+  'Niveau': 'Stuäfe',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'No kei Massnahme-Folie zum Zämmefasse',
+  'Sectie': 'Abschnitt',
+  'Streefdatum': 'Zieltermin',
+  'Van toepassing': 'Aawändbar',
+  'Voortgang': 'Fortschritt',
+  'Voortgang managementsysteem': 'Fortschritt vom Managementsystem',
+  'Voortgangsoverzicht bijgewerkt': 'Fortschrittsübersicht aktualisiert',
+  'Welk deel?': 'Wele Teil?',
+  'beheersmaatregelen geladen': 'Massnahme glade',
+  'geïmplementeerd': 'umgsetzt',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul aa. Rechechärn, Folielayouts und Vorlage sind lokal verfüegbar ({n} Regelchartfaktore).',
   'SIPOC-procesoverzicht': 'SIPOC-Prozessübersicht',

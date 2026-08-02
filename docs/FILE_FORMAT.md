@@ -582,6 +582,7 @@ The first class determines (together with the content) the **slide type**:
 | Tree (process improvement) | `tree` | Nested bullets + `ocideck_template` + `ocideck_layout` |
 | Flow (process improvement) | `flow` | Bullet steps + `ocideck_template` + `ocideck_layout` |
 | Phase gate (process improvement) | `phase-gate` | Gate checklist as bullets |
+| Control status (management system) | `control-status` | — (a plain table falls back to `table`) |
 | Bullets only | *(none)* | bullets present |
 | Two images | *(none)* | two background images |
 | Large image | *(none)* | one image, no bullets |
@@ -610,6 +611,15 @@ The first class determines (together with the content) the **slide type**:
 > deck that already carries them always opens. The module toggle governs
 > **authoring only**: these types appear in the add-slide and change-type
 > pickers only while the module is enabled.
+
+> **Management-system class.** `control-status` is the slide type of the
+> **Managementsysteem** module (ISO 27001/9001/42001 progress reporting,
+> § "Management-system module" in the User Guide). Unlike the two modules above
+> it is **not** behind an authoring toggle: `control-status` is always offered,
+> in a dedicated *Managementsysteem* tab of the add-slide picker. Its
+> `_class` token is `control-status`; without that token a plain table reads back
+> as an ordinary `table`, so the token is what preserves the type across a
+> round-trip.
 
 Additional behavior classes:
 
@@ -1598,6 +1608,47 @@ as a unit.
   does not recognise, so a copied `Anomaly` loses the status without a warning.
 - The tested/total coverage (shown as a progress bar in the app) is **derived**
   from the rows and is not stored.
+
+**Control status** (`control-status`) — the per-control implementation status of
+one management-system standard (ISO 27001/9001/42001), for the **Managementsysteem**
+module. Stored as a normal Markdown table (like `checklist` / `scope-matrix`) so
+it round-trips losslessly. The heading is the slide title (the section heading,
+e.g. `ISO 27001 · Annex A — Organisatorisch (A.5)`); the table has a fixed
+eight-column shape:
+
+```markdown
+<!-- _class: control-status -->
+# ISO 27001 · Annex A — Organisatorisch (A.5)
+| ID | Control | Status | Maturity | Owner | Target | Evidence | Note |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| A.5.1 | Policies for information security | Implemented | 4 | CISO | — | policy-repo#12 | — |
+| A.5.7 | Threat intelligence | Partial | 2 | SOC | 2026-Q4 | — | pilot loopt |
+| A.5.23 | Information security for use of cloud services | Planned | — | IT | 2027-Q1 | — | — |
+```
+
+- The **column headers** (`ID … Note`) and the **Status** words are **stable
+  English anchors** so the table round-trips regardless of interface language;
+  the editor and preview localise them for display. Cells are read **by column
+  position**, so a localised or reordered header never misroutes a value.
+- The **Status** column holds one of `NotStarted`, `Planned`, `Partial`,
+  `Implemented` or `NotApplicable`. An em-dash or empty cell reads as
+  `NotStarted`; anything unrecognised also falls back to `NotStarted`, so a
+  hand-edited table never throws. `NotApplicable` is a Statement-of-Applicability
+  exclusion and wants its reason in `Note`.
+- **Maturity** is optional (0–5). `0` means *not rated* and is written as an
+  em-dash; the progress tally counts status, never maturity.
+- **Owner**, **Target** and **Evidence** are optional; an empty value is written
+  as an em-dash so the table stays rectangular.
+- The **progress** shown in the app (implemented as a share of the *applicable*
+  controls, i.e. everything except `NotApplicable`) is **derived** from the rows
+  and is not stored. The *Genereer voortgangsoverzicht* action rolls this up
+  across every `control-status` slide into a plain `table` slide; that overview is
+  likewise derived, never a second stored figure.
+
+The canonical titles in the `Control` column come from the bundled ISO index
+(`lib/services/management_system_catalog.dart`) when the editor's *Load controls*
+action fills them; an author may overwrite them (e.g. a Dutch translation), and
+the `ID` stays the key the overview joins on.
 
 ### Image Size (`imageSize`)
 

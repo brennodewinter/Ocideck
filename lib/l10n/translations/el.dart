@@ -1810,6 +1810,43 @@ const _dutchSourceAddEl = <String, String>{
   'Procesverbetering: 8D-project': 'Βελτίωση διαδικασίας: έργο 8D',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D σκελετός για περιγραφή προβλημάτων, αιτίες και διασφάλιση.',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Μόνο το ευρετήριο ρητρών 4–10 (28 υπορήτρες + σύντομοι τίτλοι). Το ISO 9001 δεν έχει Annex A. Το κείμενο του προτύπου ΔΕΝ περιλαμβάνεται.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Μόνο το ευρετήριο του Annex A (38 αναγνωριστικά ελέγχων + σύντομοι τίτλοι) και οι εννέα επικεφαλίδες στόχων A.2–A.10. Το κείμενο του προτύπου ΔΕΝ περιλαμβάνεται.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Μόνο το ευρετήριο του Annex A (93 αναγνωριστικά ελέγχων + σύντομοι τίτλοι) και οι τέσσερις θεματικές επικεφαλίδες. Το κείμενο του προτύπου ΔΕΝ περιλαμβάνεται.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Η κατάσταση υλοποίησης ανά έλεγχο ενός προτύπου ISO (27001/9001/42001). Φορτώστε τους ελέγχους από ένα πρότυπο και συμπληρώστε κατάσταση, υπεύθυνο και τεκμήριο.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Πνευματικά δικαιώματα ISO — ευρετήριο ως τεκμηριωμένη αναφορά, κείμενο προτύπου μη συμπεριλαμβανόμενο',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Δημιουργεί ή ανανεώνει μια διαφάνεια επισκόπησης με την πρόοδο ανά ενότητα (προκύπτει από όλες τις διαφάνειες ελέγχων).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Προσθέτει τους ελέγχους ενός προτύπου ISO (μόνο το ευρετήριο· μόνο νέα αναγνωριστικά).',
+  'Alle secties': 'Όλες οι ενότητες',
+  'Beheersmaatregel': 'Έλεγχος',
+  'Beheersmaatregel toevoegen': 'Προσθήκη ελέγχου',
+  'Beheersmaatregelen laden…': 'Φόρτωση ελέγχων…',
+  'Genereer voortgangsoverzicht': 'Δημιουργία επισκόπησης προόδου',
+  'Geïmplementeerd': 'Υλοποιημένο',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Οργανωτικά (A.5)',
+  'Kies een norm': 'Επιλέξτε πρότυπο',
+  'Managementsysteem': 'Σύστημα διαχείρισης',
+  'Niet gescoord': 'Χωρίς βαθμολόγηση',
+  'Niveau': 'Επίπεδο',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Δεν υπάρχουν ακόμη διαφάνειες ελέγχων για σύνοψη',
+  'Sectie': 'Ενότητα',
+  'Streefdatum': 'Ημερομηνία-στόχος',
+  'Van toepassing': 'Εφαρμόσιμο',
+  'Voortgang': 'Πρόοδος',
+  'Voortgang managementsysteem': 'Πρόοδος συστήματος διαχείρισης',
+  'Voortgangsoverzicht bijgewerkt': 'Η επισκόπηση προόδου ενημερώθηκε',
+  'Welk deel?': 'Ποιο μέρος;',
+  'beheersmaatregelen geladen': 'έλεγχοι φορτώθηκαν',
+  'geïmplementeerd': 'υλοποιημένο',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Η ενότητα είναι ενεργή. Ο πυρήνας υπολογισμών, οι διατάξεις διαφανειών και τα πρότυπα είναι διαθέσιμα τοπικά ({n} παράγοντες διαγράμματος ελέγχου).',
   'SIPOC-procesoverzicht': 'Επισκόπηση διαδικασίας SIPOC',

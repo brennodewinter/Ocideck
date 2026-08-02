@@ -1801,6 +1801,45 @@ const _dutchSourceAddRo = <String, String>{
   'Procesverbetering: 8D-project': 'Îmbunătățirea procesului: proiect 8D',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Schelet 8D pentru descrierea problemei, cauze și asigurare.',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Doar indexul clauzelor 4–10 (28 de subclauze + titluri scurte). ISO 9001 nu are Annex A. Textul standardului NU este inclus.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Doar indexul Annex A (38 de identificatori de control + titluri scurte) și cele nouă titluri de obiective A.2–A.10. Textul standardului NU este inclus.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Doar indexul Annex A (93 de identificatori de control + titluri scurte) și cele patru titluri tematice. Textul standardului NU este inclus.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Starea de implementare per control a unui standard ISO (27001/9001/42001). Încarcă controalele dintr-un standard și completează starea, responsabilul și dovada.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Drepturi de autor ISO — index ca referință factuală, textul standardului neinclus',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Creează sau reîmprospătează un diapozitiv de ansamblu cu progresul pe secțiuni (derivat din toate diapozitivele de control).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Adaugă controalele unui standard ISO (doar indexul; doar identificatori noi).',
+  'Alle secties': 'Toate secțiunile',
+  'Beheersmaatregel': 'Control',
+  'Beheersmaatregel toevoegen': 'Adaugă control',
+  'Beheersmaatregelen laden…': 'Încarcă controalele…',
+  'Genereer voortgangsoverzicht':
+      'Generează prezentarea generală a progresului',
+  'Geïmplementeerd': 'Implementat',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizațional (A.5)',
+  'Kies een norm': 'Alege un standard',
+  'Managementsysteem': 'Sistem de management',
+  'Niet gescoord': 'Neevaluat',
+  'Niveau': 'Nivel',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Încă nu există diapozitive de control de rezumat',
+  'Sectie': 'Secțiune',
+  'Streefdatum': 'Dată-țintă',
+  'Van toepassing': 'Aplicabil',
+  'Voortgang': 'Progres',
+  'Voortgang managementsysteem': 'Progresul sistemului de management',
+  'Voortgangsoverzicht bijgewerkt':
+      'Prezentarea generală a progresului a fost actualizată',
+  'Welk deel?': 'Ce parte?',
+  'beheersmaatregelen geladen': 'controale încărcate',
+  'geïmplementeerd': 'implementat',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul activat. Nucleul de calcul, aspectele diapozitivelor și șabloanele sunt disponibile local ({n} factori ai diagramei de control).',
   'SIPOC-procesoverzicht': 'Prezentare generală a procesului SIPOC',

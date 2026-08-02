@@ -1783,6 +1783,43 @@ const _dutchSourceAddId = <String, String>{
   'Procesverbetering: 8D-project': 'Peningkatan proses: proyek 8D',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Kerangka 8D untuk deskripsi masalah, penyebab dan jaminan.',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Hanya indeks klausul 4–10 (28 sub-klausul + judul singkat). ISO 9001 tidak memiliki Annex A. Teks standar TIDAK disertakan.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Hanya indeks Annex A (38 id kontrol + judul singkat) dan sembilan judul sasaran A.2–A.10. Teks standar TIDAK disertakan.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Hanya indeks Annex A (93 id kontrol + judul singkat) dan empat judul tema. Teks standar TIDAK disertakan.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Status penerapan per kontrol dari standar ISO (27001/9001/42001). Muat kontrol dari sebuah standar lalu isi status, pemilik, dan bukti.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Hak cipta ISO — indeks sebagai rujukan faktual, teks standar tidak disertakan',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Membuat atau memperbarui slide ringkasan dengan kemajuan per bagian (diturunkan dari semua slide kontrol).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Menambahkan kontrol dari standar ISO (hanya indeks; hanya id baru).',
+  'Alle secties': 'Semua bagian',
+  'Beheersmaatregel': 'Kontrol',
+  'Beheersmaatregel toevoegen': 'Tambah kontrol',
+  'Beheersmaatregelen laden…': 'Muat kontrol…',
+  'Genereer voortgangsoverzicht': 'Buat ringkasan kemajuan',
+  'Geïmplementeerd': 'Diterapkan',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisasi (A.5)',
+  'Kies een norm': 'Pilih standar',
+  'Managementsysteem': 'Sistem manajemen',
+  'Niet gescoord': 'Belum dinilai',
+  'Niveau': 'Tingkat',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Belum ada slide kontrol untuk diringkas',
+  'Sectie': 'Bagian',
+  'Streefdatum': 'Tanggal target',
+  'Van toepassing': 'Berlaku',
+  'Voortgang': 'Kemajuan',
+  'Voortgang managementsysteem': 'Kemajuan sistem manajemen',
+  'Voortgangsoverzicht bijgewerkt': 'Ringkasan kemajuan diperbarui',
+  'Welk deel?': 'Bagian mana?',
+  'beheersmaatregelen geladen': 'kontrol dimuat',
+  'geïmplementeerd': 'diterapkan',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul aktif. Inti perhitungan, tata letak slide, dan templat tersedia secara lokal ({n} faktor peta kendali).',
   'SIPOC-procesoverzicht': 'Ringkasan proses SIPOC',

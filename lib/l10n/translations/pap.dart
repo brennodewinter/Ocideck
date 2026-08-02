@@ -742,6 +742,43 @@ const _dutchSourceAddPap = {
   'Procesverbetering: 8D-project': 'Mehorashon di proseso: proyekto 8D',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Skeleton 8D pa deskripshon di problema, kousa i siguransa.',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Solamente e indeks di klóusula 4–10 (28 sub-klóusula + título kòrtiku). ISO 9001 no tin Annex A. E teksto di norma NO ta inkluí.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Solamente e indeks di Annex A (38 id di kontrol + título kòrtiku) i e nuebe kabesante di opheto A.2–A.10. E teksto di norma NO ta inkluí.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Solamente e indeks di Annex A (93 id di kontrol + título kòrtiku) i e kuater kabesante temátiko. E teksto di norma NO ta inkluí.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'E estado di implementashon pa kada kontrol di un norma ISO (27001/9001/42001). Karga e kontrolnan for di un norma i yena estado, doño i prueba.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Copyright di ISO — indeks komo referensia faktual, teksto di norma no inkluí',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Ta krea òf renobá un slide di resúmen ku e progreso pa sekshon (derivá for di tur slide di kontrol).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Ta agregá e kontrolnan di un norma ISO (solamente e indeks; solamente id nobo).',
+  'Alle secties': 'Tur sekshon',
+  'Beheersmaatregel': 'Kontrol',
+  'Beheersmaatregel toevoegen': 'Agregá kontrol',
+  'Beheersmaatregelen laden…': 'Karga kontrolnan…',
+  'Genereer voortgangsoverzicht': 'Generá resúmen di progreso',
+  'Geïmplementeerd': 'Implementá',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisashonal (A.5)',
+  'Kies een norm': 'Skohe un norma',
+  'Managementsysteem': 'Sistema di gestion',
+  'Niet gescoord': 'No evaluá',
+  'Niveau': 'Nivel',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Ainda no tin slide di kontrol pa resumí',
+  'Sectie': 'Sekshon',
+  'Streefdatum': 'Fecha meta',
+  'Van toepassing': 'Aplikabel',
+  'Voortgang': 'Progreso',
+  'Voortgang managementsysteem': 'Progreso di sistema di gestion',
+  'Voortgangsoverzicht bijgewerkt': 'Resúmen di progreso aktualisá',
+  'Welk deel?': 'Kua parti?',
+  'beheersmaatregelen geladen': 'kontrol kargá',
+  'geïmplementeerd': 'implementá',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Módulo prendé. Núkleo di kalkulashon, diseñonan di diapositiva i plantianan ta disponibel lokalmente ({n} faktornan di karta di kontrol).',
   'SIPOC-procesoverzicht': 'Resumen di proseso SIPOC',
