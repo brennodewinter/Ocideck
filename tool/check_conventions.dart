@@ -129,10 +129,8 @@ const Map<String, int> fileSizeBaseline = {
   // voegde daarna de cockpit-integratie op main toe.
   // +4 (#1098): imports voor de uitbreidingspoort en het rechtenoverzicht voor
   // afbeeldingen; het gedrag zelf blijft in losse providers en widgets.
-  // +1 (#1117 ← #1103): de import 'editors/markdown_editor_field.dart' voor de
-  // Markdown-editor-UX; het veld zelf is een losse widget in dat bestand.
   'lib/widgets/app_shell.dart':
-      841, // +4 (#978 Blok C): imports + part 'provenance_actions'; +1 (video-calls F1): call_panel import
+      840, // +4 (#978 Blok C): imports + part 'provenance_actions'; +1 (video-calls F1): call_panel import
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
   // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
   // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped
@@ -141,23 +139,13 @@ const Map<String, int> fileSizeBaseline = {
   // outcome — same one-line build-time listen, behaviour in the collab part file.
   // +4 (#977): the chat rail spread into the workspace row; its logic lives in
   // `collabChatRail` in collab_chat_panel.dart, only the spread + note remain.
-  // +3 (#1117 ← #1103): _toggleMarkdownMode werd async met een verwerp-dialoog
-  // voor niet-toegepaste markdown-wijzigingen (bescherming tegen dataverlies).
   'lib/widgets/app_shell_main_layout.dart':
-      1026, // +6 (#978 Blok C): _signProvenance-delegator (zware logica in provenance_actions.dart); +1 (video-calls F1): callRail spread
+      1023, // +6 (#978 Blok C): _signProvenance-delegator (zware logica in provenance_actions.dart); +1 (video-calls F1): callRail spread
   // Procesverbetering category tab + engine types in the add-slide picker.
   'lib/widgets/dialogs/add_slide_dialog.dart': 1094,
   // chart_preview_improvement part registration + improvement ChartType switch.
   // +Y-01-parameter; improvement cases in improvement_dispatch.dart (part).
   'lib/widgets/slides/slide_preview.dart': 1039,
-  // #1117 (← #1103/#1113): de Markdown-editor-UX landde boven het plafond zonder
-  // dat de ratchet meegroeide (geen CI-runner ving het). Deze twee invoeren
-  // verzoenen de poort met de bewust gemergede omvang; splitsen blijft wenselijke
-  // opvolging, met name markdown_deck_editor.dart — dat heeft één `part`
-  // (`_gutter`) en zeven losse hulpwidgets (regels ~1010–1512) die zich lenen
-  // voor een tweede `part`. Genoteerd als schuld, niet als eindstand.
-  'lib/widgets/editors/markdown_deck_editor.dart': 1512,
-  'lib/state/tabs_provider.dart': 1037,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -219,10 +207,7 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 2868,
   // Procesverbetering: improvement-slide discovery + save paths.
   // +4: Y-01/framework-args op newDeck + improvement-module-prompt.
-  // +48 (#1117 ← #1103/#1113): de Markdown-editor-UX (autosave-lus, markdown-
-  // scope, herstelpaden) verdeeld over de part-bestanden. Verzoening met de
-  // gemergede omvang; extractie naar een eigen laag blijft opvolging.
-  'lib/state/tabs_provider.dart#TabsNotifier': 2291,
+  'lib/state/tabs_provider.dart#TabsNotifier': 2243,
   // Procesverbetering: matrix/canvas/tree/flow/phaseGate serialize/parse.
   // +33: Y-01 front-matter keys (name/unit/usl/lsl/target/baseline/goal).
   'lib/services/markdown_service.dart#MarkdownService': 2412,
@@ -231,11 +216,8 @@ const Map<String, int> classSizeBaseline = {
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
   // +7 (#1098): menu- en dialoogaanroepen voor het rechtenoverzicht; de scan en
   // beoordeling leven buiten de State in providers en services.
-  // +33 (#1117 ← #1103): de Markdown-modus-schakelaar werd async met een
-  // verwerp-dialoog voor niet-toegepaste wijzigingen, plus de markdown-
-  // bedrading in de State. Verzoening met de gemergede omvang.
   'lib/widgets/app_shell.dart#_MainLayoutState':
-      1490, // +1 (video-calls F1): callRail spread
+      1457, // +1 (video-calls F1): callRail spread
   // Bewust verhoogd van 1331 naar 1344: het app-globale Matrix-account
   // (setMatrixAccount + de keychain-getters voor het access-token) spiegelt
   // bewust de bestaande AI- en git-account-setters. Het gedrag staat in de
