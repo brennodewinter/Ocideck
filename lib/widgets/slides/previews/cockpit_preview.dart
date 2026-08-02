@@ -829,11 +829,9 @@ class _CockpitInstrumentPainter extends CustomPainter {
   }
 
   void _heading(Canvas canvas, Size size) {
-    final c = Offset(
-      size.width * (_authentic ? 0.50 : 0.42),
-      size.height * 0.50,
-    );
-    final r = math.min(size.width, size.height) * (_authentic ? 0.34 : 0.35);
+    final dial = cockpitHeadingDial(size, authentic: _authentic);
+    final c = dial.center;
+    final r = dial.radius;
     canvas.drawCircle(
       c,
       r,
@@ -905,22 +903,38 @@ class _CockpitInstrumentPainter extends CustomPainter {
       Paint()..color = _authentic ? _instrumentInk : accent,
     );
     _hub(canvas, c, size.shortestSide);
+    // De roos draagt streepjes en N/E/S/W-labels rondom, dus geen vrij venster
+    // zoals de andere instrumenten. Klassiek: een rechterkolom naast de roos.
+    // Authentiek (ronde bezel vult de cel): een uitleesvenster laag op de plaat.
+    // In beide gevallen begrensd, zodat een lange markerregel met een ellipsis
+    // binnen het instrument blijft i.p.v. over roos of bezel te lopen (#1110).
+    final readouts = cockpitHeadingReadouts(size, c, r, authentic: _authentic);
+    final window = readouts.window;
+    if (window != null) _drawReadoutWindow(canvas, size, window);
+    final anchor = readouts.anchorRight ? _Anchor.centerRight : _Anchor.center;
+    final align = readouts.anchorRight ? TextAlign.right : TextAlign.center;
+    final actualFont = _authentic
+        ? size.shortestSide * 0.058
+        : size.width * 0.05;
+    final targetFont = _authentic
+        ? size.shortestSide * 0.045
+        : size.width * 0.038;
+    final markerFont = _authentic
+        ? size.shortestSide * 0.047
+        : size.width * 0.032;
     _text(
       canvas,
       faceText.actual.replaceAll(
         '{value}',
         _fmt(_animatedHeading(meter.value) % 360).padLeft(3, '0'),
       ),
-      // Stack the readouts in the clear right column instead of over the
-      // compass rose, where they collided with the S label and the ticks.
-      _authentic
-          ? Offset(size.width * 0.80, size.height * 0.42)
-          : Offset(size.width * 0.76, size.height * 0.43),
-      size.width * (_authentic ? 0.038 : 0.05),
+      readouts.actualCenter,
+      actualFont,
       _instrumentInk,
-      align: TextAlign.center,
-      anchor: _Anchor.center,
+      align: align,
+      anchor: anchor,
       weight: FontWeight.w800,
+      maxWidth: readouts.maxWidth,
     );
     _text(
       canvas,
@@ -928,26 +942,24 @@ class _CockpitInstrumentPainter extends CustomPainter {
         '{heading}',
         _fmt(meter.heading).padLeft(3, '0'),
       ),
-      _authentic
-          ? Offset(size.width * 0.80, size.height * 0.56)
-          : Offset(size.width * 0.76, size.height * 0.59),
-      size.width * (_authentic ? 0.029 : 0.038),
+      readouts.targetCenter,
+      targetFont,
       _instrumentMuted,
-      align: TextAlign.center,
-      anchor: _Anchor.center,
+      align: align,
+      anchor: anchor,
       weight: FontWeight.w600,
+      maxWidth: readouts.maxWidth,
     );
     if (meter.markerLabel.isNotEmpty) {
       _text(
         canvas,
         meter.markerLabel,
-        _authentic
-            ? Offset(size.width * 0.80, size.height * 0.70)
-            : Offset(size.width * 0.76, size.height * 0.72),
-        size.width * 0.032,
+        readouts.markerCenter,
+        markerFont,
         _instrumentMuted,
-        align: TextAlign.center,
-        anchor: _Anchor.center,
+        align: align,
+        anchor: anchor,
+        maxWidth: readouts.maxWidth,
       );
     }
   }
@@ -986,4 +998,4 @@ class _CockpitInstrumentPainter extends CustomPainter {
       oldDelegate.faceText != faceText;
 }
 
-enum _Anchor { topLeft, topCenter, center }
+enum _Anchor { topLeft, topCenter, center, centerRight }

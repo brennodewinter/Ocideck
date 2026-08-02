@@ -42,7 +42,7 @@ extension _CockpitInstrumentPainterSupport on _CockpitInstrumentPainter {
 
   void _authenticFrame(Canvas canvas, Size size) {
     final c = Offset(size.width / 2, size.height / 2);
-    final radius = size.shortestSide * 0.465;
+    final radius = size.shortestSide * kCockpitAuthenticBezelFactor;
     canvas.drawCircle(
       c + Offset(0, size.shortestSide * 0.025),
       radius * 1.03,
@@ -236,36 +236,185 @@ extension _CockpitInstrumentPainterSupport on _CockpitInstrumentPainter {
     FontWeight weight = FontWeight.w600,
     TextAlign align = TextAlign.left,
     _Anchor anchor = _Anchor.topLeft,
+    double? maxWidth,
   }) {
     final effectiveColor = _authentic
         ? (color == accent
               ? accent.withValues(alpha: _power)
               : color.withValues(alpha: color.a * _power))
         : color;
-    final painter = TextPainter(
-      text: TextSpan(
-        text: text,
-        style: TextStyle(
-          color: effectiveColor,
-          fontSize: size,
-          fontWeight: weight,
-          fontFamily: font,
-          decoration: TextDecoration.none,
-        ),
-      ),
-      textDirection: TextDirection.ltr,
-      textAlign: align,
-      maxLines: 1,
-      ellipsis: '…',
-    )..layout(maxWidth: math.max(12, size * 12));
+    final painter =
+        TextPainter(
+          text: TextSpan(
+            text: text,
+            style: TextStyle(
+              color: effectiveColor,
+              fontSize: size,
+              fontWeight: weight,
+              fontFamily: font,
+              decoration: TextDecoration.none,
+            ),
+          ),
+          textDirection: TextDirection.ltr,
+          textAlign: align,
+          maxLines: 1,
+          ellipsis: '…',
+        )..layout(
+          maxWidth: maxWidth == null
+              ? math.max(12, size * 12)
+              : math.max(1, maxWidth),
+        );
     final dx = switch (anchor) {
       _Anchor.topCenter || _Anchor.center => offset.dx - painter.width / 2,
+      _Anchor.centerRight => offset.dx - painter.width,
       _ => offset.dx,
     };
     final dy = switch (anchor) {
-      _Anchor.center => offset.dy - painter.height / 2,
+      _Anchor.center || _Anchor.centerRight => offset.dy - painter.height / 2,
       _ => offset.dy,
     };
     painter.paint(canvas, Offset(dx, dy));
   }
+
+  /// Tekent het authentieke kompas-uitleesvenster: een vlak in de face-kleur dat
+  /// de roos-streepjes eronder afdekt, zodat de ACT/TGT/marker-regels leesbaar
+  /// binnen de plaat staan i.p.v. over de streepjes en de bezel te lopen. Alleen
+  /// authentiek; de klassieke stand heeft een vrije rechterkolom (#1110).
+  void _drawReadoutWindow(Canvas canvas, Size size, Rect window) {
+    final rr = RRect.fromRectAndRadius(
+      window,
+      Radius.circular(size.shortestSide * 0.03),
+    );
+    canvas
+      ..drawRRect(rr, Paint()..color = _palette.face)
+      ..drawRRect(
+        rr,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = math.max(1, size.shortestSide * 0.006)
+          ..color = _line(0.30),
+      );
+  }
 }
+
+/// Buitenstraal van de authentieke bezel (fractie van de kortste zijde), zoals
+/// [_CockpitInstrumentPainterSupport._authenticFrame] hem tekent.
+const double kCockpitAuthenticBezelFactor = 0.465;
+
+/// Straal van de authentieke wijzerplaat (de crème/donkere face): de bezel maal
+/// 0,88, gelijk aan de `radius * 0.88` in `_authenticFrame`. Het uitleesvenster
+/// moet binnen deze cirkel blijven.
+const double kCockpitAuthenticFaceFactor = kCockpitAuthenticBezelFactor * 0.88;
+
+/// Middelpunt en straal van de kompas-wijzerplaat binnen een instrument van
+/// [size]. De authentieke roos valt samen met het bezel-middelpunt (celmidden);
+/// de klassieke variant zit iets links zodat de rechterkolom vrij komt.
+@visibleForTesting
+({Offset center, double radius}) cockpitHeadingDial(
+  Size size, {
+  required bool authentic,
+}) {
+  return (
+    center: Offset(size.width * (authentic ? 0.50 : 0.42), size.height * 0.50),
+    radius: math.min(size.width, size.height) * (authentic ? 0.34 : 0.35),
+  );
+}
+
+/// Plaatsing én begrenzing van de drie kompas-uitleesregels (ACT/TGT/marker),
+/// zodat ze niet buiten het instrument vallen (#1110).
+///
+/// De twee visuele stijlen hebben een andere vorm en dus een andere plek:
+/// * **klassiek** — het instrument vult een rechthoekige kaart; de regels vormen
+///   een rechterkolom naast de roos, rechts uitgelijnd ([anchorRight] = true).
+/// * **authentiek** — een ronde bezel vult de cel, dus er ís geen vrije kolom
+///   ernaast (een rechterkolom zou over de bezel en het buurinstrument lopen).
+///   De regels zitten daarom in een uitleesvenster ([window]) laag op de plaat,
+///   gecentreerd — zoals de andere authentieke instrumenten hun waarde binnen de
+///   wijzerplaat tonen.
+///
+/// In beide gevallen begrenst [maxWidth] de regelbreedte, zodat een lange
+/// (gelokaliseerde) markerregel met een ellipsis binnen de plaat blijft.
+@immutable
+class CockpitHeadingReadouts {
+  const CockpitHeadingReadouts({
+    required this.anchorRight,
+    required this.maxWidth,
+    required this.actualCenter,
+    required this.targetCenter,
+    required this.markerCenter,
+    this.window,
+  });
+
+  /// True: regels rechts uitgelijnd op hun anker (klassieke rechterkolom).
+  /// False: regels gecentreerd op hun anker (authentiek venster).
+  final bool anchorRight;
+
+  /// Breedtegrens per regel; langere tekst krijgt een ellipsis.
+  final double maxWidth;
+
+  /// Ankerpunten van de drie regels — de rechterrand bij [anchorRight], anders
+  /// het midden; verticaal gecentreerd.
+  final Offset actualCenter;
+  final Offset targetCenter;
+  final Offset markerCenter;
+
+  /// Alleen authentiek: het uitleesvenster dat de roos-streepjes eronder afdekt.
+  /// Null in de klassieke stand.
+  final Rect? window;
+}
+
+/// Berekent de plaatsing van de kompas-uitleesregels uit de instrument-[size] en
+/// de roos-geometrie ([center]/[radius]).
+///
+/// Puur en zonder neveneffect, zodat een test kan bewijzen dat de regels binnen
+/// het instrument blijven — de begrenzing die issue #1110 vroeg. Authentiek: het
+/// venster valt binnen de face-cirkel (straal [kCockpitAuthenticFaceFactor]·
+/// kortste-zijde rond het celmidden). Klassiek: de kolom valt naast de roos en
+/// binnen de rand; de marge [_headingReadoutGap] vangt ook de markerpunt op die
+/// tot r·1,02 buiten de cirkel steekt.
+@visibleForTesting
+CockpitHeadingReadouts cockpitHeadingReadouts(
+  Size size,
+  Offset center,
+  double radius, {
+  required bool authentic,
+}) {
+  if (authentic) {
+    final faceCenter = Offset(size.width / 2, size.height / 2);
+    final faceR = size.shortestSide * kCockpitAuthenticFaceFactor;
+    final winW = faceR * 1.20;
+    final winH = faceR * 0.64;
+    // Onder de naaf (het celmidden), zodat het venster de hub/naald-basis vrij
+    // laat en met marge binnen de face-cirkel valt.
+    final winCenter = Offset(faceCenter.dx, faceCenter.dy + faceR * 0.40);
+    final window = Rect.fromCenter(
+      center: winCenter,
+      width: winW,
+      height: winH,
+    );
+    return CockpitHeadingReadouts(
+      anchorRight: false,
+      maxWidth: winW - faceR * 0.14,
+      actualCenter: Offset(winCenter.dx, window.top + winH * 0.26),
+      targetCenter: Offset(winCenter.dx, winCenter.dy),
+      markerCenter: Offset(winCenter.dx, window.bottom - winH * 0.24),
+      window: window,
+    );
+  }
+  // Net binnen de rand van de rechthoekige kaart zodat de tekst niet op de rand
+  // valt.
+  final rightEdge = size.width * 0.965;
+  final freeLeft = center.dx + radius + size.width * _headingReadoutGap;
+  return CockpitHeadingReadouts(
+    anchorRight: true,
+    maxWidth: rightEdge - freeLeft,
+    actualCenter: Offset(rightEdge, size.height * 0.43),
+    targetCenter: Offset(rightEdge, size.height * 0.59),
+    markerCenter: Offset(rightEdge, size.height * 0.72),
+  );
+}
+
+/// Tussenruimte (fractie van de breedte) tussen de roos en de klassieke
+/// uitleeskolom. Groter dan de r·0,02 waarmee de markerpunt buiten de cirkel
+/// steekt.
+const double _headingReadoutGap = 0.02;
