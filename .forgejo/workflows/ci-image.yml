@@ -39,12 +39,12 @@ concurrency:
 jobs:
   build-publish:
     runs-on: docker
-    # De runner geeft job-containers het dind-netwerk mee (runner-config:
-    # `network: forgejo-stack_default`), zodat de job de bestaande dind-daemon
-    # bereikt op `docker-in-docker:2375` (dockerd --tls=false). Geen eigen
-    # dind-service nodig; alleen de docker-CLI hoeft naar die host te wijzen.
+    # Job-containers draaien ÍN de dind (de runner maakt ze via de dind-daemon).
+    # Ze staan op het dind-netwerk `forgejo-stack_default` (runner-config), waarvan
+    # de gateway (172.30.0.1) de dind-daemon zelf is — die luistert op 0.0.0.0:2375.
+    # De docker-CLI bouwt dus tegen `tcp://172.30.0.1:2375`.
     env:
-      DOCKER_HOST: tcp://docker-in-docker:2375
+      DOCKER_HOST: tcp://172.30.0.1:2375
     steps:
       # Zonder registry-token kan deze workflow niets publiceren. Dat is géén
       # fout: vóór de eenmalige inrichting (of op een fork) hoort de run gewoon
