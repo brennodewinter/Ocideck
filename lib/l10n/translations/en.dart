@@ -911,6 +911,24 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Voortgang per sectie': 'Progress by section',
+  'Nog te doen': 'Remaining',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Progress overview and chart updated',
+  'Genereer managementreview (9.3)': 'Generate management review (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Adds a pre-filled template for the management review (ISO clause 9.3), with the current progress in it.',
+  'Managementreview (clausule 9.3) — Input':
+      'Management review (clause 9.3) — Input',
+  'Managementreview (clausule 9.3) — Output':
+      'Management review (clause 9.3) — Output',
+  'Managementreview (9.3) toegevoegd': 'Management review (9.3) added',
+  'Er staat al een managementreview in dit deck':
+      'This deck already contains a management review',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Input (9.3.2)\n\n- **a.** Status of actions from previous management reviews\n- **b.** Changes in internal and external issues affecting the management system\n- **c.** Changes in the needs and expectations of interested parties\n- **d.** Performance and effectiveness — {p}% implemented ({impl}/{app} controls applicable)\n    - Trends in nonconformities and corrective actions\n    - Monitoring and measurement results\n    - Audit results\n- **e.** Adequacy of resources\n- **f.** Effectiveness of actions to address risks and opportunities\n- **g.** Opportunities for improvement',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Output (9.3.3)\n\n- Decisions on opportunities for continual improvement\n- Decisions on any changes to the management system\n- Resource needs\n\n_Fill in the decisions, actions and owners below._',
   'Procesverbetering: DMADV-project': 'Process improvement: DMADV project',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV skeleton for designing and verifying a new process.',

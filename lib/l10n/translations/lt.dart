@@ -1778,6 +1778,24 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Voortgang per sectie': 'Pažanga pagal skyrius',
+  'Nog te doen': 'Liko',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Pažangos apžvalga ir diagrama atnaujintos',
+  'Genereer managementreview (9.3)': 'Generuoti vadovybinę analizę (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Prideda iš anksto užpildytą vadovybinės analizės šabloną (ISO 9.3 punktas) su dabartine pažanga.',
+  'Managementreview (clausule 9.3) — Input':
+      'Vadovybinė analizė (9.3 punktas) — Įvesties duomenys',
+  'Managementreview (clausule 9.3) — Output':
+      'Vadovybinė analizė (9.3 punktas) — Išvesties duomenys',
+  'Managementreview (9.3) toegevoegd': 'Vadovybinė analizė (9.3) pridėta',
+  'Er staat al een managementreview in dit deck':
+      'Šiame deke jau yra vadovybinė analizė',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Įvesties duomenys (9.3.2)\n\n- **a.** Veiksmų iš ankstesnių vadovybinių analizių būsena\n- **b.** Vidinių ir išorinių aspektų, susijusių su valdymo sistema, pokyčiai\n- **c.** Suinteresuotųjų šalių poreikių ir lūkesčių pokyčiai\n- **d.** Veiksmingumas ir rezultatyvumas — {p}% įdiegta (taikytinos kontrolės: {impl}/{app})\n    - Neatitikčių ir taisomųjų veiksmų tendencijos\n    - Stebėsenos ir matavimų rezultatai\n    - Auditų rezultatai\n- **e.** Išteklių pakankamumas\n- **f.** Veiksmų, skirtų rizikoms ir galimybėms, rezultatyvumas\n- **g.** Gerinimo galimybės',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Išvesties duomenys (9.3.3)\n\n- Sprendimai dėl nuolatinio gerinimo galimybių\n- Sprendimai dėl bet kokių valdymo sistemos pakeitimų\n- Išteklių poreikiai\n\n_Žemiau įrašykite sprendimus, veiksmus ir atsakingus asmenis._',
   'Procesverbetering: DMADV-project': 'Proceso tobulinimas: DMADV projektas',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV skeletas, skirtas naujam procesui kurti ir tikrinti.',

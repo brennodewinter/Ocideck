@@ -184,16 +184,31 @@ class _ControlStatusEditorState extends ConsumerState<ControlStatusEditor> {
             ),
           ),
         ),
+        const SizedBox(height: 12),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Tooltip(
+            message: l10n.d(
+              'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.',
+            ),
+            child: OutlinedButton.icon(
+              onPressed: _generateReview,
+              icon: const Icon(Icons.rate_review_outlined, size: 16),
+              label: Text(l10n.d('Genereer managementreview (9.3)')),
+            ),
+          ),
+        ),
       ],
     );
   }
 
-  /// Regenerate the deck-wide progress overview from every `controlStatus`
-  /// slide, then report the outcome via a SnackBar.
+  /// Draw the derived overview: the summary table **and** the burn-up chart,
+  /// both regenerated from the `controlStatus` slides.
   void _generateOverview() {
     final l10n = context.l10n;
+    final notifier = ref.read(deckProvider.notifier);
     final made = generateManagementSystemOverview(
-      ref.read(deckProvider.notifier),
+      notifier,
       overviewTitle: l10n.d('Voortgang managementsysteem'),
       sectionHeader: l10n.d('Sectie'),
       applicableHeader: l10n.d('Van toepassing'),
@@ -201,12 +216,47 @@ class _ControlStatusEditorState extends ConsumerState<ControlStatusEditor> {
       progressHeader: l10n.d('Voortgang'),
       totalLabel: l10n.d('Totaal'),
     );
+    generateManagementSystemChart(
+      notifier,
+      chartTitle: l10n.d('Voortgang per sectie'),
+      implementedLabel: l10n.d('Geïmplementeerd'),
+      remainingLabel: l10n.d('Nog te doen'),
+    );
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           made > 0
-              ? l10n.d('Voortgangsoverzicht bijgewerkt')
+              ? l10n.d('Voortgangsoverzicht en -grafiek bijgewerkt')
               : l10n.d('Nog geen beheersmaatregel-dia\'s om samen te vatten'),
+        ),
+      ),
+    );
+  }
+
+  /// Insert the ISO 9.3 management-review template, pre-filled with the current
+  /// progress. Appends once (guarded against duplicates).
+  void _generateReview() {
+    final l10n = context.l10n;
+    final made = generateManagementReview(
+      ref.read(deckProvider.notifier),
+      inputTitle: l10n.d('Managementreview (clausule 9.3) — Input'),
+      // Eén stringliteral per d(): de l10n-scanner is regex-gebaseerd en pakt
+      // alleen de eerste literal na .d(, dus aaneengeschakelde delen zouden half
+      // vertaald blijven.
+      inputBody: l10n.d(
+        '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering',
+      ),
+      outputTitle: l10n.d('Managementreview (clausule 9.3) — Output'),
+      outputBody: l10n.d(
+        '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._',
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          made > 0
+              ? l10n.d('Managementreview (9.3) toegevoegd')
+              : l10n.d('Er staat al een managementreview in dit deck'),
         ),
       ),
     );

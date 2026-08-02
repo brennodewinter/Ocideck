@@ -1774,6 +1774,24 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Voortgang per sectie': 'Fortschritt pro Abschnitt',
+  'Nog te doen': 'Ussteend',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Fortschrittsübersicht und -diagramm aktualisiert',
+  'Genereer managementreview (9.3)': 'Managementbewertig generiere (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Füegt e vorusgfüllti Vorlag für d Managementbewertig (ISO-Abschnitt 9.3) hinzue, mit em aktuelle Fortschritt drin.',
+  'Managementreview (clausule 9.3) — Input':
+      'Managementbewertig (Abschnitt 9.3) — Iigabe',
+  'Managementreview (clausule 9.3) — Output':
+      'Managementbewertig (Abschnitt 9.3) — Ergäbnis',
+  'Managementreview (9.3) toegevoegd': 'Managementbewertig (9.3) hinzuegfüegt',
+  'Er staat al een managementreview in dit deck':
+      'In dem Deck git\'s scho e Managementbewertig',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Iigabe (9.3.2)\n\n- **a.** Status vo de Massnahme us früenere Managementbewertige\n- **b.** Änderige bi interne und externe Theme, wo s Managementsystem betreffe\n- **c.** Änderige bi de Bedürfnis und Erwartige vo de interessierte Parteie\n- **d.** Leischtig und Wirksamkeit — {p}% umgsetzt ({impl}/{app} Massnahme aawändbar)\n    - Trends bi Abwiichige und Korrekturmassnahme\n    - Ergäbnis vo de Überwachig und Mässig\n    - Auditergäbnis\n- **e.** Aagmässeheit vo de Ressource\n- **f.** Wirksamkeit vo de Massnahme gäge Risike und Chance\n- **g.** Möglichkeite zum Verbessere',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Ergäbnis (9.3.3)\n\n- Entscheid zu de Möglichkeite vo de kontinuierliche Verbesserig\n- Entscheid über allfälligi Änderige am Managementsystem\n- Ressourcebedarf\n\n_Trag unte d Entscheid, Massnahme und Verantwortlechi ii._',
   'Procesverbetering: DMADV-project': 'Prozessverbesserung: DMADV-Projekt',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV-Gerüst zum Entwerfen und Verifizieren eines neuen Prozesses.',

@@ -19,6 +19,8 @@ import '../services/document_integrity.dart';
 import '../services/rich_text_chapters.dart';
 import '../services/finding_context_score.dart';
 import '../services/finding_numbering.dart';
+import '../models/chart.dart';
+import '../services/management_system_artefacts.dart';
 import '../services/management_system_progress.dart';
 import '../services/scope_coverage.dart';
 import '../services/file_service.dart';

@@ -1798,6 +1798,26 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Voortgang per sectie': 'Πρόοδος ανά ενότητα',
+  'Nog te doen': 'Απομένει',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Η επισκόπηση και το γράφημα προόδου ενημερώθηκαν',
+  'Genereer managementreview (9.3)':
+      'Δημιουργία ανασκόπησης από τη διοίκηση (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Προσθέτει ένα προσυμπληρωμένο πρότυπο για την ανασκόπηση από τη διοίκηση (ρήτρα ISO 9.3), με την τρέχουσα πρόοδο.',
+  'Managementreview (clausule 9.3) — Input':
+      'Ανασκόπηση από τη διοίκηση (ρήτρα 9.3) — Εισροές',
+  'Managementreview (clausule 9.3) — Output':
+      'Ανασκόπηση από τη διοίκηση (ρήτρα 9.3) — Εκροές',
+  'Managementreview (9.3) toegevoegd':
+      'Προστέθηκε ανασκόπηση από τη διοίκηση (9.3)',
+  'Er staat al een managementreview in dit deck':
+      'Αυτό το deck περιέχει ήδη ανασκόπηση από τη διοίκηση',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Εισροές (9.3.2)\n\n- **a.** Κατάσταση των ενεργειών από προηγούμενες ανασκοπήσεις από τη διοίκηση\n- **b.** Αλλαγές στα εσωτερικά και εξωτερικά θέματα που επηρεάζουν το σύστημα διαχείρισης\n- **c.** Αλλαγές στις ανάγκες και προσδοκίες των ενδιαφερόμενων μερών\n- **d.** Επιδόσεις και αποτελεσματικότητα — {p}% υλοποιήθηκε (εφαρμοστέοι έλεγχοι: {impl}/{app})\n    - Τάσεις σε μη συμμορφώσεις και διορθωτικές ενέργειες\n    - Αποτελέσματα παρακολούθησης και μετρήσεων\n    - Αποτελέσματα επιθεωρήσεων\n- **e.** Επάρκεια πόρων\n- **f.** Αποτελεσματικότητα των ενεργειών για κινδύνους και ευκαιρίες\n- **g.** Ευκαιρίες για βελτίωση',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Εκροές (9.3.3)\n\n- Αποφάσεις για ευκαιρίες συνεχούς βελτίωσης\n- Αποφάσεις για τυχόν αλλαγές στο σύστημα διαχείρισης\n- Ανάγκες σε πόρους\n\n_Συμπληρώστε παρακάτω τις αποφάσεις, τις ενέργειες και τους υπευθύνους._',
   'Procesverbetering: DMADV-project': 'Βελτίωση διαδικασίας: έργο DMADV',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'Σκελετός DMADV για το σχεδιασμό και την επαλήθευση μιας νέας διαδικασίας.',

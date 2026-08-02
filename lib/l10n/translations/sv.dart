@@ -1770,6 +1770,24 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Voortgang per sectie': 'Framsteg per sektion',
+  'Nog te doen': 'Återstår',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Framstegsöversikt och -diagram uppdaterade',
+  'Genereer managementreview (9.3)': 'Generera ledningens genomgång (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Lägger till en förifylld mall för ledningens genomgång (ISO-avsnitt 9.3) med det aktuella framsteget.',
+  'Managementreview (clausule 9.3) — Input':
+      'Ledningens genomgång (avsnitt 9.3) — Underlag',
+  'Managementreview (clausule 9.3) — Output':
+      'Ledningens genomgång (avsnitt 9.3) — Resultat',
+  'Managementreview (9.3) toegevoegd': 'Ledningens genomgång (9.3) tillagd',
+  'Er staat al een managementreview in dit deck':
+      'Det här decket innehåller redan en ledningens genomgång',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Underlag (9.3.2)\n\n- **a.** Status för åtgärder från tidigare ledningens genomgångar\n- **b.** Förändringar i interna och externa frågor som påverkar ledningssystemet\n- **c.** Förändringar i intressenternas behov och förväntningar\n- **d.** Prestanda och verkan — {p}% implementerat ({impl}/{app} tillämpliga åtgärder)\n    - Trender i avvikelser och korrigerande åtgärder\n    - Resultat av övervakning och mätning\n    - Revisionsresultat\n- **e.** Resursernas tillräcklighet\n- **f.** Verkan av åtgärder mot risker och möjligheter\n- **g.** Möjligheter till förbättring',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Resultat (9.3.3)\n\n- Beslut om möjligheter till ständig förbättring\n- Beslut om eventuella ändringar av ledningssystemet\n- Resursbehov\n\n_Fyll i beslut, åtgärder och ansvariga nedan._',
   'Procesverbetering: DMADV-project': 'Processförbättring: DMADV-projekt',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV-skelett för att designa och verifiera en ny process.',

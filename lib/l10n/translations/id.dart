@@ -1771,6 +1771,24 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Voortgang per sectie': 'Kemajuan per bagian',
+  'Nog te doen': 'Belum selesai',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Ringkasan dan grafik kemajuan diperbarui',
+  'Genereer managementreview (9.3)': 'Buat tinjauan manajemen (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Menambahkan templat terisi untuk tinjauan manajemen (klausul ISO 9.3), dengan kemajuan saat ini di dalamnya.',
+  'Managementreview (clausule 9.3) — Input':
+      'Tinjauan manajemen (klausul 9.3) — Masukan',
+  'Managementreview (clausule 9.3) — Output':
+      'Tinjauan manajemen (klausul 9.3) — Keluaran',
+  'Managementreview (9.3) toegevoegd': 'Tinjauan manajemen (9.3) ditambahkan',
+  'Er staat al een managementreview in dit deck':
+      'Deck ini sudah berisi tinjauan manajemen',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Masukan (9.3.2)\n\n- **a.** Status tindakan dari tinjauan manajemen sebelumnya\n- **b.** Perubahan pada isu internal dan eksternal yang memengaruhi sistem manajemen\n- **c.** Perubahan pada kebutuhan dan harapan pihak berkepentingan\n- **d.** Kinerja dan efektivitas — {p}% diterapkan ({impl}/{app} kontrol berlaku)\n    - Tren ketidaksesuaian dan tindakan korektif\n    - Hasil pemantauan dan pengukuran\n    - Hasil audit\n- **e.** Kecukupan sumber daya\n- **f.** Efektivitas tindakan terhadap risiko dan peluang\n- **g.** Peluang untuk perbaikan',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Keluaran (9.3.3)\n\n- Keputusan tentang peluang perbaikan berkelanjutan\n- Keputusan tentang perubahan apa pun pada sistem manajemen\n- Kebutuhan sumber daya\n\n_Isi keputusan, tindakan, dan penanggung jawab di bawah ini._',
   'Procesverbetering: DMADV-project': 'Peningkatan proses: proyek DMADV',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'Kerangka DMADV untuk merancang dan memverifikasi proses baru.',

@@ -1770,6 +1770,24 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Voortgang per sectie': 'Fremskridt pr. sektion',
+  'Nog te doen': 'Mangler',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Fremskridtsoversigt og -diagram opdateret',
+  'Genereer managementreview (9.3)': 'Generér ledelsens evaluering (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Tilføjer en forududfyldt skabelon til ledelsens evaluering (ISO-punkt 9.3) med det aktuelle fremskridt.',
+  'Managementreview (clausule 9.3) — Input':
+      'Ledelsens evaluering (punkt 9.3) — Input',
+  'Managementreview (clausule 9.3) — Output':
+      'Ledelsens evaluering (punkt 9.3) — Output',
+  'Managementreview (9.3) toegevoegd': 'Ledelsens evaluering (9.3) tilføjet',
+  'Er staat al een managementreview in dit deck':
+      'Dette deck indeholder allerede en ledelsesevaluering',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Input (9.3.2)\n\n- **a.** Status på handlinger fra tidligere ledelsesevalueringer\n- **b.** Ændringer i interne og eksterne forhold, der påvirker ledelsessystemet\n- **c.** Ændringer i interessenternes behov og forventninger\n- **d.** Præstation og effektivitet — {p}% implementeret ({impl}/{app} kontroller relevante)\n    - Tendenser i afvigelser og korrigerende handlinger\n    - Resultater af overvågning og måling\n    - Auditresultater\n- **e.** Ressourcernes tilstrækkelighed\n- **f.** Effektiviteten af handlinger over for risici og muligheder\n- **g.** Muligheder for forbedring',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Output (9.3.3)\n\n- Beslutninger om muligheder for løbende forbedring\n- Beslutninger om eventuelle ændringer af ledelsessystemet\n- Ressourcebehov\n\n_Udfyld beslutninger, handlinger og ansvarlige nedenfor._',
   'Procesverbetering: DMADV-project': 'Procesforbedring: DMADV-projekt',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV skelet til at designe og verificere en ny proces.',

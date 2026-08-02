@@ -1771,6 +1771,24 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Voortgang per sectie': 'Edistyminen osioittain',
+  'Nog te doen': 'Jäljellä',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Edistymiskatsaus ja -kaavio päivitetty',
+  'Genereer managementreview (9.3)': 'Luo johdon katselmus (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Lisää esitäytetyn mallin johdon katselmusta varten (ISO-kohta 9.3), jossa on nykyinen edistyminen.',
+  'Managementreview (clausule 9.3) — Input':
+      'Johdon katselmus (kohta 9.3) — Lähtötiedot',
+  'Managementreview (clausule 9.3) — Output':
+      'Johdon katselmus (kohta 9.3) — Tulokset',
+  'Managementreview (9.3) toegevoegd': 'Johdon katselmus (9.3) lisätty',
+  'Er staat al een managementreview in dit deck':
+      'Tässä deckissä on jo johdon katselmus',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Lähtötiedot (9.3.2)\n\n- **a.** Aiempien johdon katselmusten toimenpiteiden tila\n- **b.** Muutokset sisäisissä ja ulkoisissa asioissa, jotka vaikuttavat hallintajärjestelmään\n- **c.** Muutokset sidosryhmien tarpeissa ja odotuksissa\n- **d.** Suorituskyky ja vaikuttavuus — {p}% toteutettu ({impl}/{app} soveltuvaa hallintakeinoa)\n    - Poikkeamien ja korjaavien toimenpiteiden trendit\n    - Seurannan ja mittausten tulokset\n    - Auditointien tulokset\n- **e.** Resurssien riittävyys\n- **f.** Riskeihin ja mahdollisuuksiin kohdistettujen toimenpiteiden vaikuttavuus\n- **g.** Parannusmahdollisuudet',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Tulokset (9.3.3)\n\n- Päätökset jatkuvan parantamisen mahdollisuuksista\n- Päätökset mahdollisista muutoksista hallintajärjestelmään\n- Resurssitarpeet\n\n_Täytä päätökset, toimenpiteet ja vastuuhenkilöt alle._',
   'Procesverbetering: DMADV-project': 'Prosessin parantaminen: DMADV-projekti',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV-runko uuden prosessin suunnitteluun ja tarkistamiseen.',

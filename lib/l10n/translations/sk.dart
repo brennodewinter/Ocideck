@@ -1778,6 +1778,25 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Voortgang per sectie': 'Pokrok podľa sekcií',
+  'Nog te doen': 'Zostáva',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Prehľad a graf pokroku aktualizované',
+  'Genereer managementreview (9.3)':
+      'Vygenerovať preskúmanie manažmentom (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Pridá predvyplnenú šablónu pre preskúmanie manažmentom (článok ISO 9.3) s aktuálnym pokrokom.',
+  'Managementreview (clausule 9.3) — Input':
+      'Preskúmanie manažmentom (článok 9.3) — Vstupy',
+  'Managementreview (clausule 9.3) — Output':
+      'Preskúmanie manažmentom (článok 9.3) — Výstupy',
+  'Managementreview (9.3) toegevoegd': 'Preskúmanie manažmentom (9.3) pridané',
+  'Er staat al een managementreview in dit deck':
+      'Tento deck už obsahuje preskúmanie manažmentom',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Vstupy (9.3.2)\n\n- **a.** Stav opatrení z predchádzajúcich preskúmaní manažmentom\n- **b.** Zmeny v interných a externých témach, ktoré ovplyvňujú systém manažérstva\n- **c.** Zmeny v potrebách a očakávaniach zainteresovaných strán\n- **d.** Výkonnosť a účinnosť — {p}% zavedené ({impl}/{app} použiteľných opatrení)\n    - Trendy v nezhodách a nápravných opatreniach\n    - Výsledky monitorovania a merania\n    - Výsledky auditov\n- **e.** Primeranosť zdrojov\n- **f.** Účinnosť opatrení prijatých voči rizikám a príležitostiam\n- **g.** Príležitosti na zlepšovanie',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Výstupy (9.3.3)\n\n- Rozhodnutia o príležitostiach na neustále zlepšovanie\n- Rozhodnutia o prípadných zmenách systému manažérstva\n- Potreby zdrojov\n\n_Nižšie vyplňte rozhodnutia, opatrenia a zodpovedné osoby._',
   'Procesverbetering: DMADV-project': 'Zlepšenie procesov: projekt DMADV',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'Kostra DMADV pre návrh a overenie nového procesu.',

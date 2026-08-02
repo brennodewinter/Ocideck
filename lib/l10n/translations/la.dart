@@ -1787,6 +1787,26 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Voortgang per sectie': 'Progressus per sectiones',
+  'Nog te doen': 'Restans',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Conspectus et diagramma progressus renovata',
+  'Genereer managementreview (9.3)':
+      'Recognitionem administrationis generare (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Addit formulam praecompletam recognitionis administrationis (caput ISO 9.3), cum progressu praesenti incluso.',
+  'Managementreview (clausule 9.3) — Input':
+      'Recognitio administrationis (caput 9.3) — Initus',
+  'Managementreview (clausule 9.3) — Output':
+      'Recognitio administrationis (caput 9.3) — Exitus',
+  'Managementreview (9.3) toegevoegd':
+      'Recognitio administrationis (9.3) addita',
+  'Er staat al een managementreview in dit deck':
+      'Hic fasciculus iam recognitionem administrationis continet',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Initus (9.3.2)\n\n- **a.** Status actionum ex recognitionibus administrationis prioribus\n- **b.** Mutationes in rebus internis et externis quae systema administrationis tangunt\n- **c.** Mutationes in necessitatibus et exspectationibus partium interesse habentium\n- **d.** Effectus et efficacia — {p}% effecta ({impl}/{app} praesidia applicabilia)\n    - Inclinationes in difformitatibus et actionibus corrigentibus\n    - Eventus observationis et mensurae\n    - Eventus recognitionum\n- **e.** Sufficientia opum\n- **f.** Efficacia actionum contra pericula et occasiones\n- **g.** Occasiones emendationis',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Exitus (9.3.3)\n\n- Decreta de occasionibus emendationis continuae\n- Decreta de ullis mutationibus systematis administrationis\n- Necessitates opum\n\n_Infra decreta, actiones et dominos comple._',
   'Procesverbetering: DMADV-project': 'Processus emendationem: DMADV project',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'sceletum DMADV ad novum processum excogitandum et comprobandum.',

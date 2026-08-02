@@ -1788,6 +1788,26 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Voortgang per sectie': 'Progres pe secțiuni',
+  'Nog te doen': 'Rămas',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Rezumatul și graficul de progres au fost actualizate',
+  'Genereer managementreview (9.3)':
+      'Generează analiza efectuată de management (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Adaugă un șablon precompletat pentru analiza efectuată de management (punctul ISO 9.3), cu progresul actual.',
+  'Managementreview (clausule 9.3) — Input':
+      'Analiza efectuată de management (punctul 9.3) — Elemente de intrare',
+  'Managementreview (clausule 9.3) — Output':
+      'Analiza efectuată de management (punctul 9.3) — Elemente de ieșire',
+  'Managementreview (9.3) toegevoegd':
+      'Analiza efectuată de management (9.3) a fost adăugată',
+  'Er staat al een managementreview in dit deck':
+      'Acest deck conține deja o analiză efectuată de management',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Elemente de intrare (9.3.2)\n\n- **a.** Stadiul acțiunilor din analizele efectuate de management anterioare\n- **b.** Modificări ale aspectelor interne și externe care afectează sistemul de management\n- **c.** Modificări ale nevoilor și așteptărilor părților interesate\n- **d.** Performanță și eficacitate — {p}% implementat ({impl}/{app} controale aplicabile)\n    - Tendințe ale neconformităților și acțiunilor corective\n    - Rezultatele monitorizării și măsurării\n    - Rezultatele auditurilor\n- **e.** Adecvarea resurselor\n- **f.** Eficacitatea acțiunilor întreprinse față de riscuri și oportunități\n- **g.** Oportunități de îmbunătățire',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Elemente de ieșire (9.3.3)\n\n- Decizii privind oportunitățile de îmbunătățire continuă\n- Decizii privind eventualele modificări ale sistemului de management\n- Necesarul de resurse\n\n_Completați mai jos deciziile, acțiunile și responsabilii._',
   'Procesverbetering: DMADV-project': 'Îmbunătățirea procesului: proiect DMADV',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'Schelet DMADV pentru proiectarea și verificarea unui nou proces.',

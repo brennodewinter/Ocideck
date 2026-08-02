@@ -1775,6 +1775,24 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Voortgang per sectie': 'Előrehaladás szakaszonként',
+  'Nog te doen': 'Hátralévő',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'A haladási áttekintés és diagram frissítve',
+  'Genereer managementreview (9.3)': 'Vezetőségi átvizsgálás létrehozása (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Hozzáad egy előre kitöltött sablont a vezetőségi átvizsgáláshoz (ISO 9.3. pont) az aktuális haladással.',
+  'Managementreview (clausule 9.3) — Input':
+      'Vezetőségi átvizsgálás (9.3. pont) — Bemenet',
+  'Managementreview (clausule 9.3) — Output':
+      'Vezetőségi átvizsgálás (9.3. pont) — Kimenet',
+  'Managementreview (9.3) toegevoegd': 'Vezetőségi átvizsgálás (9.3) hozzáadva',
+  'Er staat al een managementreview in dit deck':
+      'Ez a deck már tartalmaz vezetőségi átvizsgálást',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Bemenet (9.3.2)\n\n- **a.** A korábbi vezetőségi átvizsgálásokból származó intézkedések állapota\n- **b.** Az irányítási rendszert érintő belső és külső témák változásai\n- **c.** Az érdekelt felek igényeinek és elvárásainak változásai\n- **d.** Teljesítmény és eredményesség — {p}% megvalósítva ({impl}/{app} alkalmazható intézkedés)\n    - A nemmegfelelőségek és a helyesbítő intézkedések tendenciái\n    - A monitorozás és mérés eredményei\n    - Az auditok eredményei\n- **e.** Az erőforrások megfelelősége\n- **f.** A kockázatok és lehetőségek kezelésére tett intézkedések eredményessége\n- **g.** Fejlesztési lehetőségek',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Kimenet (9.3.3)\n\n- Döntések a folyamatos fejlesztés lehetőségeiről\n- Döntések az irányítási rendszer esetleges változtatásairól\n- Erőforrásigények\n\n_Az alábbiakban adja meg a döntéseket, intézkedéseket és felelősöket._',
   'Procesverbetering: DMADV-project': 'Folyamatfejlesztés: DMADV projekt',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'DMADV váz egy új folyamat tervezéséhez és ellenőrzéséhez.',

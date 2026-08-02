@@ -1800,6 +1800,24 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Voortgang per sectie': 'Progresso por secção',
+  'Nog te doen': 'Pendente',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Resumo e gráfico de progresso atualizados',
+  'Genereer managementreview (9.3)': 'Gerar revisão pela direção (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Adiciona um modelo pré-preenchido para a revisão pela direção (cláusula ISO 9.3), com o progresso atual.',
+  'Managementreview (clausule 9.3) — Input':
+      'Revisão pela direção (cláusula 9.3) — Entradas',
+  'Managementreview (clausule 9.3) — Output':
+      'Revisão pela direção (cláusula 9.3) — Saídas',
+  'Managementreview (9.3) toegevoegd': 'Revisão pela direção (9.3) adicionada',
+  'Er staat al een managementreview in dit deck':
+      'Este deck já contém uma revisão pela direção',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Entradas (9.3.2)\n\n- **a.** Estado das ações de revisões pela direção anteriores\n- **b.** Alterações nas questões internas e externas que afetam o sistema de gestão\n- **c.** Alterações nas necessidades e expetativas das partes interessadas\n- **d.** Desempenho e eficácia — {p}% implementado ({impl}/{app} controlos aplicáveis)\n    - Tendências nas não conformidades e ações corretivas\n    - Resultados da monitorização e medição\n    - Resultados de auditorias\n- **e.** Adequação dos recursos\n- **f.** Eficácia das ações tomadas face a riscos e oportunidades\n- **g.** Oportunidades de melhoria',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Saídas (9.3.3)\n\n- Decisões sobre oportunidades de melhoria contínua\n- Decisões sobre eventuais alterações ao sistema de gestão\n- Necessidades de recursos\n\n_Preencha abaixo as decisões, ações e responsáveis._',
   'Procesverbetering: DMADV-project': 'Melhoria de processos: projeto DMADV',
   'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
       'Esqueleto DMADV para projetar e verificar um novo processo.',
