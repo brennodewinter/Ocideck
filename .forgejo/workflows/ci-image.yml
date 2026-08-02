@@ -39,6 +39,18 @@ concurrency:
 jobs:
   build-publish:
     runs-on: docker
+    # De runner draait de job in een container zonder eigen docker-daemon (geen
+    # /var/run/docker.sock). Start daarom een Docker-in-Docker daemon als service
+    # en wijs de CLI daarheen (DOCKER_HOST). TLS uit → platte TCP op 2375;
+    # --privileged is voor dind vereist (de runner is daarop ingericht — "dind").
+    services:
+      dind:
+        image: docker:27-dind
+        options: --privileged
+        env:
+          DOCKER_TLS_CERTDIR: ""
+    env:
+      DOCKER_HOST: tcp://dind:2375
     steps:
       # Zonder registry-token kan deze workflow niets publiceren. Dat is géén
       # fout: vóór de eenmalige inrichting (of op een fork) hoort de run gewoon
@@ -66,8 +78,8 @@ jobs:
 
       # De job draait in een kaal ubuntu:24.04 (de runner-default), zonder node —
       # en `actions/checkout`/`actions/cache` zijn node-acties. Installeer daarom
-      # eerst node, plus de docker-CLI om het image te bouwen en te pushen (de
-      # dind-runner levert de daemon). `git` erbij zodat checkout via git werkt.
+      # eerst node, plus de docker-CLI die met de dind-service praat (DOCKER_HOST).
+      # `git` erbij zodat checkout via git werkt.
       - name: Gereedschap in de container (node + docker-CLI)
         if: steps.guard.outputs.publish == 'yes'
         run: |
@@ -75,7 +87,18 @@ jobs:
           apt-get update
           apt-get install -y --no-install-recommends \
             nodejs ca-certificates git docker.io
-          docker version || echo "LET OP: docker-daemon niet bereikbaar vanuit de job"
+
+      # De dind-service start parallel op; wacht tot de daemon luistert, anders
+      # faalt de eerste docker-aanroep op een nog-dichte socket.
+      - name: Wacht op de docker-daemon
+        if: steps.guard.outputs.publish == 'yes'
+        run: |
+          set -eu
+          for i in $(seq 1 30); do
+            docker info >/dev/null 2>&1 && { echo "daemon bereikbaar"; docker version; exit 0; }
+            sleep 2
+          done
+          echo "docker-daemon kwam niet op binnen 60s"; docker info; exit 1
 
       - if: steps.guard.outputs.publish == 'yes'
         uses: actions/checkout@v4
