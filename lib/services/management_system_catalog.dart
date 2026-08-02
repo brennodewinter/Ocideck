@@ -8,11 +8,22 @@
 //
 // Daarom draagt dit bestand **alleen de index**: het nummer plus de korte
 // canonieke titel plus het thema/de clausule. Dat is dezelfde feitelijke lijst
-// die elke ISMS/QMS-tool toont ("A.5.1 — Policies for information security") en
-// die te kort en te feitelijk is voor auteursrechtelijke bescherming van de
-// losse regel. De **normatieve eistekst, toelichtingen en leidraad staan hier
-// NIET in.** Wie de eis wil lezen, koopt de norm; de bron-URL in
-// `reference_standards.dart` wijst naar de officiële uitgave.
+// die elke ISMS/QMS-tool toont ("A.5.1 — Policies for information security").
+// Zo'n functioneel label mist het eigen oorspronkelijk karakter dat het
+// auteursrecht vereist (niet: "het is te kort" — lengte is niet de toets, zie
+// HvJ-EU Infopaq C-5/08; wél: er is geen creatieve keuzevrijheid in een
+// nummer + functiekop). De **normatieve eistekst, toelichtingen en leidraad
+// staan hier NIET in.** Wie de eis wil lezen, koopt de norm.
+//
+// **Herkomst: de openbare ISO-catalogus, niet een gekochte normkopie.** De
+// Annex A-controllijst en de clausulekoppen staan gratis op ISO's publieke
+// catalogus (waar `reference_standards.dart` naar verwijst). We tikken dus geen
+// aangeschafte, licentie-gebonden PDF over — er is geen ISO/NEN-gebruikscontract
+// gevormd dat verder zou beperken dan het auteursrecht.
+//
+// **De titels blijven Engelse ISO-data en gaan NIET door l10n.** Een vertaling
+// naar de officiële NEN-Nederlandse bewoording zou NEN's aparte vertaalrecht
+// raken; laat een "behulpzame" vertaling naar de NL-titels dus achterwege.
 //
 // De header staat er om dezelfde reden als bij de CWE/WSTG/MASTG-catalogi: de
 // inhoud is normatief materiaal van een ander, geen materiaal van ons, en dat

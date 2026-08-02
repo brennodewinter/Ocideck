@@ -370,10 +370,17 @@ anders dan OWASP (CC-BY-SA) of CWE (MITRE-terms). Daarom:
 
 - **Wel gebundeld:** control-/clausule**nummers + korte canonieke titels + thema**.
   Deze feitelijke index is universeel herbruikt in elke ISMS/QMS-tool ("A.5.1 —
-  Beleid voor informatiebeveiliging") en is te kort/te feitelijk voor
-  auteursrechtelijke bescherming van de individuele regel.
+  Policies for information security"). Zo'n functioneel label mist het **eigen
+  oorspronkelijk karakter** dat het auteursrecht vereist — de toets is creatieve
+  keuzevrijheid, niet lengte (HvJ-EU *Infopaq* C-5/08). De index komt bovendien
+  uit ISO's **openbare catalogus**, niet uit een gekochte normkopie, dus er is
+  ook geen ISO/NEN-gebruikscontract dat verder beperkt. Het sui-generis
+  databankrecht op de verzameling is apart gewogen (spin-off-leer, *BHB* C-203/02);
+  zie [`LICENSE_COMPLIANCE.md`](../LICENSE_COMPLIANCE.md).
 - **Niet gebundeld:** de normatieve eistekst, toelichtingen en leidraad. Wie de
-  eis wil lezen, koopt de norm; de `url`-verwijzing wijst naar de officiële bron.
+  eis wil lezen, koopt de norm; de `url`-verwijzing wijst naar ISO's openbare
+  catalogus. Titels blijven Engelse ISO-data en gaan niet door l10n (een
+  NEN-vertaling zou NEN's aparte vertaalrecht raken).
 - Dit is **exact het bestaande patroon** ("bundel de index, niet de gids-inhoud",
   zoals WSTG/MASTG). De `bundled`- en `licence`-velden maken die grens expliciet,
   en de nota's in [`LICENSE_COMPLIANCE.md`](../LICENSE_COMPLIANCE.md) en
