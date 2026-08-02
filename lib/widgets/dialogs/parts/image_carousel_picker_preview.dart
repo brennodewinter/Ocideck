@@ -161,46 +161,6 @@ extension _CarouselPreview on _ImageCarouselPickerState {
     );
   }
 
-  /// Een metadata-tekstveld (caption/beschrijving) in de donkere previewstijl.
-  /// De twee velden verschilden alleen in controller, hint, icoon en handler.
-  Widget _metaField({
-    required TextEditingController controller,
-    required String hint,
-    required IconData icon,
-    required ValueChanged<String> onChanged,
-  }) {
-    return TextField(
-      controller: controller,
-      minLines: 1,
-      maxLines: 3,
-      onChanged: onChanged,
-      style: const TextStyle(color: ImagePickerPalette.text, fontSize: 12),
-      decoration: InputDecoration(
-        hintText: hint,
-        hintStyle: const TextStyle(
-          color: ImagePickerPalette.textMuted,
-          fontSize: 12,
-        ),
-        prefixIcon: Icon(icon, color: ImagePickerPalette.iconDim, size: 16),
-        isDense: true,
-        filled: true,
-        fillColor: ImagePickerPalette.bg,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: ImagePickerPalette.border),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: ImagePickerPalette.border),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppTheme.blue500),
-        ),
-      ),
-    );
-  }
-
   Widget _buildFooter() {
     final l10n = context.l10n;
     return Container(
@@ -349,4 +309,49 @@ extension _CarouselPreview on _ImageCarouselPickerState {
     }
     return path;
   }
+}
+
+/// Een metadata-tekstveld (caption/beschrijving) in de donkere previewstijl.
+/// De twee velden verschillen alleen in controller, hint, icoon en handler.
+///
+/// Top-level in plaats van een methode op `_ImageCarouselPickerState`: het veld
+/// leunt op geen enkele instantietoestand (alleen zijn parameters en het
+/// top-level palet), dus het hoort niet in de klasse en telt zo ook niet mee
+/// voor de klassegrootte-ratchet.
+Widget _metaField({
+  required TextEditingController controller,
+  required String hint,
+  required IconData icon,
+  required ValueChanged<String> onChanged,
+}) {
+  return TextField(
+    controller: controller,
+    minLines: 1,
+    maxLines: 3,
+    onChanged: onChanged,
+    style: const TextStyle(color: ImagePickerPalette.text, fontSize: 12),
+    decoration: InputDecoration(
+      hintText: hint,
+      hintStyle: const TextStyle(
+        color: ImagePickerPalette.textMuted,
+        fontSize: 12,
+      ),
+      prefixIcon: Icon(icon, color: ImagePickerPalette.iconDim, size: 16),
+      isDense: true,
+      filled: true,
+      fillColor: ImagePickerPalette.bg,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(color: ImagePickerPalette.border),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(color: ImagePickerPalette.border),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(color: AppTheme.blue500),
+      ),
+    ),
+  );
 }

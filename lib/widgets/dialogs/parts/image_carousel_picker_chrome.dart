@@ -348,7 +348,9 @@ extension _CarouselChrome on _ImageCarouselPickerState {
               filtering
                   ? l10n.d('Pas je zoekterm aan of voeg een beschrijving toe.')
                   : widget.manageOnly
-                  ? l10n.d('Er staan nog geen afbeeldingen in je bibliotheekmappen.')
+                  ? l10n.d(
+                      'Er staan nog geen afbeeldingen in je bibliotheekmappen.',
+                    )
                   : l10n.d(
                       'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.',
                     ),
