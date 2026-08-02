@@ -211,7 +211,7 @@ class FullscreenPresenter extends StatefulWidget {
   /// presenteren is het ontvangende oppervlak bij uitstek — wat hier op het
   /// scherm komt, ziet de zaal. De projectiegrens hoort dus in het typesysteem
   /// te staan en niet in een afspraak. Zie `PrivacyProjection`.
-  static Future<void> present(
+  static Future<String?> present(
     BuildContext context, {
     required AudienceDeck audienceDeck,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
@@ -251,9 +251,9 @@ class FullscreenPresenter extends StatefulWidget {
       isDesktopNative: supportsDualScreenPresenter,
       displayCount: displayCount,
     );
-    if (!context.mounted) return;
+    if (!context.mounted) return null;
     if (dual) {
-      await showDualScreen(
+      return await showDualScreen(
         context,
         slides: slides,
         projectPath: projectPath,
@@ -277,7 +277,7 @@ class FullscreenPresenter extends StatefulWidget {
         improvementY01: deck.improvementY01Metric,
       );
     } else {
-      await show(
+      return await show(
         context,
         slides: slides,
         projectPath: projectPath,
@@ -303,7 +303,7 @@ class FullscreenPresenter extends StatefulWidget {
     }
   }
 
-  static Future<void> show(
+  static Future<String?> show(
     BuildContext context, {
     required List<Slide> slides,
     required String? projectPath,
@@ -334,9 +334,9 @@ class FullscreenPresenter extends StatefulWidget {
       // presenter-route wordt hoe dan ook geopend.
       await setPresenterFullscreen(true);
       if (context.mounted) {
-        await Navigator.push(
+        return await Navigator.push<String>(
           context,
-          PageRouteBuilder<void>(
+          PageRouteBuilder<String>(
             opaque: true,
             pageBuilder: (context, anim, anim2) => FullscreenPresenter(
               slides: slides,
@@ -366,6 +366,7 @@ class FullscreenPresenter extends StatefulWidget {
           ),
         );
       }
+      return null;
     } finally {
       await _restoreWakeLock(hadWakeLock);
     }
@@ -375,7 +376,7 @@ class FullscreenPresenter extends StatefulWidget {
   /// the slide, and run the presenter view (current/next/notes/timer) in the
   /// main window on the laptop. The two windows stay in sync over method
   /// channels. Falls back to [show] if the second window can't be created.
-  static Future<void> showDualScreen(
+  static Future<String?> showDualScreen(
     BuildContext context, {
     required List<Slide> slides,
     required String? projectPath,
@@ -452,7 +453,7 @@ class FullscreenPresenter extends StatefulWidget {
 
     if (audience == null || audienceHandle == null) {
       if (context.mounted) {
-        await show(
+        return await show(
           context,
           slides: slides,
           projectPath: projectPath,
@@ -475,16 +476,16 @@ class FullscreenPresenter extends StatefulWidget {
           improvementY01: improvementY01,
         );
       }
-      return;
+      return null;
     }
 
     final hadWakeLock = await _wakeLockEnabled();
     await _enableWakeLock();
     try {
       if (context.mounted) {
-        await Navigator.push(
+        return await Navigator.push<String>(
           context,
-          PageRouteBuilder<void>(
+          PageRouteBuilder<String>(
             opaque: true,
             pageBuilder: (context, anim, anim2) => FullscreenPresenter(
               slides: slides,
@@ -514,6 +515,7 @@ class FullscreenPresenter extends StatefulWidget {
           ),
         );
       }
+      return null;
     } finally {
       await _restoreWakeLock(hadWakeLock);
       // Make sure the audience window is gone even if exit didn't close it.
@@ -876,7 +878,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     } else {
       await setPresenterFullscreen(false);
     }
-    if (mounted) Navigator.pop(context);
+    if (mounted) Navigator.pop(context, _exitSlideId(widget.slides, _index));
   }
 
   /// Toon na afloop de oefenrun-samenvatting wanneer de deck-schakelaar aan

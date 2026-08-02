@@ -2,6 +2,16 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../fullscreen_presenter.dart';
 
+/// Het id van de dia die bij het verlaten van de presentatie in beeld is (#1111),
+/// zodat de editor daarna díe dia selecteert en niet terugspringt naar de
+/// startdia. Via het **id**, niet de rauwe render-index: de presenter toont
+/// uitgeklapte findings-pagina's, dus render-index ≠ bron-dia-index — de launcher
+/// mapt het id terug op de bron-dia, net als `onSlideChanged`. Een leeg deck (de
+/// `total == 0`-exit in [build]) geeft null. Top-level zodat het de toch al forse
+/// [_FullscreenPresenterState] niet verder laat groeien.
+String? _exitSlideId(List<Slide> slides, int index) =>
+    slides.isEmpty ? null : slides[index.clamp(0, slides.length - 1)].id;
+
 extension _PresenterNavigation on _FullscreenPresenterState {
   /// Meld de slidewissel aan schermlezers (WCAG 4.1.3, statusberichten):
   /// visueel verandert de hele slide, maar zonder aankondiging merkt een

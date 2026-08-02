@@ -396,6 +396,15 @@ in Dutch, and it keeps growing on `main` between releases.
   aandeel. De bestaande OpenKAT-wizardroute behoudt haar stappen, maar volgt
   nu ook het gekozen app-appearance-profiel, de bijbehorende
   thema-oppervlakken en OciDecks accent- en radiusstijl.
+- Presentatiemodus: na **Escape** sprong de editor terug naar de dia waar je de
+  presentatie startte, niet naar de dia die op dat moment in beeld was. Wie
+  tijdens het presenteren op een bepaalde dia stopt, doet dat meestal met een
+  reden (daar iets nakijken of aanpassen) en wil op díe dia verder; de editor
+  selecteert nu die dia. De presenter geeft zijn eindpositie terug via het
+  **dia-id** — niet de rauwe render-index, want een lange bevinding klapt uit tot
+  meerdere render-pagina's met hetzelfde id — en de launcher zoekt dat id terug
+  in het deck. Een tijdens het presenteren verwijderde dia (id niet meer te
+  vinden) laat de selectie ongemoeid (#1111).
 
 ### Added
 

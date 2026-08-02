@@ -21,6 +21,7 @@ void presentDeck(
   bool fromStart = false,
 }) {
   final deckNotifier = ref.read(deckProvider.notifier);
+  final editorNotifier = ref.read(editorProvider.notifier);
   final deck = ref.read(deckProvider).deck;
   if (deck == null) return;
   final l10n = context.l10n;
@@ -129,7 +130,17 @@ void presentDeck(
   // achter de presentatie, en per toetsaanslag verversen zou elke aanslag een
   // eigen ongedaan-stap maken (de coalescing in [updateSlide] hangt aan het
   // uitblijven van een revisiesprong).
-  presenting.then((_) {
+  presenting.then((endSlideId) {
     if (liveEdited) deckNotifier.refreshEditorFields();
+    // De editor volgt de presenter naar de dia waar die stopte (#1111). De
+    // presenter geeft het bron-dia-id terug (niet de render-index — findings
+    // klappen uit tot meerdere render-pagina's met hetzelfde id); zoek dat id
+    // terug in het actuele deck. Een tijdens het presenteren verwijderde dia is
+    // niet meer te vinden (< 0) → laat de selectie dan staan.
+    if (endSlideId == null) return;
+    final current = deckNotifier.currentState.deck;
+    if (current == null) return;
+    final sourceIndex = current.slides.indexWhere((s) => s.id == endSlideId);
+    if (sourceIndex >= 0) editorNotifier.select(sourceIndex);
   });
 }
