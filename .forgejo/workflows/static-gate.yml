@@ -1,0 +1,134 @@
+# De statische poort van OciDeck, per pull request (#1118).
+#
+# **Waarom deze workflow bestaat.** De uitbrengpoort (`ci.yml`) vuurt alleen op
+# een `v*`-tag en de Linux-poort (`linux-gate.yml`) alleen op afroep, dus tussen
+# releases houdt niets de statische poorten tegen op een PR. Zo dreef `main` stil
+# rood: een reeks merges duwde bestanden, klassen, een methode en registraties
+# over hun plafond zonder dat een poort het per PR ving, en dat kwam pas boven
+# toen iemand er een fix op wilde landen (#1118). Deze workflow zet dezelfde
+# snelle statische controles die `make check` lokaal draait óók op elke PR neer,
+# op het moment dat een overschrijding nog een wijziging is in plaats van
+# historie op `main`.
+#
+# **Waarom alleen de statische deelverzameling en niet de hele poort.** De
+# volledige suite en de dekkingsmeting kosten op deze container tientallen
+# minuten (zie `linux-gate.yml` en #796) — precies de reden dat de poort ooit
+# naar een tag verhuisde. De statische poorten daarentegen zijn seconden per
+# stuk. `make check-static` is exact `$(STATIC_GATES)` uit de Makefile, dezelfde
+# lijst die `check` draait, dus er ontstaat geen tweede waarheid die kan
+# uiteenlopen. De dekkingsvloer en de per-bestandsvloer blijven in `make check`
+# op de machine van de committer, vóór main — die twee vangt deze workflow
+# bewust niet, en dat staat ook in docs/CHECKS.md.
+#
+# **Waarom op de Linux-container en niet op de Mac.** Zelfde afweging als
+# `scans.yml`: deze workflow vuurt bij élke PR, en de Mac is sinds #797 zowel de
+# uitbrengpoort als de werkmachine van de committer. In een container op de
+# server neemt hij geen kernen weg van een `make check` die daar op dat moment
+# draait. De toolchain komt — net als in `linux-gate.yml` — als officiële,
+# sha256-geverifieerde stable uit de pin in `.tool-versions`, zodat
+# `check-toolchain` onverkort binnen `make check-static` meedraait: een
+# kant-en-klaar Flutter-image zou kanaal `[user-branch]` kunnen dragen, precies
+# wat die poort afkeurt.
+name: static-gate
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+# Duwt iemand een nieuwe commit op een PR terwijl de vorige poortrun nog loopt,
+# dan zet die de lopende run opzij. Afbreken kost hier niets: de statische poort
+# bekijkt de héle boom op de nieuwste commit, dus de latere run dekt onverkort
+# wat de afgebroken run zou hebben gezien. Een afgebroken run meldt zich als
+# `failure` en kan mailen; dat het er bijna geen zijn, is de bedoeling.
+concurrency:
+  group: static-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-gate:
+    runs-on: docker
+    container:
+      image: ubuntu:24.04
+    steps:
+      # Vóór de checkout: actions/checkout is een node-actie, en dit kale image
+      # brengt geen node mee. De build-toolchain (cmake/ninja/clang/gtk/gcc) staat
+      # erbij omdat élke `dart run tool/…` de native-assets-hook van dartcv4
+      # bouwt — zonder gcc/g++ faalt die hook op "CMAKE_C_COMPILER: gcc not found".
+      - name: Gereedschap installeren
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            nodejs make git curl ca-certificates xz-utils jq unzip \
+            cmake ninja-build clang pkg-config libgtk-3-dev \
+            build-essential
+
+      - uses: actions/checkout@v4
+
+      # De repo is van een andere uid dan root; zonder dit weigert git bewerkingen
+      # en falen controles die de werkkopie via git bekijken op iets dat niets met
+      # de poort te maken heeft.
+      - name: De werkkopie vertrouwen
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      # De pin is de cachesleutel, dus hij wordt één keer gelezen en hergebruikt.
+      - name: Gepinde Flutter-versie lezen
+        id: pin
+        run: |
+          set -eu
+          VERSION="$(sed -n 's/^flutter \(.*\)-stable$/\1/p' .tool-versions)"
+          test -n "$VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      # Sleutel = de gepinde versie; een pin-bump is automatisch een nieuwe cache.
+      # De cache vervangt geen controle: `check-toolchain` draait op de herstelde
+      # boom en eist onverkort kanaal `stable`, de officiële herkomst en gelijkheid
+      # met de pin.
+      - name: Flutter uit de cache
+        id: flutter-cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: /opt/flutter
+          key: flutter-linux-${{ steps.pin.outputs.version }}-stable
+
+      - name: Officiële Flutter volgens de pin
+        if: steps.flutter-cache.outputs.cache-hit != 'true'
+        run: |
+          set -eu
+          VERSION="${{ steps.pin.outputs.version }}"
+          ARCHIVE="flutter_linux_${VERSION}-stable.tar.xz"
+          BASE="https://storage.googleapis.com/flutter_infra_release/releases"
+          curl -fsSLo /tmp/releases.json "$BASE/releases_linux.json"
+          SHA=$(jq -r --arg v "$VERSION" \
+            '.releases[] | select(.channel=="stable" and .version==$v) | .sha256' \
+            /tmp/releases.json)
+          test -n "$SHA"
+          curl -fsSLo "/tmp/$ARCHIVE" "$BASE/stable/linux/$ARCHIVE"
+          echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
+          tar -xJf "/tmp/$ARCHIVE" -C /opt
+          rm "/tmp/$ARCHIVE"
+
+      # Apart van de installatie: dit moet óók gebeuren als de cache raak was.
+      - name: Flutter op het pad
+        run: |
+          set -eu
+          git config --global --add safe.directory /opt/flutter
+          echo "/opt/flutter/bin" >> "$GITHUB_PATH"
+
+      - name: Pub-pakketten uit de cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: ~/.pub-cache
+          key: pub-linux-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            pub-linux-
+
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      # De commando's zelf staan in de Makefile: `make check-static` is precies de
+      # statische deelverzameling die een bijdrager lokaal in `make check` draait.
+      # Ze hier overtypen zou twee waarheden opleveren die uit elkaar gaan lopen.
+      - name: De statische poort
+        run: make check-static
