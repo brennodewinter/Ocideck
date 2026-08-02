@@ -1775,8 +1775,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'Szoba tesztelése (opcionális): szoba@szolgáltatás',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konferencia-URL (opcionális): megjeleníti az OciDeck companion szobáját',
+  'Companion-kamer': 'Companion szoba',
   'Aanwezig in de kamer': 'A szobában jelenlévők',
   'De bijnaam is al in gebruik in de kamer.':
       'A becenév már használatban van a szobában.',

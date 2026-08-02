@@ -1746,8 +1746,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'pa\' waH (\'e\' DaneH chugh): pa\'@Qu\'',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'qep URL (\'e\' DaneH chugh): OciDeck companion pa\' cha\'',
+  'Companion-kamer': 'companion pa\'',
   'Aanwezig in de kamer': 'pa\'Daq nuvpu\'',
   'De bijnaam is al in gebruik in de kamer.': 'pa\'Daq pong lo\'lu\'taH.',
   'Deze kamer is alleen voor leden.': 'pa\'vam \'ellaH chaw\'lu\'bogh neH.',

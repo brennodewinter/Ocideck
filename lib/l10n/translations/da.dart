@@ -1770,8 +1770,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'Test rum (valgfrit): rum@tjeneste',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konference-URL (valgfrit): viser OciDeck-companion-rummet',
+  'Companion-kamer': 'Companion-rum',
   'Aanwezig in de kamer': 'Til stede i rummet',
   'De bijnaam is al in gebruik in de kamer.':
       'Kaldenavnet er allerede i brug i rummet.',

@@ -1778,8 +1778,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'Test miestnosti (voliteľné): miestnosť@služba',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL konferencie (voliteľné): zobrazí companion miestnosť OciDeck',
+  'Companion-kamer': 'Companion miestnosť',
   'Aanwezig in de kamer': 'Prítomní v miestnosti',
   'De bijnaam is al in gebruik in de kamer.':
       'Prezývka sa v miestnosti už používa.',

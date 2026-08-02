@@ -1788,8 +1788,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'Testare cameră (opțional): cameră@serviciu',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL-ul conferinței (opțional): afișează camera companion OciDeck',
+  'Companion-kamer': 'Cameră companion',
   'Aanwezig in de kamer': 'Prezenți în cameră',
   'De bijnaam is al in gebruik in de kamer.':
       'Porecla este deja folosită în cameră.',

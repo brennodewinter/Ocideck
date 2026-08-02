@@ -730,8 +730,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
-  'Kamer testen (optioneel): kamer@service':
-      'Raum testen (optional): raum@dienst',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konferenz-URL (optional): zeigt den OciDeck-Companion-Raum',
+  'Companion-kamer': 'Companion-Raum',
   'Aanwezig in de kamer': 'Anwesend im Raum',
   'De bijnaam is al in gebruik in de kamer.':
       'Der Spitzname wird im Raum bereits verwendet.',

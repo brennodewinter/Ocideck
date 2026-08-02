@@ -911,8 +911,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
-  'Kamer testen (optioneel): kamer@service':
-      'Test room (optional): room@service',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Conference URL (optional): shows the OciDeck companion room',
+  'Companion-kamer': 'Companion room',
   'Aanwezig in de kamer': 'Present in the room',
   'De bijnaam is al in gebruik in de kamer.':
       'The nickname is already in use in the room.',

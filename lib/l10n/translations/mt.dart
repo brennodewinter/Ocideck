@@ -1793,8 +1793,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'Ittestja kamra (mhux obbligatorju): kamra@servizz',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL tal-konferenza (mhux obbligatorju): juri l-kamra companion ta\' OciDeck',
+  'Companion-kamer': 'Kamra companion',
   'Aanwezig in de kamer': 'Preżenti fil-kamra',
   'De bijnaam is al in gebruik in de kamer.':
       'Il-laqam diġà qed jintuża fil-kamra.',

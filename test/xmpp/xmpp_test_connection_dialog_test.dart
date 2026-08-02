@@ -1,7 +1,7 @@
 // Widget test for the "test XMPP connection" dialog (F2/F3). The connection call
-// is injected, so this drives the whole UI — enter server/JID/password/room, press
-// test, read the result — without ever opening a socket. Locale is pinned to Dutch
-// so the assertions match the source strings regardless of translation state.
+// is injected, so this drives the whole UI — enter server/JID/password/conference,
+// press test, read the result — without ever opening a socket. Locale is pinned to
+// Dutch so the assertions match the source strings regardless of translation state.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -29,15 +29,15 @@ Future<void> pumpDialog(WidgetTester tester, XmppConnectTest connect) async {
   await tester.pumpAndSettle();
 }
 
-Future<void> fillAndTest(WidgetTester tester, {String? room}) async {
+Future<void> fillAndTest(WidgetTester tester, {String? conference}) async {
   await tester.enterText(
     find.byType(TextField).at(0),
     'wss://xmpp.example/xmpp-websocket',
   );
   await tester.enterText(find.byType(TextField).at(1), 'a@example');
   await tester.enterText(find.byType(TextField).at(2), 'pencil');
-  if (room != null) {
-    await tester.enterText(find.byType(TextField).at(3), room);
+  if (conference != null) {
+    await tester.enterText(find.byType(TextField).at(3), conference);
   }
   await tester.tap(find.text('Verbinding testen'));
   await tester.pumpAndSettle();
@@ -47,11 +47,11 @@ void main() {
   testWidgets('reports success with the negotiated mechanism', (tester) async {
     XmppSettings? seenSettings;
     String? seenPassword;
-    String? seenRoom;
-    await pumpDialog(tester, (settings, password, room) async {
+    String? seenConference;
+    await pumpDialog(tester, (settings, password, conferenceUrl) async {
       seenSettings = settings;
       seenPassword = password;
-      seenRoom = room;
+      seenConference = conferenceUrl;
       return const XmppTestOutcome(
         result: XmppSessionResult.ok(
           mechanism: 'SCRAM-SHA-256',
@@ -65,7 +65,7 @@ void main() {
     expect(seenSettings?.serverUrl, 'wss://xmpp.example/xmpp-websocket');
     expect(seenSettings?.jid, 'a@example');
     expect(seenPassword, 'pencil');
-    expect(seenRoom, ''); // no room entered
+    expect(seenConference, ''); // no conference entered
     // The success line names the mechanism (locale-independent protocol name)
     // and the bound full JID.
     expect(find.textContaining('SCRAM-SHA-256'), findsOneWidget);
@@ -77,7 +77,7 @@ void main() {
   ) async {
     await pumpDialog(
       tester,
-      (settings, password, room) async => const XmppTestOutcome(
+      (settings, password, conferenceUrl) async => const XmppTestOutcome(
         result: XmppSessionResult.failed(XmppSessionFailure.badCredentials),
       ),
     );
@@ -85,36 +85,44 @@ void main() {
     expect(find.textContaining('wachtwoord'), findsWidgets);
   });
 
-  testWidgets('lists the room occupants when a room is joined', (tester) async {
-    String? seenRoom;
-    await pumpDialog(tester, (settings, password, room) async {
-      seenRoom = room;
+  testWidgets('shows the companion room and occupants for a conference', (
+    tester,
+  ) async {
+    String? seenConference;
+    await pumpDialog(tester, (settings, password, conferenceUrl) async {
+      seenConference = conferenceUrl;
       return const XmppTestOutcome(
         result: XmppSessionResult.ok(
           mechanism: 'SCRAM-SHA-256',
           boundJid: 'a@example/ocideck-1',
         ),
+        companionRoom: 'ocideck-deadbeef@conference.example',
         occupants: ['alice', 'a'],
       );
     });
-    await fillAndTest(tester, room: 'room@conf.example');
+    await fillAndTest(tester, conference: 'https://meet.jit.si/Demo');
 
-    expect(seenRoom, 'room@conf.example');
+    expect(seenConference, 'https://meet.jit.si/Demo');
+    expect(
+      find.textContaining('ocideck-deadbeef@conference.example'),
+      findsOneWidget,
+    );
     expect(find.textContaining('alice'), findsOneWidget);
   });
 
   testWidgets('maps a join failure to a translated message', (tester) async {
     await pumpDialog(
       tester,
-      (settings, password, room) async => const XmppTestOutcome(
+      (settings, password, conferenceUrl) async => const XmppTestOutcome(
         result: XmppSessionResult.ok(
           mechanism: 'SCRAM-SHA-256',
           boundJid: 'a@example/ocideck-1',
         ),
+        companionRoom: 'ocideck-deadbeef@conference.example',
         joinFailure: MucJoinFailure.nickConflict,
       ),
     );
-    await fillAndTest(tester, room: 'room@conf.example');
+    await fillAndTest(tester, conference: 'https://meet.jit.si/Demo');
     expect(find.textContaining('bijnaam'), findsWidgets);
   });
 
@@ -122,7 +130,7 @@ void main() {
     tester,
   ) async {
     var called = false;
-    await pumpDialog(tester, (settings, password, room) async {
+    await pumpDialog(tester, (settings, password, conferenceUrl) async {
       called = true;
       return const XmppTestOutcome(
         result: XmppSessionResult.ok(

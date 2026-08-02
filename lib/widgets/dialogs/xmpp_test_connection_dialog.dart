@@ -2,10 +2,11 @@
 // consumer of the XMPP client, and the thing that makes it reachable from the
 // app. The user enters a server, a Jabber-ID and a password; pressing test opens
 // a NetGuard-pinned wss stream, authenticates (SASL) and binds a resource. If a
-// room JID is given, it also joins that MUC (XEP-0045) and reports who is present,
-// then leaves. Nothing is stored, and the session is closed again right away —
-// this only proves the account (and, optionally, a room) works, the groundwork
-// the real calls path (F3 Jingle) builds on.
+// conference URL is given, it derives the OciDeck companion room (§5.1) from it,
+// joins that MUC (XEP-0045) and reports which OciDeck users are present, then
+// leaves. Nothing is stored, and the session is closed again right away — this
+// only proves the account (and, optionally, the companion pairing) works, the
+// groundwork the real calls path (F3 Jingle) builds on.
 //
 // The connection call is injectable so the widget test drives it without a socket;
 // the failure codes are mapped to translated messages here (the session and MUC
@@ -16,41 +17,48 @@ import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/xmpp_settings.dart';
 import '../../theme/app_theme.dart';
+import '../../xmpp/companion_room.dart';
 import '../../xmpp/xmpp_frame_transport.dart';
 import '../../xmpp/xmpp_frame_transport_platform.dart';
 import '../../xmpp/xmpp_muc.dart';
 import '../../xmpp/xmpp_session.dart';
 
-/// The result of a test: the session outcome, plus — if a room was given — who
-/// was present (nicks) or why joining failed.
+/// The result of a test: the session outcome, plus — if a conference URL was
+/// given — the derived companion room and who was present there (or why joining
+/// failed).
 class XmppTestOutcome {
   const XmppTestOutcome({
     required this.result,
+    this.companionRoom,
     this.occupants,
     this.joinFailure,
   });
   final XmppSessionResult result;
 
-  /// Room nicks, non-null iff a room was joined successfully.
+  /// The derived companion room JID, non-null iff a conference URL was given.
+  final String? companionRoom;
+
+  /// Companion-room nicks, non-null iff the companion room was joined ok.
   final List<String>? occupants;
 
-  /// Non-null iff joining the given room failed.
+  /// Non-null iff joining the companion room failed.
   final MucJoinFailure? joinFailure;
 }
 
-/// Opens a guarded wss session to [settings], binds a resource, optionally joins
-/// [room], and closes everything again. Injected in tests.
+/// Opens a guarded wss session to [settings], binds a resource, and — if a
+/// [conferenceUrl] is given — joins the companion room derived from it (§5.1) and
+/// reports who is present, then closes everything again. Injected in tests.
 typedef XmppConnectTest =
     Future<XmppTestOutcome> Function(
       XmppSettings settings,
       String password,
-      String? room,
+      String? conferenceUrl,
     );
 
 Future<XmppTestOutcome> _liveConnectTest(
   XmppSettings settings,
   String password,
-  String? room,
+  String? conferenceUrl,
 ) async {
   final XmppFrameTransport transport;
   try {
@@ -69,27 +77,38 @@ Future<XmppTestOutcome> _liveConnectTest(
     password: password,
   );
   final result = await session.connect();
-  final trimmedRoom = room?.trim() ?? '';
-  if (!result.ok || trimmedRoom.isEmpty) {
+  final conference = conferenceUrl?.trim() ?? '';
+  if (!result.ok || conference.isEmpty) {
     await session.close();
     return XmppTestOutcome(result: result);
   }
+  // The companion MUC rides the same server as the account; its component is
+  // conventionally `conference.<domain>` (a real join would disco it).
+  final companion = companionRoomJid(
+    conference,
+    'conference.${settings.domain}',
+  );
   final muc = XmppMuc(
     channel: session,
-    roomJid: trimmedRoom,
+    roomJid: companion,
     nick: _nickFrom(result.boundJid),
   );
-  final joinResult = await muc.join();
-  final occupants = joinResult.ok
-      ? muc.roster.map((o) => o.nick).toList()
-      : null;
-  await muc.leave();
-  await session.close();
-  return XmppTestOutcome(
-    result: result,
-    occupants: occupants,
-    joinFailure: joinResult.failure,
-  );
+  try {
+    final joinResult = await muc.join();
+    final occupants = joinResult.ok
+        ? muc.roster.map((o) => o.nick).toList()
+        : null;
+    return XmppTestOutcome(
+      result: result,
+      companionRoom: companion,
+      occupants: occupants,
+      joinFailure: joinResult.failure,
+    );
+  } finally {
+    // A "test" holds nothing open, even if join ever throws in the future.
+    await muc.leave();
+    await session.close();
+  }
 }
 
 /// The room nick to enter with: the account localpart, or a fallback for an
@@ -115,7 +134,7 @@ class _XmppTestConnectionDialogState extends State<XmppTestConnectionDialog> {
   final _server = TextEditingController();
   final _jid = TextEditingController();
   final _password = TextEditingController();
-  final _room = TextEditingController();
+  final _conference = TextEditingController();
   bool _testing = false;
   XmppTestOutcome? _outcome;
 
@@ -124,7 +143,7 @@ class _XmppTestConnectionDialogState extends State<XmppTestConnectionDialog> {
     _server.dispose();
     _jid.dispose();
     _password.dispose();
-    _room.dispose();
+    _conference.dispose();
     super.dispose();
   }
 
@@ -140,7 +159,7 @@ class _XmppTestConnectionDialogState extends State<XmppTestConnectionDialog> {
     final outcome = await widget.connect(
       settings,
       _password.text,
-      _room.text.trim(),
+      _conference.text.trim(),
     );
     if (!mounted) return;
     setState(() {
@@ -189,9 +208,11 @@ class _XmppTestConnectionDialogState extends State<XmppTestConnectionDialog> {
             ),
             const SizedBox(height: 8),
             TextField(
-              controller: _room,
+              controller: _conference,
               decoration: InputDecoration(
-                labelText: l10n.d('Kamer testen (optioneel): kamer@service'),
+                labelText: l10n.d(
+                  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer',
+                ),
               ),
             ),
             if (_outcome != null) ...[
@@ -240,6 +261,15 @@ class _OutcomeView extends StatelessWidget {
           color,
           sessionText,
         ),
+        if (outcome.companionRoom != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: _line(
+              Icons.hub_outlined,
+              AppTheme.slate600,
+              '${l10n.d('Companion-kamer')}: ${outcome.companionRoom}',
+            ),
+          ),
         if (outcome.occupants != null)
           Padding(
             padding: const EdgeInsets.only(top: 8),

@@ -1774,8 +1774,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'Ruum teste (optional): ruum@dienscht',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konferänz-URL (optional): zeigt de OciDeck-Companion-Ruum',
+  'Companion-kamer': 'Companion-Ruum',
   'Aanwezig in de kamer': 'Aawäsend im Ruum',
   'De bijnaam is al in gebruik in de kamer.':
       'De Spitzname wird im Ruum scho bruucht.',

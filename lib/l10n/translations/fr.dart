@@ -730,8 +730,9 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
-  'Kamer testen (optioneel): kamer@service':
-      'Tester le salon (optionnel) : salon@service',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL de conférence (optionnel) : affiche le salon companion OciDeck',
+  'Companion-kamer': 'Salon companion',
   'Aanwezig in de kamer': 'Présents dans le salon',
   'De bijnaam is al in gebruik in de kamer.':
       'Ce pseudonyme est déjà utilisé dans le salon.',

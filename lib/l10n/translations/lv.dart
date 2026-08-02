@@ -1770,8 +1770,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'Pārbaudīt istabu (neobligāti): istaba@serviss',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konferences URL (neobligāti): rāda OciDeck companion istabu',
+  'Companion-kamer': 'Companion istaba',
   'Aanwezig in de kamer': 'Klātesošie istabā',
   'De bijnaam is al in gebruik in de kamer.':
       'Segvārds istabā jau tiek izmantots.',

@@ -1788,8 +1788,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'Перевірка кімнати (необовʼязково): кімната@сервіс',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL-адреса конференції (необовʼязково): показує companion-кімнату OciDeck',
+  'Companion-kamer': 'Companion-кімната',
   'Aanwezig in de kamer': 'Присутні в кімнаті',
   'De bijnaam is al in gebruik in de kamer.':
       'Псевдонім уже використовується в кімнаті.',

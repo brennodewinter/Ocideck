@@ -264,15 +264,19 @@ call the rest of the participants are in:
   crosses into a Matrix room. In Matrix mode the analogue is a separate Matrix
   room for the control plane alongside the MatrixRTC call — the same shape.
 
-**Pairing (open detail for F3).** The companion room must be findable without a
-central registry (P1). The natural default is a **deterministic derivation from
-the already-shared conference URL** (e.g. a stable hash of the conference host +
-room into a companion room name), so two OciDeck clients that hold the same Jitsi
-link compute the same companion room and meet there. A later refinement can let
-the presenter announce/verify the companion room explicitly. The derivation must
-not leak the conference identity to anyone who doesn't already hold the link, and
-the companion room inherits the same `MeetingProviderProfile`/NetGuard posture as
-the signalling origin (§8).
+**Pairing — built (`lib/xmpp/companion_room.dart`, F3).** The companion room must
+be findable without a central registry (P1). The default is a **deterministic
+derivation from the already-shared conference URL**: `companionRoomLocalpart`
+normalizes the URL (lowercase host, drop the ephemeral `#config`/query, strip
+trailing slashes) and takes a **one-way SHA-256 hash behind a versioned salt** into
+`ocideck-<hash>`, so two OciDeck clients that hold the same Jitsi link compute the
+same companion room and meet there. Because it is a one-way hash, the room name
+does not leak the conference identity to anyone who doesn't already hold the link;
+the versioned salt lets the scheme rev without old and new clients silently
+diverging. A later refinement can let the presenter announce/verify the companion
+room explicitly. The companion room is joined over the same guarded session, so it
+inherits the same `MeetingProviderProfile`/NetGuard posture as the signalling
+origin (§8).
 
 ---
 

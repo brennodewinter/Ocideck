@@ -1778,8 +1778,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'Tikrinti kambarį (nebūtina): kambarys@paslauga',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konferencijos URL (nebūtina): rodo OciDeck companion kambarį',
+  'Companion-kamer': 'Companion kambarys',
   'Aanwezig in de kamer': 'Esantys kambaryje',
   'De bijnaam is al in gebruik in de kamer.':
       'Slapyvardis kambaryje jau naudojamas.',

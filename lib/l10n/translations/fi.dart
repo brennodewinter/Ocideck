@@ -1771,8 +1771,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'Testaa huone (valinnainen): huone@palvelu',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'Konferenssin URL (valinnainen): näyttää OciDeckin companion-huoneen',
+  'Companion-kamer': 'Companion-huone',
   'Aanwezig in de kamer': 'Läsnä huoneessa',
   'De bijnaam is al in gebruik in de kamer.':
       'Kutsumanimi on jo käytössä huoneessa.',

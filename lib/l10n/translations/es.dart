@@ -727,8 +727,9 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
-  'Kamer testen (optioneel): kamer@service':
-      'Probar sala (opcional): sala@servicio',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL de conferencia (opcional): muestra la sala companion de OciDeck',
+  'Companion-kamer': 'Sala companion',
   'Aanwezig in de kamer': 'Presentes en la sala',
   'De bijnaam is al in gebruik in de kamer.':
       'El apodo ya está en uso en la sala.',

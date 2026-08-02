@@ -1777,8 +1777,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'Provjera sobe (neobavezno): soba@usluga',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL konferencije (neobavezno): prikazuje OciDeck companion sobu',
+  'Companion-kamer': 'Companion soba',
   'Aanwezig in de kamer': 'Prisutni u sobi',
   'De bijnaam is al in gebruik in de kamer.':
       'Nadimak je već u upotrebi u sobi.',

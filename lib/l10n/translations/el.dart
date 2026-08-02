@@ -1798,8 +1798,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
-  'Kamer testen (optioneel): kamer@service':
-      'Δοκιμή δωματίου (προαιρετικό): δωμάτιο@υπηρεσία',
+  'Conferentie-URL (optioneel): toont de OciDeck-companion-kamer':
+      'URL διάσκεψης (προαιρετικό): εμφανίζει το companion δωμάτιο του OciDeck',
+  'Companion-kamer': 'Companion δωμάτιο',
   'Aanwezig in de kamer': 'Παρόντες στο δωμάτιο',
   'De bijnaam is al in gebruik in de kamer.':
       'Το ψευδώνυμο χρησιμοποιείται ήδη στο δωμάτιο.',
