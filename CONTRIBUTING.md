@@ -84,17 +84,21 @@ flutter run -d macos  # or -d windows / -d linux
 
 ## The quality gate
 
-Run this before every push — it is the enforced quality gate, and it really is
-the only one. The Forgejo remote *has* an Actions runner, but since #790 it
-runs this same gate on a `v*` tag rather than per pull request: a CI run cost
-22 minutes there against 2.5 minutes here. So nothing runs it for you between
-your branch and `main`. If it fails at tag time, the problem already landed.
+Run this before every push — it is the enforced quality gate. The Forgejo remote
+*has* an Actions runner, but since #790 it runs the *full* gate on a `v*` tag
+rather than per pull request: a CI run cost 22 minutes there against 2.5 minutes
+here. So the full gate — the test suite and the two coverage floors — runs
+nowhere for you between your branch and `main`. If it fails at tag time, the
+problem already landed.
 
-One thing *does* run on every pull request, and only that one thing: the secret
-and SAST scans (`.forgejo/workflows/scans.yml`, #778). They take seconds rather
-than minutes, and for a credential the moment is not interchangeable — found
-before the merge it is an edit, found after it is in the history. That is an
-addition to your local run, not a replacement for it.
+Two things *do* run on every pull request. The secret and SAST scans
+(`.forgejo/workflows/scans.yml`, #778) take seconds, and for a credential the
+moment is not interchangeable — found before the merge it is an edit, found
+after it is in the history. And since #1118 the **static gates** run too
+(`.forgejo/workflows/static-gate.yml` → `make check-static`, the fast static
+half of `make check`), because otherwise those ratchets drift silently red on
+`main` between releases. Both are additions to your local run, not a replacement
+for it — the coverage floors still run only here.
 
 ```sh
 make check            # format-check + analyze + conventions + full test suite + coverage floor

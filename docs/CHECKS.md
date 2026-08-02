@@ -10,12 +10,16 @@ these checks. The Forgejo remote has an Actions runner since 2026-07-23, and
 **on a `v*` tag, on the Mac runner** — not per pull request
 (#741/#751/#790/#797). That is `make check`
 with the full test suite intact but without the coverage instrumentation —
-worth roughly 13 minutes off a 46-minute gate on that runner. Read this literally, twice over:
-nothing between your `make check` and `main` runs this gate for you, and the
-**coverage floors run nowhere but on your own machine**. CI is the release gate;
-you are the merge gate.
+worth roughly 13 minutes off a 46-minute gate on that runner. Since #1118 the
+**static gates** — `$(STATIC_GATES)`, seconds each — also run on **every pull
+request** (`.forgejo/workflows/static-gate.yml`, [`make check-static`](#make-check-static)),
+so that class of drift no longer waits for a tag. But read the rest literally,
+twice over: the **full test suite and the coverage floors still run nowhere but
+on your own machine**. CI is the release gate, the per-PR static gate is a safety
+net, and you are still the merge gate.
 
-**One exception, and it is deliberate:** `.forgejo/workflows/scans.yml` runs the
+**Two workflows already run per pull request, each for its own deliberate
+reason.** The older is `.forgejo/workflows/scans.yml`, which runs the
 secret and SAST scans (`make check-secrets`, `make sast`) on **every pull
 request** (#778). Those take 17 and 2 seconds locally against the 22 minutes per
 pull request that moved the gate to a tag, so the timing argument that moved the
@@ -227,8 +231,11 @@ not what runs. That workflow does not execute: Forgejo reads
 is [`make check-no-coverage`](#make-check-no-coverage) on the Mac runner, on a
 `v*` tag (#790/#796/#797), plus
 [`make check-secrets`](#make-check-secrets) and [`make sast`](#make-sast) on
-every pull request (#778) — those two are the only checks in
-this table that a forge actually runs before a merge.
+every pull request (#778), and — since #1118 — the ten static gates
+(`$(STATIC_GATES)`) via [`make check-static`](#make-check-static) on every pull
+request too (`.forgejo/workflows/static-gate.yml`). Those are the checks in this
+table that a forge actually runs before a merge; the full test suite and the two
+coverage floors still run only in your local `make check`.
 Note that `make
 check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
 `check-web` — those live in `check-full`. Run `make check-full` before a
@@ -660,6 +667,27 @@ also declares them, but see the [CI note](#continuous-integration).)
   mandatory — in `make check`, on the committer's machine, before `main`. This
   is a relocation, not a relaxation, and it only holds because the merge gate
   was already local (see the top of this document).
+
+### `make check-static`
+- **Runs:** exactly `$(STATIC_GATES)` — the same static gates `make check` runs,
+  and nothing else: no `make test`, no coverage.
+- **Covers:** formatting, static analysis, the toolchain, conventions, the
+  privacy projection boundary, method length, dead-code, hardcoded visible text,
+  comment language and improvement templates. Seconds each; no test-suite compile.
+- **Where it is used:** `.forgejo/workflows/static-gate.yml`, on **every pull
+  request** (#1118). It is the part of the gate fast enough to run per pull
+  request on the server without the clock argument that moved the full gate to a
+  tag.
+- **Why it exists:** while the full gate runs only on a `v*` tag and the Linux
+  gate only on demand, these static ratchets ran nowhere between releases — so
+  `main` drifted silently red (files, classes, a method and registrations over
+  their ceiling, uncaught until someone tried to land a fix on top, #1118). This
+  target puts the fast half of the gate back on the pull request, where an
+  overrun is still an edit rather than history.
+- **What it gives up, stated plainly:** the full test suite, the coverage floor
+  and the per-file floor. Those are unchanged and still mandatory — in
+  `make check`, on the committer's machine, before `main`. It is a safety net in
+  front of that gate, not a replacement for it.
 
 ---
 
@@ -1230,6 +1258,8 @@ that reaches beyond `build/test_cache`.
 > before a dependency or web-facing change. Its two *security* scans are the
 > exception since #778 —
 > see [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request).
+> Since #1118 the **static gates** run per pull request as well — see
+> [`static-gate.yml`](#forgejoworkflowsstatic-gateyml--the-static-gate-per-pull-request).
 > Since #797 the release gate runs on a registered **Mac**
 > runner rather than on the server, and the Linux gate moved to an on-demand
 > workflow — see below for what that buys and what it costs. The sections below
@@ -1320,6 +1350,35 @@ that reaches beyond `build/test_cache`.
   the working tree, `make check-secrets` exits non-zero and names the leak; with
   the same pair only in history and the working tree clean, both history passes
   still fail.
+
+### `.forgejo/workflows/static-gate.yml` — the static gate, per pull request
+- **static-gate** — the same bare `ubuntu:24.04` container and pinned-Flutter
+  setup as `linux-gate.yml` (version read from `.tool-versions`, tarball
+  sha256-verified against the official manifest, `/opt/flutter` and `~/.pub-cache`
+  cached), then `flutter pub get` and [`make check-static`](#make-check-static) —
+  `$(STATIC_GATES)` and nothing else, no test suite and no coverage.
+- **Why it exists (#1118).** The release gate runs on a `v*` tag and the Linux
+  gate only on demand, so between releases nothing held the static ratchets on a
+  pull request. `main` drifted silently red — a run of merges pushed files,
+  classes, a method and doc/coverage registrations past their ceilings, and it
+  only surfaced when a later fix could not land on a green gate. This puts the
+  fast half of the gate on the pull request, where an overrun is still an edit
+  rather than history.
+- **Why only the static subset.** The full suite and the coverage floors cost
+  tens of minutes on this container — the very reason the gate moved to a tag
+  (#796) — while the static gates are seconds each. The coverage floor and the
+  per-file floor stay in `make check` on the committer's machine, before `main`;
+  this workflow deliberately does not run them, and says so in its own header.
+- **Why the Linux container, not the Mac.** Same trade as `scans.yml`: it fires
+  on every pull request, and since #797 the Mac is both the release gate and the
+  committer's working machine. In a container on the otherwise-idle server it
+  takes no cores from a `make check` running on the Mac. `check-toolchain` runs
+  unchanged inside `make check-static`, so the pinned official stable is enforced
+  here too — a prebuilt Flutter image with channel `[user-branch]` would fail it,
+  exactly as in `linux-gate.yml`.
+- **A superseded run cancels** (`concurrency`, `cancel-in-progress`): the gate
+  reads the whole tree at the newest commit, so a later run covers everything an
+  aborted one would have seen.
 
 ### `.forgejo/workflows/linux-gate.yml` — on demand (`workflow_dispatch`)
 - **gate-linux** — the gate that `ci.yml` used to be: a bare `ubuntu:24.04`
