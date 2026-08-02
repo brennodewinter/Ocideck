@@ -16,6 +16,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- **Afbeeldingenbibliotheek als onderhoudsscherm vanaf het beginscherm** — de
+  bibliotheek was alleen te openen met een presentatie erbij (om er een
+  afbeelding voor een dia uit te kiezen). Op het beginscherm staat nu een knop
+  **Afbeeldingenbibliotheek** — op desktop en zodra je bibliotheekmappen hebt
+  ingesteld — die de bibliotheek in een **beheermodus** opent: het kiezen (de
+  knoppen *Kiezen* en *Bladeren*) vervalt en alleen het onderhoud blijft over,
+  duplicaten opruimen en afbeeldingen verwijderen. Zo ruim je je
+  bibliotheekmappen op zonder eerst een lege presentatie te hoeven openen; in
+  andere tabs geopende presentaties worden bij het opruimen ontzien. (#1108)
 - **Managementsysteem-rapportage (ISO 27001 / 9001 / 42001)** — een nieuwe manier
   om de **voortgang van je eigen managementsysteem** te rapporteren. Voeg een
   dia **Beheersmaatregel-status** toe (tabblad *Managementsysteem* in *Dia
