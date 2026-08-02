@@ -4,6 +4,13 @@ import 'package:ocideck/xmpp/xmpp_frame_transport.dart';
 import 'package:ocideck/xmpp/xmpp_frame_transport_web.dart';
 
 void main() {
+  test('connect exception describes its refusal', () {
+    expect(
+      const XmppConnectException('blocked').toString(),
+      'XmppConnectException: blocked',
+    );
+  });
+
   test('web transport refuses an unpinnable XMPP connection', () async {
     const settings = XmppSettings(
       serverUrl: 'wss://xmpp.example/xmpp-websocket',
