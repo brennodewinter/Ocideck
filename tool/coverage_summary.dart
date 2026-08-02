@@ -418,6 +418,14 @@ bool _checkPerFileFloor(File report) {
   final below =
       _perFile(report)
           .where((f) => !_isTranslationData(f.path))
+          // Honour uncoveredBaseline here too, like _checkInstrumented and the
+          // average floor. It never mattered before: those entries are platform
+          // *other*-halves (a `_web` half on this io VM), never compiled here, so
+          // they had no report record to floor-check. The F3 native-media binding
+          // is different — it IS compiled on every platform, so an import (via the
+          // preflight tile) puts it in the report at 0%. Without this skip the
+          // approved exemption would be defeated by this one floor.
+          .where((f) => !uncoveredBaseline.contains(f.path))
           .where((f) => f.hit * 100 < perFileFloorPercent * f.found)
           .toList()
         ..sort((a, b) {
