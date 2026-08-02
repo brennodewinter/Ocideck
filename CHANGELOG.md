@@ -278,6 +278,15 @@ in Dutch, and it keeps growing on `main` between releases.
   schermlezer-label noemen nu de wérkelijke stand, in de geest van het
   instellingenpaneel: *geaccepteerd*, *gemarkeerd voor de ontvanger* of
   *weggelaten* (#1112).
+- Video/afspeelpunt: het verlaten van een dia met (afspelende) video kon Flutter
+  laten crashen met *"setState() … called when widget tree was locked"*.
+  `VideoPlayheadBus.clearFor` wiste het gepubliceerde afspeelpunt synchroon in
+  `dispose()`, en dispose draait tijdens het afronden van het frame — de
+  element-tree is dan gelockt. De live meeluisterende "Knip hier"-knop in de
+  video-editor (`ValueListenableBuilder<VideoPlayhead?>`) wilde daardoor onder de
+  lock herbouwen. Draait er een frame, dan stelt de bus de clear nu uit tot ná
+  het frame; anders wist hij synchroon. De `slideId`-guard voorkomt dat een
+  intussen door een andere dia gepubliceerd afspeelpunt wordt weggegooid (#1114).
 - Export/geheugen: een PDF/PPTX-raster-export hield alle gerenderde PNG's in het
   geheugen en verhoogde de image-cache tot 1 GB, terwijl de assemblage pas begon
   nadat álles gerasteriseerd was — honderden hoog-entropische dia's konden zo
