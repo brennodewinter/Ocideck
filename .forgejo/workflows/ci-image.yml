@@ -1,0 +1,91 @@
+# Bouwt en publiceert het voorgebakken CI-basisimage
+# (`.forgejo/ci-image/Dockerfile`) naar de eigen Forgejo-registry.
+#
+# WANNEER. Op afroep (`workflow_dispatch`) én automatisch zodra de Dockerfile of
+# de Flutter-pin (`.tool-versions`) op `main` wijzigt — zo kan het image nooit
+# stil achterlopen op de pin. Het tag ís de pin (`flutter-<versie>`), dus een
+# pin-bump publiceert een nieuw tag zonder een oud te overschrijven.
+#
+# EENMALIG IN TE RICHTEN (zie docs/CHECKS.md "Voorgebakken CI-image"):
+#   * repo-secret `CI_IMAGE_TOKEN` — een Forgejo-token met `write:package`.
+#   * de runner moet `docker` kunnen aanroepen (de dind-runner op pawprint kan
+#     dat); draait hij zonder docker-toegang, gebruik dan de handmatige route
+#     `make ci-image-publish` vanaf een machine met docker/colima.
+#   * zet het gepubliceerde package op PUBLIEK, zodat de gate-workflows het
+#     zonder inlog kunnen pullen (of richt pull-credentials op de runner in).
+#
+# VERTROUWENSGRENS. Zelfde als de runner en de bestaande `actions/cache`: onze
+# eigen job bouwt het image op onze eigen runner en duwt het naar onze eigen
+# registry. De Dockerfile toetst de Flutter-tarball sha256 vóór het uitpakken,
+# dus een gemanipuleerde toolchain valt om bij de build — niet pas in de poort.
+name: ci-image
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.forgejo/ci-image/Dockerfile'
+      - '.forgejo/workflows/ci-image.yml'
+      - '.tool-versions'
+
+# Twee pushes vlak na elkaar (pin-bump + Dockerfile) hoeven niet dubbel te
+# bouwen; de laatste dekt de nieuwste staat.
+concurrency:
+  group: ci-image-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-publish:
+    runs-on: docker
+    steps:
+      # Zonder registry-token kan deze workflow niets publiceren. Dat is géén
+      # fout: vóór de eenmalige inrichting (of op een fork) hoort de run gewoon
+      # groen over te slaan, niet rood te worden. Anders zou juist de PR die dit
+      # image toevoegt na de merge een rode `main`-run opleveren.
+      - name: Heeft dit repo een registry-token?
+        id: guard
+        env:
+          TOKEN: ${{ secrets.CI_IMAGE_TOKEN }}
+        run: |
+          set -eu
+          if [ -z "${TOKEN:-}" ]; then
+            echo "CI_IMAGE_TOKEN niet gezet — image-publicatie overgeslagen."
+            echo "Richt hem eenmalig in (docs/CHECKS.md 'ci-image.yml') of draai 'make ci-image-publish'."
+            echo "publish=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      - if: steps.guard.outputs.publish == 'yes'
+        uses: actions/checkout@v4
+
+      - name: Gepinde Flutter-versie lezen
+        if: steps.guard.outputs.publish == 'yes'
+        id: pin
+        run: |
+          set -eu
+          V="$(sed -n 's/^flutter \(.*\)-stable$/\1/p' .tool-versions)"
+          test -n "$V"
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+
+      - name: Inloggen op de Forgejo-registry
+        if: steps.guard.outputs.publish == 'yes'
+        run: |
+          set -eu
+          echo "${{ secrets.CI_IMAGE_TOKEN }}" \
+            | docker login pawprint.vigilis.online \
+                -u "${{ github.actor }}" --password-stdin
+
+      - name: Bouwen en pushen
+        if: steps.guard.outputs.publish == 'yes'
+        run: |
+          set -eu
+          IMG="pawprint.vigilis.online/librekat/ocideck-ci"
+          TAG="flutter-${{ steps.pin.outputs.version }}"
+          docker build \
+            --build-arg FLUTTER_VERSION="${{ steps.pin.outputs.version }}" \
+            -t "$IMG:$TAG" \
+            -f .forgejo/ci-image/Dockerfile .forgejo/ci-image
+          docker push "$IMG:$TAG"
+          echo "Gepubliceerd: $IMG:$TAG"
