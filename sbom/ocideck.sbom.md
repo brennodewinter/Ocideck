@@ -2,16 +2,16 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.1.3+4** (licence EUPL-1.2) and every third-party component it ships (211 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.1.3+4** (licence EUPL-1.2) and every third-party component it ships (217 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **716 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **733 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
 | Licence | Components |
 | --- | ---: |
-| BSD-3-Clause | 135 |
-| MIT | 51 |
+| BSD-3-Clause | 136 |
+| MIT | 56 |
 | Apache-2.0 | 17 |
 | OFL-1.1 | 5 |
 | MPL-2.0 | 1 |
@@ -20,7 +20,7 @@ The JSON documents carry **716 dependency relations** between these components: 
 
 ## Components
 
-### Dart / Flutter packages (196)
+### Dart / Flutter packages (202)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -47,6 +47,7 @@ The JSON documents carry **716 dependency relations** between these components: 
 | csslib _(transitive)_ | 1.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/csslib@1.0.2` |
 | cupertino_icons _(direct main)_ | 1.0.9 | MIT | flutter | `pkg:pub/cupertino_icons@1.0.9` |
 | dart_quill_delta _(transitive)_ | 10.8.3 | MIT | FlutterQuill | `pkg:pub/dart_quill_delta@10.8.3` |
+| dart_webrtc _(transitive)_ | 1.8.1 | MIT | flutter-webrtc | `pkg:pub/dart_webrtc@1.8.1` |
 | dartcv4 _(direct main)_ | 2.2.1+4 | Apache-2.0 | rainyl | `pkg:pub/dartcv4@2.2.1+4` |
 | dbus _(transitive)_ | 0.7.13 | MPL-2.0 | canonical | `pkg:pub/dbus@0.7.13` |
 | desktop_drop _(direct main)_ | 0.7.1 | Apache-2.0 | MixinNetwork | `pkg:pub/desktop_drop@0.7.1` |
@@ -85,6 +86,7 @@ The JSON documents carry **716 dependency relations** between these components: 
 | flutter_svg _(direct main)_ | 2.3.0 | MIT | flutter | `pkg:pub/flutter_svg@2.3.0` |
 | flutter_test _(direct dev)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | flutter_web_plugins _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
+| flutter_webrtc _(direct main)_ | 1.5.2 | MIT | cloudwebrtc | `pkg:pub/flutter_webrtc@1.5.2` |
 | frontend_server_client _(transitive)_ | 4.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/frontend_server_client@4.0.0` |
 | fuchsia_remote_debug_protocol _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | glob _(transitive)_ | 2.1.3 | BSD-3-Clause | dart-lang | `pkg:pub/glob@2.1.3` |
@@ -102,12 +104,14 @@ The JSON documents carry **716 dependency relations** between these components: 
 | jni _(transitive)_ | 1.0.1 | BSD-3-Clause | dart-lang | `pkg:pub/jni@1.0.1` |
 | jni_flutter _(transitive)_ | 1.0.1 | BSD-3-Clause | dart-lang | `pkg:pub/jni_flutter@1.0.1` |
 | jni_util _(transitive)_ | 1.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/jni_util@1.0.0` |
+| js _(transitive)_ | 0.7.2 | BSD-3-Clause | dart-lang | `pkg:pub/js@0.7.2` |
 | json_annotation _(transitive)_ | 4.12.0 | BSD-3-Clause | google | `pkg:pub/json_annotation@4.12.0` |
 | leak_tracker _(transitive)_ | 11.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/leak_tracker@11.0.2` |
 | leak_tracker_flutter_testing _(transitive)_ | 3.0.10 | BSD-3-Clause | dart-lang | `pkg:pub/leak_tracker_flutter_testing@3.0.10` |
 | leak_tracker_testing _(transitive)_ | 3.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/leak_tracker_testing@3.0.2` |
 | lints _(transitive)_ | 6.1.0 | BSD-3-Clause | dart-lang | `pkg:pub/lints@6.1.0` |
 | listen _(transitive)_ | 1.0.0-beta.4 | BSD-3-Clause | flutter | `pkg:pub/listen@1.0.0-beta.4` |
+| logger _(transitive)_ | 2.7.0 | MIT | SourceHorizon | `pkg:pub/logger@2.7.0` |
 | logging _(transitive)_ | 1.3.0 | BSD-3-Clause | dart-lang | `pkg:pub/logging@1.3.0` |
 | markdown _(direct main)_ | 7.3.1 | BSD-3-Clause | dart-lang | `pkg:pub/markdown@7.3.1` |
 | markdown_quill _(direct main)_ | 4.3.0 | MIT | TarekkMA | `pkg:pub/markdown_quill@4.3.0` |
@@ -176,6 +180,7 @@ The JSON documents carry **716 dependency relations** between these components: 
 | stream_channel _(transitive)_ | 2.1.4 | BSD-3-Clause | dart-lang | `pkg:pub/stream_channel@2.1.4` |
 | string_scanner _(transitive)_ | 1.4.1 | BSD-3-Clause | dart-lang | `pkg:pub/string_scanner@1.4.1` |
 | sync_http _(transitive)_ | 0.3.1 | BSD-3-Clause | google | `pkg:pub/sync_http@0.3.1` |
+| synchronized _(transitive)_ | 3.4.1+1 | MIT | tekartik | `pkg:pub/synchronized@3.4.1+1` |
 | term_glyph _(transitive)_ | 1.2.2 | BSD-3-Clause | dart-lang | `pkg:pub/term_glyph@1.2.2` |
 | test _(transitive)_ | 1.31.0 | BSD-3-Clause | dart-lang | `pkg:pub/test@1.31.0` |
 | test_api _(transitive)_ | 0.7.11 | BSD-3-Clause | dart-lang | `pkg:pub/test_api@0.7.11` |
@@ -210,6 +215,7 @@ The JSON documents carry **716 dependency relations** between these components: 
 | web_socket_channel _(transitive)_ | 3.0.3 | BSD-3-Clause | dart-lang | `pkg:pub/web_socket_channel@3.0.3` |
 | webdriver _(transitive)_ | 3.1.0 | Apache-2.0 | google | `pkg:pub/webdriver@3.1.0` |
 | webkit_inspection_protocol _(transitive)_ | 1.2.1 | BSD-3-Clause | google | `pkg:pub/webkit_inspection_protocol@1.2.1` |
+| webrtc_interface _(transitive)_ | 1.5.1 | MIT | flutter-webrtc.org | `pkg:pub/webrtc_interface@1.5.1` |
 | webview_flutter _(direct main)_ | 4.14.1 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter@4.14.1` |
 | webview_flutter_android _(transitive)_ | 4.13.0 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter_android@4.13.0` |
 | webview_flutter_platform_interface _(transitive)_ | 2.15.1 | BSD-3-Clause | flutter | `pkg:pub/webview_flutter_platform_interface@2.15.1` |

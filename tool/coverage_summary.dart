@@ -37,6 +37,18 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // UNTESTABLE NATIVE BINDING (F3, ketenkeuring-flutter-webrtc.md; user-approved
+  // new category, 2026-08-02): `meeting_media_core_webrtc.dart` is the one thin
+  // binding to `flutter_webrtc` (libwebrtc). It differs from a platform half —
+  // it is present on every platform, not split io/web — but shares the reason
+  // those sit here: it cannot run in a headless test VM. libwebrtc needs a real
+  // device (camera/mic, ICE, a live peer), so this binding is verified LIVE, not
+  // by a unit test. The discipline holds around it: the file carries ONLY direct
+  // libwebrtc calls (no branching), and every testable decision — the media-E2EE
+  // fact and the bounded-egress policy — lives in `meeting_media_core.dart` and is
+  // covered there (meeting_media_core_test.dart). Keep this list to genuine such
+  // bindings, not a hiding place for logic that could be tested behind a fake.
+  'lib/meetings/meeting_media_core_webrtc.dart',
   // NO EXECUTABLE LINES: `library_scan_limits.dart` holds only two const upper
   // bounds shared by the deck scan and the image picker (#1049) — lcov emits no
   // record for a file with nothing to execute. The values are exercised through
