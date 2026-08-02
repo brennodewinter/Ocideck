@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/caption_service.dart';
 import 'package:ocideck/services/description_service.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
@@ -27,6 +28,9 @@ void main() {
   late Directory tempDir;
 
   setUp(() {
+    // Pin de taal, zodat de tekstasserties op de Nederlandse bronstrings
+    // kloppen ongeacht de omgeving.
+    AppLocalizations.setActiveLanguageCode('nl');
     // The picker is a ConsumerStatefulWidget; its settings provider reads
     // SharedPreferences on build, which needs a mock store under flutter_test.
     SharedPreferences.setMockInitialValues({});
@@ -72,7 +76,10 @@ void main() {
     clearLayoutNoise(tester);
   }
 
-  Future<void> pumpPicker(WidgetTester tester) async {
+  Future<void> pumpPicker(
+    WidgetTester tester, {
+    bool manageOnly = false,
+  }) async {
     await tester.binding.setSurfaceSize(const Size(1400, 900));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     // _loadImages wordt in initState gestart en loopt met echte bestand-I/O
@@ -87,6 +94,7 @@ void main() {
               searchPaths: [tempDir.path],
               captionService: CaptionService(),
               descriptionService: DescriptionService(),
+              manageOnly: manageOnly,
             ),
           ),
         ),
@@ -136,6 +144,39 @@ void main() {
     await settle(tester);
 
     expect(find.byType(ImageCarouselPicker), findsOneWidget);
+    expect(find.byType(ErrorWidget), findsNothing);
+  });
+
+  // ── Beheermodus (#1108) ─────────────────────────────────────────────────
+
+  testWidgets('kies-modus toont het kiezen én de titel', (tester) async {
+    await pumpPicker(tester);
+
+    expect(find.text('Afbeelding kiezen'), findsOneWidget);
+    expect(find.text('Kiezen'), findsOneWidget);
+    expect(find.text('Bladeren…'), findsOneWidget);
+    // Onderhoud is er in beide modi:
+    expect(find.text('Duplicaten opruimen'), findsOneWidget);
+    expect(find.byType(ErrorWidget), findsNothing);
+  });
+
+  testWidgets('beheermodus verbergt het kiezen, houdt het onderhoud', (
+    tester,
+  ) async {
+    await pumpPicker(tester, manageOnly: true);
+
+    // De titel zegt "beheren", niet "kiezen".
+    expect(find.text('Afbeeldingen beheren'), findsOneWidget);
+    expect(find.text('Afbeelding kiezen'), findsNothing);
+
+    // Geen kies-affordances: geen Kiezen-knop, geen Bladeren, wél een Sluiten.
+    expect(find.text('Kiezen'), findsNothing);
+    expect(find.text('Bladeren…'), findsNothing);
+    expect(find.text('Sluiten'), findsOneWidget);
+
+    // Het onderhoud blijft: duplicaten opruimen (verwijderen zit in de
+    // previewkolom, per selectie).
+    expect(find.text('Duplicaten opruimen'), findsOneWidget);
     expect(find.byType(ErrorWidget), findsNothing);
   });
 }
