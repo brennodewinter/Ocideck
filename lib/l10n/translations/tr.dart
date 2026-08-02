@@ -2760,6 +2760,48 @@ const _dutchSourceAddTr = <String, String>{
   'Procesverbetering: 8D-project': 'Süreç iyileştirme: 8D projesi',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Sorunun tanımı, nedenleri ve güvencesi için 8D iskelet.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Bir ISO yönetim sistemi (27001/9001/42001) ilerlemesini raporlayın: her kontrol için durum ve türetilmiş bir ilerleme genel bakışı. Varsayılan olarak kapalı; slayt türünü kullanmak için eklentiyi açın.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modül açık. ISO dizini yerel olarak kullanılabilir (üç standartta {n} kontrol); yalnızca numaralar ve kısa başlıklar, standardın metni değil.',
+  'Beheersmaatregel-status': 'Kontrol durumu',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Yalnızca madde dizini 4–10 (28 alt madde + kısa başlıklar). ISO 9001\'de Annex A yoktur. Standart metni dâhil DEĞİLDİR.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Yalnızca Annex A dizini (38 kontrol kimliği + kısa başlıklar) ve dokuz hedef başlığı A.2–A.10. Standart metni dâhil DEĞİLDİR.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Yalnızca Annex A dizini (93 kontrol kimliği + kısa başlıklar) ve dört tema başlığı. Standart metni dâhil DEĞİLDİR.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Bir ISO standardının (27001/9001/42001) her kontrolü için uygulama durumu. Kontrolleri bir standarttan yükleyin ve durumu, sorumluyu ve kanıtı doldurun.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO telif hakkı — olgusal başvuru olarak dizin, standart metni dâhil değil',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Bölüm bazında ilerlemeyi gösteren bir genel bakış slaydı oluşturur veya yeniler (tüm kontrol slaytlarından türetilir).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Bir ISO standardının kontrollerini ekler (yalnızca dizin; yalnızca yeni kimlikler).',
+  'Alle secties': 'Tüm bölümler',
+  'Beheersmaatregel': 'Kontrol',
+  'Beheersmaatregel toevoegen': 'Kontrol ekle',
+  'Beheersmaatregelen laden…': 'Kontrolleri yükle…',
+  'Genereer voortgangsoverzicht': 'İlerleme genel bakışı oluştur',
+  'Geïmplementeerd': 'Uygulandı',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Kurumsal (A.5)',
+  'Kies een norm': 'Bir standart seç',
+  'Managementsysteem': 'Yönetim sistemi',
+  'Niet gescoord': 'Puanlanmadı',
+  'Niveau': 'Düzey',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Özetlenecek kontrol slaydı henüz yok',
+  'Sectie': 'Bölüm',
+  'Streefdatum': 'Hedef tarih',
+  'Van toepassing': 'Uygulanabilir',
+  'Voortgang': 'İlerleme',
+  'Voortgang managementsysteem': 'Yönetim sistemi ilerlemesi',
+  'Voortgangsoverzicht bijgewerkt': 'İlerleme genel bakışı güncellendi',
+  'Welk deel?': 'Hangi bölüm?',
+  'beheersmaatregelen geladen': 'kontrol yüklendi',
+  'geïmplementeerd': 'uygulandı',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modül açık. Hesaplama çekirdeği, slayt düzenleri ve şablonlar yerel olarak kullanılabilir ({n} kontrol grafiği faktörü).',
   'SIPOC-procesoverzicht': 'SIPOC süreç genel görünümü',

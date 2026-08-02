@@ -1758,6 +1758,48 @@ const _dutchSourceAddTlh = <String, String>{
   'Procesverbetering: 8D-project': '8D: gher\'ID QI\'meH mIq',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Qagh Del, motlh je qaDmoHmeH 8D qel.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'ISO che\'meH pat (27001/9001/42001) Qap yIja\': Hub patlh je Qap \'oS chenmoHlu\'bogh. lurDech: chu\'be\'; cha\'nob Segh yIlo\'meH chelwI\' yIchu\'.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'chelwI\' chu\'lu\'. pa\' ISO index tu\'lu\' ({n} Hubmey wej chut); mI\'mey per nI\'be\' je neH, chut mu\'mey qachbe\'.',
+  'Beheersmaatregel-status': 'SeH Dotlh',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'chut \'ay\' 4–10 index neH (28 chut \'ay\' mach + per nI\'be\'). ISO 9001 Annex A ghajbe\'. chut mu\'mey chellu\'be\'.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Annex A index neH (38 Hub per + per nI\'be\') je ngoQ nav Hut A.2–A.10. chut mu\'mey chellu\'be\'.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Annex A index neH (93 Hub per + per nI\'be\') je loS mIll\'ogh nav. chut mu\'mey chellu\'be\'.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'ISO chut (27001/9001/42001) Hub patlh. chutvo\' Hubmey yISuq; patlh, ghajwI\', \'ol je yIghItlh.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO copyright — teH index, chut mu\'mey chellu\'be\'',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      '\'ay\' Hoch Qap \'oS much nav chenmoHlu\' pagh choHlu\'; Hub navmey Hoch lo\'lu\'.',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'ISO chut Hubmey chel; index neH, per chu\' neH.',
+  'Alle secties': 'Hoch \'ay\'mey',
+  'Beheersmaatregel': 'Hub',
+  'Beheersmaatregel toevoegen': 'Hub yIchel',
+  'Beheersmaatregelen laden…': 'Hubmey yISuq…',
+  'Genereer voortgangsoverzicht': 'Qap much yIchenmoH',
+  'Geïmplementeerd': 'rInpu\'',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — ghom (A.5)',
+  'Kies een norm': 'chut yIwIv',
+  'Managementsysteem': 'che\'meH pat',
+  'Niet gescoord': 'juvbe\'lu\'',
+  'Niveau': 'patlh',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Hub navmey tu\'lu\'be\'',
+  'Sectie': '\'ay\'',
+  'Streefdatum': 'ngoQ jaj',
+  'Van toepassing': 'lo\'laH',
+  'Voortgang': 'Qap',
+  'Voortgang managementsysteem': 'che\'meH pat Qap',
+  'Voortgangsoverzicht bijgewerkt': 'Qap much chu\'qa\'lu\'pu\'',
+  'Welk deel?': 'nuq \'ay\'?',
+  'beheersmaatregelen geladen': 'Hubmey Suqlu\'pu\'',
+  'geïmplementeerd': 'rInpu\'',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'chu\' module. De\'wI\' mIw, slide patmey je template-mey Daq SumDaq tu\'lu\' ({n} control-chartfactor).',
   'SIPOC-procesoverzicht': 'SIPOC ghu\'vam',

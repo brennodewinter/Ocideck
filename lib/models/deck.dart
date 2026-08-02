@@ -547,4 +547,17 @@ class Deck {
   /// one-time "enable the module" discovery prompt; slides always render
   /// (MODUS-REGEL).
   bool get hasImprovementSlides => firstImprovementSlideIndex >= 0;
+
+  /// Index of the first Managementsysteem slide (a `controlStatus` slide,
+  /// [SlideCategory.managementsysteem]), or -1 when there is none. Mirrors
+  /// [firstSecuritySlideIndex]; it drives the picker's Managementsysteem tab —
+  /// which appears once a deck already carries such a slide, the shared module
+  /// contract "tonen zodra de inhoud er is" (ISO_MANAGEMENTSYSTEEM §5).
+  int get firstManagementSystemSlideIndex => slides.indexWhere(
+    (s) => s.type.category == SlideCategory.managementsysteem,
+  );
+
+  /// True when this deck carries any Managementsysteem slide type; slides always
+  /// render regardless of any module switch (MODUS-REGEL).
+  bool get hasManagementSystemSlides => firstManagementSystemSlideIndex >= 0;
 }

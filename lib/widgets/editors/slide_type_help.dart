@@ -103,6 +103,10 @@ String slideTypeHelpText(AppLocalizations l10n, SlideType type) {
       return l10n.d(
         'Een matrix van scope-objecten tegen standaarden en de mate van toetsing.',
       );
+    case SlideType.controlStatus:
+      return l10n.d(
+        'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.',
+      );
     case SlideType.signOff:
       return l10n.d(
         'De waarheidsverklaring met rapporteur, certificering, handtekening en verzegeling.',

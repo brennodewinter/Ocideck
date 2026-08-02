@@ -923,6 +923,48 @@ const _dutchSourceAddEn = {
   'Procesverbetering: 8D-project': 'Process improvement: 8D project',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D skeleton for problem description, causes and assurance.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Report the progress of an ISO management system (27001/9001/42001): status per control and a derived progress overview. Off by default; turn on the extension to use the slide type.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Module on. The ISO index is available locally ({n} controls across three standards); only the numbers and short titles, not the standard text.',
+  'Beheersmaatregel-status': 'Control status',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Only the clause index 4–10 (28 sub-clauses + short titles). ISO 9001 has no Annex A. The standard text is NOT bundled.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Only the Annex A index (38 control ids + short titles) and the nine objective headings A.2–A.10. The standard text is NOT bundled.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Only the Annex A index (93 control ids + short titles) and the four theme headings. The standard text is NOT bundled.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'The implementation status per control of an ISO standard (27001/9001/42001). Load the controls from a standard and fill in status, owner and evidence.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO copyright — index as a factual reference, standard text not included',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Creates or refreshes an overview slide with the progress per section (derived from all control slides).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Adds the controls of an ISO standard (index only; new ids only).',
+  'Alle secties': 'All sections',
+  'Beheersmaatregel': 'Control',
+  'Beheersmaatregel toevoegen': 'Add control',
+  'Beheersmaatregelen laden…': 'Load controls…',
+  'Genereer voortgangsoverzicht': 'Generate progress overview',
+  'Geïmplementeerd': 'Implemented',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizational (A.5)',
+  'Kies een norm': 'Choose a standard',
+  'Managementsysteem': 'Management system',
+  'Niet gescoord': 'Not rated',
+  'Niveau': 'Level',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'No control slides to summarize yet',
+  'Sectie': 'Section',
+  'Streefdatum': 'Target date',
+  'Van toepassing': 'Applicable',
+  'Voortgang': 'Progress',
+  'Voortgang managementsysteem': 'Management system progress',
+  'Voortgangsoverzicht bijgewerkt': 'Progress overview updated',
+  'Welk deel?': 'Which part?',
+  'beheersmaatregelen geladen': 'controls loaded',
+  'geïmplementeerd': 'implemented',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Module on. Calculation core, slide layouts and templates are available locally ({n} control-chart factors).',
   'SIPOC-procesoverzicht': 'SIPOC process overview',

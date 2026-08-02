@@ -1786,6 +1786,48 @@ const _dutchSourceAddCs = <String, String>{
   'Procesverbetering: 8D-project': 'Zlepšení procesu: 8D projekt',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D kostra pro popis problému, příčiny a zajištění.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Reportujte průběh systému řízení ISO (27001/9001/42001): stav podle jednotlivých opatření a odvozený přehled průběhu. Ve výchozím nastavení vypnuto; zapněte rozšíření, abyste mohli použít typ snímku.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modul zapnut. Index ISO je dostupný lokálně ({n} opatření napříč třemi normami); pouze čísla a krátké názvy, nikoli text normy.',
+  'Beheersmaatregel-status': 'Stav opatření',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Pouze index klauzulí 4–10 (28 podklauzulí + krátké názvy). ISO 9001 nemá Annex A. Text normy NENÍ součástí.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Pouze index Annex A (38 ID opatření + krátké názvy) a devět nadpisů cílů A.2–A.10. Text normy NENÍ součástí.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Pouze index Annex A (93 ID opatření + krátké názvy) a čtyři tematické nadpisy. Text normy NENÍ součástí.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Stav zavedení pro každé opatření normy ISO (27001/9001/42001). Načtěte opatření z normy a vyplňte stav, vlastníka a důkaz.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Autorská práva ISO — index jako faktická reference, text normy není součástí',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Vytvoří nebo obnoví přehledový snímek s průběhem podle oddílů (odvozeno ze všech snímků opatření).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Přidá opatření normy ISO (pouze index; pouze nová ID).',
+  'Alle secties': 'Všechny oddíly',
+  'Beheersmaatregel': 'Opatření',
+  'Beheersmaatregel toevoegen': 'Přidat opatření',
+  'Beheersmaatregelen laden…': 'Načíst opatření…',
+  'Genereer voortgangsoverzicht': 'Vytvořit přehled průběhu',
+  'Geïmplementeerd': 'Zavedeno',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizační (A.5)',
+  'Kies een norm': 'Vyberte normu',
+  'Managementsysteem': 'Systém řízení',
+  'Niet gescoord': 'Nehodnoceno',
+  'Niveau': 'Úroveň',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Zatím žádné snímky opatření k shrnutí',
+  'Sectie': 'Oddíl',
+  'Streefdatum': 'Cílové datum',
+  'Van toepassing': 'Použitelné',
+  'Voortgang': 'Průběh',
+  'Voortgang managementsysteem': 'Průběh systému řízení',
+  'Voortgangsoverzicht bijgewerkt': 'Přehled průběhu aktualizován',
+  'Welk deel?': 'Která část?',
+  'beheersmaatregelen geladen': 'načtených opatření',
+  'geïmplementeerd': 'zavedeno',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul je zapnutý. Výpočetní jádro, rozvržení snímků a šablony jsou k dispozici místně ({n} faktorů regulačního diagramu).',
   'SIPOC-procesoverzicht': 'Přehled procesu SIPOC',

@@ -54,6 +54,19 @@ enum UpstreamProbe {
   /// Levert geen versienummer op maar wel het antwoord dat telt — of we
   /// achterlopen. FIRST publiceert de CVSS-specificatie zo.
   successorDocument,
+
+  /// De editie van een ISO-norm, gelezen van de **publieke** cataloguspagina van
+  /// ISO (`www.iso.org/standard/…`). De normtekst is betaald, maar de editie en
+  /// de status ("Published" / "Under review" / "Withdrawn") staan wél openbaar
+  /// op die pagina — en de paginatitel draagt `NNNNN:JJJJ` (bv. `27001:2022`).
+  ///
+  /// Dit is precies het geval dat de kop van deze enum aankondigt: bleek een bron
+  /// écht (deels) gesloten, voeg de waarde dan terug mét de reden. ISO verkoopt
+  /// de norm — anders dan OWASP (CC-BY-SA) — dus er is geen release-feed. Wat wél
+  /// publiek is, is de editie; dáárop toetst deze probe. Een nieuwe editie is een
+  /// **inhoudelijke migratie** van de index (nieuwe/hernummerde controls), geen
+  /// bouwblokkade, dus de ISO-standaarden staan op `advisory: true`.
+  isoEdition,
 }
 
 /// Eén gebundelde referentiestandaard: wat we ervan meedragen, welke versie dat

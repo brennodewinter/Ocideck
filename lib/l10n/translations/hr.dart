@@ -1789,6 +1789,48 @@ const _dutchSourceAddHr = <String, String>{
   'Procesverbetering: 8D-project': 'Unapređenje procesa: 8D projekt',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D kostur za opis problema, uzroke i osiguranje.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Prijavite napredak ISO sustava upravljanja (27001/9001/42001): status po kontroli i izvedeni pregled napretka. Prema zadanom isključeno; uključite proširenje da biste koristili vrstu slajda.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modul uključen. ISO indeks dostupan je lokalno ({n} kontrola u tri norme); samo brojevi i kratki naslovi, ne i tekst norme.',
+  'Beheersmaatregel-status': 'Status kontrola',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Samo indeks klauzula 4–10 (28 potklauzula + kratki naslovi). ISO 9001 nema Annex A. Tekst norme NIJE uključen.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Samo indeks Annex A (38 id-ova kontrola + kratki naslovi) i devet naslova ciljeva A.2–A.10. Tekst norme NIJE uključen.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Samo indeks Annex A (93 id-a kontrola + kratki naslovi) i četiri tematska naslova. Tekst norme NIJE uključen.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Status implementacije po kontroli neke ISO norme (27001/9001/42001). Učitajte kontrole iz norme i ispunite status, vlasnika i dokaz.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO autorska prava — indeks kao činjenična referenca, tekst norme nije uključen',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Stvara ili osvježava pregledni slajd s napretkom po odjeljku (izveden iz svih slajdova kontrola).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Dodaje kontrole neke ISO norme (samo indeks; samo novi id-ovi).',
+  'Alle secties': 'Svi odjeljci',
+  'Beheersmaatregel': 'Kontrola',
+  'Beheersmaatregel toevoegen': 'Dodaj kontrolu',
+  'Beheersmaatregelen laden…': 'Učitaj kontrole…',
+  'Genereer voortgangsoverzicht': 'Generiraj pregled napretka',
+  'Geïmplementeerd': 'Implementirano',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizacijske (A.5)',
+  'Kies een norm': 'Odaberite normu',
+  'Managementsysteem': 'Sustav upravljanja',
+  'Niet gescoord': 'Nije ocijenjeno',
+  'Niveau': 'Razina',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Još nema slajdova kontrola za sažetak',
+  'Sectie': 'Odjeljak',
+  'Streefdatum': 'Ciljni datum',
+  'Van toepassing': 'Primjenjivo',
+  'Voortgang': 'Napredak',
+  'Voortgang managementsysteem': 'Napredak sustava upravljanja',
+  'Voortgangsoverzicht bijgewerkt': 'Pregled napretka ažuriran',
+  'Welk deel?': 'Koji dio?',
+  'beheersmaatregelen geladen': 'kontrola učitano',
+  'geïmplementeerd': 'implementirano',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul je uključen. Jezgra za izračun, rasporedi slajdova i predlošci dostupni su lokalno ({n} faktora kontrolne karte).',
   'SIPOC-procesoverzicht': 'Pregled SIPOC procesa',

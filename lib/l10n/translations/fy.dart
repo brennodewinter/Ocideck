@@ -743,6 +743,48 @@ const _dutchSourceAddFy = {
   'Procesverbetering: 8D-project': 'Prosesferbettering: 8D-projekt',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D skelet foar probleem beskriuwing, oarsaken en assurance.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Rapportearje de fuortgong fan in ISO-behearsysteem (27001/9001/42001): status per behearsmaatregel en in ôflaat fuortgongsoersjoch. Standert út; set de utwreiding oan om it slidetype te brûken.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Module oan. De ISO-yndeks is lokaal beskikber ({n} behearsmaatregels oer trije noarmen); allinnich de nûmers en koarte titels, net de noarmtekst.',
+  'Beheersmaatregel-status': 'Behearmaatregelstatus',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Allinnich de klausule-yndeks 4–10 (28 sub-klausules + koarte titels). ISO 9001 hat gjin Annex A. De noarmtekst is NET bondele.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Allinnich de yndeks fan Annex A (38 kontrole-id\'s + koarte titels) en de njoggen doelstellingskoppen A.2–A.10. De noarmtekst is NET bondele.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Allinnich de yndeks fan Annex A (93 kontrole-id\'s + koarte titels) en de fjouwer tema-koppen. De noarmtekst is NET bondele.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'De ymplementaasjestatus per behearsmaatregel fan in ISO-noarm (27001/9001/42001). Laad de kontrôles út in noarm en folje status, eigner en bewiis yn.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO-copyright — yndeks as feitreferinsje, noarmtekst net meilevere',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Makket of fernijt in oersjochdia mei de fuortgong per seksje (ôflaat út alle behearsmaatregeldia\'s).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Foeget de behearsmaatregels fan in ISO-noarm ta (allinnich de yndeks; allinnich nije id\'s).',
+  'Alle secties': 'Alle seksjes',
+  'Beheersmaatregel': 'Behearsmaatregel',
+  'Beheersmaatregel toevoegen': 'Behearsmaatregel tafoegje',
+  'Beheersmaatregelen laden…': 'Behearsmaatregels lade…',
+  'Genereer voortgangsoverzicht': 'Fuortgongsoersjoch generearje',
+  'Geïmplementeerd': 'Ymplementearre',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisatoarysk (A.5)',
+  'Kies een norm': 'Kies in noarm',
+  'Managementsysteem': 'Behearsysteem',
+  'Niet gescoord': 'Net skoard',
+  'Niveau': 'Nivo',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Noch gjin behearsmaatregeldia\'s om gear te fetsjen',
+  'Sectie': 'Seksje',
+  'Streefdatum': 'Doeldatum',
+  'Van toepassing': 'Fan tapassing',
+  'Voortgang': 'Fuortgong',
+  'Voortgang managementsysteem': 'Fuortgong behearsysteem',
+  'Voortgangsoverzicht bijgewerkt': 'Fuortgongsoersjoch bywurke',
+  'Welk deel?': 'Hokker diel?',
+  'beheersmaatregelen geladen': 'behearsmaatregels laden',
+  'geïmplementeerd': 'ymplementearre',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Module oan. Rekkenkearn, dia-yndielingen en sjabloanen binne lokaal beskikber ({n} kontrôlekaartfaktoaren).',
   'SIPOC-procesoverzicht': 'SIPOC-prosesoersjoch',

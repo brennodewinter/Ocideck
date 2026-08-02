@@ -379,9 +379,36 @@ Future<ProbeResult> probeUpstream(Standard s) async {
       return _probeCweApi(s);
     case 'successorDocument':
       return _probeSuccessor(s);
+    case 'isoEdition':
+      return _probeIsoEdition(s);
     default:
       return ProbeResult(null);
   }
+}
+
+/// De gepubliceerde editie van een ISO-norm, gelezen van ISO's publieke
+/// popular-standards-pagina (die de drie normen mét editie noemt, bv.
+/// "ISO/IEC 27001:2022"). Het normnummer komt uit de naam ("ISO/IEC 27001" →
+/// `27001`), en op de pagina zoeken we `27001:JJJJ`.
+///
+/// ISO verkoopt de norm en blokkeert bovendien vaak geautomatiseerd ophalen; dan
+/// levert dit **onbekend** — een eerlijke uitkomst, geen valse "actueel". De
+/// toelichting zegt dan dat een mens de editie op iso.org moet nakijken. Zie
+/// UpstreamProbe.isoEdition.
+Future<ProbeResult> _probeIsoEdition(Standard s) async {
+  final number = RegExp(r'(\d{4,5})$').firstMatch(s.name.trim())?.group(1);
+  if (number == null) return ProbeResult(null);
+  final body = await _get(Uri.parse(s.target));
+  if (body == null) {
+    return ProbeResult(
+      null,
+      note:
+          '${s.name}: ISO publiceert de editie op ${s.target}, maar blokkeert '
+          'geautomatiseerd ophalen — controleer de editie met de hand.',
+    );
+  }
+  final latest = RegExp('$number:(\\d{4})').firstMatch(body)?.group(1);
+  return ProbeResult(latest, stale: deviates(s.version, latest));
 }
 
 /// De laatste-commitdatum, eventueel versmald tot het bestand waar de gebundelde

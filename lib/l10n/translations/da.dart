@@ -1782,6 +1782,48 @@ const _dutchSourceAddDa = <String, String>{
   'Procesverbetering: 8D-project': 'Procesforbedring: 8D-projekt',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D skelet til problembeskrivelse, årsager og sikkerhed.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Rapportér fremdriften for et ISO-ledelsessystem (27001/9001/42001): status pr. kontrol og et afledt fremdriftsoverblik. Slået fra som standard; aktivér udvidelsen for at bruge slidetypen.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modul aktivt. ISO-indekset er tilgængeligt lokalt ({n} kontroller på tværs af tre standarder); kun numrene og de korte titler, ikke standardteksten.',
+  'Beheersmaatregel-status': 'Kontrolstatus',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Kun klausulindekset 4–10 (28 underklausuler + korte titler). ISO 9001 har ingen Annex A. Standardteksten er IKKE inkluderet.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Kun Annex A-indekset (38 kontrol-id\'er + korte titler) og de ni måloverskrifter A.2–A.10. Standardteksten er IKKE inkluderet.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Kun Annex A-indekset (93 kontrol-id\'er + korte titler) og de fire temaoverskrifter. Standardteksten er IKKE inkluderet.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Implementeringsstatus pr. kontrol i en ISO-standard (27001/9001/42001). Indlæs kontrollerne fra en standard, og udfyld status, ejer og bevis.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO-ophavsret — indeks som faktuel reference, standardtekst ikke inkluderet',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Opretter eller opdaterer et oversigtsdias med fremdriften pr. afsnit (afledt af alle kontroldias).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Tilføjer kontrollerne fra en ISO-standard (kun indekset; kun nye id\'er).',
+  'Alle secties': 'Alle afsnit',
+  'Beheersmaatregel': 'Kontrol',
+  'Beheersmaatregel toevoegen': 'Tilføj kontrol',
+  'Beheersmaatregelen laden…': 'Indlæs kontroller…',
+  'Genereer voortgangsoverzicht': 'Generér fremdriftsoversigt',
+  'Geïmplementeerd': 'Implementeret',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisatorisk (A.5)',
+  'Kies een norm': 'Vælg en standard',
+  'Managementsysteem': 'Ledelsessystem',
+  'Niet gescoord': 'Ikke vurderet',
+  'Niveau': 'Niveau',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Ingen kontroldias at opsummere endnu',
+  'Sectie': 'Afsnit',
+  'Streefdatum': 'Måldato',
+  'Van toepassing': 'Relevant',
+  'Voortgang': 'Fremdrift',
+  'Voortgang managementsysteem': 'Ledelsessystemets fremdrift',
+  'Voortgangsoverzicht bijgewerkt': 'Fremdriftsoversigt opdateret',
+  'Welk deel?': 'Hvilken del?',
+  'beheersmaatregelen geladen': 'kontroller indlæst',
+  'geïmplementeerd': 'implementeret',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul slået til. Beregningskerne, diaslayouts og skabeloner er tilgængelige lokalt ({n} kontrolkortfaktorer).',
   'SIPOC-procesoverzicht': 'SIPOC-procesoversigt',

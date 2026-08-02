@@ -1799,6 +1799,48 @@ const _dutchSourceAddLa = <String, String>{
   'Procesverbetering: 8D-project': 'Processus emendationem: 8D project',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D Ossa problemata descriptio, causarum et certitudinum.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Progressum systematis administrationis ISO (27001/9001/42001) refer: status pro singulis praesidiis et conspectus progressus inde ductus. Praedefinite inactivum; extensionem activa ut genus paginae adhibeas.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modulus activus. Index ISO localiter praesto est ({n} praesidia per tres normas); tantum numeri et tituli breves, non textus normae.',
+  'Beheersmaatregel-status': 'Status moderaminum',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Tantum index clausularum 4–10 (28 subclausulae + tituli breves). ISO 9001 Annex A non habet. Textus normae NON includitur.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Tantum index Annex A (38 nomina praesidiorum + tituli breves) et novem capita propositorum A.2–A.10. Textus normae NON includitur.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Tantum index Annex A (93 nomina praesidiorum + tituli breves) et quattuor capita thematum. Textus normae NON includitur.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Status effectionis pro singulis praesidiis normae ISO (27001/9001/42001). Praesidia ex norma onera et statum, possessorem et argumentum comple.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Ius ISO — index ut fontis factorum, textus normae non inclusus',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Creat vel renovat scidam conspectus cum progressu per sectionem (ex omnibus scidis praesidiorum ductum).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Praesidia normae ISO addit (tantum index; tantum nova nomina).',
+  'Alle secties': 'Omnes sectiones',
+  'Beheersmaatregel': 'Praesidium',
+  'Beheersmaatregel toevoegen': 'Praesidium addere',
+  'Beheersmaatregelen laden…': 'Praesidia onerare…',
+  'Genereer voortgangsoverzicht': 'Conspectum progressus generare',
+  'Geïmplementeerd': 'Effectum',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Ordinativum (A.5)',
+  'Kies een norm': 'Normam elige',
+  'Managementsysteem': 'Systema administrationis',
+  'Niet gescoord': 'Non aestimatum',
+  'Niveau': 'Gradus',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Nullae adhuc scidae praesidiorum ad summandum',
+  'Sectie': 'Sectio',
+  'Streefdatum': 'Dies destinata',
+  'Van toepassing': 'Applicabile',
+  'Voortgang': 'Progressus',
+  'Voortgang managementsysteem': 'Progressus systematis administrationis',
+  'Voortgangsoverzicht bijgewerkt': 'Conspectus progressus renovatus',
+  'Welk deel?': 'Quae pars?',
+  'beheersmaatregelen geladen': 'praesidia onerata',
+  'geïmplementeerd': 'effectum',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modulus activus. Nucleus computationis, dispositiones diapositivarum et exemplaria localiter praesto sunt ({n} factores chartae moderationis).',
   'SIPOC-procesoverzicht': 'Conspectus processus SIPOC',

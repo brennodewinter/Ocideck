@@ -12,6 +12,11 @@ extension _SlideListPanelAddSlide on _SlideListPanelState {
       context,
       revealInfoSafety: ref.read(infoSafetyRevealProvider),
       revealProcesverbetering: ref.read(procesverbeteringRevealProvider),
+      // The shared module contract: revealed when the switch is on, or the deck
+      // already carries a controlStatus slide so switching off never strands it.
+      revealManagementsysteem:
+          ref.read(managementsysteemRevealProvider) ||
+          (ref.read(deckProvider).deck?.hasManagementSystemSlides ?? false),
     );
     if (type == null) return;
     final notifier = ref.read(deckProvider.notifier);

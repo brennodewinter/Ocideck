@@ -744,6 +744,49 @@ const _dutchSourceAddFr = {
   'Procesverbetering: 8D-project': 'Amélioration des processus : projet 8D',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Squelette 8D pour la description du problème, ses causes et son assurance.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Signalez l\'avancement d\'un système de management ISO (27001/9001/42001) : l\'état par mesure et une synthèse d\'avancement dérivée. Désactivé par défaut ; activez l\'extension pour utiliser le type de diapositive.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Module activé. L\'index ISO est disponible localement ({n} mesures réparties sur trois normes) ; uniquement les numéros et les titres courts, pas le texte de la norme.',
+  'Beheersmaatregel-status': 'État des mesures',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Seulement l\'index des clauses 4–10 (28 sous-clauses + titres courts). L\'ISO 9001 n\'a pas d\'Annex A. Le texte de la norme n\'est PAS inclus.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Seulement l\'index de l\'Annex A (38 identifiants de mesure + titres courts) et les neuf en-têtes d\'objectifs A.2–A.10. Le texte de la norme n\'est PAS inclus.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Seulement l\'index de l\'Annex A (93 identifiants de mesure + titres courts) et les quatre en-têtes thématiques. Le texte de la norme n\'est PAS inclus.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'L\'état de mise en œuvre par mesure d\'une norme ISO (27001/9001/42001). Chargez les mesures d\'une norme et renseignez l\'état, le responsable et la preuve.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Copyright ISO — index comme référence factuelle, texte de la norme non inclus',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Crée ou actualise une diapositive de synthèse avec l\'avancement par section (dérivé de toutes les diapositives de mesures).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Ajoute les mesures d\'une norme ISO (index uniquement ; identifiants nouveaux uniquement).',
+  'Alle secties': 'Toutes les sections',
+  'Beheersmaatregel': 'Mesure',
+  'Beheersmaatregel toevoegen': 'Ajouter une mesure',
+  'Beheersmaatregelen laden…': 'Charger les mesures…',
+  'Genereer voortgangsoverzicht': 'Générer la vue d\'ensemble de l\'avancement',
+  'Geïmplementeerd': 'Mise en œuvre',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisationnel (A.5)',
+  'Kies een norm': 'Choisir une norme',
+  'Managementsysteem': 'Système de management',
+  'Niet gescoord': 'Non évalué',
+  'Niveau': 'Niveau',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Aucune diapositive de mesures à résumer pour l\'instant',
+  'Sectie': 'Section',
+  'Streefdatum': 'Échéance',
+  'Van toepassing': 'Applicable',
+  'Voortgang': 'Avancement',
+  'Voortgang managementsysteem': 'Avancement du système de management',
+  'Voortgangsoverzicht bijgewerkt':
+      'Vue d\'ensemble de l\'avancement mise à jour',
+  'Welk deel?': 'Quelle partie ?',
+  'beheersmaatregelen geladen': 'mesures chargées',
+  'geïmplementeerd': 'mis en œuvre',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Module activé. Le moteur de calcul, les mises en page de diapositives et les modèles sont disponibles localement ({n} facteurs de carte de contrôle).',
   'SIPOC-procesoverzicht': 'Vue d’ensemble du processus SIPOC',

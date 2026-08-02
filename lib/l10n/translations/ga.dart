@@ -1818,6 +1818,49 @@ const _dutchSourceAddGa = <String, String>{
   'Procesverbetering: 8D-project': 'Feabhsú próisis: tionscadal 8D',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Creat 8D le haghaidh cur síos ar fhadhb, cúiseanna agus daingnithe.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Tuairiscigh dul chun cinn córais bhainistíochta ISO (27001/9001/42001): stádas de réir gach rialaithe agus forbhreathnú dul chun cinn díorthaithe. Múchta de réir réamhshocraithe; cuir an breiseán ar siúl chun an cineál sleamhnáin a úsáid.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modúl ar siúl. Tá an t-innéacs ISO ar fáil go logánta ({n} rialú thar trí chaighdeán); na huimhreacha agus na teidil ghearra amháin, ní téacs an chaighdeáin.',
+  'Beheersmaatregel-status': 'Stádas na rialuithe',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Innéacs na gclásal 4–10 amháin (28 fo-chlásal + teidil ghearra). Níl Annex A ag ISO 9001. NÍL téacs an chaighdeáin ceangailte.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Innéacs Annex A amháin (38 aitheantóir rialaithe + teidil ghearra) agus na naoi gceannteideal cuspóra A.2–A.10. NÍL téacs an chaighdeáin ceangailte.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Innéacs Annex A amháin (93 aitheantóir rialaithe + teidil ghearra) agus na ceithre cheannteideal téama. NÍL téacs an chaighdeáin ceangailte.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Stádas cur i bhfeidhm de réir gach rialaithe de chaighdeán ISO (27001/9001/42001). Luchtaigh na rialuithe ó chaighdeán agus líon isteach stádas, úinéir agus fianaise.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Cóipcheart ISO — innéacs mar thagairt fhíorasach, téacs an chaighdeáin gan chur san áireamh',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Cruthaíonn nó athnuann sé sleamhnán forbhreathnaithe leis an dul chun cinn de réir rannáin (díorthaithe ó gach sleamhnán rialaithe).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Cuireann sé rialuithe caighdeáin ISO leis (an t-innéacs amháin; aitheantóirí nua amháin).',
+  'Alle secties': 'Gach rannán',
+  'Beheersmaatregel': 'Rialú',
+  'Beheersmaatregel toevoegen': 'Cuir rialú leis',
+  'Beheersmaatregelen laden…': 'Luchtaigh rialuithe…',
+  'Genereer voortgangsoverzicht': 'Gin forbhreathnú ar an dul chun cinn',
+  'Geïmplementeerd': 'Curtha i bhfeidhm',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Eagraíochtúil (A.5)',
+  'Kies een norm': 'Roghnaigh caighdeán',
+  'Managementsysteem': 'Córas bainistíochta',
+  'Niet gescoord': 'Gan rátáil',
+  'Niveau': 'Leibhéal',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Níl aon sleamhnán rialaithe le hachoimriú go fóill',
+  'Sectie': 'Rannán',
+  'Streefdatum': 'Spriocdháta',
+  'Van toepassing': 'Infheidhme',
+  'Voortgang': 'Dul chun cinn',
+  'Voortgang managementsysteem': 'Dul chun cinn an chórais bainistíochta',
+  'Voortgangsoverzicht bijgewerkt':
+      'Nuashonraíodh an forbhreathnú ar an dul chun cinn',
+  'Welk deel?': 'Cén chuid?',
+  'beheersmaatregelen geladen': 'rialú luchtaithe',
+  'geïmplementeerd': 'curtha i bhfeidhm',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modúl ar siúl. Tá croí ríomhaireachta, leaganacha amach sleamhnán agus teimpléid ar fáil go háitiúil ({n} fachtóir cárta rialaithe).',
   'SIPOC-procesoverzicht': 'Forléargas ar phróiseas SIPOC',

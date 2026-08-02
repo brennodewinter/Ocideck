@@ -16,6 +16,27 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- **Managementsysteem-rapportage (ISO 27001 / 9001 / 42001)** — een nieuwe manier
+  om de **voortgang van je eigen managementsysteem** te rapporteren. Voeg een
+  dia **Beheersmaatregel-status** toe (tabblad *Managementsysteem* in *Dia
+  toevoegen*; deze werkvorm staat altijd klaar, zonder aparte schakelaar) en laad
+  met één druk de beheersmaatregelen van een norm: ISO/IEC 27001:2022 (de 93
+  Annex A-controls), ISO 9001:2015 (de clausules 4–10, geen Annex A) of ISO/IEC
+  42001:2023 (de 38 Annex A-controls). Per beheersmaatregel leg je een status
+  (*Niet gestart* / *Gepland* / *Deels* / *Geïmplementeerd* / *Niet van
+  toepassing*), een optioneel volwassenheidsniveau (0–5), een eigenaar, een
+  streefdatum, een bewijsverwijzing en een notitie vast. De voortgangsbalk en de
+  actie **Genereer voortgangsoverzicht** (een tabel-dia per sectie met totalen)
+  worden altijd **afgeleid** uit de dia's, dus ze lopen nooit uit de pas met de
+  details. Op schijf is het een gewone Markdown-tabel met taalonafhankelijke
+  Engelse statuswoorden, dus een rapport reist verliesvrij mee en opent overal.
+  Alles is offline: alleen de **index** van de normen is meegeleverd (nummer +
+  korte titel), niet de auteursrechtelijk beschermde normtekst. OciDeck
+  rapporteert voortgang; het doet geen certificerings- of conformiteitsuitspraak.
+  **Nog niet gebouwd** (bewust uitgesteld): een managementreview-sjabloon
+  (clausule 9.3), een burn-up-grafiek van de voortgang over de tijd, en de
+  periode/trend-frontmatter. Zie
+  [`docs/design/ISO_MANAGEMENTSYSTEEM.md`](docs/design/ISO_MANAGEMENTSYSTEEM.md).
 - **Procesverbetering via sjablonen** — de losse actie *Nieuw
   verbeteringsproject* op het welkomstscherm en de bijbehorende wizard zijn
   vervallen. Zet de uitbreiding aan en kies in **Nieuwe presentatie** een

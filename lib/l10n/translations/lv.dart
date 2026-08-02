@@ -1782,6 +1782,48 @@ const _dutchSourceAddLv = <String, String>{
   'Procesverbetering: 8D-project': 'Procesa uzlabošana: 8D projekts',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D skelets problēmas aprakstam, cēloņiem un pārliecībai.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Ziņojiet par ISO pārvaldības sistēmas (27001/9001/42001) progresu: statuss katrai kontrolei un atvasināts progresa pārskats. Pēc noklusējuma izslēgts; ieslēdziet paplašinājumu, lai izmantotu slaida tipu.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modulis ieslēgts. ISO indekss ir pieejams lokāli ({n} kontroles trijos standartos); tikai numuri un īsie nosaukumi, nevis standarta teksts.',
+  'Beheersmaatregel-status': 'Kontroļu statuss',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Tikai klauzulu indekss 4–10 (28 apakšklauzulas + īsi nosaukumi). ISO 9001 nav Annex A. Standarta teksts NAV iekļauts.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Tikai Annex A indekss (38 kontroļu identifikatori + īsi nosaukumi) un deviņi mērķu virsraksti A.2–A.10. Standarta teksts NAV iekļauts.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Tikai Annex A indekss (93 kontroļu identifikatori + īsi nosaukumi) un četri tēmu virsraksti. Standarta teksts NAV iekļauts.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Ieviešanas statuss katrai ISO standarta kontrolei (27001/9001/42001). Ielādējiet kontroles no standarta un aizpildiet statusu, atbildīgo un pierādījumu.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO autortiesības — indekss kā faktu atsauce, standarta teksts nav iekļauts',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Izveido vai atsvaidzina pārskata slaidu ar progresu pa sadaļām (atvasināts no visiem kontroļu slaidiem).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Pievieno ISO standarta kontroles (tikai indekss; tikai jauni identifikatori).',
+  'Alle secties': 'Visas sadaļas',
+  'Beheersmaatregel': 'Kontrole',
+  'Beheersmaatregel toevoegen': 'Pievienot kontroli',
+  'Beheersmaatregelen laden…': 'Ielādēt kontroles…',
+  'Genereer voortgangsoverzicht': 'Ģenerēt progresa pārskatu',
+  'Geïmplementeerd': 'Ieviests',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizatoriskie (A.5)',
+  'Kies een norm': 'Izvēlieties standartu',
+  'Managementsysteem': 'Pārvaldības sistēma',
+  'Niet gescoord': 'Nav novērtēts',
+  'Niveau': 'Līmenis',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Vēl nav kontroļu slaidu, ko apkopot',
+  'Sectie': 'Sadaļa',
+  'Streefdatum': 'Mērķa datums',
+  'Van toepassing': 'Piemērojams',
+  'Voortgang': 'Progress',
+  'Voortgang managementsysteem': 'Pārvaldības sistēmas progress',
+  'Voortgangsoverzicht bijgewerkt': 'Progresa pārskats atjaunināts',
+  'Welk deel?': 'Kura daļa?',
+  'beheersmaatregelen geladen': 'kontroles ielādētas',
+  'geïmplementeerd': 'ieviests',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modulis ir ieslēgts. Aprēķinu kodols, slaidu izkārtojumi un veidnes ir pieejamas lokāli ({n} kontroles diagrammas koeficienti).',
   'SIPOC-procesoverzicht': 'SIPOC procesa pārskats',

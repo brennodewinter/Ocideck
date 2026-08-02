@@ -1787,6 +1787,48 @@ const _dutchSourceAddHu = <String, String>{
   'Procesverbetering: 8D-project': 'Folyamatfejlesztés: 8D projekt',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D-s csontváz a probléma leírásához, az okokhoz és a biztosítékhoz.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Jelentse egy ISO-irányítási rendszer (27001/9001/42001) előrehaladását: intézkedésenkénti állapot és egy származtatott előrehaladási áttekintés. Alapértelmezetten kikapcsolva; kapcsolja be a bővítményt a diatípus használatához.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modul bekapcsolva. Az ISO-index helyben elérhető ({n} intézkedés három szabványban); csak a számok és a rövid címek, nem a szabvány szövege.',
+  'Beheersmaatregel-status': 'Intézkedések állapota',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Csak a 4–10. pontok indexe (28 alpont + rövid címek). Az ISO 9001-nek nincs Annex A-ja. A szabvány szövege NINCS mellékelve.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Csak az Annex A indexe (38 intézkedésazonosító + rövid címek) és a kilenc célkitűzés-fejléc A.2–A.10. A szabvány szövege NINCS mellékelve.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Csak az Annex A indexe (93 intézkedésazonosító + rövid címek) és a négy témafejléc. A szabvány szövege NINCS mellékelve.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Egy ISO-szabvány (27001/9001/42001) minden intézkedésének megvalósítási állapota. Töltsd be az intézkedéseket egy szabványból, és add meg az állapotot, a felelőst és a bizonyítékot.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO szerzői jog — index tényszerű hivatkozásként, a szabvány szövege nincs mellékelve',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Létrehoz vagy frissít egy áttekintő diát a szakaszonkénti előrehaladással (az összes intézkedésdiából származtatva).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Hozzáadja egy ISO-szabvány intézkedéseit (csak az index; csak új azonosítók).',
+  'Alle secties': 'Minden szakasz',
+  'Beheersmaatregel': 'Intézkedés',
+  'Beheersmaatregel toevoegen': 'Intézkedés hozzáadása',
+  'Beheersmaatregelen laden…': 'Intézkedések betöltése…',
+  'Genereer voortgangsoverzicht': 'Előrehaladási áttekintés létrehozása',
+  'Geïmplementeerd': 'Megvalósítva',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Szervezeti (A.5)',
+  'Kies een norm': 'Válassz szabványt',
+  'Managementsysteem': 'Irányítási rendszer',
+  'Niet gescoord': 'Nincs értékelve',
+  'Niveau': 'Szint',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Még nincsenek összefoglalható intézkedésdiák',
+  'Sectie': 'Szakasz',
+  'Streefdatum': 'Céldátum',
+  'Van toepassing': 'Alkalmazandó',
+  'Voortgang': 'Előrehaladás',
+  'Voortgang managementsysteem': 'Az irányítási rendszer előrehaladása',
+  'Voortgangsoverzicht bijgewerkt': 'Az előrehaladási áttekintés frissítve',
+  'Welk deel?': 'Melyik rész?',
+  'beheersmaatregelen geladen': 'intézkedés betöltve',
+  'geïmplementeerd': 'megvalósítva',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'A modul be van kapcsolva. A számítási mag, a diaelrendezések és a sablonok helyben elérhetők ({n} szabályozókártya-tényező).',
   'SIPOC-procesoverzicht': 'SIPOC folyamatáttekintés',

@@ -122,6 +122,7 @@ void main() {
         ModuleId.collaboration,
         ModuleId.videoCalls,
         ModuleId.assetRights,
+        ModuleId.managementsysteem,
       ]);
     });
   });

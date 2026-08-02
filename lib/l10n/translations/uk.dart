@@ -1800,6 +1800,48 @@ const _dutchSourceAddUk = <String, String>{
   'Procesverbetering: 8D-project': 'Удосконалення процесу: 8D проект',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D скелет для опису проблеми, причин і гарантії.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Повідомляйте про прогрес системи управління ISO (27001/9001/42001): стан для кожного контролю та похідний огляд прогресу. Типово вимкнено; увімкніть розширення, щоб використовувати тип слайда.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Модуль увімкнено. Індекс ISO доступний локально ({n} контролів у трьох стандартах); лише номери та короткі назви, а не текст стандарту.',
+  'Beheersmaatregel-status': 'Стан заходів',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Лише індекс пунктів 4–10 (28 підпунктів + короткі заголовки). ISO 9001 не має Annex A. Текст стандарту НЕ включено.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Лише індекс Annex A (38 ідентифікаторів контролів + короткі заголовки) та дев\'ять заголовків цілей A.2–A.10. Текст стандарту НЕ включено.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Лише індекс Annex A (93 ідентифікатори контролів + короткі заголовки) та чотири тематичні заголовки. Текст стандарту НЕ включено.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Статус впровадження для кожного контролю стандарту ISO (27001/9001/42001). Завантажте контролі зі стандарту та заповніть статус, власника й доказ.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Авторське право ISO — індекс як фактологічне джерело, текст стандарту не включено',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Створює або оновлює оглядовий слайд із прогресом за розділами (на основі всіх слайдів контролів).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Додає контролі стандарту ISO (лише індекс; лише нові ідентифікатори).',
+  'Alle secties': 'Усі розділи',
+  'Beheersmaatregel': 'Контроль',
+  'Beheersmaatregel toevoegen': 'Додати контроль',
+  'Beheersmaatregelen laden…': 'Завантажити контролі…',
+  'Genereer voortgangsoverzicht': 'Створити огляд прогресу',
+  'Geïmplementeerd': 'Впроваджено',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Організаційні (A.5)',
+  'Kies een norm': 'Виберіть стандарт',
+  'Managementsysteem': 'Система управління',
+  'Niet gescoord': 'Не оцінено',
+  'Niveau': 'Рівень',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Ще немає слайдів контролів для узагальнення',
+  'Sectie': 'Розділ',
+  'Streefdatum': 'Цільова дата',
+  'Van toepassing': 'Застосовно',
+  'Voortgang': 'Прогрес',
+  'Voortgang managementsysteem': 'Прогрес системи управління',
+  'Voortgangsoverzicht bijgewerkt': 'Огляд прогресу оновлено',
+  'Welk deel?': 'Яка частина?',
+  'beheersmaatregelen geladen': 'контролів завантажено',
+  'geïmplementeerd': 'впроваджено',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Модуль увімкнено. Обчислювальне ядро, макети слайдів і шаблони доступні локально ({n} коефіцієнтів контрольної карти).',
   'SIPOC-procesoverzicht': 'Огляд процесу SIPOC',

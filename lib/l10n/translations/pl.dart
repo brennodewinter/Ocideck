@@ -1795,6 +1795,48 @@ const _dutchSourceAddPl = <String, String>{
   'Procesverbetering: 8D-project': 'Doskonalenie procesu: projekt 8D',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Szkielet 8D do opisu problemu, przyczyn i pewności.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Raportuj postęp systemu zarządzania ISO (27001/9001/42001): status dla każdego zabezpieczenia oraz wyprowadzony przegląd postępu. Domyślnie wyłączone; włącz rozszerzenie, aby użyć typu slajdu.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Moduł włączony. Indeks ISO jest dostępny lokalnie ({n} zabezpieczeń w trzech normach); tylko numery i krótkie tytuły, bez treści normy.',
+  'Beheersmaatregel-status': 'Status zabezpieczeń',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Tylko indeks klauzul 4–10 (28 podklauzul + krótkie tytuły). ISO 9001 nie ma Annex A. Tekst normy NIE jest dołączony.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Tylko indeks Annex A (38 identyfikatorów zabezpieczeń + krótkie tytuły) i dziewięć nagłówków celów A.2–A.10. Tekst normy NIE jest dołączony.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Tylko indeks Annex A (93 identyfikatory zabezpieczeń + krótkie tytuły) i cztery nagłówki tematyczne. Tekst normy NIE jest dołączony.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Status wdrożenia dla każdego zabezpieczenia normy ISO (27001/9001/42001). Wczytaj zabezpieczenia z normy i uzupełnij status, właściciela i dowód.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Prawa autorskie ISO — indeks jako odniesienie faktograficzne, tekst normy niedołączony',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Tworzy lub odświeża slajd przeglądowy z postępem w podziale na sekcje (na podstawie wszystkich slajdów zabezpieczeń).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Dodaje zabezpieczenia normy ISO (tylko indeks; tylko nowe identyfikatory).',
+  'Alle secties': 'Wszystkie sekcje',
+  'Beheersmaatregel': 'Zabezpieczenie',
+  'Beheersmaatregel toevoegen': 'Dodaj zabezpieczenie',
+  'Beheersmaatregelen laden…': 'Wczytaj zabezpieczenia…',
+  'Genereer voortgangsoverzicht': 'Generuj przegląd postępu',
+  'Geïmplementeerd': 'Wdrożone',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizacyjne (A.5)',
+  'Kies een norm': 'Wybierz normę',
+  'Managementsysteem': 'System zarządzania',
+  'Niet gescoord': 'Nieocenione',
+  'Niveau': 'Poziom',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Brak jeszcze slajdów zabezpieczeń do podsumowania',
+  'Sectie': 'Sekcja',
+  'Streefdatum': 'Termin docelowy',
+  'Van toepassing': 'Dotyczy',
+  'Voortgang': 'Postęp',
+  'Voortgang managementsysteem': 'Postęp systemu zarządzania',
+  'Voortgangsoverzicht bijgewerkt': 'Zaktualizowano przegląd postępu',
+  'Welk deel?': 'Która część?',
+  'beheersmaatregelen geladen': 'wczytanych zabezpieczeń',
+  'geïmplementeerd': 'wdrożone',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Moduł włączony. Rdzeń obliczeniowy, układy slajdów i szablony są dostępne lokalnie ({n} współczynników karty kontrolnej).',
   'SIPOC-procesoverzicht': 'Przegląd procesu SIPOC',

@@ -135,6 +135,63 @@ locally and what is recorded here cannot drift apart:
 > only in prose here — and prose cannot be checked, which is how a catalogue goes
 > stale unnoticed.
 
+## Bundled reference data (managementsysteem module)
+
+The *Managementsysteem* module (ISO 27001 / 9001 / 42001 progress reporting,
+[`docs/design/ISO_MANAGEMENTSYSTEEM.md`](design/ISO_MANAGEMENTSYSTEEM.md))
+bundles the **index** of three ISO management-system standards — clause/control
+numbers and their short canonical titles — as `const` data.
+
+As with the Informatieveiligheid catalogs, **the data ships in every build,
+module on or off** — it is `const` data in `lib/services/`, so these terms apply
+to every copy of OciDeck, not only to users who switch the module on.
+
+Unlike the OWASP catalogs (CC-BY-SA-4.0) or CWE (MITRE terms), **ISO standards
+are copyrighted and sold** by ISO/NEN. So only the index is bundled — the same
+factual list every ISMS/QMS tool shows ("A.5.1 — Policies for information
+security"). A functional label of this kind lacks the *originality* copyright
+protects (the test is authorial creative choice, not length — even eleven words
+can be protected, HvJ-EU *Infopaq* C-5/08; a number plus a functional heading
+offers no such creative latitude). **The normative requirement text, guidance
+and notes are not bundled.** A reader who wants the requirement buys the standard.
+
+**Two ISO-specific points OWASP/CWE do not raise, stated so the record is
+complete:**
+
+- **Provenance — the public catalogue, not a purchased copy.** The Annex A
+  control list and the clause headings are published free on ISO's public
+  standards catalogue (which the `url` in the register points at). We derive the
+  index from that public list; we do **not** transcribe a bought, licence-bound
+  normative PDF, so no ISO/NEN usage contract is formed that could restrict
+  beyond copyright.
+- **Sui generis database right (Directive 96/9/EC / NL Databankenwet).** Bundling
+  the whole Annex A index is a substantial part of a collection, so the database
+  right on the *collection* is a separate question from copyright on each line.
+  It is defensible that it does not bite: under the spin-off doctrine (*British
+  Horseracing Board* C-203/02) investment in *creating* the data — writing the
+  standard — does not count toward a database right; only investment in
+  *collecting* pre-existing data does. This is noted as considered, not waved
+  away.
+
+The titles are the **English** ISO index and are deliberately not run through
+l10n; translating them to NEN's official Dutch wording would touch NEN's separate
+translation right, so it is left undone (see the guard note in
+`management_system_catalog.dart`).
+
+| Dataset | Where | Upstream | Licence / terms |
+|---|---|---|---|
+| ISO/IEC 27001 Annex A index (93 control ids + short titles, 4 themes) | `lib/services/management_system_catalog.dart` | ISO/IEC 27001:**2022** (iso.org) | **ISO copyright — index only.** Numbers + short titles as factual reference; normative text **not** bundled |
+| ISO 9001 clause index (28 sub-clauses 4–10 + short titles) | `lib/services/management_system_catalog.dart` | ISO 9001:**2015** (iso.org) | **ISO copyright — index only.** Numbers + short titles as factual reference; normative text **not** bundled |
+| ISO/IEC 42001 Annex A index (38 control ids + short titles, objectives A.2–A.10) | `lib/services/management_system_catalog.dart` | ISO/IEC 42001:**2023** (iso.org) | **ISO copyright — index only.** Numbers + short titles as factual reference; normative text **not** bundled |
+
+> The editions in this table are mirrored from
+> [`lib/services/reference_standards.dart`](../lib/services/reference_standards.dart)
+> (`iso27001BundledEdition` etc.), the single source of truth for what this build
+> bundles. `reference_standards_test.dart` fails if the two disagree. Because ISO
+> is sold and blocks automated fetches, the freshness probe (`isoEdition`) usually
+> reports *onbekend* rather than a false *actueel* — a human checks the edition on
+> iso.org when a new one is announced.
+
 ### OWASP WSTG, MASTG and MASWE — attribution and share-alike
 
 All three bundled OWASP datasets carry the same licence and the same reasoning; the

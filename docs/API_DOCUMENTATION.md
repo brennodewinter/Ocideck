@@ -60,16 +60,23 @@ Two of those fields exist **only while rendering** and never reach a saved file:
 rich-text body a copy draws. Neither is read back by the parser and neither is
 carried over by `Slide.duplicate`; see ARCHITECTURE § *Render-time pagination*.
 
-`SlideType` (29 values): `title, section, bullets, twoBullets, bulletsImage,
+`SlideType` (30 values): `title, section, bullets, twoBullets, bulletsImage,
 twoImages, image, video, quote, table, freeMarkdown, code, chart, cockpit,
 question, timeline, scorecard, assets, discoveries, finding, findingsSummary,
-checklist, scopeMatrix, signOff, matrix, canvas, tree, flow, phaseGate`.
+checklist, scopeMatrix, signOff, matrix, canvas, tree, flow, phaseGate,
+controlStatus`. *(Was 29 until 2026-08-02, when `controlStatus` was added for the
+Managementsysteem module.)*
 The informatieveiligheid (pentest-reporting) layouts run from `assets` through
 `signOff`, hidden until that module is enabled. `matrix`, `canvas`, `tree`,
 `flow` and `phaseGate`
-belong to the optional Procesverbetering module (same authoring gate). Note the
+belong to the optional Procesverbetering module (same authoring gate).
+`controlStatus` carries a per-control ISO implementation status
+(`SlideCategory.managementsysteem`); unlike the other two modules it is **not**
+behind an authoring toggle — it is always offered in a dedicated
+*Managementsysteem* tab of the add-slide picker. Note the
 Marp `_class` token stored in Markdown can differ from the enum name (e.g. the
-`split` class maps to `SlideType.bulletsImage`).
+`split` class maps to `SlideType.bulletsImage`, and `controlStatus` serialises as
+`control-status`).
 
 ### Question Model
 `lib/models/question.dart` — the payload of a `question` slide, carried as JSON in

@@ -1805,6 +1805,49 @@ const _dutchSourceAddMt = <String, String>{
   'Procesverbetering: 8D-project': 'Titjib tal-proċess: proġett 8D',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Skeletru 8D għal deskrizzjoni tal-problema, kawżi u assigurazzjoni.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Irrapporta l-progress ta\' sistema ta\' ġestjoni ISO (27001/9001/42001): l-istatus għal kull kontroll u ħarsa ġenerali tal-progress miksuba. Mitfi b\'mod awtomatiku; ixgħel l-estensjoni biex tuża t-tip ta\' slide.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modulu mixgħul. L-indiċi ISO huwa disponibbli lokalment ({n} kontrolli fi tliet standards); in-numri u t-titli qosra biss, mhux it-test tal-istandard.',
+  'Beheersmaatregel-status': 'Status tal-kontrolli',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'L-indiċi tal-klawżoli 4–10 biss (28 sottoklawżola + titli qosra). L-ISO 9001 m\'għandhiex Annex A. It-test tal-istandard MHUX inkluż.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'L-indiċi tal-Annex A biss (38 id ta\' kontroll + titli qosra) u d-disa\' intestaturi tal-objettivi A.2–A.10. It-test tal-istandard MHUX inkluż.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'L-indiċi tal-Annex A biss (93 id ta\' kontroll + titli qosra) u l-erba\' intestaturi tematiċi. It-test tal-istandard MHUX inkluż.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'L-istatus tal-implimentazzjoni għal kull kontroll ta\' standard ISO (27001/9001/42001). Għabbi l-kontrolli minn standard u imla l-istatus, is-sid u l-evidenza.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Drittijiet tal-awtur ISO — indiċi bħala referenza fattwali, test tal-istandard mhux inkluż',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Joħloq jew iġedded slide ta\' ħarsa ġenerali bil-progress skont is-sezzjoni (miksub mis-slides tal-kontrolli kollha).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Iżid il-kontrolli ta\' standard ISO (l-indiċi biss; id ġodda biss).',
+  'Alle secties': 'Is-sezzjonijiet kollha',
+  'Beheersmaatregel': 'Kontroll',
+  'Beheersmaatregel toevoegen': 'Żid kontroll',
+  'Beheersmaatregelen laden…': 'Għabbi l-kontrolli…',
+  'Genereer voortgangsoverzicht': 'Iġġenera ħarsa ġenerali tal-progress',
+  'Geïmplementeerd': 'Implimentat',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizzattivi (A.5)',
+  'Kies een norm': 'Agħżel standard',
+  'Managementsysteem': 'Sistema ta\' ġestjoni',
+  'Niet gescoord': 'Mhux ivvalutat',
+  'Niveau': 'Livell',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Għad m\'hemmx slides tal-kontrolli x\'jinġabru fil-qosor',
+  'Sectie': 'Sezzjoni',
+  'Streefdatum': 'Data mira',
+  'Van toepassing': 'Applikabbli',
+  'Voortgang': 'Progress',
+  'Voortgang managementsysteem': 'Progress tas-sistema ta\' ġestjoni',
+  'Voortgangsoverzicht bijgewerkt':
+      'Il-ħarsa ġenerali tal-progress ġiet aġġornata',
+  'Welk deel?': 'Liema parti?',
+  'beheersmaatregelen geladen': 'kontrolli mgħobbija',
+  'geïmplementeerd': 'implimentat',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Il-modulu attiv. Il-qalba tal-kalkolu, it-taqsimiet ta’ slides u l-mudelli huma disponibbli lokalment ({n} fatturi ta’ chart ta’ kontroll).',
   'SIPOC-procesoverzicht': 'Ħarsa ġenerali lejn il-proċess SIPOC',

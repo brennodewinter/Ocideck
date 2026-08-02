@@ -19,6 +19,7 @@ import '../services/document_integrity.dart';
 import '../services/rich_text_chapters.dart';
 import '../services/finding_context_score.dart';
 import '../services/finding_numbering.dart';
+import '../services/management_system_progress.dart';
 import '../services/scope_coverage.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
@@ -36,6 +37,7 @@ part 'deck_provider_markdown.dart';
 part 'deck_provider_ai.dart';
 part 'deck_provider_miauw.dart';
 part 'deck_provider_checklist.dart';
+part 'deck_provider_managementsysteem.dart';
 part 'deck_provider_auto.dart';
 part 'deck_provider_slides.dart';
 
