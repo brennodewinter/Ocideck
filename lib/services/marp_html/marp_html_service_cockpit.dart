@@ -521,24 +521,53 @@ void _headingSvg(
       '<path d="M$cx,${cy - 10} L$tipX,$tipY L$cx,${cy + 10} Z" '
       'fill="${p.needle}"/>',
     )
-    ..write('<circle cx="$cx" cy="$cy" r="7" fill="${p.ink}"/>')
+    ..write('<circle cx="$cx" cy="$cy" r="7" fill="${p.ink}"/>');
+  // De uitleesregels vormen een rechterkolom naast de roos: rechts uitgelijnd
+  // op een vaste binnenmarge en in breedte begrensd tot de vrije ruimte ernaast,
+  // zodat een lange (gelokaliseerde) markerregel binnen de kaart blijft in
+  // plaats van links op de roos of rechts over het buurinstrument te lopen.
+  // Dezelfde begrenzing als de preview (#1110); de export kan tekst niet meten,
+  // dus schat `_ellipsizeToWidth` de glyphbreedte i.p.v. echte tekstmetriek.
+  // In de authentieke stand tekent de kaart een grotere bezel (`gaugeR + 8`,
+  // straal min(w,h)·.36) om de roos; de vrije kolom moet die bezel ontwijken,
+  // niet alleen de kleinere roos, anders lopen de regels over de bezelrand.
+  final authentic = scheme.visualStyle == CockpitVisualStyle.authentic;
+  final clearR = authentic ? math.min(w, h) * .36 + 12 : r;
+  final readoutRight = x + w * .965;
+  final readoutMaxWidth = readoutRight - (cx + clearR + w * .02);
+  b
     ..write(
-      '<text x="${x + w * .78}" y="${y + h * .46}" text-anchor="middle" '
+      '<text x="$readoutRight" y="${y + h * .46}" text-anchor="end" '
       'font-size="15" font-weight="800" fill="${p.ink}">'
       'ACT ${_esc(_headingNum(meter.value))}°</text>',
     )
     ..write(
-      '<text x="${x + w * .78}" y="${y + h * .61}" text-anchor="middle" '
+      '<text x="$readoutRight" y="${y + h * .61}" text-anchor="end" '
       'font-size="12" font-weight="700" fill="${p.inkMuted}">'
       'TGT ${_esc(_headingNum(meter.heading))}°</text>',
     );
   if (meter.markerLabel.isNotEmpty) {
     b.write(
-      '<text x="${x + w * .78}" y="${y + h * .73}" text-anchor="middle" '
+      '<text x="$readoutRight" y="${y + h * .73}" text-anchor="end" '
       'font-size="11" font-weight="600" fill="${p.inkMuted}">'
-      '${_esc(meter.markerLabel)}</text>',
+      '${_esc(_ellipsizeToWidth(meter.markerLabel, readoutMaxWidth, 11))}</text>',
     );
   }
+}
+
+/// Kapt [text] af tot wat er bij lettergrootte [fontSize] in [maxWidth] past en
+/// zet er een ellipsis achter. De SVG-export kan tekst niet meten of laten
+/// aflopen zoals de preview met echte tekstmetriek doet (`cockpitHeadingReadouts`),
+/// dus schatten we de glyphbreedte conservatief op 0,6·em. Zo blijft een lange
+/// kompas-markerregel binnen de wijzerplaat i.p.v. over het buurinstrument te
+/// lopen (#1110). Snijdt op code-punten zodat een teken niet halverwege breekt.
+String _ellipsizeToWidth(String text, double maxWidth, double fontSize) {
+  if (text.isEmpty || maxWidth <= 0) return '';
+  final maxChars = (maxWidth / (fontSize * 0.6)).floor();
+  final runes = text.runes.toList();
+  if (runes.length <= maxChars) return text;
+  if (maxChars <= 1) return '…';
+  return '${String.fromCharCodes(runes.take(maxChars - 1))}…';
 }
 
 String _headingNum(double value) => _num(value).padLeft(3, '0');

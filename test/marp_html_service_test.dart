@@ -421,6 +421,43 @@ void main() {}
     expect(html, contains('class="cockpit-svg authentic"'));
   });
 
+  test('cockpit heading readouts stay inside the card in export (#1110)', () {
+    // Een lange gelokaliseerde markerregel liep in de export ongeclipt over het
+    // buurinstrument (center-anchored, geen breedtegrens). Nu rechts uitgelijnd
+    // en afgekapt met een ellipsis binnen de vrije kolom. Getoetst in de
+    // 3-koloms rasterindeling (zes meters) waar de kaart smal is — precies de
+    // situatie uit het issue, waar één brede kaart de afkapping zou verbergen.
+    const longMarker = 'Kursabweichungen im Steigflug über dem Fjord';
+    final block = CockpitSpec(
+      meters: const [
+        CockpitMeterSpec(label: 'Capacity', value: 78),
+        CockpitMeterSpec(
+          type: CockpitMeterType.heading,
+          label: 'Findings trend',
+          value: 187,
+          heading: 90,
+          markerLabel: longMarker,
+        ),
+        CockpitMeterSpec(label: 'Signal', value: 92),
+        CockpitMeterSpec(label: 'Quality', value: 64),
+        CockpitMeterSpec(label: 'Coverage', value: 41),
+        CockpitMeterSpec(label: 'Backlog', value: 12),
+      ],
+    ).toBlock();
+    final slide = '```cockpit\n$block\n```';
+
+    final html = MarpHtmlService.renderCockpitBlocks(slide);
+
+    // De volledige lange marker staat er niet meer in; hij is afgekapt.
+    expect(html, isNot(contains(longMarker)));
+    expect(html, contains('…'));
+    // Rechts uitgelijnd i.p.v. het oude center-anchored op .78·breedte.
+    expect(html, contains('text-anchor="end"'));
+    // De korte readouts blijven voluit leesbaar.
+    expect(html, contains('ACT 187°'));
+    expect(html, contains('TGT 090°'));
+  });
+
   test('cockpit SVG keeps the classic visual style available', () {
     final block = const CockpitSpec(
       meters: [CockpitMeterSpec(label: 'Classic meter')],

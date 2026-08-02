@@ -279,6 +279,23 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- Cockpit/kompas: de drie uitleesregels (ACT/TGT/marker) van het
+  kompas-instrument liepen buiten de wijzerplaat — links botsten ze op de
+  kompasroos, rechts staken langere of gelokaliseerde regels voorbij de bezel
+  het buurinstrument in. De regels waren op een vaste x-fractie *gecentreerd*
+  geschilderd, zonder breedtebegrenzing. De plaatsing volgt nu de vorm van het
+  instrument, per visuele stijl: **klassiek** (rechthoekige kaart) krijgt een
+  rechts uitgelijnde kolom naast de roos; **authentiek** (een ronde bezel die de
+  cel vult, waar géén vrije kolom naast past) krijgt een uitleesvenster laag op
+  de wijzerplaat, binnen de face-cirkel, dat de streepjes eronder afdekt. In
+  beide gevallen wordt de regelbreedte begrensd zodat een lange (gelokaliseerde)
+  markerregel met een ellipsis binnen de plaat blijft in plaats van eroverheen te
+  vallen. Een geometrietest (`cockpit_heading_readouts_test.dart`) bewijst per
+  stijl de begrenzing voor meerdere celverhoudingen en de breedste string.
+  Dezelfde fout zat in de **HTML-export** (`marp_html_service_cockpit.dart`),
+  waar de SVG-tekst zelfs ongeclipt over het buurinstrument liep; daar staan de
+  regels nu rechts uitgelijnd, ontwijken ze de authentieke bezel en wordt een te
+  lange markerregel afgekapt (#1110).
 - Privacy/UI: de privacy-badge op de dia-thumbnails zei bij aanwijzen altijd
   "Persoonsgegevens geaccepteerd", ook op een dia die was ingesteld op *weglaten*
   of *accepteren + waarschuwen*. De grijze badge dekt namelijk drie standen af,

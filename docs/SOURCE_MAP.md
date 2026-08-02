@@ -1247,7 +1247,14 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
   preserves the earlier card painter.
 - `cockpit_painter_support.dart` — Material details shared by the authentic
   instrument painter (panel/bezel, screws, glass, lamps, hubs and the sweep
-  functions), split out to keep the geometry file below its size ceiling.
+  functions), split out to keep the geometry file below its size ceiling. Also
+  holds the compass read-out layout (`cockpitHeadingDial`/`cockpitHeadingReadouts`,
+  `_drawReadoutWindow`): the ACT/TGT/marker lines are width-capped per visual
+  style — a right-hand column beside the rose in classic, an in-face read-out
+  window low on the dial in authentic (where the round bezel leaves no free
+  column) — so a long localized marker ellipsizes instead of spilling over the
+  rose or the bezel (#1110); the HTML export mirrors this in
+  `marp_html_service_cockpit.dart`.
 - `code_preview.dart` — Syntax-highlighted code slides with fit.
 - `media_previews.dart` — Shared audio/video playback lifecycle (`_MediaPlaybackHost`) + remote-media SSRF gate.
 - `media_previews_image.dart` — Image rendering helpers, captions, and the placeholders. `ImagePlaceholderReason` keeps "no image chosen yet" visually distinct from "file missing", "outside the deck", "gone after reload", and `redacted` — the last one paints a fixed-black redaction block rather than the grey placeholder, and deliberately does not follow the slate palette (which inverts in dark mode). The shared blocked-online-media placeholder names *why* it is not playing via `remoteBlockedReasonFor` (`RemoteBlockedReason.web`/`settingOff`/`urlRejected`) and, for `settingOff`, shows an "enable in settings" button — but only when the editor preview supplied `onEnableOnlineMedia` through `_SlideLinkScope`; presenter, rail, export and play-only leave it null (#852).
