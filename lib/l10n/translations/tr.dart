@@ -2755,6 +2755,18 @@ const _dutchSourceAddTr = <String, String>{
       'Tedarikçiler, girdiler, ana adımlar, çıktılar ve müşteriler aracılığıyla bir sürecin kapsamını ve bağımlılıklarını belirleyin.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Süreç iyileştirme araçları (SIPOC, DMAIC, Kaizen ve A3). Varsayılan olarak kapalıdır; ilgili şablonları ve slayt düzenlerini kullanmak için uzantıyı etkinleştirin.',
+  'Videovergaderingen': 'Görüntülü toplantılar',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Görüntülü toplantılara katıl ve OciDeck\'ten kendi arayüzüyle sun: katılımcılar başka bir uygulamanın penceresinde değil, slaydının yanında. Bring-your-own-server (Jitsi veya Matrix); OciDeck hiçbir şey barındırmaz ve konuşma verilerini AI\'dan uzak tutar. Bir toplantı hizmetine bağlantı, ileriki bir sürümde gelecek.',
+  'Videovergadering': 'Görüntülü toplantı',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Henüz etkin bir toplantı yok. Bir toplantı hizmetine bağlanma özelliği ileriki bir sürümde eklenecek.',
+  'Dempen opheffen': 'Sesi aç',
+  'Dempen': 'Sesi kapat',
+  'Camera aan': 'Kamerayı aç',
+  'Camera uit': 'Kamerayı kapat',
+  'Scherm delen': 'Ekranı paylaş',
+  'Vergadering verlaten': 'Toplantıdan ayrıl',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Görsel kitaplığı çok büyük; yalnızca en yeni görseller gösteriliyor.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

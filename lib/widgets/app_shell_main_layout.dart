@@ -192,6 +192,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                   ),
                   const Expanded(child: EditorPanel()),
                   ...collabChatRail(ref),
+                  ...callRail(ref),
                 ],
               );
               // Banners stack above the workspace: the collab verification

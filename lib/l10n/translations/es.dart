@@ -734,6 +734,18 @@ const _dutchSourceAddEs = {
       'Defina el alcance y las dependencias de un proceso mediante proveedores, entradas, pasos principales, salidas y clientes.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Herramientas para la mejora de procesos (SIPOC, DMAIC, Kaizen y A3). Desactivadas de forma predeterminada; active la extensión para usar las plantillas y los diseños de diapositivas relacionados.',
+  'Videovergaderingen': 'Videoconferencias',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Únete a videoconferencias y presenta desde OciDeck con una interfaz propia: los participantes junto a tu diapositiva, no en la ventana de otra aplicación. Bring-your-own-server (Jitsi o Matrix); OciDeck no aloja nada y mantiene los datos de la conversación fuera de la IA. La conexión con un servicio de reuniones llegará en una versión futura.',
+  'Videovergadering': 'Videoconferencia',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Aún no hay ninguna reunión activa. La conexión con un servicio de reuniones se añadirá en una versión futura.',
+  'Dempen opheffen': 'Reactivar audio',
+  'Dempen': 'Silenciar',
+  'Camera aan': 'Activar cámara',
+  'Camera uit': 'Desactivar cámara',
+  'Scherm delen': 'Compartir pantalla',
+  'Vergadering verlaten': 'Salir de la reunión',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'La biblioteca de imágenes es demasiado grande; solo se muestran las imágenes más recientes.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

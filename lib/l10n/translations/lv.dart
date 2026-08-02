@@ -1777,6 +1777,18 @@ const _dutchSourceAddLv = <String, String>{
       'Nosakiet procesa tvērumu un atkarības, izmantojot piegādātājus, ievaddatus, galvenos soļus, rezultātus un klientus.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Rīki procesu uzlabošanai (SIPOC, DMAIC, Kaizen un A3). Pēc noklusējuma izslēgti; iespējojiet paplašinājumu, lai izmantotu saistītās veidnes un slaidu izkārtojumus.',
+  'Videovergaderingen': 'Videosanāksmes',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Pievienojieties videosanāksmēm un prezentējiet no OciDeck ar savu saskarni: dalībnieki blakus jūsu slaidam, nevis citas lietotnes logā. Bring-your-own-server (Jitsi vai Matrix); OciDeck neko nemitina un sarunu datus tur prom no MI. Savienojums ar sanāksmju pakalpojumu tiks pievienots nākamajā versijā.',
+  'Videovergadering': 'Videosanāksme',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Vēl nav aktīvas sanāksmes. Savienojums ar sanāksmju pakalpojumu tiks pievienots nākamajā versijā.',
+  'Dempen opheffen': 'Ieslēgt skaņu',
+  'Dempen': 'Izslēgt skaņu',
+  'Camera aan': 'Ieslēgt kameru',
+  'Camera uit': 'Izslēgt kameru',
+  'Scherm delen': 'Kopīgot ekrānu',
+  'Vergadering verlaten': 'Pamest sanāksmi',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Attēlu bibliotēka ir pārāk liela; tiek rādīti tikai jaunākie attēli.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

@@ -737,6 +737,18 @@ const _dutchSourceAddDe = {
       'Bestimmen Sie Umfang und Abhängigkeiten eines Prozesses anhand von Lieferanten, Eingaben, Hauptschritten, Ausgaben und Kunden.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Werkzeuge zur Prozessverbesserung (SIPOC, DMAIC, Kaizen und A3). Standardmäßig aus; aktivieren Sie die Erweiterung, um die zugehörigen Vorlagen und Folienlayouts zu verwenden.',
+  'Videovergaderingen': 'Videokonferenzen',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Nehmen Sie an Videokonferenzen teil und präsentieren Sie aus OciDeck mit einer eigenen Oberfläche: die Teilnehmer neben Ihrer Folie, nicht im Fenster einer anderen App. Bring-your-own-server (Jitsi oder Matrix); OciDeck hostet nichts und hält die Gesprächsdaten von KI fern. Die Anbindung an einen Besprechungsdienst folgt in einer künftigen Version.',
+  'Videovergadering': 'Videokonferenz',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Noch keine aktive Besprechung. Die Anbindung an einen Besprechungsdienst wird in einer künftigen Version ergänzt.',
+  'Dempen opheffen': 'Stummschaltung aufheben',
+  'Dempen': 'Stummschalten',
+  'Camera aan': 'Kamera an',
+  'Camera uit': 'Kamera aus',
+  'Scherm delen': 'Bildschirm teilen',
+  'Vergadering verlaten': 'Besprechung verlassen',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Die Bildbibliothek ist zu groß; es werden nur die neuesten Bilder angezeigt.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

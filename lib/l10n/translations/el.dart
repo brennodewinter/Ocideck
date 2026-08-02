@@ -1805,6 +1805,18 @@ const _dutchSourceAddEl = <String, String>{
       'Καθορίστε το εύρος και τις εξαρτήσεις μιας διαδικασίας μέσω προμηθευτών, εισροών, κύριων βημάτων, εκροών και πελατών.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Εργαλεία για βελτίωση διαδικασιών (SIPOC, DMAIC, Kaizen και A3). Απενεργοποιημένα από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τα σχετικά πρότυπα και τις διατάξεις διαφανειών.',
+  'Videovergaderingen': 'Βιντεοσυσκέψεις',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Συμμετέχετε σε βιντεοσυσκέψεις και παρουσιάζετε από το OciDeck με δικό του περιβάλλον: οι συμμετέχοντες δίπλα στη διαφάνειά σας, όχι στο παράθυρο μιας άλλης εφαρμογής. Bring-your-own-server (Jitsi ή Matrix)· το OciDeck δεν φιλοξενεί τίποτα και κρατά τα δεδομένα της συνομιλίας μακριά από την AI. Η σύνδεση με μια υπηρεσία συσκέψεων θα ακολουθήσει σε μελλοντική έκδοση.',
+  'Videovergadering': 'Βιντεοσύσκεψη',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Δεν υπάρχει ακόμη ενεργή σύσκεψη. Η σύνδεση με μια υπηρεσία συσκέψεων θα προστεθεί σε μελλοντική έκδοση.',
+  'Dempen opheffen': 'Κατάργηση σίγασης',
+  'Dempen': 'Σίγαση',
+  'Camera aan': 'Ενεργοποίηση κάμερας',
+  'Camera uit': 'Απενεργοποίηση κάμερας',
+  'Scherm delen': 'Κοινή χρήση οθόνης',
+  'Vergadering verlaten': 'Αποχώρηση από τη σύσκεψη',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Η βιβλιοθήκη εικόνων είναι πολύ μεγάλη· εμφανίζονται μόνο οι πιο πρόσφατες εικόνες.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

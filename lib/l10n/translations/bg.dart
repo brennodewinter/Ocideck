@@ -1800,6 +1800,18 @@ const _dutchSourceAddBg = <String, String>{
       'Определете обхвата и зависимостите на процеса чрез доставчици, входни данни, основни стъпки, изходи и клиенти.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Инструменти за подобряване на процесите (SIPOC, DMAIC, Kaizen и A3). Изключени по подразбиране; включете разширението, за да използвате свързаните шаблони и оформления на слайдове.',
+  'Videovergaderingen': 'Видеосрещи',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Присъединявайте се към видеосрещи и презентирайте от OciDeck със собствен интерфейс: участниците до вашия слайд, а не в прозореца на друго приложение. Bring-your-own-server (Jitsi или Matrix); OciDeck не хоства нищо и държи данните от разговорите далеч от AI. Свързването с услуга за срещи ще бъде добавено в бъдеща версия.',
+  'Videovergadering': 'Видеосреща',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Все още няма активна среща. Свързването с услуга за срещи ще бъде добавено в бъдеща версия.',
+  'Dempen opheffen': 'Включи звука',
+  'Dempen': 'Изключи звука',
+  'Camera aan': 'Включи камерата',
+  'Camera uit': 'Изключи камерата',
+  'Scherm delen': 'Споделяне на екрана',
+  'Vergadering verlaten': 'Напускане на срещата',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Библиотеката с изображения е твърде голяма; показват се само най-новите изображения.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

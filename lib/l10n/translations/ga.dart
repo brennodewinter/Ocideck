@@ -1813,6 +1813,18 @@ const _dutchSourceAddGa = <String, String>{
       'Sainigh raon feidhme agus spleáchais próisis trí sholáthraithe, ionchuir, príomhchéimeanna, aschuir agus custaiméirí.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Uirlisí le haghaidh feabhsú próiseas (SIPOC, DMAIC, Kaizen agus A3). Múchta de réir réamhshocraithe; cumasaigh an breiseán chun na teimpléid agus leaganacha amach sleamhnán gaolmhara a úsáid.',
+  'Videovergaderingen': 'Físchruinnithe',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Glac páirt i gcruinnithe físe agus déan cur i láthair ó OciDeck le comhéadan dá chuid féin: na rannpháirtithe in aice le do sleamhnán, ní i bhfuinneog feidhmchláir eile. Bring-your-own-server (Jitsi nó Matrix); ní óstálann OciDeck aon rud agus coinníonn sé sonraí an chomhrá amach ón IS. Leanfaidh an nasc le seirbhís chruinnithe i leagan sa todhchaí.',
+  'Videovergadering': 'Físchruinniú',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Níl aon chruinniú gníomhach ann fós. Cuirfear an nasc le seirbhís chruinnithe leis i leagan sa todhchaí.',
+  'Dempen opheffen': 'Dí-bhalbhaigh',
+  'Dempen': 'Balbhaigh',
+  'Camera aan': 'Ceamara ar siúl',
+  'Camera uit': 'Ceamara as',
+  'Scherm delen': 'Comhroinn an scáileán',
+  'Vergadering verlaten': 'Fág an cruinniú',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Tá an leabharlann íomhánna rómhór; ní thaispeántar ach na híomhánna is nuaí.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

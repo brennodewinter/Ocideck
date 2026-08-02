@@ -1794,6 +1794,18 @@ const _dutchSourceAddLa = <String, String>{
       'Ambitum et necessitudines processus per praebitores, initia, gradus praecipuos, exitus et clientes constitue.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Instrumenta ad emendationem processuum (SIPOC, DMAIC, Kaizen et A3). Ex praedefinito inactiva; extensionem activa ut exemplaribus et dispositionibus diapositivarum adiunctis utaris.',
+  'Videovergaderingen': 'Conventus visifici',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Conventibus visificis interesse potes et ex OciDeck interficie propria referre: participes iuxta paginam tuam, non in fenestra alterius programmatis. Bring-your-own-server (Jitsi vel Matrix); OciDeck nihil hospitatur et data colloquii extra IA servat. Coniunctio ad servitium conventuum in versione posteriore sequetur.',
+  'Videovergadering': 'Conventus visificus',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Nullus conventus adhuc actuosus. Coniunctio ad servitium conventuum in versione posteriore addetur.',
+  'Dempen opheffen': 'Sonum reddere',
+  'Dempen': 'Sonum supprimere',
+  'Camera aan': 'Camera accensa',
+  'Camera uit': 'Camera exstincta',
+  'Scherm delen': 'Quadrum communicare',
+  'Vergadering verlaten': 'Conventum relinquere',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Bibliotheca imaginum nimis magna est; solae imagines recentissimae ostenduntur.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

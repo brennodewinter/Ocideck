@@ -66,6 +66,7 @@ import 'settings/openkat_integration_panel.dart';
 import 'settings/import_module_card.dart';
 import 'settings/procesverbetering_module_card.dart';
 import 'settings/asset_rights_module_card.dart';
+import 'settings/video_calls_module_card.dart';
 import 'settings/appearance_legibility.dart';
 import 'settings/git_form.dart';
 import 'settings/git_panel.dart';

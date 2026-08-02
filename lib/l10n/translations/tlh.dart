@@ -1753,6 +1753,18 @@ const _dutchSourceAddTlh = <String, String>{
       'ghu\'vam \'ej ghaytanHa\'ghachmey SIPOC Daqel: lIlwI\', \'el, wa\'DIch mIw, mej, je ghotpu\'.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'mIw DubmeH janmey (SIPOC, DMAIC, Kaizen je A3). motlh chu\'Ha\'lu\'; template slide De\' patmey je lo\'laHmeH extension chu\'.',
+  'Videovergaderingen': 'HaSta qepmey',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'HaSta qepmeyDaq yIjeS \'ej OciDeckvo\' yISoQmoH; SoQmoHwI\' Da\'armey Daghaj. HaSta cha\'wI\'pu\' Slide retlhDaq, latlh ghItlh lojmItDaq ghobe\'. Bring-your-own-server (Jitsi Matrix je); pagh polHa\' OciDeck \'ej ja\'chuqmey De\' IAvo\' Hoch chel. qep lIchwI\' rarmeH \'ay\' chu\' chellu\' pIq.',
+  'Videovergadering': 'HaSta qep',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'DaH qep vumtaHbogh tu\'lu\'be\'. qep lIchwI\' rarmeH \'ay\' chu\' chellu\' pIq.',
+  'Dempen opheffen': 'wab chu\'qa\'',
+  'Dempen': 'wab chu\'Ha\'',
+  'Camera aan': 'mIllogh chu\'',
+  'Camera uit': 'mIllogh chu\'Ha\'',
+  'Scherm delen': 'HaSta \'ang',
+  'Vergadering verlaten': 'qepvo\' yImej',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'tlhoy tIn mIllogh qul; mIllogh chu\' neH boch.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

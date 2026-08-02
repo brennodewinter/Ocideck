@@ -130,7 +130,7 @@ const Map<String, int> fileSizeBaseline = {
   // +4 (#1098): imports voor de uitbreidingspoort en het rechtenoverzicht voor
   // afbeeldingen; het gedrag zelf blijft in losse providers en widgets.
   'lib/widgets/app_shell.dart':
-      839, // +4 (#978 Blok C): imports + part 'provenance_actions'
+      840, // +4 (#978 Blok C): imports + part 'provenance_actions'; +1 (video-calls F1): call_panel import
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
   // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
   // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped
@@ -140,7 +140,7 @@ const Map<String, int> fileSizeBaseline = {
   // +4 (#977): the chat rail spread into the workspace row; its logic lives in
   // `collabChatRail` in collab_chat_panel.dart, only the spread + note remain.
   'lib/widgets/app_shell_main_layout.dart':
-      1022, // +6 (#978 Blok C): _signProvenance-delegator (zware logica in provenance_actions.dart)
+      1023, // +6 (#978 Blok C): _signProvenance-delegator (zware logica in provenance_actions.dart); +1 (video-calls F1): callRail spread
   // Procesverbetering category tab + engine types in the add-slide picker.
   'lib/widgets/dialogs/add_slide_dialog.dart': 1094,
   // chart_preview_improvement part registration + improvement ChartType switch.
@@ -181,7 +181,8 @@ const int maxClassLines = 1000;
 const Map<String, int> classSizeBaseline = {
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
-  'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState': 5973,
+  'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
+      5974, // +1 (video-calls F1): ModuleId.videoCalls switch-case
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
@@ -215,7 +216,8 @@ const Map<String, int> classSizeBaseline = {
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
   // +7 (#1098): menu- en dialoogaanroepen voor het rechtenoverzicht; de scan en
   // beoordeling leven buiten de State in providers en services.
-  'lib/widgets/app_shell.dart#_MainLayoutState': 1456,
+  'lib/widgets/app_shell.dart#_MainLayoutState':
+      1457, // +1 (video-calls F1): callRail spread
   // Bewust verhoogd van 1331 naar 1344: het app-globale Matrix-account
   // (setMatrixAccount + de keychain-getters voor het access-token) spiegelt
   // bewust de bestaande AI- en git-account-setters. Het gedrag staat in de

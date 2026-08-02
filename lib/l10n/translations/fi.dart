@@ -1778,6 +1778,18 @@ const _dutchSourceAddFi = <String, String>{
       'Määritä prosessin laajuus ja riippuvuudet toimittajien, syötteiden, päävaiheiden, tuotosten ja asiakkaiden avulla.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Työkalut prosessien parantamiseen (SIPOC, DMAIC, Kaizen ja A3). Oletusarvoisesti pois päältä; ota laajennus käyttöön käyttääksesi siihen liittyviä malleja ja diojen asetteluja.',
+  'Videovergaderingen': 'Videokokoukset',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Osallistu videokokouksiin ja esitä OciDeckistä omalla käyttöliittymällä: osallistujat diasi vieressä, eivät toisen sovelluksen ikkunassa. Bring-your-own-server (Jitsi tai Matrix); OciDeck ei isännöi mitään ja pitää keskustelutiedot poissa tekoälystä. Yhteys kokouspalveluun tulee tulevassa versiossa.',
+  'Videovergadering': 'Videokokous',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Ei aktiivista kokousta vielä. Yhteys kokouspalveluun lisätään tulevassa versiossa.',
+  'Dempen opheffen': 'Poista mykistys',
+  'Dempen': 'Mykistä',
+  'Camera aan': 'Kamera päälle',
+  'Camera uit': 'Kamera pois',
+  'Scherm delen': 'Jaa näyttö',
+  'Vergadering verlaten': 'Poistu kokouksesta',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Kuvakirjasto on liian suuri; vain uusimmat kuvat näytetään.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
