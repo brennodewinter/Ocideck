@@ -43,13 +43,14 @@ const Set<String> uncoveredBaseline = {
   // it is present on every platform, not split io/web — but shares the reason
   // those sit here: it cannot run in a headless test VM. libwebrtc needs a real
   // device (camera/mic, ICE, a live peer), so this binding is verified LIVE, not
-  // by a unit test. The discipline holds around it: the only untestable code here
-  // is `selfTest`'s libwebrtc call; the constructor and the `mediaE2ee` getter are
-  // trivial delegations to the tested pure function `mediaE2eeFor` (covered in
-  // meeting_media_core_test.dart, which reads them off a real `WebrtcMediaCore`),
-  // and no decision logic hides here — every real decision lives in
-  // `meeting_media_core.dart`. Keep this list to genuine such bindings, not a
-  // hiding place for logic that could be tested behind a fake.
+  // by a unit test. No test imports this file at all — doing so would only cover
+  // the two trivial delegations (the constructor and the `mediaE2ee` getter, which
+  // just forwards to the pure, tested `mediaE2eeFor`) while `selfTest`'s libwebrtc
+  // call stays uncovered, landing the file at ~33% and tripping the per-file floor
+  // (which does not exempt this list). So the whole file is left un-instrumented,
+  // its only real decision — the E2EE fact — is proven directly on `mediaE2eeFor`
+  // in meeting_media_core_test.dart, and no decision logic hides here. Keep this
+  // list to genuine such bindings, not a hiding place for logic testable via a fake.
   'lib/meetings/meeting_media_core_webrtc.dart',
   // NO EXECUTABLE LINES: `library_scan_limits.dart` holds only two const upper
   // bounds shared by the deck scan and the image picker (#1049) — lcov emits no
