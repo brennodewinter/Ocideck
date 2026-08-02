@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:image/image.dart' as img;
 
 import '../utils/image_limits.dart' show kMaxImageDecodeDimension;
+import '../utils/image_resize.dart';
 import 'ai_client_service.dart';
 import 'ai_request.dart';
 
@@ -39,21 +40,7 @@ Uint8List resizeImageForVision(Uint8List bytes) {
   // `data:image/jpeg` naar een derde partij gaan onder een onjuist type, en
   // zonder enige begrenzing op de omvang. Liever niets sturen.
   if (decoded == null) return Uint8List(0);
-  final longest = decoded.width >= decoded.height
-      ? decoded.width
-      : decoded.height;
-  if (longest <= kVisionMaxEdge) return img.encodeJpg(decoded, quality: 85);
-  final resized = decoded.width >= decoded.height
-      ? img.copyResize(
-          decoded,
-          width: kVisionMaxEdge,
-          interpolation: img.Interpolation.average,
-        )
-      : img.copyResize(
-          decoded,
-          height: kVisionMaxEdge,
-          interpolation: img.Interpolation.average,
-        );
+  final resized = resizeLongestEdge(decoded, kVisionMaxEdge);
   return img.encodeJpg(resized, quality: 85);
 }
 
