@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
+import 'markdown_editor_field.dart';
+import 'editor_slide_preview.dart';
 import '../../theme/app_theme.dart';
 
 class QuoteEditor extends ConsumerStatefulWidget {
@@ -58,12 +60,17 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor>
     return editorScrollList(
       nestedInScrollView: widget.nestedInScrollView,
       children: [
-        EditorField(
+        MarkdownEditorField(
           label: 'Citaat',
           controller: _quote,
           hint: 'Citaat tekst...',
+          minLines: 3,
           maxLines: 5,
           qualityField: 'quote',
+          previewBuilder: (_, markdown) => editorSlidePreview(
+            widget.slide.copyWith(quote: markdown, quoteAuthor: _author.text),
+            projectPath: widget.captionBasePath,
+          ),
         ),
         const SizedBox(height: 16),
         EditorField(

@@ -12,6 +12,8 @@ import '../../l10n/app_localizations.dart';
 import '../../models/checklist_spec.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/finding_spec.dart';
+import '../../models/improvement_y01.dart';
+import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/finding_ai_service.dart';
@@ -28,7 +30,9 @@ import '../dialogs/cvss_builder_dialog.dart';
 import '../dialogs/cwe_picker.dart';
 import '../dialogs/maswe_picker.dart';
 import '../dialogs/finding_template_picker.dart';
+import '../slides/slide_preview.dart';
 import '_editor_field.dart';
+import 'markdown_editor_field.dart';
 import 'ai_suggest_field.dart';
 import '../../platform/platform_features.dart';
 
@@ -130,6 +134,18 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
   }
 
   void _emit() {
+    final spec = _currentSpec();
+    widget.onUpdate(
+      widget.slide.copyWith(
+        customMarkdown: spec.toMarkdown(),
+        title: spec.heading,
+        findingId: _findingId.text.trim(),
+        aiAssistedFields: _aiFields.toList(),
+      ),
+    );
+  }
+
+  FindingSpec _currentSpec({String? field, String? markdown}) {
     final cweText = _cwe.text.trim();
     final cweId = int.tryParse(_reCweId.firstMatch(cweText)?.group(0) ?? '');
     final cweName = cweId == null
@@ -143,7 +159,9 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
       final id = match.group(0)!.toUpperCase();
       if (!cveIds.contains(id)) cveIds.add(id);
     }
-    final spec = FindingSpec(
+    String value(String key, String current) =>
+        field == key ? markdown ?? current : current;
+    return FindingSpec(
       heading: _heading.text.trim(),
       scopeObject: _scope.text.trim(),
       cvssVector: _cvss.text.trim(),
@@ -151,20 +169,57 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
       masweId: _reMasweId.firstMatch(_maswe.text)?.group(0) ?? '',
       cweName: cweName,
       cveIds: cveIds,
-      description: _description.text,
-      confirmation: _confirmation.text,
-      impact: _impact.text,
-      recommendation: _recommendation.text,
+      description: value('description', _description.text),
+      confirmation: value('confirmation', _confirmation.text),
+      impact: value('impact', _impact.text),
+      recommendation: value('recommendation', _recommendation.text),
       retest: _retest,
-      retestNote: _retestNote.text.trim(),
+      retestNote: value('retestNote', _retestNote.text).trim(),
       testId: _testId,
     );
-    widget.onUpdate(
-      widget.slide.copyWith(
-        customMarkdown: spec.toMarkdown(),
-        title: spec.heading,
-        findingId: _findingId.text.trim(),
-        aiAssistedFields: _aiFields.toList(),
+  }
+
+  Widget _livePreview(BuildContext context, String field, String markdown) {
+    final deck = ref.read(deckProvider).deck;
+    final settings = ref.read(settingsProvider);
+    final spec = _currentSpec(field: field, markdown: markdown);
+    final slide = widget.slide.copyWith(
+      customMarkdown: spec.toMarkdown(),
+      title: spec.heading,
+      findingId: _findingId.text.trim(),
+    );
+    return AspectRatio(
+      aspectRatio: 16 / 9,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.16),
+              blurRadius: 14,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: SlidePreviewWidget(
+          slide: slide,
+          projectPath: widget.projectPath,
+          themeProfile: deck?.themeProfile ?? const ThemeProfile(),
+          cockpitColorScheme: settings.cockpitColorScheme,
+          slideNumber: deck == null
+              ? null
+              : deck.slides.indexOf(widget.slide) + 1,
+          slideCount: deck?.slides.length,
+          scopeCia: deckScopeCiaIndex(deck?.slides ?? const []),
+          reportLanguage: deck?.language ?? '',
+          improvementY01:
+              deck?.improvementY01Metric ?? ImprovementY01Metric.empty,
+          tlp: deck?.tlp ?? TlpLevel.none,
+          organization: deck?.organization ?? '',
+          deckSignature: deck?.signature,
+          sealedAt: deck?.finalized == true ? deck!.sealAt : '',
+          showClassificationWatermark: settings.classificationWatermarkEnabled,
+          allowRemoteMedia: settings.allowRemoteMedia,
+        ),
       ),
     );
   }
@@ -429,32 +484,48 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
         _testField(context, availableTests),
         _retestField(context),
         if (_retest.isRetested)
-          EditorField(
+          MarkdownEditorField(
             label: 'Hertest-notitie',
             controller: _retestNote,
             hint: 'bijv. hertest 2026-07-20, patch toegepast',
+            minLines: 2,
+            maxLines: 4,
+            previewBuilder: (context, markdown) =>
+                _livePreview(context, 'retestNote', markdown),
           ),
-        EditorField(
+        MarkdownEditorField(
           label: 'Beschrijving',
           controller: _description,
+          minLines: 3,
           maxLines: 5,
+          previewBuilder: (context, markdown) =>
+              _livePreview(context, 'description', markdown),
         ),
         _suggest(FindingAiField.description, 'description', _description),
-        EditorField(
+        MarkdownEditorField(
           label: 'Bevestiging (reproductie)',
           controller: _confirmation,
+          minLines: 3,
           maxLines: 5,
+          previewBuilder: (context, markdown) =>
+              _livePreview(context, 'confirmation', markdown),
         ),
-        EditorField(
+        MarkdownEditorField(
           label: 'Mogelijke impact',
           controller: _impact,
+          minLines: 3,
           maxLines: 4,
+          previewBuilder: (context, markdown) =>
+              _livePreview(context, 'impact', markdown),
         ),
         _suggest(FindingAiField.impact, 'impact', _impact),
-        EditorField(
+        MarkdownEditorField(
           label: 'Aanbeveling',
           controller: _recommendation,
+          minLines: 3,
           maxLines: 4,
+          previewBuilder: (context, markdown) =>
+              _livePreview(context, 'recommendation', markdown),
         ),
         _suggest(
           FindingAiField.recommendation,

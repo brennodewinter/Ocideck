@@ -5,6 +5,8 @@ import '../../models/slide.dart';
 import '../../models/timeline.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
+import 'markdown_editor_field.dart';
+import 'editor_slide_preview.dart';
 
 /// Editor for a timeline slide: a title, a reorderable list of events (each with
 /// a marker, title and optional description) and the layout/animation options.
@@ -328,15 +330,27 @@ class _TimelineEditorState extends State<TimelineEditor> {
                     ],
                   ),
                   const SizedBox(height: 6),
-                  TextField(
+                  MarkdownEditorField(
+                    label: 'Omschrijving (optioneel)',
                     controller: row.description,
                     minLines: 1,
                     maxLines: 3,
-                    textInputAction: TextInputAction.newline,
-                    decoration: InputDecoration(
-                      labelText: l10n.d('Omschrijving (optioneel)'),
-                      isDense: true,
-                    ),
+                    previewBuilder: (_, markdown) {
+                      final events = [
+                        for (var j = 0; j < _rows.length; j++)
+                          _rows[j].toEvent().copyWith(
+                            description: j == i
+                                ? markdown
+                                : _rows[j].description.text,
+                          ),
+                      ];
+                      return editorSlidePreview(
+                        widget.slide.copyWith(
+                          title: _title.text,
+                          bullets: timelineEventsToBullets(events),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

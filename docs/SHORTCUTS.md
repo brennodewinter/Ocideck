@@ -1,6 +1,6 @@
 # OciDeck — Keyboard shortcuts
 
-> **Status:** reference, current · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** reference, current · **Status last reviewed:** 2026-08-02 · **Published by:** Stichting LibreKAT
 
 `Ctrl` is shown for Windows/Linux; use `Cmd` (⌘) on macOS.
 
@@ -65,11 +65,18 @@ on the last-applied slide fields.
 | --- | --- |
 | `Ctrl/Cmd + F` | Open the find bar |
 | `Ctrl/Cmd + H` | Open the find bar with replace |
+| `Ctrl/Cmd + B` | Make the selection bold |
+| `Ctrl/Cmd + I` | Make the selection italic |
+| `Ctrl/Cmd + K` | Insert a link around the selection |
+| `Ctrl/Cmd + Space` | Open the searchable insert and formatting commands |
+| `Tab` / `Shift + Tab` | Indent / outdent the selected source lines |
 | `Enter` / `Shift + Enter` (in find field) | Next / previous match |
 | `Esc` | Close find bar |
 
 The find bar also offers previous/next buttons, a match counter (`1 / 3`), a
-case-sensitivity toggle, **Replace** (current match), and **Replace all**.
+case-sensitivity toggle, **Replace** (current match), and **Replace all**. In the
+source field itself, Enter continues a bullet, numbered list or quote; brackets
+and parentheses pair automatically, and a third backtick opens a fenced block.
 
 ## Fullscreen presenter
 

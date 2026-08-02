@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/editors/_editor_field.dart';
+import 'package:ocideck/widgets/editors/markdown_editor_field.dart';
 import 'package:ocideck/widgets/editors/quote_editor.dart';
 
 /// Behaviour tests for the `quote` slide editor: it edits the quote and author
@@ -13,7 +14,11 @@ void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
   Finder fieldByLabel(String label) => find.descendant(
-    of: find.byWidgetPredicate((w) => w is EditorField && w.label == label),
+    of: find.byWidgetPredicate(
+      (w) =>
+          (w is EditorField && w.label == label) ||
+          (w is MarkdownEditorField && w.label == label),
+    ),
     matching: find.byType(TextField),
   );
 

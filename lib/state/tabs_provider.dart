@@ -91,6 +91,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// dus zolang het object hetzelfde is, is er niets gewijzigd en kan de tick
   /// de volledige serialisatie + schrijfbeurt overslaan.
   final Map<int, Deck> _lastAutosavedDeck = {};
+  final Map<int, String?> _lastAutosavedMarkdownDraft = {};
 
   /// Duplicaat-melding maximaal één keer per paar per sessie, anders wordt
   /// elke her-open van hetzelfde bestand een herhaalde snackbar.
@@ -188,6 +189,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   void _disposeTab(TabInfo tab) {
     _subs.remove(tab.id)?.cancel();
     _lastAutosavedDeck.remove(tab.id);
+    _lastAutosavedMarkdownDraft.remove(tab.id);
   }
 
   /// [recoveryId] hergebruikt de sleutel van een bestaande herstelkopie (zie
@@ -220,12 +222,22 @@ class TabsNotifier extends StateNotifier<TabsState> {
       if (!mounted) return;
       // Zodra een tabblad is opgeslagen (schoon), het herstelbestand wissen.
       // Schrijven gebeurt gebufferd door de periodieke autosave-tick.
-      if (!(st.isOpen && st.isDirty)) {
+      if (!(st.isOpen && (st.isDirty || _markdownDraftFor(tab) != null))) {
         _recovery.discard(key);
       }
       state = state.copyWith(tabs: List.from(state.tabs));
     });
     return tab;
+  }
+
+  /// Niet-toegepaste bron die afwijkt van het laatste geldige deck.
+  String? _markdownDraftFor(TabInfo tab) {
+    if (!tab.deckNotifier.mounted) return null;
+    final deckState = tab.deckNotifier.currentState;
+    final deck = deckState.deck;
+    if (!deckState.isOpen || deck == null) return null;
+    final editor = tab.editorNotifier.currentState;
+    return editor.hasMarkdownDraft ? editor.markdownBuffer : null;
   }
 
   /// Bewaar elk niet-opgeslagen tabblad naar zijn herstelbestand.
@@ -241,9 +253,15 @@ class TabsNotifier extends StateNotifier<TabsState> {
       // notifier dragen; die heeft niets meer te autosaven.
       if (!tab.deckNotifier.mounted) continue;
       final st = tab.deckNotifier.currentState;
-      if (st.isOpen && st.isDirty) {
+      if (st.isOpen) {
         final deck = st.deck!;
-        if (identical(_lastAutosavedDeck[tab.id], deck)) continue;
+        final editor = tab.editorNotifier.currentState;
+        final markdownDraft = _markdownDraftFor(tab);
+        if (!st.isDirty && markdownDraft == null) continue;
+        if (identical(_lastAutosavedDeck[tab.id], deck) &&
+            _lastAutosavedMarkdownDraft[tab.id] == markdownDraft) {
+          continue;
+        }
         _recovery.save(
           RecoverySnapshot(
             id: tab.recoveryId,
@@ -251,6 +269,15 @@ class TabsNotifier extends StateNotifier<TabsState> {
             filePath: st.filePath,
             label: tab.label,
             markdown: tab.deckNotifier.generateMarkdown(),
+            markdownDraft: markdownDraft,
+            markdownDraftScope: markdownDraft == null
+                ? null
+                : editor.markdownScope.name,
+            markdownDraftSlideIndex:
+                markdownDraft != null &&
+                    editor.markdownScope == MarkdownScope.slide
+                ? editor.selectedIndex
+                : null,
             userNotes: UserNotesCodec.encode(deck.slides, deck.userNotes),
             miauw: MiauwCodec.encodeDisposition(deck.miauw),
             seal: SealCodec.encode(SealRecord.of(deck)),
@@ -261,6 +288,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
           ),
         );
         _lastAutosavedDeck[tab.id] = deck;
+        _lastAutosavedMarkdownDraft[tab.id] = markdownDraft;
       }
     }
   }
@@ -320,6 +348,26 @@ class TabsNotifier extends StateNotifier<TabsState> {
       final tab = _createTab(recoveryId: snap.id);
       tab.deckNotifier.loadDeck(deck, filePath: snap.filePath);
       tab.deckNotifier.markDirty(); // herstelde inhoud is nog niet opgeslagen
+      final draft = snap.markdownDraft;
+      if (draft != null) {
+        final scope = snap.markdownDraftScope == MarkdownScope.slide.name
+            ? MarkdownScope.slide
+            : MarkdownScope.deck;
+        final slideIndex = (snap.markdownDraftSlideIndex ?? 0).clamp(
+          0,
+          deck.slides.length - 1,
+        );
+        tab.editorNotifier.select(slideIndex);
+        tab.editorNotifier.setMarkdownScope(scope);
+        final baseline = scope == MarkdownScope.slide
+            ? tab.deckNotifier.generateSlideMarkdown(slideIndex)
+            : tab.deckNotifier.generateMarkdown();
+        tab.editorNotifier.setMode(
+          EditorMode.markdown,
+          initialMarkdown: baseline,
+        );
+        tab.editorNotifier.updateMarkdown(draft);
+      }
       restored.add(tab);
     }
     if (restored.isEmpty) return unreadable;

@@ -8,6 +8,8 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/recovery_service.dart';
 import 'package:ocideck/state/tabs_provider.dart';
+import 'package:ocideck/state/editor_provider.dart';
+import 'package:ocideck/state/deck_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Records recovery calls synchronously so the periodic autosave tick can be
@@ -113,6 +115,38 @@ void main() {
 
       async.elapse(const Duration(seconds: 30));
       expect(recovery.saved, isEmpty);
+    });
+  });
+
+  test('autosave preserves unapplied Markdown separately from valid deck', () {
+    fakeAsync((async) {
+      final recovery = _RecordingRecovery();
+      final tabs = _tabs(recovery);
+      addTearDown(tabs.dispose);
+      final tab = tabs.state.current!;
+      tab.deckNotifier.loadDeck(_deck());
+      final baseline = tab.deckNotifier.generateMarkdown();
+      tab.editorNotifier.setMode(
+        EditorMode.markdown,
+        initialMarkdown: baseline,
+      );
+      tab.editorNotifier.updateMarkdown('$baseline\n```onaf');
+
+      async.elapse(const Duration(seconds: 30));
+
+      expect(recovery.saved, hasLength(1));
+      final snapshot = recovery.saved.single;
+      expect(snapshot.markdown, isNot(contains('```onaf')));
+      expect(snapshot.markdownDraft, contains('```onaf'));
+
+      final restored = _tabs(_RecordingRecovery());
+      addTearDown(restored.dispose);
+      expect(restored.restoreRecovered([snapshot]), 0);
+      final restoredEditor =
+          restored.state.current!.editorNotifier.currentState;
+      expect(restoredEditor.mode, EditorMode.markdown);
+      expect(restoredEditor.markdownBuffer, contains('```onaf'));
+      expect(restoredEditor.hasMarkdownDraft, isTrue);
     });
   });
 

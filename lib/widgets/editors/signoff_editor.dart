@@ -12,6 +12,8 @@ import '../dialogs/finalize_seal_dialog.dart';
 import '../document_signature_view.dart';
 import '../signature_draw_dialog.dart';
 import '_editor_field.dart';
+import 'markdown_editor_field.dart';
+import 'editor_slide_preview.dart';
 
 /// Editor for a `signOff` slide (PENTEST_MIAUW 1.6 / §8 A1): the report's
 /// truthful-reporting attestation. It authors the **deck-level**
@@ -203,11 +205,24 @@ class _SignOffEditorState extends ConsumerState<SignOffEditor>
         EditorField(label: 'Titel', controller: _title, hint: 'Ondertekening'),
         const SizedBox(height: 16),
         const SectionLabel('Waarheidsverklaring'),
-        EditorField(
+        MarkdownEditorField(
           label: 'Verklaring',
           controller: _statement,
           hint: 'Deze rapportage is naar waarheid opgesteld.',
+          minLines: 2,
           maxLines: 3,
+          previewBuilder: (_, markdown) => editorSlidePreview(
+            widget.slide.copyWith(title: _title.text.trim()),
+            deckSignature: DocumentSignature(
+              name: _name.text.trim(),
+              role: _role.text.trim(),
+              certification: _certification.text.trim(),
+              statement: markdown.trim(),
+              typedSignature: _typed.text.trim(),
+              imagePath: _imagePath,
+              date: _date,
+            ),
+          ),
         ),
         const SizedBox(height: 16),
         const SectionLabel('Rapporteur'),

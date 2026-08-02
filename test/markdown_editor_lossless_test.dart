@@ -77,6 +77,8 @@ void main() {
       await tester.pumpWidget(_testApp(_Host(controller: controller)));
       await tester.tap(find.text('wissel'));
       await tester.pumpAndSettle();
+      expect(find.byType(QuillEditor), findsNothing);
+      expect(find.textContaining('Bronmodus beschermt opmaak'), findsOneWidget);
       await tester.tap(find.text('wissel'));
       await tester.pumpAndSettle();
 

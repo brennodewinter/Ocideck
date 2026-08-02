@@ -54,6 +54,27 @@ void main() {
     expect(all.single.userNotes, notesJson);
   });
 
+  test('save round-trips an unapplied Markdown draft', () async {
+    await service.save(
+      RecoverySnapshot(
+        id: 'draft',
+        savedAt: DateTime(2026, 8, 2),
+        filePath: '/tmp/deck.md',
+        label: 'Met concept',
+        markdown: '# Geldige versie\n',
+        markdownDraft: '# Concept\n```onaf',
+        markdownDraftScope: 'deck',
+        markdownDraftSlideIndex: 3,
+      ),
+    );
+
+    final restored = (await service.loadAll()).single;
+    expect(restored.markdown, '# Geldige versie\n');
+    expect(restored.markdownDraft, '# Concept\n```onaf');
+    expect(restored.markdownDraftScope, 'deck');
+    expect(restored.markdownDraftSlideIndex, 3);
+  });
+
   test('save round-trips the seal payload in a snapshot', () async {
     // Juist ná het verzegelen is het deck vuil en nog niet opgeslagen — precies
     // het venster waarin de autosave toeslaat. Zonder dit veld zou herstel de

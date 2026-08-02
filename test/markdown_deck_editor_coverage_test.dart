@@ -20,6 +20,7 @@ Widget _host({
   bool Function(String)? onApply,
   VoidCallback? onExit,
   bool parseError = false,
+  ValueChanged<int>? onActiveSlideChanged,
 }) {
   return ProviderScope(
     child: MaterialApp(
@@ -39,6 +40,7 @@ Widget _host({
             parseError: parseError,
             onExitMarkdown: onExit ?? () {},
             onScopeChanged: (_) {},
+            onActiveSlideChanged: onActiveSlideChanged,
           ),
         ),
       ),
@@ -91,6 +93,8 @@ void main() {
     await tester.pump();
 
     expect(find.text('Geen syntaxproblemen gevonden'), findsOneWidget);
+    expect(find.textContaining('woorden'), findsOneWidget);
+    expect(find.textContaining('Regel 1'), findsWidgets);
   });
 
   testWidgets('cancel button leaves markdown mode without applying', (
@@ -116,6 +120,102 @@ void main() {
     expect(applied, isFalse);
   });
 
+  testWidgets('cancel protects unapplied markdown changes', (tester) async {
+    var exited = false;
+    await tester.pumpWidget(
+      _host(content: _validDeck, onExit: () => exited = true),
+    );
+
+    await tester.enterText(find.byType(TextField).last, 'gewijzigd');
+    await tester.pump();
+    expect(find.byTooltip('Niet toegepast'), findsOneWidget);
+
+    await tester.tap(find.text('Annuleren'));
+    await tester.pumpAndSettle();
+    expect(find.text('Niet-toegepaste wijzigingen'), findsOneWidget);
+    expect(exited, isFalse);
+
+    await tester.tap(find.text('Wijzigingen verwerpen'));
+    await tester.pumpAndSettle();
+    expect(exited, isTrue);
+  });
+
+  testWidgets('validates markdown automatically after typing pauses', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_host(content: _validDeck));
+
+    await tester.enterText(find.byType(TextField).last, _invalidDeck);
+    await tester.pump(const Duration(milliseconds: 400));
+
+    expect(find.byTooltip('Problemen gevonden'), findsOneWidget);
+    expect(find.byWidgetPredicate(isIssueHighlightLayer), findsOneWidget);
+  });
+
+  testWidgets('dirty status opens a source comparison', (tester) async {
+    await tester.pumpWidget(_host(content: '# Oud'));
+    await tester.enterText(find.byType(TextField).last, '# Nieuw');
+    await tester.pump();
+
+    await tester.tap(find.byTooltip('Niet toegepast'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Wijzigingen vergelijken'), findsOneWidget);
+    expect(find.text('# Oud'), findsOneWidget);
+    expect(
+      find.descendant(
+        of: find.byType(AlertDialog),
+        matching: find.text('# Nieuw'),
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('Ctrl+B wraps the current selection in bold markdown', (
+    tester,
+  ) async {
+    String? applied;
+    await tester.pumpWidget(
+      _host(
+        content: 'tekst',
+        onApply: (markdown) {
+          applied = markdown;
+          return true;
+        },
+      ),
+    );
+    final field = find.byType(TextField).last;
+    await tester.tap(field);
+    final editable = tester.widget<EditableText>(
+      find.byType(EditableText).last,
+    );
+    editable.controller.selection = const TextSelection(
+      baseOffset: 0,
+      extentOffset: 5,
+    );
+
+    await _sendControlKey(tester, LogicalKeyboardKey.keyB);
+    await tester.pump();
+    await tester.tap(find.text('Toepassen'));
+    await tester.pumpAndSettle();
+
+    expect(applied, '**tekst**');
+  });
+
+  testWidgets('Ctrl+Space opens searchable markdown commands', (tester) async {
+    await tester.pumpWidget(_host(content: 'Titel'));
+    await tester.tap(find.byType(TextField).last);
+
+    await _sendControlKey(tester, LogicalKeyboardKey.space);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Invoegen of opmaken'), findsOneWidget);
+    await tester.enterText(find.byType(TextField).last, 'tabel');
+    await tester.pump();
+    expect(find.text('Tabel'), findsOneWidget);
+    expect(find.text('Kop 1'), findsNothing);
+  });
+
   testWidgets('a parse error shows the red banner', (tester) async {
     await tester.pumpWidget(_host(content: _validDeck, parseError: true));
 
@@ -123,6 +223,28 @@ void main() {
       find.textContaining('Markdown kon niet worden verwerkt'),
       findsOneWidget,
     );
+  });
+
+  testWidgets('quick fix closes an unclosed fenced code block', (tester) async {
+    String? applied;
+    await tester.pumpWidget(
+      _host(
+        content: '# Code\n\n```dart\nvoid main() {}',
+        onApply: (markdown) {
+          applied = markdown;
+          return true;
+        },
+      ),
+    );
+
+    await tester.tap(find.text('Controleren'));
+    await tester.pump();
+    await tester.tap(find.byTooltip('Snel herstellen'));
+    await tester.pump();
+    await tester.tap(find.text('Toepassen'));
+    await tester.pumpAndSettle();
+
+    expect(applied, endsWith('```\n'));
   });
 
   testWidgets('applying invalid markdown and confirming "Toch toepassen"', (
@@ -238,6 +360,26 @@ void main() {
     expect(find.text('1 / 3'), findsOneWidget);
   });
 
+  testWidgets('moving the source cursor selects the matching slide', (
+    tester,
+  ) async {
+    int? selected;
+    const source = '# Eerste\n---\n# Tweede';
+    await tester.pumpWidget(
+      _host(content: source, onActiveSlideChanged: (index) => selected = index),
+    );
+    final editable = tester.widget<EditableText>(
+      find.byType(EditableText).last,
+    );
+
+    editable.controller.selection = TextSelection.collapsed(
+      offset: source.indexOf('# Tweede'),
+    );
+    await tester.pump();
+
+    expect(selected, 1);
+  });
+
   testWidgets('case-sensitive toggle recounts matches', (tester) async {
     await tester.pumpWidget(_host(content: 'Alpha alpha ALPHA'));
 
@@ -327,3 +469,7 @@ void main() {
     expect(find.text('Vervang alles'), findsOneWidget);
   });
 }
+
+bool isIssueHighlightLayer(Widget widget) =>
+    widget is CustomPaint &&
+    widget.painter.runtimeType.toString() == '_IssueHighlightPainter';

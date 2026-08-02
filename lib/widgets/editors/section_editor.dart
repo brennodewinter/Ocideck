@@ -4,6 +4,8 @@ import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/image_crop_dialog.dart';
 import '_editor_field.dart';
+import 'markdown_editor_field.dart';
+import 'editor_slide_preview.dart';
 import '../../theme/app_theme.dart';
 
 /// De tussentitel-editor. Draagt dezelfde achtergrondafbeelding-bediening als de
@@ -112,11 +114,16 @@ class _SectionEditorState extends ConsumerState<SectionEditor>
           maxLines: 2,
         ),
         const SizedBox(height: 16),
-        EditorField(
+        MarkdownEditorField(
           label: 'Ondertitel / toelichting',
           controller: _subtitle,
           hint: 'Optionele toelichting',
+          minLines: 2,
           maxLines: 3,
+          previewBuilder: (_, markdown) => editorSlidePreview(
+            widget.slide.copyWith(title: _title.text, subtitle: markdown),
+            projectPath: widget.captionBasePath,
+          ),
         ),
         const SizedBox(height: 20),
 

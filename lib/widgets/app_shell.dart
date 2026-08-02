@@ -101,6 +101,7 @@ import '../l10n/slide_quality_localization.dart';
 import 'dialogs/asset_usage_dialog.dart';
 import 'dialogs/asset_rights_dialog.dart';
 import 'dialogs/command_palette.dart';
+import 'editors/markdown_editor_field.dart';
 import 'dialogs/duplicate_cleanup_dialog.dart';
 import 'dialogs/management_summary_dialog.dart';
 import 'dialogs/miauw_compliance_panel.dart';

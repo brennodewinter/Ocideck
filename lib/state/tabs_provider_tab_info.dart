@@ -100,7 +100,10 @@ class TabInfo {
     return deck?.title.isNotEmpty == true ? deck!.title : _newTabLabel;
   }
 
-  bool get isDirty => deckNotifier.mounted && deckNotifier.currentState.isDirty;
+  bool get isDirty =>
+      deckNotifier.mounted &&
+      (deckNotifier.currentState.isDirty ||
+          editorNotifier.currentState.hasMarkdownDraft);
   bool get isOpen => deckNotifier.mounted && deckNotifier.currentState.isOpen;
 }
 

@@ -230,19 +230,35 @@ class EditorPanel extends ConsumerWidget {
     final scope = editor.markdownScope;
     final isSlide = scope == MarkdownScope.slide;
     final idx = editor.selectedIndex.clamp(0, deck.slides.length - 1);
+    final generated = isSlide
+        ? deckNotifier.generateSlideMarkdown(idx)
+        : deckNotifier.generateMarkdown();
     return MarkdownDeckEditor(
       // Verse instantie na undo/redo zodat de markdown opnieuw wordt geladen.
       // Bij wisselen van omvang of actieve slide blijft de widget bestaan
       // (zodat de scope-toggle vloeiend animeert) en herlaadt hij zijn inhoud
       // via didUpdateWidget op basis van de veranderde initialContent.
       key: ValueKey('md-$revision'),
-      initialContent: isSlide
-          ? deckNotifier.generateSlideMarkdown(idx)
-          : deckNotifier.generateMarkdown(),
+      // Keep an actual draft, but let a clean editor follow deck changes such
+      // as undo/redo instead of pinning the source buffer to an older snapshot.
+      initialContent: editor.hasMarkdownDraft
+          ? editor.markdownBuffer
+          : generated,
+      baselineContent: editor.hasMarkdownDraft
+          ? editor.markdownBaseline
+          : generated,
       scope: scope,
       slideNumber: idx + 1,
       slideCount: deck.slides.length,
-      onScopeChanged: editorNotifier.setMarkdownScope,
+      onScopeChanged: (nextScope) {
+        final nextMarkdown = nextScope == MarkdownScope.slide
+            ? deckNotifier.generateSlideMarkdown(idx)
+            : deckNotifier.generateMarkdown();
+        editorNotifier.loadMarkdownSource(nextMarkdown);
+        editorNotifier.setMarkdownScope(nextScope);
+      },
+      onDraftChanged: editorNotifier.updateMarkdown,
+      onActiveSlideChanged: isSlide ? null : editorNotifier.select,
       onApply: (md) {
         final ok = isSlide
             ? deckNotifier.applySlideMarkdown(idx, md)

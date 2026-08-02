@@ -16,6 +16,12 @@ class RecoverySnapshot {
   final String label;
   final String markdown;
 
+  /// Unapplied source-editor text. Kept separate from [markdown], which must
+  /// remain parseable so recovery can always reopen the last valid deck.
+  final String? markdownDraft;
+  final String? markdownDraftScope;
+  final int? markdownDraftSlideIndex;
+
   /// JSON payload from [UserNotesCodec.encode], when the deck has user notes.
   final String? userNotes;
 
@@ -48,6 +54,9 @@ class RecoverySnapshot {
     required this.filePath,
     required this.label,
     required this.markdown,
+    this.markdownDraft,
+    this.markdownDraftScope,
+    this.markdownDraftSlideIndex,
     this.userNotes,
     this.miauw,
     this.seal,
@@ -60,6 +69,10 @@ class RecoverySnapshot {
     'filePath': filePath,
     'label': label,
     'markdown': markdown,
+    if (markdownDraft != null) 'markdownDraft': markdownDraft,
+    if (markdownDraftScope != null) 'markdownDraftScope': markdownDraftScope,
+    if (markdownDraftSlideIndex != null)
+      'markdownDraftSlideIndex': markdownDraftSlideIndex,
     if (userNotes != null) 'userNotes': userNotes,
     if (miauw != null) 'miauw': miauw,
     if (seal != null) 'seal': seal,
@@ -74,6 +87,9 @@ class RecoverySnapshot {
       filePath: json['filePath'] as String?,
       label: (json['label'] as String?) ?? 'Presentatie',
       markdown: (json['markdown'] as String?) ?? '',
+      markdownDraft: json['markdownDraft'] as String?,
+      markdownDraftScope: json['markdownDraftScope'] as String?,
+      markdownDraftSlideIndex: json['markdownDraftSlideIndex'] as int?,
       userNotes: json['userNotes'] as String?,
       miauw: json['miauw'] as String?,
       seal: json['seal'] as String?,
