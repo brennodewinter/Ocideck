@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -1007,6 +1007,19 @@ check-no-coverage: $(STATIC_GATES) test
 	@echo "== OciDeck check (zonder dekkingsmeting) complete =="
 	@echo "Validated: formatting, static analysis, conventions, the privacy projection boundary, method length, dead-code, hardcoded visible text, comment language, and the full Flutter test suite."
 	@echo "NOT validated here: the coverage floor and the per-file coverage floor — those run in 'make check'."
+
+# De snelle statische deelverzameling van de poort: alleen $(STATIC_GATES), geen
+# test-suite en geen dekkingsmeting. Bedoeld als per-PR-poort op de server
+# (`.forgejo/workflows/static-gate.yml`). Zonder zo'n poort draaien deze
+# controles pas op een `v*`-tag, en dan stapelt `main` tussen releases stille
+# overschrijdingen op — precies wat #1118 blootlegde. Dezelfde $(STATIC_GATES)
+# als `check`, dus geen tweede lijst die kan uiteenlopen. De dekkingsvloer, de
+# per-bestandsvloer en de volledige suite blijven in `make check`, op de machine
+# van de committer vóór main; die vangt dit doel bewust niet.
+check-static: $(STATIC_GATES)
+	@echo "== OciDeck static gate complete =="
+	@echo "Validated: formatting, static analysis, the toolchain, conventions, the privacy projection boundary, method length, dead-code, hardcoded visible text, comment language, and improvement templates."
+	@echo "NOT validated here: the full test suite, the coverage floor and the per-file coverage floor — those run in 'make check'."
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
