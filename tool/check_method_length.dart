@@ -45,7 +45,7 @@ const Map<String, int> methodLengthBaseline = {
   'lib/widgets/dialogs/add_slide_dialog.dart::SlideTypePreviewPainter.paint':
       126,
   // Procesverbetering project-wizard entry on the welcome column.
-  'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen._startColumn': 150,
+  'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen._startColumn': 118,
   // Procesverbetering preview switch for matrix/canvas/tree/flow/phaseGate.
   // Verlaagd van 165: improvement-cases naar improvement_dispatch.dart.
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':

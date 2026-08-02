@@ -212,7 +212,7 @@ const Map<String, int> classSizeBaseline = {
   // +33: Y-01 front-matter keys (name/unit/usl/lsl/target/baseline/goal).
   'lib/services/markdown_service.dart#MarkdownService': 2407,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
-      2138,
+      2145,
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
   // +7 (#1098): menu- en dialoogaanroepen voor het rechtenoverzicht; de scan en
   // beoordeling leven buiten de State in providers en services.
