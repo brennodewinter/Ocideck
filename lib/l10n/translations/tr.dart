@@ -2748,6 +2748,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modül açık. Hesaplama çekirdeği, slayt düzenleri ve şablonlar yerel olarak kullanılabilir ({n} kontrol grafiği faktörü).',
+  'SIPOC-procesoverzicht': 'SIPOC süreç genel görünümü',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Tedarikçiler, girdiler, ana adımlar, çıktılar ve müşteriler aracılığıyla bir sürecin kapsamını ve bağımlılıklarını belirleyin.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Süreç iyileştirme araçları (SIPOC, DMAIC, Kaizen ve A3). Varsayılan olarak kapalıdır; ilgili şablonları ve slayt düzenlerini kullanmak için uzantıyı etkinleştirin.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Görsel kitaplığı çok büyük; yalnızca en yeni görseller gösteriliyor.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -3553,10 +3560,6 @@ const _dutchSourceAddTr = <String, String>{
   'Te weinig gegevens voor een histogram': 'Histogram için veri yetersiz',
   'Te weinig gegevens voor een boxplot': 'Kutu grafiği için veri yetersiz',
   'Procesverbetering': 'Süreç iyileştirme',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Süreç iyileştirme ve Lean Six Sigma projeleri (DMAIC, Kaizen, A3) için eserler. Varsayılan olarak kapalı. Modül kullanılabilir; eserler sonraki adımlarda gelecek.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modül açık. Hesaplama çekirdeği yerel olarak kullanılabilir ({n} control chart faktörü). Slayt türleri ve şablonlar hazır olduklarında eklenecek.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Bu sunum, Süreç iyileştirme modülünün parçalarını içeriyor. Bunları düzenlemek için modülü açın.',
   'Online media staat uit — aanzetten': 'Çevrimiçi medya kapalı — aç',

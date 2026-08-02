@@ -46,11 +46,26 @@ void main() {
     expect(gated, securityTypes);
   });
 
-  test(
-    'the MIAUW template requires the module (so it is hidden by default)',
-    () {
-      final miauw = deckTemplates.firstWhere((t) => t.id == 'miauwReport');
-      expect(miauw.requiresInfoSafety, isTrue);
-    },
-  );
+  test('information-security templates require the module', () {
+    const expected = {
+      'rasci',
+      'securityTasks',
+      'certification',
+      'postIncidentReview',
+      'privacyIncident',
+      'dpia',
+      'riskRegister',
+      'continuityTest',
+      'tabletopExercise',
+      'auditFollowup',
+      'vendorRisk',
+      'threatModeling',
+      'miauwReport',
+    };
+    final gated = deckTemplates
+        .where((template) => template.requiresInfoSafety)
+        .map((template) => template.id)
+        .toSet();
+    expect(gated, expected);
+  });
 }

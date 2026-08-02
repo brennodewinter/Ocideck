@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
-import 'package:ocideck/models/improvement_y01.dart';
 import 'package:ocideck/widgets/dialogs/improvement_inference_dialog.dart';
 import 'package:ocideck/widgets/dialogs/improvement_msa_dialog.dart';
-import 'package:ocideck/widgets/dialogs/improvement_project_wizard.dart';
 import 'package:ocideck/widgets/dialogs/improvement_regression_dialog.dart';
 
 void main() {
@@ -222,75 +220,6 @@ P2\tB\t8
       await tester.tap(find.text('Berekenen'));
       await tester.pumpAndSettle();
       expect(find.textContaining('StatsRefusal'), findsOneWidget);
-    });
-  });
-
-  group('ImprovementProjectWizard', () {
-    testWidgets('Project starten disabled until title is set', (tester) async {
-      await wideSurface(tester);
-      ImprovementProjectChoice? choice;
-      await tester.pumpWidget(
-        appHost(
-          Builder(
-            builder: (context) => ElevatedButton(
-              onPressed: () async {
-                choice = await ImprovementProjectWizard.show(context);
-              },
-              child: const Text('open'),
-            ),
-          ),
-        ),
-      );
-      await tester.tap(find.text('open'));
-      await tester.pumpAndSettle();
-
-      final start = tester.widget<FilledButton>(
-        find.widgetWithText(FilledButton, 'Project starten'),
-      );
-      expect(start.onPressed, isNull);
-
-      await tester.enterText(
-        find.widgetWithText(TextField, 'Projecttitel'),
-        'Doorlooptijd',
-      );
-      await tester.pump();
-      await tester.enterText(
-        find.widgetWithText(TextField, 'Primaire Y-metriek (Y-01)'),
-        'dagen',
-      );
-      await tester.tap(find.text('Project starten'));
-      await tester.pumpAndSettle();
-
-      expect(choice, isNotNull);
-      expect(choice!.title, 'Doorlooptijd');
-      expect(choice!.y01Description, 'dagen');
-      expect(choice!.framework, isNotEmpty);
-    });
-
-    testWidgets('Annuleren returns null', (tester) async {
-      await wideSurface(tester);
-      ImprovementProjectChoice? choice = ImprovementProjectChoice(
-        title: 'x',
-        framework: 'dmaic',
-        y01: ImprovementY01Metric.empty,
-      );
-      await tester.pumpWidget(
-        appHost(
-          Builder(
-            builder: (context) => ElevatedButton(
-              onPressed: () async {
-                choice = await ImprovementProjectWizard.show(context);
-              },
-              child: const Text('open'),
-            ),
-          ),
-        ),
-      );
-      await tester.tap(find.text('open'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Annuleren'));
-      await tester.pumpAndSettle();
-      expect(choice, isNull);
     });
   });
 }

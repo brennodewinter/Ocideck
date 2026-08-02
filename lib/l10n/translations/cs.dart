@@ -1774,6 +1774,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modul je zapnutý. Výpočetní jádro, rozvržení snímků a šablony jsou k dispozici místně ({n} faktorů regulačního diagramu).',
+  'SIPOC-procesoverzicht': 'Přehled procesu SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Určete rozsah a závislosti procesu prostřednictvím dodavatelů, vstupů, hlavních kroků, výstupů a zákazníků.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Nástroje pro zlepšování procesů (SIPOC, DMAIC, Kaizen a A3). Ve výchozím nastavení vypnuté; povolte rozšíření pro použití souvisejících šablon a rozvržení snímků.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Knihovna obrázků je příliš velká; zobrazují se pouze nejnovější obrázky.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2576,10 +2583,6 @@ const _dutchSourceAddCs = <String, String>{
   'Te weinig gegevens voor een histogram': 'Příliš málo dat pro histogram',
   'Te weinig gegevens voor een boxplot': 'Příliš málo dat pro krabicový graf',
   'Procesverbetering': 'Zlepšování procesů',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefakty pro zlepšování procesů a projekty Lean Six Sigma (DMAIC, Kaizen, A3). Ve výchozím nastavení vypnuto. Modul je k dispozici; artefakty budou následovat v dalších krocích.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modul zapnutý. Výpočetní jádro dostupné lokálně ({n} faktorů control chart). Typy snímků a šablony přibudou, jakmile budou hotové.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Tato prezentace obsahuje části modulu Zlepšování procesů. Zapněte modul, abyste je mohli upravovat.',
   'Online media staat uit — aanzetten': 'Online média jsou vypnutá — zapnout',

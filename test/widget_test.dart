@@ -7,6 +7,7 @@ import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/state/tabs_provider.dart';
+import 'package:ocideck/state/procesverbetering_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:ocideck/widgets/panels/slide_list_panel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -65,6 +66,21 @@ void main() {
       findsOneWidget,
     );
   });
+
+  testWidgets(
+    'procesverbetering voegt geen losse aanmaakknop aan het openscherm toe',
+    (tester) async {
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [procesverbeteringRevealProvider.overrideWithValue(true)],
+          child: const OciDeckApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Nieuw verbeteringsproject'), findsNothing);
+      expect(find.text('Nieuwe presentatie'), findsOneWidget);
+    },
+  );
 
   testWidgets(
     'het openscherm toont het versienummer, en een tik erop opent Over OciDeck',

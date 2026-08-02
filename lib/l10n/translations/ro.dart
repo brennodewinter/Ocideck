@@ -1788,6 +1788,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modul activat. Nucleul de calcul, aspectele diapozitivelor și șabloanele sunt disponibile local ({n} factori ai diagramei de control).',
+  'SIPOC-procesoverzicht': 'Prezentare generală a procesului SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Stabiliți domeniul de aplicare și dependențele unui proces prin furnizori, intrări, pași principali, ieșiri și clienți.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Instrumente pentru îmbunătățirea proceselor (SIPOC, DMAIC, Kaizen și A3). Dezactivate implicit; activați extensia pentru a utiliza șabloanele și aspectele de diapozitive asociate.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Biblioteca de imagini este prea mare; sunt afișate doar cele mai noi imagini.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2606,10 +2613,6 @@ const _dutchSourceAddRo = <String, String>{
   'Te weinig gegevens voor een boxplot':
       'Prea puține date pentru o diagramă cutie',
   'Procesverbetering': 'Îmbunătățirea proceselor',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefacte pentru îmbunătățirea proceselor și proiecte Lean Six Sigma (DMAIC, Kaizen, A3). Dezactivat implicit. Modulul este disponibil; artefactele vor urma în pașii următori.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modul activat. Nucleul de calcul disponibil local ({n} factori control chart). Tipurile de diapozitive și șabloanele vor fi adăugate imediat ce sunt gata.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Această prezentare conține elemente ale modulului Îmbunătățirea proceselor. Activează modulul pentru a le edita.',
   'Online media staat uit — aanzetten': 'Media online dezactivată — activează',

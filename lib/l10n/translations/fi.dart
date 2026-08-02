@@ -1771,6 +1771,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Moduuli on käytössä. Laskentaydin, diojen asettelut ja mallit ovat käytettävissä paikallisesti ({n} ohjauskorttikerrointa).',
+  'SIPOC-procesoverzicht': 'SIPOC-prosessin yleiskatsaus',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Määritä prosessin laajuus ja riippuvuudet toimittajien, syötteiden, päävaiheiden, tuotosten ja asiakkaiden avulla.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Työkalut prosessien parantamiseen (SIPOC, DMAIC, Kaizen ja A3). Oletusarvoisesti pois päältä; ota laajennus käyttöön käyttääksesi siihen liittyviä malleja ja diojen asetteluja.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Kuvakirjasto on liian suuri; vain uusimmat kuvat näytetään.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2585,10 +2592,6 @@ const _dutchSourceAddFi = <String, String>{
   'Te weinig gegevens voor een histogram': 'Liian vähän dataa histogrammiin',
   'Te weinig gegevens voor een boxplot': 'Liian vähän dataa laatikkokuvaajaan',
   'Procesverbetering': 'Prosessien parantaminen',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefakteja prosessien parantamiseen ja Lean Six Sigma -projekteihin (DMAIC, Kaizen, A3). Pois päältä oletuksena. Moduuli on käytettävissä; artefaktit seuraavat myöhemmissä vaiheissa.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Moduuli päällä. Laskentaydin käytettävissä paikallisesti ({n} control chart -kerrointa). Diatyypit ja mallipohjat lisätään, kun ne ovat valmiit.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Tämä esitys sisältää Prosessien parantaminen -moduulin osia. Ota moduuli käyttöön muokataksesi niitä.',
   'Online media staat uit — aanzetten': 'Online-media pois — laita päälle',

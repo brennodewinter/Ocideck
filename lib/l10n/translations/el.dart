@@ -1798,6 +1798,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Η ενότητα είναι ενεργή. Ο πυρήνας υπολογισμών, οι διατάξεις διαφανειών και τα πρότυπα είναι διαθέσιμα τοπικά ({n} παράγοντες διαγράμματος ελέγχου).',
+  'SIPOC-procesoverzicht': 'Επισκόπηση διαδικασίας SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Καθορίστε το εύρος και τις εξαρτήσεις μιας διαδικασίας μέσω προμηθευτών, εισροών, κύριων βημάτων, εκροών και πελατών.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Εργαλεία για βελτίωση διαδικασιών (SIPOC, DMAIC, Kaizen και A3). Απενεργοποιημένα από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τα σχετικά πρότυπα και τις διατάξεις διαφανειών.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Η βιβλιοθήκη εικόνων είναι πολύ μεγάλη· εμφανίζονται μόνο οι πιο πρόσφατες εικόνες.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2620,10 +2627,6 @@ const _dutchSourceAddEl = <String, String>{
   'Te weinig gegevens voor een histogram': 'Πολύ λίγα δεδομένα για ιστόγραμμα',
   'Te weinig gegevens voor een boxplot': 'Πολύ λίγα δεδομένα για θηκόγραμμα',
   'Procesverbetering': 'Βελτίωση διεργασιών',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Παραδοτέα για τη βελτίωση διεργασιών και έργα Lean Six Sigma (DMAIC, Kaizen, A3). Απενεργοποιημένο από προεπιλογή. Η ενότητα είναι διαθέσιμη· τα παραδοτέα θα ακολουθήσουν σε επόμενα βήματα.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Η ενότητα είναι ενεργή. Ο πυρήνας υπολογισμού είναι διαθέσιμος τοπικά ({n} συντελεστές control chart). Οι τύποι διαφανειών και τα πρότυπα θα προστεθούν μόλις είναι έτοιμα.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Αυτή η παρουσίαση περιέχει στοιχεία της ενότητας Βελτίωση διεργασιών. Ενεργοποιήστε την ενότητα για να τα επεξεργαστείτε.',
   'Online media staat uit — aanzetten':

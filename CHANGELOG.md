@@ -16,6 +16,16 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- **Procesverbetering via sjablonen** — de losse actie *Nieuw
+  verbeteringsproject* op het welkomstscherm en de bijbehorende wizard zijn
+  vervallen. Zet de uitbreiding aan en kies in **Nieuwe presentatie** een
+  sjabloon met de badge *Procesverbetering*: het bestaande DMAIC-project of het
+  nieuwe zelfstandige **SIPOC-procesoverzicht**. Dat laatste bevat vijf dia's,
+  inclusief een bewerkbare SIPOC-matrix die dezelfde sjabloonopslag gebruikt
+  als andere matrices; het legt 4–7 hoofdlijnen vast en begeleidt het invullen
+  van klant naar leverancier. Sjablonen voor MIAUW en voor de geselecteerde
+  informatieveiligheidswerkvormen volgen dezelfde catalogusregel: zij zijn pas
+  zichtbaar met *Informatieveiligheid* aan en dragen daar de badge van.
 - Samenwerken (realtime): **cryptografisch herkomstbewijs** op een verspreid deck
   (fundament). De eigenaar kan een deck met de samenwerkingsidentiteit
   ondertekenen (Ed25519 over de zegelhash); een ontvanger die die identiteit via

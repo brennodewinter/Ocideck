@@ -17,16 +17,14 @@ class DeckTemplate {
   /// Semantic icon key, mapped to the picker icon in the widget layer.
   final String icon;
 
-  /// True for templates that only make sense with the "Informatieveiligheid"
-  /// module on (they scaffold module-only slide types like `finding` /
-  /// `scopeMatrix`). The picker hides them until `infoSafetyRevealProvider` is
-  /// true, so the flat catalogue stays uncluttered for everyone else.
+  /// True for templates that belong to the "Informatieveiligheid" extension.
+  /// The picker hides them until `infoSafetyRevealProvider` is true and uses
+  /// the same flag for the visible module badge.
   final bool requiresInfoSafety;
 
   /// True for templates that only make sense with the "Procesverbetering"
-  /// module on (PROCESS_IMPROVEMENT.md Phase 0). Hidden until that module is
-  /// revealed. Temporary sibling of [requiresInfoSafety] — not a unified
-  /// `requiresModule` yet, on purpose (light Phase 0).
+  /// module on. Hidden until that module is revealed; the picker also uses the
+  /// same flag for the visible module badge.
   final bool requiresProcesverbetering;
 
   const DeckTemplate({
@@ -107,18 +105,21 @@ final List<DeckTemplate> deckTemplates = [
     title: 'Informatieveiligheid: RASCI / TVB',
     description: 'Rollen, RASCI-matrix en taakafspraken vastleggen.',
     icon: 'rasci',
+    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'securityTasks',
     title: 'Takenplan informatieveiligheid',
     description: 'Taken, prioriteiten, eigenaren en bewijsstukken.',
     icon: 'securityTasks',
+    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'certification',
     title: 'Certificering voortgang',
     description: 'Voortgang per domein, controls en auditplanning.',
     icon: 'certification',
+    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'training',
@@ -138,36 +139,42 @@ final List<DeckTemplate> deckTemplates = [
     description:
         'Tijdlijn, impact, oorzaken en verbeteracties na een incident.',
     icon: 'postIncidentReview',
+    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'privacyIncident',
     title: 'Datalek / privacy-incident beoordeling',
     description: 'Beoordeel gegevens, risico, meldplicht en communicatie.',
     icon: 'privacyIncident',
+    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'dpia',
     title: 'DPIA / privacy impact assessment',
     description: "Verwerking, grondslag, privacyrisico's en maatregelen.",
     icon: 'dpia',
+    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'riskRegister',
     title: 'Risicoanalyse / risk register',
     description: "Leg risico's, kans, impact, maatregelen en eigenaren vast.",
     icon: 'riskRegister',
+    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'continuityTest',
     title: 'Business continuity / DR-test',
     description: 'Scenario, hersteldoelen, testbevindingen en verbeterpunten.',
     icon: 'continuityTest',
+    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'tabletopExercise',
     title: 'Tabletop-oefening / crisisoefening',
     description: 'Scenario, injects, besluiten, waarnemingen en evaluatie.',
     icon: 'tabletopExercise',
+    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'bobCrisis',
@@ -219,12 +226,14 @@ final List<DeckTemplate> deckTemplates = [
     title: 'Auditbevindingen en opvolging',
     description: 'Bevindingen, root cause, maatregelen, bewijs en status.',
     icon: 'auditFollowup',
+    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'vendorRisk',
     title: 'Leveranciersbeoordeling / vendor risk',
     description: "Dienst, data, afhankelijkheid, eisen, risico's en besluit.",
     icon: 'vendorRisk',
+    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'architectureDecision',
@@ -239,6 +248,7 @@ final List<DeckTemplate> deckTemplates = [
         'Scope, datastromen, vertrouwensgrenzen, dreigingen per '
         'STRIDE-categorie en maatregelen.',
     icon: 'threatModeling',
+    requiresInfoSafety: true,
   ),
   DeckTemplate(
     id: 'policyRollout',
@@ -699,6 +709,15 @@ final List<DeckTemplate> deckTemplates = [
     icon: 'procesverbeteringDmaic',
     requiresProcesverbetering: true,
   ),
+  DeckTemplate(
+    id: 'procesverbetering-sipoc',
+    title: 'SIPOC-procesoverzicht',
+    description:
+        'Bepaal de scope en afhankelijkheden van een proces via leveranciers, '
+        'input, hoofdstappen, output en klanten.',
+    icon: 'procesverbeteringSipoc',
+    requiresProcesverbetering: true,
+  ),
 ];
 
 DeckTemplate? deckTemplateById(String id) {
@@ -706,4 +725,19 @@ DeckTemplate? deckTemplateById(String id) {
     if (template.id == id) return template;
   }
   return null;
+}
+
+/// Eén zichtbaarheidsregel voor de sjabloonkiezer en het aantal op het
+/// welkomstscherm. Een modulebadge mag nooit zichtbaar zijn terwijl het
+/// bijbehorende sjabloon buiten de modulepoort om bereikbaar is.
+bool deckTemplateVisible(
+  DeckTemplate template, {
+  required bool infoSafetyRevealed,
+  required bool procesverbeteringRevealed,
+}) {
+  if (template.requiresInfoSafety && !infoSafetyRevealed) return false;
+  if (template.requiresProcesverbetering && !procesverbeteringRevealed) {
+    return false;
+  }
+  return true;
 }

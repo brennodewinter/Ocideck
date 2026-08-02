@@ -1773,6 +1773,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modul je vključen. Računsko jedro, postavitve diapozitivov in predloge so na voljo lokalno ({n} faktorjev kontrolne karte).',
+  'SIPOC-procesoverzicht': 'Pregled procesa SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Določite obseg in odvisnosti procesa prek dobaviteljev, vhodov, glavnih korakov, izhodov in strank.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Orodja za izboljševanje procesov (SIPOC, DMAIC, Kaizen in A3). Privzeto izklopljena; omogočite razširitev za uporabo povezanih predlog in postavitev diapozitivov.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Knjižnica slik je prevelika; prikazane so samo najnovejše slike.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2585,10 +2592,6 @@ const _dutchSourceAddSl = <String, String>{
   'Te weinig gegevens voor een boxplot':
       'Premalo podatkov za škatlasti diagram',
   'Procesverbetering': 'Izboljševanje procesov',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefakti za izboljševanje procesov in projekte Lean Six Sigma (DMAIC, Kaizen, A3). Privzeto izklopljeno. Modul je na voljo; artefakti sledijo v naslednjih korakih.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modul vklopljen. Računsko jedro na voljo lokalno ({n} faktorjev control chart). Vrste diapozitivov in predloge bodo dodane, ko bodo pripravljene.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Ta predstavitev vsebuje dele modula Izboljševanje procesov. Vklopite modul, da jih uredite.',
   'Online media staat uit — aanzetten': 'Spletni mediji izklopljeni — vklopi',

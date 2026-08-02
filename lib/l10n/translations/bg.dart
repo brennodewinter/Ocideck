@@ -1793,6 +1793,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Модулът е включен. Изчислителното ядро, оформленията на слайдовете и шаблоните са налични локално ({n} фактора за контролна карта).',
+  'SIPOC-procesoverzicht': 'Преглед на процеса SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Определете обхвата и зависимостите на процеса чрез доставчици, входни данни, основни стъпки, изходи и клиенти.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Инструменти за подобряване на процесите (SIPOC, DMAIC, Kaizen и A3). Изключени по подразбиране; включете разширението, за да използвате свързаните шаблони и оформления на слайдове.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Библиотеката с изображения е твърде голяма; показват се само най-новите изображения.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2611,10 +2618,6 @@ const _dutchSourceAddBg = <String, String>{
   'Te weinig gegevens voor een boxplot':
       'Твърде малко данни за кутия с мустаци',
   'Procesverbetering': 'Подобряване на процесите',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Артефакти за подобряване на процесите и проекти по Lean Six Sigma (DMAIC, Kaizen, A3). Изключено по подразбиране. Модулът е наличен; артефактите ще последват в следващи стъпки.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Модулът е включен. Изчислителното ядро е налично локално ({n} фактора за control chart). Видовете слайдове и шаблоните ще се добавят, щом са готови.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Тази презентация съдържа елементи от модула Подобряване на процесите. Включете модула, за да ги редактирате.',
   'Online media staat uit — aanzetten': 'Онлайн медията е изключена — включи',

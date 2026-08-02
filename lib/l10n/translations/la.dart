@@ -1787,6 +1787,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modulus activus. Nucleus computationis, dispositiones diapositivarum et exemplaria localiter praesto sunt ({n} factores chartae moderationis).',
+  'SIPOC-procesoverzicht': 'Conspectus processus SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Ambitum et necessitudines processus per praebitores, initia, gradus praecipuos, exitus et clientes constitue.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Instrumenta ad emendationem processuum (SIPOC, DMAIC, Kaizen et A3). Ex praedefinito inactiva; extensionem activa ut exemplaribus et dispositionibus diapositivarum adiunctis utaris.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Bibliotheca imaginum nimis magna est; solae imagines recentissimae ostenduntur.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2596,10 +2603,6 @@ const _dutchSourceAddLa = <String, String>{
   'Te weinig gegevens voor een histogram': 'Nimis pauca data pro histogrammate',
   'Te weinig gegevens voor een boxplot': 'Nimis pauca data pro tabula arcae',
   'Procesverbetering': 'Emendatio processuum',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Instrumenta ad emendationem processuum et proposita Lean Six Sigma (DMAIC, Kaizen, A3). Ex praedefinito inactiva. Modulus praesto est; instrumenta gradibus sequentibus sequentur.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modulus activus. Nucleus computationis in loco praesto est ({n} factores control chart). Genera diapositivarum et exemplaria addentur simul atque parata erunt.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Haec demonstratio partes moduli Emendationis processuum continet. Modulum activa ut eas recenseas.',
   'Online media staat uit — aanzetten': 'Media in linea exstincta — activa',

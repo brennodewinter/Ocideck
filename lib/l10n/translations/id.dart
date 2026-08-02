@@ -1771,6 +1771,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modul aktif. Inti perhitungan, tata letak slide, dan templat tersedia secara lokal ({n} faktor peta kendali).',
+  'SIPOC-procesoverzicht': 'Ringkasan proses SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Tentukan ruang lingkup dan ketergantungan proses melalui pemasok, masukan, langkah utama, keluaran, dan pelanggan.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Perkakas untuk peningkatan proses (SIPOC, DMAIC, Kaizen, dan A3). Nonaktif secara default; aktifkan ekstensi untuk menggunakan templat dan tata letak slide terkait.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Pustaka gambar terlalu besar; hanya gambar terbaru yang ditampilkan.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2591,10 +2598,6 @@ const _dutchSourceAddId = <String, String>{
   'Te weinig gegevens voor een boxplot':
       'Data terlalu sedikit untuk diagram kotak',
   'Procesverbetering': 'Peningkatan proses',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefak untuk peningkatan proses dan proyek Lean Six Sigma (DMAIC, Kaizen, A3). Nonaktif secara default. Modul ini tersedia; artefaknya akan menyusul pada langkah berikutnya.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modul aktif. Inti perhitungan tersedia secara lokal ({n} faktor control chart). Jenis slide dan templat akan ditambahkan begitu siap.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Presentasi ini berisi bagian dari modul Peningkatan proses. Aktifkan modul untuk mengeditnya.',
   'Online media staat uit — aanzetten': 'Media daring nonaktif — aktifkan',

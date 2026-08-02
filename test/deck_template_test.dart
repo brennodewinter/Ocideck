@@ -83,6 +83,28 @@ void main() {
       expect(deckTemplateById('quiz')!.title, 'Interactieve quiz');
       expect(deckTemplateById('bestaat-niet'), isNull);
     });
+
+    test('module visibility follows the template requirement', () {
+      final ordinary = deckTemplateById('briefing')!;
+      final security = deckTemplateById('miauwReport')!;
+      final improvement = deckTemplateById('procesverbetering-sipoc')!;
+
+      bool visible(
+        DeckTemplate template, {
+        bool sec = false,
+        bool imp = false,
+      }) => deckTemplateVisible(
+        template,
+        infoSafetyRevealed: sec,
+        procesverbeteringRevealed: imp,
+      );
+
+      expect(visible(ordinary), isTrue);
+      expect(visible(security), isFalse);
+      expect(visible(security, sec: true), isTrue);
+      expect(visible(improvement), isFalse);
+      expect(visible(improvement, imp: true), isTrue);
+    });
   });
 
   group('template documents', () {
@@ -746,6 +768,45 @@ void main() {
         expect(spec.description, isNotEmpty, reason: language);
         expect(spec.recommendation, isNotEmpty, reason: language);
       }
+    });
+  });
+
+  group('SIPOC-procesoverzicht', () {
+    test('is registered behind the process-improvement module', () {
+      final template = deckTemplateById('procesverbetering-sipoc')!;
+      expect(template.requiresProcesverbetering, isTrue);
+      expect(template.title, 'SIPOC-procesoverzicht');
+    });
+
+    test('contains one typed SIPOC matrix in every content language', () {
+      for (final language in contentLanguages) {
+        final matrix = slidesOf(
+          'procesverbetering-sipoc',
+          language: language,
+        ).singleWhere((slide) => slide.type == SlideType.matrix);
+        expect(matrix.improvementTemplateId, 'sipoc', reason: language);
+        expect(matrix.tableRows.first, [
+          'Supplier',
+          'Input',
+          'Process',
+          'Output',
+          'Customer',
+        ], reason: language);
+        expect(matrix.tableRows.length, inInclusiveRange(5, 8));
+      }
+    });
+
+    test('teaches scope, comparison and right-to-left completion', () {
+      final slides = slidesOf('procesverbetering-sipoc');
+      expect(slides, hasLength(5));
+      expect(
+        slides.any((slide) => slide.title.contains('gedetailleerde flowchart')),
+        isTrue,
+      );
+      expect(
+        slides.any((slide) => slide.title.contains('rechts naar links')),
+        isTrue,
+      );
     });
   });
 

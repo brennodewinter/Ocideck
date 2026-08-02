@@ -1806,6 +1806,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modúl ar siúl. Tá croí ríomhaireachta, leaganacha amach sleamhnán agus teimpléid ar fáil go háitiúil ({n} fachtóir cárta rialaithe).',
+  'SIPOC-procesoverzicht': 'Forléargas ar phróiseas SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Sainigh raon feidhme agus spleáchais próisis trí sholáthraithe, ionchuir, príomhchéimeanna, aschuir agus custaiméirí.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Uirlisí le haghaidh feabhsú próiseas (SIPOC, DMAIC, Kaizen agus A3). Múchta de réir réamhshocraithe; cumasaigh an breiseán chun na teimpléid agus leaganacha amach sleamhnán gaolmhara a úsáid.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Tá an leabharlann íomhánna rómhór; ní thaispeántar ach na híomhánna is nuaí.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2630,10 +2637,6 @@ const _dutchSourceAddGa = <String, String>{
   'Te weinig gegevens voor een boxplot':
       'Níl go leor sonraí ann do bhosca-léaráid',
   'Procesverbetering': 'Feabhsú próiseas',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Déantáin le haghaidh feabhsú próiseas agus tionscadail Lean Six Sigma (DMAIC, Kaizen, A3). Múchta de réir réamhshocraithe. Tá an modúl ar fáil; leanfaidh na déantáin sna céimeanna ina dhiaidh seo.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Tá an modúl ar siúl. Croílár ríomha ar fáil go háitiúil ({n} fachtóir control chart). Cuirfear cineálacha sleamhnán agus teimpléid leis a luaithe a bheidh siad réidh.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Tá codanna den mhodúl Feabhsú próiseas sa láithreoireacht seo. Cuir an modúl ar siúl chun iad a chur in eagar.',
   'Online media staat uit — aanzetten': 'Meáin ar líne as — cuir ar siúl',

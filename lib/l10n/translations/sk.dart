@@ -1778,6 +1778,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
+      'Modul je zapnutý. Výpočtové jadro, rozloženia snímok a šablóny sú dostupné lokálne ({n} faktorov regulačnej karty).',
+  'SIPOC-procesoverzicht': 'Prehľad procesu SIPOC',
+  'Bepaal de scope en afhankelijkheden van een proces via leveranciers, input, hoofdstappen, output en klanten.':
+      'Určite rozsah a závislosti procesu prostredníctvom dodávateľov, vstupov, hlavných krokov, výstupov a zákazníkov.',
+  'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
+      'Nástroje na zlepšovanie procesov (SIPOC, DMAIC, Kaizen a A3). Predvolene vypnuté; povoľte rozšírenie na používanie súvisiacich šablón a rozložení snímok.',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Knižnica obrázkov je príliš veľká; zobrazujú sa iba najnovšie obrázky.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
@@ -2587,10 +2594,6 @@ const _dutchSourceAddSk = <String, String>{
   'Te weinig gegevens voor een boxplot':
       'Príliš málo údajov pre krabicový graf',
   'Procesverbetering': 'Zlepšovanie procesov',
-  'Artefacten voor procesverbetering en Lean Six Sigma-projecten (DMAIC, Kaizen, A3). Standaard uit. De module is beschikbaar; de artefacten volgen in volgende stappen.':
-      'Artefakty na zlepšovanie procesov a projekty Lean Six Sigma (DMAIC, Kaizen, A3). Predvolene vypnuté. Modul je k dispozícii; artefakty budú nasledovať v ďalších krokoch.',
-  'Module aan. Rekenkern lokaal beschikbaar ({n} control-chartfactoren). Slidetypes en sjablonen komen erbij zodra ze klaar zijn.':
-      'Modul zapnutý. Výpočtové jadro dostupné lokálne ({n} faktorov control chart). Typy snímok a šablóny pribudnú, keď budú pripravené.',
   'Deze presentatie bevat onderdelen van de Procesverbetering-module. Zet de module aan om ze te bewerken.':
       'Táto prezentácia obsahuje časti modulu Zlepšovanie procesov. Zapnite modul, aby ste ich mohli upravovať.',
   'Online media staat uit — aanzetten': 'Online médiá sú vypnuté — zapnúť',
