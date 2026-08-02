@@ -74,87 +74,104 @@ class _EditorToolbar extends StatelessWidget {
       if (!profiles.any((p) => p.name == activeProfile.name)) activeProfile,
     ];
 
+    final fields = <Widget>[
+      Expanded(
+        child: _ToolbarField(
+          label: 'TYPE',
+          child: _SlideTypePickerButton(
+            type: slide.type,
+            onTap: () => _pickType(context),
+          ),
+        ),
+      ),
+      const SizedBox(width: 10),
+      Expanded(
+        child: _ToolbarField(
+          label: 'STIJL',
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              value: activeProfile.name,
+              isExpanded: true,
+              isDense: true,
+              borderRadius: BorderRadius.circular(6),
+              style: TextStyle(
+                fontSize: 12,
+                color: AppTheme.tealFg,
+                fontWeight: FontWeight.w600,
+              ),
+              items: [
+                for (final profile in profileItems)
+                  DropdownMenuItem(
+                    value: profile.name,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.palette_outlined,
+                          size: 14,
+                          color: AppTheme.tealFg,
+                        ),
+                        const SizedBox(width: 4),
+                        Flexible(
+                          child: Text(
+                            profile.name,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+              onChanged: (name) {
+                if (name == null) return;
+                final profile = profileItems.firstWhere(
+                  (p) => p.name == name,
+                  orElse: () => activeProfile,
+                );
+                onProfileChanged(profile);
+              },
+            ),
+          ),
+        ),
+      ),
+      // Alleen tonen wanneer de stijl afwijkt van de standaard — anders
+      // voegt het niets toe. Eén klik zet 'm terug op het standaardprofiel.
+      if (activeProfile.name != defaultProfile.name) ...[
+        const SizedBox(width: 2),
+        IconButton(
+          tooltip:
+              '${context.l10n.d('Terug naar standaardstijl')} ${defaultProfile.name}',
+          onPressed: onDefaultProfileRequested,
+          icon: const Icon(Icons.restart_alt, size: 16),
+          color: AppTheme.tealFg,
+          visualDensity: VisualDensity.compact,
+          padding: EdgeInsets.zero,
+          constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+        ),
+      ],
+    ];
+
     return Container(
       color: AppTheme.paper,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: Row(
-        children: [
-          Expanded(
-            child: _ToolbarField(
-              label: 'TYPE',
-              child: _SlideTypePickerButton(
-                type: slide.type,
-                onTap: () => _pickType(context),
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: _ToolbarField(
-              label: 'STIJL',
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  value: activeProfile.name,
-                  isExpanded: true,
-                  isDense: true,
-                  borderRadius: BorderRadius.circular(6),
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: AppTheme.tealFg,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  items: [
-                    for (final profile in profileItems)
-                      DropdownMenuItem(
-                        value: profile.name,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.palette_outlined,
-                              size: 14,
-                              color: AppTheme.tealFg,
-                            ),
-                            const SizedBox(width: 4),
-                            Flexible(
-                              child: Text(
-                                profile.name,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                  ],
-                  onChanged: (name) {
-                    if (name == null) return;
-                    final profile = profileItems.firstWhere(
-                      (p) => p.name == name,
-                      orElse: () => activeProfile,
-                    );
-                    onProfileChanged(profile);
-                  },
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth < 560) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(children: fields),
+                const SizedBox(height: 6),
+                Wrap(
+                  alignment: WrapAlignment.end,
+                  runSpacing: 4,
+                  children: trailing,
                 ),
-              ),
-            ),
-          ),
-          // Alleen tonen wanneer de stijl afwijkt van de standaard — anders
-          // voegt het niets toe. Eén klik zet 'm terug op het standaardprofiel.
-          if (activeProfile.name != defaultProfile.name) ...[
-            const SizedBox(width: 2),
-            IconButton(
-              tooltip:
-                  '${context.l10n.d('Terug naar standaardstijl')} ${defaultProfile.name}',
-              onPressed: onDefaultProfileRequested,
-              icon: const Icon(Icons.restart_alt, size: 16),
-              color: AppTheme.tealFg,
-              visualDensity: VisualDensity.compact,
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-            ),
-          ],
-          ...trailing,
-        ],
+              ],
+            );
+          }
+          return Row(children: [...fields, ...trailing]);
+        },
       ),
     );
   }

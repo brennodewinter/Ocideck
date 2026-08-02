@@ -23,6 +23,7 @@ void main() {
     WidgetTester tester, {
     required bool reveal,
     SlideType initialType = SlideType.title,
+    double width = 1000,
   }) async {
     final container = ProviderContainer(
       overrides: [infoSafetyRevealProvider.overrideWithValue(reveal)],
@@ -34,7 +35,7 @@ void main() {
       notifier.updateSlide(0, Slide.create(initialType));
     }
 
-    await tester.binding.setSurfaceSize(const Size(1000, 2200));
+    await tester.binding.setSurfaceSize(Size(width, 2200));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
     await tester.pumpWidget(
@@ -58,6 +59,14 @@ void main() {
 
   // The button carries the picker's title as its tooltip; a stable locator.
   final typeButton = find.byTooltip('Slide type kiezen');
+
+  testWidgets('the editor toolbar fits the minimum editor width', (
+    tester,
+  ) async {
+    await pump(tester, reveal: false, width: 420);
+
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets('the TYPE selector opens the visual picker and applies a type', (
     tester,
