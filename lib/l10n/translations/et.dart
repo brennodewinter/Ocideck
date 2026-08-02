@@ -1762,6 +1762,18 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Procesverbetering: DMADV-project': 'Protsessi täiustamine: DMADV projekt',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV skelett uue protsessi kavandamiseks ja kontrollimiseks.',
+  'Procesverbetering: Kaizen-project': 'Protsessi täiustamine: Kaizen projekt',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompaktne parendusprojekt planeerimise, tegemise ja kontrolli etappidega.',
+  'Procesverbetering: A3-project': 'Protsessi täiustamine: A3 projekt',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 skelett probleemide, analüüside ja parendusmeetmete jaoks.',
+  'Procesverbetering: 8D-project': 'Protsessi täiustamine: 8D projekt',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D skelett probleemi kirjeldamiseks, põhjusteks ja kinnituseks.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Moodul on sisse lülitatud. Arvutustuum, slaidipaigutused ja mallid on kohalikult saadaval ({n} kontrollkaardi tegurit).',
   'SIPOC-procesoverzicht': 'SIPOC-protsessi ülevaade',

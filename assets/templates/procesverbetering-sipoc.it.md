@@ -24,6 +24,29 @@ language: it
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Stabilire i confini del processo
+
+| Confine | Valore |
+| --- | --- |
+| Nome del processo |  |
+| Punto di partenza |  |
+| Punto finale |  |
+
+---
+
+# Completalo da destra a sinistra
+
+1. Stabilisci punti di inizio e fine chiari per il processo.
+2. Nomina i clienti che dipendono dal risultato.
+3. Descrivi gli output che ricevono.
+4. Riassumere il processo in 4-7 attività di alto livello.
+5. Determinare di quali input hanno bisogno tali attività.
+6. Collegare ogni input al fornitore che lo rende disponibile.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: it
 | Dettaglio | Da 4 a 7 attività di alto livello | Può contenere decine di passaggi |
 | Messa a fuoco | Fornitori, input, output e clienti | Sequenza, passaggi di consegne e punti decisionali |
 | Utilizzo | Inizio di uno sforzo di miglioramento | Esecuzione e analisi dei guasti |
-
----
-
-# Completalo da destra a sinistra
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

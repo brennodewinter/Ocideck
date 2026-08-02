@@ -24,6 +24,29 @@ language: gsw
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Legen Sie die Prozessgrenzen fest
+
+| Grenze | Wert |
+| --- | --- |
+| Prozessname |  |
+| Ausgangspunkt |  |
+| Endpunkt |  |
+
+---
+
+# Vervollständigen Sie es von rechts nach links
+
+1. Legen Sie klare Start- und Endpunkte für den Prozess fest.
+2. Nennen Sie die Kunden, die auf das Ergebnis angewiesen sind.
+3. Beschreiben Sie die Ergebnisse, die sie erhalten.
+4. Fassen Sie den Prozess in 4 bis 7 übergeordneten Aktivitäten zusammen.
+5. Bestimmen Sie, welche Eingaben diese Aktivitäten benötigen.
+6. Verknüpfen Sie jede Eingabe mit dem Lieferanten, der sie zur Verfügung stellt.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: gsw
 | Detail | 4 bis 7 hochrangige Aktivitäten | Kann Dutzende Schritte enthalten |
 | Fokus | Lieferanten, Inputs, Outputs und Kunden | Reihenfolge, Übergaben und Entscheidungspunkte |
 | Verwenden | Beginn einer Verbesserungsbemühung | Ausführung und Fehleranalyse |
-
----
-
-# Vervollständigen Sie es von rechts nach links
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

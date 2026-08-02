@@ -24,6 +24,29 @@ language: fi
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Aseta prosessin rajat
+
+| Raja | Arvo |
+| --- | --- |
+| Prosessin nimi |  |
+| Aloituspiste |  |
+| Loppupiste |  |
+
+---
+
+# Täytä se oikealta vasemmalle
+
+1. Aseta prosessille selkeät aloitus- ja loppupisteet.
+2. Nimeä asiakkaat, jotka ovat riippuvaisia ​​tuloksesta.
+3. Kuvaile heidän saamiaan tuloksia.
+4. Tee yhteenveto prosessista 4–7 korkean tason toimintoon.
+5. Selvitä, mitä panoksia nämä toiminnot tarvitsevat.
+6. Linkitä jokainen syöte toimittajaan, joka antaa sen saataville.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: fi
 | Yksityiskohta | 4-7 korkean tason toimintaa | Voi sisältää kymmeniä vaiheita |
 | Keskity | Toimittajat, panokset, tuotokset ja asiakkaat | Järjestys, vaihdot ja päätöspisteet |
 | Käyttää | Parantamisen aloitus | Toteutus ja vikaanalyysi |
-
----
-
-# Täytä se oikealta vasemmalle
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

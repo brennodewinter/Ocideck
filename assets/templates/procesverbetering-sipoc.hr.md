@@ -24,6 +24,29 @@ language: hr
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Postavite granice procesa
+
+| Granica | Vrijednost |
+| --- | --- |
+| Naziv procesa |  |
+| Početna točka |  |
+| Krajnja točka |  |
+
+---
+
+# Ispunite ga s desna na lijevo
+
+1. Postavite jasne početne i krajnje točke procesa.
+2. Imenujte kupce koji ovise o rezultatu.
+3. Opišite rezultate koje dobivaju.
+4. Sažmite proces u 4 do 7 aktivnosti visoke razine.
+5. Odredite koji inputi su potrebni za te aktivnosti.
+6. Povežite svaki unos s dobavljačem koji ga stavlja na raspolaganje.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: hr
 | Detalj | 4 do 7 aktivnosti visoke razine | Može sadržavati desetke koraka |
 | Fokus | Dobavljači, ulazi, izlazi i kupci | Redoslijed, predaje i odluke |
 | Koristiti | Početak napora za poboljšanje | Izvođenje i analiza grešaka |
-
----
-
-# Ispunite ga s desna na lijevo
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

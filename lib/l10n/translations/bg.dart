@@ -1793,6 +1793,18 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Procesverbetering: DMADV-project': 'Подобряване на процеса: проект DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV скелет за проектиране и проверка на нов процес.',
+  'Procesverbetering: Kaizen-project': 'Подобряване на процеса: проект Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Компактен проект за подобрение с фази на планиране, изпълнение и проверка.',
+  'Procesverbetering: A3-project': 'Подобряване на процеса: проект А3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 скелет за проблеми, анализ и действия за подобряване.',
+  'Procesverbetering: 8D-project': 'Подобряване на процеса: 8D проект',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D скелет за описание на проблема, причини и увереност.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Модулът е включен. Изчислителното ядро, оформленията на слайдовете и шаблоните са налични локално ({n} фактора за контролна карта).',
   'SIPOC-procesoverzicht': 'Преглед на процеса SIPOC',

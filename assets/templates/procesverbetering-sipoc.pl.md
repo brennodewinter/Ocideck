@@ -24,6 +24,29 @@ language: pl
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Ustaw granice procesu
+
+| Granica | Wartość |
+| --- | --- |
+| Nazwa procesu |  |
+| Punkt początkowy |  |
+| Punkt końcowy |  |
+
+---
+
+# Uzupełnij go od prawej do lewej
+
+1. Ustaw jasne punkty początkowe i końcowe procesu.
+2. Wymień klientów, którym zależy na wyniku.
+3. Opisz otrzymane wyniki.
+4. Podsumuj proces w 4 do 7 działań na wysokim poziomie.
+5. Określ, jakich danych wejściowych wymagają te działania.
+6. Połącz każde dane wejściowe z dostawcą, który je udostępnia.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: pl
 | Szczegół | 4 do 7 działań na wysokim poziomie | Może zawierać dziesiątki kroków |
 | Centrum | Dostawcy, wejścia, wyjścia i klienci | Sekwencja, przekazania i punkty decyzyjne |
 | Używać | Początek wysiłków zmierzających do poprawy | Analiza wykonania i błędów |
-
----
-
-# Uzupełnij go od prawej do lewej
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

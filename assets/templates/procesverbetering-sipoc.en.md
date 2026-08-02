@@ -24,6 +24,29 @@ language: en
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Set the process boundaries
+
+| Boundary | Value |
+| --- | --- |
+| Process |  |
+| Start point |  |
+| End point |  |
+
+---
+
+# Complete it from right to left
+
+1. Set clear start and end points for the process.
+2. Name the customers who depend on the result.
+3. Describe the outputs they receive.
+4. Summarise the process in 4 to 7 high-level activities.
+5. Determine which inputs those activities need.
+6. Link each input to the supplier who makes it available.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: en
 | Detail | 4 to 7 high-level activities | May contain dozens of steps |
 | Focus | Suppliers, inputs, outputs and customers | Sequence, hand-offs and decision points |
 | Use | Start of an improvement effort | Execution and fault analysis |
-
----
-
-# Complete it from right to left
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

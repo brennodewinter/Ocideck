@@ -3275,8 +3275,8 @@ is the source of truth; the toggle only governs *authoring*).
 ### Procesverbetering (process improvement)
 
 A fifth optional module on **Settings → Uitbreidingen (Extensions)**, off by
-default. It provides authoring tools for methods such as DMAIC, Kaizen, A3,
-SIPOC, FMEA and RACI — see
+default. It provides authoring tools for methods such as DMAIC, DMADV, Kaizen,
+A3, 8D, SIPOC, FMEA and RACI — see
 [`docs/design/PROCESS_IMPROVEMENT.md`](design/PROCESS_IMPROVEMENT.md). The
 module is named *Procesverbetering*; it makes no certification, conformance or
 affiliation claim.
@@ -3413,11 +3413,14 @@ headings.
 **Starting templates.** With the module on, **New presentation** exposes its
 process-improvement starting points in the ordinary template catalogue, each
 with a **Procesverbetering** badge. *Procesverbetering: DMAIC-project* supplies
-the DMAIC skeleton. *SIPOC-procesoverzicht* is a standalone five-slide overview:
-it explains supplier, input, process, output and customer; contains a typed,
-editable SIPOC matrix; compares the overview with a detailed flowchart; and
-guides you from customer back to supplier. Keep the process column to 4–7
-high-level activities, then fill the matrix from right to left.
+the DMAIC skeleton; DMADV, Kaizen, A3 and 8D are available in the same place.
+After choosing one of these project templates, record the optional primary
+Y-metric and its limits before the deck opens. *SIPOC-procesoverzicht* is a
+standalone six-slide overview: it explains supplier, input, process, output and
+customer; provides editable process, start-point and end-point fields; guides
+you from customer back to supplier before presenting the typed, editable SIPOC
+matrix; and compares the overview with a detailed flowchart. Keep the process
+column to 4–7 high-level activities, then fill the matrix from right to left.
 
 **AI wording assist (Phase 10).** When **both** the AI-assistentie module and
 Procesverbetering are on, canvas, tree and flow editors show **Tekst voorstellen

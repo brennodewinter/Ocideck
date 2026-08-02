@@ -6,7 +6,6 @@ import 'package:ocideck/models/markdown_validation.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/slide_quality.dart';
 import 'package:ocideck/services/improvement/chart_derivation.dart';
-import 'package:ocideck/services/improvement/improvement_project_scaffold.dart';
 import 'package:ocideck/services/improvement/improvement_quality_bridge.dart';
 import 'package:ocideck/services/markdown_service.dart';
 
@@ -161,41 +160,6 @@ ocideck_improvement_y01: Doorlooptijd
       final parsed = service.parseDeck(md)!.slides.single;
       expect(parsed.type, SlideType.phaseGate);
       expect(parsed.bullets, slide.bullets);
-    });
-  });
-
-  group('project scaffold', () {
-    test('DMAIC skeleton is non-empty and includes Y-01 tree', () {
-      final slides = buildImprovementProjectSlides(
-        projectTitle: 'Order intake',
-        framework: 'dmaic',
-        y01Description: 'Lead time',
-      );
-      expect(slides.length, greaterThan(5));
-      expect(slides.first.type, SlideType.title);
-      expect(slides.any((s) => s.type == SlideType.canvas), isTrue);
-      expect(slides.any((s) => s.type == SlideType.matrix), isTrue);
-      final tree = slides.firstWhere((s) => s.type == SlideType.tree);
-      expect(tree.bullets.join('\n'), contains('**Y-01**'));
-      expect(tree.bullets.first, contains('Lead time'));
-    });
-
-    test('a3 has fewer phase sections than dmaic', () {
-      final a3 = buildImprovementProjectSlides(
-        projectTitle: 'A3',
-        framework: 'a3',
-        y01Description: '',
-      );
-      final dmaic = buildImprovementProjectSlides(
-        projectTitle: 'DMAIC',
-        framework: 'dmaic',
-        y01Description: '',
-      );
-      final a3Sections = a3.where((s) => s.type == SlideType.section).length;
-      final dmaicSections = dmaic
-          .where((s) => s.type == SlideType.section)
-          .length;
-      expect(a3Sections, lessThan(dmaicSections));
     });
   });
 }

@@ -19,11 +19,12 @@ in Dutch, and it keeps growing on `main` between releases.
 - **Procesverbetering via sjablonen** — de losse actie *Nieuw
   verbeteringsproject* op het welkomstscherm en de bijbehorende wizard zijn
   vervallen. Zet de uitbreiding aan en kies in **Nieuwe presentatie** een
-  sjabloon met de badge *Procesverbetering*: het bestaande DMAIC-project of het
-  nieuwe zelfstandige **SIPOC-procesoverzicht**. Dat laatste bevat vijf dia's,
-  inclusief een bewerkbare SIPOC-matrix die dezelfde sjabloonopslag gebruikt
-  als andere matrices; het legt 4–7 hoofdlijnen vast en begeleidt het invullen
-  van klant naar leverancier. Sjablonen voor MIAUW en voor de geselecteerde
+  sjabloon met de badge *Procesverbetering*: DMAIC, DMADV, Kaizen, A3, 8D of het
+  zelfstandige **SIPOC-procesoverzicht**. De projectvormen vragen na de keuze om
+  de optionele primaire Y-metriek en limieten. SIPOC bevat zes dia's, waaronder
+  een bewerkbare procesafbakening en matrix; de instructie om van klant naar
+  leverancier te werken staat vóór de lege matrix. Sjablonen voor MIAUW en voor
+  de geselecteerde
   informatieveiligheidswerkvormen volgen dezelfde catalogusregel: zij zijn pas
   zichtbaar met *Informatieveiligheid* aan en dragen daar de badge van.
 - Samenwerken (realtime): **cryptografisch herkomstbewijs** op een verspreid deck

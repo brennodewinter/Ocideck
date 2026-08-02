@@ -1773,6 +1773,18 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Procesverbetering: DMADV-project': 'Izboljšanje procesa: projekt DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV okostje za načrtovanje in preverjanje novega procesa.',
+  'Procesverbetering: Kaizen-project': 'Izboljšanje procesa: projekt Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompakten projekt izboljšav s fazami načrtovanja, izvajanja in preverjanja.',
+  'Procesverbetering: A3-project': 'Izboljšanje procesa: projekt A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 okostje za težave, analize in izboljšave.',
+  'Procesverbetering: 8D-project': 'Izboljšanje procesa: 8D projekt',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D skelet za opis težave, vzroke in zagotovilo.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul je vključen. Računsko jedro, postavitve diapozitivov in predloge so na voljo lokalno ({n} faktorjev kontrolne karte).',
   'SIPOC-procesoverzicht': 'Pregled procesa SIPOC',

@@ -1793,6 +1793,18 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Procesverbetering: DMADV-project': 'Titjib tal-proċess: proġett DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Skeletru DMADV għat-tfassil u l-verifika ta \'proċess ġdid.',
+  'Procesverbetering: Kaizen-project': 'Titjib tal-proċess: Proġett Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Proġett ta’ titjib kompatt bil-fażijiet ta’ Ippjana, Tagħmel u Iċċekkja.',
+  'Procesverbetering: A3-project': 'Titjib tal-proċess: proġett A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Skeletru A3 għal azzjonijiet ta\' problema, analiżi u titjib.',
+  'Procesverbetering: 8D-project': 'Titjib tal-proċess: proġett 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Skeletru 8D għal deskrizzjoni tal-problema, kawżi u assigurazzjoni.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Il-modulu attiv. Il-qalba tal-kalkolu, it-taqsimiet ta’ slides u l-mudelli huma disponibbli lokalment ({n} fatturi ta’ chart ta’ kontroll).',
   'SIPOC-procesoverzicht': 'Ħarsa ġenerali lejn il-proċess SIPOC',

@@ -1806,6 +1806,18 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Procesverbetering: DMADV-project': 'Feabhsú próisis: tionscadal DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Creat DMADV chun próiseas nua a dhearadh agus a fhíorú.',
+  'Procesverbetering: Kaizen-project': 'Feabhsú próisis: tionscadal Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Tionscadal feabhsúcháin dlúth le céimeanna Pleanála, Déanta agus Seiceála.',
+  'Procesverbetering: A3-project': 'Feabhsú próisis: tionscadal A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Creat A3 le haghaidh faidhbe, anailíse agus gníomhartha feabhsúcháin.',
+  'Procesverbetering: 8D-project': 'Feabhsú próisis: tionscadal 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Creat 8D le haghaidh cur síos ar fhadhb, cúiseanna agus daingnithe.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modúl ar siúl. Tá croí ríomhaireachta, leaganacha amach sleamhnán agus teimpléid ar fáil go háitiúil ({n} fachtóir cárta rialaithe).',
   'SIPOC-procesoverzicht': 'Forléargas ar phróiseas SIPOC',

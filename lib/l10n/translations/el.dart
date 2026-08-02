@@ -1798,6 +1798,18 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Procesverbetering: DMADV-project': 'Βελτίωση διαδικασίας: έργο DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Σκελετός DMADV για το σχεδιασμό και την επαλήθευση μιας νέας διαδικασίας.',
+  'Procesverbetering: Kaizen-project': 'Βελτίωση διαδικασίας: έργο Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Συμπαγές έργο βελτίωσης με φάσεις Plan, Do και Check.',
+  'Procesverbetering: A3-project': 'Βελτίωση διαδικασίας: έργο A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Σκελετός Α3 για ενέργειες προβλήματος, ανάλυσης και βελτίωσης.',
+  'Procesverbetering: 8D-project': 'Βελτίωση διαδικασίας: έργο 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D σκελετός για περιγραφή προβλημάτων, αιτίες και διασφάλιση.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Η ενότητα είναι ενεργή. Ο πυρήνας υπολογισμών, οι διατάξεις διαφανειών και τα πρότυπα είναι διαθέσιμα τοπικά ({n} παράγοντες διαγράμματος ελέγχου).',
   'SIPOC-procesoverzicht': 'Επισκόπηση διαδικασίας SIPOC',

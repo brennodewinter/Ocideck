@@ -24,6 +24,29 @@ language: da
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Sæt procesgrænserne
+
+| Grænse | Værdi |
+| --- | --- |
+| Procesnavn |  |
+| Startpunkt |  |
+| Slutpunkt |  |
+
+---
+
+# Fuldfør det fra højre mod venstre
+
+1. Sæt klare start- og slutpunkter for processen.
+2. Nævn de kunder, der er afhængige af resultatet.
+3. Beskriv de output, de modtager.
+4. Opsummer processen i 4 til 7 aktiviteter på højt niveau.
+5. Bestem, hvilke input disse aktiviteter har brug for.
+6. Link hvert input til leverandøren, der stiller det til rådighed.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: da
 | Detalje | 4 til 7 aktiviteter på højt niveau | Kan indeholde snesevis af trin |
 | Fokus | Leverandører, input, output og kunder | Rækkefølge, afleveringer og beslutningspunkter |
 | Bruge | Start på en forbedringsindsats | Udførelse og fejlanalyse |
-
----
-
-# Fuldfør det fra højre mod venstre
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

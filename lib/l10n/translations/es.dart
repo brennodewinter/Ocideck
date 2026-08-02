@@ -727,6 +727,18 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Procesverbetering: DMADV-project': 'Mejora de procesos: proyecto DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Esqueleto DMADV para diseñar y verificar un nuevo proceso.',
+  'Procesverbetering: Kaizen-project': 'Mejora de procesos: proyecto Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Proyecto de mejora compacto con fases de Planificar, Hacer y Verificar.',
+  'Procesverbetering: A3-project': 'Mejora de procesos: proyecto A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Esqueleto A3 para problemas, análisis y acciones de mejora.',
+  'Procesverbetering: 8D-project': 'Mejora de procesos: proyecto 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Esqueleto 8D para descripción, causas y seguridad del problema.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Módulo activado. El núcleo de cálculo, los diseños de diapositivas y las plantillas están disponibles localmente ({n} factores de gráfico de control).',
   'SIPOC-procesoverzicht': 'Resumen del proceso SIPOC',

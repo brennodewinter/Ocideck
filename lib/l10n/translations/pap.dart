@@ -730,6 +730,18 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Procesverbetering: DMADV-project': 'Mehorashon di proseso: proyekto DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Skeleton di DMADV pa diseñá i verifiká un proseso nobo.',
+  'Procesverbetering: Kaizen-project': 'Mehorashon di proseso: proyekto Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Proyekto di mehorashon kompakto ku fasenan di Plan, Hasi i Kontrolá.',
+  'Procesverbetering: A3-project': 'Mehorashon di proseso: proyekto A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 skelet pa akshonnan di problema, analisis i mehorashon.',
+  'Procesverbetering: 8D-project': 'Mehorashon di proseso: proyekto 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Skeleton 8D pa deskripshon di problema, kousa i siguransa.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Módulo prendé. Núkleo di kalkulashon, diseñonan di diapositiva i plantianan ta disponibel lokalmente ({n} faktornan di karta di kontrol).',
   'SIPOC-procesoverzicht': 'Resumen di proseso SIPOC',

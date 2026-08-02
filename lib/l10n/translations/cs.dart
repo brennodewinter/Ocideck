@@ -1774,6 +1774,18 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Procesverbetering: DMADV-project': 'Zlepšení procesů: projekt DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Kostra DMADV pro návrh a ověření nového procesu.',
+  'Procesverbetering: Kaizen-project': 'Zlepšení procesu: projekt Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompaktní projekt zlepšování s fázemi Plán, Do a Kontrola.',
+  'Procesverbetering: A3-project': 'Zlepšení procesu: projekt A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 kostra pro problémové, analytické a zlepšovací akce.',
+  'Procesverbetering: 8D-project': 'Zlepšení procesu: 8D projekt',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D kostra pro popis problému, příčiny a zajištění.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul je zapnutý. Výpočetní jádro, rozvržení snímků a šablony jsou k dispozici místně ({n} faktorů regulačního diagramu).',
   'SIPOC-procesoverzicht': 'Přehled procesu SIPOC',

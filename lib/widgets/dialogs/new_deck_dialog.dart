@@ -211,19 +211,31 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
   }
 
   /// The catalogue narrowed by the search box and sorted for display. Matches
-  /// the localised title and description, plus the Dutch source strings, so a
-  /// term in either language finds the template.
+  /// the localised title, description and module badge, plus the Dutch source
+  /// strings, so a term in either language finds the template.
   List<DeckTemplate> _filtered(AppLocalizations l10n) {
     final query = _searchCtrl.text.trim().toLowerCase();
     // Module-only templates stay hidden until their module is revealed.
     final secRevealed = ref.watch(infoSafetyRevealProvider);
     final impRevealed = ref.watch(procesverbeteringRevealProvider);
-    bool matches(DeckTemplate t) => [
-      l10n.d(t.title),
-      l10n.d(t.description),
-      t.title,
-      t.description,
-    ].any((text) => text.toLowerCase().contains(query));
+    bool matches(DeckTemplate t) {
+      final terms = <String>[
+        l10n.d(t.title),
+        l10n.d(t.description),
+        t.title,
+        t.description,
+        if (t.requiresInfoSafety) ...[
+          l10n.d('Informatieveiligheid'),
+          'Informatieveiligheid',
+        ],
+        if (t.requiresProcesverbetering) ...[
+          l10n.d('Procesverbetering'),
+          'Procesverbetering',
+        ],
+      ];
+      return terms.any((text) => text.toLowerCase().contains(query));
+    }
+
     final catalogue = deckTemplates.where(
       (template) => deckTemplateVisible(
         template,
@@ -240,8 +252,9 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
       final l10n = context.l10n;
       final visible = _filtered(l10n);
       // Houd de selectie zichtbaar: verdwijnt die uit het filter, verspring
-      // dan naar het eerste resultaat (bij nul resultaten blijft de oude
-      // selectie gelden, zodat aanmaken altijd een geldig sjabloon oplevert).
+      // dan naar het eerste resultaat. Bij nul resultaten blijft de oude
+      // selectie bewaard voor wanneer het filter wordt gewist, maar aanmaken
+      // wordt uitgeschakeld en `_submit` controleert dit nogmaals.
       if (visible.isNotEmpty && !visible.contains(_template)) {
         _template = visible.first;
       }
@@ -266,92 +279,90 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
           key: _formKey,
           child: SizedBox(
             width: 520,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextFormField(
-                  controller: _ctrl,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    labelText: l10n.d('Titel'),
-                    hintText: l10n.d('Bijv. Kwartaalupdate Q4'),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextFormField(
+                    controller: _ctrl,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      labelText: l10n.d('Titel'),
+                      hintText: l10n.d('Bijv. Kwartaalupdate Q4'),
+                    ),
+                    validator: (v) => (v == null || v.trim().isEmpty)
+                        ? l10n.d('Vul een titel in')
+                        : null,
+                    onFieldSubmitted: (_) => _submit(),
                   ),
-                  validator: (v) => (v == null || v.trim().isEmpty)
-                      ? l10n.d('Vul een titel in')
-                      : null,
-                  onFieldSubmitted: (_) => _submit(),
-                ),
-                const SizedBox(height: 16),
-                DropdownButtonFormField<String>(
-                  initialValue: profiles.any((p) => p.name == selected)
-                      ? selected
-                      : profiles.first.name,
-                  decoration: InputDecoration(
-                    labelText: l10n.t('styleProfile'),
-                  ),
-                  items: [
-                    for (final profile in profiles)
-                      DropdownMenuItem(
-                        value: profile.name,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ThemeProfileSwatch(profile: profile),
-                            const SizedBox(width: 8),
-                            Flexible(
-                              child: Text(
-                                profile.name,
-                                overflow: TextOverflow.ellipsis,
+                  const SizedBox(height: 16),
+                  DropdownButtonFormField<String>(
+                    initialValue: profiles.any((p) => p.name == selected)
+                        ? selected
+                        : profiles.first.name,
+                    decoration: InputDecoration(
+                      labelText: l10n.t('styleProfile'),
+                    ),
+                    items: [
+                      for (final profile in profiles)
+                        DropdownMenuItem(
+                          value: profile.name,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ThemeProfileSwatch(profile: profile),
+                              const SizedBox(width: 8),
+                              Flexible(
+                                child: Text(
+                                  profile.name,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                  ],
-                  onChanged: (name) => setState(() => _profileName = name),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  l10n.d(
-                    'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.',
-                  ),
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  l10n.d('Sjabloon'),
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-                _templateLanguageNotice(context, l10n),
-                const SizedBox(height: 6),
-                TextField(
-                  key: const ValueKey('templateSearchField'),
-                  controller: _searchCtrl,
-                  onChanged: (_) => _onSearchChanged(),
-                  decoration: InputDecoration(
-                    isDense: true,
-                    prefixIcon: const Icon(Icons.search, size: 18),
-                    hintText: l10n.d('Zoek een sjabloon'),
-                    suffixIcon: _searchCtrl.text.isEmpty
-                        ? null
-                        : IconButton(
-                            icon: const Icon(Icons.clear, size: 16),
-                            onPressed: () {
-                              _searchCtrl.clear();
-                              _onSearchChanged();
-                            },
+                            ],
                           ),
+                        ),
+                    ],
+                    onChanged: (name) => setState(() => _profileName = name),
                   ),
-                ),
-                const SizedBox(height: 6),
-                // Flexible met een plafond: op kleine vensters krimpt de
-                // lijst mee in plaats van de dialoog te laten overlopen.
-                Flexible(
-                  child: Container(
+                  const SizedBox(height: 6),
+                  Text(
+                    l10n.d(
+                      'Bepaalt kleuren, lettertype en logo. Later aan te passen via de presentatie-eigenschappen of instellingen.',
+                    ),
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    l10n.d('Sjabloon'),
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+                  _templateLanguageNotice(context, l10n),
+                  const SizedBox(height: 6),
+                  TextField(
+                    key: const ValueKey('templateSearchField'),
+                    controller: _searchCtrl,
+                    onChanged: (_) => _onSearchChanged(),
+                    decoration: InputDecoration(
+                      isDense: true,
+                      prefixIcon: const Icon(Icons.search, size: 18),
+                      hintText: l10n.d('Zoek een sjabloon'),
+                      suffixIcon: _searchCtrl.text.isEmpty
+                          ? null
+                          : IconButton(
+                              icon: const Icon(Icons.clear, size: 16),
+                              onPressed: () {
+                                _searchCtrl.clear();
+                                _onSearchChanged();
+                              },
+                            ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Container(
                     constraints: const BoxConstraints(maxHeight: 320),
                     decoration: BoxDecoration(
                       border: Border.all(color: AppTheme.slate300),
@@ -364,8 +375,8 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
                       child: _templateList(l10n),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -374,7 +385,10 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
             onPressed: () => Navigator.pop(context),
             child: Text(l10n.t('cancel')),
           ),
-          ElevatedButton(onPressed: _submit, child: Text(l10n.d('Aanmaken'))),
+          ElevatedButton(
+            onPressed: _filtered(l10n).contains(_template) ? _submit : null,
+            child: Text(l10n.d('Aanmaken')),
+          ),
         ],
       ),
     );
@@ -497,6 +511,8 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
   }
 
   void _submit() {
+    final l10n = context.l10n;
+    if (!_filtered(l10n).contains(_template)) return;
     if (_formKey.currentState!.validate()) {
       final settings = ref.read(settingsProvider);
       Navigator.pop(

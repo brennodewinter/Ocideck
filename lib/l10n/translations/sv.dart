@@ -1770,6 +1770,18 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Procesverbetering: DMADV-project': 'Processförbättring: DMADV-projekt',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV-skelett för att designa och verifiera en ny process.',
+  'Procesverbetering: Kaizen-project': 'Processförbättring: Kaizen-projektet',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompakt förbättringsprojekt med Plan, Gör och Kontrollera faser.',
+  'Procesverbetering: A3-project': 'Processförbättring: A3-projekt',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3-skelett för problem, analys och förbättringsåtgärder.',
+  'Procesverbetering: 8D-project': 'Processförbättring: 8D-projekt',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D-skelett för problembeskrivning, orsaker och försäkran.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modulen är på. Beräkningskärna, bildlayouter och mallar är tillgängliga lokalt ({n} styrdiagramfaktorer).',
   'SIPOC-procesoverzicht': 'SIPOC-processöversikt',

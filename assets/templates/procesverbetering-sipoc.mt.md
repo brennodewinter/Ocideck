@@ -24,6 +24,29 @@ language: mt
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Issettja l-konfini tal-proċess
+
+| Konfini | Valur |
+| --- | --- |
+| Isem tal-proċess |  |
+| Punt tal-bidu |  |
+| Il-punt tat-tmiem |  |
+
+---
+
+# Imlaha mil-lemin għax-xellug
+
+1. Issettja punti ċari tal-bidu u tat-tmiem għall-proċess.
+2. Semmi l-klijenti li jiddependu fuq ir-riżultat.
+3. Iddeskrivi l-outputs li jirċievu.
+4. Agħti fil-qosor il-proċess f'4 sa 7 attivitajiet ta' livell għoli.
+5. Iddetermina liema inputs jeħtieġu dawk l-attivitajiet.
+6. Link kull input mal-fornitur li jagħmilha disponibbli.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: mt
 | Dettall | 4 sa 7 attivitajiet ta' livell għoli | Jista 'jkun fih għexieren ta' passi |
 | Iffoka | Fornituri, inputs, outputs u klijenti | Sekwenza, hand-offs u punti ta' deċiżjoni |
 | Użu | Bidu ta' sforz ta' titjib | Eżekuzzjoni u analiżi tal-ħsarat |
-
----
-
-# Imlaha mil-lemin għax-xellug
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

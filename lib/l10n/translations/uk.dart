@@ -1788,6 +1788,18 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Procesverbetering: DMADV-project': 'Удосконалення процесу: проект DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Скелет DMADV для розробки та перевірки нового процесу.',
+  'Procesverbetering: Kaizen-project': 'Покращення процесів: проект Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Компактний проект покращення з фазами «Планування», «Виконання» та «Перевірка».',
+  'Procesverbetering: A3-project': 'Удосконалення процесу: проект А3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Скелет формату A3 для проблем, аналізу та дій щодо покращення.',
+  'Procesverbetering: 8D-project': 'Удосконалення процесу: 8D проект',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D скелет для опису проблеми, причин і гарантії.',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Модуль увімкнено. Обчислювальне ядро, макети слайдів і шаблони доступні локально ({n} коефіцієнтів контрольної карти).',
   'SIPOC-procesoverzicht': 'Огляд процесу SIPOC',

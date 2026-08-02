@@ -24,6 +24,29 @@ language: hu
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Állítsa be a folyamat határait
+
+| Határ | Érték |
+| --- | --- |
+| Folyamat neve |  |
+| Kezdőpont |  |
+| Végpont |  |
+
+---
+
+# Töltse ki jobbról balra
+
+1. Állítson be világos kezdő- és végpontokat a folyamathoz.
+2. Nevezze meg azokat az ügyfeleket, akik az eredménytől függenek.
+3. Ismertesse a kapott kimeneteket.
+4. Foglalja össze a folyamatot 4-7 magas szintű tevékenységben.
+5. Határozza meg, hogy ezeknek a tevékenységeknek milyen inputokra van szüksége.
+6. Minden bemenetet kapcsoljon a szállítóhoz, aki azt elérhetővé teszi.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: hu
 | Részlet | 4-7 magas szintű tevékenység | Több tucat lépést tartalmazhat |
 | Fókusz | Szállítók, inputok, outputok és vevők | Sorrend, átadások és döntési pontok |
 | Használat | A fejlesztés megkezdése | Végrehajtás és hibaelemzés |
-
----
-
-# Töltse ki jobbról balra
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

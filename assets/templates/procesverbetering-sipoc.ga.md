@@ -24,6 +24,29 @@ language: ga
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Set the process boundaries
+
+| Boundary | Value |
+| --- | --- |
+| Process name |  |
+| Start point |  |
+| End point |  |
+
+---
+
+# Comhlánaigh é ó dheis go clé
+
+1. Set clear start and end points for the process.
+2. Name the customers who depend on the result.
+3. Describe the outputs they receive.
+4. Summarise the process in 4 to 7 high-level activities.
+5. Determine which inputs those activities need.
+6. Link each input to the supplier who makes it available.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: ga
 | Sonraigh | 4 go 7 gníomhaíocht ardleibhéil | Féadfaidh an iliomad céimeanna a bheith ann |
 | Fócas | Soláthraithe, ionchuir, aschuir agus custaiméirí | Seicheamh, lámhscríbhinní agus pointí cinnteoireachta |
 | Úsáid | Tús le hiarracht feabhsúcháin | Forghníomhú agus anailís locht |
-
----
-
-# Comhlánaigh é ó dheis go clé
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

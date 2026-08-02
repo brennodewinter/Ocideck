@@ -24,6 +24,29 @@ language: ro
 
 ---
 
+<!-- _class: table table-editable -->
+
+# Stabiliți limitele procesului
+
+| Hotar | Valoare |
+| --- | --- |
+| Numele procesului |  |
+| Punctul de pornire |  |
+| Punctul final |  |
+
+---
+
+# Completați-l de la dreapta la stânga
+
+1. Stabiliți puncte de început și de sfârșit clare pentru proces.
+2. Numiți clienții care depind de rezultat.
+3. Descrieți rezultatele pe care le primesc.
+4. Rezumați procesul în 4 până la 7 activități de nivel înalt.
+5. Determinați ce inputuri au nevoie de acele activități.
+6. Conectați fiecare intrare la furnizorul care o pune la dispoziție.
+
+---
+
 <!-- _class: matrix -->
 <!-- ocideck_template: sipoc -->
 
@@ -49,14 +72,3 @@ language: ro
 | Detaliu | 4 până la 7 activități de nivel înalt | Poate conține zeci de pași |
 | Concentrează-te | Furnizori, intrări, ieșiri și clienți | Secvență, transferuri și puncte de decizie |
 | Utilizare | Începutul unui efort de îmbunătățire | Executie si analiza defectelor |
-
----
-
-# Completați-l de la dreapta la stânga
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.
