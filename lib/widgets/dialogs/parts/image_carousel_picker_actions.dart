@@ -563,6 +563,9 @@ extension _CarouselActions on _ImageCarouselPickerState {
   }
 
   Future<void> _confirm() async {
+    // In beheermodus is er niets om te kiezen: Enter en dubbelklik mogen de
+    // dialoog dan niet met een (zinloos) resultaat sluiten.
+    if (widget.manageOnly) return;
     if (_selected == null) return;
     await _persistDescription();
     await widget.captionService.saveCaption(_selected!, _caption);

@@ -211,18 +211,24 @@ extension _CarouselPreview on _ImageCarouselPickerState {
       ),
       child: Row(
         children: [
-          // Bladeren knop
-          OutlinedButton.icon(
-            onPressed: _browse,
-            icon: const Icon(Icons.folder_open_outlined, size: 16),
-            label: Text(l10n.d('Bladeren…')),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: ImagePickerPalette.textMuted,
-              side: const BorderSide(color: ImagePickerPalette.border),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          // Bladeren knop — kiest een afbeelding van schijf in het deck; in de
+          // beheermodus is er geen deck om in te kiezen, dus die vervalt.
+          if (!widget.manageOnly) ...[
+            OutlinedButton.icon(
+              onPressed: _browse,
+              icon: const Icon(Icons.folder_open_outlined, size: 16),
+              label: Text(l10n.d('Bladeren…')),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: ImagePickerPalette.textMuted,
+                side: const BorderSide(color: ImagePickerPalette.border),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 10,
+                ),
+              ),
             ),
-          ),
-          const SizedBox(width: 8),
+            const SizedBox(width: 8),
+          ],
           // Duplicaten opruimen (md5)
           Tooltip(
             message: l10n.d(
@@ -260,45 +266,77 @@ extension _CarouselPreview on _ImageCarouselPickerState {
           // `Flexible` + `Spacer`: elk flex 1, dus die deelden de vrije ruimte
           // en de hint eindigde op "Dubbelklik s…" met 400px leegte ernaast.
           // De kleur was `borderStrong`, een randkleur als tekst: 2,28:1 (#780).
+          // In de beheermodus gaat de hint over kiezen en klopt dus niet; dan
+          // vult een lege ruimte de plek zodat de knoppen rechts blijven staan.
           Expanded(
-            child: Text(
-              l10n.d(
-                '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert',
-              ),
-              style: const TextStyle(
-                color: ImagePickerPalette.textMuted,
-                fontSize: 11,
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
+            child: widget.manageOnly
+                ? const SizedBox.shrink()
+                : Text(
+                    l10n.d(
+                      '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert',
+                    ),
+                    style: const TextStyle(
+                      color: ImagePickerPalette.textMuted,
+                      fontSize: 11,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
           ),
-          // Annuleren
-          TextButton(
-            onPressed: () => _close(),
-            style: TextButton.styleFrom(
-              foregroundColor: ImagePickerPalette.textMuted,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          if (widget.manageOnly)
+            // In beheermodus is er niets te kiezen of te annuleren: één heldere
+            // uitgang volstaat.
+            ElevatedButton.icon(
+              onPressed: () => _close(),
+              icon: const Icon(Icons.check_circle_outline, size: 17),
+              label: Text(l10n.t('close')),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppTheme.blue500,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 22,
+                  vertical: 10,
+                ),
+                textStyle: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
+              ),
+            )
+          else ...[
+            // Annuleren
+            TextButton(
+              onPressed: () => _close(),
+              style: TextButton.styleFrom(
+                foregroundColor: ImagePickerPalette.textMuted,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
+                ),
+              ),
+              child: Text(l10n.t('cancel')),
             ),
-            child: Text(l10n.t('cancel')),
-          ),
-          const SizedBox(width: 10),
-          // Kiezen
-          ElevatedButton.icon(
-            onPressed: _selected != null ? () => _confirm() : null,
-            icon: const Icon(Icons.check_circle_outline, size: 17),
-            label: Text(l10n.d('Kiezen')),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ImagePickerPalette.successStrong,
-              foregroundColor: Colors.white,
-              disabledBackgroundColor: ImagePickerPalette.surface2,
-              disabledForegroundColor: ImagePickerPalette.borderStrong,
-              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
-              textStyle: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
+            const SizedBox(width: 10),
+            // Kiezen
+            ElevatedButton.icon(
+              onPressed: _selected != null ? () => _confirm() : null,
+              icon: const Icon(Icons.check_circle_outline, size: 17),
+              label: Text(l10n.d('Kiezen')),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ImagePickerPalette.successStrong,
+                foregroundColor: Colors.white,
+                disabledBackgroundColor: ImagePickerPalette.surface2,
+                disabledForegroundColor: ImagePickerPalette.borderStrong,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 22,
+                  vertical: 10,
+                ),
+                textStyle: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
               ),
             ),
-          ),
+          ],
         ],
       ),
     );
