@@ -1771,6 +1771,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Sessie actief als': 'Istunto aktiivinen käyttäjänä',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Kirjauduttu sisään, mutta palvelin ei voinut muodostaa istuntoa (resurssin sidonta epäonnistui).',
   'XMPP-server testen': 'Testaa XMPP-palvelin',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Anna XMPP-palvelin, Jabber-tunnus ja salasana ja testaa yhteys. Mitään ei tallenneta; tämä vain tarkistaa, toimiiko tili. Jätä Jabber-tunnus tyhjäksi anonyymiä käyttöä varten.',

@@ -1775,6 +1775,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Sessie actief als': 'Munkamenet aktív mint',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Bejelentkezve, de a kiszolgáló nem tudott munkamenetet létrehozni (az erőforrás-hozzárendelés sikertelen).',
   'XMPP-server testen': 'XMPP-kiszolgáló tesztelése',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Adjon meg egy XMPP-kiszolgálót, egy Jabber-azonosítót és egy jelszót, majd tesztelje a kapcsolatot. Semmi nem kerül mentésre; ez csak azt ellenőrzi, hogy a fiók működik-e. Névtelen hozzáféréshez hagyja üresen a Jabber-azonosítót.',

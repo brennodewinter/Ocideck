@@ -1777,6 +1777,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Sessie actief als': 'Sesija aktivna kao',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Prijava uspješna, ali poslužitelj nije mogao uspostaviti sesiju (povezivanje resursa nije uspjelo).',
   'XMPP-server testen': 'Testiraj XMPP poslužitelj',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Unesite XMPP poslužitelj, Jabber ID i lozinku te testirajte vezu. Ništa se ne pohranjuje; ovo samo provjerava radi li račun. Ostavite Jabber ID praznim za anonimni pristup.',

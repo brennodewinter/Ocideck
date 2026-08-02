@@ -1787,6 +1787,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Sessie actief als': 'Sessio activa ut',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Ingressus es, sed server sessionem instituere non potuit (colligatio facultatis defecit).',
   'XMPP-server testen': 'Server XMPP probare',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Servrum XMPP, Jabber-ID et tesseram insere ac nexum proba. Nihil servatur; hoc tantum probat num ratio operetur. Jabber-ID vacuam relinque ad accessum anonymum.',

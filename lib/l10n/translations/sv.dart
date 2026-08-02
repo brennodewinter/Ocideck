@@ -1770,6 +1770,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Sessie actief als': 'Session aktiv som',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Inloggad, men servern kunde inte upprätta en session (resursbindning misslyckades).',
   'XMPP-server testen': 'Testa XMPP-server',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Ange en XMPP-server, ett Jabber-ID och ett lösenord och testa anslutningen. Ingenting sparas; detta kontrollerar bara om kontot fungerar. Lämna Jabber-ID:t tomt för anonym åtkomst.',

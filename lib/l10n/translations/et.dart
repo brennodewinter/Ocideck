@@ -1762,6 +1762,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Sessie actief als': 'Seanss aktiivne kasutajana',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Sisse logitud, kuid server ei suutnud seanssi luua (ressursi sidumine ebaõnnestus).',
   'XMPP-server testen': 'Testi XMPP-serverit',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Sisestage XMPP-server, Jabber ID ja parool ning testige ühendust. Midagi ei salvestata; see üksnes kontrollib, kas konto töötab. Anonüümseks juurdepääsuks jätke Jabber ID tühjaks.',

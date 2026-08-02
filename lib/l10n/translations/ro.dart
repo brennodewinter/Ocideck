@@ -1788,6 +1788,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Sessie actief als': 'Sesiune activă ca',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Autentificat, dar serverul nu a putut stabili o sesiune (asocierea resursei a eșuat).',
   'XMPP-server testen': 'Testează serverul XMPP',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Introduceți un server XMPP, un Jabber ID și o parolă și testați conexiunea. Nu se stochează nimic; aceasta verifică doar dacă contul funcționează. Lăsați Jabber ID gol pentru acces anonim.',

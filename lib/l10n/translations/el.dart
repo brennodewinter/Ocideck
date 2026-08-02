@@ -1798,6 +1798,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Sessie actief als': 'Ενεργή συνεδρία ως',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Έγινε σύνδεση, αλλά ο διακομιστής δεν μπόρεσε να δημιουργήσει συνεδρία (η δέσμευση πόρου απέτυχε).',
   'XMPP-server testen': 'Δοκιμή διακομιστή XMPP',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Εισαγάγετε έναν διακομιστή XMPP, ένα Jabber ID και έναν κωδικό πρόσβασης και δοκιμάστε τη σύνδεση. Δεν αποθηκεύεται τίποτα· αυτό ελέγχει μόνο αν λειτουργεί ο λογαριασμός. Αφήστε το Jabber ID κενό για ανώνυμη πρόσβαση.',

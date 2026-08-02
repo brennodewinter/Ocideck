@@ -1793,6 +1793,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Sessie actief als': 'Sessjoni attiva bħala',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Illoggjat, imma s-server ma setax joħloq sessjoni (l-irbit tar-riżorsa falla).',
   'XMPP-server testen': 'Ittestja s-server XMPP',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Daħħal server XMPP, Jabber ID u password u ttestja l-konnessjoni. Ma jinħażen xejn; dan jiċċekkja biss jekk il-kont jaħdimx. Ħalli l-Jabber ID vojt għal aċċess anonimu.',

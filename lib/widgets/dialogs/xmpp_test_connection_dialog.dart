@@ -1,12 +1,13 @@
-// The "test XMPP connection" dialog (F2, `NATIVE_CALLS.md` §5): the first
-// consumer of the XMPP connection layer, and the thing that makes it reachable
-// from the app. The user enters a server, a Jabber-ID and a password; pressing
-// test opens a NetGuard-pinned wss stream and authenticates (SASL), then shows
-// whether it worked. Nothing is stored — this only proves the account works, the
-// groundwork the real calls path (F3) builds on.
+// The "test XMPP connection" dialog (F2/F3, `NATIVE_CALLS.md` §5): the first
+// consumer of the XMPP client, and the thing that makes it reachable from the
+// app. The user enters a server, a Jabber-ID and a password; pressing test opens
+// a NetGuard-pinned wss stream, authenticates (SASL) and binds a resource, then
+// shows whether a full session came up. Nothing is stored, and the session is
+// closed again right away — this only proves the account works, the groundwork
+// the real calls path (F3 MUC/Jingle) builds on.
 //
 // The connection call is injectable so the widget test drives it without a socket;
-// the failure code is mapped to a translated message here (the connection layer
+// the failure code is mapped to a translated message here (the session layer
 // carries no l10n).
 
 import 'package:flutter/material.dart';
@@ -14,15 +15,16 @@ import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/xmpp_settings.dart';
 import '../../theme/app_theme.dart';
-import '../../xmpp/xmpp_connection.dart';
 import '../../xmpp/xmpp_frame_transport.dart';
 import '../../xmpp/xmpp_frame_transport_platform.dart';
+import '../../xmpp/xmpp_session.dart';
 
-/// Opens a guarded wss stream to [settings] and authenticates. Injected in tests.
+/// Opens a guarded wss session to [settings], binds a resource, and closes it
+/// again. Injected in tests.
 typedef XmppConnectTest =
-    Future<XmppAuthResult> Function(XmppSettings settings, String password);
+    Future<XmppSessionResult> Function(XmppSettings settings, String password);
 
-Future<XmppAuthResult> _liveConnectTest(
+Future<XmppSessionResult> _liveConnectTest(
   XmppSettings settings,
   String password,
 ) async {
@@ -30,16 +32,20 @@ Future<XmppAuthResult> _liveConnectTest(
   try {
     transport = await openXmppFrameTransport(settings);
   } on XmppConnectException catch (e) {
-    return XmppAuthResult.failed(
-      XmppAuthFailure.transportRefused,
+    return XmppSessionResult.failed(
+      XmppSessionFailure.transportRefused,
       detail: e.message,
     );
   }
-  return XmppConnection(
+  final session = XmppSession(
     transport: transport,
     settings: settings,
     password: password,
-  ).authenticate();
+  );
+  final result = await session.connect();
+  // A "test" only proves the session comes up; hold nothing open.
+  await session.close();
+  return result;
 }
 
 class XmppTestConnectionDialog extends StatefulWidget {
@@ -57,7 +63,7 @@ class _XmppTestConnectionDialogState extends State<XmppTestConnectionDialog> {
   final _jid = TextEditingController();
   final _password = TextEditingController();
   bool _testing = false;
-  XmppAuthResult? _result;
+  XmppSessionResult? _result;
 
   @override
   void dispose() {
@@ -148,7 +154,7 @@ class _ResultLine extends StatelessWidget {
   const _ResultLine({required this.l10n, required this.result});
 
   final AppLocalizations l10n;
-  final XmppAuthResult result;
+  final XmppSessionResult result;
 
   @override
   Widget build(BuildContext context) {
@@ -156,6 +162,7 @@ class _ResultLine extends StatelessWidget {
     final color = ok ? AppTheme.successFg : AppTheme.dangerFg;
     final text = ok
         ? '${l10n.d('Verbonden — authenticatie geslaagd via')} ${result.mechanism}'
+              '\n${l10n.d('Sessie actief als')} ${result.boundJid}'
         : _failureText(l10n, result.failure!);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,25 +183,28 @@ class _ResultLine extends StatelessWidget {
 
 String _failureText(
   AppLocalizations l10n,
-  XmppAuthFailure failure,
+  XmppSessionFailure failure,
 ) => switch (failure) {
-  XmppAuthFailure.noUsableMechanism => l10n.d(
+  XmppSessionFailure.noUsableMechanism => l10n.d(
     'De server biedt geen inlogmethode die OciDeck ondersteunt.',
   ),
-  XmppAuthFailure.badCredentials => l10n.d(
+  XmppSessionFailure.badCredentials => l10n.d(
     'De gebruikersnaam of het wachtwoord werd niet geaccepteerd.',
   ),
-  XmppAuthFailure.mutualAuthFailed => l10n.d(
+  XmppSessionFailure.mutualAuthFailed => l10n.d(
     'De server kon zich niet bewijzen (wederzijdse verificatie mislukt).',
   ),
-  XmppAuthFailure.serverRedirect => l10n.d(
+  XmppSessionFailure.serverRedirect => l10n.d(
     'De server wilde de verbinding omleiden naar een andere host; geweigerd.',
   ),
-  XmppAuthFailure.timeout => l10n.d('De server reageerde niet op tijd.'),
-  XmppAuthFailure.transportRefused => l10n.d(
+  XmppSessionFailure.resourceBindFailed => l10n.d(
+    'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).',
+  ),
+  XmppSessionFailure.timeout => l10n.d('De server reageerde niet op tijd.'),
+  XmppSessionFailure.transportRefused => l10n.d(
     'Kon geen verbinding maken met de server. Gebruik wss:// en een geldig adres.',
   ),
-  XmppAuthFailure.serverError ||
-  XmppAuthFailure.streamClosed ||
-  XmppAuthFailure.handshake => l10n.d('De verbinding met de server mislukte.'),
+  XmppSessionFailure.serverError || XmppSessionFailure.handshake => l10n.d(
+    'De verbinding met de server mislukte.',
+  ),
 };

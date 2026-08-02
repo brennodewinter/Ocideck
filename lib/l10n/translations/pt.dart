@@ -1800,6 +1800,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Sessie actief als': 'Sessão ativa como',
+  'Ingelogd, maar de server kon geen sessie opzetten (resource-binding mislukt).':
+      'Autenticado, mas o servidor não conseguiu estabelecer uma sessão (a vinculação de recurso falhou).',
   'XMPP-server testen': 'Testar servidor XMPP',
   'Voer een XMPP-server, een Jabber-ID en een wachtwoord in en test de verbinding. Er wordt niets bewaard; dit controleert alleen of het account werkt. Laat de Jabber-ID leeg voor anonieme toegang.':
       'Insira um servidor XMPP, um Jabber ID e uma palavra-passe e teste a ligação. Nada é armazenado; isto apenas verifica se a conta funciona. Deixe o Jabber ID vazio para acesso anónimo.',
