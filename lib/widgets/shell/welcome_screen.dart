@@ -378,6 +378,11 @@ class _WelcomeScreen extends ConsumerWidget {
           ),
         ),
       ],
+      // Onderhoud aan de afbeeldingenbibliotheek kan ook zonder open presentatie
+      // (#1108). Bewust onderaan — het is geen "manier om te beginnen" maar een
+      // beheertaak; de knop gate zichzelf en verdwijnt bij wie geen bibliotheek
+      // heeft.
+      ..._imageLibraryButton(context, ref, l10n),
       const SizedBox(height: 4),
     ];
   }
@@ -499,6 +504,63 @@ class _WelcomeScreen extends ConsumerWidget {
 
   Future<void> _newDeck(BuildContext context, WidgetRef ref) =>
       _createDeckFromDialog(context, ref, inNewTab: false);
+
+  /// De knop 'Afbeeldingen beheren' onderaan de startkolom: opent de bibliotheek
+  /// in beheermodus, los van een presentatie (#1108). Zelf gated — alleen op
+  /// desktop en zodra er bibliotheekmappen zijn ingesteld, want zonder mappen
+  /// valt er niets te beheren. Losse methode zodat [_startColumn] onder de
+  /// methodelengte-ratchet blijft.
+  List<Widget> _imageLibraryButton(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+  ) {
+    final hasLibraries = ref.watch(
+      settingsProvider.select((s) => s.libraries.isNotEmpty),
+    );
+    if (!supportsLocalProjectFolders || !hasLibraries) return const [];
+    return [
+      const SizedBox(height: 10),
+      SizedBox(
+        width: double.infinity,
+        child: OutlinedButton.icon(
+          onPressed: () => _manageImageLibrary(context, ref),
+          icon: const Icon(Icons.photo_library_outlined, size: 18),
+          // 'Afbeeldingen beheren' i.p.v. de langere bibliotheeknaam: het is een
+          // beheeractie (zelfde titel als de dialoog) en de tekst mag in een
+          // breedsprakige taal op twee regels vallen in plaats van over de rand.
+          label: Text(
+            l10n.d('Afbeeldingen beheren'),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+          ),
+        ),
+      ),
+    ];
+  }
+
+  /// Opent de Afbeeldingenbibliotheek in beheermodus, los van een presentatie
+  /// (#1108). De zoekwortels zijn de ingestelde bibliotheken; een gekozen
+  /// afbeelding heeft hier geen bestemming, dus het resultaat wordt genegeerd —
+  /// het gaat om het onderhoud (verwijderen, duplicaten opruimen) dat de
+  /// bibliotheek zelf biedt. Eventueel in andere tabs geopende decks worden wél
+  /// meegenomen, zodat opruimen hun verwijzingen niet stukmaakt.
+  Future<void> _manageImageLibrary(BuildContext context, WidgetRef ref) async {
+    final settings = ref.read(settingsProvider);
+    await ImageCarouselPicker.show(
+      context,
+      manageOnly: true,
+      searchPaths: settings.libraryPaths,
+      captionService: ref.read(captionServiceProvider),
+      descriptionService: ref.read(descriptionServiceProvider),
+      usageOf: (absolutePath) => _imageUsages(ref, absolutePath),
+      onReplaceUsages: (from, to) => _replaceImageUsages(ref, from, to),
+      openDeckFiles: [
+        for (final tab in ref.read(tabsProvider).tabs)
+          ?tab.deckNotifier.currentState.filePath,
+      ],
+    );
+  }
 
   /// Open een recent bestand met dezelfde nette foutafhandeling als het
   /// openen-dialoog; een verdwenen bestand verdwijnt ook uit de lijst.

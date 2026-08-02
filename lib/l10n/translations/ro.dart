@@ -1852,6 +1852,9 @@ const _dutchSourceAddRo = <String, String>{
   'Persoonsgegevens weggelaten': 'Date cu caracter personal omise',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Date cu caracter personal marcate pentru destinatar',
+  'Afbeeldingen beheren': 'Gestionează imaginile',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Încă nu există imagini în folderele bibliotecii tale.',
   'Voortgang per sectie': 'Progres pe secțiuni',
   'Nog te doen': 'Rămas',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

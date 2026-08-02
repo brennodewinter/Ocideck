@@ -794,6 +794,9 @@ const _dutchSourceAddPap = {
   'Persoonsgegevens weggelaten': 'Datonan personal kitá',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Datonan personal marká pa e destinataro',
+  'Afbeeldingen beheren': 'Maneha imágennan',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Ainda no tin imágennan den bo karpetanan di biblioteka.',
   'Voortgang per sectie': 'Progreso pa sekshon',
   'Nog te doen': 'Falta pa hasi',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

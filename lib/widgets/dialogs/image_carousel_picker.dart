@@ -78,6 +78,12 @@ class ImageCarouselPicker extends ConsumerStatefulWidget {
   /// overgeslagen om dubbeltellingen te voorkomen.
   final List<String> openDeckFiles;
 
+  /// Beheer-/onderhoudsmodus: de bibliotheek staat op zichzelf, zonder open
+  /// presentatie om een afbeelding voor te kiezen. Dan vervalt het kiezen
+  /// (knoppen "Kiezen"/"Bladeren", Enter/dubbelklik) en blijft alleen het
+  /// onderhoud over: verwijderen en duplicaten opruimen. Zie beginscherm (#1108).
+  final bool manageOnly;
+
   const ImageCarouselPicker({
     super.key,
     required this.searchPaths,
@@ -87,6 +93,7 @@ class ImageCarouselPicker extends ConsumerStatefulWidget {
     this.usageOf,
     this.onReplaceUsages,
     this.openDeckFiles = const [],
+    this.manageOnly = false,
   });
 
   static Future<ImagePickResult?> show(
@@ -98,6 +105,7 @@ class ImageCarouselPicker extends ConsumerStatefulWidget {
     ImageUsageLookup? usageOf,
     ImageUsageReplace? onReplaceUsages,
     List<String> openDeckFiles = const [],
+    bool manageOnly = false,
   }) {
     return showDialog<ImagePickResult>(
       context: context,
@@ -110,6 +118,7 @@ class ImageCarouselPicker extends ConsumerStatefulWidget {
         usageOf: usageOf,
         onReplaceUsages: onReplaceUsages,
         openDeckFiles: openDeckFiles,
+        manageOnly: manageOnly,
       ),
     );
   }

@@ -1836,6 +1836,9 @@ const _dutchSourceAddId = <String, String>{
   'Persoonsgegevens weggelaten': 'Data pribadi dihilangkan',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Data pribadi ditandai untuk penerima',
+  'Afbeeldingen beheren': 'Kelola gambar',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Belum ada gambar di folder pustaka Anda.',
   'Voortgang per sectie': 'Kemajuan per bagian',
   'Nog te doen': 'Belum selesai',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

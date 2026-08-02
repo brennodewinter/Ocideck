@@ -1476,6 +1476,16 @@ image you can store a **caption** (source/credit line, shown on the slide) and a
 searchable **description** — in practice your tags. The search box matches file
 names and descriptions.
 
+You can also open the library **without any presentation open**, straight from
+the start screen: once you have one or more library folders configured, a
+desktop-only **Manage images** button appears there. Opened this way it runs in a
+**management mode** — there is no slide to pick an image *for*, so the *Choose*
+and *Browse* actions fall away and only the maintenance actions remain: cleaning
+up duplicates and deleting images. It searches your configured library folders,
+so you can tidy them between jobs without first opening a throwaway deck. Any
+decks open in other tabs are still respected, so a clean-up never breaks their
+references. *(Added 2026-08-02.)*
+
 Supported formats are PNG, JPEG, **GIF (including animated)**, BMP and WebP.
 Animated GIFs (and animated WebP) play in the preview, presentation and audience
 window. Very large images are decoded at a capped size to protect memory; a

@@ -49,7 +49,9 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           ),
           const SizedBox(width: 14),
           Text(
-            l10n.d('Afbeelding kiezen'),
+            widget.manageOnly
+                ? l10n.d('Afbeeldingen beheren')
+                : l10n.d('Afbeelding kiezen'),
             style: const TextStyle(
               color: Colors.white,
               fontSize: 17,
@@ -345,6 +347,10 @@ extension _CarouselChrome on _ImageCarouselPickerState {
             Text(
               filtering
                   ? l10n.d('Pas je zoekterm aan of voeg een beschrijving toe.')
+                  : widget.manageOnly
+                  ? l10n.d(
+                      'Er staan nog geen afbeeldingen in je bibliotheekmappen.',
+                    )
                   : l10n.d(
                       'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.',
                     ),

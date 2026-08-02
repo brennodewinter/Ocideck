@@ -1852,6 +1852,9 @@ const _dutchSourceAddLa = <String, String>{
   'Persoonsgegevens weggelaten': 'Data personalia omissa',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Data personalia pro accipiente notata',
+  'Afbeeldingen beheren': 'Imagines administrare',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Nullae adhuc imagines in plicis bibliothecae tuae sunt.',
   'Voortgang per sectie': 'Progressus per sectiones',
   'Nog te doen': 'Restans',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

@@ -1835,6 +1835,9 @@ const _dutchSourceAddSv = <String, String>{
   'Persoonsgegevens weggelaten': 'Personuppgifter utelämnade',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Personuppgifter markerade för mottagaren',
+  'Afbeeldingen beheren': 'Hantera bilder',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Det finns inga bilder i dina biblioteksmappar ännu.',
   'Voortgang per sectie': 'Framsteg per sektion',
   'Nog te doen': 'Återstår',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

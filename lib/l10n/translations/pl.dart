@@ -1849,6 +1849,9 @@ const _dutchSourceAddPl = <String, String>{
   'Persoonsgegevens weggelaten': 'Pominięto dane osobowe',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Oznaczono dane osobowe dla odbiorcy',
+  'Afbeeldingen beheren': 'Zarządzaj obrazami',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'W folderach twojej biblioteki nie ma jeszcze obrazów.',
   'Voortgang per sectie': 'Postęp według sekcji',
   'Nog te doen': 'Pozostało',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

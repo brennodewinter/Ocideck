@@ -1858,6 +1858,9 @@ const _dutchSourceAddBg = <String, String>{
   'Persoonsgegevens weggelaten': 'Личните данни са пропуснати',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Личните данни са отбелязани за получателя',
+  'Afbeeldingen beheren': 'Управление на изображенията',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'В папките на библиотеката ви все още няма изображения.',
   'Voortgang per sectie': 'Напредък по раздели',
   'Nog te doen': 'Оставащо',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

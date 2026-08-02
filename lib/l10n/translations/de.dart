@@ -797,6 +797,9 @@ const _dutchSourceAddDe = {
   'Persoonsgegevens weggelaten': 'Personenbezogene Daten weggelassen',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Personenbezogene Daten für den Empfänger markiert',
+  'Afbeeldingen beheren': 'Bilder verwalten',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'In deinen Bibliotheksordnern sind noch keine Bilder.',
   'Voortgang per sectie': 'Fortschritt pro Abschnitt',
   'Nog te doen': 'Ausstehend',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

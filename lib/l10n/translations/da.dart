@@ -1835,6 +1835,9 @@ const _dutchSourceAddDa = <String, String>{
   'Persoonsgegevens weggelaten': 'Personoplysninger udeladt',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Personoplysninger markeret for modtageren',
+  'Afbeeldingen beheren': 'Administrer billeder',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Der er endnu ingen billeder i dine biblioteksmapper.',
   'Voortgang per sectie': 'Fremskridt pr. sektion',
   'Nog te doen': 'Mangler',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

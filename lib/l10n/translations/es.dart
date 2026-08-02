@@ -792,6 +792,9 @@ const _dutchSourceAddEs = {
   'Persoonsgegevens weggelaten': 'Datos personales omitidos',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Datos personales marcados para el destinatario',
+  'Afbeeldingen beheren': 'Gestionar imágenes',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Aún no hay imágenes en tus carpetas de biblioteca.',
   'Voortgang per sectie': 'Progreso por sección',
   'Nog te doen': 'Pendiente',
   'Voortgangsoverzicht en -grafiek bijgewerkt':

@@ -1836,6 +1836,9 @@ const _dutchSourceAddFi = <String, String>{
   'Persoonsgegevens weggelaten': 'Henkilötiedot jätetty pois',
   'Persoonsgegevens gemarkeerd voor de ontvanger':
       'Henkilötiedot merkitty vastaanottajalle',
+  'Afbeeldingen beheren': 'Hallitse kuvia',
+  'Er staan nog geen afbeeldingen in je bibliotheekmappen.':
+      'Kirjastokansioissasi ei ole vielä kuvia.',
   'Voortgang per sectie': 'Edistyminen osioittain',
   'Nog te doen': 'Jäljellä',
   'Voortgangsoverzicht en -grafiek bijgewerkt':
