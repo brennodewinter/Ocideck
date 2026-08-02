@@ -3415,12 +3415,28 @@ process-improvement starting points in the ordinary template catalogue, each
 with a **Procesverbetering** badge. *Procesverbetering: DMAIC-project* supplies
 the DMAIC skeleton; DMADV, Kaizen, A3 and 8D are available in the same place.
 After choosing one of these project templates, record the optional primary
-Y-metric and its limits before the deck opens. *SIPOC-procesoverzicht* is a
-standalone six-slide overview: it explains supplier, input, process, output and
-customer; provides editable process, start-point and end-point fields; guides
-you from customer back to supplier before presenting the typed, editable SIPOC
-matrix; and compares the overview with a detailed flowchart. Keep the process
-column to 4–7 high-level activities, then fill the matrix from right to left.
+Y-metric and its limits before the deck opens. Each project template then keeps
+you moving with a short **skipped guidance slide after every phase divider**.
+Those slides ask for the concrete evidence, decision, owner and result that
+belong in that phase. Use them as checklists and add ordinary slides directly
+after them for your answers. The charter regions explain what belongs in each
+field, the **Measurable customer requirements (CTQ tree)** starter turns the
+customer need into measurable criteria, and a SIPOC guide sits directly before
+the empty matrix. Replace the charter and CTQ prompt text with project content.
+Guidance slides remain visible while editing, but because they start skipped
+they do not appear in presentation or export. Turn **Skip** off only when a
+guidance slide should reach the audience.
+
+*SIPOC-procesoverzicht* is a standalone nine-slide overview: it explains
+supplier, input, process, output and customer; provides editable process,
+start-point and end-point fields; shows what precise boundaries and one coherent
+example row look like; guides you from customer back to supplier before the
+typed, editable SIPOC matrix; and compares the overview with a detailed
+flowchart. Keep the process column to 4–7 high-level activities, then fill the
+matrix from right to left. Its four slides labelled **Skipped** are working
+instructions and stay outside presentation and export by default. The method
+explanation and flowchart comparison are ordinary slides; switch **Skip** on for
+either one when your audience does not need it.
 
 **AI wording assist (Phase 10).** When **both** the AI-assistentie module and
 Procesverbetering are on, canvas, tree and flow editors show **Tekst voorstellen

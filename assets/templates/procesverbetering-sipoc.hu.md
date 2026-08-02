@@ -14,6 +14,17 @@ language: hu
 
 ---
 
+<!-- skip -->
+
+# Így dolgozhat ezzel a sablonnal
+
+- A SIPOC segítségével megértheti egy folyamat hatókörét és függőségeit, nem pedig minden művelet rögzítésére.
+- Használja a súgót és a példasort ellenőrzőlistaként; írja be a válaszait a **Folyamathatárok** és az üres **SIPOC** mátrixba.
+- Lehetőleg vevőtől beszállítóig dolgozzon, főnevekkel az input és output, valamint az igékkel a folyamat lépéseihez.
+- Csak a **Kihagyott** címkével ellátott diák maradnak ki a prezentációból és az exportálásból. Kapcsolja be vagy ki a **Kihagyás** funkciót, ha olyan magyarázatokat szeretne kapni, amelyekre közönségének szüksége lehet, vagy nem.
+
+---
+
 # Mit térképez fel a SIPOC?
 
 - **Beszállító:** biztosítja a folyamathoz szükséges információkat vagy erőforrásokat.
@@ -36,7 +47,21 @@ language: hu
 
 ---
 
-# Töltse ki jobbról balra
+<!-- skip -->
+
+# Ellenőrzőlista – Mikor elég világosak a határok?
+
+- **Folyamat:** adjon neki egy felismerhető nevet igével és tárggyal, például „Rendelés regisztrálása”.
+- **Kiindulópont:** Nevezzen meg egy megfigyelhető eseményt, például „Kérés érkezett”.
+- **Végpont:** nevezzen meg egy kimutatható eredményt, például „Rendelési visszaigazolás elküldve”.
+- Válassza ki azokat a határokat, amelyek körül a csapat értelmes megállapodásokat köthet.
+- A kivételek és a szomszédos folyamatok áthelyezése a mátrixon kívülre; írja le őket külön.
+
+---
+
+<!-- skip -->
+
+# Ellenőrzőlista – Töltse ki jobbról balra
 
 1. Állítson be világos kezdő- és végpontokat a folyamathoz.
 2. Nevezze meg azokat az ügyfeleket, akik az eredménytől függenek.
@@ -44,6 +69,21 @@ language: hu
 4. Foglalja össze a folyamatot 4-7 magas szintű tevékenységben.
 5. Határozza meg, hogy ezeknek a tevékenységeknek milyen inputokra van szüksége.
 6. Minden bemenetet kapcsoljon a szállítóhoz, aki azt elérhetővé teszi.
+
+---
+
+<!-- skip -->
+<!-- _class: table -->
+
+# Ellenőrzőlista — Példa egy összekapcsolt sorra
+
+| Supplier | Input | Process | Output | Customer |
+| --- | --- | --- | --- | --- |
+| Eladás | Jóváhagyott kérés | Megrendelés ellenőrzése → regisztrálás → megerősítés | Megrendelés visszaigazolása | Pályázó |
+
+- Olvassa el a sort egy láncként: a szállító ad inputot, a folyamat a vevő számára outputtá alakítja.
+- Csak akkor adjon hozzá új sort, ha a lánc jelentősen eltér.
+- Ellenőrizze az érintettekkel, hogy nem hiányzik-e egy fontos beszállító, input, output vagy ügyfél.
 
 ---
 
