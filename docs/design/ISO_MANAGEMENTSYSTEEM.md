@@ -381,10 +381,18 @@ anders dan OWASP (CC-BY-SA) of CWE (MITRE-terms). Daarom:
   eis wil lezen, koopt de norm; de `url`-verwijzing wijst naar ISO's openbare
   catalogus. Titels blijven Engelse ISO-data en gaan niet door l10n (een
   NEN-vertaling zou NEN's aparte vertaalrecht raken).
-- Dit is **exact het bestaande patroon** ("bundel de index, niet de gids-inhoud",
-  zoals WSTG/MASTG). De `bundled`- en `licence`-velden maken die grens expliciet,
-  en de nota's in [`LICENSE_COMPLIANCE.md`](../LICENSE_COMPLIANCE.md) en
-  `THIRD_PARTY_NOTICES.md` leggen hem vast.
+- **Zelfde vórm, ander fundament — en dat benoemen we.** De *vorm* is het
+  bestaande patroon ("bundel de index, niet de gids-inhoud", zoals WSTG/MASTG).
+  Maar het juridische *fundament* verschilt: WSTG/MASTG/CWE dragen een
+  **affirmatieve open licentie** (CC-BY-SA / MITRE-terms), terwijl de ISO-index
+  géén licentie-grant draagt maar rust op het **argument** dat de index geen
+  auteursrechtelijke bescherming geniet (originaliteit, Infopaq) plus een
+  spin-off-argument tegen het databankrecht. Verdedigbaar en door de jurist als
+  houdbaar-mits getekend, maar een zwakker *soort* fundament — dus benoemd, niet
+  weggemoffeld onder "precies hetzelfde". De `bundled`- en `licence`-velden maken
+  de grens expliciet, en de nota's in
+  [`LICENSE_COMPLIANCE.md`](../LICENSE_COMPLIANCE.md) en `THIRD_PARTY_NOTICES.md`
+  (de ISO-handelsmerk-/niet-affiliatienotitie) leggen hem vast.
 
 > Toets dit vóór Blok A met de jurist-skill: bevestig dat de index-only-lijn voor
 > ISO net zo houdbaar is als voor de OWASP-catalogi, en of NEN-specifieke voorwaarden
