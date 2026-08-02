@@ -7,7 +7,8 @@
 # pin-bump publiceert een nieuw tag zonder een oud te overschrijven.
 #
 # EENMALIG IN TE RICHTEN (zie docs/CHECKS.md "Voorgebakken CI-image"):
-#   * repo-secret `CI_IMAGE_TOKEN` — een Forgejo-token met `write:package`.
+#   * repo-secret `CI_IMAGE_TOKEN` — een Forgejo-token met `write:package`, en
+#     repo-variabele `CI_IMAGE_USER` — de EIGENAAR van dat token (de login-naam).
 #   * de runner moet `docker` kunnen aanroepen (de dind-runner op pawprint kan
 #     dat); draait hij zonder docker-toegang, gebruik dan de handmatige route
 #     `make ci-image-publish` vanaf een machine met docker/colima.
@@ -43,15 +44,21 @@ jobs:
       # fout: vóór de eenmalige inrichting (of op een fork) hoort de run gewoon
       # groen over te slaan, niet rood te worden. Anders zou juist de PR die dit
       # image toevoegt na de merge een rode `main`-run opleveren.
-      - name: Heeft dit repo een registry-token?
+      - name: Is de registry-publicatie ingericht?
         id: guard
         env:
           TOKEN: ${{ secrets.CI_IMAGE_TOKEN }}
+          USER: ${{ vars.CI_IMAGE_USER }}
         run: |
           set -eu
-          if [ -z "${TOKEN:-}" ]; then
-            echo "CI_IMAGE_TOKEN niet gezet — image-publicatie overgeslagen."
-            echo "Richt hem eenmalig in (docs/CHECKS.md 'ci-image.yml') of draai 'make ci-image-publish'."
+          # Beide nodig: het token is het geheim, de gebruikersnaam is de EIGENAAR
+          # van dat token (een Forgejo-gebruiker met write:package). Bewust NIET
+          # `github.actor` — dat is wie de run triggert, en die hoeft niet de
+          # token-eigenaar te zijn; dan zou de push stil op de verkeerde login
+          # falen. Een repo-variabele `CI_IMAGE_USER` maakt het expliciet.
+          if [ -z "${TOKEN:-}" ] || [ -z "${USER:-}" ]; then
+            echo "CI_IMAGE_TOKEN (secret) en/of CI_IMAGE_USER (variabele) niet gezet — publicatie overgeslagen."
+            echo "Richt ze eenmalig in (docs/CHECKS.md 'ci-image.yml') of draai 'make ci-image-publish'."
             echo "publish=no" >> "$GITHUB_OUTPUT"
           else
             echo "publish=yes" >> "$GITHUB_OUTPUT"
@@ -75,7 +82,7 @@ jobs:
           set -eu
           echo "${{ secrets.CI_IMAGE_TOKEN }}" \
             | docker login pawprint.vigilis.online \
-                -u "${{ github.actor }}" --password-stdin
+                -u "${{ vars.CI_IMAGE_USER }}" --password-stdin
 
       - name: Bouwen en pushen
         if: steps.guard.outputs.publish == 'yes'

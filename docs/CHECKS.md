@@ -1462,13 +1462,28 @@ own Forgejo registry as
 - **Trust boundary.** Same as the runner and the existing `actions/cache`: our
   own job builds the image on our own runner and pushes it to our own registry —
   no new party.
-- **One-time setup** (either route): a repo secret `CI_IMAGE_TOKEN` (a Forgejo
-  token with `write:package`) for the workflow, **or** `make ci-image-publish`
-  from a machine with docker/colima (it cross-builds `linux/amd64`, since the
-  runner is amd64); then set the published package to **public** so the gate
-  workflows can pull it without credentials. Until the image exists and the gates
-  are switched over (a separate PR), the gates keep installing the toolchain per
-  run as before — introducing the image cannot break CI on its own.
+- **One-time setup** (either route): for the workflow, a repo secret
+  `CI_IMAGE_TOKEN` (a Forgejo token with `write:package`) **and** a repo variable
+  `CI_IMAGE_USER` (the token owner's login — the workflow logs in as that user,
+  not as whoever triggered the run); **or** `make ci-image-publish` from a machine
+  with docker/colima (it uses your own `docker login` and cross-builds
+  `linux/amd64`, since the runner is amd64). Then set the published package to
+  **public** so the gate workflows can pull it without credentials (fase 2 may
+  instead configure pull-credentials on the runner — see below). Until the image
+  exists and the gates are switched over (a separate PR), the gates keep
+  installing the toolchain per run as before — introducing the image cannot break
+  CI on its own.
+- **Two conditions the follow-up (fase 2) must honour** (raised by the
+  kernwaardenbewaker on #1141): (1) **continuity** — a `container: image:` pointing
+  at the registry is a hard dependency; a registry outage or an accidentally
+  *private* package would stop the gate job from starting, where fase 1 needs no
+  registry. Fase 2 must degrade to per-run install (or configure runner
+  pull-credentials so *private* still works), not to a blocked CI. (2)
+  **single-source pin↔tag** — an `image:` field cannot interpolate the pin at
+  runtime, so the tag is hardcoded in the gate workflow; a pin bump must update
+  `.tool-versions` **and** the gate tag in the same commit, and the ordering must
+  ensure `ci-image` has published the new tag before a gate tries to pull it, so a
+  bump cannot race `main` red.
 
 ### `.forgejo/workflows/linux-build.yml` — on demand (`workflow_dispatch`)
 - **build-linux** — same official pinned toolchain as the gate, plus the GTK
