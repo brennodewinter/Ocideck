@@ -44,7 +44,9 @@ String _withheldTooltip(AppLocalizations l10n, TlpLevel slideTlp) =>
 /// drie standen af — accepteren, waarschuwen én weglaten — en die zijn niet
 /// hetzelfde: "geaccepteerd" op een weggelaten dia is onwaar, want daar is niets
 /// geaccepteerd, het wordt juist weggehaald. Dus noemt de badge wélke stand het
-/// is, in de woorden die het instellingenpaneel ook gebruikt.
+/// is, in de geest van het instellingenpaneel — "geaccepteerd" en "weggelaten"
+/// zijn er letterlijk uit, "gemarkeerd voor de ontvanger" is een preciezere
+/// parafrase van het paneelwoord "gewaarschuwd".
 String _privacyBadgeTooltip(
   AppLocalizations l10n,
   SlideBadgeTone tone,

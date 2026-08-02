@@ -275,7 +275,7 @@ in Dutch, and it keeps growing on `main` between releases.
   of *accepteren + waarschuwen*. De grijze badge dekt namelijk drie standen af,
   maar noemde er maar één — en "geaccepteerd" op een weggelaten dia is onwaar,
   want daar wordt juist niets geaccepteerd, het wordt weggehaald. De badge én het
-  schermlezer-label noemen nu de wérkelijke stand, in de woorden van het
+  schermlezer-label noemen nu de wérkelijke stand, in de geest van het
   instellingenpaneel: *geaccepteerd*, *gemarkeerd voor de ontvanger* of
   *weggelaten* (#1112).
 - Export/geheugen: een PDF/PPTX-raster-export hield alle gerenderde PNG's in het
