@@ -93,18 +93,22 @@ Future<XmppTestOutcome> _liveConnectTest(
     roomJid: companion,
     nick: _nickFrom(result.boundJid),
   );
-  final joinResult = await muc.join();
-  final occupants = joinResult.ok
-      ? muc.roster.map((o) => o.nick).toList()
-      : null;
-  await muc.leave();
-  await session.close();
-  return XmppTestOutcome(
-    result: result,
-    companionRoom: companion,
-    occupants: occupants,
-    joinFailure: joinResult.failure,
-  );
+  try {
+    final joinResult = await muc.join();
+    final occupants = joinResult.ok
+        ? muc.roster.map((o) => o.nick).toList()
+        : null;
+    return XmppTestOutcome(
+      result: result,
+      companionRoom: companion,
+      occupants: occupants,
+      joinFailure: joinResult.failure,
+    );
+  } finally {
+    // A "test" holds nothing open, even if join ever throws in the future.
+    await muc.leave();
+    await session.close();
+  }
 }
 
 /// The room nick to enter with: the account localpart, or a fallback for an

@@ -7,8 +7,9 @@
 // URL must compute the same companion room, and no one who lacks the URL may
 // recover it from the room name. So the name is a ONE-WAY hash of the normalized
 // conference identity behind a versioned domain separator — it reveals nothing
-// about the conference (§5.1), and a scheme change can rev the prefix without
-// colliding with the old derivation. SHA-256 comes from `package:crypto` (already
+// about the conference (§5.1), and a scheme change can rev the salt version
+// without colliding with the old derivation. SHA-256 comes from `package:crypto`
+// (already
 // a dependency, used by the SASL code).
 
 import 'dart:convert';
@@ -36,11 +37,13 @@ String companionRoomJid(String conferenceRef, String mucService) =>
     '${companionRoomLocalpart(conferenceRef)}@$mucService';
 
 /// Normalize a conference reference so two clients holding the same link derive
-/// the same room: lowercase the host, drop the ephemeral fragment (`#config…`)
-/// and query (Jitsi carries mute/camera hints there — not part of the room's
-/// identity, §7.1.6), and strip trailing slashes. A non-URL reference is taken
-/// verbatim (trimmed) — it is already the shared identifier. The path case is
-/// preserved: a room name can be case-sensitive, so it is not folded together.
+/// the same room: lowercase the host, keep the (effective) port so two
+/// deployments on one host but different ports do not collapse into one room,
+/// drop the ephemeral fragment (`#config…`) and query (Jitsi carries mute/camera
+/// hints there — not part of the room's identity), and strip trailing
+/// slashes. A non-URL reference is taken verbatim (trimmed) — it is already the
+/// shared identifier. The path case is preserved: a room name can be
+/// case-sensitive, so it is not folded together.
 String _normalizeConferenceRef(String conferenceRef) {
   final trimmed = conferenceRef.trim();
   final uri = Uri.tryParse(trimmed);
@@ -49,7 +52,9 @@ String _normalizeConferenceRef(String conferenceRef) {
     while (path.length > 1 && path.endsWith('/')) {
       path = path.substring(0, path.length - 1);
     }
-    return '${uri.host.toLowerCase()}$path';
+    // uri.port is the effective port (the scheme default when none was written),
+    // so an explicit `:443` and an implicit one agree, but `:8443` does not.
+    return '${uri.host.toLowerCase()}:${uri.port}$path';
   }
   return trimmed;
 }

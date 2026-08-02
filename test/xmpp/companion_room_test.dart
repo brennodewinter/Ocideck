@@ -53,6 +53,22 @@ void main() {
         companionRoomLocalpart(conf),
       );
     });
+
+    test('an explicit default port matches the implicit one', () {
+      expect(
+        companionRoomLocalpart('https://host.example:443/Room'),
+        companionRoomLocalpart('https://host.example/Room'),
+      );
+    });
+  });
+
+  test('a non-default port is part of the room identity', () {
+    // Two Jitsi deployments on one host but different ports must not collapse
+    // into one companion room.
+    expect(
+      companionRoomLocalpart('https://host.example:8443/Room'),
+      isNot(companionRoomLocalpart('https://host.example/Room')),
+    );
   });
 
   test('the room name is case-sensitive in the room part', () {
