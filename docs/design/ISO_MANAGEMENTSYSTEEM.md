@@ -204,9 +204,20 @@ invult — hetzelfde patroon als de pentest-scaffold.
 ## 5. Slidetype-picker: de categorie-tab
 
 Nieuwe waarde `SlideCategory.managementsysteem` op `controlStatus`. De picker
-leidt zijn tab-balk af uit de aanwezige categorieën, dus de tab verschijnt vanzelf
-zodra de module iets levert — identiek aan hoe `informationSecurity` en
-`procesverbetering` nu werken ([slide.dart](../../lib/models/slide.dart)).
+leidt zijn tab-balk af uit de aanwezige categorieën, dus de tab verschijnt zodra
+de module *onthuld* is — identiek aan hoe `informationSecurity` en
+`procesverbetering` werken ([slide.dart](../../lib/models/slide.dart)).
+
+**Opt-in, net als de andere domeinmodules (gebouwd).** De module staat standaard
+uit en heeft een eigen schakelaar op *Instellingen → Uitbreidingen*
+(`managementsysteem_provider.dart`, geregistreerd in `module_registry.dart`, kaart
+in `managementsysteem_module_card.dart`). Het gedeelde modulecontract geldt:
+*onthuld = schakelaar aan **óf** het deck draagt al een `controlStatus`-dia*
+(`Deck.hasManagementSystemSlides`), zodat uitzetten bestaand werk nooit
+onbereikbaar maakt. Een eerdere schets in dit doc suggereerde "altijd
+beschikbaar"; dat is bewust vervangen door de opt-in-schakelaar, omdat het
+`controlStatus`-type een specialistische functie is die de basis-picker niet hoort
+te vullen voor wie hem niet nodig heeft.
 
 ---
 

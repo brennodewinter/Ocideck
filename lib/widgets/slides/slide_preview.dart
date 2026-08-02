@@ -842,14 +842,7 @@ class SlidePreviewWidget extends StatelessWidget {
           onAnswerTextChanged: onAnswerTextChanged,
         );
       case SlideType.timeline:
-        return _TimelinePreview(
-          slide: slide,
-          w: w,
-          font: fontFamily,
-          profile: themeProfile,
-          presentationMode: presentationMode,
-          revealedCount: timelineRevealedCount,
-        );
+        return _timelineContent(slide, w);
       case SlideType.scorecard:
       case SlideType.assets:
       case SlideType.discoveries:
@@ -867,12 +860,7 @@ class SlidePreviewWidget extends StatelessWidget {
       case SlideType.phaseGate:
         return _improvementPreview(slide, w);
       case SlideType.controlStatus:
-        return _ControlStatusPreview(
-          slide: slide,
-          w: w,
-          font: fontFamily,
-          profile: themeProfile,
-        );
+        return _controlStatusContent(slide, w);
     }
   }
 

@@ -22,6 +22,7 @@ import 'meeting_session_provider.dart';
 import 'info_safety_provider.dart';
 import 'online_storage_provider.dart';
 import 'import_module_provider.dart';
+import 'managementsysteem_provider.dart';
 import 'procesverbetering_provider.dart';
 import 'settings_provider.dart';
 import 'asset_rights_module_provider.dart';
@@ -37,6 +38,7 @@ enum ModuleId {
   collaboration,
   videoCalls,
   assetRights,
+  managementsysteem,
 }
 
 /// Eén module in het register: wie hij is en waar zijn poorten staan.
@@ -126,5 +128,10 @@ final List<ModuleEntry> moduleRegistry = [
     id: ModuleId.assetRights,
     enabled: assetRightsModuleEnabledProvider,
     revealed: assetRightsModuleRevealProvider,
+  ),
+  ModuleEntry(
+    id: ModuleId.managementsysteem,
+    enabled: managementsysteemEnabledProvider,
+    revealed: managementsysteemRevealProvider,
   ),
 ];

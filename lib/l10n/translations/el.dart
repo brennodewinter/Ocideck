@@ -1810,6 +1810,11 @@ const _dutchSourceAddEl = <String, String>{
   'Procesverbetering: 8D-project': 'Βελτίωση διαδικασίας: έργο 8D',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D σκελετός για περιγραφή προβλημάτων, αιτίες και διασφάλιση.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Αναφέρετε την πρόοδο ενός συστήματος διαχείρισης ISO (27001/9001/42001): κατάσταση ανά έλεγχο και μια παραγόμενη επισκόπηση προόδου. Απενεργοποιημένο από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τον τύπο διαφάνειας.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Λειτουργική μονάδα ενεργή. Το ευρετήριο ISO είναι διαθέσιμο τοπικά ({n} έλεγχοι σε τρία πρότυπα)· μόνο οι αριθμοί και οι σύντομοι τίτλοι, όχι το κείμενο του προτύπου.',
+  'Beheersmaatregel-status': 'Κατάσταση ελέγχων',
   'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
       'Μόνο το ευρετήριο ρητρών 4–10 (28 υπορήτρες + σύντομοι τίτλοι). Το ISO 9001 δεν έχει Annex A. Το κείμενο του προτύπου ΔΕΝ περιλαμβάνεται.',
   'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':

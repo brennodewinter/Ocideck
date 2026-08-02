@@ -13,6 +13,7 @@ import '../../platform/platform_features.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/info_safety_provider.dart';
+import '../../state/managementsysteem_provider.dart';
 import '../../state/procesverbetering_provider.dart';
 import '../../state/presentation_sources.dart';
 import '../../state/settings_provider.dart';

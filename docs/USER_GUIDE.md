@@ -3805,10 +3805,11 @@ standard: ISO/IEC 27001 (information security), ISO 9001 (quality) or ISO/IEC
 certification body — which controls are implemented, which are still planned, who
 owns them and what the evidence is. Everything is offline; nothing is downloaded.
 
-Unlike the Informatieveiligheid and Procesverbetering modules, this one has **no
-toggle to switch on**. Its single slide type is always available: in **Add slide**
-you will find a **Managementsysteem** tab with **Beheersmaatregel-status**
-(control status).
+Like the other optional modules, it is **off by default**. Switch it on under
+**Settings → Uitbreidingen (Extensions) → Managementsysteem**. Once enabled, the
+**Add slide** dialog shows a **Managementsysteem** tab with **Beheersmaatregel-status**
+(control status). A deck that already carries such a slide reveals the tab even
+with the module off, so switching it off never strands existing work.
 
 > **What is bundled, and what is not.** OciDeck ships only the **index** of the
 > three standards — the clause/control numbers with their short canonical titles.

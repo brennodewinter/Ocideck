@@ -35,9 +35,7 @@ class ControlSectionProgress {
       total: spec.total,
       applicable: spec.applicableCount,
       implemented: spec.implementedCount,
-      partial: spec.rows
-          .where((r) => r.status == ControlStatus.partial)
-          .length,
+      partial: spec.rows.where((r) => r.status == ControlStatus.partial).length,
     );
   }
 }

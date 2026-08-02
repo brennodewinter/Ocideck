@@ -1785,6 +1785,11 @@ const _dutchSourceAddSl = <String, String>{
   'Procesverbetering: 8D-project': 'Izboljšanje procesa: 8D projekt',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D skelet za opis težave, vzroke in zagotovilo.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Poročajte o napredku sistema upravljanja ISO (27001/9001/42001): stanje po posamezni kontroli in izpeljan pregled napredka. Privzeto izklopljeno; vklopite razširitev za uporabo vrste diapozitiva.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modul vklopljen. Kazalo ISO je na voljo lokalno ({n} kontrol v treh standardih); samo številke in kratki naslovi, ne besedilo standarda.',
+  'Beheersmaatregel-status': 'Stanje kontrol',
   'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
       'Samo kazalo klavzul 4–10 (28 podklavzul + kratki naslovi). ISO 9001 nima Annex A. Besedilo standarda NI vključeno.',
   'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':

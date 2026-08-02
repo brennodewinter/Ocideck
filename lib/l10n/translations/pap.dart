@@ -742,6 +742,11 @@ const _dutchSourceAddPap = {
   'Procesverbetering: 8D-project': 'Mehorashon di proseso: proyekto 8D',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Skeleton 8D pa deskripshon di problema, kousa i siguransa.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Reportá e progreso di un sistema di gestion ISO (27001/9001/42001): estado pa kada kontrol i un resúmen di progreso derivá. Pa defekto apagá; sende e ekstenshon pa usa e tipo di slide.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Módulo sendé. E indeks ISO ta disponibel lokalmente ({n} kontrol den tres norma); solamente e numbernan i título kòrtiku, no e teksto di norma.',
+  'Beheersmaatregel-status': 'Estado di kontrol',
   'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
       'Solamente e indeks di klóusula 4–10 (28 sub-klóusula + título kòrtiku). ISO 9001 no tin Annex A. E teksto di norma NO ta inkluí.',
   'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':

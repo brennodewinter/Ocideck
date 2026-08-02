@@ -773,13 +773,15 @@ class SlideQualityAnalyzer {
         break;
     }
   }
-
-  // Route through the shared containment guard so a crafted deck can't turn the
-  // "missing media" check into a file-existence oracle (existsSync) for paths
-  // outside the project via absolute or `../` references.
-  String? _resolveAssetPath(String path, String? projectPath) =>
-      resolveSlideAssetPath(path, projectPath);
 }
+
+// Route through the shared containment guard so a crafted deck can't turn the
+// "missing media" check into a file-existence oracle (existsSync) for paths
+// outside the project via absolute or `../` references. Top-level (not a method)
+// so it stays out of the SlideQualityAnalyzer class-size ratchet; same library,
+// so the analyzer and its density extension still call it directly.
+String? _resolveAssetPath(String path, String? projectPath) =>
+    resolveSlideAssetPath(path, projectPath);
 
 class _BulletText {
   final String text;

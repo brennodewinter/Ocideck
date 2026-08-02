@@ -70,7 +70,8 @@ void main() {
   });
 
   group('generateManagementSystemOverview', () {
-    int gen(DeckNotifier n) => n.generateManagementSystemOverview(
+    int gen(DeckNotifier n) => generateManagementSystemOverview(
+      n,
       overviewTitle: 'Voortgang',
       sectionHeader: 'Sectie',
       applicableHeader: 'Van toepassing',

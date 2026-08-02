@@ -13,16 +13,18 @@ no application backend; all processing is local.
 **Deck** — a complete presentation: metadata, an ordered list of slides, a theme
 profile, and a TLP classification. Immutable model (`lib/models/deck.dart`).
 
-**Slide** — one immutable, strongly-typed slide. Its `SlideType` (29 values)
+**Slide** — one immutable, strongly-typed slide. Its `SlideType` (30 values)
 selects the layout: `title`, `section`, `bullets`, `twoBullets`, `bulletsImage`,
 `twoImages`, `image`, `video`, `quote`, `table`, `freeMarkdown`, `code`, `chart`,
 `cockpit`, `question`, `timeline`, `scorecard`, the pentest layouts (`assets`,
 `discoveries`, `finding`, `findingsSummary`, `checklist`, `scopeMatrix`,
-`signOff`), and the Procesverbetering layouts (`matrix`, `canvas`, `tree`,
-`flow`, `phaseGate`). The seven
+`signOff`), the Procesverbetering layouts (`matrix`, `canvas`, `tree`,
+`flow`, `phaseGate`), and the Managementsysteem layout (`controlStatus`). The seven
 information-security layouts stay hidden until that module is enabled; `matrix`,
-`canvas`, `tree`, `flow` and `phaseGate` follow the same authoring gate for Procesverbetering. *(Corrected
-2026-07-29: Phase 7 adds `phaseGate`; count held by `test/docs_enum_counts_test.dart`.)*
+`canvas`, `tree`, `flow` and `phaseGate` follow the same authoring gate for
+Procesverbetering, and `controlStatus` for the Managementsysteem module. *(Corrected
+2026-07-29: Phase 7 adds `phaseGate`; 2026-08-02: the Managementsysteem module
+adds `controlStatus`; count held by `test/docs_enum_counts_test.dart`.)*
 
 **Marp** — the open Markdown-for-presentations format OciDeck reads and writes.
 Decks stay close to plain Marp Markdown, so they interoperate with other Marp

@@ -17,8 +17,11 @@ void main() {
       expect(ControlStatus.notApplicable.isApplicable, isFalse);
       expect(ControlStatus.implemented.isApplicable, isTrue);
       expect(ControlStatus.implemented.isImplemented, isTrue);
-      expect(ControlStatus.partial.isImplemented, isFalse,
-          reason: 'partial telt bewust niet als done');
+      expect(
+        ControlStatus.partial.isImplemented,
+        isFalse,
+        reason: 'partial telt bewust niet als done',
+      );
     });
   });
 
@@ -45,7 +48,10 @@ void main() {
     });
 
     test('all not-applicable → 0%, no divide-by-zero', () {
-      final s = spec([ControlStatus.notApplicable, ControlStatus.notApplicable]);
+      final s = spec([
+        ControlStatus.notApplicable,
+        ControlStatus.notApplicable,
+      ]);
       expect(s.applicableCount, 0);
       expect(s.progressPercent, 0);
     });

@@ -12,9 +12,19 @@ void main() {
     WidgetTester tester, {
     bool reveal = false,
     bool revealProcesverbetering = false,
+    bool revealManagementsysteem = false,
+    Size? surfaceSize,
   }) {
     SlideType? picked;
     return () async {
+      // The exhaustive "all types" cases reveal every module at once — four
+      // categories, so the tab bar wraps to more rows than the default
+      // 800×600 test surface leaves room for. Give those a taller window; the
+      // real app's window is comfortably larger than the AlertDialog either way.
+      if (surfaceSize != null) {
+        await tester.binding.setSurfaceSize(surfaceSize);
+        addTearDown(() => tester.binding.setSurfaceSize(null));
+      }
       await tester.pumpWidget(
         MaterialApp(
           home: Builder(
@@ -24,6 +34,7 @@ void main() {
                   context,
                   revealInfoSafety: reveal,
                   revealProcesverbetering: revealProcesverbetering,
+                  revealManagementsysteem: revealManagementsysteem,
                 ),
                 child: const Text('open'),
               ),
@@ -45,9 +56,15 @@ void main() {
       .toList();
 
   testWidgets('every slide type shows a wireframe preview', (tester) async {
-    // Reveal both modules so every type is offered; the "Alle" tab drops
+    // Reveal every module so every type is offered; the "Alle" tab drops
     // the category filter so all of them are visible at once.
-    await openDialog(tester, reveal: true, revealProcesverbetering: true)();
+    await openDialog(
+      tester,
+      reveal: true,
+      revealProcesverbetering: true,
+      revealManagementsysteem: true,
+      surfaceSize: const Size(800, 900),
+    )();
     await tester.tap(find.text('Alle'));
     await tester.pumpAndSettle();
     expect(visibleTypes(tester).toSet(), SlideType.values.toSet());
@@ -58,7 +75,13 @@ void main() {
   ) async {
     // Derived from the single source of truth, so a newly added type shows up
     // automatically instead of having to be added to a second hand-kept list.
-    await openDialog(tester, reveal: true, revealProcesverbetering: true)();
+    await openDialog(
+      tester,
+      reveal: true,
+      revealProcesverbetering: true,
+      revealManagementsysteem: true,
+      surfaceSize: const Size(800, 900),
+    )();
     await tester.tap(find.text('Alle'));
     await tester.pumpAndSettle();
     expect(visibleTypes(tester).toSet(), slideTypeMeta.keys.toSet());

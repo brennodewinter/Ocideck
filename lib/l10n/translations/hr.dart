@@ -1789,6 +1789,11 @@ const _dutchSourceAddHr = <String, String>{
   'Procesverbetering: 8D-project': 'Unapređenje procesa: 8D projekt',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D kostur za opis problema, uzroke i osiguranje.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Prijavite napredak ISO sustava upravljanja (27001/9001/42001): status po kontroli i izvedeni pregled napretka. Prema zadanom isključeno; uključite proširenje da biste koristili vrstu slajda.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modul uključen. ISO indeks dostupan je lokalno ({n} kontrola u tri norme); samo brojevi i kratki naslovi, ne i tekst norme.',
+  'Beheersmaatregel-status': 'Status kontrola',
   'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
       'Samo indeks klauzula 4–10 (28 potklauzula + kratki naslovi). ISO 9001 nema Annex A. Tekst norme NIJE uključen.',
   'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':

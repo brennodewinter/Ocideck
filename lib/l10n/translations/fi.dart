@@ -1784,6 +1784,11 @@ const _dutchSourceAddFi = <String, String>{
   'Procesverbetering: 8D-project': 'Prosessin parannus: 8D-projekti',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D-runko ongelman kuvausta, syitä ja varmuutta varten.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Raportoi ISO-hallintajärjestelmän (27001/9001/42001) edistyminen: tila hallintakeinoittain ja johdettu edistymisen yhteenveto. Oletuksena pois päältä; ota laajennus käyttöön käyttääksesi diatyyppiä.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Moduuli käytössä. ISO-hakemisto on saatavilla paikallisesti ({n} hallintakeinoa kolmessa standardissa); vain numerot ja lyhyet otsikot, ei standardin tekstiä.',
+  'Beheersmaatregel-status': 'Hallintakeinojen tila',
   'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
       'Vain lausekeindeksi 4–10 (28 alalauseketta + lyhyet otsikot). ISO 9001:ssä ei ole Annex A:ta. Standardin tekstiä EI ole mukana.',
   'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':

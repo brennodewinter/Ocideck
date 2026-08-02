@@ -1758,6 +1758,11 @@ const _dutchSourceAddTlh = <String, String>{
   'Procesverbetering: 8D-project': '8D: gher\'ID QI\'meH mIq',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Qagh Del, motlh je qaDmoHmeH 8D qel.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'ISO che\'meH pat (27001/9001/42001) Qap yIja\': Hub patlh je Qap \'oS chenmoHlu\'bogh. lurDech: chu\'be\'; cha\'nob Segh yIlo\'meH chelwI\' yIchu\'.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'chelwI\' chu\'lu\'. pa\' ISO index tu\'lu\' ({n} Hubmey wej chut); mI\'mey per nI\'be\' je neH, chut mu\'mey qachbe\'.',
+  'Beheersmaatregel-status': 'SeH Dotlh',
   'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
       'chut \'ay\' 4–10 index neH (28 chut \'ay\' mach + per nI\'be\'). ISO 9001 Annex A ghajbe\'. chut mu\'mey chellu\'be\'.',
   'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':

@@ -5,13 +5,15 @@
 // regexes/helpers and are called straight from `_parseBlock`.
 part of 'markdown_service.dart';
 
-extension _MarkdownFindingParse on MarkdownService {
-  /// Split each Markdown table body line into cells, dropping the GFM separator
-  /// row (`| --- | :---: |`). De codering zelf staat in
-  /// `markdown_table_codec.dart`, omdat de HTML-export dezelfde tabellen leest.
-  List<List<String>> _decodeTableRows(List<String> tableLines) =>
-      decodeMarkdownTableRows(tableLines);
+/// Split each Markdown table body line into cells, dropping the GFM separator
+/// row (`| --- | :---: |`). De codering zelf staat in
+/// `markdown_table_codec.dart`, omdat de HTML-export dezelfde tabellen leest.
+/// Top-level (not an extension member) so it stays out of the MarkdownService
+/// class-size ratchet; same library, so `_parseBlock` still calls it directly.
+List<List<String>> _decodeTableRows(List<String> tableLines) =>
+    decodeMarkdownTableRows(tableLines);
 
+extension _MarkdownFindingParse on MarkdownService {
   /// Pulls the per-slide attestation link comments out of [block]: the
   /// finding-group link (`ocideck_finding_id` / `ocideck_finding_role`) and the
   /// AI-assist markers (`ocideck_ai_assisted`, AI_ASSIST §16.3). Returns the

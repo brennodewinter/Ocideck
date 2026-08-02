@@ -2,6 +2,17 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../slide_preview.dart';
 
+extension _ControlStatusPreviewDispatch on SlidePreviewWidget {
+  /// Uit [_buildContent] gehaald zodat die methode onder het lengteplafond
+  /// blijft nu de managementsysteem-module een slidetype toevoegt.
+  Widget _controlStatusContent(Slide slide, double w) => _ControlStatusPreview(
+    slide: slide,
+    w: w,
+    font: fontFamily,
+    profile: themeProfile,
+  );
+}
+
 /// Preview for a `controlStatus` slide (ISO_MANAGEMENTSYSTEEM §3.1 / §4): the
 /// section heading with a derived *implemented / applicable* progress bar, then
 /// the controls as a table of id × control × status × maturity. Content comes
@@ -66,8 +77,9 @@ class _ControlStatusPreview extends StatelessWidget {
   }
 
   Widget _progress(BuildContext context, ControlStatusSpec spec, Color accent) {
-    final fraction =
-        spec.applicableCount == 0 ? 0.0 : spec.implementedCount / spec.applicableCount;
+    final fraction = spec.applicableCount == 0
+        ? 0.0
+        : spec.implementedCount / spec.applicableCount;
     return Row(
       children: [
         SizedBox(
@@ -83,11 +95,17 @@ class _ControlStatusPreview extends StatelessWidget {
           ),
         ),
         SizedBox(width: w * 0.02),
-        Text(
-          '${spec.progressPercent}% ${context.l10n.d('geïmplementeerd')}',
-          style: _applyFont(
-            font,
-            TextStyle(fontSize: w * 0.022, color: AppTheme.slideInkMuted),
+        // Flexible + ellipsis so a long localised label (or a wide test font)
+        // can never push this Row past the fixed slide width — an unbounded
+        // Text here overflowed the rasteriser at export sizes.
+        Flexible(
+          child: Text(
+            '${spec.progressPercent}% ${context.l10n.d('geïmplementeerd')}',
+            overflow: TextOverflow.ellipsis,
+            style: _applyFont(
+              font,
+              TextStyle(fontSize: w * 0.022, color: AppTheme.slideInkMuted),
+            ),
           ),
         ),
       ],
@@ -109,7 +127,10 @@ class _ControlStatusPreview extends StatelessWidget {
       child: Row(
         children: [
           Expanded(flex: 2, child: Text(l10n.d('ID'), style: style())),
-          Expanded(flex: 6, child: Text(l10n.d('Beheersmaatregel'), style: style())),
+          Expanded(
+            flex: 6,
+            child: Text(l10n.d('Beheersmaatregel'), style: style()),
+          ),
           Expanded(flex: 3, child: Text(l10n.d('Status'), style: style())),
           Expanded(flex: 2, child: Text(l10n.d('Niveau'), style: style())),
         ],

@@ -192,16 +192,15 @@ class _ControlStatusEditorState extends ConsumerState<ControlStatusEditor> {
   /// slide, then report the outcome via a SnackBar.
   void _generateOverview() {
     final l10n = context.l10n;
-    final made = ref
-        .read(deckProvider.notifier)
-        .generateManagementSystemOverview(
-          overviewTitle: l10n.d('Voortgang managementsysteem'),
-          sectionHeader: l10n.d('Sectie'),
-          applicableHeader: l10n.d('Van toepassing'),
-          implementedHeader: l10n.d('Geïmplementeerd'),
-          progressHeader: l10n.d('Voortgang'),
-          totalLabel: l10n.d('Totaal'),
-        );
+    final made = generateManagementSystemOverview(
+      ref.read(deckProvider.notifier),
+      overviewTitle: l10n.d('Voortgang managementsysteem'),
+      sectionHeader: l10n.d('Sectie'),
+      applicableHeader: l10n.d('Van toepassing'),
+      implementedHeader: l10n.d('Geïmplementeerd'),
+      progressHeader: l10n.d('Voortgang'),
+      totalLabel: l10n.d('Totaal'),
+    );
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
@@ -235,10 +234,7 @@ class _ControlStatusEditorState extends ConsumerState<ControlStatusEditor> {
       for (final e in entries) {
         if (present.contains(e.id)) continue;
         _rows.add(
-          _RowControllers(
-            ControlStatusRow(id: e.id, control: e.title),
-            _emit,
-          ),
+          _RowControllers(ControlStatusRow(id: e.id, control: e.title), _emit),
         );
         added++;
       }
@@ -246,9 +242,7 @@ class _ControlStatusEditorState extends ConsumerState<ControlStatusEditor> {
     _emit();
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('$added ${l10n.d('beheersmaatregelen geladen')}'),
-      ),
+      SnackBar(content: Text('$added ${l10n.d('beheersmaatregelen geladen')}')),
     );
   }
 

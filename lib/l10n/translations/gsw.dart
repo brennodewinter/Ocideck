@@ -1786,6 +1786,11 @@ const _dutchSourceAddGsw = <String, String>{
   'Procesverbetering: 8D-project': 'Prozessverbesserung: 8D-Projekt',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D-Skelett zur Problembeschreibung, Ursachen und Absicherung.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Bricht de Fortschritt vo eme ISO-Managementsystem (27001/9001/42001): Status pro Massnahme und e abgleiteti Fortschrittsübersicht. Standardmässig us; aktivier d Erwyterig, zum de Slide-Typ bruuche.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modul aktiv. De ISO-Index isch lokal verfüegbar ({n} Massnahme über drei Norme); nume d Nummere und churzi Titel, nöd de Normtext.',
+  'Beheersmaatregel-status': 'Massnahmestatus',
   'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
       'Nume de Klausle-Index 4–10 (28 Unterklausle + churzi Titel). ISO 9001 het kein Annex A. De Normtext isch NÖD debii.',
   'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':

@@ -1799,6 +1799,11 @@ const _dutchSourceAddLa = <String, String>{
   'Procesverbetering: 8D-project': 'Processus emendationem: 8D project',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D Ossa problemata descriptio, causarum et certitudinum.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Progressum systematis administrationis ISO (27001/9001/42001) refer: status pro singulis praesidiis et conspectus progressus inde ductus. Praedefinite inactivum; extensionem activa ut genus paginae adhibeas.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modulus activus. Index ISO localiter praesto est ({n} praesidia per tres normas); tantum numeri et tituli breves, non textus normae.',
+  'Beheersmaatregel-status': 'Status moderaminum',
   'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
       'Tantum index clausularum 4–10 (28 subclausulae + tituli breves). ISO 9001 Annex A non habet. Textus normae NON includitur.',
   'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':

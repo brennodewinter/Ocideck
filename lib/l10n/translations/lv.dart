@@ -1782,6 +1782,11 @@ const _dutchSourceAddLv = <String, String>{
   'Procesverbetering: 8D-project': 'Procesa uzlabošana: 8D projekts',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D skelets problēmas aprakstam, cēloņiem un pārliecībai.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Ziņojiet par ISO pārvaldības sistēmas (27001/9001/42001) progresu: statuss katrai kontrolei un atvasināts progresa pārskats. Pēc noklusējuma izslēgts; ieslēdziet paplašinājumu, lai izmantotu slaida tipu.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modulis ieslēgts. ISO indekss ir pieejams lokāli ({n} kontroles trijos standartos); tikai numuri un īsie nosaukumi, nevis standarta teksts.',
+  'Beheersmaatregel-status': 'Kontroļu statuss',
   'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
       'Tikai klauzulu indekss 4–10 (28 apakšklauzulas + īsi nosaukumi). ISO 9001 nav Annex A. Standarta teksts NAV iekļauts.',
   'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':

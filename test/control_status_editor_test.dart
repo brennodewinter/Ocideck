@@ -19,10 +19,9 @@ void main() {
     matching: find.byType(TextField),
   );
 
-  Slide slideWithRows(List<ControlStatusRow> rows) =>
-      Slide.create(SlideType.controlStatus).copyWith(
-        tableRows: ControlStatusSpec(rows: rows).toTableRows(),
-      );
+  Slide slideWithRows(List<ControlStatusRow> rows) => Slide.create(
+    SlideType.controlStatus,
+  ).copyWith(tableRows: ControlStatusSpec(rows: rows).toTableRows());
 
   Future<Slide? Function()> pump(WidgetTester tester, Slide slide) async {
     Slide? updated;
@@ -52,8 +51,13 @@ void main() {
     expect(find.text('Beheersmaatregelen laden…'), findsOneWidget);
   });
 
-  testWidgets('editing the heading emits it as the slide title', (tester) async {
-    final latest = await pump(tester, slideWithRows(const [ControlStatusRow()]));
+  testWidgets('editing the heading emits it as the slide title', (
+    tester,
+  ) async {
+    final latest = await pump(
+      tester,
+      slideWithRows(const [ControlStatusRow()]),
+    );
     await tester.enterText(fieldByLabel('Kop'), 'ISO 27001 · A.5');
     await tester.pump();
     expect(latest()!.title, 'ISO 27001 · A.5');
@@ -104,7 +108,10 @@ void main() {
   testWidgets('loading an ISO section fills the controls from the catalog', (
     tester,
   ) async {
-    final latest = await pump(tester, slideWithRows(const [ControlStatusRow()]));
+    final latest = await pump(
+      tester,
+      slideWithRows(const [ControlStatusRow()]),
+    );
 
     await tester.tap(find.text('Beheersmaatregelen laden…'));
     await tester.pumpAndSettle();
@@ -123,6 +130,9 @@ void main() {
     expect(spec.rows.length, 8);
     expect(spec.rows.first.id, 'A.6.1');
     expect(spec.rows.first.control, 'Screening');
-    expect(spec.rows.every((r) => r.status == ControlStatus.notStarted), isTrue);
+    expect(
+      spec.rows.every((r) => r.status == ControlStatus.notStarted),
+      isTrue,
+    );
   });
 }

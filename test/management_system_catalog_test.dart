@@ -13,22 +13,32 @@ void main() {
     test('ISO 27001: 93 controls over vier thema\'s', () {
       expect(cat.sectionsFor(ManagementSystemStandard.iso27001), hasLength(4));
       expect(cat.controlsFor(ManagementSystemStandard.iso27001), hasLength(93));
-      expect(cat.controlsInSection(ManagementSystemStandard.iso27001, 'A.5'),
-          hasLength(37));
-      expect(cat.controlsInSection(ManagementSystemStandard.iso27001, 'A.6'),
-          hasLength(8));
-      expect(cat.controlsInSection(ManagementSystemStandard.iso27001, 'A.7'),
-          hasLength(14));
-      expect(cat.controlsInSection(ManagementSystemStandard.iso27001, 'A.8'),
-          hasLength(34));
+      expect(
+        cat.controlsInSection(ManagementSystemStandard.iso27001, 'A.5'),
+        hasLength(37),
+      );
+      expect(
+        cat.controlsInSection(ManagementSystemStandard.iso27001, 'A.6'),
+        hasLength(8),
+      );
+      expect(
+        cat.controlsInSection(ManagementSystemStandard.iso27001, 'A.7'),
+        hasLength(14),
+      );
+      expect(
+        cat.controlsInSection(ManagementSystemStandard.iso27001, 'A.8'),
+        hasLength(34),
+      );
     });
 
     test('ISO 9001: clausule-index (7 clausules, 28 sub-clausules)', () {
       expect(cat.sectionsFor(ManagementSystemStandard.iso9001), hasLength(7));
       expect(cat.controlsFor(ManagementSystemStandard.iso9001), hasLength(28));
       // 9.3 Management review is de haak waar de 9.3-reviewdia op leunt.
-      expect(cat.byId(ManagementSystemStandard.iso9001, '9.3')?.title,
-          'Management review');
+      expect(
+        cat.byId(ManagementSystemStandard.iso9001, '9.3')?.title,
+        'Management review',
+      );
     });
 
     test('ISO 42001: 38 controls over negen doelstellingen', () {
@@ -40,8 +50,11 @@ void main() {
       for (final std in ManagementSystemStandard.values) {
         final sectionIds = cat.sectionsFor(std).map((s) => s.id).toSet();
         for (final c in cat.controlsFor(std)) {
-          expect(sectionIds, contains(c.sectionId),
-              reason: '${std.token} ${c.id} → onbekende sectie ${c.sectionId}');
+          expect(
+            sectionIds,
+            contains(c.sectionId),
+            reason: '${std.token} ${c.id} → onbekende sectie ${c.sectionId}',
+          );
         }
       }
     });
@@ -54,8 +67,10 @@ void main() {
     });
 
     test('byId vindt een control en is null voor onbekend', () {
-      expect(cat.byId(ManagementSystemStandard.iso27001, 'A.5.1')?.title,
-          'Policies for information security');
+      expect(
+        cat.byId(ManagementSystemStandard.iso27001, 'A.5.1')?.title,
+        'Policies for information security',
+      );
       expect(cat.byId(ManagementSystemStandard.iso27001, 'A.99.99'), isNull);
     });
   });
@@ -65,9 +80,11 @@ void main() {
       for (final s in ManagementSystemStandard.values) {
         expect(ManagementSystemStandard.fromToken(s.token), s);
       }
-      expect(ManagementSystemStandard.fromToken('ISO27001'),
-          ManagementSystemStandard.iso27001,
-          reason: 'hoofdletterongevoelig');
+      expect(
+        ManagementSystemStandard.fromToken('ISO27001'),
+        ManagementSystemStandard.iso27001,
+        reason: 'hoofdletterongevoelig',
+      );
       expect(ManagementSystemStandard.fromToken('bestaat-niet'), isNull);
     });
 

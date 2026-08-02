@@ -1818,6 +1818,11 @@ const _dutchSourceAddGa = <String, String>{
   'Procesverbetering: 8D-project': 'Feabhsú próisis: tionscadal 8D',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       'Creat 8D le haghaidh cur síos ar fhadhb, cúiseanna agus daingnithe.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Tuairiscigh dul chun cinn córais bhainistíochta ISO (27001/9001/42001): stádas de réir gach rialaithe agus forbhreathnú dul chun cinn díorthaithe. Múchta de réir réamhshocraithe; cuir an breiseán ar siúl chun an cineál sleamhnáin a úsáid.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modúl ar siúl. Tá an t-innéacs ISO ar fáil go logánta ({n} rialú thar trí chaighdeán); na huimhreacha agus na teidil ghearra amháin, ní téacs an chaighdeáin.',
+  'Beheersmaatregel-status': 'Stádas na rialuithe',
   'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
       'Innéacs na gclásal 4–10 amháin (28 fo-chlásal + teidil ghearra). Níl Annex A ag ISO 9001. NÍL téacs an chaighdeáin ceangailte.',
   'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':

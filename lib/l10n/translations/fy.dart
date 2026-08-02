@@ -743,6 +743,11 @@ const _dutchSourceAddFy = {
   'Procesverbetering: 8D-project': 'Prosesferbettering: 8D-projekt',
   '8D-skelet voor probleembeschrijving, oorzaken en borging.':
       '8D skelet foar probleem beskriuwing, oarsaken en assurance.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Rapportearje de fuortgong fan in ISO-behearsysteem (27001/9001/42001): status per behearsmaatregel en in ôflaat fuortgongsoersjoch. Standert út; set de utwreiding oan om it slidetype te brûken.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Module oan. De ISO-yndeks is lokaal beskikber ({n} behearsmaatregels oer trije noarmen); allinnich de nûmers en koarte titels, net de noarmtekst.',
+  'Beheersmaatregel-status': 'Behearmaatregelstatus',
   'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
       'Allinnich de klausule-yndeks 4–10 (28 sub-klausules + koarte titels). ISO 9001 hat gjin Annex A. De noarmtekst is NET bondele.',
   'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
