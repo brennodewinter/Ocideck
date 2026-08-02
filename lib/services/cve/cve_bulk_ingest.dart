@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 
 import '../../models/local_cve_status.dart';
+import '../../utils/archive_limits.dart';
 import 'cve_record_parser.dart';
 import 'local_cve_index.dart';
 
@@ -247,7 +248,7 @@ class CveBulkIngest {
       final output = _CappedFileOutputStream(inner.path, maxInnerArchiveBytes);
       try {
         nested.writeContent(output);
-      } on _ExtractionLimitException {
+      } on ExtractionLimitException {
         throw const CveIngestException(
           CveIngestFailure.invalidArchive,
           'het geneste archief groeide voorbij de grens tijdens het uitpakken',
@@ -328,12 +329,6 @@ class CveBulkIngest {
   }
 }
 
-/// Gegooid door [_CappedFileOutputStream] zodra het uitpakken voorbij zijn
-/// budget groeit — het teken dat het geneste archief een decompressiebom is.
-class _ExtractionLimitException implements Exception {
-  const _ExtractionLimitException();
-}
-
 /// Een [OutputStream] die naar een bestand schrijft en weigert voorbij [limit]
 /// te groeien.
 ///
@@ -353,7 +348,7 @@ class _CappedFileOutputStream extends OutputStream {
   final int limit;
 
   void _guard(int add) {
-    if (_out.length + add > limit) throw const _ExtractionLimitException();
+    if (_out.length + add > limit) throw const ExtractionLimitException();
   }
 
   @override

@@ -414,12 +414,6 @@ String _freeArchivePath(Set<String> added, String subdir, String abs) {
   return rel;
 }
 
-/// Thrown by [_CappedOutputStream] when a decompressed entry would exceed its
-/// byte budget — the signal that a package entry is a decompression bomb.
-class _ExtractionLimitException implements Exception {
-  const _ExtractionLimitException();
-}
-
 /// Thrown while building a package when the assets would push it past
 /// [FileService.maxPackageBytes] — the very limit the importer enforces
 /// ([tabs_provider_import]). Without this a single big video could produce a
@@ -452,7 +446,7 @@ class _CappedOutputStream extends OutputMemoryStream {
   final int limit;
 
   void _guard(int add) {
-    if (length + add > limit) throw const _ExtractionLimitException();
+    if (length + add > limit) throw const ExtractionLimitException();
   }
 
   @override

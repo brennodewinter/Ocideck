@@ -18,6 +18,7 @@ import '../models/chart.dart';
 import '../models/seal_record.dart';
 import '../models/slide.dart';
 import '../platform/platform_features.dart';
+import '../utils/archive_limits.dart';
 import '../utils/atomic_file.dart';
 import '../utils/bundled_asset.dart';
 import '../utils/file_download.dart';
@@ -879,7 +880,7 @@ class FileService {
         try {
           f.writeContent(capped);
           content = Uint8List.fromList(capped.getBytes());
-        } on _ExtractionLimitException {
+        } on ExtractionLimitException {
           logWarning(
             'FileService.decodePackageEntries: entry exceeds decompression '
             'limit (possible zip bomb): ${f.name}',
