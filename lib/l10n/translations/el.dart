@@ -1798,6 +1798,80 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Voortgang per sectie': 'Πρόοδος ανά ενότητα',
+  'Nog te doen': 'Απομένει',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Η επισκόπηση και το γράφημα προόδου ενημερώθηκαν',
+  'Genereer managementreview (9.3)':
+      'Δημιουργία ανασκόπησης από τη διοίκηση (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Προσθέτει ένα προσυμπληρωμένο πρότυπο για την ανασκόπηση από τη διοίκηση (ρήτρα ISO 9.3), με την τρέχουσα πρόοδο.',
+  'Managementreview (clausule 9.3) — Input':
+      'Ανασκόπηση από τη διοίκηση (ρήτρα 9.3) — Εισροές',
+  'Managementreview (clausule 9.3) — Output':
+      'Ανασκόπηση από τη διοίκηση (ρήτρα 9.3) — Εκροές',
+  'Managementreview (9.3) toegevoegd':
+      'Προστέθηκε ανασκόπηση από τη διοίκηση (9.3)',
+  'Er staat al een managementreview in dit deck':
+      'Αυτό το deck περιέχει ήδη ανασκόπηση από τη διοίκηση',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Εισροές (9.3.2)\n\n- **a.** Κατάσταση των ενεργειών από προηγούμενες ανασκοπήσεις από τη διοίκηση\n- **b.** Αλλαγές στα εσωτερικά και εξωτερικά θέματα που επηρεάζουν το σύστημα διαχείρισης\n- **c.** Αλλαγές στις ανάγκες και προσδοκίες των ενδιαφερόμενων μερών\n- **d.** Επιδόσεις και αποτελεσματικότητα — {p}% υλοποιήθηκε (εφαρμοστέοι έλεγχοι: {impl}/{app})\n    - Τάσεις σε μη συμμορφώσεις και διορθωτικές ενέργειες\n    - Αποτελέσματα παρακολούθησης και μετρήσεων\n    - Αποτελέσματα επιθεωρήσεων\n- **e.** Επάρκεια πόρων\n- **f.** Αποτελεσματικότητα των ενεργειών για κινδύνους και ευκαιρίες\n- **g.** Ευκαιρίες για βελτίωση',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Εκροές (9.3.3)\n\n- Αποφάσεις για ευκαιρίες συνεχούς βελτίωσης\n- Αποφάσεις για τυχόν αλλαγές στο σύστημα διαχείρισης\n- Ανάγκες σε πόρους\n\n_Συμπληρώστε παρακάτω τις αποφάσεις, τις ενέργειες και τους υπευθύνους._',
+  'Procesverbetering: DMADV-project': 'Βελτίωση διαδικασίας: έργο DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Σκελετός DMADV για το σχεδιασμό και την επαλήθευση μιας νέας διαδικασίας.',
+  'Procesverbetering: Kaizen-project': 'Βελτίωση διαδικασίας: έργο Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Συμπαγές έργο βελτίωσης με φάσεις Plan, Do και Check.',
+  'Procesverbetering: A3-project': 'Βελτίωση διαδικασίας: έργο A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Σκελετός Α3 για ενέργειες προβλήματος, ανάλυσης και βελτίωσης.',
+  'Procesverbetering: 8D-project': 'Βελτίωση διαδικασίας: έργο 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D σκελετός για περιγραφή προβλημάτων, αιτίες και διασφάλιση.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Αναφέρετε την πρόοδο ενός συστήματος διαχείρισης ISO (27001/9001/42001): κατάσταση ανά έλεγχο και μια παραγόμενη επισκόπηση προόδου. Απενεργοποιημένο από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τον τύπο διαφάνειας.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Λειτουργική μονάδα ενεργή. Το ευρετήριο ISO είναι διαθέσιμο τοπικά ({n} έλεγχοι σε τρία πρότυπα)· μόνο οι αριθμοί και οι σύντομοι τίτλοι, όχι το κείμενο του προτύπου.',
+  'Beheersmaatregel-status': 'Κατάσταση ελέγχων',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Μόνο το ευρετήριο ρητρών 4–10 (28 υπορήτρες + σύντομοι τίτλοι). Το ISO 9001 δεν έχει Annex A. Το κείμενο του προτύπου ΔΕΝ περιλαμβάνεται.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Μόνο το ευρετήριο του Annex A (38 αναγνωριστικά ελέγχων + σύντομοι τίτλοι) και οι εννέα επικεφαλίδες στόχων A.2–A.10. Το κείμενο του προτύπου ΔΕΝ περιλαμβάνεται.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Μόνο το ευρετήριο του Annex A (93 αναγνωριστικά ελέγχων + σύντομοι τίτλοι) και οι τέσσερις θεματικές επικεφαλίδες. Το κείμενο του προτύπου ΔΕΝ περιλαμβάνεται.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Η κατάσταση υλοποίησης ανά έλεγχο ενός προτύπου ISO (27001/9001/42001). Φορτώστε τους ελέγχους από ένα πρότυπο και συμπληρώστε κατάσταση, υπεύθυνο και τεκμήριο.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Πνευματικά δικαιώματα ISO — ευρετήριο ως τεκμηριωμένη αναφορά, κείμενο προτύπου μη συμπεριλαμβανόμενο',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Δημιουργεί ή ανανεώνει μια διαφάνεια επισκόπησης με την πρόοδο ανά ενότητα (προκύπτει από όλες τις διαφάνειες ελέγχων).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Προσθέτει τους ελέγχους ενός προτύπου ISO (μόνο το ευρετήριο· μόνο νέα αναγνωριστικά).',
+  'Alle secties': 'Όλες οι ενότητες',
+  'Beheersmaatregel': 'Έλεγχος',
+  'Beheersmaatregel toevoegen': 'Προσθήκη ελέγχου',
+  'Beheersmaatregelen laden…': 'Φόρτωση ελέγχων…',
+  'Genereer voortgangsoverzicht': 'Δημιουργία επισκόπησης προόδου',
+  'Geïmplementeerd': 'Υλοποιημένο',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Οργανωτικά (A.5)',
+  'Kies een norm': 'Επιλέξτε πρότυπο',
+  'Managementsysteem': 'Σύστημα διαχείρισης',
+  'Niet gescoord': 'Χωρίς βαθμολόγηση',
+  'Niveau': 'Επίπεδο',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Δεν υπάρχουν ακόμη διαφάνειες ελέγχων για σύνοψη',
+  'Sectie': 'Ενότητα',
+  'Streefdatum': 'Ημερομηνία-στόχος',
+  'Van toepassing': 'Εφαρμόσιμο',
+  'Voortgang': 'Πρόοδος',
+  'Voortgang managementsysteem': 'Πρόοδος συστήματος διαχείρισης',
+  'Voortgangsoverzicht bijgewerkt': 'Η επισκόπηση προόδου ενημερώθηκε',
+  'Welk deel?': 'Ποιο μέρος;',
+  'beheersmaatregelen geladen': 'έλεγχοι φορτώθηκαν',
+  'geïmplementeerd': 'υλοποιημένο',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Η ενότητα είναι ενεργή. Ο πυρήνας υπολογισμών, οι διατάξεις διαφανειών και τα πρότυπα είναι διαθέσιμα τοπικά ({n} παράγοντες διαγράμματος ελέγχου).',
   'SIPOC-procesoverzicht': 'Επισκόπηση διαδικασίας SIPOC',
@@ -1805,6 +1879,18 @@ const _dutchSourceAddEl = <String, String>{
       'Καθορίστε το εύρος και τις εξαρτήσεις μιας διαδικασίας μέσω προμηθευτών, εισροών, κύριων βημάτων, εκροών και πελατών.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Εργαλεία για βελτίωση διαδικασιών (SIPOC, DMAIC, Kaizen και A3). Απενεργοποιημένα από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τα σχετικά πρότυπα και τις διατάξεις διαφανειών.',
+  'Videovergaderingen': 'Βιντεοσυσκέψεις',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Συμμετέχετε σε βιντεοσυσκέψεις και παρουσιάζετε από το OciDeck με δικό του περιβάλλον: οι συμμετέχοντες δίπλα στη διαφάνειά σας, όχι στο παράθυρο μιας άλλης εφαρμογής. Bring-your-own-server (Jitsi ή Matrix)· το OciDeck δεν φιλοξενεί τίποτα και κρατά τα δεδομένα της συνομιλίας μακριά από την AI. Η σύνδεση με μια υπηρεσία συσκέψεων θα ακολουθήσει σε μελλοντική έκδοση.',
+  'Videovergadering': 'Βιντεοσύσκεψη',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Δεν υπάρχει ακόμη ενεργή σύσκεψη. Η σύνδεση με μια υπηρεσία συσκέψεων θα προστεθεί σε μελλοντική έκδοση.',
+  'Dempen opheffen': 'Κατάργηση σίγασης',
+  'Dempen': 'Σίγαση',
+  'Camera aan': 'Ενεργοποίηση κάμερας',
+  'Camera uit': 'Απενεργοποίηση κάμερας',
+  'Scherm delen': 'Κοινή χρήση οθόνης',
+  'Vergadering verlaten': 'Αποχώρηση από τη σύσκεψη',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Η βιβλιοθήκη εικόνων είναι πολύ μεγάλη· εμφανίζονται μόνο οι πιο πρόσφατες εικόνες.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

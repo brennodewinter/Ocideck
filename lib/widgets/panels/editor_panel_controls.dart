@@ -19,6 +19,9 @@ class _EditorToolbar extends StatelessWidget {
   /// Of de Procesverbetering-module onthuld is.
   final bool revealProcesverbetering;
 
+  /// Of de Managementsysteem-module onthuld is.
+  final bool revealManagementsysteem;
+
   /// Extra items rechts in de kopregel (bijv. de hulp-toggle en de
   /// kwaliteits-samenvatting), zodat die op dezelfde regel als TYPE/STIJL staan.
   final List<Widget> trailing;
@@ -33,6 +36,7 @@ class _EditorToolbar extends StatelessWidget {
     required this.onDefaultProfileRequested,
     required this.revealInfoSafety,
     this.revealProcesverbetering = false,
+    this.revealManagementsysteem = false,
     this.trailing = const [],
   });
 
@@ -47,10 +51,16 @@ class _EditorToolbar extends StatelessWidget {
     final revealImp =
         revealProcesverbetering ||
         slide.type.category == SlideCategory.procesverbetering;
+    // Revealed when the module switch is on, or the current slide already is a
+    // controlStatus slide so it can be retyped within its own category.
+    final revealMgmt =
+        revealManagementsysteem ||
+        slide.type.category == SlideCategory.managementsysteem;
     final picked = await AddSlideDialog.show(
       context,
       revealInfoSafety: revealSec,
       revealProcesverbetering: revealImp,
+      revealManagementsysteem: revealMgmt,
     );
     if (picked != null && picked != slide.type) onTypeChanged(picked);
   }
@@ -165,6 +175,7 @@ class _EditorHeaderBar extends StatefulWidget {
   final VoidCallback onDefaultProfileRequested;
   final bool revealInfoSafety;
   final bool revealProcesverbetering;
+  final bool revealManagementsysteem;
 
   const _EditorHeaderBar({
     required this.slide,
@@ -176,6 +187,7 @@ class _EditorHeaderBar extends StatefulWidget {
     required this.onDefaultProfileRequested,
     required this.revealInfoSafety,
     this.revealProcesverbetering = false,
+    this.revealManagementsysteem = false,
   });
 
   @override
@@ -201,6 +213,7 @@ class _EditorHeaderBarState extends State<_EditorHeaderBar> {
           onDefaultProfileRequested: widget.onDefaultProfileRequested,
           revealInfoSafety: widget.revealInfoSafety,
           revealProcesverbetering: widget.revealProcesverbetering,
+          revealManagementsysteem: widget.revealManagementsysteem,
           trailing: [
             const SizedBox(width: 8),
             SlideTypeHelpToggle(

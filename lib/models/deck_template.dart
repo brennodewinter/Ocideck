@@ -27,6 +27,10 @@ class DeckTemplate {
   /// same flag for the visible module badge.
   final bool requiresProcesverbetering;
 
+  /// Procesverbeteringskader dat bij dit sjabloon in het deck wordt bewaard.
+  /// Leeg voor gewone sjablonen en voor losse hulpmiddelen zoals SIPOC.
+  final String improvementFramework;
+
   const DeckTemplate({
     required this.id,
     required this.title,
@@ -34,6 +38,7 @@ class DeckTemplate {
     required this.icon,
     this.requiresInfoSafety = false,
     this.requiresProcesverbetering = false,
+    this.improvementFramework = '',
   });
 }
 
@@ -708,6 +713,40 @@ final List<DeckTemplate> deckTemplates = [
         'DMAIC-skelet met charter, CTQ-boom (Y-01), SIPOC en fase-secties.',
     icon: 'procesverbeteringDmaic',
     requiresProcesverbetering: true,
+    improvementFramework: 'dmaic',
+  ),
+  DeckTemplate(
+    id: 'procesverbetering-dmadv',
+    title: 'Procesverbetering: DMADV-project',
+    description:
+        'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.',
+    icon: 'procesverbeteringDmaic',
+    requiresProcesverbetering: true,
+    improvementFramework: 'dmadv',
+  ),
+  DeckTemplate(
+    id: 'procesverbetering-kaizen',
+    title: 'Procesverbetering: Kaizen-project',
+    description: 'Compact verbeterproject met Plan-, Do- en Check-fases.',
+    icon: 'procesverbeteringDmaic',
+    requiresProcesverbetering: true,
+    improvementFramework: 'kaizen',
+  ),
+  DeckTemplate(
+    id: 'procesverbetering-a3',
+    title: 'Procesverbetering: A3-project',
+    description: 'A3-skelet voor probleem, analyse en verbeteracties.',
+    icon: 'procesverbeteringDmaic',
+    requiresProcesverbetering: true,
+    improvementFramework: 'a3',
+  ),
+  DeckTemplate(
+    id: 'procesverbetering-8d',
+    title: 'Procesverbetering: 8D-project',
+    description: '8D-skelet voor probleembeschrijving, oorzaken en borging.',
+    icon: 'procesverbeteringDmaic',
+    requiresProcesverbetering: true,
+    improvementFramework: '8d',
   ),
   DeckTemplate(
     id: 'procesverbetering-sipoc',

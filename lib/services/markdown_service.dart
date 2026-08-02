@@ -515,6 +515,7 @@ class MarkdownService {
       case SlideType.discoveries:
       case SlideType.checklist:
       case SlideType.scopeMatrix:
+      case SlideType.controlStatus:
       case SlideType.findingsSummary:
       // Een matrix is óók echt een Markdown-tabel (PROCESS_IMPROVEMENT §3.1):
       // het sjabloon rijdt mee als commentaar, de afgeleide kolom (RPN) wordt

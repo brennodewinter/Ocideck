@@ -24,7 +24,11 @@
 > [`ketenkeuring-flutter-webrtc.md`](../../assurance/ketenkeuring-flutter-webrtc.md) and
 > the spine [`ketenkeuring-xmpp-spine.md`](../../assurance/ketenkeuring-xmpp-spine.md).
 > The **spine decision (§5) is taken** (2026-08-02): the single XMPP spine, with
-> **backend exclusivity** (§1).
+> **backend exclusivity** (§1). The maintainer also gave **GO to build** (2026-08-02),
+> with the sub-choices in §10: `lib/xmpp/` from scratch, and media E2EE uniform across
+> platforms until the upstream fix. The dependencies still land only after the
+> build-conditions; **F1** (the provider-neutral interface + a fake adapter, no
+> dependency) is under way.
 
 ---
 
@@ -237,6 +241,39 @@ exclusivity invariant:
 - **The interface of §3 is unaffected.** The spine choice changes which
   `CollabTransport` carries the data plane, not the call UI.
 
+### 5.1 Companion channel — OciDeck's control plane rides a *separate* room (decided 2026-08-02)
+
+OciDeck's data plane (presenter-sync, ops, chat, presence) does **not** go into
+the Jitsi conference's own MUC. It rides a **separate companion MUC** on the same
+XMPP server, paired with the conference. This keeps OciDeck's traffic out of the
+call the rest of the participants are in:
+
+- **Non-OciDeck participants are undisturbed.** They are in the Jitsi conference
+  room only and never see OciDeck's `nl.ocideck.*` events, presence extensions or
+  ops. A plain Jitsi/browser user in the same call notices nothing — no stray
+  presence, no unknown messages.
+- **OciDeck participants discover each other.** Presence in the companion room is
+  exactly "who in this call also runs OciDeck." Presenter-sync, follow-mode and
+  co-authoring run among *those* participants; everyone else just sees the shared
+  screen/video like any Jitsi call.
+- **The two streams stay apart.** Media and roster are the Jitsi conference
+  (`MeetingSession`, §3); the OciDeck control plane is the companion room
+  (`CollabTransport` over XMPP, §5). Same server, same connection, **two MUCs** —
+  the two-seams model (§1) expressed as two rooms rather than one shared room.
+- **Backend exclusivity holds (§8).** Both rooms are XMPP/Jitsi-mode; nothing
+  crosses into a Matrix room. In Matrix mode the analogue is a separate Matrix
+  room for the control plane alongside the MatrixRTC call — the same shape.
+
+**Pairing (open detail for F3).** The companion room must be findable without a
+central registry (P1). The natural default is a **deterministic derivation from
+the already-shared conference URL** (e.g. a stable hash of the conference host +
+room into a companion room name), so two OciDeck clients that hold the same Jitsi
+link compute the same companion room and meet there. A later refinement can let
+the presenter announce/verify the companion room explicitly. The derivation must
+not leak the conference identity to anyone who doesn't already hold the link, and
+the companion room inherits the same `MeetingProviderProfile`/NetGuard posture as
+the signalling origin (§8).
+
 ---
 
 ## 6. Design principles (inherited)
@@ -377,11 +414,16 @@ host; run any crypto in an isolate with static helpers.
    backend exclusivity). Remaining build-conditions are in that chain review: XMPP-lib
    choice, shared crypto + external review, the exclusivity invariant as a test, and
    NetGuard on the signalling origin.
-1. **XMPP library** — fork a permissive core (e.g. `moxxmpp`) vs. `lib/xmpp/` from
-   scratch. Jingle/Colibri2/Jitsi-presence are net-new either way.
-2. **E2EE on macOS** — `flutter_webrtc` frame cryptor is known to crash on iOS/macOS
-   (OciDeck's primary target). Is media E2EE v1-blocking, or does it land on
-   Linux/Windows/web first?
+1. **XMPP library — DECIDED (2026-08-02): `lib/xmpp/` from scratch** (no fork),
+   preferring own code over a dependency and keeping the trust/maintenance surface
+   smallest. Jingle/Colibri2/Jitsi-presence are net-new regardless.
+2. **Media E2EE — DECIDED (2026-08-02): uniform across all platforms until the upstream
+   fix lands.** The `flutter_webrtc` frame cryptor crashes on iOS/macOS; rather than a
+   per-platform split, media E2EE stays uniformly off (with honest `MeetingPreflight`
+   disclosure everywhere) and flips on everywhere once the fix is merged **and** released
+   **and** verified on Apple hardware (a two-peer call on a Mac + two devices with a
+   forced decrypt failure). Upstream fix in flight: `flutter-webrtc/flutter-webrtc#2135`
+   (a Darwin state-delivery/lifetime fix; not yet merged or live-verified).
 3. **Web parity** — how much media on the web build (CSP, `flutter_webrtc` web
    maturity)? (COLLABORATION.md open question 6.)
 4. **Signalling depth for v1** — simulcast/SVC/lastN/dominant-speaker as a later

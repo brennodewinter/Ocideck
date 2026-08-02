@@ -5,6 +5,8 @@ import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../editors/slide_type_help.dart';
 
+part 'add_slide_dialog_painter.dart';
+
 /// A picker tab: one [SlideCategory] to filter by, or `null` for "all types".
 class _PickerTab {
   final SlideCategory? category;
@@ -23,22 +25,31 @@ class AddSlideDialog extends StatefulWidget {
   /// types and their picker tab (PROCESS_IMPROVEMENT.md Phase 0).
   final bool revealProcesverbetering;
 
+  /// Whether the Managementsysteem module is revealed. Gates the `controlStatus`
+  /// type and its picker tab, so they stay hidden until a deck already carries
+  /// such a slide — the shared module contract "tonen zodra de inhoud er is"
+  /// (ISO_MANAGEMENTSYSTEEM §5). Off by default; the caller passes the value.
+  final bool revealManagementsysteem;
+
   const AddSlideDialog({
     super.key,
     this.revealInfoSafety = false,
     this.revealProcesverbetering = false,
+    this.revealManagementsysteem = false,
   });
 
   static Future<SlideType?> show(
     BuildContext context, {
     bool revealInfoSafety = false,
     bool revealProcesverbetering = false,
+    bool revealManagementsysteem = false,
   }) {
     return showDialog<SlideType>(
       context: context,
       builder: (_) => AddSlideDialog(
         revealInfoSafety: revealInfoSafety,
         revealProcesverbetering: revealProcesverbetering,
+        revealManagementsysteem: revealManagementsysteem,
       ),
     );
   }
@@ -81,6 +92,9 @@ class AddSlideDialog extends StatefulWidget {
     SlideType.tree,
     SlideType.flow,
     SlideType.phaseGate,
+    // Managementsysteem-module — eigen tabblad zodra de module de types
+    // onthult (ISO_MANAGEMENTSYSTEEM §5).
+    SlideType.controlStatus,
   ];
 
   @override
@@ -136,6 +150,10 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
         !widget.revealProcesverbetering) {
       return false;
     }
+    if (t.category == SlideCategory.managementsysteem &&
+        !widget.revealManagementsysteem) {
+      return false;
+    }
     return true;
   });
 
@@ -178,6 +196,8 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
         return l10n.d('Informatieveiligheid');
       case SlideCategory.procesverbetering:
         return l10n.d('Procesverbetering');
+      case SlideCategory.managementsysteem:
+        return l10n.d('Managementsysteem');
     }
   }
 
@@ -681,41 +701,7 @@ class SlideTypePreviewPainter extends CustomPainter {
         _dial(canvas, 46, 58, 22);
         _dial(canvas, 92, 58, 22);
       case SlideType.timeline:
-        // Horizontal rail with four nodes and cards alternating above/below.
-        canvas.drawLine(
-          const Offset(18, 45),
-          const Offset(146, 45),
-          _paint(_accent)
-            ..strokeWidth = 3
-            ..strokeCap = StrokeCap.round,
-        );
-        const xs = [26.0, 66.0, 106.0, 142.0];
-        for (var i = 0; i < xs.length; i++) {
-          final x = xs[i];
-          final above = i.isEven;
-          final cardY = above ? 12.0 : 56.0;
-          _bar(canvas, x - 16, cardY, 32, 22, _fill, radius: 3);
-          _bar(canvas, x - 12, cardY + 4, 14, 5, _accent, radius: 2);
-          _bar(canvas, x - 12, cardY + 12, 22, 4, _soft, radius: 2);
-          canvas.drawLine(
-            Offset(x, 45),
-            Offset(x, above ? 34 : 56),
-            _paint(_accent.withValues(alpha: 0.4))..strokeWidth = 1.5,
-          );
-          canvas.drawCircle(
-            Offset(x, 45),
-            6,
-            _paint(_accent.withValues(alpha: 0.18)),
-          );
-          canvas.drawCircle(Offset(x, 45), 4, _paint(_accent));
-          canvas.drawCircle(
-            Offset(x, 45),
-            4,
-            _paint(_ink)
-              ..style = PaintingStyle.stroke
-              ..strokeWidth = 1.5,
-          );
-        }
+        _paintTimelineWireframe(canvas);
       case SlideType.code:
         _bar(canvas, 10, 10, 140, 70, AppTheme.slate800, radius: 4);
         _bar(canvas, 20, 22, 44, 6, AppTheme.successSoft, radius: 3);
@@ -757,7 +743,10 @@ class SlideTypePreviewPainter extends CustomPainter {
         _paintTreeWireframe(canvas);
       case SlideType.flow:
         _paintFlowWireframe(canvas);
+      // controlStatus leent de checklist-wireframe, net als phaseGate: rijen met
+      // statusvakjes.
       case SlideType.phaseGate:
+      case SlideType.controlStatus:
         _paintSecurityWireframe(canvas, SlideType.checklist);
     }
   }
@@ -998,7 +987,8 @@ class SlideTypePreviewPainter extends CustomPainter {
           SlideType.canvas ||
           SlideType.tree ||
           SlideType.flow ||
-          SlideType.phaseGate:
+          SlideType.phaseGate ||
+          SlideType.controlStatus:
         break;
     }
   }

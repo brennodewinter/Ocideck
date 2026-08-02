@@ -29,6 +29,25 @@ const werkdeckIds = [
   'retrospective',
 ];
 
+/// De vijf projectvormen en het kader dat het nieuwe deck in de frontmatter
+/// moet meekrijgen. SIPOC is een los hulpmiddel en heeft daarom geen kader.
+const improvementProjectFrameworks = {
+  'procesverbetering-dmaic': 'dmaic',
+  'procesverbetering-dmadv': 'dmadv',
+  'procesverbetering-kaizen': 'kaizen',
+  'procesverbetering-a3': 'a3',
+  'procesverbetering-8d': '8d',
+};
+
+const improvementTemplateIds = [
+  'procesverbetering-dmaic',
+  'procesverbetering-dmadv',
+  'procesverbetering-kaizen',
+  'procesverbetering-a3',
+  'procesverbetering-8d',
+  'procesverbetering-sipoc',
+];
+
 /// De inhoudstalen van de sjabloondocumenten. Klingon valt voorlopig terug op
 /// Engels totdat de inhoud betrouwbaar door een mens is vertaald.
 final contentLanguages = AppLocalizations.supportedLocales
@@ -87,7 +106,6 @@ void main() {
     test('module visibility follows the template requirement', () {
       final ordinary = deckTemplateById('briefing')!;
       final security = deckTemplateById('miauwReport')!;
-      final improvement = deckTemplateById('procesverbetering-sipoc')!;
 
       bool visible(
         DeckTemplate template, {
@@ -102,8 +120,24 @@ void main() {
       expect(visible(ordinary), isTrue);
       expect(visible(security), isFalse);
       expect(visible(security, sec: true), isTrue);
-      expect(visible(improvement), isFalse);
-      expect(visible(improvement, imp: true), isTrue);
+      for (final id in improvementTemplateIds) {
+        final improvement = deckTemplateById(id)!;
+        expect(visible(improvement), isFalse, reason: id);
+        expect(visible(improvement, imp: true), isTrue, reason: id);
+      }
+    });
+
+    test('every improvement project declares its framework', () {
+      for (final entry in improvementProjectFrameworks.entries) {
+        final template = deckTemplateById(entry.key);
+        expect(template, isNotNull, reason: entry.key);
+        expect(template!.requiresProcesverbetering, isTrue, reason: entry.key);
+        expect(template.improvementFramework, entry.value, reason: entry.key);
+      }
+      expect(
+        deckTemplateById('procesverbetering-sipoc')!.improvementFramework,
+        isEmpty,
+      );
     });
   });
 
@@ -202,6 +236,7 @@ void main() {
         for (var i = 0; i < nl.length; i++) {
           final where = '$label slide ${i + 1}';
           expect(en[i].tableEditable, nl[i].tableEditable, reason: where);
+          expect(en[i].skipped, nl[i].skipped, reason: where);
           expect(en[i].listStyle, nl[i].listStyle, reason: where);
           expect(
             en[i].showChecklistProgress,
@@ -796,9 +831,77 @@ void main() {
       }
     });
 
+    test(
+      'puts boundary fields and completion instructions before the matrix',
+      () {
+        const expectedRows = {
+          'nl': [
+            ['Afbakening', 'Waarde'],
+            ['Proces', ''],
+            ['Startpunt', ''],
+            ['Eindpunt', ''],
+          ],
+          'en': [
+            ['Boundary', 'Value'],
+            ['Process', ''],
+            ['Start point', ''],
+            ['End point', ''],
+          ],
+        };
+        const instructionTitles = {
+          'nl': 'Checklist — Invullen van rechts naar links',
+          'en': 'Checklist — Complete from right to left',
+        };
+
+        for (final language in expectedRows.keys) {
+          final slides = slidesOf(
+            'procesverbetering-sipoc',
+            language: language,
+          );
+          final matrixIndex = slides.indexWhere(
+            (slide) => slide.type == SlideType.matrix,
+          );
+          final boundaryIndex = slides.indexWhere(
+            (slide) =>
+                slide.type == SlideType.table &&
+                slide.tableEditable &&
+                slide.tableRows.length == 4,
+          );
+          final instructionIndex = slides.indexWhere(
+            (slide) => slide.title == instructionTitles[language],
+          );
+
+          expect(matrixIndex, greaterThan(0), reason: language);
+          expect(
+            boundaryIndex,
+            inInclusiveRange(1, matrixIndex - 1),
+            reason: language,
+          );
+          expect(
+            instructionIndex,
+            inInclusiveRange(boundaryIndex + 1, matrixIndex - 1),
+            reason: language,
+          );
+          expect(
+            slides[boundaryIndex].tableRows,
+            expectedRows[language],
+            reason: language,
+          );
+          final instruction = slides[instructionIndex];
+          expect(instruction.listStyle, ListStyle.numbered, reason: language);
+          expect(instruction.bullets, hasLength(6), reason: language);
+          expect(
+            instruction.bullets.every((step) => step.trim().isNotEmpty),
+            isTrue,
+            reason: language,
+          );
+        }
+      },
+    );
+
     test('teaches scope, comparison and right-to-left completion', () {
       final slides = slidesOf('procesverbetering-sipoc');
-      expect(slides, hasLength(5));
+      expect(slides, hasLength(9));
       expect(
         slides.any((slide) => slide.title.contains('gedetailleerde flowchart')),
         isTrue,
@@ -807,6 +910,127 @@ void main() {
         slides.any((slide) => slide.title.contains('rechts naar links')),
         isTrue,
       );
+    });
+  });
+
+  group('procesverbetering invulhulp', () {
+    test('every project phase is immediately followed by skipped guidance', () {
+      for (final id in improvementProjectFrameworks.keys) {
+        for (final language in contentLanguages) {
+          final slides = slidesOf(id, language: language);
+          final label = '$id.$language';
+
+          expect(slides[1].skipped, isTrue, reason: '$label start guidance');
+          expect(slides[1].type, SlideType.bullets, reason: label);
+          expect(slides[1].bullets, hasLength(4), reason: label);
+
+          for (var i = 0; i < slides.length; i++) {
+            if (slides[i].type != SlideType.section) continue;
+            expect(i + 1, lessThan(slides.length), reason: label);
+            final guidance = slides[i + 1];
+            expect(guidance.skipped, isTrue, reason: '$label after ${i + 1}');
+            expect(guidance.type, SlideType.bullets, reason: label);
+            expect(guidance.bullets, hasLength(5), reason: label);
+            expect(
+              guidance.bullets.every((item) => item.trim().isNotEmpty),
+              isTrue,
+              reason: label,
+            );
+          }
+        }
+      }
+    });
+
+    test('every project explains SIPOC before the editable matrix', () {
+      for (final id in improvementProjectFrameworks.keys) {
+        for (final language in contentLanguages) {
+          final slides = slidesOf(id, language: language);
+          final matrixIndex = slides.indexWhere(
+            (slide) => slide.type == SlideType.matrix,
+          );
+          expect(matrixIndex, greaterThan(0), reason: '$id.$language');
+          final guidance = slides[matrixIndex - 1];
+          expect(guidance.skipped, isTrue, reason: '$id.$language');
+          expect(guidance.type, SlideType.bullets, reason: '$id.$language');
+          expect(guidance.bullets, hasLength(5), reason: '$id.$language');
+        }
+      }
+    });
+
+    test(
+      'charter and CTQ starters contain prompts rather than empty labels',
+      () {
+        for (final id in improvementProjectFrameworks.keys) {
+          for (final language in contentLanguages) {
+            final slides = slidesOf(id, language: language);
+            final label = '$id.$language';
+            final charter = slides.singleWhere(
+              (slide) => slide.improvementTemplateId == 'charter',
+            );
+            final regions = charter.customMarkdown
+                .split(RegExp(r'(?=^## )', multiLine: true))
+                .where((region) => region.startsWith('## '));
+            expect(regions, isNotEmpty, reason: label);
+            for (final region in regions) {
+              final lines = region.split('\n');
+              expect(
+                lines.skip(1).join('\n').trim(),
+                isNotEmpty,
+                reason: '$label: ${lines.first}',
+              );
+            }
+
+            final ctq = slides.singleWhere(
+              (slide) => slide.improvementTemplateId == 'ctq-tree',
+            );
+            expect(ctq.bullets, hasLength(3), reason: label);
+            expect(
+              ctq.bullets.every((item) => item.trim().isNotEmpty),
+              isTrue,
+              reason: label,
+            );
+            expect(
+              ctq.bullets
+                  .skip(1)
+                  .any((item) => RegExp(r'^\s*CTQ\s+\d+$').hasMatch(item)),
+              isFalse,
+              reason: label,
+            );
+          }
+        }
+      },
+    );
+
+    test('standalone SIPOC keeps guidance out of presentation and export', () {
+      for (final language in contentLanguages) {
+        final slides = slidesOf('procesverbetering-sipoc', language: language);
+        final guidance = slides.where((slide) => slide.skipped).toList();
+        expect(guidance, hasLength(4), reason: language);
+        expect(guidance.first.type, SlideType.bullets, reason: language);
+        expect(
+          guidance.any((slide) => slide.type == SlideType.table),
+          isTrue,
+          reason: language,
+        );
+        expect(
+          guidance.every(
+            (slide) => slide.bullets.isNotEmpty || slide.tableRows.length > 1,
+          ),
+          isTrue,
+          reason: language,
+        );
+        for (final slide in guidance) {
+          expect(
+            slideReachesAudience(
+              slide,
+              presentationTlp: TlpLevel.none,
+              includeDetail: true,
+            ),
+            isFalse,
+            reason: '$language: ${slide.title}',
+          );
+        }
+      }
     });
   });
 

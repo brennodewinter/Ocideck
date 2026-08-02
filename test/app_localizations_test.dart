@@ -13,6 +13,8 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'A.5.1',
+  '2026-Q4',
   'ABCD-EFGH-…',
   'Matrix',
   // Het chatpaneel: het Engels houdt het leenwoord 'Chat', maar andere talen
@@ -202,6 +204,8 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'A.5.1',
+  '2026-Q4',
   'ABCD-EFGH-…',
   'Matrix',
   'CVSS',

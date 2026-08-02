@@ -16,14 +16,48 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- **Managementsysteem-rapportage (ISO 27001 / 9001 / 42001)** — een nieuwe manier
+  om de **voortgang van je eigen managementsysteem** te rapporteren. Voeg een
+  dia **Beheersmaatregel-status** toe (tabblad *Managementsysteem* in *Dia
+  toevoegen*; deze werkvorm staat altijd klaar, zonder aparte schakelaar) en laad
+  met één druk de beheersmaatregelen van een norm: ISO/IEC 27001:2022 (de 93
+  Annex A-controls), ISO 9001:2015 (de clausules 4–10, geen Annex A) of ISO/IEC
+  42001:2023 (de 38 Annex A-controls). Per beheersmaatregel leg je een status
+  (*Niet gestart* / *Gepland* / *Deels* / *Geïmplementeerd* / *Niet van
+  toepassing*), een optioneel volwassenheidsniveau (0–5), een eigenaar, een
+  streefdatum, een bewijsverwijzing en een notitie vast. De voortgangsbalk en de
+  actie **Genereer voortgangsoverzicht** worden altijd **afgeleid** uit de dia's,
+  dus ze lopen nooit uit de pas met de details; die actie zet nu naast de
+  overzichtstabel (per sectie met totalen) óók een **burn-up-grafiek** neer — een
+  horizontale staaf per sectie, gesplitst in geïmplementeerd (groen) en nog te
+  doen (grijs). Met de nieuwe actie **Genereer managementreview (9.3)** voeg je een
+  ingevuld sjabloon voor de directiebeoordeling toe: twee dia's (input volgens
+  9.3.2 en output volgens 9.3.3) met de huidige voortgangscijfers erin. Die dia's
+  zijn gewone, direct te bewerken dia's; een tweede druk laat een bestaande review
+  ongemoeid, zodat je eigen antwoorden blijven staan. Op schijf is de statuslijst
+  een gewone Markdown-tabel met taalonafhankelijke Engelse statuswoorden, dus een
+  rapport reist verliesvrij mee en opent overal. Alles is offline: alleen de
+  **index** van de normen is meegeleverd (nummer + korte titel), niet de
+  auteursrechtelijk beschermde normtekst. OciDeck rapporteert voortgang; het doet
+  geen certificerings- of conformiteitsuitspraak. **Nog niet gebouwd** (bewust
+  uitgesteld): de periode/trend-frontmatter, waarmee een deck een reviewperiode
+  draagt en de voortgang zich tegen een vorige periode laat vergelijken. Zie
+  [`docs/design/ISO_MANAGEMENTSYSTEEM.md`](docs/design/ISO_MANAGEMENTSYSTEEM.md).
 - **Procesverbetering via sjablonen** — de losse actie *Nieuw
   verbeteringsproject* op het welkomstscherm en de bijbehorende wizard zijn
   vervallen. Zet de uitbreiding aan en kies in **Nieuwe presentatie** een
-  sjabloon met de badge *Procesverbetering*: het bestaande DMAIC-project of het
-  nieuwe zelfstandige **SIPOC-procesoverzicht**. Dat laatste bevat vijf dia's,
-  inclusief een bewerkbare SIPOC-matrix die dezelfde sjabloonopslag gebruikt
-  als andere matrices; het legt 4–7 hoofdlijnen vast en begeleidt het invullen
-  van klant naar leverancier. Sjablonen voor MIAUW en voor de geselecteerde
+  sjabloon met de badge *Procesverbetering*: DMAIC, DMADV, Kaizen, A3, 8D of het
+  zelfstandige **SIPOC-procesoverzicht**. De projectvormen vragen na de keuze om
+  de optionele primaire Y-metriek en limieten. Elk projectsjabloon bevat nu per
+  fase een korte hulpdia met concrete invulvragen; charter, CTQ-boom en SIPOC
+  leggen eveneens uit welke informatie nodig is. Die hulpdia's zijn standaard
+  als **Checklist** en overgeslagen gemarkeerd: de maker zet antwoorden op
+  gewone dia's erna, vervangt de charter- en CTQ-vraagtekst en voorkomt zo dat
+  werknotities ongemerkt uit presentatie of export verdwijnen. Het zelfstandige
+  SIPOC-sjabloon bevat daarnaast procesafbakening, een voorbeeldketen en de
+  instructie om van klant naar leverancier te werken vóór de lege matrix.
+  Sjablonen voor MIAUW en voor
+  de geselecteerde
   informatieveiligheidswerkvormen volgen dezelfde catalogusregel: zij zijn pas
   zichtbaar met *Informatieveiligheid* aan en dragen daar de badge van.
 - Samenwerken (realtime): **cryptografisch herkomstbewijs** op een verspreid deck

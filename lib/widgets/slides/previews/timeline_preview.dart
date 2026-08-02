@@ -1,5 +1,18 @@
 part of '../slide_preview.dart';
 
+extension _TimelinePreviewDispatch on SlidePreviewWidget {
+  /// Uit [_buildContent] gehaald zodat die methode onder het lengteplafond
+  /// blijft; de constructie leunt op de widget-velden van [SlidePreviewWidget].
+  Widget _timelineContent(Slide slide, double w) => _TimelinePreview(
+    slide: slide,
+    w: w,
+    font: fontFamily,
+    profile: themeProfile,
+    presentationMode: presentationMode,
+    revealedCount: timelineRevealedCount,
+  );
+}
+
 /// Eye-candy timeline renderer.
 ///
 /// The graphics (glowing spine, nodes, connectors) are painted by

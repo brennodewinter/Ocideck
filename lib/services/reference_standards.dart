@@ -115,7 +115,70 @@ const referenceStandards = <ReferenceStandard>[
     probe: UpstreamProbe.successorDocument,
     probeTarget: 'https://www.first.org/cvss/cvss-v{version}.json',
   ),
+  // ── Managementsysteemnormen (ISO_MANAGEMENTSYSTEEM §7) ────────────────────
+  // Alleen de **index** (nummer + korte titel) is gebundeld; de normtekst is
+  // betaald en staat er niet in (zie management_system_catalog.dart en §9).
+  //
+  // De probe (`isoEdition`) mikt op ISO's publieke `popular-standards.html`,
+  // die alle drie de edities in één pagina noemt ("ISO/IEC 27001:2022", …).
+  // ISO verkoopt de norm en blokkeert bovendien geautomatiseerd ophalen (403),
+  // dus in de praktijk levert de probe meestal "onbekend" — een eerlijke uitkomst,
+  // geen valse groen: een mens controleert de editie op iso.org. Een nieuwe editie
+  // is een inhoudelijke migratie van de index, geen bouwblokkade → `advisory`.
+  ReferenceStandard(
+    id: 'iso27001',
+    name: 'ISO/IEC 27001',
+    bundledVersion: iso27001BundledEdition,
+    url: 'https://www.iso.org/popular-standards.html',
+    bundled:
+        'Alleen de index van Annex A (93 control-ids + korte titels) en de '
+        'vier thema-koppen. De normtekst is NIET gebundeld.',
+    licence:
+        'ISO copyright — index als feitreferentie, normtekst niet meegeleverd',
+    probe: UpstreamProbe.isoEdition,
+    probeTarget: 'https://www.iso.org/popular-standards.html',
+    advisory: true,
+  ),
+  ReferenceStandard(
+    id: 'iso9001',
+    name: 'ISO 9001',
+    bundledVersion: iso9001BundledEdition,
+    url: 'https://www.iso.org/popular-standards.html',
+    bundled:
+        'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). '
+        'ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.',
+    licence:
+        'ISO copyright — index als feitreferentie, normtekst niet meegeleverd',
+    probe: UpstreamProbe.isoEdition,
+    probeTarget: 'https://www.iso.org/popular-standards.html',
+    advisory: true,
+  ),
+  ReferenceStandard(
+    id: 'iso42001',
+    name: 'ISO/IEC 42001',
+    bundledVersion: iso42001BundledEdition,
+    url: 'https://www.iso.org/popular-standards.html',
+    bundled:
+        'Alleen de index van Annex A (38 control-ids + korte titels) en de '
+        'negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.',
+    licence:
+        'ISO copyright — index als feitreferentie, normtekst niet meegeleverd',
+    probe: UpstreamProbe.isoEdition,
+    probeTarget: 'https://www.iso.org/popular-standards.html',
+    advisory: true,
+  ),
 ];
+
+/// De ISO/IEC 27001-editie die `management_system_catalog.dart` weerspiegelt.
+/// Gelijk gehouden aan [ManagementSystemStandard.iso27001.edition] door
+/// `management_system_catalog_test.dart`, zodat de twee niet uiteenlopen.
+const iso27001BundledEdition = '2022';
+
+/// De ISO 9001-editie die de gebundelde clausule-index weerspiegelt.
+const iso9001BundledEdition = '2015';
+
+/// De ISO/IEC 42001-editie die de gebundelde Annex A-index weerspiegelt.
+const iso42001BundledEdition = '2023';
 
 /// De CWE-lijst die `assets/cwe/cwe_full.json` weerspiegelt.
 const cweBundledVersion = '4.20';

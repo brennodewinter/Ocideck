@@ -2748,6 +2748,78 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Voortgang per sectie': 'Bölüme göre ilerleme',
+  'Nog te doen': 'Kalan',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'İlerleme özeti ve grafiği güncellendi',
+  'Genereer managementreview (9.3)': 'Yönetim gözden geçirmesi oluştur (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Yönetim gözden geçirmesi için (ISO madde 9.3) mevcut ilerlemeyi içeren önceden doldurulmuş bir şablon ekler.',
+  'Managementreview (clausule 9.3) — Input':
+      'Yönetim gözden geçirmesi (madde 9.3) — Girdi',
+  'Managementreview (clausule 9.3) — Output':
+      'Yönetim gözden geçirmesi (madde 9.3) — Çıktı',
+  'Managementreview (9.3) toegevoegd': 'Yönetim gözden geçirmesi (9.3) eklendi',
+  'Er staat al een managementreview in dit deck':
+      'Bu sunumda zaten bir yönetim gözden geçirmesi var',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Girdi (9.3.2)\n\n- **a.** Önceki yönetim gözden geçirmelerinden gelen faaliyetlerin durumu\n- **b.** Yönetim sistemini etkileyen iç ve dış konulardaki değişiklikler\n- **c.** İlgili tarafların ihtiyaç ve beklentilerindeki değişiklikler\n- **d.** Performans ve etkinlik — %{p} uygulandı ({impl}/{app} uygulanabilir kontrol)\n    - Uygunsuzluklar ve düzeltici faaliyetlerdeki eğilimler\n    - İzleme ve ölçme sonuçları\n    - Denetim sonuçları\n- **e.** Kaynakların yeterliliği\n- **f.** Riskler ve fırsatlara yönelik faaliyetlerin etkinliği\n- **g.** İyileştirme fırsatları',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Çıktı (9.3.3)\n\n- Sürekli iyileştirme fırsatlarına ilişkin kararlar\n- Yönetim sistemindeki olası değişikliklere ilişkin kararlar\n- Kaynak ihtiyaçları\n\n_Kararları, faaliyetleri ve sorumluları aşağıya girin._',
+  'Procesverbetering: DMADV-project': 'Süreç iyileştirme: DMADV projesi',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Yeni bir sürecin tasarlanması ve doğrulanması için DMADV iskeleti.',
+  'Procesverbetering: Kaizen-project': 'Süreç iyileştirme: Kaizen projesi',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Planla, Yap ve Kontrol aşamalarını içeren kompakt iyileştirme projesi.',
+  'Procesverbetering: A3-project': 'Süreç iyileştirme: A3 projesi',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Sorun, analiz ve iyileştirme eylemleri için A3 iskeleti.',
+  'Procesverbetering: 8D-project': 'Süreç iyileştirme: 8D projesi',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Sorunun tanımı, nedenleri ve güvencesi için 8D iskelet.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Bir ISO yönetim sistemi (27001/9001/42001) ilerlemesini raporlayın: her kontrol için durum ve türetilmiş bir ilerleme genel bakışı. Varsayılan olarak kapalı; slayt türünü kullanmak için eklentiyi açın.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modül açık. ISO dizini yerel olarak kullanılabilir (üç standartta {n} kontrol); yalnızca numaralar ve kısa başlıklar, standardın metni değil.',
+  'Beheersmaatregel-status': 'Kontrol durumu',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Yalnızca madde dizini 4–10 (28 alt madde + kısa başlıklar). ISO 9001\'de Annex A yoktur. Standart metni dâhil DEĞİLDİR.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Yalnızca Annex A dizini (38 kontrol kimliği + kısa başlıklar) ve dokuz hedef başlığı A.2–A.10. Standart metni dâhil DEĞİLDİR.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Yalnızca Annex A dizini (93 kontrol kimliği + kısa başlıklar) ve dört tema başlığı. Standart metni dâhil DEĞİLDİR.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Bir ISO standardının (27001/9001/42001) her kontrolü için uygulama durumu. Kontrolleri bir standarttan yükleyin ve durumu, sorumluyu ve kanıtı doldurun.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO telif hakkı — olgusal başvuru olarak dizin, standart metni dâhil değil',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Bölüm bazında ilerlemeyi gösteren bir genel bakış slaydı oluşturur veya yeniler (tüm kontrol slaytlarından türetilir).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Bir ISO standardının kontrollerini ekler (yalnızca dizin; yalnızca yeni kimlikler).',
+  'Alle secties': 'Tüm bölümler',
+  'Beheersmaatregel': 'Kontrol',
+  'Beheersmaatregel toevoegen': 'Kontrol ekle',
+  'Beheersmaatregelen laden…': 'Kontrolleri yükle…',
+  'Genereer voortgangsoverzicht': 'İlerleme genel bakışı oluştur',
+  'Geïmplementeerd': 'Uygulandı',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Kurumsal (A.5)',
+  'Kies een norm': 'Bir standart seç',
+  'Managementsysteem': 'Yönetim sistemi',
+  'Niet gescoord': 'Puanlanmadı',
+  'Niveau': 'Düzey',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Özetlenecek kontrol slaydı henüz yok',
+  'Sectie': 'Bölüm',
+  'Streefdatum': 'Hedef tarih',
+  'Van toepassing': 'Uygulanabilir',
+  'Voortgang': 'İlerleme',
+  'Voortgang managementsysteem': 'Yönetim sistemi ilerlemesi',
+  'Voortgangsoverzicht bijgewerkt': 'İlerleme genel bakışı güncellendi',
+  'Welk deel?': 'Hangi bölüm?',
+  'beheersmaatregelen geladen': 'kontrol yüklendi',
+  'geïmplementeerd': 'uygulandı',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modül açık. Hesaplama çekirdeği, slayt düzenleri ve şablonlar yerel olarak kullanılabilir ({n} kontrol grafiği faktörü).',
   'SIPOC-procesoverzicht': 'SIPOC süreç genel görünümü',
@@ -2755,6 +2827,18 @@ const _dutchSourceAddTr = <String, String>{
       'Tedarikçiler, girdiler, ana adımlar, çıktılar ve müşteriler aracılığıyla bir sürecin kapsamını ve bağımlılıklarını belirleyin.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Süreç iyileştirme araçları (SIPOC, DMAIC, Kaizen ve A3). Varsayılan olarak kapalıdır; ilgili şablonları ve slayt düzenlerini kullanmak için uzantıyı etkinleştirin.',
+  'Videovergaderingen': 'Görüntülü toplantılar',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Görüntülü toplantılara katıl ve OciDeck\'ten kendi arayüzüyle sun: katılımcılar başka bir uygulamanın penceresinde değil, slaydının yanında. Bring-your-own-server (Jitsi veya Matrix); OciDeck hiçbir şey barındırmaz ve konuşma verilerini AI\'dan uzak tutar. Bir toplantı hizmetine bağlantı, ileriki bir sürümde gelecek.',
+  'Videovergadering': 'Görüntülü toplantı',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Henüz etkin bir toplantı yok. Bir toplantı hizmetine bağlanma özelliği ileriki bir sürümde eklenecek.',
+  'Dempen opheffen': 'Sesi aç',
+  'Dempen': 'Sesi kapat',
+  'Camera aan': 'Kamerayı aç',
+  'Camera uit': 'Kamerayı kapat',
+  'Scherm delen': 'Ekranı paylaş',
+  'Vergadering verlaten': 'Toplantıdan ayrıl',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Görsel kitaplığı çok büyük; yalnızca en yeni görseller gösteriliyor.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

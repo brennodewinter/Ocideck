@@ -1778,6 +1778,78 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Voortgang per sectie': 'Pažanga pagal skyrius',
+  'Nog te doen': 'Liko',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Pažangos apžvalga ir diagrama atnaujintos',
+  'Genereer managementreview (9.3)': 'Generuoti vadovybinę analizę (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Prideda iš anksto užpildytą vadovybinės analizės šabloną (ISO 9.3 punktas) su dabartine pažanga.',
+  'Managementreview (clausule 9.3) — Input':
+      'Vadovybinė analizė (9.3 punktas) — Įvesties duomenys',
+  'Managementreview (clausule 9.3) — Output':
+      'Vadovybinė analizė (9.3 punktas) — Išvesties duomenys',
+  'Managementreview (9.3) toegevoegd': 'Vadovybinė analizė (9.3) pridėta',
+  'Er staat al een managementreview in dit deck':
+      'Šiame deke jau yra vadovybinė analizė',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Įvesties duomenys (9.3.2)\n\n- **a.** Veiksmų iš ankstesnių vadovybinių analizių būsena\n- **b.** Vidinių ir išorinių aspektų, susijusių su valdymo sistema, pokyčiai\n- **c.** Suinteresuotųjų šalių poreikių ir lūkesčių pokyčiai\n- **d.** Veiksmingumas ir rezultatyvumas — {p}% įdiegta (taikytinos kontrolės: {impl}/{app})\n    - Neatitikčių ir taisomųjų veiksmų tendencijos\n    - Stebėsenos ir matavimų rezultatai\n    - Auditų rezultatai\n- **e.** Išteklių pakankamumas\n- **f.** Veiksmų, skirtų rizikoms ir galimybėms, rezultatyvumas\n- **g.** Gerinimo galimybės',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Išvesties duomenys (9.3.3)\n\n- Sprendimai dėl nuolatinio gerinimo galimybių\n- Sprendimai dėl bet kokių valdymo sistemos pakeitimų\n- Išteklių poreikiai\n\n_Žemiau įrašykite sprendimus, veiksmus ir atsakingus asmenis._',
+  'Procesverbetering: DMADV-project': 'Proceso tobulinimas: DMADV projektas',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV skeletas, skirtas naujam procesui kurti ir tikrinti.',
+  'Procesverbetering: Kaizen-project': 'Proceso tobulinimas: Kaizen projektas',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompaktiškas tobulinimo projektas su planavimo, darymo ir patikrinimo etapais.',
+  'Procesverbetering: A3-project': 'Proceso tobulinimas: A3 projektas',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 griaučiai problemoms, analizei ir tobulinimo veiksmams.',
+  'Procesverbetering: 8D-project': 'Proceso tobulinimas: 8D projektas',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D skeletas, skirtas problemos aprašymui, priežastims ir patikinimui.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Praneškite apie ISO valdymo sistemos (27001/9001/42001) pažangą: būsena kiekvienai kontrolei ir išvesta pažangos apžvalga. Pagal numatytuosius nustatymus išjungta; įjunkite plėtinį, kad galėtumėte naudoti skaidrės tipą.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modulis įjungtas. ISO rodyklė pasiekiama vietoje ({n} kontrolės trijuose standartuose); tik numeriai ir trumpi pavadinimai, o ne standarto tekstas.',
+  'Beheersmaatregel-status': 'Kontrolių būsena',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Tik straipsnių rodyklė 4–10 (28 pastraipos + trumpi pavadinimai). ISO 9001 neturi Annex A. Standarto tekstas NĖRA įtrauktas.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Tik Annex A rodyklė (38 kontrolių identifikatoriai + trumpi pavadinimai) ir devynios tikslų antraštės A.2–A.10. Standarto tekstas NĖRA įtrauktas.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Tik Annex A rodyklė (93 kontrolių identifikatoriai + trumpi pavadinimai) ir keturios teminės antraštės. Standarto tekstas NĖRA įtrauktas.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Kiekvienos ISO standarto kontrolės įgyvendinimo būsena (27001/9001/42001). Įkelkite kontroles iš standarto ir užpildykite būseną, savininką ir įrodymą.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO autorių teisės — rodyklė kaip faktinė nuoroda, standarto tekstas neįtrauktas',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Sukuria arba atnaujina apžvalgos skaidrę su pažanga pagal skyrius (išvesta iš visų kontrolių skaidrių).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Prideda ISO standarto kontroles (tik rodyklė; tik nauji identifikatoriai).',
+  'Alle secties': 'Visi skyriai',
+  'Beheersmaatregel': 'Kontrolė',
+  'Beheersmaatregel toevoegen': 'Pridėti kontrolę',
+  'Beheersmaatregelen laden…': 'Įkelti kontroles…',
+  'Genereer voortgangsoverzicht': 'Generuoti pažangos apžvalgą',
+  'Geïmplementeerd': 'Įgyvendinta',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizaciniai (A.5)',
+  'Kies een norm': 'Pasirinkite standartą',
+  'Managementsysteem': 'Valdymo sistema',
+  'Niet gescoord': 'Neįvertinta',
+  'Niveau': 'Lygis',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Kol kas nėra kontrolių skaidrių, kurias būtų galima apibendrinti',
+  'Sectie': 'Skyrius',
+  'Streefdatum': 'Tikslinė data',
+  'Van toepassing': 'Taikoma',
+  'Voortgang': 'Pažanga',
+  'Voortgang managementsysteem': 'Valdymo sistemos pažanga',
+  'Voortgangsoverzicht bijgewerkt': 'Pažangos apžvalga atnaujinta',
+  'Welk deel?': 'Kuri dalis?',
+  'beheersmaatregelen geladen': 'kontrolių įkelta',
+  'geïmplementeerd': 'įgyvendinta',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modulis įjungtas. Skaičiavimo branduolys, skaidrių išdėstymai ir šablonai pasiekiami vietoje ({n} kontrolinės diagramos koeficientų).',
   'SIPOC-procesoverzicht': 'SIPOC proceso apžvalga',
@@ -1785,6 +1857,18 @@ const _dutchSourceAddLt = <String, String>{
       'Nustatykite proceso apimtį ir priklausomybes pagal tiekėjus, įvestis, pagrindinius žingsnius, išvestis ir klientus.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Procesų tobulinimo įrankiai (SIPOC, DMAIC, Kaizen ir A3). Pagal numatytuosius nustatymus išjungti; įjunkite plėtinį, kad galėtumėte naudoti susijusius šablonus ir skaidrių išdėstymus.',
+  'Videovergaderingen': 'Vaizdo susitikimai',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Prisijunkite prie vaizdo susitikimų ir pristatykite iš OciDeck su sava sąsaja: dalyviai šalia jūsų skaidrės, o ne kitos programos lange. Bring-your-own-server (Jitsi arba Matrix); OciDeck nieko nepriglobia ir pokalbių duomenis laiko atokiau nuo DI. Prisijungimas prie susitikimų paslaugos bus pridėtas būsimoje versijoje.',
+  'Videovergadering': 'Vaizdo susitikimas',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Aktyvaus susitikimo dar nėra. Prisijungimas prie susitikimų paslaugos bus pridėtas būsimoje versijoje.',
+  'Dempen opheffen': 'Įjungti garsą',
+  'Dempen': 'Nutildyti',
+  'Camera aan': 'Įjungti kamerą',
+  'Camera uit': 'Išjungti kamerą',
+  'Scherm delen': 'Bendrinti ekraną',
+  'Vergadering verlaten': 'Palikti susitikimą',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Vaizdų biblioteka per didelė; rodomi tik naujausi vaizdai.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

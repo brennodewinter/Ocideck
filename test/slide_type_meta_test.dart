@@ -81,6 +81,7 @@ void main() {
       SlideType.scopeMatrix,
       SlideType.findingsSummary,
       SlideType.matrix,
+      SlideType.controlStatus,
     });
   });
 

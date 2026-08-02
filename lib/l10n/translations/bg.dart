@@ -1793,6 +1793,80 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Voortgang per sectie': 'Напредък по раздели',
+  'Nog te doen': 'Оставащо',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Прегледът и графиката на напредъка са актуализирани',
+  'Genereer managementreview (9.3)':
+      'Генериране на преглед от ръководството (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Добавя предварително попълнен шаблон за преглед от ръководството (ISO клауза 9.3) с текущия напредък.',
+  'Managementreview (clausule 9.3) — Input':
+      'Преглед от ръководството (клауза 9.3) — Входни данни',
+  'Managementreview (clausule 9.3) — Output':
+      'Преглед от ръководството (клауза 9.3) — Изходни данни',
+  'Managementreview (9.3) toegevoegd':
+      'Прегледът от ръководството (9.3) е добавен',
+  'Er staat al een managementreview in dit deck':
+      'В това тесте вече има преглед от ръководството',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Входни данни (9.3.2)\n\n- **a.** Състояние на действията от предишни прегледи от ръководството\n- **b.** Промени във вътрешните и външните въпроси, засягащи системата за управление\n- **c.** Промени в потребностите и очакванията на заинтересованите страни\n- **d.** Резултатност и ефикасност — {p}% внедрено (приложими контроли: {impl}/{app})\n    - Тенденции при несъответствията и коригиращите действия\n    - Резултати от наблюдение и измерване\n    - Резултати от одити\n- **e.** Достатъчност на ресурсите\n- **f.** Ефикасност на действията спрямо рисковете и възможностите\n- **g.** Възможности за подобряване',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Изходни данни (9.3.3)\n\n- Решения относно възможностите за непрекъснато подобряване\n- Решения относно евентуални промени в системата за управление\n- Необходими ресурси\n\n_Попълнете по-долу решенията, действията и отговорниците._',
+  'Procesverbetering: DMADV-project': 'Подобряване на процеса: проект DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV скелет за проектиране и проверка на нов процес.',
+  'Procesverbetering: Kaizen-project': 'Подобряване на процеса: проект Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Компактен проект за подобрение с фази на планиране, изпълнение и проверка.',
+  'Procesverbetering: A3-project': 'Подобряване на процеса: проект А3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 скелет за проблеми, анализ и действия за подобряване.',
+  'Procesverbetering: 8D-project': 'Подобряване на процеса: 8D проект',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D скелет за описание на проблема, причини и увереност.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Докладвайте напредъка на система за управление по ISO (27001/9001/42001): състояние за всяка контрола и производен обзор на напредъка. По подразбиране изключено; включете разширението, за да използвате типа слайд.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Модулът е включен. Индексът по ISO е наличен локално ({n} контроли в три стандарта); само номерата и кратките заглавия, но не и текста на стандарта.',
+  'Beheersmaatregel-status': 'Състояние на контролите',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Само индексът на клаузите 4–10 (28 подклаузи + кратки заглавия). ISO 9001 няма Annex A. Текстът на стандарта НЕ е включен.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Само индексът на Annex A (38 идентификатора на контроли + кратки заглавия) и деветте заглавия на целите A.2–A.10. Текстът на стандарта НЕ е включен.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Само индексът на Annex A (93 идентификатора на контроли + кратки заглавия) и четирите тематични заглавия. Текстът на стандарта НЕ е включен.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Статусът на внедряване за всяка контрола на стандарт ISO (27001/9001/42001). Заредете контролите от стандарт и попълнете статус, отговорник и доказателство.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Авторско право на ISO — индекс като фактическа справка, текстът на стандарта не е включен',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Създава или обновява обзорен слайд с напредъка по раздели (извлечен от всички слайдове с контроли).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Добавя контролите на стандарт ISO (само индекса; само нови идентификатори).',
+  'Alle secties': 'Всички раздели',
+  'Beheersmaatregel': 'Контрола',
+  'Beheersmaatregel toevoegen': 'Добавяне на контрола',
+  'Beheersmaatregelen laden…': 'Зареждане на контроли…',
+  'Genereer voortgangsoverzicht': 'Генериране на преглед на напредъка',
+  'Geïmplementeerd': 'Внедрено',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Организационни (A.5)',
+  'Kies een norm': 'Изберете стандарт',
+  'Managementsysteem': 'Система за управление',
+  'Niet gescoord': 'Не е оценено',
+  'Niveau': 'Ниво',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Все още няма слайдове с контроли за обобщаване',
+  'Sectie': 'Раздел',
+  'Streefdatum': 'Целева дата',
+  'Van toepassing': 'Приложимо',
+  'Voortgang': 'Напредък',
+  'Voortgang managementsysteem': 'Напредък на системата за управление',
+  'Voortgangsoverzicht bijgewerkt': 'Прегледът на напредъка е обновен',
+  'Welk deel?': 'Коя част?',
+  'beheersmaatregelen geladen': 'контроли заредени',
+  'geïmplementeerd': 'внедрено',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Модулът е включен. Изчислителното ядро, оформленията на слайдовете и шаблоните са налични локално ({n} фактора за контролна карта).',
   'SIPOC-procesoverzicht': 'Преглед на процеса SIPOC',
@@ -1800,6 +1874,18 @@ const _dutchSourceAddBg = <String, String>{
       'Определете обхвата и зависимостите на процеса чрез доставчици, входни данни, основни стъпки, изходи и клиенти.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Инструменти за подобряване на процесите (SIPOC, DMAIC, Kaizen и A3). Изключени по подразбиране; включете разширението, за да използвате свързаните шаблони и оформления на слайдове.',
+  'Videovergaderingen': 'Видеосрещи',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Присъединявайте се към видеосрещи и презентирайте от OciDeck със собствен интерфейс: участниците до вашия слайд, а не в прозореца на друго приложение. Bring-your-own-server (Jitsi или Matrix); OciDeck не хоства нищо и държи данните от разговорите далеч от AI. Свързването с услуга за срещи ще бъде добавено в бъдеща версия.',
+  'Videovergadering': 'Видеосреща',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Все още няма активна среща. Свързването с услуга за срещи ще бъде добавено в бъдеща версия.',
+  'Dempen opheffen': 'Включи звука',
+  'Dempen': 'Изключи звука',
+  'Camera aan': 'Включи камерата',
+  'Camera uit': 'Изключи камерата',
+  'Scherm delen': 'Споделяне на екрана',
+  'Vergadering verlaten': 'Напускане на срещата',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Библиотеката с изображения е твърде голяма; показват се само най-новите изображения.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

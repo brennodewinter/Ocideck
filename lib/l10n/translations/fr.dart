@@ -730,6 +730,81 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Voortgang per sectie': 'Progression par section',
+  'Nog te doen': 'Restant',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Aperçu et graphique de progression mis à jour',
+  'Genereer managementreview (9.3)': 'Générer la revue de direction (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Ajoute un modèle prérempli pour la revue de direction (article ISO 9.3), avec la progression actuelle.',
+  'Managementreview (clausule 9.3) — Input':
+      'Revue de direction (article 9.3) — Éléments d\'entrée',
+  'Managementreview (clausule 9.3) — Output':
+      'Revue de direction (article 9.3) — Éléments de sortie',
+  'Managementreview (9.3) toegevoegd': 'Revue de direction (9.3) ajoutée',
+  'Er staat al een managementreview in dit deck':
+      'Ce deck contient déjà une revue de direction',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Éléments d\'entrée (9.3.2)\n\n- **a.** État des actions issues des revues de direction précédentes\n- **b.** Modifications des enjeux internes et externes ayant une incidence sur le système de management\n- **c.** Modifications des besoins et attentes des parties intéressées\n- **d.** Performance et efficacité — {p}% mis en œuvre ({impl}/{app} mesures applicables)\n    - Tendances des non-conformités et des actions correctives\n    - Résultats de la surveillance et des mesurages\n    - Résultats des audits\n- **e.** Adéquation des ressources\n- **f.** Efficacité des actions menées face aux risques et opportunités\n- **g.** Opportunités d\'amélioration',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Éléments de sortie (9.3.3)\n\n- Décisions relatives aux opportunités d\'amélioration continue\n- Décisions relatives à d\'éventuelles modifications du système de management\n- Besoins en ressources\n\n_Renseignez ci-dessous les décisions, les actions et les responsables._',
+  'Procesverbetering: DMADV-project':
+      'Amélioration des processus : projet DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Squelette DMADV pour concevoir et vérifier un nouveau processus.',
+  'Procesverbetering: Kaizen-project':
+      'Amélioration des processus : projet Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Projet d\'amélioration compact avec phases Planifier, Faire et Vérifier.',
+  'Procesverbetering: A3-project': 'Amélioration des processus : projet A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Squelette A3 pour les actions de problème, d’analyse et d’amélioration.',
+  'Procesverbetering: 8D-project': 'Amélioration des processus : projet 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Squelette 8D pour la description du problème, ses causes et son assurance.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Signalez l\'avancement d\'un système de management ISO (27001/9001/42001) : l\'état par mesure et une synthèse d\'avancement dérivée. Désactivé par défaut ; activez l\'extension pour utiliser le type de diapositive.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Module activé. L\'index ISO est disponible localement ({n} mesures réparties sur trois normes) ; uniquement les numéros et les titres courts, pas le texte de la norme.',
+  'Beheersmaatregel-status': 'État des mesures',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Seulement l\'index des clauses 4–10 (28 sous-clauses + titres courts). L\'ISO 9001 n\'a pas d\'Annex A. Le texte de la norme n\'est PAS inclus.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Seulement l\'index de l\'Annex A (38 identifiants de mesure + titres courts) et les neuf en-têtes d\'objectifs A.2–A.10. Le texte de la norme n\'est PAS inclus.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Seulement l\'index de l\'Annex A (93 identifiants de mesure + titres courts) et les quatre en-têtes thématiques. Le texte de la norme n\'est PAS inclus.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'L\'état de mise en œuvre par mesure d\'une norme ISO (27001/9001/42001). Chargez les mesures d\'une norme et renseignez l\'état, le responsable et la preuve.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Copyright ISO — index comme référence factuelle, texte de la norme non inclus',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Crée ou actualise une diapositive de synthèse avec l\'avancement par section (dérivé de toutes les diapositives de mesures).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Ajoute les mesures d\'une norme ISO (index uniquement ; identifiants nouveaux uniquement).',
+  'Alle secties': 'Toutes les sections',
+  'Beheersmaatregel': 'Mesure',
+  'Beheersmaatregel toevoegen': 'Ajouter une mesure',
+  'Beheersmaatregelen laden…': 'Charger les mesures…',
+  'Genereer voortgangsoverzicht': 'Générer la vue d\'ensemble de l\'avancement',
+  'Geïmplementeerd': 'Mise en œuvre',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisationnel (A.5)',
+  'Kies een norm': 'Choisir une norme',
+  'Managementsysteem': 'Système de management',
+  'Niet gescoord': 'Non évalué',
+  'Niveau': 'Niveau',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Aucune diapositive de mesures à résumer pour l\'instant',
+  'Sectie': 'Section',
+  'Streefdatum': 'Échéance',
+  'Van toepassing': 'Applicable',
+  'Voortgang': 'Avancement',
+  'Voortgang managementsysteem': 'Avancement du système de management',
+  'Voortgangsoverzicht bijgewerkt':
+      'Vue d\'ensemble de l\'avancement mise à jour',
+  'Welk deel?': 'Quelle partie ?',
+  'beheersmaatregelen geladen': 'mesures chargées',
+  'geïmplementeerd': 'mis en œuvre',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Module activé. Le moteur de calcul, les mises en page de diapositives et les modèles sont disponibles localement ({n} facteurs de carte de contrôle).',
   'SIPOC-procesoverzicht': 'Vue d’ensemble du processus SIPOC',
@@ -737,6 +812,18 @@ const _dutchSourceAddFr = {
       'Définissez le périmètre et les dépendances d’un processus au moyen des fournisseurs, entrées, étapes principales, sorties et clients.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Outils d’amélioration des processus (SIPOC, DMAIC, Kaizen et A3). Désactivés par défaut ; activez l’extension pour utiliser les modèles et mises en page de diapositives associés.',
+  'Videovergaderingen': 'Visioconférences',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Participez à des visioconférences et présentez depuis OciDeck avec une interface dédiée : les participants à côté de votre diapositive, pas dans la fenêtre d\'une autre application. Bring-your-own-server (Jitsi ou Matrix) ; OciDeck n\'héberge rien et garde les données de conversation hors de l\'IA. La connexion à un service de réunion suivra dans une version ultérieure.',
+  'Videovergadering': 'Visioconférence',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Aucune réunion active pour le moment. La connexion à un service de réunion sera ajoutée dans une version ultérieure.',
+  'Dempen opheffen': 'Réactiver le son',
+  'Dempen': 'Couper le son',
+  'Camera aan': 'Activer la caméra',
+  'Camera uit': 'Désactiver la caméra',
+  'Scherm delen': 'Partager l\'écran',
+  'Vergadering verlaten': 'Quitter la réunion',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'La bibliothèque d’images est trop volumineuse ; seules les images les plus récentes sont affichées.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

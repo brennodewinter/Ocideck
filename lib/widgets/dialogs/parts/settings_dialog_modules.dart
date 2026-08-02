@@ -36,7 +36,9 @@ extension _SettingsModules on _SettingsDialogState {
             ),
             ModuleId.procesverbetering => const ProcesverbeteringModuleCard(),
             ModuleId.collaboration => const CollaborationModuleCard(),
+            ModuleId.videoCalls => const VideoCallsModuleCard(),
             ModuleId.assetRights => const AssetRightsModuleCard(),
+            ModuleId.managementsysteem => const ManagementsysteemModuleCard(),
           },
         ],
       ],
@@ -147,68 +149,6 @@ extension _SettingsModules on _SettingsDialogState {
     );
   }
 
-  Widget _infoSafetyInventoryCard(
-    AppLocalizations l10n,
-    List<ReferenceCatalog> catalogs,
-  ) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppTheme.slate50,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppTheme.iceBlue),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            l10n.d('Wat er lokaal beschikbaar is'),
-            style: TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w700,
-              color: AppTheme.slate600,
-              letterSpacing: 0.6,
-            ),
-          ),
-          const SizedBox(height: 8),
-          for (final c in catalogs)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 52,
-                    child: Text(
-                      '${c.count}',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                        color: AppTheme.slate800,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      l10n.d(c.name),
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      c.standard.isEmpty ? c.source : c.standard,
-                      style: TextStyle(fontSize: 11, color: AppTheme.slate500),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-
   Future<void> _toggleInfoSafety(bool enabled) async {
     final notifier = ref.read(infoSafetyProvider.notifier);
     if (enabled) {
@@ -217,4 +157,69 @@ extension _SettingsModules on _SettingsDialogState {
       await notifier.disable();
     }
   }
+}
+
+/// De referentie-inventaris als kaart. Top-level omdat hij zuiver van zijn twee
+/// argumenten afhangt (geen `context`, `ref` of dialoogstaat) — zo telt hij niet
+/// mee tegen het plafond van _SettingsDialogState, dat al aan zijn grens zit.
+Widget _infoSafetyInventoryCard(
+  AppLocalizations l10n,
+  List<ReferenceCatalog> catalogs,
+) {
+  return Container(
+    width: double.infinity,
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: AppTheme.slate50,
+      borderRadius: BorderRadius.circular(8),
+      border: Border.all(color: AppTheme.iceBlue),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.d('Wat er lokaal beschikbaar is'),
+          style: TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w700,
+            color: AppTheme.slate600,
+            letterSpacing: 0.6,
+          ),
+        ),
+        const SizedBox(height: 8),
+        for (final c in catalogs)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 52,
+                  child: Text(
+                    '${c.count}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: AppTheme.slate800,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    l10n.d(c.name),
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    c.standard.isEmpty ? c.source : c.standard,
+                    style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
+    ),
+  );
 }

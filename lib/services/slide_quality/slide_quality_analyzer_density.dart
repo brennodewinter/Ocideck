@@ -118,6 +118,7 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
       case SlideType.findingsSummary:
       case SlideType.checklist:
       case SlideType.scopeMatrix:
+      case SlideType.controlStatus:
       case SlideType.signOff:
         break;
     }

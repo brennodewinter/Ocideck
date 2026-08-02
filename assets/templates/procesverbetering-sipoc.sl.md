@@ -14,6 +14,17 @@ language: sl
 
 ---
 
+<!-- skip -->
+
+# Tako delate s to predlogo
+
+- Uporabite SIPOC za razumevanje obsega in odvisnosti enega procesa, ne za beleženje vsakega dejanja.
+- Uporabite pomoč in primer vrstice kot kontrolni seznam; vnesite svoje odgovore na **Meje procesa** in v prazno matriko **SIPOC**.
+- Po možnosti delo od stranke do dobavitelja, s samostalniki za vhod in izhod ter glagoli za korake procesa.
+- Samo diapozitivi z oznako **Preskočeno** bodo izpuščeni iz predstavitve in izvoza. Vklopite ali izklopite **Preskoči** za pojasnila, ki jih vaše občinstvo morda potrebuje ali ne.
+
+---
+
 # Kaj preslikava SIPOC?
 
 - **Dobavitelj:** zagotavlja informacije ali vire, ki jih proces potrebuje.
@@ -21,6 +32,58 @@ language: sl
 - **Proces:** 4 do 7 dejavnosti na visoki ravni, ki spremenijo vnos.
 - **Izhod:** izdelek, storitev ali informacija, ki jo ustvari proces.
 - **Stranka:** notranji ali zunanji prejemnik izhoda.
+
+---
+
+<!-- _class: table table-editable -->
+
+# Postavite meje procesa
+
+| Meja | Vrednost |
+| --- | --- |
+| Ime procesa |  |
+| Začetna točka |  |
+| Končna točka |  |
+
+---
+
+<!-- skip -->
+
+# Kontrolni seznam – Kdaj so meje dovolj jasne?
+
+- **Proces:** mu dajte prepoznavno ime z glagolom in predmetom, na primer »Registracija naročila«.
+- **Začetna točka:** Poimenujte en opazovan dogodek, na primer »Prejeta zahteva«.
+- **Končna točka:** poimenujte en dokazljiv rezultat, na primer »Potrditev naročila poslana«.
+- Izberite meje, okoli katerih lahko ekipa sklepa pomembne dogovore.
+- Premaknite izjeme in sosednje procese izven matrike; zapišite jih ločeno.
+
+---
+
+<!-- skip -->
+
+# Kontrolni seznam — izpolnite od desne proti levi
+
+1. Določite jasne začetne in končne točke procesa.
+2. Poimenujte stranke, od katerih je rezultat odvisen.
+3. Opišite rezultate, ki jih prejmejo.
+4. Povzemite proces v 4 do 7 dejavnosti na visoki ravni.
+5. Ugotovite, katere vložke te dejavnosti potrebujejo.
+6. Povežite vsak vložek z dobaviteljem, ki ga da na voljo.
+
+---
+
+<!-- skip -->
+<!-- _class: table -->
+
+# Kontrolni seznam — Primer ene povezane vrstice
+
+| Supplier | Input | Process | Output | Customer |
+| --- | --- | --- | --- | --- |
+| Prodaja | Odobrena zahteva | Preveri naročilo → registriraj → potrdi | Potrditev naročila | Prijavitelj |
+
+- Preberite vrstico kot eno verigo: dobavitelj zagotovi vhod, postopek pa ga spremeni v izhod za stranko.
+- Novo vrstico dodajte le, če je veriga bistveno drugačna.
+- Preverite pri vpletenih, da zagotovite, da ne manjka noben pomemben dobavitelj, vložek, izhod ali stranka.
 
 ---
 
@@ -49,14 +112,3 @@ language: sl
 | Podrobnost | 4 do 7 aktivnosti na visoki ravni | Lahko vsebuje na desetine korakov |
 | Fokus | Dobavitelji, vložki, izhodi in kupci | Zaporedje, predaje in odločitvene točke |
 | Uporaba | Začetek prizadevanj za izboljšanje | Izvedba in analiza napak |
-
----
-
-# Izpolnite ga od desne proti levi
-
-1. Set clear start and end points for the process.
-2. Name the customers who depend on the result.
-3. Describe the outputs they receive.
-4. Summarise the process in 4 to 7 high-level activities.
-5. Determine which inputs those activities need.
-6. Link each input to the supplier who makes it available.

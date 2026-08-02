@@ -1787,6 +1787,80 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Voortgang per sectie': 'Progressus per sectiones',
+  'Nog te doen': 'Restans',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Conspectus et diagramma progressus renovata',
+  'Genereer managementreview (9.3)':
+      'Recognitionem administrationis generare (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Addit formulam praecompletam recognitionis administrationis (caput ISO 9.3), cum progressu praesenti incluso.',
+  'Managementreview (clausule 9.3) — Input':
+      'Recognitio administrationis (caput 9.3) — Initus',
+  'Managementreview (clausule 9.3) — Output':
+      'Recognitio administrationis (caput 9.3) — Exitus',
+  'Managementreview (9.3) toegevoegd':
+      'Recognitio administrationis (9.3) addita',
+  'Er staat al een managementreview in dit deck':
+      'Hic fasciculus iam recognitionem administrationis continet',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Initus (9.3.2)\n\n- **a.** Status actionum ex recognitionibus administrationis prioribus\n- **b.** Mutationes in rebus internis et externis quae systema administrationis tangunt\n- **c.** Mutationes in necessitatibus et exspectationibus partium interesse habentium\n- **d.** Effectus et efficacia — {p}% effecta ({impl}/{app} praesidia applicabilia)\n    - Inclinationes in difformitatibus et actionibus corrigentibus\n    - Eventus observationis et mensurae\n    - Eventus recognitionum\n- **e.** Sufficientia opum\n- **f.** Efficacia actionum contra pericula et occasiones\n- **g.** Occasiones emendationis',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Exitus (9.3.3)\n\n- Decreta de occasionibus emendationis continuae\n- Decreta de ullis mutationibus systematis administrationis\n- Necessitates opum\n\n_Infra decreta, actiones et dominos comple._',
+  'Procesverbetering: DMADV-project': 'Processus emendationem: DMADV project',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'sceletum DMADV ad novum processum excogitandum et comprobandum.',
+  'Procesverbetering: Kaizen-project': 'Processus emendationem: Kaizen project',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Foedus emendationem propositi cum Plan, Fac et Compesce augmenta.',
+  'Procesverbetering: A3-project': 'Processus emendationem: A3 project',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 osseus problema, analysis et actus emendandi.',
+  'Procesverbetering: 8D-project': 'Processus emendationem: 8D project',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D Ossa problemata descriptio, causarum et certitudinum.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Progressum systematis administrationis ISO (27001/9001/42001) refer: status pro singulis praesidiis et conspectus progressus inde ductus. Praedefinite inactivum; extensionem activa ut genus paginae adhibeas.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modulus activus. Index ISO localiter praesto est ({n} praesidia per tres normas); tantum numeri et tituli breves, non textus normae.',
+  'Beheersmaatregel-status': 'Status moderaminum',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Tantum index clausularum 4–10 (28 subclausulae + tituli breves). ISO 9001 Annex A non habet. Textus normae NON includitur.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Tantum index Annex A (38 nomina praesidiorum + tituli breves) et novem capita propositorum A.2–A.10. Textus normae NON includitur.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Tantum index Annex A (93 nomina praesidiorum + tituli breves) et quattuor capita thematum. Textus normae NON includitur.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Status effectionis pro singulis praesidiis normae ISO (27001/9001/42001). Praesidia ex norma onera et statum, possessorem et argumentum comple.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Ius ISO — index ut fontis factorum, textus normae non inclusus',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Creat vel renovat scidam conspectus cum progressu per sectionem (ex omnibus scidis praesidiorum ductum).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Praesidia normae ISO addit (tantum index; tantum nova nomina).',
+  'Alle secties': 'Omnes sectiones',
+  'Beheersmaatregel': 'Praesidium',
+  'Beheersmaatregel toevoegen': 'Praesidium addere',
+  'Beheersmaatregelen laden…': 'Praesidia onerare…',
+  'Genereer voortgangsoverzicht': 'Conspectum progressus generare',
+  'Geïmplementeerd': 'Effectum',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Ordinativum (A.5)',
+  'Kies een norm': 'Normam elige',
+  'Managementsysteem': 'Systema administrationis',
+  'Niet gescoord': 'Non aestimatum',
+  'Niveau': 'Gradus',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Nullae adhuc scidae praesidiorum ad summandum',
+  'Sectie': 'Sectio',
+  'Streefdatum': 'Dies destinata',
+  'Van toepassing': 'Applicabile',
+  'Voortgang': 'Progressus',
+  'Voortgang managementsysteem': 'Progressus systematis administrationis',
+  'Voortgangsoverzicht bijgewerkt': 'Conspectus progressus renovatus',
+  'Welk deel?': 'Quae pars?',
+  'beheersmaatregelen geladen': 'praesidia onerata',
+  'geïmplementeerd': 'effectum',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modulus activus. Nucleus computationis, dispositiones diapositivarum et exemplaria localiter praesto sunt ({n} factores chartae moderationis).',
   'SIPOC-procesoverzicht': 'Conspectus processus SIPOC',
@@ -1794,6 +1868,18 @@ const _dutchSourceAddLa = <String, String>{
       'Ambitum et necessitudines processus per praebitores, initia, gradus praecipuos, exitus et clientes constitue.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Instrumenta ad emendationem processuum (SIPOC, DMAIC, Kaizen et A3). Ex praedefinito inactiva; extensionem activa ut exemplaribus et dispositionibus diapositivarum adiunctis utaris.',
+  'Videovergaderingen': 'Conventus visifici',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Conventibus visificis interesse potes et ex OciDeck interficie propria referre: participes iuxta paginam tuam, non in fenestra alterius programmatis. Bring-your-own-server (Jitsi vel Matrix); OciDeck nihil hospitatur et data colloquii extra IA servat. Coniunctio ad servitium conventuum in versione posteriore sequetur.',
+  'Videovergadering': 'Conventus visificus',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Nullus conventus adhuc actuosus. Coniunctio ad servitium conventuum in versione posteriore addetur.',
+  'Dempen opheffen': 'Sonum reddere',
+  'Dempen': 'Sonum supprimere',
+  'Camera aan': 'Camera accensa',
+  'Camera uit': 'Camera exstincta',
+  'Scherm delen': 'Quadrum communicare',
+  'Vergadering verlaten': 'Conventum relinquere',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Bibliotheca imaginum nimis magna est; solae imagines recentissimae ostenduntur.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

@@ -16,10 +16,13 @@ import 'quality_disposition.dart';
 import 'finding_spec.dart';
 import 'findings_summary_spec.dart';
 import 'question.dart';
+import 'control_status_spec.dart';
 import 'scope_matrix_spec.dart';
 import 'scorecard_spec.dart';
 import 'settings.dart';
 import 'timeline.dart';
+
+part 'slide_bullets.dart';
 
 const _uuid = Uuid();
 
@@ -62,6 +65,11 @@ enum SlideType {
   tree,
   flow,
   phaseGate,
+  // Managementsysteem-module (ISO 27001/9001/42001-voortgang,
+  // ISO_MANAGEMENTSYSTEEM §4). `controlStatus` draagt een per-control
+  // implementatiestatus als gewone Markdown-tabel (dus [backedByTable]); de
+  // managementreview en verbeteracties leunen op de bestaande `canvas`/`matrix`.
+  controlStatus,
 }
 
 /// Broad grouping a [SlideType] belongs to, used by the add-slide picker to
@@ -70,7 +78,12 @@ enum SlideType {
 /// [SlideCategory.procesverbetering]. The picker derives its tab bar from the
 /// categories actually present, so a tab appears only once the module reveals
 /// its types.
-enum SlideCategory { general, informationSecurity, procesverbetering }
+enum SlideCategory {
+  general,
+  informationSecurity,
+  procesverbetering,
+  managementsysteem,
+}
 
 /// Hoeveel kolommen *doorlopende* bullettekst een [SlideType] toont — de vorm
 /// die zich over pagina's laat verdelen.
@@ -91,60 +104,6 @@ enum BulletColumns { none, one, two }
 enum FindingRole { header, detail, evidence }
 
 enum ListStyle { bullets, numbered, checklist, richText }
-
-int bulletLevel(String value) {
-  var level = 0;
-  while (level < value.length && value[level] == '\t') {
-    level++;
-  }
-  return level;
-}
-
-String bulletText(String value) => value.substring(bulletLevel(value));
-
-bool checklistItemChecked(String value) =>
-    RegExp(r'^\[[xX]\]\s*').hasMatch(bulletText(value));
-
-String checklistItemText(String value) =>
-    bulletText(value).replaceFirst(RegExp(r'^\[[ xX]\]\s*'), '');
-
-String checklistBullet({
-  required int level,
-  required String text,
-  required bool checked,
-}) => '${'\t' * level}[${checked ? 'x' : ' '}] $text';
-
-/// Sentinel that marks a bullet-list item as a **group heading** ("tussenkop"):
-/// a labelled break that visually separates groups of bullets on one slide, so a
-/// single bullets slide can be split into sections without splitting the slide.
-///
-/// It is a private-use codepoint stored inline at the start of the item's text
-/// — mirroring the checklist `[x]` convention — so a heading is just another
-/// entry in [Slide.bullets]. Ordering, drag-reorder, delete and the file
-/// round-trip therefore all ride the existing list machinery: no parallel list
-/// of positions to keep in sync. An empty label renders as a plain divider rule
-/// (a break with no words). Group headings are always at level 0.
-///
-/// The codepoint is deliberately in the Unicode Private Use Area so it can never
-/// collide with text a user actually types (the same reasoning as the caption
-/// pipe sentinels in `markdown_service_helpers.dart`).
-const String kGroupHeadingMarker = '\u{E010}';
-
-/// Whether [value] is a group-heading item (see [kGroupHeadingMarker]).
-bool isGroupHeading(String value) =>
-    bulletText(value).startsWith(kGroupHeadingMarker);
-
-/// The label of a group-heading item, or the plain bullet text when [value] is
-/// an ordinary bullet. Empty for a wordless divider.
-String groupHeadingText(String value) {
-  final body = bulletText(value);
-  return body.startsWith(kGroupHeadingMarker)
-      ? body.substring(kGroupHeadingMarker.length)
-      : body;
-}
-
-/// Builds a group-heading item carrying [text] (empty = a wordless divider).
-String groupHeadingBullet(String text) => '$kGroupHeadingMarker$text';
 
 /// Pure-data metadata for a [SlideType], co-located with the enum so adding a
 /// type is one map entry instead of edits to several scattered switches. UI
@@ -329,6 +288,14 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     marpClass: 'phase-gate',
     category: SlideCategory.procesverbetering,
     bulletColumns: BulletColumns.one,
+  ),
+  // Managementsysteem-module (ISO_MANAGEMENTSYSTEEM §4). Per-control
+  // implementatiestatus als gewone Markdown-tabel, dus [backedByTable].
+  SlideType.controlStatus: SlideTypeMeta(
+    label: 'Beheersmaatregel-status',
+    marpClass: 'control-status',
+    category: SlideCategory.managementsysteem,
+    backedByTable: true,
   ),
 };
 
@@ -748,6 +715,10 @@ class Slide {
           : type == SlideType.discoveries
           // Alleen de vaste kop; de editor deelt de eerste lege regel uit.
           ? const DiscoveriesSpec().toTableRows()
+          : type == SlideType.controlStatus
+          // Alleen de vaste kop + één lege regel; de importer vult de controls
+          // uit een ISO-index, of de auteur voegt ze zelf toe.
+          ? const ControlStatusSpec(rows: [ControlStatusRow()]).toTableRows()
           : type == SlideType.matrix
           // De kop van het startsjabloon plus één lege regel, zodat de matrix
           // meteen invulbaar is in plaats van als leeg raster te openen.

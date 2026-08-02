@@ -34,6 +34,8 @@ const _knownClassTokens = {
   'tree',
   'flow',
   'phase-gate',
+  // Managementsysteem-module (ISO_MANAGEMENTSYSTEEM §4).
+  'control-status',
   'timeline-horizontal',
   'timeline-vertical',
   'timeline-steps',

@@ -18,6 +18,7 @@ import 'free_markdown_editor.dart';
 import 'image_slide_editor.dart';
 import 'question_editor.dart';
 import 'quote_editor.dart';
+import 'control_status_editor.dart';
 import 'scope_matrix_editor.dart';
 import 'matrix_editor.dart';
 import 'canvas_editor.dart';
@@ -274,6 +275,12 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.scopeMatrix: (c) => ScopeMatrixEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.controlStatus: (c) => ControlStatusEditor(
         key: c._key,
         slide: c.slide,
         onUpdate: c.onUpdate,

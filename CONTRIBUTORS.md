@@ -18,6 +18,7 @@ lifeblood of open source, and we do not take a single one of them for granted.
 - Bas Eenhoorn
 - Mischa van Geelen
 - Edward Hazekamp
+- Youetta de Jager
 - Jan Klopper
 - Reinoud van Leeuwen
 - Astrid Oosenbrug

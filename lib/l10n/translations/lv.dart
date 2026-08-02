@@ -1770,6 +1770,78 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Voortgang per sectie': 'Progress pa sadaļām',
+  'Nog te doen': 'Atlikušais',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Progresa pārskats un diagramma atjaunināti',
+  'Genereer managementreview (9.3)': 'Ģenerēt vadības pārskatīšanu (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Pievieno iepriekš aizpildītu vadības pārskatīšanas veidni (ISO 9.3. punkts) ar pašreizējo progresu.',
+  'Managementreview (clausule 9.3) — Input':
+      'Vadības pārskatīšana (9.3. punkts) — Ievaddati',
+  'Managementreview (clausule 9.3) — Output':
+      'Vadības pārskatīšana (9.3. punkts) — Izvaddati',
+  'Managementreview (9.3) toegevoegd': 'Vadības pārskatīšana (9.3) pievienota',
+  'Er staat al een managementreview in dit deck':
+      'Šajā dekā jau ir vadības pārskatīšana',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Ievaddati (9.3.2)\n\n- **a.** Darbību statuss no iepriekšējām vadības pārskatīšanām\n- **b.** Izmaiņas iekšējos un ārējos jautājumos, kas ietekmē pārvaldības sistēmu\n- **c.** Izmaiņas ieinteresēto pušu vajadzībās un gaidās\n- **d.** Veiktspēja un rezultativitāte — {p}% ieviests (piemērojamas kontroles: {impl}/{app})\n    - Neatbilstību un koriģējošo darbību tendences\n    - Uzraudzības un mērījumu rezultāti\n    - Auditu rezultāti\n- **e.** Resursu pietiekamība\n- **f.** Risku un iespēju risināšanai veikto darbību rezultativitāte\n- **g.** Uzlabošanas iespējas',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Izvaddati (9.3.3)\n\n- Lēmumi par nepārtrauktas uzlabošanas iespējām\n- Lēmumi par jebkādām izmaiņām pārvaldības sistēmā\n- Nepieciešamie resursi\n\n_Zemāk ierakstiet lēmumus, darbības un atbildīgos._',
+  'Procesverbetering: DMADV-project': 'Procesa uzlabošana: DMADV projekts',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV skelets jauna procesa projektēšanai un pārbaudei.',
+  'Procesverbetering: Kaizen-project': 'Procesa uzlabošana: Kaizen projekts',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompakts uzlabošanas projekts ar plānošanas, darbības un pārbaudes fāzēm.',
+  'Procesverbetering: A3-project': 'Procesa uzlabošana: A3 projekts',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 skelets problēmu, analīzes un uzlabošanas darbībām.',
+  'Procesverbetering: 8D-project': 'Procesa uzlabošana: 8D projekts',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D skelets problēmas aprakstam, cēloņiem un pārliecībai.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Ziņojiet par ISO pārvaldības sistēmas (27001/9001/42001) progresu: statuss katrai kontrolei un atvasināts progresa pārskats. Pēc noklusējuma izslēgts; ieslēdziet paplašinājumu, lai izmantotu slaida tipu.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modulis ieslēgts. ISO indekss ir pieejams lokāli ({n} kontroles trijos standartos); tikai numuri un īsie nosaukumi, nevis standarta teksts.',
+  'Beheersmaatregel-status': 'Kontroļu statuss',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Tikai klauzulu indekss 4–10 (28 apakšklauzulas + īsi nosaukumi). ISO 9001 nav Annex A. Standarta teksts NAV iekļauts.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Tikai Annex A indekss (38 kontroļu identifikatori + īsi nosaukumi) un deviņi mērķu virsraksti A.2–A.10. Standarta teksts NAV iekļauts.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Tikai Annex A indekss (93 kontroļu identifikatori + īsi nosaukumi) un četri tēmu virsraksti. Standarta teksts NAV iekļauts.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Ieviešanas statuss katrai ISO standarta kontrolei (27001/9001/42001). Ielādējiet kontroles no standarta un aizpildiet statusu, atbildīgo un pierādījumu.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO autortiesības — indekss kā faktu atsauce, standarta teksts nav iekļauts',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Izveido vai atsvaidzina pārskata slaidu ar progresu pa sadaļām (atvasināts no visiem kontroļu slaidiem).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Pievieno ISO standarta kontroles (tikai indekss; tikai jauni identifikatori).',
+  'Alle secties': 'Visas sadaļas',
+  'Beheersmaatregel': 'Kontrole',
+  'Beheersmaatregel toevoegen': 'Pievienot kontroli',
+  'Beheersmaatregelen laden…': 'Ielādēt kontroles…',
+  'Genereer voortgangsoverzicht': 'Ģenerēt progresa pārskatu',
+  'Geïmplementeerd': 'Ieviests',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizatoriskie (A.5)',
+  'Kies een norm': 'Izvēlieties standartu',
+  'Managementsysteem': 'Pārvaldības sistēma',
+  'Niet gescoord': 'Nav novērtēts',
+  'Niveau': 'Līmenis',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Vēl nav kontroļu slaidu, ko apkopot',
+  'Sectie': 'Sadaļa',
+  'Streefdatum': 'Mērķa datums',
+  'Van toepassing': 'Piemērojams',
+  'Voortgang': 'Progress',
+  'Voortgang managementsysteem': 'Pārvaldības sistēmas progress',
+  'Voortgangsoverzicht bijgewerkt': 'Progresa pārskats atjaunināts',
+  'Welk deel?': 'Kura daļa?',
+  'beheersmaatregelen geladen': 'kontroles ielādētas',
+  'geïmplementeerd': 'ieviests',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modulis ir ieslēgts. Aprēķinu kodols, slaidu izkārtojumi un veidnes ir pieejamas lokāli ({n} kontroles diagrammas koeficienti).',
   'SIPOC-procesoverzicht': 'SIPOC procesa pārskats',
@@ -1777,6 +1849,18 @@ const _dutchSourceAddLv = <String, String>{
       'Nosakiet procesa tvērumu un atkarības, izmantojot piegādātājus, ievaddatus, galvenos soļus, rezultātus un klientus.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Rīki procesu uzlabošanai (SIPOC, DMAIC, Kaizen un A3). Pēc noklusējuma izslēgti; iespējojiet paplašinājumu, lai izmantotu saistītās veidnes un slaidu izkārtojumus.',
+  'Videovergaderingen': 'Videosanāksmes',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Pievienojieties videosanāksmēm un prezentējiet no OciDeck ar savu saskarni: dalībnieki blakus jūsu slaidam, nevis citas lietotnes logā. Bring-your-own-server (Jitsi vai Matrix); OciDeck neko nemitina un sarunu datus tur prom no MI. Savienojums ar sanāksmju pakalpojumu tiks pievienots nākamajā versijā.',
+  'Videovergadering': 'Videosanāksme',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Vēl nav aktīvas sanāksmes. Savienojums ar sanāksmju pakalpojumu tiks pievienots nākamajā versijā.',
+  'Dempen opheffen': 'Ieslēgt skaņu',
+  'Dempen': 'Izslēgt skaņu',
+  'Camera aan': 'Ieslēgt kameru',
+  'Camera uit': 'Izslēgt kameru',
+  'Scherm delen': 'Kopīgot ekrānu',
+  'Vergadering verlaten': 'Pamest sanāksmi',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Attēlu bibliotēka ir pārāk liela; tiek rādīti tikai jaunākie attēli.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

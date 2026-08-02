@@ -18,9 +18,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'collaboration_provider.dart';
+import 'meeting_session_provider.dart';
 import 'info_safety_provider.dart';
 import 'online_storage_provider.dart';
 import 'import_module_provider.dart';
+import 'managementsysteem_provider.dart';
 import 'procesverbetering_provider.dart';
 import 'settings_provider.dart';
 import 'asset_rights_module_provider.dart';
@@ -34,7 +36,9 @@ enum ModuleId {
   imports,
   procesverbetering,
   collaboration,
+  videoCalls,
   assetRights,
+  managementsysteem,
 }
 
 /// Eén module in het register: wie hij is en waar zijn poorten staan.
@@ -116,8 +120,18 @@ final List<ModuleEntry> moduleRegistry = [
     revealed: collaborationRevealProvider,
   ),
   ModuleEntry(
+    id: ModuleId.videoCalls,
+    enabled: videoCallsEnabledProvider,
+    revealed: videoCallsRevealProvider,
+  ),
+  ModuleEntry(
     id: ModuleId.assetRights,
     enabled: assetRightsModuleEnabledProvider,
     revealed: assetRightsModuleRevealProvider,
+  ),
+  ModuleEntry(
+    id: ModuleId.managementsysteem,
+    enabled: managementsysteemEnabledProvider,
+    revealed: managementsysteemRevealProvider,
   ),
 ];

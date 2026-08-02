@@ -1771,6 +1771,78 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Voortgang per sectie': 'Kemajuan per bagian',
+  'Nog te doen': 'Belum selesai',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Ringkasan dan grafik kemajuan diperbarui',
+  'Genereer managementreview (9.3)': 'Buat tinjauan manajemen (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Menambahkan templat terisi untuk tinjauan manajemen (klausul ISO 9.3), dengan kemajuan saat ini di dalamnya.',
+  'Managementreview (clausule 9.3) — Input':
+      'Tinjauan manajemen (klausul 9.3) — Masukan',
+  'Managementreview (clausule 9.3) — Output':
+      'Tinjauan manajemen (klausul 9.3) — Keluaran',
+  'Managementreview (9.3) toegevoegd': 'Tinjauan manajemen (9.3) ditambahkan',
+  'Er staat al een managementreview in dit deck':
+      'Deck ini sudah berisi tinjauan manajemen',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Masukan (9.3.2)\n\n- **a.** Status tindakan dari tinjauan manajemen sebelumnya\n- **b.** Perubahan pada isu internal dan eksternal yang memengaruhi sistem manajemen\n- **c.** Perubahan pada kebutuhan dan harapan pihak berkepentingan\n- **d.** Kinerja dan efektivitas — {p}% diterapkan ({impl}/{app} kontrol berlaku)\n    - Tren ketidaksesuaian dan tindakan korektif\n    - Hasil pemantauan dan pengukuran\n    - Hasil audit\n- **e.** Kecukupan sumber daya\n- **f.** Efektivitas tindakan terhadap risiko dan peluang\n- **g.** Peluang untuk perbaikan',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Keluaran (9.3.3)\n\n- Keputusan tentang peluang perbaikan berkelanjutan\n- Keputusan tentang perubahan apa pun pada sistem manajemen\n- Kebutuhan sumber daya\n\n_Isi keputusan, tindakan, dan penanggung jawab di bawah ini._',
+  'Procesverbetering: DMADV-project': 'Peningkatan proses: proyek DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Kerangka DMADV untuk merancang dan memverifikasi proses baru.',
+  'Procesverbetering: Kaizen-project': 'Peningkatan proses: proyek Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Proyek peningkatan kompak dengan fase Rencana, Lakukan, dan Periksa.',
+  'Procesverbetering: A3-project': 'Peningkatan proses: proyek A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Kerangka A3 untuk masalah, analisis dan tindakan perbaikan.',
+  'Procesverbetering: 8D-project': 'Peningkatan proses: proyek 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Kerangka 8D untuk deskripsi masalah, penyebab dan jaminan.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Laporkan kemajuan sistem manajemen ISO (27001/9001/42001): status per kontrol dan ringkasan kemajuan turunan. Nonaktif secara default; aktifkan ekstensi untuk menggunakan tipe slide.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modul aktif. Indeks ISO tersedia secara lokal ({n} kontrol di tiga standar); hanya nomor dan judul singkat, bukan teks standar.',
+  'Beheersmaatregel-status': 'Status kendali',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Hanya indeks klausul 4–10 (28 sub-klausul + judul singkat). ISO 9001 tidak memiliki Annex A. Teks standar TIDAK disertakan.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Hanya indeks Annex A (38 id kontrol + judul singkat) dan sembilan judul sasaran A.2–A.10. Teks standar TIDAK disertakan.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Hanya indeks Annex A (93 id kontrol + judul singkat) dan empat judul tema. Teks standar TIDAK disertakan.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Status penerapan per kontrol dari standar ISO (27001/9001/42001). Muat kontrol dari sebuah standar lalu isi status, pemilik, dan bukti.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Hak cipta ISO — indeks sebagai rujukan faktual, teks standar tidak disertakan',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Membuat atau memperbarui slide ringkasan dengan kemajuan per bagian (diturunkan dari semua slide kontrol).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Menambahkan kontrol dari standar ISO (hanya indeks; hanya id baru).',
+  'Alle secties': 'Semua bagian',
+  'Beheersmaatregel': 'Kontrol',
+  'Beheersmaatregel toevoegen': 'Tambah kontrol',
+  'Beheersmaatregelen laden…': 'Muat kontrol…',
+  'Genereer voortgangsoverzicht': 'Buat ringkasan kemajuan',
+  'Geïmplementeerd': 'Diterapkan',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisasi (A.5)',
+  'Kies een norm': 'Pilih standar',
+  'Managementsysteem': 'Sistem manajemen',
+  'Niet gescoord': 'Belum dinilai',
+  'Niveau': 'Tingkat',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Belum ada slide kontrol untuk diringkas',
+  'Sectie': 'Bagian',
+  'Streefdatum': 'Tanggal target',
+  'Van toepassing': 'Berlaku',
+  'Voortgang': 'Kemajuan',
+  'Voortgang managementsysteem': 'Kemajuan sistem manajemen',
+  'Voortgangsoverzicht bijgewerkt': 'Ringkasan kemajuan diperbarui',
+  'Welk deel?': 'Bagian mana?',
+  'beheersmaatregelen geladen': 'kontrol dimuat',
+  'geïmplementeerd': 'diterapkan',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul aktif. Inti perhitungan, tata letak slide, dan templat tersedia secara lokal ({n} faktor peta kendali).',
   'SIPOC-procesoverzicht': 'Ringkasan proses SIPOC',
@@ -1778,6 +1850,18 @@ const _dutchSourceAddId = <String, String>{
       'Tentukan ruang lingkup dan ketergantungan proses melalui pemasok, masukan, langkah utama, keluaran, dan pelanggan.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Perkakas untuk peningkatan proses (SIPOC, DMAIC, Kaizen, dan A3). Nonaktif secara default; aktifkan ekstensi untuk menggunakan templat dan tata letak slide terkait.',
+  'Videovergaderingen': 'Rapat video',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Ikuti rapat video dan presentasikan dari OciDeck dengan antarmuka tersendiri: peserta di samping slide Anda, bukan di jendela aplikasi lain. Bring-your-own-server (Jitsi atau Matrix); OciDeck tidak meng-host apa pun dan menjaga data percakapan tetap jauh dari AI. Koneksi ke layanan rapat akan menyusul pada versi mendatang.',
+  'Videovergadering': 'Rapat video',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Belum ada rapat aktif. Koneksi ke layanan rapat akan ditambahkan pada versi mendatang.',
+  'Dempen opheffen': 'Bunyikan',
+  'Dempen': 'Bisukan',
+  'Camera aan': 'Nyalakan kamera',
+  'Camera uit': 'Matikan kamera',
+  'Scherm delen': 'Bagikan layar',
+  'Vergadering verlaten': 'Tinggalkan rapat',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Pustaka gambar terlalu besar; hanya gambar terbaru yang ditampilkan.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

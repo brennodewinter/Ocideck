@@ -28,6 +28,7 @@
 - [Exporting](#exporting)
 - [Accessibility](#accessibility)
 - [Information security module (pentest reports)](#information-security-module-pentest-reports)
+- [Management-system module (ISO progress reporting)](#management-system-module-iso-progress-reporting)
 - [Markdown mode](#markdown-mode)
 - [What the browser version cannot do](#what-the-browser-version-cannot-do)
 - [Theming and language](#theming-and-language)
@@ -3275,8 +3276,8 @@ is the source of truth; the toggle only governs *authoring*).
 ### Procesverbetering (process improvement)
 
 A fifth optional module on **Settings → Uitbreidingen (Extensions)**, off by
-default. It provides authoring tools for methods such as DMAIC, Kaizen, A3,
-SIPOC, FMEA and RACI — see
+default. It provides authoring tools for methods such as DMAIC, DMADV, Kaizen,
+A3, 8D, SIPOC, FMEA and RACI — see
 [`docs/design/PROCESS_IMPROVEMENT.md`](design/PROCESS_IMPROVEMENT.md). The
 module is named *Procesverbetering*; it makes no certification, conformance or
 affiliation claim.
@@ -3413,11 +3414,30 @@ headings.
 **Starting templates.** With the module on, **New presentation** exposes its
 process-improvement starting points in the ordinary template catalogue, each
 with a **Procesverbetering** badge. *Procesverbetering: DMAIC-project* supplies
-the DMAIC skeleton. *SIPOC-procesoverzicht* is a standalone five-slide overview:
-it explains supplier, input, process, output and customer; contains a typed,
-editable SIPOC matrix; compares the overview with a detailed flowchart; and
-guides you from customer back to supplier. Keep the process column to 4–7
-high-level activities, then fill the matrix from right to left.
+the DMAIC skeleton; DMADV, Kaizen, A3 and 8D are available in the same place.
+After choosing one of these project templates, record the optional primary
+Y-metric and its limits before the deck opens. Each project template then keeps
+you moving with a short **skipped guidance slide after every phase divider**.
+Those slides ask for the concrete evidence, decision, owner and result that
+belong in that phase. Use them as checklists and add ordinary slides directly
+after them for your answers. The charter regions explain what belongs in each
+field, the **Measurable customer requirements (CTQ tree)** starter turns the
+customer need into measurable criteria, and a SIPOC guide sits directly before
+the empty matrix. Replace the charter and CTQ prompt text with project content.
+Guidance slides remain visible while editing, but because they start skipped
+they do not appear in presentation or export. Turn **Skip** off only when a
+guidance slide should reach the audience.
+
+*SIPOC-procesoverzicht* is a standalone nine-slide overview: it explains
+supplier, input, process, output and customer; provides editable process,
+start-point and end-point fields; shows what precise boundaries and one coherent
+example row look like; guides you from customer back to supplier before the
+typed, editable SIPOC matrix; and compares the overview with a detailed
+flowchart. Keep the process column to 4–7 high-level activities, then fill the
+matrix from right to left. Its four slides labelled **Skipped** are working
+instructions and stay outside presentation and export by default. The method
+explanation and flowchart comparison are ordinary slides; switch **Skip** on for
+either one when your audience does not need it.
 
 **AI wording assist (Phase 10).** When **both** the AI-assistentie module and
 Procesverbetering are on, canvas, tree and flow editors show **Tekst voorstellen
@@ -3776,6 +3796,111 @@ A built-in **Security** theme profile ships a clean, professional report look an
 severity colour tokens (Critical / High / Medium / Low / Informational). The
 tokens drive finding cards, CVSS badges and the findings-summary chart, and can be
 retuned per profile under *Settings → presentation style → Severity (bevindingen)*.
+
+## Management-system module (ISO progress reporting)
+
+OciDeck can report the **progress of your own management system** against an ISO
+standard: ISO/IEC 27001 (information security), ISO 9001 (quality) or ISO/IEC
+42001 (AI). It is aimed at a periodic report to the board, management or a
+certification body — which controls are implemented, which are still planned, who
+owns them and what the evidence is. Everything is offline; nothing is downloaded.
+
+Like the other optional modules, it is **off by default**. Switch it on under
+**Settings → Uitbreidingen (Extensions) → Managementsysteem**. Once enabled, the
+**Add slide** dialog shows a **Managementsysteem** tab with **Beheersmaatregel-status**
+(control status). A deck that already carries such a slide reveals the tab even
+with the module off, so switching it off never strands existing work.
+
+> **What is bundled, and what is not.** OciDeck ships only the **index** of the
+> three standards — the clause/control numbers with their short canonical titles.
+> ISO standards are copyrighted and sold by ISO/NEN, so the **normative
+> requirement text is deliberately not included**; to read a requirement, buy the
+> standard. The bundled index covers ISO/IEC 27001:2022 (the 93 Annex A controls
+> in four themes), ISO 9001:2015 (clauses 4–10, no Annex A) and ISO/IEC 42001:2023
+> (the 38 Annex A controls). See
+> [`docs/LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md).
+
+### Loading the controls of a standard
+
+Add a **Beheersmaatregel-status** slide and give it a heading (the section it
+covers, e.g. *ISO 27001 · Annex A — Organisatorisch (A.5)*). Rather than typing
+93 control ids by hand, press **Beheersmaatregelen laden…**: pick a standard, then
+either **Alle secties** (all sections) or one section (e.g. *A.5 · Organizational
+controls*). OciDeck appends every control from the bundled index whose id is not
+already on the slide — existing rows are never touched, and a single empty starter
+row is replaced so a fresh slide fills cleanly. Each added row arrives with its id
+and canonical title filled in and its status at *not started*, for you to work
+through. You can also add, remove and reorder rows by hand.
+
+### Filling in the status
+
+Each control row carries a **status**, an optional **maturity**, an **owner**, a
+**target** date or period, an **evidence** reference and a free **note**:
+
+- **Status** is one of *Niet gestart* (not started), *Gepland* (planned), *Deels*
+  (partial), *Geïmplementeerd* (implemented) or *Niet van toepassing* (not
+  applicable). Choose *Niet van toepassing* for a control you exclude — a
+  Statement-of-Applicability exclusion — and put the reason in the note.
+- **Niveau (maturity)** is optional, 0–5; *Niet gescoord* (0) means no one has
+  rated it yet. It is a second, finer view — the progress figure counts status,
+  never maturity.
+- **Owner**, **target** and **evidence** are free text and may be left blank.
+
+On disk the slide is a plain Markdown table with stable English status words
+(`NotStarted` / `Planned` / `Partial` / `Implemented` / `NotApplicable`), so a
+report round-trips regardless of interface language and opens and renders on any
+install — the file is the source of truth. The preview shows a **progress bar**:
+the share of controls that are implemented, out of the ones that are *applicable*
+(not-applicable controls are left out of the sum, so excluding a control never
+flatters or deflates the figure).
+
+### Generating a progress overview
+
+**Genereer voortgangsoverzicht** rolls up every Beheersmaatregel-status slide in
+the deck and draws **two** derived slides. The first is the **overview table**
+("Voortgang managementsysteem"): one row per section with its applicable count,
+implemented count and percentage, plus a totals row. The second is a **burn-up
+chart** ("Voortgang per sectie"): a horizontal stacked bar per section, its length
+the section's applicable controls, split into the part that is implemented (green)
+and the part still to do (grey), so at a glance you see how far each section has
+burned up toward done. Not-applicable controls are already out of the applicable
+base, so a section that is entirely out of scope shows an empty bar rather than a
+misleadingly full one.
+
+Both are **derived** from the detail slides — regenerate them after a change and
+they stay consistent; there is no second figure that can drift. Running the action
+again refreshes the existing table and chart in place rather than adding a second
+copy (the chart is matched on its own title, "Voortgang per sectie"). If there are
+no control-status slides yet, it tells you so instead of writing empty slides. The
+burn-up is a **snapshot** of the deck as it stands, not a trend over time; a
+comparison against a previous review period is part of the period/trend work that
+is not built yet (see below).
+
+### Generating a management review (clause 9.3)
+
+**Genereer managementreview (9.3)** adds a two-slide template for the ISO
+management review, pre-filled with the current progress. The first slide is the
+**input** following clause 9.3.2 (status of earlier actions, changes in the
+organisation's context and in the stakeholders, performance and effectiveness —
+with the percentage implemented and the implemented-of-applicable count filled in
+— adequacy of resources, effectiveness against risks and opportunities, and
+opportunities for improvement). The second is the **output** following clause
+9.3.3 (decisions on continual improvement, on changes to the management system,
+and on the resources needed).
+
+These are ordinary editable slides (free Markdown), not a locked form, so you
+write your decisions, actions and owners straight into them. Running the action
+again does **not** add a second copy: an invisible marker on the first slide
+guards your answers, and OciDeck tells you a review is already present instead of
+overwriting it. If you want a fresh template, delete the existing review slides
+first.
+
+> **Not yet built.** Period/trend metadata — which review period a deck reports
+> on, and comparing progress against the previous period — is on the roadmap but
+> not in the app yet; see
+> [`docs/design/ISO_MANAGEMENTSYSTEEM.md`](design/ISO_MANAGEMENTSYSTEEM.md).
+> OciDeck reports progress — it makes no certification or conformance claim and is
+> not a substitute for an auditor.
 
 ## Markdown mode
 

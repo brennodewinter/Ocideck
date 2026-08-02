@@ -1746,6 +1746,76 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Voortgang per sectie': '\'ay\' Qap',
+  'Nog te doen': 'ratlhtaHbogh',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Qap much Qap HaSta je chu\'moHlu\'pu\'',
+  'Genereer managementreview (9.3)': 'che\'wI\' nuD yIchenmoH (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'che\'wI\' nuD (ISO chut 9.3) buq\'Ir chellu\', DaH Qap tebbogh.',
+  'Managementreview (clausule 9.3) — Input': 'che\'wI\' nuD (chut 9.3) — \'el',
+  'Managementreview (clausule 9.3) — Output': 'che\'wI\' nuD (chut 9.3) — mej',
+  'Managementreview (9.3) toegevoegd': 'che\'wI\' nuD (9.3) chellu\'pu\'',
+  'Er staat al een managementreview in dit deck':
+      'deck vamDaq che\'wI\' nuD tu\'lu\'bej',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## \'el (9.3.2)\n\n- **a.** che\'wI\' nuD ben vo\' vangtaHghachmey Dotlh\n- **b.** pat luqaHbogh Sum \'ej Hop Doch\'e\' choHmey\n- **c.** ngoq ghajwI\'pu\' poQmey \'ej pIHmey choHmey\n- **d.** Qapla\' \'ej lI\'taHghach — {p}% rInpu\' ({impl}/{app} Hubmey lo\'laH)\n    - qarHa\'ghachmey \'ej DubmeH vangtaHghachmey tlheghmey\n    - ghoQ \'ej juvtaHghach De\'mey\n    - nuDtaHghach De\'mey\n- **e.** jo naQ\n- **f.** Qob \'ej \'eb luSammeH vangtaHghachmey lI\'taHghach\n- **g.** DubmeH \'ebmey',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## mej (9.3.3)\n\n- taHtaHbogh DubmeH \'ebmey wIvmey\n- che\'meH pat choHmey wIvmey\n- poQlu\'bogh jo\n\n_bIngDaq wIvmey, vangtaHghachmey \'ej ghajwI\'pu\' yIghItlh._',
+  'Procesverbetering: DMADV-project': 'DMADV: gher\'ID QI\'meH mIq',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'cherghmeH je olmeH chu\' gher\'ID DMADV qel.',
+  'Procesverbetering: Kaizen-project': 'Kaizen: gher\'ID QI\'meH mIq',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'mIq mach: nab, ta\' je leghmeH mIw.',
+  'Procesverbetering: A3-project': 'A3: gher\'ID QI\'meH mIq',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Qagh, leghlaHghach je QI\'meH ta\' A3 qel.',
+  'Procesverbetering: 8D-project': '8D: gher\'ID QI\'meH mIq',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Qagh Del, motlh je qaDmoHmeH 8D qel.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'ISO che\'meH pat (27001/9001/42001) Qap yIja\': Hub patlh je Qap \'oS chenmoHlu\'bogh. lurDech: chu\'be\'; cha\'nob Segh yIlo\'meH chelwI\' yIchu\'.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'chelwI\' chu\'lu\'. pa\' ISO index tu\'lu\' ({n} Hubmey wej chut); mI\'mey per nI\'be\' je neH, chut mu\'mey qachbe\'.',
+  'Beheersmaatregel-status': 'SeH Dotlh',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'chut \'ay\' 4–10 index neH (28 chut \'ay\' mach + per nI\'be\'). ISO 9001 Annex A ghajbe\'. chut mu\'mey chellu\'be\'.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Annex A index neH (38 Hub per + per nI\'be\') je ngoQ nav Hut A.2–A.10. chut mu\'mey chellu\'be\'.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Annex A index neH (93 Hub per + per nI\'be\') je loS mIll\'ogh nav. chut mu\'mey chellu\'be\'.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'ISO chut (27001/9001/42001) Hub patlh. chutvo\' Hubmey yISuq; patlh, ghajwI\', \'ol je yIghItlh.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO copyright — teH index, chut mu\'mey chellu\'be\'',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      '\'ay\' Hoch Qap \'oS much nav chenmoHlu\' pagh choHlu\'; Hub navmey Hoch lo\'lu\'.',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'ISO chut Hubmey chel; index neH, per chu\' neH.',
+  'Alle secties': 'Hoch \'ay\'mey',
+  'Beheersmaatregel': 'Hub',
+  'Beheersmaatregel toevoegen': 'Hub yIchel',
+  'Beheersmaatregelen laden…': 'Hubmey yISuq…',
+  'Genereer voortgangsoverzicht': 'Qap much yIchenmoH',
+  'Geïmplementeerd': 'rInpu\'',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — ghom (A.5)',
+  'Kies een norm': 'chut yIwIv',
+  'Managementsysteem': 'che\'meH pat',
+  'Niet gescoord': 'juvbe\'lu\'',
+  'Niveau': 'patlh',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Hub navmey tu\'lu\'be\'',
+  'Sectie': '\'ay\'',
+  'Streefdatum': 'ngoQ jaj',
+  'Van toepassing': 'lo\'laH',
+  'Voortgang': 'Qap',
+  'Voortgang managementsysteem': 'che\'meH pat Qap',
+  'Voortgangsoverzicht bijgewerkt': 'Qap much chu\'qa\'lu\'pu\'',
+  'Welk deel?': 'nuq \'ay\'?',
+  'beheersmaatregelen geladen': 'Hubmey Suqlu\'pu\'',
+  'geïmplementeerd': 'rInpu\'',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'chu\' module. De\'wI\' mIw, slide patmey je template-mey Daq SumDaq tu\'lu\' ({n} control-chartfactor).',
   'SIPOC-procesoverzicht': 'SIPOC ghu\'vam',
@@ -1753,6 +1823,18 @@ const _dutchSourceAddTlh = <String, String>{
       'ghu\'vam \'ej ghaytanHa\'ghachmey SIPOC Daqel: lIlwI\', \'el, wa\'DIch mIw, mej, je ghotpu\'.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'mIw DubmeH janmey (SIPOC, DMAIC, Kaizen je A3). motlh chu\'Ha\'lu\'; template slide De\' patmey je lo\'laHmeH extension chu\'.',
+  'Videovergaderingen': 'HaSta qepmey',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'HaSta qepmeyDaq yIjeS \'ej OciDeckvo\' yISoQmoH; SoQmoHwI\' Da\'armey Daghaj. HaSta cha\'wI\'pu\' Slide retlhDaq, latlh ghItlh lojmItDaq ghobe\'. Bring-your-own-server (Jitsi Matrix je); pagh polHa\' OciDeck \'ej ja\'chuqmey De\' IAvo\' Hoch chel. qep lIchwI\' rarmeH \'ay\' chu\' chellu\' pIq.',
+  'Videovergadering': 'HaSta qep',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'DaH qep vumtaHbogh tu\'lu\'be\'. qep lIchwI\' rarmeH \'ay\' chu\' chellu\' pIq.',
+  'Dempen opheffen': 'wab chu\'qa\'',
+  'Dempen': 'wab chu\'Ha\'',
+  'Camera aan': 'mIllogh chu\'',
+  'Camera uit': 'mIllogh chu\'Ha\'',
+  'Scherm delen': 'HaSta \'ang',
+  'Vergadering verlaten': 'qepvo\' yImej',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'tlhoy tIn mIllogh qul; mIllogh chu\' neH boch.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

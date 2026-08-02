@@ -730,6 +730,78 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Voortgang per sectie': 'Progreso pa sekshon',
+  'Nog te doen': 'Falta pa hasi',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Resúmen i gráfiko di progreso aktualisá',
+  'Genereer managementreview (9.3)': 'Generá revishon di gerensia (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Ta agregá un plantilla yená pa e revishon di gerensia (klousula ISO 9.3), ku e progreso aktual aden.',
+  'Managementreview (clausule 9.3) — Input':
+      'Revishon di gerensia (klousula 9.3) — Entrada',
+  'Managementreview (clausule 9.3) — Output':
+      'Revishon di gerensia (klousula 9.3) — Salida',
+  'Managementreview (9.3) toegevoegd': 'Revishon di gerensia (9.3) agregá',
+  'Er staat al een managementreview in dit deck':
+      'E deck aki tin kaba un revishon di gerensia',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Entrada (9.3.2)\n\n- **a.** Estado di e akshonnan di revishonnan di gerensia anterior\n- **b.** Kambionan den asuntunan interno i eksterno ku ta afektá e sistema di gestion\n- **c.** Kambionan den e nesesidat i ekspektativa di e partidonan interesá\n- **d.** Rendimentu i efektividat — {p}% implementá ({impl}/{app} kontrol aplikabel)\n    - Tendensia den no-konformidat i akshon korektivo\n    - Resultado di monitoreo i midimentu\n    - Resultado di ouditoria\n- **e.** Adekuashon di rekurso\n- **f.** Efektividat di e akshonnan kontra riesgo i oportunidat\n- **g.** Oportunidat pa mehoramentu',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Salida (9.3.3)\n\n- Desishon tokante oportunidat pa mehoramentu kontinuo\n- Desishon tokante kualke kambio na e sistema di gestion\n- Nesesidat di rekurso\n\n_Yena e desishon, akshon i doñonan abou._',
+  'Procesverbetering: DMADV-project': 'Mehorashon di proseso: proyekto DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Skeleton di DMADV pa diseñá i verifiká un proseso nobo.',
+  'Procesverbetering: Kaizen-project': 'Mehorashon di proseso: proyekto Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Proyekto di mehorashon kompakto ku fasenan di Plan, Hasi i Kontrolá.',
+  'Procesverbetering: A3-project': 'Mehorashon di proseso: proyekto A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 skelet pa akshonnan di problema, analisis i mehorashon.',
+  'Procesverbetering: 8D-project': 'Mehorashon di proseso: proyekto 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Skeleton 8D pa deskripshon di problema, kousa i siguransa.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Reportá e progreso di un sistema di gestion ISO (27001/9001/42001): estado pa kada kontrol i un resúmen di progreso derivá. Pa defekto apagá; sende e ekstenshon pa usa e tipo di slide.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Módulo sendé. E indeks ISO ta disponibel lokalmente ({n} kontrol den tres norma); solamente e numbernan i título kòrtiku, no e teksto di norma.',
+  'Beheersmaatregel-status': 'Estado di kontrol',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Solamente e indeks di klóusula 4–10 (28 sub-klóusula + título kòrtiku). ISO 9001 no tin Annex A. E teksto di norma NO ta inkluí.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Solamente e indeks di Annex A (38 id di kontrol + título kòrtiku) i e nuebe kabesante di opheto A.2–A.10. E teksto di norma NO ta inkluí.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Solamente e indeks di Annex A (93 id di kontrol + título kòrtiku) i e kuater kabesante temátiko. E teksto di norma NO ta inkluí.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'E estado di implementashon pa kada kontrol di un norma ISO (27001/9001/42001). Karga e kontrolnan for di un norma i yena estado, doño i prueba.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Copyright di ISO — indeks komo referensia faktual, teksto di norma no inkluí',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Ta krea òf renobá un slide di resúmen ku e progreso pa sekshon (derivá for di tur slide di kontrol).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Ta agregá e kontrolnan di un norma ISO (solamente e indeks; solamente id nobo).',
+  'Alle secties': 'Tur sekshon',
+  'Beheersmaatregel': 'Kontrol',
+  'Beheersmaatregel toevoegen': 'Agregá kontrol',
+  'Beheersmaatregelen laden…': 'Karga kontrolnan…',
+  'Genereer voortgangsoverzicht': 'Generá resúmen di progreso',
+  'Geïmplementeerd': 'Implementá',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisashonal (A.5)',
+  'Kies een norm': 'Skohe un norma',
+  'Managementsysteem': 'Sistema di gestion',
+  'Niet gescoord': 'No evaluá',
+  'Niveau': 'Nivel',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Ainda no tin slide di kontrol pa resumí',
+  'Sectie': 'Sekshon',
+  'Streefdatum': 'Fecha meta',
+  'Van toepassing': 'Aplikabel',
+  'Voortgang': 'Progreso',
+  'Voortgang managementsysteem': 'Progreso di sistema di gestion',
+  'Voortgangsoverzicht bijgewerkt': 'Resúmen di progreso aktualisá',
+  'Welk deel?': 'Kua parti?',
+  'beheersmaatregelen geladen': 'kontrol kargá',
+  'geïmplementeerd': 'implementá',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Módulo prendé. Núkleo di kalkulashon, diseñonan di diapositiva i plantianan ta disponibel lokalmente ({n} faktornan di karta di kontrol).',
   'SIPOC-procesoverzicht': 'Resumen di proseso SIPOC',
@@ -737,6 +809,18 @@ const _dutchSourceAddPap = {
       'Determiná e alkanse i dependensianan di un proseso mediante proveedónan, entrada, pasonan prinsipal, salida i klientenan.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Hulpmidinan pa mehoramentu di proseso (SIPOC, DMAIC, Kaizen i A3). Standardmente apagá; aktivá e ekstensión pa usa e plantianan i diseñonan di diapositiva relashoná.',
+  'Videovergaderingen': 'Reunionnan di video',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Partisipá na reunionnan di video i presentá for di OciDeck ku un interfase propio: e partisipantenan banda di bo slide, no den e bentana di un otro app. Bring-your-own-server (Jitsi òf Matrix); OciDeck no ta hospedá nada i ta tene e datonan di konbersashon pafó di IA. E koneksion ku un servisio di reunion lo sigui den un versión futuro.',
+  'Videovergadering': 'Reunion di video',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Ainda no tin un reunion aktivo. E koneksion ku un servisio di reunion lo wòrdu añadí den un versión futuro.',
+  'Dempen opheffen': 'Kita silensio',
+  'Dempen': 'Silensia',
+  'Camera aan': 'Sende kámera',
+  'Camera uit': 'Paga kámera',
+  'Scherm delen': 'Kompartí pantaya',
+  'Vergadering verlaten': 'Bandoná reunion',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'E biblioteka di imágen ta muchu grandi; solamente e imágennan mas nobo ta wòrdu mustrá.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

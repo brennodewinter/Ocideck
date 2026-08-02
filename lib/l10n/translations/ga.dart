@@ -1806,6 +1806,80 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Voortgang per sectie': 'Dul chun cinn de réir rannóige',
+  'Nog te doen': 'Le déanamh',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Nuashonraíodh an forbhreathnú agus an chairt dul chun cinn',
+  'Genereer managementreview (9.3)': 'Gin athbhreithniú bainistíochta (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Cuireann sé teimpléad réamhlíonta leis don athbhreithniú bainistíochta (clásal ISO 9.3), leis an dul chun cinn reatha.',
+  'Managementreview (clausule 9.3) — Input':
+      'Athbhreithniú bainistíochta (clásal 9.3) — Ionchur',
+  'Managementreview (clausule 9.3) — Output':
+      'Athbhreithniú bainistíochta (clásal 9.3) — Aschur',
+  'Managementreview (9.3) toegevoegd':
+      'Cuireadh athbhreithniú bainistíochta (9.3) leis',
+  'Er staat al een managementreview in dit deck':
+      'Tá athbhreithniú bainistíochta sa deck seo cheana féin',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Ionchur (9.3.2)\n\n- **a.** Stádas na ngníomhartha ó athbhreithnithe bainistíochta roimhe seo\n- **b.** Athruithe ar shaincheisteanna inmheánacha agus seachtracha a bhaineann leis an gcóras bainistíochta\n- **c.** Athruithe ar riachtanais agus ionchais na bpáirtithe leasmhara\n- **d.** Feidhmíocht agus éifeachtacht — {p}% curtha i bhfeidhm ({impl}/{app} rialú infheidhme)\n    - Treochtaí i neamhréireachtaí agus i ngníomhartha ceartaitheacha\n    - Torthaí faireacháin agus tomhais\n    - Torthaí iniúchóireachta\n- **e.** Leordhóthanacht na n-acmhainní\n- **f.** Éifeachtacht na ngníomhartha i leith rioscaí agus deiseanna\n- **g.** Deiseanna feabhsúcháin',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Aschur (9.3.3)\n\n- Cinntí faoi dheiseanna feabhsúcháin leanúnaigh\n- Cinntí faoi aon athruithe ar an gcóras bainistíochta\n- Riachtanais acmhainní\n\n_Líon isteach na cinntí, na gníomhartha agus na húinéirí thíos._',
+  'Procesverbetering: DMADV-project': 'Feabhsú próisis: tionscadal DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Creat DMADV chun próiseas nua a dhearadh agus a fhíorú.',
+  'Procesverbetering: Kaizen-project': 'Feabhsú próisis: tionscadal Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Tionscadal feabhsúcháin dlúth le céimeanna Pleanála, Déanta agus Seiceála.',
+  'Procesverbetering: A3-project': 'Feabhsú próisis: tionscadal A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Creat A3 le haghaidh faidhbe, anailíse agus gníomhartha feabhsúcháin.',
+  'Procesverbetering: 8D-project': 'Feabhsú próisis: tionscadal 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Creat 8D le haghaidh cur síos ar fhadhb, cúiseanna agus daingnithe.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Tuairiscigh dul chun cinn córais bhainistíochta ISO (27001/9001/42001): stádas de réir gach rialaithe agus forbhreathnú dul chun cinn díorthaithe. Múchta de réir réamhshocraithe; cuir an breiseán ar siúl chun an cineál sleamhnáin a úsáid.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modúl ar siúl. Tá an t-innéacs ISO ar fáil go logánta ({n} rialú thar trí chaighdeán); na huimhreacha agus na teidil ghearra amháin, ní téacs an chaighdeáin.',
+  'Beheersmaatregel-status': 'Stádas na rialuithe',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Innéacs na gclásal 4–10 amháin (28 fo-chlásal + teidil ghearra). Níl Annex A ag ISO 9001. NÍL téacs an chaighdeáin ceangailte.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Innéacs Annex A amháin (38 aitheantóir rialaithe + teidil ghearra) agus na naoi gceannteideal cuspóra A.2–A.10. NÍL téacs an chaighdeáin ceangailte.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Innéacs Annex A amháin (93 aitheantóir rialaithe + teidil ghearra) agus na ceithre cheannteideal téama. NÍL téacs an chaighdeáin ceangailte.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Stádas cur i bhfeidhm de réir gach rialaithe de chaighdeán ISO (27001/9001/42001). Luchtaigh na rialuithe ó chaighdeán agus líon isteach stádas, úinéir agus fianaise.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Cóipcheart ISO — innéacs mar thagairt fhíorasach, téacs an chaighdeáin gan chur san áireamh',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Cruthaíonn nó athnuann sé sleamhnán forbhreathnaithe leis an dul chun cinn de réir rannáin (díorthaithe ó gach sleamhnán rialaithe).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Cuireann sé rialuithe caighdeáin ISO leis (an t-innéacs amháin; aitheantóirí nua amháin).',
+  'Alle secties': 'Gach rannán',
+  'Beheersmaatregel': 'Rialú',
+  'Beheersmaatregel toevoegen': 'Cuir rialú leis',
+  'Beheersmaatregelen laden…': 'Luchtaigh rialuithe…',
+  'Genereer voortgangsoverzicht': 'Gin forbhreathnú ar an dul chun cinn',
+  'Geïmplementeerd': 'Curtha i bhfeidhm',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Eagraíochtúil (A.5)',
+  'Kies een norm': 'Roghnaigh caighdeán',
+  'Managementsysteem': 'Córas bainistíochta',
+  'Niet gescoord': 'Gan rátáil',
+  'Niveau': 'Leibhéal',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Níl aon sleamhnán rialaithe le hachoimriú go fóill',
+  'Sectie': 'Rannán',
+  'Streefdatum': 'Spriocdháta',
+  'Van toepassing': 'Infheidhme',
+  'Voortgang': 'Dul chun cinn',
+  'Voortgang managementsysteem': 'Dul chun cinn an chórais bainistíochta',
+  'Voortgangsoverzicht bijgewerkt':
+      'Nuashonraíodh an forbhreathnú ar an dul chun cinn',
+  'Welk deel?': 'Cén chuid?',
+  'beheersmaatregelen geladen': 'rialú luchtaithe',
+  'geïmplementeerd': 'curtha i bhfeidhm',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modúl ar siúl. Tá croí ríomhaireachta, leaganacha amach sleamhnán agus teimpléid ar fáil go háitiúil ({n} fachtóir cárta rialaithe).',
   'SIPOC-procesoverzicht': 'Forléargas ar phróiseas SIPOC',
@@ -1813,6 +1887,18 @@ const _dutchSourceAddGa = <String, String>{
       'Sainigh raon feidhme agus spleáchais próisis trí sholáthraithe, ionchuir, príomhchéimeanna, aschuir agus custaiméirí.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Uirlisí le haghaidh feabhsú próiseas (SIPOC, DMAIC, Kaizen agus A3). Múchta de réir réamhshocraithe; cumasaigh an breiseán chun na teimpléid agus leaganacha amach sleamhnán gaolmhara a úsáid.',
+  'Videovergaderingen': 'Físchruinnithe',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Glac páirt i gcruinnithe físe agus déan cur i láthair ó OciDeck le comhéadan dá chuid féin: na rannpháirtithe in aice le do sleamhnán, ní i bhfuinneog feidhmchláir eile. Bring-your-own-server (Jitsi nó Matrix); ní óstálann OciDeck aon rud agus coinníonn sé sonraí an chomhrá amach ón IS. Leanfaidh an nasc le seirbhís chruinnithe i leagan sa todhchaí.',
+  'Videovergadering': 'Físchruinniú',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Níl aon chruinniú gníomhach ann fós. Cuirfear an nasc le seirbhís chruinnithe leis i leagan sa todhchaí.',
+  'Dempen opheffen': 'Dí-bhalbhaigh',
+  'Dempen': 'Balbhaigh',
+  'Camera aan': 'Ceamara ar siúl',
+  'Camera uit': 'Ceamara as',
+  'Scherm delen': 'Comhroinn an scáileán',
+  'Vergadering verlaten': 'Fág an cruinniú',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Tá an leabharlann íomhánna rómhór; ní thaispeántar ach na híomhánna is nuaí.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

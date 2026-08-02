@@ -731,6 +731,78 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Voortgang per sectie': 'Fuortgong per seksje',
+  'Nog te doen': 'Noch te dwaan',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Fuortgongsoersjoch en -grafyk bywurke',
+  'Genereer managementreview (9.3)': 'Managementbeoardieling generearje (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Foeget in ynfolde sjabloan foar de managementbeoardieling (ISO-klausule 9.3) ta, mei de aktuele fuortgong deryn.',
+  'Managementreview (clausule 9.3) — Input':
+      'Managementbeoardieling (klausule 9.3) — Ynfier',
+  'Managementreview (clausule 9.3) — Output':
+      'Managementbeoardieling (klausule 9.3) — Utfier',
+  'Managementreview (9.3) toegevoegd': 'Managementbeoardieling (9.3) tafoege',
+  'Er staat al een managementreview in dit deck':
+      'Yn dit deck stiet al in managementbeoardieling',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Ynfier (9.3.2)\n\n- **a.** Status fan aksjes út eardere managementbeoardielingen\n- **b.** Feroarings yn ynterne en eksterne ûnderwerpen dy\'t it behearsysteem reitsje\n- **c.** Feroarings yn behoeften en ferwachtings fan belanghawwenden\n- **d.** Prestaasjes en doeltreffendheid — {p}% ymplementearre ({impl}/{app} behearsmaatregels fan tapassing)\n    - Trends yn ôfwikings en korrizjearjende maatregels\n    - Monitoring- en mjittingsresultaten\n    - Auditresultaten\n- **e.** Genôchheid fan middels\n- **f.** Doeltreffendheid fan maatregels tsjin risiko\'s en kânsen\n- **g.** Kânsen foar ferbettering',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Utfier (9.3.3)\n\n- Beslissings oer kânsen foar trochgeande ferbettering\n- Beslissings oer eventuele feroarings oan it behearsysteem\n- Nedige middels\n\n_Folje hjirûnder de beslissings, aksjes en eigners yn._',
+  'Procesverbetering: DMADV-project': 'Prosesferbettering: DMADV-projekt',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV skelet foar it ûntwerpen en ferifiearjen fan in nij proses.',
+  'Procesverbetering: Kaizen-project': 'Prosesferbettering: Kaizen-projekt',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompakt ferbetteringsprojekt mei Plan, Do en Kontrolearje fazen.',
+  'Procesverbetering: A3-project': 'Prosesferbettering: A3-projekt',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 skelet foar probleem, analyze en ferbettering aksjes.',
+  'Procesverbetering: 8D-project': 'Prosesferbettering: 8D-projekt',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D skelet foar probleem beskriuwing, oarsaken en assurance.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Rapportearje de fuortgong fan in ISO-behearsysteem (27001/9001/42001): status per behearsmaatregel en in ôflaat fuortgongsoersjoch. Standert út; set de utwreiding oan om it slidetype te brûken.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Module oan. De ISO-yndeks is lokaal beskikber ({n} behearsmaatregels oer trije noarmen); allinnich de nûmers en koarte titels, net de noarmtekst.',
+  'Beheersmaatregel-status': 'Behearmaatregelstatus',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Allinnich de klausule-yndeks 4–10 (28 sub-klausules + koarte titels). ISO 9001 hat gjin Annex A. De noarmtekst is NET bondele.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Allinnich de yndeks fan Annex A (38 kontrole-id\'s + koarte titels) en de njoggen doelstellingskoppen A.2–A.10. De noarmtekst is NET bondele.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Allinnich de yndeks fan Annex A (93 kontrole-id\'s + koarte titels) en de fjouwer tema-koppen. De noarmtekst is NET bondele.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'De ymplementaasjestatus per behearsmaatregel fan in ISO-noarm (27001/9001/42001). Laad de kontrôles út in noarm en folje status, eigner en bewiis yn.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO-copyright — yndeks as feitreferinsje, noarmtekst net meilevere',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Makket of fernijt in oersjochdia mei de fuortgong per seksje (ôflaat út alle behearsmaatregeldia\'s).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Foeget de behearsmaatregels fan in ISO-noarm ta (allinnich de yndeks; allinnich nije id\'s).',
+  'Alle secties': 'Alle seksjes',
+  'Beheersmaatregel': 'Behearsmaatregel',
+  'Beheersmaatregel toevoegen': 'Behearsmaatregel tafoegje',
+  'Beheersmaatregelen laden…': 'Behearsmaatregels lade…',
+  'Genereer voortgangsoverzicht': 'Fuortgongsoersjoch generearje',
+  'Geïmplementeerd': 'Ymplementearre',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisatoarysk (A.5)',
+  'Kies een norm': 'Kies in noarm',
+  'Managementsysteem': 'Behearsysteem',
+  'Niet gescoord': 'Net skoard',
+  'Niveau': 'Nivo',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Noch gjin behearsmaatregeldia\'s om gear te fetsjen',
+  'Sectie': 'Seksje',
+  'Streefdatum': 'Doeldatum',
+  'Van toepassing': 'Fan tapassing',
+  'Voortgang': 'Fuortgong',
+  'Voortgang managementsysteem': 'Fuortgong behearsysteem',
+  'Voortgangsoverzicht bijgewerkt': 'Fuortgongsoersjoch bywurke',
+  'Welk deel?': 'Hokker diel?',
+  'beheersmaatregelen geladen': 'behearsmaatregels laden',
+  'geïmplementeerd': 'ymplementearre',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Module oan. Rekkenkearn, dia-yndielingen en sjabloanen binne lokaal beskikber ({n} kontrôlekaartfaktoaren).',
   'SIPOC-procesoverzicht': 'SIPOC-prosesoersjoch',
@@ -738,6 +810,18 @@ const _dutchSourceAddFy = {
       'Bepaal de omfang en ôfhinklikheden fan in proses oan ’e hân fan leveransiers, ynfier, haadstappen, útfier en klanten.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Helpmiddels foar prosesferbettering (SIPOC, DMAIC, Kaizen en A3). Standert út; skeakelje de útwreiding yn om de byhearrende sjabloanen en dia-yndielingen te brûken.',
+  'Videovergaderingen': 'Fideofergaderingen',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Doch mei oan fideofergaderingen en presintearje fanút OciDeck mei in eigen ynterface: de dielnimmers njonken jo slide, net yn it finster fan in oare app. Bring-your-own-server (Jitsi of Matrix); OciDeck hostet neat en hâldt de peteargegevens bûten AI. De ferbining mei in gearkomstetsjinst folget yn in folgjende ferzje.',
+  'Videovergadering': 'Fideofergadering',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Noch gjin aktive gearkomste. It ferbinen mei in gearkomstetsjinst wurdt yn in folgjende ferzje tafoege.',
+  'Dempen opheffen': 'Lûd oansette',
+  'Dempen': 'Lûd útsette',
+  'Camera aan': 'Kamera oan',
+  'Camera uit': 'Kamera út',
+  'Scherm delen': 'Skerm diele',
+  'Vergadering verlaten': 'Gearkomste ferlitte',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'De ôfbyldingsbibleteek is te grut; allinnich de nijste ôfbyldings wurde toand.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

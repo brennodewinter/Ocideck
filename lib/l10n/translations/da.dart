@@ -1770,6 +1770,78 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Voortgang per sectie': 'Fremskridt pr. sektion',
+  'Nog te doen': 'Mangler',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Fremskridtsoversigt og -diagram opdateret',
+  'Genereer managementreview (9.3)': 'Generér ledelsens evaluering (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Tilføjer en forududfyldt skabelon til ledelsens evaluering (ISO-punkt 9.3) med det aktuelle fremskridt.',
+  'Managementreview (clausule 9.3) — Input':
+      'Ledelsens evaluering (punkt 9.3) — Input',
+  'Managementreview (clausule 9.3) — Output':
+      'Ledelsens evaluering (punkt 9.3) — Output',
+  'Managementreview (9.3) toegevoegd': 'Ledelsens evaluering (9.3) tilføjet',
+  'Er staat al een managementreview in dit deck':
+      'Dette deck indeholder allerede en ledelsesevaluering',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Input (9.3.2)\n\n- **a.** Status på handlinger fra tidligere ledelsesevalueringer\n- **b.** Ændringer i interne og eksterne forhold, der påvirker ledelsessystemet\n- **c.** Ændringer i interessenternes behov og forventninger\n- **d.** Præstation og effektivitet — {p}% implementeret ({impl}/{app} kontroller relevante)\n    - Tendenser i afvigelser og korrigerende handlinger\n    - Resultater af overvågning og måling\n    - Auditresultater\n- **e.** Ressourcernes tilstrækkelighed\n- **f.** Effektiviteten af handlinger over for risici og muligheder\n- **g.** Muligheder for forbedring',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Output (9.3.3)\n\n- Beslutninger om muligheder for løbende forbedring\n- Beslutninger om eventuelle ændringer af ledelsessystemet\n- Ressourcebehov\n\n_Udfyld beslutninger, handlinger og ansvarlige nedenfor._',
+  'Procesverbetering: DMADV-project': 'Procesforbedring: DMADV-projekt',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV skelet til at designe og verificere en ny proces.',
+  'Procesverbetering: Kaizen-project': 'Procesforbedring: Kaizen-projekt',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompakt forbedringsprojekt med Plan, Do og Check faser.',
+  'Procesverbetering: A3-project': 'Procesforbedring: A3-projekt',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 skelet til problem-, analyse- og forbedringshandlinger.',
+  'Procesverbetering: 8D-project': 'Procesforbedring: 8D-projekt',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D skelet til problembeskrivelse, årsager og sikkerhed.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Rapportér fremdriften for et ISO-ledelsessystem (27001/9001/42001): status pr. kontrol og et afledt fremdriftsoverblik. Slået fra som standard; aktivér udvidelsen for at bruge slidetypen.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modul aktivt. ISO-indekset er tilgængeligt lokalt ({n} kontroller på tværs af tre standarder); kun numrene og de korte titler, ikke standardteksten.',
+  'Beheersmaatregel-status': 'Kontrolstatus',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Kun klausulindekset 4–10 (28 underklausuler + korte titler). ISO 9001 har ingen Annex A. Standardteksten er IKKE inkluderet.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Kun Annex A-indekset (38 kontrol-id\'er + korte titler) og de ni måloverskrifter A.2–A.10. Standardteksten er IKKE inkluderet.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Kun Annex A-indekset (93 kontrol-id\'er + korte titler) og de fire temaoverskrifter. Standardteksten er IKKE inkluderet.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Implementeringsstatus pr. kontrol i en ISO-standard (27001/9001/42001). Indlæs kontrollerne fra en standard, og udfyld status, ejer og bevis.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO-ophavsret — indeks som faktuel reference, standardtekst ikke inkluderet',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Opretter eller opdaterer et oversigtsdias med fremdriften pr. afsnit (afledt af alle kontroldias).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Tilføjer kontrollerne fra en ISO-standard (kun indekset; kun nye id\'er).',
+  'Alle secties': 'Alle afsnit',
+  'Beheersmaatregel': 'Kontrol',
+  'Beheersmaatregel toevoegen': 'Tilføj kontrol',
+  'Beheersmaatregelen laden…': 'Indlæs kontroller…',
+  'Genereer voortgangsoverzicht': 'Generér fremdriftsoversigt',
+  'Geïmplementeerd': 'Implementeret',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisatorisk (A.5)',
+  'Kies een norm': 'Vælg en standard',
+  'Managementsysteem': 'Ledelsessystem',
+  'Niet gescoord': 'Ikke vurderet',
+  'Niveau': 'Niveau',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Ingen kontroldias at opsummere endnu',
+  'Sectie': 'Afsnit',
+  'Streefdatum': 'Måldato',
+  'Van toepassing': 'Relevant',
+  'Voortgang': 'Fremdrift',
+  'Voortgang managementsysteem': 'Ledelsessystemets fremdrift',
+  'Voortgangsoverzicht bijgewerkt': 'Fremdriftsoversigt opdateret',
+  'Welk deel?': 'Hvilken del?',
+  'beheersmaatregelen geladen': 'kontroller indlæst',
+  'geïmplementeerd': 'implementeret',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul slået til. Beregningskerne, diaslayouts og skabeloner er tilgængelige lokalt ({n} kontrolkortfaktorer).',
   'SIPOC-procesoverzicht': 'SIPOC-procesoversigt',
@@ -1777,6 +1849,18 @@ const _dutchSourceAddDa = <String, String>{
       'Fastlæg et processes omfang og afhængigheder gennem leverandører, input, hovedtrin, output og kunder.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Værktøjer til procesforbedring (SIPOC, DMAIC, Kaizen og A3). Slået fra som standard; aktivér udvidelsen for at bruge de tilhørende skabeloner og diaslayouts.',
+  'Videovergaderingen': 'Videomøder',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Deltag i videomøder og præsentér fra OciDeck med en dedikeret grænseflade: deltagerne ved siden af dit slide, ikke i et andet programs vindue. Bring-your-own-server (Jitsi eller Matrix); OciDeck hoster ingenting og holder samtaledataene væk fra AI. Forbindelsen til en mødetjeneste følger i en fremtidig version.',
+  'Videovergadering': 'Videomøde',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Der er endnu ikke noget aktivt møde. Forbindelsen til en mødetjeneste tilføjes i en fremtidig version.',
+  'Dempen opheffen': 'Slå lyd til',
+  'Dempen': 'Slå lyd fra',
+  'Camera aan': 'Kamera til',
+  'Camera uit': 'Kamera fra',
+  'Scherm delen': 'Del skærm',
+  'Vergadering verlaten': 'Forlad mødet',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Billedbiblioteket er for stort; kun de nyeste billeder vises.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

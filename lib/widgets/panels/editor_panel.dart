@@ -19,6 +19,7 @@ import '../../state/editor_provider.dart';
 import '../../models/chart.dart';
 import '../../services/display_window_service.dart';
 import '../../state/info_safety_provider.dart';
+import '../../state/managementsysteem_provider.dart';
 import '../../state/procesverbetering_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
@@ -66,6 +67,7 @@ class EditorPanel extends ConsumerWidget {
     // toevoegen', so both places offer exactly the same types.
     final revealed = ref.watch(infoSafetyRevealProvider);
     final revealProcesverbetering = ref.watch(procesverbeteringRevealProvider);
+    final revealManagementsysteem = ref.watch(managementsysteemRevealProvider);
 
     // Zoekpaden voor de afbeeldingencarousel: projectmap eerst, dan alle
     // bibliotheken als (recursief gescande) zoekwortels.
@@ -95,6 +97,7 @@ class EditorPanel extends ConsumerWidget {
             defaultProfile: settings.themeProfile,
             revealInfoSafety: revealed,
             revealProcesverbetering: revealProcesverbetering,
+            revealManagementsysteem: revealManagementsysteem,
             onTypeChanged: (newType) {
               if (newType == slide.type) return;
               update(_convertSlideType(slide, newType));
@@ -412,4 +415,5 @@ const Map<SlideType, IconData> slideTypeIcons = {
   SlideType.tree: Icons.account_tree_outlined,
   SlideType.flow: Icons.alt_route,
   SlideType.phaseGate: Icons.door_front_door_outlined,
+  SlideType.controlStatus: Icons.fact_check_outlined,
 };

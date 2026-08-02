@@ -1773,6 +1773,78 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Voortgang per sectie': 'Napredek po razdelkih',
+  'Nog te doen': 'Preostalo',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Pregled in graf napredka posodobljena',
+  'Genereer managementreview (9.3)': 'Ustvari vodstveni pregled (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Doda vnaprej izpolnjeno predlogo za vodstveni pregled (točka ISO 9.3) s trenutnim napredkom.',
+  'Managementreview (clausule 9.3) — Input':
+      'Vodstveni pregled (točka 9.3) — Vhodni podatki',
+  'Managementreview (clausule 9.3) — Output':
+      'Vodstveni pregled (točka 9.3) — Izhodni podatki',
+  'Managementreview (9.3) toegevoegd': 'Vodstveni pregled (9.3) dodan',
+  'Er staat al een managementreview in dit deck':
+      'Ta komplet že vsebuje vodstveni pregled',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Vhodni podatki (9.3.2)\n\n- **a.** Stanje ukrepov iz prejšnjih vodstvenih pregledov\n- **b.** Spremembe notranjih in zunanjih vprašanj, ki vplivajo na sistem vodenja\n- **c.** Spremembe potreb in pričakovanj zainteresiranih strani\n- **d.** Uspešnost in učinkovitost — {p}% uvedeno ({impl}/{app} veljavnih kontrol)\n    - Trendi neskladnosti in korektivnih ukrepov\n    - Rezultati spremljanja in merjenja\n    - Rezultati presoj\n- **e.** Ustreznost virov\n- **f.** Učinkovitost ukrepov za obvladovanje tveganj in priložnosti\n- **g.** Priložnosti za izboljšave',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Izhodni podatki (9.3.3)\n\n- Odločitve o priložnostih za nenehno izboljševanje\n- Odločitve o morebitnih spremembah sistema vodenja\n- Potrebe po virih\n\n_Spodaj vnesite odločitve, ukrepe in odgovorne osebe._',
+  'Procesverbetering: DMADV-project': 'Izboljšanje procesa: projekt DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV okostje za načrtovanje in preverjanje novega procesa.',
+  'Procesverbetering: Kaizen-project': 'Izboljšanje procesa: projekt Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompakten projekt izboljšav s fazami načrtovanja, izvajanja in preverjanja.',
+  'Procesverbetering: A3-project': 'Izboljšanje procesa: projekt A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3 okostje za težave, analize in izboljšave.',
+  'Procesverbetering: 8D-project': 'Izboljšanje procesa: 8D projekt',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D skelet za opis težave, vzroke in zagotovilo.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Poročajte o napredku sistema upravljanja ISO (27001/9001/42001): stanje po posamezni kontroli in izpeljan pregled napredka. Privzeto izklopljeno; vklopite razširitev za uporabo vrste diapozitiva.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modul vklopljen. Kazalo ISO je na voljo lokalno ({n} kontrol v treh standardih); samo številke in kratki naslovi, ne besedilo standarda.',
+  'Beheersmaatregel-status': 'Stanje kontrol',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Samo kazalo klavzul 4–10 (28 podklavzul + kratki naslovi). ISO 9001 nima Annex A. Besedilo standarda NI vključeno.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Samo kazalo Annex A (38 identifikatorjev kontrol + kratki naslovi) in devet naslovov ciljev A.2–A.10. Besedilo standarda NI vključeno.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Samo kazalo Annex A (93 identifikatorjev kontrol + kratki naslovi) in štirje tematski naslovi. Besedilo standarda NI vključeno.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Stanje uvedbe za vsako kontrolo standarda ISO (27001/9001/42001). Naložite kontrole iz standarda ter vnesite stanje, lastnika in dokazilo.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Avtorske pravice ISO — kazalo kot dejansko sklicevanje, besedilo standarda ni vključeno',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Ustvari ali osveži pregledno prosojnico z napredkom po razdelkih (izpeljano iz vseh prosojnic s kontrolami).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Doda kontrole standarda ISO (samo kazalo; samo novi identifikatorji).',
+  'Alle secties': 'Vsi razdelki',
+  'Beheersmaatregel': 'Kontrola',
+  'Beheersmaatregel toevoegen': 'Dodaj kontrolo',
+  'Beheersmaatregelen laden…': 'Naloži kontrole…',
+  'Genereer voortgangsoverzicht': 'Ustvari pregled napredka',
+  'Geïmplementeerd': 'Uvedeno',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizacijske (A.5)',
+  'Kies een norm': 'Izberite standard',
+  'Managementsysteem': 'Sistem upravljanja',
+  'Niet gescoord': 'Ni ocenjeno',
+  'Niveau': 'Raven',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Zaenkrat še ni prosojnic s kontrolami za povzetek',
+  'Sectie': 'Razdelek',
+  'Streefdatum': 'Ciljni datum',
+  'Van toepassing': 'Velja',
+  'Voortgang': 'Napredek',
+  'Voortgang managementsysteem': 'Napredek sistema upravljanja',
+  'Voortgangsoverzicht bijgewerkt': 'Pregled napredka posodobljen',
+  'Welk deel?': 'Kateri del?',
+  'beheersmaatregelen geladen': 'naloženih kontrol',
+  'geïmplementeerd': 'uvedeno',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul je vključen. Računsko jedro, postavitve diapozitivov in predloge so na voljo lokalno ({n} faktorjev kontrolne karte).',
   'SIPOC-procesoverzicht': 'Pregled procesa SIPOC',
@@ -1780,6 +1852,18 @@ const _dutchSourceAddSl = <String, String>{
       'Določite obseg in odvisnosti procesa prek dobaviteljev, vhodov, glavnih korakov, izhodov in strank.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Orodja za izboljševanje procesov (SIPOC, DMAIC, Kaizen in A3). Privzeto izklopljena; omogočite razširitev za uporabo povezanih predlog in postavitev diapozitivov.',
+  'Videovergaderingen': 'Videosestanki',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Pridružite se videosestankom in predstavljajte iz OciDecka z lastnim vmesnikom: udeleženci ob vašem diapozitivu, ne v oknu druge aplikacije. Bring-your-own-server (Jitsi ali Matrix); OciDeck ničesar ne gosti in podatke pogovorov ohranja stran od UI. Povezava s storitvijo za sestanke bo dodana v prihodnji različici.',
+  'Videovergadering': 'Videosestanek',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Še ni aktivnega sestanka. Povezava s storitvijo za sestanke bo dodana v prihodnji različici.',
+  'Dempen opheffen': 'Vklopi zvok',
+  'Dempen': 'Izklopi zvok',
+  'Camera aan': 'Vklopi kamero',
+  'Camera uit': 'Izklopi kamero',
+  'Scherm delen': 'Deli zaslon',
+  'Vergadering verlaten': 'Zapusti sestanek',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Knjižnica slik je prevelika; prikazane so samo najnovejše slike.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

@@ -1793,6 +1793,80 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Voortgang per sectie': 'Progress skont it-taqsima',
+  'Nog te doen': 'Fadal',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'L-istampa ġenerali u l-graff tal-progress ġew aġġornati',
+  'Genereer managementreview (9.3)': 'Iġġenera reviżjoni mill-maniġment (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Iżid mudell mimli minn qabel għar-reviżjoni mill-maniġment (klawżola ISO 9.3), bil-progress attwali.',
+  'Managementreview (clausule 9.3) — Input':
+      'Reviżjoni mill-maniġment (klawżola 9.3) — Input',
+  'Managementreview (clausule 9.3) — Output':
+      'Reviżjoni mill-maniġment (klawżola 9.3) — Output',
+  'Managementreview (9.3) toegevoegd':
+      'Ir-reviżjoni mill-maniġment (9.3) miżjuda',
+  'Er staat al een managementreview in dit deck':
+      'Dan id-deck diġà fih reviżjoni mill-maniġment',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Input (9.3.2)\n\n- **a.** L-istat tal-azzjonijiet minn reviżjonijiet mill-maniġment preċedenti\n- **b.** Bidliet fil-kwistjonijiet interni u esterni li jaffettwaw is-sistema ta\' ġestjoni\n- **c.** Bidliet fil-ħtiġijiet u l-aspettattivi tal-partijiet interessati\n- **d.** Prestazzjoni u effettività — {p}% implimentat ({impl}/{app} kontrolli applikabbli)\n    - Xejriet fin-nuqqasijiet ta\' konformità u l-azzjonijiet korrettivi\n    - Riżultati tal-monitoraġġ u l-kejl\n    - Riżultati tal-verifiki\n- **e.** L-adegwatezza tar-riżorsi\n- **f.** L-effettività tal-azzjonijiet meħuda kontra r-riskji u l-opportunitajiet\n- **g.** Opportunitajiet għal titjib',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Output (9.3.3)\n\n- Deċiżjonijiet dwar opportunitajiet ta\' titjib kontinwu\n- Deċiżjonijiet dwar kwalunkwe bidla fis-sistema ta\' ġestjoni\n- Ħtiġijiet ta\' riżorsi\n\n_Imla d-deċiżjonijiet, l-azzjonijiet u s-sidien hawn taħt._',
+  'Procesverbetering: DMADV-project': 'Titjib tal-proċess: proġett DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Skeletru DMADV għat-tfassil u l-verifika ta \'proċess ġdid.',
+  'Procesverbetering: Kaizen-project': 'Titjib tal-proċess: Proġett Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Proġett ta’ titjib kompatt bil-fażijiet ta’ Ippjana, Tagħmel u Iċċekkja.',
+  'Procesverbetering: A3-project': 'Titjib tal-proċess: proġett A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Skeletru A3 għal azzjonijiet ta\' problema, analiżi u titjib.',
+  'Procesverbetering: 8D-project': 'Titjib tal-proċess: proġett 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Skeletru 8D għal deskrizzjoni tal-problema, kawżi u assigurazzjoni.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Irrapporta l-progress ta\' sistema ta\' ġestjoni ISO (27001/9001/42001): l-istatus għal kull kontroll u ħarsa ġenerali tal-progress miksuba. Mitfi b\'mod awtomatiku; ixgħel l-estensjoni biex tuża t-tip ta\' slide.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modulu mixgħul. L-indiċi ISO huwa disponibbli lokalment ({n} kontrolli fi tliet standards); in-numri u t-titli qosra biss, mhux it-test tal-istandard.',
+  'Beheersmaatregel-status': 'Status tal-kontrolli',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'L-indiċi tal-klawżoli 4–10 biss (28 sottoklawżola + titli qosra). L-ISO 9001 m\'għandhiex Annex A. It-test tal-istandard MHUX inkluż.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'L-indiċi tal-Annex A biss (38 id ta\' kontroll + titli qosra) u d-disa\' intestaturi tal-objettivi A.2–A.10. It-test tal-istandard MHUX inkluż.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'L-indiċi tal-Annex A biss (93 id ta\' kontroll + titli qosra) u l-erba\' intestaturi tematiċi. It-test tal-istandard MHUX inkluż.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'L-istatus tal-implimentazzjoni għal kull kontroll ta\' standard ISO (27001/9001/42001). Għabbi l-kontrolli minn standard u imla l-istatus, is-sid u l-evidenza.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Drittijiet tal-awtur ISO — indiċi bħala referenza fattwali, test tal-istandard mhux inkluż',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Joħloq jew iġedded slide ta\' ħarsa ġenerali bil-progress skont is-sezzjoni (miksub mis-slides tal-kontrolli kollha).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Iżid il-kontrolli ta\' standard ISO (l-indiċi biss; id ġodda biss).',
+  'Alle secties': 'Is-sezzjonijiet kollha',
+  'Beheersmaatregel': 'Kontroll',
+  'Beheersmaatregel toevoegen': 'Żid kontroll',
+  'Beheersmaatregelen laden…': 'Għabbi l-kontrolli…',
+  'Genereer voortgangsoverzicht': 'Iġġenera ħarsa ġenerali tal-progress',
+  'Geïmplementeerd': 'Implimentat',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizzattivi (A.5)',
+  'Kies een norm': 'Agħżel standard',
+  'Managementsysteem': 'Sistema ta\' ġestjoni',
+  'Niet gescoord': 'Mhux ivvalutat',
+  'Niveau': 'Livell',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Għad m\'hemmx slides tal-kontrolli x\'jinġabru fil-qosor',
+  'Sectie': 'Sezzjoni',
+  'Streefdatum': 'Data mira',
+  'Van toepassing': 'Applikabbli',
+  'Voortgang': 'Progress',
+  'Voortgang managementsysteem': 'Progress tas-sistema ta\' ġestjoni',
+  'Voortgangsoverzicht bijgewerkt':
+      'Il-ħarsa ġenerali tal-progress ġiet aġġornata',
+  'Welk deel?': 'Liema parti?',
+  'beheersmaatregelen geladen': 'kontrolli mgħobbija',
+  'geïmplementeerd': 'implimentat',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Il-modulu attiv. Il-qalba tal-kalkolu, it-taqsimiet ta’ slides u l-mudelli huma disponibbli lokalment ({n} fatturi ta’ chart ta’ kontroll).',
   'SIPOC-procesoverzicht': 'Ħarsa ġenerali lejn il-proċess SIPOC',
@@ -1800,6 +1874,18 @@ const _dutchSourceAddMt = <String, String>{
       'Iddefinixxi l-ambitu u d-dipendenzi ta’ proċess permezz ta’ fornituri, inputs, passi ewlenin, outputs u klijenti.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Għodod għat-titjib tal-proċessi (SIPOC, DMAIC, Kaizen u A3). Mitfija b’mod awtomatiku; attiva l-estensjoni biex tuża l-mudelli u t-taqsimiet ta’ slides relatati.',
+  'Videovergaderingen': 'Laqgħat bil-vidjo',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Ingħaqad ma\' laqgħat bil-vidjo u ppreżenta minn OciDeck b\'interfaċċja tiegħu stess: il-parteċipanti maġenb l-islajd tiegħek, mhux fit-tieqa ta\' app oħra. Bring-your-own-server (Jitsi jew Matrix); OciDeck ma jospita xejn u jżomm id-data tal-konverżazzjoni \'l bogħod mill-IA. Il-konnessjoni ma\' servizz tal-laqgħat se tiżdied f\'verżjoni futura.',
+  'Videovergadering': 'Laqgħa bil-vidjo',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Għad m\'hemm l-ebda laqgħa attiva. Il-konnessjoni ma\' servizz tal-laqgħat se tiżdied f\'verżjoni futura.',
+  'Dempen opheffen': 'Neħħi s-silenzju',
+  'Dempen': 'Silenzja',
+  'Camera aan': 'Ixgħel il-kamera',
+  'Camera uit': 'Itfi l-kamera',
+  'Scherm delen': 'Aqsam l-iskrin',
+  'Vergadering verlaten': 'Oħroġ mil-laqgħa',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Il-librerija tal-immaġni hija kbira wisq; jintwerew biss l-aktar immaġni riċenti.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

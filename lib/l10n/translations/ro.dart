@@ -1788,6 +1788,83 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Voortgang per sectie': 'Progres pe secțiuni',
+  'Nog te doen': 'Rămas',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Rezumatul și graficul de progres au fost actualizate',
+  'Genereer managementreview (9.3)':
+      'Generează analiza efectuată de management (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Adaugă un șablon precompletat pentru analiza efectuată de management (punctul ISO 9.3), cu progresul actual.',
+  'Managementreview (clausule 9.3) — Input':
+      'Analiza efectuată de management (punctul 9.3) — Elemente de intrare',
+  'Managementreview (clausule 9.3) — Output':
+      'Analiza efectuată de management (punctul 9.3) — Elemente de ieșire',
+  'Managementreview (9.3) toegevoegd':
+      'Analiza efectuată de management (9.3) a fost adăugată',
+  'Er staat al een managementreview in dit deck':
+      'Acest deck conține deja o analiză efectuată de management',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Elemente de intrare (9.3.2)\n\n- **a.** Stadiul acțiunilor din analizele efectuate de management anterioare\n- **b.** Modificări ale aspectelor interne și externe care afectează sistemul de management\n- **c.** Modificări ale nevoilor și așteptărilor părților interesate\n- **d.** Performanță și eficacitate — {p}% implementat ({impl}/{app} controale aplicabile)\n    - Tendințe ale neconformităților și acțiunilor corective\n    - Rezultatele monitorizării și măsurării\n    - Rezultatele auditurilor\n- **e.** Adecvarea resurselor\n- **f.** Eficacitatea acțiunilor întreprinse față de riscuri și oportunități\n- **g.** Oportunități de îmbunătățire',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Elemente de ieșire (9.3.3)\n\n- Decizii privind oportunitățile de îmbunătățire continuă\n- Decizii privind eventualele modificări ale sistemului de management\n- Necesarul de resurse\n\n_Completați mai jos deciziile, acțiunile și responsabilii._',
+  'Procesverbetering: DMADV-project': 'Îmbunătățirea procesului: proiect DMADV',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'Schelet DMADV pentru proiectarea și verificarea unui nou proces.',
+  'Procesverbetering: Kaizen-project':
+      'Îmbunătățirea procesului: proiect Kaizen',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Proiect compact de îmbunătățire cu faze de Planificare, Efectuare și Verificare.',
+  'Procesverbetering: A3-project': 'Îmbunătățirea procesului: proiect A3',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'Schelet A3 pentru probleme, analize și acțiuni de îmbunătățire.',
+  'Procesverbetering: 8D-project': 'Îmbunătățirea procesului: proiect 8D',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      'Schelet 8D pentru descrierea problemei, cauze și asigurare.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Raportează progresul unui sistem de management ISO (27001/9001/42001): starea per control și o prezentare generală a progresului derivată. Dezactivat implicit; activează extensia pentru a folosi tipul de slide.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Modul activat. Indexul ISO este disponibil local ({n} controale în trei standarde); doar numerele și titlurile scurte, nu textul standardului.',
+  'Beheersmaatregel-status': 'Starea controalelor',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Doar indexul clauzelor 4–10 (28 de subclauze + titluri scurte). ISO 9001 nu are Annex A. Textul standardului NU este inclus.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Doar indexul Annex A (38 de identificatori de control + titluri scurte) și cele nouă titluri de obiective A.2–A.10. Textul standardului NU este inclus.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Doar indexul Annex A (93 de identificatori de control + titluri scurte) și cele patru titluri tematice. Textul standardului NU este inclus.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Starea de implementare per control a unui standard ISO (27001/9001/42001). Încarcă controalele dintr-un standard și completează starea, responsabilul și dovada.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'Drepturi de autor ISO — index ca referință factuală, textul standardului neinclus',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Creează sau reîmprospătează un diapozitiv de ansamblu cu progresul pe secțiuni (derivat din toate diapozitivele de control).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Adaugă controalele unui standard ISO (doar indexul; doar identificatori noi).',
+  'Alle secties': 'Toate secțiunile',
+  'Beheersmaatregel': 'Control',
+  'Beheersmaatregel toevoegen': 'Adaugă control',
+  'Beheersmaatregelen laden…': 'Încarcă controalele…',
+  'Genereer voortgangsoverzicht':
+      'Generează prezentarea generală a progresului',
+  'Geïmplementeerd': 'Implementat',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organizațional (A.5)',
+  'Kies een norm': 'Alege un standard',
+  'Managementsysteem': 'Sistem de management',
+  'Niet gescoord': 'Neevaluat',
+  'Niveau': 'Nivel',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Încă nu există diapozitive de control de rezumat',
+  'Sectie': 'Secțiune',
+  'Streefdatum': 'Dată-țintă',
+  'Van toepassing': 'Aplicabil',
+  'Voortgang': 'Progres',
+  'Voortgang managementsysteem': 'Progresul sistemului de management',
+  'Voortgangsoverzicht bijgewerkt':
+      'Prezentarea generală a progresului a fost actualizată',
+  'Welk deel?': 'Ce parte?',
+  'beheersmaatregelen geladen': 'controale încărcate',
+  'geïmplementeerd': 'implementat',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Modul activat. Nucleul de calcul, aspectele diapozitivelor și șabloanele sunt disponibile local ({n} factori ai diagramei de control).',
   'SIPOC-procesoverzicht': 'Prezentare generală a procesului SIPOC',
@@ -1795,6 +1872,18 @@ const _dutchSourceAddRo = <String, String>{
       'Stabiliți domeniul de aplicare și dependențele unui proces prin furnizori, intrări, pași principali, ieșiri și clienți.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Instrumente pentru îmbunătățirea proceselor (SIPOC, DMAIC, Kaizen și A3). Dezactivate implicit; activați extensia pentru a utiliza șabloanele și aspectele de diapozitive asociate.',
+  'Videovergaderingen': 'Întâlniri video',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Alătură-te întâlnirilor video și prezintă din OciDeck cu o interfață proprie: participanții lângă slide-ul tău, nu în fereastra altei aplicații. Bring-your-own-server (Jitsi sau Matrix); OciDeck nu găzduiește nimic și ține datele conversațiilor departe de IA. Conectarea la un serviciu de întâlniri va urma într-o versiune viitoare.',
+  'Videovergadering': 'Întâlnire video',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Încă nu există nicio întâlnire activă. Conectarea la un serviciu de întâlniri va fi adăugată într-o versiune viitoare.',
+  'Dempen opheffen': 'Reactivează sunetul',
+  'Dempen': 'Dezactivează sunetul',
+  'Camera aan': 'Pornește camera',
+  'Camera uit': 'Oprește camera',
+  'Scherm delen': 'Partajează ecranul',
+  'Vergadering verlaten': 'Părăsește întâlnirea',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Biblioteca de imagini este prea mare; sunt afișate doar cele mai noi imagini.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

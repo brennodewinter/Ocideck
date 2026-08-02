@@ -1771,6 +1771,79 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Voortgang per sectie': 'Edistyminen osioittain',
+  'Nog te doen': 'Jäljellä',
+  'Voortgangsoverzicht en -grafiek bijgewerkt':
+      'Edistymiskatsaus ja -kaavio päivitetty',
+  'Genereer managementreview (9.3)': 'Luo johdon katselmus (9.3)',
+  'Voegt een ingevuld sjabloon voor de directiebeoordeling (ISO-clausule 9.3) toe, met de huidige voortgang erin.':
+      'Lisää esitäytetyn mallin johdon katselmusta varten (ISO-kohta 9.3), jossa on nykyinen edistyminen.',
+  'Managementreview (clausule 9.3) — Input':
+      'Johdon katselmus (kohta 9.3) — Lähtötiedot',
+  'Managementreview (clausule 9.3) — Output':
+      'Johdon katselmus (kohta 9.3) — Tulokset',
+  'Managementreview (9.3) toegevoegd': 'Johdon katselmus (9.3) lisätty',
+  'Er staat al een managementreview in dit deck':
+      'Tässä deckissä on jo johdon katselmus',
+  '## Input (9.3.2)\n\n- **a.** Status van acties uit eerdere directiebeoordelingen\n- **b.** Wijzigingen in interne en externe onderwerpen die het managementsysteem raken\n- **c.** Wijzigingen in behoeften en verwachtingen van belanghebbenden\n- **d.** Prestaties en doeltreffendheid — {p}% geïmplementeerd ({impl}/{app} beheersmaatregelen van toepassing)\n    - Trends in afwijkingen en corrigerende maatregelen\n    - Monitoring- en meetresultaten\n    - Auditresultaten\n- **e.** Toereikendheid van middelen\n- **f.** Doeltreffendheid van maatregelen tegen risico\'s en kansen\n- **g.** Kansen voor verbetering':
+      '## Lähtötiedot (9.3.2)\n\n- **a.** Aiempien johdon katselmusten toimenpiteiden tila\n- **b.** Muutokset sisäisissä ja ulkoisissa asioissa, jotka vaikuttavat hallintajärjestelmään\n- **c.** Muutokset sidosryhmien tarpeissa ja odotuksissa\n- **d.** Suorituskyky ja vaikuttavuus — {p}% toteutettu ({impl}/{app} soveltuvaa hallintakeinoa)\n    - Poikkeamien ja korjaavien toimenpiteiden trendit\n    - Seurannan ja mittausten tulokset\n    - Auditointien tulokset\n- **e.** Resurssien riittävyys\n- **f.** Riskeihin ja mahdollisuuksiin kohdistettujen toimenpiteiden vaikuttavuus\n- **g.** Parannusmahdollisuudet',
+  '## Output (9.3.3)\n\n- Besluiten over kansen voor continue verbetering\n- Besluiten over eventuele wijzigingen aan het managementsysteem\n- Benodigde middelen\n\n_Vul de besluiten, acties en eigenaren hieronder in._':
+      '## Tulokset (9.3.3)\n\n- Päätökset jatkuvan parantamisen mahdollisuuksista\n- Päätökset mahdollisista muutoksista hallintajärjestelmään\n- Resurssitarpeet\n\n_Täytä päätökset, toimenpiteet ja vastuuhenkilöt alle._',
+  'Procesverbetering: DMADV-project': 'Prosessin parantaminen: DMADV-projekti',
+  'DMADV-skelet voor het ontwerpen en verifiëren van een nieuw proces.':
+      'DMADV-runko uuden prosessin suunnitteluun ja tarkistamiseen.',
+  'Procesverbetering: Kaizen-project':
+      'Prosessin parantaminen: Kaizen-projekti',
+  'Compact verbeterproject met Plan-, Do- en Check-fases.':
+      'Kompakti parannusprojekti Plan, Do ja Check -vaiheilla.',
+  'Procesverbetering: A3-project': 'Prosessin parannus: A3-projekti',
+  'A3-skelet voor probleem, analyse en verbeteracties.':
+      'A3-runko ongelma-, analyysi- ja parannustoimiin.',
+  'Procesverbetering: 8D-project': 'Prosessin parannus: 8D-projekti',
+  '8D-skelet voor probleembeschrijving, oorzaken en borging.':
+      '8D-runko ongelman kuvausta, syitä ja varmuutta varten.',
+  'Rapporteer de voortgang van een ISO-managementsysteem (27001/9001/42001): status per beheersmaatregel en een afgeleid voortgangsoverzicht. Standaard uit; zet de uitbreiding aan om het dia-type te gebruiken.':
+      'Raportoi ISO-hallintajärjestelmän (27001/9001/42001) edistyminen: tila hallintakeinoittain ja johdettu edistymisen yhteenveto. Oletuksena pois päältä; ota laajennus käyttöön käyttääksesi diatyyppiä.',
+  'Module aan. De ISO-index is lokaal beschikbaar ({n} beheersmaatregelen over drie normen); alleen de nummers en korte titels, niet de normtekst.':
+      'Moduuli käytössä. ISO-hakemisto on saatavilla paikallisesti ({n} hallintakeinoa kolmessa standardissa); vain numerot ja lyhyet otsikot, ei standardin tekstiä.',
+  'Beheersmaatregel-status': 'Hallintakeinojen tila',
+  'Alleen de clausule-index 4–10 (28 sub-clausules + korte titels). ISO 9001 kent geen Annex A. De normtekst is NIET gebundeld.':
+      'Vain lausekeindeksi 4–10 (28 alalauseketta + lyhyet otsikot). ISO 9001:ssä ei ole Annex A:ta. Standardin tekstiä EI ole mukana.',
+  'Alleen de index van Annex A (38 control-ids + korte titels) en de negen doelstelling-koppen A.2–A.10. De normtekst is NIET gebundeld.':
+      'Vain Annex A -indeksi (38 hallintakeinon tunnusta + lyhyet otsikot) ja yhdeksän tavoiteotsikkoa A.2–A.10. Standardin tekstiä EI ole mukana.',
+  'Alleen de index van Annex A (93 control-ids + korte titels) en de vier thema-koppen. De normtekst is NIET gebundeld.':
+      'Vain Annex A -indeksi (93 hallintakeinon tunnusta + lyhyet otsikot) ja neljä teemaotsikkoa. Standardin tekstiä EI ole mukana.',
+  'De implementatiestatus per beheersmaatregel van een ISO-norm (27001/9001/42001). Laad de controls uit een norm en vul status, eigenaar en bewijs in.':
+      'Toteutuksen tila hallintakeinoittain ISO-standardissa (27001/9001/42001). Lataa hallintakeinot standardista ja täytä tila, omistaja ja näyttö.',
+  'ISO copyright — index als feitreferentie, normtekst niet meegeleverd':
+      'ISO-tekijänoikeus — indeksi tosiasiaviitteenä, standardin tekstiä ei ole mukana',
+  'Maakt of vernieuwt een overzichtsdia met de voortgang per sectie (afgeleid uit alle beheersmaatregel-dia\'s).':
+      'Luo tai päivittää yhteenvetodian, jossa on edistyminen osioittain (johdettu kaikista hallintakeinodioista).',
+  'Voegt de beheersmaatregelen van een ISO-norm toe (alleen de index; alleen nieuwe ids).':
+      'Lisää ISO-standardin hallintakeinot (vain indeksi; vain uudet tunnukset).',
+  'Alle secties': 'Kaikki osiot',
+  'Beheersmaatregel': 'Hallintakeino',
+  'Beheersmaatregel toevoegen': 'Lisää hallintakeino',
+  'Beheersmaatregelen laden…': 'Lataa hallintakeinot…',
+  'Genereer voortgangsoverzicht': 'Luo edistymisyhteenveto',
+  'Geïmplementeerd': 'Toteutettu',
+  'ISO 27001 · Annex A — Organisatorisch (A.5)':
+      'ISO 27001 · Annex A — Organisatoriset (A.5)',
+  'Kies een norm': 'Valitse standardi',
+  'Managementsysteem': 'Hallintajärjestelmä',
+  'Niet gescoord': 'Ei arvioitu',
+  'Niveau': 'Taso',
+  'Nog geen beheersmaatregel-dia\'s om samen te vatten':
+      'Ei vielä hallintakeinodioja koottavaksi',
+  'Sectie': 'Osio',
+  'Streefdatum': 'Tavoitepäivä',
+  'Van toepassing': 'Sovellettavissa',
+  'Voortgang': 'Edistyminen',
+  'Voortgang managementsysteem': 'Hallintajärjestelmän edistyminen',
+  'Voortgangsoverzicht bijgewerkt': 'Edistymisyhteenveto päivitetty',
+  'Welk deel?': 'Mikä osa?',
+  'beheersmaatregelen geladen': 'hallintakeinoa ladattu',
+  'geïmplementeerd': 'toteutettu',
   'Module aan. Rekenkern, dia-indelingen en sjablonen zijn lokaal beschikbaar ({n} control-chartfactoren).':
       'Moduuli on käytössä. Laskentaydin, diojen asettelut ja mallit ovat käytettävissä paikallisesti ({n} ohjauskorttikerrointa).',
   'SIPOC-procesoverzicht': 'SIPOC-prosessin yleiskatsaus',
@@ -1778,6 +1851,18 @@ const _dutchSourceAddFi = <String, String>{
       'Määritä prosessin laajuus ja riippuvuudet toimittajien, syötteiden, päävaiheiden, tuotosten ja asiakkaiden avulla.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Työkalut prosessien parantamiseen (SIPOC, DMAIC, Kaizen ja A3). Oletusarvoisesti pois päältä; ota laajennus käyttöön käyttääksesi siihen liittyviä malleja ja diojen asetteluja.',
+  'Videovergaderingen': 'Videokokoukset',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Osallistu videokokouksiin ja esitä OciDeckistä omalla käyttöliittymällä: osallistujat diasi vieressä, eivät toisen sovelluksen ikkunassa. Bring-your-own-server (Jitsi tai Matrix); OciDeck ei isännöi mitään ja pitää keskustelutiedot poissa tekoälystä. Yhteys kokouspalveluun tulee tulevassa versiossa.',
+  'Videovergadering': 'Videokokous',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Ei aktiivista kokousta vielä. Yhteys kokouspalveluun lisätään tulevassa versiossa.',
+  'Dempen opheffen': 'Poista mykistys',
+  'Dempen': 'Mykistä',
+  'Camera aan': 'Kamera päälle',
+  'Camera uit': 'Kamera pois',
+  'Scherm delen': 'Jaa näyttö',
+  'Vergadering verlaten': 'Poistu kokouksesta',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Kuvakirjasto on liian suuri; vain uusimmat kuvat näytetään.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
@@ -11,12 +12,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Pompt een minimale app met een "open"-knop en opent de dialoog. De
 /// uiteindelijke uitkomst landt in [_Harness.choice] zodra de dialoog sluit.
 class _Harness {
-  _Harness({this.reveal = false, this.revealProcesverbetering = false});
+  _Harness({
+    this.reveal = false,
+    this.revealProcesverbetering = false,
+    this.languageCode,
+    this.brightness = Brightness.light,
+    this.textScaler = TextScaler.noScaling,
+  });
 
   /// Whether the Informatieveiligheid module is revealed (gates MIAUW-only
   /// templates). Off by default, matching a fresh install.
   final bool reveal;
   final bool revealProcesverbetering;
+  final String? languageCode;
+  final Brightness brightness;
+  final TextScaler textScaler;
   NewDeckChoice? choice;
 
   Future<void> open(WidgetTester tester) async {
@@ -29,7 +39,23 @@ class _Harness {
           ),
         ],
         child: MaterialApp(
-          localizationsDelegates: const [AppLocalizations.delegate],
+          locale: languageCode == null ? null : Locale(languageCode!),
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          themeMode: brightness == Brightness.dark
+              ? ThemeMode.dark
+              : ThemeMode.light,
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaler: textScaler),
+            child: child!,
+          ),
           home: Builder(
             builder: (context) => Center(
               child: ElevatedButton(
@@ -48,8 +74,69 @@ class _Harness {
   }
 }
 
+/// Brengt een tegel in de geneste sjabloonlijst in beeld.
+///
+/// De dialoog scrolt als geheel op een klein venster en de catalogus heeft een
+/// eigen scrollpositie. `scrollUntilVisible` kiest dan niet betrouwbaar de
+/// binnenste positie en kan op de vaste dialoogknoppen terechtkomen. Deze helper
+/// verplaatst eerst de buitenste viewport en loopt daarna uitsluitend door de
+/// catalogus, waarna de echte tegel nog steeds gewoon wordt aangetikt.
+Future<void> _revealTemplate(WidgetTester tester, Finder target) async {
+  final outerScrollable = find
+      .descendant(
+        of: find.byType(SingleChildScrollView),
+        matching: find.byType(Scrollable),
+      )
+      .first;
+  final outerPosition = tester.state<ScrollableState>(outerScrollable).position;
+  if (outerPosition.hasContentDimensions &&
+      outerPosition.pixels < outerPosition.maxScrollExtent) {
+    outerPosition.jumpTo(outerPosition.maxScrollExtent);
+    await tester.pump();
+  }
+
+  final templateScrollable = find
+      .descendant(of: find.byType(ListView), matching: find.byType(Scrollable))
+      .first;
+  final templatePosition = tester
+      .state<ScrollableState>(templateScrollable)
+      .position;
+
+  for (var attempt = 0; attempt < 200; attempt++) {
+    if (target.evaluate().isNotEmpty) {
+      await tester.ensureVisible(target);
+      await tester.pump();
+      return;
+    }
+    if (!templatePosition.hasContentDimensions ||
+        templatePosition.pixels >= templatePosition.maxScrollExtent) {
+      break;
+    }
+    templatePosition.jumpTo(
+      (templatePosition.pixels + 60).clamp(
+        templatePosition.minScrollExtent,
+        templatePosition.maxScrollExtent,
+      ),
+    );
+    await tester.pump();
+  }
+
+  fail(
+    'Kon sjabloontegel ${target.describeMatch(Plurality.many)} niet bereiken',
+  );
+}
+
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  const processTemplateIds = [
+    'procesverbetering-dmaic',
+    'procesverbetering-dmadv',
+    'procesverbetering-kaizen',
+    'procesverbetering-a3',
+    'procesverbetering-8d',
+    'procesverbetering-sipoc',
+  ];
 
   testWidgets('titel + standaardprofiel bij aanmaken', (tester) async {
     final harness = _Harness();
@@ -84,12 +171,7 @@ void main() {
     // "Leeg deck" staat vastgepind bovenaan, dus altijd in de eerste viewport.
     expect(find.text('Leeg deck'), findsOneWidget);
     // Een niet-bovenaan sjabloon is via scrollen bereikbaar.
-    await tester.scrollUntilVisible(
-      find.text('Korte briefing'),
-      60,
-      scrollable: find.byType(Scrollable).last,
-      maxScrolls: 200,
-    );
+    await _revealTemplate(tester, find.text('Korte briefing'));
     expect(find.text('Korte briefing'), findsOneWidget);
     expect(find.byType(TextFormField), findsOneWidget);
   });
@@ -108,12 +190,7 @@ void main() {
     final harness = _Harness();
     await harness.open(tester);
     await tester.enterText(find.byType(TextFormField), '  Kick-off Q3  ');
-    await tester.scrollUntilVisible(
-      find.text('Projectstart / kick-off'),
-      60,
-      scrollable: find.byType(Scrollable).last,
-      maxScrolls: 200,
-    );
+    await _revealTemplate(tester, find.text('Projectstart / kick-off'));
     // Volledig in beeld brengen: scrollUntilVisible kan de tegel aan de rand
     // laten staan, waar een tap net naast zou vallen.
     await tester.ensureVisible(find.text('Projectstart / kick-off'));
@@ -152,11 +229,7 @@ void main() {
       ),
       (t) => t.title,
     )) {
-      await tester.scrollUntilVisible(
-        find.text(template.title),
-        60,
-        scrollable: find.byType(Scrollable).last,
-      );
+      await _revealTemplate(tester, find.text(template.title));
       expect(find.text(template.title), findsOneWidget);
     }
   });
@@ -182,12 +255,7 @@ void main() {
     // (MIAUW, sorteert onder de M). Met de bredere catalogus staat het dieper,
     // dus een royaal scrollbudget zoals de rest van dit bestand (maxScrolls:
     // 200); de standaard 50 reikt niet meer tot onderaan.
-    await tester.scrollUntilVisible(
-      find.text(miauw.title),
-      60,
-      scrollable: find.byType(Scrollable).last,
-      maxScrolls: 200,
-    );
+    await _revealTemplate(tester, find.text(miauw.title));
     expect(find.text(miauw.title), findsOneWidget);
     expect(
       find.byKey(const ValueKey('templateModuleBadge-miauwReport')),
@@ -196,31 +264,38 @@ void main() {
     expect(find.text('Informatieveiligheid'), findsWidgets);
   });
 
-  testWidgets('process templates appear with a badge only after reveal', (
+  testWidgets('all process templates appear with badges only after reveal', (
     tester,
   ) async {
-    final sipoc = deckTemplates.firstWhere(
-      (t) => t.id == 'procesverbetering-sipoc',
-    );
+    final processTemplates = processTemplateIds
+        .map((id) => deckTemplates.firstWhere((template) => template.id == id))
+        .toList();
 
     await _Harness().open(tester);
-    expect(find.text(sipoc.title), findsNothing);
+    for (final template in processTemplates) {
+      expect(find.text(template.title), findsNothing, reason: template.id);
+      expect(
+        find.byKey(ValueKey('templateModuleBadge-${template.id}')),
+        findsNothing,
+        reason: template.id,
+      );
+    }
     await tester.tap(find.text('Annuleren'));
     await tester.pumpAndSettle();
 
     await _Harness(revealProcesverbetering: true).open(tester);
-    await tester.scrollUntilVisible(
-      find.text(sipoc.title),
-      60,
-      scrollable: find.byType(Scrollable).last,
-      maxScrolls: 200,
-    );
-    expect(find.text(sipoc.title), findsOneWidget);
-    expect(
-      find.byKey(const ValueKey('templateModuleBadge-procesverbetering-sipoc')),
-      findsOneWidget,
-    );
-    expect(find.text('Procesverbetering'), findsWidgets);
+    for (final template in sortTemplatesForDisplay(
+      processTemplates,
+      (template) => template.title,
+    )) {
+      await _revealTemplate(tester, find.text(template.title));
+      expect(find.text(template.title), findsOneWidget, reason: template.id);
+      expect(
+        find.byKey(ValueKey('templateModuleBadge-${template.id}')),
+        findsOneWidget,
+        reason: template.id,
+      );
+    }
   });
 
   testWidgets('every template has a picker icon', (tester) async {
@@ -230,6 +305,43 @@ void main() {
         isTrue,
         reason: '${template.id} mist een icoon in templatePickerIcons',
       );
+    }
+  });
+
+  testWidgets('picker stays operable in German at 200% in light and dark', (
+    tester,
+  ) async {
+    for (final brightness in Brightness.values) {
+      final harness = _Harness(
+        revealProcesverbetering: true,
+        languageCode: 'de',
+        brightness: brightness,
+        textScaler: TextScaler.linear(2),
+      );
+      await harness.open(tester);
+      await tester.enterText(find.byType(TextFormField).first, 'SIPOC intake');
+      await tester.enterText(
+        find.byKey(const ValueKey('templateSearchField')),
+        'SIPOC',
+      );
+      await tester.pumpAndSettle();
+
+      await _revealTemplate(
+        tester,
+        find.byKey(
+          const ValueKey('templateModuleBadge-procesverbetering-sipoc'),
+        ),
+      );
+      expect(
+        find.byKey(
+          const ValueKey('templateModuleBadge-procesverbetering-sipoc'),
+        ),
+        findsOneWidget,
+      );
+      expect(tester.takeException(), isNull, reason: brightness.name);
+      await tester.tap(find.byType(TextButton).last);
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull, reason: brightness.name);
     }
   });
 
@@ -278,6 +390,54 @@ void main() {
     await tester.enterText(searchField, 'xyzzy-bestaat-niet');
     await tester.pumpAndSettle();
     expect(find.text('Geen sjablonen gevonden'), findsOneWidget);
+  });
+
+  testWidgets('a search without matches cannot create the old selection', (
+    tester,
+  ) async {
+    final harness = _Harness();
+    await harness.open(tester);
+    await tester.enterText(
+      find.byType(TextFormField).first,
+      'Mag niet als leeg deck ontstaan',
+    );
+    await tester.enterText(searchField, 'xyzzy-bestaat-niet');
+    await tester.pumpAndSettle();
+
+    final create = tester.widget<ElevatedButton>(
+      find.widgetWithText(ElevatedButton, 'Aanmaken'),
+    );
+    expect(create.onPressed, isNull);
+    expect(harness.choice, isNull);
+    expect(find.text('Nieuwe presentatie'), findsOneWidget);
+  });
+
+  testWidgets('searching the security badge finds a security template', (
+    tester,
+  ) async {
+    await _Harness(reveal: true).open(tester);
+    await tester.enterText(searchField, 'Informatieveiligheid');
+    await tester.pumpAndSettle();
+
+    // De MIAUW-titel en -omschrijving bevatten de zoekterm niet. Alleen de
+    // modulebadge kan dit sjabloon dus in het resultaat brengen.
+    await _revealTemplate(tester, find.text('MIAUW-pentestrapport'));
+    expect(find.text('MIAUW-pentestrapport'), findsOneWidget);
+    expect(find.text('Leeg deck'), findsNothing);
+  });
+
+  testWidgets('searching the improvement badge finds the SIPOC template', (
+    tester,
+  ) async {
+    await _Harness(revealProcesverbetering: true).open(tester);
+    await tester.enterText(searchField, 'Procesverbetering');
+    await tester.pumpAndSettle();
+
+    // Anders dan de vijf projecttitels noemt SIPOC de module niet in titel of
+    // omschrijving. Dit resultaat bewijst daarom dat de badge meedoet.
+    await _revealTemplate(tester, find.text('SIPOC-procesoverzicht'));
+    expect(find.text('SIPOC-procesoverzicht'), findsOneWidget);
+    expect(find.text('Leeg deck'), findsNothing);
   });
 
   testWidgets('selection follows the filter and lands in the result', (

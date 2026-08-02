@@ -120,7 +120,9 @@ void main() {
         ModuleId.imports,
         ModuleId.procesverbetering,
         ModuleId.collaboration,
+        ModuleId.videoCalls,
         ModuleId.assetRights,
+        ModuleId.managementsysteem,
       ]);
     });
   });
