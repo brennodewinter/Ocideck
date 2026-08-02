@@ -1781,6 +1781,18 @@ const _dutchSourceAddGsw = <String, String>{
       'Bestimm dr Umfang und d’Abhängigkeiten vo mene Prozess über Lieferante, Eingabe, Hauptschritt, Ausgabe und Chunde.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Hilfsmittel zur Prozessverbesserig (SIPOC, DMAIC, Kaizen und A3). Standardmässig us; aktivier d’Erweiterig, um d’zugehörige Vorlage und Folielayouts z’bruuche.',
+  'Videovergaderingen': 'Videokonferänze',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Mach bi Videokonferänze mit und präsentier us OciDeck mit ere eigene Oberflächi: d Teilnehmer näbet dim Slide, nöd im Fäischter vo nere andere App. Bring-your-own-server (Jitsi oder Matrix); OciDeck hostet nüüt und haltet d Gsprächsdate vo de KI ewäg. D Aabindig an e Sitzigsdienscht chunt inere spöötere Version.',
+  'Videovergadering': 'Videokonferänz',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Na kei aktivi Sitzig. D Aabindig an e Sitzigsdienscht chunt inere spöötere Version dezue.',
+  'Dempen opheffen': 'Stummschaltig ufhäbe',
+  'Dempen': 'Stumm schalte',
+  'Camera aan': 'Kamera aa',
+  'Camera uit': 'Kamera us',
+  'Scherm delen': 'Bildschirm teile',
+  'Vergadering verlaten': 'Konferänz verlah',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'D Bildbibliothek isch z gross; es wärde nume die nöischte Bilder azeigt.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

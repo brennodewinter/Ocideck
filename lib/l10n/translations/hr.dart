@@ -1784,6 +1784,18 @@ const _dutchSourceAddHr = <String, String>{
       'Odredite opseg i ovisnosti procesa putem dobavljača, ulaznih podataka, glavnih koraka, izlaznih podataka i kupaca.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Alati za poboljšanje procesa (SIPOC, DMAIC, Kaizen i A3). Prema zadanim postavkama isključeni; uključite proširenje za korištenje povezanih predložaka i rasporeda slajdova.',
+  'Videovergaderingen': 'Videosastanci',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Pridružite se videosastancima i prezentirajte iz OciDecka s vlastitim sučeljem: sudionici uz vaš slajd, a ne u prozoru druge aplikacije. Bring-your-own-server (Jitsi ili Matrix); OciDeck ništa ne hostira i drži podatke razgovora podalje od AI-ja. Povezivanje s uslugom za sastanke stići će u budućoj verziji.',
+  'Videovergadering': 'Videosastanak',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Još nema aktivnog sastanka. Povezivanje s uslugom za sastanke bit će dodano u budućoj verziji.',
+  'Dempen opheffen': 'Uključi zvuk',
+  'Dempen': 'Isključi zvuk',
+  'Camera aan': 'Uključi kameru',
+  'Camera uit': 'Isključi kameru',
+  'Scherm delen': 'Podijeli zaslon',
+  'Vergadering verlaten': 'Napusti sastanak',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Biblioteka slika je prevelika; prikazuju se samo najnovije slike.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

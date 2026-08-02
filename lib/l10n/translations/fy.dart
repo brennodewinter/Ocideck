@@ -738,6 +738,18 @@ const _dutchSourceAddFy = {
       'Bepaal de omfang en ôfhinklikheden fan in proses oan ’e hân fan leveransiers, ynfier, haadstappen, útfier en klanten.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Helpmiddels foar prosesferbettering (SIPOC, DMAIC, Kaizen en A3). Standert út; skeakelje de útwreiding yn om de byhearrende sjabloanen en dia-yndielingen te brûken.',
+  'Videovergaderingen': 'Fideofergaderingen',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Doch mei oan fideofergaderingen en presintearje fanút OciDeck mei in eigen ynterface: de dielnimmers njonken jo slide, net yn it finster fan in oare app. Bring-your-own-server (Jitsi of Matrix); OciDeck hostet neat en hâldt de peteargegevens bûten AI. De ferbining mei in gearkomstetsjinst folget yn in folgjende ferzje.',
+  'Videovergadering': 'Fideofergadering',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Noch gjin aktive gearkomste. It ferbinen mei in gearkomstetsjinst wurdt yn in folgjende ferzje tafoege.',
+  'Dempen opheffen': 'Lûd oansette',
+  'Dempen': 'Lûd útsette',
+  'Camera aan': 'Kamera oan',
+  'Camera uit': 'Kamera út',
+  'Scherm delen': 'Skerm diele',
+  'Vergadering verlaten': 'Gearkomste ferlitte',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'De ôfbyldingsbibleteek is te grut; allinnich de nijste ôfbyldings wurde toand.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

@@ -1800,6 +1800,18 @@ const _dutchSourceAddMt = <String, String>{
       'Iddefinixxi l-ambitu u d-dipendenzi ta’ proċess permezz ta’ fornituri, inputs, passi ewlenin, outputs u klijenti.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Għodod għat-titjib tal-proċessi (SIPOC, DMAIC, Kaizen u A3). Mitfija b’mod awtomatiku; attiva l-estensjoni biex tuża l-mudelli u t-taqsimiet ta’ slides relatati.',
+  'Videovergaderingen': 'Laqgħat bil-vidjo',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Ingħaqad ma\' laqgħat bil-vidjo u ppreżenta minn OciDeck b\'interfaċċja tiegħu stess: il-parteċipanti maġenb l-islajd tiegħek, mhux fit-tieqa ta\' app oħra. Bring-your-own-server (Jitsi jew Matrix); OciDeck ma jospita xejn u jżomm id-data tal-konverżazzjoni \'l bogħod mill-IA. Il-konnessjoni ma\' servizz tal-laqgħat se tiżdied f\'verżjoni futura.',
+  'Videovergadering': 'Laqgħa bil-vidjo',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Għad m\'hemm l-ebda laqgħa attiva. Il-konnessjoni ma\' servizz tal-laqgħat se tiżdied f\'verżjoni futura.',
+  'Dempen opheffen': 'Neħħi s-silenzju',
+  'Dempen': 'Silenzja',
+  'Camera aan': 'Ixgħel il-kamera',
+  'Camera uit': 'Itfi l-kamera',
+  'Scherm delen': 'Aqsam l-iskrin',
+  'Vergadering verlaten': 'Oħroġ mil-laqgħa',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Il-librerija tal-immaġni hija kbira wisq; jintwerew biss l-aktar immaġni riċenti.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

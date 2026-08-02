@@ -1785,6 +1785,18 @@ const _dutchSourceAddLt = <String, String>{
       'Nustatykite proceso apimtį ir priklausomybes pagal tiekėjus, įvestis, pagrindinius žingsnius, išvestis ir klientus.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Procesų tobulinimo įrankiai (SIPOC, DMAIC, Kaizen ir A3). Pagal numatytuosius nustatymus išjungti; įjunkite plėtinį, kad galėtumėte naudoti susijusius šablonus ir skaidrių išdėstymus.',
+  'Videovergaderingen': 'Vaizdo susitikimai',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Prisijunkite prie vaizdo susitikimų ir pristatykite iš OciDeck su sava sąsaja: dalyviai šalia jūsų skaidrės, o ne kitos programos lange. Bring-your-own-server (Jitsi arba Matrix); OciDeck nieko nepriglobia ir pokalbių duomenis laiko atokiau nuo DI. Prisijungimas prie susitikimų paslaugos bus pridėtas būsimoje versijoje.',
+  'Videovergadering': 'Vaizdo susitikimas',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Aktyvaus susitikimo dar nėra. Prisijungimas prie susitikimų paslaugos bus pridėtas būsimoje versijoje.',
+  'Dempen opheffen': 'Įjungti garsą',
+  'Dempen': 'Nutildyti',
+  'Camera aan': 'Įjungti kamerą',
+  'Camera uit': 'Išjungti kamerą',
+  'Scherm delen': 'Bendrinti ekraną',
+  'Vergadering verlaten': 'Palikti susitikimą',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Vaizdų biblioteka per didelė; rodomi tik naujausi vaizdai.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

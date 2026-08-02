@@ -737,6 +737,18 @@ const _dutchSourceAddFr = {
       'Définissez le périmètre et les dépendances d’un processus au moyen des fournisseurs, entrées, étapes principales, sorties et clients.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Outils d’amélioration des processus (SIPOC, DMAIC, Kaizen et A3). Désactivés par défaut ; activez l’extension pour utiliser les modèles et mises en page de diapositives associés.',
+  'Videovergaderingen': 'Visioconférences',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Participez à des visioconférences et présentez depuis OciDeck avec une interface dédiée : les participants à côté de votre diapositive, pas dans la fenêtre d\'une autre application. Bring-your-own-server (Jitsi ou Matrix) ; OciDeck n\'héberge rien et garde les données de conversation hors de l\'IA. La connexion à un service de réunion suivra dans une version ultérieure.',
+  'Videovergadering': 'Visioconférence',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Aucune réunion active pour le moment. La connexion à un service de réunion sera ajoutée dans une version ultérieure.',
+  'Dempen opheffen': 'Réactiver le son',
+  'Dempen': 'Couper le son',
+  'Camera aan': 'Activer la caméra',
+  'Camera uit': 'Désactiver la caméra',
+  'Scherm delen': 'Partager l\'écran',
+  'Vergadering verlaten': 'Quitter la réunion',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'La bibliothèque d’images est trop volumineuse ; seules les images les plus récentes sont affichées.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

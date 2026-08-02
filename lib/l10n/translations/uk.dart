@@ -1795,6 +1795,18 @@ const _dutchSourceAddUk = <String, String>{
       'Визначте межі та залежності процесу через постачальників, входи, основні кроки, виходи й клієнтів.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Інструменти для вдосконалення процесів (SIPOC, DMAIC, Kaizen і A3). Вимкнено за замовчуванням; увімкніть розширення, щоб користуватися пов’язаними шаблонами й макетами слайдів.',
+  'Videovergaderingen': 'Відеозустрічі',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Долучайтеся до відеозустрічей і презентуйте з OciDeck у власному інтерфейсі: учасники поруч зі слайдом, а не у вікні іншого застосунку. Bring-your-own-server (Jitsi або Matrix); OciDeck нічого не розміщує і тримає дані розмов подалі від ШІ. Підключення до сервісу зустрічей з\'явиться в наступній версії.',
+  'Videovergadering': 'Відеозустріч',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Активної зустрічі ще немає. Підключення до сервісу зустрічей буде додано в наступній версії.',
+  'Dempen opheffen': 'Увімкнути звук',
+  'Dempen': 'Вимкнути звук',
+  'Camera aan': 'Увімкнути камеру',
+  'Camera uit': 'Вимкнути камеру',
+  'Scherm delen': 'Поділитися екраном',
+  'Vergadering verlaten': 'Покинути зустріч',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Бібліотека зображень завелика; показуються лише найновіші зображення.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

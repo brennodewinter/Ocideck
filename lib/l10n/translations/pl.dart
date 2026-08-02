@@ -1790,6 +1790,18 @@ const _dutchSourceAddPl = <String, String>{
       'Określ zakres i zależności procesu poprzez dostawców, dane wejściowe, główne kroki, wyniki i klientów.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Narzędzia do doskonalenia procesów (SIPOC, DMAIC, Kaizen i A3). Domyślnie wyłączone; włącz rozszerzenie, aby korzystać z powiązanych szablonów i układów slajdów.',
+  'Videovergaderingen': 'Wideokonferencje',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Dołączaj do wideokonferencji i prezentuj z OciDeck we własnym interfejsie: uczestnicy obok slajdu, a nie w oknie innej aplikacji. Bring-your-own-server (Jitsi lub Matrix); OciDeck niczego nie hostuje i trzyma dane rozmów z dala od AI. Połączenie z usługą spotkań pojawi się w przyszłej wersji.',
+  'Videovergadering': 'Wideokonferencja',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Brak aktywnego spotkania. Łączenie z usługą spotkań zostanie dodane w przyszłej wersji.',
+  'Dempen opheffen': 'Wyłącz wyciszenie',
+  'Dempen': 'Wycisz',
+  'Camera aan': 'Włącz kamerę',
+  'Camera uit': 'Wyłącz kamerę',
+  'Scherm delen': 'Udostępnij ekran',
+  'Vergadering verlaten': 'Opuść spotkanie',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Biblioteka obrazów jest za duża; wyświetlane są tylko najnowsze obrazy.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

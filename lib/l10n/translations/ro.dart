@@ -1795,6 +1795,18 @@ const _dutchSourceAddRo = <String, String>{
       'Stabiliți domeniul de aplicare și dependențele unui proces prin furnizori, intrări, pași principali, ieșiri și clienți.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Instrumente pentru îmbunătățirea proceselor (SIPOC, DMAIC, Kaizen și A3). Dezactivate implicit; activați extensia pentru a utiliza șabloanele și aspectele de diapozitive asociate.',
+  'Videovergaderingen': 'Întâlniri video',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Alătură-te întâlnirilor video și prezintă din OciDeck cu o interfață proprie: participanții lângă slide-ul tău, nu în fereastra altei aplicații. Bring-your-own-server (Jitsi sau Matrix); OciDeck nu găzduiește nimic și ține datele conversațiilor departe de IA. Conectarea la un serviciu de întâlniri va urma într-o versiune viitoare.',
+  'Videovergadering': 'Întâlnire video',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Încă nu există nicio întâlnire activă. Conectarea la un serviciu de întâlniri va fi adăugată într-o versiune viitoare.',
+  'Dempen opheffen': 'Reactivează sunetul',
+  'Dempen': 'Dezactivează sunetul',
+  'Camera aan': 'Pornește camera',
+  'Camera uit': 'Oprește camera',
+  'Scherm delen': 'Partajează ecranul',
+  'Vergadering verlaten': 'Părăsește întâlnirea',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Biblioteca de imagini este prea mare; sunt afișate doar cele mai noi imagini.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

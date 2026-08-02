@@ -135,6 +135,7 @@ import 'shell/presentation_import_action.dart';
 import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
 import 'panels/collab_chat_panel.dart';
+import 'panels/call_panel.dart';
 import 'panels/slide_list_panel.dart';
 import 'privacy_badge.dart';
 import 'collab_verify_banner.dart';

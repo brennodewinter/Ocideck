@@ -1778,6 +1778,18 @@ const _dutchSourceAddId = <String, String>{
       'Tentukan ruang lingkup dan ketergantungan proses melalui pemasok, masukan, langkah utama, keluaran, dan pelanggan.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Perkakas untuk peningkatan proses (SIPOC, DMAIC, Kaizen, dan A3). Nonaktif secara default; aktifkan ekstensi untuk menggunakan templat dan tata letak slide terkait.',
+  'Videovergaderingen': 'Rapat video',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Ikuti rapat video dan presentasikan dari OciDeck dengan antarmuka tersendiri: peserta di samping slide Anda, bukan di jendela aplikasi lain. Bring-your-own-server (Jitsi atau Matrix); OciDeck tidak meng-host apa pun dan menjaga data percakapan tetap jauh dari AI. Koneksi ke layanan rapat akan menyusul pada versi mendatang.',
+  'Videovergadering': 'Rapat video',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Belum ada rapat aktif. Koneksi ke layanan rapat akan ditambahkan pada versi mendatang.',
+  'Dempen opheffen': 'Bunyikan',
+  'Dempen': 'Bisukan',
+  'Camera aan': 'Nyalakan kamera',
+  'Camera uit': 'Matikan kamera',
+  'Scherm delen': 'Bagikan layar',
+  'Vergadering verlaten': 'Tinggalkan rapat',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Pustaka gambar terlalu besar; hanya gambar terbaru yang ditampilkan.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

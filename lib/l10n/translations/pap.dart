@@ -737,6 +737,18 @@ const _dutchSourceAddPap = {
       'Determiná e alkanse i dependensianan di un proseso mediante proveedónan, entrada, pasonan prinsipal, salida i klientenan.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Hulpmidinan pa mehoramentu di proseso (SIPOC, DMAIC, Kaizen i A3). Standardmente apagá; aktivá e ekstensión pa usa e plantianan i diseñonan di diapositiva relashoná.',
+  'Videovergaderingen': 'Reunionnan di video',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Partisipá na reunionnan di video i presentá for di OciDeck ku un interfase propio: e partisipantenan banda di bo slide, no den e bentana di un otro app. Bring-your-own-server (Jitsi òf Matrix); OciDeck no ta hospedá nada i ta tene e datonan di konbersashon pafó di IA. E koneksion ku un servisio di reunion lo sigui den un versión futuro.',
+  'Videovergadering': 'Reunion di video',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Ainda no tin un reunion aktivo. E koneksion ku un servisio di reunion lo wòrdu añadí den un versión futuro.',
+  'Dempen opheffen': 'Kita silensio',
+  'Dempen': 'Silensia',
+  'Camera aan': 'Sende kámera',
+  'Camera uit': 'Paga kámera',
+  'Scherm delen': 'Kompartí pantaya',
+  'Vergadering verlaten': 'Bandoná reunion',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'E biblioteka di imágen ta muchu grandi; solamente e imágennan mas nobo ta wòrdu mustrá.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

@@ -1781,6 +1781,18 @@ const _dutchSourceAddCs = <String, String>{
       'Určete rozsah a závislosti procesu prostřednictvím dodavatelů, vstupů, hlavních kroků, výstupů a zákazníků.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Nástroje pro zlepšování procesů (SIPOC, DMAIC, Kaizen a A3). Ve výchozím nastavení vypnuté; povolte rozšíření pro použití souvisejících šablon a rozvržení snímků.',
+  'Videovergaderingen': 'Videoschůzky',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Připojte se k videoschůzkám a prezentujte z OciDecku s vlastním rozhraním: účastníci vedle vašeho snímku, ne v okně jiné aplikace. Bring-your-own-server (Jitsi nebo Matrix); OciDeck nic nehostuje a data konverzací drží mimo AI. Připojení ke službě pro schůzky přibude v příští verzi.',
+  'Videovergadering': 'Videoschůzka',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Zatím žádná aktivní schůzka. Připojení ke službě pro schůzky bude přidáno v příští verzi.',
+  'Dempen opheffen': 'Zrušit ztlumení',
+  'Dempen': 'Ztlumit',
+  'Camera aan': 'Zapnout kameru',
+  'Camera uit': 'Vypnout kameru',
+  'Scherm delen': 'Sdílet obrazovku',
+  'Vergadering verlaten': 'Opustit schůzku',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Knihovna obrázků je příliš velká; zobrazují se pouze nejnovější obrázky.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

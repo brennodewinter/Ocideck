@@ -918,6 +918,18 @@ const _dutchSourceAddEn = {
       'Define a process’s scope and dependencies through suppliers, inputs, main steps, outputs and customers.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Tools for process improvement (SIPOC, DMAIC, Kaizen and A3). Off by default; enable the extension to use the related templates and slide layouts.',
+  'Videovergaderingen': 'Video meetings',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Join video meetings and present from OciDeck with a dedicated interface: participants beside your slide, not in another app\'s window. Bring-your-own-server (Jitsi or Matrix); OciDeck hosts nothing and keeps the conversation data out of AI. Connecting to a meeting service will follow in a future version.',
+  'Videovergadering': 'Video meeting',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'No active meeting yet. Connecting to a meeting service will be added in a future version.',
+  'Dempen opheffen': 'Unmute',
+  'Dempen': 'Mute',
+  'Camera aan': 'Camera on',
+  'Camera uit': 'Camera off',
+  'Scherm delen': 'Share screen',
+  'Vergadering verlaten': 'Leave meeting',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'The image library is too large; only the newest images are shown.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

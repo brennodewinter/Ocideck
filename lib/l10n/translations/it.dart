@@ -733,6 +733,18 @@ const _dutchSourceAddIt = {
       'Definisci l’ambito e le dipendenze di un processo tramite fornitori, input, fasi principali, output e clienti.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Strumenti per il miglioramento dei processi (SIPOC, DMAIC, Kaizen e A3). Disattivati per impostazione predefinita; attiva l’estensione per usare i modelli e i layout delle diapositive correlati.',
+  'Videovergaderingen': 'Videoconferenze',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Partecipa a videoconferenze e presenta da OciDeck con un\'interfaccia dedicata: i partecipanti accanto alla tua slide, non nella finestra di un\'altra app. Bring-your-own-server (Jitsi o Matrix); OciDeck non ospita nulla e tiene i dati delle conversazioni fuori dall\'IA. La connessione a un servizio di riunioni arriverà in una versione futura.',
+  'Videovergadering': 'Videoconferenza',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Nessuna riunione attiva. La connessione a un servizio di riunioni sarà aggiunta in una versione futura.',
+  'Dempen opheffen': 'Riattiva audio',
+  'Dempen': 'Disattiva audio',
+  'Camera aan': 'Attiva videocamera',
+  'Camera uit': 'Disattiva videocamera',
+  'Scherm delen': 'Condividi schermo',
+  'Vergadering verlaten': 'Abbandona riunione',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'La libreria di immagini è troppo grande; vengono mostrate solo le immagini più recenti.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

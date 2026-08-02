@@ -1777,6 +1777,18 @@ const _dutchSourceAddDa = <String, String>{
       'Fastlæg et processes omfang og afhængigheder gennem leverandører, input, hovedtrin, output og kunder.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Værktøjer til procesforbedring (SIPOC, DMAIC, Kaizen og A3). Slået fra som standard; aktivér udvidelsen for at bruge de tilhørende skabeloner og diaslayouts.',
+  'Videovergaderingen': 'Videomøder',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Deltag i videomøder og præsentér fra OciDeck med en dedikeret grænseflade: deltagerne ved siden af dit slide, ikke i et andet programs vindue. Bring-your-own-server (Jitsi eller Matrix); OciDeck hoster ingenting og holder samtaledataene væk fra AI. Forbindelsen til en mødetjeneste følger i en fremtidig version.',
+  'Videovergadering': 'Videomøde',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Der er endnu ikke noget aktivt møde. Forbindelsen til en mødetjeneste tilføjes i en fremtidig version.',
+  'Dempen opheffen': 'Slå lyd til',
+  'Dempen': 'Slå lyd fra',
+  'Camera aan': 'Kamera til',
+  'Camera uit': 'Kamera fra',
+  'Scherm delen': 'Del skærm',
+  'Vergadering verlaten': 'Forlad mødet',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'Billedbiblioteket er for stort; kun de nyeste billeder vises.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':

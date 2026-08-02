@@ -18,6 +18,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'collaboration_provider.dart';
+import 'meeting_session_provider.dart';
 import 'info_safety_provider.dart';
 import 'online_storage_provider.dart';
 import 'import_module_provider.dart';
@@ -34,6 +35,7 @@ enum ModuleId {
   imports,
   procesverbetering,
   collaboration,
+  videoCalls,
   assetRights,
 }
 
@@ -114,6 +116,11 @@ final List<ModuleEntry> moduleRegistry = [
     id: ModuleId.collaboration,
     enabled: collaborationEnabledProvider,
     revealed: collaborationRevealProvider,
+  ),
+  ModuleEntry(
+    id: ModuleId.videoCalls,
+    enabled: videoCallsEnabledProvider,
+    revealed: videoCallsRevealProvider,
   ),
   ModuleEntry(
     id: ModuleId.assetRights,

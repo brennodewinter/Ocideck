@@ -1807,6 +1807,18 @@ const _dutchSourceAddPt = <String, String>{
       'Defina o âmbito e as dependências de um processo através de fornecedores, entradas, etapas principais, saídas e clientes.',
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Ferramentas para melhoria de processos (SIPOC, DMAIC, Kaizen e A3). Desativadas por predefinição; ative a extensão para utilizar os modelos e esquemas de diapositivos associados.',
+  'Videovergaderingen': 'Videoconferências',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Participe em videoconferências e apresente a partir do OciDeck com uma interface própria: os participantes ao lado do seu diapositivo, não na janela de outra aplicação. Bring-your-own-server (Jitsi ou Matrix); o OciDeck não aloja nada e mantém os dados das conversas fora da IA. A ligação a um serviço de reuniões chegará numa versão futura.',
+  'Videovergadering': 'Videoconferência',
+  'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
+      'Ainda não há nenhuma reunião ativa. A ligação a um serviço de reuniões será adicionada numa versão futura.',
+  'Dempen opheffen': 'Reativar áudio',
+  'Dempen': 'Silenciar',
+  'Camera aan': 'Ativar câmara',
+  'Camera uit': 'Desativar câmara',
+  'Scherm delen': 'Partilhar ecrã',
+  'Vergadering verlaten': 'Sair da reunião',
   'De afbeeldingenbibliotheek is te groot; alleen de nieuwste afbeeldingen worden getoond.':
       'A biblioteca de imagens é demasiado grande; apenas as imagens mais recentes são mostradas.',
   'Dit pakket is te groot (maximaal 512 MB). Anders kan OciDeck het daarna niet meer openen. Gebruik minder of kleinere afbeeldingen, video’s of audiobestanden.':
