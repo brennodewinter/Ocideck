@@ -1834,6 +1834,12 @@ const _dutchSourceAddUk = <String, String>{
   'XMPP-verbinding testen': 'Перевірити з\'єднання XMPP',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Перевірте, чи може OciDeck дістатися до XMPP-сервера й увійти з вашим обліковим записом. Нічого не зберігається.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Позначте всі правильні відповіді. Під час показу всі відповіді відображаються у випадковому порядку.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Позначте правильні відповіді. Під час показу відображається одна правильна відповідь із випадковою добіркою неправильних відповідей.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Запитання неможливо відтворити: {aantal} відповідей, тоді як цей тип запитань допускає щонайбільше {maximum}.',
   'Actueel': 'поточний',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Режим вихідного коду захищає форматування, яке візуальний редактор ще не підтримує без втрат.',

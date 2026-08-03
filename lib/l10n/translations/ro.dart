@@ -1833,6 +1833,12 @@ const _dutchSourceAddRo = <String, String>{
   'XMPP-verbinding testen': 'Testează conexiunea XMPP',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Verificați dacă OciDeck poate ajunge la un server XMPP și se poate autentifica cu contul dvs. Nu se stochează nimic.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Marcați toate răspunsurile corecte. În timpul prezentării, toate răspunsurile sunt afișate în ordine aleatorie.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Marcați răspunsurile corecte. În timpul prezentării, este afișat un răspuns corect împreună cu o selecție aleatorie de răspunsuri incorecte.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Întrebarea nu poate fi jucată: {aantal} răspunsuri, în timp ce acest tip de întrebare permite maximum {maximum}.',
   'Actueel': 'Curent',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Modul sursă protejează formatarea pe care editorul vizual nu o acceptă încă fără pierderi.',

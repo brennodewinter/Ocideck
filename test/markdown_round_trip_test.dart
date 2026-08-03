@@ -937,6 +937,27 @@ void main() {
       expect(parsed.onWrong, QuestionOnWrong.lockAndContinue);
     });
 
+    test('question slide keeps a complete twenty-answer choice bank', () {
+      final source = multipleChoiceBeerQuestionBlock(20);
+      final expected = QuestionSpec.parse(source);
+      final out = _roundTrip(
+        Slide.create(
+          SlideType.question,
+        ).copyWith(title: 'Bierkennis', customMarkdown: source),
+      );
+
+      final parsed = QuestionSpec.parse(out.customMarkdown);
+      expect(parsed.kind, QuestionKind.multipleChoice);
+      expect(parsed.prompt, 'Wat is geen bier?');
+      expect(parsed.optionCount, 4);
+      expect(parsed.hasValidAnswerCount, isTrue);
+      expect(parsed.sourceAnswerCount, 20);
+      expect(
+        parsed.answers.map((answer) => answer.toJson()).toList(),
+        expected.answers.map((answer) => answer.toJson()).toList(),
+      );
+    });
+
     test('oversized question keeps its complete source on open and save', () {
       final source = questionBlockWithAnswers(9);
       final out = _roundTrip(

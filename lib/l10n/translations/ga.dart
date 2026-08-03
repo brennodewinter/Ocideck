@@ -1853,6 +1853,12 @@ const _dutchSourceAddGa = <String, String>{
   'XMPP-verbinding testen': 'Tástáil nasc XMPP',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Seiceáil an féidir le OciDeck freastalaí XMPP a bhaint amach agus logáil isteach le do chuntas. Ní stóráiltear aon rud.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Marcáil gach freagra ceart. Le linn cur i láthair, taispeántar gach freagra in ord randamach.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Marcáil na freagraí cearta. Le linn cur i láthair, taispeántar freagra ceart amháin le rogha randamach freagraí míchearta.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Ní féidir an cheist a imirt: {aantal} freagra, ach ceadaíonn an cineál ceiste seo {maximum} ar a mhéad.',
   'Actueel': 'Reatha',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Cosnaíonn mód foinse formáidiú nach dtacaíonn an t-eagarthóir amhairc go fóill gan chailliúint.',

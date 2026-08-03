@@ -1816,6 +1816,12 @@ const _dutchSourceAddDa = <String, String>{
   'XMPP-verbinding testen': 'Test XMPP-forbindelse',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Kontrollér, om OciDeck kan nå en XMPP-server og logge ind med din konto. Der gemmes intet.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Markér alle rigtige svar. Under præsentationen vises alle svar i tilfældig rækkefølge.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Markér de rigtige svar. Under præsentationen vises ét rigtigt svar sammen med et tilfældigt udvalg af forkerte svar.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Spørgsmålet kan ikke spilles: {aantal} svar, mens denne spørgsmålstype højst tillader {maximum}.',
   'Actueel': 'Nuværende',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Kildetilstand beskytter formatering, som den visuelle editor endnu ikke understøtter tabsfrit.',

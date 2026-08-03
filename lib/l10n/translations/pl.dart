@@ -1831,6 +1831,12 @@ const _dutchSourceAddPl = <String, String>{
   'XMPP-verbinding testen': 'Przetestuj połączenie XMPP',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Sprawdź, czy OciDeck może połączyć się z serwerem XMPP i zalogować się na Twoim koncie. Nic nie jest zapisywane.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Zaznacz wszystkie poprawne odpowiedzi. Podczas prezentacji wszystkie odpowiedzi są wyświetlane w losowej kolejności.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Zaznacz poprawne odpowiedzi. Podczas prezentacji wyświetlana jest jedna poprawna odpowiedź wraz z losowo wybranymi błędnymi odpowiedziami.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Pytania nie można rozegrać: {aantal} odpowiedzi, podczas gdy ten typ pytania dopuszcza maksymalnie {maximum}.',
   'Actueel': 'Aktualny',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Tryb źródłowy chroni formatowanie, którego edytor wizualny nie obsługuje jeszcze bezstratnie.',

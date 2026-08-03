@@ -92,6 +92,23 @@ void main() {
       expect(loose.timeLimitSeconds, 13);
     });
 
+    test('keeps the visible option limit separate from answer-bank limits', () {
+      expect(questionMaxOptionCount, 8);
+      expect(questionMaxAnswerPoolCount, 32);
+      expect(questionAnswerCountLimit(QuestionKind.multipleChoice), 32);
+      expect(questionAnswerCountLimit(QuestionKind.ordering), 32);
+      expect(questionAnswerCountLimit(QuestionKind.imagePair), 32);
+      expect(questionAnswerCountLimit(QuestionKind.openText), 32);
+      expect(questionAnswerCountLimit(QuestionKind.multipleCorrect), 8);
+      expect(questionAnswerCountLimit(QuestionKind.trueFalse), 8);
+
+      final spec = QuestionSpec.parse(
+        multipleChoiceBeerQuestionBlock(20, optionCount: 99),
+      );
+      expect(spec.optionCount, 8);
+      expect(spec.answers, hasLength(20));
+    });
+
     test('statementIsTrue defaults true unless explicitly false', () {
       expect(QuestionSpec.parse('{}').statementIsTrue, isTrue);
       expect(
@@ -108,6 +125,34 @@ void main() {
       expect(spec.answers, hasLength(8));
     });
 
+    test('accepts a multiple-choice answer bank of twenty', () {
+      final spec = QuestionSpec.parse(multipleChoiceBeerQuestionBlock(20));
+
+      expect(spec.prompt, 'Wat is geen bier?');
+      expect(spec.hasValidAnswerCount, isTrue);
+      expect(spec.sourceAnswerCount, 20);
+      expect(spec.answers, hasLength(20));
+      expect(
+        spec.correctAnswers.map((answer) => answer.text),
+        multipleChoiceNonBeers,
+      );
+      expect(spec.wrongAnswers, hasLength(15));
+    });
+
+    test('accepts 32 but preserves and rejects 33 multiple-choice answers', () {
+      final atLimit = QuestionSpec.parse(multipleChoiceBeerQuestionBlock(32));
+      expect(atLimit.hasValidAnswerCount, isTrue);
+      expect(atLimit.sourceAnswerCount, 32);
+      expect(atLimit.answers, hasLength(32));
+
+      final overLimitSource = multipleChoiceBeerQuestionBlock(33);
+      final overLimit = QuestionSpec.parse(overLimitSource);
+      expect(overLimit.hasValidAnswerCount, isFalse);
+      expect(overLimit.sourceAnswerCount, 33);
+      expect(overLimit.answers, isEmpty);
+      expect(overLimit.toBlock(), overLimitSource);
+    });
+
     test('rejects a ninth answer without changing the source', () {
       final source = questionBlockWithAnswers(9);
       final spec = QuestionSpec.parse(source);
@@ -120,7 +165,7 @@ void main() {
     });
 
     test('does not materialise the 10,000-answer regression fixture', () {
-      final source = questionBlockWithAnswers(10000);
+      final source = multipleChoiceBeerQuestionBlock(10000);
       final spec = QuestionSpec.parse(source);
 
       expect(spec.hasValidAnswerCount, isFalse);

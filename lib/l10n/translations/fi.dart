@@ -1816,6 +1816,12 @@ const _dutchSourceAddFi = <String, String>{
   'XMPP-verbinding testen': 'Testaa XMPP-yhteys',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Tarkista, tavoittaako OciDeck XMPP-palvelimen ja voiko se kirjautua sisään tililläsi. Mitään ei tallenneta.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Merkitse kaikki oikeat vastaukset. Esityksessä kaikki vastaukset näytetään satunnaisessa järjestyksessä.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Merkitse oikeat vastaukset. Esityksessä näytetään yksi oikea vastaus sekä satunnainen valikoima vääriä vastauksia.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Kysymystä ei voi pelata: {aantal} vastausta, kun taas tämä kysymystyyppi sallii enintään {maximum}.',
   'Actueel': 'Nykyinen',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Lähdetila suojaa häviöttömästi muotoiluja, joita visuaalinen editori ei vielä tue.',

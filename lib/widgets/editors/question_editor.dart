@@ -55,12 +55,16 @@ class _QuestionEditorState extends State<QuestionEditor> {
   late QuestionKind _kind;
   late bool _statementIsTrue;
   late final bool _hasValidAnswerCount;
+  late final int _sourceAnswerCount;
+  late final int _sourceAnswerLimit;
 
   @override
   void initState() {
     super.initState();
     final spec = QuestionSpec.parse(widget.slide.customMarkdown);
     _hasValidAnswerCount = spec.hasValidAnswerCount;
+    _sourceAnswerCount = spec.sourceAnswerCount;
+    _sourceAnswerLimit = spec.answerCountLimit;
     _title = TextEditingController(text: widget.slide.title);
     _prompt = TextEditingController(text: spec.prompt);
     _timeLimit = TextEditingController(
@@ -124,8 +128,10 @@ class _QuestionEditorState extends State<QuestionEditor> {
     );
   }
 
+  int get _answerLimit => questionAnswerCountLimit(_kind);
+
   void _addAnswer() {
-    if (_answers.length >= questionMaxAnswerCount) return;
+    if (_answers.length >= _answerLimit) return;
     setState(() {
       _answers.add(_makeCtrl(''));
       _correct.add(false);
@@ -313,26 +319,44 @@ class _QuestionEditorState extends State<QuestionEditor> {
       items: [
         DropdownMenuItem(
           value: QuestionKind.multipleChoice,
+          enabled:
+              _answers.length <=
+              questionAnswerCountLimit(QuestionKind.multipleChoice),
           child: Text(l10n.d('Meerkeuze')),
         ),
         DropdownMenuItem(
           value: QuestionKind.trueFalse,
+          enabled:
+              _answers.length <=
+              questionAnswerCountLimit(QuestionKind.trueFalse),
           child: Text(l10n.d('Juist / Onjuist')),
         ),
         DropdownMenuItem(
           value: QuestionKind.multipleCorrect,
+          enabled:
+              _answers.length <=
+              questionAnswerCountLimit(QuestionKind.multipleCorrect),
           child: Text(l10n.d('Meerdere juiste antwoorden')),
         ),
         DropdownMenuItem(
           value: QuestionKind.ordering,
+          enabled:
+              _answers.length <=
+              questionAnswerCountLimit(QuestionKind.ordering),
           child: Text(l10n.d('Volgorde')),
         ),
         DropdownMenuItem(
           value: QuestionKind.imagePair,
+          enabled:
+              _answers.length <=
+              questionAnswerCountLimit(QuestionKind.imagePair),
           child: Text(l10n.d('Twee afbeeldingen')),
         ),
         DropdownMenuItem(
           value: QuestionKind.openText,
+          enabled:
+              _answers.length <=
+              questionAnswerCountLimit(QuestionKind.openText),
           child: Text(l10n.d('Getypt antwoord')),
         ),
       ],
@@ -374,7 +398,8 @@ class _QuestionEditorState extends State<QuestionEditor> {
             const SizedBox(height: 4),
             Text(
               '${l10n.d('Maximaal aantal items')}: '
-              '$questionMaxAnswerCount · ${l10n.d('Antwoorden')}',
+              '$_sourceAnswerLimit · ${l10n.d('Antwoorden')}: '
+              '$_sourceAnswerCount',
               textAlign: TextAlign.center,
             ),
           ],
@@ -396,11 +421,19 @@ class _QuestionEditorState extends State<QuestionEditor> {
         child: Text(
           isMulti
               ? l10n.d(
-                  'Markeer alle juiste antwoorden. Bij presenteren wordt willekeurig een set getoond met minstens één juist en één fout.',
+                  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.',
                 )
               : l10n.d(
-                  'Markeer de goede antwoorden. Maximaal acht antwoorden; bij presenteren wordt willekeurig 1 goed en de rest fout getoond.',
+                  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.',
                 ),
+          style: TextStyle(fontSize: 12, color: AppTheme.slate500),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: Text(
+          '${l10n.d('Maximaal aantal items')}: '
+          '$_answerLimit · ${l10n.d('Antwoorden')}',
           style: TextStyle(fontSize: 12, color: AppTheme.slate500),
         ),
       ),
@@ -409,9 +442,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
       Align(
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
-          onPressed: _answers.length < questionMaxAnswerCount
-              ? _addAnswer
-              : null,
+          onPressed: _answers.length < _answerLimit ? _addAnswer : null,
           icon: const Icon(Icons.add, size: 16),
           label: Text(l10n.d('Antwoord toevoegen')),
         ),
@@ -462,9 +493,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
       Align(
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
-          onPressed: _answers.length < questionMaxAnswerCount
-              ? _addAnswer
-              : null,
+          onPressed: _answers.length < _answerLimit ? _addAnswer : null,
           icon: const Icon(Icons.add, size: 16),
           label: Text(l10n.d('Antwoord toevoegen')),
         ),

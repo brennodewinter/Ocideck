@@ -133,6 +133,28 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('a twenty-answer multiple-choice bank remains editable', (
+    tester,
+  ) async {
+    final source = multipleChoiceBeerQuestionBlock(20);
+    final expectedLastAnswer = QuestionSpec.parse(source).answers.last.text;
+    var updated = Slide.create(
+      SlideType.question,
+    ).copyWith(customMarkdown: source);
+
+    await _pump(tester, _host(updated, (s) => updated = s));
+
+    expect(find.text('Ongeldige vraag'), findsNothing);
+    expect(find.text('Karnemelk'), findsWidgets);
+    expect(find.text(expectedLastAnswer), findsWidgets);
+    final add = tester.widget<TextButton>(
+      find.widgetWithText(TextButton, 'Antwoord toevoegen'),
+    );
+    expect(add.onPressed, isNotNull);
+    expect(QuestionSpec.parse(updated.customMarkdown).answers, hasLength(20));
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('an oversized question is reported without answer editors', (
     tester,
   ) async {
@@ -150,6 +172,7 @@ void main() {
     );
     expect(find.text('Ongeldige vraag'), findsOneWidget);
     expect(find.textContaining('Maximaal aantal items: 8'), findsOneWidget);
+    expect(find.textContaining('Antwoorden: 10000'), findsOneWidget);
     expect(find.byType(TextField), findsNothing);
     expect(updates, 0);
     expect(slide.customMarkdown, source);

@@ -1015,9 +1015,10 @@ A question slide turns the presentation into a short quiz. Pick **Question** in
 the chooser, then choose the **kind** in the editor:
 
 - **Multiple choice** — one correct answer is shown together with a random pick of
-  wrong ones. Add up to eight answers and tick the correct ones;
-  set **how many options are shown** (default 4). At presentation time one correct
-  answer plus random wrong ones are drawn, so each run differs.
+  wrong ones. Build a bank of up to 32 answers and tick the correct ones; set
+  **how many options are shown** (2–8, default 4). At presentation time one
+  correct answer plus random wrong ones are drawn, so each run differs without
+  putting the whole bank on screen.
 - **True / false** — the prompt is a statement; a switch in the editor sets whether
   it is **true or false**. The viewer picks *Juist* (true) or *Onjuist* (false).
 - **Multiple correct answers** — several answers may be correct. **Every** answer
@@ -1028,8 +1029,8 @@ the chooser, then choose the **kind** in the editor:
   options are shown* does not apply to this kind (*corrected 2026-07-21: it used
   to draw a random subset, which is what this guide described*).
 - **Ordering** — enter the answers **in the correct order** in the editor (the
-  up/down arrows rearrange them; at most eight fit in one question). At
-  presentation time a random subset is drawn (keeping its relative order as the
+  up/down arrows rearrange them; the bank may hold up to 32). At presentation
+  time a subset of at most eight is drawn (keeping its relative order as the
   right answer) and shown shuffled — never
   accidentally already in the right order. The viewer taps the options in the
   order they think is correct — each tap assigns the next position number,
@@ -1047,14 +1048,14 @@ the chooser, then choose the **kind** in the editor:
   one" in a caption. This kind has no separate decorative image: the two answers
   *are* the pictures.
 
-  The editor offers two slots, but Markdown may contain a pool of at most eight
+  The editor offers two slots, but Markdown may contain a pool of at most 32
   answer images. Each round then draws **one correct and one wrong** picture from
   the pool, so a longer pool gives a fresh pair every time instead of always the
   first two. A missing answer image is reported by the file check like any other
   missing image — an empty tile where an answer belongs is something you would
   otherwise only notice in the room.
 - **Typed answer** — the viewer types instead of picking. Tick every answer that
-  should count as right (more than one is allowed, up to eight) and set **how
+  should count as right (more than one is allowed, up to 32) and set **how
   closely the typed answer must match** with the slider: 85% by default, which
   lets a typo through but not a different word. Capitals, leading/trailing spaces
   and doubled spaces are ignored before comparing; punctuation is kept, because
@@ -1078,13 +1079,17 @@ the chooser, then choose the **kind** in the editor:
 
 Common options for every kind:
 
-- **Answer limit** — one question stores at most eight answer records. The add
-  button stops at eight. A hand-edited deck containing more is shown as an
+- **Answer limits** — the number shown in one round remains at most eight.
+  Question kinds that draw from a bank (`multipleChoice`, `ordering` and
+  `imagePair`) or keep accepted answers off-screen (`openText`) may store up to
+  32 records. `multipleCorrect` remains capped at eight because it shows every
+  answer; `trueFalse` does not use answer records. The add button follows the
+  active kind. A hand-edited deck that exceeds that kind's limit is shown as an
   invalid question before answer controls or slide options are built; OciDeck
-  preserves every answer record and unknown JSON field instead of silently
-  dropping them. Saving may normalise the surrounding fence, whitespace or JSON
-  formatting; storage operations that rewrite image paths preserve the fields
-  but may likewise reformat the JSON.
+  reports the actual and allowed counts and preserves every source record and
+  unknown JSON field instead of silently dropping them. Saving may normalise the
+  surrounding fence, whitespace or JSON formatting; storage operations that
+  rewrite image paths preserve the fields but may likewise reformat the JSON.
 
 - **Answer time** (optional) — a countdown starts the moment the slide appears;
   running out counts as a wrong answer. A question that cannot be got right as it

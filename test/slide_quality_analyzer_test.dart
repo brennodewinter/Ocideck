@@ -1128,6 +1128,28 @@ void main() {
       expect(issues.single.slideIndex, 0);
       expect(issues.single.severity, MarkdownValidationSeverity.warning);
     });
+
+    test('reports an oversized visible answer set with its actual limit', () {
+      final oversized = Slide.create(SlideType.question).copyWith(
+        customMarkdown: QuestionSpec(
+          kind: QuestionKind.multipleCorrect,
+          answers: [
+            for (var i = 0; i < 9; i++)
+              QuestionAnswer(text: 'Antwoord $i', correct: i.isEven),
+          ],
+        ).toBlock(),
+      );
+
+      final issues = analyzer
+          .analyze(Deck(title: 'Quiz', slides: [oversized]))
+          .issues
+          .where((i) => i.kind == SlideQualityIssueKind.questionAnswerCountHigh)
+          .toList();
+
+      expect(issues, hasLength(1));
+      expect(issues.single.severity, MarkdownValidationSeverity.error);
+      expect(issues.single.args, {'count': '9', 'maximum': '8'});
+    });
   });
 
   // #583: een scorecard die je zojuist had toegevoegd zag er in de editor

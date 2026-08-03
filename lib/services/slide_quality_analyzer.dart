@@ -44,6 +44,22 @@ void _checkQuestionAnswerable(
 ) {
   if (slide.type != SlideType.question) return;
   final spec = QuestionSpec.parse(slide.customMarkdown);
+  if (!spec.hasValidAnswerCount) {
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: SlideQualityIssueKind.questionAnswerCountHigh,
+        category: SlideQualityCategory.content,
+        severity: MarkdownValidationSeverity.error,
+        field: 'customMarkdown',
+        args: {
+          'count': '${spec.sourceAnswerCount}',
+          'maximum': '${spec.answerCountLimit}',
+        },
+      ),
+    );
+    return;
+  }
   if (spec.isPresentable) return;
   issues.add(
     SlideQualityIssue(

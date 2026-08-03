@@ -1822,6 +1822,12 @@ const _dutchSourceAddHu = <String, String>{
   'XMPP-verbinding testen': 'XMPP-kapcsolat tesztelése',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Ellenőrizze, hogy az OciDeck el tud-e érni egy XMPP-kiszolgálót, és be tud-e jelentkezni a fiókjával. Semmi nem kerül mentésre.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Jelölje meg az összes helyes választ. Bemutatáskor minden válasz véletlenszerű sorrendben jelenik meg.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Jelölje meg a helyes válaszokat. Bemutatáskor egy helyes válasz jelenik meg véletlenszerűen kiválasztott hibás válaszokkal.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'A kérdés nem játszható le: {aantal} válasz, miközben ez a kérdéstípus legfeljebb {maximum} választ engedélyez.',
   'Actueel': 'Aktuális',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'A Forrás mód veszteségmentesen védi azokat a formázásokat, amelyeket a vizuális szerkesztő még nem támogat.',

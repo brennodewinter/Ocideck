@@ -192,6 +192,10 @@ void main() {
       SlideQualityIssueKind.bulletMultiSentence: {},
       SlideQualityIssueKind.bulletNestingDeep: {'level': '4'},
       SlideQualityIssueKind.bulletColumnImbalance: {'left': '8', 'right': '1'},
+      SlideQualityIssueKind.questionAnswerCountHigh: {
+        'count': '20',
+        'maximum': '8',
+      },
       SlideQualityIssueKind.questionNotAnswerable: {},
       SlideQualityIssueKind.emptySlide: {},
       SlideQualityIssueKind.privacyImage: {'rule': 'image.face', 'sample': '2'},

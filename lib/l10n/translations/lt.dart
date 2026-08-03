@@ -1824,6 +1824,12 @@ const _dutchSourceAddLt = <String, String>{
   'XMPP-verbinding testen': 'Tikrinti XMPP ryšį',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Patikrinkite, ar OciDeck gali pasiekti XMPP serverį ir prisijungti su jūsų paskyra. Niekas neįrašoma.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Pažymėkite visus teisingus atsakymus. Pristatant visi atsakymai rodomi atsitiktine tvarka.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Pažymėkite teisingus atsakymus. Pristatant rodomas vienas teisingas atsakymas su atsitiktine neteisingų atsakymų imtimi.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Klausimo negalima žaisti: {aantal} atsakymų, nors šio tipo klausimas leidžia daugiausia {maximum}.',
   'Actueel': 'Dabartinė',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Šaltinio režimas be nuostolių apsaugo formatavimą, kurio vaizdo redaktorius dar nepalaiko.',

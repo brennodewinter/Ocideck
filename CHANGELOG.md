@@ -14,6 +14,18 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ## Unreleased
 
+### Fixed
+
+- Vraagslides met een grotere antwoordbank werkten sinds #1077 niet meer. De
+  veiligheidsgrens van acht zichtbare opties was daar ook als grens voor de hele
+  antwoordbank gebruikt; een bestaand deck met twintig kandidaten en vier
+  getoonde opties werd daardoor ongeldig en leek zijn vraag kwijt. De twee
+  grenzen zijn nu gescheiden: trekkende vraagsoorten bewaren een begrensde bank
+  van maximaal 32, terwijl één ronde maximaal acht opties toont. Soorten die alle
+  antwoorden tonen blijven op acht. De kwaliteitscontrole meldt bij een echte
+  overschrijding voortaan het gevonden én toegestane aantal, in plaats van ten
+  onrechte te zeggen dat een goed/fout-paar ontbreekt.
+
 ### Added
 
 - **Afbeeldingenbibliotheek als onderhoudsscherm vanaf het beginscherm** — de

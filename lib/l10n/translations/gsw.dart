@@ -1821,6 +1821,12 @@ const _dutchSourceAddGsw = <String, String>{
   'XMPP-verbinding testen': 'XMPP-Verbindig teste',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Prüef, öb OciDeck en XMPP-Server erreiche und sich mit dim Konto amälde cha. Es wird nüt gspeicheret.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Markier alli richtige Antworte. Bim Präsentiere werde alli Antworte i zuefälliger Reihenfolg azeigt.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Markier d\'richtige Antworte. Bim Präsentiere wird e richtigi Antwort mit ere zuefällige Uuswahl falscher Antworte azeigt.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'D\'Froog cha nöd gspielt werde: {aantal} Antworte, während dä Froogtyp höchstens {maximum} zuelet.',
   'Actueel': 'Aktuell',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Der Quellmodus schützt Formatierungen, die der visuelle Editor noch nicht unterstützt, verlustfrei.',

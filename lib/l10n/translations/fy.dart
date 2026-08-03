@@ -777,6 +777,12 @@ const _dutchSourceAddFy = {
   'XMPP-verbinding testen': 'XMPP-ferbining teste',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Kontrolearje oft OciDeck in XMPP-server berikke kin en mei jo akkount ynlogge kin. Der wurdt neat bewarre.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Markearje alle goede antwurden. By it presintearjen wurde alle antwurden yn willekeurige folchoarder toand.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Markearje de goede antwurden. By it presintearjen wurdt ien goed antwurd toand mei in willekeurige greep út de ferkearde antwurden.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'De fraach is net spielber: {aantal} antwurden, wylst dit soarte fraach maksimaal {maximum} tastiet.',
   'Actueel': 'Aktueel',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Boarne modus beskermet opmaak dat de fisuele bewurker noch net losslessly stipet.',

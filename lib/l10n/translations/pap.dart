@@ -775,6 +775,12 @@ const _dutchSourceAddPap = {
   'XMPP-verbinding testen': 'Test e konekshon XMPP',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Kontrolá si OciDeck por yega na un servidó XMPP i login ku bo kuenta. No ta wòrdu warda nada.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Marka tur e kontestan korekto. Durante di presentashon, tur kontesta ta wordu mustrá den un órden aleatorio.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Marka e kontestan korekto. Durante di presentashon, un kontesta korekto ta wordu mustrá ku un selekshon aleatorio di kontestan inkorekto.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'E pregunta no por wordu hunga: {aantal} kontesta, miéntras ku e tipo di pregunta aki ta permití un máximo di {maximum}.',
   'Actueel': 'Aktual',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Modo di fuente ta protehá formato ku e editor visual no por konvertí ainda sin pèrdida.',
