@@ -145,7 +145,10 @@ const Map<String, int> fileSizeBaseline = {
   'lib/widgets/dialogs/add_slide_dialog.dart': 1084,
   // chart_preview_improvement part registration + improvement ChartType switch.
   // +Y-01-parameter; improvement cases in improvement_dispatch.dart (part).
-  'lib/widgets/slides/slide_preview.dart': 1036,
+  // +13 (#1164): het nieuwe publieke veld splitRunPosition met zijn dispatch en
+  // export; de titelteller-helper zelf is naar de part bullets_previews.dart
+  // getild, alleen de irreducibele plumbing bleef in de librarykop.
+  'lib/widgets/slides/slide_preview.dart': 1049,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -193,8 +196,11 @@ const Map<String, int> classSizeBaseline = {
   // vensters bij. De extractie brengt de klasse écht onder het plafond in plaats
   // van het plafond op te rekken.
   // +1: Y-01-doorvoer naar SlidePreview in views/overlays (resolve-at-draw).
+  // +6 (#1164): splitRunPosition-doorvoer naar SlidePreview in views/overlays,
+  // zodat de (2/3)-titelteller ook in de presentatie- en publieksweergave staat.
+  // Pure plumbing van een nieuw veld; er valt geen gedrag uit te tillen.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3311,
+      3317,
   'lib/services/file_service.dart#FileService': 2747,
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on
@@ -245,7 +251,8 @@ const Map<String, int> classSizeBaseline = {
   // overlay. The overlay's real work (filter + Stack + dots) lives in the
   // top-level `slideWithPresence` in slide_presence_dots.dart; only the per-item
   // read and the wrap call remain in the state class.
-  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1024,
+  // +1 (#1164): splitRunPosition-doorvoer naar de thumbnail voor de (2/3)-teller.
+  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1025,
 };
 
 final _print = RegExp(r'(?<![\w.])print\(');

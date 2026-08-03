@@ -377,6 +377,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                     _theme,
                     _theme.fontFamily,
                   ),
+                  splitRunPosition: splitRunPositionFor(_slides, _index),
                   richTextPage: _richTextPage,
                   showRichTextPageControls: false,
                   timelineRevealedCount: _timelineRevealedFor(slide),

@@ -64,7 +64,11 @@ import '../../services/rich_text_layout.dart';
 // `SlidePreviewWidget.fitScaleOverride`.
 import '../../services/split_run.dart';
 export '../../services/split_run.dart'
-    show invalidateSplitRunLayout, sharedSplitFitScale, splitRunMemberScale;
+    show
+        invalidateSplitRunLayout,
+        sharedSplitFitScale,
+        splitRunMemberScale,
+        splitRunPositionFor;
 import '../../services/web_asset_store.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/image_focal.dart';
@@ -456,6 +460,11 @@ class SlidePreviewWidget extends StatelessWidget {
   /// with the full deck compute it via [sharedSplitFitScale].
   final double? fitScaleOverride;
 
+  /// Positie `(page, total)` van deze dia in zijn gesplitste reeks, voor de
+  /// "(2/3)"-titelteller (#1164); null op een losse dia. Aanroepers met het hele
+  /// deck vullen het via [splitRunPositionFor].
+  final ({int page, int total})? splitRunPosition;
+
   /// The deck's scope-object → CIA-rating index (see [deckScopeCiaIndex]). A
   /// `finding` header whose scope object is rated shows a context (environmental)
   /// score derived from it. Callers with the full deck build it once and pass it
@@ -520,6 +529,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.timelineRevealedCount,
     this.numberStart = 1,
     this.fitScaleOverride,
+    this.splitRunPosition,
     this.scopeCia = const {},
     this.reportLanguage = '',
     this.improvementY01 = ImprovementY01Metric.empty,
@@ -742,6 +752,7 @@ class SlidePreviewWidget extends StatelessWidget {
           richTextPage: _effectivePage,
           numberStart: numberStart,
           fitScaleOverride: fitScaleOverride,
+          splitRunPosition: splitRunPosition,
         );
       case SlideType.twoBullets:
         return _TwoBulletsPreview(
@@ -750,6 +761,7 @@ class SlidePreviewWidget extends StatelessWidget {
           font: fontFamily,
           profile: themeProfile,
           fitScaleOverride: fitScaleOverride,
+          splitRunPosition: splitRunPosition,
         );
       case SlideType.bulletsImage:
         return _BulletsImagePreview(
@@ -761,6 +773,7 @@ class SlidePreviewWidget extends StatelessWidget {
           richTextPage: _effectivePage,
           numberStart: numberStart,
           fitScaleOverride: fitScaleOverride,
+          splitRunPosition: splitRunPosition,
         );
       case SlideType.twoImages:
         return _TwoImagesPreview(

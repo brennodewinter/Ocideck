@@ -193,10 +193,17 @@ List<SlideQualityAction> buildSlideQualityActions({
     );
   }
 
-  // Te volle slides: splitsen lost het in één klik op.
+  // Te volle slides: splitsen lost het in één klik op — maar alleen wanneer
+  // splitsen de dia werkelijk verlicht. Een pagina met te weinig bullets voor
+  // twee volwaardige pagina's (bv. een al-gesplitste pagina van drie lange
+  // bullets die alleen nog woordigheid meldt) wordt door splitsen niet beter:
+  // het zou flinters opleveren en de melding blijft staan. Dan is 'Splits
+  // slide' een dode knop; we bieden hem daar niet aan en laten 'Uitleg naar
+  // notities' het werk doen (#1164). Dezelfde grens als de fix-alles-motor.
   if (issue.category == SlideQualityCategory.textDensity &&
       slide != null &&
-      canSplitSlide(slide)) {
+      canSplitSlide(slide) &&
+      hasBulletsForFontEnlargingSplit(slide)) {
     final index = issue.slideIndex;
     actions.add(
       SlideQualityAction(

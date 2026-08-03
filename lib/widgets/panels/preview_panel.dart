@@ -455,6 +455,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                     deck.themeProfile,
                     deck.themeProfile.fontFamily,
                   ),
+                  splitRunPosition: splitRunPositionFor(deck.slides, idx),
                   richTextPage: richTextPage,
                   showRichTextPageControls: hasRichTextPages,
                   onRichTextPageChanged: hasRichTextPages
@@ -659,6 +660,7 @@ class FullDeckPreview extends ConsumerWidget {
                     onLinkTap: openExternalUrl,
                     slideNumber: i + 1,
                     slideCount: renderSlides.length,
+                    splitRunPosition: splitRunPositionFor(renderSlides, i),
                     scopeCia: scopeCia,
                     reportLanguage: deck.language,
                     improvementY01: deck.improvementY01Metric,

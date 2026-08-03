@@ -14,8 +14,28 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ## Unreleased
 
+### Added
+
+- **Een gesplitste dia toont nu een "(pagina/totaal)"-teller naast zijn titel.**
+  Na "Splits slide" herhaalde elke vervolgpagina exact dezelfde titel zonder
+  markering — soms met een nu-onjuist aantal erin. Elke pagina van een gesplitste
+  reeks krijgt nu een bescheiden, gedempte teller ("1/3", "2/3", "3/3"), zodat
+  spreker en publiek zien dat de lijst doorloopt en waar ze zitten. Zichtbaar in
+  de slidestrook, de editor, het volledige-deck-overzicht, de presentatie én de
+  PDF-export; een losse dia toont niets extra. De teller is een render-decoratie
+  en blijft daarom bewust uit de markdown-getrouwe HTML/Marp-export, die de dia
+  toont zoals de `.md` hem beschrijft. (#1164)
+
 ### Fixed
 
+- **Het kwaliteitspaneel bood 'Splits slide' ook aan waar splitsen niet hielp.**
+  Een dia met te weinig bullets voor twee volwaardige pagina's — bijvoorbeeld een
+  al-gesplitste pagina van drie lange bullets die alleen nog woordigheid meldt —
+  kreeg toch die knop, terwijl splitsen daar flinters zou opleveren en de melding
+  liet staan: een dode knop. Het paneel biedt 'Splits slide' nu alleen aan
+  wanneer de dia genoeg bullets heeft voor twee echte pagina's, dezelfde grens
+  als de fix-alles-motor; anders blijft 'Uitleg naar notities' over, de remedie
+  die woordigheid wél aanpakt. (#1164)
 - **Fix alle problemen** vergrootte de tekst niet wanneer een dia te klein
   rendert doordat zijn bullets *lang* zijn in plaats van *veel*. De motor
   splitste alleen dia's met méér bullets dan de leesbaarheidsdrempel; een dia met
@@ -813,6 +833,24 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een gesplitste dia zag er ná reparatie niet verzorgd uit — twee punten uit
+  de beeldkeuring bij #1159.** (1) Elke vervolgpagina herhaalde exact dezelfde
+  titel, zonder markering; bij een titel met een aantal erin stond dat onjuiste
+  aantal 3× op pagina's van zes. Nu draagt elke pagina van een reeks een
+  gedempte "(pagina/totaal)"-teller. De positie is puur uit `splitRunRange`
+  (`splitRunPositionFor`), reist als `SlidePreviewWidget.splitRunPosition` mee en
+  wordt op de zeven call-sites naast `fitScaleOverride` gevuld; omdat alle vier
+  de oppervlakken (editor, presentatie, publiek, export via de rasterizer) via
+  diezelfde widget renderen, verschijnt de teller overal tegelijk. Bewust op de
+  *positie* afgegaan, niet op de `continuesSplit`-vlag alleen: die zit niet op de
+  eerste pagina, dus "1/3" op pagina 1 vereist de range. Een losse dia (reeks van
+  één) krijgt exact de oude titel-widget terug, dus de goldens veranderen niet.
+  (2) Het paneel bood 'Splits slide' ook aan op een pagina waar alleen nog
+  woordigheid restte — splitsen zou daar flinters opleveren zonder de melding op
+  te lossen. De knop verschijnt nu op dezelfde grens als de fix-alles-motor
+  (`hasBulletsForFontEnlargingSplit`), zodat 'Uitleg naar notities' overblijft
+  waar dat de echte remedie is. De 70%-klif en het ontbrekende thema-logo uit
+  dezelfde keuring zijn apart gehouden (#1164 / een eigen issue). (#1164)
 - **"Fix alle problemen" splitste op het bulletaantal, terwijl de font-krimp
   vaak uit de bulletlengte komt.** Gemeten op referentiebreedte (960pt, Roboto):
   een dia met zestien korte bullets rendert op schaal 0,60 en werd al gesplitst

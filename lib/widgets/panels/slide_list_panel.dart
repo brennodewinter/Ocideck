@@ -589,6 +589,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         deck.themeProfile,
         deck.themeProfile.fontFamily,
       ),
+      splitRunPosition: splitRunPositionFor(deck.slides, index),
       numberStart: numberStarts[index],
       scopeCia: deckScopeCiaIndex(deck.slides),
       reportLanguage: deck.language,

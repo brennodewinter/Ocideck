@@ -69,6 +69,20 @@ bool canContinueSplitFrom(List<Slide> slides, int index) {
   return (start, end);
 }
 
+/// De positie van de dia op [index] binnen zijn gesplitste reeks: `(page, total)`
+/// met `page` één-gebaseerd. `null` wanneer de dia geen deel is van een reeks van
+/// meerdere pagina's — dan valt er niets te tellen.
+///
+/// Puur uit [splitRunRange] (de vlaggen, geen meting), zodat een preview er een
+/// "(2/3)"-teller uit kan afleiden zonder het deck opnieuw te meten. Aanroepers
+/// met het hele deck geven de uitkomst door als
+/// `SlidePreviewWidget.splitRunPosition`; een losse preview laat hem op `null`.
+({int page, int total})? splitRunPositionFor(List<Slide> slides, int index) {
+  final (start, end) = splitRunRange(slides, index);
+  if (end <= start) return null;
+  return (page: index - start + 1, total: end - start + 1);
+}
+
 /// Welke pagina's van een run onnodig klein renderen, gegeven de schaal die elke
 /// pagina op zichzelf zou halen ([scales], in runvolgorde).
 ///

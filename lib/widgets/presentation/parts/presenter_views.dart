@@ -43,6 +43,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                     widget.themeProfile,
                     widget.themeProfile.fontFamily,
                   ),
+                  splitRunPosition: splitRunPositionFor(widget.slides, _index),
                   richTextPage: _richTextPage,
                   showRichTextPageControls:
                       (_richTextPlanFor(slide)?.pageCount ?? 1) > 1,
@@ -263,6 +264,10 @@ extension _PresenterViews on _FullscreenPresenterState {
                                 _index + 1,
                                 widget.themeProfile,
                                 widget.themeProfile.fontFamily,
+                              ),
+                              splitRunPosition: splitRunPositionFor(
+                                widget.slides,
+                                _index + 1,
                               ),
                               improvementY01: widget.improvementY01,
                             ),

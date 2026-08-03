@@ -22,6 +22,32 @@ void main() {
       expect(splitRunRange(slides, 1), (1, 1));
     });
 
+    test(
+      'splitRunPositionFor telt pagina en totaal, null buiten een reeks',
+      () {
+        final slides = [
+          bullets(['a']),
+          bullets(['b'], continuesSplit: true),
+          bullets(['c'], continuesSplit: true),
+          bullets(['d']),
+        ];
+        // Elke pagina van de reeks kent zijn plaats "(page/total)".
+        expect(splitRunPositionFor(slides, 0), (page: 1, total: 3));
+        expect(splitRunPositionFor(slides, 1), (page: 2, total: 3));
+        expect(splitRunPositionFor(slides, 2), (page: 3, total: 3));
+        // Een losse slide erna is geen reeks: geen teller.
+        expect(splitRunPositionFor(slides, 3), isNull);
+        // Twee losse slides op zichzelf: allebei null.
+        expect(
+          splitRunPositionFor([
+            bullets(['x']),
+            bullets(['y']),
+          ], 0),
+          isNull,
+        );
+      },
+    );
+
     test('de vlag hecht een pagina aan zijn voorganger', () {
       final slides = [
         bullets(['a']),
