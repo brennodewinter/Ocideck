@@ -207,8 +207,12 @@ const Map<String, int> classSizeBaseline = {
   // +6 (#1164): splitRunPosition-doorvoer naar SlidePreview in views/overlays,
   // zodat de (2/3)-titelteller ook in de presentatie- en publieksweergave staat.
   // Pure plumbing van een nieuw veld; er valt geen gedrag uit te tillen.
+  // +24 (#1162): de sprong-uit + navigatiestack in de presentator — `_advanceTo`,
+  // de sprong-tak in `_next`, de retrace in `_prev` en het wissen van de stack bij
+  // een teleport. De anker-resolutie zelf is al top-level (`_indexOfAnchor`) en
+  // telt niet mee; wat rest gebruikt `_index`/`_rebuild` en hoort in de state.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3317,
+      3341,
   'lib/services/file_service.dart#FileService': 2747,
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on

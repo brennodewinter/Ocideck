@@ -534,6 +534,9 @@ void _replaceSlide(List<Slide> slides, int index, Slide replacement) {
 
 class _FullscreenPresenterState extends State<FullscreenPresenter> {
   late int _index;
+
+  /// Werkelijk gelopen route (#1162): voorwaarts duwt, "terug" popt. Zie `_prev`.
+  final List<int> _jumpHistory = [];
   late FocusNode _focusNode;
   Timer? _advanceTimer;
   Timer? _clockTimer;

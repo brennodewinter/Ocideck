@@ -12,6 +12,18 @@ part of '../fullscreen_presenter.dart';
 String? _exitSlideId(List<Slide> slides, int index) =>
     slides.isEmpty ? null : slides[index.clamp(0, slides.length - 1)].id;
 
+/// De render-index van de eerste dia met [anchor] (#1162), of null als geen dia
+/// het draagt — dan valt een sprong fail-safe terug op lineair. Zoekt in de
+/// render-uitgeklapte lijst, dus een sprong landt op de eerste pagina van de
+/// doeldia. Top-level zodat het de forse [_FullscreenPresenterState] niet groeit.
+int? _indexOfAnchor(List<Slide> slides, String anchor) {
+  if (anchor.isEmpty) return null;
+  for (var i = 0; i < slides.length; i++) {
+    if (slides[i].anchor == anchor) return i;
+  }
+  return null;
+}
+
 extension _PresenterNavigation on _FullscreenPresenterState {
   /// Meld de slidewissel aan schermlezers (WCAG 4.1.3, statusberichten):
   /// visueel verandert de hele slide, maar zonder aankondiging merkt een
@@ -27,6 +39,22 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       '${title.isEmpty ? '' : ': $title'}',
       TextDirection.ltr,
     );
+  }
+
+  /// Ga voorwaarts naar [target] en onthoud de dia die je verlaat op de
+  /// retrace-stack, zodat "terug" langs de werkelijke route loopt (#1162).
+  void _advanceTo(int target) {
+    _commitActiveInk();
+    _persistUserNoteFromController();
+    _rebuild(() {
+      _jumpHistory.add(_index);
+      _index = target;
+      _richTextPage = 0;
+      _timelineStep = 0;
+    });
+    _loadUserNoteIntoController();
+    _scheduleAdvance();
+    _announceSlide();
   }
 
   void _next({bool allowInUserNotes = false}) {
@@ -64,17 +92,14 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       }
       return;
     }
-    if (_index < widget.slides.length - 1) {
-      _commitActiveInk();
-      _persistUserNoteFromController();
-      _rebuild(() {
-        _index++;
-        _richTextPage = 0;
-        _timelineStep = 0;
-      });
-      _loadUserNoteIntoController();
-      _scheduleAdvance();
-      _announceSlide();
+    // Een per-dia sprong-uit (#1162) gaat vóór de lineaire volgorde: is er een
+    // vindbaar doelanker, dan springen we daarheen — ook voorbij de laatste dia,
+    // zodat een tak vanaf het eind terug naar het menu kan keren.
+    final jumpIndex = _indexOfAnchor(widget.slides, _currentSlide.nextAnchor);
+    if (jumpIndex != null) {
+      _advanceTo(jumpIndex);
+    } else if (_index < widget.slides.length - 1) {
+      _advanceTo(_index + 1);
     } else {
       // Voorbij de laatste slide klikken/tikken verlaat de presentatie, zodat je
       // er na de laatste slide gewoon "doorheen" loopt i.p.v. vast te lopen en
@@ -103,19 +128,26 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _announceSlide();
       return;
     }
-    if (_index > 0) {
-      _commitActiveInk();
-      _persistUserNoteFromController();
-      _rebuild(() {
-        _index--;
-        final prevPlan = _richTextPlanFor(widget.slides[_index]);
-        _richTextPage = prevPlan != null ? prevPlan.pageCount - 1 : 0;
-        _timelineStep = 0;
-      });
-      _loadUserNoteIntoController();
-      _scheduleAdvance();
-      _announceSlide();
-    }
+    // "Terug" volgt de werkelijke route (#1162): pop de dia die we het laatst
+    // verlieten. Zo keer je na een menusprong terug náár het menu i.p.v. naar de
+    // vorige brondia. Een lineair deck heeft `[0,1,2,…]` op de stack, dus dit valt
+    // samen met het oude `_index--`. Is de stack leeg (bv. gestart middenin het
+    // deck), dan gewoon één brondia terug.
+    final target = _jumpHistory.isNotEmpty
+        ? _jumpHistory.removeLast().clamp(0, widget.slides.length - 1)
+        : (_index > 0 ? _index - 1 : null);
+    if (target == null) return;
+    _commitActiveInk();
+    _persistUserNoteFromController();
+    _rebuild(() {
+      _index = target;
+      final prevPlan = _richTextPlanFor(widget.slides[_index]);
+      _richTextPage = prevPlan != null ? prevPlan.pageCount - 1 : 0;
+      _timelineStep = 0;
+    });
+    _loadUserNoteIntoController();
+    _scheduleAdvance();
+    _announceSlide();
   }
 
   /// Spring direct naar een slide (vanuit het rasteroverzicht).
@@ -131,6 +163,8 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _tableEditMode = false;
       _tableEditRow = null;
       _tableEditCol = null;
+      // Een expliciete teleport breekt de route: "terug" is daarna lineair (#1162).
+      _jumpHistory.clear();
     });
     _loadUserNoteIntoController();
     _scheduleAdvance();
@@ -154,6 +188,8 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _tableEditMode = false;
       _tableEditRow = null;
       _tableEditCol = null;
+      // Een expliciete teleport breekt de route: "terug" is daarna lineair (#1162).
+      _jumpHistory.clear();
     });
     _loadUserNoteIntoController();
     _scheduleAdvance();
