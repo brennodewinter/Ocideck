@@ -2748,6 +2748,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
+      'Zayıflıklar listesi (78): id, başlık, MASVS kategorisi, platform, CWE bağlantısı ve kısa bir açıklama. Ayrıca eski beta numaralandırmasından (0119\'a kadar) kanonik id\'lere bir köprü, böylece MASTG çapraz referansı doğru kalır.',
   'Media (WebRTC)': 'Medya (WebRTC)',
   'Media-stack testen': 'Medya yığınını test et',
   'De media-stack werkt op dit apparaat.': 'Medya yığını bu cihazda çalışıyor.',

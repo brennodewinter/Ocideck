@@ -1806,6 +1806,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
+      'Liosta na laigí (78): id, teideal, catagóir MASVS, ardán, an nasc CWE agus cur síos gairid. Chomh maith le sin, droichead ón sean-uimhriú béite (suas go 0119) go dtí na id canónacha, ionas go bhfanfaidh an chrostagairt MASTG ceart.',
   'Media (WebRTC)': 'Meáin (WebRTC)',
   'Media-stack testen': 'Tástáil an chruach meán',
   'De media-stack werkt op dit apparaat.':

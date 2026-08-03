@@ -1793,6 +1793,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
+      'Il-lista tad-dgħufijiet (78): id, titlu, kategorija MASVS, pjattaforma, ir-rabta CWE u deskrizzjoni qasira. Flimkien ma\' pont mit-tqassim beta l-antik (sa 0119) għall-id kanoniċi, biex ir-referenza inkroċjata MASTG tibqa\' taqbel.',
   'Media (WebRTC)': 'Media (WebRTC)',
   'Media-stack testen': 'Ittestja l-istack tal-media',
   'De media-stack werkt op dit apparaat.':

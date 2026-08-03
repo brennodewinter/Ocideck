@@ -1778,6 +1778,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
+      'Zoznam slabín (78): id, názov, kategória MASVS, platforma, prepojenie CWE a krátky opis. Navyše most od starého beta číslovania (až po 0119) ku kanonickým id, aby krížový odkaz MASTG naďalej sedel.',
   'Media (WebRTC)': 'Médiá (WebRTC)',
   'Media-stack testen': 'Otestovať mediálny zásobník',
   'De media-stack werkt op dit apparaat.':

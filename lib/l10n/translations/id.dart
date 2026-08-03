@@ -1771,6 +1771,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
+      'Daftar kelemahan (78): id, judul, kategori MASVS, platform, tautan CWE, dan deskripsi singkat. Ditambah jembatan dari penomoran beta lama (hingga 0119) ke id kanonik, sehingga referensi silang MASTG tetap sesuai.',
   'Media (WebRTC)': 'Media (WebRTC)',
   'Media-stack testen': 'Uji stack media',
   'De media-stack werkt op dit apparaat.':

@@ -1771,6 +1771,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
+      'Heikkouksien luettelo (78): id, otsikko, MASVS-luokka, alusta, CWE-linkitys ja lyhyt kuvaus. Lisäksi silta vanhasta beta-numeroinnista (aina 0119 asti) kanonisiin id-tunnuksiin, jotta MASTG-ristiviittaus pysyy paikkansapitävänä.',
   'Media (WebRTC)': 'Media (WebRTC)',
   'Media-stack testen': 'Testaa mediapino',
   'De media-stack werkt op dit apparaat.': 'Mediapino toimii tässä laitteessa.',
