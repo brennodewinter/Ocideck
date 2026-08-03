@@ -3212,7 +3212,16 @@ group headings, so whole **tussenkoppen** groups stay together on a page rather
 than being cut in half. Splitting a **bullets + image** slide keeps the image on
 every continuation page too, so all pages match and share one font size — swap a
 follow-up to a plain bullets page via the slide **type** picker if you prefer.
-Two-column slides spread both columns across the same set of pages.
+Two-column slides spread both columns across the same set of pages. Each page of a
+split run shows a small, dimmed **`page/total`** counter beside its title (`1/3`,
+`2/3`, `3/3`), so a listener knows the list continues and where they are; a
+standalone slide shows nothing extra.
+
+**Split slide** is offered only when splitting would actually relieve the slide —
+when there are enough bullets to make two real pages. On a slide with just a few
+long bullets (where splitting would only leave scraps of one or two), the button
+stays away and **Explanation to notes** is offered instead, because there the
+problem is wordiness, which splitting does not cure.
 
 A bullet slide with multi-sentence or overly long bullets offers two more
 one-click fixes in the quality panel. **Split sentences into bullets** turns each
