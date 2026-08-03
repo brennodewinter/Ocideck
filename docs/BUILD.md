@@ -730,3 +730,81 @@ Per release, after the workflow has published the tag:
 
 A recipient verifies with `minisign -Vm SHA256SUMS -p minisign.pub`.
 `OCIDECK_RELEASE_KEY` overrides the key path for a different signer.
+
+##### Backing up and escrowing the key
+
+The private key is a single point of failure, and losing it is not hypothetical:
+`v0.2.0` nearly shipped unsigned because the passphrase had been forgotten (it was
+recovered). Two things keep that from becoming a real loss, and both are manual —
+they are deliberately **not** automated, because the whole point is that the key
+and its passphrase never touch a runner or the repository:
+
+- **Passphrase in a password manager**, not only in someone's memory. It is the
+  key to a release root of trust; treat it like one.
+- **An offline backup of the private key file** (`~/.minisign/ocideck-release.key`)
+  on a second secure medium — an encrypted volume or another machine's protected
+  keystore. Never in the repository (`.gitignore` guards the filename as a
+  backstop, and `release_signing_test.dart` fails the build if `minisign.key` or
+  `ocideck-release.key` ever appears in the tree) and never as a runner secret.
+
+The public half is safe to copy anywhere; it is already in the repository and on
+the mirror.
+
+##### Rotating the key
+
+Rotate when the private key or its passphrase is lost, when the key may have been
+exposed, or on a planned schedule. Because releases from `v0.2.0` onward are
+signed, a rotation is a **published event**, not a silent swap: a receiver
+cross-checks the key ID out of band, so a quiet replacement is indistinguishable
+from an attacker swapping the key. Steps:
+
+1. **Generate a fresh keypair** (new passphrase, stored in the manager). `-f`
+   overwrites the retired files and writes the new public key straight into the
+   repository root:
+
+   ```sh
+   minisign -G -f -p minisign.pub -s ~/.minisign/ocideck-release.key
+   ```
+
+2. **Update every pinned copy of the public key / key ID.** The build fails until
+   they all agree — that is `test/release_signing_test.dart` doing its job, not a
+   nuisance. Read the new key ID from line 1 of the fresh `minisign.pub`
+   (`untrusted comment: minisign public key <ID>`) and the new base64 from line 2,
+   then fix the four places:
+
+   | File | What to change |
+   | --- | --- |
+   | `minisign.pub` (repo root) | already written by step 1 |
+   | `test/release_signing_test.dart` | `verwachteSleutel` (the base64 line) **and** `verwachteSleutelId` |
+   | `SECURITY.md` | the key ID in *Release artifact integrity and signing* |
+   | `.forgejo/release-body.md` | the key ID in the verify blurb shipped in every release body |
+
+3. **Prove they agree:** `flutter test test/release_signing_test.dart` must pass
+   (it checks the pin, that the private key did not leak into the tree, and that
+   the four references line up).
+
+4. **Land it via PR before the next tag**, and **announce it in `SECURITY.md`**
+   with a dated note: the old key ID is retired, the new one is `<ID>`, effective
+   from release `vN`. That note is the out-of-band signal that makes the new key
+   trustworthy — put it where receivers already look (the repo, the mirror,
+   `SECURITY.md`). Releases signed with the old key stay verifiable against the
+   `minisign.pub` committed *at their own tag*; new releases verify against the new
+   key.
+
+##### A reserve key turns a forced rotation into a planned one (recommended)
+
+Generate a second keypair offline once, and decide up front how it backs up the
+primary — so a lost or exposed key points at something already trusted instead of
+introducing a brand-new key under pressure:
+
+- **Document-only (cheap, covers "key lost").** List the reserve public key and
+  its ID in `SECURITY.md` as *the key we will rotate to*. Receivers can trust it
+  in advance, so a rotation is only steps 2–4 above with values that were already
+  published.
+- **Co-sign (covers "primary key compromised", but doubles the signing step).**
+  Attach a second detached signature from the reserve key
+  (`SHA256SUMS.reserve.minisig`) to each release, so forging a release means
+  forging *both*. Keep the reserve private key on different media than the primary.
+
+Either way the reserve private key lives offline and never on a runner, same as
+the primary.

@@ -646,7 +646,13 @@ the out-of-band key ID is what a compromise of a single host cannot quietly
 change. The private key never leaves the maintainer's machine and is never a
 secret on a runner. The manifest is signed **by hand, locally**
 (`make sign-release`) — the same least-privilege model as the macOS notarisation,
-which also runs locally.
+which also runs locally. If the key is ever lost, exposed, or rotated on schedule,
+the procedure — key backup/escrow, updating the pinned copies, and how the change
+is announced *here* — is in
+[BUILD.md, *Rotating the key*](docs/BUILD.md#rotating-the-key). A rotation is a
+published event: when the key ID above changes, a dated note in this section will
+record the retired ID, the new ID, and the release it takes effect from, so the
+out-of-band cross-check keeps working.
 
 The signature covers exactly the files listed in `SHA256SUMS`; a file that is not
 in the list is outside its guarantee (this is why the verify command uses
