@@ -231,6 +231,25 @@ void main() {
     Process.runSync('chmod', ['000', locked.path]);
     addTearDown(() => Process.runSync('chmod', ['755', locked.path]));
 
+    // `chmod 000` houdt root niet tegen, en CI-containers draaien als root: dan
+    // slaagt de scan gewoon en verschijnt de "onvolledig"-melding niet. Deze test
+    // toetst het niet-root-gedrag. Toets of het slot echt werkt (map niet te
+    // lezen); zo niet (root/CI), sla hem over i.p.v. vals-rood te melden — op een
+    // ontwikkelaarsmachine draait hij onverkort.
+    var lockEffective = false;
+    try {
+      locked.listSync();
+    } on FileSystemException {
+      lockEffective = true;
+    }
+    if (!lockEffective) {
+      markTestSkipped(
+        'chmod 000 heeft geen effect als root (CI-container); '
+        'het onleesbare-submap-scenario is alleen op non-root toetsbaar.',
+      );
+      return;
+    }
+
     await tester.binding.setSurfaceSize(const Size(1400, 900));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     await tester.runAsync(() async {
