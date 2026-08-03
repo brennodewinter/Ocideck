@@ -65,4 +65,33 @@ void main() {
       expect(rescue.message, contains('module'));
     });
   });
+
+  group('presentationOpenRescueSnackBar', () {
+    test('geen melding voor een niet-presentatie', () {
+      expect(
+        presentationOpenRescueSnackBar(
+          l10n,
+          'notities.md',
+          importModuleAvailable: true,
+          onImport: () {},
+          onOpenSettings: () {},
+        ),
+        isNull,
+      );
+    });
+
+    test('een presentatie krijgt een melding met een actieknop', () {
+      final bar = presentationOpenRescueSnackBar(
+        l10n,
+        'talk.odp',
+        importModuleAvailable: true,
+        onImport: () {},
+        onOpenSettings: () {},
+      );
+      expect(bar, isNotNull);
+      expect(bar!.action, isNotNull);
+      // Ruim genoeg om te lezen én te klikken.
+      expect(bar.duration, const Duration(seconds: 8));
+    });
+  });
 }

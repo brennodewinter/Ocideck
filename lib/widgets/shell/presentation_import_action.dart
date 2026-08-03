@@ -272,3 +272,32 @@ bool isImportablePresentationName(String name) {
     startsImport: false,
   );
 }
+
+/// De melding-met-uitweg als kant-en-klare [SnackBar], of `null` wanneer
+/// [sourceName] geen presentatie is (dan blijft de gewone open-fout staan).
+/// [onImport] converteert het al-gekozen bestand; [onOpenSettings] opent de
+/// instellingen om de module aan te zetten — welke van de twee de knop krijgt,
+/// bepaalt de module. De duur is ruimer dan standaard: dit is een "wat nu"-
+/// moment, de knop mag niet wegvallen terwijl de gebruiker nog leest.
+SnackBar? presentationOpenRescueSnackBar(
+  AppLocalizations l10n,
+  String sourceName, {
+  required bool importModuleAvailable,
+  required VoidCallback onImport,
+  required VoidCallback onOpenSettings,
+}) {
+  final rescue = presentationOpenRescue(
+    l10n,
+    sourceName,
+    importModuleAvailable: importModuleAvailable,
+  );
+  if (rescue == null) return null;
+  return SnackBar(
+    content: Text(rescue.message),
+    duration: const Duration(seconds: 8),
+    action: SnackBarAction(
+      label: rescue.startsImport ? l10n.d('Importeren') : l10n.t('settings'),
+      onPressed: rescue.startsImport ? onImport : onOpenSettings,
+    ),
+  );
+}

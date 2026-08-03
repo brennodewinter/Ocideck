@@ -25,27 +25,15 @@ void _reportOpenFailure(
   if (sourceName != null &&
       (result == OpenResult.unreadable ||
           result == OpenResult.notAPresentation)) {
-    final rescue = presentationOpenRescue(
+    final bar = presentationOpenRescueSnackBar(
       l10n,
       sourceName,
       importModuleAvailable: importModuleAvailable,
+      onImport: onImport ?? () {},
+      onOpenSettings: onOpenSettings ?? () {},
     );
-    if (rescue != null) {
-      final onPressed = rescue.startsImport ? onImport : onOpenSettings;
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text(rescue.message),
-          // Ruimer dan standaard: dit is een "wat nu"-moment, de knop mag niet
-          // wegvallen terwijl de gebruiker de melding nog leest.
-          duration: const Duration(seconds: 8),
-          action: SnackBarAction(
-            label: rescue.startsImport
-                ? l10n.d('Importeren')
-                : l10n.t('settings'),
-            onPressed: onPressed ?? () {},
-          ),
-        ),
-      );
+    if (bar != null) {
+      messenger.showSnackBar(bar);
       return;
     }
   }
@@ -177,26 +165,17 @@ Future<void> _openWithSearch(BuildContext context, WidgetRef ref) async {
     reason: ref.read(openFailureProvider),
     sourceName: result.path,
     importModuleAvailable: ref.read(importModuleRevealProvider),
-    onImport: () => _rescueImportFromPath(context, ref, result.path),
+    // Pad al bekend: importeer zonder de bestandskiezer opnieuw te openen.
+    onImport: () async {
+      final bytes = await File(result.path).readAsBytes();
+      if (!context.mounted) return;
+      await importPresentation(
+        context,
+        ref,
+        fileOverride: (bytes: bytes, name: p.basename(result.path)),
+      );
+    },
     onOpenSettings: () => SettingsDialog.show(context),
-  );
-}
-
-/// Importeer een presentatie waarvan het pad al bekend is (de gebruiker koos
-/// hem net via "Openen"), zónder de bestandskiezer opnieuw te openen. De import
-/// werkt op bytes, dus lezen en doorgeven; de reguliere import-flow neemt het
-/// daarna over (waarschuwing → conversie → nieuw tabblad).
-Future<void> _rescueImportFromPath(
-  BuildContext context,
-  WidgetRef ref,
-  String path,
-) async {
-  final bytes = await File(path).readAsBytes();
-  if (!context.mounted) return;
-  await importPresentation(
-    context,
-    ref,
-    fileOverride: (bytes: bytes, name: p.basename(path)),
   );
 }
 
