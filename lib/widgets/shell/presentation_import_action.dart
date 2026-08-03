@@ -11,11 +11,13 @@ import '../../services/import/importers/import_failure.dart';
 import '../../services/import/presentation_import_service.dart';
 import '../../services/web_asset_store.dart';
 import '../../state/deck_provider.dart';
+import '../../state/import_module_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../utils/error_snackbar.dart';
 import '../../utils/log.dart';
 import '../../utils/user_facing_error.dart';
+import '../dialogs/settings_dialog.dart';
 import '../dialogs/import_presentation_warning_dialog.dart';
 import '../dialogs/import_decision_dialog.dart';
 import '../dialogs/import_security_alarm_dialog.dart';
@@ -300,4 +302,31 @@ SnackBar? presentationOpenRescueSnackBar(
       onPressed: rescue.startsImport ? onImport : onOpenSettings,
     ),
   );
+}
+
+/// Gesleepte presentatiebestanden verwerken. De bytes zijn al gelezen door de
+/// dropafhandeling (desktop uit het pad, web uit de drop), dus dit deelt de
+/// route met "Presentaties importeren…": staat de module Importeren aan, dan
+/// gaat het hele stel de import in — één bestand opent direct, meer gaan naar de
+/// wachtrij. Staat de module uit, dan dezelfde uitweg als bij "Openen": de
+/// melding wijst naar de instellingen in plaats van stil te importeren, zodat
+/// een standaard-uit module ook via slepen niet ongemerkt aangaat.
+Future<void> importDroppedPresentations(
+  BuildContext context,
+  WidgetRef ref,
+  List<PickedPresentation> presentations,
+) async {
+  if (presentations.isEmpty) return;
+  if (ref.read(importModuleRevealProvider)) {
+    await importPresentation(context, ref, filesOverride: presentations);
+    return;
+  }
+  final bar = presentationOpenRescueSnackBar(
+    context.l10n,
+    presentations.first.name,
+    importModuleAvailable: false,
+    onImport: () {},
+    onOpenSettings: () => SettingsDialog.show(context),
+  );
+  if (bar != null) ScaffoldMessenger.of(context).showSnackBar(bar);
 }

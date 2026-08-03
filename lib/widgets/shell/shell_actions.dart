@@ -19,9 +19,8 @@ void _reportOpenFailure(
   VoidCallback? onImport,
   VoidCallback? onOpenSettings,
 }) {
-  // Koos de gebruiker via "Openen" eigenlijk een presentatie (.pptx/.odp/.key),
-  // dan liep de melding vroeger dood op "OciDeck opent Markdown". Import is dan
-  // de bedoeling: een melding mét uitweg, niet een doodlopende straat met tekst.
+  // Koos de gebruiker via "Openen" eigenlijk een presentatie, dan is import de
+  // bedoeling: een melding mét uitweg, niet doodlopen op "OciDeck opent Markdown".
   if (sourceName != null &&
       (result == OpenResult.unreadable ||
           result == OpenResult.notAPresentation)) {
@@ -52,15 +51,13 @@ void _reportOpenFailure(
 }
 
 extension _DropActions on _AppShellState {
-  /// Drag-drop op web: er is geen pad, alleen inhoud. Een `.md` of
-  /// `.ocideck`-pakket wordt via het in-memory pad geopend (zelfde
-  /// security-gate; pakketten worden in het geheugen uitgepakt);
-  /// afbeeldingen gaan na dezelfde validatie als pickImage de WebAssetStore
-  /// in en worden slides met een mem:-pad. Overige typen worden — net als op
-  /// desktop — genegeerd.
+  /// Drag-drop op web: geen pad, alleen inhoud. `.md`/`.ocideck` opent in-memory
+  /// (zelfde security-gate), afbeeldingen gaan de WebAssetStore in, een
+  /// presentatie de import — net als op desktop; overige typen worden genegeerd.
   Future<void> _onWebFilesDropped(List<DropItem> files) async {
     final tabs = ref.read(tabsProvider.notifier);
     final images = <String>[];
+    final presentations = <PickedPresentation>[];
     for (final file in files) {
       final ext = p.extension(file.name.toLowerCase());
       if (ext == '.md' || ext == '.ocideck' || ext == '.zip') {
@@ -74,6 +71,8 @@ extension _DropActions on _AppShellState {
             reason: ref.read(openFailureProvider),
           );
         }
+      } else if (isImportablePresentationName(file.name)) {
+        presentations.add((bytes: await file.readAsBytes(), name: file.name));
       } else if (_AppShellState._imageExtensions.contains(ext)) {
         final bytes = await file.readAsBytes();
         if (bytes.isEmpty ||
@@ -101,6 +100,9 @@ extension _DropActions on _AppShellState {
       }
     }
     if (images.isNotEmpty) _addImagesToActiveDeck(images);
+    if (presentations.isNotEmpty && mounted) {
+      await importDroppedPresentations(context, ref, presentations);
+    }
   }
 }
 

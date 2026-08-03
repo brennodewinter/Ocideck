@@ -440,6 +440,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     final homeDir = ref.read(settingsProvider).homeDirectory;
     final tabs = ref.read(tabsProvider.notifier);
     final images = <String>[];
+    final presentations = <PickedPresentation>[];
     for (final path in paths) {
       final ext = p.extension(path).toLowerCase();
       if (ext == '.md') {
@@ -456,9 +457,15 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       } else if (_imageExtensions.contains(ext)) {
         final adopted = await _adoptDroppedImage(path);
         if (adopted != null) images.add(adopted);
+      } else if (isImportablePresentationName(path)) {
+        final bytes = await File(path).readAsBytes();
+        presentations.add((bytes: bytes, name: p.basename(path)));
       }
     }
     if (images.isNotEmpty) _addImagesToActiveDeck(images);
+    if (presentations.isNotEmpty && mounted) {
+      await importDroppedPresentations(context, ref, presentations);
+    }
   }
 
   /// Neem een gesleepte afbeelding op in het deck in plaats van naar de plek op

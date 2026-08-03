@@ -9,6 +9,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/services/import/pipeline/import_runner.dart';
 import 'package:ocideck/services/import/pipeline/import_task.dart';
 import 'package:ocideck/services/web_asset_store.dart';
+import 'package:ocideck/state/import_module_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/shell/presentation_import_action.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -203,6 +204,50 @@ void main() {
     });
     expect(opened, isFalse);
     expect(find.byType(SnackBar), findsNothing);
+  });
+
+  testWidgets('een gesleepte presentatie opent als deck (module aan)', (
+    tester,
+  ) async {
+    final (container, ctx, ref) = await pump(tester);
+    await container.read(importModuleProvider.notifier).setEnabled(true);
+    // Slepen deelt de route met "Presentaties importeren…": de bytes zijn al
+    // gelezen, dus dit gaat rechtstreeks door de conversie naar een nieuwe tab.
+    final future = importDroppedPresentations(ctx, ref, [
+      (bytes: pptx(titel: 'Gesleept'), name: 'gesleept.pptx'),
+    ]);
+    await tester.pumpAndSettle();
+    await future;
+
+    final deck = container
+        .read(tabsProvider)
+        .current
+        ?.deckNotifier
+        .currentState
+        .deck;
+    expect(deck, isNotNull);
+    expect(deck!.slides.any((s) => s.title.contains('Gesleept')), isTrue);
+    container.dispose();
+  });
+
+  testWidgets('een gesleepte presentatie zonder module wijst naar instellingen', (
+    tester,
+  ) async {
+    // De module staat standaard uit; niets aanzetten.
+    final (container, ctx, ref) = await pump(tester);
+    // Staat de module uit, dan importeert slepen niet stil: dezelfde uitweg als
+    // bij "Openen" — een melding met een knop naar de instellingen, geen tab.
+    await importDroppedPresentations(ctx, ref, [
+      (bytes: pptx(), name: 'gesleept.pptx'),
+    ]);
+    await tester.pump();
+
+    var opened = true;
+    await tester.runAsync(() async {
+      opened = _openDeck(container) != null;
+    });
+    expect(opened, isFalse);
+    expect(find.byType(SnackBarAction), findsOneWidget);
   });
 
   test('het menulabel komt uit de vertaling, niet uit de aanroeper', () {
