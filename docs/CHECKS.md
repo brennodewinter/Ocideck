@@ -1302,12 +1302,13 @@ that reaches beyond `build/test_cache`.
   arrangement and should not be read as one.
 
 ### `.forgejo/workflows/scans.yml` — secrets and SAST, per pull request
-- **scans** — a bare `ubuntu:24.04` container that installs three pinned
-  scanners and then runs [`make check-secrets`](#make-check-secrets) (gitleaks +
-  trufflehog, working tree *and* full history) and [`make sast`](#make-sast)
-  (semgrep, local rules only). The commands are the Makefile targets, not
-  re-typed copies of what they do — a contributor's local run and CI are then
-  the same run by construction.
+- **scans** — runs on the prebaked scan image
+  (`pawprint.vigilis.online/librekat/ocideck-scans:<pins>`, see the
+  `ci-image-scans.yml` section) with the three scanners baked in, then runs
+  [`make check-secrets`](#make-check-secrets) (gitleaks + trufflehog, working
+  tree *and* full history) and [`make sast`](#make-sast) (semgrep, local rules
+  only). The commands are the Makefile targets, not re-typed copies of what they
+  do — a contributor's local run and CI are then the same run by construction.
 - **Why it is its own workflow rather than a second job in `ci.yml`.** `on:` is
   per workflow, and `ci.yml` fires on a `v*` tag. A job there would first scan
   once the secret was already on `main` with a tag around it.
@@ -1316,27 +1317,38 @@ that reaches beyond `build/test_cache`.
   that already ran before every push. These two take 17 and 2 seconds locally,
   so that argument does not reach them, and for a secret the moment is not
   interchangeable.
-- **What it actually costs in CI: about three minutes**, measured on the first
-  runs (#778). Read that against the 19 seconds above and the difference is the
-  point — nearly all of it is *installing* the scanners into a bare image, not
-  scanning. The obvious lever would be to cache the two binaries and the semgrep
-  venv on the pinned versions, the way `linux-gate.yml` caches the toolchain.
-  **That is deliberately not done, and the reason first recorded here — "three
-  minutes does not yet justify the staleness" — was the weaker one.** The real
-  objection is specific to this job: a cache restore would replace a
-  sha256-verified download *of a security scanner* with an artifact written by
-  an earlier run. `linux-gate.yml` accepts that trade for the toolchain because
-  `check-toolchain` re-checks the restored tree; there is no equivalent re-check
-  for a restored scanner binary, so caching here would quietly spend the very
-  property #778 was after — that green means the same thing over time.
-- **What does get fixed is the network, not the clock.** Three downloads on
-  every pull request is three chances per run at a failure that has
-  nothing to do with this repository, and on 2026-07-24 that happened twice in
-  one afternoon: `curl: (22) … error: 504`, half a second after checkout, with
-  `make check-secrets` and `make sast` green locally on the same commit. The
-  downloads therefore retry on 5xx with a backoff, and a superseded run cancels
-  instead of reporting failure. Both exist for one reason: a red tick on a
-  security gate that is not a finding teaches you to ignore the next one.
+- **What it used to cost, and why it is now prebaked.** The first runs (#778)
+  measured about three minutes, against 19 seconds of actual scanning — nearly
+  all of it *installing* the scanners into a bare image. The obvious lever, an
+  `actions/cache` on the two binaries and the semgrep venv the way
+  `linux-gate.yml` caches the toolchain, was **deliberately refused** for a reason
+  specific to this job: a cache restore would replace a sha256-verified download
+  *of a security scanner* with an artifact written by an earlier run.
+  `linux-gate.yml` accepts that trade for the toolchain because `check-toolchain`
+  re-checks the restored tree; there was no equivalent re-check for a restored
+  scanner binary, so caching would quietly spend the very property #778 was after
+  — that green means the same thing over time.
+- **The prebaked scan image answers that objection instead of dodging it.** The
+  scanners now come baked into
+  `pawprint.vigilis.online/librekat/ocideck-scans:<pins>` (see the
+  `ci-image-scans.yml` section), which removes the per-run install *and* the
+  three network fetches. It is defensible only because it closes the exact gap the
+  cache left open, on two points: (1) the sha256 verification is not gone but
+  moved to **build time** (in `scans.Dockerfile`), and (2) the workflow regains
+  the missing re-check — a first step, *"baked scanner versions == the pins"*,
+  asserts fail-closed that the image carries what the pins say, the precise
+  equivalent of `check-toolchain` for Flutter. A lagging or mistagged image falls
+  over there, before anything is scanned, so green still means the same thing over
+  time. The image tag *is* the three pins, so a bump cannot ride an old image
+  silently; `ci-image-scans.yml` republishes on a pin change.
+- **The network problem this also removes.** Three downloads on every pull request
+  were three chances per run at a failure that had nothing to do with this
+  repository, and on 2026-07-24 that happened twice in one afternoon: `curl: (22)
+  … error: 504`, half a second after checkout, with `make check-secrets` and `make
+  sast` green locally on the same commit. With the scanners baked in there is no
+  per-run download to fail; a superseded run still cancels rather than reporting
+  failure. Both matter for one reason: a red tick on a security gate that is not a
+  finding teaches you to ignore the next one.
 - **Why on the Linux runner rather than the Mac.** The Mac has all three
   scanners installed already, so nothing would need downloading. But since #797
   that Mac is both the release gate and the committer's own working machine, and
@@ -1348,17 +1360,18 @@ that reaches beyond `build/test_cache`.
   both history passes then look at almost nothing and report green. Measured
   rather than asserted — on a repository where a secret was committed and later
   deleted, the full clone exits 1 (gitleaks) and 183 (trufflehog) while the
-  shallow clone of that same repository exits 0 twice. And the three scanners
-  are pinned in the workflow's `env` block with the download sha256-verified
-  against the published manifest, because a scanner that updates itself quietly
-  changes what green means. The `test -n "$SHA"` in that verification earns its
-  line, though not for the reason first given here (#800): the claim that
-  `grep … | sha256sum -c -` passes *silently* on an empty match does not hold on
-  GNU coreutils — measured on 9.5, and the image runs 9.4 off the same codebase.
-  An empty match ends in "no properly formatted checksum lines found" and exit 1.
-  What the line buys is a readable failure: without it, a renamed release asset
-  surfaces as a complaint about `sha256sum`'s *input*, and the reader debugs the
-  verification instead of the asset name.
+  shallow clone of that same repository exits 0 twice. And the three scanner pins
+  still live in the workflow's `env` block — no longer as download parameters (the
+  download, sha256-verified against the published manifest, now happens once at
+  image-build time in `scans.Dockerfile`) but as the *expected values* the
+  fail-closed re-check asserts the baked binaries against. That `test -n "$SHA"` in
+  the build-time verification earns its line, though not for the reason first given
+  here (#800): the claim that `grep … | sha256sum -c -` passes *silently* on an
+  empty match does not hold on GNU coreutils — measured on 9.5, and the image runs
+  9.4 off the same codebase. An empty match ends in "no properly formatted checksum
+  lines found" and exit 1. What the line buys is a readable failure: without it, a
+  renamed release asset surfaces as a complaint about `sha256sum`'s *input*, and
+  the reader debugs the verification instead of the asset name.
 - **Counter-tested, because a scan job that sees nothing looks exactly like a
   clean repository.** With a randomly generated AWS-shaped key pair planted in
   the working tree, `make check-secrets` exits non-zero and names the leak; with
@@ -1489,6 +1502,44 @@ own Forgejo registry as
   `.tool-versions` **and** the gate tag in the same commit, and the ordering must
   ensure `ci-image` has published the new tag before a gate tries to pull it, so a
   bump cannot race `main` red.
+
+### `.forgejo/workflows/ci-image-scans.yml` — the prebaked scan image (`workflow_dispatch` + on pin/Dockerfile change)
+
+The sibling of `ci-image.yml`, for the *scanner* image rather than the Flutter
+toolchain. `scans.yml` ran on a bare `ubuntu:24.04` and rebuilt its environment
+every pull request — apt tools plus three scanners fetched from the net. This
+workflow bakes those into
+`pawprint.vigilis.online/librekat/ocideck-scans:<pins>` and pushes it to the
+project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
+
+- **Why a second image and workflow, not a job added to `ci-image.yml`.** `on.push.paths`
+  is per workflow, not per job. One workflow carrying both images would rebuild the
+  scanner image on every Flutter bump and the toolchain image on every scanner bump.
+  Two files keep each trigger sharp: an image rebuilds only when *that* image changes.
+- **What the image carries:** the three scanners — gitleaks and trufflehog
+  (release tarballs, sha256-verified **at build time** against their published
+  manifests) and semgrep (a pinned pip venv). No repo-coupled artifacts, so a
+  dependency change never rebuilds it.
+- **Why baking is defensible here where an `actions/cache` was refused.** See the
+  `scans.yml` section: the cache objection was that it removed the sha256
+  verification with no re-check. Baking keeps the verification (moved to build
+  time) *and* adds the re-check `scans.yml` runs in the gate — *"baked scanner
+  versions == the pins"*, fail-closed, the equivalent of `check-toolchain`.
+- **Pin coupling, single-source.** The three versions are read at build time from
+  `.github/pinned-ci-versions.json` — the one manifest `check-pins` monitors for
+  staleness and `pinned_versions_manifest_test` keeps equal to the `env` block in
+  `scans.yml`. They are **not** written into this workflow as `*_VERSION:` lines
+  (that would be an unmonitored second copy); it reads them with `jq`. The image
+  tag *is* the three pins (`gl<gitleaks>-th<trufflehog>-sg<semgrep>`), so a bump
+  publishes a new tag, and the workflow fires automatically on a change to the
+  Dockerfile or the manifest — the image cannot silently lag the pins.
+- **Trust boundary and one-time setup** are identical to `ci-image.yml`: our own
+  job builds on our own runner and pushes to our own registry; it needs the same
+  `CI_IMAGE_TOKEN` secret and `CI_IMAGE_USER` variable, or the manual route
+  `make ci-image-scans-publish` from a machine with docker/colima. Set the
+  published package to **public** so `scans.yml` can pull it without credentials.
+  The publish guard skips green when the token is absent, so adding this cannot
+  turn `main` red before the one-time setup is done.
 
 ### `.forgejo/workflows/linux-build.yml` — on demand (`workflow_dispatch`)
 - **build-linux** — same official pinned toolchain as the gate, plus the GTK
