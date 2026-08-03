@@ -660,6 +660,7 @@ class FullDeckPreview extends ConsumerWidget {
                     onLinkTap: openExternalUrl,
                     slideNumber: i + 1,
                     slideCount: renderSlides.length,
+                    splitRunPosition: splitRunPositionFor(renderSlides, i),
                     scopeCia: scopeCia,
                     reportLanguage: deck.language,
                     improvementY01: deck.improvementY01Metric,

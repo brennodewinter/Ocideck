@@ -21,8 +21,10 @@ in Dutch, and it keeps growing on `main` between releases.
   markering — soms met een nu-onjuist aantal erin. Elke pagina van een gesplitste
   reeks krijgt nu een bescheiden, gedempte teller ("1/3", "2/3", "3/3"), zodat
   spreker en publiek zien dat de lijst doorloopt en waar ze zitten. Zichtbaar in
-  de slidestrook, de editor, de presentatie én de export; een losse dia toont
-  niets extra. (#1164)
+  de slidestrook, de editor, het volledige-deck-overzicht, de presentatie én de
+  PDF-export; een losse dia toont niets extra. De teller is een render-decoratie
+  en blijft daarom bewust uit de markdown-getrouwe HTML/Marp-export, die de dia
+  toont zoals de `.md` hem beschrijft. (#1164)
 
 ### Fixed
 
