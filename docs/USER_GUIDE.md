@@ -3226,7 +3226,11 @@ follow-up to a plain bullets page via the slide **type** picker if you prefer.
 Two-column slides spread both columns across the same set of pages. Each page of a
 split run shows a small, dimmed **`page/total`** counter beside its title (`1/3`,
 `2/3`, `3/3`), so a listener knows the list continues and where they are; a
-standalone slide shows nothing extra.
+standalone slide shows nothing extra. The counter is a render decoration: it
+appears everywhere the app draws the slide — the editor, the rail, presenting,
+the audience window and the rasterised **PDF** export — but not in the
+Markdown-faithful **HTML/Marp** export, which renders the slide from the `.md`
+heading itself and deliberately leaves derived decorations out.
 
 **Split slide** is offered only when splitting would actually relieve the slide —
 when there are enough bullets to make two real pages. On a slide with just a few
