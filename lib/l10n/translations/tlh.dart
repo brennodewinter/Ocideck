@@ -1746,6 +1746,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bewerk deze dia als markdown-bron': '\'anghomvam markdown Daq yIchoH',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'mIllogh nav \'oH, Markdown teywI\' \'oHbe\'. deck chu\'Daq lan \'e\' chaw\' OciDeck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

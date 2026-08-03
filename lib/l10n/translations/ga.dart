@@ -1806,6 +1806,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bewerk deze dia als markdown-bron':
+      'Cuir an sleamhnán seo in eagar mar fhoinse markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Is cur i láthair é seo, ní comhad Markdown é. Is féidir le OciDeck é a iompórtáil isteach i ndeic nua.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

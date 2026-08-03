@@ -1800,6 +1800,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bewerk deze dia als markdown-bron': 'Editar este slide como fonte markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Isto é uma apresentação, não um ficheiro Markdown. O OciDeck pode importá-la para um novo deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

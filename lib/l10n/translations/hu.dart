@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bewerk deze dia als markdown-bron': 'Dia szerkesztése markdown forrásként',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Ez egy prezentáció, nem Markdown-fájl. Az OciDeck importálhatja egy új deckbe.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

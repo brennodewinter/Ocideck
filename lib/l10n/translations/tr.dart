@@ -2748,6 +2748,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Bewerk deze dia als markdown-bron':
+      'Bu slaydı markdown kaynağı olarak düzenle',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Bu bir sunum, Markdown dosyası değil. OciDeck bunu yeni bir deck\'e aktarabilir.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

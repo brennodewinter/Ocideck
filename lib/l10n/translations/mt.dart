@@ -1793,6 +1793,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bewerk deze dia als markdown-bron':
+      'Editja din is-slajd bħala sors markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Din hija preżentazzjoni, mhux fajl Markdown. OciDeck jista\' jimportaha f\'deck ġdid.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

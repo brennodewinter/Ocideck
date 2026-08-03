@@ -16,6 +16,16 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- **Een "Bron"-knop in de editor-kopregel opent de rauwe markdown van déze
+  dia.** (#1160) Naast de bestaande globale markdown-modus staat er nu in de
+  kopregel van de gestructureerde editor een chip **Bron** (code-icoon). Eén klik
+  zet de editor in markdown-modus, meteen gericht op de dia die je aan het
+  bewerken was — je bewerkt dus de rauwe markdown van die ene dia in plaats van
+  het hele deck. Het is een sneltoegang naar de al bestaande markdown-editor, geen
+  aparte modus: dezelfde *Toepassen*, dezelfde controle en dezelfde weg terug naar
+  de gestructureerde weergave. Notities en annotaties her-ankeren bij toepassen
+  zoals ze dat al deden, en de parser bepaalt het diatype, dus via de bron kun je
+  een dia ook van soort laten wisselen.
 - **Een presentatie op het venster slepen importeert hem nu.** (#1175) Een of
   meer PowerPoint-/Impress-/Keynote-bestanden (`.pptx`/`.odp`/`.key`) op OciDeck
   laten vallen gaat rechtstreeks de import in — precies zoals `.md` slepen al een
