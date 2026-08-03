@@ -156,7 +156,12 @@ class _EditorToolbar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          if (constraints.maxWidth < 560) {
+          // Onder deze breedte passen de TYPE/STIJL-velden en de trailing-chips
+          // (hulp, kwaliteit, Bron, split) niet meer naast elkaar zonder de
+          // Expanded-velden tot niets te pletten; dan stapelen we de trailing
+          // eronder. De grens ligt boven de smalle-paneelbreedte (~680) sinds
+          // de 'Bron'-chip (#1160) de trailing-groep breder maakte.
+          if (constraints.maxWidth < 700) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -190,6 +195,9 @@ class _EditorHeaderBar extends StatefulWidget {
   final ValueChanged<SlideType> onTypeChanged;
   final ValueChanged<ThemeProfile> onProfileChanged;
   final VoidCallback onDefaultProfileRequested;
+
+  /// Opent de rauwe markdown-bron van de actieve dia (de schakelaar uit #1160).
+  final VoidCallback onOpenSource;
   final bool revealInfoSafety;
   final bool revealProcesverbetering;
   final bool revealManagementsysteem;
@@ -202,6 +210,7 @@ class _EditorHeaderBar extends StatefulWidget {
     required this.onTypeChanged,
     required this.onProfileChanged,
     required this.onDefaultProfileRequested,
+    required this.onOpenSource,
     required this.revealInfoSafety,
     this.revealProcesverbetering = false,
     this.revealManagementsysteem = false,
@@ -242,6 +251,8 @@ class _EditorHeaderBarState extends State<_EditorHeaderBar> {
               open: _qualityOpen,
               onToggle: () => setState(() => _qualityOpen = !_qualityOpen),
             ),
+            const SizedBox(width: 6),
+            _SlideSourceToggle(onTap: widget.onOpenSource),
             // Verschijnt alleen wanneer déze slide door zijn reeks klein wordt
             // gerenderd; anders neemt hij geen ruimte in.
             const SplitRunDetachChip(),
@@ -256,6 +267,46 @@ class _EditorHeaderBarState extends State<_EditorHeaderBar> {
           const SlideQualityPanel(embedded: true),
         ],
       ],
+    );
+  }
+}
+
+/// Schakelaar in de editor-kopregel die de gestructureerde editor inruilt voor
+/// de rauwe markdown-bron van de actieve dia (#1160). Ziet eruit als de andere
+/// kop-chips ([SlideTypeHelpToggle]); de markdown-editor zelf biedt de weg
+/// terug naar de gestructureerde weergave.
+class _SlideSourceToggle extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const _SlideSourceToggle({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Tooltip(
+      message: l10n.d('Bewerk deze dia als markdown-bron'),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(6),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.code, size: 14, color: AppTheme.tealFg),
+              const SizedBox(width: 5),
+              Text(
+                l10n.d('Bron'),
+                style: TextStyle(
+                  fontSize: 11.5,
+                  color: AppTheme.tealFg,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

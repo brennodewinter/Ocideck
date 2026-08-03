@@ -1771,6 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bewerk deze dia als markdown-bron': 'Muokkaa tätä diaa markdown-lähteenä',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Tämä on esitys, ei Markdown-tiedosto. OciDeck voi tuoda sen uuteen deckiin.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

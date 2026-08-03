@@ -1770,6 +1770,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bewerk deze dia als markdown-bron': 'Redigera denna bild som markdown-källa',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Det här är en presentation, inte en Markdown-fil. OciDeck kan importera den till ett nytt deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

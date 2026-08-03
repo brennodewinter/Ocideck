@@ -1788,6 +1788,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bewerk deze dia als markdown-bron':
+      'Editează acest diapozitiv ca sursă markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Aceasta este o prezentare, nu un fișier Markdown. OciDeck o poate importa într-un deck nou.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

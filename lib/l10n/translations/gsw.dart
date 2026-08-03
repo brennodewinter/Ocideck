@@ -1774,6 +1774,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bewerk deze dia als markdown-bron':
+      'Die Folie als Markdown-Quälle bearbeite',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Das isch e Präsentation, kes Markdown-File. OciDeck cha si in es nöis Deck importiere.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

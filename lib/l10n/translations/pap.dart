@@ -730,6 +730,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bewerk deze dia als markdown-bron': 'Editá e slide aki komo fuente markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Esaki ta un presentashon, no un archivo Markdown. OciDeck por importá e den un deck nobo.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

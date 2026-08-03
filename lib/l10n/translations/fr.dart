@@ -730,6 +730,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Bewerk deze dia als markdown-bron':
+      'Modifier cette diapositive comme source markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Ceci est une présentation, pas un fichier Markdown. OciDeck peut l\'importer dans un nouveau deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

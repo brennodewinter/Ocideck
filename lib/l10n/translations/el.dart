@@ -1798,6 +1798,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bewerk deze dia als markdown-bron':
+      'Επεξεργασία αυτής της διαφάνειας ως πηγή markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Αυτή είναι μια παρουσίαση, όχι αρχείο Markdown. Το OciDeck μπορεί να την εισαγάγει σε ένα νέο deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
