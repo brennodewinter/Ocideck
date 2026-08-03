@@ -4,7 +4,6 @@ import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 import 'markdown_editor_field.dart';
-import 'editor_slide_preview.dart';
 import '../../theme/app_theme.dart';
 
 class QuoteEditor extends ConsumerStatefulWidget {
@@ -67,10 +66,6 @@ class _QuoteEditorState extends ConsumerState<QuoteEditor>
           minLines: 3,
           maxLines: 5,
           qualityField: 'quote',
-          previewBuilder: (_, markdown) => editorSlidePreview(
-            widget.slide.copyWith(quote: markdown, quoteAuthor: _author.text),
-            projectPath: widget.captionBasePath,
-          ),
         ),
         const SizedBox(height: 16),
         EditorField(

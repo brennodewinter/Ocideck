@@ -1151,7 +1151,6 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 ### `lib/widgets/editors/` — per-slide-type editors
 
 - `_editor_field.dart` — Shared layout helpers for slide editors.
-- `editor_slide_preview.dart` — Shared `editorSlidePreview(...)` helper that renders a slide's live preview inside an editor form (used by the question, quote, section, timeline, canvas … editors).
 - `ai_suggest_control.dart` — Shared "suggest text (AI)" control: confirmation, progress, error feedback and the AI-concept/Nagekeken provenance chrome.
 - `ai_suggest_field.dart` — Connects that shared control to finding free-text fields and their finding-specific AI service.
 - `improvement_ai_suggest_field.dart` — Connects the shared control to Procesverbetering canvas/tree/flow fields; gated on both AI and Procesverbetering modules (`improvement_ai_provider.dart`).
@@ -1175,8 +1174,8 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `list_style_selector.dart` — Selects list style (bullets/numbered/checklist/rich text).
 - `markdown_command_palette.dart` — Searchable, keyboard-first insert/format command picker for Markdown source editing.
 - `markdown_deck_editor.dart` — Syntax-aware, lossless Markdown source editor with live validation/quick fixes, highlighted find/replace, outline navigation, writing and speaking metrics, native spell suggestions, undo/redo, draft diff/recovery status, formatting tools and linked source↔slide selection. Its sliding scope toggle switches whole-deck vs. single-slide Markdown but refuses to reinterpret an unapplied draft under another scope.
-- `markdown_editor_field.dart` — Form-sized Markdown field that reveals formatting controls while in use and can expand into the full visual/Markdown editor.
-- `expanded_markdown_dialog.dart` — Full-window expansion of a `MarkdownEditorField`: a larger editor pane with a live preview, opened from the field's expand action.
+- `markdown_editor_field.dart` — Quiet form-sized Markdown field with an **Bewerken** action that expands into the full word-processor. Deliberately plain: no floating toolbar over the text; formatting lives in the expand editor.
+- `expanded_markdown_dialog.dart` — Full-window word-processor for one Markdown field. Opens in the visual (WYSIWYG) editor by default, with a switch to raw Markdown (remembered locally); content that cannot round-trip losslessly (tables, footnotes, front-matter, HTML comments) opens in source mode via `markdownNeedsSourceMode`. No separate preview pane — the visual editor is the view.
 - `markdown_find_bar.dart` — In-editor find/replace bar for markdown mode.
 - `markdown_source_controller.dart` — Source-preserving syntax/search/delimiter painter for the deck editor; caches lexical tokens and retains IME composing underlines.
 - `markdown_smart_input_formatter.dart` — Direct-typing conveniences: continue lists/quotes and pair brackets, parentheses and backticks without rewriting pasted source.

@@ -18,7 +18,6 @@ class MarkdownEditorField extends ConsumerStatefulWidget {
   final String hint;
   final int minLines;
   final int maxLines;
-  final Widget Function(BuildContext context, String markdown)? previewBuilder;
   final String? qualityField;
 
   const MarkdownEditorField({
@@ -28,7 +27,6 @@ class MarkdownEditorField extends ConsumerStatefulWidget {
     this.hint = '',
     this.minLines = 3,
     this.maxLines = 5,
-    this.previewBuilder,
     this.qualityField,
   });
 
@@ -72,7 +70,6 @@ class _MarkdownEditorFieldState extends ConsumerState<MarkdownEditorField> {
     if (_focusNode.hasFocus) {
       MarkdownEditorField.openActiveEditor = _openExpandedEditor;
     }
-    setState(() {});
   }
 
   @override
@@ -90,14 +87,8 @@ class _MarkdownEditorFieldState extends ConsumerState<MarkdownEditorField> {
     BuildContext context, {
     double fontSize = 13,
   }) {
-    final theme = Theme.of(context);
-    final palette = AppPalette.of(theme);
-    return MarkdownEditorTheme.editorPanel(
-      text: palette.panelText,
-      link: palette.accentInk,
-      accent: palette.accentInk,
-      codeBackground: AppTheme.slate100,
-      border: theme.dividerColor,
+    return MarkdownEditorTheme.documentSurface(
+      scheme: Theme.of(context).colorScheme,
       fontSize: fontSize,
     );
   }
@@ -105,7 +96,6 @@ class _MarkdownEditorFieldState extends ConsumerState<MarkdownEditorField> {
   Future<void> _openExpandedEditor() async {
     await showDialog<void>(
       context: context,
-      animationStyle: AnimationStyle.noAnimation,
       builder: (dialogContext) => ExpandedMarkdownDialog(
         label: widget.label,
         hint: widget.hint.isEmpty
@@ -113,7 +103,6 @@ class _MarkdownEditorFieldState extends ConsumerState<MarkdownEditorField> {
             : dialogContext.l10n.d(widget.hint),
         sourceController: widget.controller,
         editorTheme: _editorTheme(dialogContext, fontSize: 15),
-        previewBuilder: widget.previewBuilder,
       ),
     );
   }
@@ -121,7 +110,6 @@ class _MarkdownEditorFieldState extends ConsumerState<MarkdownEditorField> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final editorTheme = _editorTheme(context);
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(
@@ -163,21 +151,6 @@ class _MarkdownEditorFieldState extends ConsumerState<MarkdownEditorField> {
                 ),
               ),
             ],
-          ),
-          AnimatedSize(
-            duration: const Duration(milliseconds: 160),
-            alignment: Alignment.topCenter,
-            child: _focusNode.hasFocus
-                ? Padding(
-                    padding: const EdgeInsets.only(bottom: 6),
-                    child: MarkdownEditorToolbar(
-                      controller: widget.controller,
-                      focusNode: _focusNode,
-                      theme: editorTheme,
-                      compact: true,
-                    ),
-                  )
-                : const SizedBox.shrink(),
           ),
           TextField(
             controller: widget.controller,

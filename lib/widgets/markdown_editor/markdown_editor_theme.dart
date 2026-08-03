@@ -75,6 +75,31 @@ class MarkdownEditorTheme {
     );
   }
 
+  /// Editor chrome derived entirely from the active [ColorScheme], so the
+  /// word-processor honours the app theme instead of a hard-coded palette.
+  ///
+  /// The writing sheet is [ColorScheme.surfaceContainerLowest] and its text is
+  /// [ColorScheme.onSurface] — a pair Material guarantees to contrast, in light
+  /// and dark and under a custom appearance profile alike. It sits a tone apart
+  /// from the dialog's own [ColorScheme.surface] so the page stays visible as a
+  /// distinct writing area.
+  factory MarkdownEditorTheme.documentSurface({
+    required ColorScheme scheme,
+    double fontSize = 15,
+  }) {
+    return MarkdownEditorTheme(
+      surface: scheme.surfaceContainerLowest,
+      text: scheme.onSurface,
+      hint: scheme.onSurfaceVariant,
+      link: scheme.primary,
+      codeBackground: scheme.surfaceContainerHigh,
+      toolbarIcon: scheme.onSurfaceVariant,
+      accent: scheme.primary,
+      border: scheme.outlineVariant,
+      fontSize: fontSize,
+    );
+  }
+
   /// Contrasting surface for notes inside a themed presenter overlay.
   factory MarkdownEditorTheme.presenterOverlay({
     required Color panelBackground,

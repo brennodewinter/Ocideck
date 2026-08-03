@@ -12,8 +12,6 @@ import '../../l10n/app_localizations.dart';
 import '../../models/checklist_spec.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/finding_spec.dart';
-import '../../models/improvement_y01.dart';
-import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/finding_ai_service.dart';
@@ -30,7 +28,6 @@ import '../dialogs/cvss_builder_dialog.dart';
 import '../dialogs/cwe_picker.dart';
 import '../dialogs/maswe_picker.dart';
 import '../dialogs/finding_template_picker.dart';
-import '../slides/slide_preview.dart';
 import '_editor_field.dart';
 import 'markdown_editor_field.dart';
 import 'ai_suggest_field.dart';
@@ -176,51 +173,6 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
       retest: _retest,
       retestNote: value('retestNote', _retestNote.text).trim(),
       testId: _testId,
-    );
-  }
-
-  Widget _livePreview(BuildContext context, String field, String markdown) {
-    final deck = ref.read(deckProvider).deck;
-    final settings = ref.read(settingsProvider);
-    final spec = _currentSpec(field: field, markdown: markdown);
-    final slide = widget.slide.copyWith(
-      customMarkdown: spec.toMarkdown(),
-      title: spec.heading,
-      findingId: _findingId.text.trim(),
-    );
-    return AspectRatio(
-      aspectRatio: 16 / 9,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.16),
-              blurRadius: 14,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: SlidePreviewWidget(
-          slide: slide,
-          projectPath: widget.projectPath,
-          themeProfile: deck?.themeProfile ?? const ThemeProfile(),
-          cockpitColorScheme: settings.cockpitColorScheme,
-          slideNumber: deck == null
-              ? null
-              : deck.slides.indexOf(widget.slide) + 1,
-          slideCount: deck?.slides.length,
-          scopeCia: deckScopeCiaIndex(deck?.slides ?? const []),
-          reportLanguage: deck?.language ?? '',
-          improvementY01:
-              deck?.improvementY01Metric ?? ImprovementY01Metric.empty,
-          tlp: deck?.tlp ?? TlpLevel.none,
-          organization: deck?.organization ?? '',
-          deckSignature: deck?.signature,
-          sealedAt: deck?.finalized == true ? deck!.sealAt : '',
-          showClassificationWatermark: settings.classificationWatermarkEnabled,
-          allowRemoteMedia: settings.allowRemoteMedia,
-        ),
-      ),
     );
   }
 
@@ -490,16 +442,12 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
             hint: 'bijv. hertest 2026-07-20, patch toegepast',
             minLines: 2,
             maxLines: 4,
-            previewBuilder: (context, markdown) =>
-                _livePreview(context, 'retestNote', markdown),
           ),
         MarkdownEditorField(
           label: 'Beschrijving',
           controller: _description,
           minLines: 3,
           maxLines: 5,
-          previewBuilder: (context, markdown) =>
-              _livePreview(context, 'description', markdown),
         ),
         _suggest(FindingAiField.description, 'description', _description),
         MarkdownEditorField(
@@ -507,16 +455,12 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
           controller: _confirmation,
           minLines: 3,
           maxLines: 5,
-          previewBuilder: (context, markdown) =>
-              _livePreview(context, 'confirmation', markdown),
         ),
         MarkdownEditorField(
           label: 'Mogelijke impact',
           controller: _impact,
           minLines: 3,
           maxLines: 4,
-          previewBuilder: (context, markdown) =>
-              _livePreview(context, 'impact', markdown),
         ),
         _suggest(FindingAiField.impact, 'impact', _impact),
         MarkdownEditorField(
@@ -524,8 +468,6 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
           controller: _recommendation,
           minLines: 3,
           maxLines: 4,
-          previewBuilder: (context, markdown) =>
-              _livePreview(context, 'recommendation', markdown),
         ),
         _suggest(
           FindingAiField.recommendation,
