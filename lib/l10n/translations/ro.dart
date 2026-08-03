@@ -1788,6 +1788,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Hierna': 'Apoi',
+  'Volgende dia': 'Diapozitivul următor',
+  'Sprong': 'Salt',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Alegeți la ce diapozitiv sare prezentarea după acesta. În mod implicit este pur și simplu diapozitivul următor. Astfel o ramură de alegere poate reveni la meniu la sfârșit.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Diapozitivul țintă nu mai există — prezentarea continuă pur și simplu aici.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Aceasta este o prezentare, nu un fișier Markdown. OciDeck o poate importa într-un deck nou.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

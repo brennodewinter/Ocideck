@@ -33,9 +33,12 @@ const Map<String, int> methodLengthBaseline = {
   // Procesverbetering VSM/swimlane scene builder — extract lane packing next.
   'lib/services/improvement/flow_layout.dart::buildFlowScene': 163,
   // Procesverbetering block directives (matrix/canvas/tree/flow/phaseGate).
+  // +8 (#1162): de twee navigatie-takken (`ocideck_slide_anchor`/`ocideck_next`),
+  // al gehalveerd via de top-level `_firstDirective`-helper.
   'lib/services/markdown_parse/markdown_service_parse_directives.dart::_MarkdownParseDirectives._parseBlockDirectives':
-      163,
-  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 158,
+      171,
+  // +2 (#1162): `anchor`/`nextAnchor` doorgeven aan de Slide-constructor.
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 160,
   // Procesverbetering SVG export for statistical chart types.
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,

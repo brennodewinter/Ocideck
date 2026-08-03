@@ -1783,6 +1783,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Hierna': 'Następnie',
+  'Volgende dia': 'Następny slajd',
+  'Sprong': 'Skok',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Wybierz, do którego slajdu prezentacja przechodzi po tym. Domyślnie jest to po prostu następny slajd. Dzięki temu gałąź wyboru może na końcu wrócić do menu.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Slajd docelowy już nie istnieje — prezentacja po prostu kontynuuje tutaj.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'To jest prezentacja, a nie plik Markdown. OciDeck może zaimportować ją do nowego decku.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

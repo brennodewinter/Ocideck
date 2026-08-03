@@ -1770,6 +1770,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Hierna': 'Därefter',
+  'Volgende dia': 'Nästa bild',
+  'Sprong': 'Hopp',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Välj vilken bild presentationen hoppar till efter denna. Som standard är det helt enkelt nästa bild. Så kan en valgren återvända till menyn i slutet.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Målbilden finns inte längre — presentationen fortsätter helt enkelt här.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Det här är en presentation, inte en Markdown-fil. OciDeck kan importera den till ett nytt deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

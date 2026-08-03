@@ -255,7 +255,10 @@ const Map<String, int> classSizeBaseline = {
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1275, // +14 (#978 Blok C): applyProvenance
+      1290, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
+  // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
+  // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
+  // klasse.
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1120,
   // Procesverbetering: Y-01-UI, type-toolbar, plaklogica en DOE-dialoog zijn

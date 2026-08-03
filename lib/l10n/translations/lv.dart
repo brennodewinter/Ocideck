@@ -1770,6 +1770,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Hierna': 'Pēc tam',
+  'Volgende dia': 'Nākamais slaids',
+  'Sprong': 'Pārlēkt',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Izvēlieties, uz kuru slaidu prezentācija pāriet pēc šī. Pēc noklusējuma tas ir vienkārši nākamais slaids. Tā izvēles zars beigās var atgriezties izvēlnē.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Mērķa slaids vairs neeksistē — prezentācija vienkārši turpinās šeit.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Šī ir prezentācija, nevis Markdown fails. OciDeck to var importēt jaunā dekā.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

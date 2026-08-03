@@ -1793,6 +1793,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Hierna': 'Wara',
+  'Volgende dia': 'Islajd li jmiss',
+  'Sprong': 'Qabża',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Agħżel għal liema slajd tqabbeż il-preżentazzjoni wara din. B\'mod awtomatiku dan huwa sempliċement l-islajd li jmiss. B\'hekk fergħa ta\' għażla tista\' terġa\' lura għall-menu fl-aħħar.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'L-islajd fil-mira m\'għadux jeżisti — il-preżentazzjoni sempliċement tkompli hawn.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Din hija preżentazzjoni, mhux fajl Markdown. OciDeck jista\' jimportaha f\'deck ġdid.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

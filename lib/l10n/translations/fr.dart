@@ -730,6 +730,13 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Hierna': 'Ensuite',
+  'Volgende dia': 'Diapositive suivante',
+  'Sprong': 'Saut',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Choisissez vers quelle diapositive la présentation saute après celle-ci. Par défaut, il s\'agit simplement de la diapositive suivante. Ainsi, une branche de choix peut revenir au menu à la fin.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'La diapositive cible n\'existe plus — la présentation continue simplement ici.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Ceci est une présentation, pas un fichier Markdown. OciDeck peut l\'importer dans un nouveau deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

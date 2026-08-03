@@ -1771,6 +1771,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Hierna': 'Sitten',
+  'Volgende dia': 'Seuraava dia',
+  'Sprong': 'Hyppy',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Valitse, mihin diaan esitys hyppää tämän jälkeen. Oletuksena se on yksinkertaisesti seuraava dia. Näin valintahaara voi palata lopussa valikkoon.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Kohdedia ei ole enää olemassa — esitys jatkuu tästä yksinkertaisesti eteenpäin.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Tämä on esitys, ei Markdown-tiedosto. OciDeck voi tuoda sen uuteen deckiin.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

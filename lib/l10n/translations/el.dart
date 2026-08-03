@@ -1798,6 +1798,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Hierna': 'Έπειτα',
+  'Volgende dia': 'Επόμενη διαφάνεια',
+  'Sprong': 'Άλμα',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Επιλέξτε σε ποια διαφάνεια μεταβαίνει η παρουσίαση μετά από αυτήν. Από προεπιλογή είναι απλώς η επόμενη διαφάνεια. Έτσι ένας κλάδος επιλογής μπορεί να επιστρέψει στο μενού στο τέλος.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Η διαφάνεια προορισμού δεν υπάρχει πλέον — η παρουσίαση απλώς συνεχίζεται εδώ.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Αυτή είναι μια παρουσίαση, όχι αρχείο Markdown. Το OciDeck μπορεί να την εισαγάγει σε ένα νέο deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

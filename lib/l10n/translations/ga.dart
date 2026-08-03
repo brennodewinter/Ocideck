@@ -1806,6 +1806,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Hierna': 'Ansin',
+  'Volgende dia': 'An chéad sleamhnán eile',
+  'Sprong': 'Léim',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Roghnaigh cén sleamhnán a léimeann an cur i láthair chuige tar éis an cheann seo. De réir réamhshocraithe is é sin an chéad sleamhnán eile go simplí. Mar sin is féidir le brainse rogha filleadh ar an roghchlár ag an deireadh.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Níl an sprioc-sleamhnán ann a thuilleadh — leanann an cur i láthair ar aghaidh anseo go simplí.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Is cur i láthair é seo, ní comhad Markdown é. Is féidir le OciDeck é a iompórtáil isteach i ndeic nua.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

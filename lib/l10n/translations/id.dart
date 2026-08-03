@@ -1771,6 +1771,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Hierna': 'Setelah ini',
+  'Volgende dia': 'Slide berikutnya',
+  'Sprong': 'Lompat',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Pilih slide mana yang dituju presentasi setelah slide ini. Secara bawaan itu hanya slide berikutnya. Dengan begitu sebuah cabang pilihan bisa kembali ke menu di akhir.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Slide tujuan sudah tidak ada — presentasi hanya melanjutkan dari sini.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Ini presentasi, bukan berkas Markdown. OciDeck dapat mengimpornya ke deck baru.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

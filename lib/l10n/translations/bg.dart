@@ -1793,6 +1793,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Hierna': 'След това',
+  'Volgende dia': 'Следващ слайд',
+  'Sprong': 'Скок',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Изберете към кой слайд преминава презентацията след този. По подразбиране това е просто следващият слайд. Така клон за избор може накрая да се върне към менюто.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Целевият слайд вече не съществува — презентацията просто продължава оттук.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Това е презентация, а не файл Markdown. OciDeck може да я импортира в нов дек.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

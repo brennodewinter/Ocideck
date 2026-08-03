@@ -355,6 +355,12 @@ List<Widget> slideSettingBadges(AppLocalizations l10n, Slide slide) {
       ),
     );
   }
+  // Een sprong-uit verandert de volgorde tijdens presenteren (#1162): zichtbaar
+  // in de ingeklapte kop, zodat je niet hoeft open te klappen om te zien dát
+  // deze dia ergens anders heen springt.
+  if (slide.nextAnchor.isNotEmpty) {
+    badges.add(_SettingBadge(icon: Icons.alt_route, label: l10n.d('Sprong')));
+  }
   return badges;
 }
 
@@ -389,11 +395,16 @@ class _SlideSettingsSection extends StatefulWidget {
   final ImageService imageService;
   final Deck deck;
 
+  /// Zet de sprong-uit van deze dia (#1162): `null` = lineair, anders de
+  /// deck-index van de doeldia.
+  final ValueChanged<int?> onSetJump;
+
   const _SlideSettingsSection({
     required this.slide,
     required this.onUpdate,
     required this.imageService,
     required this.deck,
+    required this.onSetJump,
   });
 
   @override
@@ -451,6 +462,7 @@ class _SlideSettingsSectionState extends State<_SlideSettingsSection> {
               onUpdate: widget.onUpdate,
               imageService: widget.imageService,
               deck: widget.deck,
+              onSetJump: widget.onSetJump,
             ),
             const SizedBox(height: 8),
           ],
@@ -470,12 +482,14 @@ class _SlideSettingsBody extends StatelessWidget {
   final ValueChanged<Slide> onUpdate;
   final ImageService imageService;
   final Deck deck;
+  final ValueChanged<int?> onSetJump;
 
   const _SlideSettingsBody({
     required this.slide,
     required this.onUpdate,
     required this.imageService,
     required this.deck,
+    required this.onSetJump,
   });
 
   /// De kolombreedte waaronder een kaart niet meer fatsoenlijk uitlijnt: het
@@ -554,6 +568,60 @@ class _SlideSettingsBody extends StatelessWidget {
     ),
   );
 
+  /// Een leesbaar label voor dia [i] in de doeldia-keuzelijst: het kopje zonder
+  /// opmaak, met volgnummer ervoor zodat twee dia's met dezelfde kop uit elkaar
+  /// te houden zijn. Zonder kop een terugval op "Dia N".
+  String _slideMenuLabel(AppLocalizations l10n, Slide s, int i) {
+    final title = stripInlineMarkdown(s.title).trim();
+    return '${i + 1}. ${title.isEmpty ? l10n.d('Dia') : title}';
+  }
+
+  /// De sprong-uit (#1162): naar welke dia de presentatie na deze springt. De
+  /// keuzelijst toont de dia's op kop; onder water bewaart de app een stabiel
+  /// anker op de doeldia. Een verweesde verwijzing (doeldia weg) valt op met een
+  /// waarschuwing en de presentatie loopt gewoon lineair door.
+  Widget _jumpRow(AppLocalizations l10n) {
+    final selfIndex = deck.slides.indexWhere((s) => s.id == slide.id);
+    final resolved = slide.nextAnchor.isEmpty
+        ? -1
+        : deck.slides.indexWhere((s) => s.anchor == slide.nextAnchor);
+    final broken = slide.nextAnchor.isNotEmpty && resolved < 0;
+    return _SettingRow(
+      icon: Icons.alt_route,
+      label: l10n.d('Hierna'),
+      help: l10n.d(
+        'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.',
+      ),
+      control: _SettingDropdown<int?>(
+        value: resolved < 0 ? null : resolved,
+        items: [
+          DropdownMenuItem(value: null, child: Text(l10n.d('Volgende dia'))),
+          for (var i = 0; i < deck.slides.length; i++)
+            if (i != selfIndex)
+              DropdownMenuItem(
+                value: i,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 220),
+                  child: Text(
+                    _slideMenuLabel(l10n, deck.slides[i], i),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ),
+        ],
+        onChanged: onSetJump,
+      ),
+      detail: broken
+          ? Text(
+              l10n.d(
+                'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.',
+              ),
+              style: TextStyle(fontSize: 11, color: AppTheme.warningFg),
+            )
+          : null,
+    );
+  }
+
   List<Widget> _groups(BuildContext context) {
     final l10n = context.l10n;
     final profile = deck.themeProfile;
@@ -613,6 +681,8 @@ class _SlideSettingsBody extends StatelessWidget {
       _SettingsGroup(
         label: l10n.d('Tijdens presenteren'),
         children: [
+          // Alleen zinvol als er een andere dia is om heen te springen.
+          if (deck.slides.length > 1) _jumpRow(l10n),
           _TimingSetting(slide: slide, onUpdate: onUpdate),
           if (slide.type == SlideType.table)
             _SettingRow(

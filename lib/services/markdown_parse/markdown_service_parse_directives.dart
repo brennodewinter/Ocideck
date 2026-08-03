@@ -6,6 +6,13 @@ part of '../markdown_service.dart';
 
 /// Wat [_MarkdownParseDirectives._parseBlockDirectives] uit één slideblok
 /// haalt: de body zonder richtlijnen, plus elke richtlijn die erin stond.
+/// De waarde na [prefix] in [content], maar alleen als [current] nog leeg is —
+/// eerste vondst wint (#1162). De serialiser zet zo'n richtlijn bovenaan, dus een
+/// gelijknamige regel verderop staat in de dia-tekst en mag de waarde niet
+/// overschrijven. Top-level zodat `_parseBlockDirectives` niet verder groeit.
+String _firstDirective(String content, String prefix, String current) =>
+    current.isNotEmpty ? current : content.substring(prefix.length).trim();
+
 typedef _BlockDirectives = ({
   String cssClass,
   String remaining,
@@ -196,15 +203,9 @@ extension _MarkdownParseDirectives on MarkdownService {
               .trim();
         }
       } else if (content.startsWith('ocideck_slide_anchor:')) {
-        // Eerste vondst wint (zoals template/layout): de serialiser zet dit
-        // bovenaan, een gelijknamige regel verderop staat in de dia-tekst.
-        if (anchor.isEmpty) {
-          anchor = content.substring('ocideck_slide_anchor:'.length).trim();
-        }
+        anchor = _firstDirective(content, 'ocideck_slide_anchor:', anchor);
       } else if (content.startsWith('ocideck_next:')) {
-        if (nextAnchor.isEmpty) {
-          nextAnchor = content.substring('ocideck_next:'.length).trim();
-        }
+        nextAnchor = _firstDirective(content, 'ocideck_next:', nextAnchor);
       } else if (content.startsWith('ocideck_view_')) {
         _collectViewComment(viewComments, content);
       } else if (!content.startsWith('_')) {

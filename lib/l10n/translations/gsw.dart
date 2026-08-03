@@ -1774,6 +1774,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Hierna': 'Denn',
+  'Volgende dia': 'Nächschti Folie',
+  'Sprong': 'Sprung',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Wähl us, uf weli Folie d Präsentation nach dere springt. Standardmässig isch das eifach d nächschti Folie. So cha en Uswahl-Ascht am Schluss zum Menü zruggchäre.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'D Ziel-Folie git\'s nüme — d Präsentation lauft eifach do wyter.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Das isch e Präsentation, kes Markdown-File. OciDeck cha si in es nöis Deck importiere.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

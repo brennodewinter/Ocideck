@@ -1777,6 +1777,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Hierna': 'Zatim',
+  'Volgende dia': 'Sljedeći slajd',
+  'Sprong': 'Skok',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Odaberite na koji slajd prezentacija skače nakon ovoga. Zadano je to jednostavno sljedeći slajd. Tako grana izbora na kraju može vratiti na izbornik.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Ciljni slajd više ne postoji — prezentacija se ovdje jednostavno nastavlja.',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Ovo je prezentacija, a ne Markdown datoteka. OciDeck je može uvesti u novi deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
