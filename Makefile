@@ -616,7 +616,7 @@ refresh-catalogs:
 # then mirror them into lib/services/reference_standards.dart.
 WSTG_VERSION ?= 4.2
 MASTG_VERSION ?= 2.0.0
-MASWE_DATE ?= 2026-06-12
+MASWE_DATE ?= 2026-08-03
 
 # Open-source licence compliance check for all resolved dependencies.
 licenses:

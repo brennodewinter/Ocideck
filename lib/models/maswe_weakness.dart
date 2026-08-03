@@ -11,7 +11,6 @@ class MasweWeakness {
     required this.category,
     required this.platforms,
     required this.cweIds,
-    required this.isPlaceholder,
     this.description = '',
   });
 
@@ -31,18 +30,11 @@ class MasweWeakness {
   /// noemt.
   final List<int> cweIds;
 
-  /// OWASP heeft de zwakheid wél benoemd maar de uitleg nog niet geschreven.
+  /// Korte omschrijving — de `requirement:` uit de bron, één zin over wat de
+  /// app moet doen. Leeg wanneer de bron er geen geeft.
   ///
-  /// Dit is bewust géén reden om hem weg te laten, en daarin verschilt MASWE
-  /// van MASTG. Een MASTG-placeholder belooft een test die niemand kan
-  /// uitvoeren; een MASWE-placeholder is een zwakheid die wél is
-  /// geïdentificeerd — met id, titel, CWE-koppeling en een conceptomschrijving
-  /// — alleen is de toelichtingspagina nog leeg. Ernaar verwijzen in een
-  /// bevinding is dus gewoon juist. Wie de uitleg wil, moet weten dat die nog
-  /// dun is, en daarvoor staat deze vlag hier.
-  final bool isPlaceholder;
-
-  /// Korte omschrijving; bij een placeholder komt die uit het `draft`-blok.
-  /// Leeg wanneer de bron er geen geeft.
+  /// Vroeger was er ook een [isPlaceholder]-vlag: driekwart van MASWE was toen
+  /// nog concept. Bij de herbouw medio 2026 heeft OWASP alle 78 zwakheden
+  /// uitgeschreven, en daarmee verviel het onderscheid.
   final String description;
 }
