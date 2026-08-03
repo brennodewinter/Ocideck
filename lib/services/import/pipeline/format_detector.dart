@@ -5,9 +5,15 @@ import '../models/source_format.dart';
 import '../utils/archive_utils.dart';
 import '../utils/import_budget.dart';
 
-/// Detect a presentation's format from its file: first by extension, then by
-/// the ZIP local-file-header magic (`PK\x03\x04`), and finally by peeking
-/// inside the archive for a format-specific marker entry.
+/// Detect a presentation's format from its file. The **content decides**: the
+/// bytes must be a ZIP archive (checked first by the `PK\x03\x04` local-file-
+/// header magic), and a valid archive is then classified by a format-specific
+/// marker entry inside it (see [validateFormatFromArchive]). The filename
+/// extension is only a last-resort label — used to phrase a better error when
+/// the content is unreadable (not a ZIP, over budget, corrupt, or a ZIP without
+/// any known marker) — and never overrides a successful content match. So a file
+/// whose extension lies (a `.pptx` that is really Impress, or the reverse) is
+/// classified by what it actually is.
 ///
 /// The marker entries are stable across versions:
 /// - **PPTX** always contains `ppt/presentation.xml`.
