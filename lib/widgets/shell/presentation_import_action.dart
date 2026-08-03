@@ -207,10 +207,7 @@ Future<List<PickedPresentation>?> _pickPresentations(
 ) async {
   final picked = await FilePicker.pickFiles(
     type: FileType.custom,
-    // Groeit mee met de geregistreerde importers (ImporterRegistry); de titel
-    // blijft bewust formaat-loos zodat er geen tekst te herzien valt als er een
-    // formaat bij komt.
-    allowedExtensions: const ['pptx', 'odp', 'key'],
+    allowedExtensions: presentationImportExtensions,
     withData: true,
     // Meer tegelijk mag: wie een stapel presentaties overzet, doet dat zelden
     // één voor één. Bij precies één blijft het gedrag ongewijzigd.
@@ -228,3 +225,50 @@ Future<List<PickedPresentation>?> _pickPresentations(
 /// Het menulabel voor de presentatie-import.
 String presentationImportLabel(AppLocalizations l10n) =>
     l10n.d('Presentaties importeren…');
+
+/// De bestandsextensies die de import kent (zonder punt). Eén bron voor de
+/// bestandskiezer én voor de herkenning bij een mislukte "Openen": groeit een
+/// importeur mee, dan groeien beide mee. Bewust formaat-loos in de teksten
+/// eromheen, zodat er niets te herzien valt als er een formaat bij komt.
+const presentationImportExtensions = ['pptx', 'odp', 'key'];
+
+/// Herkent aan de bestandsnaam of dit een presentatie is die de import kan
+/// omzetten. Gebruikt bij een mislukte "Openen": koos de gebruiker eigenlijk
+/// een `.pptx`/`.odp`/`.key`, dan is een import de bedoeling — geen Markdown.
+bool isImportablePresentationName(String name) {
+  final dot = name.lastIndexOf('.');
+  if (dot < 0) return false;
+  return presentationImportExtensions.contains(
+    name.substring(dot + 1).toLowerCase(),
+  );
+}
+
+/// De uitweg die een mislukte "Openen" van een presentatie krijgt, in plaats
+/// van een doodlopende melding. `null` als [sourceName] geen presentatie is —
+/// dan blijft de gewone open-foutmelding staan.
+///
+/// Twee dingen: wát het is, en wát de gebruiker nu kan doen. Staat de module
+/// Importeren aan ([importModuleAvailable]), dan is dat "importeer hem meteen"
+/// ([startsImport] `true`). Staat hij uit, dan eerst aanzetten — de melding
+/// wijst naar de instellingen in plaats van de module stil aan te zetten.
+({String message, bool startsImport})? presentationOpenRescue(
+  AppLocalizations l10n,
+  String sourceName, {
+  required bool importModuleAvailable,
+}) {
+  if (!isImportablePresentationName(sourceName)) return null;
+  if (importModuleAvailable) {
+    return (
+      message: l10n.d(
+        'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.',
+      ),
+      startsImport: true,
+    );
+  }
+  return (
+    message: l10n.d(
+      'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.',
+    ),
+    startsImport: false,
+  );
+}
