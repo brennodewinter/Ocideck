@@ -1,9 +1,10 @@
 // ── THIRD-PARTY CONTENT — NOT EUPL-1.2 ──────────────────────────────────────
 //
-// The weakness list in this library (see the `_written` and `_draft` parts)
-// reproduces 117 verbatim weakness ids, titles, MASVS categories and CWE
-// mappings of the **OWASP Mobile Application Security Weakness Enumeration**
-// (snapshot 2026-06-12 — the project publishes no releases or tags).
+// The weakness list in this library (see the `maswe_catalog_data` part)
+// reproduces 78 verbatim weakness ids, titles, MASVS categories, requirement
+// summaries and CWE mappings of the **OWASP Mobile Application Security
+// Weakness Enumeration** (snapshot 2026-08-03 — the project publishes no
+// releases or tags).
 // © the OWASP Foundation and its contributors, licensed under CC-BY-SA-4.0.
 //
 //   Licence: https://creativecommons.org/licenses/by-sa/4.0/
@@ -19,8 +20,7 @@
 
 import '../models/maswe_weakness.dart';
 
-part 'maswe_catalog_written.dart';
-part 'maswe_catalog_draft.dart';
+part 'maswe_catalog_data.dart';
 
 /// De OWASP Mobile Application Security Weakness Enumeration (MASWE) — de
 /// mobiele tegenhanger van MITRE's CWE, en de laag waar MASTG-tests naar
@@ -33,14 +33,13 @@ part 'maswe_catalog_draft.dart';
 /// zwakkere aanhaling dan `WSTG v4.2` of `MASTG v2.0.0`, en dat hoort zo te
 /// staan in plaats van weggepoetst te worden met een verzonnen versienummer.
 ///
-/// **Drie kwart is nog niet uitgeschreven, en dat is geen reden om ze weg te
-/// laten.** OWASP heeft de zwakheden benoemd — met id, titel, CWE-koppeling en
-/// een conceptomschrijving — maar de toelichtingspagina's grotendeels nog niet
-/// geschreven. Naar zo'n zwakheid verwijzen in een bevinding is gewoon juist;
-/// je haalt een enumeratie aan, geen handleiding. Ze dragen wel
-/// [MasweWeakness.isPlaceholder], zodat een scherm kan tonen dat de uitleg dun
-/// is. Dit is bewust een ándere afweging dan bij MASTG, waar placeholders juist
-/// worden overgeslagen: daar zou het een test beloven die niemand kan doen.
+/// **Oude beta-nummering blijft aanhaalbaar.** OWASP heeft de lijst medio 2026
+/// herbouwd: van 117 (grotendeels concept) naar 78 uitgeschreven zwakheden,
+/// MASWE-0001..0078. De oude concept-id's tot 0119 bestaan niet meer als
+/// zwakheid, maar leven voort als [_betaAliases]: elk oud id wijst de canonieke
+/// zwakheid aan die het heeft opgeslokt. [byId] volgt die brug, zodat de
+/// gebundelde MASTG v2.0.0 — die nog naar de beta-nummering verwijst — blijft
+/// kloppen zonder dat we die MASTG-data vervalsen.
 ///
 /// **Materiaal van derden onder CC-BY-SA-4.0**, © de OWASP Foundation en haar
 /// bijdragers; `docs/LICENSE_COMPLIANCE.md` is daarvoor het gezag.
@@ -55,18 +54,25 @@ class MasweCatalog {
   /// Het etiket dat de aanhaling draagt.
   String get standardLabel => masweStandardLabel;
 
-  /// Alle zwakheden, op id gesorteerd.
-  List<MasweWeakness> get weaknesses =>
-      [..._writtenWeaknesses, ..._draftWeaknesses]
-        ..sort((a, b) => a.id.compareTo(b.id));
-
-  /// Alleen de zwakheden waarvan de uitleg is geschreven.
-  List<MasweWeakness> get written => _writtenWeaknesses;
+  /// Alle zwakheden, op id gesorteerd (de generator levert ze al gesorteerd).
+  List<MasweWeakness> get weaknesses => _weaknesses;
 
   /// De zwakheid met [id], of null.
+  ///
+  /// Een canoniek id wint altijd: bestaat [id] als huidige zwakheid, dan geeft
+  /// die terug. Pas als dat niet zo is, wordt [id] als oud beta-id opgevat en
+  /// via [_betaAliases] naar zijn canonieke opvolger gebracht. Die volgorde is
+  /// wezenlijk — de beta- en de canonieke nummering delen dezelfde ruimte
+  /// (`MASWE-0001` is zowel een huidige zwakheid als een beta-id dat elders is
+  /// opgegaan), en de huidige zwakheid hoort dan voor te gaan.
   MasweWeakness? byId(String id) {
-    for (final w in weaknesses) {
+    for (final w in _weaknesses) {
       if (w.id == id) return w;
+    }
+    final canonical = _betaAliases[id];
+    if (canonical == null) return null;
+    for (final w in _weaknesses) {
+      if (w.id == canonical) return w;
     }
     return null;
   }
@@ -80,7 +86,7 @@ class MasweCatalog {
 }
 
 /// De dag waarop deze momentopname van MASWE is genomen.
-const masweSnapshotDate = '2026-06-12';
+const masweSnapshotDate = '2026-08-03';
 
 /// Het etiket met de datum, want een versienummer heeft MASWE niet.
 const masweStandardLabel = 'OWASP MASWE ($masweSnapshotDate)';

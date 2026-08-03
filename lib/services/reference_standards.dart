@@ -48,23 +48,14 @@ const referenceStandards = <ReferenceStandard>[
     bundledVersion: masweSnapshotDate,
     url: 'https://mas.owasp.org/MASWE/',
     bundled:
-        'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de '
-        'CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die '
-        'staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.',
+        'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de '
+        'CWE-koppeling en een korte omschrijving. Plus een brug van de oude '
+        'beta-nummering (tot 0119) naar de canonieke id\'s, zodat de '
+        'MASTG-kruiskoppeling blijft kloppen.',
     licence: 'CC-BY-SA-4.0',
     // Geen releases, geen tags — alleen een doorlopende branch.
     probe: UpstreamProbe.githubCommitDate,
     probeTarget: 'OWASP/maswe',
-    // Adviserend: upstream heeft de lijst medio 2026 grondig hérbouwd (van 117
-    // naar 78 zwakheden, `status`/`description`-frontmatter weg, id's boven 0078
-    // alleen nog als beta-mapping). Onze snapshot 2026-06-12 is intern
-    // consistent met de gebundelde MASTG v2.0.0, die naar id's boven 0078
-    // verwijst; blind meelopen zou die kruiskoppeling breken en alle
-    // omschrijvingen verliezen. De overstap naar het nieuwe formaat is een
-    // inhoudelijke migratie (generator + MASTG-herijking), geen bouwblokkade —
-    // net als de ISO-normen hieronder. Gevolgd in #1156; daarna kan `advisory`
-    // weg.
-    advisory: true,
   ),
   ReferenceStandard(
     id: 'cwe',

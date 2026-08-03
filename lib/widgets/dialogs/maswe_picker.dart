@@ -8,10 +8,9 @@ import '../../theme/app_theme.dart';
 /// Een doorzoekbare kiezer over de gebundelde MASWE-lijst, tegenhanger van
 /// [CwePicker] voor mobiel. Geeft de gekozen [MasweWeakness] terug, of null.
 ///
-/// Toont uitgeschreven zwakheden bovenaan en markeert de rest. Dat is geen
-/// opsmuk: drie kwart van MASWE is bij de bron nog een concept, en zonder dat
-/// onderscheid zou een tester een zwakheid kiezen en op een lege pagina
-/// belanden zonder te begrijpen waarom.
+/// Sinds de herbouw van MASWE (medio 2026) zijn alle 78 zwakheden
+/// uitgeschreven; er is geen concept-onderscheid meer te tonen. De lijst staat
+/// simpelweg op id-volgorde.
 class MaswePicker extends StatefulWidget {
   const MaswePicker({super.key});
 
@@ -40,21 +39,15 @@ class _MaswePickerState extends State<MaswePicker> {
     super.dispose();
   }
 
-  /// Zoekt op id, titel en categorie. Uitgeschreven zwakheden eerst, want die
-  /// hebben een pagina waar de lezer van het rapport iets aan heeft.
+  /// Zoekt op id, titel en categorie; de uitkomst blijft op id-volgorde.
   List<MasweWeakness> get _matches {
     final q = _search.text.trim().toLowerCase();
-    final all = MasweCatalog.instance.weaknesses.where((w) {
+    return MasweCatalog.instance.weaknesses.where((w) {
       if (q.isEmpty) return true;
       return w.id.toLowerCase().contains(q) ||
           w.title.toLowerCase().contains(q) ||
           w.category.toLowerCase().contains(q);
     }).toList();
-    all.sort((a, b) {
-      if (a.isPlaceholder != b.isPlaceholder) return a.isPlaceholder ? 1 : -1;
-      return a.id.compareTo(b.id);
-    });
-    return all;
   }
 
   @override
@@ -83,7 +76,7 @@ class _MaswePickerState extends State<MaswePicker> {
                   : ListView.separated(
                       itemCount: matches.length,
                       separatorBuilder: (_, _) => const Divider(height: 1),
-                      itemBuilder: (context, i) => _tile(l10n, matches[i]),
+                      itemBuilder: (context, i) => _tile(matches[i]),
                     ),
             ),
           ],
@@ -98,11 +91,10 @@ class _MaswePickerState extends State<MaswePicker> {
     );
   }
 
-  Widget _tile(AppLocalizations l10n, MasweWeakness w) {
+  Widget _tile(MasweWeakness w) {
     final subtitle = [
       w.category,
       if (w.cweIds.isNotEmpty) 'CWE-${w.cweIds.join(', CWE-')}',
-      if (w.isPlaceholder) l10n.d('uitleg nog niet geschreven'),
     ].join(' · ');
 
     return ListTile(
@@ -111,10 +103,7 @@ class _MaswePickerState extends State<MaswePicker> {
         subtitle,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontSize: 11.5,
-          color: w.isPlaceholder ? AppTheme.amber600 : AppTheme.slate400,
-        ),
+        style: TextStyle(fontSize: 11.5, color: AppTheme.slate400),
       ),
       trailing: Icon(Icons.chevron_right, color: AppTheme.slate400),
       onTap: () => Navigator.of(context).pop(w),

@@ -1770,6 +1770,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
+      'Vājumu saraksts (78): id, nosaukums, MASVS kategorija, platforma, CWE saite un īss apraksts. Turklāt tilts no vecās beta numerācijas (līdz 0119) uz kanoniskajiem id, lai MASTG savstarpējā atsauce joprojām sakristu.',
   'Media (WebRTC)': 'Multivide (WebRTC)',
   'Media-stack testen': 'Pārbaudīt multivides steku',
   'De media-stack werkt op dit apparaat.':

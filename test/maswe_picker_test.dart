@@ -5,11 +5,9 @@ import 'package:ocideck/models/maswe_weakness.dart';
 import 'package:ocideck/services/maswe_catalog.dart';
 import 'package:ocideck/widgets/dialogs/maswe_picker.dart';
 
-/// De MASWE-kiezer, tegenhanger van [CwePicker] voor mobiel. De ordening is
-/// hier geen opsmuk: driekwart van MASWE is bij de bron nog een concept, en een
-/// tester die daar blind uit kiest belandt op een lege uitlegpagina zonder te
-/// begrijpen waarom. Uitgeschreven zwakheden horen dus bovenaan te staan en de
-/// rest hoort gemarkeerd te zijn.
+/// De MASWE-kiezer, tegenhanger van [CwePicker] voor mobiel. Sinds de herbouw
+/// van MASWE zijn alle 78 zwakheden uitgeschreven; de lijst staat simpelweg op
+/// id-volgorde en er is geen concept-markering meer.
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
@@ -48,59 +46,33 @@ void main() {
       .map((t) => (t.title! as Text).data!)
       .toList();
 
-  testWidgets('zonder zoekterm staat de hele lijst er, concepten onderaan', (
+  testWidgets('zonder zoekterm staat de hele lijst er, op id-volgorde', (
     tester,
   ) async {
     await open(tester);
 
     final catalogus = MasweCatalog.instance.weaknesses;
-    expect(
-      catalogus.where((w) => !w.isPlaceholder),
-      isNotEmpty,
-      reason: 'zonder uitgeschreven zwakheid zegt de ordening niets',
-    );
-    expect(catalogus.where((w) => w.isPlaceholder), isNotEmpty);
+    expect(catalogus, isNotEmpty);
 
-    // De eerste zichtbare regel hoort een uitgeschreven zwakheid te zijn.
-    final eerste = zichtbareTitels(tester).first;
-    final eersteId = eerste.split(' — ').first;
-    expect(
-      catalogus.firstWhere((w) => w.id == eersteId).isPlaceholder,
-      isFalse,
-      reason: 'een concept mag niet bovenaan de lijst staan',
-    );
+    final zichtbareIds = zichtbareTitels(
+      tester,
+    ).map((t) => t.split(' — ').first).toList();
+    // De zichtbare regels horen op oplopend id te staan, koppend op de eerste.
+    expect(zichtbareIds, orderedEquals([...zichtbareIds]..sort()));
+    expect(zichtbareIds.first, catalogus.first.id);
   });
 
-  testWidgets('een concept draagt zichtbaar dat de uitleg nog ontbreekt', (
-    tester,
-  ) async {
+  testWidgets('een regel toont id, titel, categorie en CWE', (tester) async {
     await open(tester);
-    final concept = MasweCatalog.instance.weaknesses.firstWhere(
-      (w) => w.isPlaceholder,
+    final w = MasweCatalog.instance.weaknesses.firstWhere(
+      (w) => w.cweIds.isNotEmpty,
     );
 
-    await zoek(tester, concept.id);
+    await zoek(tester, w.id);
 
-    expect(find.textContaining('${concept.id} — '), findsOneWidget);
-    expect(
-      find.textContaining('uitleg nog niet geschreven'),
-      findsOneWidget,
-      reason: 'wie dit kiest moet weten dat de uitlegpagina leeg is',
-    );
-  });
-
-  testWidgets('een uitgeschreven zwakheid draagt die markering niet', (
-    tester,
-  ) async {
-    await open(tester);
-    final echt = MasweCatalog.instance.weaknesses.firstWhere(
-      (w) => !w.isPlaceholder,
-    );
-
-    await zoek(tester, echt.id);
-
-    expect(find.textContaining('${echt.id} — '), findsOneWidget);
-    expect(find.textContaining('uitleg nog niet geschreven'), findsNothing);
+    expect(find.text('${w.id} — ${w.title}'), findsOneWidget);
+    expect(find.textContaining(w.category), findsOneWidget);
+    expect(find.textContaining('CWE-${w.cweIds.first}'), findsOneWidget);
   });
 
   testWidgets('zoeken werkt op id, titel én categorie', (tester) async {
@@ -144,9 +116,7 @@ void main() {
 
   testWidgets('een tik op een regel geeft die zwakheid terug', (tester) async {
     final gekozen = await open(tester);
-    final w = MasweCatalog.instance.weaknesses.firstWhere(
-      (w) => !w.isPlaceholder,
-    );
+    final w = MasweCatalog.instance.weaknesses.first;
 
     await zoek(tester, w.id);
     await tester.tap(find.text('${w.id} — ${w.title}'));

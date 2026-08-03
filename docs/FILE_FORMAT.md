@@ -1370,7 +1370,7 @@ block. All structured fields are inline and re-parsed on load:
 **Scope object:** `https://app.client.example/login`
 **CVSS 4.0:** 9.3 (Critical) · `CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N`
 **CWE:** [CWE-89 — Improper Neutralization of SQL](https://cwe.mitre.org/data/definitions/89.html)
-`**MASWE:** [MASWE-0005 — API Keys Hardcoded in the App Package](https://mas.owasp.org/MASWE/MASVS-AUTH/MASWE-0005/)` — the mobile weakness (OWASP MASWE), written alongside `**CWE:**` rather than instead of it. Only the **id** is authoritative: the title and the category in the URL are resolved from the bundled catalogue when writing, so a weakness whose title OWASP later adjusts is not frozen in the report. An id the bundled catalogue does not know is kept verbatim, without a link.
+`**MASWE:** [MASWE-0005 — Insertion of Sensitive Data into Logs](https://mas.owasp.org/MASWE/MASVS-STORAGE/MASWE-0005/)` — the mobile weakness (OWASP MASWE), written alongside `**CWE:**` rather than instead of it. Only the **id** is authoritative: the title and the category in the URL are resolved from the bundled catalogue when writing, so a weakness whose title OWASP later adjusts is not frozen in the report. An id the bundled catalogue does not know is kept verbatim, without a link.
 **CVE:** [CVE-2024-1234](https://nvd.nist.gov/vuln/detail/CVE-2024-1234)
 **Test:** `WSTG-ATHN-07`
 **Retest:** Resolved — hertest 2026-07-20, patch toegepast

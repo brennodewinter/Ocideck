@@ -1774,6 +1774,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
+      'D Liste vo de Schwachstelle (78): ID, Titel, MASVS-Kategorie, Plattform, d CWE-Verchnüpfig und e churzi Beschribig. Plus e Brugg vo de alte Beta-Nummerierig (bis 0119) zu de kanonische ID, damit de MASTG-Querverwiis wiiterhin stimmt.',
   'Media (WebRTC)': 'Medie (WebRTC)',
   'Media-stack testen': 'Medie-Stack teste',
   'De media-stack werkt op dit apparaat.': 'De Medie-Stack lauft uf dem Grät.',

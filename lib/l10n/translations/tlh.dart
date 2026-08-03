@@ -1746,6 +1746,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
+      '\'oy\'ghach tetlh (78): id, per, MASVS Segh, jo\', CWE rarwI\' je run QIj. latlh: mI\'mey ngo\' beta (0119 vIS) canonical id\'e\'Daq rarbogh QIn, vaj taHtaH MASTG rar lugh.',
   'Media (WebRTC)': 'Media (WebRTC)',
   'Media-stack testen': 'media stack yIwaH',
   'De media-stack werkt op dit apparaat.': 'jan vamDaq Qap media stack.',

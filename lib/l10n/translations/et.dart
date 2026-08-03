@@ -1762,6 +1762,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
+      'Nõrkuste loend (78): id, pealkiri, MASVS-kategooria, platvorm, CWE-seos ja lühikirjeldus. Lisaks sild vanast beeta-numeratsioonist (kuni 0119) kanooniliste id-de juurde, et MASTG-ristviide jääks paika.',
   'Media (WebRTC)': 'Meedia (WebRTC)',
   'Media-stack testen': 'Testi meediapinu',
   'De media-stack werkt op dit apparaat.': 'Meediapinu töötab selles seadmes.',
