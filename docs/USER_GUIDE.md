@@ -1994,17 +1994,24 @@ detail is for nobody) has to just work, and the author of that slide knows best.
 
 ### Importing OpenKAT reports (desktop)
 
-Importing is an optional module: **Instellingen → Uitbreidingen → Importeren**,
-off by default. One switch covers every source OciDeck pulls material in from;
-today that is OpenKAT. Switching it on adds an **Integraties** tab with a
-section per system, where you point at the folder holding your OpenKAT exports
-so the import does not ask for it every time. The import only reads that folder
-— nothing in it is changed or sent anywhere.
+*(Changed 2026-08-03, #1158: OpenKAT is now its own integration with its own
+switch on the Integraties tab. Until then it shared the Importeren module's
+single switch.)*
 
-Switching the module off later does not take the entry point away as long as a
+OpenKAT is an integration: **Instellingen → Integraties**, off by default. On
+the Integraties tab each connection has its own on/off switch (plus an *Alles
+inschakelen* / *Alles uitschakelen* control for all of them at once). Switch
+OpenKAT on and its settings appear below the switch, where you point at the
+folder holding your OpenKAT exports so the import does not ask for it every time.
+The import only reads that folder — nothing in it is changed or sent anywhere.
+The Integraties tab appears whenever a connection is available on your platform;
+on the web version OpenKAT falls away, because its folder picker does not exist
+there.
+
+Switching OpenKAT off later does not take the entry point away as long as a
 report folder is set: an existing OpenKAT deck can still be updated or safely
-recreated as a new report. What goes away is the tab and the menu item for
-someone who never imports anything.
+recreated as a new report. What goes away is the menu item for someone who never
+imports anything.
 
 There are three ways to start the same desktop route: **Rapportages
 controleren…** in the Integrations tab, **OpenKAT-rapport maken…** on the
@@ -2187,12 +2194,13 @@ deck unchanged.
 **… → Presentaties importeren…** turns a PowerPoint (`.pptx`), LibreOffice
 Impress (`.odp`) or Apple Keynote (`.key`) file into a real OciDeck deck: typed
 slides you can edit, in ordinary Marp Markdown, not a stack of pictures of
-somebody else's slides. It is the second source behind the same **Importeren**
-module as the OpenKAT import above, so the menu item appears once that module is
-switched on — or once an import source already has something set up, under the
-rule that turning a module off may never put existing work out of reach. Unlike
-the OpenKAT import it reads the bytes of the file you picked rather than a
-folder on disk, so this one exists in the browser version too.
+somebody else's slides. It lives behind the **Importeren** module
+(**Instellingen → Uitbreidingen → Importeren**, off by default), so the menu
+item appears once that module is switched on. *(Changed 2026-08-03, #1158: the
+Importeren module now covers only this presentation import; OpenKAT moved out to
+its own integration, described above.)* Unlike the OpenKAT import it reads the
+bytes of the file you picked rather than a folder on disk, so this one exists in
+the browser version too.
 
 The format is decided by looking *inside* the file, not by the extension: a
 `.pptx` is recognised by the presentation part it always carries, an `.odp` by
