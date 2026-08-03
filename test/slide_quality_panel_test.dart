@@ -160,6 +160,26 @@ void main() {
   );
 
   testWidgets(
+    'te weinig bullets voor twee pagina\'s: geen dode Splits slide-knop (#1164)',
+    (tester) async {
+      // Vijf lange 'label: uitleg'-bullets: dicht genoeg voor een melding, maar
+      // te weinig om over twee volwaardige pagina's te verdelen. Splitsen zou
+      // flinters opleveren en niets oplossen, dus die knop hoort weg te blijven;
+      // 'Uitleg naar notities' is hier de remedie.
+      await tester.pumpWidget(_host(denseBulletDeck(5)));
+      await tester.pump();
+      await tester.tap(find.textContaining('Slidekwaliteit'));
+      await tester.pump();
+
+      expect(find.widgetWithText(TextButton, 'Splits slide'), findsNothing);
+      expect(
+        find.widgetWithText(TextButton, 'Uitleg naar notities'),
+        findsWidgets,
+      );
+    },
+  );
+
+  testWidgets(
     'Fix alle problemen splitst een te volle dia in één klik (#915)',
     (tester) async {
       await tester.pumpWidget(_host(overfullDeck()));
