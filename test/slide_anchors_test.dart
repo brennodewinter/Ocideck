@@ -77,7 +77,10 @@ void main() {
       notifier.loadDeck(deckWith(['Menu', 'Tak A']));
 
       notifier.setSlideJump(1, 0);
-      expect(container.read(deckProvider).deck!.slides[1].nextAnchor, isNotEmpty);
+      expect(
+        container.read(deckProvider).deck!.slides[1].nextAnchor,
+        isNotEmpty,
+      );
 
       notifier.setSlideJump(1, null);
       expect(container.read(deckProvider).deck!.slides[1].nextAnchor, isEmpty);

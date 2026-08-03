@@ -16,6 +16,17 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- **Een dia kan nu naar een andere dia springen ("Hierna").** (#1162) In de
+  slide-instellingen, onder *Tijdens presenteren*, kies je met **Hierna** naar
+  welke dia de presentatie na deze springt in plaats van naar de eerstvolgende.
+  Zo laat je een zijpad aan het eind terugkeren naar waar het aftakte. In de
+  presentator volgt **terug** de werkelijk gelopen route: na een sprong keer je
+  terug náár de dia waarvandaan je sprong, niet naar de vorige dia in het
+  bestand. Een lineair deck merkt er niets van. De doeldia wordt gekozen op kop
+  (nooit op een technisch anker); is de doeldia later verwijderd, dan waarschuwt
+  de editor en loopt de presentatie gewoon lineair door — geen fout. De sprong
+  round-trippt verliesvrij en werkt ook in de HTML-export. *Dit is de eerste
+  helft van #1162; het keuze-menu-diatype volgt op dit navigatiefundament.*
 - **Een presentatie op het venster slepen importeert hem nu.** (#1175) Een of
   meer PowerPoint-/Impress-/Keynote-bestanden (`.pptx`/`.odp`/`.key`) op OciDeck
   laten vallen gaat rechtstreeks de import in — precies zoals `.md` slepen al een

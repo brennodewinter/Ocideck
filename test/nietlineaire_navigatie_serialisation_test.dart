@@ -16,10 +16,9 @@ void main() {
     final deck = Deck(
       title: 'Menu-demo',
       slides: [
-        Slide.create(SlideType.bullets).copyWith(
-          title: 'Hoofdmenu',
-          anchor: 'hoofdmenu',
-        ),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Hoofdmenu', anchor: 'hoofdmenu'),
         Slide.create(SlideType.bullets).copyWith(
           title: 'Prijzen',
           anchor: 'prijzen',

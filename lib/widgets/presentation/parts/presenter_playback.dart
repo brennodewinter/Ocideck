@@ -112,9 +112,7 @@ extension _PresenterPlayback on _FullscreenPresenterState {
     final jumpIndex = _indexOfAnchor(widget.slides, _currentSlide.nextAnchor);
     final target =
         jumpIndex ??
-        (_index < widget.slides.length - 1
-            ? _index + 1
-            : (_loop ? 0 : null));
+        (_index < widget.slides.length - 1 ? _index + 1 : (_loop ? 0 : null));
     if (target == null) return;
     _commitActiveInk();
     _persistUserNoteFromController();

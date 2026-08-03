@@ -696,7 +696,8 @@ explains that slides classified above the deck's level are left out when you
 present or export. The editor header keeps everything on one strip: the type and
 style pickers, that hint, a compact **Quality** chip (its colour shows the
 status; hover or open it for the counts) and a gear button for **Slide
-settings** — the less-used per-slide options (audio, logo, footer, timing, TLP).
+settings** — the less-used per-slide options (audio, logo, footer, timing, the
+[jump to another slide](#non-linear-order-jump-to-another-slide-1162), TLP).
 Each expands just below the strip; a set per-slide TLP shows as a small badge on
 the gear so the classification stays visible at a glance.
 
@@ -2694,6 +2695,28 @@ is right there, on your own screen.
 that the screen mentioned. Someone presenting for the first time had to guess, in
 front of an audience, which is the worst possible moment to be guessing. (The bar
 originally also showed the slide number; that was removed in #864.)*
+
+### Non-linear order: jump to another slide (#1162)
+
+A presentation does not have to run straight through. Any slide can say **"go
+here next"** — after it, the presentation jumps to a slide you pick instead of
+the next one in the list. Open the slide's **per-slide settings**, and under *During
+presenting* set **Hierna** ("After this") to the target slide. The list shows the
+slides by their heading; leave it on **Next slide** for the ordinary linear order.
+
+This is what lets a side-track return to where it branched from: put a menu-like
+slide early, let a slide near it jump forward, and let the end of the side-track
+jump back. In the presenter, **back retraces the route you actually took** — after
+a jump, ← (or Backspace) returns you to the slide you jumped *from*, not to the
+previous slide in the file. A linear deck is unaffected: back is still just the
+previous slide.
+
+A slide with a jump shows a small **Sprong** ("Jump") badge on its collapsed
+settings. If the target slide is later deleted, the jump is not an error — the
+editor warns that the target is gone and the presentation simply continues in
+normal order. Under the hood the target carries a stable, hidden anchor, so the
+link survives renaming its heading or reordering the deck; you never type or see
+that anchor — you pick a slide.
 
 ### Play-only decks
 

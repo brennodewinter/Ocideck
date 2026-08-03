@@ -31,19 +31,13 @@ void main() {
   ) async {
     await tester.pumpWidget(
       _host([
-        Slide.create(SlideType.bullets).copyWith(
-          title: 'Menu',
-          bullets: ['x'],
-          anchor: 'menu',
-        ),
-        Slide.create(SlideType.bullets).copyWith(
-          title: 'Tak A',
-          bullets: ['y'],
-          nextAnchor: 'menu',
-        ),
         Slide.create(
           SlideType.bullets,
-        ).copyWith(title: 'Slot', bullets: ['z']),
+        ).copyWith(title: 'Menu', bullets: ['x'], anchor: 'menu'),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Tak A', bullets: ['y'], nextAnchor: 'menu'),
+        Slide.create(SlideType.bullets).copyWith(title: 'Slot', bullets: ['z']),
       ]),
     );
     await tester.pumpAndSettle();
@@ -66,16 +60,12 @@ void main() {
   ) async {
     await tester.pumpWidget(
       _host([
-        Slide.create(SlideType.bullets).copyWith(
-          title: 'Menu',
-          bullets: ['x'],
-          anchor: 'menu',
-        ),
-        Slide.create(SlideType.bullets).copyWith(
-          title: 'Tak A',
-          bullets: ['y'],
-          nextAnchor: 'menu',
-        ),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Menu', bullets: ['x'], anchor: 'menu'),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Tak A', bullets: ['y'], nextAnchor: 'menu'),
       ]),
     );
     await tester.pumpAndSettle();
@@ -99,11 +89,9 @@ void main() {
   ) async {
     await tester.pumpWidget(
       _host([
-        Slide.create(SlideType.bullets).copyWith(
-          title: 'Eerste',
-          bullets: ['x'],
-          nextAnchor: 'bestaat-niet',
-        ),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Eerste', bullets: ['x'], nextAnchor: 'bestaat-niet'),
         Slide.create(
           SlideType.bullets,
         ).copyWith(title: 'Tweede', bullets: ['y']),
