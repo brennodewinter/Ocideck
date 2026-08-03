@@ -12,6 +12,21 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## Unreleased
+
+### Fixed
+
+- **Fix alle problemen** vergrootte de tekst niet wanneer een dia te klein
+  rendert doordat zijn bullets *lang* zijn in plaats van *veel*. De motor
+  splitste alleen dia's met méér bullets dan de leesbaarheidsdrempel; een dia met
+  zes tot acht lange bullets rendert te klein maar heeft te weinig bullets voor
+  die aantal-gate, dus de motor liet hem staan en de font bleef klein. De
+  handmatige "Splits slide"-knop deed het al wél. Nu splitst de motor zo'n dia
+  ook — mits hij te klein rendert (dichtheidsmelding) en er genoeg bullets zijn
+  voor twee volwaardige pagina's — zodat de tekst op de resulterende pagina's
+  groter wordt. De paginatie zelf blijft aantal-gebaseerd en voorspelbaar; alleen
+  de beslissing óf er gesplitst wordt is nu ook dichtheids-gedreven. (#1159)
+
 ## [0.2.0] — 2026-08-03
 
 ### Fixed
@@ -798,6 +813,24 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **"Fix alle problemen" splitste op het bulletaantal, terwijl de font-krimp
+  vaak uit de bulletlengte komt.** Gemeten op referentiebreedte (960pt, Roboto):
+  een dia met zestien korte bullets rendert op schaal 0,60 en werd al gesplitst
+  naar 0,60 → 1,08 (×1,8). Maar een dia met zes tot acht *lange* bullets rendert
+  even klein (0,67–0,69) en werd niét aangeraakt: de gate eiste méér bullets dan
+  de leesbaarheidsdrempel (8), en zes of acht haalt die niet. Handmatig splitsen
+  vergrootte de font wél — zes lange bullets werden [3,3] op 0,98 (×1,4), acht
+  werden [4,4] op 0,91 (×1,4) — dus de motor liet winst liggen die de knop
+  ernaast wél pakte. De beslissing is nu tweeledig: boven de drempel splitsen we
+  op aantal zoals voorheen, en eronder splitsen we alleen wanneer de dia te klein
+  *rendert* (`textDensityWarning`/`Critical`) én er genoeg bullets zijn voor twee
+  volwaardige pagina's (≥ 2×`kMinPageBullets`). De paginatie in
+  `bullet_pagination.dart` bleef bewust ongemoeid — die is aantal-gebaseerd en
+  voorspelbaar gehouden na een eerdere meet-gebaseerde versie die lange lijsten
+  in stapels van vijf uiteen liet vallen; alleen de *of*-vraag is nu ook
+  dichtheids-gedreven, niet de *hoe*. Een zuivere aantal- of woordmelding onder
+  de drempel splitst nog steeds niet — dat levert flinters van één of twee
+  bullets op. (#1159)
 - **De Windows-leg van de spiegel staat met tussenpozen minuten stil, en dat is
   een aanvaarde afweging in plaats van een oplossing.** Na de vier reparaties
   hierónder was één draai volledig groen en strandde de volgende op precies één

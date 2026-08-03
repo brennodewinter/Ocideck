@@ -3064,7 +3064,11 @@ When you would rather not decide, **Fix all problems** — at the top of the pan
 shown only when something can actually be fixed automatically — works through
 them in the safe order (split overfull slides, cut multi-sentence bullets apart,
 detach a page dragged small by its split run), always choosing the option that
-keeps every word visible and never removing content from a slide. It is a single
+keeps every word visible and never removing content from a slide. Splitting now
+also kicks in when a slide renders too small because its bullets are *long*
+rather than *many*: a handful of long bullets that shrink the text below the
+readable size is spread over pages too, so the font grows — as long as there are
+enough bullets to make two real pages. It is a single
 undo step. What is left needs a human choice — alt text, theme contrast, a
 privacy finding — and stays in the list. The same safe fix is a keystroke away
 while presenting: press **`F`** to fix the slide on screen without interrupting
