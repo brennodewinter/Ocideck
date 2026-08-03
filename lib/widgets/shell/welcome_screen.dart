@@ -308,10 +308,10 @@ class _WelcomeScreen extends ConsumerWidget {
       // Beginnen met een OpenKAT-uitdraai is beginnen, net zo goed als
       // beginnen met een sjabloon — en juist wie hiermee werkt, komt het
       // vaakst op dit scherm terug om het overzicht te verversen. Zelfde poort
-      // als het menu-item: desktop, en de module aan (of er staat al een map).
-      // Zonder ingestelde map vraagt de actie er zelf om.
+      // als het menu-item: desktop, en de koppeling aan (of er staat al een
+      // map). Zonder ingestelde map vraagt de actie er zelf om.
       if (supportsLocalProjectFolders &&
-          ref.watch(importModuleRevealProvider)) ...[
+          ref.watch(openKatIntegrationRevealProvider)) ...[
         const SizedBox(height: 10),
         SizedBox(
           width: double.infinity,

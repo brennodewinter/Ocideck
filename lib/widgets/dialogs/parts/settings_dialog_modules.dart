@@ -30,10 +30,7 @@ extension _SettingsModules on _SettingsDialogState {
             ModuleId.infoSafety => _informationSecurityCard(l10n, module),
             ModuleId.ai => _aiAssistCard(l10n),
             ModuleId.onlineStorage => const OnlineStorageModuleCard(),
-            ModuleId.imports => ImportModuleCard(
-              onOpenIntegrations: () =>
-                  _rebuild(() => _selectedTab = SettingsSection.integrations),
-            ),
+            ModuleId.imports => const ImportModuleCard(),
             ModuleId.procesverbetering => const ProcesverbeteringModuleCard(),
             ModuleId.collaboration => const CollaborationModuleCard(),
             ModuleId.videoCalls => const VideoCallsModuleCard(),

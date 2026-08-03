@@ -147,16 +147,16 @@ extension _MainLayoutMenu on _MainLayoutState {
       ),
       _menuItem('import_url', Icons.link, l10n.t('importUrl')),
       // OpenKAT leest een map van schijf; op web weglaten, niet grijs maken.
-      // En het zit achter de module Importeren: `importModuleRevealProvider`
-      // legt uit waarom dat de reveal is en niet de schakelaar.
-      if (supportsLocalProjectFolders && ref.watch(importModuleRevealProvider))
+      // Achter de integratie OpenKAT (#1158): `openKatIntegrationRevealProvider`
+      // is aan, óf er staat al een map (bestaand deck bijwerken met koppeling uit).
+      if (supportsLocalProjectFolders &&
+          ref.watch(openKatIntegrationRevealProvider))
         _menuItem(
           'import_openkat',
           Icons.radar_outlined,
           openKatLabel(l10n, updating: hasActiveOpenKatReport(ref)),
         ),
-      // De tweede bron van dezelfde module: presentaties uit PowerPoint,
-      // Keynote en Impress. Werkt op bytes, dus anders dan OpenKAT ook op web.
+      // Presentatie-import (PowerPoint/Keynote/Impress): werkt op bytes, dus ook op web.
       if (ref.watch(importModuleRevealProvider))
         _menuItem(
           'import_presentation',
