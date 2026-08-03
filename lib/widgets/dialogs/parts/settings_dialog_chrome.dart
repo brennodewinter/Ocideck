@@ -21,6 +21,51 @@ part of '../settings_dialog.dart';
 @visibleForTesting
 final Color settingsSidebarThumbColor = Colors.white.withValues(alpha: 0.45);
 
+/// Een instellingsregel met een bijschrift links en zijn bediening rechts — maar
+/// die de bediening ónder het bijschrift laat vallen zodra de interface-tekst
+/// groot of de kolom smal wordt, in plaats van de rij te laten overlopen.
+///
+/// Zonder deze knik liep een "label + keuzemenu"-regel bij 200% interface-tekst
+/// op smal web horizontaal over: het bijschrift kromp wel mee (Expanded), maar de
+/// bediening (een keuzemenu of segmentknop) houdt zijn natuurlijke breedte en
+/// duwde de rij het venster uit. Gestapeld krijgt het bijschrift de volle breedte
+/// om over te lopen en staat de bediening eronder, waar hij wél past.
+///
+/// De knik hangt aan de tekstschaal én de breedte: bij normale tekst op een ruime
+/// kolom (het gebruikelijke geval) blijft alles op één regel, precies zoals het
+/// was. Alleen de veeleisende hoek stapelt.
+Widget _settingFieldRow(
+  BuildContext context, {
+  required Widget label,
+  required Widget control,
+}) {
+  return LayoutBuilder(
+    builder: (context, constraints) {
+      final scale = MediaQuery.textScalerOf(context).scale(1);
+      final stack = scale >= 1.5 || constraints.maxWidth < 360;
+      if (stack) {
+        // Gestapeld krijgt de bediening de vólle kolombreedte (stretch): een
+        // keuzemenu met `isExpanded` vult die en kort zijn tekst in plaats van
+        // over te lopen, en een segmentknop verdeelt zich netjes.
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [label, const SizedBox(height: 8), control],
+        );
+      }
+      // Inline houdt de bediening in een [Flexible], zodat een `isExpanded`-
+      // bediening een begrensde breedte krijgt (ongebonden zou die falen) en
+      // brede bediening kan krimpen in plaats van de rij te laten overlopen.
+      return Row(
+        children: [
+          Expanded(child: label),
+          const SizedBox(width: 12),
+          Flexible(child: control),
+        ],
+      );
+    },
+  );
+}
+
 /// Hoeveel pixels inhoud er hoogstens vervagen aan een rand waar meer achter
 /// ligt. Klein genoeg om geen leesruimte te kosten, groot genoeg om een item
 /// zichtbaar te laten "oplossen" in plaats van netjes te eindigen.
@@ -259,19 +304,182 @@ class _NavItem extends StatelessWidget {
   }
 }
 
+/// De breedte van de zijbalk bij de standaard tekstgrootte.
+const double _sidebarWidth = 234;
+
+/// Hoeveel de zijbalk hoogstens meegroeit met de tekstschaal.
+///
+/// Eén-op-één meegroeien zou bij 200% op 468 px uitkomen en het venster
+/// opeten — dan is de navigatie leesbaar en de inhoud niet. Anderhalf keer
+/// haalt de meeste labels heel; wat dan nog niet past breekt over twee
+/// regels af in [_navItem]. Verticale ruimte is hier goedkoper dan
+/// horizontale, want de lijst scrolt toch al.
+const double _sidebarMaxGrowth = 1.5;
+
+/// De smalste inhoudskolom die naast de zijbalk nog bruikbaar is. Zakt het
+/// dialoog daaronder (smal web bij grote tekst), dan wijkt de zijbalk voor een
+/// keuzebalk bovenaan; zie [_buildLayout].
+const double _minContentWidth = 320;
+
+/// De zichtbare tabbladen, in navigatievolgorde. Eén bron voor zowel de
+/// zijbalk als de smalle keuzebalk, zodat die twee nooit uiteenlopen over
+/// welke modules onthuld zijn.
+///
+/// Top-level en geen methode op de staat: puur presentatiebedrading die de
+/// klasse-plafond-ratchet niet hoort te belasten. Het gedrag is ongewijzigd —
+/// de staat komt binnen als parameter.
+List<SettingsSection> _visibleNavSections(_SettingsDialogState state) =>
+    SettingsSection.navItems(
+      infoSafetyRevealed: state.ref.watch(infoSafetyRevealProvider),
+      hasChecklists: state.ref
+          .watch(settingsProvider)
+          .customChecklists
+          .isNotEmpty,
+      // Uit het formulier en niet uit de opgeslagen instelling: zet je de
+      // module op Uitbreidingen aan, dan hoort het tabblad meteen te
+      // verschijnen en niet pas na Opslaan.
+      aiRevealed: state._ai.revealsTab,
+      importRevealed: state.ref.watch(importModuleRevealProvider),
+      // Integraties is OpenKAT (desktop); op web reveal't de module wél, maar
+      // zonder OpenKAT-tabblad.
+      openKatAvailable: supportsLocalProjectFolders,
+      collaborationRevealed: state.ref.watch(collaborationRevealProvider),
+    );
+
+/// Kiest tussen de brede layout (vaste zijbalk naast de inhoud) en de smalle
+/// (keuzebalk bovenaan, inhoud over de volle breedte). De inhoud zelf is in
+/// beide gevallen exact dezelfde widget, zodat een tabblad niet weet welke
+/// layout hem draagt.
+Widget _buildLayout(
+  _SettingsDialogState state,
+  AppLocalizations l10n, {
+  required bool useRailLayout,
+  required Widget content,
+}) {
+  if (useRailLayout) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        state._sidebar(l10n),
+        Expanded(child: content),
+      ],
+    );
+  }
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      _compactSectionBar(state, l10n),
+      Expanded(child: content),
+    ],
+  );
+}
+
+/// De navigatie voor de smalle layout: één keuzemenu dat de zijbalk vervangt.
+/// "Over OciDeck" hoort er hier expliciet bij — in de zijbalk opent dat via de
+/// merkvoet, die in deze layout ontbreekt, dus zonder deze toevoeging zou het
+/// tabblad onbereikbaar zijn.
+Widget _compactSectionBar(_SettingsDialogState state, AppLocalizations l10n) {
+  final sections = [
+    ..._visibleNavSections(state),
+    if (!_visibleNavSections(state).contains(SettingsSection.about))
+      SettingsSection.about,
+  ];
+  // Het actieve tabblad kan buiten de lijst vallen (bijv. geopend op een
+  // sectie die intussen verborgen is); val dan terug op de eerste, zodat het
+  // keuzemenu een geldige waarde houdt in plaats van te crashen.
+  final value = sections.contains(state._selectedTab)
+      ? state._selectedTab
+      : sections.first;
+  return Container(
+    padding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [AppTheme.navySoft, AppTheme.navy],
+      ),
+    ),
+    child: Row(
+      children: [
+        const Icon(
+          Icons.settings_suggest_outlined,
+          color: Colors.white,
+          size: 22,
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<SettingsSection>(
+              key: const Key('settings-section-picker'),
+              isExpanded: true,
+              value: value,
+              dropdownColor: AppTheme.navy,
+              iconEnabledColor: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+              ),
+              items: [
+                for (final section in sections)
+                  DropdownMenuItem<SettingsSection>(
+                    value: section,
+                    child: Text(
+                      section.label(l10n),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+              ],
+              onChanged: (section) {
+                if (section != null) {
+                  state._rebuild(() => state._selectedTab = section);
+                }
+              },
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+/// De voetbalk met Annuleren/Opslaan. Top-level en geen methode op de staat:
+/// presentatiebedrading die de klasse-plafond-ratchet niet hoort te belasten;
+/// het gedrag is ongewijzigd en de staat komt binnen als parameter.
+Widget _footerBar(_SettingsDialogState state, AppLocalizations l10n) {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
+    decoration: BoxDecoration(
+      color: AppTheme.paper,
+      border: const Border(top: BorderSide(color: AppTheme.iceBlue)),
+    ),
+    // Wrap in plaats van Row: bij 200% tekstschaal passen "Abbrechen" en
+    // "Einstellungen speichern" niet meer naast elkaar en liep deze balk 261
+    // pixels buiten het venster — met de opslaanknop aan de kant die
+    // wegviel. Dan stapelen ze liever onder elkaar.
+    child: Wrap(
+      alignment: WrapAlignment.end,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 10,
+      runSpacing: 8,
+      children: [
+        TextButton(
+          onPressed: () => Navigator.pop(state.context),
+          child: Text(l10n.t('cancel')),
+        ),
+        ElevatedButton.icon(
+          onPressed: state._save,
+          icon: const Icon(Icons.check_rounded, size: 18),
+          label: Text(l10n.t('saveSettings')),
+        ),
+      ],
+    ),
+  );
+}
+
 extension _SettingsChrome on _SettingsDialogState {
-  /// De breedte van de zijbalk bij de standaard tekstgrootte.
-  static const double _sidebarWidth = 234;
-
-  /// Hoeveel de zijbalk hoogstens meegroeit met de tekstschaal.
-  ///
-  /// Eén-op-één meegroeien zou bij 200% op 468 px uitkomen en het venster
-  /// opeten — dan is de navigatie leesbaar en de inhoud niet. Anderhalf keer
-  /// haalt de meeste labels heel; wat dan nog niet past breekt over twee
-  /// regels af in [_navItem]. Verticale ruimte is hier goedkoper dan
-  /// horizontale, want de lijst scrolt toch al.
-  static const double _sidebarMaxGrowth = 1.5;
-
   Widget _sidebar(AppLocalizations l10n) {
     // Bij schaal 1.0 exact 234, zodat er voor wie niets instelt niets verandert.
     final scale = MediaQuery.textScalerOf(context).scale(1);
@@ -352,24 +560,7 @@ extension _SettingsChrome on _SettingsDialogState {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    for (final section in SettingsSection.navItems(
-                      infoSafetyRevealed: ref.watch(infoSafetyRevealProvider),
-                      hasChecklists: ref
-                          .watch(settingsProvider)
-                          .customChecklists
-                          .isNotEmpty,
-                      // Uit het formulier en niet uit de opgeslagen instelling:
-                      // zet je de module op Uitbreidingen aan, dan hoort het
-                      // tabblad meteen te verschijnen en niet pas na Opslaan.
-                      aiRevealed: _ai.revealsTab,
-                      importRevealed: ref.watch(importModuleRevealProvider),
-                      // Integraties is OpenKAT (desktop); op web reveal't de
-                      // module wél, maar zonder OpenKAT-tabblad.
-                      openKatAvailable: supportsLocalProjectFolders,
-                      collaborationRevealed: ref.watch(
-                        collaborationRevealProvider,
-                      ),
-                    ))
+                    for (final section in _visibleNavSections(this))
                       _NavItem(
                         section: section,
                         selected: _selectedTab == section,
@@ -488,37 +679,6 @@ extension _SettingsChrome on _SettingsDialogState {
             icon: const Icon(Icons.close, size: 20),
             color: AppTheme.slate400,
             splashRadius: 20,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _footerBar(AppLocalizations l10n) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
-      decoration: BoxDecoration(
-        color: AppTheme.paper,
-        border: const Border(top: BorderSide(color: AppTheme.iceBlue)),
-      ),
-      // Wrap in plaats van Row: bij 200% tekstschaal passen "Abbrechen" en
-      // "Einstellungen speichern" niet meer naast elkaar en liep deze balk 261
-      // pixels buiten het venster — met de opslaanknop aan de kant die
-      // wegviel. Dan stapelen ze liever onder elkaar.
-      child: Wrap(
-        alignment: WrapAlignment.end,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 10,
-        runSpacing: 8,
-        children: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(l10n.t('cancel')),
-          ),
-          ElevatedButton.icon(
-            onPressed: _save,
-            icon: const Icon(Icons.check_rounded, size: 18),
-            label: Text(l10n.t('saveSettings')),
           ),
         ],
       ),
