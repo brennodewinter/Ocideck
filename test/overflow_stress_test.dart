@@ -7,6 +7,8 @@ import 'package:ocideck/app.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
+import 'package:ocideck/widgets/editors/expanded_markdown_dialog.dart';
+import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Stresspoort tegen RenderFlex-overflows in de interface.
@@ -88,6 +90,43 @@ final _surfaces = <_Surface>[
   (
     name: 'instellingen-dialoog',
     pump: _pumpSettingsDialog,
+    sizes: _dialogViewportSizes,
+  ),
+  // Het uitklap-tekstverwerker-dialoog voor een Markdown-veld. De kop draagt de
+  // modus-schakelaar én de opmaakbalk; bij 200% tekst moeten die wikkelen in
+  // plaats van overlopen. Rechtstreeks op [AppShell] geopend zodat het dialoog
+  // de tekstschaal via dezelfde gedeelde MediaQuery erft.
+  (
+    name: 'markdown-tekstverwerker',
+    pump: (tester) async {
+      SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
+      await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+      await tester.pumpAndSettle();
+      final controller = TextEditingController(
+        text:
+            '# Een kop\n\nEen alinea met **vet** en *cursief* en een '
+            'behoorlijk lange regel die de beschikbare breedte vult.',
+      );
+      addTearDown(controller.dispose);
+      unawaited(
+        showDialog<void>(
+          context: tester.element(find.byType(AppShell)),
+          builder: (_) => ExpandedMarkdownDialog(
+            label: 'Beschrijving',
+            hint: 'Tekst',
+            sourceController: controller,
+            editorTheme: MarkdownEditorTheme.editorPanel(
+              text: const Color(0xFF1E293B),
+              link: const Color(0xFF003399),
+              accent: const Color(0xFF003399),
+              codeBackground: const Color(0xFFF1F5F9),
+              border: const Color(0xFFCBD5E1),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+    },
     sizes: _dialogViewportSizes,
   ),
 ];

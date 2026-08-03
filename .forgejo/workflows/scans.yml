@@ -21,19 +21,40 @@
 # de merge herhaalt exact wat de PR-run een paar minuten eerder al zag. Die
 # tweede run voegde geen enkel signaal toe en was juist de enige bron van ruis —
 # snel opeenvolgende merges naar main annuleerden elkaars lopende run
-# (concurrency), en zo'n afgebroken run meldt zich als `failure` en mailt. Op één
-# drukke docs-avond in juli 2026 kwam de mailstroom vrijwel volledig hiervandaan.
+# (concurrency), en zo'n afgebroken run meldt zich als `failure` en mailt.
 # Weggehaald: het beveiligingssignaal zit vóór de merge, de post-merge-run was
 # alleen kosten. Wat hiermee vervalt is dekking van een commit die rechtstreeks
 # op main wordt gezet zónder PR — en zo werkt deze repo niet.
 #
-# **Waarom op de Linux-runner en niet op de Mac.** De Mac heeft de drie
-# scanners staan, dus daar zou niets geïnstalleerd hoeven worden. Maar die Mac
-# is sinds #797 zowel de uitbrengpoort als de werkmachine van de committer, en
-# deze workflow vuurt bij elke PR: dan vreet hij kernen op de machine waar op dat
-# moment `make check` draait. De server staat sinds diezelfde verhuizing stil.
-# Bijkomend voordeel: in een container bepaal je zelf welke scannerversie erin
-# zit, op een machine bepaalt Homebrew dat.
+# **Waarom op het voorgebakken scan-image en niet meer op een kaal ubuntu.** Deze
+# workflow vuurde bij élke PR en bouwde de omgeving voorheen per run opnieuw op:
+# apt-tools installeren en drie scanners van het net halen (gitleaks + trufflehog
+# als release-tarball, semgrep uit een verse pip-venv). Gemeten ~3 minuten per run,
+# waarvan vrijwel alles installeren was en amper 19 seconden scannen (#778); en
+# drie downloads per run zijn drie kansen op een netstoring die niets met deze
+# repo te maken heeft. Dat werk is nu voorgebakken in
+# `pawprint.vigilis.online/librekat/ocideck-scans:<pins>` (zie
+# `.forgejo/ci-image/scans.Dockerfile` en `docs/CHECKS.md`): de drie scanners
+# zitten er sha256-geverifieerd in, dus de per-run-installatie én het net vervallen.
+#
+# **Waarom dit mocht, terwijl scanners CACHEN bewust niet mocht.** `scans.yml`
+# weigerde ooit een `actions/cache` op de scanner-binaries omdat een cache-restore
+# een sha256-geverifieerde download van een BEVEILIGINGSscanner zou vervangen door
+# een artefact van een eerdere run, zónder de hercontrole die `check-toolchain` de
+# Flutter-toolchain wél geeft — "groen" zou stil iets anders kunnen gaan betekenen.
+# Een voorgebakken image neemt dat op twee punten weg: (1) de sha256-verificatie is
+# niet weg maar naar bouwtijd verplaatst (zie de Dockerfile), en (2) deze workflow
+# krijgt de ontbrekende hercontrole terug — de stap "Ingebakken scanner-versies ==
+# de pins" hieronder toetst fail-closed dat het image draagt wat de pins zeggen,
+# net zoals `check-toolchain` dat voor Flutter doet.
+#
+# **Pin-koppeling.** Het image-tag ís de drie scanner-pins
+# (`gl<gitleaks>-th<trufflehog>-sg<semgrep>`). De pins staan hieronder in `env` —
+# hun ENIGE andere plek is `.github/pinned-ci-versions.json`, en
+# `pinned_versions_manifest_test` houdt die twee gelijk. Bump je een pin, dan
+# verandert het tag mee; loopt het image achter (of vergat iemand het tag bij te
+# werken), dan valt de hercontrole hieronder om — fail-closed, geen stille drift.
+# `ci-image-scans.yml` publiceert het nieuwe tag automatisch bij een pin-wijziging.
 name: scans
 
 on:
@@ -43,10 +64,9 @@ on:
 # **Waarom een superseded run mag worden afgebroken.** Duwt iemand een nieuwe
 # commit op een PR terwijl de vorige scan nog loopt, dan zet die de lopende run
 # opzij. Afbreken kost hier niets, en dat is geen aanname over snelheid maar een
-# eigenschap van wat er gemeten wordt: `gitleaks git` en `trufflehog git`
-# scannen de héle historie, dus de latere run dekt onverkort alles wat de
-# afgebroken run zou hebben gezien. Bij een poort die alleen de wijziging bekijkt
-# zou dit fout zijn.
+# eigenschap van wat er gemeten wordt: `gitleaks git` en `trufflehog git` scannen
+# de héle historie, dus de latere run dekt onverkort alles wat de afgebroken run
+# zou hebben gezien. Bij een poort die alleen de wijziging bekijkt zou dit fout zijn.
 #
 # De grootste bron van zulke afbrekingen — snel opeenvolgende merges naar main —
 # is met het schrappen van de `push`-trigger hierboven verdwenen; wat rest is het
@@ -60,41 +80,44 @@ concurrency:
 jobs:
   scans:
     runs-on: docker
+    # De drie scanners zitten voorgebakken in dit image; het tag ís de drie pins.
+    # Het image is anoniem pullbaar (publieke org) en de dind heeft het lokaal;
+    # valt de registry toch weg, dan start de job niet — dezelfde beschikbaarheids-
+    # grens als de runner zelf.
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-scans:gl8.30.1-th3.95.9-sg1.171.0
     env:
-      # De enige plek waar deze drie versies staan. Een scanner die zichzelf
-      # bijwerkt verandert stilletjes wat de poort betekent — dan is "groen"
-      # vandaag iets anders dan gisteren, zonder dat iemand iets wijzigde.
+      # De enige plek náást `.github/pinned-ci-versions.json` waar deze drie
+      # versies staan; `pinned_versions_manifest_test` houdt ze gelijk. Ze zijn
+      # hier geen download-parameter meer (dat gebeurt op bouwtijd in het image)
+      # maar de verwachte waarde waartegen de hercontrole hieronder toetst.
       GITLEAKS_VERSION: 8.30.1
       TRUFFLEHOG_VERSION: 3.95.9
       SEMGREP_VERSION: 1.171.0
     steps:
-      # Vóór de checkout: actions/checkout én actions/cache zijn node-acties, en
-      # dit kale image brengt geen node mee. Node eerst, dan de apt-cache, dan de
-      # rest — zodat `apt-get install` de download (niet de installatie) overslaat.
-      - name: Node voor de cache-acties
+      # De hercontrole die scanners-in-een-image pas verdedigbaar maakt: toets dat
+      # het ingebakken image exact de gepinde versies draagt. Dit is het equivalent
+      # van `check-toolchain` voor Flutter — zonder deze stap zou een achtergebleven
+      # of verkeerd getagd image stil kunnen scannen met andere scanners, en dan
+      # betekent "groen" niet meer hetzelfde over de tijd. Fail-closed: wijkt één
+      # versie af, dan valt de poort hier om, vóór er iets gescand is. `trufflehog
+      # --version` schrijft naar stderr, vandaar `2>&1`.
+      - name: Ingebakken scanner-versies == de pins
         run: |
-          apt-get update
-          apt-get install -y --no-install-recommends nodejs ca-certificates
-          printf 'Binary::apt::APT::Keep-Downloaded-Packages "true";\n' \
-            > /etc/apt/apt.conf.d/99keep-debs
-
-      # Eigen sleutel: deze poort heeft een lichtere pakketlijst dan de build-gates
-      # (geen cmake/gtk). Bump `-v1` als de lijst verandert. De scanner-binaries en
-      # de semgrep-venv worden hier bewust NIET gecachet — dat is een aparte, iets
-      # delicatere stap (gepinde download + verificatie) voor een volgende keer.
-      - name: Scan-tools uit de apt-cache
-        continue-on-error: true
-        uses: actions/cache@v4
-        with:
-          path: /var/cache/apt/archives
-          key: apt-linux-2404-scans-v1
-
-      - name: Gereedschap installeren
-        run: |
-          apt-get install -y --no-install-recommends \
-            make git curl tar python3 python3-venv
+          set -eu
+          fail=0
+          check() {
+            name="$1"; want="$2"; got="$3"
+            if printf '%s' "$got" | grep -qF -- "$want"; then
+              echo "ok: $name $want"
+            else
+              echo "MISMATCH: $name wil $want, image meldt: $got"; fail=1
+            fi
+          }
+          check gitleaks   "$GITLEAKS_VERSION"   "$(gitleaks version 2>&1)"
+          check trufflehog "$TRUFFLEHOG_VERSION" "$(trufflehog --version 2>&1)"
+          check semgrep    "$SEMGREP_VERSION"    "$(semgrep --version 2>&1)"
+          test "$fail" -eq 0
 
       - uses: actions/checkout@v4
         with:
@@ -111,80 +134,6 @@ jobs:
       # maken heeft.
       - name: De werkkopie vertrouwen
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
-      # Zelfde discipline als de Flutter-stap in `linux-gate.yml`: de release
-      # binnenhalen en de sha256 controleren tegen het gepubliceerde manifest.
-      # Dat vangt een beschadigde of onderweg gewijzigde download; het is geen
-      # bewijs over de uitgever, want het manifest komt van diezelfde uitgever.
-      #
-      # De `test -n "$SHA"` blijft staan, maar om een preciezere reden dan hier
-      # eerst stond. Die zin luidde dat `grep … | sha256sum -c -` STIL met exit 0
-      # slaagt zodra de grep niets vindt. Nagemeten op GNU coreutils 9.5 (dit
-      # image draait 9.4, dezelfde codebasis) klopt dat niet: bij een lege
-      # treffer meldt sha256sum "no properly formatted checksum lines found" en
-      # eindigt op 1 — via een grep zonder treffer én met een lege `$SHA` uit
-      # awk. Het vangnet zit er dus al. (#800)
-      #
-      # Wat de regel wél doet, is de faalreden leesbaar houden. Zonder hem
-      # struikelt de stap over de *invoer van sha256sum*, en wie dat leest gaat
-      # de verificatie debuggen terwijl er in werkelijkheid een release-asset
-      # hernoemd is. Eén regel om te voorkomen dat een correcte controle als een
-      # kapotte controle overkomt.
-      #
-      # **De `--retry` is er niet voor de netheid.** Deze poort haalt drie
-      # scanners van het net, bij élke PR, en dat is precies zo vaak een kans op
-      # een storing die niets met deze repo te maken heeft. Op
-      # 24-07 gebeurde dat twee keer op één middag: `curl: (22) … error: 504`,
-      # een halve seconde na de checkout, en de poort stond rood terwijl
-      # `check-secrets` en `sast` op datzelfde commit lokaal groen waren.
-      #
-      # Een rood beveiligingsvinkje dat geen vondst is, is duurder dan geen
-      # vinkje: het leert je het volgende rode vinkje ook weg te klikken. Curl
-      # herhaalt op 5xx met een oplopende wachttijd, en dat is de goedkoopste
-      # manier om de storing van de bevinding te scheiden.
-      - name: gitleaks volgens de pin
-        run: |
-          set -eu
-          BASE="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}"
-          ARCHIVE="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
-          curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 -o "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
-          curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 -o /tmp/gitleaks_checksums.txt \
-            "$BASE/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
-          SHA=$(awk -v f="$ARCHIVE" '$2 == f { print $1 }' /tmp/gitleaks_checksums.txt)
-          test -n "$SHA"
-          echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
-          tar -xzf "/tmp/$ARCHIVE" -C /usr/local/bin gitleaks
-          rm "/tmp/$ARCHIVE"
-          gitleaks version
-
-      - name: trufflehog volgens de pin
-        run: |
-          set -eu
-          BASE="https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}"
-          ARCHIVE="trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz"
-          curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 -o "/tmp/$ARCHIVE" "$BASE/$ARCHIVE"
-          curl -fsSL --retry 5 --retry-delay 3 --retry-all-errors --connect-timeout 15 -o /tmp/trufflehog_checksums.txt \
-            "$BASE/trufflehog_${TRUFFLEHOG_VERSION}_checksums.txt"
-          SHA=$(awk -v f="$ARCHIVE" '$2 == f { print $1 }' /tmp/trufflehog_checksums.txt)
-          test -n "$SHA"
-          echo "$SHA  /tmp/$ARCHIVE" | sha256sum -c -
-          tar -xzf "/tmp/$ARCHIVE" -C /usr/local/bin trufflehog
-          rm "/tmp/$ARCHIVE"
-          trufflehog --version
-
-      # Semgrep komt van PyPI en niet als losse tarball. Een venv omdat Ubuntu
-      # 24.04 systeem-pip afschermt (PEP 668). De versie is gepind; de
-      # transitieve afhankelijkheden zijn dat NIET — hash-pinnen zou een eigen
-      # requirements-bestand met honderden hashes vragen, en dat onderhouden is
-      # een grotere belofte dan hier waargemaakt wordt. Bewust genoteerd in
-      # plaats van stil gelaten.
-      - name: semgrep volgens de pin
-        run: |
-          set -eu
-          python3 -m venv /opt/semgrep-venv
-          /opt/semgrep-venv/bin/pip install --quiet --no-input \
-            "semgrep==${SEMGREP_VERSION}"
-          echo "/opt/semgrep-venv/bin" >> "$GITHUB_PATH"
 
       # De commando's zelf staan bewust niet hier maar in de Makefile: `make
       # check-secrets` en `make sast` zijn precies wat een bijdrager lokaal

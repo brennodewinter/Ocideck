@@ -17,6 +17,12 @@ import '../models/slide.dart';
 import 'rich_text_layout.dart';
 import 'slide_layout_metrics.dart';
 
+/// The "(i/N)" marker [paginateFinding] appends to a split finding's heading
+/// (see [_page]). The single place that recognises an already-paginated page:
+/// [firstRenderPageSpec] leaves such a page untouched, and the preview reads the
+/// page number from it to tell a continuation from page one.
+final RegExp findingPageMarker = RegExp(r'\((\d+)/\d+\)\s*$');
+
 /// A finding section, in the fixed §3.1 order.
 enum _Section { description, confirmation, impact, recommendation }
 
@@ -216,6 +222,34 @@ List<Slide> expandFindingsForRender(
     }
   }
   return out;
+}
+
+/// The [FindingSpec] a **single-slide** preview should render for [slide]: the
+/// first render page when the finding overflows one slide, otherwise the finding
+/// whole. Thumbnails and the in-editor live preview render exactly one slide and
+/// never run [expandFindingsForRender] (that expands a whole deck), so without
+/// this an overflowing finding is scaled down *uniformly* by the
+/// `_PreviewScaffold` [FittedBox] — which shrinks it in width too, until the
+/// header card uses only a fraction of the slide (#1147). Returning page 1 makes
+/// those previews match the paged main preview, the presenter and the export, at
+/// full width.
+///
+/// A finding that already fits one slide — including a page-slide produced by
+/// [expandFindingsForRender] — is returned unchanged, so this is a no-op on the
+/// paths that already paginate.
+FindingSpec firstRenderPageSpec(Slide slide, {ThemeProfile? profile}) {
+  final spec = FindingSpec.parse(slide.customMarkdown);
+  // Already a render page? A page produced by [expandFindingsForRender] (the
+  // presenter, the export, the paged main preview) carries the "(i/N)" marker
+  // and has no header card on its continuations. Re-paginating it would charge
+  // the header-card budget to a page that has none and split it again into a
+  // mangled, double-marked page — so leave any already-paginated page verbatim
+  // and only split an un-split source finding.
+  if (findingPageMarker.hasMatch(spec.heading)) return spec;
+  return paginateFinding(
+    spec,
+    linesPerSlide: _linesPerSlideFor(slide, profile),
+  ).first;
 }
 
 /// The per-page line budget for [slide], reduced when a shown logo reserves

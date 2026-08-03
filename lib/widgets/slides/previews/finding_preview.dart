@@ -35,7 +35,14 @@ class _FindingPreview extends StatelessWidget {
     // content becomes ~0.91·w instead of 0.86·w, fewer findings spill to a
     // second page.
     final hPad = w * 0.045;
-    final spec = FindingSpec.parse(slide.customMarkdown);
+    // Render the finding's first page, not the raw (possibly overflowing) slide:
+    // a too-tall finding would otherwise be scaled down uniformly by the
+    // [FittedBox] below — shrinking in width until the header card fills a
+    // fraction of the slide. The paged main preview, the presenter and the
+    // export already pass single-page slides here (via expandFindingsForRender),
+    // so this only changes the single-slide previews that didn't — the thumbnail
+    // strip and the in-editor live preview (#1147).
+    final spec = firstRenderPageSpec(slide, profile: profile);
     // The context (environmental) score when the scope object is rated; the
     // header card and its primary badge then track the CIA-weighted severity.
     final ctxCvss = findingContextCvss(spec, scopeCia);
@@ -72,15 +79,11 @@ class _FindingPreview extends StatelessWidget {
     );
   }
 
-  /// The "(i/N)" page marker that [paginateFinding] appends to a split finding's
-  /// heading — the only place it is ever added.
-  static final RegExp _pageMarker = RegExp(r'\((\d+)/\d+\)\s*$');
-
-  /// Whether this page is a paginated *continuation*. The page number is the
-  /// authority: page 1 must keep the finding card even when an author supplied
-  /// no CVSS, scope or other metadata.
+  /// Whether this page is a paginated *continuation*. The page number (from the
+  /// shared [findingPageMarker]) is the authority: page 1 must keep the finding
+  /// card even when an author supplied no CVSS, scope or other metadata.
   bool _isContinuationPage(FindingSpec spec) {
-    final marker = _pageMarker.firstMatch(spec.heading);
+    final marker = findingPageMarker.firstMatch(spec.heading);
     return marker != null && int.tryParse(marker.group(1) ?? '') != 1;
   }
 

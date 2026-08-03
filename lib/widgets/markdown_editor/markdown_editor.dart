@@ -19,6 +19,13 @@ export 'markdown_editor_toolbar.dart';
 export 'notes_editor_mode.dart';
 export 'notes_mode_toggle.dart';
 
+/// How the editor paints its chrome.
+///
+/// [panel] is the compact framed field used inside editor panels and presenter
+/// notes. [document] is the roomy word-processor surface used by the expand
+/// dialog: one clean toolbar header and a centred page you write on.
+enum NotesSurfaceStyle { panel, document }
+
 /// Notes editor with a visual (WYSIWYG) and a raw markdown mode side by side.
 ///
 /// Markdown is the stored format; switching modes converts through [MarkdownQuillCodec].
@@ -40,6 +47,7 @@ class MarkdownNotesEditor extends StatefulWidget {
   final ValueChanged<NotesEditorMode>? onModeChanged;
   final bool showModeToggle;
   final NotesModeToggleStyle modeToggleStyle;
+  final NotesSurfaceStyle surfaceStyle;
 
   const MarkdownNotesEditor({
     super.key,
@@ -60,6 +68,7 @@ class MarkdownNotesEditor extends StatefulWidget {
     this.onModeChanged,
     this.showModeToggle = true,
     this.modeToggleStyle = NotesModeToggleStyle.standard,
+    this.surfaceStyle = NotesSurfaceStyle.panel,
   });
 
   /// Convenience constructor using discrete color/style parameters.
@@ -151,6 +160,12 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       : _requestedMode;
 
   FocusNode get _focusNode => widget.focusNode ?? _ownedFocusNode!;
+
+  bool get _document => widget.surfaceStyle == NotesSurfaceStyle.document;
+
+  /// The document surface frames the whole page itself, so the field inside
+  /// drops its own border to read as one continuous sheet.
+  bool get _fieldBordered => _document ? false : widget.bordered;
 
   @override
   void initState() {
@@ -338,7 +353,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       decoration: BoxDecoration(
         color: widget.editorTheme.surface,
         borderRadius: BorderRadius.circular(6),
-        border: widget.bordered
+        border: _fieldBordered
             ? Border.all(color: widget.editorTheme.border)
             : null,
       ),
@@ -378,7 +393,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       hintText: widget.hintText,
       expand: widget.expand,
       contentPadding: widget.contentPadding,
-      bordered: widget.bordered,
+      bordered: _fieldBordered,
     );
   }
 
@@ -392,76 +407,155 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     return field;
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildModeToggle() => MediaQuery.withClampedTextScaling(
+    maxScaleFactor: 1.5,
+    child: NotesModeToggle(
+      mode: _effectiveMode,
+      onModeChanged: _onModeSelected,
+      style: widget.modeToggleStyle,
+      foregroundColor: widget.editorTheme.toolbarIcon,
+      accentColor: widget.editorTheme.accent,
+    ),
+  );
+
+  Widget? _buildToolbar({required bool bordered}) {
+    if (!widget.showToolbar) return null;
     final quill = _quillController;
+    final Widget bar;
+    if (_effectiveMode == NotesEditorMode.markdown) {
+      bar = MarkdownEditorToolbar(
+        controller: widget.controller,
+        focusNode: _focusNode,
+        theme: widget.editorTheme,
+        compact: widget.compactToolbar,
+        bordered: bordered,
+      );
+    } else if (quill != null) {
+      bar = WysiwygNotesToolbar(
+        controller: quill,
+        focusNode: _focusNode,
+        theme: widget.editorTheme,
+        compact: widget.compactToolbar,
+        bordered: bordered,
+      );
+    } else {
+      return null;
+    }
+    return MediaQuery.withClampedTextScaling(maxScaleFactor: 1.5, child: bar);
+  }
+
+  Widget? _buildLimitationHint() {
+    if (_visualLimitations.isEmpty ||
+        _effectiveMode != NotesEditorMode.markdown) {
+      return null;
+    }
+    return markdownSourceModeHint(context, widget.editorTheme);
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      _document ? _buildDocumentLayout() : _buildPanelLayout();
+
+  Widget _buildPanelLayout() {
+    final toolbar = _buildToolbar(bordered: true);
+    final hint = _buildLimitationHint();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (widget.showModeToggle) ...[
-          MediaQuery.withClampedTextScaling(
-            maxScaleFactor: 1.5,
-            child: NotesModeToggle(
-              mode: _effectiveMode,
-              onModeChanged: _onModeSelected,
-              style: widget.modeToggleStyle,
-              foregroundColor: widget.editorTheme.toolbarIcon,
-              accentColor: widget.editorTheme.accent,
-            ),
-          ),
+          _buildModeToggle(),
           const SizedBox(height: 6),
         ],
-        if (widget.showToolbar) ...[
-          if (_effectiveMode == NotesEditorMode.markdown)
-            MediaQuery.withClampedTextScaling(
-              maxScaleFactor: 1.5,
-              child: MarkdownEditorToolbar(
-                controller: widget.controller,
-                focusNode: _focusNode,
-                theme: widget.editorTheme,
-                compact: widget.compactToolbar,
-              ),
-            )
-          else if (quill != null)
-            MediaQuery.withClampedTextScaling(
-              maxScaleFactor: 1.5,
-              child: WysiwygNotesToolbar(
-                controller: quill,
-                focusNode: _focusNode,
-                theme: widget.editorTheme,
-                compact: widget.compactToolbar,
-              ),
-            ),
-          const SizedBox(height: 6),
-        ],
-        if (_visualLimitations.isNotEmpty &&
-            _effectiveMode == NotesEditorMode.markdown)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 6),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.shield_outlined,
-                  size: 14,
-                  color: widget.editorTheme.toolbarIcon,
-                ),
-                const SizedBox(width: 5),
-                Expanded(
-                  child: Text(
-                    context.l10n.d(
-                      'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.',
-                    ),
-                    style: widget.editorTheme.hintStyle.copyWith(
-                      fontSize: 10.5,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+        if (toolbar != null) ...[toolbar, const SizedBox(height: 6)],
+        if (hint != null)
+          Padding(padding: const EdgeInsets.only(bottom: 6), child: hint),
         _buildEditorSurface(),
       ],
     );
   }
+
+  /// Roomy word-processor surface: one clean header (switch + toolbar over a
+  /// hairline) and a centred page you write on. Used by the expand dialog.
+  Widget _buildDocumentLayout() {
+    final toolbar = _buildToolbar(bordered: false);
+    final hint = _buildLimitationHint();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          padding: const EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: widget.editorTheme.border),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (widget.showModeToggle) ...[
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: _buildModeToggle(),
+                ),
+                if (toolbar != null) const SizedBox(height: 8),
+              ],
+              ?toolbar,
+            ],
+          ),
+        ),
+        if (hint != null)
+          Padding(padding: const EdgeInsets.only(top: 8), child: hint),
+        Expanded(child: _buildDocumentPage()),
+      ],
+    );
+  }
+
+  Widget _buildDocumentPage() {
+    final field = _effectiveMode == NotesEditorMode.visual
+        ? _buildVisualField()
+        : _buildMarkdownField();
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(6, 12, 6, 6),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 860),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: widget.editorTheme.surface,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: widget.editorTheme.border),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.10),
+                  blurRadius: 12,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: field,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The gentle "source mode protects formatting the visual editor can't yet
+/// round-trip" note, shown when raw markdown is required.
+Widget markdownSourceModeHint(BuildContext context, MarkdownEditorTheme theme) {
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Icon(Icons.shield_outlined, size: 14, color: theme.toolbarIcon),
+      const SizedBox(width: 5),
+      Expanded(
+        child: Text(
+          context.l10n.d(
+            'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.',
+          ),
+          style: theme.hintStyle.copyWith(fontSize: 10.5),
+        ),
+      ),
+    ],
+  );
 }

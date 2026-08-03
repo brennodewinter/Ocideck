@@ -54,6 +54,7 @@ import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/finding_context_score.dart';
+import '../../services/finding_pagination.dart';
 import '../../services/display_window_service.dart';
 import '../../services/markdown_body_blocks.dart';
 import '../../services/slide_layout_metrics.dart';
@@ -257,10 +258,8 @@ EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
   return EdgeInsets.only(top: top, bottom: bottom);
 }
 
-double _logoAwareBottomPadding(double defaultPad, double safeBottom) {
-  if (safeBottom <= 0) return defaultPad;
-  return math.max(defaultPad, safeBottom);
-}
+double _logoAwareBottomPadding(double defaultPad, double safeBottom) =>
+    safeBottom <= 0 ? defaultPad : math.max(defaultPad, safeBottom);
 
 /// De dikte van een voortgangsbalk in een preview, afgeleid van de breedte
 /// waarop de dia wordt opgemaakt.

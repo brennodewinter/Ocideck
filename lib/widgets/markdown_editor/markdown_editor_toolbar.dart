@@ -10,12 +10,17 @@ class MarkdownEditorToolbar extends StatelessWidget {
   final MarkdownEditorTheme theme;
   final bool compact;
 
+  /// Draws the framed surface around the buttons. Off in the document editor,
+  /// where the toolbar sits in a shared header instead of its own boxed strip.
+  final bool bordered;
+
   const MarkdownEditorToolbar({
     super.key,
     required this.controller,
     this.focusNode,
     required this.theme,
     this.compact = false,
+    this.bordered = true,
   });
 
   @override
@@ -53,111 +58,113 @@ class MarkdownEditorToolbar extends StatelessWidget {
       );
     }
 
+    final buttons = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+      child: Wrap(
+        spacing: 2,
+        runSpacing: 2,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          button(
+            tooltip: l10n.d('Vet'),
+            icon: Icons.format_bold,
+            onPressed: () => MarkdownEditorActions.wrapSelection(
+              controller,
+              before: '**',
+              after: '**',
+              placeholder: 'tekst',
+            ),
+          ),
+          button(
+            tooltip: l10n.d('Cursief'),
+            icon: Icons.format_italic,
+            onPressed: () => MarkdownEditorActions.wrapSelection(
+              controller,
+              before: '*',
+              after: '*',
+              placeholder: 'tekst',
+            ),
+          ),
+          button(
+            tooltip: l10n.d('Doorhalen'),
+            icon: Icons.format_strikethrough,
+            onPressed: () => MarkdownEditorActions.wrapSelection(
+              controller,
+              before: '~~',
+              after: '~~',
+              placeholder: 'tekst',
+            ),
+          ),
+          button(
+            tooltip: l10n.d('Code'),
+            icon: Icons.code,
+            onPressed: () => MarkdownEditorActions.wrapSelection(
+              controller,
+              before: '`',
+              after: '`',
+              placeholder: 'code',
+            ),
+          ),
+          button(
+            tooltip: l10n.d('Link'),
+            icon: Icons.link,
+            onPressed: () => MarkdownEditorActions.insertLink(controller),
+          ),
+          button(
+            tooltip: l10n.d('Kop'),
+            icon: Icons.title,
+            onPressed: () => MarkdownEditorActions.toggleHeading(controller, 2),
+          ),
+          button(
+            tooltip: l10n.d('Opsomming'),
+            icon: Icons.format_list_bulleted,
+            onPressed: () => MarkdownEditorActions.toggleBullet(controller),
+          ),
+          button(
+            tooltip: l10n.d('Nummering'),
+            icon: Icons.format_list_numbered,
+            onPressed: () => MarkdownEditorActions.toggleNumbered(controller),
+          ),
+          if (!compact) ...[
+            button(
+              tooltip: l10n.d('Citaat'),
+              icon: Icons.format_quote,
+              onPressed: () => MarkdownEditorActions.toggleQuote(controller),
+            ),
+            button(
+              tooltip: l10n.d('Code'),
+              icon: Icons.data_object,
+              onPressed: () =>
+                  MarkdownEditorActions.insertCodeBlock(controller),
+            ),
+            button(
+              tooltip: l10n.d('Taak'),
+              icon: Icons.check_box_outlined,
+              onPressed: () => MarkdownEditorActions.insertTask(controller),
+            ),
+            button(
+              tooltip: l10n.d('Afbeelding'),
+              icon: Icons.image_outlined,
+              onPressed: () => MarkdownEditorActions.insertImage(controller),
+            ),
+            button(
+              tooltip: l10n.d('Tabel'),
+              icon: Icons.table_chart_outlined,
+              onPressed: () => MarkdownEditorActions.insertTable(controller),
+            ),
+          ],
+        ],
+      ),
+    );
+
+    if (!bordered) return buttons;
     return DecoratedBox(
       decoration: BoxDecoration(
         color: theme.surface,
         borderRadius: BorderRadius.circular(6),
         border: Border.all(color: theme.border),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-        child: Wrap(
-          spacing: 2,
-          runSpacing: 2,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            button(
-              tooltip: l10n.d('Vet'),
-              icon: Icons.format_bold,
-              onPressed: () => MarkdownEditorActions.wrapSelection(
-                controller,
-                before: '**',
-                after: '**',
-                placeholder: 'tekst',
-              ),
-            ),
-            button(
-              tooltip: l10n.d('Cursief'),
-              icon: Icons.format_italic,
-              onPressed: () => MarkdownEditorActions.wrapSelection(
-                controller,
-                before: '*',
-                after: '*',
-                placeholder: 'tekst',
-              ),
-            ),
-            button(
-              tooltip: l10n.d('Doorhalen'),
-              icon: Icons.format_strikethrough,
-              onPressed: () => MarkdownEditorActions.wrapSelection(
-                controller,
-                before: '~~',
-                after: '~~',
-                placeholder: 'tekst',
-              ),
-            ),
-            button(
-              tooltip: l10n.d('Code'),
-              icon: Icons.code,
-              onPressed: () => MarkdownEditorActions.wrapSelection(
-                controller,
-                before: '`',
-                after: '`',
-                placeholder: 'code',
-              ),
-            ),
-            button(
-              tooltip: l10n.d('Link'),
-              icon: Icons.link,
-              onPressed: () => MarkdownEditorActions.insertLink(controller),
-            ),
-            button(
-              tooltip: l10n.d('Kop'),
-              icon: Icons.title,
-              onPressed: () =>
-                  MarkdownEditorActions.toggleHeading(controller, 2),
-            ),
-            button(
-              tooltip: l10n.d('Opsomming'),
-              icon: Icons.format_list_bulleted,
-              onPressed: () => MarkdownEditorActions.toggleBullet(controller),
-            ),
-            button(
-              tooltip: l10n.d('Nummering'),
-              icon: Icons.format_list_numbered,
-              onPressed: () => MarkdownEditorActions.toggleNumbered(controller),
-            ),
-            if (!compact) ...[
-              button(
-                tooltip: l10n.d('Citaat'),
-                icon: Icons.format_quote,
-                onPressed: () => MarkdownEditorActions.toggleQuote(controller),
-              ),
-              button(
-                tooltip: l10n.d('Code'),
-                icon: Icons.data_object,
-                onPressed: () =>
-                    MarkdownEditorActions.insertCodeBlock(controller),
-              ),
-              button(
-                tooltip: l10n.d('Taak'),
-                icon: Icons.check_box_outlined,
-                onPressed: () => MarkdownEditorActions.insertTask(controller),
-              ),
-              button(
-                tooltip: l10n.d('Afbeelding'),
-                icon: Icons.image_outlined,
-                onPressed: () => MarkdownEditorActions.insertImage(controller),
-              ),
-              button(
-                tooltip: l10n.d('Tabel'),
-                icon: Icons.table_chart_outlined,
-                onPressed: () => MarkdownEditorActions.insertTable(controller),
-              ),
-            ],
-          ],
-        ),
-      ),
+      child: buttons,
     );
   }
 }
