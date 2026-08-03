@@ -25,6 +25,21 @@ in Dutch, and it keeps growing on `main` between releases.
   omlaag — wat haar ook smaller maakt. Ze tonen nu, net als het presenteren en
   exporteren, de eerste pagina op volle breedte. De tekst wordt niet groter; er
   wordt alleen de juiste pagina getoond. (#1147)
+- **Het uitklap-tekstvak voor Markdown-velden is weer een tekstverwerker.** Het
+  detailscherm dat je met **Bewerken** opent (bij een bevinding, sectie, citaat,
+  tijdlijn, vraag of verbeterblok) opende zichzelf sinds kort in de ruwe
+  Markdown-broncode, met rechts een apart voorbeeldpaneel — kaler en technischer
+  dan bedoeld. Het opent nu standaard in de **visuele stand**: een rustig,
+  paginabreed schrijfvlak met één schone opmaakbalk, zoals een tekstverwerker.
+  Wie liever de broncode ziet, schakelt met de knop rechtsboven naar
+  **Markdown modus** (die keuze wordt onthouden); tekst met een tabel, voetnoten
+  of front-matter opent nog steeds meteen in de bronstand, met een zachte uitleg.
+  Het schrijfvlak en de tekst volgen nu het actieve thema (afgeleid van het
+  `ColorScheme`), zodat de tekst leesbaar blijft in licht, donker én een
+  aangepast weergaveprofiel — eerder kon de tekst wegvallen tegen een wit vlak.
+  Het losse voorbeeldpaneel is vervallen — de visuele stand ís de weergave. Ook
+  de dunne opmaakbalk die in het kleine invulveld verscheen zodra je begon te
+  typen, is weg; het veld blijft rustig en de opmaak zit in de tekstverwerker.
 - Vraagslides met een grotere antwoordbank werkten sinds #1077 niet meer. De
   veiligheidsgrens van acht zichtbare opties was daar ook als grens voor de hele
   antwoordbank gebruikt; een bestaand deck met twintig kandidaten en vier

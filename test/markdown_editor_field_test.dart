@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,7 +16,6 @@ void main() {
 
   Widget host(
     TextEditingController controller, {
-    Widget Function(BuildContext, String)? previewBuilder,
     ThemeData? theme,
     double textScale = 1,
   }) => MaterialApp(
@@ -40,18 +38,22 @@ void main() {
         child: MarkdownEditorField(
           label: 'Beschrijving',
           controller: controller,
-          previewBuilder: previewBuilder,
         ),
       ),
     ),
   );
+
+  Future<void> openDialog(WidgetTester tester) async {
+    await tester.tap(find.text('Bewerken'));
+    await tester.pumpAndSettle();
+  }
 
   test('complex Markdown is kept in source mode', () {
     expect(markdownNeedsSourceMode('| A | B |\n|---|---|'), isTrue);
     expect(markdownNeedsSourceMode('Gewone **tekst**'), isFalse);
   });
 
-  testWidgets('compact toolbar appears on focus and edits Markdown', (
+  testWidgets('the inline field stays quiet — no floating toolbar on focus', (
     tester,
   ) async {
     final controller = TextEditingController(text: 'tekst');
@@ -61,163 +63,148 @@ void main() {
     expect(find.byTooltip('Vet'), findsNothing);
     await tester.tap(find.byType(TextField));
     await tester.pumpAndSettle();
-    expect(find.byTooltip('Vet'), findsOneWidget);
-
-    controller.selection = const TextSelection(baseOffset: 0, extentOffset: 5);
-    await tester.tap(find.byTooltip('Vet'));
-    await tester.pumpAndSettle();
-    expect(controller.text, '**tekst**');
+    // Formatting lives in the expand editor now, not in a strip over the field.
+    expect(find.byTooltip('Vet'), findsNothing);
   });
 
-  testWidgets('expanded editor writes through to the field controller', (
-    tester,
-  ) async {
-    final controller = TextEditingController(text: 'begin');
-    addTearDown(controller.dispose);
-    await tester.pumpWidget(host(controller));
-
-    await tester.tap(find.text('Bewerken'));
-    await tester.pumpAndSettle();
-    expect(find.byType(MarkdownNotesEditor), findsOneWidget);
-
-    final expandedField = find.descendant(
-      of: find.byType(Dialog),
-      matching: find.byType(TextField),
-    );
-    await tester.enterText(expandedField, '## Uitgebreid');
-    await tester.pump(const Duration(milliseconds: 130));
-    expect(controller.text, '## Uitgebreid');
-
-    await tester.tap(find.text('Klaar'));
-    await tester.pumpAndSettle();
-    expect(find.byType(Dialog), findsNothing);
-  });
-
-  testWidgets('expanded editor debounces updates and flushes when closed', (
-    tester,
-  ) async {
-    final controller = TextEditingController(text: 'begin');
-    addTearDown(controller.dispose);
-    var updates = 0;
-    controller.addListener(() => updates++);
-    await tester.pumpWidget(host(controller));
-
-    await tester.tap(find.text('Bewerken'));
-    await tester.pumpAndSettle();
-    final expandedField = find.descendant(
-      of: find.byType(Dialog),
-      matching: find.byType(TextField),
-    );
-    final draft = tester.widget<TextField>(expandedField).controller!;
-    draft.text = 'een';
-    await tester.pump(const Duration(milliseconds: 40));
-    draft.text = 'twee';
-    await tester.pump(const Duration(milliseconds: 40));
-    draft.text = 'drie';
-    await tester.pump(const Duration(milliseconds: 40));
-
-    expect(controller.text, 'begin');
-    expect(updates, 0);
-    await tester.tap(find.text('Klaar'));
-    await tester.pumpAndSettle();
-    expect(controller.text, 'drie');
-    expect(updates, 1);
-  });
-
-  testWidgets('shortcut opens expanded editor with a live preview', (
+  testWidgets('expand opens a WYSIWYG word-processor, no preview pane', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(1200, 800));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     final controller = TextEditingController(text: 'begin');
     addTearDown(controller.dispose);
-    await tester.pumpWidget(
-      host(
-        controller,
-        previewBuilder: (_, markdown) => Text('PREVIEW:$markdown'),
-      ),
-    );
+    await tester.pumpWidget(host(controller));
 
-    await tester.tap(find.byType(TextField));
-    await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
-    await tester.sendKeyDownEvent(LogicalKeyboardKey.shiftLeft);
-    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
-    await tester.sendKeyUpEvent(LogicalKeyboardKey.shiftLeft);
-    await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+    await openDialog(tester);
+
+    expect(find.byType(MarkdownNotesEditor), findsOneWidget);
+    // Default is the friendly visual editor.
+    expect(find.byType(QuillEditor), findsOneWidget);
+    // The mode switch is visible for those who prefer raw Markdown.
+    expect(find.text('Visuele modus'), findsOneWidget);
+    expect(find.text('Markdown modus'), findsOneWidget);
+    // No separate preview surface remains.
+    expect(find.text('Preview'), findsNothing);
+  });
+
+  testWidgets('switching to Markdown mode writes through, flushes on close', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final controller = TextEditingController(text: 'begin');
+    addTearDown(controller.dispose);
+    var updates = 0;
+    controller.addListener(() => updates++);
+    await tester.pumpWidget(host(controller));
+
+    await openDialog(tester);
+    await tester.tap(find.text('Markdown modus'));
     await tester.pumpAndSettle();
 
-    expect(find.byType(Dialog), findsOneWidget);
-    expect(find.text('Preview'), findsOneWidget);
-    expect(find.text('PREVIEW:begin'), findsOneWidget);
-
-    final expandedField = find.descendant(
+    final field = find.descendant(
       of: find.byType(Dialog),
       matching: find.byType(TextField),
     );
-    await tester.enterText(expandedField, '**nieuw**');
-    await tester.pump(const Duration(milliseconds: 130));
-    expect(find.text('PREVIEW:**nieuw**'), findsOneWidget);
+    expect(field, findsOneWidget);
+
+    await tester.enterText(field, '## Uitgebreid');
+    // Below the debounce the source is untouched.
+    await tester.pump(const Duration(milliseconds: 40));
+    expect(controller.text, 'begin');
+    // After the debounce it commits.
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(controller.text, '## Uitgebreid');
+
+    await tester.tap(find.text('Klaar'));
+    await tester.pumpAndSettle();
+    expect(find.byType(Dialog), findsNothing);
+    expect(updates, greaterThan(0));
   });
 
-  testWidgets('small layouts expose writing and preview as tabs', (
+  testWidgets('closing flushes a pending debounce without losing input', (
     tester,
   ) async {
-    await tester.binding.setSurfaceSize(const Size(700, 700));
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    final controller = TextEditingController(text: 'smal');
+    final controller = TextEditingController(text: 'begin');
     addTearDown(controller.dispose);
-    await tester.pumpWidget(
-      host(
-        controller,
-        previewBuilder: (_, markdown) => Text('PREVIEW:$markdown'),
-      ),
+    await tester.pumpWidget(host(controller));
+
+    await openDialog(tester);
+    await tester.tap(find.text('Markdown modus'));
+    await tester.pumpAndSettle();
+
+    final field = find.descendant(
+      of: find.byType(Dialog),
+      matching: find.byType(TextField),
     );
-    expect(tester.takeException(), isNull);
-
-    await tester.tap(find.text('Bewerken'));
+    await tester.enterText(field, 'drie');
+    // Close before the debounce fires; disposing must still flush.
+    await tester.pump(const Duration(milliseconds: 40));
+    await tester.tap(find.text('Klaar'));
     await tester.pumpAndSettle();
-    expect(find.text('Bewerken'), findsWidgets);
-    expect(find.text('Preview'), findsOneWidget);
-    expect(find.text('PREVIEW:smal'), findsNothing);
-
-    await tester.tap(find.text('Preview'));
-    await tester.pumpAndSettle();
-    expect(find.text('PREVIEW:smal'), findsOneWidget);
+    expect(controller.text, 'drie');
   });
 
-  testWidgets('dark theme and 200 percent text remain usable', (tester) async {
-    await tester.binding.setSurfaceSize(const Size(800, 900));
-    addTearDown(() => tester.binding.setSurfaceSize(null));
-    final controller = TextEditingController(text: 'toegankelijk');
-    addTearDown(controller.dispose);
-    await tester.pumpWidget(
-      host(
-        controller,
-        theme: ThemeData.dark(),
-        textScale: 2,
-        previewBuilder: (_, markdown) => Text(markdown),
-      ),
-    );
-    expect(tester.takeException(), isNull);
-
-    await tester.tap(find.text('Bewerken'));
-    await tester.pumpAndSettle();
-    expect(find.byType(MarkdownNotesEditor), findsOneWidget);
-    expect(tester.takeException(), isNull);
-  });
-
-  testWidgets('last visual mode is restored for compatible Markdown', (
+  testWidgets('table content opens in source mode with the protective hint', (
     tester,
   ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final controller = TextEditingController(text: '| A | B |\n|---|---|');
+    addTearDown(controller.dispose);
+    await tester.pumpWidget(host(controller));
+
+    await openDialog(tester);
+    // No lossy visual editor for a table; raw source instead.
+    expect(find.byType(QuillEditor), findsNothing);
+    expect(
+      find.descendant(
+        of: find.byType(Dialog),
+        matching: find.byType(TextField),
+      ),
+      findsOneWidget,
+    );
+    expect(find.byIcon(Icons.shield_outlined), findsOneWidget);
+  });
+
+  testWidgets('last chosen Markdown mode is restored for compatible text', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
     SharedPreferences.setMockInitialValues({
-      'markdownFieldEditorMode': NotesEditorMode.visual.name,
+      'markdownFieldEditorMode': NotesEditorMode.markdown.name,
     });
     final controller = TextEditingController(text: 'gewone tekst');
     addTearDown(controller.dispose);
     await tester.pumpWidget(host(controller));
 
-    await tester.tap(find.text('Bewerken'));
-    await tester.pumpAndSettle();
-    expect(find.byType(QuillEditor), findsOneWidget);
+    await openDialog(tester);
+    expect(find.byType(QuillEditor), findsNothing);
+    expect(
+      find.descendant(
+        of: find.byType(Dialog),
+        matching: find.byType(TextField),
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('dark theme and 200 percent text remain usable', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1000, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final controller = TextEditingController(text: 'toegankelijk');
+    addTearDown(controller.dispose);
+    await tester.pumpWidget(
+      host(controller, theme: ThemeData.dark(), textScale: 2),
+    );
+    expect(tester.takeException(), isNull);
+
+    await openDialog(tester);
+    expect(find.byType(MarkdownNotesEditor), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 }
