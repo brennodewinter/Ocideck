@@ -9,22 +9,17 @@ import '../../../state/settings_provider.dart';
 import '../../../theme/app_theme.dart';
 import '../../shell/openkat_import_action.dart';
 import '../../shell/openkat_import_summary.dart';
-import 'settings_section_title.dart';
 
-/// Het tabblad Integraties: koppelingen met andere systemen, per systeem een
-/// kop. OpenKAT staat voorop en is voorlopig de enige — de kop per systeem is
-/// meteen het zoekanker, zodat een tweede integratie erbij zetten geen
-/// herindeling vraagt.
-///
-/// Het tabblad hangt aan de OpenKAT-module (`navItems`): zolang OpenKAT de
-/// enige integratie is, is een leeg tabblad "Integraties" geen informatie maar
-/// ruis.
+/// De instellingen van de OpenKAT-koppeling: de map met rapportages en de knop
+/// om ze meteen te controleren. Dit is de *body* van de OpenKAT-sectie op het
+/// tabblad Integraties; de schakelaar en de kop eromheen komen van
+/// `IntegrationsPanel`, dat per integratie een schakelkaart tekent (#1158).
 ///
 /// Een losse widget en geen `part` van het instellingenvenster (#631): die
 /// klasse zit tegen haar plafond, en dit paneel heeft niets van haar nodig —
 /// het leest en schrijft alleen `openKatProvider`.
-class OpenKatIntegrationPanel extends ConsumerWidget {
-  const OpenKatIntegrationPanel({super.key});
+class OpenKatIntegrationBody extends ConsumerWidget {
+  const OpenKatIntegrationBody({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,36 +27,11 @@ class OpenKatIntegrationPanel extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SettingsSectionTitle(l10n.d('OpenKAT')),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Keiko, het logo van OpenKAT: in één oogopslag duidelijk over welk
-            // systeem deze sectie gaat. Bewust het logo en niet de mascottefoto
-            // van Over OciDeck — dáár staan de katten van Brenno, hier staat het
-            // merk waar we aan koppelen.
-            //
-            // `contain` en niet `cover`: dit is lijnwerk met witruimte eromheen,
-            // en bijsnijden zou er oren af halen.
-            Image.asset(
-              'assets/images/openkat-logo.png',
-              width: 56,
-              height: 56,
-              fit: BoxFit.contain,
-              // Decoratief naast een kop die het al zegt; een tweede keer
-              // "OpenKAT" voorlezen helpt niemand.
-              excludeFromSemantics: true,
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                l10n.d(
-                  'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.',
-                ),
-                style: TextStyle(fontSize: 12, color: AppTheme.slate600),
-              ),
-            ),
-          ],
+        Text(
+          l10n.d(
+            'Kies de map waarin OpenKAT de rapportages heeft geplaatst. OciDeck leest deze map alleen; er wordt niets gewijzigd of verstuurd.',
+          ),
+          style: TextStyle(fontSize: 12, color: AppTheme.slate600),
         ),
         const SizedBox(height: 16),
         _DirectoryField(),

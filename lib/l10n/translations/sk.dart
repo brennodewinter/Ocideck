@@ -1780,6 +1780,17 @@ const _dutchSourceSk = {
 const _dutchSourceAddSk = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Zoznam slabín (78): id, názov, kategória MASVS, platforma, prepojenie CWE a krátky opis. Navyše most od starého beta číslovania (až po 0119) ku kanonickým id, aby krížový odkaz MASTG naďalej sedel.',
+  'Alle integraties': 'Všetky integrácie',
+  'Alles inschakelen': 'Zapnúť všetko',
+  'Alles uitschakelen': 'Vypnúť všetko',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Priečinok s hláseniami je už nastavený, takže prepojenie zostáva dostupné a existujúcu prezentáciu OpenKAT možno naďalej aktualizovať.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Prepojenia s inými systémami. Každé prepojenie je predvolene vypnuté a zostáva neaktívne, kým ho nezapnete.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Načítajte priečinky s hláseniami OpenKAT ako jeden manažérsky prehľad.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Vtiahnutie prezentácií z PowerPoint (.pptx), Keynote (.key) a Impress (.odp) ako upraviteľný deck. Prepojenia s inými systémami, ako je OpenKAT, nájdete v Integráciách.',
   'Media (WebRTC)': 'Médiá (WebRTC)',
   'Media-stack testen': 'Otestovať mediálny zásobník',
   'De media-stack werkt op dit apparaat.':

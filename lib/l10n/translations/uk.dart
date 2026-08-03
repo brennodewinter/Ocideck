@@ -1790,6 +1790,17 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Перелік слабкостей (78): id, назва, категорія MASVS, платформа, зв\'язок із CWE та короткий опис. Плюс міст від старої бета-нумерації (до 0119) до канонічних id, щоб перехресне посилання MASTG залишалося правильним.',
+  'Alle integraties': 'Усі інтеграції',
+  'Alles inschakelen': 'Увімкнути все',
+  'Alles uitschakelen': 'Вимкнути все',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Теку зі звітами вже вказано, тож з\'єднання залишається доступним і наявну презентацію OpenKAT можна оновлювати далі.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'З\'єднання з іншими системами. Кожне з\'єднання типово вимкнене й лишається неактивним, доки ви його не ввімкнете.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Зчитайте теки зі звітами OpenKAT як єдиний управлінський огляд.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Втягування презентацій з PowerPoint (.pptx), Keynote (.key) та Impress (.odp) як редагована колода. З\'єднання з іншими системами, як-от OpenKAT, розміщені в Інтеграціях.',
   'Media (WebRTC)': 'Медіа (WebRTC)',
   'Media-stack testen': 'Перевірити медіастек',
   'De media-stack werkt op dit apparaat.':

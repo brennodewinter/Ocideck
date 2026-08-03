@@ -1780,6 +1780,17 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Silpnybių sąrašas (78): id, pavadinimas, MASVS kategorija, platforma, CWE nuoroda ir trumpas aprašymas. Be to, tiltas nuo senos beta numeracijos (iki 0119) iki kanoninių id, kad MASTG kryžminė nuoroda ir toliau atitiktų.',
+  'Alle integraties': 'Visos integracijos',
+  'Alles inschakelen': 'Įjungti viską',
+  'Alles uitschakelen': 'Išjungti viską',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Ataskaitų aplankas jau nustatytas, todėl ryšys lieka pasiekiamas ir esamą „OpenKAT“ pateiktį vis dar galima atnaujinti.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Ryšiai su kitomis sistemomis. Kiekvienas ryšys pagal numatytuosius nustatymus išjungtas ir lieka neaktyvus, kol jį įjungiate.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Nuskaitykite OpenKAT ataskaitų aplankus kaip vieną vadovybės apžvalgą.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Pristatymų įtraukimas iš PowerPoint (.pptx), Keynote (.key) ir Impress (.odp) kaip redaguojamas dekas. Ryšiai su kitomis sistemomis, pavyzdžiui, „OpenKAT“, yra skiltyje Integracijos.',
   'Media (WebRTC)': 'Medija (WebRTC)',
   'Media-stack testen': 'Išbandyti medijos steką',
   'De media-stack werkt op dit apparaat.':

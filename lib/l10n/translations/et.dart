@@ -1764,6 +1764,17 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Nõrkuste loend (78): id, pealkiri, MASVS-kategooria, platvorm, CWE-seos ja lühikirjeldus. Lisaks sild vanast beeta-numeratsioonist (kuni 0119) kanooniliste id-de juurde, et MASTG-ristviide jääks paika.',
+  'Alle integraties': 'Kõik integratsioonid',
+  'Alles inschakelen': 'Luba kõik',
+  'Alles uitschakelen': 'Keela kõik',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Aruannete kaust on juba määratud, seega jääb ühendus kättesaadavaks ja olemasolevat OpenKAT-esitlust saab endiselt uuendada.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Ühendused teiste süsteemidega. Iga ühendus on vaikimisi välja lülitatud ja jääb passiivseks, kuni te selle sisse lülitate.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Loe OpenKAT-i aruandekaustad sisse ühe juhtimisülevaatena.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Esitluste toomine programmidest PowerPoint (.pptx), Keynote (.key) ja Impress (.odp) muudetava deck\'ina. Ühendused teiste süsteemidega, näiteks OpenKAT, on jaotises Integratsioonid.',
   'Media (WebRTC)': 'Meedia (WebRTC)',
   'Media-stack testen': 'Testi meediapinu',
   'De media-stack werkt op dit apparaat.': 'Meediapinu töötab selles seadmes.',

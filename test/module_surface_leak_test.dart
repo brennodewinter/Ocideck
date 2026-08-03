@@ -25,15 +25,13 @@ void main() {
     required bool revealed,
     required bool hasChecklists,
     bool aiRevealed = false,
-    bool importRevealed = false,
-    bool openKatAvailable = true,
+    bool integrationsAvailable = true,
     bool collaborationRevealed = false,
   }) => SettingsSection.navItems(
     infoSafetyRevealed: revealed,
     hasChecklists: hasChecklists,
     aiRevealed: aiRevealed,
-    importRevealed: importRevealed,
-    openKatAvailable: openKatAvailable,
+    integrationsAvailable: integrationsAvailable,
     collaborationRevealed: collaborationRevealed,
   );
 

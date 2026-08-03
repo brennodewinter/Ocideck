@@ -79,20 +79,18 @@ enum SettingsSection {
   /// module geworden en woont onder Uitbreidingen. Wie hem uit laat, ziet er
   /// niets van — behalve wanneer er al een backend is ingevuld, want ook daar
   /// geldt "tonen zodra de inhoud er is".
-  /// [importRevealed] is de module Importeren (#772), maar het tabblad
-  /// Integraties is enger dan de module: het tabblad ís OpenKAT, en OpenKAT
-  /// bestaat alleen waar de mapkiezer en schijftoegang bestaan — de desktop
-  /// ([openKatAvailable]). De tweede bron van de module, de presentatie-import,
-  /// werkt óók op web maar heeft niets in te stellen; hij hoort dus geen
-  /// Integraties-tabblad te openen. Een leeg tabblad "Integraties" is geen
-  /// informatie maar ruis. Krijgt een importeur later wél instellingen op web,
-  /// dan is dít de plek die het eerst pijn doet.
+  /// [integrationsAvailable] is of dit platform überhaupt een integratie kan
+  /// gebruiken (`anyIntegrationAvailableProvider`). Sinds #1158 leeft de
+  /// schakelaar per integratie óp het tabblad Integraties zelf, dus het tabblad
+  /// hoort zichtbaar te zijn zodra een koppeling beschikbaar is — anders is er
+  /// geen plek om ze aan te zetten. Op web valt de enige integratie (OpenKAT)
+  /// weg omdat haar mapkiezer daar niet bestaat, en dan is een leeg tabblad
+  /// "Integraties" geen informatie maar ruis.
   static List<SettingsSection> navItems({
     required bool infoSafetyRevealed,
     required bool hasChecklists,
     required bool aiRevealed,
-    required bool importRevealed,
-    required bool openKatAvailable,
+    required bool integrationsAvailable,
     required bool collaborationRevealed,
   }) => values.where((s) {
     if (s == SettingsSection.about) return false;
@@ -101,9 +99,7 @@ enum SettingsSection {
     }
     if (s == SettingsSection.ai) return aiRevealed;
     if (s == SettingsSection.collaboration) return collaborationRevealed;
-    if (s == SettingsSection.integrations) {
-      return importRevealed && openKatAvailable;
-    }
+    if (s == SettingsSection.integrations) return integrationsAvailable;
     return true;
   }).toList();
 }

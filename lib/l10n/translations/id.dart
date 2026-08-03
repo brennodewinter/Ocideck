@@ -1773,6 +1773,17 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Daftar kelemahan (78): id, judul, kategori MASVS, platform, tautan CWE, dan deskripsi singkat. Ditambah jembatan dari penomoran beta lama (hingga 0119) ke id kanonik, sehingga referensi silang MASTG tetap sesuai.',
+  'Alle integraties': 'Semua integrasi',
+  'Alles inschakelen': 'Aktifkan semua',
+  'Alles uitschakelen': 'Nonaktifkan semua',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Folder laporan sudah ditetapkan, sehingga koneksi tetap tersedia dan dek OpenKAT yang ada masih dapat diperbarui.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Koneksi dengan sistem lain. Setiap koneksi mati secara bawaan dan tetap tidak aktif sampai Anda mengaktifkannya.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Baca folder laporan OpenKAT sebagai satu ikhtisar manajemen.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Membawa masuk presentasi dari PowerPoint (.pptx), Keynote (.key), dan Impress (.odp) sebagai deck yang dapat diedit. Koneksi dengan sistem lain, seperti OpenKAT, ada di Integrasi.',
   'Media (WebRTC)': 'Media (WebRTC)',
   'Media-stack testen': 'Uji stack media',
   'De media-stack werkt op dit apparaat.':

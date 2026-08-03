@@ -846,6 +846,22 @@ that before deciding whether this alpha fits what you are doing.
   van de MASTG-tests die ze noemen: `MASWE-0097` → `MASWE-0051` (root-/
   jailbreak-detectie) en `MASWE-0108` → `MASWE-0073`. De snapshotdatum gaat naar
   2026-08-03 en de standaard is niet langer als adviserend gemarkeerd.
+- **OpenKAT is een eigen integratie geworden, met een eigen aan/uit-schakelaar.**
+  Tot nu toe had OpenKAT geen eigen schakelaar: aan of uit zat in de module
+  *Importeren* (besluit B1 van #772), samen met de presentatie-import. Dat was
+  het verkeerde handvat zodra je koppelingen los wilt kunnen aan- en uitzetten —
+  "OpenKAT uit" doofde dan ook de presentatie-import. OpenKAT staat nu als eigen
+  koppeling op een nieuw tabblad **Integraties** in de instellingen, standaard
+  uit, met per integratie een schakelkaart en een bediening om ze allemaal
+  tegelijk aan of uit te zetten (*Alles inschakelen* / *Alles uitschakelen*). De
+  module *Importeren* gaat sindsdien alleen nog over presentatie-import
+  (.pptx/.key/.odp). De vaste projectregel blijft: uitzetten verbergt alleen; een
+  aangewezen rapportagemap blijft bewaard, zodat een bestaand OpenKAT-deck bij te
+  werken blijft. Het tabblad Integraties verschijnt zodra er op dit platform een
+  koppeling beschikbaar is (desktop); op het web valt OpenKAT weg omdat de
+  mapkiezer daar niet bestaat. Onder water zit een nieuw integratieregister
+  (`lib/state/integration_registry.dart`), een broertje van het moduleregister,
+  zodat een tweede integratie erbij zetten één regel is. (#1158)
 - **De Windows-leg van de spiegel staat met tussenpozen minuten stil, en dat is
   een aanvaarde afweging in plaats van een oplossing.** Na de vier reparaties
   hierónder was één draai volledig groen en strandde de volgende op precies één

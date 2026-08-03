@@ -1808,6 +1808,17 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Liosta na laigí (78): id, teideal, catagóir MASVS, ardán, an nasc CWE agus cur síos gairid. Chomh maith le sin, droichead ón sean-uimhriú béite (suas go 0119) go dtí na id canónacha, ionas go bhfanfaidh an chrostagairt MASTG ceart.',
+  'Alle integraties': 'Gach comhtháthú',
+  'Alles inschakelen': 'Cumasaigh gach ceann',
+  'Alles uitschakelen': 'Díchumasaigh gach ceann',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Tá fillteán tuairiscí socraithe cheana, mar sin fanann an nasc inrochtana agus is féidir taispeántas OpenKAT atá ann a nuashonrú fós.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Naisc le córais eile. Tá gach nasc múchta de réir réamhshocraithe agus fanann sé neamhghníomhach go dtí go gcumasaíonn tú é.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Léigh fillteáin tuairiscí OpenKAT isteach mar fhorbhreathnú bainistíochta amháin.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Láithreoireachtaí a thabhairt isteach ó PowerPoint (.pptx), Keynote (.key) agus Impress (.odp) mar deck ineagarthóireachta. Tá naisc le córais eile, ar nós OpenKAT, faoi Chomhtháthuithe.',
   'Media (WebRTC)': 'Meáin (WebRTC)',
   'Media-stack testen': 'Tástáil an chruach meán',
   'De media-stack werkt op dit apparaat.':

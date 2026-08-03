@@ -480,13 +480,15 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
 
   // ── Integraties ───────────────────────────────────────────────────────────
-  // `integrationsOnly`: het tabblad Integraties is OpenKAT (desktop, module
-  // onthuld). Zonder deze vlag zou "openkat" op web — of met de module uit —
-  // naar een tabblad springen dat er niet is.
+  // `integrationsOnly`: het tabblad Integraties bestaat alleen waar een
+  // koppeling beschikbaar is (OpenKAT op desktop; zie #1158). Zonder deze vlag
+  // zou "openkat" op web naar een tabblad springen dat er niet is.
   SettingsSearchEntry(
     tab: SettingsSection.integrations,
     label: 'OpenKAT',
-    section: 'OpenKAT',
+    // Anker naar de sectiekop van het tabblad: OpenKAT is sinds #1158 een
+    // integratiekaart ónder de kop 'Integraties', geen eigen sectietitel meer.
+    section: 'Integraties',
     integrationsOnly: true,
     keywords: [
       'openkat',

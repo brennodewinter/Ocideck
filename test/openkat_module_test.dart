@@ -9,10 +9,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
-import 'package:ocideck/state/import_module_provider.dart';
 import 'package:ocideck/state/openkat_provider.dart';
 import 'package:ocideck/state/settings_provider.dart';
-import 'package:ocideck/widgets/dialogs/settings/import_module_card.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/shell/openkat_import_action.dart';
 import 'package:path/path.dart' as p;
@@ -21,19 +19,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'support/pump_until.dart';
 import 'support/temp_dir.dart';
 
-/// De module Importeren (#772, besluit B1): materiaal uit andere systemen
-/// binnenhalen als uitbreiding, standaard uit. OpenKAT is de eerste importeur;
-/// zijn rapportagemap staat onder Integraties.
+/// De integratie OpenKAT (#767, #772, #1158): een koppeling naar buiten met een
+/// eigen schakelaar op het tabblad Integraties. Tot #1158 hing OpenKAT aan de
+/// module Importeren (#772, B1); sinds #1158 is de koppeling losgemaakt zodat ze
+/// los in en uit te schakelen is, en gaat de module Importeren alleen nog over
+/// presentatie-import.
 ///
-/// De drie regels die deze module met de andere deelt, en waar ze hier
+/// De drie regels die deze koppeling deelt met de modules, en waar ze hier
 /// bewaakt worden:
 ///
 ///  1. **Standaard uit** — een nieuwe installatie ziet er niets van.
-///  2. **Weglaten, niet grijs maken** — met de module uit bestaat het tabblad
-///     Integraties niet; er staat geen leeg tabblad te wachten.
-///  3. **Tonen zodra de inhoud er is** — wie een rapportagemap heeft
+///  2. **Tonen zodra de inhoud er is** — wie een rapportagemap heeft
 ///     aangewezen houdt het invoerpunt, ook met de schakelaar uit, zodat een
 ///     bestaand OpenKAT-deck bij te werken blijft.
+///  3. **Het tabblad zelf is er zodra de koppeling beschikbaar is** — anders is
+///     er geen plek om de schakelaar aan te zetten; op web valt OpenKAT weg
+///     omdat de mapkiezer daar niet bestaat.
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
@@ -42,7 +43,6 @@ void main() {
     final c = ProviderContainer();
     addTearDown(c.dispose);
     c.read(openKatProvider);
-    c.read(importModuleProvider);
     // De voorkeuren laden asynchroon; één beurt is genoeg.
     await Future<void>.delayed(Duration.zero);
     return c;
@@ -51,17 +51,17 @@ void main() {
   group('de stand en de poort', () {
     test('een nieuwe installatie start uit', () async {
       final c = await vers();
-      expect(c.read(importModuleEnabledProvider), isFalse);
-      expect(c.read(importModuleRevealProvider), isFalse);
+      expect(c.read(openKatIntegrationEnabledProvider), isFalse);
+      expect(c.read(openKatIntegrationRevealProvider), isFalse);
       expect(c.read(openKatDirectoryProvider), isNull);
     });
 
     test('de keuze van de gebruiker wordt bewaard', () async {
       final c = await vers();
-      await c.read(importModuleProvider.notifier).setEnabled(true);
+      await c.read(openKatProvider.notifier).setEnabled(true);
       final prefs = await SharedPreferences.getInstance();
-      expect(prefs.getBool('importModuleEnabled'), isTrue);
-      expect(c.read(importModuleRevealProvider), isTrue);
+      expect(prefs.getBool('openkatIntegrationEnabled'), isTrue);
+      expect(c.read(openKatIntegrationRevealProvider), isTrue);
     });
 
     test('de rapportagemap wordt bewaard en is te wissen', () async {
@@ -83,58 +83,53 @@ void main() {
       );
     });
 
-    test('een map houdt het invoerpunt bereikbaar met de module uit', () async {
-      // De vaste regel van dit project. Zonder deze poort zou uitzetten een
-      // bestaand OpenKAT-deck onbijwerkbaar maken.
-      final c = await vers(
-        prefs: {
-          'importModuleEnabled': false,
-          'openkatReportDirectory': '/pad/naar/kat',
-        },
-      );
-      expect(c.read(importModuleEnabledProvider), isFalse);
-      expect(c.read(importModuleRevealProvider), isTrue);
-    });
+    test(
+      'een map houdt de koppeling bereikbaar met de schakelaar uit',
+      () async {
+        // De vaste regel van dit project. Zonder deze poort zou uitzetten een
+        // bestaand OpenKAT-deck onbijwerkbaar maken.
+        final c = await vers(
+          prefs: {
+            'openkatIntegrationEnabled': false,
+            'openkatReportDirectory': '/pad/naar/kat',
+          },
+        );
+        expect(c.read(openKatIntegrationEnabledProvider), isFalse);
+        expect(c.read(openKatIntegrationRevealProvider), isTrue);
+      },
+    );
 
     test('een lege map telt als geen map', () async {
       final c = await vers(prefs: {'openkatReportDirectory': ''});
       expect(c.read(openKatDirectoryProvider), isNull);
-      expect(c.read(importModuleRevealProvider), isFalse);
+      expect(c.read(openKatIntegrationRevealProvider), isFalse);
     });
   });
 
   group('het tabblad Integraties', () {
-    List<SettingsSection> nav({
-      required bool importRevealed,
-      bool openKatAvailable = true,
-    }) => SettingsSection.navItems(
-      infoSafetyRevealed: false,
-      hasChecklists: false,
-      aiRevealed: false,
-      importRevealed: importRevealed,
-      openKatAvailable: openKatAvailable,
-      collaborationRevealed: false,
-    );
+    List<SettingsSection> nav({required bool integrationsAvailable}) =>
+        SettingsSection.navItems(
+          infoSafetyRevealed: false,
+          hasChecklists: false,
+          aiRevealed: false,
+          integrationsAvailable: integrationsAvailable,
+          collaborationRevealed: false,
+        );
 
-    test('met de module uit staat het tabblad er niet', () {
-      // Zolang OpenKAT de enige integratie is, is een leeg tabblad
-      // "Integraties" geen informatie maar ruis.
+    test('op desktop staat het tabblad er, ook met de koppeling uit', () {
+      // De schakelaar per integratie leeft óp dit tabblad; het moet er dus zijn
+      // zodra er iets aan te zetten valt, niet pas nadat het aan staat.
       expect(
-        nav(importRevealed: false),
-        isNot(contains(SettingsSection.integrations)),
+        nav(integrationsAvailable: true),
+        contains(SettingsSection.integrations),
       );
     });
 
-    test('met de module aan staat het er wel', () {
-      expect(nav(importRevealed: true), contains(SettingsSection.integrations));
-    });
-
-    test('op web valt het weg, ook met de module aan', () {
-      // Het tabblad ís OpenKAT, en dat leest een map van schijf — op web
-      // bestaat die bron niet. De module kan daar wél aan staan (voor de
-      // presentatie-import, die op bytes werkt), maar dan zonder Integraties.
+    test('zonder beschikbare integratie valt het tabblad weg', () {
+      // Op web bestaat de mapkiezer van OpenKAT niet; een leeg tabblad
+      // "Integraties" is dan geen informatie maar ruis.
       expect(
-        nav(importRevealed: true, openKatAvailable: false),
+        nav(integrationsAvailable: false),
         isNot(contains(SettingsSection.integrations)),
       );
     });
@@ -144,7 +139,7 @@ void main() {
     Future<void> open(
       WidgetTester tester, {
       Map<String, Object> prefs = const {},
-      SettingsSection section = SettingsSection.modules,
+      SettingsSection section = SettingsSection.integrations,
     }) async {
       SharedPreferences.setMockInitialValues({...prefs});
       await tester.binding.setSurfaceSize(const Size(1500, 1100));
@@ -157,7 +152,6 @@ void main() {
                 builder: (context, ref, _) {
                   ref.watch(settingsProvider);
                   ref.watch(openKatProvider);
-                  ref.watch(importModuleProvider);
                   return ElevatedButton(
                     onPressed: () =>
                         SettingsDialog.show(context, initialSection: section),
@@ -174,34 +168,33 @@ void main() {
       await tester.pumpAndSettle();
     }
 
-    testWidgets('de kaart staat op Uitbreidingen en schakelt de tab bij', (
+    testWidgets('Integraties staat op desktop in de zijbalk', (tester) async {
+      await open(tester, section: SettingsSection.modules);
+      expect(find.text('Integraties'), findsWidgets);
+    });
+
+    testWidgets('de OpenKAT-schakelaar onthult de map-instellingen', (
       tester,
     ) async {
+      // Uit: alleen de schakelkaart, geen mapkiezer.
       await open(tester);
-      expect(find.byType(ImportModuleCard), findsOneWidget);
-      // Uit: geen Integraties in de zijbalk.
-      expect(find.text('Integraties'), findsNothing);
+      expect(find.text('Map kiezen…'), findsNothing);
 
-      // Vierde kaart op het tabblad: die staat onder de vouw.
-      final schakelaar = find.descendant(
-        of: find.byType(ImportModuleCard),
-        matching: find.byType(SwitchListTile),
-      );
+      final schakelaar = find.byType(SwitchListTile).first;
       await tester.ensureVisible(schakelaar);
       await tester.pumpAndSettle();
       await tester.tap(schakelaar);
       await tester.pumpAndSettle();
-      expect(find.text('Integraties'), findsOneWidget);
+      expect(find.text('Map kiezen…'), findsOneWidget);
     });
 
     testWidgets('Integraties toont de rapportagemap', (tester) async {
       await open(
         tester,
         prefs: {
-          'importModuleEnabled': true,
+          'openkatIntegrationEnabled': true,
           'openkatReportDirectory': '/pad/naar/kat',
         },
-        section: SettingsSection.integrations,
       );
       expect(find.text('/pad/naar/kat'), findsOneWidget);
       expect(find.text('Map kiezen…'), findsOneWidget);
@@ -211,11 +204,7 @@ void main() {
       // Een verkeerd assetpad rendert stil een foutvak in plaats van te falen,
       // en op een instellingentabblad valt dat niemand op. Vandaar dat het pad
       // zelf de bewering is, en niet alleen "er staat een plaatje".
-      await open(
-        tester,
-        prefs: {'importModuleEnabled': true},
-        section: SettingsSection.integrations,
-      );
+      await open(tester);
       final logo = tester.widgetList<Image>(find.byType(Image)).where((i) {
         final provider = i.image;
         return provider is AssetImage &&
@@ -227,11 +216,7 @@ void main() {
     testWidgets('zonder map zegt Integraties dat er niets gekozen is', (
       tester,
     ) async {
-      await open(
-        tester,
-        prefs: {'importModuleEnabled': true},
-        section: SettingsSection.integrations,
-      );
+      await open(tester, prefs: {'openkatIntegrationEnabled': true});
       expect(find.text('Geen map gekozen'), findsOneWidget);
     });
 
@@ -240,15 +225,29 @@ void main() {
     ) async {
       // Een knop die zichtbaar níets kan doen is beter dan een knop die stil
       // een tweede mapkiezer opent naast de knop ernaast.
-      await open(
-        tester,
-        prefs: {'importModuleEnabled': true},
-        section: SettingsSection.integrations,
-      );
+      await open(tester, prefs: {'openkatIntegrationEnabled': true});
       final knop = tester.widget<FilledButton>(
         find.widgetWithText(FilledButton, 'Rapportages controleren…'),
       );
       expect(knop.onPressed, isNull);
+    });
+
+    testWidgets('"Alles inschakelen" zet de koppeling aan', (tester) async {
+      // De bulkbediening (#1158): met alles uit is "Alles inschakelen" de weg om
+      // in één handeling elke integratie aan te zetten.
+      await open(tester);
+      expect(find.text('Map kiezen…'), findsNothing);
+      await tester.tap(find.widgetWithText(TextButton, 'Alles inschakelen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Map kiezen…'), findsOneWidget);
+    });
+
+    testWidgets('"Alles uitschakelen" zet de koppeling uit', (tester) async {
+      await open(tester, prefs: {'openkatIntegrationEnabled': true});
+      expect(find.text('Map kiezen…'), findsOneWidget);
+      await tester.tap(find.widgetWithText(TextButton, 'Alles uitschakelen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Map kiezen…'), findsNothing);
     });
 
     testWidgets('met een map opent de knop dezelfde rapportwizard', (
@@ -266,14 +265,19 @@ void main() {
       await open(
         tester,
         prefs: {
-          'importModuleEnabled': true,
+          'openkatIntegrationEnabled': true,
           'openkatReportDirectory': tmp.path,
         },
-        section: SettingsSection.integrations,
       );
-      await tester.tap(
-        find.widgetWithText(FilledButton, 'Rapportages controleren…'),
+      // De knop zit onder de schakelkaart en de bulkbediening, dus verder naar
+      // beneden dan vroeger; scroll hem in beeld voordat de tik hem kan raken.
+      final knop = find.widgetWithText(
+        FilledButton,
+        'Rapportages controleren…',
       );
+      await tester.ensureVisible(knop);
+      await tester.pumpAndSettle();
+      await tester.tap(knop);
 
       // De scan doet echte bestands-I/O: die futures komen onder de
       // testbinding alleen aan in een runAsync-beurt, en één pomp is te vroeg.
@@ -311,21 +315,21 @@ void main() {
       await tester.pumpAndSettle();
     }
 
-    testWidgets('met de module uit staat OpenKAT er niet', (tester) async {
+    testWidgets('met de koppeling uit staat OpenKAT er niet', (tester) async {
       await openscherm(tester);
       expect(find.text('OpenKAT-rapport maken…'), findsNothing);
     });
 
-    testWidgets('met de module aan begin je hier met een OpenKAT-uitdraai', (
+    testWidgets('met de koppeling aan begin je hier met een OpenKAT-uitdraai', (
       tester,
     ) async {
       // Wie met OpenKAT werkt komt juist op dit scherm terug om het overzicht
       // te verversen; dan is drie stappen door een menu er één te veel.
-      await openscherm(tester, prefs: {'importModuleEnabled': true});
+      await openscherm(tester, prefs: {'openkatIntegrationEnabled': true});
       expect(find.text('OpenKAT-rapport maken…'), findsOneWidget);
     });
 
-    testWidgets('een ingestelde map houdt de ingang met de module uit', (
+    testWidgets('een ingestelde map houdt de ingang met de koppeling uit', (
       tester,
     ) async {
       await openscherm(tester, prefs: {'openkatReportDirectory': '/pad/kat'});
@@ -336,9 +340,10 @@ void main() {
   testWidgets('de rapportwizard gebruikt de ingestelde map zonder mapkiezer', (
     tester,
   ) async {
-    // Dit is het verschil dat de module bruikbaar maakt bij dagelijks gebruik.
-    // De mapkiezer laat zich onder `flutter test` niet aansturen en zou null
-    // teruggeven; verschijnen de scenario's, dan kwam de map uit de instelling.
+    // Dit is het verschil dat de koppeling bruikbaar maakt bij dagelijks
+    // gebruik. De mapkiezer laat zich onder `flutter test` niet aansturen en zou
+    // null teruggeven; verschijnen de scenario's, dan kwam de map uit de
+    // instelling.
     final tmp = Directory.systemTemp.createTempSync('ocikat-vaste-map-');
     addTearDown(() => deleteTempDir(tmp));
     Directory(p.join(tmp.path, 'raw-data')).createSync();
@@ -348,7 +353,7 @@ void main() {
 
     SharedPreferences.setMockInitialValues({
       'app_consent_accepted': true,
-      'importModuleEnabled': true,
+      'openkatIntegrationEnabled': true,
       'openkatReportDirectory': tmp.path,
     });
 
@@ -368,7 +373,6 @@ void main() {
               body: Consumer(
                 builder: (context, ref, _) {
                   ref.watch(openKatProvider);
-                  ref.watch(importModuleProvider);
                   ctx = context;
                   reff = ref;
                   return const SizedBox();

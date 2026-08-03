@@ -83,6 +83,7 @@ import '../state/provider_warmup.dart';
 import '../state/save_progress_provider.dart';
 import '../state/info_safety_provider.dart';
 import '../state/import_module_provider.dart';
+import '../state/openkat_provider.dart';
 import '../state/asset_rights_module_provider.dart';
 import '../state/procesverbetering_provider.dart';
 import '../state/editor_provider.dart';
@@ -151,8 +152,7 @@ part 'app_shell_menu.dart';
 
 // ── Shared helpers ──────────────────────────────────────────────────────────
 
-// Shell sub-widgets and helpers, split into part files for navigability.
-// These parts share this library's imports and private scope.
+// Shell sub-widgets and helpers, split into part files for navigability; the parts share this library's imports and private scope.
 part 'shell/provenance_actions.dart';
 part 'shell/shell_actions.dart';
 part 'shell/shell_actions_present.dart';

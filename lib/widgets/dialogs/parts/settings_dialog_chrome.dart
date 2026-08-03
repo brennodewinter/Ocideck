@@ -328,23 +328,21 @@ const double _minContentWidth = 320;
 /// Top-level en geen methode op de staat: puur presentatiebedrading die de
 /// klasse-plafond-ratchet niet hoort te belasten. Het gedrag is ongewijzigd —
 /// de staat komt binnen als parameter.
-List<SettingsSection> _visibleNavSections(_SettingsDialogState state) =>
-    SettingsSection.navItems(
-      infoSafetyRevealed: state.ref.watch(infoSafetyRevealProvider),
-      hasChecklists: state.ref
-          .watch(settingsProvider)
-          .customChecklists
-          .isNotEmpty,
-      // Uit het formulier en niet uit de opgeslagen instelling: zet je de
-      // module op Uitbreidingen aan, dan hoort het tabblad meteen te
-      // verschijnen en niet pas na Opslaan.
-      aiRevealed: state._ai.revealsTab,
-      importRevealed: state.ref.watch(importModuleRevealProvider),
-      // Integraties is OpenKAT (desktop); op web reveal't de module wél, maar
-      // zonder OpenKAT-tabblad.
-      openKatAvailable: supportsLocalProjectFolders,
-      collaborationRevealed: state.ref.watch(collaborationRevealProvider),
-    );
+List<SettingsSection> _visibleNavSections(
+  _SettingsDialogState state,
+) => SettingsSection.navItems(
+  infoSafetyRevealed: state.ref.watch(infoSafetyRevealProvider),
+  hasChecklists: state.ref.watch(settingsProvider).customChecklists.isNotEmpty,
+  // Uit het formulier en niet uit de opgeslagen instelling: zet je de
+  // module op Uitbreidingen aan, dan hoort het tabblad meteen te
+  // verschijnen en niet pas na Opslaan.
+  aiRevealed: state._ai.revealsTab,
+  // Het tabblad Integraties hangt sinds #1158 aan de beschikbaarheid van een
+  // koppeling, niet aan de schakelaar: de schakelaar per integratie leeft
+  // óp dat tabblad, dus het moet er zijn zodra er iets aan te zetten valt.
+  integrationsAvailable: state.ref.watch(anyIntegrationAvailableProvider),
+  collaborationRevealed: state.ref.watch(collaborationRevealProvider),
+);
 
 /// Kiest tussen de brede layout (vaste zijbalk naast de inhoud) en de smalle
 /// (keuzebalk bovenaan, inhoud over de volle breedte). De inhoud zelf is in

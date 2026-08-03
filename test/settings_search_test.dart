@@ -128,7 +128,7 @@ void main() {
       'lib/widgets/dialogs/settings_dialog.dart',
     ).readAsStringSync();
     // Een body is een `_xxx()`-bouwer in de part-scope óf een losse widget
-    // (`const OpenKatIntegrationPanel()`). Dat tweede bestaat sinds #631 de
+    // (`const IntegrationsPanel()`). Dat tweede bestaat sinds #631 de
     // panelen uit de gedeelde part-scope trekt en de dialoogklasse tegen haar
     // plafond zit; alleen `_`-bouwers herkennen zou zo'n tabblad stil buiten
     // deze telling laten vallen.

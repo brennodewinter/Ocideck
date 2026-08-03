@@ -2,27 +2,26 @@
 // systemen binnenhalen als uitbreiding, standaard uit.
 //
 // Waarom één module en niet één per bron. Voor de gebruiker is "ik haal er iets
-// van buiten in" één gedachte, niet een lijst producten. OpenKAT is vandaag de
-// enige importeur; presentatie-import (.pptx/.odp/.key) komt erbij. Elk daarvan
-// een eigen schakelaar geven zou het Uitbreidingen-tabblad laten groeien met
-// keuzes die niemand los wil maken.
+// van buiten in" één gedachte, niet een lijst producten. Presentatie-import
+// (.pptx/.odp/.key) is vandaag wat hieronder valt.
 //
-// **Het uitbreidpunt is [importerContentProviders].** Een nieuwe importeur
-// voegt daar zijn eigen "heb ik al inhoud"-provider toe en erft daarmee de
-// vaste regel van dit project: tonen zodra de inhoud er is, en uitzetten mag
-// bestaand werk nooit onbereikbaar maken. Dat is bewust een lijst en geen
-// steeds langere `||`-expressie — zo staat op één plek wát er als inhoud telt,
-// en kan een importeur er niet stil buiten vallen.
+// **OpenKAT viel hier tot #1158 ook onder** — besluit B1 van #772 bundelde alle
+// importeurs onder één schakelaar. #1158 heeft OpenKAT losgemaakt tot een eigen
+// integratie met eigen schakelaar (`openkat_provider.dart`,
+// `integration_registry.dart`), omdat een koppeling naar buiten los in en uit te
+// schakelen hoort te zijn. Sindsdien gaat deze module alleen nog over de
+// presentatie-import.
 //
-// De schakelaar woont hier; de instellingen van een importeur wonen bij die
-// importeur (OpenKAT: `openkat_provider.dart`). Dat is de scheiding die de
-// naamswijziging afdwong en die klopt: de schakelaar beantwoordt "hoort dit bij
-// mijn werk", de instelling "waar staan mijn bestanden".
+// **Het uitbreidpunt blijft [importerContentProviders].** Een nieuwe importeur
+// die eigen inhoud op schijf bewaart, voegt daar zijn "heb ik al inhoud"-provider
+// toe en erft de vaste regel van dit project: tonen zodra de inhoud er is, en
+// uitzetten mag bestaand werk nooit onbereikbaar maken. De lijst is vandaag leeg
+// omdat de presentatie-import niets persistents achterlaat — hij is bewust een
+// lijst en geen `||`-expressie, zodat op één plek staat wát er als inhoud telt.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/log.dart';
-import 'openkat_provider.dart';
 
 /// De voorkeursleutel van de schakelaar. Hernoemen mag hierna niet meer: dan
 /// staat de module bij een bestaande installatie stil weer uit.
@@ -30,12 +29,10 @@ const _enabledKey = 'importModuleEnabled';
 
 /// Wat er per importeur als "inhoud" telt.
 ///
-/// Voeg hier de provider van een nieuwe importeur toe zodra die er is. Staat
-/// er ergens al iets ingesteld of geïmporteerd, dan blijft dat bereikbaar ook
-/// als de module uit gaat.
-final List<Provider<bool>> importerContentProviders = [
-  openKatHasContentProvider,
-];
+/// Vandaag leeg: de presentatie-import bewaart niets persistents dat na het
+/// uitzetten bereikbaar hoeft te blijven. Voegt een importeur later wél iets op
+/// schijf toe, dan komt zijn "heb ik al inhoud"-provider hier.
+final List<Provider<bool>> importerContentProviders = <Provider<bool>>[];
 
 final importModuleProvider =
     NotifierProvider<ImportModuleNotifier, ImportModuleState>(
