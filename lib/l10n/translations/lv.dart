@@ -1772,6 +1772,17 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Vājumu saraksts (78): id, nosaukums, MASVS kategorija, platforma, CWE saite un īss apraksts. Turklāt tilts no vecās beta numerācijas (līdz 0119) uz kanoniskajiem id, lai MASTG savstarpējā atsauce joprojām sakristu.',
+  'Alle integraties': 'Visas integrācijas',
+  'Alles inschakelen': 'Ieslēgt visu',
+  'Alles uitschakelen': 'Izslēgt visu',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Atskaišu mape jau ir iestatīta, tāpēc savienojums paliek pieejams un esošu OpenKAT prezentāciju joprojām var atjaunināt.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Savienojumi ar citām sistēmām. Katrs savienojums pēc noklusējuma ir izslēgts un paliek neaktīvs, līdz to ieslēdzat.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Nolasiet OpenKAT atskaišu mapes kā vienu vadības pārskatu.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Prezentāciju ievilkšana no PowerPoint (.pptx), Keynote (.key) un Impress (.odp) kā rediģējams deks. Savienojumi ar citām sistēmām, piemēram, OpenKAT, atrodas sadaļā Integrācijas.',
   'Media (WebRTC)': 'Multivide (WebRTC)',
   'Media-stack testen': 'Pārbaudīt multivides steku',
   'De media-stack werkt op dit apparaat.':

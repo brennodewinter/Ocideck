@@ -1748,6 +1748,17 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       '\'oy\'ghach tetlh (78): id, per, MASVS Segh, jo\', CWE rarwI\' je run QIj. latlh: mI\'mey ngo\' beta (0119 vIS) canonical id\'e\'Daq rarbogh QIn, vaj taHtaH MASTG rar lugh.',
+  'Alle integraties': 'Hoch muvmoHghachmey',
+  'Alles inschakelen': 'Hoch tIchu\'moH',
+  'Alles uitschakelen': 'Hoch tIchu\'Ha\'moH',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'ja\'chuq ngaSwI\' Sovlu\'pu\'; vaj muvmoHghach lo\'laH, \'ej OpenKAT De\'meywI\' chu\'moHlaH.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'latlh patmey muvmoHghachmey. muvmoHghach chu\'Ha\'lu\'pu\' motlh, \'ej Dachu\'moHpa\' lo\'laHbe\' taH.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'wa\' che\'wI\' Sovmey rurmoHmeH OpenKAT ja\'chuq ngaSwI\'mey tIlaD.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'PowerPoint (.pptx), Keynote (.key), Impress (.odp) je nge\'wI\'mey deck choH laH tIqem. latlh patmey muvmoHghachmey, OpenKAT rurbogh, muvmoHmeH bIngDaq tu\'lu\'.',
   'Media (WebRTC)': 'Media (WebRTC)',
   'Media-stack testen': 'media stack yIwaH',
   'De media-stack werkt op dit apparaat.': 'jan vamDaq Qap media stack.',

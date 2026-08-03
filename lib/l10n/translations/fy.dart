@@ -733,6 +733,17 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'De list mei swakkens (78): id, titel, MASVS-kategory, platfoarm, de CWE-keppeling en in koarte beskriuwing. Plus in brêge fan de âlde beta-nûmering (oant 0119) nei de kanonike id\'s, sadat de MASTG-krúskeppeling kloppend bliuwt.',
+  'Alle integraties': 'Alle yntegraasjes',
+  'Alles inschakelen': 'Alles ynskeakelje',
+  'Alles uitschakelen': 'Alles útskeakelje',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Der is al in rapportaazjemap ynsteld; de keppeling bliuwt dêrom berikber, sadat in besteand OpenKAT-deck by te wurkjen bliuwt.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Keppelings mei oare systemen. Eltse keppeling stiet standert út en bliuwt ynaktyf oant jo har ynskeakelje.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Lês rapportaazjemappen fan OpenKAT yn as ien managementoersjoch.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Presintaasjes út PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhelje as bewurkber deck. Keppelings mei oare systemen, lykas OpenKAT, steane ûnder Yntegraasjes.',
   'Media (WebRTC)': 'Media (WebRTC)',
   'Media-stack testen': 'Media-stack teste',
   'De media-stack werkt op dit apparaat.':

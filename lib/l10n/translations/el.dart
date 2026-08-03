@@ -1800,6 +1800,17 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Ο κατάλογος αδυναμιών (78): id, τίτλος, κατηγορία MASVS, πλατφόρμα, ο σύνδεσμος CWE και μια σύντομη περιγραφή. Επιπλέον μια γέφυρα από την παλιά αρίθμηση beta (έως 0119) στα κανονικά id, ώστε η διασταυρούμενη αναφορά MASTG να παραμένει σωστή.',
+  'Alle integraties': 'Όλες οι ενσωματώσεις',
+  'Alles inschakelen': 'Ενεργοποίηση όλων',
+  'Alles uitschakelen': 'Απενεργοποίηση όλων',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Έχει ήδη οριστεί φάκελος αναφορών, οπότε η σύνδεση παραμένει προσβάσιμη και μια υπάρχουσα παρουσίαση OpenKAT μπορεί να ενημερώνεται.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Συνδέσεις με άλλα συστήματα. Κάθε σύνδεση είναι εξ ορισμού απενεργοποιημένη και παραμένει ανενεργή μέχρι να την ενεργοποιήσετε.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Διαβάστε τους φακέλους αναφορών του OpenKAT ως μία διοικητική επισκόπηση.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Εισαγωγή παρουσιάσεων από PowerPoint (.pptx), Keynote (.key) και Impress (.odp) ως επεξεργάσιμο deck. Οι συνδέσεις με άλλα συστήματα, όπως το OpenKAT, βρίσκονται στις Ενσωματώσεις.',
   'Media (WebRTC)': 'Πολυμέσα (WebRTC)',
   'Media-stack testen': 'Δοκιμή στοίβας πολυμέσων',
   'De media-stack werkt op dit apparaat.':

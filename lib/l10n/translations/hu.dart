@@ -1777,6 +1777,17 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'A gyengeségek listája (78): id, cím, MASVS-kategória, platform, a CWE-kapcsolat és egy rövid leírás. Ezenkívül híd a régi béta-számozásból (0119-ig) a kanonikus id-khez, hogy a MASTG-kereszthivatkozás továbbra is stimmeljen.',
+  'Alle integraties': 'Összes integráció',
+  'Alles inschakelen': 'Összes bekapcsolása',
+  'Alles uitschakelen': 'Összes kikapcsolása',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Már be van állítva jelentésmappa, ezért a kapcsolat elérhető marad, és a meglévő OpenKAT-bemutató továbbra is frissíthető.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Kapcsolatok más rendszerekkel. Minden kapcsolat alapértelmezetten ki van kapcsolva, és inaktív marad, amíg be nem kapcsolja.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Olvassa be az OpenKAT-jelentésmappákat egyetlen vezetői áttekintésként.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'A PowerPoint (.pptx), Keynote (.key) és Impress (.odp) programból származó bemutatók behozatala szerkeszthető deckként. A más rendszerekkel való kapcsolatok, például az OpenKAT, az Integrációk alatt találhatók.',
   'Media (WebRTC)': 'Média (WebRTC)',
   'Media-stack testen': 'Médiaverem tesztelése',
   'De media-stack werkt op dit apparaat.':

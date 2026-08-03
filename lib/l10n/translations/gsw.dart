@@ -1776,6 +1776,17 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'D Liste vo de Schwachstelle (78): ID, Titel, MASVS-Kategorie, Plattform, d CWE-Verchnüpfig und e churzi Beschribig. Plus e Brugg vo de alte Beta-Nummerierig (bis 0119) zu de kanonische ID, damit de MASTG-Querverwiis wiiterhin stimmt.',
+  'Alle integraties': 'Alli Integratione',
+  'Alles inschakelen': 'Alles iischalte',
+  'Alles uitschakelen': 'Alles usschalte',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Es isch scho en Bricht-Ornder iigstellt; drum bliibt d Verbindig erreichbar, damit e bestehendi OpenKAT-Presentation wiiter aktualisiert werde cha.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Verbindige mit anderne Systeem. Jedi Verbindig isch standardmässig us und bliibt inaktiv, bis du sie iischaltisch.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'OpenKAT-Brichtordner as ei Management-Übersicht iiläse.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Präsentatione us PowerPoint (.pptx), Keynote (.key) und Impress (.odp) as bearbeitbars Deck inehole. Verbindige mit anderne Systeem, wie OpenKAT, findsch under Integratione.',
   'Media (WebRTC)': 'Medie (WebRTC)',
   'Media-stack testen': 'Medie-Stack teste',
   'De media-stack werkt op dit apparaat.': 'De Medie-Stack lauft uf dem Grät.',

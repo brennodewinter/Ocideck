@@ -1802,6 +1802,17 @@ const _dutchSourcePt = {
 const _dutchSourceAddPt = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'A lista de fraquezas (78): id, título, categoria MASVS, plataforma, a ligação CWE e uma breve descrição. Além disso, uma ponte da antiga numeração beta (até 0119) para os id canónicos, para que a referência cruzada MASTG continue correta.',
+  'Alle integraties': 'Todas as integrações',
+  'Alles inschakelen': 'Ativar tudo',
+  'Alles uitschakelen': 'Desativar tudo',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Já está definida uma pasta de relatórios, por isso a ligação continua acessível e uma apresentação OpenKAT existente ainda pode ser atualizada.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Ligações com outros sistemas. Cada ligação está desativada por predefinição e permanece inativa até que a ative.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Leia as pastas de relatórios do OpenKAT como uma única visão de gestão.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Trazer apresentações do PowerPoint (.pptx), Keynote (.key) e Impress (.odp) como deck editável. As ligações com outros sistemas, como o OpenKAT, encontram-se em Integrações.',
   'Media (WebRTC)': 'Multimédia (WebRTC)',
   'Media-stack testen': 'Testar a pilha multimédia',
   'De media-stack werkt op dit apparaat.':

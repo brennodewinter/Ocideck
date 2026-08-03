@@ -1795,6 +1795,17 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Il-lista tad-dgħufijiet (78): id, titlu, kategorija MASVS, pjattaforma, ir-rabta CWE u deskrizzjoni qasira. Flimkien ma\' pont mit-tqassim beta l-antik (sa 0119) għall-id kanoniċi, biex ir-referenza inkroċjata MASTG tibqa\' taqbel.',
+  'Alle integraties': 'L-integrazzjonijiet kollha',
+  'Alles inschakelen': 'Attiva kollox',
+  'Alles uitschakelen': 'Iddiżattiva kollox',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Diġà hemm folder tar-rapporti mħaddem, għalhekk il-konnessjoni tibqa\' aċċessibbli u preżentazzjoni OpenKAT eżistenti tista\' tibqa\' tiġi aġġornata.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Konnessjonijiet ma\' sistemi oħra. Kull konnessjoni hija mitfija b\'mod awtomatiku u tibqa\' inattiva sakemm int tixgħelha.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Aqra l-folders tar-rapporti ta\' OpenKAT bħala ħarsa ġenerali waħda għall-maniġment.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Iddaħħal preżentazzjonijiet minn PowerPoint (.pptx), Keynote (.key) u Impress (.odp) bħala deck editabbli. Il-konnessjonijiet ma\' sistemi oħra, bħal OpenKAT, jinsabu taħt Integrazzjonijiet.',
   'Media (WebRTC)': 'Media (WebRTC)',
   'Media-stack testen': 'Ittestja l-istack tal-media',
   'De media-stack werkt op dit apparaat.':

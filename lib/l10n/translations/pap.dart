@@ -732,6 +732,17 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'E lista di debilidatnan (78): id, título, kategoria MASVS, plataforma, e konekshon CWE i un deskripshon kòrtiku. Plus un puente for di e numerashon beta bieu (te na 0119) pa e id kanónikonan, pa e referensia krusá MASTG keda korekto.',
+  'Alle integraties': 'Tur integrashon',
+  'Alles inschakelen': 'Aktivá tur',
+  'Alles uitschakelen': 'Desaktivá tur',
+  'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Ya tin un karpeta di rapòrt konfigurá; p\'esei e konekshon ta keda alkansabel, di manera ku un presentashon OpenKAT eksistente por keda aktualisá.',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
+      'Konekshon ku otro sistemanan. Kada konekshon ta paga pa defekto i ta keda inaktivo te ora bo aktivé.',
+  'Lees rapportagemappen van OpenKAT in als één managementoverzicht.':
+      'Lesa karpetanan di rapòrt di OpenKAT komo un solo bista di gerensia.',
+  'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
+      'Trese presentashonnan for di PowerPoint (.pptx), Keynote (.key) i Impress (.odp) komo deck editabel. Konekshonnan ku otro sistemanan, manera OpenKAT, ta bou di Integrashonnan.',
   'Media (WebRTC)': 'Media (WebRTC)',
   'Media-stack testen': 'Testa e stack di media',
   'De media-stack werkt op dit apparaat.':
