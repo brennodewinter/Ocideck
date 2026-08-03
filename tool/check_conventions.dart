@@ -130,7 +130,9 @@ const Map<String, int> fileSizeBaseline = {
   // +4 (#1098): imports voor de uitbreidingspoort en het rechtenoverzicht voor
   // afbeeldingen; het gedrag zelf blijft in losse providers en widgets.
   'lib/widgets/app_shell.dart':
-      806, // +4 (#978 Blok C): imports + part 'provenance_actions'; +1 (video-calls F1): call_panel import
+      813, // +4 (#978 Blok C): imports + part 'provenance_actions'; +1 (video-calls F1): call_panel import
+  // +7 (#1175): _onFilesDropped krijgt de presentatie-tak — een gesleepte
+  // .pptx/.odp/.key gaat de import in (routing gedeeld in importDroppedPresentations).
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
   // behaviour is extracted (listenCollabAuthorityChange lives in the collab part
   // file, and _MainLayoutState stays under its class ceiling); only the tab-scoped

@@ -16,6 +16,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- **Een presentatie op het venster slepen importeert hem nu.** (#1175) Een of
+  meer PowerPoint-/Impress-/Keynote-bestanden (`.pptx`/`.odp`/`.key`) op OciDeck
+  laten vallen gaat rechtstreeks de import in — precies zoals `.md` slepen al een
+  deck opende. Eén bestand opent direct; meerdere gaan naar de bestaande
+  wachtrijdialoog (volgorde en doelmap). Een gemengde sleep (bijvoorbeeld wat
+  Markdown, een afbeelding en een `.odp`) blijft werken: elk soort z'n eigen
+  route. Staat de module Importeren uit, dan importeert slepen niet stil maar
+  toont dezelfde uitweg als "Openen…": een melding die naar **Instellingen**
+  wijst. Werkt op desktop én in de browser.
 - **Wie een presentatie via "Openen…" kiest, wordt nu naar de import geleid in
   plaats van doodgelopen.** (#1175) "Openen…" is voor Markdown- en
   `.ocideck`-bestanden; koos je daar een PowerPoint/Impress/Keynote-bestand
@@ -28,7 +37,8 @@ in Dutch, and it keeps growing on `main` between releases.
   naar **Instellingen** om de module aan te zetten — hij zet hem niet stil aan.
   Werkt op desktop én in de browser. Import blijft bewust een aparte, standaard
   uitgeschakelde module en een gemarkeerd verliesgevend proces; deze wijziging
-  maakt hem alleen vindbaar op het moment dat je hem duidelijk nodig hebt.
+  maakt hem alleen vindbaar op het moment dat je hem duidelijk nodig hebt. (Ook
+  slepen-en-laten-vallen leidt nu naar de import — zie de aparte regel hierboven.)
 - **Een gesplitste dia toont nu een "(pagina/totaal)"-teller naast zijn titel.**
   Na "Splits slide" herhaalde elke vervolgpagina exact dezelfde titel zonder
   markering — soms met een nu-onjuist aantal erin. Elke pagina van een gesplitste

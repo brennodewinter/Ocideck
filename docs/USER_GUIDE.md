@@ -2213,6 +2213,15 @@ choose the file again. With the module still off, it names what you chose and
 sends you to **Instellingen** to switch the module on, rather than silently
 enabling it.
 
+**You can also drag presentations straight onto the window.** *(Added
+2026-08-03, #1175.)* Dropping one or more `.pptx`/`.odp`/`.key` files onto
+OciDeck sends them into the same import — one file opens directly, several go to
+the queue dialog (order and destination), exactly like the menu item. A mixed
+drop is fine: Markdown, images and presentations each take their own route. With
+the **Importeren** module off, a dropped presentation shows the same pointer to
+**Instellingen** rather than importing silently. Works on desktop and in the
+browser.
+
 The format is decided by looking *inside* the file, not by the extension: a
 `.pptx` is recognised by the presentation part it always carries, an `.odp` by
 its declared media type, a `.key` by its `Index/` archives. A file that is not a
