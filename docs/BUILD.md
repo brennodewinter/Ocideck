@@ -545,8 +545,8 @@ that same web bundle.
 
 | Artifact | Built on | Why there |
 | --- | --- | --- |
-| Web bundle | forge, `docker` runner | `make check-web`: hardened build **and** its verification |
-| Linux x64 | forge, `docker` runner | native toolchain in the job container |
+| Web bundle | forge `docker` runner, prebaked `ocideck-ci` image | `make check-web`: hardened build **and** its verification |
+| Linux x64 | forge `docker` runner, prebaked `ocideck-ci` image | native desktop build on the baked toolchain |
 | macOS | forge, `macos` runner | Apple licenses macOS for Apple hardware only |
 | Windows x64 | GitHub mirror | no Windows machine on the forge |
 | SBOM | forge, from the repo | committed and kept current by `make sbom-verify` |
@@ -557,6 +557,19 @@ expires after ninety days; a release asset is a plain public URL that keeps
 working. That is why the forge needs no GitHub credentials to collect it — the
 `windows-ophalen` job simply waits (up to 45 minutes) for the file to appear and
 `curl`s it.
+
+The **web and Linux jobs run on the prebaked `ocideck-ci:flutter-<pin>` image** —
+the same image the gates use (see the `ci-image.yml` section of
+[CHECKS.md](CHECKS.md)) — so the build-toolchain and the pinned, sha256-verified
+Flutter are baked in rather than installed on every tag. The Linux job additionally `apt-get install`s
+`liblzma-dev` and `libsecret-1-dev`, which only the desktop build links (via
+`flutter_secure_storage` and lzma) and the test-oriented image does not carry.
+Both jobs share the gates' `pub`/`dartcv` `actions/cache` keys: `linux-gate`
+populates them on every push to `main` — a scope a tag build can read — so the
+expensive dartcv OpenCV compile is restored *warm* at tag time instead of rebuilt
+from scratch. A cache miss is fail-open (it just rebuilds, as before). Together
+this cut the Linux build from about seventy minutes at `v0.2.0` to under twenty at
+the `v0.2.1-rc1` rehearsal (#1170, #1172).
 
 ### Before you tag
 
@@ -619,10 +632,13 @@ secrets on the forge — see
   a man-in-the-middle needs.
 
 Without them the `deploy-web` job **skips** the live step — it does not fail, so
-a tag produces no red job and no failure mail. The release still publishes,
-because the desktop downloads do not depend on the web host; put the web version
-live by hand with `make deploy-web`. Set both secrets to have a tag deploy the
-web automatically again.
+a tag produces no red job and no failure mail. The skip now writes a visible
+`⏭️ Web NIET live gezet` note to the run summary, so a green `deploy-web` job is
+not mistaken for "the web is live" (#1169). The release still publishes, because
+the desktop downloads do not depend on the web host; put the web version live by
+hand with `make deploy-web` (which now builds the bundle first, so it no longer
+fails on a missing `build/web/` after a `flutter clean`). Set both secrets to
+have a tag deploy the web automatically again.
 
 ### Signing the macOS release on the runner (one-time)
 

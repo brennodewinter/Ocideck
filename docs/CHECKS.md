@@ -1540,6 +1540,18 @@ project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
   published package to **public** so `scans.yml` can pull it without credentials.
   The publish guard skips green when the token is absent, so adding this cannot
   turn `main` red before the one-time setup is done.
+- **Publish the image once by hand when you introduce or re-point it — Forgejo
+  will not do it for you (#1168).** A newly added `push`-triggered workflow does
+  **not** run on the commit that introduces it, so merging the PR that adds this
+  image (or bumps the pin so the tag changes) does not build the image. Until you
+  **dispatch `ci-image-scans.yml` manually** (or run `make ci-image-scans-publish`),
+  the tag `scans.yml` references does not exist, and every pull request built on
+  that `main` fails in seconds with `docker pull … not found`. This is exactly how
+  #1150 left the scan gate red for a day — branches predating it still ran the old
+  per-run install and passed, which disguised a hard breakage as a ~50% flake
+  (#1168). After the first publish, pin bumps *do* rebuild automatically, because
+  the `push` trigger covers `.github/pinned-ci-versions.json`. The same one-time
+  dispatch applies to `ci-image.yml`.
 
 ### `.forgejo/workflows/linux-build.yml` — on demand (`workflow_dispatch`)
 - **build-linux** — same official pinned toolchain as the gate, plus the GTK
