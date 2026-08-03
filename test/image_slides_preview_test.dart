@@ -76,6 +76,65 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('an unresolvable theme logo vanishes instead of drawing the '
+      'missing-file placeholder (#1174)', (tester) async {
+    await tester.runAsync(() async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              // Large enough that the placeholder would render its full
+              // icon-and-label form (it collapses to an icon below 48 px).
+              width: 1200,
+              child: SlidePreviewWidget(
+                slide: Slide.create(SlideType.bullets),
+                themeProfile: const ThemeProfile(
+                  logoPath: '/no/such/theme-logo.png',
+                  logoSize: 128,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      // Let the (failing) file image decode so the errorBuilder runs.
+      await Future<void>.delayed(const Duration(milliseconds: 300));
+      await tester.pump();
+
+      // A brand overlay that can't resolve must fall away silently — no
+      // broken-image placeholder stamped onto every slide (and every export).
+      expect(find.text('Bestand niet gevonden'), findsNothing);
+      expect(find.text('Buiten de presentatie'), findsNothing);
+      expect(find.byIcon(Icons.broken_image_outlined), findsNothing);
+    });
+  });
+
+  testWidgets('a missing *content* image still shows the placeholder '
+      '(the theme-logo fix must not swallow it, #1174)', (tester) async {
+    await tester.runAsync(() async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 800,
+              child: SlidePreviewWidget(
+                slide: Slide(
+                  id: 'c',
+                  type: SlideType.image,
+                  imagePath: '/no/such/content-image.png',
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await Future<void>.delayed(const Duration(milliseconds: 300));
+      await tester.pump();
+
+      expect(find.text('Bestand niet gevonden'), findsOneWidget);
+    });
+  });
+
   testWidgets('twoImages paints both the left and right images', (
     tester,
   ) async {

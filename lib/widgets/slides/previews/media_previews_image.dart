@@ -81,6 +81,22 @@ String imageSemanticsLabel(
   return text.isEmpty ? context.l10n.d('Afbeelding') : text;
 }
 
+/// De plaatshouder voor een afbeelding die niet geladen kon worden — behalve
+/// voor een vertrouwd asset (het thema-logo), dat stil wegvalt.
+///
+/// Een thema-logo is een merk-overlay die op élke dia van élk deck ligt. Kan het
+/// bestand niet worden geresolveerd (een geïmporteerd stijlprofiel zonder zijn
+/// logo, een gestript build-asset), dan hoort het weg te vallen in plaats van
+/// een 'Bestand niet gevonden'-vlak op iedere geëxporteerde pagina te stampen
+/// (#1174). Een ontbrekende *inhouds*afbeelding blijft wél zichtbaar — vandaar
+/// dat dit alleen voor het vertrouwde asset geldt.
+Widget _failedImage(
+  BuildContext context,
+  bool trustedAsset,
+  ImagePlaceholderReason reason,
+) =>
+    trustedAsset ? const SizedBox.shrink() : _imagePlaceholder(context, reason);
+
 Widget _resolvedImage(
   BuildContext context,
   String imagePath,
@@ -90,6 +106,9 @@ Widget _resolvedImage(
   bool trustedAsset = false,
   String? semanticLabel,
 }) {
+  Widget failed(ImagePlaceholderReason reason) =>
+      _failedImage(context, trustedAsset, reason);
+
   if (imagePath.isEmpty) {
     // Een leeg pad heeft twee heel verschillende betekenissen, en alleen de
     // scope weet welke: de auteur heeft nog niets gekozen, óf de projectie
@@ -114,7 +133,7 @@ Widget _resolvedImage(
       gaplessPlayback: true,
       semanticLabel: semanticLabel,
       errorBuilder: (context, error, stackTrace) =>
-          _imagePlaceholder(context, ImagePlaceholderReason.missing),
+          failed(ImagePlaceholderReason.missing),
     );
   }
 
@@ -134,11 +153,11 @@ Widget _resolvedImage(
       gaplessPlayback: true,
       semanticLabel: semanticLabel,
       errorBuilder: (context, error, stackTrace) =>
-          _imagePlaceholder(context, ImagePlaceholderReason.missing),
+          failed(ImagePlaceholderReason.missing),
     );
   }
   if (WebAssetStore.isMemPath(imagePath)) {
-    return _imagePlaceholder(context, ImagePlaceholderReason.memoryGone);
+    return failed(ImagePlaceholderReason.memoryGone);
   }
 
   // Online afbeelding: render live via NetworkImage (zelfde decode-cap als
@@ -170,7 +189,7 @@ Widget _resolvedImage(
           gaplessPlayback: true,
           semanticLabel: semanticLabel,
           errorBuilder: (context, error, stackTrace) =>
-              _imagePlaceholder(context, ImagePlaceholderReason.missing),
+              failed(ImagePlaceholderReason.missing),
         );
       },
     );
@@ -185,8 +204,7 @@ Widget _resolvedImage(
   if (resolved == null) {
     // Op web bestaat er geen bestandssysteem: het bestand is er domweg niet.
     // Op desktop kan dit alleen door de containment-grens komen.
-    return _imagePlaceholder(
-      context,
+    return failed(
       kIsWeb
           ? ImagePlaceholderReason.missing
           : ImagePlaceholderReason.outsideDeck,
@@ -220,7 +238,7 @@ Widget _resolvedImage(
     // shows up as a black flash between slides — fatal when recording video.
     gaplessPlayback: true,
     errorBuilder: (context, error, stackTrace) =>
-        _imagePlaceholder(context, ImagePlaceholderReason.missing),
+        failed(ImagePlaceholderReason.missing),
   );
 }
 
