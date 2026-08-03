@@ -1800,6 +1800,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'Isto é uma apresentação, não um ficheiro Markdown. O OciDeck pode importá-la para um novo deck.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'Isto é uma apresentação, não um ficheiro Markdown. Ative o módulo Importar para convertê-la num deck.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'A lista de fraquezas (78): id, título, categoria MASVS, plataforma, a ligação CWE e uma breve descrição. Além disso, uma ponte da antiga numeração beta (até 0119) para os id canónicos, para que a referência cruzada MASTG continue correta.',
   'Alle integraties': 'Todas as integrações',

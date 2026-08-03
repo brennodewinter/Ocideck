@@ -2748,6 +2748,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'Bu bir sunum, Markdown dosyası değil. OciDeck bunu yeni bir deck\'e aktarabilir.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'Bu bir sunum, Markdown dosyası değil. Onu bir deck\'e dönüştürmek için İçe aktar modülünü açın.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Zayıflıklar listesi (78): id, başlık, MASVS kategorisi, platform, CWE bağlantısı ve kısa bir açıklama. Ayrıca eski beta numaralandırmasından (0119\'a kadar) kanonik id\'lere bir köprü, böylece MASTG çapraz referansı doğru kalır.',
   'Alle integraties': 'Tüm entegrasyonlar',

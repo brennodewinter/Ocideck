@@ -1770,6 +1770,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'Det här är en presentation, inte en Markdown-fil. OciDeck kan importera den till ett nytt deck.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'Det här är en presentation, inte en Markdown-fil. Aktivera modulen Importera för att omvandla den till ett deck.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Listan över svagheter (78): id, titel, MASVS-kategori, plattform, CWE-kopplingen och en kort beskrivning. Plus en brygga från den gamla beta-numreringen (upp till 0119) till de kanoniska id:na, så att MASTG-korsreferensen fortsätter att stämma.',
   'Alle integraties': 'Alla integrationer',

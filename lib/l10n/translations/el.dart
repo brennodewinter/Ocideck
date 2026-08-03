@@ -1798,6 +1798,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'Αυτή είναι μια παρουσίαση, όχι αρχείο Markdown. Το OciDeck μπορεί να την εισαγάγει σε ένα νέο deck.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'Αυτή είναι μια παρουσίαση, όχι αρχείο Markdown. Ενεργοποιήστε τη μονάδα «Εισαγωγή» για να τη μετατρέψετε σε deck.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Ο κατάλογος αδυναμιών (78): id, τίτλος, κατηγορία MASVS, πλατφόρμα, ο σύνδεσμος CWE και μια σύντομη περιγραφή. Επιπλέον μια γέφυρα από την παλιά αρίθμηση beta (έως 0119) στα κανονικά id, ώστε η διασταυρούμενη αναφορά MASTG να παραμένει σωστή.',
   'Alle integraties': 'Όλες οι ενσωματώσεις',

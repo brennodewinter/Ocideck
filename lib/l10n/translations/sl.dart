@@ -1773,6 +1773,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'To je predstavitev, ne datoteka Markdown. OciDeck jo lahko uvozi v nov deck.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'To je predstavitev, ne datoteka Markdown. Vklopite modul Uvozi, da jo pretvorite v deck.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Seznam šibkosti (78): id, naslov, kategorija MASVS, platforma, povezava CWE in kratek opis. Poleg tega most od starega beta oštevilčenja (do 0119) do kanoničnih id-jev, da navzkrižni sklic MASTG še naprej drži.',
   'Alle integraties': 'Vse integracije',

@@ -911,6 +911,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'This is a presentation, not a Markdown file. OciDeck can import it into a new deck.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'This is a presentation, not a Markdown file. Turn on the Import module to convert it into a deck.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'The weaknesses list (78): id, title, MASVS category, platform, the CWE link and a short description. Plus a bridge from the old beta numbering (up to 0119) to the canonical ids, so the MASTG cross-reference keeps matching.',
   'Alle integraties': 'All integrations',

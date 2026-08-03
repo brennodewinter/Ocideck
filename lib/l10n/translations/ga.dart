@@ -1806,6 +1806,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'Is cur i láthair é seo, ní comhad Markdown é. Is féidir le OciDeck é a iompórtáil isteach i ndeic nua.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'Is cur i láthair é seo, ní comhad Markdown é. Cuir an modúl Iompórtáil ar siúl chun é a thiontú ina dheic.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Liosta na laigí (78): id, teideal, catagóir MASVS, ardán, an nasc CWE agus cur síos gairid. Chomh maith le sin, droichead ón sean-uimhriú béite (suas go 0119) go dtí na id canónacha, ionas go bhfanfaidh an chrostagairt MASTG ceart.',
   'Alle integraties': 'Gach comhtháthú',

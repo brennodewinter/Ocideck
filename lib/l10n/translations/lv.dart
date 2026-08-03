@@ -1770,6 +1770,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'Šī ir prezentācija, nevis Markdown fails. OciDeck to var importēt jaunā dekā.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'Šī ir prezentācija, nevis Markdown fails. Ieslēdziet moduli Importēt, lai pārvērstu to par deku.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Vājumu saraksts (78): id, nosaukums, MASVS kategorija, platforma, CWE saite un īss apraksts. Turklāt tilts no vecās beta numerācijas (līdz 0119) uz kanoniskajiem id, lai MASTG savstarpējā atsauce joprojām sakristu.',
   'Alle integraties': 'Visas integrācijas',

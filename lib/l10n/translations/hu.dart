@@ -1775,6 +1775,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'Ez egy prezentáció, nem Markdown-fájl. Az OciDeck importálhatja egy új deckbe.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'Ez egy prezentáció, nem Markdown-fájl. Kapcsold be az Importálás modult, hogy deckké alakítsd.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'A gyengeségek listája (78): id, cím, MASVS-kategória, platform, a CWE-kapcsolat és egy rövid leírás. Ezenkívül híd a régi béta-számozásból (0119-ig) a kanonikus id-khez, hogy a MASTG-kereszthivatkozás továbbra is stimmeljen.',
   'Alle integraties': 'Összes integráció',
