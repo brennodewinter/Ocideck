@@ -4,14 +4,18 @@ part of '../slide_preview.dart';
 
 /// De titel van een bulletdia, met — wanneer de dia één pagina van een
 /// gesplitste reeks is ([position] niet null en meer dan één pagina) — een
-/// bescheiden "(pagina/totaal)"-teller ernaast (#1164). Zonder reeks precies
+/// bescheiden "(pagina/totaal)"-teller erachter (#1164). Zonder reeks precies
 /// [_md]: een losse dia toont niets extra en de bestaande goldens veranderen niet.
 ///
-/// De teller staat rechts van de titel, kleiner en gedempt, en lijnt onderaan
-/// uit (een Markdown-titel meldt geen baseline) — zo blijft hij leesbaar naast
-/// een titel die over twee regels loopt. Gedeeld door de drie bullet-previews
-/// zodat de vier oppervlakken (editor, presentatie, publiek, export) dezelfde
-/// teller tonen.
+/// De teller loopt als trailing-span in dezelfde paragraaf mee: kleiner en
+/// gedempt, op de tekstbaseline, en met een vaste-spatie aan het laatste woord
+/// geplakt zodat hij bij een titel over meerdere regels tegen de titel blijft
+/// staan in plaats van naar de rechterrand te zweven. Gedeeld door de drie
+/// bullet-previews zodat de Flutter-renderoppervlakken (editor, slidestrook,
+/// presentatie, publiek en de gerasterde PDF-export) dezelfde teller tonen. De
+/// markdown-getrouwe HTML/Marp-export rendert de titel uit de ruwe markdown en
+/// toont de teller bewust niet — een render-decoratie hoort niet in de
+/// interchange-inhoud.
 Widget _titleWithSplitCounter(
   BuildContext context,
   String title,
@@ -19,26 +23,20 @@ Widget _titleWithSplitCounter(
   required Color linkColor,
   required ({int page, int total})? position,
 }) {
-  final titleWidget = _md(context, title, style, linkColor: linkColor);
-  if (position == null || position.total <= 1) return titleWidget;
+  if (position == null || position.total <= 1) {
+    return _md(context, title, style, linkColor: linkColor);
+  }
   final baseColor = style.color ?? Colors.black;
-  return Row(
-    crossAxisAlignment: CrossAxisAlignment.end,
-    children: [
-      Flexible(child: titleWidget),
-      Padding(
-        padding: EdgeInsets.only(left: (style.fontSize ?? 12) * 0.35),
-        child: Text(
-          '${position.page}/${position.total}',
-          style: style.copyWith(
-            fontSize: (style.fontSize ?? 12) * 0.62,
-            fontWeight: FontWeight.w500,
-            color: baseColor.withValues(alpha: 0.55),
-          ),
-        ),
-      ),
-    ],
+  // Non-breaking space: de teller breekt niet los van het laatste woord.
+  final counter = TextSpan(
+    text: '\u00A0${position.page}/${position.total}',
+    style: style.copyWith(
+      fontSize: (style.fontSize ?? 12) * 0.62,
+      fontWeight: FontWeight.w500,
+      color: baseColor.withValues(alpha: 0.55),
+    ),
   );
+  return _md(context, title, style, linkColor: linkColor, trailing: counter);
 }
 
 /// Clips bullets-slide content to the real layout box. [OverflowBox] keeps the

@@ -244,6 +244,7 @@ Widget _md(
   TextAlign textAlign = TextAlign.start,
   TextOverflow overflow = TextOverflow.clip,
   bool softWrap = true,
+  InlineSpan? trailing,
 }) {
   return InlineMarkdownText(
     normalizeRichTextMarkdown(text),
@@ -254,6 +255,7 @@ Widget _md(
     textAlign: textAlign,
     overflow: overflow,
     softWrap: softWrap,
+    trailing: trailing,
   );
 }
 
