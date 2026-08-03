@@ -1,0 +1,146 @@
+# Bouwt en publiceert het voorgebakken scan-basisimage
+# (`.forgejo/ci-image/scans.Dockerfile`) naar de eigen Forgejo-registry.
+#
+# WAAROM APART VAN `ci-image.yml`. Dat bouwt het Flutter-toolchain-image en vuurt
+# op `.tool-versions`; dit bouwt het scanner-image en vuurt op de scanner-pins.
+# `on.push.paths` geldt per workflow, niet per job — één workflow met beide zou
+# het scanner-image herbouwen bij elke Flutter-bump en andersom. Twee bestanden
+# houden elke trigger scherp: elk image herbouwt alleen als er iets aan dát image
+# verandert.
+#
+# WANNEER. Op afroep (`workflow_dispatch`) én automatisch zodra de scan-Dockerfile,
+# deze workflow, of de pinbron (`.github/pinned-ci-versions.json`) op `main`
+# wijzigt — zo kan het image nooit stil achterlopen op de pins. Het tag ís de drie
+# pins (`gl<gitleaks>-th<trufflehog>-sg<semgrep>`), dus een pin-bump publiceert een
+# nieuw tag zonder een oud te overschrijven.
+#
+# EENMALIG IN TE RICHTEN (zie docs/CHECKS.md "Voorgebakken CI-image"):
+#   * dezelfde repo-secret `CI_IMAGE_TOKEN` (Forgejo-token met `write:package`) en
+#     repo-variabele `CI_IMAGE_USER` (de EIGENAAR van dat token) als `ci-image.yml`.
+#   * de runner moet `docker` kunnen aanroepen (de dind-runner op pawprint kan dat);
+#     draait hij zonder docker-toegang, gebruik dan `make ci-image-scans-publish`
+#     vanaf een machine met docker/colima.
+#   * zet het gepubliceerde package op PUBLIEK, zodat `scans.yml` het zonder inlog
+#     kan pullen.
+#
+# VERTROUWENSGRENS. Zelfde als de runner en de bestaande `actions/cache`: onze
+# eigen job bouwt het image op onze eigen runner en duwt het naar onze eigen
+# registry. De Dockerfile toetst elke scanner-tarball sha256 vóór het uitpakken,
+# dus een gemanipuleerde download valt om bij de build — niet pas in de poort.
+name: ci-image-scans
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.forgejo/ci-image/scans.Dockerfile'
+      - '.forgejo/workflows/ci-image-scans.yml'
+      - '.github/pinned-ci-versions.json'
+
+# Twee pushes vlak na elkaar (pin-bump + Dockerfile) hoeven niet dubbel te
+# bouwen; de laatste dekt de nieuwste staat.
+concurrency:
+  group: ci-image-scans-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-publish:
+    runs-on: docker
+    # Job-containers draaien ÍN de dind (de runner maakt ze via de dind-daemon).
+    # Ze staan op het dind-netwerk `forgejo-stack_default` (runner-config), waarvan
+    # de gateway (172.30.0.1) de dind-daemon zelf is — die luistert op 0.0.0.0:2375.
+    # De docker-CLI bouwt dus tegen `tcp://172.30.0.1:2375`.
+    env:
+      DOCKER_HOST: tcp://172.30.0.1:2375
+    steps:
+      # Zonder registry-token kan deze workflow niets publiceren. Dat is géén
+      # fout: vóór de eenmalige inrichting (of op een fork) hoort de run gewoon
+      # groen over te slaan, niet rood te worden. Anders zou juist de PR die dit
+      # image toevoegt na de merge een rode `main`-run opleveren.
+      - name: Is de registry-publicatie ingericht?
+        id: guard
+        env:
+          TOKEN: ${{ secrets.CI_IMAGE_TOKEN }}
+          USER: ${{ vars.CI_IMAGE_USER }}
+        run: |
+          set -eu
+          # Beide nodig: het token is het geheim, de gebruikersnaam is de EIGENAAR
+          # van dat token (een Forgejo-gebruiker met write:package). Bewust NIET
+          # `github.actor` — dat is wie de run triggert, en die hoeft niet de
+          # token-eigenaar te zijn; dan zou de push stil op de verkeerde login
+          # falen. Een repo-variabele `CI_IMAGE_USER` maakt het expliciet.
+          if [ -z "${TOKEN:-}" ] || [ -z "${USER:-}" ]; then
+            echo "CI_IMAGE_TOKEN (secret) en/of CI_IMAGE_USER (variabele) niet gezet — publicatie overgeslagen."
+            echo "Richt ze eenmalig in (docs/CHECKS.md 'ci-image.yml') of draai 'make ci-image-scans-publish'."
+            echo "publish=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      # De job draait in een kaal ubuntu:24.04 (de runner-default), zonder node —
+      # en `actions/checkout` is een node-actie. Installeer daarom node, de
+      # docker-CLI die met de dind-service praat (DOCKER_HOST), `git` voor de
+      # checkout, en `jq` om de scanner-pins uit het manifest te lezen.
+      - name: Gereedschap in de container (node + docker-CLI + jq)
+        if: steps.guard.outputs.publish == 'yes'
+        run: |
+          set -eu
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            nodejs ca-certificates git docker.io jq
+
+      # De dind-service start parallel op; wacht tot de daemon luistert, anders
+      # faalt de eerste docker-aanroep op een nog-dichte socket.
+      - name: Wacht op de docker-daemon
+        if: steps.guard.outputs.publish == 'yes'
+        run: |
+          set -eu
+          for i in $(seq 1 30); do
+            docker info >/dev/null 2>&1 && { echo "daemon bereikbaar"; docker version; exit 0; }
+            sleep 2
+          done
+          echo "docker-daemon kwam niet op binnen 60s"; docker info; exit 1
+
+      - if: steps.guard.outputs.publish == 'yes'
+        uses: actions/checkout@v4
+
+      # De pins uit de ENIGE bron: het manifest. Zo staat de versie niet ook nog
+      # eens in deze workflow (waar `pinned_versions_manifest_test` hem dan als
+      # ongemonitorde pin zou aanmerken) — het manifest is de bron, dit leest hem.
+      - name: Scanner-pins uit het manifest lezen
+        if: steps.guard.outputs.publish == 'yes'
+        id: pins
+        run: |
+          set -eu
+          M=.github/pinned-ci-versions.json
+          get() { jq -r --arg n "$1" '.tools[] | select(.name==$n) | .version' "$M"; }
+          GL="$(get gitleaks)";   TH="$(get trufflehog)"; SG="$(get semgrep)"
+          test -n "$GL" && test -n "$TH" && test -n "$SG"
+          echo "gitleaks=$GL"   >> "$GITHUB_OUTPUT"
+          echo "trufflehog=$TH" >> "$GITHUB_OUTPUT"
+          echo "semgrep=$SG"    >> "$GITHUB_OUTPUT"
+          echo "tag=gl${GL}-th${TH}-sg${SG}" >> "$GITHUB_OUTPUT"
+
+      - name: Inloggen op de Forgejo-registry
+        if: steps.guard.outputs.publish == 'yes'
+        run: |
+          set -eu
+          echo "${{ secrets.CI_IMAGE_TOKEN }}" \
+            | docker login pawprint.vigilis.online \
+                -u "${{ vars.CI_IMAGE_USER }}" --password-stdin
+
+      - name: Bouwen en pushen
+        if: steps.guard.outputs.publish == 'yes'
+        run: |
+          set -eu
+          IMG="pawprint.vigilis.online/librekat/ocideck-scans"
+          TAG="${{ steps.pins.outputs.tag }}"
+          docker build \
+            --build-arg GITLEAKS_VERSION="${{ steps.pins.outputs.gitleaks }}" \
+            --build-arg TRUFFLEHOG_VERSION="${{ steps.pins.outputs.trufflehog }}" \
+            --build-arg SEMGREP_VERSION="${{ steps.pins.outputs.semgrep }}" \
+            -t "$IMG:$TAG" \
+            -f .forgejo/ci-image/scans.Dockerfile .forgejo/ci-image
+          docker push "$IMG:$TAG"
+          echo "Gepubliceerd: $IMG:$TAG"
