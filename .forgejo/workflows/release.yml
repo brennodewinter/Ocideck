@@ -66,8 +66,34 @@ jobs:
 
       - uses: ./.forgejo/actions/flutter
 
+      # Dezelfde cache-sleutels als linux-gate/static-gate, met opzet. De
+      # Linux-poort draait op elke push naar main en vult die caches dus onder
+      # main-scope; main-scope-caches zijn leesbaar vanuit een tag-build, dus bij
+      # het snijden van een tag staat de dure dartcv-OpenCV-compile hier al warm
+      # i.p.v. from-scratch. `continue-on-error`: valt de cache-API weg of mist de
+      # sleutel, dan bouwt de stap gewoon opnieuw — precies het gedrag van nu.
+      - name: Pub-pakketten uit de cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: ~/.pub-cache
+          key: pub-linux-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            pub-linux-
+
       - name: Afhankelijkheden ophalen
         run: flutter pub get
+
+      - name: dartcv4 native OpenCV-build uit de cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: |
+            .dart_tool/hooks_runner
+            build/native_assets
+          key: dartcv-linux-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            dartcv-linux-
 
       # Dezelfde poort die elke push krijgt, plus de hardingscontrole. Een tag
       # mag geen artefact uitleveren dat langs de controles is geglipt: dit is
@@ -123,6 +149,18 @@ jobs:
             echo "niet automatisch live gezet. Dat is nu de bedoeling: deployen gebeurt"
             echo "met de hand (make deploy-web, zie docs/HOSTING.md). De release zelf"
             echo "publiceert hoe dan ook compleet; deze job slaat alleen de live-stap over."
+            # De job-conclusie is verder gewoon 'success', en dan leest een groene
+            # job als "web staat live" terwijl er niets gedeployd is. Zet de skip
+            # daarom zichtbaar op de run-samenvatting, niet alleen in de staplog.
+            {
+              echo "### ⏭️ Web NIET live gezet"
+              echo ""
+              echo "De release-artefacten (incl. de webbundel als download) zijn compleet,"
+              echo "maar \`ocideck.librekat.nl\` is **niet** automatisch bijgewerkt:"
+              echo "\`DEPLOY_SSH_KEY\`/\`DEPLOY_KNOWN_HOSTS\` ontbreken (bewust)."
+              echo ""
+              echo "Zet de webversie met de hand live: \`make deploy-web\` (zie docs/HOSTING.md)."
+            } >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Gereedschap installeren
@@ -204,8 +242,32 @@ jobs:
 
       - uses: ./.forgejo/actions/flutter
 
+      # Gedeelde cache-sleutels met de gates (zie de web-job): linux-gate draait
+      # op elke push naar main en vult deze onder main-scope, die een tag-build
+      # mag lezen — zo staat de dartcv-OpenCV-compile hier warm. `continue-on-error`
+      # → mist de cache, dan bouwt het gewoon opnieuw, als vanouds.
+      - name: Pub-pakketten uit de cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: ~/.pub-cache
+          key: pub-linux-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            pub-linux-
+
       - name: Afhankelijkheden ophalen
         run: flutter pub get
+
+      - name: dartcv4 native OpenCV-build uit de cache
+        continue-on-error: true
+        uses: actions/cache@v4
+        with:
+          path: |
+            .dart_tool/hooks_runner
+            build/native_assets
+          key: dartcv-linux-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            dartcv-linux-
 
       - name: Linux-release bouwen
         run: make build-linux

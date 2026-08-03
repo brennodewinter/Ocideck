@@ -933,7 +933,13 @@ build-all:
 # The same script runs in the release workflow, so a hand deploy and a tag
 # deploy are the same sequence — see scripts/deploy_web.sh for why the order
 # (verify → unpack beside → atomic swap → verify live → drop backup) matters.
-deploy-web:
+# Depends on build-web so `make deploy-web` always ships a freshly built,
+# hardening-verified bundle. Without it the target deployed whatever happened to
+# be in build/web/ — and after a `flutter clean` (as before a release build)
+# that directory is gone, so deploy_web.sh died with "Geen build/web/index.html".
+# The CI deploy path does not use this target: its job unpacks the already-built
+# web artifact and calls scripts/deploy_web.sh directly.
+deploy-web: build-web
 	@echo "== OciDeck deploy: hardened web bundle =="
 	@echo "Command: scripts/deploy_web.sh"
 	@echo "Covers: bundle verification, upload, atomic swap, live verification."
