@@ -131,49 +131,64 @@ class _WelcomeScreen extends ConsumerWidget {
           ],
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Semantics(
-            label: l10n.d('OciDeck'),
-            image: true,
-            // No plate behind the mark. The dark logo asset is an alpha mask
-            // (transparent ground, ink = coverage), so `srcIn` paints just the
-            // mark in [logoInk] and it reads directly on the gradient in either
-            // theme instead of sitting in a white card.
-            child: SizedBox(
-              width: 170,
-              height: 170,
-              child: ColorFiltered(
-                colorFilter: ColorFilter.mode(logoInk, BlendMode.srcIn),
-                child: Image.asset(
-                  BrandLogo.ociDeck.darkAsset,
-                  fit: BoxFit.contain,
-                  filterQuality: FilterQuality.high,
-                ),
+      // Bij 200% interface-tekst (WCAG-plafond) groeien de kop en de Markdown-
+      // belofte tot voorbij de paneelhoogte. De Column met [Spacer] mag dan niet
+      // overlopen — die regressie glipte via #1146 ongetoetst op main (RenderFlex
+      // +266px bij 200% tekst). Scroll-wanneer-het-niet-past, met behoud van de
+      // "logo boven, welkomtekst + versie onder"-verdeling zolang het wél past
+      // (minHeight = paneelhoogte + IntrinsicHeight laten de [Spacer] werken).
+      child: LayoutBuilder(
+        builder: (context, constraints) => SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: IntrinsicHeight(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Semantics(
+                    label: l10n.d('OciDeck'),
+                    image: true,
+                    // No plate behind the mark. The dark logo asset is an alpha mask
+                    // (transparent ground, ink = coverage), so `srcIn` paints just the
+                    // mark in [logoInk] and it reads directly on the gradient in either
+                    // theme instead of sitting in a white card.
+                    child: SizedBox(
+                      width: 170,
+                      height: 170,
+                      child: ColorFiltered(
+                        colorFilter: ColorFilter.mode(logoInk, BlendMode.srcIn),
+                        child: Image.asset(
+                          BrandLogo.ociDeck.darkAsset,
+                          fit: BoxFit.contain,
+                          filterQuality: FilterQuality.high,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    l10n.d('Welkom bij OciDeck'),
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    l10n.d(
+                      'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.',
+                    ),
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      height: 1.45,
+                    ),
+                  ),
+                  const SizedBox(height: 18),
+                  _VersionTag(palette: AppPalette.of(theme)),
+                ],
               ),
             ),
           ),
-          const Spacer(),
-          Text(
-            l10n.d('Welkom bij OciDeck'),
-            style: theme.textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            l10n.d(
-              'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.',
-            ),
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-              height: 1.45,
-            ),
-          ),
-          const SizedBox(height: 18),
-          _VersionTag(palette: AppPalette.of(theme)),
-        ],
+        ),
       ),
     );
   }
