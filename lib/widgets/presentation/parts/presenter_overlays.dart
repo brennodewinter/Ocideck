@@ -571,6 +571,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                         widget.themeProfile,
                         widget.themeProfile.fontFamily,
                       ),
+                      splitRunPosition: splitRunPositionFor(widget.slides, i),
                       improvementY01: widget.improvementY01,
                     ),
                   ),

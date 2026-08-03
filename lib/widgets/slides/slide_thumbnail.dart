@@ -156,6 +156,10 @@ class SlideThumbnail extends ConsumerWidget {
   /// matches the main preview (see [SlidePreviewWidget.fitScaleOverride]).
   final double? fitScaleOverride;
 
+  /// Position within a split run for the "(page/total)" title counter, so the
+  /// rail matches the main preview (see [SlidePreviewWidget.splitRunPosition]).
+  final ({int page, int total})? splitRunPosition;
+
   /// First number a continued numbered list shows here, so the rail matches the
   /// main preview and the presentation (see [SlidePreviewWidget.numberStart]).
   final int numberStart;
@@ -186,6 +190,7 @@ class SlideThumbnail extends ConsumerWidget {
     this.tlp = TlpLevel.none,
     this.organization = '',
     this.fitScaleOverride,
+    this.splitRunPosition,
     this.numberStart = 1,
     this.scopeCia = const {},
     this.reportLanguage = '',
@@ -460,6 +465,7 @@ class SlideThumbnail extends ConsumerWidget {
                     scopeCia: scopeCia,
                     reportLanguage: reportLanguage,
                     fitScaleOverride: fitScaleOverride,
+                    splitRunPosition: splitRunPosition,
                     tlp: tlp,
                     organization: organization,
                     showClassificationWatermark: showWatermark,

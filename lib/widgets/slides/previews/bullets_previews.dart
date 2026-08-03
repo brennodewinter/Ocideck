@@ -83,6 +83,10 @@ class _BulletsPreview extends StatelessWidget {
   /// Shared font scale for a split run (see [SlidePreviewWidget.fitScaleOverride]).
   final double? fitScaleOverride;
 
+  /// Position within a split run for the "(page/total)" title counter
+  /// (see [SlidePreviewWidget.splitRunPosition]).
+  final ({int page, int total})? splitRunPosition;
+
   const _BulletsPreview({
     required this.slide,
     required this.w,
@@ -92,6 +96,7 @@ class _BulletsPreview extends StatelessWidget {
     this.richTextPage = 0,
     this.numberStart = 1,
     this.fitScaleOverride,
+    this.splitRunPosition,
   });
 
   @override
@@ -201,7 +206,7 @@ class _BulletsPreview extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (hasTitle)
-          _md(
+          _titleWithSplitCounter(
             context,
             slide.title,
             _applyFont(
@@ -213,6 +218,7 @@ class _BulletsPreview extends StatelessWidget {
               ),
             ),
             linkColor: AppTheme.parseHexColor(profile.accentColor),
+            position: splitRunPosition,
           ),
         if (hasSubtitle) ...[
           SizedBox(height: spacing * resolvedScale * 0.4),
@@ -430,12 +436,17 @@ class _TwoBulletsPreview extends StatelessWidget {
   /// Shared font scale for a split run (see [SlidePreviewWidget.fitScaleOverride]).
   final double? fitScaleOverride;
 
+  /// Position within a split run for the "(page/total)" title counter
+  /// (see [SlidePreviewWidget.splitRunPosition]).
+  final ({int page, int total})? splitRunPosition;
+
   const _TwoBulletsPreview({
     required this.slide,
     required this.w,
     required this.font,
     required this.profile,
     this.fitScaleOverride,
+    this.splitRunPosition,
   });
 
   /// One bullet column with an optional heading above it. When any column has a
@@ -578,7 +589,7 @@ class _TwoBulletsPreview extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (hasTitle)
-          _md(
+          _titleWithSplitCounter(
             context,
             slide.title,
             _applyFont(
@@ -590,6 +601,7 @@ class _TwoBulletsPreview extends StatelessWidget {
               ),
             ),
             linkColor: AppTheme.parseHexColor(profile.accentColor),
+            position: splitRunPosition,
           ),
         if (hasTitle) SizedBox(height: spacing),
         if (slide.listStyle == ListStyle.checklist &&

@@ -17,6 +17,10 @@ class _BulletsImagePreview extends StatelessWidget {
   /// Shared font scale for a split run (see [SlidePreviewWidget.fitScaleOverride]).
   final double? fitScaleOverride;
 
+  /// Position within a split run for the "(page/total)" title counter
+  /// (see [SlidePreviewWidget.splitRunPosition]).
+  final ({int page, int total})? splitRunPosition;
+
   const _BulletsImagePreview({
     required this.slide,
     required this.w,
@@ -26,6 +30,7 @@ class _BulletsImagePreview extends StatelessWidget {
     this.richTextPage = 0,
     this.numberStart = 1,
     this.fitScaleOverride,
+    this.splitRunPosition,
   });
 
   @override
@@ -331,7 +336,7 @@ class _BulletsImagePreview extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (hasTitle)
-            _md(
+            _titleWithSplitCounter(
               context,
               slide.title,
               _applyFont(
@@ -343,6 +348,7 @@ class _BulletsImagePreview extends StatelessWidget {
                 ),
               ),
               linkColor: AppTheme.parseHexColor(profile.accentColor),
+              position: splitRunPosition,
             ),
           if (hasTitle && bullets.isNotEmpty) SizedBox(height: spacing * scale),
           if (slide.listStyle == ListStyle.checklist &&

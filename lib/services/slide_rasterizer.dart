@@ -245,6 +245,7 @@ class SlideRasterizer {
             themeProfile,
             themeProfile.fontFamily,
           ),
+          splitRunPosition: splitRunPositionFor(slides, i),
         );
         if (!context.mounted) break;
 
@@ -475,6 +476,7 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
   late int _slideNumber;
   int _numberStart = 1;
   double? _fitScaleOverride;
+  ({int page, int total})? _splitRunPosition;
 
   @override
   void initState() {
@@ -488,11 +490,13 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
     int slideNumber, {
     int numberStart = 1,
     double? fitScaleOverride,
+    ({int page, int total})? splitRunPosition,
   }) {
     if (_slide.id == slide.id &&
         _slideNumber == slideNumber &&
         _numberStart == numberStart &&
-        _fitScaleOverride == fitScaleOverride) {
+        _fitScaleOverride == fitScaleOverride &&
+        _splitRunPosition == splitRunPosition) {
       return;
     }
     setState(() {
@@ -500,6 +504,7 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
       _slideNumber = slideNumber;
       _numberStart = numberStart;
       _fitScaleOverride = fitScaleOverride;
+      _splitRunPosition = splitRunPosition;
     });
   }
 
@@ -523,6 +528,7 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           slideCount: widget.slideCount,
           numberStart: _numberStart,
           fitScaleOverride: _fitScaleOverride,
+          splitRunPosition: _splitRunPosition,
           deckSignature: widget.signature,
           sealedAt: widget.sealedAt,
           tlp: widget.tlp,

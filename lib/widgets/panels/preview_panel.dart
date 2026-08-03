@@ -455,6 +455,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                     deck.themeProfile,
                     deck.themeProfile.fontFamily,
                   ),
+                  splitRunPosition: splitRunPositionFor(deck.slides, idx),
                   richTextPage: richTextPage,
                   showRichTextPageControls: hasRichTextPages,
                   onRichTextPageChanged: hasRichTextPages
