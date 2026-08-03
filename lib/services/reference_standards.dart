@@ -55,6 +55,16 @@ const referenceStandards = <ReferenceStandard>[
     // Geen releases, geen tags — alleen een doorlopende branch.
     probe: UpstreamProbe.githubCommitDate,
     probeTarget: 'OWASP/maswe',
+    // Adviserend: upstream heeft de lijst medio 2026 grondig hérbouwd (van 117
+    // naar 78 zwakheden, `status`/`description`-frontmatter weg, id's boven 0078
+    // alleen nog als beta-mapping). Onze snapshot 2026-06-12 is intern
+    // consistent met de gebundelde MASTG v2.0.0, die naar id's boven 0078
+    // verwijst; blind meelopen zou die kruiskoppeling breken en alle
+    // omschrijvingen verliezen. De overstap naar het nieuwe formaat is een
+    // inhoudelijke migratie (generator + MASTG-herijking), geen bouwblokkade —
+    // net als de ISO-normen hieronder. Gevolgd in #1156; daarna kan `advisory`
+    // weg.
+    advisory: true,
   ),
   ReferenceStandard(
     id: 'cwe',
