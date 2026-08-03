@@ -1817,6 +1817,12 @@ const _dutchSourceAddId = <String, String>{
   'XMPP-verbinding testen': 'Uji koneksi XMPP',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Periksa apakah OciDeck dapat menjangkau server XMPP dan masuk dengan akun Anda. Tidak ada yang disimpan.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Tandai semua jawaban yang benar. Saat presentasi, semua jawaban ditampilkan dalam urutan acak.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Tandai jawaban yang benar. Saat presentasi, satu jawaban benar ditampilkan bersama pilihan acak jawaban yang salah.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Pertanyaan tidak dapat dimainkan: {aantal} jawaban, sedangkan jenis pertanyaan ini mengizinkan maksimal {maximum}.',
   'Actueel': 'Saat ini',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Mode sumber melindungi pemformatan yang belum didukung oleh editor visual tanpa kehilangan.',

@@ -1840,6 +1840,12 @@ const _dutchSourceAddBg = <String, String>{
   'XMPP-verbinding testen': 'Тест на XMPP връзка',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Проверете дали OciDeck може да достигне до XMPP сървър и да влезе с вашия акаунт. Нищо не се съхранява.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Отбележете всички верни отговори. При представяне всички отговори се показват в случаен ред.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Отбележете верните отговори. При представяне се показва един верен отговор с произволна извадка от грешните отговори.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Въпросът не може да се играе: {aantal} отговора, докато този тип въпрос допуска най-много {maximum}.',
   'Actueel': 'Текущ',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Режимът на източника защитава форматирането, което визуалният редактор все още не поддържа без загуби.',

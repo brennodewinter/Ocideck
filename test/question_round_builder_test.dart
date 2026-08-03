@@ -72,6 +72,31 @@ void main() {
       expect(view.answerable, isTrue);
     });
 
+    test('trekt uit twintig antwoorden per ronde precies vier opties', () {
+      final spec = QuestionSpec.parse(multipleChoiceBeerQuestionBlock(20));
+
+      for (var seed = 0; seed < 20; seed++) {
+        final view = QuestionRoundBuilder(
+          random: math.Random(seed),
+        ).draw(spec, trueLabel: 'Juist', falseLabel: 'Onjuist');
+        expect(view.options, hasLength(spec.optionCount), reason: 'seed $seed');
+        expect(view.correctIndices, hasLength(1), reason: 'seed $seed');
+        expect(
+          multipleChoiceNonBeers,
+          contains(view.options[view.correctIndices.single]),
+          reason: 'seed $seed',
+        );
+        expect(
+          view.options.where(
+            (option) => multipleChoiceNonBeers.contains(option),
+          ),
+          hasLength(1),
+          reason: 'seed $seed',
+        );
+        expect(view.answerable, isTrue, reason: 'seed $seed');
+      }
+    });
+
     test('zonder een fout antwoord is de vraag niet te presenteren', () {
       final view = draw(
         const QuestionSpec(

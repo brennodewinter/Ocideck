@@ -1823,6 +1823,12 @@ const _dutchSourceAddSk = <String, String>{
   'XMPP-verbinding testen': 'Otestovať pripojenie XMPP',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Skontrolujte, či sa OciDeck dokáže pripojiť k serveru XMPP a prihlásiť sa pomocou vášho účtu. Nič sa neukladá.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Označte všetky správne odpovede. Počas prezentácie sa všetky odpovede zobrazia v náhodnom poradí.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Označte správne odpovede. Počas prezentácie sa zobrazí jedna správna odpoveď s náhodným výberom nesprávnych odpovedí.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Otázku nie je možné hrať: {aantal} odpovedí, zatiaľ čo tento typ otázky povoľuje najviac {maximum}.',
   'Actueel': 'Aktuálne',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Zdrojový režim bezstratovo chráni formátovanie, ktoré vizuálny editor zatiaľ nepodporuje.',

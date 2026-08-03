@@ -15,3 +15,31 @@ String questionBlockWithAnswers(int count) =>
           {'text': 'Antwoord $i', 'correct': i.isEven},
       ],
     });
+
+const multipleChoiceNonBeers = [
+  'Karnemelk',
+  'Appelsap',
+  'Koffie',
+  'Thee',
+  'Water',
+];
+
+/// A realistic multiple-choice bank: five non-beers and many plausible beers.
+///
+/// The generated tail lets boundary and resource-limit tests reuse the same
+/// user-facing example without committing a large opaque fixture.
+String multipleChoiceBeerQuestionBlock(int count, {int optionCount = 4}) =>
+    const JsonEncoder.withIndent('  ').convert({
+      'kind': 'multipleChoice',
+      'prompt': 'Wat is geen bier?',
+      'optionCount': optionCount,
+      'answers': [
+        for (var i = 0; i < count; i++)
+          {
+            'text': i < multipleChoiceNonBeers.length
+                ? multipleChoiceNonBeers[i]
+                : 'Bier ${i - multipleChoiceNonBeers.length + 1}',
+            'correct': i < multipleChoiceNonBeers.length,
+          },
+      ],
+    });

@@ -1789,6 +1789,12 @@ const _dutchSourceAddTlh = <String, String>{
   'XMPP-verbinding testen': 'XMPP rar yIwaH',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'XMPP server SamlaH\'a\' OciDeck \'ej accountlIj lo\'taHvIS \'el\'a\'? yInuD. pagh pollu\'.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'QIjlaHbogh jangmey Hoch wIghItlh. ghojmoHtaHvIS, tlham Hoch jangmey \'ej mI\' pImHa\'lu\'boghDaq cha\'lu\'.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'QIjlaHbogh jangmey yIghItlh. ghojmoHtaHvIS, wa\' QIjlaHbogh jang \'ej jangmey lughbe\'bogh pImHa\'lu\'bogh puS je cha\'lu\'.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Qu\' Qapbe\': {aantal} jangmey, \'ach Qu\' botlhvamvaD {maximum} jangmey neH chaw\'lu\'.',
   'Actueel': 'DaH Qap',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Hal Segh pat vIlo\'taHvIS, ghItlh Segh\'e\' polmeH mIw Qan.',

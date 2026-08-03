@@ -209,6 +209,31 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('a twenty-answer bank presents only the four drawn options', (
+    tester,
+  ) async {
+    final spec = QuestionSpec.parse(multipleChoiceBeerQuestionBlock(20));
+
+    await tester.pumpWidget(_host([_question(spec), after]));
+    await tester.pump();
+
+    expect(
+      find.byKey(const Key('invalid-question-answer-count')),
+      findsNothing,
+    );
+    expect(find.text('Wat is geen bier?'), findsOneWidget);
+    final shown = [
+      for (final answer in spec.answers)
+        if (find.text(answer.text).evaluate().isNotEmpty) answer.text,
+    ];
+    expect(shown, hasLength(4));
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.pump();
+    expect(find.text('Daarna'), findsNothing);
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('an oversized question reports invalid and never blocks', (
     tester,
   ) async {

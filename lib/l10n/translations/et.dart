@@ -1807,6 +1807,12 @@ const _dutchSourceAddEt = <String, String>{
   'XMPP-verbinding testen': 'Testi XMPP-ühendust',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Kontrollige, kas OciDeck jõuab XMPP-serverini ja saab teie kontoga sisse logida. Midagi ei salvestata.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Märgi kõik õiged vastused. Esitamisel kuvatakse kõik vastused juhuslikus järjekorras.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Märgi õiged vastused. Esitamisel kuvatakse üks õige vastus koos juhusliku valikuga valedest vastustest.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Küsimust ei saa mängida: {aantal} vastust, samas kui seda tüüpi küsimus lubab kuni {maximum}.',
   'Actueel': 'Praegune',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Allikarežiim kaitseb kadudeta vormindamist, mida visuaalne redaktor veel ei toeta.',

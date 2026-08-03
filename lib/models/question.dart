@@ -4,8 +4,13 @@ import '../utils/log.dart';
 
 /// Limits keep a question slide sane and the random pick meaningful.
 const int questionMinOptionCount = 2;
-const int questionMaxAnswerCount = 8;
-const int questionMaxOptionCount = questionMaxAnswerCount;
+const int questionMaxOptionCount = 8;
+
+/// Maximum size of an authored answer bank for question kinds that only draw a
+/// subset for one presentation round. This is deliberately separate from
+/// [questionMaxOptionCount]: a larger bank is useful precisely because each
+/// round can draw a different, still small set of options.
+const int questionMaxAnswerPoolCount = 32;
 const int questionDefaultOptionCount = 4;
 const int questionMaxTimeLimitSeconds = 3600;
 
@@ -44,6 +49,20 @@ enum QuestionKind {
   openText,
 }
 
+/// How many authored answer records are safe and meaningful for [kind].
+///
+/// Multiple-correct shows every answer, so its record limit remains the visible
+/// option limit. The other answer-backed kinds either draw a bounded subset or
+/// keep the bank off-screen and may therefore use the larger bounded pool.
+int questionAnswerCountLimit(QuestionKind kind) => switch (kind) {
+  QuestionKind.multipleCorrect ||
+  QuestionKind.trueFalse => questionMaxOptionCount,
+  QuestionKind.multipleChoice ||
+  QuestionKind.ordering ||
+  QuestionKind.imagePair ||
+  QuestionKind.openText => questionMaxAnswerPoolCount,
+};
+
 QuestionKind _kindFromName(String? name) => QuestionKind.values.firstWhere(
   (k) => k.name == name,
   orElse: () => QuestionKind.multipleChoice,
@@ -59,9 +78,9 @@ enum QuestionOnWrong { retry, lockAndContinue }
 QuestionOnWrong _onWrongFromName(String? name) => QuestionOnWrong.values
     .firstWhere((v) => v.name == name, orElse: () => QuestionOnWrong.retry);
 
-/// A single possible answer in the pool. A question may hold at most
-/// [questionMaxAnswerCount] records; the presentation draws a subset where the
-/// selected question kind calls for one.
+/// A single possible answer in the pool. The presentation draws a subset where
+/// the selected question kind calls for one; [questionAnswerCountLimit] bounds
+/// the authored bank before model objects or widgets are built.
 class QuestionAnswer {
   final String text;
   final bool correct;
@@ -167,11 +186,12 @@ class QuestionSpec {
     try {
       final data = jsonDecode(raw.trim());
       if (data is! Map) return QuestionSpec.defaultMultipleChoice();
+      final kind = _kindFromName(data['kind']?.toString());
       final rawAnswers = data['answers'];
       final answerItems = rawAnswers is List ? rawAnswers : const <dynamic>[];
-      final oversized = answerItems.length > questionMaxAnswerCount;
+      final oversized = answerItems.length > questionAnswerCountLimit(kind);
       return QuestionSpec._parsed(
-        kind: _kindFromName(data['kind']?.toString()),
+        kind: kind,
         prompt: (data['prompt'] ?? '').toString(),
         answers: oversized
             ? const []
@@ -242,7 +262,8 @@ class QuestionSpec {
   }
 
   int get sourceAnswerCount => _parsedAnswerCount ?? answers.length;
-  bool get hasValidAnswerCount => sourceAnswerCount <= questionMaxAnswerCount;
+  int get answerCountLimit => questionAnswerCountLimit(kind);
+  bool get hasValidAnswerCount => sourceAnswerCount <= answerCountLimit;
 
   /// Whether an answer counts as filled in. Normally that means it has text;
   /// bij een beeldvraag ís de afbeelding het antwoord en is de tekst hooguit

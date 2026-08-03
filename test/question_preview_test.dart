@@ -53,6 +53,28 @@ void main() {
     expect(find.textContaining('Antwoordoptie nummer 8'), findsOneWidget);
   });
 
+  testWidgets('maximum multiple-choice bank stays valid in author preview', (
+    tester,
+  ) async {
+    final source = multipleChoiceBeerQuestionBlock(32);
+    final expectedLastAnswer = QuestionSpec.parse(source).answers.last.text;
+    final slide = Slide(
+      id: 'max-bank',
+      type: SlideType.question,
+      customMarkdown: source,
+    );
+
+    await _pump(tester, slide);
+
+    expect(
+      find.byKey(const Key('invalid-question-answer-count')),
+      findsNothing,
+    );
+    expect(find.text('Karnemelk'), findsOneWidget);
+    expect(find.text(expectedLastAnswer), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('10,000 answers show one invalid-question notice, not options', (
     tester,
   ) async {
@@ -70,6 +92,7 @@ void main() {
     );
     expect(find.text('Ongeldige vraag'), findsOneWidget);
     expect(find.textContaining('Maximaal aantal items: 8'), findsOneWidget);
+    expect(find.textContaining('Antwoorden: 10000'), findsOneWidget);
     expect(find.textContaining('Antwoord 9999'), findsNothing);
     expect(tester.takeException(), isNull);
   });

@@ -2793,6 +2793,12 @@ const _dutchSourceAddTr = <String, String>{
   'XMPP-verbinding testen': 'XMPP bağlantısını test et',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'OciDeck\'in bir XMPP sunucusuna ulaşıp ulaşamadığını ve hesabınızla oturum açıp açamadığını kontrol edin. Hiçbir şey saklanmaz.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Tüm doğru cevapları işaretleyin. Sunum sırasında tüm cevaplar rastgele sırayla gösterilir.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Doğru cevapları işaretleyin. Sunum sırasında bir doğru cevap, yanlış cevaplardan rastgele seçilmiş bir grupla gösterilir.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Soru oynatılamaz: {aantal} cevap var, oysa bu soru türü en fazla {maximum} cevaba izin verir.',
   'Actueel': 'Mevcut',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Kaynak modu, görsel düzenleyicinin henüz desteklemediği biçimlendirmeyi kayıpsız bir şekilde korur.',

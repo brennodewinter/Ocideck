@@ -388,6 +388,13 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
           '(${issue.args['left']} ${l10n.d('tegenover')} '
           '${issue.args['right']} ${l10n.d('bullets')}). '
           '${l10n.d('Verdeel of splits de inhoud.')}',
+    SlideQualityIssueKind.questionAnswerCountHigh =>
+      l10n
+          .d(
+            'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.',
+          )
+          .replaceAll('{aantal}', issue.args['count'] ?? '')
+          .replaceAll('{maximum}', issue.args['maximum'] ?? ''),
     SlideQualityIssueKind.missingMediaFile =>
       '${label('label')}${l10n.d(': bestand niet gevonden (')}'
           '${issue.args['path'] ?? ''}).',

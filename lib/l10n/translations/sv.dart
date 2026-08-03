@@ -1816,6 +1816,12 @@ const _dutchSourceAddSv = <String, String>{
   'XMPP-verbinding testen': 'Testa XMPP-anslutning',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Kontrollera om OciDeck kan nå en XMPP-server och logga in med ditt konto. Ingenting sparas.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Markera alla rätta svar. Vid presentationen visas alla svar i slumpmässig ordning.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Markera de rätta svaren. Vid presentationen visas ett rätt svar tillsammans med ett slumpmässigt urval av felaktiga svar.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Frågan kan inte spelas: {aantal} svar, medan denna frågetyp tillåter högst {maximum}.',
   'Actueel': 'Aktuell',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Källläge skyddar formatering som den visuella redigeraren ännu inte stöder förlustfritt.',

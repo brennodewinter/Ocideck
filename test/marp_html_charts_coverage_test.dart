@@ -863,9 +863,20 @@ void main() {
 
         expect(out, contains('Ongeldige vraag'));
         expect(out, contains('Maximaal aantal items: 8'));
+        expect(out, contains('Antwoorden: 9'));
         expect(out, isNot(contains('<li>')));
         expect(out, isNot(contains('Antwoord 8')));
       },
     );
+
+    test('a twenty-answer multiple-choice bank remains exportable', () {
+      final out = MarpHtmlService.renderQuestionBlocks(
+        '```question\n${multipleChoiceBeerQuestionBlock(20)}\n```',
+      );
+
+      expect(out, isNot(contains('Ongeldige vraag')));
+      expect(out, contains('Wat is geen bier?'));
+      expect('<li>'.allMatches(out), hasLength(20));
+    });
   });
 }

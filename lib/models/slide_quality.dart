@@ -40,6 +40,7 @@ enum SlideQualityIssueKind {
   bulletMultiSentence,
   bulletNestingDeep,
   bulletColumnImbalance,
+  questionAnswerCountHigh,
   questionNotAnswerable,
   emptySlide,
 

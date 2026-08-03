@@ -29,11 +29,15 @@ class _InvalidQuestionAnswerCountNotice extends StatelessWidget {
   final double width;
   final String font;
   final ThemeProfile profile;
+  final int actualCount;
+  final int limit;
 
   const _InvalidQuestionAnswerCountNotice({
     required this.width,
     required this.font,
     required this.profile,
+    required this.actualCount,
+    required this.limit,
   });
 
   @override
@@ -49,7 +53,7 @@ class _InvalidQuestionAnswerCountNotice extends StatelessWidget {
         label:
             '${l10n.d('Ongeldige vraag')}. '
             '${l10n.d('Maximaal aantal items')}: '
-            '$questionMaxAnswerCount. ${l10n.d('Antwoorden')}.',
+            '$limit. ${l10n.d('Antwoorden')}: $actualCount.',
         child: Container(
           key: const Key('invalid-question-answer-count'),
           padding: EdgeInsets.symmetric(
@@ -86,7 +90,7 @@ class _InvalidQuestionAnswerCountNotice extends StatelessWidget {
               SizedBox(height: width * 0.008),
               Text(
                 '${l10n.d('Maximaal aantal items')}: '
-                '$questionMaxAnswerCount · ${l10n.d('Antwoorden')}',
+                '$limit · ${l10n.d('Antwoorden')}: $actualCount',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: font,
@@ -106,10 +110,13 @@ Widget _invalidQuestionAnswerCountNotice(
   double width,
   String font,
   ThemeProfile profile,
+  QuestionSpec spec,
 ) => _InvalidQuestionAnswerCountNotice(
   width: width,
   font: font,
   profile: profile,
+  actualCount: spec.sourceAnswerCount,
+  limit: spec.answerCountLimit,
 );
 
 bool _questionIsInteractive(
@@ -163,7 +170,7 @@ class _QuestionPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final spec = QuestionSpec.parse(slide.customMarkdown);
     if (!spec.hasValidAnswerCount) {
-      return _invalidQuestionAnswerCountNotice(w, font, profile);
+      return _invalidQuestionAnswerCountNotice(w, font, profile, spec);
     }
     final hasImage = slide.imagePath.isNotEmpty;
     final pad = w * 0.06;

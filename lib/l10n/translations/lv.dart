@@ -1816,6 +1816,12 @@ const _dutchSourceAddLv = <String, String>{
   'XMPP-verbinding testen': 'Pārbaudīt XMPP savienojumu',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Pārbaudiet, vai OciDeck var sasniegt XMPP serveri un pieteikties ar jūsu kontu. Nekas netiek saglabāts.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Atzīmējiet visas pareizās atbildes. Prezentējot visas atbildes tiek rādītas nejaušā secībā.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Atzīmējiet pareizās atbildes. Prezentējot tiek rādīta viena pareizā atbilde ar nejaušu nepareizo atbilžu izlasi.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Jautājumu nevar spēlēt: {aantal} atbildes, kamēr šis jautājuma veids atļauj ne vairāk kā {maximum}.',
   'Actueel': 'Pašreizējais',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Avota režīms bez zudumiem aizsargā formatējumu, ko vizuālais redaktors vēl neatbalsta.',

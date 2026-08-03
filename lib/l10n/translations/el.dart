@@ -1847,6 +1847,12 @@ const _dutchSourceAddEl = <String, String>{
   'XMPP-verbinding testen': 'Δοκιμή σύνδεσης XMPP',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Ελέγξτε αν το OciDeck μπορεί να προσεγγίσει έναν διακομιστή XMPP και να συνδεθεί με τον λογαριασμό σας. Δεν αποθηκεύεται τίποτα.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Σημειώστε όλες τις σωστές απαντήσεις. Κατά την παρουσίαση, όλες οι απαντήσεις εμφανίζονται με τυχαία σειρά.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Σημειώστε τις σωστές απαντήσεις. Κατά την παρουσίαση, εμφανίζεται μία σωστή απάντηση μαζί με μια τυχαία επιλογή λανθασμένων απαντήσεων.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Η ερώτηση δεν μπορεί να παιχτεί: {aantal} απαντήσεις, ενώ αυτός ο τύπος ερώτησης επιτρέπει έως {maximum}.',
   'Actueel': 'Τρέχον',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Η λειτουργία πηγής προστατεύει τη μορφοποίηση που το οπτικό πρόγραμμα επεξεργασίας δεν υποστηρίζει ακόμη χωρίς απώλειες.',

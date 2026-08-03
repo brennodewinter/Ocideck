@@ -957,6 +957,12 @@ const _dutchSourceAddEn = {
   'XMPP-verbinding testen': 'Test XMPP connection',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Check whether OciDeck can reach an XMPP server and log in with your account. Nothing is stored.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Mark all correct answers. When presenting, all answers are shown in random order.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Mark the correct answers. When presenting, one correct answer is shown with a random selection of incorrect answers.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Question cannot be played: {aantal} answers, while this question type allows a maximum of {maximum}.',
   'Actueel': 'Current',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Source mode protects formatting that the visual editor does not yet support losslessly.',

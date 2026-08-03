@@ -468,7 +468,8 @@ class MarpHtmlService {
             '<p class="question-prompt">'
             '${l10n.d('Ongeldige vraag')} · '
             '${l10n.d('Maximaal aantal items')}: '
-            '$questionMaxAnswerCount · ${l10n.d('Antwoorden')}'
+            '${spec.answerCountLimit} · ${l10n.d('Antwoorden')}: '
+            '${spec.sourceAnswerCount}'
             '</p></div>\n';
       }
       final b = StringBuffer('\n<div class="question">');

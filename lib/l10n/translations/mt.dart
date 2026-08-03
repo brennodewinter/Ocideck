@@ -1839,6 +1839,12 @@ const _dutchSourceAddMt = <String, String>{
   'XMPP-verbinding testen': 'Ittestja l-konnessjoni XMPP',
   'Controleer of OciDeck een XMPP-server kan bereiken en met uw account kan inloggen. Er wordt niets bewaard.':
       'Iċċekkja jekk OciDeck jistax jilħaq server XMPP u jidħol bil-kont tiegħek. Ma jinħażen xejn.',
+  'Markeer alle juiste antwoorden. Bij presenteren worden alle antwoorden in willekeurige volgorde getoond.':
+      'Immarka t-tweġibiet korretti kollha. Waqt il-preżentazzjoni, it-tweġibiet kollha jintwerew f\'ordni każwali.',
+  'Markeer de goede antwoorden. Bij presenteren wordt één goed antwoord met een willekeurige greep uit de foute antwoorden getoond.':
+      'Immarka t-tweġibiet korretti. Waqt il-preżentazzjoni, tintwera tweġiba korretta waħda b\'għażla każwali ta\' tweġibiet żbaljati.',
+  'Vraag is niet speelbaar: {aantal} antwoorden, terwijl deze vraagsoort er maximaal {maximum} toestaat.':
+      'Il-mistoqsija ma tistax tintlagħab: {aantal} tweġibiet, filwaqt li dan it-tip ta\' mistoqsija jippermetti massimu ta\' {maximum}.',
   'Actueel': 'Kurrenti',
   'Bronmodus beschermt opmaak die de visuele editor nog niet verliesvrij ondersteunt.':
       'Il-mod tas-sors jipproteġi l-ifformattjar li l-editur viżwali għadu ma jappoġġjax mingħajr telf.',
