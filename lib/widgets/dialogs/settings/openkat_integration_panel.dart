@@ -199,44 +199,69 @@ class _DirectoryField extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final directory = ref.watch(openKatDirectoryProvider);
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            decoration: BoxDecoration(
-              color: AppTheme.slate50,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: AppTheme.iceBlue),
-            ),
-            child: Text(
-              directory ?? l10n.d('Geen map gekozen'),
-              style: TextStyle(
-                fontSize: 12,
-                color: directory == null
-                    ? AppTheme.slate500
-                    : AppTheme.slate800,
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
+    final pathBox = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppTheme.slate50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppTheme.iceBlue),
+      ),
+      child: Text(
+        directory ?? l10n.d('Geen map gekozen'),
+        style: TextStyle(
+          fontSize: 12,
+          color: directory == null ? AppTheme.slate500 : AppTheme.slate800,
         ),
-        const SizedBox(width: 8),
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+    // Een [Wrap] en geen [Row]: bij 200% interface-tekst passen de kiesknop en de
+    // wisknop samen niet meer op één smalle regel, dan valt de wisknop eronder in
+    // plaats van de rij te laten overlopen.
+    final actions = Wrap(
+      spacing: 4,
+      runSpacing: 4,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
         OutlinedButton.icon(
           onPressed: () => _pick(context, ref),
           icon: const Icon(Icons.folder_open_outlined, size: 16),
           label: Text(l10n.d('Map kiezen…')),
         ),
-        if (directory != null) ...[
-          const SizedBox(width: 4),
+        if (directory != null)
           IconButton(
             onPressed: () =>
                 ref.read(openKatProvider.notifier).setReportDirectory(null),
             icon: const Icon(Icons.close, size: 18),
             tooltip: l10n.d('Map wissen'),
           ),
-        ],
       ],
+    );
+    // De knoppen vallen ónder het padvak zodra de interface-tekst groot of de
+    // kolom smal wordt, in plaats van de rij te laten overlopen (dezelfde knik
+    // als `_settingFieldRow` in de venster-schil; dit paneel staat buiten die
+    // library en draagt hem daarom zelf).
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final scale = MediaQuery.textScalerOf(context).scale(1);
+        if (scale >= 1.5 || constraints.maxWidth < 360) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              pathBox,
+              const SizedBox(height: 8),
+              Align(alignment: Alignment.centerLeft, child: actions),
+            ],
+          );
+        }
+        return Row(
+          children: [
+            Expanded(child: pathBox),
+            const SizedBox(width: 8),
+            actions,
+          ],
+        );
+      },
     );
   }
 

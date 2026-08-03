@@ -81,20 +81,15 @@ final _surfaces = <_Surface>[
     },
     sizes: _fullViewportSizes,
   ),
-  // Het instellingen-dialoog — veel velden over acht tabbladen (in een
-  // IndexedStack, dus één render raakt ze allemaal), een klassieke overflow-
-  // kandidaat. Geopend vanuit de echte app-context, die [AppShell] heeft zodat
-  // de harness de tekstschaal langs dezelfde weg zet; het dialoog erft die
-  // schaal via de gedeelde MediaQuery.
+  // Het instellingen-dialoog op de dialoog-maten (binnen het bureaublad-
+  // minimum), een klassieke overflow-kandidaat. Let op: dit toetst alleen het
+  // actieve tabblad — de IndexedStack tékent de rest niet, en een overflow
+  // meldt zich pas bij het tekenen. Alle tabbladen los komen in de per-sectie-
+  // lus onderaan aan bod; deze entry bewaakt de dialoog-schil (zijbalk, kop,
+  // voet) over de vier hoeken van het werkgebied.
   (
     name: 'instellingen-dialoog',
-    pump: (tester) async {
-      SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
-      await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
-      await tester.pumpAndSettle();
-      unawaited(SettingsDialog.show(tester.element(find.byType(AppShell))));
-      await tester.pumpAndSettle();
-    },
+    pump: _pumpSettingsDialog,
     sizes: _dialogViewportSizes,
   ),
   // Het uitklap-tekstverwerker-dialoog voor een Markdown-veld. De kop draagt de
@@ -136,6 +131,59 @@ final _surfaces = <_Surface>[
   ),
 ];
 
+/// Smalle web-viewports voor het instellingen-dialoog. Op het web is er geen
+/// minimum vensterbreedte, dus de dialoogbreedte zakt naar zijn eigen vloer en
+/// de zijbalk klapt in; het bureaublad-minimum (1000x650) geeft een ruimere
+/// breedte, waardoor deze overflow alleen op het web bereikbaar is. Twee
+/// breedtes omdat ze verschillende standen raken: 400 zakt onder de
+/// zijbalk-inklapgrens, 440 zit er net boven. Deze worden in de per-sectie-lus
+/// gebruikt (niet als `_Surface`-entry), zodat élk tabblad los getoetst wordt.
+const _narrowSettingsViewports = <(String, Size)>[
+  ('smal-en-kort 400x600', Size(400, 600)),
+  ('smal 440x760', Size(440, 760)),
+];
+
+/// Opent het instellingen-dialoog vanuit de echte app-context, die [AppShell]
+/// heeft zodat de harness de tekstschaal langs dezelfde weg zet; het dialoog
+/// erft die schaal via de gedeelde MediaQuery.
+Future<void> _pumpSettingsDialog(WidgetTester tester) async {
+  await _openSettingsDialog(tester);
+}
+
+/// Idem, maar met een gekozen begin-tabblad. Nodig voor de per-sectie-toets
+/// hieronder: de [IndexedStack] in het dialoog tékent alleen het actieve
+/// tabblad, en een RenderFlex-overflow meldt zich pas bij het tekenen — een
+/// tabblad dat nooit actief is, glipt er ongezien langs. Door per sectie te
+/// openen wordt élk tabblad daadwerkelijk gerenderd en getoetst.
+Future<void> _openSettingsDialog(
+  WidgetTester tester, {
+  SettingsSection? section,
+}) async {
+  SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
+  await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+  await tester.pumpAndSettle();
+  unawaited(
+    SettingsDialog.show(
+      tester.element(find.byType(AppShell)),
+      initialSection: section ?? SettingsSection.general,
+    ),
+  );
+  await tester.pumpAndSettle();
+}
+
+/// Zet de tekstschaal langs de echte weg (de settings-provider die de app op
+/// MediaQuery toepast), niet via een losse MediaQuery-override, zodat de conditie
+/// exact overeenkomt met wat een gebruiker instelt.
+Future<void> _applyStressTextScale(WidgetTester tester) async {
+  final container = ProviderScope.containerOf(
+    tester.element(find.byType(AppShell)),
+  );
+  await container
+      .read(settingsProvider.notifier)
+      .setUiTextScale(_stressTextScale);
+  await tester.pumpAndSettle();
+}
+
 void main() {
   for (final surface in _surfaces) {
     for (final (sizeLabel, size) in surface.sizes) {
@@ -146,17 +194,7 @@ void main() {
           addTearDown(() => tester.binding.setSurfaceSize(null));
 
           await surface.pump(tester);
-
-          // De tekstschaal langs de echte weg zetten (de settings-provider die de
-          // app op MediaQuery toepast), niet via een losse MediaQuery-override,
-          // zodat de conditie exact overeenkomt met wat een gebruiker instelt.
-          final container = ProviderScope.containerOf(
-            tester.element(find.byType(AppShell)),
-          );
-          await container
-              .read(settingsProvider.notifier)
-              .setUiTextScale(_stressTextScale);
-          await tester.pumpAndSettle();
+          await _applyStressTextScale(tester);
 
           expect(
             tester.takeException(),
@@ -164,6 +202,41 @@ void main() {
             reason:
                 '${surface.name} loopt over op $sizeLabel bij '
                 '${(_stressTextScale * 100).round()}% interface-tekst',
+          );
+        },
+      );
+    }
+  }
+
+  // Elk instellingen-tabblad los, op de smalle web-viewports bij 200% tekst. Een
+  // gewone `_Surface`-entry toetst maar het actieve tabblad (de IndexedStack
+  // tekent de rest niet en een overflow meldt zich pas bij het tekenen); deze lus
+  // opent élke sectie apart zodat een overflow in gelijk welk tabblad de poort
+  // haalt. Zo staat de belofte "loopt niet over bij 200% tekst op smal web" voor
+  // het hele dialoog, niet alleen voor het tabblad dat toevallig bovenop lag.
+  for (final section in SettingsSection.values) {
+    for (final (sizeLabel, size) in _narrowSettingsViewports) {
+      testWidgets(
+        'instellingen-tabblad ${section.name} loopt niet over bij 200% tekst '
+        'op $sizeLabel',
+        (tester) async {
+          await tester.binding.setSurfaceSize(size);
+          addTearDown(() => tester.binding.setSurfaceSize(null));
+
+          await _openSettingsDialog(tester, section: section);
+          await _applyStressTextScale(tester);
+          // Nog een frame forceren: de overflow-indicator meldt zich bij het
+          // tekenen, niet bij de layout, dus het actieve tabblad moet echt
+          // geschilderd worden nadat de schaal gezet is.
+          tester.binding.scheduleFrame();
+          await tester.pumpAndSettle();
+
+          expect(
+            tester.takeException(),
+            isNull,
+            reason:
+                'instellingen-tabblad ${section.name} loopt over op $sizeLabel '
+                'bij ${(_stressTextScale * 100).round()}% interface-tekst',
           );
         },
       );

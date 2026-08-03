@@ -780,14 +780,37 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     // altijd binnen het scherm — een dialoog die groter is dan het scherm
     // ruilt het ene probleem voor het andere.
     final scale = MediaQuery.textScalerOf(context).scale(1).clamp(1.0, 1.5);
+    // Op een klein venster (web kent geen minimum vensterbreedte; desktop dwingt
+    // 1000x650 af) krimpt de buitenmarge, zodat het dialoog het scherm niet uit
+    // groeit. De comfort-ondergrens (640x560) geldt alleen zolang het scherm die
+    // ook biedt: `math.min(..., beschikbaar)` maakt de beschikbare ruimte de
+    // bovengrens. Een dialoog dat groter is dan het scherm ruilt afknijpen voor
+    // overlopen — precies wat op smal web misging, waar de 640-vloer de zijbalk
+    // en inhoud in een te krappe Row perste.
+    final tight = screen.width < 720 || screen.height < 620;
+    final dialogInset = tight
+        ? const EdgeInsets.symmetric(horizontal: 12, vertical: 12)
+        : const EdgeInsets.symmetric(horizontal: 40, vertical: 28);
+    final availableWidth = screen.width - dialogInset.horizontal;
+    final availableHeight = screen.height - dialogInset.vertical;
     final dialogWidth = math
-        .min(920.0 * scale, screen.width * 0.88)
-        .clamp(640.0, math.max(640.0, screen.width * 0.88))
+        .min(
+          math.max(640.0, math.min(920.0 * scale, screen.width * 0.88)),
+          availableWidth,
+        )
         .toDouble();
     final dialogHeight = math
-        .min(760.0 * scale, screen.height * 0.86)
-        .clamp(560.0, math.max(560.0, screen.height * 0.86))
+        .min(
+          math.max(560.0, math.min(760.0 * scale, screen.height * 0.86)),
+          availableHeight,
+        )
         .toDouble();
+    // De zijbalk heeft een vaste breedte die met de tekstschaal meegroeit (zie
+    // `_sidebarWidth`). Zodra het dialoog te smal wordt om die zijbalk én een
+    // bruikbare inhoudskolom naast elkaar te dragen, klapt de navigatie naar een
+    // keuzebalk bovenaan en krijgt de inhoud de volle breedte — anders knijpt de
+    // zijbalk de tabbladen tot een strook waarin elke rij overloopt.
+    final sidebarWidth = _sidebarWidth * scale.clamp(1.0, _sidebarMaxGrowth);
 
     // Eén ingang per tabblad, in de volgorde van de enum, zodat de IndexedStack
     // hieronder nooit uit de pas kan lopen met de zijbalk.
@@ -823,54 +846,57 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         child: Dialog(
           clipBehavior: Clip.antiAlias,
           backgroundColor: Colors.white,
-          insetPadding: const EdgeInsets.symmetric(
-            horizontal: 40,
-            vertical: 28,
-          ),
+          insetPadding: dialogInset,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
           ),
           child: SizedBox(
             width: dialogWidth,
             height: dialogHeight,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _sidebar(l10n),
-                Expanded(
-                  // Material (not ColoredBox) so ListTiles inside the tab bodies
-                  // paint their ink/selected state onto this surface instead of a
-                  // hidden ancestor behind an opaque box.
-                  child: Material(
-                    color: AppTheme.slate50,
-                    child: Column(
-                      children: [
-                        _contentHeader(_selectedTab.label(l10n)),
-                        Expanded(
-                          // De zoekresultaten leggen zich óver de actieve tab; de
-                          // IndexedStack blijft eronder staan zodat zijn GlobalKeys
-                          // (de sectie-ankers) in de boom blijven en een treffer er
-                          // meteen naartoe kan scrollen.
-                          child: Stack(
-                            children: [
-                              IndexedStack(
-                                index: _selectedTab.index,
-                                sizing: StackFit.expand,
-                                children: bodies,
+            // De rail/smal-keuze op de wérkelijke breedte, niet op
+            // MediaQuery: een Dialog knijpt zijn kind terug binnen het scherm,
+            // dus de gevraagde `dialogWidth` kan boven de echte ruimte liggen
+            // (en in widget-tests wijkt MediaQuery sowieso af van de
+            // surface-grootte). De LayoutBuilder leest wat er echt beschikbaar
+            // is, zodat de zijbalk precies dan inklapt wanneer hij niet past.
+            child: LayoutBuilder(
+              builder: (context, constraints) => _buildLayout(
+                this,
+                l10n,
+                useRailLayout:
+                    constraints.maxWidth >= sidebarWidth + _minContentWidth,
+                // Material (not ColoredBox) so ListTiles inside the tab bodies
+                // paint their ink/selected state onto this surface instead of a
+                // hidden ancestor behind an opaque box.
+                content: Material(
+                  color: AppTheme.slate50,
+                  child: Column(
+                    children: [
+                      _contentHeader(_selectedTab.label(l10n)),
+                      Expanded(
+                        // De zoekresultaten leggen zich óver de actieve tab; de
+                        // IndexedStack blijft eronder staan zodat zijn GlobalKeys
+                        // (de sectie-ankers) in de boom blijven en een treffer er
+                        // meteen naartoe kan scrollen.
+                        child: Stack(
+                          children: [
+                            IndexedStack(
+                              index: _selectedTab.index,
+                              sizing: StackFit.expand,
+                              children: bodies,
+                            ),
+                            if (_searchQuery.isNotEmpty)
+                              Positioned.fill(
+                                child: _settingsSearchResults(l10n),
                               ),
-                              if (_searchQuery.isNotEmpty)
-                                Positioned.fill(
-                                  child: _settingsSearchResults(l10n),
-                                ),
-                            ],
-                          ),
+                          ],
                         ),
-                        _footerBar(l10n),
-                      ],
-                    ),
+                      ),
+                      _footerBar(this, l10n),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ),

@@ -16,6 +16,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- **Het instellingenvenster liep niet meer over de rand bij grote interface-tekst
+  op een smal (web-)venster.** Op het web is er geen minimum vensterbreedte; bij
+  200% interface-tekst (WCAG 1.4.4) paste de vaste zijbalk daar niet meer naast de
+  inhoud, en losse velden met een keuzemenu liepen buiten beeld. Het venster past
+  zich nu aan de schermbreedte aan, de zijbalk klapt op smalle breedte in tot een
+  keuzebalk bovenaan zodat de inhoud de volle breedte krijgt, en velden met een
+  keuzemenu of segmentknop stapelen hun bediening onder het bijschrift in plaats
+  van over te lopen. Op desktop verandert er niets: het minimumvenster van
+  1000×650 haalt deze grens nooit. (volgt op #1149)
 - De **finding-headerdia** vulde in de dia-strook links en in de live-preview van
   de editor maar een fractie van de breedte zodra de bevinding te lang was voor
   één dia: de headerkaart en de meta werden samengedrukt in de linkerhelft,
