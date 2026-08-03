@@ -1778,6 +1778,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'Tai pristatymas, o ne Markdown failas. „OciDeck“ gali jį importuoti į naują deką.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'Tai pristatymas, o ne Markdown failas. Įjunkite modulį „Importuoti“, kad paverstumėte jį deku.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Silpnybių sąrašas (78): id, pavadinimas, MASVS kategorija, platforma, CWE nuoroda ir trumpas aprašymas. Be to, tiltas nuo senos beta numeracijos (iki 0119) iki kanoninių id, kad MASTG kryžminė nuoroda ir toliau atitiktų.',
   'Alle integraties': 'Visos integracijos',

@@ -1787,6 +1787,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'Haec praesentatio est, non tabella Markdown. OciDeck eam in novum deck importare potest.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'Haec praesentatio est, non tabella Markdown. Modulum Importare activa ut eam in deck convertas.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Index infirmitatum (78): id, titulus, categoria MASVS, suggestum, nexus CWE et brevis descriptio. Praeterea pons a vetere numeratione beta (usque ad 0119) ad id canonica, ut relatio transversa MASTG recta maneat.',
   'Alle integraties': 'Omnes integrationes',

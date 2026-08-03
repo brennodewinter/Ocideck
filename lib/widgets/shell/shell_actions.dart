@@ -14,7 +14,29 @@ void _reportOpenFailure(
   AppLocalizations l10n,
   OpenResult result, {
   OpenFailure? reason,
+  String? sourceName,
+  bool importModuleAvailable = false,
+  VoidCallback? onImport,
+  VoidCallback? onOpenSettings,
 }) {
+  // Koos de gebruiker via "Openen" eigenlijk een presentatie (.pptx/.odp/.key),
+  // dan liep de melding vroeger dood op "OciDeck opent Markdown". Import is dan
+  // de bedoeling: een melding mét uitweg, niet een doodlopende straat met tekst.
+  if (sourceName != null &&
+      (result == OpenResult.unreadable ||
+          result == OpenResult.notAPresentation)) {
+    final bar = presentationOpenRescueSnackBar(
+      l10n,
+      sourceName,
+      importModuleAvailable: importModuleAvailable,
+      onImport: onImport ?? () {},
+      onOpenSettings: onOpenSettings ?? () {},
+    );
+    if (bar != null) {
+      messenger.showSnackBar(bar);
+      return;
+    }
+  }
   final message = switch (result) {
     OpenResult.notAPresentation => l10n.d(
       'Dit is geen Marp/OciDeck-presentatie.',
@@ -134,12 +156,26 @@ Future<void> _openWithSearch(BuildContext context, WidgetRef ref) async {
       .openFileByPath(result.path, selectIndex: result.slideIndex);
   // A loose file browsed from disk that isn't a presentation (or is otherwise
   // unreadable) is refused — tell the user instead of doing nothing silently,
-  // en met de reden erbij als het openpad die kende.
+  // en met de reden erbij als het openpad die kende. Bleek het een PowerPoint/
+  // Impress/Keynote-bestand, dan biedt de melding meteen de importroute.
   _reportOpenFailure(
     messenger,
     l10n,
     openResult,
     reason: ref.read(openFailureProvider),
+    sourceName: result.path,
+    importModuleAvailable: ref.read(importModuleRevealProvider),
+    // Pad al bekend: importeer zonder de bestandskiezer opnieuw te openen.
+    onImport: () async {
+      final bytes = await File(result.path).readAsBytes();
+      if (!context.mounted) return;
+      await importPresentation(
+        context,
+        ref,
+        fileOverride: (bytes: bytes, name: p.basename(result.path)),
+      );
+    },
+    onOpenSettings: () => SettingsDialog.show(context),
   );
 }
 
@@ -157,11 +193,21 @@ Future<void> _openWithBytesPicker(BuildContext context, WidgetRef ref) async {
   final openResult = await ref
       .read(tabsProvider.notifier)
       .openDeckFromBytes(picked.bytes, picked.name);
+  // Op web zijn de bytes al binnen: een presentatie kan direct de import in,
+  // zonder de bestandskiezer opnieuw te openen.
   _reportOpenFailure(
     messenger,
     l10n,
     openResult,
     reason: ref.read(openFailureProvider),
+    sourceName: picked.name,
+    importModuleAvailable: ref.read(importModuleRevealProvider),
+    onImport: () => importPresentation(
+      context,
+      ref,
+      fileOverride: (bytes: picked.bytes, name: picked.name),
+    ),
+    onOpenSettings: () => SettingsDialog.show(context),
   );
 }
 

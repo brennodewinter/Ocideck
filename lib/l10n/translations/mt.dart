@@ -1793,6 +1793,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'Din hija preżentazzjoni, mhux fajl Markdown. OciDeck jista\' jimportaha f\'deck ġdid.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'Din hija preżentazzjoni, mhux fajl Markdown. Ixgħel il-modulu Importa biex tikkonvertiha f\'deck.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Il-lista tad-dgħufijiet (78): id, titlu, kategorija MASVS, pjattaforma, ir-rabta CWE u deskrizzjoni qasira. Flimkien ma\' pont mit-tqassim beta l-antik (sa 0119) għall-id kanoniċi, biex ir-referenza inkroċjata MASTG tibqa\' taqbel.',
   'Alle integraties': 'L-integrazzjonijiet kollha',

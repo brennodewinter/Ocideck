@@ -1762,6 +1762,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'See on esitlus, mitte Markdown-fail. OciDeck saab selle uude deki importida.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'See on esitlus, mitte Markdown-fail. Lülita moodul Impordi sisse, et see deckiks teisendada.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'Nõrkuste loend (78): id, pealkiri, MASVS-kategooria, platvorm, CWE-seos ja lühikirjeldus. Lisaks sild vanast beeta-numeratsioonist (kuni 0119) kanooniliste id-de juurde, et MASTG-ristviide jääks paika.',
   'Alle integraties': 'Kõik integratsioonid',

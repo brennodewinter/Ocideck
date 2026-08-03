@@ -730,6 +730,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'Esaki ta un presentashon, no un archivo Markdown. OciDeck por importá e den un deck nobo.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'Esaki ta un presentashon, no un archivo Markdown. Sende e módulo Importá pa konvertié den un deck.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       'E lista di debilidatnan (78): id, título, kategoria MASVS, plataforma, e konekshon CWE i un deskripshon kòrtiku. Plus un puente for di e numerashon beta bieu (te na 0119) pa e id kanónikonan, pa e referensia krusá MASTG keda korekto.',
   'Alle integraties': 'Tur integrashon',

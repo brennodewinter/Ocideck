@@ -2202,6 +2202,17 @@ its own integration, described above.)* Unlike the OpenKAT import it reads the
 bytes of the file you picked rather than a folder on disk, so this one exists in
 the browser version too.
 
+**If you reach for "Openen…" instead, OciDeck points you the right way.**
+*(Added 2026-08-03, #1175.)* "Openen…" is for Markdown and `.ocideck` files, so
+picking a `.pptx`/`.odp`/`.key` there used to dead-end on "this file is not
+readable text — OciDeck opens Markdown", with no hint that an import even exists.
+Now that message recognises the presentation and offers a way out: with the
+**Importeren** module on, the notice carries an **Importeren** button that starts
+the conversion on the file you just picked — no need to find the menu item or
+choose the file again. With the module still off, it names what you chose and
+sends you to **Instellingen** to switch the module on, rather than silently
+enabling it.
+
 The format is decided by looking *inside* the file, not by the extension: a
 `.pptx` is recognised by the presentation part it always carries, an `.odp` by
 its declared media type, a `.key` by its `Index/` archives. A file that is not a

@@ -1746,6 +1746,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
+      'mIllogh nav \'oH, Markdown teywI\' \'oHbe\'. deck chu\'Daq lan \'e\' chaw\' OciDeck.',
+  'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
+      'mIllogh nav \'oH, Markdown teywI\' \'oHbe\'. deck moj \'e\' chaw\'meH yIkII\' De\'wI\'Hom yIchu\'.',
   'De zwakhedenlijst (78): id, titel, MASVS-categorie, platform, de CWE-koppeling en een korte omschrijving. Plus een brug van de oude beta-nummering (tot 0119) naar de canonieke id\'s, zodat de MASTG-kruiskoppeling blijft kloppen.':
       '\'oy\'ghach tetlh (78): id, per, MASVS Segh, jo\', CWE rarwI\' je run QIj. latlh: mI\'mey ngo\' beta (0119 vIS) canonical id\'e\'Daq rarbogh QIn, vaj taHtaH MASTG rar lugh.',
   'Alle integraties': 'Hoch muvmoHghachmey',
