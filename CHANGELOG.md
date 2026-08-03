@@ -16,6 +16,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- **Het instellingenvenster liep niet meer over de rand bij grote interface-tekst
+  op een smal (web-)venster.** Op het web is er geen minimum vensterbreedte; bij
+  200% interface-tekst (WCAG 1.4.4) paste de vaste zijbalk daar niet meer naast de
+  inhoud, en losse velden met een keuzemenu liepen buiten beeld. Het venster past
+  zich nu aan de schermbreedte aan, de zijbalk klapt op smalle breedte in tot een
+  keuzebalk bovenaan zodat de inhoud de volle breedte krijgt, en velden met een
+  keuzemenu of segmentknop stapelen hun bediening onder het bijschrift in plaats
+  van over te lopen. Op desktop verandert er niets: het minimumvenster van
+  1000×650 haalt deze grens nooit. (volgt op #1149)
 - Vraagslides met een grotere antwoordbank werkten sinds #1077 niet meer. De
   veiligheidsgrens van acht zichtbare opties was daar ook als grens voor de hele
   antwoordbank gebruikt; een bestaand deck met twintig kandidaten en vier
