@@ -48,8 +48,11 @@ const Map<String, int> methodLengthBaseline = {
   'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen._startColumn': 118,
   // Procesverbetering preview switch for matrix/canvas/tree/flow/phaseGate.
   // Verlaagd van 165: improvement-cases naar improvement_dispatch.dart.
+  // +3 (#1164): splitRunPosition-doorgifte in de drie bullet-cases (bullets,
+  // twoBullets, bulletsImage) van de dispatch-switch; pure plumbing van een
+  // nieuw veld, geen gedrag om uit te tillen.
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
-      148,
+      151,
 };
 
 bool _isTranslationData(String path) =>

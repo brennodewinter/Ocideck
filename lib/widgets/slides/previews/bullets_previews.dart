@@ -2,6 +2,45 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../slide_preview.dart';
 
+/// De titel van een bulletdia, met — wanneer de dia één pagina van een
+/// gesplitste reeks is ([position] niet null en meer dan één pagina) — een
+/// bescheiden "(pagina/totaal)"-teller ernaast (#1164). Zonder reeks precies
+/// [_md]: een losse dia toont niets extra en de bestaande goldens veranderen niet.
+///
+/// De teller staat rechts van de titel, kleiner en gedempt, en lijnt onderaan
+/// uit (een Markdown-titel meldt geen baseline) — zo blijft hij leesbaar naast
+/// een titel die over twee regels loopt. Gedeeld door de drie bullet-previews
+/// zodat de vier oppervlakken (editor, presentatie, publiek, export) dezelfde
+/// teller tonen.
+Widget _titleWithSplitCounter(
+  BuildContext context,
+  String title,
+  TextStyle style, {
+  required Color linkColor,
+  required ({int page, int total})? position,
+}) {
+  final titleWidget = _md(context, title, style, linkColor: linkColor);
+  if (position == null || position.total <= 1) return titleWidget;
+  final baseColor = style.color ?? Colors.black;
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.end,
+    children: [
+      Flexible(child: titleWidget),
+      Padding(
+        padding: EdgeInsets.only(left: (style.fontSize ?? 12) * 0.35),
+        child: Text(
+          '${position.page}/${position.total}',
+          style: style.copyWith(
+            fontSize: (style.fontSize ?? 12) * 0.62,
+            fontWeight: FontWeight.w500,
+            color: baseColor.withValues(alpha: 0.55),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
 /// Clips bullets-slide content to the real layout box. [OverflowBox] keeps the
 /// inner column from throwing flex overflow; [ClipRect] hides any remainder.
 Widget _bulletsSlideShell({
