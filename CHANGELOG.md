@@ -16,6 +16,19 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- **Wie een presentatie via "Openen…" kiest, wordt nu naar de import geleid in
+  plaats van doodgelopen.** (#1175) "Openen…" is voor Markdown- en
+  `.ocideck`-bestanden; koos je daar een PowerPoint/Impress/Keynote-bestand
+  (`.pptx`/`.odp`/`.key`), dan kreeg je "dit bestand is geen leesbare tekst,
+  OciDeck opent Markdown" — zonder enige aanwijzing dat er een importfunctie
+  bestaat. De melding herkent nu de presentatie en biedt een uitweg: staat de
+  module Importeren aan, dan zet een knop **Importeren** de conversie meteen in
+  gang op het bestand dat je net koos (geen menu zoeken, geen bestand opnieuw
+  kiezen). Staat de module uit, dan benoemt de melding wat je koos en wijst hij
+  naar **Instellingen** om de module aan te zetten — hij zet hem niet stil aan.
+  Werkt op desktop én in de browser. Import blijft bewust een aparte, standaard
+  uitgeschakelde module en een gemarkeerd verliesgevend proces; deze wijziging
+  maakt hem alleen vindbaar op het moment dat je hem duidelijk nodig hebt.
 - **Een gesplitste dia toont nu een "(pagina/totaal)"-teller naast zijn titel.**
   Na "Splits slide" herhaalde elke vervolgpagina exact dezelfde titel zonder
   markering — soms met een nu-onjuist aantal erin. Elke pagina van een gesplitste
