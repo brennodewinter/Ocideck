@@ -51,6 +51,16 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- **Een thema-logo dat niet te vinden was, stempelde 'Bestand niet gevonden' op
+  élke dia — in editor, presentatie én export.** Een merk-overlay is een
+  thema-instelling die op iedere dia ligt; kon het logobestand niet worden
+  geresolveerd (typisch een geïmporteerd stijlprofiel waarvan het bijbehorende
+  logobestand op deze machine ontbreekt), dan verscheen linksonder op elke
+  pagina een gebroken-afbeelding-plaatshouder — die ook mee de PDF/PPTX in
+  reisde. Een merk-overlay die stil wegvalt is correcter dan een gebroken-
+  afbeelding-icoon op elke geëxporteerde pagina, dus een niet-resolveerbaar
+  thema-logo verdwijnt nu geruisloos. Een ontbrekende *inhouds*afbeelding blijft
+  wél zichtbaar als plaatshouder — die hoort de auteur te zien. (#1174)
 - **Het kwaliteitspaneel bood 'Splits slide' ook aan waar splitsen niet hielp.**
   Een dia met te weinig bullets voor twee volwaardige pagina's — bijvoorbeeld een
   al-gesplitste pagina van drie lange bullets die alleen nog woordigheid meldt —
