@@ -16,35 +16,20 @@ class _WelcomeScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surfaceContainerLowest,
-      body: Stack(
-        children: [
-          LayoutBuilder(
-            builder: (context, constraints) => SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(28, 28, 28, 48),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: (constraints.maxHeight - 76).clamp(0, 10000),
-                ),
-                child: Center(
-                  child: _welcomeHub(
-                    context,
-                    ref,
-                    theme,
-                    palette,
-                    l10n,
-                    recentFiles,
-                    constraints,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 16,
-            bottom: 12,
-            child: _VersionTag(palette: palette),
-          ),
-        ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final hub = _welcomeHub(
+            context,
+            ref,
+            theme,
+            palette,
+            l10n,
+            recentFiles,
+            constraints,
+          );
+          if (constraints.maxWidth >= 820) return hub;
+          return SingleChildScrollView(child: hub);
+        },
       ),
     );
   }
@@ -59,21 +44,14 @@ class _WelcomeScreen extends ConsumerWidget {
     BoxConstraints viewport,
   ) {
     final wide = viewport.maxWidth >= 820;
-    final baseHubHeight = (viewport.maxHeight - 88).clamp(460, 590).toDouble();
-    final requiredBrandHeight = _requiredBrandPanelHeight(context, theme, l10n);
-    final hubHeight = requiredBrandHeight > baseHubHeight
-        ? requiredBrandHeight
-        : baseHubHeight;
-    final hub = wide
+    return wide
         ? SizedBox(
-            height: hubHeight,
+            width: double.infinity,
+            height: viewport.maxHeight,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(
-                  width: 340,
-                  child: _brandPanel(context, theme, l10n, fillHeight: true),
-                ),
+                SizedBox(width: 340, child: _brandPanel(context, theme, l10n)),
                 Expanded(child: _actionsPanel(context, ref, l10n, palette)),
                 if (recentFiles.isNotEmpty)
                   SizedBox(
@@ -93,10 +71,7 @@ class _WelcomeScreen extends ConsumerWidget {
         : Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(
-                width: double.infinity,
-                child: _brandPanel(context, theme, l10n, fillHeight: false),
-              ),
+              SizedBox(height: 400, child: _brandPanel(context, theme, l10n)),
               SizedBox(
                 height: 520,
                 child: _actionsPanel(context, ref, l10n, palette),
@@ -115,71 +90,37 @@ class _WelcomeScreen extends ConsumerWidget {
                 ),
             ],
           );
-
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: recentFiles.isEmpty ? 840 : 1120),
-      child: Container(
-        clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(
-          color: theme.colorScheme.surface,
-          border: Border.all(color: theme.colorScheme.outlineVariant),
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: theme.colorScheme.shadow.withValues(alpha: 0.12),
-              blurRadius: 32,
-              offset: const Offset(0, 14),
-            ),
-          ],
-        ),
-        child: hub,
-      ),
-    );
   }
-
-  double _requiredBrandPanelHeight(
-    BuildContext context,
-    ThemeData theme,
-    AppLocalizations l10n,
-  ) {
-    final scaler = MediaQuery.textScalerOf(context);
-    final direction = Directionality.of(context);
-
-    double textHeight(String text, TextStyle? style) {
-      final painter = TextPainter(
-        text: TextSpan(text: text, style: style),
-        textDirection: direction,
-        textScaler: scaler,
-      )..layout(maxWidth: 272);
-      return painter.height;
-    }
-
-    return 68 +
-        170 +
-        textHeight(l10n.d('Welkom bij OciDeck'), _brandHeadingStyle(theme)) +
-        12 +
-        textHeight(
-          l10n.d(
-            'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.',
-          ),
-          _brandBodyStyle(theme),
-        );
-  }
-
-  TextStyle? _brandHeadingStyle(ThemeData theme) =>
-      theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600);
-
-  TextStyle? _brandBodyStyle(ThemeData theme) => theme.textTheme.bodyMedium
-      ?.copyWith(color: theme.colorScheme.onSurfaceVariant, height: 1.45);
 
   Widget _brandPanel(
     BuildContext context,
     ThemeData theme,
-    AppLocalizations l10n, {
-    required bool fillHeight,
-  }) {
+    AppLocalizations l10n,
+  ) {
+    // Het merk in EU-geel — de merkkleur — met een terugval op EU-blauw als het
+    // geel te weinig contrast heeft tegen de (thema-afhankelijke) paneel-
+    // achtergrond, bijvoorbeeld een licht profiel waar het gele merk zou
+    // wegvallen. Gemeten op de linksboven-hoek van het verloop, waar het logo
+    // staat.
+    const euYellow = AppTheme.amberVivid; // #FFCC00
+    const euBlue = AppTheme.blueVivid; // #003399
+    final logoBackground = Color.alphaBlend(
+      theme.colorScheme.primaryContainer.withValues(alpha: 0.72),
+      theme.colorScheme.surfaceContainerLowest,
+    );
+    // WCAG-contrast (grafiek/groot: 3:1) tussen het gele merk en de
+    // paneelachtergrond; valt het daaronder, dan EU-blauw. Inline gerekend met
+    // computeLuminance zodat de app_shell-bibliotheek geen extra import nodig
+    // heeft.
+    final yellowLum = euYellow.computeLuminance();
+    final bgLum = logoBackground.computeLuminance();
+    final hi = yellowLum > bgLum ? yellowLum : bgLum;
+    final lo = yellowLum > bgLum ? bgLum : yellowLum;
+    final logoInk = (hi + 0.05) / (lo + 0.05) >= 3.0 ? euYellow : euBlue;
     return Container(
-      padding: const EdgeInsets.all(34),
+      // Bottom inset matches the actions panel's footer padding (14) so the
+      // version tag lines up with the "Gebruikershandleiding" link beside it.
+      padding: const EdgeInsets.fromLTRB(34, 34, 34, 14),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -196,38 +137,42 @@ class _WelcomeScreen extends ConsumerWidget {
           Semantics(
             label: l10n.d('OciDeck'),
             image: true,
-            child: Container(
+            // No plate behind the mark. The dark logo asset is an alpha mask
+            // (transparent ground, ink = coverage), so `srcIn` paints just the
+            // mark in [logoInk] and it reads directly on the gradient in either
+            // theme instead of sitting in a white card.
+            child: SizedBox(
               width: 170,
               height: 170,
-              padding: const EdgeInsets.all(12),
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                color: AppTheme.paper,
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
-                    color: theme.colorScheme.shadow.withValues(alpha: 0.1),
-                    blurRadius: 18,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
-              child: Image.asset(
-                BrandLogo.ociDeck.assetKey,
-                fit: BoxFit.contain,
-                filterQuality: FilterQuality.high,
+              child: ColorFiltered(
+                colorFilter: ColorFilter.mode(logoInk, BlendMode.srcIn),
+                child: Image.asset(
+                  BrandLogo.ociDeck.darkAsset,
+                  fit: BoxFit.contain,
+                  filterQuality: FilterQuality.high,
+                ),
               ),
             ),
           ),
-          if (fillHeight) const Spacer() else const SizedBox(height: 48),
-          Text(l10n.d('Welkom bij OciDeck'), style: _brandHeadingStyle(theme)),
+          const Spacer(),
+          Text(
+            l10n.d('Welkom bij OciDeck'),
+            style: theme.textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           const SizedBox(height: 12),
           Text(
             l10n.d(
               'Presentaties die gewone Markdown-bestanden blijven: leesbaar, doorzoekbaar en te openen met elke editor.',
             ),
-            style: _brandBodyStyle(theme),
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+              height: 1.45,
+            ),
           ),
+          const SizedBox(height: 18),
+          _VersionTag(palette: AppPalette.of(theme)),
         ],
       ),
     );
@@ -246,9 +191,15 @@ class _WelcomeScreen extends ConsumerWidget {
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(32, 30, 32, 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: _startColumn(context, ref, l10n, palette),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 640),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: _startColumn(context, ref, l10n, palette),
+                  ),
+                ),
               ),
             ),
           ),

@@ -196,6 +196,10 @@ class AppTheme {
   static const amber700 = Color(0xFFB45309);
   static const amberVivid = Color(0xFFFFCC00);
 
+  /// EU-blauw — het tegenwicht van [amberVivid] uit het EU-palet, o.a. voor het
+  /// merk op een lichte achtergrond waar het geel te weinig contrast heeft.
+  static const blueVivid = Color(0xFF003399);
+
   // Groen/rood-accent voor bevestigd/afwijkend (o.a. apparaatverificatie).
   static const green600 = Color(0xFF16A34A);
   static const red600 = Color(0xFFDC2626);
