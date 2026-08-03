@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
-import 'package:ocideck/state/import_module_provider.dart';
+import 'package:ocideck/state/integration_registry.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/utils/color_contrast.dart';
@@ -54,7 +54,7 @@ void main() {
         overrides: [
           if (allModulesRevealed) ...[
             infoSafetyRevealProvider.overrideWithValue(true),
-            importModuleRevealProvider.overrideWithValue(true),
+            anyIntegrationAvailableProvider.overrideWithValue(true),
           ],
         ],
         child: MaterialApp(
