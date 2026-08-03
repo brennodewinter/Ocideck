@@ -112,7 +112,11 @@ const int maxFileLines = 1000;
 /// `lib/l10n/translations/*` is exempt — those files grow with every UI string.
 const Map<String, int> fileSizeBaseline = {
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
-  'lib/models/slide.dart': 975,
+  // +20 (#1162): de twee onherleidbare navigatievelden `anchor` + `nextAnchor`
+  // (stabiel dia-anker en per-dia sprong-uit) met hun doc, constructor- en
+  // copyWith-doorvoer. Pure dataplumbing van een nieuw formaatveld; er valt geen
+  // gedrag uit te tillen naar een part.
+  'lib/models/slide.dart': 995,
   // Procesverbetering module card / reveal wiring in the shell.
   // +1 (#1037): the url_launcher_util import so the play-only landing can open
   // slide links in the browser, like every other presentation surface. The file
@@ -220,7 +224,11 @@ const Map<String, int> classSizeBaseline = {
   'lib/state/tabs_provider.dart#TabsNotifier': 2235,
   // Procesverbetering: matrix/canvas/tree/flow/phaseGate serialize/parse.
   // +33: Y-01 front-matter keys (name/unit/usl/lsl/target/baseline/goal).
-  'lib/services/markdown_service.dart#MarkdownService': 2407,
+  // +16 (#1162): het lezen van de twee navigatie-comments (`ocideck_slide_anchor`
+  // + `ocideck_next`) in `_parseBlockDirectives` — typedef-veld, init en twee
+  // parse-takken per veld. Onherleidbare parse-plumbing; de serialisatie zelf zit
+  // al in de top-level `_writeSlideDirectives` en telt niet mee.
+  'lib/services/markdown_service.dart#MarkdownService': 2423,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2145,
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,

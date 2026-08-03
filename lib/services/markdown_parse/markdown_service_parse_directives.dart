@@ -33,6 +33,8 @@ typedef _BlockDirectives = ({
   DisplayWindowSpec? viewLimit,
   String improvementTemplateId,
   String improvementLayout,
+  String anchor,
+  String nextAnchor,
 });
 
 /// Neemt [content] op in het notitieblok en haalt het uit de body.
@@ -108,6 +110,8 @@ extension _MarkdownParseDirectives on MarkdownService {
     int styleImageWidth = 0;
     var improvementTemplateId = '';
     var improvementLayout = '';
+    var anchor = '';
+    var nextAnchor = '';
     final viewComments = <String, String>{};
     final source = remaining;
     remaining = source.replaceAllMapped(_reHtmlComment, (m) {
@@ -191,6 +195,16 @@ extension _MarkdownParseDirectives on MarkdownService {
               .substring('ocideck_layout:'.length)
               .trim();
         }
+      } else if (content.startsWith('ocideck_slide_anchor:')) {
+        // Eerste vondst wint (zoals template/layout): de serialiser zet dit
+        // bovenaan, een gelijknamige regel verderop staat in de dia-tekst.
+        if (anchor.isEmpty) {
+          anchor = content.substring('ocideck_slide_anchor:'.length).trim();
+        }
+      } else if (content.startsWith('ocideck_next:')) {
+        if (nextAnchor.isEmpty) {
+          nextAnchor = content.substring('ocideck_next:'.length).trim();
+        }
       } else if (content.startsWith('ocideck_view_')) {
         _collectViewComment(viewComments, content);
       } else if (!content.startsWith('_')) {
@@ -233,6 +247,8 @@ extension _MarkdownParseDirectives on MarkdownService {
           : DisplayWindowSpec.fromComments(viewComments),
       improvementTemplateId: improvementTemplateId,
       improvementLayout: improvementLayout,
+      anchor: anchor,
+      nextAnchor: nextAnchor,
     );
   }
 
