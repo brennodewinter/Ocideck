@@ -16,6 +16,15 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- De **finding-headerdia** vulde in de dia-strook links en in de live-preview van
+  de editor maar een fractie van de breedte zodra de bevinding te lang was voor
+  één dia: de headerkaart en de meta werden samengedrukt in de linkerhelft,
+  terwijl dezelfde dia bij het presenteren en exporteren wél de volle breedte
+  gebruikte. Die paden pagineren een te lange bevinding al over meerdere dia's;
+  de enkele-dia-previews deden dat niet en schaalden de hele bevinding uniform
+  omlaag — wat haar ook smaller maakt. Ze tonen nu, net als het presenteren en
+  exporteren, de eerste pagina op volle breedte. De tekst wordt niet groter; er
+  wordt alleen de juiste pagina getoond. (#1147)
 - Vraagslides met een grotere antwoordbank werkten sinds #1077 niet meer. De
   veiligheidsgrens van acht zichtbare opties was daar ook als grens voor de hele
   antwoordbank gebruikt; een bestaand deck met twintig kandidaten en vier

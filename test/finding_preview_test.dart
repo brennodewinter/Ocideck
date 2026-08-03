@@ -255,9 +255,17 @@ void main() {
     final pages = paginateFinding(FindingSpec.parse(longFinding));
     expect(pages.length, greaterThan(1), reason: 'this finding must split');
 
-    // Rendered whole (the pre-fix behaviour), it scales down to a fraction of
-    // the width — the reported bug (F-01 rendered at ~a third).
-    expect(await renderWidthFraction(tester, longFinding), lessThan(0.6));
+    // The whole source finding — what the thumbnail and the in-editor preview
+    // receive, un-paginated — now renders its FIRST PAGE at (near-)full width.
+    // Before #1147 the single-slide preview scaled the whole overflowing finding
+    // down uniformly to a fraction of the width (F-01 at ~a third); it now
+    // paginates on the way in, exactly like the presenter and the export.
+    expect(
+      await renderWidthFraction(tester, longFinding),
+      greaterThan(0.70),
+      reason:
+          'whole source finding should render its first page full-width (#1147)',
+    );
 
     for (var i = 0; i < pages.length; i++) {
       final frac = await renderWidthFraction(tester, pages[i].toMarkdown());
@@ -280,6 +288,34 @@ void main() {
       }
     }
   });
+
+  testWidgets(
+    'an overflowing finding fills the slide width in a single-slide preview '
+    '(#1147)',
+    (tester) async {
+      // The thumbnail and the in-editor live preview render one source slide and
+      // never run expandFindingsForRender. Before #1147 an overflowing finding
+      // was scaled down uniformly there, so the header card used a fraction of
+      // the slide width — parked top-left with the meta squeezed into the left
+      // half. It must now fill the width like the paged preview and the export.
+      await tester.pumpWidget(_host(_finding(longFinding)));
+      await tester.pump();
+      expect(tester.takeException(), isNull);
+
+      final slide = tester.getRect(find.byType(SlidePreviewWidget));
+      final card = tester.getRect(
+        find.byKey(const ValueKey('finding-header-card')),
+      );
+      final fill = card.width / slide.width;
+      expect(
+        fill,
+        greaterThan(0.5),
+        reason:
+            'header card should fill most of the slide width, was '
+            '${fill.toStringAsFixed(2)} (pre-fix ~0.13)',
+      );
+    },
+  );
 
   testWidgets(
     'a continuation page drops the severity card for a plain heading',

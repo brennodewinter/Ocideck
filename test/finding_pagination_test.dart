@@ -292,4 +292,47 @@ void main() {
       }
     });
   });
+
+  group('firstRenderPageSpec (single-slide preview)', () {
+    Slide slideOf(FindingSpec spec) => Slide.create(SlideType.finding).copyWith(
+      customMarkdown: spec.toMarkdown(),
+      findingRole: FindingRole.header,
+    );
+
+    test('a finding that fits is returned whole', () {
+      const spec = FindingSpec(heading: heading, description: 'Kort.');
+      final shown = firstRenderPageSpec(slideOf(spec));
+      // Same content as the source: nothing is dropped for a single-page finding.
+      expect(shown.heading, heading);
+      expect(shown.description, 'Kort.');
+    });
+
+    test('an overflowing finding yields its first page, not the whole', () {
+      // Without this the thumbnail / in-editor preview would render the whole
+      // overflowing finding, which the FittedBox scales down uniformly until the
+      // header card uses a fraction of the width (#1147).
+      final source = bigFinding();
+      final pages = paginateFinding(source);
+      expect(pages.length, greaterThan(1), reason: 'anders test dit niets');
+
+      final shown = firstRenderPageSpec(slideOf(source));
+      // It is exactly what the paginated first page would render — the header
+      // keeps its "(1/N)" marker and the later sections are not all present.
+      expect(shown.heading, pages.first.heading);
+      expect(shown.heading, contains('(1/'));
+      final sourceSections = [
+        source.description,
+        source.confirmation,
+        source.impact,
+        source.recommendation,
+      ].where((s) => s.trim().isNotEmpty).length;
+      final shownSections = [
+        shown.description,
+        shown.confirmation,
+        shown.impact,
+        shown.recommendation,
+      ].where((s) => s.trim().isNotEmpty).length;
+      expect(shownSections, lessThan(sourceSections));
+    });
+  });
 }
