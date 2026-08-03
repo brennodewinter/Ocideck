@@ -30,6 +30,8 @@ void main() {
     SlideType.bullets,
   ).copyWith(title: title, bullets: const ['Een', 'Twee', 'Drie']);
 
+  // De teller loopt als trailing-span mee in dezelfde paragraaf als de titel,
+  // dus titel én teller zitten in één rich-text — zoeken gaat met textContaining.
   testWidgets('een reeks-pagina toont de teller naast de titel', (
     tester,
   ) async {
@@ -37,16 +39,16 @@ void main() {
       _host(bullets('Aanpak'), position: (page: 2, total: 3)),
     );
     await tester.pump();
-    expect(find.text('Aanpak'), findsOneWidget);
-    expect(find.text('2/3'), findsOneWidget);
+    expect(find.textContaining('Aanpak'), findsOneWidget);
+    expect(find.textContaining('2/3'), findsOneWidget);
   });
 
   testWidgets('een losse dia toont geen teller', (tester) async {
     await tester.pumpWidget(_host(bullets('Aanpak')));
     await tester.pump();
-    expect(find.text('Aanpak'), findsOneWidget);
-    // Geen enkel "(x/y)"-tellertje.
-    expect(find.textContaining(RegExp(r'^\d+/\d+$')), findsNothing);
+    expect(find.textContaining('Aanpak'), findsOneWidget);
+    // Geen enkel "x/y"-tellertje.
+    expect(find.textContaining(RegExp(r'\d+/\d+')), findsNothing);
   });
 
   testWidgets('een reeks van één pagina toont geen teller', (tester) async {
@@ -55,7 +57,7 @@ void main() {
       _host(bullets('Aanpak'), position: (page: 1, total: 1)),
     );
     await tester.pump();
-    expect(find.text('1/1'), findsNothing);
+    expect(find.textContaining(RegExp(r'\d+/\d+')), findsNothing);
   });
 
   testWidgets('de teller werkt ook op een tweekoloms dia', (tester) async {
@@ -66,6 +68,6 @@ void main() {
     );
     await tester.pumpWidget(_host(slide, position: (page: 3, total: 4)));
     await tester.pump();
-    expect(find.text('3/4'), findsOneWidget);
+    expect(find.textContaining('3/4'), findsOneWidget);
   });
 }

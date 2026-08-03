@@ -19,6 +19,11 @@ class InlineMarkdownText extends StatefulWidget {
   final TextOverflow overflow;
   final bool softWrap;
 
+  /// Een span die ná de tekst in dezelfde paragraaf meeloopt — zodat hij tegen
+  /// het laatste woord blijft plakken en met de tekst mee afbreekt in plaats van
+  /// naast het blok te zweven. Gebruikt voor de "(2/3)"-titelteller (#1164).
+  final InlineSpan? trailing;
+
   const InlineMarkdownText(
     this.text, {
     super.key,
@@ -29,6 +34,7 @@ class InlineMarkdownText extends StatefulWidget {
     this.textAlign = TextAlign.start,
     this.overflow = TextOverflow.clip,
     this.softWrap = true,
+    this.trailing,
   });
 
   @override
@@ -96,7 +102,7 @@ class _InlineMarkdownTextState extends State<InlineMarkdownText> {
   Widget build(BuildContext context) {
     _disposeRecognizers(); // verse set per build
     return Text.rich(
-      TextSpan(children: _spans()),
+      TextSpan(children: [..._spans(), ?widget.trailing]),
       maxLines: widget.maxLines,
       textAlign: widget.textAlign,
       overflow: widget.overflow,

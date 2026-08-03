@@ -148,7 +148,9 @@ const Map<String, int> fileSizeBaseline = {
   // +13 (#1164): het nieuwe publieke veld splitRunPosition met zijn dispatch en
   // export; de titelteller-helper zelf is naar de part bullets_previews.dart
   // getild, alleen de irreducibele plumbing bleef in de librarykop.
-  'lib/widgets/slides/slide_preview.dart': 1049,
+  // +2 (#1164): de optionele `trailing`-span op de gedeelde _md-helper, zodat de
+  // teller inline in de titelparagraaf meeloopt i.p.v. ernaast te zweven.
+  'lib/widgets/slides/slide_preview.dart': 1051,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
