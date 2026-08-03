@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -1108,4 +1108,25 @@ ci-image-publish:
 	  --build-arg FLUTTER_VERSION=$(CI_IMAGE_FLUTTER) \
 	  -t $(CI_IMAGE_REPO):flutter-$(CI_IMAGE_FLUTTER) \
 	  -f .forgejo/ci-image/Dockerfile .forgejo/ci-image
+	@echo "== Gepubliceerd. Zet het package op publiek als dat nog niet zo is. =="
+
+# Idem voor het scan-image (.forgejo/ci-image/scans.Dockerfile), getagd op de drie
+# scanner-pins uit .github/pinned-ci-versions.json — de ENIGE bron, dezelfde die
+# ci-image-scans.yml leest en waartegen scans.yml in de poort hertoetst. De
+# handmatige route naast die workflow, met dezelfde buildx-cross-build.
+SCANS_IMAGE_REPO ?= pawprint.vigilis.online/librekat/ocideck-scans
+CI_PINS := .github/pinned-ci-versions.json
+SCANS_GITLEAKS := $(shell jq -r '.tools[] | select(.name=="gitleaks") | .version' $(CI_PINS))
+SCANS_TRUFFLEHOG := $(shell jq -r '.tools[] | select(.name=="trufflehog") | .version' $(CI_PINS))
+SCANS_SEMGREP := $(shell jq -r '.tools[] | select(.name=="semgrep") | .version' $(CI_PINS))
+SCANS_IMAGE_TAG := gl$(SCANS_GITLEAKS)-th$(SCANS_TRUFFLEHOG)-sg$(SCANS_SEMGREP)
+ci-image-scans-publish:
+	@test -n "$(SCANS_GITLEAKS)$(SCANS_TRUFFLEHOG)$(SCANS_SEMGREP)" || { echo "Scanner-pins niet leesbaar uit $(CI_PINS) (is jq geïnstalleerd?)"; exit 1; }
+	@echo "== Scan-image bouwen+pushen: $(SCANS_IMAGE_REPO):$(SCANS_IMAGE_TAG) (linux/amd64) =="
+	docker buildx build --platform linux/amd64 --push \
+	  --build-arg GITLEAKS_VERSION=$(SCANS_GITLEAKS) \
+	  --build-arg TRUFFLEHOG_VERSION=$(SCANS_TRUFFLEHOG) \
+	  --build-arg SEMGREP_VERSION=$(SCANS_SEMGREP) \
+	  -t $(SCANS_IMAGE_REPO):$(SCANS_IMAGE_TAG) \
+	  -f .forgejo/ci-image/scans.Dockerfile .forgejo/ci-image
 	@echo "== Gepubliceerd. Zet het package op publiek als dat nog niet zo is. =="
