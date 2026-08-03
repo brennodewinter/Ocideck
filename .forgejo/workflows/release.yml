@@ -36,24 +36,16 @@ jobs:
   web:
     name: Web bouwen
     runs-on: docker
+    # Voorgebakken CI-image i.p.v. kaal ubuntu (#1170): OS, node, de
+    # build-toolchain (cmake/build-essential voor de dartcv4-OpenCV-hook, #870) en
+    # de gepinde, sha256-geverifieerde Flutter zitten er al in, dus de per-run-
+    # installatie én de Flutter-download vervallen. Het tag ís de Flutter-pin;
+    # `check-toolchain` (in de gate op ditzelfde image) bewaakt dat het niet
+    # afdrijft. De web-engine-artefacten zijn niet voorgebakken (`--no-web` in het
+    # image) en worden bij `flutter build web` opgehaald — een kleine download.
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.44.8
     steps:
-      # Vóór de checkout: actions/checkout en upload-artifact zijn node-acties,
-      # en dit kale image brengt geen node mee.
-      - name: Gereedschap installeren
-        # cmake + build-essential: sinds de dartcv4-migratie (#870) bouwt de
-        # native-assets-hook zijn OpenCV-laag met CMake (gcc/g++), en die hook
-        # draait bij elke `dart run`/`flutter build` voor de host — óók in de
-        # web-job, want `make check-web` → `deps-verify-offline` roept
-        # `dart run` aan. Zonder deze twee faalt de hook op "Failed to find
-        # cmake" resp. "CMAKE_C_COMPILER: gcc ... not found".
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends \
-            nodejs make git curl ca-certificates xz-utils jq unzip zip \
-            cmake build-essential
-
       - uses: actions/checkout@v4
 
       - name: Alleen op een tag
@@ -64,7 +56,12 @@ jobs:
             exit 1
           }
 
-      - uses: ./.forgejo/actions/flutter
+      # De werkkopie is van een andere uid dan root; zonder dit weigert git en
+      # falen stappen die git aanroepen. Op het kale image deed de Flutter-
+      # composite-actie dit voor /opt/flutter; Flutter staat nu al klaar, dus we
+      # zetten alleen de werkkopie op safe (zoals de gate-workflows).
+      - name: De werkkopie vertrouwen
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       # Dezelfde cache-sleutels als linux-gate/static-gate, met opzet. De
       # Linux-poort draait op elke push naar main en vult die caches dus onder
@@ -222,25 +219,27 @@ jobs:
   linux:
     name: Linux bouwen
     runs-on: docker
+    # Voorgebakken CI-image i.p.v. kaal ubuntu (#1170): toolchain + Flutter +
+    # Linux-desktop-precache zitten erin. Het image is echter voor de TEST-gates
+    # gebouwd en mist twee libs die alléén de desktop-build linkt — die vullen we
+    # hieronder aan. De rest (clang/cmake/ninja/pkg-config/libgtk-3-dev/
+    # build-essential/node) is ingebakken.
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.44.8
     steps:
-      - name: Gereedschap en Linux-buildafhankelijkheden installeren
+      # liblzma-dev + libsecret-1-dev: nodig voor `make build-linux`
+      # (flutter_secure_storage linkt libsecret; lzma voor compressie), maar niet
+      # voor de test-gates, dus ze zitten niet in het image. build-essential/clang/
+      # cmake/ninja/pkg-config/libgtk-3-dev zitten er wél al in.
+      - name: Ontbrekende Linux-buildlibs
         run: |
           apt-get update
-          apt-get install -y --no-install-recommends \
-            nodejs make git curl ca-certificates xz-utils jq unzip zip \
-            clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev \
-            libsecret-1-dev \
-            build-essential
-          # build-essential (gcc/g++): dartcv4's native OpenCV-build (#870)
-          # genereert een CMake-project dat de standaard gcc/g++ zoekt, niet de
-          # aanwezige clang. Zonder dit faalt de hook op "CMAKE_C_COMPILER: gcc
-          # ... not found in the PATH".
+          apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev
 
       - uses: actions/checkout@v4
 
-      - uses: ./.forgejo/actions/flutter
+      - name: De werkkopie vertrouwen
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       # Gedeelde cache-sleutels met de gates (zie de web-job): linux-gate draait
       # op elke push naar main en vult deze onder main-scope, die een tag-build
