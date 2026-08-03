@@ -145,7 +145,7 @@ const Map<String, int> fileSizeBaseline = {
   'lib/widgets/dialogs/add_slide_dialog.dart': 1084,
   // chart_preview_improvement part registration + improvement ChartType switch.
   // +Y-01-parameter; improvement cases in improvement_dispatch.dart (part).
-  'lib/widgets/slides/slide_preview.dart': 1037,
+  'lib/widgets/slides/slide_preview.dart': 1036,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
