@@ -69,6 +69,18 @@ const int kMoveToNotesMaxBulletCount = kSingleColumnBulletWarningCount;
 int visibleContentBulletCount(Slide slide) =>
     _visibleBulletCount(slide.bullets) + _visibleBulletCount(slide.bullets2);
 
+/// Of [slide] genoeg zichtbare bullets heeft om te splitsen in twee volwaardige
+/// pagina's — samen minstens tweemaal [kMinPageBullets], zodat elke helft een
+/// echte pagina blijft in plaats van een flinter van één of twee bullets.
+///
+/// Bedoeld voor een dia die te klein *rendert* doordat zijn bullets lang zijn:
+/// dan ligt het bulletaantal onder de leesbaarheidsdrempel (het zijn er weinig,
+/// maar wél lange), en toch vergroot splitsen de tekst omdat elke pagina minder
+/// bullets draagt. De aantal-drempel is daar de verkeerde maat; deze grens —
+/// "is er genoeg om over pagina's te verdelen" — is de juiste.
+bool hasBulletsForFontEnlargingSplit(Slide slide) =>
+    visibleContentBulletCount(slide) >= 2 * kMinPageBullets;
+
 /// De pagina's waarin "Splits slide" [slide] verdeelt — pagina's van hooguit de
 /// leesbaarheidsdrempel (acht bullets, twaalf voor een checklist, zeven per
 /// kolom), met de rest op een laatste, kortere pagina. `null` als splitsen niet

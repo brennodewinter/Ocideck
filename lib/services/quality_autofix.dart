@@ -105,12 +105,15 @@ List<Slide>? safeFixForSlide(
       canSplitSentenceBullets(slide)) {
     return [splitSentenceBullets(slide)];
   }
-  // 2. Te vol → splitsen; null wanneer de dia niet te splitsen valt. Maar
-  //    niet als de dia al binnen de bulletdrempel past: dan lost splitsen
-  //    niets op en resteren twee-bullet-pagina's. De melding blijft staan
+  // 2. Te vol → splitsen; null wanneer de dia niet te splitsen valt. De gate
+  //    zit in [_shouldSplitFor]: boven de bulletdrempel altijd, en eronder
+  //    alleen wanneer de dia te klein rendert door lánge bullets — dan
+  //    vergroot splitsen de tekst nog steeds. Anders blijft de melding staan
   //    zodat de gebruiker "Uitleg naar notities" kan kiezen.
-  if (issues.any((i) => _splitClearableKinds.contains(i.kind)) &&
-      visibleContentBulletCount(slide) > _splitThreshold(slide)) {
+  if (issues.any(
+    (i) =>
+        _splitClearableKinds.contains(i.kind) && _shouldSplitFor(slide, i.kind),
+  )) {
     return splitBulletSlidePages(slide);
   }
   return null;
@@ -133,15 +136,16 @@ Deck? _applyNextFix(Deck deck, SlideQualityAnalyzer analyzer) {
     return _replaceSlide(deck, issue.slideIndex, [splitSentenceBullets(slide)]);
   }
 
-  // 2. Te volle dia's: splitsen over pagina's. Maar alleen als de dia meer
-  //    bullets heeft dan de drempel: bij ≤ drempel bullets lost splitsen niets
-  //    op (rest van 1-2 bullets is geen slide) en blijft de melding staan
-  //    zodat de gebruiker "Uitleg naar notities" kan kiezen.
+  // 2. Te volle dia's: splitsen over pagina's. Boven de drempel altijd; eronder
+  //    alleen wanneer de dia te klein rendert door lange bullets (zie
+  //    [_shouldSplitFor]) — dan verdeelt splitsen de inhoud over pagina's die
+  //    elk groter renderen. Bij een aantal-melding onder de drempel blijft de
+  //    melding staan zodat de gebruiker "Uitleg naar notities" kan kiezen.
   for (final issue in result.issues) {
     if (!_splitClearableKinds.contains(issue.kind)) continue;
     final slide = _slideAt(deck, issue.slideIndex);
     if (slide == null) continue;
-    if (visibleContentBulletCount(slide) <= _splitThreshold(slide)) continue;
+    if (!_shouldSplitFor(slide, issue.kind)) continue;
     final pages = splitBulletSlidePages(slide);
     if (pages == null) continue;
     return _replaceSlide(deck, issue.slideIndex, pages);
@@ -158,6 +162,27 @@ Deck? _applyNextFix(Deck deck, SlideQualityAnalyzer analyzer) {
   }
 
   return null;
+}
+
+/// Of "Splits slide" [slide] moet aanpakken voor een melding van [kind].
+///
+/// Boven de leesbaarheidsdrempel: altijd — de dia draagt simpelweg te veel
+/// bullets, en verdelen is de enige remedie. Eronder splitsen we alleen wanneer
+/// de dia te klein *rendert* ([SlideQualityIssueKind.textDensityWarning] of
+/// `…Critical`) én er genoeg bullets zijn voor twee volwaardige pagina's: dan
+/// komt de overloop uit de lengte van de bullets, niet uit hun aantal, en
+/// verdeelt splitsen ze over pagina's die elk groter renderen (#1159). Zo wordt
+/// de font ook vergroot bij weinig-maar-lange bullets.
+///
+/// Een zuivere aantal- of woord-melding (te veel bullets, te veel woorden in één
+/// bullet) onder de drempel splitsen we níet — dat levert flinters van één of
+/// twee bullets op zonder de melding op te lossen.
+bool _shouldSplitFor(Slide slide, SlideQualityIssueKind kind) {
+  if (visibleContentBulletCount(slide) > _splitThreshold(slide)) return true;
+  final rendersTooSmall =
+      kind == SlideQualityIssueKind.textDensityWarning ||
+      kind == SlideQualityIssueKind.textDensityCritical;
+  return rendersTooSmall && hasBulletsForFontEnlargingSplit(slide);
 }
 
 /// De paginadrempel waarboven splitsen zinvol is: het aantal bullets dat op
