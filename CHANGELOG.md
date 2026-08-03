@@ -831,6 +831,21 @@ that before deciding whether this alpha fits what you are doing.
   dichtheids-gedreven, niet de *hoe*. Een zuivere aantal- of woordmelding onder
   de drempel splitst nog steeds niet — dat levert flinters van één of twee
   bullets op. (#1159)
+- **De MASWE-catalogus is gemigreerd naar het herbouwde upstream-formaat (#1156).**
+  OWASP heeft de zwakhedenlijst medio 2026 grondig herzien: van 117 (grotendeels
+  concept) naar 78 volledig uitgeschreven zwakheden, MASWE-0001..0078. De
+  front-matter `status:` en `description:` zijn verdwenen — de omschrijving komt
+  nu uit het nieuwe `requirement:`-veld, en met álles uitgeschreven vervalt het
+  onderscheid uitgeschreven/concept (en daarmee de `isPlaceholder`-vlag en de
+  markering in de kiezer). De oude concept-id's tot 0119 bestaan niet meer als
+  zwakheid maar leven voort als beta→canoniek-brug (`_betaAliases`, uit het
+  nieuwe `mappings.maswe-beta`-veld); `MasweCatalog.byId` volgt die brug, zodat de
+  gebundelde MASTG v2.0.0 — die nog naar de beta-nummering verwijst — blijft
+  kloppen zonder dat we de MASTG-data vervalsen. Twee beta-id's zijn met de hand
+  gekoppeld omdat upstream geen eenduidige koppeling gaf, dwingend uit de titels
+  van de MASTG-tests die ze noemen: `MASWE-0097` → `MASWE-0051` (root-/
+  jailbreak-detectie) en `MASWE-0108` → `MASWE-0073`. De snapshotdatum gaat naar
+  2026-08-03 en de standaard is niet langer als adviserend gemarkeerd.
 - **De Windows-leg van de spiegel staat met tussenpozen minuten stil, en dat is
   een aanvaarde afweging in plaats van een oplossing.** Na de vier reparaties
   hierónder was één draai volledig groen en strandde de volgende op precies één
