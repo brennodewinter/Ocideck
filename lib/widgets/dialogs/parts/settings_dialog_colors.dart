@@ -45,38 +45,35 @@ extension _SettingsColors on _SettingsDialogState {
         ),
       ),
       const SizedBox(height: 12),
-      Row(
-        children: [
-          Expanded(
-            child: Text(
-              l10n.d('Opsommingsteken'),
-              style: const TextStyle(fontSize: 13),
+      _settingFieldRow(
+        context,
+        label: Text(
+          l10n.d('Opsommingsteken'),
+          style: const TextStyle(fontSize: 13),
+        ),
+        control: SegmentedButton<BulletMarker>(
+          segments: [
+            ButtonSegment(
+              value: BulletMarker.dot,
+              icon: const Icon(Icons.fiber_manual_record, size: 12),
+              label: Text(l10n.d('Stip')),
             ),
-          ),
-          SegmentedButton<BulletMarker>(
-            segments: [
-              ButtonSegment(
-                value: BulletMarker.dot,
-                icon: const Icon(Icons.fiber_manual_record, size: 12),
-                label: Text(l10n.d('Stip')),
-              ),
-              ButtonSegment(
-                value: BulletMarker.paw,
-                icon: const Icon(Icons.pets, size: 16),
-                label: Text(l10n.d('Pootje')),
-              ),
-            ],
-            selected: {_themeProfile.bulletMarker},
-            showSelectedIcon: false,
-            style: const ButtonStyle(visualDensity: VisualDensity.compact),
-            onSelectionChanged: (selection) => _rebuild(() {
-              _themeProfile = _themeProfile.copyWith(
-                bulletMarker: selection.first,
-              );
-              _profileTouched = true;
-            }),
-          ),
-        ],
+            ButtonSegment(
+              value: BulletMarker.paw,
+              icon: const Icon(Icons.pets, size: 16),
+              label: Text(l10n.d('Pootje')),
+            ),
+          ],
+          selected: {_themeProfile.bulletMarker},
+          showSelectedIcon: false,
+          style: const ButtonStyle(visualDensity: VisualDensity.compact),
+          onSelectionChanged: (selection) => _rebuild(() {
+            _themeProfile = _themeProfile.copyWith(
+              bulletMarker: selection.first,
+            );
+            _profileTouched = true;
+          }),
+        ),
       ),
       ..._checklistTableColorSettings(contrast),
       ..._codeColorSettings(contrast),
@@ -373,6 +370,7 @@ extension _SettingsColors on _SettingsDialogState {
       ),
       const SizedBox(height: 10),
       DropdownButtonFormField<String>(
+        isExpanded: true,
         initialValue:
             AppSettings.codeFonts.contains(_themeProfile.codeFontFamily)
             ? _themeProfile.codeFontFamily
@@ -440,6 +438,7 @@ extension _SettingsColors on _SettingsDialogState {
         ),
         const SizedBox(height: 18),
         DropdownButtonFormField<String>(
+          isExpanded: true,
           initialValue: _themeProfile.logoPosition,
           decoration: InputDecoration(
             labelText: l10n.d('Logo positie'),

@@ -29,23 +29,31 @@ class AppearancePreview extends StatelessWidget {
     final palette = AppPalette.of(theme);
     return Theme(
       data: theme,
-      // Een plaatje, geen bedieningspaneel: de knoppen staan er om te tónen hoe
-      // ze eruitzien. Ze wél inschakelen (`onChanged` niet null) is nodig om ze
-      // in hun actieve kleur te krijgen; IgnorePointer houdt ze stil.
-      child: IgnorePointer(
-        child: Container(
-          height: 148,
-          decoration: BoxDecoration(
-            color: theme.scaffoldBackgroundColor,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: palette.panel),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            children: [
-              _bar(context, theme),
-              Expanded(child: _body(context, theme, palette)),
-            ],
+      // Vaste tekstschaal: dit is een miniatuur met een vast pixelontwerp (hoogte
+      // 148), geen interface die met de leesbaarheidsinstelling meegroeit. Zonder
+      // deze grens liep het voorbeeld bij 200% interface-tekst buiten zijn eigen
+      // kader — de knoppen en de balktekst zwollen op tot de rij overliep. Het
+      // toont hóe het profiel oogt, niet hoe groot de interface staat.
+      child: MediaQuery(
+        data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
+        // Een plaatje, geen bedieningspaneel: de knoppen staan er om te tónen hoe
+        // ze eruitzien. Ze wél inschakelen (`onChanged` niet null) is nodig om ze
+        // in hun actieve kleur te krijgen; IgnorePointer houdt ze stil.
+        child: IgnorePointer(
+          child: Container(
+            height: 148,
+            decoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: palette.panel),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              children: [
+                _bar(context, theme),
+                Expanded(child: _body(context, theme, palette)),
+              ],
+            ),
           ),
         ),
       ),
@@ -104,42 +112,51 @@ class AppearancePreview extends StatelessWidget {
 
   /// De rollen die #744 blootlegde: het aangevinkte vakje (vulling én vinkje),
   /// de schakelaar, de tekstknop en de gevulde knop.
-  Widget _controls(BuildContext context) => Row(
-    children: [
-      SizedBox(
-        height: 24,
-        width: 24,
-        child: Checkbox(
-          value: true,
-          visualDensity: VisualDensity.compact,
-          onChanged: (_) {},
+  ///
+  /// In een [FittedBox] omdat dit een miniatuur met een vaste breedte is: de vier
+  /// bedieningen naast elkaar passen bij een smal voorbeeldkader net niet, en een
+  /// plaatje krimpt liever in zijn geheel dan dat het overloopt of afkapt.
+  Widget _controls(BuildContext context) => FittedBox(
+    fit: BoxFit.scaleDown,
+    alignment: Alignment.centerLeft,
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          height: 24,
+          width: 24,
+          child: Checkbox(
+            value: true,
+            visualDensity: VisualDensity.compact,
+            onChanged: (_) {},
+          ),
         ),
-      ),
-      const SizedBox(width: 4),
-      Transform.scale(
-        scale: 0.7,
-        child: Switch(value: true, onChanged: (_) {}),
-      ),
-      const Spacer(),
-      TextButton(
-        onPressed: () {},
-        style: TextButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 6),
-          minimumSize: const Size(0, 28),
+        const SizedBox(width: 4),
+        Transform.scale(
+          scale: 0.7,
+          child: Switch(value: true, onChanged: (_) {}),
         ),
-        child: Text(context.l10n.d('Meer')),
-      ),
-      const SizedBox(width: 4),
-      ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          minimumSize: const Size(0, 28),
-          textStyle: const TextStyle(fontSize: 12),
+        const SizedBox(width: 16),
+        TextButton(
+          onPressed: () {},
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 6),
+            minimumSize: const Size(0, 28),
+          ),
+          child: Text(context.l10n.d('Meer')),
         ),
-        child: Text(context.l10n.d('Knop')),
-      ),
-    ],
+        const SizedBox(width: 4),
+        ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            minimumSize: const Size(0, 28),
+            textStyle: const TextStyle(fontSize: 12),
+          ),
+          child: Text(context.l10n.d('Knop')),
+        ),
+      ],
+    ),
   );
 }
 
@@ -183,11 +200,13 @@ class AppearanceLegibility extends StatelessWidget {
                     : AppTheme.warningFg,
               ),
               const SizedBox(width: 8),
-              Text(
-                l10n.d('Leesbaarheid van dit profiel'),
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
+              Expanded(
+                child: Text(
+                  l10n.d('Leesbaarheid van dit profiel'),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ],

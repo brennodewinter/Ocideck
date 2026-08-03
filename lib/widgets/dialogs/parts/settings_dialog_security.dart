@@ -493,32 +493,33 @@ extension _SettingsSecurity on _SettingsDialogState {
       PrivacyExportGate.block => l10n.d('Export blokkeren'),
     };
 
-    return Row(
-      children: [
-        Expanded(
-          child: Text(
-            l10n.d('Bij onafgehandelde persoonsgegevens'),
-            style: const TextStyle(fontSize: 13),
-          ),
+    return _settingFieldRow(
+      context,
+      label: Text(
+        l10n.d('Bij onafgehandelde persoonsgegevens'),
+        style: const TextStyle(fontSize: 13),
+      ),
+      control: DropdownButtonHideUnderline(
+        child: DropdownButton<PrivacyExportGate>(
+          value: gate,
+          isDense: true,
+          isExpanded: true,
+          borderRadius: BorderRadius.circular(6),
+          style: TextStyle(fontSize: 12, color: AppTheme.ink),
+          items: [
+            for (final g in PrivacyExportGate.values)
+              DropdownMenuItem(
+                value: g,
+                child: Text(label(g), overflow: TextOverflow.ellipsis),
+              ),
+          ],
+          onChanged: (v) {
+            if (v != null) {
+              ref.read(settingsProvider.notifier).setPrivacyExportGate(v);
+            }
+          },
         ),
-        DropdownButtonHideUnderline(
-          child: DropdownButton<PrivacyExportGate>(
-            value: gate,
-            isDense: true,
-            borderRadius: BorderRadius.circular(6),
-            style: TextStyle(fontSize: 12, color: AppTheme.ink),
-            items: [
-              for (final g in PrivacyExportGate.values)
-                DropdownMenuItem(value: g, child: Text(label(g))),
-            ],
-            onChanged: (v) {
-              if (v != null) {
-                ref.read(settingsProvider.notifier).setPrivacyExportGate(v);
-              }
-            },
-          ),
-        ),
-      ],
+      ),
     );
   }
 

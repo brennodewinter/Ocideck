@@ -95,13 +95,22 @@ Widget _aboutBannerTitle(BuildContext context, AppLocalizations l10n) {
   return Row(
     mainAxisSize: MainAxisSize.min,
     children: [
-      Text(
-        l10n.d('OciDeck'),
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.w800,
-          letterSpacing: 0.3,
+      // De merknaam krimpt liever dan dat hij afkapt of overloopt: bij 200%
+      // interface-tekst op een smalle bannerkolom past "OciDeck" anders niet
+      // naast het hartje. FittedBox houdt de naam heel en schaalt hem terug.
+      Flexible(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Text(
+            l10n.d('OciDeck'),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
+              letterSpacing: 0.3,
+            ),
+          ),
         ),
       ),
       const SizedBox(width: 6),

@@ -326,6 +326,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
       children: [
         _sectionTitle(l10n.d('Weergave')),
         DropdownButtonFormField<CockpitVisualStyle>(
+          isExpanded: true,
           initialValue: _cockpitVisualStyle,
           decoration: InputDecoration(
             labelText: l10n.d('Weergave'),
@@ -441,6 +442,7 @@ extension _SettingsGeneralTab on _SettingsDialogState {
       children: [
         Expanded(
           child: DropdownButtonFormField<String>(
+            isExpanded: true,
             initialValue: selectedName,
             decoration: InputDecoration(
               labelText: l10n.d('Cockpit-kleurschema'),
@@ -454,7 +456,12 @@ extension _SettingsGeneralTab on _SettingsDialogState {
                     children: [
                       _appearanceDot(scheme.good),
                       const SizedBox(width: 8),
-                      Text(scheme.name),
+                      Flexible(
+                        child: Text(
+                          scheme.name,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ],
                   ),
                 ),
