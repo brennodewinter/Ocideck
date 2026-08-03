@@ -12,7 +12,7 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
-## Unreleased
+## [0.2.0] — 2026-08-03
 
 ### Fixed
 
