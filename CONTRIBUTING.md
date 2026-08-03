@@ -238,6 +238,17 @@ Targeted test groups for focused work:
     been a breaking change for everyone with a branch open.)*
 - **Tests**: add or update tests for behaviour you change — especially the
   Markdown round-trip and any file-format change.
+- **New top-level surfaces get an overflow-stress entry.** A `RenderFlex`
+  overflow surfaces only when a widget is actually laid out too small, so a
+  screen that no test pumps at an extreme size can overflow unseen. When you add
+  a top-level screen, dialog or panel, register it in
+  [`test/overflow_stress_test.dart`](test/overflow_stress_test.dart): one entry,
+  and it is rendered against several demanding viewports (narrow, short) at the
+  200% interface-text ceiling (WCAG 1.4.4), failing on the first overflow. *(Added
+  2026-08-03: the welcome screen reached `main` overflowing by 266px at 200% text,
+  because it slipped in through a direct push that bypassed the pull-request gate.
+  The stress gate closes that class of bug — but only for the surfaces that are
+  registered, so registering yours is the whole point.)*
 - **File format**: if you change how anything is stored, update
   [`docs/FILE_FORMAT.md`](docs/FILE_FORMAT.md) in the same change.
 
