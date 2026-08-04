@@ -334,4 +334,38 @@ void main() {
     final result = await OdpImporter().importBytes(bytes, path: name);
     expect(result.isErr, isTrue);
   });
+
+  // #1194: content.xml is UTF-8. Byte-voor-byte lezen trok een typografisch
+  // aanhalingsteken (3 UTF-8-bytes) uiteen tot mojibake ("â" + twee tekens).
+  test('preserves UTF-8 typographic quotes and accents in body text', () async {
+    // Openingsaanhalingsteken U+201C, sluitend U+201D, apostrof U+2019, é.
+    const quoted = 'Of “we don’t trust voting computers” famé';
+    final content =
+        '<?xml version="1.0" encoding="UTF-8"?>'
+        '<office:document-content xmlns:office="$_office" xmlns:draw="$_draw" '
+        'xmlns:text="$_text" xmlns:presentation="$_presentation" '
+        'office:version="1.2">'
+        '<office:body><office:presentation>'
+        '<draw:page draw:name="p1" svg:width="28cm" svg:height="15.75cm">'
+        '<draw:frame draw:name="Body" presentation:class="outline" '
+        'svg:x="2cm" svg:y="5cm" svg:width="24cm" svg:height="8cm">'
+        '<draw:text-box><text:list><text:list-item>'
+        '<text:p>$quoted</text:p>'
+        '</text:list-item></text:list></draw:text-box></draw:frame>'
+        '</draw:page>'
+        '</office:presentation></office:body></office:document-content>';
+    final bytes = _zip({
+      'mimetype': _b('application/vnd.oasis.opendocument.presentation'),
+      'content.xml': _b(content),
+    });
+
+    final deck = (await OdpImporter().importBytes(
+      bytes,
+      path: 'quotes.odp',
+    )).okValue!;
+    final texts = deck.slides.single.bodyBlocks.map((b) => b.text).toList();
+    expect(texts, contains(quoted));
+    // Vang de specifieke regressie: geen mojibake-voorloopbyte.
+    expect(texts.join(), isNot(contains('â')));
+  });
 }

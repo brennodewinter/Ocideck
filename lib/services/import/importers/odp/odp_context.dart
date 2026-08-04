@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 
@@ -18,7 +20,10 @@ class OdpContext {
 
   String? readPart(String path) {
     final bytes = readPartBytes(path);
-    return bytes == null ? null : String.fromCharCodes(bytes);
+    // ODF-onderdelen (content.xml, styles.xml, meta.xml) zijn UTF-8. Byte-voor-
+    // byte lezen zou een meerbyte-teken als typografische aanhalingstekens of
+    // een é uiteentrekken tot mojibake (#1194).
+    return bytes == null ? null : utf8.decode(bytes);
   }
 
   List<int>? readPartBytes(String path) {
