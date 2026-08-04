@@ -46,11 +46,18 @@ enum _Section { description, confirmation, impact, recommendation }
 /// meter. It reserved more than a page for the header and nearly a page for a
 /// continuation heading, producing five sparse pages for content that renders
 /// legibly on three. These values are calibrated against that real fixture.
-const double _linesPerSlide = 19.5;
-const double _headerCardCost = 17.5;
+///
+/// Since #1163 the finding preview draws its type ~0.84× (see
+/// [_findingFontScale] in `finding_preview.dart`), so a body line holds more
+/// characters and more lines fit per slide — both raised in step below so the
+/// smaller type actually buys fewer pages. The header card cost rises slightly
+/// because its padding does not shrink with the font, so in the smaller
+/// body-line unit it costs a touch more.
+const double _linesPerSlide = 23.0;
+const double _headerCardCost = 18.5;
 const double _contHeadingCost = 6.0;
 const double _sectionHeadingCost = 2.5;
-const double _charsPerLine = 40.0;
+const double _charsPerLine = 47.0;
 
 /// The lowest render scale at which a finding is still left on one slide. A
 /// finding whose content fits [_linesPerSlide] / this ratio stays single: it

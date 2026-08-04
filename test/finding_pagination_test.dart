@@ -38,7 +38,13 @@ void main() {
       expect(pages.length, greaterThan(1));
     });
 
-    test('a realistic finding uses three useful pages', () {
+    test('a realistic finding packs denser since the smaller finding type '
+        '(#1163)', () {
+      // The same four ~5-line sections that needed three pages before the
+      // #1163 type down-scale now fit two: page 1 carries the header plus the
+      // first section, page 2 the remaining three. This is the calibration
+      // guard for "more content per page" — if the font/pagination scaling
+      // drift apart, the packing here moves.
       final description = 'Beschrijving: ${_lorem(8)}';
       final confirmation = 'Bevestiging: ${_lorem(8)}';
       final impact = 'Impact: ${_lorem(8)}';
@@ -56,7 +62,7 @@ void main() {
 
       final pages = paginateFinding(spec);
 
-      expect(pages, hasLength(3));
+      expect(pages, hasLength(2));
       expect(pages[0].description, description);
       expect(pages[0].confirmation, isEmpty);
       expect(pages[0].impact, isEmpty);
@@ -64,11 +70,7 @@ void main() {
       expect(pages[1].description, isEmpty);
       expect(pages[1].confirmation, confirmation);
       expect(pages[1].impact, impact);
-      expect(pages[1].recommendation, isEmpty);
-      expect(pages[2].description, isEmpty);
-      expect(pages[2].confirmation, isEmpty);
-      expect(pages[2].impact, isEmpty);
-      expect(pages[2].recommendation, recommendation);
+      expect(pages[1].recommendation, recommendation);
 
       // Reconstruct the authored section stream from the rendered pages. This
       // makes the test fail if a section is dropped, duplicated or reordered,
@@ -215,14 +217,16 @@ void main() {
     );
 
     test('een bevinding die past zonder logo splitst met logo', () {
-      // Header + één korte sectie: zonder logo blijft dat net onder de
-      // enkel-pagina-drempel (≥0.70 breedte), maar een logo verkleint het
-      // budget genoeg om onder die drempel te zakken → splitsen, zodat de tekst
-      // niet onder het logo doorloopt.
+      // Header + één sectie die net onder de enkel-pagina-drempel blijft
+      // (≥0.70 breedte) zonder logo, maar een logo verkleint het budget genoeg
+      // om onder die drempel te zakken → splitsen, zodat de tekst niet onder
+      // het logo doorloopt. De sectie is meegegroeid met de #1163-herkalibratie
+      // (grotere pagina-capaciteit door de kleinere finding-letter), zodat de
+      // drempel nog steeds precies tussen "met" en "zonder logo" ligt.
       final finding = Slide.create(SlideType.finding).copyWith(
         customMarkdown: FindingSpec(
           heading: heading,
-          description: _lorem(2),
+          description: _lorem(12),
         ).toMarkdown(),
       );
 

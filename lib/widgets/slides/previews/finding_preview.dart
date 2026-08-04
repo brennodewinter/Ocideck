@@ -2,6 +2,15 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../slide_preview.dart';
 
+/// A calm, uniform down-scale for the finding slide's type sizes. Since the
+/// width fix (#1147/#1152) a finding renders at full slide width, so its
+/// `w`-relative fonts landed at their true — and, for a dense pentest finding,
+/// unnecessarily large — size. This factor shrinks every finding font in step
+/// (headers, body, CVSS card, chips) so more content fits per page without
+/// touching layout or the other slide types. The finding's page budget in
+/// [paginateFinding] is calibrated against the same factor (#1163).
+const double _findingFontScale = 0.84;
+
 /// Preview for a `finding` header slide (PENTEST_MIAUW §3.1, §11): a
 /// severity-coloured header card — heading, CVSS score/severity badge, CWE/MASWE/CVE
 /// chips and the scope object — above the finding's prose sections. All content
@@ -99,7 +108,7 @@ class _FindingPreview extends StatelessWidget {
         style: _applyFont(
           font,
           TextStyle(
-            fontSize: w * 0.032,
+            fontSize: w * 0.032 * _findingFontScale,
             fontWeight: FontWeight.w700,
             color: AppTheme.navy,
           ),
@@ -142,7 +151,7 @@ class _FindingPreview extends StatelessWidget {
                     style: _applyFont(
                       font,
                       TextStyle(
-                        fontSize: w * 0.038,
+                        fontSize: w * 0.038 * _findingFontScale,
                         fontWeight: FontWeight.w700,
                         color: AppTheme.navy,
                       ),
@@ -165,7 +174,7 @@ class _FindingPreview extends StatelessWidget {
                           style: _applyFont(
                             font,
                             TextStyle(
-                              fontSize: w * 0.024,
+                              fontSize: w * 0.024 * _findingFontScale,
                               color: AppTheme.slideInk,
                             ),
                           ),
@@ -225,7 +234,7 @@ class _FindingPreview extends StatelessWidget {
                 font,
                 TextStyle(
                   color: textColor.withValues(alpha: 0.68),
-                  fontSize: w * 0.018,
+                  fontSize: w * 0.018 * _findingFontScale,
                   fontWeight: FontWeight.w700,
                   letterSpacing: w * 0.0015,
                 ),
@@ -241,7 +250,7 @@ class _FindingPreview extends StatelessWidget {
                     font,
                     TextStyle(
                       color: textColor,
-                      fontSize: w * 0.052,
+                      fontSize: w * 0.052 * _findingFontScale,
                       fontWeight: FontWeight.w800,
                       height: 1,
                     ),
@@ -259,7 +268,7 @@ class _FindingPreview extends StatelessWidget {
                         font,
                         TextStyle(
                           color: textColor,
-                          fontSize: w * 0.021,
+                          fontSize: w * 0.021 * _findingFontScale,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -360,7 +369,7 @@ class _FindingPreview extends StatelessWidget {
         font,
         TextStyle(
           color: textColor.withValues(alpha: 0.58),
-          fontSize: w * 0.014,
+          fontSize: w * 0.014 * _findingFontScale,
           fontWeight: FontWeight.w600,
           height: 1,
         ),
@@ -421,7 +430,7 @@ class _FindingPreview extends StatelessWidget {
           font,
           TextStyle(
             color: Colors.white,
-            fontSize: w * 0.024,
+            fontSize: w * 0.024 * _findingFontScale,
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -441,7 +450,7 @@ class _FindingPreview extends StatelessWidget {
         style: _applyFont(
           font,
           TextStyle(
-            fontSize: w * 0.022,
+            fontSize: w * 0.022 * _findingFontScale,
             fontWeight: FontWeight.w600,
             color: AppTheme.slideInkMuted,
           ),
@@ -484,6 +493,11 @@ class _FindingPreview extends StatelessWidget {
       font: font,
       profile: profile,
       headingColor: AppTheme.navy,
+      // Shrink the prose and its `##` section headings in step with the header
+      // card (#1163), so a dense finding fits more per page. Defaults are
+      // w*0.024 (body) and w*0.03 (heading2).
+      bodyFontSize: w * 0.024 * _findingFontScale,
+      heading2Size: w * 0.03 * _findingFontScale,
     );
   }
 }
