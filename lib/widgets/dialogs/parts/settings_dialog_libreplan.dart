@@ -97,7 +97,17 @@ extension _SettingsLibreplan on _SettingsDialogState {
         ),
         const SizedBox(height: 12),
         _libreplanTestRow(l10n),
+        const SizedBox(height: 20),
+        _libreplanImportButton(l10n),
       ],
+    );
+  }
+
+  Widget _libreplanImportButton(AppLocalizations l10n) {
+    return ElevatedButton.icon(
+      onPressed: () => LibreplanImportDialog.show(context),
+      icon: const Icon(Icons.download, size: 18),
+      label: Text(l10n.d('Importeren uit LibrePlan')),
     );
   }
 
