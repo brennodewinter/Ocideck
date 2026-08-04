@@ -401,6 +401,11 @@ class SlidePreviewWidget extends StatelessWidget {
   /// eerste/enkele lijst en 1 voor de rechterkolom.
   final void Function(int column, int itemIndex)? onChecklistItemToggle;
 
+  /// Tik tijdens het presenteren op een keuze-menublok met een doel (#1162): de
+  /// presentator springt naar het meegegeven anker. Null (buiten de presentatie)
+  /// = de blokken zijn niet aanklikbaar; de preview toont ze alleen.
+  final void Function(String anchor)? onMenuBlockTap;
+
   /// Live tabelbewerking tijdens presenteren (toets E op een tabeldia).
   final bool tableEditMode;
   final int? tableEditRow;
@@ -516,6 +521,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.mermaidViewController,
     this.mermaidInteractive = true,
     this.onChecklistItemToggle,
+    this.onMenuBlockTap,
     this.tableEditMode = false,
     this.tableEditRow,
     this.tableEditCol,
@@ -737,6 +743,7 @@ class SlidePreviewWidget extends StatelessWidget {
           projectPath: projectPath,
           font: fontFamily,
           profile: themeProfile,
+          onBlockTap: onMenuBlockTap,
         );
       case SlideType.title:
         return _TitlePreview(

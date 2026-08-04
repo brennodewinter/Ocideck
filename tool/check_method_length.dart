@@ -56,9 +56,10 @@ const Map<String, int> methodLengthBaseline = {
   // twoBullets, bulletsImage) van de dispatch-switch; pure plumbing van een
   // nieuw veld, geen gedrag om uit te tillen.
   // +8 (#1162): de `menu`-case (de _MenuPreview-aanroep). Pure dispatch: één case
-  // valt niet zinvol uit een type→widget-switch te tillen.
+  // valt niet zinvol uit een type→widget-switch te tillen. +1: de
+  // onMenuBlockTap-doorgifte voor de klik-om-te-springen.
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
-      159,
+      160,
 };
 
 bool _isTranslationData(String path) =>

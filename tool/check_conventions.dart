@@ -163,7 +163,9 @@ const Map<String, int> fileSizeBaseline = {
   // +11 (#1162): de `menu`-tak in `_buildContent` (de _MenuPreview-aanroep) plus
   // de menu_blocks-import in de librarykop; de preview zelf staat in de part
   // menu_preview.dart.
-  'lib/widgets/slides/slide_preview.dart': 1062,
+  // +7 (#1162): het `onMenuBlockTap`-veld + constructor-param + doorgifte, zodat
+  // een keuze-menublok tijdens presenteren aanklikbaar is.
+  'lib/widgets/slides/slide_preview.dart': 1069,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -218,8 +220,10 @@ const Map<String, int> classSizeBaseline = {
   // de sprong-tak in `_next`, de retrace in `_prev` en het wissen van de stack bij
   // een teleport. De anker-resolutie zelf is al top-level (`_indexOfAnchor`) en
   // telt niet mee; wat rest gebruikt `_index`/`_rebuild` en hoort in de state.
+  // +8 (#1162): `_jumpToAnchor` (klik op een menublok) + de onMenuBlockTap-wiring;
+  // gebruikt `_advanceTo` en hoort dus in de state.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3341,
+      3349,
   'lib/services/file_service.dart#FileService': 2747,
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on

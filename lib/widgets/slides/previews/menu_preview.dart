@@ -14,12 +14,17 @@ class _MenuPreview extends StatelessWidget {
   final String font;
   final ThemeProfile profile;
 
+  /// Zie [SlidePreviewWidget.onMenuBlockTap]: gezet tijdens presenteren, dan zijn
+  /// doel-blokken aanklikbaar. Null = alleen tonen.
+  final void Function(String anchor)? onBlockTap;
+
   const _MenuPreview({
     required this.slide,
     required this.w,
     this.projectPath,
     required this.font,
     required this.profile,
+    this.onBlockTap,
   });
 
   @override
@@ -64,6 +69,7 @@ class _MenuPreview extends StatelessWidget {
               accent,
               projectPath,
               font,
+              onBlockTap,
             ),
           ),
       ],
@@ -81,6 +87,7 @@ Widget _menuGrid(
   Color accent,
   String? projectPath,
   String font,
+  void Function(String anchor)? onBlockTap,
 ) {
   final n = blocks.length;
   final cols = n <= 1
@@ -110,6 +117,7 @@ Widget _menuGrid(
                           accent: accent,
                           projectPath: projectPath,
                           font: font,
+                          onTap: onBlockTap,
                         )
                       : const SizedBox.shrink(),
                 ),
@@ -132,6 +140,7 @@ class _MenuBlockCard extends StatelessWidget {
   final Color accent;
   final String? projectPath;
   final String font;
+  final void Function(String anchor)? onTap;
 
   const _MenuBlockCard({
     required this.block,
@@ -140,6 +149,7 @@ class _MenuBlockCard extends StatelessWidget {
     required this.accent,
     this.projectPath,
     required this.font,
+    this.onTap,
   });
 
   @override
@@ -166,7 +176,7 @@ class _MenuBlockCard extends StatelessWidget {
         linkColor: accent,
       ),
     );
-    return Container(
+    final card = Container(
       decoration: BoxDecoration(
         color: fill,
         border: Border.all(color: border, width: w * 0.003),
@@ -189,6 +199,15 @@ class _MenuBlockCard extends StatelessWidget {
               ],
             )
           : Center(child: label),
+    );
+    // Aanklikbaar alleen tijdens presenteren (onTap gezet) en alleen als het blok
+    // ergens heen springt (#1162). Een tekstblok of de preview in de editor blijft
+    // gewoon een kaart.
+    if (onTap == null || !actionable) return card;
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => onTap!(block.targetAnchor),
+      child: MouseRegion(cursor: SystemMouseCursors.click, child: card),
     );
   }
 }

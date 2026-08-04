@@ -68,6 +68,8 @@ extension _PresenterViews on _FullscreenPresenterState {
                         column: column,
                         itemIndex: itemIndex,
                       ),
+                  // Tik op een keuze-menublok → spring naar zijn doeldia (#1162).
+                  onMenuBlockTap: _jumpToAnchor,
                   questionView: _currentQuestionView,
                   onAnswerSelected: (i) => _onAnswerSelected(i),
                   onAnswerSubmit: () => _onAnswerSubmit(),
