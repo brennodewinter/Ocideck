@@ -38,6 +38,7 @@ const _knownClassTokens = {
   'phase-gate',
   // Managementsysteem-module (ISO_MANAGEMENTSYSTEEM §4).
   'control-status',
+  'gantt',
   'timeline-horizontal',
   'timeline-vertical',
   'timeline-steps',
@@ -111,6 +112,8 @@ const _supportedCommentDirectives = {
   // Welk verbetersjabloon een engine-dia volgt (PROCESS_IMPROVEMENT §3.1).
   'ocideck_template',
   'ocideck_layout',
+  'ocideck_gantt_scale',
+  'ocideck_gantt_sections',
   // Niet-lineaire navigatie (#1162): het stabiele dia-anker waar een menublok of
   // sprong-uit naar wijst, en de per-dia sprong-uit zelf.
   'ocideck_slide_anchor',

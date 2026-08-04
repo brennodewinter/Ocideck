@@ -42,6 +42,8 @@ typedef _BlockDirectives = ({
   String improvementLayout,
   String anchor,
   String nextAnchor,
+  String ganttScale,
+  bool ganttSections,
 });
 
 /// Neemt [content] op in het notitieblok en haalt het uit de body.
@@ -119,6 +121,8 @@ extension _MarkdownParseDirectives on MarkdownService {
     var improvementLayout = '';
     var anchor = '';
     var nextAnchor = '';
+    var ganttScale = 'auto';
+    var ganttSections = false;
     final viewComments = <String, String>{};
     final source = remaining;
     remaining = source.replaceAllMapped(_reHtmlComment, (m) {
@@ -202,6 +206,14 @@ extension _MarkdownParseDirectives on MarkdownService {
               .substring('ocideck_layout:'.length)
               .trim();
         }
+      } else if (content.startsWith('ocideck_gantt_scale:')) {
+        if (ganttScale == 'auto') {
+          ganttScale = content.substring('ocideck_gantt_scale:'.length).trim();
+        }
+      } else if (content.startsWith('ocideck_gantt_sections:')) {
+        ganttSections =
+            content.substring('ocideck_gantt_sections:'.length).trim() ==
+            'true';
       } else if (content.startsWith('ocideck_slide_anchor:')) {
         anchor = _firstDirective(content, 'ocideck_slide_anchor:', anchor);
       } else if (content.startsWith('ocideck_next:')) {
@@ -250,6 +262,8 @@ extension _MarkdownParseDirectives on MarkdownService {
       improvementLayout: improvementLayout,
       anchor: anchor,
       nextAnchor: nextAnchor,
+      ganttScale: ganttScale,
+      ganttSections: ganttSections,
     );
   }
 

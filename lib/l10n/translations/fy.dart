@@ -731,6 +731,19 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Gantt': 'Gantt',
+  'Dag': 'Dei',
+  'Week': 'Wike',
+  'Maand': 'Moanne',
+  'Tijdschaal': 'Tiidskaal',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'De as-granulariteit fan it Gantt-diagram. “Auto” kiest op basis fan it datumbereik fan de taken.',
+  'Sectiedelingen': 'Seksjeferdielingen',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Behannelje in taaknamme dy\'t begjint mei “## ” as in seksjekop yn it diagram.',
+  'Secties': 'Seksjes',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'In projektschema as Gantt-diagram. Fol de tabel mei taak, start, doer, foartgong en ôfhinklikheden; it diagram wurdt ôflaat. In taaknamme dy\'t begjint mei “Milestone:” is in nuldoer-mylpaal.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Let op: yn de sesjedata steane mooglik persoansgegevens.',
   'Privacy-bevindingen in sessie-data': 'Privacy-ûntdekkingen yn sesjedata',

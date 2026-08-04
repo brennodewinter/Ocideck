@@ -1793,6 +1793,19 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Gantt': 'Gantt',
+  'Dag': 'Jum',
+  'Week': 'Ġimgħa',
+  'Maand': 'Xahar',
+  'Tijdschaal': 'Skala ta\' ħin',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Il-granularità tal-assi tad-diagramma Gantt. “Auto” jagħżel abbażi mill-firxa tad-dati tat-tasks.',
+  'Sectiedelingen': 'Diviżjonijiet ta\' sezzjoni',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Tratta isem ta\' task li jibda b\'“## ” bħala intestazzjoni ta\' sezzjoni fid-diagramma.',
+  'Secties': 'Sezzjonijiet',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Skeda ta\' proġett bħala diagramma Gantt. Imla t-tabella b\'task, bidu, tul, progress u dipendenzi; id-diagramma tiġi derivata. Isem ta\' task li jibda b\'“Milestone:” huwa milestone ta\' tul żero.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Attenzjoni: id-data tas-sessjoni jista\' jkun fih data personali.',
   'Privacy-bevindingen in sessie-data':

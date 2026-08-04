@@ -347,6 +347,19 @@ List<Widget> slideSettingBadges(AppLocalizations l10n, Slide slide) {
       ),
     );
   }
+  if (slide.type == SlideType.gantt && slide.ganttScale != 'auto') {
+    badges.add(
+      _SettingBadge(
+        icon: Icons.calendar_today_outlined,
+        label: slide.ganttScale,
+      ),
+    );
+  }
+  if (slide.ganttSections) {
+    badges.add(
+      _SettingBadge(icon: Icons.view_agenda_outlined, label: l10n.d('Secties')),
+    );
+  }
   if (slide.viewLimit?.isActive == true) {
     badges.add(
       _SettingBadge(
@@ -695,6 +708,41 @@ class _SlideSettingsBody extends StatelessWidget {
                 value: slide.tableEditable,
                 semanticLabel: l10n.d('Tabel bewerkbaar'),
                 onChanged: (v) => onUpdate(slide.copyWith(tableEditable: v)),
+              ),
+            ),
+          if (slide.type == SlideType.gantt)
+            _SettingRow(
+              icon: Icons.calendar_today_outlined,
+              label: l10n.d('Tijdschaal'),
+              help: l10n.d(
+                'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.',
+              ),
+              control: DropdownButton<String>(
+                value: slide.ganttScale,
+                items: [
+                  DropdownMenuItem(value: 'auto', child: Text(l10n.d('Auto'))),
+                  DropdownMenuItem(value: 'day', child: Text(l10n.d('Dag'))),
+                  DropdownMenuItem(value: 'week', child: Text(l10n.d('Week'))),
+                  DropdownMenuItem(
+                    value: 'month',
+                    child: Text(l10n.d('Maand')),
+                  ),
+                ],
+                onChanged: (v) =>
+                    onUpdate(slide.copyWith(ganttScale: v ?? ganttScaleAuto)),
+              ),
+            ),
+          if (slide.type == SlideType.gantt)
+            _SettingRow(
+              icon: Icons.view_agenda_outlined,
+              label: l10n.d('Sectiedelingen'),
+              help: l10n.d(
+                'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.',
+              ),
+              control: _SettingSwitch(
+                value: slide.ganttSections,
+                semanticLabel: l10n.d('Sectiedelingen'),
+                onChanged: (v) => onUpdate(slide.copyWith(ganttSections: v)),
               ),
             ),
           if (slide.type != SlideType.video)

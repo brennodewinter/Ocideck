@@ -487,6 +487,8 @@ extension _MarkdownParse on MarkdownService {
           : '',
       anchor: d.anchor,
       nextAnchor: d.nextAnchor,
+      ganttScale: type == SlideType.gantt ? d.ganttScale : ganttScaleAuto,
+      ganttSections: type == SlideType.gantt && d.ganttSections,
     );
   }
 

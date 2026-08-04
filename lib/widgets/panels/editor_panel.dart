@@ -12,6 +12,7 @@ import '../../models/timeline.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/image_service.dart';
 import '../../services/rich_text_chapters.dart';
+import '../../services/improvement/gantt_dsl.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/split_run.dart';
 import '../../state/deck_provider.dart';
@@ -434,5 +435,6 @@ const Map<SlideType, IconData> slideTypeIcons = {
   SlideType.flow: Icons.alt_route,
   SlideType.phaseGate: Icons.door_front_door_outlined,
   SlideType.controlStatus: Icons.fact_check_outlined,
+  SlideType.gantt: Icons.view_timeline_outlined,
   SlideType.menu: Icons.list_alt_outlined,
 };

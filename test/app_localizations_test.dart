@@ -13,6 +13,9 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'Gantt',
+  'Auto',
+  'Week',
   // Toetsnaam: 'Esc' blijft 'Esc', ook in het Engels (zie unchangedInAllLanguages).
   'Esc',
   'A.5.1',
@@ -211,6 +214,9 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'Gantt',
+  'Auto',
+  'Week',
   // Toetsnaam, geen tekst: de 'Esc'-sneltoetshint in de vergroot-markdown-dialoog
   // is een identifier die in elke taal 'Esc' blijft (zie shortcut_label.dart).
   'Esc',

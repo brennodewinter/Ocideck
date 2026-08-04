@@ -1774,6 +1774,19 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Gantt': 'Gantt',
+  'Dag': 'Den',
+  'Week': 'Týden',
+  'Maand': 'Měsíc',
+  'Tijdschaal': 'Časová osa',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Granularita osy Ganttova diagramu. “Auto” volí na základě rozsahu dat úkolů.',
+  'Sectiedelingen': 'Rozdělení sekcí',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Považujte název úkolu začínající na “## ” za nadpis sekce v diagramu.',
+  'Secties': 'Sekce',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Plán projektu jako Ganttův diagram. Vyplňte tabulku úkolem, začátkem, dobou trvání, pokrokem a závislostmi; diagram je odvozen. Název úkolu začínající na “Milestone:” je milník s nulovou dobou trvání.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Pozor: data relace mohou obsahovat osobní údaje.',
   'Privacy-bevindingen in sessie-data':

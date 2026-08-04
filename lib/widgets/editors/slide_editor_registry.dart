@@ -330,4 +330,10 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         onUpdate: c.onUpdate,
         nestedInScrollView: c.nestedInScrollView,
       ),
+      SlideType.gantt: (c) => TableEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
     };

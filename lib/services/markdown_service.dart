@@ -15,6 +15,7 @@ import '../models/seal_record.dart';
 import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import 'improvement/gantt_dsl.dart';
 import '../models/used_tool.dart';
 import '../models/timeline.dart';
 import '../models/video_source.dart';
@@ -527,6 +528,8 @@ class MarkdownService {
       // niet geschreven — die staat niet in [Slide.tableRows].
       case SlideType.matrix:
         _writeTableSlide(buf, slide);
+      case SlideType.gantt:
+        _writeTableSlide(buf, slide);
       case SlideType.signOff:
         _writeSignOffSlide(buf, slide);
       case SlideType.finding:
@@ -741,6 +744,12 @@ void _writeSlideDirectives(
   if (slide.improvementLayout.isNotEmpty) {
     buf.writeln('<!-- ocideck_layout: ${slide.improvementLayout} -->');
   }
+  if (slide.type == SlideType.gantt && slide.ganttScale != 'auto') {
+    buf.writeln('<!-- ocideck_gantt_scale: ${slide.ganttScale} -->');
+  }
+  if (slide.type == SlideType.gantt && slide.ganttSections) {
+    buf.writeln('<!-- ocideck_gantt_sections: true -->');
+  }
   // Non-destructive view limit for data-driven slides.
   final viewComments = slide.viewLimit?.toComments() ?? const {};
   for (final entry in viewComments.entries) {
@@ -764,6 +773,8 @@ void _writeSlideDirectives(
       slide.checklistScope.isNotEmpty ||
       slide.improvementTemplateId.isNotEmpty ||
       slide.improvementLayout.isNotEmpty ||
+      (slide.type == SlideType.gantt && slide.ganttScale != 'auto') ||
+      (slide.type == SlideType.gantt && slide.ganttSections) ||
       viewComments.isNotEmpty ||
       mediaRedactedMarker) {
     buf.writeln();

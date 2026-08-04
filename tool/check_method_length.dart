@@ -36,9 +36,9 @@ const Map<String, int> methodLengthBaseline = {
   // +8 (#1162): de twee navigatie-takken (`ocideck_slide_anchor`/`ocideck_next`),
   // al gehalveerd via de top-level `_firstDirective`-helper.
   'lib/services/markdown_parse/markdown_service_parse_directives.dart::_MarkdownParseDirectives._parseBlockDirectives':
-      171,
+      183,
   // +2 (#1162): `anchor`/`nextAnchor` doorgeven aan de Slide-constructor.
-  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 160,
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 162,
   // Procesverbetering SVG export for statistical chart types.
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,
@@ -47,7 +47,7 @@ const Map<String, int> methodLengthBaseline = {
   // Procesverbetering engine thumbnails in the add-slide picker.
   // +2 (#1162): de `menu`-case (de wireframe zelf zit in `_paintMenuWireframe`).
   'lib/widgets/dialogs/add_slide_dialog.dart::SlideTypePreviewPainter.paint':
-      128,
+      130,
   // Procesverbetering project-wizard entry on the welcome column.
   'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen._startColumn': 118,
   // Procesverbetering preview switch for matrix/canvas/tree/flow/phaseGate.
@@ -59,7 +59,12 @@ const Map<String, int> methodLengthBaseline = {
   // valt niet zinvol uit een type→widget-switch te tillen. +1: de
   // onMenuBlockTap-doorgifte voor de klik-om-te-springen.
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
-      160,
+      162,
+  // +2 (#1238): ganttScale/ganttSections in copyWith — pure plumbing.
+  'lib/models/slide.dart::Slide.copyWith': 152,
+  // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
+  'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
+      183,
 };
 
 bool _isTranslationData(String path) =>

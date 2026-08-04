@@ -1771,6 +1771,19 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Gantt': 'Gantt',
+  'Dag': 'Päivä',
+  'Week': 'Viikko',
+  'Maand': 'Kuukausi',
+  'Tijdschaal': 'Aikajana',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Gantt-kaavion akselin granulaarisuus. “Auto” valitsee tehtävien päivämääräalueen perusteella.',
+  'Sectiedelingen': 'Osionjaot',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Käsittele “## ”-alkavaa tehtävän nimeä osion otsikkona kaaviossa.',
+  'Secties': 'Osiot',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Projektiaikataulu Gantt-kaaviona. Täytä taulukko tehtävällä, alulla, kestolla, edistymisellä ja riippuvuuksilla; kaavio johdetaan. “Milestone:”-alkava tehtävän nimi on nollakestoinen virstanpylväs.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Huom: istuntotiedoissa saattaa olla henkilötietoja.',
   'Privacy-bevindingen in sessie-data': 'Yksityisyyslöydökset istuntotiedoissa',

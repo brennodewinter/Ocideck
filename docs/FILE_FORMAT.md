@@ -584,6 +584,7 @@ The first class determines (together with the content) the **slide type**:
 | Flow (process improvement) | `flow` | Bullet steps + `ocideck_template` + `ocideck_layout` |
 | Phase gate (process improvement) | `phase-gate` | Gate checklist as bullets |
 | Control status (management system) | `control-status` | — (a plain table falls back to `table`) |
+| Gantt (process improvement) | `gantt` | — (a plain table falls back to `table`) |
 | Bullets only | *(none)* | bullets present |
 | Two images | *(none)* | two background images |
 | Large image | *(none)* | one image, no bullets |

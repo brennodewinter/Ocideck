@@ -1777,6 +1777,19 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Gantt': 'Gantt',
+  'Dag': 'Dan',
+  'Week': 'Tjedan',
+  'Maand': 'Mjesec',
+  'Tijdschaal': 'Vremenska ljestvica',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Granularnost osi Ganttovog dijagrama. “Auto” bira na temelju raspona datuma zadataka.',
+  'Sectiedelingen': 'Podjele sekcija',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Tretirajte naziv zadatka koji počinje s “## ” kao naslov sekcije u dijagramu.',
+  'Secties': 'Sekcije',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Raspored projekta kao Ganttov dijagram. Ispunite tablicu zadatkom, početkom, trajanjem, napretkom i ovisnostima; dijagram se izvodi. Naziv zadatka koji počinje s “Milestone:” je kontrolna točka nultog trajanja.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Napomena: podaci sesije možda sadrže osobne podatke.',
   'Privacy-bevindingen in sessie-data': 'Nalazi privatnosti u podacima sesije',

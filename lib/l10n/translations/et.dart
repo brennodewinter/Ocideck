@@ -1762,6 +1762,19 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Gantt': 'Gantt',
+  'Dag': 'Päev',
+  'Week': 'Nädal',
+  'Maand': 'Kuu',
+  'Tijdschaal': 'Ajaskaala',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Gantt-diagrammi telje granulaarsus. “Auto” valib ülesannete kuupäevavahemiku põhjal.',
+  'Sectiedelingen': 'Jaotiste jaotused',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Käsitle “## ”-ga algavat ülesande nime diagrammis jaotise pealkirjana.',
+  'Secties': 'Jaotised',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Projekti ajakava Gantt-diagrammina. Täida tabel ülesande, alguse, kestuse, edenemise ja sõltuvustega; diagramm tuletatakse. “Milestone:”-ga algav ülesande nimi on nullkestuse verstapost.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Märkus: seansi andmed võivad sisaldada isikuandmeid.',
   'Privacy-bevindingen in sessie-data': 'Privaatsuse leiud seansi andmetes',

@@ -2748,6 +2748,19 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Gantt': 'Gantt',
+  'Dag': 'Gün',
+  'Week': 'Hafta',
+  'Maand': 'Ay',
+  'Tijdschaal': 'Zaman ölçeği',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Gantt diyagramının eksen granülaritesi. “Auto”, görevlerin tarih aralığına göre seçer.',
+  'Sectiedelingen': 'Bölüm ayırmaları',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      '“## ” ile başlayan bir görev adını diyagramda bölüm başlığı olarak ele alın.',
+  'Secties': 'Bölümler',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Gantt diyagramı olarak bir proje zaman çizelgesi. Tabloyu görev, başlangıç, süre, ilerleme ve bağımlılıklarla doldurun; diyagram türetilir. “Milestone:” ile başlayan bir görev adı, sıfır süreli bir dönüm noktasıdır.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Dikkat: oturum verilerinde kişisel veriler olabilir.',
   'Privacy-bevindingen in sessie-data': 'Gizlilik bulguları oturum verilerinde',

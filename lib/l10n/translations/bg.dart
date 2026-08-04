@@ -1793,6 +1793,19 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Gantt': 'Gantt',
+  'Dag': 'Ден',
+  'Week': 'Седмица',
+  'Maand': 'Месец',
+  'Tijdschaal': 'Времева скала',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Гранулярността на оста на диаграмата на Гант. “Auto” избира въз основа на диапазона от дати на задачите.',
+  'Sectiedelingen': 'Разделяния на секции',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Третирайте име на задача, започващо с “## ”, като заглавие на секция в диаграмата.',
+  'Secties': 'Секции',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'График на проекта като диаграма на Гант. Попълнете таблицата със задача, начало, продължителност, напредък и зависимости; диаграмата се извежда. Име на задача, започващо с “Milestone:”, е етап с нулева продължителност.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Внимание: данните от сесията може да съдържат лични данни.',
   'Privacy-bevindingen in sessie-data':
