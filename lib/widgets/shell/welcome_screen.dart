@@ -186,16 +186,24 @@ class _WelcomeScreen extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Semantics(
-                    label: l10n.d('OciDeck'),
-                    image: true,
-                    // No plate behind the mark. The dark logo asset is an alpha mask
-                    // (transparent ground, ink = coverage), so `srcIn` paints just the
-                    // mark in [logoInk] and it reads directly on the gradient in either
-                    // theme instead of sitting in a white card. Hover wisselt de inkt
-                    // naar de 'andere' Europese kleur: blauw → geel, geel → Italiaans
-                    // groen (zie [_HoverHueLogo]).
-                    child: _HoverHueLogo(baseInk: logoInk, size: 170),
+                  // Horizontaal gecentreerd in de baan: de Column houdt
+                  // `CrossAxisAlignment.start` aan voor de welkomtekst eronder,
+                  // maar het logo zelf hoort in het midden van de eerste baan,
+                  // niet tegen de linkerrand. De [Align] rekt over de volle
+                  // baanbreedte en zet het merk in het midden.
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Semantics(
+                      label: l10n.d('OciDeck'),
+                      image: true,
+                      // No plate behind the mark. The dark logo asset is an alpha mask
+                      // (transparent ground, ink = coverage), so `srcIn` paints just the
+                      // mark in [logoInk] and it reads directly on the gradient in either
+                      // theme instead of sitting in a white card. Hover wisselt de inkt
+                      // naar de 'andere' Europese kleur: blauw → geel, geel → Italiaans
+                      // groen (zie [_HoverHueLogo]).
+                      child: _HoverHueLogo(baseInk: logoInk, size: 170),
+                    ),
                   ),
                   const Spacer(),
                   Text(
