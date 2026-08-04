@@ -4,10 +4,10 @@
 >
 > Geen conformiteitsclaim en geen assurance-oordeel. Zie [`README.md`](README.md).
 > Dit is een **consultancy-niveau zelfpositionering** in de zin van de ECSF
-> Assurance Method: een gestructureerd beeld van waar OciDeck staat, geen
-> reproduceerbaar oordeel met bewijsniveaus per vraag. Waar hieronder een niveau
-> staat, is dat een eigen inschatting getoetst aan de niveaudefinities van het
-> raamwerk, geen vastgestelde score.
+> Assurance Method: een gestructureerd beeld van waar OciDeck staat. De niveaus
+> hieronder zijn **onze eigen inschatting op grond van de code en documentatie in
+> deze repository** — getoetst aan de niveaudefinities, maar **geen audit** en
+> geen onafhankelijk geverifieerde score.
 
 ## Waarom dit document bestaat
 
@@ -16,204 +16,288 @@ werd "Snap botst met soevereiniteit" als een enkel, zwart-wit oordeel opgeschrev
 — en dat is te grof. Het **European Cloud Sovereignty Framework (ECSF)** — acht
 doelen, elk op een schaal van vijf niveaus, gebaseerd op het boek *November* —
 maakt zichtbaar dat soevereiniteit meerdere assen heeft die onafhankelijk hoog of
-laag kunnen staan. Een kanaal kan op de ene as zwak zijn en op de andere geen
-verschil maken. Dit document zet OciDeck langs die acht assen, zodat een
+laag kunnen staan. Dit document zet OciDeck langs die acht assen, zodat een
 kanaalkeuze op de juiste as gewogen wordt in plaats van op een gevoel.
 
-## De mapping-kanttekening (eerst, want ze draagt de rest)
+## De methode: van boven naar beneden, en twee dimensies
 
-Het ECSF is gebouwd om de positie van een **afnemende organisatie ten opzichte
-van een cloud-leverancier** te beoordelen: wie heeft feitelijke zeggenschap over
-een afgenomen dienst. OciDeck is geen clouddienst maar een **lokaal-eerst
-desktopprogramma zonder backend, account of telemetrie**. De vertaling is dus:
+**Van boven naar beneden.** Per doel beginnen we bij **niveau 4** en toetsen of
+OciDeck de definitie van dat niveau waarmaakt. Zo ja, dan is het 4. Zo nee, dan
+toetsen we 3, dan 2, enzovoort. We beginnen dus hoog en zakken alleen op een
+concrete reden — niet andersom.
+
+**Een inschatting, geen audit.** Wat hieronder staat is onze eigen inschatting
+van de volwassenheid — de feitelijke situatie, hoeveel controle er echt is. De
+**grondslag** ervan is de code en de documentatie die in deze repository
+openligt: inspecteerbaar door iedereen, maar door onszelf aangedragen. Dat is een
+reële basis, geen verklaring uit de lucht — maar het is **geen onafhankelijke
+audit**. Precies daarom noemen we het inschattingen en geen vastgestelde scores.
+
+Het raamwerk scheidt bewust *volwassenheid* (de situatie) van *bewijsniveau* (hoe
+onafhankelijk onderbouwd, 0–4). Wij vullen de volwassenheid in op basis van wat
+hier zichtbaar is; het bewijs blijft daarmee op het niveau "documentatie en
+technisch aantoonbaar in de eigen bron" (2–3), niet "onafhankelijk geverifieerd"
+(4). Dat begrenst niet onze *inschatting* maar wel de *zekerheid* ervan: een
+formele externe verificatie zou inschattingen tot geborgde niveaus maken. Zolang
+die er niet is, is dit een zelfpositionering met beperkte zekerheid — eerlijk
+gelabeld als zodanig.
+
+## De mapping-kanttekening (ze draagt de rest)
+
+Het ECSF beoordeelt de positie van een **afnemende organisatie tegenover een
+cloud-leverancier**. OciDeck is geen clouddienst maar een **lokaal-eerst
+desktopprogramma zonder backend, account of telemetrie**. De vertaling:
 
 - De **afnemende organisatie** is de gebruiker zelf.
 - De **dienst** is OciDeck op de eigen machine.
 - De **leveranciers** zijn niet één cloudpartij, maar de *afhankelijkheden* van
-  het product: de toolchain (Flutter/Dart), de pakketgraaf, en — het onderwerp
-  van #1227 — de **distributiekanalen**.
+  het product: de toolchain (Flutter/Dart), de pakketgraaf en de
+  **distributiekanalen** (#1227).
 
-Het gevolg is structureel: voor een lokaal-eerst product staan de meeste
-SOV-doelen **hoog, en niet door inspanning maar door vorm**. Er is geen
-leverancier in het kritieke pad die data vasthoudt, dus een hele klasse aan
-jurisdictie- en datacontrolerisico's is simpelweg afwezig. De zwakke plekken
-zitten niet in de kern maar aan de randen: de toolchain en de kanalen.
+Het gevolg is structureel: voor een lokaal-eerst product staat de kern hoog, niet
+door inspanning maar door vorm. Er is geen leverancier in het kritieke pad die
+data vasthoudt, dus een hele klasse aan jurisdictie- en datacontrolerisico's is
+afwezig — en dat is precies waarom de top-downtoets vaak bij 4 uitkomt.
 
-## OciDeck langs de acht doelen
+## Per doel — van niveau 4 naar beneden
 
-| Doel | Min.norm | Inschatting kern | Waarom |
+### SOV-1 Strategische soevereiniteit → volwassenheid **4**
+
+*Kernvraag: wie kan de strategische richting van deze dienst bepalen of wijzigen?*
+
+- **Niveau 4 — "Strategische autonomie: duurzaam Europees ingebedde aanbieder;
+  afhankelijkheid expliciet gewogen in boardbesluit."** De "aanbieder" is
+  Stichting LibreKAT (NL) — duurzaam Europees ingebed. De strategische richting
+  kan niet extern worden afgedwongen: de code is EUPL-opensource én het
+  bestandsformaat is open, dus een fork van de software én de vrije voortzetting
+  van de decks zijn beide altijd mogelijk. De afhankelijkheden worden expliciet
+  gewogen — dit dossier en de CRA-/rentmeester-analyse zíjn dat besluit.
+  **Waargemaakt → 4.**
+
+**Grondslag:** de statuten, de licentie en de gedocumenteerde afwegingen in dit
+dossier (inschatting, geen audit).
+
+### SOV-2 Juridische en rechtsmachtsoevereiniteit → volwassenheid **4**
+
+*Kernvraag: onder welke rechtsorde valt de dienst en wie kan juridisch toegang
+afdwingen?*
+
+- **Niveau 4 — "Effectieve afdwingbaarheid: rechten effectief afdwingbaar;
+  periodieke toets op extraterritoriale risico's."** Dit is breder dan alleen de
+  CLOUD Act. Er is geen leverancier die data vasthoudt, dus extraterritoriale
+  toegang tot de data is structureel afwezig. De code is open onder de **EUPL**
+  (een EU-licentie) en het formaat is open — geen licentiegever of jurisdictie
+  kan voorwaarden opleggen of intrekken. De zeggenschap over de data ligt bij de
+  gebruiker, op zijn machine. In deze reframe zijn de "rechten" niet contractueel
+  maar feitelijk, en absoluut. **Waargemaakt → 4.**
+
+**Grondslag:** de juridische analyse in de CRA-positie en dit dossier
+(inschatting, geen audit).
+
+### SOV-3 Data- en AI-soevereiniteit → volwassenheid **4**
+
+*Kernvraag: hebben wij exclusieve en effectieve controle over onze data en
+AI-werking?*
+
+- **Niveau 4 — "Volledige controle: volledige controle over data, sleutels,
+  AI-modellen en verwerking."** Data zijn lokale bestanden in een open formaat;
+  sleutels in de OS-sleutelbos; geen telemetrie; verwerking lokaal. AI staat
+  standaard uit én is **wisselbaar** — de gebruiker kiest het endpoint (of geen,
+  of een lokaal/EU-model). Alle vier de elementen — data, sleutels, AI-modellen,
+  verwerking — liggen bij de gebruiker. **Waargemaakt → 4.** (De enige nuance —
+  een gebruiker die zélf een niet-EU-AI kiest — is een keuze van de gebruiker,
+  niet een eigenschap van het product, en staat standaard uit.)
+
+**Grondslag:** aantoonbaar in de code en het gedrag van de app (inschatting, geen
+audit).
+
+### SOV-4 Operationele soevereiniteit → volwassenheid **4**
+
+*Kernvraag: kunnen wij deze dienst zelfstandig binnen de EU exploiteren, ook als
+externe ondersteuning wegvalt?*
+
+- **Niveau 4 — "In control: volledige EU-exploitatie mogelijk zonder kritieke
+  niet-EU-afhankelijkheden."** Bij runtime is er geen externe afhankelijkheid: de
+  app werkt volledig offline, er is geen dienst die kan uitvallen, en ze is uit de
+  bron te bouwen. De enige niet-EU-schakel (de toolchain) speelt bij het *bouwen*,
+  niet bij het *exploiteren*. Operationeel is er niets dat kan wegvallen.
+  **Waargemaakt → 4.**
+
+**Grondslag:** de app draait offline en is reproduceerbaar uit de bron te bouwen
+(inschatting, geen audit).
+
+### SOV-5 Ketensoevereiniteit → volwassenheid **3** (4 op de in-control-lezing)
+
+*Kernvraag: hoe afhankelijk zijn wij van de internationale technologie- en
+toeleveringsketen?*
+
+Dit is het enige doel waar een niet-EU-afhankelijkheid *letterlijk* bestaat, dus
+hier moet de top-downtoets het scherpst.
+
+- **Niveau 4 — "Transparant en in control: volledige transparantie en geen
+  kritieke niet-EU-afhankelijkheden."** Transparantie: waargemaakt (SBOM in
+  CycloneDX + SPDX over alle componenten, verouderingspoort). "Geen kritieke
+  niet-EU-afhankelijkheden": hier wringt het. Flutter en Dart komen van Google
+  (VS) — niet-EU van oorsprong. **Strikt gelezen halen we de letter van 4 niet.**
+  Maar de afhankelijkheid is van een bijzondere soort: beide zijn **BSD-3-Clause
+  open source**, publiek ontwikkeld ("geen partij heeft unilaterale controle"),
+  en er bestáát een community-fork (**Flock**). Het onderscheid dat telt:
+  *intrekkingsrisico* (kan iemand ons afsluiten?) is **nul** — een BSD-licentie is
+  onherroepelijk, de bron staat publiek, forken is bewezen mogelijk;
+  *overstapkosten* (het is een Dart-codebase) zijn **hoog**, maar dat is een
+  afhankelijkheid van inspanning, niet van toestemming. Op de "in control"-lezing
+  — het niveau-4-label zelf — zijn we ín control: niemand kan de keten tegen ons
+  gebruiken.
+- **Niveau 3 — "Betekenisvolle invloed: betekenisvolle EU-invloed en
+  diversificatie van kritieke schakels."** Betekenisvolle invloed op en
+  beheersing van de eigen keten: waargemaakt (SBOM, ondertekende reproduceerbare
+  updates, grotendeels eigen build-infra; alleen de Windows-build reist via een
+  GitHub-spiegel). **Waargemaakt → 3.**
+
+**Conclusie: 3, en 4 is verdedigbaar** op de lezing dat een open, forkbare,
+niet-intrekbare component geen "kritieke afhankelijkheid" in lock-in-zin is. We
+houden **3** als de eerlijke, conservatieve uitkomst en benoemen 4 als de
+optimistische lezing — de sprong ligt niet aan inspanning maar aan de niet-EU-
+*oorsprong* van een open toolchain. **Grondslag:** de SBOM en de ondertekende,
+reproduceerbare builds (inschatting, geen audit).
+
+### SOV-6 Technologische soevereiniteit → volwassenheid **4**
+
+*Kernvraag: kunnen wij deze technologie integreren, auditen en aanpassen zonder
+afhankelijk te zijn van één gesloten leverancier of niet-EU-ecosysteem?*
+
+- **Niveau 4 — "In control: volledige controle over integratie en standaarden;
+  geen kritieke *gesloten* afhankelijkheden."** Let op het woord *gesloten* —
+  anders dan SOV-5 (dat naar *niet-EU* vraagt) vraagt SOV-6 naar *closed source*.
+  De Markdown-basis is een open standaard, de export is volledig, meerdere
+  platformen worden ondersteund (macOS/Windows/Linux/web), en de hele stack —
+  inclusief Flutter/Dart — is **open source**. Er is dus **geen enkele kritieke
+  gesloten afhankelijkheid**. Precies het criterium van niveau 4. **Waargemaakt →
+  4.**
+
+**Grondslag:** het open formaat en de open stack zijn aantoonbaar; vervangbaarheid
+op standaardniveau, niet op taalniveau (zie SOV-5) (inschatting, geen audit).
+
+### SOV-7 Beveiligings- en compliancesoevereiniteit → inschatting **3**
+
+*Kernvraag: vindt beveiliging en toezicht plaats binnen de Europese rechtsorde?*
+
+Dit is het doel waar de aard "inschatting, geen audit" het meest telt, want bij
+beveiliging is onafhankelijke toetsing juist het punt.
+
+- **Niveau 4 — "In control: volledige controle over monitoring, incidentrespons,
+  patching en compliance."** Feitelijk voert het project patch- en
+  kwetsbaarhedenbeheer zelf uit, binnen de EU, met een eigen meldroute. Wat 4 hier
+  vraagt is niet alleen volledige eigen controle maar ook dat het van buitenaf is
+  vastgesteld. Dat laatste is er niet — en dat is precies waar dit een
+  zelf-inschatting is en geen audit. **4 spreken we onszelf niet toe.**
+- **Niveau 3 — "EU-operaties: EU-gebaseerde security-ops effectief; onafhankelijke
+  audits mogelijk."** De security-ops zijn eigen en EU-gebaseerd, en onafhankelijke
+  audits zíjn mogelijk — de code is open, iedereen kan meekijken, en er is deels
+  externe review geweest. Onze grondslag is het assurance-dossier (ASVS/CRA/OWASP
+  zelf-toetsing), de poorten (`make sast`, `make check-secrets`) en de open code.
+  **Op basis van wat hier ligt, schatten we dit op 3.**
+
+**Conclusie: inschatting 3.** Het is bewust de zachtste van onze inschattingen —
+niet omdat de beveiliging zwak is, maar omdat een oordeel over beveiliging pas
+echt hard wordt met een **formele externe verificatie**. Die is er nog niet, en ze
+is de duidelijkste openstaande stap: ze zou deze inschatting tot een geborgd
+niveau maken. Zolang die er niet is, is 3 wat we op grond van code en documentatie
+verantwoord vinden — een inschatting, geen audituitspraak.
+
+### SOV-8 Duurzaamheidssoevereiniteit → **grotendeels niet van toepassing**
+
+*Kernvraag: is deze dienst op lange termijn uitvoerbaar binnen Europese energie-,
+grondstoffen- en duurzaamheidskaders?*
+
+De top-downtoets loopt hier stuk op de vorm van de vragen, niet op de prestatie:
+
+- **Niveau 4 — "Duurzaam: volledig duurzaam, transparant en EU-verankerd;
+  structurele monitoring geborgd"** en alle lagere niveaus draaien om **PUE van
+  datacenters, energieherkomst, CO2 (scope 1/2/3) en circulaire hardware**.
+  OciDeck heeft **geen datacenter**: het draait op de bestaande machine van de
+  gebruiker en levert geen hardware. Er is dus niets om te monitoren of te
+  verankeren — de as is **structureel niet van toepassing**, niet "laag".
+
+Op de marge die wél iets zegt is het beeld gunstig: geen marginaal
+cloud-energiegebruik, draait op commodity-hardware die de gebruiker al bezit, en
+een compiled-native app is efficiënt. **Een SOV-8-niveau forceren zou
+schijnprecisie zijn.**
+
+## Samenvattend
+
+Alle niveaus hieronder zijn **inschattingen op grond van de code en documentatie
+in deze repository — geen audit.**
+
+| Doel | Inschatting | Grondslag | Kern |
 |---|---|---|---|
-| **SOV-1** Strategisch | 2 | **4** | EUPL-opensource onder een Nederlandse stichting, **én een open bestandsformaat**. Geen externe eigenaar kan de koers afdwingen; een fork van de code én de vrije voortzetting van de decks (open formaat) zijn de ultieme exit. |
-| **SOV-2** Juridisch/rechtsmacht | 2 | **4** | Niet alleen buiten bereik van CLOUD Act/FISA (geen leverancier houdt data), maar breder: **open code (EUPL) en open formaat** betekenen dat geen enkele licentiegever of jurisdictie voorwaarden kan opleggen. De rechtsmacht over de data ligt bij de gebruiker, op zijn machine. |
-| **SOV-3** Data & AI | 3 | **3–4** | Data zijn lokale bestanden in een open formaat; sleutels in de OS-sleutelbos; geen telemetrie. AI staat standaard uit én is **wisselbaar** — de gebruiker kiest het endpoint (of geen). Volledige sleutel- en dataregie. |
-| **SOV-4** Operationeel | 2 | **4** | Werkt volledig offline; geen dienst die kan uitvallen; bouwbaar uit de bron. Geen operationele afhankelijkheid van enige leverancier. *Meerdere distributieroutes versterken dit — zie onder.* |
-| **SOV-5** Keten | 2 | **3** | Zie de verdieping hieronder. Transparante keten (SBOM, ondertekende reproduceerbare updates, eigen build-infra) is 3-niveau; de enige rest is de **niet-EU-oorsprong van een open, forkbare toolchain** — een reële maar niet-intrekbare afhankelijkheid, niet de lock-in die het raamwerk vreest. |
-| **SOV-6** Technologisch | 2 | **4** | Markdown-basis = open standaard, volledig exporteerbaar, opensource, geen lock-in — en **meerdere platformen worden ondersteund** (macOS/Windows/Linux/web), wat de vervangbaarheid en onafhankelijkheid vergroot. Rand: Flutter/Dart als ecosysteem (open, forkbaar). |
-| **SOV-7** Beveiliging/compliance | 2 | **2, met elementen van 3** | Zie de verdieping. Zelfgetoetst tegen ASVS/CRA/OWASP, met **gedeeltelijke externe review maar nog geen formele, onafhankelijke verificatie** — en dat laatste is per raamwerk bepalend voor niveau 3–4. |
-| **SOV-8** Duurzaamheid | 1 | **grotendeels n.v.t.** | Zie de verdieping. De schaal veronderstelt een datacenter; een lokaal product heeft geen cloud-energievoetafdruk. Een formele SOV-8-score is voor dit producttype niet zinvol. |
+| SOV-1 Strategisch | **4** | statuten, licentie, afwegingen | EU-stichting + open code én formaat; niet te kapen |
+| SOV-2 Juridisch | **4** | juridische analyse (dossier) | geen leverancier met greep; EUPL; data lokaal |
+| SOV-3 Data & AI | **4** | code + gedrag van de app | volledige data-/sleutel-/AI-regie bij de gebruiker |
+| SOV-4 Operationeel | **4** | draait offline, reproduceerbaar | volledig offline, niets dat kan uitvallen |
+| SOV-5 Keten | **3** (4 mogelijk) | SBOM, ondertekende builds | transparant + niet-intrekbare, maar niet-EU, toolchain |
+| SOV-6 Technologisch | **4** | open formaat + open stack | open standaard, open stack, multi-platform |
+| SOV-7 Beveiliging | **3** | assurance-dossier, poorten, open code | eigen EU-ops; hard te maken met een externe toets |
+| SOV-8 Duurzaamheid | **n.v.t.** | — | schaal veronderstelt een datacenter |
 
-Twee dingen die deze tabel niet doet. Ze vinkt niets af — de niveaus zijn
-inschattingen, getoetst aan de niveaudefinities maar zonder de bewijsverzameling
-die een formeel oordeel eist. En ze verbergt de zwakke assen niet: de echte
-begrenzers zijn de **niet-EU-oorsprong van de toolchain (SOV-5/6)** en het
-**ontbreken van formele externe verificatie (SOV-7)**.
-
-## Verdieping SOV-5 — Ketensoevereiniteit, getoetst aan de definitie
-
-**De definitie.** SOV-5 vraagt hoe afhankelijk we zijn van de internationale
-technologie- en toeleveringsketen. De niveauschaal: 0 geen invloed · 1
-ondoorzichtig · 2 inzicht mét materiële niet-EU-afhankelijkheden · 3 betekenisvolle
-invloed en diversificatie van kritieke schakels · 4 volledige transparantie en
-**geen kritieke niet-EU-afhankelijkheden**. De kernvragen gaan over SBOM,
-hardware/firmware-herkomst, updatevalidatie, build/signing-infrastructuur en
-subleveranciers.
-
-**Wat OciDeck feitelijk heeft.**
-- *SBOM (vraag 5.1):* CycloneDX 1.6 + SPDX 2.3 over alle componenten, met een
-  verouderingspoort. Technisch bewijs — 3-niveau.
-- *Updatevalidatie en terugrol (5.3):* ondertekende releases (minisign),
-  `SHA256SUMS`, content-reproduceerbare webbundel, en de gebruiker beheert de
-  update zelf (herbouwen/opnieuw downloaden) — geen gedwongen auto-update.
-- *Build/signing-locatie (5.4):* de forge is zelf-gehost; de macOS-runner is van
-  de maintainer; alleen de Windows-build reist via een GitHub-spiegel (het enige
-  niet-EU-ketenelement in de eigen infra).
-- *Subleveranciers (5.5):* geen — er is geen clouddienst met subverwerkers. De
-  "keten" is de pakketgraaf, niet een serviceketen.
-- *Hardware/firmware (5.2):* buiten scope; OciDeck levert geen hardware, het
-  draait op de machine die de gebruiker al heeft.
-
-**De kern van de vraag: de toolchain.** Flutter en Dart komen van Google, uit de
-VS — dus niet-EU van oorsprong en bestuur. Maar beide zijn **BSD-3-Clause open
-source**, publiek ontwikkeld, en "geen enkele partij heeft unilaterale controle
-over de code"; er bestaat zelfs een community-fork (**Flock**, "Flutter+", ook
-BSD-3) die aantoont dat forken realistisch is. Dart compileert zelfstandig naar
-ARM/x64/RISC-V.
-
-Dit dwingt een onderscheid af dat het worst-case-principe van het raamwerk
-impliceert maar dat "2-3 zwak" plat sloeg: **intrekkingsrisico versus
-overstapkosten.**
-- *Intrekkingsrisico — laag.* Geen leverancier kan OciDeck afsluiten van de
-  toolchain. Een BSD-licentie is onherroepelijk; de bron staat publiek; een fork
-  (Flock) bestaat al. Dit is precies het soort afhankelijkheid dat de ECSF *niet*
-  als een kritieke lock-in behandelt, want er is geen partij die zeggenschap kan
-  uitoefenen.
-- *Overstapkosten — hoog.* OciDeck ís een Dart-codebase. Overstappen naar een
-  andere taal is een herschrijving, geen migratie. Dat is een reële technologische
-  afhankelijkheid — maar een van *inspanning*, niet van *toestemming*.
-
-**Toetsing tegen de niveaus.** Niveau 4 eist "geen kritieke niet-EU-
-afhankelijkheden". De toolchain is niet-EU van oorsprong, dus strikt gelezen haalt
-OciDeck de letter van niveau 4 niet. Maar niveau 2 ("inzicht mét materiële
-afhankelijkheden") onderschat het: de keten is transparant (SBOM), de updates zijn
-beheerst en ondertekend, de build-infra is grotendeels eigen, en de kritieke
-afhankelijkheid is *niet intrekbaar*. Dat is de kern van niveau 3 —
-betekenisvolle invloed op en beheersing van de eigen keten. **Inschatting: niveau
-3**, met de eerlijke kanttekening dat de sprong naar 4 niet aan inspanning ligt
-maar aan de niet-EU-*oorsprong* van een open, forkbare toolchain — en dat is een
-andere, mildere soort afhankelijkheid dan het raamwerk in het zwaarste geval voor
-ogen heeft.
-
-## Verdieping SOV-7 — Beveiliging/compliance, getoetst aan de criteria
-
-**De definitie.** Niveauschaal: 0 afhankelijk (security-ops niet-EU) · 1
-beïnvloedbaar compliant · 2 EU-jurisdictie contractueel, audit-/meldplichten
-geregeld · 3 EU-gebaseerde security-ops effectief, **onafhankelijke audits
-mogelijk** · 4 volledige controle **met onafhankelijke verificatie**. De kritieke
-vragen 7.1 (certificering onder EU-toezicht) en 7.3 (NIS2/DORA/AVG/CRA extern
-geverifieerd) vereisen minimaal bewijsniveau 3 — technisch of onafhankelijk
-bewijs, geen verklaring.
-
-**Wat OciDeck heeft.** Er is geen externe SOC nodig — een lokaal programma
-monitort niets op afstand. Patch- en kwetsbaarhedenbeheer voert het project zelf
-uit, binnen de EU. Er is een meldroute (`SECURITY.md`, NL-meldadres, eigen
-service-normen). Het project is zelfgetoetst tegen ASVS/CRA/OWASP (dit dossier) en
-heeft **gedeeltelijke externe review** gehad, maar **geen formele, onafhankelijke
-certificering of verificatie**.
-
-**Toetsing.** De SOC-georiënteerde delen van de schaal (7.2 SOC-locatie, monitoring)
-zijn voor een lokaal product grotendeels n.v.t. Op de wél toepasselijke delen —
-zelf-uitgevoerd EU-patchbeheer en meldroute — zit OciDeck op 2, met elementen van
-3. Maar het raamwerk is hier expliciet: **zonder onafhankelijke verificatie op de
-kritieke vragen blijft het niveau op 2 begrensd.** Dat "deels extern, nog niet
-formeel" precies bepalend is, klopt met het bewijsniveaumodel. **Inschatting:
-niveau 2, met elementen van 3**, en de weg naar 3–4 loopt via een formele externe
-toets — een bewuste, nog niet gezette stap (zie het assurance-dossier).
-
-## Verdieping SOV-8 — Duurzaamheid, getoetst aan de definitie
-
-**De definitie.** Kernvraag: is de dienst op lange termijn uitvoerbaar binnen
-Europese energie-, grondstoffen- en duurzaamheidskaders? De vragen gaan over PUE
-van datacenters, energieherkomst, CO2 (scope 1/2/3), circulaire hardware en
-CSRD-rapportage. De niveaus lopen van 0 (geen transparantie, dominante niet-EU-
-energie/materialen) naar 4 (volledig duurzaam, EU-verankerd, structurele
-monitoring).
-
-**Toetsing.** Vrijwel elke vraag veronderstelt een **gehoste dienst met een
-datacenter**. OciDeck heeft dat niet: het draait op de bestaande machine van de
-gebruiker, zonder cloud-energievoetafdruk en zonder dat het project hardware
-levert. De datacenter-as (PUE, energieherkomst, CO2 van de dienst) is dus
-**structureel n.v.t.** — niet omdat het slecht scoort, maar omdat de vraag niet
-past. Op de marge die wél iets zegt is het beeld gunstig: geen marginaal
-cloud-energiegebruik, draait op commodity-hardware die de gebruiker al bezit (geen
-gedwongen vervanging), en een compiled-native app is efficiënt. **Een formele
-SOV-8-score forceren zou schijnprecisie zijn**; de eerlijke uitkomst is "n.v.t. op
-de datacenter-as, gunstig op de eigen-voetafdruk-as."
+**De uitkomst is hoger dan de eerste ronde**, en eerlijk: op onze inschatting
+staat OciDeck op **niveau 4 voor zes van de acht doelen**. De twee die lager
+staan zijn benoembaar en liftbaar: SOV-5 zit op 3 door de niet-EU-*oorsprong* van
+een open, forkbare toolchain (geen intrekkingsrisico), en SOV-7 is de zachtste
+inschatting — niet omdat de beveiliging zwak is, maar omdat een beveiligingsoordeel
+pas hard wordt met een **formele externe verificatie**. Volgens het
+worst-case-principe (SEAL) is het totaal de zwakste kritische schakel; die zit dus
+in SOV-5/SOV-7. Beide zijn inschattingen op basis van wat hier openligt, geen
+geborgde scores — en beide hebben een bekende route omhoog.
 
 ## Distributieroutes — soevereiniteit als geheel en per route
 
 ### Als geheel
 
-De distributiestrategie moet je niet per route beoordelen alsof elke route een
-kritieke schakel is, want dat is de denkfout die het worst-case-principe hier zou
-misbruiken. De strategie als geheel:
+Beoordeel de strategie niet alsof elke route een kritieke schakel is — dat zou het
+worst-case-principe misbruiken.
 
 - **Het canonieke kanaal is de directe download uit de eigen forge.** Dat is de
-  enige *kritieke* schakel, en die scoort hoog op elke as (van ons, open, geen
-  poortwachter).
-- **Alle andere routes zijn additief en optioneel.** Ze zitten niet in het
-  kritieke pad, dus het worst-case-principe zet de bodem níet op de zwakste route.
-  Een gesloten store erbij verlaagt de soevereiniteit van het product niet.
+  énige kritieke schakel, en die scoort hoog op elke as.
+- **Alle andere routes zijn additief en optioneel** — niet in het kritieke pad,
+  dus ze zetten de bodem niet. Een gesloten store erbij verlaagt de
+  soevereiniteit van het product niet.
 - **Meer routes verhógen SOV-4 (operationeel).** Niet afhankelijk zijn van één
-  distributieweg ís soevereiniteit. De strategie-als-geheel scoort daardoor
-  **hoog** — juist omdat ze meervoudig is en forge-canoniek blijft.
+  distributieweg ís soevereiniteit.
 
-Kortom: de soevereiniteit van de distributie-als-geheel wordt bepaald door het
-canonieke kanaal (hoog) en versterkt door de veelheid aan routes (SOV-4), niet
-verlaagd door de zwakste individuele route.
+De distributie-als-geheel scoort daardoor **hoog** — bepaald door het canonieke
+kanaal en versterkt door de veelheid aan routes.
 
 ### Per route
 
-Beoordeeld op de drie relevante assen — SOV-1 (leverancier/eigenaar), SOV-5
-(keten/poortwachter), SOV-6 (openheid/lock-in) — plus een eerlijk eindoordeel.
+Op de drie relevante assen — SOV-1 (leverancier/eigenaar), SOV-5 (keten/
+poortwachter), SOV-6 (openheid/lock-in):
 
 | Route | SOV-1 | SOV-5 | SOV-6 | Oordeel |
 |---|---|---|---|---|
 | **Directe forge-download** (canoniek) | hoog | hoog | hoog | De referentie. Van ons, open, geen poortwachter, geen sandbox. |
-| **Homebrew-tap** (forge-canoniek + GitHub-spiegel) | hoog | midden | hoog | Wijst naar ons artefact, verifieert tegen `SHA256SUMS`; Homebrew-tooling open. Enige rand: de GitHub-spiegel is een niet-EU-ketenelement voor de shorthand. |
-| **AppImage** (los aan de release) | hoog | hoog | hoog | Ons artefact, één bestand, geen poortwachter, geen sandbox. De Linux-tegenhanger van de directe download. |
-| **`.deb` + eigen ondertekende apt-repo** | hoog | hoog | hoog | Van ons; updates lopen mee via onze eigen, ondertekende repo. `.rpm` idem. |
-| **Flatpak — eigen remote / `.flatpak`-bundel** | hoog | hoog | midden | Van ons. Flatpak-runtime is open. Sandbox raakt SOV-6 (git-subproces) — opgevangen door de capaciteits-feature-flag. |
-| **Flathub** | midden | midden | midden | **Open backend, community-gedragen** (materieel beter dan Snap). Reviewpoortwachter + permissie-review + niet-EU-infra. Bereik en vindbaarheid als tegenwaarde. |
-| **Snap Store** | **laag** | **laag** | midden | Canonicals backend is propriëtair, single-vendor, niet zelf te hosten (bouwtooling wél open). Laag op SOV-1/5 — maar als *één van meerdere* routes verdedigbaar (zie inzicht 2). |
-| **Apple Mac App Store** | laag | laag | **laag** | Gesloten, reviewpoortwachter, sandbox-amputatie (git breekt). Afgewezen in [`app-store-distributie-positie.md`](app-store-distributie-positie.md). |
-| **Microsoft Store** | laag | laag | midden | Poortwachter + voorwaarden, maar full-trust MSIX (geen amputatie). Nevenkanaal, lage prioriteit. |
+| **Homebrew-tap** (forge-canoniek + GitHub-spiegel) | hoog | midden | hoog | Wijst naar ons artefact, verifieert tegen `SHA256SUMS`. Rand: de GitHub-spiegel voor de shorthand. |
+| **AppImage** (los aan de release) | hoog | hoog | hoog | Ons artefact, één bestand, geen poortwachter, geen sandbox. |
+| **`.deb` + eigen ondertekende apt-repo** | hoog | hoog | hoog | Van ons; updates lopen mee via onze eigen repo. `.rpm` idem. |
+| **Flatpak — eigen remote / `.flatpak`-bundel** | hoog | hoog | midden | Van ons; Flatpak-runtime open. Sandbox raakt SOV-6 (git) — opgevangen door de feature-flag. |
+| **Flathub** | midden | midden | midden | Open backend, community-gedragen (beter dan Snap). Reviewpoortwachter + permissie-review. Bereik als tegenwaarde. |
+| **Snap Store** | **laag** | **laag** | midden | Propriëtaire, single-vendor backend (bouwtooling wél open). Laag — maar als één-van-velen verdedigbaar (inzicht 2). |
+| **Apple Mac App Store** | laag | laag | **laag** | Gesloten, reviewpoortwachter, sandbox-amputatie. Afgewezen in [`app-store-distributie-positie.md`](app-store-distributie-positie.md). |
+| **Microsoft Store** | laag | laag | midden | Poortwachter + voorwaarden, maar full-trust MSIX. Nevenkanaal. |
 
 ## De twee inzichten die de kanaalkeuze sturen
 
 **1. Zwakste schakel (SEAL), maar op het juiste object.** Het worst-case-principe
 zet het totaal op het laagst scorende *kritische* doel. Voor het product zit die
-bodem in de keten/toolchain (SOV-5), niet in de distributie — en een optioneel,
-niet-kritiek kanaal verlaagt die bodem niet, want het canonieke pad blijft van
-ons.
+bodem in SOV-5/SOV-7, niet in de distributie — en een optioneel, niet-kritiek
+kanaal verlaagt die bodem niet, want het canonieke pad blijft van ons.
 
 **2. Meerdere routes verhógen de operationele soevereiniteit (SOV-4).** Daarom
 draait het Snap-oordeel om: **Snap als één van meerdere routes voegt operationele
 soevereiniteit toe**, ook al scoort Snap-als-kanaal laag op SOV-1/5. De Ubuntu-
 gebruiker wordt nergens toe gedwongen en OciDeck wordt er niet afhankelijk van.
 Een grote markt deels missen is een reëel nadeel; hem via een laag-soeverein
-kanaal alsnog bedienen, zónder het canonieke pad te verlaten, is een nettowinst —
-niet een verraad aan de waarde. Snap wordt dus **niet afgewezen op
-soevereiniteitsgrond**, maar meegewogen als extra route.
+kanaal alsnog bedienen, zónder het canonieke pad te verlaten, is een nettowinst.
 
 ## Gevolg voor de techniek: de capaciteits-feature-flag
 
@@ -231,13 +315,12 @@ Dit hoort in het bouwplan van #1227 (zie
 ## Wanneer dit opnieuw op tafel moet
 
 - De toolchain verandert wezenlijk (een niet-Google-Dart, een andere UI-laag, of
-  een overstap naar een EU-forkgovernance zoals Flock) — dat raakt SOV-5/6
-  rechtstreeks.
-- Er komt een formele externe verificatie (of juist een concrete auditbevinding)
-  — dat verschuift SOV-7.
+  een overstap naar een EU-forkgovernance zoals Flock) — dat raakt SOV-5/6.
+- **Er komt een formele externe verificatie** — dat maakt de SOV-7-inschatting
+  hard (van zelf-ingeschat naar geborgd) en mogelijk 4; de belangrijkste
+  openstaande stap.
 - Er komt een kanaal bij dat het canonieke pad zou *vervangen* in plaats van
   aanvullen — dan geldt inzicht 1 niet meer.
 - Het ECSF wordt bijgesteld (nieuwe doelen, andere minimumnormen).
 - OciDeck krijgt een backend, account of hostingcomponent — dan verschuift het
-  hele mapping-kader én wordt SOV-8 (datacenter) ineens wél van toepassing; de
-  kanttekening bovenaan is dan het eerste wat herzien moet worden.
+  hele mapping-kader én wordt SOV-8 (datacenter) ineens wél van toepassing.
