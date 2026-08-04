@@ -1004,6 +1004,28 @@ that before deciding whether this alpha fits what you are doing.
   draait moet `nodejs` installeren. Restpunt: de tap-repo op de forge + de
   GitHub-spiegel + beide secrets zijn nog handmatig te zetten (zie `docs/BUILD.md`,
   "Homebrew cask"); tot die tijd slaat de job elke release netjes groen over.
+- **Onbewaakte release met één commando (#1161).** `scripts/release_auto.sh` maakt
+  de release-keten volledig handenvrij, als automatiseringsslag bovenop de geleide
+  `scripts/release.sh` (die de onomkeerbare stappen bewust alleen afdrukte). Alle
+  interactie zit vooraan: een menu kiest het volgende SemVer-niveau (patch/minor/
+  major — geen vierde cijfer, OciDeck belooft strikte 3-delige SemVer, afgedwongen
+  door `check-version-bump`) en één prompt neemt het minisign-sleutelwachtwoord;
+  daarna draait alles zonder verdere vragen. Fase 1 (lokaal) draait een
+  verouderingsgate (`make catalogs-outdated` + `make check-pins` — een nieuwere
+  upstream-catalogus of een achterlopende CI-pin stopt de release mét melding, zodat
+  je eerst bijwerkt i.p.v. stil mee te bumpen), de vier-plek-versiebump, `make sbom`,
+  `make check-release`, `make build-release`, `make notarize-macos`, zegelverificatie
+  en de `/Applications`-vervanging. Fase 2 opent een PR, wacht op de groene poort,
+  merget, tagt en pusht naar origin **en** mirror, en volgt de release-CI per minuut.
+  Fase 3 tekent `SHA256SUMS` met minisign (het wachtwoord blijft in het geheugen en
+  gaat via `expect` naar minisign, nooit naar schijf/log), hangt de handtekening aan,
+  bewaakt de website-job en draait `make deploy-web`. Fail-safe: `set -Eeuo pipefail`
+  plus een `ERR`-trap noemt welke stap op welke regel faalde én of de tag al gepusht
+  was — vóór de push is er niets naar buiten en wordt de release-branch opgeruimd, ná
+  de push staat de tag vast en wordt de fix de volgende patch-tag (nooit een her-tag).
+  `--dry-run` toont het plan en de verouderingsgate zonder te muteren; `--print-version`
+  is de hermetische guard-rekenkunde die `test/release_auto_version_test.dart` tegen de
+  canonieke één-as-regel pint. Gedocumenteerd in `docs/BUILD.md` § *Cutting a release*.
 - **Homebrew-cask voor macOS, automatisch bijgewerkt bij release (#1227).**
   Met dank aan **Reinoud van Leeuwen**, die dit als pull request (#1222)
   aandroeg — een cask-template, een generatiescript en release-bedrading. Op
