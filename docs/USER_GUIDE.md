@@ -835,10 +835,11 @@ presentation jumps to that slide**. Because a jump uses the same route history a
 the jump-out, **back** returns you to the menu you came from. If the target slide
 is later deleted, the block simply stops jumping — no error.
 
-In the `.md` file the blocks are ordinary Markdown link-bullets
-(`- [Label](#anchor)`, optionally followed by `![](mem:…)` for the image), so a
-menu stays a readable list of links in any Markdown viewer; only the
-`<!-- _class: menu -->` token marks it as a menu for OciDeck.
+In the `.md` file the blocks are ordinary Markdown link-bullets — a `- [Label]`
+bullet whose link points at the target slide's anchor, optionally followed by
+`![](mem:…)` for the image — so a menu stays a readable list of links in any
+Markdown viewer; only the `<!-- _class: menu -->` token marks it as a menu for
+OciDeck.
 
 ### Source-code slides
 
