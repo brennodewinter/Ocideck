@@ -3662,9 +3662,10 @@ else.
   A finding is authored as **one** slide, but when its prose is too long for a
   single slide it is **rendered** across several full-size slides — so the text
   stays full-size and full-width instead of shrinking to fit. Page 1 keeps the
-  header card (with the meta) and the sections that fit; because that card on its
-  own is taller than a slide, when nothing fits beside it the sections start on
-  page 2. Each further page repeats the heading with a small "(i/N)" marker —
+  header card (with the meta) plus the finding's first section, so it always
+  carries content rather than stranding the header on a near-empty slide; the
+  remaining sections continue on the pages after it. Each further page repeats
+  the heading with a small "(i/N)" marker —
   drawn as a plain line rather than the severity card, so the section fills the
   slide width — and carries the next sections. You page through them with the
   arrow keys and the page indicator reads "Pagina i / N", the presenter does the

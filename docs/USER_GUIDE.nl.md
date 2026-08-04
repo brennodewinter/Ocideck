@@ -3748,8 +3748,9 @@ ongewijzigd blijft.
   Een bevinding wordt opgesteld als **één** slide, maar wanneer de prozatekst te lang is voor een
   enkele slide wordt hij **gerenderd** over meerdere slides op volledige grootte — zodat de tekst
   op volledige grootte en volledige breedte blijft in plaats van te krimpen om te passen. Pagina 1 houdt de
-  headerkaart (met de meta) en de secties die passen; omdat die kaart op zichzelf
-  hoger is dan een slide, beginnen de secties op pagina 2 wanneer er niets naast past.
+  headerkaart (met de meta) plus de eerste sectie van de bevinding, zodat hij
+  altijd inhoud draagt in plaats van de header op een bijna lege slide achter te
+  laten; de overige secties lopen door op de pagina's erna.
   Elke volgende pagina herhaalt de kop met een kleine "(i/N)"-markering —
   getekend als een gewone regel in plaats van de ernstkaart, zodat de sectie de
   slidebreedte vult — en draagt de volgende secties. Je bladert er met de

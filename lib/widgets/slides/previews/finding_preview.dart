@@ -102,13 +102,18 @@ class _FindingPreview extends StatelessWidget {
   Widget _continuationHeading(FindingSpec spec) {
     return Padding(
       key: const ValueKey('finding-continuation-heading'),
-      padding: EdgeInsets.only(bottom: w * 0.025),
+      padding: EdgeInsets.only(bottom: w * 0.02),
       child: Text(
         spec.heading,
         style: _applyFont(
           font,
           TextStyle(
-            fontSize: w * 0.032 * _findingFontScale,
+            // About half the size of page 1's heading: a continuation page only
+            // needs a compact "which finding, page i/N" reminder — the finding's
+            // full identity lives on page 1 — so the previously large repeated
+            // title just wasted half the slide on the finding's beginning
+            // (#1198 follow-up).
+            fontSize: w * 0.017 * _findingFontScale,
             fontWeight: FontWeight.w700,
             color: AppTheme.navy,
           ),

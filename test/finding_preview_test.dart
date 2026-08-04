@@ -335,6 +335,45 @@ void main() {
     },
   );
 
+  testWidgets(
+    'the continuation heading is far smaller than page 1 (#1198 follow-up)',
+    (tester) async {
+      // The repeated heading on a continuation page is a compact reminder, not a
+      // full title — a large one wasted half the slide on the finding's name. It
+      // must stay clearly smaller than page 1's header heading.
+      double headingSize(Finder root, String heading) {
+        final text = tester.widget<Text>(
+          find.descendant(of: root, matching: find.text(heading)),
+        );
+        return text.style!.fontSize!;
+      }
+
+      final pages = paginateFinding(FindingSpec.parse(longFinding));
+
+      await tester.pumpWidget(_host(_finding(pages.first.toMarkdown())));
+      await tester.pump();
+      final page1 = headingSize(
+        find.byKey(const ValueKey('finding-header-card')),
+        pages.first.heading,
+      );
+
+      await tester.pumpWidget(_host(_finding(pages[1].toMarkdown())));
+      await tester.pump();
+      final continuation = headingSize(
+        find.byKey(const ValueKey('finding-continuation-heading')),
+        pages[1].heading,
+      );
+
+      expect(
+        continuation,
+        lessThan(page1 * 0.6),
+        reason:
+            'continuation heading ($continuation) should be about half of the '
+            'page-1 heading ($page1), not a full-size title',
+      );
+    },
+  );
+
   testWidgets('page 1 without metadata still renders the finding header', (
     tester,
   ) async {
