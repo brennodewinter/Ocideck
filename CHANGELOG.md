@@ -12,6 +12,65 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.3.1] — 2026-08-04
+
+### Added
+
+- **Doorzoekbare taalkiezer in de toestemmingspoort.** (#1228) De taalkeuze bij
+  de eerste start is een zoekveld geworden: typ een deel van de taalnaam en de
+  lijst filtert mee, in plaats van door 31 talen te scrollen.
+- **Homebrew-cask voor macOS, automatisch bijgewerkt bij een release.** (#1227)
+  Met dank aan **Reinoud van Leeuwen**, die dit als pull request (#1222)
+  aandroeg. `brew install --cask` haalt de macOS-app op; de cask pint de SHA-256
+  uit de gepubliceerde `SHA256SUMS` en de tap staat canoniek op de eigen forge,
+  met een GitHub-spiegel voor de `librekat/ocideck`-shorthand. macOS-only (een
+  Linux-route loopt langs een eigen spoor). De afweging staat in
+  `assurance/app-store-distributie-positie.md`.
+- **Een uitweg uit de toestemmingspoort zonder akkoord.** (#1207) Naast "Akkoord
+  gaan" staat er op desktop nu **"Niet akkoord en afsluiten"**, die de app netjes
+  sluit — wie de voorwaarden niet aanvaardt, zat op Windows anders klem.
+- **Nederlandse gebruikersdocumentatie meegeleverd.** (#1181) Een Nederlandse
+  machinevertaling van de gebundelde gebruikersdocs.
+
+### Changed
+
+- **Lange bestandspaden zijn overal volledig leesbaar.** (#1211, #1217) De
+  save-dialoog toont de paden naar de presentatie, `images/` en `media/` nu
+  volledig, en vijf verdere dialogen (de S3- en WebDAV-browser, presentaties
+  zoeken, dubbele presentaties opruimen, presentatie openen) zijn breedte-
+  aanpasbaar via een sleephandgreep, met een tooltip die het volle pad toont.
+- **Welkomscherm verfijnd.** (#1226) De versie staat in de voet met klikbare
+  links en een merk-hoverkleur.
+- **Positie over app-storedistributie vastgelegd.** (#1220) Een assurance-notitie
+  weegt distributie via de Apple- en Microsoft-store tegen de directe download.
+- **De release-tag-guard negeert de losgelaten `v1.2.1`.** De monotone guard in
+  `scripts/release.sh` sloot de per ongeluk uitgebrachte `v1.2.1` in als hoogste
+  tag, waardoor elke 0.x-release erna als "niet strikt hoger" werd geweigerd; die
+  tag telt nu als losgelaten mee, zoals `sanctionedTransitions` dat al deed voor
+  de versie-bump-poort.
+
+### Fixed
+
+- **Niet-canonieke `## …`-secties in een bevinding verdwijnen niet langer stil.**
+  (#1198) Een handgeschreven of geïmporteerde bevinding met een korte of
+  Nederlandse sectiekop (`## Confirmation`, `## Impact`, `## Notes`) werd nooit
+  uitgelezen en verdween uit weergave, presentatie én export. Gangbare vormen
+  worden nu als alias herkend en round-trippen naar de canonieke kop; een écht
+  onbekende sectie levert een zichtbare kwaliteitswaarschuwing op.
+- **Geen schaarse header-only eerste pagina meer bij een bevindingsdia.** (#1198)
+  Een paginerende bevinding kon een eerste pagina met alléén de headerkaart
+  opleveren; de header-kostenschatting is nu inhoud-afgeleid en met een echte-
+  render-test vastgepind, en pagina 1 draagt onvoorwaardelijk de header plus de
+  eerste sectie. De vervolgpagina-kop is kleiner voor meer inhoudsruimte.
+- **Web-splashlogo gebroken door Apache `Alias /icons/`.** (#1221) De map
+  `icons/` in de webbundel botste met een standaard Apache-alias en liet het
+  splashlogo weg; de map heet nu `app-icons/`, met een poort tegen het pad in
+  `index.html`.
+- **Verkeerde open-melding vlak na de start.** (#1209) Een `.pptx`/`.odp`/`.key`
+  meteen na het starten openen meldde "Zet de module Importeren aan…" terwijl die
+  al aan stond; de open-paden wachten nu eerst tot de opgeslagen module-stand
+  geladen is.
+
 ## [0.3.0] — 2026-08-04
 
 ### Changed
