@@ -52,6 +52,53 @@ void main() {
     },
   );
 
+  // #1209: de schakelaar wordt asynchroon uit SharedPreferences geladen. Een
+  // beslissing die vlak na de start valt — de "wat nu"-melding bij het openen,
+  // slepen of web-openen van een presentatie — mag niet op de nog-ladende
+  // default vallen en de module als uit zien terwijl hij aan staat.
+  test(
+    'de reveal-wacht ziet de opgeslagen stand, de kale lezing nog niet',
+    () async {
+      SharedPreferences.setMockInitialValues({'importModuleEnabled': true});
+      final c = ProviderContainer();
+      addTearDown(c.dispose);
+      // Eerste lezing, nog vóór het async laden klaar is: precies het venster
+      // waarin #1209 de verkeerde melding toonde — de veilige default (uit).
+      expect(c.read(importModuleRevealProvider), isFalse);
+      // Na het wachten op de notifier is de opgeslagen stand er: module aan.
+      await c.read(importModuleProvider.notifier).ready;
+      expect(c.read(importModuleRevealProvider), isTrue);
+    },
+  );
+
+  testWidgets('de open-helper wacht op het laden en ziet de module aan (#1209)', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({'importModuleEnabled': true});
+    late WidgetRef captured;
+    await tester.pumpWidget(
+      ProviderScope(
+        child: Consumer(
+          builder: (_, ref, _) {
+            captured = ref;
+            return const SizedBox();
+          },
+        ),
+      ),
+    );
+    // Op het eerste frame leest de kale reveal nog de ladende default: dit is
+    // het startvenster waarin de melding de gebruiker naar de instellingen
+    // stuurde voor een module die al aan stond.
+    expect(captured.read(importModuleRevealProvider), isFalse);
+    // De helper die de open-/sleep-/web-paden gebruiken wacht dat venster af en
+    // geeft de werkelijke stand terug: aan.
+    await expectLater(
+      importModuleRevealedWhenReady(captured),
+      completion(isTrue),
+    );
+    await tester.pumpAndSettle();
+  });
+
   testWidgets('de kaart schakelt de module en noemt OpenKAT niet meer', (
     tester,
   ) async {
