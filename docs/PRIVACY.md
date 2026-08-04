@@ -419,6 +419,25 @@ able to send a screenshot of an admin panel or a group photo to a third party.
 the safeguard only to text, so it read as though the image was equally
 protected.)*
 
+### The LibrePlan connector is off by default and read-only
+
+The optional LibrePlan connector does nothing until you switch on its module
+card under **Settings → Uitbreidingen (Extensions)**. Until you do, it has no
+tab of its own in the settings sidebar. Switching the module on reveals a
+**Settings → LibrePlan-connector** tab where you configure a server URL,
+username and password.
+
+The connector is **read-only**: it sends GET requests to LibrePlan's REST API
+and never writes back. The password is stored in your OS keychain, not in the
+deck or in preferences. The connector is **desktop-only** — on the web build
+the keychain is not safe, so the module card is visible but disabled.
+
+Data fetched from LibrePlan (project schedules, resources, timesheets) becomes
+part of your deck and is treated like any other slide content: the privacy
+scanner (OciWacht) checks it before export, and the redaction manifest applies
+to it. The connector itself does not send deck content anywhere — it only
+fetches from the LibrePlan server you configured.
+
 ## Controls for sharing safely
 
 ### Privacy scanning (OciWacht)
