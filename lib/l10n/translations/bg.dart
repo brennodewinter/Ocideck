@@ -1793,6 +1793,19 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Внимание: данните от сесията може да съдържат лични данни.',
+  'Privacy-bevindingen in sessie-data':
+      'Открития за поверителност в данните от сесията',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Сканирането за поверителност може да е открило лични данни в данните от сесията. Експортът ги редактира автоматично; кликнете върху откритие за детайлите.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'По време на презентацията попълнихте контролни списъци и актуализирахте таблици в {aantal} слайда.',
+  'en nog {aantal} dia’s.': 'и още {aantal} слайда.',
+  'Sessie-wijzigingen bewaren?': 'Запазване на промените от сесията?',
+  'In deck behouden': 'Запази в презентацията',
+  'Downloaden als losse bestanden': 'Изтегли като отделни файлове',
+  'Map voor sessie-bestanden kiezen': 'Избери папка за файловете от сесията',
   'Zoek op taal of code': 'Търсене по език или код',
   'Geen talen gevonden': 'Няма намерени езици',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

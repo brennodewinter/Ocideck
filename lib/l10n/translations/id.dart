@@ -1771,6 +1771,18 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Perhatian: data sesi mungkin berisi data pribadi.',
+  'Privacy-bevindingen in sessie-data': 'Temuan privasi dalam data sesi',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Pemindaian privasi mungkin menemukan data pribadi dalam data sesi. Ekspor menyensornya secara otomatis; klik temuan untuk detailnya.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Saat presentasi, kamu mengisi checklist dan memperbarui tabel di {aantal} slide.',
+  'en nog {aantal} dia’s.': 'dan {aantal} slide lagi.',
+  'Sessie-wijzigingen bewaren?': 'Simpan perubahan sesi?',
+  'In deck behouden': 'Simpan di deck',
+  'Downloaden als losse bestanden': 'Unduh sebagai file terpisah',
+  'Map voor sessie-bestanden kiezen': 'Pilih folder untuk file sesi',
   'Zoek op taal of code': 'Cari berdasarkan bahasa atau kode',
   'Geen talen gevonden': 'Tidak ada bahasa ditemukan',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

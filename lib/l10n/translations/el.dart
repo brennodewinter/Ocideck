@@ -1798,6 +1798,19 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Προσοχή: τα δεδομένα συνεδρίας ενδέχεται να περιέχουν προσωπικά δεδομένα.',
+  'Privacy-bevindingen in sessie-data':
+      'Ευρήματα απορρήτου στα δεδομένα συνεδρίας',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Η σάρωση απορρήτου ενδέχεται να βρήκε προσωπικά δεδομένα στα δεδομένα συνεδρίας. Η εξαγωγή τα αποκρύπτει αυτόματα· κάντε κλικ σε ένα εύρημα για τις λεπτομέρειες.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Κατά την παρουσίαση συμπλήρωσες λίστες ελέγχου και ενημέρωσες πίνακες σε {aantal} διαφάνειες.',
+  'en nog {aantal} dia’s.': 'και {aantal} διαφάνειες ακόμα.',
+  'Sessie-wijzigingen bewaren?': 'Αποθήκευση αλλαγών συνεδρίας;',
+  'In deck behouden': 'Διατήρηση στο deck',
+  'Downloaden als losse bestanden': 'Λήψη ως ξεχωριστά αρχεία',
+  'Map voor sessie-bestanden kiezen': 'Επιλογή φακέλου για αρχεία συνεδρίας',
   'Zoek op taal of code': 'Αναζήτηση κατά γλώσσα ή κωδικό',
   'Geen talen gevonden': 'Δεν βρέθηκαν γλώσσες',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

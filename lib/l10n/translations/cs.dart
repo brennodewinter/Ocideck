@@ -1774,6 +1774,19 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Pozor: data relace mohou obsahovat osobní údaje.',
+  'Privacy-bevindingen in sessie-data':
+      'Zjištění o ochraně osobních údajů v datech relace',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Sken soukromí možná našel osobní údaje v datech relace. Export je automaticky rediguje; klikněte na zjištění pro podrobnosti.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Během prezentace jsi vyplnil kontrolní seznamy a aktualizoval tabulky na {aantal} slidech.',
+  'en nog {aantal} dia’s.': 'a ještě {aantal} slideů.',
+  'Sessie-wijzigingen bewaren?': 'Uložit změny relace?',
+  'In deck behouden': 'Ponechat v prezentaci',
+  'Downloaden als losse bestanden': 'Stáhnout jako samostatné soubory',
+  'Map voor sessie-bestanden kiezen': 'Vybrat složku pro soubory relace',
   'Zoek op taal of code': 'Hledat podle jazyka nebo kódu',
   'Geen talen gevonden': 'Nebyly nalezeny žádné jazyky',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

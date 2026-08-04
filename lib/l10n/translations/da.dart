@@ -1770,6 +1770,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Bemærk: sessionsdataene kan indeholde personoplysninger.',
+  'Privacy-bevindingen in sessie-data': 'Privatlivsresultater i sessionsdata',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Privatlivsscanningen har muligvis fundet personoplysninger i sessionsdataene. Eksporten tilslører dem automatisk; klik på et resultat for at se detaljerne.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Under præsentationen udfyldte du tjeklister og opdaterede tabeller på {aantal} slides.',
+  'en nog {aantal} dia’s.': 'og {aantal} slides mere.',
+  'Sessie-wijzigingen bewaren?': 'Gem ændringer i sessionen?',
+  'In deck behouden': 'Behold i deck',
+  'Downloaden als losse bestanden': 'Download som separate filer',
+  'Map voor sessie-bestanden kiezen': 'Vælg mappe til sessionsfiler',
   'Zoek op taal of code': 'Søg efter sprog eller kode',
   'Geen talen gevonden': 'Ingen sprog fundet',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

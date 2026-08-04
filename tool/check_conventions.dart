@@ -111,6 +111,11 @@ const int maxFileLines = 1000;
 /// deliberate reason; the goal is fewer and smaller entries over time.
 /// `lib/l10n/translations/*` is exempt — those files grow with every UI string.
 const Map<String, int> fileSizeBaseline = {
+  // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
+  // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
+  // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
+  // dat uit te liften valt; de call-sites zitten in de part-bestanden.
+  'lib/widgets/presentation/fullscreen_presenter.dart': 1016,
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
   // +20 (#1162): de twee onherleidbare navigatievelden `anchor` + `nextAnchor`
   // (stabiel dia-anker en per-dia sprong-uit) met hun doc, constructor- en
@@ -135,7 +140,7 @@ const Map<String, int> fileSizeBaseline = {
   // +4 (#1098): imports voor de uitbreidingspoort en het rechtenoverzicht voor
   // afbeeldingen; het gedrag zelf blijft in losse providers en widgets.
   'lib/widgets/app_shell.dart':
-      813, // +4 (#978 Blok C): imports + part 'provenance_actions'; +1 (video-calls F1): call_panel import
+      814, // +1 (#1235): session_export import — de afloop-flow wordt aangeroepen vanuit shell_actions_present.dart (een part-of zonder eigen imports), dus de import hoort in de library-head.
   // +7 (#1175): _onFilesDropped krijgt de presentatie-tak — een gesleepte
   // .pptx/.odp/.key gaat de import in (routing gedeeld in importDroppedPresentations).
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The
@@ -272,11 +277,14 @@ const Map<String, int> classSizeBaseline = {
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1306, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
+      1328, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
   // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
   // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
   // klasse. +16 (#1162): de even dunne setMenuBlockTarget-delegator (berekening
-  // in slidesWithMenuTarget, menu_blocks.dart).
+  // in slidesWithMenuTarget, menu_blocks.dart). +22 (#1235): revertSlidesById —
+  // zet meerdere dia's in één _mutate terug (één undo-stap voor session-data-
+  // edits na een presentatie). Onherleidbaar: de coalescing/undo-logica zit in
+  // _mutate, dus de batch-revert hoort bij de notifier.
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
   // +10 (#1162): de `menu`-tak in de drie kwaliteitsswitches (contrast, alt-tekst,
   // ontbrekend bestand) + de dichtheidsswitch — menublokken zijn een raster, geen

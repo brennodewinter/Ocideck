@@ -1775,6 +1775,20 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Figyelem: a munkamenet adatai esetleg személyes adatokat tartalmaznak.',
+  'Privacy-bevindingen in sessie-data':
+      'Adatvédelmi megállapítások a munkamenet adataiban',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Az adatvédelmi vizsgálat esetleg személyes adatokat talált a munkamenet adataiban. Az export automatikusan anonimizálja ezeket; kattintson egy megállapításra a részletekért.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Prezentáció közben ellenőrzőlistákat töltöttél ki és táblázatokat frissítettél {aantal} dián.',
+  'en nog {aantal} dia’s.': 'és még {aantal} dia.',
+  'Sessie-wijzigingen bewaren?': 'Munkamenet változásainak mentése?',
+  'In deck behouden': 'Megtartás a prezentációban',
+  'Downloaden als losse bestanden': 'Letöltés külön fájlokként',
+  'Map voor sessie-bestanden kiezen':
+      'Mappa választása a munkamenet fájljaihoz',
   'Zoek op taal of code': 'Keresés nyelv vagy kód szerint',
   'Geen talen gevonden': 'Nem található nyelv',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

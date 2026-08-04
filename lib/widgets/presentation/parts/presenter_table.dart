@@ -72,7 +72,7 @@ extension _PresenterTable on _FullscreenPresenterState {
     rows[row][col] = value;
     final updated = slide.copyWith(tableRows: rows);
     _rebuild(() => _replaceSlide(widget.slides, slideIndex, updated));
-    widget.onSlideChanged?.call(updated);
+    widget.onSessionEdit?.call(updated);
     _pushTableToAudience(slideIndex, updated);
   }
 
@@ -111,7 +111,7 @@ extension _PresenterTable on _FullscreenPresenterState {
       _tableEditRow = rows.length - 1;
       _tableEditCol = 0;
     });
-    widget.onSlideChanged?.call(updated);
+    widget.onSessionEdit?.call(updated);
     _pushTableToAudience(slideIndex, updated);
   }
 

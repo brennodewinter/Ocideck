@@ -72,6 +72,11 @@ void presentDeck(
   // verversing hieronder blijft de editor na afloop de oude tekst tonen — en
   // schrijft de eerstvolgende toetsaanslag daarin de live bewerking stil terug.
   var liveEdited = false;
+  // Session-data-edits (#1235): per gewijzigde bron-dia de oorspronkelijke
+  // versie vóór de eerste edit, zodat de afloop-flow kan aanbieden de wijzigingen
+  // als losse .md te bewaren en het deck schoon te houden. De live-fix #914
+  // (onSlideChanged) is een deck-bewerking en wordt hier niet in bijgehouden.
+  final sessionOriginals = <String, Slide>{};
   // Een blijvende [MaterialBanner] of [SnackBar] hoort niet mee de zaal in. De
   // gedeelde ScaffoldMessenger verhuist die anders naar het Scaffold van de
   // zojuist geduwde presenter-route. Bij een snackbar kan dat bovendien twee
@@ -105,6 +110,9 @@ void presentDeck(
     initialUserNotes: deck.userNotes,
     onUserNotesChanged: deckNotifier.setUserNotes,
     onSlideChanged: (updated) {
+      // De live-fix #914 (in-place opknippen): een deck-bewerking, geen
+      // session-data. Blijft in het deck staan; wordt niet aangeboden voor
+      // export+terugdraaien.
       final index = deckNotifier.currentState.deck?.slides.indexWhere(
         (slide) => slide.id == updated.id,
       );
@@ -112,6 +120,20 @@ void presentDeck(
         deckNotifier.updateSlide(index, updated);
         liveEdited = true;
       }
+    },
+    onSessionEdit: (updated) {
+      // Session-data (checklist/tabel): schrijf door naar het deck (zodat de
+      // editor na afloop de live bewerking toont), én vang de oorspronkelijke
+      // dia vóór de eerste edit. putIfAbsent bewaart alleen die eerste — de
+      // pre-edit versie, inclusief eerdere live-fixes die mogen blijven.
+      final index = deckNotifier.currentState.deck?.slides.indexWhere(
+        (slide) => slide.id == updated.id,
+      );
+      if (index == null || index < 0) return;
+      final current = deckNotifier.currentState.deck!.slides[index];
+      sessionOriginals.putIfAbsent(updated.id, () => current);
+      deckNotifier.updateSlide(index, updated);
+      liveEdited = true;
     },
     // Live-fix tijdens presenteren (#914): de presenter knipt een te volle dia
     // lokaal al op; hier wordt de knip op de bron doorgeschreven, op dezelfde
@@ -131,16 +153,52 @@ void presentDeck(
   // eigen ongedaan-stap maken (de coalescing in [updateSlide] hangt aan het
   // uitblijven van een revisiesprong).
   presenting.then((endSlideId) {
-    if (liveEdited) deckNotifier.refreshEditorFields();
-    // De editor volgt de presenter naar de dia waar die stopte (#1111). De
-    // presenter geeft het bron-dia-id terug (niet de render-index — findings
-    // klappen uit tot meerdere render-pagina's met hetzelfde id); zoek dat id
-    // terug in het actuele deck. Een tijdens het presenteren verwijderde dia is
-    // niet meer te vinden (< 0) → laat de selectie dan staan.
-    if (endSlideId == null) return;
-    final current = deckNotifier.currentState.deck;
-    if (current == null) return;
-    final sourceIndex = current.slides.indexWhere((s) => s.id == endSlideId);
-    if (sourceIndex >= 0) editorNotifier.select(sourceIndex);
+    if (!context.mounted) return;
+    _afterPresentation(
+      context,
+      ref,
+      endSlideId: endSlideId,
+      liveEdited: liveEdited,
+      sessionOriginals: sessionOriginals,
+      deckNotifier: deckNotifier,
+      editorNotifier: editorNotifier,
+    );
   });
+}
+
+/// Afloop na een presentatie: editor verversen, selectie volgen naar de
+/// eind-dia, en session-data-edits aanbieden als losse bestanden (#1235).
+/// Aparte functie zodat [presentDeck] onder de method-length-ratchet blijft.
+Future<void> _afterPresentation(
+  BuildContext context,
+  WidgetRef ref, {
+  required String? endSlideId,
+  required bool liveEdited,
+  required Map<String, Slide> sessionOriginals,
+  required DeckNotifier deckNotifier,
+  required EditorNotifier editorNotifier,
+}) async {
+  if (liveEdited) deckNotifier.refreshEditorFields();
+  // De editor volgt de presenter naar de dia waar die stopte (#1111). De
+  // presenter geeft het bron-dia-id terug (niet de render-index — findings
+  // klappen uit tot meerdere render-pagina's met hetzelfde id); zoek dat id
+  // terug in het actuele deck. Een tijdens het presenteren verwijderde dia is
+  // niet meer te vinden (< 0) → laat de selectie dan staan.
+  if (endSlideId != null) {
+    final current = deckNotifier.currentState.deck;
+    if (current != null) {
+      final sourceIndex = current.slides.indexWhere((s) => s.id == endSlideId);
+      if (sourceIndex >= 0) editorNotifier.select(sourceIndex);
+    }
+  }
+  // Pas ná de editor-verversing en selectie: bied session-data-edits aan als
+  // losse bestanden (#1235). Geen edits → geen dialoog.
+  if (sessionOriginals.isNotEmpty && context.mounted) {
+    await offerSessionExport(
+      context,
+      ref,
+      deckNotifier: deckNotifier,
+      sessionOriginals: sessionOriginals,
+    );
+  }
 }

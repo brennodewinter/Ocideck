@@ -1762,6 +1762,18 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Märkus: seansi andmed võivad sisaldada isikuandmeid.',
+  'Privacy-bevindingen in sessie-data': 'Privaatsuse leiud seansi andmetes',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Privaatsusskanneerimine leidis võib-olla isikuandmeid seansi andmetes. Eksport muudab need automaatselt; klõpsa leiul, et näha üksikasju.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Esitluse ajal täitsid kontrollnimekirju ja uuendasid tabeleid {aantal} slaidil.',
+  'en nog {aantal} dia’s.': 'ja veel {aantal} slaidi.',
+  'Sessie-wijzigingen bewaren?': 'Salvestada seansi muudatused?',
+  'In deck behouden': 'Säilita esitluses',
+  'Downloaden als losse bestanden': 'Lae alla eraldi failidena',
+  'Map voor sessie-bestanden kiezen': 'Vali seansifailide kaust',
   'Zoek op taal of code': 'Otsi keele või koodi järgi',
   'Geen talen gevonden': 'Keeli ei leitud',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

@@ -199,7 +199,7 @@ extension _PresenterContent on _FullscreenPresenterState {
         ? slide.copyWith(bullets2: updatedItems)
         : slide.copyWith(bullets: updatedItems);
     _rebuild(() => _replaceSlide(widget.slides, slideIndex, updated));
-    widget.onSlideChanged?.call(updated);
+    widget.onSessionEdit?.call(updated);
     if (_dual) {
       audienceChannel
           .invokeMethod('checklistUpdate', {

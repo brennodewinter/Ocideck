@@ -1770,6 +1770,18 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Observera: sessionsdatan kan innehålla personuppgifter.',
+  'Privacy-bevindingen in sessie-data': 'Integritetsfynd i sessionsdata',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Integritetsgenomsökningen kan ha hittat personuppgifter i sessionsdatan. Exporten maskar dem automatiskt; klicka på ett fynd för detaljerna.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Under presentationen fyllde du i checklistor och uppdaterade tabeller på {aantal} bilder.',
+  'en nog {aantal} dia’s.': 'och {aantal} bilder till.',
+  'Sessie-wijzigingen bewaren?': 'Spara ändringar i sessionen?',
+  'In deck behouden': 'Behåll i presentationen',
+  'Downloaden als losse bestanden': 'Ladda ner som separata filer',
+  'Map voor sessie-bestanden kiezen': 'Välj mapp för sessionsfiler',
   'Zoek op taal of code': 'Sök på språk eller kod',
   'Geen talen gevonden': 'Inga språk hittades',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

@@ -1793,6 +1793,19 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Attenzjoni: id-data tas-sessjoni jista\' jkun fih data personali.',
+  'Privacy-bevindingen in sessie-data':
+      'Sejbiet tal-privatezza fid-data tas-sessjoni',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'L-iskanjament tal-privatezza seta\' sab data personali fid-data tas-sessjoni. L-esportazzjoni tirredattaha awtomatikament; agħfas fuq sejba għad-dettalji.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Matul il-preżentazzjoni mlajt checklist u aġġornajt tabelli fuq {aantal} slides.',
+  'en nog {aantal} dia’s.': 'u {aantal} slides oħra.',
+  'Sessie-wijzigingen bewaren?': 'Tiffranka l-bidliet tas-sessjoni?',
+  'In deck behouden': 'Żomm fid-deck',
+  'Downloaden als losse bestanden': 'Niżżel bħala fajls separati',
+  'Map voor sessie-bestanden kiezen': 'Agħzel folder għall-fajls tas-sessjoni',
   'Zoek op taal of code': 'Fittex skont il-lingwa jew il-kodiċi',
   'Geen talen gevonden': 'L-ebda lingwa ma nstabet',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

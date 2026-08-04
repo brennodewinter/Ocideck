@@ -1773,6 +1773,19 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Pozor: v podatkih seje so morda osebni podatki.',
+  'Privacy-bevindingen in sessie-data':
+      'Ugotovitve o zasebnosti v podatkih seje',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Sken zasebnosti je morda našel osebne podatke v podatkih seje. Izvoz jih samodejno redigira; kliknite na ugotovitev za podrobnosti.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Med predstavitvijo si izpolnil kontrolne sezname in posodobil tabele na {aantal} diapozitivih.',
+  'en nog {aantal} dia’s.': 'in še {aantal} diapozitivov.',
+  'Sessie-wijzigingen bewaren?': 'Shraniti spremembe seje?',
+  'In deck behouden': 'Obdrži v predstavitvi',
+  'Downloaden als losse bestanden': 'Prenesi kot ločene datoteke',
+  'Map voor sessie-bestanden kiezen': 'Izberi mapo za datoteke seje',
   'Zoek op taal of code': 'Iskanje po jeziku ali kodi',
   'Geen talen gevonden': 'Ni najdenih jezikov',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
