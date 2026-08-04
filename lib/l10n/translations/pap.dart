@@ -730,6 +730,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Breedte aanpassen': 'Adjusta e hanchura',
   'Niet akkoord en afsluiten': 'Rechasá i sali',
   'Springt naar': 'Salta pa',
   'Geen sprong': 'Sin salto',

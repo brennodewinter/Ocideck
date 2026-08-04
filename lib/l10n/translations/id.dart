@@ -1771,6 +1771,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Breedte aanpassen': 'Sesuaikan lebar',
   'Niet akkoord en afsluiten': 'Tolak dan keluar',
   'Springt naar': 'Melompat ke',
   'Geen sprong': 'Tanpa lompatan',

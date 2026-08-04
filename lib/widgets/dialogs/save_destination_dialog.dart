@@ -54,6 +54,13 @@ class _SaveDestinationDialogState extends State<SaveDestinationDialog> {
   /// aparte optie getoond zodat de keuze zichtbaar blijft.
   String? _customPath;
 
+  /// Breedte van de dialoog. De gebruiker kan haar aanpassen door de
+  /// rechteronderhoek te slepen (#1211), zodat lange bestandspaden leesbaar
+  /// blijven in plaats van afgekapt met "…". Start op 560 — ruim genoeg voor
+  /// de meeste bibliotheekpaden — en blijft begrensd tussen 420 en de
+  /// schermbreedte minus marge.
+  double _width = 560;
+
   @override
   void initState() {
     super.initState();
@@ -107,7 +114,7 @@ class _SaveDestinationDialogState extends State<SaveDestinationDialog> {
         ],
       ),
       content: SizedBox(
-        width: 480,
+        width: _width,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -142,6 +149,8 @@ class _SaveDestinationDialogState extends State<SaveDestinationDialog> {
             ),
             const SizedBox(height: 8),
             _summary(l10n),
+            const SizedBox(height: 4),
+            Align(alignment: Alignment.centerRight, child: _resizeHandle(l10n)),
           ],
         ),
       ),
@@ -193,9 +202,12 @@ class _SaveDestinationDialogState extends State<SaveDestinationDialog> {
                       ),
                     ),
                     Text(
+                      // softWrap (standaard aan) laat het pad naar de volgende
+                      // regel afbreken in plaats van af te knippen met "…"
+                      // (#1211). Wie het toch op één regel wil, maakt de
+                      // dialoog breder via de resize-handgreep.
                       path,
                       style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
@@ -289,12 +301,51 @@ class _SaveDestinationDialogState extends State<SaveDestinationDialog> {
           ),
           Expanded(
             child: Text(
+              // Zie _option: afbreken naar volgende regel i.p.v. "…" (#1211).
               value,
               style: TextStyle(fontSize: 12, color: AppTheme.slate700),
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  /// Sleephandgreep rechtsonder: horizontaal slepen verbreedt/vernauwt de
+  /// dialoog zodat lange paden op één regel passen (#1211). De cursor en het
+  /// icoon geven de affordance; het Semantics-label maakt het voor een
+  /// schermlezer begrijpelijk. Alleen pointer-bediening — de kernoplossing
+  /// (paden afbreken naar volgende regel) werkt ook zonder en is volledig
+  // toetsenbord-/schermlezer-bereikbaar.
+  Widget _resizeHandle(AppLocalizations l10n) {
+    final label = l10n.d('Breedte aanpassen');
+    return Semantics(
+      label: label,
+      button: true,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.resizeLeftRight,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onPanUpdate: (details) {
+            setState(() {
+              _width = (_width + details.delta.dx).clamp(
+                420.0,
+                MediaQuery.sizeOf(context).width - 80,
+              );
+            });
+          },
+          child: Tooltip(
+            message: label,
+            child: Padding(
+              padding: const EdgeInsets.all(6),
+              child: Icon(
+                Icons.drag_indicator,
+                size: 18,
+                color: AppTheme.slate400,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

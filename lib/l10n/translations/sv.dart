@@ -1770,6 +1770,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Breedte aanpassen': 'Justera bredd',
   'Niet akkoord en afsluiten': 'Avvisa och avsluta',
   'Springt naar': 'Hoppar till',
   'Geen sprong': 'Inget hopp',

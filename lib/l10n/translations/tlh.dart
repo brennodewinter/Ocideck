@@ -1746,6 +1746,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Breedte aanpassen': 'mIllogh yIchoH',
   'Niet akkoord en afsluiten': 'yIlajQo\' \'ej yImev',
   'Springt naar': 'SupmeH Daq',
   'Geen sprong': 'Sup pagh',

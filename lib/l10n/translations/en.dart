@@ -911,6 +911,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Breedte aanpassen': 'Adjust width',
   'Niet akkoord en afsluiten': 'Decline and quit',
   'Springt naar': 'Jumps to',
   'Geen sprong': 'No jump',

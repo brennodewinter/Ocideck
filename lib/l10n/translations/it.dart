@@ -726,6 +726,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Breedte aanpassen': 'Regola la larghezza',
   'Niet akkoord en afsluiten': 'Rifiuta ed esci',
   'Springt naar': 'Salta a',
   'Geen sprong': 'Nessun salto',

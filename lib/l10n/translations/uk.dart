@@ -1788,6 +1788,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Breedte aanpassen': 'Налаштувати ширину',
   'Niet akkoord en afsluiten': 'Відхилити й вийти',
   'Springt naar': 'Переходить до',
   'Geen sprong': 'Без переходу',

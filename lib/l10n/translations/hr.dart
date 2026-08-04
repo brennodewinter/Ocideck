@@ -1777,6 +1777,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Breedte aanpassen': 'Prilagodi širinu',
   'Niet akkoord en afsluiten': 'Odbij i zatvori',
   'Springt naar': 'Skače na',
   'Geen sprong': 'Bez skoka',

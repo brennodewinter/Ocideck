@@ -1774,6 +1774,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Breedte aanpassen': 'Upravit šířku',
   'Niet akkoord en afsluiten': 'Odmítnout a ukončit',
   'Springt naar': 'Přejde na',
   'Geen sprong': 'Bez skoku',

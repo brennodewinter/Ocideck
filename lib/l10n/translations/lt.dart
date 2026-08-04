@@ -1778,6 +1778,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Breedte aanpassen': 'Reguliuoti plotį',
   'Niet akkoord en afsluiten': 'Atmesti ir išeiti',
   'Springt naar': 'Pereina į',
   'Geen sprong': 'Be perėjimo',

@@ -1770,6 +1770,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Breedte aanpassen': 'Justér bredde',
   'Niet akkoord en afsluiten': 'Afvis og luk',
   'Springt naar': 'Springer til',
   'Geen sprong': 'Intet spring',

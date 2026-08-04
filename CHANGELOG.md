@@ -942,6 +942,17 @@ that before deciding whether this alpha fits what you are doing.
   dezelfde zekerheid. Twee regressietests pinnen het startvenster: een kale lezing
   ziet nog de default, de wachtende helper de opgeslagen stand — en een sleep vlak
   na de start importeert nu in plaats van naar de instellingen te wijzen.
+- **Lange bestandspaden in de save-dialoog waren afgekapt met "…" (#1211).** Wie
+  een presentatie opslaat zag in de bestemmingsdialoog niet waar de bestanden
+  landen: de paden naar de presentatie, `images/` en `media/` werden afgeknipt
+  omdat de dialoog een vaste breedte had en de tekst `TextOverflow.ellipsis`
+  gebruikte. De paden breken nu naar de volgende regel (softWrap) zodat het
+  volledige pad altijd leesbaar is, en de dialoog is breedte-aanpasbaar via een
+  sleephandgreep rechtsonder — wie het pad liever op één regel ziet, maakt de
+  dialoog breder. De kernoplossing (afbreken) werkt zonder muis en is volledig
+  toetsenbord-/schermlezer-bereikbaar; de handgreep is een extra voor
+  pointer-gebruikers. Nieuwe tooltip-string "Breedte aanpassen" in alle 31
+  talen via `make add-l10n`.
 - **Wie de voorwaarden bij de eerste start niet accepteerde, zat klem (#1207).**
   De toestemmingspoort had alleen een "Akkoord gaan"-knop. Op Windows liep dat
   vast: `configureNativeWindow` zet `setPreventClose(true)`, en alleen de shell

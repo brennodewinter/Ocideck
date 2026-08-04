@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Breedte aanpassen': 'Szélesség beállítása',
   'Niet akkoord en afsluiten': 'Elutasítás és kilépés',
   'Springt naar': 'Ugrás ide',
   'Geen sprong': 'Nincs ugrás',

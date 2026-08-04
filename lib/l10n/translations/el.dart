@@ -1798,6 +1798,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Breedte aanpassen': 'Προσαρμογή πλάτους',
   'Niet akkoord en afsluiten': 'Άρνηση και έξοδος',
   'Springt naar': 'Μεταβαίνει σε',
   'Geen sprong': 'Χωρίς μετάβαση',

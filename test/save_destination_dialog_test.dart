@@ -114,4 +114,80 @@ void main() {
     expect(popped, isTrue);
     expect(result, isNull);
   });
+
+  // #1211: lange bestandspaden waren afgekapt met "…". De dialoog is nu
+  // breedte-aanpasbaar en paden breken af naar de volgende regel.
+  testWidgets('resize handle widens the dialog on drag (#1211)', (
+    WidgetTester tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(900, 1200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await tester.pumpWidget(
+      _host((BuildContext context) async {
+        await SaveDestinationDialog.show(
+          context,
+          libraries: const [LibraryFolder(name: 'Werk', path: '/home/werk')],
+          deckTitle: 'Demo',
+        );
+      }),
+    );
+
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    // De handgreep is aanwezig en draagt een gelokaliseerd tooltip-label.
+    expect(find.byTooltip('Breedte aanpassen'), findsOneWidget);
+
+    // De content-SizedBox is degene met width >= 420 (de resize-gevoelige
+    // breedte); de samenvatting staat erin als herkenningspunt.
+    SizedBox contentBox() {
+      final boxes = tester.widgetList<SizedBox>(
+        find.descendant(
+          of: find.byType(AlertDialog),
+          matching: find.byType(SizedBox),
+        ),
+      );
+      return boxes.firstWhere((b) => (b.width ?? 0) >= 420);
+    }
+
+    expect(contentBox().width, 560);
+    // Naar rechts slepen verbreedt (touch-slop slokt een paar px op, dus
+    // relatief beweren, niet exact).
+    await tester.drag(find.byIcon(Icons.drag_indicator), const Offset(80, 0));
+    await tester.pump();
+    final wider = contentBox().width ?? 560;
+    expect(wider, greaterThan(560.0));
+
+    // Naar links slepen vernauwt weer.
+    await tester.drag(find.byIcon(Icons.drag_indicator), const Offset(-40, 0));
+    await tester.pump();
+    expect(contentBox().width ?? wider, lessThan(wider));
+  });
+
+  testWidgets('a long library path is shown in full, not truncated (#1211)', (
+    WidgetTester tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(900, 1200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final longPath = '/home/${'sub/' * 20}diep';
+    await tester.pumpWidget(
+      _host((BuildContext context) async {
+        await SaveDestinationDialog.show(
+          context,
+          libraries: [LibraryFolder(name: 'Diep', path: longPath)],
+          deckTitle: 'Demo',
+        );
+      }),
+    );
+
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    // Het volledige pad staat als Text-data in de optie (softWrap i.p.v.
+    // ellipsis), en de samenvatting toont het pad naar het presentatiebestand.
+    expect(find.text(longPath), findsOneWidget);
+    expect(find.textContaining(p.join(longPath, 'Demo.md')), findsOneWidget);
+  });
 }

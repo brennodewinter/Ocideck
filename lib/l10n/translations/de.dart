@@ -730,6 +730,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Breedte aanpassen': 'Breite anpassen',
   'Niet akkoord en afsluiten': 'Ablehnen und beenden',
   'Springt naar': 'Springt zu',
   'Geen sprong': 'Kein Sprung',

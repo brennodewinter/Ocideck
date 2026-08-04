@@ -1771,6 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Breedte aanpassen': 'Säädä leveyttä',
   'Niet akkoord en afsluiten': 'Hylkää ja lopeta',
   'Springt naar': 'Siirtyy kohtaan',
   'Geen sprong': 'Ei hyppyä',

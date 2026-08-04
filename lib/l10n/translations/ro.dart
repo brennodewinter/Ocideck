@@ -1788,6 +1788,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Breedte aanpassen': 'Ajustează lățimea',
   'Niet akkoord en afsluiten': 'Refuză și ieși',
   'Springt naar': 'Sare la',
   'Geen sprong': 'Fără salt',

@@ -1783,6 +1783,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Breedte aanpassen': 'Dostosuj szerokość',
   'Niet akkoord en afsluiten': 'Odrzuć i zamknij',
   'Springt naar': 'Przechodzi do',
   'Geen sprong': 'Bez skoku',

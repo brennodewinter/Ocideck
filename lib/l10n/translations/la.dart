@@ -1787,6 +1787,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Breedte aanpassen': 'Latitudinem accommodare',
   'Niet akkoord en afsluiten': 'Recusa et exi',
   'Springt naar': 'Salit ad',
   'Geen sprong': 'Nullus saltus',

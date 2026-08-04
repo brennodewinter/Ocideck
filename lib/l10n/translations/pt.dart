@@ -1800,6 +1800,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Breedte aanpassen': 'Ajustar largura',
   'Niet akkoord en afsluiten': 'Recusar e sair',
   'Springt naar': 'Salta para',
   'Geen sprong': 'Sem salto',

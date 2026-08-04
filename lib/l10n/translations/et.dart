@@ -1762,6 +1762,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Breedte aanpassen': 'Kohalda laiust',
   'Niet akkoord en afsluiten': 'Keeldu ja välju',
   'Springt naar': 'Hüppab kohta',
   'Geen sprong': 'Ei hüpet',

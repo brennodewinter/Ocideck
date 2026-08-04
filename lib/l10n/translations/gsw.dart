@@ -1774,6 +1774,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Breedte aanpassen': 'Breiti aapasse',
   'Niet akkoord en afsluiten': 'Ablehne und beände',
   'Springt naar': 'Springt zue',
   'Geen sprong': 'Kei Sprung',
