@@ -207,7 +207,8 @@ void main() {
 
       final explainsThePhoneRule =
           doc.path.endsWith('OCIWACHT.md') ||
-          doc.path.endsWith('USER_GUIDE.md');
+          doc.path.endsWith('USER_GUIDE.md') ||
+          doc.path.endsWith('USER_GUIDE.nl.md');
       const publisherRules = {'contact.phone', 'contact.address'};
       final hits = [
         ...result.certain.where(
