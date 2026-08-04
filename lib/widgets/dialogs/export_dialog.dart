@@ -453,6 +453,10 @@ class _ExportDialogState extends State<ExportDialog> {
       privacySummary: _bundle.privacySummary,
       privacyPolicy: widget.privacyPolicy,
       privacyAcknowledged: true,
+      // WCAG 2.1 SC 3.1.1: de HTML-export labelt de pagina met de
+      // rapporttaal (metadata.language) en laat zijn chrome in die taal
+      // renderen; bij afwezigheid valt hij terug op de interfacetaal. #1249
+      interfaceLanguageCode: l10n.languageCode,
     );
 
     if (!mounted) return;

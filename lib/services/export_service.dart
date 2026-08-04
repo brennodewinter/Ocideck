@@ -174,7 +174,7 @@ class ExportService {
     PrivacyExportPolicy privacyPolicy = const PrivacyExportPolicy(),
     bool privacyAcknowledged = false,
     PrivacyExportProfile privacyProfile = PrivacyExportProfile.full,
-
+    String interfaceLanguageCode = 'nl', // WCAG 3.1.1 fallback (#1249)
     /// Of de verdiepingsslides in deze uitvoer zitten. Alleen de beknopte
     /// versie krijgt een achtervoegsel: de volledige uitvoer heet zoals hij
     /// altijd al heette.
@@ -253,6 +253,7 @@ class ExportService {
             cockpitColorScheme: cockpitColorScheme,
             metadata: docMeta,
             fallbackTitle: fallbackTitle,
+            interfaceLanguageCode: interfaceLanguageCode,
           );
       }
       if (kIsWeb) {
@@ -302,6 +303,7 @@ class ExportService {
     required CockpitColorScheme cockpitColorScheme,
     required ExportDocumentMetadata metadata,
     required String fallbackTitle,
+    required String interfaceLanguageCode,
   }) async {
     // Een bewaard deck heeft een projectmap: de map van het `.md`, en daar
     // blijft het lezen binnen. Een deck dat nog nooit is opgeslagen heeft er
@@ -311,15 +313,33 @@ class ExportService {
     // bewerksessie mogen (dat zijn de wachtruimte-kopieën van net ingevoegd
     // beeld), relatieve niet. Zelfde regel als de preview.
     final projectPath = p.isAbsolute(deckPath) ? p.dirname(deckPath) : null;
-    final html = await _html.build(
-      markdown,
-      theme: themeProfile,
-      cockpitColorScheme: cockpitColorScheme,
-      metadata: metadata,
-      fallbackTitle: fallbackTitle,
-      embedImage: (source) => _embedImage(source, projectPath),
-    );
-    return Uint8List.fromList(utf8.encode(html));
+    // WCAG 2.1 SC 3.1.1 (#1249): lang = de inhoudstaal (metadata.language),
+    // interfacetaal als fallback. Chrome valt op de interfacetaal voor een
+    // onbekende taal (lang blijft juist).
+    final dl = metadata.language.trim();
+    final htmlLang = dl.isNotEmpty ? dl : interfaceLanguageCode;
+    final chromeLanguageCode = AppLocalizations.languageNames.containsKey(dl)
+        ? dl
+        : interfaceLanguageCode;
+    // ponytail: chrome leest AppLocalizations.languageCode (bibliotheek-brede
+    // static). Tijdelijk op de exporttaal, in finally terug. Plafond: globaal
+    // muteerbare status; modale export zonder voortgangscallbacks, dus veilig.
+    final previousLanguageCode = AppLocalizations.activeLanguageCode;
+    AppLocalizations.setActiveLanguageCode(chromeLanguageCode);
+    try {
+      final html = await _html.build(
+        markdown,
+        theme: themeProfile,
+        cockpitColorScheme: cockpitColorScheme,
+        metadata: metadata,
+        fallbackTitle: fallbackTitle,
+        htmlLang: htmlLang,
+        embedImage: (source) => _embedImage(source, projectPath),
+      );
+      return Uint8List.fromList(utf8.encode(html));
+    } finally {
+      AppLocalizations.setActiveLanguageCode(previousLanguageCode);
+    }
   }
 
   /// Leest de afbeelding op [source] en maakt er een `data:`-URI van, zodat de

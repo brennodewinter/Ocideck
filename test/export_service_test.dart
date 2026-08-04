@@ -13,6 +13,7 @@ import 'package:ocideck/models/slide_quality.dart';
 import 'package:ocideck/models/redaction_manifest.dart';
 import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/export_service.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/quality_export_policy.dart';
 import 'package:ocideck/services/marp_html_service.dart';
@@ -695,5 +696,116 @@ void main() {
     // Het bestand erbuiten wordt niet gelezen en niet genoemd.
     expect(html, isNot(contains(outsidePath)));
     expect(html, contains('Afbeelding niet ingesloten'));
+  });
+
+  // WCAG 2.1 SC 3.1.1: de HTML-export labelt de pagina met de rapporttaal
+  // (deck.language) en valt bij afwezigheid terug op de interfacetaal. #1249
+  group('HTML-export <html lang> (WCAG 3.1.1, #1249)', () {
+    test('zet lang op de rapporttaal wanneer die is vastgelegd', () async {
+      final htmlService = ExportService(
+        htmlService: MarpHtmlService(loadAsset: (a) => File(a).readAsString()),
+      );
+      final bundle = bundleFor(
+        const Deck(title: 'Finnish report', language: 'fi'),
+        markdown: '# Finnish report\n',
+      );
+      final r = await htmlService.export(
+        deckPath(),
+        ExportFormat.html,
+        const [],
+        audience: bundle,
+        metadata: ExportDocumentMetadata.fromDeck(bundle.audience),
+        interfaceLanguageCode: 'nl',
+      );
+
+      expect(r.success, isTrue, reason: r.error);
+      final html = await File(r.outputPath!).readAsString();
+      expect(html, contains('<html lang="fi">'));
+    });
+
+    test(
+      'valt terug op de interfacetaal wanneer het deck geen taal vastlegt',
+      () async {
+        final htmlService = ExportService(
+          htmlService: MarpHtmlService(
+            loadAsset: (a) => File(a).readAsString(),
+          ),
+        );
+        final bundle = bundleFor(
+          const Deck(title: 'No language'),
+          markdown: '# No language\n',
+        );
+        final r = await htmlService.export(
+          deckPath(),
+          ExportFormat.html,
+          const [],
+          audience: bundle,
+          metadata: ExportDocumentMetadata.fromDeck(bundle.audience),
+          interfaceLanguageCode: 'en',
+        );
+
+        expect(r.success, isTrue, reason: r.error);
+        final html = await File(r.outputPath!).readAsString();
+        expect(html, contains('<html lang="en">'));
+      },
+    );
+
+    test(
+      'een niet-ondersteunde rapporttaal behoudt lang, chrome valt terug',
+      () async {
+        // Een Japans deck: lang="ja" is juist (de inhoud is Japans), maar
+        // OciDeck kent geen Japanse chrome — die valt op de interfacetaal.
+        final htmlService = ExportService(
+          htmlService: MarpHtmlService(
+            loadAsset: (a) => File(a).readAsString(),
+          ),
+        );
+        final bundle = bundleFor(
+          const Deck(title: 'Japanese report', language: 'ja'),
+          markdown: '# Japanese report\n',
+        );
+        final r = await htmlService.export(
+          deckPath(),
+          ExportFormat.html,
+          const [],
+          audience: bundle,
+          metadata: ExportDocumentMetadata.fromDeck(bundle.audience),
+          interfaceLanguageCode: 'en',
+        );
+
+        expect(r.success, isTrue, reason: r.error);
+        final html = await File(r.outputPath!).readAsString();
+        expect(html, contains('<html lang="ja">'));
+        // Chrome in het Engels (de interfacetaal), niet in het Nederlands.
+        expect(html, contains('Third-party licences'));
+        expect(html, isNot(contains('Licenties van derden')));
+      },
+    );
+
+    test('zet de actieve taalcode na de export terug', () async {
+      // ExportService stelt AppLocalizations.languageCode tijdelijk in op de
+      // exporttaal; na de export moet de vorige (interface-)taal hersteld zijn,
+      // anders lekt de exporttaal in de app-UI. #1249
+      AppLocalizations.setActiveLanguageCode('en');
+      addTearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
+      final htmlService = ExportService(
+        htmlService: MarpHtmlService(loadAsset: (a) => File(a).readAsString()),
+      );
+      final bundle = bundleFor(
+        const Deck(title: 'Finnish report', language: 'fi'),
+        markdown: '# Finnish report\n',
+      );
+      final r = await htmlService.export(
+        deckPath(),
+        ExportFormat.html,
+        const [],
+        audience: bundle,
+        metadata: ExportDocumentMetadata.fromDeck(bundle.audience),
+        interfaceLanguageCode: 'en',
+      );
+
+      expect(r.success, isTrue, reason: r.error);
+      expect(AppLocalizations.activeLanguageCode, 'en');
+    });
   });
 }

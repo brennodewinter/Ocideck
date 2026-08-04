@@ -986,6 +986,20 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De HTML-export schrijft `<html lang="…">` in de taal van het deck (#1249).**
+  De export hardcodeerde altijd `<html lang="nl">`, ongeacht de interfacetaal of
+  de taal van de inhoud. Een schermlezer kondigde daarmee een Fins deck aan in
+  het Nederlands en las het onverstaanbaar voor — WCAG 2.1 SC 3.1.1 (Taal van de
+  pagina) op AA-niveau, en juist in de exportroute die
+  `docs/ACCESSIBILITY.md` aanbeveelt "when the recipient needs to read rather
+  than look." Het attribuut volgt nu de vastgelegde rapporttaal
+  (`Deck.language`), met de interfacetaal als fallback wanneer het deck er geen
+  vastlegt. De chrome van de export (licentiebanner, "Afbeelding niet
+  ingesloten", de AI-conceptmelding) renderen in dezelfde taal waar OciDeck haar
+  kent en vallen anders terug op de interfacetaal; een rapport in een taal die
+  OciDeck niet vertaalt (bijv. Japans) houdt `lang="ja"` en krijgt chrome in de
+  interfacetaal. PDF en PPTX zijn bitmaps en dragen geen taallabel. De
+  toegankelijkheidsdoc is bijgewerkt met de belofte en haar grens.
 - **`make bump-scanner-pins` + automatische scanner-bump in de release (#1161).**
   De secrets-scan draait op een voorgebakken image waarvan de **tag** de drie
   scanner-versies is (`ocideck-scans:gl…-th…-sg…`), dus gitleaks/trufflehog/semgrep

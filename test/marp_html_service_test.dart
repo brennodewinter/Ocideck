@@ -9,6 +9,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 
 /// Reads the vendored libraries straight from the repo (tests run at the root).
 Future<String> _diskLoader(String asset) => File(asset).readAsString();
@@ -1205,5 +1206,39 @@ void _videoTests() {
     // De hardgecodeerde Engelse header hoort nergens meer te staan.
     expect(light, isNot(contains('COCKPIT VIEW')));
     expect(dark, isNot(contains('COCKPIT VIEW')));
+  });
+
+  // WCAG 2.1 SC 3.1.1: de HTML-export moet <html lang="…"> op de taal van de
+  // inhoud zetten. De chrome-strings volgen AppLocalizations.languageCode (een
+  // bibliotheek-brede static); ExportService zet die tijdelijk op de
+  // exporttaal — hier stellen we haar zelf in om de builder los te toetsen. #1249
+  group('HTML-export taal (WCAG 3.1.1, #1249)', () {
+    test('<html lang> volgt htmlLang, niet het Nederlands', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build('# Titel\n', htmlLang: 'fi');
+
+      expect(html, contains('<html lang="fi">'));
+      expect(html, isNot(contains('<html lang="nl">')));
+    });
+
+    test('build() zonder taal valt terug op <html lang="nl">', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build('# Titel\n');
+
+      expect(html, contains('<html lang="nl">'));
+    });
+
+    test('chrome-strings volgen de actieve taalcode', () async {
+      AppLocalizations.setActiveLanguageCode('en');
+      addTearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build('# Titel\n');
+
+      // De licentie-samenvatting en de mermaid-labels zijn chrome: ze horen
+      // in de actieve taal te staan, niet in het Nederlands.
+      expect(html, contains('Third-party licences'));
+      expect(html, contains('This diagram could not be drawn'));
+      expect(html, isNot(contains('Licenties van derden')));
+    });
   });
 }

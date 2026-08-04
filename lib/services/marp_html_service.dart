@@ -178,9 +178,9 @@ class MarpHtmlService {
     String fallbackTitle = 'Presentatie',
     HtmlImageResolver? embedImage,
     int maxEmbedBytes = kMaxHtmlEmbedTotalBytes,
+    String htmlLang = 'nl', // <html lang>: inhoudstaal (WCAG 3.1.1) #1249
   }) async {
-    // De zes bundel-assets en de themed CSS zijn onafhankelijk; sequentieel
-    // wachten stapelde hun laadtijden op.
+    // De zes bundel-assets en de themed CSS zijn onafhankelijk.
     final [
       marked,
       purify,
@@ -256,7 +256,7 @@ class MarpHtmlService {
         _aiBanner(meta);
 
     return '<!doctype html>\n'
-        '<html lang="nl"><head><meta charset="utf-8">'
+        '<html lang="$htmlLang"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
         // Neutralise injected inline scripts (defence-in-depth behind DOMPurify)
         // without over-restricting style, which would break locally opened
@@ -322,6 +322,11 @@ class MarpHtmlService {
   Future<ExportNotices> thirdPartyNotices({required bool embedsFont}) async {
     final banners = <String, String>{};
     final texts = <(String, String)>[];
+    // De banner wijst de lezer naar de licentiesectie bij naam; die naam is
+    // gelokaliseerd (zie [_noticesHtml]), dus de verwijzing hoort mee te
+    // bewegen met de exporttaal. #1249
+    const l10n = AppLocalizations(Locale('nl'));
+    final licencesHeading = l10n.d('Licenties van derden');
     try {
       final manifest =
           jsonDecode(await loadAsset('$_assetDir/MANIFEST.json'))
@@ -338,7 +343,7 @@ class MarpHtmlService {
         final label = '${entry.component} $version';
         banners[npm] =
             '/*! @license $label — ${entry.license}. '
-            'Full licence text: see "Licenties van derden" at the end of this '
+            'Full licence text: see "$licencesHeading" at the end of this '
             'file, or ${entry.source} */\n';
         texts.add((label, await loadAsset(entry.licenseAsset)));
       }
