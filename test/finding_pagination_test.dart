@@ -44,7 +44,8 @@ void main() {
       // #1163 type down-scale now fit two: page 1 carries the header plus the
       // first section, page 2 the remaining three. This is the calibration
       // guard for "more content per page" — if the font/pagination scaling
-      // drift apart, the packing here moves.
+      // drift apart, the packing here moves. (Page 1 stops at the first section
+      // by design so the header page stays readable, not sparse — #1198.)
       final description = 'Beschrijving: ${_lorem(8)}';
       final confirmation = 'Bevestiging: ${_lorem(8)}';
       final impact = 'Impact: ${_lorem(8)}';
@@ -93,15 +94,20 @@ void main() {
     });
 
     test('a finding stays single until it would shrink past the scale floor', () {
-      // The header card alone already fills most of a slide, so "fits one page"
-      // means header + a short section that still renders at ≥0.70 width. That
-      // stays single; growing the body until the single slide would scale down
-      // past the floor splits it instead of shrinking it (the bug that made a
-      // finding render at a third of the width).
+      // "Fits one page" means header + sections that still render at ≥0.70
+      // width. A short finding stays single; growing it until the slide would
+      // scale down past the floor splits it BETWEEN sections instead of
+      // shrinking the whole thing (the bug that made a finding render at a third
+      // of the width). A finding must have more than one section to split — a
+      // single section cannot be broken, so it is returned whole (#1198).
       final small = FindingSpec(heading: heading, description: _lorem(2));
       expect(paginateFinding(small), hasLength(1));
 
-      final big = FindingSpec(heading: heading, description: _lorem(24));
+      final big = FindingSpec(
+        heading: heading,
+        description: _lorem(24),
+        confirmation: _lorem(24),
+      );
       expect(paginateFinding(big).length, greaterThan(1));
     });
 
@@ -128,20 +134,25 @@ void main() {
         ),
       );
       final headingRe = RegExp(r'^## ', multiLine: true);
-      // Page 1 carries the first section below the compact header.
-      expect(
-        headingRe
-            .allMatches(pages.first.toMarkdown(omitEmptySections: true))
-            .length,
-        1,
-      );
-      // Continuation pages carry one or more complete sections.
-      for (final page in pages.skip(1)) {
+      // Every page serialises exactly one `##` heading per section it actually
+      // carries — no blanked section leaks its heading, and no page is empty.
+      for (final page in pages) {
         final md = page.toMarkdown(omitEmptySections: true);
+        final sectionsOnPage = [
+          page.description,
+          page.confirmation,
+          page.impact,
+          page.recommendation,
+        ].where((s) => s.isNotEmpty).length;
+        expect(
+          sectionsOnPage,
+          greaterThanOrEqualTo(1),
+          reason: 'no page may be section-less, got:\n$md',
+        );
         expect(
           headingRe.allMatches(md).length,
-          greaterThanOrEqualTo(1),
-          reason: 'at least one section heading expected, got:\n$md',
+          sectionsOnPage,
+          reason: 'heading count must match the sections on the page:\n$md',
         );
       }
     });
@@ -217,16 +228,18 @@ void main() {
     );
 
     test('een bevinding die past zonder logo splitst met logo', () {
-      // Header + één sectie die net onder de enkel-pagina-drempel blijft
+      // Twee secties die samen net onder de enkel-pagina-drempel blijven
       // (≥0.70 breedte) zonder logo, maar een logo verkleint het budget genoeg
-      // om onder die drempel te zakken → splitsen, zodat de tekst niet onder
-      // het logo doorloopt. De sectie is meegegroeid met de #1163-herkalibratie
-      // (grotere pagina-capaciteit door de kleinere finding-letter), zodat de
-      // drempel nog steeds precies tussen "met" en "zonder logo" ligt.
+      // om onder die drempel te zakken → splitsen tussen de secties, zodat de
+      // tekst niet onder het logo doorloopt. De secties zijn meegegroeid met de
+      // #1163/#1198-herkalibratie (grotere capaciteit door de kleinere letter en
+      // de op het echte kaartje geijkte header-kost), zodat de drempel nog
+      // steeds precies tussen "met" en "zonder logo" ligt.
       final finding = Slide.create(SlideType.finding).copyWith(
         customMarkdown: FindingSpec(
           heading: heading,
-          description: _lorem(12),
+          description: 'Beschrijving: ${_lorem(12)}',
+          confirmation: 'Bevestiging: ${_lorem(12)}',
         ).toMarkdown(),
       );
 

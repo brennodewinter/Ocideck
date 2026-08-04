@@ -940,6 +940,28 @@ that before deciding whether this alpha fits what you are doing.
   2-3× zo hoog. De kerninhoud blijft zonder muis volledig bedienbaar; de
   handgreep is een extra voor pointer-gebruikers. De save-dialoog uit #1211
   wordt in deze PR niet gemigreerd naar de helper (werkt al); eventueel later.
+- **Schaarse header-only eerste pagina bij een bevindingsdia (#1198).** Een
+  bevinding die over meerdere dia's paginteert, kon een eerste pagina opleveren
+  met alléén de headerkaart — de rest van de dia leeg — terwijl de eerste sectie
+  pas op pagina 2 begon. Dat werd zichtbaar bij de standaard-LibreKAT-stijl,
+  waar het logo linksonder verticale ruimte reserveert: het smallere budget
+  duwde de eerste sectie eraf. Oorzaak was niet het logo (dat rendert en is
+  zichtbaar) maar de header-kostenschatting in `finding_pagination.dart`. Die was
+  één vaste constante (`_headerCardCost = 18.5`, ≈80% van een dia), terwijl de
+  echte headerkaart varieert van ~44% van een dia voor een gewone bevinding tot
+  ~98% voor een volle (lange titel plus alle identiteitsvelden). Die constante
+  overreserveerde dus voor de gewone bevinding (de schaarse pagina) én
+  onderreserveerde voor een volle. De kost wordt nu afgeleid uit de inhoud —
+  gewrapte kopregels, een scope-regel, de badge-rijen en de CVSS-scorekaart — en
+  is met een echte-render-test (`finding_header_cost_test.dart`) tegen de
+  levende `_FindingPreview` vastgepind, zodat de schatting niet stil kan
+  wegroffen. Daarnaast draagt pagina 1 nu onvoorwaardelijk de header **plus de
+  eerste sectie** en stopt daar: de headerkaart is een hoog blok, dus verder
+  volpakken tot de leesbaarheidsvloer maakte lijst-zware secties te klein. Een
+  bevinding met één sectie kan niet gesplitst worden en wordt heel teruggegeven
+  in plaats van de header op een eigen pagina achter te laten. Twee
+  regressietests pinnen het gedrag met het logo (geen header-only pagina meer),
+  en de bestaande paginering-ijkpunten zijn meegegroeid.
 - **Verkeerde melding bij het openen van een presentatie vlak na de start
   (#1209).** Opende (of sleepte) je een `.pptx`/`.odp`/`.key` meteen na het
   starten, dan meldde OciDeck "Zet de module Importeren aan…" terwijl die module

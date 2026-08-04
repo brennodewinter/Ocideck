@@ -6,10 +6,14 @@
 /// changes.
 ///
 /// Page 1 keeps the header card (severity badge, heading, scope) plus the
-/// sections that fit; each continuation page repeats the heading with a small
-/// "(i/N)" marker, drops the header card, and holds the next sections. A finding
-/// that fits one slide is returned unchanged (a single page).
+/// finding's first section — placed unconditionally, so an overflowing finding
+/// never renders a header-only, near-empty first page (#1198). Each continuation
+/// page repeats the heading with a small "(i/N)" marker, drops the header card,
+/// and holds the next sections. A finding that fits one slide is returned
+/// unchanged (a single page).
 library;
+
+import 'package:flutter/foundation.dart';
 
 import '../models/finding_spec.dart';
 import '../models/settings.dart';
@@ -50,13 +54,93 @@ enum _Section { description, confirmation, impact, recommendation }
 /// Since #1163 the finding preview draws its type ~0.84× (see
 /// [_findingFontScale] in `finding_preview.dart`), so a body line holds more
 /// characters and more lines fit per slide — both raised in step below so the
-/// smaller type actually buys fewer pages. The header card cost rises slightly
-/// because its padding does not shrink with the font, so in the smaller
-/// body-line unit it costs a touch more.
+/// smaller type actually buys fewer pages.
 const double _linesPerSlide = 23.0;
-const double _headerCardCost = 18.5;
 const double _contHeadingCost = 6.0;
 const double _sectionHeadingCost = 2.5;
+
+// ── Header-card cost, derived from the finding's identity content ────────────
+// The finding header card is NOT a fixed height: it grows with the heading's
+// wrapped lines, an optional scope line, the identity badge rows (CWE/MASWE/
+// CVE/testId/retest) and — dominating when present — the CVSS score card on the
+// right. A single constant (the old 18.5) modelled the header at ~80% of a
+// slide, but the live card measures ~44% for a common finding and up to ~98%
+// for a fat one (long title + every identity field). That over-reservation left
+// a header-only, mostly-empty page 1 for ordinary findings — worse once a logo
+// also reserves space (#1198) — while UNDER-reserving for fat headers, whose
+// first section then overflowed. So the cost is now computed from the spec, each
+// term measured at the reference width against the live `_FindingPreview` and
+// pinned by `finding_header_cost_test.dart`.
+
+/// Line-units per wrapped heading line.
+const double _headingLineCost = 1.35;
+
+/// Heading characters per line. The CVSS score card (right) narrows the text
+/// column, so the heading wraps sooner when a score is shown.
+const double _headingCharsPerLine = 22.0;
+const double _headingCharsPerLineWithScore = 16.0;
+
+/// The scope row (`my_location` icon + object) when present.
+const double _scopeRowCost = 1.7;
+
+/// One row of identity badges; chips wrap ~2.5 to a row at this width.
+const double _badgeRowCost = 2.1;
+const double _badgeChipsPerRow = 2.5;
+
+/// The CVSS score card: a fixed-height block on the right. The header is as tall
+/// as the taller of its two columns, so a score sets a floor on the height.
+const double _scoreCardCost = 5.9;
+
+/// The card's own vertical padding, present regardless of content.
+const double _headerPadCost = 2.5;
+
+/// Whether the finding renders its identity badge row. Mirrors `_hasBadges` in
+/// `finding_preview.dart`: a MASWE id alone does not open the row (it rides
+/// alongside another badge), so it must not, alone, add badge height here.
+bool _hasIdentityBadges(FindingSpec spec) =>
+    spec.cvss != null ||
+    spec.cweId != null ||
+    spec.cveIds.isNotEmpty ||
+    spec.testId.isNotEmpty ||
+    spec.retest.isRetested;
+
+/// The number of visible identity chips (see `_badges` in `finding_preview.dart`).
+int _badgeChipCount(FindingSpec spec) {
+  if (!_hasIdentityBadges(spec)) return 0;
+  return (spec.cweId != null ? 1 : 0) +
+      (spec.masweId.isNotEmpty ? 1 : 0) +
+      spec.cveIds.length +
+      (spec.testId.isNotEmpty ? 1 : 0) +
+      (spec.retest.isRetested ? 1 : 0);
+}
+
+/// The finding header card's height in line-units, from its identity content.
+/// Grounded on the live render; see the calibration block above and #1198.
+double _headerCardCost(FindingSpec spec) {
+  final hasScore = spec.cvss != null;
+  final charsPerLine = hasScore
+      ? _headingCharsPerLineWithScore
+      : _headingCharsPerLine;
+  final headingLines = spec.heading.isEmpty
+      ? 0
+      : (spec.heading.length / charsPerLine).ceil();
+  var leftColumn = headingLines * _headingLineCost;
+  if (spec.scopeObject.isNotEmpty) leftColumn += _scopeRowCost;
+  final chips = _badgeChipCount(spec);
+  if (chips > 0) {
+    leftColumn += (chips / _badgeChipsPerRow).ceil() * _badgeRowCost;
+  }
+  final rightColumn = hasScore ? _scoreCardCost : 0.0;
+  return _headerPadCost + (leftColumn > rightColumn ? leftColumn : rightColumn);
+}
+
+/// The modelled header-card cost in line-units, exposed so a real-render test can
+/// pin the model against the live `_FindingPreview` (see #1198). Not for
+/// production use — pagination reads [_headerCardCost] directly.
+@visibleForTesting
+double debugHeaderCardCost(FindingSpec spec) => _headerCardCost(spec);
+
+/// One full-size body line holds this many characters at the reference width.
 const double _charsPerLine = 47.0;
 
 /// The lowest render scale at which a finding is still left on one slide. A
@@ -143,36 +227,41 @@ List<FindingSpec> paginateFinding(
   // A finding that renders close enough to full width already: leave it whole
   // rather than trade a small width gain for extra slides.
   final total =
-      _headerCardCost +
+      _headerCardCost(spec) +
       present.fold<double>(0, (a, s) => a + _sectionCost(spec, s));
   final pageCapacity = linesPerSlide / _minSinglePageScale;
   if (total <= pageCapacity) return [spec];
 
-  // Greedy pack. The usable capacity includes the same bounded scale-down that
-  // decides whether a finding may stay on one page. This lets the compact header
-  // share page 1 with a normal section and lets related short sections share a
-  // continuation page, without ever shrinking below the readability floor.
-  // A section that on its own overflows a page still gets its own page (it
-  // renders slightly scaled rather than being dropped), but never shares an
-  // already-full page.
-  final pages = <List<_Section>>[];
+  // Page 1 carries the header card plus the FIRST section — placed
+  // unconditionally, so an overflowing finding never renders a header-only,
+  // mostly-empty page 1 (#1198). The header card is a tall fixed block whose
+  // height varies with the finding's identity content (see [_headerCardCost]);
+  // rather than pack further sections down toward the readability floor beneath
+  // it — where a list-heavy section can render smaller than its line-cost
+  // predicts — page 1 deliberately stops at the first section, which measures
+  // comfortably above the floor even with a logo. The remaining sections greedily
+  // fill continuation pages (no header card, only the repeated heading), which
+  // may hold several related sections each. A single-section finding cannot be
+  // split, so it is returned whole (and scaled) rather than stranding its header.
+  final pages = <List<_Section>>[
+    [present.first],
+  ];
   var current = <_Section>[];
-  var isFirstPage = true;
-  var budget = pageCapacity - _headerCardCost;
-  for (final s in present) {
+  var budget = pageCapacity - _contHeadingCost;
+  for (final s in present.skip(1)) {
     final cost = _sectionCost(spec, s);
-    if (cost > budget && (current.isNotEmpty || isFirstPage)) {
-      // An exceptionally large first section may still leave page 1 as a
-      // header-only identity page; ordinary sections now use that space.
+    if (cost > budget && current.isNotEmpty) {
+      // A section that on its own overflows a page still gets its own page (it
+      // renders slightly scaled rather than being dropped), but never shares an
+      // already-full page.
       pages.add(current);
       current = <_Section>[];
-      isFirstPage = false;
       budget = pageCapacity - _contHeadingCost;
     }
     current.add(s);
     budget -= cost;
   }
-  pages.add(current);
+  if (current.isNotEmpty) pages.add(current);
   if (pages.length <= 1) return [spec];
 
   return [
