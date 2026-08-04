@@ -726,6 +726,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Niet akkoord en afsluiten': 'Rifiuta ed esci',
   'Springt naar': 'Salta a',
   'Geen sprong': 'Nessun salto',
   'Blok toevoegen': 'Aggiungi blocco',

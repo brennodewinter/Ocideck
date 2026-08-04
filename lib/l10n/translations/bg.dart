@@ -1793,6 +1793,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Niet akkoord en afsluiten': 'Отхвърляне и изход',
   'Springt naar': 'Преминава към',
   'Geen sprong': 'Без преход',
   'Blok toevoegen': 'Добавяне на блок',

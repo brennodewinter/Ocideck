@@ -1788,6 +1788,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Niet akkoord en afsluiten': 'Refuză și ieși',
   'Springt naar': 'Sare la',
   'Geen sprong': 'Fără salt',
   'Blok toevoegen': 'Adaugă bloc',

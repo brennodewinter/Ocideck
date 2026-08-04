@@ -30,3 +30,15 @@ Future<void> configureNativeWindow() async {
   await windowManager.focus();
   await windowManager.setPreventClose(true);
 }
+
+/// Sluit de app netjes af — de uitweg voor een gebruiker die niet verder wíl.
+///
+/// Nodig omdat `configureNativeWindow` `setPreventClose(true)` zet en alleen de
+/// shell (`AppShell.onWindowClose`) dat sluiten weer afhandelt. Vóór de shell —
+/// bij de toestemmingspoort — luistert er niemand naar de kruis-knop, dus dan
+/// zit een gebruiker die niet akkoord gaat klem (#1207). Deze route omzeilt de
+/// vensterbewaking: er is op de poort niets opgeslagen om te bewaken.
+Future<void> quitApp() async {
+  if (!Platform.isMacOS && !Platform.isWindows && !Platform.isLinux) return;
+  await windowManager.destroy();
+}

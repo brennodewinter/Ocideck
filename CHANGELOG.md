@@ -927,6 +927,17 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Wie de voorwaarden bij de eerste start niet accepteerde, zat klem (#1207).**
+  De toestemmingspoort had alleen een "Akkoord gaan"-knop. Op Windows liep dat
+  vast: `configureNativeWindow` zet `setPreventClose(true)`, en alleen de shell
+  (`AppShell.onWindowClose`) handelt dat sluiten weer af — maar de shell draait
+  nog niet zolang de poort in beeld is. De kruis-knop deed dus niets en er was
+  geen weg vooruit of terug. Nu staat er op desktop onder de akkoord-knop een
+  knop **"Niet akkoord en afsluiten"** die de app netjes sluit (`quitApp` →
+  `windowManager.destroy`); die knop hangt bewust *niet* van het vinkje af, want
+  hij is er juist voor wie niet instemt. Op web valt de knop weg: een tabblad
+  sluiten werkt daar altijd en een pagina kan zichzelf niet afsluiten. Een test
+  pint dat de uitweg openstaat terwijl "Akkoord gaan" nog grijs is.
 - **Eén commando voor het snijden van een release — de veilige kern eerst
   (#1161).** `make release TAG=vX.Y.Z` (`scripts/release.sh`) draait de voorkant
   van de release-keten voortaan identiek: een **monotone tag-guard** die alles

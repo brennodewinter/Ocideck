@@ -1793,6 +1793,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Niet akkoord en afsluiten': 'Irrifjuta u oħroġ',
   'Springt naar': 'Jaqbeż għal',
   'Geen sprong': 'Ebda qbiż',
   'Blok toevoegen': 'Żid blokk',

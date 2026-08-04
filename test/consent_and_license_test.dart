@@ -151,6 +151,25 @@ void main() {
 
       expect(container.read(consentProvider).hasAccepted, isTrue);
     });
+
+    testWidgets('een uitweg blijft open zonder akkoord (#1207)', (
+      tester,
+    ) async {
+      // Op Windows houdt `setPreventClose` de kruis-knop tegen zolang de shell
+      // nog niet draait; wie niet akkoord ging zat klem. De afsluitknop is de
+      // uitweg, en anders dan "Akkoord gaan" mag hij NIET van het vinkje
+      // afhangen — hij is er juist voor wie niet wil instemmen.
+      await pumpDialog(tester);
+
+      final quit = find.widgetWithText(TextButton, 'Niet akkoord en afsluiten');
+      expect(quit, findsOneWidget);
+      expect(acceptButton(tester).onPressed, isNull);
+      expect(
+        tester.widget<TextButton>(quit).onPressed,
+        isNotNull,
+        reason: 'de afsluitknop moet werken zonder dat het vinkje aan staat',
+      );
+    });
   });
 
   // De vlag staat op schijf; wat er gebeurt als die schijf niet meewerkt was

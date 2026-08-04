@@ -1806,6 +1806,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Niet akkoord en afsluiten': 'Diúltaigh agus scoir',
   'Springt naar': 'Léim go',
   'Geen sprong': 'Gan léim',
   'Blok toevoegen': 'Cuir bloc leis',

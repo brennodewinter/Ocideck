@@ -1778,6 +1778,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Niet akkoord en afsluiten': 'Odmietnuť a ukončiť',
   'Springt naar': 'Skočí na',
   'Geen sprong': 'Bez skoku',
   'Blok toevoegen': 'Pridať blok',

@@ -1770,6 +1770,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Niet akkoord en afsluiten': 'Noraidīt un aizvērt',
   'Springt naar': 'Pāriet uz',
   'Geen sprong': 'Bez pārejas',
   'Blok toevoegen': 'Pievienot bloku',

@@ -730,6 +730,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Niet akkoord en afsluiten': 'Refuser et quitter',
   'Springt naar': 'Saute vers',
   'Geen sprong': 'Aucun saut',
   'Blok toevoegen': 'Ajouter un bloc',

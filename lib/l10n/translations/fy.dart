@@ -731,6 +731,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Niet akkoord en afsluiten': 'Ofwize en ôfslute',
   'Springt naar': 'Springt nei',
   'Geen sprong': 'Gjin sprong',
   'Blok toevoegen': 'Blok tafoegje',

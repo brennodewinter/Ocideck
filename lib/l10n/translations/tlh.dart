@@ -1746,6 +1746,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Niet akkoord en afsluiten': 'yIlajQo\' \'ej yImev',
   'Springt naar': 'SupmeH Daq',
   'Geen sprong': 'Sup pagh',
   'Blok toevoegen': 'block yIchel',
