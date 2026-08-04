@@ -841,6 +841,10 @@ bullet whose link points at the target slide's anchor, optionally followed by
 Markdown viewer; only the `<!-- _class: menu -->` token marks it as a menu for
 OciDeck.
 
+The **HTML export** draws the same card grid, and there the blocks are real
+in-page links: click a block and the page scrolls to that slide. (The PDF export
+shows the grid too, printed rather than clickable.)
+
 ### Source-code slides
 
 Choose a programming language for syntax highlighting (or "plain text") and paste

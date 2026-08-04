@@ -39,6 +39,7 @@ import 'improvement/flow_layout.dart';
 import 'improvement/flow_slide.dart';
 import 'improvement/flow_spec.dart';
 import 'markdown_table_codec.dart';
+import 'menu_blocks.dart';
 import 'scene/scene.dart';
 import 'markdown_service.dart';
 
@@ -52,6 +53,7 @@ part 'marp_html/marp_html_service_matrix.dart';
 part 'marp_html/marp_html_service_canvas.dart';
 part 'marp_html/marp_html_service_tree.dart';
 part 'marp_html/marp_html_service_flow.dart';
+part 'marp_html/marp_html_service_menu.dart';
 part 'marp_html/marp_html_service_css.dart';
 part 'marp_html/marp_html_service_render_script.dart';
 part 'marp_html/marp_html_service_images.dart';

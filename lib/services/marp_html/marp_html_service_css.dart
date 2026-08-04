@@ -69,11 +69,27 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 ''';
 
 /// De stylesheet die vóór het themablok in elk document gaat: de structuur plus
-/// de rapportagedia's.
+/// de rapportagedia's en het keuze-menuraster.
 ///
-/// Een functie en geen derde constante, zodat de aanroeper niet hoeft te weten
+/// Een functie en geen vierde constante, zodat de aanroeper niet hoeft te weten
 /// uit hoeveel stukken dit bestaat.
-String exportBaseCss() => '$_structuralCss\n$_reportingCss';
+String exportBaseCss() => '$_structuralCss\n$_reportingCss\n$_menuCss';
+
+/// De vorm van het keuze-menuraster (#1162). Thema-onafhankelijk, net als de
+/// rapportage-opmaak: alleen de layout staat hier, de kleuren (rand/vulling uit
+/// het accent, of een rustige rand uit de tekstkleur) zet [renderMenuSlide]
+/// inline per kaart. `grid-auto-rows` geeft elke rij dezelfde hoogte, zodat het
+/// een net raster blijft; bij een afbeelding vult het beeld de kaart en zakt het
+/// label eronder, anders staat het label gecentreerd. De hoverlift maakt een
+/// aanklikbaar (doel)blok voelbaar in een geopende export.
+const _menuCss = r'''
+.slide .menu-grid{display:grid;gap:22px;margin:.5em 0;grid-auto-rows:200px}
+.slide .menu-card{display:flex;flex-direction:column;align-items:stretch;justify-content:center;overflow:hidden;border:2px solid;border-radius:16px;text-decoration:none;color:inherit}
+.slide .menu-card .menu-thumb{flex:1 1 auto;width:100%;min-height:0;object-fit:cover}
+.slide .menu-card .menu-label{padding:14px 18px;font-size:28px;font-weight:600;line-height:1.2;text-align:center}
+.slide a.menu-card{transition:filter .12s ease}
+.slide a.menu-card:hover{filter:brightness(1.06)}
+''';
 
 /// De opmaak van de zes rapportagedia's. Ook thema-onafhankelijk: kleuren die
 /// betekenis dragen staan inline op de rij die ze beschrijft, en de accentkleur

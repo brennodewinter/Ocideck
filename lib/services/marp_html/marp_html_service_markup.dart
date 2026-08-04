@@ -15,6 +15,22 @@ final RegExp _titleColorComment = RegExp(
   r'<!--\s*ocideck_title_text_color:\s*(#[0-9A-Fa-f]{3,8})',
 );
 
+/// Strict slug so the matched value can never break out of the `id` attribute
+/// it is written into. Anchors are `[a-z0-9-]` by construction (see
+/// `slugifyAnchor`), so anything else is not one of ours and is ignored.
+final RegExp _slideAnchorComment = RegExp(
+  r'<!--\s*ocideck_slide_anchor:\s*([a-z0-9-]+)',
+);
+
+/// The `id` a slide's `<section>` carries so an in-page `#anchor` link — a
+/// choice-menu block, a jump-out — actually lands on it in the HTML export, or
+/// `''` when the slide has no anchor. marked (v18) generates no heading ids, so
+/// without this every `[label](#anchor)` fragment link would scroll nowhere.
+String _slideAnchorIdAttr(String slideMarkdown) {
+  final anchor = _slideAnchorComment.firstMatch(slideMarkdown)?.group(1);
+  return anchor == null ? '' : ' id="$anchor"';
+}
+
 /// Inline style carrying a title slide's per-slide title-text-colour override
 /// (`ocideck_title_text_color`) as a CSS custom property, or `''` when the
 /// slide sets none. The title `h1` reads this variable (with the theme's title
@@ -104,6 +120,7 @@ String _renderSections(
     body = renderCanvasSlide(body, theme: theme);
     body = renderTreeSlide(body, theme: theme);
     body = renderFlowSlide(body, theme: theme);
+    body = renderMenuSlide(body, theme: theme);
     body = MarpHtmlService.renderChartBlocks(
       body,
       theme: theme,
@@ -125,8 +142,9 @@ String _renderSections(
     );
     final markerClass = _bulletMarkerSectionClass(slide);
     final titleColorStyle = _titleColorSectionStyle(slide);
+    final anchorId = _slideAnchorIdAttr(slide);
     sections
-      ..write('<section class="slide$markerClass"$titleColorStyle>')
+      ..write('<section class="slide$markerClass"$anchorId$titleColorStyle>')
       ..write('<script type="text/markdown">')
       ..write(_guardMarkdown(renderedBlocks))
       ..write('</script></section>');

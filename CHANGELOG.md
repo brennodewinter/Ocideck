@@ -28,6 +28,13 @@ in Dutch, and it keeps growing on `main` between releases.
   doeldia laat het menu gewoon staan, zonder fout. De blokken zijn in het
   `.md`-bestand doodgewone link-bullets, dus een menu blijft leesbaar in elke
   Markdown-lezer.
+- **Keuzemenu in de HTML-export.** (#1162) De HTML-export tekent nu hetzelfde
+  kaartenraster in de themakleuren als de app, presentator en PDF — voorheen
+  kwam een menudia er als een platte lijst hyperlinks uit. De blokken zijn
+  echte in-pagina-links: klik een blok en de pagina scrolt naar die dia. Elke
+  dia met een anker draagt daarvoor nu een `id` in de export (marked genereert
+  zelf geen kop-id's), zodat óók een handmatige verwijzing naar een `#anker`
+  ergens landt.
 - **Een dia kan nu naar een andere dia springen ("Hierna").** (#1162) In de
   slide-instellingen, onder *Tijdens presenteren*, kies je met **Hierna** naar
   welke dia de presentatie na deze springt in plaats van naar de eerstvolgende.
