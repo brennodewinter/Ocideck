@@ -485,6 +485,8 @@ extension _MarkdownParse on MarkdownService {
       improvementLayout: type.category == SlideCategory.procesverbetering
           ? d.improvementLayout
           : '',
+      anchor: d.anchor,
+      nextAnchor: d.nextAnchor,
     );
   }
 

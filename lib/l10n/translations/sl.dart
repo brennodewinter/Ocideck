@@ -1773,6 +1773,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Hierna': 'Nato',
+  'Volgende dia': 'Naslednji diapozitiv',
+  'Sprong': 'Skok',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Izberite, na kateri diapozitiv predstavitev skoči po tem. Privzeto je to preprosto naslednji diapozitiv. Tako se lahko izbirna veja na koncu vrne v meni.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Ciljni diapozitiv ne obstaja več — predstavitev se tukaj preprosto nadaljuje.',
   'Bewerk deze dia als markdown-bron': 'Uredi ta diapozitiv kot vir markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'To je predstavitev, ne datoteka Markdown. OciDeck jo lahko uvozi v nov deck.',

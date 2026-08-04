@@ -706,6 +706,15 @@ void _writeSlideDirectives(
     buf.writeln('<!-- ocideck_finding_id: ${slide.findingId} -->');
     buf.writeln('<!-- ocideck_finding_role: ${slide.findingRole.name} -->');
   }
+  // Niet-lineaire navigatie (#1162): het stabiele anker waar deze dia van een
+  // menublok of sprong-uit het doel van kan zijn, en de eigen sprong-uit. Beide
+  // leeg = een gewone lineaire dia zonder anker; dan schrijven we niets.
+  if (slide.anchor.isNotEmpty) {
+    buf.writeln('<!-- ocideck_slide_anchor: ${slide.anchor} -->');
+  }
+  if (slide.nextAnchor.isNotEmpty) {
+    buf.writeln('<!-- ocideck_next: ${slide.nextAnchor} -->');
+  }
   // AI-assist markers (AI_ASSIST §16.3): the fields whose text was drafted by
   // AI and not yet reviewed. Persisted so the seal gate survives a save/open.
   if (slide.aiAssistedFields.isNotEmpty) {

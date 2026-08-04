@@ -112,7 +112,11 @@ const int maxFileLines = 1000;
 /// `lib/l10n/translations/*` is exempt — those files grow with every UI string.
 const Map<String, int> fileSizeBaseline = {
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
-  'lib/models/slide.dart': 975,
+  // +20 (#1162): de twee onherleidbare navigatievelden `anchor` + `nextAnchor`
+  // (stabiel dia-anker en per-dia sprong-uit) met hun doc, constructor- en
+  // copyWith-doorvoer. Pure dataplumbing van een nieuw formaatveld; er valt geen
+  // gedrag uit te tillen naar een part.
+  'lib/models/slide.dart': 995,
   // Procesverbetering module card / reveal wiring in the shell.
   // +1 (#1037): the url_launcher_util import so the play-only landing can open
   // slide links in the browser, like every other presentation surface. The file
@@ -203,8 +207,12 @@ const Map<String, int> classSizeBaseline = {
   // +6 (#1164): splitRunPosition-doorvoer naar SlidePreview in views/overlays,
   // zodat de (2/3)-titelteller ook in de presentatie- en publieksweergave staat.
   // Pure plumbing van een nieuw veld; er valt geen gedrag uit te tillen.
+  // +24 (#1162): de sprong-uit + navigatiestack in de presentator — `_advanceTo`,
+  // de sprong-tak in `_next`, de retrace in `_prev` en het wissen van de stack bij
+  // een teleport. De anker-resolutie zelf is al top-level (`_indexOfAnchor`) en
+  // telt niet mee; wat rest gebruikt `_index`/`_rebuild` en hoort in de state.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3317,
+      3341,
   'lib/services/file_service.dart#FileService': 2747,
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on
@@ -220,7 +228,11 @@ const Map<String, int> classSizeBaseline = {
   'lib/state/tabs_provider.dart#TabsNotifier': 2235,
   // Procesverbetering: matrix/canvas/tree/flow/phaseGate serialize/parse.
   // +33: Y-01 front-matter keys (name/unit/usl/lsl/target/baseline/goal).
-  'lib/services/markdown_service.dart#MarkdownService': 2407,
+  // +16 (#1162): het lezen van de twee navigatie-comments (`ocideck_slide_anchor`
+  // + `ocideck_next`) in `_parseBlockDirectives` — typedef-veld, init en twee
+  // parse-takken per veld. Onherleidbare parse-plumbing; de serialisatie zelf zit
+  // al in de top-level `_writeSlideDirectives` en telt niet mee.
+  'lib/services/markdown_service.dart#MarkdownService': 2423,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2145,
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
@@ -243,7 +255,10 @@ const Map<String, int> classSizeBaseline = {
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1275, // +14 (#978 Blok C): applyProvenance
+      1290, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
+  // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
+  // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
+  // klasse.
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
   'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1120,
   // Procesverbetering: Y-01-UI, type-toolbar, plaklogica en DOE-dialoog zijn

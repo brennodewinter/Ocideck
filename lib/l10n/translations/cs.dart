@@ -1774,6 +1774,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Hierna': 'Poté',
+  'Volgende dia': 'Další snímek',
+  'Sprong': 'Skok',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Vyberte, na který snímek prezentace přeskočí po tomto. Ve výchozím nastavení je to prostě další snímek. Tak se větev volby může na konci vrátit do nabídky.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Cílový snímek už neexistuje — prezentace zde jednoduše pokračuje.',
   'Bewerk deze dia als markdown-bron':
       'Upravit tento snímek jako zdroj markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':

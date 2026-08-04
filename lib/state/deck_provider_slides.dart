@@ -274,6 +274,21 @@ extension DeckNotifierSlides on DeckNotifier {
     );
   }
 
+  /// Zet (of wist) de sprong-uit van dia [index] (#1162): naar welke dia de
+  /// presentatie na deze springt in plaats van de volgende in bronvolgorde.
+  ///
+  /// [targetIndex] `null` wist de sprong (terug naar lineair). Anders krijgt de
+  /// doeldia zo nodig een uniek, bevroren anker — de gebruiker koos een dia, niet
+  /// een anker — en wijst deze dia daarheen. Een sprong naar zichzelf of een
+  /// ongeldige index wordt genegeerd. Beide dia's muteren in één stap.
+  void setSlideJump(int index, int? targetIndex) {
+    final deck = currentState.deck;
+    if (deck == null) return;
+    final slides = slidesWithJump(deck.slides, index, targetIndex);
+    if (slides == null) return;
+    _mutate(deck.copyWith(slides: slides), bumpRevision: true);
+  }
+
   /// Zet de "overslaan"-status van een slide aan/uit. Overgeslagen slides
   /// worden weggelaten bij presenteren en exporteren.
   void toggleSkip(int index) {

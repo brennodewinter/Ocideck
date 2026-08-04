@@ -107,27 +107,22 @@ extension _PresenterPlayback on _FullscreenPresenterState {
     }
     // Niet automatisch voorbij een onbeantwoorde vraag schuiven.
     if (_questionBlocksAdvance) return;
-    if (_index < widget.slides.length - 1) {
-      _commitActiveInk();
-      _persistUserNoteFromController();
-      _rebuild(() {
-        _index++;
-        _richTextPage = 0;
-        _timelineStep = 0;
-      });
-      _loadUserNoteIntoController();
-      _scheduleAdvance();
-    } else if (_loop) {
-      _commitActiveInk();
-      _persistUserNoteFromController();
-      _rebuild(() {
-        _index = 0;
-        _richTextPage = 0;
-        _timelineStep = 0;
-      });
-      _loadUserNoteIntoController();
-      _scheduleAdvance();
-    }
+    // Auto-play volgt dezelfde sprong-uit als handmatig (#1162), maar vult de
+    // retrace-stack bewust níet: in een kiosk-lus zou die eindeloos groeien.
+    final jumpIndex = _indexOfAnchor(widget.slides, _currentSlide.nextAnchor);
+    final target =
+        jumpIndex ??
+        (_index < widget.slides.length - 1 ? _index + 1 : (_loop ? 0 : null));
+    if (target == null) return;
+    _commitActiveInk();
+    _persistUserNoteFromController();
+    _rebuild(() {
+      _index = target;
+      _richTextPage = 0;
+      _timelineStep = 0;
+    });
+    _loadUserNoteIntoController();
+    _scheduleAdvance();
   }
 
   void _onMediaCompleted({int? index, String? kind}) {

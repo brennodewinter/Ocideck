@@ -597,6 +597,20 @@ class Slide {
   /// `Slide.duplicate`, which resets it.
   final int renderPage;
 
+  /// Stable in-deck anchor this slide can be *jumped to* by (#1162). Empty until
+  /// the slide actually becomes a target, so a deck that never branches stays
+  /// clean. Seeded from a slug of the title on first assignment but frozen
+  /// thereafter — renaming the heading never breaks a link. Unique within the
+  /// deck. Unlike [id] (an ephemeral parse-time uuid) this round-trips as
+  /// `<!-- ocideck_slide_anchor: … -->`.
+  final String anchor;
+
+  /// Non-linear "go here next" (#1162): the [anchor] of the slide to advance to
+  /// instead of the next slide in source order. Empty = ordinary linear order.
+  /// A jump to an anchor that no longer exists falls back to linear (fail-safe).
+  /// Round-trips as `<!-- ocideck_next: … -->`.
+  final String nextAnchor;
+
   const Slide({
     required this.id,
     required this.type,
@@ -661,6 +675,8 @@ class Slide {
     this.improvementTemplateId = '',
     this.improvementLayout = '',
     this.renderPage = 0,
+    this.anchor = '',
+    this.nextAnchor = '',
   });
 
   factory Slide.create(SlideType type) {
@@ -887,6 +903,8 @@ class Slide {
     String? improvementTemplateId,
     String? improvementLayout,
     int? renderPage,
+    String? anchor,
+    String? nextAnchor,
   }) {
     return Slide(
       id: id,
@@ -961,6 +979,8 @@ class Slide {
           improvementTemplateId ?? this.improvementTemplateId,
       improvementLayout: improvementLayout ?? this.improvementLayout,
       renderPage: renderPage ?? this.renderPage,
+      anchor: anchor ?? this.anchor,
+      nextAnchor: nextAnchor ?? this.nextAnchor,
     );
   }
 

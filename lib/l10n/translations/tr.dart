@@ -2748,6 +2748,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Hierna': 'Sonra',
+  'Volgende dia': 'Sonraki slayt',
+  'Sprong': 'Atla',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Sunumun bundan sonra hangi slayta atlayacağını seçin. Varsayılan olarak bu, yalnızca sonraki slayttır. Böylece bir seçim dalı sonunda menüye dönebilir.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Hedef slayt artık yok — sunum burada yalnızca devam eder.',
   'Bewerk deze dia als markdown-bron':
       'Bu slaydı markdown kaynağı olarak düzenle',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':

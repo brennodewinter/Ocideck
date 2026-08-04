@@ -1778,6 +1778,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Hierna': 'Toliau',
+  'Volgende dia': 'Kita skaidrė',
+  'Sprong': 'Šuolis',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Pasirinkite, į kurią skaidrę pristatymas pereina po šios. Numatytoji reikšmė yra tiesiog kita skaidrė. Taip pasirinkimo šaka pabaigoje gali grįžti į meniu.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Tikslinės skaidrės nebėra — pristatymas tiesiog tęsiasi čia.',
   'Bewerk deze dia als markdown-bron':
       'Redaguoti šią skaidrę kaip markdown šaltinį',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':

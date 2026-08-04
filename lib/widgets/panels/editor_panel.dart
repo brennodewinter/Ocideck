@@ -29,6 +29,7 @@ import '../editors/slide_editor_registry.dart';
 import '../editors/slide_type_help.dart';
 import '../panels/slide_quality_panel.dart';
 import '../editors/markdown_deck_editor.dart';
+import '../../utils/inline_markdown.dart';
 import '../../utils/page_scoped_notes.dart';
 import '../panels/preview_panel.dart';
 import '../markdown_editor/markdown_editor.dart';
@@ -203,6 +204,12 @@ class EditorPanel extends ConsumerWidget {
         onUpdate: update,
         imageService: imageService,
         deck: deck,
+        // De sprong-uit muteert twee dia's (deze en het doel), dus loopt hij via
+        // de deck-notifier i.p.v. de enkel-dia [update] (#1162).
+        onSetJump: (targetIndex) => deckNotifier.setSlideJump(
+          deck.slides.indexWhere((s) => s.id == slide.id),
+          targetIndex,
+        ),
       ),
       const Divider(height: 1),
       _NotesField(

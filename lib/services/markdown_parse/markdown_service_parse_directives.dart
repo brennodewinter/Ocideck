@@ -6,6 +6,13 @@ part of '../markdown_service.dart';
 
 /// Wat [_MarkdownParseDirectives._parseBlockDirectives] uit één slideblok
 /// haalt: de body zonder richtlijnen, plus elke richtlijn die erin stond.
+/// De waarde na [prefix] in [content], maar alleen als [current] nog leeg is —
+/// eerste vondst wint (#1162). De serialiser zet zo'n richtlijn bovenaan, dus een
+/// gelijknamige regel verderop staat in de dia-tekst en mag de waarde niet
+/// overschrijven. Top-level zodat `_parseBlockDirectives` niet verder groeit.
+String _firstDirective(String content, String prefix, String current) =>
+    current.isNotEmpty ? current : content.substring(prefix.length).trim();
+
 typedef _BlockDirectives = ({
   String cssClass,
   String remaining,
@@ -33,6 +40,8 @@ typedef _BlockDirectives = ({
   DisplayWindowSpec? viewLimit,
   String improvementTemplateId,
   String improvementLayout,
+  String anchor,
+  String nextAnchor,
 });
 
 /// Neemt [content] op in het notitieblok en haalt het uit de body.
@@ -108,6 +117,8 @@ extension _MarkdownParseDirectives on MarkdownService {
     int styleImageWidth = 0;
     var improvementTemplateId = '';
     var improvementLayout = '';
+    var anchor = '';
+    var nextAnchor = '';
     final viewComments = <String, String>{};
     final source = remaining;
     remaining = source.replaceAllMapped(_reHtmlComment, (m) {
@@ -191,6 +202,10 @@ extension _MarkdownParseDirectives on MarkdownService {
               .substring('ocideck_layout:'.length)
               .trim();
         }
+      } else if (content.startsWith('ocideck_slide_anchor:')) {
+        anchor = _firstDirective(content, 'ocideck_slide_anchor:', anchor);
+      } else if (content.startsWith('ocideck_next:')) {
+        nextAnchor = _firstDirective(content, 'ocideck_next:', nextAnchor);
       } else if (content.startsWith('ocideck_view_')) {
         _collectViewComment(viewComments, content);
       } else if (!content.startsWith('_')) {
@@ -233,6 +248,8 @@ extension _MarkdownParseDirectives on MarkdownService {
           : DisplayWindowSpec.fromComments(viewComments),
       improvementTemplateId: improvementTemplateId,
       improvementLayout: improvementLayout,
+      anchor: anchor,
+      nextAnchor: nextAnchor,
     );
   }
 

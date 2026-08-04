@@ -1788,6 +1788,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Hierna': 'Далі',
+  'Volgende dia': 'Наступний слайд',
+  'Sprong': 'Перехід',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Виберіть, на який слайд презентація переходить після цього. За замовчуванням це просто наступний слайд. Так гілка вибору може наприкінці повернутися до меню.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Цільового слайда більше не існує — презентація просто продовжується тут.',
   'Bewerk deze dia als markdown-bron':
       'Редагувати цей слайд як джерело markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':

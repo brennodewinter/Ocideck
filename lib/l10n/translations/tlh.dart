@@ -1746,6 +1746,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Hierna': 'ghIq',
+  'Volgende dia': 'veb HemtIq',
+  'Sprong': 'Sup',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'poH veb Da\'ovlu\' \'e\' wIv, wa\'DIch ghu\' rInDI\'. motlh \'oH veb HemtIq neH \'oH. vaj bIQ wIv jol pumbogh chenmoHlaH menu.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'taghwI\' HemtIq Daqawlu\'be\' — naDev ghItlh cha\' neH.',
   'Bewerk deze dia als markdown-bron': '\'anghomvam markdown Daq yIchoH',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'mIllogh nav \'oH, Markdown teywI\' \'oHbe\'. deck chu\'Daq lan \'e\' chaw\' OciDeck.',

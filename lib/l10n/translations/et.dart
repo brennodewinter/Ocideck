@@ -1762,6 +1762,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Hierna': 'Seejärel',
+  'Volgende dia': 'Järgmine slaid',
+  'Sprong': 'Hüpe',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Valige, millisele slaidile esitlus pärast seda hüppab. Vaikimisi on see lihtsalt järgmine slaid. Nii saab valikuharu lõpus menüüsse tagasi pöörduda.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'Sihtslaidi enam ei ole — esitlus lihtsalt jätkub siit.',
   'Bewerk deze dia als markdown-bron':
       'Redigeeri seda slaidi markdown-allikana',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':

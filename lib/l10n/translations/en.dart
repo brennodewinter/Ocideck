@@ -911,6 +911,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Hierna': 'Then',
+  'Volgende dia': 'Next slide',
+  'Sprong': 'Jump',
+  'Kies naar welke dia de presentatie na deze springt. Standaard is dat gewoon de volgende dia. Zo laat je een keuze-tak aan het eind terugkeren naar het menu.':
+      'Choose which slide the presentation jumps to after this one. By default that is simply the next slide. This lets a choice branch return to the menu at the end.',
+  'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
+      'The target slide no longer exists — the presentation simply continues here.',
   'Bewerk deze dia als markdown-bron': 'Edit this slide as markdown source',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'This is a presentation, not a Markdown file. OciDeck can import it into a new deck.',

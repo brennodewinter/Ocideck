@@ -109,4 +109,8 @@ const _supportedCommentDirectives = {
   // Welk verbetersjabloon een engine-dia volgt (PROCESS_IMPROVEMENT §3.1).
   'ocideck_template',
   'ocideck_layout',
+  // Niet-lineaire navigatie (#1162): het stabiele dia-anker waar een menublok of
+  // sprong-uit naar wijst, en de per-dia sprong-uit zelf.
+  'ocideck_slide_anchor',
+  'ocideck_next',
 };
