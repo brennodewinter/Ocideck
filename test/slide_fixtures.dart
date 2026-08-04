@@ -45,6 +45,13 @@ Slide slideMetInhoud(SlideType type) {
     ),
     SlideType.title ||
     SlideType.section => basis.copyWith(title: 'T', subtitle: 'S'),
+    // Menu (#1162): de blokken leven als link-bullets in [Slide.bullets], niet
+    // in de body uit Slide.create. Eén blok `[label](#anker)` maakt de dia
+    // herkenbaar én laat de golden meer tonen dan alleen de titel.
+    SlideType.menu => basis.copyWith(
+      title: 'T',
+      bullets: const ['[Naar deel twee](#deel-twee)'],
+    ),
     // De overige types dragen hun token én een gevulde body uit Slide.create.
     _ => basis.copyWith(title: 'T'),
   };
