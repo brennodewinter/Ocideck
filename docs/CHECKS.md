@@ -601,9 +601,10 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Deliberate exceptions are written down.** A conscious, one-off transition the
   canonical rule forbids (say, a correction that goes back down past a bad
   release) goes in `sanctionedTransitions` in `tool/check_version_bump.dart`, in
-  the diff, with a reason. The list is empty by default — the `1.2.1` accident is
-  left standing and the next release is the ordinary patch `1.2.2`. An accident
-  has no entry there and fails; a decision does.
+  the diff, with a reason. The one current entry is `1.2.1->0.3.0`: the
+  accidental `v1.2.1` release is abandoned and the project deliberately returns
+  below 1.0, continuing its 0.x line at 0.3.0. An accident has no entry there and
+  fails; a decision does.
 - **A shallow clone is skipped, not failed.** With no reachable tag the gate
   cannot know the baseline, so it prints a note and passes rather than fail a
   machine that simply lacks the history; a full clone and the release runner both

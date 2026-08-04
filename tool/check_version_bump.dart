@@ -82,10 +82,13 @@ bool isLegalTransition(SemVer from, String to) =>
 /// Deliberately sanctioned transitions that the canonical rule forbids, as
 /// `from->to`. Each needs a comment saying why. This is the escape hatch for a
 /// conscious correction (say, undoing an accidental bump by going back down) —
-/// never for a routine bump. Empty by default: the `1.2.1` accident is left
-/// standing and the next release is the ordinary patch `1.2.2`, which needs no
-/// exception.
-const Set<String> sanctionedTransitions = {};
+/// never for a routine bump.
+///
+///   * `1.2.1->0.3.0` — the accidental `v1.2.1` release of 2026-08-03 is
+///     abandoned; the project deliberately returns below 1.0 and continues its
+///     0.x line at 0.3.0. A one-time downgrade past a version that briefly
+///     existed. From 0.3.0 onward the canonical rule applies again unaided.
+const Set<String> sanctionedTransitions = {'1.2.1->0.3.0'};
 
 /// Reads the `version:` line from pubspec.yaml at [path], returning the raw
 /// value (with any `+build` suffix). Throws when the field is missing.

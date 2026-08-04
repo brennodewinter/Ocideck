@@ -85,10 +85,11 @@ void main() {
     });
   });
 
-  test('there are no sanctioned exceptions by default', () {
-    // The escape hatch exists but is empty: the 1.2.1 accident is left standing
-    // and the next release is the ordinary patch 1.2.2. Adding an entry should
-    // be a conscious act, visible in the diff.
-    expect(sanctionedTransitions, isEmpty);
+  test('the deliberate return below 1.0 is a sanctioned exception', () {
+    // The 1.2.1 accident is abandoned: the project drops back to its 0.x line
+    // at 0.3.0. That downgrade is not a canonical step, so it only passes as a
+    // written-down, conscious exception — visible here and in the diff.
+    expect(sanctionedTransitions, contains('1.2.1->0.3.0'));
+    expect(isLegalTransition(const SemVer(1, 2, 1), '0.3.0'), isFalse);
   });
 }

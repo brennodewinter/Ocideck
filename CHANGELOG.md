@@ -12,6 +12,19 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.3.0] — 2026-08-04
+
+### Changed
+
+- **Het project keert terug onder 1.0 en zet de 0.x-lijn voort op 0.3.0.** De
+  release `1.2.1` ontstond uit een misgelopen versiesprong (0.2.0 → 1.2.1 in
+  plaats van de bedoelde 0.2.2) waarvan de tag ongemerkt de hele uitbrengketen
+  afvuurde. Die release wordt losgelaten; 0.3.0 zet de gewone 0.x-ontwikkeling
+  voort. Inhoudelijk gelijk aan 1.2.1 hieronder. De versiesprong die dit
+  veroorzaakte kan niet opnieuw ongemerkt gebeuren: `make check-version-bump`
+  weigert voortaan elke niet-canonieke bump (zie de Development log en
+  `docs/CHECKS.md`).
+
 ## [1.2.1] — 2026-08-04
 
 ### Added
@@ -968,19 +981,21 @@ that before deciding whether this alpha fits what you are doing.
   van 0.2.0 naar 1.2.1 in plaats van de bedoelde 0.2.2, en de tag `v1.2.1` vuurde
   de hele uitbrengketen af (vier platformen, een gepubliceerde release, de live
   web) voordat iemand het zag. De adoptie was verwaarloosbaar en de app kent geen
-  update-checker, dus 1.2.1 blijft staan; de eerstvolgende release is gewoon de
-  patch 1.2.2. `1.2.1` is geen stap die een release-proces oplevert
+  update-checker, dus de sprong is teruggenomen: het project keert bewust terug
+  onder 1.0 en zet de 0.x-lijn voort op **0.3.0** (de `1.2.1`-release wordt
+  losgelaten). `1.2.1` is geen stap die een release-proces oplevert
   — een echte bump verzet precies één semver-as en nult de assen eronder — dus
   het is de signatuur van een typefout of een losgeslagen zoek-en-vervang. De
   nieuwe poort `make check-version-bump` (`tool/check_version_bump.dart`, in
   `STATIC_GATES` dus op elke PR) toetst de versie in `pubspec.yaml` tegen de
   laatste release-tag: vanaf `X.Y.Z` zijn alleen `X.Y.(Z+1)`, `X.(Y+1).0` en
   `(X+1).0.0` toegestaan. Hij is een no-op zolang de versie ongewijzigd is, en
-  slaat een ondiepe clone zonder tags over in plaats van te falen. De
-  `sanctionedTransitions`-lijst — de ontsnappingsklep voor een bewuste eenmalige
-  uitzondering, met reden en in de diff — is standaard leeg: een ongeluk heeft
-  daar geen vermelding en faalt, een besluit wel. `test/version_bump_test.dart`
-  pint de regel met de oorspronkelijke fout als rode toets.
+  slaat een ondiepe clone zonder tags over in plaats van te falen. De bewuste
+  terugkeer onder 1.0 (`1.2.1 → 0.3.0`) is niet-canoniek en staat daarom als
+  enige vermelding in de `sanctionedTransitions`-ontsnappingsklep — met reden en
+  in de diff. Een ongeluk heeft daar geen vermelding en faalt, een besluit wel.
+  `test/version_bump_test.dart` pint de regel met de oorspronkelijke fout als
+  rode toets.
 - **Een gesplitste dia zag er ná reparatie niet verzorgd uit — twee punten uit
   de beeldkeuring bij #1159.** (1) Elke vervolgpagina herhaalde exact dezelfde
   titel, zonder markering; bij een titel met een aantal erin stond dat onjuiste
