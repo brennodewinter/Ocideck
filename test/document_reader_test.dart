@@ -325,10 +325,15 @@ void main() {
     test(
       'falls back to the base doc when no locale variant is bundled',
       () async {
-        // No docs/USER_GUIDE.de.md is shipped yet, so `de` must return the base.
-        final base = await service.load('docs/USER_GUIDE.md', 'nl');
+        // `en` is the base language, so it returns the base document directly.
+        // No docs/USER_GUIDE.{de,nl}.md is shipped yet, so both must fall back
+        // to that same base — including Dutch, which since #1181 is resolved
+        // like any other non-base language rather than pinned to the base.
+        final base = await service.load('docs/USER_GUIDE.md', 'en');
         final german = await service.load('docs/USER_GUIDE.md', 'de');
+        final dutch = await service.load('docs/USER_GUIDE.md', 'nl');
         expect(german, equals(base));
+        expect(dutch, equals(base));
         expect(base, isNotEmpty);
       },
     );
@@ -545,9 +550,20 @@ void main() {
         expect(melding(), findsNothing);
       });
 
-      testWidgets('staat er niet in het Nederlands', (tester) async {
-        // De basisversie ís de Nederlandse bron; er valt niets te melden.
-        await open(tester, isBaseVersion: true);
+      testWidgets('staat er óók in het Nederlands (de basis is Engels)', (
+        tester,
+      ) async {
+        // De gebundelde basis is Engels, niet Nederlands. Een Nederlandse lezer
+        // die daarop terugvalt hoort dat te weten (#1181); vóór #1181 werd juist
+        // de Nederlandse lezer de melding onthouden — de gemelde bug.
+        await open(tester, isBaseVersion: true, locale: 'nl');
+        expect(melding(), findsOneWidget);
+      });
+
+      testWidgets('staat er niet in het Engels — dat ís de basis', (
+        tester,
+      ) async {
+        await open(tester, isBaseVersion: true, locale: 'en');
         expect(melding(), findsNothing);
       });
     });

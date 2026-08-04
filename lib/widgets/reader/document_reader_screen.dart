@@ -225,10 +225,15 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
               _ensureAnchorVisible();
             }
           }
-          // De titel van dit document staat in 32 talen, de inhoud in één. Dat
-          // verschil hoort de lezer te horen vóór hij begint te lezen, niet
-          // halverwege te ontdekken (#626).
-          final showNotice = loaded.isBaseVersion && languageCode != 'nl';
+          // De titel van dit document staat in 32 talen, de inhoud vaak in één.
+          // Dat verschil hoort de lezer te horen vóór hij begint te lezen, niet
+          // halverwege te ontdekken (#626). De basis is Engels, dus de melding
+          // hoort bij iederéén die géén Engels leest en op de basis terugvalt —
+          // vóór #1181 stond hier `!= 'nl'`, wat juist de Nederlandse lezer
+          // (die óók de Engelse basis kreeg) de melding onthield.
+          final showNotice =
+              loaded.isBaseVersion &&
+              languageCode != DocumentationService.baseLanguage;
           // Which blocks contain the query, and which of those is the active
           // hit. Computed here (text in hand) so both the find bar's counter and
           // the document's highlight see the same result.

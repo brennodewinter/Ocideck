@@ -14,9 +14,17 @@ import 'package:flutter/services.dart' show AssetManifest, rootBundle;
 class DocumentationService {
   const DocumentationService();
 
+  /// The language the bundled base documents (`docs/NAME.md`, `LICENSE.md`) are
+  /// written in — English. A reader in this language gets the base directly and
+  /// needs no "you're reading the source" notice; every other language prefers a
+  /// `.<code>.md` translation and, when none is bundled, falls back to the base
+  /// *and is told so*. Before #1181 this was assumed to be Dutch, which silently
+  /// left Dutch readers on the English base with no notice — the exact report.
+  static const String baseLanguage = 'en';
+
   /// Loads [baseAsset] (e.g. `docs/USER_GUIDE.md` or `LICENSE.md`), preferring a
-  /// `.<languageCode>.md` sibling when it is bundled. `nl` and unknown codes use
-  /// the base document.
+  /// `.<languageCode>.md` sibling when it is bundled. [baseLanguage] and unknown
+  /// codes use the base document.
   Future<String> load(String baseAsset, String languageCode) async =>
       (await loadDetailed(baseAsset, languageCode)).text;
 
@@ -72,7 +80,7 @@ class DocumentationService {
   /// otherwise the base key. Uses the manifest (not a load-and-catch) so a
   /// missing variant is never an error path.
   Future<String> _resolveKey(String baseAsset, String languageCode) async {
-    if (languageCode == 'nl' || languageCode.isEmpty) return baseAsset;
+    if (languageCode == baseLanguage || languageCode.isEmpty) return baseAsset;
     final variant = _variantKey(baseAsset, languageCode);
     if (variant == baseAsset) return baseAsset;
     final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);

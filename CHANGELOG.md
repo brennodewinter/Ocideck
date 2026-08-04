@@ -926,6 +926,25 @@ that before deciding whether this alpha fits what you are doing.
   dezelfde latente fout voor de plists/XML onder `Metadata/`) hun tekst als
   UTF-8. `test/import/odp_importer_test.dart` pint de regressie met `“ ” ’ é`:
   rood vóór de fix (reproduceert de exacte mojibake), groen erna.
+- **De handleiding komt in je eigen taal — de mechaniek eerst (#1181).** Wie de
+  app op Nederlands (of Pools, of Fries) zette, kreeg een vertaalde titel maar
+  een Engelse handleiding, en juist de Nederlandse lezer kreeg dat niet eens
+  gemeld: de melding "dit document bestaat alleen in het Engels" stond op
+  `!= 'nl'`, in de veronderstelling dat de basis Nederlands was — maar de
+  gebundelde docs zijn Engels. Nu is de basistaal expliciet Engels
+  (`DocumentationService.baseLanguage`), valt élke niet-Engelse lezer met een
+  eerlijke melding terug op de basis, en lost de lezer óók voor Nederlands een
+  `docs/NAME.nl.md`-variant op zodra die er ligt. Voor dat "zodra die er ligt"
+  is er nu een machinevertaal-pijplijn: `make translate-docs` (`tool/
+  translate_docs.dart`) schrijft `docs/NAME.<taal>.md` voor de gebundelde
+  gebruikersdocs in elke app-taal, met een zichtbare "machinevertaling — de
+  Engelse bron is leidend"-banner bovenaan. De pijplijn draagt bewust géén eigen
+  vertaalmotor (OciDeck is lokaal-eerst en netwerkvrij tijdens gebruik): je wijst
+  met `TRANSLATOR=` een extern commando aan, en de gegenereerde bestanden zijn
+  gecommitte artefacten zoals de l10n-overlays. `docs/PRIVACY.md` en
+  `docs/SECURITY_DESIGN.md` worden nooit machinevertaald — een verkeerd vertaalde
+  belofte is nog steeds een belofte. Dit is de mechaniek; het genereren van de
+  talen met een gekozen motor is de vervolgstap.
 - **Een misgelopen versiesprong 0.2.0 → 1.2.1, en een poort die het voortaan
   tegenhoudt.** Bij het uitbrengen sprong de versie in `pubspec.yaml` per ongeluk
   van 0.2.0 naar 1.2.1 in plaats van de bedoelde 0.2.2, en de tag `v1.2.1` vuurde

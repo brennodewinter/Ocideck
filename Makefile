@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -611,6 +611,27 @@ refresh-catalogs:
 	@echo "URL. Run tool/build_cwe_catalog.dart by hand (see its header)."
 	@dart format lib/ >/dev/null
 	@echo "Done. Read 'git diff', bump the versions, update LICENSE_COMPLIANCE.md."
+
+# Machine-translate the bundled user docs into every app language (#1181). The
+# app resolves docs/NAME.<lang>.md automatically; this writes those variants.
+# OciDeck ships no translation engine (local-first, network-free at runtime), so
+# point TRANSLATOR at a command that reads Markdown on stdin and writes the
+# translation on stdout (target language as $$1 and $$OCIDECK_TARGET_LANG).
+# PRIVACY.md and SECURITY_DESIGN.md are never machine-translated.
+#   make translate-docs TRANSLATOR='argos-translate --from en --to'
+#   make translate-docs STUB=1     # identity copies, to smoke-test the wiring
+translate-docs:
+	@echo "== OciDeck: machine-translate the bundled user docs (#1181) =="
+	@echo "Excluded (English-only): docs/PRIVACY.md, docs/SECURITY_DESIGN.md."
+	@echo "This writes docs/NAME.<lang>.md and registers them in pubspec.yaml."
+	dart run tool/translate_docs.dart $(if $(STUB),--stub,--translator '$(TRANSLATOR)')
+	@dart format tool/ >/dev/null
+	@echo "Done. Read 'git diff'; the English source stays authoritative."
+
+translate-docs-check:
+	@echo "== OciDeck: are all doc translations present + registered? =="
+	@echo "Command: dart run tool/translate_docs.dart --check"
+	dart run tool/translate_docs.dart --check
 
 # The upstream versions the generators pull. Bump these, run refresh-catalogs,
 # then mirror them into lib/services/reference_standards.dart.
