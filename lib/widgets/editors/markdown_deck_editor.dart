@@ -800,8 +800,22 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
         children: [
+          // Niet-interactief status-badge: het <>-icoon met het woord 'Bron'
+          // maakt duidelijk dat je in de rauwe markdown-bron zit — een label,
+          // geen knop (#1187). Een kale icoon las tussen de echte icoonknoppen
+          // in deze balk als iets klikbaars. Hetzelfde woord 'Bron' als de chip
+          // die hierheen leidt, dus instap en bestemming dragen één signaal.
           Icon(Icons.code, size: 14, color: AppTheme.warningFg),
-          const SizedBox(width: 8),
+          const SizedBox(width: 5),
+          Text(
+            l10n.d('Bron'),
+            style: TextStyle(
+              fontSize: 11.5,
+              fontWeight: FontWeight.w600,
+              color: AppTheme.warningFg,
+            ),
+          ),
+          const SizedBox(width: 10),
           Flexible(
             child: _MarkdownScopeToggle(
               scope: widget.scope,

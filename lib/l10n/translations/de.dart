@@ -737,6 +737,8 @@ const _dutchSourceAddDe = {
       'Wählen Sie, zu welcher Folie die Präsentation nach dieser springt. Standardmäßig ist das einfach die nächste Folie. So kann ein Auswahlzweig am Ende zum Menü zurückkehren.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Die Zielfolie existiert nicht mehr — die Präsentation läuft hier einfach weiter.',
+  'Bewerk deze dia als markdown-bron':
+      'Diese Folie als Markdown-Quelle bearbeiten',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Dies ist eine Präsentation, keine Markdown-Datei. OciDeck kann sie in ein neues Deck importieren.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

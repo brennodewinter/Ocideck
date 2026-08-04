@@ -737,6 +737,7 @@ const _dutchSourceAddPap = {
       'Skohe pa kua slide e presentashon ta bula despues di esaki. Pa defekto ta simplemente e siguiente slide. Asina un rama di skohementu por bolbe na e menu na final.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'E slide di destino no ta eksistí mas — e presentashon simplemente ta sigui akinan.',
+  'Bewerk deze dia als markdown-bron': 'Editá e slide aki komo fuente markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Esaki ta un presentashon, no un archivo Markdown. OciDeck por importá e den un deck nobo.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

@@ -1782,6 +1782,7 @@ const _dutchSourceAddHu = <String, String>{
       'Válassza ki, melyik diára ugrik a bemutató ez után. Alapértelmezés szerint ez egyszerűen a következő dia. Így egy választási ág a végén visszatérhet a menübe.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'A céldia már nem létezik — a bemutató itt egyszerűen folytatódik.',
+  'Bewerk deze dia als markdown-bron': 'Dia szerkesztése markdown forrásként',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Ez egy prezentáció, nem Markdown-fájl. Az OciDeck importálhatja egy új deckbe.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

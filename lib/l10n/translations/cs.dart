@@ -1781,6 +1781,8 @@ const _dutchSourceAddCs = <String, String>{
       'Vyberte, na který snímek prezentace přeskočí po tomto. Ve výchozím nastavení je to prostě další snímek. Tak se větev volby může na konci vrátit do nabídky.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Cílový snímek už neexistuje — prezentace zde jednoduše pokračuje.',
+  'Bewerk deze dia als markdown-bron':
+      'Upravit tento snímek jako zdroj markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Toto je prezentace, nikoli soubor Markdown. OciDeck ji může naimportovat do nového decku.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

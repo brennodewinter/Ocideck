@@ -4005,6 +4005,12 @@ Use this for bulk edits, copy-paste from another tool, or tweaks that are faster
 in raw text. Switch back with **Apply** (to parse the text back into typed slides)
 or **Cancel** (discard your edits and return to the visual editor).
 
+A **Source** chip (code icon) in the structured editor's header does the same
+thing, but jumps straight to the *This slide* scope (below) so you land on the raw
+markdown of the slide you were editing. It is a shortcut into the existing
+markdown editor, not a separate mode: the same Apply, validation and way back
+apply. *(Added 2026-08-03, #1160.)*
+
 ### Whole presentation or a single slide
 
 A sliding toggle at the top of the markdown editor chooses the **scope**:

@@ -1800,6 +1800,8 @@ const _dutchSourceAddMt = <String, String>{
       'Agħżel għal liema slajd tqabbeż il-preżentazzjoni wara din. B\'mod awtomatiku dan huwa sempliċement l-islajd li jmiss. B\'hekk fergħa ta\' għażla tista\' terġa\' lura għall-menu fl-aħħar.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'L-islajd fil-mira m\'għadux jeżisti — il-preżentazzjoni sempliċement tkompli hawn.',
+  'Bewerk deze dia als markdown-bron':
+      'Editja din is-slajd bħala sors markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Din hija preżentazzjoni, mhux fajl Markdown. OciDeck jista\' jimportaha f\'deck ġdid.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

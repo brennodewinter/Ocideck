@@ -1778,6 +1778,7 @@ const _dutchSourceAddId = <String, String>{
       'Pilih slide mana yang dituju presentasi setelah slide ini. Secara bawaan itu hanya slide berikutnya. Dengan begitu sebuah cabang pilihan bisa kembali ke menu di akhir.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Slide tujuan sudah tidak ada — presentasi hanya melanjutkan dari sini.',
+  'Bewerk deze dia als markdown-bron': 'Edit slide ini sebagai sumber markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Ini presentasi, bukan berkas Markdown. OciDeck dapat mengimpornya ke deck baru.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

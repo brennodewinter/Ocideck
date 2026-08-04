@@ -12,7 +12,7 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
-## Unreleased
+## [1.2.1] — 2026-08-04
 
 ### Added
 
@@ -27,6 +27,16 @@ in Dutch, and it keeps growing on `main` between releases.
   de editor en loopt de presentatie gewoon lineair door — geen fout. De sprong
   round-trippt verliesvrij en werkt ook in de HTML-export. *Dit is de eerste
   helft van #1162; het keuze-menu-diatype volgt op dit navigatiefundament.*
+- **Een "Bron"-knop in de editor-kopregel opent de rauwe markdown van déze
+  dia.** (#1160) Naast de bestaande globale markdown-modus staat er nu in de
+  kopregel van de gestructureerde editor een chip **Bron** (code-icoon). Eén klik
+  zet de editor in markdown-modus, meteen gericht op de dia die je aan het
+  bewerken was — je bewerkt dus de rauwe markdown van die ene dia in plaats van
+  het hele deck. Het is een sneltoegang naar de al bestaande markdown-editor, geen
+  aparte modus: dezelfde *Toepassen*, dezelfde controle en dezelfde weg terug naar
+  de gestructureerde weergave. Notities en annotaties her-ankeren bij toepassen
+  zoals ze dat al deden, en de parser bepaalt het diatype, dus via de bron kun je
+  een dia ook van soort laten wisselen.
 - **Een presentatie op het venster slepen importeert hem nu.** (#1175) Een of
   meer PowerPoint-/Impress-/Keynote-bestanden (`.pptx`/`.odp`/`.key`) op OciDeck
   laten vallen gaat rechtstreeks de import in — precies zoals `.md` slepen al een
@@ -62,6 +72,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- **Het `<>`-icoon linksboven in de markdown-editor las als een knop, maar deed
+  niets.** In de modus-balk van de markdown-editor stond het code-icoon
+  (`<>`) tussen de echte icoonknoppen in en oogde daardoor klikbaar, terwijl het
+  alleen aangaf dat je in de rauwe bron zat. Het is nu een niet-interactief
+  status-badge: hetzelfde `<>`-icoon met het woord **Bron** ernaast, zodat het
+  als label leest en niet als knop. Dezelfde term als de *Bron*-chip die naar de
+  markdown-modus leidt, dus instap en bestemming dragen één signaal. Geen
+  gedragsverandering. (#1187)
 - **Een thema-logo dat niet te vinden was, stempelde 'Bestand niet gevonden' op
   élke dia — in editor, presentatie én export.** Een merk-overlay is een
   thema-instelling die op iedere dia ligt; kon het logobestand niet worden

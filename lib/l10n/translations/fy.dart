@@ -738,6 +738,7 @@ const _dutchSourceAddFy = {
       'Kies nei hokker dia de presintaasje nei dizze springt. Standert is dat gewoan de folgjende dia. Sa lit in kar-tûke oan de ein weromkeare nei it menu.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'De doeldia bestiet net mear — de presintaasje giet hjir gewoan fierder.',
+  'Bewerk deze dia als markdown-bron': 'Bewurkje dizze dia as markdown-boarne',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Dit is in presintaasje, gjin Markdown-bestân. OciDeck kin him ymportearje nei in nij deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

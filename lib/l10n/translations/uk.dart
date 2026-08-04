@@ -1795,6 +1795,8 @@ const _dutchSourceAddUk = <String, String>{
       'Виберіть, на який слайд презентація переходить після цього. За замовчуванням це просто наступний слайд. Так гілка вибору може наприкінці повернутися до меню.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Цільового слайда більше не існує — презентація просто продовжується тут.',
+  'Bewerk deze dia als markdown-bron':
+      'Редагувати цей слайд як джерело markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Це презентація, а не файл Markdown. OciDeck може імпортувати її в новий дек.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

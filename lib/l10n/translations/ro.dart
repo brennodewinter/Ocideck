@@ -1795,6 +1795,8 @@ const _dutchSourceAddRo = <String, String>{
       'Alegeți la ce diapozitiv sare prezentarea după acesta. În mod implicit este pur și simplu diapozitivul următor. Astfel o ramură de alegere poate reveni la meniu la sfârșit.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Diapozitivul țintă nu mai există — prezentarea continuă pur și simplu aici.',
+  'Bewerk deze dia als markdown-bron':
+      'Editează acest diapozitiv ca sursă markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Aceasta este o prezentare, nu un fișier Markdown. OciDeck o poate importa într-un deck nou.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
