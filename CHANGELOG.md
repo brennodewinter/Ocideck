@@ -976,6 +976,17 @@ that before deciding whether this alpha fits what you are doing.
   `docs/SECURITY_DESIGN.md` worden nooit machinevertaald — een verkeerd vertaalde
   belofte is nog steeds een belofte. Dit is de mechaniek; het genereren van de
   talen met een gekozen motor is de vervolgstap.
+- **Een verouderde SBOM na een versiebump kan niet meer stilletjes door de
+  snelle poort.** De SBOM noemt de projectversie (de CRA wil weten voor welke
+  versie de inventaris geldt), dus een versiebump maakt hem stale tot `make sbom`
+  hem herschrijft. `sbom_test` ving dat al, maar alleen als volledige
+  regenereer-en-vergelijk-flutter-test in `make check-registrations` — buiten de
+  snelle `make check-static`. Daardoor kwam de bump 1.2.1 → 0.3.0 groen door de
+  snelle static-gate terwijl de SBOM een versie achterliep. Nieuwe snelle poort
+  `make check-sbom-version` (`tool/check_sbom_version.dart`, in `STATIC_GATES`)
+  eist dat de volledige pubspec-versie (`X.Y.Z+B`) in elk SBOM-bestand staat —
+  een goedkope string-toets in dezelfde tier; `sbom_test` houdt de volledige
+  afhankelijkheidsversheid. `test/sbom_version_test.dart` pint de regel.
 - **Een misgelopen versiesprong 0.2.0 → 1.2.1, en een poort die het voortaan
   tegenhoudt.** Bij het uitbrengen sprong de versie in `pubspec.yaml` per ongeluk
   van 0.2.0 naar 1.2.1 in plaats van de bedoelde 0.2.2, en de tag `v1.2.1` vuurde
