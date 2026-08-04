@@ -53,7 +53,7 @@ published them. The list itself is therefore signed. Verify that signature with
 minisign -Vm SHA256SUMS -p minisign.pub
 ```
 
-The key's ID is `9A467E62F323426D`. Since the key and the signature come from the
+The key's ID is `CF0BCBD82CFD5B85`. Since the key and the signature come from the
 same host as this download, cross-check that ID against an independent copy — the
 [source repository](https://pawprint.vigilis.online/LibreKAT/Ocideck) or the
 [GitHub mirror](https://github.com/brennodewinter/Ocideck) — before you trust it.

@@ -637,7 +637,7 @@ Verify the list before trusting it:
     minisign -Vm SHA256SUMS -p minisign.pub
 
 The public key lives in the repository root ([`minisign.pub`](minisign.pub)), key
-ID `9A467E62F323426D`. That key and the signature travel from the same host as
+ID `CF0BCBD82CFD5B85`. That key and the signature travel from the same host as
 the release, so treat the key ID as the fixed anchor: cross-check it against an
 independent copy — the [GitHub mirror](https://github.com/brennodewinter/Ocideck),
 the git history, or the publisher's site — before trusting a `minisign.pub` you

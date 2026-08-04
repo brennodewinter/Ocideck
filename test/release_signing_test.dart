@@ -24,12 +24,12 @@ void main() {
   // De verwachte publieke sleutel, gepind. Welgevormdheid alleen is niet genoeg:
   // een omgewisselde — even welgevormde — sleutel zou de héle verify-keten stil
   // op een andere wortel laten rusten. Deze constante is het vaste anker; ze
-  // staat óók in SECURITY.md (sleutel-ID 9A467E62F323426D) en is via de
+  // staat óók in SECURITY.md (sleutel-ID CF0BCBD82CFD5B85) en is via de
   // GitHub-spiegel en de git-historie onafhankelijk na te lopen. Verandert de
   // sleutel echt, dan is dat een bewuste rotatie en werk je deze regel bij.
   const verwachteSleutel =
-      'RWRtQiPzYn5Gms/+PoSdQ2lFVHJBpovjvVenIJLYC5M2iqkKj+WC0rnD';
-  const verwachteSleutelId = '9A467E62F323426D';
+      'RWSFW/0s2MsLz7MpTL2hVcGJX7K+AH7Ln29VxXfh7LMp8sr7lLMWcU71';
+  const verwachteSleutelId = 'CF0BCBD82CFD5B85';
 
   test(
     'de publieke sleutel staat in de repo-root en is de gepinde sleutel',
