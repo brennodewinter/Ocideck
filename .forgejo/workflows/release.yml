@@ -550,22 +550,53 @@ jobs:
       HOMEBREW_TAP_REPOSITORY: ${{ secrets.HOMEBREW_TAP_REPOSITORY }}
       HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
     steps:
+      # Zelfde filosofie als 'Webversie live zetten': is de tap niet
+      # geconfigureerd, dan tuigen we geen gereedschap of checkout op en gaat de
+      # job groen met een zichtbare overslaan-notitie. De release zelf publiceert
+      # hoe dan ook compleet; de cask is een macOS-nevenkanaal. De check staat
+      # vooraan zodat een ontbrekende tap geen apt-get + checkout voor niets optuigt.
+      - name: Is de tap geconfigureerd?
+        id: check
+        run: |
+          if [ -n "${HOMEBREW_TAP_REPOSITORY:-}" ] && [ -n "${HOMEBREW_TAP_TOKEN:-}" ]; then
+            echo "tap=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "tap=false" >> "$GITHUB_OUTPUT"
+            echo "Geen HOMEBREW_TAP_REPOSITORY/HOMEBREW_TAP_TOKEN ingesteld — de"
+            echo "Homebrew-cask wordt niet bijgewerkt. Dat is nu de bedoeling: de tap"
+            echo "wordt met de hand onderhouden tot beide secrets gezet zijn. De"
+            echo "release zelf publiceert compleet; deze job slaat alleen de tap over."
+            # Een groene job leest als "tap bijgewerkt"; zet de skip daarom
+            # zichtbaar op de run-samenvatting, niet alleen in de staplog.
+            {
+              echo "### ⏭️ Homebrew-cask NIET bijgewerkt"
+              echo ""
+              echo "De release-artefacten zijn compleet, maar de tap is **niet**"
+              echo "bijgewerkt: \`HOMEBREW_TAP_REPOSITORY\`/\`HOMEBREW_TAP_TOKEN\`"
+              echo "ontbreken (bewust, tot de tap bestaat)."
+              echo ""
+              echo "Werk de cask tot die tijd met de hand bij:"
+              echo "\`scripts/update_homebrew_cask.sh <tag> <tap>/Casks/ocideck.rb\`."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # nodejs erbij: actions/checkout@v4 is een Node-actie en de kale
+      # ubuntu:24.04 heeft geen Node aan boord (net als 'Release publiceren' en
+      # 'Webversie live zetten'). Zonder deze regel faalt de checkout hieronder —
+      # dat brak de eerste echte cask-run (v0.3.1).
       - name: Gereedschap installeren
+        if: steps.check.outputs.tap == 'true'
         run: |
           apt-get update
-          apt-get install -y --no-install-recommends curl git ca-certificates
+          apt-get install -y --no-install-recommends nodejs git curl ca-certificates
 
       - uses: actions/checkout@v4
+        if: steps.check.outputs.tap == 'true'
 
       - name: Homebrew-cask genereren en in de tap bijwerken
+        if: steps.check.outputs.tap == 'true'
         run: |
           set -euo pipefail
-          # Secret-guard, zoals de notarisatiestap: ontbreekt de tap-configuratie,
-          # dan blijft de release gewoon staan en wordt alleen de cask overgeslagen.
-          if [ -z "${HOMEBREW_TAP_REPOSITORY:-}" ] || [ -z "${HOMEBREW_TAP_TOKEN:-}" ]; then
-            echo "HOMEBREW_TAP_REPOSITORY/TOKEN ontbreken — de cask wordt niet bijgewerkt."
-            exit 0
-          fi
 
           # De tap staat op de eigen forge (canoniek). De GitHub-spiegel die de
           # `brew tap librekat/ocideck`-shorthand voedt, wordt door een
@@ -574,7 +605,22 @@ jobs:
           # niet tegen een hardgecodeerde github.com.
           FORGE_HOST="${GITHUB_SERVER_URL#https://}"
           TMPDIR="$(mktemp -d)"
-          git clone "https://oauth2:${HOMEBREW_TAP_TOKEN}@${FORGE_HOST}/${HOMEBREW_TAP_REPOSITORY}.git" "$TMPDIR/tap"
+
+          # Is de tap (nog) niet te klonen — hij bestaat niet, of het token mist
+          # push-scope — dan overslaan zoals bij ontbrekende secrets, in plaats
+          # van de hele job rood te maken. De release blijft compleet staan.
+          if ! git clone "https://oauth2:${HOMEBREW_TAP_TOKEN}@${FORGE_HOST}/${HOMEBREW_TAP_REPOSITORY}.git" "$TMPDIR/tap" 2>"$TMPDIR/clone.err"; then
+            echo "Tap ${HOMEBREW_TAP_REPOSITORY} niet te klonen — cask overgeslagen." >&2
+            sed 's/oauth2:[^@]*@/oauth2:***@/g' "$TMPDIR/clone.err" >&2 || true
+            {
+              echo "### ⚠️ Homebrew-cask overgeslagen: tap onbereikbaar"
+              echo ""
+              echo "\`${HOMEBREW_TAP_REPOSITORY}\` kon niet gekloond worden — de tap"
+              echo "bestaat niet of \`HOMEBREW_TAP_TOKEN\` mist push-scope. De release"
+              echo "is compleet; werk de cask met de hand bij."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
 
           git config --global user.name "OciDeck release"
           git config --global user.email "release@librekat.nl"
@@ -583,7 +629,13 @@ jobs:
           ./scripts/update_homebrew_cask.sh "$GITHUB_REF_NAME" "$TMPDIR/tap/Casks/ocideck.rb"
 
           cd "$TMPDIR/tap"
-          DEFAULT_BRANCH=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
+          # Een verse/lege tap-repo heeft nog geen HEAD-branch; dan geeft
+          # `git remote show origin` "(unknown)" of niets terug en zou
+          # `git checkout -B ""` falen. Val in dat geval terug op main.
+          DEFAULT_BRANCH="$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')"
+          if [ -z "$DEFAULT_BRANCH" ] || [ "$DEFAULT_BRANCH" = "(unknown)" ]; then
+            DEFAULT_BRANCH="main"
+          fi
           git checkout -B "$DEFAULT_BRANCH"
           git add Casks/ocideck.rb
           if git diff --cached --quiet; then
