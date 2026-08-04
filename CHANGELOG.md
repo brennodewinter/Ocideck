@@ -61,6 +61,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- **Het `<>`-icoon linksboven in de markdown-editor las als een knop, maar deed
+  niets.** In de modus-balk van de markdown-editor stond het code-icoon
+  (`<>`) tussen de echte icoonknoppen in en oogde daardoor klikbaar, terwijl het
+  alleen aangaf dat je in de rauwe bron zat. Het is nu een niet-interactief
+  status-badge: hetzelfde `<>`-icoon met het woord **Bron** ernaast, zodat het
+  als label leest en niet als knop. Dezelfde term als de *Bron*-chip die naar de
+  markdown-modus leidt, dus instap en bestemming dragen één signaal. Geen
+  gedragsverandering. (#1187)
 - **Een thema-logo dat niet te vinden was, stempelde 'Bestand niet gevonden' op
   élke dia — in editor, presentatie én export.** Een merk-overlay is een
   thema-instelling die op iedere dia ligt; kon het logobestand niet worden
