@@ -1783,6 +1783,19 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Uwaga: w danych sesji mogą znajdować się dane osobowe.',
+  'Privacy-bevindingen in sessie-data':
+      'Wyniki kontroli prywatności w danych sesji',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Skan prywatności znalazł możliwe dane osobowe w danych sesji. Eksport zaciemnia je automatycznie; kliknij wynik, aby zobaczyć szczegóły.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Podczas prezentacji wypełniłeś listy kontrolne i zaktualizowałeś tabele na {aantal} slajdach.',
+  'en nog {aantal} dia’s.': 'i jeszcze {aantal} slajdów.',
+  'Sessie-wijzigingen bewaren?': 'Zapisać zmiany sesji?',
+  'In deck behouden': 'Zachowaj w prezentacji',
+  'Downloaden als losse bestanden': 'Pobierz jako osobne pliki',
+  'Map voor sessie-bestanden kiezen': 'Wybierz folder dla plików sesji',
   'Zoek op taal of code': 'Szukaj według języka lub kodu',
   'Geen talen gevonden': 'Nie znaleziono języków',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

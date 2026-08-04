@@ -1787,6 +1787,19 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Nota: in datis sessionis fortasse adsunt data personalia.',
+  'Privacy-bevindingen in sessie-data':
+      'Reperta de vita privata in datis sessionis',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Privatitatis inspectio fortasse data personalia in datis sessionis invenit. Exportatio ea automatice redigit; clic in reperto pro detailibus.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Dum praesentandum indicia implesti et tabulas in {aantal} diapositis innovasti.',
+  'en nog {aantal} dia’s.': 'et {aantal} diapositiva amplius.',
+  'Sessie-wijzigingen bewaren?': 'Mutationes sessionis servare?',
+  'In deck behouden': 'In deck retinere',
+  'Downloaden als losse bestanden': 'Delineare ut singula files',
+  'Map voor sessie-bestanden kiezen': 'Deligere folder pro files sessionis',
   'Zoek op taal of code': 'Quaere lingua vel nota',
   'Geen talen gevonden': 'Nullae linguae inventae',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

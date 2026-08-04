@@ -1806,6 +1806,20 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Tabhair faoi deara: b\'fhéidir go bhfuil sonraí pearsanta in sonraí an tseisiúin.',
+  'Privacy-bevindingen in sessie-data':
+      'Aimsiúcháin phríobháideachta i sonraí an tseisiúin',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'B\'fhéidir go bhfuair an scanadh príobháideachta sonraí pearsanta in sonraí an tseisiúin. Déanann onnmhairiú iad a chur in ionad go huathoibríoch; cliceáil ar aimsiúchán le haghaidh na sonraí.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Le linn na láithreoireachta líon tú seicliostaí agus nuashonraigh tú táblaí ar {aantal} sleamhnán.',
+  'en nog {aantal} dia’s.': 'agus {aantal} sleamhnán eile.',
+  'Sessie-wijzigingen bewaren?': 'Sábháil athruithe an tseisiúin?',
+  'In deck behouden': 'Coinnigh sa deck',
+  'Downloaden als losse bestanden': 'Íoslódáil mar chomhaid ar leith',
+  'Map voor sessie-bestanden kiezen':
+      'Roghnaigh fillteán do chomhaid an tseisiúin',
   'Zoek op taal of code': 'Cuardaigh de réir teanga nó cód',
   'Geen talen gevonden': 'Níor aimsíodh aon teanga',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

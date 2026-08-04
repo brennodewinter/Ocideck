@@ -1746,6 +1746,19 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'yIqIm: chupghach De\'Daq chaq nuqDaq ghuHqoq De\' tu\'lu\'.',
+  'Privacy-bevindingen in sessie-data':
+      'pe\'vIH De\' Samlu\'pu\' chupghach De\'Daq',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'pe\'vIH Hevvo\' chaq nuqDaq ghuHqoq De\' Samlu\'pu\' chupghach De\'Daq. ngoDHoch ngeHlu\'pu\' \'e\' choHlu\' net tlhob; tach DIch DIch Samlu\'pu\' \'e\' yIlegh.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'MuchtaHmeH checklist DataDajta\' \'ej {aantal} ngermeyDaq tablemey lulnISpu\'.',
+  'en nog {aantal} dia’s.': '\'ej {aantal} ngermey tlhej.',
+  'Sessie-wijzigingen bewaren?': 'Sessie choHmey pol?',
+  'In deck behouden': 'deckDaq pol',
+  'Downloaden als losse bestanden': 'tlhIHmeH Dat ghel',
+  'Map voor sessie-bestanden kiezen': 'Sessie ngoghDaq Daq wIv',
   'Zoek op taal of code': 'Hol pagh nab yISam',
   'Geen talen gevonden': 'Hol tu\'be\'lu\'',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

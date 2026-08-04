@@ -87,6 +87,13 @@ const Map<String, Surface> _registry = {
     'Het publieksvenster. Een zaal is een ontvanger, ook al komt er geen '
     'bestand aan te pas.',
   ),
+  'lib/widgets/presentation/session_export.dart::_downloadSessionSlides': Surface(
+    SurfaceKind.audience,
+    'Session-data-export (#1235): per gewijzigde dia één .md naar de spreker. '
+    'De data verlaat het deck naar losse bestanden die elders gebruikt worden — '
+    'een ontvanger-oppervlak. Gaat door PrivacyProjection.forAudience, met een '
+    'waarschuwingsschildje als de scan persoonsgegevens vindt.',
+  ),
   'lib/widgets/dialogs/export_dialog.dart::show': Surface(
     SurfaceKind.audience,
     'Krijgt een fabriek die per doelgroepprofiel een bundel oplevert, zodat de '

@@ -1778,6 +1778,18 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Pozor: údaje relácie môžu obsahovať osobné údaje.',
+  'Privacy-bevindingen in sessie-data': 'Zistenia o súkromí v údajoch relácie',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Sken súkromia možno našiel osobné údaje v údajoch relácie. Export ich automaticky rediguje; kliknite na zistenie pre podrobnosti.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Počas prezentácie si vyplnil kontrolné zoznamy a aktualizoval tabuľky na {aantal} slajdoch.',
+  'en nog {aantal} dia’s.': 'a ešte {aantal} slajdov.',
+  'Sessie-wijzigingen bewaren?': 'Uložiť zmeny relácie?',
+  'In deck behouden': 'Ponechať v prezentácii',
+  'Downloaden als losse bestanden': 'Stiahnuť ako samostatné súbory',
+  'Map voor sessie-bestanden kiezen': 'Vybrať priečinok pre súbory relácie',
   'Zoek op taal of code': 'Hľadať podľa jazyka alebo kódu',
   'Geen talen gevonden': 'Nenašli sa žiadne jazyky',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

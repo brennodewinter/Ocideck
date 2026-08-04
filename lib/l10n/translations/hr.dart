@@ -1777,6 +1777,18 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Napomena: podaci sesije možda sadrže osobne podatke.',
+  'Privacy-bevindingen in sessie-data': 'Nalazi privatnosti u podacima sesije',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Sken privatnosti možda je pronašao osobne podatke u podacima sesije. Izvoz ih automatski redigira; kliknite na nalaz za detalje.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Tijekom prezentacije ispunio si kontrolne liste i ažurirao tablice na {aantal} slajdova.',
+  'en nog {aantal} dia’s.': 'i još {aantal} slajdova.',
+  'Sessie-wijzigingen bewaren?': 'Spremiti promjene sesije?',
+  'In deck behouden': 'Zadrži u prezentaciji',
+  'Downloaden als losse bestanden': 'Preuzmi kao zasebne datoteke',
+  'Map voor sessie-bestanden kiezen': 'Odaberi mapu za datoteke sesije',
   'Zoek op taal of code': 'Pretraži po jeziku ili kodu',
   'Geen talen gevonden': 'Nema pronađenih jezika',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

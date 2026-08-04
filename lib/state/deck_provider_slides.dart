@@ -274,6 +274,28 @@ extension DeckNotifierSlides on DeckNotifier {
     );
   }
 
+  /// Zet de dia's met een id in [originalsById] in één ongedaan-stap terug naar
+  /// hun oorspronkelijke versie — voor het terugdraaien van session-data-edits
+  /// (checklist/tabel) na een presentatie (#1235). Eén `_mutate`, dus één
+  /// Ctrl+Z, ongeacht het aantal dia's. Een id die inmiddels verdwenen is
+  /// (verwijderde dia) wordt stil genegeerd. bumpRevision dwingt de editor de
+  /// teruggedraaide inhoud te tonen.
+  void revertSlidesById(Map<String, Slide> originalsById) {
+    final deck = currentState.deck;
+    if (deck == null || originalsById.isEmpty) return;
+    final slides = List<Slide>.from(deck.slides);
+    var changed = false;
+    for (var i = 0; i < slides.length; i++) {
+      final orig = originalsById[slides[i].id];
+      if (orig != null && slides[i] != orig) {
+        slides[i] = orig;
+        changed = true;
+      }
+    }
+    if (!changed) return;
+    _mutate(deck.copyWith(slides: slides), bumpRevision: true);
+  }
+
   /// Zet (of wist) de sprong-uit van dia [index] (#1162): naar welke dia de
   /// presentatie na deze springt in plaats van de volgende in bronvolgorde.
   ///

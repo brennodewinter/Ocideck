@@ -1771,6 +1771,18 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Huom: istuntotiedoissa saattaa olla henkilötietoja.',
+  'Privacy-bevindingen in sessie-data': 'Yksityisyyslöydökset istuntotiedoissa',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Yksityisyystarkistus saattoi löytää henkilötietoja istuntotiedoista. Vienti muokkaa ne automaattisesti; napsauta löydöstä saadaksesi yksityiskohdat.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Esityksen aikana täytit tarkistuslistoja ja päivitit taulukoita {aantal} dialla.',
+  'en nog {aantal} dia’s.': 'ja vielä {aantal} diaa.',
+  'Sessie-wijzigingen bewaren?': 'Tallennetaanko istunnon muutokset?',
+  'In deck behouden': 'Säilytä esityksessä',
+  'Downloaden als losse bestanden': 'Lataa erillisinä tiedostoina',
+  'Map voor sessie-bestanden kiezen': 'Valitse kansio istuntotiedostoille',
   'Zoek op taal of code': 'Hae kielen tai koodin mukaan',
   'Geen talen gevonden': 'Kieliä ei löytynyt',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

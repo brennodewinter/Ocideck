@@ -730,6 +730,19 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Atenshon: denabo den e datunan di sesion por tin datonan personal.',
+  'Privacy-bevindingen in sessie-data':
+      'Resulta di privasidad den datunan di sesion',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'E privacyscan a topa posibel datonan personal den e datunan di sesion. E exportashon ta redakt\'é nan outomatikamente; klik riba un resulta pa e detaynan.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Durante presentashon bo a yena checklist i aktualisa tablanan riba {aantal} diapositivanan.',
+  'en nog {aantal} dia’s.': 'i {aantal} diapositiva mas.',
+  'Sessie-wijzigingen bewaren?': 'Warda e kambionan di seshon?',
+  'In deck behouden': 'Keda den deck',
+  'Downloaden als losse bestanden': 'Deskarga komo archivos separá',
+  'Map voor sessie-bestanden kiezen': 'Skohe mapa pa e archivonan di seshon',
   'Zoek op taal of code': 'Buska pa idioma òf kódigo',
   'Geen talen gevonden': 'No a haña ningun idioma',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

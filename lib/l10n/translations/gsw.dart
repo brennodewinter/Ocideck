@@ -1774,6 +1774,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Achtung: I de Sitzigsdate chönnte möglicherwys persönlichi Date drin sy.',
+  'Privacy-bevindingen in sessie-data': 'Dateschutz-Fund i de Sitzigsdate',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Dr Dateschutz-Scan het möglicherwys persönlichi Date i de Sitzigsdate gfunde. Dr Export schwärzt die automatisch; klick uf e Fund für d Details.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Während em Präsentiere häsch du Checkliste usgfüllt und Tabälle uf {aantal} Folie aktualisiert.',
+  'en nog {aantal} dia’s.': 'und no {aantal} Folie.',
+  'Sessie-wijzigingen bewaren?': 'Sitzigsänderige spychere?',
+  'In deck behouden': 'Im Deck bhalte',
+  'Downloaden als losse bestanden': 'Als einzelni Dateie abelade',
+  'Map voor sessie-bestanden kiezen': 'Ordner für Sitzigsdateie wähle',
   'Zoek op taal of code': 'Nach Sproch oder Code sueche',
   'Geen talen gevonden': 'Kei Sproche gfunde',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

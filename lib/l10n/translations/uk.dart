@@ -1788,6 +1788,19 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Увага: у даних сесії можуть бути персональні дані.',
+  'Privacy-bevindingen in sessie-data':
+      'Виявлення конфіденційності в даних сесії',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Сканування конфіденційності, можливо, виявило персональні дані в даних сесії. Експорт автоматично їх редагує; натисніть на виявлення, щоб переглянути деталі.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Під час презентації ви заповнили контрольні списки та оновили таблиці на {aantal} слайдах.',
+  'en nog {aantal} dia’s.': 'і ще {aantal} слайдів.',
+  'Sessie-wijzigingen bewaren?': 'Зберегти зміни сеансу?',
+  'In deck behouden': 'Зберегти в презентації',
+  'Downloaden als losse bestanden': 'Завантажити як окремі файли',
+  'Map voor sessie-bestanden kiezen': 'Вибрати папку для файлів сеансу',
   'Zoek op taal of code': 'Пошук за мовою або кодом',
   'Geen talen gevonden': 'Мов не знайдено',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

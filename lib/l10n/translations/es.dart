@@ -727,6 +727,20 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Atención: es posible que los datos de la sesión contengan datos personales.',
+  'Privacy-bevindingen in sessie-data':
+      'Hallazgos de privacidad en los datos de la sesión',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'El análisis de privacidad ha encontrado posibles datos personales en los datos de la sesión. La exportación los redacta automáticamente; haz clic en un hallazgo para ver los detalles.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Durante la presentación rellenaste listas de comprobación y actualizaste tablas en {aantal} diapositivas.',
+  'en nog {aantal} dia’s.': 'y {aantal} diapositivas más.',
+  'Sessie-wijzigingen bewaren?': '¿Guardar los cambios de la sesión?',
+  'In deck behouden': 'Mantener en la presentación',
+  'Downloaden als losse bestanden': 'Descargar como archivos separados',
+  'Map voor sessie-bestanden kiezen':
+      'Elegir carpeta para los archivos de sesión',
   'Zoek op taal of code': 'Buscar por idioma o código',
   'Geen talen gevonden': 'No se encontraron idiomas',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

@@ -2748,6 +2748,18 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Dikkat: oturum verilerinde kişisel veriler olabilir.',
+  'Privacy-bevindingen in sessie-data': 'Gizlilik bulguları oturum verilerinde',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Gizlilik taraması, oturum verilerinde kişisel veriler bulmuş olabilir. Dışa aktarma bunları otomatik olarak sansürler; ayrıntılar için bir bulguya tıklayın.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Sunum sırasında kontrol listelerini doldurdun ve {aantal} slaytta tabloları güncelledin.',
+  'en nog {aantal} dia’s.': 've {aantal} slayt daha.',
+  'Sessie-wijzigingen bewaren?': 'Oturum değişiklikleri kaydedilsin mi?',
+  'In deck behouden': 'Sunumda tut',
+  'Downloaden als losse bestanden': 'Ayrı dosyalar olarak indir',
+  'Map voor sessie-bestanden kiezen': 'Oturum dosyaları için klasör seç',
   'Zoek op taal of code': 'Dile veya koda göre ara',
   'Geen talen gevonden': 'Dil bulunamadı',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

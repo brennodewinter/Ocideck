@@ -307,7 +307,7 @@ void main() {
           projectPath: null,
           themeProfile: const ThemeProfile(),
           initialIndex: 0,
-          onSlideChanged: (slide) => updated = slide,
+          onSessionEdit: (slide) => updated = slide,
         ),
       ),
     );
@@ -343,7 +343,7 @@ void main() {
             projectPath: null,
             themeProfile: const ThemeProfile(),
             initialIndex: 0,
-            onSlideChanged: (slide) => updated = slide,
+            onSessionEdit: (slide) => updated = slide,
           ),
         ),
       );

@@ -1778,6 +1778,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Dėmesio: seanso duomenyse gali būti asmens duomenų.',
+  'Privacy-bevindingen in sessie-data': 'Privatumo radiniai seanso duomenyse',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Privatumo skenavimas, galbūt, rado asmens duomenis seanso duomenyse. Eksportas juos automatiškai redaguoja; spustelėkite radinį, kad pamatytumėte išsamesnę informaciją.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Pristatymo metu užpildei kontrolinius sąrašus ir atnaujinai lenteles {aantal} skaidrėse.',
+  'en nog {aantal} dia’s.': 'ir dar {aantal} skaidrių.',
+  'Sessie-wijzigingen bewaren?': 'Išsaugoti sesijos pakeitimus?',
+  'In deck behouden': 'Palikti pristatyme',
+  'Downloaden als losse bestanden': 'Atsisiųsti kaip atskirus failus',
+  'Map voor sessie-bestanden kiezen': 'Pasirinkti aplanką sesijos failams',
   'Zoek op taal of code': 'Ieškoti pagal kalbą arba kodą',
   'Geen talen gevonden': 'Kalbų nerasta',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

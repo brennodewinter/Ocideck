@@ -1770,6 +1770,18 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Uzmanību: sesijas datos, iespējams, ir personiskie dati.',
+  'Privacy-bevindingen in sessie-data': 'Privātuma atklājumi sesijas datos',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Privātuma skenēšana, iespējams, atrada personiskos datus sesijas datos. Eksports tos automātiski rediģē; noklikšķiniet uz atklājuma, lai redzētu detalizētu informāciju.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'Prezentācijas laikā tu aizpildīji kontrolsarakstus un atjaunoji tabulas {aantal} slaidos.',
+  'en nog {aantal} dia’s.': 'un vēl {aantal} slaidi.',
+  'Sessie-wijzigingen bewaren?': 'Saglabāt sesijas izmaiņas?',
+  'In deck behouden': 'Paturēt prezentācijā',
+  'Downloaden als losse bestanden': 'Lejupielādēt kā atsevišķus failus',
+  'Map voor sessie-bestanden kiezen': 'Izvēlēties mapi sesijas failiem',
   'Zoek op taal of code': 'Meklēt pēc valodas vai koda',
   'Geen talen gevonden': 'Valodas nav atrastas',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':

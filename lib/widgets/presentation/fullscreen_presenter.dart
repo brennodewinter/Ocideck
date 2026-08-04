@@ -171,6 +171,13 @@ class FullscreenPresenter extends StatefulWidget {
   /// dia's, dus het is een eigen terugkoppeling.
   final ValueChanged<String>? onSlideSplit;
 
+  /// Session-data-edit tijdens presenteren (#1235): een ingevulde checklist of
+  /// een bewerkte tabelcel. Dit is géén deck-bewerking maar sessiedata — de
+  /// uitkomst van deze presentatie — en wordt daarom apart van [onSlideChanged]
+  /// (de live-fix #914) teruggemeld, zodat de afloop-flow kan aanbieden de
+  /// wijzigingen als losse `.md` te bewaren en het deck schoon te houden.
+  final ValueChanged<Slide>? onSessionEdit;
+
   /// Recipient/course notes keyed by [Slide.id]; never shown on the audience
   /// display unless the presenter toggles the local notes panel (Ctrl+N).
   final Map<String, String> initialUserNotes;
@@ -199,6 +206,7 @@ class FullscreenPresenter extends StatefulWidget {
     this.onAnnotationsChanged,
     this.onSlideChanged,
     this.onSlideSplit,
+    this.onSessionEdit,
     this.initialUserNotes = const {},
     this.onUserNotesChanged,
     this.improvementY01 = ImprovementY01Metric.empty,
@@ -225,6 +233,7 @@ class FullscreenPresenter extends StatefulWidget {
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
     ValueChanged<String>? onSlideSplit,
+    ValueChanged<Slide>? onSessionEdit,
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
   }) async {
@@ -272,6 +281,7 @@ class FullscreenPresenter extends StatefulWidget {
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
         onSlideSplit: onSlideSplit,
+        onSessionEdit: onSessionEdit,
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
         improvementY01: deck.improvementY01Metric,
@@ -296,6 +306,7 @@ class FullscreenPresenter extends StatefulWidget {
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
         onSlideSplit: onSlideSplit,
+        onSessionEdit: onSessionEdit,
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
         improvementY01: deck.improvementY01Metric,
@@ -322,6 +333,7 @@ class FullscreenPresenter extends StatefulWidget {
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
     ValueChanged<String>? onSlideSplit,
+    ValueChanged<Slide>? onSessionEdit,
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
@@ -356,6 +368,7 @@ class FullscreenPresenter extends StatefulWidget {
               onAnnotationsChanged: onAnnotationsChanged,
               onSlideChanged: onSlideChanged,
               onSlideSplit: onSlideSplit,
+              onSessionEdit: onSessionEdit,
               initialUserNotes: initialUserNotes,
               onUserNotesChanged: onUserNotesChanged,
               improvementY01: improvementY01,
@@ -395,6 +408,7 @@ class FullscreenPresenter extends StatefulWidget {
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
     ValueChanged<String>? onSlideSplit,
+    ValueChanged<Slide>? onSessionEdit,
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
@@ -471,6 +485,7 @@ class FullscreenPresenter extends StatefulWidget {
           onAnnotationsChanged: onAnnotationsChanged,
           onSlideChanged: onSlideChanged,
           onSlideSplit: onSlideSplit,
+          onSessionEdit: onSessionEdit,
           initialUserNotes: initialUserNotes,
           onUserNotesChanged: onUserNotesChanged,
           improvementY01: improvementY01,
@@ -505,6 +520,7 @@ class FullscreenPresenter extends StatefulWidget {
               onAnnotationsChanged: onAnnotationsChanged,
               onSlideChanged: onSlideChanged,
               onSlideSplit: onSlideSplit,
+              onSessionEdit: onSessionEdit,
               initialUserNotes: initialUserNotes,
               onUserNotesChanged: onUserNotesChanged,
               improvementY01: improvementY01,

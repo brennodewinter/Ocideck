@@ -1788,6 +1788,19 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
+      'Atenție: datele sesiunii pot conține date cu caracter personal.',
+  'Privacy-bevindingen in sessie-data':
+      'Descoperiri de confidențialitate în datele sesiunii',
+  'De privacyscan vond mogelijk persoonsgegevens in de sessie-data. De export redigeert deze automatisch; klik op een bevinding voor de details.':
+      'Scanarea de confidențialitate a găsit posibil date cu caracter personal în datele sesiunii. Exportul le redactează automat; faceți clic pe o descoperire pentru detalii.',
+  'Tijdens het presenteren heb je checklists ingevuld en tabellen bijgewerkt op {aantal} dia’s.':
+      'În timpul prezentării ai completat liste de verificare și ai actualizat tabele pe {aantal} slide-uri.',
+  'en nog {aantal} dia’s.': 'și încă {aantal} slide-uri.',
+  'Sessie-wijzigingen bewaren?': 'Salvezi modificările sesiunii?',
+  'In deck behouden': 'Păstrează în deck',
+  'Downloaden als losse bestanden': 'Descarcă ca fișiere separate',
+  'Map voor sessie-bestanden kiezen': 'Alege dosar pentru fișierele sesiunii',
   'Zoek op taal of code': 'Caută după limbă sau cod',
   'Geen talen gevonden': 'Nu s-au găsit limbi',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
