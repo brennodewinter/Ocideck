@@ -246,6 +246,12 @@ class AppLocalizations {
     _activeLanguageCode = languageNames.containsKey(code) ? code : 'nl';
   }
 
+  /// De actieve interface-taalcode, zoals [setActiveLanguageCode] het laatst
+  /// zette. De HTML-export bewaart deze, stelt tijdelijk de taal van het deck
+  /// in voor de chrome-strings, en zet hem in `finally` terug — zie
+  /// [MarpHtmlService.build].
+  static String get activeLanguageCode => _activeLanguageCode;
+
   static Locale materialLocaleFor(String code) {
     return _materialLocaleFallbacks[code] ?? const Locale('nl');
   }

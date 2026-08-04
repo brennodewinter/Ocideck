@@ -52,6 +52,15 @@ class ExportDocumentMetadata {
   final String keywords;
   final TlpLevel tlp;
 
+  /// De taal waarin de inhoud van dit deck is geschreven, als BCP47-code
+  /// (`nl`, `en`, `fi` …), of leeg wanneer niet vastgelegd. Dit is de
+  /// **rapporttaal** (zie [Deck.language]), niet de interfacetaal: de
+  /// HTML-export zet hier zijn `<html lang="…">` mee, zodat een schermlezer het
+  /// deck in de taal van de inhoud voorleest in plaats van in het Nederlands
+  /// (WCAG 2.1 SC 3.1.1). De chrome-strings van de export volgen deze taal
+  /// waar OciDeck haar kent, en vallen anders terug op de interfacetaal.
+  final String language;
+
   /// De zichtbare handtekening op dekniveau, en het moment van verzegelen.
   ///
   /// Ze reizen sinds 0.1.0 niet meer mee in de front matter van de `.md` (ze
@@ -79,6 +88,7 @@ class ExportDocumentMetadata {
     this.description = '',
     this.keywords = '',
     this.tlp = TlpLevel.none,
+    this.language = '',
     this.signature,
     this.sealedAt = '',
     this.unreviewedAiSlideCount = 0,
@@ -116,6 +126,7 @@ class ExportDocumentMetadata {
       description: deck.description,
       keywords: deck.keywords,
       tlp: deck.tlp,
+      language: deck.language,
       signature: deck.signature,
       sealedAt: deck.finalized ? deck.sealAt : '',
       unreviewedAiSlideCount: slidesWithUnreviewedAiMarkers(deck).length,
@@ -147,6 +158,7 @@ class ExportDocumentMetadata {
         description: description,
         keywords: keywords,
         tlp: tlp,
+        language: language,
         unreviewedAiSlideCount: slidesWithUnreviewedAiMarkers(
           audience.deck,
         ).length,

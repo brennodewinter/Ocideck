@@ -129,6 +129,17 @@ either). PPTX speaker notes are real text and do travel.
 and headings, which is already a great deal more than the bitmap formats, but
 nobody has checked its colour contrast, focus order or landmark structure.
 
+**The page language follows the report, not the UI.** *(Fixed 2026-08-05,
+#1249.)* The HTML export writes `<html lang="…">` from the deck's recorded
+report language (`Deck.language`), falling back to the author's interface
+language when the deck records none. A screen reader therefore announces a
+Finnish report in Finnish, not in Dutch — WCAG 2.1 SC 3.1.1 (Taal van de
+pagina). The export's own chrome (licence banner, "image not embedded", the
+AI-draft notice) renders in the same language where OciDeck carries it, and
+falls back to the interface language for a report whose language OciDeck does
+not translate into; the `lang` attribute keeps the report's actual language
+either way. PDF and PPTX are bitmaps and carry no language tag.
+
 **The app's own colours, and the bar it applies to your slides.** *(Audit
 completed 2026-07-23, #606; first measured 2026-07-22.)* OciDeck measures the
 contrast of your deck against WCAG AA and reports what falls short, so its own
