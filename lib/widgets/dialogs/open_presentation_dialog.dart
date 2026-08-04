@@ -10,6 +10,7 @@ import '../../utils/display_path.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../duplicate_badges.dart';
+import '../resizable_dialog_box.dart';
 
 /// What the open dialog returns: a presentation path and, optionally, the
 /// index of a slide to jump to (when the user picked a search hit).
@@ -241,15 +242,16 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
         ],
       ),
       contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
-      content: SizedBox(
-        width: 760,
+      content: ResizableDialogBox(
+        initialWidth: 760,
         height: 560,
-        child: Column(
+        builder: (context, handle) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _toolbar(),
             const SizedBox(height: 12),
             Expanded(child: _body(visible)),
+            Align(alignment: Alignment.centerRight, child: handle),
           ],
         ),
       ),

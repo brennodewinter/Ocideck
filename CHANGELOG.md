@@ -927,6 +927,19 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Vijf dialogen waar lange paden afgekapt werden zijn nu breedte-
+  aanpasbaar (#1217).** Voortbouwend op #1211 (de save-dialoog) onderzocht ik
+  waar in de UI nog bestandspaden met `TextOverflow.ellipsis` afgekapt worden.
+  Twee browsers (S3, WebDAV) toonden een breadcrumb zonder tooltip; drie
+  lijst-dialogen (presentaties zoeken, dubbele presentaties opruimen,
+  presentatie openen) hadden een vaste breedte. Alle vijf zijn nu breedte-
+  aanpasbaar via een gedeelde `ResizableDialogBox`-helper met een
+  sleephandgreep. De S3- en WebDAV-breadcrumb kregen ook een `Tooltip` met het
+  volledige pad. softWrap is hier bewust niet toegepast: een breadcrumb die
+  wrapt breekt de navigatie-header, en in een lijst maakt het elke regel
+  2-3× zo hoog. De kerninhoud blijft zonder muis volledig bedienbaar; de
+  handgreep is een extra voor pointer-gebruikers. De save-dialoog uit #1211
+  wordt in deze PR niet gemigreerd naar de helper (werkt al); eventueel later.
 - **Verkeerde melding bij het openen van een presentatie vlak na de start
   (#1209).** Opende (of sleepte) je een `.pptx`/`.odp`/`.key` meteen na het
   starten, dan meldde OciDeck "Zet de module Importeren aan…" terwijl die module

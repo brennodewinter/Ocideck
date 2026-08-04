@@ -13,6 +13,7 @@ import '../../theme/app_theme.dart';
 import '../../utils/display_path.dart';
 import '../../utils/log.dart';
 import '../duplicate_badges.dart';
+import '../resizable_dialog_box.dart';
 
 /// Eén stel byte-identieke kopieën van dezelfde presentatie.
 class CleanupGroup {
@@ -150,24 +151,40 @@ class _DuplicateCleanupDialogState
         ],
       ),
       contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
-      content: SizedBox(
-        width: 640,
+      content: ResizableDialogBox(
+        initialWidth: 640,
         height: 420,
-        // Opgeruimde groepen blijven zichtbaar met hun overgebleven kopie
-        // (uitgegrijsd): dat bevestigt wat er is gebeurd en wat er staat.
-        child: groups.isEmpty
-            ? Center(
-                child: Text(
-                  l10n.d('Geen dubbele presentaties gevonden.'),
-                  style: TextStyle(color: AppTheme.slate500, fontSize: 13),
-                ),
-              )
-            : ListView(
-                children: [
-                  for (final group in groups)
-                    _groupSection(l10n, group.title, group.paths, openPaths),
-                ],
-              ),
+        builder: (context, handle) => Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Opgeruimde groepen blijven zichtbaar met hun overgebleven kopie
+            // (uitgegrijsd): dat bevestigt wat er is gebeurd en wat er staat.
+            Expanded(
+              child: groups.isEmpty
+                  ? Center(
+                      child: Text(
+                        l10n.d('Geen dubbele presentaties gevonden.'),
+                        style: TextStyle(
+                          color: AppTheme.slate500,
+                          fontSize: 13,
+                        ),
+                      ),
+                    )
+                  : ListView(
+                      children: [
+                        for (final group in groups)
+                          _groupSection(
+                            l10n,
+                            group.title,
+                            group.paths,
+                            openPaths,
+                          ),
+                      ],
+                    ),
+            ),
+            Align(alignment: Alignment.centerRight, child: handle),
+          ],
+        ),
       ),
       actions: [
         TextButton(

@@ -944,6 +944,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `duplicate_badges.dart` — The shared badges and `formatModifiedDate` for the duplicate lists: which copy is the newest, and which entries are name-mates rather than duplicates.
 - `document_signature_view.dart` — `DocumentSignatureView` plus the decoder for an embedded `data:…;base64,…` signature image. The decoded bytes are memoised per URI so every caller gets the *same* `Uint8List`: `cappedMemoryImage` then compares equal across the export precache and the preview, which is what lets a drawn signature paint on the very first frame the rasteriser captures.
 - `signature_draw_dialog.dart` — `SignatureDrawDialog`: a freehand signature pad (mouse, trackpad, touch or stylus) rasterised to a transparent PNG and returned as the same embedded `data:` URI `DocumentSignature.imagePath` already expects — so a drawn signature round-trips in the deck and is covered by the seal like the rest of the attestation. Cancelling returns null, so the caller keeps the typed signature.
+- `resizable_dialog_box.dart` — `ResizableDialogBox` + `DialogResizeHandle`: a width-resizable replacement for the fixed `SizedBox(width:, height:)` that dialogs wrap their content in. The user drags the handle to widen the dialog so long file paths fit on one line (#1211, #1217). The builder pattern lets each dialog place the handle where it fits (footer, last row).
 
 ### `lib/widgets/shell/` (`part of app_shell.dart`, except the two noted below)
 

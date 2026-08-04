@@ -6,6 +6,7 @@ import '../../services/webdav_service.dart';
 import '../../state/webdav_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/user_facing_error.dart';
+import '../resizable_dialog_box.dart';
 
 /// Wat de browser laat kiezen: een deck om te openen of een afbeelding om in te
 /// voegen. Bepaalt welke bestanden klikbaar zijn.
@@ -80,10 +81,10 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
     return Dialog(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-      child: SizedBox(
-        width: 560,
+      child: ResizableDialogBox(
+        initialWidth: 560,
         height: 560,
-        child: Column(
+        builder: (context, handle) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _header(title),
@@ -100,8 +101,9 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
             Padding(
               padding: const EdgeInsets.all(12),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  handle,
                   TextButton(
                     onPressed: () => Navigator.pop(context),
                     child: Text(l10n.t('cancel')),
@@ -157,14 +159,18 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
           ),
           const SizedBox(width: 4),
           Expanded(
-            child: Text(
-              _path.isEmpty ? '/' : '/$_path',
-              style: TextStyle(
-                fontSize: 12,
-                color: AppTheme.slate600,
-                fontFamily: 'monospace',
+            child: Tooltip(
+              message: _path.isEmpty ? '/' : '/$_path',
+              waitDuration: const Duration(milliseconds: 400),
+              child: Text(
+                _path.isEmpty ? '/' : '/$_path',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: AppTheme.slate600,
+                  fontFamily: 'monospace',
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],

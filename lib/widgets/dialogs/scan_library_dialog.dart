@@ -7,6 +7,7 @@ import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/display_path.dart';
 import '../duplicate_badges.dart';
+import '../resizable_dialog_box.dart';
 import 'duplicate_cleanup_dialog.dart';
 
 /// Dialog that scans a fixed set of well-known locations (recent-file folders
@@ -123,10 +124,10 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
         ],
       ),
       contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
-      content: SizedBox(
-        width: 760,
+      content: ResizableDialogBox(
+        initialWidth: 760,
         height: 560,
-        child: Column(
+        builder: (context, handle) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextField(
@@ -142,6 +143,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
             _status(l10n),
             const SizedBox(height: 8),
             Expanded(child: _body(visible)),
+            Align(alignment: Alignment.centerRight, child: handle),
           ],
         ),
       ),
