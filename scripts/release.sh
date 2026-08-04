@@ -58,10 +58,26 @@ validate_tag() {
   [ "$version" = "$pubspec_version" ] \
     || die "tag $TAG disagrees with pubspec.yaml version $pubspec_version — bump pubspec (and kOciDeckVersion, CHANGELOG, sbom) to $version first"
 
-  # Strictly higher than the highest existing release tag. `sort -V` orders
-  # semver correctly; the guard fails if $TAG is not strictly the greatest.
+  # Abandoned release tags — a version that briefly existed but was deliberately
+  # given up, so the line continues *below* it. `v1.2.1` came from the
+  # 0.2.0 → 1.2.1 accident of 2026-08-03 (a stray bump whose tag fired the whole
+  # chain before anyone noticed); the project abandoned it and resumed its 0.x
+  # line at 0.3.0. The version-bump gate records the same decision in
+  # tool/check_version_bump.dart (`sanctionedTransitions`, 1.2.1->0.3.0); the
+  # monotonicity guard must ignore it too, or every 0.x release after it reads as
+  # "not strictly higher than v1.2.1" and is refused forever. One line per tag,
+  # each with a reason — never a routine escape hatch.
+  local abandoned_tags=(
+    v1.2.1 # accidental 0.2.0 → 1.2.1 release of 2026-08-03, abandoned for 0.3.0
+  )
+
+  # Strictly higher than the highest existing release tag, ignoring abandoned
+  # ones. `sort -V` orders semver correctly; the guard fails if $TAG is not
+  # strictly the greatest of the remaining tags.
   local highest
-  highest="$(git tag --list 'v*' | sort -V | tail -n1 || true)"
+  highest="$(git tag --list 'v*' \
+    | grep -vxF "$(printf '%s\n' "${abandoned_tags[@]}")" \
+    | sort -V | tail -n1 || true)"
   if [ -n "$highest" ] && [ "$highest" != "$TAG" ]; then
     local top
     top="$(printf '%s\n%s\n' "$highest" "$TAG" | sort -V | tail -n1)"
