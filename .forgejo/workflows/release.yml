@@ -539,6 +539,9 @@ jobs:
   homebrew-cask:
     name: Homebrew-cask bijwerken
     needs: publiceren
+    # Geen prereleases: een -rc hoort niet in de tap. Homebrew Cask is
+    # macOS-only — een Linux-installatieroute loopt langs een eigen spoor
+    # (#1227), niet via deze cask.
     if: ${{ !contains(github.ref_name, '-') }}
     runs-on: docker
     container:
@@ -557,13 +560,21 @@ jobs:
       - name: Homebrew-cask genereren en in de tap bijwerken
         run: |
           set -euo pipefail
+          # Secret-guard, zoals de notarisatiestap: ontbreekt de tap-configuratie,
+          # dan blijft de release gewoon staan en wordt alleen de cask overgeslagen.
           if [ -z "${HOMEBREW_TAP_REPOSITORY:-}" ] || [ -z "${HOMEBREW_TAP_TOKEN:-}" ]; then
             echo "HOMEBREW_TAP_REPOSITORY/TOKEN ontbreken — de cask wordt niet bijgewerkt."
             exit 0
           fi
 
+          # De tap staat op de eigen forge (canoniek). De GitHub-spiegel die de
+          # `brew tap librekat/ocideck`-shorthand voedt, wordt door een
+          # push-mirror op het tap-repo bijgewerkt — niet door een tweede
+          # release-job. Daarom klonen we forge-relatief via GITHUB_SERVER_URL en
+          # niet tegen een hardgecodeerde github.com.
+          FORGE_HOST="${GITHUB_SERVER_URL#https://}"
           TMPDIR="$(mktemp -d)"
-          git clone "https://oauth2:${HOMEBREW_TAP_TOKEN}@github.com/${HOMEBREW_TAP_REPOSITORY}.git" "$TMPDIR/tap"
+          git clone "https://oauth2:${HOMEBREW_TAP_TOKEN}@${FORGE_HOST}/${HOMEBREW_TAP_REPOSITORY}.git" "$TMPDIR/tap"
 
           git config --global user.name "OciDeck release"
           git config --global user.email "release@librekat.nl"

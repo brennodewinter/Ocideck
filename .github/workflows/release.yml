@@ -127,52 +127,8 @@ jobs:
               --title "OciDeck $GITHUB_REF_NAME (Windows build)" \
               --notes "$NOTES" "${VOORLOPER[@]}"
           fi
-
-  homebrew-cask:
-    name: Update Homebrew cask
-    needs: windows
-    if: ${{ !contains(github.ref_name, '-') }}
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    env:
-      HOMEBREW_TAP_REPOSITORY: ${{ secrets.HOMEBREW_TAP_REPOSITORY }}
-      HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          persist-credentials: false
-
-      - name: Install prerequisites
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends curl git ca-certificates
-
-      - name: Update the Homebrew tap
-        run: |
-          set -euo pipefail
-          if [ -z "${HOMEBREW_TAP_REPOSITORY:-}" ] || [ -z "${HOMEBREW_TAP_TOKEN:-}" ]; then
-            echo "HOMEBREW_TAP_REPOSITORY/TOKEN are not configured; skipping the cask update."
-            exit 0
-          fi
-
-          TMPDIR="$(mktemp -d)"
-          git clone "https://oauth2:${HOMEBREW_TAP_TOKEN}@github.com/${HOMEBREW_TAP_REPOSITORY}.git" "$TMPDIR/tap"
-
-          git config --global user.name "OciDeck release"
-          git config --global user.email "release@librekat.nl"
-
-          chmod +x scripts/update_homebrew_cask.sh
-          ./scripts/update_homebrew_cask.sh "$GITHUB_REF_NAME" "$TMPDIR/tap/Casks/ocideck.rb"
-
-          cd "$TMPDIR/tap"
-          DEFAULT_BRANCH=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
-          git checkout -B "$DEFAULT_BRANCH"
-          git add Casks/ocideck.rb
-          if git diff --cached --quiet; then
-            echo "No Homebrew cask changes were necessary."
-            exit 0
-          fi
-          git commit -m "OciDeck $GITHUB_REF_NAME: update Homebrew cask"
-          git push origin "HEAD:$DEFAULT_BRANCH"
+          # De Homebrew-cask wordt uitsluitend vanuit de canonieke forge-release
+          # bijgewerkt (`.forgejo/workflows/release.yml`), die naar de tap op de
+          # eigen forge pusht. De GitHub-spiegel van de tap volgt via een
+          # push-mirror — geen tweede release-job hier, anders pushen twee ketens
+          # dezelfde cask en botsen ze. Zie issue #1227.

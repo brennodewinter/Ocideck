@@ -1,21 +1,11 @@
 cask "ocideck" do
   version "{{VERSION}}"
+  sha256 "{{MACOS_SHA256}}"
 
-  on_macos do
-    url "{{MACOS_URL}}"
-    sha256 "{{MACOS_SHA256}}"
-    app "OciDeck.app"
-  end
-
-  on_linux do
-    url "{{LINUX_URL}}"
-    sha256 "{{LINUX_SHA256}}"
-    binary "ocideck"
-  end
-
+  url "{{MACOS_URL}}"
   name "OciDeck"
   desc "Open-source presentation app for decks, notes, and collaborative sessions"
   homepage "https://ocideck.librekat.nl"
 
-  auto_updates true
+  app "OciDeck.app"
 end
