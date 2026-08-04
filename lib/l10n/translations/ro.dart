@@ -1788,6 +1788,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Zi',
   'Week': 'Săptămână',
   'Maand': 'Lună',

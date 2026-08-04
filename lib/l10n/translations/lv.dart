@@ -1770,6 +1770,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Diena',
   'Week': 'Nedēļa',
   'Maand': 'Mēnesis',

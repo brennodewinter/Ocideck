@@ -161,5 +161,4 @@ String _autoAxisFormat(List<List<String>> rows, Map<int, String> ids) {
   return '%Y-%m';
 }
 
-String _cell(List<String> row, int col) =>
-    col < row.length ? row[col] : '';
+String _cell(List<String> row, int col) => col < row.length ? row[col] : '';

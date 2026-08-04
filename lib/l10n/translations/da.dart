@@ -1770,6 +1770,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Dag',
   'Week': 'Uge',
   'Maand': 'Måned',

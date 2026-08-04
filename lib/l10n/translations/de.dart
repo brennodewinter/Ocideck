@@ -730,6 +730,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Gantt': 'Gantt',
   'Dag': 'Tag',
   'Week': 'Woche',
   'Maand': 'Monat',

@@ -1778,6 +1778,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Deň',
   'Week': 'Týždeň',
   'Maand': 'Mesiac',

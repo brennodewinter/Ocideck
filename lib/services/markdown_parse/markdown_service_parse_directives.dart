@@ -211,7 +211,9 @@ extension _MarkdownParseDirectives on MarkdownService {
           ganttScale = content.substring('ocideck_gantt_scale:'.length).trim();
         }
       } else if (content.startsWith('ocideck_gantt_sections:')) {
-        ganttSections = content.substring('ocideck_gantt_sections:'.length).trim() == 'true';
+        ganttSections =
+            content.substring('ocideck_gantt_sections:'.length).trim() ==
+            'true';
       } else if (content.startsWith('ocideck_slide_anchor:')) {
         anchor = _firstDirective(content, 'ocideck_slide_anchor:', anchor);
       } else if (content.startsWith('ocideck_next:')) {

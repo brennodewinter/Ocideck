@@ -1771,6 +1771,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Hari',
   'Week': 'Minggu',
   'Maand': 'Bulan',

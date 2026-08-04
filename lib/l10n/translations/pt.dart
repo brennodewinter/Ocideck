@@ -1800,6 +1800,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Dia',
   'Week': 'Semana',
   'Maand': 'Mês',

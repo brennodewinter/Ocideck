@@ -348,10 +348,17 @@ List<Widget> slideSettingBadges(AppLocalizations l10n, Slide slide) {
     );
   }
   if (slide.type == SlideType.gantt && slide.ganttScale != 'auto') {
-    badges.add(_SettingBadge(icon: Icons.calendar_today_outlined, label: slide.ganttScale));
+    badges.add(
+      _SettingBadge(
+        icon: Icons.calendar_today_outlined,
+        label: slide.ganttScale,
+      ),
+    );
   }
   if (slide.ganttSections) {
-    badges.add(_SettingBadge(icon: Icons.view_agenda_outlined, label: l10n.d('Secties')));
+    badges.add(
+      _SettingBadge(icon: Icons.view_agenda_outlined, label: l10n.d('Secties')),
+    );
   }
   if (slide.viewLimit?.isActive == true) {
     badges.add(
@@ -716,9 +723,13 @@ class _SlideSettingsBody extends StatelessWidget {
                   DropdownMenuItem(value: 'auto', child: Text(l10n.d('Auto'))),
                   DropdownMenuItem(value: 'day', child: Text(l10n.d('Dag'))),
                   DropdownMenuItem(value: 'week', child: Text(l10n.d('Week'))),
-                  DropdownMenuItem(value: 'month', child: Text(l10n.d('Maand'))),
+                  DropdownMenuItem(
+                    value: 'month',
+                    child: Text(l10n.d('Maand')),
+                  ),
                 ],
-                onChanged: (v) => onUpdate(slide.copyWith(ganttScale: v ?? 'auto')),
+                onChanged: (v) =>
+                    onUpdate(slide.copyWith(ganttScale: v ?? 'auto')),
               ),
             ),
           if (slide.type == SlideType.gantt)

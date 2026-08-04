@@ -1777,6 +1777,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Dan',
   'Week': 'Tjedan',
   'Maand': 'Mjesec',

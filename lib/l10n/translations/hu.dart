@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Nap',
   'Week': 'Hét',
   'Maand': 'Hónap',

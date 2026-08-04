@@ -1770,6 +1770,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Dag',
   'Week': 'Vecka',
   'Maand': 'Månad',

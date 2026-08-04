@@ -1774,6 +1774,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Den',
   'Week': 'Týden',
   'Maand': 'Měsíc',

@@ -1793,6 +1793,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Jum',
   'Week': 'Ġimgħa',
   'Maand': 'Xahar',

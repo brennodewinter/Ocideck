@@ -730,6 +730,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Gantt': 'Gantt',
   'Dag': 'Día',
   'Week': 'Siman',
   'Maand': 'Luna',

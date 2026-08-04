@@ -1783,6 +1783,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Dzień',
   'Week': 'Tydzień',
   'Maand': 'Miesiąc',

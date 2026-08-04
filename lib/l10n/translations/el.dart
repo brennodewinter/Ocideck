@@ -1798,6 +1798,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Ημέρα',
   'Week': 'Εβδομάδα',
   'Maand': 'Μήνας',

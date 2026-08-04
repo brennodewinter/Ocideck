@@ -1806,6 +1806,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Lá',
   'Week': 'Seachtain',
   'Maand': 'Mí',

@@ -45,9 +45,7 @@ class _GanttPreview extends StatelessWidget {
       profile: profile,
       horizontalPadding: pad,
       verticalPadding: pad,
-      children: [
-        MermaidDiagram(source: dsl, width: w - pad * 2),
-      ],
+      children: [MermaidDiagram(source: dsl, width: w - pad * 2)],
     );
   }
 }

@@ -82,6 +82,7 @@ void main() {
       SlideType.findingsSummary,
       SlideType.matrix,
       SlideType.controlStatus,
+      SlideType.gantt,
     });
   });
 

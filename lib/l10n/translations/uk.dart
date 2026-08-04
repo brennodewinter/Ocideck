@@ -1788,6 +1788,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'День',
   'Week': 'Тиждень',
   'Maand': 'Місяць',

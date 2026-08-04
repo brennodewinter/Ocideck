@@ -1793,6 +1793,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Ден',
   'Week': 'Седмица',
   'Maand': 'Месец',

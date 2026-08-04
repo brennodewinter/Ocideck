@@ -731,6 +731,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Gantt': 'Gantt',
   'Dag': 'Dei',
   'Week': 'Wike',
   'Maand': 'Moanne',

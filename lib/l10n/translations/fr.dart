@@ -730,6 +730,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Gantt': 'Gantt',
   'Dag': 'Jour',
   'Week': 'Semaine',
   'Maand': 'Mois',

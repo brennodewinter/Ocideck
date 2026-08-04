@@ -727,6 +727,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Gantt': 'Gantt',
   'Dag': 'Día',
   'Week': 'Semana',
   'Maand': 'Mes',

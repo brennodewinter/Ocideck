@@ -1773,6 +1773,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Dan',
   'Week': 'Teden',
   'Maand': 'Mesec',

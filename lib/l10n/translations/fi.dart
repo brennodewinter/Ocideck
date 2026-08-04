@@ -1771,6 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Gantt': 'Gantt',
   'Dag': 'Päivä',
   'Week': 'Viikko',
   'Maand': 'Kuukausi',
