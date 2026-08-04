@@ -672,7 +672,8 @@ six statistical types when the Procesverbetering module is on), **cockpit** (a
 dashboard of aviation-style instrument gauges),
 **question** (an interactive quiz slide, in six kinds), **timeline** (an animated timeline of
 dated events), **scorecard** (a few headline figures, each beside the figure from
-the previous report), and
+the previous report), **choice menu** (a grid of blocks that each jump to another
+slide, #1162), and
 **free Markdown**. Each card in the chooser shows a miniature
 wireframe of the layout, and **below the grid stands the explanation of whatever
 the mouse or the keyboard focus is pointing at** — so you choose on a sentence
@@ -817,6 +818,27 @@ is non-destructive: it stores a focal point, never rewrites the image file, and
 travels with the deck in the `.md`. The same **Bijsnijden** button is on the
 title background, the bullets-and-image panel, and each image of a two-images
 slide (remote/URL images can't be cropped this way).
+
+### Choice menu slides (#1162)
+
+A **choice menu** turns a slide into a set of *blocks* that each jump to another
+slide — the interactive counterpart of the [jump-out](#non-linear-order-jump-to-another-slide-1162).
+In the editor you build the blocks one by one: type a **label**, pick the target
+slide under **Springt naar** ("Jumps to") from a list of the deck's slides by
+heading, and optionally add an image. A block you leave without a target is just a
+text block. You never type or see an anchor — you pick a slide, and the app keeps
+the link stable even if you rename that slide's heading or reorder the deck.
+
+While presenting, the blocks show as a tidy grid in the theme's colours (blocks
+that jump carry a subtle accent border); **click or tap a block and the
+presentation jumps to that slide**. Because a jump uses the same route history as
+the jump-out, **back** returns you to the menu you came from. If the target slide
+is later deleted, the block simply stops jumping — no error.
+
+In the `.md` file the blocks are ordinary Markdown link-bullets
+(`- [Label](#anchor)`, optionally followed by `![](mem:…)` for the image), so a
+menu stays a readable list of links in any Markdown viewer; only the
+`<!-- _class: menu -->` token marks it as a menu for OciDeck.
 
 ### Source-code slides
 
