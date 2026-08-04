@@ -1799,6 +1799,7 @@ const _dutchSourceAddMt = <String, String>{
       'It-taqsima "{sectie}" mhijiex taqsima standard ta\' sejba u ma tintweriex jew tiġi esportata (il-kontenut madankollu jibqa\' fil-fajl tas-sors). Ibdel l-isem tal-intestatura għal Description, Confirmation (reproduction), Possible impact jew Recommendation.',
   'Breedte aanpassen': 'Aġusta l-wisa\'',
   'Niet akkoord en afsluiten': 'Irrifjuta u oħroġ',
+  'Vul de datum van vandaag in': 'Imla d-data tal-lum',
   'Springt naar': 'Jaqbeż għal',
   'Geen sprong': 'Ebda qbiż',
   'Blok toevoegen': 'Żid blokk',

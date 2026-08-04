@@ -736,6 +736,7 @@ const _dutchSourceAddPap = {
       'E sekshon "{sectie}" no ta un sekshon standard di un konstatashon i no ta wòrdu mustrá ni eksportá (e kontenido ta keda den e archivo fuente). Kambia e enkabesamentu pa Description, Confirmation (reproduction), Possible impact of Recommendation.',
   'Breedte aanpassen': 'Adjusta e hanchura',
   'Niet akkoord en afsluiten': 'Rechasá i sali',
+  'Vul de datum van vandaag in': 'Yena e fecha di awe',
   'Springt naar': 'Salta pa',
   'Geen sprong': 'Sin salto',
   'Blok toevoegen': 'Agregá blòk',

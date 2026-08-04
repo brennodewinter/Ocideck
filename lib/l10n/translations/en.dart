@@ -917,6 +917,7 @@ const _dutchSourceAddEn = {
       'The section "{sectie}" is not a standard finding section and is not shown or exported (the content does remain in the source file). Rename the heading to Description, Confirmation (reproduction), Possible impact or Recommendation.',
   'Breedte aanpassen': 'Adjust width',
   'Niet akkoord en afsluiten': 'Decline and quit',
+  'Vul de datum van vandaag in': 'Fill in today\'s date',
   'Springt naar': 'Jumps to',
   'Geen sprong': 'No jump',
   'Blok toevoegen': 'Add block',

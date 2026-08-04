@@ -1784,6 +1784,7 @@ const _dutchSourceAddLt = <String, String>{
       'Skiltis „{sectie}“ nėra standartinė radinio skiltis ir nerodoma bei neeksportuojama (turinys vis dėlto lieka pradiniame faile). Pervadinkite antraštę į Description, Confirmation (reproduction), Possible impact arba Recommendation.',
   'Breedte aanpassen': 'Reguliuoti plotį',
   'Niet akkoord en afsluiten': 'Atmesti ir išeiti',
+  'Vul de datum van vandaag in': 'Įrašyti šiandienos datą',
   'Springt naar': 'Pereina į',
   'Geen sprong': 'Be perėjimo',
   'Blok toevoegen': 'Pridėti bloką',

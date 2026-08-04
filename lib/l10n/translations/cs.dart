@@ -1780,6 +1780,7 @@ const _dutchSourceAddCs = <String, String>{
       'Sekce „{sectie}“ není standardní sekcí zjištění a nezobrazuje se ani neexportuje (obsah však zůstává ve zdrojovém souboru). Přejmenujte nadpis na Description, Confirmation (reproduction), Possible impact nebo Recommendation.',
   'Breedte aanpassen': 'Upravit šířku',
   'Niet akkoord en afsluiten': 'Odmítnout a ukončit',
+  'Vul de datum van vandaag in': 'Vyplnit dnešní datum',
   'Springt naar': 'Přejde na',
   'Geen sprong': 'Bez skoku',
   'Blok toevoegen': 'Přidat blok',

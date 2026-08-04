@@ -1777,6 +1777,7 @@ const _dutchSourceAddFi = <String, String>{
       'Osio "{sectie}" ei ole löydöksen vakio-osio, eikä sitä näytetä tai viedä (sisältö säilyy kuitenkin lähdetiedostossa). Nimeä otsikko uudelleen muotoon Description, Confirmation (reproduction), Possible impact tai Recommendation.',
   'Breedte aanpassen': 'Säädä leveyttä',
   'Niet akkoord en afsluiten': 'Hylkää ja lopeta',
+  'Vul de datum van vandaag in': 'Täytä tämän päivän päivämäärä',
   'Springt naar': 'Siirtyy kohtaan',
   'Geen sprong': 'Ei hyppyä',
   'Blok toevoegen': 'Lisää lohko',

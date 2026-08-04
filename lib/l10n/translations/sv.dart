@@ -1776,6 +1776,7 @@ const _dutchSourceAddSv = <String, String>{
       'Avsnittet "{sectie}" är inte ett standardavsnitt i ett fynd och visas eller exporteras inte (innehållet finns dock kvar i källfilen). Byt namn på rubriken till Description, Confirmation (reproduction), Possible impact eller Recommendation.',
   'Breedte aanpassen': 'Justera bredd',
   'Niet akkoord en afsluiten': 'Avvisa och avsluta',
+  'Vul de datum van vandaag in': 'Fyll i dagens datum',
   'Springt naar': 'Hoppar till',
   'Geen sprong': 'Inget hopp',
   'Blok toevoegen': 'Lägg till block',

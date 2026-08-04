@@ -1781,6 +1781,7 @@ const _dutchSourceAddHu = <String, String>{
       'A(z) "{sectie}" szakasz nem egy megállapítás szabványos szakasza, és nem jelenik meg és nem kerül exportálásra (a tartalom azonban a forrásfájlban marad). Nevezze át a fejlécet erre: Description, Confirmation (reproduction), Possible impact vagy Recommendation.',
   'Breedte aanpassen': 'Szélesség beállítása',
   'Niet akkoord en afsluiten': 'Elutasítás és kilépés',
+  'Vul de datum van vandaag in': 'Mai dátum beszúrása',
   'Springt naar': 'Ugrás ide',
   'Geen sprong': 'Nincs ugrás',
   'Blok toevoegen': 'Blokk hozzáadása',

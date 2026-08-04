@@ -1777,6 +1777,7 @@ const _dutchSourceAddId = <String, String>{
       'Bagian "{sectie}" bukan bagian standar dari suatu temuan dan tidak ditampilkan atau diekspor (isinya tetap ada di berkas sumber). Ganti nama judul menjadi Description, Confirmation (reproduction), Possible impact atau Recommendation.',
   'Breedte aanpassen': 'Sesuaikan lebar',
   'Niet akkoord en afsluiten': 'Tolak dan keluar',
+  'Vul de datum van vandaag in': 'Isi tanggal hari ini',
   'Springt naar': 'Melompat ke',
   'Geen sprong': 'Tanpa lompatan',
   'Blok toevoegen': 'Tambah blok',

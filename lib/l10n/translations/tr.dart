@@ -2754,6 +2754,7 @@ const _dutchSourceAddTr = <String, String>{
       '"{sectie}" bölümü bir bulgunun standart bölümü değildir ve gösterilmez veya dışa aktarılmaz (içerik yine de kaynak dosyada kalır). Başlığı Description, Confirmation (reproduction), Possible impact veya Recommendation olarak yeniden adlandırın.',
   'Breedte aanpassen': 'Genişliği ayarla',
   'Niet akkoord en afsluiten': 'Reddet ve çık',
+  'Vul de datum van vandaag in': 'Bugünün tarihini gir',
   'Springt naar': 'Şuraya atlar',
   'Geen sprong': 'Atlama yok',
   'Blok toevoegen': 'Blok ekle',

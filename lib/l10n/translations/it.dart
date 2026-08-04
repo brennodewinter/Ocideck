@@ -732,6 +732,7 @@ const _dutchSourceAddIt = {
       'La sezione "{sectie}" non è una sezione standard di un rilievo e non viene mostrata né esportata (il contenuto rimane comunque nel file di origine). Rinomina il titolo in Description, Confirmation (reproduction), Possible impact o Recommendation.',
   'Breedte aanpassen': 'Regola la larghezza',
   'Niet akkoord en afsluiten': 'Rifiuta ed esci',
+  'Vul de datum van vandaag in': 'Inserisci la data di oggi',
   'Springt naar': 'Salta a',
   'Geen sprong': 'Nessun salto',
   'Blok toevoegen': 'Aggiungi blocco',
