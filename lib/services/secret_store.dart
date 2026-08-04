@@ -426,6 +426,52 @@ class SecretStore {
     }
   }
 
+  /// Keychain-sleutel voor het LibrePlan-wachtwoord van [username] op [baseUrl].
+  /// Beide worden genormaliseerd zodat een triviale variatie (trailing slash,
+  /// hoofdletters in de host) niet stilletjes een tweede entry maakt. Spiegelt
+  /// [webdavKey] — hetzelfde patroon, een andere dienst.
+  static String libreplanKey(String baseUrl, String username) {
+    final normalized = baseUrl.trim().replaceAll(RegExp(r'/+$'), '');
+    return 'libreplan_pw::$normalized::${username.trim()}';
+  }
+
+  Future<void> writeLibreplanPassword(
+    String baseUrl,
+    String username,
+    String password,
+  ) async {
+    _requireStorage('writeLibreplanPassword');
+    try {
+      await _storage.write(
+        key: libreplanKey(baseUrl, username),
+        value: password,
+      );
+    } catch (e) {
+      logError('SecretStore.writeLibreplanPassword: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  Future<String?> readLibreplanPassword(String baseUrl, String username) async {
+    if (!_canStore) return null;
+    try {
+      return await _storage.read(key: libreplanKey(baseUrl, username));
+    } catch (e) {
+      logError('SecretStore.readLibreplanPassword: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteLibreplanPassword(String baseUrl, String username) async {
+    if (!_canStore) return;
+    try {
+      await _storage.delete(key: libreplanKey(baseUrl, username));
+    } catch (e) {
+      // Wissen mag nooit fataal zijn: log en ga door.
+      logWarning('SecretStore.deleteLibreplanPassword: keychain delete failed', e);
+    }
+  }
+
   /// Keychain-sleutel voor "je eigen gegevens" van de privacycontrole.
   ///
   /// Eén entry, want het gaat over de gebruiker van deze installatie en niet

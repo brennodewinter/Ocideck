@@ -76,6 +76,21 @@ MatrixServer? _readMatrixAccount(SharedPreferences prefs) {
   }
 }
 
+/// Lees de opgeslagen LibrePlan-connector-instellingen; corrupte data
+/// degradeert veilig. Spiegelt [_readAiSettings].
+LibreplanSettings _readLibreplanSettings(SharedPreferences prefs) {
+  final json = prefs.getString('libreplanSettings');
+  if (json == null) return const LibreplanSettings();
+  try {
+    return LibreplanSettings.fromJson(
+      Map<String, Object?>.from(jsonDecode(json) as Map),
+    );
+  } catch (e) {
+    logWarning('SettingsNotifier: ongeldige libreplanSettings-prefs', e);
+    return const LibreplanSettings();
+  }
+}
+
 ({
   List<CockpitColorScheme> schemes,
   String selectedName,
@@ -226,6 +241,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     final cockpit = _loadCockpitSettings(prefs, _mergeCockpitSchemes);
     final ai = _readAiSettings(prefs);
     final matrix = _readMatrixAccount(prefs);
+    final libreplan = _readLibreplanSettings(prefs);
     // Het laden is asynchroon; een scope die in die tussentijd verdwijnt — een
     // venster dat sluit, een test die afloopt — mag geen "gebruikt na dispose"
     // opleveren. Er valt dan ook niets meer bij te werken.
@@ -303,6 +319,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           prefs.getString('cveApiBaseUrl') ?? AppSettings.defaultCveApiBaseUrl,
       aiSettings: ai,
       matrixAccount: matrix,
+      libreplanSettings: libreplan,
     );
     _persistedLogoPaths = _referencedLogoPaths;
     // Niet awaiten: de sleutelbos mag de instellingen niet ophouden.
@@ -417,6 +434,15 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = state.copyWith(aiSettings: settings);
     await _persist('setAiSettings', (prefs) async {
       await prefs.setString('aiSettings', jsonEncode(settings.toJson()));
+    });
+  }
+
+  /// Bewaar de instellingen van de optionele LibrePlan-connector (zonder
+  /// wachtwoord) in hetzelfde prefs-domein. Spiegelt [setAiSettings].
+  Future<void> setLibreplanSettings(LibreplanSettings settings) async {
+    state = state.copyWith(libreplanSettings: settings);
+    await _persist('setLibreplanSettings', (prefs) async {
+      await prefs.setString('libreplanSettings', jsonEncode(settings.toJson()));
     });
   }
 

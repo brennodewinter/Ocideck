@@ -2,6 +2,7 @@ import 'privacy_disposition.dart';
 import 'privacy_finding.dart';
 import '../services/privacy/privacy_regions.dart';
 import 'ai_settings.dart';
+import 'libreplan_settings.dart';
 import 'chart.dart' show normalizeChartColor;
 import 'checklist_template.dart';
 import 'library_folder.dart';
@@ -13,6 +14,7 @@ import 'webdav_settings.dart';
 import 'matrix_settings.dart';
 
 export 'ai_settings.dart';
+export 'libreplan_settings.dart';
 export 'checklist_template.dart';
 export 'library_folder.dart';
 export 'recent_file.dart';
@@ -770,6 +772,10 @@ class AppSettings {
   /// zie `SecretStore`) — alleen de niet-geheime homeserver/user/device-gegevens.
   final MatrixServer? matrixAccount;
 
+  /// Instellingen voor de optionele LibrePlan-connector. Standaard uit; bevat
+  /// nooit het wachtwoord (dat staat in de keychain).
+  final LibreplanSettings libreplanSettings;
+
   const AppSettings({
     this.languageCode = 'nl',
     this.connections = const [],
@@ -805,6 +811,7 @@ class AppSettings {
     this.cveApiBaseUrl = defaultCveApiBaseUrl,
     this.aiSettings = const AiSettings(),
     this.matrixAccount,
+    this.libreplanSettings = const LibreplanSettings(),
   });
 
   ThemeProfile get themeProfile {
@@ -893,6 +900,7 @@ class AppSettings {
     AiSettings? aiSettings,
     MatrixServer? matrixAccount,
     bool clearMatrixAccount = false,
+    LibreplanSettings? libreplanSettings,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
     bool clearMinRequiredExportTlp = false,
@@ -964,6 +972,7 @@ class AppSettings {
       matrixAccount: clearMatrixAccount
           ? null
           : (matrixAccount ?? this.matrixAccount),
+      libreplanSettings: libreplanSettings ?? this.libreplanSettings,
     );
   }
 }

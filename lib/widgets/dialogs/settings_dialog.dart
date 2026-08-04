@@ -68,6 +68,7 @@ import 'settings/procesverbetering_module_card.dart';
 import 'settings/asset_rights_module_card.dart';
 import 'settings/video_calls_module_card.dart';
 import 'settings/managementsysteem_module_card.dart';
+import 'settings/libreplan_module_card.dart';
 import 'settings/appearance_legibility.dart';
 import 'settings/git_form.dart';
 import 'settings/git_panel.dart';
@@ -204,6 +205,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// De AI-backend (optioneel, standaard uit): velden, modus en API-sleutel.
   final AiForm _ai = AiForm();
 
+  /// LibrePlan-connector (optioneel, standaard uit): formulierstand van de
+  /// schakelaar. De volledige form-velden komen op het LibrePlan-tabblad.
+  bool _libreplanEnabled = false;
+
   /// Whether the user changed the active profile in this session. Used to
   /// decide whether to apply the profile to the currently open presentation.
   bool _profileTouched = false;
@@ -295,6 +300,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       text: _themeProfile.closingSlideMarkdown,
     );
     _initAiFields(settings.aiSettings);
+    _libreplanEnabled = settings.libreplanSettings.enabled;
     _adoptMatrixForm(settings.matrixAccount);
     _highlightedThemeField = widget.highlightThemeField;
     _selectedTab = widget.initialSection;
@@ -754,6 +760,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     }
 
     _ai.save(notifier);
+
+    // LibrePlan-connector: bewaar de schakelaar en de bestaande configuratie.
+    // De volledige form-velden worden op het LibrePlan-tabblad bewerkt; hier
+    // wordt voorlopig alleen de schakelaar meegenomen (rest blijft ongewijzigd).
+    final lp = ref.read(settingsProvider).libreplanSettings;
+    notifier.setLibreplanSettings(lp.copyWith(enabled: _libreplanEnabled));
 
     // Het app-globale Matrix-account: de configuratie via de notifier, het token
     // apart in de sleutelhanger. Leeggemaakt terwijl er een account stond →

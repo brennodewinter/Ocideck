@@ -26,6 +26,7 @@ import 'managementsysteem_provider.dart';
 import 'procesverbetering_provider.dart';
 import 'settings_provider.dart';
 import 'asset_rights_module_provider.dart';
+import 'libreplan_provider.dart';
 
 /// De optionele modules, in de volgorde waarin het Uitbreidingen-tabblad ze
 /// toont.
@@ -39,6 +40,7 @@ enum ModuleId {
   videoCalls,
   assetRights,
   managementsysteem,
+  libreplan,
 }
 
 /// Eén module in het register: wie hij is en waar zijn poorten staan.
@@ -133,5 +135,10 @@ final List<ModuleEntry> moduleRegistry = [
     id: ModuleId.managementsysteem,
     enabled: managementsysteemEnabledProvider,
     revealed: managementsysteemRevealProvider,
+  ),
+  ModuleEntry(
+    id: ModuleId.libreplan,
+    enabled: libreplanEnabledProvider,
+    revealed: libreplanRevealProvider,
   ),
 ];
