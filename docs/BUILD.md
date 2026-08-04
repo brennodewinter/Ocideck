@@ -619,9 +619,16 @@ tracked separately (#1227).
   top-level `Casks/` directory; add a GitHub push-mirror to
   `LibreKAT/homebrew-ocideck`. Then set two repo secrets on the OciDeck repo:
   `HOMEBREW_TAP_REPOSITORY` (`LibreKAT/homebrew-ocideck`) and `HOMEBREW_TAP_TOKEN`
-  (a forge token with `write:repository` on the tap). Absent either, the job is a
-  no-op — the release still publishes, only the cask is skipped (same secret-guard
-  pattern as macOS notarisation).
+  (a forge token with `write:repository` on the tap). Absent either, the job
+  checks that up front and skips everything — no tooling or checkout is set up —
+  ending green with a `⏭️ Homebrew-cask NIET bijgewerkt` note on the run summary
+  (same graceful-skip pattern as the web-deploy job). The release still publishes;
+  only the cask is skipped.
+- **Fails soft on a missing tap.** Even with both secrets set, if the tap cannot
+  be cloned (it does not exist yet, or the token lacks push scope) the job logs a
+  `⚠️ tap onbereikbaar` note and exits green rather than turning the whole
+  release run red. A brand-new, still-empty tap repo is handled too: with no HEAD
+  branch yet the job falls back to `main`.
 - **Caveat.** The cask is only a *smooth* install once the macOS release is
   notarised. An unsigned release (see the signing section above) installs fine
   via `brew` but Gatekeeper still blocks it on first launch — the cask eases

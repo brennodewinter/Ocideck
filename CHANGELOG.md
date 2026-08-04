@@ -986,6 +986,24 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De Homebrew-cask-job faalde bij de eerste echte release (v0.3.1) — nu
+  gerepareerd én robuust (#1227).** De job draait op een kale `ubuntu:24.04` en
+  gebruikt `actions/checkout@v4`, een Node-actie; die image heeft geen Node aan
+  boord. De zusterjobs (`Release publiceren`, `Webversie live zetten`)
+  installeren daarom eerst `nodejs` — de cask-job vergat dat en de checkout brak,
+  nog vóór de secret-guard. Ontbrekende `HOMEBREW_TAP_*`-secrets waren dus niet
+  de oorzaak (met lege secrets zou de guard juist netjes overslaan). `nodejs` is
+  toegevoegd. Verder heeft de job nu dezelfde filosofie als de web-deploy-job:
+  een **check-stap vooraan** slaat álles over (geen apt-get, geen checkout) als
+  de tap niet is geconfigureerd en zet dat zichtbaar op de run-samenvatting in
+  plaats van de staplog. Zelfs mét secrets faalt de job zacht als de tap niet te
+  klonen is (bestaat nog niet, of het token mist push-scope) en een **verse,
+  lege tap-repo** — zonder HEAD-branch — valt terug op `main` in plaats van te
+  stikken op `git checkout -B ""`. `test/release_workflow_checkout_node_test.dart`
+  bewaakt de invariant structureel: elke kale-ubuntu-job die een `actions/*`-actie
+  draait moet `nodejs` installeren. Restpunt: de tap-repo op de forge + de
+  GitHub-spiegel + beide secrets zijn nog handmatig te zetten (zie `docs/BUILD.md`,
+  "Homebrew cask"); tot die tijd slaat de job elke release netjes groen over.
 - **Homebrew-cask voor macOS, automatisch bijgewerkt bij release (#1227).**
   Met dank aan **Reinoud van Leeuwen**, die dit als pull request (#1222)
   aandroeg — een cask-template, een generatiescript en release-bedrading. Op
