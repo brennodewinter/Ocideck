@@ -986,6 +986,23 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **`make bump-scanner-pins` + automatische scanner-bump in de release (#1161).**
+  De secrets-scan draait op een voorgebakken image waarvan de **tag** de drie
+  scanner-versies is (`ocideck-scans:gl…-th…-sg…`), dus gitleaks/trufflehog/semgrep
+  bijwerken was geen versienummer maar een dans over vier plekken (manifest,
+  `*_VERSION`-env per workflow, de image-tag, plus het image opnieuw publiceren).
+  `scripts/bump_scanner_pins.sh` (`make bump-scanner-pins`) zet ze nu in één stap
+  gelijk: het leunt op `check_pinned_versions.dart` voor "wat is de laatste"
+  (één bron voor die vraag) en werkt met een gerichte `sed`/`jq` het manifest, elke
+  workflow-env én de scans-image-tag bij — idempotent (no-op als alles actueel is)
+  en met een minimale, opmaak-behoudende diff. Het publiceert het image bewust
+  níet zelf; het drukt de vervolgstap af. `scripts/release_auto.sh` roept dit nu
+  aan het begin van fase 1 aan, zodat een release niet meer hard stopt op
+  advisory scanner-drift (catalogus-drift stopt wél nog): bumpt hij iets, dan
+  committeert het script dat als eigen commit en publiceert het in fase 2 éérst
+  een nieuw scans-image (`ci-image-scans`-dispatch op de release-branch) vóór de
+  PR-scan draait. Een nieuwere scanner kan nieuwe bevindingen opleveren — dan valt
+  de poort en stopt de keten netjes. Gedocumenteerd in `docs/BUILD.md`.
 - **De Homebrew-cask-job faalde bij de eerste echte release (v0.3.1) — nu
   gerepareerd én robuust (#1227).** De job draait op een kale `ubuntu:24.04` en
   gebruikt `actions/checkout@v4`, een Node-actie; die image heeft geen Node aan

@@ -565,14 +565,26 @@ and fed to `minisign` via `expect`; the macOS notarisation leans on this Mac's
 keychain items and asks for nothing.
 
 The order is the three phases in one go: **Phase 1 (local)** an *outdatedness
-gate* (`make catalogs-outdated` and `make check-pins` — a newer upstream catalog
-or a behind CI pin stops the release with a message so you update first, rather
-than bumping silently mid-release), the four-place version bump, `make sbom`,
+gate* over the bundled reference data (`make catalogs-outdated` — a newer upstream
+catalog stops the release with a message, because refreshing it changes what a
+report points at, a deliberate step); then it always runs `make bump-scanner-pins`
+(idempotent) so the CI scanners (gitleaks/trufflehog/semgrep) ride to their latest
+upstream automatically instead of blocking a release — a bump, if any, becomes its
+own commit on the release branch; then the four-place version bump, `make sbom`,
 `make check-release`, `make build-release`, `make notarize-macos`, seal
-verification and the `/Applications` swap; **Phase 2** branch → PR → wait for the
-gate → merge → tag → push to origin **and** mirror → poll the release CI until
-every job is done; **Phase 3** sign `SHA256SUMS` and attach `SHA256SUMS.minisig`,
-watch the website-downloads job, and `make deploy-web`.
+verification and the `/Applications` swap; **Phase 2** branch → *if the scanners
+were bumped, publish a new scans image first* (dispatch `ci-image-scans` on the
+branch and wait, so `scans.yml`'s new image tag exists before the PR scan runs) →
+PR → wait for the gate → merge → tag → push to origin **and** mirror → poll the
+release CI until every job is done; **Phase 3** sign `SHA256SUMS` and attach
+`SHA256SUMS.minisig`, watch the website-downloads job, and `make deploy-web`.
+
+The standalone `make bump-scanner-pins` does the same edit outside a release
+(manifest + every workflow's `*_VERSION` env + the pre-baked scans image tag, in
+sync); `DRY_RUN=1` shows what it would change. It does **not** publish the image
+or commit — dispatch `ci-image-scans` (or `make ci-image-scans-publish`) and open
+a PR yourself, exactly as `release_auto.sh` does inside a release. A newer scanner
+can surface new findings, so the scan gate may still turn red and need addressing.
 
 Fail-safe: `set -Eeuo pipefail` plus an `ERR` trap name *which* step failed on
 *which* line, and whether the tag was already pushed — before the push nothing

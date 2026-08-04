@@ -20,9 +20,10 @@
 #
 # De keten (alles na de twee prompts, onbewaakt), volgens #1161:
 #   FASE 1 (lokaal, alles móét groen vóór de tag)
-#     verouderingsgate → bump (pubspec+kOciDeckVersion+CHANGELOG) → make sbom
-#     → make check-release → make build-release → make notarize-macos → zegel
-#       verifiëren → de nieuwe .app in /Applications zetten
+#     verouderingsgate (referentiedata) → scanner-pins bumpen (idempotent)
+#     → bump (pubspec+kOciDeckVersion+CHANGELOG) → make sbom → make check-release
+#     → make build-release → make notarize-macos → zegel verifiëren → de nieuwe
+#       .app in /Applications zetten
 #   FASE 2 (naar de CI-straat + bewaken)
 #     branch+PR → poort groen → merge → tag → push origin+mirror → release-CI
 #       eens per ~minuut volgen tot alle jobs klaar zijn
@@ -223,9 +224,15 @@ generate_changelog_section() {
 # (make refresh-catalogs / de pins) en draait opnieuw, i.p.v. het stil mee te
 # bumpen tijdens een release. `deps-outdated` (pub) blijft adviserend: een
 # dependency-bump is een aparte afweging, geen release-blokker.
+# De verouderingsgate is nu ALLEEN de referentiedata (WSTG/MASTG/MASWE/CWE …): die
+# hard stoppen is terecht, want `make refresh-catalogs` verandert waar een rapport
+# naar verwijst — een bewuste stap, geen automaat. De scanner-CI-pins
+# (gitleaks/trufflehog/semgrep) worden NIET meer hier hard gestopt: die werkt
+# fase 1 automatisch bij met `make bump-scanner-pins` (zie hieronder). Zo blokkeert
+# een advisory scanner-drift geen release; catalogus-drift wel.
 outdated_gate() {
   STEP="verouderingsgate"
-  section "Verouderingsgate"
+  section "Verouderingsgate (referentiedata)"
   local co
   co="$(make catalogs-outdated 2>&1 || true)"
   if ! printf '%s' "$co" | grep -q "Reference data OK."; then
@@ -233,12 +240,7 @@ outdated_gate() {
     die "referentiedata niet actueel — werk bij met 'make refresh-catalogs' (+ de versies in lib/services/reference_standards.dart) en draai opnieuw."
   fi
   log "Referentiedata actueel."
-  if ! make check-pins >/tmp/release_auto_pins.$$ 2>&1; then
-    sed 's/^/   /' /tmp/release_auto_pins.$$; rm -f /tmp/release_auto_pins.$$
-    die "een CI-pin loopt achter — bump hem in elke workflow + .github/pinned-ci-versions.json en draai opnieuw."
-  fi
-  rm -f /tmp/release_auto_pins.$$
-  log "CI-pins actueel."
+  log "Scanner-pins worden in fase 1 automatisch bijgewerkt (bump-scanner-pins)."
   log "Dependencies (adviserend):"
   make deps-outdated 2>&1 | grep -iE "upgradable|outdated|newer|→" | head -8 | sed 's/^/     /' || true
 }
@@ -258,9 +260,10 @@ show_plan() {
   cat <<STEPS
 
   Keten (onbewaakt na het wachtwoord):
-    FASE 1  verouderingsgate → bump → make sbom → make check-release
-            → make build-release → make notarize-macos → zegel → /Applications
-    FASE 2  PR → poort groen → merge → tag $TAG → push origin+mirror → CI volgen
+    FASE 1  verouderingsgate → scanner-pins bumpen → bump → make sbom
+            → make check-release → build + notarize → zegel → /Applications
+    FASE 2  [scans-image publiceren als pins gebumpt] → PR → poort groen → merge
+            → tag $TAG → push origin+mirror → CI volgen
     FASE 3  SHA256SUMS tekenen + aanhangen → website-job bewaken → make deploy-web
 STEPS
   if ! changelog_has_section; then
@@ -305,6 +308,25 @@ section "Fase 1 — voorbereiden"
 git fetch origin --quiet
 git checkout -B "$BRANCH" origin/main --quiet
 log "Branch $BRANCH van origin/main."
+
+# Aan het begin van élke release: scanner-pins naar de laatste upstream. Idempotent
+# — verandert niets als ze al kloppen. Wijzigt hij wel iets, dan committen we dat
+# als eigen commit op de release-branch; fase 2 publiceert dan éérst een nieuw
+# scans-image vóór de PR-scan draait. Een nieuwere scanner kan nieuwe bevindingen
+# vinden — dan valt `make check-release` of de PR-scan, en stopt de keten netjes.
+STEP="scanner-pins bumpen"
+PINS_BUMPED=0
+make bump-scanner-pins
+if ! git diff --quiet; then
+  PINS_BUMPED=1
+  git add .github/pinned-ci-versions.json .forgejo/workflows/scans.yml .github/workflows/ci.yml
+  git commit --quiet -m "ci: scanner-pins bijwerken naar de laatste upstream
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
+  log "Scanner-pins gebumpt en gecommit; nieuw scans-image volgt in fase 2."
+else
+  log "Scanner-pins waren al actueel."
+fi
 
 python3 - "$NEW_VERSION" "$NEW_BUILD" <<'PY'
 import re, sys
@@ -383,6 +405,32 @@ git commit --quiet -m "chore(release): versie $NEW_VERSION
 Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
 git push --quiet -u origin "$BRANCH"
 HEAD_SHA="$(git rev-parse HEAD)"
+
+# Zijn de scanner-pins gebumpt, dan wijst scans.yml naar een nieuw image-tag dat
+# nog niet bestaat. Publiceer dat EERST (ci-image-scans dispatchen op deze branch,
+# die de nieuwe manifest-versies leest) vóór we de PR openen — anders vindt de
+# PR-scan het image niet. Zie [[scans-image-eerst-publiceren]].
+if [ "$PINS_BUMPED" -eq 1 ]; then
+  STEP="scans-image publiceren"
+  section "Fase 2 — nieuw scans-image publiceren (scanner-pins gebumpt)"
+  api POST "/actions/workflows/ci-image-scans.yml/dispatches" -H 'Content-Type: application/json' \
+    -d "$(jq -n --arg r "$BRANCH" '{ref:$r}')" -o /dev/null
+  log "ci-image-scans gedispatcht op $BRANCH — wachten tot het scans-image gepubliceerd is…"
+  sleep 10
+  ist=""
+  for _ in $(seq 1 60); do
+    ist="$(api GET '/actions/tasks?limit=20' \
+      | jq -r --arg ref "$BRANCH" '[(.workflow_runs // .tasks // [])[]
+          | select(.head_branch==$ref and .name=="build-publish") | .status][0] // "onbekend"')"
+    case "$ist" in
+      success) break ;;
+      failure|cancelled) die "ci-image-scans faalde op $BRANCH — het nieuwe scans-image is niet gepubliceerd; de PR-scan zou het niet vinden." ;;
+      *) sleep 20 ;;
+    esac
+  done
+  [ "$ist" = "success" ] || die "scans-image werd niet op tijd gepubliceerd — controleer de ci-image-scans-run."
+  log "Nieuw scans-image gepubliceerd."
+fi
 
 PR_NUMBER="$(api POST /pulls -H 'Content-Type: application/json' \
   -d "$(jq -n --arg b main --arg h "$BRANCH" --arg t "chore(release): versie $NEW_VERSION" \
