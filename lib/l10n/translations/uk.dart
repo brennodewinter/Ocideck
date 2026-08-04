@@ -1788,6 +1788,17 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Springt naar': 'Переходить до',
+  'Geen sprong': 'Без переходу',
+  'Blok toevoegen': 'Додати блок',
+  'Blok verwijderen': 'Видалити блок',
+  'Geen afbeelding': 'Немає зображення',
+  'Afbeelding verwijderen': 'Видалити зображення',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Ще немає блоків. Додайте блок вибору.',
+  'Keuzemenu': 'Меню вибору',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Меню вибору: кожен блок під час натискання переходить до іншого слайда. Введіть підпис для кожного блоку, виберіть цільовий слайд і за потреби зображення. Блок без цілі — це звичайний текст.',
   'Hierna': 'Далі',
   'Volgende dia': 'Наступний слайд',
   'Sprong': 'Перехід',

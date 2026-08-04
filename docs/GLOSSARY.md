@@ -13,10 +13,10 @@ no application backend; all processing is local.
 **Deck** — a complete presentation: metadata, an ordered list of slides, a theme
 profile, and a TLP classification. Immutable model (`lib/models/deck.dart`).
 
-**Slide** — one immutable, strongly-typed slide. Its `SlideType` (30 values)
+**Slide** — one immutable, strongly-typed slide. Its `SlideType` (31 values)
 selects the layout: `title`, `section`, `bullets`, `twoBullets`, `bulletsImage`,
 `twoImages`, `image`, `video`, `quote`, `table`, `freeMarkdown`, `code`, `chart`,
-`cockpit`, `question`, `timeline`, `scorecard`, the pentest layouts (`assets`,
+`cockpit`, `question`, `timeline`, `scorecard`, `menu` (non-linear choice menu, #1162), the pentest layouts (`assets`,
 `discoveries`, `finding`, `findingsSummary`, `checklist`, `scopeMatrix`,
 `signOff`), the Procesverbetering layouts (`matrix`, `canvas`, `tree`,
 `flow`, `phaseGate`), and the Managementsysteem layout (`controlStatus`). The seven

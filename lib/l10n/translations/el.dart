@@ -1798,6 +1798,17 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Springt naar': 'Μεταβαίνει σε',
+  'Geen sprong': 'Χωρίς μετάβαση',
+  'Blok toevoegen': 'Προσθήκη μπλοκ',
+  'Blok verwijderen': 'Αφαίρεση μπλοκ',
+  'Geen afbeelding': 'Χωρίς εικόνα',
+  'Afbeelding verwijderen': 'Αφαίρεση εικόνας',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Δεν υπάρχουν ακόμη μπλοκ. Προσθέστε ένα μπλοκ επιλογής.',
+  'Keuzemenu': 'Μενού επιλογών',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Ένα μενού επιλογών: κάθε μπλοκ μεταβαίνει σε άλλη διαφάνεια όταν το πατήσετε. Πληκτρολογήστε μια ετικέτα για κάθε μπλοκ, επιλέξτε τη διαφάνεια προορισμού και προαιρετικά μια εικόνα. Ένα μπλοκ χωρίς προορισμό είναι απλό κείμενο.',
   'Hierna': 'Έπειτα',
   'Volgende dia': 'Επόμενη διαφάνεια',
   'Sprong': 'Άλμα',

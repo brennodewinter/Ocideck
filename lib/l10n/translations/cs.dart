@@ -1774,6 +1774,17 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Springt naar': 'Přejde na',
+  'Geen sprong': 'Bez skoku',
+  'Blok toevoegen': 'Přidat blok',
+  'Blok verwijderen': 'Odebrat blok',
+  'Geen afbeelding': 'Bez obrázku',
+  'Afbeelding verwijderen': 'Odebrat obrázek',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Zatím žádné bloky. Přidejte blok výběru.',
+  'Keuzemenu': 'Nabídka voleb',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Nabídka voleb: každý blok po kliknutí přejde na jiný snímek. Pro každý blok zadejte popisek, vyberte cílový snímek a případně obrázek. Blok bez cíle je běžný text.',
   'Hierna': 'Poté',
   'Volgende dia': 'Další snímek',
   'Sprong': 'Skok',

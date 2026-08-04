@@ -1777,6 +1777,17 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Springt naar': 'Skače na',
+  'Geen sprong': 'Bez skoka',
+  'Blok toevoegen': 'Dodaj blok',
+  'Blok verwijderen': 'Ukloni blok',
+  'Geen afbeelding': 'Bez slike',
+  'Afbeelding verwijderen': 'Ukloni sliku',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Još nema blokova. Dodajte blok izbora.',
+  'Keuzemenu': 'Izbornik odabira',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Izbornik odabira: svaki blok klikom prelazi na drugi slajd. Za svaki blok upišite oznaku, odaberite odredišni slajd i po želji sliku. Blok bez odredišta je obični tekst.',
   'Hierna': 'Zatim',
   'Volgende dia': 'Sljedeći slajd',
   'Sprong': 'Skok',

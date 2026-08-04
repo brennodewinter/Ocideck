@@ -1775,6 +1775,17 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Springt naar': 'Ugrás ide',
+  'Geen sprong': 'Nincs ugrás',
+  'Blok toevoegen': 'Blokk hozzáadása',
+  'Blok verwijderen': 'Blokk eltávolítása',
+  'Geen afbeelding': 'Nincs kép',
+  'Afbeelding verwijderen': 'Kép eltávolítása',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Még nincsenek blokkok. Adjon hozzá egy választóblokkot.',
+  'Keuzemenu': 'Választómenü',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Választómenü: minden blokk kattintásra egy másik diára ugrik. Adjon meg minden blokkhoz egy címkét, válassza ki a céldiát és tetszés szerint egy képet. A cél nélküli blokk egyszerű szöveg.',
   'Hierna': 'Ezután',
   'Volgende dia': 'Következő dia',
   'Sprong': 'Ugrás',

@@ -22,6 +22,7 @@ import '../services/finding_numbering.dart';
 import '../models/chart.dart';
 import '../services/management_system_artefacts.dart';
 import '../services/management_system_progress.dart';
+import '../services/menu_blocks.dart';
 import '../services/scope_coverage.dart';
 import '../services/slide_anchors.dart';
 import '../services/file_service.dart';

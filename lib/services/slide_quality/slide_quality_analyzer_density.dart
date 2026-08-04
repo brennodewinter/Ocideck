@@ -120,6 +120,9 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
       case SlideType.scopeMatrix:
       case SlideType.controlStatus:
       case SlideType.signOff:
+      // Een keuze-menu is een raster van blokken, geen doorlopende tekst; de
+      // dichtheids-/fit-scale-heuristieken van bullets slaan er niet op.
+      case SlideType.menu:
         break;
     }
   }

@@ -730,6 +730,17 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Springt naar': 'Saute vers',
+  'Geen sprong': 'Aucun saut',
+  'Blok toevoegen': 'Ajouter un bloc',
+  'Blok verwijderen': 'Supprimer le bloc',
+  'Geen afbeelding': 'Aucune image',
+  'Afbeelding verwijderen': 'Supprimer l\'image',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Aucun bloc pour l\'instant. Ajoutez un bloc de choix.',
+  'Keuzemenu': 'Menu de choix',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Un menu de choix : chaque bloc passe à une autre diapositive lorsqu\'on clique dessus. Saisissez une étiquette par bloc, choisissez la diapositive cible et éventuellement une image. Un bloc sans cible est du texte ordinaire.',
   'Hierna': 'Ensuite',
   'Volgende dia': 'Diapositive suivante',
   'Sprong': 'Saut',

@@ -44,6 +44,11 @@ enum SlideType {
   question,
   timeline,
   scorecard,
+  // Keuze-menu (#1162): blokken die elk naar een andere dia in het deck springen,
+  // als raster getoond. De blokken leven als gewone bullets (`[label](#anker)` +
+  // optioneel `![](mem:…)`), zodat een menu een leesbare linklijst blijft in elke
+  // Markdown-lezer; zie `menu_blocks.dart` en het formaatontwerp bij #1162.
+  menu,
   assets,
   discoveries,
   // Informatieveiligheid-module (pentestrapportage, PENTEST_MIAUW §4). Elk type
@@ -210,6 +215,10 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     marpClass: 'scorecard',
     backedByTable: true,
   ),
+  // Keuze-menu (#1162). De blokken staan in [Slide.bullets] als gewone
+  // link-bullets, dus geen tabel-opslag en geen doorlopende bullettekst
+  // (`bulletColumns.none`): een menu splits of pagineert niet.
+  SlideType.menu: SlideTypeMeta(label: 'Keuzemenu', marpClass: 'menu'),
   // Informatieveiligheid-module — categorie [SlideCategory.informationSecurity],
   // waardoor de kiezer automatisch een tabblad toont (P0-PICK). marpClass-tokens
   // volgen PENTEST_MIAUW §4.

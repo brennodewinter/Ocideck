@@ -1793,6 +1793,17 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Springt naar': 'Преминава към',
+  'Geen sprong': 'Без преход',
+  'Blok toevoegen': 'Добавяне на блок',
+  'Blok verwijderen': 'Премахване на блок',
+  'Geen afbeelding': 'Няма изображение',
+  'Afbeelding verwijderen': 'Премахване на изображението',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Все още няма блокове. Добавете блок за избор.',
+  'Keuzemenu': 'Меню за избор',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Меню за избор: всеки блок при щракване преминава към друг слайд. Въведете етикет за всеки блок, изберете целевия слайд и по желание изображение. Блок без цел е обикновен текст.',
   'Hierna': 'След това',
   'Volgende dia': 'Следващ слайд',
   'Sprong': 'Скок',

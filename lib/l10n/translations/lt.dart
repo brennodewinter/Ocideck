@@ -1778,6 +1778,17 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Springt naar': 'Pereina į',
+  'Geen sprong': 'Be perėjimo',
+  'Blok toevoegen': 'Pridėti bloką',
+  'Blok verwijderen': 'Pašalinti bloką',
+  'Geen afbeelding': 'Nėra paveikslėlio',
+  'Afbeelding verwijderen': 'Pašalinti paveikslėlį',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Kol kas nėra blokų. Pridėkite pasirinkimo bloką.',
+  'Keuzemenu': 'Pasirinkimo meniu',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Pasirinkimo meniu: kiekvienas blokas spustelėjus perkelia į kitą skaidrę. Kiekvienam blokui įveskite etiketę, pasirinkite paskirties skaidrę ir, jei norite, paveikslėlį. Blokas be paskirties yra paprastas tekstas.',
   'Hierna': 'Toliau',
   'Volgende dia': 'Kita skaidrė',
   'Sprong': 'Šuolis',

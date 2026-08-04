@@ -1774,6 +1774,17 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Springt naar': 'Springt zue',
+  'Geen sprong': 'Kei Sprung',
+  'Blok toevoegen': 'Block hinzuefüege',
+  'Blok verwijderen': 'Block entfärne',
+  'Geen afbeelding': 'Kes Bild',
+  'Afbeelding verwijderen': 'Bild entfärne',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'No kei Blöck. Füeg en Uswahlblock zue.',
+  'Keuzemenu': 'Uswahlmenü',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Es Uswahlmenü: jede Block springt bim Aaklicke uf e anderi Folie. Gib pro Block e Beschriftig ii, wähl d Zielfolie und optional es Bild. E Block ohni Ziel isch eifache Text.',
   'Hierna': 'Denn',
   'Volgende dia': 'Nächschti Folie',
   'Sprong': 'Sprung',

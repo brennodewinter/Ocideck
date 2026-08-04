@@ -640,6 +640,8 @@ class SlideTypePreviewPainter extends CustomPainter {
       case SlideType.bullets:
         _bar(canvas, 14, 12, 84, 9, _ink);
         _bullets(canvas, 14, 34, 110, 4);
+      case SlideType.menu:
+        _paintMenuWireframe(canvas);
       case SlideType.twoBullets:
         _bar(canvas, 14, 12, 84, 9, _ink);
         _bullets(canvas, 14, 32, 56, 3);
@@ -881,6 +883,21 @@ class SlideTypePreviewPainter extends CustomPainter {
     }
   }
 
+  /// Wireframe voor het keuze-menu (#1162): titel plus een 2×2 raster van
+  /// keuzeblokken met elk een labelbalkje. Losgetrokken uit [paint] om die
+  /// binnen de lengte-ratchet te houden.
+  void _paintMenuWireframe(Canvas canvas) {
+    _bar(canvas, 14, 10, 70, 8, _ink);
+    for (var r = 0; r < 2; r++) {
+      for (var c = 0; c < 2; c++) {
+        final x = 12.0 + c * 74;
+        final y = 26.0 + r * 30;
+        _bar(canvas, x, y, 66, 24, _fill, radius: 4);
+        _bar(canvas, x + 8, y + 9, 40, 6, _soft);
+      }
+    }
+  }
+
   /// Wireframes for the Informatieveiligheid slide types (P1-S), split out of
   /// [paint] so that method stays within the length ratchet. Only called for
   /// the five security types; the `default` keeps the switch total.
@@ -967,6 +984,7 @@ class SlideTypePreviewPainter extends CustomPainter {
       case SlideType.title ||
           SlideType.section ||
           SlideType.bullets ||
+          SlideType.menu ||
           SlideType.twoBullets ||
           SlideType.bulletsImage ||
           SlideType.twoImages ||

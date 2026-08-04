@@ -1800,6 +1800,17 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Springt naar': 'Salta para',
+  'Geen sprong': 'Sem salto',
+  'Blok toevoegen': 'Adicionar bloco',
+  'Blok verwijderen': 'Remover bloco',
+  'Geen afbeelding': 'Sem imagem',
+  'Afbeelding verwijderen': 'Remover imagem',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Ainda não há blocos. Adicione um bloco de escolha.',
+  'Keuzemenu': 'Menu de opções',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Um menu de opções: cada bloco salta para outro slide quando é clicado. Digite um rótulo para cada bloco, escolha o slide de destino e, opcionalmente, uma imagem. Um bloco sem destino é texto simples.',
   'Hierna': 'Depois',
   'Volgende dia': 'Diapositivo seguinte',
   'Sprong': 'Salto',

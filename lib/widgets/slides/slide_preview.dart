@@ -48,6 +48,7 @@ import '../../models/discoveries_spec.dart';
 import '../../models/scorecard_spec.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../services/menu_blocks.dart';
 import '../../models/timeline.dart';
 import '../../models/video_source.dart';
 import '../../theme/app_theme.dart';
@@ -94,6 +95,7 @@ import 'image_zoom_dialog.dart';
 part 'previews/preview_scaffold.dart';
 part 'previews/text_previews.dart';
 part 'previews/bullets_previews.dart';
+part 'previews/menu_preview.dart';
 part 'previews/bullets_image_preview.dart';
 part 'previews/checklist_previews.dart';
 part 'previews/table_preview.dart';
@@ -728,6 +730,14 @@ class SlidePreviewWidget extends StatelessWidget {
 
   Widget _buildContent(Slide slide, double w) {
     switch (slide.type) {
+      case SlideType.menu:
+        return _MenuPreview(
+          slide: slide,
+          w: w,
+          projectPath: projectPath,
+          font: fontFamily,
+          profile: themeProfile,
+        );
       case SlideType.title:
         return _TitlePreview(
           slide: slide,
@@ -1030,6 +1040,7 @@ double _contentLeftInset(Slide slide, double w) {
     // zijn footer scheef onder de inhoud komt te staan.
     case SlideType.title ||
         SlideType.section ||
+        SlideType.menu ||
         SlideType.twoImages ||
         SlideType.image ||
         SlideType.video ||

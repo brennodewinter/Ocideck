@@ -1770,6 +1770,17 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Springt naar': 'Hoppar till',
+  'Geen sprong': 'Inget hopp',
+  'Blok toevoegen': 'Lägg till block',
+  'Blok verwijderen': 'Ta bort block',
+  'Geen afbeelding': 'Ingen bild',
+  'Afbeelding verwijderen': 'Ta bort bild',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Inga block ännu. Lägg till ett valblock.',
+  'Keuzemenu': 'Valmeny',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'En valmeny: varje block hoppar till en annan diabild när man klickar på det. Skriv en etikett för varje block, välj måldiabilden och eventuellt en bild. Ett block utan mål är vanlig text.',
   'Hierna': 'Därefter',
   'Volgende dia': 'Nästa bild',
   'Sprong': 'Hopp',

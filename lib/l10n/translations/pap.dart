@@ -730,6 +730,17 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Springt naar': 'Salta pa',
+  'Geen sprong': 'Sin salto',
+  'Blok toevoegen': 'Agregá blòk',
+  'Blok verwijderen': 'Kita blòk',
+  'Geen afbeelding': 'Sin imagen',
+  'Afbeelding verwijderen': 'Kita imagen',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Ainda no tin blòk. Agregá un blòk di skohe.',
+  'Keuzemenu': 'Menú di skoho',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Un menú di skoho: kada blòki ta bula pa un otro slide ora bo klik riba dje. Skirbi un label pa kada blòki, skohe e slide di destino i opshonalmente un imagen. Un blòki sin destino ta teksto normal.',
   'Hierna': 'Despues',
   'Volgende dia': 'Siguiente slide',
   'Sprong': 'Salto',

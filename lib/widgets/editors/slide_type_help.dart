@@ -25,6 +25,10 @@ String slideTypeHelpText(AppLocalizations l10n, SlideType type) {
       return l10n.d(
         'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.',
       );
+    case SlideType.menu:
+      return l10n.d(
+        'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.',
+      );
     case SlideType.twoBullets:
       return l10n.d(
         'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.',

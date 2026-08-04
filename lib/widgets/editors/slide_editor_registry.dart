@@ -16,6 +16,7 @@ import 'finding_editor.dart';
 import 'findings_summary_editor.dart';
 import 'free_markdown_editor.dart';
 import 'image_slide_editor.dart';
+import 'menu_editor.dart';
 import 'question_editor.dart';
 import 'quote_editor.dart';
 import 'control_status_editor.dart';
@@ -127,6 +128,13 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         previousSlideIsNumbered: c.previousSlideIsNumbered,
         canContinueSplit: c.canContinueSplit,
         nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.menu: (c) => MenuEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        imageService: c.imageService,
+        searchPaths: c.searchPaths,
       ),
       SlideType.twoBullets: (c) => TwoBulletsEditor(
         key: c._key,

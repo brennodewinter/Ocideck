@@ -1778,6 +1778,17 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Springt naar': 'Skočí na',
+  'Geen sprong': 'Bez skoku',
+  'Blok toevoegen': 'Pridať blok',
+  'Blok verwijderen': 'Odstrániť blok',
+  'Geen afbeelding': 'Bez obrázka',
+  'Afbeelding verwijderen': 'Odstrániť obrázok',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Zatiaľ žiadne bloky. Pridajte blok výberu.',
+  'Keuzemenu': 'Ponuka volieb',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Ponuka volieb: každý blok po kliknutí prejde na iný snímok. Pre každý blok zadajte označenie, vyberte cieľový snímok a prípadne obrázok. Blok bez cieľa je bežný text.',
   'Hierna': 'Potom',
   'Volgende dia': 'Ďalšia snímka',
   'Sprong': 'Skok',

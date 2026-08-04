@@ -1783,6 +1783,17 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Springt naar': 'Przechodzi do',
+  'Geen sprong': 'Bez skoku',
+  'Blok toevoegen': 'Dodaj blok',
+  'Blok verwijderen': 'Usuń blok',
+  'Geen afbeelding': 'Brak obrazu',
+  'Afbeelding verwijderen': 'Usuń obraz',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Brak bloków. Dodaj blok wyboru.',
+  'Keuzemenu': 'Menu wyboru',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Menu wyboru: każdy blok po kliknięciu przechodzi do innego slajdu. Wpisz etykietę dla każdego bloku, wybierz slajd docelowy i opcjonalnie obraz. Blok bez celu jest zwykłym tekstem.',
   'Hierna': 'Następnie',
   'Volgende dia': 'Następny slajd',
   'Sprong': 'Skok',

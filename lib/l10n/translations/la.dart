@@ -1787,6 +1787,17 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Springt naar': 'Salit ad',
+  'Geen sprong': 'Nullus saltus',
+  'Blok toevoegen': 'Adde partem',
+  'Blok verwijderen': 'Tolle partem',
+  'Geen afbeelding': 'Nulla imago',
+  'Afbeelding verwijderen': 'Tolle imaginem',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Nullae adhuc partes. Adde partem optionis.',
+  'Keuzemenu': 'Menu optionum',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Menu optionum: quisque quadrus, cum premitur, ad aliam paginam salit. Singulis quadris titulum inscribe, paginam destinatam et, si vis, imaginem elige. Quadrus sine destinatione textus simplex est.',
   'Hierna': 'Deinde',
   'Volgende dia': 'Pagina proxima',
   'Sprong': 'Saltus',

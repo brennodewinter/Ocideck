@@ -1771,6 +1771,17 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Springt naar': 'Melompat ke',
+  'Geen sprong': 'Tanpa lompatan',
+  'Blok toevoegen': 'Tambah blok',
+  'Blok verwijderen': 'Hapus blok',
+  'Geen afbeelding': 'Tanpa gambar',
+  'Afbeelding verwijderen': 'Hapus gambar',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Belum ada blok. Tambahkan blok pilihan.',
+  'Keuzemenu': 'Menu pilihan',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Menu pilihan: setiap blok melompat ke slide lain saat diklik. Ketik label untuk setiap blok, pilih slide tujuan dan gambar jika diperlukan. Blok tanpa tujuan adalah teks biasa.',
   'Hierna': 'Setelah ini',
   'Volgende dia': 'Slide berikutnya',
   'Sprong': 'Lompat',
