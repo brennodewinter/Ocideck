@@ -156,17 +156,20 @@ Future<void> _openWithSearch(BuildContext context, WidgetRef ref) async {
   final openResult = await ref
       .read(tabsProvider.notifier)
       .openFileByPath(result.path, selectIndex: result.slideIndex);
-  // A loose file browsed from disk that isn't a presentation (or is otherwise
-  // unreadable) is refused — tell the user instead of doing nothing silently,
-  // en met de reden erbij als het openpad die kende. Bleek het een PowerPoint/
-  // Impress/Keynote-bestand, dan biedt de melding meteen de importroute.
+  // Wacht op de geladen module-stand vóór de melding gekozen wordt: vlak na de
+  // start leest de reveal anders nog de ladende default (#1209).
+  final importModuleAvailable = await importModuleRevealedWhenReady(ref);
+  if (!context.mounted) return;
+  // Een los gekozen bestand dat geen presentatie is (of onleesbaar) wordt
+  // geweigerd — meld het, met de importroute als het een PowerPoint/Impress/
+  // Keynote-bestand bleek.
   _reportOpenFailure(
     messenger,
     l10n,
     openResult,
     reason: ref.read(openFailureProvider),
     sourceName: result.path,
-    importModuleAvailable: ref.read(importModuleRevealProvider),
+    importModuleAvailable: importModuleAvailable,
     // Pad al bekend: importeer zonder de bestandskiezer opnieuw te openen.
     onImport: () async {
       final bytes = await File(result.path).readAsBytes();
@@ -195,15 +198,17 @@ Future<void> _openWithBytesPicker(BuildContext context, WidgetRef ref) async {
   final openResult = await ref
       .read(tabsProvider.notifier)
       .openDeckFromBytes(picked.bytes, picked.name);
-  // Op web zijn de bytes al binnen: een presentatie kan direct de import in,
-  // zonder de bestandskiezer opnieuw te openen.
+  // Zelfde laadwacht als het desktop-openpad (#1209) vóór de melding valt.
+  final importModuleAvailable = await importModuleRevealedWhenReady(ref);
+  if (!context.mounted) return;
+  // Op web zijn de bytes al binnen: een presentatie kan direct de import in.
   _reportOpenFailure(
     messenger,
     l10n,
     openResult,
     reason: ref.read(openFailureProvider),
     sourceName: picked.name,
-    importModuleAvailable: ref.read(importModuleRevealProvider),
+    importModuleAvailable: importModuleAvailable,
     onImport: () => importPresentation(
       context,
       ref,

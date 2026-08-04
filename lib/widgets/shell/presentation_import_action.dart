@@ -317,7 +317,11 @@ Future<void> importDroppedPresentations(
   List<PickedPresentation> presentations,
 ) async {
   if (presentations.isEmpty) return;
-  if (ref.read(importModuleRevealProvider)) {
+  // Wacht op de geladen module-stand vóór de keuze: een sleep vlak na de start
+  // mag niet op de ladende default vallen en de import stil weigeren (#1209).
+  final revealed = await importModuleRevealedWhenReady(ref);
+  if (!context.mounted) return;
+  if (revealed) {
     await importPresentation(context, ref, filesOverride: presentations);
     return;
   }
