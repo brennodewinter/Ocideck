@@ -201,42 +201,72 @@ class _SessionExportDialog extends StatelessWidget {
 }
 
 /// Het rode schildje dat waarschuwt voor mogelijke persoonsgegevens in de
-/// session-data. Klikbaar: toont de bevindingen in een detail-dialoog.
-class _PrivacyShieldBadge extends StatelessWidget {
+/// session-data. Klikbaar: toont de bevindingen in een detail-dialoog. Het
+/// schildje knippert (opacity pulseert tussen 0.4 en 1.0, ~1.2s cyclus) om de
+/// aandacht te trekken — een stille badge in een drukke dialoog valt weg.
+class _PrivacyShieldBadge extends StatefulWidget {
   final List<PrivacyFinding> findings;
 
   const _PrivacyShieldBadge({required this.findings});
 
   @override
+  State<_PrivacyShieldBadge> createState() => _PrivacyShieldBadgeState();
+}
+
+class _PrivacyShieldBadgeState extends State<_PrivacyShieldBadge>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _pulse;
+  late final Animation<double> _opacity;
+
+  @override
+  void initState() {
+    super.initState();
+    _pulse = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..repeat(reverse: true);
+    _opacity = Tween<double>(
+      begin: 0.4,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _pulse, curve: Curves.easeInOut));
+  }
+
+  @override
+  void dispose() {
+    _pulse.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final errorColor = Theme.of(context).colorScheme.error;
     return InkWell(
-      onTap: () => _showPrivacyFindingsDialog(context, findings),
+      onTap: () => _showPrivacyFindingsDialog(context, widget.findings),
       borderRadius: BorderRadius.circular(12),
       child: Tooltip(
         message: l10n
             .d('Let op: er staan mogelijk persoonsgegevens in de sessie-data.')
-            .replaceAll('{aantal}', '${findings.length}'),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.shield,
-                size: 16,
-                color: Theme.of(context).colorScheme.error,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                '${findings.length}',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).colorScheme.error,
+            .replaceAll('{aantal}', '${widget.findings.length}'),
+        child: FadeTransition(
+          opacity: _opacity,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.shield, size: 16, color: errorColor),
+                const SizedBox(width: 4),
+                Text(
+                  '${widget.findings.length}',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: errorColor,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
