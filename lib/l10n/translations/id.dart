@@ -1771,6 +1771,18 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Dag': 'Hari',
+  'Week': 'Minggu',
+  'Maand': 'Bulan',
+  'Tijdschaal': 'Skala waktu',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Granularitas sumbu diagram Gantt. “Auto” memilih berdasarkan rentang tanggal tugas.',
+  'Sectiedelingen': 'Pembagian bagian',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Perlakukan nama tugas yang dimulai dengan “## ” sebagai judul bagian dalam diagram.',
+  'Secties': 'Bagian',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Jadwal proyek sebagai diagram Gantt. Isi tabel dengan tugas, mulai, durasi, progres, dan dependensi; diagram diturunkan. Nama tugas yang dimulai dengan “Milestone:” adalah tonggak dengan durasi nol.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Perhatian: data sesi mungkin berisi data pribadi.',
   'Privacy-bevindingen in sessie-data': 'Temuan privasi dalam data sesi',

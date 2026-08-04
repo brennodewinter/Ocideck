@@ -1778,6 +1778,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Dag': 'Diena',
+  'Week': 'Savaitė',
+  'Maand': 'Mėnuo',
+  'Tijdschaal': 'Laiko skalė',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Gantt diagramos ašies granuliariškumas. “Auto” renkasi pagal užduočių datų intervalą.',
+  'Sectiedelingen': 'Sekcijų padalijimai',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Traktuokite užduoties pavadinimą, prasidedantį “## ”, kaip sekcijos antraštę diagramoje.',
+  'Secties': 'Sekcijos',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Projekto grafikas kaip Gantt diagrama. Užpildykite lentelę užduotimi, pradžia, trukme, progresu ir priklausomybėmis; diagrama išvedama. Užduoties pavadinimas, prasidedantis “Milestone:”, yra nulinės trukmės etapas.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Dėmesio: seanso duomenyse gali būti asmens duomenų.',
   'Privacy-bevindingen in sessie-data': 'Privatumo radiniai seanso duomenyse',

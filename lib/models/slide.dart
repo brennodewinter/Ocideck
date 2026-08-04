@@ -2,6 +2,7 @@ import 'package:uuid/uuid.dart';
 import '../services/improvement/canvas_spec.dart';
 import '../services/improvement/flow_spec.dart';
 import '../services/improvement/flow_slide.dart';
+import '../services/improvement/gantt_dsl.dart';
 import '../services/improvement/matrix_spec.dart';
 import '../services/improvement/tree_spec.dart';
 import '../services/improvement/tree_slide.dart';
@@ -75,6 +76,10 @@ enum SlideType {
   // implementatiestatus als gewone Markdown-tabel (dus [backedByTable]); de
   // managementreview en verbeteracties leunen op de bestaande `canvas`/`matrix`.
   controlStatus,
+  // Procesverbetering-module: Gantt-diagram (GANTT_SLIDETYPE). Opslag is een
+  // gewone Markdown-tabel (dus [backedByTable]); de render leidt er Mermaid
+  // gantt-DSL uit af via `ganttTableToMermaid` — de DSL wordt nooit opgeslagen.
+  gantt,
 }
 
 /// Broad grouping a [SlideType] belongs to, used by the add-slide picker to
@@ -306,6 +311,15 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     category: SlideCategory.managementsysteem,
     backedByTable: true,
   ),
+  // Procesverbetering-module: Gantt-diagram (GANTT_SLIDETYPE). Opslag is een
+  // gewone Markdown-tabel met vijf vaste kolommen; de render leidt er Mermaid
+  // gantt-DSL uit af. De tabel degradeert leesbaar in plain Marp.
+  SlideType.gantt: SlideTypeMeta(
+    label: 'Gantt',
+    marpClass: 'gantt',
+    category: SlideCategory.procesverbetering,
+    backedByTable: true,
+  ),
 };
 
 /// De registry andersom: `_class`-token → slidetype.
@@ -522,6 +536,14 @@ class Slide {
   /// months later would go on claiming everything is on schedule.
   final bool tableMarkOverdue;
 
+  /// Gantt slides only: de as-granulariteit — `'auto'`, `'day'`, `'week'` of
+  /// `'month'`. Round-trips als `ocideck_gantt_scale`.
+  final String ganttScale;
+
+  /// Gantt slides only: of een rij wiens Taak-cel met `## ` begint uitpakt als
+  /// een Mermaid `section`-kop. Round-trips als `ocideck_gantt_sections`.
+  final bool ganttSections;
+
   /// Optional, non-destructive view limit for data-driven slides (bullets,
   /// tables, charts). The underlying data stays intact; this only drives the
   /// visible projection in renderers and exports.
@@ -671,6 +693,8 @@ class Slide {
     this.tableRows = const [],
     this.tableEditable = false,
     this.tableMarkOverdue = false,
+    this.ganttScale = 'auto',
+    this.ganttSections = false,
     this.viewLimit,
     this.isDetail = false,
     this.timelineLayout = TimelineLayout.auto,
@@ -748,6 +772,8 @@ class Slide {
           // De kop van het startsjabloon plus één lege regel, zodat de matrix
           // meteen invulbaar is in plaats van als leeg raster te openen.
           ? improvementTemplateStarterRows(kDefaultImprovementTemplateId)
+          : type == SlideType.gantt
+          ? ganttStarterRows
           : const [],
       improvementTemplateId: type == SlideType.matrix
           ? kDefaultImprovementTemplateId
@@ -829,6 +855,8 @@ class Slide {
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
       tableEditable: src.tableEditable,
       tableMarkOverdue: src.tableMarkOverdue,
+      ganttScale: src.ganttScale,
+      ganttSections: src.ganttSections,
       viewLimit: src.viewLimit,
       isDetail: src.isDetail,
       timelineLayout: src.timelineLayout,
@@ -896,6 +924,8 @@ class Slide {
     List<List<String>>? tableRows,
     bool? tableEditable,
     bool? tableMarkOverdue,
+    String? ganttScale,
+    bool? ganttSections,
     DisplayWindowSpec? viewLimit,
     bool clearViewLimit = false,
     bool? isDetail,
@@ -970,6 +1000,8 @@ class Slide {
       tableRows: tableRows ?? this.tableRows,
       tableEditable: tableEditable ?? this.tableEditable,
       tableMarkOverdue: tableMarkOverdue ?? this.tableMarkOverdue,
+      ganttScale: ganttScale ?? this.ganttScale,
+      ganttSections: ganttSections ?? this.ganttSections,
       viewLimit: clearViewLimit ? null : (viewLimit ?? this.viewLimit),
       isDetail: isDetail ?? this.isDetail,
       timelineLayout: timelineLayout ?? this.timelineLayout,

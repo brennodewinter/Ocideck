@@ -1774,6 +1774,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Dag': 'Tag',
+  'Week': 'Wuche',
+  'Maand': 'Monet',
+  'Tijdschaal': 'Zeitskala',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'D Achsegranularität vom Gantt-Diagramm. “Auto” wählt uf Basis vom Datumsberiich vo de Uufgabe.',
+  'Sectiedelingen': 'Abschnitts-Yteilige',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Behandel en Uufgabename, wo mit “## ” aafangt, als Abschnittsüberschrift im Diagramm.',
+  'Secties': 'Abschnitt',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'En Projektplan als Gantt-Diagramm. Füll d Tabälle mit Uufgab, Start, Duur, Fortschritt und Abhängigkeite; s Diagramm wird abglaitet. En Uufgabename, wo mit “Milestone:” aafangt, isch en Meilenstein ohni Duur.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Achtung: I de Sitzigsdate chönnte möglicherwys persönlichi Date drin sy.',
   'Privacy-bevindingen in sessie-data': 'Dateschutz-Fund i de Sitzigsdate',

@@ -1770,6 +1770,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Dag': 'Dag',
+  'Week': 'Uge',
+  'Maand': 'Måned',
+  'Tijdschaal': 'Tidsskala',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Aksens granularitet for Gantt-diagrammet. “Auto” vælger baseret på opgavernes datointerval.',
+  'Sectiedelingen': 'Sektionsopdelinger',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Behandl et opgavenavn, der starter med “## ”, som en sektionsoverskrift i diagrammet.',
+  'Secties': 'Sektioner',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'En projektplan som Gantt-diagram. Udfyld tabellen med opgave, start, varighed, fremgang og afhængigheder; diagrammet afledes. Et opgavenavn der starter med “Milestone:” er en milepæl med nul varighed.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Bemærk: sessionsdataene kan indeholde personoplysninger.',
   'Privacy-bevindingen in sessie-data': 'Privatlivsresultater i sessionsdata',

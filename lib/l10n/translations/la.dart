@@ -1787,6 +1787,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Dag': 'Dies',
+  'Week': 'Septimana',
+  'Maand': 'Mensis',
+  'Tijdschaal': 'Scala temporis',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Granularitas axis diagrammatis Gantt. “Auto” eligit secundum intervallum dierum officinarum.',
+  'Sectiedelingen': 'Divisiones sectionum',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Nomen officinae quod incipit cum “## ” tracta sicut titulus sectionis in diagrammate.',
+  'Secties': 'Sectiones',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Schedula propositi ut diagramma Gantt. Comple tabulam cum officina, initio, duratione, progressu et dependentiis; diagramma derivatur. Nomen officinae quod incipit cum “Milestone:” est lapis miliarius durationis nullae.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Nota: in datis sessionis fortasse adsunt data personalia.',
   'Privacy-bevindingen in sessie-data':

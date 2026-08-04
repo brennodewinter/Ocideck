@@ -750,6 +750,8 @@ class SlideTypePreviewPainter extends CustomPainter {
       case SlideType.phaseGate:
       case SlideType.controlStatus:
         _paintSecurityWireframe(canvas, SlideType.checklist);
+      case SlideType.gantt:
+        _paintGanttWireframe(canvas);
     }
   }
 
@@ -768,6 +770,16 @@ class SlideTypePreviewPainter extends CustomPainter {
       }
     }
     _bar(canvas, 14, 62, 100, 5, _soft);
+  }
+
+  /// Gantt wireframe: title bar, timeline axis, three task bars.
+  void _paintGanttWireframe(Canvas canvas) {
+    _bar(canvas, 14, 12, 72, 8, _ink);
+    final axis = _paint(_soft)..strokeWidth = 1.2;
+    canvas.drawLine(const Offset(14, 28), const Offset(146, 28), axis);
+    _bar(canvas, 14, 34, 40, 7, _fill, radius: 2);
+    _bar(canvas, 14, 46, 60, 7, _accent, radius: 2);
+    _bar(canvas, 14, 58, 30, 7, _fill, radius: 2);
   }
 
   /// Nested list / fishbone branches off a title bar.
@@ -1006,7 +1018,8 @@ class SlideTypePreviewPainter extends CustomPainter {
           SlideType.tree ||
           SlideType.flow ||
           SlideType.phaseGate ||
-          SlideType.controlStatus:
+          SlideType.controlStatus ||
+          SlideType.gantt:
         break;
     }
   }

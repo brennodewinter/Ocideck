@@ -1798,6 +1798,18 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Dag': 'Ημέρα',
+  'Week': 'Εβδομάδα',
+  'Maand': 'Μήνας',
+  'Tijdschaal': 'Κλίμακα χρόνου',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Η κοκκομετρία του άξονα του διαγράμματος Gantt. “Auto” επιλέγει με βάση το εύρος ημερομηνιών των εργασιών.',
+  'Sectiedelingen': 'Διαιρέσεις ενοτήτων',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Θεωρήστε ένα όνομα εργασίας που ξεκινά με “## ” ως επικεφαλίδα ενότητας στο διάγραμμα.',
+  'Secties': 'Ενότητες',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Ένα χρονοδιάγραμμα έργου ως διάγραμμα Gantt. Συμπληρώστε τον πίνακα με εργασία, έναρξη, διάρκεια, πρόοδο και εξαρτήσεις· το διάγραμμα προκύπτει. Ένα όνομα εργασίας που ξεκινά με “Milestone:” είναι ένα ορόσημο μηδενικής διάρκειας.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Προσοχή: τα δεδομένα συνεδρίας ενδέχεται να περιέχουν προσωπικά δεδομένα.',
   'Privacy-bevindingen in sessie-data':

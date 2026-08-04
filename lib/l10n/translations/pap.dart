@@ -730,6 +730,18 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Dag': 'Día',
+  'Week': 'Siman',
+  'Maand': 'Luna',
+  'Tijdschaal': 'Escala di tempu',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'E granularidat di e as di e diagrama Gantt. “Auto” skohe na base di e rango di fecha di e tareanan.',
+  'Sectiedelingen': 'Divishon di seksjon',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Trata un nòmber di tarea ku ta kuminsá ku “## ” komo un título di sekshon den e diagrama.',
+  'Secties': 'Sekschonnan',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Un skema di proyecto komo diagrama Gantt. Yena e tabla ku tarea, inisio, durashon, progreso i dependensianan; e diagrama ta wòrdu derivá. Un nòmber di tarea ku ta kuminsá ku “Milestone:” ta un hito di durashon cero.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Atenshon: denabo den e datunan di sesion por tin datonan personal.',
   'Privacy-bevindingen in sessie-data':

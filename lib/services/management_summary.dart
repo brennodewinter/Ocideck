@@ -67,7 +67,8 @@ List<String> deckStandardsUsed(Deck deck) {
           SlideType.phaseGate ||
           // controlStatus draagt de ISO-norm in de front matter, niet als
           // pentest-toetsnorm; de ISO-voortgang heeft een eigen analyzer.
-          SlideType.controlStatus:
+          SlideType.controlStatus ||
+          SlideType.gantt:
         break;
     }
   }

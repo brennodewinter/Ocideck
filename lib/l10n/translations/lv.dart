@@ -1770,6 +1770,18 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Dag': 'Diena',
+  'Week': 'Nedēļa',
+  'Maand': 'Mēnesis',
+  'Tijdschaal': 'Laika skala',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Ass granularitāte Gantt diagrammai. “Auto” izvēlas, pamatojoties uz uzdevumu datumu diapazonu.',
+  'Sectiedelingen': 'Sadaļu dalījumi',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Uzskatiet uzdevuma nosaukumu, kas sākas ar “## ”, par sadaļas virsrakstu diagrammā.',
+  'Secties': 'Sadaļas',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Projekta grafiks kā Gantt diagramma. Aizpildiet tabulu ar uzdevumu, sākumu, ilgumu, progresu un atkarībām; diagramma tiek atvasināta. Uzdevuma nosaukums, kas sākas ar “Milestone:”, ir atskaites punkts ar nulles ilgumu.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Uzmanību: sesijas datos, iespējams, ir personiskie dati.',
   'Privacy-bevindingen in sessie-data': 'Privātuma atklājumi sesijas datos',

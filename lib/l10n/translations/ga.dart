@@ -1806,6 +1806,18 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Dag': 'Lá',
+  'Week': 'Seachtain',
+  'Maand': 'Mí',
+  'Tijdschaal': 'Scála ama',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Gránalacht na haise den léarscáil Gantt. Roghnaíonn “Auto” bunaithe ar raon na ndátaí na dtascanna.',
+  'Sectiedelingen': 'Ranna rannóg',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Déileáil le hainm taisc a thosaíonn le “## ” mar cheannteideal rannóige sa léarscáil.',
+  'Secties': 'Rannóga',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Sceideal tionscadail mar léarscáil Gantt. Líon an tábla le tasc, tosach, ré, dul chun cinn agus spleáchais; díorthaítear an léarscáil. Is cloch mhíle ré nialais é ainm taisc a thosaíonn le “Milestone:”.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Tabhair faoi deara: b\'fhéidir go bhfuil sonraí pearsanta in sonraí an tseisiúin.',
   'Privacy-bevindingen in sessie-data':

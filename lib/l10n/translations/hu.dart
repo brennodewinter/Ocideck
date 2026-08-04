@@ -1775,6 +1775,18 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Dag': 'Nap',
+  'Week': 'Hét',
+  'Maand': 'Hónap',
+  'Tijdschaal': 'Időskála',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'A Gantt-diagram tengelyének granularitása. “Auto” a feladatok dátumtartománya alapján választ.',
+  'Sectiedelingen': 'Szakaszfelosztások',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Kezelje a “## ”-vel kezdődő feladatnevet szakaszcímként a diagramban.',
+  'Secties': 'Szakaszok',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Egy projektütemterv Gantt-diagramként. Töltse ki a táblázatot feladattal, kezdettel, időtartammal, előrehaladással és függőségekkel; a diagram levezethető. Egy “Milestone:”-vel kezdődő feladatnév nulla időtartamú mérföldkő.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Figyelem: a munkamenet adatai esetleg személyes adatokat tartalmaznak.',
   'Privacy-bevindingen in sessie-data':

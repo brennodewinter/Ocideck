@@ -1788,6 +1788,18 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Dag': 'Zi',
+  'Week': 'Săptămână',
+  'Maand': 'Lună',
+  'Tijdschaal': 'Scară de timp',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Granularitatea axei diagramei Gantt. “Auto” alege în funcție de intervalul de date al sarcinilor.',
+  'Sectiedelingen': 'Diviziuni de secțiune',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Tratați un nume de sarcină care începe cu “## ” ca titlu de secțiune în diagramă.',
+  'Secties': 'Secțiuni',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Un calendar de proiect ca diagramă Gantt. Completați tabelul cu sarcină, început, durată, progres și dependențe; diagrama este derivată. Un nume de sarcină care începe cu “Milestone:” este o piatră de hotar de durată zero.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Atenție: datele sesiunii pot conține date cu caracter personal.',
   'Privacy-bevindingen in sessie-data':

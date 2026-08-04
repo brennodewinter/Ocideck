@@ -563,7 +563,8 @@ class SlideQualityAnalyzer {
           SlideType.canvas ||
           SlideType.tree ||
           SlideType.flow ||
-          SlideType.phaseGate:
+          SlideType.phaseGate ||
+          SlideType.gantt:
         break;
     }
   }
@@ -649,6 +650,7 @@ class SlideQualityAnalyzer {
       case SlideType.tree:
       case SlideType.flow:
       case SlideType.phaseGate:
+      case SlideType.gantt:
         break;
     }
   }
@@ -828,6 +830,7 @@ class SlideQualityAnalyzer {
       case SlideType.tree:
       case SlideType.flow:
       case SlideType.phaseGate:
+      case SlideType.gantt:
         break;
     }
   }

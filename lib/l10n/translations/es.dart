@@ -727,6 +727,18 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Dag': 'Día',
+  'Week': 'Semana',
+  'Maand': 'Mes',
+  'Tijdschaal': 'Escala de tiempo',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'La granularidad del eje del diagrama Gantt. “Auto” elige según el rango de fechas de las tareas.',
+  'Sectiedelingen': 'Divisiones de sección',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Trate un nombre de tarea que comience con “## ” como encabezado de sección en el diagrama.',
+  'Secties': 'Secciones',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Un cronograma de proyecto como diagrama Gantt. Rellene la tabla con tarea, inicio, duración, progreso y dependencias; el diagrama se deriva. Un nombre de tarea que comienza con “Milestone:” es un hito de duración cero.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Atención: es posible que los datos de la sesión contengan datos personales.',
   'Privacy-bevindingen in sessie-data':

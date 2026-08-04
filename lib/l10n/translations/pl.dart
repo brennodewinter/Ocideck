@@ -1783,6 +1783,18 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Dag': 'Dzień',
+  'Week': 'Tydzień',
+  'Maand': 'Miesiąc',
+  'Tijdschaal': 'Skala czasu',
+  'De as-granulariteit van het Gantt-diagram. “Auto” kiest op basis van het datumbereik van de taken.':
+      'Granularność osi wykresu Gantt. “Auto” wybiera na podstawie zakresu dat zadań.',
+  'Sectiedelingen': 'Podziały sekcji',
+  'Behandel een taaknaam die met “## ” begint als een sectiekop in het diagram.':
+      'Traktuj nazwę zadania rozpoczynającą się od “## ” jako nagłówek sekcji w diagramie.',
+  'Secties': 'Sekcje',
+  'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.':
+      'Harmonogram projektu jako wykres Gantt. Wypełnij tabelę zadaniem, początkiem, czasem trwania, postępem i zależnościami; wykres jest wyliczany. Nazwa zadania rozpoczynająca się od “Milestone:” to kamień milowy o zerowym czasie trwania.',
   'Let op: er staan mogelijk persoonsgegevens in de sessie-data.':
       'Uwaga: w danych sesji mogą znajdować się dane osobowe.',
   'Privacy-bevindingen in sessie-data':

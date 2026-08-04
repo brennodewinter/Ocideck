@@ -26,6 +26,7 @@ import '../../services/improvement/tree_spec.dart';
 import '../../services/improvement/flow_layout.dart';
 import '../../services/improvement/flow_slide.dart';
 import '../../services/improvement/flow_spec.dart';
+import '../../services/improvement/gantt_dsl.dart';
 import '../../services/improvement/chart_derivation.dart';
 import '../../services/improvement/matrix_layout.dart';
 import '../../services/improvement/matrix_slide.dart';
@@ -128,6 +129,7 @@ part 'previews/matrix_preview.dart';
 part 'previews/canvas_preview.dart';
 part 'previews/tree_preview.dart';
 part 'previews/flow_preview.dart';
+part 'previews/gantt_preview.dart';
 part 'previews/improvement_dispatch.dart';
 part 'previews/overlays.dart';
 
@@ -892,6 +894,8 @@ class SlidePreviewWidget extends StatelessWidget {
         return _improvementPreview(slide, w);
       case SlideType.controlStatus:
         return _controlStatusContent(slide, w);
+      case SlideType.gantt:
+        return _ganttContent(slide, w);
     }
   }
 
@@ -1022,6 +1026,7 @@ double _contentLeftInset(Slide slide, double w) {
     case SlideType.flow:
     case SlideType.phaseGate:
     case SlideType.freeMarkdown:
+    case SlideType.gantt:
       return w * 0.07;
     case SlideType.code:
       return w * 0.05;
