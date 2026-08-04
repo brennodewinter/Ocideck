@@ -469,6 +469,38 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     return _secrets.readAiApiKey(baseUrl);
   }
 
+  /// Bewaar het LibrePlan-wachtwoord in de keychain (gekeyd op
+  /// `baseUrl::username`). Een leeg wachtwoord wist de entry.
+  Future<bool> setLibreplanPassword(String key, String password) async {
+    try {
+      if (password.isEmpty) {
+        await _secrets.deleteLibreplanPasswordByKey(key);
+      } else {
+        await _secrets.writeLibreplanPasswordByKey(key, password);
+      }
+      return true;
+    } catch (e) {
+      _reportSecretFailure('setLibreplanPassword', e);
+      return false;
+    }
+  }
+
+  /// Wis het LibrePlan-wachtwoord uit de keychain.
+  Future<bool> deleteLibreplanPassword(String key) async {
+    try {
+      await _secrets.deleteLibreplanPasswordByKey(key);
+      return true;
+    } catch (e) {
+      _reportSecretFailure('deleteLibreplanPassword', e);
+      return false;
+    }
+  }
+
+  /// Lees het LibrePlan-wachtwoord uit de keychain, of `null`.
+  Future<String?> readLibreplanPassword(String key) {
+    return _secrets.readLibreplanPasswordByKey(key);
+  }
+
   /// Stel het vrijgaveplafond voor de export-gate in (een TLP-sleutel), of
   /// `null` om de gate uit te zetten. Persisteert in hetzelfde prefs-domein.
   Future<void> setMaxReleaseExportTlp(String? key) async {

@@ -472,6 +472,38 @@ class SecretStore {
     }
   }
 
+  /// Schrijf het LibrePlan-wachtwoord met een reeds samengestelde sleutel
+  /// (uit `libreplanKey(baseUrl, username)`). Gebruikt door de settings-dialoog
+  /// die de sleutel één keer berekent en voor lezen/schrijven/wissen hergebruikt.
+  Future<void> writeLibreplanPasswordByKey(String key, String password) async {
+    _requireStorage('writeLibreplanPasswordByKey');
+    try {
+      await _storage.write(key: key, value: password);
+    } catch (e) {
+      logError('SecretStore.writeLibreplanPasswordByKey: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  Future<String?> readLibreplanPasswordByKey(String key) async {
+    if (!_canStore) return null;
+    try {
+      return await _storage.read(key: key);
+    } catch (e) {
+      logError('SecretStore.readLibreplanPasswordByKey: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteLibreplanPasswordByKey(String key) async {
+    if (!_canStore) return;
+    try {
+      await _storage.delete(key: key);
+    } catch (e) {
+      logWarning('SecretStore.deleteLibreplanPasswordByKey: keychain delete failed', e);
+    }
+  }
+
   /// Keychain-sleutel voor "je eigen gegevens" van de privacycontrole.
   ///
   /// Eén entry, want het gaat over de gebruiker van deze installatie en niet
