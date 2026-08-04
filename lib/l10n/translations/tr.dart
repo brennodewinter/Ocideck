@@ -2766,6 +2766,8 @@ const _dutchSourceAddTr = <String, String>{
       'Sunumun bundan sonra hangi slayta atlayacağını seçin. Varsayılan olarak bu, yalnızca sonraki slayttır. Böylece bir seçim dalı sonunda menüye dönebilir.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Hedef slayt artık yok — sunum burada yalnızca devam eder.',
+  'Bewerk deze dia als markdown-bron':
+      'Bu slaydı markdown kaynağı olarak düzenle',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Bu bir sunum, Markdown dosyası değil. OciDeck bunu yeni bir deck\'e aktarabilir.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

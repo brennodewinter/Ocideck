@@ -1805,6 +1805,8 @@ const _dutchSourceAddLa = <String, String>{
       'Elige ad quam paginam narratio post hanc saliat. Ex more haec simpliciter pagina proxima est. Sic ramus optionis in fine ad menu redire potest.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Pagina destinata iam non exstat — narratio hic simpliciter pergit.',
+  'Bewerk deze dia als markdown-bron':
+      'Hanc paginam ut fontem markdown recensere',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Haec praesentatio est, non tabella Markdown. OciDeck eam in novum deck importare potest.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

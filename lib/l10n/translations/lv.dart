@@ -1788,6 +1788,7 @@ const _dutchSourceAddLv = <String, String>{
       'Izvēlieties, uz kuru slaidu prezentācija pāriet pēc šī. Pēc noklusējuma tas ir vienkārši nākamais slaids. Tā izvēles zars beigās var atgriezties izvēlnē.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Mērķa slaids vairs neeksistē — prezentācija vienkārši turpinās šeit.',
+  'Bewerk deze dia als markdown-bron': 'Rediģēt šo slaidu kā markdown avotu',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Šī ir prezentācija, nevis Markdown fails. OciDeck to var importēt jaunā dekā.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

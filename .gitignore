@@ -68,3 +68,6 @@ test/.tmp_*
 ocideck-release.key
 *.minisign.key
 minisign.key
+
+# Release-artefacten (lokaal gebouwd; nooit committen — belanden anders in de release-tag)
+dist/

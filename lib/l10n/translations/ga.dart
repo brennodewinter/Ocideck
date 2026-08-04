@@ -1824,6 +1824,8 @@ const _dutchSourceAddGa = <String, String>{
       'Roghnaigh cén sleamhnán a léimeann an cur i láthair chuige tar éis an cheann seo. De réir réamhshocraithe is é sin an chéad sleamhnán eile go simplí. Mar sin is féidir le brainse rogha filleadh ar an roghchlár ag an deireadh.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Níl an sprioc-sleamhnán ann a thuilleadh — leanann an cur i láthair ar aghaidh anseo go simplí.',
+  'Bewerk deze dia als markdown-bron':
+      'Cuir an sleamhnán seo in eagar mar fhoinse markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Is cur i láthair é seo, ní comhad Markdown é. Is féidir le OciDeck é a iompórtáil isteach i ndeic nua.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

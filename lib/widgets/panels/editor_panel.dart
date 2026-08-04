@@ -107,6 +107,17 @@ class EditorPanel extends ConsumerWidget {
                 deckNotifier.updateThemeProfile(profile),
             onDefaultProfileRequested: () =>
                 deckNotifier.updateThemeProfile(settings.themeProfile),
+            // Rechtstreeks naar de rauwe markdown van déze dia: dezelfde
+            // markdown-modus als de globale schakelaar, maar meteen op de
+            // actieve slide gericht (het ontsnappingsluik uit #1160). De
+            // markdown-editor zelf regelt Apply, validatie en de weg terug.
+            onOpenSource: () {
+              editorNotifier.setMarkdownScope(MarkdownScope.slide);
+              editorNotifier.setMode(
+                EditorMode.markdown,
+                initialMarkdown: deckNotifier.generateSlideMarkdown(idx),
+              );
+            },
           ),
           const Divider(height: 1),
           Expanded(

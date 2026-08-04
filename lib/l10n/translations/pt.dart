@@ -1818,6 +1818,7 @@ const _dutchSourceAddPt = <String, String>{
       'Escolha para que diapositivo a apresentação salta a seguir a este. Por predefinição é simplesmente o diapositivo seguinte. Assim um ramo de escolha pode voltar ao menu no fim.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'O diapositivo de destino já não existe — a apresentação simplesmente continua aqui.',
+  'Bewerk deze dia als markdown-bron': 'Editar este slide como fonte markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Isto é uma apresentação, não um ficheiro Markdown. O OciDeck pode importá-la para um novo deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

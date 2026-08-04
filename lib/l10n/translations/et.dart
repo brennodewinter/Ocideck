@@ -1780,6 +1780,8 @@ const _dutchSourceAddEt = <String, String>{
       'Valige, millisele slaidile esitlus pärast seda hüppab. Vaikimisi on see lihtsalt järgmine slaid. Nii saab valikuharu lõpus menüüsse tagasi pöörduda.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Sihtslaidi enam ei ole — esitlus lihtsalt jätkub siit.',
+  'Bewerk deze dia als markdown-bron':
+      'Redigeeri seda slaidi markdown-allikana',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'See on esitlus, mitte Markdown-fail. OciDeck saab selle uude deki importida.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

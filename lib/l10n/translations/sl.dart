@@ -1791,6 +1791,7 @@ const _dutchSourceAddSl = <String, String>{
       'Izberite, na kateri diapozitiv predstavitev skoči po tem. Privzeto je to preprosto naslednji diapozitiv. Tako se lahko izbirna veja na koncu vrne v meni.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Ciljni diapozitiv ne obstaja več — predstavitev se tukaj preprosto nadaljuje.',
+  'Bewerk deze dia als markdown-bron': 'Uredi ta diapozitiv kot vir markdown',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'To je predstavitev, ne datoteka Markdown. OciDeck jo lahko uvozi v nov deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

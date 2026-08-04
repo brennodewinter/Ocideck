@@ -1795,6 +1795,7 @@ const _dutchSourceAddHr = <String, String>{
       'Odaberite na koji slajd prezentacija skače nakon ovoga. Zadano je to jednostavno sljedeći slajd. Tako grana izbora na kraju može vratiti na izbornik.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Ciljni slajd više ne postoji — prezentacija se ovdje jednostavno nastavlja.',
+  'Bewerk deze dia als markdown-bron': 'Uredi ovaj slajd kao markdown izvor',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Ovo je prezentacija, a ne Markdown datoteka. OciDeck je može uvesti u novi deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

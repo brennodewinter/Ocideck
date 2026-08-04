@@ -1789,6 +1789,7 @@ const _dutchSourceAddFi = <String, String>{
       'Valitse, mihin diaan esitys hyppää tämän jälkeen. Oletuksena se on yksinkertaisesti seuraava dia. Näin valintahaara voi palata lopussa valikkoon.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Kohdedia ei ole enää olemassa — esitys jatkuu tästä yksinkertaisesti eteenpäin.',
+  'Bewerk deze dia als markdown-bron': 'Muokkaa tätä diaa markdown-lähteenä',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Tämä on esitys, ei Markdown-tiedosto. OciDeck voi tuoda sen uuteen deckiin.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

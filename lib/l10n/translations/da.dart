@@ -1788,6 +1788,7 @@ const _dutchSourceAddDa = <String, String>{
       'Vælg hvilket dias præsentationen springer til efter dette. Som standard er det blot det næste dias. På den måde kan en valggren vende tilbage til menuen til sidst.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Måldiaset findes ikke længere — præsentationen fortsætter bare her.',
+  'Bewerk deze dia als markdown-bron': 'Rediger dette dias som markdown-kilde',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Dette er en præsentation, ikke en Markdown-fil. OciDeck kan importere den til et nyt deck.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':

@@ -1796,6 +1796,8 @@ const _dutchSourceAddLt = <String, String>{
       'Pasirinkite, į kurią skaidrę pristatymas pereina po šios. Numatytoji reikšmė yra tiesiog kita skaidrė. Taip pasirinkimo šaka pabaigoje gali grįžti į meniu.',
   'De doeldia bestaat niet meer — de presentatie gaat hier gewoon verder.':
       'Tikslinės skaidrės nebėra — pristatymas tiesiog tęsiasi čia.',
+  'Bewerk deze dia als markdown-bron':
+      'Redaguoti šią skaidrę kaip markdown šaltinį',
   'Dit is een presentatie, geen Markdown-bestand. OciDeck kan hem importeren naar een nieuw deck.':
       'Tai pristatymas, o ne Markdown failas. „OciDeck“ gali jį importuoti į naują deką.',
   'Dit is een presentatie, geen Markdown-bestand. Zet de module Importeren aan om hem om te zetten naar een deck.':
