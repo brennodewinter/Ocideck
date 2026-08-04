@@ -1774,6 +1774,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Sekce „{sectie}“ není standardní sekcí zjištění a nezobrazuje se ani neexportuje (obsah však zůstává ve zdrojovém souboru). Přejmenujte nadpis na Description, Confirmation (reproduction), Possible impact nebo Recommendation.',
   'Breedte aanpassen': 'Upravit šířku',
   'Niet akkoord en afsluiten': 'Odmítnout a ukončit',
   'Springt naar': 'Přejde na',

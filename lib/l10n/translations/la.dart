@@ -1787,6 +1787,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Sectio "{sectie}" non est sectio pervulgata inventi neque ostenditur neque exportatur (contentum tamen in fonte manet). Titulum in Description, Confirmation (reproduction), Possible impact aut Recommendation renomina.',
   'Breedte aanpassen': 'Latitudinem accommodare',
   'Niet akkoord en afsluiten': 'Recusa et exi',
   'Springt naar': 'Salit ad',

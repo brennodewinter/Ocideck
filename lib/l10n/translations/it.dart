@@ -726,6 +726,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'La sezione "{sectie}" non è una sezione standard di un rilievo e non viene mostrata né esportata (il contenuto rimane comunque nel file di origine). Rinomina il titolo in Description, Confirmation (reproduction), Possible impact o Recommendation.',
   'Breedte aanpassen': 'Regola la larghezza',
   'Niet akkoord en afsluiten': 'Rifiuta ed esci',
   'Springt naar': 'Salta a',

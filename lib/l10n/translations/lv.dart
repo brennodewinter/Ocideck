@@ -1770,6 +1770,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Sadaļa "{sectie}" nav standarta atraduma sadaļa un netiek rādīta vai eksportēta (saturs tomēr paliek avota failā). Pārdēvējiet virsrakstu par Description, Confirmation (reproduction), Possible impact vai Recommendation.',
   'Breedte aanpassen': 'Pielāgot platumu',
   'Niet akkoord en afsluiten': 'Noraidīt un aizvērt',
   'Springt naar': 'Pāriet uz',

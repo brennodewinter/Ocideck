@@ -1773,6 +1773,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Razdelek »{sectie}« ni standardni razdelek ugotovitve in se ne prikaže niti izvozi (vsebina kljub temu ostane v izvorni datoteki). Preimenujte naslov v Description, Confirmation (reproduction), Possible impact ali Recommendation.',
   'Breedte aanpassen': 'Prilagodi širino',
   'Niet akkoord en afsluiten': 'Zavrni in končaj',
   'Springt naar': 'Skoči na',

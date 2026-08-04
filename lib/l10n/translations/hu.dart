@@ -1775,6 +1775,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'A(z) "{sectie}" szakasz nem egy megállapítás szabványos szakasza, és nem jelenik meg és nem kerül exportálásra (a tartalom azonban a forrásfájlban marad). Nevezze át a fejlécet erre: Description, Confirmation (reproduction), Possible impact vagy Recommendation.',
   'Breedte aanpassen': 'Szélesség beállítása',
   'Niet akkoord en afsluiten': 'Elutasítás és kilépés',
   'Springt naar': 'Ugrás ide',

@@ -1762,6 +1762,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Jaotis "{sectie}" ei ole leiu standardjaotis ega seda ei kuvata ega ekspordita (sisu jääb siiski lähtefaili). Nimetage pealkiri ümber: Description, Confirmation (reproduction), Possible impact või Recommendation.',
   'Breedte aanpassen': 'Kohalda laiust',
   'Niet akkoord en afsluiten': 'Keeldu ja välju',
   'Springt naar': 'Hüppab kohta',

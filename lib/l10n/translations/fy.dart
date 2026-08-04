@@ -731,6 +731,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'De seksje "{sectie}" is gjin standertseksje fan in befining en wurdt net toand of eksportearre (de ynhâld bliuwt al yn it boarnebestân). Neam de kop om nei Description, Confirmation (reproduction), Possible impact of Recommendation.',
   'Breedte aanpassen': 'Breedte oanpasse',
   'Niet akkoord en afsluiten': 'Ofwize en ôfslute',
   'Springt naar': 'Springt nei',

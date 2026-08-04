@@ -1793,6 +1793,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'It-taqsima "{sectie}" mhijiex taqsima standard ta\' sejba u ma tintweriex jew tiġi esportata (il-kontenut madankollu jibqa\' fil-fajl tas-sors). Ibdel l-isem tal-intestatura għal Description, Confirmation (reproduction), Possible impact jew Recommendation.',
   'Breedte aanpassen': 'Aġusta l-wisa\'',
   'Niet akkoord en afsluiten': 'Irrifjuta u oħroġ',
   'Springt naar': 'Jaqbeż għal',

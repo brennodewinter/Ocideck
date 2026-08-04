@@ -730,6 +730,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Der Abschnitt „{sectie}“ ist kein Standardabschnitt eines Befunds und wird nicht angezeigt oder exportiert (der Inhalt bleibt aber in der Quelldatei erhalten). Benenne die Überschrift in Description, Confirmation (reproduction), Possible impact oder Recommendation um.',
   'Breedte aanpassen': 'Breite anpassen',
   'Niet akkoord en afsluiten': 'Ablehnen und beenden',
   'Springt naar': 'Springt zu',

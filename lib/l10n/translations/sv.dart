@@ -1770,6 +1770,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Avsnittet "{sectie}" är inte ett standardavsnitt i ett fynd och visas eller exporteras inte (innehållet finns dock kvar i källfilen). Byt namn på rubriken till Description, Confirmation (reproduction), Possible impact eller Recommendation.',
   'Breedte aanpassen': 'Justera bredd',
   'Niet akkoord en afsluiten': 'Avvisa och avsluta',
   'Springt naar': 'Hoppar till',

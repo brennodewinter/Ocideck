@@ -198,6 +198,7 @@ void main() {
       },
       SlideQualityIssueKind.questionNotAnswerable: {},
       SlideQualityIssueKind.emptySlide: {},
+      SlideQualityIssueKind.findingUnknownSection: {'section': 'Notes'},
       SlideQualityIssueKind.privacyImage: {'rule': 'image.face', 'sample': '2'},
       SlideQualityIssueKind.privacyImageUnreadable: {'rule': 'image.face'},
       SlideQualityIssueKind.privacyIdentifier: {

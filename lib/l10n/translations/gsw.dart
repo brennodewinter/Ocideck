@@ -1774,6 +1774,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'De Abschnitt «{sectie}» isch käi Standardabschnitt vo emene Befund und wird nöd azeigt oder exportiert (de Inhalt bliibt aber i de Quälledatei). Benänn de Titel um zu Description, Confirmation (reproduction), Possible impact oder Recommendation.',
   'Breedte aanpassen': 'Breiti aapasse',
   'Niet akkoord en afsluiten': 'Ablehne und beände',
   'Springt naar': 'Springt zue',

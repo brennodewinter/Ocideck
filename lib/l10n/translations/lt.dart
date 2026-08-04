@@ -1778,6 +1778,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Skiltis „{sectie}“ nėra standartinė radinio skiltis ir nerodoma bei neeksportuojama (turinys vis dėlto lieka pradiniame faile). Pervadinkite antraštę į Description, Confirmation (reproduction), Possible impact arba Recommendation.',
   'Breedte aanpassen': 'Reguliuoti plotį',
   'Niet akkoord en afsluiten': 'Atmesti ir išeiti',
   'Springt naar': 'Pereina į',

@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import '../models/asset_origin.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
+import '../models/finding_spec.dart';
 import '../models/markdown_validation.dart';
 import '../models/question.dart';
 import '../models/settings.dart';
@@ -67,6 +68,63 @@ void _checkQuestionAnswerable(
       kind: SlideQualityIssueKind.questionNotAnswerable,
       category: SlideQualityCategory.content,
       severity: MarkdownValidationSeverity.warning,
+      field: 'customMarkdown',
+    ),
+  );
+}
+
+/// Waarschuw voor een `## …`-sectie in de kopkaart van een bevinding waarvan de
+/// naam geen canonieke sectie is (en ook geen herkende korte vorm — zie
+/// [FindingSpec.canonicalSectionAnchor]).
+///
+/// De kopkaart rendert alleen de vier vaste secties; een handgeschreven of
+/// geïmporteerde `## Notes` / `## References` staat wél in de `.md` maar verdwijnt
+/// uit de weergave, de presentatie én de export. Op schijf gaat er niets
+/// verloren — het bestand blijft de bron — maar een uitgeleverd pentestrapport
+/// zou de sectie stil missen. Een waarschuwing en geen fout: het bestand is niet
+/// kapot, en de auteur hoeft alleen de kop te hernoemen naar een standaardsectie.
+/// Alleen op de kop-dia (rol `header`): een detail-/bewijs-dia draagt geen
+/// kopkaart en mag vrije `##`-koppen bevatten. Gevonden bij de keuring van #1198.
+void _checkFindingSections(
+  Slide slide,
+  int index,
+  List<SlideQualityIssue> issues,
+) {
+  if (slide.type != SlideType.finding) return;
+  if (slide.findingRole != FindingRole.header) return;
+  final spec = FindingSpec.parse(slide.customMarkdown);
+  for (final title in spec.unknownSectionTitles) {
+    issues.add(
+      SlideQualityIssue(
+        slideIndex: index,
+        kind: SlideQualityIssueKind.findingUnknownSection,
+        category: SlideQualityCategory.content,
+        severity: MarkdownValidationSeverity.warning,
+        field: 'customMarkdown',
+        args: {'section': title},
+      ),
+    );
+  }
+}
+
+void _checkChartAltText(
+  Slide slide,
+  int index,
+  List<SlideQualityIssue> issues,
+) {
+  final spec = ChartSpec.parse(slide.customMarkdown);
+  if (spec.title.trim().isNotEmpty) return;
+  if (spec.hasInlineData && spec.series.any((s) => s.name.trim().isNotEmpty)) {
+    return;
+  }
+  if (spec.source != null && spec.source!.trim().isNotEmpty) return;
+
+  issues.add(
+    SlideQualityIssue(
+      slideIndex: index,
+      kind: SlideQualityIssueKind.chartMissingDescription,
+      category: SlideQualityCategory.altText,
+      severity: MarkdownValidationSeverity.informational,
       field: 'customMarkdown',
     ),
   );
@@ -274,6 +332,7 @@ class SlideQualityAnalyzer {
     _checkMissingMedia(slide, index, projectPath, issues);
     // Hangen alleen van de slide-inhoud af, dus veilig per slide te cachen.
     _checkQuestionAnswerable(slide, index, issues);
+    _checkFindingSections(slide, index, issues);
     _checkEmptySlide(slide, index, issues);
     _slideIssuesCache[slide] = _SlideIssuesMemo(
       theme: theme,
@@ -592,30 +651,6 @@ class SlideQualityAnalyzer {
       case SlideType.phaseGate:
         break;
     }
-  }
-
-  void _checkChartAltText(
-    Slide slide,
-    int index,
-    List<SlideQualityIssue> issues,
-  ) {
-    final spec = ChartSpec.parse(slide.customMarkdown);
-    if (spec.title.trim().isNotEmpty) return;
-    if (spec.hasInlineData &&
-        spec.series.any((s) => s.name.trim().isNotEmpty)) {
-      return;
-    }
-    if (spec.source != null && spec.source!.trim().isNotEmpty) return;
-
-    issues.add(
-      SlideQualityIssue(
-        slideIndex: index,
-        kind: SlideQualityIssueKind.chartMissingDescription,
-        category: SlideQualityCategory.altText,
-        severity: MarkdownValidationSeverity.informational,
-        field: 'customMarkdown',
-      ),
-    );
   }
 
   void _checkMediaAltText({

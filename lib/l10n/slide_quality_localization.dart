@@ -408,6 +408,15 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.emptySlide => l10n.d(
       'Deze dia is leeg: hij toont niets op het scherm en in de export.',
     ),
+    // De sectienaam is tekst van de auteur: rechtstreeks invullen, nooit door
+    // l10n.d(). De vier standaardkoppen blijven onvertaald — het zijn de
+    // taalonafhankelijke ankers die in de `.md` staan.
+    SlideQualityIssueKind.findingUnknownSection =>
+      l10n
+          .d(
+            'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.',
+          )
+          .replaceAll('{sectie}', issue.args['section'] ?? ''),
     SlideQualityIssueKind.privacyIdentifier ||
     SlideQualityIssueKind.privacyFinancial ||
     SlideQualityIssueKind.privacyContact ||

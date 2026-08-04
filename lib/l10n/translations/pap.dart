@@ -730,6 +730,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'E sekshon "{sectie}" no ta un sekshon standard di un konstatashon i no ta wòrdu mustrá ni eksportá (e kontenido ta keda den e archivo fuente). Kambia e enkabesamentu pa Description, Confirmation (reproduction), Possible impact of Recommendation.',
   'Breedte aanpassen': 'Adjusta e hanchura',
   'Niet akkoord en afsluiten': 'Rechasá i sali',
   'Springt naar': 'Salta pa',
