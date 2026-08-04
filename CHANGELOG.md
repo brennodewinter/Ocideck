@@ -927,6 +927,25 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Homebrew-cask voor macOS, automatisch bijgewerkt bij release (#1227).**
+  Met dank aan **Reinoud van Leeuwen**, die dit als pull request (#1222)
+  aandroeg — een cask-template, een generatiescript en release-bedrading. Op
+  zijn voorzet voortgebouwd en opgeknapt: de cask is nu **macOS-only** (Homebrew
+  Cask kent geen Linux-casks; de `on_linux`-arm en `binary`-verwijzing konden
+  principieel niet, en de Linux-tarball is een bundelmap, geen los binary). Het
+  onjuiste `auto_updates true` is eruit — dat betekent "de app werkt zichzelf
+  bij" en zou `brew upgrade` juist onderdrukken, terwijl OciDeck zich niet zelf
+  bijwerkt. De gepinde SHA-256 komt nu uit de **gepubliceerde `SHA256SUMS`** van
+  de release in plaats van uit een herberekening van een verse download, zodat
+  de cask precies pint wat de release verstuurde. De tap staat op de **eigen
+  forge** (canoniek), met een GitHub-spiegel voor de `brew tap
+  librekat/ocideck`-shorthand; de release-job pusht alleen vanuit de
+  forge-keten, niet dubbel vanaf GitHub. Achter een secret-guard, zoals de
+  notarisatiestap: ontbreekt de tap-configuratie, dan blijft de release staan en
+  wordt alleen de cask overgeslagen. `test/homebrew_cask_test.dart` bewaakt de
+  hash-herkomst, het macOS-only-zijn en dat een prerelease geen cask oplevert.
+  Een Linux-installatieroute voor veel distributies loopt langs een eigen spoor
+  onder #1227. De afweging staat in `assurance/app-store-distributie-positie.md`.
 - **Niet-canonieke `## …`-secties in een bevinding verdwijnen niet langer stil
   (#1198).** De kopkaart van een `finding`-dia rendert vier vaste secties
   (`## Description`, `## Confirmation (reproduction)`, `## Possible impact`,

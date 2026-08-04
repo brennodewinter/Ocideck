@@ -127,3 +127,8 @@ jobs:
               --title "OciDeck $GITHUB_REF_NAME (Windows build)" \
               --notes "$NOTES" "${VOORLOPER[@]}"
           fi
+          # De Homebrew-cask wordt uitsluitend vanuit de canonieke forge-release
+          # bijgewerkt (`.forgejo/workflows/release.yml`), die naar de tap op de
+          # eigen forge pusht. De GitHub-spiegel van de tap volgt via een
+          # push-mirror — geen tweede release-job hier, anders pushen twee ketens
+          # dezelfde cask en botsen ze. Zie issue #1227.
