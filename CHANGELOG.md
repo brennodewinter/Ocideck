@@ -16,6 +16,18 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- **Nieuw diatype: keuzemenu.** (#1162) Een dia die als menu werkt: je zet er
+  *blokken* op die elk naar een andere dia in het deck springen. In de editor
+  typ je per blok een label, kies je de doeldia uit een lijst (op kop — het
+  technische anker beheert de app) en eventueel een afbeelding. Tijdens
+  presenteren tonen de blokken zich als een net raster in de themakleuren; klik
+  of tik een blok en de presentatie springt naar die dia. Samen met de sprong-uit
+  ("Hierna") levert dit eenvoudige branching op: een menu biedt keuzes, en een
+  tak keert aan het eind terug naar het menu — waarbij **terug** de werkelijk
+  gelopen route volgt. Een blok zonder doel is gewone tekst; een verwijderde
+  doeldia laat het menu gewoon staan, zonder fout. De blokken zijn in het
+  `.md`-bestand doodgewone link-bullets, dus een menu blijft leesbaar in elke
+  Markdown-lezer.
 - **Een dia kan nu naar een andere dia springen ("Hierna").** (#1162) In de
   slide-instellingen, onder *Tijdens presenteren*, kies je met **Hierna** naar
   welke dia de presentatie na deze springt in plaats van naar de eerstvolgende.

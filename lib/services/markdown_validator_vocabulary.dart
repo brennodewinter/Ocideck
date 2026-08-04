@@ -21,6 +21,8 @@ const _knownClassTokens = {
   'timeline',
   'scorecard',
   'actions',
+  // Keuze-menu (#1162): blokken als link-bullets.
+  'menu',
   'assets',
   'discoveries',
   'finding',

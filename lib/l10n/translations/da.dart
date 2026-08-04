@@ -1770,6 +1770,17 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Springt naar': 'Springer til',
+  'Geen sprong': 'Intet spring',
+  'Blok toevoegen': 'Tilføj blok',
+  'Blok verwijderen': 'Fjern blok',
+  'Geen afbeelding': 'Intet billede',
+  'Afbeelding verwijderen': 'Fjern billede',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Ingen blokke endnu. Tilføj en valgblok.',
+  'Keuzemenu': 'Valgmenu',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'En valgmenu: hver blok springer til et andet dias, når man klikker på den. Skriv en etiket for hver blok, vælg måldiaset og eventuelt et billede. En blok uden mål er almindelig tekst.',
   'Hierna': 'Derefter',
   'Volgende dia': 'Næste dias',
   'Sprong': 'Spring',

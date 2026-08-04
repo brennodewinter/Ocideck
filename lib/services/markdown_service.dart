@@ -483,6 +483,11 @@ class MarkdownService {
         _writeSectionSlide(buf, slide);
       case SlideType.bullets:
         _writeBulletsSlide(buf, slide, themeProfile, forExport);
+      // Een keuze-menu (#1162) bewaart zijn blokken als gewone link-bullets, dus
+      // schrijft het weg als een bullets-dia; de `_class: menu` uit marpClass
+      // onderscheidt het bij het teruglezen.
+      case SlideType.menu:
+        _writeBulletsSlide(buf, slide, themeProfile, forExport);
       case SlideType.twoBullets:
         _writeTwoBulletsSlide(buf, slide, themeProfile, forExport);
       case SlideType.bulletsImage:

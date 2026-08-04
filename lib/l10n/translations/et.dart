@@ -1762,6 +1762,17 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Springt naar': 'Hüppab kohta',
+  'Geen sprong': 'Ei hüpet',
+  'Blok toevoegen': 'Lisa plokk',
+  'Blok verwijderen': 'Eemalda plokk',
+  'Geen afbeelding': 'Pilt puudub',
+  'Afbeelding verwijderen': 'Eemalda pilt',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Plokke veel pole. Lisa valikuplokk.',
+  'Keuzemenu': 'Valikumenüü',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Valikumenüü: iga plokk hüppab klõpsamisel teisele slaidile. Sisesta igale plokile silt, vali sihtslaid ja soovi korral pilt. Ilma sihita plokk on tavaline tekst.',
   'Hierna': 'Seejärel',
   'Volgende dia': 'Järgmine slaid',
   'Sprong': 'Hüpe',

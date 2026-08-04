@@ -570,6 +570,7 @@ The first class determines (together with the content) the **slide type**:
 | Question | `question` | — |
 | Timeline | `timeline` | — |
 | Scorecard | `scorecard` | — |
+| Menu (#1162) | `menu` | — (blocks are link-bullets; without the token it reads back as ordinary `bullets`) |
 | Asset overview | `assets` | — |
 | Discoveries | `discoveries` | — |
 | Finding | `finding` | — |

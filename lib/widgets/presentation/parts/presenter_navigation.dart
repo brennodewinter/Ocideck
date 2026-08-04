@@ -57,6 +57,14 @@ extension _PresenterNavigation on _FullscreenPresenterState {
     _announceSlide();
   }
 
+  /// Spring naar de dia met [anchor] (#1162, een klik op een keuze-menublok).
+  /// Onbekend anker = niets doen (fail-safe). De sprong gaat via [_advanceTo], dus
+  /// "terug" keert netjes terug naar de menudia.
+  void _jumpToAnchor(String anchor) {
+    final target = _indexOfAnchor(widget.slides, anchor);
+    if (target != null) _advanceTo(target);
+  }
+
   void _next({bool allowInUserNotes = false}) {
     // Met het notitiepaneel open bladert alleen PgUp/PgDn expliciet door;
     // klikken en overige toetsen blijven bij het tekstveld.

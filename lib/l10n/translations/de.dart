@@ -730,6 +730,17 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Springt naar': 'Springt zu',
+  'Geen sprong': 'Kein Sprung',
+  'Blok toevoegen': 'Block hinzufügen',
+  'Blok verwijderen': 'Block entfernen',
+  'Geen afbeelding': 'Kein Bild',
+  'Afbeelding verwijderen': 'Bild entfernen',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Noch keine Blöcke. Fügen Sie einen Auswahlblock hinzu.',
+  'Keuzemenu': 'Auswahlmenü',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Ein Auswahlmenü: Jeder Block springt beim Anklicken zu einer anderen Folie. Gib pro Block eine Beschriftung ein, wähle die Zielfolie und optional ein Bild. Ein Block ohne Ziel ist einfacher Text.',
   'Hierna': 'Danach',
   'Volgende dia': 'Nächste Folie',
   'Sprong': 'Sprung',

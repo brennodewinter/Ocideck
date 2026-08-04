@@ -39,6 +39,7 @@ List<String> deckStandardsUsed(Deck deck) {
       case SlideType.title ||
           SlideType.section ||
           SlideType.bullets ||
+          SlideType.menu ||
           SlideType.twoBullets ||
           SlideType.bulletsImage ||
           SlideType.twoImages ||

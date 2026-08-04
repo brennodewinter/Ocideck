@@ -45,8 +45,9 @@ const Map<String, int> methodLengthBaseline = {
   // +1: Y-01 uit export-markdown voor resolve-at-draw in chart SVG.
   'lib/services/marp_html_service.dart::MarpHtmlService.build': 132,
   // Procesverbetering engine thumbnails in the add-slide picker.
+  // +2 (#1162): de `menu`-case (de wireframe zelf zit in `_paintMenuWireframe`).
   'lib/widgets/dialogs/add_slide_dialog.dart::SlideTypePreviewPainter.paint':
-      126,
+      128,
   // Procesverbetering project-wizard entry on the welcome column.
   'lib/widgets/shell/welcome_screen.dart::_WelcomeScreen._startColumn': 118,
   // Procesverbetering preview switch for matrix/canvas/tree/flow/phaseGate.
@@ -54,8 +55,11 @@ const Map<String, int> methodLengthBaseline = {
   // +3 (#1164): splitRunPosition-doorgifte in de drie bullet-cases (bullets,
   // twoBullets, bulletsImage) van de dispatch-switch; pure plumbing van een
   // nieuw veld, geen gedrag om uit te tillen.
+  // +8 (#1162): de `menu`-case (de _MenuPreview-aanroep). Pure dispatch: één case
+  // valt niet zinvol uit een type→widget-switch te tillen. +1: de
+  // onMenuBlockTap-doorgifte voor de klik-om-te-springen.
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
-      151,
+      160,
 };
 
 bool _isTranslationData(String path) =>

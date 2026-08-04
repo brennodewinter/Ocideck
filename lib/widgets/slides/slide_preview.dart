@@ -48,6 +48,7 @@ import '../../models/discoveries_spec.dart';
 import '../../models/scorecard_spec.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../services/menu_blocks.dart';
 import '../../models/timeline.dart';
 import '../../models/video_source.dart';
 import '../../theme/app_theme.dart';
@@ -94,6 +95,7 @@ import 'image_zoom_dialog.dart';
 part 'previews/preview_scaffold.dart';
 part 'previews/text_previews.dart';
 part 'previews/bullets_previews.dart';
+part 'previews/menu_preview.dart';
 part 'previews/bullets_image_preview.dart';
 part 'previews/checklist_previews.dart';
 part 'previews/table_preview.dart';
@@ -399,6 +401,11 @@ class SlidePreviewWidget extends StatelessWidget {
   /// eerste/enkele lijst en 1 voor de rechterkolom.
   final void Function(int column, int itemIndex)? onChecklistItemToggle;
 
+  /// Tik tijdens het presenteren op een keuze-menublok met een doel (#1162): de
+  /// presentator springt naar het meegegeven anker. Null (buiten de presentatie)
+  /// = de blokken zijn niet aanklikbaar; de preview toont ze alleen.
+  final void Function(String anchor)? onMenuBlockTap;
+
   /// Live tabelbewerking tijdens presenteren (toets E op een tabeldia).
   final bool tableEditMode;
   final int? tableEditRow;
@@ -514,6 +521,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.mermaidViewController,
     this.mermaidInteractive = true,
     this.onChecklistItemToggle,
+    this.onMenuBlockTap,
     this.tableEditMode = false,
     this.tableEditRow,
     this.tableEditCol,
@@ -728,6 +736,15 @@ class SlidePreviewWidget extends StatelessWidget {
 
   Widget _buildContent(Slide slide, double w) {
     switch (slide.type) {
+      case SlideType.menu:
+        return _MenuPreview(
+          slide: slide,
+          w: w,
+          projectPath: projectPath,
+          font: fontFamily,
+          profile: themeProfile,
+          onBlockTap: onMenuBlockTap,
+        );
       case SlideType.title:
         return _TitlePreview(
           slide: slide,
@@ -1030,6 +1047,7 @@ double _contentLeftInset(Slide slide, double w) {
     // zijn footer scheef onder de inhoud komt te staan.
     case SlideType.title ||
         SlideType.section ||
+        SlideType.menu ||
         SlideType.twoImages ||
         SlideType.image ||
         SlideType.video ||

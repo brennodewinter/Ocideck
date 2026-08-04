@@ -1788,6 +1788,17 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Springt naar': 'Sare la',
+  'Geen sprong': 'Fără salt',
+  'Blok toevoegen': 'Adaugă bloc',
+  'Blok verwijderen': 'Elimină blocul',
+  'Geen afbeelding': 'Fără imagine',
+  'Afbeelding verwijderen': 'Elimină imaginea',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Încă nu există blocuri. Adaugă un bloc de alegere.',
+  'Keuzemenu': 'Meniu de opțiuni',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Un meniu de opțiuni: fiecare bloc trece la altă diapozitivă atunci când este apăsat. Introduceți o etichetă pentru fiecare bloc, alegeți diapozitivul țintă și, opțional, o imagine. Un bloc fără țintă este text obișnuit.',
   'Hierna': 'Apoi',
   'Volgende dia': 'Diapozitivul următor',
   'Sprong': 'Salt',

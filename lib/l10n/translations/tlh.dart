@@ -1746,6 +1746,17 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Springt naar': 'SupmeH Daq',
+  'Geen sprong': 'Sup pagh',
+  'Blok toevoegen': 'block yIchel',
+  'Blok verwijderen': 'block yIteq',
+  'Geen afbeelding': 'mIllogh pagh',
+  'Afbeelding verwijderen': 'mIllogh yIteq',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'block tu\'lu\'be\'. wIvmeH block yIchel.',
+  'Keuzemenu': 'wIvmeH menu',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'wIvmeH menu: \'uylu\'DI\' latlh \'anghom Sup Hoch \'ay\'. Hoch \'ay\'vaD per yIghItlh, HemtIq \'anghom yIwIv, DaneHchugh mIllogh je. HemtIq Hutlhbogh \'ay\' ghItlh nap \'oH.',
   'Hierna': 'ghIq',
   'Volgende dia': 'veb HemtIq',
   'Sprong': 'Sup',

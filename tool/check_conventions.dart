@@ -116,7 +116,8 @@ const Map<String, int> fileSizeBaseline = {
   // (stabiel dia-anker en per-dia sprong-uit) met hun doc, constructor- en
   // copyWith-doorvoer. Pure dataplumbing van een nieuw formaatveld; er valt geen
   // gedrag uit te tillen naar een part.
-  'lib/models/slide.dart': 995,
+  // +9 (#1162): de `menu`-enumwaarde met haar doc + de slideTypeMeta-entry.
+  'lib/models/slide.dart': 1004,
   // Procesverbetering module card / reveal wiring in the shell.
   // +1 (#1037): the url_launcher_util import so the play-only landing can open
   // slide links in the browser, like every other presentation surface. The file
@@ -148,7 +149,10 @@ const Map<String, int> fileSizeBaseline = {
   'lib/widgets/app_shell_main_layout.dart':
       985, // +6 (#978 Blok C): _signProvenance-delegator (zware logica in provenance_actions.dart); +1 (video-calls F1): callRail spread
   // Procesverbetering category tab + engine types in the add-slide picker.
-  'lib/widgets/dialogs/add_slide_dialog.dart': 1084,
+  // +18 (#1162): de menu-wireframe (2×2 raster van keuzeblokken) als eigen helper
+  // `_paintMenuWireframe` (uit `paint` getild voor de methode-ratchet) plus de
+  // `menu`-takken in de kiezer-switches.
+  'lib/widgets/dialogs/add_slide_dialog.dart': 1102,
   // chart_preview_improvement part registration + improvement ChartType switch.
   // +Y-01-parameter; improvement cases in improvement_dispatch.dart (part).
   // +13 (#1164): het nieuwe publieke veld splitRunPosition met zijn dispatch en
@@ -156,7 +160,12 @@ const Map<String, int> fileSizeBaseline = {
   // getild, alleen de irreducibele plumbing bleef in de librarykop.
   // +2 (#1164): de optionele `trailing`-span op de gedeelde _md-helper, zodat de
   // teller inline in de titelparagraaf meeloopt i.p.v. ernaast te zweven.
-  'lib/widgets/slides/slide_preview.dart': 1051,
+  // +11 (#1162): de `menu`-tak in `_buildContent` (de _MenuPreview-aanroep) plus
+  // de menu_blocks-import in de librarykop; de preview zelf staat in de part
+  // menu_preview.dart.
+  // +7 (#1162): het `onMenuBlockTap`-veld + constructor-param + doorgifte, zodat
+  // een keuze-menublok tijdens presenteren aanklikbaar is.
+  'lib/widgets/slides/slide_preview.dart': 1069,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -211,8 +220,10 @@ const Map<String, int> classSizeBaseline = {
   // de sprong-tak in `_next`, de retrace in `_prev` en het wissen van de stack bij
   // een teleport. De anker-resolutie zelf is al top-level (`_indexOfAnchor`) en
   // telt niet mee; wat rest gebruikt `_index`/`_rebuild` en hoort in de state.
+  // +8 (#1162): `_jumpToAnchor` (klik op een menublok) + de onMenuBlockTap-wiring;
+  // gebruikt `_advanceTo` en hoort dus in de state.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3341,
+      3349,
   'lib/services/file_service.dart#FileService': 2747,
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on
@@ -255,12 +266,17 @@ const Map<String, int> classSizeBaseline = {
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1290, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
+      1306, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
   // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
   // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
-  // klasse.
+  // klasse. +16 (#1162): de even dunne setMenuBlockTarget-delegator (berekening
+  // in slidesWithMenuTarget, menu_blocks.dart).
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
-  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1120,
+  // +10 (#1162): de `menu`-tak in de drie kwaliteitsswitches (contrast, alt-tekst,
+  // ontbrekend bestand) + de dichtheidsswitch — menublokken zijn een raster, geen
+  // doorlopende tekst; de blokafbeeldingen zitten in de bullet-tekst, niet in
+  // [Slide.imagePath], dus de generieke controles slaan er (vooralsnog) niet op.
+  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1130,
   // Procesverbetering: Y-01-UI, type-toolbar, plaklogica en DOE-dialoog zijn
   // naar losse widgets/helpers getild (chart_histogram_limits,
   // chart_type_toolbar, table_clipboard, DoeDesignDialog). Plafond verlaagd

@@ -1773,6 +1773,17 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Springt naar': 'Skoči na',
+  'Geen sprong': 'Brez skoka',
+  'Blok toevoegen': 'Dodaj blok',
+  'Blok verwijderen': 'Odstrani blok',
+  'Geen afbeelding': 'Brez slike',
+  'Afbeelding verwijderen': 'Odstrani sliko',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Blokov še ni. Dodajte blok izbire.',
+  'Keuzemenu': 'Izbirni meni',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Izbirni meni: vsak blok ob kliku preskoči na drug diapozitiv. Za vsak blok vnesite oznako, izberite ciljni diapozitiv in po želji sliko. Blok brez cilja je navadno besedilo.',
   'Hierna': 'Nato',
   'Volgende dia': 'Naslednji diapozitiv',
   'Sprong': 'Skok',

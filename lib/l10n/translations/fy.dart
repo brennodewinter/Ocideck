@@ -731,6 +731,17 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Springt naar': 'Springt nei',
+  'Geen sprong': 'Gjin sprong',
+  'Blok toevoegen': 'Blok tafoegje',
+  'Blok verwijderen': 'Blok fuortsmite',
+  'Geen afbeelding': 'Gjin ôfbylding',
+  'Afbeelding verwijderen': 'Ôfbylding fuortsmite',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Noch gjin blokken. Foegje in karblok ta.',
+  'Keuzemenu': 'Karmenu',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'In karmenu: elk blok springt by it oanklikken nei in oare dia. Typ per blok in label, kies de doeldia en eventueel in ôfbylding. In blok sûnder doel is gewoane tekst.',
   'Hierna': 'Dêrnei',
   'Volgende dia': 'Folgjende dia',
   'Sprong': 'Sprong',

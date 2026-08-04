@@ -1806,6 +1806,17 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Springt naar': 'Léim go',
+  'Geen sprong': 'Gan léim',
+  'Blok toevoegen': 'Cuir bloc leis',
+  'Blok verwijderen': 'Bain bloc',
+  'Geen afbeelding': 'Gan íomhá',
+  'Afbeelding verwijderen': 'Bain íomhá',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Níl aon bhloc ann fós. Cuir bloc rogha leis.',
+  'Keuzemenu': 'Roghchlár roghanna',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Roghchlár roghanna: léimeann gach bloc go sleamhnán eile nuair a chliceáiltear air. Cuir lipéad isteach do gach bloc, roghnaigh an sleamhnán sprice agus íomhá más mian leat. Is gnáththéacs é bloc gan sprioc.',
   'Hierna': 'Ansin',
   'Volgende dia': 'An chéad sleamhnán eile',
   'Sprong': 'Léim',

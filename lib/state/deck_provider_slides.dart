@@ -289,6 +289,22 @@ extension DeckNotifierSlides on DeckNotifier {
     _mutate(deck.copyWith(slides: slides), bumpRevision: true);
   }
 
+  /// Laat menublok [blockIndex] van menudia [menuIndex] naar dia [targetIndex]
+  /// wijzen (of, bij `null`, nergens) — en ken de doeldia zo nodig een anker toe
+  /// (#1162). De gebruiker koos een dia, niet een anker.
+  void setMenuBlockTarget(int menuIndex, int blockIndex, int? targetIndex) {
+    final deck = currentState.deck;
+    if (deck == null) return;
+    final slides = slidesWithMenuTarget(
+      deck.slides,
+      menuIndex,
+      blockIndex,
+      targetIndex,
+    );
+    if (slides == null) return;
+    _mutate(deck.copyWith(slides: slides), bumpRevision: true);
+  }
+
   /// Zet de "overslaan"-status van een slide aan/uit. Overgeslagen slides
   /// worden weggelaten bij presenteren en exporteren.
   void toggleSkip(int index) {

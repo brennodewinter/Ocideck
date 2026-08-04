@@ -1770,6 +1770,17 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Springt naar': 'Pāriet uz',
+  'Geen sprong': 'Bez pārejas',
+  'Blok toevoegen': 'Pievienot bloku',
+  'Blok verwijderen': 'Noņemt bloku',
+  'Geen afbeelding': 'Nav attēla',
+  'Afbeelding verwijderen': 'Noņemt attēlu',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Vēl nav bloku. Pievienojiet izvēles bloku.',
+  'Keuzemenu': 'Izvēles izvēlne',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Izvēles izvēlne: katrs bloks, uz tā noklikšķinot, pāriet uz citu slaidu. Katram blokam ievadiet uzrakstu, izvēlieties mērķa slaidu un pēc izvēles attēlu. Bloks bez mērķa ir vienkāršs teksts.',
   'Hierna': 'Pēc tam',
   'Volgende dia': 'Nākamais slaids',
   'Sprong': 'Pārlēkt',

@@ -477,6 +477,7 @@ class SlideQualityAnalyzer {
       // eigen voor-/achtergrondpaar heeft dat gekeurd moet worden.
       case SlideType.title ||
           SlideType.bullets ||
+          SlideType.menu ||
           SlideType.twoBullets ||
           SlideType.bulletsImage ||
           SlideType.twoImages ||
@@ -563,6 +564,9 @@ class SlideQualityAnalyzer {
       case SlideType.title:
       case SlideType.quote:
       case SlideType.bullets:
+      // Menublok-afbeeldingen zitten per blok in de bullet-tekst, niet in
+      // [Slide.imagePath]; alt-tekst per blok is een latere verfijning.
+      case SlideType.menu:
       case SlideType.twoBullets:
       case SlideType.section:
       case SlideType.table:
@@ -765,6 +769,9 @@ class SlideQualityAnalyzer {
           }
         }
       case SlideType.bullets:
+      // Menublok-afbeeldingen leven in de bullet-tekst, niet in [Slide.imagePath];
+      // een ontbrekend-bestand-controle per blok is een latere verfijning.
+      case SlideType.menu:
       case SlideType.twoBullets:
       case SlideType.table:
       case SlideType.freeMarkdown:

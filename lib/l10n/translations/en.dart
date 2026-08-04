@@ -911,6 +911,17 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Springt naar': 'Jumps to',
+  'Geen sprong': 'No jump',
+  'Blok toevoegen': 'Add block',
+  'Blok verwijderen': 'Remove block',
+  'Geen afbeelding': 'No image',
+  'Afbeelding verwijderen': 'Remove image',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'No blocks yet. Add a choice block.',
+  'Keuzemenu': 'Choice menu',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'A choice menu: each block jumps to another slide when clicked. Enter a label for each block, choose the target slide and optionally an image. A block without a target is plain text.',
   'Hierna': 'Then',
   'Volgende dia': 'Next slide',
   'Sprong': 'Jump',

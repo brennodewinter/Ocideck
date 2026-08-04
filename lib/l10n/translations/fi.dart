@@ -1771,6 +1771,17 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Springt naar': 'Siirtyy kohtaan',
+  'Geen sprong': 'Ei hyppyä',
+  'Blok toevoegen': 'Lisää lohko',
+  'Blok verwijderen': 'Poista lohko',
+  'Geen afbeelding': 'Ei kuvaa',
+  'Afbeelding verwijderen': 'Poista kuva',
+  'Nog geen blokken. Voeg een keuzeblok toe.':
+      'Ei vielä lohkoja. Lisää valintalohko.',
+  'Keuzemenu': 'Valintavalikko',
+  'Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label, kies de doeldia en eventueel een afbeelding. Een blok zonder doel is gewone tekst.':
+      'Valintavalikko: jokainen lohko siirtyy toiseen diaan, kun sitä napsautetaan. Kirjoita jokaiselle lohkolle nimike, valitse kohdedia ja halutessasi kuva. Lohko ilman kohdetta on tavallista tekstiä.',
   'Hierna': 'Sitten',
   'Volgende dia': 'Seuraava dia',
   'Sprong': 'Hyppy',

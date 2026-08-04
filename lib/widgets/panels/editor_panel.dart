@@ -434,4 +434,5 @@ const Map<SlideType, IconData> slideTypeIcons = {
   SlideType.flow: Icons.alt_route,
   SlideType.phaseGate: Icons.door_front_door_outlined,
   SlideType.controlStatus: Icons.fact_check_outlined,
+  SlideType.menu: Icons.list_alt_outlined,
 };
