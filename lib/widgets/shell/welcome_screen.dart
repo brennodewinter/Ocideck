@@ -158,8 +158,9 @@ class _WelcomeScreen extends ConsumerWidget {
     final lo = yellowLum > bgLum ? bgLum : yellowLum;
     final logoInk = (hi + 0.05) / (lo + 0.05) >= 3.0 ? euYellow : euBlue;
     return Container(
-      // Bottom inset (14) geeft de versietag lucht boven de doorlopende
-      // voettekststreep die nu onder alle kolommen loopt ([_welcomeFooter]).
+      // Bottom inset (14) geeft de welkomtekst lucht boven de doorlopende
+      // voettekststreep die onder alle kolommen loopt ([_welcomeFooter]); de
+      // versietag is inmiddels naar die voettekst verhuisd.
       padding: const EdgeInsets.fromLTRB(34, 34, 34, 14),
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -175,7 +176,7 @@ class _WelcomeScreen extends ConsumerWidget {
       // belofte tot voorbij de paneelhoogte. De Column met [Spacer] mag dan niet
       // overlopen — die regressie glipte via #1146 ongetoetst op main (RenderFlex
       // +266px bij 200% tekst). Scroll-wanneer-het-niet-past, met behoud van de
-      // "logo boven, welkomtekst + versie onder"-verdeling zolang het wél past
+      // "logo boven, welkomtekst onder"-verdeling zolang het wél past
       // (minHeight = paneelhoogte + IntrinsicHeight laten de [Spacer] werken).
       child: LayoutBuilder(
         builder: (context, constraints) => SingleChildScrollView(
@@ -191,19 +192,10 @@ class _WelcomeScreen extends ConsumerWidget {
                     // No plate behind the mark. The dark logo asset is an alpha mask
                     // (transparent ground, ink = coverage), so `srcIn` paints just the
                     // mark in [logoInk] and it reads directly on the gradient in either
-                    // theme instead of sitting in a white card.
-                    child: SizedBox(
-                      width: 170,
-                      height: 170,
-                      child: ColorFiltered(
-                        colorFilter: ColorFilter.mode(logoInk, BlendMode.srcIn),
-                        child: Image.asset(
-                          BrandLogo.ociDeck.darkAsset,
-                          fit: BoxFit.contain,
-                          filterQuality: FilterQuality.high,
-                        ),
-                      ),
-                    ),
+                    // theme instead of sitting in a white card. Hover wisselt de inkt
+                    // naar de 'andere' Europese kleur: blauw → geel, geel → Italiaans
+                    // groen (zie [_HoverHueLogo]).
+                    child: _HoverHueLogo(baseInk: logoInk, size: 170),
                   ),
                   const Spacer(),
                   Text(
@@ -222,8 +214,6 @@ class _WelcomeScreen extends ConsumerWidget {
                       height: 1.45,
                     ),
                   ),
-                  const SizedBox(height: 18),
-                  _VersionTag(palette: AppPalette.of(theme)),
                 ],
               ),
             ),
@@ -373,15 +363,18 @@ class _WelcomeScreen extends ConsumerWidget {
     ];
   }
 
-  /// De twee tekstlinks onderaan: handleiding en instellingen.
+  /// De linkergroep van de voettekstband: het versienummer (links, klein en
+  /// tikt door naar Over OciDeck) plus handleiding en instellingen als
+  /// outlined knoppen — dezelfde vorm als de startknoppen in de middelste
+  /// kolom, zodat ze herkenbaar als klikbaar zijn. Rechts blijft de
+  /// Vigilis-sponsorvermelding staan.
   ///
-  /// Bewust stil: klein, gedempte kleur, geen knopvorm en geen icoon. Ze
-  /// stonden eerst als [TextButton.icon] vlak onder de knoppenkolom — zelfde
-  /// blauw, bijna dezelfde lettergrootte — en lazen daardoor als een zesde en
-  /// zevende "manier om te beginnen" in plaats van de bijzaak die het is. Hoe
-  /// meer opties er even zwaar ogen, hoe langer het kiezen duurt (Hick-Hyman);
-  /// een stille, losstaande voettekst laat de knoppenkolom weer als dé keuze
-  /// staan.
+  /// Eerder stonden deze twee als stille tekstlinks: klein, gedempt, zonder
+  /// knopvorm of icoon. Dat was bewust gekozen om ze niet als een zesde en
+  /// zevende "manier om te beginnen" te laten lezen. In de praktijk las
+  /// niemand ze echter als klikbaar — de gebruiker zag geen verschil met
+  /// gewone voettekst. De knopvorm is nu de hogere lat: vindbaarheid wint van
+  /// rust.
   ///
   /// De handleiding stond alleen achter Instellingen → Documentatie: drie
   /// klikken diep, precies daar waar iemand die nog niets weet niet gaat
@@ -391,41 +384,46 @@ class _WelcomeScreen extends ConsumerWidget {
     AppLocalizations l10n,
     AppPalette palette,
   ) {
-    final style = TextStyle(fontSize: 11.5, color: palette.mutedText);
-    // Links de stille tekstlinks, rechts de sponsorvermelding met het Vigilis-
-    // merk. `spaceBetween` duwt de twee groepen naar de uiteinden van de
-    // schermbrede band — links links, credit rechtsonder — en laat ze onder
-    // elkaar zakken zodra het te smal wordt (bv. 200% tekst), zodat er niets
-    // overloopt.
+    final scheme = Theme.of(context).colorScheme;
+    final creditStyle = TextStyle(fontSize: 11.5, color: palette.mutedText);
+    final buttonStyle = _secondaryButtonStyle(scheme);
+    // Links het versienummer en de twee knoppen, rechts de sponsorvermelding
+    // met het Vigilis-merk. `spaceBetween` duwt de twee groepen naar de
+    // uiteinden van de schermbrede band — links links, credit rechtsonder — en
+    // laat ze onder elkaar zakken zodra het te smal wordt (bv. 200% tekst),
+    // zodat er niets overloopt.
     return Wrap(
       alignment: WrapAlignment.spaceBetween,
       crossAxisAlignment: WrapCrossAlignment.center,
       runAlignment: WrapAlignment.center,
-      spacing: 20,
+      spacing: 16,
       runSpacing: 12,
       children: [
         Wrap(
-          spacing: 20,
+          spacing: 12,
           runSpacing: 8,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            _QuietLink(
-              label: l10n.d('Gebruikershandleiding'),
-              style: style,
-              onTap: () => DocumentReaderScreen.open(
+            _VersionTag(palette: palette),
+            OutlinedButton.icon(
+              style: buttonStyle,
+              onPressed: () => DocumentReaderScreen.open(
                 context,
                 title: l10n.d('Gebruikershandleiding'),
                 assetBase: 'docs/USER_GUIDE.md',
               ),
+              icon: const Icon(Icons.menu_book_outlined, size: 18),
+              label: Text(l10n.d('Gebruikershandleiding')),
             ),
-            _QuietLink(
-              label: l10n.t('settings'),
-              style: style,
-              onTap: () => SettingsDialog.show(context),
+            OutlinedButton.icon(
+              style: buttonStyle,
+              onPressed: () => SettingsDialog.show(context),
+              icon: const Icon(Icons.settings_outlined, size: 18),
+              label: Text(l10n.t('settings')),
             ),
           ],
         ),
-        _madePossibleByVigilis(l10n, style),
+        _madePossibleByVigilis(l10n, creditStyle),
       ],
     );
   }
@@ -615,28 +613,52 @@ class _VersionTag extends StatelessWidget {
   }
 }
 
-/// Eén tekstlinkje in de stille voettekst: geen knopvorm, geen icoon — de
-/// stijl van [style] (klein, gedempt) draagt het onderscheid met de echte
-/// knoppen erboven, niet padding of een rand.
-class _QuietLink extends StatelessWidget {
-  final String label;
-  final TextStyle style;
-  final VoidCallback onTap;
+/// Het OciDeck-merk als alpha-masker, met een hover-wissel van inktkleur. In
+/// rust toont het merk [baseInk] (EU-geel of EU-blauw, zie [_brandPanel]).
+/// Bij hover gaat het naar de 'andere' Europese kleur: is de rustkleur blauw,
+/// dan wordt het geel; is de rustkleur geel, dan wordt het Italiaans
+/// vlaggroen. Eén widget met eigen state, want de inktkleur hangt af van
+/// muisstatus die de bovenliggende [StatelessWidget] niet bijhoudt.
+class _HoverHueLogo extends StatefulWidget {
+  final Color baseInk;
+  final double size;
 
-  const _QuietLink({
-    required this.label,
-    required this.style,
-    required this.onTap,
-  });
+  const _HoverHueLogo({required this.baseInk, required this.size});
+
+  @override
+  State<_HoverHueLogo> createState() => _HoverHueLogoState();
+}
+
+class _HoverHueLogoState extends State<_HoverHueLogo> {
+  bool _hovering = false;
+
+  Color get _hoverInk {
+    // Blauw → geel, geel → Italiaans groen. De twee rustkleuren uit
+    // [_brandPanel] krijgen zo elk een eigen hoverkleur uit het Europese
+    // kleurgebaar; andere basisinkleuren vallen terug op geel (de merkkleur).
+    if (widget.baseInk == AppTheme.blueVivid) return AppTheme.amberVivid;
+    if (widget.baseInk == AppTheme.amberVivid) return AppTheme.italianGreen;
+    return AppTheme.amberVivid;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(3),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-        child: Text(label, style: style),
+    final ink = _hovering ? _hoverInk : widget.baseInk;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovering = true),
+      onExit: (_) => setState(() => _hovering = false),
+      child: SizedBox(
+        width: widget.size,
+        height: widget.size,
+        child: ColorFiltered(
+          colorFilter: ColorFilter.mode(ink, BlendMode.srcIn),
+          child: Image.asset(
+            BrandLogo.ociDeck.darkAsset,
+            fit: BoxFit.contain,
+            filterQuality: FilterQuality.high,
+          ),
+        ),
       ),
     );
   }

@@ -28,8 +28,8 @@ void main() {
   testWidgets('Welcome screen exposes settings', (WidgetTester tester) async {
     await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
     await tester.pumpAndSettle();
-    // Sinds de stille voettekst (geen knopvorm, geen icoon meer) is de tekst
-    // zelf de vindplaats, niet een icoon ernaast.
+    // De voettekstlink staat als outlined knop met icoon; het label is nog
+    // steeds de vindplaats.
     expect(find.text('Instellingen'), findsOneWidget);
   });
 
@@ -87,13 +87,18 @@ void main() {
     (tester) async {
       // Vóór deze tag stond het versienummer nergens op het openscherm — een
       // melder moest drie klikken diep in Instellingen om op te zoeken welke
-      // versie SECURITY.md vraagt te vermelden.
+      // versie SECURITY.md vraagt te vermelden. De tag woont nu in de
+      // voettekstband onderaan, die in de nauwe (smal-scherm) layout onder de
+      // kolommen schuift — vandaar eerst zichtbaar scrollen vóór de tik.
       await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
       await tester.pumpAndSettle();
 
-      expect(find.text('v$kOciDeckVersion'), findsOneWidget);
+      final versionFinder = find.text('v$kOciDeckVersion');
+      expect(versionFinder, findsOneWidget);
+      await tester.ensureVisible(versionFinder);
+      await tester.pumpAndSettle();
 
-      await tester.tap(find.text('v$kOciDeckVersion'));
+      await tester.tap(versionFinder);
       await tester.pumpAndSettle();
 
       expect(find.text('Over OciDeck'), findsOneWidget);
