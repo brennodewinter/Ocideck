@@ -92,11 +92,35 @@ Twee distributiewegen:
 Flatpak is dus geen simpele "erbij" maar een eigen traject met een echte
 waardenkeuze (eigen remote vs Flathub). Het verdient een aparte beslissing.
 
-**Snap — waarschijnlijk niet.** De Snap Store is Canonical-gecentraliseerd met een
-proprietary backend; er is praktisch geen alternatieve store. Dat botst met
-soevereiniteit (waarde 3) op dezelfde manier als een gesloten app-store, en zonder
-de vindbaarheidswinst die Flathub biedt op méér dan één distro. Voorlopig
-afgeraden; genoteerd, niet gebouwd.
+**Snap — laag-soeverein als kanaal, maar verdedigbaar als één van velen.** De Snap
+Store is Canonical-gecentraliseerd met een propriëtaire, niet zelf te hosten
+backend (de bouwtooling is wél open). Als *kanaal* scoort Snap daarmee laag op
+strategische, keten- en technologische soevereiniteit. Maar dat is niet het einde
+van de afweging — zie [`../../assurance/soevereiniteit-ecsf.md`](../../assurance/soevereiniteit-ecsf.md):
+soevereiniteit is meerdimensionaal, en **meerdere routes verhógen de operationele
+soevereiniteit (SOV-4)**. Snap als één van meerdere kanalen dwingt de
+Ubuntu-gebruiker nergens toe (die heeft AppImage, `.deb`, Flatpak) en maakt
+OciDeck er niet afhankelijk van — de release komt uit onze forge. De Ubuntu-markt
+deels missen is een reëel nadeel; hem via een laag-soeverein kanaal alsnog
+bedienen, zónder het canonieke pad te verlaten, is een nettowinst. Snap wordt dus
+**niet op voorhand afgewezen**, maar als extra route gewogen met open ogen over
+waar het laag scoort. Bouwen kan met de snapcraft flutter-extensie; publiceren
+loopt via Canonicals store (en `classic`-confinement vergt hun per-app-goedkeuring).
+
+## Beperkte builds: de capaciteits-feature-flag
+
+Flatpak (strict) en Snap draaien in een **sandbox**, en die raakt functionaliteit
+die op een **git-subproces** leunt (de git-opslag met de NetGuard-oplegging). Bij
+Flatpak is dat oplosbaar door `git` mee te bundelen; waar dat niet kan of niet
+gewenst is, mag de app **niet breken of stil verkeerd gedrag vertonen**. In plaats
+daarvan hoort er een **capaciteits-feature-flag** te zijn — gezet bij de build of
+gedetecteerd bij runtime — die de subproces-afhankelijke functies uitschakelt en
+de gebruiker **zegt** wat deze verpakking wel en niet kan. Zo is een beperkte
+verpakking een *bewuste, benoemde* beperking in plaats van een bug, en blijft de
+technologische soevereiniteit overeind: de gebruiker weet wat elke build kan. Dit
+is een harde bouwvoorwaarde voor elke confined verpakking (Flatpak/Snap), niet een
+bijzaak. De redenering staat in
+[`../../assurance/soevereiniteit-ecsf.md`](../../assurance/soevereiniteit-ecsf.md).
 
 ## Aanbevolen fasering
 
@@ -107,11 +131,18 @@ afgeraden; genoteerd, niet gebouwd.
 2. **Daarna, gebruiksgemak zonder de forge te verlaten:** een eigen,
    ondertekende apt-repo (en desgewenst een dnf/rpm-repo) op de forge/website,
    zodat updates meelopen.
-3. **Aparte beslissing:** Flatpak — eerst een eigen remote (waardenzuiver), en
-   pas daarna de vraag of Flathub erbij komt (bereik vs poortwachter +
-   permissie-review). De offline-buildhorde is met bestaande tooling te nemen.
+3. **De confined kanalen — Flatpak en Snap, elk mét de capaciteits-feature-flag
+   als bouwvoorwaarde.** Flatpak langs een eigen remote of een `.flatpak`-bundel
+   (waardenzuiver) én Flathub (bereik + vindbaarheid); Snap voor de Ubuntu-markt.
+   Elk van deze draait in een sandbox, dus geen van drieën gaat live zonder dat
+   de feature-flag de subproces-afhankelijke functies netjes uitschakelt en
+   benoemt. De offline-buildhorde van Flathub is met `flatpak-flutter`/`flutpak`
+   te nemen.
 
-Elke fase is op zichzelf compleet; niets hiervan maakt een kanaal canoniek.
+Elke fase is op zichzelf compleet; niets hiervan maakt een kanaal canoniek. De
+onderbouwing waarom óók de laag-soevereine kanalen (Snap, Flathub) hier als
+nettowinst gelden, staat in
+[`../../assurance/soevereiniteit-ecsf.md`](../../assurance/soevereiniteit-ecsf.md).
 
 ## De website (aparte repo — werkitems, niet in deze PR)
 
@@ -134,8 +165,12 @@ zoekraken.
 
 ## Open beslissingen (voor de bouwfase)
 
-- **Flatpak: eigen remote, Flathub, of allebei?** De enige echte waardenkeuze in
-  dit plan.
-- **Snap: definitief niet, of toch classic-confinement overwegen?**
-- **Eigen apt/rpm-repo nu of later** — hangt aan of updates-meelopen zwaar genoeg
-  weegt tegen het onderhoud van een ondertekende repo.
+- **Flatpak: eigen remote/`.flatpak`-bundel én Flathub?** De soevereiniteitstoets
+  wijst richting "allebei": de eigen route voor de waarde, Flathub voor het
+  bereik. Bevestiging gevraagd.
+- **Snap: als extra route erbij (aanbevolen na de ECSF-weging), en zo ja strict-
+  of classic-confinement?** Strict houdt de sandbox intact (feature-flag doet het
+  werk); classic vergt Canonicals per-app-goedkeuring.
+- **Eigen apt/rpm-repo** — bevestigd als kern van fase 1 (updates lopen mee).
+- **Feature-flag** — geen open vraag maar een **bouwvoorwaarde** voor elke
+  confined verpakking; hoort ontworpen te zijn vóór de eerste Flatpak/Snap.
