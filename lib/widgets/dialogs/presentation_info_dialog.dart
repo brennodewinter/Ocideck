@@ -363,12 +363,29 @@ class _PresentationInfoDialogState
             ),
             const SizedBox(width: 12),
             SizedBox(
-              width: 120,
+              // Breed genoeg voor tien tekens (JJJJ-MM-DD) plús de suffix-knop:
+              // bij 150 viel het laatste dagcijfer achter de knop weg (#1210),
+              // precies het cijfer dat de knop leesbaar moest maken.
+              width: 184,
               child: _field(
                 _date,
                 'Datum',
                 'Bijv. 2026-05-30',
                 onDoubleTap: _setCurrentDate,
+                // Een zichtbare knop maakt de dubbelklik-functie vindbaar (#1210):
+                // zonder aanwijzing wist niemand dat het veld vandaag kon
+                // invullen. Compact, zodat hij het tekstveld niet verdringt.
+                suffix: IconButton(
+                  icon: const Icon(Icons.today, size: 18),
+                  tooltip: context.l10n.d('Vul de datum van vandaag in'),
+                  onPressed: _setCurrentDate,
+                  padding: EdgeInsets.zero,
+                  visualDensity: VisualDensity.compact,
+                  constraints: const BoxConstraints(
+                    minWidth: 32,
+                    minHeight: 32,
+                  ),
+                ),
               ),
             ),
           ],

@@ -1794,6 +1794,7 @@ const _dutchSourceAddRo = <String, String>{
       'Secțiunea „{sectie}“ nu este o secțiune standard a unei constatări și nu este afișată sau exportată (conținutul rămâne totuși în fișierul sursă). Redenumiți titlul în Description, Confirmation (reproduction), Possible impact sau Recommendation.',
   'Breedte aanpassen': 'Ajustează lățimea',
   'Niet akkoord en afsluiten': 'Refuză și ieși',
+  'Vul de datum van vandaag in': 'Completează data de azi',
   'Springt naar': 'Sare la',
   'Geen sprong': 'Fără salt',
   'Blok toevoegen': 'Adaugă bloc',

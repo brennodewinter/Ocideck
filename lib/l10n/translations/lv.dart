@@ -1776,6 +1776,7 @@ const _dutchSourceAddLv = <String, String>{
       'Sadaļa "{sectie}" nav standarta atraduma sadaļa un netiek rādīta vai eksportēta (saturs tomēr paliek avota failā). Pārdēvējiet virsrakstu par Description, Confirmation (reproduction), Possible impact vai Recommendation.',
   'Breedte aanpassen': 'Pielāgot platumu',
   'Niet akkoord en afsluiten': 'Noraidīt un aizvērt',
+  'Vul de datum van vandaag in': 'Ievietot šodienas datumu',
   'Springt naar': 'Pāriet uz',
   'Geen sprong': 'Bez pārejas',
   'Blok toevoegen': 'Pievienot bloku',

@@ -1779,6 +1779,7 @@ const _dutchSourceAddSl = <String, String>{
       'Razdelek »{sectie}« ni standardni razdelek ugotovitve in se ne prikaže niti izvozi (vsebina kljub temu ostane v izvorni datoteki). Preimenujte naslov v Description, Confirmation (reproduction), Possible impact ali Recommendation.',
   'Breedte aanpassen': 'Prilagodi širino',
   'Niet akkoord en afsluiten': 'Zavrni in končaj',
+  'Vul de datum van vandaag in': 'Vstavi današnji datum',
   'Springt naar': 'Skoči na',
   'Geen sprong': 'Brez skoka',
   'Blok toevoegen': 'Dodaj blok',

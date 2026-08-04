@@ -99,6 +99,50 @@ void main() {
     expect(field.controller!.text, expected);
   });
 
+  testWidgets('the today button fills in the current date', (tester) async {
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: PresentationInfoDialog(deck: Deck(title: 'Test')),
+          ),
+        ),
+      ),
+    );
+
+    final now = DateTime.now();
+    String twoDigits(int value) => value.toString().padLeft(2, '0');
+    final expected =
+        '${now.year}-${twoDigits(now.month)}-${twoDigits(now.day)}';
+
+    // De knop maakt de dubbelklik-functie zichtbaar (#1210): hij hangt in de
+    // suffix van het datumveld en vult dezelfde datum in.
+    final todayButton = tester.widget<IconButton>(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is IconButton &&
+            widget.icon is Icon &&
+            (widget.icon as Icon).icon == Icons.today,
+      ),
+    );
+    expect(todayButton.tooltip, isNotEmpty);
+
+    // De knop rechtstreeks aanroepen in plaats van te tikken: het datumveld
+    // draagt ook een onDoubleTap, en die recognizer houdt de arena open tot de
+    // dubbelklik-timer afloopt, waardoor een gesimuleerde enkele tik in de
+    // fake-async testomgeving de knopdruk niet betrouwbaar laat winnen. De
+    // gesture-route naar dezelfde datum staat al in de dubbelklik-test hierboven.
+    todayButton.onPressed!();
+    await tester.pump();
+
+    final dateField = find.byWidgetPredicate(
+      (widget) =>
+          widget is TextField && widget.decoration?.labelText == 'Datum',
+    );
+    final field = tester.widget<TextField>(dateField);
+    expect(field.controller!.text, expected);
+  });
+
   testWidgets('gekozen stijlprofiel komt in het resultaat', (tester) async {
     Future<PresentationInfo?>? result;
     await tester.pumpWidget(

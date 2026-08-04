@@ -1776,6 +1776,7 @@ const _dutchSourceAddDa = <String, String>{
       'Afsnittet "{sectie}" er ikke et standardafsnit i et fund og vises eller eksporteres ikke (indholdet forbliver dog i kildefilen). Omdøb overskriften til Description, Confirmation (reproduction), Possible impact eller Recommendation.',
   'Breedte aanpassen': 'Justér bredde',
   'Niet akkoord en afsluiten': 'Afvis og luk',
+  'Vul de datum van vandaag in': 'Indsæt dagens dato',
   'Springt naar': 'Springer til',
   'Geen sprong': 'Intet spring',
   'Blok toevoegen': 'Tilføj blok',

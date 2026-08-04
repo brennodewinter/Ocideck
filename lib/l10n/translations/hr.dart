@@ -1783,6 +1783,7 @@ const _dutchSourceAddHr = <String, String>{
       'Odjeljak "{sectie}" nije standardni odjeljak nalaza i ne prikazuje se niti izvozi (sadržaj ipak ostaje u izvornoj datoteci). Preimenujte naslov u Description, Confirmation (reproduction), Possible impact ili Recommendation.',
   'Breedte aanpassen': 'Prilagodi širinu',
   'Niet akkoord en afsluiten': 'Odbij i zatvori',
+  'Vul de datum van vandaag in': 'Umetni današnji datum',
   'Springt naar': 'Skače na',
   'Geen sprong': 'Bez skoka',
   'Blok toevoegen': 'Dodaj blok',

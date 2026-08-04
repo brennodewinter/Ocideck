@@ -1812,6 +1812,7 @@ const _dutchSourceAddGa = <String, String>{
       'Ní cuid chaighdeánach de thoradh í an rannóg "{sectie}" agus ní thaispeántar ná ní easpórtáiltear í (fanann an t-ábhar sa bhunchomhad mar sin féin). Athainmnigh an ceannteideal go Description, Confirmation (reproduction), Possible impact nó Recommendation.',
   'Breedte aanpassen': 'Coigeartaigh leithead',
   'Niet akkoord en afsluiten': 'Diúltaigh agus scoir',
+  'Vul de datum van vandaag in': 'Cuir isteach dáta an lae inniu',
   'Springt naar': 'Léim go',
   'Geen sprong': 'Gan léim',
   'Blok toevoegen': 'Cuir bloc leis',

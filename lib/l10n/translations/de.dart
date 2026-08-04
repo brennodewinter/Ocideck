@@ -736,6 +736,7 @@ const _dutchSourceAddDe = {
       'Der Abschnitt „{sectie}“ ist kein Standardabschnitt eines Befunds und wird nicht angezeigt oder exportiert (der Inhalt bleibt aber in der Quelldatei erhalten). Benenne die Überschrift in Description, Confirmation (reproduction), Possible impact oder Recommendation um.',
   'Breedte aanpassen': 'Breite anpassen',
   'Niet akkoord en afsluiten': 'Ablehnen und beenden',
+  'Vul de datum van vandaag in': 'Heutiges Datum einfügen',
   'Springt naar': 'Springt zu',
   'Geen sprong': 'Kein Sprung',
   'Blok toevoegen': 'Block hinzufügen',

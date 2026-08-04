@@ -1794,6 +1794,7 @@ const _dutchSourceAddUk = <String, String>{
       'Розділ «{sectie}» не є стандартним розділом виявлення і не відображається та не експортується (вміст усе ж залишається у вихідному файлі). Перейменуйте заголовок на Description, Confirmation (reproduction), Possible impact або Recommendation.',
   'Breedte aanpassen': 'Налаштувати ширину',
   'Niet akkoord en afsluiten': 'Відхилити й вийти',
+  'Vul de datum van vandaag in': 'Вставити сьогоднішню дату',
   'Springt naar': 'Переходить до',
   'Geen sprong': 'Без переходу',
   'Blok toevoegen': 'Додати блок',

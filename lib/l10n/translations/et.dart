@@ -1768,6 +1768,7 @@ const _dutchSourceAddEt = <String, String>{
       'Jaotis "{sectie}" ei ole leiu standardjaotis ega seda ei kuvata ega ekspordita (sisu jääb siiski lähtefaili). Nimetage pealkiri ümber: Description, Confirmation (reproduction), Possible impact või Recommendation.',
   'Breedte aanpassen': 'Kohalda laiust',
   'Niet akkoord en afsluiten': 'Keeldu ja välju',
+  'Vul de datum van vandaag in': 'Lisa tänane kuupäev',
   'Springt naar': 'Hüppab kohta',
   'Geen sprong': 'Ei hüpet',
   'Blok toevoegen': 'Lisa plokk',

@@ -1752,6 +1752,7 @@ const _dutchSourceAddTlh = <String, String>{
       '«{sectie}» \'ay\' \'oH tu\'bogh De\' \'ay\' motlhbe\'; \'angbe\'lu\' \'ej ngeHbe\'lu\' (mungDaq De\' ratlh). Description, Confirmation (reproduction), Possible impact ghap Recommendation \'oHmo\' nab, nab pong yIchoH.',
   'Breedte aanpassen': 'mIllogh yIchoH',
   'Niet akkoord en afsluiten': 'yIlajQo\' \'ej yImev',
+  'Vul de datum van vandaag in': 'DaHjaj jaj chel',
   'Springt naar': 'SupmeH Daq',
   'Geen sprong': 'Sup pagh',
   'Blok toevoegen': 'block yIchel',

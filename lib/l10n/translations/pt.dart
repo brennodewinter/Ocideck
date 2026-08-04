@@ -1806,6 +1806,7 @@ const _dutchSourceAddPt = <String, String>{
       'A secção "{sectie}" não é uma secção padrão de uma constatação e não é apresentada nem exportada (o conteúdo permanece, no entanto, no ficheiro de origem). Mude o nome do título para Description, Confirmation (reproduction), Possible impact ou Recommendation.',
   'Breedte aanpassen': 'Ajustar largura',
   'Niet akkoord en afsluiten': 'Recusar e sair',
+  'Vul de datum van vandaag in': 'Inserir a data de hoje',
   'Springt naar': 'Salta para',
   'Geen sprong': 'Sem salto',
   'Blok toevoegen': 'Adicionar bloco',

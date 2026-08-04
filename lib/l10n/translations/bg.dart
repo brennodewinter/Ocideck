@@ -1799,6 +1799,7 @@ const _dutchSourceAddBg = <String, String>{
       'Разделът „{sectie}“ не е стандартен раздел на констатация и не се показва, нито се експортира (съдържанието обаче остава в изходния файл). Преименувайте заглавието на Description, Confirmation (reproduction), Possible impact или Recommendation.',
   'Breedte aanpassen': 'Настрой ширината',
   'Niet akkoord en afsluiten': 'Отхвърляне и изход',
+  'Vul de datum van vandaag in': 'Попълни днешната дата',
   'Springt naar': 'Преминава към',
   'Geen sprong': 'Без преход',
   'Blok toevoegen': 'Добавяне на блок',

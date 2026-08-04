@@ -1780,6 +1780,7 @@ const _dutchSourceAddGsw = <String, String>{
       'De Abschnitt «{sectie}» isch käi Standardabschnitt vo emene Befund und wird nöd azeigt oder exportiert (de Inhalt bliibt aber i de Quälledatei). Benänn de Titel um zu Description, Confirmation (reproduction), Possible impact oder Recommendation.',
   'Breedte aanpassen': 'Breiti aapasse',
   'Niet akkoord en afsluiten': 'Ablehne und beände',
+  'Vul de datum van vandaag in': 'Hütigs Datum ifüege',
   'Springt naar': 'Springt zue',
   'Geen sprong': 'Kei Sprung',
   'Blok toevoegen': 'Block hinzuefüege',

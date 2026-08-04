@@ -737,6 +737,7 @@ const _dutchSourceAddFy = {
       'De seksje "{sectie}" is gjin standertseksje fan in befining en wurdt net toand of eksportearre (de ynhâld bliuwt al yn it boarnebestân). Neam de kop om nei Description, Confirmation (reproduction), Possible impact of Recommendation.',
   'Breedte aanpassen': 'Breedte oanpasse',
   'Niet akkoord en afsluiten': 'Ofwize en ôfslute',
+  'Vul de datum van vandaag in': 'Ful de datum fan hjoed yn',
   'Springt naar': 'Springt nei',
   'Geen sprong': 'Gjin sprong',
   'Blok toevoegen': 'Blok tafoegje',

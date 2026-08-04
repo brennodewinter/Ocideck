@@ -1804,6 +1804,7 @@ const _dutchSourceAddEl = <String, String>{
       'Η ενότητα «{sectie}» δεν είναι τυπική ενότητα ευρήματος και δεν εμφανίζεται ούτε εξάγεται (το περιεχόμενο παραμένει ωστόσο στο αρχείο προέλευσης). Μετονομάστε την επικεφαλίδα σε Description, Confirmation (reproduction), Possible impact ή Recommendation.',
   'Breedte aanpassen': 'Προσαρμογή πλάτους',
   'Niet akkoord en afsluiten': 'Άρνηση και έξοδος',
+  'Vul de datum van vandaag in': 'Συμπλήρωση της σημερινής ημερομηνίας',
   'Springt naar': 'Μεταβαίνει σε',
   'Geen sprong': 'Χωρίς μετάβαση',
   'Blok toevoegen': 'Προσθήκη μπλοκ',

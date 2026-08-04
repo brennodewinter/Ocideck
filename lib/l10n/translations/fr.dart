@@ -736,6 +736,7 @@ const _dutchSourceAddFr = {
       'La section « {sectie} » n\'est pas une section standard d\'une constatation et n\'est ni affichée ni exportée (le contenu reste toutefois dans le fichier source). Renommez le titre en Description, Confirmation (reproduction), Possible impact ou Recommendation.',
   'Breedte aanpassen': 'Ajuster la largeur',
   'Niet akkoord en afsluiten': 'Refuser et quitter',
+  'Vul de datum van vandaag in': 'Insérer la date du jour',
   'Springt naar': 'Saute vers',
   'Geen sprong': 'Aucun saut',
   'Blok toevoegen': 'Ajouter un bloc',

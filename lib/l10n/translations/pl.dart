@@ -1789,6 +1789,7 @@ const _dutchSourceAddPl = <String, String>{
       'Sekcja „{sectie}“ nie jest standardową sekcją ustalenia i nie jest wyświetlana ani eksportowana (treść pozostaje jednak w pliku źródłowym). Zmień nazwę nagłówka na Description, Confirmation (reproduction), Possible impact lub Recommendation.',
   'Breedte aanpassen': 'Dostosuj szerokość',
   'Niet akkoord en afsluiten': 'Odrzuć i zamknij',
+  'Vul de datum van vandaag in': 'Wstaw dzisiejszą datę',
   'Springt naar': 'Przechodzi do',
   'Geen sprong': 'Bez skoku',
   'Blok toevoegen': 'Dodaj blok',

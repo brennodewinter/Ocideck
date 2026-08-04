@@ -1117,6 +1117,15 @@ that before deciding whether this alpha fits what you are doing.
   hij is er juist voor wie niet instemt. Op web valt de knop weg: een tabblad
   sluiten werkt daar altijd en een pagina kan zichzelf niet afsluiten. Een test
   pint dat de uitweg openstaat terwijl "Akkoord gaan" nog grijs is.
+- **Het datumveld in de presentatie-eigenschappen kreeg een zichtbare
+  "vandaag"-knop (#1210).** Een dubbelklik op het datumveld vulde al de datum van
+  vandaag in, maar niets liet dat zien — een gebruiker ontdekte het bij toeval en
+  vroeg om een aanwijzing. In plaats van alleen een tooltip op een onzichtbaar
+  gebaar staat er nu een compacte kalenderknop (`Icons.today`) in het veld, met
+  de tooltip "Vul de datum van vandaag in": zichtbaar zonder te hoeven raden, en
+  hij vult hetzelfde `JJJJ-MM-DD` in. De dubbelklik blijft voor wie hem gewend
+  is. Het datumveld werd van 120 naar 150 px verbreed zodat de knop netjes naast
+  de tekst past; de tooltip staat in alle 31 talen.
 - **Eén commando voor het snijden van een release — de veilige kern eerst
   (#1161).** `make release TAG=vX.Y.Z` (`scripts/release.sh`) draait de voorkant
   van de release-keten voortaan identiek: een **monotone tag-guard** die alles

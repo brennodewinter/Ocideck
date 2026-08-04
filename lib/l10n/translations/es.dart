@@ -733,6 +733,7 @@ const _dutchSourceAddEs = {
       'La sección "{sectie}" no es una sección estándar de un hallazgo y no se muestra ni se exporta (el contenido sí permanece en el archivo de origen). Cambia el título a Description, Confirmation (reproduction), Possible impact o Recommendation.',
   'Breedte aanpassen': 'Ajustar el ancho',
   'Niet akkoord en afsluiten': 'Rechazar y salir',
+  'Vul de datum van vandaag in': 'Insertar la fecha de hoy',
   'Springt naar': 'Salta a',
   'Geen sprong': 'Sin salto',
   'Blok toevoegen': 'Añadir bloque',

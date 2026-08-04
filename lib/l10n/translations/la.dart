@@ -1793,6 +1793,7 @@ const _dutchSourceAddLa = <String, String>{
       'Sectio "{sectie}" non est sectio pervulgata inventi neque ostenditur neque exportatur (contentum tamen in fonte manet). Titulum in Description, Confirmation (reproduction), Possible impact aut Recommendation renomina.',
   'Breedte aanpassen': 'Latitudinem accommodare',
   'Niet akkoord en afsluiten': 'Recusa et exi',
+  'Vul de datum van vandaag in': 'Hodiernam diem insere',
   'Springt naar': 'Salit ad',
   'Geen sprong': 'Nullus saltus',
   'Blok toevoegen': 'Adde partem',

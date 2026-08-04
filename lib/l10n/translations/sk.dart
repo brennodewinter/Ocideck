@@ -1784,6 +1784,7 @@ const _dutchSourceAddSk = <String, String>{
       'Sekcia „{sectie}“ nie je štandardnou sekciou zistenia a nezobrazuje sa ani neexportuje (obsah však zostáva v zdrojovom súbore). Premenujte nadpis na Description, Confirmation (reproduction), Possible impact alebo Recommendation.',
   'Breedte aanpassen': 'Upraviť šírku',
   'Niet akkoord en afsluiten': 'Odmietnuť a ukončiť',
+  'Vul de datum van vandaag in': 'Vyplniť dnešný dátum',
   'Springt naar': 'Skočí na',
   'Geen sprong': 'Bez skoku',
   'Blok toevoegen': 'Pridať blok',
