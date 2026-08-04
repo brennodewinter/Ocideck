@@ -549,13 +549,40 @@ front of this chain so it happens the same way every time:
 
 The **irreversible, outward** steps are printed as ordered next steps rather than
 fired automatically — pushing the tag, replacing the app in `/Applications`, and
-the public distribution below. A release orchestrator that pushes tags and
-overwrites the installed app has to be proven before it does those on its own;
-until then this removes the repeatable toil (guard + validate + build) and keeps
-the irreversible acts deliberate. Run the numbered steps the script prints, then
-the sections below. Complete automation of phases 2–3 (tag → mirror push, CI
-polling once a minute, minisign, website, `/Applications`) is the tracked next
-increment.
+the public distribution below. This is the **guided** variant: it removes the
+repeatable toil (guard + validate + build) and keeps the irreversible acts
+deliberate. Run the numbered steps it prints, then the sections below.
+
+### `scripts/release_auto.sh` — the unattended variant (#1161)
+
+When you want the *whole* chain to run hands-off, `scripts/release_auto.sh` is
+the automated counterpart. It fronts **all** the interaction — a menu picks the
+next SemVer level (patch/minor/major; there is no fourth digit, the project
+promises strict three-part SemVer) and one prompt takes the minisign key
+password — and then runs everything without another question, through the public
+tag push, the signing and the web deploy. The password is held only in memory
+and fed to `minisign` via `expect`; the macOS notarisation leans on this Mac's
+keychain items and asks for nothing.
+
+The order is the three phases in one go: **Phase 1 (local)** an *outdatedness
+gate* (`make catalogs-outdated` and `make check-pins` — a newer upstream catalog
+or a behind CI pin stops the release with a message so you update first, rather
+than bumping silently mid-release), the four-place version bump, `make sbom`,
+`make check-release`, `make build-release`, `make notarize-macos`, seal
+verification and the `/Applications` swap; **Phase 2** branch → PR → wait for the
+gate → merge → tag → push to origin **and** mirror → poll the release CI until
+every job is done; **Phase 3** sign `SHA256SUMS` and attach `SHA256SUMS.minisig`,
+watch the website-downloads job, and `make deploy-web`.
+
+Fail-safe: `set -Eeuo pipefail` plus an `ERR` trap name *which* step failed on
+*which* line, and whether the tag was already pushed — before the push nothing
+went out and the release branch is cleaned up, after it the tag stays put and the
+fix becomes the next patch tag (never a re-tag). `--dry-run` shows the plan and
+the outdatedness gate without mutating anything; `--print-version LEVEL` prints
+just the computed tag (the hermetic guard-arithmetic that
+`test/release_auto_version_test.dart` pins against the canonical rule). This is
+the fully-unattended increment the guided `make release` deliberately left to a
+proven follow-up.
 
 ### The tag-driven chain
 
