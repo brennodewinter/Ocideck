@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Niet akkoord en afsluiten': 'Elutasítás és kilépés',
   'Springt naar': 'Ugrás ide',
   'Geen sprong': 'Nincs ugrás',
   'Blok toevoegen': 'Blokk hozzáadása',

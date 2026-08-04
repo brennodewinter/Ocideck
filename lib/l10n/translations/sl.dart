@@ -1773,6 +1773,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Niet akkoord en afsluiten': 'Zavrni in končaj',
   'Springt naar': 'Skoči na',
   'Geen sprong': 'Brez skoka',
   'Blok toevoegen': 'Dodaj blok',

@@ -727,6 +727,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Niet akkoord en afsluiten': 'Rechazar y salir',
   'Springt naar': 'Salta a',
   'Geen sprong': 'Sin salto',
   'Blok toevoegen': 'Añadir bloque',

@@ -1778,6 +1778,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Niet akkoord en afsluiten': 'Atmesti ir išeiti',
   'Springt naar': 'Pereina į',
   'Geen sprong': 'Be perėjimo',
   'Blok toevoegen': 'Pridėti bloką',
