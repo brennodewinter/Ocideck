@@ -15,6 +15,7 @@ import '../models/seal_record.dart';
 import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import 'improvement/gantt_dsl.dart';
 import '../models/used_tool.dart';
 import '../models/timeline.dart';
 import '../models/video_source.dart';

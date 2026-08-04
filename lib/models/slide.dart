@@ -693,7 +693,7 @@ class Slide {
     this.tableRows = const [],
     this.tableEditable = false,
     this.tableMarkOverdue = false,
-    this.ganttScale = 'auto',
+    this.ganttScale = ganttScaleAuto,
     this.ganttSections = false,
     this.viewLimit,
     this.isDetail = false,

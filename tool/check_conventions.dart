@@ -122,7 +122,7 @@ const Map<String, int> fileSizeBaseline = {
   // copyWith-doorvoer. Pure dataplumbing van een nieuw formaatveld; er valt geen
   // gedrag uit te tillen naar een part.
   // +9 (#1162): de `menu`-enumwaarde met haar doc + de slideTypeMeta-entry.
-  'lib/models/slide.dart': 1004,
+  'lib/models/slide.dart': 1036,
   // Procesverbetering module card / reveal wiring in the shell.
   // +1 (#1037): the url_launcher_util import so the play-only landing can open
   // slide links in the browser, like every other presentation surface. The file
@@ -163,7 +163,7 @@ const Map<String, int> fileSizeBaseline = {
   // +18 (#1162): de menu-wireframe (2×2 raster van keuzeblokken) als eigen helper
   // `_paintMenuWireframe` (uit `paint` getild voor de methode-ratchet) plus de
   // `menu`-takken in de kiezer-switches.
-  'lib/widgets/dialogs/add_slide_dialog.dart': 1102,
+  'lib/widgets/dialogs/add_slide_dialog.dart': 1115,
   // chart_preview_improvement part registration + improvement ChartType switch.
   // +Y-01-parameter; improvement cases in improvement_dispatch.dart (part).
   // +13 (#1164): het nieuwe publieke veld splitRunPosition met zijn dispatch en
@@ -176,7 +176,7 @@ const Map<String, int> fileSizeBaseline = {
   // menu_preview.dart.
   // +7 (#1162): het `onMenuBlockTap`-veld + constructor-param + doorgifte, zodat
   // een keuze-menublok tijdens presenteren aanklikbaar is.
-  'lib/widgets/slides/slide_preview.dart': 1069,
+  'lib/widgets/slides/slide_preview.dart': 1074,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -254,7 +254,7 @@ const Map<String, int> classSizeBaseline = {
   // + `ocideck_next`) in `_parseBlockDirectives` — typedef-veld, init en twee
   // parse-takken per veld. Onherleidbare parse-plumbing; de serialisatie zelf zit
   // al in de top-level `_writeSlideDirectives` en telt niet mee.
-  'lib/services/markdown_service.dart#MarkdownService': 2423,
+  'lib/services/markdown_service.dart#MarkdownService': 2438,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2145,
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,

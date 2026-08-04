@@ -8,6 +8,11 @@ library;
 /// De vijf vaste kolommen van een gantt-tabel, op volgorde.
 const ganttColumnCount = 5;
 
+/// Default-waarde van `Slide.ganttScale`: Mermaid kiest zelf een as-formaat
+/// op basis van het datumbereik. Geen schermtekst — de dropdown-labels gaan
+/// door `l10n.d('Auto')` e.d.; dit is de interne waarde die opslaat/round-tript.
+const ganttScaleAuto = 'auto';
+
 /// De vaste kop die een nieuwe gantt-dia meekrijgt (GANTT_SLIDETYPE §2.2).
 /// Nederlands — de opslagtaal van de `.md`, zoals checklist- en scope-koppen.
 const ganttStarterRows = [

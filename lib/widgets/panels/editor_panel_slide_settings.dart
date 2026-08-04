@@ -729,7 +729,7 @@ class _SlideSettingsBody extends StatelessWidget {
                   ),
                 ],
                 onChanged: (v) =>
-                    onUpdate(slide.copyWith(ganttScale: v ?? 'auto')),
+                    onUpdate(slide.copyWith(ganttScale: v ?? ganttScaleAuto)),
               ),
             ),
           if (slide.type == SlideType.gantt)
