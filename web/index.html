@@ -18,7 +18,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="OciDeck">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="apple-touch-icon" href="app-icons/Icon-192.png">
   <link rel="icon" type="image/png" href="favicon.png"/>
 
   <title>OciDeck — Feline and human friendly presentations</title>
@@ -51,7 +51,12 @@
 <body>
   <!-- Loading splash, no inline script (CSP): rationale in docs/BUILD.md, #589. -->
   <div id="splash" role="status" aria-live="polite">
-    <img src="icons/Icon-192.png" alt="" width="72" height="72">
+    <!-- `app-icons/` and not `icons/`: Debian/Ubuntu Apache ships
+         `Alias /icons/ /usr/share/apache2/icons/` in mods-enabled/alias.conf,
+         which shadows a webroot `icons/` dir and serves the system icons
+         instead — the splash logo then 404s on a default Apache host (#1221).
+         A path no stock server aliases is portable without a vhost edit. -->
+    <img src="app-icons/Icon-192.png" alt="" width="72" height="72">
     <p>OciDeck</p>
     <p class="sub">Laden… · Loading…</p>
   </div>

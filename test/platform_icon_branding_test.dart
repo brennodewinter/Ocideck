@@ -96,7 +96,7 @@ void main() {
         'macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png',
     'Linux': 'linux/runner/resources/app_icon.png',
     'Windows': 'windows/runner/resources/app_icon.ico',
-    'web': 'web/icons/Icon-512.png',
+    'web': 'web/app-icons/Icon-512.png',
     'iOS':
         'ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png',
     'Android': 'android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png',
@@ -157,7 +157,7 @@ void main() {
       for (final n in macosMaten)
         'macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_$n.png',
       'web/favicon.png',
-      'web/icons/Icon-192.png',
+      'web/app-icons/Icon-192.png',
       ...iosBestanden.map(iosPad),
       ...androidDichtheden.map(androidPad),
     ].where((pad) => File(pad).existsSync());
