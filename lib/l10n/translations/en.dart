@@ -911,6 +911,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Zoek op taal of code': 'Search by language or code',
+  'Geen talen gevonden': 'No languages found',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'The section "{sectie}" is not a standard finding section and is not shown or exported (the content does remain in the source file). Rename the heading to Description, Confirmation (reproduction), Possible impact or Recommendation.',
   'Breedte aanpassen': 'Adjust width',

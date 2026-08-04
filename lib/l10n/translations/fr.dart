@@ -730,6 +730,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Zoek op taal of code': 'Rechercher par langue ou code',
+  'Geen talen gevonden': 'Aucune langue trouvée',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'La section « {sectie} » n\'est pas une section standard d\'une constatation et n\'est ni affichée ni exportée (le contenu reste toutefois dans le fichier source). Renommez le titre en Description, Confirmation (reproduction), Possible impact ou Recommendation.',
   'Breedte aanpassen': 'Ajuster la largeur',

@@ -731,6 +731,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Zoek op taal of code': 'Sykje op taal of koade',
+  'Geen talen gevonden': 'Gjin talen fûn',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'De seksje "{sectie}" is gjin standertseksje fan in befining en wurdt net toand of eksportearre (de ynhâld bliuwt al yn it boarnebestân). Neam de kop om nei Description, Confirmation (reproduction), Possible impact of Recommendation.',
   'Breedte aanpassen': 'Breedte oanpasse',

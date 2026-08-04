@@ -1787,6 +1787,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Zoek op taal of code': 'Quaere lingua vel nota',
+  'Geen talen gevonden': 'Nullae linguae inventae',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'Sectio "{sectie}" non est sectio pervulgata inventi neque ostenditur neque exportatur (contentum tamen in fonte manet). Titulum in Description, Confirmation (reproduction), Possible impact aut Recommendation renomina.',
   'Breedte aanpassen': 'Latitudinem accommodare',

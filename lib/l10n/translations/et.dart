@@ -1762,6 +1762,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Zoek op taal of code': 'Otsi keele või koodi järgi',
+  'Geen talen gevonden': 'Keeli ei leitud',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'Jaotis "{sectie}" ei ole leiu standardjaotis ega seda ei kuvata ega ekspordita (sisu jääb siiski lähtefaili). Nimetage pealkiri ümber: Description, Confirmation (reproduction), Possible impact või Recommendation.',
   'Breedte aanpassen': 'Kohalda laiust',

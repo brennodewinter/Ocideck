@@ -1778,6 +1778,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Zoek op taal of code': 'Hľadať podľa jazyka alebo kódu',
+  'Geen talen gevonden': 'Nenašli sa žiadne jazyky',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'Sekcia „{sectie}“ nie je štandardnou sekciou zistenia a nezobrazuje sa ani neexportuje (obsah však zostáva v zdrojovom súbore). Premenujte nadpis na Description, Confirmation (reproduction), Possible impact alebo Recommendation.',
   'Breedte aanpassen': 'Upraviť šírku',
