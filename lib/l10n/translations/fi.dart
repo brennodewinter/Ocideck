@@ -1771,6 +1771,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Zoek op taal of code': 'Hae kielen tai koodin mukaan',
+  'Geen talen gevonden': 'Kieliä ei löytynyt',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'Osio "{sectie}" ei ole löydöksen vakio-osio, eikä sitä näytetä tai viedä (sisältö säilyy kuitenkin lähdetiedostossa). Nimeä otsikko uudelleen muotoon Description, Confirmation (reproduction), Possible impact tai Recommendation.',
   'Breedte aanpassen': 'Säädä leveyttä',

@@ -1771,6 +1771,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Zoek op taal of code': 'Cari berdasarkan bahasa atau kode',
+  'Geen talen gevonden': 'Tidak ada bahasa ditemukan',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'Bagian "{sectie}" bukan bagian standar dari suatu temuan dan tidak ditampilkan atau diekspor (isinya tetap ada di berkas sumber). Ganti nama judul menjadi Description, Confirmation (reproduction), Possible impact atau Recommendation.',
   'Breedte aanpassen': 'Sesuaikan lebar',

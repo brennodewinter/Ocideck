@@ -1770,6 +1770,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Zoek op taal of code': 'Meklēt pēc valodas vai koda',
+  'Geen talen gevonden': 'Valodas nav atrastas',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'Sadaļa "{sectie}" nav standarta atraduma sadaļa un netiek rādīta vai eksportēta (saturs tomēr paliek avota failā). Pārdēvējiet virsrakstu par Description, Confirmation (reproduction), Possible impact vai Recommendation.',
   'Breedte aanpassen': 'Pielāgot platumu',

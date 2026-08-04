@@ -1746,6 +1746,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Zoek op taal of code': 'Hol pagh nab yISam',
+  'Geen talen gevonden': 'Hol tu\'be\'lu\'',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       '«{sectie}» \'ay\' \'oH tu\'bogh De\' \'ay\' motlhbe\'; \'angbe\'lu\' \'ej ngeHbe\'lu\' (mungDaq De\' ratlh). Description, Confirmation (reproduction), Possible impact ghap Recommendation \'oHmo\' nab, nab pong yIchoH.',
   'Breedte aanpassen': 'mIllogh yIchoH',

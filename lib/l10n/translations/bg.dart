@@ -1793,6 +1793,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Zoek op taal of code': 'Търсене по език или код',
+  'Geen talen gevonden': 'Няма намерени езици',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'Разделът „{sectie}“ не е стандартен раздел на констатация и не се показва, нито се експортира (съдържанието обаче остава в изходния файл). Преименувайте заглавието на Description, Confirmation (reproduction), Possible impact или Recommendation.',
   'Breedte aanpassen': 'Настрой ширината',

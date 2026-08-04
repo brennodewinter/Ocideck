@@ -1800,6 +1800,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Zoek op taal of code': 'Pesquisar por idioma ou código',
+  'Geen talen gevonden': 'Nenhum idioma encontrado',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'A secção "{sectie}" não é uma secção padrão de uma constatação e não é apresentada nem exportada (o conteúdo permanece, no entanto, no ficheiro de origem). Mude o nome do título para Description, Confirmation (reproduction), Possible impact ou Recommendation.',
   'Breedte aanpassen': 'Ajustar largura',

@@ -1770,6 +1770,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Zoek op taal of code': 'Søg efter sprog eller kode',
+  'Geen talen gevonden': 'Ingen sprog fundet',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'Afsnittet "{sectie}" er ikke et standardafsnit i et fund og vises eller eksporteres ikke (indholdet forbliver dog i kildefilen). Omdøb overskriften til Description, Confirmation (reproduction), Possible impact eller Recommendation.',
   'Breedte aanpassen': 'Justér bredde',

@@ -2748,6 +2748,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Zoek op taal of code': 'Dile veya koda göre ara',
+  'Geen talen gevonden': 'Dil bulunamadı',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       '"{sectie}" bölümü bir bulgunun standart bölümü değildir ve gösterilmez veya dışa aktarılmaz (içerik yine de kaynak dosyada kalır). Başlığı Description, Confirmation (reproduction), Possible impact veya Recommendation olarak yeniden adlandırın.',
   'Breedte aanpassen': 'Genişliği ayarla',

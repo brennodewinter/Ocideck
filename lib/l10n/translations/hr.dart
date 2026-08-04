@@ -1777,6 +1777,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Zoek op taal of code': 'Pretraži po jeziku ili kodu',
+  'Geen talen gevonden': 'Nema pronađenih jezika',
   'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
       'Odjeljak "{sectie}" nije standardni odjeljak nalaza i ne prikazuje se niti izvozi (sadržaj ipak ostaje u izvornoj datoteci). Preimenujte naslov u Description, Confirmation (reproduction), Possible impact ili Recommendation.',
   'Breedte aanpassen': 'Prilagodi širinu',
