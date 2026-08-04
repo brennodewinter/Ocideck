@@ -927,6 +927,21 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Verkeerde melding bij het openen van een presentatie vlak na de start
+  (#1209).** Opende (of sleepte) je een `.pptx`/`.odp`/`.key` meteen na het
+  starten, dan meldde OciDeck "Zet de module Importeren aan…" terwijl die module
+  in de instellingen al aan stond; een tweede poging toonde wél de goede melding
+  ("OciDeck kan hem importeren…"). Oorzaak: de schakelaar wordt asynchroon uit
+  `SharedPreferences` geladen, en `importModuleRevealProvider` las in dat
+  laadvenster nog de veilige default (uit). De drie éénmalige beslissingen die
+  daarop vallen — "Openen" op desktop, openen-via-bytes op web, en slepen — wachten
+  nu eerst tot de stand geladen is via `importModuleRevealedWhenReady`, dat op de
+  nieuwe `ImportModuleNotifier.ready` leunt (voltooit zodra het laden klaar is,
+  gelukt of niet). De ontdekkingsbanieren van Informatieveiligheid en
+  Procesverbetering toetsten dit al op `state.loading`; de import-paden krijgen
+  dezelfde zekerheid. Twee regressietests pinnen het startvenster: een kale lezing
+  ziet nog de default, de wachtende helper de opgeslagen stand — en een sleep vlak
+  na de start importeert nu in plaats van naar de instellingen te wijzen.
 - **Wie de voorwaarden bij de eerste start niet accepteerde, zat klem (#1207).**
   De toestemmingspoort had alleen een "Akkoord gaan"-knop. Op Windows liep dat
   vast: `configureNativeWindow` zet `setPreventClose(true)`, en alleen de shell

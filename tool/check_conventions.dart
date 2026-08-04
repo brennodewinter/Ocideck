@@ -148,6 +148,12 @@ const Map<String, int> fileSizeBaseline = {
   // `collabChatRail` in collab_chat_panel.dart, only the spread + note remain.
   'lib/widgets/app_shell_main_layout.dart':
       985, // +6 (#978 Blok C): _signProvenance-delegator (zware logica in provenance_actions.dart); +1 (video-calls F1): callRail spread
+  // +5 (#1209): het desktop- én web-openpad wachten nu op de geladen module-stand
+  // (importModuleRevealedWhenReady) vóór ze de melding kiezen, met de bijhorende
+  // mounted-guard. Onherleidbare plumbing: de wacht + guard horen in elk openpad
+  // zelf, en beide paden delen al `_reportOpenFailure`. Het bestand stond exact op
+  // zijn plafond.
+  'lib/widgets/shell/shell_actions.dart': 1005,
   // Procesverbetering category tab + engine types in the add-slide picker.
   // +18 (#1162): de menu-wireframe (2×2 raster van keuzeblokken) als eigen helper
   // `_paintMenuWireframe` (uit `paint` getild voor de methode-ratchet) plus de
