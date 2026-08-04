@@ -222,6 +222,7 @@ now the only passing state.
 | [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — |
 | [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | — |
 | [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | — |
+| [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — |
@@ -579,6 +580,38 @@ also declares them, but see the [CI note](#continuous-integration).)
   already exists but does not win, check the `PATH` order in `~/.zshrc` — an
   entry added *before* Homebrew's line loses to it, which is precisely how two
   Flutters disagreed here unnoticed for weeks.
+
+### `make check-version-bump`
+- **Runs:** `dart run tool/check_version_bump.dart`
+- **Covers:** the `version:` in `pubspec.yaml` against the last release tag
+  reachable from HEAD (`git describe --tags --abbrev=0 --match 'v*'`). From a
+  released `X.Y.Z` the only legal next versions are the patch `X.Y.(Z+1)`, the
+  minor `X.(Y+1).0` (patch reset) or the major `(X+1).0.0` (minor and patch
+  reset). Anything else — carrying an old minor or patch across a major bump,
+  jumping two axes at once — is refused.
+- **Why it exists:** the version was once bumped `0.2.0 → 1.2.1` in a release
+  commit, and the `v1.2.1` tag fired the whole release chain (four platforms, a
+  published release, the live web) before anyone noticed it was meant to be
+  `0.2.2`. `1.2.1` is not a step any release process produces; it is the
+  signature of a typo or a stray find-replace. A single-axis rule catches
+  exactly that class of mistake.
+- **A no-op between releases.** When the pubspec version equals the baseline
+  there is no bump in progress, so normal development and feature branches never
+  trip it — it fires only on the commit that actually changes the version.
+- **Deliberate exceptions are written down.** A conscious, one-off transition the
+  canonical rule forbids (say, a correction that goes back down past a bad
+  release) goes in `sanctionedTransitions` in `tool/check_version_bump.dart`, in
+  the diff, with a reason. The list is empty by default — the `1.2.1` accident is
+  left standing and the next release is the ordinary patch `1.2.2`. An accident
+  has no entry there and fails; a decision does.
+- **A shallow clone is skipped, not failed.** With no reachable tag the gate
+  cannot know the baseline, so it prints a note and passes rather than fail a
+  machine that simply lacks the history; a full clone and the release runner both
+  carry the tags.
+- **Failure means:** correct the version in `pubspec.yaml` (and
+  `kOciDeckVersion` in `lib/services/export_metadata.dart` — see
+  `version_consistency_test`), or, for a deliberate one-off, add the transition
+  to `sanctionedTransitions` with a reason.
 
 ### `make test`
 - **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags golden`

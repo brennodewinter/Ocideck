@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -762,6 +762,21 @@ check-improvement-templates:
 	@echo "Failure means: run dart run tool/build_improvement_templates.dart"
 	dart run tool/check_improvement_templates.dart
 
+# Refuse a version bump that isn't a single canonical semver step. Born from the
+# 0.2.0 → 1.2.1 accident: a real release moves one axis and zeroes the ones
+# below it, so from X.Y.Z only X.Y.(Z+1), X.(Y+1).0 or (X+1).0.0 are legal.
+check-version-bump:
+	@echo "== OciDeck check: version bump =="
+	@echo "Command: dart run tool/check_version_bump.dart"
+	@echo "Covers: the version in pubspec.yaml against the last release tag —"
+	@echo "        the only legal successors are the patch, minor or major step."
+	@echo "        A no-op when the version is unchanged; a shallow clone without"
+	@echo "        tags is skipped, not failed."
+	@echo "Failure means: correct the version in pubspec.yaml, or (for a deliberate"
+	@echo "        one-off) add the transition to sanctionedTransitions in"
+	@echo "        tool/check_version_bump.dart with a reason."
+	dart run tool/check_version_bump.dart
+
 # Add new d('…') source strings to every language's additions overlay from a
 # JSON spec (format documented in tool/add_l10n.dart). Inserts, dart-formats and
 # de-duplicates across all 30 language files in one step, and whitelists any
@@ -982,7 +997,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates
+STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump
 
 check: $(STATIC_GATES) coverage coverage-per-file
 	@echo "== OciDeck check complete =="
