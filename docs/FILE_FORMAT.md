@@ -1571,7 +1571,15 @@ Rules:
 - The section headings (`## Description`, `## Confirmation (reproduction)`,
   `## Possible impact`, `## Recommendation`) are **stable English anchors** —
   they are finding *content*, not localised UI, so a finding round-trips
-  identically regardless of interface language.
+  identically regardless of interface language. On parse, common short forms
+  (`## Confirmation`, `## Impact`) and the Dutch source headings (`## Beschrijving`,
+  `## Aanbeveling`, …) are recognised case-insensitively as aliases of the right
+  anchor, so a hand-authored or imported finding does not silently drop out of the
+  view and export; the editor writes the canonical English heading back on the next
+  save. A `## …` heading that is neither an anchor nor a recognised alias (e.g.
+  `## Notes`, `## References`) does **not** render or export — the content stays in
+  the `.md`, but the quality check warns about it so the gap between the file and a
+  delivered report is never silent (rename the heading to one of the four anchors).
 - The whole body rides on the free-Markdown rails in `customMarkdown`, so a
   hand-edited finding is preserved verbatim (file = truth); the structured fields
   are a parsed *view* used by the editor and the severity-card preview.

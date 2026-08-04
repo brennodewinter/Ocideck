@@ -1572,7 +1572,16 @@ Regels:
 - De sectiekoppen (`## Description`, `## Confirmation (reproduction)`,
   `## Possible impact`, `## Recommendation`) zijn **stabiele Engelse ankers** —
   ze zijn bevindings*inhoud*, geen gelokaliseerde UI, zodat een bevinding identiek
-  heen en terug gaat ongeacht de interfacetaal.
+  heen en terug gaat ongeacht de interfacetaal. Bij het inlezen worden gangbare
+  korte vormen (`## Confirmation`, `## Impact`) en de Nederlandse bronkoppen
+  (`## Beschrijving`, `## Aanbeveling`, …) hoofdletterongevoelig als alias van het
+  juiste anker herkend, zodat een handgeschreven of geïmporteerde bevinding niet
+  stil uit de weergave en de export valt; bij de eerstvolgende opslag schrijft de
+  editor de canonieke Engelse kop terug. Een `## …`-kop die géén anker en geen
+  herkende alias is (bijvoorbeeld `## Notes` of `## References`) rendert en
+  exporteert **niet** — de inhoud blijft wel in de `.md`, maar de
+  kwaliteitscontrole waarschuwt ervoor zodat het verschil tussen bestand en
+  uitgeleverd rapport nooit stil is (hernoem de kop naar één van de vier ankers).
 - De hele inhoud rijdt op de vrije-Markdown-rails in `customMarkdown`, zodat een
   handmatig bewerkte bevinding letterlijk behouden blijft (bestand = waarheid); de gestructureerde velden
   zijn een geparsede *weergave* die door de editor en de ernstkaart-voorbeeldweergave wordt gebruikt.
