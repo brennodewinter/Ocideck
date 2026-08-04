@@ -276,6 +276,16 @@ There is no CI runner on the forge, so the checks below run on the maintainer's
 machine and nowhere else. That is a bus factor of one, and it is the largest
 single risk in this project — larger than anything a scanner has reported.
 
+**When a change starts as someone else's contribution, the credit is explicit.**
+If a pull request from an outside contributor is taken over and landed by the
+maintainer — cherry-picked, rebased or reworked before merge — the CHANGELOG
+entry names them with a word of thanks, and they are added to
+[`CONTRIBUTORS.md`](CONTRIBUTORS.md) if not already there. The commit authorship
+is preserved (a cherry-pick keeps the original author; otherwise a
+`Co-authored-by` trailer), but the changelog is where a reader looks, not the
+commit graph — so that is where the acknowledgement has to be visible.
+*(Added 2026-08-04.)*
+
 **What stands in for peer review**, and it is not nothing:
 
 - `make check` must be green before a merge: analysis with `--fatal-infos`, the

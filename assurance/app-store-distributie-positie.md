@@ -125,6 +125,39 @@ CRA-conclusie niet — maar de conditie stáát er niet voor niets. Wordt een st
 ooit serieus opgetuigd, dan is de CRA-positie het eerste wat opnieuw gewogen
 moet worden, vóór de eerste upload.
 
+## Package managers (Homebrew, Linux) — een ander geval dan een store
+
+*Toegevoegd 2026-08-04, n.a.v. #1222/#1227.* Een package manager is geen store,
+en de toets valt dan ook anders uit. Een Homebrew-**cask** herbergt de app niet:
+hij is een *verwijzing* die `brew` naar ons eigen release-artefact stuurt en de
+download tegen onze gepubliceerde `SHA256SUMS` verifieert. Geen sandbox, geen
+review-poortwachter op de binary, geen re-hosting — de gebruiker krijgt exact de
+`.app` die wij uitbrachten. Dat staat qua waarden **dicht tegen de canonieke
+directe download**, en veel dichterbij dan een app-store.
+
+Twee dingen bewaken we daarbij, zodat het een nevenkanaal blijft en geen slot:
+
+- **De tap is van ons.** De cask-formule leeft in een eigen tap-repo op de
+  **eigen forge** (canoniek), met een GitHub-spiegel voor de
+  `brew tap librekat/ocideck`-shorthand. Zo is de bron inspecteerbaar en van ons;
+  de officiële `homebrew-cask` (met eigen reviewers en notability-criteria)
+  wordt bewust niet gebruikt.
+- **Homebrew Cask is macOS-only.** Er bestaan geen Linux-casks. Linux krijgt dus
+  een *eigen* installatieroute die op zo veel mogelijk distributies werkt
+  (AppImage/Flatpak-spoor, #1227) — nooit een uitgeklede cask die alleen op
+  papier bestaat.
+
+Dit trekt de heroverwegingsconditie in [`CRA-2024-2847-positie.md`](CRA-2024-2847-positie.md)
+licht ("distributie via een kanaal dat niet de eigen forge is, met binaries"),
+maar mild: de binary komt uit onze forge; de tap is enkel een index die ernaar
+wijst. Genoteerd, geen blokker.
+
+**Voorbehoud (eerlijk).** De cask is pas een gladde installatie zodra de
+macOS-release genotariseerd is; is een release ongetekend uitgebracht (zie
+`README.md` en `docs/BUILD.md`), dan blokkeert Gatekeeper de app bij eerste
+start net als bij een directe download. De cask maakt de distributie makkelijker,
+niet de ondertekening — die staat los.
+
 ## Wanneer dit besluit opnieuw op tafel moet
 
 - De git-opslag verhuist naar een pure-Dart-implementatie (Apple-botsing 1

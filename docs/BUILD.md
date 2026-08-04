@@ -597,6 +597,36 @@ from scratch. A cache miss is fail-open (it just rebuilds, as before). Together
 this cut the Linux build from about seventy minutes at `v0.2.0` to under twenty at
 the `v0.2.1-rc1` rehearsal (#1170, #1172).
 
+### Homebrew cask (macOS)
+
+Each non-prerelease tag also updates a Homebrew **cask**, so macOS users can
+`brew install --cask librekat/ocideck/ocideck`. The cask is only a pointer: it
+carries the release's download URL and the SHA-256 read straight from the
+published `SHA256SUMS`, so `brew` fetches our own artifact and verifies it. It is
+**macOS-only** — Homebrew Cask has no Linux equivalent; a Linux install path is
+tracked separately (#1227).
+
+- **Where it runs.** Only the canonical forge chain
+  (`.forgejo/workflows/release.yml`, job `homebrew-cask`, after `publiceren`)
+  writes the cask. `scripts/update_homebrew_cask.sh` fills
+  `homebrew/ocideck.rb.tmpl` and commits `Casks/ocideck.rb` to the tap. The
+  GitHub `release.yml` deliberately has **no** such job — it would double-push.
+- **Tap topology.** The tap lives on our own forge as the canonical repo,
+  **mirrored to GitHub** (a Forgejo push-mirror on the tap repo) so the
+  `brew tap librekat/ocideck` shorthand — which resolves to
+  `github.com/LibreKAT/homebrew-ocideck` — keeps working.
+- **One-time setup.** Create the tap repo `homebrew-ocideck` on the forge with a
+  top-level `Casks/` directory; add a GitHub push-mirror to
+  `LibreKAT/homebrew-ocideck`. Then set two repo secrets on the OciDeck repo:
+  `HOMEBREW_TAP_REPOSITORY` (`LibreKAT/homebrew-ocideck`) and `HOMEBREW_TAP_TOKEN`
+  (a forge token with `write:repository` on the tap). Absent either, the job is a
+  no-op — the release still publishes, only the cask is skipped (same secret-guard
+  pattern as macOS notarisation).
+- **Caveat.** The cask is only a *smooth* install once the macOS release is
+  notarised. An unsigned release (see the signing section above) installs fine
+  via `brew` but Gatekeeper still blocks it on first launch — the cask eases
+  distribution, not signing.
+
 ### Before you tag
 
 1. `make check-release` green on `main`. This is the **ready-for-tagging** pass:
