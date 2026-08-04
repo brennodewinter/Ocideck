@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -89,6 +89,7 @@ help:
 	@echo "  make build-windows   Build the Windows app (Windows only)."
 	@echo "  make build-linux     Build the Linux bundle (Linux only)."
 	@echo "  make build-all       Build web + this OS's native desktop target."
+	@echo "  make release TAG=vX.Y.Z  Orchestrate a release: tag-guard + Phase 1 (validate/build/sign); guides the irreversible steps."
 	@echo "  make build-release   Build verified web + macOS release artifacts."
 	@echo "  make notarize-macos  Sign (Developer ID) + notarize + staple the macOS .app for distribution."
 	@echo "  make deploy-web      Put build/web live on the static host (atomic swap + verify)."
@@ -988,6 +989,15 @@ deploy-web: build-web
 build-release:
 	@echo "== OciDeck release build: web + macOS =="
 	scripts/build_release.sh
+
+# One orchestrating command for cutting a release (#1161): the monotone
+# tag-guard, then Phase 1 (local validation + build + sign). The irreversible,
+# outward steps (tag push, /Applications, distribution) are printed as guided
+# next steps, not auto-fired — see scripts/release.sh and docs/BUILD.md.
+#   make release TAG=v0.2.2
+release:
+	@echo "== OciDeck release: orchestrate (guard + Phase 1) =="
+	scripts/release.sh $(TAG)
 
 # Sign the macOS release app with Developer ID, notarize it with Apple, and
 # staple the ticket — the full chain that lets the .app open on other Macs

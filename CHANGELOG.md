@@ -914,6 +914,24 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Eén commando voor het snijden van een release — de veilige kern eerst
+  (#1161).** `make release TAG=vX.Y.Z` (`scripts/release.sh`) draait de voorkant
+  van de release-keten voortaan identiek: een **monotone tag-guard** die alles
+  weigert wat geen schone, strikt-hogere release-tag is — `vX.Y.Z` zonder
+  pre-release/build-suffix, gelijk aan `v` + de versie in `pubspec.yaml`, nog
+  niet bestaand, en een geldige één-as-bump vanaf de vorige release (die laatste
+  regel geleend van de al geteste `make check-version-bump`, zodat de
+  semver-regels op één plek staan) — gevolgd door fase 1: `catalogs-outdated`
+  (adviserend), `check-release`, `build-release`, `notarize-macos`. De
+  **onomkeerbare, naar buiten gerichte** stappen (tag pushen, `/Applications`
+  vervangen, publieke distributie) vuurt het script bewust *niet* zelf af maar
+  drukt het als geordende vervolgstappen af: een orkestrator die tags pusht en de
+  geïnstalleerde app overschrijft moet bewezen zijn voordat hij dat zelfstandig
+  doet. Dit haalt de herhaalbare sleur (guarden + valideren + bouwen) weg en
+  houdt de onomkeerbare handelingen weloverwogen; de volledige automatisering van
+  fase 2–3 (mirror-push, CI-bewaking per minuut, minisign, website) is de
+  getrackte vervolgstap. Guard geverifieerd tegen vijf foutgevallen; shellcheck
+  schoon.
 - **Geïmporteerde `.odp`/`.key` verminkten typografische aanhalingstekens en
   accenten (#1194).** Een `.odp` uit LibreOffice Impress met `"we don’t trust"`
   kwam in de editor terecht als `âwe donât trustâ` — mojibake. De oorzaak zat in

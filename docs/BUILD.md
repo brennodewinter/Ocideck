@@ -533,6 +533,32 @@ For the full check reference, see [`CHECKS.md`](CHECKS.md).
 
 ## Cutting a release
 
+### `make release TAG=vX.Y.Z` — the orchestrator (#1161)
+
+`make release TAG=vX.Y.Z` (a thin wrapper over `scripts/release.sh`) runs the
+front of this chain so it happens the same way every time:
+
+1. **Tag-guard** — refuses anything that is not a clean, strictly-higher release
+   tag, without changing a thing: the tag must be `vX.Y.Z` (no pre-release/build
+   suffix), must equal `v` + the version in `pubspec.yaml`, must not already
+   exist, and must be a legal one-axis bump from the last release — the last
+   check delegated to `make check-version-bump` (`tool/check_version_bump.dart`),
+   so the semver rules live in exactly one, tested, place.
+2. **Phase 1 (local, non-destructive)** — `make catalogs-outdated` (advisory),
+   `make check-release`, `make build-release`, `make notarize-macos`.
+
+The **irreversible, outward** steps are printed as ordered next steps rather than
+fired automatically — pushing the tag, replacing the app in `/Applications`, and
+the public distribution below. A release orchestrator that pushes tags and
+overwrites the installed app has to be proven before it does those on its own;
+until then this removes the repeatable toil (guard + validate + build) and keeps
+the irreversible acts deliberate. Run the numbered steps the script prints, then
+the sections below. Complete automation of phases 2–3 (tag → mirror push, CI
+polling once a minute, minisign, website, `/Applications`) is the tracked next
+increment.
+
+### The tag-driven chain
+
 One tag produces everything. `git push origin v0.1.0` starts
 `.forgejo/workflows/release.yml`, and about half an hour later there is a
 release at
