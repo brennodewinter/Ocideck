@@ -161,6 +161,38 @@ void main() {
     }
   }
 
+  // ── Splash icon path is not shadowed by a default Apache alias (#1221) ──────
+  // Debian/Ubuntu Apache ships `Alias /icons/ /usr/share/apache2/icons/` in
+  // mods-enabled/alias.conf, which shadows a webroot `icons/` directory: the
+  // splash logo deploys but 404s on a default host (the file is in SHA256SUMS
+  // yet unreachable). The fix is a path no stock server aliases; this ratchet
+  // stops a well-meaning revert to the Flutter `icons/` convention from
+  // silently reintroducing the broken splash. A `flutter test` cannot prove
+  // this — there is no Apache under `flutter test` — so the poort lives here,
+  // on the built bundle, where it reads the path the browser will actually
+  // request.
+  if (indexHtml.existsSync()) {
+    final html = indexHtml.readAsStringSync();
+    final shadowed = RegExp(r'(?:src|href)="(icons/[^"]*)"').allMatches(html);
+    require(
+      shadowed.isEmpty,
+      'index.html references an icon under icons/ '
+      '(${shadowed.map((m) => m.group(1)).join(', ')}), which a default '
+      'Debian/Ubuntu Apache shadows via Alias /icons/ → '
+      '/usr/share/apache2/icons/ (#1221). Use a path no stock server aliases.',
+    );
+    // The splash <img> must resolve to a file actually present in the bundle,
+    // so a rename that misses the build copy doesn't ship a broken splash.
+    final splashImg = RegExp(r'<img[^>]*\bsrc="([^"]+)"').firstMatch(html);
+    if (splashImg != null) {
+      final src = splashImg.group(1)!;
+      require(
+        File('build/web/$src').existsSync(),
+        'Splash <img src="$src"> does not resolve to a file in build/web.',
+      );
+    }
+  }
+
   // ── CanvasKit is self-hosted, not pulled from the gstatic CDN ───────────────
   require(
     File('build/web/canvaskit/canvaskit.wasm').existsSync(),
