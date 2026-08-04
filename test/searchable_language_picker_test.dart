@@ -60,10 +60,7 @@ void main() {
     // Bij een lege zoekterm draagt de lijst meer talen dan een gefilterde
     // treffer: er staan meerdere rijen (de builder bouwt de zichtbare kop).
     expect(find.byType(ListTile), findsWidgets);
-    expect(
-      tester.widgetList(find.byType(ListTile)).length,
-      greaterThan(1),
-    );
+    expect(tester.widgetList(find.byType(ListTile)).length, greaterThan(1));
     expect(find.text('Geen talen gevonden'), findsNothing);
   });
 
