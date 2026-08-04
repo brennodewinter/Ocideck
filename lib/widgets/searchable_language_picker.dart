@@ -46,7 +46,8 @@ class _SearchableLanguagePickerState extends State<SearchableLanguagePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final name = AppLocalizations.languageNames[widget.languageCode] ??
+    final name =
+        AppLocalizations.languageNames[widget.languageCode] ??
         widget.languageCode;
     return SizedBox(
       width: widget.width ?? 200,
