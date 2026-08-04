@@ -914,6 +914,18 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Geïmporteerde `.odp`/`.key` verminkten typografische aanhalingstekens en
+  accenten (#1194).** Een `.odp` uit LibreOffice Impress met `"we don’t trust"`
+  kwam in de editor terecht als `âwe donât trustâ` — mojibake. De oorzaak zat in
+  `OdpContext.readPart`, dat `content.xml` met `String.fromCharCodes` las: dat
+  neemt elke *byte* als een losse code-unit, terwijl ODF-onderdelen UTF-8 zijn.
+  Een teken als `“` (U+201C) is drie UTF-8-bytes (`E2 80 9C`) en werd zo drie
+  losse tekens (`â` plus twee stuurtekens) — precies de drie "veranderde"
+  aanhalingstekens uit de melding. De PPTX-importer deed dit al goed met
+  `utf8.decode`; nu lezen ook de ODP- en Keynote-context (`KeyContext.readPart`,
+  dezelfde latente fout voor de plists/XML onder `Metadata/`) hun tekst als
+  UTF-8. `test/import/odp_importer_test.dart` pint de regressie met `“ ” ’ é`:
+  rood vóór de fix (reproduceert de exacte mojibake), groen erna.
 - **Een misgelopen versiesprong 0.2.0 → 1.2.1, en een poort die het voortaan
   tegenhoudt.** Bij het uitbrengen sprong de versie in `pubspec.yaml` per ongeluk
   van 0.2.0 naar 1.2.1 in plaats van de bedoelde 0.2.2, en de tag `v1.2.1` vuurde
