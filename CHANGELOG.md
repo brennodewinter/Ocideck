@@ -927,6 +927,28 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Niet-canonieke `## …`-secties in een bevinding verdwijnen niet langer stil
+  (#1198).** De kopkaart van een `finding`-dia rendert vier vaste secties
+  (`## Description`, `## Confirmation (reproduction)`, `## Possible impact`,
+  `## Recommendation`); die vier ankers zijn taalonafhankelijk en staan letterlijk
+  in de `.md`. Een handgeschreven of geïmporteerde bevinding met een korte kop
+  (`## Confirmation`, `## Impact`) of een extra sectie (`## Notes`, `## References`)
+  matchte geen anker: de tekst stond wél in het bronbestand maar werd nooit
+  uitgelezen en verdween daarmee uit de weergave, de presentatie én de export —
+  een stille afwijking tussen "het bestand is de bron" en wat je uitlevert, en
+  voor een pentestrapport een reëel risico. Twee maatregelen, gewogen met de
+  bewaker (uitwisselbaarheid/round-trip is de kern van het product, dus stille
+  afwijking mag niet blijven bestaan): (1) `FindingSpec.parse` herkent nu
+  gangbare korte vormen en de Nederlandse bronkoppen als alias van het juiste
+  anker (hoofdletterongevoelig), zodat de inhoud in het juiste veld landt en bij
+  de volgende opslag netjes naar de canonieke Engelse kop round-trippt; (2) elke
+  ná die aliasing nog onbekende `## …`-sectie op de kop-dia levert een zichtbare
+  kwaliteitswaarschuwing op (`SlideQualityAnalyzer`, categorie Inhoud) die de
+  auteur vertelt dat de sectie niet wordt getoond/geëxporteerd en hoe hij de kop
+  hernoemt — zodat de stille datalek onmogelijk wordt. Een detail-/bewijs-dia
+  draagt geen kopkaart en mag vrije `##`-koppen houden. Gevonden bij de
+  beeldkeuring van #1198. Regressietests in `finding_spec_test.dart` en
+  `slide_quality_analyzer_test.dart`.
 - **Vijf dialogen waar lange paden afgekapt werden zijn nu breedte-
   aanpasbaar (#1217).** Voortbouwend op #1211 (de save-dialoog) onderzocht ik
   waar in de UI nog bestandspaden met `TextOverflow.ellipsis` afgekapt worden.

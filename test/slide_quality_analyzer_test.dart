@@ -1305,4 +1305,58 @@ void main() {
       expect(nudges(Slide.create(SlideType.image)), isFalse);
     });
   });
+
+  group('niet-canonieke bevindingssectie (keuring #1198)', () {
+    List<SlideQualityIssue> sectionIssues(Slide slide) => analyzer
+        .analyzeSlides(
+          slides: [slide],
+          theme: const ThemeProfile(),
+          font: const ThemeProfile().fontFamily,
+        )
+        .issues
+        .where((i) => i.kind == SlideQualityIssueKind.findingUnknownSection)
+        .toList();
+
+    Slide finding(String markdown, {FindingRole role = FindingRole.header}) =>
+        Slide.create(
+          SlideType.finding,
+        ).copyWith(customMarkdown: markdown, findingRole: role);
+
+    test('een onbekende ## sectie op de kop-dia waarschuwt', () {
+      final issues = sectionIssues(
+        finding('# H\n\n## Description\n\nd\n\n## Notes\n\nlosse notitie'),
+      );
+      expect(issues, hasLength(1));
+      expect(issues.single.args['section'], 'Notes');
+      expect(issues.single.severity, MarkdownValidationSeverity.warning);
+      expect(issues.single.field, 'customMarkdown');
+    });
+
+    test('een herkende korte vorm waarschuwt niet', () {
+      expect(
+        sectionIssues(finding('# H\n\n## Confirmation\n\nreproductie')),
+        isEmpty,
+      );
+    });
+
+    test('een canonieke bevinding waarschuwt niet', () {
+      expect(
+        sectionIssues(
+          finding('# H\n\n## Description\n\nd\n\n## Recommendation\n\nr'),
+        ),
+        isEmpty,
+      );
+    });
+
+    test('een detail-dia mag vrije ## koppen dragen zonder waarschuwing', () {
+      // Alleen de kop-dia rendert de kopkaart; een detail-/bewijs-dia is vrije
+      // inhoud, dus een `## Bijlage` daar is geen verdwijnende sectie.
+      expect(
+        sectionIssues(
+          finding('## Bijlage\n\nextra bewijs', role: FindingRole.detail),
+        ),
+        isEmpty,
+      );
+    });
+  });
 }

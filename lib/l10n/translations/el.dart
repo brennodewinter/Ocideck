@@ -1798,6 +1798,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Η ενότητα «{sectie}» δεν είναι τυπική ενότητα ευρήματος και δεν εμφανίζεται ούτε εξάγεται (το περιεχόμενο παραμένει ωστόσο στο αρχείο προέλευσης). Μετονομάστε την επικεφαλίδα σε Description, Confirmation (reproduction), Possible impact ή Recommendation.',
   'Breedte aanpassen': 'Προσαρμογή πλάτους',
   'Niet akkoord en afsluiten': 'Άρνηση και έξοδος',
   'Springt naar': 'Μεταβαίνει σε',

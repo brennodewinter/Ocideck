@@ -1788,6 +1788,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Secțiunea „{sectie}“ nu este o secțiune standard a unei constatări și nu este afișată sau exportată (conținutul rămâne totuși în fișierul sursă). Redenumiți titlul în Description, Confirmation (reproduction), Possible impact sau Recommendation.',
   'Breedte aanpassen': 'Ajustează lățimea',
   'Niet akkoord en afsluiten': 'Refuză și ieși',
   'Springt naar': 'Sare la',

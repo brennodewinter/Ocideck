@@ -1806,6 +1806,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Ní cuid chaighdeánach de thoradh í an rannóg "{sectie}" agus ní thaispeántar ná ní easpórtáiltear í (fanann an t-ábhar sa bhunchomhad mar sin féin). Athainmnigh an ceannteideal go Description, Confirmation (reproduction), Possible impact nó Recommendation.',
   'Breedte aanpassen': 'Coigeartaigh leithead',
   'Niet akkoord en afsluiten': 'Diúltaigh agus scoir',
   'Springt naar': 'Léim go',

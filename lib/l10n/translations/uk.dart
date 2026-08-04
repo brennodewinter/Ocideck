@@ -1788,6 +1788,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Розділ «{sectie}» не є стандартним розділом виявлення і не відображається та не експортується (вміст усе ж залишається у вихідному файлі). Перейменуйте заголовок на Description, Confirmation (reproduction), Possible impact або Recommendation.',
   'Breedte aanpassen': 'Налаштувати ширину',
   'Niet akkoord en afsluiten': 'Відхилити й вийти',
   'Springt naar': 'Переходить до',

@@ -294,4 +294,55 @@ void main() {
       expect(rt(out).toMarkdown(), out.toMarkdown());
     });
   });
+
+  group('niet-canonieke ## secties (keuring #1198)', () {
+    test('een korte vorm landt in het juiste veld i.p.v. te verdwijnen', () {
+      // `## Confirmation` en `## Impact` zonder de canonieke staart matchten geen
+      // anker, en de inhoud verdween stil uit de weergave en de export.
+      final spec = FindingSpec.parse(
+        '# H\n\n## Confirmation\n\nreproductie hier\n\n## Impact\n\nechte impact',
+      );
+      expect(spec.confirmation, 'reproductie hier');
+      expect(spec.impact, 'echte impact');
+      expect(spec.unknownSectionTitles, isEmpty);
+    });
+
+    test('een Nederlandse bronkop wordt herkend', () {
+      final spec = FindingSpec.parse(
+        '# H\n\n## Aanbeveling\n\ngebruik prepared statements',
+      );
+      expect(spec.recommendation, 'gebruik prepared statements');
+      expect(spec.unknownSectionTitles, isEmpty);
+    });
+
+    test('matching is hoofdletterongevoelig', () {
+      final spec = FindingSpec.parse('# H\n\n## DESCRIPTION\n\nx');
+      expect(spec.description, 'x');
+      expect(spec.unknownSectionTitles, isEmpty);
+    });
+
+    test('een echt onbekende sectie wordt gemeld, niet stil gedropt', () {
+      final spec = FindingSpec.parse(
+        '# H\n\n## Description\n\nd\n\n## Notes\n\nlosse notitie\n\n## References\n\nlink',
+      );
+      expect(spec.description, 'd');
+      expect(spec.unknownSectionTitles, ['Notes', 'References']);
+    });
+
+    test('een canonieke bevinding meldt niets onbekends', () {
+      expect(FindingSpec.parse(_example).unknownSectionTitles, isEmpty);
+    });
+
+    test('canonicalSectionAnchor mapt korte vormen en kent onbekend', () {
+      expect(
+        FindingSpec.canonicalSectionAnchor('Impact'),
+        FindingSpec.sectionImpact,
+      );
+      expect(
+        FindingSpec.canonicalSectionAnchor(' recommendation '),
+        FindingSpec.sectionRecommendation,
+      );
+      expect(FindingSpec.canonicalSectionAnchor('Notes'), isNull);
+    });
+  });
 }

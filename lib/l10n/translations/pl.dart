@@ -1783,6 +1783,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De sectie "{sectie}" is geen standaardsectie van een bevinding en wordt niet getoond of geëxporteerd (de inhoud blijft wel in het bronbestand). Hernoem de kop naar Description, Confirmation (reproduction), Possible impact of Recommendation.':
+      'Sekcja „{sectie}“ nie jest standardową sekcją ustalenia i nie jest wyświetlana ani eksportowana (treść pozostaje jednak w pliku źródłowym). Zmień nazwę nagłówka na Description, Confirmation (reproduction), Possible impact lub Recommendation.',
   'Breedte aanpassen': 'Dostosuj szerokość',
   'Niet akkoord en afsluiten': 'Odrzuć i zamknij',
   'Springt naar': 'Przechodzi do',

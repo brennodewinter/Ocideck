@@ -43,6 +43,7 @@ enum SlideQualityIssueKind {
   questionAnswerCountHigh,
   questionNotAnswerable,
   emptySlide,
+  findingUnknownSection,
 
   // ── Privacy (OCIWACHT §2.1) ─────────────────────────────────────────
   // Eén kind per familie, niet één per regel: de regelverzameling groeit naar
