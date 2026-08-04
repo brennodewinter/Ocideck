@@ -44,29 +44,25 @@ class _WelcomeScreen extends ConsumerWidget {
     BoxConstraints viewport,
   ) {
     final wide = viewport.maxWidth >= 820;
-    return wide
-        ? SizedBox(
-            width: double.infinity,
-            height: viewport.maxHeight,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(width: 340, child: _brandPanel(context, theme, l10n)),
-                Expanded(child: _actionsPanel(context, ref, l10n, palette)),
-                if (recentFiles.isNotEmpty)
-                  SizedBox(
-                    width: 300,
-                    child: _recentFilesPanel(
-                      context,
-                      ref,
-                      theme,
-                      palette,
-                      l10n,
-                      recentFiles,
-                    ),
+    final body = wide
+        ? Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(width: 340, child: _brandPanel(context, theme, l10n)),
+              Expanded(child: _actionsPanel(context, ref, l10n, palette)),
+              if (recentFiles.isNotEmpty)
+                SizedBox(
+                  width: 300,
+                  child: _recentFilesPanel(
+                    context,
+                    ref,
+                    theme,
+                    palette,
+                    l10n,
+                    recentFiles,
                   ),
-              ],
-            ),
+                ),
+            ],
           )
         : Column(
             mainAxisSize: MainAxisSize.min,
@@ -90,6 +86,50 @@ class _WelcomeScreen extends ConsumerWidget {
                 ),
             ],
           );
+    // De voettekstband loopt onder de héle hub door — de streep uit het onderste
+    // gedeelte 1-op-1 doorgetrokken over alle kolommen. De stille links staan
+    // links, de Vigilis-credit rechtsonder, dus onder de rechterkolom (en op de
+    // rechterrand als die kolom er niet is). Eén band i.p.v. een streep per
+    // kolom, want kolomvoeten van ongelijke hoogte zouden niet op één lijn
+    // liggen.
+    final footer = _welcomeFooter(context, l10n, palette);
+    return wide
+        ? SizedBox(
+            width: double.infinity,
+            height: viewport.maxHeight,
+            child: Column(
+              children: [
+                Expanded(child: body),
+                footer,
+              ],
+            ),
+          )
+        : Column(mainAxisSize: MainAxisSize.min, children: [body, footer]);
+  }
+
+  /// De doorlopende voettekstband onder alle kolommen: de streep plus de stille
+  /// links (links) en de Vigilis-sponsorvermelding (rechtsonder). Los van de
+  /// panelen erboven zodat de streep over de volle breedte loopt en de credit op
+  /// de rechterrand valt.
+  Widget _welcomeFooter(
+    BuildContext context,
+    AppLocalizations l10n,
+    AppPalette palette,
+  ) {
+    final scheme = Theme.of(context).colorScheme;
+    return ColoredBox(
+      color: scheme.surface,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Divider(height: 1, color: scheme.outlineVariant),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+            child: _footerLinks(context, l10n, palette),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _brandPanel(
@@ -118,8 +158,8 @@ class _WelcomeScreen extends ConsumerWidget {
     final lo = yellowLum > bgLum ? bgLum : yellowLum;
     final logoInk = (hi + 0.05) / (lo + 0.05) >= 3.0 ? euYellow : euBlue;
     return Container(
-      // Bottom inset matches the actions panel's footer padding (14) so the
-      // version tag lines up with the "Gebruikershandleiding" link beside it.
+      // Bottom inset (14) geeft de versietag lucht boven de doorlopende
+      // voettekststreep die nu onder alle kolommen loopt ([_welcomeFooter]).
       padding: const EdgeInsets.fromLTRB(34, 34, 34, 14),
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -199,34 +239,22 @@ class _WelcomeScreen extends ConsumerWidget {
     AppLocalizations l10n,
     AppPalette palette,
   ) {
+    // Alleen de knoppenkolom; de links en de Vigilis-credit zijn naar de
+    // doorlopende voettekstband onder de hele hub verhuisd ([_welcomeFooter]).
     return ColoredBox(
       color: Theme.of(context).colorScheme.surface,
-      child: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(32, 30, 32, 20),
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 640),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: _startColumn(context, ref, l10n, palette),
-                  ),
-                ),
-              ),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(32, 30, 32, 20),
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 640),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: _startColumn(context, ref, l10n, palette),
             ),
           ),
-          Divider(
-            height: 1,
-            color: Theme.of(context).colorScheme.outlineVariant,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-            child: _footerLinks(context, l10n, palette),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -240,6 +268,15 @@ class _WelcomeScreen extends ConsumerWidget {
     AppLocalizations l10n,
     AppPalette palette,
   ) {
+    // Eén gedeelde knopvorm en -uitlijning voor de hele startkolom. De inhoud
+    // (icoon + label) staat links uitgelijnd, op dezelfde linkerlijn als de kop
+    // en de subtekst erboven — de kop stond links maar de knoplabels
+    // gecentreerd, en dat verschil las rommelig. De zachtere `outlineVariant`-
+    // rand en de ruimere afronding geven de secundaire knoppen een rustiger,
+    // verfijnder beeld dan de standaard OutlinedButton.
+    final scheme = Theme.of(context).colorScheme;
+    final primaryStyle = _primaryButtonStyle();
+    final secondaryStyle = _secondaryButtonStyle(scheme);
     return [
       Text(
         l10n.t('newPresentation'),
@@ -260,49 +297,35 @@ class _WelcomeScreen extends ConsumerWidget {
       SizedBox(
         width: double.infinity,
         child: ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
-          ),
+          style: primaryStyle,
           onPressed: () => _newDeck(context, ref),
           icon: const Icon(Icons.add, size: 18),
           label: Text(l10n.d('Kiezen')),
         ),
       ),
       const SizedBox(height: 24),
-      Divider(color: Theme.of(context).colorScheme.outlineVariant),
+      Divider(color: scheme.outlineVariant),
       const SizedBox(height: 16),
-      SizedBox(
-        width: double.infinity,
-        child: OutlinedButton.icon(
-          style: OutlinedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          ),
-          onPressed: () => _openWithSearch(context, ref),
-          icon: const Icon(Icons.folder_open_outlined, size: 18),
-          label: Text(l10n.t('open')),
-        ),
+      _wideSecondaryButton(
+        style: secondaryStyle,
+        icon: Icons.folder_open_outlined,
+        label: Text(l10n.t('open')),
+        onPressed: () => _openWithSearch(context, ref),
       ),
       const SizedBox(height: 10),
-      SizedBox(
-        width: double.infinity,
-        child: OutlinedButton.icon(
-          style: OutlinedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          ),
-          onPressed: () => _importFromUrl(context, ref),
-          icon: const Icon(Icons.cloud_download_outlined, size: 18),
-          label: Text(l10n.t('importUrl')),
-        ),
+      _wideSecondaryButton(
+        style: secondaryStyle,
+        icon: Icons.cloud_download_outlined,
+        label: Text(l10n.t('importUrl')),
+        onPressed: () => _importFromUrl(context, ref),
       ),
       if (supportsLocalProjectFolders) ...[
         const SizedBox(height: 10),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton.icon(
-            onPressed: () => _scanLibrary(context, ref),
-            icon: const Icon(Icons.travel_explore, size: 18),
-            label: Text(l10n.d('Zoek op deze computer')),
-          ),
+        _wideSecondaryButton(
+          style: secondaryStyle,
+          icon: Icons.travel_explore,
+          label: Text(l10n.d('Zoek op deze computer')),
+          onPressed: () => _scanLibrary(context, ref),
         ),
       ],
       // Beginnen met een OpenKAT-uitdraai is beginnen, net zo goed als
@@ -313,19 +336,18 @@ class _WelcomeScreen extends ConsumerWidget {
       if (supportsLocalProjectFolders &&
           ref.watch(openKatIntegrationRevealProvider)) ...[
         const SizedBox(height: 10),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton.icon(
-            onPressed: () => importOpenKatReports(context, ref),
-            icon: const Icon(Icons.radar_outlined, size: 18),
-            // Dezelfde bronstring als in het menu: twee bijna gelijke zinnen
-            // laten vertalen is hoe ze uit elkaar gaan lopen. Twee regels mag;
-            // hij past niet op één in een knop van 220.
-            label: Text(
-              openKatLabel(l10n, updating: false),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-            ),
+        _wideSecondaryButton(
+          style: secondaryStyle,
+          icon: Icons.radar_outlined,
+          onPressed: () => importOpenKatReports(context, ref),
+          // Dezelfde bronstring als in het menu: twee bijna gelijke zinnen
+          // laten vertalen is hoe ze uit elkaar gaan lopen. Twee regels mag; hij
+          // past niet op één in een knop van 220. Links uitgelijnd zoals de
+          // andere knoplabels, zodat een tweede regel onder de eerste begint.
+          label: Text(
+            openKatLabel(l10n, updating: false),
+            textAlign: TextAlign.start,
+            maxLines: 2,
           ),
         ),
       ],
@@ -335,13 +357,11 @@ class _WelcomeScreen extends ConsumerWidget {
       // heen kon.
       if (_remoteConnections(ref).isNotEmpty) ...[
         const SizedBox(height: 10),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton.icon(
-            onPressed: () => _openFromConnection(context, ref),
-            icon: const Icon(Icons.cloud_outlined, size: 18),
-            label: Text(l10n.d('Openen uit…')),
-          ),
+        _wideSecondaryButton(
+          style: secondaryStyle,
+          icon: Icons.cloud_outlined,
+          label: Text(l10n.d('Openen uit…')),
+          onPressed: () => _openFromConnection(context, ref),
         ),
       ],
       // Onderhoud aan de afbeeldingenbibliotheek kan ook zonder open presentatie
@@ -372,24 +392,40 @@ class _WelcomeScreen extends ConsumerWidget {
     AppPalette palette,
   ) {
     final style = TextStyle(fontSize: 11.5, color: palette.mutedText);
+    // Links de stille tekstlinks, rechts de sponsorvermelding met het Vigilis-
+    // merk. `spaceBetween` duwt de twee groepen naar de uiteinden van de
+    // schermbrede band — links links, credit rechtsonder — en laat ze onder
+    // elkaar zakken zodra het te smal wordt (bv. 200% tekst), zodat er niets
+    // overloopt.
     return Wrap(
-      alignment: WrapAlignment.center,
+      alignment: WrapAlignment.spaceBetween,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      runAlignment: WrapAlignment.center,
       spacing: 20,
+      runSpacing: 12,
       children: [
-        _QuietLink(
-          label: l10n.d('Gebruikershandleiding'),
-          style: style,
-          onTap: () => DocumentReaderScreen.open(
-            context,
-            title: l10n.d('Gebruikershandleiding'),
-            assetBase: 'docs/USER_GUIDE.md',
-          ),
+        Wrap(
+          spacing: 20,
+          runSpacing: 8,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            _QuietLink(
+              label: l10n.d('Gebruikershandleiding'),
+              style: style,
+              onTap: () => DocumentReaderScreen.open(
+                context,
+                title: l10n.d('Gebruikershandleiding'),
+                assetBase: 'docs/USER_GUIDE.md',
+              ),
+            ),
+            _QuietLink(
+              label: l10n.t('settings'),
+              style: style,
+              onTap: () => SettingsDialog.show(context),
+            ),
+          ],
         ),
-        _QuietLink(
-          label: l10n.t('settings'),
-          style: style,
-          onTap: () => SettingsDialog.show(context),
-        ),
+        _madePossibleByVigilis(l10n, style),
       ],
     );
   }
@@ -487,19 +523,17 @@ class _WelcomeScreen extends ConsumerWidget {
     if (!supportsLocalProjectFolders || !hasLibraries) return const [];
     return [
       const SizedBox(height: 10),
-      SizedBox(
-        width: double.infinity,
-        child: OutlinedButton.icon(
-          onPressed: () => _manageImageLibrary(context, ref),
-          icon: const Icon(Icons.photo_library_outlined, size: 18),
-          // 'Afbeeldingen beheren' i.p.v. de langere bibliotheeknaam: het is een
-          // beheeractie (zelfde titel als de dialoog) en de tekst mag in een
-          // breedsprakige taal op twee regels vallen in plaats van over de rand.
-          label: Text(
-            l10n.d('Afbeeldingen beheren'),
-            textAlign: TextAlign.center,
-            maxLines: 2,
-          ),
+      _wideSecondaryButton(
+        style: _secondaryButtonStyle(Theme.of(context).colorScheme),
+        icon: Icons.photo_library_outlined,
+        onPressed: () => _manageImageLibrary(context, ref),
+        // 'Afbeeldingen beheren' i.p.v. de langere bibliotheeknaam: het is een
+        // beheeractie (zelfde titel als de dialoog) en de tekst mag in een
+        // breedsprakige taal op twee regels vallen in plaats van over de rand.
+        label: Text(
+          l10n.d('Afbeeldingen beheren'),
+          textAlign: TextAlign.start,
+          maxLines: 2,
         ),
       ),
     ];
@@ -808,6 +842,84 @@ class _RecentBadge extends StatelessWidget {
       ),
     );
   }
+}
+
+/// De gedeelde knopvorm: een ruimere afronding dan de Material-standaard geeft
+/// de startkolom een zachter, verfijnder beeld. Top-level zodat zowel
+/// [_WelcomeScreen._startColumn] als de losse [_WelcomeScreen._imageLibraryButton]
+/// dezelfde vorm delen zonder de klasse te laten groeien.
+const _welcomeButtonShape = RoundedRectangleBorder(
+  borderRadius: BorderRadius.all(Radius.circular(10)),
+);
+
+/// De primaire actie ('Kiezen'): inhoud links uitgelijnd zodat het label op
+/// dezelfde linkerlijn valt als de kop en de knoplabels eronder.
+ButtonStyle _primaryButtonStyle() => ElevatedButton.styleFrom(
+  alignment: Alignment.centerLeft,
+  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+  shape: _welcomeButtonShape,
+);
+
+/// De secundaire acties (openen, importeren, zoeken…): dezelfde linkeruitlijning
+/// en vorm, met de zachtere [ColorScheme.outlineVariant] als rand in plaats van
+/// de standaard [ColorScheme.outline] — rustiger tegen het paneel.
+ButtonStyle _secondaryButtonStyle(ColorScheme scheme) =>
+    OutlinedButton.styleFrom(
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      shape: _welcomeButtonShape,
+      side: BorderSide(color: scheme.outlineVariant),
+    );
+
+/// Een volle-breedte secundaire startknop met de gedeelde stijl. Losse helper
+/// zodat de startkolom de `SizedBox` + `OutlinedButton.icon`-boilerplate niet
+/// voor elke knop herhaalt (en onder de methodelengte-ratchet blijft).
+Widget _wideSecondaryButton({
+  required ButtonStyle style,
+  required IconData icon,
+  required Widget label,
+  required VoidCallback onPressed,
+}) => SizedBox(
+  width: double.infinity,
+  child: OutlinedButton.icon(
+    style: style,
+    onPressed: onPressed,
+    icon: Icon(icon, size: 18),
+    label: label,
+  ),
+);
+
+/// De sponsorvermelding rechtsonder: 'Mogelijk gemaakt door' met het thema-
+/// bewuste Vigilis-merk. Klein en gedempt — het is een credit, geen actie.
+/// Begrensd op een bescheiden breedte zodat het label bij 200% tekst netjes
+/// wikkelt in plaats van de voettekstband te laten overlopen; het merk zelf
+/// schaalt niet mee met de tekst (het is een afbeelding), dus de bandhoogte
+/// wordt door de tekst bepaald en klemt het logo nooit af.
+Widget _madePossibleByVigilis(AppLocalizations l10n, TextStyle style) {
+  return ConstrainedBox(
+    constraints: const BoxConstraints(maxWidth: 220),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Flexible(
+          child: Text(
+            l10n.d('Mogelijk gemaakt door'),
+            style: style,
+            textAlign: TextAlign.right,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Image.asset(
+          BrandLogo.vigilis.assetKey,
+          height: 18,
+          fit: BoxFit.contain,
+          filterQuality: FilterQuality.high,
+          semanticLabel: l10n.d('Vigilis'),
+        ),
+      ],
+    ),
+  );
 }
 
 /// Alleen buiten nl/en zit er een melding op de sjabloonbelofte; in die twee
