@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -62,6 +62,7 @@ help:
 	@echo "  make shellcheck      ShellCheck over the committed shell scripts (needs shellcheck)."
 	@echo "  make trivy           Advisory supply-chain scan: Dart-dep CVEs + committed secrets (needs trivy)."
 	@echo "  make check-pins      Advisory: exact-pinned CI versions (actions + scanners) vs their latest release."
+	@echo "  make bump-scanner-pins  Bumpt gitleaks/trufflehog/semgrep overal (manifest+workflows+image-tag). DRY_RUN=1 toont het."
 	@echo "  make servicenormen   Interne reactietermijnen op beveiligingsmeldingen (--quiet voor cron)."
 	@echo "  make doorlooptijd    Doorlooptijd van gewone issues (adviserend; --quiet voor cron)."
 	@echo "  make ratchets        Bewegen de basislijnen en de dekking de goede kant op (adviserend)."
@@ -454,6 +455,16 @@ check-pins:
 	@echo "Covers: every exact-pinned action and scanner in .github/pinned-ci-versions.json vs its latest release."
 	@echo "Failure means: a pin is behind (bump it in every workflow + the manifest) or an upstream API was unreachable."
 	dart run tool/check_pinned_versions.dart
+
+# Bumpt de scanner-pins (gitleaks/trufflehog/semgrep) naar hun laatste upstream op
+# alle plekken tegelijk: het manifest, de *_VERSION-env in elke workflow, en de
+# tag van het voorgebakken scans-image. Idempotent (no-op als alles actueel is);
+# leunt op check-pins voor "wat is de laatste". Publiceert het nieuwe scans-image
+# NIET — draai daarna een ci-image-scans-dispatch of `make ci-image-scans-publish`
+# vóór een workflow naar het nieuwe tag wijst. `DRY_RUN=1` toont wat zou wijzigen.
+bump-scanner-pins:
+	@echo "== OciDeck: scanner-pins bumpen naar de laatste upstream =="
+	scripts/bump_scanner_pins.sh
 
 # Interne servicenormen rond beveiligingsmeldingen: hoe snel er gereageerd,
 # geoordeeld en opgelost wordt. Meet uit de tijdstempels die de meldingen in de
