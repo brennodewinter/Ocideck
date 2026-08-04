@@ -12,7 +12,6 @@
 /// `ponytail:` plafond: een kwaadaardige server (of MITM op plain HTTP) kan
 /// pathologische XML sturen; de parser-limieten vangen dat, de connector faalt
 /// gesloten met een zichtbare fout.
-library;
 
 import 'package:xml/xml.dart';
 

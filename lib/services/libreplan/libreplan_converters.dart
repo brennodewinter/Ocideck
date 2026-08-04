@@ -17,7 +17,6 @@
 /// `ponytail:` plafonds: gantt kapt af op `ganttMaxTasks` (30), tree op 50
 /// knopen, tables op 100 rijen. Een LibrePlan-project met meer data wordt
 /// afgekapt — een dia is een samenvatting, geen planbestand.
-library;
 
 import '../../models/slide.dart';
 import '../improvement/gantt_dsl.dart';

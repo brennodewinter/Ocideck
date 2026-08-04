@@ -13,7 +13,6 @@
 /// - **Desktop-only**: op web is de keychain niet veilig (fail-closed).
 /// - **Logs**: base URL + username bij fout, nooit de response body (bevat
 ///   projectdata).
-library;
 
 import 'dart:async';
 import 'dart:convert';
