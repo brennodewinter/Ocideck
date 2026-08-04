@@ -159,7 +159,11 @@ class _MenuBlockCard extends StatelessWidget {
         ? accent.withValues(alpha: 0.55)
         : text.withValues(alpha: 0.22);
     final fill = accent.withValues(alpha: actionable ? 0.10 : 0.04);
-    final label = Padding(
+    // Het label moet begrensd zijn: onder een afbeelding is er weinig verticale
+    // ruimte, en een lang label liep de kaart uit (#1162, beeldkeuring). Onder een
+    // afbeelding hoogstens twee regels, een tekstblok vult de hele kaart en mag er
+    // meer; in beide gevallen breekt het af met een ellips i.p.v. over te lopen.
+    Widget labelText(int maxLines) => Padding(
       padding: EdgeInsets.all(w * 0.02),
       child: _md(
         context,
@@ -174,6 +178,9 @@ class _MenuBlockCard extends StatelessWidget {
           ),
         ),
         linkColor: accent,
+        maxLines: maxLines,
+        overflow: TextOverflow.ellipsis,
+        textAlign: TextAlign.center,
       ),
     );
     final card = Container(
@@ -195,10 +202,10 @@ class _MenuBlockCard extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                label,
+                labelText(2),
               ],
             )
-          : Center(child: label),
+          : Center(child: labelText(5)),
     );
     // Aanklikbaar alleen tijdens presenteren (onTap gezet) en alleen als het blok
     // ergens heen springt (#1162). Een tekstblok of de preview in de editor blijft
