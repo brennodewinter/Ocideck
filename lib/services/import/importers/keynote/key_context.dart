@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 
@@ -16,7 +18,9 @@ class KeyContext {
 
   String? readPart(String path) {
     final bytes = readPartBytes(path);
-    return bytes == null ? null : String.fromCharCodes(bytes);
+    // Keynote-plists en -XML onder Metadata/ zijn UTF-8; byte-voor-byte lezen
+    // zou een meerbyte-teken tot mojibake uiteentrekken (zie #1194 voor .odp).
+    return bytes == null ? null : utf8.decode(bytes);
   }
 
   List<int>? readPartBytes(String path) {
