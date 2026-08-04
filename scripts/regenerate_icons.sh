@@ -92,10 +92,16 @@ section "web"
 # leest daar rustiger. Dat is geen vergissing uit het verleden — het is
 # nagemeten (de gecommitte set komt op 0,3 tot 1,9% na uit dit recept) en
 # daarom hier vastgelegd in plaats van rechtgetrokken.
+#
+# De map heet `app-icons/` en niet `icons/`: Debian/Ubuntu Apache levert
+# `Alias /icons/ /usr/share/apache2/icons/` (mods-enabled/alias.conf), die een
+# webroot `icons/` overschaduwt en het splash-logo op een default host laat
+# 404'en (#1221). Een pad dat geen standaardserver aliast is draagbaar zonder
+# vhost-ingreep.
 WEB_SOURCE="assets/images/ocideck-logo.png"
 for size in 512 192; do
-  magick "$WEB_SOURCE" -resize "${size}x${size}" -strip "web/icons/Icon-${size}.png"
-  echo "  ${size}px  web/icons/Icon-${size}.png"
+  magick "$WEB_SOURCE" -resize "${size}x${size}" -strip "web/app-icons/Icon-${size}.png"
+  echo "  ${size}px  web/app-icons/Icon-${size}.png"
 done
 magick "$WEB_SOURCE" -resize 64x64 -strip web/favicon.png
 echo "  64px  web/favicon.png"
@@ -104,8 +110,8 @@ echo "  64px  web/favicon.png"
 for size in 512 192; do
   magick "$WEB_SOURCE" -alpha off -resize "$((size * 8 / 10))x$((size * 8 / 10))" \
     -background white -gravity center -extent "${size}x${size}" -strip \
-    "web/icons/Icon-maskable-${size}.png"
-  echo "  ${size}px  web/icons/Icon-maskable-${size}.png (veilige zone)"
+    "web/app-icons/Icon-maskable-${size}.png"
+  echo "  ${size}px  web/app-icons/Icon-maskable-${size}.png (veilige zone)"
 done
 
 section "iOS"
