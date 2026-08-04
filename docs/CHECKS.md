@@ -223,6 +223,7 @@ now the only passing state.
 | [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | — |
 | [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | — |
 | [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ |
+| [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — |
@@ -601,9 +602,10 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Deliberate exceptions are written down.** A conscious, one-off transition the
   canonical rule forbids (say, a correction that goes back down past a bad
   release) goes in `sanctionedTransitions` in `tool/check_version_bump.dart`, in
-  the diff, with a reason. The list is empty by default — the `1.2.1` accident is
-  left standing and the next release is the ordinary patch `1.2.2`. An accident
-  has no entry there and fails; a decision does.
+  the diff, with a reason. The one current entry is `1.2.1->0.3.0`: the
+  accidental `v1.2.1` release is abandoned and the project deliberately returns
+  below 1.0, continuing its 0.x line at 0.3.0. An accident has no entry there and
+  fails; a decision does.
 - **A shallow clone is skipped, not failed.** With no reachable tag the gate
   cannot know the baseline, so it prints a note and passes rather than fail a
   machine that simply lacks the history; a full clone and the release runner both
@@ -612,6 +614,28 @@ also declares them, but see the [CI note](#continuous-integration).)
   `kOciDeckVersion` in `lib/services/export_metadata.dart` — see
   `version_consistency_test`), or, for a deliberate one-off, add the transition
   to `sanctionedTransitions` with a reason.
+
+### `make check-sbom-version`
+- **Runs:** `dart run tool/check_sbom_version.dart`
+- **Covers:** that every committed SBOM file (`sbom/ocideck.cdx.json`,
+  `sbom/ocideck.spdx.json`, `sbom/ocideck.sbom.md`) contains the current
+  `pubspec.yaml` version *including the build number* (`X.Y.Z+B`). `make sbom`
+  writes that string into all three at once, so a file that lacks it was not
+  regenerated.
+- **Why it exists:** the SBOM records the project version (the CRA wants "which
+  version is this inventory for"), so a version bump makes it stale.
+  `sbom_test` already catches that — but only as a full regenerate-and-diff
+  flutter test in `make check-registrations`, which
+  is outside the fast `make check-static` subset. The `1.2.1 → 0.3.0` bump
+  therefore passed the fast static gate green while the SBOM was still a version
+  behind, and the drift only surfaced in the slower gate. This closes that gap
+  with a cheap string check at the same fast tier; `sbom_test` still owns the
+  full dependency-set freshness.
+- **Why the build number too:** `make sbom` writes `X.Y.Z+B`, and the build
+  number moves on a re-release even when `X.Y.Z` does not — so matching only the
+  three-part version would let a stale SBOM through.
+- **Failure means:** regenerate the SBOM and commit it — `make sbom` then
+  `git add sbom/`.
 
 ### `make test`
 - **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags golden`
