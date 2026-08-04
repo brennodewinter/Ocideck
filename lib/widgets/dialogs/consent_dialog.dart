@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
+import '../../platform/native_window.dart';
+import '../../platform/platform_features.dart';
 import '../../state/consent_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
@@ -94,6 +96,21 @@ class _ConsentDialogState extends ConsumerState<ConsentDialog> {
                     child: Text(l10n.d('Akkoord gaan')),
                   ),
                 ),
+                // Wie niet akkoord gaat, moet weg kunnen. Op desktop houdt
+                // `setPreventClose` de kruis-knop tegen zolang de shell nog niet
+                // draait, dus zónder deze uitweg zit de gebruiker klem (#1207).
+                // Op web valt de knop weg: daar sluit het tabblad altijd en kan
+                // de pagina zichzelf niet afsluiten.
+                if (isDesktopNative) ...[
+                  const SizedBox(height: 4),
+                  SizedBox(
+                    width: double.infinity,
+                    child: TextButton(
+                      onPressed: quitApp,
+                      child: Text(l10n.d('Niet akkoord en afsluiten')),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
