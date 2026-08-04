@@ -7,8 +7,8 @@ import '../../state/consent_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/brand_logo.dart';
-import '../language_flag.dart';
 import '../privacy_statement_content.dart';
+import '../searchable_language_picker.dart';
 
 class ConsentDialog extends ConsumerStatefulWidget {
   const ConsentDialog({super.key});
@@ -156,33 +156,10 @@ class _ConsentHeader extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const Spacer(),
-          SizedBox(
-            width: 210,
-            child: DropdownButtonFormField<String>(
-              initialValue: languageCode,
-              isExpanded: true,
-              isDense: true,
-              decoration: InputDecoration(
-                labelText: l10n.t('applicationLanguage'),
-                isDense: true,
-                prefixIcon: const Icon(Icons.language, size: 16),
-                border: const OutlineInputBorder(),
-              ),
-              items: [
-                for (final entry in AppLocalizations.languageOptions)
-                  DropdownMenuItem(
-                    value: entry.key,
-                    child: languageOptionRow(
-                      entry.key,
-                      entry.value,
-                      fontSize: 13,
-                    ),
-                  ),
-              ],
-              onChanged: (code) {
-                if (code != null) onLanguageChanged(code);
-              },
-            ),
+          SearchableLanguagePicker(
+            languageCode: languageCode,
+            onLanguageChanged: onLanguageChanged,
+            labelText: l10n.t('applicationLanguage'),
           ),
         ],
       ),
