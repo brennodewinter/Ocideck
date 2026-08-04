@@ -200,6 +200,12 @@ class AppTheme {
   /// merk op een lichte achtergrond waar het geel te weinig contrast heeft.
   static const blueVivid = Color(0xFF003399);
 
+  /// Italiaans vlaggroen — de hoverkleur van het OciDeck-merk wanneer het in
+  /// rust EU-geel is. Behoort bij hetzelfde Europese kleurgebaar als
+  /// [amberVivid] en [blueVivid], vandaar hier en niet bij de algemene
+  /// groenschaal.
+  static const italianGreen = Color(0xFF008C45);
+
   // Groen/rood-accent voor bevestigd/afwijkend (o.a. apparaatverificatie).
   static const green600 = Color(0xFF16A34A);
   static const red600 = Color(0xFFDC2626);
