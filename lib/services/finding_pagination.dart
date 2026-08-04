@@ -56,7 +56,12 @@ enum _Section { description, confirmation, impact, recommendation }
 /// characters and more lines fit per slide — both raised in step below so the
 /// smaller type actually buys fewer pages.
 const double _linesPerSlide = 23.0;
-const double _contHeadingCost = 6.0;
+
+/// A continuation page's repeated heading ("(i/N)" marker) plus its spacing. It
+/// is now a quiet half-size reminder rather than a large title (#1198 follow-up:
+/// the big heading wasted half a continuation slide on the finding's title), so
+/// this reserve dropped in step and continuation pages carry a little more.
+const double _contHeadingCost = 4.5;
 const double _sectionHeadingCost = 2.5;
 
 // ── Header-card cost, derived from the finding's identity content ────────────

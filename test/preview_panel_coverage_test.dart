@@ -262,19 +262,19 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
 
-    // Starter title + three rendered pages for the authored finding. Both the
+    // Starter title + two rendered pages for the authored finding. Both the
     // list labels and the in-slide footers count the expanded render list, just
-    // like presenter/export, rather than the two authored slides.
-    for (var page = 1; page <= 4; page++) {
+    // like presenter/export, rather than the two authored slides. Since #1198
+    // the compact continuation heading reclaims room, so this finding fits in
+    // two pages instead of three.
+    for (var page = 1; page <= 3; page++) {
       expect(find.text('Slide $page'), findsOneWidget);
     }
-    expect(find.text('2 / 4'), findsOneWidget);
-    expect(find.text('3 / 4'), findsOneWidget);
-    expect(find.text('4 / 4'), findsOneWidget);
-    expect(find.textContaining('Slide 5'), findsNothing);
-    expect(find.textContaining('(1/3)'), findsOneWidget);
-    expect(find.textContaining('(2/3)'), findsOneWidget);
-    expect(find.textContaining('(3/3)'), findsOneWidget);
+    expect(find.text('2 / 3'), findsOneWidget);
+    expect(find.text('3 / 3'), findsOneWidget);
+    expect(find.textContaining('Slide 4'), findsNothing);
+    expect(find.textContaining('(1/2)'), findsOneWidget);
+    expect(find.textContaining('(2/2)'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 
