@@ -68,6 +68,7 @@ class FindingSpec {
     this.retest = RetestStatus.notRetested,
     this.retestNote = '',
     this.testId = '',
+    this.unknownSectionTitles = const [],
   });
 
   /// The `# ` heading text, e.g. `F-03 · SQL injection in the login form`. The
@@ -122,6 +123,20 @@ class FindingSpec {
   /// the finding's scope object; setting it marks the matching checklist row as
   /// an anomaly linked to this finding. Rendered inside backticks; stored without.
   final String testId;
+
+  /// The headings of any `## …` sections whose title is **not** one of the four
+  /// canonical anchors (nor a recognised alias of one — see [_sectionAliases]).
+  ///
+  /// Only the header card renders the four sections; anything else in the
+  /// Markdown never reaches the structured view, the presentation or the export.
+  /// The file stays the source of truth, so the content is not lost on disk — but
+  /// a hand-written or imported `## Notes` / `## References` would vanish from a
+  /// *delivered* report without a trace. This list lets the quality analyzer
+  /// surface exactly that, instead of the divergence staying silent (found while
+  /// keuring #1198). Empty on any finding that only uses canonical headings, and
+  /// only meaningful straight after [parse] — it is derived from the raw Markdown,
+  /// not carried through edits.
+  final List<String> unknownSectionTitles;
 
   /// The parsed CVSS vector, or null when [cvssVector] is empty/invalid.
   Cvss4? get cvss =>
@@ -203,6 +218,20 @@ class FindingSpec {
     sectionRecommendation: 'Aanbeveling',
   };
 
+  /// The canonical anchor a `## …` heading maps to, or null when the heading is
+  /// not a recognised section. Matching is case-insensitive and space-trimmed.
+  ///
+  /// The finding editor only ever writes the exact anchors, so this matters for
+  /// hand-authored or imported Markdown: a common short form (`## Confirmation`,
+  /// `## Impact`) should still land in the right field rather than silently
+  /// dropping out of the render/export. The Dutch source headings (the labels a
+  /// tester reads in the UI) are recognised too, so a finding typed in Dutch
+  /// round-trips into the canonical English anchors on the next save. Anything
+  /// still unrecognised is reported by the quality analyzer, never dropped in
+  /// silence — see [unknownSectionTitles].
+  static String? canonicalSectionAnchor(String heading) =>
+      _sectionAliases[heading.trim().toLowerCase()];
+
   /// Parse a finding header body (the Markdown after the `_class` sidecar). The
   /// parse is deliberately lenient: hand-written findings that stray from the
   /// canonical layout still yield whatever fields are recognisable, and the
@@ -281,8 +310,27 @@ class FindingSpec {
       }
     }
 
-    String body(String title) =>
-        _unescapeSectionBody((sections[title]?.toString() ?? '').trim());
+    // Gather every section that resolves to [anchor] (the canonical heading, a
+    // short form, or the Dutch source), merged in author order. Merging rather
+    // than taking the first keeps content even in the odd case where both a
+    // short form and the canonical heading appear.
+    String body(String anchor) {
+      final buf = StringBuffer();
+      sections.forEach((title, sectionBuf) {
+        if (canonicalSectionAnchor(title) != anchor) return;
+        if (buf.isNotEmpty) buf.write('\n\n');
+        buf.write(sectionBuf.toString());
+      });
+      return _unescapeSectionBody(buf.toString().trim());
+    }
+
+    // Sections whose heading maps to no canonical anchor: their content never
+    // reaches the render/export, so the analyzer flags them instead of letting
+    // the divergence stay silent.
+    final unknownSections = [
+      for (final title in sections.keys)
+        if (canonicalSectionAnchor(title) == null) title,
+    ];
     return FindingSpec(
       heading: heading,
       scopeObject: scopeObject,
@@ -298,6 +346,7 @@ class FindingSpec {
       confirmation: body(sectionConfirmation),
       impact: body(sectionImpact),
       recommendation: body(sectionRecommendation),
+      unknownSectionTitles: unknownSections,
     );
   }
 
@@ -485,6 +534,7 @@ class FindingSpec {
     RetestStatus? retest,
     String? retestNote,
     String? testId,
+    List<String>? unknownSectionTitles,
   }) {
     return FindingSpec(
       heading: heading ?? this.heading,
@@ -505,6 +555,33 @@ class FindingSpec {
       retest: retest ?? this.retest,
       retestNote: retestNote ?? this.retestNote,
       testId: testId ?? this.testId,
+      unknownSectionTitles: unknownSectionTitles ?? this.unknownSectionTitles,
     );
   }
 }
+
+/// Normalised (`trim().toLowerCase()`) section heading → canonical anchor.
+///
+/// Top-level (not a member) so it stays out of the [FindingSpec] class-size
+/// ratchet; same library, so [FindingSpec.canonicalSectionAnchor] reads it
+/// directly. Each canonical anchor maps to itself, its common English short
+/// form, and its Dutch source heading (from [FindingSpec.sectionSources]).
+const Map<String, String> _sectionAliases = {
+  // Description
+  'description': FindingSpec.sectionDescription,
+  'beschrijving': FindingSpec.sectionDescription,
+  // Confirmation (reproduction)
+  'confirmation (reproduction)': FindingSpec.sectionConfirmation,
+  'confirmation': FindingSpec.sectionConfirmation,
+  'reproduction': FindingSpec.sectionConfirmation,
+  'bevestiging (reproductie)': FindingSpec.sectionConfirmation,
+  'bevestiging': FindingSpec.sectionConfirmation,
+  // Possible impact
+  'possible impact': FindingSpec.sectionImpact,
+  'impact': FindingSpec.sectionImpact,
+  'mogelijke impact': FindingSpec.sectionImpact,
+  // Recommendation
+  'recommendation': FindingSpec.sectionRecommendation,
+  'recommendations': FindingSpec.sectionRecommendation,
+  'aanbeveling': FindingSpec.sectionRecommendation,
+};
