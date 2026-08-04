@@ -198,15 +198,24 @@ flutter:
     # be added alongside and are picked up automatically by DocumentationService
     # once declared here.
     - docs/USER_GUIDE.md
+    - docs/USER_GUIDE.nl.md
     - docs/SHORTCUTS.md
+    - docs/SHORTCUTS.nl.md
     - docs/FILE_FORMAT.md
+    - docs/FILE_FORMAT.nl.md
     - docs/README.md
+    - docs/README.nl.md
     - docs/FAQ.md
+    - docs/FAQ.nl.md
     - docs/TROUBLESHOOTING_GUIDE.md
+    - docs/TROUBLESHOOTING_GUIDE.nl.md
     - docs/PRIVACY.md
     - docs/ACCESSIBILITY.md
+    - docs/ACCESSIBILITY.nl.md
     - docs/KNOWN_LIMITATIONS.md
+    - docs/KNOWN_LIMITATIONS.nl.md
     - docs/GLOSSARY.md
+    - docs/GLOSSARY.nl.md
     - docs/LICENSE_COMPLIANCE.md
     - docs/SBOM.md
     - docs/PERFORMANCE_GUIDE.md

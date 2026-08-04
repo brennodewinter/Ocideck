@@ -326,15 +326,42 @@ void main() {
       'falls back to the base doc when no locale variant is bundled',
       () async {
         // `en` is the base language, so it returns the base document directly.
-        // No docs/USER_GUIDE.{de,nl}.md is shipped yet, so both must fall back
-        // to that same base — including Dutch, which since #1181 is resolved
-        // like any other non-base language rather than pinned to the base.
+        // German ships no bundled translation of any doc, so it falls back to
+        // the base.
         final base = await service.load('docs/USER_GUIDE.md', 'en');
         final german = await service.load('docs/USER_GUIDE.md', 'de');
-        final dutch = await service.load('docs/USER_GUIDE.md', 'nl');
         expect(german, equals(base));
-        expect(dutch, equals(base));
         expect(base, isNotEmpty);
+
+        // Dutch now HAS bundled translations for the user docs (#1181), so the
+        // fallback is shown with SECURITY_DESIGN.md — a bundled doc deliberately
+        // kept English-only (a mistranslated security promise is still a
+        // promise) — where even Dutch must fall back to the English base.
+        final secBase = await service.load('docs/SECURITY_DESIGN.md', 'en');
+        final secDutch = await service.load('docs/SECURITY_DESIGN.md', 'nl');
+        expect(secDutch, equals(secBase));
+        expect(secBase, isNotEmpty);
+      },
+    );
+
+    test(
+      'serves a bundled Dutch variant instead of the English base (#1181)',
+      () async {
+        // KNOWN_LIMITATIONS.nl.md is the first bundled translation; a Dutch reader
+        // must get it, not the base, and the reader must know it is not the base.
+        final detailed = await service.loadDetailed(
+          'docs/KNOWN_LIMITATIONS.md',
+          'nl',
+        );
+        expect(detailed.isBaseVersion, isFalse);
+        expect(detailed.text, contains('Bekende beperkingen'));
+        // The English base for another language is unchanged.
+        final english = await service.loadDetailed(
+          'docs/KNOWN_LIMITATIONS.md',
+          'en',
+        );
+        expect(english.isBaseVersion, isTrue);
+        expect(english.text, contains('Known limitations'));
       },
     );
 
