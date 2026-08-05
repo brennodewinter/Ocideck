@@ -12,6 +12,41 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.3.2] — 2026-08-05
+
+### Added
+
+- feat(a11y): <main>-landmark en visueel-verborgen <h1> in HTML-export (#1250) (#1259)
+- feat(libreplan): read-only REST-import als specialist-module (#1240)
+- feat(gantt): gantt-slidetype — tabel-opslag → Mermaid-render (#1246)
+- feat(presentatie): session-data-edits als losse .md bewaren na presenteren (#1235)
+- feat(release): onbewaakt release-script met één wachtwoord (#1161)
+- feat(presentatie-info): zichtbare 'vandaag'-knop op het datumveld (#1210)
+
+### Changed
+
+- chore(deps): lock-file-bumps, waaronder retracted jni 1.0.1 → 1.0.3
+- Revert "ci: schrijf een echte commit-status voor de static-gate" (#1260) (#1261)
+- ci: schrijf een echte commit-status voor de static-gate (Gitea 1.22-bug)
+- test(a11y): bronscan herkent ook de kale IconButton (#1248) (#1257)
+- docs(gantt): design-doc voor het gantt-slidetype (#1253)
+- ci(release): make bump-scanner-pins + automatische scanner-bump (#1161)
+- ci: bump scanner-pins trufflehog 3.96.0 + semgrep 1.172.0
+- docs: Linux-packagingplan + soevereiniteit-zelfpositionering (ECSF) — #1227
+
+### Fixed
+
+- fix(macos): Podfile.lock meenemen met flutter_webrtc 1.6.0-bump
+- fix(test): stil false-positive tap-warning in stijlprofiel-dropdown
+- fix(test): homebrew_cask_test overslaat op Windows (#1263)
+- fix(test): vervang vaste delay door wachten op uitkomst (linux-gate flaky) (#1262)
+- fix(a11y): eerlijke active-accessor voor het tab-opschrift (#1251)
+- fix(a11y): twee naamloze zoekveld-wisknoppen (WCAG 4.1.2) (#1247)
+- fix(html-export): <html lang> volgt de rapporttaal, niet hardcoded nl (#1249) (#1254)
+- fix(welkomscherm): logo horizontaal centreren in de eerste baan
+- fix(presentatie): knipperend privacy-schildje in session-export-dialoog
+- fix(release): homebrew-cask-job installeert nodejs en slaat zacht over (#1227)
+
 ## [0.3.1] — 2026-08-04
 
 ### Added
