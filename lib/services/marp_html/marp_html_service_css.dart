@@ -19,6 +19,7 @@ const _structuralCss = r'''
 :root{--ocideck-accent:#003399}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+.ocideck-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .slide{position:relative;width:1280px;min-height:720px;margin:24px auto;padding:48px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);border-radius:4px}
 .slide h1{font-size:48px;margin:.15em 0}
 .slide h2{font-size:34px;margin:.15em 0}

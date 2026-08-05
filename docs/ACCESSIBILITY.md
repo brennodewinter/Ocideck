@@ -127,7 +127,11 @@ either). PPTX speaker notes are real text and do travel.
 
 **The HTML export is not audited for accessibility.** It produces genuine text
 and headings, which is already a great deal more than the bitmap formats, but
-nobody has checked its colour contrast, focus order or landmark structure.
+nobody has checked its colour contrast or focus order. Its landmark structure
+*is* in place: the slides sit inside a `<main>` landmark with a
+visually-hidden `<h1>` carrying the deck title, so a screen reader can
+identify the document and bypass to the content (WCAG 2.1 SC 1.3.1, 2.4.1;
+fixed 2026-08-05, #1250).
 
 **The page language follows the report, not the UI.** *(Fixed 2026-08-05,
 #1249.)* The HTML export writes `<html lang="…">` from the deck's recorded

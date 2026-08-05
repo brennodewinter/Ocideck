@@ -248,6 +248,12 @@ class MarpHtmlService {
 
     final meta = docMeta;
     final title = _htmlAttr(meta.displayTitle(fallbackTitle));
+    // WCAG 1.3.1/2.4.1: een documenttitel boven de dia's, voor de schermlezer.
+    // Visueel verborgen (ocideck-sr-only) zodat de export nog direct op de
+    // eerste dia opent — de titel staat al in <title>, dit is het
+    // documentstructuur-anker dat een schermlezer bij binnenkomst aankondigt.
+    // _htmlText, niet _htmlAttr: dit is tekstinhoud van <h1>, geen attribuut.
+    final h1Title = _htmlText(meta.displayTitle(fallbackTitle));
     final headMeta = _htmlHeadMeta(meta, fallbackTitle: fallbackTitle);
     final banner =
         (meta.htmlClassification == null
@@ -258,34 +264,7 @@ class MarpHtmlService {
     return '<!doctype html>\n'
         '<html lang="$htmlLang"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
-        // Neutralise injected inline scripts (defence-in-depth behind DOMPurify)
-        // without over-restricting style, which would break locally opened
-        // exports. No default-src: the inline <style> block must keep working
-        // (adding one would force 'unsafe-inline' for style). Instead every
-        // network-capable resource type is pinned to local sources so nothing a
-        // crafted deck smuggles past DOMPurify can beacon home when the file is
-        // opened: connect-src 'none' (fetch/XHR/beacon), img-src/media-src
-        // self/data/blob/file (a surviving <img>/<video src="https://…">),
-        // font-src self/data (a hostile @font-face url()), and form-action
-        // 'none' (a planted <form action="https://…"> on submit). MathJax is
-        // tex-svg (no web fonts) and the bundled theme/highlight CSS carry no
-        // url()/@font-face, so these limits never bite a legitimate export.
-        //
-        // style-src 'unsafe-inline' sluit het laatste gat: zónder die richtlijn
-        // valt stijl helemaal buiten de CSP, en kon een `@import url(https://…)`
-        // in een `<style>`-blok alsnog naar buiten bellen — precies wat de rest
-        // van deze regel belooft te verhinderen. 'unsafe-inline' klinkt ruimer
-        // dan het is: het staat inline stijl toe (die er al was, want er stond
-        // niets) maar géén enkele externe herkomst, dus het import-verzoek
-        // wordt geweigerd. Een nonce zou strenger zijn, maar breekt de stijl
-        // die MathJax en mermaid tijdens het renderen zelf injecteren.
-        '<meta http-equiv="Content-Security-Policy" '
-        'content="script-src \'nonce-$nonce\'; object-src \'none\'; '
-        'base-uri \'none\'; frame-src \'none\'; form-action \'none\'; '
-        'img-src \'self\' data: blob: file:; '
-        'media-src \'self\' data: blob: file:; font-src \'self\' data:; '
-        'style-src \'unsafe-inline\'; '
-        'connect-src \'none\'">'
+        '${_cspMeta(nonce)}'
         '<title>$title</title>'
         '$headMeta'
         '<style>${exportBaseCss()}\n$css\n$hljsCss</style>'
@@ -297,11 +276,46 @@ class MarpHtmlService {
         '${inline(mermaid, 'mermaid')}'
         '</head><body>'
         '$banner'
+        '<main><h1 class="ocideck-sr-only">$h1Title</h1>'
         '$sections'
+        '</main>'
         '${inline(_renderScript(embedded.dataUris))}'
         '${notices.html}'
         '</body></html>';
   }
+
+  /// De Content-Security-Policy voor één export, als `<meta>`-element met de
+  /// per-export [nonce] erin gebakken.
+  ///
+  /// Neutralise injected inline scripts (defence-in-depth behind DOMPurify)
+  /// without over-restricting style, which would break locally opened
+  /// exports. No default-src: the inline <style> block must keep working
+  /// (adding one would force 'unsafe-inline' for style). Instead every
+  /// network-capable resource type is pinned to local sources so nothing a
+  /// crafted deck smuggles past DOMPurify can beacon home when the file is
+  /// opened: connect-src 'none' (fetch/XHR/beacon), img-src/media-src
+  /// self/data/blob/file (a surviving <img>/<video src="https://…">),
+  /// font-src self/data (a hostile @font-face url()), and form-action
+  /// 'none' (a planted <form action="https://…"> on submit). MathJax is
+  /// tex-svg (no web fonts) and the bundled theme/highlight CSS carry no
+  /// url()/@font-face, so these limits never bite a legitimate export.
+  ///
+  /// style-src 'unsafe-inline' sluit het laatste gat: zónder die richtlijn
+  /// valt stijl helemaal buiten de CSP, en kon een `@import url(https://…)`
+  /// in een `<style>`-blok alsnog naar buiten bellen — precies wat de rest
+  /// van deze regel belooft te verhinderen. 'unsafe-inline' klinkt ruimer
+  /// dan het is: het staat inline stijl toe (die er al was, want er stond
+  /// niets) maar géén enkele externe herkomst, dus het import-verzoek
+  /// wordt geweigerd. Een nonce zou strenger zijn, maar breekt de stijl
+  /// die MathJax en mermaid tijdens het renderen zelf injecteren.
+  static String _cspMeta(String nonce) =>
+      '<meta http-equiv="Content-Security-Policy" '
+      'content="script-src \'nonce-$nonce\'; object-src \'none\'; '
+      'base-uri \'none\'; frame-src \'none\'; form-action \'none\'; '
+      'img-src \'self\' data: blob: file:; '
+      'media-src \'self\' data: blob: file:; font-src \'self\' data:; '
+      'style-src \'unsafe-inline\'; '
+      'connect-src \'none\'">';
 
   /// Collects the third-party notices for one export: the per-script licence
   /// banners and the collapsible block carrying the full licence texts.
