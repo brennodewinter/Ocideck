@@ -10,7 +10,10 @@ version in your browser. Your deck stays in the tab; nothing is uploaded.
 | --- | --- |
 | macOS (Apple Silicon + Intel) | `ocideck-macos-@VERSIE@.zip` |
 | Windows (x64) | `ocideck-windows-x64-@VERSIE@.zip` |
-| Linux (x64) | `ocideck-linux-x64-@VERSIE@.tar.gz` |
+| Linux — AppImage (most distributions) | `ocideck-linux-x86_64-@VERSIE@.AppImage` |
+| Linux — Debian / Ubuntu / Mint | `ocideck-linux-amd64-@VERSIE@.deb` |
+| Linux — Fedora / openSUSE | `ocideck-linux-x86_64-@VERSIE@.rpm` |
+| Linux — portable tarball | `ocideck-linux-x64-@VERSIE@.tar.gz` |
 | Web bundle (self-hosting) | `ocideck-web-@VERSIE@.tar.gz` |
 
 Also attached: the Software Bill of Materials in CycloneDX
@@ -31,8 +34,20 @@ OciDeck.app`: it reports `source=Notarized Developer ID`.)
 **Windows.** SmartScreen shows "Windows protected your PC". Choose **More
 info**, then **Run anyway**.
 
-**Linux.** Unpack and run `./ocideck`. The bundle needs GTK 3 and
-`libsecret-1`; on Debian/Ubuntu: `sudo apt install libgtk-3-0 libsecret-1-0`.
+**Linux.** Four packagings of the same build — pick what fits your distribution.
+None is sandboxed or store-signed; each wraps the same bundle listed above.
+
+- **AppImage** — `chmod +x ocideck-linux-x86_64-@VERSIE@.AppImage`, then run it. One
+  file, no installation, works on most distributions.
+- **Debian / Ubuntu / Mint** — `sudo apt install ./ocideck-linux-amd64-@VERSIE@.deb`.
+- **Fedora / openSUSE** — `sudo dnf install ./ocideck-linux-x86_64-@VERSIE@.rpm`
+  (or `sudo zypper install ./ocideck-linux-x86_64-@VERSIE@.rpm`).
+- **Any distribution** — unpack `ocideck-linux-x64-@VERSIE@.tar.gz` and run
+  `./ocideck`.
+
+All four need GTK 3, `libsecret-1` and `liblzma5`; the `.deb` and `.rpm` pull
+them in, and any GTK desktop already has them. For the AppImage or tarball on a
+minimal system: `sudo apt install libgtk-3-0 libsecret-1-0` (Debian/Ubuntu).
 
 ## Verifying what you downloaded
 
