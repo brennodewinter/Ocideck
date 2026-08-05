@@ -12,6 +12,7 @@ import '../models/asset_origin.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/improvement_y01.dart';
+import '../models/markdown_kind.dart';
 import '../models/settings.dart';
 import '../models/seal_record.dart';
 import '../models/slide.dart';
@@ -46,6 +47,7 @@ import '../services/webdav_service.dart';
 import '../platform/platform_features.dart';
 import '../utils/log.dart';
 import 'deck_provider.dart';
+import 'document_provider.dart';
 import 'editor_provider.dart';
 import 'settings_provider.dart';
 import 'asset_rights_module_provider.dart';
@@ -215,8 +217,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final tab = TabInfo(
       id: id,
       recoveryId: key,
-      deckNotifier: deckNotifier,
-      editorNotifier: EditorNotifier(),
+      content: DeckTabContent(deckNotifier, EditorNotifier()),
     );
     _subs[id] = deckNotifier.stream.listen((st) {
       if (!mounted) return;

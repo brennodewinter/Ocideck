@@ -7,13 +7,52 @@ part of 'tabs_provider.dart';
 
 // ── Per-tab data ──────────────────────────────────────────────────────────────
 
+/// De inhoud van een tabblad: óf een presentatie (deck) óf een document.
+///
+/// Sealed zodat elke plek die beide soorten moet behandelen dat expliciet en
+/// exhaustief doet — de naad uit docs/design/DOCUMENT_MODE.md §2, waar deck en
+/// document één substraat (opslag, herstel, dirty) delen zónder dat het
+/// deck-model aan doorlopende tekst wordt opgedrongen. De gedeelde tab-velden
+/// (id, herkomst, samenwerksessie) blijven op [TabInfo]; alleen de notifier(s)
+/// verschillen per soort.
+sealed class TabContent {
+  const TabContent();
+
+  MarkdownKind get kind;
+}
+
+/// Een presentatietabblad: het zware [DeckNotifier] (deck + ongedaan-historie)
+/// plus de lichte [EditorNotifier] voor de per-dia editor.
+class DeckTabContent extends TabContent {
+  const DeckTabContent(this.deckNotifier, this.editorNotifier);
+
+  final DeckNotifier deckNotifier;
+  final EditorNotifier editorNotifier;
+
+  @override
+  MarkdownKind get kind => MarkdownKind.presentation;
+}
+
+/// Een documenttabblad: één [DocumentNotifier] over het platte `.md`. Geen
+/// per-dia editor — een document is de bron zelf.
+class DocumentTabContent extends TabContent {
+  const DocumentTabContent(this.documentNotifier);
+
+  final DocumentNotifier documentNotifier;
+
+  @override
+  MarkdownKind get kind => MarkdownKind.document;
+}
+
 class TabInfo {
   final int id;
 
   /// Stabiele sleutel voor het autosave-herstelbestand van dit tabblad.
   final String recoveryId;
-  final DeckNotifier deckNotifier;
-  final EditorNotifier editorNotifier;
+
+  /// Wat dit tabblad bewerkt — een deck of een document. De rest van de
+  /// tab-laag leest [content] (of de compat-getters hieronder).
+  final TabContent content;
 
   /// Waar het deck in dit tabblad vandaan kwam, of `null` voor een nieuw of
   /// puur lokaal deck. Muteerbaar: wordt na het openen ingevuld en bij elke
@@ -72,40 +111,96 @@ class TabInfo {
   TabInfo({
     required this.id,
     required this.recoveryId,
-    required this.deckNotifier,
-    required this.editorNotifier,
+    required this.content,
     this.origin,
   });
 
-  String get label {
-    // Rond het sluiten van een tab of het venster kan Riverpod de notifier al
-    // hebben opgeruimd (de ProviderScope van de tab is dan ontmanteld) terwijl
-    // dit TabInfo nog één rebuild lang in beeld is. Lezen van een gedisposede
-    // StateNotifier gooit; val dan terug op neutrale waarden.
-    // Via de actieve taal en niet als kale literal: dit is het eerste woord
-    // linksboven in het venster, en het stond in alle 32 talen in het
-    // Nederlands (#576). `AppLocalizations.active` leest de statisch gezette
-    // taal — zie #1251 voor waarom dit niet `const AppLocalizations(Locale('nl'))`
-    // is: die Locale is een misleidend handvat, want `d()` negeert hem.
-    if (!deckNotifier.mounted) return _newTabLabel;
-    final st = deckNotifier.currentState;
-    // A saved deck is identified by its file name — that is what the user
-    // recognises, not the parsed first-slide title (which falls back to the
-    // generic 'Presentatie').
-    final path = st.filePath;
-    if (path != null && path.isNotEmpty) {
-      final name = p.basenameWithoutExtension(path);
-      if (name.isNotEmpty) return name;
-    }
-    final deck = st.deck;
-    return deck?.title.isNotEmpty == true ? deck!.title : _newTabLabel;
-  }
+  /// Presentatie of document.
+  MarkdownKind get kind => content.kind;
 
-  bool get isDirty =>
+  /// Compat: de deck-notifier van dit tabblad. Gooit voor een documenttabblad —
+  /// deck-only paden (dia's, git, S3, import) horen zo'n tab nooit te bereiken;
+  /// de schil verbergt hun acties per soort. Soort-bewuste code leest [content],
+  /// [documentNotifier] of [kind] in plaats van deze getter.
+  DeckNotifier get deckNotifier => switch (content) {
+    DeckTabContent(:final deckNotifier) => deckNotifier,
+    DocumentTabContent() => throw StateError(
+      'deckNotifier opgevraagd op een documenttabblad',
+    ),
+  };
+
+  /// Compat, als [deckNotifier]: de per-dia editor-notifier. Documenttabbladen
+  /// hebben er geen (een document is de bron zelf), dus dit gooit voor zo'n tab.
+  EditorNotifier get editorNotifier => switch (content) {
+    DeckTabContent(:final editorNotifier) => editorNotifier,
+    DocumentTabContent() => throw StateError(
+      'editorNotifier opgevraagd op een documenttabblad',
+    ),
+  };
+
+  /// De document-notifier van dit tabblad, of `null` voor een presentatie.
+  DocumentNotifier? get documentNotifier => switch (content) {
+    DocumentTabContent(:final documentNotifier) => documentNotifier,
+    DeckTabContent() => null,
+  };
+
+  String get label => switch (content) {
+    DeckTabContent(:final deckNotifier) => _deckTabLabel(deckNotifier),
+    DocumentTabContent(:final documentNotifier) => _documentTabLabel(
+      documentNotifier,
+    ),
+  };
+
+  bool get isDirty => switch (content) {
+    DeckTabContent(:final deckNotifier, :final editorNotifier) =>
       deckNotifier.mounted &&
-      (deckNotifier.currentState.isDirty ||
-          editorNotifier.currentState.hasMarkdownDraft);
-  bool get isOpen => deckNotifier.mounted && deckNotifier.currentState.isOpen;
+          (deckNotifier.currentState.isDirty ||
+              editorNotifier.currentState.hasMarkdownDraft),
+    DocumentTabContent(:final documentNotifier) =>
+      documentNotifier.mounted && documentNotifier.currentState.isDirty,
+  };
+
+  bool get isOpen => switch (content) {
+    DeckTabContent(:final deckNotifier) =>
+      deckNotifier.mounted && deckNotifier.currentState.isOpen,
+    DocumentTabContent(:final documentNotifier) =>
+      documentNotifier.mounted && documentNotifier.currentState.isOpen,
+  };
+}
+
+/// Het opschrift van een presentatietabblad.
+///
+/// Rond het sluiten van een tab of het venster kan Riverpod de notifier al
+/// hebben opgeruimd (de ProviderScope van de tab is dan ontmanteld) terwijl het
+/// [TabInfo] nog één rebuild lang in beeld is. Lezen van een gedisposede
+/// StateNotifier gooit; val dan terug op de neutrale [_newTabLabel]. Die volgt
+/// de actieve taal en is geen kale literal — het is het eerste woord linksboven
+/// in het venster (#576/#1251).
+String _deckTabLabel(DeckNotifier deckNotifier) {
+  if (!deckNotifier.mounted) return _newTabLabel;
+  final st = deckNotifier.currentState;
+  // A saved deck is identified by its file name — that is what the user
+  // recognises, not the parsed first-slide title (which falls back to the
+  // generic 'Presentatie').
+  final path = st.filePath;
+  if (path != null && path.isNotEmpty) {
+    final name = p.basenameWithoutExtension(path);
+    if (name.isNotEmpty) return name;
+  }
+  final deck = st.deck;
+  return deck?.title.isNotEmpty == true ? deck!.title : _newTabLabel;
+}
+
+/// Het opschrift van een documenttabblad: de bestandsnaam, of [_newTabLabel]
+/// zolang het document niet is opgeslagen (zelfde neutrale val als een deck).
+String _documentTabLabel(DocumentNotifier documentNotifier) {
+  if (!documentNotifier.mounted) return _newTabLabel;
+  final path = documentNotifier.currentState.filePath;
+  if (path != null && path.isNotEmpty) {
+    final name = p.basenameWithoutExtension(path);
+    if (name.isNotEmpty) return name;
+  }
+  return _newTabLabel;
 }
 
 // ── Tabs state ────────────────────────────────────────────────────────────────
