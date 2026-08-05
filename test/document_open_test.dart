@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
@@ -73,4 +74,26 @@ void main() {
       expect(result.document!.toMarkdown(), source);
     },
   );
+
+  test('saveDocument schrijft de bron byte-getrouw naar schijf', () async {
+    const source = '# Rapport\n\nTekst.\n\n---\n\nMeer.\r\n';
+    final path = p.join(temp.path, 'uit.md');
+    final ok = await saveDocument(MarkdownDocument.parse(source), path);
+    expect(ok, isTrue);
+    expect(File(path).readAsStringSync(), source);
+  });
+
+  test('open → bewerk → opslaan → heropenen is byte-identiek', () async {
+    const source = '---\ntitle: Memo\n---\n\n# Kop\n\nInhoud.\n';
+    final path = p.join(temp.path, 'memo.md');
+    File(path).writeAsStringSync(source);
+    final svc = _service();
+
+    final opened = (await svc.openDocumentDetailed(path)).document!;
+    const edited = '$source\nExtra regel.\n';
+    expect(await saveDocument(opened.withSource(edited), path), isTrue);
+
+    final reopened = (await svc.openDocumentDetailed(path)).document!;
+    expect(reopened.toMarkdown(), edited);
+  });
 }

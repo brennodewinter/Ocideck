@@ -84,6 +84,27 @@ extension FileServiceDocumentOpen on FileService {
   }
 }
 
+/// Schrijf een document byte-getrouw naar [filePath]: precies de bron, geen
+/// deck-scaffold, geen `marp:`-kop, geen normalisatie (DOCUMENT_MODE.md §3).
+/// Atomair via [writeStringAtomic], zodat een onderbroken schrijfactie nooit een
+/// half bestand achterlaat. Levert `true` bij succes.
+///
+/// De veiligheidsscan hoort bij het *openen* (onvertrouwde invoer); wat de
+/// gebruiker in zijn eigen editor typt en naar zijn eigen, gekozen pad
+/// wegschrijft, is geen onvertrouwde invoer en gaat er niet nog eens doorheen.
+///
+/// Top-level en niet op [FileService]: hij raakt geen enkel veld van die klasse
+/// aan, en de klasse zit tegen haar plafond.
+Future<bool> saveDocument(MarkdownDocument document, String filePath) async {
+  try {
+    await writeStringAtomic(File(filePath), document.toMarkdown());
+    return true;
+  } catch (e) {
+    logWarning('FileService.saveDocument: not writable', e);
+    return false;
+  }
+}
+
 /// True when [content] handed to [FileService.openDeckDetailed] is over the
 /// markdown cap. A UTF-16 code unit is always ≥ 1 UTF-8 byte, so a code-unit
 /// count over the cap guarantees the byte size is over it too — a cheap, O(1)
