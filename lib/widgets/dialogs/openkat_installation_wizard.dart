@@ -394,11 +394,12 @@ class _OpenKatInstallationWizardState
     final draft = _draft();
     final client = OpenKatRockyClient(installation: draft, token: token);
     if (!client.canSend) {
+      final denial = openKatDenialMessage(client.denialReason);
       setState(() {
         _testing = false;
         _testOk = false;
-        _testMessage = openKatDenialMessage(client.denialReason);
-        _testMessageArgs = const {};
+        _testMessage = denial.source;
+        _testMessageArgs = denial.args;
       });
       return;
     }
@@ -421,11 +422,12 @@ class _OpenKatInstallationWizardState
       });
     } catch (e) {
       if (!mounted) return;
+      final msg = openKatErrorMessage(e);
       setState(() {
         _testing = false;
         _testOk = false;
-        _testMessage = openKatErrorMessage(e);
-        _testMessageArgs = const {};
+        _testMessage = msg.source;
+        _testMessageArgs = msg.args;
       });
     }
   }

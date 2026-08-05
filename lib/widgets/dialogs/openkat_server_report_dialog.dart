@@ -42,7 +42,7 @@ class _OpenKatServerReportDialogState
   List<OpenKatOrganization> _orgs = const [];
   List<OpenKatReportRef> _reports = const [];
   bool _loading = false;
-  String? _error;
+  OpenKatUserMessage? _error;
   bool _importing = false;
 
   @override
@@ -128,7 +128,7 @@ class _OpenKatServerReportDialogState
     }
     if (_error != null) {
       return Text(
-        l10n.d(_error!),
+        _error!.apply(l10n.d(_error!.source)),
         style: TextStyle(color: Theme.of(context).colorScheme.error),
       );
     }
@@ -391,8 +391,9 @@ class _OpenKatServerReportDialogState
         .readToken(installation.id);
     if (token == null || token.trim().isEmpty) {
       setState(
-        () => _error =
-            'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.',
+        () => _error = const OpenKatUserMessage(
+          'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.',
+        ),
       );
       await ref.read(openKatProvider.notifier).markInstallationChecked(
         id: installation.id,

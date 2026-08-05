@@ -3,43 +3,77 @@
 /// De client praat in interne codes (`desktop_only`, `HTTP 401`, …); de UI
 /// vertaalt die hier naar handelingsperspectief — zie
 /// `docs/design/OPENKAT_LIVE_UX.md`.
+///
+/// Bronzinnen bevatten placeholders (`{code}`, …) die **na** `l10n.d` worden
+/// ingevuld — nooit Dart-interpolatie in de sleutel.
 library;
 
 import '../../models/openkat/openkat_installation.dart';
 import 'openkat_rocky_client.dart';
 
-/// Zet een [OpenKatRequestException] of denial-code om naar een NL-bronzin
-/// voor `l10n.d(...)`.
-String openKatErrorMessage(Object error) {
+/// Een te lokaliseren melding met optionele placeholders.
+class OpenKatUserMessage {
+  final String source;
+  final Map<String, String> args;
+
+  const OpenKatUserMessage(this.source, [this.args = const {}]);
+
+  /// Pas [translated] (uitkomst van `l10n.d(source)`) toe met [args].
+  String apply(String translated) {
+    var text = translated;
+    for (final entry in args.entries) {
+      text = text.replaceAll('{${entry.key}}', entry.value);
+    }
+    return text;
+  }
+}
+
+/// Zet een [OpenKatRequestException] of denial-code om naar een NL-bronzin.
+OpenKatUserMessage openKatErrorMessage(Object error) {
   if (error is OpenKatRequestException) {
     return _fromException(error);
   }
-  return 'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.';
+  return const OpenKatUserMessage(
+    'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.',
+  );
 }
 
-/// Zet een [OpenKatRockyClient.denialReason]-code om naar een NL-bronzin.
-String openKatDenialMessage(String? code) {
+/// Zet een [OpenKatRockyClient.denialReason]-code om.
+OpenKatUserMessage openKatDenialMessage(String? code) {
   switch (code) {
     case 'desktop_only':
-      return 'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.';
+      return const OpenKatUserMessage(
+        'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.',
+      );
     case 'not_configured':
-      return 'Vul een weergavenaam en een adres in.';
+      return const OpenKatUserMessage('Vul een weergavenaam en een adres in.');
     case 'token_missing':
-      return 'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.';
+      return const OpenKatUserMessage(
+        'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.',
+      );
     case 'https_required':
-      return 'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.';
+      return const OpenKatUserMessage(
+        'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.',
+      );
     default:
-      return 'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.';
+      return const OpenKatUserMessage(
+        'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.',
+      );
   }
 }
 
-String _fromException(OpenKatRequestException e) {
+OpenKatUserMessage _fromException(OpenKatRequestException e) {
   final status = e.statusCode;
   if (status == 401 || status == 403) {
-    return 'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.';
+    return const OpenKatUserMessage(
+      'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.',
+    );
   }
   if (status != null) {
-    return 'OpenKAT gaf een onverwacht antwoord ($status). Probeer later opnieuw of vraag uw beheerder om hulp.';
+    return OpenKatUserMessage(
+      'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.',
+      {'code': '$status'},
+    );
   }
   switch (e.message) {
     case 'desktop_only':
@@ -48,28 +82,43 @@ String _fromException(OpenKatRequestException e) {
     case 'https_required':
       return openKatDenialMessage(e.message);
     case 'timeout':
-      return 'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.';
+      return const OpenKatUserMessage(
+        'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.',
+      );
     case 'host refused or unreachable':
-      return 'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.';
+      return const OpenKatUserMessage(
+        'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.',
+      );
     case 'response too large':
-      return 'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.';
+      return const OpenKatUserMessage(
+        'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.',
+      );
     case 'network':
-      return 'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.';
+      return const OpenKatUserMessage(
+        'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.',
+      );
     default:
       if (e.message.startsWith('HTTP ')) {
         final code = int.tryParse(e.message.substring(5));
         if (code == 401 || code == 403) {
-          return 'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.';
+          return const OpenKatUserMessage(
+            'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.',
+          );
         }
         if (code != null) {
-          return 'OpenKAT gaf een onverwacht antwoord ($code). Probeer later opnieuw of vraag uw beheerder om hulp.';
+          return OpenKatUserMessage(
+            'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.',
+            {'code': '$code'},
+          );
         }
       }
-      return 'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.';
+      return const OpenKatUserMessage(
+        'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.',
+      );
   }
 }
 
-/// Statuslabel voor een installatiekaart.
+/// Statuslabel voor een installatiekaart (bronzin voor `l10n.d`).
 String openKatStatusLabel(OpenKatInstallationStatus status) {
   switch (status) {
     case OpenKatInstallationStatus.connected:
