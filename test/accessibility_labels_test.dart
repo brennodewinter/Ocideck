@@ -277,6 +277,53 @@ void main() {
           'naam; zet de tekst in IconButton(tooltip: …) — dat doet allebei',
     );
   });
+
+  // ── De symmetrische bronscan (#1248) ──────────────────────────────────────
+  //
+  // De Tooltip-scan hierboven vangt één manier waarop een knop naamloos is:
+  // een `Tooltip` die eromheen lijkt te benoemen maar het niet doet. De
+  // symmetrische fout is de kale `IconButton` die nóch een eigen `tooltip:`
+  // nóch een `Icon(semanticsLabel:)` meekrijgt — geen wrapper die misleidt,
+  // gewoon geen naam. Dat patroon herkende de Tooltip-scan niet, en de
+  // widgettests pompen slechts een fractie van het oppervlak, dus dit sloot
+  // de klasse universeel — zie #1247 voor twee knoppen die erdoorheen glipten.
+  test('geen enkele IconButton is naamloos', () {
+    final offenders = <String>[];
+    for (final file in Directory('lib').listSync(recursive: true)) {
+      if (file is! File || !file.path.endsWith('.dart')) continue;
+      final source = file.readAsStringSync();
+      for (final line in _iconButtonsWithoutName(source)) {
+        offenders.add('${file.path}:$line');
+      }
+    }
+    expect(
+      offenders,
+      isEmpty,
+      reason:
+          'een IconButton zonder tooltip of Icon(semanticsLabel:) is voor een '
+          'schermlezer een naamloze knop (WCAG 4.1.2); geef hem een tooltip',
+    );
+  });
+
+  test('de bronscan merkt een kale IconButton daadwerkelijk op', () {
+    // Zonder deze zelftest zou een fout in _iconButtonsWithoutName() de hele
+    // suite stilletjes groen houden.
+    const kale = '''
+IconButton(
+  icon: const Icon(Icons.clear),
+  onPressed: () {},
+)
+''';
+    const metTooltip = '''
+IconButton(
+  icon: const Icon(Icons.clear),
+  tooltip: 'Wissen',
+  onPressed: () {},
+)
+''';
+    expect(_iconButtonsWithoutName(kale), isNotEmpty);
+    expect(_iconButtonsWithoutName(metTooltip), isEmpty);
+  });
 }
 
 /// De index van de `)` die hoort bij de `(` op [open], met aanhalingstekens
@@ -302,4 +349,27 @@ int _matchingParen(String source, int open) {
     i++;
   }
   return -1;
+}
+
+/// Zoekt `IconButton(…)` in [source] en geeft de 1-gebaseerde regelnummers
+/// terug van de knoppen die zelf geen `tooltip:` dragen en waarvan het icoon
+/// geen `semanticsLabel:` heeft. Dat zijn precies de naamloze knoppen die een
+/// schermlezer aankondigt als "knop" (WCAG 2.2 SC 4.1.2).
+///
+/// Het symmetrische patroon bij de Tooltip-scan: daar ging het om een
+/// `Tooltip` die een naam líjkt te geven maar het niet doet; hier gaat het
+/// om een `IconButton` die nóch een eigen `tooltip:` nóch een `Icon` met
+/// `semanticsLabel:` meekrijgt — de kale knop die niemand opmerkt.
+List<int> _iconButtonsWithoutName(String source) {
+  final offenders = <int>[];
+  for (final match in RegExp(r'\bIconButton\(').allMatches(source)) {
+    final close = _matchingParen(source, match.end - 1);
+    if (close < 0) continue;
+    final body = source.substring(match.end, close);
+    if (RegExp(r'tooltip:').hasMatch(body)) continue;
+    if (RegExp(r'semanticsLabel:').hasMatch(body)) continue;
+    final line = '\n'.allMatches(source.substring(0, match.start)).length + 1;
+    offenders.add(line);
+  }
+  return offenders;
 }
