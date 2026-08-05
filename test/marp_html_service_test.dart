@@ -1241,4 +1241,61 @@ void _videoTests() {
       expect(html, isNot(contains('Licenties van derden')));
     });
   });
+
+  // WCAG 2.1 SC 1.3.1 (Info en relaties) en 2.4.1 (Blokken omzeilen): de
+  // HTML-export is de aanbevolen route voor wie leest in plaats van kijkt, dus
+  // het document heeft landmarks en een titel nodig — anders is het voor een
+  // schermlezer één platte rij dia's zonder ingang. #1250
+  group('HTML-export documentstructuur (WCAG 1.3.1/2.4.1, #1250)', () {
+    test(
+      'wikkel de dia\'s in <main> met een visueel-verborgen <h1>-titel',
+      () async {
+        final service = MarpHtmlService(loadAsset: _diskLoader);
+        final html = await service.build(
+          '# Mijn deck\n',
+          metadata: const ExportDocumentMetadata(title: 'Mijn deck'),
+          fallbackTitle: 'Voorraad',
+        );
+
+        // <main> als landmark rond de secties.
+        expect(html, contains('<main>'));
+        expect(html, contains('</main>'));
+        // De secties staan binnen <main>, ná de h1.
+        final mainStart = html.indexOf('<main>');
+        final firstSection = html.indexOf('<section class="slide');
+        final mainEnd = html.indexOf('</main>');
+        expect(mainStart, lessThan(firstSection));
+        expect(firstSection, lessThan(mainEnd));
+
+        // Een document-h1 met de decktitel, visueel verborgen.
+        expect(html, contains('<h1 class="ocideck-sr-only">Mijn deck</h1>'));
+        // De sr-only-regel staat in de structural CSS.
+        expect(html, contains('.ocideck-sr-only{'));
+      },
+    );
+
+    test('valt terug op fallbackTitle wanneer de decktitel leeg is', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(
+        '\n\nEerste dia zonder kop\n',
+        fallbackTitle: 'Presentatie',
+      );
+
+      expect(html, contains('<h1 class="ocideck-sr-only">Presentatie</h1>'));
+    });
+
+    test('ontsnapt de titel als tekstinhoud, niet als attribuut', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(
+        '# A & B <script>\n',
+        fallbackTitle: 'A & B <script>',
+      );
+
+      // _htmlText ontsnapt & en <, dus geen ruwe <script> in de h1-inhoud.
+      expect(
+        html,
+        contains('<h1 class="ocideck-sr-only">A &amp; B &lt;script&gt;</h1>'),
+      );
+    });
+  });
 }
