@@ -12,6 +12,12 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.3.4] — 2026-08-05
+
+### Fixed
+
+- fix(packaging): install `file` for appimagetool in the Linux release job (#1227)
+
 ## [0.3.3] — 2026-08-05
 
 ### Added
