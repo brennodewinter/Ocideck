@@ -11,10 +11,10 @@ void main() {
     });
 
     test('vervangt meerdere placeholders', () {
-      const msg = OpenKatUserMessage(
-        '{host}: {n} items',
-        {'host': 'ok.example', 'n': '3'},
-      );
+      const msg = OpenKatUserMessage('{host}: {n} items', {
+        'host': 'ok.example',
+        'n': '3',
+      });
       expect(msg.apply('{host}: {n} items'), 'ok.example: 3 items');
     });
 
@@ -78,9 +78,7 @@ void main() {
 
     test('timeout', () {
       expect(
-        openKatErrorMessage(
-          const OpenKatRequestException('timeout'),
-        ).source,
+        openKatErrorMessage(const OpenKatRequestException('timeout')).source,
         contains('niet op tijd'),
       );
     });
@@ -105,9 +103,7 @@ void main() {
 
     test('network', () {
       expect(
-        openKatErrorMessage(
-          const OpenKatRequestException('network'),
-        ).source,
+        openKatErrorMessage(const OpenKatRequestException('network')).source,
         contains('mislukt'),
       );
     });
@@ -149,24 +145,18 @@ void main() {
 
     test('HTTP-prefix 401/403 in message', () {
       expect(
-        openKatErrorMessage(
-          const OpenKatRequestException('HTTP 401'),
-        ).source,
+        openKatErrorMessage(const OpenKatRequestException('HTTP 401')).source,
         contains('weigerde het token'),
       );
       expect(
-        openKatErrorMessage(
-          const OpenKatRequestException('HTTP 403'),
-        ).source,
+        openKatErrorMessage(const OpenKatRequestException('HTTP 403')).source,
         contains('weigerde het token'),
       );
     });
 
     test('HTTP-prefix zonder parsebare code', () {
       expect(
-        openKatErrorMessage(
-          const OpenKatRequestException('HTTP oeps'),
-        ).source,
+        openKatErrorMessage(const OpenKatRequestException('HTTP oeps')).source,
         contains('mislukt'),
       );
     });

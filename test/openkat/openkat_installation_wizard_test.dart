@@ -123,7 +123,9 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(
-        find.text('Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl'),
+        find.text(
+          'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl',
+        ),
         findsOneWidget,
       );
     });
@@ -230,7 +232,9 @@ void main() {
   });
 
   group('stap 2 — test', () {
-    testWidgets('bewerken met opgeslagen token bereikt teststap', (tester) async {
+    testWidgets('bewerken met opgeslagen token bereikt teststap', (
+      tester,
+    ) async {
       final existing = OpenKatInstallation.create(
         name: 'Acceptatie',
         baseUrl: 'https://ok.example',
@@ -239,10 +243,7 @@ void main() {
       await secrets.writeOpenKatToken(existing.id, 'tok');
 
       await tester.pumpWidget(
-        _appWithSecrets(
-          secrets,
-          OpenKatInstallationWizard(existing: existing),
-        ),
+        _appWithSecrets(secrets, OpenKatInstallationWizard(existing: existing)),
       );
       await _settleOpenKat(tester);
       await tester.pumpAndSettle();
@@ -264,17 +265,16 @@ void main() {
       );
     });
 
-    testWidgets('bewerken zonder opgeslagen token vereist invoer', (tester) async {
+    testWidgets('bewerken zonder opgeslagen token vereist invoer', (
+      tester,
+    ) async {
       final existing = OpenKatInstallation.create(
         name: 'Acceptatie',
         baseUrl: 'https://ok.example',
       );
 
       await tester.pumpWidget(
-        _appWithSecrets(
-          secrets,
-          OpenKatInstallationWizard(existing: existing),
-        ),
+        _appWithSecrets(secrets, OpenKatInstallationWizard(existing: existing)),
       );
       await _settleOpenKat(tester);
       await tester.pumpAndSettle();
@@ -298,10 +298,7 @@ void main() {
       await secrets.writeOpenKatToken(existing.id, 'tok');
 
       await tester.pumpWidget(
-        _appWithSecrets(
-          secrets,
-          OpenKatInstallationWizard(existing: existing),
-        ),
+        _appWithSecrets(secrets, OpenKatInstallationWizard(existing: existing)),
       );
       await _settleOpenKat(tester);
       await tester.pumpAndSettle();
@@ -343,10 +340,7 @@ void main() {
       await secrets.writeOpenKatToken(existing.id, 'tok');
 
       await tester.pumpWidget(
-        _appWithSecrets(
-          secrets,
-          OpenKatInstallationWizard(existing: existing),
-        ),
+        _appWithSecrets(secrets, OpenKatInstallationWizard(existing: existing)),
       );
       await _settleOpenKat(tester);
       await tester.pumpAndSettle();
@@ -372,10 +366,7 @@ void main() {
       await secrets.writeOpenKatToken(existing.id, 'tok');
 
       await tester.pumpWidget(
-        _appWithSecrets(
-          secrets,
-          OpenKatInstallationWizard(existing: existing),
-        ),
+        _appWithSecrets(secrets, OpenKatInstallationWizard(existing: existing)),
       );
       await _settleOpenKat(tester);
       await tester.pumpAndSettle();
