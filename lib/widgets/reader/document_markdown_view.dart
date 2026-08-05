@@ -46,6 +46,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.mermaidRenderer,
     this.chartTheme,
     this.onEditChart,
+    this.onEditTable,
     this.searchTerm,
     this.activeMatchBlockIndex = -1,
     this.activeMatchKey,
@@ -85,6 +86,13 @@ class DocumentMarkdownView extends StatelessWidget {
   /// de editor de juiste fence in de bron kan vervangen. `null` → geen bewerking.
   final void Function(int chartOrdinal, String chartBlock)? onEditChart;
 
+  /// Aangeroepen bij dubbelklik op een tabel — alleen in de editor gezet. Geeft
+  /// het volgnummer van de tabel (de hoeveelheidste GFM-tabel in het document,
+  /// vanaf 0) en de rauwe regels (koprij + body, zónder scheidingsrij) mee, zodat
+  /// de editor precies dat tabelblok in de bron kan vervangen. `null` → geen
+  /// bewerking.
+  final void Function(int tableOrdinal, List<String> tableRows)? onEditTable;
+
   /// Case-insensitive find-in-page term. When non-empty, every block whose text
   /// contains it is tinted. `null`/empty means no search is active and the tree
   /// is identical to the plain document (no wrappers), so non-search callers are
@@ -120,6 +128,53 @@ class DocumentMarkdownView extends StatelessWidget {
     return -1;
   }
 
+  /// De regel-reikwijdte `[start, eind)` van het `ordinal`-de GFM-tabelblok
+  /// (vanaf 0) in [source] — koprij + scheidingsrij + body — geteld met exact
+  /// dezelfde grammatica als de weergave (fenced blokken worden overgeslagen, en
+  /// een pipe-regel bereikt altijd de tabelherkenning). `null` als er geen
+  /// zoveelste tabel is. De editor gebruikt dit om precies dat blok in de bron te
+  /// vervangen zonder de omringende bytes aan te raken.
+  static List<int>? nthTableBlockRange(String source, int ordinal) {
+    final lines = source.split('\n');
+    var seen = 0;
+    var i = 0;
+    while (i < lines.length) {
+      final marker = _fenceMarker(lines[i].trim());
+      if (marker != null) {
+        var end = i + 1;
+        while (end < lines.length && lines[end].trim() != marker) {
+          end++;
+        }
+        i = end < lines.length ? end + 1 : end;
+        continue;
+      }
+      if (_looksLikeTableRow(lines[i]) &&
+          i + 1 < lines.length &&
+          _isTableDelimiter(lines[i + 1])) {
+        var j = i + 2;
+        while (j < lines.length && _looksLikeTableRow(lines[j])) {
+          j++;
+        }
+        if (seen == ordinal) return [i, j];
+        seen++;
+        i = j;
+        continue;
+      }
+      i++;
+    }
+    return null;
+  }
+
+  /// De cellen van een GFM-tabelblok (koprij + body, zónder scheidingsrij),
+  /// ontdaan van pipe-ontsnapping — de vorm die de tabel-editor verwacht.
+  /// Spiegelt de splitsing die de weergave zelf gebruikt, zodat wat je ziet en
+  /// wat je bewerkt gelijk zijn.
+  static List<List<String>> tableCells(List<String> rawRows) => rawRows
+      .map(
+        (r) => _splitTableRow(r).map((c) => c.replaceAll(r'\|', '|')).toList(),
+      )
+      .toList();
+
   @override
   Widget build(BuildContext context) {
     final t = _Theme(Theme.of(context));
@@ -128,16 +183,14 @@ class DocumentMarkdownView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // `chart` telt alleen de grafiekblokken op, zodat elke grafiek zijn eigen
-        // volgnummer krijgt voor de dubbelklik-bewerking.
-        for (var i = 0, chart = 0; i < blocks.length; i++)
-          _decorated(
-            t,
-            blocks[i],
-            i,
-            term,
-            blocks[i].kind == _Kind.chart ? chart++ : -1,
-          ),
+        // Grafieken en tabellen worden elk apart geteld, zodat een dubbelklik het
+        // juiste blok (de hoeveelheidste van zíjn soort) in de bron kan vervangen.
+        for (var i = 0, chart = 0, table = 0; i < blocks.length; i++)
+          _decorated(t, blocks[i], i, term, switch (blocks[i].kind) {
+            _Kind.chart => chart++,
+            _Kind.table => table++,
+            _ => -1,
+          }),
       ],
     );
   }
@@ -152,9 +205,9 @@ class DocumentMarkdownView extends StatelessWidget {
     _Block b,
     int index,
     String term,
-    int chartOrdinal,
+    int kindOrdinal,
   ) {
-    var widget = _buildWidget(t, b, chartOrdinal);
+    var widget = _buildWidget(t, b, kindOrdinal);
     // The anchor target carries its own key (one moving key, like the search
     // scroll) so `#anchor` links land on the section.
     if (index == anchorBlockIndex && anchorKey != null) {
@@ -174,15 +227,15 @@ class DocumentMarkdownView extends StatelessWidget {
     );
   }
 
-  Widget _buildWidget(_Theme t, _Block b, int chartOrdinal) => switch (b.kind) {
+  Widget _buildWidget(_Theme t, _Block b, int kindOrdinal) => switch (b.kind) {
     _Kind.heading => _bounded(_heading(t, b.level, b.text)),
     _Kind.paragraph => _bounded(_paragraph(t, b.text)),
     _Kind.list => _bounded(_list(t, b.items)),
     _Kind.quote => _bounded(_blockQuote(t, b.text)),
     _Kind.code => _codeBlock(t, b.text),
     _Kind.mermaid => _mermaid(t, b.text),
-    _Kind.chart => _chart(t, b.text, chartOrdinal),
-    _Kind.table => _table(t, b.rows),
+    _Kind.chart => _chart(t, b.text, kindOrdinal),
+    _Kind.table => _table(t, b.rows, kindOrdinal),
     _Kind.rule => _bounded(_rule(t)),
   };
 
@@ -497,14 +550,14 @@ class DocumentMarkdownView extends StatelessWidget {
     child: Divider(height: 1, thickness: 1, color: t.border),
   );
 
-  Widget _table(_Theme t, List<String> rows) {
+  Widget _table(_Theme t, List<String> rows, int tableOrdinal) {
     final cells = rows.map(_splitTableRow).toList();
     final columns = cells.isEmpty
         ? 0
         : cells.map((r) => r.length).reduce((a, b) => a > b ? a : b);
     if (columns == 0) return const SizedBox.shrink();
 
-    return Padding(
+    final table = Padding(
       padding: const EdgeInsets.only(bottom: 14),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -535,6 +588,16 @@ class DocumentMarkdownView extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+    final onEdit = onEditTable;
+    if (onEdit == null) return table;
+    // In de editor: dubbelklik op de tabel opent de tabel-editor.
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onDoubleTap: () => onEdit(tableOrdinal, rows),
+        child: table,
       ),
     );
   }

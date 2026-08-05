@@ -11,6 +11,7 @@ import '../services/file_service.dart';
 import '../state/document_provider.dart';
 import '../utils/doc_link.dart' show headingSlug;
 import 'editors/chart_editor.dart';
+import 'editors/table_editor.dart';
 import 'reader/document_markdown_view.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
@@ -192,33 +193,24 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         anchorBlockIndex: _anchorBlockIndex,
         anchorKey: _anchorKey,
         onEditChart: _editChart,
+        onEditTable: _editTable,
       ),
     ),
   );
 
-  /// Dubbelklik op een gerenderde grafiek → de volwaardige [ChartEditor] in een
-  /// dialoog (dezelfde editor als een dia, met een wegwerp-[Slide] om zijn bron
-  /// vast te houden). 'Toepassen' schrijft het bewerkte ```chart-blok terug op
-  /// zijn plek in de bron; de weergave hertekent mee. DOCUMENT_MODE.md §4.2.
-  Future<void> _editChart(int chartOrdinal, String block) async {
+  /// De gedeelde dialoogschil voor het bewerken van een ingebedde kaart (grafiek
+  /// of tabel): de volwaardige editor in een vast venster met Annuleren/Toepassen
+  /// (bestaande l10n). Geeft `true` terug bij Toepassen.
+  Future<bool?> _embedEditorDialog(Widget editor) {
     final l10n = context.l10n;
-    var edited = block;
-    final slide = Slide.create(SlideType.chart).copyWith(customMarkdown: block);
-    final apply = await showDialog<bool>(
+    return showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
         content: SizedBox(
           width: 760,
           height: 560,
-          child: SingleChildScrollView(
-            child: ChartEditor(
-              slide: slide,
-              themeAnimationDurationMs: 0,
-              nestedInScrollView: true,
-              onUpdate: (s) => edited = s.customMarkdown,
-            ),
-          ),
+          child: SingleChildScrollView(child: editor),
         ),
         actions: [
           TextButton(
@@ -232,9 +224,54 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         ],
       ),
     );
+  }
+
+  /// Dubbelklik op een gerenderde grafiek → de volwaardige [ChartEditor] in een
+  /// dialoog (dezelfde editor als een dia, met een wegwerp-[Slide] om zijn bron
+  /// vast te houden). 'Toepassen' schrijft het bewerkte ```chart-blok terug op
+  /// zijn plek in de bron; de weergave hertekent mee. DOCUMENT_MODE.md §4.2.
+  Future<void> _editChart(int chartOrdinal, String block) async {
+    var edited = block;
+    final slide = Slide.create(SlideType.chart).copyWith(customMarkdown: block);
+    final apply = await _embedEditorDialog(
+      ChartEditor(
+        slide: slide,
+        themeAnimationDurationMs: 0,
+        nestedInScrollView: true,
+        onUpdate: (s) => edited = s.customMarkdown,
+      ),
+    );
     if (apply != true || !mounted) return;
     final source = ref.read(documentProvider).document?.source ?? '';
     final next = replaceNthChartBlock(source, chartOrdinal, edited);
+    if (next != source) {
+      ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
+    }
+  }
+
+  /// Dubbelklik op een gerenderde tabel → de volwaardige [TableEditor] in een
+  /// dialoog. De rauwe GFM-regels worden naar een celraster ontleed (via
+  /// [DocumentMarkdownView.tableCells]) en in een wegwerp-[Slide] gezet;
+  /// 'Toepassen' serialiseert het raster terug naar een GFM-tabel en vervangt
+  /// precies dat tabelblok in de bron. DOCUMENT_MODE.md §4.2.
+  Future<void> _editTable(int tableOrdinal, List<String> rawRows) async {
+    final cells = DocumentMarkdownView.tableCells(rawRows);
+    var edited = cells;
+    final slide = Slide.create(SlideType.table).copyWith(tableRows: cells);
+    final apply = await _embedEditorDialog(
+      TableEditor(
+        slide: slide,
+        nestedInScrollView: true,
+        onUpdate: (s) => edited = s.tableRows,
+      ),
+    );
+    if (apply != true || !mounted) return;
+    final source = ref.read(documentProvider).document?.source ?? '';
+    final next = replaceNthTableBlock(
+      source,
+      tableOrdinal,
+      rowsToGfmTable(edited),
+    );
     if (next != source) {
       ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
     }
@@ -324,4 +361,36 @@ String replaceNthChartBlock(
     if (seen++ != chartOrdinal) return m.group(0)!;
     return '```chart\n$newContent\n```';
   });
+}
+
+/// Serialiseer een celraster (eerste rij = koppen) naar een GFM-pijptabel: een
+/// koprij, een scheidingsrij en de body. Cellen met een `|` worden ontsnapt naar
+/// `\|` zodat ze de kolomgrens niet breken. Ragged rijen worden met lege cellen
+/// aangevuld tot de breedste. Uitlijning wordt niet bewaard (de editor kent geen
+/// uitlijning); een bewuste vereenvoudiging bij het bewerken van een tabel.
+String rowsToGfmTable(List<List<String>> rows) {
+  if (rows.isEmpty) return '';
+  final cols = rows.fold<int>(1, (m, r) => r.length > m ? r.length : m);
+  String cell(List<String> r, int c) =>
+      (c < r.length ? r[c] : '').replaceAll('|', r'\|');
+  String line(List<String> r) =>
+      '| ${List.generate(cols, (c) => cell(r, c)).join(' | ')} |';
+  return [
+    line(rows.first),
+    '| ${List.filled(cols, '---').join(' | ')} |',
+    for (final r in rows.skip(1)) line(r),
+  ].join('\n');
+}
+
+/// Vervang het `tableOrdinal`-de GFM-tabelblok (vanaf 0) in [source] door
+/// [newGfm], en laat elke andere byte staan. De regel-reikwijdte komt van
+/// [DocumentMarkdownView.nthTableBlockRange], zodat de telling exact die van de
+/// weergave volgt; een ordinaal buiten bereik laat de bron ongemoeid. Top-level
+/// en puur, zodat de terugschrijf-logica los toetsbaar is.
+String replaceNthTableBlock(String source, int tableOrdinal, String newGfm) {
+  final range = DocumentMarkdownView.nthTableBlockRange(source, tableOrdinal);
+  if (range == null) return source;
+  final lines = source.split('\n');
+  lines.replaceRange(range[0], range[1], newGfm.split('\n'));
+  return lines.join('\n');
 }
