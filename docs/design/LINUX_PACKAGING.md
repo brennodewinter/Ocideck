@@ -1,10 +1,15 @@
 # Linux-packaging — plan en afweging
 
-> **Status:** plan · opgesteld 2026-08-04 · onderdeel van #1227
+> **Status:** fase 1 gebouwd · opgesteld 2026-08-04 · onderdeel van #1227
 >
-> Dit is een ontwerp met een aanbeveling, geen belofte. Het legt de opties naast
-> elkaar, weegt ze tegen de kernwaarden, en stelt een fasering voor. De
-> waardenlijn volgt [`../../assurance/app-store-distributie-positie.md`](../../assurance/app-store-distributie-positie.md):
+> Dit was een ontwerp met een aanbeveling; **fase 1 (AppImage + `.deb` + `.rpm` +
+> AUR) is inmiddels geïmplementeerd** — zie `scripts/package_linux.sh`,
+> `packaging/`, de `linux`-job in `.forgejo/workflows/release.yml` en
+> `docs/BUILD.md` § "Linux packaging". Fase 2 (eigen apt/rpm-repo) en fase 3
+> (Flatpak/Snap achter de capaciteits-feature-flag) staan nog open. Het stuk
+> hieronder legt de opties naast elkaar, weegt ze tegen de kernwaarden, en stelt
+> de fasering voor. De waardenlijn volgt
+> [`../../assurance/app-store-distributie-positie.md`](../../assurance/app-store-distributie-positie.md):
 > **de directe download uit de eigen forge blijft canoniek; elk pakketformaat is
 > een extra kanaal, nooit het enige.**
 
@@ -124,10 +129,14 @@ bijzaak. De redenering staat in
 
 ## Aanbevolen fasering
 
-1. **Nu, waardenzuiver en goedkoop:** AppImage + `.deb` (+ `.rpm` gratis ernaast)
-   als losse assets aan elke release, naast de bestaande tarball. Eén
-   `fastforge`-config, gedraaid in de bestaande Linux-release-job op het
-   voorgebakken CI-image. Plus een AUR-`ocideck-bin`.
+1. **Nu, waardenzuiver en goedkoop — GEBOUWD.** AppImage + `.deb` (+ `.rpm`
+   ernaast) als losse assets aan elke release, naast de bestaande tarball,
+   gedraaid in de bestaande Linux-release-job op het voorgebakken CI-image. Plus
+   een AUR-`ocideck-bin`. Uitgevoerd met een eigen, transparant pakketscript
+   (`scripts/package_linux.sh`: `dpkg-deb`/`rpmbuild` + een sha256-gepinde
+   `appimagetool`) in plaats van `fastforge` — dat past bij de pin- en
+   herkomstlijn van deze repo (alles gepind en controleerbaar) en voegt geen
+   Dart-toolketen toe.
 2. **Daarna, gebruiksgemak zonder de forge te verlaten:** een eigen,
    ondertekende apt-repo (en desgewenst een dnf/rpm-repo) op de forge/website,
    zodat updates meelopen.

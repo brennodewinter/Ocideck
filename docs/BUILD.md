@@ -314,9 +314,14 @@ make build-release  # verified web bundle + macOS .app
 make build-macos     # flutter build macos --release    → build/macos/Build/Products/Release/*.app
 make build-windows   # flutter build windows --release  → build/windows/x64/runner/Release
 make build-linux     # flutter build linux --release    → build/linux/x64/release/bundle
+make package-linux VERSION=<v>   # AppImage + .deb + .rpm from that bundle → dist/
 make build-web       # hardened web bundle              → build/web
 make build-all       # web + this machine's native desktop target
 ```
+
+`make package-linux` needs a bundle from `make build-linux` first (it is not a
+prerequisite, so the release job does not build twice) and the packaging tools
+on the machine — see [Linux packaging](#linux-packaging).
 
 Use `make build-release` for the normal manual release path on macOS. It runs
 `make check-web` first, so the browser bundle is built with
@@ -434,8 +439,10 @@ in `build/` without rebuilding.
   standaard over te nemen. De app opent het meegegeven pad bij het starten.
   macOS regelt hetzelfde via `CFBundleDocumentTypes` in `Info.plist`
   (`.ocideck` = Owner, `.md` = Alternate) — dat zit al in de app-bundel.
-- Linux: distribute `build/linux/x64/release/bundle/` (or package as a
-  Flatpak/AppImage/Snap as you prefer).
+- Linux: distribute `build/linux/x64/release/bundle/` (shipped as a tarball), or
+  build an AppImage, a `.deb` and an `.rpm` from it with `make package-linux` —
+  see [Linux packaging](#linux-packaging). Flatpak/Snap are a separate, later
+  track (#1227).
 
 ### App icons
 
@@ -602,16 +609,16 @@ One tag produces everything. `git push origin v0.1.0` starts
 `.forgejo/workflows/release.yml`, and about half an hour later there is a
 release at
 <https://pawprint.vigilis.online/LibreKAT/Ocideck/releases> carrying the web
-bundle, the macOS app, the Linux bundle, the Windows app, both SBOM formats and
-a `SHA256SUMS` over all of them — and <https://ocideck.librekat.nl/> is serving
-that same web bundle.
+bundle, the macOS app, the Linux packages (tarball plus AppImage, `.deb` and
+`.rpm`), the Windows app, both SBOM formats and a `SHA256SUMS` over all of them —
+and <https://ocideck.librekat.nl/> is serving that same web bundle.
 
 ### What runs where, and why
 
 | Artifact | Built on | Why there |
 | --- | --- | --- |
 | Web bundle | forge `docker` runner, prebaked `ocideck-ci` image | `make check-web`: hardened build **and** its verification |
-| Linux x64 | forge `docker` runner, prebaked `ocideck-ci` image | native desktop build on the baked toolchain |
+| Linux x64 — tarball, AppImage, `.deb`, `.rpm` | forge `docker` runner, prebaked `ocideck-ci` image | native desktop build on the baked toolchain, then `make package-linux` |
 | macOS | forge, `macos` runner | Apple licenses macOS for Apple hardware only |
 | Windows x64 | GitHub mirror | no Windows machine on the forge |
 | SBOM | forge, from the repo | committed and kept current by `make sbom-verify` |
@@ -628,7 +635,8 @@ the same image the gates use (see the `ci-image.yml` section of
 [CHECKS.md](CHECKS.md)) — so the build-toolchain and the pinned, sha256-verified
 Flutter are baked in rather than installed on every tag. The Linux job additionally `apt-get install`s
 `liblzma-dev` and `libsecret-1-dev`, which only the desktop build links (via
-`flutter_secure_storage` and lzma) and the test-oriented image does not carry.
+`flutter_secure_storage` and lzma) and the test-oriented image does not carry,
+plus `rpm` for the packaging step's `rpmbuild`.
 Both jobs share the gates' `pub`/`dartcv` `actions/cache` keys: `linux-gate`
 populates them on every push to `main` — a scope a tag build can read — so the
 expensive dartcv OpenCV compile is restored *warm* at tag time instead of rebuilt
@@ -672,6 +680,49 @@ tracked separately (#1227).
   notarised. An unsigned release (see the signing section above) installs fine
   via `brew` but Gatekeeper still blocks it on first launch — the cask eases
   distribution, not signing.
+
+### Linux packaging
+
+Homebrew Cask is macOS-only, so Linux has its own route (#1227). Phase 1 hangs
+three portable formats — AppImage, `.deb` and `.rpm` — off every release, next
+to the tarball — all wrapping the
+same bundle, none a store or a sandbox. The design and the later phases (own
+apt/rpm repo; Flatpak/Snap behind the capability feature-flag) are in
+[`design/LINUX_PACKAGING.md`](design/LINUX_PACKAGING.md); the layout is in
+[`../packaging/README.md`](../packaging/README.md).
+
+- **Where it runs.** The `linux` job in `.forgejo/workflows/release.yml`, after
+  `make build-linux`, runs `make package-linux` (→ `scripts/package_linux.sh`)
+  and uploads all four assets in one artifact. `publiceren` then folds them into
+  `SHA256SUMS` like every other file.
+- **What it produces**, into `dist/`:
+  `ocideck-linux-x86_64-<v>.AppImage`, `ocideck-linux-amd64-<v>.deb`,
+  `ocideck-linux-x86_64-<v>.rpm` (each format's own arch label).
+- **Tools.** `dpkg-deb` (base system), `rpmbuild` (the `rpm` package, added by
+  the job) and `appimagetool`. The `.rpm` lets rpmbuild derive soname `Requires`
+  so it resolves on Fedora and openSUSE alike; the `.deb` declares
+  `libgtk-3-0t64 | libgtk-3-0, libsecret-1-0, liblzma5`.
+- **appimagetool is sha256-pinned** (`APPIMAGETOOL_SHA256` in the job), because it
+  only ships a rolling `continuous` tag — there is no version to monitor, so the
+  hash is the pin. A drift fails the build loudly; to re-pin, fetch the new digest
+  (see [`../packaging/README.md`](../packaging/README.md)) and update the job.
+- **Not offline-testable.** The packages only build on a Linux tag;
+  `test/linux_packaging_test.dart` pins the wiring, but validate the real packages
+  with a `-rc1` tag (below) before a real release.
+
+### AUR package
+
+`packaging/aur/PKGBUILD` is `ocideck-bin`: it installs the release tarball on
+Arch/Manjaro, verified against the published `SHA256SUMS`. Publishing is a
+maintainer step — it needs an AUR account and a registered SSH key, like the
+Homebrew tap, so it is **not** wired into the release chain. Per release:
+
+```bash
+scripts/update_aur_pkgbuild.sh v<version>   # fills pkgver + sha256 from SHA256SUMS
+# then on an Arch machine:
+makepkg --printsrcinfo > .SRCINFO
+git commit -am "ocideck-bin <version>" && git push aur master
+```
 
 ### Before you tag
 

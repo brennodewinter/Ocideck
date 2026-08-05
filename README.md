@@ -122,10 +122,11 @@ so they cost the ordinary user nothing.
 **Download OciDeck** for macOS, Windows, Linux or the web from the
 [releases page](https://pawprint.vigilis.online/LibreKAT/Ocideck/releases). Every
 release carries the app for all four platforms, both SBOM formats and a
-`SHA256SUMS` to verify what you downloaded. The macOS build is signed and
-notarised and opens normally; the Windows and Linux binaries are unsigned, so
-they warn on first launch — the release notes explain how to open them on each
-platform.
+`SHA256SUMS` to verify what you downloaded. On **Linux** take your pick of an
+AppImage, a `.deb` (Debian/Ubuntu/Mint), an `.rpm` (Fedora/openSUSE) or the
+portable tarball — all the same build. The macOS build is signed and notarised
+and opens normally; the Windows and Linux binaries are unsigned, so they warn on
+first launch — the release notes explain how to open them on each platform.
 
 On macOS you can also install with [Homebrew](https://brew.sh/):
 
