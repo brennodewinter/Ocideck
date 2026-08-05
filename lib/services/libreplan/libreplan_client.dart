@@ -1,18 +1,18 @@
-/// LibrePlan REST-client: GET-only, Basic Auth, XML, via NetGuard + pinning.
-///
-/// Spiegelt `ai_client_service.dart`: een injecteerbare transport-seam zodat
-/// tests geen netwerk raken, en een default transport die de host via NetGuard
-/// resolveert, de socket pinnet, redirects weigert en de response cappeert.
-///
-/// Beveiligingscontract (design-doc §5):
-/// - **GET-only**: geen POST/DELETE — read-only consumer.
-/// - **Basic Auth**: username:password → base64, wachtwoord uit de keychain.
-/// - **NetGuard**: SSRF-guard, interne adressen dicht tenzij `trustedInternal`.
-/// - **HTTPS verplicht**: plain HTTP alleen voor vertrouwde interne servers.
-/// - **followRedirects = false**: een 3xx mag niet om de hostcontrole heen.
-/// - **Desktop-only**: op web is de keychain niet veilig (fail-closed).
-/// - **Logs**: base URL + username bij fout, nooit de response body (bevat
-///   projectdata).
+// LibrePlan REST-client: GET-only, Basic Auth, XML, via NetGuard + pinning.
+//
+// Spiegelt `ai_client_service.dart`: een injecteerbare transport-seam zodat
+// tests geen netwerk raken, en een default transport die de host via NetGuard
+// resolveert, de socket pinnet, redirects weigert en de response cappeert.
+//
+// Beveiligingscontract (design-doc §5):
+// - **GET-only**: geen POST/DELETE — read-only consumer.
+// - **Basic Auth**: username:password → base64, wachtwoord uit de keychain.
+// - **NetGuard**: SSRF-guard, interne adressen dicht tenzij `trustedInternal`.
+// - **HTTPS verplicht**: plain HTTP alleen voor vertrouwde interne servers.
+// - **followRedirects = false**: een 3xx mag niet om de hostcontrole heen.
+// - **Desktop-only**: op web is de keychain niet veilig (fail-closed).
+// - **Logs**: base URL + username bij fout, nooit de response body (bevat
+//   projectdata).
 
 import 'dart:async';
 import 'dart:convert';
@@ -128,8 +128,8 @@ class LibreplanClient {
     this.password,
     LibreplanHttpTransport? transport,
     bool? isWeb,
-  })  : _transport = transport ?? const PinnedLibreplanTransport(),
-        _isWeb = isWeb ?? isWebPlatform;
+  }) : _transport = transport ?? const PinnedLibreplanTransport(),
+       _isWeb = isWeb ?? isWebPlatform;
 
   final LibreplanSettings settings;
   final String? password;
@@ -170,10 +170,7 @@ class LibreplanClient {
     final user = settings.username.trim();
     final pass = (password ?? '').trim();
     final credentials = base64Encode(utf8.encode('$user:$pass'));
-    return {
-      'authorization': 'Basic $credentials',
-      'accept': 'application/xml',
-    };
+    return {'authorization': 'Basic $credentials', 'accept': 'application/xml'};
   }
 
   /// Voer een GET-request uit naar een service-path. Retourneert de XML-body.

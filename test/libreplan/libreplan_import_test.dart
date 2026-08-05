@@ -6,15 +6,15 @@ import 'package:ocideck/services/libreplan/libreplan_import.dart';
 
 class _FakeClient extends LibreplanClient {
   _FakeClient(this._responses)
-      : super(
-          settings: const LibreplanSettings(
-            enabled: true,
-            baseUrl: 'https://libreplan.example.org/libreplan/',
-            username: 'wsreader',
-          ),
-          password: 'secret',
-          isWeb: false,
-        );
+    : super(
+        settings: const LibreplanSettings(
+          enabled: true,
+          baseUrl: 'https://libreplan.example.org/libreplan/',
+          username: 'wsreader',
+        ),
+        password: 'secret',
+        isWeb: false,
+      );
 
   final Map<String, String> _responses;
 
@@ -124,9 +124,7 @@ void main() {
     });
 
     test('faalt niet bij één falende endpoint', () async {
-      final client = _FakeClient({
-        'orderelements/': _orderXml,
-      });
+      final client = _FakeClient({'orderelements/': _orderXml});
       final importer = LibreplanImporter(client);
 
       final result = await importer.import(
@@ -137,7 +135,10 @@ void main() {
       );
 
       expect(result.slides, hasLength(5));
-      expect(result.warnings, anyElement(contains('Resources ophalen mislukt')));
+      expect(
+        result.warnings,
+        anyElement(contains('Resources ophalen mislukt')),
+      );
     });
 
     test('lege opties geven een warning', () async {

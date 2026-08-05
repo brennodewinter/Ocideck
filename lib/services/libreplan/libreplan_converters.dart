@@ -1,22 +1,22 @@
-/// LibrePlan models → OciDeck slides. Pure Dart, testbaar.
-///
-/// Elke converter neemt LibrePlan-Dart-models (uit `libreplan_xml.dart`) en
-/// produceert een `Slide` van het juiste type. De slides worden door
-/// `libreplan_import.dart` in een deck verzameld.
-///
-/// Mapping (design-doc §4):
-/// - Order → gantt (projectplanning met datums + afhankelijkheden)
-/// - Order-hiërarchie → tree (WBS)
-/// - Resources → table (resourcelijst)
-/// - Work reports → table (timesheet)
-/// - Resource hours → chart (belasting over tijd)
-/// - Order + progress → cockpit (projectstatus)
-/// - Milestones → timeline
-/// - Critical path → flow
-///
-/// `ponytail:` plafonds: gantt kapt af op `ganttMaxTasks` (30), tree op 50
-/// knopen, tables op 100 rijen. Een LibrePlan-project met meer data wordt
-/// afgekapt — een dia is een samenvatting, geen planbestand.
+// LibrePlan models → OciDeck slides. Pure Dart, testbaar.
+//
+// Elke converter neemt LibrePlan-Dart-models (uit `libreplan_xml.dart`) en
+// produceert een `Slide` van het juiste type. De slides worden door
+// `libreplan_import.dart` in een deck verzameld.
+//
+// Mapping (design-doc §4):
+// - Order → gantt (projectplanning met datums + afhankelijkheden)
+// - Order-hiërarchie → tree (WBS)
+// - Resources → table (resourcelijst)
+// - Work reports → table (timesheet)
+// - Resource hours → chart (belasting over tijd)
+// - Order + progress → cockpit (projectstatus)
+// - Milestones → timeline
+// - Critical path → flow
+//
+// `ponytail:` plafonds: gantt kapt af op `ganttMaxTasks` (30), tree op 50
+// knopen, tables op 100 rijen. Een LibrePlan-project met meer data wordt
+// afgekapt — een dia is een samenvatting, geen planbestand.
 
 import '../../models/slide.dart';
 import '../improvement/gantt_dsl.dart';
@@ -111,10 +111,9 @@ Slide libreplanOrderToWbs(LibreplanOrder order) {
 
   walk(order.children, 0);
 
-  return Slide.create(SlideType.tree).copyWith(
-    title: 'WBS: ${order.name}',
-    bullets: lines,
-  );
+  return Slide.create(
+    SlideType.tree,
+  ).copyWith(title: 'WBS: ${order.name}', bullets: lines);
 }
 
 // ── Resources (table) ──────────────────────────────────────────────────────
@@ -126,10 +125,9 @@ Slide libreplanResourcesToTable(List<LibreplanResource> resources) {
     for (final r in resources.take(libreplanMaxTableRows))
       [r.code, r.displayName, r.isMachine ? 'Machine' : 'Medewerker'],
   ];
-  return Slide.create(SlideType.table).copyWith(
-    title: 'Resources',
-    tableRows: rows,
-  );
+  return Slide.create(
+    SlideType.table,
+  ).copyWith(title: 'Resources', tableRows: rows);
 }
 
 // ── Timesheet (table) ──────────────────────────────────────────────────────
@@ -153,10 +151,9 @@ Slide libreplanWorkReportsToTable(List<LibreplanWorkReport> reports) {
       ]);
     }
   }
-  return Slide.create(SlideType.table).copyWith(
-    title: 'Timesheet',
-    tableRows: rows,
-  );
+  return Slide.create(
+    SlideType.table,
+  ).copyWith(title: 'Timesheet', tableRows: rows);
 }
 
 // ── Resource load (chart) ──────────────────────────────────────────────────
@@ -200,10 +197,9 @@ Slide libreplanResourceHoursToChart(List<LibreplanResourceHours> hours) {
     'series': series,
   };
 
-  return Slide.create(SlideType.chart).copyWith(
-    title: 'Resourcebelasting',
-    customMarkdown: _jsonEncode(spec),
-  );
+  return Slide.create(
+    SlideType.chart,
+  ).copyWith(title: 'Resourcebelasting', customMarkdown: _jsonEncode(spec));
 }
 
 // ── Project status (cockpit) ───────────────────────────────────────────────
@@ -220,6 +216,7 @@ Slide libreplanOrderToCockpit(LibreplanOrder order) {
       if (el.isContainer) collect(el.children);
     }
   }
+
   collect(order.children);
 
   final totalHours = allElements.fold(0, (s, e) => s + e.workingHours);
@@ -258,10 +255,9 @@ Slide libreplanOrderToCockpit(LibreplanOrder order) {
     ],
   };
 
-  return Slide.create(SlideType.cockpit).copyWith(
-    title: 'Status: ${order.name}',
-    customMarkdown: _jsonEncode(spec),
-  );
+  return Slide.create(
+    SlideType.cockpit,
+  ).copyWith(title: 'Status: ${order.name}', customMarkdown: _jsonEncode(spec));
 }
 
 // ── Milestones (timeline) ──────────────────────────────────────────────────
@@ -275,6 +271,7 @@ Slide libreplanOrderToTimeline(LibreplanOrder order) {
       if (el.isContainer) collect(el.children);
     }
   }
+
   collect(order.children);
 
   milestones.sort((a, b) {
@@ -291,10 +288,9 @@ Slide libreplanOrderToTimeline(LibreplanOrder order) {
     return '$date :: ${m.name} :: ';
   }).toList();
 
-  return Slide.create(SlideType.timeline).copyWith(
-    title: 'Milestones: ${order.name}',
-    bullets: bullets,
-  );
+  return Slide.create(
+    SlideType.timeline,
+  ).copyWith(title: 'Milestones: ${order.name}', bullets: bullets);
 }
 
 // ── Critical path (flow) ───────────────────────────────────────────────────
@@ -315,6 +311,7 @@ Slide libreplanOrderToCriticalPath(LibreplanOrder order) {
       if (el.isContainer) collect(el.children);
     }
   }
+
   collect(order.children);
 
   // Bouw een naam→code map voor dependency-resolutie.
@@ -338,7 +335,11 @@ Slide libreplanOrderToCriticalPath(LibreplanOrder order) {
 
   // Volg de langste keten vanaf elk startpunt (DFS, beperkt diepte).
   List<LibreplanOrderElement>? longest;
-  void dfs(LibreplanOrderElement current, List<LibreplanOrderElement> path, int depth) {
+  void dfs(
+    LibreplanOrderElement current,
+    List<LibreplanOrderElement> path,
+    int depth,
+  ) {
     if (depth > 20) return; // ponytail: diepte-limiet tegen cycli
     final extended = [...path, current];
     final children = <LibreplanOrderElement>[];
@@ -365,13 +366,12 @@ Slide libreplanOrderToCriticalPath(LibreplanOrder order) {
   final bullets = <String>[];
   for (final e in path) {
     final hours = e.workingHours > 0 ? '${e.workingHours}u' : '';
-    bullets.add('${e.name} :: process :: pt=${hours};crit=1');
+    bullets.add('${e.name} :: process :: pt=$hours;crit=1');
   }
 
-  return Slide.create(SlideType.flow).copyWith(
-    title: 'Kritieke pad: ${order.name}',
-    bullets: bullets,
-  );
+  return Slide.create(
+    SlideType.flow,
+  ).copyWith(title: 'Kritieke pad: ${order.name}', bullets: bullets);
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────

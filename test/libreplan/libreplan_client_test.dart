@@ -6,10 +6,9 @@ import 'package:ocideck/services/libreplan/libreplan_client.dart';
 /// antwoord retourneert. Test de client-logica (auth, URL-bouw, gates)
 /// zonder het netwerk te raken.
 class _FakeTransport implements LibreplanHttpTransport {
-  _FakeTransport({this.response, this.throwException});
+  _FakeTransport({this.response});
 
   final LibreplanHttpResult? response;
-  final LibreplanRequestException? throwException;
 
   /// De laatste aanroep, voor assertions.
   late final Uri lastUrl;
@@ -26,7 +25,6 @@ class _FakeTransport implements LibreplanHttpTransport {
     lastUrl = url;
     lastTrustedInternal = trustedInternal;
     lastHeaders = headers;
-    if (throwException != null) throw throwException!;
     return response!;
   }
 }

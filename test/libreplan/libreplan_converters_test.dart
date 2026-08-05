@@ -47,8 +47,13 @@ void main() {
       final slide = libreplanOrderToGantt(_sampleOrder());
       expect(slide.type, SlideType.gantt);
       expect(slide.title, 'Project X');
-      expect(slide.tableRows.first,
-          ['Taak', 'Start', 'Duur', 'Voortgang', 'Afhankelijk van']);
+      expect(slide.tableRows.first, [
+        'Taak',
+        'Start',
+        'Duur',
+        'Voortgang',
+        'Afhankelijk van',
+      ]);
     });
 
     test('containers worden sectiekoppen met sections=true', () {
@@ -110,9 +115,17 @@ void main() {
   group('libreplanResourcesToTable', () {
     test('produceert een resourcelijst', () {
       final resources = [
-        const LibreplanResource(code: 'm1', name: '3D-printer', isMachine: true),
         const LibreplanResource(
-            code: 'w1', name: '', firstName: 'Alice', surname: 'Smith'),
+          code: 'm1',
+          name: '3D-printer',
+          isMachine: true,
+        ),
+        const LibreplanResource(
+          code: 'w1',
+          name: '',
+          firstName: 'Alice',
+          surname: 'Smith',
+        ),
       ];
       final slide = libreplanResourcesToTable(resources);
       expect(slide.type, SlideType.table);
@@ -131,9 +144,17 @@ void main() {
           workOrder: 'TASK-1',
           lines: [
             LibreplanWorkReportLine(
-                code: 'l1', hours: 4, resource: 'w1', workOrder: 'TASK-1'),
+              code: 'l1',
+              hours: 4,
+              resource: 'w1',
+              workOrder: 'TASK-1',
+            ),
             LibreplanWorkReportLine(
-                code: 'l2', hours: 6, resource: 'w1', workOrder: 'TASK-2'),
+              code: 'l2',
+              hours: 6,
+              resource: 'w1',
+              workOrder: 'TASK-2',
+            ),
           ],
         ),
       ];
@@ -168,8 +189,10 @@ void main() {
       final slide = libreplanResourceHoursToChart(validHours);
       expect(slide.type, SlideType.chart);
       expect(slide.customMarkdown, contains('"type":"bar"'));
-      expect(slide.customMarkdown,
-          contains('"xLabels":["2026-09-01","2026-09-02"]'));
+      expect(
+        slide.customMarkdown,
+        contains('"xLabels":["2026-09-01","2026-09-02"]'),
+      );
       expect(slide.customMarkdown, contains('"name":"w1"'));
       expect(slide.customMarkdown, contains('"name":"w2"'));
     });
@@ -214,7 +237,11 @@ void main() {
         code: 'O',
         name: 'Test',
         children: [
-          const LibreplanOrderElement(code: 'M2', name: 'Laat', milestone: true),
+          const LibreplanOrderElement(
+            code: 'M2',
+            name: 'Laat',
+            milestone: true,
+          ),
           LibreplanOrderElement(
             code: 'M1',
             name: 'Vroeg',

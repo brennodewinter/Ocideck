@@ -35,6 +35,9 @@ const unchangedInEnglish = {
   'https://matrix.to/#/…',
   'https://matrix.example.org',
   '@jij:matrix.example.org',
+  // LibrePlan-connector: voorbeeld-URL en -gebruikersnaam (#1240)
+  'https://libreplan.example.org/libreplan/',
+  'wsreader',
   'Homeserver',
   'SWOT',
   'A3',

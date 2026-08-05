@@ -48,9 +48,7 @@ class _LibreplanImportDialogState extends ConsumerState<LibreplanImportDialog> {
       title: Text(l10n.d('LibrePlan importeren')),
       content: SizedBox(
         width: 420,
-        child: _importing
-            ? _importingContent(l10n)
-            : _optionsContent(l10n),
+        child: _importing ? _importingContent(l10n) : _optionsContent(l10n),
       ),
       actions: _importing ? null : _actions(l10n),
     );
@@ -64,23 +62,57 @@ class _LibreplanImportDialogState extends ConsumerState<LibreplanImportDialog> {
         children: [
           Text(
             l10n.d(
-              'Kies welke slides u uit het LibrePlan-project wilt halen. '
-              'De import is alleen-lezen en schrijft niets terug.',
+              'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.',
             ),
             style: TextStyle(fontSize: 12, color: AppTheme.slate600),
           ),
           const SizedBox(height: 16),
-          _checkbox(l10n.d('Gantt-planning'), _gantt, (v) => setState(() => _gantt = v ?? false)),
-          _checkbox(l10n.d('WBS (hiërarchie)'), _wbs, (v) => setState(() => _wbs = v ?? false)),
-          _checkbox(l10n.d('Projectstatus (cockpit)'), _status, (v) => setState(() => _status = v ?? false)),
-          _checkbox(l10n.d('Milestones (tijdlijn)'), _milestones, (v) => setState(() => _milestones = v ?? false)),
-          _checkbox(l10n.d('Kritieke pad (flow)'), _criticalPath, (v) => setState(() => _criticalPath = v ?? false)),
-          _checkbox(l10n.d('Resources (tabel)'), _resources, (v) => setState(() => _resources = v ?? false)),
-          _checkbox(l10n.d('Timesheet (tabel)'), _timesheet, (v) => setState(() => _timesheet = v ?? false)),
-          _checkbox(l10n.d('Resourcebelasting (grafiek)'), _resourceLoad, (v) => setState(() => _resourceLoad = v ?? false)),
+          _checkbox(
+            l10n.d('Gantt-planning'),
+            _gantt,
+            (v) => setState(() => _gantt = v ?? false),
+          ),
+          _checkbox(
+            l10n.d('WBS (hiërarchie)'),
+            _wbs,
+            (v) => setState(() => _wbs = v ?? false),
+          ),
+          _checkbox(
+            l10n.d('Projectstatus (cockpit)'),
+            _status,
+            (v) => setState(() => _status = v ?? false),
+          ),
+          _checkbox(
+            l10n.d('Milestones (tijdlijn)'),
+            _milestones,
+            (v) => setState(() => _milestones = v ?? false),
+          ),
+          _checkbox(
+            l10n.d('Kritieke pad (flow)'),
+            _criticalPath,
+            (v) => setState(() => _criticalPath = v ?? false),
+          ),
+          _checkbox(
+            l10n.d('Resources (tabel)'),
+            _resources,
+            (v) => setState(() => _resources = v ?? false),
+          ),
+          _checkbox(
+            l10n.d('Timesheet (tabel)'),
+            _timesheet,
+            (v) => setState(() => _timesheet = v ?? false),
+          ),
+          _checkbox(
+            l10n.d('Resourcebelasting (grafiek)'),
+            _resourceLoad,
+            (v) => setState(() => _resourceLoad = v ?? false),
+          ),
           if (_error != null) ...[
             const SizedBox(height: 12),
-            Text(_error!, style: TextStyle(fontSize: 12, color: AppTheme.dangerFg)),
+            Text(
+              _error!,
+              style: TextStyle(fontSize: 12, color: AppTheme.dangerFg),
+            ),
           ],
         ],
       ),
@@ -97,7 +129,10 @@ class _LibreplanImportDialogState extends ConsumerState<LibreplanImportDialog> {
           child: CircularProgressIndicator(strokeWidth: 3),
         ),
         const SizedBox(height: 16),
-        Text(l10n.d('Ophalen uit LibrePlan…'), style: const TextStyle(fontSize: 13)),
+        Text(
+          l10n.d('Ophalen uit LibrePlan…'),
+          style: const TextStyle(fontSize: 13),
+        ),
       ],
     );
   }
@@ -116,8 +151,14 @@ class _LibreplanImportDialogState extends ConsumerState<LibreplanImportDialog> {
   }
 
   bool _anyEnabled() =>
-      _gantt || _wbs || _resources || _timesheet ||
-      _resourceLoad || _status || _milestones || _criticalPath;
+      _gantt ||
+      _wbs ||
+      _resources ||
+      _timesheet ||
+      _resourceLoad ||
+      _status ||
+      _milestones ||
+      _criticalPath;
 
   Widget _checkbox(String label, bool value, ValueChanged<bool?> onChanged) {
     return CheckboxListTile(
@@ -138,7 +179,9 @@ class _LibreplanImportDialogState extends ConsumerState<LibreplanImportDialog> {
     try {
       final settings = ref.read(settingsProvider).libreplanSettings;
       final key = SecretStore.libreplanKey(settings.baseUrl, settings.username);
-      final password = await ref.read(settingsProvider.notifier).readLibreplanPassword(key);
+      final password = await ref
+          .read(settingsProvider.notifier)
+          .readLibreplanPassword(key);
 
       final client = LibreplanClient(
         settings: settings,
@@ -183,13 +226,15 @@ class _LibreplanImportDialogState extends ConsumerState<LibreplanImportDialog> {
       final count = result.slides.length;
       final warning = result.hasWarnings ? ' ${result.warnings.first}' : '';
       messenger.showSnackBar(
-        SnackBar(content: Text('$count ${l10n.d("dia's geïmporteerd.")}$warning')),
+        SnackBar(
+          content: Text('$count ${l10n.d("dia's geïmporteerd.")}$warning'),
+        ),
       );
     } catch (e) {
       if (!mounted) return;
       setState(() {
         _importing = false;
-        _error = context.l10n.d('Import mislukt: $e');
+        _error = '${context.l10n.d('Import mislukt: ')}$e';
       });
     }
   }

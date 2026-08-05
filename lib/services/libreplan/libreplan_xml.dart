@@ -1,17 +1,17 @@
-/// LibrePlan REST XML → Dart models. Pure Dart, geen netwerk, testbaar.
-///
-/// LibrePlan's REST API (`/ws/rest/<service-path>/`) retourneert XML met
-/// namespace `http://rest.ws.libreplan.dev`. Deze laag parseert dat defensief:
-/// ontbrekende velden worden getolereerd, onbekende velden genegeerd, een veld
-/// dat niet parseert wordt overgeslagen — niet gecrasht. Zie het design-doc
-/// §5.4 ("XML parsing safety").
-///
-/// De `xml`-package parset, voert niet uit: geen XXE (geen externe entities),
-/// geen code-evaluatie. De parser krijgt alleen XML van een door de gebruiker
-/// aangewezen LibrePlan-server, nooit uit een deck of een onvertrouwde bron.
-/// `ponytail:` plafond: een kwaadaardige server (of MITM op plain HTTP) kan
-/// pathologische XML sturen; de parser-limieten vangen dat, de connector faalt
-/// gesloten met een zichtbare fout.
+// LibrePlan REST XML → Dart models. Pure Dart, geen netwerk, testbaar.
+//
+// LibrePlan's REST API (`/ws/rest/<service-path>/`) retourneert XML met
+// namespace `http://rest.ws.libreplan.dev`. Deze laag parseert dat defensief:
+// ontbrekende velden worden getolereerd, onbekende velden genegeerd, een veld
+// dat niet parseert wordt overgeslagen — niet gecrasht. Zie het design-doc
+// §5.4 ("XML parsing safety").
+//
+// De `xml`-package parset, voert niet uit: geen XXE (geen externe entities),
+// geen code-evaluatie. De parser krijgt alleen XML van een door de gebruiker
+// aangewezen LibrePlan-server, nooit uit een deck of een onvertrouwde bron.
+// `ponytail:` plafond: een kwaadaardige server (of MITM op plain HTTP) kan
+// pathologische XML sturen; de parser-limieten vangen dat, de connector faalt
+// gesloten met een zichtbare fout.
 
 import 'package:xml/xml.dart';
 
@@ -183,7 +183,7 @@ List<LibreplanOrder> parseOrderList(String xml) {
   final root = _findRoot(doc, 'order-list');
   if (root == null) return [];
   return root
-      .findElements('order', namespace: '*')
+      .findElements('order', namespaceUri: '*')
       .map(_parseOrder)
       .toList();
 }
@@ -214,7 +214,7 @@ List<LibreplanWorkReport> parseWorkReportList(String xml) {
   final root = _findRoot(doc, 'work-report-list');
   if (root == null) return [];
   return root
-      .findElements('work-report', namespace: '*')
+      .findElements('work-report', namespaceUri: '*')
       .map(_parseWorkReport)
       .toList();
 }
@@ -233,16 +233,21 @@ List<LibreplanResourceHours> parseResourceHoursList(String xml) {
       // work-report-line kan direct of in een work-report-line-list zitten.
       final linesEl = _child(el, 'work-report-line-list');
       final lineSource = linesEl ?? el;
-      final lines = lineSource.findElements('work-report-line', namespace: '*');
+      final lines = lineSource.findElements(
+        'work-report-line',
+        namespaceUri: '*',
+      );
       for (final line in lines) {
         final date = _parseDate(_attr(line, 'date'));
         final h = _parseDouble(_attr(line, 'hours'));
         if (date != null && h > 0) {
-          hours.add(LibreplanResourceHours(
-            resourceCode: resourceCode,
-            date: date,
-            hours: h,
-          ));
+          hours.add(
+            LibreplanResourceHours(
+              resourceCode: resourceCode,
+              date: date,
+              hours: h,
+            ),
+          );
         }
       }
     }
@@ -257,7 +262,7 @@ List<LibreplanExpenseSheet> parseExpenseSheetList(String xml) {
   final root = _findRoot(doc, 'expense-sheet-list');
   if (root == null) return [];
   return root
-      .findElements('expense-sheet', namespace: '*')
+      .findElements('expense-sheet', namespaceUri: '*')
       .map(_parseExpenseSheet)
       .toList();
 }
@@ -270,7 +275,7 @@ List<LibreplanExpenseSheet> parseExpenseSheetList(String xml) {
 XmlDocument? _parseSafely(String xml) {
   if (xml.length > libreplanXmlMaxBytes) {
     throw const LibreplanXmlException(
-      'XML overschrijdt de maximale grootte (${libreplanXmlMaxBytes} bytes)',
+      'XML overschrijdt de maximale grootte ($libreplanXmlMaxBytes bytes)',
     );
   }
   try {
@@ -333,10 +338,10 @@ List<LibreplanOrderElement> _parseOrderChildren(XmlElement parent) {
 
 LibreplanOrderElement _parseOrderElement(XmlElement el) {
   final children = _parseOrderChildren(el);
-  final hoursGroups = el.findElements('hours-groups', namespace: '*');
+  final hoursGroups = el.findElements('hours-groups', namespaceUri: '*');
   var workingHours = 0;
   for (final hg in hoursGroups) {
-    for (final group in hg.findElements('hours-group', namespace: '*')) {
+    for (final group in hg.findElements('hours-group', namespaceUri: '*')) {
       workingHours += _parseInt(_attr(group, 'working-hours')) ?? 0;
     }
   }
@@ -345,8 +350,7 @@ LibreplanOrderElement _parseOrderElement(XmlElement el) {
   final deps = <String>[];
   final depsEl = _child(el, 'dependencies');
   if (depsEl != null) {
-    for (final dep
-        in depsEl.findElements('dependency', namespace: '*')) {
+    for (final dep in depsEl.findElements('dependency', namespaceUri: '*')) {
       final origin = _attr(dep, 'origin') ?? _attr(dep, 'name') ?? '';
       if (origin.isNotEmpty) deps.add(origin);
     }
@@ -368,8 +372,7 @@ double _parseProgress(XmlElement el) {
   // Progress kan een attribuut zijn of in een schedulingState-element zitten.
   final attr = _attr(el, 'progress');
   if (attr != null) return _parseDouble(attr);
-  final sched = _child(el, 'scheduling-state') ??
-      _child(el, 'schedulingState');
+  final sched = _child(el, 'scheduling-state') ?? _child(el, 'schedulingState');
   if (sched != null) {
     final p = _attr(sched, 'progress');
     if (p != null) return _parseDouble(p);
@@ -397,15 +400,19 @@ LibreplanWorkReport _parseWorkReport(XmlElement el) {
   final linesEl = _child(el, 'work-report-line-list');
   final lines = <LibreplanWorkReportLine>[];
   if (linesEl != null) {
-    for (final line
-        in linesEl.findElements('work-report-line', namespace: '*')) {
-      lines.add(LibreplanWorkReportLine(
-        code: _attr(line, 'code') ?? '',
-        hours: _parseDouble(_attr(line, 'hours')),
-        date: _parseDate(_attr(line, 'date')),
-        resource: _attr(line, 'resource') ?? '',
-        workOrder: _attr(line, 'work-order') ?? '',
-      ));
+    for (final line in linesEl.findElements(
+      'work-report-line',
+      namespaceUri: '*',
+    )) {
+      lines.add(
+        LibreplanWorkReportLine(
+          code: _attr(line, 'code') ?? '',
+          hours: _parseDouble(_attr(line, 'hours')),
+          date: _parseDate(_attr(line, 'date')),
+          resource: _attr(line, 'resource') ?? '',
+          workOrder: _attr(line, 'work-order') ?? '',
+        ),
+      );
     }
   }
   return LibreplanWorkReport(
@@ -455,13 +462,13 @@ DateTime? _parseDate(String? value) {
     final datePart = s.substring(0, 10);
     try {
       return DateTime.parse(datePart);
-    } catch (_) {
+    } on FormatException {
       // Val door naar full-parse poging.
     }
   }
   try {
     return DateTime.parse(s);
-  } catch (_) {
+  } on FormatException {
     return null;
   }
 }

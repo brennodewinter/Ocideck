@@ -25,12 +25,14 @@ void main() {
     required bool revealed,
     required bool hasChecklists,
     bool aiRevealed = false,
+    bool libreplanRevealed = false,
     bool integrationsAvailable = true,
     bool collaborationRevealed = false,
   }) => SettingsSection.navItems(
     infoSafetyRevealed: revealed,
     hasChecklists: hasChecklists,
     aiRevealed: aiRevealed,
+    libreplanRevealed: libreplanRevealed,
     integrationsAvailable: integrationsAvailable,
     collaborationRevealed: collaborationRevealed,
   );

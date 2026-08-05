@@ -189,11 +189,9 @@ void main() {
 
   group('limieten', () {
     test('XML groter dan maxBytes werpt een exceptie', () {
-      final huge = '<order-list>${'x' * (libreplanXmlMaxBytes + 1)}</order-list>';
-      expect(
-        () => parseOrderList(huge),
-        throwsA(isA<LibreplanXmlException>()),
-      );
+      final huge =
+          '<order-list>${'x' * (libreplanXmlMaxBytes + 1)}</order-list>';
+      expect(() => parseOrderList(huge), throwsA(isA<LibreplanXmlException>()));
     });
 
     test('pathologisch diepe XML werpt een exceptie', () {

@@ -42,11 +42,7 @@ extension _SettingsLibreplan on _SettingsDialogState {
       children: [
         Text(
           l10n.d(
-            'LibrePlan-connector is optioneel en staat standaard uit. Er wordt '
-            'niets opgehaald totdat u dit inschakelt en zelf een server '
-            'configureert. Alleen-lezen: de connector schrijft niets terug '
-            'naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw '
-            'besturingssysteem opgeslagen, niet in het deck.',
+            'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.',
           ),
           style: const TextStyle(fontSize: 12, height: 1.4),
         ),
@@ -63,13 +59,13 @@ extension _SettingsLibreplan on _SettingsDialogState {
         SettingsTextField(
           _libreplanBaseUrl,
           l10n.d('Server-URL'),
-          hint: 'https://libreplan.example.org/libreplan/',
+          hint: l10n.d('https://libreplan.example.org/libreplan/'),
         ),
         const SizedBox(height: 12),
         SettingsTextField(
           _libreplanUsername,
           l10n.d('Gebruikersnaam'),
-          hint: 'wsreader',
+          hint: l10n.d('wsreader'),
         ),
         const SizedBox(height: 12),
         SettingsTextField(
@@ -88,9 +84,7 @@ extension _SettingsLibreplan on _SettingsDialogState {
           ),
           subtitle: Text(
             l10n.d(
-              'Alleen voor servers op het eigen netwerk (LAN). Staat '
-              'plain-HTTP toe en staat privé-adressen door de NetGuard. '
-              'Uitgeschakeld: HTTPS verplicht.',
+              'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.',
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.slate600),
           ),
@@ -112,13 +106,15 @@ extension _SettingsLibreplan on _SettingsDialogState {
   }
 
   Widget _libreplanTestRow(AppLocalizations l10n) {
-    return Row(
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 12,
+      runSpacing: 6,
       children: [
         ElevatedButton(
           onPressed: _libreplanTesting ? null : () => _libreplanTest(),
           child: Text(l10n.d('Verbinding testen')),
         ),
-        const SizedBox(width: 12),
         if (_libreplanTesting)
           const SizedBox(
             width: 16,
@@ -131,14 +127,11 @@ extension _SettingsLibreplan on _SettingsDialogState {
             size: 16,
             color: _libreplanTestOk! ? AppTheme.accentFg : AppTheme.dangerFg,
           ),
-          const SizedBox(width: 6),
-          Expanded(
-            child: Text(
-              _libreplanTestMessage ?? '',
-              style: TextStyle(
-                fontSize: 11,
-                color: _libreplanTestOk! ? AppTheme.accentFg : AppTheme.dangerFg,
-              ),
+          Text(
+            _libreplanTestMessage ?? '',
+            style: TextStyle(
+              fontSize: 11,
+              color: _libreplanTestOk! ? AppTheme.accentFg : AppTheme.dangerFg,
             ),
           ),
         ],
@@ -152,7 +145,9 @@ extension _SettingsLibreplan on _SettingsDialogState {
     if (baseUrl.isEmpty || username.isEmpty) {
       _rebuild(() {
         _libreplanTestOk = false;
-        _libreplanTestMessage = context.l10n.d('Vul server-URL en gebruikersnaam in.');
+        _libreplanTestMessage = context.l10n.d(
+          'Vul server-URL en gebruikersnaam in.',
+        );
       });
       return;
     }

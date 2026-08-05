@@ -776,14 +776,17 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
     // LibrePlan-connector: bewaar de schakelaar en de volledige configuratie.
     final lp = ref.read(settingsProvider).libreplanSettings;
-    notifier.setLibreplanSettings(LibreplanSettings(
-      enabled: _libreplanEnabled,
-      baseUrl: _libreplanBaseUrl.text.trim(),
-      username: _libreplanUsername.text.trim(),
-      trustedInternal: _libreplanTrustedInternal,
-    ));
+    notifier.setLibreplanSettings(
+      LibreplanSettings(
+        enabled: _libreplanEnabled,
+        baseUrl: _libreplanBaseUrl.text.trim(),
+        username: _libreplanUsername.text.trim(),
+        trustedInternal: _libreplanTrustedInternal,
+      ),
+    );
     // Wachtwoord in de keychain (gekeyd op base URL + username).
-    final lpKey = '${_libreplanBaseUrl.text.trim()}::${_libreplanUsername.text.trim()}';
+    final lpKey =
+        '${_libreplanBaseUrl.text.trim()}::${_libreplanUsername.text.trim()}';
     final lpPass = _libreplanPassword.text;
     if (lpPass.isNotEmpty) {
       notifier.setLibreplanPassword(lpKey, lpPass);

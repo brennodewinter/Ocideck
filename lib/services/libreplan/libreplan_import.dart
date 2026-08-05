@@ -1,11 +1,11 @@
-/// LibrePlan import-orchestratie: fetch → parse → convert → slides.
-///
-/// Deze laag combineert [LibreplanClient] (fetch), [libreplan_xml.dart] (parse)
-/// en [libreplan_converters.dart] (convert) tot één operatie die een lijst
-/// slides retourneert. De UI-laag (import-dialoog) voegt ze toe aan het deck.
-///
-/// De orchestratie is testbaar: de client is injecteerbaar, en de fetch-
-/// methodes kunnen per slide-type worden gekozen via [LibreplanImportOptions].
+// LibrePlan import-orchestratie: fetch → parse → convert → slides.
+//
+// Deze laag combineert [LibreplanClient] (fetch), [libreplan_xml.dart] (parse)
+// en [libreplan_converters.dart] (convert) tot één operatie die een lijst
+// slides retourneert. De UI-laag (import-dialoog) voegt ze toe aan het deck.
+//
+// De orchestratie is testbaar: de client is injecteerbaar, en de fetch-
+// methodes kunnen per slide-type worden gekozen via [LibreplanImportOptions].
 
 import '../../models/slide.dart';
 import 'libreplan_client.dart';
@@ -106,11 +106,21 @@ class LibreplanImporter {
     }
 
     if (order != null) {
-      if (options.gantt) slides.add(libreplanOrderToGantt(order!));
-      if (options.wbs) slides.add(libreplanOrderToWbs(order!));
-      if (options.status) slides.add(libreplanOrderToCockpit(order!));
-      if (options.milestones) slides.add(libreplanOrderToTimeline(order!));
-      if (options.criticalPath) slides.add(libreplanOrderToCriticalPath(order!));
+      if (options.gantt) {
+        slides.add(libreplanOrderToGantt(order));
+      }
+      if (options.wbs) {
+        slides.add(libreplanOrderToWbs(order));
+      }
+      if (options.status) {
+        slides.add(libreplanOrderToCockpit(order));
+      }
+      if (options.milestones) {
+        slides.add(libreplanOrderToTimeline(order));
+      }
+      if (options.criticalPath) {
+        slides.add(libreplanOrderToCriticalPath(order));
+      }
     }
 
     if (options.resources) {

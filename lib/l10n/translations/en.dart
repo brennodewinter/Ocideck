@@ -4348,4 +4348,39 @@ const _dutchSourceAddEn = {
       'Hook, problem, solution, proof and ask for a persuasive pitch.',
   'Stakeholders, argumentatie en bezwaren om een besluit of steun te krijgen in een vergadering.':
       'Stakeholders, argumentation and objections to gain a decision or support in a meeting.',
+  'LibrePlan-connector': 'LibrePlan connector',
+  'De LibrePlan-connector is alleen beschikbaar in de desktopversie.':
+      'The LibrePlan connector is only available in the desktop version.',
+  'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.':
+      'The LibrePlan connector is optional and off by default. Nothing is fetched until you enable it and configure a server yourself. Read-only: the connector never writes back to LibrePlan. The password is stored in your OS keychain, not in the deck.',
+  'Opgeslagen in de sleutelhanger': 'Stored in the keychain',
+  'Alleen voor servers op het eigen netwerk (LAN). Staat plain-HTTP toe en staat privé-adressen door de NetGuard. Uitgeschakeld: HTTPS verplicht.':
+      'Only for servers on your own network (LAN). Allows plain HTTP and lets private addresses through NetGuard. Disabled: HTTPS required.',
+  'Verbinding succesvol.': 'Connection successful.',
+  'Onverwachte fout.': 'Unexpected error.',
+  'Importeren uit LibrePlan': 'Import from LibrePlan',
+  'LibrePlan importeren': 'Import from LibrePlan',
+  'Kies welke slides u uit het LibrePlan-project wilt halen. De import is alleen-lezen en schrijft niets terug.':
+      'Choose which slides to fetch from the LibrePlan project. The import is read-only and writes nothing back.',
+  'Gantt-planning': 'Gantt schedule',
+  'WBS (hiërarchie)': 'WBS (hierarchy)',
+  'Projectstatus (cockpit)': 'Project status (cockpit)',
+  'Milestones (tijdlijn)': 'Milestones (timeline)',
+  'Kritieke pad (flow)': 'Critical path (flow)',
+  'Resources (tabel)': 'Resources (table)',
+  'Timesheet (tabel)': 'Timesheet (table)',
+  'Resourcebelasting (grafiek)': 'Resource load (chart)',
+  'Ophalen uit LibrePlan…': 'Fetching from LibrePlan…',
+  'Geen slides gevonden.': 'No slides found.',
+  "dia's geïmporteerd.": 'slides imported.',
+  'Import mislukt: ': 'Import failed: ',
+  'Checklists': 'Checklists',
+  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
+      'Configure the server on the LibrePlan connector tab. Until you do, nothing happens.',
+  'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
+      'Import a project snapshot from a LibrePlan instance as slides: Gantt, WBS, resource load, timesheet and more. Read-only, on request — nothing leaves until you configure a server and start an import.',
+  'Vul server-URL en gebruikersnaam in.': 'Enter server URL and username.',
+  'https://libreplan.example.org/libreplan/':
+      'https://libreplan.example.org/libreplan/',
+  'wsreader': 'wsreader',
 };

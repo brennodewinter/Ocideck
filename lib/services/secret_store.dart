@@ -468,7 +468,10 @@ class SecretStore {
       await _storage.delete(key: libreplanKey(baseUrl, username));
     } catch (e) {
       // Wissen mag nooit fataal zijn: log en ga door.
-      logWarning('SecretStore.deleteLibreplanPassword: keychain delete failed', e);
+      logWarning(
+        'SecretStore.deleteLibreplanPassword: keychain delete failed',
+        e,
+      );
     }
   }
 
@@ -480,7 +483,10 @@ class SecretStore {
     try {
       await _storage.write(key: key, value: password);
     } catch (e) {
-      logError('SecretStore.writeLibreplanPasswordByKey: keychain write failed', e);
+      logError(
+        'SecretStore.writeLibreplanPasswordByKey: keychain write failed',
+        e,
+      );
       rethrow;
     }
   }
@@ -490,7 +496,10 @@ class SecretStore {
     try {
       return await _storage.read(key: key);
     } catch (e) {
-      logError('SecretStore.readLibreplanPasswordByKey: keychain read failed', e);
+      logError(
+        'SecretStore.readLibreplanPasswordByKey: keychain read failed',
+        e,
+      );
       return null;
     }
   }
@@ -500,7 +509,10 @@ class SecretStore {
     try {
       await _storage.delete(key: key);
     } catch (e) {
-      logWarning('SecretStore.deleteLibreplanPasswordByKey: keychain delete failed', e);
+      logWarning(
+        'SecretStore.deleteLibreplanPasswordByKey: keychain delete failed',
+        e,
+      );
     }
   }
 

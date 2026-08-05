@@ -45,7 +45,8 @@ class LibreplanSettings {
   /// ingesteld en daarna de module uitzet, moet die configuratie kunnen blijven
   /// zien en opruimen; anders maakt de schakelaar bestaand werk onbereikbaar.
   /// Dat is de vaste regel uit #648.
-  bool get hasBackend => baseUrl.trim().isNotEmpty && username.trim().isNotEmpty;
+  bool get hasBackend =>
+      baseUrl.trim().isNotEmpty && username.trim().isNotEmpty;
 
   /// Of er een bruikbare server is gekozen én de module aan staat.
   bool get isConfigured => enabled && hasBackend;
