@@ -354,6 +354,7 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
                           ? null
                           : IconButton(
                               icon: const Icon(Icons.clear, size: 16),
+                              tooltip: l10n.d('Zoekveld wissen'),
                               onPressed: () {
                                 _searchCtrl.clear();
                                 _onSearchChanged();
