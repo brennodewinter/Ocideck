@@ -52,12 +52,6 @@ concurrency:
   group: static-gate-${{ github.ref }}
   cancel-in-progress: true
 
-# `statuses: write` zodat de poortuitslag-stap een commit-status mag schrijven
-# (zie de laatste stap). Zonder dit heeft de automatische GITHUB_TOKEN geen
-# schrijftoegang tot /statuses.
-permissions:
-  statuses: write
-
 jobs:
   static-gate:
     runs-on: docker
@@ -111,7 +105,6 @@ jobs:
       # statische deelverzameling die een bijdrager lokaal in `make check` draait.
       # Ze hier overtypen zou twee waarheden opleveren die uit elkaar gaan lopen.
       - name: De statische poort
-        id: static-gate
         run: make check-static
 
       # De registratie-invarianten (#1123): een handvol snelle tests die betrappen
@@ -120,38 +113,4 @@ jobs:
       # stap kon zulke drift (bv. source_map) tóch per PR passeren. Zelfde job, dus
       # dezelfde status-check-context; alleen deze stap erbij, geen tweede lijst.
       - name: De registratie-invarianten
-        id: registrations
         run: make check-registrations
-
-      # Forgejo/Gitea 1.22 schrijft bij een Actions-run wel een status met
-      # `status: success`, maar laat het legacy `state`-veld `null` — en
-      # branch-bescherming leest `state`. Gevolg: de poort is groen, maar de
-      # merge blijft permanent geblokkeerd (zie #38364 upstream). Deze stap
-      # zet zélf een commit-status met een echte `state` onder een context die
-      # we beheren (`static-gate`), zodat branch-bescherming een groene check
-      # ziet in plaats van `null`. De auto-status gebruikt een andere context
-      # (`static-gate / static-gate (pull_request)`), dus die overschrijft de
-      # onze niet. `if: always()` zodat een falende poort ook `failure`
-      # rapporteert in plaats van niets — fail-closed, geen stille groene
-      # merge.
-      - name: Poortuitslag als commit-status
-        id: report
-        if: always()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -eu
-          gate="${{ steps.static-gate.outcome }}"
-          reg="${{ steps.registrations.outcome }}"
-          if [ "$gate" = "success" ] && [ "$reg" = "success" ]; then
-            state="success"
-            desc="Static gate passed"
-          else
-            state="failure"
-            desc="Static gate failed (gate=$gate registrations=$reg)"
-          fi
-          curl -fsS -X POST \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Content-Type: application/json" \
-            "$GITHUB_SERVER_URL/api/v1/repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
-            -d "{\"state\":\"$state\",\"context\":\"static-gate\",\"description\":\"$desc\",\"target_url\":\"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\"}"
