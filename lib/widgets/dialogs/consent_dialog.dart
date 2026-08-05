@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../platform/native_window.dart';
+import '../../services/export_metadata.dart' show kOciDeckVersion;
 import '../../platform/platform_features.dart';
 import '../../state/consent_provider.dart';
 import '../../state/settings_provider.dart';
@@ -154,6 +155,17 @@ class _ConsentHeader extends StatelessWidget {
           Text(
             l10n.d('OciDeck'),
             style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(width: 8),
+          // Het versienummer hoort op het eerste scherm zichtbaar te zijn,
+          // niet pas achter Instellingen → Over: een melder die nog geen
+          // toestemming heeft gegeven moet het kunnen aflezen (SECURITY.md).
+          Text(
+            'v$kOciDeckVersion',
+            style: TextStyle(
+              fontSize: 12,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const Spacer(),
           SearchableLanguagePicker(

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/services/export_metadata.dart' show kOciDeckVersion;
 import 'package:ocideck/state/consent_provider.dart';
 import 'package:ocideck/widgets/dialogs/consent_dialog.dart';
 import 'package:ocideck/widgets/language_flag.dart';
@@ -168,6 +169,22 @@ void main() {
         tester.widget<TextButton>(quit).onPressed,
         isNotNull,
         reason: 'de afsluitknop moet werken zonder dat het vinkje aan staat',
+      );
+    });
+
+    testWidgets('het versienummer staat in de kop, zichtbaar vóór akkoord', (
+      tester,
+    ) async {
+      // SECURITY.md vraagt een melder het versienummer te noemen; vóór deze
+      // wijziging was er op het toestemmingsscherm nergens een plek waar iemand
+      // het kon aflezen — pas achter Instellingen → Over. Het eerste scherm
+      // dat een nieuwe gebruiker ziet hoort het te tonen.
+      await pumpDialog(tester);
+
+      expect(
+        find.text('v$kOciDeckVersion'),
+        findsOneWidget,
+        reason: 'het versienummer hoort zichtbaar te zijn vóór toestemming',
       );
     });
   });
