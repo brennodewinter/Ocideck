@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:a7e8e0da-da83-591b-8525-f828f2d42044",
+  "serialNumber": "urn:uuid:ef7e07ba-c969-5e7a-873c-e45ae18d6929",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-04T18:21:46.015331Z",
+    "timestamp": "2026-08-05T11:58:20.461289Z",
     "tools": {
       "components": [
         {
@@ -1407,7 +1407,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/file_picker@11.0.2",
+      "bom-ref": "pkg:pub/file_picker@11.0.3",
       "type": "library",
       "supplier": {
         "name": "miguelpruivo",
@@ -1416,8 +1416,8 @@
         ]
       },
       "name": "file_picker",
-      "version": "11.0.2",
-      "purl": "pkg:pub/file_picker@11.0.2",
+      "version": "11.0.3",
+      "purl": "pkg:pub/file_picker@11.0.3",
       "licenses": [
         {
           "license": {
@@ -1428,13 +1428,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "f13a03000d942e476bc1ff0a736d2e9de711d2f89a95cd4c1d88f861c3348387"
+          "content": "29cc1fdb20613876cc7afc529738c1c0f11a9ca159b010edad0c566ac330847e"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/file_picker/versions/11.0.2"
+          "url": "https://pub.dev/packages/file_picker/versions/11.0.3"
         }
       ],
       "properties": [
@@ -2220,7 +2220,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/flutter_riverpod@3.4.1",
+      "bom-ref": "pkg:pub/flutter_riverpod@3.4.2",
       "type": "library",
       "supplier": {
         "name": "rrousselGit",
@@ -2229,8 +2229,8 @@
         ]
       },
       "name": "flutter_riverpod",
-      "version": "3.4.1",
-      "purl": "pkg:pub/flutter_riverpod@3.4.1",
+      "version": "3.4.2",
+      "purl": "pkg:pub/flutter_riverpod@3.4.2",
       "licenses": [
         {
           "license": {
@@ -2241,13 +2241,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "a441fd079f11969f526ec04556ba9819fee7d981bdf50fab858066807b36cff9"
+          "content": "56e81e662e6e54e59b231da57e90ac0d06ac67d8e3f2273c129a37ae6282b40c"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/flutter_riverpod/versions/3.4.1"
+          "url": "https://pub.dev/packages/flutter_riverpod/versions/3.4.2"
         }
       ],
       "properties": [
@@ -2388,7 +2388,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
+      "bom-ref": "pkg:pub/flutter_secure_storage_platform_interface@2.0.3",
       "type": "library",
       "supplier": {
         "name": "mogol",
@@ -2397,8 +2397,8 @@
         ]
       },
       "name": "flutter_secure_storage_platform_interface",
-      "version": "2.0.2",
-      "purl": "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
+      "version": "2.0.3",
+      "purl": "pkg:pub/flutter_secure_storage_platform_interface@2.0.3",
       "licenses": [
         {
           "license": {
@@ -2409,13 +2409,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "06686df417f34fe9f963ed217b7fdce250e2f637ddd6c374d7eb054549770633"
+          "content": "788060052712555182aba55ecb5f8b6e5cb9cfe8f776c83249a61fe3ce877db4"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/flutter_secure_storage_platform_interface/versions/2.0.2"
+          "url": "https://pub.dev/packages/flutter_secure_storage_platform_interface/versions/2.0.3"
         }
       ],
       "properties": [
@@ -2622,7 +2622,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/flutter_webrtc@1.5.2",
+      "bom-ref": "pkg:pub/flutter_webrtc@1.6.0",
       "type": "library",
       "supplier": {
         "name": "cloudwebrtc",
@@ -2631,8 +2631,8 @@
         ]
       },
       "name": "flutter_webrtc",
-      "version": "1.5.2",
-      "purl": "pkg:pub/flutter_webrtc@1.5.2",
+      "version": "1.6.0",
+      "purl": "pkg:pub/flutter_webrtc@1.6.0",
       "licenses": [
         {
           "license": {
@@ -2643,13 +2643,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "0f89dee7f4c35dab5611f351c3897a3bfe9f7057720cc7da209b52455af4316e"
+          "content": "e997161d7da3adedd3d430691b20931b0b4d96fa48bb60938d9ba0bf6fca98be"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/flutter_webrtc/versions/1.5.2"
+          "url": "https://pub.dev/packages/flutter_webrtc/versions/1.6.0"
         }
       ],
       "properties": [
@@ -3234,7 +3234,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/jni@1.0.1",
+      "bom-ref": "pkg:pub/jni@1.0.3",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -3243,8 +3243,8 @@
         ]
       },
       "name": "jni",
-      "version": "1.0.1",
-      "purl": "pkg:pub/jni@1.0.1",
+      "version": "1.0.3",
+      "purl": "pkg:pub/jni@1.0.3",
       "licenses": [
         {
           "license": {
@@ -3255,13 +3255,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "ca1efa31ef27a0b8ecbb4f8dcf3785e5ad1b8a54c64af9b72d287ae81f93a4f4"
+          "content": "f038e58b4dc2c9037f50e233175086337e0b305e356d28211bf55f21c504cbd3"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/jni/versions/1.0.1"
+          "url": "https://pub.dev/packages/jni/versions/1.0.3"
         }
       ],
       "properties": [
@@ -3276,7 +3276,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/jni_flutter@1.0.1",
+      "bom-ref": "pkg:pub/jni_flutter@1.0.2",
       "type": "library",
       "supplier": {
         "name": "dart-lang",
@@ -3285,8 +3285,8 @@
         ]
       },
       "name": "jni_flutter",
-      "version": "1.0.1",
-      "purl": "pkg:pub/jni_flutter@1.0.1",
+      "version": "1.0.2",
+      "purl": "pkg:pub/jni_flutter@1.0.2",
       "licenses": [
         {
           "license": {
@@ -3297,13 +3297,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "8b59e590786050b1cd866677dddaf76b1ade5e7bc751abe04b86e84d379d3ba6"
+          "content": "7b717011ea40d04fd47c2731d3d1d36eb99eba3435c2753d62489e8c3c9991d5"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/jni_flutter/versions/1.0.1"
+          "url": "https://pub.dev/packages/jni_flutter/versions/1.0.2"
         }
       ],
       "properties": [
@@ -3612,7 +3612,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/listen@1.0.0-beta.4",
+      "bom-ref": "pkg:pub/listen@1.0.1",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -3621,8 +3621,8 @@
         ]
       },
       "name": "listen",
-      "version": "1.0.0-beta.4",
-      "purl": "pkg:pub/listen@1.0.0-beta.4",
+      "version": "1.0.1",
+      "purl": "pkg:pub/listen@1.0.1",
       "licenses": [
         {
           "license": {
@@ -3633,13 +3633,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "cb0ad74d7453d8f83a7c1fae401828681ef5df21d41a3a26a04af590c985d085"
+          "content": "47501a08016a43fcad79252439d723f50f14f88fa7bfd8a177e0a417e5c9e1f2"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/listen/versions/1.0.0-beta.4"
+          "url": "https://pub.dev/packages/listen/versions/1.0.1"
         }
       ],
       "properties": [
@@ -5502,7 +5502,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/riverpod@3.4.1",
+      "bom-ref": "pkg:pub/riverpod@3.4.2",
       "type": "library",
       "supplier": {
         "name": "rrousselGit",
@@ -5511,8 +5511,8 @@
         ]
       },
       "name": "riverpod",
-      "version": "3.4.1",
-      "purl": "pkg:pub/riverpod@3.4.1",
+      "version": "3.4.2",
+      "purl": "pkg:pub/riverpod@3.4.2",
       "licenses": [
         {
           "license": {
@@ -5523,13 +5523,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "ccd1d45f07d20f894a975eeaa64d14a0dbbcfd0825bb59c3cd89837c2c21b436"
+          "content": "84351b3472a447f7b89f961f95c73287009d58c59d8cc1267425d995f78e50f1"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/riverpod/versions/3.4.1"
+          "url": "https://pub.dev/packages/riverpod/versions/3.4.2"
         }
       ],
       "properties": [
@@ -7257,7 +7257,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/vector_graphics@1.2.2",
+      "bom-ref": "pkg:pub/vector_graphics@1.2.3",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -7266,8 +7266,8 @@
         ]
       },
       "name": "vector_graphics",
-      "version": "1.2.2",
-      "purl": "pkg:pub/vector_graphics@1.2.2",
+      "version": "1.2.3",
+      "purl": "pkg:pub/vector_graphics@1.2.3",
       "licenses": [
         {
           "license": {
@@ -7278,13 +7278,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "2306c03da2ba81724afeb589c351ebbc0aa7d86005925be8f8735856dbe5e42d"
+          "content": "9d0e3b9cb16542ad660daee871e726a10d13a93b7b5391677c3160e8f5e83935"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/vector_graphics/versions/1.2.2"
+          "url": "https://pub.dev/packages/vector_graphics/versions/1.2.3"
         }
       ],
       "properties": [
@@ -7341,7 +7341,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/vector_graphics_compiler@1.2.6",
+      "bom-ref": "pkg:pub/vector_graphics_compiler@1.3.0",
       "type": "library",
       "supplier": {
         "name": "flutter",
@@ -7350,8 +7350,8 @@
         ]
       },
       "name": "vector_graphics_compiler",
-      "version": "1.2.6",
-      "purl": "pkg:pub/vector_graphics_compiler@1.2.6",
+      "version": "1.3.0",
+      "purl": "pkg:pub/vector_graphics_compiler@1.3.0",
       "licenses": [
         {
           "license": {
@@ -7362,13 +7362,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "142a9146f447d15b10bdc00e21d5f4d83e5b32bb5f8f8f5a04c75311344923a3"
+          "content": "4dca4feb77dc3ec7f6e27e49c53241eb8217f55e4f9b12599a27f8903bca5682"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/vector_graphics_compiler/versions/1.2.6"
+          "url": "https://pub.dev/packages/vector_graphics_compiler/versions/1.3.0"
         }
       ],
       "properties": [
@@ -9065,16 +9065,16 @@
         "pkg:pub/dartcv4@2.2.1+4",
         "pkg:pub/desktop_drop@0.7.1",
         "pkg:pub/fake_async@1.3.3",
-        "pkg:pub/file_picker@11.0.2",
+        "pkg:pub/file_picker@11.0.3",
         "pkg:pub/fl_chart@1.2.0",
         "pkg:pub/flutter_highlight@0.7.0",
         "pkg:pub/flutter_lints@6.0.0",
         "pkg:pub/flutter_math_fork@0.7.4",
         "pkg:pub/flutter_quill@11.5.1",
-        "pkg:pub/flutter_riverpod@3.4.1",
+        "pkg:pub/flutter_riverpod@3.4.2",
         "pkg:pub/flutter_secure_storage@10.3.1",
         "pkg:pub/flutter_svg@2.3.0",
-        "pkg:pub/flutter_webrtc@1.5.2",
+        "pkg:pub/flutter_webrtc@1.6.0",
         "pkg:pub/highlight@0.7.0",
         "pkg:pub/http@1.6.0",
         "pkg:pub/image@4.9.1",
@@ -9337,7 +9337,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/file_picker@11.0.2",
+      "ref": "pkg:pub/file_picker@11.0.3",
       "dependsOn": [
         "pkg:pub/cross_file@0.3.5+4",
         "pkg:pub/dbus@0.7.13",
@@ -9519,11 +9519,11 @@
       ]
     },
     {
-      "ref": "pkg:pub/flutter_riverpod@3.4.1",
+      "ref": "pkg:pub/flutter_riverpod@3.4.2",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
         "pkg:pub/meta@1.18.0",
-        "pkg:pub/riverpod@3.4.1",
+        "pkg:pub/riverpod@3.4.2",
         "pkg:pub/state_notifier@1.0.0",
         "sdk:flutter@0.0.0",
         "sdk:flutter_test@0.0.0"
@@ -9534,7 +9534,7 @@
       "dependsOn": [
         "pkg:pub/flutter_secure_storage_darwin@0.3.2",
         "pkg:pub/flutter_secure_storage_linux@3.0.1",
-        "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
+        "pkg:pub/flutter_secure_storage_platform_interface@2.0.3",
         "pkg:pub/flutter_secure_storage_web@2.1.1",
         "pkg:pub/flutter_secure_storage_windows@4.1.0",
         "pkg:pub/meta@1.18.0",
@@ -9551,12 +9551,12 @@
     {
       "ref": "pkg:pub/flutter_secure_storage_linux@3.0.1",
       "dependsOn": [
-        "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
+        "pkg:pub/flutter_secure_storage_platform_interface@2.0.3",
         "sdk:flutter@0.0.0"
       ]
     },
     {
-      "ref": "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
+      "ref": "pkg:pub/flutter_secure_storage_platform_interface@2.0.3",
       "dependsOn": [
         "pkg:pub/plugin_platform_interface@2.1.8",
         "sdk:flutter@0.0.0"
@@ -9565,7 +9565,7 @@
     {
       "ref": "pkg:pub/flutter_secure_storage_web@2.1.1",
       "dependsOn": [
-        "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
+        "pkg:pub/flutter_secure_storage_platform_interface@2.0.3",
         "pkg:pub/web@1.1.1",
         "sdk:flutter@0.0.0",
         "sdk:flutter_web_plugins@0.0.0"
@@ -9575,7 +9575,7 @@
       "ref": "pkg:pub/flutter_secure_storage_windows@4.1.0",
       "dependsOn": [
         "pkg:pub/ffi@2.2.0",
-        "pkg:pub/flutter_secure_storage_platform_interface@2.0.2",
+        "pkg:pub/flutter_secure_storage_platform_interface@2.0.3",
         "pkg:pub/path@1.9.1",
         "pkg:pub/path_provider@2.1.6",
         "pkg:pub/win32@5.15.0",
@@ -9586,9 +9586,9 @@
       "ref": "pkg:pub/flutter_svg@2.3.0",
       "dependsOn": [
         "pkg:pub/http@1.6.0",
-        "pkg:pub/vector_graphics@1.2.2",
+        "pkg:pub/vector_graphics@1.2.3",
         "pkg:pub/vector_graphics_codec@1.1.13",
-        "pkg:pub/vector_graphics_compiler@1.2.6",
+        "pkg:pub/vector_graphics_compiler@1.3.0",
         "sdk:flutter@0.0.0"
       ]
     },
@@ -9616,7 +9616,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/flutter_webrtc@1.5.2",
+      "ref": "pkg:pub/flutter_webrtc@1.6.0",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
         "pkg:pub/dart_webrtc@1.8.1",
@@ -9742,7 +9742,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/jni@1.0.1",
+      "ref": "pkg:pub/jni@1.0.3",
       "dependsOn": [
         "pkg:pub/args@2.7.0",
         "pkg:pub/collection@1.19.1",
@@ -9755,9 +9755,9 @@
       ]
     },
     {
-      "ref": "pkg:pub/jni_flutter@1.0.1",
+      "ref": "pkg:pub/jni_flutter@1.0.2",
       "dependsOn": [
-        "pkg:pub/jni@1.0.1",
+        "pkg:pub/jni@1.0.3",
         "sdk:flutter@0.0.0"
       ]
     },
@@ -9810,7 +9810,7 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:pub/listen@1.0.0-beta.4",
+      "ref": "pkg:pub/listen@1.0.1",
       "dependsOn": [
         "pkg:pub/meta@1.18.0"
       ]
@@ -9976,8 +9976,8 @@
     {
       "ref": "pkg:pub/path_provider_android@2.3.1",
       "dependsOn": [
-        "pkg:pub/jni@1.0.1",
-        "pkg:pub/jni_flutter@1.0.1",
+        "pkg:pub/jni@1.0.3",
+        "pkg:pub/jni_flutter@1.0.2",
         "pkg:pub/path_provider_platform_interface@2.1.3",
         "sdk:flutter@0.0.0"
       ]
@@ -10169,12 +10169,12 @@
       ]
     },
     {
-      "ref": "pkg:pub/riverpod@3.4.1",
+      "ref": "pkg:pub/riverpod@3.4.2",
       "dependsOn": [
         "pkg:pub/async@2.13.1",
         "pkg:pub/clock@1.1.2",
         "pkg:pub/collection@1.19.1",
-        "pkg:pub/listen@1.0.0-beta.4",
+        "pkg:pub/listen@1.0.1",
         "pkg:pub/meta@1.18.0",
         "pkg:pub/stack_trace@1.12.1",
         "pkg:pub/state_notifier@1.0.0",
@@ -10535,7 +10535,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/vector_graphics@1.2.2",
+      "ref": "pkg:pub/vector_graphics@1.2.3",
       "dependsOn": [
         "pkg:pub/http@1.6.0",
         "pkg:pub/vector_graphics_codec@1.1.13",
@@ -10547,7 +10547,7 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:pub/vector_graphics_compiler@1.2.6",
+      "ref": "pkg:pub/vector_graphics_compiler@1.3.0",
       "dependsOn": [
         "pkg:pub/args@2.7.0",
         "pkg:pub/meta@1.18.0",
