@@ -331,24 +331,39 @@ void main() {
     final dedupeButton = find.text('Duplicaten opruimen');
     expect(dedupeButton, findsOneWidget);
 
-    // De vergelijking (md5) en de mapscan lopen op echte file-IO.
-    await tester.runAsync(() async {
-      await tester.tap(dedupeButton, warnIfMissed: false);
-      await Future<void>.delayed(const Duration(milliseconds: 300));
-    });
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 200));
+    // De vergelijking (md5) en de mapscan lopen op echte file-IO, dus wacht op
+    // de uitkomst (de dialoogknop) in plaats van op de klok — een vaste delay
+    // is onder de volle suite op de CI-runner te krap geweest (zie
+    // test/support/pump_until.dart). pumpUntil doet per stap zelf runAsync.
+    await tester.tap(dedupeButton, warnIfMissed: false);
+    await pumpUntil(
+      tester,
+      () =>
+          find.widgetWithText(ElevatedButton, 'Opruimen').evaluate().isNotEmpty,
+      reason: 'de ontdubbel-dialoog verscheen niet (md5-scan liep nog)',
+    );
     clearLayoutNoise(tester);
 
     // De bevestigingsdialoog verschijnt met de "Opruimen"-knop.
     final confirm = find.widgetWithText(ElevatedButton, 'Opruimen');
     expect(confirm, findsOneWidget);
 
-    await tester.runAsync(() async {
-      await tester.tap(confirm, warnIfMissed: false);
-      await Future<void>.delayed(const Duration(milliseconds: 300));
-    });
-    await settle(tester);
+    // De verwijdering loopt op echte file-IO; wacht op de schijf-uitkomst
+    // (één overgebleven bestand) in plaats van op een gokte delay.
+    await tester.tap(confirm, warnIfMissed: false);
+    await pumpUntil(
+      tester,
+      () =>
+          tempDir
+              .listSync()
+              .whereType<File>()
+              .where((f) => f.path.endsWith('.png'))
+              .length ==
+          1,
+      reason:
+          'de ontdubbeling verwijderde de duplicaten niet (file-IO liep nog)',
+    );
+    clearLayoutNoise(tester);
 
     // Er blijft één bestand op schijf staan; twee kopieën zijn verwijderd.
     final remaining = tempDir
