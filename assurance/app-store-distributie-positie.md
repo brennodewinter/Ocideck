@@ -139,7 +139,7 @@ Twee dingen bewaken we daarbij, zodat het een nevenkanaal blijft en geen slot:
 
 - **De tap is van ons.** De cask-formule leeft in een eigen tap-repo op de
   **eigen forge** (canoniek), met een GitHub-spiegel voor de
-  `brew tap librekat/ocideck`-shorthand. Zo is de bron inspecteerbaar en van ons;
+  `brew tap brennodewinter/ocideck`-shorthand. Zo is de bron inspecteerbaar en van ons;
   de officiële `homebrew-cask` (met eigen reviewers en notability-criteria)
   wordt bewust niet gebruikt.
 - **Homebrew Cask is macOS-only.** Er bestaan geen Linux-casks. Linux krijgt dus
