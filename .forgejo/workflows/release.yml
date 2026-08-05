@@ -234,10 +234,14 @@ jobs:
       # cmake/ninja/pkg-config/libgtk-3-dev zitten er wél al in. `rpm` levert
       # rpmbuild voor het .rpm-pakket (#1227); dpkg-deb voor het .deb zit al in het
       # basissysteem, en appimagetool haalt het pakketscript sha256-geverifieerd op.
+      # `file` lijkt triviaal maar zit niet in het kale ubuntu:24.04-image, en
+      # appimagetool weigert zonder ("file command is missing but required") — dat
+      # brak de eerste Linux-pakketrun (v0.3.3). Zonder deze regel valt de hele
+      # `publiceren`-job weg (die needt `linux`) en verschijnt er geen release.
       - name: Ontbrekende Linux-buildlibs
         run: |
           apt-get update
-          apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev rpm
+          apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev rpm file
 
       - uses: actions/checkout@v4
 
