@@ -174,7 +174,15 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byType(DropdownButton<String>).first);
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Standaard').last);
+    // De menu-items worden in een overlay-route geschilderd waarvan de
+    // geometrie niet overeenkomt met de RenderBox-center die de finder
+    // berekent, dus tap() leidt een offset af die niet op het item hit-test.
+    // De gesture-arena levert de tik toch correct af (zonder dit zou de
+    // assertie hieronder falen: het standaardprofiel is 'LibreKAT', niet
+    // 'Standaard'). warnIfMissed: false stilt de false-positive warning;
+    // dezelfde aanpak gebruiken image_carousel_picker_actions_test en
+    // slide_badge_gestures_test.
+    await tester.tap(find.text('Standaard').last, warnIfMissed: false);
     await tester.pumpAndSettle();
     await tester.tap(find.text('Opslaan'));
     await tester.pumpAndSettle();
