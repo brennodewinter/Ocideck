@@ -22,7 +22,13 @@ extension _MainLayoutMenuCommands on _MainLayoutState {
     // elke frame mee. Alleen het zichtbare tabblad mag de menubalk vullen —
     // anders bedient "Presenteren" een presentatie die niet in beeld staat.
     final notifier = ref.read(deckProvider.notifier);
-    if (!identical(ref.watch(tabsProvider).current?.deckNotifier, notifier)) {
+    // deckNotifierOrNull: is het zichtbare tabblad een document, dan is er geen
+    // deck-notifier om de menubalk voor te vullen (en de compat-getter zou
+    // gooien terwijl een open deck-tab in de IndexedStack elke frame meebouwt).
+    if (!identical(
+      ref.watch(tabsProvider).current?.deckNotifierOrNull,
+      notifier,
+    )) {
       return;
     }
     final next = ShellDeckCommands(

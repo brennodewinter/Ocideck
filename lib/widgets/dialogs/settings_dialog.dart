@@ -283,13 +283,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _configAtOpen[connection.id] = jsonEncode(connection.toJson()['config']);
     }
     _exportDirectory = settings.exportDirectory;
-    // Reflect the profile the open presentation actually uses, falling back to
-    // the globally selected profile when no deck is open.
+    // Profiel van de open presentatie (deckNotifierOrNull: documenttab = geen).
     final deckProfile = ref
         .read(tabsProvider)
         .current
-        ?.deckNotifier
-        .currentState
+        ?.deckNotifierOrNull
+        ?.currentState
         .deck
         ?.themeProfile;
     _themeProfile = deckProfile ?? settings.themeProfile;
@@ -756,7 +755,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     // touched the profile in this session (otherwise we would clobber a
     // per-deck profile the user set elsewhere).
     if (_profileTouched) {
-      ref.read(tabsProvider).current?.deckNotifier.updateThemeProfile(profile);
+      final deckN = ref.read(tabsProvider).current?.deckNotifierOrNull;
+      deckN?.updateThemeProfile(profile); // documenttab: geen deck, geen no-op
     }
 
     // De configuraties zijn hierboven als één lijst weggeschreven; hier blijven

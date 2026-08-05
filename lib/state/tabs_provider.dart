@@ -545,7 +545,12 @@ class TabsNotifier extends StateNotifier<TabsState> {
     String? remoteOrigin,
   }) {
     final current = state.current;
-    if (current != null && !current.isOpen) {
+    // Hergebruik alleen een leeg *presentatie*-tabblad; een leeg documenttabblad
+    // (mogelijk zodra nieuw-document bestaat) is een andere soort en zou op de
+    // compat-getter gooien.
+    if (current != null &&
+        !current.isOpen &&
+        current.deckNotifierOrNull != null) {
       current.deckNotifier.loadDeck(
         deck,
         filePath: filePath,
