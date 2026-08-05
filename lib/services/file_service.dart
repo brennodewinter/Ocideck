@@ -13,6 +13,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart' show rootBundle;
 import '../models/deck.dart';
 import '../l10n/app_localizations.dart';
+import '../models/markdown_document.dart';
 import '../models/settings.dart';
 import '../models/chart.dart';
 import '../models/seal_record.dart';
@@ -607,52 +608,14 @@ class FileService {
     String filePath, {
     String? content,
   }) async {
-    String raw;
-    if (content != null) {
-      // Provided content bypasses the on-disk stat, so apply an equivalent cap.
-      if (_providedContentOverCap(content)) {
-        return const DeckOpenResult.failed(OpenFailure.tooLarge);
-      }
-      raw = content;
-    } else {
-      final file = File(filePath);
-      if (!await file.exists()) {
-        return const DeckOpenResult.failed(OpenFailure.notFound);
-      }
-      // A deck is plain text (images/media are sidecar files), so a huge .md is
-      // pathological. Cap it to avoid loading/parsing an attacker-sized file.
-      try {
-        if (await file.length() > maxDeckMarkdownBytes) {
-          logWarning(
-            'FileService.openDeck: file exceeds ${maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
-          );
-          return const DeckOpenResult.failed(OpenFailure.tooLarge);
-        }
-      } catch (e) {
-        logWarning('FileService.openDeck: cannot stat file', e);
-        return const DeckOpenResult.failed(OpenFailure.unreadable);
-      }
-      try {
-        raw = await file.readAsString();
-      } catch (e) {
-        // Non-UTF8 / unreadable bytes must not crash the open flow.
-        logWarning('FileService.openDeck: file not readable as UTF-8', e);
-        return const DeckOpenResult.failed(OpenFailure.unreadable);
-      }
+    // Cap → exists → UTF-8 read → fail-closed safety scan. Shared verbatim with
+    // the document-open path so both inherit the same order and the same guards
+    // (the scan runs on the exact bytes each path parses next).
+    final read = await _readAndScanMarkdown(filePath, content);
+    if (read.failure != null) {
+      return DeckOpenResult.failed(read.failure!);
     }
-    // Fail-closed: never parse/open a deck that carries executable content.
-    // Scanning `raw` (the very bytes we hand to the parser) closes any
-    // time-of-check/time-of-use gap — the file cannot have changed between the
-    // scan and the parse because both use this one in-memory string.
-    final findings = MarkdownSafetyScanner.scan(raw);
-    if (findings.isNotEmpty) {
-      logWarning(
-        'FileService.openDeck: refused — executable content '
-        '(${findings.length} finding(s))',
-        filePath,
-      );
-      return const DeckOpenResult.failed(OpenFailure.unsafe);
-    }
+    final raw = read.raw!;
     // Only open Marp/OciDeck presentations. Every deck declares `marp: true` in
     // its front matter (the serializer always writes it), so this rejects an
     // arbitrary file picked via the now-unfiltered open dialog — a plain

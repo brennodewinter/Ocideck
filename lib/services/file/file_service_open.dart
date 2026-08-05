@@ -41,6 +41,49 @@ class DeckOpenResult {
       skippedSidecars = const <String>[];
 }
 
+/// Wat [FileServiceDocumentOpen.openDocumentDetailed] oplevert: het geopende
+/// [MarkdownDocument], of de reden van een weigering.
+///
+/// Dezelfde vorm als [DeckOpenResult], maar voor het platte-.md-pad — het loopt
+/// door dezelfde fail-closed poorten (cap, veiligheidsscan) zonder de bron te
+/// deconstrueren tot slides. Geen `warnings`/`skippedSidecars`: die horen bij de
+/// deck-hydratie (grafiekdata, sidecars) die een document nog niet kent.
+class DocumentOpenResult {
+  const DocumentOpenResult({this.document, this.failure});
+
+  /// Het geopende document, of null bij een weigering.
+  final MarkdownDocument? document;
+
+  /// Waarom er geweigerd is, of null wanneer het gelukt is.
+  final OpenFailure? failure;
+
+  /// Een weigering, met de reden.
+  const DocumentOpenResult.failed(OpenFailure reason)
+    : document = null,
+      failure = reason;
+}
+
+extension FileServiceDocumentOpen on FileService {
+  /// Opent een gewoon, doorlopend Markdown-document (geen Marp-deck) als een
+  /// byte-getrouw [MarkdownDocument].
+  ///
+  /// Dezelfde fail-closed poort als [FileService.openDeckDetailed] — grootte-cap,
+  /// UTF-8, veiligheidsscan — maar zónder de `marp: true`-eis en zónder de bron
+  /// te deconstrueren: wat op schijf staat, is wat je bewerkt (zie
+  /// `docs/design/DOCUMENT_MODE.md`). De aanroeper kiest deck of document aan de
+  /// hand van [MarkdownService.sniffFrontmatter]; dit pad opent wat het krijgt.
+  Future<DocumentOpenResult> openDocumentDetailed(
+    String filePath, {
+    String? content,
+  }) async {
+    final read = await _readAndScanMarkdown(filePath, content);
+    if (read.failure != null) {
+      return DocumentOpenResult.failed(read.failure!);
+    }
+    return DocumentOpenResult(document: MarkdownDocument.parse(read.raw!));
+  }
+}
+
 /// True when [content] handed to [FileService.openDeckDetailed] is over the
 /// markdown cap. A UTF-16 code unit is always ≥ 1 UTF-8 byte, so a code-unit
 /// count over the cap guarantees the byte size is over it too — a cheap, O(1)
@@ -52,6 +95,70 @@ bool _providedContentOverCap(String content) {
     '${FileService.maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
   );
   return true;
+}
+
+/// Leest de bytes van een `.md` in en scant ze fail-closed op uitvoerbare
+/// inhoud — de gedeelde poort vóór zowel het deck- als het documentpad.
+///
+/// De volgorde is veiligheidskritisch en identiek voor beide paden: grootte-cap
+/// → bestaan → UTF-8-lees → veiligheidsscan. De scan draait op exact de bytes die
+/// de aanroeper daarna parseert, zodat er geen gat zit tussen controle en gebruik
+/// (een bestand op schijf kan tussen twee lezingen verwisseld worden). Levert de
+/// bron óf de reden van een weigering; nooit allebei.
+///
+/// Top-level en niet op [FileService]: hij raakt geen enkel veld van die klasse
+/// aan, en de klasse zit tegen haar plafond.
+Future<({String? raw, OpenFailure? failure})> _readAndScanMarkdown(
+  String filePath,
+  String? content,
+) async {
+  String raw;
+  if (content != null) {
+    // Provided content bypasses the on-disk stat, so apply an equivalent cap.
+    if (_providedContentOverCap(content)) {
+      return (raw: null, failure: OpenFailure.tooLarge);
+    }
+    raw = content;
+  } else {
+    final file = File(filePath);
+    if (!await file.exists()) {
+      return (raw: null, failure: OpenFailure.notFound);
+    }
+    // Plain text (images/media are sidecar files), so a huge .md is
+    // pathological. Cap it to avoid loading/parsing an attacker-sized file.
+    try {
+      if (await file.length() > FileService.maxDeckMarkdownBytes) {
+        logWarning(
+          'FileService.open: file exceeds '
+          '${FileService.maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
+        );
+        return (raw: null, failure: OpenFailure.tooLarge);
+      }
+    } catch (e) {
+      logWarning('FileService.open: cannot stat file', e);
+      return (raw: null, failure: OpenFailure.unreadable);
+    }
+    try {
+      raw = await file.readAsString();
+    } catch (e) {
+      // Non-UTF8 / unreadable bytes must not crash the open flow.
+      logWarning('FileService.open: file not readable as UTF-8', e);
+      return (raw: null, failure: OpenFailure.unreadable);
+    }
+  }
+  // Fail-closed: never open content that carries executable markup. Scanning
+  // `raw` — the very bytes the caller parses next — closes any
+  // time-of-check/time-of-use gap.
+  final findings = MarkdownSafetyScanner.scan(raw);
+  if (findings.isNotEmpty) {
+    logWarning(
+      'FileService.open: refused — executable content '
+      '(${findings.length} finding(s))',
+      filePath,
+    );
+    return (raw: null, failure: OpenFailure.unsafe);
+  }
+  return (raw: raw, failure: null);
 }
 
 extension _FileServiceOpen on FileService {
