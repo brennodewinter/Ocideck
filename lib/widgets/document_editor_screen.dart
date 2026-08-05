@@ -6,9 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/markdown_outline.dart';
+import '../models/slide.dart';
 import '../services/file_service.dart';
 import '../state/document_provider.dart';
 import '../utils/doc_link.dart' show headingSlug;
+import 'editors/chart_editor.dart';
 import 'reader/document_markdown_view.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
@@ -189,9 +191,54 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         maxTextWidth: 720,
         anchorBlockIndex: _anchorBlockIndex,
         anchorKey: _anchorKey,
+        onEditChart: _editChart,
       ),
     ),
   );
+
+  /// Dubbelklik op een gerenderde grafiek → de volwaardige [ChartEditor] in een
+  /// dialoog (dezelfde editor als een dia, met een wegwerp-[Slide] om zijn bron
+  /// vast te houden). 'Toepassen' schrijft het bewerkte ```chart-blok terug op
+  /// zijn plek in de bron; de weergave hertekent mee. DOCUMENT_MODE.md §4.2.
+  Future<void> _editChart(int chartOrdinal, String block) async {
+    final l10n = context.l10n;
+    var edited = block;
+    final slide = Slide.create(SlideType.chart).copyWith(customMarkdown: block);
+    final apply = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+        content: SizedBox(
+          width: 760,
+          height: 560,
+          child: SingleChildScrollView(
+            child: ChartEditor(
+              slide: slide,
+              themeAnimationDurationMs: 0,
+              nestedInScrollView: true,
+              onUpdate: (s) => edited = s.customMarkdown,
+            ),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(false),
+            child: Text(l10n.d('Annuleren')),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: Text(l10n.d('Toepassen')),
+          ),
+        ],
+      ),
+    );
+    if (apply != true || !mounted) return;
+    final source = ref.read(documentProvider).document?.source ?? '';
+    final next = replaceNthChartBlock(source, chartOrdinal, edited);
+    if (next != source) {
+      ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
+    }
+  }
 
   /// De Overzicht-rail: de koppen van het document, live afgeleid, klikbaar om
   /// naar die kop in de weergave te scrollen. Leeg document → lege rail.
@@ -252,4 +299,29 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       ),
     ),
   );
+}
+
+/// De fence van één ```chart-blok, om de `chartOrdinal`-de (vanaf 0) in de bron
+/// te vinden en te vervangen. Dezelfde vorm als [MarpHtmlService], zodat wat de
+/// weergave telt en wat de editor terugschrijft naar dezelfde blokken wijzen.
+final RegExp _documentChartFence = RegExp(
+  r'```chart[ \t]*\n([\s\S]*?)\n```',
+  multiLine: true,
+);
+
+/// Vervang de inhoud van het `chartOrdinal`-de ```chart-blok (vanaf 0) in
+/// [source] door [newContent] (de kale spec-tekst, zonder fence). Andere blokken
+/// — en alle tekst eromheen — blijven byte-getrouw staan; een `chartOrdinal`
+/// buiten bereik laat de bron ongemoeid. Top-level en puur, zodat de
+/// terugschrijf-logica los toetsbaar is van het editor-scherm.
+String replaceNthChartBlock(
+  String source,
+  int chartOrdinal,
+  String newContent,
+) {
+  var seen = 0;
+  return source.replaceAllMapped(_documentChartFence, (m) {
+    if (seen++ != chartOrdinal) return m.group(0)!;
+    return '```chart\n$newContent\n```';
+  });
 }

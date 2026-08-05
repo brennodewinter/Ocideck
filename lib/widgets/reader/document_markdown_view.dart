@@ -45,6 +45,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.maxTextWidth,
     this.mermaidRenderer,
     this.chartTheme,
+    this.onEditChart,
     this.searchTerm,
     this.activeMatchBlockIndex = -1,
     this.activeMatchKey,
@@ -77,6 +78,12 @@ class DocumentMarkdownView extends StatelessWidget {
   /// standaardkleuren van de grafiek-SVG. Een document heeft geen deck-thema, dus
   /// de aanroeper geeft hier het actieve app-profiel of niets.
   final ThemeProfile? chartTheme;
+
+  /// Aangeroepen bij dubbelklik op een grafiek — alleen in de editor gezet (de
+  /// docs-lezer is alleen-lezen). Geeft het volgnummer van de grafiek (de
+  /// hoeveelheidste ```chart in het document, vanaf 0) en de blokinhoud mee, zodat
+  /// de editor de juiste fence in de bron kan vervangen. `null` → geen bewerking.
+  final void Function(int chartOrdinal, String chartBlock)? onEditChart;
 
   /// Case-insensitive find-in-page term. When non-empty, every block whose text
   /// contains it is tinted. `null`/empty means no search is active and the tree
@@ -121,8 +128,16 @@ class DocumentMarkdownView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (var i = 0; i < blocks.length; i++)
-          _decorated(t, blocks[i], i, term),
+        // `chart` telt alleen de grafiekblokken op, zodat elke grafiek zijn eigen
+        // volgnummer krijgt voor de dubbelklik-bewerking.
+        for (var i = 0, chart = 0; i < blocks.length; i++)
+          _decorated(
+            t,
+            blocks[i],
+            i,
+            term,
+            blocks[i].kind == _Kind.chart ? chart++ : -1,
+          ),
       ],
     );
   }
@@ -132,8 +147,14 @@ class DocumentMarkdownView extends StatelessWidget {
   /// reader can scroll to either. With no term and no anchor the block is
   /// returned untouched, so a non-searching, non-navigating reader gets exactly
   /// the old tree.
-  Widget _decorated(_Theme t, _Block b, int index, String term) {
-    var widget = _buildWidget(t, b);
+  Widget _decorated(
+    _Theme t,
+    _Block b,
+    int index,
+    String term,
+    int chartOrdinal,
+  ) {
+    var widget = _buildWidget(t, b, chartOrdinal);
     // The anchor target carries its own key (one moving key, like the search
     // scroll) so `#anchor` links land on the section.
     if (index == anchorBlockIndex && anchorKey != null) {
@@ -153,14 +174,14 @@ class DocumentMarkdownView extends StatelessWidget {
     );
   }
 
-  Widget _buildWidget(_Theme t, _Block b) => switch (b.kind) {
+  Widget _buildWidget(_Theme t, _Block b, int chartOrdinal) => switch (b.kind) {
     _Kind.heading => _bounded(_heading(t, b.level, b.text)),
     _Kind.paragraph => _bounded(_paragraph(t, b.text)),
     _Kind.list => _bounded(_list(t, b.items)),
     _Kind.quote => _bounded(_blockQuote(t, b.text)),
     _Kind.code => _codeBlock(t, b.text),
     _Kind.mermaid => _mermaid(t, b.text),
-    _Kind.chart => _chart(t, b.text),
+    _Kind.chart => _chart(t, b.text, chartOrdinal),
     _Kind.table => _table(t, b.rows),
     _Kind.rule => _bounded(_rule(t)),
   };
@@ -439,10 +460,10 @@ class DocumentMarkdownView extends StatelessWidget {
   /// als de HTML-export). Draagt het blok geen inline cijfers (bv. een
   /// `source:`-verwijzing die nog niet gehydrateerd is), dan valt het terug op
   /// het codeblok — dan zie je tenminste de bron in plaats van een leeg vlak.
-  Widget _chart(_Theme t, String block) {
+  Widget _chart(_Theme t, String block, int chartOrdinal) {
     final spec = ChartSpec.parse(block);
     if (!spec.hasInlineData) return _codeBlock(t, block);
-    return Container(
+    final chart = Container(
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(10),
@@ -457,6 +478,16 @@ class DocumentMarkdownView extends StatelessWidget {
           MarpHtmlService.chartSpecSvg(spec, chartTheme),
           fit: BoxFit.contain,
         ),
+      ),
+    );
+    final onEdit = onEditChart;
+    if (onEdit == null) return chart;
+    // In de editor: dubbelklik op de grafiek opent de grafiek-editor.
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onDoubleTap: () => onEdit(chartOrdinal, block),
+        child: chart,
       ),
     );
   }
