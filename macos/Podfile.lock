@@ -8,7 +8,7 @@ PODS:
   - flutter_secure_storage_darwin (10.0.0):
     - Flutter
     - FlutterMacOS
-  - flutter_webrtc (1.4.0):
+  - flutter_webrtc (1.6.0):
     - FlutterMacOS
     - WebRTC-SDK (= 144.7559.09)
   - FlutterMacOS (1.0.0)
@@ -98,7 +98,7 @@ SPEC CHECKSUMS:
   desktop_multi_window: 93667594ccc4b88d91a97972fd3b1b89667fa80a
   file_picker: 7584aae6fa07a041af2b36a2655122d42f578c1a
   flutter_secure_storage_darwin: acdb3f316ed05a3e68f856e0353b133eec373a23
-  flutter_webrtc: fec3dc9284a1f6d21ec2caa91c90bb4c1824eb04
+  flutter_webrtc: 7dd2a2ad0e9c96dad0ae96c42d9a7786d96d8be6
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
   package_info_plus: f0052d280d17aa382b932f399edf32507174e870
   pasteboard: b594eaf838d930b276d7a35a44a32b4f489170cb
