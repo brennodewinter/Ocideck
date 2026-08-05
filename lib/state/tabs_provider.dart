@@ -405,40 +405,17 @@ class TabsNotifier extends StateNotifier<TabsState> {
     state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
   }
 
-  /// Open a file picker and load the chosen deck.
-  /// If the current tab is empty, replaces it; otherwise opens a new tab.
+  /// Open een bestandskiezer en laad de keuze.
+  ///
+  /// Loopt door het volledige [openFileByPath]: veiligheidsscan,
+  /// dubbele-open-detectie, grafiekdata-waarschuwingen én de router die een
+  /// niet-marp `.md` als plat document opent i.p.v. het stil te weigeren.
   Future<void> openFile({String? initialDirectory}) async {
     final path = await _file.pickMarkdownFile(
       initialDirectory: initialDirectory,
     );
     if (path == null) return;
-    // Detailed, niet de dunne wrapper: die gooit de grafiekdata-waarschuwingen
-    // weg, en dan opent een deck met een ontbrekend databestand hier met stille
-    // lege plots — precies wat [chartDataWarningProvider] hoort te melden.
-    final outcome = await _file.openDeckDetailed(path);
-    final deck = outcome.deck;
-    if (deck == null) return;
-    if (!mounted) return; // notifier disposed during the await
-    _reportOpenOutcome(_ref, outcome);
-
-    final current = state.current;
-    if (current != null && !current.isOpen) {
-      // Replace the empty current tab
-      current.deckNotifier.loadDeck(deck, filePath: path);
-      current.editorNotifier.select(0);
-      state = state.copyWith(tabs: List.from(state.tabs));
-    } else {
-      // Open in a new tab
-      final tab = _createTab();
-      tab.deckNotifier.loadDeck(deck, filePath: path);
-      final newTabs = [...state.tabs, tab];
-      state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
-    }
-    await _settings.addRecentFile(
-      path,
-      slideCount: deck.slides.length,
-      tlp: deck.tlp,
-    );
+    await openFileByPath(path);
   }
 
   Future<OpenResult> openFileByPath(String path, {int? selectIndex}) async {
