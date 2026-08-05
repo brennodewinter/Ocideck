@@ -56,7 +56,7 @@ The JSON documents carry **733 dependency relations** between these components: 
 | fake_async _(direct dev)_ | 1.3.3 | Apache-2.0 | dart-lang | `pkg:pub/fake_async@1.3.3` |
 | ffi _(transitive)_ | 2.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/ffi@2.2.0` |
 | file _(transitive)_ | 7.0.1 | BSD-3-Clause | dart-lang | `pkg:pub/file@7.0.1` |
-| file_picker _(direct main)_ | 11.0.2 | MIT | miguelpruivo | `pkg:pub/file_picker@11.0.2` |
+| file_picker _(direct main)_ | 11.0.3 | MIT | miguelpruivo | `pkg:pub/file_picker@11.0.3` |
 | file_selector_platform_interface _(transitive)_ | 2.7.0 | BSD-3-Clause | flutter | `pkg:pub/file_selector_platform_interface@2.7.0` |
 | file_selector_windows _(transitive)_ | 0.9.3+5 | BSD-3-Clause | flutter | `pkg:pub/file_selector_windows@0.9.3+5` |
 | fixnum _(transitive)_ | 1.1.1 | BSD-3-Clause | dart-lang | `pkg:pub/fixnum@1.1.1` |
@@ -76,17 +76,17 @@ The JSON documents carry **733 dependency relations** between these components: 
 | flutter_plugin_android_lifecycle _(transitive)_ | 2.0.35 | BSD-3-Clause | flutter | `pkg:pub/flutter_plugin_android_lifecycle@2.0.35` |
 | flutter_quill _(direct main)_ | 11.5.1 | MIT | singerdmx | `pkg:pub/flutter_quill@11.5.1` |
 | flutter_quill_delta_from_html _(transitive)_ | 1.5.3 | MIT | CatHood0 | `pkg:pub/flutter_quill_delta_from_html@1.5.3` |
-| flutter_riverpod _(direct main)_ | 3.4.1 | MIT | rrousselGit | `pkg:pub/flutter_riverpod@3.4.1` |
+| flutter_riverpod _(direct main)_ | 3.4.2 | MIT | rrousselGit | `pkg:pub/flutter_riverpod@3.4.2` |
 | flutter_secure_storage _(direct main)_ | 10.3.1 | BSD-3-Clause | mogol | `pkg:pub/flutter_secure_storage@10.3.1` |
 | flutter_secure_storage_darwin _(transitive)_ | 0.3.2 | BSD-3-Clause | juliansteenbakker | `pkg:pub/flutter_secure_storage_darwin@0.3.2` |
 | flutter_secure_storage_linux _(transitive)_ | 3.0.1 | BSD-3-Clause | mogol | `pkg:pub/flutter_secure_storage_linux@3.0.1` |
-| flutter_secure_storage_platform_interface _(transitive)_ | 2.0.2 | BSD-3-Clause | mogol | `pkg:pub/flutter_secure_storage_platform_interface@2.0.2` |
+| flutter_secure_storage_platform_interface _(transitive)_ | 2.0.3 | BSD-3-Clause | mogol | `pkg:pub/flutter_secure_storage_platform_interface@2.0.3` |
 | flutter_secure_storage_web _(transitive)_ | 2.1.1 | BSD-3-Clause | mogol | `pkg:pub/flutter_secure_storage_web@2.1.1` |
 | flutter_secure_storage_windows _(transitive)_ | 4.1.0 | BSD-3-Clause | mogol | `pkg:pub/flutter_secure_storage_windows@4.1.0` |
 | flutter_svg _(direct main)_ | 2.3.0 | MIT | flutter | `pkg:pub/flutter_svg@2.3.0` |
 | flutter_test _(direct dev)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | flutter_web_plugins _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
-| flutter_webrtc _(direct main)_ | 1.5.2 | MIT | cloudwebrtc | `pkg:pub/flutter_webrtc@1.5.2` |
+| flutter_webrtc _(direct main)_ | 1.6.0 | MIT | cloudwebrtc | `pkg:pub/flutter_webrtc@1.6.0` |
 | frontend_server_client _(transitive)_ | 4.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/frontend_server_client@4.0.0` |
 | fuchsia_remote_debug_protocol _(transitive)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
 | glob _(transitive)_ | 2.1.3 | BSD-3-Clause | dart-lang | `pkg:pub/glob@2.1.3` |
@@ -101,8 +101,8 @@ The JSON documents carry **733 dependency relations** between these components: 
 | intl _(transitive)_ | 0.20.2 | BSD-3-Clause | dart-lang | `pkg:pub/intl@0.20.2` |
 | io _(transitive)_ | 1.0.5 | BSD-3-Clause | dart-lang | `pkg:pub/io@1.0.5` |
 | is_ios_simulator _(transitive)_ | 1.0.1 | MIT | EchoEllet | `pkg:pub/is_ios_simulator@1.0.1` |
-| jni _(transitive)_ | 1.0.1 | BSD-3-Clause | dart-lang | `pkg:pub/jni@1.0.1` |
-| jni_flutter _(transitive)_ | 1.0.1 | BSD-3-Clause | dart-lang | `pkg:pub/jni_flutter@1.0.1` |
+| jni _(transitive)_ | 1.0.3 | BSD-3-Clause | dart-lang | `pkg:pub/jni@1.0.3` |
+| jni_flutter _(transitive)_ | 1.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/jni_flutter@1.0.2` |
 | jni_util _(transitive)_ | 1.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/jni_util@1.0.0` |
 | js _(transitive)_ | 0.7.2 | BSD-3-Clause | dart-lang | `pkg:pub/js@0.7.2` |
 | json_annotation _(transitive)_ | 4.12.0 | BSD-3-Clause | google | `pkg:pub/json_annotation@4.12.0` |
@@ -110,7 +110,7 @@ The JSON documents carry **733 dependency relations** between these components: 
 | leak_tracker_flutter_testing _(transitive)_ | 3.0.10 | BSD-3-Clause | dart-lang | `pkg:pub/leak_tracker_flutter_testing@3.0.10` |
 | leak_tracker_testing _(transitive)_ | 3.0.2 | BSD-3-Clause | dart-lang | `pkg:pub/leak_tracker_testing@3.0.2` |
 | lints _(transitive)_ | 6.1.0 | BSD-3-Clause | dart-lang | `pkg:pub/lints@6.1.0` |
-| listen _(transitive)_ | 1.0.0-beta.4 | BSD-3-Clause | flutter | `pkg:pub/listen@1.0.0-beta.4` |
+| listen _(transitive)_ | 1.0.1 | BSD-3-Clause | flutter | `pkg:pub/listen@1.0.1` |
 | logger _(transitive)_ | 2.7.0 | MIT | SourceHorizon | `pkg:pub/logger@2.7.0` |
 | logging _(transitive)_ | 1.3.0 | BSD-3-Clause | dart-lang | `pkg:pub/logging@1.3.0` |
 | markdown _(direct main)_ | 7.3.1 | BSD-3-Clause | dart-lang | `pkg:pub/markdown@7.3.1` |
@@ -155,7 +155,7 @@ The JSON documents carry **733 dependency relations** between these components: 
 | quill_native_bridge_windows _(transitive)_ | 0.0.2 | MIT | FlutterQuill | `pkg:pub/quill_native_bridge_windows@0.0.2` |
 | quiver _(transitive)_ | 3.2.2 | Apache-2.0 | google | `pkg:pub/quiver@3.2.2` |
 | record_use _(transitive)_ | 0.6.0 | BSD-3-Clause | dart-lang | `pkg:pub/record_use@0.6.0` |
-| riverpod _(transitive)_ | 3.4.1 | MIT | rrousselGit | `pkg:pub/riverpod@3.4.1` |
+| riverpod _(transitive)_ | 3.4.2 | MIT | rrousselGit | `pkg:pub/riverpod@3.4.2` |
 | screen_retriever _(direct main)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever@0.2.2` |
 | screen_retriever_linux _(transitive)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever_linux@0.2.2` |
 | screen_retriever_platform_interface _(transitive)_ | 0.2.2 | MIT | leanflutter | `pkg:pub/screen_retriever_platform_interface@0.2.2` |
@@ -197,9 +197,9 @@ The JSON documents carry **733 dependency relations** between these components: 
 | url_launcher_web _(transitive)_ | 2.4.3 | BSD-3-Clause | flutter | `pkg:pub/url_launcher_web@2.4.3` |
 | url_launcher_windows _(transitive)_ | 3.1.5 | BSD-3-Clause | flutter | `pkg:pub/url_launcher_windows@3.1.5` |
 | uuid _(direct main)_ | 4.6.0 | MIT | Daegalus | `pkg:pub/uuid@4.6.0` |
-| vector_graphics _(transitive)_ | 1.2.2 | BSD-3-Clause | flutter | `pkg:pub/vector_graphics@1.2.2` |
+| vector_graphics _(transitive)_ | 1.2.3 | BSD-3-Clause | flutter | `pkg:pub/vector_graphics@1.2.3` |
 | vector_graphics_codec _(transitive)_ | 1.1.13 | BSD-3-Clause | flutter | `pkg:pub/vector_graphics_codec@1.1.13` |
-| vector_graphics_compiler _(transitive)_ | 1.2.6 | BSD-3-Clause | flutter | `pkg:pub/vector_graphics_compiler@1.2.6` |
+| vector_graphics_compiler _(transitive)_ | 1.3.0 | BSD-3-Clause | flutter | `pkg:pub/vector_graphics_compiler@1.3.0` |
 | vector_math _(transitive)_ | 2.2.0 | BSD-3-Clause | google | `pkg:pub/vector_math@2.2.0` |
 | video_player _(direct main)_ | 2.13.0 | BSD-3-Clause | flutter | `pkg:pub/video_player@2.13.0` |
 | video_player_android _(transitive)_ | 2.12.0 | BSD-3-Clause | flutter | `pkg:pub/video_player_android@2.12.0` |
