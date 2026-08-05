@@ -179,7 +179,9 @@ const Map<String, int> fileSizeBaseline = {
   // een keuze-menublok tijdens presenteren aanklikbaar is.
   // +2 (#1281): twee nieuwe `part`-regels (chart_preview_heatmap /
   // chart_preview_touch) om chart_preview_extra.dart onder de 1000 te houden.
-  'lib/widgets/slides/slide_preview.dart': 1076,
+  // +1 (#1282): `fitScaleOverride` doorgeven aan `_FindingPreview`, zodat de
+  // inhoud-bewuste header-fit te overschrijven is (o.a. voor de kostentoets).
+  'lib/widgets/slides/slide_preview.dart': 1077,
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
   'lib/state/settings_provider.dart': 1057,

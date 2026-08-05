@@ -951,6 +951,7 @@ class SlidePreviewWidget extends StatelessWidget {
       profile: themeProfile,
       scopeCia: scopeCia,
       reportLanguage: reportLanguage,
+      fitScaleOverride: fitScaleOverride,
     ),
     SlideType.checklist => _ChecklistPreview(
       slide: slide,

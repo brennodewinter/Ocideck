@@ -1060,6 +1060,24 @@ that before deciding whether this alpha fits what you are doing.
   bestandsgroottegrens te blijven. Zeven nieuwe hover-tests (eerst-rood) dekken
   alle types; de tooltip hergebruikt bestaande tekst (`Reeks`), dus geen nieuwe
   vertalingen.
+- **Finding-header rendeerde veel te groot (#1282).** Een `finding`-kop met alle
+  identiteitsgegevens (titel, scope, CVSS-kaart, CWE/MASWE/CVE/test-badges) plus een
+  prozasectie tekende op zijn vaste #1163-formaat: onnodig groot, en zodra hij overliep
+  werd het geheel door de `BoxFit.scaleDown` van de steiger verkleind én linksboven
+  geparkeerd (de dia maar deels gebruikt). Er ontbrak de inhoud-bewuste krimpstap die
+  bullets al hadden. Nieuwe top-level meting `findingHeaderFitScale` in
+  `slide_layout_metrics.dart` meet de gepagineerde pagina-inhoud (kaart + de secties van
+  díe pagina) met `TextPainter` tegen de beschikbare dia-hoogte en geeft een
+  type-vermenigvuldiger in `(0, maxScale]` terug: een dichte kop herstroomt naar ~de
+  helft, een schaarse blijft aan de bovengrens (nooit groter dan het #1163-formaat).
+  `_FindingPreview` past die factor toe op zijn corpsgroottes; de paginering blijft
+  ongemoeid (gemeten ná `firstRenderPageSpec`, dus een bevinding die legitiem over twee
+  dia's loopt blijft splitsen). De ongebruikte `fitScaleOverride` op `SlidePreviewWidget`
+  wordt nu ook aan de finding doorgegeven, zodat `finding_header_cost_test.dart` het
+  paginatie-kostenmodel tegen de kaart op ware grootte kan blijven meten. Regressietest
+  `finding_header_autofit_test.dart` toetst tegen een echte render: een dichte F-01-kop
+  past nu op volle breedte binnen de dia en op ~halve grootte (bovengrens, eerst-rood),
+  een schaarse kop blijft aan de bovengrens.
 - **Vertaalde handleiding toonde een Engels mermaid-diagram (#1278).** In de
   Nederlandse gebruikershandleiding stond het stroomschema onder "In het kort
   verplaatst een deck zich als volgt door OciDeck" met Engelse labels. Oorzaak:

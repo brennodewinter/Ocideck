@@ -93,6 +93,11 @@ void main() {
               child: SlidePreviewWidget(
                 slide: slide,
                 themeProfile: ThemeProfile.libreKat,
+                // Measure the card at its natural (#1163) size: the pagination
+                // model this test pins is calibrated to the full-size card, so
+                // bypass the per-page auto-fit (#1282) that would otherwise
+                // shrink a dense header before it is measured.
+                fitScaleOverride: 1.0,
               ),
             ),
           ),
