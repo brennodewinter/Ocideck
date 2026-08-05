@@ -70,6 +70,8 @@ branches enriched the same line and the merge kept both copies.
 - `finding_template.dart` — `FindingTemplate`, a reusable finding starter parsed from Markdown with YAML front matter.
 - `findings_summary_spec.dart` — per-severity findings-summary counts + retest-resolved total + `deckFindingSeverities` / `deckRetestResolvedCount` derivations.
 - `markdown_validation.dart` — `MarkdownValidationResult`/`MarkdownValidationIssue` for linting markdown content.
+- `markdown_document.dart` — `MarkdownDocument`: a flowing Markdown document kept byte-for-byte (`toMarkdown` returns exactly what was read) over the lossless `MarkdownSourceDocument`; the plain-`.md` counterpart to `Deck` for the document mode (docs/design/DOCUMENT_MODE.md).
+- `markdown_kind.dart` — `MarkdownKind` (presentation | document): the file-kind discriminator, derived from the absence of `marp: true` rather than any on-disk marker.
 - `markdown_outline.dart` — Source-preserving heading index with slide, line and byte-offset coordinates; fenced code and front matter do not leak fake headings into the outline.
 - `markdown_source_document.dart` — Lossless Markdown source model: stable slide-block identities, exact source ranges and minimal block replacement without normalising unknown Markdown.
 - `markdown_writing_suggestion.dart` — Fast language-independent writing checks for repeated words, overlong source lines and generated placeholders, excluding fenced code.
