@@ -89,7 +89,7 @@ class _OpenKatServerReportDialogState
               ),
               const SizedBox(height: 12),
             ],
-            Flexible(child: _body(l10n, installations)),
+            _body(l10n, installations),
           ],
         ),
       ),
