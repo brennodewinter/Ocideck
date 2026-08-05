@@ -13,6 +13,7 @@ import '../../services/openkat/openkat_rocky_client.dart';
 import '../../state/openkat_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/atomic_file.dart';
 import '../../widgets/shell/openkat_import_action.dart';
 import 'openkat_installation_wizard.dart';
 
@@ -507,6 +508,7 @@ class _OpenKatServerReportDialogState
   }
 
   Future<void> _pickJsonFile() async {
+    if (!supportsLocalProjectFolders) return;
     final result = await FilePicker.pickFiles(
       type: FileType.custom,
       allowedExtensions: const ['json'],
@@ -519,6 +521,7 @@ class _OpenKatServerReportDialogState
   }
 
   Future<void> _pickFolder() async {
+    if (!supportsLocalProjectFolders) return;
     final dir = await FilePicker.getDirectoryPath(
       dialogTitle: context.l10n.d('Map met OpenKAT-rapportages kiezen'),
       initialDirectory:
@@ -538,7 +541,7 @@ class _OpenKatServerReportDialogState
     setState(() => _importing = true);
     final temp = await Directory.systemTemp.createTemp('ocideck-openkat-');
     final file = File(p.join(temp.path, preferredName));
-    await file.writeAsString(body);
+    await writeStringAtomic(file, body);
     if (!mounted) return;
     Navigator.of(context).pop();
     await importOpenKatReports(context, ref, directoryOverride: temp.path);

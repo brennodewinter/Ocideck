@@ -13,6 +13,8 @@ import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../widgets/dialogs/openkat_report_wizard/openkat_report_wizard.dart';
 import '../../widgets/dialogs/openkat_report_wizard/openkat_wizard_steps.dart';
+import '../../widgets/dialogs/openkat_installation_wizard.dart';
+import '../../widgets/dialogs/openkat_server_report_dialog.dart';
 import 'openkat_import_summary.dart';
 
 /// De ene desktoproute voor menu, welkom en Instellingen.
@@ -124,3 +126,9 @@ bool hasActiveOpenKatReport(WidgetRef ref) {
 String openKatLabel(AppLocalizations l10n, {bool updating = false}) => updating
     ? l10n.d('OpenKAT-rapport bijwerken…')
     : l10n.d('OpenKAT-rapport maken…');
+
+Future<void> showOpenKatInstallationWizard(BuildContext context) =>
+    OpenKatInstallationWizard.show(context);
+
+Future<void> showOpenKatServerReportDialog(BuildContext context) =>
+    OpenKatServerReportDialog.show(context);

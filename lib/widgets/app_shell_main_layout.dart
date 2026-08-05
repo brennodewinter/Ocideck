@@ -423,11 +423,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             case 'import_url':
               _importUrl();
             case 'import_openkat':
-              importOpenKatReports(context, ref);
             case 'openkat_add_server':
-              OpenKatInstallationWizard.show(context);
             case 'openkat_server_report':
-              OpenKatServerReportDialog.show(context);
+              dispatchOpenKatShellAction(context, ref, v);
             case 'import_presentation':
               importPresentation(context, ref);
             case 'find':
@@ -878,19 +876,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   }
 
   Future<void> _importUrl() => _importFromUrl(context, ref);
-
-  PopupMenuItem<String> _menuItem(String value, IconData icon, String label) {
-    return PopupMenuItem<String>(
-      value: value,
-      child: Row(
-        children: [
-          Icon(icon, size: 16, color: AppTheme.slate600),
-          const SizedBox(width: 10),
-          Flexible(child: Text(label, overflow: TextOverflow.ellipsis)),
-        ],
-      ),
-    );
-  }
 }
 
 /// Of exporteren nu kan, plus de tooltip die uitlegt waarom (niet).

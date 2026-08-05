@@ -7,6 +7,7 @@ import '../../../services/openkat/openkat_error_messages.dart';
 import '../../../services/openkat/openkat_rocky_client.dart';
 import '../../../state/openkat_provider.dart';
 import '../../../theme/app_theme.dart';
+import '../../../utils/log.dart';
 import '../openkat_installation_wizard.dart';
 import '../openkat_server_report_dialog.dart';
 
@@ -223,7 +224,8 @@ class _InstallationCardState extends ConsumerState<_InstallationCard> {
         id: installation.id,
         status: OpenKatInstallationStatus.connected,
       );
-    } catch (_) {
+    } on Object catch (e, st) {
+      logError('OpenKatInstallationsSection._test', e, st);
       await notifier.markInstallationChecked(
         id: installation.id,
         status: OpenKatInstallationStatus.failed,

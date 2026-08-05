@@ -127,36 +127,9 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         ),
       ...provenanceSignCommands(ref, l10n, deck, _signProvenance),
       ...collabPaletteCommands(context, ref, l10n),
-      ..._openKatPaletteCommands(l10n),
+      ...openKatPaletteCommands(context, ref, l10n),
     ];
     CommandPalette.show(context, commands);
-  }
-
-  /// OpenKAT-acties: alleen wanneer de integratie zichtbaar is (aan of inhoud).
-  List<PaletteCommand> _openKatPaletteCommands(AppLocalizations l10n) {
-    final revealed = ref.read(openKatIntegrationRevealProvider);
-    final desktop = supportsLocalProjectFolders;
-    if (!revealed || !desktop) return const [];
-    return [
-      PaletteCommand(
-        label: openKatLabel(l10n, updating: hasActiveOpenKatReport(ref)),
-        icon: Icons.radar_outlined,
-        keywords: const ['openkat', 'import', 'rapport', 'map'],
-        onInvoke: () => importOpenKatReports(context, ref),
-      ),
-      PaletteCommand(
-        label: l10n.d('OpenKAT-server toevoegen…'),
-        icon: Icons.add_link,
-        keywords: const ['openkat', 'server', 'installatie', 'rocky'],
-        onInvoke: () => OpenKatInstallationWizard.show(context),
-      ),
-      PaletteCommand(
-        label: l10n.d('Rapportage van OpenKAT-server…'),
-        icon: Icons.cloud_download_outlined,
-        keywords: const ['openkat', 'server', 'rapportage', 'live'],
-        onInvoke: () => OpenKatServerReportDialog.show(context),
-      ),
-    ];
   }
 
   /// De handelingen die het vaakst gezocht worden en tot nu toe alleen als
@@ -648,4 +621,82 @@ void _listenChartDataWarning(BuildContext context, WidgetRef ref) {
       ),
     );
   });
+}
+
+/// OpenKAT-menu-items voor het …-menu. Top-level zodat `_MainLayoutState`
+/// onder het klasseplafond blijft.
+List<PopupMenuEntry<String>> openKatShellMenuEntries(
+  WidgetRef ref,
+  AppLocalizations l10n,
+  PopupMenuItem<String> Function(String, IconData, String) menuItem,
+) {
+  if (!supportsLocalProjectFolders ||
+      !ref.watch(openKatIntegrationRevealProvider)) {
+    return const [];
+  }
+  return [
+    menuItem(
+      'import_openkat',
+      Icons.radar_outlined,
+      openKatLabel(l10n, updating: hasActiveOpenKatReport(ref)),
+    ),
+    menuItem(
+      'openkat_add_server',
+      Icons.add_link,
+      l10n.d('OpenKAT-server toevoegen…'),
+    ),
+    menuItem(
+      'openkat_server_report',
+      Icons.cloud_download_outlined,
+      l10n.d('Rapportage van OpenKAT-server…'),
+    ),
+  ];
+}
+
+/// OpenKAT-acties in het commandopalet; zelfde reveal- en desktop-poort als het menu.
+List<PaletteCommand> openKatPaletteCommands(
+  BuildContext context,
+  WidgetRef ref,
+  AppLocalizations l10n,
+) {
+  if (!ref.read(openKatIntegrationRevealProvider) ||
+      !supportsLocalProjectFolders) {
+    return const [];
+  }
+  return [
+    PaletteCommand(
+      label: openKatLabel(l10n, updating: hasActiveOpenKatReport(ref)),
+      icon: Icons.radar_outlined,
+      keywords: const ['openkat', 'import', 'rapport', 'map'],
+      onInvoke: () => importOpenKatReports(context, ref),
+    ),
+    PaletteCommand(
+      label: l10n.d('OpenKAT-server toevoegen…'),
+      icon: Icons.add_link,
+      keywords: const ['openkat', 'server', 'installatie', 'rocky'],
+      onInvoke: () => showOpenKatInstallationWizard(context),
+    ),
+    PaletteCommand(
+      label: l10n.d('Rapportage van OpenKAT-server…'),
+      icon: Icons.cloud_download_outlined,
+      keywords: const ['openkat', 'server', 'rapportage', 'live'],
+      onInvoke: () => showOpenKatServerReportDialog(context),
+    ),
+  ];
+}
+
+/// Eén dispatch voor alle OpenKAT-menu-acties.
+Future<void> dispatchOpenKatShellAction(
+  BuildContext context,
+  WidgetRef ref,
+  String action,
+) async {
+  switch (action) {
+    case 'import_openkat':
+      await importOpenKatReports(context, ref);
+    case 'openkat_add_server':
+      await showOpenKatInstallationWizard(context);
+    case 'openkat_server_report':
+      await showOpenKatServerReportDialog(context);
+  }
 }

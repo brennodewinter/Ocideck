@@ -23,3 +23,7 @@ String openKatLabel(AppLocalizations l10n, {bool updating = false}) => '';
 bool isOpenKatGeneratedDeck(Deck deck) => false;
 
 bool hasActiveOpenKatReport(WidgetRef ref) => false;
+
+Future<void> showOpenKatInstallationWizard(BuildContext context) async {}
+
+Future<void> showOpenKatServerReportDialog(BuildContext context) async {}
