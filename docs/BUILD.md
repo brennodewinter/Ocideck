@@ -639,7 +639,7 @@ the `v0.2.1-rc1` rehearsal (#1170, #1172).
 ### Homebrew cask (macOS)
 
 Each non-prerelease tag also updates a Homebrew **cask**, so macOS users can
-`brew install --cask librekat/ocideck/ocideck`. The cask is only a pointer: it
+`brew install --cask brennodewinter/ocideck/ocideck`. The cask is only a pointer: it
 carries the release's download URL and the SHA-256 read straight from the
 published `SHA256SUMS`, so `brew` fetches our own artifact and verifies it. It is
 **macOS-only** — Homebrew Cask has no Linux equivalent; a Linux install path is
@@ -652,11 +652,11 @@ tracked separately (#1227).
   GitHub `release.yml` deliberately has **no** such job — it would double-push.
 - **Tap topology.** The tap lives on our own forge as the canonical repo,
   **mirrored to GitHub** (a Forgejo push-mirror on the tap repo) so the
-  `brew tap librekat/ocideck` shorthand — which resolves to
-  `github.com/LibreKAT/homebrew-ocideck` — keeps working.
+  `brew tap brennodewinter/ocideck` shorthand — which resolves to
+  `github.com/brennodewinter/homebrew-ocideck` — keeps working.
 - **One-time setup.** Create the tap repo `homebrew-ocideck` on the forge with a
   top-level `Casks/` directory; add a GitHub push-mirror to
-  `LibreKAT/homebrew-ocideck`. Then set two repo secrets on the OciDeck repo:
+  `brennodewinter/homebrew-ocideck`. Then set two repo secrets on the OciDeck repo:
   `HOMEBREW_TAP_REPOSITORY` (`LibreKAT/homebrew-ocideck`) and `HOMEBREW_TAP_TOKEN`
   (a forge token with `write:repository` on the tap). Absent either, the job
   checks that up front and skips everything — no tooling or checkout is set up —
