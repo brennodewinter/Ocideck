@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../services/file_service.dart';
 import '../state/document_provider.dart';
 import 'reader/document_markdown_view.dart';
 
@@ -39,6 +43,20 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     super.dispose();
   }
 
+  /// Sla het document byte-getrouw op naar zijn eigen pad. Cmd/Ctrl+S, net als
+  /// een deck. Feedback is de dirty-stip op het tabblad die verdwijnt — geen
+  /// aparte melding nodig. Een nog niet opgeslagen document (geen pad) kan pas
+  /// worden bewaard zodra 'Opslaan als…' er is; tot dan is dit een no-op.
+  Future<void> _save() async {
+    final state = ref.read(documentProvider);
+    final path = state.filePath;
+    final document = state.document;
+    if (path == null || document == null || !state.isDirty) return;
+    if (await saveDocument(document, path) && mounted) {
+      ref.read(documentProvider.notifier).markSaved(filePath: path);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Wanneer de bron van búiten de editor verandert (ongedaan maken/opnieuw),
@@ -59,31 +77,40 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       documentProvider.select((s) => s.document?.source ?? ''),
     );
     final theme = Theme.of(context);
-    return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final divider = theme.colorScheme.outlineVariant;
-          final editor = _editor(theme);
-          final preview = _preview(theme, source);
-          // Naast elkaar op een breed venster; onder elkaar wanneer het te smal
-          // wordt voor twee leesbare kolommen.
-          if (constraints.maxWidth < 760) {
-            return Column(
+    return CallbackShortcuts(
+      bindings: {
+        // Cmd op macOS, Ctrl elders — net als het opslaan van een deck.
+        const SingleActivator(LogicalKeyboardKey.keyS, meta: true): () =>
+            unawaited(_save()),
+        const SingleActivator(LogicalKeyboardKey.keyS, control: true): () =>
+            unawaited(_save()),
+      },
+      child: Scaffold(
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            final divider = theme.colorScheme.outlineVariant;
+            final editor = _editor(theme);
+            final preview = _preview(theme, source);
+            // Naast elkaar op een breed venster; onder elkaar wanneer het te smal
+            // wordt voor twee leesbare kolommen.
+            if (constraints.maxWidth < 760) {
+              return Column(
+                children: [
+                  Expanded(child: editor),
+                  Divider(height: 1, thickness: 1, color: divider),
+                  Expanded(child: preview),
+                ],
+              );
+            }
+            return Row(
               children: [
                 Expanded(child: editor),
-                Divider(height: 1, thickness: 1, color: divider),
+                VerticalDivider(width: 1, thickness: 1, color: divider),
                 Expanded(child: preview),
               ],
             );
-          }
-          return Row(
-            children: [
-              Expanded(child: editor),
-              VerticalDivider(width: 1, thickness: 1, color: divider),
-              Expanded(child: preview),
-            ],
-          );
-        },
+          },
+        ),
       ),
     );
   }
