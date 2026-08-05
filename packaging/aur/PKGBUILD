@@ -1,0 +1,59 @@
+# Maintainer: Stichting LibreKAT <security@librekat.nl>
+#
+# AUR package `ocideck-bin`: installs the official OciDeck release tarball on
+# Arch/Manjaro. Part of the Linux install route (issue #1227). It points at our
+# own forge release and verifies it against the checksum the release publishes —
+# no re-hosting, no gatekeeper. `pkgver` and `sha256sums` are filled per release
+# by scripts/update_aur_pkgbuild.sh; publishing to the AUR is a maintainer step
+# (see docs/BUILD.md, "AUR package").
+pkgname=ocideck-bin
+pkgver=0.0.0
+pkgrel=1
+pkgdesc="Presentation tool where the content, not the canvas, is the document (Marp Markdown)"
+arch=('x86_64')
+url="https://pawprint.vigilis.online/LibreKAT/Ocideck"
+license=('EUPL-1.2')
+depends=('gtk3' 'libsecret' 'xz' 'hicolor-icon-theme')
+provides=('ocideck')
+conflicts=('ocideck')
+# The payload is a prebuilt Flutter bundle: no debug symbols to keep, and its
+# bundled .so files must not be stripped or the app fails to start.
+options=('!strip' '!debug')
+source=("ocideck-${pkgver}.tar.gz::https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/download/v${pkgver}/ocideck-linux-x64-${pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+package() {
+  # The tarball unpacks to a single ocideck-<version>/ directory (the release
+  # renames the bundle root); install it whole under /usr/lib.
+  install -d "${pkgdir}/usr/lib/ocideck"
+  cp -a "${srcdir}/ocideck-${pkgver}/." "${pkgdir}/usr/lib/ocideck/"
+
+  install -d "${pkgdir}/usr/bin"
+  cat > "${pkgdir}/usr/bin/ocideck" <<'EOF'
+#!/bin/sh
+exec /usr/lib/ocideck/ocideck "$@"
+EOF
+  chmod 0755 "${pkgdir}/usr/bin/ocideck"
+
+  # Desktop entry mirrors packaging/linux/com.dewinter.ocideck.desktop; the icon
+  # ships inside the bundle (data/icons/app_icon.png, 512px).
+  install -d "${pkgdir}/usr/share/applications"
+  cat > "${pkgdir}/usr/share/applications/com.dewinter.ocideck.desktop" <<'EOF'
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=OciDeck
+GenericName=Presentation Editor
+Comment=Write presentations in Marp Markdown, where the content is the document
+Exec=ocideck
+Icon=com.dewinter.ocideck
+Terminal=false
+Categories=Office;Presentation;
+Keywords=presentation;slides;markdown;marp;deck;
+StartupNotify=true
+StartupWMClass=ocideck
+EOF
+
+  install -Dm0644 "${srcdir}/ocideck-${pkgver}/data/icons/app_icon.png" \
+    "${pkgdir}/usr/share/icons/hicolor/512x512/apps/com.dewinter.ocideck.png"
+}
