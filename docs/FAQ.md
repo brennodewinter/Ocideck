@@ -180,6 +180,25 @@ Desktop version:
 - Minimum RAM: 4GB (recommended 8GB+)
 - Disk space: Minimum required for application + projects
 
+### How do I install OciDeck on macOS with Homebrew?
+If you use [Homebrew](https://brew.sh/), install OciDeck on macOS with a single
+command:
+
+```sh
+brew install --cask brennodewinter/ocideck/ocideck
+```
+
+Homebrew fetches the latest release straight from our own forge and verifies the
+checksum automatically. The macOS build is signed with an Apple Developer ID and
+notarised, so it opens with an ordinary double-click. Update later with
+`brew upgrade --cask ocideck`.
+
+The cask is only a pointer to that same signed, notarised release — Homebrew does
+not host the app, and no extra intermediary is involved. Homebrew Cask is
+macOS-only; on Windows and Linux, download OciDeck directly from the
+[releases page](https://pawprint.vigilis.online/LibreKAT/Ocideck/releases). See
+[BUILD.md](BUILD.md#homebrew-cask-macos) for how the cask is built and published.
+
 ## Performance and Optimization
 
 ### Why is my presentation slow to render?

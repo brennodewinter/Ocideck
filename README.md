@@ -122,9 +122,20 @@ so they cost the ordinary user nothing.
 **Download OciDeck** for macOS, Windows, Linux or the web from the
 [releases page](https://pawprint.vigilis.online/LibreKAT/Ocideck/releases). Every
 release carries the app for all four platforms, both SBOM formats and a
-`SHA256SUMS` to verify what you downloaded. The binaries are unsigned, so macOS
-and Windows will warn on first launch — the release notes explain how to open
-them on each platform.
+`SHA256SUMS` to verify what you downloaded. The macOS build is signed and
+notarised and opens normally; the Windows and Linux binaries are unsigned, so
+they warn on first launch — the release notes explain how to open them on each
+platform.
+
+On macOS you can also install with [Homebrew](https://brew.sh/):
+
+```sh
+brew install --cask brennodewinter/ocideck/ocideck
+```
+
+Homebrew fetches the latest release from our own forge and verifies its checksum;
+update later with `brew upgrade --cask ocideck`. The cask is only a pointer to the
+same signed, notarised release — see [BUILD.md](docs/BUILD.md#homebrew-cask-macos).
 
 Or build and run from source:
 
@@ -347,3 +358,8 @@ maintained* in [`docs/README.md`](docs/README.md).
   1,300 characters each, and gave the optional MIAUW module the same weight as
   the editor itself. It is now eight lines plus a modules section, with the
   detail in the User Guide.
+- **2026-08-05, macOS signing.** *Getting started* said "the binaries are
+  unsigned, so macOS and Windows will warn on first launch". The macOS build is
+  signed with an Apple Developer ID and notarised and opens normally; only the
+  Windows and Linux binaries are unsigned. The same section now also documents
+  the Homebrew cask.
