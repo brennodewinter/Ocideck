@@ -19,10 +19,7 @@ void main() {
     await tester.pump();
 
     // De rauwe editor draagt de bron letterlijk.
-    expect(
-      find.widgetWithText(TextField, '# Kop\n\nTekst.'),
-      findsOneWidget,
-    );
+    expect(find.widgetWithText(TextField, '# Kop\n\nTekst.'), findsOneWidget);
     // De weergave rendert dezelfde bron (robuust op de prop, niet op glyphs).
     final view = tester.widget<DocumentMarkdownView>(
       find.byType(DocumentMarkdownView),
