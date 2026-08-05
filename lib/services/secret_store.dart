@@ -516,6 +516,45 @@ class SecretStore {
     }
   }
 
+  /// Keychain-sleutel voor het OpenKAT (Rocky) API-token van installatie [id].
+  /// Gekeyd op de stabiele installatie-id — niet op de URL — zodat een
+  /// URL-wijziging bij bewerken niet stilletjes een tweede token-entry maakt
+  /// en het oude token achterlaat.
+  static String openKatTokenKey(String installationId) =>
+      'openkat_token::${installationId.trim()}';
+
+  Future<void> writeOpenKatToken(String installationId, String token) async {
+    _requireStorage('writeOpenKatToken');
+    try {
+      await _storage.write(
+        key: openKatTokenKey(installationId),
+        value: token,
+      );
+    } catch (e) {
+      logError('SecretStore.writeOpenKatToken: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  Future<String?> readOpenKatToken(String installationId) async {
+    if (!_canStore) return null;
+    try {
+      return await _storage.read(key: openKatTokenKey(installationId));
+    } catch (e) {
+      logError('SecretStore.readOpenKatToken: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteOpenKatToken(String installationId) async {
+    if (!_canStore) return;
+    try {
+      await _storage.delete(key: openKatTokenKey(installationId));
+    } catch (e) {
+      logWarning('SecretStore.deleteOpenKatToken: keychain delete failed', e);
+    }
+  }
+
   /// Keychain-sleutel voor "je eigen gegevens" van de privacycontrole.
   ///
   /// Eén entry, want het gaat over de gebruiker van deze installatie en niet
