@@ -40,7 +40,10 @@ Widget _appWithSecrets(SecretStore secrets, Widget child) {
 
 Future<void> _goToStep1(WidgetTester tester) async {
   await tester.enterText(find.byType(TextField).first, 'Productie');
-  await tester.enterText(find.byType(TextField).at(1), 'https://openkat.example');
+  await tester.enterText(
+    find.byType(TextField).at(1),
+    'https://openkat.example',
+  );
   await tester.tap(find.text('Volgende'));
   await tester.pumpAndSettle();
 }
@@ -125,7 +128,10 @@ void main() {
 
     await tester.tap(find.text('Volgende'));
     await tester.pumpAndSettle();
-    expect(find.text('Laat leeg om het opgeslagen token te behouden'), findsOneWidget);
+    expect(
+      find.text('Laat leeg om het opgeslagen token te behouden'),
+      findsOneWidget,
+    );
 
     await tester.tap(find.text('Volgende'));
     await tester.pumpAndSettle();
@@ -134,7 +140,9 @@ void main() {
     expect(find.text('Terug'), findsOneWidget);
   });
 
-  testWidgets('bewerken zonder opgeslagen token blokkeert stap 2', (tester) async {
+  testWidgets('bewerken zonder opgeslagen token blokkeert stap 2', (
+    tester,
+  ) async {
     final existing = OpenKatInstallation.create(
       name: 'Leeg',
       baseUrl: 'https://leeg.example',

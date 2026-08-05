@@ -40,15 +40,11 @@ void main() {
 
     test('timeout en netwerk', () {
       expect(
-        openKatErrorMessage(
-          const OpenKatRequestException('timeout'),
-        ).source,
+        openKatErrorMessage(const OpenKatRequestException('timeout')).source,
         contains('niet op tijd'),
       );
       expect(
-        openKatErrorMessage(
-          const OpenKatRequestException('network'),
-        ).source,
+        openKatErrorMessage(const OpenKatRequestException('network')).source,
         contains('mislukt'),
       );
     });
