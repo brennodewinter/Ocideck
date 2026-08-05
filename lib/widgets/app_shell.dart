@@ -118,6 +118,8 @@ import 'dialogs/import_security_alarm_dialog.dart';
 import 'dialogs/new_deck_dialog.dart';
 import 'dialogs/improvement_project_setup_dialog.dart';
 import 'dialogs/open_presentation_dialog.dart';
+import 'dialogs/openkat_installation_wizard.dart';
+import 'dialogs/openkat_server_report_dialog.dart';
 import 'dialogs/matrix_collab_dialogs.dart';
 import 'dialogs/package_encrypt_dialog.dart';
 import 'dialogs/package_password_dialog.dart';

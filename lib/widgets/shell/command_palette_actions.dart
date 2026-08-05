@@ -127,8 +127,36 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         ),
       ...provenanceSignCommands(ref, l10n, deck, _signProvenance),
       ...collabPaletteCommands(context, ref, l10n),
+      ..._openKatPaletteCommands(l10n),
     ];
     CommandPalette.show(context, commands);
+  }
+
+  /// OpenKAT-acties: alleen wanneer de integratie zichtbaar is (aan of inhoud).
+  List<PaletteCommand> _openKatPaletteCommands(AppLocalizations l10n) {
+    final revealed = ref.read(openKatIntegrationRevealProvider);
+    final desktop = supportsLocalProjectFolders;
+    if (!revealed || !desktop) return const [];
+    return [
+      PaletteCommand(
+        label: openKatLabel(l10n, updating: hasActiveOpenKatReport(ref)),
+        icon: Icons.radar_outlined,
+        keywords: const ['openkat', 'import', 'rapport', 'map'],
+        onInvoke: () => importOpenKatReports(context, ref),
+      ),
+      PaletteCommand(
+        label: l10n.d('OpenKAT-server toevoegen…'),
+        icon: Icons.add_link,
+        keywords: const ['openkat', 'server', 'installatie', 'rocky'],
+        onInvoke: () => OpenKatInstallationWizard.show(context),
+      ),
+      PaletteCommand(
+        label: l10n.d('Rapportage van OpenKAT-server…'),
+        icon: Icons.cloud_download_outlined,
+        keywords: const ['openkat', 'server', 'rapportage', 'live'],
+        onInvoke: () => OpenKatServerReportDialog.show(context),
+      ),
+    ];
   }
 
   /// De handelingen die het vaakst gezocht worden en tot nu toe alleen als

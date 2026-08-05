@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../../platform/platform_features.dart';
 import '../../../state/integration_registry.dart';
 import '../../../state/openkat_provider.dart';
 import '../../../theme/app_theme.dart';
@@ -120,6 +121,7 @@ class _IntegrationCard extends ConsumerWidget {
     final l10n = context.l10n;
     final enabled = ref.watch(entry.enabled);
     final revealed = ref.watch(entry.revealed);
+    final web = isWebPlatform;
     return Material(
       color: AppTheme.paper,
       clipBehavior: Clip.antiAlias,
@@ -131,8 +133,8 @@ class _IntegrationCard extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SwitchListTile(
-            value: enabled,
-            onChanged: (v) => entry.setEnabled(ref, v),
+            value: !web && enabled,
+            onChanged: web ? null : (v) => entry.setEnabled(ref, v),
             title: Text(
               _title(l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
@@ -143,12 +145,12 @@ class _IntegrationCard extends ConsumerWidget {
             ),
             secondary: _logo(),
           ),
-          if (revealed)
+          if (!web && revealed)
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
               child: _body(),
             )
-          else if (_hasContent(ref))
+          else if (!web && _hasContent(ref))
             // Uit, maar er is al inhoud: de vaste regel van dit project in beeld.
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
@@ -170,15 +172,22 @@ class _IntegrationCard extends ConsumerWidget {
     IntegrationId.openKat => l10n.d('OpenKAT'),
   };
 
-  String _subtitle(AppLocalizations l10n) => switch (entry.id) {
-    IntegrationId.openKat => l10n.d(
-      'Lees rapportagemappen van OpenKAT in als één managementoverzicht.',
-    ),
-  };
+  String _subtitle(AppLocalizations l10n) {
+    if (isWebPlatform) {
+      return l10n.d(
+        'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.',
+      );
+    }
+    return switch (entry.id) {
+      IntegrationId.openKat => l10n.d(
+        'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.',
+      ),
+    };
+  }
 
   String _contentNote(AppLocalizations l10n) => switch (entry.id) {
     IntegrationId.openKat => l10n.d(
-      'Er staat al een rapportagemap ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.',
+      'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.',
     ),
   };
 

@@ -69,8 +69,9 @@ final List<IntegrationEntry> integrationRegistry = [
   ),
 ];
 
-/// De integraties die dít platform kan gebruiken. Op web valt OpenKAT weg en is
-/// de lijst leeg — dan hoort het tabblad Integraties er niet te zijn.
+/// De integraties die dít platform kan gebruiken. OpenKAT staat altijd in het
+/// register (op web met nette disabled-staat); een lege lijst zou het tabblad
+/// Integraties verbergen.
 final availableIntegrationsProvider = Provider<List<IntegrationEntry>>((ref) {
   return [
     for (final entry in integrationRegistry)

@@ -153,10 +153,8 @@ extension _SettingsSearch on _SettingsDialogState {
     // Uit het formulier, net als de zijbalk: zet je de module aan en zoek je
     // meteen daarna, dan hoort de backend-instelling al vindbaar te zijn.
     final aiRevealed = _ai.revealsTab;
-    // Integraties bestaat zodra dit platform een koppeling kan gebruiken (sinds
-    // #1158 leeft de schakelaar per integratie óp dat tabblad; zie
-    // SettingsSection.navItems). Op web valt de enige integratie (OpenKAT) weg
-    // en verdwijnt het tabblad, dus dan hoort "openkat" niet als treffer terug.
+    // Integraties bestaat zodra dit platform een koppeling kan gebruiken
+    // (OpenKAT is altijd in het register; op web zichtbaar maar uitgeschakeld).
     final integrationsRevealed = ref.watch(anyIntegrationAvailableProvider);
 
     final scored = <({int score, SettingsSearchEntry entry})>[];
