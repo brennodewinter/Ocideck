@@ -144,6 +144,25 @@ class TabInfo {
     DeckTabContent() => null,
   };
 
+  /// De deck-notifier, of `null` voor een documenttabblad. Voor tab-brede lussen
+  /// (geheugensweep, autosave) die over álle tabbladen lopen en niet mogen
+  /// omvallen zodra er een documenttabblad tussen zit — anders dan [deckNotifier],
+  /// dat bewust gooit op deck-only paden.
+  DeckNotifier? get deckNotifierOrNull => switch (content) {
+    DeckTabContent(:final deckNotifier) => deckNotifier,
+    DocumentTabContent() => null,
+  };
+
+  /// Het bestandspad van dit tabblad, ongeacht de soort, of `null` als het niet
+  /// (meer) is opgeslagen of de notifier al is opgeruimd. Voor soort-agnostische
+  /// tab-logica zoals dubbele-open-detectie.
+  String? get openFilePath => switch (content) {
+    DeckTabContent(:final deckNotifier) =>
+      deckNotifier.mounted ? deckNotifier.currentState.filePath : null,
+    DocumentTabContent(:final documentNotifier) =>
+      documentNotifier.mounted ? documentNotifier.currentState.filePath : null,
+  };
+
   String get label => switch (content) {
     DeckTabContent(:final deckNotifier) => _deckTabLabel(deckNotifier),
     DocumentTabContent(:final documentNotifier) => _documentTabLabel(

@@ -128,8 +128,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (WebAssetStore.isEmpty) return;
     final live = <String>{};
     for (final tab in state.tabs) {
-      if (!tab.deckNotifier.mounted) continue;
-      tab.deckNotifier.collectLiveMemoryAssetPaths(live);
+      // Documenttabbladen kennen (nog) geen mem:-assets; hun bron is één string.
+      final dn = tab.deckNotifierOrNull;
+      if (dn == null || !dn.mounted) continue;
+      dn.collectLiveMemoryAssetPaths(live);
     }
     final clipboard = _ref.read(slideClipboardProvider);
     if (clipboard != null) addSlideMemoryAssetPaths(clipboard, live);
@@ -231,16 +233,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
     return tab;
   }
 
-  /// Niet-toegepaste bron die afwijkt van het laatste geldige deck.
-  String? _markdownDraftFor(TabInfo tab) {
-    if (!tab.deckNotifier.mounted) return null;
-    final deckState = tab.deckNotifier.currentState;
-    final deck = deckState.deck;
-    if (!deckState.isOpen || deck == null) return null;
-    final editor = tab.editorNotifier.currentState;
-    return editor.hasMarkdownDraft ? editor.markdownBuffer : null;
-  }
-
   /// Bewaar elk niet-opgeslagen tabblad naar zijn herstelbestand.
   void _autosaveTick() {
     if (!mounted) return;
@@ -251,9 +243,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
     unawaited(_recovery.pruneIfDue());
     for (final tab in state.tabs) {
       // Zie TabInfo.label: een tab kan kortstondig een al-gedisposede
-      // notifier dragen; die heeft niets meer te autosaven.
-      if (!tab.deckNotifier.mounted) continue;
-      final st = tab.deckNotifier.currentState;
+      // notifier dragen; die heeft niets meer te autosaven. Documenttabbladen
+      // krijgen hun eigen herstelpad later; nu slaan we ze over.
+      final dn = tab.deckNotifierOrNull;
+      if (dn == null || !dn.mounted) continue;
+      final st = dn.currentState;
       if (st.isOpen) {
         final deck = st.deck!;
         final editor = tab.editorNotifier.currentState;
@@ -269,7 +263,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
             savedAt: DateTime.now(),
             filePath: st.filePath,
             label: tab.label,
-            markdown: tab.deckNotifier.generateMarkdown(),
+            markdown: dn.generateMarkdown(),
             markdownDraft: markdownDraft,
             markdownDraftScope: markdownDraft == null
                 ? null
@@ -557,9 +551,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
   int? _indexOfOpenPath(String path) {
     final target = p.canonicalize(path);
     for (var i = 0; i < state.tabs.length; i++) {
-      final tab = state.tabs[i];
-      if (!tab.deckNotifier.mounted) continue;
-      final open = tab.deckNotifier.currentState.filePath;
+      // Soort-agnostisch: een al open document telt net zo goed mee als een deck.
+      final open = state.tabs[i].openFilePath;
       if (open != null && open.isNotEmpty && p.canonicalize(open) == target) {
         return i;
       }
@@ -791,6 +784,20 @@ final openFailureProvider = StateProvider<OpenFailure?>((ref) => null);
 /// [TabsNotifier] omdat die klasse tegen haar plafond zit — en omdat dit geen
 /// state is maar een notitie erover; [alive] draagt de `mounted`-controle mee,
 /// want na dispose is er geen container meer om in te schrijven.
+/// Niet-toegepaste bron die afwijkt van het laatste geldige deck. Alleen voor
+/// presentatietabbladen: een document kent geen aparte, ongetoepaste bron — het
+/// bewerkt zijn bron live. Top-level (raakt geen [TabsNotifier]-veld) om de
+/// klassenratchet niet te tarten.
+String? _markdownDraftFor(TabInfo tab) {
+  final dn = tab.deckNotifierOrNull;
+  if (dn == null || !dn.mounted) return null;
+  final deckState = dn.currentState;
+  final deck = deckState.deck;
+  if (!deckState.isOpen || deck == null) return null;
+  final editor = tab.editorNotifier.currentState;
+  return editor.hasMarkdownDraft ? editor.markdownBuffer : null;
+}
+
 OpenResult _failOpen(Ref ref, bool alive, OpenFailure reason) {
   if (alive) ref.read(openFailureProvider.notifier).state = reason;
   return OpenResult.unreadable;
