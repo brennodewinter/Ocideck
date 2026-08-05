@@ -314,11 +314,6 @@ EdgeInsets _bulletsPadding({
   );
 }
 
-EdgeInsets _splitTextLogoSafeInsets(double w, ThemeProfile profile) {
-  final (top, bottom) = logoSafeReserveEdges(w, profile, splitText: true);
-  return EdgeInsets.only(top: top, bottom: bottom);
-}
-
 /// Renders a visual approximation of a Marp slide inside a 16:9 container.
 /// All font sizes and paddings are proportional to the widget width so the
 /// same widget works both as the full preview pane and as a tiny thumbnail.

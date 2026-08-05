@@ -22,8 +22,8 @@ void main() {
   const darkBlue = '#003366';
   const lightBlue = '#6699CC';
 
-  ThemeProfile theme({String titleText = lightBlue}) => const ThemeProfile()
-      .copyWith(
+  ThemeProfile theme({String titleText = lightBlue}) =>
+      const ThemeProfile().copyWith(
         titleTextColor: titleText,
         titleBackgroundColor: darkBlue,
         sectionBackgroundColor: darkBlue,
@@ -108,14 +108,12 @@ void main() {
   test('een goed leesbare ondertitel waarschuwt niet', () {
     final result = analyzer.analyzeSlides(
       slides: [
-        Slide.create(SlideType.section).copyWith(
-          title: 'Deel 2',
-          subtitle: 'Prima leesbaar',
-        ),
-        Slide.create(SlideType.title).copyWith(
-          title: 'Welkom',
-          subtitle: 'Ook prima',
-        ),
+        Slide.create(
+          SlideType.section,
+        ).copyWith(title: 'Deel 2', subtitle: 'Prima leesbaar'),
+        Slide.create(
+          SlideType.title,
+        ).copyWith(title: 'Welkom', subtitle: 'Ook prima'),
       ],
       // Witte tekst op donkerblauw: ruim voldoende, ook op 0.72 dekking.
       theme: theme(titleText: '#FFFFFF'),
