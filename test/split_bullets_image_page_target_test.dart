@@ -2,13 +2,11 @@ import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/bullet_pagination.dart';
-import 'package:ocideck/services/split_run.dart';
 import 'package:ocideck/utils/bullet_fixes.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
@@ -89,10 +87,9 @@ void main() {
     });
 
     test('een checklist naast een afbeelding schaalt haar ruimere optimum', () {
-      final slide = bulletsImage(
-        [for (var i = 0; i < 14; i++) '[ ] Taak nummer $i om af te vinken'],
-        listStyle: ListStyle.checklist,
-      );
+      final slide = bulletsImage([
+        for (var i = 0; i < 14; i++) '[ ] Taak nummer $i om af te vinken',
+      ], listStyle: ListStyle.checklist);
       expect(pageSizes(slide), [7, 7]);
     });
 
