@@ -14,7 +14,8 @@
 #   macos    → .app als zip (op de Mac-runner)
 #   windows  → opgehaald van de spiegel
 #   publiceren → een Forgejo-release met alles eraan, plus SBOM en SHA256SUMS
-#   website  → de downloads op librekat.nl bijgewerkt naar deze release
+#   website  → de download-verwijzingen in de website-repo bijgewerkt; die repo
+#              zet zichzelf live met een eigen deploy-workflow
 #
 # Ondertekening: de macOS-app wordt op de Mac-runner getekend en genotariseerd
 # (Developer ID + notarytool; zie de macos-job en docs/BUILD.md), mits het
@@ -647,18 +648,26 @@ jobs:
 
   website-downloads:
     name: Website-downloads bijwerken
-    # Op de aangemelde Mac (mac-brenno): die heeft hugo, de deploy-SSH-sleutel en
-    # SSH-toegang tot de website-repo. Draait ná 'publiceren', want het
-    # bump-script haalt de verificatiehash en de datum uit de zojuist
-    # gepubliceerde release. Geen prereleases (zoals deploy-web) — een -rc zet de
-    # productiesite niet live. Faalt deze job, dan is de release al gepubliceerd:
-    # de website valt terug op de handmatige route (scripts/bump-ocideck.sh +
-    # ./publiceersite in de website-repo).
+    # Op de aangemelde Mac (mac-brenno): die heeft SSH-toegang tot de website-repo
+    # en de tooling van het bump-script. Draait ná 'publiceren', want het
+    # bump-script haalt de verificatiehash en de datum uit de zojuist gepubliceerde
+    # release. Geen prereleases (zoals deploy-web) — een -rc raakt de productiesite
+    # niet.
+    #
+    # Deze job werkt alléén de website-repository bij: bump -> commit -> push. Het
+    # live zetten is bewust níet meer de taak van de releaseketen. De website-repo
+    # publiceert zichzelf, met een eigen deploy-workflow die op elke push naar main
+    # `./publiceersite` draait (.forgejo/workflows/deploy.yml in die repo). Zo reikt
+    # de release niet meer rechtstreeks naar de productieserver — hij levert een
+    # commit aan, de website-repo zet live. Faalt deze job, dan is de release al
+    # gepubliceerd en valt de website terug op de handmatige route
+    # (scripts/bump-ocideck.sh + commit + push in de website-repo; de
+    # deploy-workflow zet daarna live).
     needs: publiceren
     if: ${{ !contains(github.ref_name, '-') }}
     runs-on: macos
     steps:
-      - name: Website naar deze release bijwerken en live zetten
+      - name: Website-repo naar deze release bijwerken
         run: |
           set -Eeuo pipefail
           export GIT_SSH_COMMAND="ssh -o BatchMode=yes -o IdentitiesOnly=yes -i $HOME/.ssh/id_rsa"
@@ -670,9 +679,9 @@ jobs:
           git config user.email "release@librekat.nl"
           scripts/bump-ocideck.sh "$VERSIE"
           if git diff --quiet; then
-            echo "Website staat al op $VERSIE — niets te publiceren."
+            echo "Website staat al op $VERSIE — niets te pushen."
             exit 0
           fi
           git commit -aqm "OciDeck $VERSIE: downloads bijwerken (automatisch bij release)"
           git push origin main
-          ./publiceersite
+          echo "Website-repo bijgewerkt naar $VERSIE — de deploy-workflow van die repo zet het live."
