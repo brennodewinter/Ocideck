@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ocideck/app.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
@@ -87,4 +88,39 @@ void main() {
     expect(tab.isDirty, isFalse);
     expect(tab.label, 'Nieuw');
   });
+
+  // Regression voor #1251: het tab-opschrift zonder deck volgt de actieve
+  // interfacetaal, niet een hardcoded Nederlands label. De oude code schreef
+  // `const AppLocalizations(Locale('nl')).d('Nieuw')` — de `Locale('nl')` is een
+  // misleidend handvat, want `d()` leest de statisch gezette taal. Dat heeft
+  // de indruk gewekt dat het label in elke taal Nederlands was, terwijl het
+  // al meebewoog sinds #576. Deze test bewijst het meebewegen en bewaakt het.
+  test(
+    'TabInfo.label voor een leeg tab volgt de actieve interfacetaal (#1251)',
+    () {
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      final notifier = DeckNotifier(
+        container.read(markdownServiceProvider),
+        container.read(fileServiceProvider),
+      );
+      notifier.newDeck('Test');
+      final tab = TabInfo(
+        id: 1,
+        recoveryId: 'r1',
+        deckNotifier: notifier,
+        editorNotifier: EditorNotifier(),
+      );
+      notifier.dispose();
+
+      AppLocalizations.setActiveLanguageCode('en');
+      expect(tab.label, 'New');
+      AppLocalizations.setActiveLanguageCode('de');
+      expect(tab.label, 'Neu');
+      AppLocalizations.setActiveLanguageCode('fy');
+      expect(tab.label, 'Nij');
+
+      addTearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
+    },
+  );
 }
