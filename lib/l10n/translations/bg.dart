@@ -1793,6 +1793,94 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT върна неочакван отговор ({code}). Опитайте по-късно или поискайте помощ от администратора.',
+  'Vanuit een OpenKAT-server': 'От OpenKAT сървър',
+  'Vanuit een map': 'От папка',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Свържете една или повече OpenKAT среди (напр. продуктивна и приемателна). OciDeck показва наличните доклади; съдържанието внасяте чрез JSON експорт от OpenKAT.',
+  'Server toevoegen…': 'Добави сървър…',
+  'Rapportage van server…': 'Доклад от сървър…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'Все още няма свързан OpenKAT сървър.',
+  'Bezig…': 'Изпълнява се…',
+  'OpenKAT-server bewerken': 'Редактирай OpenKAT сървър',
+  'OpenKAT-server toevoegen': 'Добави OpenKAT сървър',
+  'OpenKAT-server toevoegen…': 'Добави OpenKAT сървър…',
+  'OpenKAT-server verwijderen?': 'Премахване на OpenKAT сървър?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Това премахва “{name}” и съответния токен за достъп от това устройство. Не може да бъде отменено.',
+  'Weergavenaam': 'Показвано име',
+  'Bijvoorbeeld Productie of Acceptatie': 'Напр. Продуктивна или Приемателна',
+  'Adres van OpenKAT': 'Адрес на OpenKAT',
+  'Verbinding met: {host}': 'Връзка с: {host}',
+  'Eigen netwerk (LAN)': 'Локална мрежа (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Само за OpenKAT в локалната мрежа. Позволява HTTP и частни адреси. Изключено: само HTTPS.',
+  'Toegangstoken': 'Токен за достъп',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Оставете празно, за да запазите запазения токен',
+  'Plak het token hier': 'Поставете токена тук',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Поискайте от администратора на OpenKAT API токен в административния екран. Токенът остава на това устройство, в keychain на ОС — не в deck.',
+  'Verbinding wordt getest…': 'Тестване на връзката…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Тествайте връзката преди запазване, за да сте сигурни, че името, адресът и токенът са верни.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'OpenKAT връзката е налична само в desktop версията.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Внасяйте OpenKAT доклади като един управленски преглед — от папка или сървър.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Вече е настроен OpenKAT източник; връзката остава достъпна, за да актуализирате съществуващ deck OpenKAT.',
+  'Rapportage van OpenKAT-server': 'Доклад от OpenKAT сървър',
+  'Rapportage van OpenKAT-server…': 'Доклад от OpenKAT сървър…',
+  'Server: {name}': 'Сървър: {name}',
+  'Organisaties worden opgehaald…': 'Извличане на организации…',
+  'Rapportages worden opgehaald…': 'Извличане на доклади…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Няма видими организации за този токен. Поискайте достъп от администратора или изберете друг сървър.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'На този сървър няма готови организационни доклади. Първо създайте агрегиран организационен доклад в OpenKAT или изберете друга организация.',
+  'JSON-export uit OpenKAT': 'JSON експорт от OpenKAT',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT предоставя съдържанието на доклада като JSON файл. Експортирайте избрания доклад като JSON в OpenKAT и посочете тук този файл или папка.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Избрано: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Избор на JSON файл…',
+  'Map met exports kiezen…': 'Избор на папка с експорти…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Въведете показвано име, напр. Продуктивна.',
+  'Vul een weergavenaam en een adres in.': 'Въведете показвано име и адрес.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Поставете токен за достъп, за да продължите.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Въведете адрес, напр. https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Този адрес не е валиден. Проверете дали сте въвели пълен URL.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'Адресът трябва да започва с https:// или включете Локална мрежа за HTTP в локалната мрежа.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Свързано с {host}. Няма видими организации за този токен.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Свързано с {host}. Достъпни организации: {n}.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Връзката с OpenKAT не успя. Проверете адреса и мрежата и опитайте отново.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Липсва токен за достъп. Поставете токена от администратора и опитайте отново.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Разрешен е само HTTPS, освен ако Локална мрежа е включена.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT отхвърли токена. Поискайте валиден API токен от администратора и го поставете отново.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT не отговори навреме. Проверете дали сървърът е достъпен и опитайте отново.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Този адрес не е достъпен. Проверете правописа на хоста и дали сте в правилната мрежа.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT върна неочаквано голям отговор. Опитайте по-късно или поискайте помощ от администратора.',
+  'Verbonden': 'Свързано',
+  'Token ontbreekt': 'Липсва токен',
+  'Laatst gecontroleerd mislukt': 'Последната проверка не успя',
+  'Nog niet gecontroleerd': 'Все още не е проверено',
   'Zoekveld wissen': 'Изчисти полето за търсене',
   'Gantt': 'Gantt',
   'Dag': 'Ден',

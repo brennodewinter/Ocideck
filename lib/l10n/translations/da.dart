@@ -1770,6 +1770,95 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT returnerede et uventet svar ({code}). Prøv igen senere, eller bed din administrator om hjælp.',
+  'Vanuit een OpenKAT-server': 'Fra en OpenKAT-server',
+  'Vanuit een map': 'Fra en mappe',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Tilslut et eller flere OpenKAT-miljøer (f.eks. produktion og accept). OciDeck viser tilgængelige rapporter; indholdet hentes via et JSON-eksport fra OpenKAT.',
+  'Server toevoegen…': 'Tilføj server…',
+  'Rapportage van server…': 'Rapport fra server…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'Ingen OpenKAT-server tilsluttet endnu.',
+  'Bezig…': 'Arbejder…',
+  'OpenKAT-server bewerken': 'Rediger OpenKAT-server',
+  'OpenKAT-server toevoegen': 'Tilføj OpenKAT-server',
+  'OpenKAT-server toevoegen…': 'Tilføj OpenKAT-server…',
+  'OpenKAT-server verwijderen?': 'Fjern OpenKAT-server?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Dette fjerner “{name}” og det tilhørende adgangstoken fra denne enhed. Det kan ikke fortrydes.',
+  'Weergavenaam': 'Visningsnavn',
+  'Bijvoorbeeld Productie of Acceptatie': 'F.eks. Produktion eller Accept',
+  'Adres van OpenKAT': 'OpenKAT-adresse',
+  'Verbinding met: {host}': 'Forbindelse til: {host}',
+  'Eigen netwerk (LAN)': 'Lokalt netværk (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Kun til OpenKAT på det lokale netværk. Tillader HTTP og private adresser. Fra: kun HTTPS.',
+  'Toegangstoken': 'Adgangstoken',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Lad stå tom for at beholde det gemte token',
+  'Plak het token hier': 'Indsæt token her',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Bed din OpenKAT-administrator om et API-token i admin-skærmen. Tokenet bliver på denne enhed, i operativsystemets nøglering — ikke i decket.',
+  'Verbinding wordt getest…': 'Tester forbindelse…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Test forbindelsen før du gemmer, så du ved at navn, adresse og token er korrekte.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'OpenKAT-forbindelsen er kun tilgængelig i desktopversionen.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Indlæs OpenKAT-rapporter som ét managementoverblik — fra en mappe eller en server.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Der er allerede konfigureret en OpenKAT-kilde; forbindelsen forbliver tilgængelig, så et eksisterende OpenKAT-deck kan opdateres.',
+  'Rapportage van OpenKAT-server': 'Rapport fra OpenKAT-server',
+  'Rapportage van OpenKAT-server…': 'Rapport fra OpenKAT-server…',
+  'Server: {name}': 'Server: {name}',
+  'Organisaties worden opgehaald…': 'Henter organisationer…',
+  'Rapportages worden opgehaald…': 'Henter rapporter…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Ingen organisationer er synlige for dette token. Bed din administrator om adgang, eller vælg en anden server.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'Der er ingen organisationsrapporter klar på denne server. Opret først en samlet organisationsrapport i OpenKAT, eller vælg en anden organisation.',
+  'JSON-export uit OpenKAT': 'JSON-eksport fra OpenKAT',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT leverer rapportindholdet som JSON-fil. Eksporter den valgte rapport som JSON i OpenKAT, og peg på den fil eller mappe her.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Valgt: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Vælg JSON-fil…',
+  'Map met exports kiezen…': 'Vælg eksportmappe…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Indtast et visningsnavn, f.eks. Produktion.',
+  'Vul een weergavenaam en een adres in.':
+      'Indtast et visningsnavn og en adresse.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Indsæt et adgangstoken for at fortsætte.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Indtast en adresse, f.eks. https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Denne adresse er ikke gyldig. Kontroller, at du har indtastet en fuld URL.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'Adressen skal starte med https://, eller slå Lokalt netværk til for HTTP på det lokale netværk.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Forbundet til {host}. Ingen organisationer er synlige for dette token endnu.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Forbundet til {host}. {n} organisation(er) tilgængelige.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Forbindelsen til OpenKAT mislykkedes. Kontroller adressen og dit netværk, og prøv igen.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Intet adgangstoken. Indsæt tokenet fra din administrator, og prøv igen.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Kun HTTPS er tilladt, medmindre Lokalt netværk er slået til.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT afviste tokenet. Bed din administrator om et gyldigt API-token, og indsæt det igen.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT svarede ikke i tide. Kontroller at serveren er tilgængelig, og prøv igen.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Denne adresse er ikke tilgængelig. Kontroller stavningen af værtsnavnet og at du er på det rigtige netværk.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT returnerede et uventet stort svar. Prøv igen senere, eller bed din administrator om hjælp.',
+  'Verbonden': 'Forbundet',
+  'Token ontbreekt': 'Token mangler',
+  'Laatst gecontroleerd mislukt': 'Seneste kontrol mislykkedes',
+  'Nog niet gecontroleerd': 'Endnu ikke kontrolleret',
   'Zoekveld wissen': 'Ryd søgefelt',
   'Gantt': 'Gantt',
   'Dag': 'Dag',

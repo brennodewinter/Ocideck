@@ -1771,6 +1771,94 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT mengembalikan respons tak terduga ({code}). Coba lagi nanti atau minta bantuan administrator.',
+  'Vanuit een OpenKAT-server': 'Dari server OpenKAT',
+  'Vanuit een map': 'Dari folder',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Hubungkan satu atau lebih lingkungan OpenKAT (misalnya produksi dan staging). OciDeck menampilkan laporan yang tersedia; impor konten melalui ekspor JSON dari OpenKAT.',
+  'Server toevoegen…': 'Tambah server…',
+  'Rapportage van server…': 'Laporan dari server…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'Belum ada server OpenKAT yang terhubung.',
+  'Bezig…': 'Sedang berlangsung…',
+  'OpenKAT-server bewerken': 'Edit server OpenKAT',
+  'OpenKAT-server toevoegen': 'Tambah server OpenKAT',
+  'OpenKAT-server toevoegen…': 'Tambah server OpenKAT…',
+  'OpenKAT-server verwijderen?': 'Hapus server OpenKAT?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Ini menghapus “{name}” dan token aksesnya dari perangkat ini. Anda tidak dapat membatalkannya.',
+  'Weergavenaam': 'Nama tampilan',
+  'Bijvoorbeeld Productie of Acceptatie': 'Misalnya Produksi atau Staging',
+  'Adres van OpenKAT': 'Alamat OpenKAT',
+  'Verbinding met: {host}': 'Menghubungkan ke: {host}',
+  'Eigen netwerk (LAN)': 'Jaringan lokal (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Hanya untuk OpenKAT di jaringan lokal. Mengizinkan HTTP dan alamat privat. Nonaktif: hanya HTTPS.',
+  'Toegangstoken': 'Token akses',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Kosongkan untuk mempertahankan token tersimpan',
+  'Plak het token hier': 'Tempel token di sini',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Minta administrator OpenKAT Anda token API di layar admin. Token tetap di perangkat ini, di keychain sistem operasi — bukan di deck.',
+  'Verbinding wordt getest…': 'Menguji koneksi…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Uji koneksi sebelum menyimpan, agar Anda yakin nama, alamat, dan token benar.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'Koneksi OpenKAT hanya tersedia di versi desktop.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Impor laporan OpenKAT sebagai satu ikhtisar manajemen — dari folder atau server.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Sumber OpenKAT sudah dikonfigurasi; koneksi tetap tersedia agar deck OpenKAT yang ada bisa diperbarui.',
+  'Rapportage van OpenKAT-server': 'Laporan dari server OpenKAT',
+  'Rapportage van OpenKAT-server…': 'Laporan dari server OpenKAT…',
+  'Server: {name}': 'Server: {name}',
+  'Organisaties worden opgehaald…': 'Mengambil organisasi…',
+  'Rapportages worden opgehaald…': 'Mengambil laporan…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Tidak ada organisasi yang terlihat untuk token ini. Minta akses ke administrator, atau pilih server lain.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'Tidak ada laporan organisasi siap di server ini. Buat laporan organisasi agregat di OpenKAT terlebih dahulu, atau pilih organisasi lain.',
+  'JSON-export uit OpenKAT': 'Ekspor JSON dari OpenKAT',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT menyediakan konten laporan sebagai file JSON. Ekspor laporan yang dipilih sebagai JSON di OpenKAT, lalu arahkan ke file atau folder itu di sini.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Dipilih: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Pilih file JSON…',
+  'Map met exports kiezen…': 'Pilih folder ekspor…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Masukkan nama tampilan, misalnya Produksi.',
+  'Vul een weergavenaam en een adres in.': 'Masukkan nama tampilan dan alamat.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Tempel token akses untuk melanjutkan.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Masukkan alamat, misalnya https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Alamat ini tidak valid. Periksa apakah Anda memasukkan URL lengkap.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'Alamat harus diawali https://, atau aktifkan Jaringan lokal untuk HTTP di jaringan lokal.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Terhubung ke {host}. Belum ada organisasi yang terlihat untuk token ini.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Terhubung ke {host}. {n} organisasi dapat dijangkau.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Koneksi ke OpenKAT gagal. Periksa alamat dan jaringan Anda, lalu coba lagi.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Tidak ada token akses. Tempel token dari administrator Anda dan coba lagi.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Hanya HTTPS yang diizinkan kecuali Jaringan lokal aktif.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT menolak token. Minta token API yang valid ke administrator dan tempel lagi.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT tidak merespons tepat waktu. Periksa apakah server dapat dijangkau dan coba lagi.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Alamat ini tidak dapat dijangkau. Periksa ejaan hostname dan apakah Anda berada di jaringan yang benar.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT mengembalikan respons yang terlalu besar. Coba lagi nanti atau minta bantuan administrator.',
+  'Verbonden': 'Terhubung',
+  'Token ontbreekt': 'Token hilang',
+  'Laatst gecontroleerd mislukt': 'Pemeriksaan terakhir gagal',
+  'Nog niet gecontroleerd': 'Belum diperiksa',
   'Zoekveld wissen': 'Hapus bidang pencarian',
   'Gantt': 'Gantt',
   'Dag': 'Hari',

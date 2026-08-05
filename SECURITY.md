@@ -346,6 +346,17 @@ OciDeck constrains what an opened deck can do:
   to catch pathologically deep or large documents from a hostile or
   misconfigured server. Fail-closed: a parse error or limit breach produces an
   empty result (no slides), not a crash or partial data.
+- **OpenKAT live connection — read-only metadata via Rocky REST, same
+  resolve-and-pin.** Optional integration (off by default). Multiple Rocky
+  installations can be stored (display name, base URL, LAN opt-in in prefs);
+  the API token lives in the OS keychain (`SecretStore`, keyed by installation
+  id), never in prefs, Markdown, or logs. Calls are GET-only against
+  `/api/v1/organization/` and `/api/v1/report/`; NetGuard resolve (or
+  `safeResolveTrusted` with **Eigen netwerk**), socket pin, no redirects, body
+  cap 20 MiB. Desktop-only for secrets. Full report JSON is not assumed from
+  REST in v1 — the UI guides a Rocky JSON export into the existing folder
+  import pipeline (fail-closed: auth failure does not half-import a deck). An
+  optional `…/report/{pk}/json/` probe is ready if upstream adds it.
 - **Symlink containment.** Both the copy-to-clipboard sink
   (`resolveContainedRealPath`) and the render/export path (`isRenderPathContained`,
   cached so the per-frame cost is O(1)) resolve the real (symlink-followed)

@@ -118,6 +118,9 @@ void main() {
     // LibrePlan-connector (desktop): één gepinde client op de server-origin,
     // safeResolve(Trusted) + connectPinned + geen redirects + bytecap.
     'lib/services/libreplan/libreplan_client.dart': 1,
+    // OpenKAT Rocky-client (desktop): één gepinde client op de server-origin,
+    // safeResolve(Trusted) + connectPinned + geen redirects + bytecap.
+    'lib/services/openkat/openkat_rocky_client.dart': 1,
   };
 
   test('media fetch sinks stay behind the NetGuard resolve gate', () {
@@ -192,6 +195,11 @@ void main() {
         // + bytecap. GET-only, Basic Auth. De enige uitgaande socket van
         // lib/services/libreplan/.
         'lib/services/libreplan/libreplan_client.dart',
+        // OpenKAT Rocky-client (desktop): safeResolve(Trusted) met de
+        // trustedInternal-opt-in van de installatie + socket-pin + geen
+        // redirects + bytecap. GET-only, Knox Token-auth. De enige uitgaande
+        // socket van de live OpenKAT-koppeling.
+        'lib/services/openkat/openkat_rocky_client.dart',
       },
       guidance:
           'New raw HttpClient. Resolve the host through NetGuard.safeResolve '

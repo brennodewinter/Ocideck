@@ -1775,6 +1775,95 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'Az OpenKAT váratlan választ adott ({code}). Próbálja később újra, vagy kérjen segítséget az adminisztrátortól.',
+  'Vanuit een OpenKAT-server': 'OpenKAT szerverről',
+  'Vanuit een map': 'Mappából',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Csatlakoztasson egy vagy több OpenKAT környezetet (például éles és elfogadó). Az OciDeck a rendelkezésre álló jelentéseket mutatja; a tartalmat JSON exportból importálja OpenKAT-ból.',
+  'Server toevoegen…': 'Szerver hozzáadása…',
+  'Rapportage van server…': 'Jelentés a szerverről…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'Még nincs OpenKAT szerver csatlakoztatva.',
+  'Bezig…': 'Folyamatban…',
+  'OpenKAT-server bewerken': 'OpenKAT szerver szerkesztése',
+  'OpenKAT-server toevoegen': 'OpenKAT szerver hozzáadása',
+  'OpenKAT-server toevoegen…': 'OpenKAT szerver hozzáadása…',
+  'OpenKAT-server verwijderen?': 'OpenKAT szerver eltávolítása?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Ez eltávolítja a(z) “{name}” szervert és a hozzá tartozó hozzáférési tokent erről az eszközről. Ezt nem lehet visszavonni.',
+  'Weergavenaam': 'Megjelenített név',
+  'Bijvoorbeeld Productie of Acceptatie': 'Például Éles vagy Elfogadó',
+  'Adres van OpenKAT': 'OpenKAT cím',
+  'Verbinding met: {host}': 'Kapcsolat: {host}',
+  'Eigen netwerk (LAN)': 'Saját hálózat (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Csak helyi hálózaton lévő OpenKAT-hoz. Engedélyezi a HTTP-t és a privát címeket. Ki: csak HTTPS.',
+  'Toegangstoken': 'Hozzáférési token',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Hagyja üresen a mentett token megtartásához',
+  'Plak het token hier': 'Illessze be a tokent ide',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Kérjen API tokent OpenKAT adminisztrátorától az admin felületen. A token ezen az eszközön marad, az operációs rendszer kulcstartójában — nem a deckben.',
+  'Verbinding wordt getest…': 'Kapcsolat tesztelése…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Mentés előtt tesztelje a kapcsolatot, hogy a név, cím és token helyes legyen.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'Az OpenKAT kapcsolat csak az asztali verzióban érhető el.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Importálja az OpenKAT jelentéseket egyetlen vezetői áttekintésként — mappából vagy szerverről.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'OpenKAT forrás már be van állítva; a kapcsolat elérhető marad a meglévő OpenKAT deck frissítéséhez.',
+  'Rapportage van OpenKAT-server': 'Jelentés OpenKAT szerverről',
+  'Rapportage van OpenKAT-server…': 'Jelentés OpenKAT szerverről…',
+  'Server: {name}': 'Szerver: {name}',
+  'Organisaties worden opgehaald…': 'Szervezetek lekérése…',
+  'Rapportages worden opgehaald…': 'Jelentések lekérése…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Ehhez a tokenhez nem látható szervezet. Kérjen hozzáférést az adminisztrátortól, vagy válasszon másik szervert.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'Ezen a szerveren nincs kész szervezeti jelentés. Először hozzon létre összesített szervezeti jelentést OpenKAT-ban, vagy válasszon másik szervezetet.',
+  'JSON-export uit OpenKAT': 'JSON export OpenKAT-ból',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'Az OpenKAT a jelentés tartalmát JSON fájlként adja. Exportálja a kiválasztott jelentést JSON-ként OpenKAT-ban, majd itt mutasson a fájlra vagy mappára.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Kiválasztva: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'JSON fájl kiválasztása…',
+  'Map met exports kiezen…': 'Export mappa kiválasztása…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Adjon meg megjelenített nevet, például Éles.',
+  'Vul een weergavenaam en een adres in.':
+      'Adjon meg megjelenített nevet és címet.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Illessze be a hozzáférési tokent a folytatáshoz.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Adjon meg címet, például https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Ez a cím érvénytelen. Ellenőrizze, hogy teljes URL-t adott-e meg.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'A címnek https://-vel kell kezdődnie, vagy kapcsolja be a Saját hálózatot HTTP-hez a helyi hálózaton.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Kapcsolódva: {host}. Ehhez a tokenhez nem látható szervezet.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Kapcsolódva: {host}. Elérhető szervezetek: {n}.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Az OpenKAT kapcsolat sikertelen. Ellenőrizze a címet és a hálózatot, majd próbálja újra.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Nincs hozzáférési token. Illessze be az adminisztrátor tokenjét és próbálja újra.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Csak HTTPS engedélyezett, kivéve ha a Saját hálózat be van kapcsolva.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'Az OpenKAT elutasította a tokent. Kérjen érvényes API tokent az adminisztrátortól és illessze be újra.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'Az OpenKAT nem válaszolt időben. Ellenőrizze, hogy a szerver elérhető-e, majd próbálja újra.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Ez a cím nem elérhető. Ellenőrizze a gazdanév helyesírását és a megfelelő hálózatot.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'Az OpenKAT váratlanul nagy választ adott. Próbálja később újra, vagy kérjen segítséget az adminisztrátortól.',
+  'Verbonden': 'Kapcsolódva',
+  'Token ontbreekt': 'Token hiányzik',
+  'Laatst gecontroleerd mislukt': 'Utolsó ellenőrzés sikertelen',
+  'Nog niet gecontroleerd': 'Még nincs ellenőrizve',
   'Zoekveld wissen': 'Keresőmező törlése',
   'Gantt': 'Gantt',
   'Dag': 'Nap',

@@ -1746,6 +1746,90 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT jang ({code}). qaS yIqaS pagh vavvo\' naw\'.',
+  'Vanuit een OpenKAT-server': 'OpenKAT De\'wI\'vo\'',
+  'Vanuit een map': 'Doch',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'wa\' OpenKAT De\'wI\' ghom qIj, ghom law\'. OciDeck report chu\' legh; OpenKAT JSON exportvo\' De\' lI\'.',
+  'Server toevoegen…': 'De\'wI\' chel…',
+  'Rapportage van server…': 'De\'wI\' report…',
+  'Nog geen OpenKAT-server aangesloten.': 'pagh OpenKAT De\'wI\' rar.',
+  'Bezig…': 'taH…',
+  'OpenKAT-server bewerken': 'OpenKAT De\'wI\' choH',
+  'OpenKAT-server toevoegen': 'OpenKAT De\'wI\' chel',
+  'OpenKAT-server toevoegen…': 'OpenKAT De\'wI\' chel…',
+  'OpenKAT-server verwijderen?': 'OpenKAT De\'wI\' teq?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'vaj “{name}” je\' token teq. vajHa\' vIghoSlaHbe\'.',
+  'Weergavenaam': 'pong',
+  'Bijvoorbeeld Productie of Acceptatie': 'Production ghom Accept ghom',
+  'Adres van OpenKAT': 'OpenKAT qach',
+  'Verbinding met: {host}': 'rarlu\' {host}',
+  'Eigen netwerk (LAN)': 'LAN',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'LAN OpenKAT neH. HTTP chaw\'. yImeH: HTTPS neH.',
+  'Toegangstoken': 'token',
+  'Laat leeg om het opgeslagen token te behouden': 'token yIlan',
+  'Plak het token hier': 'token yIlan',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'OpenKAT vav ra\' API token. vaj De\'wI\'vo\' token — deckvo\' ghobe\'.',
+  'Verbinding wordt getest…': 'rarlu\' tetlh…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'choHqa\' rarlu\' tetlh, pong qach token lugh.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'OpenKAT rarlu\' De\'wI\' neH.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'OpenKAT report lI\' — Dochvo\' De\'wI\'vo\'.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'OpenKAT Hal chu\'lu\'. rarlu\' taH, deck choHlaH.',
+  'Rapportage van OpenKAT-server': 'OpenKAT De\'wI\' report',
+  'Rapportage van OpenKAT-server…': 'OpenKAT De\'wI\' report…',
+  'Server: {name}': 'De\'wI\': {name}',
+  'Organisaties worden opgehaald…': 'ghom lI\'…',
+  'Rapportages worden opgehaald…': 'report lI\'…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'tokenDaq pagh ghom legh. vavvo\' naw\' pagh latlh De\'wI\' wIv.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'De\'wI\'vam report pagh. OpenKATDaq wa\' ghom report chenmoH pagh latlh ghom wIv.',
+  'JSON-export uit OpenKAT': 'OpenKAT JSON export',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT report De\' JSON. OpenKATDaq JSON export, vaj De\' pagh Doch wIv.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'wIvlu\': {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'JSON De\' wIv…',
+  'Map met exports kiezen…': 'export Doch wIv…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.': 'pong yIqon, Production.',
+  'Vul een weergavenaam en een adres in.': 'pong qach yIqon.',
+  'Plak een toegangstoken om verder te gaan.': 'token yIlan, yIghoS.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'qach yIqon, https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'qach lo\'. URL buqmoH.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'qach https:// bIreQ, pagh LAN yImeH HTTP.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'rarlu\' {host}. tokenDaq pagh ghom legh.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'rarlu\' {host}. {n} ghom.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'OpenKAT rarlu\' luj. qach HeH yIlegh, yIqaS.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'pagh token. vav token yIlan, yIqaS.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'HTTPS neH, LAN yImeH chaw\'.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT token luj. vavvo\' API token yIlan.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT jup. De\'wI\' lughbe\', yIqaS.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'qach lughbe\'. De\'wI\' pong yIlegh.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT jach jang. qaS yIqaS pagh vavvo\' naw\'.',
+  'Verbonden': 'rarlu\'',
+  'Token ontbreekt': 'pagh token',
+  'Laatst gecontroleerd mislukt': 'potlh tetlh luj',
+  'Nog niet gecontroleerd': 'pagh tetlh',
   'Zoekveld wissen': 'nejwI\' yIwoH',
   'Gantt': 'Gantt',
   'Dag': 'jaj',

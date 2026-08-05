@@ -33,8 +33,8 @@ import 'support/temp_dir.dart';
 ///     aangewezen houdt het invoerpunt, ook met de schakelaar uit, zodat een
 ///     bestaand OpenKAT-deck bij te werken blijft.
 ///  3. **Het tabblad zelf is er zodra de koppeling beschikbaar is** — anders is
-///     er geen plek om de schakelaar aan te zetten; op web valt OpenKAT weg
-///     omdat de mapkiezer daar niet bestaat.
+///     er geen plek om de schakelaar aan te zetten; op web blijft OpenKAT
+///     zichtbaar maar uitgeschakeld (geen mapkiezer / sleutelbos).
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 

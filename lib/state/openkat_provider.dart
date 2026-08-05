@@ -1,5 +1,5 @@
-// De koppeling met OpenKAT (#767, #772, #1158): of de integratie aan staat, en
-// de map waarin de OpenKAT-exports staan.
+// De koppeling met OpenKAT (#767, #772, #1158 + live Rocky): of de integratie
+// aan staat, de map met exports, en de aangesloten OpenKAT-installaties.
 //
 // **Waarom de schakelaar hier woont, en niet meer bij de module Importeren.**
 // Tot #1158 had OpenKAT bewust geen eigen schakelaar (#772, besluit B1): de
@@ -10,20 +10,20 @@
 // eerste-klas integratie met een eigen schakelaar; de module Importeren gaat
 // sindsdien alleen nog over presentatie-import.
 //
-// De scheiding binnen dít bestand blijft langs dezelfde vraag lopen als
-// voorheen: [enabled] beantwoordt "hoort deze koppeling bij mijn werk",
-// [reportDirectory] "waar staan mijn OpenKAT-bestanden".
-//
-// [openKatHasContentProvider] is wat de reveal-regel van de integratie inbrengt:
-// een aangewezen map is inhoud, en inhoud blijft bereikbaar ook als de
-// koppeling uit gaat (de vaste projectregel: uitzetten maakt bestaand werk
-// nooit onbereikbaar).
+// [enabled] beantwoordt "hoort deze koppeling bij mijn werk",
+// [reportDirectory] "waar staan mijn OpenKAT-bestanden",
+// [installations] "welke OpenKAT-servers ken ik". Tokens staan in SecretStore.
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/openkat/openkat_installation.dart';
 import '../models/openkat/openkat_wizard_models.dart';
 import '../platform/platform_features.dart';
+import '../services/secret_store.dart';
 import '../utils/log.dart';
+import 'secret_store_provider.dart';
 
 /// De voorkeursleutel van de map. Hernoemen mag nooit: dan is de aangewezen map
 /// weg.
@@ -34,6 +34,9 @@ const _directoryKey = 'openkatReportDirectory';
 /// stil weer uit.
 const _enabledKey = 'openkatIntegrationEnabled';
 
+/// JSON-lijst van [OpenKatInstallation]-metadata (zonder tokens).
+const _installationsKey = 'openkatInstallations';
+
 final openKatProvider = NotifierProvider<OpenKatNotifier, OpenKatState>(
   OpenKatNotifier.new,
 );
@@ -43,27 +46,33 @@ final openKatDirectoryProvider = Provider<String?>((ref) {
   return ref.watch(openKatProvider.select((s) => s.reportDirectory));
 });
 
+/// Opgeslagen OpenKAT-installaties (metadata; tokens in de sleutelbos).
+final openKatInstallationsProvider = Provider<List<OpenKatInstallation>>((ref) {
+  return ref.watch(openKatProvider.select((s) => s.installations));
+});
+
 /// Of de OpenKAT-koppeling aan staat (de bewaarde stand). Harde standaard uit.
 final openKatIntegrationEnabledProvider = Provider<bool>((ref) {
   return ref.watch(openKatProvider.select((s) => s.enabled));
 });
 
-/// Of OpenKAT op dit platform überhaupt te gebruiken is: de koppeling leest een
-/// map van schijf, en die mapkiezer bestaat alleen op desktop (op web geeft
-/// `getDirectoryPath` stil null terug, #150). Als provider verpakt zodat het
-/// integratieregister er net zo op kan kijken als op elke andere poort.
-final openKatAvailableProvider = Provider<bool>((ref) {
+/// Of OpenKAT op dit platform in het Integraties-tabblad hoort te staan.
+///
+/// Altijd zichtbaar: op web met nette disabled-staat (zoals LibrePlan), op
+/// desktop volledig bruikbaar. Mapkiezer en sleutelbos bestaan alleen op
+/// desktop — de UI legt dat uit in plaats van het tabblad te verbergen.
+final openKatAvailableProvider = Provider<bool>((ref) => true);
+
+/// Of de live/map-functies écht mogen draaien (desktop + lokale mappen).
+final openKatDesktopCapableProvider = Provider<bool>((ref) {
   return supportsLocalProjectFolders;
 });
 
-/// Wat OpenKAT als "inhoud" inbrengt.
-///
-/// Een aangewezen rapportagemap betekent dat iemand hier al mee werkt. Zonder
-/// deze provider zou de koppeling uitzetten een bestaand OpenKAT-deck
-/// onbijwerkbaar maken, en zou de enige weg terug het opnieuw aanwijzen zijn
-/// van een map waarvan de app al wist waar hij stond.
+/// Wat OpenKAT als "inhoud" inbrengt: een aangewezen map óf minstens één
+/// opgeslagen installatie. Uitzetten maakt bestaand werk nooit onbereikbaar.
 final openKatHasContentProvider = Provider<bool>((ref) {
-  return ref.watch(openKatDirectoryProvider) != null;
+  final state = ref.watch(openKatProvider);
+  return state.reportDirectory != null || state.installations.isNotEmpty;
 });
 
 /// De poort waar het tabblad, de menu-items en het openscherm op kijken: de
@@ -81,6 +90,9 @@ class OpenKatState {
   /// De map met OpenKAT-exports; null zolang er geen gekozen is.
   final String? reportDirectory;
 
+  /// Aangesloten OpenKAT-servers (metadata).
+  final List<OpenKatInstallation> installations;
+
   /// Voorkeuren worden nog geladen bij de eerste opbouw.
   final bool loading;
 
@@ -92,6 +104,7 @@ class OpenKatState {
   const OpenKatState({
     this.enabled = false,
     this.reportDirectory,
+    this.installations = const [],
     this.loading = true,
     this.deckSessions = const {},
   });
@@ -100,6 +113,7 @@ class OpenKatState {
     bool? enabled,
     String? reportDirectory,
     bool clearReportDirectory = false,
+    List<OpenKatInstallation>? installations,
     bool? loading,
     Map<String, OpenKatDeckSession>? deckSessions,
   }) => OpenKatState(
@@ -107,6 +121,7 @@ class OpenKatState {
     reportDirectory: clearReportDirectory
         ? null
         : (reportDirectory ?? this.reportDirectory),
+    installations: installations ?? this.installations,
     loading: loading ?? this.loading,
     deckSessions: deckSessions ?? this.deckSessions,
   );
@@ -122,6 +137,9 @@ class OpenKatDeckSession {
 class OpenKatNotifier extends Notifier<OpenKatState> {
   bool _directoryChanged = false;
   bool _enabledChanged = false;
+  bool _installationsChanged = false;
+
+  SecretStore get _secrets => ref.read(secretStoreProvider);
 
   @override
   OpenKatState build() {
@@ -134,6 +152,9 @@ class OpenKatNotifier extends Notifier<OpenKatState> {
       final prefs = await SharedPreferences.getInstance();
       final directory = prefs.getString(_directoryKey);
       final storedEnabled = prefs.getBool(_enabledKey) ?? false;
+      final installations = _decodeInstallations(
+        prefs.getString(_installationsKey),
+      );
       // Wat de gebruiker in deze sessie al omzette wint van de opgeslagen
       // waarde: het laden mag een net gemaakte keuze niet terugdraaien.
       final directoryHasContent = directory != null && directory.isNotEmpty;
@@ -143,6 +164,7 @@ class OpenKatNotifier extends Notifier<OpenKatState> {
             ? null
             : directory,
         clearReportDirectory: !_directoryChanged && !directoryHasContent,
+        installations: _installationsChanged ? null : installations,
         loading: false,
       );
     } catch (e, s) {
@@ -189,6 +211,76 @@ class OpenKatNotifier extends Notifier<OpenKatState> {
     }
   }
 
+  /// Voegt een installatie toe en schrijft optioneel het token weg.
+  Future<void> addInstallation(
+    OpenKatInstallation installation, {
+    String? token,
+  }) async {
+    final next = [...state.installations, installation];
+    await _persistInstallations(next);
+    if (token != null && token.trim().isNotEmpty) {
+      await _secrets.writeOpenKatToken(installation.id, token.trim());
+    }
+  }
+
+  /// Vervangt een bestaande installatie (zelfde id). Leeg [token] = ongewijzigd.
+  Future<void> updateInstallation(
+    OpenKatInstallation installation, {
+    String? token,
+  }) async {
+    final next = [
+      for (final item in state.installations)
+        if (item.id == installation.id) installation else item,
+    ];
+    await _persistInstallations(next);
+    if (token != null && token.trim().isNotEmpty) {
+      await _secrets.writeOpenKatToken(installation.id, token.trim());
+    }
+  }
+
+  /// Verwijdert installatie + token. Onomkeerbaar.
+  Future<void> removeInstallation(String id) async {
+    final next = [
+      for (final item in state.installations)
+        if (item.id != id) item,
+    ];
+    await _persistInstallations(next);
+    await _secrets.deleteOpenKatToken(id);
+  }
+
+  /// Zet de status na een verbindingstest.
+  Future<void> markInstallationChecked({
+    required String id,
+    required OpenKatInstallationStatus status,
+  }) async {
+    final next = [
+      for (final item in state.installations)
+        if (item.id == id)
+          item.copyWith(
+            lastCheckedAt: DateTime.now().toUtc(),
+            lastStatus: status,
+          )
+        else
+          item,
+    ];
+    await _persistInstallations(next);
+  }
+
+  Future<String?> readToken(String installationId) =>
+      _secrets.readOpenKatToken(installationId);
+
+  Future<bool> hasToken(String installationId) async {
+    final token = await readToken(installationId);
+    return token != null && token.trim().isNotEmpty;
+  }
+
+  OpenKatInstallation? installationById(String id) {
+    for (final item in state.installations) {
+      if (item.id == id) return item;
+    }
+    return null;
+  }
+
   OpenKatDeckSession? sessionForDeck(String deckId) =>
       state.deckSessions[deckId];
 
@@ -208,5 +300,36 @@ class OpenKatNotifier extends Notifier<OpenKatState> {
         deckId: OpenKatDeckSession(directory: directory, recipe: recipe),
       }),
     );
+  }
+
+  Future<void> _persistInstallations(List<OpenKatInstallation> next) async {
+    _installationsChanged = true;
+    state = state.copyWith(
+      installations: List.unmodifiable(next),
+      loading: false,
+    );
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final encoded = jsonEncode([for (final item in next) item.toJson()]);
+      await prefs.setString(_installationsKey, encoded);
+    } catch (e, s) {
+      logError('OpenKatNotifier: prefs-schrijf mislukt (installaties)', e, s);
+    }
+  }
+
+  List<OpenKatInstallation> _decodeInstallations(String? raw) {
+    if (raw == null || raw.trim().isEmpty) return const [];
+    try {
+      final decoded = jsonDecode(raw);
+      if (decoded is! List) return const [];
+      return [
+        for (final item in decoded)
+          if (item is Map)
+            OpenKatInstallation.fromJson(Map<String, Object?>.from(item)),
+      ];
+    } catch (e, s) {
+      logError('OpenKatNotifier: installaties onleesbaar', e, s);
+      return const [];
+    }
   }
 }

@@ -2096,17 +2096,22 @@ de Importeren-module.)*
 OpenKAT is een integratie: **Instellingen → Integraties**, standaard uit. Op het
 tabblad Integraties heeft elke verbinding een eigen aan/uit-schakelaar (plus een
 *Alles inschakelen* / *Alles uitschakelen*-knop voor allemaal tegelijk). Zet
-OpenKAT aan en zijn instellingen verschijnen onder de schakelaar, waar je naar de
-map wijst met je OpenKAT-exports zodat de import er niet elke keer om vraagt. De
-import leest alleen die map — er wordt niets in gewijzigd of ergens naartoe
-verstuurd. Het tabblad Integraties verschijnt zodra er een verbinding beschikbaar
-is op je platform; in de webversie valt OpenKAT weg, want de mapkiezer bestaat daar
-niet.
+OpenKAT aan en verschijnen onder de schakelaar twee blokken: **Vanuit een map**
+(map-import) en **Vanuit een OpenKAT-server** (live koppeling met één of meer
+Rocky-installaties). De map-import leest alleen de map die u kiest — er wordt
+niets in gewijzigd of ergens naartoe verstuurd.
+
+Het tabblad Integraties toont elke integratie die op uw platform zichtbaar mag
+zijn. In de webversie blijft de OpenKAT-kaart zichtbaar maar uitgeschakeld — de
+mapkiezer en de sleutelhanger van het besturingssysteem bestaan alleen op
+desktop — met een regel dat de koppeling alleen in de desktopversie werkt.
 
 OpenKAT later uitzetten haalt het startpunt niet weg zolang er een rapportmap is
-ingesteld: een bestaand OpenKAT-deck kan nog worden bijgewerkt of veilig opnieuw
-worden aangemaakt als een nieuw rapport. Wat wegvalt is het menu-item voor iemand
-die nooit iets importeert.
+ingesteld **of minstens één server is aangesloten**: een bestaand OpenKAT-deck
+kan nog worden bijgewerkt of veilig opnieuw worden aangemaakt als een nieuw
+rapport. Wat wegvalt is het menu-item voor iemand die nooit iets importeert.
+
+#### Vanuit een map
 
 Er zijn drie manieren om dezelfde desktoproute te starten: **Rapportages
 controleren…** op het tabblad Integraties, **OpenKAT-rapport maken…** op het
@@ -2187,6 +2192,32 @@ wat OpenKAT heeft gemeten. De import is eerlijk over wat hij deed — de melding
 wat er is geladen en wat er is overgeslagen (dubbelen, onherkende of ongeldige
 bestanden, en bestanden boven de groottelimiet; de map komt van buiten, dus hij
 wordt binnen grenzen gelezen). Alleen desktop: de import leest een map van schijf.
+
+#### Vanuit een OpenKAT-server
+
+*(Toegevoegd 2026-08-05: live Rocky-koppeling, meerdere installaties.)*
+
+Op desktop kunt u één of meer OpenKAT-omgevingen aansluiten (bijvoorbeeld
+productie en acceptatie). **Server toevoegen…** opent een korte wizard:
+weergavenaam, Rocky-basis-URL, optioneel de schakelaar *Eigen netwerk (LAN)* wanneer
+OpenKAT op uw privénetwerk draait (HTTP en privé-adressen zijn alleen met die
+schakelaar aan toegestaan; anders is HTTPS verplicht), en een API-token van uw
+OpenKAT-beheerder. Het token wordt op dit apparaat in de sleutelhanger bewaard —
+niet in het deck of in app-voorkeuren. U test de verbinding vóór opslaan; elke
+opgeslagen server verschijnt als kaart met **Testen**, **Bewerken** en
+**Verwijderen**.
+
+**Rapportage van server…** (Integraties, menu of commandopalet) leidt u langs het
+kiezen van een server, organisatie en aggregaat-organisatierapport — dezelfde
+rapportvorm die de map-import verwacht. De publieke Rocky REST-API toont
+organisaties en rapporten, maar levert niet altijd de volledige JSON-envelope.
+OciDeck haalt de rapport**inhoud** daarom op dezelfde manier binnen als bij een
+handmatige export: exporteer het gekozen rapport als JSON in OpenKAT en wijs
+daarna dat JSON-bestand of een map met exports aan in het dialoog. Als uw
+Rocky-versie al `GET /api/v1/report/{id}/json/` biedt, probeert OciDeck dat eerst
+en slaat de handmatige stap over wanneer het lukt. Er is geen recipe-planning,
+geen directe Octopoes- of Bytes-toegang, en geen verborgen sessie-login. Elke
+run gebruikt precies één server; niets wisselt stil de "actieve" installatie.
 
 Twee exportvormen worden herkend, die OpenKAT allebei vandaag schrijft: het
 **organisatierapport** (één platte samenvatting van de hele organisatie) en de
@@ -4294,7 +4325,7 @@ voordat je het deck van een klant erop opent. Dezelfde bundle zelf hosten is
 | De waarschuwing "missende media" | Afwezig — het kijkt op schijf. |
 | Cloud-AI | Bewust geblokkeerd, niet door de browser. |
 | Een deck importeren vanuit een URL | **Werkt**, door dezelfde beveiligingspoort als op desktop. |
-| OpenKAT-rapporten importeren | Afwezig — het leest een map van schijf. |
+| OpenKAT-rapporten importeren | Zichtbaar op Integraties maar **uitgeschakeld** — map-import en servertokens hebben desktop nodig (sleutelhanger en lokale mappen). |
 | **Één** PowerPoint-, Keynote- of Impress-bestand importeren | **Werkt**. De conversie draait op de bytes die je koos en het resultaat opent in een tabblad. |
 | **Meerdere** presentaties tegelijk importeren | Afwezig. De wachtrij schrijft elk geconverteerd deck als een bestand naar een map die je kiest, en de browser heeft geen map om te kiezen. Het dialoog zegt dat in plaats van een knop aan te bieden die niet kan werken. |
 | Exporteren, verzegelen, versleutelde packages | **Werkt**, geleverd als downloads. |

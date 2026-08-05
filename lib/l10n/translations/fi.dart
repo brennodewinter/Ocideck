@@ -1771,6 +1771,94 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT palautti odottamattoman vastauksen ({code}). Yritä myöhemmin uudelleen tai pyydä apua ylläpitäjältä.',
+  'Vanuit een OpenKAT-server': 'OpenKAT-palvelimelta',
+  'Vanuit een map': 'Kansiosta',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Yhdistä yksi tai useampi OpenKAT-ympäristö (esim. tuotanto ja hyväksyntä). OciDeck näyttää saatavilla olevat raportit; tuo sisältö JSON-viennistä OpenKAT:sta.',
+  'Server toevoegen…': 'Lisää palvelin…',
+  'Rapportage van server…': 'Raportti palvelimelta…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'OpenKAT-palvelinta ei ole vielä yhdistetty.',
+  'Bezig…': 'Käsitellään…',
+  'OpenKAT-server bewerken': 'Muokkaa OpenKAT-palvelinta',
+  'OpenKAT-server toevoegen': 'Lisää OpenKAT-palvelin',
+  'OpenKAT-server toevoegen…': 'Lisää OpenKAT-palvelin…',
+  'OpenKAT-server verwijderen?': 'Poistetaanko OpenKAT-palvelin?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Tämä poistaa “{name}”:n ja siihen liittyvän käyttöoikeustunnuksen tästä laitteesta. Toimintoa ei voi perua.',
+  'Weergavenaam': 'Näyttönimi',
+  'Bijvoorbeeld Productie of Acceptatie': 'Esim. Tuotanto tai Hyväksyntä',
+  'Adres van OpenKAT': 'OpenKAT-osoite',
+  'Verbinding met: {host}': 'Yhteys: {host}',
+  'Eigen netwerk (LAN)': 'Oma verkko (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Vain OpenKAT:lle omassa verkossa. Sallii HTTP:n ja yksityiset osoitteet. Pois: vain HTTPS.',
+  'Toegangstoken': 'Käyttöoikeustunnus',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Jätä tyhjäksi säilyttääksesi tallennetun tunnuksen',
+  'Plak het token hier': 'Liitä tunnus tähän',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Pyydä OpenKAT-ylläpitäjältä API-tunnus hallintanäkymässä. Tunnus pysyy tällä laitteella käyttöjärjestelmän avainnipussa — ei deckissä.',
+  'Verbinding wordt getest…': 'Testataan yhteyttä…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Testaa yhteys ennen tallennusta, jotta nimi, osoite ja tunnus ovat oikein.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'OpenKAT-yhteys on saatavilla vain työpöytäversiossa.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Tuo OpenKAT-raportit yhtenä johdon yhteenvetona — kansiosta tai palvelimelta.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'OpenKAT-lähde on jo määritetty; yhteys pysyy käytettävissä olemassa olevan OpenKAT-deckin päivittämiseen.',
+  'Rapportage van OpenKAT-server': 'Raportti OpenKAT-palvelimelta',
+  'Rapportage van OpenKAT-server…': 'Raportti OpenKAT-palvelimelta…',
+  'Server: {name}': 'Palvelin: {name}',
+  'Organisaties worden opgehaald…': 'Haetaan organisaatioita…',
+  'Rapportages worden opgehaald…': 'Haetaan raportteja…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Tälle tunnukselle ei näy organisaatioita. Pyydä ylläpitäjältä käyttöoikeutta tai valitse toinen palvelin.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'Tällä palvelimella ei ole valmiita organisaatioraportteja. Luo ensin OpenKAT:ssa koottu organisaatioraportti tai valitse toinen organisaatio.',
+  'JSON-export uit OpenKAT': 'JSON-vienti OpenKAT:sta',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT toimittaa raportin sisällön JSON-tiedostona. Vie valittu raportti JSON-muodossa OpenKAT:ssa ja osoita sitten tähän tiedosto tai kansio.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Valittu: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Valitse JSON-tiedosto…',
+  'Map met exports kiezen…': 'Valitse vientikansio…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Anna näyttönimi, esim. Tuotanto.',
+  'Vul een weergavenaam en een adres in.': 'Anna näyttönimi ja osoite.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Liitä käyttöoikeustunnus jatkaaksesi.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Anna osoite, esim. https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Tämä osoite ei ole kelvollinen. Tarkista, että annoit täydellisen URL-osoitteen.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'Osoitteen on alettava https://, tai ota Oma verkko käyttöön HTTP:lle omassa verkossa.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Yhdistetty kohteeseen {host}. Tälle tunnukselle ei näy organisaatioita.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Yhdistetty kohteeseen {host}. Saavutettavia organisaatioita: {n}.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Yhteys OpenKAT:iin epäonnistui. Tarkista osoite ja verkko ja yritä uudelleen.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Käyttöoikeustunnus puuttuu. Liitä ylläpitäjän antama tunnus ja yritä uudelleen.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Vain HTTPS sallitaan, ellei Oma verkko ole päällä.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT hylkäsi tunnuksen. Pyydä ylläpitäjältä kelvollinen API-tunnus ja liitä se uudelleen.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT ei vastannut ajoissa. Tarkista, että palvelin on tavoitettavissa, ja yritä uudelleen.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Tähän osoitteeseen ei saada yhteyttä. Tarkista isäntänimen kirjoitus ja oikea verkko.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT palautti odottamattoman suuren vastauksen. Yritä myöhemmin uudelleen tai pyydä apua ylläpitäjältä.',
+  'Verbonden': 'Yhdistetty',
+  'Token ontbreekt': 'Tunnus puuttuu',
+  'Laatst gecontroleerd mislukt': 'Viimeisin tarkistus epäonnistui',
+  'Nog niet gecontroleerd': 'Ei vielä tarkistettu',
   'Zoekveld wissen': 'Tyhjennä hakukenttä',
   'Gantt': 'Gantt',
   'Dag': 'Päivä',

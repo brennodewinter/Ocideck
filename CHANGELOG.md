@@ -1021,6 +1021,14 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **OpenKAT live multi-serverkoppeling (desktop, v1).** Meerdere Rocky-installaties
+  (naam, URL, LAN-vlag in prefs; Knox-token in de sleutelhanger). Integraties toont
+  twee blokken: map-import (ongewijzigd) en serverkoppeling. Rocky REST leest
+  organisaties en aggregaat-rapporten; de rapportinhoud komt standaard via
+  begeleide JSON-export (pad B) in de bestaande importpijplijn. Optioneel pad A
+  wanneer upstream `GET /api/v1/report/{pk}/json/` heeft. Geen recipe-CRUD,
+  Octopoes/Bytes of sessie-download. Web: kaart zichtbaar, uitgeschakeld.
+  Documentatie: USER_GUIDE, OPENKAT_ROCKY_REPORT_API, SOURCE_MAP.
 - **De HTML-export schrijft `<html lang="…">` in de taal van het deck (#1249).**
   De export hardcodeerde altijd `<html lang="nl">`, ongeacht de interfacetaal of
   de taal van de inhoud. Een schermlezer kondigde daarmee een Fins deck aan in
