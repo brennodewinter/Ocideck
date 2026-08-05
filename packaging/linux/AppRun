@@ -1,0 +1,10 @@
+#!/bin/sh
+# AppImage entrypoint for OciDeck.
+#
+# The Flutter Linux bundle is laid out at the AppDir root: the `ocideck` ELF
+# next to its `lib/` (loaded via an $ORIGIN/lib rpath) and its `data/` tree
+# (found relative to /proc/self/exe at runtime). So all this has to do is resolve
+# the real AppDir — following the symlink the AppImage runtime hands us as $0 —
+# and exec the binary from there, passing arguments straight through.
+HERE="$(dirname "$(readlink -f "$0")")"
+exec "${HERE}/ocideck" "$@"

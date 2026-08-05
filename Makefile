@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -973,6 +973,17 @@ build-linux: sbom-verify
 	flutter build linux --release
 	@echo "== OciDeck check: bundled documentation is fresh =="
 	dart run tool/check_bundled_docs_fresh.dart build/linux
+
+# Package the Linux bundle into portable, self-hostable formats — Phase 1 of the
+# Linux install route (#1227, docs/design/LINUX_PACKAGING.md): AppImage, .deb and
+# .rpm, alongside the tarball the release already ships. Needs a bundle from
+# build-linux first (deliberately not a prerequisite, so the release job does not
+# build twice); the script errors clearly if none is there. VERSION is required;
+# FORMATS and OUT pass through to scripts/package_linux.sh.
+#   make package-linux VERSION=0.3.2
+package-linux:
+	@echo "== OciDeck package: Linux (AppImage/.deb/.rpm) =="
+	scripts/package_linux.sh $(VERSION)
 
 # Build everything this machine CAN build: the hardened web bundle always, plus
 # the desktop target native to the current OS. Windows/Linux desktop bundles for

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=OciDeck
+GenericName=Presentation Editor
+Comment=Write presentations in Marp Markdown, where the content is the document
+Exec=ocideck
+Icon=com.dewinter.ocideck
+Terminal=false
+Categories=Office;Presentation;
+Keywords=presentation;slides;markdown;marp;deck;
+StartupNotify=true
+StartupWMClass=ocideck
