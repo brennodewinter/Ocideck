@@ -696,6 +696,24 @@ double richTextFitScale({
   return lo;
 }
 
+/// De tekstkolom van een bullets+afbeelding-slide als fractie van de kolom van
+/// een gewone bulletslide — de maat waarmee "Splits slide" zijn paginadoel
+/// verkleint (#1279): naast een afbeelding passen minder bullets comfortabel,
+/// en een paginadoel op volle-breedte-maat drukt de gedeelde run-schaal omlaag.
+///
+/// Spiegelt de geometrie van [bulletsImageSlideFitScale] (linkerrand en
+/// tussenruimte van elk 3,8% van de breedte, beeldbreedte uit [Slide.imageSize]
+/// met 40% als standaard) en [bulletsSlideFitScale] (7% rand aan weerszijden).
+/// De regressietest rendert de echte widget, zodat deze spiegel niet stil van
+/// de live layout kan wegdrijven.
+double bulletsImageTextColumnFraction(Slide slide) {
+  final imgFraction = (slide.imageSize > 0 ? slide.imageSize / 100.0 : 0.40)
+      .clamp(0.1, 0.70);
+  final splitColumn = (1.0 - imgFraction - 0.038 * 2).clamp(0.12, 1.0);
+  const fullColumn = 1.0 - 0.07 * 2;
+  return splitColumn / fullColumn;
+}
+
 /// Layout metrics for a bullets + image slide. [extraVReserve] reserves extra
 /// vertical space (bijv. de logostrook) zodat de gedeelde split-schaal die net zo
 /// vrijhoudt als de live layout.

@@ -1,5 +1,7 @@
 import '../models/slide.dart';
 import '../services/bullet_pagination.dart';
+import '../services/slide_layout_metrics.dart'
+    show bulletsImageTextColumnFraction;
 import '../services/slide_quality_analyzer.dart'
     show
         kChecklistBulletWarningCount,
@@ -83,8 +85,9 @@ bool hasBulletsForFontEnlargingSplit(Slide slide) =>
 
 /// De pagina's waarin "Splits slide" [slide] verdeelt — pagina's van hooguit de
 /// leesbaarheidsdrempel (acht bullets, twaalf voor een checklist, zeven per
-/// kolom), met de rest op een laatste, kortere pagina. `null` als splitsen niet
-/// kan (geen bullettype, of te weinig bullets).
+/// kolom; naast een afbeelding naar rato van de smallere tekstkolom), met de
+/// rest op een laatste, kortere pagina. `null` als splitsen niet kan (geen
+/// bullettype, of te weinig bullets).
 ///
 /// De eerste pagina erft type/afbeelding en de continuesSplit-vlag van [slide]
 /// (want [Slide.duplicate] kopieert imagePath/-caption/-size); elke vervolgpagina
@@ -110,9 +113,20 @@ List<Slide>? splitBulletSlidePages(Slide slide) {
       if (slide.bullets.length < 2) return null;
       // Checklists houden hun ruimere optimum aan (consistent met de
       // waarschuwingsdrempel), zodat een lijst van 12 niet onnodig krimpt.
-      final size = slide.listStyle == ListStyle.checklist
+      final base = slide.listStyle == ListStyle.checklist
           ? kChecklistBulletWarningCount
           : kSingleColumnBulletWarningCount;
+      // Naast een afbeelding is de tekstkolom smal: hetzelfde aantal bullets
+      // dat op volle breedte comfortabel leest, drukt daar de gedeelde
+      // run-schaal omlaag en laat de deel-slides klein renderen (#1279).
+      // Schaal het paginadoel mee met de kolombreedte, zodat de splitsing
+      // pagina's oplevert die de vrijgekomen ruimte ook werkelijk vullen.
+      final size = slide.type == SlideType.bulletsImage
+          ? (base * bulletsImageTextColumnFraction(slide)).round().clamp(
+              kMinPageBullets,
+              base,
+            )
+          : base;
       return build([
         for (final p in splitBulletsIntoPages(slide.bullets, size))
           (p, const <String>[]),
