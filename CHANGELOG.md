@@ -1046,6 +1046,24 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Splits slide naast een afbeelding: paginadoel volgt de smalle tekstkolom (#1279).**
+  "Verdeel over meerdere slides" op een overvolle bullets+afbeelding-slide
+  gebruikte het volle-breedte-doel van acht bullets per pagina. Naast een
+  afbeelding is de tekstkolom veel smaller (bij 40% beeld ~61% van een gewone
+  bulletslide), dus de volste pagina drukte de gedeelde run-schaal omlaag en
+  bleven de deel-slides klein renderen terwijl er ruimte over was. Het
+  paginadoel schaalt nu mee met de kolombreedte
+  (`bulletsImageTextColumnFraction` in `slide_layout_metrics.dart`, gebruikt
+  door `splitBulletSlidePages`): bij 40% beeld vijf bullets per pagina, bij een
+  bredere afbeelding minder (met `kMinPageBullets` als vloer), bij een smalle
+  afbeelding het volle doel; een checklist schaalt haar ruimere optimum van
+  twaalf mee. Het bewuste invariant dat één split-run op één gedeelde grootte
+  rendert (de volste pagina) blijft ongemoeid — de run wint grootte doordat de
+  pagina's kleiner zijn, niet doordat pagina's uiteenlopen. Regressietests
+  (eerst-rood) pinnen het paginadoel, de gestegen gedeelde schaal én — per
+  repo-regel heuristiek-tegen-echte-render — de effectieve fontgrootte in een
+  echte widget-render van een vervolgpagina
+  (`test/split_bullets_image_page_target_test.dart`).
 - **Grafieken: waarde-tooltip bij hover voor zeven ontbrekende types (#1281).**
   Spreiding (scatter), gestapelde staaf, horizontale staaf, horizontale
   gestapelde staaf, combo, waterval en bullet toonden bij muis-hover geen
