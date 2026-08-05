@@ -64,7 +64,7 @@ class _TitlePreview extends StatelessWidget {
             _applyFont(
               font,
               TextStyle(
-                color: titleColor.withValues(alpha: 0.72),
+                color: titleColor.withValues(alpha: kTitleSubtitleAlpha),
                 fontSize: w * 0.03,
                 height: 1.3,
               ),
@@ -251,7 +251,7 @@ class _SectionPreview extends StatelessWidget {
             _applyFont(
               font,
               TextStyle(
-                color: _titleColor.withValues(alpha: 0.72),
+                color: _titleColor.withValues(alpha: kTitleSubtitleAlpha),
                 fontSize: w * 0.025,
               ),
             ),

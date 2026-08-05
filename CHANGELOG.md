@@ -1046,6 +1046,23 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Contrastpoort miste de ondertitel van titel- en tussentiteldia's.** De
+  kwaliteitscontrole toetste de volle titeltekst tegen de titel- respectievelijk
+  tussentitelachtergrond, maar de ondertitel eronder rendert op verlaagde dekking
+  (`kTitleSubtitleAlpha` = 0,72) — een lichtere variant van dezelfde kleur, met
+  stelliger het zwakste contrast van de twee. Bij een donkerblauwe achtergrond
+  met een lichterblauwe titel haalde de volle titel nog net de drempel voor grote
+  tekst, terwijl de lichtere ondertitel er ruim onder zakte en tóch geen
+  waarschuwing kreeg: een dia die voor mensen niet te lezen was, meldde "geen
+  probleem". `_checkSlideContrast` toetst nu ook de ondertitel (gemengd op
+  `kTitleSubtitleAlpha`, kleur volgt de render inclusief een per-dia
+  `titleTextColorOverride`), voor zowel de titel- als de tussenteteldia. De 0,72
+  is nu één gedeelde constante die render en toets delen, zodat ze niet uit
+  elkaar kunnen lopen. Het label hergebruikt de bestaande, in 31 talen vertaalde
+  string `Ondertitel` — geen nieuwe l10n. Regressietest eerst-rood
+  (`test/subtitle_contrast_test.dart`) met een kleurenpaar waarin de volle titel
+  de drempel haalt maar de 0,72-ondertitel niet, zodat de ondertitel aantoonbaar
+  de enige bindende beperking is.
 - **Splits slide naast een afbeelding: paginadoel volgt de smalle tekstkolom (#1279).**
   "Verdeel over meerdere slides" op een overvolle bullets+afbeelding-slide
   gebruikte het volle-breedte-doel van acht bullets per pagina. Naast een

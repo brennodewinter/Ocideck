@@ -85,7 +85,8 @@ import '../../utils/lru_cache.dart';
 import '../../utils/net_guard.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/project_path.dart';
-import '../../utils/title_contrast.dart' show kTitleOverlayAlpha;
+import '../../utils/title_contrast.dart'
+    show kTitleOverlayAlpha, kTitleSubtitleAlpha;
 import '../document_signature_view.dart' show decodeEmbeddedSignatureImage;
 import '../privacy_badge.dart' show privacyKatSvg;
 import '../../utils/inline_markdown.dart';
