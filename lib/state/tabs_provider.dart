@@ -64,6 +64,7 @@ part 'tabs_provider_s3.dart';
 part 'tabs_provider_git.dart';
 part 'tabs_provider_git_native.dart';
 part 'tabs_provider_git_review.dart';
+part 'tabs_provider_recovery.dart';
 
 const _uuid = Uuid();
 
@@ -87,7 +88,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   final FileService _file;
   final SettingsNotifier _settings;
   final RecoveryService _recovery;
-  final Map<int, StreamSubscription<DeckState>> _subs = {};
+  final Map<int, StreamSubscription<Object?>> _subs = {};
 
   /// Laatst ge-autosavede deck per tab (op identiteit): het deck is immutable,
   /// dus zolang het object hetzelfde is, is er niets gewijzigd en kan de tick
@@ -258,29 +259,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
           continue;
         }
         _recovery.save(
-          RecoverySnapshot(
-            id: tab.recoveryId,
-            savedAt: DateTime.now(),
-            filePath: st.filePath,
-            label: tab.label,
-            markdown: dn.generateMarkdown(),
-            markdownDraft: markdownDraft,
-            markdownDraftScope: markdownDraft == null
-                ? null
-                : editor.markdownScope.name,
-            markdownDraftSlideIndex:
-                markdownDraft != null &&
-                    editor.markdownScope == MarkdownScope.slide
-                ? editor.selectedIndex
-                : null,
-            userNotes: UserNotesCodec.encode(deck.slides, deck.userNotes),
-            miauw: MiauwCodec.encodeDisposition(deck.miauw),
-            seal: SealCodec.encode(SealRecord.of(deck)),
-            // Tekeningen staan niet in de markdown (eigen sidecar), en tekenen
-            // maakt het deck wél vuil. Zonder deze regel kwam een herstelde
-            // presentatie stil zonder annotaties terug.
-            annotations: AnnotationCodec.encode(deck.slides, deck.annotations),
-          ),
+          _deckRecoverySnapshot(tab, st, dn, editor, markdownDraft),
         );
         _lastAutosavedDeck[tab.id] = deck;
         _lastAutosavedMarkdownDraft[tab.id] = markdownDraft;
@@ -476,7 +455,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       final failure = await importPackageFile(path, homeDir: homeDir);
       return _packageOpenResult(_ref, mounted, failure);
     }
-    final existing = _indexOfOpenPath(path);
+    final existing = _indexOfOpenPath(this, path);
     if (existing != null) {
       selectTab(existing);
       if (selectIndex != null) {
@@ -508,6 +487,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final outcome = await _file.openDeckDetailed(path);
     final deck = outcome.deck;
     if (deck == null) {
+      // Geen Marp-deck? Router, geen muur (DOCUMENT_MODE.md §2): open als document.
+      if (outcome.failure == OpenFailure.notPresentation) {
+        return _openAsDocument(path);
+      }
       return _openFailureResult(_ref, mounted, outcome.failure);
     }
     // notifier disposed during the await
@@ -523,6 +506,36 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // Los van het open-pad: een byte-identieke kopie elders in de recente
     // lijst is het melden waard, maar mag het openen nooit vertragen.
     unawaited(_noticeIdenticalCopy(path));
+    return OpenResult.opened;
+  }
+
+  /// Open [path] als plat document in een nieuw tabblad (deck-pad gaf
+  /// `notPresentation`: veilig, maar geen Marp-deck).
+  Future<OpenResult> _openAsDocument(String path) async {
+    final result = await _file.openDocumentDetailed(path);
+    if (!mounted) return OpenResult.unreadable;
+    final document = result.document;
+    if (document == null) {
+      return _openFailureResult(_ref, mounted, result.failure);
+    }
+    final id = _nextId++;
+    final key = _uuid.v4();
+    final notifier = DocumentNotifier()..loadDocument(document, filePath: path);
+    _subs[id] = notifier.stream.listen((st) {
+      if (!mounted) return;
+      if (!(st.isOpen && st.isDirty)) _recovery.discard(key);
+      state = state.copyWith(tabs: List.from(state.tabs));
+    });
+    final tab = TabInfo(
+      id: id,
+      recoveryId: key,
+      content: DocumentTabContent(notifier),
+    );
+    state = state.copyWith(
+      tabs: [...state.tabs, tab],
+      selectedIndex: state.tabs.length,
+    );
+    await _settings.addRecentFile(path); // soort-in-recent: latere politoer
     return OpenResult.opened;
   }
 
@@ -543,21 +556,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
     } catch (e) {
       logWarning('TabsNotifier._noticeIdenticalCopy', e);
     }
-  }
-
-  /// Index van het tabblad waarin het bestand met [path] al open is, of `null`.
-  /// Vergelijkt genormaliseerde absolute paden zodat een relatief pad en het
-  /// volledige pad naar hetzelfde bestand hetzelfde tabblad raken.
-  int? _indexOfOpenPath(String path) {
-    final target = p.canonicalize(path);
-    for (var i = 0; i < state.tabs.length; i++) {
-      // Soort-agnostisch: een al open document telt net zo goed mee als een deck.
-      final open = state.tabs[i].openFilePath;
-      if (open != null && open.isNotEmpty && p.canonicalize(open) == target) {
-        return i;
-      }
-    }
-    return null;
   }
 
   /// Zet een zojuist geopend deck in een tabblad: een leeg huidig tabblad
@@ -784,18 +782,21 @@ final openFailureProvider = StateProvider<OpenFailure?>((ref) => null);
 /// [TabsNotifier] omdat die klasse tegen haar plafond zit — en omdat dit geen
 /// state is maar een notitie erover; [alive] draagt de `mounted`-controle mee,
 /// want na dispose is er geen container meer om in te schrijven.
-/// Niet-toegepaste bron die afwijkt van het laatste geldige deck. Alleen voor
-/// presentatietabbladen: een document kent geen aparte, ongetoepaste bron — het
-/// bewerkt zijn bron live. Top-level (raakt geen [TabsNotifier]-veld) om de
-/// klassenratchet niet te tarten.
-String? _markdownDraftFor(TabInfo tab) {
-  final dn = tab.deckNotifierOrNull;
-  if (dn == null || !dn.mounted) return null;
-  final deckState = dn.currentState;
-  final deck = deckState.deck;
-  if (!deckState.isOpen || deck == null) return null;
-  final editor = tab.editorNotifier.currentState;
-  return editor.hasMarkdownDraft ? editor.markdownBuffer : null;
+/// Index van het tabblad waarin het bestand met [path] al open is, of `null`.
+/// Vergelijkt genormaliseerde absolute paden zodat een relatief pad en het
+/// volledige pad naar hetzelfde bestand hetzelfde tabblad raken. Top-level (leest
+/// via de publieke `currentState`) om de klassenratchet te ontlasten.
+int? _indexOfOpenPath(TabsNotifier n, String path) {
+  final target = p.canonicalize(path);
+  final tabs = n.currentState.tabs;
+  for (var i = 0; i < tabs.length; i++) {
+    // Soort-agnostisch: een al open document telt net zo goed mee als een deck.
+    final open = tabs[i].openFilePath;
+    if (open != null && open.isNotEmpty && p.canonicalize(open) == target) {
+      return i;
+    }
+  }
+  return null;
 }
 
 OpenResult _failOpen(Ref ref, bool alive, OpenFailure reason) {
