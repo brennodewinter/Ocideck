@@ -241,7 +241,11 @@ class _OpenKatInstallationWizardState
             l10n.d(
               'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.',
             ),
-            style: TextStyle(fontSize: 13, color: AppTheme.slate600, height: 1.4),
+            style: TextStyle(
+              fontSize: 13,
+              color: AppTheme.slate600,
+              height: 1.4,
+            ),
           ),
       ],
     );
@@ -266,10 +270,7 @@ class _OpenKatInstallationWizardState
           child: Text(l10n.d('Terug')),
         ),
       if (_step < 2)
-        FilledButton(
-          onPressed: _goNext,
-          child: Text(l10n.d('Volgende')),
-        )
+        FilledButton(onPressed: _goNext, child: Text(l10n.d('Volgende')))
       else ...[
         if (!_testOk)
           FilledButton(
@@ -290,7 +291,8 @@ class _OpenKatInstallationWizardState
       final name = _name.text.trim();
       if (name.isEmpty) {
         setState(
-          () => _fieldError = 'Vul een weergavenaam in, bijvoorbeeld Productie.',
+          () =>
+              _fieldError = 'Vul een weergavenaam in, bijvoorbeeld Productie.',
         );
         return;
       }
@@ -415,8 +417,7 @@ class _OpenKatInstallationWizardState
               'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.';
           _testMessageArgs = {'host': host};
         } else {
-          _testMessage =
-              'Verbonden met {host}. {n} organisatie(s) bereikbaar.';
+          _testMessage = 'Verbonden met {host}. {n} organisatie(s) bereikbaar.';
           _testMessageArgs = {'host': host, 'n': '${orgs.length}'};
         }
       });

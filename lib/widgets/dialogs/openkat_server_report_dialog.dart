@@ -285,13 +285,14 @@ class _OpenKatServerReportDialogState
           l10n.d(
             'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.',
           ),
-          style: TextStyle(fontSize: 12, color: AppTheme.slate600, height: 1.35),
+          style: TextStyle(
+            fontSize: 12,
+            color: AppTheme.slate600,
+            height: 1.35,
+          ),
         ),
         const SizedBox(height: 8),
-        Text(
-          chosen,
-          style: TextStyle(fontSize: 11, color: AppTheme.slate500),
-        ),
+        Text(chosen, style: TextStyle(fontSize: 11, color: AppTheme.slate500)),
         const SizedBox(height: 14),
         if (_importing)
           const LinearProgressIndicator()
@@ -325,8 +326,7 @@ class _OpenKatServerReportDialogState
         onPressed: _importing
             ? null
             : () {
-                if (_step == 0 ||
-                    (_step == 1 && installations.length == 1)) {
+                if (_step == 0 || (_step == 1 && installations.length == 1)) {
                   Navigator.pop(context);
                 } else {
                   setState(() {
@@ -354,9 +354,7 @@ class _OpenKatServerReportDialogState
       if (_step < 3)
         FilledButton(
           onPressed: _importing ? null : _goNext,
-          child: Text(
-            _step == 2 ? l10n.d('Doorgaan') : l10n.d('Volgende'),
-          ),
+          child: Text(_step == 2 ? l10n.d('Doorgaan') : l10n.d('Volgende')),
         ),
     ];
   }
@@ -395,10 +393,12 @@ class _OpenKatServerReportDialogState
           'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.',
         ),
       );
-      await ref.read(openKatProvider.notifier).markInstallationChecked(
-        id: installation.id,
-        status: OpenKatInstallationStatus.tokenMissing,
-      );
+      await ref
+          .read(openKatProvider.notifier)
+          .markInstallationChecked(
+            id: installation.id,
+            status: OpenKatInstallationStatus.tokenMissing,
+          );
       return null;
     }
     return OpenKatRockyClient(installation: installation, token: token);
@@ -424,20 +424,24 @@ class _OpenKatServerReportDialogState
         _loading = false;
         if (orgs.length == 1) _organization = orgs.first;
       });
-      await ref.read(openKatProvider.notifier).markInstallationChecked(
-        id: _installation!.id,
-        status: OpenKatInstallationStatus.connected,
-      );
+      await ref
+          .read(openKatProvider.notifier)
+          .markInstallationChecked(
+            id: _installation!.id,
+            status: OpenKatInstallationStatus.connected,
+          );
     } catch (e) {
       if (!mounted) return;
       setState(() {
         _loading = false;
         _error = openKatErrorMessage(e);
       });
-      await ref.read(openKatProvider.notifier).markInstallationChecked(
-        id: _installation!.id,
-        status: OpenKatInstallationStatus.failed,
-      );
+      await ref
+          .read(openKatProvider.notifier)
+          .markInstallationChecked(
+            id: _installation!.id,
+            status: OpenKatInstallationStatus.failed,
+          );
     }
   }
 

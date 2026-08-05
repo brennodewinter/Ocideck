@@ -36,7 +36,11 @@ class OpenKatInstallationsSection extends ConsumerWidget {
           l10n.d(
             'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.',
           ),
-          style: TextStyle(fontSize: 12, color: AppTheme.slate600, height: 1.35),
+          style: TextStyle(
+            fontSize: 12,
+            color: AppTheme.slate600,
+            height: 1.35,
+          ),
         ),
         const SizedBox(height: 12),
         if (!desktopCapable)
@@ -154,11 +158,17 @@ class _InstallationCardState extends ConsumerState<_InstallationCard> {
                         installation.host.isEmpty
                             ? installation.baseUrl
                             : installation.host,
-                        style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: AppTheme.slate600,
+                        ),
                       ),
                       Text(
                         l10n.d(openKatStatusLabel(installation.lastStatus)),
-                        style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: AppTheme.slate500,
+                        ),
                       ),
                     ],
                   ),
@@ -172,11 +182,7 @@ class _InstallationCardState extends ConsumerState<_InstallationCard> {
               children: [
                 TextButton(
                   onPressed: _testing ? null : _test,
-                  child: Text(
-                    _testing
-                        ? l10n.d('Bezig…')
-                        : l10n.d('Testen'),
-                  ),
+                  child: Text(_testing ? l10n.d('Bezig…') : l10n.d('Testen')),
                 ),
                 TextButton(
                   onPressed: () => OpenKatInstallationWizard.show(
@@ -209,10 +215,7 @@ class _InstallationCardState extends ConsumerState<_InstallationCard> {
       if (mounted) setState(() => _testing = false);
       return;
     }
-    final client = OpenKatRockyClient(
-      installation: installation,
-      token: token,
-    );
+    final client = OpenKatRockyClient(installation: installation, token: token);
     try {
       if (!client.canSend) throw OpenKatRequestException(client.denialReason!);
       await client.testConnection();
@@ -255,7 +258,9 @@ class _InstallationCardState extends ConsumerState<_InstallationCard> {
       ),
     );
     if (confirmed != true) return;
-    await ref.read(openKatProvider.notifier).removeInstallation(installation.id);
+    await ref
+        .read(openKatProvider.notifier)
+        .removeInstallation(installation.id);
   }
 }
 

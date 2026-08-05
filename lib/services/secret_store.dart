@@ -526,10 +526,7 @@ class SecretStore {
   Future<void> writeOpenKatToken(String installationId, String token) async {
     _requireStorage('writeOpenKatToken');
     try {
-      await _storage.write(
-        key: openKatTokenKey(installationId),
-        value: token,
-      );
+      await _storage.write(key: openKatTokenKey(installationId), value: token);
     } catch (e) {
       logError('SecretStore.writeOpenKatToken: keychain write failed', e);
       rethrow;

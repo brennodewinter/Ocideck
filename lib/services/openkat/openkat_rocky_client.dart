@@ -78,11 +78,7 @@ class OpenKatOrganization {
   final String name;
   final String code;
 
-  const OpenKatOrganization({
-    this.id,
-    required this.name,
-    required this.code,
-  });
+  const OpenKatOrganization({this.id, required this.name, required this.code});
 
   factory OpenKatOrganization.fromJson(Map<String, Object?> json) {
     return OpenKatOrganization(
@@ -281,7 +277,9 @@ class OpenKatRockyClient {
   }
 
   /// `GET /api/v1/report/?organization_code=` — alleen aggregaat-rapporten.
-  Future<List<OpenKatReportRef>> listAggregateReports(String organizationCode) async {
+  Future<List<OpenKatReportRef>> listAggregateReports(
+    String organizationCode,
+  ) async {
     final code = organizationCode.trim();
     if (code.isEmpty) {
       throw const OpenKatRequestException('organization_code required');
@@ -344,7 +342,8 @@ class OpenKatRockyClient {
       _throwForStatus(result.statusCode, 'fetchReportJson');
     }
     final trimmed = result.body.trim();
-    if (trimmed.isEmpty || !(trimmed.startsWith('{') || trimmed.startsWith('['))) {
+    if (trimmed.isEmpty ||
+        !(trimmed.startsWith('{') || trimmed.startsWith('['))) {
       _jsonCapability = OpenKatJsonCapability.unavailable;
       return null;
     }

@@ -25,10 +25,7 @@ void main() {
 
     test('HTTP zonder LAN geweigerd', () {
       expect(
-        validateOpenKatBaseUrl(
-          'http://openkat.lan',
-          trustedInternal: false,
-        ),
+        validateOpenKatBaseUrl('http://openkat.lan', trustedInternal: false),
         contains('https://'),
       );
     });
@@ -53,14 +50,15 @@ void main() {
 
   group('OpenKatInstallation json', () {
     test('round-trip', () {
-      final original = OpenKatInstallation.create(
-        name: 'Productie',
-        baseUrl: 'https://openkat.example/',
-        trustedInternal: false,
-      ).copyWith(
-        lastStatus: OpenKatInstallationStatus.connected,
-        lastCheckedAt: DateTime.utc(2026, 8, 5, 12),
-      );
+      final original =
+          OpenKatInstallation.create(
+            name: 'Productie',
+            baseUrl: 'https://openkat.example/',
+            trustedInternal: false,
+          ).copyWith(
+            lastStatus: OpenKatInstallationStatus.connected,
+            lastCheckedAt: DateTime.utc(2026, 8, 5, 12),
+          );
       final restored = OpenKatInstallation.fromJson(original.toJson());
       expect(restored.id, original.id);
       expect(restored.name, 'Productie');

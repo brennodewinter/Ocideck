@@ -42,10 +42,7 @@ OpenKatInstallation _inst({
 void main() {
   group('SecretStore.openKatTokenKey', () {
     test('stabiel per installatie-id', () {
-      expect(
-        SecretStore.openKatTokenKey('abc-123'),
-        'openkat_token::abc-123',
-      );
+      expect(SecretStore.openKatTokenKey('abc-123'), 'openkat_token::abc-123');
       expect(
         SecretStore.openKatTokenKey('abc-123'),
         isNot(SecretStore.openKatTokenKey('other')),
@@ -198,9 +195,7 @@ void main() {
       final client = OpenKatRockyClient(
         installation: _inst(),
         token: 'tok',
-        transport: _FakeTransport(
-          response: const OpenKatHttpResult(404, 'no'),
-        ),
+        transport: _FakeTransport(response: const OpenKatHttpResult(404, 'no')),
         isWeb: false,
       );
       final body = await client.fetchReportJson(

@@ -71,8 +71,7 @@ class OpenKatInstallation {
   }
 
   /// Of er een bruikbaar adres én een weergavenaam staan (token apart).
-  bool get isConfigured =>
-      name.trim().isNotEmpty && baseUrl.trim().isNotEmpty;
+  bool get isConfigured => name.trim().isNotEmpty && baseUrl.trim().isNotEmpty;
 
   /// Host uit [baseUrl], of leeg wanneer onparseerbaar.
   String get host => Uri.tryParse(baseUrl.trim())?.host ?? '';
@@ -91,7 +90,9 @@ class OpenKatInstallation {
     return OpenKatInstallation(
       id: id,
       name: name ?? this.name,
-      baseUrl: baseUrl != null ? normalizeOpenKatBaseUrl(baseUrl) : this.baseUrl,
+      baseUrl: baseUrl != null
+          ? normalizeOpenKatBaseUrl(baseUrl)
+          : this.baseUrl,
       trustedInternal: trustedInternal ?? this.trustedInternal,
       lastCheckedAt: clearLastCheckedAt
           ? null
@@ -105,7 +106,8 @@ class OpenKatInstallation {
     'name': name,
     'baseUrl': baseUrl,
     'trustedInternal': trustedInternal,
-    if (lastCheckedAt != null) 'lastCheckedAt': lastCheckedAt!.toIso8601String(),
+    if (lastCheckedAt != null)
+      'lastCheckedAt': lastCheckedAt!.toIso8601String(),
     'lastStatus': lastStatus.name,
   };
 
