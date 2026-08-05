@@ -76,6 +76,21 @@ MatrixServer? _readMatrixAccount(SharedPreferences prefs) {
   }
 }
 
+/// Lees de opgeslagen LibrePlan-connector-instellingen; corrupte data
+/// degradeert veilig. Spiegelt [_readAiSettings].
+LibreplanSettings _readLibreplanSettings(SharedPreferences prefs) {
+  final json = prefs.getString('libreplanSettings');
+  if (json == null) return const LibreplanSettings();
+  try {
+    return LibreplanSettings.fromJson(
+      Map<String, Object?>.from(jsonDecode(json) as Map),
+    );
+  } catch (e) {
+    logWarning('SettingsNotifier: ongeldige libreplanSettings-prefs', e);
+    return const LibreplanSettings();
+  }
+}
+
 ({
   List<CockpitColorScheme> schemes,
   String selectedName,
@@ -226,6 +241,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     final cockpit = _loadCockpitSettings(prefs, _mergeCockpitSchemes);
     final ai = _readAiSettings(prefs);
     final matrix = _readMatrixAccount(prefs);
+    final libreplan = _readLibreplanSettings(prefs);
     // Het laden is asynchroon; een scope die in die tussentijd verdwijnt — een
     // venster dat sluit, een test die afloopt — mag geen "gebruikt na dispose"
     // opleveren. Er valt dan ook niets meer bij te werken.
@@ -303,6 +319,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           prefs.getString('cveApiBaseUrl') ?? AppSettings.defaultCveApiBaseUrl,
       aiSettings: ai,
       matrixAccount: matrix,
+      libreplanSettings: libreplan,
     );
     _persistedLogoPaths = _referencedLogoPaths;
     // Niet awaiten: de sleutelbos mag de instellingen niet ophouden.
@@ -420,6 +437,15 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     });
   }
 
+  /// Bewaar de instellingen van de optionele LibrePlan-connector (zonder
+  /// wachtwoord) in hetzelfde prefs-domein. Spiegelt [setAiSettings].
+  Future<void> setLibreplanSettings(LibreplanSettings settings) async {
+    state = state.copyWith(libreplanSettings: settings);
+    await _persist('setLibreplanSettings', (prefs) async {
+      await prefs.setString('libreplanSettings', jsonEncode(settings.toJson()));
+    });
+  }
+
   /// Schrijf de optionele AI-API-sleutel versleuteld naar de keychain (gekeyd
   /// op de basis-URL). Een lege sleutel wist de entry. Vangt keychain-fouten
   /// zelf af (en logt ze) zodat een niet-afgewachte aanroep — zoals vanuit de
@@ -441,6 +467,38 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   /// Lees de opgeslagen AI-API-sleutel uit de keychain, of `null`.
   Future<String?> readAiApiKey(String baseUrl) {
     return _secrets.readAiApiKey(baseUrl);
+  }
+
+  /// Bewaar het LibrePlan-wachtwoord in de keychain (gekeyd op
+  /// `baseUrl::username`). Een leeg wachtwoord wist de entry.
+  Future<bool> setLibreplanPassword(String key, String password) async {
+    try {
+      if (password.isEmpty) {
+        await _secrets.deleteLibreplanPasswordByKey(key);
+      } else {
+        await _secrets.writeLibreplanPasswordByKey(key, password);
+      }
+      return true;
+    } catch (e) {
+      _reportSecretFailure('setLibreplanPassword', e);
+      return false;
+    }
+  }
+
+  /// Wis het LibrePlan-wachtwoord uit de keychain.
+  Future<bool> deleteLibreplanPassword(String key) async {
+    try {
+      await _secrets.deleteLibreplanPasswordByKey(key);
+      return true;
+    } catch (e) {
+      _reportSecretFailure('deleteLibreplanPassword', e);
+      return false;
+    }
+  }
+
+  /// Lees het LibrePlan-wachtwoord uit de keychain, of `null`.
+  Future<String?> readLibreplanPassword(String key) {
+    return _secrets.readLibreplanPasswordByKey(key);
   }
 
   /// Stel het vrijgaveplafond voor de export-gate in (een TLP-sleutel), of

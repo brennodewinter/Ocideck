@@ -177,6 +177,12 @@ const Map<String, int> fileSizeBaseline = {
   // +7 (#1162): het `onMenuBlockTap`-veld + constructor-param + doorgifte, zodat
   // een keuze-menublok tijdens presenteren aanklikbaar is.
   'lib/widgets/slides/slide_preview.dart': 1074,
+  // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
+  // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
+  'lib/state/settings_provider.dart': 1057,
+  // +31 (#1240): LibrePlan-connector — form-velden, init, dispose, save, import-
+  // dialoog-import in de settings_dialog library-head.
+  'lib/widgets/dialogs/settings_dialog.dart': 1031,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -213,7 +219,7 @@ const Map<String, int> classSizeBaseline = {
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
-      5913, // +1 (video-calls F1): ModuleId.videoCalls switch-case
+      6111, // +198 (#1240): LibrePlan-tab — form-velden, init, test-row, import-knop in settings_dialog_libreplan.dart part
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
@@ -268,7 +274,8 @@ const Map<String, int> classSizeBaseline = {
   // part `settings_provider_matrix.dart`, maar telt mee voor de klasse; het
   // laadwerk (aiSettings + matrixAccount) ging in dezelfde wijziging naar
   // top-level helpers, wat de netto groei drukte.
-  'lib/state/settings_provider.dart#SettingsNotifier': 1342,
+  'lib/state/settings_provider.dart#SettingsNotifier':
+      1385, // +43 (#1240): LibrePlan password keychain-methodes (set/delete/read)
   // Bewust verhoogd van 1256 naar 1261 (#651): `setDismissals` is een nieuwe
   // openbare mogelijkheid, geen drift. In dezelfde wijziging ging er 24 regels
   // uit — de vier identieke regels die annotaties, notities en terzijdeleggingen

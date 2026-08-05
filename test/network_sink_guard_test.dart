@@ -115,6 +115,9 @@ void main() {
     // wss-endpoint-origin, resolveConfigured + connectPinned + een fail-closed
     // schema-assert; WebSocket.connect gebruikt deze customClient.
     'lib/xmpp/xmpp_frame_transport_io.dart': 1,
+    // LibrePlan-connector (desktop): één gepinde client op de server-origin,
+    // safeResolve(Trusted) + connectPinned + geen redirects + bytecap.
+    'lib/services/libreplan/libreplan_client.dart': 1,
   };
 
   test('media fetch sinks stay behind the NetGuard resolve gate', () {
@@ -184,6 +187,11 @@ void main() {
         // fail-closed schema-assert die een ongepinde (niet-https) socket weigert
         // i.p.v. TLS te droppen. De enige uitgaande socket van lib/xmpp/.
         'lib/xmpp/xmpp_frame_transport_io.dart',
+        // LibrePlan-connector (desktop): safeResolve(Trusted) met de
+        // trustedInternal-opt-in van de server + socket-pin + geen redirects
+        // + bytecap. GET-only, Basic Auth. De enige uitgaande socket van
+        // lib/services/libreplan/.
+        'lib/services/libreplan/libreplan_client.dart',
       },
       guidance:
           'New raw HttpClient. Resolve the host through NetGuard.safeResolve '

@@ -332,6 +332,20 @@ OciDeck constrains what an opened deck can do:
   stated plainly: for the lifetime of that process the token exists outside the
   keychain. That the imposition is real and not paper is asserted against a live
   server in `test/git_network_guard_test.dart`.
+- **LibrePlan connector — read-only, GET-only, same resolve-and-pin.** The
+  LibrePlan connector is an optional module (off by default, desktop-only)
+  that imports a project snapshot from a LibrePlan instance via its REST API.
+  The password is stored in the OS keychain (`SecretStore`, keyed by base URL +
+  username), never in prefs. The connector sends only GET requests — it never
+  writes back to LibrePlan. The host is resolved through `NetGuard.safeResolve`
+  (or `safeResolveTrusted` with the **Trusted internal server** opt-in, which
+  is the only thing that lifts the private-address block and allows plain
+  HTTP), the socket is pinned, redirects are refused, and the response is
+  capped at 10 MiB. XML is parsed by `package:xml` which does not resolve
+  external entities (no XXE), with a max depth of 100 and a max size of 10 MiB
+  to catch pathologically deep or large documents from a hostile or
+  misconfigured server. Fail-closed: a parse error or limit breach produces an
+  empty result (no slides), not a crash or partial data.
 - **Symlink containment.** Both the copy-to-clipboard sink
   (`resolveContainedRealPath`) and the render/export path (`isRenderPathContained`,
   cached so the per-frame cost is O(1)) resolve the real (symlink-followed)

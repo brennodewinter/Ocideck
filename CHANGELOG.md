@@ -1000,6 +1000,15 @@ that before deciding whether this alpha fits what you are doing.
   OciDeck niet vertaalt (bijv. Japans) houdt `lang="ja"` en krijgt chrome in de
   interfacetaal. PDF en PPTX zijn bitmaps en dragen geen taallabel. De
   toegankelijkheidsdoc is bijgewerkt met de belofte en haar grens.
+- **LibrePlan-connector (#1240).** Een optionele module die een
+  projectsnapshot uit een LibrePlan-instantie importeert als OciDeck-slides:
+  Gantt-planning, WBS, projectstatus (cockpit), milestones (tijdlijn),
+  kritieke pad (flow), resources (tabel), timesheet (tabel) en
+  resourcebelasting (grafiek). Alleen-lezen (GET-only), desktop-only,
+  standaard uit. Wachtwoord in de OS-sleutelhanger. NetGuard + socket-pin +
+  HTTPS-verplicht (tenzij vertrouwd intern). XML-parser met diepte- en
+  grootte-limieten. Beveiligingsreview in SECURITY.md, privacy in
+  PRIVACY.md, gebruik in USER_GUIDE.nl.md.
 - **`make bump-scanner-pins` + automatische scanner-bump in de release (#1161).**
   De secrets-scan draait op een voorgebakken image waarvan de **tag** de drie
   scanner-versies is (`ocideck-scans:gl…-th…-sg…`), dus gitleaks/trufflehog/semgrep

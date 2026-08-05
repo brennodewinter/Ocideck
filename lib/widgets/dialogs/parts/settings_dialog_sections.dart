@@ -28,6 +28,7 @@ enum SettingsSection {
   privacy(Icons.privacy_tip_outlined),
   security(Icons.shield_outlined),
   ai(Icons.smart_toy_outlined),
+  libreplan(Icons.cloud_download_outlined),
   checklists(Icons.checklist_outlined),
   modules(Icons.extension_outlined),
   integrations(Icons.hub_outlined),
@@ -52,6 +53,7 @@ enum SettingsSection {
     SettingsSection.privacy => l10n.d('Licentie en Privacy'),
     SettingsSection.security => l10n.d('Beveiliging'),
     SettingsSection.ai => l10n.d('AI-assistentie'),
+    SettingsSection.libreplan => l10n.d('LibrePlan-connector'),
     SettingsSection.checklists => l10n.d('Checklists'),
     SettingsSection.modules => l10n.d('Uitbreidingen'),
     SettingsSection.integrations => l10n.d('Integraties'),
@@ -90,6 +92,7 @@ enum SettingsSection {
     required bool infoSafetyRevealed,
     required bool hasChecklists,
     required bool aiRevealed,
+    required bool libreplanRevealed,
     required bool integrationsAvailable,
     required bool collaborationRevealed,
   }) => values.where((s) {
@@ -98,6 +101,7 @@ enum SettingsSection {
       return infoSafetyRevealed || hasChecklists;
     }
     if (s == SettingsSection.ai) return aiRevealed;
+    if (s == SettingsSection.libreplan) return libreplanRevealed;
     if (s == SettingsSection.collaboration) return collaborationRevealed;
     if (s == SettingsSection.integrations) return integrationsAvailable;
     return true;

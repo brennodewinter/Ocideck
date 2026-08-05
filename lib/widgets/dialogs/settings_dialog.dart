@@ -19,6 +19,8 @@ import '../../services/privacy/privacy_regions.dart';
 import '../../services/reference_standards.dart';
 import '../../services/ai_client_service.dart';
 import '../../services/ai_security_gate.dart';
+import '../../services/libreplan/libreplan_client.dart';
+import '../../services/secret_store.dart';
 import '../../services/disk_traces.dart';
 import '../../services/export_metadata.dart';
 import '../../services/file_service.dart';
@@ -68,6 +70,8 @@ import 'settings/procesverbetering_module_card.dart';
 import 'settings/asset_rights_module_card.dart';
 import 'settings/video_calls_module_card.dart';
 import 'settings/managementsysteem_module_card.dart';
+import 'settings/libreplan_module_card.dart';
+import 'libreplan_import_dialog.dart';
 import 'settings/appearance_legibility.dart';
 import 'settings/git_form.dart';
 import 'settings/git_panel.dart';
@@ -94,6 +98,7 @@ part 'parts/settings_dialog_profile.dart';
 part 'parts/settings_dialog_privacy.dart';
 part 'parts/settings_dialog_security.dart';
 part 'parts/settings_dialog_ai.dart';
+part 'parts/settings_dialog_libreplan.dart';
 part 'parts/settings_dialog_docs.dart';
 part 'parts/settings_dialog_modules.dart';
 part 'parts/settings_dialog_checklists.dart';
@@ -204,6 +209,16 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// De AI-backend (optioneel, standaard uit): velden, modus en API-sleutel.
   final AiForm _ai = AiForm();
 
+  /// LibrePlan-connector (optioneel, standaard uit): formulierstand.
+  bool _libreplanEnabled = false;
+  late final TextEditingController _libreplanBaseUrl;
+  late final TextEditingController _libreplanUsername;
+  final TextEditingController _libreplanPassword = TextEditingController();
+  bool _libreplanTrustedInternal = false;
+  bool? _libreplanTestOk;
+  String? _libreplanTestMessage;
+  bool _libreplanTesting = false;
+
   /// Whether the user changed the active profile in this session. Used to
   /// decide whether to apply the profile to the currently open presentation.
   bool _profileTouched = false;
@@ -295,6 +310,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       text: _themeProfile.closingSlideMarkdown,
     );
     _initAiFields(settings.aiSettings);
+    _initLibreplanFields(settings.libreplanSettings);
     _adoptMatrixForm(settings.matrixAccount);
     _highlightedThemeField = widget.highlightThemeField;
     _selectedTab = widget.initialSection;
@@ -325,6 +341,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     }
     _matrixForm.dispose();
     _ai.dispose();
+    _libreplanBaseUrl.dispose();
+    _libreplanUsername.dispose();
+    _libreplanPassword.dispose();
     super.dispose();
   }
 
@@ -755,6 +774,26 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
     _ai.save(notifier);
 
+    // LibrePlan-connector: bewaar de schakelaar en de volledige configuratie.
+    final lp = ref.read(settingsProvider).libreplanSettings;
+    notifier.setLibreplanSettings(
+      LibreplanSettings(
+        enabled: _libreplanEnabled,
+        baseUrl: _libreplanBaseUrl.text.trim(),
+        username: _libreplanUsername.text.trim(),
+        trustedInternal: _libreplanTrustedInternal,
+      ),
+    );
+    // Wachtwoord in de keychain (gekeyd op base URL + username).
+    final lpKey =
+        '${_libreplanBaseUrl.text.trim()}::${_libreplanUsername.text.trim()}';
+    final lpPass = _libreplanPassword.text;
+    if (lpPass.isNotEmpty) {
+      notifier.setLibreplanPassword(lpKey, lpPass);
+    } else if (lp.hasBackend) {
+      notifier.deleteLibreplanPassword(lpKey);
+    }
+
     // Het app-globale Matrix-account: de configuratie via de notifier, het token
     // apart in de sleutelhanger. Leeggemaakt terwijl er een account stond →
     // wissen; onaangeroerd zonder account → niets doen.
@@ -826,6 +865,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           SettingsSection.privacy => _privacyTab(),
           SettingsSection.security => _securityTab(),
           SettingsSection.ai => _aiTab(),
+          SettingsSection.libreplan => _libreplanTab(),
           SettingsSection.checklists => _checklistsTab(),
           SettingsSection.modules => _modulesTab(),
           SettingsSection.integrations => const IntegrationsPanel(),

@@ -123,6 +123,7 @@ void main() {
         ModuleId.videoCalls,
         ModuleId.assetRights,
         ModuleId.managementsysteem,
+        ModuleId.libreplan,
       ]);
     });
   });

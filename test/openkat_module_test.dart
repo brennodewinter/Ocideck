@@ -112,6 +112,7 @@ void main() {
           infoSafetyRevealed: false,
           hasChecklists: false,
           aiRevealed: false,
+          libreplanRevealed: false,
           integrationsAvailable: integrationsAvailable,
           collaborationRevealed: false,
         );

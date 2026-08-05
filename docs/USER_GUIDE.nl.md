@@ -4109,6 +4109,54 @@ overschrijven. Als je een vers sjabloon wilt, verwijder dan eerst de bestaande r
 > OciDeck rapporteert voortgang — het doet geen enkele claim over certificering of conformiteit en is
 > geen vervanging voor een auditor.
 
+## LibrePlan-connector (optioneel)
+
+De LibrePlan-connector is een optionele module die een projectsnapshot uit een
+LibrePlan-instantie importeert als OciDeck-slides. Alleen-lezen: de connector
+schrijft niets terug naar LibrePlan. Standaard uit; alleen beschikbaar in de
+desktopversie.
+
+### Aanzetten en configureren
+
+1. Ga naar **Instellingen → Uitbreidingen** en zet de schakelaar
+   **LibrePlan-connector** aan.
+2. Het tabblad **Instellingen → LibrePlan-connector** verschijnt in de zijbalk.
+3. Vul de server-URL (bijv. `https://libreplan.example.org/libreplan/`),
+   gebruikersnaam en wachtwoord in. Het wachtwoord wordt in de
+   sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.
+4. Voor servers op het eigen netwerk (LAN) kunt u **Vertrouwde interne server**
+   aanzetten — dit staat plain-HTTP toe en staat privé-adressen door de
+   NetGuard. Uitgeschakeld: HTTPS is verplicht.
+5. Klik **Verbinding testen** om de instellingen te controleren.
+
+### Importeren
+
+Klik op **Importeren uit LibrePlan** op het LibrePlan-tabblad. Kies welke slides
+u wilt importeren:
+
+- **Gantt-planning** — projectplanning met datums, afhankelijkheden en milestones
+- **WBS** — work breakdown structure als hiërarchische boom
+- **Projectstatus** — cockpit met voortgang- en urenmeters
+- **Milestones** — tijdlijn met de milestones uit het project
+- **Kritieke pad** — flow-diagram met het langste afhankelijkheidsketen
+- **Resources** — tabel met machines en medewerkers
+- **Timesheet** — tabel met gewerkte uren uit werkrapporten
+- **Resourcebelasting** — staafdiagram met uren per resource per dag (laatste 30 dagen)
+
+De slides worden ingevoegd in het huidige deck. Waarschuwingen (bijv. een
+falend endpoint) worden getoond maar stoppen de import niet — de rest van
+de slides wordt nog steeds geproduceerd.
+
+### Beperkingen
+
+- Eén project per import (het eerste project op de server). Voor een specifiek
+  project, gebruik de projectcode in de server-URL.
+- De Gantt-dia kapt af op 30 taken, de WBS op 50 knopen, tabellen op 100 rijen.
+- Het kritieke pad is een benadering (langste afhankelijkheidsketen), niet de
+  CPM-berekening die LibrePlan server-side doet.
+- Duur wordt geschat op 8 uur per dag — LibrePlan's kalender is niet beschikbaar
+  in de REST-export.
+
 ## Markdown-modus
 
 Het code-icoon in de werkbalk schakelt de bewerker naar **Markdown-modus**: het hele deck wordt
