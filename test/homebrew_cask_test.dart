@@ -1,4 +1,8 @@
-@TestOn('vm')
+// Slaat Windows over: de test roept `bash scripts/update_homebrew_cask.sh` aan
+// (awk/sed/sha256sum/mktemp), en de cask is macOS-only — op Windows draait dat
+// script niet in productie en bash is er niet betrouwbaar. De GitHub Windows-
+// runner gaf de drie cask-tests daarom consistent exit 1 (run 30942431938).
+@TestOn('vm && !windows')
 library;
 
 import 'dart:io';
