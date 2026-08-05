@@ -252,6 +252,18 @@ class AppLocalizations {
   /// [MarpHtmlService.build].
   static String get activeLanguageCode => _activeLanguageCode;
 
+  /// De localisatie die de actieve interface-taal leest. [d] en [t] sleutelen
+  /// op de statisch gezette taal ([setActiveLanguageCode]), niet op de
+  /// [Locale] die de constructor meekrijgt — dus `const
+  /// AppLocalizations(Locale('nl')).d('Nieuw')` volgt wél de actieve taal,
+  /// ondanks dat de `Locale('nl')` hardcoded Nederlands suggereert. Dat
+  /// handvat heeft al twee lezers in de val laten lopen (zie #1251), dus dit
+  /// is het eerlijke handvat: de [Locale] klopt hier bij de taal die `d()`
+  /// ook echt leest. Geen `const`: de actieve taal staat niet vast op
+  /// compileertijd.
+  static AppLocalizations get active =>
+      AppLocalizations(Locale(_activeLanguageCode));
+
   static Locale materialLocaleFor(String code) {
     return _materialLocaleFallbacks[code] ?? const Locale('nl');
   }

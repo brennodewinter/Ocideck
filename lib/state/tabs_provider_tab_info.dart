@@ -84,8 +84,9 @@ class TabInfo {
     // StateNotifier gooit; val dan terug op neutrale waarden.
     // Via de actieve taal en niet als kale literal: dit is het eerste woord
     // linksboven in het venster, en het stond in alle 32 talen in het
-    // Nederlands (#576). De Locale is hier een handvat — `d()` leest de
-    // statisch gezette taal.
+    // Nederlands (#576). `AppLocalizations.active` leest de statisch gezette
+    // taal — zie #1251 voor waarom dit niet `const AppLocalizations(Locale('nl'))`
+    // is: die Locale is een misleidend handvat, want `d()` negeert hem.
     if (!deckNotifier.mounted) return _newTabLabel;
     final st = deckNotifier.currentState;
     // A saved deck is identified by its file name — that is what the user
@@ -132,5 +133,8 @@ class TabsState {
   }
 }
 
-/// Het opschrift van een tabblad zonder deck.
-String get _newTabLabel => const AppLocalizations(Locale('nl')).d('Nieuw');
+/// Het opschrift van een tabblad zonder deck. Volgt de actieve interfacetaal
+/// via [AppLocalizations.active] — niet de kale literal `'Nieuw'` die in alle
+/// 32 talen Nederlands gaf (#576), en niet `const AppLocalizations(Locale('nl'))`,
+/// waarvan de `Locale('nl')` een misleidend handvat is (#1251).
+String get _newTabLabel => AppLocalizations.active.d('Nieuw');
