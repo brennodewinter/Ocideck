@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../models/chart.dart';
+import '../../models/settings.dart' show ThemeProfile;
+import '../../services/marp_html_service.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/doc_link.dart' show headingSlug;
 import '../slides/inline_markdown.dart';
@@ -40,6 +44,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.onTapLink,
     this.maxTextWidth,
     this.mermaidRenderer,
+    this.chartTheme,
     this.searchTerm,
     this.activeMatchBlockIndex = -1,
     this.activeMatchKey,
@@ -67,6 +72,11 @@ class DocumentMarkdownView extends StatelessWidget {
   /// [DocMermaidView]) to the shared render service. Tests pass a fake so the
   /// diagram path can be exercised without a WebView.
   final MermaidRenderer? mermaidRenderer;
+
+  /// Stijlprofiel voor de kleuren van een ```chart-blok. `null` → de
+  /// standaardkleuren van de grafiek-SVG. Een document heeft geen deck-thema, dus
+  /// de aanroeper geeft hier het actieve app-profiel of niets.
+  final ThemeProfile? chartTheme;
 
   /// Case-insensitive find-in-page term. When non-empty, every block whose text
   /// contains it is tinted. `null`/empty means no search is active and the tree
@@ -150,6 +160,7 @@ class DocumentMarkdownView extends StatelessWidget {
     _Kind.quote => _bounded(_blockQuote(t, b.text)),
     _Kind.code => _codeBlock(t, b.text),
     _Kind.mermaid => _mermaid(t, b.text),
+    _Kind.chart => _chart(t, b.text),
     _Kind.table => _table(t, b.rows),
     _Kind.rule => _bounded(_rule(t)),
   };
@@ -197,7 +208,11 @@ class DocumentMarkdownView extends StatelessWidget {
         }
         final code = lines.sublist(start, end).join('\n');
         blocks.add(
-          _Block(lang == 'mermaid' ? _Kind.mermaid : _Kind.code, text: code),
+          _Block(switch (lang) {
+            'mermaid' => _Kind.mermaid,
+            'chart' => _Kind.chart,
+            _ => _Kind.code,
+          }, text: code),
         );
         i = end < lines.length ? end + 1 : end;
         continue;
@@ -420,6 +435,32 @@ class DocumentMarkdownView extends StatelessWidget {
     renderer: mermaidRenderer,
   );
 
+  /// Een ```chart-blok als gerenderde grafiek (statische SVG, dezelfde renderlaag
+  /// als de HTML-export). Draagt het blok geen inline cijfers (bv. een
+  /// `source:`-verwijzing die nog niet gehydrateerd is), dan valt het terug op
+  /// het codeblok — dan zie je tenminste de bron in plaats van een leeg vlak.
+  Widget _chart(_Theme t, String block) {
+    final spec = ChartSpec.parse(block);
+    if (!spec.hasInlineData) return _codeBlock(t, block);
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: t.codeBg,
+        border: Border.all(color: t.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: AspectRatio(
+        aspectRatio: 800 / 450,
+        child: SvgPicture.string(
+          MarpHtmlService.chartSpecSvg(spec, chartTheme),
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+  }
+
   Widget _rule(_Theme t) => Padding(
     padding: const EdgeInsets.symmetric(vertical: 14),
     child: Divider(height: 1, thickness: 1, color: t.border),
@@ -587,7 +628,17 @@ class DocumentMarkdownView extends StatelessWidget {
 }
 
 /// The kind of a parsed Markdown block.
-enum _Kind { heading, paragraph, list, quote, code, mermaid, table, rule }
+enum _Kind {
+  heading,
+  paragraph,
+  list,
+  quote,
+  code,
+  mermaid,
+  chart,
+  table,
+  rule,
+}
 
 /// One parsed block: its kind plus whatever that kind needs to render and to be
 /// searched. Kept as a plain data record so parsing is a pure step, decoupled
