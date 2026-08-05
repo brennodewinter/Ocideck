@@ -12,6 +12,25 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.3.3] — 2026-08-05
+
+### Added
+
+- feat(packaging): Linux install route Phase 1 — AppImage / .deb / .rpm / AUR (#1227)
+- feat(openkat): live multi-serverkoppeling (Rocky)
+
+### Changed
+
+- docs: Homebrew-cask in de app-docs, plus macOS-signing corrigeren
+- ci(release): website-repo bijwerken, niet meer rechtstreeks live zetten
+- docs(homebrew): brennodewinter/ocideck shorthand i.p.v. librekat/ocideck (#1271)
+- Toon versienummer op het toestemmingsscherm
+- docs(openkat): Rocky report API contract (EN + NL)
+
+### Fixed
+
+- fix(tabs): dispose-crash in de privacyketen bij sluiten tabblad (#1270)
+
 ## [0.3.2] — 2026-08-05
 
 ### Added
