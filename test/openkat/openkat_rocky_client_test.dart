@@ -5,11 +5,9 @@ import 'package:ocideck/services/secret_store.dart';
 
 /// Fake transport: programmeerbaar antwoord, geen netwerk.
 class _FakeTransport implements OpenKatHttpTransport {
-  _FakeTransport({this.response, this.responses});
+  _FakeTransport({required this.response});
 
-  final OpenKatHttpResult? response;
-  final List<OpenKatHttpResult>? responses;
-  int _i = 0;
+  final OpenKatHttpResult response;
 
   late Uri lastUrl;
   late Map<String, String> lastHeaders;
@@ -23,10 +21,7 @@ class _FakeTransport implements OpenKatHttpTransport {
   }) async {
     lastUrl = url;
     lastHeaders = headers;
-    if (responses != null) {
-      return responses![_i++];
-    }
-    return response!;
+    return response;
   }
 }
 
