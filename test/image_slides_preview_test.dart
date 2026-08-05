@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -38,9 +39,16 @@ Future<({int width, int height, Uint8List bytes})> _capture(
       ),
     ),
   );
-  // Let the file images decode and paint before capturing a single frame.
-  await Future<void>.delayed(const Duration(milliseconds: 300));
-  await tester.pump();
+  // Wacht tot de file-images gedecodeerd zijn — op de ImageStream, niet op de
+  // klok. Een vaste `Future.delayed(300 ms)` was onder de volle suite op de
+  // CI-runner soms te krap, zodat `toImage` een blank frame ving en de
+  // "zoomed image paints"-test rood kleurde op wat een frame later wél klopte
+  // (zie test/support/pump_until.dart voor dezelfde valkuil). `pumpAndSettle`
+  // alleen pompt in nep-tijd en brengt file-IO-decode niet vooruit; daarom
+  // eerst op de stream-completers wachten. De aanroepende test draait al in
+  // `runAsync`, dus de decode loopt op echte tijd.
+  await _waitForImages(tester);
+  await tester.pumpAndSettle(const Duration(seconds: 5));
 
   final boundary =
       key.currentContext!.findRenderObject() as RenderRepaintBoundary;
@@ -49,6 +57,38 @@ Future<({int width, int height, Uint8List bytes})> _capture(
     format: ui.ImageByteFormat.rawRgba,
   ))!.buffer.asUint8List();
   return (width: image.width, height: image.height, bytes: bytes);
+}
+
+/// Voltooit zodra elke [Image] in de boom zijn [ImageStream] resolved heeft
+/// (gedecodeerd is), in plaats van na een gokte wachttijd. Bij een error
+/// (ontbrekend bestand) voltooit de completer met die error, zodat de test
+/// faalt met de echte oorzaak in plaats van met een blank frame.
+Future<void> _waitForImages(WidgetTester tester) async {
+  final images = find
+      .byType(Image)
+      .evaluate()
+      .map((e) => e.widget as Image)
+      .toList();
+  if (images.isEmpty) return;
+  final pending = <Future<void>>[];
+  for (final image in images) {
+    final completer = Completer<void>();
+    late ImageStreamListener listener;
+    final stream = image.image.resolve(ImageConfiguration.empty);
+    listener = ImageStreamListener(
+      (info, synchronousCall) {
+        if (!completer.isCompleted) completer.complete();
+      },
+      onError: (Object e, StackTrace? st) {
+        if (!completer.isCompleted) completer.completeError(e, st);
+      },
+    );
+    stream.addListener(listener);
+    pending.add(
+      completer.future.whenComplete(() => stream.removeListener(listener)),
+    );
+  }
+  await Future.wait(pending);
 }
 
 void main() {
