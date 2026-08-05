@@ -211,6 +211,11 @@ resolve_appimagetool() {
 
 build_appimage() {
   require curl "AppImage (to fetch appimagetool)"
+  # appimagetool shells out to `file` to detect the payload architecture and
+  # bails with "file command is missing but required" if it is absent. It is not
+  # in a minimal ubuntu image, so check for it here with a clear message rather
+  # than letting appimagetool fail cryptically deep in the run (broke v0.3.3).
+  require file "AppImage (appimagetool invokes it)"
   resolve_appimagetool
 
   local appdir="$TMPROOT/AppDir"

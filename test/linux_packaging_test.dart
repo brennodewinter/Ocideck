@@ -37,6 +37,17 @@ void main() {
       );
     });
 
+    test('the Linux job installs file (appimagetool needs it)', () {
+      // appimagetool shells out to `file` and refuses to run without it, but a
+      // minimal ubuntu image has no `file`. Missing it made the whole Linux job
+      // fail, which skips `publiceren` and publishes no release at all (v0.3.3).
+      expect(
+        RegExp(r'apt-get install[^\n]*\bfile\b').hasMatch(releaseYaml),
+        isTrue,
+        reason: 'The Linux job no longer installs `file` for appimagetool.',
+      );
+    });
+
     test('the Linux job runs the packager', () {
       expect(
         releaseYaml.contains('make package-linux VERSION='),
@@ -110,6 +121,19 @@ void main() {
           reason: 'The .deb Depends omits `$lib` (a linked runtime library).',
         );
       }
+    });
+
+    test('the AppImage build requires the file tool up front', () {
+      // appimagetool invokes `file`; the packager checks for it before running
+      // so a missing tool fails with a clear message instead of a cryptic
+      // appimagetool error deep in the run (broke v0.3.3).
+      expect(
+        RegExp(r'require file\b').hasMatch(script),
+        isTrue,
+        reason:
+            'build_appimage no longer checks for `file` before invoking '
+            'appimagetool, which needs it.',
+      );
     });
 
     test('appimagetool is verified against its sha256 before use', () {
