@@ -538,7 +538,16 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   Widget _tabScope(TabInfo tab) => ProviderScope(
     key: ValueKey(tab.id),
     overrides: [
-      deckProvider.overrideWith((ref) => tab.deckNotifier),
+      // Bij sluiten kan de DeckNotifier al disposed zijn terwijl _TabContent
+      // nog één rebuild doet (c542bf1e fixte TabInfo, niet de keten).
+      deckProvider.overrideWith(
+        (ref) => tab.deckNotifier.mounted
+            ? tab.deckNotifier
+            : DeckNotifier(
+                ref.read(markdownServiceProvider),
+                ref.read(fileServiceProvider),
+              ),
+      ),
       editorProvider.overrideWith((ref) => tab.editorNotifier),
       collabSessionProvider.overrideWith(
         (ref) => CollabSessionNotifier(ref, tab),

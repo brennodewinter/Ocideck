@@ -140,7 +140,8 @@ const Map<String, int> fileSizeBaseline = {
   // +4 (#1098): imports voor de uitbreidingspoort en het rechtenoverzicht voor
   // afbeeldingen; het gedrag zelf blijft in losse providers en widgets.
   'lib/widgets/app_shell.dart':
-      814, // +1 (#1235): session_export import — de afloop-flow wordt aangeroepen vanuit shell_actions_present.dart (een part-of zonder eigen imports), dus de import hoort in de library-head.
+      823, // +9 (#1270): deckProvider.overrideWith valt terug op een verse DeckNotifier als de tab al disposed is — voorkomt "Tried to use DeckNotifier after dispose" in de privacyketen bij sluiten.
+  // +1 (#1235): session_export import — de afloop-flow wordt aangeroepen vanuit shell_actions_present.dart (een part-of zonder eigen imports), dus de import hoort in de library-head.
   // +7 (#1175): _onFilesDropped krijgt de presentatie-tak — een gesleepte
   // .pptx/.odp/.key gaat de import in (routing gedeeld in importDroppedPresentations).
   // +1 (#1004): a single build() ref.listen hook for owner-drop handover. The

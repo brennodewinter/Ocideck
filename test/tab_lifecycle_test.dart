@@ -7,6 +7,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/editor_provider.dart';
+import 'package:ocideck/state/privacy_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -121,6 +122,75 @@ void main() {
       expect(tab.label, 'Nij');
 
       addTearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
+    },
+  );
+
+  // Regression: bij het sluiten van een tab kan Riverpod de DeckNotifier al
+  // disposen terwijl er nog één rebuild van _TabContent gepland staat. De
+  // deckProvider.override levert dan een gedisposede notifier op en de
+  // privacyketen (deckProvider → privacyScanProvider →
+  // privacyQualityIssuesProvider) gooit "Tried to use DeckNotifier after
+  // dispose" vanuit StateNotifier.addListener. c542bf1e fixte TabInfo.label
+  // maar niet de providerketen.
+  //
+  // De race zelf is niet in een widgettest te forceren (pump verwerkt frames
+  // sequentieel), maar de gevolgde oplossing wel direct getest: een override
+  // die een gedisposede notifier teruggeeft moet de privacyketen niet laten
+  // crashen, maar terugvallen op een verse lege notifier. Dit is dezelfde
+  // patroon-check als in _tabScope (app_shell.dart).
+  testWidgets(
+    'privacyketen overleeft een gedisposede DeckNotifier in de override',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1600, 1000));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      final notifier = DeckNotifier(
+        container.read(markdownServiceProvider),
+        container.read(fileServiceProvider),
+      );
+      notifier.dispose();
+
+      // Zonder de mounted-check in de override gooit StateNotifier.addListener
+      // "Tried to use DeckNotifier after dispose". Met de check levert de
+      // override een verse lege notifier op en de keten returned leeg.
+      await tester.pumpWidget(
+        UncontrolledProviderScope(
+          container: container,
+          child: ProviderScope(
+            overrides: [
+              deckProvider.overrideWith(
+                (ref) => notifier.mounted
+                    ? notifier
+                    : DeckNotifier(
+                        ref.read(markdownServiceProvider),
+                        ref.read(fileServiceProvider),
+                      ),
+              ),
+              privacyRawScanProvider.overrideWith(computePrivacyRawScan),
+              privacyScanProvider.overrideWith(computePrivacyScan),
+              privacyQualityIssuesProvider.overrideWith(
+                computePrivacyQualityIssues,
+              ),
+            ],
+            child: MaterialApp(
+              home: Consumer(
+                builder: (context, ref, _) {
+                  // Dit is de keten die in _TabContent.build via
+                  // warmTabDerivedProviders wordt aangeroepen.
+                  ref.watch(privacyQualityIssuesProvider);
+                  return const SizedBox();
+                },
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Geen crash: de privacyketen heeft een leeg resultaat opgeleverd.
+      expect(container.read(privacyQualityIssuesProvider), isEmpty);
     },
   );
 }
