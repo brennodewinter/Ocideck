@@ -70,6 +70,8 @@ import '../services/webdav_service.dart';
 import '../state/collab_session_provider.dart';
 import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
+import '../state/document_provider.dart';
+import 'document_editor_screen.dart';
 import '../state/image_contrast_provider.dart';
 import '../state/image_privacy_provider.dart';
 import '../state/improvement_provider.dart';
@@ -526,47 +528,6 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     }
     editorN.select(idx);
   }
-
-  /// Eén tab-paneel, met alle providers die het deck lezen per tab opnieuw
-  /// gescoped.
-  ///
-  /// Alles wat het deck leest hoort in deze `overrides` te staan. Een afgeleide
-  /// provider die ontbreekt, lost op in de root-container, ziet een leeg deck en
-  /// doet stilletjes niets — geen fout, geen melding, gewoon niets. Zo ging
-  /// `imageContrastIssuesProvider` ooit stuk. `provider_scope_test.dart` scant
-  /// `lib/state` en faalt als er hier een mist.
-  Widget _tabScope(TabInfo tab) => ProviderScope(
-    key: ValueKey(tab.id),
-    overrides: [
-      // Bij sluiten kan de DeckNotifier al disposed zijn terwijl _TabContent
-      // nog één rebuild doet (c542bf1e fixte TabInfo, niet de keten).
-      deckProvider.overrideWith(
-        (ref) => tab.deckNotifier.mounted
-            ? tab.deckNotifier
-            : DeckNotifier(
-                ref.read(markdownServiceProvider),
-                ref.read(fileServiceProvider),
-              ),
-      ),
-      editorProvider.overrideWith((ref) => tab.editorNotifier),
-      collabSessionProvider.overrideWith(
-        (ref) => CollabSessionNotifier(ref, tab),
-      ),
-      deckQualityRawProvider.overrideWith(computeDeckQualityRaw),
-      deckQualityProvider.overrideWith(computeDeckQuality),
-      imageContrastIssuesProvider.overrideWith(computeImageContrastIssues),
-      privacyRawScanProvider.overrideWith(computePrivacyRawScan),
-      imagePrivacyRawIssuesProvider.overrideWith(computeImagePrivacyRawIssues),
-      imagePrivacyIssuesProvider.overrideWith(computeImagePrivacyIssues),
-      privacyScanProvider.overrideWith(computePrivacyScan),
-      privacyQualityIssuesProvider.overrideWith(computePrivacyQualityIssues),
-      improvementQualityIssuesProvider.overrideWith(
-        computeImprovementQualityIssues,
-      ),
-      privacyExportSummaryProvider.overrideWith(computePrivacyExportSummary),
-    ],
-    child: const _TabContent(),
-  );
 
   /// Een laag naast het deck is niet ingelezen omdat hij te groot was.
   ///

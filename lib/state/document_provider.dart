@@ -191,3 +191,12 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
   void setError(String message) => state = state.copyWith(error: message);
   void clearError() => state = state.copyWith(clearError: true);
 }
+
+/// De document-notifier van het actieve documenttabblad.
+///
+/// Per tab overschreven in `_tabScope` (app_shell.dart) met de `DocumentNotifier`
+/// van dat tabblad — de tegenhanger van `deckProvider`. De root-fabriek is
+/// alleen een vangnet voor als er (nog) geen documenttabblad actief is.
+final documentProvider = StateNotifierProvider<DocumentNotifier, DocumentState>(
+  (ref) => DocumentNotifier(),
+);
