@@ -1806,6 +1806,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Los automatisch op wat kan': 'Deisigh an méid is féidir a uathoibriú',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'Thug OpenKAT freagra gan choinne ({code}). Bain triail eile as ar ball nó iarr cabhair ar do riarthóir.',
   'Vanuit een OpenKAT-server': 'Ó fhreastalaí OpenKAT',
@@ -2836,7 +2837,6 @@ const _dutchSourceAddGa = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Níl go leor sonraí le haghaidh plota dóchúlachta',
   'Met dank aan': 'Le buíochas',
-  'Fix alle problemen': 'Deisigh gach fadhb',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Réitíodh na fadhbanna in-réitithe go huathoibríoch. Éilíonn a bhfuil fágtha rogha.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

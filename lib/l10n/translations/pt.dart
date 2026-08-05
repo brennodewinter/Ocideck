@@ -1800,6 +1800,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Los automatisch op wat kan': 'Corrigir o que dá para automatizar',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'O OpenKAT devolveu uma resposta inesperada ({code}). Tente mais tarde ou peça ajuda ao administrador.',
   'Vanuit een OpenKAT-server': 'De um servidor OpenKAT',
@@ -2823,7 +2824,6 @@ const _dutchSourceAddPt = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Dados insuficientes para um probability plot',
   'Met dank aan': 'Com gratidão',
-  'Fix alle problemen': 'Corrigir todos os problemas',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Os problemas que podiam ser corrigidos automaticamente foram tratados. O que resta exige uma escolha.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

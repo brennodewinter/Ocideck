@@ -911,6 +911,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Los automatisch op wat kan': 'Fix what can be automated',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT returned an unexpected response ({code}). Try again later or ask your administrator for help.',
   'Vanuit een OpenKAT-server': 'From an OpenKAT server',
@@ -1925,7 +1926,6 @@ const _dutchSourceAddEn = {
   'Te weinig gegevens voor een probability plot':
       'Too little data for a probability plot',
   'Met dank aan': 'With thanks',
-  'Fix alle problemen': 'Fix all issues',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'The automatically fixable issues have been handled. What remains needs a choice.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

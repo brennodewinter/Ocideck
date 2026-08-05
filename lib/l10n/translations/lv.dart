@@ -1770,6 +1770,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Los automatisch op wat kan': 'Labot, ko var automātiski',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT atgrieza negaidītu atbildi ({code}). Mēģiniet vēlāk vai lūdziet palīdzību administratoram.',
   'Vanuit een OpenKAT-server': 'No OpenKAT servera',
@@ -2786,7 +2787,6 @@ const _dutchSourceAddLv = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Pārāk maz datu varbūtības diagrammai',
   'Met dank aan': 'Ar pateicību',
-  'Fix alle problemen': 'Labot visas problēmas',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Automātiski risināmās problēmas ir novērstas. Pārējais prasa izvēli.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

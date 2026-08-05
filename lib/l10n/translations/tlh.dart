@@ -1746,6 +1746,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Los automatisch op wat kan': 'tI\'laHlu\'bogh Qaghmey yItI\'',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT jang ({code}). qaS yIqaS pagh vavvo\' naw\'.',
   'Vanuit een OpenKAT-server': 'OpenKAT De\'wI\'vo\'',
@@ -2754,7 +2755,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'tlhoy puS De\' probability plot',
   'Met dank aan': 'Satlho\'',
-  'Fix alle problemen': 'Hoch Qaghmey yItI\'',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'tI\'laHlu\'bogh Qaghmey tI\'lu\'pu\'. wIv poQ ratlhtaHbogh Qaghmey.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

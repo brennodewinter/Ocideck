@@ -1787,6 +1787,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Los automatisch op wat kan': 'Corrige quae per se corrigi possunt',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT responsum inopinatum ({code}) dedit. Postea iterum conare vel administratorem adi.',
   'Vanuit een OpenKAT-server': 'Ex servo OpenKAT',
@@ -2804,7 +2805,6 @@ const _dutchSourceAddLa = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Nimis pauca data pro schemate probabilitatis',
   'Met dank aan': 'Gratias agimus',
-  'Fix alle problemen': 'Omnia problemata corrigere',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Problemata quae per se corrigi poterant tractata sunt. Quod restat electionem poscit.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

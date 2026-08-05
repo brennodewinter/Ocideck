@@ -1771,6 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Los automatisch op wat kan': 'Korjaa, mikä onnistuu automaattisesti',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT palautti odottamattoman vastauksen ({code}). Yritä myöhemmin uudelleen tai pyydä apua ylläpitäjältä.',
   'Vanuit een OpenKAT-server': 'OpenKAT-palvelimelta',
@@ -2789,7 +2790,6 @@ const _dutchSourceAddFi = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Liian vähän dataa todennäköisyyskuvaajaan',
   'Met dank aan': 'Kiitokset',
-  'Fix alle problemen': 'Korjaa kaikki ongelmat',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Automaattisesti korjattavat ongelmat on hoidettu. Loput vaativat valinnan.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

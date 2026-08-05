@@ -29,6 +29,9 @@ void main() {
       ]);
       expect(hasFixableIssue(deck), isTrue);
 
+      // De motor-accurate poort ziet dat er echt iets te doen valt (#1280).
+      expect(hasApplicableStructuralFix(deck), isTrue);
+
       final result = fixAllStructuralQualityIssues(deck);
 
       expect(result.applied, greaterThan(0));
@@ -42,6 +45,34 @@ void main() {
       // En er is geen automatisch op te lossen probleem meer over.
       expect(hasFixableIssue(result.deck), isFalse);
     });
+
+    test(
+      'hasApplicableStructuralFix spiegelt of de motor echt iets doet (#1280)',
+      () {
+        // Zeven bullets van dertien woorden: 91 > 90 → bulletWordCountHigh, maar
+        // 7 ≤ 8 bullets → de motor kan niet splitsen. De grove soort-poort
+        // [isStructurallyAutofixable] noemt dit tóch "fixbaar" (Laag 2 uit
+        // #1280): daardoor verscheen de knop en deed vervolgens niets.
+        final bullet = List.filled(13, 'woord').join(' ');
+        final deck = deckOf([
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(bullets: [for (var i = 0; i < 7; i++) bullet]),
+        ]);
+
+        // De oude soort-poort belooft te veel: ze vlagt het deck als fixbaar...
+        expect(hasFixableIssue(deck), isTrue);
+        // ...maar de motor werkt niets weg.
+        final applied = fixAllStructuralQualityIssues(deck).applied;
+        expect(applied, 0);
+
+        // De motor-accurate poort matcht de werkelijkheid: knop zichtbaar ⇔ er
+        // wordt echt gefixt. Waar de soort-poort hierboven true gaf, geeft deze
+        // false — precies de divergentie die de dode knop veroorzaakte.
+        expect(hasApplicableStructuralFix(deck), applied > 0);
+        expect(hasApplicableStructuralFix(deck), isFalse);
+      },
+    );
 
     test('knipt meerzins-bullets op zonder de dia te splitsen', () {
       final deck = deckOf([

@@ -726,6 +726,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Los automatisch op wat kan': 'Correggi ciò che si può in automatico',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT ha restituito una risposta imprevista ({code}). Riprovate più tardi o chiedete aiuto al vostro amministratore.',
   'Vanuit een OpenKAT-server': 'Da un server OpenKAT',
@@ -1757,7 +1758,6 @@ const _dutchSourceAddIt = {
   'Te weinig gegevens voor een probability plot':
       'Dati insufficienti per un probability plot',
   'Met dank aan': 'Con gratitudine',
-  'Fix alle problemen': 'Correggi tutti i problemi',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Risolti i problemi correggibili in automatico. Il resto richiede una scelta.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

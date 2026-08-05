@@ -1788,6 +1788,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Los automatisch op wat kan': 'Repară ce se poate automat',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT a returnat un răspuns neașteptat ({code}). Încercați mai târziu sau cereți ajutor administratorului.',
   'Vanuit een OpenKAT-server': 'De pe un server OpenKAT',
@@ -2813,7 +2814,6 @@ const _dutchSourceAddRo = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Prea puține date pentru un grafic de probabilitate',
   'Met dank aan': 'Cu recunoștință',
-  'Fix alle problemen': 'Repară toate problemele',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Problemele care puteau fi rezolvate automat au fost tratate. Ce rămâne cere o alegere.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

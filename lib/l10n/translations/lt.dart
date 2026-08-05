@@ -1778,6 +1778,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Los automatisch op wat kan': 'Taisyti, ką galima automatiškai',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT grąžino netikėtą atsakymą ({code}). Bandykite vėliau arba kreipkitės į administratorių.',
   'Vanuit een OpenKAT-server': 'Iš OpenKAT serverio',
@@ -2798,7 +2799,6 @@ const _dutchSourceAddLt = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Per mažai duomenų tikimybių grafikui',
   'Met dank aan': 'Su padėka',
-  'Fix alle problemen': 'Taisyti visas problemas',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Automatiškai išsprendžiamos problemos sutvarkytos. Kas lieka, reikalauja pasirinkimo.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

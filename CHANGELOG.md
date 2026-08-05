@@ -1062,6 +1062,19 @@ that before deciding whether this alpha fits what you are doing.
   mermaid-parser in de vertaalstap zou juist de syntaxis breken die de vertaler
   ontwijkt door codeblokken over te slaan; de poort dwingt de handmatige pas af.
   Docs: `docs/CHECKS.md`, en de reden staat bij de code in `tool/translate_docs.dart`.
+- **Kwaliteitspaneel: "Fix alle problemen" beloofde meer dan de knop waarmaakte (#1280).**
+  De knop werkt bewust alleen de structureel-veilige categorieën weg (te volle
+  dia's splitsen, meerzins-bullets opknippen) en laat contrast, alt-tekst,
+  ontbrekende media en privacy staan — die vragen menselijk oordeel. Twee lagen
+  hersteld: (1) de knop-poort spiegelt nu de motor via de nieuwe top-level helper
+  `hasApplicableStructuralFix` in `quality_autofix.dart`, zodat de knop zichtbaar
+  is ⇔ er ook echt iets wordt opgelost — geen dode knop meer bij bijv. een
+  woord-melding op een dia met te weinig bullets om te splitsen; (2) het label is
+  eerlijk gemaakt: "Los automatisch op wat kan" (EN "Fix what can be automated",
+  in alle 31 talen), de oude sleutel `Fix alle problemen` is opgeruimd.
+  Regressietests: `quality_autofix_test.dart` (helper spiegelt `applied`) en
+  `slide_quality_panel_test.dart` (gemengd deck: structureel opgelost, contrast
+  blijft, knop verdwijnt).
 - **OpenKAT live multi-serverkoppeling (desktop, v1).** Meerdere Rocky-installaties
   (naam, URL, LAN-vlag in prefs; Knox-token in de sleutelhanger). Integraties toont
   twee blokken: map-import (ongewijzigd) en serverkoppeling. Rocky REST leest

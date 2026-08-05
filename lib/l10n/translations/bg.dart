@@ -1793,6 +1793,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Los automatisch op wat kan': 'Поправи каквото може автоматично',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT върна неочакван отговор ({code}). Опитайте по-късно или поискайте помощ от администратора.',
   'Vanuit een OpenKAT-server': 'От OpenKAT сървър',
@@ -2817,7 +2818,6 @@ const _dutchSourceAddBg = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Твърде малко данни за график на вероятността',
   'Met dank aan': 'С благодарност',
-  'Fix alle problemen': 'Поправи всички проблеми',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Проблемите, които можеха да се решат автоматично, са решени. Останалото изисква избор.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

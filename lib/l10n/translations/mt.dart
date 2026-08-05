@@ -1793,6 +1793,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Los automatisch op wat kan':
+      'Irranġa dak li jista\' jissewwa awtomatikament',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT ritorna risposta mhux mistennija ({code}). Erġa\' pprova aktar tard jew itlob għajnuna lill-amministratur.',
   'Vanuit een OpenKAT-server': 'Minn server OpenKAT',
@@ -2824,7 +2826,6 @@ const _dutchSourceAddMt = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Data ftit wisq għal plot tal-probabbiltà',
   'Met dank aan': 'Ringrazzjamenti',
-  'Fix alle problemen': 'Irranġa l-problemi kollha',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Il-problemi li setgħu jissewwew awtomatikament ġew indirizzati. Dak li fadal jitlob għażla.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
