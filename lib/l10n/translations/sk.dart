@@ -1778,6 +1778,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Zoekveld wissen': 'Vymazať vyhľadávacie pole',
   'Gantt': 'Gantt',
   'Dag': 'Deň',
   'Week': 'Týždeň',

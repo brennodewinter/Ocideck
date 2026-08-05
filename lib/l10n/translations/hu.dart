@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Zoekveld wissen': 'Keresőmező törlése',
   'Gantt': 'Gantt',
   'Dag': 'Nap',
   'Week': 'Hét',

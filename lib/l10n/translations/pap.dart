@@ -730,6 +730,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Zoekveld wissen': 'Borsa e kampo di buska',
   'Gantt': 'Gantt',
   'Dag': 'Día',
   'Week': 'Siman',

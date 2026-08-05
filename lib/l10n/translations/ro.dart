@@ -1788,6 +1788,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Zoekveld wissen': 'Șterge câmpul de căutare',
   'Gantt': 'Gantt',
   'Dag': 'Zi',
   'Week': 'Săptămână',

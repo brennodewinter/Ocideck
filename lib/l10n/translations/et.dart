@@ -1762,6 +1762,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Zoekveld wissen': 'Tühjenda otsinguväli',
   'Gantt': 'Gantt',
   'Dag': 'Päev',
   'Week': 'Nädal',

@@ -911,6 +911,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Zoekveld wissen': 'Clear search field',
   'Gantt': 'Gantt',
   'Dag': 'Day',
   'Week': 'Week',

@@ -1793,6 +1793,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Zoekveld wissen': 'Изчисти полето за търсене',
   'Gantt': 'Gantt',
   'Dag': 'Ден',
   'Week': 'Седмица',

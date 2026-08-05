@@ -1783,6 +1783,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Zoekveld wissen': 'Wyczyść pole wyszukiwania',
   'Gantt': 'Gantt',
   'Dag': 'Dzień',
   'Week': 'Tydzień',

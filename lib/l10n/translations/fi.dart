@@ -1771,6 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Zoekveld wissen': 'Tyhjennä hakukenttä',
   'Gantt': 'Gantt',
   'Dag': 'Päivä',
   'Week': 'Viikko',

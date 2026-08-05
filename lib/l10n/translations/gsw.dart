@@ -1774,6 +1774,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Zoekveld wissen': 'Suechfeld lösche',
   'Gantt': 'Gantt',
   'Dag': 'Tag',
   'Week': 'Wuche',
