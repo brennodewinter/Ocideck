@@ -30,51 +30,56 @@ extension _ChartPreviewBullet on _ChartPreviewState {
         fontWeight: presentationMode ? FontWeight.w600 : FontWeight.normal,
       ),
     );
-    return _customGrow((t) {
-      return LayoutBuilder(
-        builder: (context, c) {
-          final labelW = math.max(w * 0.12, c.maxWidth * 0.24);
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(
-                width: labelW,
-                child: Column(
-                  children: [
-                    for (var i = 0; i < n; i++)
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: w * 0.008),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              spec.x[i],
-                              textAlign: TextAlign.right,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: labelStyle,
+    return _withCellTooltip(
+      tooltip: _cellTooltip,
+      w: w,
+      style: _tooltipStyle(),
+      chart: _customGrow((t) {
+        return LayoutBuilder(
+          builder: (context, c) {
+            final labelW = math.max(w * 0.12, c.maxWidth * 0.24);
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(
+                  width: labelW,
+                  child: Column(
+                    children: [
+                      for (var i = 0; i < n; i++)
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(right: w * 0.008),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                spec.x[i],
+                                textAlign: TextAlign.right,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: labelStyle,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    for (var i = 0; i < n; i++)
-                      Expanded(
-                        child: _bulletRow(spec, i, textColor, labelStyle, t),
-                      ),
-                  ],
+                Expanded(
+                  child: Column(
+                    children: [
+                      for (var i = 0; i < n; i++)
+                        Expanded(
+                          child: _bulletRow(spec, i, textColor, labelStyle, t),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
-      );
-    });
+              ],
+            );
+          },
+        );
+      }),
+    );
   }
 
   /// Eén rij: banden, meetbalk, streefstreepje en de waarde erachter.
@@ -93,56 +98,64 @@ extension _ChartPreviewBullet on _ChartPreviewState {
     // Banden van donker naar licht, oplopend: de slechtste zone is de zwaarste
     // grijstint, zodat de meetbalk er altijd bovenuit springt.
     final edges = <double>[...spec.bands]..sort();
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: w * 0.004),
-      child: LayoutBuilder(
-        builder: (context, c) {
-          final plotW = c.maxWidth;
-          final rowH = c.maxHeight;
-          double at(double v) => (v / maxX).clamp(0.0, 1.0) * plotW;
-          // Élk kind is gepositioneerd én de stack vult zijn rij: anders krimpt
-          // de Stack tot de meetbalk en krijgt iedere rij zijn eigen nulpunt,
-          // zodat de banden niet meer onder elkaar liggen.
-          return Stack(
-            fit: StackFit.expand,
-            children: [
-              for (var b = 0; b <= edges.length; b++)
+    final label = i < spec.x.length ? spec.x[i] : '';
+    return MouseRegion(
+      key: ValueKey('bullet-cell-$i'),
+      onEnter: (_) => _setCellTooltip(
+        '${label.isEmpty ? '' : '$label\n'}${_fmtNum(value)}',
+      ),
+      onExit: (_) => _setCellTooltip(null),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: w * 0.004),
+        child: LayoutBuilder(
+          builder: (context, c) {
+            final plotW = c.maxWidth;
+            final rowH = c.maxHeight;
+            double at(double v) => (v / maxX).clamp(0.0, 1.0) * plotW;
+            // Élk kind is gepositioneerd én de stack vult zijn rij: anders krimpt
+            // de Stack tot de meetbalk en krijgt iedere rij zijn eigen nulpunt,
+            // zodat de banden niet meer onder elkaar liggen.
+            return Stack(
+              fit: StackFit.expand,
+              children: [
+                for (var b = 0; b <= edges.length; b++)
+                  Positioned(
+                    left: b == 0 ? 0 : at(edges[b - 1]),
+                    width:
+                        (b == edges.length ? plotW : at(edges[b])) -
+                        (b == 0 ? 0 : at(edges[b - 1])),
+                    top: 0,
+                    bottom: 0,
+                    child: ColoredBox(
+                      color: textColor.withValues(
+                        alpha: 0.18 - b * (0.12 / (edges.length + 1)),
+                      ),
+                    ),
+                  ),
                 Positioned(
-                  left: b == 0 ? 0 : at(edges[b - 1]),
-                  width:
-                      (b == edges.length ? plotW : at(edges[b])) -
-                      (b == 0 ? 0 : at(edges[b - 1])),
-                  top: 0,
-                  bottom: 0,
-                  child: ColoredBox(
-                    color: textColor.withValues(
-                      alpha: 0.18 - b * (0.12 / (edges.length + 1)),
+                  left: 0,
+                  top: rowH * 0.33,
+                  height: rowH * 0.34,
+                  width: at(value) * t,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: measureColor,
+                      borderRadius: BorderRadius.circular(rowH * 0.06),
                     ),
                   ),
                 ),
-              Positioned(
-                left: 0,
-                top: rowH * 0.33,
-                height: rowH * 0.34,
-                width: at(value) * t,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: measureColor,
-                    borderRadius: BorderRadius.circular(rowH * 0.06),
+                if (target != null)
+                  Positioned(
+                    left: math.max(0.0, at(target) - 1.25),
+                    top: rowH * 0.1,
+                    height: rowH * 0.8,
+                    width: 2.5,
+                    child: ColoredBox(color: textColor),
                   ),
-                ),
-              ),
-              if (target != null)
-                Positioned(
-                  left: math.max(0.0, at(target) - 1.25),
-                  top: rowH * 0.1,
-                  height: rowH * 0.8,
-                  width: 2.5,
-                  child: ColoredBox(color: textColor),
-                ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }

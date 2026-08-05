@@ -1046,6 +1046,20 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Grafieken: waarde-tooltip bij hover voor zeven ontbrekende types (#1281).**
+  Spreiding (scatter), gestapelde staaf, horizontale staaf, horizontale
+  gestapelde staaf, combo, waterval en bullet toonden bij muis-hover geen
+  waarde, terwijl staaf/lijn/vlak/cirkel/radar dat wél deden. Twee oorzaken,
+  beide verholpen: bij scatter/gestapelde staaf/waterval/combo stond de
+  fl_chart-touch op `enabled: false` — nu aan, met een `touchTooltipData`
+  gemodelleerd op de werkende staaf/lijn-tooltips; de handgetekende types
+  (horizontale (gestapelde) staaf, bullet) en de gelaagde combo kregen een eigen
+  hover-overlay in de stijl van de cirkel/radar-tooltip. De herbruikbare
+  tooltip-helpers en de heatmap-bouwer zijn naar de nieuwe parts
+  `chart_preview_touch.dart` en `chart_preview_heatmap.dart` gelicht om onder de
+  bestandsgroottegrens te blijven. Zeven nieuwe hover-tests (eerst-rood) dekken
+  alle types; de tooltip hergebruikt bestaande tekst (`Reeks`), dus geen nieuwe
+  vertalingen.
 - **Vertaalde handleiding toonde een Engels mermaid-diagram (#1278).** In de
   Nederlandse gebruikershandleiding stond het stroomschema onder "In het kort
   verplaatst een deck zich als volgt door OciDeck" met Engelse labels. Oorzaak:

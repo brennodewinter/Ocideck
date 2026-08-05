@@ -177,7 +177,9 @@ const Map<String, int> fileSizeBaseline = {
   // menu_preview.dart.
   // +7 (#1162): het `onMenuBlockTap`-veld + constructor-param + doorgifte, zodat
   // een keuze-menublok tijdens presenteren aanklikbaar is.
-  'lib/widgets/slides/slide_preview.dart': 1074,
+  // +2 (#1281): twee nieuwe `part`-regels (chart_preview_heatmap /
+  // chart_preview_touch) om chart_preview_extra.dart onder de 1000 te houden.
+  'lib/widgets/slides/slide_preview.dart': 1076,
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
   'lib/state/settings_provider.dart': 1057,
@@ -251,7 +253,13 @@ const Map<String, int> classSizeBaseline = {
   // mental model. Follow-up: lift painters to a ChartImprovementSurface.
   // +1: normalityLabel (l10n 'AD p=') on the probability-plot painter call.
   // +7: Y-01-resolutie in de preview-aanroep (deck-limieten via yRef).
-  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 2868,
+  // +134 (#1281): hover-tooltips voor scatter/gestapelde/horizontale staaf/
+  // combo/waterval/bullet. De herbruikbare stukken (tooltiptekst-bouwers, de
+  // overlay-widget, de combo-overlay) staan al top-level in
+  // chart_preview_touch.dart; wat resteert is de touch-configuratie die per
+  // definitie ín de builder-methoden van deze State leeft (fl_chart
+  // *TouchData, MouseRegion-omhulsels, het `_cellTooltip`-veld + setter).
+  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3002,
   // Procesverbetering: improvement-slide discovery + save paths.
   // +4: Y-01/framework-args op newDeck + improvement-module-prompt.
   'lib/state/tabs_provider.dart#TabsNotifier': 2235,
