@@ -731,6 +731,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Zoekveld wissen': 'Sykfjild wiskje',
   'Gantt': 'Gantt',
   'Dag': 'Dei',
   'Week': 'Wike',

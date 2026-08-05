@@ -1746,6 +1746,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Zoekveld wissen': 'nejwI\' yIwoH',
   'Gantt': 'Gantt',
   'Dag': 'jaj',
   'Week': 'Hogh',

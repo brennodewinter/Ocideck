@@ -13,8 +13,10 @@ import 'package:ocideck/widgets/editors/bullets_editor.dart';
 import 'package:ocideck/widgets/editors/signoff_editor.dart';
 import 'package:ocideck/widgets/editors/table_editor.dart';
 import 'package:ocideck/widgets/editors/timeline_editor.dart';
+import 'package:ocideck/widgets/dialogs/new_deck_dialog.dart';
 import 'package:ocideck/widgets/editors/two_images_editor.dart';
 import 'package:ocideck/widgets/editors/video_slide_editor.dart';
+import 'package:ocideck/widgets/searchable_language_picker.dart';
 
 /// Toegankelijkheidsvangrail voor de editors.
 ///
@@ -155,6 +157,69 @@ void main() {
         );
       });
     }
+
+    // De twee zoekveld-wisknoppen uit #1247. De bronscan hieronder vangt een
+    // kale Tooltip om een IconButton, maar níet een kale IconButton zonder
+    // tooltip — en deze twee dialogen werden bovendien door geen enkele widget-
+    // test gepompt met de clear-knop in beeld. De knop is pas zichtbaar als er
+    // tekst in het zoekveld staat, dus typen we eerst.
+    testWidgets(
+      'de taalkiezer-wisknop draagt een naam als hij zichtbaar is (#1247)',
+      (tester) async {
+        final handle = tester.ensureSemantics();
+        await tester.pumpWidget(
+          _testApp(
+            SearchableLanguagePicker(
+              languageCode: 'en',
+              onLanguageChanged: (_) {},
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        // Open de dialoog en typ iets, zodat de wisknop verschijnt.
+        await tester.tap(find.text('English'));
+        await tester.pumpAndSettle();
+        await tester.enterText(find.byType(TextField), 'neder');
+        await tester.pump();
+
+        final offenders = unnamedButtons(tester);
+        handle.dispose();
+
+        expect(
+          offenders,
+          isEmpty,
+          reason:
+              'de wisknop in de taalkiezer heeft geen tooltip; een schermlezer '
+              'kondigt hem aan als naamloze knop (WCAG 4.1.2)',
+        );
+      },
+    );
+
+    testWidgets(
+      'de sjabloonzoek-wisknop draagt een naam als hij zichtbaar is (#1247)',
+      (tester) async {
+        final handle = tester.ensureSemantics();
+        await tester.pumpWidget(_testApp(const NewDeckDialog()));
+        await tester.pumpAndSettle();
+        // Typ in het sjabloonzoekveld, zodat de wisknop verschijnt.
+        await tester.enterText(
+          find.byKey(const ValueKey('templateSearchField')),
+          'brief',
+        );
+        await tester.pump();
+
+        final offenders = unnamedButtons(tester);
+        handle.dispose();
+
+        expect(
+          offenders,
+          isEmpty,
+          reason:
+              'de wisknop in de sjabloonzoek heeft geen tooltip; een schermlezer '
+              'kondigt hem aan als naamloze knop (WCAG 4.1.2)',
+        );
+      },
+    );
   });
 
   testWidgets('de vangrail merkt een kale icoonknop daadwerkelijk op', (

@@ -1777,6 +1777,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Zoekveld wissen': 'Obriši polje pretraživanja',
   'Gantt': 'Gantt',
   'Dag': 'Dan',
   'Week': 'Tjedan',

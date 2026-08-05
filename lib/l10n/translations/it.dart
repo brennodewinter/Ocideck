@@ -726,6 +726,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Zoekveld wissen': 'Cancella campo di ricerca',
   'Gantt': 'Gantt',
   'Dag': 'Giorno',
   'Week': 'Settimana',

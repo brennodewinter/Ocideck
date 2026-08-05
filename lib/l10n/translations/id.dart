@@ -1771,6 +1771,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Zoekveld wissen': 'Hapus bidang pencarian',
   'Gantt': 'Gantt',
   'Dag': 'Hari',
   'Week': 'Minggu',

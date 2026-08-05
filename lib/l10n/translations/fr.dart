@@ -730,6 +730,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Zoekveld wissen': 'Effacer le champ de recherche',
   'Gantt': 'Gantt',
   'Dag': 'Jour',
   'Week': 'Semaine',

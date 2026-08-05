@@ -1798,6 +1798,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Zoekveld wissen': 'Καθαρισμός πεδίου αναζήτησης',
   'Gantt': 'Gantt',
   'Dag': 'Ημέρα',
   'Week': 'Εβδομάδα',

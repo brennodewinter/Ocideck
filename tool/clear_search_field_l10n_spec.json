@@ -1,0 +1,37 @@
+{
+  "additions": {
+    "Zoekveld wissen": {
+      "en": "Clear search field",
+      "it": "Cancella campo di ricerca",
+      "de": "Suchfeld löschen",
+      "fr": "Effacer le champ de recherche",
+      "es": "Borrar campo de búsqueda",
+      "fy": "Sykfjild wiskje",
+      "pap": "Borsa e kampo di buska",
+      "la": "Purgare campum quaerendi",
+      "id": "Hapus bidang pencarian",
+      "pl": "Wyczyść pole wyszukiwania",
+      "uk": "Очистити поле пошуку",
+      "gsw": "Suechfeld lösche",
+      "el": "Καθαρισμός πεδίου αναζήτησης",
+      "da": "Ryd søgefelt",
+      "sv": "Rensa sökfält",
+      "hr": "Obriši polje pretraživanja",
+      "cs": "Vymazat vyhledávací pole",
+      "fi": "Tyhjennä hakukenttä",
+      "bg": "Изчисти полето за търсене",
+      "lv": "Notīrīt meklēšanas lauku",
+      "lt": "Išvalyti paieškos lauką",
+      "mt": "Neħħi l-kamp tat-tfittxija",
+      "et": "Tühjenda otsinguväli",
+      "hu": "Keresőmező törlése",
+      "ga": "Glan an réimse cuardaigh",
+      "pt": "Limpar campo de pesquisa",
+      "ro": "Șterge câmpul de căutare",
+      "sl": "Počisti iskalno polje",
+      "sk": "Vymazať vyhľadávacie pole",
+      "tlh": "nejwI' yIwoH",
+      "tr": "Arama alanını temizle"
+    }
+  }
+}

@@ -152,6 +152,7 @@ class _LanguageSearchDialogState extends State<_LanguageSearchDialog> {
                       ? null
                       : IconButton(
                           icon: const Icon(Icons.clear, size: 16),
+                          tooltip: l10n.d('Zoekveld wissen'),
                           onPressed: () {
                             _searchCtrl.clear();
                             setState(() => _query = '');

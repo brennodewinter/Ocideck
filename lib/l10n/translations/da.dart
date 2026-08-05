@@ -1770,6 +1770,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Zoekveld wissen': 'Ryd søgefelt',
   'Gantt': 'Gantt',
   'Dag': 'Dag',
   'Week': 'Uge',

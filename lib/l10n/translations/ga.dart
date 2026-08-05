@@ -1806,6 +1806,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Zoekveld wissen': 'Glan an réimse cuardaigh',
   'Gantt': 'Gantt',
   'Dag': 'Lá',
   'Week': 'Seachtain',

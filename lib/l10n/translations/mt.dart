@@ -1793,6 +1793,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Zoekveld wissen': 'Neħħi l-kamp tat-tfittxija',
   'Gantt': 'Gantt',
   'Dag': 'Jum',
   'Week': 'Ġimgħa',

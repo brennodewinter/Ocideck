@@ -1770,6 +1770,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Zoekveld wissen': 'Rensa sökfält',
   'Gantt': 'Gantt',
   'Dag': 'Dag',
   'Week': 'Vecka',

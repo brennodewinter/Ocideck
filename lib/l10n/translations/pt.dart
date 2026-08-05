@@ -1800,6 +1800,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Zoekveld wissen': 'Limpar campo de pesquisa',
   'Gantt': 'Gantt',
   'Dag': 'Dia',
   'Week': 'Semana',

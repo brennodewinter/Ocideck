@@ -1778,6 +1778,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Zoekveld wissen': 'Išvalyti paieškos lauką',
   'Gantt': 'Gantt',
   'Dag': 'Diena',
   'Week': 'Savaitė',

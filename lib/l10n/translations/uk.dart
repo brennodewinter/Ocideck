@@ -1788,6 +1788,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Zoekveld wissen': 'Очистити поле пошуку',
   'Gantt': 'Gantt',
   'Dag': 'День',
   'Week': 'Тиждень',
