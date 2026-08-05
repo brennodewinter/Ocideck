@@ -79,6 +79,7 @@ they live in the repository. See [How these documents are maintained](#how-these
 | [VERIFICATION.md](design/VERIFICATION.md) | A worklist, in Dutch: what has been built and passes its own tests but has never met a real server, a second operating system or a real report. |
 | [LEXICON_LICENTIENAVRAAG.md](design/LEXICON_LICENTIENAVRAAG.md) | A licensing dossier, in Dutch: three lexicon sources that would enrich the privacy check, and why none of them can be bundled yet. |
 | [OPENKAT_DISTRIBUTIE.md](design/OPENKAT_DISTRIBUTIE.md) | Design proposal, unbuilt: encrypted report distribution to a recipient who has minimal friction — double-click and view. The distribution side of the OpenKAT integration. |
+| [OPENKAT_ROCKY_REPORT_API.md](design/OPENKAT_ROCKY_REPORT_API.md) | Research/design contract: how Rocky reports work via API and JSON export, and what that means for a later live OpenKAT integration in OciDeck. Dutch twin: [OPENKAT_ROCKY_REPORT_API.nl.md](design/OPENKAT_ROCKY_REPORT_API.nl.md). |
 
 *(Corrected 2026-07-22: this list named seven of the then-nine documents in
 `design/`; `VERIFICATION.md` and `LEXICON_LICENTIENAVRAAG.md` were missing while
