@@ -1046,6 +1046,22 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Vertaalde handleiding toonde een Engels mermaid-diagram (#1278).** In de
+  Nederlandse gebruikershandleiding stond het stroomschema onder "In het kort
+  verplaatst een deck zich als volgt door OciDeck" met Engelse labels. Oorzaak:
+  `tool/translate_docs.dart` geeft de hele Markdown-body aan een externe vertaler,
+  en die laat codeblokken — en dus ook een mermaid-blok — bewust ongemoeid om de
+  syntaxis niet te breken; de labeltekst bleef daardoor Engels terwijl het proza
+  eromheen wél werd vertaald. Het diagram in `docs/USER_GUIDE.nl.md` is nu met de
+  hand vertaald (knoop-ID's en mermaid-syntaxis intact). Een nieuwe statische poort
+  `make check-translated-mermaid` (`tool/check_translated_mermaid.dart`, in
+  `STATIC_GATES`) faalt voortaan wanneer een gegenereerde `docs/NAME.<taal>.md` een
+  mermaid-blok draagt dat byte-identiek is aan de Engelse bron — voor élke huidige
+  en toekomstige taal, met een expliciete witte lijst voor echt taalneutrale
+  diagrammen (nu leeg). Mermaid-labels blijven bewust handwerk: een halve
+  mermaid-parser in de vertaalstap zou juist de syntaxis breken die de vertaler
+  ontwijkt door codeblokken over te slaan; de poort dwingt de handmatige pas af.
+  Docs: `docs/CHECKS.md`, en de reden staat bij de code in `tool/translate_docs.dart`.
 - **OpenKAT live multi-serverkoppeling (desktop, v1).** Meerdere Rocky-installaties
   (naam, URL, LAN-vlag in prefs; Knox-token in de sleutelhanger). Integraties toont
   twee blokken: map-import (ongewijzigd) en serverkoppeling. Rocky REST leest

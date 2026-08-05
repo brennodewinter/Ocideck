@@ -49,12 +49,12 @@ In het kort verplaatst een deck zich als volgt door OciDeck:
 
 ```mermaid
 flowchart LR
-    New[New or open a deck] --> Edit[Compose typed slides]
-    Edit --> Preview[Live preview]
+    New[Nieuw of een deck openen] --> Edit[Getypte dia's samenstellen]
+    Edit --> Preview[Live voorbeeld]
     Preview --> Edit
-    Edit --> Present[Present on one or two screens]
-    Edit --> Export[Export to Markdown, PDF, PPTX or offline HTML]
-    Export --> Reuse[Reopen in OciDeck or another Marp tool]
+    Edit --> Present[Presenteren op één of twee schermen]
+    Edit --> Export[Exporteren naar Markdown, PDF, PPTX of offline HTML]
+    Export --> Reuse[Heropenen in OciDeck of een andere Marp-tool]
 ```
 
 ## Decks maken en openen
