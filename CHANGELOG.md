@@ -1029,6 +1029,26 @@ that before deciding whether this alpha fits what you are doing.
   wanneer upstream `GET /api/v1/report/{pk}/json/` heeft. Geen recipe-CRUD,
   Octopoes/Bytes of sessie-download. Web: kaart zichtbaar, uitgeschakeld.
   Documentatie: USER_GUIDE, OPENKAT_ROCKY_REPORT_API, SOURCE_MAP.
+- **Linux-distributie fase 1: AppImage, `.deb`, `.rpm` en een AUR-PKGBUILD (#1227).**
+  De releaseketen leverde Linux alleen als tarball; nu hangt de `linux`-job na
+  `make build-linux` ook drie draagbare formaten aan elke release — een AppImage
+  (vrijwel elke distro), een `.deb` (Debian/Ubuntu/Mint) en een `.rpm`
+  (Fedora/openSUSE) — plus `ocideck-bin` voor de AUR. Elk verpakt dezelfde bundel;
+  geen store, geen sandbox, de directe forge-download blijft canoniek
+  (`assurance/app-store-distributie-positie.md`; ontwerp in
+  `docs/design/LINUX_PACKAGING.md`). Bewust met een eigen, transparant script
+  (`scripts/package_linux.sh`: `dpkg-deb`/`rpmbuild` + een sha256-gepinde
+  `appimagetool`) in plaats van `fastforge` — dat past bij de pin- en
+  herkomstlijn van de repo en voegt geen Dart-toolketen toe. De `.deb` overbrugt
+  de Ubuntu-`t64`-hernoemingen met alternatieve deps; de `.rpm` laat rpmbuild
+  soname-`Requires` afleiden zodat hij op Fedora én openSUSE oplost. appimagetool
+  kent alleen een rollende `continuous`-tag, dus de sha256 ÍS de pin: drift faalt
+  hoorbaar in plaats van stil een ander binary te draaien. De pakketten bouwen
+  alleen op een Linux-tag, dus `test/linux_packaging_test.dart` pint de bedrading
+  offline; de echte pakketten valideer je met een `-rc1`-tag. Fase 2 (eigen
+  apt/rpm-repo) en fase 3 (Flatpak/Snap achter de capaciteits-feature-flag) staan
+  nog open. Docs: `docs/BUILD.md` § "Linux packaging", `packaging/README.md` en de
+  README-downloadalinea.
 - **De HTML-export schrijft `<html lang="…">` in de taal van het deck (#1249).**
   De export hardcodeerde altijd `<html lang="nl">`, ongeacht de interfacetaal of
   de taal van de inhoud. Een schermlezer kondigde daarmee een Fins deck aan in

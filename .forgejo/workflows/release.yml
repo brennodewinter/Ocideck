@@ -231,11 +231,13 @@ jobs:
       # liblzma-dev + libsecret-1-dev: nodig voor `make build-linux`
       # (flutter_secure_storage linkt libsecret; lzma voor compressie), maar niet
       # voor de test-gates, dus ze zitten niet in het image. build-essential/clang/
-      # cmake/ninja/pkg-config/libgtk-3-dev zitten er wél al in.
+      # cmake/ninja/pkg-config/libgtk-3-dev zitten er wél al in. `rpm` levert
+      # rpmbuild voor het .rpm-pakket (#1227); dpkg-deb voor het .deb zit al in het
+      # basissysteem, en appimagetool haalt het pakketscript sha256-geverifieerd op.
       - name: Ontbrekende Linux-buildlibs
         run: |
           apt-get update
-          apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev
+          apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev rpm
 
       - uses: actions/checkout@v4
 
@@ -278,19 +280,44 @@ jobs:
         # ./lib/…) over de map waarin je stond (issue #904). --transform
         # hernoemt de bovenste padcomponent `bundle` naar `ocideck-<versie>`;
         # het anker ^bundle raakt geen symlink-doelen, want die beginnen daar
-        # nooit mee.
+        # nooit mee. Alles landt in dist/ zodat één artifact zowel de tarball als
+        # de pakketten draagt en ze in `publiceren` weer samen in dist/ komen.
         run: |
           VERSIE="${GITHUB_REF_NAME#v}"
+          mkdir -p dist
           tar -C build/linux/x64/release \
             --transform "s,^bundle,ocideck-$VERSIE," \
-            -czf "ocideck-linux-x64-$VERSIE.tar.gz" bundle
+            -czf "dist/ocideck-linux-x64-$VERSIE.tar.gz" bundle
           echo "VERSIE=$VERSIE" >> "$GITHUB_ENV"
+
+      - name: Linux-pakketten bouwen (AppImage/.deb/.rpm)
+        # Phase 1 van de Linux-installatieroute (#1227, docs/design/LINUX_PACKAGING.md):
+        # naast de rauwe tarball een AppImage, een .deb en een .rpm — losse assets
+        # aan de release, geen store en geen sandbox. appimagetool zit in geen
+        # distro, dus het pakketscript haalt het op en toetst het tegen deze
+        # sha256. De hash ÍS de pin: draait de `continuous`-build upstream weg, dan
+        # faalt de download hier hoorbaar in plaats van stil een ander binary te
+        # draaien. Daarom staat appimagetool niet als *_VERSION in de pin-manifest
+        # (een content-hash veroudert niet in stilte); bij een sha-mismatch: haal
+        # de nieuwe digest uit de GitHub-release-API en werk hem hier bij.
+        env:
+          APPIMAGETOOL_URL: https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+          APPIMAGETOOL_SHA256: a6d71e2b6cd66f8e8d16c37ad164658985e0cf5fcaa950c90a482890cb9d13e0
+          OUT: dist
+        run: make package-linux VERSION="$VERSIE"
 
       - name: Artifact bewaren
         uses: actions/upload-artifact@v3
         with:
           name: ocideck-linux
-          path: ocideck-linux-x64-${{ env.VERSIE }}.tar.gz
+          # Alle vier de Linux-assets in één artifact. De gemeenschappelijke
+          # basismap is dist/, dus ze downloaden in `publiceren` weer in dist/ en
+          # vallen daar onder de SHA256SUMS-sweep.
+          path: |
+            dist/ocideck-linux-x64-${{ env.VERSIE }}.tar.gz
+            dist/ocideck-linux-amd64-${{ env.VERSIE }}.deb
+            dist/ocideck-linux-x86_64-${{ env.VERSIE }}.rpm
+            dist/ocideck-linux-x86_64-${{ env.VERSIE }}.AppImage
 
   macos:
     name: macOS bouwen
