@@ -56,6 +56,34 @@ void main() {
     expect(find.widgetWithText(TextField, 'a'), findsOneWidget);
   });
 
+  testWidgets('de Overzicht-rail toont de koppen en scrollt zonder crash', (
+    tester,
+  ) async {
+    // Breed genoeg dat de rail meedoet (>= 940).
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse('# Een\n\n## Twee\n\ntekst\n\n# Drie\n'),
+      );
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    // De koppen staan in de rail (eigen documenttekst, geen l10n). De weergave
+    // rendert ze als RichText, de editor als één bronveld, dus find.text raakt
+    // hier de rail-items.
+    expect(find.text('Een'), findsWidgets);
+    expect(find.text('Twee'), findsWidgets);
+    expect(find.text('Drie'), findsWidgets);
+
+    // Klikken op een kop scrollt de weergave; mag niet crashen.
+    await tester.tap(find.text('Twee').first);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('Cmd+S slaat op naar het pad en maakt het document schoon', (
     tester,
   ) async {
