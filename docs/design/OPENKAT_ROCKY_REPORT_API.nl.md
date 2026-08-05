@@ -1,6 +1,6 @@
 # OciDeck — OpenKAT Rocky rapportage-API
 
-> **Status:** onderzoek / ontwerpcontract voor latere live-integratie; nog niets gebouwd — OciDeck importeert vandaag alleen JSON-bestanden van schijf · **Status laatst herzien:** 2026-08-05 · **Uitgever:** Stichting LibreKAT · **Language:** Nederlands
+> **Status:** upstream-onderzoekscontract **plus** OciDeck v1 live-client (desktop): metadata via Rocky REST; rapport-JSON standaard = begeleidde bestandsexport (pad B); optionele REST `/json/` wanneer upstream die heeft (pad A). Sessie-download (pad C), recipe-CRUD vanuit de app, Octopoes/Bytes: niet gebouwd · **Status laatst herzien:** 2026-08-05 · **Uitgever:** Stichting LibreKAT · **Language:** Nederlands
 >
 > Engelse tweeling: [OPENKAT_ROCKY_REPORT_API.md](OPENKAT_ROCKY_REPORT_API.md)
 
@@ -448,19 +448,44 @@ niet voor het ophalen van rapportpayloads.
 
 ---
 
-## 7. Wat OciDeck vandaag al aankan
+## 7. Wat OciDeck vandaag aankan
+
+### 7.1 Bestandsimport (ongewijzigd)
 
 Bestandsimport (desktop): map → `.json` → adapters:
 
-1. **Organisatierapport** — envelope + platte `data` (aggregate export).
+1. **Organisatierapport** — envelope + platte `data` (aggregate-export).
 2. **Assetrapporten** — envelope + `data[report-type][ooi]` met `template`.
 
-Geen HTTP-client, geen Knox-token, geen NetGuard-allowlist voor Rocky.
-Zie `openkat_export_adapters.dart` en tests voor exacte velden / finding-shapes.
+Geen HTTP in dit pad. Zie `openkat_export_adapters.dart` en tests voor exacte
+velden / finding-vormen.
+
+### 7.2 Live Rocky-client (v1, desktop, 2026-08-05)
+
+Geïmplementeerd in `lib/models/openkat/openkat_installation.dart`,
+`lib/services/openkat/openkat_rocky_client.dart`, `lib/state/openkat_provider.dart`
+en de Integraties-UI (`openkat_installation_wizard.dart`,
+`openkat_installations_section.dart`, `openkat_server_report_dialog.dart`). UX-
+contract: [OPENKAT_LIVE_UX.md](OPENKAT_LIVE_UX.md).
+
+| Onderwerp | v1-gedrag |
+|---|---|
+| Installaties | Meerdere; metadata (naam, basis-URL, LAN-vlag, laatste teststatus) in prefs (`openkatInstallations`); Knox-token per installatie-id in `SecretStore` — nooit in Markdown/deck |
+| Rocky-calls | Alleen GET via NetGuard + pinning: `GET /api/v1/organization/`, `GET /api/v1/report/?organization_code=` gefilterd op `aggregate-organisation-report` |
+| Rapport-JSON-payload | **Pad B (default):** gebruiker exporteert JSON in Rocky UI, kiest bestand of map in OciDeck → bestaande importpijplijn. **Pad A (optioneel):** `fetchReportJson` probeert `GET /api/v1/report/{pk}/json/`; bij 404/405/501 of niet-JSON body terugval naar pad B — geen belofte dat REST altijd JSON levert |
+| Niet in v1 | Recipe-CRUD, Octopoes/Bytes, sessie/`?json=true`-download (pad C), portfolio over servers in één run, centrale proxy, telemetrie |
+| Web | OpenKAT-integratiekaart zichtbaar op Integraties maar uitgeschakeld (geen sleutelhanger / mapkiezer) |
+| Fail closed | Time-outs, hostbeleid, auth-fouten; geen half geïmporteerd deck |
+
+De live-dialoog toont orgs en aggregaat-rapporten, importeert daarna via pad A
+wanneer upstream dat ondersteunt, of toont de begeleide exportstap (pad B). Eén
+server per run; geen stille wissel van "actieve server".
 
 ---
 
 ## 8. Bouwopties voor live-integratie
+
+*(Historische ontwerpopties; v1 leverde pad B met optionele pad-A-probe — zie §7.2.)*
 
 ### Optie A — Knox + REST metadata, JSON via UI-sessie (hybride)
 
@@ -606,19 +631,12 @@ API (#3746), JSON download in UI (#3460).
 
 ---
 
-## 12. Open vragen vóór bouw
+## 12. Open vragen (na v1)
 
-1. **Upstream JSON-action:** willen we Optie B upstream bijdragen, of alleen
-   consumeren wat er is?
-2. **Multi-org:** trekken we ook `multi-organization-report` / geüploade
-   `ReportData`, of blijft dat buiten OciDeck (sectorvergelijking zit al deels
-   in onze portfolio-scenario’s)?
-3. **Recipe-beheer in OciDeck:** alleen lezen/pullen, of ook schedules
-   aanmaken vanuit de app? (product + beveiliging)
-4. **Token UX:** wie maakt Knox-tokens aan (beheerder in Rocky-admin) en hoe
-   documenteren we dat voor gebruikers?
-5. **Versiepin:** welke OpenKAT-release ondersteunen we; hoe detecteren we
-   `intput_oois` vs eventuele fix?
+1. **Upstream JSON-action:** Optie B upstream bijdragen zodat pad A betrouwbaar wordt, of pad B als blijvende default houden?
+2. **Multi-org:** `multi-organization-report` / geüploade `ReportData` ophalen, of buiten OciDeck houden?
+3. **Recipe-beheer in OciDeck:** in v1 nog read-only — schedules vanuit de app aanmaken blijft een product- + beveiligingsbesluit.
+4. **Token UX-documentatie:** beheerder-stappen voor Knox-tokens in Rocky-admin — deels in USER_GUIDE / OPENKAT_LIVE_UX.
+5. **Versiepin:** welke OpenKAT-release is getest; `intput_oois` vs upstream-fix detecteren.
 
-Tot die vragen beantwoord zijn, blijft de veilige default: **bestandsexport uit
-Rocky → map in OciDeck**, met dit document als contract voor de volgende stap.
+**Veilige default in productie vandaag:** pad B (Rocky UI JSON-export → bestand/map → bestaande adapters). Pad A wordt gebruikt wanneer Rocky `/json/` exposeert; pad C (sessie-download) is expliciet niet gebouwd.

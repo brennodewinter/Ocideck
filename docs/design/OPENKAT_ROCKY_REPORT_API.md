@@ -1,6 +1,6 @@
 # OciDeck — OpenKAT Rocky report API
 
-> **Status:** research / design contract for a later live integration; nothing built yet — OciDeck today only imports JSON files from disk · **Status last reviewed:** 2026-08-05 · **Published by:** Stichting LibreKAT · **Language:** English
+> **Status:** upstream research contract **plus** OciDeck v1 live client (desktop): metadata via Rocky REST; report JSON default = guided file export (path B); optional REST `/json/` when upstream has it (path A). Session download (path C), recipe CRUD from the app, Octopoes/Bytes: not built · **Status last reviewed:** 2026-08-05 · **Published by:** Stichting LibreKAT · **Language:** English
 >
 > Dutch twin: [OPENKAT_ROCKY_REPORT_API.nl.md](OPENKAT_ROCKY_REPORT_API.nl.md)
 
@@ -447,19 +447,44 @@ for fetching report payloads.
 
 ---
 
-## 7. What OciDeck already handles
+## 7. What OciDeck handles today
+
+### 7.1 File import (unchanged)
 
 File import (desktop): folder → `.json` → adapters:
 
 1. **Organisation report** — envelope + flat `data` (aggregate export).
 2. **Asset reports** — envelope + `data[report-type][ooi]` with `template`.
 
-No HTTP client, no Knox token, no NetGuard allowlist for Rocky. See
-`openkat_export_adapters.dart` and tests for exact fields / finding shapes.
+No HTTP in this path. See `openkat_export_adapters.dart` and tests for exact
+fields / finding shapes.
+
+### 7.2 Live Rocky client (v1, desktop, 2026-08-05)
+
+Implemented in `lib/models/openkat/openkat_installation.dart`,
+`lib/services/openkat/openkat_rocky_client.dart`, `lib/state/openkat_provider.dart`
+and the Integrations UI (`openkat_installation_wizard.dart`,
+`openkat_installations_section.dart`, `openkat_server_report_dialog.dart`). UX
+contract: [OPENKAT_LIVE_UX.md](OPENKAT_LIVE_UX.md).
+
+| Topic | v1 behaviour |
+|---|---|
+| Installations | Multiple; metadata (name, base URL, LAN flag, last test status) in prefs (`openkatInstallations`); Knox token per installation id in `SecretStore` — never in Markdown/deck |
+| Rocky calls | GET-only via NetGuard + pinning: `GET /api/v1/organization/`, `GET /api/v1/report/?organization_code=` filtered to `aggregate-organisation-report` |
+| Report JSON payload | **Path B (default):** user exports JSON in Rocky UI, picks file or folder in OciDeck → existing import pipeline. **Path A (optional):** `fetchReportJson` tries `GET /api/v1/report/{pk}/json/`; on 404/405/501 or non-JSON body, falls back to path B — no promise that REST always delivers JSON |
+| Not in v1 | Recipe CRUD, Octopoes/Bytes, session/`?json=true` download (path C), portfolio across servers in one run, central proxy, telemetry |
+| Web | OpenKAT integration card visible on Integraties but disabled (no keychain / folder picker) |
+| Fail closed | Timeouts, host policy, auth errors; no half-imported deck |
+
+The live dialog lists orgs and aggregate reports, then either imports via path A
+when upstream supports it or shows the guided export step (path B). One server
+per run; no silent “active server” switch.
 
 ---
 
 ## 8. Build options for a live integration
+
+*(Historical design options; v1 shipped path B with optional path A probe — see §7.2.)*
 
 ### Option A — Knox + REST metadata, JSON via UI session (hybrid)
 
@@ -605,19 +630,12 @@ API (#3746), JSON download in UI (#3460).
 
 ---
 
-## 12. Open questions before building
+## 12. Open questions (after v1)
 
-1. **Upstream JSON action:** do we contribute Option B upstream, or only
-   consume what exists?
-2. **Multi-org:** do we also pull `multi-organization-report` / uploaded
-   `ReportData`, or keep that outside OciDeck (sector comparison already partly
-   lives in our portfolio scenarios)?
-3. **Recipe management in OciDeck:** read/pull only, or also create schedules
-   from the app? (product + security)
-4. **Token UX:** who creates Knox tokens (admin in Rocky admin) and how do we
-   document that for users?
-5. **Version pin:** which OpenKAT release do we support; how do we detect
-   `intput_oois` vs a possible fix?
+1. **Upstream JSON action:** contribute Option B upstream so path A becomes reliable, or keep path B as the long-term default?
+2. **Multi-org:** pull `multi-organization-report` / uploaded `ReportData`, or keep outside OciDeck?
+3. **Recipe management in OciDeck:** still read-only in v1 — create schedules from the app remains a product + security decision.
+4. **Token UX documentation:** admin-facing steps for Knox tokens in Rocky admin — partly covered in USER_GUIDE / OPENKAT_LIVE_UX.
+5. **Version pin:** which OpenKAT release is tested; detect `intput_oois` vs upstream fix.
 
-Until those are answered, the safe default remains: **file export from Rocky →
-folder in OciDeck**, with this document as the contract for the next step.
+**Safe default in production today:** path B (Rocky UI JSON export → file/folder → existing adapters). Path A is used when Rocky exposes `/json/`; path C (session download) is explicitly not built.

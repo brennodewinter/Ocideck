@@ -2029,17 +2029,21 @@ single switch.)*
 OpenKAT is an integration: **Instellingen → Integraties**, off by default. On
 the Integraties tab each connection has its own on/off switch (plus an *Alles
 inschakelen* / *Alles uitschakelen* control for all of them at once). Switch
-OpenKAT on and its settings appear below the switch, where you point at the
-folder holding your OpenKAT exports so the import does not ask for it every time.
-The import only reads that folder — nothing in it is changed or sent anywhere.
-The Integraties tab appears whenever a connection is available on your platform;
-on the web version OpenKAT falls away, because its folder picker does not exist
-there.
+OpenKAT on and two blocks appear below the switch: **Vanuit een map** (folder
+import) and **Vanuit een OpenKAT-server** (live connection to one or more Rocky
+installations). The folder import only reads the folder you choose — nothing in
+it is changed or sent anywhere.
+
+The Integraties tab lists every integration your platform can show. On web the
+OpenKAT card stays visible but disabled — the folder picker and OS keychain exist
+only on desktop — with a line that the connection works only in the desktop build.
 
 Switching OpenKAT off later does not take the entry point away as long as a
-report folder is set: an existing OpenKAT deck can still be updated or safely
-recreated as a new report. What goes away is the menu item for someone who never
-imports anything.
+report folder is set **or at least one server is connected**: an existing
+OpenKAT deck can still be updated or safely recreated as a new report. What goes
+away is the menu item for someone who never imports anything.
+
+#### From a folder
 
 There are three ways to start the same desktop route: **Rapportages
 controleren…** in the Integrations tab, **OpenKAT-rapport maken…** on the
@@ -2119,6 +2123,31 @@ The import is honest about what it did — the message counts what was loaded
 and what was skipped (duplicates, unrecognised or invalid files, and files
 over the size cap; the folder comes from outside, so it is read within
 bounds). Desktop only: the import reads a folder from disk.
+
+#### From an OpenKAT server
+
+*(Added 2026-08-05: live Rocky connection, multi-installation.)*
+
+On desktop you can connect one or more OpenKAT environments (for example
+production and acceptance). **Server toevoegen…** opens a short wizard: display
+name, Rocky base URL, an optional *Eigen netwerk (LAN)* switch when OpenKAT runs
+on your private network (HTTP and private addresses are allowed only with that
+switch on; otherwise HTTPS is required), and an API token from your OpenKAT
+administrator. The token is stored in the OS keychain on this device — not in
+the deck or in app preferences. You test the connection before saving; each
+saved server appears as a card with **Testen**, **Bewerken** and **Verwijderen**.
+
+**Rapportage van server…** (Integrations, menu or command palette) walks you
+through choosing a server, organisation and aggregate organisation report — the
+same report shape the folder import expects. Rocky’s public REST API lists
+organisations and reports but does not always expose the full JSON envelope.
+OciDeck therefore fetches the report **content** the same way as a manual export:
+export the chosen report as JSON in OpenKAT, then pick that JSON file or a folder
+of exports in the dialog. If your Rocky version already offers
+`GET /api/v1/report/{id}/json/`, OciDeck tries that first and skips the manual
+step when it succeeds. There is no recipe scheduling, no direct Octopoes or Bytes
+access, and no hidden session login. Each run uses exactly one server; nothing
+silently switches the “active” installation.
 
 Two export shapes are recognised, both of which OpenKAT writes today: the
 **organisation report** (one flat summary of the whole organisation) and the
@@ -4162,7 +4191,7 @@ before you open a client's deck on it. Hosting the same bundle yourself is
 | The "missing media" warning | Absent — it looks on disk. |
 | Cloud AI | Blocked on purpose, not by the browser. |
 | Importing a deck from a URL | **Works**, through the same security gate as on desktop. |
-| Importing OpenKAT reports | Absent — it reads a folder from disk. |
+| Importing OpenKAT reports | Visible on Integraties but **disabled** — folder import and server tokens need desktop (keychain and local folders). |
 | Importing **one** PowerPoint, Keynote or Impress file | **Works**. The conversion runs on the bytes you picked and the result opens in a tab. |
 | Importing **several** presentations at once | Absent. The queue writes each converted deck as a file into a folder you choose, and the browser has no folder to choose. The dialog says so rather than offering a button that cannot work. |
 | Exporting, sealing, encrypted packages | **Works**, delivered as downloads. |
