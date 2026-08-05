@@ -1770,6 +1770,95 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT atgrieza negaidītu atbildi ({code}). Mēģiniet vēlāk vai lūdziet palīdzību administratoram.',
+  'Vanuit een OpenKAT-server': 'No OpenKAT servera',
+  'Vanuit een map': 'No mapes',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Pievienojiet vienu vai vairākas OpenKAT vides (piemēram, produkciju un pieņemšanu). OciDeck rāda pieejamos pārskatus; saturu importējiet ar JSON eksportu no OpenKAT.',
+  'Server toevoegen…': 'Pievienot serveri…',
+  'Rapportage van server…': 'Pārskats no servera…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'Vēl nav pievienots OpenKAT serveris.',
+  'Bezig…': 'Notiek…',
+  'OpenKAT-server bewerken': 'Rediģēt OpenKAT serveri',
+  'OpenKAT-server toevoegen': 'Pievienot OpenKAT serveri',
+  'OpenKAT-server toevoegen…': 'Pievienot OpenKAT serveri…',
+  'OpenKAT-server verwijderen?': 'Noņemt OpenKAT serveri?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Tas noņem “{name}” un saistīto piekļuves tokenu no šīs ierīces. To nevar atsaukt.',
+  'Weergavenaam': 'Attēlojamais nosaukums',
+  'Bijvoorbeeld Productie of Acceptatie': 'Piem., Produkcija vai Pieņemšana',
+  'Adres van OpenKAT': 'OpenKAT adrese',
+  'Verbinding met: {host}': 'Savienojums ar: {host}',
+  'Eigen netwerk (LAN)': 'Vietējā tīkls (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Tikai OpenKAT vietējā tīklā. Atļauj HTTP un privātās adreses. Izslēgts: tikai HTTPS.',
+  'Toegangstoken': 'Piekļuves tokens',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Atstājiet tukšu, lai saglabātu saglabāto tokenu',
+  'Plak het token hier': 'Ielīmējiet tokenu šeit',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Palūdziet OpenKAT administratoram API tokenu administrācijas ekrānā. Tokens paliek šajā ierīcē, OS atslēgu glabātavā — ne deck.',
+  'Verbinding wordt getest…': 'Pārbauda savienojumu…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Pārbaudiet savienojumu pirms saglabāšanas, lai pārliecinātos, ka nosaukums, adrese un tokens ir pareizi.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'OpenKAT savienojums pieejams tikai desktop versijā.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Importējiet OpenKAT pārskatus kā vienu vadības pārskatu — no mapes vai servera.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'OpenKAT avots jau ir konfigurēts; savienojums paliek pieejams, lai atjauninātu esošu OpenKAT deck.',
+  'Rapportage van OpenKAT-server': 'Pārskats no OpenKAT servera',
+  'Rapportage van OpenKAT-server…': 'Pārskats no OpenKAT servera…',
+  'Server: {name}': 'Serveris: {name}',
+  'Organisaties worden opgehaald…': 'Iegūst organizācijas…',
+  'Rapportages worden opgehaald…': 'Iegūst pārskatus…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Šim tokenam nav redzamu organizāciju. Palūdziet piekļuvi administratoram vai izvēlieties citu serveri.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'Šajā serverī nav gatavu organizāciju pārskatu. Vispirms izveidojiet apkopoto organizācijas pārskatu OpenKAT vai izvēlieties citu organizāciju.',
+  'JSON-export uit OpenKAT': 'JSON eksports no OpenKAT',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT nodrošina pārskata saturu kā JSON failu. Eksportējiet izvēlēto pārskatu kā JSON OpenKAT un šeit norādiet uz šo failu vai mapi.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Izvēlēts: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Izvēlēties JSON failu…',
+  'Map met exports kiezen…': 'Izvēlēties eksportu mapi…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Ievadiet attēlojamo nosaukumu, piem., Produkcija.',
+  'Vul een weergavenaam en een adres in.':
+      'Ievadiet attēlojamo nosaukumu un adresi.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Ielīmējiet piekļuves tokenu, lai turpinātu.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Ievadiet adresi, piem., https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Šī adrese nav derīga. Pārbaudiet, vai ievadījāt pilnu URL.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'Adresei jāsākas ar https:// vai ieslēdziet Vietējo tīklu HTTP lokālajā tīklā.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Savienots ar {host}. Šim tokenam nav redzamu organizāciju.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Savienots ar {host}. Pieejamas organizācijas: {n}.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Savienojums ar OpenKAT neizdevās. Pārbaudiet adresi un tīklu un mēģiniet vēlreiz.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Nav piekļuves tokena. Ielīmējiet administratora tokenu un mēģiniet vēlreiz.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Atļauts tikai HTTPS, ja vien Vietējais tīkls nav ieslēgts.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT noraidīja tokenu. Palūdziet derīgu API tokenu administratoram un ielīmējiet vēlreiz.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT nereagēja laikā. Pārbaudiet, vai serveris ir sasniedzams, un mēģiniet vēlreiz.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Šī adrese nav sasniedzama. Pārbaudiet resursdatora nosaukuma pareizrakstību un pareizo tīklu.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT atgrieza negaidīti lielu atbildi. Mēģiniet vēlāk vai lūdziet palīdzību administratoram.',
+  'Verbonden': 'Savienots',
+  'Token ontbreekt': 'Trūkst tokena',
+  'Laatst gecontroleerd mislukt': 'Pēdējā pārbaude neizdevās',
+  'Nog niet gecontroleerd': 'Vēl nav pārbaudīts',
   'Zoekveld wissen': 'Notīrīt meklēšanas lauku',
   'Gantt': 'Gantt',
   'Dag': 'Diena',

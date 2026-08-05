@@ -1778,6 +1778,94 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT grąžino netikėtą atsakymą ({code}). Bandykite vėliau arba kreipkitės į administratorių.',
+  'Vanuit een OpenKAT-server': 'Iš OpenKAT serverio',
+  'Vanuit een map': 'Iš aplanko',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Prijunkite vieną ar kelias OpenKAT aplinkas (pvz., produkciją ir priėmimą). OciDeck rodo galimas ataskaitas; turinį importuokite per JSON eksportą iš OpenKAT.',
+  'Server toevoegen…': 'Pridėti serverį…',
+  'Rapportage van server…': 'Ataskaita iš serverio…',
+  'Nog geen OpenKAT-server aangesloten.': 'Dar neprijungtas OpenKAT serveris.',
+  'Bezig…': 'Vykdoma…',
+  'OpenKAT-server bewerken': 'Redaguoti OpenKAT serverį',
+  'OpenKAT-server toevoegen': 'Pridėti OpenKAT serverį',
+  'OpenKAT-server toevoegen…': 'Pridėti OpenKAT serverį…',
+  'OpenKAT-server verwijderen?': 'Pašalinti OpenKAT serverį?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Tai pašalina “{name}” ir susijusį prieigos raktą iš šio įrenginio. To negalima atšaukti.',
+  'Weergavenaam': 'Rodomas pavadinimas',
+  'Bijvoorbeeld Productie of Acceptatie': 'Pvz., Produkcija ar Priėmimas',
+  'Adres van OpenKAT': 'OpenKAT adresas',
+  'Verbinding met: {host}': 'Ryšys su: {host}',
+  'Eigen netwerk (LAN)': 'Vietinis tinklas (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Tik OpenKAT vietiniame tinkle. Leidžia HTTP ir privačius adresus. Išjungta: tik HTTPS.',
+  'Toegangstoken': 'Prieigos raktas',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Palikite tuščią, kad išsaugotumėte išsaugotą raktą',
+  'Plak het token hier': 'Įklijuokite raktą čia',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Paprašykite OpenKAT administratoriaus API rakto administravimo ekrane. Raktas lieka šiame įrenginyje, OS raktų saugykloje — ne deck.',
+  'Verbinding wordt getest…': 'Tikrinamas ryšys…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Patikrinkite ryšį prieš išsaugodami, kad įsitikintumėte, jog pavadinimas, adresas ir raktas teisingi.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'OpenKAT ryšys prieinamas tik darbalaukio versijoje.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Importuokite OpenKAT ataskaitas kaip vieną valdymo apžvalgą — iš aplanko ar serverio.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'OpenKAT šaltinis jau sukonfigūruotas; ryšys lieka pasiekiamas esamam OpenKAT deck atnaujinti.',
+  'Rapportage van OpenKAT-server': 'Ataskaita iš OpenKAT serverio',
+  'Rapportage van OpenKAT-server…': 'Ataskaita iš OpenKAT serverio…',
+  'Server: {name}': 'Serveris: {name}',
+  'Organisaties worden opgehaald…': 'Gaunamos organizacijos…',
+  'Rapportages worden opgehaald…': 'Gaunamos ataskaitos…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Šiam raktui nematoma jokių organizacijų. Paprašykite prieigos pas administratorių arba pasirinkite kitą serverį.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'Šiame serveryje nėra paruoštų organizacijų ataskaitų. Pirmiausia sukurkite suvestinę organizacijos ataskaitą OpenKAT arba pasirinkite kitą organizaciją.',
+  'JSON-export uit OpenKAT': 'JSON eksportas iš OpenKAT',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT pateikia ataskaitos turinį kaip JSON failą. Eksportuokite pasirinktą ataskaitą kaip JSON OpenKAT ir čia nurodykite tą failą ar aplanką.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Pasirinkta: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Pasirinkti JSON failą…',
+  'Map met exports kiezen…': 'Pasirinkti eksportų aplanką…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Įveskite rodomą pavadinimą, pvz., Produkcija.',
+  'Vul een weergavenaam en een adres in.':
+      'Įveskite rodomą pavadinimą ir adresą.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Įklijuokite prieigos raktą, kad tęstumėte.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Įveskite adresą, pvz., https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Šis adresas negalioja. Patikrinkite, ar įvedėte visą URL.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'Adresas turi prasidėti https:// arba įjunkite Vietinį tinklą HTTP vietiniame tinkle.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Prisijungta prie {host}. Šiam raktui nematoma organizacijų.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Prisijungta prie {host}. Pasiekiamų organizacijų: {n}.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Nepavyko prisijungti prie OpenKAT. Patikrinkite adresą ir tinklą ir bandykite dar kartą.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Nėra prieigos rakto. Įklijuokite administratoriaus raktą ir bandykite dar kartą.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Leidžiamas tik HTTPS, nebent įjungtas Vietinis tinklas.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT atmetė raktą. Paprašykite galiojančio API rakto pas administratorių ir įklijuokite dar kartą.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT neatsakė laiku. Patikrinkite, ar serveris pasiekiamas, ir bandykite dar kartą.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Šis adresas nepasiekiamas. Patikrinkite hostname rašybą ir ar esate tinkamame tinkle.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT grąžino netikėtai didelį atsakymą. Bandykite vėliau arba kreipkitės į administratorių.',
+  'Verbonden': 'Prisijungta',
+  'Token ontbreekt': 'Trūksta rakto',
+  'Laatst gecontroleerd mislukt': 'Paskutinis patikrinimas nepavyko',
+  'Nog niet gecontroleerd': 'Dar nepatikrinta',
   'Zoekveld wissen': 'Išvalyti paieškos lauką',
   'Gantt': 'Gantt',
   'Dag': 'Diena',

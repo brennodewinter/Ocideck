@@ -1798,6 +1798,95 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'Το OpenKAT επέστρεψε απροσδόκητη απάντηση ({code}). Δοκιμάστε αργότερα ή ζητήστε βοήθεια από τον διαχειριστή.',
+  'Vanuit een OpenKAT-server': 'Από διακομιστή OpenKAT',
+  'Vanuit een map': 'Από φάκελο',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Συνδέστε ένα ή περισσότερα περιβάλλοντα OpenKAT (π.χ. παραγωγή και αποδοχή). Το OciDeck εμφανίζει διαθέσιμες αναφορές· το περιεχόμενο εισάγετε μέσω JSON εξαγωγής από το OpenKAT.',
+  'Server toevoegen…': 'Προσθήκη διακομιστή…',
+  'Rapportage van server…': 'Αναφορά από διακομιστή…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'Δεν έχει συνδεθεί ακόμη διακομιστής OpenKAT.',
+  'Bezig…': 'Σε εξέλιξη…',
+  'OpenKAT-server bewerken': 'Επεξεργασία διακομιστή OpenKAT',
+  'OpenKAT-server toevoegen': 'Προσθήκη διακομιστή OpenKAT',
+  'OpenKAT-server toevoegen…': 'Προσθήκη διακομιστή OpenKAT…',
+  'OpenKAT-server verwijderen?': 'Αφαίρεση διακομιστή OpenKAT;',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Αυτό αφαιρεί το “{name}” και το αντίστοιχο διακριτικό πρόσβασης από αυτή τη συσκευή. Δεν μπορείτε να το αναιρέσετε.',
+  'Weergavenaam': 'Εμφανιζόμενο όνομα',
+  'Bijvoorbeeld Productie of Acceptatie': 'Π.χ. Παραγωγή ή Αποδοχή',
+  'Adres van OpenKAT': 'Διεύθυνση OpenKAT',
+  'Verbinding met: {host}': 'Σύνδεση με: {host}',
+  'Eigen netwerk (LAN)': 'Τοπικό δίκτυο (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Μόνο για OpenKAT στο τοπικό δίκτυο. Επιτρέπει HTTP και ιδιωτικές διευθύνσεις. Ανενεργό: μόνο HTTPS.',
+  'Toegangstoken': 'Διακριτικό πρόσβασης',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Αφήστε κενό για να κρατήσετε το αποθηκευμένο διακριτικό',
+  'Plak het token hier': 'Επικολλήστε το διακριτικό εδώ',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Ζητήστε από τον διαχειριστή OpenKAT ένα API διακριτικό στην οθόνη διαχείρισης. Το διακριτικό μένει σε αυτή τη συσκευή, στο keychain του λειτουργικού — όχι στο deck.',
+  'Verbinding wordt getest…': 'Δοκιμή σύνδεσης…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Δοκιμάστε τη σύνδεση πριν αποθηκεύσετε, ώστε να επιβεβαιώσετε ότι όνομα, διεύθυνση και διακριτικό είναι σωστά.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'Η σύνδεση OpenKAT είναι διαθέσιμη μόνο στην έκδοση desktop.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Εισάγετε αναφορές OpenKAT ως μία διαχειριστική επισκόπηση — από φάκελο ή διακομιστή.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Υπάρχει ήδη πηγή OpenKAT· η σύνδεση παραμένει διαθέσιμη για ενημέρωση υπάρχοντος deck OpenKAT.',
+  'Rapportage van OpenKAT-server': 'Αναφορά από διακομιστή OpenKAT',
+  'Rapportage van OpenKAT-server…': 'Αναφορά από διακομιστή OpenKAT…',
+  'Server: {name}': 'Διακομιστής: {name}',
+  'Organisaties worden opgehaald…': 'Λήψη οργανισμών…',
+  'Rapportages worden opgehaald…': 'Λήψη αναφορών…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Δεν εμφανίζονται οργανισμοί για αυτό το διακριτικό. Ζητήστε πρόσβαση από τον διαχειριστή ή επιλέξτε άλλο διακομιστή.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'Δεν υπάρχουν έτοιμες αναφορές οργανισμού σε αυτόν τον διακομιστή. Δημιουργήστε πρώτα συγκεντρωτική αναφορά οργανισμού στο OpenKAT ή επιλέξτε άλλον οργανισμό.',
+  'JSON-export uit OpenKAT': 'JSON εξαγωγή από OpenKAT',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'Το OpenKAT παρέχει το περιεχόμενο αναφοράς ως αρχείο JSON. Εξαγάγετε την επιλεγμένη αναφορά ως JSON στο OpenKAT και δείξτε εδώ το αρχείο ή τον φάκελο.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Επιλέχθηκε: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Επιλογή αρχείου JSON…',
+  'Map met exports kiezen…': 'Επιλογή φακέλου εξαγωγής…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Εισαγάγετε εμφανιζόμενο όνομα, π.χ. Παραγωγή.',
+  'Vul een weergavenaam en een adres in.':
+      'Εισαγάγετε εμφανιζόμενο όνομα και διεύθυνση.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Επικολλήστε διακριτικό πρόσβασης για να συνεχίσετε.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Εισαγάγετε διεύθυνση, π.χ. https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Αυτή η διεύθυνση δεν είναι έγκυρη. Ελέγξτε ότι εισαγάγατε πλήρη URL.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'Η διεύθυνση πρέπει να αρχίζει με https://, ή ενεργοποιήστε Τοπικό δίκτυο για HTTP στο τοπικό δίκτυο.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Συνδέθηκε με {host}. Δεν εμφανίζονται οργανισμοί για αυτό το διακριτικό.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Συνδέθηκε με {host}. {n} οργανισμός/οί προσβάσιμος/οι.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Η σύνδεση με το OpenKAT απέτυχε. Ελέγξτε τη διεύθυνση και το δίκτυό σας και δοκιμάστε ξανά.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Δεν υπάρχει διακριτικό πρόσβασης. Επικολλήστε το διακριτικό του διαχειριστή και δοκιμάστε ξανά.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Επιτρέπεται μόνο HTTPS, εκτός αν είναι ενεργό το Τοπικό δίκτυο.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'Το OpenKAT απέρριψε το διακριτικό. Ζητήστε έγκυρο API διακριτικό από τον διαχειριστή και επικολλήστε ξανά.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'Το OpenKAT δεν απάντησε εγκαίρως. Ελέγξτε ότι ο διακομιστής είναι προσβάσιμος και δοκιμάστε ξανά.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Αυτή η διεύθυνση δεν είναι προσβάσιμη. Ελέγξτε την ορθογραφία του host και ότι είστε στο σωστό δίκτυο.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'Το OpenKAT επέστρεψε απροσδόκητα μεγάλη απάντηση. Δοκιμάστε αργότερα ή ζητήστε βοήθεια από τον διαχειριστή.',
+  'Verbonden': 'Συνδεδεμένο',
+  'Token ontbreekt': 'Λείπει διακριτικό',
+  'Laatst gecontroleerd mislukt': 'Ο τελευταίος έλεγχος απέτυχε',
+  'Nog niet gecontroleerd': 'Δεν έχει ελεγχθεί ακόμη',
   'Zoekveld wissen': 'Καθαρισμός πεδίου αναζήτησης',
   'Gantt': 'Gantt',
   'Dag': 'Ημέρα',

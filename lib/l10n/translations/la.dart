@@ -1787,6 +1787,96 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT responsum inopinatum ({code}) dedit. Postea iterum conare vel administratorem adi.',
+  'Vanuit een OpenKAT-server': 'Ex servo OpenKAT',
+  'Vanuit een map': 'Ex fasciculo',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Coniunge unum vel plures OpenKAT ordinationes (exempli gratia productio et acceptatio). OciDeck ostendit relationes praesto; contentum per JSON exportationem ex OpenKAT accipis.',
+  'Server toevoegen…': 'Adde servum…',
+  'Rapportage van server…': 'Relatio e servo…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'Nondum ullus servus OpenKAT coniunctus.',
+  'Bezig…': 'Agitur…',
+  'OpenKAT-server bewerken': 'Servum OpenKAT recensere',
+  'OpenKAT-server toevoegen': 'Servum OpenKAT adde',
+  'OpenKAT-server toevoegen…': 'Servum OpenKAT adde…',
+  'OpenKAT-server verwijderen?': 'Servum OpenKAT removere?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Hoc removet “{name}” et signum accessus ab hoc instrumento. Id revocare non potes.',
+  'Weergavenaam': 'Nomen ostensum',
+  'Bijvoorbeeld Productie of Acceptatie':
+      'Exempli gratia Productio vel Acceptatio',
+  'Adres van OpenKAT': 'Oratio OpenKAT',
+  'Verbinding met: {host}': 'Coniunctio cum: {host}',
+  'Eigen netwerk (LAN)': 'Rete proprium (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Tantum pro OpenKAT in rete proprio. HTTP et orationes privatas permittit. Off: tantum HTTPS.',
+  'Toegangstoken': 'Signum accessus',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Vacuum relinque ut signum servatum serves',
+  'Plak het token hier': 'Signum hic adglutina',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Petere ab administratore OpenKAT signum API in tabula administrationis. Signum in hoc instrumento manet, in claviario systematis — non in deck.',
+  'Verbinding wordt getest…': 'Coniunctio probatur…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Coniunctionem ante servandum proba, ut nomen, oratio et signum recta sint.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'Coniunctio OpenKAT tantum in versione desktop praesto est.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Relationes OpenKAT ut unum managementum conspectum importa — ex fasciculo vel servo.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Fons OpenKAT iam configuratus est; coniunctio praesto manet ut deck OpenKAT existens aggiornare possis.',
+  'Rapportage van OpenKAT-server': 'Relatio e servo OpenKAT',
+  'Rapportage van OpenKAT-server…': 'Relatio e servo OpenKAT…',
+  'Server: {name}': 'Servus: {name}',
+  'Organisaties worden opgehaald…': 'Organisationes accipiuntur…',
+  'Rapportages worden opgehaald…': 'Relationes accipiuntur…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Nullae organisationes pro hoc signo videntur. Pete accessum ab administratore, vel alium servum elige.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'In hoc servo nullae relationes organisationis paratae sunt. Primum relationem organisationis aggregatam in OpenKAT fac, vel aliam organisationem elige.',
+  'JSON-export uit OpenKAT': 'Exportatio JSON ex OpenKAT',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT contentum relationis ut fasciculum JSON praebet. Relationem electam in OpenKAT ut JSON exporta, hic fasciculum vel fasciculum indica.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Electum: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Fasciculum JSON elige…',
+  'Map met exports kiezen…': 'Fasciculum exportationum elige…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Nomen ostensum insere, exempli gratia Productio.',
+  'Vul een weergavenaam en een adres in.':
+      'Nomen ostensum et orationem insere.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Signum accessus adglutina ut pergas.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Orationem insere, exempli gratia https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Haec oratio non valet. Vide num URL completam inscripseris.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'Oratio debet incipere cum https://, vel Rete proprium activa pro HTTP in rete proprio.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Coniunctum cum {host}. Nullae organisationes pro hoc signo videntur.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Coniunctum cum {host}. {n} organisationes perviae.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Coniunctio cum OpenKAT defecit. Orationem et rete inspice, deinde iterum conare.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Signum accessus deest. Signum ab administratore adglutina et iterum conare.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Tantum HTTPS licet, nisi Rete proprium activum est.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT signum recusavit. Pete ab administratore signum API validum et iterum adglutina.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT non statim respondit. Vide num servus pervius sit, deinde iterum conare.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Haec oratio non pervia est. Orthographiam hospitis et rete rectum inspice.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT responsum inopinatum magnum dedit. Postea iterum conare vel administratorem adi.',
+  'Verbonden': 'Coniunctum',
+  'Token ontbreekt': 'Signum deest',
+  'Laatst gecontroleerd mislukt': 'Ultima probatio defecit',
+  'Nog niet gecontroleerd': 'Nondum probatum',
   'Zoekveld wissen': 'Purgare campum quaerendi',
   'Gantt': 'Gantt',
   'Dag': 'Dies',

@@ -730,6 +730,95 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT a duna un respuesta inesperá ({code}). Purba despues of pidi ayudo na bo administrador.',
+  'Vanuit een OpenKAT-server': 'For di un servidor OpenKAT',
+  'Vanuit een map': 'For di un karpeta',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Konektá un of mas ambiente OpenKAT (por ehèmpel produkshon i aseptashon). OciDeck ta mustra reportnan disponibel; bo ta importá e kontenido via un export JSON di OpenKAT.',
+  'Server toevoegen…': 'Agregá servidor…',
+  'Rapportage van server…': 'Report di servidor…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'Ainda no tin servidor OpenKAT konektá.',
+  'Bezig…': 'Trabousando…',
+  'OpenKAT-server bewerken': 'Editá servidor OpenKAT',
+  'OpenKAT-server toevoegen': 'Agregá servidor OpenKAT',
+  'OpenKAT-server toevoegen…': 'Agregá servidor OpenKAT…',
+  'OpenKAT-server verwijderen?': 'Kita servidor OpenKAT?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Esaki ta kita “{name}” i su token di akseso for di e aparato aki. Bo no por deshasé esaki.',
+  'Weergavenaam': 'Nòmber di mustra',
+  'Bijvoorbeeld Productie of Acceptatie': 'Por ehèmpel Produkdor of Aseptashon',
+  'Adres van OpenKAT': 'Adres di OpenKAT',
+  'Verbinding met: {host}': 'Konekshon ku: {host}',
+  'Eigen netwerk (LAN)': 'Red lokal (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Solamente pa OpenKAT riba red lokal. Permití HTTP i direkshon privá. Desaktivá: solamente HTTPS.',
+  'Toegangstoken': 'Token di akseso',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Laga bashi pa keda e token guardá',
+  'Plak het token hier': 'Pega e token aki',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Pidi bo administrador OpenKAT un token API den e pantaya di administrashon. E token ta keda riba e aparato aki, den e keychain di bo sistema operativo — no den e deck.',
+  'Verbinding wordt getest…': 'Ta test konekshon…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Test e konekshon promé ku bo guardá, pa bo sa ku nòmber, direkshon i token ta korekto.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'E konekshon OpenKAT ta disponibel solamente den e vershon desktop.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Importá reportnan OpenKAT komo un resumen di management — for di un karpeta of un servidor.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Ya tin un fuente OpenKAT konfigurá; e konekshon ta keda disponibel pa sigui aktualisá un deck OpenKAT eksistente.',
+  'Rapportage van OpenKAT-server': 'Report di servidor OpenKAT',
+  'Rapportage van OpenKAT-server…': 'Report di servidor OpenKAT…',
+  'Server: {name}': 'Servidor: {name}',
+  'Organisaties worden opgehaald…': 'Ta buska organisashonnan…',
+  'Rapportages worden opgehaald…': 'Ta buska reportnan…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'No tin organisashonnan visibel pa e token aki. Pidi akseso na bo administrador, of skohe un otro servidor.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'No tin report di organisashon klaar riba e servidor aki. Krea promé un report agregá di organisashon den OpenKAT, of skohe un otro organisashon.',
+  'JSON-export uit OpenKAT': 'Export JSON di OpenKAT',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT ta duna e kontenido di report komo archivo JSON. Exportá e report skohe komo JSON den OpenKAT, i señalá e archivo of karpeta aki.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Skohe: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Skohe archivo JSON…',
+  'Map met exports kiezen…': 'Skohe karpeta di export…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Yena un nòmber di mustra, por ehèmpel Produkdor.',
+  'Vul een weergavenaam en een adres in.':
+      'Yena un nòmber di mustra i un direkshon.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Pega un token di akseso pa sigui.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Yena un direkshon, por ehèmpel https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'E direkshon aki no ta válido. Verifiká si bo a yena un URL kompleto.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'E direkshon mester kuminsá ku https://, of aktivá Red lokal pa HTTP riba red lokal.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Konektá ku {host}. Ainda no tin organisashonnan visibel pa e token aki.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Konektá ku {host}. {n} organisashon(nan) alcanzabel.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'E konekshon ku OpenKAT a frakasá. Verifiká e direkshon i bo red, i purba atrobe.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'No tin token di akseso. Pega e token di bo administrador i purba atrobe.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Solamente HTTPS ta permití, a ménos ku Red lokal ta aktivo.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT a rechazá e token. Pidi bo administrador un token API válido i pega atrobe.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT no a reaccioná a tempu. Verifiká si e servidor ta alcanzabel i purba atrobe.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'E direkshon aki no ta alcanzabel. Verifiká e deletreo di e host i si bo ta riba e red korekto.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT a duna un respuesta hopi grandi. Purba despues of pidi ayudo na bo administrador.',
+  'Verbonden': 'Konektá',
+  'Token ontbreekt': 'Token faltá',
+  'Laatst gecontroleerd mislukt': 'Último chequeo a frakasá',
+  'Nog niet gecontroleerd': 'Ainda no a wordo chequeá',
   'Zoekveld wissen': 'Borsa e kampo di buska',
   'Gantt': 'Gantt',
   'Dag': 'Día',

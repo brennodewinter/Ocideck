@@ -2748,6 +2748,93 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT beklenmedik bir yanıt döndürdü ({code}). Daha sonra tekrar deneyin veya yöneticinizden yardım isteyin.',
+  'Vanuit een OpenKAT-server': 'Bir OpenKAT sunucusundan',
+  'Vanuit een map': 'Bir klasörden',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Bir veya daha fazla OpenKAT ortamı bağlayın (örneğin üretim ve kabul). OciDeck kullanılabilir raporları gösterir; içeriği OpenKAT\'tan JSON dışa aktarımıyla içe aktarın.',
+  'Server toevoegen…': 'Sunucu ekle…',
+  'Rapportage van server…': 'Sunucudan rapor…',
+  'Nog geen OpenKAT-server aangesloten.': 'Henüz OpenKAT sunucusu bağlanmadı.',
+  'Bezig…': 'İşleniyor…',
+  'OpenKAT-server bewerken': 'OpenKAT sunucusunu düzenle',
+  'OpenKAT-server toevoegen': 'OpenKAT sunucusu ekle',
+  'OpenKAT-server toevoegen…': 'OpenKAT sunucusu ekle…',
+  'OpenKAT-server verwijderen?': 'OpenKAT sunucusu kaldırılsın mı?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Bu, “{name}” ve ilişkili erişim belirtecini bu cihazdan kaldırır. Geri alınamaz.',
+  'Weergavenaam': 'Görünen ad',
+  'Bijvoorbeeld Productie of Acceptatie': 'Örneğin Üretim veya Kabul',
+  'Adres van OpenKAT': 'OpenKAT adresi',
+  'Verbinding met: {host}': 'Bağlantı: {host}',
+  'Eigen netwerk (LAN)': 'Yerel ağ (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Yalnızca yerel ağdaki OpenKAT için. HTTP ve özel adreslere izin verir. Kapalı: yalnızca HTTPS.',
+  'Toegangstoken': 'Erişim belirteci',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Kayıtlı belirteci korumak için boş bırakın',
+  'Plak het token hier': 'Belirteci buraya yapıştırın',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'OpenKAT yöneticinizden yönetim ekranında bir API belirteci isteyin. Belirteç bu cihazda, işletim sisteminin anahtarlığında kalır — deck\'te değil.',
+  'Verbinding wordt getest…': 'Bağlantı test ediliyor…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Kaydetmeden önce bağlantıyı test edin; ad, adres ve belirtecin doğru olduğundan emin olun.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'OpenKAT bağlantısı yalnızca masaüstü sürümünde kullanılabilir.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'OpenKAT raporlarını tek bir yönetim özeti olarak içe aktarın — klasörden veya sunucudan.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Bir OpenKAT kaynağı zaten yapılandırılmış; mevcut OpenKAT deck\'i güncelleyebilmeniz için bağlantı erişilebilir kalır.',
+  'Rapportage van OpenKAT-server': 'OpenKAT sunucusundan rapor',
+  'Rapportage van OpenKAT-server…': 'OpenKAT sunucusundan rapor…',
+  'Server: {name}': 'Sunucu: {name}',
+  'Organisaties worden opgehaald…': 'Kuruluşlar alınıyor…',
+  'Rapportages worden opgehaald…': 'Raporlar alınıyor…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Bu belirteç için görünür kuruluş yok. Yöneticinizden erişim isteyin veya başka bir sunucu seçin.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'Bu sunucuda hazır kuruluş raporu yok. Önce OpenKAT\'ta birleşik kuruluş raporu oluşturun veya başka bir kuruluş seçin.',
+  'JSON-export uit OpenKAT': 'OpenKAT\'tan JSON dışa aktarım',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT rapor içeriğini JSON dosyası olarak sağlar. Seçilen raporu OpenKAT\'ta JSON olarak dışa aktarın ve burada o dosyayı veya klasörü gösterin.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Seçilen: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'JSON dosyası seç…',
+  'Map met exports kiezen…': 'Dışa aktarım klasörü seç…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Görünen ad girin, örneğin Üretim.',
+  'Vul een weergavenaam en een adres in.': 'Görünen ad ve adres girin.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Devam etmek için erişim belirteci yapıştırın.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Adres girin, örneğin https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Bu adres geçerli değil. Tam bir URL girdiğinizi kontrol edin.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'Adres https:// ile başlamalı veya yerel ağda HTTP için Yerel ağ\'ı açın.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      '{host} ile bağlandı. Bu belirteç için görünür kuruluş yok.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      '{host} ile bağlandı. {n} kuruluş erişilebilir.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'OpenKAT bağlantısı başarısız oldu. Adresi ve ağınızı kontrol edip tekrar deneyin.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Erişim belirteci yok. Yöneticinizin belirtecini yapıştırıp tekrar deneyin.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Yerel ağ açık değilse yalnızca HTTPS\'e izin verilir.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT belirteci reddetti. Yöneticinizden geçerli bir API belirteci isteyip tekrar yapıştırın.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT zamanında yanıt vermedi. Sunucunun erişilebilir olduğunu kontrol edip tekrar deneyin.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Bu adrese ulaşılamıyor. Ana bilgisayar adının yazımını ve doğru ağda olup olmadığınızı kontrol edin.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT beklenmedik derecede büyük bir yanıt döndürdü. Daha sonra tekrar deneyin veya yöneticinizden yardım isteyin.',
+  'Verbonden': 'Bağlandı',
+  'Token ontbreekt': 'Belirteç eksik',
+  'Laatst gecontroleerd mislukt': 'Son denetim başarısız',
+  'Nog niet gecontroleerd': 'Henüz denetlenmedi',
   'Zoekveld wissen': 'Arama alanını temizle',
   'Gantt': 'Gantt',
   'Dag': 'Gün',

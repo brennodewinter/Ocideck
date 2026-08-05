@@ -1806,6 +1806,95 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'Thug OpenKAT freagra gan choinne ({code}). Bain triail eile as ar ball nó iarr cabhair ar do riarthóir.',
+  'Vanuit een OpenKAT-server': 'Ó fhreastalaí OpenKAT',
+  'Vanuit een map': 'Ó fhillteán',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Ceangail timpeallacht OpenKAT amháin nó níos mó (mar shampla táirgeadh agus glacadh). Taispeánann OciDeck tuarascálacha atá ar fáil; iompórtáil an t-ábhar trí easpórtáil JSON ó OpenKAT.',
+  'Server toevoegen…': 'Cuir freastalaí leis…',
+  'Rapportage van server…': 'Tuairisc ón bhfreastalaí…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'Níl aon fhreastalaí OpenKAT ceangailte fós.',
+  'Bezig…': 'Ag obair…',
+  'OpenKAT-server bewerken': 'Cuir freastalaí OpenKAT in eagar',
+  'OpenKAT-server toevoegen': 'Cuir freastalaí OpenKAT leis',
+  'OpenKAT-server toevoegen…': 'Cuir freastalaí OpenKAT leis…',
+  'OpenKAT-server verwijderen?': 'Bain freastalaí OpenKAT?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Baineann sé “{name}” agus an comhartha rochtana a bhaineann leis den ghléas seo. Ní féidir é seo a chealú.',
+  'Weergavenaam': 'Ainm taispeána',
+  'Bijvoorbeeld Productie of Acceptatie': 'Mar shampla Táirgeadh nó Glacadh',
+  'Adres van OpenKAT': 'Seoladh OpenKAT',
+  'Verbinding met: {host}': 'Ceangal le: {host}',
+  'Eigen netwerk (LAN)': 'Líonra áitiúil (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'D\'OpenKAT ar an líonra áitiúil amháin. Ceadaíonn HTTP agus seoltaí príobháideacha. As: HTTPS amháin.',
+  'Toegangstoken': 'Comhartha rochtana',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Fág folamh chun an comhartha sábháilte a choinneáil',
+  'Plak het token hier': 'Greamaigh an comhartha anseo',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Iarr ar do riarthóir OpenKAT comhartha API sa scáileán riaracháin. Fanann an comhartha ar an ngléas seo, i keychain an chórais — ní sa deck.',
+  'Verbinding wordt getest…': 'Ceangal á thástáil…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Déan tástáil ar an gceangal sula sábhálann tú, chun a fháil amach go bhfuil an t-ainm, seoladh agus comhartha ceart.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'Níl an nasc OpenKAT ar fáil ach sa leagan deisce.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Iompórtáil tuarascálacha OpenKAT mar aon léargas bainistíochta — ó fhillteán nó freastalaí.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Tá foinse OpenKAT cumraithe cheana; fanann an nasc ar fáil chun deck OpenKAT atá ann a nuashonrú.',
+  'Rapportage van OpenKAT-server': 'Tuairisc ó fhreastalaí OpenKAT',
+  'Rapportage van OpenKAT-server…': 'Tuairisc ó fhreastalaí OpenKAT…',
+  'Server: {name}': 'Freastalaí: {name}',
+  'Organisaties worden opgehaald…': 'Eagraíochtaí á bhfáil…',
+  'Rapportages worden opgehaald…': 'Tuarascálacha á bhfáil…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Níl aon eagraíochtaí le feiceáil don chomhartha seo. Iarr rochtain ar do riarthóir, nó roghnaigh freastalaí eile.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'Níl aon tuarascálacha eagraíochta réidh ar an bhfreastalaí seo. Cruthaigh tuarascáil eagraíochta comhiomlánaithe i OpenKAT ar dtús, nó roghnaigh eagraíocht eile.',
+  'JSON-export uit OpenKAT': 'Easpórtáil JSON ó OpenKAT',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'Soláthraíonn OpenKAT ábhar an tuarascála mar chomhad JSON. Easpórtáil an tuarascáil roghnaithe mar JSON in OpenKAT, ansin dírithe an comhad nó fillteán anseo.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Roghnaithe: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Roghnaigh comhad JSON…',
+  'Map met exports kiezen…': 'Roghnaigh fillteán easpórtála…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Cuir isteach ainm taispeána, mar shampla Táirgeadh.',
+  'Vul een weergavenaam en een adres in.':
+      'Cuir isteach ainm taispeána agus seoladh.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Greamaigh comhartha rochtana chun leanúint ar aghaidh.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Cuir isteach seoladh, mar shampla https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Ní bhailíonn an seoladh seo. Seiceáil gur chuir tú URL iomlán isteach.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'Caithfidh an seoladh tosú le https://, nó cuir Líonra áitiúil ar siúl le HTTP ar an líonra áitiúil.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Ceangailte le {host}. Níl aon eagraíochtaí le feiceáil don chomhartha seo.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Ceangailte le {host}. Eagraíochtaí inrochtana: {n}.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Theip ar an nasc le OpenKAT. Seiceáil an seoladh agus do líonra, ansin bain triail eile as.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Níl comhartha rochtana ann. Greamaigh comhartha ó do riarthóir agus bain triail eile as.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Ní cheadaítear ach HTTPS mura bhfuil Líonra áitiúil ar siúl.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'Dhiúltaigh OpenKAT an comhartha. Iarr comhartha API bailí ar do riarthóir agus greamaigh arís é.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'Níor fhreagair OpenKAT in am. Seiceáil go bhfuil an freastalaí inrochtana agus bain triail eile as.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Ní féidir an seoladh seo a bhaint amach. Seiceáil litriú an óstainm agus an líonra ceart.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'Thug OpenKAT freagra mór gan choinne. Bain triail eile as ar ball nó iarr cabhair ar do riarthóir.',
+  'Verbonden': 'Ceangailte',
+  'Token ontbreekt': 'Comhartha ar iarraidh',
+  'Laatst gecontroleerd mislukt': 'Theip ar an seiceáil dheireanach',
+  'Nog niet gecontroleerd': 'Níor seiceáladh fós',
   'Zoekveld wissen': 'Glan an réimse cuardaigh',
   'Gantt': 'Gantt',
   'Dag': 'Lá',

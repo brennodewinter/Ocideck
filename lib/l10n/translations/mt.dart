@@ -1793,6 +1793,95 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT ritorna risposta mhux mistennija ({code}). Erġa\' pprova aktar tard jew itlob għajnuna lill-amministratur.',
+  'Vanuit een OpenKAT-server': 'Minn server OpenKAT',
+  'Vanuit een map': 'Minn folder',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Qabbad ambjent OpenKAT wieħed jew aktar (pereżempju produzzjoni u aċċettazzjoni). OciDeck juri r-rapporti disponibbli; l-import tal-kontenut isir permezz ta\' export JSON minn OpenKAT.',
+  'Server toevoegen…': 'Żid server…',
+  'Rapportage van server…': 'Rapport mis-server…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'Għad m\'hemmx server OpenKAT mqabbad.',
+  'Bezig…': 'Qed jsir…',
+  'OpenKAT-server bewerken': 'Editja s-server OpenKAT',
+  'OpenKAT-server toevoegen': 'Żid server OpenKAT',
+  'OpenKAT-server toevoegen…': 'Żid server OpenKAT…',
+  'OpenKAT-server verwijderen?': 'Neħħi s-server OpenKAT?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Dan ineħħi “{name}” u t-token ta\' aċċess tagħhom minn dan l-apparat. Ma tistax tħassar dan.',
+  'Weergavenaam': 'Isem li jidher',
+  'Bijvoorbeeld Productie of Acceptatie':
+      'Pereżempju Produzzjoni jew Aċċettazzjoni',
+  'Adres van OpenKAT': 'Indirizz OpenKAT',
+  'Verbinding met: {host}': 'Konnessjoni ma\': {host}',
+  'Eigen netwerk (LAN)': 'Netwerk lokali (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Biss għal OpenKAT fuq in-netwerk lokali. Jippermetti HTTP u indirizzi privati. Mitfi: HTTPS biss.',
+  'Toegangstoken': 'Token ta\' aċċess',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Ħalli vojt biex iżżomm it-token salvat',
+  'Plak het token hier': 'Waħħal it-token hawn',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Itlob lill-amministratur OpenKAT token API fl-iskrin tal-amministrazzjoni. It-token jibqa\' fuq dan l-apparat, fil-keychain tas-sistema — mhux fid-deck.',
+  'Verbinding wordt getest…': 'Qed jiġi ttestjat il-konnessjoni…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Ittestja l-konnessjoni qabel ma tissejvja, biex tkun ċert li l-isem, l-indirizz u t-token huma korretti.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'Il-konnessjoni OpenKAT hija disponibbli biss fil-verżjoni desktop.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Importa rapporti OpenKAT bħala ħarsa ġenerali ta\' management — minn folder jew server.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Diġà hemm sors OpenKAT konfigurat; il-konnessjoni tibqa\' disponibbli biex tibqa\' taġġorna deck OpenKAT eżistenti.',
+  'Rapportage van OpenKAT-server': 'Rapport mis-server OpenKAT',
+  'Rapportage van OpenKAT-server…': 'Rapport mis-server OpenKAT…',
+  'Server: {name}': 'Server: {name}',
+  'Organisaties worden opgehaald…': 'Qed jiġu miġbura l-organizzazzjonijiet…',
+  'Rapportages worden opgehaald…': 'Qed jiġu miġbura r-rapporti…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'M\'hemm l-ebda organizzazzjoni viżibbli għal dan it-token. Itlob aċċess lill-amministratur tiegħek, jew agħżel server ieħor.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'M\'hemm l-ebda rapport ta\' organizzazzjoni lesti fuq dan is-server. Oħloq l-ewwel rapport aggregat ta\' organizzazzjoni f\'OpenKAT, jew agħżel organizzazzjoni oħra.',
+  'JSON-export uit OpenKAT': 'Export JSON minn OpenKAT',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT jipprovdi l-kontenut tar-rapport bħala fajl JSON. Esporta r-rapport magħżul bħala JSON f\'OpenKAT, u indika hawn dak il-fajl jew il-folder.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Magħżul: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Agħżel fajl JSON…',
+  'Map met exports kiezen…': 'Agħżel folder ta\' export…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Daħħal isem li jidher, pereżempju Produzzjoni.',
+  'Vul een weergavenaam en een adres in.': 'Daħħal isem li jidher u indirizz.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Waħħal token ta\' aċċess biex tkompli.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Daħħal indirizz, pereżempju https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Dan l-indirizz mhux validu. Ikkontrolla jekk daħħaltx URL sħiħ.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'L-indirizz irid jibda b\'https://, jew ixgħel Netwerk lokali għal HTTP fuq in-netwerk lokali.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Konness ma\' {host}. M\'hemm l-ebda organizzazzjoni viżibbli għal dan it-token.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Konness ma\' {host}. {n} organizzazzjoni(jiet) disponibbli.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Il-konnessjoni ma\' OpenKAT falliet. Ikkontrolla l-indirizz u n-netwerk tiegħek, u erġa\' pprova.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'M\'hemmx token ta\' aċċess. Waħħal it-token tal-amministratur tiegħek u erġa\' pprova.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'HTTPS biss huwa permess, sakemm Netwerk lokali mhux attiv.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT rifiuta t-token. Itlob token API validu lill-amministratur tiegħek u waħħlu mill-ġdid.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT ma wieġibx f\'waqtu. Ikkontrolla jekk is-server huwiex raggiungibbli u erġa\' pprova.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Dan l-indirizz mhux raggiungibbli. Ikkontrolla l-ittri tal-host u jekk inti fuq in-netwerk it-tajjeb.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT ritorna risposta kbira mhux mistennija. Erġa\' pprova aktar tard jew itlob għajnuna lill-amministratur.',
+  'Verbonden': 'Konness',
+  'Token ontbreekt': 'Token nieqes',
+  'Laatst gecontroleerd mislukt': 'L-aħħar kontroll falla',
+  'Nog niet gecontroleerd': 'Għad ma ġiex ikkontrollat',
   'Zoekveld wissen': 'Neħħi l-kamp tat-tfittxija',
   'Gantt': 'Gantt',
   'Dag': 'Jum',

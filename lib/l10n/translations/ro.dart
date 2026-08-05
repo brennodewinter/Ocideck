@@ -1788,6 +1788,95 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT a returnat un răspuns neașteptat ({code}). Încercați mai târziu sau cereți ajutor administratorului.',
+  'Vanuit een OpenKAT-server': 'De pe un server OpenKAT',
+  'Vanuit een map': 'Dintr-un folder',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Conectați unul sau mai multe medii OpenKAT (de exemplu producție și acceptare). OciDeck afișează rapoartele disponibile; importați conținutul printr-un export JSON din OpenKAT.',
+  'Server toevoegen…': 'Adaugă server…',
+  'Rapportage van server…': 'Raport de pe server…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'Niciun server OpenKAT conectat încă.',
+  'Bezig…': 'Se lucrează…',
+  'OpenKAT-server bewerken': 'Editează serverul OpenKAT',
+  'OpenKAT-server toevoegen': 'Adaugă server OpenKAT',
+  'OpenKAT-server toevoegen…': 'Adaugă server OpenKAT…',
+  'OpenKAT-server verwijderen?': 'Eliminați serverul OpenKAT?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Aceasta elimină “{name}” și tokenul de acces asociat de pe acest dispozitiv. Nu puteți anula.',
+  'Weergavenaam': 'Nume afișat',
+  'Bijvoorbeeld Productie of Acceptatie': 'De exemplu Producție sau Acceptare',
+  'Adres van OpenKAT': 'Adresă OpenKAT',
+  'Verbinding met: {host}': 'Conexiune la: {host}',
+  'Eigen netwerk (LAN)': 'Rețea locală (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Doar pentru OpenKAT în rețeaua locală. Permite HTTP și adrese private. Dezactivat: doar HTTPS.',
+  'Toegangstoken': 'Token de acces',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Lăsați gol pentru a păstra tokenul salvat',
+  'Plak het token hier': 'Lipiți tokenul aici',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Cereți administratorului OpenKAT un token API în ecranul de administrare. Tokenul rămâne pe acest dispozitiv, în keychain-ul sistemului — nu în deck.',
+  'Verbinding wordt getest…': 'Se testează conexiunea…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Testați conexiunea înainte de salvare, ca să confirmați că numele, adresa și tokenul sunt corecte.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'Conexiunea OpenKAT este disponibilă doar în versiunea desktop.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Importați rapoarte OpenKAT ca o singură privire de management — din folder sau de pe server.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'Există deja o sursă OpenKAT configurată; conexiunea rămâne disponibilă pentru a actualiza un deck OpenKAT existent.',
+  'Rapportage van OpenKAT-server': 'Raport de pe serverul OpenKAT',
+  'Rapportage van OpenKAT-server…': 'Raport de pe serverul OpenKAT…',
+  'Server: {name}': 'Server: {name}',
+  'Organisaties worden opgehaald…': 'Se preiau organizațiile…',
+  'Rapportages worden opgehaald…': 'Se preiau rapoartele…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Nu există organizații vizibile pentru acest token. Cereți acces administratorului sau alegeți alt server.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'Nu există rapoarte de organizație pregătite pe acest server. Creați mai întâi un raport agregat de organizație în OpenKAT sau alegeți altă organizație.',
+  'JSON-export uit OpenKAT': 'Export JSON din OpenKAT',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT furnizează conținutul raportului ca fișier JSON. Exportați raportul ales ca JSON în OpenKAT, apoi indicați aici acel fișier sau folder.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Selectat: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Alegeți fișier JSON…',
+  'Map met exports kiezen…': 'Alegeți folder de export…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Introduceți un nume afișat, de exemplu Producție.',
+  'Vul een weergavenaam en een adres in.':
+      'Introduceți un nume afișat și o adresă.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Lipiți un token de acces pentru a continua.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Introduceți o adresă, de exemplu https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Această adresă nu este validă. Verificați dacă ați introdus un URL complet.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'Adresa trebuie să înceapă cu https://, sau activați Rețea locală pentru HTTP în rețeaua locală.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Conectat la {host}. Nu există organizații vizibile pentru acest token.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Conectat la {host}. {n} organizație/organizații accesibile.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Conexiunea la OpenKAT a eșuat. Verificați adresa și rețeaua, apoi încercați din nou.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Lipsește tokenul de acces. Lipiți tokenul de la administrator și încercați din nou.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Este permis doar HTTPS, exceptând când Rețea locală este activă.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT a respins tokenul. Cereți administratorului un token API valid și lipiți-l din nou.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT nu a răspuns la timp. Verificați dacă serverul este accesibil și încercați din nou.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Această adresă nu este accesibilă. Verificați scrierea numelui gazdei și rețeaua corectă.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT a returnat un răspuns neașteptat de mare. Încercați mai târziu sau cereți ajutor administratorului.',
+  'Verbonden': 'Conectat',
+  'Token ontbreekt': 'Token lipsă',
+  'Laatst gecontroleerd mislukt': 'Ultima verificare a eșuat',
+  'Nog niet gecontroleerd': 'Încă neverificat',
   'Zoekveld wissen': 'Șterge câmpul de căutare',
   'Gantt': 'Gantt',
   'Dag': 'Zi',

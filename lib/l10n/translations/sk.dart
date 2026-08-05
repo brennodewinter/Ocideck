@@ -1778,6 +1778,95 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT vrátil neočakávanú odpoveď ({code}). Skúste neskôr alebo požiadajte správcu o pomoc.',
+  'Vanuit een OpenKAT-server': 'Z OpenKAT servera',
+  'Vanuit een map': 'Z priečinka',
+  'Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.':
+      'Pripojte jedno alebo viac prostredí OpenKAT (napr. produkciu a akceptáciu). OciDeck zobrazí dostupné reporty; obsah naimportujete cez JSON export z OpenKAT.',
+  'Server toevoegen…': 'Pridať server…',
+  'Rapportage van server…': 'Report zo servera…',
+  'Nog geen OpenKAT-server aangesloten.':
+      'Zatiaľ nie je pripojený žiadny OpenKAT server.',
+  'Bezig…': 'Prebieha…',
+  'OpenKAT-server bewerken': 'Upraviť OpenKAT server',
+  'OpenKAT-server toevoegen': 'Pridať OpenKAT server',
+  'OpenKAT-server toevoegen…': 'Pridať OpenKAT server…',
+  'OpenKAT-server verwijderen?': 'Odstrániť OpenKAT server?',
+  'Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.':
+      'Tým sa z tohto zariadenia odstráni “{name}” a súvisiaci prístupový token. Nedá sa to vrátiť späť.',
+  'Weergavenaam': 'Zobrazovaný názov',
+  'Bijvoorbeeld Productie of Acceptatie': 'Napr. Produkcia alebo Akceptácia',
+  'Adres van OpenKAT': 'Adresa OpenKAT',
+  'Verbinding met: {host}': 'Pripojenie k: {host}',
+  'Eigen netwerk (LAN)': 'Vlastná sieť (LAN)',
+  'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.':
+      'Len pre OpenKAT v lokálnej sieti. Povolí HTTP a súkromné adresy. Vypnuté: len HTTPS.',
+  'Toegangstoken': 'Prístupový token',
+  'Laat leeg om het opgeslagen token te behouden':
+      'Nechajte prázdne na zachovanie uloženého tokenu',
+  'Plak het token hier': 'Vložte token sem',
+  'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.':
+      'Požiadajte správcu OpenKAT o API token na administračnej obrazovke. Token zostane na tomto zariadení v keychain OS — nie v decku.',
+  'Verbinding wordt getest…': 'Testuje sa pripojenie…',
+  'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.':
+      'Otestujte pripojenie pred uložením, aby ste overili názov, adresu a token.',
+  'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.':
+      'Pripojenie OpenKAT je k dispozícii len v desktopovej verzii.',
+  'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.':
+      'Importujte reporty OpenKAT ako jeden manažérsky prehľad — z priečinka alebo zo servera.',
+  'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.':
+      'OpenKAT zdroj je už nastavený; pripojenie zostane dostupné na aktualizáciu existujúceho OpenKAT decku.',
+  'Rapportage van OpenKAT-server': 'Report z OpenKAT servera',
+  'Rapportage van OpenKAT-server…': 'Report z OpenKAT servera…',
+  'Server: {name}': 'Server: {name}',
+  'Organisaties worden opgehaald…': 'Načítavajú sa organizácie…',
+  'Rapportages worden opgehaald…': 'Načítavajú sa reporty…',
+  'Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.':
+      'Pre tento token nie sú viditeľné žiadne organizácie. Požiadajte správcu o prístup alebo zvoľte iný server.',
+  'Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.':
+      'Na tomto serveri nie sú pripravené žiadne organizačné reporty. Najprv vytvorte v OpenKAT agregovaný organizačný report alebo zvoľte inú organizáciu.',
+  'JSON-export uit OpenKAT': 'JSON export z OpenKAT',
+  'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.':
+      'OpenKAT poskytuje obsah reportu ako JSON súbor. Exportujte vybraný report ako JSON v OpenKAT a tu ukážte na tento súbor alebo priečinok.',
+  'Gekozen: {reportName} · {orgName} · {serverName}':
+      'Vybrané: {reportName} · {orgName} · {serverName}',
+  'JSON-bestand kiezen…': 'Vybrať JSON súbor…',
+  'Map met exports kiezen…': 'Vybrať priečinok exportov…',
+  'Vul een weergavenaam in, bijvoorbeeld Productie.':
+      'Zadajte zobrazovaný názov, napr. Produkcia.',
+  'Vul een weergavenaam en een adres in.':
+      'Zadajte zobrazovaný názov a adresu.',
+  'Plak een toegangstoken om verder te gaan.':
+      'Vložte prístupový token na pokračovanie.',
+  'Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl':
+      'Zadajte adresu, napr. https://openkat.voorbeeld.nl',
+  'Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.':
+      'Táto adresa nie je platná. Skontrolujte, či ste zadali úplnú URL.',
+  'Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.':
+      'Adresa musí začínať https://, alebo zapnite Vlastnú sieť pre HTTP v lokálnej sieti.',
+  'Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.':
+      'Pripojené k {host}. Pre tento token nie sú viditeľné žiadne organizácie.',
+  'Verbonden met {host}. {n} organisatie(s) bereikbaar.':
+      'Pripojené k {host}. Dosiahnuteľných organizácií: {n}.',
+  'De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.':
+      'Pripojenie k OpenKAT zlyhalo. Skontrolujte adresu a sieť a skúste znova.',
+  'Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.':
+      'Chýba prístupový token. Vložte token od správcu a skúste znova.',
+  'Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.':
+      'Povolené je len HTTPS, pokiaľ nie je zapnutá Vlastná sieť.',
+  'OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.':
+      'OpenKAT odmietol token. Požiadajte správcu o platný API token a vložte ho znova.',
+  'OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.':
+      'OpenKAT neodpovedal včas. Skontrolujte, či je server dosiahnuteľný, a skúste znova.',
+  'Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.':
+      'Táto adresa nie je dosiahnuteľná. Skontrolujte pravopis názvu hostiteľa a správnu sieť.',
+  'OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.':
+      'OpenKAT vrátil neočakávane veľkú odpoveď. Skúste neskôr alebo požiadajte správcu o pomoc.',
+  'Verbonden': 'Pripojené',
+  'Token ontbreekt': 'Chýba token',
+  'Laatst gecontroleerd mislukt': 'Posledná kontrola zlyhala',
+  'Nog niet gecontroleerd': 'Zatiaľ neoverené',
   'Zoekveld wissen': 'Vymazať vyhľadávacie pole',
   'Gantt': 'Gantt',
   'Dag': 'Deň',
