@@ -1,6 +1,6 @@
 # OciDeck
 
-> **Status:** current-state project overview · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state project overview · **Status last reviewed:** 2026-08-07 · **Published by:** Stichting LibreKAT
 
 > **Alpha — releases are now tagged (latest: `0.1.1`, 2026-07-27).** You can
 > build from source, or download a release build; either way the file format is
@@ -13,6 +13,12 @@ presentations through a structured, slide-by-slide editor — no raw Markdown
 wrangling required. Compose decks from typed slide templates, preview them live,
 present them fullscreen across two screens, and export to Marp Markdown, PDF,
 PPTX and offline HTML.
+
+Alongside presentations it also edits a **flowing Markdown document** — a report,
+a memo, a note — in the same window: a plain `.md` that any Markdown reader
+opens, with a visual and a source view, exported to `.md` or one continuous HTML
+file, and convertible either way between a document and a presentation
+([ARCHITECTURE.md](docs/ARCHITECTURE.md#document-mode)).
 
 > **Try it in your browser:** <https://ocideck.librekat.nl/> — the web build,
 > running entirely in your own tab; nothing you type or open is uploaded. It is
@@ -57,6 +63,7 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 ## What it does
 
 - **Structured slide editors** — a dedicated editor per slide type: title, bullets, images, quote, table, code, video, audio, and more.
+- **Document mode** — edits a plain, flowing `.md` document next to presentations, with a visual and a source view, an insert palette and a formatting toolbar; exports to `.md` or one continuous HTML file and converts either way between a document and a presentation.
 - **Privacy check and redaction (OciWacht)** — every slide is read for personal data, and what you mark is left out of display and export, not painted over.
 - **Live preview and fullscreen presenter** — presenter view, dual screens, a rehearsal clock, an annotation layer, and live table editing.
 - **Charts, timelines and quiz slides** — thirteen chart types from CSV or an in-app grid, animated timelines, and interactive question slides.
