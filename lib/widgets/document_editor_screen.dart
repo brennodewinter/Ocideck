@@ -20,6 +20,8 @@ import '../utils/doc_link.dart' show headingSlug;
 import 'editors/_editor_field.dart' show pickImageWithFeedback;
 import 'editors/chart_editor.dart';
 import 'editors/table_editor.dart';
+import 'markdown_editor/markdown_editor_theme.dart';
+import 'markdown_editor/markdown_editor_toolbar.dart';
 import 'reader/document_markdown_view.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
@@ -54,19 +56,47 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// dubbelklik bewerkt. Standaard bron: dat is waar je tekst typt.
   _DocViewMode _viewMode = _DocViewMode.source;
 
+  /// De focus van de rauwe editor. De opmaak-knoppenbalk geeft de focus hierheen
+  /// terug na een klik, zodat je meteen verder typt.
+  final FocusNode _editorFocus = FocusNode();
+
+  /// Waar terwijl de controller van *buitenaf* wordt gelijkgetrokken aan de bron
+  /// (ongedaan maken/opnieuw, of een invoeging): dan mag de controllerluisteraar
+  /// niet terugstromen naar de notifier — dat zou een lus of dubbele bewerking
+  /// geven.
+  bool _applyingExternal = false;
+
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(
       text: ref.read(documentProvider).document?.source ?? '',
     );
+    // Eén luisteraar vangt élke bronwijziging in de controller — typen én de
+    // opmaak-knoppenbalk (die de controller rechtstreeks muteert en dus geen
+    // onChanged afvuurt). Zo stroomt alles langs dezelfde weg naar de notifier.
+    _controller.addListener(_onControllerChanged);
   }
 
   @override
   void dispose() {
+    _controller.removeListener(_onControllerChanged);
     _controller.dispose();
+    _editorFocus.dispose();
     _previewScroll.dispose();
     super.dispose();
+  }
+
+  /// Stroom een controllerwijziging naar de notifier. Slaat over wanneer de
+  /// controller juist van búiten wordt bijgewerkt (`_applyingExternal`), en
+  /// wanneer alleen de selectie/cursor verschoof (tekst gelijk) — anders zou een
+  /// simpele cursorbeweging een lege bewerking worden.
+  void _onControllerChanged() {
+    if (_applyingExternal) return;
+    final text = _controller.text;
+    final current = ref.read(documentProvider).document?.source ?? '';
+    if (text == current) return;
+    ref.read(documentProvider.notifier).edit(text, coalesceKey: 'doc');
   }
 
   /// Sla het document op. Cmd/Ctrl+S, net als een deck. Feedback is de dirty-stip
@@ -130,10 +160,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       source,
     ) {
       if (source != _controller.text) {
+        _applyingExternal = true;
         _controller.value = TextEditingValue(
           text: source,
           selection: TextSelection.collapsed(offset: source.length),
         );
+        _applyingExternal = false;
       }
     });
     final source = ref.watch(
@@ -158,6 +190,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
               onInsertTable: _insertTable,
               onInsertMermaid: _insertMermaid,
               onInsertImage: _insertImage,
+              controller: _controller,
+              editorFocus: _editorFocus,
             ),
             Divider(height: 1, thickness: 1, color: theme.colorScheme.outlineVariant),
             Expanded(
@@ -225,8 +259,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   Widget _editor(ThemeData theme) => TextField(
     controller: _controller,
-    onChanged: (text) =>
-        ref.read(documentProvider.notifier).edit(text, coalesceKey: 'doc'),
+    focusNode: _editorFocus,
     maxLines: null,
     expands: true,
     textAlignVertical: TextAlignVertical.top,
@@ -362,10 +395,15 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       sel.end,
       block,
     );
+    // Zet de controller (met cursor ná het blok) los van de luisteraar en dien de
+    // bewerking als een eigen stap in (`coalesceKey: null`), zodat een invoeging
+    // niet met eerder typen samenvloeit in de ongedaan-maken-geschiedenis.
+    _applyingExternal = true;
     _controller.value = TextEditingValue(
       text: next,
       selection: TextSelection.collapsed(offset: cursor),
     );
+    _applyingExternal = false;
     ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
   }
 
@@ -505,6 +543,8 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onInsertTable;
   final VoidCallback onInsertMermaid;
   final VoidCallback onInsertImage;
+  final TextEditingController controller;
+  final FocusNode editorFocus;
 
   const _DocEditorToolbar({
     required this.mode,
@@ -513,36 +553,55 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onInsertTable,
     required this.onInsertMermaid,
     required this.onInsertImage,
+    required this.controller,
+    required this.editorFocus,
   });
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final scheme = Theme.of(context).colorScheme;
     return Container(
-      color: Theme.of(context).colorScheme.surface,
+      color: scheme.surface,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SegmentedButton<_DocViewMode>(
-            segments: [
-              ButtonSegment(
-                value: _DocViewMode.visual,
-                label: Text(l10n.d('Visueel')),
-                icon: const Icon(Icons.visibility_outlined, size: 15),
+          Row(
+            children: [
+              SegmentedButton<_DocViewMode>(
+                segments: [
+                  ButtonSegment(
+                    value: _DocViewMode.visual,
+                    label: Text(l10n.d('Visueel')),
+                    icon: const Icon(Icons.visibility_outlined, size: 15),
+                  ),
+                  ButtonSegment(
+                    value: _DocViewMode.source,
+                    label: Text(l10n.d('Bron')),
+                    icon: const Icon(Icons.code, size: 15),
+                  ),
+                ],
+                selected: {mode},
+                showSelectedIcon: false,
+                style: const ButtonStyle(visualDensity: VisualDensity.compact),
+                onSelectionChanged: (s) => onModeChanged(s.first),
               ),
-              ButtonSegment(
-                value: _DocViewMode.source,
-                label: Text(l10n.d('Bron')),
-                icon: const Icon(Icons.code, size: 15),
-              ),
+              const Spacer(),
+              _insertMenu(l10n),
             ],
-            selected: {mode},
-            showSelectedIcon: false,
-            style: const ButtonStyle(visualDensity: VisualDensity.compact),
-            onSelectionChanged: (s) => onModeChanged(s.first),
           ),
-          const Spacer(),
-          _insertMenu(l10n),
+          // De gedeelde opmaak-knoppenbalk (vet/cursief/kop/lijst/…), dezelfde als
+          // de deck-markdown-editor. Zit hier in de gedeelde kop zonder eigen
+          // kader (`bordered: false`, zoals de knoppenbalk zelf documenteert), en
+          // muteert de bron via de controller — de controllerluisteraar stroomt
+          // dat door naar de weergave en de opslag.
+          MarkdownEditorToolbar(
+            controller: controller,
+            focusNode: editorFocus,
+            theme: MarkdownEditorTheme.documentSurface(scheme: scheme),
+            bordered: false,
+          ),
         ],
       ),
     );

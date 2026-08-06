@@ -162,4 +162,22 @@ void main() {
     expect(source, contains('```mermaid'));
     expect(source, startsWith('Tekst.'));
   });
+
+  testWidgets('de opmaak-knoppenbalk muteert de bron en stroomt naar de notifier', (
+    tester,
+  ) async {
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(''));
+    await tester.pumpWidget(harness(n));
+    await tester.enterText(find.byType(TextField), 'abc');
+    await tester.pump();
+
+    // 'Vet' klikken muteert de controller rechtstreeks (geen onChanged); de
+    // controllerluisteraar moet dat tóch naar de notifier stromen. Met een
+    // samengevouwen cursor voegt het de placeholder tussen ** ** in.
+    await tester.tap(find.byTooltip('Vet'));
+    await tester.pump();
+
+    expect(n.currentState.document!.source, contains('**'));
+    expect(n.currentState.isDirty, isTrue);
+  });
 }
