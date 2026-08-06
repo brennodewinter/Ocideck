@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart' show TlpLevel;
-import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/models/matrix_settings.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/storage_connection.dart';
