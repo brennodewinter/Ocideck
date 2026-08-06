@@ -1772,6 +1772,46 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logoet for denne stilprofil blev ikke fundet og vises ikke (sti: {pad}). Vælg et logo i præsentationsindstillingerne.',
+  'Converteer naar document…': 'Konvertér til dokument…',
+  'Converteer naar presentatie…': 'Konvertér til præsentation…',
+  'Converteren': 'Konvertér',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Inddelingen i dias (teksten fortsætter som ét dokument).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Inddelingen i dias er et forslag; præsentation og dokument er ikke et perfekt spejlbillede af hinanden.',
+  'Document exporteren': 'Eksportér dokument',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'En redigeret kopi af den rene tekst — åbner i enhver Markdown-læser.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'En tematisk streg (---) bliver til en dias-grænse.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Eksport laver en redigeret kopi til en modtager. Dit byte-tro original beholder du med Gem.',
+  'Exporteren…': 'Eksportér…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Én tilgængelig HTML-fil, der åbner i enhver browser uden internet, med tabeller, matematik, mermaid og diagrammer.',
+  'Het thema en de opmaak per dia (_class).':
+      'Temaet og formateringen pr. dias (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Seglet: en konverteret fil er ny og bærer ikke noget segl.',
+  'Naar document converteren?': 'Konvertér til dokument?',
+  'Naar presentatie converteren?': 'Konvertér til præsentation?',
+  'Nog een export': 'Endnu en eksport',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'For PDF: åbn HTML\'en og udskriv via din browser (Gem som PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'For den bredere kreds: alt, hvad kontrollen finder, fjernes. Filen får "-redigeret" i navnet.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'For opdragsgiveren eller revisoren: kun det, du selv har sat til "udelad", fjernes. Resten forbliver læsbar.',
+  'Wat gaat er verloren bij het converteren:':
+      'Hvad går tabt ved konverteringen:',
+  'Wat verandert er bij het converteren:':
+      'Hvad ændrer sig ved konverteringen:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Vi laver en kopi i en ny fane; din oprindelige fil forbliver uændret.',
+  'Welk formaat?': 'Hvilket format?',
+  'dia\'s, gesplitst op kop.': 'dias, opdelt efter overskrift.',
+  'document': 'dokument',
+  'volledig': 'fuldstændig',
   'Invoegen': 'Indsæt',
   'Visueel': 'Visuel',
   'Document': 'Dokument',

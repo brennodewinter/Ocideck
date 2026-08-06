@@ -13,6 +13,8 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'HTML',
+  'Markdown (.md)',
   'Mermaid',
   'Server: {name}',
   'https://openkat.voorbeeld.nl',
@@ -40,6 +42,11 @@ const unchangedInEnglish = {
   // Dokument, Fins Asiakirja, …), dus alleen op de Engelse witte lijst — niet op
   // unchangedInAllLanguages.
   'Document',
+  // De standaard-exportnaam van een naamloos document: het Engels houdt
+  // 'document' identiek aan het Nederlands, maar andere talen vertalen het wél
+  // (Duits Dokument, Fins asiakirja, Grieks έγγραφο, …), dus alleen op de
+  // Engelse witte lijst — niet op unchangedInAllLanguages.
+  'document',
   'https://matrix.to/#/…',
   'https://matrix.example.org',
   '@jij:matrix.example.org',
@@ -225,6 +232,8 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'HTML',
+  'Markdown (.md)',
   'Mermaid',
   'Server: {name}',
   'https://openkat.voorbeeld.nl',

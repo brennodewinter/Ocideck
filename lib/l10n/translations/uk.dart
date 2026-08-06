@@ -1790,6 +1790,46 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Логотип цього профілю стилю не знайдено й не показано (шлях: {pad}). Виберіть логотип у налаштуваннях презентації.',
+  'Converteer naar document…': 'Перетворити на документ…',
+  'Converteer naar presentatie…': 'Перетворити на презентацію…',
+  'Converteren': 'Перетворити',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Поділ на слайди (текст продовжується як один документ).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Поділ на слайди — це пропозиція; презентація й документ не є ідеальним відображенням одне одного.',
+  'Document exporteren': 'Експортувати документ',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Відредагована копія простого тексту — відкривається в будь-якому читачі Markdown.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Тематична лінія (---) стає межею слайда.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Експорт створює відредаговану копію для одержувача. Свій байтово-точний оригінал ви зберігаєте через Зберегти.',
+  'Exporteren…': 'Експортувати…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Один доступний HTML-файл, що відкривається в будь-якому браузері без інтернету, з таблицями, математикою, mermaid і діаграмами.',
+  'Het thema en de opmaak per dia (_class).':
+      'Тема та оформлення для кожного слайда (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Печатка: перетворений файл є новим і не має печатки.',
+  'Naar document converteren?': 'Перетворити на документ?',
+  'Naar presentatie converteren?': 'Перетворити на презентацію?',
+  'Nog een export': 'Ще один експорт',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Для PDF: відкрийте HTML і надрукуйте через браузер (Зберегти як PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Для ширшого кола: усе, що знаходить перевірка, вилучається. Файл отримує "-відредаговано" в назві.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Для замовника чи аудитора: вилучається лише те, що ви самі позначили як "пропустити". Решта залишається читабельною.',
+  'Wat gaat er verloren bij het converteren:':
+      'Що втрачається під час перетворення:',
+  'Wat verandert er bij het converteren:':
+      'Що змінюється під час перетворення:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Ми створюємо копію в новій вкладці; ваш вихідний файл залишається без змін.',
+  'Welk formaat?': 'Який формат?',
+  'dia\'s, gesplitst op kop.': 'слайдів, поділених за заголовком.',
+  'document': 'документ',
+  'volledig': 'повний',
   'Invoegen': 'Вставити',
   'Visueel': 'Візуально',
   'Document': 'Документ',

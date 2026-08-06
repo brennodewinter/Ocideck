@@ -1764,6 +1764,45 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Selle stiiliprofiili logo ei leitud ja seda ei näidata (tee: {pad}). Valige logo esitluse sätetes.',
+  'Converteer naar document…': 'Teisenda dokumendiks…',
+  'Converteer naar presentatie…': 'Teisenda esitluseks…',
+  'Converteren': 'Teisenda',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Jaotus slaidideks (tekst jätkub ühe dokumendina).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Jaotus slaidideks on ettepanek; esitlus ja dokument ei ole teineteise täiuslik peegeldus.',
+  'Document exporteren': 'Ekspordi dokument',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Toimetatud koopia lihttekstist — avaneb igas Markdown-lugejas.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Teemajoon (---) muutub slaidipiiriks.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Eksport loob toimetatud koopia saajale. Baiditäpse originaali säilitad käsuga Salvesta.',
+  'Exporteren…': 'Ekspordi…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Üks juurdepääsetav HTML-fail, mis avaneb igas brauseris ilma internetita, koos tabelite, matemaatika, mermaidi ja diagrammidega.',
+  'Het thema en de opmaak per dia (_class).':
+      'Teema ja slaidipõhine vormindus (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Pitser: teisendatud fail on uus ega kanna pitserit.',
+  'Naar document converteren?': 'Kas teisendada dokumendiks?',
+  'Naar presentatie converteren?': 'Kas teisendada esitluseks?',
+  'Nog een export': 'Veel üks eksport',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'PDF-i jaoks: ava HTML ja prindi brauseri kaudu (Salvesta PDF-ina).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Laiemale ringile: kõik, mille kontroll leiab, eemaldatakse. Faili nimele lisatakse "-redigeeritud".',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Tellijale või audiitorile: eemaldatakse ainult see, mille oled ise märkinud "jäta välja". Ülejäänu jääb loetavaks.',
+  'Wat gaat er verloren bij het converteren:':
+      'Mis läheb teisendamisel kaotsi:',
+  'Wat verandert er bij het converteren:': 'Mis muutub teisendamisel:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Loome koopia uuel kaardil; sinu algne fail jääb muutumatuks.',
+  'Welk formaat?': 'Milline vorming?',
+  'dia\'s, gesplitst op kop.': 'slaidi, jagatud pealkirja järgi.',
+  'document': 'dokument',
+  'volledig': 'täielik',
   'Invoegen': 'Lisa',
   'Visueel': 'Visuaalne',
   'Document': 'Dokument',

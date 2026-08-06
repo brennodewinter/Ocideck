@@ -1790,6 +1790,44 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo-ul acestui profil de stil nu a fost găsit și nu este afișat (cale: {pad}). Alegeți un logo în setările prezentării.',
+  'Converteer naar document…': 'Conversie în document…',
+  'Converteer naar presentatie…': 'Conversie în prezentare…',
+  'Converteren': 'Convertește',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Împărțirea în diapozitive (textul continuă ca un singur document).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Împărțirea în diapozitive este o sugestie; prezentarea și documentul nu sunt o oglindă perfectă unul pentru celălalt.',
+  'Document exporteren': 'Exportă documentul',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'O copie redactată a textului simplu — se deschide în orice cititor Markdown.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'O linie tematică (---) devine o limită de diapozitiv.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Exportul creează o copie redactată pentru un destinatar. Originalul tău fidel octeților îl păstrezi cu Salvare.',
+  'Exporteren…': 'Exportă…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Un singur fișier HTML accesibil care se deschide în orice browser fără internet, cu tabele, matematică, mermaid și grafice.',
+  'Het thema en de opmaak per dia (_class).':
+      'Tema și formatarea pentru fiecare diapozitiv (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Sigiliul: un fișier convertit este nou și nu poartă niciun sigiliu.',
+  'Naar document converteren?': 'Conversie în document?',
+  'Naar presentatie converteren?': 'Conversie în prezentare?',
+  'Nog een export': 'Încă un export',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Pentru PDF: deschide HTML-ul și tipărește din browser (Salvează ca PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Pentru cercul mai larg: tot ce găsește verificarea este eliminat. Fișierul primește "-redactate" în nume.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Pentru client sau auditor: se elimină doar ceea ce ai marcat tu însuți drept "omite". Restul rămâne lizibil.',
+  'Wat gaat er verloren bij het converteren:': 'Ce se pierde la conversie:',
+  'Wat verandert er bij het converteren:': 'Ce se schimbă la conversie:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Creăm o copie într-o filă nouă; fișierul tău original rămâne neschimbat.',
+  'Welk formaat?': 'Ce format?',
+  'dia\'s, gesplitst op kop.': 'diapozitive, împărțite după titlu.',
+  'document': 'document',
+  'volledig': 'complet',
   'Invoegen': 'Inserează',
   'Visueel': 'Vizual',
   'Document': 'Document',

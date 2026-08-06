@@ -2750,6 +2750,44 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Bu stil profilinin logosu bulunamadı ve gösterilmiyor (yol: {pad}). Sunum ayarlarında bir logo seçin.',
+  'Converteer naar document…': 'Belgeye dönüştür…',
+  'Converteer naar presentatie…': 'Sunuya dönüştür…',
+  'Converteren': 'Dönüştür',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Slaytlara bölme (metin tek bir belge olarak devam eder).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Slaytlara bölme bir öneridir; sunum ve belge birbirinin kusursuz aynası değildir.',
+  'Document exporteren': 'Belgeyi dışa aktar',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Düz metnin redakte edilmiş bir kopyası — herhangi bir Markdown okuyucuda açılır.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Tematik bir çizgi (---) bir slayt sınırına dönüşür.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Dışa aktarma, bir alıcı için redakte edilmiş bir kopya oluşturur. Bayta sadık orijinalinizi Kaydet ile saklarsınız.',
+  'Exporteren…': 'Dışa aktar…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Tablolar, matematik, mermaid ve grafiklerle birlikte internet olmadan herhangi bir tarayıcıda açılan tek, erişilebilir bir HTML dosyası.',
+  'Het thema en de opmaak per dia (_class).':
+      'Tema ve slayt başına biçimlendirme (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Mühür: dönüştürülmüş bir dosya yenidir ve hiçbir mühür taşımaz.',
+  'Naar document converteren?': 'Belgeye dönüştürülsün mü?',
+  'Naar presentatie converteren?': 'Sunuya dönüştürülsün mü?',
+  'Nog een export': 'Başka bir dışa aktarma',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'PDF için: HTML\'i açın ve tarayıcınızdan yazdırın (PDF olarak kaydet).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Daha geniş çevre için: denetimin bulduğu her şey çıkarılır. Dosya adına "-redakte edildi" eklenir.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Müşteri veya denetçi için: yalnızca kendinizin "atla" olarak işaretlediğiniz kaldırılır. Geri kalanı okunabilir kalır.',
+  'Wat gaat er verloren bij het converteren:': 'Dönüştürürken neler kaybolur:',
+  'Wat verandert er bij het converteren:': 'Dönüştürürken neler değişir:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Yeni bir sekmede bir kopya oluştururuz; orijinal dosyanız değişmeden kalır.',
+  'Welk formaat?': 'Hangi biçim?',
+  'dia\'s, gesplitst op kop.': 'slayt, başlığa göre bölünmüş.',
+  'document': 'belge',
+  'volledig': 'tam',
   'Invoegen': 'Ekle',
   'Visueel': 'Görsel',
   'Document': 'Belge',

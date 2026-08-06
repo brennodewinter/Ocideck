@@ -1772,6 +1772,45 @@ const _dutchSourceSv = {
 const _dutchSourceAddSv = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logotypen för denna stilprofil hittades inte och visas inte (sökväg: {pad}). Välj en logotyp i presentationsinställningarna.',
+  'Converteer naar document…': 'Konvertera till dokument…',
+  'Converteer naar presentatie…': 'Konvertera till presentation…',
+  'Converteren': 'Konvertera',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Indelningen i bilder (texten fortsätter som ett enda dokument).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Indelningen i bilder är ett förslag; presentation och dokument är inte en perfekt spegelbild av varandra.',
+  'Document exporteren': 'Exportera dokument',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'En maskad kopia av klartexten — öppnas i vilken Markdown-läsare som helst.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'En tematisk linje (---) blir en bildgräns.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Export skapar en maskad kopia för en mottagare. Ditt byte-trogna original behåller du med Spara.',
+  'Exporteren…': 'Exportera…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'En enda tillgänglig HTML-fil som öppnas i vilken webbläsare som helst utan internet, med tabeller, matematik, mermaid och diagram.',
+  'Het thema en de opmaak per dia (_class).':
+      'Temat och formateringen per bild (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Sigillet: en konverterad fil är ny och bär inget sigill.',
+  'Naar document converteren?': 'Konvertera till dokument?',
+  'Naar presentatie converteren?': 'Konvertera till presentation?',
+  'Nog een export': 'Ännu en export',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'För PDF: öppna HTML:en och skriv ut via din webbläsare (Spara som PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'För den bredare kretsen: allt som kontrollen hittar tas bort. Filen får "-maskade" i namnet.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'För uppdragsgivaren eller revisorn: bara det du själv har markerat som "utelämna" tas bort. Resten förblir läsbar.',
+  'Wat gaat er verloren bij het converteren:':
+      'Vad går förlorat vid konverteringen:',
+  'Wat verandert er bij het converteren:': 'Vad ändras vid konverteringen:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Vi skapar en kopia i en ny flik; din ursprungliga fil förblir oförändrad.',
+  'Welk formaat?': 'Vilket format?',
+  'dia\'s, gesplitst op kop.': 'bilder, uppdelade efter rubrik.',
+  'document': 'dokument',
+  'volledig': 'fullständig',
   'Invoegen': 'Infoga',
   'Visueel': 'Visuell',
   'Document': 'Dokument',

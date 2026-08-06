@@ -1779,6 +1779,44 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logotip ovog profila stila nije pronađen i ne prikazuje se (putanja: {pad}). Odaberite logotip u postavkama prezentacije.',
+  'Converteer naar document…': 'Pretvori u dokument…',
+  'Converteer naar presentatie…': 'Pretvori u prezentaciju…',
+  'Converteren': 'Pretvori',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Podjela na slajdove (tekst se nastavlja kao jedan dokument).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Podjela na slajdove je prijedlog; prezentacija i dokument nisu savršeni odraz jedno drugoga.',
+  'Document exporteren': 'Izvezi dokument',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Redigirana kopija običnog teksta — otvara se u svakom Markdown čitaču.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Tematska crta (---) postaje granica slajda.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Izvoz stvara redigiranu kopiju za primatelja. Svoj bajtno vjeran izvornik čuvate pomoću Spremi.',
+  'Exporteren…': 'Izvezi…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Jedna pristupačna HTML datoteka koja se otvara u svakom pregledniku bez interneta, s tablicama, matematikom, mermaidom i grafikonima.',
+  'Het thema en de opmaak per dia (_class).':
+      'Tema i oblikovanje po slajdu (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Pečat: pretvorena datoteka je nova i ne nosi pečat.',
+  'Naar document converteren?': 'Pretvoriti u dokument?',
+  'Naar presentatie converteren?': 'Pretvoriti u prezentaciju?',
+  'Nog een export': 'Još jedan izvoz',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Za PDF: otvorite HTML i ispišite putem preglednika (Spremi kao PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Za širi krug: sve što provjera pronađe uklanja se. Datoteka dobiva "-redigirano" u nazivu.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Za naručitelja ili revizora: uklanja se samo ono što ste sami označili s "izostavi". Ostalo ostaje čitljivo.',
+  'Wat gaat er verloren bij het converteren:': 'Što se gubi pri pretvorbi:',
+  'Wat verandert er bij het converteren:': 'Što se mijenja pri pretvorbi:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Radimo kopiju u novoj kartici; vaša izvorna datoteka ostaje nepromijenjena.',
+  'Welk formaat?': 'Koji format?',
+  'dia\'s, gesplitst op kop.': 'slajdova, podijeljenih po naslovu.',
+  'document': 'dokument',
+  'volledig': 'potpuno',
   'Invoegen': 'Umetni',
   'Visueel': 'Vizualno',
   'Document': 'Dokument',

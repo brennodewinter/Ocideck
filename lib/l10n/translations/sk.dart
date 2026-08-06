@@ -1780,6 +1780,44 @@ const _dutchSourceSk = {
 const _dutchSourceAddSk = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo tohto profilu štýlu sa nenašlo a nezobrazuje sa (cesta: {pad}). Vyberte logo v nastaveniach prezentácie.',
+  'Converteer naar document…': 'Konvertovať na dokument…',
+  'Converteer naar presentatie…': 'Konvertovať na prezentáciu…',
+  'Converteren': 'Konvertovať',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Rozdelenie na snímky (text pokračuje ako jeden dokument).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Rozdelenie na snímky je návrh; prezentácia a dokument nie sú dokonalým zrkadlom jeden druhého.',
+  'Document exporteren': 'Exportovať dokument',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Začiernená kópia obyčajného textu — otvorí sa v každej čítačke Markdownu.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Tematická čiara (---) sa stane hranicou snímky.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Export vytvorí začiernenú kópiu pre príjemcu. Svoj bajtovo verný originál uchováte pomocou Uložiť.',
+  'Exporteren…': 'Exportovať…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Jeden prístupný súbor HTML, ktorý sa otvorí v každom prehliadači bez internetu, s tabuľkami, matematikou, mermaidom a grafmi.',
+  'Het thema en de opmaak per dia (_class).':
+      'Motív a formátovanie jednotlivých snímok (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Pečať: konvertovaný súbor je nový a nenesie žiadnu pečať.',
+  'Naar document converteren?': 'Konvertovať na dokument?',
+  'Naar presentatie converteren?': 'Konvertovať na prezentáciu?',
+  'Nog een export': 'Ďalší export',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Pre PDF: otvorte HTML a vytlačte cez prehliadač (Uložiť ako PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Pre širší okruh: všetko, čo kontrola nájde, sa odstráni. Súbor dostane "-začiernené" v názve.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Pre zadávateľa alebo audítora: odstráni sa len to, čo sami označíte ako "vynechať". Zvyšok zostane čitateľný.',
+  'Wat gaat er verloren bij het converteren:': 'Čo sa stratí pri prevode:',
+  'Wat verandert er bij het converteren:': 'Čo sa zmení pri prevode:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Vytvoríme kópiu na novej karte; váš pôvodný súbor zostane nezmenený.',
+  'Welk formaat?': 'Aký formát?',
+  'dia\'s, gesplitst op kop.': 'snímok, rozdelených podľa nadpisu.',
+  'document': 'dokument',
+  'volledig': 'úplný',
   'Invoegen': 'Vložiť',
   'Visueel': 'Vizuálne',
   'Document': 'Dokument',

@@ -1795,6 +1795,46 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Логото на този профил за стил не е намерено и не се показва (път: {pad}). Изберете логото в настройките за презентация.',
+  'Converteer naar document…': 'Преобразуване в документ…',
+  'Converteer naar presentatie…': 'Преобразуване в презентация…',
+  'Converteren': 'Преобразуване',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Разделянето на слайдове (текстът продължава като един документ).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Разделянето на слайдове е предложение; презентацията и документът не са идеално отражение един на друг.',
+  'Document exporteren': 'Експортиране на документ',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Заличено копие на обикновения текст — отваря се във всеки четец на Markdown.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Тематична линия (---) става граница на слайд.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Експортът създава заличено копие за получател. Своя байтово точен оригинал запазвате със Запази.',
+  'Exporteren…': 'Експортиране…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Един достъпен HTML файл, който се отваря във всеки браузър без интернет, с таблици, математика, mermaid и диаграми.',
+  'Het thema en de opmaak per dia (_class).':
+      'Темата и оформлението за всеки слайд (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Печатът: преобразуван файл е нов и няма печат.',
+  'Naar document converteren?': 'Преобразуване в документ?',
+  'Naar presentatie converteren?': 'Преобразуване в презентация?',
+  'Nog een export': 'Още един експорт',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'За PDF: отворете HTML и отпечатайте през браузъра си (Запази като PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'За по-широкия кръг: всичко, което проверката открие, се премахва. Файлът получава "-заличени" в името.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'За възложителя или одитора: премахва се само това, което сами сте маркирали като "пропусни". Останалото остава четимо.',
+  'Wat gaat er verloren bij het converteren:':
+      'Какво се губи при преобразуването:',
+  'Wat verandert er bij het converteren:':
+      'Какво се променя при преобразуването:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Правим копие в нов раздел; оригиналният ви файл остава непроменен.',
+  'Welk formaat?': 'Кой формат?',
+  'dia\'s, gesplitst op kop.': 'слайда, разделени по заглавие.',
+  'document': 'документ',
+  'volledig': 'пълен',
   'Invoegen': 'Вмъкване',
   'Visueel': 'Визуален',
   'Document': 'Документ',
