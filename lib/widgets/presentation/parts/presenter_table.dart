@@ -117,7 +117,9 @@ extension _PresenterTable on _FullscreenPresenterState {
 
   /// Tab loopt door de cellen: aan het einde van een rij naar de volgende
   /// rij, en op de allerlaatste cel voegt het onderaan een nieuwe rij toe.
-  /// Shift+Tab loopt terug en stopt bij de eerste cel.
+  /// Shift+Tab loopt terug en stopt bij de eerste cel. De cursor-wiskunde
+  /// staat in [nextTableCell]/[prevTableCell] — gedeeld met de bouwer, zodat
+  /// "volgende cel" hier en daar hetzelfde betekent.
   void _tabTableCell({required bool backwards}) {
     if (!_tableEditMode) return;
     final slide = _currentSlide;
@@ -126,27 +128,20 @@ extension _PresenterTable on _FullscreenPresenterState {
     if (rows.isEmpty) return;
     final rowCount = rows.length;
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
-    var row = _tableEditRow ?? 0;
-    var col = _tableEditCol ?? 0;
+    final row = _tableEditRow ?? 0;
+    final col = _tableEditCol ?? 0;
     if (backwards) {
-      col -= 1;
-      if (col < 0) {
-        if (row == 0) return;
-        row -= 1;
-        col = colCount - 1;
-      }
+      final prev = prevTableCell(row, col, colCount);
+      if (prev == null) return;
+      _selectTableCell(prev.row, prev.col);
     } else {
-      col += 1;
-      if (col >= colCount) {
-        col = 0;
-        row += 1;
-      }
-      if (row >= rowCount) {
+      final next = nextTableCell(row, col, rowCount, colCount);
+      if (next == null) {
         _addTableRow();
         return;
       }
+      _selectTableCell(next.row, next.col);
     }
-    _selectTableCell(row, col);
   }
 
   /// Toetsen tijdens live tabelbewerking.

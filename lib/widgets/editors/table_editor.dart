@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/slide.dart';
 import '../../l10n/app_localizations.dart';
+import '../../utils/table_cell_navigation.dart';
 import '../../utils/table_clipboard.dart';
 import '_editor_field.dart';
 import '../../theme/app_theme.dart';
 
 /// Editor for a table slide. Stores cells as a rectangular grid of
 /// [TextEditingController]s where the first row is the header.
+///
+/// Per-rij- en per-kolomacties (invoegen, verplaatsen, verwijderen) leven in
+/// één popup-menu per rij/kolom in plaats van vier knoppen naast elke cel —
+/// dat houdt de rijhoogte bij de cel, niet bij de bediening.
+enum _RowAction { insertBelow, moveUp, moveDown, delete }
+
+enum _ColumnAction { insertRight, moveLeft, moveRight, delete }
+
 class TableEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
@@ -36,6 +45,16 @@ class _TableEditorState extends State<TableEditor> {
 
   late final TextEditingController _title;
   late List<List<TextEditingController>> _cells;
+
+  /// Eén [FocusNode] per cel, parallel aan [_cells], zodat Tab/Shift+Tab een
+  /// specifieke cel kan focussen in plaats van op de standaard-traversie te
+  /// leunen (die op de laatste cel de tabel uit loopt in plaats van een rij
+  /// bij te maken). Gesynchroniseerd in [build] via [_syncFocusNodes].
+  final List<List<FocusNode>> _focusNodes = [];
+
+  /// Cel die na de volgende rebuild focus moet pakken (na "rij toevoegen").
+  int? _pendingFocusRow;
+  int? _pendingFocusCol;
   bool _wasBlank = true;
 
   @override
@@ -174,10 +193,64 @@ class _TableEditorState extends State<TableEditor> {
     _emit();
   }
 
+  /// Voegt een lege rij in op index [at] (0 = bovenaan, _cells.length =
+  /// onderaan). "Boven invoegen" is dit met at = r; "onder invoegen" met
+  /// at = r + 1 — één methode, twee knoppen.
+  void _insertRowAt(int at) {
+    setState(() {
+      _cells.insert(
+        at.clamp(0, _cells.length),
+        List<TextEditingController>.generate(_colCount, (_) => _makeCtrl('')),
+      );
+    });
+    _emit();
+  }
+
+  /// Voegt een lege kolom in op index [at] in elke rij. "Links invoegen" is
+  /// dit met at = c; "rechts invoegen" met at = c + 1.
+  void _insertColumnAt(int at) {
+    final idx = at.clamp(0, _colCount);
+    setState(() {
+      for (final row in _cells) {
+        row.insert(idx, _makeCtrl(''));
+      }
+    });
+    _emit();
+  }
+
+  /// Verplaatst rij [r] met [delta] (−1 omhoog, +1 omlaag). De koprij (index 0)
+  /// blijft de kop: een body-rij kan niet boven de kop komen, en de kop zelf
+  /// verplaatst niet. Buiten de rand gebeurt niets.
+  void _moveRow(int r, int delta) {
+    final target = r + delta;
+    if (r <= 0 || target <= 0 || target >= _cells.length) return;
+    setState(() {
+      final row = _cells.removeAt(r);
+      _cells.insert(target, row);
+    });
+    _emit();
+  }
+
+  /// Verplaatst kolom [c] met [delta] (−1 links, +1 rechts). Buiten de rand
+  /// gebeurt niets.
+  void _moveColumn(int c, int delta) {
+    final target = c + delta;
+    if (target < 0 || target >= _colCount) return;
+    setState(() {
+      for (final row in _cells) {
+        final ctrl = row.removeAt(c);
+        row.insert(target, ctrl);
+      }
+    });
+    _emit();
+  }
+
   /// Intercepts the paste shortcut on a cell: Cmd+V (macOS), Ctrl+V
   /// (Windows/Linux) and Shift+Insert (Windows/Linux). The clipboard can only
   /// be read asynchronously, so the event is always claimed and [_pasteIntoCell]
-  /// decides between a table fill and a plain in-cell paste.
+  /// decides between a table fill and a plain in-cell paste. Tab/Shift+Tab
+  /// loopt door de cellen — op de laatste cel wordt een rij bijgemaakt — zodat
+  /// de bouwer dezelfde cel-navigatie heeft als de presentatiemodus.
   KeyEventResult _onCellKey(int r, int c, KeyEvent event) {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
     final keys = HardwareKeyboard.instance;
@@ -185,13 +258,48 @@ class _TableEditorState extends State<TableEditor> {
         (event.logicalKey == LogicalKeyboardKey.keyV &&
             (keys.isControlPressed || keys.isMetaPressed)) ||
         (event.logicalKey == LogicalKeyboardKey.insert && keys.isShiftPressed);
-    if (!pasteCombo) return KeyEventResult.ignored;
-    Clipboard.getData(Clipboard.kTextPlain).then((data) {
-      final text = data?.text;
-      if (text == null || text.isEmpty || !mounted) return;
-      _pasteIntoCell(r, c, text);
-    });
-    return KeyEventResult.handled;
+    if (pasteCombo) {
+      Clipboard.getData(Clipboard.kTextPlain).then((data) {
+        final text = data?.text;
+        if (text == null || text.isEmpty || !mounted) return;
+        _pasteIntoCell(r, c, text);
+      });
+      return KeyEventResult.handled;
+    }
+    if (event.logicalKey == LogicalKeyboardKey.tab) {
+      // Handled teruggeven wóórt de standaard-traversie af, zodat Tab hier
+      // cel-naar-cel loopt in plaats van de tabel uit.
+      if (keys.isShiftPressed) {
+        final prev = prevTableCell(r, c, _colCount);
+        if (prev == null) return KeyEventResult.handled; // eerste cel: blijf
+        _moveFocusTo(prev.row, prev.col);
+        return KeyEventResult.handled;
+      }
+      final next = nextTableCell(r, c, _cells.length, _colCount);
+      if (next == null) {
+        _addRowAndFocusFirst();
+        return KeyEventResult.handled;
+      }
+      _moveFocusTo(next.row, next.col);
+      return KeyEventResult.handled;
+    }
+    // Cmd/Ctrl+C met geen tekst geselecteerd in de cel kopieert de hele tabel
+    // als TSV (plakt in een rekenblad). Staat er wél een tekstselectie, dan
+    // laten we het event los zodat het veld die tekst kopieert — de cel is ook
+    // een tekstveld, en die twee mogen niet om dezelfde Cmd+C vechten.
+    final copyCombo =
+        event.logicalKey == LogicalKeyboardKey.keyC &&
+        (keys.isControlPressed || keys.isMetaPressed);
+    if (copyCombo) {
+      final sel = _cells[r][c].selection;
+      if (sel.isValid && !sel.isCollapsed) return KeyEventResult.ignored;
+      final tsv = encodeClipboardTable(_rows);
+      if (tsv.isNotEmpty) {
+        Clipboard.setData(ClipboardData(text: tsv));
+      }
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
   }
 
   /// Tabular clipboard content (a spreadsheet selection, CSV, a markdown
@@ -245,11 +353,78 @@ class _TableEditorState extends State<TableEditor> {
         c.dispose();
       }
     }
+    for (final row in _focusNodes) {
+      for (final n in row) {
+        n.dispose();
+      }
+    }
     super.dispose();
+  }
+
+  /// Houdt [_focusNodes] parallel aan [_cells]: evenveel rijen, evenveel
+  /// kolommen per rij. Eén synchronisatiepunt in [build] in plaats van
+  /// mirroring in elke mutatie (_addRow/_addColumn/_pasteIntoCell/…), zodat een
+  /// vergeten helft geen lege focusnode-rij achterlaat.
+  void _syncFocusNodes() {
+    final rowCount = _cells.length;
+    final colCount = _colCount;
+    while (_focusNodes.length < rowCount) {
+      _focusNodes.add([for (var c = 0; c < colCount; c++) FocusNode()]);
+    }
+    while (_focusNodes.length > rowCount) {
+      for (final n in _focusNodes.removeLast()) {
+        n.dispose();
+      }
+    }
+    for (final row in _focusNodes) {
+      while (row.length < colCount) {
+        row.add(FocusNode());
+      }
+      while (row.length > colCount) {
+        row.removeLast().dispose();
+      }
+    }
+  }
+
+  /// Focust cel (r, c) direct als de node al bestaat (Tab naar een bestaande
+  /// cel); de [build] hoeft dan niet opnieuw te draaien.
+  void _moveFocusTo(int r, int c) {
+    if (r >= 0 &&
+        r < _focusNodes.length &&
+        c >= 0 &&
+        c < _focusNodes[r].length) {
+      _focusNodes[r][c].requestFocus();
+    }
+  }
+
+  /// Markeert cel (r, c) als de focus-doel ná de eerstvolgende rebuild —
+  /// gebruikt na "rij toevoegen", wanneer de doel-cel (en haar [FocusNode])
+  /// pas in [build] wordt aangemaakt.
+  void _focusAfterBuild(int r, int c) {
+    _pendingFocusRow = r;
+    _pendingFocusCol = c;
+  }
+
+  /// Voegt onderaan een lege rij toe en focust nadien de eerste cel ervan —
+  /// het gedrag dat Tab op de laatste cel hoort te geven, gespiegeld aan de
+  /// presentatiemodus.
+  void _addRowAndFocusFirst() {
+    _addRow();
+    _focusAfterBuild(_cells.length - 1, 0);
   }
 
   @override
   Widget build(BuildContext context) {
+    _syncFocusNodes();
+    final pr = _pendingFocusRow;
+    final pc = _pendingFocusCol;
+    if (pr != null) {
+      _pendingFocusRow = null;
+      _pendingFocusCol = null;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _moveFocusTo(pr, pc!);
+      });
+    }
     final l10n = context.l10n;
     return editorScrollList(
       nestedInScrollView: widget.nestedInScrollView,
@@ -319,31 +494,49 @@ class _TableEditorState extends State<TableEditor> {
       child: Row(
         children: [
           for (int c = 0; c < _colCount; c++)
-            Expanded(
-              child: Center(
-                child: IconButton(
-                  icon: Icon(
-                    Icons.delete_outline,
-                    size: 16,
-                    color: AppTheme.slate500,
-                  ),
-                  onPressed: _colCount > 1 ? () => _removeColumn(c) : null,
-                  tooltip:
-                      '${l10n.d('Kolom')} ${c + 1} ${l10n.d('verwijderen')}',
-                  padding: EdgeInsets.zero,
-                  visualDensity: VisualDensity.compact,
-                  constraints: const BoxConstraints(
-                    minWidth: 28,
-                    minHeight: 28,
-                  ),
-                ),
-              ),
-            ),
+            Expanded(child: Center(child: _columnMenu(l10n, c))),
           const SizedBox(width: _rowActionWidth),
         ],
       ),
     );
   }
+
+  /// Eén menu per kolom: invoegen-rechts, verplaatsen, verwijderen. Houdt de
+  /// kolomkop-regel op één regel hoogte in plaats van vier knoppen gestapeld.
+  Widget _columnMenu(AppLocalizations l10n, int c) =>
+      PopupMenuButton<_ColumnAction>(
+        tooltip: '${l10n.d('Kolom')} ${c + 1}',
+        icon: Icon(Icons.more_vert, size: 18, color: AppTheme.slate500),
+        padding: EdgeInsets.zero,
+        constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+        itemBuilder: (_) => [
+          PopupMenuItem(
+            value: _ColumnAction.insertRight,
+            child: Text(l10n.d('Kolom rechts invoegen')),
+          ),
+          PopupMenuItem(
+            enabled: c > 0,
+            value: _ColumnAction.moveLeft,
+            child: Text(l10n.d('Kolom naar links')),
+          ),
+          PopupMenuItem(
+            enabled: c < _colCount - 1,
+            value: _ColumnAction.moveRight,
+            child: Text(l10n.d('Kolom naar rechts')),
+          ),
+          PopupMenuItem(
+            enabled: _colCount > 1,
+            value: _ColumnAction.delete,
+            child: Text('${l10n.d('Kolom')} ${c + 1} ${l10n.d('verwijderen')}'),
+          ),
+        ],
+        onSelected: (action) => switch (action) {
+          _ColumnAction.insertRight => _insertColumnAt(c + 1),
+          _ColumnAction.moveLeft => _moveColumn(c, -1),
+          _ColumnAction.moveRight => _moveColumn(c, 1),
+          _ColumnAction.delete => _removeColumn(c),
+        },
+      );
 
   Widget _buildRow(int r) {
     final l10n = context.l10n;
@@ -362,6 +555,7 @@ class _TableEditorState extends State<TableEditor> {
                   onKeyEvent: (node, event) => _onCellKey(r, c, event),
                   child: TextField(
                     controller: _cells[r][c],
+                    focusNode: _focusNodes[r][c],
                     // Meerdere regels toestaan: het veld groeit mee en Enter
                     // voegt een nieuwe regel toe binnen de cel.
                     minLines: 1,
@@ -388,26 +582,57 @@ class _TableEditorState extends State<TableEditor> {
                 ),
               ),
             ),
-          // Verwijderknop op de hoogte van de eerste regel houden.
+          // Eén menu per rij: invoegen-onder, omhoog/omlaag, verwijderen. Houdt
+          // de rijhoogte bij de cel — vier knoppen gestapeld maakten een
+          // éénregelige cel drie keer zo hoog als de bediening.
           SizedBox(
             width: _rowActionWidth,
             height: 40,
-            child: IconButton(
-              icon: Icon(
-                Icons.remove_circle_outline,
-                size: 18,
-                color: AppTheme.slate500,
-              ),
-              onPressed: _cells.length > 1 ? () => _removeRow(r) : null,
-              tooltip: isHeader
-                  ? l10n.d('Koprij verwijderen')
-                  : l10n.d('Rij verwijderen'),
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minWidth: 28),
-            ),
+            child: _rowMenu(l10n, r, isHeader),
           ),
         ],
       ),
     );
   }
+
+  /// Het per-rij-menu. De koprij (r == 0) kan niet omhoog of verwijderd worden
+  /// — de kop is de kop. Body-rijen verplaatsen binnen de body.
+  Widget _rowMenu(AppLocalizations l10n, int r, bool isHeader) =>
+      PopupMenuButton<_RowAction>(
+        tooltip: isHeader ? l10n.d('Koprij') : l10n.d('Rij'),
+        icon: Icon(Icons.more_vert, size: 18, color: AppTheme.slate500),
+        padding: EdgeInsets.zero,
+        constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+        itemBuilder: (_) => [
+          PopupMenuItem(
+            value: _RowAction.insertBelow,
+            child: Text(l10n.d('Rij onder invoegen')),
+          ),
+          PopupMenuItem(
+            enabled: r > 1,
+            value: _RowAction.moveUp,
+            child: Text(l10n.d('Rij omhoog')),
+          ),
+          PopupMenuItem(
+            enabled: r > 0 && r < _cells.length - 1,
+            value: _RowAction.moveDown,
+            child: Text(l10n.d('Rij omlaag')),
+          ),
+          PopupMenuItem(
+            enabled: !isHeader && _cells.length > 1,
+            value: _RowAction.delete,
+            child: Text(
+              isHeader
+                  ? l10n.d('Koprij verwijderen')
+                  : l10n.d('Rij verwijderen'),
+            ),
+          ),
+        ],
+        onSelected: (action) => switch (action) {
+          _RowAction.insertBelow => _insertRowAt(r + 1),
+          _RowAction.moveUp => _moveRow(r, -1),
+          _RowAction.moveDown => _moveRow(r, 1),
+          _RowAction.delete => _removeRow(r),
+        },
+      );
 }
