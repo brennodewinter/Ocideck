@@ -13,11 +13,18 @@ class TableEditor extends StatefulWidget {
   final ValueChanged<Slide> onUpdate;
   final bool nestedInScrollView;
 
+  /// In een plat document bestaat er geen dia: dan verbergt de editor de
+  /// dia-specifieke onderdelen (het 'Slide titel'-veld en de deck-preset), zodat
+  /// er geen presentatie-woordenschat in een documentcontext lekt. Alleen het
+  /// tabelraster telt daar.
+  final bool documentContext;
+
   const TableEditor({
     super.key,
     required this.slide,
     required this.onUpdate,
     this.nestedInScrollView = false,
+    this.documentContext = false,
   });
 
   @override
@@ -247,8 +254,10 @@ class _TableEditorState extends State<TableEditor> {
     return editorScrollList(
       nestedInScrollView: widget.nestedInScrollView,
       children: [
-        EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
-        const SizedBox(height: 16),
+        if (!widget.documentContext) ...[
+          EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
+          const SizedBox(height: 16),
+        ],
         const SectionLabel('Tabel'),
         Padding(
           padding: const EdgeInsets.only(bottom: 6),
@@ -258,7 +267,7 @@ class _TableEditorState extends State<TableEditor> {
             style: TextStyle(fontSize: 11, color: AppTheme.slate500),
           ),
         ),
-        if (_isBlank) _buildPresetRow(),
+        if (_isBlank && !widget.documentContext) _buildPresetRow(),
         _buildColumnControls(),
         for (int r = 0; r < _cells.length; r++) _buildRow(r),
         const SizedBox(height: 8),

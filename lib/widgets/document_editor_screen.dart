@@ -367,6 +367,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       TableEditor(
         slide: slide,
         nestedInScrollView: true,
+        documentContext: true,
         onUpdate: (s) => edited = s.tableRows,
       ),
     );
@@ -435,6 +436,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       TableEditor(
         slide: slide,
         nestedInScrollView: true,
+        documentContext: true,
         onUpdate: (s) => rows = s.tableRows,
       ),
     );
