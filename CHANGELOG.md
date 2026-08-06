@@ -1071,6 +1071,10 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Gebundelde Mermaid bijgewerkt naar 11.16.1 (#1310).** De meegeleverde
+  `mermaid.min.js` ging van 11.16.0 naar 11.16.1; die sprong verhelpt vijf
+  OSV-advisories in de afhankelijkheidsketen van de bundel. De SBOM is
+  meebijgewerkt. Geen zichtbare gedragswijziging in de app.
 - **Mermaid-diagram in de donkere documentlezer kleurt mee.** Een gerenderd
   ```mermaid-blok hield in de documentweergave een felwitte kaart met donkere
   lijnen, óók in donker thema — een lichtvlak dat uit de toon viel tussen de
