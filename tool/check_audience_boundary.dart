@@ -99,6 +99,13 @@ const Map<String, Surface> _registry = {
     'Krijgt een fabriek die per doelgroepprofiel een bundel oplevert, zodat de '
     'bron er ook hier niet in komt.',
   ),
+  'lib/services/document_export_service.dart::writeDocumentExport': Surface(
+    SurfaceKind.audience,
+    'De documentmodus-export (§11.2): schrijft het geprojecteerde `.md` of het '
+    'doorlopende HTML weg. De geredigeerde body komt via de ExportBundle binnen '
+    '(projectedDocumentBody leest bundle.audience.deck), nooit de rauwe bron; '
+    'daarom neemt de schrijfsignatuur een ExportBundle en geen rauwe Deck.',
+  ),
 
   // ── De bron terug naar de gebruiker: redigeren zou hier fout zijn ────────
   //
