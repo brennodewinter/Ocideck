@@ -411,30 +411,33 @@ extension _SettingsColors on _SettingsDialogState {
       // doet wat hij belooft. Footer en slotdia blijven wél staan; die hebben
       // geen bestandssysteem nodig.
       if (supportsLocalProjectFolders) ...[
-        Row(
-          children: [
-            Expanded(
-              child: _pathBox(
-                _themeProfile.logoPath ?? l10n.d('Geen logo ingesteld'),
-                muted: _themeProfile.logoPath == null,
+        _themeColorAnchor(
+          'logoPath',
+          Row(
+            children: [
+              Expanded(
+                child: _pathBox(
+                  _themeProfile.logoPath ?? l10n.d('Geen logo ingesteld'),
+                  muted: _themeProfile.logoPath == null,
+                ),
               ),
-            ),
-            const SizedBox(width: 8),
-            ElevatedButton.icon(
-              onPressed: _pickLogo,
-              icon: const Icon(Icons.image_outlined, size: 16),
-              label: Text(l10n.d('Kiezen')),
-            ),
-            if (_themeProfile.logoPath != null)
-              IconButton(
-                onPressed: () => _rebuild(() {
-                  _themeProfile = _themeProfile.copyWith(clearLogo: true);
-                  _profileTouched = true;
-                }),
-                icon: const Icon(Icons.clear, size: 18),
-                tooltip: l10n.d('Verwijder logo'),
+              const SizedBox(width: 8),
+              ElevatedButton.icon(
+                onPressed: _pickLogo,
+                icon: const Icon(Icons.image_outlined, size: 16),
+                label: Text(l10n.d('Kiezen')),
               ),
-          ],
+              if (_themeProfile.logoPath != null)
+                IconButton(
+                  onPressed: () => _rebuild(() {
+                    _themeProfile = _themeProfile.copyWith(clearLogo: true);
+                    _profileTouched = true;
+                  }),
+                  icon: const Icon(Icons.clear, size: 18),
+                  tooltip: l10n.d('Verwijder logo'),
+                ),
+            ],
+          ),
         ),
         const SizedBox(height: 18),
         DropdownButtonFormField<String>(

@@ -1773,6 +1773,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Logotip tega profila stila ni bil najden in se ne prikazuje (pot: {pad}). Izberite logotip v nastavitvah predstavitve.',
   'Nieuw document': 'Nov dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Velja za {n} prosojnic tega razdeljenega zaporedja.',

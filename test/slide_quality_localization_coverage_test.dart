@@ -171,6 +171,7 @@ void main() {
         'label': 'Afbeelding',
         'path': '/elders/x.png',
       },
+      SlideQualityIssueKind.themeLogoMissing: {'path': 'asset:images/x.png'},
       SlideQualityIssueKind.textDensityWarning: {'percent': '80%'},
       SlideQualityIssueKind.textDensityCritical: {'percent': '55%'},
       SlideQualityIssueKind.splitRunDragged: {

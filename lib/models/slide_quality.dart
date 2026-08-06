@@ -24,6 +24,12 @@ enum SlideQualityIssueKind {
   mediaMissingDescription,
   missingMediaFile,
   externalMediaFile,
+  // Deckbreed: het logo van het actieve stijlprofiel wijst naar niets — een
+  // verdwenen bestand, een `asset:`-sleutel die niet in de bundel zit, of een
+  // `mem:`-logo dat na een herlaad leeg is. De renderlaag laat het logo stil
+  // vallen (vertrouwde stijl-config toont nooit een placeholder), dus zonder
+  // deze melding staat de gebruiker voor een lege hoek zonder te weten waarom.
+  themeLogoMissing,
   textDensityWarning,
   textDensityCritical,
   splitRunDragged,

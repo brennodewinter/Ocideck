@@ -1783,6 +1783,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Logo tego profilu stylu nie zostało znalezione i nie jest wyświetlane (ścieżka: {pad}). Wybierz logo w ustawieniach prezentacji.',
   'Nieuw document': 'Nowy dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Dotyczy {n} slajdów tej podzielonej serii.',

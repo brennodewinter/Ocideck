@@ -1774,6 +1774,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Logo tohoto profilu stylu nebylo nalezeno a nezobrazuje se (cesta: {pad}). Vyberte logo v nastavení prezentace.',
   'Nieuw document': 'Nový dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Platí pro {n} snímků této rozdělené řady.',

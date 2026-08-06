@@ -727,6 +727,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'El logotipo de este perfil de estilo no se ha encontrado y no se muestra (ruta: {pad}). Elija un logotipo en los ajustes de presentación.',
   'Nieuw document': 'Nuevo documento',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Se aplica a {n} diapositivas de esta serie dividida.',

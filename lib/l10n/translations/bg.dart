@@ -1793,6 +1793,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Логото на този профил за стил не е намерено и не се показва (път: {pad}). Изберете логото в настройките за презентация.',
   'Nieuw document': 'Нов документ',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Отнася се за {n} слайда от тази разделена поредица.',

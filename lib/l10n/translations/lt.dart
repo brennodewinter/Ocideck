@@ -1778,6 +1778,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Šio stiliaus profilio logotipas nerastas ir nerodomas (kelias: {pad}). Pasirinkite logotipą pateikties nustatymuose.',
   'Nieuw document': 'Naujas dokumentas',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Taikoma {n} skaidrėms iš šios padalytos sekos.',

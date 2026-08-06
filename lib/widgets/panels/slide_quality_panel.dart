@@ -18,6 +18,7 @@ import '../../state/image_privacy_provider.dart';
 import '../../state/improvement_provider.dart';
 import '../../state/privacy_provider.dart';
 import '../../state/settings_provider.dart';
+import '../../state/theme_logo_provider.dart';
 import '../privacy_badge.dart' show privacyKatSvg;
 import '../dialogs/slide_quality_details_dialog.dart';
 import 'slide_quality_actions.dart';
@@ -34,12 +35,14 @@ import '../../theme/app_theme.dart';
 SlideQualityResult combinedSlideQualityResult(WidgetRef ref) {
   final syncResult = ref.watch(deckQualityProvider);
   final imageIssues = ref.watch(imageContrastIssuesProvider).value ?? const [];
+  final logoIssues = ref.watch(themeLogoIssuesProvider).value ?? const [];
   final privacyIssues = ref.watch(privacyQualityIssuesProvider);
   final improvementIssues = ref.watch(improvementQualityIssuesProvider);
   // De beeldcontrole is asynchroon en mag de rest niet ophouden: zolang ze
   // draait toont het paneel gewoon de tekstbevindingen.
   final imagePrivacy = ref.watch(imagePrivacyIssuesProvider).value ?? const [];
   if (imageIssues.isEmpty &&
+      logoIssues.isEmpty &&
       privacyIssues.isEmpty &&
       improvementIssues.isEmpty &&
       imagePrivacy.isEmpty) {
@@ -55,6 +58,9 @@ SlideQualityResult combinedSlideQualityResult(WidgetRef ref) {
     ...syncResult.issues,
     for (final issue in imageIssues)
       if (deck == null || !isQualityAccepted(deck, issue.slideIndex)) issue,
+    // Deckbreed: een stijlprofiel-logo hoort bij geen enkele slide en is dus
+    // nooit geaccepteerd — net als de privacy- en verbeteringsmeldingen.
+    ...logoIssues,
     ...privacyIssues,
     ...improvementIssues,
     ...imagePrivacy,

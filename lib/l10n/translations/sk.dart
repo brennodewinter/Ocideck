@@ -1778,6 +1778,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Logo tohto profilu štýlu sa nenašlo a nezobrazuje sa (cesta: {pad}). Vyberte logo v nastaveniach prezentácie.',
   'Nieuw document': 'Nový dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Platí pre {n} snímok tohto rozdeleného radu.',

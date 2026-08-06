@@ -2748,6 +2748,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Bu stil profilinin logosu bulunamadı ve gösterilmiyor (yol: {pad}). Sunum ayarlarında bir logo seçin.',
   'Nieuw document': 'Yeni belge',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Bu bölünmüş serideki {n} slayt için geçerli.',

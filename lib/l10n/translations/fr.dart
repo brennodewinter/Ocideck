@@ -730,6 +730,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Le logo de ce profil de style est introuvable et n\'est pas affiché (chemin : {pad}). Choisissez un logo dans les paramètres de présentation.',
   'Nieuw document': 'Nouveau document',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'S\'applique à {n} diapositives de cette série fractionnée.',

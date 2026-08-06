@@ -1806,6 +1806,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Ní bhfuarthas lógó an phróifíle stíle seo agus ní thaispeántar é (cosán: {pad}). Roghnaigh lógó i socruithe na láithreoide.',
   'Nieuw document': 'Cáipéis nua',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Baineann sé le {n} sleamhnán den tsraith roinnte seo.',

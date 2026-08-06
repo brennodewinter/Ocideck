@@ -1788,6 +1788,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Логотип цього профілю стилю не знайдено й не показано (шлях: {pad}). Виберіть логотип у налаштуваннях презентації.',
   'Nieuw document': 'Новий документ',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Стосується {n} слайдів цієї розділеної серії.',

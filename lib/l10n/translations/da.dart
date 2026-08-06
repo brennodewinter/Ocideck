@@ -1770,6 +1770,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Logoet for denne stilprofil blev ikke fundet og vises ikke (sti: {pad}). Vælg et logo i præsentationsindstillingerne.',
   'Nieuw document': 'Nyt dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Gælder for {n} dias i denne opdelte række.',
