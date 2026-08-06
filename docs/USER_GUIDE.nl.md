@@ -4,7 +4,7 @@
 
 # OciDeck — Gebruikershandleiding
 
-> **Status:** actuele gebruikershandleiding · **Status laatst nagekeken:** 2026-08-02 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** actuele gebruikershandleiding · **Status laatst nagekeken:** 2026-08-07 · **Uitgegeven door:** Stichting LibreKAT
 
 ## Inhoud
 
@@ -33,6 +33,7 @@
 - [Toegankelijkheid](#toegankelijkheid)
 - [Informatiebeveiligingsmodule (pentestrapporten)](#informatiebeveiligingsmodule-pentestrapporten)
 - [Managementsysteemmodule (ISO-voortgangsrapportage)](#managementsysteemmodule-iso-voortgangsrapportage)
+- [Documenten](#documenten)
 - [Markdown-modus](#markdown-modus)
 - [Wat de browserversie niet kan](#wat-de-browserversie-niet-kan)
 - [Thema's en taal](#themas-en-taal)
@@ -4187,6 +4188,99 @@ de slides wordt nog steeds geproduceerd.
   CPM-berekening die LibrePlan server-side doet.
 - Duur wordt geschat op 8 uur per dag — LibrePlan's kalender is niet beschikbaar
   in de REST-export.
+
+## Documenten
+
+Naast presentaties bewerkt OciDeck **documenten**: een doorlopend, plat
+Markdown-bestand in plaats van een deck met dia's. Een document is een gewoon
+`.md` zonder diastructuur en zonder Marp-front-matter, zodat het in elk
+Markdown-gereedschap prima opent en leest. Het is een andere soort bestand dan
+een deck; beide staan naast elkaar in tabbladen, en een documenttabblad draagt
+een klein document-icoon zodat je de twee in één oogopslag uit elkaar houdt.
+*(Toegevoegd 2026-08-06.)*
+
+Het ontwerp achter deze modus — het schijfcontract, wat wel en niet een rondgang
+overleeft, en waarom conversie bewust verliesgevend is — staat beschreven in
+[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md).
+
+### Een document maken, openen en opslaan
+
+- **Nieuw document** vanuit de menubalk of het welkomstscherm begint een leeg
+  document in een nieuw tabblad. Een plat `.md` dat je op de gewone manier
+  **Opent** (het welkomstscherm of `Ctrl/Cmd + O`) opent als een document en niet
+  als een deck; OciDeck houdt de twee uit elkaar aan de afwezigheid van
+  `marp: true`, dus niets op schijf merkt een bestand als "van OciDeck".
+- **Opslaan** (`Ctrl/Cmd + S`) schrijft je **byte-getrouwe origineel**: een
+  document openen en zonder bewerking opnieuw opslaan levert een byte-identiek
+  bestand op. OciDeck voegt geen front-matter toe, dwingt geen dia-scheidingen af
+  en past geen eigen normalisatie toe. Dit is de kopie die je bewaart, back-upt en
+  uiteindelijk opschoont.
+- Een document heeft een **werkmap** net als een deck: afbeeldingen staan in
+  `images/` en grafiekdata in `data/*.json` **naast** het `.md`. Een afbeelding
+  die je invoegt vóór de eerste keer opslaan leeft in het geheugen tot je opslaat
+  en verschijnt dan in `images/` — dezelfde waarschuwing "je verliest deze
+  afbeelding" geldt als bij een deck.
+
+### De bewerker: Visueel en Bron
+
+Een schakelaar boven aan de documentbewerker kiest hoe je werkt:
+
+- **Visueel** toont het gerenderde document — koppen, prosa, tabellen, code,
+  Mermaid-diagrammen, grafieken en afbeeldingen — zoals een lezer het ziet. Op een
+  breed genoeg venster verschijnt ernaast een **overzichtsrail** met de koppen van
+  het document; op een kop klikken scrolt ernaartoe.
+- **Bron** zet de ruwe Markdown naast een live gerenderde weergave (gestapeld
+  wanneer het venster te smal is voor twee leesbare kolommen). Elke toetsaanslag
+  loopt meteen door — er is geen aparte "Toepassen"-stap, anders dan de
+  deck-gerichte [Markdown-modus](#markdown-modus) hieronder.
+
+Een **opmaak-knoppenbalk** (dezelfde als die van de notitiebewerker) staat boven
+de bewerker voor de gewone inline-opmaak. Een **invoeg-palet** voegt de rijkere
+blokken toe als draagbare Markdown: een **grafiek** (een ` ```chart `-fence met de
+data in `data/*.json`), een **tabel** (een GFM-pijptabel), een
+**Mermaid**-diagram of een **afbeelding** (gekopieerd naar `images/`). Elk blijft
+platte, parseerbare tekst zodat het bestand elders blijft openen.
+
+### Een document exporteren
+
+**Exporteren is niet Opslaan.** Opslaan schrijft je byte-getrouwe origineel;
+**Exporteren** maakt een *afgeleide, geredigeerde kopie voor een ontvanger* op een
+**nieuw** bestand, en raakt je bron nooit aan. Het exportvenster vraagt twee
+dingen:
+
+- **Voor wie** — het profiel. **Volledig** laat alles leesbaar behalve wat je zelf
+  hebt gemarkeerd om weg te laten; **Geredigeerd** haalt eruit wat de
+  privacycontrole vindt. Het gekozen profiel wordt in de bestandsnaam van de export
+  geschreven, zodat een vergissing tussen de twee zichtbaar is. Als de
+  privacycontrole uitstaat (onder Beveiliging), zegt het venster dat ronduit: een
+  geredigeerde kopie is dan niet daadwerkelijk op persoonsgegevens gecontroleerd.
+- **Welk formaat** — **Markdown (`.md`)** is een geredigeerde kopie van de platte
+  tekst die in elke Markdown-lezer opent; **HTML** is één op zichzelf staand,
+  toegankelijk HTML-bestand dat in elke browser opent zonder internet, met zijn
+  tabellen, wiskunde, Mermaid-diagrammen en grafieken ter plekke gerenderd.
+
+Er is geen ingebouwde PDF-knop. Voor een **PDF** open je de geëxporteerde HTML en
+druk je die vanuit je browser af (*Opslaan als PDF*). OciDeck doet geen belofte
+over de toegankelijkheid van een zo gemaakte PDF — dat is het werk van de browser
+— maar de HTML die het exporteert is opgezet om toegankelijk te zijn.
+
+Elke export loopt door dezelfde privacyprojectie (OciWacht) als een deck-export,
+zodat wat de deur uit gaat de geredigeerde inhoud is, nooit de rauwe bron.
+
+### Omzetten tussen een presentatie en een document
+
+Je kunt beide kanten op omzetten, en het resultaat is **altijd een kopie in een
+nieuw tabblad** — je oorspronkelijke bestand blijft ongemoeid, en een
+bevestigingsvenster zegt wat er verloren gaat voordat er iets gebeurt:
+
+- **Presentatie → document** platst de dia's tot één doorlopend document. De
+  diastructuur, de `_class`/het thema per dia en het **zegel** vervallen: een
+  omgezet bestand is nieuw en draagt geen zegel, omdat een verzegelde kopie een
+  onware integriteitsclaim zou zijn.
+- **Document → presentatie** stelt een aantal dia's voor (splitsend op koppen) en
+  maakt van thematische `---`-scheidingen dia-scheidingen. Het venster is eerlijk
+  dat een presentatie en een document geen perfecte spiegel van elkaar zijn — de
+  splitsing is een voorstel, geen bijectie.
 
 ## Markdown-modus
 
