@@ -1,5 +1,6 @@
 import '../models/deck.dart';
 import '../models/slide.dart';
+import 'markdown_service.dart';
 
 /// Converteert tussen een plat Markdown-**document** en een getypeerd
 /// [Deck]. Twee zuivere, headless functies — bewust hier en niet verspreid over
@@ -142,6 +143,19 @@ class DocumentDeckBridge {
   /// `customMarkdown` — of, als dat leeg is, een korte tekstuele terugval op
   /// titel en bullets, zodat er geen inhoud verdwijnt. Ook de projected-body-
   /// lezer voor het exportpad (§11.2 stap 4).
+  /// Het deck-**markdown** van een plat document: deconstrueer het via
+  /// [documentToDeck] en serialiseer dat met de gewone deck-generator, zodat de
+  /// uitkomst een geldig presentatie-`.md` is (front matter, `---`-diagrenzen).
+  ///
+  /// Voor de conversie document→presentatie (§11.3) en elke plek die de
+  /// presentatievorm als tekst wil. Zuiver: [svc] is de enige afhankelijkheid en
+  /// heeft geen IO nodig voor het serialiseren.
+  static String documentToDeckMarkdown(
+    String body,
+    MarkdownService svc, {
+    String title = '',
+  }) => svc.generateDeck(documentToDeck(body, title: title));
+
   static String deckToDocumentMarkdown(Deck deck) {
     final parts = <String>[];
     for (final slide in deck.slides) {

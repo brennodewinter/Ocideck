@@ -7,6 +7,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/document_deck_bridge.dart';
+import 'package:ocideck/services/markdown_service.dart';
 
 void main() {
   /// Alle tekst uit alle dia-velden waar het zero-loss-contract over gaat:
@@ -164,6 +165,34 @@ void main() {
       // En hij komt ontsnapt terug in de GFM-serialisatie.
       final out = DocumentDeckBridge.deckToDocumentMarkdown(deck);
       expect(out.contains(r'x \| y'), isTrue);
+    });
+  });
+
+  group('documentToDeckMarkdown', () {
+    test('levert een geldig presentatie-.md met front matter en de titel', () {
+      const doc = '# Rapport\n\nEen alinea met UNIEKPROZA.\n';
+      final md = DocumentDeckBridge.documentToDeckMarkdown(
+        doc,
+        MarkdownService(),
+        title: 'Rapport',
+      );
+      // Deck-scaffold: de front-matter-kop die een document juist NIET draagt.
+      expect(md.startsWith('---'), isTrue);
+      expect(md.contains('marp: true'), isTrue);
+      // De inhoud reist mee.
+      expect(md.contains('UNIEKPROZA'), isTrue);
+    });
+
+    test('splitst op kop in aparte dia-secties', () {
+      const doc = '# Een\n\nprosa een\n\n# Twee\n\nprosa twee\n';
+      final md = DocumentDeckBridge.documentToDeckMarkdown(doc, MarkdownService());
+      // Twee koppen → twee dia's: naast de front-matter-`---` staat er minstens
+      // één diagrens-`---` in de body.
+      final slideBreaks = RegExp(
+        r'^---\s*$',
+        multiLine: true,
+      ).allMatches(md).length;
+      expect(slideBreaks, greaterThanOrEqualTo(3));
     });
   });
 }
