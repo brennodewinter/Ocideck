@@ -84,11 +84,9 @@ extension SettingsTraces on SettingsNotifier {
       tlp: tlp,
       kind: kind,
     );
-    final updated = [
-      entry,
-      ...currentState.recentFiles.where((f) => f.path != path),
-    ].take(10).toList();
-    await _persistRecentFiles(updated);
+    await _persistRecentFiles(
+      recentFilesWithFront(currentState.recentFiles, entry),
+    );
   }
 
   /// Onthoud dat [path] zojuist als [formatLabel] ("PDF", "PPTX", "HTML") is
@@ -202,3 +200,11 @@ extension SettingsTraces on SettingsNotifier {
     return true;
   }
 }
+
+/// Zet [entry] vooraan de recente lijst (nieuwste eerst), zonder een dubbel pad,
+/// en kap op tien. Top-level en puur, los van de notifier — zodat de recente-
+/// lijst-logica los toetsbaar blijft en de klasse niet groeit.
+List<RecentFile> recentFilesWithFront(
+  List<RecentFile> current,
+  RecentFile entry,
+) => [entry, ...current.where((f) => f.path != entry.path)].take(10).toList();

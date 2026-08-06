@@ -4,6 +4,11 @@ import 'deck.dart';
 import 'markdown_kind.dart';
 import '../utils/log.dart';
 
+// [RecentFile.kind] is een [MarkdownKind]; wie een recent bestand leest, leest
+// die soort mee. Her-exporteer het type zodat het bij de klasse hoort (en de
+// settings-laag geen aparte import nodig heeft).
+export 'markdown_kind.dart';
+
 /// Eén item in de "recente presentaties"-lijst: naast het pad ook de
 /// metadata die terugvinden makkelijk maakt (wanneer geopend, hoeveel
 /// slides, welk TLP-niveau, laatst geëxporteerd als). De metadata wordt

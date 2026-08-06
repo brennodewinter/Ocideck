@@ -7,7 +7,6 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../l10n/app_localizations.dart' show AppLocalizations;
 import '../models/deck.dart' show TlpLevel;
-import '../models/markdown_kind.dart';
 import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
 import '../models/matrix_settings.dart';
