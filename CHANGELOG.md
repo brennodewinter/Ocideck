@@ -12,6 +12,19 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.3.6] — 2026-08-06
+
+### Added
+
+- feat(quality): melding bij ontbrekend stijlprofiel-logo (#1298) (#1300)
+- feat(style): exporteer .ocideckstyle als leesbare JSON (#1296) (#1297)
+- feat(documentmodus): visuele modus (grafiek/tabel dubbelklik) + nieuw-document
+
+### Fixed
+
+- fix(import): toon `&` in chart-labels en timeline-events (#1299 follow-up)
+- fix(import): toon `&` in geïmporteerde titels, niet `&amp;` (#1299)
+
 ## [0.3.5] — 2026-08-06
 
 ### Fixed
