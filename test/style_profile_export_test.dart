@@ -64,6 +64,20 @@ void main() {
     },
   );
 
+  test(
+    'het bestand is leesbaar geformatteerd (newlines en indentatie)',
+    () async {
+      final built = await file.buildStyleProfileBytes(const ThemeProfile());
+      final text = utf8.decode(built.bytes);
+      // Pretty-print: meerdere regels en 2-spatie indent — niet één regel.
+      expect(text.contains('\n'), isTrue);
+      expect(text.contains('  '), isTrue);
+      // De round-trip blijft heel ondanks de witruimte.
+      final out = await file.importStyleProfileBytes(built.bytes);
+      expect(out.failure, isNull);
+    },
+  );
+
   test('het bestand draagt de marker en de formaatversie', () async {
     final built = await file.buildStyleProfileBytes(const ThemeProfile());
     final envelope = envelopeOf(built.bytes);
