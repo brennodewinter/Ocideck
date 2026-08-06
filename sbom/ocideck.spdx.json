@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.3.6+13",
-  "documentNamespace": "https://ocideck.app/spdx/25695b15-6b2d-5c2e-8138-fae75ea46526",
+  "documentNamespace": "https://ocideck.app/spdx/6e339dcd-18f2-5aa5-87e4-1b9610c8ce0c",
   "creationInfo": {
-    "created": "2026-08-06T19:38:41.874218Z",
+    "created": "2026-08-06T22:55:20.758272Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4806,22 +4806,22 @@
     {
       "SPDXID": "SPDXRef-213-mermaid",
       "name": "mermaid",
-      "versionInfo": "11.16.0",
-      "downloadLocation": "https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js",
+      "versionInfo": "11.16.1",
+      "downloadLocation": "https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "74d7c46dabca328c2294733910a8aa1ed0c37451776e8d5295da38a2b758fb9b"
+          "checksumValue": "18327bef70d96fb505fe7287d9f6a7362ebf07ff6576ddfaffb1a06f3e1a2954"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/mermaid@11.16.0"
+          "referenceLocator": "pkg:npm/mermaid@11.16.1"
         }
       ],
       "comment": "Vendored into mermaid.min.js, inlined into the HTML export."
