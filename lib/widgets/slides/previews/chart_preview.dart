@@ -231,10 +231,10 @@ class _ChartPreviewState extends State<_ChartPreview>
       final series = spec.series[si];
       final name = series.name.isEmpty
           ? '${l10n.d('Reeks')} ${si + 1}'
-          : series.name;
+          : decodeNamedHtmlEntities(series.name);
       final values = [
         for (var xi = 0; xi < spec.x.length && xi < series.data.length; xi++)
-          '${spec.x[xi]} ${_fmtNum(series.data[xi])}',
+          '${decodeNamedHtmlEntities(spec.x[xi])} ${_fmtNum(series.data[xi])}',
       ];
       buffer.write('. $name: ${values.join(', ')}');
     }
@@ -408,7 +408,7 @@ class _ChartPreviewState extends State<_ChartPreview>
                           child: Text(
                             spec.series[i].name.isEmpty
                                 ? '${context.l10n.d('Reeks')} ${i + 1}'
-                                : spec.series[i].name,
+                                : decodeNamedHtmlEntities(spec.series[i].name),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: _applyFont(
@@ -488,7 +488,7 @@ class _ChartPreviewState extends State<_ChartPreview>
                           SizedBox(width: w * 0.006),
                           Expanded(
                             child: Text(
-                              spec.x[i],
+                              decodeNamedHtmlEntities(spec.x[i]),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: _applyFont(
@@ -703,7 +703,7 @@ class _ChartPreviewState extends State<_ChartPreview>
               child: SizedBox(
                 width: slot,
                 child: Text(
-                  spec.x[i],
+                  decodeNamedHtmlEntities(spec.x[i]),
                   style: style,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
