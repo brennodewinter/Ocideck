@@ -4466,4 +4466,14 @@ const _dutchSourceAddTlh = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'DochDaq',
+  'Getalnotatie': 'mI\' mIq\'',
+  'Kolom naar links': 'nIH nIq',
+  'Kolom naar rechts': 'nIH nIq poS',
+  'Kolom rechts invoegen': 'nIH chel poS',
+  'Koprij': 'Doch teywI',
+  'Links uitlijnen': 'poS moH',
+  'Rechts uitlijnen': 'nIH moH',
+  'Rij onder invoegen': 'bing chel',
+  'Splits tabel': 'wa\' DIch DIv\'',
 };

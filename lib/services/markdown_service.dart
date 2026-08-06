@@ -362,7 +362,13 @@ class MarkdownService {
   }
 
   /// Write [rows] as a GitHub-flavoured markdown table (first row = header).
-  void _writeTable(StringBuffer buf, List<List<String>> rows) {
+  /// [alignments] zet de GFM-scheidingsrij met colons (`:---`/`:---:`/`---:`);
+  /// leeg of korter dan het aantal kolommen = kale `---` (GFM-default = links).
+  void _writeTable(
+    StringBuffer buf,
+    List<List<String>> rows, {
+    List<TableAlign>? alignments,
+  }) {
     if (rows.isEmpty) return;
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
     if (colCount == 0) return;
@@ -374,7 +380,7 @@ class MarkdownService {
         '| ${List.generate(colCount, (c) => cell(row, c)).join(' | ')} |';
 
     buf.writeln(renderRow(rows.first));
-    buf.writeln('| ${List.generate(colCount, (_) => '---').join(' | ')} |');
+    buf.writeln(markdownTableSeparatorRow(colCount, alignments));
     for (var i = 1; i < rows.length; i++) {
       buf.writeln(renderRow(rows[i]));
     }
@@ -722,6 +728,18 @@ void _writeSlideDirectives(
   }
   if (slide.nextAnchor.isNotEmpty) {
     buf.writeln('<!-- ocideck_next: ${slide.nextAnchor} -->');
+  }
+  // Taalbewuste getalnotatie (opt-in per kolom): de kolomindices waarvoor de
+  // celwaarden bij het renderen als getal geformatteerd worden. De ruwe
+  // celinhoud blijft staan; dit is puur een render-instructie.
+  if (slide.tableNumberColumns.isNotEmpty) {
+    final cols = [
+      for (var c = 0; c < slide.tableNumberColumns.length; c++)
+        if (slide.tableNumberColumns[c]) c,
+    ];
+    if (cols.isNotEmpty) {
+      buf.writeln('<!-- ocideck_table_num_cols: ${cols.join(',')} -->');
+    }
   }
   // AI-assist markers (AI_ASSIST §16.3): the fields whose text was drafted by
   // AI and not yet reviewed. Persisted so the seal gate survives a save/open.

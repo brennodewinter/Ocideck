@@ -4544,4 +4544,14 @@ const _dutchSourceAddHu = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Középre',
+  'Getalnotatie': 'Számformátum',
+  'Kolom naar links': 'Oszlop balra',
+  'Kolom naar rechts': 'Oszlop jobbra',
+  'Kolom rechts invoegen': 'Oszlop beszúrása jobbra',
+  'Koprij': 'Fejlécsor',
+  'Links uitlijnen': 'Balra igazítás',
+  'Rechts uitlijnen': 'Jobbra igazítás',
+  'Rij onder invoegen': 'Sor beszúrása alá',
+  'Splits tabel': 'Táblázat felosztása',
 };

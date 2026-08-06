@@ -4526,4 +4526,14 @@ const _dutchSourceAddLv = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Centrēt',
+  'Getalnotatie': 'Skaitļu formāts',
+  'Kolom naar links': 'Kolonna pa kreisi',
+  'Kolom naar rechts': 'Kolonna pa labi',
+  'Kolom rechts invoegen': 'Ievietot kolonnu pa labi',
+  'Koprij': 'Galvenes rinda',
+  'Links uitlijnen': 'Līdzināt pa kreisi',
+  'Rechts uitlijnen': 'Līdzināt pa labi',
+  'Rij onder invoegen': 'Ievietot rindu zemāk',
+  'Splits tabel': 'Sadalīt tabulu',
 };

@@ -6,12 +6,14 @@
 part of 'markdown_service.dart';
 
 /// Split each Markdown table body line into cells, dropping the GFM separator
-/// row (`| --- | :---: |`). De codering zelf staat in
-/// `markdown_table_codec.dart`, omdat de HTML-export dezelfde tabellen leest.
-/// Top-level (not an extension member) so it stays out of the MarkdownService
-/// class-size ratchet; same library, so `_parseBlock` still calls it directly.
-List<List<String>> _decodeTableRows(List<String> tableLines) =>
-    decodeMarkdownTableRows(tableLines);
+/// row (`| --- | :---: |`), en lees de per-kolomuitlijning uit de colons. De
+/// codering zelf staat in `markdown_table_codec.dart`, omdat de HTML-export
+/// dezelfde tabellen leest. Top-level (not an extension member) so it stays
+/// out of the MarkdownService class-size ratchet; same library, so
+/// `_parseBlock` still calls it directly.
+({List<List<String>> rows, List<TableAlign> alignments})
+_decodeTableWithAlignment(List<String> tableLines) =>
+    decodeMarkdownTableWithAlignment(tableLines);
 
 extension _MarkdownFindingParse on MarkdownService {
   /// Pulls the per-slide attestation link comments out of [block]: the

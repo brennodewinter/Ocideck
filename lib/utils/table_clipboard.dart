@@ -109,6 +109,28 @@ ChartClipboardGrid? chartGridFromClipboardTable(List<List<String>> table) {
 /// Een pijp die niet ontsnapt is — de scheiding tussen twee cellen.
 final _reUnescapedPipe = RegExp(r'(?<!\\)\|');
 
+/// Zet een celraster om naar tab-gescheiden tekst (TSV) — de spiegel van
+/// [parseClipboardTable]. Spreadsheets (Excel, Numbers, Calc, Sheets) lezen
+/// TSV op elk platform, dus dit is de vorm die het best plakt in een
+/// rekenblad. Een cel met een regeleinde wordt tussen aanhalingstekens gezet
+/// (CSV-regel: anders breekt de regel de rij).
+String encodeClipboardTable(List<List<String>> rows) {
+  final out = StringBuffer();
+  for (var r = 0; r < rows.length; r++) {
+    if (r > 0) out.writeln();
+    final cells = <String>[];
+    for (final cell in rows[r]) {
+      cells.add(
+        cell.contains('\t') || cell.contains('\n') || cell.contains('"')
+            ? '"${cell.replaceAll('"', '""')}"'
+            : cell,
+      );
+    }
+    out.write(cells.join('\t'));
+  }
+  return out.toString();
+}
+
 /// Haalt de ontsnapping uit een geplakte markdown-cel.
 ///
 /// Spiegelt `_unescapeCell` in `markdown_service.dart`, dat de schrijfkant doet.

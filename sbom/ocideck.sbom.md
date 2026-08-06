@@ -4,7 +4,7 @@
 
 This is **ocideck 0.3.6+13** (licence EUPL-1.2) and every third-party component it ships (217 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **733 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **734 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 6 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -98,7 +98,7 @@ The JSON documents carry **733 dependency relations** between these components: 
 | http_parser _(transitive)_ | 4.1.2 | BSD-3-Clause | dart-lang | `pkg:pub/http_parser@4.1.2` |
 | image _(direct main)_ | 4.9.1 | MIT | brendan-duncan | `pkg:pub/image@4.9.1` |
 | integration_test _(direct dev)_ | 0.0.0 | BSD-3-Clause (Flutter SDK) | flutter | Source: sdk. |
-| intl _(transitive)_ | 0.20.2 | BSD-3-Clause | dart-lang | `pkg:pub/intl@0.20.2` |
+| intl _(direct main)_ | 0.20.2 | BSD-3-Clause | dart-lang | `pkg:pub/intl@0.20.2` |
 | io _(transitive)_ | 1.0.5 | BSD-3-Clause | dart-lang | `pkg:pub/io@1.0.5` |
 | is_ios_simulator _(transitive)_ | 1.0.1 | MIT | EchoEllet | `pkg:pub/is_ios_simulator@1.0.1` |
 | jni _(transitive)_ | 1.0.3 | BSD-3-Clause | dart-lang | `pkg:pub/jni@1.0.3` |

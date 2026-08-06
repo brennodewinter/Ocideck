@@ -4531,4 +4531,14 @@ const _dutchSourceAddHr = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Centriraj',
+  'Getalnotatie': 'Format brojeva',
+  'Kolom naar links': 'Stupac lijevo',
+  'Kolom naar rechts': 'Stupac desno',
+  'Kolom rechts invoegen': 'Umetni stupac desno',
+  'Koprij': 'Redak zaglavlja',
+  'Links uitlijnen': 'Poravnaj lijevo',
+  'Rechts uitlijnen': 'Poravnaj desno',
+  'Rij onder invoegen': 'Umetni redak ispod',
+  'Splits tabel': 'Podijeli tablicu',
 };

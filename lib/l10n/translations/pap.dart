@@ -4546,4 +4546,14 @@ const _dutchSourceAddPap = {
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Sentra',
+  'Getalnotatie': 'Format di number',
+  'Kolom naar links': 'Kolom pa na banda',
+  'Kolom naar rechts': 'Kolom pa drechi banda',
+  'Kolom rechts invoegen': 'Inserta kolom pa drechi',
+  'Koprij': 'Riba di tabla',
+  'Links uitlijnen': 'Alinia pa na',
+  'Rechts uitlijnen': 'Alinia pa drechi',
+  'Rij onder invoegen': 'Inserta riba abou',
+  'Splits tabel': 'Parti tabla',
 };

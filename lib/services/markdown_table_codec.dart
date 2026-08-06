@@ -13,6 +13,8 @@
 /// een auteur die de tekens `<br>` letterlijk bedoelt.
 library;
 
+import '../models/slide.dart';
+
 /// Een pijp die geen celinhoud is, dus niet voorafgegaan door een backslash.
 final _unescapedPipe = RegExp(r'(?<!\\)\|');
 
@@ -72,22 +74,65 @@ String encodeMarkdownTableCell(String value) => value
 /// inhoud — in een bevindingen- of scopetabel de gebruikelijke invulling voor
 /// "niet van toepassing" — en zo'n rij werd anders in zijn geheel weggegooid,
 /// inclusief de andere kolommen.
-List<List<String>> decodeMarkdownTableRows(List<String> tableLines) {
+List<List<String>> decodeMarkdownTableRows(List<String> tableLines) =>
+    decodeMarkdownTableWithAlignment(tableLines).rows;
+
+/// Zoals [decodeMarkdownTableRows], maar leest óók de per-kolomuitlijning uit
+/// de GFM-scheidingsrij (`:---` = links, `:---:` = centrum, `---:` = rechts).
+/// Een scheidingsrij zonder colons levert een lege lijst op — de aanroeper
+/// hoort dat te behandelen als "alles links" (de GFM-default).
+({List<List<String>> rows, List<TableAlign> alignments})
+decodeMarkdownTableWithAlignment(List<String> tableLines) {
   final rows = <List<String>>[];
+  final alignments = <TableAlign>[];
   for (final line in tableLines) {
     final cells = splitMarkdownTableRow(line);
     if (rows.length == 1 &&
         cells.isNotEmpty &&
         cells.every((c) => _separatorCell.hasMatch(c.trim()))) {
+      for (final c in cells) {
+        final t = c.trim();
+        final left = t.startsWith(':');
+        final right = t.endsWith(':');
+        alignments.add(
+          left && right
+              ? TableAlign.center
+              : right
+              ? TableAlign.right
+              : TableAlign.left,
+        );
+      }
       continue;
     }
     rows.add(cells);
   }
-  return rows;
+  return (rows: rows, alignments: alignments);
 }
 
 /// Of [line] eruitziet als een regel van een Markdown-tabel.
 bool isMarkdownTableLine(String line) {
   final t = line.trim();
   return t.startsWith('|') && t.length > 1;
+}
+
+/// Bouwt de GFM-scheidingsrij met per-kolomuitlijning: `:---` voor links,
+/// `:---:` voor centrum, `---:` voor rechts. Zonder [alignments] (of korter
+/// dan [colCount]) is elke kolom de kale `---` (GFM-default = links).
+String markdownTableSeparatorRow(int colCount, [List<TableAlign>? alignments]) {
+  final cells = <String>[];
+  for (var c = 0; c < colCount; c++) {
+    // Geen uitlijning opgegeven voor deze kolom = kale --- (de GFM-default).
+    // Wel opgegeven = expliciete colon-vorm, ook voor links (:---). Zo blijft
+    // een oud deck zonder uitlijning ongewijzigd bij opslaan.
+    if (alignments == null || c >= alignments.length) {
+      cells.add('---');
+      continue;
+    }
+    cells.add(switch (alignments[c]) {
+      TableAlign.left => ':---',
+      TableAlign.center => ':---:',
+      TableAlign.right => '---:',
+    });
+  }
+  return '| ${cells.join(' | ')} |';
 }
