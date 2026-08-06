@@ -118,11 +118,32 @@ bool _hasMarker(String s) {
   return false;
 }
 
+/// Spiegelt de HTML-escape uit `sanitizeImportedText` voor weergave: `&amp;`,
+/// `&lt;`, `&gt;`, `&quot;` worden weer `&`, `<`, `>`, `"`. Numerieke entities
+/// (`&#60;`) blijven staan — de sanitizer escaped `&` juist als eerste zodat een
+/// bron-`&#60;` `&amp;#60;` wordt en na deze decode niet als `<` terugkomt.
+/// `&amp;` gaat als laatste, anders wordt een letterlijke `&lt;` na twee stappen
+/// alsnog `<` (zelfde volgorde als `_unescapeHtml` in markdown_service_helpers).
+String _decodeNamedHtmlEntities(String text) {
+  if (!text.contains('&')) return text;
+  return text
+      .replaceAll('&lt;', '<')
+      .replaceAll('&gt;', '>')
+      .replaceAll('&quot;', '"')
+      .replaceAll('&amp;', '&');
+}
+
 void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
   final buf = StringBuffer();
   void flush() {
     if (buf.isNotEmpty) {
-      out.add(ctx._with()._copyText(buf.toString()));
+      // Geïmporteerde tekst landt HTML-escaped in het `.md` (#876); de
+      // Flutter-preview rendert via deze runs, dus de named entities gaan hier
+      // terug. Alleen named, nooit numeriek — anders wordt een bron-`&#60;`
+      // alsnog `<` en dat is juist de evasie die de sanitizer blokkeert.
+      // Code-spans voegen hun tekst direct toe (hieronder) en slaan deze stap
+      // over, zodat `` `&amp;` `` letterlijk blijft.
+      out.add(ctx._with()._copyText(_decodeNamedHtmlEntities(buf.toString())));
       buf.clear();
     }
   }
