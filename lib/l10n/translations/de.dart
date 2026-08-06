@@ -730,6 +730,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Gilt für {n} Folien dieser geteilten Reihe.',
   'Los automatisch op wat kan': 'Beheben, was automatisch geht',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT lieferte eine unerwartete Antwort ({code}). Versuchen Sie es später erneut oder bitten Sie Ihren Administrator um Hilfe.',

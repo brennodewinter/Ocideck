@@ -1,6 +1,6 @@
 # OciDeck — User Guide
 
-> **Status:** current-state user manual · **Status last reviewed:** 2026-08-02 · **Published by:** Stichting LibreKAT
+> **Status:** current-state user manual · **Status last reviewed:** 2026-08-06 · **Published by:** Stichting LibreKAT
 
 ## Contents
 
@@ -3344,6 +3344,33 @@ worse — there **Split slide** is the one fix left standing.
 when the explanation is at least a few words) it keeps just the label on the slide
 and moves the full original line to the speaker notes — the point survives where
 you can still say it, and one undo brings it back.
+
+#### One warning for a whole split run
+
+**Split slide** spreads the bullets over pages, but it does not make them shorter.
+A list of long, prose-like bullets still reads as *many words*, *bullets that are
+long on average*, *a bullet with several sentences* or *deep nesting* on every page
+it lands on, and the *font shrunk below design size* warning travels with each page
+too. Splitting relieves the density that comes from *how many* bullets share a page,
+not the length of the bullets themselves — so, left alone, the panel would repeat
+each of those length warnings on every page of the run, and taking the panel's own
+advice to split would multiply the warnings instead of clearing them.
+
+The panel therefore folds them together. A length-driven density warning that
+returns on **two or more** pages of the same split run — the same kind of bullet
+slide, joined as continuations — is listed **once** for the whole run, and the line
+adds that it *applies to all N slides of this split run*, so the single entry is not
+mistaken for a one-page problem. What splitting further *would* relieve is left on
+every page: a warning about too *many* bullets, and any **error**-severity density
+flag (a page over the hard limit), because there another split is still the right
+move and the run is not yet done. A single stray hit is left alone too — the folding
+starts only once a warning is a property of the run rather than of one page.
+
+This is only what the panel *shows*. The thumbnail badges and the badge popover read
+the full analysis, so every page that carries a folded warning still shows its own
+mark; and **Fix all problems** — and the same fix while presenting — re-analyses the
+deck from scratch, so it keeps acting page by page. Folding the warnings changes how
+many the panel lists, not what the deck contains.
 
 #### A slide that is dragged down by its split run
 

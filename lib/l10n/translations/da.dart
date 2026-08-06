@@ -1770,6 +1770,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Gælder for {n} dias i denne opdelte række.',
   'Los automatisch op wat kan': 'Løs det, der kan automatiseres',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT returnerede et uventet svar ({code}). Prøv igen senere, eller bed din administrator om hjælp.',

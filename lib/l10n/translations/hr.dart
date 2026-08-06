@@ -1777,6 +1777,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Odnosi se na {n} slajdova ovog podijeljenog niza.',
   'Los automatisch op wat kan': 'Popravi što se može automatski',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT je vratio neočekivani odgovor ({code}). Pokušajte kasnije ili zatražite pomoć administratora.',

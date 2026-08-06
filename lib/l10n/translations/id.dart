@@ -1771,6 +1771,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Berlaku untuk {n} slide dari rangkaian terpisah ini.',
   'Los automatisch op wat kan': 'Perbaiki yang bisa otomatis',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT mengembalikan respons tak terduga ({code}). Coba lagi nanti atau minta bantuan administrator.',

@@ -1773,6 +1773,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Velja za {n} prosojnic tega razdeljenega zaporedja.',
   'Los automatisch op wat kan': 'Odpravi, kar je mogoče samodejno',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT je vrnil nepričakovan odgovor ({code}). Poskusite pozneje ali prosite skrbnika za pomoč.',

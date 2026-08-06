@@ -1778,6 +1778,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Platí pre {n} snímok tohto rozdeleného radu.',
   'Los automatisch op wat kan': 'Opraviť, čo sa dá automaticky',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT vrátil neočakávanú odpoveď ({code}). Skúste neskôr alebo požiadajte správcu o pomoc.',

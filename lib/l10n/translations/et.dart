@@ -1762,6 +1762,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Kehtib selle jaotatud jada {n} slaidi kohta.',
   'Los automatisch op wat kan': 'Paranda automaatselt lahendatavad',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT tagastas ootamatu vastuse ({code}). Proovige hiljem uuesti või pöörduge administraatori poole.',

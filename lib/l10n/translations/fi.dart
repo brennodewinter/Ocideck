@@ -1771,6 +1771,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Koskee tämän jaetun sarjan {n} diaa.',
   'Los automatisch op wat kan': 'Korjaa, mikä onnistuu automaattisesti',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT palautti odottamattoman vastauksen ({code}). Yritä myöhemmin uudelleen tai pyydä apua ylläpitäjältä.',

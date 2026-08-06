@@ -730,6 +730,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Ta konta pa {n} slide di e serie partí aki.',
   'Los automatisch op wat kan': 'Drecha loke por outomatisá',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT a duna un respuesta inesperá ({code}). Purba despues of pidi ayudo na bo administrador.',

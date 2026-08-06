@@ -1793,6 +1793,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Japplika għal {n} slajds ta\' din is-sensiela maqsuma.',
   'Los automatisch op wat kan':
       'Irranġa dak li jista\' jissewwa awtomatikament',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':

@@ -726,6 +726,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Vale per {n} diapositive di questa sequenza divisa.',
   'Los automatisch op wat kan': 'Correggi ciò che si può in automatico',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT ha restituito una risposta imprevista ({code}). Riprovate più tardi o chiedete aiuto al vostro amministratore.',

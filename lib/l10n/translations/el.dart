@@ -1798,6 +1798,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Ισχύει για {n} διαφάνειες αυτής της χωρισμένης σειράς.',
   'Los automatisch op wat kan': 'Επιδιόρθωση όσων γίνονται αυτόματα',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'Το OpenKAT επέστρεψε απροσδόκητη απάντηση ({code}). Δοκιμάστε αργότερα ή ζητήστε βοήθεια από τον διαχειριστή.',

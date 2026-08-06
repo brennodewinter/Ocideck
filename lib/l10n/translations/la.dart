@@ -1787,6 +1787,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Valet pro {n} paginis huius seriei divisae.',
   'Los automatisch op wat kan': 'Corrige quae per se corrigi possunt',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT responsum inopinatum ({code}) dedit. Postea iterum conare vel administratorem adi.',

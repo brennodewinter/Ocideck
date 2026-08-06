@@ -1770,6 +1770,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Piemērojams {n} slaidiem šajā sadalītajā virknē.',
   'Los automatisch op wat kan': 'Labot, ko var automātiski',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT atgrieza negaidītu atbildi ({code}). Mēģiniet vēlāk vai lūdziet palīdzību administratoram.',
