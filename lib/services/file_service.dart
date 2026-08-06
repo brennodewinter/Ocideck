@@ -948,4 +948,18 @@ class FileService {
       fileName: '${_safeName(deck.title)}.$packageExtension',
     );
   }
+
+  /// Vraagt waar een document-export (§11.2) naartoe moet. Anders dan een deck
+  /// (dat naast zijn `.md` landt) prompt een document om een pad, want het is
+  /// een afgeleide, geredigeerde kopie voor een ontvanger — niet de meester.
+  /// [fileName] draagt al de juiste extensie (`.md`/`.html`) en het profiel
+  /// (`…-geredigeerd`), zodat een verwisseling zichtbaar is in de naam.
+  Future<String?> pickDocumentExportDestination({
+    required String fileName,
+    String? initialDirectory,
+  }) => _saveDestination(
+    dialogTitle: _d('Exporteren'),
+    fileName: fileName,
+    initialDirectory: initialDirectory,
+  );
 }

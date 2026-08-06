@@ -10,13 +10,23 @@ import '../l10n/app_localizations.dart';
 import '../models/chart.dart';
 import '../models/markdown_kind.dart';
 import '../models/markdown_outline.dart';
+import '../models/privacy_disposition.dart';
 import '../models/slide.dart';
+import '../services/document_deck_bridge.dart';
+import '../services/document_export_service.dart';
+import '../services/export_metadata.dart';
 import '../services/file_service.dart';
+import '../services/html_image_embedder.dart';
+import '../services/marp_html_service.dart';
+import '../services/privacy/privacy_own_identity.dart';
 import '../state/deck_provider.dart'
-    show fileServiceProvider, imageServiceProvider;
+    show fileServiceProvider, imageServiceProvider, markdownServiceProvider;
 import '../state/document_provider.dart';
 import '../state/settings_provider.dart' show settingsProvider, SettingsTraces;
+import '../state/tabs_provider.dart';
 import '../utils/doc_link.dart' show headingSlug;
+import 'dialogs/convert_to_presentation_dialog.dart';
+import 'dialogs/document_export_dialog.dart';
 import 'editors/_editor_field.dart' show pickImageWithFeedback;
 import 'editors/chart_editor.dart';
 import 'editors/table_editor.dart';
@@ -126,6 +136,130 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         .addRecentFile(saved, kind: MarkdownKind.document);
   }
 
+  /// De titel van dit document: de eerste H1, anders de bestandsnaam, anders
+  /// leeg. Bepaalt de voorgestelde exportnaam en de HTML-`<title>` — net als een
+  /// tekstverwerker een document naar zijn kop noemt.
+  String _documentTitle(String source, String? filePath) {
+    for (final line in source.split('\n')) {
+      final m = RegExp(r'^#\s+(.+)$').firstMatch(line.trim());
+      if (m != null) return m.group(1)!.trim();
+    }
+    if (filePath != null) return p.basenameWithoutExtension(filePath);
+    return '';
+  }
+
+  /// Open de document-export-dialoog (DOCUMENT_MODE.md §11.2). De dialoog kiest
+  /// profiel en formaat; het echte bouwen-en-wegschrijven gebeurt in de closure
+  /// hieronder, die de bron langs `buildDocumentExportBundle → AudienceDeck`
+  /// projecteert (nooit de rauwe bron), een pad laat kiezen en atomisch
+  /// wegschrijft. De bron zelf blijft ongemoeid — export is een afgeleid bestand.
+  Future<void> _export() async {
+    final state = ref.read(documentProvider);
+    final document = state.document;
+    if (document == null) return;
+    final settings = ref.read(settingsProvider);
+    await DocumentExportDialog.show(
+      context,
+      privacyChecksEnabled: settings.privacyChecksEnabled,
+      onExport: (profile, format) => _writeExport(profile, format),
+    );
+  }
+
+  /// Bouwt de exportbundel voor het gekozen [profile], laat een pad kiezen met
+  /// de juiste extensie, en schrijft de export weg. Geeft het geschreven pad
+  /// terug, of `null` als de gebruiker de bestandskiezer wegklikte of het
+  /// schrijven mislukte.
+  Future<String?> _writeExport(
+    PrivacyExportProfile profile,
+    DocumentExportFormat format,
+  ) async {
+    final state = ref.read(documentProvider);
+    final source = state.document?.source ?? '';
+    final filePath = state.filePath;
+    final projectPath = filePath == null ? null : p.dirname(filePath);
+    final settings = ref.read(settingsProvider);
+    final fileService = ref.read(fileServiceProvider);
+    final imageService = ref.read(imageServiceProvider);
+    final markdownService = ref.read(markdownServiceProvider);
+    final l10n = context.l10n;
+    final title = _documentTitle(source, filePath);
+
+    // Bouw de bundel langs de audited projectiegrens. Vanaf hier raakt geen
+    // uitvoerpad de rauwe bron nog aan.
+    final bundle = await buildDocumentExportBundle(
+      source,
+      projectPath: projectPath,
+      profile: profile,
+      ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
+      regions: settings.privacyRegions,
+      disabledRules: settings.privacyDisabledRules,
+      markdownService: markdownService,
+      title: title,
+    );
+
+    // Kies een pad. De extensie én het profiel staan in de naam, zodat een
+    // verwisseling (volledig ↔ geredigeerd) zichtbaar is.
+    final ext = format == DocumentExportFormat.md ? 'md' : 'html';
+    final tag = profile == PrivacyExportProfile.redacted
+        ? l10n.d('geredigeerd')
+        : l10n.d('volledig');
+    final base = _safeExportName(title.isEmpty ? l10n.d('document') : title);
+    final dest = await fileService.pickDocumentExportDestination(
+      fileName: '$base-$tag.$ext',
+      initialDirectory: projectPath,
+    );
+    if (dest == null) return null;
+    final outputPath = dest.endsWith('.$ext') ? dest : '$dest.$ext';
+
+    // Afbeeldingen ingesloten als data:-URI, begrensd binnen de projectmap —
+    // dezelfde regel als de deck-HTML-export: een pad buiten de map wordt
+    // geweigerd, niet gevolgd.
+    Future<String?> embed(String src) async {
+      final bytes = await imageService.readSlideImageBytes(
+        src,
+        projectPath: projectPath,
+      );
+      if (bytes == null) return null;
+      final encoded = encodeForHtmlEmbed(bytes, src);
+      return encoded == null ? null : htmlImageDataUri(encoded);
+    }
+
+    return writeDocumentExport(
+      bundle,
+      format,
+      html: MarpHtmlService(),
+      theme: fileService.activeProfileFor(projectPath: projectPath),
+      metadata: ExportDocumentMetadata(
+        title: title,
+        language: l10n.languageCode,
+      ),
+      embedImage: embed,
+      outputPath: outputPath,
+    );
+  }
+
+  /// Converteer dit document naar een NIEUWE presentatie in een nieuw tabblad
+  /// (DOCUMENT_MODE.md §11.3). Een expliciete kopie: dit document blijft
+  /// ongemoeid. De dialoog toont het voorgestelde aantal dia's en de drop-lijst
+  /// vóór het committen; pas bij bevestigen ontstaat het nieuwe tabblad.
+  Future<void> _convertToPresentation() async {
+    final state = ref.read(documentProvider);
+    final source = state.document?.source ?? '';
+    final title = _documentTitle(source, state.filePath);
+    // De getypeerde, zero-loss deconstructie ís de bron van waarheid — voor het
+    // voorgestelde aantal dia's én voor het nieuwe deck. Bewust niet
+    // generateDeck→parseDeck: dat zou een kop-geleide sectie via `_inferSlideType`
+    // weer stil kunnen laten vallen (§11.3, §11.5). De nieuwe presentatie is een
+    // kopie; er reist geen zegel mee.
+    final deck = DocumentDeckBridge.documentToDeck(source, title: title);
+    final confirmed = await ConvertToPresentationDialog.show(
+      context,
+      slideCount: deck.slides.length,
+    );
+    if (confirmed != true || !mounted) return;
+    ref.read(tabsProvider.notifier).newDeckInNewTab(title, slides: deck.slides);
+  }
+
   /// Scroll de weergave naar de aangeklikte kop uit de Overzicht-rail. Hergebruikt
   /// het anker-mechanisme van [DocumentMarkdownView]: markeer het blok via
   /// setState zodat [_anchorKey] deze frame aanhecht, en scroll het daarna in
@@ -190,6 +324,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
               onInsertTable: _insertTable,
               onInsertMermaid: _insertMermaid,
               onInsertImage: _insertImage,
+              onExport: _export,
+              onConvertToPresentation: _convertToPresentation,
               controller: _controller,
               editorFocus: _editorFocus,
             ),
@@ -545,6 +681,8 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onInsertTable;
   final VoidCallback onInsertMermaid;
   final VoidCallback onInsertImage;
+  final VoidCallback onExport;
+  final VoidCallback onConvertToPresentation;
   final TextEditingController controller;
   final FocusNode editorFocus;
 
@@ -555,6 +693,8 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onInsertTable,
     required this.onInsertMermaid,
     required this.onInsertImage,
+    required this.onExport,
+    required this.onConvertToPresentation,
     required this.controller,
     required this.editorFocus,
   });
@@ -591,6 +731,13 @@ class _DocEditorToolbar extends StatelessWidget {
               ),
               const Spacer(),
               _insertMenu(l10n),
+              const SizedBox(width: 4),
+              TextButton.icon(
+                onPressed: onExport,
+                icon: const Icon(Icons.ios_share, size: 16),
+                label: Text(l10n.d('Exporteren…')),
+              ),
+              _moreMenu(l10n),
             ],
           ),
           // De gedeelde opmaak-knoppenbalk (vet/cursief/kop/lijst/…), dezelfde als
@@ -643,6 +790,32 @@ class _DocEditorToolbar extends StatelessWidget {
     );
   }
 
+  /// Het overloopmenu rechts: minder vaak gebruikte handelingen die geen eigen
+  /// knop verdienen. Nu de conversie naar een presentatie (een NIEUW tabblad,
+  /// nooit een in-place omschakeling — DOCUMENT_MODE.md §11.3).
+  Widget _moreMenu(AppLocalizations l10n) {
+    return PopupMenuButton<int>(
+      tooltip: l10n.t('more'),
+      position: PopupMenuPosition.under,
+      icon: const Icon(Icons.more_vert, size: 18),
+      onSelected: (value) {
+        if (value == 0) onConvertToPresentation();
+      },
+      itemBuilder: (context) => [
+        PopupMenuItem<int>(
+          value: 0,
+          child: Row(
+            children: [
+              const Icon(Icons.slideshow_outlined, size: 17),
+              const SizedBox(width: 10),
+              Text(l10n.d('Converteer naar presentatie…')),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   PopupMenuItem<int> _insertItem(int value, IconData icon, String label) {
     return PopupMenuItem<int>(
       value: value,
@@ -687,6 +860,17 @@ class _DocEditorToolbar extends StatelessWidget {
       : '\n\n';
   final insertion = '$lead$block$trail';
   return ('$before$insertion$after', before.length + insertion.length);
+}
+
+/// Een bestandsnaam-veilige vorm van [title] voor de voorgestelde exportnaam:
+/// alles wat geen letter/cijfer/koppelteken is wordt een koppelteken, samengedrukt
+/// en getrimd. Top-level en puur, los toetsbaar van het editor-scherm.
+String _safeExportName(String title) {
+  final cleaned = title
+      .replaceAll(RegExp(r'[^\w\- ]+'), '')
+      .trim()
+      .replaceAll(RegExp(r'[\s]+'), '-');
+  return cleaned.isEmpty ? 'document' : cleaned;
 }
 
 /// De fence van één ```chart-blok, om de `chartOrdinal`-de (vanaf 0) in de bron
