@@ -4519,4 +4519,14 @@ const _dutchSourceAddEn = {
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Center',
+  'Getalnotatie': 'Number format',
+  'Kolom naar links': 'Move column left',
+  'Kolom naar rechts': 'Move column right',
+  'Kolom rechts invoegen': 'Insert column right',
+  'Koprij': 'Header row',
+  'Links uitlijnen': 'Align left',
+  'Rechts uitlijnen': 'Align right',
+  'Rij onder invoegen': 'Insert row below',
+  'Splits tabel': 'Split table',
 };

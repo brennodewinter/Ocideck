@@ -4597,4 +4597,14 @@ const _dutchSourceAddEl = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Κεντράρισμα',
+  'Getalnotatie': 'Μορφή αριθμών',
+  'Kolom naar links': 'Στήλη αριστερά',
+  'Kolom naar rechts': 'Στήλη δεξιά',
+  'Kolom rechts invoegen': 'Εισαγωγή στήλης δεξιά',
+  'Koprij': 'Γραμμή κεφαλίδας',
+  'Links uitlijnen': 'Στοίχιση αριστερά',
+  'Rechts uitlijnen': 'Στοίχιση δεξιά',
+  'Rij onder invoegen': 'Εισαγωγή γραμμής κάτω',
+  'Splits tabel': 'Διαίρεση πίνακα',
 };

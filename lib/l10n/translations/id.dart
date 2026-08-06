@@ -4538,4 +4538,14 @@ const _dutchSourceAddId = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Tengah',
+  'Getalnotatie': 'Format angka',
+  'Kolom naar links': 'Kolom ke kiri',
+  'Kolom naar rechts': 'Kolom ke kanan',
+  'Kolom rechts invoegen': 'Sisipkan kolom kanan',
+  'Koprij': 'Baris header',
+  'Links uitlijnen': 'Rata kiri',
+  'Rechts uitlijnen': 'Rata kanan',
+  'Rij onder invoegen': 'Sisipkan baris di bawah',
+  'Splits tabel': 'Bagi tabel',
 };

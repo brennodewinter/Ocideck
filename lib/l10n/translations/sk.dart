@@ -4532,4 +4532,14 @@ const _dutchSourceAddSk = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Na stred',
+  'Getalnotatie': 'Formát čísel',
+  'Kolom naar links': 'Stĺec doľava',
+  'Kolom naar rechts': 'Stĺec doprava',
+  'Kolom rechts invoegen': 'Vložiť stĺec vpravo',
+  'Koprij': 'Riadok hlavičky',
+  'Links uitlijnen': 'Zarovnať vľavo',
+  'Rechts uitlijnen': 'Zarovnať vpravo',
+  'Rij onder invoegen': 'Vložiť riadok pod',
+  'Splits tabel': 'Rozdeliť tabuľku',
 };

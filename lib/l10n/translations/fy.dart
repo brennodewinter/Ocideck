@@ -4526,4 +4526,14 @@ const _dutchSourceAddFy = {
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Sintralisearje',
+  'Getalnotatie': 'Getalnotaasje',
+  'Kolom naar links': 'Kolom nei links',
+  'Kolom naar rechts': 'Kolom nei rjochts',
+  'Kolom rechts invoegen': 'Kolom rjochts ynfoegje',
+  'Koprij': 'Koprigel',
+  'Links uitlijnen': 'Links utlijnje',
+  'Rechts uitlijnen': 'Rjochts utlijnje',
+  'Rij onder invoegen': 'Rigel ûnder ynfoegje',
+  'Splits tabel': 'Tabel splitsje',
 };

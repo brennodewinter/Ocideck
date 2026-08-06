@@ -4535,4 +4535,14 @@ const _dutchSourceAddFi = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Keskitä',
+  'Getalnotatie': 'Lukumuoto',
+  'Kolom naar links': 'Sarake vasemmalle',
+  'Kolom naar rechts': 'Sarake oikealle',
+  'Kolom rechts invoegen': 'Lisää sarake oikealle',
+  'Koprij': 'Otsikkorivi',
+  'Links uitlijnen': 'Tasaa vasemmalle',
+  'Rechts uitlijnen': 'Tasaa oikealle',
+  'Rij onder invoegen': 'Lisää rivi alle',
+  'Splits tabel': 'Jaa taulukko',
 };

@@ -4549,4 +4549,14 @@ const _dutchSourceAddUk = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'За центрувати',
+  'Getalnotatie': 'Формат чисел',
+  'Kolom naar links': 'Колонка ліворуч',
+  'Kolom naar rechts': 'Колонка праворуч',
+  'Kolom rechts invoegen': 'Вставити колонку праворуч',
+  'Koprij': 'Рядок заголовка',
+  'Links uitlijnen': 'Вирівняти ліворуч',
+  'Rechts uitlijnen': 'Вирівняти праворуч',
+  'Rij onder invoegen': 'Вставити рядок знизу',
+  'Splits tabel': 'Розділити таблицю',
 };

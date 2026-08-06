@@ -4599,4 +4599,14 @@ const _dutchSourceAddGa = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Lárnaithe',
+  'Getalnotatie': 'Formáid uimhreach',
+  'Kolom naar links': 'Colún ar chlé',
+  'Kolom naar rechts': 'Colún ar dheis',
+  'Kolom rechts invoegen': 'Ionsáigh colún ar dheis',
+  'Koprij': 'Ró ceanntáisc',
+  'Links uitlijnen': 'Ailínigh ar chlé',
+  'Rechts uitlijnen': 'Ailínigh ar dheis',
+  'Rij onder invoegen': 'Ionsáigh ró faoi bhun',
+  'Splits tabel': 'Roinn tábla',
 };

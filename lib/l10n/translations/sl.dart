@@ -4530,4 +4530,14 @@ const _dutchSourceAddSl = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Centriraj',
+  'Getalnotatie': 'Format številk',
+  'Kolom naar links': 'Stolpec levo',
+  'Kolom naar rechts': 'Stolpec desno',
+  'Kolom rechts invoegen': 'Vstavi stolpec desno',
+  'Koprij': 'Vrstica glave',
+  'Links uitlijnen': 'Poravnaj levo',
+  'Rechts uitlijnen': 'Poravnaj desno',
+  'Rij onder invoegen': 'Vstavi vrstico spodaj',
+  'Splits tabel': 'Razdeli tabelo',
 };
