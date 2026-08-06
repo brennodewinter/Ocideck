@@ -5,7 +5,7 @@ you edit like a word processor — headings, tables, images, charts, gantt,
 mermaid — where the file on disk stays a plain, maximally interchangeable `.md`
 that any Markdown reader opens.*
 
-> **Status:** design — not yet implemented · **Status last reviewed:** 2026-08-05 · **Published by:** Stichting LibreKAT
+> **Status:** phases 1–3 implemented (open/edit/save, badge, Visueel\|Bron toggle, insert palette); export/conversion/storage (§11) designed & reviewed, build pending · **Status last reviewed:** 2026-08-06 · **Published by:** Stichting LibreKAT
 
 > **This is a design doc, not shipping behaviour.** It is the *format-first*
 > gate: the disk contract and the shared-editor decision must be signed off
@@ -441,9 +441,13 @@ deliverable and valuable.
 
 **Still open for Phase 0 sign-off:**
 
-- Gantt marker: ` ```mermaid ` gantt vs recognised table (§4.1).
+- ~~Gantt marker~~ — **resolved** (§11.2): for a document, option (a), the
+  ` ```mermaid ` gantt fence, by construction (no per-slide `_class`).
 - Exact shape of the shared editing-surface contract so it serves both typed
   slides and flowing documents without paradigm bleed (§2.1 risk note).
+
+The export / conversion / storage format contract is settled in **§11**
+(implementation sign-off 2026-08-06, three-lens review).
 
 **Building blocks re-used (verified in exploration):**
 
@@ -457,3 +461,209 @@ deliverable and valuable.
 | Storage & working dir | [`storage_connection.dart`](../../lib/models/storage_connection.dart), `FileService`, `projectPath` |
 | Export + privacy gate | [`export_service.dart`](../../lib/services/export_service.dart), `buildExportBundle → AudienceDeck` |
 | Rich content | `MermaidRenderService`, `ganttTableToMermaid`, the chart preview/editor family (to be unbound from `Slide`) |
+
+---
+
+## 11. Implementation contract — export, conversion & storage (format-first sign-off 2026-08-06)
+
+*This section turns §5–§7 into code-level decisions, grounded in the actual
+export/projection internals, so the build follows a signed-off design rather
+than discovering the format at the keyboard. Reviewed by the core-values
+guardian, the security architect and the privacy expert (see the review note at
+the end).*
+
+### 11.1 The load-bearing fact: OciWacht projects a **Deck**, not flat text
+
+The privacy boundary is not text-shaped. `PrivacyScanner` and
+`PrivacyProjection._project` operate on the **deconstructed `Deck`/`Slide`**:
+the scanner fragments *typed slide fields* (`customMarkdown`, `bullets`,
+`tableRows`, `title`, …) and the projection redacts those fields. There is **no
+public route that scans or redacts a flat Markdown `String`** — `redactText`
+only applies author `[[…]]` marks, it does **not** detect PII.
+
+Consequence, and it is a red line: a document export **cannot** hand flat
+document text to OciWacht. To be projected it must first become a `Deck`. This
+is *why* §6's "every document export goes through `buildExportBundle →
+AudienceDeck`" needs a concrete bridge.
+
+### 11.2 Export path (task: export) — **revised after the privacy review (2026-08-06)**
+
+> **A naive single-`freeMarkdown` wrap is rejected.** The first draft wrapped
+> the whole body into *one* `freeMarkdown` slide and read
+> `bundle.audience.deck.slides.single.customMarkdown` back. The privacy review
+> found three defects that all stem from treating a whole document as one slide:
+> (1) externalised ` ```chart ` data in `data/*.json` is **never hydrated** for a
+> non-`chart` slide, so it escapes the scanner entirely — a PII leak; (2) a GFM
+> table inside one raw `customMarkdown` fragment loses its **column-header
+> context**, so context-gated detectors (BSN under a "BSN" column) fire weaker
+> than on a typed slide; (3) the **slide-wide escalation** that couples "there is
+> a person here" to every special-category term, safe when a slide is small,
+> over-redacts across an entire document. The wrap is therefore **not** the
+> design. Export deconstructs into **typed slides**, exactly what OciWacht was
+> built for.
+
+**The path, corrected:**
+
+```
+// 1. Pre-scan hydration — fold every data/*.json chart series INLINE into the
+//    body so the scanner sees the values, whatever slide type it lands in.
+String hydrated = hydrateDocumentChartData(body, projectPath)   // pure + tested
+
+// 2. Structural deconstruct into a real Deck via the EXISTING deck parser, so a
+//    GFM table becomes a typed `table` slide (column context), a heading section
+//    becomes its own slide (LOCAL escalation scope), prose becomes freeMarkdown.
+Deck deck = DocumentDeckBridge.documentToDeck(hydrated)         // §11.3, shared
+
+// 3. The one, audited boundary — unchanged.
+ExportBundle bundle = buildExportBundle(deck, deck.slides, profile: …, …)
+
+// 4. Read the projected body back DEFENSIVELY — join over all slides, never
+//    assume `.single` (which relied on an undocumented cross-file invariant).
+String projectedBody = DocumentDeckBridge.deckToDocumentMarkdown(bundle.audience.deck)
+```
+
+- **Deconstruction is the redaction enabler.** Because tables become `table`
+  slides and each section is its own slide, the scanner keeps the column-header
+  context (fixes finding 2) and the escalation stays section-local (fixes finding
+  3). Chart data is hydrated *before* the scan and is **never** re-inlined from
+  `data/*.json` *after* projection (fixes finding 1). No second scanner is built;
+  the existing per-field projection does the work.
+- **`.md` export** = `projectedBody`: a **projected copy for a recipient**, not
+  the master. The interface must name it so — *"export a redacted copy"* — and
+  never label it the same as **Save**, which alone writes the byte-faithful,
+  un-redacted sovereign master (§3.1). Conflating the two would let a user mistake
+  a redacted export for their master and silently forfeit the round-trip
+  guarantee (guardian finding). The `.md` export is a derived artefact on a new
+  file, so it is exempt from the open→save byte-identity gate; the zero-body-loss
+  test stays about round-trip, untouched.
+- **Continuous HTML** = `MarpHtmlService.build(projectedBody, continuous: true,
+  …)`. New `continuous` flag: `_renderSections` renders the whole markdown as
+  **one flowing `<article>`** instead of per-`---` `<section class="slide">`,
+  with document CSS beside the 16:9 slide CSS. **The flow mode MUST route the
+  body through the same inert `<script type="text/markdown">` + `_guardMarkdown`
+  + client-side DOMPurify pipeline** as slide mode — it may never inject rendered
+  HTML directly (security finding). The document CSS **MUST carry no external
+  `url()`/`@font-face`**; the CSP is the net, not the licence. The marked/
+  mermaid/mathjax/chart/highlight render layer is otherwise **unchanged** — no
+  third render path (red line §4). A document `---` becomes a real `<hr>`.
+- **The writing surface takes an `ExportBundle`** (never a raw `Deck`/
+  `List<Slide>`), registered `SurfaceKind.audience` in
+  `tool/check_audience_boundary.dart`. Note precisely what that gate proves: the
+  **signature**, not the **derivation**. It cannot see a surface that keeps the
+  raw body in scope and passes a `String` one layer deeper to `build()` (its
+  documented blind spot). The real guarantee is therefore a **mandatory
+  fail-closed test** (see §11.5), not the compiler.
+
+**PDF — honest scope.** OciDeck produces the **projected, accessible continuous
+HTML**; a PDF is obtained by the user printing that HTML through their **own
+browser/OS** (Print → Save as PDF). OciDeck ships **no** HTML→PDF engine:
+`package:printing`'s `convertHtml` is unsupported on desktop, a bundled headless
+browser rebuilds the removed provisioning model and escapes NetGuard (the pandoc
+reasons, §6), and the image-per-page `pw.Document` path has **no** text layer
+(rejected for documents, §6). We do **not** promise the PDF keeps a text layer or
+accessibility tree — that depends on the user's browser/OS, which we do not
+control (guardian finding). The claim is bounded to what we produce: *"OciDeck
+gives you accessible HTML; whether the PDF preserves that is up to your
+browser."* The HTML that the user prints carries the **already-projected**
+(redacted) body, so nothing un-scanned leaves the machine.
+
+**Gantt in a document needs no special case.** A document has no per-slide
+`_class:gantt`; a gantt is authored as a ` ```mermaid ` gantt fence, which the
+unchanged mermaid layer already renders in the flow HTML. So §4.1's export gap
+(a deck-only problem) **does not exist for documents** — resolving §4.1 for
+document mode as **option (a), the ` ```mermaid ` fence**, by construction.
+
+### 11.3 Conversion `presentation ⇄ document` (task: conversion)
+
+One headless, isolation-tested service `DocumentDeckBridge` with two **pure**
+functions (not spread across notifiers — conversion crosses the round-trip and
+projection contracts):
+
+- `deckToDocumentMarkdown(Deck) → String`: serialise the deck bodies into one
+  flowing document; **strip** the marp front matter, `theme:`/`paginate:`, every
+  `_class`, and the slide `---` separators; thread the slide bodies with blank
+  lines. Lossless on *text*; loses slide-structure semantics (stated, not
+  hidden). Also the projected-body reader for export (§11.2 step 4).
+- `documentToDeck(String) → Deck` (and its `documentToDeckMarkdown` string form):
+  interpret `##`/`---` as slide breaks and let the **existing deck parser** type
+  each section (a GFM table → `table` slide, a heading section → its own slide,
+  prose → `freeMarkdown`). **Warn** that a thematic `---` thereby becomes a slide
+  boundary (loss of intent).
+
+Rules (from §7, now binding):
+
+- Both are **explicit user actions producing a NEW file/tab** — never an
+  in-place toggle. The round-trip is asymmetric and lossy.
+- **Always copy + preview + an explicit drop-list.** The reassurance is *"we
+  make a copy; your original stays unchanged."* Document→presentation shows the
+  proposed split ("N slides from Heading 1") with a granularity choice **before**
+  committing — never a silent guess.
+- **The seal never travels** to a converted file (a converted artefact is new;
+  a travelled seal would be a false integrity claim).
+- No lossless-bijection promise anywhere in UI or docs.
+
+`documentToDeck` is **shared** with the export path (§11.2): the same structural
+deconstruction that makes a presentation is what gives the export its typed-slide
+redaction. One deconstruction, two callers — no second, drifting mechanism.
+
+### 11.4 Storage & working directory (task: storage)
+
+**Decision: a document stays a single flat `.md` with the same beside-file
+working directory as a deck — no project folder, no new backend.** This is
+already the behaviour and the minimal one:
+
+- Assets live **beside** the `.md`: images in `images/`, chart data in
+  `data/*.json`, addressed relative. The insert-image path already passes
+  `projectPath = dirname(filePath)` to the shared `ImageService`, which copies
+  into `images/` (or keeps a `mem:` asset while the document is unsaved and
+  materialises it on first save — the existing web-asset lifecycle and its "you
+  will lose this image" warning cover it).
+- The whole `FileService` substrate transfers 1:1: fail-closed
+  `MarkdownSafetyScanner` ahead of every path, size caps, `writeStringAtomic`,
+  the `resolveContainedRealPath` containment guard, sidecar machinery.
+- **Web parity stays deliberately weaker** (save = `.md` download only; no
+  sidecars/assets). The honesty must **land in-interface, not only here**: a
+  warning at *insert time* (a chart/image into an unsaved-on-web document) and
+  again at *web export*, so a user never silently ships an `.md` that references
+  `images/`/`data/` files the download does not contain (guardian finding).
+- `RecentFile.kind` carries document|presentation so the recent list shows the
+  right icon/label (done); no on-disk `kind:` marker — recognition stays the
+  *absence* of `marp: true` (red line §2).
+
+Nothing here reopens the disk contract (§3); it records that the storage layer
+is content-agnostic and needs no document-specific structure.
+
+### 11.5 Review note & binding build requirements
+
+Reviewed 2026-08-06 by the core-values guardian (**akkoord-mits**), the security
+architect (**akkoord-mits**) and the privacy expert (**niet-akkoord** on the
+first draft — the single-`freeMarkdown` wrap). §11.2 is **rewritten** to close
+the privacy blockers; the following are **binding** on the build, not optional:
+
+1. **Typed-slide deconstruction, not a whole-document wrap** — so the scanner
+   keeps table column-context and section-local escalation (privacy findings 2,
+   3). Export and conversion share `documentToDeck` (§11.3).
+2. **Pre-scan chart-data hydration** — fold every `data/*.json` series inline
+   *before* `buildExportBundle`, and **never** re-inline external data after
+   projection (privacy finding 1, the leak). A **mandatory fail-closed test**:
+   a redacted-profile export of a document whose chart data is externalised, and
+   whose body carries a planted PII token, must contain the redaction block and
+   **not** the token or the raw chart values.
+3. **Defensive projected-body read** — join over `bundle.audience.deck.slides`,
+   never assume `.single` (security finding 2).
+4. **Flow mode on the inert pipeline** — `continuous` renders through the same
+   `<script type="text/markdown">` + `_guardMarkdown` + DOMPurify path; document
+   CSS carries no external `url()`/`@font-face` (security finding 3).
+5. **Honest promises** — the export UI distinguishes **Save** (byte-faithful
+   master) from **Export → redacted copy**; the PDF claim is bounded to the HTML
+   we produce, not the user's browser output (guardian findings 1, 2).
+6. **Signature/closing names are not auto-found** — `_scanName` needs a label or
+   predicate, which a *"Kind regards, Jan Jansen"* sign-off lacks; continuous
+   documents carry these far more than slides. Either add a sign-off-block
+   heuristic **or** document plainly that closing names are not auto-detected
+   (consistent with the "we don't find everything" tone) — privacy finding 4.
+
+The audience-boundary gate proves the **signature**, not the derivation (its
+documented blind spot); requirement 2's fail-closed test is the guarantee the
+compiler cannot give. Every export route (`.md`, HTML, the printed PDF) carries
+the **already-projected** body — nothing un-scanned leaves the machine.
