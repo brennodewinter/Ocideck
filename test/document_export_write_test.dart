@@ -30,9 +30,7 @@ void main() {
 
   const body = '# Rapport\n\nEen alinea met UNIEKPROZA.\n';
 
-  Future<void> withBundle(
-    Future<void> Function(ExportBundle bundle) fn,
-  ) async {
+  Future<void> withBundle(Future<void> Function(ExportBundle bundle) fn) async {
     final bundle = await buildDocumentExportBundle(
       body,
       projectPath: null,

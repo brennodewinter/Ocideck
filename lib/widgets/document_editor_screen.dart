@@ -204,7 +204,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         ? l10n.d('geredigeerd')
         : l10n.d('volledig');
     final base = _safeExportName(title.isEmpty ? l10n.d('document') : title);
-    final dest = await fileService.pickDocumentExportDestination(
+    final dest = await pickDocumentExportDestination(
+      dialogTitle: l10n.t('export'),
       fileName: '$base-$tag.$ext',
       initialDirectory: projectPath,
     );
@@ -329,10 +330,15 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
               controller: _controller,
               editorFocus: _editorFocus,
             ),
-            Divider(height: 1, thickness: 1, color: theme.colorScheme.outlineVariant),
+            Divider(
+              height: 1,
+              thickness: 1,
+              color: theme.colorScheme.outlineVariant,
+            ),
             Expanded(
               child: LayoutBuilder(
-                builder: (context, constraints) => _viewMode == _DocViewMode.visual
+                builder: (context, constraints) =>
+                    _viewMode == _DocViewMode.visual
                     ? _visualLayout(theme, source, constraints)
                     : _sourceLayout(theme, source, constraints),
               ),
@@ -414,22 +420,23 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     ),
   );
 
-  Widget _preview(ThemeData theme, String source, {bool centered = false}) => Container(
-    color: theme.colorScheme.surface,
-    alignment: centered ? Alignment.topCenter : Alignment.topLeft,
-    child: SingleChildScrollView(
-      controller: _previewScroll,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-      child: DocumentMarkdownView(
-        source,
-        maxTextWidth: 720,
-        anchorBlockIndex: _anchorBlockIndex,
-        anchorKey: _anchorKey,
-        onEditChart: _editChart,
-        onEditTable: _editTable,
-      ),
-    ),
-  );
+  Widget _preview(ThemeData theme, String source, {bool centered = false}) =>
+      Container(
+        color: theme.colorScheme.surface,
+        alignment: centered ? Alignment.topCenter : Alignment.topLeft,
+        child: SingleChildScrollView(
+          controller: _previewScroll,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+          child: DocumentMarkdownView(
+            source,
+            maxTextWidth: 720,
+            anchorBlockIndex: _anchorBlockIndex,
+            anchorKey: _anchorKey,
+            onEditChart: _editChart,
+            onEditTable: _editTable,
+          ),
+        ),
+      );
 
   /// De gedeelde dialoogschil voor het bewerken van een ingebedde kaart (grafiek
   /// of tabel): de volwaardige editor in een venster met Annuleren/Toepassen

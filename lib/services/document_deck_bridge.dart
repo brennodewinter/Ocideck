@@ -136,13 +136,6 @@ class DocumentDeckBridge {
     return Deck(title: title, slides: slides, projectPath: projectPath);
   }
 
-  /// De omgekeerde weg: serialiseer de dia-lichamen tot één vloeiend document.
-  ///
-  /// Expliciet lossy op dia-*structuur* (§7): een tabel wordt weer een GFM-tabel,
-  /// een chart weer een ` ```chart `-fence, en elk ander type levert zijn
-  /// `customMarkdown` — of, als dat leeg is, een korte tekstuele terugval op
-  /// titel en bullets, zodat er geen inhoud verdwijnt. Ook de projected-body-
-  /// lezer voor het exportpad (§11.2 stap 4).
   /// Het deck-**markdown** van een plat document: deconstrueer het via
   /// [documentToDeck] en serialiseer dat met de gewone deck-generator, zodat de
   /// uitkomst een geldig presentatie-`.md` is (front matter, `---`-diagrenzen).
@@ -156,6 +149,13 @@ class DocumentDeckBridge {
     String title = '',
   }) => svc.generateDeck(documentToDeck(body, title: title));
 
+  /// De omgekeerde weg: serialiseer de dia-lichamen tot één vloeiend document.
+  ///
+  /// Expliciet lossy op dia-*structuur* (§7): een tabel wordt weer een GFM-tabel,
+  /// een chart weer een ` ```chart `-fence, en elk ander type levert zijn
+  /// `customMarkdown` — of, als dat leeg is, een korte tekstuele terugval op
+  /// titel en bullets, zodat er geen inhoud verdwijnt. Ook de projected-body-
+  /// lezer voor het exportpad (§11.2 stap 4).
   static String deckToDocumentMarkdown(Deck deck) {
     final parts = <String>[];
     for (final slide in deck.slides) {
@@ -282,6 +282,5 @@ _FenceInfo? _fenceOpen(String trimmed) {
 
 /// Of een getrimde regel de fence sluit: hetzelfde teken, minstens even lang, en
 /// zonder taal erachter.
-bool _isFenceClose(String trimmed, String marker, int length) => RegExp(
-  '^${RegExp.escape(marker)}{$length,}[ \\t]*\$',
-).hasMatch(trimmed);
+bool _isFenceClose(String trimmed, String marker, int length) =>
+    RegExp('^${RegExp.escape(marker)}{$length,}[ \\t]*\$').hasMatch(trimmed);

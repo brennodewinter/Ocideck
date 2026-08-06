@@ -185,7 +185,10 @@ void main() {
 
     test('splitst op kop in aparte dia-secties', () {
       const doc = '# Een\n\nprosa een\n\n# Twee\n\nprosa twee\n';
-      final md = DocumentDeckBridge.documentToDeckMarkdown(doc, MarkdownService());
+      final md = DocumentDeckBridge.documentToDeckMarkdown(
+        doc,
+        MarkdownService(),
+      );
       // Twee koppen → twee dia's: naast de front-matter-`---` staat er minstens
       // één diagrens-`---` in de body.
       final slideBreaks = RegExp(

@@ -29,10 +29,13 @@ void main() {
       expect(next.substring(0, cursor), 'Alfa\n\nBLOK\n\n');
     });
 
-    test('cursor direct na tekst zonder newline: vult aan tot dubbele witregel', () {
-      final (next, _) = insertBlockIntoSource('Alfa', 4, 4, 'BLOK');
-      expect(next, 'Alfa\n\nBLOK\n');
-    });
+    test(
+      'cursor direct na tekst zonder newline: vult aan tot dubbele witregel',
+      () {
+        final (next, _) = insertBlockIntoSource('Alfa', 4, 4, 'BLOK');
+        expect(next, 'Alfa\n\nBLOK\n');
+      },
+    );
 
     test('bestaande dubbele witregel wordt niet verdubbeld', () {
       // Ervoor staat al `\n\n`; erna begint al met `\n` → geen extra witregels.

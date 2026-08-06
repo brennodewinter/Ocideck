@@ -21,7 +21,6 @@ import '../models/asset_origin.dart';
 import '../models/deck.dart';
 import '../models/deck_template.dart';
 import '../models/improvement_y01.dart';
-import '../models/markdown_kind.dart';
 import '../models/privacy_disposition.dart';
 import '../models/recent_file.dart';
 import '../models/settings.dart' show AppSettings;

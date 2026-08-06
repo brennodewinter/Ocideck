@@ -120,26 +120,27 @@ void main() {
     expect(n.currentState.isDirty, isFalse);
   });
 
-  testWidgets('Visueel maakt de weergave het hoofdoppervlak, zonder rauwe editor', (
-    tester,
-  ) async {
-    await tester.binding.setSurfaceSize(const Size(1200, 800));
-    addTearDown(() => tester.binding.setSurfaceSize(null));
+  testWidgets(
+    'Visueel maakt de weergave het hoofdoppervlak, zonder rauwe editor',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
 
-    final n = DocumentNotifier()
-      ..loadDocument(MarkdownDocument.parse('# Kop\n\nTekst.'));
-    await tester.pumpWidget(harness(n));
-    await tester.pump();
+      final n = DocumentNotifier()
+        ..loadDocument(MarkdownDocument.parse('# Kop\n\nTekst.'));
+      await tester.pumpWidget(harness(n));
+      await tester.pump();
 
-    // Standaard staat de editor in de bron-modus: de rauwe editor is er.
-    expect(find.byType(TextField), findsOneWidget);
+      // Standaard staat de editor in de bron-modus: de rauwe editor is er.
+      expect(find.byType(TextField), findsOneWidget);
 
-    // Wissel naar Visueel: de rauwe editor verdwijnt, de weergave blijft.
-    await tester.tap(find.text('Visueel'));
-    await tester.pump();
-    expect(find.byType(TextField), findsNothing);
-    expect(find.byType(DocumentMarkdownView), findsOneWidget);
-  });
+      // Wissel naar Visueel: de rauwe editor verdwijnt, de weergave blijft.
+      await tester.tap(find.text('Visueel'));
+      await tester.pump();
+      expect(find.byType(TextField), findsNothing);
+      expect(find.byType(DocumentMarkdownView), findsOneWidget);
+    },
+  );
 
   testWidgets('het invoeg-palet schrijft een mermaid-blok in de bron', (
     tester,
@@ -163,21 +164,22 @@ void main() {
     expect(source, startsWith('Tekst.'));
   });
 
-  testWidgets('de opmaak-knoppenbalk muteert de bron en stroomt naar de notifier', (
-    tester,
-  ) async {
-    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(''));
-    await tester.pumpWidget(harness(n));
-    await tester.enterText(find.byType(TextField), 'abc');
-    await tester.pump();
+  testWidgets(
+    'de opmaak-knoppenbalk muteert de bron en stroomt naar de notifier',
+    (tester) async {
+      final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(''));
+      await tester.pumpWidget(harness(n));
+      await tester.enterText(find.byType(TextField), 'abc');
+      await tester.pump();
 
-    // 'Vet' klikken muteert de controller rechtstreeks (geen onChanged); de
-    // controllerluisteraar moet dat tóch naar de notifier stromen. Met een
-    // samengevouwen cursor voegt het de placeholder tussen ** ** in.
-    await tester.tap(find.byTooltip('Vet'));
-    await tester.pump();
+      // 'Vet' klikken muteert de controller rechtstreeks (geen onChanged); de
+      // controllerluisteraar moet dat tóch naar de notifier stromen. Met een
+      // samengevouwen cursor voegt het de placeholder tussen ** ** in.
+      await tester.tap(find.byTooltip('Vet'));
+      await tester.pump();
 
-    expect(n.currentState.document!.source, contains('**'));
-    expect(n.currentState.isDirty, isTrue);
-  });
+      expect(n.currentState.document!.source, contains('**'));
+      expect(n.currentState.isDirty, isTrue);
+    },
+  );
 }

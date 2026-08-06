@@ -42,9 +42,17 @@ class ConvertToDocumentDialog extends StatelessWidget {
               style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
             const SizedBox(height: 6),
-            _drop(l10n.d('De indeling in dia\'s (de tekst loopt door als één document).')),
+            _drop(
+              l10n.d(
+                'De indeling in dia\'s (de tekst loopt door als één document).',
+              ),
+            ),
             _drop(l10n.d('Het thema en de opmaak per dia (_class).')),
-            _drop(l10n.d('Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.')),
+            _drop(
+              l10n.d(
+                'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.',
+              ),
+            ),
           ],
         ),
       ),

@@ -102,8 +102,11 @@ void main() {
         _app(
           Builder(
             builder: (context) => TextButton(
-              onPressed: () async => result =
-                  await ConvertToPresentationDialog.show(context, slideCount: 4),
+              onPressed: () async =>
+                  result = await ConvertToPresentationDialog.show(
+                    context,
+                    slideCount: 4,
+                  ),
               child: const Text('open'),
             ),
           ),
@@ -117,10 +120,7 @@ void main() {
         find.textContaining('je originele bestand blijft ongewijzigd'),
         findsOneWidget,
       );
-      expect(
-        find.textContaining('wordt een diagrens'),
-        findsOneWidget,
-      );
+      expect(find.textContaining('wordt een diagrens'), findsOneWidget);
       await tester.tap(find.text('Converteren'));
       await tester.pumpAndSettle();
       expect(result, isTrue);

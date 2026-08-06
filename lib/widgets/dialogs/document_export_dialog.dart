@@ -35,7 +35,10 @@ class DocumentExportDialog extends StatefulWidget {
 
   static Future<void> show(
     BuildContext context, {
-    required Future<String?> Function(PrivacyExportProfile, DocumentExportFormat)
+    required Future<String?> Function(
+      PrivacyExportProfile,
+      DocumentExportFormat,
+    )
     onExport,
     required bool privacyChecksEnabled,
   }) => showDialog(

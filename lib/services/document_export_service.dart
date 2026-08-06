@@ -39,7 +39,10 @@ Future<ExportBundle> buildDocumentExportBundle(
   required MarkdownService markdownService,
   String title = '',
 }) async {
-  final hydrated = await hydrateDocumentChartData(body, projectPath: projectPath);
+  final hydrated = await hydrateDocumentChartData(
+    body,
+    projectPath: projectPath,
+  );
   final deck = DocumentDeckBridge.documentToDeck(
     hydrated,
     projectPath: projectPath,

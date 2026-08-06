@@ -27,14 +27,17 @@ TOKEN_PARAGRAPH van de eerste sectie.
 
 void main() {
   group('build(continuous: true) — doorlopende documentmodus', () {
-    test('rendert de body als één <section class="document">, geen dia', () async {
-      final service = MarpHtmlService(loadAsset: _diskLoader);
-      final html = await service.build(_md, continuous: true);
+    test(
+      'rendert de body als één <section class="document">, geen dia',
+      () async {
+        final service = MarpHtmlService(loadAsset: _diskLoader);
+        final html = await service.build(_md, continuous: true);
 
-      // Precies één documentsectie, en geen enkele diasectie.
-      expect('<section class="document"'.allMatches(html), hasLength(1));
-      expect(html, isNot(contains('<section class="slide')));
-    });
+        // Precies één documentsectie, en geen enkele diasectie.
+        expect('<section class="document"'.allMatches(html), hasLength(1));
+        expect(html, isNot(contains('<section class="slide')));
+      },
+    );
 
     test('de payload draagt de HELE body, niet meerdere losse secties', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);
@@ -65,22 +68,36 @@ void main() {
       expect(html, contains('.document{'));
     });
 
-    test('blijft self-contained, met CSP en zonder externe url() in <style>', () async {
-      final service = MarpHtmlService(loadAsset: _diskLoader);
-      final html = await service.build(_md, continuous: true);
+    test(
+      'blijft self-contained, met CSP en zonder externe url() in <style>',
+      () async {
+        final service = MarpHtmlService(loadAsset: _diskLoader);
+        final html = await service.build(_md, continuous: true);
 
-      expect(html, startsWith('<!doctype html>'));
-      expect(html, contains('http-equiv="Content-Security-Policy"'));
-      expect(html, isNot(contains('<script src')));
+        expect(html, startsWith('<!doctype html>'));
+        expect(html, contains('http-equiv="Content-Security-Policy"'));
+        expect(html, isNot(contains('<script src')));
 
-      // Geen externe http(s)-url() in het <style>-blok (data:-URI's mogen).
-      final styleStart = html.indexOf('<style>');
-      final styleEnd = html.indexOf('</style>', styleStart);
-      final style = html.substring(styleStart, styleEnd);
-      expect(style, isNot(matches(RegExp(r'url\(\s*["' "'" r']?https?://'))));
-      // En geen @font-face die naar buiten wijst.
-      expect(style, isNot(contains('@font-face{font-family:\'X')));
-    });
+        // Geen externe http(s)-url() in het <style>-blok (data:-URI's mogen).
+        final styleStart = html.indexOf('<style>');
+        final styleEnd = html.indexOf('</style>', styleStart);
+        final style = html.substring(styleStart, styleEnd);
+        expect(
+          style,
+          isNot(
+            matches(
+              RegExp(
+                r'url\(\s*["'
+                "'"
+                r']?https?://',
+              ),
+            ),
+          ),
+        );
+        // En geen @font-face die naar buiten wijst.
+        expect(style, isNot(contains('@font-face{font-family:\'X')));
+      },
+    );
   });
 
   test('build(continuous: false) laat de dia-modus onaangetast', () async {

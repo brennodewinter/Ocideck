@@ -59,7 +59,8 @@ void main() {
           expect(
             haystack.contains(token),
             isTrue,
-            reason: '$token uit "${entry.key}" mag in geen enkel dia-veld ontbreken',
+            reason:
+                '$token uit "${entry.key}" mag in geen enkel dia-veld ontbreken',
           );
         }
       });

@@ -13,7 +13,6 @@ import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/improvement_y01.dart';
 import '../models/markdown_document.dart';
-import '../models/markdown_kind.dart';
 import '../models/settings.dart';
 import '../models/seal_record.dart';
 import '../models/slide.dart';
