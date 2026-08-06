@@ -590,15 +590,24 @@ projection contracts):
   `_inferSlideType` sends a heading-led section (`## Kop` + prose, the dominant
   document shape) to an **empty `bullets` slide**, silently dropping the prose
   *and* any table — content that then never reaches OciWacht. `documentToDeck`
-  must instead, per section: **lift the `##` heading into the slide title** (so
-  the remainder is prose-only → a scanned `freeMarkdown` body) and **split a GFM
-  table or ` ```chart ` block into its own typed slide** (prose and a table cannot
-  share one block without the parser dropping one). **Binding invariant:** after
-  deconstruction, *every non-empty source chunk reappears in a typed, scanned
-  field* (`title`, `customMarkdown`, `bullets` or `tableRows`) — zero loss is a
-  privacy requirement here, not a tidiness wish, and a deconstruction-invariant
-  test/gate enforces it. **Warn** that a thematic `---` becomes a slide boundary
-  (loss of intent).
+  therefore **constructs typed slides directly, bypassing `_inferSlideType`**:
+  it walks the body and, per block,
+  - starts a **new `freeMarkdown` slide at each heading** (the heading text stays
+    *verbatim in the slide body*, so it is scanned and the level round-trips) —
+    one slide per heading section keeps the slide-wide escalation *section-local*;
+  - accumulates prose, ` ```mermaid ` and code fences into that section's
+    `freeMarkdown` `customMarkdown` (all scanned as text);
+  - splits a **GFM table into its own `table` slide** (`tableRows`, so the scanner
+    keeps column-header context) and a **` ```chart ` fence into its own `chart`
+    slide** (so chart-data hydration applies).
+
+  **Binding invariant:** after deconstruction, *every non-empty source line
+  reappears in a typed, scanned field* (`customMarkdown` or `tableRows`) — zero
+  loss is a privacy requirement, not a tidiness wish, enforced by a
+  deconstruction-invariant test/gate. The reverse, `deckToDocumentMarkdown`,
+  emits each slide's body (freeMarkdown → its `customMarkdown`; table → a GFM
+  table; chart → a ` ```chart ` fence) joined with blank lines. **Warn** that a
+  thematic `---` becomes a slide boundary (loss of intent).
 
 Rules (from §7, now binding):
 
