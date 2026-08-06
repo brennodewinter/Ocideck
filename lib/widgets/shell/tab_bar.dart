@@ -152,6 +152,21 @@ class _TabChipState extends State<_TabChip> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
+            // Een documenttabblad draagt een klein icoon vooraan, zodat het in
+            // één oogopslag te onderscheiden is van een presentatietabblad. De
+            // soort volgt uit de afwezigheid van `marp: true` (zie MarkdownKind).
+            if (tab.kind.isDocument)
+              Padding(
+                padding: const EdgeInsets.only(right: 5),
+                child: Tooltip(
+                  message: context.l10n.d('Document'),
+                  child: Icon(
+                    Icons.description_outlined,
+                    size: 13,
+                    color: panelText.withValues(alpha: isActive ? 0.9 : 0.6),
+                  ),
+                ),
+              ),
             if (tab.isDirty)
               Container(
                 width: 6,

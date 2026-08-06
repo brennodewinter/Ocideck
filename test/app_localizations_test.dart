@@ -34,6 +34,11 @@ const unchangedInEnglish = {
   // unchangedInAllLanguages.
   'Media (WebRTC)',
   'CVSS',
+  // Het documenttabblad: het Engels houdt 'Document' identiek aan het
+  // Nederlands, maar andere talen vertalen het wél (Italiaans Documento, Duits
+  // Dokument, Fins Asiakirja, …), dus alleen op de Engelse witte lijst — niet op
+  // unchangedInAllLanguages.
+  'Document',
   'https://matrix.to/#/…',
   'https://matrix.example.org',
   '@jij:matrix.example.org',

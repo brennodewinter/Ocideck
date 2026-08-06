@@ -732,6 +732,7 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'E logo di e perfil di estilo aki no a wòrdu hañá i no ta mustra (kaminda: {pad}). Skohe un logo den e settingnan di presentashon.',
+  'Document': 'Dokumento',
   'Nieuw document': 'Dokumento nobo',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Ta konta pa {n} slide di e serie partí aki.',

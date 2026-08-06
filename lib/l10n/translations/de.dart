@@ -732,6 +732,7 @@ const _dutchSourceDe = {
 const _dutchSourceAddDe = {
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Das Logo dieses Stilprofils wurde nicht gefunden und wird nicht angezeigt (Pfad: {pad}). Wählen Sie ein Logo in den Präsentationseinstellungen.',
+  'Document': 'Dokument',
   'Nieuw document': 'Neues Dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Gilt für {n} Folien dieser geteilten Reihe.',

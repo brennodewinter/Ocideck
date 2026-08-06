@@ -1772,6 +1772,7 @@ const _dutchSourceSv = {
 const _dutchSourceAddSv = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logotypen för denna stilprofil hittades inte och visas inte (sökväg: {pad}). Välj en logotyp i presentationsinställningarna.',
+  'Document': 'Dokument',
   'Nieuw document': 'Nytt dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Gäller för {n} bilder i den här uppdelade serien.',

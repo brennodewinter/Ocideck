@@ -1790,6 +1790,7 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo-ul acestui profil de stil nu a fost găsit și nu este afișat (cale: {pad}). Alegeți un logo în setările prezentării.',
+  'Document': 'Document',
   'Nieuw document': 'Document nou',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Se aplică la {n} diapozitive din această serie divizată.',
