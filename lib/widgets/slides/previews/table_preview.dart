@@ -306,6 +306,7 @@ class _TablePreview extends StatelessWidget {
               ),
             ),
             linkColor: header ? headerTextColor : accent,
+            textAlign: _tableAlign(slide, col),
           ),
         );
       }
@@ -583,4 +584,17 @@ double _captionBlockHeight(
         fontFamily: font,
       ) +
       pad * _kCaptionGapFactor;
+}
+
+/// De [TextAlign] voor kolom [col] van [slide], uit de GFM-scheidingsrij
+/// gelezen. `start` (de Flutter-default voor links in LTR) als er geen
+/// uitlijning is opgegeven — een oud deck zonder colons blijft links.
+TextAlign _tableAlign(Slide slide, int col) {
+  final aligns = slide.tableColumnAlignments;
+  if (col >= aligns.length) return TextAlign.start;
+  return switch (aligns[col]) {
+    TableAlign.left => TextAlign.start,
+    TableAlign.center => TextAlign.center,
+    TableAlign.right => TextAlign.end,
+  };
 }

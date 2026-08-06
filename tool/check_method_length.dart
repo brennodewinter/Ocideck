@@ -38,7 +38,8 @@ const Map<String, int> methodLengthBaseline = {
   'lib/services/markdown_parse/markdown_service_parse_directives.dart::_MarkdownParseDirectives._parseBlockDirectives':
       183,
   // +2 (#1162): `anchor`/`nextAnchor` doorgeven aan de Slide-constructor.
-  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 162,
+  // +15: tableDecoded/tableAlignments voor GFM-scheidingsrij-uitlijning.
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 177,
   // Procesverbetering SVG export for statistical chart types.
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,
@@ -61,7 +62,8 @@ const Map<String, int> methodLengthBaseline = {
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
       162,
   // +2 (#1238): ganttScale/ganttSections in copyWith — pure plumbing.
-  'lib/models/slide.dart::Slide.copyWith': 152,
+  // +3: tableColumnAlignments-parameter voor GFM-uitlijning.
+  'lib/models/slide.dart::Slide.copyWith': 155,
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
       183,

@@ -283,7 +283,7 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln('# ${slide.title}');
       buf.writeln();
     }
-    _writeTable(buf, slide.tableRows);
+    _writeTable(buf, slide.tableRows, alignments: slide.tableColumnAlignments);
   }
 
   /// A `signOff` slide (PENTEST_MIAUW 1.6 / §8 A1) carries no per-slide body of

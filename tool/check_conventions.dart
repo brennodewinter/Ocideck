@@ -122,7 +122,11 @@ const Map<String, int> fileSizeBaseline = {
   // copyWith-doorvoer. Pure dataplumbing van een nieuw formaatveld; er valt geen
   // gedrag uit te tillen naar een part.
   // +9 (#1162): de `menu`-enumwaarde met haar doc + de slideTypeMeta-entry.
-  'lib/models/slide.dart': 1036,
+  // +18: de `TableAlign`-enum + het `tableColumnAlignments`-veld met doc,
+  // constructor-, duplicate- en copyWith-doorvoer. Pure dataplumbing van een
+  // nieuw formaatveld (GFM-scheidingsrij-uitlijning); er valt geen gedrag
+  // uit te tillen naar een part.
+  'lib/models/slide.dart': 1054,
   // Procesverbetering module card / reveal wiring in the shell.
   // +1 (#1037): the url_launcher_util import so the play-only landing can open
   // slide links in the browser, like every other presentation surface. The file
@@ -271,7 +275,12 @@ const Map<String, int> classSizeBaseline = {
   // + `ocideck_next`) in `_parseBlockDirectives` — typedef-veld, init en twee
   // parse-takken per veld. Onherleidbare parse-plumbing; de serialisatie zelf zit
   // al in de top-level `_writeSlideDirectives` en telt niet mee.
-  'lib/services/markdown_service.dart#MarkdownService': 2438,
+  // +15: `_decodeTableWithAlignment` (finding.dart) + `tableDecoded`/
+  // `tableAlignments` (parse.dart) + `_writeTable` alignments-parameter
+  // (markdown_service.dart). Onherleidbare codec-plumbing voor de nieuwe
+  // `tableColumnAlignments`-veld; de logica zelf staat in
+  // `markdown_table_codec.dart` en telt niet mee.
+  'lib/services/markdown_service.dart#MarkdownService': 2453,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2145,
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,

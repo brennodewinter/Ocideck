@@ -115,6 +115,12 @@ enum FindingRole { header, detail, evidence }
 
 enum ListStyle { bullets, numbered, checklist, richText }
 
+/// Per-kolomuitlijning van een tabel, opgeslagen in de GFM-scheidingsrij
+/// (`:---`, `:---:`, `---:`). Standaard-GFM, dus elk Marp-gereedschap eert
+/// het — geen OciDeck-token. `left` is de GFM-default bij afwezigheid van
+/// colons, zodat een oud deck zonder uitlijning ongewijzigd opent.
+enum TableAlign { left, center, right }
+
 /// Pure-data metadata for a [SlideType], co-located with the enum so adding a
 /// type is one map entry instead of edits to several scattered switches. UI
 /// behaviour (editor, preview, picker icon) lives in the widget layer's
@@ -522,6 +528,13 @@ class Slide {
   final QualityDisposition quality;
   final List<List<String>> tableRows; // first row is the header
 
+  /// Per-kolomuitlijning van een tabel (zie [TableAlign]). Eén entry per
+  /// kolom; een lege lijst = de GFM-default (links) — een oud deck zonder
+  /// uitlijning opent ongewijzigd. Round-tript via de GFM-scheidingsrij
+  /// (`:---`/`:---:`/`---:`), dus geen OciDeck-token: elk Marp-gereedschap
+  /// leest en schrijft dezelfde uitlijning.
+  final List<TableAlign> tableColumnAlignments;
+
   /// Table slides only: whether the table may be edited live during a
   /// presentation. Off by default, so tables are read-only unless the author
   /// explicitly opts in from the builder. Older presentations lack the token
@@ -691,6 +704,7 @@ class Slide {
     this.privacy,
     this.quality = QualityDisposition.warn,
     this.tableRows = const [],
+    this.tableColumnAlignments = const [],
     this.tableEditable = false,
     this.tableMarkOverdue = false,
     this.ganttScale = ganttScaleAuto,
@@ -853,6 +867,7 @@ class Slide {
       privacy: src.privacy,
       quality: src.quality,
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
+      tableColumnAlignments: List<TableAlign>.from(src.tableColumnAlignments),
       tableEditable: src.tableEditable,
       tableMarkOverdue: src.tableMarkOverdue,
       ganttScale: src.ganttScale,
@@ -922,6 +937,7 @@ class Slide {
     bool clearPrivacy = false,
     QualityDisposition? quality,
     List<List<String>>? tableRows,
+    List<TableAlign>? tableColumnAlignments,
     bool? tableEditable,
     bool? tableMarkOverdue,
     String? ganttScale,
@@ -998,6 +1014,8 @@ class Slide {
       privacy: clearPrivacy ? null : (privacy ?? this.privacy),
       quality: quality ?? this.quality,
       tableRows: tableRows ?? this.tableRows,
+      tableColumnAlignments:
+          tableColumnAlignments ?? this.tableColumnAlignments,
       tableEditable: tableEditable ?? this.tableEditable,
       tableMarkOverdue: tableMarkOverdue ?? this.tableMarkOverdue,
       ganttScale: ganttScale ?? this.ganttScale,

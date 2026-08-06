@@ -15,7 +15,15 @@ import '../../theme/app_theme.dart';
 /// dat houdt de rijhoogte bij de cel, niet bij de bediening.
 enum _RowAction { insertBelow, moveUp, moveDown, delete }
 
-enum _ColumnAction { insertRight, moveLeft, moveRight, delete }
+enum _ColumnAction {
+  insertRight,
+  moveLeft,
+  moveRight,
+  delete,
+  alignLeft,
+  alignCenter,
+  alignRight,
+}
 
 class TableEditor extends StatefulWidget {
   final Slide slide;
@@ -243,6 +251,17 @@ class _TableEditorState extends State<TableEditor> {
       }
     });
     _emit();
+  }
+
+  /// Zet de uitlijning van kolom [c] op [align]. Werkt op het slide-model
+  /// (niet op [_cells], want uitlijning is geen celinhoud) en emit direct.
+  void _setColumnAlign(int c, TableAlign align) {
+    final aligns = List<TableAlign>.from(widget.slide.tableColumnAlignments);
+    while (aligns.length <= c) {
+      aligns.add(TableAlign.left);
+    }
+    aligns[c] = align;
+    widget.onUpdate(widget.slide.copyWith(tableColumnAlignments: aligns));
   }
 
   /// Intercepts the paste shortcut on a cell: Cmd+V (macOS), Ctrl+V
@@ -501,42 +520,82 @@ class _TableEditorState extends State<TableEditor> {
     );
   }
 
-  /// Eén menu per kolom: invoegen-rechts, verplaatsen, verwijderen. Houdt de
-  /// kolomkop-regel op één regel hoogte in plaats van vier knoppen gestapeld.
-  Widget _columnMenu(AppLocalizations l10n, int c) =>
-      PopupMenuButton<_ColumnAction>(
-        tooltip: '${l10n.d('Kolom')} ${c + 1}',
-        icon: Icon(Icons.more_vert, size: 18, color: AppTheme.slate500),
-        padding: EdgeInsets.zero,
-        constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-        itemBuilder: (_) => [
-          PopupMenuItem(
-            value: _ColumnAction.insertRight,
-            child: Text(l10n.d('Kolom rechts invoegen')),
+  /// Eén menu per kolom: invoegen-rechts, verplaatsen, uitlijnen, verwijderen.
+  /// Houdt de kolomkop-regel op één regel hoogte in plaats van knoppen gestapeld.
+  Widget _columnMenu(AppLocalizations l10n, int c) {
+    final current = c < widget.slide.tableColumnAlignments.length
+        ? widget.slide.tableColumnAlignments[c]
+        : TableAlign.left;
+    return PopupMenuButton<_ColumnAction>(
+      tooltip: '${l10n.d('Kolom')} ${c + 1}',
+      icon: Icon(Icons.more_vert, size: 18, color: AppTheme.slate500),
+      padding: EdgeInsets.zero,
+      constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+      itemBuilder: (_) => [
+        PopupMenuItem(
+          value: _ColumnAction.insertRight,
+          child: Text(l10n.d('Kolom rechts invoegen')),
+        ),
+        PopupMenuItem(
+          enabled: c > 0,
+          value: _ColumnAction.moveLeft,
+          child: Text(l10n.d('Kolom naar links')),
+        ),
+        PopupMenuItem(
+          enabled: c < _colCount - 1,
+          value: _ColumnAction.moveRight,
+          child: Text(l10n.d('Kolom naar rechts')),
+        ),
+        const PopupMenuDivider(),
+        PopupMenuItem(
+          value: _ColumnAction.alignLeft,
+          child: _alignItem(
+            l10n.d('Links uitlijnen'),
+            current == TableAlign.left,
           ),
-          PopupMenuItem(
-            enabled: c > 0,
-            value: _ColumnAction.moveLeft,
-            child: Text(l10n.d('Kolom naar links')),
+        ),
+        PopupMenuItem(
+          value: _ColumnAction.alignCenter,
+          child: _alignItem(l10n.d('Centreren'), current == TableAlign.center),
+        ),
+        PopupMenuItem(
+          value: _ColumnAction.alignRight,
+          child: _alignItem(
+            l10n.d('Rechts uitlijnen'),
+            current == TableAlign.right,
           ),
-          PopupMenuItem(
-            enabled: c < _colCount - 1,
-            value: _ColumnAction.moveRight,
-            child: Text(l10n.d('Kolom naar rechts')),
-          ),
-          PopupMenuItem(
-            enabled: _colCount > 1,
-            value: _ColumnAction.delete,
-            child: Text('${l10n.d('Kolom')} ${c + 1} ${l10n.d('verwijderen')}'),
-          ),
-        ],
-        onSelected: (action) => switch (action) {
-          _ColumnAction.insertRight => _insertColumnAt(c + 1),
-          _ColumnAction.moveLeft => _moveColumn(c, -1),
-          _ColumnAction.moveRight => _moveColumn(c, 1),
-          _ColumnAction.delete => _removeColumn(c),
-        },
-      );
+        ),
+        const PopupMenuDivider(),
+        PopupMenuItem(
+          enabled: _colCount > 1,
+          value: _ColumnAction.delete,
+          child: Text('${l10n.d('Kolom')} ${c + 1} ${l10n.d('verwijderen')}'),
+        ),
+      ],
+      onSelected: (action) => switch (action) {
+        _ColumnAction.insertRight => _insertColumnAt(c + 1),
+        _ColumnAction.moveLeft => _moveColumn(c, -1),
+        _ColumnAction.moveRight => _moveColumn(c, 1),
+        _ColumnAction.alignLeft => _setColumnAlign(c, TableAlign.left),
+        _ColumnAction.alignCenter => _setColumnAlign(c, TableAlign.center),
+        _ColumnAction.alignRight => _setColumnAlign(c, TableAlign.right),
+        _ColumnAction.delete => _removeColumn(c),
+      },
+    );
+  }
+
+  /// Een uitlijn-item met een vinkje als [selected] aan staat — Flutter's
+  /// `PopupMenuItem` heeft geen `checked`, dus tekenen we het zelf.
+  Widget _alignItem(String label, bool selected) => Row(
+    children: [
+      if (selected)
+        Icon(Icons.check, size: 18, color: AppTheme.slate500)
+      else
+        const SizedBox(width: 18),
+      const SizedBox(width: 8),
+      Text(label),
+    ],
+  );
 
   Widget _buildRow(int r) {
     final l10n = context.l10n;

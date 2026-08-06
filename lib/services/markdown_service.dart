@@ -362,7 +362,13 @@ class MarkdownService {
   }
 
   /// Write [rows] as a GitHub-flavoured markdown table (first row = header).
-  void _writeTable(StringBuffer buf, List<List<String>> rows) {
+  /// [alignments] zet de GFM-scheidingsrij met colons (`:---`/`:---:`/`---:`);
+  /// leeg of korter dan het aantal kolommen = kale `---` (GFM-default = links).
+  void _writeTable(
+    StringBuffer buf,
+    List<List<String>> rows, {
+    List<TableAlign>? alignments,
+  }) {
     if (rows.isEmpty) return;
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
     if (colCount == 0) return;
@@ -374,7 +380,7 @@ class MarkdownService {
         '| ${List.generate(colCount, (c) => cell(row, c)).join(' | ')} |';
 
     buf.writeln(renderRow(rows.first));
-    buf.writeln('| ${List.generate(colCount, (_) => '---').join(' | ')} |');
+    buf.writeln(markdownTableSeparatorRow(colCount, alignments));
     for (var i = 1; i < rows.length; i++) {
       buf.writeln(renderRow(rows[i]));
     }

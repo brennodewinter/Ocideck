@@ -370,7 +370,21 @@ extension _MarkdownParse on MarkdownService {
 
     final imageSize = _cappedImageSize(body.imageSize, d.styleImageWidth);
 
-    final tableRows = _decodeTableRows(body.tableLines);
+    final tableDecoded = _decodeTableWithAlignment(body.tableLines);
+    final tableRows = tableDecoded.rows;
+    // Vul de uitlijning aan tot het aantal kolommen: een scheidingsrij zonder
+    // colons leverde een lege lijst op, en een raggede scheidingsrij een
+    // kortere — beide behandelen we als "links" (de GFM-default).
+    final colCount = tableRows.fold<int>(
+      0,
+      (m, r) => r.length > m ? r.length : m,
+    );
+    final tableAlignments = List<TableAlign>.generate(
+      colCount,
+      (c) => c < tableDecoded.alignments.length
+          ? tableDecoded.alignments[c]
+          : TableAlign.left,
+    );
 
     final type = _inferSlideType(
       cssClass: d.cssClass,
@@ -460,6 +474,7 @@ extension _MarkdownParse on MarkdownService {
       privacy: d.privacy,
       quality: d.quality,
       tableRows: type.backedByTable ? tableRows : const [],
+      tableColumnAlignments: type.backedByTable ? tableAlignments : const [],
       tableEditable:
           type == SlideType.table && classTokens.contains('table-editable'),
       tableMarkOverdue:
