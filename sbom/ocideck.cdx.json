@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:ef7e07ba-c969-5e7a-873c-e45ae18d6929",
+  "serialNumber": "urn:uuid:adbd6794-85e9-5605-891e-0a5ae5e7bc70",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-06T19:38:41.874218Z",
+    "timestamp": "2026-08-06T22:55:20.758272Z",
     "tools": {
       "components": [
         {
@@ -8827,11 +8827,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:npm/mermaid@11.16.0",
+      "bom-ref": "pkg:npm/mermaid@11.16.1",
       "type": "library",
       "name": "mermaid",
-      "version": "11.16.0",
-      "purl": "pkg:npm/mermaid@11.16.0",
+      "version": "11.16.1",
+      "purl": "pkg:npm/mermaid@11.16.1",
       "licenses": [
         {
           "license": {
@@ -8842,13 +8842,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "74d7c46dabca328c2294733910a8aa1ed0c37451776e8d5295da38a2b758fb9b"
+          "content": "18327bef70d96fb505fe7287d9f6a7362ebf07ff6576ddfaffb1a06f3e1a2954"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js"
+          "url": "https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"
         }
       ],
       "properties": [
@@ -9055,7 +9055,7 @@
         "pkg:npm/highlight.js@11.11.1",
         "pkg:npm/marked@18.0.5",
         "pkg:npm/mathjax@3.2.2",
-        "pkg:npm/mermaid@11.16.0",
+        "pkg:npm/mermaid@11.16.1",
         "pkg:pub/analyzer@12.1.0",
         "pkg:pub/archive@4.0.9",
         "pkg:pub/characters@1.4.1",

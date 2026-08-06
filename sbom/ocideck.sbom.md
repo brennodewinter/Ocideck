@@ -242,7 +242,7 @@ The JSON documents carry **733 dependency relations** between these components: 
 | highlight.js | 11.11.1 | BSD-3-Clause | — | `pkg:npm/highlight.js@11.11.1` |
 | marked | 18.0.5 | MIT | — | `pkg:npm/marked@18.0.5` |
 | mathjax | 3.2.2 | Apache-2.0 | — | `pkg:npm/mathjax@3.2.2` |
-| mermaid | 11.16.0 | MIT | — | `pkg:npm/mermaid@11.16.0` |
+| mermaid | 11.16.1 | MIT | — | `pkg:npm/mermaid@11.16.1` |
 
 ### Vendored export assets (1)
 
