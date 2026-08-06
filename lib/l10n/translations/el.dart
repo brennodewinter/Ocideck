@@ -1798,6 +1798,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Nieuw document': 'Νέο έγγραφο',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Ισχύει για {n} διαφάνειες αυτής της χωρισμένης σειράς.',
   'Los automatisch op wat kan': 'Επιδιόρθωση όσων γίνονται αυτόματα',

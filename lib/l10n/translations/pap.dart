@@ -730,6 +730,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Nieuw document': 'Dokumento nobo',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Ta konta pa {n} slide di e serie partí aki.',
   'Los automatisch op wat kan': 'Drecha loke por outomatisá',

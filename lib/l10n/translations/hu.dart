@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Nieuw document': 'Új dokumentum',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Ennek az osztott sorozatnak {n} diájára vonatkozik.',
   'Los automatisch op wat kan': 'Javítsd, ami automatizálható',

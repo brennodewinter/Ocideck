@@ -730,6 +730,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Nieuw document': 'Neues Dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Gilt für {n} Folien dieser geteilten Reihe.',
   'Los automatisch op wat kan': 'Beheben, was automatisch geht',

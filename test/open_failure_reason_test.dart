@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/file_service.dart';
+import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -64,10 +65,11 @@ void main() {
   });
 
   test(
-    'een leesbaar bestand dat geen presentatie is, houdt zijn eigen uitkomst',
+    'een leesbaar niet-marp .md opent als document (de poort is een router)',
     () async {
-      // Dit geval had al een eigen melding en houdt die: hier gaat het erom dat
-      // het niet stilletjes in de nieuwe, algemenere afhandeling verdwijnt.
+      // Vroeger een `notPresentation`-weigering; sinds de documentmodus opent zo'n
+      // bestand als plat document (DOCUMENT_MODE.md §2) i.p.v. het te weigeren —
+      // het verdwijnt dus niet stil, het krijgt juist een tabblad.
       final pad = '${temp.path}/gewoon.md';
       File(pad).writeAsStringSync('# Zomaar een notitie\n\nGeen marp-kop.\n');
 
@@ -77,8 +79,9 @@ void main() {
           .read(tabsProvider.notifier)
           .openFileByPath(pad);
 
-      expect(uitkomst, OpenResult.notAPresentation);
-      expect(container.read(openFailureProvider), OpenFailure.notPresentation);
+      expect(uitkomst, OpenResult.opened);
+      expect(container.read(openFailureProvider), isNull);
+      expect(container.read(tabsProvider).current!.kind, MarkdownKind.document);
     },
   );
 

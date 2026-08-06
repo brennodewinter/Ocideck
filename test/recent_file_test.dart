@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/models/recent_file.dart';
 
 void main() {
@@ -55,6 +56,28 @@ void main() {
     expect(
       RecentFile.decodeList('[{"path":"/a.md","tlp":"paars"}]').single.tlp,
       TlpLevel.none,
+    );
+  });
+
+  test('document-soort round-tript door de codec', () {
+    final doc = RecentFile(
+      path: '/rapporten/memo.md',
+      kind: MarkdownKind.document,
+    );
+    final back = RecentFile.decodeList(RecentFile.encodeList([doc])).single;
+    expect(back.kind, MarkdownKind.document);
+  });
+
+  test('een presentatie schrijft geen kind-sleutel (byte-stabiele opslag)', () {
+    const deck = RecentFile(path: '/decks/a.md');
+    expect(deck.kind, MarkdownKind.presentation);
+    expect(deck.toJson().containsKey('kind'), isFalse);
+  });
+
+  test('oude entry zonder kind leest terug als presentatie', () {
+    expect(
+      RecentFile.decodeList('[{"path":"/a.md"}]').single.kind,
+      MarkdownKind.presentation,
     );
   });
 }

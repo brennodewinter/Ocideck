@@ -1770,6 +1770,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Nieuw document': 'Nytt dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Gäller för {n} bilder i den här uppdelade serien.',
   'Los automatisch op wat kan': 'Åtgärda det som kan automatiseras',

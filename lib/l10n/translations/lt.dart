@@ -1778,6 +1778,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Nieuw document': 'Naujas dokumentas',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Taikoma {n} skaidrėms iš šios padalytos sekos.',
   'Los automatisch op wat kan': 'Taisyti, ką galima automatiškai',

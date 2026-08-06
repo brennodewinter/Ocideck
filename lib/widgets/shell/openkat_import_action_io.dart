@@ -32,7 +32,8 @@ Future<OpenKatImportOutcome?> importOpenKatReports(
   if (!supportsLocalProjectFolders) return null;
   final l10n = context.l10n;
   final current = ref.read(tabsProvider).current;
-  final activeDeck = current?.deckNotifier.currentState.deck;
+  // deckNotifierOrNull: op een documenttabblad is er geen deck om bij te werken.
+  final activeDeck = current?.deckNotifierOrNull?.currentState.deck;
   final updating = activeDeck != null && isOpenKatGeneratedDeck(activeDeck);
   final remembered = updating && current != null
       ? ref.read(openKatProvider.notifier).sessionForDeck(current.recoveryId)
@@ -119,7 +120,12 @@ bool _recipeMatchesDeck(OpenKatWizardRecipe recipe, Deck deck) {
 }
 
 bool hasActiveOpenKatReport(WidgetRef ref) {
-  final deck = ref.read(tabsProvider).current?.deckNotifier.currentState.deck;
+  final deck = ref
+      .read(tabsProvider)
+      .current
+      ?.deckNotifierOrNull
+      ?.currentState
+      .deck;
   return deck != null && isOpenKatGeneratedDeck(deck);
 }
 

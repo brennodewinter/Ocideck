@@ -44,7 +44,11 @@ void main() {
         'collabChatOpenProvider',
       };
 
-      final appShell = File('lib/widgets/app_shell.dart').readAsStringSync();
+      // `_tabScope` (met de per-tab overrides) woont in de tab_bar-part van de
+      // app_shell-library; lees beide, zodat de scan hem vindt waar hij ook staat.
+      final appShell =
+          File('lib/widgets/app_shell.dart').readAsStringSync() +
+          File('lib/widgets/shell/tab_bar.dart').readAsStringSync();
       final readPattern = RegExp(
         r'ref\.(?:watch|read|listen)\(\s*(?:deckProvider|editorProvider)',
       );

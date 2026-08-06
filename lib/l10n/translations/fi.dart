@@ -1771,6 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Nieuw document': 'Uusi asiakirja',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Koskee tämän jaetun sarjan {n} diaa.',
   'Los automatisch op wat kan': 'Korjaa, mikä onnistuu automaattisesti',

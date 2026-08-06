@@ -454,6 +454,14 @@ class MarpHtmlService {
     });
   }
 
+  /// De zelfstandige SVG van één grafiek-spec (los van slide/body), voor de
+  /// documentweergave — dezelfde renderlaag als de HTML-export (§4.2).
+  static String chartSpecSvg(
+    ChartSpec spec,
+    ThemeProfile? theme, {
+    ImprovementY01Metric y01 = ImprovementY01Metric.empty,
+  }) => _chartSvg(spec, theme, y01: y01);
+
   // ── Question → HTML ───────────────────────────────────────────────────────
 
   static final RegExp _questionFence = RegExp(

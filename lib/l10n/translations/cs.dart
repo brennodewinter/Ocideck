@@ -1774,6 +1774,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Nieuw document': 'Nový dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Platí pro {n} snímků této rozdělené řady.',
   'Los automatisch op wat kan': 'Opravit, co lze automaticky',

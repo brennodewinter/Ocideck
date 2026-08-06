@@ -1,0 +1,459 @@
+# OciDeck — Document mode: product & format design
+
+*A second kind of file next to the Marp deck: a **flowing Markdown document**
+you edit like a word processor — headings, tables, images, charts, gantt,
+mermaid — where the file on disk stays a plain, maximally interchangeable `.md`
+that any Markdown reader opens.*
+
+> **Status:** design — not yet implemented · **Status last reviewed:** 2026-08-05 · **Published by:** Stichting LibreKAT
+
+> **This is a design doc, not shipping behaviour.** It is the *format-first*
+> gate: the disk contract and the shared-editor decision must be signed off
+> here (by the core-values guardian and the software architect) before any code
+> lands. When implementation arrives, the contributor docs
+> ([`ARCHITECTURE.md`](../ARCHITECTURE.md), [`SOURCE_MAP.md`](../SOURCE_MAP.md),
+> [`FILE_FORMAT.md`](../FILE_FORMAT.md), [`USER_GUIDE.md`](../USER_GUIDE.md)) and
+> the [`CHANGELOG.md`](../../CHANGELOG.md) carry the truth. This document remains
+> the *why* and the *format contract*.
+
+> Sibling design docs: [`GANTT_SLIDETYPE.md`](GANTT_SLIDETYPE.md) and
+> [`PROCESS_IMPROVEMENT.md`](PROCESS_IMPROVEMENT.md) (rich content this mode
+> re-uses), [`OCIWACHT.md`](OCIWACHT.md) (the privacy projection every export
+> must pass through).
+
+---
+
+## 1. Purpose & scope
+
+Today OciDeck reads and writes **Marp-compatible** Markdown only, by design: a
+`.md` without `marp: true` is refused at the identity gate
+([`file_service.dart`](../../lib/services/file_service.dart) — `OpenFailure.notPresentation`).
+This document proposes a **document mode**: a second file *kind* in which the
+same application edits an ordinary, flowing Markdown document — a report, a
+memo, a note — with the full-screen Markdown editor (raw **and** visual) at the
+centre, and the same rich content the slide side already offers (tables,
+images, mermaid, gantt, charts, math).
+
+### 1.1 The reframe (why this belongs in OciDeck)
+
+The brief asked for a document mode that *"must not be inferior to a
+professional word processor."* Taken literally that invites feature-parity with
+Word, which is the wrong target. The right target — and the reason this belongs
+in OciDeck rather than in yet another editor — is the **trust promise**:
+
+> The same responsible professional (pentester, adviser, researcher, civil
+> servant) who builds a deck in OciDeck also writes reports and memos. Those
+> deserve the *same* promise the deck already gets: **local-first, no lock-in,
+> an OciWacht privacy scan before it leaves the machine, and a plain,
+> interchangeable Markdown master.** Today that person writes the report in a
+> cloud word processor (lock-in, no personal-data check before sharing) and the
+> deck in OciDeck. Document mode closes that gap.
+
+So the success measure is the **promise**, not Word-parity. Any feature whose
+only justification is *"Word has it"* is out of scope. In interface and docs we
+do **not** claim *"not inferior to Word"*; we claim local / no-lock-in /
+privacy-scanned / interchangeable text.
+
+### 1.2 The thesis this mode expresses (not threatens)
+
+Document mode is the *purest* form of OciDeck's core idea — *Markdown as the
+simple, maximally interchangeable base; everything specific lives beside it* —
+because a document is exactly that: a flat `.md` that opens in GitHub, VS Code
+or any Markdown reader, with images in `images/`, chart data in `data/*.json`,
+and diagrams as fenced blocks. The **only** danger is re-use-for-convenience:
+if a document rides the Marp *deck* pipeline it drags `marp: true`, the
+`---`-into-slides split, and the zero-width-space dash-escape into an innocent
+text file — and then it is no longer a document but *deck exhaust*. Guarding
+against that is what §3 is for.
+
+---
+
+## 2. Architecture decision: a Document abstraction, not a Deck flag
+
+**Decision:** model a document as a **separate `Document` abstraction next to
+`Deck`, built on the already-existing lossless source model
+[`MarkdownSourceDocument`](../../lib/models/markdown_source_document.dart)** — a
+`Deck` with a "document" boolean is explicitly rejected.
+
+Why:
+
+- `Deck` is a **deconstructed** model: a `List<Slide>` of typed slides plus
+  presentation metadata (seal, signature, standards, TLP, rehearsal…). A
+  document is by definition **byte-faithful** to a flat `.md`.
+  `MarkdownSourceDocument` already holds `source` verbatim and normalises
+  *nothing*; open→save without an edit is byte-identical — strictly better than
+  the deck path can promise.
+- A mode boolean would thread through dozens of `switch`/`if` sites in the
+  model, serialiser and tab layer — the *"a flag interpreted wrong in thirty
+  places"* smell.
+
+**The seam is at tab level.** A tab carries either a deck session or a document
+session (a sealed content type on `TabInfo`: `DeckTab | DocumentTab`). The
+shared fields (origin, collaboration session, recovery, dirty-tracking, label)
+stay on `TabInfo`; the kind-specific notifier hangs off the variant. This
+re-uses the whole substrate — storage, privacy projection, export,
+undo/dirty/atomic-write — without imposing the `Deck` model on flowing text.
+
+The identity gate becomes a **router, not a wall**: the single open chokepoint
+returns a sum type (*deck-open* **or** *document-open*) instead of *deck-open*
+**or** *failure*; absence of `marp: true` routes to the document path. The user
+chooses nothing on open. (New-file is the only place a choice is offered:
+"New presentation" vs "New document".)
+
+### 2.1 One editor, used in both modes (no double code)
+
+**Product decision (owner):** the Markdown editing surface is **built once and
+shared** between document mode and the presentation side. There is no separate
+"document editor" and "deck editor"; there is one full-screen, live,
+raw+visual Markdown editing surface — call it the **Markdown editing surface** —
+used by:
+
+1. document mode (the whole document), and
+2. the presentation side wherever it edits Markdown/source (the raw deck source
+   view and `freeMarkdown` slides).
+
+This promotes *"no third render path"* from a red line to the **organising
+principle**: the same insert palette, the same rich-block renderers, the same
+find bar and outline serve both. The typed slide editors (bullets, finding,
+chart…) stay as they are; the *shared* piece is the Markdown/source/visual
+surface, which this work is expected to raise to word-processor quality for
+**both** sides.
+
+> Risk to watch: "shared" must not mean forcing the flowing-document paradigm
+> onto typed slides, nor vice versa. The shared component is the Markdown
+> surface and its block renderers — not the slide-vs-document layout. Keep the
+> contract at "given Markdown text (+ an asset root + a theme), edit and render
+> it"; both callers supply those.
+
+---
+
+## 3. The disk contract (format-first — the heart of this doc)
+
+A document on disk is a **plain `.md`**. This contract *is* the reason the
+feature exists; if it cannot be guaranteed byte-clean, the feature does not
+ship.
+
+**MUST:**
+
+- **No `marp: true`, no `theme:`, no `paginate:`** injected. (The deck
+  serialiser always writes these — see
+  [`markdown_service.dart`](../../lib/services/markdown_service.dart) around the
+  front-matter writer. The document path uses its **own** flat serialise route,
+  never `generateDeck`.)
+- **No forced slide `---` separators** and **no `themes/`/`logos/` project
+  scaffold** (`_writeProject` is presentation-only).
+- **No zero-width-space dash-escape.** `escapeDeckMarkdownDashLines`
+  ([`deck_markdown_dashes.dart`](../../lib/utils/deck_markdown_dashes.dart))
+  exists so a `---` inside a `freeMarkdown` body is not read as a slide
+  separator. A document is **not** split on `---`, so this function is **never**
+  called on a document body — a `---` stays a real thematic break, byte-clean.
+- **No byte-changing normalisation** on save. Not the CRLF→LF / NBSP→space /
+  invisible-character strip that `normalizeRichTextMarkdownForStorage` applies
+  to slide bodies. The model is `MarkdownSourceDocument`; the serialise is
+  *"write the bytes"*.
+- **Author-set front matter is preserved byte-identically.** A document may
+  legitimately carry Jekyll/Hugo/Obsidian front matter the author wrote;
+  `mergeFrontMatter` already preserves unknown keys. The document path injects
+  **no** owned keys.
+
+**MUST NOT:**
+
+- **No new on-disk marker** to "claim" a `.md` as OciDeck's — no `kind:`,
+  no `ocideck:` front-matter key. That would pollute every README and break
+  maximum interchangeability. **The discriminator is the *absence* of
+  `marp: true`.**
+
+**Consequences to verify (open questions the gate must close):**
+
+- The truncation heuristic `_looksTruncated`
+  ([`file_service_open.dart`](../../lib/services/file_service_open.dart))
+  assumes a front-matter header with a slide body; a plain document with no
+  `---` must be shown, provably, not to trip it.
+- The identity gate widening keeps the existing order: size-cap → UTF-8 read →
+  `MarkdownSafetyScanner` (fail-closed) → path containment run **before** the
+  marp check, so a document inherits the safety scan automatically. (Verified in
+  exploration: the scan runs ahead of the marp gate.)
+
+### 3.1 The gate test
+
+A **zero-body-loss round-trip test** is the acceptance gate for §3: open →
+(no edit) → save yields **byte-identical** output; and every construct in §4
+survives open→save unchanged. This is the mirror image of the existing
+[`test/roundtrip_content_loss_test.dart`](../../test/roundtrip_content_loss_test.dart),
+which *documents* what the deck path loses — the document path must lose
+**nothing**.
+
+---
+
+## 4. Rich content in a document
+
+Rich content is expressed as **portable Markdown constructs** so the `.md`
+opens fine anywhere. The editor makes inserting them easy; the file stays plain.
+Ordered by how well they degrade in a foreign reader ("the interchangeability
+ladder"):
+
+| Construct | On disk | Degrades outside OciDeck to | Re-use |
+|---|---|---|---|
+| **Tables** | GFM pipe table | a real table | `TableEditor` via a text-in/text-out adapter |
+| **Images** | `![alt](images/x.png)` | a real image | shared block helper; asset copied into `images/` |
+| **Mermaid** | ` ```mermaid ` fence | rendered on GitHub/GitLab, else a labelled code block | `DocMermaidView` + `MermaidRenderService` (already works in the reader) |
+| **Gantt** | Markdown table (+ portable marker) | a readable table | `ganttTableToMermaid` (pure) → mermaid render |
+| **Math** | `$$…$$` | source text | shared block helper (lift from slide layer) |
+| **Charts** | ` ```chart ` fence + `data/*.json` | **raw JSON** (does not render) | see §4.2 |
+
+### 4.1 Gantt: the portable marker
+
+In slides a gantt is a portable Markdown table **plus** a per-slide
+`_class:gantt` token. A document has no per-slide `_class`. **Do not invent a
+document-only token.** Format-first choice to settle at the gate, both of which
+leave readable content behind:
+
+- **(a) Emit ` ```mermaid ` gantt** — fully portable, renders as a real gantt on
+  GitHub/GitLab, degrades to a code block; or
+- **(b) Keep the readable table** and recognise it by its fixed header shape (an
+  HTML comment above it, which Marp/foreign tools ignore, can carry the two
+  options `scale`/`sections`).
+
+Either way the gantt→mermaid derivation must be **emitted into the document
+export path** (§6); today gantt renders only via the Flutter preview, so
+without this a gantt would silently vanish on HTML/PDF export.
+
+### 4.2 Charts: full-fledged, pretty in visual mode, double-click to edit
+
+**Owner decision:** charts are supported **full-fledged**, identical mechanism
+to the slide side (no second chart mechanism). On disk: a ` ```chart ` fence
+with data externalised to `data/*.json` (readable, no base64, no binary).
+
+This is the **one** genuine interchangeability tension, and we name it in the
+open: unlike mermaid (widely recognised) or a gantt table (a real table), a
+` ```chart ` fence shows **raw JSON** in a foreign Markdown reader. It does not
+cross the hard red line (it stays plain, parseable text with external data — no
+lock-in, no binary), but it sits on the weakest point of "maximally
+interchangeable". Accepted because (a) it is identical to the slide mechanism,
+and (b) the user can always get a rendered, portable artefact via export (§6).
+
+**Visual behaviour (owner decision):** in the visual (WYSIWYG) mode a chart is
+shown as its **fully rendered, pretty** form — the same render the slide side
+draws — as an embedded card; **double-click opens the chart editor**. "The
+picture is always nicer for the user." This requires **unlocking the rich chart
+renderer and editor from their `Slide` binding**:
+
+- The chart preview family is currently `part of` `slide_preview.dart` and takes
+  a `Slide`; the `ChartEditor` mutates a `Slide`. Both need a **`ChartSpec`/block
+  contract** (spec in, block text out) so they render and edit inside a document
+  with only a `ThemeProfile` (and, for the Procesverbetering chart types, the
+  deck-wide `ImprovementY01Metric` — a document supplies a theme + y01 context or
+  falls back to defaults).
+
+### 4.3 The hybrid embed card (the one genuinely new piece)
+
+The visual mode renders prose as WYSIWYG **but** shows table / chart / gantt /
+mermaid / image / block-math as **atomic, fully-rendered embed cards with an
+"Edit" affordance** (double-click, or an explicit button). The prose goes
+through the visual bridge; the blocks the bridge cannot round-trip losslessly
+(tables, raw HTML, footnotes — the known `markdownVisualLimitations`) are
+**never touched by the bridge**. The source text (`MarkdownSourceDocument`) is
+**always** the truth. This is the rule that lets a WYSIWYG mode exist without
+ever silently corrupting a table.
+
+---
+
+## 5. Storage & working directory
+
+The storage layer is **already content-agnostic** and re-used wholesale:
+
+- `StorageConnection` (Local / WebDAV / S3 / Git, incl. the git-clone working
+  directory) carries a document `.md` as well as a deck `.md`; no presentation
+  assumption lives there.
+- The **working directory is the `projectPath` concept that already exists**:
+  images in `images/`, chart data in `data/*.json`, **beside** the `.md` —
+  exactly like a deck. No new working directory, no new backend, no database.
+- The whole `FileService` mechanism transfers 1:1: fail-closed
+  `MarkdownSafetyScanner`, size-caps, `writeStringAtomic` ("never half-written"),
+  the containment guard (`resolveContainedRealPath` refuses `../` and absolute
+  paths, follows symlinks), and the sidecar machinery (path =
+  `setExtension(mdPath, …)`).
+
+Small required changes:
+
+- **`RecentFile` gains a `kind` discriminator** (document | presentation) so the
+  recent list shows the right icon/label and never says "12 slides" for a
+  document (`slideCount` stays 0/meaningless).
+- **Not-yet-saved documents:** re-use the web-asset lifecycle (`mem:` assets)
+  so an inserted image lives in memory until first save, then materialises into
+  `images/`; the existing "you will lose this image" warning already covers it.
+- **First save = fewest steps:** default filename from the first H1, like a word
+  processor names a document after its heading.
+- **Web parity** stays deliberately weaker (save = `.md` download only; no
+  sidecars/assets) — accepted for now, communicated honestly.
+
+---
+
+## 6. Export
+
+**Decision (owner): in-tree only — the `.md` itself + continuous HTML +
+print-to-PDF. No pandoc, no bundled converter, no `.docx`/`.odt` for now.**
+
+**Pandoc / LibreOffice: rejected**, for three converging reasons:
+
+1. A native subprocess **escapes NetGuard interception** and can itself fetch
+   external images/CSS over URLs — egress OciDeck cannot see. (The subprocess
+   *pattern* is proven safe for git in
+   [`git_cli_io.dart`](../../lib/services/git/git_cli_io.dart) — shell-less,
+   `includeParentEnvironment:false`, timed out — but git was *empirically*
+   verified not to network; pandoc/LibreOffice would each need that same proof
+   and would still fail #2 and #3.)
+2. Not bundled and not guaranteed present = a hidden external binary dependency
+   and de-facto lock-in on a third-party tool; bundling rebuilds the
+   provisioning model that was deliberately removed in 2026.
+3. Desktop-only (`dart:io Process` does not exist on web) — web loses the
+   feature.
+
+And it is **unnecessary**: the user *already has* the plain `.md`, so every
+pandoc target is open to them on their **own** machine with their **own**
+pandoc — precisely the thesis working as intended. Document that; do not take
+the dependency on ourselves.
+
+**What we build instead:**
+
+- **Continuous HTML** is the natural foundation. `MarpHtmlService` is already a
+  self-contained, offline, CSP-locked renderer with tables/images/charts/
+  mermaid/gantt/math/highlight. The only change is a render **mode** in
+  `_renderSections`: one continuous flow instead of per-`---`
+  `<section class="slide">`, plus document CSS (page width, margins, typography)
+  instead of the 16:9 slide CSS. The marked/mermaid/mathjax/chart render layer
+  is unchanged.
+- **PDF** = continuous, with **selectable text and an accessibility tree**, via
+  print-to-PDF from that HTML — **not** the existing image-per-page PDF path
+  (which pastes one PNG per page: no text, no WCAG). The accessibility promise
+  currently lives only in the HTML export; the document PDF inherits it.
+- **Non-negotiable:** every document export goes through
+  `buildExportBundle → AudienceDeck` (OciWacht redaction), enforced by the
+  compile-time audience-boundary gate. A document export that touches raw source
+  instead of the projected content leaks personal data past OciWacht. Close the
+  gantt→mermaid gap (§4.1) in this path.
+
+Should `.docx`/`.odt` ever be wanted, it is written **in-tree** via
+`package:archive` exactly as the PPTX writer already hand-builds OOXML — a
+separate, later decision, never an external converter.
+
+---
+
+## 7. Conversion presentation ⇄ document
+
+One **headless service** (`DocumentDeckBridge`) with two pure, isolation-tested
+functions — **not** spread across the notifiers, because conversion crosses the
+round-trip and projection contracts:
+
+- `documentToDeckMarkdown` — the flat document becomes a deck by *interpreting*
+  `---` (or `##`) as slide breaks; warn that a thematic `---` thereby becomes a
+  slide boundary (loss of intent).
+- `deckToDocumentMarkdown` — serialise the deck, **strip** the marp front
+  matter / theme / `_class` / slide `---`, and thread the bodies into one
+  flowing document (lossless on text, loses slide-structure semantics).
+
+Rules:
+
+- Both are **explicit user actions that produce a NEW file/tab**, never an
+  implicit in-place mode toggle. The round-trip is **asymmetric and lossy** (a
+  deck deconstructs to typed slides; a document is verbatim), so a silent
+  back-and-forth would quietly discard content/formatting.
+- **Always a copy + preview + an explicit list of what is dropped.** The brake
+  is not a scary confirmation but reassurance: *"We make a copy; your original
+  file stays unchanged."* For document→presentation, show the proposed split
+  ("12 slides based on Heading 1") with a granularity choice **before**
+  committing — guessing slide breaks must never be silent.
+- **The seal never travels** to a converted file (that would be a false
+  integrity claim); a converted file is a new artefact with its own (or no)
+  seal.
+- No lossless-bijection promise. The two formats are genuinely different
+  intents; claiming a perfect bridge would be the real lie.
+
+---
+
+## 8. Red lines (unanimous across the lenses)
+
+1. **Flat `.md` on disk** — no `marp: true`, no forced slide `---`, no ZWSP
+   dash-escape, no `themes/` scaffold, no byte-changing normalisation. Own
+   serialise path, not `generateDeck`. *Not guaranteeable byte-clean = do not
+   ship.*
+2. **No new on-disk marker** to recognise a document — absence of `marp: true`.
+3. **Body round-trips byte-identically** — model = `MarkdownSourceDocument`;
+   the gate is the zero-loss test (§3.1).
+4. **No third render path, no second chart mechanism** — share with the slide
+   side or do not build (else permanent drift).
+5. **Export only via `buildExportBundle → AudienceDeck`** — never raw document
+   text around OciWacht.
+6. **No pandoc / bundled external converter**; the safety scanner stays
+   fail-closed ahead of every document path; path containment applies unchanged
+   to linked images/files.
+7. **No lossy WYSIWYG that silently drops a table** — hybrid embed cards or fall
+   back to raw, nothing in between.
+8. Every new visible string via `l10n.d('…')` in all languages; design controls
+   for the longest language (segmented control, insert menu, badges), no fixed
+   widths.
+
+---
+
+## 9. Phased roadmap
+
+Bigger-at-once than a minimal MVP (owner decision), but **building on what
+exists**, with the shared editor as the spine. Each phase is separately
+deliverable and valuable.
+
+- **Phase 0 — Format-first (this doc, no code).** Sign off the disk contract
+  (§3), the gantt/chart marker choice (§4.1), and the shared-editor mandate
+  (§2.1). Define the zero-body-loss round-trip test as the gate. Guardian +
+  architect sign off. *Deliverable: this design, agreed, + the gate test.*
+- **Phase 1 — Foundation.** `Document` abstraction over `MarkdownSourceDocument`;
+  flat serialise path (no marp scaffold); identity gate → router; sealed
+  `TabInfo` content; `RecentFile.kind`; shell stripped of the slide strip and
+  "Slide N" wording in document mode. *Deliverable: open/edit/save a flat `.md`
+  losslessly.*
+- **Phase 2 — Shared render + edit layer (highest leverage).** Consolidate the
+  doubled rich-block renderers (images `![]()`, block-math, syntax-highlighting,
+  ` ```chart ` fence) into **one** layer the reader and the slide `freeMarkdown`
+  preview both consume; `part`-split `document_markdown_view.dart` before the
+  1000-line ratchet. Establish the shared Markdown editing surface (live, no
+  "Apply" wall). *Deliverable: one editor + one renderer, both modes.*
+- **Phase 3 — Insert like a word processor.** "+" button **and** `/`-slash on the
+  command palette, extended with chart / gantt / mermaid / formula;
+  `TableEditor`/`ChartEditor` given a text/block callback; hybrid embed cards in
+  visual mode with double-click-to-edit (§4.3); charts rendered pretty (§4.2).
+  *Deliverable: rich insertion producing portable Markdown.*
+- **Phase 4 — Navigation & export.** Outline rail (`buildMarkdownOutline`),
+  `MarkdownFindBar`, reading-time status bar; continuous HTML (`MarpHtmlService`
+  flow mode + document CSS) and selectable PDF, through the OciWacht gate;
+  gantt→mermaid gap closed. *Deliverable: professional-looking export.*
+- **Phase 5 — Conversion.** `DocumentDeckBridge`: non-destructive, always-copy,
+  preview dialog, drop-list. *Deliverable: two clean modes over one backbone.*
+
+## 10. Resolved decisions & what re-uses what
+
+**Resolved (owner, 2026-08-05):**
+
+- **Ambition:** bigger-at-once, building on existing pieces; **one shared editor
+  across document and presentation modes**, no double code, maximum UX (§2.1).
+- **Charts:** full-fledged, identical to the slide mechanism; visual mode shows
+  the pretty rendered chart, double-click to edit (§4.2).
+- **Export:** in-tree `.md` + HTML + print-PDF; no pandoc, no `.docx`/`.odt` for
+  now (§6).
+
+**Still open for Phase 0 sign-off:**
+
+- Gantt marker: ` ```mermaid ` gantt vs recognised table (§4.1).
+- Exact shape of the shared editing-surface contract so it serves both typed
+  slides and flowing documents without paradigm bleed (§2.1 risk note).
+
+**Building blocks re-used (verified in exploration):**
+
+| Need | Existing building block |
+|---|---|
+| Lossless source model | [`markdown_source_document.dart`](../../lib/models/markdown_source_document.dart) |
+| Flowing renderer | [`document_markdown_view.dart`](../../lib/widgets/reader/document_markdown_view.dart), [`doc_mermaid_view.dart`](../../lib/widgets/reader/doc_mermaid_view.dart) |
+| Editor surface (raw + WYSIWYG notes) | [`lib/widgets/markdown_editor/`](../../lib/widgets/markdown_editor/) |
+| Outline / TOC | [`markdown_outline.dart`](../../lib/models/markdown_outline.dart) (`buildMarkdownOutline`) |
+| Insert palette | the existing Markdown command palette |
+| Storage & working dir | [`storage_connection.dart`](../../lib/models/storage_connection.dart), `FileService`, `projectPath` |
+| Export + privacy gate | [`export_service.dart`](../../lib/services/export_service.dart), `buildExportBundle → AudienceDeck` |
+| Rich content | `MermaidRenderService`, `ganttTableToMermaid`, the chart preview/editor family (to be unbound from `Slide`) |

@@ -1793,6 +1793,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Nieuw document': 'Нов документ',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Отнася се за {n} слайда от тази разделена поредица.',
   'Los automatisch op wat kan': 'Поправи каквото може автоматично',

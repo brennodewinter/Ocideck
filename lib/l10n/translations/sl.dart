@@ -1773,6 +1773,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Nieuw document': 'Nov dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Velja za {n} prosojnic tega razdeljenega zaporedja.',
   'Los automatisch op wat kan': 'Odpravi, kar je mogoče samodejno',

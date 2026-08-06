@@ -1770,6 +1770,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Nieuw document': 'Nyt dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Gælder for {n} dias i denne opdelte række.',
   'Los automatisch op wat kan': 'Løs det, der kan automatiseres',

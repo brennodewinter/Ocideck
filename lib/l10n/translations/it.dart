@@ -726,6 +726,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Nieuw document': 'Nuovo documento',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Vale per {n} diapositive di questa sequenza divisa.',
   'Los automatisch op wat kan': 'Correggi ciò che si può in automatico',

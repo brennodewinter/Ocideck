@@ -1778,6 +1778,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Nieuw document': 'Nový dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Platí pre {n} snímok tohto rozdeleného radu.',
   'Los automatisch op wat kan': 'Opraviť, čo sa dá automaticky',

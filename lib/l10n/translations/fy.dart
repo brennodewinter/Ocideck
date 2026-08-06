@@ -731,6 +731,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Nieuw document': 'Nij dokumint',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Jildt foar {n} slides fan dizze splitste rige.',
   'Los automatisch op wat kan': 'Los op wat fansels kin',

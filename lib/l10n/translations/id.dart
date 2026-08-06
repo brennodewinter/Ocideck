@@ -1771,6 +1771,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Nieuw document': 'Dokumen baru',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Berlaku untuk {n} slide dari rangkaian terpisah ini.',
   'Los automatisch op wat kan': 'Perbaiki yang bisa otomatis',

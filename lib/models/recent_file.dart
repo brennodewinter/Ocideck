@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'deck.dart';
+import 'markdown_kind.dart';
 import '../utils/log.dart';
 
 /// Eén item in de "recente presentaties"-lijst: naast het pad ook de
@@ -15,10 +16,15 @@ class RecentFile {
   final DateTime? openedAt;
 
   /// Aantal slides bij de laatste keer openen (0 = onbekend, bijv. na
-  /// migratie van de oude paden-lijst).
+  /// migratie van de oude paden-lijst). Betekenisloos voor een [document];
+  /// de recente-lijst toont dan geen "N dia's".
   final int slideCount;
 
   final TlpLevel tlp;
+
+  /// Presentatie of document (zie [MarkdownKind]). Bepaalt icoon en label in
+  /// de recente-lijst en het openpad. Ontbreekt in oude opslag → presentatie.
+  final MarkdownKind kind;
 
   /// Label van het laatst geëxporteerde formaat ("PDF", "PPTX", "HTML");
   /// null zolang er nooit geëxporteerd is.
@@ -30,6 +36,7 @@ class RecentFile {
     this.openedAt,
     this.slideCount = 0,
     this.tlp = TlpLevel.none,
+    this.kind = MarkdownKind.presentation,
     this.lastExportFormat,
     this.lastExportAt,
   });
@@ -38,6 +45,7 @@ class RecentFile {
     DateTime? openedAt,
     int? slideCount,
     TlpLevel? tlp,
+    MarkdownKind? kind,
     String? lastExportFormat,
     DateTime? lastExportAt,
   }) {
@@ -46,6 +54,7 @@ class RecentFile {
       openedAt: openedAt ?? this.openedAt,
       slideCount: slideCount ?? this.slideCount,
       tlp: tlp ?? this.tlp,
+      kind: kind ?? this.kind,
       lastExportFormat: lastExportFormat ?? this.lastExportFormat,
       lastExportAt: lastExportAt ?? this.lastExportAt,
     );
@@ -56,6 +65,9 @@ class RecentFile {
     if (openedAt != null) 'openedAt': openedAt!.toIso8601String(),
     'slideCount': slideCount,
     'tlp': tlp.key,
+    // Alleen schrijven voor een document: zo blijft de opslag van elk bestaand
+    // deck-item byte-identiek en verandert er niets aan de recente-lijst.
+    if (kind.isDocument) 'kind': kind.key,
     if (lastExportFormat != null) 'lastExportFormat': lastExportFormat,
     if (lastExportAt != null) 'lastExportAt': lastExportAt!.toIso8601String(),
   };
@@ -68,6 +80,7 @@ class RecentFile {
           : null,
       slideCount: (json['slideCount'] as num?)?.toInt() ?? 0,
       tlp: TlpLevelX.fromKey(json['tlp'] as String? ?? ''),
+      kind: MarkdownKindX.fromKey(json['kind'] as String?),
       lastExportFormat: json['lastExportFormat'] as String?,
       lastExportAt: json['lastExportAt'] is String
           ? DateTime.tryParse(json['lastExportAt'] as String)

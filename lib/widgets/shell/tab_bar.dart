@@ -199,6 +199,64 @@ class _TabChipState extends State<_TabChip> {
 
 // ── Per-tab content ───────────────────────────────────────────────────────────
 
+/// Eén tab-paneel, met alle providers die het deck lezen per tab opnieuw
+/// gescoped.
+///
+/// Alles wat het deck leest hoort in deze `overrides` te staan. Een afgeleide
+/// provider die ontbreekt, lost op in de root-container, ziet een leeg deck en
+/// doet stilletjes niets — geen fout, geen melding, gewoon niets. Zo ging
+/// `imageContrastIssuesProvider` ooit stuk. `provider_scope_test.dart` scant
+/// `lib/state` en faalt als er hier een mist.
+Widget _tabScope(TabInfo tab) {
+  // Een documenttabblad krijgt een eigen, veel lichtere scope: het bewerkt de
+  // platte bron via één DocumentNotifier, niet een deck met zijn afgeleide
+  // privacy/kwaliteit-keten. De gedeelde tabbalk eromheen blijft soort-agnostisch.
+  if (tab.content case DocumentTabContent(:final documentNotifier)) {
+    return ProviderScope(
+      key: ValueKey(tab.id),
+      overrides: [
+        documentProvider.overrideWith(
+          (ref) =>
+              documentNotifier.mounted ? documentNotifier : DocumentNotifier(),
+        ),
+      ],
+      child: const DocumentEditorScreen(),
+    );
+  }
+  return ProviderScope(
+    key: ValueKey(tab.id),
+    overrides: [
+      // Bij sluiten kan de DeckNotifier al disposed zijn terwijl _TabContent
+      // nog één rebuild doet (c542bf1e fixte TabInfo, niet de keten).
+      deckProvider.overrideWith(
+        (ref) => tab.deckNotifier.mounted
+            ? tab.deckNotifier
+            : DeckNotifier(
+                ref.read(markdownServiceProvider),
+                ref.read(fileServiceProvider),
+              ),
+      ),
+      editorProvider.overrideWith((ref) => tab.editorNotifier),
+      collabSessionProvider.overrideWith(
+        (ref) => CollabSessionNotifier(ref, tab),
+      ),
+      deckQualityRawProvider.overrideWith(computeDeckQualityRaw),
+      deckQualityProvider.overrideWith(computeDeckQuality),
+      imageContrastIssuesProvider.overrideWith(computeImageContrastIssues),
+      privacyRawScanProvider.overrideWith(computePrivacyRawScan),
+      imagePrivacyRawIssuesProvider.overrideWith(computeImagePrivacyRawIssues),
+      imagePrivacyIssuesProvider.overrideWith(computeImagePrivacyIssues),
+      privacyScanProvider.overrideWith(computePrivacyScan),
+      privacyQualityIssuesProvider.overrideWith(computePrivacyQualityIssues),
+      improvementQualityIssuesProvider.overrideWith(
+        computeImprovementQualityIssues,
+      ),
+      privacyExportSummaryProvider.overrideWith(computePrivacyExportSummary),
+    ],
+    child: const _TabContent(),
+  );
+}
+
 class _TabContent extends ConsumerWidget {
   const _TabContent();
 

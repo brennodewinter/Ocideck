@@ -1788,6 +1788,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Nieuw document': 'Document nou',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Se aplică la {n} diapozitive din această serie divizată.',
   'Los automatisch op wat kan': 'Repară ce se poate automat',

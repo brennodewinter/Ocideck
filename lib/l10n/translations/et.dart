@@ -1762,6 +1762,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Nieuw document': 'Uus dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Kehtib selle jaotatud jada {n} slaidi kohta.',
   'Los automatisch op wat kan': 'Paranda automaatselt lahendatavad',

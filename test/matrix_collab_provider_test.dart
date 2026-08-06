@@ -66,8 +66,7 @@ void main() {
   TabInfo tabFor(DeckNotifier deckN) => TabInfo(
     id: 1,
     recoveryId: 'rec',
-    deckNotifier: deckN,
-    editorNotifier: EditorNotifier(),
+    content: DeckTabContent(deckN, EditorNotifier()),
   );
 
   ProviderContainer containerFor({

@@ -18,6 +18,7 @@ void main() {
 
   AppMenuActions appActions() => AppMenuActions(
     newDeck: () => note('newDeck'),
+    newDocument: () => note('newDocument'),
     open: () => note('open'),
     settings: () => note('settings'),
     userGuide: () => note('userGuide'),

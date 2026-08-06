@@ -1777,6 +1777,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Nieuw document': 'Novi dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Odnosi se na {n} slajdova ovog podijeljenog niza.',
   'Los automatisch op wat kan': 'Popravi što se može automatski',

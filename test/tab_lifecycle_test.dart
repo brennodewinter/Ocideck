@@ -76,8 +76,7 @@ void main() {
     final tab = TabInfo(
       id: 1,
       recoveryId: 'r1',
-      deckNotifier: notifier,
-      editorNotifier: EditorNotifier(),
+      content: DeckTabContent(notifier, EditorNotifier()),
     );
     expect(tab.isOpen, isTrue);
     expect(tab.isDirty, isTrue);
@@ -109,8 +108,7 @@ void main() {
       final tab = TabInfo(
         id: 1,
         recoveryId: 'r1',
-        deckNotifier: notifier,
-        editorNotifier: EditorNotifier(),
+        content: DeckTabContent(notifier, EditorNotifier()),
       );
       notifier.dispose();
 

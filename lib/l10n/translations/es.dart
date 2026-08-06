@@ -727,6 +727,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Nieuw document': 'Nuevo documento',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Se aplica a {n} diapositivas de esta serie dividida.',
   'Los automatisch op wat kan': 'Corregir lo automatizable',

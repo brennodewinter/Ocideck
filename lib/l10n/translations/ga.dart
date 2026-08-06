@@ -1806,6 +1806,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Nieuw document': 'Cáipéis nua',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Baineann sé le {n} sleamhnán den tsraith roinnte seo.',
   'Los automatisch op wat kan': 'Deisigh an méid is féidir a uathoibriú',

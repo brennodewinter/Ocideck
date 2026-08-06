@@ -1783,6 +1783,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Nieuw document': 'Nowy dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Dotyczy {n} slajdów tej podzielonej serii.',
   'Los automatisch op wat kan': 'Napraw, co się da automatycznie',

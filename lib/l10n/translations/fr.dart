@@ -730,6 +730,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Nieuw document': 'Nouveau document',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'S\'applique à {n} diapositives de cette série fractionnée.',
   'Los automatisch op wat kan': 'Corriger ce qui peut l\'être automatiquement',

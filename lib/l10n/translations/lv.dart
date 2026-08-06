@@ -1770,6 +1770,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Nieuw document': 'Jauns dokuments',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Piemērojams {n} slaidiem šajā sadalītajā virknē.',
   'Los automatisch op wat kan': 'Labot, ko var automātiski',

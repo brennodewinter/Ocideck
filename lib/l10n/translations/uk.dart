@@ -1788,6 +1788,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Nieuw document': 'Новий документ',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Стосується {n} слайдів цієї розділеної серії.',
   'Los automatisch op wat kan': 'Виправити те, що можна автоматично',

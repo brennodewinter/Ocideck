@@ -1774,6 +1774,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Nieuw document': 'Nöis Dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Gilt für {n} Slides vo dere gteilte Reihe.',
   'Los automatisch op wat kan': 'Behäb, was automatisch gaht',

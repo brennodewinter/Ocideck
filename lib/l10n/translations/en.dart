@@ -911,6 +911,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Nieuw document': 'New document',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Applies to {n} slides of this split run.',
   'Los automatisch op wat kan': 'Fix what can be automated',

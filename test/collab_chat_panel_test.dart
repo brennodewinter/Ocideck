@@ -71,8 +71,7 @@ void main() {
     final tab = TabInfo(
       id: 1,
       recoveryId: 'r',
-      deckNotifier: deckN,
-      editorNotifier: EditorNotifier(),
+      content: DeckTabContent(deckN, EditorNotifier()),
     );
 
     await tester.pumpWidget(

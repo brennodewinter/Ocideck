@@ -1793,6 +1793,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Nieuw document': 'Dokument ġdid',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Japplika għal {n} slajds ta\' din is-sensiela maqsuma.',
   'Los automatisch op wat kan':

@@ -1787,6 +1787,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Nieuw document': 'Novum documentum',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Valet pro {n} paginis huius seriei divisae.',
   'Los automatisch op wat kan': 'Corrige quae per se corrigi possunt',

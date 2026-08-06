@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../l10n/app_localizations.dart';
+import '../../models/chart.dart';
+import '../../models/settings.dart' show ThemeProfile;
+import '../../services/marp_html_service.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/doc_link.dart' show headingSlug;
 import '../slides/inline_markdown.dart';
@@ -40,6 +45,9 @@ class DocumentMarkdownView extends StatelessWidget {
     this.onTapLink,
     this.maxTextWidth,
     this.mermaidRenderer,
+    this.chartTheme,
+    this.onEditChart,
+    this.onEditTable,
     this.searchTerm,
     this.activeMatchBlockIndex = -1,
     this.activeMatchKey,
@@ -67,6 +75,24 @@ class DocumentMarkdownView extends StatelessWidget {
   /// [DocMermaidView]) to the shared render service. Tests pass a fake so the
   /// diagram path can be exercised without a WebView.
   final MermaidRenderer? mermaidRenderer;
+
+  /// Stijlprofiel voor de kleuren van een ```chart-blok. `null` → de
+  /// standaardkleuren van de grafiek-SVG. Een document heeft geen deck-thema, dus
+  /// de aanroeper geeft hier het actieve app-profiel of niets.
+  final ThemeProfile? chartTheme;
+
+  /// Aangeroepen bij dubbelklik op een grafiek — alleen in de editor gezet (de
+  /// docs-lezer is alleen-lezen). Geeft het volgnummer van de grafiek (de
+  /// hoeveelheidste ```chart in het document, vanaf 0) en de blokinhoud mee, zodat
+  /// de editor de juiste fence in de bron kan vervangen. `null` → geen bewerking.
+  final void Function(int chartOrdinal, String chartBlock)? onEditChart;
+
+  /// Aangeroepen bij dubbelklik op een tabel — alleen in de editor gezet. Geeft
+  /// het volgnummer van de tabel (de hoeveelheidste GFM-tabel in het document,
+  /// vanaf 0) en de rauwe regels (koprij + body, zónder scheidingsrij) mee, zodat
+  /// de editor precies dat tabelblok in de bron kan vervangen. `null` → geen
+  /// bewerking.
+  final void Function(int tableOrdinal, List<String> tableRows)? onEditTable;
 
   /// Case-insensitive find-in-page term. When non-empty, every block whose text
   /// contains it is tinted. `null`/empty means no search is active and the tree
@@ -103,6 +129,53 @@ class DocumentMarkdownView extends StatelessWidget {
     return -1;
   }
 
+  /// De regel-reikwijdte `[start, eind)` van het `ordinal`-de GFM-tabelblok
+  /// (vanaf 0) in [source] — koprij + scheidingsrij + body — geteld met exact
+  /// dezelfde grammatica als de weergave (fenced blokken worden overgeslagen, en
+  /// een pipe-regel bereikt altijd de tabelherkenning). `null` als er geen
+  /// zoveelste tabel is. De editor gebruikt dit om precies dat blok in de bron te
+  /// vervangen zonder de omringende bytes aan te raken.
+  static List<int>? nthTableBlockRange(String source, int ordinal) {
+    final lines = source.split('\n');
+    var seen = 0;
+    var i = 0;
+    while (i < lines.length) {
+      final marker = _fenceMarker(lines[i].trim());
+      if (marker != null) {
+        var end = i + 1;
+        while (end < lines.length && lines[end].trim() != marker) {
+          end++;
+        }
+        i = end < lines.length ? end + 1 : end;
+        continue;
+      }
+      if (_looksLikeTableRow(lines[i]) &&
+          i + 1 < lines.length &&
+          _isTableDelimiter(lines[i + 1])) {
+        var j = i + 2;
+        while (j < lines.length && _looksLikeTableRow(lines[j])) {
+          j++;
+        }
+        if (seen == ordinal) return [i, j];
+        seen++;
+        i = j;
+        continue;
+      }
+      i++;
+    }
+    return null;
+  }
+
+  /// De cellen van een GFM-tabelblok (koprij + body, zónder scheidingsrij),
+  /// ontdaan van pipe-ontsnapping — de vorm die de tabel-editor verwacht.
+  /// Spiegelt de splitsing die de weergave zelf gebruikt, zodat wat je ziet en
+  /// wat je bewerkt gelijk zijn.
+  static List<List<String>> tableCells(List<String> rawRows) => rawRows
+      .map(
+        (r) => _splitTableRow(r).map((c) => c.replaceAll(r'\|', '|')).toList(),
+      )
+      .toList();
+
   @override
   Widget build(BuildContext context) {
     final t = _Theme(Theme.of(context));
@@ -111,8 +184,14 @@ class DocumentMarkdownView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (var i = 0; i < blocks.length; i++)
-          _decorated(t, blocks[i], i, term),
+        // Grafieken en tabellen worden elk apart geteld, zodat een dubbelklik het
+        // juiste blok (de hoeveelheidste van zíjn soort) in de bron kan vervangen.
+        for (var i = 0, chart = 0, table = 0; i < blocks.length; i++)
+          _decorated(t, blocks[i], i, term, switch (blocks[i].kind) {
+            _Kind.chart => chart++,
+            _Kind.table => table++,
+            _ => -1,
+          }),
       ],
     );
   }
@@ -122,8 +201,14 @@ class DocumentMarkdownView extends StatelessWidget {
   /// reader can scroll to either. With no term and no anchor the block is
   /// returned untouched, so a non-searching, non-navigating reader gets exactly
   /// the old tree.
-  Widget _decorated(_Theme t, _Block b, int index, String term) {
-    var widget = _buildWidget(t, b);
+  Widget _decorated(
+    _Theme t,
+    _Block b,
+    int index,
+    String term,
+    int kindOrdinal,
+  ) {
+    var widget = _buildWidget(t, b, kindOrdinal);
     // The anchor target carries its own key (one moving key, like the search
     // scroll) so `#anchor` links land on the section.
     if (index == anchorBlockIndex && anchorKey != null) {
@@ -143,14 +228,15 @@ class DocumentMarkdownView extends StatelessWidget {
     );
   }
 
-  Widget _buildWidget(_Theme t, _Block b) => switch (b.kind) {
+  Widget _buildWidget(_Theme t, _Block b, int kindOrdinal) => switch (b.kind) {
     _Kind.heading => _bounded(_heading(t, b.level, b.text)),
     _Kind.paragraph => _bounded(_paragraph(t, b.text)),
     _Kind.list => _bounded(_list(t, b.items)),
     _Kind.quote => _bounded(_blockQuote(t, b.text)),
     _Kind.code => _codeBlock(t, b.text),
     _Kind.mermaid => _mermaid(t, b.text),
-    _Kind.table => _table(t, b.rows),
+    _Kind.chart => _chart(t, b.text, kindOrdinal),
+    _Kind.table => _table(t, b.rows, kindOrdinal),
     _Kind.rule => _bounded(_rule(t)),
   };
 
@@ -197,7 +283,11 @@ class DocumentMarkdownView extends StatelessWidget {
         }
         final code = lines.sublist(start, end).join('\n');
         blocks.add(
-          _Block(lang == 'mermaid' ? _Kind.mermaid : _Kind.code, text: code),
+          _Block(switch (lang) {
+            'mermaid' => _Kind.mermaid,
+            'chart' => _Kind.chart,
+            _ => _Kind.code,
+          }, text: code),
         );
         i = end < lines.length ? end + 1 : end;
         continue;
@@ -420,19 +510,52 @@ class DocumentMarkdownView extends StatelessWidget {
     renderer: mermaidRenderer,
   );
 
+  /// Een ```chart-blok als gerenderde grafiek (statische SVG, dezelfde renderlaag
+  /// als de HTML-export). Draagt het blok geen inline cijfers (bv. een
+  /// `source:`-verwijzing die nog niet gehydrateerd is), dan valt het terug op
+  /// het codeblok — dan zie je tenminste de bron in plaats van een leeg vlak.
+  Widget _chart(_Theme t, String block, int chartOrdinal) {
+    final spec = ChartSpec.parse(block);
+    if (!spec.hasInlineData) return _codeBlock(t, block);
+    final chart = Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: t.codeBg,
+        border: Border.all(color: t.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: AspectRatio(
+        aspectRatio: 800 / 450,
+        child: SvgPicture.string(
+          MarpHtmlService.chartSpecSvg(spec, chartTheme),
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+    final onEdit = onEditChart;
+    if (onEdit == null) return chart;
+    // In de editor: dubbelklik óf het potlood-knopje opent de grafiek-editor.
+    return _EditableEmbed(
+      onEdit: () => onEdit(chartOrdinal, block),
+      child: chart,
+    );
+  }
+
   Widget _rule(_Theme t) => Padding(
     padding: const EdgeInsets.symmetric(vertical: 14),
     child: Divider(height: 1, thickness: 1, color: t.border),
   );
 
-  Widget _table(_Theme t, List<String> rows) {
+  Widget _table(_Theme t, List<String> rows, int tableOrdinal) {
     final cells = rows.map(_splitTableRow).toList();
     final columns = cells.isEmpty
         ? 0
         : cells.map((r) => r.length).reduce((a, b) => a > b ? a : b);
     if (columns == 0) return const SizedBox.shrink();
 
-    return Padding(
+    final table = Padding(
       padding: const EdgeInsets.only(bottom: 14),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -464,6 +587,13 @@ class DocumentMarkdownView extends StatelessWidget {
           ),
         ),
       ),
+    );
+    final onEdit = onEditTable;
+    if (onEdit == null) return table;
+    // In de editor: dubbelklik óf het potlood-knopje opent de tabel-editor.
+    return _EditableEmbed(
+      onEdit: () => onEdit(tableOrdinal, rows),
+      child: table,
     );
   }
 
@@ -587,7 +717,17 @@ class DocumentMarkdownView extends StatelessWidget {
 }
 
 /// The kind of a parsed Markdown block.
-enum _Kind { heading, paragraph, list, quote, code, mermaid, table, rule }
+enum _Kind {
+  heading,
+  paragraph,
+  list,
+  quote,
+  code,
+  mermaid,
+  chart,
+  table,
+  rule,
+}
 
 /// One parsed block: its kind plus whatever that kind needs to render and to be
 /// searched. Kept as a plain data record so parsing is a pure step, decoupled
@@ -691,4 +831,73 @@ class _Theme {
   final Color tableHeaderBg;
   final Color findMatch;
   final Color findActive;
+}
+
+/// Omhult een bewerkbare embed (grafiek of tabel) in de editor: hand-cursor,
+/// dubbelklik om te bewerken, én een zichtbaar potlood-knopje rechtsboven dat
+/// bij één klik dezelfde editor opent. Het potlood is altijd subtiel zichtbaar
+/// en licht op bij hover — zodat de bewerkbaarheid ontdekbaar is zonder dat je
+/// de dubbelklik hoeft te raden (vgl. #1210: een dubbelklik-alleen affordance
+/// vond niemand). Alleen in de editor gemonteerd; de docs-lezer geeft geen
+/// bewerk-callback en krijgt dus geen potlood.
+class _EditableEmbed extends StatefulWidget {
+  const _EditableEmbed({required this.child, required this.onEdit});
+
+  final Widget child;
+  final VoidCallback onEdit;
+
+  @override
+  State<_EditableEmbed> createState() => _EditableEmbedState();
+}
+
+class _EditableEmbedState extends State<_EditableEmbed> {
+  bool _hover = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hover = true),
+      onExit: (_) => setState(() => _hover = false),
+      child: GestureDetector(
+        onDoubleTap: widget.onEdit,
+        child: Stack(
+          children: [
+            widget.child,
+            Positioned(
+              top: 6,
+              right: 6,
+              child: AnimatedOpacity(
+                opacity: _hover ? 1 : 0.6,
+                duration: const Duration(milliseconds: 120),
+                child: Material(
+                  color: scheme.surface.withValues(alpha: 0.9),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    side: BorderSide(color: scheme.outlineVariant),
+                  ),
+                  child: Tooltip(
+                    message: context.l10n.d('Bewerken'),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(6),
+                      onTap: widget.onEdit,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: Icon(
+                          Icons.edit_outlined,
+                          size: 16,
+                          color: scheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

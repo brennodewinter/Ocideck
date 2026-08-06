@@ -1746,6 +1746,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Nieuw document': 'ghItlh chu\'',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'rarvam {n} \'echletHomvaD lI\'.',
   'Los automatisch op wat kan': 'tI\'laHlu\'bogh Qaghmey yItI\'',

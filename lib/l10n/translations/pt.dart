@@ -1800,6 +1800,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Nieuw document': 'Novo documento',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Aplica-se a {n} diapositivos desta série dividida.',
   'Los automatisch op wat kan': 'Corrigir o que dá para automatizar',
