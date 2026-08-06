@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart' show TlpLevel;
+import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/models/matrix_settings.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/storage_connection.dart';
@@ -443,6 +444,21 @@ void main() {
       expect(entry.openedAt, isNotNull);
       expect(entry.lastExportFormat, 'PDF');
       expect(entry.lastExportAt, isNotNull);
+    });
+
+    test('addRecentFile onthoudt de soort document (regressie)', () async {
+      // Een document dat via Opslaan-als / openen in de recente lijst belandt,
+      // moet als document worden onthouden — anders leest het heropenen weer
+      // "presentatie" en verliest de lijst het onderscheid. Vóór de fix werd
+      // `kind` niet doorgegeven (tabs_provider: "latere politoer").
+      final n = await _loadedNotifier();
+      await n.addRecentFile('/memo.md', kind: MarkdownKind.document);
+      expect(n.state.recentFiles.single.kind, MarkdownKind.document);
+
+      // Zonder soort blijft een pad een presentatie (de veilige standaard).
+      await n.addRecentFile('/deck.md');
+      final deck = n.state.recentFiles.firstWhere((f) => f.path == '/deck.md');
+      expect(deck.kind, MarkdownKind.presentation);
     });
 
     test('recordRecentFileExport negeert onbekende paden', () async {

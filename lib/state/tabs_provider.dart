@@ -497,7 +497,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       return _openFailureResult(_ref, mounted, result.failure);
     }
     _placeDocumentTab(document, filePath: path);
-    await _settings.addRecentFile(path); // soort-in-recent: latere politoer
+    await _settings.addRecentFile(path, kind: MarkdownKind.document);
     return OpenResult.opened;
   }
 

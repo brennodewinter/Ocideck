@@ -8,6 +8,7 @@ import 'package:path/path.dart' as p;
 
 import '../l10n/app_localizations.dart';
 import '../models/chart.dart';
+import '../models/markdown_kind.dart';
 import '../models/markdown_outline.dart';
 import '../models/slide.dart';
 import '../services/file_service.dart';
@@ -90,7 +91,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final saved = await ref.read(fileServiceProvider).saveDocumentAs(document);
     if (saved == null || !mounted) return;
     ref.read(documentProvider.notifier).markSaved(filePath: saved);
-    await ref.read(settingsProvider.notifier).addRecentFile(saved);
+    await ref
+        .read(settingsProvider.notifier)
+        .addRecentFile(saved, kind: MarkdownKind.document);
   }
 
   /// Scroll de weergave naar de aangeklikte kop uit de Overzicht-rail. Hergebruikt

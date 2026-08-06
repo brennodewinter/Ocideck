@@ -73,6 +73,7 @@ extension SettingsTraces on SettingsNotifier {
     String path, {
     int? slideCount,
     TlpLevel? tlp,
+    MarkdownKind? kind,
   }) async {
     final existing = currentState.recentFiles
         .where((f) => f.path == path)
@@ -81,6 +82,7 @@ extension SettingsTraces on SettingsNotifier {
       openedAt: DateTime.now(),
       slideCount: slideCount,
       tlp: tlp,
+      kind: kind,
     );
     final updated = [
       entry,
