@@ -188,6 +188,30 @@ bool isDarkHex(String hex) => _relativeLuminance(hex) < 0.4;
 /// Fixed (not the deck/app theme) because the cell colour is fixed too.
 String heatmapInk(String cellHex) => isDarkHex(cellHex) ? '#FFFFFF' : '#334155';
 
+/// The WCAG 2.1 AA large-text contrast floor. The chart title and legend are
+/// bold and large, so the 3:1 bar (not the 4.5:1 body-text one) is the one to
+/// clear.
+const double _chartInkContrastFloor = 3.0;
+
+/// A legible ink (`#RRGGBB`) for chart text of [preferred] colour drawn on
+/// [background].
+///
+/// The chart title and legend take the deck's text colour, which is picked to
+/// contrast with the *slide* background. But the same shared SVG is dropped onto
+/// other grounds: the document view paints it on the app's surface card, and a
+/// dark app theme (or a dark-themed slide) then lands a dark title on a dark
+/// ground — theme-navy on near-black, effectively invisible, while the axis
+/// labels survive on their fixed greys. Keep [preferred] whenever it clears the
+/// large-text contrast bar; otherwise fall back to white or a dark ink by the
+/// background's luminance so the title stays readable wherever the chart lands.
+String readableChartInk(String preferred, String background) {
+  final lp = _relativeLuminance(preferred);
+  final lb = _relativeLuminance(background);
+  final ratio = (math.max(lp, lb) + 0.05) / (math.min(lp, lb) + 0.05);
+  if (ratio >= _chartInkContrastFloor) return preferred;
+  return isDarkHex(background) ? '#FFFFFF' : '#1A1A1A';
+}
+
 /// Parse `#RRGGBB` (or `#RGB`) into `[r, g, b]` (0..255); tolerant of a missing
 /// `#` and bad input (falls back to black).
 List<int> _rgbOf(String hex) {

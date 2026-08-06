@@ -611,4 +611,27 @@ void main() {
       expect(isDarkHex('fff'), isFalse); // no '#', shorthand
     });
   });
+
+  group('readableChartInk', () {
+    test('keeps the preferred colour when it clears the contrast bar', () {
+      // Brand navy on white and light text on a dark slide both pass — the
+      // theme colour is kept so the chart title stays on-brand.
+      expect(readableChartInk('#003399', '#FFFFFF'), '#003399');
+      expect(readableChartInk('#EEF1F4', '#0A0B0C'), '#EEF1F4');
+    });
+
+    test('flips to white on a dark ground when the preferred ink fails', () {
+      // Theme-navy on a near-black card: unreadable, so it becomes white.
+      expect(readableChartInk('#003399', '#111827'), '#FFFFFF');
+      expect(readableChartInk('#1E293B', '#0F172A'), '#FFFFFF');
+    });
+
+    test(
+      'flips to a dark ink on a light ground when the preferred ink fails',
+      () {
+        // A pale colour on white is invisible; fall back to a dark ink.
+        expect(readableChartInk('#F5F5F5', '#FFFFFF'), '#1A1A1A');
+      },
+    );
+  });
 }
