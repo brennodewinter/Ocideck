@@ -5,7 +5,7 @@ you edit like a word processor — headings, tables, images, charts, gantt,
 mermaid — where the file on disk stays a plain, maximally interchangeable `.md`
 that any Markdown reader opens.*
 
-> **Status:** phases 1–3 implemented (open/edit/save, badge, Visueel\|Bron toggle, insert palette); export/conversion/storage (§11) designed & reviewed, build pending · **Status last reviewed:** 2026-08-06 · **Published by:** Stichting LibreKAT
+> **Status:** phases 1–3 implemented (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar); export/conversion/storage (§11) designed, three-lens reviewed, **build blocked** pending the zero-loss `documentToDeck` the privacy re-review requires (§11.3/§11.5) · **Status last reviewed:** 2026-08-06 · **Published by:** Stichting LibreKAT
 
 > **This is a design doc, not shipping behaviour.** It is the *format-first*
 > gate: the disk contract and the shared-editor decision must be signed off
@@ -585,10 +585,20 @@ projection contracts):
   lines. Lossless on *text*; loses slide-structure semantics (stated, not
   hidden). Also the projected-body reader for export (§11.2 step 4).
 - `documentToDeck(String) → Deck` (and its `documentToDeckMarkdown` string form):
-  interpret `##`/`---` as slide breaks and let the **existing deck parser** type
-  each section (a GFM table → `table` slide, a heading section → its own slide,
-  prose → `freeMarkdown`). **Warn** that a thematic `---` thereby becomes a slide
-  boundary (loss of intent).
+  interpret `##`/`---` as slide breaks. **The existing deck parser must NOT be
+  fed sections raw** — the privacy re-review (2026-08-06) *empirically* found that
+  `_inferSlideType` sends a heading-led section (`## Kop` + prose, the dominant
+  document shape) to an **empty `bullets` slide**, silently dropping the prose
+  *and* any table — content that then never reaches OciWacht. `documentToDeck`
+  must instead, per section: **lift the `##` heading into the slide title** (so
+  the remainder is prose-only → a scanned `freeMarkdown` body) and **split a GFM
+  table or ` ```chart ` block into its own typed slide** (prose and a table cannot
+  share one block without the parser dropping one). **Binding invariant:** after
+  deconstruction, *every non-empty source chunk reappears in a typed, scanned
+  field* (`title`, `customMarkdown`, `bullets` or `tableRows`) — zero loss is a
+  privacy requirement here, not a tidiness wish, and a deconstruction-invariant
+  test/gate enforces it. **Warn** that a thematic `---` becomes a slide boundary
+  (loss of intent).
 
 Rules (from §7, now binding):
 
@@ -635,35 +645,45 @@ is content-agnostic and needs no document-specific structure.
 
 ### 11.5 Review note & binding build requirements
 
+**Review status: NOT yet signed off — export/conversion build is blocked.**
 Reviewed 2026-08-06 by the core-values guardian (**akkoord-mits**), the security
-architect (**akkoord-mits**) and the privacy expert (**niet-akkoord** on the
-first draft — the single-`freeMarkdown` wrap). §11.2 is **rewritten** to close
-the privacy blockers; the following are **binding** on the build, not optional:
+architect (**akkoord-mits**) and the privacy expert (**niet-akkoord**, twice).
+The privacy expert's second pass *empirically tested the parser* and found that
+even the revised design's "reuse the existing deck parser" step leaks: a
+heading-led section drops to an empty `bullets` slide, so PII in the dominant
+document shape never reaches OciWacht (§11.3). The build must therefore implement
+the **custom, zero-loss `documentToDeck`** of §11.3 and pass a re-review before
+any export/conversion code lands. The following are **binding**:
 
-1. **Typed-slide deconstruction, not a whole-document wrap** — so the scanner
-   keeps table column-context and section-local escalation (privacy findings 2,
-   3). Export and conversion share `documentToDeck` (§11.3).
+1. **Custom typed-slide deconstruction, not a whole-document wrap and not the raw
+   parser** — heading→title, each table/chart→own typed slide, prose→scanned
+   `freeMarkdown`; enforce the **zero-loss invariant** (§11.3). This keeps table
+   column-context and section-local escalation (privacy findings 2, 3) *and*
+   closes the empty-`bullets` drop the re-review found. Export and conversion
+   share this one `documentToDeck`.
 2. **Pre-scan chart-data hydration** — fold every `data/*.json` series inline
    *before* `buildExportBundle`, and **never** re-inline external data after
-   projection (privacy finding 1, the leak). A **mandatory fail-closed test**:
-   a redacted-profile export of a document whose chart data is externalised, and
-   whose body carries a planted PII token, must contain the redaction block and
-   **not** the token or the raw chart values.
-3. **Defensive projected-body read** — join over `bundle.audience.deck.slides`,
+   projection (privacy finding 1, the leak). **Mandatory fail-closed test**, in
+   the **heading-led** shape the re-review named:
+   `## Kop\n\ntoelichting met TOKEN\n\n| Naam | BSN |…` with externalised chart
+   data, redacted profile → the export contains the redaction block and **not**
+   the token or the raw table/chart values.
+3. **Deconstruction-invariant gate** — verify no non-empty source section maps to
+   an empty typed field (the empty-`bullets` trap), so a future parser regression
+   cannot silently reintroduce the drop.
+4. **Defensive projected-body read** — join over `bundle.audience.deck.slides`,
    never assume `.single` (security finding 2).
-4. **Flow mode on the inert pipeline** — `continuous` renders through the same
+5. **Flow mode on the inert pipeline** — `continuous` renders through the same
    `<script type="text/markdown">` + `_guardMarkdown` + DOMPurify path; document
    CSS carries no external `url()`/`@font-face` (security finding 3).
-5. **Honest promises** — the export UI distinguishes **Save** (byte-faithful
+6. **Honest promises** — the export UI distinguishes **Save** (byte-faithful
    master) from **Export → redacted copy**; the PDF claim is bounded to the HTML
    we produce, not the user's browser output (guardian findings 1, 2).
-6. **Signature/closing names are not auto-found** — `_scanName` needs a label or
-   predicate, which a *"Kind regards, Jan Jansen"* sign-off lacks; continuous
-   documents carry these far more than slides. Either add a sign-off-block
-   heuristic **or** document plainly that closing names are not auto-detected
-   (consistent with the "we don't find everything" tone) — privacy finding 4.
+7. **Signature/closing names are not auto-found** — document plainly (or add a
+   sign-off heuristic), consistent with the "we don't find everything" tone
+   (privacy finding 4).
 
 The audience-boundary gate proves the **signature**, not the derivation (its
-documented blind spot); requirement 2's fail-closed test is the guarantee the
-compiler cannot give. Every export route (`.md`, HTML, the printed PDF) carries
-the **already-projected** body — nothing un-scanned leaves the machine.
+documented blind spot); requirements 2 and 3 are the guarantees the compiler
+cannot give. Every export route (`.md`, HTML, the printed PDF) must carry the
+**already-projected** body — nothing un-scanned leaves the machine.
