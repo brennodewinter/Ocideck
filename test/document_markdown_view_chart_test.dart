@@ -32,6 +32,8 @@ void main() {
     await tester.pump();
 
     expect(find.byType(SvgPicture), findsOneWidget);
+    // Zonder bewerk-callback (de docs-lezer) is er geen potlood-affordance.
+    expect(find.byIcon(Icons.edit_outlined), findsNothing);
   });
 
   testWidgets('een ```chart zonder inline cijfers valt terug op het codeblok', (

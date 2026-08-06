@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../models/settings.dart' show ThemeProfile;
 import '../../services/marp_html_service.dart';
@@ -535,13 +536,10 @@ class DocumentMarkdownView extends StatelessWidget {
     );
     final onEdit = onEditChart;
     if (onEdit == null) return chart;
-    // In de editor: dubbelklik op de grafiek opent de grafiek-editor.
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onDoubleTap: () => onEdit(chartOrdinal, block),
-        child: chart,
-      ),
+    // In de editor: dubbelklik óf het potlood-knopje opent de grafiek-editor.
+    return _EditableEmbed(
+      onEdit: () => onEdit(chartOrdinal, block),
+      child: chart,
     );
   }
 
@@ -592,13 +590,10 @@ class DocumentMarkdownView extends StatelessWidget {
     );
     final onEdit = onEditTable;
     if (onEdit == null) return table;
-    // In de editor: dubbelklik op de tabel opent de tabel-editor.
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onDoubleTap: () => onEdit(tableOrdinal, rows),
-        child: table,
-      ),
+    // In de editor: dubbelklik óf het potlood-knopje opent de tabel-editor.
+    return _EditableEmbed(
+      onEdit: () => onEdit(tableOrdinal, rows),
+      child: table,
     );
   }
 
@@ -836,4 +831,73 @@ class _Theme {
   final Color tableHeaderBg;
   final Color findMatch;
   final Color findActive;
+}
+
+/// Omhult een bewerkbare embed (grafiek of tabel) in de editor: hand-cursor,
+/// dubbelklik om te bewerken, én een zichtbaar potlood-knopje rechtsboven dat
+/// bij één klik dezelfde editor opent. Het potlood is altijd subtiel zichtbaar
+/// en licht op bij hover — zodat de bewerkbaarheid ontdekbaar is zonder dat je
+/// de dubbelklik hoeft te raden (vgl. #1210: een dubbelklik-alleen affordance
+/// vond niemand). Alleen in de editor gemonteerd; de docs-lezer geeft geen
+/// bewerk-callback en krijgt dus geen potlood.
+class _EditableEmbed extends StatefulWidget {
+  const _EditableEmbed({required this.child, required this.onEdit});
+
+  final Widget child;
+  final VoidCallback onEdit;
+
+  @override
+  State<_EditableEmbed> createState() => _EditableEmbedState();
+}
+
+class _EditableEmbedState extends State<_EditableEmbed> {
+  bool _hover = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hover = true),
+      onExit: (_) => setState(() => _hover = false),
+      child: GestureDetector(
+        onDoubleTap: widget.onEdit,
+        child: Stack(
+          children: [
+            widget.child,
+            Positioned(
+              top: 6,
+              right: 6,
+              child: AnimatedOpacity(
+                opacity: _hover ? 1 : 0.6,
+                duration: const Duration(milliseconds: 120),
+                child: Material(
+                  color: scheme.surface.withValues(alpha: 0.9),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    side: BorderSide(color: scheme.outlineVariant),
+                  ),
+                  child: Tooltip(
+                    message: context.l10n.d('Bewerken'),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(6),
+                      onTap: widget.onEdit,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: Icon(
+                          Icons.edit_outlined,
+                          size: 16,
+                          color: scheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

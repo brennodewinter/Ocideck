@@ -155,4 +155,34 @@ void main() {
     expect(DocumentMarkdownView.nthTableBlockRange(source, 1), isNull);
     expect(source, contains('# Rapport'));
   });
+
+  testWidgets('het potlood is zichtbaar en opent met één klik de editor', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1300, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse(
+          '# Rapport\n\n| Naam | Waarde |\n| --- | --- |\n| Alfa | 1 |\n',
+        ),
+      );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [documentProvider.overrideWith((ref) => n)],
+        child: const MaterialApp(home: DocumentEditorScreen()),
+      ),
+    );
+    await tester.pump();
+
+    // Het potlood-knopje is zichtbaar op de tabel en opent met één klik dezelfde
+    // volwaardige editor — ontdekbaar zonder de dubbelklik te hoeven raden.
+    final pencil = find.byIcon(Icons.edit_outlined);
+    expect(pencil, findsOneWidget);
+    await tester.tap(pencil);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(find.byType(TableEditor), findsOneWidget);
+  });
 }
