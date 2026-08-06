@@ -75,4 +75,41 @@ void main() {
       expect(runs.single.text, 'a*b');
     });
   });
+
+  // Geïmporteerde tekst (pptx/odp/key) wordt aan de importgrens HTML-escaped
+  // (#876): `&` → `&amp;`, `<` → `&lt;`, `>` → `&gt;`. Dat is correct in het
+  // `.md` (de HTML-export decodeert het weer), maar de Flutter-preview rendert
+  // via `parseInlineRuns`, dus híer moeten de named entities terug. Alleen
+  // named, nooit numeriek — anders wordt een bron-`&#60;` alsnog `<` en dat is
+  // precies de evasie die de sanitizer blokkeert (#1299).
+  group('HTML entity decoding (imported text)', () {
+    test('decodes named entities in plain text', () {
+      expect(
+        parseInlineRuns(
+          'Where to find, copy &amp; paste?',
+        ).map((r) => r.text).join(),
+        'Where to find, copy & paste?',
+      );
+      expect(
+        parseInlineRuns(
+          'a &lt; b &gt; c &quot;d&quot;',
+        ).map((r) => r.text).join(),
+        'a < b > c "d"',
+      );
+    });
+
+    test('leaves numeric entities untouched (evasion guard)', () {
+      expect(
+        parseInlineRuns('&#60;script&#62;').map((r) => r.text).join(),
+        '&#60;script&#62;',
+      );
+    });
+
+    test('code spans keep entities literal', () {
+      final runs = parseInlineRuns('`a &amp; b`');
+      expect(runs, hasLength(1));
+      expect(runs.single.code, isTrue);
+      expect(runs.single.text, 'a &amp; b');
+    });
+  });
 }
