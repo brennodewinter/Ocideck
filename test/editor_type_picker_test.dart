@@ -95,7 +95,7 @@ void main() {
 
     // Same state as 'Slide toevoegen' with the module off: one category, so no
     // tab bar and no informatieveiligheid type is reachable.
-    expect(find.byType(ChoiceChip), findsNothing);
+    expect(find.byKey(const Key('addSlideCategoryTabs')), findsNothing);
     expect(find.text('Bevinding'), findsNothing);
     // Aanvalsoppervlak is MIAUW-materiaal en hoort bij de module; het miste
     // alleen zijn categorie en stond daardoor altijd in de kiezer.
@@ -107,7 +107,7 @@ void main() {
     await tester.tap(typeButton);
     await tester.pumpAndSettle();
 
-    expect(find.byType(ChoiceChip), findsWidgets);
+    expect(find.byKey(const Key('addSlideCategoryTabs')), findsWidgets);
     await tester.tap(find.text('Informatieveiligheid'));
     await tester.pumpAndSettle();
     expect(find.text('Bevinding'), findsOneWidget);
@@ -123,7 +123,7 @@ void main() {
 
       // Current slide is already a security type, so the category is revealed
       // (tab bar appears) even though the module is off — no dead-end.
-      expect(find.byType(ChoiceChip), findsWidgets);
+      expect(find.byKey(const Key('addSlideCategoryTabs')), findsWidgets);
       await tester.tap(find.text('Informatieveiligheid'));
       await tester.pumpAndSettle();
       expect(find.text('Uitvoering testen conform standaard'), findsOneWidget);

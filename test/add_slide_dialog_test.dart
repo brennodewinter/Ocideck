@@ -93,7 +93,7 @@ void main() {
     // Module off (the default): only SlideCategory.general types are offered,
     // so no tab bar is drawn and no Informatieveiligheid type is reachable.
     await openDialog(tester)();
-    expect(find.byType(ChoiceChip), findsNothing);
+    expect(find.byKey(const Key('addSlideCategoryTabs')), findsNothing);
     expect(
       visibleTypes(
         tester,
@@ -108,7 +108,7 @@ void main() {
     await openDialog(tester, reveal: true)();
     // A second category now carries types, so the tab bar appears. The default
     // tab is Algemeen, so no security type is shown yet.
-    expect(find.byType(ChoiceChip), findsWidgets);
+    expect(find.byKey(const Key('addSlideCategoryTabs')), findsWidgets);
     expect(
       visibleTypes(
         tester,

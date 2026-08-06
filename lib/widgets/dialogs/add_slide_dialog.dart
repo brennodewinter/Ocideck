@@ -6,13 +6,7 @@ import '../../l10n/app_localizations.dart';
 import '../editors/slide_type_help.dart';
 
 part 'add_slide_dialog_painter.dart';
-
-/// A picker tab: one [SlideCategory] to filter by, or `null` for "all types".
-class _PickerTab {
-  final SlideCategory? category;
-  final String label;
-  const _PickerTab(this.category, this.label);
-}
+part 'add_slide_dialog_pills.dart';
 
 class AddSlideDialog extends StatefulWidget {
   /// Whether the Informatieveiligheid module is revealed (enabled + a matching
@@ -278,14 +272,15 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
     return Semantics(
       container: true,
       child: Wrap(
+        key: const Key('addSlideCategoryTabs'),
         spacing: 8,
         runSpacing: 8,
         children: [
           for (final tab in tabs)
-            ChoiceChip(
-              label: Text(tab.label),
+            _CategoryPill(
+              label: tab.label,
               selected: _activeCategory == tab.category,
-              onSelected: (_) => setState(() => _activeCategory = tab.category),
+              onTap: () => setState(() => _activeCategory = tab.category),
             ),
         ],
       ),
