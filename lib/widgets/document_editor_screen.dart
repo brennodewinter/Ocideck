@@ -43,6 +43,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   final GlobalKey _anchorKey = GlobalKey();
   int _anchorBlockIndex = -1;
 
+  /// De actieve weergavemodus. [_DocViewMode.source] toont de split (rauwe bron +
+  /// live weergave) om tekst te bewerken; [_DocViewMode.visual] maakt de weergave
+  /// het hoofdoppervlak, waar je de ingebedde blokken (grafiek/tabel) met een
+  /// dubbelklik bewerkt. Standaard bron: dat is waar je tekst typt.
+  _DocViewMode _viewMode = _DocViewMode.source;
+
   @override
   void initState() {
     super.initState();
@@ -136,40 +142,73 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
             unawaited(_save()),
       },
       child: Scaffold(
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            final divider = theme.colorScheme.outlineVariant;
-            final editor = _editor(theme);
-            final preview = _preview(theme, source);
-            // Naast elkaar op een breed venster; onder elkaar wanneer het te smal
-            // wordt voor twee leesbare kolommen.
-            if (constraints.maxWidth < 760) {
-              return Column(
-                children: [
-                  Expanded(child: editor),
-                  Divider(height: 1, thickness: 1, color: divider),
-                  Expanded(child: preview),
-                ],
-              );
-            }
-            // Waar een presentatie de diastrook heeft, toont een document zijn
-            // koppen — maar alleen als er breedte genoeg is voor rail + twee
-            // leesbare kolommen ernaast.
-            final showRail = constraints.maxWidth >= 940;
-            return Row(
-              children: [
-                if (showRail) ...[
-                  _outlineRail(theme, source),
-                  VerticalDivider(width: 1, thickness: 1, color: divider),
-                ],
-                Expanded(child: editor),
-                VerticalDivider(width: 1, thickness: 1, color: divider),
-                Expanded(child: preview),
-              ],
-            );
-          },
+        body: Column(
+          children: [
+            _DocViewModeBar(
+              mode: _viewMode,
+              onChanged: (m) => setState(() => _viewMode = m),
+            ),
+            Divider(height: 1, thickness: 1, color: theme.colorScheme.outlineVariant),
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) => _viewMode == _DocViewMode.visual
+                    ? _visualLayout(theme, source, constraints)
+                    : _sourceLayout(theme, source, constraints),
+              ),
+            ),
+          ],
         ),
       ),
+    );
+  }
+
+  /// Bron-modus: de rauwe bron en de live weergave naast elkaar op een breed
+  /// venster, onder elkaar wanneer het te smal wordt voor twee leesbare kolommen.
+  /// De Overzicht-rail komt erbij zodra er breedte genoeg is.
+  Widget _sourceLayout(ThemeData theme, String source, BoxConstraints c) {
+    final divider = theme.colorScheme.outlineVariant;
+    final editor = _editor(theme);
+    final preview = _preview(theme, source);
+    if (c.maxWidth < 760) {
+      return Column(
+        children: [
+          Expanded(child: editor),
+          Divider(height: 1, thickness: 1, color: divider),
+          Expanded(child: preview),
+        ],
+      );
+    }
+    // Waar een presentatie de diastrook heeft, toont een document zijn koppen —
+    // maar alleen als er breedte genoeg is voor rail + twee leesbare kolommen.
+    final showRail = c.maxWidth >= 940;
+    return Row(
+      children: [
+        if (showRail) ...[
+          _outlineRail(theme, source),
+          VerticalDivider(width: 1, thickness: 1, color: divider),
+        ],
+        Expanded(child: editor),
+        VerticalDivider(width: 1, thickness: 1, color: divider),
+        Expanded(child: preview),
+      ],
+    );
+  }
+
+  /// Visuele modus: de weergave is het hoofdoppervlak (gecentreerd als een
+  /// documentpagina), waar je de ingebedde blokken met een dubbelklik bewerkt.
+  /// Geen rauwe editor; voor tekst wissel je terug naar de bron. De Overzicht-rail
+  /// blijft naast de weergave zolang er breedte genoeg is.
+  Widget _visualLayout(ThemeData theme, String source, BoxConstraints c) {
+    final divider = theme.colorScheme.outlineVariant;
+    final showRail = c.maxWidth >= 940;
+    return Row(
+      children: [
+        if (showRail) ...[
+          _outlineRail(theme, source),
+          VerticalDivider(width: 1, thickness: 1, color: divider),
+        ],
+        Expanded(child: _preview(theme, source, centered: true)),
+      ],
     );
   }
 
@@ -195,9 +234,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     ),
   );
 
-  Widget _preview(ThemeData theme, String source) => Container(
+  Widget _preview(ThemeData theme, String source, {bool centered = false}) => Container(
     color: theme.colorScheme.surface,
-    alignment: Alignment.topLeft,
+    alignment: centered ? Alignment.topCenter : Alignment.topLeft,
     child: SingleChildScrollView(
       controller: _previewScroll,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -358,6 +397,49 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       ),
     ),
   );
+}
+
+/// De weergavemodus van de documenteditor. Twee manieren om naar hetzelfde
+/// document te kijken, nooit een derde renderpad (DOCUMENT_MODE.md §2.1): de bron
+/// als tekst, of de weergave als hoofdoppervlak.
+enum _DocViewMode { visual, source }
+
+/// De segmentkeuze bovenaan de documenteditor: wissel tussen de visuele modus en
+/// de bron-split. Top-level widget zodat het bewerkscherm zelf slank blijft; de
+/// labels lopen via [l10n] mee met de langste taal (geen vaste breedte).
+class _DocViewModeBar extends StatelessWidget {
+  final _DocViewMode mode;
+  final ValueChanged<_DocViewMode> onChanged;
+
+  const _DocViewModeBar({required this.mode, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Container(
+      color: Theme.of(context).colorScheme.surface,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      alignment: Alignment.centerLeft,
+      child: SegmentedButton<_DocViewMode>(
+        segments: [
+          ButtonSegment(
+            value: _DocViewMode.visual,
+            label: Text(l10n.d('Visueel')),
+            icon: const Icon(Icons.visibility_outlined, size: 15),
+          ),
+          ButtonSegment(
+            value: _DocViewMode.source,
+            label: Text(l10n.d('Bron')),
+            icon: const Icon(Icons.code, size: 15),
+          ),
+        ],
+        selected: {mode},
+        showSelectedIcon: false,
+        style: const ButtonStyle(visualDensity: VisualDensity.compact),
+        onSelectionChanged: (s) => onChanged(s.first),
+      ),
+    );
+  }
 }
 
 /// De fence van één ```chart-blok, om de `chartOrdinal`-de (vanaf 0) in de bron

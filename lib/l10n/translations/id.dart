@@ -1773,6 +1773,7 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo profil gaya ini tidak ditemukan dan tidak ditampilkan (jalur: {pad}). Pilih logo di pengaturan presentasi.',
+  'Visueel': 'Visual',
   'Document': 'Dokumen',
   'Nieuw document': 'Dokumen baru',
   'Geldt voor {n} slides van deze gesplitste reeks.':

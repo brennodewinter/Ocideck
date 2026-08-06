@@ -1776,6 +1776,7 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'S Logo vo däm Stiilprofil isch nöd gfunde worde und wird nöd aazeigt (Pfad: {pad}). Wähl e Logo i de Präsentationsistellige.',
+  'Visueel': 'Visuell',
   'Document': 'Dokumänt',
   'Nieuw document': 'Nöis Dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':

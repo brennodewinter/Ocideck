@@ -1800,6 +1800,7 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Το λογότυπο αυτού του προφίλ στυλ δεν βρέθηκε και δεν εμφανίζεται (διαδρομή: {pad}). Επιλέξτε ένα λογότυπο στις ρυθμίσεις παρουσίασης.',
+  'Visueel': 'Οπτικό',
   'Document': 'Έγγραφο',
   'Nieuw document': 'Νέο έγγραφο',
   'Geldt voor {n} slides van deze gesplitste reeks.':

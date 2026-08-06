@@ -1779,6 +1779,7 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logotip ovog profila stila nije pronađen i ne prikazuje se (putanja: {pad}). Odaberite logotip u postavkama prezentacije.',
+  'Visueel': 'Vizualno',
   'Document': 'Dokument',
   'Nieuw document': 'Novi dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':

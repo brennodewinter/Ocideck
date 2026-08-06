@@ -728,6 +728,7 @@ const _dutchSourceIt = {
 const _dutchSourceAddIt = {
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Il logo di questo profilo di stile non è stato trovato e non viene mostrato (percorso: {pad}). Scegli un logo nelle impostazioni di presentazione.',
+  'Visueel': 'Visuale',
   'Document': 'Documento',
   'Nieuw document': 'Nuovo documento',
   'Geldt voor {n} slides van deze gesplitste reeks.':
