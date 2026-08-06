@@ -507,6 +507,7 @@ class DocumentMarkdownView extends StatelessWidget {
   Widget _mermaid(_Theme t, String code) => DocMermaidView(
     source: code,
     fallback: _codeBlock(t, code),
+    dark: t.dark,
     renderer: mermaidRenderer,
   );
 
@@ -801,7 +802,8 @@ String _hexRgb(Color color) {
 
 class _Theme {
   _Theme(ThemeData theme)
-    : body = TextStyle(
+    : dark = theme.brightness == Brightness.dark,
+      body = TextStyle(
         fontSize: 15.5,
         height: 1.55,
         color: theme.colorScheme.onSurface,
@@ -838,6 +840,7 @@ class _Theme {
       findMatch = AppTheme.findHighlight,
       findActive = AppTheme.findHighlightActive;
 
+  final bool dark;
   final TextStyle body;
   final Color heading;
   final Color marker;

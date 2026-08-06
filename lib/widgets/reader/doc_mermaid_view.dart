@@ -24,11 +24,20 @@ import '../slides/mermaid_diagram.dart' show MermaidRenderer;
 /// is no WebView, but also a genuine render failure) the widget shows
 /// [fallback]: the reader's ordinary code block, so the source is still visible
 /// rather than an empty frame.
+///
+/// Unlike a slide — a fixed white canvas in both app themes, rendered in a
+/// theme-less export isolate — the reader is app chrome that follows the
+/// light/dark appearance and is never exported. So here, and here alone, the
+/// diagram tracks the app theme: in dark mode it renders with Mermaid's dark
+/// theme (light strokes on a dark card) instead of dark-on-near-white, which
+/// otherwise read as a harsh white card amid the dark prose. The slide renderer
+/// ([MermaidDiagram]) deliberately keeps its near-white card regardless.
 class DocMermaidView extends StatefulWidget {
   const DocMermaidView({
     super.key,
     required this.source,
     required this.fallback,
+    this.dark = false,
     this.renderer,
   });
 
@@ -38,6 +47,11 @@ class DocMermaidView extends StatefulWidget {
   /// Shown while rendering is impossible or has failed: the same monospace code
   /// block the reader uses for every other fence, so nothing is lost.
   final Widget fallback;
+
+  /// Whether the reader is in dark mode. Drives both the Mermaid theme (a dark
+  /// theme with light strokes) and the card colours; `false` keeps the original
+  /// near-white card and dark-on-light diagram.
+  final bool dark;
 
   /// Injectable for tests; defaults to the shared [MermaidRenderService].
   final MermaidRenderer? renderer;
@@ -53,17 +67,27 @@ class _DocMermaidViewState extends State<DocMermaidView> {
   MermaidRenderer get _render =>
       widget.renderer ?? MermaidRenderService.instance.render;
 
+  /// The definition actually handed to the renderer: in dark mode it carries an
+  /// init directive selecting Mermaid's dark theme, so the cache keys the two
+  /// theme variants apart and a theme toggle re-renders rather than reusing the
+  /// light SVG.
+  String get _effectiveSource =>
+      widget.dark ? mermaidWithDarkTheme(widget.source) : widget.source;
+
   @override
   void initState() {
     super.initState();
-    _svg = _render(widget.source);
+    _svg = _render(_effectiveSource);
   }
 
   @override
   void didUpdateWidget(DocMermaidView old) {
     super.didUpdateWidget(old);
-    // A different document reuses this element for a new diagram: re-render.
-    if (old.source != widget.source) _svg = _render(widget.source);
+    // A different document reuses this element for a new diagram, or the app
+    // theme flipped: either way the effective source changes, so re-render.
+    if (old.source != widget.source || old.dark != widget.dark) {
+      _svg = _render(_effectiveSource);
+    }
   }
 
   @override
@@ -94,14 +118,23 @@ class _DocMermaidViewState extends State<DocMermaidView> {
     );
   }
 
+  /// The card backdrop behind the diagram. In light mode a near-white frame the
+  /// dark-on-transparent diagram reads on; in dark mode a dark panel the
+  /// dark-theme diagram (light strokes) reads on, so the reader shows a diagram
+  /// that belongs to the surrounding prose rather than a glaring white cut-out.
+  Color get _cardColor =>
+      widget.dark ? AppTheme.docMermaidDarkCard : AppTheme.nearWhite;
+  Color get _cardBorder =>
+      widget.dark ? AppTheme.docMermaidDarkBorder : AppTheme.ghBorder;
+
   /// A slim, fixed-height frame while the (async) WebView render is in flight,
   /// so the document doesn't jump when the diagram arrives.
   Widget _loading() => Container(
     height: 64,
     margin: const EdgeInsets.only(bottom: 12),
     decoration: BoxDecoration(
-      color: AppTheme.nearWhite,
-      border: Border.all(color: AppTheme.ghBorder),
+      color: _cardColor,
+      border: Border.all(color: _cardBorder),
       borderRadius: BorderRadius.circular(8),
     ),
     child: const Center(
@@ -114,17 +147,18 @@ class _DocMermaidViewState extends State<DocMermaidView> {
   );
 
   Widget _diagram(BuildContext context, String svg, Size natural) {
-    // Mermaid SVGs assume a light backdrop (dark strokes/text on transparent),
-    // so the frame is near-white in both app themes — the same choice the slide
-    // renderer makes — rather than inheriting a dark surface the diagram would
-    // vanish into.
+    // In light mode the diagram is dark-on-transparent and the frame is
+    // near-white; in dark mode it renders with Mermaid's dark theme (light
+    // strokes) and the frame is dark — see [_cardColor]. The slide renderer
+    // stays near-white in both themes on purpose (a slide is a white canvas,
+    // exported theme-lessly); the reader is the one app-themed surface.
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppTheme.nearWhite,
-        border: Border.all(color: AppTheme.ghBorder),
+        color: _cardColor,
+        border: Border.all(color: _cardBorder),
         borderRadius: BorderRadius.circular(8),
       ),
       child: LayoutBuilder(
@@ -159,6 +193,21 @@ class _DocMermaidViewState extends State<DocMermaidView> {
       ),
     );
   }
+}
+
+/// Prepends a Mermaid init directive selecting the built-in `dark` theme, so a
+/// diagram rendered for the dark reader draws light strokes and text instead of
+/// the default dark-on-light. `theme` is deliberately absent from
+/// `kMermaidInitConfig`'s `secure` list, so a per-diagram directive may override
+/// it without touching the locked-down security posture.
+///
+/// Skipped when the source already opens with its own directive (`%%{`) or with
+/// YAML frontmatter (`---`) — both must stay the first line, and a diagram that
+/// sets its own theme keeps it.
+String mermaidWithDarkTheme(String source) {
+  final head = source.trimLeft();
+  if (head.startsWith('%%{') || head.startsWith('---')) return source;
+  return '%%{init: {"theme":"dark"}}%%\n$source';
 }
 
 /// The diagram's intrinsic pixel size, read from the SVG `viewBox`

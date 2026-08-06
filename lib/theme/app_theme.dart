@@ -171,6 +171,19 @@ class AppTheme {
   static const ghBorder = Color(0xFFE1E4E8);
   static const ghInk = Color(0xFF24292E);
 
+  // Mermaid-kaart in de dónkere documentlezer (DocMermaidView). Anders dan een
+  // dia — een vast wit canvas, themaloos geëxporteerd — is de lezer app-chrome
+  // die het thema volgt en nooit geëxporteerd wordt; alleen dáár kleurt de
+  // kaart mee. De achtergrond is bewust mermaids eigen dark-thema-backdrop
+  // (`#333`): dat thema berekent lijn/tekst/node-rand als contrast daarvan (dus
+  // licht) en vult nodes met bijna-zwart `#1f2020`. Op deze kaart landt elk
+  // element op de backdrop waarvoor het berekend is; een donkerder paneel zou de
+  // node-vullingen opslokken. De rand licht een tikje op tegen het donkerdere
+  // lezer-oppervlak. Const en niet mode-afhankelijk: de lezer kiest ze alleen in
+  // donkere modus, zoals de `gh*`-neutralen hierboven alleen op een dia gelden.
+  static const docMermaidDarkCard = Color(0xFF333333);
+  static const docMermaidDarkBorder = Color(0xFF4A4A4A);
+
   // Find-in-page highlight in the documentation reader: a warm amber for a
   // match, a stronger orange for the active hit. The alpha is baked into the
   // ARGB (0x38 ≈ 0.22, 0x73 ≈ 0.45) so it reads on both a light and a dark
