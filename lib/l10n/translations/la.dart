@@ -1787,6 +1787,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Huius stiliprofili insigne non inventum est et non ostenditur (via: {pad}). Elige insigne in praesentationis optionibus.',
   'Nieuw document': 'Novum documentum',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Valet pro {n} paginis huius seriei divisae.',

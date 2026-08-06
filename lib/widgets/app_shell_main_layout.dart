@@ -266,9 +266,12 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     final imageIssues =
         ref.watch(imageContrastIssuesProvider).value ??
         const <SlideQualityIssue>[];
-    final quality = imageIssues.isEmpty
+    final logoIssues =
+        ref.watch(themeLogoIssuesProvider).value ?? const <SlideQualityIssue>[];
+    final asyncIssues = [...imageIssues, ...logoIssues];
+    final quality = asyncIssues.isEmpty
         ? syncQuality
-        : SlideQualityResult([...syncQuality.issues, ...imageIssues]);
+        : SlideQualityResult([...syncQuality.issues, ...asyncIssues]);
     final readiness = evaluateExportReadiness(
       needsSave:
           !isWebPlatform && (deckState.filePath == null || deckState.isDirty),
@@ -667,8 +670,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     var quality = syncQuality;
     try {
       final imageIssues = await ref.read(imageContrastIssuesProvider.future);
-      if (imageIssues.isNotEmpty) {
-        quality = SlideQualityResult([...syncQuality.issues, ...imageIssues]);
+      final logoIssues = await ref.read(themeLogoIssuesProvider.future);
+      final asyncIssues = [...imageIssues, ...logoIssues];
+      if (asyncIssues.isNotEmpty) {
+        quality = SlideQualityResult([...syncQuality.issues, ...asyncIssues]);
       }
     } catch (e) {
       // Fall back to the sync result if the async pass fails.

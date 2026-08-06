@@ -243,6 +243,7 @@ Widget _tabScope(TabInfo tab) {
       deckQualityRawProvider.overrideWith(computeDeckQualityRaw),
       deckQualityProvider.overrideWith(computeDeckQuality),
       imageContrastIssuesProvider.overrideWith(computeImageContrastIssues),
+      themeLogoIssuesProvider.overrideWith(computeThemeLogoIssues),
       privacyRawScanProvider.overrideWith(computePrivacyRawScan),
       imagePrivacyRawIssuesProvider.overrideWith(computeImagePrivacyRawIssues),
       imagePrivacyIssuesProvider.overrideWith(computeImagePrivacyIssues),

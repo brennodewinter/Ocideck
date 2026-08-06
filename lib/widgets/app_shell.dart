@@ -78,6 +78,7 @@ import '../state/improvement_provider.dart';
 import '../state/collaboration_provider.dart';
 import '../state/matrix_client_provider.dart';
 import '../state/secret_store_provider.dart';
+import '../state/theme_logo_provider.dart';
 import '../collab/collab_device_store.dart';
 import '../services/provenance_service.dart';
 import '../state/privacy_provider.dart';

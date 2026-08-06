@@ -911,6 +911,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'The logo of this style profile was not found and is not shown (path: {pad}). Choose a logo in the presentation settings.',
   'Nieuw document': 'New document',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Applies to {n} slides of this split run.',

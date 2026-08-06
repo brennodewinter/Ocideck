@@ -1762,6 +1762,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Selle stiiliprofiili logo ei leitud ja seda ei näidata (tee: {pad}). Valige logo esitluse sätetes.',
   'Nieuw document': 'Uus dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Kehtib selle jaotatud jada {n} slaidi kohta.',

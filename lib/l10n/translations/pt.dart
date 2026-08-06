@@ -1800,6 +1800,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'O logótipo deste perfil de estilo não foi encontrado e não é mostrado (caminho: {pad}). Escolha um logótipo nas definições de apresentação.',
   'Nieuw document': 'Novo documento',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Aplica-se a {n} diapositivos desta série dividida.',

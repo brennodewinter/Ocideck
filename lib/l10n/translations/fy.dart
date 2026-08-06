@@ -731,6 +731,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'It logo fan dizze stylprofyl is net fûn en wurdt net toand (paad: {pad}). Kies in logo yn de presintaasjeynstellings.',
   'Nieuw document': 'Nij dokumint',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Jildt foar {n} slides fan dizze splitste rige.',

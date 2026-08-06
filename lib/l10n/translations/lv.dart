@@ -1770,6 +1770,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
+      'Šī stila profila logotips nav atrasts un netiek rādīts (ceļš: {pad}). Izvēlieties logotipu prezentācijas iestatījumos.',
   'Nieuw document': 'Jauns dokuments',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Piemērojams {n} slaidiem šajā sadalītajā virknē.',

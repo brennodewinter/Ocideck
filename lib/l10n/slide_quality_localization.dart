@@ -402,6 +402,15 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
       '${label('label')}${l10n.d(': ligt buiten de presentatie en gaat niet mee (')}'
           '${issue.args['path'] ?? ''}). '
           '${l10n.d('Sla de presentatie op om een kopie te maken.')}',
+    // Deckbreed: het logo wijst naar niets. Het pad staat erbij omdat de
+    // gebruiker juist dan wil weten waar de app zocht — zonder blijft "logo
+    // ontbreekt" een raadsel bovenop een lege hoek (#1298).
+    SlideQualityIssueKind.themeLogoMissing =>
+      l10n
+          .d(
+            'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.',
+          )
+          .replaceAll('{pad}', issue.args['path'] ?? ''),
     SlideQualityIssueKind.questionNotAnswerable => l10n.d(
       'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.',
     ),
