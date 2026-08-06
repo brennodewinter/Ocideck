@@ -1774,6 +1774,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Gilt für {n} Slides vo dere gteilte Reihe.',
   'Los automatisch op wat kan': 'Behäb, was automatisch gaht',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT het e unerwarteti Antwort ({code}) gee. Probier spöter nomol oder frag din Admin.',

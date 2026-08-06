@@ -1806,6 +1806,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Baineann sé le {n} sleamhnán den tsraith roinnte seo.',
   'Los automatisch op wat kan': 'Deisigh an méid is féidir a uathoibriú',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'Thug OpenKAT freagra gan choinne ({code}). Bain triail eile as ar ball nó iarr cabhair ar do riarthóir.',

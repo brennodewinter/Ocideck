@@ -2748,6 +2748,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Bu bölünmüş serideki {n} slayt için geçerli.',
   'Los automatisch op wat kan': 'Otomatik düzeltilebilenleri düzelt',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT beklenmedik bir yanıt döndürdü ({code}). Daha sonra tekrar deneyin veya yöneticinizden yardım isteyin.',

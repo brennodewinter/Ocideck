@@ -593,4 +593,32 @@ void main() {
       });
     });
   });
+
+  group('run-scope-suffix bij samengevatte split-run-meldingen (#1289)', () {
+    test('voegt de reeks-omvang toe zodra runPages is gezet', () {
+      inBothLanguages(() {
+        final base = formatSlideQualityIssue(
+          l10n,
+          issue(
+            SlideQualityIssueKind.bulletAverageLengthHigh,
+            category: SlideQualityCategory.textDensity,
+            args: const {'average': '20'},
+          ),
+        );
+        final withRun = formatSlideQualityIssue(
+          l10n,
+          issue(
+            SlideQualityIssueKind.bulletAverageLengthHigh,
+            category: SlideQualityCategory.textDensity,
+            args: const {'average': '20', 'runPages': '5'},
+          ),
+        );
+        // De samengevatte melding begint met de gewone tekst en zegt er eerlijk
+        // bij op hoeveel pagina's van de reeks ze staat.
+        expect(withRun, startsWith(base));
+        expect(withRun.length, greaterThan(base.length));
+        expect(withRun, contains('5'));
+      });
+    });
+  });
 }

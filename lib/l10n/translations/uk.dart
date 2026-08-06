@@ -1788,6 +1788,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Стосується {n} слайдів цієї розділеної серії.',
   'Los automatisch op wat kan': 'Виправити те, що можна автоматично',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT надав неочікувану відповідь ({code}). Спробуйте пізніше або зверніться до адміністратора.',

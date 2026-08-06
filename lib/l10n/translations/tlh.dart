@@ -1746,6 +1746,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'rarvam {n} \'echletHomvaD lI\'.',
   'Los automatisch op wat kan': 'tI\'laHlu\'bogh Qaghmey yItI\'',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT jang ({code}). qaS yIqaS pagh vavvo\' naw\'.',

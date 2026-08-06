@@ -1778,6 +1778,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Taikoma {n} skaidrėms iš šios padalytos sekos.',
   'Los automatisch op wat kan': 'Taisyti, ką galima automatiškai',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT grąžino netikėtą atsakymą ({code}). Bandykite vėliau arba kreipkitės į administratorių.',

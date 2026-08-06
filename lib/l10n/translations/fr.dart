@@ -730,6 +730,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'S\'applique à {n} diapositives de cette série fractionnée.',
   'Los automatisch op wat kan': 'Corriger ce qui peut l\'être automatiquement',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT a renvoyé une réponse inattendue ({code}). Réessayez plus tard ou demandez de l\'aide à votre administrateur.',

@@ -1800,6 +1800,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Aplica-se a {n} diapositivos desta série dividida.',
   'Los automatisch op wat kan': 'Corrigir o que dá para automatizar',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'O OpenKAT devolveu uma resposta inesperada ({code}). Tente mais tarde ou peça ajuda ao administrador.',

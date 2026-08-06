@@ -1793,6 +1793,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Отнася се за {n} слайда от тази разделена поредица.',
   'Los automatisch op wat kan': 'Поправи каквото може автоматично',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT върна неочакван отговор ({code}). Опитайте по-късно или поискайте помощ от администратора.',

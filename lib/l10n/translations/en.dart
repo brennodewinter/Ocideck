@@ -911,6 +911,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Applies to {n} slides of this split run.',
   'Los automatisch op wat kan': 'Fix what can be automated',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT returned an unexpected response ({code}). Try again later or ask your administrator for help.',

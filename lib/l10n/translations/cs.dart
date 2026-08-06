@@ -1774,6 +1774,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Platí pro {n} snímků této rozdělené řady.',
   'Los automatisch op wat kan': 'Opravit, co lze automaticky',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT vrátil neočekávanou odpověď ({code}). Zkuste to později nebo požádejte správce o pomoc.',

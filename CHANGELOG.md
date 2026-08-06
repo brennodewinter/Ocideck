@@ -1081,6 +1081,33 @@ that before deciding whether this alpha fits what you are doing.
   repo-regel heuristiek-tegen-echte-render — de effectieve fontgrootte in een
   echte widget-render van een vervolgpagina
   (`test/split_bullets_image_page_target_test.dart`).
+- **Kwaliteitspaneel: aanbevolen 'Splits slide' liet het aantal waarschuwingen exploderen (#1289).**
+  Op een overvolle bullets+afbeelding-dia beveelt het paneel 'Splits slide' aan.
+  Wie dat opvolgde, kreeg een veelvoud aan waarschuwingen terug: elke deelpagina
+  van de gesplitste lijst herhaalde dezelfde lengte-gedreven
+  tekstdichtheidsmeldingen (veel woorden, gemiddeld lange bullets, meerzins-bullet,
+  diepe nesting, "verkleind tot X%"). Splitsen verdeelt de bullets over pagina's —
+  het maakt ze niet korter — dus lost het de dichtheid-per-aantal op, maar niet de
+  lengte-per-bullet, en vermenigvuldigen die lengte-meldingen zich over de pagina's:
+  straf op gehoorzaamheid. De nieuwe, pure top-level functie `collapseSplitRunDensity`
+  in `lib/services/slide_quality/split_run_density_summary.dart` vat de meldingen uit
+  de geëxporteerde set `kLengthDrivenRunDensityKinds` die over twee of meer pagina's
+  van dezelfde gesplitste reeks (de `continuesSplit`-keten uit `splitRunRange`)
+  terugkeren samen tot één per soort per reeks. De samenvatting draagt in
+  `args['runPages']` mee over hoeveel pagina's ze gaat, en `formatSlideQualityIssue`
+  plakt daar de zin "Geldt voor {n} slides van deze gesplitste reeks." achteraan, zodat
+  de ene regel niet als een enkele-pagina-probleem leest. Dit gebeurt op de
+  weergave-laag: `computeDeckQuality` past de samenvatting toe ná de accepted-filter,
+  terwijl `deckQualityRawProvider`/`computeDeckQualityRaw` ongecollapst blijven — de
+  fix-motor ('Los automatisch op wat kan') heranalyseert vers en de thumbnailbadges
+  plus de badge-popover lezen de ruwe provider, dus die blijven elke pagina apart
+  zien. Fouten (de critical-varianten) en aantal-gedreven meldingen (te veel bullets)
+  blijven per pagina staan, want die lost verder splitsen wél op. Regressietests:
+  `split_run_density_summary_test.dart` (de samenvatting én de grenzen — alleen echte
+  runs, pas vanaf twee pagina's, nooit fouten of aantal-per-dia, en ruw vs. weergave
+  via de providers na een echte 'Splits slide') en een run-scope-suffix-test in
+  `slide_quality_localization_coverage_test.dart`. Documentatie: `docs/USER_GUIDE.md`
+  (de tekstdichtheid-/split-run-sectie) en `docs/SOURCE_MAP.md`.
 - **Grafieken: waarde-tooltip bij hover voor zeven ontbrekende types (#1281).**
   Spreiding (scatter), gestapelde staaf, horizontale staaf, horizontale
   gestapelde staaf, combo, waterval en bullet toonden bij muis-hover geen

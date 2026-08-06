@@ -1770,6 +1770,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Gäller för {n} bilder i den här uppdelade serien.',
   'Los automatisch op wat kan': 'Åtgärda det som kan automatiseras',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT gav ett oväntat svar ({code}). Försök igen senare eller be administratören om hjälp.',

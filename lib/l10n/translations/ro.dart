@@ -1788,6 +1788,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Se aplică la {n} diapozitive din această serie divizată.',
   'Los automatisch op wat kan': 'Repară ce se poate automat',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT a returnat un răspuns neașteptat ({code}). Încercați mai târziu sau cereți ajutor administratorului.',

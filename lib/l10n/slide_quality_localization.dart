@@ -313,7 +313,7 @@ String slideQualityCategoryLabel(
 String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
   String label(String key) => l10n.d(issue.args[key] ?? key);
 
-  return switch (issue.kind) {
+  final message = switch (issue.kind) {
     SlideQualityIssueKind.missingAltCaption =>
       '${label('label')} ${l10n.d('heeft geen bijschrift/alt-tekst.')}',
     SlideQualityIssueKind.themeContrast => _formatThemeContrast(l10n, issue),
@@ -436,6 +436,14 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
       '${l10n.d('Golden-thread-id')} ${issue.args['id'] ?? ''} '
           '${l10n.d('staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.')}',
   };
+
+  // Een over meerdere split-pagina's samengevatte dichtheidsmelding (#1289):
+  // zeg er eerlijk bij op hoeveel pagina's van de reeks hij staat, zodat de ene
+  // regel niet als een enkele-pagina-probleem leest.
+  final runPages = issue.args['runPages'];
+  if (runPages == null) return message;
+  return '$message '
+      '${l10n.d('Geldt voor {n} slides van deze gesplitste reeks.').replaceAll('{n}', runPages)}';
 }
 
 /// De tekst van een privacybevinding.

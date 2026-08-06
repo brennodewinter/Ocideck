@@ -1775,6 +1775,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Ennek az osztott sorozatnak {n} diájára vonatkozik.',
   'Los automatisch op wat kan': 'Javítsd, ami automatizálható',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'Az OpenKAT váratlan választ adott ({code}). Próbálja később újra, vagy kérjen segítséget az adminisztrátortól.',
