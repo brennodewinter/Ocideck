@@ -635,6 +635,82 @@ void main() {
       expect(html, contains('Omzet'));
     });
 
+    // Regressie: de grafiektitel viel in een donker thema weg omdat hij blind
+    // de (donkere) thema-tekstkleur nam en op de donkere grafiekkaart landde —
+    // marineblauw op bijna-zwart, WCAG-onleesbaar. De titel kiest nu een
+    // leesbare inkt tegen de achtergrond waaróp hij belandt.
+    ChartSpec titledBar() => const ChartSpec(
+      type: ChartType.bar,
+      title: 'Omzet',
+      x: ['A'],
+      series: [
+        ChartSeries(name: 'V', data: [1]),
+      ],
+    );
+
+    /// De fill van het titel-<text> (font-size 26, vet) uit de gerenderde SVG.
+    String titleFill(String html) {
+      final m = RegExp(
+        r'<text x="40" y="40" font-size="26" font-weight="bold" fill="([^"]+)"',
+      ).firstMatch(html);
+      expect(m, isNotNull, reason: 'geen titel-<text> gevonden in de SVG');
+      return m!.group(1)!;
+    }
+
+    test(
+      'title keeps the theme text colour when it contrasts (light slide)',
+      () {
+        // #003399 op wit haalt de contrastdrempel ruim — merkkleur blijft staan.
+        final html = _render(
+          titledBar(),
+          theme: const ThemeProfile(
+            slideBackgroundColor: '#FFFFFF',
+            textColor: '#003399',
+          ),
+        );
+        expect(titleFill(html), '#003399');
+      },
+    );
+
+    test('title flips to a light ink on a dark-themed slide', () {
+      // Donkere dia-achtergrond met een donkere tekstkleur: onleesbaar zoals het
+      // was; de titel wordt nu wit in plaats van de thema-navy.
+      final html = _render(
+        titledBar(),
+        theme: const ThemeProfile(
+          slideBackgroundColor: '#0F172A',
+          textColor: '#1E293B',
+        ),
+      );
+      expect(titleFill(html), '#FFFFFF');
+    });
+
+    test('title flips when the chart lands on a dark card (background arg)', () {
+      // De documentweergave zet dezelfde SVG op een donkere kaart. De thema-navy
+      // zou daar wegvallen; de titel kiest wit tegen de meegegeven kaartkleur.
+      final svg = MarpHtmlService.chartSpecSvg(
+        titledBar(),
+        const ThemeProfile(
+          slideBackgroundColor: '#FFFFFF',
+          textColor: '#003399',
+        ),
+        background: '#111827',
+      );
+      expect(titleFill(svg), '#FFFFFF');
+    });
+
+    test('title stays the brand colour on a light card (background arg)', () {
+      final svg = MarpHtmlService.chartSpecSvg(
+        titledBar(),
+        const ThemeProfile(
+          slideBackgroundColor: '#FFFFFF',
+          textColor: '#003399',
+        ),
+        background: '#FFFFFF',
+      );
+      expect(titleFill(svg), '#003399');
+    });
+
     test('all-zero data still renders without dividing by zero', () {
       final html = _render(
         const ChartSpec(

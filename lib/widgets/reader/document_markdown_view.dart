@@ -529,7 +529,11 @@ class DocumentMarkdownView extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 800 / 450,
         child: SvgPicture.string(
-          MarpHtmlService.chartSpecSvg(spec, chartTheme),
+          MarpHtmlService.chartSpecSvg(
+            spec,
+            chartTheme,
+            background: t.chartCardHex,
+          ),
           fit: BoxFit.contain,
         ),
       ),
@@ -788,6 +792,13 @@ class _ListLine {
 
 /// Resolved, theme-derived colours and the base text style, computed once so
 /// every block builder shares them.
+/// An opaque [color] as `#RRGGBB` for handing to the hex-based SVG renderer.
+String _hexRgb(Color color) {
+  String two(double channel) =>
+      (channel * 255).round().clamp(0, 255).toRadixString(16).padLeft(2, '0');
+  return '#${two(color.r)}${two(color.g)}${two(color.b)}'.toUpperCase();
+}
+
 class _Theme {
   _Theme(ThemeData theme)
     : body = TextStyle(
@@ -808,6 +819,16 @@ class _Theme {
       quoteBar = AppPalette.of(theme).accentInk,
       quoteText = theme.colorScheme.onSurfaceVariant,
       codeBg = theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+      // The opaque colour the code/chart card actually shows: the 0.6-alpha card
+      // fill composited over the page surface. A chart SVG picks its title ink
+      // against this, so a dark app theme doesn't drop a dark title on a dark
+      // card. Kept as `#RRGGBB` because the SVG renderer speaks hex.
+      chartCardHex = _hexRgb(
+        Color.alphaBlend(
+          theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+          theme.colorScheme.surface,
+        ),
+      ),
       codeText = theme.colorScheme.onSurface,
       tableHeaderBg = theme.colorScheme.surfaceContainerHighest.withValues(
         alpha: 0.7,
@@ -827,6 +848,7 @@ class _Theme {
   final Color quoteBar;
   final Color quoteText;
   final Color codeBg;
+  final String chartCardHex;
   final Color codeText;
   final Color tableHeaderBg;
   final Color findMatch;

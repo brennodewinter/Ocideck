@@ -20,11 +20,17 @@ String _chartSvg(
   ChartSpec spec,
   ThemeProfile? theme, {
   ImprovementY01Metric y01 = ImprovementY01Metric.empty,
+  String? background,
 }) {
   if (!spec.hasInlineData) {
     return '<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg"></svg>';
   }
-  final textColor = theme?.textColor ?? '#111827';
+  // The chart sits on the slide background when exported, but on the app's card
+  // in the document view — [background] lets that caller say where it actually
+  // lands. The title and legend take the deck's text colour only when it stays
+  // legible there; on a dark ground a dark theme colour flips to a readable ink.
+  final ground = background ?? theme?.slideBackgroundColor ?? '#FFFFFF';
+  final textColor = readableChartInk(theme?.textColor ?? '#111827', ground);
   final b = StringBuffer()
     ..write(
       '<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" '
