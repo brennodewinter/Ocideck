@@ -310,6 +310,83 @@ void main() {
       expect(find.text('FALLBACK'), findsOneWidget);
       expect(find.byType(SvgPicture), findsNothing);
     });
+
+    // Regression: in dark mode a rendered diagram used to keep a bright
+    // near-white card that jarred against the dark prose. It now renders with
+    // Mermaid's dark theme on a dark card, while light mode is unchanged.
+    Color cardColour(WidgetTester tester) {
+      final container = tester.widget<Container>(
+        find
+            .ancestor(
+              of: find.byType(SvgPicture),
+              matching: find.byType(Container),
+            )
+            .first,
+      );
+      return (container.decoration as BoxDecoration).color!;
+    }
+
+    testWidgets('dark mode renders a dark-theme diagram on a dark card', (
+      tester,
+    ) async {
+      String? seen;
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData(brightness: Brightness.dark),
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: DocMermaidView(
+                source: 'graph TD; A-->B;',
+                fallback: const Text('FALLBACK'),
+                dark: true,
+                renderer: (s) async {
+                  seen = s;
+                  return smallSvg;
+                },
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      // The renderer was handed the dark-theme directive…
+      expect(seen, startsWith('%%{init: {"theme":"dark"}}%%'));
+      // …and the card is dark, not the near-white light-mode frame.
+      expect(cardColour(tester).computeLuminance(), lessThan(0.1));
+    });
+
+    testWidgets('light mode keeps the near-white card and plain source', (
+      tester,
+    ) async {
+      String? seen;
+      await pumpMermaid(tester, (s) async {
+        seen = s;
+        return smallSvg;
+      });
+      await tester.pumpAndSettle();
+      // No directive in light mode: the diagram renders dark-on-light as before.
+      expect(seen, 'graph TD; A-->B;');
+      expect(cardColour(tester).computeLuminance(), greaterThan(0.9));
+    });
+  });
+
+  group('mermaidWithDarkTheme', () {
+    test('prepends the dark-theme init directive', () {
+      expect(
+        mermaidWithDarkTheme('graph TD; A-->B;'),
+        '%%{init: {"theme":"dark"}}%%\ngraph TD; A-->B;',
+      );
+    });
+
+    test('leaves a diagram that sets its own directive untouched', () {
+      const src = '%%{init: {"theme":"forest"}}%%\ngraph TD; A-->B;';
+      expect(mermaidWithDarkTheme(src), src);
+    });
+
+    test('leaves a diagram opening with YAML frontmatter untouched', () {
+      const src = '---\ntitle: Flow\n---\ngraph TD; A-->B;';
+      expect(mermaidWithDarkTheme(src), src);
+    });
   });
 
   group('DocumentationService', () {

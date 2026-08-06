@@ -1071,6 +1071,20 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Mermaid-diagram in de donkere documentlezer kleurt mee.** Een gerenderd
+  ```mermaid-blok hield in de documentweergave een felwitte kaart met donkere
+  lijnen, óók in donker thema — een lichtvlak dat uit de toon viel tussen de
+  donkere tekst. Op een dia is dat bewust en blijft het (een dia is een vast
+  wit canvas en rendert themaloos in de export-isolate); de documentlezer is
+  echter app-chrome die het thema volgt en nooit geëxporteerd wordt. Daar volgt
+  het diagram nu het thema: in donker thema rendert `DocMermaidView` met
+  mermaids ingebouwde dark-thema (lichte lijnen/tekst) op een donkere kaart
+  (`AppTheme.docMermaidDarkCard`, mermaids eigen `#333`-backdrop, zodat de
+  bijna-zwarte node-vullingen niet wegvallen), via een per-diagram
+  `%%{init: {"theme":"dark"}}%%`-directive — `theme` staat bewust niet in de
+  `secure`-lijst van `kMermaidInitConfig`, dus dat mag zonder de
+  beveiligingspostuur te raken. Licht thema en de dia-/export-render blijven
+  ongewijzigd. Visueel gekeurd in beide thema's.
 - **Stijlprofiel-export schrijft leesbare JSON (#1296).** Een `.ocideckstyle`-
   bestand was compacte JSON op één regel — met de hand niet te bewerken. De
   export gebruikt nu `JsonEncoder.withIndent('  ')` (2-spatie indent, de
