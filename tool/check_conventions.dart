@@ -126,7 +126,8 @@ const Map<String, int> fileSizeBaseline = {
   // constructor-, duplicate- en copyWith-doorvoer. Pure dataplumbing van een
   // nieuw formaatveld (GFM-scheidingsrij-uitlijning); er valt geen gedrag
   // uit te tillen naar een part.
-  'lib/models/slide.dart': 1054,
+  // +12: tableNumberColumns-veld + doc + constructor/duplicate/copyWith-doorvoer.
+  'lib/models/slide.dart': 1066,
   // Procesverbetering module card / reveal wiring in the shell.
   // +1 (#1037): the url_launcher_util import so the play-only landing can open
   // slide links in the browser, like every other presentation surface. The file
@@ -280,7 +281,8 @@ const Map<String, int> classSizeBaseline = {
   // (markdown_service.dart). Onherleidbare codec-plumbing voor de nieuwe
   // `tableColumnAlignments`-veld; de logica zelf staat in
   // `markdown_table_codec.dart` en telt niet mee.
-  'lib/services/markdown_service.dart#MarkdownService': 2453,
+  // +14: ocideck_table_num_cols directive schrijven + _parseNumCols-lezen.
+  'lib/services/markdown_service.dart#MarkdownService': 2467,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2145,
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,

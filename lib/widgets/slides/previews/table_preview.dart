@@ -226,11 +226,17 @@ class _TablePreview extends StatelessWidget {
   final String font;
   final ThemeProfile profile;
 
+  /// De taal van het rapport (zie [Deck.language]), gebruikt voor
+  /// taalbewuste getalnotatie in gemarkeerde kolommen. Leeg = geen
+  /// notatie-toepassing (de celwaarde staat zoals hij in de .md staat).
+  final String reportLanguage;
+
   const _TablePreview({
     required this.slide,
     required this.w,
     required this.font,
     required this.profile,
+    this.reportLanguage = '',
   });
 
   @override
@@ -288,11 +294,17 @@ class _TablePreview extends StatelessWidget {
       if (!editing) {
         final expired =
             today != null && !header && isPastDateCell(value, today);
+        // Taalbewuste getalnotatie: als deze kolom gemarkeerd is en de cel
+        // een getal bevat, formatteer het volgens de deck-taal. De ruwe
+        // waarde blijft in de .md; dit is puur visueel.
+        final displayValue = (!header && _isNumberColumn(slide, col))
+            ? formatTableCellNumber(value, reportLanguage)
+            : value;
         return Padding(
           padding: padding,
           child: _md(
             context,
-            value,
+            displayValue,
             _applyFont(
               font,
               TextStyle(
@@ -589,6 +601,10 @@ double _captionBlockHeight(
 /// De [TextAlign] voor kolom [col] van [slide], uit de GFM-scheidingsrij
 /// gelezen. `start` (de Flutter-default voor links in LTR) als er geen
 /// uitlijning is opgegeven — een oud deck zonder colons blijft links.
+/// Of kolom [col] gemarkeerd is voor getalnotatie op deze slide.
+bool _isNumberColumn(Slide slide, int col) =>
+    col < slide.tableNumberColumns.length && slide.tableNumberColumns[col];
+
 TextAlign _tableAlign(Slide slide, int col) {
   final aligns = slide.tableColumnAlignments;
   if (col >= aligns.length) return TextAlign.start;

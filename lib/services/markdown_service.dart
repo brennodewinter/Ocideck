@@ -729,6 +729,18 @@ void _writeSlideDirectives(
   if (slide.nextAnchor.isNotEmpty) {
     buf.writeln('<!-- ocideck_next: ${slide.nextAnchor} -->');
   }
+  // Taalbewuste getalnotatie (opt-in per kolom): de kolomindices waarvoor de
+  // celwaarden bij het renderen als getal geformatteerd worden. De ruwe
+  // celinhoud blijft staan; dit is puur een render-instructie.
+  if (slide.tableNumberColumns.isNotEmpty) {
+    final cols = [
+      for (var c = 0; c < slide.tableNumberColumns.length; c++)
+        if (slide.tableNumberColumns[c]) c,
+    ];
+    if (cols.isNotEmpty) {
+      buf.writeln('<!-- ocideck_table_num_cols: ${cols.join(',')} -->');
+    }
+  }
   // AI-assist markers (AI_ASSIST §16.3): the fields whose text was drafted by
   // AI and not yet reviewed. Persisted so the seal gate survives a save/open.
   if (slide.aiAssistedFields.isNotEmpty) {

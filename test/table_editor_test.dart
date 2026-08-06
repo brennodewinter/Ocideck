@@ -370,4 +370,60 @@ void main() {
     await tester.pump();
     expect(copied, 'Naam\tScore\nJan\t8');
   });
+
+  // Uitlijnen via het kolom-menu zet de GFM-scheidingsrij met colons.
+  testWidgets('align column right sets TableAlign.right on the slide', (
+    tester,
+  ) async {
+    var updated = Slide.create(SlideType.table);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+        ),
+      ),
+    );
+    await tester.enterText(find.byType(TextField).at(1), 'A');
+    await tester.pump();
+    await tester.tap(find.byIcon(Icons.more_vert).at(0));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Rechts uitlijnen'));
+    await tester.pumpAndSettle();
+    expect(updated.tableColumnAlignments, [TableAlign.right]);
+  });
+
+  // Getalnotatie-toggle markeert een kolom — de celinhoud blijft rauw in de
+  // .md, maar bij het renderen wordt de waarde taalbewust geformatteerd.
+  // StatefulBuilder zodat de editor de bijgewerkte slide terugziet bij de
+  // tweede toggle — anders leest hij nog de oude widget.slide.
+  testWidgets('toggle number column sets tableNumberColumns on the slide', (
+    tester,
+  ) async {
+    var updated = Slide.create(SlideType.table);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: StatefulBuilder(
+            builder: (context, setState) => TableEditor(
+              slide: updated,
+              onUpdate: (s) => setState(() => updated = s),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.enterText(find.byType(TextField).at(1), 'A');
+    await tester.pump();
+    await tester.tap(find.byIcon(Icons.more_vert).at(0));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Getalnotatie'));
+    await tester.pumpAndSettle();
+    expect(updated.tableNumberColumns, [true]);
+    // Nogmaals toggelen zet hem uit.
+    await tester.tap(find.byIcon(Icons.more_vert).at(0));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Getalnotatie'));
+    await tester.pumpAndSettle();
+    expect(updated.tableNumberColumns, [false]);
+  });
 }

@@ -475,6 +475,9 @@ extension _MarkdownParse on MarkdownService {
       quality: d.quality,
       tableRows: type.backedByTable ? tableRows : const [],
       tableColumnAlignments: type.backedByTable ? tableAlignments : const [],
+      tableNumberColumns: type == SlideType.table
+          ? d.tableNumberColumns
+          : const [],
       tableEditable:
           type == SlideType.table && classTokens.contains('table-editable'),
       tableMarkOverdue:

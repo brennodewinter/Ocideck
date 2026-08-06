@@ -44,6 +44,7 @@ typedef _BlockDirectives = ({
   String nextAnchor,
   String ganttScale,
   bool ganttSections,
+  List<bool> tableNumberColumns,
 });
 
 /// Neemt [content] op in het notitieblok en haalt het uit de body.
@@ -123,6 +124,7 @@ extension _MarkdownParseDirectives on MarkdownService {
     var nextAnchor = '';
     var ganttScale = 'auto';
     var ganttSections = false;
+    var tableNumberColumns = const <bool>[];
     final viewComments = <String, String>{};
     final source = remaining;
     remaining = source.replaceAllMapped(_reHtmlComment, (m) {
@@ -218,6 +220,9 @@ extension _MarkdownParseDirectives on MarkdownService {
         anchor = _firstDirective(content, 'ocideck_slide_anchor:', anchor);
       } else if (content.startsWith('ocideck_next:')) {
         nextAnchor = _firstDirective(content, 'ocideck_next:', nextAnchor);
+      } else if (content.startsWith('ocideck_table_num_cols:')) {
+        final raw = content.substring('ocideck_table_num_cols:'.length).trim();
+        tableNumberColumns = _parseNumCols(raw);
       } else if (content.startsWith('ocideck_view_')) {
         _collectViewComment(viewComments, content);
       } else if (!content.startsWith('_')) {
@@ -264,6 +269,7 @@ extension _MarkdownParseDirectives on MarkdownService {
       nextAnchor: nextAnchor,
       ganttScale: ganttScale,
       ganttSections: ganttSections,
+      tableNumberColumns: tableNumberColumns,
     );
   }
 
@@ -338,4 +344,23 @@ void _collectViewComment(Map<String, String> viewComments, String content) {
         .substring(colon + 1)
         .trim();
   }
+}
+
+/// Parseert `ocideck_table_num_cols: 1,3` naar een bool-lijst. Indexen zijn
+/// 0-gebaseerd; de lijst wordt opgerekt tot de hoogste index met `false`.
+List<bool> _parseNumCols(String raw) {
+  if (raw.isEmpty) return const [];
+  final indices = raw
+      .split(',')
+      .map((s) => int.tryParse(s.trim()))
+      .where((n) => n != null && n >= 0)
+      .map((n) => n!)
+      .toSet();
+  if (indices.isEmpty) return const [];
+  final maxIdx = indices.reduce((a, b) => a > b ? a : b);
+  final result = List<bool>.filled(maxIdx + 1, false);
+  for (final i in indices) {
+    result[i] = true;
+  }
+  return result;
 }

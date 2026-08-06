@@ -535,6 +535,14 @@ class Slide {
   /// leest en schrijft dezelfde uitlijning.
   final List<TableAlign> tableColumnAlignments;
 
+  /// Per-kolom of de celwaarden als getal geformatteerd moeten worden bij het
+  /// renderen (taalbewust, via het deck-taalveld). De ruwe celinhoud blijft
+  /// staan in de .md — `1234.5` wordt `1.234,5` in een Nederlands deck en
+  /// `1,234.5` in een Engels. Opgeslagen als een OciDeck-HTML-commentaar
+  /// (`<!-- ocideck_table_num_cols: 1,3 -->`), dus het bestand blijft leesbaar
+  /// zonder OciDeck; de notatie is puur visueel.
+  final List<bool> tableNumberColumns;
+
   /// Table slides only: whether the table may be edited live during a
   /// presentation. Off by default, so tables are read-only unless the author
   /// explicitly opts in from the builder. Older presentations lack the token
@@ -705,6 +713,7 @@ class Slide {
     this.quality = QualityDisposition.warn,
     this.tableRows = const [],
     this.tableColumnAlignments = const [],
+    this.tableNumberColumns = const [],
     this.tableEditable = false,
     this.tableMarkOverdue = false,
     this.ganttScale = ganttScaleAuto,
@@ -868,6 +877,7 @@ class Slide {
       quality: src.quality,
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
       tableColumnAlignments: List<TableAlign>.from(src.tableColumnAlignments),
+      tableNumberColumns: List<bool>.from(src.tableNumberColumns),
       tableEditable: src.tableEditable,
       tableMarkOverdue: src.tableMarkOverdue,
       ganttScale: src.ganttScale,
@@ -938,6 +948,7 @@ class Slide {
     QualityDisposition? quality,
     List<List<String>>? tableRows,
     List<TableAlign>? tableColumnAlignments,
+    List<bool>? tableNumberColumns,
     bool? tableEditable,
     bool? tableMarkOverdue,
     String? ganttScale,
@@ -1016,6 +1027,7 @@ class Slide {
       tableRows: tableRows ?? this.tableRows,
       tableColumnAlignments:
           tableColumnAlignments ?? this.tableColumnAlignments,
+      tableNumberColumns: tableNumberColumns ?? this.tableNumberColumns,
       tableEditable: tableEditable ?? this.tableEditable,
       tableMarkOverdue: tableMarkOverdue ?? this.tableMarkOverdue,
       ganttScale: ganttScale ?? this.ganttScale,

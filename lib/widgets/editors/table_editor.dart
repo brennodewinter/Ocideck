@@ -23,6 +23,7 @@ enum _ColumnAction {
   alignLeft,
   alignCenter,
   alignRight,
+  toggleNumber,
 }
 
 class TableEditor extends StatefulWidget {
@@ -262,6 +263,17 @@ class _TableEditorState extends State<TableEditor> {
     }
     aligns[c] = align;
     widget.onUpdate(widget.slide.copyWith(tableColumnAlignments: aligns));
+  }
+
+  /// Zet getalnotatie voor kolom [c] aan of uit. Werkt op het slide-model
+  /// (niet op [_cells], want notatie is geen celinhoud) en emit direct.
+  void _toggleNumberColumn(int c) {
+    final cols = List<bool>.from(widget.slide.tableNumberColumns);
+    while (cols.length <= c) {
+      cols.add(false);
+    }
+    cols[c] = !cols[c];
+    widget.onUpdate(widget.slide.copyWith(tableNumberColumns: cols));
   }
 
   /// Intercepts the paste shortcut on a cell: Cmd+V (macOS), Ctrl+V
@@ -567,6 +579,15 @@ class _TableEditorState extends State<TableEditor> {
         ),
         const PopupMenuDivider(),
         PopupMenuItem(
+          value: _ColumnAction.toggleNumber,
+          child: _alignItem(
+            l10n.d('Getalnotatie'),
+            c < widget.slide.tableNumberColumns.length &&
+                widget.slide.tableNumberColumns[c],
+          ),
+        ),
+        const PopupMenuDivider(),
+        PopupMenuItem(
           enabled: _colCount > 1,
           value: _ColumnAction.delete,
           child: Text('${l10n.d('Kolom')} ${c + 1} ${l10n.d('verwijderen')}'),
@@ -580,6 +601,7 @@ class _TableEditorState extends State<TableEditor> {
         _ColumnAction.alignCenter => _setColumnAlign(c, TableAlign.center),
         _ColumnAction.alignRight => _setColumnAlign(c, TableAlign.right),
         _ColumnAction.delete => _removeColumn(c),
+        _ColumnAction.toggleNumber => _toggleNumberColumn(c),
       },
     );
   }
