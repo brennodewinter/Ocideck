@@ -1787,6 +1787,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Nieuw document': 'Novum documentum',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT responsum inopinatum ({code}) dedit. Postea iterum conare vel administratorem adi.',
   'Vanuit een OpenKAT-server': 'Ex servo OpenKAT',

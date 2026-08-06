@@ -1770,6 +1770,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Nieuw document': 'Nyt dokument',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT returnerede et uventet svar ({code}). Prøv igen senere, eller bed din administrator om hjælp.',
   'Vanuit een OpenKAT-server': 'Fra en OpenKAT-server',

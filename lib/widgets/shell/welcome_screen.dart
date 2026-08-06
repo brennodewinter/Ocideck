@@ -301,6 +301,7 @@ class _WelcomeScreen extends ConsumerWidget {
           label: Text(l10n.d('Kiezen')),
         ),
       ),
+      ..._newDocumentButton(context, ref, l10n),
       const SizedBox(height: 24),
       Divider(color: scheme.outlineVariant),
       const SizedBox(height: 16),
@@ -512,6 +513,24 @@ class _WelcomeScreen extends ConsumerWidget {
 
   Future<void> _newDeck(BuildContext context, WidgetRef ref) =>
       _createDeckFromDialog(context, ref, inNewTab: false);
+
+  /// De knop 'Nieuw document' onder 'Kiezen': opent een leeg, doorlopend
+  /// tekstdocument in plaats van een presentatie (DOCUMENT_MODE.md) — dezelfde
+  /// platte-.md-basis, andere modus. Losse methode zodat [_startColumn] onder de
+  /// methodelengte-ratchet blijft.
+  List<Widget> _newDocumentButton(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+  ) => [
+    const SizedBox(height: 10),
+    _wideSecondaryButton(
+      style: _secondaryButtonStyle(Theme.of(context).colorScheme),
+      icon: Icons.description_outlined,
+      label: Text(l10n.d('Nieuw document')),
+      onPressed: () => ref.read(tabsProvider.notifier).newDocument(),
+    ),
+  ];
 
   /// De knop 'Afbeeldingen beheren' onderaan de startkolom: opent de bibliotheek
   /// in beheermodus, los van een presentatie (#1108). Zelf gated — alleen op

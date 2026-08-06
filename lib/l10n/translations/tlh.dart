@@ -1746,6 +1746,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Nieuw document': 'ghItlh chu\'',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT jang ({code}). qaS yIqaS pagh vavvo\' naw\'.',
   'Vanuit een OpenKAT-server': 'OpenKAT De\'wI\'vo\'',

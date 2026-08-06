@@ -1783,6 +1783,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Nieuw document': 'Nowy dokument',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT zwrócił nieoczekiwaną odpowiedź ({code}). Spróbuj ponownie później lub poproś administratora o pomoc.',
   'Vanuit een OpenKAT-server': 'Z serwera OpenKAT',

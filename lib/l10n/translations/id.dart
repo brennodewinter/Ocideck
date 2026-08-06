@@ -1771,6 +1771,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Nieuw document': 'Dokumen baru',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT mengembalikan respons tak terduga ({code}). Coba lagi nanti atau minta bantuan administrator.',
   'Vanuit een OpenKAT-server': 'Dari server OpenKAT',

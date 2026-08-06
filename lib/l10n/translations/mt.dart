@@ -1793,6 +1793,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Nieuw document': 'Dokument ġdid',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT ritorna risposta mhux mistennija ({code}). Erġa\' pprova aktar tard jew itlob għajnuna lill-amministratur.',
   'Vanuit een OpenKAT-server': 'Minn server OpenKAT',

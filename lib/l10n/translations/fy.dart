@@ -731,6 +731,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Nieuw document': 'Nij dokumint',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT joe in ûnferwacht antwurd ({code}). Probearje letter opnij of freeg jo behearder om help.',
   'Vanuit een OpenKAT-server': 'Fan in OpenKAT-server',

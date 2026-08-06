@@ -1793,6 +1793,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Nieuw document': 'Нов документ',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT върна неочакван отговор ({code}). Опитайте по-късно или поискайте помощ от администратора.',
   'Vanuit een OpenKAT-server': 'От OpenKAT сървър',

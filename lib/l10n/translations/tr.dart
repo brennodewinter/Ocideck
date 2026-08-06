@@ -2748,6 +2748,7 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Nieuw document': 'Yeni belge',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT beklenmedik bir yanıt döndürdü ({code}). Daha sonra tekrar deneyin veya yöneticinizden yardım isteyin.',
   'Vanuit een OpenKAT-server': 'Bir OpenKAT sunucusundan',

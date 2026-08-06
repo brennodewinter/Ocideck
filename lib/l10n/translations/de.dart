@@ -730,6 +730,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Nieuw document': 'Neues Dokument',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT lieferte eine unerwartete Antwort ({code}). Versuchen Sie es später erneut oder bitten Sie Ihren Administrator um Hilfe.',
   'Vanuit een OpenKAT-server': 'Von einem OpenKAT-Server',

@@ -1774,6 +1774,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Nieuw document': 'Nöis Dokument',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT het e unerwarteti Antwort ({code}) gee. Probier spöter nomol oder frag din Admin.',
   'Vanuit een OpenKAT-server': 'Vo em OpenKAT-Server',

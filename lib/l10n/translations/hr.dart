@@ -1777,6 +1777,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Nieuw document': 'Novi dokument',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT je vratio neočekivani odgovor ({code}). Pokušajte kasnije ili zatražite pomoć administratora.',
   'Vanuit een OpenKAT-server': 'S OpenKAT poslužitelja',

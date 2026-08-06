@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Nieuw document': 'Új dokumentum',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'Az OpenKAT váratlan választ adott ({code}). Próbálja később újra, vagy kérjen segítséget az adminisztrátortól.',
   'Vanuit een OpenKAT-server': 'OpenKAT szerverről',

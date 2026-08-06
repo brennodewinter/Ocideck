@@ -1788,6 +1788,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Nieuw document': 'Document nou',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT a returnat un răspuns neașteptat ({code}). Încercați mai târziu sau cereți ajutor administratorului.',
   'Vanuit een OpenKAT-server': 'De pe un server OpenKAT',

@@ -1806,6 +1806,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Nieuw document': 'Cáipéis nua',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'Thug OpenKAT freagra gan choinne ({code}). Bain triail eile as ar ball nó iarr cabhair ar do riarthóir.',
   'Vanuit een OpenKAT-server': 'Ó fhreastalaí OpenKAT',

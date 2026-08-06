@@ -1770,6 +1770,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Nieuw document': 'Jauns dokuments',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT atgrieza negaidītu atbildi ({code}). Mēģiniet vēlāk vai lūdziet palīdzību administratoram.',
   'Vanuit een OpenKAT-server': 'No OpenKAT servera',

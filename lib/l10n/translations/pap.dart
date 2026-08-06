@@ -730,6 +730,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Nieuw document': 'Dokumento nobo',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT a duna un respuesta inesperá ({code}). Purba despues of pidi ayudo na bo administrador.',
   'Vanuit een OpenKAT-server': 'For di un servidor OpenKAT',

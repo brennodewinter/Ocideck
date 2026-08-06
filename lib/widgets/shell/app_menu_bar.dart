@@ -8,6 +8,7 @@ import '../../l10n/app_localizations.dart';
 @immutable
 class AppMenuActions {
   final VoidCallback newDeck;
+  final VoidCallback newDocument;
   final VoidCallback open;
   final VoidCallback settings;
   final VoidCallback userGuide;
@@ -15,6 +16,7 @@ class AppMenuActions {
 
   const AppMenuActions({
     required this.newDeck,
+    required this.newDocument,
     required this.open,
     required this.settings,
     required this.userGuide,
@@ -180,6 +182,10 @@ PlatformMenu _fileMenu(
           label: l10n.t('newPresentation'),
           shortcut: const SingleActivator(LogicalKeyboardKey.keyN, meta: true),
           onSelected: actions.newDeck,
+        ),
+        PlatformMenuItem(
+          label: l10n.d('Nieuw document'),
+          onSelected: actions.newDocument,
         ),
         PlatformMenuItem(
           label: l10n.t('openEllipsis'),

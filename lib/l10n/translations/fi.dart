@@ -1771,6 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Nieuw document': 'Uusi asiakirja',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT palautti odottamattoman vastauksen ({code}). Yritä myöhemmin uudelleen tai pyydä apua ylläpitäjältä.',
   'Vanuit een OpenKAT-server': 'OpenKAT-palvelimelta',

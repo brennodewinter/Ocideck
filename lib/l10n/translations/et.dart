@@ -1762,6 +1762,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Nieuw document': 'Uus dokument',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT tagastas ootamatu vastuse ({code}). Proovige hiljem uuesti või pöörduge administraatori poole.',
   'Vanuit een OpenKAT-server': 'OpenKAT serverist',

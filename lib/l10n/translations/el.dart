@@ -1798,6 +1798,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Nieuw document': 'Νέο έγγραφο',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'Το OpenKAT επέστρεψε απροσδόκητη απάντηση ({code}). Δοκιμάστε αργότερα ή ζητήστε βοήθεια από τον διαχειριστή.',
   'Vanuit een OpenKAT-server': 'Από διακομιστή OpenKAT',

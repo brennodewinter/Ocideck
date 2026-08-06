@@ -1800,6 +1800,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Nieuw document': 'Novo documento',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'O OpenKAT devolveu uma resposta inesperada ({code}). Tente mais tarde ou peça ajuda ao administrador.',
   'Vanuit een OpenKAT-server': 'De um servidor OpenKAT',

@@ -1778,6 +1778,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Nieuw document': 'Nový dokument',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT vrátil neočakávanú odpoveď ({code}). Skúste neskôr alebo požiadajte správcu o pomoc.',
   'Vanuit een OpenKAT-server': 'Z OpenKAT servera',

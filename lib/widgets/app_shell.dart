@@ -742,6 +742,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   /// De menubalk-handelingen die geen open presentatie nodig hebben.
   AppMenuActions _menuActions(AppLocalizations l10n) => AppMenuActions(
     newDeck: () => ref.read(tabsProvider.notifier).newEmptyTab(),
+    newDocument: () => ref.read(tabsProvider.notifier).newDocument(),
     open: _openActive,
     settings: () => SettingsDialog.show(context),
     userGuide: () => DocumentReaderScreen.open(
