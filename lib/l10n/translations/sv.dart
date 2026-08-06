@@ -1770,6 +1770,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'dia\'s uit dit document.': 'bilder från detta dokument.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logotypen för denna stilprofil hittades inte och visas inte (sökväg: {pad}). Välj en logotyp i presentationsinställningarna.',
   'Converteer naar document…': 'Konvertera till dokument…',

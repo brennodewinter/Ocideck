@@ -1798,6 +1798,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'dia\'s uit dit document.': 'διαφάνειες από αυτό το έγγραφο.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Το λογότυπο αυτού του προφίλ στυλ δεν βρέθηκε και δεν εμφανίζεται (διαδρομή: {pad}). Επιλέξτε ένα λογότυπο στις ρυθμίσεις παρουσίασης.',
   'Converteer naar document…': 'Μετατροπή σε έγγραφο…',

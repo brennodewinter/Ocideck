@@ -1793,6 +1793,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'dia\'s uit dit document.': 'slajds minn dan id-dokument.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Il-logo ta\' dan il-profil tal-istil ma nstabx u mhux jintwera (triq: {pad}). Agħżel logo fl-issettjar tal-preżentazzjoni.',
   'Converteer naar document…': 'Ikkonverti f\'dokument…',

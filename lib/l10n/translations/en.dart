@@ -911,6 +911,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'dia\'s uit dit document.': 'slides from this document.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'The logo of this style profile was not found and is not shown (path: {pad}). Choose a logo in the presentation settings.',
   'Converteer naar document…': 'Convert to document…',

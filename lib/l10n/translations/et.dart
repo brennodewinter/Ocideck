@@ -1762,6 +1762,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'dia\'s uit dit document.': 'slaidi sellest dokumendist.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Selle stiiliprofiili logo ei leitud ja seda ei näidata (tee: {pad}). Valige logo esitluse sätetes.',
   'Converteer naar document…': 'Teisenda dokumendiks…',

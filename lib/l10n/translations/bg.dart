@@ -1793,6 +1793,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'dia\'s uit dit document.': 'слайда от този документ.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Логото на този профил за стил не е намерено и не се показва (път: {pad}). Изберете логото в настройките за презентация.',
   'Converteer naar document…': 'Преобразуване в документ…',

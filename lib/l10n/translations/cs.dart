@@ -1774,6 +1774,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'dia\'s uit dit document.': 'snímků z tohoto dokumentu.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo tohoto profilu stylu nebylo nalezeno a nezobrazuje se (cesta: {pad}). Vyberte logo v nastavení prezentace.',
   'Converteer naar document…': 'Převést na dokument…',

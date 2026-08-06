@@ -1774,6 +1774,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'dia\'s uit dit document.': 'Folie us dem Dokumänt.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'S Logo vo däm Stiilprofil isch nöd gfunde worde und wird nöd aazeigt (Pfad: {pad}). Wähl e Logo i de Präsentationsistellige.',
   'Converteer naar document…': 'In Dokumänt umwandle…',

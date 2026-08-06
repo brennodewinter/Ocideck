@@ -7,7 +7,7 @@ import '../../theme/app_theme.dart';
 ///
 /// Geen enge waarschuwing maar geruststelling: we maken een **kopie** in een
 /// nieuw tabblad, het originele document blijft ongewijzigd. Wél expliciet het
-/// voorgestelde aantal dia's (gesplitst op kop) én de drop-lijst — een
+/// voorgestelde aantal dia's (gesplitst per kop en blok) én de drop-lijst — een
 /// thematische `---` wordt een diagrens (intentieverlies), en de conversie is
 /// asymmetrisch en lossy (geen bijectie-belofte).
 class ConvertToPresentationDialog extends StatelessWidget {
@@ -34,7 +34,7 @@ class ConvertToPresentationDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '$slideCount ${l10n.d('dia\'s, gesplitst op kop.')}',
+              '$slideCount ${l10n.d('dia\'s uit dit document.')}',
               style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 10),

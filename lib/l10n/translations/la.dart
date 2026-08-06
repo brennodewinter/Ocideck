@@ -1787,6 +1787,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'dia\'s uit dit document.': 'scidae ex hoc documento.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Huius stiliprofili insigne non inventum est et non ostenditur (via: {pad}). Elige insigne in praesentationis optionibus.',
   'Converteer naar document…': 'In documentum converte…',

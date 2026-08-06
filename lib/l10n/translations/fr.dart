@@ -730,6 +730,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'dia\'s uit dit document.': 'diapositives de ce document.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Le logo de ce profil de style est introuvable et n\'est pas affiché (chemin : {pad}). Choisissez un logo dans les paramètres de présentation.',
   'Converteer naar document…': 'Convertir en document…',

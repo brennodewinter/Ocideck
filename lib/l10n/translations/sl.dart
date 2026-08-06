@@ -1773,6 +1773,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'dia\'s uit dit document.': 'prosojnic iz tega dokumenta.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logotip tega profila stila ni bil najden in se ne prikazuje (pot: {pad}). Izberite logotip v nastavitvah predstavitve.',
   'Converteer naar document…': 'Pretvori v dokument…',

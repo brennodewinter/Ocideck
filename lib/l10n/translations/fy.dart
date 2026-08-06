@@ -731,6 +731,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'dia\'s uit dit document.': 'dia\'s út dit dokumint.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'It logo fan dizze stylprofyl is net fûn en wurdt net toand (paad: {pad}). Kies in logo yn de presintaasjeynstellings.',
   'Converteer naar document…': 'Nei dokumint konvertearje…',

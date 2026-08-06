@@ -1788,6 +1788,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'dia\'s uit dit document.': 'diapozitive din acest document.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo-ul acestui profil de stil nu a fost găsit și nu este afișat (cale: {pad}). Alegeți un logo în setările prezentării.',
   'Converteer naar document…': 'Conversie în document…',

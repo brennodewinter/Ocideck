@@ -1775,6 +1775,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'dia\'s uit dit document.': 'dia ebből a dokumentumból.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Ezen stílusrprofil logója nem található és nem jelenik meg (útvonal: {pad}). Válasszon egy logót a bemutató beállításaiban.',
   'Converteer naar document…': 'Átalakítás dokumentummá…',

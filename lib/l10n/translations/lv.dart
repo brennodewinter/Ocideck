@@ -1770,6 +1770,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'dia\'s uit dit document.': 'slaidi no šī dokumenta.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Šī stila profila logotips nav atrasts un netiek rādīts (ceļš: {pad}). Izvēlieties logotipu prezentācijas iestatījumos.',
   'Converteer naar document…': 'Pārvērst par dokumentu…',

@@ -1788,6 +1788,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'dia\'s uit dit document.': 'слайдів із цього документа.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Логотип цього профілю стилю не знайдено й не показано (шлях: {pad}). Виберіть логотип у налаштуваннях презентації.',
   'Converteer naar document…': 'Перетворити на документ…',

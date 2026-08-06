@@ -1777,6 +1777,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'dia\'s uit dit document.': 'slajdova iz ovog dokumenta.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logotip ovog profila stila nije pronađen i ne prikazuje se (putanja: {pad}). Odaberite logotip u postavkama prezentacije.',
   'Converteer naar document…': 'Pretvori u dokument…',

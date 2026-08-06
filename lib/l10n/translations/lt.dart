@@ -1778,6 +1778,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'dia\'s uit dit document.': 'skaidrių iš šio dokumento.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Šio stiliaus profilio logotipas nerastas ir nerodomas (kelias: {pad}). Pasirinkite logotipą pateikties nustatymuose.',
   'Converteer naar document…': 'Konvertuoti į dokumentą…',

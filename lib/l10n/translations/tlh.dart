@@ -1746,6 +1746,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'dia\'s uit dit document.': 'vam nav QIchmey.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Deghvam Segh tu\'be\'lu\' \'ej \'angbe\'lu\' (HeH: {pad}). \'ang SeHlawDaq Degh yIwIv.',
   'Converteer naar document…': 'ghItlhDaq choH…',

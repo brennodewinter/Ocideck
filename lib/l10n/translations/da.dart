@@ -1770,6 +1770,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'dia\'s uit dit document.': 'dias fra dette dokument.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logoet for denne stilprofil blev ikke fundet og vises ikke (sti: {pad}). Vælg et logo i præsentationsindstillingerne.',
   'Converteer naar document…': 'Konvertér til dokument…',

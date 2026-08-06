@@ -1783,6 +1783,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'dia\'s uit dit document.': 'slajdów z tego dokumentu.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo tego profilu stylu nie zostało znalezione i nie jest wyświetlane (ścieżka: {pad}). Wybierz logo w ustawieniach prezentacji.',
   'Converteer naar document…': 'Konwertuj na dokument…',

@@ -1771,6 +1771,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'dia\'s uit dit document.': 'diaa tästä asiakirjasta.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Tämän tyyliprofiilin logoa ei löytynyt eikä sitä näytetä (polku: {pad}). Valitse logo esityksen asetuksissa.',
   'Converteer naar document…': 'Muunna asiakirjaksi…',

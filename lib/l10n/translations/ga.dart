@@ -1806,6 +1806,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'dia\'s uit dit document.': 'sleamhnán ón doiciméad seo.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Ní bhfuarthas lógó an phróifíle stíle seo agus ní thaispeántar é (cosán: {pad}). Roghnaigh lógó i socruithe na láithreoide.',
   'Converteer naar document…': 'Tiontaigh go doiciméad…',

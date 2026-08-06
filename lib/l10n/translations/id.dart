@@ -1771,6 +1771,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'dia\'s uit dit document.': 'slide dari dokumen ini.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo profil gaya ini tidak ditemukan dan tidak ditampilkan (jalur: {pad}). Pilih logo di pengaturan presentasi.',
   'Converteer naar document…': 'Konversi ke dokumen…',
