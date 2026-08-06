@@ -82,6 +82,37 @@ extension FileServiceDocumentOpen on FileService {
     }
     return DocumentOpenResult(document: MarkdownDocument.parse(read.raw!));
   }
+
+  /// Vraagt de gebruiker waar het document naartoe moet en schrijft het daar
+  /// byte-getrouw heen (nieuw of nog niet opgeslagen document, DOCUMENT_MODE.md
+  /// §3). Levert het gekozen pad, of null bij wegklikken of schrijffout — zie
+  /// [_writeDocumentToPicked]. Spiegel van [saveDeckAsDetailed], zonder projectmap
+  /// of sidecars: een document is één plat bestand.
+  Future<String?> saveDocumentAs(
+    MarkdownDocument document, {
+    String? initialDirectory,
+  }) async => _writeDocumentToPicked(
+    document,
+    await _saveDestination(
+      dialogTitle: _d('Opslaan als'),
+      fileName: 'document.md',
+      initialDirectory: initialDirectory,
+    ),
+  );
+}
+
+/// Schrijft [document] naar het gekozen [dest] (vult `.md` aan wanneer die
+/// ontbreekt). Levert het uiteindelijke pad, of null wanneer de gebruiker het
+/// venster wegklikte (`dest == null`) of het schrijven mislukte (dat logt
+/// [saveDocument]). Top-level en niet op [FileService]: hij raakt geen veld van
+/// die klasse aan, en de klasse zit tegen haar plafond.
+Future<String?> _writeDocumentToPicked(
+  MarkdownDocument document,
+  String? dest,
+) async {
+  if (dest == null) return null;
+  final path = dest.endsWith('.md') ? dest : '$dest.md';
+  return await saveDocument(document, path) ? path : null;
 }
 
 /// Schrijf een document byte-getrouw naar [filePath]: precies de bron, geen

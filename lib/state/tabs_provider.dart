@@ -12,6 +12,7 @@ import '../models/asset_origin.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/improvement_y01.dart';
+import '../models/markdown_document.dart';
 import '../models/markdown_kind.dart';
 import '../models/settings.dart';
 import '../models/seal_record.dart';
@@ -495,9 +496,27 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (document == null) {
       return _openFailureResult(_ref, mounted, result.failure);
     }
+    _placeDocumentTab(document, filePath: path);
+    await _settings.addRecentFile(path); // soort-in-recent: latere politoer
+    return OpenResult.opened;
+  }
+
+  /// Maak een nieuw, leeg document in een nieuw tabblad. Nog niet op schijf:
+  /// het eerste Cmd/Ctrl+S valt terug op 'Opslaan als…' (kiest dan een pad).
+  /// Spiegel van [newDeckInNewTab] voor de documentmodus.
+  void newDocument() {
+    _placeDocumentTab(MarkdownDocument.parse(''));
+  }
+
+  /// Bouwt een documenttabblad rond [document] en zet het naast de bestaande
+  /// (geselecteerd). Een verse [DocumentNotifier] met een herstelabonnement dat
+  /// de kopie wist zodra het tabblad schoon is — gedeeld door het openen van een
+  /// `.md` en het maken van een nieuw document.
+  void _placeDocumentTab(MarkdownDocument document, {String? filePath}) {
     final id = _nextId++;
     final key = _uuid.v4();
-    final notifier = DocumentNotifier()..loadDocument(document, filePath: path);
+    final notifier = DocumentNotifier()
+      ..loadDocument(document, filePath: filePath);
     _subs[id] = notifier.stream.listen((st) {
       if (!mounted) return;
       if (!(st.isOpen && st.isDirty)) _recovery.discard(key);
@@ -512,8 +531,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
       tabs: [...state.tabs, tab],
       selectedIndex: state.tabs.length,
     );
-    await _settings.addRecentFile(path); // soort-in-recent: latere politoer
-    return OpenResult.opened;
   }
 
   /// Zoek een byte-identieke kopie van het zojuist geopende bestand in de

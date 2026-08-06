@@ -9,7 +9,9 @@ import '../l10n/app_localizations.dart';
 import '../models/markdown_outline.dart';
 import '../models/slide.dart';
 import '../services/file_service.dart';
+import '../state/deck_provider.dart' show fileServiceProvider;
 import '../state/document_provider.dart';
+import '../state/settings_provider.dart' show settingsProvider, SettingsTraces;
 import '../utils/doc_link.dart' show headingSlug;
 import 'editors/chart_editor.dart';
 import 'editors/table_editor.dart';
@@ -56,18 +58,29 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     super.dispose();
   }
 
-  /// Sla het document byte-getrouw op naar zijn eigen pad. Cmd/Ctrl+S, net als
-  /// een deck. Feedback is de dirty-stip op het tabblad die verdwijnt — geen
-  /// aparte melding nodig. Een nog niet opgeslagen document (geen pad) kan pas
-  /// worden bewaard zodra 'Opslaan als…' er is; tot dan is dit een no-op.
+  /// Sla het document op. Cmd/Ctrl+S, net als een deck. Feedback is de dirty-stip
+  /// op het tabblad die verdwijnt — geen aparte melding nodig.
+  ///
+  /// Heeft het al een pad, dan byte-getrouw terug naar dat pad (alleen als er
+  /// iets veranderde). Een nog niet opgeslagen document (nieuw, geen pad) valt
+  /// terug op 'Opslaan als…': kies een pad, schrijf, en zet het in de recente
+  /// lijst — net als een deck.
   Future<void> _save() async {
     final state = ref.read(documentProvider);
-    final path = state.filePath;
     final document = state.document;
-    if (path == null || document == null || !state.isDirty) return;
-    if (await saveDocument(document, path) && mounted) {
-      ref.read(documentProvider.notifier).markSaved(filePath: path);
+    if (document == null) return;
+    final path = state.filePath;
+    if (path != null) {
+      if (!state.isDirty) return;
+      if (await saveDocument(document, path) && mounted) {
+        ref.read(documentProvider.notifier).markSaved(filePath: path);
+      }
+      return;
     }
+    final saved = await ref.read(fileServiceProvider).saveDocumentAs(document);
+    if (saved == null || !mounted) return;
+    ref.read(documentProvider.notifier).markSaved(filePath: saved);
+    await ref.read(settingsProvider.notifier).addRecentFile(saved);
   }
 
   /// Scroll de weergave naar de aangeklikte kop uit de Overzicht-rail. Hergebruikt
