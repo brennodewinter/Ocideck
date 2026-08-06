@@ -108,6 +108,20 @@ extension DeckNotifierSlides on DeckNotifier {
     _mutate(deck.copyWith(slides: slides), bumpRevision: true);
   }
 
+  /// Splitst een tabel-slide op [index] in pagina's van hooguit
+  /// [kTableRowsPerPage] data-rijen, met de koprij herhaald op elke pagina.
+  /// Doet niets als de tabel te weinig rijen heeft om te splitsen.
+  void splitTableSlide(int index) {
+    final deck = currentState.deck;
+    if (deck == null || index < 0 || index >= deck.slides.length) return;
+    final pages = splitTableSlidePages(deck.slides[index]);
+    if (pages == null) return;
+    final slides = List<Slide>.from(deck.slides)
+      ..removeAt(index)
+      ..insertAll(index, pages);
+    _mutate(deck.copyWith(slides: slides), bumpRevision: true);
+  }
+
   /// Werkt alle automatisch én veilig oplosbare kwaliteitsproblemen in één keer
   /// weg (#915), met steeds de meest veilige oplossing: te volle dia's splitsen,
   /// meerzins-bullets opknippen, meegesleepte pagina's losmaken. Nooit wordt

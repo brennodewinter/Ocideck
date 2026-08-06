@@ -71,6 +71,9 @@ const Map<String, int> methodLengthBaseline = {
       188,
   // +2: reportLanguage-parameter + getalnotatie in cell().
   'lib/widgets/slides/previews/table_preview.dart::_TablePreview.build': 152,
+  // +8: tabel-split actie bij tableDensityMinimum-warning.
+  'lib/widgets/panels/slide_quality_actions.dart::buildSlideQualityActions':
+      158,
 };
 
 bool _isTranslationData(String path) =>
