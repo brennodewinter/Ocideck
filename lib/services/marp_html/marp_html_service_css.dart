@@ -50,7 +50,16 @@ html,body{margin:0;padding:0}
 .slide .mermaid-error-label{font-size:16px;font-weight:600;margin:.7em 0 .2em;opacity:.8;color:#7F1D1D}
 .slide .mermaid-error-detail,.slide .mermaid-error-source{margin:0;padding:10px 12px;background:rgba(255,255,255,.65);border:0;border-radius:4px;font-size:15px;line-height:1.35;white-space:pre-wrap;overflow:auto;max-height:220px;color:#7F1D1D}
 .tlp-export-banner{position:fixed;top:0;left:0;right:0;background:#000;color:#ffc000;text-align:center;font:700 14px/2.4 monospace;z-index:9999;letter-spacing:.06em}
-@media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}}
+/* Documentmodus (§11.2): één doorlopende leesbare pagina i.p.v. losse 16:9-dia's.
+   Alleen de layout hier — géén 16:9-kader, geen vaste hoogte; de kleuren komen
+   uit het thema ([_themedDocumentCss]) of [_defaultThemeCss]. */
+.document{max-width:46rem;margin:24px auto;padding:32px 40px;line-height:1.65;border-radius:4px;overflow-wrap:break-word}
+.document img{max-width:100%}
+.document pre{overflow:auto}
+.document pre.mermaid{background:transparent;border:0;text-align:center}
+.document table{border-collapse:collapse;width:100%}
+.document hr{border:0;border-top:1px solid rgba(100,116,139,.35);margin:1.6em 0}
+@media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}.document{margin:0;max-width:100%;box-shadow:none;border-radius:0}}
 ''';
 
 /// De kleuren en letters voor een export zonder [ThemeProfile] — de
@@ -63,6 +72,12 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 .slide code{font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace}
 .slide blockquote{border-left:4px solid #ccc;margin:.5em 0;padding-left:16px;color:#555}
 .slide th,.slide td{border:1px solid #ccc;padding:6px 12px;font-size:20px}
+.document{background:#fff}
+.document h1{color:var(--ocideck-title-color,inherit)}
+.document pre{background:#f6f8fa;border:1px solid #e1e4e8;border-radius:6px;padding:16px;font-size:16px}
+.document code{font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace}
+.document blockquote{border-left:4px solid #ccc;margin:.6em 0;padding-left:16px;color:#555}
+.document th,.document td{border:1px solid #ccc;padding:6px 12px}
 
 /* De melding dat er ongecontroleerde AI-tekst in dit document staat.
    Kwam van de juridische tak; deze CSS verhuisde intussen hierheen. */
@@ -75,6 +90,33 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 /// Een functie en geen vierde constante, zodat de aanroeper niet hoeft te weten
 /// uit hoeveel stukken dit bestaat.
 String exportBaseCss() => '$_structuralCss\n$_reportingCss\n$_menuCss';
+
+/// De thema-afhankelijke opmaak van de doorlopende documentmodus
+/// (`<section class="document">`, §11.2): dezelfde kleuren en letter als een
+/// dia, maar als leesbare pagina — een redelijke kolombreedte, comfortabele
+/// marges en regelafstand, géén 16:9-kader en geen vaste hoogte.
+///
+/// Top-level in dit part-bestand (en niet in `_themedCss` in de
+/// hoofdbibliotheek) zodat die onder de bestandsgrensratchet blijft. GÉÉN
+/// externe `url()`/`@font-face`: de CSP is het vangnet, niet de vergunning.
+String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) =>
+    '.document{max-width:46rem;margin:24px auto;padding:32px 40px;'
+    'background:${t.slideBackgroundColor};color:${t.textColor};'
+    'font-family:$family;line-height:1.65;border-radius:4px;'
+    'box-shadow:0 4px 24px rgba(0,0,0,.4)}'
+    '.document h1{color:var(--ocideck-title-color,${t.textColor})}'
+    '.document h2{color:${t.accentColor}}'
+    '.document a{color:${t.accentColor}}'
+    '.document pre{background:${t.codeBackgroundColor};color:${t.codeTextColor};'
+    'border:1px solid ${t.codeTextColor}38;border-radius:6px;padding:16px;'
+    'font-family:$codeFamily}'
+    '.document pre code{color:${t.codeTextColor};background:transparent}'
+    '.document code{font-family:$codeFamily}'
+    '.document blockquote{border-left:4px solid ${t.accentColor};margin:.6em 0;'
+    'padding-left:16px;opacity:.85}'
+    '.document th{background:${t.tableHeaderBackgroundColor};'
+    'color:${t.tableHeaderTextColor};border:1px solid #ccc;padding:6px 12px}'
+    '.document td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px}';
 
 /// De vorm van het keuze-menuraster (#1162). Thema-onafhankelijk, net als de
 /// rapportage-opmaak: alleen de layout staat hier, de kleuren (rand/vulling uit

@@ -102,43 +102,97 @@ final RegExp _scriptClose = RegExp(r'</(script)', caseSensitive: false);
 /// het geval voor `</script`, dat werd ontsnapt maar nooit hersteld.
 String _guardMarkdown(String s) => _guardScript(s).replaceAll('<!--', r'<\!--');
 
-/// Rendert elke dia uit [markdown] naar zijn `<section>` met inerte
-/// markdown-payload. De omzettingsketen loopt van binnen naar buiten: elke
-/// stap laat een dia die haar niet aangaat onveranderd, dus de volgorde is
-/// vrij; het rapportagetype gaat als eerste omdat het de hele body vervangt.
+/// Strips a leading YAML front-matter block from [markdown] and normalises
+/// `\r\n` to `\n`, **without** splitting on `---`. The exact strip that
+/// [MarpHtmlService.marpSlides] does before it splits, lifted out so the
+/// continuous document mode can reuse it: a document renders this whole body as
+/// one flow, so a `---` in the body must survive as text (marked turns it into
+/// a real `<hr>`) instead of becoming a page break.
+String _stripFrontMatter(String markdown) {
+  var text = markdown.replaceAll('\r\n', '\n');
+  if (text.startsWith('---\n')) {
+    final close = text.indexOf('\n---', 4);
+    if (close != -1) {
+      final nl = text.indexOf('\n', close + 1);
+      text = nl == -1 ? '' : text.substring(nl + 1);
+    }
+  }
+  return text;
+}
+
+/// Past de blok-transformaties op één body toe — een losse dia óf de hele
+/// documentbody in de doorlopende modus. De omzettingsketen loopt van binnen
+/// naar buiten: elke stap laat inhoud die haar niet aangaat onveranderd, dus de
+/// volgorde is vrij; het rapportagetype gaat als eerste omdat het de hele body
+/// vervangt. Gedeeld zodat dia- en documentmodus door exact dezelfde renderlaag
+/// lopen — geen tweede route.
+String _renderBodyBlocks(
+  String body, {
+  required ThemeProfile? theme,
+  required CockpitColorScheme cockpitColorScheme,
+  required Map<String, String> signature,
+  required ImprovementY01Metric exportY01,
+}) {
+  var out = MarpHtmlService.renderReportingSlide(body, theme: theme);
+  out = renderMatrixSlide(out, theme: theme);
+  out = renderCanvasSlide(out, theme: theme);
+  out = renderTreeSlide(out, theme: theme);
+  out = renderFlowSlide(out, theme: theme);
+  out = renderMenuSlide(out, theme: theme);
+  out = MarpHtmlService.renderChartBlocks(out, theme: theme, y01: exportY01);
+  out = MarpHtmlService.renderQuestionBlocks(out);
+  out = MarpHtmlService.renderMediaRedacted(out);
+  out = MarpHtmlService.renderVideoNotice(out);
+  out = MarpHtmlService.renderTimelineBlocks(out);
+  out = MarpHtmlService.renderSignOffBlock(
+    out,
+    signature,
+    sealedAt: signature['ocideck_seal_at'] ?? '',
+  );
+  return MarpHtmlService.renderCockpitBlocks(
+    out,
+    theme: theme,
+    scheme: cockpitColorScheme,
+  );
+}
+
+/// Rendert [markdown] naar de `<section>`(s) met inerte markdown-payload.
+///
+/// [continuous] false is het dia-pad: splits op `---`, elke dia een
+/// `<section class="slide…">`. [continuous] true is de documentmodus: geen
+/// split, de hele front-matter-gestripte body als één `<section class="document">`.
+/// Beide leggen hun body als payload in een `<script type="text/markdown">` via
+/// [_guardMarkdown] — nooit rechtstreeks gerenderde HTML, zodat de client-side
+/// marked+DOMPurify-poort de enige renderroute blijft.
 String _renderSections(
   String markdown, {
   ThemeProfile? theme,
   required CockpitColorScheme cockpitColorScheme,
   required Map<String, String> signature,
+  bool continuous = false,
 }) {
   final exportY01 = MarpHtmlService._y01FromExportMarkdown(markdown);
+  if (continuous) {
+    final rendered = _renderBodyBlocks(
+      _stripFrontMatter(markdown).trim(),
+      theme: theme,
+      cockpitColorScheme: cockpitColorScheme,
+      signature: signature,
+      exportY01: exportY01,
+    );
+    return '<section class="document">'
+        '<script type="text/markdown">'
+        '${_guardMarkdown(rendered)}'
+        '</script></section>';
+  }
   final sections = StringBuffer();
   for (final slide in MarpHtmlService.marpSlides(markdown)) {
-    var body = MarpHtmlService.renderReportingSlide(slide, theme: theme);
-    body = renderMatrixSlide(body, theme: theme);
-    body = renderCanvasSlide(body, theme: theme);
-    body = renderTreeSlide(body, theme: theme);
-    body = renderFlowSlide(body, theme: theme);
-    body = renderMenuSlide(body, theme: theme);
-    body = MarpHtmlService.renderChartBlocks(
-      body,
+    final renderedBlocks = _renderBodyBlocks(
+      slide,
       theme: theme,
-      y01: exportY01,
-    );
-    body = MarpHtmlService.renderQuestionBlocks(body);
-    body = MarpHtmlService.renderMediaRedacted(body);
-    body = MarpHtmlService.renderVideoNotice(body);
-    body = MarpHtmlService.renderTimelineBlocks(body);
-    body = MarpHtmlService.renderSignOffBlock(
-      body,
-      signature,
-      sealedAt: signature['ocideck_seal_at'] ?? '',
-    );
-    final renderedBlocks = MarpHtmlService.renderCockpitBlocks(
-      body,
-      theme: theme,
-      scheme: cockpitColorScheme,
+      cockpitColorScheme: cockpitColorScheme,
+      signature: signature,
+      exportY01: exportY01,
     );
     final markerClass = _bulletMarkerSectionClass(slide);
     final titleColorStyle = _titleColorSectionStyle(slide);

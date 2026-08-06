@@ -179,6 +179,10 @@ class MarpHtmlService {
     HtmlImageResolver? embedImage,
     int maxEmbedBytes = kMaxHtmlEmbedTotalBytes,
     String htmlLang = 'nl', // <html lang>: inhoudstaal (WCAG 3.1.1) #1249
+    // Documentmodus: render de body als één doorlopende stroom
+    // (`<section class="document">`) i.p.v. losse 16:9-dia's (§11.2). Loopt door
+    // exact dezelfde inerte `<script type="text/markdown">`-poort als de dia's.
+    bool continuous = false,
   }) async {
     // De zes bundel-assets en de themed CSS zijn onafhankelijk.
     final [
@@ -234,6 +238,7 @@ class MarpHtmlService {
       theme: theme,
       cockpitColorScheme: cockpitColorScheme,
       signature: signature,
+      continuous: continuous,
     );
 
     // Elke ingesloten bundel krijgt een licentiebanner, ook als de geminificeerde
@@ -406,15 +411,9 @@ class MarpHtmlService {
   }
 
   static List<String> marpSlides(String markdown) {
-    var text = markdown.replaceAll('\r\n', '\n');
-    // Strip a leading YAML front-matter block: ---\n ... \n---\n
-    if (text.startsWith('---\n')) {
-      final close = text.indexOf('\n---', 4);
-      if (close != -1) {
-        final nl = text.indexOf('\n', close + 1);
-        text = nl == -1 ? '' : text.substring(nl + 1);
-      }
-    }
+    // Front matter weg (dezelfde strip als de documentmodus, zie
+    // [_stripFrontMatter]), daarna splitsen op de `---`-scheidingen.
+    final text = _stripFrontMatter(markdown);
     final slides = <String>[];
     final buf = StringBuffer();
     for (final line in text.split('\n')) {
@@ -896,7 +895,8 @@ class MarpHtmlService {
         '.slide table{border-collapse:collapse;width:100%}'
         '.slide th{background:${t.tableHeaderBackgroundColor};color:${t.tableHeaderTextColor};'
         'border:1px solid #ccc;padding:6px 12px;font-size:20px}'
-        '.slide td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px;font-size:20px}';
+        '.slide td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px;font-size:20px}'
+        '\n${_themedDocumentCss(t, family, codeFamily)}';
   }
 
   String _cssFontStack(String font) {
