@@ -117,7 +117,12 @@ Normal text.
 
     test('het renderscript overleeft de dia', () async {
       final html = await service.build(trigger, fallbackTitle: 'Test');
-      expect(html, contains("querySelectorAll('section.slide')"));
+      // De doorlopende documentmodus deelt hetzelfde renderscript; de selector
+      // dekt sindsdien zowel de dia's als de document-sectie.
+      expect(
+        html,
+        contains("querySelectorAll('section.slide,section.document')"),
+      );
     });
 
     test('de ontsnapping wordt in de browser teruggedraaid', () async {
