@@ -730,8 +730,51 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'dia\'s uit dit document.': 'Folien aus diesem Dokument.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Das Logo dieses Stilprofils wurde nicht gefunden und wird nicht angezeigt (Pfad: {pad}). Wählen Sie ein Logo in den Präsentationseinstellungen.',
+  'Converteer naar document…': 'In Dokument umwandeln…',
+  'Converteer naar presentatie…': 'In Präsentation umwandeln…',
+  'Converteren': 'Umwandeln',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Die Einteilung in Folien (der Text läuft als ein einziges Dokument weiter).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Die Einteilung in Folien ist ein Vorschlag; Präsentation und Dokument sind kein perfektes Spiegelbild voneinander.',
+  'Document exporteren': 'Dokument exportieren',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Eine geschwärzte Kopie des Klartexts — öffnet in jedem Markdown-Leser.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Eine thematische Trennlinie (---) wird zu einer Foliengrenze.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Der Export erstellt eine geschwärzte Kopie für einen Empfänger. Dein bytegetreues Original bewahrst du mit Speichern.',
+  'Exporteren…': 'Exportieren…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Eine einzige barrierefreie HTML-Datei, die in jedem Browser ohne Internet öffnet, mit Tabellen, Mathematik, Mermaid und Diagrammen.',
+  'Het thema en de opmaak per dia (_class).':
+      'Das Thema und die Formatierung je Folie (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Das Siegel: eine umgewandelte Datei ist neu und trägt kein Siegel.',
+  'Naar document converteren?': 'In Dokument umwandeln?',
+  'Naar presentatie converteren?': 'In Präsentation umwandeln?',
+  'Nog een export': 'Weiterer Export',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Für PDF: Öffne das HTML und drucke über deinen Browser (Als PDF speichern).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Für den weiteren Kreis: alles, was die Prüfung findet, wird entfernt. Die Datei erhält "-geschwärzt" im Namen.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Für den Auftraggeber oder Prüfer: entfernt wird nur, was du selbst auf "weglassen" gesetzt hast. Der Rest bleibt lesbar.',
+  'Wat gaat er verloren bij het converteren:':
+      'Was beim Umwandeln verloren geht:',
+  'Wat verandert er bij het converteren:': 'Was sich beim Umwandeln ändert:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Wir legen eine Kopie in einem neuen Tab an; deine Originaldatei bleibt unverändert.',
+  'Welk formaat?': 'Welches Format?',
+  'dia\'s, gesplitst op kop.': 'Folien, aufgeteilt nach Überschrift.',
+  'document': 'Dokument',
+  'volledig': 'vollständig',
+  'Invoegen': 'Einfügen',
+  'Visueel': 'Visuell',
+  'Document': 'Dokument',
   'Nieuw document': 'Neues Dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Gilt für {n} Folien dieser geteilten Reihe.',

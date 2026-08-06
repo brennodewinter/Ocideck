@@ -4,17 +4,34 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path/path.dart' as p;
 
 import '../l10n/app_localizations.dart';
+import '../models/chart.dart';
+import '../models/markdown_kind.dart';
 import '../models/markdown_outline.dart';
+import '../models/privacy_disposition.dart';
 import '../models/slide.dart';
+import '../services/document_deck_bridge.dart';
+import '../services/document_export_service.dart';
+import '../services/export_metadata.dart';
 import '../services/file_service.dart';
-import '../state/deck_provider.dart' show fileServiceProvider;
+import '../services/html_image_embedder.dart';
+import '../services/marp_html_service.dart';
+import '../services/privacy/privacy_own_identity.dart';
+import '../state/deck_provider.dart'
+    show fileServiceProvider, imageServiceProvider, markdownServiceProvider;
 import '../state/document_provider.dart';
 import '../state/settings_provider.dart' show settingsProvider, SettingsTraces;
+import '../state/tabs_provider.dart';
 import '../utils/doc_link.dart' show headingSlug;
+import 'dialogs/convert_to_presentation_dialog.dart';
+import 'dialogs/document_export_dialog.dart';
+import 'editors/_editor_field.dart' show pickImageWithFeedback;
 import 'editors/chart_editor.dart';
 import 'editors/table_editor.dart';
+import 'markdown_editor/markdown_editor_theme.dart';
+import 'markdown_editor/markdown_editor_toolbar.dart';
 import 'reader/document_markdown_view.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
@@ -43,19 +60,53 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   final GlobalKey _anchorKey = GlobalKey();
   int _anchorBlockIndex = -1;
 
+  /// De actieve weergavemodus. [_DocViewMode.source] toont de split (rauwe bron +
+  /// live weergave) om tekst te bewerken; [_DocViewMode.visual] maakt de weergave
+  /// het hoofdoppervlak, waar je de ingebedde blokken (grafiek/tabel) met een
+  /// dubbelklik bewerkt. Standaard bron: dat is waar je tekst typt.
+  _DocViewMode _viewMode = _DocViewMode.source;
+
+  /// De focus van de rauwe editor. De opmaak-knoppenbalk geeft de focus hierheen
+  /// terug na een klik, zodat je meteen verder typt.
+  final FocusNode _editorFocus = FocusNode();
+
+  /// Waar terwijl de controller van *buitenaf* wordt gelijkgetrokken aan de bron
+  /// (ongedaan maken/opnieuw, of een invoeging): dan mag de controllerluisteraar
+  /// niet terugstromen naar de notifier — dat zou een lus of dubbele bewerking
+  /// geven.
+  bool _applyingExternal = false;
+
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(
       text: ref.read(documentProvider).document?.source ?? '',
     );
+    // Eén luisteraar vangt élke bronwijziging in de controller — typen én de
+    // opmaak-knoppenbalk (die de controller rechtstreeks muteert en dus geen
+    // onChanged afvuurt). Zo stroomt alles langs dezelfde weg naar de notifier.
+    _controller.addListener(_onControllerChanged);
   }
 
   @override
   void dispose() {
+    _controller.removeListener(_onControllerChanged);
     _controller.dispose();
+    _editorFocus.dispose();
     _previewScroll.dispose();
     super.dispose();
+  }
+
+  /// Stroom een controllerwijziging naar de notifier. Slaat over wanneer de
+  /// controller juist van búiten wordt bijgewerkt (`_applyingExternal`), en
+  /// wanneer alleen de selectie/cursor verschoof (tekst gelijk) — anders zou een
+  /// simpele cursorbeweging een lege bewerking worden.
+  void _onControllerChanged() {
+    if (_applyingExternal) return;
+    final text = _controller.text;
+    final current = ref.read(documentProvider).document?.source ?? '';
+    if (text == current) return;
+    ref.read(documentProvider.notifier).edit(text, coalesceKey: 'doc');
   }
 
   /// Sla het document op. Cmd/Ctrl+S, net als een deck. Feedback is de dirty-stip
@@ -80,7 +131,134 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final saved = await ref.read(fileServiceProvider).saveDocumentAs(document);
     if (saved == null || !mounted) return;
     ref.read(documentProvider.notifier).markSaved(filePath: saved);
-    await ref.read(settingsProvider.notifier).addRecentFile(saved);
+    await ref
+        .read(settingsProvider.notifier)
+        .addRecentFile(saved, kind: MarkdownKind.document);
+  }
+
+  /// De titel van dit document: de eerste H1, anders de bestandsnaam, anders
+  /// leeg. Bepaalt de voorgestelde exportnaam en de HTML-`<title>` — net als een
+  /// tekstverwerker een document naar zijn kop noemt.
+  String _documentTitle(String source, String? filePath) {
+    for (final line in source.split('\n')) {
+      final m = RegExp(r'^#\s+(.+)$').firstMatch(line.trim());
+      if (m != null) return m.group(1)!.trim();
+    }
+    if (filePath != null) return p.basenameWithoutExtension(filePath);
+    return '';
+  }
+
+  /// Open de document-export-dialoog (DOCUMENT_MODE.md §11.2). De dialoog kiest
+  /// profiel en formaat; het echte bouwen-en-wegschrijven gebeurt in de closure
+  /// hieronder, die de bron langs `buildDocumentExportBundle → AudienceDeck`
+  /// projecteert (nooit de rauwe bron), een pad laat kiezen en atomisch
+  /// wegschrijft. De bron zelf blijft ongemoeid — export is een afgeleid bestand.
+  Future<void> _export() async {
+    final state = ref.read(documentProvider);
+    final document = state.document;
+    if (document == null) return;
+    final settings = ref.read(settingsProvider);
+    await DocumentExportDialog.show(
+      context,
+      privacyChecksEnabled: settings.privacyChecksEnabled,
+      onExport: (profile, format) => _writeExport(profile, format),
+    );
+  }
+
+  /// Bouwt de exportbundel voor het gekozen [profile], laat een pad kiezen met
+  /// de juiste extensie, en schrijft de export weg. Geeft het geschreven pad
+  /// terug, of `null` als de gebruiker de bestandskiezer wegklikte of het
+  /// schrijven mislukte.
+  Future<String?> _writeExport(
+    PrivacyExportProfile profile,
+    DocumentExportFormat format,
+  ) async {
+    final state = ref.read(documentProvider);
+    final source = state.document?.source ?? '';
+    final filePath = state.filePath;
+    final projectPath = filePath == null ? null : p.dirname(filePath);
+    final settings = ref.read(settingsProvider);
+    final fileService = ref.read(fileServiceProvider);
+    final imageService = ref.read(imageServiceProvider);
+    final markdownService = ref.read(markdownServiceProvider);
+    final l10n = context.l10n;
+    final title = _documentTitle(source, filePath);
+
+    // Bouw de bundel langs de audited projectiegrens. Vanaf hier raakt geen
+    // uitvoerpad de rauwe bron nog aan.
+    final bundle = await buildDocumentExportBundle(
+      source,
+      projectPath: projectPath,
+      profile: profile,
+      ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
+      regions: settings.privacyRegions,
+      disabledRules: settings.privacyDisabledRules,
+      markdownService: markdownService,
+      title: title,
+    );
+
+    // Kies een pad. De extensie én het profiel staan in de naam, zodat een
+    // verwisseling (volledig ↔ geredigeerd) zichtbaar is.
+    final ext = format == DocumentExportFormat.md ? 'md' : 'html';
+    final tag = profile == PrivacyExportProfile.redacted
+        ? l10n.d('geredigeerd')
+        : l10n.d('volledig');
+    final base = _safeExportName(title.isEmpty ? l10n.d('document') : title);
+    final dest = await pickDocumentExportDestination(
+      dialogTitle: l10n.t('export'),
+      fileName: '$base-$tag.$ext',
+      initialDirectory: projectPath,
+    );
+    if (dest == null) return null;
+    final outputPath = dest.endsWith('.$ext') ? dest : '$dest.$ext';
+
+    // Afbeeldingen ingesloten als data:-URI, begrensd binnen de projectmap —
+    // dezelfde regel als de deck-HTML-export: een pad buiten de map wordt
+    // geweigerd, niet gevolgd.
+    Future<String?> embed(String src) async {
+      final bytes = await imageService.readSlideImageBytes(
+        src,
+        projectPath: projectPath,
+      );
+      if (bytes == null) return null;
+      final encoded = encodeForHtmlEmbed(bytes, src);
+      return encoded == null ? null : htmlImageDataUri(encoded);
+    }
+
+    return writeDocumentExport(
+      bundle,
+      format,
+      html: MarpHtmlService(),
+      theme: fileService.activeProfileFor(projectPath: projectPath),
+      metadata: ExportDocumentMetadata(
+        title: title,
+        language: l10n.languageCode,
+      ),
+      embedImage: embed,
+      outputPath: outputPath,
+    );
+  }
+
+  /// Converteer dit document naar een NIEUWE presentatie in een nieuw tabblad
+  /// (DOCUMENT_MODE.md §11.3). Een expliciete kopie: dit document blijft
+  /// ongemoeid. De dialoog toont het voorgestelde aantal dia's en de drop-lijst
+  /// vóór het committen; pas bij bevestigen ontstaat het nieuwe tabblad.
+  Future<void> _convertToPresentation() async {
+    final state = ref.read(documentProvider);
+    final source = state.document?.source ?? '';
+    final title = _documentTitle(source, state.filePath);
+    // De getypeerde, zero-loss deconstructie ís de bron van waarheid — voor het
+    // voorgestelde aantal dia's én voor het nieuwe deck. Bewust niet
+    // generateDeck→parseDeck: dat zou een kop-geleide sectie via `_inferSlideType`
+    // weer stil kunnen laten vallen (§11.3, §11.5). De nieuwe presentatie is een
+    // kopie; er reist geen zegel mee.
+    final deck = DocumentDeckBridge.documentToDeck(source, title: title);
+    final confirmed = await ConvertToPresentationDialog.show(
+      context,
+      slideCount: deck.slides.length,
+    );
+    if (confirmed != true || !mounted) return;
+    ref.read(tabsProvider.notifier).newDeckInNewTab(title, slides: deck.slides);
   }
 
   /// Scroll de weergave naar de aangeklikte kop uit de Overzicht-rail. Hergebruikt
@@ -117,10 +295,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       source,
     ) {
       if (source != _controller.text) {
+        _applyingExternal = true;
         _controller.value = TextEditingValue(
           text: source,
           selection: TextSelection.collapsed(offset: source.length),
         );
+        _applyingExternal = false;
       }
     });
     final source = ref.watch(
@@ -136,47 +316,92 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
             unawaited(_save()),
       },
       child: Scaffold(
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            final divider = theme.colorScheme.outlineVariant;
-            final editor = _editor(theme);
-            final preview = _preview(theme, source);
-            // Naast elkaar op een breed venster; onder elkaar wanneer het te smal
-            // wordt voor twee leesbare kolommen.
-            if (constraints.maxWidth < 760) {
-              return Column(
-                children: [
-                  Expanded(child: editor),
-                  Divider(height: 1, thickness: 1, color: divider),
-                  Expanded(child: preview),
-                ],
-              );
-            }
-            // Waar een presentatie de diastrook heeft, toont een document zijn
-            // koppen — maar alleen als er breedte genoeg is voor rail + twee
-            // leesbare kolommen ernaast.
-            final showRail = constraints.maxWidth >= 940;
-            return Row(
-              children: [
-                if (showRail) ...[
-                  _outlineRail(theme, source),
-                  VerticalDivider(width: 1, thickness: 1, color: divider),
-                ],
-                Expanded(child: editor),
-                VerticalDivider(width: 1, thickness: 1, color: divider),
-                Expanded(child: preview),
-              ],
-            );
-          },
+        body: Column(
+          children: [
+            _DocEditorToolbar(
+              mode: _viewMode,
+              onModeChanged: (m) => setState(() => _viewMode = m),
+              onInsertChart: _insertChart,
+              onInsertTable: _insertTable,
+              onInsertMermaid: _insertMermaid,
+              onInsertImage: _insertImage,
+              onExport: _export,
+              onConvertToPresentation: _convertToPresentation,
+              controller: _controller,
+              editorFocus: _editorFocus,
+            ),
+            Divider(
+              height: 1,
+              thickness: 1,
+              color: theme.colorScheme.outlineVariant,
+            ),
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) =>
+                    _viewMode == _DocViewMode.visual
+                    ? _visualLayout(theme, source, constraints)
+                    : _sourceLayout(theme, source, constraints),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
+  /// Bron-modus: de rauwe bron en de live weergave naast elkaar op een breed
+  /// venster, onder elkaar wanneer het te smal wordt voor twee leesbare kolommen.
+  /// De Overzicht-rail komt erbij zodra er breedte genoeg is.
+  Widget _sourceLayout(ThemeData theme, String source, BoxConstraints c) {
+    final divider = theme.colorScheme.outlineVariant;
+    final editor = _editor(theme);
+    final preview = _preview(theme, source);
+    if (c.maxWidth < 760) {
+      return Column(
+        children: [
+          Expanded(child: editor),
+          Divider(height: 1, thickness: 1, color: divider),
+          Expanded(child: preview),
+        ],
+      );
+    }
+    // Waar een presentatie de diastrook heeft, toont een document zijn koppen —
+    // maar alleen als er breedte genoeg is voor rail + twee leesbare kolommen.
+    final showRail = c.maxWidth >= 940;
+    return Row(
+      children: [
+        if (showRail) ...[
+          _outlineRail(theme, source),
+          VerticalDivider(width: 1, thickness: 1, color: divider),
+        ],
+        Expanded(child: editor),
+        VerticalDivider(width: 1, thickness: 1, color: divider),
+        Expanded(child: preview),
+      ],
+    );
+  }
+
+  /// Visuele modus: de weergave is het hoofdoppervlak (gecentreerd als een
+  /// documentpagina), waar je de ingebedde blokken met een dubbelklik bewerkt.
+  /// Geen rauwe editor; voor tekst wissel je terug naar de bron. De Overzicht-rail
+  /// blijft naast de weergave zolang er breedte genoeg is.
+  Widget _visualLayout(ThemeData theme, String source, BoxConstraints c) {
+    final divider = theme.colorScheme.outlineVariant;
+    final showRail = c.maxWidth >= 940;
+    return Row(
+      children: [
+        if (showRail) ...[
+          _outlineRail(theme, source),
+          VerticalDivider(width: 1, thickness: 1, color: divider),
+        ],
+        Expanded(child: _preview(theme, source, centered: true)),
+      ],
+    );
+  }
+
   Widget _editor(ThemeData theme) => TextField(
     controller: _controller,
-    onChanged: (text) =>
-        ref.read(documentProvider.notifier).edit(text, coalesceKey: 'doc'),
+    focusNode: _editorFocus,
     maxLines: null,
     expands: true,
     textAlignVertical: TextAlignVertical.top,
@@ -195,22 +420,23 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     ),
   );
 
-  Widget _preview(ThemeData theme, String source) => Container(
-    color: theme.colorScheme.surface,
-    alignment: Alignment.topLeft,
-    child: SingleChildScrollView(
-      controller: _previewScroll,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-      child: DocumentMarkdownView(
-        source,
-        maxTextWidth: 720,
-        anchorBlockIndex: _anchorBlockIndex,
-        anchorKey: _anchorKey,
-        onEditChart: _editChart,
-        onEditTable: _editTable,
-      ),
-    ),
-  );
+  Widget _preview(ThemeData theme, String source, {bool centered = false}) =>
+      Container(
+        color: theme.colorScheme.surface,
+        alignment: centered ? Alignment.topCenter : Alignment.topLeft,
+        child: SingleChildScrollView(
+          controller: _previewScroll,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+          child: DocumentMarkdownView(
+            source,
+            maxTextWidth: 720,
+            anchorBlockIndex: _anchorBlockIndex,
+            anchorKey: _anchorKey,
+            onEditChart: _editChart,
+            onEditTable: _editTable,
+          ),
+        ),
+      );
 
   /// De gedeelde dialoogschil voor het bewerken van een ingebedde kaart (grafiek
   /// of tabel): de volwaardige editor in een venster met Annuleren/Toepassen
@@ -284,6 +510,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       TableEditor(
         slide: slide,
         nestedInScrollView: true,
+        documentContext: true,
         onUpdate: (s) => edited = s.tableRows,
       ),
     );
@@ -297,6 +524,91 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     if (next != source) {
       ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
     }
+  }
+
+  /// Voeg [block] als een verse alinea in op de cursorpositie (of achteraan als
+  /// er geen selectie is). De pure [insertBlockIntoSource] regelt de lege regels
+  /// eromheen; hier zetten we de controller en de bron gelijk en plaatsen we de
+  /// cursor ná het blok, zodat je meteen verder kunt typen. Een expliciete
+  /// bewerking (`coalesceKey: null`) — geen samenvoeging met eerder typen.
+  void _insertBlock(String block) {
+    final sel = _controller.selection;
+    final (next, cursor) = insertBlockIntoSource(
+      _controller.text,
+      sel.start,
+      sel.end,
+      block,
+    );
+    // Zet de controller (met cursor ná het blok) los van de luisteraar en dien de
+    // bewerking als een eigen stap in (`coalesceKey: null`), zodat een invoeging
+    // niet met eerder typen samenvloeit in de ongedaan-maken-geschiedenis.
+    _applyingExternal = true;
+    _controller.value = TextEditingValue(
+      text: next,
+      selection: TextSelection.collapsed(offset: cursor),
+    );
+    _applyingExternal = false;
+    ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
+  }
+
+  /// Voeg een verse grafiek in: dezelfde [ChartEditor] als een dia (met een
+  /// wegwerp-[Slide]), en bij 'Toepassen' een ```chart-blok op de cursorpositie.
+  /// Identiek aan het dia-mechanisme — geen tweede grafiekweg (DOCUMENT_MODE.md
+  /// §4.2). Zonder ingevulde data blijft het een geldig, later invulbaar blok.
+  Future<void> _insertChart() async {
+    final slide = Slide.create(SlideType.chart);
+    var spec = ChartSpec.parse(slide.customMarkdown).toBlock();
+    final apply = await _embedEditorDialog(
+      ChartEditor(
+        slide: slide,
+        themeAnimationDurationMs: 0,
+        nestedInScrollView: true,
+        onUpdate: (s) => spec = s.customMarkdown,
+      ),
+    );
+    if (apply != true || !mounted) return;
+    _insertBlock('```chart\n$spec\n```');
+  }
+
+  /// Voeg een verse tabel in: de [TableEditor] met een leeg 2×2-raster, en bij
+  /// 'Toepassen' een GFM-pijptabel op de cursorpositie.
+  Future<void> _insertTable() async {
+    final slide = Slide.create(SlideType.table);
+    var rows = slide.tableRows;
+    final apply = await _embedEditorDialog(
+      TableEditor(
+        slide: slide,
+        nestedInScrollView: true,
+        documentContext: true,
+        onUpdate: (s) => rows = s.tableRows,
+      ),
+    );
+    if (apply != true || !mounted) return;
+    _insertBlock(rowsToGfmTable(rows));
+  }
+
+  /// Voeg een verse ```mermaid-fence in met een minimaal, taal-neutraal
+  /// startdiagram (knoop-id's, geen tekst om te vertalen). Bewerken gaat via de
+  /// bron — de dubbelklik is voor mermaid bewust overgeslagen (DOCUMENT_MODE.md).
+  void _insertMermaid() =>
+      _insertBlock('```mermaid\nflowchart TD\n  A --> B\n```');
+
+  /// Voeg een afbeelding in: kies een bestand via de bestaande import-keten
+  /// (grootte-cap, magic-bytes, kopie naar `images/` of `mem:` zolang het
+  /// document nog niet is opgeslagen) en zet een `![](…)`-verwijzing op de
+  /// cursorpositie. Hergebruikt exact de dia-import — geen tweede assetweg.
+  Future<void> _insertImage() async {
+    final state = ref.read(documentProvider);
+    final projectPath = state.filePath == null
+        ? null
+        : p.dirname(state.filePath!);
+    final reference = await pickImageWithFeedback(
+      context,
+      ref.read(imageServiceProvider),
+      projectPath: projectPath,
+    );
+    if (reference == null || !mounted) return;
+    _insertBlock('![]($reference)');
   }
 
   /// De Overzicht-rail: de koppen van het document, live afgeleid, klikbaar om
@@ -358,6 +670,214 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       ),
     ),
   );
+}
+
+/// De weergavemodus van de documenteditor. Twee manieren om naar hetzelfde
+/// document te kijken, nooit een derde renderpad (DOCUMENT_MODE.md §2.1): de bron
+/// als tekst, of de weergave als hoofdoppervlak.
+enum _DocViewMode { visual, source }
+
+/// De werkbalk bovenaan de documenteditor: links de segmentkeuze Visueel | Bron,
+/// rechts het invoeg-palet. Top-level widget zodat het bewerkscherm zelf slank
+/// blijft; de labels lopen via [l10n] mee met de langste taal (geen vaste
+/// breedte, DOCUMENT_MODE.md §8).
+class _DocEditorToolbar extends StatelessWidget {
+  final _DocViewMode mode;
+  final ValueChanged<_DocViewMode> onModeChanged;
+  final VoidCallback onInsertChart;
+  final VoidCallback onInsertTable;
+  final VoidCallback onInsertMermaid;
+  final VoidCallback onInsertImage;
+  final VoidCallback onExport;
+  final VoidCallback onConvertToPresentation;
+  final TextEditingController controller;
+  final FocusNode editorFocus;
+
+  const _DocEditorToolbar({
+    required this.mode,
+    required this.onModeChanged,
+    required this.onInsertChart,
+    required this.onInsertTable,
+    required this.onInsertMermaid,
+    required this.onInsertImage,
+    required this.onExport,
+    required this.onConvertToPresentation,
+    required this.controller,
+    required this.editorFocus,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final scheme = Theme.of(context).colorScheme;
+    return Container(
+      color: scheme.surface,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              SegmentedButton<_DocViewMode>(
+                segments: [
+                  ButtonSegment(
+                    value: _DocViewMode.visual,
+                    label: Text(l10n.d('Visueel')),
+                    icon: const Icon(Icons.visibility_outlined, size: 15),
+                  ),
+                  ButtonSegment(
+                    value: _DocViewMode.source,
+                    label: Text(l10n.d('Bron')),
+                    icon: const Icon(Icons.code, size: 15),
+                  ),
+                ],
+                selected: {mode},
+                showSelectedIcon: false,
+                style: const ButtonStyle(visualDensity: VisualDensity.compact),
+                onSelectionChanged: (s) => onModeChanged(s.first),
+              ),
+              const Spacer(),
+              _insertMenu(l10n),
+              const SizedBox(width: 4),
+              TextButton.icon(
+                onPressed: onExport,
+                icon: const Icon(Icons.ios_share, size: 16),
+                label: Text(l10n.d('Exporteren…')),
+              ),
+              _moreMenu(l10n),
+            ],
+          ),
+          // De gedeelde opmaak-knoppenbalk (vet/cursief/kop/lijst/…), dezelfde als
+          // de deck-markdown-editor. Zit hier in de gedeelde kop zonder eigen
+          // kader (`bordered: false`, zoals de knoppenbalk zelf documenteert), en
+          // muteert de bron via de controller — de controllerluisteraar stroomt
+          // dat door naar de weergave en de opslag.
+          MarkdownEditorToolbar(
+            controller: controller,
+            focusNode: editorFocus,
+            theme: MarkdownEditorTheme.documentSurface(scheme: scheme),
+            bordered: false,
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Het invoeg-palet: één menu dat een rijk blok op de cursorpositie invoegt.
+  /// Hergebruikt de bestaande labels (Grafiek/Tabel/Afbeelding); Mermaid is de
+  /// productnaam van de fence. Elke keuze schrijft een verse, draagbare
+  /// Markdown-constructie in de bron (DOCUMENT_MODE.md §4).
+  Widget _insertMenu(AppLocalizations l10n) {
+    return PopupMenuButton<int>(
+      tooltip: l10n.d('Invoegen'),
+      position: PopupMenuPosition.under,
+      onSelected: (value) => switch (value) {
+        0 => onInsertChart(),
+        1 => onInsertTable(),
+        2 => onInsertMermaid(),
+        _ => onInsertImage(),
+      },
+      itemBuilder: (context) => [
+        _insertItem(0, Icons.bar_chart, l10n.d('Grafiek')),
+        _insertItem(1, Icons.table_chart_outlined, l10n.d('Tabel')),
+        _insertItem(2, Icons.account_tree_outlined, l10n.d('Mermaid')),
+        _insertItem(3, Icons.image_outlined, l10n.d('Afbeelding')),
+      ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.add, size: 16),
+            const SizedBox(width: 4),
+            Text(l10n.d('Invoegen'), style: const TextStyle(fontSize: 13)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Het overloopmenu rechts: minder vaak gebruikte handelingen die geen eigen
+  /// knop verdienen. Nu de conversie naar een presentatie (een NIEUW tabblad,
+  /// nooit een in-place omschakeling — DOCUMENT_MODE.md §11.3).
+  Widget _moreMenu(AppLocalizations l10n) {
+    return PopupMenuButton<int>(
+      tooltip: l10n.t('more'),
+      position: PopupMenuPosition.under,
+      icon: const Icon(Icons.more_vert, size: 18),
+      onSelected: (value) {
+        if (value == 0) onConvertToPresentation();
+      },
+      itemBuilder: (context) => [
+        PopupMenuItem<int>(
+          value: 0,
+          child: Row(
+            children: [
+              const Icon(Icons.slideshow_outlined, size: 17),
+              const SizedBox(width: 10),
+              Text(l10n.d('Converteer naar presentatie…')),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  PopupMenuItem<int> _insertItem(int value, IconData icon, String label) {
+    return PopupMenuItem<int>(
+      value: value,
+      child: Row(
+        children: [
+          Icon(icon, size: 17),
+          const SizedBox(width: 10),
+          Text(label),
+        ],
+      ),
+    );
+  }
+}
+
+/// Voeg [block] in [source] in op het bereik [selStart]–[selEnd] (een negatieve
+/// start betekent 'geen cursor' → achteraan), omgeven door precies genoeg lege
+/// regels om een eigen alinea te vormen zonder er ooit meer dan één dubbele
+/// witregel van te maken. Geeft de nieuwe bron én de cursorpositie ná het
+/// ingevoegde blok terug. Top-level en puur, zodat de invoeglogica los toetsbaar
+/// is van het editor-scherm — net als de terugschrijf-helpers hierboven.
+(String, int) insertBlockIntoSource(
+  String source,
+  int selStart,
+  int selEnd,
+  String block,
+) {
+  final start = selStart < 0 ? source.length : math.min(selStart, selEnd);
+  final end = selEnd < 0 ? source.length : math.max(selStart, selEnd);
+  final before = source.substring(0, start);
+  final after = source.substring(end);
+  final lead = before.isEmpty
+      ? ''
+      : before.endsWith('\n\n')
+      ? ''
+      : before.endsWith('\n')
+      ? '\n'
+      : '\n\n';
+  final trail = after.isEmpty
+      ? '\n'
+      : after.startsWith('\n')
+      ? ''
+      : '\n\n';
+  final insertion = '$lead$block$trail';
+  return ('$before$insertion$after', before.length + insertion.length);
+}
+
+/// Een bestandsnaam-veilige vorm van [title] voor de voorgestelde exportnaam:
+/// alles wat geen letter/cijfer/koppelteken is wordt een koppelteken, samengedrukt
+/// en getrimd. Top-level en puur, los toetsbaar van het editor-scherm.
+String _safeExportName(String title) {
+  final cleaned = title
+      .replaceAll(RegExp(r'[^\w\- ]+'), '')
+      .trim()
+      .replaceAll(RegExp(r'[\s]+'), '-');
+  return cleaned.isEmpty ? 'document' : cleaned;
 }
 
 /// De fence van één ```chart-blok, om de `chartOrdinal`-de (vanaf 0) in de bron

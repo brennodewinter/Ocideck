@@ -1806,8 +1806,51 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'dia\'s uit dit document.': 'sleamhnán ón doiciméad seo.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Ní bhfuarthas lógó an phróifíle stíle seo agus ní thaispeántar é (cosán: {pad}). Roghnaigh lógó i socruithe na láithreoide.',
+  'Converteer naar document…': 'Tiontaigh go doiciméad…',
+  'Converteer naar presentatie…': 'Tiontaigh go láithreoireacht…',
+  'Converteren': 'Tiontaigh',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'An roinnt ina sleamhnáin (leanann an téacs ar aghaidh mar dhoiciméad amháin).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Is moladh í an roinnt ina sleamhnáin; níl an cur i láthair agus an doiciméad ina scáthán foirfe ar a chéile.',
+  'Document exporteren': 'Easpórtáil doiciméad',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Cóip fholaithe den ghnáth-théacs — osclaíonn sé in aon léitheoir Markdown.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Éiríonn líne théamach (---) ina teorainn sleamhnáin.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Cruthaíonn an easpórtáil cóip fholaithe do fhaighteoir. Coinníonn tú do bhunchóip dhílis do na bearta le Sábháil.',
+  'Exporteren…': 'Easpórtáil…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Comhad HTML inrochtana amháin a osclaíonn in aon bhrabhsálaí gan idirlíon, le táblaí, matamaitic, mermaid agus cairteacha.',
+  'Het thema en de opmaak per dia (_class).':
+      'An téama agus an fhormáidiú de réir sleamhnáin (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'An séala: tá comhad tiontaithe nua agus níl séala ar bith air.',
+  'Naar document converteren?': 'Tiontaigh go doiciméad?',
+  'Naar presentatie converteren?': 'Tiontaigh go láithreoireacht?',
+  'Nog een export': 'Easpórtáil eile',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Le haghaidh PDF: oscail an HTML agus priontáil trí do bhrabhsálaí (Sábháil mar PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Don chiorcal níos leithne: baintear gach rud a aimsíonn an seiceáil. Faigheann an comhad "-folaithe" ina ainm.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Don chliant nó don iniúchóir: ní bhaintear ach an méid a mharcáil tú féin mar "fág ar lár". Fanann an chuid eile inléite.',
+  'Wat gaat er verloren bij het converteren:':
+      'Cad a chailltear agus é á thiontú:',
+  'Wat verandert er bij het converteren:': 'Cad a athraíonn agus é á thiontú:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Cruthaímid cóip i gcluaisín nua; fanann do bhunchomhad gan athrú.',
+  'Welk formaat?': 'Cén fhormáid?',
+  'dia\'s, gesplitst op kop.': 'sleamhnán, roinnte de réir ceannteideal.',
+  'document': 'doiciméad',
+  'volledig': 'iomlán',
+  'Invoegen': 'Ionsáigh',
+  'Visueel': 'Amharc',
+  'Document': 'Cáipéis',
   'Nieuw document': 'Cáipéis nua',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Baineann sé le {n} sleamhnán den tsraith roinnte seo.',

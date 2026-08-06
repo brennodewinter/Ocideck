@@ -727,8 +727,50 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'dia\'s uit dit document.': 'diapositivas de este documento.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'El logotipo de este perfil de estilo no se ha encontrado y no se muestra (ruta: {pad}). Elija un logotipo en los ajustes de presentación.',
+  'Converteer naar document…': 'Convertir a documento…',
+  'Converteer naar presentatie…': 'Convertir a presentación…',
+  'Converteren': 'Convertir',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'La división en diapositivas (el texto continúa como un solo documento).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'La división en diapositivas es una propuesta; presentación y documento no son un reflejo perfecto el uno del otro.',
+  'Document exporteren': 'Exportar documento',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Una copia redactada del texto plano — se abre en cualquier lector de Markdown.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Una línea temática (---) se convierte en un límite de diapositiva.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'La exportación crea una copia redactada para un destinatario. Tu original fiel a los bytes lo guardas con Guardar.',
+  'Exporteren…': 'Exportar…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Un único archivo HTML accesible que se abre en cualquier navegador sin internet, con tablas, matemáticas, mermaid y gráficos.',
+  'Het thema en de opmaak per dia (_class).':
+      'El tema y el formato por diapositiva (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'El sello: un archivo convertido es nuevo y no lleva sello.',
+  'Naar document converteren?': '¿Convertir a documento?',
+  'Naar presentatie converteren?': '¿Convertir a presentación?',
+  'Nog een export': 'Otra exportación',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Para PDF: abre el HTML e imprime desde tu navegador (Guardar como PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Para el círculo más amplio: se elimina todo lo que encuentra la comprobación. El archivo recibe "-redactados" en el nombre.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Para el cliente o el auditor: solo se elimina lo que tú mismo marcaste como "omitir". El resto sigue siendo legible.',
+  'Wat gaat er verloren bij het converteren:': 'Qué se pierde al convertir:',
+  'Wat verandert er bij het converteren:': 'Qué cambia al convertir:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Creamos una copia en una pestaña nueva; tu archivo original queda sin cambios.',
+  'Welk formaat?': '¿Qué formato?',
+  'dia\'s, gesplitst op kop.': 'diapositivas, divididas por título.',
+  'document': 'documento',
+  'volledig': 'completo',
+  'Invoegen': 'Insertar',
+  'Visueel': 'Visual',
+  'Document': 'Documento',
   'Nieuw document': 'Nuevo documento',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Se aplica a {n} diapositivas de esta serie dividida.',

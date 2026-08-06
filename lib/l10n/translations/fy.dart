@@ -731,8 +731,52 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'dia\'s uit dit document.': 'dia\'s út dit dokumint.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'It logo fan dizze stylprofyl is net fûn en wurdt net toand (paad: {pad}). Kies in logo yn de presintaasjeynstellings.',
+  'Converteer naar document…': 'Nei dokumint konvertearje…',
+  'Converteer naar presentatie…': 'Nei presintaasje konvertearje…',
+  'Converteren': 'Konvertearje',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'De yndieling yn dia\'s (de tekst rint troch as ien dokumint).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'De yndieling yn dia\'s is in foarstel; presintaasje en dokumint binne gjin perfekte spegel fan inoar.',
+  'Document exporteren': 'Dokumint eksportearje',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'In redigearre kopy fan de platte tekst — iepenet yn elke Markdown-lêzer.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'In tematyske line (---) wurdt in diagrins.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Eksportearje makket in redigearre kopy foar in ûntfanger. Dyn byte-trouwe orizjineel bewarrest do mei Bewarje.',
+  'Exporteren…': 'Eksportearje…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Ien tagonklik HTML-bestân dat yn elke browser iepenet sûnder ynternet, mei tabellen, wiskunde, mermaid en grafiken.',
+  'Het thema en de opmaak per dia (_class).':
+      'It tema en de opmaak per dia (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'It segel: in konvertearre bestân is nij en draacht gjin segel.',
+  'Naar document converteren?': 'Nei dokumint konvertearje?',
+  'Naar presentatie converteren?': 'Nei presintaasje konvertearje?',
+  'Nog een export': 'Noch in eksport',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Foar PDF: iepenje de HTML en print fia jo browser (Bewarje as PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Foar de bredere rûnte: alles wat de kontrôle fynt giet derút. It bestân krijt "-redigearre" yn de namme.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Foar de opdrachtjouwer of auditor: allinnich wat jo sels op "weilitte" set hawwe giet derút. De rest bliuwt lêsber.',
+  'Wat gaat er verloren bij het converteren:':
+      'Wat giet ferlern by it konvertearjen:',
+  'Wat verandert er bij het converteren:':
+      'Wat feroaret der by it konvertearjen:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Wy meitsje in kopy yn in nij ljepblêd; jo oarspronklike bestân bliuwt ûnferoare.',
+  'Welk formaat?': 'Hokker formaat?',
+  'dia\'s, gesplitst op kop.': 'dia\'s, splitst op kop.',
+  'document': 'dokumint',
+  'volledig': 'folslein',
+  'Invoegen': 'Ynfoegje',
+  'Visueel': 'Fisueel',
+  'Document': 'Dokumint',
   'Nieuw document': 'Nij dokumint',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Jildt foar {n} slides fan dizze splitste rige.',

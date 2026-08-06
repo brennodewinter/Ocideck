@@ -115,4 +115,43 @@ void main() {
     // Een preset die ingetypte koppen zou overschrijven, hoort er niet te staan.
     expect(find.text('Acties en besluiten'), findsNothing);
   });
+
+  testWidgets('documentContext verbergt de dia-woordenschat (titel + preset)', (
+    tester,
+  ) async {
+    final slide = Slide.create(SlideType.table); // leeg 2×2 → preset zou tonen
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: TableEditor(
+            slide: slide,
+            onUpdate: (_) {},
+            documentContext: true,
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+    // In een plat document bestaat geen dia: geen 'Slide titel'-veld, geen
+    // deck-preset — alleen het tabelraster.
+    expect(find.text('Slide titel'), findsNothing);
+    expect(find.text('Acties en besluiten'), findsNothing);
+    expect(find.text('Tabel'), findsOneWidget);
+  });
+
+  testWidgets('zonder documentContext blijft de dia-woordenschat zichtbaar', (
+    tester,
+  ) async {
+    final slide = Slide.create(SlideType.table);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: TableEditor(slide: slide, onUpdate: (_) {}),
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(find.text('Slide titel'), findsOneWidget);
+    expect(find.text('Acties en besluiten'), findsOneWidget);
+  });
 }

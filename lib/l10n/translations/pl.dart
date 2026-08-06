@@ -1783,8 +1783,51 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'dia\'s uit dit document.': 'slajdów z tego dokumentu.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo tego profilu stylu nie zostało znalezione i nie jest wyświetlane (ścieżka: {pad}). Wybierz logo w ustawieniach prezentacji.',
+  'Converteer naar document…': 'Konwertuj na dokument…',
+  'Converteer naar presentatie…': 'Konwertuj na prezentację…',
+  'Converteren': 'Konwertuj',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Podział na slajdy (tekst przechodzi w jeden dokument).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Podział na slajdy to propozycja; prezentacja i dokument nie są swoim idealnym odbiciem.',
+  'Document exporteren': 'Eksportuj dokument',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Zredagowana kopia zwykłego tekstu — otwiera się w każdym czytniku Markdown.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Linia tematyczna (---) staje się granicą slajdu.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Eksport tworzy zredagowaną kopię dla odbiorcy. Wierny bajtom oryginał zachowujesz przez Zapisz.',
+  'Exporteren…': 'Eksportuj…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Jeden dostępny plik HTML, który otwiera się w każdej przeglądarce bez internetu, z tabelami, matematyką, mermaid i wykresami.',
+  'Het thema en de opmaak per dia (_class).':
+      'Motyw i formatowanie na slajd (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Pieczęć: przekonwertowany plik jest nowy i nie ma pieczęci.',
+  'Naar document converteren?': 'Konwertować na dokument?',
+  'Naar presentatie converteren?': 'Konwertować na prezentację?',
+  'Nog een export': 'Kolejny eksport',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Aby uzyskać PDF: otwórz HTML i wydrukuj przez przeglądarkę (Zapisz jako PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Dla szerszego grona: wszystko, co znajdzie kontrola, zostaje usunięte. Plik otrzymuje "-zredagowane" w nazwie.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Dla zleceniodawcy lub audytora: usuwane jest tylko to, co samodzielnie oznaczysz jako "pomiń". Reszta pozostaje czytelna.',
+  'Wat gaat er verloren bij het converteren:':
+      'Co zostaje utracone podczas konwersji:',
+  'Wat verandert er bij het converteren:': 'Co się zmienia podczas konwersji:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Tworzymy kopię w nowej karcie; oryginalny plik pozostaje bez zmian.',
+  'Welk formaat?': 'Który format?',
+  'dia\'s, gesplitst op kop.': 'slajdów, podzielonych według nagłówka.',
+  'document': 'dokument',
+  'volledig': 'pełny',
+  'Invoegen': 'Wstaw',
+  'Visueel': 'Wizualny',
+  'Document': 'Dokument',
   'Nieuw document': 'Nowy dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Dotyczy {n} slajdów tej podzielonej serii.',

@@ -730,8 +730,50 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'dia\'s uit dit document.': 'slide di e dokumento aki.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'E logo di e perfil di estilo aki no a wòrdu hañá i no ta mustra (kaminda: {pad}). Skohe un logo den e settingnan di presentashon.',
+  'Converteer naar document…': 'Konvertí na dokumento…',
+  'Converteer naar presentatie…': 'Konvertí na presentashon…',
+  'Converteren': 'Konvertí',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'E divishon den slide (e teksto ta sigui komo un solo dokumento).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'E divishon den slide ta un proposishon; presentashon i dokumento no ta un spil perfekto di otro.',
+  'Document exporteren': 'Eksportá dokumento',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Un kopia redaktá di e teksto plano — ta habri den kualke lesadó di Markdown.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Un liña temátiko (---) ta bira un frontera di slide.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Eksportá ta traha un kopia redaktá pa un risibidó. Bo original fiel na byte bo ta warda ku Warda.',
+  'Exporteren…': 'Eksportá…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Un solo dokumento HTML aksesibel ku ta habri den kualke browser sin internet, ku tabel, matemátika, mermaid i gráfiko.',
+  'Het thema en de opmaak per dia (_class).':
+      'E tema i e formato pa kada slide (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'E seyo: un dokumento konvertí ta nobo i no tin seyo.',
+  'Naar document converteren?': 'Konvertí na dokumento?',
+  'Naar presentatie converteren?': 'Konvertí na presentashon?',
+  'Nog een export': 'Un otro eksportashon',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Pa PDF: habri e HTML i imprimí via bo browser (Warda komo PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Pa e sírkulo mas hanchu: tur loke e chekeo haña ta bai afó. E dokumento ta haña "-redaktá" den su nòmber.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Pa e kliente òf ouditor: solamente loke bo mes a marka komo "laga afó" ta bai afó. E resto ta keda leesbaar.',
+  'Wat gaat er verloren bij het converteren:': 'Kiko ta perde ora di konvertí:',
+  'Wat verandert er bij het converteren:': 'Kiko ta kambia ora di konvertí:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Nos ta traha un kopia den un tab nobo; bo dokumento original ta keda sin kambio.',
+  'Welk formaat?': 'Ki formato?',
+  'dia\'s, gesplitst op kop.': 'slide, dividí pa titulo.',
+  'document': 'dokumento',
+  'volledig': 'kompleto',
+  'Invoegen': 'Inserta',
+  'Visueel': 'Visual',
+  'Document': 'Dokumento',
   'Nieuw document': 'Dokumento nobo',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Ta konta pa {n} slide di e serie partí aki.',

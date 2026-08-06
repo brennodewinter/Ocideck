@@ -46,7 +46,10 @@ function sanitizeMermaid(){
   });
 }
 if(window.marked&&marked.setOptions){marked.setOptions({gfm:true,breaks:false});}
-document.querySelectorAll('section.slide').forEach(function(sec){
+// section.slide (dia-modus) én section.document (doorlopende documentmodus):
+// beide dragen hun body als inerte markdown-payload en worden hier client-side
+// door marked+DOMPurify gerenderd — de enige renderroute.
+document.querySelectorAll('section.slide,section.document').forEach(function(sec){
   var holder=sec.querySelector('script[type="text/markdown"]');
   var src=holder?holder.textContent:'';
   // De ontsnapping uit _guardMarkdown terugdraaien: die bestaat alleen om de

@@ -1771,8 +1771,51 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'dia\'s uit dit document.': 'slide dari dokumen ini.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo profil gaya ini tidak ditemukan dan tidak ditampilkan (jalur: {pad}). Pilih logo di pengaturan presentasi.',
+  'Converteer naar document…': 'Konversi ke dokumen…',
+  'Converteer naar presentatie…': 'Konversi ke presentasi…',
+  'Converteren': 'Konversi',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Pembagian ke dalam slide (teks berlanjut sebagai satu dokumen).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Pembagian ke dalam slide hanyalah usulan; presentasi dan dokumen bukanlah cerminan sempurna satu sama lain.',
+  'Document exporteren': 'Ekspor dokumen',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Salinan teks polos yang diredaksi — terbuka di pembaca Markdown mana pun.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Sebuah garis tematik (---) menjadi batas slide.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Ekspor membuat salinan yang diredaksi untuk penerima. Dokumen asli Anda yang setia-byte disimpan dengan Simpan.',
+  'Exporteren…': 'Ekspor…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Satu berkas HTML yang mudah diakses dan terbuka di browser mana pun tanpa internet, dengan tabel, matematika, mermaid, dan grafik.',
+  'Het thema en de opmaak per dia (_class).':
+      'Tema dan format per slide (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Segel: berkas hasil konversi bersifat baru dan tidak membawa segel.',
+  'Naar document converteren?': 'Konversi ke dokumen?',
+  'Naar presentatie converteren?': 'Konversi ke presentasi?',
+  'Nog een export': 'Ekspor lagi',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Untuk PDF: buka HTML lalu cetak lewat browser Anda (Simpan sebagai PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Untuk kalangan yang lebih luas: semua yang ditemukan pemeriksaan dihapus. Berkas mendapat "-diredaksi" pada namanya.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Untuk pemberi tugas atau auditor: hanya yang Anda tandai sendiri sebagai "hilangkan" yang dihapus. Sisanya tetap terbaca.',
+  'Wat gaat er verloren bij het converteren:':
+      'Apa yang hilang saat mengonversi:',
+  'Wat verandert er bij het converteren:': 'Apa yang berubah saat mengonversi:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Kami membuat salinan di tab baru; berkas asli Anda tetap tidak berubah.',
+  'Welk formaat?': 'Format apa?',
+  'dia\'s, gesplitst op kop.': 'slide, dibagi berdasarkan judul.',
+  'document': 'dokumen',
+  'volledig': 'lengkap',
+  'Invoegen': 'Sisipkan',
+  'Visueel': 'Visual',
+  'Document': 'Dokumen',
   'Nieuw document': 'Dokumen baru',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Berlaku untuk {n} slide dari rangkaian terpisah ini.',

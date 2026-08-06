@@ -1793,8 +1793,50 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'dia\'s uit dit document.': 'slajds minn dan id-dokument.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Il-logo ta\' dan il-profil tal-istil ma nstabx u mhux jintwera (triq: {pad}). Agħżel logo fl-issettjar tal-preżentazzjoni.',
+  'Converteer naar document…': 'Ikkonverti f\'dokument…',
+  'Converteer naar presentatie…': 'Ikkonverti f\'preżentazzjoni…',
+  'Converteren': 'Ikkonverti',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Il-qsim fi slajds (it-test ikompli bħala dokument wieħed).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Il-qsim fi slajds huwa suġġeriment; il-preżentazzjoni u d-dokument mhumiex mera perfetta ta\' xulxin.',
+  'Document exporteren': 'Esporta d-dokument',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Kopja rediġuta tat-test sempliċi — tinfetaħ f\'kull qarrej Markdown.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Linja tematika (---) issir tarf ta\' slajd.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'L-esportazzjoni toħloq kopja rediġuta għal riċevitur. L-oriġinal tiegħek fidil għall-bytes iżżommu bl-Issejvja.',
+  'Exporteren…': 'Esporta…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Fajl HTML wieħed aċċessibbli li jinfetaħ f\'kull browser bla internet, bit-tabelli, il-matematika, il-mermaid u l-graffs.',
+  'Het thema en de opmaak per dia (_class).':
+      'It-tema u l-formattazzjoni għal kull slajd (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Is-siġill: fajl konvertit huwa ġdid u ma jġorr l-ebda siġill.',
+  'Naar document converteren?': 'Tikkonverti f\'dokument?',
+  'Naar presentatie converteren?': 'Tikkonverti f\'preżentazzjoni?',
+  'Nog een export': 'Esportazzjoni oħra',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Għall-PDF: iftaħ l-HTML u ipprintja permezz tal-browser tiegħek (Issejvja bħala PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Għaċ-ċirku usa\': dak kollu li ssib il-verifika jitneħħa. Il-fajl jieħu "-irrediġuti" fl-isem.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Għall-klijent jew l-awditur: jitneħħa biss dak li int stess immarkajt bħala "ħalli barra". Il-bqija jibqa\' jinqara.',
+  'Wat gaat er verloren bij het converteren:': 'X\'jintilef bil-konverżjoni:',
+  'Wat verandert er bij het converteren:': 'X\'jinbidel bil-konverżjoni:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Noħolqu kopja f\'tab ġdid; il-fajl oriġinali tiegħek jibqa\' mhux mibdul.',
+  'Welk formaat?': 'Liema format?',
+  'dia\'s, gesplitst op kop.': 'slajds, maqsuma skont it-titlu.',
+  'document': 'dokument',
+  'volledig': 'sħiħ',
+  'Invoegen': 'Daħħal',
+  'Visueel': 'Viżiv',
+  'Document': 'Dokument',
   'Nieuw document': 'Dokument ġdid',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Japplika għal {n} slajds ta\' din is-sensiela maqsuma.',

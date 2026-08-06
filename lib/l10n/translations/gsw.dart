@@ -1774,8 +1774,50 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'dia\'s uit dit document.': 'Folie us dem Dokumänt.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'S Logo vo däm Stiilprofil isch nöd gfunde worde und wird nöd aazeigt (Pfad: {pad}). Wähl e Logo i de Präsentationsistellige.',
+  'Converteer naar document…': 'In Dokumänt umwandle…',
+  'Converteer naar presentatie…': 'In Präsentation umwandle…',
+  'Converteren': 'Umwandle',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'D Ufteilig i Folie (de Text lauft as ei einzigs Dokumänt wiiter).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'D Ufteilig i Folie isch en Vorschlag; Präsentation und Dokumänt sind kei perfekts Spiegelbild vonenand.',
+  'Document exporteren': 'Dokumänt exportiere',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'E gschwärzti Kopie vom Klartext — gaht i jedem Markdown-Läser uf.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'E thematischi Linie (---) wird zunere Foliegränze.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'De Export macht e gschwärzti Kopie für en Empfänger. Dis byte-treue Original bhaltsch mit Speichere.',
+  'Exporteren…': 'Exportiere…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Ei einzigi barrierefreii HTML-Datei, wo i jedem Browser ohni Internet uf gaht, mit Tabälle, Mathe, Mermaid und Diagramm.',
+  'Het thema en de opmaak per dia (_class).':
+      'S Thema und d Formatierig pro Folie (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'S Siegel: e umgwandleti Datei isch neu und treit kei Siegel.',
+  'Naar document converteren?': 'In Dokumänt umwandle?',
+  'Naar presentatie converteren?': 'In Präsentation umwandle?',
+  'Nog een export': 'Nochli en Export',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Für PDF: mach s HTML uf und druck über dis Browser (Als PDF speichere).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Für de wiiteri Chreis: alles, was d Prüefig findt, chunt use. D Datei überchunt "-gschwärzt" im Name.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Für de Uftraggäber oder Prüefer: es chunt nur use, was du sälber uf "weglah" gsetzt häsch. De Rescht bliibt läsbar.',
+  'Wat gaat er verloren bij het converteren:': 'Was bim Umwandle verlore gaht:',
+  'Wat verandert er bij het converteren:': 'Was sich bim Umwandle änderet:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Mir mached e Kopie i mene neue Tab; dis Originaldatei bliibt unveränderet.',
+  'Welk formaat?': 'Weles Format?',
+  'dia\'s, gesplitst op kop.': 'Folie, ufteilt nach Überschrift.',
+  'document': 'Dokumänt',
+  'volledig': 'vollständig',
+  'Invoegen': 'Iifüege',
+  'Visueel': 'Visuell',
+  'Document': 'Dokumänt',
   'Nieuw document': 'Nöis Dokument',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Gilt für {n} Slides vo dere gteilte Reihe.',

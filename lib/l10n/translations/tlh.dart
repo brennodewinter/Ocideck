@@ -1746,8 +1746,49 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'dia\'s uit dit document.': 'vam nav QIchmey.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Deghvam Segh tu\'be\'lu\' \'ej \'angbe\'lu\' (HeH: {pad}). \'ang SeHlawDaq Degh yIwIv.',
+  'Converteer naar document…': 'ghItlhDaq choH…',
+  'Converteer naar presentatie…': '\'anglaw\'Daq choH…',
+  'Converteren': 'choH',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'HaSta\'mey chevlu\' (wa\' ghItlh rur mu\'meyvam).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'HaSta\'mey chev mIw \'oH neH; rapbe\' \'anglaw\' ghItlh je.',
+  'Document exporteren': 'ghItlh ngeH',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'ghItlh nap So\'lu\' velqa\' — Markdown laDwI\' HochDaq poSlu\'.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'tlhegh (---) HaSta\' veH moj.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'ngeHmeH ghItlh So\'lu\' chenmoHlu\' HevwI\'vaD. byte-\'ol ghItlh niHlIj DapolmeH, choqwI\' Dalo\'.',
+  'Exporteren…': 'ngeH…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'wa\' HTML teywI\' lI\'laHbogh, internet Hutlh Hoch browserDaq poSbogh, tetlhmey mI\'QeD mermaid HaSta\'mey je tlhej.',
+  'Het thema en de opmaak per dia (_class).': 'tema HaSta\' Segh je (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'HImmer: ghItlh choHlu\'pu\'bogh chu\' \'ej HImmer Hutlh.',
+  'Naar document converteren?': 'ghItlhDaq choH\'a\'?',
+  'Naar presentatie converteren?': '\'anglaw\'Daq choH\'a\'?',
+  'Nog een export': 'latlh ngeH',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'PDFvaD: HTML poSmoH \'ej browserlIj lo\'taHvIS ta\'moH (PDF choqmeH).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'qutlhmey law\' teqlu\': Hoch SammeH ghItlh teq. pong "-So\'lu\'" Hev ghItlh.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'lupabogh ghojwI\' pagh nughmeH: "lonlu\'" DaghItlhpu\'bogh neH teqlu\'. latlh laDlaH.',
+  'Wat gaat er verloren bij het converteren:': 'choHDI\' nuq chIllu\':',
+  'Wat verandert er bij het converteren:': 'choHDI\' nuq choHlu\':',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'chu\' tabDaq ghItlh velqa\' wIchenmoH; ghItlh niHlIj choHbe\'lu\'.',
+  'Welk formaat?': 'nuq Segh?',
+  'dia\'s, gesplitst op kop.': 'HaSta\'mey, nav pIn vItlhutlh chevlu\'.',
+  'document': 'ghItlh',
+  'volledig': 'naQ',
+  'Invoegen': 'chel',
+  'Visueel': 'mIllogh',
+  'Document': 'nav',
   'Nieuw document': 'ghItlh chu\'',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'rarvam {n} \'echletHomvaD lI\'.',

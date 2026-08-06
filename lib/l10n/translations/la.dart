@@ -1787,8 +1787,50 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'dia\'s uit dit document.': 'scidae ex hoc documento.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Huius stiliprofili insigne non inventum est et non ostenditur (via: {pad}). Elige insigne in praesentationis optionibus.',
+  'Converteer naar document…': 'In documentum converte…',
+  'Converteer naar presentatie…': 'In praesentationem converte…',
+  'Converteren': 'Converte',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Divisio in tabulas (textus tamquam unum documentum pergit).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Divisio in tabulas consilium est; praesentatio et documentum non sunt perfectum alterius speculum.',
+  'Document exporteren': 'Documentum exportare',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Exemplum obliteratum textus meri — in quolibet lectore Markdown aperitur.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Linea thematica (---) fit terminus paginae.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Exportatio exemplum obliteratum accipienti creat. Archetypum tuum bytis fidele Servando conservas.',
+  'Exporteren…': 'Exportare…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Unus fasciculus HTML accessibilis qui in quolibet navigatro sine interrete aperitur, cum tabulis, mathematica, mermaid et diagrammatibus.',
+  'Het thema en de opmaak per dia (_class).':
+      'Thema et forma per paginam (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Sigillum: fasciculus conversus novus est nec sigillum gerit.',
+  'Naar document converteren?': 'In documentum convertere?',
+  'Naar presentatie converteren?': 'In praesentationem convertere?',
+  'Nog een export': 'Alia exportatio',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Pro PDF: HTML aperi et per navigatrum tuum imprime (Ut PDF serva).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Pro ampliore circulo: omnia quae examen invenit auferuntur. Fasciculus "-obliterata" in nomine accipit.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Pro mandante vel inspectore: solum aufertur quod ipse "omittendum" notavisti. Cetera legibilia manent.',
+  'Wat gaat er verloren bij het converteren:': 'Quid in convertendo amittitur:',
+  'Wat verandert er bij het converteren:': 'Quid in convertendo mutatur:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Exemplum in nova scida facimus; fasciculus tuus originalis immutatus manet.',
+  'Welk formaat?': 'Quae forma?',
+  'dia\'s, gesplitst op kop.': 'paginae, secundum titulum divisae.',
+  'document': 'documentum',
+  'volledig': 'plenum',
+  'Invoegen': 'Insere',
+  'Visueel': 'Visuale',
+  'Document': 'Documentum',
   'Nieuw document': 'Novum documentum',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Valet pro {n} paginis huius seriei divisae.',

@@ -1778,8 +1778,50 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'dia\'s uit dit document.': 'skaidrių iš šio dokumento.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Šio stiliaus profilio logotipas nerastas ir nerodomas (kelias: {pad}). Pasirinkite logotipą pateikties nustatymuose.',
+  'Converteer naar document…': 'Konvertuoti į dokumentą…',
+  'Converteer naar presentatie…': 'Konvertuoti į pateiktį…',
+  'Converteren': 'Konvertuoti',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Skaidymas į skaidres (tekstas tęsiasi kaip vienas dokumentas).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Skaidymas į skaidres yra pasiūlymas; pristatymas ir dokumentas nėra tobula vienas kito atspindys.',
+  'Document exporteren': 'Eksportuoti dokumentą',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Paslėpta paprastojo teksto kopija — atsidaro bet kurioje Markdown skaityklėje.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Teminė linija (---) tampa skaidrės riba.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Eksportas sukuria paslėptą kopiją gavėjui. Savo baitui ištikimą originalą išsaugote su Įrašyti.',
+  'Exporteren…': 'Eksportuoti…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Vienas prieinamas HTML failas, atsidarantis bet kurioje naršyklėje be interneto, su lentelėmis, matematika, mermaid ir diagramomis.',
+  'Het thema en de opmaak per dia (_class).':
+      'Tema ir kiekvienos skaidrės formatavimas (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Antspaudas: konvertuotas failas yra naujas ir neturi antspaudo.',
+  'Naar document converteren?': 'Konvertuoti į dokumentą?',
+  'Naar presentatie converteren?': 'Konvertuoti į pateiktį?',
+  'Nog een export': 'Dar vienas eksportas',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'PDF: atverkite HTML ir spausdinkite per naršyklę (Įrašyti kaip PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Platesniam ratui: viskas, ką randa patikra, pašalinama. Failo pavadinime atsiranda "-paslėpta".',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Užsakovui ar auditoriui: pašalinama tik tai, ką patys pažymėjote kaip "praleisti". Likusi dalis lieka įskaitoma.',
+  'Wat gaat er verloren bij het converteren:': 'Kas prarandama konvertuojant:',
+  'Wat verandert er bij het converteren:': 'Kas keičiasi konvertuojant:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Sukuriame kopiją naujoje kortelėje; jūsų originalus failas lieka nepakitęs.',
+  'Welk formaat?': 'Koks formatas?',
+  'dia\'s, gesplitst op kop.': 'skaidrių, padalytų pagal antraštę.',
+  'document': 'dokumentas',
+  'volledig': 'pilnas',
+  'Invoegen': 'Įterpti',
+  'Visueel': 'Vaizdinis',
+  'Document': 'Dokumentas',
   'Nieuw document': 'Naujas dokumentas',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Taikoma {n} skaidrėms iš šios padalytos sekos.',

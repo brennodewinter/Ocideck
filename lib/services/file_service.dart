@@ -949,3 +949,21 @@ class FileService {
     );
   }
 }
+
+/// Vraagt waar een document-export (§11.2) naartoe moet. Anders dan een deck
+/// (dat naast zijn `.md` landt) prompt een document om een pad: het is een
+/// afgeleide, geredigeerde kopie voor een ontvanger — niet de meester.
+/// [fileName] draagt al de juiste extensie (`.md`/`.html`) en het profiel
+/// (`…-geredigeerd`), zodat een verwisseling zichtbaar is in de naam.
+///
+/// Top-level en niet op [FileService]: precies zoals [_systemSaveDestination] al
+/// [FilePicker.saveFile] omhult, en omdat die klasse tegen haar plafond zit.
+Future<String?> pickDocumentExportDestination({
+  required String dialogTitle,
+  required String fileName,
+  String? initialDirectory,
+}) => FilePicker.saveFile(
+  dialogTitle: dialogTitle,
+  fileName: fileName,
+  initialDirectory: initialDirectory,
+);

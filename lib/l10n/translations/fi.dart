@@ -1771,8 +1771,50 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'dia\'s uit dit document.': 'diaa tästä asiakirjasta.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Tämän tyyliprofiilin logoa ei löytynyt eikä sitä näytetä (polku: {pad}). Valitse logo esityksen asetuksissa.',
+  'Converteer naar document…': 'Muunna asiakirjaksi…',
+  'Converteer naar presentatie…': 'Muunna esitykseksi…',
+  'Converteren': 'Muunna',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Jako dioihin (teksti jatkuu yhtenä asiakirjana).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Jako dioihin on ehdotus; esitys ja asiakirja eivät ole toistensa täydellinen peilikuva.',
+  'Document exporteren': 'Vie asiakirja',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Peitetty kopio pelkästä tekstistä — avautuu missä tahansa Markdown-lukijassa.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Aiheviiva (---) muuttuu dian rajaksi.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Vienti luo peitetyn kopion vastaanottajalle. Tavutarkan alkuperäisen säilytät Tallenna-toiminnolla.',
+  'Exporteren…': 'Vie…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Yksi saavutettava HTML-tiedosto, joka avautuu missä tahansa selaimessa ilman internetiä, sisältäen taulukot, matematiikan, mermaidin ja kaaviot.',
+  'Het thema en de opmaak per dia (_class).':
+      'Teema ja diakohtainen muotoilu (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Sinetti: muunnettu tiedosto on uusi eikä sisällä sinettiä.',
+  'Naar document converteren?': 'Muunnetaanko asiakirjaksi?',
+  'Naar presentatie converteren?': 'Muunnetaanko esitykseksi?',
+  'Nog een export': 'Uusi vienti',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'PDF:ää varten: avaa HTML ja tulosta selaimesi kautta (Tallenna PDF-muodossa).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Laajemmalle piirille: kaikki, mitä tarkistus löytää, poistetaan. Tiedosto saa nimeensä "-peitetty".',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Toimeksiantajalle tai tarkastajalle: poistetaan vain se, minkä olet itse merkinnyt "jätä pois". Loput pysyvät luettavina.',
+  'Wat gaat er verloren bij het converteren:': 'Mitä muunnoksessa menetetään:',
+  'Wat verandert er bij het converteren:': 'Mikä muuttuu muunnoksessa:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Luomme kopion uuteen välilehteen; alkuperäinen tiedostosi pysyy muuttumattomana.',
+  'Welk formaat?': 'Mikä muoto?',
+  'dia\'s, gesplitst op kop.': 'diaa, jaettu otsikon mukaan.',
+  'document': 'asiakirja',
+  'volledig': 'täysi',
+  'Invoegen': 'Lisää',
+  'Visueel': 'Visuaalinen',
+  'Document': 'Asiakirja',
   'Nieuw document': 'Uusi asiakirja',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Koskee tämän jaetun sarjan {n} diaa.',

@@ -437,6 +437,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _clearAllChecklists();
             case 'full_preview':
               _openFullDeckPreview();
+            case 'convert_to_document':
+              convertDeckToDocument(context, ref);
             case 'finalize':
               _finalizeAndSeal();
             case 'settings':
@@ -797,16 +799,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     }
   }
 
-  void _openFullDeckPreview() {
-    final deck = ref.read(deckProvider).deck!;
-    Navigator.push(
-      context,
-      MaterialPageRoute<void>(
-        builder: (_) =>
-            FullDeckPreview(deck: deck, themeProfile: deck.themeProfile),
-      ),
-    );
-  }
+  void _openFullDeckPreview() => openFullDeckPreview(context, ref);
 
   Future<void> _newInTab() =>
       _createDeckFromDialog(context, ref, inNewTab: true);

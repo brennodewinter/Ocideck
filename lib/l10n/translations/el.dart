@@ -1798,8 +1798,50 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'dia\'s uit dit document.': 'διαφάνειες από αυτό το έγγραφο.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Το λογότυπο αυτού του προφίλ στυλ δεν βρέθηκε και δεν εμφανίζεται (διαδρομή: {pad}). Επιλέξτε ένα λογότυπο στις ρυθμίσεις παρουσίασης.',
+  'Converteer naar document…': 'Μετατροπή σε έγγραφο…',
+  'Converteer naar presentatie…': 'Μετατροπή σε παρουσίαση…',
+  'Converteren': 'Μετατροπή',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Ο διαχωρισμός σε διαφάνειες (το κείμενο συνεχίζεται ως ένα ενιαίο έγγραφο).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Ο διαχωρισμός σε διαφάνειες είναι μια πρόταση· η παρουσίαση και το έγγραφο δεν είναι τέλειο κάτοπτρο το ένα του άλλου.',
+  'Document exporteren': 'Εξαγωγή εγγράφου',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Ένα αποκρυμμένο αντίγραφο του απλού κειμένου — ανοίγει σε οποιονδήποτε αναγνώστη Markdown.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Μια θεματική γραμμή (---) γίνεται όριο διαφάνειας.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Η εξαγωγή δημιουργεί ένα αποκρυμμένο αντίγραφο για έναν παραλήπτη. Το πιστό στα byte πρωτότυπό σας το κρατάτε με την Αποθήκευση.',
+  'Exporteren…': 'Εξαγωγή…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Ένα προσβάσιμο αρχείο HTML που ανοίγει σε οποιονδήποτε browser χωρίς internet, με πίνακες, μαθηματικά, mermaid και γραφήματα.',
+  'Het thema en de opmaak per dia (_class).':
+      'Το θέμα και η μορφοποίηση ανά διαφάνεια (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Η σφραγίδα: ένα αρχείο που έχει μετατραπεί είναι νέο και δεν φέρει σφραγίδα.',
+  'Naar document converteren?': 'Μετατροπή σε έγγραφο;',
+  'Naar presentatie converteren?': 'Μετατροπή σε παρουσίαση;',
+  'Nog een export': 'Άλλη μια εξαγωγή',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'Για PDF: ανοίξτε το HTML και εκτυπώστε μέσω του browser σας (Αποθήκευση ως PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Για τον ευρύτερο κύκλο: αφαιρείται ό,τι βρίσκει ο έλεγχος. Το αρχείο αποκτά "-αποκρυμμένα" στο όνομα.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Για τον εντολέα ή τον ελεγκτή: αφαιρείται μόνο ό,τι έχετε ορίσει εσείς ως "παράλειψη". Τα υπόλοιπα παραμένουν αναγνώσιμα.',
+  'Wat gaat er verloren bij het converteren:': 'Τι χάνεται κατά τη μετατροπή:',
+  'Wat verandert er bij het converteren:': 'Τι αλλάζει κατά τη μετατροπή:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Δημιουργούμε ένα αντίγραφο σε νέα καρτέλα· το αρχικό σας αρχείο παραμένει αμετάβλητο.',
+  'Welk formaat?': 'Ποια μορφή;',
+  'dia\'s, gesplitst op kop.': 'διαφάνειες, χωρισμένες ανά επικεφαλίδα.',
+  'document': 'έγγραφο',
+  'volledig': 'πλήρες',
+  'Invoegen': 'Εισαγωγή',
+  'Visueel': 'Οπτικό',
+  'Document': 'Έγγραφο',
   'Nieuw document': 'Νέο έγγραφο',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Ισχύει για {n} διαφάνειες αυτής της χωρισμένης σειράς.',

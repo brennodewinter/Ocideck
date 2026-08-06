@@ -1770,8 +1770,50 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'dia\'s uit dit document.': 'slaidi no šī dokumenta.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Šī stila profila logotips nav atrasts un netiek rādīts (ceļš: {pad}). Izvēlieties logotipu prezentācijas iestatījumos.',
+  'Converteer naar document…': 'Pārvērst par dokumentu…',
+  'Converteer naar presentatie…': 'Pārvērst par prezentāciju…',
+  'Converteren': 'Pārvērst',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'Dalījums slaidos (teksts turpinās kā viens dokuments).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'Dalījums slaidos ir ieteikums; prezentācija un dokuments nav viens otra ideāls spogulis.',
+  'Document exporteren': 'Eksportēt dokumentu',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'Aizklāta vienkāršā teksta kopija — atveras jebkurā Markdown lasītājā.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Tematiska līnija (---) kļūst par slaida robežu.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Eksports izveido aizklātu kopiju saņēmējam. Savu baitam uzticīgo oriģinālu saglabājat ar Saglabāt.',
+  'Exporteren…': 'Eksportēt…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Viens piekļūstams HTML fails, kas atveras jebkurā pārlūkā bez interneta, ar tabulām, matemātiku, mermaid un diagrammām.',
+  'Het thema en de opmaak per dia (_class).':
+      'Motīvs un formatējums katram slaidam (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'Zīmogs: pārveidots fails ir jauns un tam nav zīmoga.',
+  'Naar document converteren?': 'Pārvērst par dokumentu?',
+  'Naar presentatie converteren?': 'Pārvērst par prezentāciju?',
+  'Nog een export': 'Vēl viens eksports',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'PDF iegūšanai: atveriet HTML un drukājiet caur pārlūku (Saglabāt kā PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Plašākam lokam: viss, ko atrod pārbaude, tiek noņemts. Faila nosaukumam pievieno "-aizklāti".',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'Pasūtītājam vai auditoram: tiek noņemts tikai tas, ko pats esat atzīmējis kā "izlaist". Pārējais paliek lasāms.',
+  'Wat gaat er verloren bij het converteren:': 'Kas tiek zaudēts, pārvēršot:',
+  'Wat verandert er bij het converteren:': 'Kas mainās, pārvēršot:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Mēs izveidojam kopiju jaunā cilnē; jūsu sākotnējais fails paliek nemainīgs.',
+  'Welk formaat?': 'Kāds formāts?',
+  'dia\'s, gesplitst op kop.': 'slaidi, sadalīti pēc virsraksta.',
+  'document': 'dokuments',
+  'volledig': 'pilns',
+  'Invoegen': 'Ievietot',
+  'Visueel': 'Vizuāls',
+  'Document': 'Dokuments',
   'Nieuw document': 'Jauns dokuments',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Piemērojams {n} slaidiem šajā sadalītajā virknē.',

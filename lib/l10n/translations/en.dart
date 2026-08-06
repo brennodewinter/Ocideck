@@ -911,8 +911,50 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'dia\'s uit dit document.': 'slides from this document.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'The logo of this style profile was not found and is not shown (path: {pad}). Choose a logo in the presentation settings.',
+  'Converteer naar document…': 'Convert to document…',
+  'Converteer naar presentatie…': 'Convert to presentation…',
+  'Converteren': 'Convert',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'The division into slides (the text flows on as a single document).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'The division into slides is a suggestion; presentation and document are not a perfect mirror of each other.',
+  'Document exporteren': 'Export document',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'A redacted copy of the plain text — opens in any Markdown reader.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'A thematic break (---) becomes a slide boundary.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Exporting makes a redacted copy for a recipient. You keep your byte-faithful original with Save.',
+  'Exporteren…': 'Export…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'One accessible HTML file that opens in any browser without internet, with tables, math, mermaid and charts.',
+  'Het thema en de opmaak per dia (_class).':
+      'The theme and the per-slide styling (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'The seal: a converted file is new and carries no seal.',
+  'Naar document converteren?': 'Convert to document?',
+  'Naar presentatie converteren?': 'Convert to presentation?',
+  'Nog een export': 'Another export',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'For PDF: open the HTML and print via your browser (Save as PDF).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'For the wider circle: everything the check finds is removed. The file gets "-redacted" in its name.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'For the client or auditor: only what you yourself marked "omit" is removed. The rest stays readable.',
+  'Wat gaat er verloren bij het converteren:': 'What is lost when converting:',
+  'Wat verandert er bij het converteren:': 'What changes when converting:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'We make a copy in a new tab; your original file stays unchanged.',
+  'Welk formaat?': 'Which format?',
+  'dia\'s, gesplitst op kop.': 'slides, split by heading.',
+  'document': 'document',
+  'volledig': 'full',
+  'Invoegen': 'Insert',
+  'Visueel': 'Visual',
+  'Document': 'Document',
   'Nieuw document': 'New document',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Applies to {n} slides of this split run.',

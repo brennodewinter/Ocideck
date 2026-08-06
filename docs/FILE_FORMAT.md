@@ -17,6 +17,7 @@
 - [11. Export Metadata (Not in `.md`)](#11-export-metadata-not-in-md)
 - [12. Redaction Manifest Files (Beside an Export)](#12-redaction-manifest-files-beside-an-export)
 - [13. Accepted Files and Their Limits](#13-accepted-files-and-their-limits)
+- [14. Documents (Plain `.md`, Not a Deck)](#14-documents-plain-md-not-a-deck)
 
 *(Added 2026-07-22: this document is around 2,253 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not.)*
 
@@ -3031,3 +3032,56 @@ knowing if you are the one serving the file.
 
 A deck arriving by any of these routes passes the same `MarkdownSafetyScanner`
 gate as a local one; none of them is a shortcut past it.
+
+---
+
+## 14. Documents (Plain `.md`, Not a Deck)
+
+*(Added 2026-08-06.)* Besides presentations, OciDeck edits **documents**: a
+flowing Markdown file that is **not** a deck of slides. The design — the disk
+contract, what round-trips and what does not — is written up in
+[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md); this section states the
+on-disk facts.
+
+### 14.1 Recognition — the absence of `marp: true`
+
+A document on disk is a **plain `.md`** with no slide structure. There is **no
+new on-disk marker** to claim a file as OciDeck's — no `kind:` key, no
+`ocideck:` front-matter key. The discriminator is the **absence of
+`marp: true`**: a `.md` that carries the Marp directive opens as a deck, one that
+does not opens as a document. This keeps an ordinary README or note maximally
+interchangeable and means a document is a file any Markdown tool reads without
+knowing anything about OciDeck. A document may legitimately carry the front
+matter its author wrote (for example Jekyll, Hugo or Obsidian keys); OciDeck adds
+no owned keys of its own.
+
+### 14.2 Working directory
+
+A document uses the **same working-directory concept as a deck** (§1): images in
+`images/` and chart data in `data/*.json`, **beside** the `.md`. There is no
+separate backend and no new folder scheme. A ` ```chart ` block references its
+numbers as `source: data/<name>.json`, exactly as on a slide, and the same
+containment guard applies — a data reference that tries to escape the project
+folder with `../` or an absolute path is refused, not followed.
+
+### 14.3 Byte-faithful round-trip
+
+Open → (no edit) → Save yields a **byte-identical** file. Unlike the deck path,
+the document path injects **no** front matter, forces **no** slide `---`
+separators, builds **no** `themes/`/`logos/` scaffold, and applies **none** of
+the byte-changing normalisation (CRLF→LF, NBSP→space, invisible-character strip)
+that deck slide bodies go through. The `.md` you save is the byte-faithful master
+you keep, back up and eventually clean — the same role §9 describes for a deck's
+Markdown, held to a stricter no-normalisation rule.
+
+### 14.4 Export is a derived, projected artefact — on a new file
+
+Exporting a document is **not** saving it. Export writes a **derived, redacted
+copy for a recipient** onto a **new** file and never touches the source, so it
+falls **outside** the byte-faithful guarantee of §14.3. Two output forms exist:
+a projected `.md` (a redacted copy of the plain text) and one **continuous**
+self-contained HTML document. Both carry the privacy-projected (OciWacht) content
+rather than the raw source, along the same audience boundary as a deck export;
+the chosen privacy profile is written into the export's filename. There is no
+built-in PDF writer for a document — a PDF is made by printing the exported HTML
+from the browser (see the [User Guide](USER_GUIDE.md#documents)).

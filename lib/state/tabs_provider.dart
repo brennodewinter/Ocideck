@@ -13,7 +13,6 @@ import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/improvement_y01.dart';
 import '../models/markdown_document.dart';
-import '../models/markdown_kind.dart';
 import '../models/settings.dart';
 import '../models/seal_record.dart';
 import '../models/slide.dart';
@@ -497,7 +496,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       return _openFailureResult(_ref, mounted, result.failure);
     }
     _placeDocumentTab(document, filePath: path);
-    await _settings.addRecentFile(path); // soort-in-recent: latere politoer
+    await _settings.addRecentFile(path, kind: MarkdownKind.document);
     return OpenResult.opened;
   }
 
@@ -506,6 +505,14 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// Spiegel van [newDeckInNewTab] voor de documentmodus.
   void newDocument() {
     _placeDocumentTab(MarkdownDocument.parse(''));
+  }
+
+  /// Open [source] als plat document in een NIEUW tabblad — een kopie, nog
+  /// zonder bestandspad. Voor de conversie presentatie → document
+  /// (DOCUMENT_MODE.md §11.3): het originele deck blijft ongemoeid, en er reist
+  /// geen zegel mee — een document kent er geen.
+  void newDocumentFromMarkdown(String source) {
+    _placeDocumentTab(MarkdownDocument.parse(source));
   }
 
   /// Bouwt een documenttabblad rond [document] en zet het naast de bestaande

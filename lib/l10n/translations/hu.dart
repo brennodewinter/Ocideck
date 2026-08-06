@@ -1775,8 +1775,50 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'dia\'s uit dit document.': 'dia ebből a dokumentumból.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Ezen stílusrprofil logója nem található és nem jelenik meg (útvonal: {pad}). Válasszon egy logót a bemutató beállításaiban.',
+  'Converteer naar document…': 'Átalakítás dokumentummá…',
+  'Converteer naar presentatie…': 'Átalakítás bemutatóvá…',
+  'Converteren': 'Átalakítás',
+  'De indeling in dia\'s (de tekst loopt door als één document).':
+      'A diákra tagolás (a szöveg egyetlen dokumentumként folytatódik).',
+  'De indeling in dia\'s is een voorstel; presentatie en document zijn geen perfecte spiegeling van elkaar.':
+      'A diákra tagolás csak javaslat; a bemutató és a dokumentum nem egymás tökéletes tükörképe.',
+  'Document exporteren': 'Dokumentum exportálása',
+  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.':
+      'A sima szöveg kitakart másolata — bármely Markdown-olvasóban megnyílik.',
+  'Een thematische regel (---) wordt een diagrens.':
+      'Egy tematikus vonal (---) diahatárrá válik.',
+  'Exporteren maakt een geredigeerde kopie voor een ontvanger. Je byte-getrouwe origineel bewaar je met Opslaan.':
+      'Az exportálás kitakart másolatot készít egy címzettnek. A bájthű eredetit a Mentés paranccsal őrzöd meg.',
+  'Exporteren…': 'Exportálás…',
+  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.':
+      'Egyetlen akadálymentes HTML-fájl, amely internet nélkül bármely böngészőben megnyílik, táblázatokkal, matematikával, mermaiddel és diagramokkal.',
+  'Het thema en de opmaak per dia (_class).':
+      'A téma és a diánkénti formázás (_class).',
+  'Het zegel: een geconverteerd bestand is nieuw en draagt geen zegel.':
+      'A pecsét: az átalakított fájl új, és nem visel pecsétet.',
+  'Naar document converteren?': 'Átalakítás dokumentummá?',
+  'Naar presentatie converteren?': 'Átalakítás bemutatóvá?',
+  'Nog een export': 'Újabb exportálás',
+  'Voor PDF: open de HTML en print via je browser (Bewaar als PDF).':
+      'PDF-hez: nyisd meg a HTML-t, és nyomtass a böngésződből (Mentés PDF-ként).',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit. Het bestand krijgt "-geredigeerd" in de naam.':
+      'A szélesebb körnek: minden eltűnik, amit az ellenőrzés talál. A fájl neve "-kitakarva" toldalékot kap.',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar.':
+      'A megbízónak vagy az auditornak: csak az kerül ki, amit magad "kihagyás"-ra jelöltél. A többi olvasható marad.',
+  'Wat gaat er verloren bij het converteren:': 'Mi vész el az átalakításkor:',
+  'Wat verandert er bij het converteren:': 'Mi változik az átalakításkor:',
+  'We maken een kopie in een nieuw tabblad; je originele bestand blijft ongewijzigd.':
+      'Másolatot készítünk egy új lapon; az eredeti fájlod változatlan marad.',
+  'Welk formaat?': 'Melyik formátum?',
+  'dia\'s, gesplitst op kop.': 'dia, címsor szerint felosztva.',
+  'document': 'dokumentum',
+  'volledig': 'teljes',
+  'Invoegen': 'Beszúrás',
+  'Visueel': 'Vizuális',
+  'Document': 'Dokumentum',
   'Nieuw document': 'Új dokumentum',
   'Geldt voor {n} slides van deze gesplitste reeks.':
       'Ennek az osztott sorozatnak {n} diájára vonatkozik.',
