@@ -490,3 +490,11 @@ class _BulletListColumn extends StatelessWidget {
     );
   }
 }
+
+/// Reserveert boven- en onderrand voor het logo bij de smalle tekstkolom naast
+/// een afbeelding. Woont bij de enige gebruiker (de bullets-met-afbeelding-
+/// preview) zodat de bibliotheekwortel onder haar bestandsplafond blijft.
+EdgeInsets _splitTextLogoSafeInsets(double w, ThemeProfile profile) {
+  final (top, bottom) = logoSafeReserveEdges(w, profile, splitText: true);
+  return EdgeInsets.only(top: top, bottom: bottom);
+}

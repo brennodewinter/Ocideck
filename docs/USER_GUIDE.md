@@ -3309,7 +3309,11 @@ splits in two, a longer one into three or more, and a list whose bullets barely
 fit (only a couple at full size) into pages of just those few. Page breaks land on
 group headings, so whole **tussenkoppen** groups stay together on a page rather
 than being cut in half. Splitting a **bullets + image** slide keeps the image on
-every continuation page too, so all pages match and share one font size — swap a
+every continuation page too, so all pages match and share one font size; because
+the text column next to the image is narrower, the split also makes
+proportionally smaller pages (at 40% image width about five bullets instead of
+eight), so the shared font size grows to fill the column instead of being pinned
+down by an over-full page. Swap a
 follow-up to a plain bullets page via the slide **type** picker if you prefer.
 Two-column slides spread both columns across the same set of pages. Each page of a
 split run shows a small, dimmed **`page/total`** counter beside its title (`1/3`,

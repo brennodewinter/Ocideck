@@ -85,7 +85,8 @@ import '../../utils/lru_cache.dart';
 import '../../utils/net_guard.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/project_path.dart';
-import '../../utils/title_contrast.dart' show kTitleOverlayAlpha;
+import '../../utils/title_contrast.dart'
+    show kTitleOverlayAlpha, kTitleSubtitleAlpha;
 import '../document_signature_view.dart' show decodeEmbeddedSignatureImage;
 import '../privacy_badge.dart' show privacyKatSvg;
 import '../../utils/inline_markdown.dart';
@@ -311,11 +312,6 @@ EdgeInsets _bulletsPadding({
       safeBottom: safe.bottom,
     ),
   );
-}
-
-EdgeInsets _splitTextLogoSafeInsets(double w, ThemeProfile profile) {
-  final (top, bottom) = logoSafeReserveEdges(w, profile, splitText: true);
-  return EdgeInsets.only(top: top, bottom: bottom);
 }
 
 /// Renders a visual approximation of a Marp slide inside a 16:9 container.
