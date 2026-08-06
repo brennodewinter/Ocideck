@@ -15,7 +15,7 @@ const kOciDeckCreator = 'OciDeck';
 /// hier of alleen daar de versie ophoogt. `test/version_consistency_test.dart`
 /// vergelijkt ze bij elke testrun; die test faalt zodra ze niet meer gelijk
 /// zijn.
-const kOciDeckVersion = '0.3.4';
+const kOciDeckVersion = '0.3.5';
 
 /// Producer string embedded in PDF/PPTX metadata.
 const kOciDeckProducer = 'OciDeck $kOciDeckVersion';

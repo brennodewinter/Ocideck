@@ -12,6 +12,18 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.3.5] — 2026-08-06
+
+### Fixed
+
+- fix(quality): vat herhaalde dichtheidsmeldingen na 'Splits slide' samen per reeks (#1289)
+- fix(split+quality): paginadoel volgt de tekstkolom naast een afbeelding (#1279) + ondertitel-contrasttoets (#1290)
+- fix(finding): inhoud-bewuste auto-fit voor de bevinding-header (#1288)
+- fix(charts): hover-tooltip voor scatter, gestapelde/horizontale staaf, combo, waterval en bullet (#1287)
+- fix(quality): kwaliteitsknop belooft niet meer dan hij oplost (#1286)
+- fix(deploy): strip macOS tar metadata so the web deploy stops spewing tar warnings
+- fix(docs): vertaal mermaid-diagram in de NL-handleiding + poort tegen onvertaalde diagrammen (#1284)
+
 ## [0.3.4] — 2026-08-05
 
 ### Fixed
