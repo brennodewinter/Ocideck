@@ -508,6 +508,14 @@ class TabsNotifier extends StateNotifier<TabsState> {
     _placeDocumentTab(MarkdownDocument.parse(''));
   }
 
+  /// Open [source] als plat document in een NIEUW tabblad — een kopie, nog
+  /// zonder bestandspad. Voor de conversie presentatie → document
+  /// (DOCUMENT_MODE.md §11.3): het originele deck blijft ongemoeid, en er reist
+  /// geen zegel mee — een document kent er geen.
+  void newDocumentFromMarkdown(String source) {
+    _placeDocumentTab(MarkdownDocument.parse(source));
+  }
+
   /// Bouwt een documenttabblad rond [document] en zet het naast de bestaande
   /// (geselecteerd). Een verse [DocumentNotifier] met een herstelabonnement dat
   /// de kopie wist zodra het tabblad schoon is — gedeeld door het openen van een

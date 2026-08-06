@@ -190,6 +190,13 @@ extension _MainLayoutMenu on _MainLayoutState {
         Icons.preview_outlined,
         l10n.t('fullDeckPreview'),
       ),
+      // Conversie naar een plat document: een NIEUW tabblad (kopie), nooit een
+      // in-place omschakeling. Het zegel reist niet mee (DOCUMENT_MODE.md §11.3).
+      shellMenuItem(
+        'convert_to_document',
+        Icons.article_outlined,
+        l10n.d('Converteer naar document…'),
+      ),
       // Hoort bij "invoegen in dit deck", niet bij git: het stond daar alleen
       // omdat het er ooit tussen is geschoven. De bijlage is MIAUW-vastlegging
       // (EIS 4.8.2), dus alleen met de informatieveiligheidsmodule aan — zonder

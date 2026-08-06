@@ -437,6 +437,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _clearAllChecklists();
             case 'full_preview':
               _openFullDeckPreview();
+            case 'convert_to_document':
+              _convertDeckToDocument(context, ref);
             case 'finalize':
               _finalizeAndSeal();
             case 'settings':
@@ -881,6 +883,25 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   }
 
   Future<void> _importUrl() => _importFromUrl(context, ref);
+}
+
+/// Converteer de open presentatie naar een NIEUW, plat document (kopie) in een
+/// nieuw tabblad (DOCUMENT_MODE.md §11.3). Toont eerst de drop-lijst — dia-
+/// structuur, `_class`, thema en het zegel reizen niet mee — met de
+/// geruststelling dat het origineel ongemoeid blijft. Pas bij bevestigen
+/// ontstaat het nieuwe tabblad.
+///
+/// Top-level en niet op de State: leest alles via parameters, en de klasse zit
+/// tegen haar plafond ([classSizeBaseline]).
+Future<void> _convertDeckToDocument(BuildContext context, WidgetRef ref) async {
+  final deck = ref.read(deckProvider).deck;
+  if (deck == null) return;
+  final confirmed = await ConvertToDocumentDialog.show(context);
+  if (confirmed != true || !context.mounted) return;
+  // Zero-loss op tekst: de dia-lichamen worden aaneengeregen tot één vloeiend
+  // document. Het zegel reist niet mee — een geconverteerd bestand is nieuw.
+  final source = DocumentDeckBridge.deckToDocumentMarkdown(deck);
+  ref.read(tabsProvider.notifier).newDocumentFromMarkdown(source);
 }
 
 /// Of exporteren nu kan, plus de tooltip die uitlegt waarom (niet).
