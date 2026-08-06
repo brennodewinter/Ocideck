@@ -14,6 +14,11 @@ const _styleProfileMarker = 'style-profile';
 /// een nieuwere OciDeck en wordt geweigerd in plaats van half gelezen.
 const _styleProfileFormatVersion = 1;
 
+/// Leesbare JSON (2-spatie indent) voor handmatig bewerkbare `.ocideckstyle`-
+/// bestanden. `jsonDecode` aan de import-kant leest zowel compacte als pretty
+/// JSON, dus de round-trip blijft heel.
+const _styleProfileEncoder = JsonEncoder.withIndent('  ');
+
 /// Waarom een stijlprofiel-bestand geen profiel opleverde. [cancelled] is een
 /// bewuste keuze van de gebruiker (geen melding tonen); de rest verdient uitleg
 /// in de UI in plaats van een stil mislukken. Spiegelt [ImageImportFailure].
@@ -174,7 +179,7 @@ extension FileServiceStyleProfile on FileService {
       'logo': ?logo,
     };
     return StyleProfileBytes(
-      Uint8List.fromList(utf8.encode(jsonEncode(envelope))),
+      Uint8List.fromList(utf8.encode(_styleProfileEncoder.convert(envelope))),
       logoOmitted: logoOmitted,
     );
   }

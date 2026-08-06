@@ -1058,6 +1058,13 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Stijlprofiel-export schrijft leesbare JSON (#1296).** Een `.ocideckstyle`-
+  bestand was compacte JSON op één regel — met de hand niet te bewerken. De
+  export gebruikt nu `JsonEncoder.withIndent('  ')` (2-spatie indent, de
+  repo-conventie), zodat het bestand eruitziet als `jq .`-uitvoer. De import
+  leest via `jsonDecode` zowel compacte als pretty JSON, dus bestaande
+  bestanden en de round-trip blijven heel. Het bestandsformaat zelf verandert
+  niet: nog steeds UTF-8 JSON met dezelfde envelope.
 - **Contrastpoort miste de ondertitel van titel- en tussentiteldia's.** De
   kwaliteitscontrole toetste de volle titeltekst tegen de titel- respectievelijk
   tussentitelachtergrond, maar de ondertitel eronder rendert op verlaagde dekking
