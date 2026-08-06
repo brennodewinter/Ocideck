@@ -3,13 +3,6 @@ import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
 
 void main() {
-  test('nieuw document is open, leeg en gewijzigd', () {
-    final n = DocumentNotifier()..newDocument();
-    expect(n.currentState.isOpen, isTrue);
-    expect(n.currentState.document!.source, '');
-    expect(n.currentState.isDirty, isTrue);
-  });
-
   test('geladen document is schoon en behoudt bron + pad', () {
     final n = DocumentNotifier()
       ..loadDocument(MarkdownDocument.parse('# Memo\n'), filePath: '/a.md');

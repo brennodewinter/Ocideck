@@ -1,6 +1,5 @@
 import '../models/deck.dart';
 import '../models/slide.dart';
-import 'markdown_service.dart';
 
 /// Converteert tussen een plat Markdown-**document** en een getypeerd
 /// [Deck]. Twee zuivere, headless functies — bewust hier en niet verspreid over
@@ -135,19 +134,6 @@ class DocumentDeckBridge {
     }
     return Deck(title: title, slides: slides, projectPath: projectPath);
   }
-
-  /// Het deck-**markdown** van een plat document: deconstrueer het via
-  /// [documentToDeck] en serialiseer dat met de gewone deck-generator, zodat de
-  /// uitkomst een geldig presentatie-`.md` is (front matter, `---`-diagrenzen).
-  ///
-  /// Voor de conversie document→presentatie (§11.3) en elke plek die de
-  /// presentatievorm als tekst wil. Zuiver: [svc] is de enige afhankelijkheid en
-  /// heeft geen IO nodig voor het serialiseren.
-  static String documentToDeckMarkdown(
-    String body,
-    MarkdownService svc, {
-    String title = '',
-  }) => svc.generateDeck(documentToDeck(body, title: title));
 
   /// De omgekeerde weg: serialiseer de dia-lichamen tot één vloeiend document.
   ///
