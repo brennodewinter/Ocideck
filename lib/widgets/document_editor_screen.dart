@@ -4,15 +4,19 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path/path.dart' as p;
 
 import '../l10n/app_localizations.dart';
+import '../models/chart.dart';
 import '../models/markdown_outline.dart';
 import '../models/slide.dart';
 import '../services/file_service.dart';
-import '../state/deck_provider.dart' show fileServiceProvider;
+import '../state/deck_provider.dart'
+    show fileServiceProvider, imageServiceProvider;
 import '../state/document_provider.dart';
 import '../state/settings_provider.dart' show settingsProvider, SettingsTraces;
 import '../utils/doc_link.dart' show headingSlug;
+import 'editors/_editor_field.dart' show pickImageWithFeedback;
 import 'editors/chart_editor.dart';
 import 'editors/table_editor.dart';
 import 'reader/document_markdown_view.dart';
@@ -144,9 +148,13 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       child: Scaffold(
         body: Column(
           children: [
-            _DocViewModeBar(
+            _DocEditorToolbar(
               mode: _viewMode,
-              onChanged: (m) => setState(() => _viewMode = m),
+              onModeChanged: (m) => setState(() => _viewMode = m),
+              onInsertChart: _insertChart,
+              onInsertTable: _insertTable,
+              onInsertMermaid: _insertMermaid,
+              onInsertImage: _insertImage,
             ),
             Divider(height: 1, thickness: 1, color: theme.colorScheme.outlineVariant),
             Expanded(
@@ -338,6 +346,85 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     }
   }
 
+  /// Voeg [block] als een verse alinea in op de cursorpositie (of achteraan als
+  /// er geen selectie is). De pure [insertBlockIntoSource] regelt de lege regels
+  /// eromheen; hier zetten we de controller en de bron gelijk en plaatsen we de
+  /// cursor ná het blok, zodat je meteen verder kunt typen. Een expliciete
+  /// bewerking (`coalesceKey: null`) — geen samenvoeging met eerder typen.
+  void _insertBlock(String block) {
+    final sel = _controller.selection;
+    final (next, cursor) = insertBlockIntoSource(
+      _controller.text,
+      sel.start,
+      sel.end,
+      block,
+    );
+    _controller.value = TextEditingValue(
+      text: next,
+      selection: TextSelection.collapsed(offset: cursor),
+    );
+    ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
+  }
+
+  /// Voeg een verse grafiek in: dezelfde [ChartEditor] als een dia (met een
+  /// wegwerp-[Slide]), en bij 'Toepassen' een ```chart-blok op de cursorpositie.
+  /// Identiek aan het dia-mechanisme — geen tweede grafiekweg (DOCUMENT_MODE.md
+  /// §4.2). Zonder ingevulde data blijft het een geldig, later invulbaar blok.
+  Future<void> _insertChart() async {
+    final slide = Slide.create(SlideType.chart);
+    var spec = ChartSpec.parse(slide.customMarkdown).toBlock();
+    final apply = await _embedEditorDialog(
+      ChartEditor(
+        slide: slide,
+        themeAnimationDurationMs: 0,
+        nestedInScrollView: true,
+        onUpdate: (s) => spec = s.customMarkdown,
+      ),
+    );
+    if (apply != true || !mounted) return;
+    _insertBlock('```chart\n$spec\n```');
+  }
+
+  /// Voeg een verse tabel in: de [TableEditor] met een leeg 2×2-raster, en bij
+  /// 'Toepassen' een GFM-pijptabel op de cursorpositie.
+  Future<void> _insertTable() async {
+    final slide = Slide.create(SlideType.table);
+    var rows = slide.tableRows;
+    final apply = await _embedEditorDialog(
+      TableEditor(
+        slide: slide,
+        nestedInScrollView: true,
+        onUpdate: (s) => rows = s.tableRows,
+      ),
+    );
+    if (apply != true || !mounted) return;
+    _insertBlock(rowsToGfmTable(rows));
+  }
+
+  /// Voeg een verse ```mermaid-fence in met een minimaal, taal-neutraal
+  /// startdiagram (knoop-id's, geen tekst om te vertalen). Bewerken gaat via de
+  /// bron — de dubbelklik is voor mermaid bewust overgeslagen (DOCUMENT_MODE.md).
+  void _insertMermaid() =>
+      _insertBlock('```mermaid\nflowchart TD\n  A --> B\n```');
+
+  /// Voeg een afbeelding in: kies een bestand via de bestaande import-keten
+  /// (grootte-cap, magic-bytes, kopie naar `images/` of `mem:` zolang het
+  /// document nog niet is opgeslagen) en zet een `![](…)`-verwijzing op de
+  /// cursorpositie. Hergebruikt exact de dia-import — geen tweede assetweg.
+  Future<void> _insertImage() async {
+    final state = ref.read(documentProvider);
+    final projectPath = state.filePath == null
+        ? null
+        : p.dirname(state.filePath!);
+    final reference = await pickImageWithFeedback(
+      context,
+      ref.read(imageServiceProvider),
+      projectPath: projectPath,
+    );
+    if (reference == null || !mounted) return;
+    _insertBlock('![]($reference)');
+  }
+
   /// De Overzicht-rail: de koppen van het document, live afgeleid, klikbaar om
   /// naar die kop in de weergave te scrollen. Leeg document → lege rail.
   Widget _outlineRail(ThemeData theme, String source) {
@@ -404,14 +491,26 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 /// als tekst, of de weergave als hoofdoppervlak.
 enum _DocViewMode { visual, source }
 
-/// De segmentkeuze bovenaan de documenteditor: wissel tussen de visuele modus en
-/// de bron-split. Top-level widget zodat het bewerkscherm zelf slank blijft; de
-/// labels lopen via [l10n] mee met de langste taal (geen vaste breedte).
-class _DocViewModeBar extends StatelessWidget {
+/// De werkbalk bovenaan de documenteditor: links de segmentkeuze Visueel | Bron,
+/// rechts het invoeg-palet. Top-level widget zodat het bewerkscherm zelf slank
+/// blijft; de labels lopen via [l10n] mee met de langste taal (geen vaste
+/// breedte, DOCUMENT_MODE.md §8).
+class _DocEditorToolbar extends StatelessWidget {
   final _DocViewMode mode;
-  final ValueChanged<_DocViewMode> onChanged;
+  final ValueChanged<_DocViewMode> onModeChanged;
+  final VoidCallback onInsertChart;
+  final VoidCallback onInsertTable;
+  final VoidCallback onInsertMermaid;
+  final VoidCallback onInsertImage;
 
-  const _DocViewModeBar({required this.mode, required this.onChanged});
+  const _DocEditorToolbar({
+    required this.mode,
+    required this.onModeChanged,
+    required this.onInsertChart,
+    required this.onInsertTable,
+    required this.onInsertMermaid,
+    required this.onInsertImage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -419,27 +518,111 @@ class _DocViewModeBar extends StatelessWidget {
     return Container(
       color: Theme.of(context).colorScheme.surface,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      alignment: Alignment.centerLeft,
-      child: SegmentedButton<_DocViewMode>(
-        segments: [
-          ButtonSegment(
-            value: _DocViewMode.visual,
-            label: Text(l10n.d('Visueel')),
-            icon: const Icon(Icons.visibility_outlined, size: 15),
+      child: Row(
+        children: [
+          SegmentedButton<_DocViewMode>(
+            segments: [
+              ButtonSegment(
+                value: _DocViewMode.visual,
+                label: Text(l10n.d('Visueel')),
+                icon: const Icon(Icons.visibility_outlined, size: 15),
+              ),
+              ButtonSegment(
+                value: _DocViewMode.source,
+                label: Text(l10n.d('Bron')),
+                icon: const Icon(Icons.code, size: 15),
+              ),
+            ],
+            selected: {mode},
+            showSelectedIcon: false,
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            onSelectionChanged: (s) => onModeChanged(s.first),
           ),
-          ButtonSegment(
-            value: _DocViewMode.source,
-            label: Text(l10n.d('Bron')),
-            icon: const Icon(Icons.code, size: 15),
-          ),
+          const Spacer(),
+          _insertMenu(l10n),
         ],
-        selected: {mode},
-        showSelectedIcon: false,
-        style: const ButtonStyle(visualDensity: VisualDensity.compact),
-        onSelectionChanged: (s) => onChanged(s.first),
       ),
     );
   }
+
+  /// Het invoeg-palet: één menu dat een rijk blok op de cursorpositie invoegt.
+  /// Hergebruikt de bestaande labels (Grafiek/Tabel/Afbeelding); Mermaid is de
+  /// productnaam van de fence. Elke keuze schrijft een verse, draagbare
+  /// Markdown-constructie in de bron (DOCUMENT_MODE.md §4).
+  Widget _insertMenu(AppLocalizations l10n) {
+    return PopupMenuButton<int>(
+      tooltip: l10n.d('Invoegen'),
+      position: PopupMenuPosition.under,
+      onSelected: (value) => switch (value) {
+        0 => onInsertChart(),
+        1 => onInsertTable(),
+        2 => onInsertMermaid(),
+        _ => onInsertImage(),
+      },
+      itemBuilder: (context) => [
+        _insertItem(0, Icons.bar_chart, l10n.d('Grafiek')),
+        _insertItem(1, Icons.table_chart_outlined, l10n.d('Tabel')),
+        _insertItem(2, Icons.account_tree_outlined, l10n.d('Mermaid')),
+        _insertItem(3, Icons.image_outlined, l10n.d('Afbeelding')),
+      ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.add, size: 16),
+            const SizedBox(width: 4),
+            Text(l10n.d('Invoegen'), style: const TextStyle(fontSize: 13)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  PopupMenuItem<int> _insertItem(int value, IconData icon, String label) {
+    return PopupMenuItem<int>(
+      value: value,
+      child: Row(
+        children: [
+          Icon(icon, size: 17),
+          const SizedBox(width: 10),
+          Text(label),
+        ],
+      ),
+    );
+  }
+}
+
+/// Voeg [block] in [source] in op het bereik [selStart]–[selEnd] (een negatieve
+/// start betekent 'geen cursor' → achteraan), omgeven door precies genoeg lege
+/// regels om een eigen alinea te vormen zonder er ooit meer dan één dubbele
+/// witregel van te maken. Geeft de nieuwe bron én de cursorpositie ná het
+/// ingevoegde blok terug. Top-level en puur, zodat de invoeglogica los toetsbaar
+/// is van het editor-scherm — net als de terugschrijf-helpers hierboven.
+(String, int) insertBlockIntoSource(
+  String source,
+  int selStart,
+  int selEnd,
+  String block,
+) {
+  final start = selStart < 0 ? source.length : math.min(selStart, selEnd);
+  final end = selEnd < 0 ? source.length : math.max(selStart, selEnd);
+  final before = source.substring(0, start);
+  final after = source.substring(end);
+  final lead = before.isEmpty
+      ? ''
+      : before.endsWith('\n\n')
+      ? ''
+      : before.endsWith('\n')
+      ? '\n'
+      : '\n\n';
+  final trail = after.isEmpty
+      ? '\n'
+      : after.startsWith('\n')
+      ? ''
+      : '\n\n';
+  final insertion = '$lead$block$trail';
+  return ('$before$insertion$after', before.length + insertion.length);
 }
 
 /// De fence van één ```chart-blok, om de `chartOrdinal`-de (vanaf 0) in de bron

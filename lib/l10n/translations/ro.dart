@@ -1790,6 +1790,7 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo-ul acestui profil de stil nu a fost găsit și nu este afișat (cale: {pad}). Alegeți un logo în setările prezentării.',
+  'Invoegen': 'Inserează',
   'Visueel': 'Vizual',
   'Document': 'Document',
   'Nieuw document': 'Document nou',

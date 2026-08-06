@@ -1777,6 +1777,7 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Ezen stílusrprofil logója nem található és nem jelenik meg (útvonal: {pad}). Válasszon egy logót a bemutató beállításaiban.',
+  'Invoegen': 'Beszúrás',
   'Visueel': 'Vizuális',
   'Document': 'Dokumentum',
   'Nieuw document': 'Új dokumentum',

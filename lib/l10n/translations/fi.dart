@@ -1773,6 +1773,7 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Tämän tyyliprofiilin logoa ei löytynyt eikä sitä näytetä (polku: {pad}). Valitse logo esityksen asetuksissa.',
+  'Invoegen': 'Lisää',
   'Visueel': 'Visuaalinen',
   'Document': 'Asiakirja',
   'Nieuw document': 'Uusi asiakirja',

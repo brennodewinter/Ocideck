@@ -1748,6 +1748,7 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Deghvam Segh tu\'be\'lu\' \'ej \'angbe\'lu\' (HeH: {pad}). \'ang SeHlawDaq Degh yIwIv.',
+  'Invoegen': 'chel',
   'Visueel': 'mIllogh',
   'Document': 'nav',
   'Nieuw document': 'ghItlh chu\'',

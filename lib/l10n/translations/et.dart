@@ -1764,6 +1764,7 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Selle stiiliprofiili logo ei leitud ja seda ei näidata (tee: {pad}). Valige logo esitluse sätetes.',
+  'Invoegen': 'Lisa',
   'Visueel': 'Visuaalne',
   'Document': 'Dokument',
   'Nieuw document': 'Uus dokument',

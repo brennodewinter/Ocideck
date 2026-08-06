@@ -119,4 +119,47 @@ void main() {
     expect(File(path).readAsStringSync(), 'nieuw\n');
     expect(n.currentState.isDirty, isFalse);
   });
+
+  testWidgets('Visueel maakt de weergave het hoofdoppervlak, zonder rauwe editor', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('# Kop\n\nTekst.'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    // Standaard staat de editor in de bron-modus: de rauwe editor is er.
+    expect(find.byType(TextField), findsOneWidget);
+
+    // Wissel naar Visueel: de rauwe editor verdwijnt, de weergave blijft.
+    await tester.tap(find.text('Visueel'));
+    await tester.pump();
+    expect(find.byType(TextField), findsNothing);
+    expect(find.byType(DocumentMarkdownView), findsOneWidget);
+  });
+
+  testWidgets('het invoeg-palet schrijft een mermaid-blok in de bron', (
+    tester,
+  ) async {
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('Tekst.'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    // Open het invoeg-palet en kies Mermaid (de enige invoeging zonder dialoog).
+    await tester.tap(find.text('Invoegen'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Mermaid'));
+    // De invoeging is synchroon; niet pumpAndSettle, want de zojuist ingevoegde
+    // ```mermaid-weergave rendert asynchroon en zou de test laten aftikken.
+    await tester.pump();
+
+    // Er staat nu een ```mermaid-fence in de bron; de bestaande tekst blijft.
+    final source = n.currentState.document!.source;
+    expect(source, contains('```mermaid'));
+    expect(source, startsWith('Tekst.'));
+  });
 }

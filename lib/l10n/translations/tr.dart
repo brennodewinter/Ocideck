@@ -2750,6 +2750,7 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Bu stil profilinin logosu bulunamadı ve gösterilmiyor (yol: {pad}). Sunum ayarlarında bir logo seçin.',
+  'Invoegen': 'Ekle',
   'Visueel': 'Görsel',
   'Document': 'Belge',
   'Nieuw document': 'Yeni belge',

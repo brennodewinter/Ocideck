@@ -1785,6 +1785,7 @@ const _dutchSourcePl = {
 const _dutchSourceAddPl = <String, String>{
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo tego profilu stylu nie zostało znalezione i nie jest wyświetlane (ścieżka: {pad}). Wybierz logo w ustawieniach prezentacji.',
+  'Invoegen': 'Wstaw',
   'Visueel': 'Wizualny',
   'Document': 'Dokument',
   'Nieuw document': 'Nowy dokument',
