@@ -112,4 +112,24 @@ void main() {
       expect(runs.single.text, 'a &amp; b');
     });
   });
+
+  // `decodeNamedHtmlEntities` is de publieke helper voor platte-`Text`-plekken
+  // die geïmporteerde tekst tonen maar niet door `parseInlineRuns` gaan
+  // (chart-labels, timeline-events) — #1299 follow-up.
+  group('decodeNamedHtmlEntities', () {
+    test('decodes the four named entities', () {
+      expect(decodeNamedHtmlEntities('a &amp; b'), 'a & b');
+      expect(decodeNamedHtmlEntities('a &lt; b &gt; c'), 'a < b > c');
+      expect(decodeNamedHtmlEntities('&quot;q&quot;'), '"q"');
+    });
+
+    test('leaves numeric entities untouched (evasion guard)', () {
+      expect(decodeNamedHtmlEntities('&#60;script&#62;'), '&#60;script&#62;');
+    });
+
+    test('no-op without an ampersand (short-circuit)', () {
+      expect(decodeNamedHtmlEntities('plain text'), 'plain text');
+      expect(decodeNamedHtmlEntities(''), '');
+    });
+  });
 }

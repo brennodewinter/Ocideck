@@ -734,7 +734,7 @@ class _TimelineCard extends StatelessWidget {
           if (showDescription) ...[
             SizedBox(height: w * 0.006 * scale),
             Text(
-              event.description.trim(),
+              decodeNamedHtmlEntities(event.description.trim()),
               maxLines: descLines,
               overflow: TextOverflow.ellipsis,
               style: _descStyle(
@@ -759,7 +759,7 @@ class _TimelineCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(w * 0.02),
     ),
     child: Text(
-      event.marker.trim(),
+      decodeNamedHtmlEntities(event.marker.trim()),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: _badgeStyle(
@@ -773,7 +773,7 @@ class _TimelineCard extends StatelessWidget {
   // Bold but deliberately not oversized — the weight already sets it apart, and
   // keeping it modest leaves room for the description.
   Widget _title({required int maxLines}) => Text(
-    event.title.trim(),
+    decodeNamedHtmlEntities(event.title.trim()),
     maxLines: maxLines,
     overflow: TextOverflow.ellipsis,
     style: _titleStyle(

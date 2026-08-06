@@ -124,7 +124,11 @@ bool _hasMarker(String s) {
 /// bron-`&#60;` `&amp;#60;` wordt en na deze decode niet als `<` terugkomt.
 /// `&amp;` gaat als laatste, anders wordt een letterlijke `&lt;` na twee stappen
 /// alsnog `<` (zelfde volgorde als `_unescapeHtml` in markdown_service_helpers).
-String _decodeNamedHtmlEntities(String text) {
+///
+/// Publiek voor plekken die platte `Text` tonen met geïmporteerde tekst (chart-
+/// labels, timeline-events) — die gaan niet door [parseInlineRuns] en moeten
+/// de entities toch terugdraaien (#1299 follow-up).
+String decodeNamedHtmlEntities(String text) {
   if (!text.contains('&')) return text;
   return text
       .replaceAll('&lt;', '<')
@@ -143,7 +147,7 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       // alsnog `<` en dat is juist de evasie die de sanitizer blokkeert.
       // Code-spans voegen hun tekst direct toe (hieronder) en slaan deze stap
       // over, zodat `` `&amp;` `` letterlijk blijft.
-      out.add(ctx._with()._copyText(_decodeNamedHtmlEntities(buf.toString())));
+      out.add(ctx._with()._copyText(decodeNamedHtmlEntities(buf.toString())));
       buf.clear();
     }
   }
