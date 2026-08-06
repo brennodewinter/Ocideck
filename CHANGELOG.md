@@ -1092,6 +1092,30 @@ that before deciding whether this alpha fits what you are doing.
   leest via `jsonDecode` zowel compacte als pretty JSON, dus bestaande
   bestanden en de round-trip blijven heel. Het bestandsformaat zelf verandert
   niet: nog steeds UTF-8 JSON met dezelfde envelope.
+- **Documentmodus: exporteren, converteren en de editor eromheen.** Naast
+  presentaties bewerkt OciDeck nu ook **documenten** — een doorlopend, plat
+  `.md`-bestand in plaats van een dia-deck (ontwerp:
+  `docs/design/DOCUMENT_MODE.md`). Een documenttabblad draagt een klein
+  document-icoon zodat het in één oogopslag van een presentatie te onderscheiden
+  is; de soort volgt uit de afwezigheid van `marp: true`, niet uit een merkteken
+  op schijf. De editor kent een **Visueel | Bron**-schakelaar (Visueel toont de
+  opgemaakte weergave met een koppen-overzicht, Bron de rauwe Markdown naast een
+  live weergave, zonder aparte "Toepassen"-stap), een **opmaak-knoppenbalk** voor
+  de inline-opmaak, en een **invoeg-palet** dat grafiek, tabel, mermaid en
+  afbeelding als draagbare Markdown toevoegt. **Exporteren** is nadrukkelijk niet
+  Opslaan: Opslaan schrijft je byte-getrouwe origineel, exporteren maakt een
+  geredigeerde kopie voor een ontvanger op een *nieuw* bestand — als `.md` (de
+  geprojecteerde platte tekst) of als één doorlopend, toegankelijk HTML-bestand.
+  Voor PDF print je die HTML via je browser; OciDeck belooft geen toegankelijke
+  PDF, wél toegankelijke HTML. Elke export loopt langs dezelfde
+  privacyprojectie (OciWacht) als een deck-export, dus wat de deur uit gaat is de
+  geredigeerde inhoud, nooit de rauwe bron; het gekozen profiel (Volledig of
+  Geredigeerd) staat in de bestandsnaam. **Converteren** kan beide kanten op en
+  levert altijd een kopie in een nieuw tabblad, met vooraf de lijst van wat
+  wegvalt: bij presentatie → document verdwijnen de dia-indeling, het `_class`/
+  thema en het **zegel** (een geconverteerd bestand is nieuw en draagt geen
+  zegel); bij document → presentatie wordt een thematische `---` een diagrens en
+  is het voorgestelde aantal dia's een voorstel, geen perfecte spiegeling.
 - **Contrastpoort miste de ondertitel van titel- en tussentiteldia's.** De
   kwaliteitscontrole toetste de volle titeltekst tegen de titel- respectievelijk
   tussentitelachtergrond, maar de ondertitel eronder rendert op verlaagde dekking

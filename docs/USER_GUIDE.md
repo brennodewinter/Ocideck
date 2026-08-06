@@ -29,6 +29,7 @@
 - [Accessibility](#accessibility)
 - [Information security module (pentest reports)](#information-security-module-pentest-reports)
 - [Management-system module (ISO progress reporting)](#management-system-module-iso-progress-reporting)
+- [Documents](#documents)
 - [Markdown mode](#markdown-mode)
 - [What the browser version cannot do](#what-the-browser-version-cannot-do)
 - [Theming and language](#theming-and-language)
@@ -4084,6 +4085,97 @@ first.
 > [`docs/design/ISO_MANAGEMENTSYSTEEM.md`](design/ISO_MANAGEMENTSYSTEEM.md).
 > OciDeck reports progress — it makes no certification or conformance claim and is
 > not a substitute for an auditor.
+
+## Documents
+
+Alongside presentations, OciDeck edits **documents**: a flowing, plain Markdown
+file rather than a deck of slides. A document is an ordinary `.md` with no slide
+structure and no Marp front matter, so it opens and reads fine in any Markdown
+tool. This is a distinct file kind from a deck; both live side by side in tabs,
+and a document tab carries a small document icon so you can tell the two apart at
+a glance. *(Added 2026-08-06.)*
+
+The design behind this mode — the disk contract, what round-trips and what does
+not, and why conversion is deliberately lossy — is written up in
+[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md).
+
+### Creating, opening and saving a document
+
+- **New document** from the menu bar or the welcome screen starts an empty
+  document in a new tab. A plain `.md` you **Open** the ordinary way (the welcome
+  screen or `Ctrl/Cmd + O`) opens as a document rather than a deck; OciDeck tells
+  the two apart by the absence of `marp: true`, so nothing on disk marks a file
+  as "OciDeck's".
+- **Save** (`Ctrl/Cmd + S`) writes your **byte-faithful master**: opening a
+  document and saving it again without editing yields a byte-identical file.
+  OciDeck injects no front matter, forces no slide separators, and applies no
+  normalisation of its own. This is the copy you keep, back up and eventually
+  clean.
+- A document has a **working directory** exactly like a deck: images live in
+  `images/` and chart data in `data/*.json` **beside** the `.md`. An image you
+  insert before the first save lives in memory until you save, then materialises
+  into `images/` — the same "you will lose this image" warning applies as for a
+  deck.
+
+### The editor: Visual and Source
+
+A toggle at the top of the document editor chooses how you work:
+
+- **Visual** shows the rendered document — headings, prose, tables, code,
+  Mermaid diagrams, charts and images — the way a reader sees it. On a wide
+  enough window an **outline rail** of the document's headings appears beside it;
+  clicking a heading scrolls to it.
+- **Source** puts the raw Markdown next to a live rendered preview (stacked when
+  the window is too narrow for two readable columns). Every keystroke flows
+  straight through — there is no separate "Apply" step, unlike the deck-oriented
+  [Markdown mode](#markdown-mode) below.
+
+A **formatting toolbar** (the same one the notes editor uses) sits above the
+editor for the common inline marks. An **insert palette** adds the richer blocks
+as portable Markdown: a **chart** (a ` ```chart ` fence with its data in
+`data/*.json`), a **table** (a GFM pipe table), a **Mermaid** diagram, or an
+**image** (copied into `images/`). Each stays plain, parseable text so the file
+keeps opening elsewhere.
+
+### Exporting a document
+
+**Export is not Save.** Save writes your byte-faithful original; **Export** makes
+a *derived, redacted copy for a recipient* on a **new** file, and never touches
+your source. The export dialog asks two things:
+
+- **For whom** — the profile. **Volledig** (full) leaves everything readable
+  except what you yourself marked to leave out; **Geredigeerd** (redacted) takes
+  out everything the privacy check finds. The chosen profile is written into the
+  export's filename, so a mix-up between the two is visible. If the privacy check
+  is switched off (under Beveiliging), the dialog says so plainly: a redacted
+  copy has then not actually been checked for personal data.
+- **Which format** — **Markdown (`.md`)** is a redacted copy of the plain text
+  that opens in any Markdown reader; **HTML** is one self-contained, accessible
+  HTML file that opens in any browser without internet, with its tables, maths,
+  Mermaid diagrams and charts rendered in place.
+
+There is no built-in PDF button. For a **PDF**, open the exported HTML and print
+it from your browser (*Save as PDF*). OciDeck makes no promise about the
+accessibility of a PDF produced that way — that is the browser's doing — but the
+HTML it exports is built to be accessible.
+
+Every export runs through the same privacy projection (OciWacht) as a deck
+export, so what leaves is the redacted content, never the raw source.
+
+### Converting between a presentation and a document
+
+You can convert either way, and the result is **always a copy in a new tab** —
+your original file is left untouched, and a confirmation dialog says what is lost
+before anything happens:
+
+- **Presentation → document** flattens the slides into one flowing document. The
+  slide structure, the per-slide `_class`/theme, and the **seal** are dropped: a
+  converted file is new and carries no seal, because a sealed copy would be a
+  false integrity claim.
+- **Document → presentation** proposes a slide count (splitting on headings) and
+  turns thematic `---` breaks into slide breaks. The dialog is honest that a
+  presentation and a document are not a perfect mirror of each other — the split
+  is a proposal, not a bijection.
 
 ## Markdown mode
 
