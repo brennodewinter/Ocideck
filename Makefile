@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -823,6 +823,25 @@ check-sbom-version:
 	@echo "Failure means: regenerate the SBOM with 'make sbom' and commit sbom/."
 	dart run tool/check_sbom_version.dart
 
+# A machine-translated doc must not carry an English mermaid diagram (#1278). The
+# translator leaves code blocks — and so mermaid — untouched, so a diagram's
+# labels stay in the source language while the prose around it is translated. This
+# gate compares each ```mermaid block in a generated docs/NAME.<lang>.md against
+# the same block in the English base and fails on a byte-identical (untranslated)
+# one.
+check-translated-mermaid:
+	@echo "== OciDeck check: translated mermaid diagrams =="
+	@echo "Command: dart run tool/check_translated_mermaid.dart"
+	@echo "Covers: every generated docs/NAME.<lang>.md variant — a fenced mermaid"
+	@echo "        block that is byte-identical to the English base is an untranslated"
+	@echo "        diagram (the translator skips code blocks). Genuinely"
+	@echo "        language-neutral diagrams are whitelisted explicitly."
+	@echo "Failure means: translate the diagram's label text by hand (keep the node"
+	@echo "        IDs and mermaid syntax), or — if it carries no prose — add its"
+	@echo "        body to languageNeutralMermaidBlocks in"
+	@echo "        tool/check_translated_mermaid.dart."
+	dart run tool/check_translated_mermaid.dart
+
 # Add new d('…') source strings to every language's additions overlay from a
 # JSON spec (format documented in tool/add_l10n.dart). Inserts, dart-formats and
 # de-duplicates across all 30 language files in one step, and whitelists any
@@ -1063,7 +1082,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version
+STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid
 
 check: $(STATIC_GATES) coverage coverage-per-file
 	@echo "== OciDeck check complete =="

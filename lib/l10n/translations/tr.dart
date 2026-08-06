@@ -2749,6 +2749,9 @@ const _dutchSourceTr = {
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
   'Nieuw document': 'Yeni belge',
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Bu bölünmüş serideki {n} slayt için geçerli.',
+  'Los automatisch op wat kan': 'Otomatik düzeltilebilenleri düzelt',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT beklenmedik bir yanıt döndürdü ({code}). Daha sonra tekrar deneyin veya yöneticinizden yardım isteyin.',
   'Vanuit een OpenKAT-server': 'Bir OpenKAT sunucusundan',
@@ -3757,7 +3760,6 @@ const _dutchSourceAddTr = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Olasılık grafiği için yetersiz veri',
   'Met dank aan': 'Teşekkürle',
-  'Fix alle problemen': 'Tüm sorunları düzelt',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Otomatik düzeltilebilen sorunlar halledildi. Kalanlar bir seçim gerektiriyor.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

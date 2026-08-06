@@ -1779,6 +1779,9 @@ const _dutchSourceSk = {
 
 const _dutchSourceAddSk = <String, String>{
   'Nieuw document': 'Nový dokument',
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Platí pre {n} snímok tohto rozdeleného radu.',
+  'Los automatisch op wat kan': 'Opraviť, čo sa dá automaticky',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT vrátil neočakávanú odpoveď ({code}). Skúste neskôr alebo požiadajte správcu o pomoc.',
   'Vanuit een OpenKAT-server': 'Z OpenKAT servera',
@@ -2790,7 +2793,6 @@ const _dutchSourceAddSk = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Príliš málo dát pre pravdepodobnostný graf',
   'Met dank aan': 'S vďakou',
-  'Fix alle problemen': 'Opraviť všetky problémy',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Problémy, ktoré sa dali vyriešiť automaticky, sú vybavené. Zvyšok vyžaduje rozhodnutie.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

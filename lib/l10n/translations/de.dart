@@ -731,6 +731,9 @@ const _dutchSourceDe = {
 
 const _dutchSourceAddDe = {
   'Nieuw document': 'Neues Dokument',
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Gilt für {n} Folien dieser geteilten Reihe.',
+  'Los automatisch op wat kan': 'Beheben, was automatisch geht',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT lieferte eine unerwartete Antwort ({code}). Versuchen Sie es später erneut oder bitten Sie Ihren Administrator um Hilfe.',
   'Vanuit een OpenKAT-server': 'Von einem OpenKAT-Server',
@@ -1754,7 +1757,6 @@ const _dutchSourceAddDe = {
   'Te weinig gegevens voor een probability plot':
       'Zu wenig Daten für ein Probability Plot',
   'Met dank aan': 'Mit Dank',
-  'Fix alle problemen': 'Alle Probleme beheben',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Automatisch behebbare Probleme wurden erledigt. Der Rest erfordert eine Entscheidung.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

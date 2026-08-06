@@ -8,10 +8,12 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/models/slide_quality.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/state/deck_provider.dart';
+import 'package:ocideck/state/deck_quality_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:ocideck/widgets/panels/slide_quality_panel.dart';
@@ -180,7 +182,7 @@ void main() {
   );
 
   testWidgets(
-    'Fix alle problemen splitst een te volle dia in één klik (#915)',
+    'Los automatisch op wat kan splitst een te volle dia in één klik (#915)',
     (tester) async {
       await tester.pumpWidget(_host(overfullDeck()));
       await tester.pump();
@@ -190,7 +192,10 @@ void main() {
       );
       expect(container.read(deckProvider).deck!.slides.length, 1);
 
-      final fixAll = find.widgetWithText(TextButton, 'Fix alle problemen');
+      final fixAll = find.widgetWithText(
+        TextButton,
+        'Los automatisch op wat kan',
+      );
       expect(fixAll, findsOneWidget);
       await tester.tap(fixAll);
       await tester.pump();
@@ -214,7 +219,89 @@ void main() {
 
       expect(find.textContaining('Slidekwaliteit'), findsOneWidget);
       expect(
-        find.widgetWithText(TextButton, 'Fix alle problemen'),
+        find.widgetWithText(TextButton, 'Los automatisch op wat kan'),
+        findsNothing,
+      );
+    },
+  );
+
+  // #1280 — de knop mag alleen verschijnen als de motor op dít deck werkelijk
+  // iets wegwerkt, en het label mag niet "alle problemen" beloven terwijl
+  // contrast/privacy/alt-tekst menselijk oordeel vragen en blijven staan.
+  //
+  // Het thema is de bron van de contrastmelding, en [DeckNotifier.loadDeck]
+  // overschrijft het themaprofiel met het actieve profiel van de FileService —
+  // dus zetten we een contrastarm actief profiel (tekst bijna gelijk aan de
+  // achtergrond) in plaats van het op het deck te prikken.
+  const badContrastTheme = ThemeProfile(
+    textColor: '#808080',
+    slideBackgroundColor: '#888888',
+    titleTextColor: '#808080',
+    titleBackgroundColor: '#888888',
+  );
+  DeckNotifier badThemeNotifier(Deck deck) {
+    final md = MarkdownService();
+    final file = FileService(md, ImageService(), () => badContrastTheme);
+    final notifier = DeckNotifier(md, file);
+    notifier.loadDeck(deck);
+    return notifier;
+  }
+
+  testWidgets(
+    'gemengd deck: de knop lost het structurele op, de contrastmelding blijft '
+    'staan en de knop verdwijnt (#1280)',
+    (tester) async {
+      final notifier = badThemeNotifier(overfullDeck());
+      AppLocalizations.setActiveLanguageCode('nl');
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [deckProvider.overrideWith((ref) => notifier)],
+          child: const MaterialApp(
+            localizationsDelegates: [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              FlutterQuillLocalizations.delegate,
+            ],
+            home: Scaffold(body: SlideQualityPanel()),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      final container = ProviderScope.containerOf(
+        tester.element(find.byType(SlideQualityPanel)),
+      );
+      // Het paneel toont de contrastmelding (deckbreed) naast de te volle dia.
+      // We lezen de meldingen uit dezelfde bron als het paneel (dat de tegels
+      // in een 180px-lijst rendert, waarvan alleen de zichtbare gebouwd worden).
+      bool contrastVisible() => container
+          .read(deckQualityProvider)
+          .issues
+          .any((i) => i.category == SlideQualityCategory.contrast);
+
+      expect(container.read(deckProvider).deck!.slides.length, 1);
+      expect(contrastVisible(), isTrue);
+
+      // Vóór de klik staat de knop er, want de te volle dia is splitsbaar.
+      final fixAll = find.widgetWithText(
+        TextButton,
+        'Los automatisch op wat kan',
+      );
+      expect(fixAll, findsOneWidget);
+
+      await tester.tap(fixAll);
+      await tester.pump();
+
+      // De te volle dia is gesplitst (structureel opgelost)...
+      expect(container.read(deckProvider).deck!.slides.length, greaterThan(1));
+      // ...de contrastmelding blijft staan (vraagt om menselijk oordeel)...
+      expect(contrastVisible(), isTrue);
+      // ...en de knop is weg, want er valt niets structureels meer te doen: de
+      // knop belooft niet langer iets wat hij niet waarmaakt.
+      expect(
+        find.widgetWithText(TextButton, 'Los automatisch op wat kan'),
         findsNothing,
       );
     },

@@ -732,6 +732,9 @@ const _dutchSourceFy = {
 
 const _dutchSourceAddFy = {
   'Nieuw document': 'Nij dokumint',
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Jildt foar {n} slides fan dizze splitste rige.',
+  'Los automatisch op wat kan': 'Los op wat fansels kin',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT joe in ûnferwacht antwurd ({code}). Probearje letter opnij of freeg jo behearder om help.',
   'Vanuit een OpenKAT-server': 'Fan in OpenKAT-server',
@@ -1748,7 +1751,6 @@ const _dutchSourceAddFy = {
   'Te weinig gegevens voor een probability plot':
       'Te min gegevens foar in probability plot',
   'Met dank aan': 'Mei tank',
-  'Fix alle problemen': 'Alle problemen oplosse',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'De problemen dy\'t fansels op te lossen wiene, binne oanpakt. Wat oerbliuwt freget om in kar.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

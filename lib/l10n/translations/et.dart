@@ -1763,6 +1763,9 @@ const _dutchSourceEt = {
 
 const _dutchSourceAddEt = <String, String>{
   'Nieuw document': 'Uus dokument',
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Kehtib selle jaotatud jada {n} slaidi kohta.',
+  'Los automatisch op wat kan': 'Paranda automaatselt lahendatavad',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT tagastas ootamatu vastuse ({code}). Proovige hiljem uuesti või pöörduge administraatori poole.',
   'Vanuit een OpenKAT-server': 'OpenKAT serverist',
@@ -2774,7 +2777,6 @@ const _dutchSourceAddEt = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Liiga vähe andmeid tõenäosusgraafiku jaoks',
   'Met dank aan': 'Tänuga',
-  'Fix alle problemen': 'Paranda kõik probleemid',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Automaatselt lahendatavad probleemid on tehtud. Ülejäänu nõuab valikut.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

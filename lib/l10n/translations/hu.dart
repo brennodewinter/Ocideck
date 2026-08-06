@@ -1776,6 +1776,9 @@ const _dutchSourceHu = {
 
 const _dutchSourceAddHu = <String, String>{
   'Nieuw document': 'Új dokumentum',
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Ennek az osztott sorozatnak {n} diájára vonatkozik.',
+  'Los automatisch op wat kan': 'Javítsd, ami automatizálható',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'Az OpenKAT váratlan választ adott ({code}). Próbálja később újra, vagy kérjen segítséget az adminisztrátortól.',
   'Vanuit een OpenKAT-server': 'OpenKAT szerverről',
@@ -2795,7 +2798,6 @@ const _dutchSourceAddHu = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Túl kevés adat a valószínűségi ábrához',
   'Met dank aan': 'Köszönettel',
-  'Fix alle problemen': 'Minden probléma javítása',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Az automatikusan javítható problémákat elintéztük. Ami marad, döntést kíván.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

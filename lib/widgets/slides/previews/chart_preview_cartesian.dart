@@ -120,7 +120,24 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
         gridData: _grid(textColor),
         borderData: FlBorderData(show: false),
         extraLinesData: _boundLines(spec),
-        barTouchData: BarTouchData(enabled: false),
+        // A stacked bar is one rod per group; the tooltip lists every segment's
+        // value (built from the series, since the rod only carries the total).
+        barTouchData: BarTouchData(
+          enabled: true,
+          mouseCursorResolver: (event, response) => response?.spot == null
+              ? SystemMouseCursors.basic
+              : SystemMouseCursors.click,
+          touchTooltipData: BarTouchTooltipData(
+            fitInsideHorizontally: true,
+            fitInsideVertically: true,
+            getTooltipColor: (_) => AppTheme.chartTooltipBg,
+            getTooltipItem: (group, groupIndex, rod, rodIndex) =>
+                BarTooltipItem(
+                  _stackedTooltipText(spec, group.x),
+                  _tooltipStyle(),
+                ),
+          ),
+        ),
       ),
       duration: _chartAnimDuration,
     );
@@ -128,6 +145,9 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
 
   Widget _scatterChart(ChartSpec spec, Color textColor) {
     final spots = <ScatterSpot>[];
+    // ScatterSpot carries no series identity and the spots are flattened across
+    // series, so keep a parallel table to recover the label and series name.
+    final spotMeta = <({int series, int xi})>[];
     for (var si = 0; si < spec.series.length; si++) {
       for (var xi = 0; xi < spec.series[si].data.length; xi++) {
         spots.add(
@@ -142,6 +162,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
             ),
           ),
         );
+        spotMeta.add((series: si, xi: xi));
       }
     }
     return ScatterChart(
@@ -152,7 +173,25 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
         titlesData: _titles(spec, textColor),
         gridData: _grid(textColor),
         borderData: FlBorderData(show: false),
-        scatterTouchData: ScatterTouchData(enabled: false),
+        scatterTouchData: ScatterTouchData(
+          enabled: true,
+          touchSpotThreshold: (w * 0.02).clamp(8.0, 24.0).toDouble(),
+          mouseCursorResolver: (event, response) =>
+              response?.touchedSpot == null
+              ? SystemMouseCursors.basic
+              : SystemMouseCursors.click,
+          touchTooltipData: ScatterTouchTooltipData(
+            fitInsideHorizontally: true,
+            fitInsideVertically: true,
+            getTooltipColor: (_) => AppTheme.chartTooltipBg,
+            getTooltipItems: (spot) {
+              final text = _scatterTooltipText(spec, spots, spotMeta, spot);
+              return text == null
+                  ? null
+                  : ScatterTooltipItem(text, textStyle: _tooltipStyle());
+            },
+          ),
+        ),
       ),
       duration: _chartAnimDuration,
     );

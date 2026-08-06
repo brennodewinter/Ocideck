@@ -40,6 +40,13 @@ class _ChartPreviewState extends State<_ChartPreview>
   /// hovering a point.
   ({int series, int entry, double value, Offset offset})? _radarTouch;
 
+  /// Hover-tooltip text for the hand-drawn charts (horizontal bar, horizontal
+  /// stacked bar, bullet) and the combo overlay — they carry no fl_chart touch
+  /// layer of their own, so a [MouseRegion] sets this and [_withCellTooltip]
+  /// floats it. Null when nothing is hovered. Composed from data (label + value)
+  /// so it introduces no new localised words.
+  String? _cellTooltip;
+
   /// Parsed chart spec, cached so the per-pointer-move hover rebuilds don't
   /// re-parse the chart JSON every frame. Re-parsed only when the slide's chart
   /// markdown actually changes.
@@ -153,6 +160,13 @@ class _ChartPreviewState extends State<_ChartPreview>
 
   void _setHover(int? index) {
     if (_hovered != index) setState(() => _hovered = index);
+  }
+
+  /// Set the hand-drawn charts' floating hover tooltip (see [_cellTooltip]).
+  /// The overlay widgets themselves are top-level helpers in
+  /// chart_preview_touch.dart, to keep this class off the size ratchet.
+  void _setCellTooltip(String? text) {
+    if (_cellTooltip != text) setState(() => _cellTooltip = text);
   }
 
   /// Trigger a rebuild from the chart-builder extensions in the `parts/` files.

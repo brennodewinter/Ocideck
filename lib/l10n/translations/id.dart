@@ -1772,6 +1772,9 @@ const _dutchSourceId = {
 
 const _dutchSourceAddId = <String, String>{
   'Nieuw document': 'Dokumen baru',
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Berlaku untuk {n} slide dari rangkaian terpisah ini.',
+  'Los automatisch op wat kan': 'Perbaiki yang bisa otomatis',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT mengembalikan respons tak terduga ({code}). Coba lagi nanti atau minta bantuan administrator.',
   'Vanuit een OpenKAT-server': 'Dari server OpenKAT',
@@ -2790,7 +2793,6 @@ const _dutchSourceAddId = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Data terlalu sedikit untuk plot probabilitas',
   'Met dank aan': 'Ucapan terima kasih',
-  'Fix alle problemen': 'Perbaiki semua masalah',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Masalah yang bisa diperbaiki otomatis sudah ditangani. Sisanya memerlukan pilihan.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

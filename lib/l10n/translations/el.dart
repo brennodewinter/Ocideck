@@ -1799,6 +1799,9 @@ const _dutchSourceEl = {
 
 const _dutchSourceAddEl = <String, String>{
   'Nieuw document': 'Νέο έγγραφο',
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Ισχύει για {n} διαφάνειες αυτής της χωρισμένης σειράς.',
+  'Los automatisch op wat kan': 'Επιδιόρθωση όσων γίνονται αυτόματα',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'Το OpenKAT επέστρεψε απροσδόκητη απάντηση ({code}). Δοκιμάστε αργότερα ή ζητήστε βοήθεια από τον διαχειριστή.',
   'Vanuit een OpenKAT-server': 'Από διακομιστή OpenKAT',
@@ -2828,7 +2831,6 @@ const _dutchSourceAddEl = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Πολύ λίγα δεδομένα για διάγραμμα πιθανότητας',
   'Met dank aan': 'Με ευγνωμοσύνη',
-  'Fix alle problemen': 'Επιδιόρθωση όλων των προβλημάτων',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Τα προβλήματα που διορθώνονται αυτόματα αντιμετωπίστηκαν. Ό,τι απομένει απαιτεί μια επιλογή.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

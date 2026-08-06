@@ -1778,6 +1778,9 @@ const _dutchSourceHr = {
 
 const _dutchSourceAddHr = <String, String>{
   'Nieuw document': 'Novi dokument',
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Odnosi se na {n} slajdova ovog podijeljenog niza.',
+  'Los automatisch op wat kan': 'Popravi što se može automatski',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT je vratio neočekivani odgovor ({code}). Pokušajte kasnije ili zatražite pomoć administratora.',
   'Vanuit een OpenKAT-server': 'S OpenKAT poslužitelja',
@@ -2791,7 +2794,6 @@ const _dutchSourceAddHr = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'Premalo podataka za grafikon vjerojatnosti',
   'Met dank aan': 'Sa zahvalnošću',
-  'Fix alle problemen': 'Popravi sve probleme',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Problemi koji su se mogli automatski riješiti su obrađeni. Ono što preostaje traži odluku.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

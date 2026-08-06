@@ -69,6 +69,20 @@ QualityAutofixResult fixAllStructuralQualityIssues(
   return (deck: current, applied: applied);
 }
 
+/// Of [fixAllStructuralQualityIssues] op dit deck werkelijk íets zou wegwerken —
+/// de motor-accurate poort voor de "los automatisch op wat kan"-knop (#1280).
+///
+/// [isStructurallyAutofixable] toetst alleen de *soort* melding en is daarmee
+/// ruimer dan de motor: een woord-melding op een dia met te weinig bullets om te
+/// splitsen telt daar als "fixbaar", terwijl [_applyNextFix] er niets mee kan.
+/// Die divergentie liet de knop verschijnen om vervolgens niets te doen. Deze
+/// helper spiegelt de echte motorpoort, zodat geldt: knop zichtbaar ⇔ er wordt
+/// ook echt een fix toegepast. Goedkoop: één analyse, geen deck-mutatie.
+bool hasApplicableStructuralFix(
+  Deck deck, {
+  SlideQualityAnalyzer analyzer = const SlideQualityAnalyzer(),
+}) => _applyNextFix(deck, analyzer) != null;
+
 int _totalBullets(Deck deck) => deck.slides.fold<int>(
   0,
   (sum, s) => sum + s.bullets.length + s.bullets2.length,

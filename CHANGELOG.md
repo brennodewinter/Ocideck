@@ -12,6 +12,24 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.3.5] — 2026-08-06
+
+### Fixed
+
+- fix(quality): vat herhaalde dichtheidsmeldingen na 'Splits slide' samen per reeks (#1289)
+- fix(split+quality): paginadoel volgt de tekstkolom naast een afbeelding (#1279) + ondertitel-contrasttoets (#1290)
+- fix(finding): inhoud-bewuste auto-fit voor de bevinding-header (#1288)
+- fix(charts): hover-tooltip voor scatter, gestapelde/horizontale staaf, combo, waterval en bullet (#1287)
+- fix(quality): kwaliteitsknop belooft niet meer dan hij oplost (#1286)
+- fix(deploy): strip macOS tar metadata so the web deploy stops spewing tar warnings
+- fix(docs): vertaal mermaid-diagram in de NL-handleiding + poort tegen onvertaalde diagrammen (#1284)
+
+## [0.3.4] — 2026-08-05
+
+### Fixed
+
+- fix(packaging): install `file` for appimagetool in the Linux release job (#1227)
+
 ## [0.3.3] — 2026-08-05
 
 ### Added
@@ -1040,6 +1058,129 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Contrastpoort miste de ondertitel van titel- en tussentiteldia's.** De
+  kwaliteitscontrole toetste de volle titeltekst tegen de titel- respectievelijk
+  tussentitelachtergrond, maar de ondertitel eronder rendert op verlaagde dekking
+  (`kTitleSubtitleAlpha` = 0,72) — een lichtere variant van dezelfde kleur, met
+  stelliger het zwakste contrast van de twee. Bij een donkerblauwe achtergrond
+  met een lichterblauwe titel haalde de volle titel nog net de drempel voor grote
+  tekst, terwijl de lichtere ondertitel er ruim onder zakte en tóch geen
+  waarschuwing kreeg: een dia die voor mensen niet te lezen was, meldde "geen
+  probleem". `_checkSlideContrast` toetst nu ook de ondertitel (gemengd op
+  `kTitleSubtitleAlpha`, kleur volgt de render inclusief een per-dia
+  `titleTextColorOverride`), voor zowel de titel- als de tussenteteldia. De 0,72
+  is nu één gedeelde constante die render en toets delen, zodat ze niet uit
+  elkaar kunnen lopen. Het label hergebruikt de bestaande, in 31 talen vertaalde
+  string `Ondertitel` — geen nieuwe l10n. Regressietest eerst-rood
+  (`test/subtitle_contrast_test.dart`) met een kleurenpaar waarin de volle titel
+  de drempel haalt maar de 0,72-ondertitel niet, zodat de ondertitel aantoonbaar
+  de enige bindende beperking is.
+- **Splits slide naast een afbeelding: paginadoel volgt de smalle tekstkolom (#1279).**
+  "Verdeel over meerdere slides" op een overvolle bullets+afbeelding-slide
+  gebruikte het volle-breedte-doel van acht bullets per pagina. Naast een
+  afbeelding is de tekstkolom veel smaller (bij 40% beeld ~61% van een gewone
+  bulletslide), dus de volste pagina drukte de gedeelde run-schaal omlaag en
+  bleven de deel-slides klein renderen terwijl er ruimte over was. Het
+  paginadoel schaalt nu mee met de kolombreedte
+  (`bulletsImageTextColumnFraction` in `slide_layout_metrics.dart`, gebruikt
+  door `splitBulletSlidePages`): bij 40% beeld vijf bullets per pagina, bij een
+  bredere afbeelding minder (met `kMinPageBullets` als vloer), bij een smalle
+  afbeelding het volle doel; een checklist schaalt haar ruimere optimum van
+  twaalf mee. Het bewuste invariant dat één split-run op één gedeelde grootte
+  rendert (de volste pagina) blijft ongemoeid — de run wint grootte doordat de
+  pagina's kleiner zijn, niet doordat pagina's uiteenlopen. Regressietests
+  (eerst-rood) pinnen het paginadoel, de gestegen gedeelde schaal én — per
+  repo-regel heuristiek-tegen-echte-render — de effectieve fontgrootte in een
+  echte widget-render van een vervolgpagina
+  (`test/split_bullets_image_page_target_test.dart`).
+- **Kwaliteitspaneel: aanbevolen 'Splits slide' liet het aantal waarschuwingen exploderen (#1289).**
+  Op een overvolle bullets+afbeelding-dia beveelt het paneel 'Splits slide' aan.
+  Wie dat opvolgde, kreeg een veelvoud aan waarschuwingen terug: elke deelpagina
+  van de gesplitste lijst herhaalde dezelfde lengte-gedreven
+  tekstdichtheidsmeldingen (veel woorden, gemiddeld lange bullets, meerzins-bullet,
+  diepe nesting, "verkleind tot X%"). Splitsen verdeelt de bullets over pagina's —
+  het maakt ze niet korter — dus lost het de dichtheid-per-aantal op, maar niet de
+  lengte-per-bullet, en vermenigvuldigen die lengte-meldingen zich over de pagina's:
+  straf op gehoorzaamheid. De nieuwe, pure top-level functie `collapseSplitRunDensity`
+  in `lib/services/slide_quality/split_run_density_summary.dart` vat de meldingen uit
+  de geëxporteerde set `kLengthDrivenRunDensityKinds` die over twee of meer pagina's
+  van dezelfde gesplitste reeks (de `continuesSplit`-keten uit `splitRunRange`)
+  terugkeren samen tot één per soort per reeks. De samenvatting draagt in
+  `args['runPages']` mee over hoeveel pagina's ze gaat, en `formatSlideQualityIssue`
+  plakt daar de zin "Geldt voor {n} slides van deze gesplitste reeks." achteraan, zodat
+  de ene regel niet als een enkele-pagina-probleem leest. Dit gebeurt op de
+  weergave-laag: `computeDeckQuality` past de samenvatting toe ná de accepted-filter,
+  terwijl `deckQualityRawProvider`/`computeDeckQualityRaw` ongecollapst blijven — de
+  fix-motor ('Los automatisch op wat kan') heranalyseert vers en de thumbnailbadges
+  plus de badge-popover lezen de ruwe provider, dus die blijven elke pagina apart
+  zien. Fouten (de critical-varianten) en aantal-gedreven meldingen (te veel bullets)
+  blijven per pagina staan, want die lost verder splitsen wél op. Regressietests:
+  `split_run_density_summary_test.dart` (de samenvatting én de grenzen — alleen echte
+  runs, pas vanaf twee pagina's, nooit fouten of aantal-per-dia, en ruw vs. weergave
+  via de providers na een echte 'Splits slide') en een run-scope-suffix-test in
+  `slide_quality_localization_coverage_test.dart`. Documentatie: `docs/USER_GUIDE.md`
+  (de tekstdichtheid-/split-run-sectie) en `docs/SOURCE_MAP.md`.
+- **Grafieken: waarde-tooltip bij hover voor zeven ontbrekende types (#1281).**
+  Spreiding (scatter), gestapelde staaf, horizontale staaf, horizontale
+  gestapelde staaf, combo, waterval en bullet toonden bij muis-hover geen
+  waarde, terwijl staaf/lijn/vlak/cirkel/radar dat wél deden. Twee oorzaken,
+  beide verholpen: bij scatter/gestapelde staaf/waterval/combo stond de
+  fl_chart-touch op `enabled: false` — nu aan, met een `touchTooltipData`
+  gemodelleerd op de werkende staaf/lijn-tooltips; de handgetekende types
+  (horizontale (gestapelde) staaf, bullet) en de gelaagde combo kregen een eigen
+  hover-overlay in de stijl van de cirkel/radar-tooltip. De herbruikbare
+  tooltip-helpers en de heatmap-bouwer zijn naar de nieuwe parts
+  `chart_preview_touch.dart` en `chart_preview_heatmap.dart` gelicht om onder de
+  bestandsgroottegrens te blijven. Zeven nieuwe hover-tests (eerst-rood) dekken
+  alle types; de tooltip hergebruikt bestaande tekst (`Reeks`), dus geen nieuwe
+  vertalingen.
+- **Finding-header rendeerde veel te groot (#1282).** Een `finding`-kop met alle
+  identiteitsgegevens (titel, scope, CVSS-kaart, CWE/MASWE/CVE/test-badges) plus een
+  prozasectie tekende op zijn vaste #1163-formaat: onnodig groot, en zodra hij overliep
+  werd het geheel door de `BoxFit.scaleDown` van de steiger verkleind én linksboven
+  geparkeerd (de dia maar deels gebruikt). Er ontbrak de inhoud-bewuste krimpstap die
+  bullets al hadden. Nieuwe top-level meting `findingHeaderFitScale` in
+  `slide_layout_metrics.dart` meet de gepagineerde pagina-inhoud (kaart + de secties van
+  díe pagina) met `TextPainter` tegen de beschikbare dia-hoogte en geeft een
+  type-vermenigvuldiger in `(0, maxScale]` terug: een dichte kop herstroomt naar ~de
+  helft, een schaarse blijft aan de bovengrens (nooit groter dan het #1163-formaat).
+  `_FindingPreview` past die factor toe op zijn corpsgroottes; de paginering blijft
+  ongemoeid (gemeten ná `firstRenderPageSpec`, dus een bevinding die legitiem over twee
+  dia's loopt blijft splitsen). De ongebruikte `fitScaleOverride` op `SlidePreviewWidget`
+  wordt nu ook aan de finding doorgegeven, zodat `finding_header_cost_test.dart` het
+  paginatie-kostenmodel tegen de kaart op ware grootte kan blijven meten. Regressietest
+  `finding_header_autofit_test.dart` toetst tegen een echte render: een dichte F-01-kop
+  past nu op volle breedte binnen de dia en op ~halve grootte (bovengrens, eerst-rood),
+  een schaarse kop blijft aan de bovengrens.
+- **Vertaalde handleiding toonde een Engels mermaid-diagram (#1278).** In de
+  Nederlandse gebruikershandleiding stond het stroomschema onder "In het kort
+  verplaatst een deck zich als volgt door OciDeck" met Engelse labels. Oorzaak:
+  `tool/translate_docs.dart` geeft de hele Markdown-body aan een externe vertaler,
+  en die laat codeblokken — en dus ook een mermaid-blok — bewust ongemoeid om de
+  syntaxis niet te breken; de labeltekst bleef daardoor Engels terwijl het proza
+  eromheen wél werd vertaald. Het diagram in `docs/USER_GUIDE.nl.md` is nu met de
+  hand vertaald (knoop-ID's en mermaid-syntaxis intact). Een nieuwe statische poort
+  `make check-translated-mermaid` (`tool/check_translated_mermaid.dart`, in
+  `STATIC_GATES`) faalt voortaan wanneer een gegenereerde `docs/NAME.<taal>.md` een
+  mermaid-blok draagt dat byte-identiek is aan de Engelse bron — voor élke huidige
+  en toekomstige taal, met een expliciete witte lijst voor echt taalneutrale
+  diagrammen (nu leeg). Mermaid-labels blijven bewust handwerk: een halve
+  mermaid-parser in de vertaalstap zou juist de syntaxis breken die de vertaler
+  ontwijkt door codeblokken over te slaan; de poort dwingt de handmatige pas af.
+  Docs: `docs/CHECKS.md`, en de reden staat bij de code in `tool/translate_docs.dart`.
+- **Kwaliteitspaneel: "Fix alle problemen" beloofde meer dan de knop waarmaakte (#1280).**
+  De knop werkt bewust alleen de structureel-veilige categorieën weg (te volle
+  dia's splitsen, meerzins-bullets opknippen) en laat contrast, alt-tekst,
+  ontbrekende media en privacy staan — die vragen menselijk oordeel. Twee lagen
+  hersteld: (1) de knop-poort spiegelt nu de motor via de nieuwe top-level helper
+  `hasApplicableStructuralFix` in `quality_autofix.dart`, zodat de knop zichtbaar
+  is ⇔ er ook echt iets wordt opgelost — geen dode knop meer bij bijv. een
+  woord-melding op een dia met te weinig bullets om te splitsen; (2) het label is
+  eerlijk gemaakt: "Los automatisch op wat kan" (EN "Fix what can be automated",
+  in alle 31 talen), de oude sleutel `Fix alle problemen` is opgeruimd.
+  Regressietests: `quality_autofix_test.dart` (helper spiegelt `applied`) en
+  `slide_quality_panel_test.dart` (gemengd deck: structureel opgelost, contrast
+  blijft, knop verdwijnt).
 - **OpenKAT live multi-serverkoppeling (desktop, v1).** Meerdere Rocky-installaties
   (naam, URL, LAN-vlag in prefs; Knox-token in de sleutelhanger). Integraties toont
   twee blokken: map-import (ongewijzigd) en serverkoppeling. Rocky REST leest

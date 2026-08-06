@@ -970,4 +970,198 @@ void main() {
       expect(tester.takeException(), isNull, reason: '$type threw');
     }
   });
+
+  // ── Hover tooltips for the previously silent chart types (issue #1281) ─────
+  // fl_chart types: call the tooltip callback directly on the widget data.
+
+  testWidgets('scatter hover tooltip shows the label and value', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.scatter,
+      x: ['Q1', 'Q2'],
+      series: [
+        ChartSeries(name: 'Meting', data: [3, 7]),
+      ],
+    );
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final chart = tester.widget<ScatterChart>(find.byType(ScatterChart));
+    expect(chart.data.scatterTouchData.enabled, isTrue);
+    final spot = chart.data.scatterSpots[1];
+    final item = chart.data.scatterTouchData.touchTooltipData.getTooltipItems(
+      spot,
+    );
+    expect(item?.text, 'Q2\nMeting: 7');
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('stacked bar hover tooltip lists every segment value', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.stackedBar,
+      x: ['Q1'],
+      series: [
+        ChartSeries(name: 'A', data: [3]),
+        ChartSeries(name: 'B', data: [2]),
+      ],
+    );
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final bar = tester.widget<BarChart>(find.byType(BarChart));
+    expect(bar.data.barTouchData.enabled, isTrue);
+    final group = bar.data.barGroups.single;
+    final item = bar.data.barTouchData.touchTooltipData.getTooltipItem(
+      group,
+      0,
+      group.barRods.single,
+      0,
+    );
+    expect(item?.text, 'Q1\nA: 3\nB: 2');
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('waterfall hover tooltip shows each step delta with its sign', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.waterfall,
+      x: ['Start', 'Erbij', 'Eraf'],
+      series: [
+        ChartSeries(name: 'Stap', data: [100, 20, -30]),
+      ],
+    );
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final bar = tester.widget<BarChart>(find.byType(BarChart));
+    expect(bar.data.barTouchData.enabled, isTrue);
+    final groups = bar.data.barGroups;
+    final tt = bar.data.barTouchData.touchTooltipData;
+    // The rod's from/to are min/max, so a fall would lose its sign; the tooltip
+    // reads the signed delta instead.
+    expect(
+      tt.getTooltipItem(groups[1], 1, groups[1].barRods.single, 0)?.text,
+      'Erbij\n20',
+    );
+    expect(
+      tt.getTooltipItem(groups[2], 2, groups[2].barRods.single, 0)?.text,
+      'Eraf\n-30',
+    );
+    expect(tester.takeException(), isNull);
+  });
+
+  // Custom-overlay types: simulate a mouse hover and read the floating tooltip.
+
+  testWidgets('combo hover overlay shows the column values', (tester) async {
+    const spec = ChartSpec(
+      type: ChartType.combo,
+      x: ['Q1', 'Q2', 'Q3'],
+      series: [
+        ChartSeries(name: 'Omzet', data: [10, 14, 12]),
+        ChartSeries(name: 'Groei', data: [3, 8, 5]),
+      ],
+    );
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+    await gesture.addPointer(location: Offset.zero);
+    addTearDown(gesture.removePointer);
+    await gesture.moveTo(tester.getCenter(find.byType(LineChart)));
+    await tester.pump();
+
+    expect(find.byKey(const ValueKey('cell-hover-tooltip')), findsOneWidget);
+    final tip = tester.widget<Text>(
+      find.descendant(
+        of: find.byKey(const ValueKey('cell-hover-tooltip')),
+        matching: find.byType(Text),
+      ),
+    );
+    // The centre column maps to Q2: both the bar and the line value are shown.
+    expect(tip.data, contains('Omzet'));
+    expect(tip.data, contains('Groei'));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('horizontal bar hover overlay shows the label and value', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.horizontalBar,
+      x: ['Alpha', 'Beta'],
+      series: [
+        ChartSeries(name: 'Score', data: [8, 12]),
+      ],
+    );
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+    await gesture.addPointer(location: Offset.zero);
+    addTearDown(gesture.removePointer);
+    await gesture.moveTo(
+      tester.getCenter(find.byKey(const ValueKey('hbar-cell-1-0'))),
+    );
+    await tester.pump();
+
+    expect(find.byKey(const ValueKey('cell-hover-tooltip')), findsOneWidget);
+    expect(find.text('Beta\nScore: 12'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('horizontal stacked bar hover overlay shows the segment value', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.horizontalStackedBar,
+      x: ['Alpha', 'Beta'],
+      series: [
+        ChartSeries(name: 'A', data: [6, 8]),
+        ChartSeries(name: 'B', data: [4, 3]),
+      ],
+    );
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+    await tester.pumpAndSettle();
+
+    final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+    await gesture.addPointer(location: Offset.zero);
+    addTearDown(gesture.removePointer);
+    await gesture.moveTo(
+      tester.getCenter(find.byKey(const ValueKey('hstack-seg-0-0'))),
+    );
+    await tester.pump();
+
+    expect(find.byKey(const ValueKey('cell-hover-tooltip')), findsOneWidget);
+    expect(find.text('Alpha\nA: 6'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('bullet hover overlay shows the label and value', (tester) async {
+    const spec = ChartSpec(
+      type: ChartType.bullet,
+      x: ['SLA'],
+      series: [
+        ChartSeries(name: 'Werkelijk', data: [80]),
+      ],
+    );
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+    await gesture.addPointer(location: Offset.zero);
+    addTearDown(gesture.removePointer);
+    await gesture.moveTo(
+      tester.getCenter(find.byKey(const ValueKey('bullet-cell-0'))),
+    );
+    await tester.pump();
+
+    expect(find.byKey(const ValueKey('cell-hover-tooltip')), findsOneWidget);
+    expect(find.text('SLA\n80'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 }

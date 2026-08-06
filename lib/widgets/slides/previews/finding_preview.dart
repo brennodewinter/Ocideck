@@ -8,8 +8,10 @@ part of '../slide_preview.dart';
 /// unnecessarily large — size. This factor shrinks every finding font in step
 /// (headers, body, CVSS card, chips) so more content fits per page without
 /// touching layout or the other slide types. The finding's page budget in
-/// [paginateFinding] is calibrated against the same factor (#1163).
-const double _findingFontScale = 0.84;
+/// [paginateFinding] is calibrated against the same factor (#1163). It is the
+/// *fixed* part; a content-aware fit ([findingHeaderFitScale]) multiplies it per
+/// page so a dense header reflows smaller instead of rendering oversized (#1282).
+const double _findingFontScale = kFindingBaseFontScale;
 
 /// Preview for a `finding` header slide (PENTEST_MIAUW §3.1, §11): a
 /// severity-coloured header card — heading, CVSS score/severity badge, CWE/MASWE/CVE
@@ -28,6 +30,13 @@ class _FindingPreview extends StatelessWidget {
   /// The report's language (see [SlidePreviewWidget.reportLanguage]).
   final String reportLanguage;
 
+  /// A fixed type multiplier that bypasses the content-aware auto-fit (#1282).
+  /// Null on every production path — a finding is not part of a split run — so
+  /// the page normally sizes its own type. A test passes 1.0 to measure the
+  /// finding at its natural (#1163) size, e.g. to pin the pagination model in
+  /// `finding_header_cost_test.dart`.
+  final double? fitScaleOverride;
+
   const _FindingPreview({
     required this.slide,
     required this.w,
@@ -35,6 +44,7 @@ class _FindingPreview extends StatelessWidget {
     required this.profile,
     this.scopeCia = const {},
     this.reportLanguage = '',
+    this.fitScaleOverride,
   });
 
   @override
@@ -70,6 +80,23 @@ class _FindingPreview extends StatelessWidget {
     // started splitting overflowing findings.
     final continuation = _isContinuationPage(spec);
 
+    // Content-aware type multiplier for THIS page (#1282): the fixed #1163
+    // down-scale times a fit that reflows a dense header smaller and holds a
+    // sparse one at the ceiling. Measured on the paginated page, so a finding
+    // that legitimately spans slides still splits — this only sizes the type.
+    final reserve = slide.showLogo
+        ? logoSafeReserve(kReferenceSlideWidth, profile)
+        : 0.0;
+    final fit =
+        fitScaleOverride ??
+        findingHeaderFitScale(
+          spec: spec,
+          font: font,
+          continuation: continuation,
+          extraVReserve: reserve,
+        );
+    final m = _findingFontScale * fit;
+
     return _PreviewScaffold(
       width: w,
       slide: slide,
@@ -78,12 +105,12 @@ class _FindingPreview extends StatelessWidget {
       verticalPadding: pad,
       children: [
         if (continuation)
-          _continuationHeading(spec)
+          _continuationHeading(spec, m)
         else ...[
-          _headerCard(context, spec, severityColor, ctxCvss),
+          _headerCard(context, spec, severityColor, ctxCvss, m),
           SizedBox(height: w * 0.03),
         ],
-        ..._sectionBlocks(context, spec),
+        ..._sectionBlocks(context, spec, m),
       ],
     );
   }
@@ -99,7 +126,7 @@ class _FindingPreview extends StatelessWidget {
   /// A continuation page's heading: the same title (with its "(i/N)" marker), as
   /// a plain line rather than the severity card, so the section below it uses the
   /// full slide width.
-  Widget _continuationHeading(FindingSpec spec) {
+  Widget _continuationHeading(FindingSpec spec, double m) {
     return Padding(
       key: const ValueKey('finding-continuation-heading'),
       padding: EdgeInsets.only(bottom: w * 0.02),
@@ -113,7 +140,7 @@ class _FindingPreview extends StatelessWidget {
             // full identity lives on page 1 — so the previously large repeated
             // title just wasted half the slide on the finding's beginning
             // (#1198 follow-up).
-            fontSize: w * 0.017 * _findingFontScale,
+            fontSize: w * 0.017 * m,
             fontWeight: FontWeight.w700,
             color: AppTheme.navy,
           ),
@@ -127,6 +154,7 @@ class _FindingPreview extends StatelessWidget {
     FindingSpec spec,
     Color severity,
     Cvss4? ctxCvss,
+    double m,
   ) {
     return Container(
       key: const ValueKey('finding-header-card'),
@@ -147,7 +175,7 @@ class _FindingPreview extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (_hasBadges(spec)) ...[
-                  _badges(context, spec, ctxCvss),
+                  _badges(context, spec, ctxCvss, m),
                   SizedBox(height: w * 0.02),
                 ],
                 if (spec.heading.isNotEmpty)
@@ -156,7 +184,7 @@ class _FindingPreview extends StatelessWidget {
                     style: _applyFont(
                       font,
                       TextStyle(
-                        fontSize: w * 0.038 * _findingFontScale,
+                        fontSize: w * 0.038 * m,
                         fontWeight: FontWeight.w700,
                         color: AppTheme.navy,
                       ),
@@ -179,7 +207,7 @@ class _FindingPreview extends StatelessWidget {
                           style: _applyFont(
                             font,
                             TextStyle(
-                              fontSize: w * 0.024 * _findingFontScale,
+                              fontSize: w * 0.024 * m,
                               color: AppTheme.slideInk,
                             ),
                           ),
@@ -191,7 +219,7 @@ class _FindingPreview extends StatelessWidget {
               ],
             ),
           ),
-          _severityScoreCard(context, spec, ctxCvss, severity),
+          _severityScoreCard(context, spec, ctxCvss, severity, m),
         ],
       ),
     );
@@ -206,6 +234,7 @@ class _FindingPreview extends StatelessWidget {
     FindingSpec spec,
     Cvss4? ctxCvss,
     Color severity,
+    double m,
   ) {
     final cvss = ctxCvss ?? spec.cvss;
     if (cvss == null) return const SizedBox.shrink();
@@ -239,7 +268,7 @@ class _FindingPreview extends StatelessWidget {
                 font,
                 TextStyle(
                   color: textColor.withValues(alpha: 0.68),
-                  fontSize: w * 0.018 * _findingFontScale,
+                  fontSize: w * 0.018 * m,
                   fontWeight: FontWeight.w700,
                   letterSpacing: w * 0.0015,
                 ),
@@ -255,7 +284,7 @@ class _FindingPreview extends StatelessWidget {
                     font,
                     TextStyle(
                       color: textColor,
-                      fontSize: w * 0.052 * _findingFontScale,
+                      fontSize: w * 0.052 * m,
                       fontWeight: FontWeight.w800,
                       height: 1,
                     ),
@@ -273,7 +302,7 @@ class _FindingPreview extends StatelessWidget {
                         font,
                         TextStyle(
                           color: textColor,
-                          fontSize: w * 0.021 * _findingFontScale,
+                          fontSize: w * 0.021 * m,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -288,8 +317,8 @@ class _FindingPreview extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _meterEndpoint('0', textColor),
-                _meterEndpoint('10', textColor),
+                _meterEndpoint('0', textColor, m),
+                _meterEndpoint('10', textColor, m),
               ],
             ),
           ],
@@ -367,14 +396,14 @@ class _FindingPreview extends StatelessWidget {
     );
   }
 
-  Widget _meterEndpoint(String value, Color textColor) {
+  Widget _meterEndpoint(String value, Color textColor, double m) {
     return Text(
       value,
       style: _applyFont(
         font,
         TextStyle(
           color: textColor.withValues(alpha: 0.58),
-          fontSize: w * 0.014 * _findingFontScale,
+          fontSize: w * 0.014 * m,
           fontWeight: FontWeight.w600,
           height: 1,
         ),
@@ -389,7 +418,12 @@ class _FindingPreview extends StatelessWidget {
       spec.testId.isNotEmpty ||
       spec.retest.isRetested;
 
-  Widget _badges(BuildContext context, FindingSpec spec, Cvss4? ctxCvss) {
+  Widget _badges(
+    BuildContext context,
+    FindingSpec spec,
+    Cvss4? ctxCvss,
+    double m,
+  ) {
     final base = spec.cvss;
     final l10n = context.l10n;
     String badge(String label, Cvss4 cvss) =>
@@ -404,25 +438,27 @@ class _FindingPreview extends StatelessWidget {
         if (base != null && ctxCvss != null) ...[
           // De contextscore staat al als primaire scorekaart rechts. Alleen de
           // basisscore blijft hier ter vergelijking staan, zonder verdubbeling.
-          _filledBadge(badge(l10n.d('Basis'), base), band(base)),
+          _filledBadge(badge(l10n.d('Basis'), base), band(base), m),
         ],
-        if (spec.cweId != null) _outlinedChip('${l10n.d('CWE')}-${spec.cweId}'),
+        if (spec.cweId != null)
+          _outlinedChip('${l10n.d('CWE')}-${spec.cweId}', m),
         // MASWE naast CWE, niet in plaats van: een mobiele bevinding hoort in
         // beide talen leesbaar te zijn, en de zwakheid verwijst zelf ook naar
         // een CWE.
-        if (spec.masweId.isNotEmpty) _outlinedChip(spec.masweId),
-        for (final cve in spec.cveIds) _outlinedChip(cve),
-        if (spec.testId.isNotEmpty) _outlinedChip(spec.testId),
+        if (spec.masweId.isNotEmpty) _outlinedChip(spec.masweId, m),
+        for (final cve in spec.cveIds) _outlinedChip(cve, m),
+        if (spec.testId.isNotEmpty) _outlinedChip(spec.testId, m),
         if (spec.retest.isRetested)
           _filledBadge(
             '${l10n.d(spec.retest.dutchLabel)} ${l10n.d('na hertest')}',
             spec.retest.isResolved ? AppTheme.success700 : AppTheme.amber700,
+            m,
           ),
       ],
     );
   }
 
-  Widget _filledBadge(String text, Color color) {
+  Widget _filledBadge(String text, Color color, double m) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: w * 0.02, vertical: w * 0.008),
       decoration: BoxDecoration(
@@ -435,7 +471,7 @@ class _FindingPreview extends StatelessWidget {
           font,
           TextStyle(
             color: Colors.white,
-            fontSize: w * 0.024 * _findingFontScale,
+            fontSize: w * 0.024 * m,
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -443,7 +479,7 @@ class _FindingPreview extends StatelessWidget {
     );
   }
 
-  Widget _outlinedChip(String text) {
+  Widget _outlinedChip(String text, double m) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: w * 0.018, vertical: w * 0.006),
       decoration: BoxDecoration(
@@ -455,7 +491,7 @@ class _FindingPreview extends StatelessWidget {
         style: _applyFont(
           font,
           TextStyle(
-            fontSize: w * 0.022 * _findingFontScale,
+            fontSize: w * 0.022 * m,
             fontWeight: FontWeight.w600,
             color: AppTheme.slideInkMuted,
           ),
@@ -472,7 +508,11 @@ class _FindingPreview extends StatelessWidget {
   /// "Beschrijving" while the file still says `## Description` and round-trips.
   /// This renders the deliverable: the rasterizer drives PDF/PPTX from these
   /// previews, so an unlocalised heading here reaches the client.
-  List<Widget> _sectionBlocks(BuildContext context, FindingSpec spec) {
+  List<Widget> _sectionBlocks(
+    BuildContext context,
+    FindingSpec spec,
+    double m,
+  ) {
     final buf = StringBuffer();
     void add(String anchor, String body) {
       if (body.trim().isEmpty) return;
@@ -499,10 +539,10 @@ class _FindingPreview extends StatelessWidget {
       profile: profile,
       headingColor: AppTheme.navy,
       // Shrink the prose and its `##` section headings in step with the header
-      // card (#1163), so a dense finding fits more per page. Defaults are
-      // w*0.024 (body) and w*0.03 (heading2).
-      bodyFontSize: w * 0.024 * _findingFontScale,
-      heading2Size: w * 0.03 * _findingFontScale,
+      // card (#1163) and the per-page content fit (#1282), so a dense finding
+      // reflows smaller. Defaults are w*0.024 (body) and w*0.03 (heading2).
+      bodyFontSize: w * 0.024 * m,
+      heading2Size: w * 0.03 * m,
     );
   }
 }

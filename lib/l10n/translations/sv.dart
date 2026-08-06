@@ -1771,6 +1771,9 @@ const _dutchSourceSv = {
 
 const _dutchSourceAddSv = <String, String>{
   'Nieuw document': 'Nytt dokument',
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Gäller för {n} bilder i den här uppdelade serien.',
+  'Los automatisch op wat kan': 'Åtgärda det som kan automatiseras',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT gav ett oväntat svar ({code}). Försök igen senare eller be administratören om hjälp.',
   'Vanuit een OpenKAT-server': 'Från en OpenKAT-server',
@@ -2782,7 +2785,6 @@ const _dutchSourceAddSv = <String, String>{
   'Te weinig gegevens voor een probability plot':
       'För lite data för ett sannolikhetsdiagram',
   'Met dank aan': 'Med tack',
-  'Fix alle problemen': 'Åtgärda alla problem',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'Problemen som kunde åtgärdas automatiskt är klara. Det som återstår kräver ett val.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':

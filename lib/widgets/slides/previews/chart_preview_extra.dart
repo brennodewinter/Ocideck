@@ -50,111 +50,116 @@ extension _ChartPreviewExtra on _ChartPreviewState {
       ),
     );
     final axisStyle = labelStyle.copyWith(fontSize: w * 0.0105 * _labelScale);
-    return _customGrow((t) {
-      return LayoutBuilder(
-        builder: (context, c) {
-          final labelW = math.max(w * 0.12, c.maxWidth * 0.24);
-          final axisH = w * 0.03 * _labelScale;
-          final plotW = math.max(0.0, c.maxWidth - labelW);
-          return Column(
-            children: [
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(
-                      width: labelW,
-                      child: Column(
-                        children: [
-                          for (var i = 0; i < n; i++)
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(right: w * 0.008),
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    spec.x[i],
-                                    textAlign: TextAlign.right,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: labelStyle,
+    return _withCellTooltip(
+      tooltip: _cellTooltip,
+      w: w,
+      style: _tooltipStyle(),
+      chart: _customGrow((t) {
+        return LayoutBuilder(
+          builder: (context, c) {
+            final labelW = math.max(w * 0.12, c.maxWidth * 0.24);
+            final axisH = w * 0.03 * _labelScale;
+            final plotW = math.max(0.0, c.maxWidth - labelW);
+            return Column(
+              children: [
+                Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SizedBox(
+                        width: labelW,
+                        child: Column(
+                          children: [
+                            for (var i = 0; i < n; i++)
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.only(right: w * 0.008),
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                      spec.x[i],
+                                      textAlign: TextAlign.right,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: labelStyle,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          for (var g = 0; g <= 4; g++)
-                            Positioned(
-                              left: plotW * g / 4,
-                              top: 0,
-                              bottom: 0,
-                              child: Container(
-                                width: 1,
-                                color: textColor.withValues(alpha: 0.12),
-                              ),
-                            ),
-                          Column(
-                            children: [
-                              for (var i = 0; i < n; i++)
-                                Expanded(
-                                  child: _hBarBand(
-                                    spec,
-                                    i,
-                                    maxX,
-                                    plotW,
-                                    t,
-                                    textColor,
-                                  ),
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            for (var g = 0; g <= 4; g++)
+                              Positioned(
+                                left: plotW * g / 4,
+                                top: 0,
+                                bottom: 0,
+                                child: Container(
+                                  width: 1,
+                                  color: textColor.withValues(alpha: 0.12),
                                 ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: axisH,
-                child: Row(
-                  children: [
-                    SizedBox(width: labelW),
-                    Expanded(
-                      child: Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          for (var g = 0; g <= 4; g++)
-                            Positioned(
-                              left: (plotW * g / 4 - w * 0.03).clamp(
-                                0.0,
-                                math.max(0.0, plotW - w * 0.02),
                               ),
-                              top: 0,
-                              width: w * 0.06,
-                              child: Text(
-                                _fmtNum(maxX * g / 4),
-                                textAlign: TextAlign.center,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: axisStyle,
-                              ),
+                            Column(
+                              children: [
+                                for (var i = 0; i < n; i++)
+                                  Expanded(
+                                    child: _hBarBand(
+                                      spec,
+                                      i,
+                                      maxX,
+                                      plotW,
+                                      t,
+                                      textColor,
+                                    ),
+                                  ),
+                              ],
                             ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
-      );
-    });
+                SizedBox(
+                  height: axisH,
+                  child: Row(
+                    children: [
+                      SizedBox(width: labelW),
+                      Expanded(
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            for (var g = 0; g <= 4; g++)
+                              Positioned(
+                                left: (plotW * g / 4 - w * 0.03).clamp(
+                                  0.0,
+                                  math.max(0.0, plotW - w * 0.02),
+                                ),
+                                top: 0,
+                                width: w * 0.06,
+                                child: Text(
+                                  _fmtNum(maxX * g / 4),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: axisStyle,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      }),
+    );
   }
 
   Widget _hBarBand(
@@ -173,13 +178,20 @@ extension _ChartPreviewExtra on _ChartPreviewState {
           for (var si = 0; si < s.length; si++)
             if (cat < s[si].data.length)
               Expanded(
-                child: _hBarCell(
-                  s[si].data[cat],
-                  _seriesDisplayColor(s[si], si),
-                  maxX,
-                  plotW,
-                  t,
-                  textColor,
+                child: MouseRegion(
+                  key: ValueKey('hbar-cell-$cat-$si'),
+                  onEnter: (_) => _setCellTooltip(
+                    _seriesCellTooltip(context, spec, cat, si),
+                  ),
+                  onExit: (_) => _setCellTooltip(null),
+                  child: _hBarCell(
+                    s[si].data[cat],
+                    _seriesDisplayColor(s[si], si),
+                    maxX,
+                    plotW,
+                    t,
+                    textColor,
+                  ),
                 ),
               ),
         ],
@@ -277,111 +289,116 @@ extension _ChartPreviewExtra on _ChartPreviewState {
       ),
     );
     final axisStyle = labelStyle.copyWith(fontSize: w * 0.0105 * _labelScale);
-    return _customGrow((t) {
-      return LayoutBuilder(
-        builder: (context, c) {
-          final labelW = math.max(w * 0.12, c.maxWidth * 0.24);
-          final axisH = w * 0.03 * _labelScale;
-          final plotW = math.max(0.0, c.maxWidth - labelW);
-          return Column(
-            children: [
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(
-                      width: labelW,
-                      child: Column(
-                        children: [
-                          for (var i = 0; i < n; i++)
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(right: w * 0.008),
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    spec.x[i],
-                                    textAlign: TextAlign.right,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: labelStyle,
+    return _withCellTooltip(
+      tooltip: _cellTooltip,
+      w: w,
+      style: _tooltipStyle(),
+      chart: _customGrow((t) {
+        return LayoutBuilder(
+          builder: (context, c) {
+            final labelW = math.max(w * 0.12, c.maxWidth * 0.24);
+            final axisH = w * 0.03 * _labelScale;
+            final plotW = math.max(0.0, c.maxWidth - labelW);
+            return Column(
+              children: [
+                Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SizedBox(
+                        width: labelW,
+                        child: Column(
+                          children: [
+                            for (var i = 0; i < n; i++)
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.only(right: w * 0.008),
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                      spec.x[i],
+                                      textAlign: TextAlign.right,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: labelStyle,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          for (var g = 0; g <= 4; g++)
-                            Positioned(
-                              left: plotW * g / 4,
-                              top: 0,
-                              bottom: 0,
-                              child: Container(
-                                width: 1,
-                                color: textColor.withValues(alpha: 0.12),
-                              ),
-                            ),
-                          Column(
-                            children: [
-                              for (var i = 0; i < n; i++)
-                                Expanded(
-                                  child: _hStackBand(
-                                    spec,
-                                    i,
-                                    maxX,
-                                    plotW,
-                                    t,
-                                    textColor,
-                                  ),
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            for (var g = 0; g <= 4; g++)
+                              Positioned(
+                                left: plotW * g / 4,
+                                top: 0,
+                                bottom: 0,
+                                child: Container(
+                                  width: 1,
+                                  color: textColor.withValues(alpha: 0.12),
                                 ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: axisH,
-                child: Row(
-                  children: [
-                    SizedBox(width: labelW),
-                    Expanded(
-                      child: Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          for (var g = 0; g <= 4; g++)
-                            Positioned(
-                              left: (plotW * g / 4 - w * 0.03).clamp(
-                                0.0,
-                                math.max(0.0, plotW - w * 0.02),
                               ),
-                              top: 0,
-                              width: w * 0.06,
-                              child: Text(
-                                _fmtNum(maxX * g / 4),
-                                textAlign: TextAlign.center,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: axisStyle,
-                              ),
+                            Column(
+                              children: [
+                                for (var i = 0; i < n; i++)
+                                  Expanded(
+                                    child: _hStackBand(
+                                      spec,
+                                      i,
+                                      maxX,
+                                      plotW,
+                                      t,
+                                      textColor,
+                                    ),
+                                  ),
+                              ],
                             ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
-      );
-    });
+                SizedBox(
+                  height: axisH,
+                  child: Row(
+                    children: [
+                      SizedBox(width: labelW),
+                      Expanded(
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            for (var g = 0; g <= 4; g++)
+                              Positioned(
+                                left: (plotW * g / 4 - w * 0.03).clamp(
+                                  0.0,
+                                  math.max(0.0, plotW - w * 0.02),
+                                ),
+                                top: 0,
+                                width: w * 0.06,
+                                child: Text(
+                                  _fmtNum(maxX * g / 4),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: axisStyle,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      }),
+    );
   }
 
   /// One stacked bar (a whole category), its series abutting left-to-right. The
@@ -396,14 +413,19 @@ extension _ChartPreviewExtra on _ChartPreviewState {
     Color textColor,
   ) {
     final s = spec.series;
-    final segs = <({double len, Color color, double value})>[];
+    final segs = <({double len, Color color, double value, int si})>[];
     for (var si = 0; si < s.length; si++) {
       if (cat >= s[si].data.length) continue;
       final value = s[si].data[cat];
       final frac = maxX <= 0 ? 0.0 : (value / maxX).clamp(0.0, 1.0);
       final len = math.max(0.0, plotW * frac * t);
       if (len <= 0) continue;
-      segs.add((len: len, color: _seriesDisplayColor(s[si], si), value: value));
+      segs.add((
+        len: len,
+        color: _seriesDisplayColor(s[si], si),
+        value: value,
+        si: si,
+      ));
     }
     final labelStyle = _applyFont(
       font,
@@ -422,31 +444,38 @@ extension _ChartPreviewExtra on _ChartPreviewState {
         child: Row(
           children: [
             for (var i = 0; i < segs.length; i++)
-              SizedBox(
-                width: segs[i].len,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: segs[i].color,
-                    border: i == 0
-                        ? null
-                        : Border(
-                            left: BorderSide(
-                              color: Colors.white.withValues(alpha: 0.9),
-                              width: w * 0.001,
+              MouseRegion(
+                key: ValueKey('hstack-seg-$cat-${segs[i].si}'),
+                onEnter: (_) => _setCellTooltip(
+                  _seriesCellTooltip(context, spec, cat, segs[i].si),
+                ),
+                onExit: (_) => _setCellTooltip(null),
+                child: SizedBox(
+                  width: segs[i].len,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: segs[i].color,
+                      border: i == 0
+                          ? null
+                          : Border(
+                              left: BorderSide(
+                                color: Colors.white.withValues(alpha: 0.9),
+                                width: w * 0.001,
+                              ),
                             ),
-                          ),
+                    ),
+                    child: segs[i].len > w * 0.045 && segs[i].value != 0
+                        ? Center(
+                            child: Text(
+                              _fmtNum(segs[i].value),
+                              maxLines: 1,
+                              overflow: TextOverflow.clip,
+                              softWrap: false,
+                              style: labelStyle,
+                            ),
+                          )
+                        : const SizedBox.expand(),
                   ),
-                  child: segs[i].len > w * 0.045 && segs[i].value != 0
-                      ? Center(
-                          child: Text(
-                            _fmtNum(segs[i].value),
-                            maxLines: 1,
-                            overflow: TextOverflow.clip,
-                            softWrap: false,
-                            style: labelStyle,
-                          ),
-                        )
-                      : const SizedBox.expand(),
                 ),
               ),
           ],
@@ -500,7 +529,10 @@ extension _ChartPreviewExtra on _ChartPreviewState {
     final rightRes = w * 0.058 * _labelScale;
     final barRodW = (w * 0.032 / barSeries.length).clamp(w * 0.008, w * 0.022);
 
-    return Stack(
+    // Both fl_chart layers keep touch off; the top line layer's Positioned.fill
+    // would otherwise swallow hover before it reaches the bars. A single
+    // transparent MouseRegion over the whole Stack maps the pointer to a column.
+    final layers = Stack(
       children: [
         Positioned.fill(
           child: BarChart(
@@ -591,6 +623,18 @@ extension _ChartPreviewExtra on _ChartPreviewState {
           ),
         ),
       ],
+    );
+    return _comboHoverOverlay(
+      layers: layers,
+      n: n,
+      leftRes: leftRes,
+      rightRes: rightRes,
+      w: w,
+      style: _tooltipStyle(),
+      tooltip: _cellTooltip,
+      setTooltip: _setCellTooltip,
+      textForColumn: (col) =>
+          _comboTooltipText(context, spec, col, barSeries, lineSeries),
     );
   }
 
@@ -724,245 +768,32 @@ extension _ChartPreviewExtra on _ChartPreviewState {
         gridData: _grid(textColor),
         borderData: FlBorderData(show: false),
         extraLinesData: _boundLines(spec),
-        barTouchData: BarTouchData(enabled: false),
-      ),
-      duration: _chartAnimDuration,
-    );
-  }
-
-  // ── Heatmap (doubles as a risk matrix) ───────────────────────────────────
-
-  /// A grid coloured by value: every series is a row, every label a column, the
-  /// cell colour a light→accent ramp over the data range. Label the axes
-  /// likelihood and impact and it reads as a risk matrix. A colour-scale strip
-  /// sits under the grid.
-  Widget _heatmapChart(ChartSpec spec, Color textColor) {
-    final rows = spec.series;
-    final cols = spec.x;
-    if (rows.isEmpty || cols.isEmpty) {
-      return _placeholderText(context.l10n.d('Geen grafiekgegevens'));
-    }
-    double? lo, hi;
-    for (final s in rows) {
-      for (final v in s.data) {
-        lo = lo == null ? v : math.min(lo, v);
-        hi = hi == null ? v : math.max(hi, v);
-      }
-    }
-    final low = lo ?? 0;
-    var high = hi ?? 1;
-    if (high <= low) high = low + 1;
-    // Magnitude → a fixed heat ramp, not the deck theme (see chart.dart), picked
-    // for the slide background so low always recedes and high always intensifies.
-    final ramp = heatmapRamp(
-      darkBackground: isDarkHex(profile.slideBackgroundColor),
-    );
-    final labelStyle = _applyFont(
-      font,
-      TextStyle(
-        fontSize: w * 0.0115 * _labelScale,
-        color: textColor.withValues(alpha: 0.88),
-        fontWeight: presentationMode ? FontWeight.w600 : FontWeight.normal,
-      ),
-    );
-
-    return _customGrow((t) {
-      return LayoutBuilder(
-        builder: (context, c) {
-          final labelW = math.max(w * 0.1, c.maxWidth * 0.2);
-          return Column(
-            children: [
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(
-                      width: labelW,
-                      child: Column(
-                        children: [
-                          for (var r = 0; r < rows.length; r++)
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(right: w * 0.008),
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    rows[r].name.isEmpty
-                                        ? '${context.l10n.d('Reeks')} ${r + 1}'
-                                        : rows[r].name,
-                                    textAlign: TextAlign.right,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: labelStyle,
-                                  ),
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          for (var r = 0; r < rows.length; r++)
-                            Expanded(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  for (var cc = 0; cc < cols.length; cc++)
-                                    Expanded(
-                                      child: _heatCell(
-                                        cc < rows[r].data.length
-                                            ? rows[r].data[cc]
-                                            : 0.0,
-                                        cc < rows[r].data.length,
-                                        low,
-                                        high,
-                                        ramp,
-                                        t,
-                                        textColor,
-                                      ),
-                                    ),
-                                ],
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: w * 0.03 * _labelScale,
-                child: Row(
-                  children: [
-                    SizedBox(width: labelW),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          for (var cc = 0; cc < cols.length; cc++)
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: w * 0.002,
-                                ),
-                                child: Text(
-                                  cols[cc],
-                                  textAlign: TextAlign.center,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: labelStyle,
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: w * 0.008),
-              _heatScale(ramp, low, high, textColor, labelW),
-            ],
-          );
-        },
-      );
-    });
-  }
-
-  Widget _heatCell(
-    double v,
-    bool present,
-    double low,
-    double high,
-    List<String> ramp,
-    double t,
-    Color textColor,
-  ) {
-    final norm = (high - low) <= 0
-        ? 0.0
-        : ((v - low) / (high - low)).clamp(0.0, 1.0);
-    final fillHex = heatmapColorAt(ramp, norm);
-    final color = present
-        ? AppTheme.parseHexColor(fillHex)
-        : textColor.withValues(alpha: 0.04);
-    // The cell colour is fixed (not the theme), so the label colour is too:
-    // white on the hot/dark cells, dark ink on the pale ones.
-    final onColor = AppTheme.parseHexColor(heatmapInk(fillHex));
-    return Padding(
-      padding: EdgeInsets.all(w * 0.0025),
-      child: Opacity(
-        opacity: t.clamp(0.0, 1.0),
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(w * 0.004),
+        // Show the step's signed delta, read from [deltas] rather than the rod's
+        // from/to (which are min/max — the sign of a fall is lost there).
+        barTouchData: BarTouchData(
+          enabled: true,
+          mouseCursorResolver: (event, response) => response?.spot == null
+              ? SystemMouseCursors.basic
+              : SystemMouseCursors.click,
+          touchTooltipData: BarTouchTooltipData(
+            fitInsideHorizontally: true,
+            fitInsideVertically: true,
+            getTooltipColor: (_) => AppTheme.chartTooltipBg,
+            getTooltipItem: (group, groupIndex, rod, rodIndex) {
+              final xi = group.x;
+              final label = xi >= 0 && xi < spec.x.length ? spec.x[xi] : '';
+              final delta = xi >= 0 && xi < deltas.length
+                  ? deltas[xi]
+                  : rod.toY - rod.fromY;
+              return BarTooltipItem(
+                '${label.isEmpty ? '' : '$label\n'}${_fmtNum(delta)}',
+                _tooltipStyle(),
+              );
+            },
           ),
-          child: present
-              ? Text(
-                  _fmtNum(v),
-                  maxLines: 1,
-                  style: _applyFont(
-                    font,
-                    TextStyle(
-                      fontSize: w * 0.012 * _labelScale,
-                      color: onColor,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                )
-              : const SizedBox.shrink(),
         ),
       ),
-    );
-  }
-
-  Widget _heatScale(
-    List<String> ramp,
-    double lo,
-    double hi,
-    Color textColor,
-    double labelW,
-  ) {
-    final style = _applyFont(
-      font,
-      TextStyle(
-        fontSize: w * 0.011 * _labelScale,
-        color: textColor.withValues(alpha: 0.7),
-        fontWeight: FontWeight.w600,
-      ),
-    );
-    return SizedBox(
-      height: w * 0.02 * _labelScale,
-      child: Row(
-        children: [
-          SizedBox(width: labelW),
-          Expanded(
-            child: Row(
-              children: [
-                Text(_fmtNum(lo), style: style),
-                SizedBox(width: w * 0.006),
-                Expanded(
-                  child: Container(
-                    height: w * 0.012,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          for (final s in ramp) AppTheme.parseHexColor(s),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(w * 0.008),
-                    ),
-                  ),
-                ),
-                SizedBox(width: w * 0.006),
-                Text(_fmtNum(hi), style: style),
-              ],
-            ),
-          ),
-        ],
-      ),
+      duration: _chartAnimDuration,
     );
   }
 }

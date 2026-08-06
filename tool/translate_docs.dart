@@ -23,6 +23,20 @@
 // sentence is a mistranslated promise; those stay English-only until a human
 // translates them. See [excludedDocs].
 //
+// Mermaid diagrams need a HUMAN pass and are NOT rewritten here (#1278). A
+// ```mermaid block travels through the translator as an ordinary code block, so —
+// like every code block — the translator leaves it untouched and its label text
+// stays English while the prose around it is translated. We deliberately do not
+// extract-and-reinsert the labels in this tool: mermaid has a dozen node shapes
+// and a different text syntax per diagram type (flowchart brackets, sequence
+// `participant … as`, gantt/pie/er/state), interleaved with lines that must NOT be
+// touched (`classDef`, `style`, `click`, `linkStyle`). A partial extractor would
+// be exactly the fragile, half-working parser that corrupts a diagram's syntax —
+// the very risk the translator sidesteps by skipping code blocks in the first
+// place. So a translated diagram's labels are translated by hand (node IDs and
+// syntax intact), and `tool/check_translated_mermaid.dart` is the gate that forces
+// it: it fails when a variant carries a mermaid block byte-identical to the base.
+//
 // Each generated file is prefixed with a visible "machine translation" banner
 // (itself run through the translator) so a reader is never misled into taking a
 // machine rendering of a promise as authoritative — the English source wins.

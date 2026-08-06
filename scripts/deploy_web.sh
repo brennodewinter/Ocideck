@@ -95,7 +95,18 @@ WERKMAP="$(mktemp -d -t ocideck-web-XXXXXX)"
 trap 'rm -rf "$WERKMAP"' EXIT
 TMP_TARBALL="$WERKMAP/$TARBALL"
 
-tar -C build/web -czf "$TMP_TARBALL" .
+# macOS' bsdtar bakt Apple-extended-attributes (com.apple.provenance/quarantine/
+# FinderInfo) en BSD-file-flags als pax-headers in het archief; de GNU-tar op de
+# server kan die keywords niet lezen en drukt dan per bestand een "Ignoring
+# unknown extended header keyword"-waarschuwing af (duizenden regels). De
+# webbundel heeft er niets aan, dus strip ze bij de bron. De vlaggen zijn
+# Apple-bsdtar-only — de CI-pad draait op GNU-tar dat ze geen van drieën kent —
+# dus alleen op Darwin toevoegen.
+TAR_OPTS=()
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  TAR_OPTS=(--no-mac-metadata --no-xattrs --no-fflags)
+fi
+tar "${TAR_OPTS[@]}" -C build/web -czf "$TMP_TARBALL" .
 echo "Tarball:    $(du -h "$TMP_TARBALL" | cut -f1)"
 
 if (( DRY_RUN )); then

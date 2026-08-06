@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/deck.dart';
 import '../models/quality_disposition.dart';
 import '../models/slide_quality.dart';
+import '../services/slide_quality/split_run_density_summary.dart';
 import '../services/slide_quality_analyzer.dart';
 import 'deck_provider.dart';
 import 'settings_provider.dart';
@@ -51,10 +52,17 @@ SlideQualityResult computeDeckQualityRaw(Ref ref) {
 SlideQualityResult computeDeckQuality(Ref ref) {
   final deck = ref.watch(deckProvider.select((state) => state.deck));
   if (deck == null) return const SlideQualityResult([]);
-  return SlideQualityResult([
+  final open = [
     for (final issue in ref.watch(deckQualityRawProvider).issues)
       if (!isQualityAccepted(deck, issue.slideIndex)) issue,
-  ]);
+  ];
+  // Vat de lengte-gedreven dichtheidsmeldingen die na 'Splits slide' op elke
+  // deelpagina terugkeren samen tot één per soort per gesplitste reeks (#1289):
+  // splitsen lost de dichtheid-per-aantal op, niet de lengte-per-bullet, dus
+  // hetzelfde lange-bullets-probleem hoort één keer geteld, niet per pagina.
+  // Presentatie-laag — de ruwe provider en de fix-motor houden elke pagina
+  // apart, zodat 'los automatisch op wat kan' de grondwaarheid blijft zien.
+  return SlideQualityResult(collapseSplitRunDensity(deck.slides, open));
 }
 
 /// Of de auteur de meldingen van slide [slideIndex] heeft geaccepteerd.

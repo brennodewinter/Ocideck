@@ -268,6 +268,7 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final result = combinedSlideQualityResult(ref);
+    final deck = ref.watch(deckProvider.select((state) => state.deck));
     final visibleIssues = _filteredIssues(result);
     final (:bg, :fg) = slideQualityColors(result);
     final iconColor = fg;
@@ -307,17 +308,18 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                       padding: EdgeInsets.zero,
                     ),
                   ),
-                  // Alleen aanbieden als er echt iets vanzelf op te lossen valt
-                  // (#915): een deck met enkel alt-tekst- of privacymeldingen
-                  // heeft geen structurele fix, en dan zou de knop een belofte
-                  // doen die hij niet waarmaakt.
-                  if (result.issues.any(
-                    (i) => isStructurallyAutofixable(i.kind),
-                  ))
+                  // Alleen aanbieden als de motor op dít deck werkelijk íets
+                  // wegwerkt (#915, #1280): een deck met enkel alt-tekst- of
+                  // privacymeldingen — of een woord-melding op een dia die te
+                  // weinig bullets heeft om te splitsen — heeft geen toepasbare
+                  // fix, en dan zou de knop een belofte doen die hij niet
+                  // waarmaakt. [hasApplicableStructuralFix] spiegelt de echte
+                  // motorpoort, zodat knop zichtbaar ⇔ er wordt ook echt gefixt.
+                  if (deck != null && hasApplicableStructuralFix(deck))
                     TextButton.icon(
                       onPressed: _fixAllProblems,
                       icon: const Icon(Icons.auto_fix_high, size: 13),
-                      label: Text(l10n.d('Fix alle problemen')),
+                      label: Text(l10n.d('Los automatisch op wat kan')),
                       style: TextButton.styleFrom(
                         foregroundColor: iconColor,
                         visualDensity: VisualDensity.compact,

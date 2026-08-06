@@ -16,6 +16,7 @@ import '../models/video_source.dart';
 import '../utils/color_contrast.dart';
 import '../utils/inline_markdown.dart';
 import '../utils/project_path.dart';
+import '../utils/title_contrast.dart' show kTitleSubtitleAlpha;
 import 'improvement/matrix_slide.dart';
 import 'slide_image_refs.dart';
 import 'slide_layout_metrics.dart';
@@ -528,14 +529,38 @@ class SlideQualityAnalyzer {
           label: 'Tussentitel',
           foreground: theme.titleTextColor,
           background: theme.sectionBackgroundColor,
+          minContrastRatio: minContrastRatio,
+        );
+        _addSubtitleContrastIssue(
+          issues: issues,
+          slideIndex: index,
+          label: 'Ondertitel',
+          slide: slide,
+          theme: theme,
+          background: theme.sectionBackgroundColor,
+          minContrastRatio: minContrastRatio,
+        );
+      // De titeldia zelf toetst de titeltekst tegen de titelachtergrond
+      // dekbreed ([_checkThemeContrast]); hier komt alleen de ondertitel bij,
+      // die met verlaagde dekking ([kTitleSubtitleAlpha]) een lichtere — en dus
+      // zwakker contrasterende — variant van dezelfde kleur is en anders
+      // ongetoetst blijft (#1279-vervolg).
+      case SlideType.title:
+        _addSubtitleContrastIssue(
+          issues: issues,
+          slideIndex: index,
+          label: 'Ondertitel',
+          slide: slide,
+          theme: theme,
+          background: theme.titleBackgroundColor,
+          minContrastRatio: minContrastRatio,
         );
       // Bewust uitgeschreven in plaats van een `default:`. Een `default` zet de
       // exhaustiviteitswaarschuwing van de analyzer uit, en dan valt slidetype
       // #25 hier stil: geen contrastcontrole, en niemand die het merkt. Nu
       // weigert de compiler een nieuw type tot iemand beslist heeft of het een
       // eigen voor-/achtergrondpaar heeft dat gekeurd moet worden.
-      case SlideType.title ||
-          SlideType.bullets ||
+      case SlideType.bullets ||
           SlideType.menu ||
           SlideType.twoBullets ||
           SlideType.bulletsImage ||
@@ -567,33 +592,6 @@ class SlideQualityAnalyzer {
           SlideType.gantt:
         break;
     }
-  }
-
-  void _addSlidePairIssue({
-    required List<SlideQualityIssue> issues,
-    required int slideIndex,
-    required String label,
-    required String foreground,
-    required String background,
-  }) {
-    final ratio = hexContrastRatio(foreground, background);
-    if (ratio == null) return;
-    final aaThreshold = math.min(kWcagAaLargeText, minContrastRatio);
-    if (ratio >= aaThreshold) return;
-
-    issues.add(
-      SlideQualityIssue(
-        slideIndex: slideIndex,
-        kind: SlideQualityIssueKind.slideContrast,
-        category: SlideQualityCategory.contrast,
-        severity: MarkdownValidationSeverity.warning,
-        args: {
-          'label': label,
-          'ratio': ratio.toStringAsFixed(1),
-          'threshold': aaThreshold.toStringAsFixed(1),
-        },
-      ),
-    );
   }
 
   void _checkMediaDescriptions(
@@ -906,4 +904,81 @@ class _SlideIssuesMemo {
         index: newIndex,
         issues: reindexed,
       );
+}
+
+/// Toetst een voorgrond/achtergrond-paar op contrast en meldt het als het onder
+/// de (voor grote tekst versoepelde) drempel zakt. Top-level zodat de emitter
+/// niet tegen het klasseplafond van [SlideQualityAnalyzer] telt.
+void _addSlidePairIssue({
+  required List<SlideQualityIssue> issues,
+  required int slideIndex,
+  required String label,
+  required String foreground,
+  required String background,
+  required double minContrastRatio,
+}) {
+  final ratio = hexContrastRatio(foreground, background);
+  if (ratio == null) return;
+  final aaThreshold = math.min(kWcagAaLargeText, minContrastRatio);
+  if (ratio >= aaThreshold) return;
+
+  issues.add(
+    SlideQualityIssue(
+      slideIndex: slideIndex,
+      kind: SlideQualityIssueKind.slideContrast,
+      category: SlideQualityCategory.contrast,
+      severity: MarkdownValidationSeverity.warning,
+      args: {
+        'label': label,
+        'ratio': ratio.toStringAsFixed(1),
+        'threshold': aaThreshold.toStringAsFixed(1),
+      },
+    ),
+  );
+}
+
+/// De ondertitel van een titel- of tussentiteldia staat op verlaagde dekking
+/// ([kTitleSubtitleAlpha]) — een lichtere versie van de titelkleur, en dus met
+/// stelliger het zwakste contrast van de twee. De volle titeltekst wordt al
+/// getoetst (dekbreed voor de titeldia, per dia voor de tussentitel); zonder
+/// deze toets glipt juist die lichtere ondertekst erdoor: donkerblauwe
+/// achtergrond met een lichterblauwe ondertitel die voor mensen niet te lezen
+/// is. De kleur volgt de render: een `titleTextColorOverride` wint van het
+/// thema. Alleen als er een ondertitel staat. Top-level zodat de emitter niet
+/// tegen het klasseplafond van [SlideQualityAnalyzer] telt.
+void _addSubtitleContrastIssue({
+  required List<SlideQualityIssue> issues,
+  required int slideIndex,
+  required String label,
+  required Slide slide,
+  required ThemeProfile theme,
+  required String background,
+  required double minContrastRatio,
+}) {
+  if (slide.subtitle.trim().isEmpty) return;
+  final foreground = slide.titleTextColorOverride.isNotEmpty
+      ? slide.titleTextColorOverride
+      : theme.titleTextColor;
+  final ratio = blendedHexContrastRatio(
+    foreground,
+    background,
+    foregroundAlpha: kTitleSubtitleAlpha,
+  );
+  if (ratio == null) return;
+  final aaThreshold = math.min(kWcagAaLargeText, minContrastRatio);
+  if (ratio >= aaThreshold) return;
+
+  issues.add(
+    SlideQualityIssue(
+      slideIndex: slideIndex,
+      kind: SlideQualityIssueKind.slideContrast,
+      category: SlideQualityCategory.contrast,
+      severity: MarkdownValidationSeverity.warning,
+      args: {
+        'label': label,
+        'ratio': ratio.toStringAsFixed(1),
+        'threshold': aaThreshold.toStringAsFixed(1),
+      },
+    ),
+  );
 }

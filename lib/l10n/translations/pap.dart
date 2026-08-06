@@ -731,6 +731,9 @@ const _dutchSourcePap = {
 
 const _dutchSourceAddPap = {
   'Nieuw document': 'Dokumento nobo',
+  'Geldt voor {n} slides van deze gesplitste reeks.':
+      'Ta konta pa {n} slide di e serie partí aki.',
+  'Los automatisch op wat kan': 'Drecha loke por outomatisá',
   'OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.':
       'OpenKAT a duna un respuesta inesperá ({code}). Purba despues of pidi ayudo na bo administrador.',
   'Vanuit een OpenKAT-server': 'For di un servidor OpenKAT',
@@ -1751,7 +1754,6 @@ const _dutchSourceAddPap = {
   'Te weinig gegevens voor een probability plot':
       'Masha poko data pa un gráfico di probabilidad',
   'Met dank aan': 'Ku danki',
-  'Fix alle problemen': 'Drecha tur problema',
   'Automatisch oplosbare problemen aangepakt. Wat overblijft vraagt om een keuze.':
       'A drecha e problemanan ku por a wòrdu drechá outomátikamente. Loke ta resta ta pidi un desishon.',
   'Niets dat zich vanzelf laat oplossen — dit vraagt om een keuze.':
