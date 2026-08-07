@@ -375,14 +375,13 @@ jobs:
   windows-ophalen:
     name: Windows ophalen van de spiegel
     runs-on: docker
+    # Voorgebakken CI-image i.p.v. kaal ubuntu + per-run apt-get: dit image draagt
+    # al node/curl/ca-certificates/jq (zie .forgejo/ci-image/Dockerfile) en staat
+    # op de runner al warm van de bouw-jobs, dus de "Gereedschap installeren"-stap
+    # (4-6 min apt) vervalt. #11 van het releaseketen-verhardingsplan.
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.44.8
     steps:
-      - name: Gereedschap installeren
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends nodejs curl ca-certificates jq
-
       # Waarom een release-asset en niet het build-artifact van die run: een
       # GitHub-*artifact* vraagt een token, óók bij een publieke repo, en
       # verloopt na negentig dagen. Een release-*asset* van een publieke repo is
