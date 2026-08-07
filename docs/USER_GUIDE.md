@@ -29,6 +29,7 @@
 - [Accessibility](#accessibility)
 - [Information security module (pentest reports)](#information-security-module-pentest-reports)
 - [Management-system module (ISO progress reporting)](#management-system-module-iso-progress-reporting)
+- [LibrePlan connector (optional)](#libreplan-connector-optional)
 - [Documents](#documents)
 - [Markdown mode](#markdown-mode)
 - [What the browser version cannot do](#what-the-browser-version-cannot-do)
@@ -4085,6 +4086,68 @@ first.
 > [`docs/design/ISO_MANAGEMENTSYSTEEM.md`](design/ISO_MANAGEMENTSYSTEEM.md).
 > OciDeck reports progress — it makes no certification or conformance claim and is
 > not a substitute for an auditor.
+
+## LibrePlan connector (optional)
+
+The LibrePlan connector is an optional module that pulls a snapshot of a project
+from a [LibrePlan](https://www.libreplan.dev/) instance and turns it into OciDeck
+slides. It is **read-only**: the connector only fetches (HTTP GET) and never
+writes anything back to LibrePlan. Like the other optional modules it is **off by
+default**, and it is only available in the desktop version — on the web build the
+tab explains that and offers nothing, because the connector keeps its password in
+the operating-system keychain, which the browser build cannot use safely.
+*(Added 2026-08-07.)*
+
+### Enabling and configuring
+
+Turn it on under **Settings → Uitbreidingen (Extensions)** with the
+**LibrePlan-connector** switch. Once enabled, a **LibrePlan-connector** tab
+appears in the settings sidebar. On that tab you fill in:
+
+- the **server URL** of the LibrePlan instance (for example
+  `https://libreplan.example.org/libreplan/`);
+- a **username** and **password**. The password is stored in your operating
+  system's keychain, keyed on the server URL and username — never in the deck and
+  never in the app's preferences.
+
+For a server on your own network you can switch on **Vertrouwde interne server**
+(trusted internal server). That allows plain HTTP and lets private addresses
+through the NetGuard, which OciDeck otherwise refuses; with it off, HTTPS is
+required. Press **Verbinding testen** (test connection) to check the settings —
+it performs a single read against the server and reports success or the failure
+reason.
+
+### Importing
+
+Press **Importeren uit LibrePlan** on the LibrePlan tab. A dialog lets you tick
+which slides to produce; all are on by default:
+
+- **Gantt-planning** — the project plan with dates, dependencies and milestones.
+- **WBS** — the work-breakdown structure as a hierarchical tree.
+- **Projectstatus** — a cockpit with a progress gauge and a planned-hours gauge.
+- **Milestones** — a timeline of the project's milestones.
+- **Kritieke pad** — a flow diagram of the longest dependency chain.
+- **Resources** — a table of machines and workers.
+- **Timesheet** — a table of logged hours drawn from the work reports.
+- **Resourcebelasting** — a bar chart of hours per resource per day over the last
+  30 days.
+
+The resulting slides are inserted into the current deck. If an individual part
+fails — say one endpoint is unavailable — the connector reports that as a warning
+but carries on, so the remaining slides are still produced.
+
+### Limits
+
+- The connector imports **one project per run**: it reads the project list from
+  the server and takes the first project. When the server holds several projects
+  it says so in a warning, but there is currently no way to pick a different one —
+  choosing a specific project is not built yet.
+- The Gantt slide is capped at 30 tasks, the WBS at 50 nodes and tables at 100
+  rows. A slide is a summary, not a plan file; a larger project is truncated.
+- The critical path is an **approximation** — the longest dependency chain — not
+  the CPM calculation LibrePlan performs server-side.
+- Durations are estimated at 8 working hours per day, because LibrePlan's calendar
+  is not available through the REST export.
 
 ## Documents
 

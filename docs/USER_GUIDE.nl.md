@@ -33,6 +33,7 @@
 - [Toegankelijkheid](#toegankelijkheid)
 - [Informatiebeveiligingsmodule (pentestrapporten)](#informatiebeveiligingsmodule-pentestrapporten)
 - [Managementsysteemmodule (ISO-voortgangsrapportage)](#managementsysteemmodule-iso-voortgangsrapportage)
+- [LibrePlan-connector (optioneel)](#libreplan-connector-optioneel)
 - [Documenten](#documenten)
 - [Markdown-modus](#markdown-modus)
 - [Wat de browserversie niet kan](#wat-de-browserversie-niet-kan)
@@ -4181,8 +4182,11 @@ de slides wordt nog steeds geproduceerd.
 
 ### Beperkingen
 
-- Eén project per import (het eerste project op de server). Voor een specifiek
-  project, gebruik de projectcode in de server-URL.
+- Eén project per import: de connector leest de projectlijst van de server en
+  neemt het eerste project. Staan er meerdere projecten, dan meldt hij dat in een
+  waarschuwing, maar een specifiek project kiezen kan nog niet. *(Gecorrigeerd
+  2026-08-07: eerder stond hier dat je een specifiek project koos via de
+  projectcode in de server-URL; die mogelijkheid bestaat niet in de code.)*
 - De Gantt-dia kapt af op 30 taken, de WBS op 50 knopen, tabellen op 100 rijen.
 - Het kritieke pad is een benadering (langste afhankelijkheidsketen), niet de
   CPM-berekening die LibrePlan server-side doet.
