@@ -19,12 +19,23 @@ fast registration/invariant tests (`SOURCE_MAP`, docs, SBOM, l10n) that are
 is a required status check** (branch protection on `main`): a PR does not merge
 until it passes, via the web UI or the REST/`tea` merge API. That is the
 prevention layer — drift is stopped at the PR instead of landing. Two things it
-still does **not** cover, on purpose: the **full test suite** and the **coverage
-floors**. The full suite runs post-merge on every push to `main`
-(`linux-gate.yml`, `make check-no-coverage`) as a smoke alarm — detection, not a
-block — and the coverage floors still run nowhere but in `make check` on your own
-machine. So: the per-PR gate blocks, the main-push gate alarms, the tag is the
-release gate, and you are still the coverage gate.
+still does **not** hard-block, on purpose: the **coverage floors**. The **full
+test suite** now runs **per pull request** that touches `lib/**` or `test/**`
+(and their direct dependencies) — `linux-gate.yml`, `make check-no-coverage` —
+surfacing the failure on the PR *before* the merge. That closes a real gap: a
+Linux-specific or load-sensitive test (path separators, subprocess timeouts,
+I/O races) can be green on the fast maintainer Mac and red only on the Linux
+runner, and until now that only showed up post-merge. It **also** still runs
+post-merge on every push to `main` as a detection smoke alarm for anything that
+changes on `main` between PRs. To avoid the I/O contention that *caused* the
+load-sensitive flakiness, the heavy gate is **serialized**: it runs on a
+dedicated **`linux-serial` runner with capacity 1**, so never more than one
+full-suite run executes at once, while `static-gate`/`scans` keep the capacity-4
+lane. The queue latency is the deliberate trade. The coverage floors still run
+nowhere but in `make check` on your own machine. So: the per-PR static gate
+blocks, the per-PR full suite surfaces (serialized, not yet a required check),
+the main-push run alarms, the tag is the release gate, and you are still the
+coverage gate.
 
 > **Escape hatch.** If the runner is down or saturated and a green PR cannot
 > merge because its required `static-gate` check never ran, a repo admin removes
