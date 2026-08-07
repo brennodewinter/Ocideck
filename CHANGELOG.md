@@ -12,6 +12,54 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.4.0] — 2026-08-07
+
+### Added
+
+- feat(latex): LaTeX-export voor documenten + presentaties
+- feat(release): windows-ophalen dispatcht de spiegel-build actief (2/3)
+- feat(release): release_auto robuuster — pre-flight, --resume, webdemo-ontkoppeling (1/3)
+- feat(table): tabel-editor soepel — navigatie, uitlijning, getalnotatie, splitsing (#1311)
+- feat(documentmodus): export, conversie en afronding van de documentmodus
+
+### Changed
+
+- ci(linux-gate): per-PR op een capacity-1 serial-runner
+- test(golden): ververs de verouderde finding_cvss-golden
+- docs(checks): documenteer translate-docs-check en verwijder de stale gate-telling
+- test(golden): voeg de ontbrekende gantt-slidetype-golden toe
+- docs(export): leg vast dat de HTML-export de dia-overlays weglaat (#1330)
+- test(release): regressiepoort tegen de minisign pty-race
+- chore(toolchain): pin Flutter 3.44.8 → 3.44.9 (stable)
+- chore(document): dubbele code opruimen + rijke office-tabellen
+- Changelog: Development log entries voor review-bevindingen
+- docs(changelog): releaseketen-verharding in de Development log
+- Gebruik buildPinnedClient voor alle vier overgebleven inline HttpClient-recepten
+- Stabiliteit: begrens AssetPool-cache op 256 entries (LRU)
+- Security: begrens resource-exhaustion in XMPP en CVE-acceptatie
+- docs(user-guide): document the LibrePlan connector in the EN guide
+- ci(release): glue-jobs op het voorgebakken CI-image (3/3)
+- docs(documentmodus): sluit vier docs-gaten na de documentmodus-merge
+
+### Fixed
+
+- fix(test,docs): Windows-pad-agnostische image-search-toets + gerepareerde DOCUMENT_MODE-link
+- fix(test): ruimer wachtbudget voor de Cmd+S-opslagtoets onder last
+- fix(tooling): translate-docs-check dwingt weer af (consistentie i.p.v. 31 talen)
+- fix(document): Visueel toont opmaak + afbeeldingscarrousel volgt app-thema
+- fix(test): royale timeout voor de native-git-merge-toetsen
+- fix(test): sla de release_auto.sh-toetsen over op Windows
+- fix(test): scope pickUnfilteredMacFile-rethrow-test op macOS
+- fix(tooling): ontkoppel translate_docs van Flutter zodat de poort weer compileert
+- fix(footer): paginanummer altijd rechtsonder, ook bij gecentreerde footer (#1330)
+- fix(release): minisign-wachtwoord via stdin i.p.v. expect
+- fix(document): macOS .md-kiezer, Visueel-editor en afbeeldingscarrousel
+- fix: eerlijke LibrePlan-waarschuwing + actuele DOCUMENT_MODE-status
+- fix(deps): gebundelde mermaid 11.16.0 → 11.16.1 (5 OSV-advisories verholpen)
+- fix(ui): categoriefilters in slidetype-kiezer subtieler
+- fix(reader): mermaid-diagram volgt app-thema in donkere documentlezer
+- fix(chart): grafiektitel leesbaar op donkere achtergrond (WCAG AA)
+
 ## [0.3.6] — 2026-08-06
 
 ### Added
@@ -1071,6 +1119,17 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Gebundelde DOMPurify 3.4.12 → 3.4.13 (OSV-advisory GHSA-55q2-fjhq-7xh7).**
+  De bundled-JS-poort (`make deps-check`, #tool/check_bundled_js.dart) stopte de
+  v0.4.0-release: DOMPurify 3.4.12 draagt een bekende XSS — *"IN_PLACE hook
+  removal leaves a detached subtree executable"* — verholpen in 3.4.13. De
+  `dist/purify.min.js` is van twee onafhankelijke mirrors (jsdelivr én unpkg)
+  gehaald en byte-identiek bevonden (sha256 `9ab3d44d…`) vóór hij de oude bundel
+  verving. `assets/web_export/MANIFEST.json` (versie + sha256 + source) en de
+  SBOM (`make sbom`) schoven mee; `make deps-check` is weer groen. Zelfde
+  faalvorm en zelfde recept als de mermaid-bump hiervoor: de poort vangt een
+  bundel die bovenstrooms een advisory kreeg, en de fix is upgraden, niet
+  onderdrukken.
 - **`translate-docs-check` bijt weer, en is nu écht een poort.** Twee gebreken
   die de eerdere compilecrash had gemaskeerd. (1) `main` was `Future<int>` met
   `return _runCheck()`, maar de Dart-VM negeert een teruggegeven int — zonder

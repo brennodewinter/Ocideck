@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:21bfc967-6420-5717-821b-f83dcf03c096",
+  "serialNumber": "urn:uuid:e27f4f2a-4f3d-51c2-8672-a9b894dc4a39",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-07T13:54:35.583313Z",
+    "timestamp": "2026-08-07T21:47:13.940731Z",
     "tools": {
       "components": [
         {
@@ -8685,11 +8685,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:npm/dompurify@3.4.12",
+      "bom-ref": "pkg:npm/dompurify@3.4.13",
       "type": "library",
       "name": "dompurify",
-      "version": "3.4.12",
-      "purl": "pkg:npm/dompurify@3.4.12",
+      "version": "3.4.13",
+      "purl": "pkg:npm/dompurify@3.4.13",
       "licenses": [
         {
           "expression": "Apache-2.0 OR MPL-2.0"
@@ -8698,13 +8698,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "c45ba939765574f96cbf35ee9b6d89f73756a17921814425e74b82f7c54603ce"
+          "content": "9ab3d44d73c3e3947f9ab72e0f0bc15c7f1931d60b365ba261fc85fe59013c56"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://cdn.jsdelivr.net/npm/dompurify@3.4.12/dist/purify.min.js"
+          "url": "https://cdn.jsdelivr.net/npm/dompurify@3.4.13/dist/purify.min.js"
         }
       ],
       "properties": [
@@ -9051,7 +9051,7 @@
         "font:assets/fonts/Roboto-Variable.ttf",
         "fork:desktop_multi_window@0.3.0",
         "fork:screen_retriever_macos@0.2.0",
-        "pkg:npm/dompurify@3.4.12",
+        "pkg:npm/dompurify@3.4.13",
         "pkg:npm/highlight.js@11.11.1",
         "pkg:npm/marked@18.0.5",
         "pkg:npm/mathjax@3.2.2",
