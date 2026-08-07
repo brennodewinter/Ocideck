@@ -196,10 +196,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
             style: OutlinedButton.styleFrom(
               foregroundColor: ImagePickerPalette.textMuted,
               side: const BorderSide(color: ImagePickerPalette.border),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 14,
-                vertical: 10,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             ),
           ),
           const SizedBox(width: 8),

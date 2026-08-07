@@ -24,8 +24,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
       _images = sorted;
       _descriptions = descriptions;
       _loading = false;
-      _rootsUnreachable =
-          result.unreachableRoots.isNotEmpty && sorted.isEmpty;
+      _rootsUnreachable = result.unreachableRoots.isNotEmpty && sorted.isEmpty;
       _selected =
           widget.initialPath ?? (sorted.isNotEmpty ? sorted.first : null);
       _applyFilter();
@@ -55,9 +54,9 @@ extension _CarouselActions on _ImageCarouselPickerState {
           : context.l10n.d(
               'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.',
             );
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     }
   }
 

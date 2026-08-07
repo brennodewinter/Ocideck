@@ -81,13 +81,16 @@ void main() {
     expect(result.paths.map(p.basename), isNot(contains('notes.txt')));
   });
 
-  test('ontbrekende wortels zonder treffers → failed + unreachableRoots', () async {
-    final missing = p.join(tmp.path, 'bestaat-niet');
-    final result = await ImageLibraryScanner.scan([missing]);
-    expect(result.paths, isEmpty);
-    expect(result.failed, isTrue);
-    expect(result.unreachableRoots, [missing]);
-  });
+  test(
+    'ontbrekende wortels zonder treffers → failed + unreachableRoots',
+    () async {
+      final missing = p.join(tmp.path, 'bestaat-niet');
+      final result = await ImageLibraryScanner.scan([missing]);
+      expect(result.paths, isEmpty);
+      expect(result.failed, isTrue);
+      expect(result.unreachableRoots, [missing]);
+    },
+  );
 
   test('ontbrekende wortel naast een gevulde blijft niet failed', () async {
     makeImg('ok.png');

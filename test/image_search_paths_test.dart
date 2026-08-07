@@ -4,10 +4,12 @@ import 'package:ocideck/utils/image_search_paths.dart';
 void main() {
   group('deckImageSearchPaths', () {
     test('project images + project + libraries', () {
-      expect(
-        deckImageSearchPaths('/deck', ['/lib-a', '/lib-b']),
-        ['/deck/images', '/deck', '/lib-a', '/lib-b'],
-      );
+      expect(deckImageSearchPaths('/deck', ['/lib-a', '/lib-b']), [
+        '/deck/images',
+        '/deck',
+        '/lib-a',
+        '/lib-b',
+      ]);
     });
 
     test('zonder project alleen bibliotheken', () {
@@ -24,9 +26,7 @@ void main() {
     });
 
     test('geen Desktop-root — die zou de bestandsgrens vullen', () {
-      final paths = documentImageSearchPaths('/Users/me/Desktop', [
-        '/library',
-      ]);
+      final paths = documentImageSearchPaths('/Users/me/Desktop', ['/library']);
       expect(paths, isNot(contains('/Users/me/Desktop')));
       expect(paths.first, '/library');
     });
@@ -35,23 +35,26 @@ void main() {
       expect(documentImageSearchPaths(null, ['/lib']), ['/lib']);
     });
 
-    test('open presentaties leveren images + projectmap (zoals presentatiemodus)', () {
-      expect(
-        documentImageSearchPaths(
-          '/doc',
-          ['/lib'],
-          openDeckProjectPaths: ['/deck-a', '/deck-b'],
-        ),
-        [
-          '/lib',
-          '/deck-a/images',
-          '/deck-a',
-          '/deck-b/images',
-          '/deck-b',
-          '/doc/images',
-        ],
-      );
-    });
+    test(
+      'open presentaties leveren images + projectmap (zoals presentatiemodus)',
+      () {
+        expect(
+          documentImageSearchPaths(
+            '/doc',
+            ['/lib'],
+            openDeckProjectPaths: ['/deck-a', '/deck-b'],
+          ),
+          [
+            '/lib',
+            '/deck-a/images',
+            '/deck-a',
+            '/deck-b/images',
+            '/deck-b',
+            '/doc/images',
+          ],
+        );
+      },
+    );
 
     test('recente presentaties leveren images/logos, niet de hele map', () {
       final paths = documentImageSearchPaths(

@@ -902,8 +902,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       descriptionService: ref.read(descriptionServiceProvider),
       // Alleen deck-tabs: documenttabs hebben geen deckNotifier (gooit anders).
       openDeckFiles: [
-        for (final tab in tabs)
-          ?tab.deckNotifierOrNull?.currentState.filePath,
+        for (final tab in tabs) ?tab.deckNotifierOrNull?.currentState.filePath,
       ],
     );
     if (picked == null || !mounted) return;

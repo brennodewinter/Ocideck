@@ -90,7 +90,8 @@ void main() {
     expect(
       code,
       contains('Platform.isMacOS'),
-      reason: 'the native panel is macOS-only; the gate must stay platform-aware',
+      reason:
+          'the native panel is macOS-only; the gate must stay platform-aware',
     );
   });
 }
