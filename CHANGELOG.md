@@ -1071,6 +1071,20 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Toolchain-pin van Flutter 3.44.8 naar 3.44.9 (stable, 2026-08-07).** De
+  laatste stable uit het officiële kanaal (uitgebracht 2026-08-06), zodat de
+  distributiebuilds op de nieuwste toolchain staan — een basaal
+  beveiligingspunt voor een LibreKAT-product. De gebundelde Dart blijft 3.12.2,
+  dus `dart format` reflowt niet en de opmaakpoort had geen mechanische
+  herformattering nodig. Het macOS-arm64-archief is met sha256 geverifieerd
+  tegen het releaseregister van het `stable`-kanaal vóór het uitpakken naar
+  `~/flutter`. Omdat `make check-toolchain` (#598/#721) eist dat de pin op élke
+  plek gelijk staat, schoven ze in één commit mee: `.tool-versions`, beide
+  workflow-sets (GitHub + Forgejo, inclusief de zeven `ocideck-ci`-imagetags),
+  `README.md`, `CONTRIBUTING.md` en de `docs/`-gidsen, plus de "Toolchains of
+  record"-tabel in `docs/CHECKS.md`. De SBOM is opnieuw gegenereerd (`make sbom`
+  leest de SDK-versie uit `.tool-versions`). Het voorgebakken CI-image
+  herpubliceert vanzelf op de `.tool-versions`-wijziging naar `main`.
 - **Documentmodus: kiezer, `__vet__`, standaard Visueel bewerkbaar.** (1) *Openen
   → Bladeren…* sloot het Flutter-dialoog niet vóór de native `NSOpenPanel`;
   genest onder die modal bleven `.md`-bestanden grijs. Bladeren sluit nu eerst
