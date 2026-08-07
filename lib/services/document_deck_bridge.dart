@@ -1,6 +1,6 @@
 import '../models/deck.dart';
 import '../models/slide.dart';
-import 'markdown_service.dart';
+import 'markdown_table_codec.dart';
 
 /// Converteert tussen een plat Markdown-**document** en een getypeerd
 /// [Deck]. Twee zuivere, headless functies — bewust hier en niet verspreid over
@@ -105,20 +105,25 @@ class DocumentDeckBridge {
       }
 
       // GFM-tabel: koprij gevolgd door een scheidingsrij.
-      if (_looksLikeTableRow(trimmed) &&
+      if (isMarkdownTableLine(trimmed) &&
           i + 1 < lines.length &&
-          _isTableDelimiter(lines[i + 1].trim())) {
+          isMarkdownTableDelimiterRow(lines[i + 1].trim())) {
         flushFlow();
-        final rawRows = <String>[line];
-        var j = i + 2; // sla de koprij en de scheidingsrij over
-        while (j < lines.length && _looksLikeTableRow(lines[j].trim())) {
-          rawRows.add(lines[j]);
+        // Koprij + scheidingsrij + body: de codec leest de per-kolomuitlijning
+        // uit de scheidingsrij (en laat die daarna weg), zodat een office-tabel
+        // zijn uitlijning door de deconstructie én de round-trip behoudt.
+        final tableLines = <String>[line, lines[i + 1]];
+        var j = i + 2;
+        while (j < lines.length && isMarkdownTableLine(lines[j].trim())) {
+          tableLines.add(lines[j]);
           j++;
         }
+        final decoded = decodeMarkdownTableWithAlignment(tableLines);
         slides.add(
-          Slide.create(
-            SlideType.table,
-          ).copyWith(tableRows: _tableCells(rawRows)),
+          Slide.create(SlideType.table).copyWith(
+            tableRows: decoded.rows,
+            tableColumnAlignments: decoded.alignments,
+          ),
         );
         i = j;
         continue;
@@ -135,19 +140,6 @@ class DocumentDeckBridge {
     }
     return Deck(title: title, slides: slides, projectPath: projectPath);
   }
-
-  /// Het deck-**markdown** van een plat document: deconstrueer het via
-  /// [documentToDeck] en serialiseer dat met de gewone deck-generator, zodat de
-  /// uitkomst een geldig presentatie-`.md` is (front matter, `---`-diagrenzen).
-  ///
-  /// Voor de conversie document→presentatie (§11.3) en elke plek die de
-  /// presentatievorm als tekst wil. Zuiver: [svc] is de enige afhankelijkheid en
-  /// heeft geen IO nodig voor het serialiseren.
-  static String documentToDeckMarkdown(
-    String body,
-    MarkdownService svc, {
-    String title = '',
-  }) => svc.generateDeck(documentToDeck(body, title: title));
 
   /// De omgekeerde weg: serialiseer de dia-lichamen tot één vloeiend document.
   ///
@@ -172,7 +164,10 @@ class DocumentDeckBridge {
 String _slideBody(Slide slide) {
   switch (slide.type) {
     case SlideType.table:
-      return _rowsToGfmTable(slide.tableRows);
+      return encodeMarkdownTable(
+        slide.tableRows,
+        alignments: slide.tableColumnAlignments,
+      );
     case SlideType.chart:
       return '```chart\n${slide.customMarkdown}\n```';
     default:
@@ -193,75 +188,8 @@ String _slideBody(Slide slide) {
   }
 }
 
-/// Serialiseer een celraster (eerste rij = koppen) naar een GFM-pijptabel: een
-/// koprij, een scheidingsrij en de body. Een `|` in een cel wordt ontsnapt naar
-/// `\|`; ragged rijen worden met lege cellen aangevuld tot de breedste.
-///
-/// Zuivere kopie van `rowsToGfmTable` uit het editor-scherm (een widget-bestand),
-/// bewust hier herhaald: een service mag `lib/widgets/` niet importeren (de
-/// laagpoort, `serviceUiImportBaseline`).
-String _rowsToGfmTable(List<List<String>> rows) {
-  if (rows.isEmpty) return '';
-  final cols = rows.fold<int>(1, (m, r) => r.length > m ? r.length : m);
-  String cell(List<String> r, int c) =>
-      (c < r.length ? r[c] : '').replaceAll('|', r'\|');
-  String line(List<String> r) =>
-      '| ${List.generate(cols, (c) => cell(r, c)).join(' | ')} |';
-  return [
-    line(rows.first),
-    '| ${List.filled(cols, '---').join(' | ')} |',
-    for (final r in rows.skip(1)) line(r),
-  ].join('\n');
-}
-
-/// De cellen van een GFM-tabelblok (koprij + body, zónder scheidingsrij),
-/// ontdaan van pipe-ontsnapping. Zuivere kopie van
-/// `DocumentMarkdownView.tableCells`, zodat wat de weergave toont en wat de
-/// bridge deconstrueert gelijk zijn — herhaald in plaats van geïmporteerd omdat
-/// een service `lib/widgets/` niet mag kennen.
-List<List<String>> _tableCells(List<String> rawRows) => rawRows
-    .map((r) => _splitTableRow(r).map((c) => c.replaceAll(r'\|', '|')).toList())
-    .toList();
-
-/// Splits een tabelrij op onontsnapte `|`, ontdaan van de buitenste pipes, elke
-/// cel getrimd. Zuivere kopie van `DocumentMarkdownView._splitTableRow`.
-List<String> _splitTableRow(String row) {
-  var t = row.trim();
-  if (t.startsWith('|')) t = t.substring(1);
-  if (t.endsWith('|')) t = t.substring(0, t.length - 1);
-  final cells = <String>[];
-  final buf = StringBuffer();
-  for (var i = 0; i < t.length; i++) {
-    final c = t[i];
-    if (c == r'\' && i + 1 < t.length) {
-      buf.write(c);
-      buf.write(t[i + 1]);
-      i++;
-      continue;
-    }
-    if (c == '|') {
-      cells.add(buf.toString().trim());
-      buf.clear();
-    } else {
-      buf.write(c);
-    }
-  }
-  cells.add(buf.toString().trim());
-  return cells;
-}
-
 /// Een regel die na trimmen met 1–6 `#` en een spatie begint.
 bool _isHeading(String trimmed) => RegExp(r'^#{1,6} ').hasMatch(trimmed);
-
-/// Een regel die als GFM-pijptabelrij leest: bevat een `|` en begint ermee.
-bool _looksLikeTableRow(String trimmed) =>
-    trimmed.contains('|') && trimmed.startsWith('|');
-
-/// De scheidingsrij onder een tabelkop, bijv. `| --- | :--: |`.
-bool _isTableDelimiter(String trimmed) {
-  if (!trimmed.contains('-') || !trimmed.contains('|')) return false;
-  return RegExp(r'^\|?[\s:|-]+\|?$').hasMatch(trimmed);
-}
 
 /// Een geopende fence-regel, ontleed in het markeerteken, de lengte en de taal.
 class _FenceInfo {

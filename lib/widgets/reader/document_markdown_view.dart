@@ -4,7 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../models/settings.dart' show ThemeProfile;
+import '../../models/slide.dart' show TableAlign;
 import '../../services/marp_html_service.dart';
+import '../../services/markdown_table_codec.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/doc_link.dart' show headingSlug;
 import '../slides/inline_markdown.dart';
@@ -149,11 +151,11 @@ class DocumentMarkdownView extends StatelessWidget {
         i = end < lines.length ? end + 1 : end;
         continue;
       }
-      if (_looksLikeTableRow(lines[i]) &&
+      if (isMarkdownTableLine(lines[i]) &&
           i + 1 < lines.length &&
-          _isTableDelimiter(lines[i + 1])) {
+          isMarkdownTableDelimiterRow(lines[i + 1])) {
         var j = i + 2;
-        while (j < lines.length && _looksLikeTableRow(lines[j])) {
+        while (j < lines.length && isMarkdownTableLine(lines[j])) {
           j++;
         }
         if (seen == ordinal) return [i, j];
@@ -165,16 +167,6 @@ class DocumentMarkdownView extends StatelessWidget {
     }
     return null;
   }
-
-  /// De cellen van een GFM-tabelblok (koprij + body, zónder scheidingsrij),
-  /// ontdaan van pipe-ontsnapping — de vorm die de tabel-editor verwacht.
-  /// Spiegelt de splitsing die de weergave zelf gebruikt, zodat wat je ziet en
-  /// wat je bewerkt gelijk zijn.
-  static List<List<String>> tableCells(List<String> rawRows) => rawRows
-      .map(
-        (r) => _splitTableRow(r).map((c) => c.replaceAll(r'\|', '|')).toList(),
-      )
-      .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -236,7 +228,7 @@ class DocumentMarkdownView extends StatelessWidget {
     _Kind.code => _codeBlock(t, b.text),
     _Kind.mermaid => _mermaid(t, b.text),
     _Kind.chart => _chart(t, b.text, kindOrdinal),
-    _Kind.table => _table(t, b.rows, kindOrdinal),
+    _Kind.table => _table(t, b.rows, b.aligns, kindOrdinal),
     _Kind.rule => _bounded(_rule(t)),
   };
 
@@ -294,16 +286,22 @@ class DocumentMarkdownView extends StatelessWidget {
       }
 
       // GFM pipe table: a header row followed by a |---|:--:| delimiter row.
-      if (_looksLikeTableRow(line) &&
+      if (isMarkdownTableLine(line) &&
           i + 1 < lines.length &&
-          _isTableDelimiter(lines[i + 1])) {
+          isMarkdownTableDelimiterRow(lines[i + 1])) {
         final rows = <String>[line];
+        // De per-kolomuitlijning zit in de scheidingsrij (`:--`, `--:`, `:-:`);
+        // die halen we eruit voordat we hem overslaan.
+        final aligns = decodeMarkdownTableWithAlignment([
+          line,
+          lines[i + 1],
+        ]).alignments;
         var j = i + 2;
-        while (j < lines.length && _looksLikeTableRow(lines[j])) {
+        while (j < lines.length && isMarkdownTableLine(lines[j])) {
           rows.add(lines[j]);
           j++;
         }
-        blocks.add(_Block(_Kind.table, rows: rows));
+        blocks.add(_Block(_Kind.table, rows: rows, aligns: aligns));
         i = j;
         continue;
       }
@@ -553,8 +551,13 @@ class DocumentMarkdownView extends StatelessWidget {
     child: Divider(height: 1, thickness: 1, color: t.border),
   );
 
-  Widget _table(_Theme t, List<String> rows, int tableOrdinal) {
-    final cells = rows.map(_splitTableRow).toList();
+  Widget _table(
+    _Theme t,
+    List<String> rows,
+    List<TableAlign> aligns,
+    int tableOrdinal,
+  ) {
+    final cells = rows.map(splitMarkdownTableRow).toList();
     final columns = cells.isEmpty
         ? 0
         : cells.map((r) => r.length).reduce((a, b) => a > b ? a : b);
@@ -585,6 +588,7 @@ class DocumentMarkdownView extends StatelessWidget {
                         t,
                         c < cells[r].length ? cells[r][c] : '',
                         header: r == 0,
+                        textAlign: _columnTextAlign(aligns, c),
                       ),
                   ],
                 ),
@@ -602,20 +606,43 @@ class DocumentMarkdownView extends StatelessWidget {
     );
   }
 
-  Widget _tableCell(_Theme t, String text, {required bool header}) => Padding(
+  Widget _tableCell(
+    _Theme t,
+    String text, {
+    required bool header,
+    TextAlign textAlign = TextAlign.start,
+  }) => Padding(
     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     child: _inline(
       text,
       header ? t.body.copyWith(fontWeight: FontWeight.w700) : t.body,
       t,
+      textAlign: textAlign,
     ),
   );
 
-  Widget _inline(String text, TextStyle style, _Theme t) => InlineMarkdownText(
+  /// De horizontale uitlijning voor kolom [c] uit de GFM-scheidingsrij; buiten
+  /// bereik → links (de GFM-default).
+  static TextAlign _columnTextAlign(List<TableAlign> aligns, int c) {
+    if (c >= aligns.length) return TextAlign.start;
+    return switch (aligns[c]) {
+      TableAlign.left => TextAlign.start,
+      TableAlign.center => TextAlign.center,
+      TableAlign.right => TextAlign.end,
+    };
+  }
+
+  Widget _inline(
+    String text,
+    TextStyle style,
+    _Theme t, {
+    TextAlign textAlign = TextAlign.start,
+  }) => InlineMarkdownText(
     text,
     style: style,
     linkColor: t.link,
     onTapLink: onTapLink,
+    textAlign: textAlign,
   );
 
   // ── Line classification helpers ───────────────────────────────────────────
@@ -640,43 +667,6 @@ class DocumentMarkdownView extends StatelessWidget {
     return RegExp(
       r'^(-{3,}|\*{3,}|_{3,})$',
     ).hasMatch(trimmed.replaceAll(' ', ''));
-  }
-
-  static bool _looksLikeTableRow(String line) {
-    final t = line.trim();
-    return t.contains('|') && t.startsWith('|');
-  }
-
-  static bool _isTableDelimiter(String line) {
-    final t = line.trim();
-    if (!t.contains('-') || !t.contains('|')) return false;
-    return RegExp(r'^\|?[\s:|-]+\|?$').hasMatch(t) && t.contains('-');
-  }
-
-  static List<String> _splitTableRow(String row) {
-    var t = row.trim();
-    if (t.startsWith('|')) t = t.substring(1);
-    if (t.endsWith('|')) t = t.substring(0, t.length - 1);
-    // Split on unescaped pipes.
-    final cells = <String>[];
-    final buf = StringBuffer();
-    for (var i = 0; i < t.length; i++) {
-      final c = t[i];
-      if (c == r'\' && i + 1 < t.length) {
-        buf.write(c);
-        buf.write(t[i + 1]);
-        i++;
-        continue;
-      }
-      if (c == '|') {
-        cells.add(buf.toString().trim());
-        buf.clear();
-      } else {
-        buf.write(c);
-      }
-    }
-    cells.add(buf.toString().trim());
-    return cells;
   }
 
   static _ListLine? _listItem(String line) {
@@ -716,7 +706,7 @@ class DocumentMarkdownView extends StatelessWidget {
     if (_isHorizontalRule(trimmed)) return false;
     if (trimmed.startsWith('>')) return false;
     if (_listItem(line) != null) return false;
-    if (_looksLikeTableRow(line)) return false;
+    if (isMarkdownTableLine(line)) return false;
     return true;
   }
 }
@@ -744,6 +734,7 @@ class _Block {
     this.level = 0,
     this.items = const [],
     this.rows = const [],
+    this.aligns = const [],
   });
 
   final _Kind kind;
@@ -757,8 +748,14 @@ class _Block {
   /// List item lines (for [_Kind.list]).
   final List<_ListLine> items;
 
-  /// Raw table rows including the delimiter row (for [_Kind.table]).
+  /// Raw table rows — header + body, *without* the delimiter row (for
+  /// [_Kind.table]). The per-column alignment from that delimiter is parsed out
+  /// into [aligns].
   final List<String> rows;
+
+  /// Per-column alignment from the GFM delimiter row (for [_Kind.table]); shorter
+  /// than the column count means the rest default to left (the GFM default).
+  final List<TableAlign> aligns;
 
   /// The plain text a find-in-page query matches against. Rules never match;
   /// tables and lists flatten their cells/items into one searchable string.
@@ -897,7 +894,12 @@ class _EditableEmbedState extends State<_EditableEmbed> {
                 opacity: _hover ? 1 : 0.6,
                 duration: const Duration(milliseconds: 120),
                 child: Material(
-                  color: scheme.surface.withValues(alpha: 0.9),
+                  // Volledig dekkend + een lichte schaduw: waar het potlood over
+                  // een cel valt (een smalle tabelkop) leest het als een knop
+                  // erbovenop in plaats van door de tekst heen te schemeren.
+                  color: scheme.surface,
+                  elevation: 2,
+                  shadowColor: Colors.black45,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6),
                     side: BorderSide(color: scheme.outlineVariant),

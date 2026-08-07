@@ -23,6 +23,7 @@ import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/timeline.dart';
 import '../utils/log.dart';
+import '../utils/markdown_blocks.dart';
 import '../models/document_signature.dart';
 import 'bundled_licenses.dart';
 import 'cvss/cvss4.dart';
@@ -430,11 +431,6 @@ class MarpHtmlService {
 
   // ── Charts → inline SVG ────────────────────────────────────────────────────
 
-  static final RegExp _chartFence = RegExp(
-    r'```chart[ \t]*\n([\s\S]*?)\n```',
-    multiLine: true,
-  );
-
   /// Y-01 uit de export-markdown (resolve-at-draw voor histogramlimieten).
   static ImprovementY01Metric _y01FromExportMarkdown(String markdown) =>
       MarkdownService().parseDeck(markdown)?.improvementY01Metric ??
@@ -447,7 +443,7 @@ class MarpHtmlService {
     ThemeProfile? theme,
     ImprovementY01Metric y01 = ImprovementY01Metric.empty,
   }) {
-    return slideMarkdown.replaceAllMapped(_chartFence, (m) {
+    return slideMarkdown.replaceAllMapped(chartFencePattern, (m) {
       final spec = ChartSpec.parse(m.group(1)!);
       return '\n<div class="chart">${_chartSvg(spec, theme, y01: y01)}</div>\n';
     });

@@ -6,6 +6,7 @@ import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/editors/table_editor.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
+import 'package:ocideck/widgets/slides/inline_markdown.dart';
 
 /// Dubbelklik-bewerken van een tabel in de documentmodus (DOCUMENT_MODE.md
 /// §4.2): een gerenderde GFM-tabel dubbelklikken opent de volwaardige
@@ -13,36 +14,6 @@ import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 /// plek in de bron. De serialisatie- en telling-logica is puur en wordt hier
 /// los, uitputtend getoetst; de widgettest bewijst de bedrading.
 void main() {
-  group('rowsToGfmTable', () {
-    test('bouwt een koprij, scheidingsrij en body', () {
-      final gfm = rowsToGfmTable([
-        ['Naam', 'Waarde'],
-        ['Alfa', '1'],
-        ['Bravo', '2'],
-      ]);
-      expect(
-        gfm,
-        '| Naam | Waarde |\n| --- | --- |\n| Alfa | 1 |\n| Bravo | 2 |',
-      );
-    });
-
-    test('ontsnapt een pijp in een cel zodat de kolomgrens heel blijft', () {
-      final gfm = rowsToGfmTable([
-        ['a|b', 'c'],
-        ['d', 'e'],
-      ]);
-      expect(gfm.split('\n').first, r'| a\|b | c |');
-    });
-
-    test('vult ragged rijen aan tot de breedste', () {
-      final gfm = rowsToGfmTable([
-        ['H1', 'H2', 'H3'],
-        ['x'],
-      ]);
-      expect(gfm.split('\n').last, '| x |  |  |');
-    });
-  });
-
   group('nthTableBlockRange telt zoals de weergave', () {
     const doc =
         '# Kop\n\n'
@@ -91,17 +62,6 @@ void main() {
       const source = '| A | B |\n| --- | --- |\n| 1 | 2 |\n';
       expect(replaceNthTableBlock(source, 5, '| X |\n| --- |\n| 9 |'), source);
     });
-  });
-
-  test('tableCells ontleedt de rauwe regels en ontsnapte pijpen', () {
-    final cells = DocumentMarkdownView.tableCells([
-      r'| a\|b | c |',
-      '| d | e |',
-    ]);
-    expect(cells, [
-      ['a|b', 'c'],
-      ['d', 'e'],
-    ]);
   });
 
   testWidgets('dubbelklik op de tabel opent de editor en past het toe', (
@@ -184,5 +144,70 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 350));
     expect(find.byType(TableEditor), findsOneWidget);
+  });
+
+  testWidgets('de weergave past de per-kolomuitlijning toe', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: DocumentMarkdownView(
+              '| A | B |\n| :---: | ---: |\n| x | 9 |\n',
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    // De cellen in de tabel dragen de uitlijning uit de scheidingsrij: kolom 0
+    // gecentreerd, kolom 1 rechts — dus niet alles op de GFM-default (links).
+    final aligns = tester
+        .widgetList<InlineMarkdownText>(
+          find.descendant(
+            of: find.byType(Table),
+            matching: find.byType(InlineMarkdownText),
+          ),
+        )
+        .map((w) => w.textAlign)
+        .toSet();
+    expect(aligns.contains(TextAlign.center), isTrue);
+    expect(aligns.contains(TextAlign.end), isTrue);
+  });
+
+  testWidgets('Toepassen behoudt de uitlijning (geen stille strip, F3)', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1300, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse(
+          '# R\n\n| A | B | C |\n| :--- | :---: | ---: |\n| 1 | 2 | 3 |\n',
+        ),
+      );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [documentProvider.overrideWith((ref) => n)],
+        child: const MaterialApp(home: DocumentEditorScreen()),
+      ),
+    );
+    await tester.pump();
+
+    // Open de tabel-editor en pas toe zónder iets te wijzigen.
+    await tester.tap(find.byIcon(Icons.edit_outlined));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(find.byType(TableEditor), findsOneWidget);
+    await tester.tap(find.text('Toepassen'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 350));
+
+    // De scheidingsrij mag NIET gestript zijn naar | --- | --- | --- |.
+    expect(
+      n.currentState.document!.source,
+      contains('| :--- | :---: | ---: |'),
+    );
   });
 }

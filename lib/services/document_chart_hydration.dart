@@ -2,15 +2,8 @@ import 'dart:io';
 
 import '../models/chart.dart';
 import '../utils/log.dart';
+import '../utils/markdown_blocks.dart';
 import '../utils/project_path.dart';
-
-/// De fence van één ` ```chart `-blok, in dezelfde vorm als de rest van de
-/// documentmodus (editor-scherm, MarpHtmlService), zodat wat er geteld en wat er
-/// gehydrateerd wordt naar dezelfde blokken wijzen.
-final RegExp _documentChartFence = RegExp(
-  r'```chart[ \t]*\n([\s\S]*?)\n```',
-  multiLine: true,
-);
 
 /// Vouw de reeksdata van elk ` ```chart `-blok met een externe
 /// `source: data/<naam>.json`-verwijzing **inline** terug het blok in, zodat de
@@ -30,7 +23,7 @@ Future<String> hydrateDocumentChartData(
   String? projectPath,
 }) async {
   if (projectPath == null) return body;
-  final matches = _documentChartFence.allMatches(body).toList();
+  final matches = chartFencePattern.allMatches(body).toList();
   if (matches.isEmpty) return body;
 
   final buf = StringBuffer();

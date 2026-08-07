@@ -194,7 +194,7 @@ ladder"):
 
 | Construct | On disk | Degrades outside OciDeck to | Re-use |
 |---|---|---|---|
-| **Tables** | GFM pipe table | a real table | `TableEditor` via a text-in/text-out adapter |
+| **Tables** | GFM pipe table | a real table | `TableEditor` via a text-in/text-out adapter, on the app-wide `markdown_table_codec` — so a document table is a full office table (per-column alignment, and multi-line cells via `<br>`), shared with the report slides / import / clipboard rather than a document-only copy |
 | **Images** | `![alt](images/x.png)` | a real image | shared block helper; asset copied into `images/` |
 | **Mermaid** | ` ```mermaid ` fence | rendered on GitHub/GitLab, else a labelled code block | `DocMermaidView` + `MermaidRenderService` (already works in the reader) |
 | **Gantt** | Markdown table (+ portable marker) | a readable table | `ganttTableToMermaid` (pure) → mermaid render |
@@ -345,9 +345,10 @@ One **headless service** (`DocumentDeckBridge`) with two pure, isolation-tested
 functions — **not** spread across the notifiers, because conversion crosses the
 round-trip and projection contracts:
 
-- `documentToDeckMarkdown` — the flat document becomes a deck by *interpreting*
-  `---` (or `##`) as slide breaks; warn that a thematic `---` thereby becomes a
-  slide boundary (loss of intent).
+- `documentToDeck` — deconstruct the flat document into a typed `Deck`, building
+  slides **directly** (one per `##`/`---` section, GFM tables → `table` slides,
+  ` ```chart ` → `chart` slides) so the OciWacht projection misses nothing —
+  **never** via the deck parser's `_inferSlideType` (see §11.3).
 - `deckToDocumentMarkdown` — serialise the deck, **strip** the marp front
   matter / theme / `_class` / slide `---`, and thread the bodies into one
   flowing document (lossless on text, loses slide-structure semantics).
@@ -584,7 +585,7 @@ projection contracts):
   `_class`, and the slide `---` separators; thread the slide bodies with blank
   lines. Lossless on *text*; loses slide-structure semantics (stated, not
   hidden). Also the projected-body reader for export (§11.2 step 4).
-- `documentToDeck(String) → Deck` (and its `documentToDeckMarkdown` string form):
+- `documentToDeck(String) → Deck`:
   interpret `##`/`---` as slide breaks. **The existing deck parser must NOT be
   fed sections raw** — the privacy re-review (2026-08-06) *empirically* found that
   `_inferSlideType` sends a heading-led section (`## Kop` + prose, the dominant

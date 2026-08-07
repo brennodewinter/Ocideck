@@ -100,12 +100,6 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
     _lastCoalesceKey = null;
   }
 
-  /// Begin een leeg, ongetiteld document.
-  void newDocument() {
-    _clearHistory();
-    state = DocumentState(document: MarkdownDocument.parse(''), isDirty: true);
-  }
-
   /// Laad een reeds ingelezen document (door de tabbeheerder), vers en schoon.
   void loadDocument(MarkdownDocument document, {String? filePath}) {
     _clearHistory();
