@@ -1071,6 +1071,34 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Releaseketen verhard na een gestrande v0.3.6 (#1313, #1314, #1315).** Bij het
+  uitbrengen van v0.3.6 struikelde de onbewaakte release: `windows-ophalen` haalt
+  de Windows-build van de GitHub-spiegel, maar die build startte nooit. Oorzaak:
+  stond de tag al op de spiegel (een eerdere poging, of Forgejo's eigen
+  push-mirror), dan is `git push mirror <tag>` een no-op en vuurt GitHub géén
+  `push`-event — dus geen Actions-run. `windows-ophalen` wachtte 45 min leeg →
+  `publiceren` (needs alle platforms) werd overgeslagen → er kwam geen
+  `SHA256SUMS`, waarop `release_auto.sh` in fase 3 op een `curl 404` afbrak, nog
+  vóór `make deploy-web`. Gevolg: de webdemo bleef op de oude versie. Drie sporen
+  aangepakt. **(1)** `windows-ophalen` leunt niet langer op het push-event maar
+  **dispatcht de spiegel-build actief** via `workflow_dispatch` (nieuw secret
+  `GH_DISPATCH_TOKEN`, een fijnmazige GitHub-PAT met Actions RW + Contents R);
+  idempotent (asset of lopende build aanwezig → niet opnieuw dispatchen) en met
+  poll op de run-status, zodat een gefaalde build de job meteen mét run-URL stopt
+  in plaats van 45 minuten leeg te wachten. Zonder secret valt de job terug op het
+  oude passieve wachten. **(2)** `release_auto.sh` kreeg een **pre-flight** die ná
+  het wachtwoord maar vóór elke onherroepelijke stap de forge-token, de
+  mirror-remote, de deploy-host (ssh) en een minisign proef-tekening toetst — zo
+  faalt een fout wachtwoord of onbereikbare host in seconden i.p.v. pas ná de tag;
+  een **`--resume vX.Y.Z`** die een al-gepushte tag alleen fase 3 (deploy-web +
+  tekenen) laat afmaken, de ontworpen herstelroute wanneer de keten ná de tag
+  struikelt; en **deploy-web draait nu eerst** in fase 3, omdat de webdemo alleen
+  aan de web-bundel hangt en dus nooit meer op de oude versie mag blijven staan
+  door een teken- of platformfout. **(3)** De release-lijmjobs `windows-ophalen`,
+  `publiceren` en `homebrew-cask` draaien nu op het voorgebakken `ocideck-ci`-image
+  (dat node/git/curl/jq al draagt) in plaats van elke run `apt-get` op kaal
+  `ubuntu:24.04` — dat scheelt vier tot zes minuten opbouw per job. Geen
+  gedragswijziging voor de app; puur de uitbreng- en verspreidketen.
 - **Gebundelde Mermaid bijgewerkt naar 11.16.1 (#1310).** De meegeleverde
   `mermaid.min.js` ging van 11.16.0 naar 11.16.1; die sprong verhelpt vijf
   OSV-advisories in de afhankelijkheidsketen van de bundel. De SBOM is
