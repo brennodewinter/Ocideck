@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../theme/app_theme.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
@@ -49,6 +52,25 @@ class MarkdownNotesEditor extends StatefulWidget {
   final NotesModeToggleStyle modeToggleStyle;
   final NotesSurfaceStyle surfaceStyle;
 
+  /// Verhoog om de editor naar [revealMarkdownOffset] / [revealTitle] te laten
+  /// springen (Overzicht-rail). Quill zoekt op titel in platte tekst; markdown-
+  /// modus zet de controller-cursor op de bron-offset.
+  final int revealSignal;
+  final int? revealMarkdownOffset;
+  final String? revealTitle;
+
+  /// Caret in Quill-modus (platte-tekst-offset + documenttekst), zodat de
+  /// Overzicht-rail mee kan lopen. In markdown-modus luistert de ouder naar
+  /// [controller].
+  final void Function(String plain, int offset)? onVisualCaret;
+
+  /// Optioneel: vang plakken af (afbeelding/tabel) vóór de standaard tekstplak.
+  final Future<bool> Function()? tryConsumePaste;
+
+  /// Wanneer gezet: de Afbeelding-knop in de markdown-opmaakbalk opent de
+  /// kiezer i.p.v. een placeholder in de bron te zetten.
+  final VoidCallback? onInsertImage;
+
   const MarkdownNotesEditor({
     super.key,
     required this.controller,
@@ -69,6 +91,12 @@ class MarkdownNotesEditor extends StatefulWidget {
     this.showModeToggle = true,
     this.modeToggleStyle = NotesModeToggleStyle.standard,
     this.surfaceStyle = NotesSurfaceStyle.panel,
+    this.revealSignal = 0,
+    this.revealMarkdownOffset,
+    this.revealTitle,
+    this.onVisualCaret,
+    this.tryConsumePaste,
+    this.onInsertImage,
   });
 
   /// Convenience constructor using discrete color/style parameters.
@@ -201,6 +229,41 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
         target == NotesEditorMode.visual) {
       _reloadVisualFromMarkdown();
     }
+    if (widget.revealSignal != oldWidget.revealSignal) {
+      // Na het build-frame: caret-sync in de ouder mag geen setState/edit
+      // tijdens didUpdateWidget doen.
+      final signal = widget.revealSignal;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted || widget.revealSignal != signal) return;
+        _revealFromOutline(widget.revealMarkdownOffset, widget.revealTitle);
+      });
+    }
+  }
+
+  /// Spring naar een Overzicht-kop: in markdown-modus de bron-cursor, in Quill
+  /// de eerste treffer van de titel in de platte tekst.
+  void _revealFromOutline(int? markdownOffset, String? title) {
+    if (_effectiveMode == NotesEditorMode.markdown) {
+      final text = widget.controller.text;
+      final offset = (markdownOffset ?? 0).clamp(0, text.length);
+      widget.controller.selection = TextSelection.collapsed(offset: offset);
+      _focusNode.requestFocus();
+      return;
+    }
+    final quill = _quillController;
+    if (quill == null) return;
+    final plain = quill.document.toPlainText();
+    var index = 0;
+    if (title != null && title.isNotEmpty) {
+      final found = plain.indexOf(title);
+      if (found >= 0) index = found;
+    }
+    quill.updateSelection(
+      TextSelection.collapsed(offset: index.clamp(0, plain.length)),
+      ChangeSource.local,
+    );
+    _focusNode.requestFocus();
+    widget.onVisualCaret?.call(plain, index);
   }
 
   @override
@@ -279,6 +342,9 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (_syncingMarkdown) return;
     final quill = _quillController;
     if (quill == null) return;
+    final plain = quill.document.toPlainText();
+    final caret = quill.selection.isValid ? quill.selection.baseOffset : 0;
+    widget.onVisualCaret?.call(plain, caret.clamp(0, plain.length));
     final markdown = MarkdownQuillCodec.markdownFromDocument(quill.document);
     if (markdown == _markdownSnapshot) return;
     _visualEdited = true;
@@ -345,7 +411,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   }
 
   Widget _buildMarkdownField() {
-    return Container(
+    final field = Container(
       width: double.infinity,
       constraints: widget.expand
           ? null
@@ -377,6 +443,44 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
         ),
       ),
     );
+    if (widget.tryConsumePaste == null) return field;
+    return Shortcuts(
+      shortcuts: const {
+        SingleActivator(LogicalKeyboardKey.keyV, control: true):
+            _NotesSmartPasteIntent(),
+        SingleActivator(LogicalKeyboardKey.keyV, meta: true):
+            _NotesSmartPasteIntent(),
+      },
+      child: Actions(
+        actions: {
+          _NotesSmartPasteIntent: CallbackAction<_NotesSmartPasteIntent>(
+            onInvoke: (_) {
+              unawaited(_pasteMarkdownSmart());
+              return null;
+            },
+          ),
+        },
+        child: field,
+      ),
+    );
+  }
+
+  Future<void> _pasteMarkdownSmart() async {
+    if (widget.tryConsumePaste != null && await widget.tryConsumePaste!()) {
+      return;
+    }
+    final data = await Clipboard.getData(Clipboard.kTextPlain);
+    final text = data?.text;
+    if (text == null || text.isEmpty) return;
+    final sel = widget.controller.selection;
+    final start = sel.isValid ? sel.start : widget.controller.text.length;
+    final end = sel.isValid ? sel.end : start;
+    final value = widget.controller.text;
+    final next = value.replaceRange(start, end, text);
+    widget.controller.value = TextEditingValue(
+      text: next,
+      selection: TextSelection.collapsed(offset: start + text.length),
+    );
   }
 
   Widget _buildVisualField() {
@@ -394,6 +498,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       expand: widget.expand,
       contentPadding: widget.contentPadding,
       bordered: _fieldBordered,
+      tryConsumePaste: widget.tryConsumePaste,
     );
   }
 
@@ -429,6 +534,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
         theme: widget.editorTheme,
         compact: widget.compactToolbar,
         bordered: bordered,
+        onInsertImage: widget.onInsertImage,
       );
     } else if (quill != null) {
       bar = WysiwygNotesToolbar(
@@ -558,4 +664,8 @@ Widget markdownSourceModeHint(BuildContext context, MarkdownEditorTheme theme) {
       ),
     ],
   );
+}
+
+class _NotesSmartPasteIntent extends Intent {
+  const _NotesSmartPasteIntent();
 }

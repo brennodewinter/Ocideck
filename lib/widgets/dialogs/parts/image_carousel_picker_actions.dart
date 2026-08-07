@@ -10,7 +10,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
     // grote of gemounte bibliotheek zou anders de interface lang blokkeren. Bij
     // sluiten van de dialoog stopt de scan doordat `mounted` false wordt.
     final result = await ImageLibraryScanner.scan(
-      widget.searchPaths,
+      [...widget.searchPaths, ..._extraRoots],
       isCancelled: () => !mounted,
       extensions: _ImageCarouselPickerState._exts,
     );
@@ -24,6 +24,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
       _images = sorted;
       _descriptions = descriptions;
       _loading = false;
+      _rootsUnreachable = result.unreachableRoots.isNotEmpty && sorted.isEmpty;
       _selected =
           widget.initialPath ?? (sorted.isNotEmpty ? sorted.first : null);
       _applyFilter();
@@ -45,15 +46,17 @@ extension _CarouselActions on _ImageCarouselPickerState {
     // Een mislukte scan (bijv. onbereikbare netwerkmap) zou anders stil een
     // lege of onvolledige bibliotheek tonen.
     if (result.failed && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            context.l10n.d(
+      final unreachable = result.unreachableRoots;
+      final message = unreachable.isNotEmpty && result.paths.isEmpty
+          ? context.l10n.d(
+              'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.',
+            )
+          : context.l10n.d(
               'Kon een of meer mappen van de bibliotheek niet lezen; de lijst kan onvolledig zijn.',
-            ),
-          ),
-        ),
-      );
+            );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     }
   }
 
@@ -606,6 +609,33 @@ extension _CarouselActions on _ImageCarouselPickerState {
     final caption = await widget.captionService.getCaption(path) ?? '';
     if (!mounted) return;
     await _close(ImagePickResult(path, caption));
+  }
+
+  /// Voeg een map toe als zoekwortel: scant opnieuw en bewaart hem als
+  /// lokale verbinding in Instellingen, zodat de volgende keer dezelfde
+  /// beelden er staan (bijv. wanneer `/Volumes/…` offline is).
+  Future<void> _addLibraryFolder() async {
+    final l10n = context.l10n;
+    // Zelfde poort als elders: op web bestaat getDirectoryPath niet (#150).
+    if (!supportsLocalProjectFolders) return;
+    final picked = await FilePicker.getDirectoryPath(
+      dialogTitle: l10n.d('Kies een map met afbeeldingen'),
+    );
+    if (picked == null || !mounted) return;
+    if (_extraRoots.contains(picked) || widget.searchPaths.contains(picked)) {
+      return;
+    }
+    _rebuild(() {
+      _extraRoots.add(picked);
+      _loading = true;
+      _images = [];
+      _filtered = [];
+    });
+    await ref
+        .read(settingsProvider.notifier)
+        .addLibrary(p.basename(picked), picked);
+    if (!mounted) return;
+    await _loadImages();
   }
 
   Future<void> _select(String path) async {

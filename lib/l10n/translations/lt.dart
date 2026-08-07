@@ -1778,6 +1778,22 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Afbeelding geplakt': 'Vaizdas įklijuotas',
+  'Bibliotheekmap niet bereikbaar': 'Bibliotekos aplankas nepasiekiamas',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Bibliotekos aplankas nepasiekiamas. Pasirinkite aplanką žemiau arba keiskite Saugyklą skiltyje ⋮ → Nustatymai.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Aplankas iš Nustatymų neprisijungęs arba perkeltas. Čia pasirinkite aplanką su vaizdais.',
+  'Kies een map met afbeeldingen': 'Pasirinkite aplanką su vaizdais',
+  'Map toevoegen…': 'Pridėti aplanką…',
+  'Overzicht inklappen': 'Sutraukti apžvalgą',
+  'Overzicht uitklappen': 'Išplėsti apžvalgą',
+  'Pakket (.ocideck)': 'Paketas (.ocideck)',
+  'Tabel geplakt': 'Lentelė įklijuota',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Pridėkite aplanką arba naudokite "Naršyti" vienam failui.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Atskiriamas paketas su markdown ir vaizdais — pasirinktinai šifruojamas (AES-256), atidaromas OciDeck.',
   'dia\'s uit dit document.': 'skaidrių iš šio dokumento.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Šio stiliaus profilio logotipas nerastas ir nerodomas (kelias: {pad}). Pasirinkite logotipą pateikties nustatymuose.',

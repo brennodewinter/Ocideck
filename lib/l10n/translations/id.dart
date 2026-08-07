@@ -1771,6 +1771,22 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Afbeelding geplakt': 'Gambar ditempel',
+  'Bibliotheekmap niet bereikbaar': 'Folder perpustakaan tidak dapat dijangkau',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Folder perpustakaan tidak dapat dijangkau. Pilih folder di bawah atau sesuaikan Penyimpanan di ⋮ → Pengaturan.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Folder dari Pengaturan offline atau dipindahkan. Pilih folder berisi gambar di sini.',
+  'Kies een map met afbeeldingen': 'Pilih folder berisi gambar',
+  'Map toevoegen…': 'Tambah folder…',
+  'Overzicht inklappen': 'Ciutkan ikhtisar',
+  'Overzicht uitklappen': 'Bentangkan ikhtisar',
+  'Pakket (.ocideck)': 'Paket (.ocideck)',
+  'Tabel geplakt': 'Tabel ditempel',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Tambahkan folder atau gunakan "Telusuri" untuk satu berkas.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Paket mandiri berisi markdown dan gambar — opsional dienkripsi (AES-256), dibuka di OciDeck.',
   'dia\'s uit dit document.': 'slide dari dokumen ini.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo profil gaya ini tidak ditemukan dan tidak ditampilkan (jalur: {pad}). Pilih logo di pengaturan presentasi.',

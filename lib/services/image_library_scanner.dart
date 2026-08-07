@@ -12,6 +12,7 @@ class ImageLibraryScanResult {
     required this.paths,
     required this.truncated,
     this.failed = false,
+    this.unreachableRoots = const [],
   });
 
   /// Absolute paden naar de gevonden afbeeldingen, nieuwste eerst.
@@ -23,6 +24,10 @@ class ImageLibraryScanResult {
   /// True wanneer minstens één map niet gelezen kon worden (bijv. een
   /// onbereikbare netwerkmap); de lijst kan dan onvolledig zijn.
   final bool failed;
+
+  /// Zoekwortels die niet bestonden (niet-gemounte schijf, verplaatste map).
+  /// Leeg als elke gevraagde wortel bereikbaar was of de lijst leeg was.
+  final List<String> unreachableRoots;
 }
 
 /// Doorloopt zoekmappen recursief op afbeeldingsbestanden — begrensd op diepte
@@ -69,6 +74,7 @@ class ImageLibraryScanner {
     final found = <String>{};
     var cancelled = false;
     var failed = false;
+    final unreachableRoots = <String>[];
 
     bool wantsStop() => isCancelled?.call() ?? false;
 
@@ -102,12 +108,20 @@ class ImageLibraryScanner {
     for (final dirPath in searchPaths) {
       if (dirPath.isEmpty || cancelled) continue;
       final root = Directory(dirPath);
-      if (!root.existsSync()) continue;
+      if (!root.existsSync()) {
+        unreachableRoots.add(dirPath);
+        continue;
+      }
       await walk(root, 0);
     }
 
     if (cancelled) {
       return const ImageLibraryScanResult(paths: [], truncated: false);
+    }
+    // Alle gevraagde wortels weg (niet-gemounte schijf) is een mislukte scan —
+    // stil een lege bibliotheek tonen alsof er niets is, is erger.
+    if (unreachableRoots.isNotEmpty && found.isEmpty) {
+      failed = true;
     }
     final truncated = found.length >= maxFiles;
 
@@ -140,6 +154,7 @@ class ImageLibraryScanner {
       paths: [for (final e in withTimes) e.$1],
       truncated: truncated,
       failed: failed,
+      unreachableRoots: unreachableRoots,
     );
   }
 }

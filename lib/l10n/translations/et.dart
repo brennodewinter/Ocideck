@@ -1762,6 +1762,22 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afbeelding geplakt': 'Pilt kleebitud',
+  'Bibliotheekmap niet bereikbaar': 'Teegi kaust pole kättesaadav',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Teegi kaust pole kättesaadav. Vali allpool kaust või muuda Salvestust menüüs ⋮ → Seaded.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Seadetest valitud kaust on võrguühenduseta või teisaldatud. Vali siin kaust piltidega.',
+  'Kies een map met afbeeldingen': 'Vali kaust piltidega',
+  'Map toevoegen…': 'Lisa kaust…',
+  'Overzicht inklappen': 'Ahenda ülevaade',
+  'Overzicht uitklappen': 'Laienda ülevaade',
+  'Pakket (.ocideck)': 'Pakett (.ocideck)',
+  'Tabel geplakt': 'Tabel kleebitud',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Lisa kaust või kasuta ühe faili jaoks "Sirvi".',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Iseseisev pakett markdowni ja piltidega — valikuliselt krüpteeritud (AES-256), avaneb OciDeckis.',
   'dia\'s uit dit document.': 'slaidi sellest dokumendist.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Selle stiiliprofiili logo ei leitud ja seda ei näidata (tee: {pad}). Valige logo esitluse sätetes.',

@@ -1746,6 +1746,22 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Afbeelding geplakt': 'nagh bej ghop',
+  'Bibliotheekmap niet bereikbaar': 'De\' Qul mIw lughajbe\'',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'De\' Qul mIw lughajbe\'. yIHoH mIw \'e\' \'e\' pagh ⋮ → Segh chu\' yIchoH.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Seghvo\' mIw offline \'ej pagh vIH. naDev nagh legh mIw yIHoH.',
+  'Kies een map met afbeeldingen': 'nagh legh mIw yIHoH',
+  'Map toevoegen…': 'Daq chel…',
+  'Overzicht inklappen': 'Hoch legh yISoQmoH',
+  'Overzicht uitklappen': 'Hoch legh yIpoSmoH',
+  'Pakket (.ocideck)': 'Hom (.ocideck)',
+  'Tabel geplakt': 'taH bej ghop',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Daq yIchel pagh wa\' De\' vIneH yISam.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Hom tam je markdown \'ej nagh — vaj \'e\' rIn (AES-256), OciDeckDaq yIghaj.',
   'dia\'s uit dit document.': 'vam nav QIchmey.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Deghvam Segh tu\'be\'lu\' \'ej \'angbe\'lu\' (HeH: {pad}). \'ang SeHlawDaq Degh yIwIv.',

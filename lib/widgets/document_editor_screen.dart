@@ -12,28 +12,42 @@ import '../models/markdown_kind.dart';
 import '../models/markdown_outline.dart';
 import '../models/privacy_disposition.dart';
 import '../models/slide.dart';
+import '../services/caption_service.dart';
+import '../services/description_service.dart';
 import '../services/document_deck_bridge.dart';
 import '../services/document_export_service.dart';
+import '../services/export_bundle.dart';
 import '../services/export_metadata.dart';
 import '../services/file_service.dart';
 import '../services/html_image_embedder.dart';
+import '../services/image_service.dart' show ImageImportFailure;
 import '../services/markdown_table_codec.dart';
 import '../services/marp_html_service.dart';
 import '../services/privacy/privacy_own_identity.dart';
+import '../platform/platform_features.dart';
 import '../state/deck_provider.dart'
     show fileServiceProvider, imageServiceProvider, markdownServiceProvider;
 import '../state/document_provider.dart';
 import '../state/settings_provider.dart' show settingsProvider, SettingsTraces;
 import '../state/tabs_provider.dart';
+import '../theme/app_theme.dart';
 import '../utils/doc_link.dart' show headingSlug;
+import '../utils/error_snackbar.dart';
+import '../utils/image_search_paths.dart';
+import '../utils/log.dart';
 import '../utils/markdown_blocks.dart';
+import '../utils/markdown_paste_cleanup.dart';
+import '../utils/table_clipboard.dart';
+import '../utils/user_facing_error.dart';
 import 'dialogs/convert_to_presentation_dialog.dart';
 import 'dialogs/document_export_dialog.dart';
-import 'editors/_editor_field.dart' show pickImageWithFeedback;
+import 'dialogs/image_carousel_picker.dart';
+import 'dialogs/package_encrypt_dialog.dart';
+import 'dialogs/settings_dialog.dart';
+import 'editors/_editor_field.dart' show reportImageImportFailure;
 import 'editors/chart_editor.dart';
 import 'editors/table_editor.dart';
-import 'markdown_editor/markdown_editor_theme.dart';
-import 'markdown_editor/markdown_editor_toolbar.dart';
+import 'markdown_editor/markdown_editor.dart';
 import 'reader/document_markdown_view.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
@@ -62,11 +76,22 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   final GlobalKey _anchorKey = GlobalKey();
   int _anchorBlockIndex = -1;
 
-  /// De actieve weergavemodus. [_DocViewMode.source] toont de split (rauwe bron +
-  /// live weergave) om tekst te bewerken; [_DocViewMode.visual] maakt de weergave
-  /// het hoofdoppervlak, waar je de ingebedde blokken (grafiek/tabel) met een
-  /// dubbelklik bewerkt. Standaard bron: dat is waar je tekst typt.
-  _DocViewMode _viewMode = _DocViewMode.source;
+  /// Actieve kop in de Overzicht-rail (−1 = geen), afgeleid van de caret.
+  int _activeOutlineIndex = -1;
+
+  /// Of de Overzicht-rail is ingeklapt tot een smalle strook.
+  bool _outlineCollapsed = false;
+
+  /// Signaal + doel voor springen in de visuele [MarkdownNotesEditor].
+  int _revealSignal = 0;
+  int? _revealMarkdownOffset;
+  String? _revealTitle;
+
+  /// De actieve weergavemodus. [_DocViewMode.visual] is de standaard: de
+  /// gedeelde Markdown-editor (WYSIWYG via Quill, of rauw bij constructies die
+  /// de brug niet aankan) als schrijfoppervlak. [_DocViewMode.source] toont de
+  /// platte bron naast een live weergave.
+  _DocViewMode _viewMode = _DocViewMode.visual;
 
   /// De focus van de rauwe editor. De opmaak-knoppenbalk geeft de focus hierheen
   /// terug na een klik, zodat je meteen verder typt.
@@ -104,11 +129,59 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// wanneer alleen de selectie/cursor verschoof (tekst gelijk) — anders zou een
   /// simpele cursorbeweging een lege bewerking worden.
   void _onControllerChanged() {
+    _syncOutlineToMarkdownCaret();
     if (_applyingExternal) return;
     final text = _controller.text;
     final current = ref.read(documentProvider).document?.source ?? '';
     if (text == current) return;
     ref.read(documentProvider.notifier).edit(text, coalesceKey: 'doc');
+  }
+
+  void _setActiveOutlineIndex(int active) {
+    if (active == _activeOutlineIndex) return;
+    // Nooit setState vanuit een controller/Quill-listener tijdens build.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || active == _activeOutlineIndex) return;
+      setState(() => _activeOutlineIndex = active);
+    });
+  }
+
+  /// Markeer in de Overzicht-rail de kop waaronder de markdown-caret staat.
+  void _syncOutlineToMarkdownCaret() {
+    final sel = _controller.selection;
+    if (!sel.isValid) return;
+    _setActiveOutlineFromMarkdownOffset(sel.baseOffset);
+  }
+
+  /// Quill-caret → actieve Overzicht-kop via titelvolgorde in de platte tekst.
+  void _syncOutlineToVisualCaret(String plain, int plainOffset) {
+    final outline = buildMarkdownOutline(_controller.text);
+    var active = -1;
+    var searchFrom = 0;
+    for (var i = 0; i < outline.length; i++) {
+      final at = plain.indexOf(outline[i].title, searchFrom);
+      if (at < 0) continue;
+      if (at <= plainOffset) {
+        active = i;
+        searchFrom = at + outline[i].title.length;
+      } else {
+        break;
+      }
+    }
+    _setActiveOutlineIndex(active);
+  }
+
+  void _setActiveOutlineFromMarkdownOffset(int offset) {
+    final outline = buildMarkdownOutline(_controller.text);
+    var active = -1;
+    for (var i = 0; i < outline.length; i++) {
+      if (outline[i].offset <= offset) {
+        active = i;
+      } else {
+        break;
+      }
+    }
+    _setActiveOutlineIndex(active);
   }
 
   /// Sla het document op. Cmd/Ctrl+S, net als een deck. Feedback is de dirty-stip
@@ -199,6 +272,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       title: title,
     );
 
+    if (format == DocumentExportFormat.ocideck) {
+      return _writePackageExport(bundle);
+    }
+
     // Kies een pad. De extensie én het profiel staan in de naam, zodat een
     // verwisseling (volledig ↔ geredigeerd) zichtbaar is.
     final ext = format == DocumentExportFormat.md ? 'md' : 'html';
@@ -241,6 +318,36 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
   }
 
+  /// Exporteer het geprojecteerde document als `.ocideck`-pakket (markdown +
+  /// assets), met dezelfde versleutelingsdialoog als bij een presentatie.
+  Future<String?> _writePackageExport(ExportBundle bundle) async {
+    if (!mounted) return null;
+    final choice = await PackageEncryptDialog.show(context);
+    if (choice == null || !mounted) return null;
+    final password = choice.encrypt ? choice.password : null;
+    final fileService = ref.read(fileServiceProvider);
+    final l10n = context.l10n;
+    final deck = bundle.audience.deck;
+    try {
+      if (isWebPlatform) {
+        return await fileService.downloadPackage(deck, password: password);
+      }
+      final picked = await fileService.pickPackageDestination(deck);
+      if (picked == null) return null;
+      await fileService.exportPackage(deck, picked, password: password);
+      return picked;
+    } catch (e) {
+      logError('DocumentEditor: pakketexport mislukt', e);
+      if (!mounted) return null;
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        l10n,
+        '${l10n.d('Export mislukt:')} ${userFacingError(l10n, e)}',
+      );
+      return null;
+    }
+  }
+
   /// Converteer dit document naar een NIEUWE presentatie in een nieuw tabblad
   /// (DOCUMENT_MODE.md §11.3). Een expliciete kopie: dit document blijft
   /// ongemoeid. De dialoog toont het voorgestelde aantal dia's en de drop-lijst
@@ -263,12 +370,28 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     ref.read(tabsProvider.notifier).newDeckInNewTab(title, slides: deck.slides);
   }
 
-  /// Scroll de weergave naar de aangeklikte kop uit de Overzicht-rail. Hergebruikt
-  /// het anker-mechanisme van [DocumentMarkdownView]: markeer het blok via
-  /// setState zodat [_anchorKey] deze frame aanhecht, en scroll het daarna in
-  /// beeld — dezelfde route als de docs-lezer, die betrouwbaar landt.
+  /// Scroll / spring naar de aangeklikte kop uit de Overzicht-rail.
+  ///
+  /// Visueel: cursor in de notes-editor (markdown-offset of Quill-titel).
+  /// Bron: cursor in de bron-editor + anker in de live weergave (docs-lezer-
+  /// mechanisme).
   void _scrollToHeading(MarkdownOutlineEntry entry) {
     final source = ref.read(documentProvider).document?.source ?? '';
+    final outline = buildMarkdownOutline(source);
+    final outlineIndex = outline.indexWhere(
+      (e) => e.offset == entry.offset && e.title == entry.title,
+    );
+    final offset = entry.offset.clamp(0, _controller.text.length);
+    _controller.selection = TextSelection.collapsed(offset: offset);
+    _editorFocus.requestFocus();
+    setState(() {
+      _activeOutlineIndex = outlineIndex;
+      _revealMarkdownOffset = entry.offset;
+      _revealTitle = entry.title;
+      _revealSignal++;
+    });
+
+    if (_viewMode != _DocViewMode.source) return;
     final index = DocumentMarkdownView.headingBlockIndex(
       source,
       headingSlug(entry.title),
@@ -308,44 +431,79 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final source = ref.watch(
       documentProvider.select((s) => s.document?.source ?? ''),
     );
+    final canUndo = ref.watch(documentProvider.select((s) => s.canUndo));
+    final canRedo = ref.watch(documentProvider.select((s) => s.canRedo));
     final theme = Theme.of(context);
-    return CallbackShortcuts(
-      bindings: {
-        // Cmd op macOS, Ctrl elders — net als het opslaan van een deck.
-        const SingleActivator(LogicalKeyboardKey.keyS, meta: true): () =>
-            unawaited(_save()),
-        const SingleActivator(LogicalKeyboardKey.keyS, control: true): () =>
-            unawaited(_save()),
+    return Actions(
+      actions: {
+        UndoTextIntent: CallbackAction<UndoTextIntent>(
+          onInvoke: (_) {
+            _undo();
+            return null;
+          },
+        ),
+        RedoTextIntent: CallbackAction<RedoTextIntent>(
+          onInvoke: (_) {
+            _redo();
+            return null;
+          },
+        ),
       },
-      child: Scaffold(
-        body: Column(
-          children: [
-            _DocEditorToolbar(
-              mode: _viewMode,
-              onModeChanged: (m) => setState(() => _viewMode = m),
-              onInsertChart: _insertChart,
-              onInsertTable: _insertTable,
-              onInsertMermaid: _insertMermaid,
-              onInsertImage: _insertImage,
-              onExport: _export,
-              onConvertToPresentation: _convertToPresentation,
-              controller: _controller,
-              editorFocus: _editorFocus,
-            ),
-            Divider(
-              height: 1,
-              thickness: 1,
-              color: theme.colorScheme.outlineVariant,
-            ),
-            Expanded(
-              child: LayoutBuilder(
-                builder: (context, constraints) =>
-                    _viewMode == _DocViewMode.visual
-                    ? _visualLayout(theme, source, constraints)
-                    : _sourceLayout(theme, source, constraints),
+      child: CallbackShortcuts(
+        bindings: {
+          // Cmd op macOS, Ctrl elders — net als het opslaan van een deck.
+          const SingleActivator(LogicalKeyboardKey.keyS, meta: true): () =>
+              unawaited(_save()),
+          const SingleActivator(LogicalKeyboardKey.keyS, control: true): () =>
+              unawaited(_save()),
+          const SingleActivator(LogicalKeyboardKey.keyZ, meta: true): _undo,
+          const SingleActivator(LogicalKeyboardKey.keyZ, control: true): _undo,
+          const SingleActivator(
+            LogicalKeyboardKey.keyZ,
+            meta: true,
+            shift: true,
+          ): _redo,
+          const SingleActivator(
+            LogicalKeyboardKey.keyZ,
+            control: true,
+            shift: true,
+          ): _redo,
+          const SingleActivator(LogicalKeyboardKey.keyY, control: true): _redo,
+        },
+        child: Scaffold(
+          body: Column(
+            children: [
+              _DocEditorToolbar(
+                mode: _viewMode,
+                onModeChanged: (m) => setState(() => _viewMode = m),
+                onInsertChart: _insertChart,
+                onInsertTable: _insertTable,
+                onInsertMermaid: _insertMermaid,
+                onInsertImage: _insertImage,
+                onPaste: () => unawaited(_smartPaste()),
+                onUndo: canUndo ? _undo : null,
+                onRedo: canRedo ? _redo : null,
+                onExport: _export,
+                onOpenSettings: () => SettingsDialog.show(context),
+                onConvertToPresentation: _convertToPresentation,
+                controller: _controller,
+                editorFocus: _editorFocus,
               ),
-            ),
-          ],
+              Divider(
+                height: 1,
+                thickness: 1,
+                color: theme.colorScheme.outlineVariant,
+              ),
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (context, constraints) =>
+                      _viewMode == _DocViewMode.visual
+                      ? _visualLayout(theme, source, constraints)
+                      : _sourceLayout(theme, source, constraints),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -383,42 +541,82 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
   }
 
-  /// Visuele modus: de weergave is het hoofdoppervlak (gecentreerd als een
-  /// documentpagina), waar je de ingebedde blokken met een dubbelklik bewerkt.
-  /// Geen rauwe editor; voor tekst wissel je terug naar de bron. De Overzicht-rail
-  /// blijft naast de weergave zolang er breedte genoeg is.
+  /// Visuele modus: bewerkbaar schrijfoppervlak via de gedeelde
+  /// [MarkdownNotesEditor] (WYSIWYG wanneer de bron dat toelaat, anders rauw
+  /// markdown — beide bewerkbaar). Geen read-only preview meer als hoofdoppervlak.
   Widget _visualLayout(ThemeData theme, String source, BoxConstraints c) {
     final divider = theme.colorScheme.outlineVariant;
     final showRail = c.maxWidth >= 940;
+    final editor = MarkdownNotesEditor(
+      controller: _controller,
+      focusNode: _editorFocus,
+      editorTheme: MarkdownEditorTheme.documentSurface(
+        scheme: theme.colorScheme,
+      ),
+      hintText: '',
+      expand: true,
+      // Opmaakbalk zit al in [_DocEditorToolbar] voor de bron; hier toont de
+      // notes-editor zijn eigen balk (Quill of markdown) passend bij de modus.
+      showToolbar: true,
+      showModeToggle: false,
+      mode: NotesEditorMode.visual,
+      surfaceStyle: NotesSurfaceStyle.document,
+      bordered: false,
+      revealSignal: _revealSignal,
+      revealMarkdownOffset: _revealMarkdownOffset,
+      revealTitle: _revealTitle,
+      onVisualCaret: _syncOutlineToVisualCaret,
+      tryConsumePaste: _smartPaste,
+      // Afbeelding-knop → carrousel, geen `![beschrijving](pad-of-url)`-dump.
+      onInsertImage: () => unawaited(_insertImage()),
+    );
     return Row(
       children: [
         if (showRail) ...[
           _outlineRail(theme, source),
           VerticalDivider(width: 1, thickness: 1, color: divider),
         ],
-        Expanded(child: _preview(theme, source, centered: true)),
+        Expanded(child: editor),
       ],
     );
   }
 
-  Widget _editor(ThemeData theme) => TextField(
-    controller: _controller,
-    focusNode: _editorFocus,
-    maxLines: null,
-    expands: true,
-    textAlignVertical: TextAlignVertical.top,
-    cursorColor: theme.colorScheme.primary,
-    keyboardType: TextInputType.multiline,
-    style: TextStyle(
-      fontFamily: 'monospace',
-      fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
-      fontSize: 14,
-      height: 1.5,
-      color: theme.colorScheme.onSurface,
-    ),
-    decoration: const InputDecoration(
-      border: InputBorder.none,
-      contentPadding: EdgeInsets.all(16),
+  Widget _editor(ThemeData theme) => Shortcuts(
+    shortcuts: const {
+      SingleActivator(LogicalKeyboardKey.keyV, control: true):
+          _DocSmartPasteIntent(),
+      SingleActivator(LogicalKeyboardKey.keyV, meta: true):
+          _DocSmartPasteIntent(),
+    },
+    child: Actions(
+      actions: {
+        _DocSmartPasteIntent: CallbackAction<_DocSmartPasteIntent>(
+          onInvoke: (_) {
+            unawaited(_smartPaste());
+            return null;
+          },
+        ),
+      },
+      child: TextField(
+        controller: _controller,
+        focusNode: _editorFocus,
+        maxLines: null,
+        expands: true,
+        textAlignVertical: TextAlignVertical.top,
+        cursorColor: theme.colorScheme.primary,
+        keyboardType: TextInputType.multiline,
+        style: TextStyle(
+          fontFamily: 'monospace',
+          fontFamilyFallback: const ['Menlo', 'Consolas', 'Courier New'],
+          fontSize: 14,
+          height: 1.5,
+          color: theme.colorScheme.onSurface,
+        ),
+        decoration: const InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(16),
+        ),
+      ),
     ),
   );
 
@@ -566,6 +764,68 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
   }
 
+  /// Slim plakken: herkent afbeelding → `![](…)`, spreadsheet/tabel → GFM-
+  /// tabel, anders opgeschoonde tekst. Geeft `true` als de plak is afgehandeld
+  /// (dan mag de editor niet nóg eens plakken).
+  Future<bool> _smartPaste() async {
+    final state = ref.read(documentProvider);
+    final projectPath = state.filePath == null
+        ? null
+        : p.dirname(state.filePath!);
+    final imageService = ref.read(imageServiceProvider);
+    final outcome = await imageService.pasteImageDetailed(
+      projectPath: projectPath,
+    );
+    if (outcome.path != null) {
+      _insertBlock('![](${outcome.path})');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.l10n.d('Afbeelding geplakt'))),
+        );
+      }
+      return true;
+    }
+    // Geen afbeelding: stil als "geen klembordbeeld", anders de echte fout.
+    if (outcome.failure != null &&
+        outcome.failure != ImageImportFailure.noClipboardImage &&
+        mounted) {
+      reportImageImportFailure(context, outcome.failure);
+      return true;
+    }
+
+    final data = await Clipboard.getData(Clipboard.kTextPlain);
+    final raw = data?.text;
+    if (raw == null || raw.isEmpty) return false;
+
+    final table = parseClipboardTable(raw);
+    if (table != null && table.isNotEmpty) {
+      _insertBlock(encodeMarkdownTable(table));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.l10n.d('Tabel geplakt'))),
+        );
+      }
+      return true;
+    }
+
+    final text = sanitizeMarkdownPaste(raw);
+    final sel = _controller.selection;
+    final start = sel.isValid ? sel.start : _controller.text.length;
+    final end = sel.isValid ? sel.end : start;
+    final next = _controller.text.replaceRange(start, end, text);
+    _applyingExternal = true;
+    _controller.value = TextEditingValue(
+      text: next,
+      selection: TextSelection.collapsed(offset: start + text.length),
+    );
+    _applyingExternal = false;
+    ref.read(documentProvider.notifier).edit(next, coalesceKey: 'doc');
+    return true;
+  }
+
+  void _undo() => ref.read(documentProvider.notifier).undo();
+  void _redo() => ref.read(documentProvider.notifier).redo();
+
   /// Voeg een verse grafiek in: dezelfde [ChartEditor] als een dia (met een
   /// wegwerp-[Slide]), en bij 'Toepassen' een ```chart-blok op de cursorpositie.
   /// Identiek aan het dia-mechanisme — geen tweede grafiekweg (DOCUMENT_MODE.md
@@ -608,63 +868,152 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   void _insertMermaid() =>
       _insertBlock('```mermaid\nflowchart TD\n  A --> B\n```');
 
-  /// Voeg een afbeelding in: kies een bestand via de bestaande import-keten
-  /// (grootte-cap, magic-bytes, kopie naar `images/` of `mem:` zolang het
-  /// document nog niet is opgeslagen) en zet een `![](…)`-verwijzing op de
-  /// cursorpositie. Hergebruikt exact de dia-import — geen tweede assetweg.
+  /// Voeg een afbeelding in via de carrousel (bibliotheken + open presentaties
+  /// + Bladeren…). De gekozen file gaat door [ImageService.importIntoDeck]
+  /// (grootte-cap, magic-bytes, kopie naar `images/` of staging) en landt als
+  /// `![…](…)` op de cursorpositie — geen aparte assetweg naast de dia-import.
   Future<void> _insertImage() async {
     final state = ref.read(documentProvider);
+    final settings = ref.read(settingsProvider);
     final projectPath = state.filePath == null
         ? null
         : p.dirname(state.filePath!);
-    final reference = await pickImageWithFeedback(
-      context,
-      ref.read(imageServiceProvider),
-      projectPath: projectPath,
+    final tabs = ref.read(tabsProvider).tabs;
+    // Zelfde afbeeldingspool als presentatiemodus: open decks + bibliotheek.
+    // Recente presentaties leveren hun images/logos (niet de hele map).
+    final searchPaths = documentImageSearchPaths(
+      projectPath,
+      settings.libraryPaths,
+      openDeckProjectPaths: [
+        for (final tab in tabs)
+          ?tab.deckNotifierOrNull?.currentState.deck?.projectPath,
+      ],
+      recentPresentationDirectories: [
+        for (final recent in settings.recentFiles)
+          if (recent.kind.isPresentation) p.dirname(recent.path),
+      ],
     );
-    if (reference == null || !mounted) return;
-    _insertBlock('![]($reference)');
+    final picked = await ImageCarouselPicker.show(
+      context,
+      searchPaths: searchPaths,
+      captionService: ref.read(captionServiceProvider),
+      descriptionService: ref.read(descriptionServiceProvider),
+      // Alleen deck-tabs: documenttabs hebben geen deckNotifier (gooit anders).
+      openDeckFiles: [
+        for (final tab in tabs) ?tab.deckNotifierOrNull?.currentState.filePath,
+      ],
+    );
+    if (picked == null || !mounted) return;
+    final reference = await ref
+        .read(imageServiceProvider)
+        .importIntoDeck(picked.path, projectPath: projectPath);
+    if (!mounted) return;
+    final alt = _markdownImageAlt(picked.caption);
+    _insertBlock('![$alt]($reference)');
+  }
+
+  /// Alt-tekst voor `![…](…)`: carrousel-bijschrift, met `[`/`]` gestript zodat
+  /// de markdown-syntaxis heel blijft.
+  String _markdownImageAlt(String caption) {
+    if (caption.isEmpty) return '';
+    return caption.replaceAll('[', '').replaceAll(']', '');
   }
 
   /// De Overzicht-rail: de koppen van het document, live afgeleid, klikbaar om
-  /// naar die kop in de weergave te scrollen. Leeg document → lege rail.
+  /// naar die kop te springen. Europa-header (EU-blauw + geel). Inklapbaar tot
+  /// een smalle strook. Leeg document → lege rail.
   Widget _outlineRail(ThemeData theme, String source) {
     final outline = buildMarkdownOutline(source);
-    return SizedBox(
-      width: 216,
-      child: Container(
-        color: theme.colorScheme.surface,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 12, 8),
-              child: Text(
-                context.l10n.d('Overzicht').toUpperCase(),
-                style: TextStyle(
-                  fontSize: 11,
-                  letterSpacing: 1.2,
-                  fontWeight: FontWeight.w700,
-                  color: theme.colorScheme.onSurfaceVariant,
+    final l10n = context.l10n;
+    if (_outlineCollapsed) {
+      return SizedBox(
+        width: 40,
+        child: Material(
+          color: AppTheme.blueVivid,
+          child: InkWell(
+            onTap: () => setState(() => _outlineCollapsed = false),
+            child: Tooltip(
+              message: l10n.d('Overzicht uitklappen'),
+              child: Center(
+                child: Icon(
+                  Icons.chevron_right,
+                  color: AppTheme.amberVivid,
+                  size: 22,
                 ),
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.only(bottom: 12),
-                itemCount: outline.length,
-                itemBuilder: (context, i) => _outlineItem(theme, outline[i]),
+          ),
+        ),
+      );
+    }
+    return SizedBox(
+      key: const Key('document-outline-rail'),
+      width: 216,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Material(
+            color: AppTheme.blueVivid,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(12, 10, 4, 10),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      l10n.d('Overzicht').toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 11,
+                        letterSpacing: 1.2,
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.amberVivid,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    tooltip: l10n.d('Overzicht inklappen'),
+                    onPressed: () => setState(() => _outlineCollapsed = true),
+                    icon: const Icon(Icons.chevron_left, size: 18),
+                    color: AppTheme.amberVivid,
+                    padding: EdgeInsets.zero,
+                    visualDensity: VisualDensity.compact,
+                    constraints: const BoxConstraints(
+                      minWidth: 28,
+                      minHeight: 28,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+          Expanded(
+            child: Container(
+              color: theme.colorScheme.surface,
+              child: ListView.builder(
+                padding: const EdgeInsets.only(top: 6, bottom: 12),
+                itemCount: outline.length,
+                itemBuilder: (context, i) => _outlineItem(
+                  theme,
+                  outline[i],
+                  active: i == _activeOutlineIndex,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _outlineItem(ThemeData theme, MarkdownOutlineEntry entry) => InkWell(
+  Widget _outlineItem(
+    ThemeData theme,
+    MarkdownOutlineEntry entry, {
+    required bool active,
+  }) => InkWell(
     onTap: () => _scrollToHeading(entry),
-    child: Padding(
+    child: Container(
+      color: active
+          ? AppTheme.blueVivid.withValues(alpha: 0.08)
+          : Colors.transparent,
       padding: EdgeInsets.only(
         left: 16 + (entry.level - 1).clamp(0, 5) * 12.0,
         right: 10,
@@ -677,8 +1026,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontSize: entry.level <= 1 ? 13 : 12.5,
-          fontWeight: entry.level <= 1 ? FontWeight.w600 : FontWeight.w400,
-          color: entry.level <= 1
+          fontWeight: active || entry.level <= 1
+              ? FontWeight.w600
+              : FontWeight.w400,
+          color: active
+              ? AppTheme.blueVivid
+              : entry.level <= 1
               ? theme.colorScheme.onSurface
               : theme.colorScheme.onSurfaceVariant,
         ),
@@ -703,7 +1056,11 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onInsertTable;
   final VoidCallback onInsertMermaid;
   final VoidCallback onInsertImage;
+  final VoidCallback onPaste;
+  final VoidCallback? onUndo;
+  final VoidCallback? onRedo;
   final VoidCallback onExport;
+  final VoidCallback onOpenSettings;
   final VoidCallback onConvertToPresentation;
   final TextEditingController controller;
   final FocusNode editorFocus;
@@ -715,7 +1072,11 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onInsertTable,
     required this.onInsertMermaid,
     required this.onInsertImage,
+    required this.onPaste,
+    required this.onUndo,
+    required this.onRedo,
     required this.onExport,
+    required this.onOpenSettings,
     required this.onConvertToPresentation,
     required this.controller,
     required this.editorFocus,
@@ -733,46 +1094,73 @@ class _DocEditorToolbar extends StatelessWidget {
         children: [
           Row(
             children: [
-              SegmentedButton<_DocViewMode>(
-                segments: [
-                  ButtonSegment(
-                    value: _DocViewMode.visual,
-                    label: Text(l10n.d('Visueel')),
-                    icon: const Icon(Icons.visibility_outlined, size: 15),
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      SegmentedButton<_DocViewMode>(
+                        segments: [
+                          ButtonSegment(
+                            value: _DocViewMode.visual,
+                            label: Text(l10n.d('Visueel')),
+                            icon: const Icon(
+                              Icons.visibility_outlined,
+                              size: 15,
+                            ),
+                          ),
+                          ButtonSegment(
+                            value: _DocViewMode.source,
+                            label: Text(l10n.d('Bron')),
+                            icon: const Icon(Icons.code, size: 15),
+                          ),
+                        ],
+                        selected: {mode},
+                        showSelectedIcon: false,
+                        style: const ButtonStyle(
+                          visualDensity: VisualDensity.compact,
+                        ),
+                        onSelectionChanged: (s) => onModeChanged(s.first),
+                      ),
+                      const SizedBox(width: 8),
+                      IconButton(
+                        tooltip: l10n.d('Ongedaan maken'),
+                        onPressed: onUndo,
+                        icon: const Icon(Icons.undo, size: 18),
+                        visualDensity: VisualDensity.compact,
+                      ),
+                      IconButton(
+                        tooltip: l10n.d('Opnieuw'),
+                        onPressed: onRedo,
+                        icon: const Icon(Icons.redo, size: 18),
+                        visualDensity: VisualDensity.compact,
+                      ),
+                      const SizedBox(width: 8),
+                      _insertMenu(l10n),
+                      const SizedBox(width: 4),
+                      TextButton.icon(
+                        onPressed: onExport,
+                        icon: const Icon(Icons.ios_share, size: 16),
+                        label: Text(l10n.d('Exporteren…')),
+                      ),
+                      _moreMenu(l10n),
+                    ],
                   ),
-                  ButtonSegment(
-                    value: _DocViewMode.source,
-                    label: Text(l10n.d('Bron')),
-                    icon: const Icon(Icons.code, size: 15),
-                  ),
-                ],
-                selected: {mode},
-                showSelectedIcon: false,
-                style: const ButtonStyle(visualDensity: VisualDensity.compact),
-                onSelectionChanged: (s) => onModeChanged(s.first),
+                ),
               ),
-              const Spacer(),
-              _insertMenu(l10n),
-              const SizedBox(width: 4),
-              TextButton.icon(
-                onPressed: onExport,
-                icon: const Icon(Icons.ios_share, size: 16),
-                label: Text(l10n.d('Exporteren…')),
-              ),
-              _moreMenu(l10n),
             ],
           ),
-          // De gedeelde opmaak-knoppenbalk (vet/cursief/kop/lijst/…), dezelfde als
-          // de deck-markdown-editor. Zit hier in de gedeelde kop zonder eigen
-          // kader (`bordered: false`, zoals de knoppenbalk zelf documenteert), en
-          // muteert de bron via de controller — de controllerluisteraar stroomt
-          // dat door naar de weergave en de opslag.
-          MarkdownEditorToolbar(
-            controller: controller,
-            focusNode: editorFocus,
-            theme: MarkdownEditorTheme.documentSurface(scheme: scheme),
-            bordered: false,
-          ),
+          // Opmaak-knoppenbalk alleen in bron-modus: in Visueel heeft
+          // MarkdownNotesEditor zijn eigen balk (Quill of markdown). Twee
+          // balkjes op één controller zouden uit de pas lopen.
+          if (mode == _DocViewMode.source)
+            MarkdownEditorToolbar(
+              controller: controller,
+              focusNode: editorFocus,
+              theme: MarkdownEditorTheme.documentSurface(scheme: scheme),
+              bordered: false,
+              onInsertImage: onInsertImage,
+            ),
         ],
       ),
     );
@@ -790,13 +1178,15 @@ class _DocEditorToolbar extends StatelessWidget {
         0 => onInsertChart(),
         1 => onInsertTable(),
         2 => onInsertMermaid(),
-        _ => onInsertImage(),
+        3 => onInsertImage(),
+        _ => onPaste(),
       },
       itemBuilder: (context) => [
         _insertItem(0, Icons.bar_chart, l10n.d('Grafiek')),
         _insertItem(1, Icons.table_chart_outlined, l10n.d('Tabel')),
         _insertItem(2, Icons.account_tree_outlined, l10n.d('Mermaid')),
         _insertItem(3, Icons.image_outlined, l10n.d('Afbeelding')),
+        _insertItem(4, Icons.content_paste, l10n.d('Plakken')),
       ],
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -812,25 +1202,44 @@ class _DocEditorToolbar extends StatelessWidget {
     );
   }
 
-  /// Het overloopmenu rechts: minder vaak gebruikte handelingen die geen eigen
-  /// knop verdienen. Nu de conversie naar een presentatie (een NIEUW tabblad,
-  /// nooit een in-place omschakeling — DOCUMENT_MODE.md §11.3).
+  /// Het overloopmenu rechts: Instellingen (anders alleen via macOS-menubalk
+  /// bereikbaar in documentmodus) en conversie naar presentatie.
   Widget _moreMenu(AppLocalizations l10n) {
     return PopupMenuButton<int>(
       tooltip: l10n.t('more'),
       position: PopupMenuPosition.under,
       icon: const Icon(Icons.more_vert, size: 18),
       onSelected: (value) {
-        if (value == 0) onConvertToPresentation();
+        switch (value) {
+          case 0:
+            onOpenSettings();
+          case 1:
+            onConvertToPresentation();
+        }
       },
       itemBuilder: (context) => [
         PopupMenuItem<int>(
           value: 0,
           child: Row(
             children: [
+              const Icon(Icons.settings_outlined, size: 17),
+              const SizedBox(width: 10),
+              Expanded(child: Text(l10n.t('settings'))),
+            ],
+          ),
+        ),
+        PopupMenuItem<int>(
+          value: 1,
+          child: Row(
+            children: [
               const Icon(Icons.slideshow_outlined, size: 17),
               const SizedBox(width: 10),
-              Text(l10n.d('Converteer naar presentatie…')),
+              Expanded(
+                child: Text(
+                  l10n.d('Converteer naar presentatie…'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ],
           ),
         ),
@@ -893,6 +1302,10 @@ String _safeExportName(String title) {
       .trim()
       .replaceAll(RegExp(r'[\s]+'), '-');
   return cleaned.isEmpty ? 'document' : cleaned;
+}
+
+class _DocSmartPasteIntent extends Intent {
+  const _DocSmartPasteIntent();
 }
 
 /// Vervang de inhoud van het `chartOrdinal`-de ```chart-blok (vanaf 0) in

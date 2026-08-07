@@ -2748,6 +2748,22 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Afbeelding geplakt': 'Görsel yapıştırıldı',
+  'Bibliotheekmap niet bereikbaar': 'Kitaplık klasörüne ulaşılamıyor',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Kitaplık klasörüne ulaşılamıyor. Aşağıdan bir klasör seçin veya ⋮ → Ayarlar altında Depolama\'yı düzenleyin.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Ayarlar\'daki klasör çevrimdışı veya taşınmış. Burada görselleri olan bir klasör seçin.',
+  'Kies een map met afbeeldingen': 'Görselleri olan bir klasör seçin',
+  'Map toevoegen…': 'Klasör ekle…',
+  'Overzicht inklappen': 'Genel bakışı daralt',
+  'Overzicht uitklappen': 'Genel bakışı genişlet',
+  'Pakket (.ocideck)': 'Paket (.ocideck)',
+  'Tabel geplakt': 'Tablo yapıştırıldı',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Bir klasör ekleyin veya tek bir dosya için "Gözat"ı kullanın.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Markdown ve görseller içeren bağımsız paket — isteğe bağlı şifreli (AES-256), OciDeck\'te açılır.',
   'dia\'s uit dit document.': 'bu belgeden slayt.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Bu stil profilinin logosu bulunamadı ve gösterilmiyor (yol: {pad}). Sunum ayarlarında bir logo seçin.',

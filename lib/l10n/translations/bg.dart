@@ -1793,6 +1793,22 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Afbeelding geplakt': 'Изображението е поставено',
+  'Bibliotheekmap niet bereikbaar': 'Папката на библиотеката е недостъпна',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Папката на библиотеката е недостъпна. Изберете папка по-долу или променете Съхранение в ⋮ → Настройки.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Папката от Настройки е офлайн или преместена. Изберете тук папка с изображения.',
+  'Kies een map met afbeeldingen': 'Изберете папка с изображения',
+  'Map toevoegen…': 'Добавяне на папка…',
+  'Overzicht inklappen': 'Свиване на прегледа',
+  'Overzicht uitklappen': 'Разгъване на прегледа',
+  'Pakket (.ocideck)': 'Пакет (.ocideck)',
+  'Tabel geplakt': 'Таблицата е поставена',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Добавете папка или използвайте "Преглед" за един файл.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Самостоятелен пакет с markdown и изображения — по избор криптиран (AES-256), отваря се в OciDeck.',
   'dia\'s uit dit document.': 'слайда от този документ.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Логото на този профил за стил не е намерено и не се показва (път: {pad}). Изберете логото в настройките за презентация.',

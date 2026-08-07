@@ -2,9 +2,9 @@ import 'package:flutter/painting.dart';
 
 import 'markdown_paste_cleanup.dart';
 
-/// Lichtgewicht inline-markdown: **vet**, *cursief* / _cursief_, `code`,
-/// ~~doorhalen~~ en [tekst](url). Geen block-niveau (dat doet de slide-layout
-/// al); puur de opmaak binnen één tekstregel.
+/// Lichtgewicht inline-markdown: **vet** / __vet__, *cursief* / _cursief_,
+/// `code`, ~~doorhalen~~ en [tekst](url). Geen block-niveau (dat doet de
+/// slide-layout al); puur de opmaak binnen één tekstregel.
 ///
 /// Deze helft is opzettelijk widget-vrij: parsen en het omzetten naar
 /// [InlineSpan]s is tekstopmaak, geen widgetboom. Daardoor kunnen de headless
@@ -190,9 +190,21 @@ void _parseInto(String s, InlineRun ctx, List<InlineRun> out) {
       }
     }
 
-    // **vet**
+    // **vet** (asterisks) — vóór enkele *cursief*
     if (c == '*' && i + 1 < s.length && s[i + 1] == '*') {
       final end = _findDelimiter(s, i + 2, '**');
+      if (end != -1) {
+        flush();
+        _parseInto(s.substring(i + 2, end), ctx._with(bold: true), out);
+        i = end + 2;
+        continue;
+      }
+    }
+
+    // __vet__ (underscores) — CommonMark/GFM; stond eerder alleen *cursief*
+    // voor `_`, waardoor `__dit__` geen vet werd (test.md / markdown-here).
+    if (c == '_' && i + 1 < s.length && s[i + 1] == '_') {
+      final end = _findDelimiter(s, i + 2, '__');
       if (end != -1) {
         flush();
         _parseInto(s.substring(i + 2, end), ctx._with(bold: true), out);

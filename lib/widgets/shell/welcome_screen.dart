@@ -582,7 +582,7 @@ class _WelcomeScreen extends ConsumerWidget {
       onReplaceUsages: (from, to) => _replaceImageUsages(ref, from, to),
       openDeckFiles: [
         for (final tab in ref.read(tabsProvider).tabs)
-          ?tab.deckNotifier.currentState.filePath,
+          ?tab.deckNotifierOrNull?.currentState.filePath,
       ],
     );
   }

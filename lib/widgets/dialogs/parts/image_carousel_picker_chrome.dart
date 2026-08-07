@@ -336,6 +336,8 @@ extension _CarouselChrome on _ImageCarouselPickerState {
             Text(
               filtering
                   ? '${l10n.d('Geen resultaten voor')} "${_query.trim()}"'
+                  : _rootsUnreachable
+                  ? l10n.d('Bibliotheekmap niet bereikbaar')
                   : l10n.d('Geen afbeeldingen gevonden'),
               style: const TextStyle(
                 color: ImagePickerPalette.text,
@@ -347,18 +349,31 @@ extension _CarouselChrome on _ImageCarouselPickerState {
             Text(
               filtering
                   ? l10n.d('Pas je zoekterm aan of voeg een beschrijving toe.')
+                  : _rootsUnreachable
+                  ? l10n.d(
+                      'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.',
+                    )
                   : widget.manageOnly
                   ? l10n.d(
                       'Er staan nog geen afbeeldingen in je bibliotheekmappen.',
                     )
                   : l10n.d(
-                      'Gebruik "Bladeren" om afbeeldingen van elke locatie te kiezen.',
+                      'Voeg een map toe of gebruik "Bladeren" voor één bestand.',
                     ),
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 color: ImagePickerPalette.textMuted,
                 fontSize: 13,
               ),
             ),
+            if (!filtering) ...[
+              const SizedBox(height: 20),
+              FilledButton.icon(
+                onPressed: _addLibraryFolder,
+                icon: const Icon(Icons.create_new_folder_outlined, size: 18),
+                label: Text(l10n.d('Map toevoegen…')),
+              ),
+            ],
           ],
         ),
       ),

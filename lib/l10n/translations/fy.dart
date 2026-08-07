@@ -731,6 +731,22 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Afbeelding geplakt': 'Ofbylding plakt',
+  'Bibliotheekmap niet bereikbaar': 'Biblioteekmap net berikber',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'De biblioteekmap is net berikber. Kies hjirûnder in map of pas Opslach oan ûnder ⋮ → Ynstellingen.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'De map út Ynstellingen is offline of ferpleatst. Kies hjir in map mei ôfbyldingen.',
+  'Kies een map met afbeeldingen': 'Kies in map mei ôfbyldingen',
+  'Map toevoegen…': 'Map tafoegje…',
+  'Overzicht inklappen': 'Oersjoch ynklappe',
+  'Overzicht uitklappen': 'Oersjoch útklappe',
+  'Pakket (.ocideck)': 'Pakket (.ocideck)',
+  'Tabel geplakt': 'Tabel plakt',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Foegje in map ta of brûk "Blêdzje" foar ien bestân.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Selfstannich pakket mei markdown en ôfbyldingen — opsjoneel fersifere (AES-256), te iepenjen yn OciDeck.',
   'dia\'s uit dit document.': 'dia\'s út dit dokumint.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'It logo fan dizze stylprofyl is net fûn en wurdt net toand (paad: {pad}). Kies in logo yn de presintaasjeynstellings.',

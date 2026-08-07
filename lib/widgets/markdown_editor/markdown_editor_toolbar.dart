@@ -14,6 +14,10 @@ class MarkdownEditorToolbar extends StatelessWidget {
   /// where the toolbar sits in a shared header instead of its own boxed strip.
   final bool bordered;
 
+  /// Wanneer gezet: de Afbeelding-knop opent de kiezer i.p.v. een markdown-
+  /// placeholder (`![beschrijving](pad-of-url)`) in de bron te dumpen.
+  final VoidCallback? onInsertImage;
+
   const MarkdownEditorToolbar({
     super.key,
     required this.controller,
@@ -21,6 +25,7 @@ class MarkdownEditorToolbar extends StatelessWidget {
     required this.theme,
     this.compact = false,
     this.bordered = true,
+    this.onInsertImage,
   });
 
   @override
@@ -145,7 +150,9 @@ class MarkdownEditorToolbar extends StatelessWidget {
             button(
               tooltip: l10n.d('Afbeelding'),
               icon: Icons.image_outlined,
-              onPressed: () => MarkdownEditorActions.insertImage(controller),
+              onPressed:
+                  onInsertImage ??
+                  () => MarkdownEditorActions.insertImage(controller),
             ),
             button(
               tooltip: l10n.d('Tabel'),

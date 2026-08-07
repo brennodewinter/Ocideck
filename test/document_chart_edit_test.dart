@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
@@ -14,6 +17,22 @@ import 'package:ocideck/widgets/editors/chart_editor.dart';
 /// in de bron. De terugschrijf-logica (`replaceNthChartBlock`) is puur en wordt
 /// hier los, uitputtend getoetst; de widgettest bewijst de bedrading.
 void main() {
+  setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
+
+  Widget editorApp(DocumentNotifier n) => ProviderScope(
+    overrides: [documentProvider.overrideWith((ref) => n)],
+    child: MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        FlutterQuillLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: const DocumentEditorScreen(),
+    ),
+  );
+
   String chartBlock(String title) {
     final spec = ChartSpec(
       type: ChartType.bar,
@@ -72,12 +91,11 @@ void main() {
       ..loadDocument(
         MarkdownDocument.parse('# Rapport\n\n${chartBlock('Omzet')}\n'),
       );
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [documentProvider.overrideWith((ref) => n)],
-        child: const MaterialApp(home: DocumentEditorScreen()),
-      ),
-    );
+    await tester.pumpWidget(editorApp(n));
+    await tester.pump();
+    // Embed-kaarten (SVG + potlood) leven in de Bron-weergave; Visueel is het
+    // bewerkbare schrijfoppervlak.
+    await tester.tap(find.text('Bron'));
     await tester.pump();
 
     // De grafiek rendert als SVG in de weergave.
@@ -121,12 +139,9 @@ void main() {
       ..loadDocument(
         MarkdownDocument.parse('# Rapport\n\n${chartBlock('Omzet')}\n'),
       );
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [documentProvider.overrideWith((ref) => n)],
-        child: const MaterialApp(home: DocumentEditorScreen()),
-      ),
-    );
+    await tester.pumpWidget(editorApp(n));
+    await tester.pump();
+    await tester.tap(find.text('Bron'));
     await tester.pump();
 
     // Het potlood-knopje is zichtbaar op de embed (ontdekbaarheid: geen

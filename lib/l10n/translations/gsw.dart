@@ -1774,6 +1774,22 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Afbeelding geplakt': 'Bild iifüegt',
+  'Bibliotheekmap niet bereikbaar': 'Bibliotheksordner nöd erreichbar',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'De Bibliotheksordner isch nöd erreichbar. Wähl unten en Ordner oder pass Speicher unter ⋮ → Iistellige a.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'De Ordner us Iistellige isch offline oder verschobe. Wähl do en Ordner mit Bilder.',
+  'Kies een map met afbeeldingen': 'Ordner mit Bilder wähle',
+  'Map toevoegen…': 'Ordner zuefüege…',
+  'Overzicht inklappen': 'Übersicht iklappe',
+  'Overzicht uitklappen': 'Übersicht uusklappe',
+  'Pakket (.ocideck)': 'Paket (.ocideck)',
+  'Tabel geplakt': 'Tabelle iifüegt',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Ordner zuefüege oder "Durchsuueche" für ei einzelni Datei bruche.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Sälbschtändigs Paket mit Markdown und Bilder — optional verschlüsslet (AES-256), goht in OciDeck uf.',
   'dia\'s uit dit document.': 'Folie us dem Dokumänt.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'S Logo vo däm Stiilprofil isch nöd gfunde worde und wird nöd aazeigt (Pfad: {pad}). Wähl e Logo i de Präsentationsistellige.',

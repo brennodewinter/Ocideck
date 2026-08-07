@@ -10,7 +10,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show MissingPluginException, rootBundle;
 import '../models/deck.dart';
 import '../l10n/app_localizations.dart';
 import '../models/markdown_document.dart';
@@ -40,6 +40,7 @@ import 'caption_service.dart';
 import 'image_service.dart';
 import 'markdown_safety.dart';
 import 'markdown_service.dart';
+import 'open_file_channel.dart';
 import 'slide_image_refs.dart';
 import 'web_asset_store.dart';
 
@@ -531,11 +532,9 @@ class FileService {
   }
 
   Future<String?> pickMarkdownFile({String? initialDirectory}) async {
-    // FileType.any, not a custom-extension filter: on macOS an
-    // `allowedExtensions: ['md']` filter greys out .md files in the native
-    // panel, so a loose presentation anywhere on disk can't be picked. Any file
-    // is selectable here; [openDeck] then validates that it is a Marp/OciDeck
-    // presentation (front matter `marp: true`) and refuses anything else.
+    // Geen extensiefilter op macOS: zie [_pickPathGated] (eigen NSOpenPanel die
+    // onthouden UTI-filters wist). Elders FileType.any via file_picker. De
+    // inhoudspoort ([openFileByPath]) bepaalt daarna deck vs. document.
     //
     // Op web levert dit null: zie [_pickPathGated]. De aanroepers sturen daar
     // al naar [pickDeckFileBytes], dat met bytes werkt in plaats van een pad.

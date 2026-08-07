@@ -1775,6 +1775,22 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Afbeelding geplakt': 'Kép beillesztve',
+  'Bibliotheekmap niet bereikbaar': 'A könyvtármappa nem érhető el',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'A könyvtármappa nem érhető el. Válasszon alább egy mappát, vagy módosítsa a Tárolót itt: ⋮ → Beállítások.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'A Beállításokból származó mappa offline vagy áthelyezve. Válasszon itt egy képeket tartalmazó mappát.',
+  'Kies een map met afbeeldingen': 'Válasszon képeket tartalmazó mappát',
+  'Map toevoegen…': 'Mappa hozzáadása…',
+  'Overzicht inklappen': 'Áttekintés összecsukása',
+  'Overzicht uitklappen': 'Áttekintés kibontása',
+  'Pakket (.ocideck)': 'Csomag (.ocideck)',
+  'Tabel geplakt': 'Táblázat beillesztve',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Adjon hozzá mappát, vagy használja a "Tallózás" lehetőséget egy fájlhoz.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Önálló csomag markdownnal és képekkel — opcionálisan titkosítva (AES-256), OciDeckben nyílik meg.',
   'dia\'s uit dit document.': 'dia ebből a dokumentumból.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Ezen stílusrprofil logója nem található és nem jelenik meg (útvonal: {pad}). Válasszon egy logót a bemutató beállításaiban.',

@@ -1806,6 +1806,22 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Afbeelding geplakt': 'Íomhá ghreamaithe',
+  'Bibliotheekmap niet bereikbaar': 'Fillteán leabharlainne dodroch',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Níl fillteán na leabharlainne inrochtana. Roghnaigh fillteán thíos nó coigeartaigh Stóráil faoi ⋮ → Socruithe.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Tá an fillteán ó na Socruithe as líne nó bogtha. Roghnaigh fillteán le híomhánna anseo.',
+  'Kies een map met afbeeldingen': 'Roghnaigh fillteán le híomhánna',
+  'Map toevoegen…': 'Cuir fillteán leis…',
+  'Overzicht inklappen': 'Cúlaigh an forbhreathnú',
+  'Overzicht uitklappen': 'Leathnaigh an forbhreathnú',
+  'Pakket (.ocideck)': 'Pacáiste (.ocideck)',
+  'Tabel geplakt': 'Tábla ghreamaithe',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Cuir fillteán leis nó úsáid "Brabhsáil" le haghaidh comhaid amháin.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Pacáiste neamhspleách le markdown agus íomhánna — criptithe de rogha (AES-256), osclaítear in OciDeck.',
   'dia\'s uit dit document.': 'sleamhnán ón doiciméad seo.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Ní bhfuarthas lógó an phróifíle stíle seo agus ní thaispeántar é (cosán: {pad}). Roghnaigh lógó i socruithe na láithreoide.',

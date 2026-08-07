@@ -8,28 +8,91 @@ import FlutterMacOS
 /// paths are buffered until the Dart side asks for them via `getLaunchFiles`
 /// (cold start). Once Dart has signalled it is ready, later events are pushed
 /// immediately via `openFiles` (warm start).
+/// Zorgt dat élk gewoon bestand in de open-kiezer aantikbaar is — ook wanneer
+/// macOS een onthouden UTI-filter of de CFBundleDocumentTypes van de app
+/// anders zou grijzen. Mappen blijven navigeerbaar.
+private final class EnableAllFilesDelegate: NSObject, NSOpenSavePanelDelegate {
+  func panel(_ sender: Any, shouldEnable url: URL) -> Bool {
+    true
+  }
+}
+
 final class OpenFileHandler {
   static let shared = OpenFileHandler()
 
   private var pending: [String] = []
   private var flutterReady = false
   private var channel: FlutterMethodChannel?
+  /// Sterke referentie zolang het paneel open is — anders ruimt ARC de
+  /// delegate op en valt `shouldEnable` stil.
+  private var pickDelegate: EnableAllFilesDelegate?
 
   func register(messenger: FlutterBinaryMessenger) {
     let channel = FlutterMethodChannel(
       name: "ocideck/open_file", binaryMessenger: messenger)
     channel.setMethodCallHandler { [weak self] call, result in
       guard let self = self else { return }
-      if call.method == "getLaunchFiles" {
+      switch call.method {
+      case "getLaunchFiles":
         self.flutterReady = true
         let files = self.pending
         self.pending = []
         result(files)
-      } else {
+      case "pickFile":
+        // Eigen kiezer: file_picker's FileType.any zet géén filter, en een
+        // sheet boven een Flutter-dialoog erfde soms de document-types van de
+        // app waardoor .md grijs bleef. Dialoog eerst dicht + runModal +
+        // lege allowedContentTypes + shouldEnable=true.
+        let args = call.arguments as? [String: Any]
+        self.pickFile(
+          title: args?["dialogTitle"] as? String,
+          initialDirectory: args?["initialDirectory"] as? String,
+          result: result)
+      default:
         result(FlutterMethodNotImplemented)
       }
     }
     self.channel = channel
+  }
+
+  /// Systeemvenster "bestand openen" waarin elk bestand selecteerbaar is.
+  /// Validatie (Marp of plat document) gebeurt aan de Dart-kant na de keuze.
+  private func pickFile(
+    title: String?,
+    initialDirectory: String?,
+    result: @escaping FlutterResult
+  ) {
+    let dialog = NSOpenPanel()
+    dialog.title = title ?? ""
+    dialog.canChooseFiles = true
+    dialog.canChooseDirectories = false
+    dialog.allowsMultipleSelection = false
+    dialog.allowsOtherFileTypes = true
+    dialog.canSelectHiddenExtension = true
+    // Lege allowedContentTypes = alle typen (Apple). allowedFileTypes=nil
+    // voor pre-UTI-paden. De EnableAllFilesDelegate forceert shouldEnable=true
+    // voor alles wat toch nog grijs zou staan.
+    if #available(macOS 11.0, *) {
+      dialog.allowedContentTypes = []
+    }
+    dialog.allowedFileTypes = nil
+    let delegate = EnableAllFilesDelegate()
+    pickDelegate = delegate
+    dialog.delegate = delegate
+    if let initialDirectory, !initialDirectory.isEmpty {
+      dialog.directoryURL = URL(fileURLWithPath: initialDirectory)
+    }
+
+    // runModal, geen sheet: een sheet op het Flutter-venster erfde de
+    // CFBundleDocumentTypes-filter van de app. De Dart-kant sluit het
+    // Openen-dialoog vóór deze call, zodat er geen geneste modal is.
+    let response = dialog.runModal()
+    pickDelegate = nil
+    if response == .OK, let path = dialog.url?.path {
+      result(path)
+    } else {
+      result(nil)
+    }
   }
 
   func addFiles(_ paths: [String]) {

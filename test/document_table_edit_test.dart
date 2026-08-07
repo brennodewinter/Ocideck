@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
@@ -14,6 +17,22 @@ import 'package:ocideck/widgets/slides/inline_markdown.dart';
 /// plek in de bron. De serialisatie- en telling-logica is puur en wordt hier
 /// los, uitputtend getoetst; de widgettest bewijst de bedrading.
 void main() {
+  setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
+
+  Widget editorApp(DocumentNotifier n) => ProviderScope(
+    overrides: [documentProvider.overrideWith((ref) => n)],
+    child: MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        FlutterQuillLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: const DocumentEditorScreen(),
+    ),
+  );
+
   group('nthTableBlockRange telt zoals de weergave', () {
     const doc =
         '# Kop\n\n'
@@ -76,12 +95,9 @@ void main() {
           '# Rapport\n\n| Naam | Waarde |\n| --- | --- |\n| Alfa | 1 |\n',
         ),
       );
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [documentProvider.overrideWith((ref) => n)],
-        child: const MaterialApp(home: DocumentEditorScreen()),
-      ),
-    );
+    await tester.pumpWidget(editorApp(n));
+    await tester.pump();
+    await tester.tap(find.text('Bron'));
     await tester.pump();
 
     // De tabel rendert in de weergave.
@@ -128,12 +144,9 @@ void main() {
           '# Rapport\n\n| Naam | Waarde |\n| --- | --- |\n| Alfa | 1 |\n',
         ),
       );
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [documentProvider.overrideWith((ref) => n)],
-        child: const MaterialApp(home: DocumentEditorScreen()),
-      ),
-    );
+    await tester.pumpWidget(editorApp(n));
+    await tester.pump();
+    await tester.tap(find.text('Bron'));
     await tester.pump();
 
     // Het potlood-knopje is zichtbaar op de tabel en opent met één klik dezelfde
@@ -187,12 +200,9 @@ void main() {
           '# R\n\n| A | B | C |\n| :--- | :---: | ---: |\n| 1 | 2 | 3 |\n',
         ),
       );
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [documentProvider.overrideWith((ref) => n)],
-        child: const MaterialApp(home: DocumentEditorScreen()),
-      ),
-    );
+    await tester.pumpWidget(editorApp(n));
+    await tester.pump();
+    await tester.tap(find.text('Bron'));
     await tester.pump();
 
     // Open de tabel-editor en pas toe zónder iets te wijzigen.

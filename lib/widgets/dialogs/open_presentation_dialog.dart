@@ -14,10 +14,23 @@ import '../resizable_dialog_box.dart';
 
 /// What the open dialog returns: a presentation path and, optionally, the
 /// index of a slide to jump to (when the user picked a search hit).
+///
+/// [browseRequested] means the user chose "Bladeren…" — the dialog closes
+/// *before* the native file picker runs. Nesting an `NSOpenPanel` under a
+/// Flutter `AlertDialog` leaves `.md` greyed out on macOS even with a custom
+/// panel; the caller must open the picker after this result.
 class OpenSearchResult {
-  final String path;
+  final String? path;
   final int? slideIndex;
-  const OpenSearchResult(this.path, {this.slideIndex});
+  final bool browseRequested;
+
+  const OpenSearchResult(this.path, {this.slideIndex})
+    : browseRequested = false;
+
+  const OpenSearchResult.browse()
+    : path = null,
+      slideIndex = null,
+      browseRequested = true;
 }
 
 /// Dialog that scans the configured libraries for Marp presentations and lets
@@ -136,12 +149,9 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   }
 
   Future<void> _browse() async {
-    final path = await widget.fileService.pickMarkdownFile(
-      initialDirectory: _firstRootPath,
-    );
-    if (path != null && mounted) {
-      Navigator.pop(context, OpenSearchResult(path));
-    }
+    // Sluit eerst: zie [OpenSearchResult.browseRequested]. De startmap geeft
+    // de aanroeper mee via de geconfigureerde wortels (eerste bibliotheek).
+    Navigator.pop(context, const OpenSearchResult.browse());
   }
 
   /// Label van de mapkeuze-knop: bij meerdere wortels "Alle bibliotheken", bij
