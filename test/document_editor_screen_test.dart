@@ -2,40 +2,85 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
+import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
+import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:path/path.dart' as p;
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
+  setUp(() {
+    AppLocalizations.setActiveLanguageCode('nl');
+    SharedPreferences.setMockInitialValues({});
+  });
+
   Widget harness(DocumentNotifier notifier) => ProviderScope(
     overrides: [documentProvider.overrideWith((ref) => notifier)],
-    child: const MaterialApp(home: DocumentEditorScreen()),
+    child: MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        FlutterQuillLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: const DocumentEditorScreen(),
+    ),
   );
 
-  testWidgets('toont de bron rauw én in een live weergave', (tester) async {
+  /// Wissel naar bron-modus (standaard is Visueel).
+  Future<void> openSource(WidgetTester tester) async {
+    await tester.tap(find.text('Bron'));
+    await tester.pump();
+  }
+
+  testWidgets('standaard Visueel: bewerkbaar oppervlak + moduskeuze', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
     final n = DocumentNotifier()
       ..loadDocument(MarkdownDocument.parse('# Kop\n\nTekst.'));
     await tester.pumpWidget(harness(n));
     await tester.pump();
 
-    // De rauwe editor draagt de bron letterlijk.
+    // Visueel | Bron staat in de werkbalk.
+    expect(find.text('Visueel'), findsOneWidget);
+    expect(find.text('Bron'), findsOneWidget);
+    // Standaard visueel: de gedeelde notes-editor, geen read-only preview.
+    expect(find.byType(MarkdownNotesEditor), findsOneWidget);
+    expect(find.byType(DocumentMarkdownView), findsNothing);
+    // Eenvoudige markdown → Quill-WYSIWYG (bewerkbaar).
+    expect(find.byType(QuillEditor), findsOneWidget);
+  });
+
+  testWidgets('Bron toont rauwe bron én live weergave', (tester) async {
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('# Kop\n\nTekst.'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+    await openSource(tester);
+
     expect(find.widgetWithText(TextField, '# Kop\n\nTekst.'), findsOneWidget);
-    // De weergave rendert dezelfde bron (robuust op de prop, niet op glyphs).
     final view = tester.widget<DocumentMarkdownView>(
       find.byType(DocumentMarkdownView),
     );
     expect(view.markdown, '# Kop\n\nTekst.');
   });
 
-  testWidgets('typen stroomt live naar de notifier (geen Toepassen-muur)', (
-    tester,
-  ) async {
+  testWidgets('typen in bron stroomt live naar de notifier', (tester) async {
     final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(''));
     await tester.pumpWidget(harness(n));
+    await openSource(tester);
 
     await tester.enterText(find.byType(TextField), 'Hallo wereld');
     await tester.pump();
@@ -47,6 +92,7 @@ void main() {
   testWidgets('ongedaan maken werkt de editortekst bij', (tester) async {
     final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('a'));
     await tester.pumpWidget(harness(n));
+    await openSource(tester);
 
     await tester.enterText(find.byType(TextField), 'ab');
     await tester.pump();
@@ -56,10 +102,7 @@ void main() {
     expect(find.widgetWithText(TextField, 'a'), findsOneWidget);
   });
 
-  testWidgets('de Overzicht-rail toont de koppen en scrollt zonder crash', (
-    tester,
-  ) async {
-    // Breed genoeg dat de rail meedoet (>= 940).
+  testWidgets('de Overzicht-rail toont de koppen zonder crash', (tester) async {
     await tester.binding.setSurfaceSize(const Size(1200, 800));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
@@ -70,14 +113,10 @@ void main() {
     await tester.pumpWidget(harness(n));
     await tester.pump();
 
-    // De koppen staan in de rail (eigen documenttekst, geen l10n). De weergave
-    // rendert ze als RichText, de editor als één bronveld, dus find.text raakt
-    // hier de rail-items.
     expect(find.text('Een'), findsWidgets);
     expect(find.text('Twee'), findsWidgets);
     expect(find.text('Drie'), findsWidgets);
 
-    // Klikken op een kop scrollt de weergave; mag niet crashen.
     await tester.tap(find.text('Twee').first);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
@@ -95,15 +134,12 @@ void main() {
     final n = DocumentNotifier()
       ..loadDocument(MarkdownDocument.parse('oud\n'), filePath: path);
     await tester.pumpWidget(harness(n));
+    await openSource(tester);
 
     await tester.enterText(find.byType(TextField), 'nieuw\n');
     await tester.pump();
     expect(n.currentState.isDirty, isTrue);
 
-    // Roep de opslag-binding rechtstreeks aan; de toets→binding-afhandeling is
-    // Flutters eigen (goed geteste) CallbackShortcuts-machinerie, dus dit toetst
-    // wat van ons is: dat Cmd+S aan een werkende opslag hangt. In runAsync, want
-    // de atomische schrijfactie is echte schijf-IO die de test-klok niet aandrijft.
     const saveActivator = SingleActivator(LogicalKeyboardKey.keyS, meta: true);
     final shortcuts = tester
         .widgetList<CallbackShortcuts>(find.byType(CallbackShortcuts))
@@ -120,28 +156,6 @@ void main() {
     expect(n.currentState.isDirty, isFalse);
   });
 
-  testWidgets(
-    'Visueel maakt de weergave het hoofdoppervlak, zonder rauwe editor',
-    (tester) async {
-      await tester.binding.setSurfaceSize(const Size(1200, 800));
-      addTearDown(() => tester.binding.setSurfaceSize(null));
-
-      final n = DocumentNotifier()
-        ..loadDocument(MarkdownDocument.parse('# Kop\n\nTekst.'));
-      await tester.pumpWidget(harness(n));
-      await tester.pump();
-
-      // Standaard staat de editor in de bron-modus: de rauwe editor is er.
-      expect(find.byType(TextField), findsOneWidget);
-
-      // Wissel naar Visueel: de rauwe editor verdwijnt, de weergave blijft.
-      await tester.tap(find.text('Visueel'));
-      await tester.pump();
-      expect(find.byType(TextField), findsNothing);
-      expect(find.byType(DocumentMarkdownView), findsOneWidget);
-    },
-  );
-
   testWidgets('het invoeg-palet schrijft een mermaid-blok in de bron', (
     tester,
   ) async {
@@ -150,31 +164,139 @@ void main() {
     await tester.pumpWidget(harness(n));
     await tester.pump();
 
-    // Open het invoeg-palet en kies Mermaid (de enige invoeging zonder dialoog).
     await tester.tap(find.text('Invoegen'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Mermaid'));
-    // De invoeging is synchroon; niet pumpAndSettle, want de zojuist ingevoegde
-    // ```mermaid-weergave rendert asynchroon en zou de test laten aftikken.
     await tester.pump();
 
-    // Er staat nu een ```mermaid-fence in de bron; de bestaande tekst blijft.
     final source = n.currentState.document!.source;
     expect(source, contains('```mermaid'));
     expect(source, startsWith('Tekst.'));
   });
 
   testWidgets(
-    'de opmaak-knoppenbalk muteert de bron en stroomt naar de notifier',
+    'Invoegen → Afbeelding opent de carrousel, niet alleen Bladeren',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final n = DocumentNotifier()
+        ..loadDocument(MarkdownDocument.parse('Tekst.'));
+      await tester.pumpWidget(harness(n));
+      await tester.pump();
+
+      await tester.tap(find.text('Invoegen'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Afbeelding'));
+      await tester.pump();
+      // De scan/I/O van de carrousel; font-overflow in tests is cosmetisch.
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 200)),
+      );
+      await tester.pump();
+      while (tester.takeException() != null) {}
+
+      expect(find.byType(ImageCarouselPicker), findsOneWidget);
+      expect(find.text('Afbeelding kiezen'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'opmaakknop Afbeelding opent de carrousel, dumpt geen placeholder',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final n = DocumentNotifier()
+        ..loadDocument(MarkdownDocument.parse('video en meer tekst'));
+      await tester.pumpWidget(harness(n));
+      await openSource(tester);
+
+      await tester.tap(find.byTooltip('Afbeelding'));
+      await tester.pump();
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 200)),
+      );
+      await tester.pump();
+      while (tester.takeException() != null) {}
+
+      expect(find.byType(ImageCarouselPicker), findsOneWidget);
+      expect(n.currentState.document!.source, 'video en meer tekst');
+      expect(n.currentState.document!.source, isNot(contains('pad-of-url')));
+    },
+  );
+
+  testWidgets('Overzicht: klik springt in Visueel; inklappen werkt', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse('# Een\n\ntekst\n\n# Twee\n\nmeer\n'),
+      );
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    expect(find.text('OVERZICHT'), findsOneWidget);
+    final outlineTwee = find.descendant(
+      of: find.byKey(const Key('document-outline-rail')),
+      matching: find.text('Twee'),
+    );
+    await tester.tap(outlineTwee);
+    await tester.pump();
+    expect(tester.takeException(), isNull);
+
+    await tester.tap(find.byTooltip('Overzicht inklappen'));
+    await tester.pump();
+    expect(find.text('OVERZICHT'), findsNothing);
+    expect(find.byTooltip('Overzicht uitklappen'), findsOneWidget);
+  });
+
+  testWidgets('undo/redo-knoppen volgen canUndo/canRedo', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('a'));
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+    await tester.enterText(find.byType(TextField), 'ab');
+    await tester.pump();
+
+    expect(n.currentState.canUndo, isTrue);
+    await tester.tap(find.byTooltip('Ongedaan maken'));
+    await tester.pump();
+    expect(n.currentState.document!.source, 'a');
+    expect(n.currentState.canRedo, isTrue);
+
+    await tester.tap(find.byTooltip('Opnieuw'));
+    await tester.pump();
+    expect(n.currentState.document!.source, 'ab');
+  });
+
+  testWidgets('⋮-menu in documentmodus biedt Instellingen', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('x'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    await tester.tap(find.byTooltip('Meer'));
+    await tester.pumpAndSettle();
+    expect(find.text('Instellingen'), findsOneWidget);
+  });
+
+  testWidgets(
+    'de opmaak-knoppenbalk in bron muteert de bron en stroomt naar de notifier',
     (tester) async {
       final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(''));
       await tester.pumpWidget(harness(n));
+      await openSource(tester);
       await tester.enterText(find.byType(TextField), 'abc');
       await tester.pump();
 
-      // 'Vet' klikken muteert de controller rechtstreeks (geen onChanged); de
-      // controllerluisteraar moet dat tóch naar de notifier stromen. Met een
-      // samengevouwen cursor voegt het de placeholder tussen ** ** in.
       await tester.tap(find.byTooltip('Vet'));
       await tester.pump();
 

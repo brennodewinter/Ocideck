@@ -14,7 +14,7 @@ import 'privacy/privacy_own_identity.dart';
 /// De twee uitvoervormen van een plat-Markdown-**document** (DOCUMENT_MODE.md
 /// §11.2): het geprojecteerde `.md` zelf, of één doorlopend HTML-document. Beide
 /// dragen de geredigeerde body — nooit de rauwe bron.
-enum DocumentExportFormat { md, html }
+enum DocumentExportFormat { md, html, ocideck }
 
 /// Bouwt de exportbundel voor een plat-Markdown-**document**, langs exact
 /// dezelfde privacygrens als het deck-exportpad.
@@ -106,5 +106,11 @@ Future<String?> writeDocumentExport(
       );
       await writeStringAtomic(File(outputPath), out);
       return outputPath;
+    case DocumentExportFormat.ocideck:
+      // Pakketexport loopt via FileService.exportPackage (versleuteling,
+      // assets) — niet via deze tekstschrijver.
+      throw UnsupportedError(
+        'DocumentExportFormat.ocideck hoort bij exportPackage, niet writeDocumentExport',
+      );
   }
 }

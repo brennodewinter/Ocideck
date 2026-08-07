@@ -243,7 +243,7 @@ list below, which made "where does this belong" slower than it needed to be.)*
 - `mermaid_web_renderer.dart` / `mermaid_web_renderer_stub.dart` — The web/io halves selected by conditional import. The web half loads the bundled `mermaid.min.js` via a first-party `<script src>` and calls `mermaid.render` through `dart:js_interop`; the io stub is never called (the WebView renders there).
 - `miauw_compliance_analyzer.dart` — Scores each MIAUW EIS (Voldaan/Openstaand/Uitgesloten) from deck content + waivers.
 - `miauw_eis_catalog.dart` — The bundled offline MIAUW EIS catalog (`MiauwEisCatalog`): all 88 testable EIS, parsed from the authoritative MIAUW workbook.
-- `open_file_channel.dart` — Receives file-open paths from macOS for `.md` files.
+- `open_file_channel.dart` — Receives file-open paths from macOS for `.md` / `.ocideck` (Finder "Open With"), and opens the filterless native pick panel (`pickUnfilteredMacFile`) so a remembered UTI filter cannot grey out `.md` files.
 - `privacy/privacy_checksums.dart` — Eleven-proof (BSN), Luhn and IBAN mod-97 with the country-length table.
 - `privacy/privacy_allowlist.dart` — Known non-personal values: reserved domains, example IBANs, test cards, the official test-BSN range.
 - `privacy/privacy_secret_rules.dart` — The secrets rule table: vendor tokens (AWS/GitHub/Slack/Stripe/…), PEM private keys, decodable JWTs, connection strings, Azure keys and SAS tokens, password hashes, TOTP seeds, plain-text passwords — plus the placeholder gate that keeps a how-to slide quiet, the Shannon-entropy fallback (`secret.entropy`, the only rule here with a context gate) and its exclusions for hashes, UUIDs and checksums.

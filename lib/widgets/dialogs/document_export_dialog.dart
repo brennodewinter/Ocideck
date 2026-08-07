@@ -79,7 +79,7 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
       scrollable: true,
       title: Text(l10n.d('Document exporteren')),
       content: SizedBox(
-        width: 400,
+        width: 460,
         child: _writtenPath != null
             ? _resultView(l10n, _writtenPath!)
             : _optionsView(l10n),
@@ -235,6 +235,11 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
               label: Text(l10n.d('HTML')),
               icon: const Icon(Icons.public_outlined, size: 15),
             ),
+            ButtonSegment(
+              value: DocumentExportFormat.ocideck,
+              label: Text(l10n.d('Pakket (.ocideck)')),
+              icon: const Icon(Icons.inventory_2_outlined, size: 15),
+            ),
           ],
           selected: {_format},
           showSelectedIcon: false,
@@ -242,16 +247,17 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
           onSelectionChanged: (s) => setState(() => _format = s.first),
         ),
         const SizedBox(height: 4),
-        Text(
-          _format == DocumentExportFormat.md
-              ? l10n.d(
-                  'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.',
-                )
-              : l10n.d(
-                  'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.',
-                ),
-          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-        ),
+        Text(switch (_format) {
+          DocumentExportFormat.md => l10n.d(
+            'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.',
+          ),
+          DocumentExportFormat.html => l10n.d(
+            'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.',
+          ),
+          DocumentExportFormat.ocideck => l10n.d(
+            'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.',
+          ),
+        }, style: TextStyle(fontSize: 11, color: AppTheme.slate400)),
       ],
     );
   }

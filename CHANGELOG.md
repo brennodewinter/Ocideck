@@ -1071,6 +1071,37 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Documentmodus: kiezer, `__vet__`, standaard Visueel bewerkbaar.** (1) *Openen
+  → Bladeren…* sloot het Flutter-dialoog niet vóór de native `NSOpenPanel`;
+  genest onder die modal bleven `.md`-bestanden grijs. Bladeren sluit nu eerst
+  en opent daarna de filterloze panel (lege `allowedContentTypes` +
+  `shouldEnable`). (2) Inline-markdown herkent `__vet__` naast `**vet**`. (3)
+  Documenttabs starten in Visueel met zichtbare Visueel|Bron-keuze en een
+  bewerkbaar schrijfoppervlak (geen read-only preview meer als standaard). (4)
+  *Invoegen → Afbeelding* opent dezelfde carrousel als bij slides (bibliotheek
+  + projectmap + Bladeren…), niet alleen de kale bestandskiezer. (5) Carrousel
+  crashte stil op een documenttab (`deckNotifier` i.p.v. `deckNotifierOrNull`).
+  (6) Overzicht-rail: caret-sync, klik-springen in Visueel, EU-blauw/geel
+  header, inklapbaar. (7) Slim plakken (afbeelding / tabel / tekst), undo/redo
+  (Cmd/Ctrl+Z) en export als `.ocideck`-pakket met versleuteling. (8) Document-
+  carrousel scant de bibliotheken uit Instellingen eerst en níet de ouder-map
+  van het `.md` (Desktop vulde anders de bestandsgrens). De opmaakknop
+  Afbeelding opent dezelfde kiezer i.p.v. `![…](pad-of-url)` in de bron te
+  dumpen. (9) Document-carrousel deelt de afbeeldingspool met presentatiemodus:
+  open presentatietabs + `images`/`logos` van recente presentaties; een
+  onbereikbare bibliotheekmap (niet-gemounte schijf) wordt gemeld i.p.v. stil
+  leeg. (10) Documentmodus: *⋮ → Instellingen* (was alleen via macOS-menubalk).
+  Carrousel: *Map toevoegen…* scant een gekozen map en bewaart die als
+  bibliotheekverbinding — uitweg wanneer Opslag naar een offline schijf wijst.
+- **Openen: `.md` niet meer grijs in de macOS-kiezer, plat `.md` via Finder als
+  document.** Twee gerelateerde open-paden. (1) `file_picker`'s `FileType.any`
+  zette géén `allowedContentTypes`, waardoor macOS een onthouden UTI-filter kon
+  laten staan en `.md`-bestanden grijs en onaantikbaar maakte in *Openen →
+  Bladeren…*. De open-kiezer gaat op macOS nu via een eigen `NSOpenPanel` op het
+  bestaande `ocideck/open_file`-kanaal, die die filter expliciet wist. (2) Een
+  plat `.md` zonder `marp: true` via Finder/"Open met" opende in oudere builds
+  niet; de document-router op main doet dat al, en Finder-/drop-opens melden
+  mislukkingen nu ook (niet stil).
 - **Codekwaliteit: vier inline HttpClient-recepten naar buildPinnedClient (#1323).**
   `media_fetch_io`, `file_service_import`, `libreplan_client` en
   `openkat_rocky_client` kopiëerden het pinning-recept (connectionTimeout +

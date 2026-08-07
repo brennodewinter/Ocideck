@@ -1,5 +1,6 @@
 import '../../utils/image_limits.dart' show boundedFileImage;
 import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../theme/image_picker_palette.dart';
@@ -163,6 +164,14 @@ class _ImageCarouselPickerState extends ConsumerState<ImageCarouselPicker> {
   String? _autoTagPhase; // huidige fase van het auto-taggen, voor op de knop
   int _hoveredIndex = -1;
   _ViewMode _viewMode = _ViewMode.grid;
+
+  /// Extra zoekwortels die de gebruiker in deze sessie via "Map toevoegen…"
+  /// koos — naast [widget.searchPaths]. Blijven tot de dialoog dichtgaat.
+  final List<String> _extraRoots = [];
+
+  /// True wanneer de laatste scan alleen onbereikbare wortels had (lege
+  /// carrousel door een weggeschoven/niet-gemounte bibliotheek).
+  bool _rootsUnreachable = false;
 
   /// Alleen actief in coverflow-modus; bestuurt de horizontale "flow".
   PageController? _pageController;

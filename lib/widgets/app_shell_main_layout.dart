@@ -588,7 +588,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       onReplaceUsages: (from, to) => _replaceImageUsages(ref, from, to),
       openDeckFiles: [
         for (final tab in ref.read(tabsProvider).tabs)
-          ?tab.deckNotifier.currentState.filePath,
+          ?tab.deckNotifierOrNull?.currentState.filePath,
       ],
     );
     if (result == null) return;

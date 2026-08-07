@@ -46,6 +46,21 @@ void main() {
       expect(runs[2].bold, isFalse);
     });
 
+    test('__underscores__ are bold, like **asterisks**', () {
+      final runs = parseInlineRuns('__vet__ en **ook**');
+      expect(runs.map((r) => r.text).toList(), ['vet', ' en ', 'ook']);
+      expect(runs[0].bold, isTrue);
+      expect(runs[1].bold, isFalse);
+      expect(runs[2].bold, isTrue);
+    });
+
+    test('single _underscores_ stay italic', () {
+      final runs = parseInlineRuns('_cursief_');
+      expect(runs.single.text, 'cursief');
+      expect(runs.single.italic, isTrue);
+      expect(runs.single.bold, isFalse);
+    });
+
     test('nested emphasis inside a link carries both flags', () {
       final runs = parseInlineRuns('[**klik**](https://x.io)');
       expect(runs, hasLength(1));

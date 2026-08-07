@@ -189,6 +189,20 @@ extension _CarouselPreview on _ImageCarouselPickerState {
             ),
             const SizedBox(width: 8),
           ],
+          OutlinedButton.icon(
+            onPressed: _loading ? null : _addLibraryFolder,
+            icon: const Icon(Icons.create_new_folder_outlined, size: 16),
+            label: Text(l10n.d('Map toevoegen…')),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: ImagePickerPalette.textMuted,
+              side: const BorderSide(color: ImagePickerPalette.border),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: 10,
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
           // Duplicaten opruimen (md5)
           Tooltip(
             message: l10n.d(

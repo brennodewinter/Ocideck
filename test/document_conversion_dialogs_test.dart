@@ -93,6 +93,35 @@ void main() {
       // Het resultaatpad staat in beeld.
       expect(find.textContaining('rapport-geredigeerd.html'), findsOneWidget);
     });
+
+    testWidgets('biedt pakket (.ocideck) als formaat', (tester) async {
+      DocumentExportFormat? gotFormat;
+      await tester.pumpWidget(
+        _app(
+          Builder(
+            builder: (context) => TextButton(
+              onPressed: () => DocumentExportDialog.show(
+                context,
+                privacyChecksEnabled: true,
+                onExport: (profile, format) async {
+                  gotFormat = format;
+                  return '/tmp/doc.ocideck';
+                },
+              ),
+              child: const Text('open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Pakket (.ocideck)'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('optioneel versleuteld'), findsOneWidget);
+      await tester.tap(find.text('Exporteren…'));
+      await tester.pumpAndSettle();
+      expect(gotFormat, DocumentExportFormat.ocideck);
+    });
   });
 
   group('ConvertToPresentationDialog', () {

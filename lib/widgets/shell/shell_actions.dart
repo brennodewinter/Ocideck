@@ -151,33 +151,54 @@ Future<void> _openWithSearch(BuildContext context, WidgetRef ref) async {
     libraries: settings.libraries,
   );
   if (result == null || !context.mounted) return;
+  // Bladeren… sluit het dialoog eerst; daarna pas de native kiezer — anders
+  // blijft .md grijs onder een geneste Flutter-modal (macOS).
+  final String path;
+  final int? selectIndex;
+  if (result.browseRequested) {
+    final picked = await ref
+        .read(fileServiceProvider)
+        .pickMarkdownFile(
+          initialDirectory: settings.libraries.isEmpty
+              ? null
+              : settings.libraries.first.path,
+        );
+    if (picked == null || !context.mounted) return;
+    path = picked;
+    selectIndex = null;
+  } else {
+    final chosen = result.path;
+    if (chosen == null) return;
+    path = chosen;
+    selectIndex = result.slideIndex;
+  }
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
   final openResult = await ref
       .read(tabsProvider.notifier)
-      .openFileByPath(result.path, selectIndex: result.slideIndex);
+      .openFileByPath(path, selectIndex: selectIndex);
   // Wacht op de geladen module-stand vóór de melding gekozen wordt: vlak na de
   // start leest de reveal anders nog de ladende default (#1209).
   final importModuleAvailable = await importModuleRevealedWhenReady(ref);
   if (!context.mounted) return;
-  // Een los gekozen bestand dat geen presentatie is (of onleesbaar) wordt
-  // geweigerd — meld het, met de importroute als het een PowerPoint/Impress/
-  // Keynote-bestand bleek.
+  // openFileByPath routet een leesbaar niet-marp `.md` naar een documenttabblad.
+  // Alleen échte weigeringen (onleesbaar, of een Office-bestand zonder marp)
+  // komen hier als snackbar — met de importroute als uitweg waar die past.
   _reportOpenFailure(
     messenger,
     l10n,
     openResult,
     reason: ref.read(openFailureProvider),
-    sourceName: result.path,
+    sourceName: path,
     importModuleAvailable: importModuleAvailable,
     // Pad al bekend: importeer zonder de bestandskiezer opnieuw te openen.
     onImport: () async {
-      final bytes = await File(result.path).readAsBytes();
+      final bytes = await File(path).readAsBytes();
       if (!context.mounted) return;
       await importPresentation(
         context,
         ref,
-        fileOverride: (bytes: bytes, name: p.basename(result.path)),
+        fileOverride: (bytes: bytes, name: p.basename(path)),
       );
     },
     onOpenSettings: () => SettingsDialog.show(context),
@@ -788,12 +809,7 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
 }
 
 List<String> _imageSearchPaths(String? projectPath, List<String> libraryPaths) {
-  final projectImagesPath = projectPath == null
-      ? null
-      : p.join(projectPath, 'images');
-  // Projectmap eerst, dan alle bibliotheken als zoekwortels. De carousel scant
-  // elke wortel recursief, dus diepe submappen komen automatisch mee.
-  return [?projectImagesPath, ?projectPath, ...libraryPaths];
+  return deckImageSearchPaths(projectPath, libraryPaths);
 }
 
 String? _resolveImagePath(String path, String? projectPath) {

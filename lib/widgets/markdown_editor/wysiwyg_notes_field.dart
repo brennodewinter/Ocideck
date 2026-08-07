@@ -63,6 +63,10 @@ class WysiwygNotesField extends StatefulWidget {
   final EdgeInsetsGeometry contentPadding;
   final bool bordered;
 
+  /// Optioneel: vang Cmd/Ctrl+V af vóór de standaard plak. Geeft `true` terug
+  /// wanneer de plak is afgehandeld (bijv. klembord-afbeelding → markdown).
+  final Future<bool> Function()? tryConsumePaste;
+
   const WysiwygNotesField({
     super.key,
     required this.controller,
@@ -73,6 +77,7 @@ class WysiwygNotesField extends StatefulWidget {
     this.expand = false,
     this.contentPadding = const EdgeInsets.all(10),
     this.bordered = true,
+    this.tryConsumePaste,
   });
 
   @override
@@ -81,6 +86,9 @@ class WysiwygNotesField extends StatefulWidget {
 
 class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
   Future<void> _pasteSanitized() async {
+    if (widget.tryConsumePaste != null && await widget.tryConsumePaste!()) {
+      return;
+    }
     final data = await Clipboard.getData(Clipboard.kTextPlain);
     final raw = data?.text;
     if (raw == null || raw.isEmpty) return;
