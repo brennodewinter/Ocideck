@@ -24,20 +24,27 @@
 #     → bump (pubspec+kOciDeckVersion+CHANGELOG) → make sbom → make check-release
 #     → make build-release → make notarize-macos → zegel verifiëren → de nieuwe
 #       .app in /Applications zetten
+#   PRE-FLIGHT (ná het wachtwoord, vóór elke mutatie): forge-token, mirror-remote,
+#     deploy-host (ssh) en een minisign proef-tekening — alles wat later
+#     onherroepelijk nodig is, faalt hier vroeg i.p.v. pas ná de tag.
 #   FASE 2 (naar de CI-straat + bewaken)
 #     branch+PR → poort groen → merge → tag → push origin+mirror → release-CI
 #       eens per ~minuut volgen tot alle jobs klaar zijn
 #   FASE 3 (verspreiden, pas ná groene CI)
-#     SHA256SUMS tekenen (minisign) + aanhangen → website-downloads-job bewaken
-#       → make deploy-web (vult de gap die de CI-job overslaat)
+#     make deploy-web (webdemo, onafhankelijk van de platform-artefacten)
+#       → SHA256SUMS tekenen (minisign) + aanhangen → website-downloads-job bewaken
+#     De webdemo gaat bewust EERST: ze hangt alleen aan de web-bundel, dus een
+#     teken- of platformfout laat de demo nooit op de oude versie staan.
 #
 # FAIL-SAFE (elke faalstap stopt de keten, met de juiste informatie):
 #   * `set -Eeuo pipefail` + een ERR-trap melden WELKE stap op WELKE regel faalde.
 #   * Faalt er iets VÓÓR de tag-push, dan is er niets naar buiten gegaan: de
 #     release-branch wordt opgeruimd en je kunt na de fix veilig opnieuw draaien.
-#   * Faalt er iets NÁ de tag-push, dan staat de tag vast: een echte fix wordt de
-#     VOLGENDE patch-tag, nooit een her-tag (dat degradeert de mirror-Windows-release
-#     tot draft en laat `windows-ophalen` eeuwig wachten).
+#   * Faalt er iets NÁ de tag-push, dan staat de tag vast. Was het fase 3
+#     (tekenen/deploy) of een upstream CI-job, herstel dat en maak DEZELFDE tag af
+#     met `--resume vX.Y.Z`. Alleen als een uitgebracht artefact zélf fout is snijd
+#     je de VOLGENDE patch-tag; her-tag nooit (dat degradeert de mirror-Windows-
+#     release tot draft en laat `windows-ophalen` eeuwig wachten).
 #
 # --dry-run doet alle read-only stappen (versie bepalen, verouderingsgate,
 # CHANGELOG-preview, plan tonen) en STOPT vóór elke mutatie.
@@ -47,6 +54,7 @@
 #   scripts/release_auto.sh patch|minor|major    # niveau meegeven, sla het menu over
 #   scripts/release_auto.sh --dry-run [niveau]   # toon het plan, muteer niets
 #   scripts/release_auto.sh --skip-install [..]  # sla /Applications-vervanging over
+#   scripts/release_auto.sh --resume vX.Y.Z      # al-gepushte tag: alleen fase 3 afmaken
 
 set -Eeuo pipefail
 
@@ -59,11 +67,15 @@ REPO_SLUG="${OCIDECK_REPO_SLUG:-LibreKAT/Ocideck}"
 RELEASE_BASE_URL="${OCIDECK_RELEASE_BASE_URL:-https://pawprint.vigilis.online/${REPO_SLUG}/releases/download}"
 TOKEN_KEYCHAIN_SERVICE="${OCIDECK_TOKEN_SERVICE:-forgejo-pawprint-api}"
 APPLICATIONS_DIR="${OCIDECK_APPLICATIONS_DIR:-/Applications}"
+# Zelfde standaard-doel als scripts/deploy_web.sh; de pre-flight toetst dat het
+# bereikbaar is vóór de tag, zodat deploy-web niet ná de tag strandt.
+DEPLOY_HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@braniebananie.nl}"
 
 DRY_RUN=0
 SKIP_INSTALL=0
 PRINT_VERSION=0
 LEVEL=""
+RESUME_TAG=""   # --resume vX.Y.Z: sla fase 1+2 over, maak alleen fase 3 af
 
 # ── Kleine hulpjes ──────────────────────────────────────────────────────────────
 section() { printf '\n== %s ==\n' "$1"; }
@@ -84,8 +96,11 @@ on_err() {
   local ec=$? ln=${1:-?}
   printf '\nrelease-auto: FOUT in stap "%s" (regel %s, exit %s).\n' "$STEP" "$ln" "$ec" >&2
   if [ "$TAG_PUSHED" -eq 1 ]; then
-    printf '  De tag %s is AL gepusht — de release staat vast. Repareer het en snijd de\n' "${TAG:-?}" >&2
-    printf '  VOLGENDE patch-tag; verplaats deze tag niet (dat breekt de mirror-Windows-release).\n' >&2
+    printf '  De tag %s is AL gepusht — de release staat vast.\n' "${TAG:-?}" >&2
+    printf '  Faalde het in fase 3 (tekenen/deploy) of op een upstream CI-job, maak dan\n' >&2
+    printf '  DEZELFDE tag af zodra dat hersteld is:  scripts/release_auto.sh --resume %s\n' "${TAG:-vX.Y.Z}" >&2
+    printf '  Alleen als een uitgebracht artefact zelf fout is, snijd je de VOLGENDE patch-tag;\n' >&2
+    printf '  verplaats deze tag nooit (dat breekt de mirror-Windows-release).\n' >&2
   else
     printf '  Er is nog niets naar buiten gegaan. De release-branch wordt opgeruimd;\n' >&2
     printf '  repareer het en draai het script opnieuw.\n' >&2
@@ -95,18 +110,32 @@ on_err() {
 trap 'on_err $LINENO' ERR
 
 # ── Argumenten ──────────────────────────────────────────────────────────────────
+RESUME=0
 for arg in "$@"; do
   case "$arg" in
     --dry-run) DRY_RUN=1 ;;
     --skip-install) SKIP_INSTALL=1 ;;
     --print-version) PRINT_VERSION=1 ;;
+    --resume) RESUME=1 ;;
     patch|minor|major) LEVEL="$arg" ;;
+    v[0-9]*.[0-9]*.[0-9]*) RESUME_TAG="$arg" ;;
     -h|--help)
-      sed -n '2,52p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
+      sed -n '2,57p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
       exit 0 ;;
-    *) die "onbekend argument: $arg (verwacht: --dry-run, --skip-install, patch, minor of major)" ;;
+    *) die "onbekend argument: $arg (verwacht: --dry-run, --skip-install, --resume vX.Y.Z, patch, minor of major)" ;;
   esac
 done
+
+# --resume maakt een al-gepushte tag alleen fase 3 af (tekenen + deploy-web).
+# Directe aanleiding: struikelt de keten ná de tag-push (bv. een upstream
+# CI-job die faalde), dan staat de tag vast en is her-taggen verboden — de
+# herstelroute is DEZELFDE tag afmaken, niet de volgende snijden.
+if [ "$RESUME" -eq 1 ] && [ -z "$RESUME_TAG" ]; then
+  die "geef de tag mee: --resume vX.Y.Z"
+fi
+if [ -n "$RESUME_TAG" ] && [ "$RESUME" -eq 0 ]; then
+  die "een losse tag $RESUME_TAG hoort bij --resume; bedoelde je '--resume $RESUME_TAG'?"
+fi
 
 # --print-version is een hermetische guard-toets (alleen rekenkunde uit pubspec);
 # die vergt niets van de release-toolketen en mag geen menu tonen.
@@ -164,14 +193,21 @@ MENU
   esac
 }
 
-choose_level
-case "$LEVEL" in
-  patch) NEW_VERSION="$PATCH_V" ;;
-  minor) NEW_VERSION="$MINOR_V" ;;
-  major) NEW_VERSION="$MAJOR_V" ;;
-esac
-NEW_BUILD=$((CUR_BUILD + 1))
-TAG="v$NEW_VERSION"
+if [ -n "$RESUME_TAG" ]; then
+  # Resume: de tag bestaat al; leid versie/build eruit af en sla het menu over.
+  TAG="$RESUME_TAG"
+  NEW_VERSION="${RESUME_TAG#v}"
+  NEW_BUILD="$CUR_BUILD"
+else
+  choose_level
+  case "$LEVEL" in
+    patch) NEW_VERSION="$PATCH_V" ;;
+    minor) NEW_VERSION="$MINOR_V" ;;
+    major) NEW_VERSION="$MAJOR_V" ;;
+  esac
+  NEW_BUILD=$((CUR_BUILD + 1))
+  TAG="v$NEW_VERSION"
+fi
 
 # Hermetische modus voor de guard-toets: alléén de berekende tag, geen git,
 # netwerk of gate. Zie test/release_auto_version_test.dart.
@@ -181,8 +217,14 @@ if [ "$PRINT_VERSION" -eq 1 ]; then
   exit 0
 fi
 
-git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1 \
-  && die "tag $TAG bestaat al — een uitgebrachte tag verplaats je nooit; kies het volgende niveau."
+if [ -n "$RESUME_TAG" ]; then
+  # In resume MOET de tag al bestaan én gepusht zijn; anders is er niets af te maken.
+  git ls-remote --exit-code origin "refs/tags/$TAG" >/dev/null 2>&1 \
+    || die "tag $TAG staat niet op origin — --resume maakt alleen een al-gepushte tag af."
+else
+  git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1 \
+    && die "tag $TAG bestaat al — een uitgebrachte tag verplaats je nooit; kies het volgende niveau."
+fi
 
 # ── CHANGELOG-sectie samenstellen ───────────────────────────────────────────────
 # Bestaat er al een handgeschreven '## [X.Y.Z]'-sectie, dan respecteren we die
@@ -264,7 +306,7 @@ show_plan() {
             → make check-release → build + notarize → zegel → /Applications
     FASE 2  [scans-image publiceren als pins gebumpt] → PR → poort groen → merge
             → tag $TAG → push origin+mirror → CI volgen
-    FASE 3  SHA256SUMS tekenen + aanhangen → website-job bewaken → make deploy-web
+    FASE 3  make deploy-web → SHA256SUMS tekenen + aanhangen → website-job bewaken
 STEPS
   if ! changelog_has_section; then
     section "CHANGELOG-preview"
@@ -272,13 +314,23 @@ STEPS
   fi
 }
 
-show_plan
-
-if [ "$DRY_RUN" -eq 1 ]; then
-  outdated_gate
-  section "Dry-run"
-  log "Niets gemuteerd. Laat --dry-run weg om de release echt te draaien."
-  exit 0
+if [ -n "$RESUME_TAG" ]; then
+  section "Plan — resume $TAG"
+  log "De tag $TAG staat al vast; alleen fase 3 wordt afgemaakt."
+  log "Stappen : pre-flight → make deploy-web → SHA256SUMS tekenen + aanhangen"
+  if [ "$DRY_RUN" -eq 1 ]; then
+    section "Dry-run"
+    log "Niets gemuteerd. Laat --dry-run weg om fase 3 echt af te maken."
+    exit 0
+  fi
+else
+  show_plan
+  if [ "$DRY_RUN" -eq 1 ]; then
+    outdated_gate
+    section "Dry-run"
+    log "Niets gemuteerd. Laat --dry-run weg om de release echt te draaien."
+    exit 0
+  fi
 fi
 
 # ── Harde voorwaarden vóór de mutaties (falen vóór het wachtwoord) ───────────────
@@ -289,7 +341,98 @@ fi
 git remote get-url mirror >/dev/null 2>&1 \
   || die "geen 'mirror'-remote — die is nodig voor de Windows-build op de spiegel."
 
-outdated_gate
+# De verouderingsgate hoort bij een échte build (fase 1); in resume bouwen we niet.
+[ -n "$RESUME_TAG" ] || outdated_gate
+
+# ── #7 Pre-flight: alles wat later onherroepelijk nodig is, nú toetsen ──────────
+# Vandaag brak de keten pas ná de tag op stappen die vooraf toetsbaar waren
+# (deploy-ssh, de handtekening). Deze functie faalt vóór elke mutatie.
+preflight() {
+  STEP="pre-flight"
+  section "Pre-flight — forge, mirror, deploy-host en minisign toetsen"
+  api GET "" -o /dev/null \
+    || die "forge-token werkt niet tegen $REPO_SLUG (keychain '$TOKEN_KEYCHAIN_SERVICE')."
+  git ls-remote mirror >/dev/null 2>&1 \
+    || die "mirror-remote onbereikbaar — de Windows-build op de spiegel hangt eraan."
+  ssh -o BatchMode=yes -o ConnectTimeout=8 "$DEPLOY_HOST" true >/dev/null 2>&1 \
+    || die "deploy-host $DEPLOY_HOST onbereikbaar via ssh — deploy-web zou ná de tag stranden."
+  # Proef-tekening: valideert sleutel én wachtwoord vóór de lange build/tag,
+  # zodat een fout wachtwoord niet pas aan het eind (na de tag) opduikt.
+  local t; t="$(mktemp -d)"
+  printf 'preflight\n' >"$t/probe"
+  MINISIGN_PW="$MINISIGN_PW" SUMS="$t/probe" expect <<'EXP' >/dev/null 2>&1
+set timeout 60
+spawn make sign-release SHA256SUMS=$env(SUMS)
+expect { -re "Password:|wachtwoord" { send -- "$env(MINISIGN_PW)\r"; exp_continue } eof { } }
+EXP
+  if [ ! -f "$t/probe.minisig" ]; then
+    rm -rf "$t"
+    die "minisign proef-tekening faalde — sleutelwachtwoord fout of sleutel ontbreekt. Niets gemuteerd."
+  fi
+  rm -rf "$t"
+  log "Pre-flight groen: forge-token, mirror, deploy-host en minisign kloppen."
+}
+
+# ── FASE 3 — verspreiden (gedeeld door de normale keten én --resume) ────────────
+phase3() {
+  # #10: eerst de webdemo. Die hangt alleen aan de web-bundel, niet aan de
+  # platform-artefacten of de handtekening — dus een teken- of platformfout mag
+  # de demo nooit op de oude versie laten staan.
+  STEP="deploy-web"
+  section "Fase 3 — webversie live zetten"
+  make deploy-web
+  log "deploy-web klaar."
+
+  STEP="SHA256SUMS tekenen"
+  section "Fase 3 — SHA256SUMS tekenen en aanhangen"
+  TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
+  # `publiceren` kan nog nalopen; wacht begrensd i.p.v. meteen op 404 te sterven.
+  local got=0 _
+  for _ in $(seq 1 20); do
+    if curl -fsSLo "$TMP/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS"; then got=1; break; fi
+    sleep 15
+  done
+  [ "$got" -eq 1 ] \
+    || die "SHA256SUMS staat na wachten niet op de release voor $TAG — waarschijnlijk faalde een upstream release-job (publiceren draaide niet). Ga de release-CI na en maak daarna DEZELFDE tag af: scripts/release_auto.sh --resume $TAG."
+  MINISIGN_PW="$MINISIGN_PW" SUMS="$TMP/SHA256SUMS" expect <<'EXP' >/dev/null
+set timeout 120
+spawn make sign-release SHA256SUMS=$env(SUMS)
+expect {
+  -re "Password:|wachtwoord" { send -- "$env(MINISIGN_PW)\r"; exp_continue }
+  eof { }
+}
+EXP
+  [ -f "$TMP/SHA256SUMS.minisig" ] || die "minisign leverde geen handtekening — controleer het sleutelwachtwoord."
+  local rid
+  rid="$(api GET "/releases/tags/$TAG" | jq -r '.id')"
+  api POST "/releases/$rid/assets?name=SHA256SUMS.minisig" \
+    -F "attachment=@$TMP/SHA256SUMS.minisig" -o /dev/null
+  log "SHA256SUMS.minisig aangehangen aan release $TAG."
+
+  STEP="website bewaken"
+  # In --resume is er geen fase-2-snapshot; haal er dan vers een op voor deze tag.
+  local snap3="${snap:-}"
+  if [ -z "$snap3" ]; then
+    snap3="$(api GET '/actions/tasks?limit=25' \
+      | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
+          | select(.head_branch==$ref) | "\(.status)|\(.name)"' | sort -u)"
+  fi
+  if printf '%s\n' "$snap3" | grep -q 'Website-downloads'; then
+    if printf '%s\n' "$snap3" | grep -q '^failure|Website-downloads'; then
+      log "LET OP: de website-downloads-job faalde — werk de librekat.nl-downloadpagina"
+      log "handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
+    else
+      log "Website-downloads-job groen."
+    fi
+  fi
+}
+
+finish() {
+  STEP="klaar"
+  section "Klaar"
+  log "OciDeck $TAG is uitgebracht, getekend en live."
+  log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
+}
 
 # ── De twee prompts (de enige interactie) ───────────────────────────────────────
 read_token
@@ -299,6 +442,17 @@ log "geheugen van deze run (voor het tekenen van SHA256SUMS, geheel aan het eind
 MINISIGN_PW=""
 read -r -s -p "  minisign-wachtwoord: " MINISIGN_PW; echo
 [ -n "$MINISIGN_PW" ] || die "leeg wachtwoord — afgebroken."
+
+# #7: faal vóór elke onherroepelijke stap; en in --resume is dit de enige gate.
+preflight
+
+# #9: is de tag al gepusht, dan is fase 1+2 al gebeurd — alleen fase 3 afmaken.
+if [ -n "$RESUME_TAG" ]; then
+  TAG_PUSHED=1   # de tag staat al vast; de ERR-trap moet dat weten
+  phase3
+  finish
+  exit 0
+fi
 
 # ════════════════════════════ FASE 1 — lokaal ══════════════════════════════════
 BRANCH="release/$TAG"
@@ -485,50 +639,13 @@ for _ in $(seq 1 120); do
   sleep 30
 done
 if printf '%s\n' "$snap" | grep -q '^failure|'; then
-  log "LET OP: minstens één release-job faalde (zie hierboven). De tag staat vast;"
-  log "een echte fix wordt de volgende patch-tag, niet een her-tag. Ga de faal na"
-  log "vóór je op de verspreiding vertrouwt."
+  log "LET OP: minstens één release-job faalde (zie hierboven). De tag staat vast."
+  log "Herstel de upstream-job en maak DEZELFDE tag af met '--resume $TAG'; her-tag niet."
+  log "phase3 wacht hieronder begrensd op SHA256SUMS en stopt met dezelfde raad als"
+  log "publiceren niet alsnog groen wordt."
 fi
 
 # ════════════════════════════ FASE 3 — verspreiden ═════════════════════════════
-STEP="SHA256SUMS tekenen"
-section "Fase 3 — SHA256SUMS tekenen en aanhangen"
-TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
-curl -fsSLo "$TMP/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS"
-# minisign vraagt zijn wachtwoord op /dev/tty; expect voert het captured wachtwoord
-# in zonder het te loggen. Het wachtwoord reist via de env van precies deze aanroep.
-MINISIGN_PW="$MINISIGN_PW" SUMS="$TMP/SHA256SUMS" expect <<'EXP' >/dev/null
-set timeout 120
-spawn make sign-release SHA256SUMS=$env(SUMS)
-expect {
-  -re "Password:|wachtwoord" { send -- "$env(MINISIGN_PW)\r"; exp_continue }
-  eof { }
-}
-EXP
-[ -f "$TMP/SHA256SUMS.minisig" ] || die "minisign leverde geen handtekening — controleer het sleutelwachtwoord."
-RID="$(api GET "/releases/tags/$TAG" | jq -r '.id')"
-api POST "/releases/$RID/assets?name=SHA256SUMS.minisig" \
-  -F "attachment=@$TMP/SHA256SUMS.minisig" -o /dev/null
-log "SHA256SUMS.minisig aangehangen aan release $TAG."
-
-STEP="website bewaken"
-if printf '%s\n' "$snap" | grep -q 'Website-downloads'; then
-  if printf '%s\n' "$snap" | grep -q '^failure|Website-downloads'; then
-    log "LET OP: de website-downloads-job faalde — werk de librekat.nl-downloadpagina"
-    log "handmatig bij (scripts/bump-ocideck.sh $NEW_VERSION + ./publiceersite in de website-repo)."
-  else
-    log "Website-downloads-job groen."
-  fi
-fi
-
-STEP="deploy-web"
-section "Fase 3 — webversie live zetten"
-# De CI-deploy-web-job slaat over zolang de deploy-secrets niet gezet zijn; dit
-# vult die gap (make deploy-web bouwt de bundel + zet ocideck.librekat.nl live).
-make deploy-web
-log "deploy-web klaar."
-
-STEP="klaar"
-section "Klaar"
-log "OciDeck $TAG is uitgebracht, getekend en live."
-log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
+# Zelfde stappen als een --resume: eerst deploy-web (onafhankelijk), dan tekenen.
+phase3
+finish
