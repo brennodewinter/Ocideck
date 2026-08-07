@@ -55,6 +55,25 @@ recipient needs to *read* rather than *look*. No WCAG conformance is claimed,
 and nothing has been tested with a real screen reader. →
 [ACCESSIBILITY.md](ACCESSIBILITY.md)
 
+## The web (HTML) export leaves off the on-slide overlays
+
+The app draws a layer of chrome *over* each slide: the footer (its text,
+position and the `N / total` page number), the logo, the diagonal
+classification watermark, the per-slide TLP badge and the personal-data
+(PrivacyKat) badge. The editor preview, the presenter and the **PDF/PPTX**
+exports all draw that layer, because they render through OciDeck's own slide
+renderer. The single-file **HTML** export does not. It embeds each slide's
+Markdown for an in-browser renderer together with the theme's colours and font,
+and carries the deck's classification as its own banner across the top of the
+document instead of the per-slide badge. So a footer such as
+`www.chateau-it.nl`, the page number, the logo and the watermark are simply
+absent from the `.html` — the overlay layer is a property of OciDeck's
+rendering, not of the deck Markdown, and there is nothing in the exported file
+to reproduce it from. When the recipient needs the footer or page numbers in a
+shared file, hand over the **PDF** (or **PPTX**) export, which keeps them.
+*(Added 2026-08-07 — the classification banner is the one exception that does
+travel; #1330.)*
+
 ## Importing a presentation is a conversion, not a copy
 
 A PowerPoint, Keynote or Impress file can be imported, but OciDeck's slide model

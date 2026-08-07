@@ -2976,6 +2976,16 @@ Export to:
   bars and coverage counters you see in the app, not as the plain table they are
   stored as. *Updated 2026-07-22: images and those six slide types used to be
   the export's blind spots.*
+
+  **The on-slide overlays are left off.** The HTML export renders the slide
+  content and the theme's colours, but not the layer OciDeck draws *over* each
+  slide: the footer (its text and page numbers), the logo, the diagonal
+  watermark and the per-slide TLP badge. That layer belongs to the app's own
+  renderer, not to the Markdown, so it is absent from the `.html`; the deck's
+  classification travels as a banner across the top instead. The **PDF and
+  PPTX** exports keep the footer and page numbers — reach for those when the
+  recipient needs them. → [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md#the-web-html-export-leaves-off-the-on-slide-overlays)
+  *(Added 2026-08-07, #1330.)*
 - **Portable package** (`.ocideck`) — a single zip with the Markdown and all
   assets, to hand the whole deck to someone else. A package this version writes
   is one it can reopen: if the assets together would push it past the 512 MB the
