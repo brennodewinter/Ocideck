@@ -1,10 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/utils/image_search_paths.dart';
 
+// image_search_paths voegt subpaden samen met `p.join`; op Windows levert dat een
+// backslash-separator (`/deck\images`), op macOS/Linux een slash. Deze tests
+// toetsen wélke mappen doorzocht worden en in welke volgorde — niet de
+// separator-stijl — dus normaliseer de uitkomst naar '/' vóór de vergelijking.
+// Zonder dit faalt de suite alleen op de Windows-runner (mirror-CI).
+List<String> _fwd(List<String> paths) => [
+  for (final path in paths) path.replaceAll(r'\', '/'),
+];
+
 void main() {
   group('deckImageSearchPaths', () {
     test('project images + project + libraries', () {
-      expect(deckImageSearchPaths('/deck', ['/lib-a', '/lib-b']), [
+      expect(_fwd(deckImageSearchPaths('/deck', ['/lib-a', '/lib-b'])), [
         '/deck/images',
         '/deck',
         '/lib-a',
@@ -20,7 +29,9 @@ void main() {
   group('documentImageSearchPaths', () {
     test('bibliotheken eerst, daarna alleen images naast het document', () {
       expect(
-        documentImageSearchPaths('/Users/me/Desktop', ['/lib-a', '/lib-b']),
+        _fwd(
+          documentImageSearchPaths('/Users/me/Desktop', ['/lib-a', '/lib-b']),
+        ),
         ['/lib-a', '/lib-b', '/Users/me/Desktop/images'],
       );
     });
@@ -39,10 +50,12 @@ void main() {
       'open presentaties leveren images + projectmap (zoals presentatiemodus)',
       () {
         expect(
-          documentImageSearchPaths(
-            '/doc',
-            ['/lib'],
-            openDeckProjectPaths: ['/deck-a', '/deck-b'],
+          _fwd(
+            documentImageSearchPaths(
+              '/doc',
+              ['/lib'],
+              openDeckProjectPaths: ['/deck-a', '/deck-b'],
+            ),
           ),
           [
             '/lib',
@@ -62,7 +75,7 @@ void main() {
         ['/lib'],
         recentPresentationDirectories: ['/Users/me/Desktop', '/presentaties'],
       );
-      expect(paths, [
+      expect(_fwd(paths), [
         '/lib',
         '/Users/me/Desktop/images',
         '/Users/me/Desktop/logos',
@@ -74,10 +87,12 @@ void main() {
 
     test('dubbele paden worden één keer gehouden', () {
       expect(
-        documentImageSearchPaths(
-          '/deck',
-          ['/deck'],
-          openDeckProjectPaths: ['/deck'],
+        _fwd(
+          documentImageSearchPaths(
+            '/deck',
+            ['/deck'],
+            openDeckProjectPaths: ['/deck'],
+          ),
         ),
         ['/deck', '/deck/images'],
       );
