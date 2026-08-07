@@ -363,6 +363,25 @@ Future<String?> _pickPathGated({
   String? initialDirectory,
 }) async {
   if (!supportsLocalProjectFolders) return null;
+  // macOS + geen extensiefilter: eigen NSOpenPanel die allowedContentTypes
+  // expliciet leegzet. file_picker's FileType.any zet géén filter, en dan kan
+  // macOS een onthouden filter laten staan waardoor .md grijs wordt (# openen).
+  // Validatie van de gekozen bytes blijft bij de aanroeper (openDeck / router).
+  if (!kIsWeb &&
+      Platform.isMacOS &&
+      type == FileType.any &&
+      (allowedExtensions == null || allowedExtensions.isEmpty)) {
+    try {
+      // null = gebruiker annuleerde — níet doorvallen naar file_picker, anders
+      // opent er een tweede kiezer die .md wél weer grijst.
+      return await pickUnfilteredMacFile(
+        dialogTitle: dialogTitle,
+        initialDirectory: initialDirectory,
+      );
+    } on MissingPluginException {
+      // Oude build zonder native handler: val terug op file_picker.
+    }
+  }
   final result = await FilePicker.pickFiles(
     dialogTitle: dialogTitle,
     type: type,

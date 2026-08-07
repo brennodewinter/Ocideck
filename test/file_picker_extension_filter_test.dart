@@ -11,7 +11,10 @@ import 'package:flutter_test/flutter_test.dart';
 /// invented extensions, so the very files the user wants become unpickable.
 /// The fix is to open with `FileType.any` and validate the chosen bytes
 /// afterwards (a package by its zip header, a style profile by its JSON
-/// `ocideck` marker).
+/// `ocideck` marker). Op macOS gaat [pickMarkdownFile] / [pickPackageFile]
+/// bovendien via `pickUnfilteredMacFile` (eigen NSOpenPanel die filters
+/// expliciet wist), zodat een *onthouden* UTI-filter `.md` niet opnieuw grijs
+/// maakt.
 ///
 /// This lives as a source-level check because the native panel cannot be driven
 /// under `flutter test`: `FilePicker` is a static call with no seam to observe
@@ -65,5 +68,29 @@ void main() {
         );
       });
     }
+  });
+
+  test('_pickPathGated uses the filterless macOS panel for FileType.any', () {
+    final source = File(
+      'lib/services/file/file_service_import.dart',
+    ).readAsStringSync();
+    // Hele part-bestand: de poort moet de native kiezer aanroepen. Geen
+    // methode-snipper — `indexOf('\n}')` snijdt te vroeg af op geneste `}`.
+    final code = source
+        .split('\n')
+        .where((line) => !line.trimLeft().startsWith('//'))
+        .join('\n');
+    expect(
+      code,
+      contains('pickUnfilteredMacFile'),
+      reason:
+          '_pickPathGated must call pickUnfilteredMacFile on macOS so an '
+          'onthouden UTI-filter cannot grey out .md files.',
+    );
+    expect(
+      code,
+      contains('Platform.isMacOS'),
+      reason: 'the native panel is macOS-only; the gate must stay platform-aware',
+    );
   });
 }

@@ -14,6 +14,7 @@ import '../platform/launch_files.dart';
 import '../platform/platform_features.dart';
 import '../platform/unsaved_work_guard.dart';
 import '../utils/display_path.dart';
+import '../utils/image_search_paths.dart';
 import '../utils/log.dart';
 import '../utils/safe_filename.dart';
 import '../utils/shortcut_label.dart';
@@ -441,7 +442,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   };
 
   /// Verwerk gesleepte bestanden: presentaties/pakketten openen, afbeeldingen
-  /// als nieuwe slide(s) toevoegen aan het actieve deck.
+  /// als nieuwe slide(s) toevoegen aan het actieve deck. Hetzelfde pad als
+  /// Finder-"Open met" (via [OpenFileChannel]): een plat `.md` opent als
+  /// document, geen stille weigering.
   Future<void> _onFilesDropped(List<String> paths) async {
     final homeDir = ref.read(settingsProvider).homeDirectory;
     final tabs = ref.read(tabsProvider.notifier);
@@ -450,7 +453,15 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     for (final path in paths) {
       final ext = p.extension(path).toLowerCase();
       if (ext == '.md') {
-        await tabs.openFileByPath(path);
+        final result = await tabs.openFileByPath(path);
+        if (mounted) {
+          _reportOpenFailure(
+            ScaffoldMessenger.of(context),
+            context.l10n,
+            result,
+            reason: ref.read(openFailureProvider),
+          );
+        }
       } else if (ext == '.ocideck' || ext == '.zip') {
         final failure = await tabs.importPackageFile(path, homeDir: homeDir);
         if (failure != null && mounted) {

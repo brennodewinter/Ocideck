@@ -3,6 +3,42 @@ import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:flutter/services.dart';
 import '../utils/log.dart';
 
+/// Method channel gedeeld met de macOS-host: Finder-"Open met" binnenkomend, en
+/// de filterloze bestandskiezer uitgaand. Zie `macos/Runner/AppDelegate.swift`.
+const MethodChannel kOpenFileChannel = MethodChannel('ocideck/open_file');
+
+/// Opent op macOS een NSOpenPanel zonder typefilter.
+///
+/// `file_picker`'s `FileType.any` zet géén `allowedContentTypes`. macOS kan dan
+/// een onthouden filter uit een eerdere sessie laten staan, waardoor `.md`-
+/// bestanden grijs en onaantikbaar worden in het systeemvenster. De native
+/// kant wist die filter expliciet (lege `allowedContentTypes` = alle typen).
+///
+/// Belangrijk: de Openen-dialoog moet *vóór* deze call dicht zijn. Een
+/// `NSOpenPanel` onder een open Flutter-`AlertDialog` grijst `.md` alsnog.
+///
+/// Levert het gekozen pad, of `null` bij annuleren. Op niet-macOS altijd
+/// `null`. [MissingPluginException] (oude build zonder native handler) wordt
+/// doorgegeven — de aanroeper mag dan op file_picker terugvallen. Andere fouten
+/// worden gelogd en als annuleren behandeld.
+Future<String?> pickUnfilteredMacFile({
+  String? dialogTitle,
+  String? initialDirectory,
+}) async {
+  if (kIsWeb || !Platform.isMacOS) return null;
+  try {
+    return await kOpenFileChannel.invokeMethod<String>('pickFile', {
+      'dialogTitle': dialogTitle,
+      'initialDirectory': initialDirectory,
+    });
+  } on MissingPluginException {
+    rethrow;
+  } catch (e) {
+    logWarning('pickUnfilteredMacFile failed', e);
+    return null;
+  }
+}
+
 /// Receives file paths from the macOS host when the user opens a `.md` or
 /// `.ocideck` file via Finder (double-click / "Open With"). See
 /// `macos/Runner/AppDelegate.swift` for the native side.
@@ -10,8 +46,6 @@ import '../utils/log.dart';
 /// On [start] it drains any files the app was launched with (cold start) and
 /// then listens for files opened while the app is already running (warm start).
 class OpenFileChannel {
-  static const _channel = MethodChannel('ocideck/open_file');
-
   /// Called with one or more file paths to open. Routing (markdown vs package)
   /// is the caller's responsibility.
   final Future<void> Function(List<String> paths) onOpenFiles;
@@ -30,9 +64,9 @@ class OpenFileChannel {
   /// hij echt aan gaat.
   @visibleForTesting
   Future<void> activate() async {
-    _channel.setMethodCallHandler(_handle);
+    kOpenFileChannel.setMethodCallHandler(_handle);
     try {
-      final launch = await _channel.invokeMethod<List<dynamic>>(
+      final launch = await kOpenFileChannel.invokeMethod<List<dynamic>>(
         'getLaunchFiles',
       );
       final paths = _stringList(launch);

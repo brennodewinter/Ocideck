@@ -4,20 +4,25 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/open_file_channel.dart';
 
-/// De kanaallogica achter Finder-"Open met" (ocideck/open_file), getest via
-/// [OpenFileChannel.activate] zodat hij op elk platform onder de dekking valt
-/// — [OpenFileChannel.start] zelf gaat alleen op macOS echt aan.
+/// De kanaallogica achter Finder-"Open met" en de filterloze macOS-kiezer
+/// (ocideck/open_file), getest via [OpenFileChannel.activate] /
+/// [pickUnfilteredMacFile] zodat hij op elk platform onder de dekking valt —
+/// [OpenFileChannel.start] zelf gaat alleen op macOS echt aan.
 void main() {
   final binding = TestWidgetsFlutterBinding.ensureInitialized();
-  const channel = MethodChannel('ocideck/open_file');
+  const channel = kOpenFileChannel;
   const codec = StandardMethodCodec();
 
   Object? launchFiles;
   final opened = <List<String>>[];
+  final pickCalls = <Map<Object?, Object?>>[];
+  String? pickResult;
 
   setUp(() {
     launchFiles = null;
     opened.clear();
+    pickCalls.clear();
+    pickResult = null;
     // De inbound-handler is globaal per kanaalnaam; zonder wissen luistert de
     // activate() van een vorig testgeval hier nog mee.
     channel.setMethodCallHandler(null);
@@ -25,6 +30,10 @@ void main() {
       call,
     ) async {
       if (call.method == 'getLaunchFiles') return launchFiles;
+      if (call.method == 'pickFile') {
+        pickCalls.add(Map<Object?, Object?>.from(call.arguments as Map));
+        return pickResult;
+      }
       return null;
     });
   });
@@ -91,5 +100,40 @@ void main() {
       await hostCalls('openFiles', ['f.md']);
       expect(opened, isEmpty);
     }
+  });
+
+  test('pickUnfilteredMacFile stuurt titel en startmap mee', () async {
+    pickResult = '/tmp/gekozen.md';
+    final path = await pickUnfilteredMacFile(
+      dialogTitle: 'Presentatie openen',
+      initialDirectory: '/tmp',
+    );
+    if (Platform.isMacOS) {
+      expect(path, '/tmp/gekozen.md');
+      expect(pickCalls, hasLength(1));
+      expect(pickCalls.single['dialogTitle'], 'Presentatie openen');
+      expect(pickCalls.single['initialDirectory'], '/tmp');
+    } else {
+      expect(path, isNull);
+      expect(pickCalls, isEmpty);
+    }
+  });
+
+  test('pickUnfilteredMacFile bij annuleren: null', () async {
+    pickResult = null;
+    final path = await pickUnfilteredMacFile(dialogTitle: 'x');
+    expect(path, isNull);
+  });
+
+  test('pickUnfilteredMacFile bij MissingPluginException gooit door', () async {
+    binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, (
+      call,
+    ) async {
+      throw MissingPluginException('geen native handler');
+    });
+    expect(
+      () => pickUnfilteredMacFile(dialogTitle: 'x'),
+      throwsA(isA<MissingPluginException>()),
+    );
   });
 }
