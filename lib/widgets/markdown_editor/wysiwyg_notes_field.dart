@@ -5,6 +5,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_quill_codec.dart';
 import 'markdown_editor_theme.dart';
+import 'table_embed_builder.dart';
 
 DefaultStyles _defaultStylesFor(MarkdownEditorTheme theme) {
   final body = theme.bodyStyle;
@@ -140,6 +141,10 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
               padding: widget.contentPadding,
               placeholder: widget.hintText,
               customStyles: _defaultStylesFor(widget.editorTheme),
+              // GFM-tabellen komen als `x-embed-table`-embed binnen (zie
+              // MarkdownQuillCodec) en worden hier als gerenderde, bewerkbare
+              // tabel getekend i.p.v. losse woorden.
+              embedBuilders: const [TableEmbedBuilder()],
               autoFocus: false,
             ),
           ),

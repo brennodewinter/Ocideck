@@ -5,16 +5,33 @@ import 'package:markdown_quill/markdown_quill.dart';
 import 'markdown_paste_cleanup.dart';
 
 /// Round-trip conversion between stored markdown and a Quill document.
+///
+/// GFM-tabellen worden als **blok-embed** ([EmbeddableTable], type
+/// `x-embed-table`) door de heen- en terugweg gedragen, in plaats van als losse
+/// woorden uiteen te vallen. Zo blijft een tabel in de visuele editor een
+/// getekend, byte-getrouw round-trippend blok — de reden dat de tabel niet meer
+/// als markdown-beperking hoeft terug te vallen (zie [markdownVisualLimitations]).
 class MarkdownQuillCodec {
   MarkdownQuillCodec._();
 
   static final _mdDocument = md.Document(
     encodeHtml: false,
     extensionSet: md.ExtensionSet.gitHubFlavored,
+    // Vóór de extensionSet toegevoegd → deze tabel-syntax wint van de standaard
+    // en levert een `x-embed-table`-element met de rauwe tabel-markdown erin.
+    blockSyntaxes: const [EmbeddableTableSyntax()],
   );
 
-  static final _mdToDelta = MarkdownToDelta(markdownDocument: _mdDocument);
+  static final _mdToDelta = MarkdownToDelta(
+    markdownDocument: _mdDocument,
+    customElementToEmbeddable: {
+      EmbeddableTable.tableType: EmbeddableTable.fromMdSyntax,
+    },
+  );
   static final _deltaToMd = DeltaToMarkdown(
+    customEmbedHandlers: {
+      EmbeddableTable.tableType: EmbeddableTable.toMdSyntax,
+    },
     customTextAttrsHandlers: {
       Attribute.italic.key: CustomAttributeHandler(
         beforeContent: (attribute, node, output) {

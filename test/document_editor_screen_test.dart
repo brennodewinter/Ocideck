@@ -63,6 +63,53 @@ void main() {
     expect(find.byType(QuillEditor), findsOneWidget);
   });
 
+  testWidgets('Visueel: een tabel valt niet terug op ruwe markdown', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse(
+          '# Rapport\n\n'
+          '| Team | Omzet |\n| --- | ---: |\n| Ontwerp | 120 |\n',
+        ),
+      );
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    // De regressie (#1328): een tabel dwong Visueel naar de ruwe-markdown-
+    // terugval. Nu blijft het de bewerkbare WYSIWYG — de tabel is een embed.
+    expect(find.byType(MarkdownNotesEditor), findsOneWidget);
+    expect(find.byType(QuillEditor), findsOneWidget);
+    // De tabel wordt als gerenderde embed getekend (DocumentMarkdownView), niet
+    // als de letterlijke tekst `| Team | Omzet |` in een tekstveld.
+    expect(find.byType(DocumentMarkdownView), findsWidgets);
+    expect(find.text('| Team | Omzet |'), findsNothing);
+  });
+
+  testWidgets('Visueel: rauwe HTML toont de leesweergave, geen broncode', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse('# Kop\n\n<div>rauwe html</div>\n\nTekst.'),
+      );
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    // Een constructie die de brug niet verliesvrij aankan → nette leesweergave,
+    // geen ruwe markdown en geen bewerkbare Quill.
+    expect(find.byType(MarkdownNotesEditor), findsNothing);
+    expect(find.byType(QuillEditor), findsNothing);
+    expect(find.byType(DocumentMarkdownView), findsOneWidget);
+    expect(find.textContaining('Bronmodus beschermt opmaak'), findsOneWidget);
+  });
+
   testWidgets('Bron toont rauwe bron én live weergave', (tester) async {
     final n = DocumentNotifier()
       ..loadDocument(MarkdownDocument.parse('# Kop\n\nTekst.'));
