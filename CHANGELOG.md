@@ -1071,6 +1071,33 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Codekwaliteit: vier inline HttpClient-recepten naar buildPinnedClient (#1323).**
+  `media_fetch_io`, `file_service_import`, `libreplan_client` en
+  `openkat_rocky_client` kopiëerden het pinning-recept (connectionTimeout +
+  connectionFactory + connectPinned) dat al in `buildPinnedClient` staat. Eén
+  plek voor het recept betekent dat een fix aan de pinning-logica voortaan één
+  diff is in plaats van vijf — de vier kopieën liepen het risico niet mee te
+  komen. Gedrag identiek: zelfde timeout, zelfde connectionFactory, zelfde
+  `followRedirects = false` per request. De `network_sink_guard_test`-allowlist
+  is bijgewerkt.
+- **Stabiliteit: AssetPool-cache groeit niet meer onbegrensd (#1321, #1322).** De
+  git-asset-cache hield elke gedecodeerde afbeelding voor altijd in het geheugen
+  — een groot deck met veel unieke assets kon het geheugen laten oplopen zonder
+  plafond. De cache is nu een LRU met een vaste capaciteit: oudste entries
+  vallen eruit als de grens bereikt is. Geen zichtbare gedragswijziging voor een
+  normaal deck; alleen een pathologisch geval (veel unieke assets in één sessie)
+  profiteert.
+- **Beveiliging: XMPP- en CVE-transport verhard (#1316, #1318, #1319, #1320).**
+  Een audit van het XMPP-substelsel vond vier begrenzingsproblemen: de
+  SCRAM-iteratiecount had geen bovengrens (een kwaadwillende server kon een
+  oneindige count sturen en de client in een rekenklus vastzetten), de
+  frame-queue en het MUC-occupant-rooster groeiden zonder plafond, en
+  JID/nick-lengtes werden niet gecontroleerd. Allemaal gefixt met expliciete
+  caps. Daarnaast accepteerde de CVE-bulk-injest non-http(s) URL's uit een
+  release-asset — dat is nu beperkt tot `http`/`https`, en de git-CLI-operand-
+  validatie is strenger gemaakt. Geen van deze fixes verandert het
+  gebruikersgedrag; ze sluiten aanvallen af die het programma laten hangen of
+  crashen.
 - **Releaseketen verhard na een gestrande v0.3.6 (#1313, #1314, #1315).** Bij het
   uitbrengen van v0.3.6 struikelde de onbewaakte release: `windows-ophalen` haalt
   de Windows-build van de GitHub-spiegel, maar die build startte nooit. Oorzaak:
