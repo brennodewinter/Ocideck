@@ -131,9 +131,20 @@ void main() {
     ) async {
       throw MissingPluginException('geen native handler');
     });
-    expect(
-      () => pickUnfilteredMacFile(dialogTitle: 'x'),
-      throwsA(isA<MissingPluginException>()),
-    );
+    if (Platform.isMacOS) {
+      // Op macOS bereikt de aanroep het kanaal, dus de MissingPluginException
+      // komt terug uit invokeMethod en pickUnfilteredMacFile herwerpt hem.
+      await expectLater(
+        () => pickUnfilteredMacFile(dialogTitle: 'x'),
+        throwsA(isA<MissingPluginException>()),
+      );
+    } else {
+      // Buiten macOS short-circuit pickUnfilteredMacFile naar null vóór het
+      // kanaal (open_file_channel.dart: `!Platform.isMacOS` → return null), dus
+      // de fout kan hem niet bereiken. Zonder deze splitsing verwachtte de test
+      // onvoorwaardelijk een throw en viel de Linux-gate om terwijl macOS groen
+      // bleef (main-drift: alleen de Linux-gate draait de suite op Linux).
+      expect(await pickUnfilteredMacFile(dialogTitle: 'x'), isNull);
+    }
   });
 }
