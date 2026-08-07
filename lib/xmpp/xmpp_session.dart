@@ -524,6 +524,15 @@ class _FrameReader {
     );
   }
 
+  /// Max frames buffered before the handshake drains them. A hostile server
+  /// can flood frames faster than the handshake pulls them; without a cap the
+  /// queue grows unbounded (memory exhaustion).
+  static const _maxQueueSize = 256;
+
+  /// Max bytes in one frame. XMPP stanzas are small; a frame above this is
+  /// either a malformed stream or a deliberate memory bomb.
+  static const _maxFrameBytes = 512 * 1024;
+
   final _queue = <String>[];
   final _waiters = <Completer<String>>[];
   late final StreamSubscription<String> _sub;
@@ -532,11 +541,22 @@ class _FrameReader {
   void Function()? _onClosed;
 
   void _onData(String frame) {
+    // Refuse an oversized frame: a hostile server can send a multi-MB frame
+    // to exhaust memory. Drop it rather than allocating it into the queue.
+    if (frame.length > _maxFrameBytes) return;
     if (_drain != null) {
       _drain!(frame);
     } else if (_waiters.isNotEmpty) {
       _waiters.removeAt(0).complete(frame);
     } else {
+      if (_queue.length >= _maxQueueSize) {
+        _sub.cancel();
+        _onError(
+          const XmppConnectException('XMPP frame queue overflow'),
+          StackTrace.empty,
+        );
+        return;
+      }
       _queue.add(frame);
     }
   }

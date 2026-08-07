@@ -105,6 +105,14 @@ class XmppMuc {
   final String nick;
   final Duration timeout;
 
+  /// Max occupants tracked — a hostile room can flood presence for fake
+  /// occupants to exhaust memory. 500 is well above any real meeting.
+  static const _maxOccupants = 500;
+
+  /// Max length for a JID (RFC 6120 §3: 3071 bytes) or nick from presence.
+  static const _maxJidLength = 3071;
+  static const _maxNickLength = 1024;
+
   final _occupants = <String, MucOccupant>{};
   final _roster = StreamController<List<MucOccupant>>.broadcast();
   StreamSubscription<Stanza>? _sub;
@@ -179,11 +187,28 @@ class XmppMuc {
       return;
     }
 
+    // Refuse an oversized nick — a hostile server can send a multi-MB
+    // string to exhaust memory. Drop the presence silently.
+    if (occNick.length > _maxNickLength) return;
+    // An oversized realJid is nullified, not dropped: the occupant is still
+    // tracked, just without the hostile JID.
+    final rawRealJid = item?.getAttribute('jid');
+    final realJid = (rawRealJid != null && rawRealJid.length <= _maxJidLength)
+        ? rawRealJid
+        : null;
+
+    // Cap the roster: a hostile room flooding fake occupants must not
+    // grow the map unbounded. Drop new entries past the cap.
+    if (_occupants.length >= _maxOccupants &&
+        !_occupants.containsKey(occNick)) {
+      return;
+    }
+
     _occupants[occNick] = MucOccupant(
       nick: occNick,
       affiliation: _affiliationOf(item?.getAttribute('affiliation')),
       role: _roleOf(item?.getAttribute('role')),
-      realJid: item?.getAttribute('jid'),
+      realJid: realJid,
       isSelf: isSelf,
     );
     _emit();
