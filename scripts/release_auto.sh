@@ -13,7 +13,7 @@
 #   1. een menu kiest het volgende SemVer-niveau (patch/minor/major — geen 4e cijfer,
 #      OciDeck belooft strikte 3-delige SemVer, afgedwongen door check-version-bump);
 #   2. één prompt vraagt het minisign-sleutelwachtwoord (blijft alleen in het geheugen
-#      van deze run; wordt via `expect` aan minisign gevoerd, nooit naar schijf/log).
+#      van deze run; wordt via een stdin-pipe aan minisign gevoerd, nooit naar schijf/log).
 #   De macOS-notarisatie leunt op de keychain-items op deze Mac (Developer-ID +
 #   notarytool-profiel) en vraagt zelf geen wachtwoord; is de keychain vergrendeld,
 #   dan faalt die stap zichtbaar (zie de fail-safe hieronder).
@@ -146,7 +146,7 @@ fi
 # ── Voorwaarden ─────────────────────────────────────────────────────────────────
 STEP="voorwaarden"
 if [ "$PRINT_VERSION" -eq 0 ]; then
-  for c in git curl jq python3 make flutter minisign expect codesign ditto; do need_cmd "$c"; done
+  for c in git curl jq python3 make flutter minisign codesign ditto; do need_cmd "$c"; done
 fi
 
 TOKEN=""
@@ -360,11 +360,8 @@ preflight() {
   # zodat een fout wachtwoord niet pas aan het eind (na de tag) opduikt.
   local t; t="$(mktemp -d)"
   printf 'preflight\n' >"$t/probe"
-  MINISIGN_PW="$MINISIGN_PW" SUMS="$t/probe" expect <<'EXP' >/dev/null 2>&1
-set timeout 60
-spawn make sign-release SHA256SUMS=$env(SUMS)
-expect { -re "Password:|wachtwoord" { send -- "$env(MINISIGN_PW)\r"; exp_continue } eof { } }
-EXP
+  printf '%s\n' "$MINISIGN_PW" \
+    | make sign-release SHA256SUMS="$t/probe" >/dev/null 2>&1 || true
   if [ ! -f "$t/probe.minisig" ]; then
     rm -rf "$t"
     die "minisign proef-tekening faalde — sleutelwachtwoord fout of sleutel ontbreekt. Niets gemuteerd."
@@ -394,14 +391,8 @@ phase3() {
   done
   [ "$got" -eq 1 ] \
     || die "SHA256SUMS staat na wachten niet op de release voor $TAG — waarschijnlijk faalde een upstream release-job (publiceren draaide niet). Ga de release-CI na en maak daarna DEZELFDE tag af: scripts/release_auto.sh --resume $TAG."
-  MINISIGN_PW="$MINISIGN_PW" SUMS="$TMP/SHA256SUMS" expect <<'EXP' >/dev/null
-set timeout 120
-spawn make sign-release SHA256SUMS=$env(SUMS)
-expect {
-  -re "Password:|wachtwoord" { send -- "$env(MINISIGN_PW)\r"; exp_continue }
-  eof { }
-}
-EXP
+  printf '%s\n' "$MINISIGN_PW" \
+    | make sign-release SHA256SUMS="$TMP/SHA256SUMS" >/dev/null || true
   [ -f "$TMP/SHA256SUMS.minisig" ] || die "minisign leverde geen handtekening — controleer het sleutelwachtwoord."
   local rid
   rid="$(api GET "/releases/tags/$TAG" | jq -r '.id')"
