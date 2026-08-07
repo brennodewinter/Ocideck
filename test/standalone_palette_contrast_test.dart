@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/theme/image_picker_palette.dart';
 import 'package:ocideck/theme/presenter_palette.dart';
 import 'package:ocideck/utils/color_contrast.dart';
@@ -25,7 +26,11 @@ void main() {
   /// **alle** getoetst en niet tegen "het" oppervlak: dezelfde tekst staat in
   /// dit venster op de kop, op een kaart en op een overlay, en het donkerste
   /// oppervlak is niet het krapste geval — het lichtste is dat.
-  const pickerSurfaces = <String, Color>{
+  ///
+  /// De tokens zijn nu mode-afhankelijk, dus dit leest ze **per thema** vers uit
+  /// (niet const): de lichte kiezer heeft zijn eigen krapste geval, de donkere
+  /// het zijne.
+  Map<String, Color> pickerSurfaces() => {
     'bgDeepest': ImagePickerPalette.bgDeepest,
     'bgDeep': ImagePickerPalette.bgDeep,
     'bg': ImagePickerPalette.bg,
@@ -34,6 +39,18 @@ void main() {
     'surfaceAlt': ImagePickerPalette.surfaceAlt,
     'surface2': ImagePickerPalette.surface2,
   };
+
+  /// Draai [body] onder beide app-thema's (licht én donker), en zet [AppTheme.isDark]
+  /// daarna terug. De kiezer volgt nu het thema, dus elke contrastlat geldt in
+  /// beide — een licht token dat de lat mist is net zo fout als een donker.
+  void inBothThemes(void Function(String thema) body) {
+    final saved = AppTheme.isDark;
+    addTearDown(() => AppTheme.isDark = saved);
+    for (final dark in [false, true]) {
+      AppTheme.isDark = dark;
+      body(dark ? 'donker' : 'licht');
+    }
+  }
 
   const presenterSurfaces = <String, Color>{
     'bgDeepest': PresenterPalette.bgDeepest,
@@ -57,45 +74,60 @@ void main() {
   };
 
   group('afbeeldingkiezer', () {
-    test('de tekstkleuren halen 4,5:1 op elk oppervlak', () {
-      for (final (naam, ink) in [
-        ('text', ImagePickerPalette.text),
-        ('textMuted', ImagePickerPalette.textMuted),
-      ]) {
-        expect(
-          shortfall(ink, pickerSurfaces, kWcagAaNormalText),
-          isEmpty,
-          reason: '$naam is tekst en zakt hier onder de AA-lat',
-        );
-      }
+    test('de tekstkleuren halen 4,5:1 op elk oppervlak (licht + donker)', () {
+      inBothThemes((thema) {
+        final surfaces = pickerSurfaces();
+        for (final (naam, ink) in [
+          ('text', ImagePickerPalette.text),
+          ('textMuted', ImagePickerPalette.textMuted),
+        ]) {
+          expect(
+            shortfall(ink, surfaces, kWcagAaNormalText),
+            isEmpty,
+            reason:
+                '$naam is tekst en zakt in het $thema-thema onder de AA-lat',
+          );
+        }
+      });
     });
 
-    test('de gedempte icoonkleur haalt 3:1 op elk oppervlak', () {
-      expect(
-        shortfall(ImagePickerPalette.iconDim, pickerSurfaces, kWcagAaLargeText),
-        isEmpty,
-        reason:
-            'iconDim kleurt grafische onderdelen; onder 3:1 is ook dat niet '
-            'meer te zien',
-      );
-    });
+    test(
+      'de gedempte icoonkleur haalt 3:1 op elk oppervlak (licht + donker)',
+      () {
+        inBothThemes((thema) {
+          expect(
+            shortfall(
+              ImagePickerPalette.iconDim,
+              pickerSurfaces(),
+              kWcagAaLargeText,
+            ),
+            isEmpty,
+            reason:
+                'iconDim kleurt grafische onderdelen; onder 3:1 is ook dat niet '
+                'meer te zien ($thema-thema)',
+          );
+        });
+      },
+    );
 
-    test('iconDim is en blijft ongeschikt als tekst', () {
+    test('iconDim is en blijft ongeschikt als tekst (licht + donker)', () {
       // Geen bewaking maar een vastlegging: dit token háált de tekstlat niet,
       // en dat is precies waarom het niet meer `textDim` heet. Trekt iemand de
       // waarde ooit op tot boven 4,5, dan valt deze toets — en dan is de vraag
       // of `iconDim` en `textMuted` nog twee tinten zijn of één.
-      expect(
-        shortfall(
-          ImagePickerPalette.iconDim,
-          pickerSurfaces,
-          kWcagAaNormalText,
-        ),
-        isNotEmpty,
-        reason:
-            'iconDim haalt nu wél overal de tekstlat — heroverweeg of hij naast '
-            'textMuted nog bestaansrecht heeft',
-      );
+      inBothThemes((thema) {
+        expect(
+          shortfall(
+            ImagePickerPalette.iconDim,
+            pickerSurfaces(),
+            kWcagAaNormalText,
+          ),
+          isNotEmpty,
+          reason:
+              'iconDim haalt in het $thema-thema wél overal de tekstlat — '
+              'heroverweeg of hij naast textMuted nog bestaansrecht heeft',
+        );
+      });
     });
 
     test('het label op een gekleurde vulling leest', () {

@@ -98,7 +98,10 @@ extension _CarouselDelete on _ImageCarouselPickerState {
               Expanded(
                 child: Text(
                   l10n.d('Afbeelding verwijderen?'),
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(
+                    color: ImagePickerPalette.text,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ],
@@ -109,7 +112,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
             children: [
               Text(
                 p.basename(path),
-                style: const TextStyle(
+                style: TextStyle(
                   color: ImagePickerPalette.text,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
@@ -121,12 +124,12 @@ extension _CarouselDelete on _ImageCarouselPickerState {
                   l10n.d(
                     'Het bestand wordt permanent van schijf verwijderd. Deze actie kan niet ongedaan worden gemaakt.',
                   ),
-                  style: const TextStyle(color: _muted, fontSize: 13),
+                  style: TextStyle(color: _muted, fontSize: 13),
                 )
               else ...[
                 Text(
                   '${l10n.d('Let op: deze afbeelding wordt nog gebruikt in')} $slideCount ${slideCount == 1 ? l10n.d("slide") : l10n.t("slides")}:',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: ImagePickerPalette.warning,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -144,7 +147,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
                             padding: const EdgeInsets.only(bottom: 3),
                             child: Text(
                               '•  $u',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: ImagePickerPalette.text,
                                 fontSize: 12.5,
                               ),
@@ -159,7 +162,7 @@ extension _CarouselDelete on _ImageCarouselPickerState {
                   l10n.d(
                     'Verwijderen maakt die slides leeg. Dit kan niet ongedaan worden gemaakt.',
                   ),
-                  style: const TextStyle(color: _muted, fontSize: 13),
+                  style: TextStyle(color: _muted, fontSize: 13),
                 ),
               ],
             ],

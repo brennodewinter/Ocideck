@@ -37,6 +37,7 @@ import '../utils/image_search_paths.dart';
 import '../utils/log.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_paste_cleanup.dart';
+import '../utils/markdown_visual_compatibility.dart';
 import '../utils/table_clipboard.dart';
 import '../utils/user_facing_error.dart';
 import 'dialogs/convert_to_presentation_dialog.dart';
@@ -46,6 +47,7 @@ import 'dialogs/package_encrypt_dialog.dart';
 import 'dialogs/settings_dialog.dart';
 import 'editors/_editor_field.dart' show reportImageImportFailure;
 import 'editors/chart_editor.dart';
+import 'editors/embed_editor_dialog.dart';
 import 'editors/table_editor.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'reader/document_markdown_view.dart';
@@ -546,35 +548,20 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
   }
 
-  /// Visuele modus: bewerkbaar schrijfoppervlak via de gedeelde
-  /// [MarkdownNotesEditor] (WYSIWYG wanneer de bron dat toelaat, anders rauw
-  /// markdown — beide bewerkbaar). Geen read-only preview meer als hoofdoppervlak.
+  /// Visuele modus: een echt geïnterpreteerd oppervlak — nooit meer rauwe
+  /// markdown. Kan de bron verliesvrij door de WYSIWYG-laag (koppen, opmaak,
+  /// lijsten, links én tabellen-als-embed), dan is dat een bewerkbaar
+  /// schrijfoppervlak ([MarkdownNotesEditor]). Bevat de bron een constructie die
+  /// de brug nog niet verliesvrij aankan (rauwe HTML, voetnoten, ontsnapte
+  /// leestekens), dan toont Visueel de nette **leesweergave** i.p.v. de tekst als
+  /// broncode; die tekst bewerk je dan in Bron (grafiek/tabel blijven met
+  /// dubbelklik bewerkbaar). Zo geeft Visueel altijd opmaak te zien.
   Widget _visualLayout(ThemeData theme, String source, BoxConstraints c) {
     final divider = theme.colorScheme.outlineVariant;
     final showRail = c.maxWidth >= 940;
-    final editor = MarkdownNotesEditor(
-      controller: _controller,
-      focusNode: _editorFocus,
-      editorTheme: MarkdownEditorTheme.documentSurface(
-        scheme: theme.colorScheme,
-      ),
-      hintText: '',
-      expand: true,
-      // Opmaakbalk zit al in [_DocEditorToolbar] voor de bron; hier toont de
-      // notes-editor zijn eigen balk (Quill of markdown) passend bij de modus.
-      showToolbar: true,
-      showModeToggle: false,
-      mode: NotesEditorMode.visual,
-      surfaceStyle: NotesSurfaceStyle.document,
-      bordered: false,
-      revealSignal: _revealSignal,
-      revealMarkdownOffset: _revealMarkdownOffset,
-      revealTitle: _revealTitle,
-      onVisualCaret: _syncOutlineToVisualCaret,
-      tryConsumePaste: _smartPaste,
-      // Afbeelding-knop → carrousel, geen `![beschrijving](pad-of-url)`-dump.
-      onInsertImage: () => unawaited(_insertImage()),
-    );
+    final editor = markdownVisualLimitations(source).isEmpty
+        ? _wysiwygEditor(theme)
+        : _renderedVisual(theme, source);
     return Row(
       children: [
         if (showRail) ...[
@@ -585,6 +572,49 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       ],
     );
   }
+
+  /// Het bewerkbare WYSIWYG-oppervlak van de Visuele modus.
+  Widget _wysiwygEditor(ThemeData theme) => MarkdownNotesEditor(
+    controller: _controller,
+    focusNode: _editorFocus,
+    editorTheme: MarkdownEditorTheme.documentSurface(scheme: theme.colorScheme),
+    hintText: '',
+    expand: true,
+    // Opmaakbalk zit al in [_DocEditorToolbar] voor de bron; hier toont de
+    // notes-editor zijn eigen Quill-balk passend bij de modus.
+    showToolbar: true,
+    showModeToggle: false,
+    mode: NotesEditorMode.visual,
+    surfaceStyle: NotesSurfaceStyle.document,
+    bordered: false,
+    revealSignal: _revealSignal,
+    revealMarkdownOffset: _revealMarkdownOffset,
+    revealTitle: _revealTitle,
+    onVisualCaret: _syncOutlineToVisualCaret,
+    tryConsumePaste: _smartPaste,
+    // Afbeelding-knop → carrousel, geen `![beschrijving](pad-of-url)`-dump.
+    onInsertImage: () => unawaited(_insertImage()),
+  );
+
+  /// De leesweergave-terugval van de Visuele modus: de nette gerenderde weergave
+  /// met een hint dat je de tekst in Bron bewerkt (dezelfde [markdownSourceModeHint]
+  /// als de notes-editor gebruikt). Grafiek en tabel blijven met dubbelklik
+  /// bewerkbaar (via [_preview]). Gebruikt wanneer de bron een constructie bevat
+  /// die de WYSIWYG-brug nog niet verliesvrij round-trip't.
+  Widget _renderedVisual(ThemeData theme, String source) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      Container(
+        color: theme.colorScheme.surfaceContainerHighest,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        child: markdownSourceModeHint(
+          context,
+          MarkdownEditorTheme.documentSurface(scheme: theme.colorScheme),
+        ),
+      ),
+      Expanded(child: _preview(theme, source)),
+    ],
+  );
 
   Widget _editor(ThemeData theme) => Shortcuts(
     shortcuts: const {
@@ -643,42 +673,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         ),
       );
 
-  /// De gedeelde dialoogschil voor het bewerken van een ingebedde kaart (grafiek
-  /// of tabel): de volwaardige editor in een venster met Annuleren/Toepassen
-  /// (bestaande l10n). Het venster mikt op 760×560 maar klemt op de
-  /// kijkvenstermaat, zodat het ook op een klein of laag scherm past in plaats
-  /// van horizontaal over te lopen (de vaste maat kromp zelf niet mee). Geeft
-  /// `true` terug bij Toepassen.
-  Future<bool?> _embedEditorDialog(Widget editor) {
-    final l10n = context.l10n;
-    return showDialog<bool>(
-      context: context,
-      builder: (ctx) {
-        final media = MediaQuery.of(ctx).size;
-        final width = math.max(280.0, math.min(760.0, media.width - 96));
-        final height = math.max(320.0, math.min(560.0, media.height - 160));
-        return AlertDialog(
-          contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-          content: SizedBox(
-            width: width,
-            height: height,
-            child: SingleChildScrollView(child: editor),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(ctx).pop(false),
-              child: Text(l10n.d('Annuleren')),
-            ),
-            FilledButton(
-              onPressed: () => Navigator.of(ctx).pop(true),
-              child: Text(l10n.d('Toepassen')),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   /// Dubbelklik op een gerenderde grafiek → de volwaardige [ChartEditor] in een
   /// dialoog (dezelfde editor als een dia, met een wegwerp-[Slide] om zijn bron
   /// vast te houden). 'Toepassen' schrijft het bewerkte ```chart-blok terug op
@@ -686,7 +680,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   Future<void> _editChart(int chartOrdinal, String block) async {
     var edited = block;
     final slide = Slide.create(SlideType.chart).copyWith(customMarkdown: block);
-    final apply = await _embedEditorDialog(
+    final apply = await showEmbedEditorDialog(
+      context,
       ChartEditor(
         slide: slide,
         themeAnimationDurationMs: 0,
@@ -722,7 +717,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       tableRows: decoded.rows,
       tableColumnAlignments: decoded.alignments,
     );
-    final apply = await _embedEditorDialog(
+    final apply = await showEmbedEditorDialog(
+      context,
       TableEditor(
         slide: slide,
         nestedInScrollView: true,
@@ -838,7 +834,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   Future<void> _insertChart() async {
     final slide = Slide.create(SlideType.chart);
     var spec = ChartSpec.parse(slide.customMarkdown).toBlock();
-    final apply = await _embedEditorDialog(
+    final apply = await showEmbedEditorDialog(
+      context,
       ChartEditor(
         slide: slide,
         themeAnimationDurationMs: 0,
@@ -855,7 +852,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   Future<void> _insertTable() async {
     final slide = Slide.create(SlideType.table);
     var rows = slide.tableRows;
-    final apply = await _embedEditorDialog(
+    final apply = await showEmbedEditorDialog(
+      context,
       TableEditor(
         slide: slide,
         nestedInScrollView: true,

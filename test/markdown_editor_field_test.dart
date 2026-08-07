@@ -49,8 +49,12 @@ void main() {
   }
 
   test('complex Markdown is kept in source mode', () {
-    expect(markdownNeedsSourceMode('| A | B |\n|---|---|'), isTrue);
+    // Een tabel round-trip't nu als embed → geen bronstand meer nodig.
+    expect(markdownNeedsSourceMode('| A | B |\n|---|---|'), isFalse);
     expect(markdownNeedsSourceMode('Gewone **tekst**'), isFalse);
+    // Voetnoten en HTML-commentaar kan de brug nog niet verliesvrij aan.
+    expect(markdownNeedsSourceMode('Zie[^1]\n\n[^1]: noot'), isTrue);
+    expect(markdownNeedsSourceMode('<!-- verborgen -->'), isTrue);
   });
 
   testWidgets('the inline field stays quiet — no floating toolbar on focus', (
@@ -148,7 +152,7 @@ void main() {
     expect(controller.text, 'drie');
   });
 
-  testWidgets('table content opens in source mode with the protective hint', (
+  testWidgets('table content stays in the visual editor as an embed', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(1200, 800));
@@ -158,16 +162,10 @@ void main() {
     await tester.pumpWidget(host(controller));
 
     await openDialog(tester);
-    // No lossy visual editor for a table; raw source instead.
-    expect(find.byType(QuillEditor), findsNothing);
-    expect(
-      find.descendant(
-        of: find.byType(Dialog),
-        matching: find.byType(TextField),
-      ),
-      findsOneWidget,
-    );
-    expect(find.byIcon(Icons.shield_outlined), findsOneWidget);
+    // Een tabel valt niet meer terug op ruwe bron: hij blijft in de WYSIWYG als
+    // bewerkbare embed, zónder de beschermende bronmodus-hint.
+    expect(find.byType(QuillEditor), findsOneWidget);
+    expect(find.byIcon(Icons.shield_outlined), findsNothing);
   });
 
   testWidgets('last chosen Markdown mode is restored for compatible text', (

@@ -60,11 +60,10 @@ class _HostState extends State<_Host> {
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
-  // De heen-en-terugweg door de rijke-tekstlaag is niet verliesvrij. Wie de
-  // visuele stand alleen aanzet om te kíjken, mag daar geen tekst aan
-  // overhouden die stuk is.
+  // De heen-en-terugweg door de rijke-tekstlaag is niet verliesvrij voor de
+  // constructies die de brug (nog) niet aankan: die vallen terug op de
+  // bronstand met de beschermende hint. Wie alleen kíjkt, houdt zijn tekst.
   for (final geval in const [
-    ('een tabel', '| Poort | Status |\n| --- | --- |\n| 443 | open |'),
     ('backslash-ontsnappingen', r'Prijs is 5 \* 3, pad C:\\temp'),
     ('een voetnoot', 'Zie hier[^1]\n\n[^1]: de noot'),
   ]) {
@@ -85,6 +84,27 @@ void main() {
       expect(controller.text, geval.$2);
     });
   }
+
+  // Een tabel valt niet meer terug: hij wordt een blok-embed in de visuele
+  // stand (geen bronstand, geen hint). Alleen kíjken laat de bron byte-getrouw
+  // staan — de embed schrijft pas terug bij een echte bewerking.
+  testWidgets('kijken in de visuele stand laat een tabel intact (embed)', (
+    tester,
+  ) async {
+    const table = '| Poort | Status |\n| --- | --- |\n| 443 | open |';
+    final controller = TextEditingController(text: table);
+    addTearDown(controller.dispose);
+
+    await tester.pumpWidget(_testApp(_Host(controller: controller)));
+    await tester.tap(find.text('wissel'));
+    await tester.pumpAndSettle();
+    expect(find.byType(QuillEditor), findsOneWidget);
+    expect(find.textContaining('Bronmodus beschermt opmaak'), findsNothing);
+    await tester.tap(find.text('wissel'));
+    await tester.pumpAndSettle();
+
+    expect(controller.text, table);
+  });
 
   testWidgets('een echte wijziging in de visuele stand komt wél terug', (
     tester,

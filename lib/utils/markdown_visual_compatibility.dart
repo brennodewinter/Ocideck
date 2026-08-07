@@ -1,6 +1,11 @@
 /// Constructs that the current rich-text bridge cannot round-trip without
 /// changing the author's Markdown source.
-enum MarkdownVisualLimitation { table, rawHtml, escapedPunctuation, footnote }
+///
+/// A GFM table is deliberately **absent** here: it round-trips losslessly as an
+/// `x-embed-table` block embed (see `MarkdownQuillCodec` / `TableEmbedBuilder`),
+/// so it is rendered and editable in the visual editor instead of forcing a
+/// fall back to raw Markdown.
+enum MarkdownVisualLimitation { rawHtml, escapedPunctuation, footnote }
 
 Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
   final limitations = <MarkdownVisualLimitation>{};
@@ -13,11 +18,6 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
       continue;
     }
     if (fenced) continue;
-    if (RegExp(r'^\s*\|?.+\|.+\|?\s*$').hasMatch(line) &&
-        index + 1 < lines.length &&
-        RegExp(r'^\s*\|?\s*:?-{3,}:?').hasMatch(lines[index + 1])) {
-      limitations.add(MarkdownVisualLimitation.table);
-    }
     if (RegExp(r'<!--|</?[A-Za-z][^>]*>').hasMatch(line)) {
       limitations.add(MarkdownVisualLimitation.rawHtml);
     }

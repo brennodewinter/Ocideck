@@ -466,7 +466,10 @@ extension _CarouselActions on _ImageCarouselPickerState {
               Expanded(
                 child: Text(
                   '${l10n.d('Dubbele afbeeldingen opruimen?')} ($removeCount)',
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(
+                    color: ImagePickerPalette.text,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ],
@@ -481,7 +484,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
                   l10n.d(
                     'Van elke groep blijft één bestand staan. Tags en opmerkingen worden samengevoegd en slides die een kopie gebruiken verwijzen daarna naar het behouden bestand — ook in presentaties die nu niet geopend zijn.',
                   ),
-                  style: const TextStyle(color: _muted, fontSize: 13),
+                  style: TextStyle(color: _muted, fontSize: 13),
                 ),
                 const SizedBox(height: 12),
                 Flexible(
@@ -492,7 +495,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
                         for (final entry in plan) ...[
                           Row(
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.check_circle_outline,
                                 size: 14,
                                 color: ImagePickerPalette.success,
@@ -501,7 +504,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
                               Expanded(
                                 child: Text(
                                   p.basename(entry.keeper),
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: ImagePickerPalette.text,
                                     fontSize: 12.5,
                                     fontWeight: FontWeight.w600,
@@ -516,7 +519,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
                               padding: const EdgeInsets.only(left: 20, top: 2),
                               child: Row(
                                 children: [
-                                  const Icon(
+                                  Icon(
                                     Icons.delete_outline,
                                     size: 13,
                                     color: ImagePickerPalette.dangerSoft,
@@ -525,7 +528,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
                                   Expanded(
                                     child: Text(
                                       p.basename(path),
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         color: _muted,
                                         fontSize: 12,
                                       ),
