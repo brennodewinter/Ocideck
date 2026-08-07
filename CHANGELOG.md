@@ -1071,6 +1071,16 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Docs: de HTML-export laat de dia-overlays weg — nu vastgelegd als bekende
+  beperking.** Bij het keuren van de paginanummer-fix (#1330) bleek dat de
+  eigen footertekst en paginanummering niet in de single-file HTML-export komen.
+  Getoetst tegen de echt gegenereerde HTML: het is geen op zichzelf staande bug
+  maar een bewuste grens — de HTML-export reproduceert de hele overlaylaag niet
+  (footer, logo, watermerk, per-dia TLP-badge en de PrivacyKat-badge), want die
+  laag hoort bij OciDeck's eigen renderer en niet bij de Markdown. De
+  classificatie reist wél mee, als banner bovenaan het document. PDF/PPTX houden
+  de footer en paginanummers wél. Vastgelegd in `KNOWN_LIMITATIONS.md` met een
+  verwijzing vanuit de USER_GUIDE-exportsectie.
 - **Paginanummer staat weer rechtsonder, ook bij een gecentreerde footer
   (#1330).** De instelling belooft "Paginanummers tonen (rechtsonder)", maar het
   nummer reed mee in dezelfde `Row` als de footertekst en volgde daardoor de
