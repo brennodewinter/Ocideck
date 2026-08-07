@@ -236,6 +236,11 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
               icon: const Icon(Icons.public_outlined, size: 15),
             ),
             ButtonSegment(
+              value: DocumentExportFormat.latex,
+              label: Text(l10n.d('LaTeX (.tex)')),
+              icon: const Icon(Icons.science_outlined, size: 15),
+            ),
+            ButtonSegment(
               value: DocumentExportFormat.ocideck,
               label: Text(l10n.d('Pakket (.ocideck)')),
               icon: const Icon(Icons.inventory_2_outlined, size: 15),
@@ -253,6 +258,9 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
           ),
           DocumentExportFormat.html => l10n.d(
             'Eén toegankelijk HTML-bestand dat in elke browser opent zonder internet, met tabellen, wiskunde, mermaid en grafieken.',
+          ),
+          DocumentExportFormat.latex => l10n.d(
+            'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.',
           ),
           DocumentExportFormat.ocideck => l10n.d(
             'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.',

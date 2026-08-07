@@ -72,6 +72,8 @@ const _stringsFi = {
   'exportAsPdf': 'Vie PDF-muodossa',
   'exportAsPptx': 'Vie PPTX-muodossa',
   'exportAsHtml': 'Vie HTML-muodossa (Marp, offline)',
+  'exportAsLatex': 'Vie LaTeXina (Beamer)',
+
   'renderingSlides': 'Renderöidään dioja…',
   'buildingHtml': 'Kootaan HTML-tiedostoa…',
   'buildingExport': 'kootaan…',
@@ -1771,6 +1773,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML avautuu missä tahansa selaimessa ilman internetiä ja renderöi koodilohkot, matematiikan ja mermaid-kaaviot. LaTeX (Beamer) käännetään pdflatex- tai xelatex-komennolla.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'LaTeX article -asiakirja. Matematiikka kulkee suoraan läpi; kuvat viitataan suhteellisella polulla. Käännä pdflatex- tai xelatex-komennolla.',
   'Afbeelding geplakt': 'Kuva liitetty',
   'Bibliotheekmap niet bereikbaar': 'Kirjastokansio ei saavutettavissa',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

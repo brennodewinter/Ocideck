@@ -74,6 +74,8 @@ const _stringsLa = {
   'exportAsPdf': 'Exportare ut PDF',
   'exportAsPptx': 'Exportare ut PPTX',
   'exportAsHtml': 'Exportare ut HTML (Marp, sine rete)',
+  'exportAsLatex': 'Exporta ut LaTeX (Beamer)',
+
   'renderingSlides': 'Diapositivae exhibentur…',
   'buildingHtml': 'HTML componitur…',
   'buildingExport': 'componitur…',
@@ -1787,6 +1789,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML in quovis navigatro sine internet aperit et codicis fragmenta, mathematicam, mermaid diagrammata reddit. LaTeX (Beamer) cum pdflatex aut xelatex compilatur.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Documentum LaTeX article. Mathematica directe transit; imagines via relativa referuntur. Compila cum pdflatex aut xelatex.',
   'Afbeelding geplakt': 'Imago infixa',
   'Bibliotheekmap niet bereikbaar': 'Plica bibliothecae non pervia',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

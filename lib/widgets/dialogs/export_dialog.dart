@@ -352,7 +352,8 @@ class _ExportDialogState extends State<ExportDialog> {
     required bool compress,
     required AppLocalizations l10n,
   }) async {
-    final needsRaster = format != ExportFormat.html;
+    final needsRaster =
+        format != ExportFormat.html && format != ExportFormat.latex;
 
     // Show progress immediately so the dialog does not look idle while the
     // quality gate or the first heavy raster pass runs.
@@ -722,11 +723,16 @@ class _ExportDialogState extends State<ExportDialog> {
           label: l10n.t('exportAsHtml'),
           onPressed: _loading ? null : () => _export(ExportFormat.html),
         ),
+        _exportButton(
+          icon: _formatIcon(ExportFormat.latex),
+          label: l10n.t('exportAsLatex'),
+          onPressed: _loading ? null : () => _export(ExportFormat.latex),
+        ),
         Padding(
           padding: const EdgeInsets.only(top: 4),
           child: Text(
             l10n.d(
-              'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen.',
+              'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.',
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
@@ -797,6 +803,8 @@ class _ExportDialogState extends State<ExportDialog> {
         return Icons.slideshow_outlined;
       case ExportFormat.html:
         return Icons.public_outlined;
+      case ExportFormat.latex:
+        return Icons.science_outlined;
     }
   }
 }

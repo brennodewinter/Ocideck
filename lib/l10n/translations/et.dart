@@ -71,6 +71,8 @@ const _stringsEt = {
   'exportAsPdf': 'Ekspordi PDF-ina',
   'exportAsPptx': 'Ekspordi PPTX-ina',
   'exportAsHtml': 'Ekspordi HTML-ina (Marp, võrguühenduseta)',
+  'exportAsLatex': 'Ekspordi LaTeXina (Beamer)',
+
   'renderingSlides': 'Slaidide renderdamine…',
   'buildingHtml': 'HTML-i koostamine…',
   'buildingExport': 'koostamine…',
@@ -1762,6 +1764,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML avaneb igas brauseris ilma internetita ja renderdab koodiplokid, matemaatika ja mermaid diagrammid. LaTeX (Beamer) kompileeritakse pdflatex või xelatex-iga.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'LaTeX article dokument. Matemaatika läheb otse läbi; pildid viidatakse suhtelise teega. Kompileeri pdflatex või xelatex-iga.',
   'Afbeelding geplakt': 'Pilt kleebitud',
   'Bibliotheekmap niet bereikbaar': 'Teegi kaust pole kättesaadav',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

@@ -72,6 +72,8 @@ const _stringsHr = {
   'exportAsPdf': 'Izvezi kao PDF',
   'exportAsPptx': 'Izvezi kao PPTX',
   'exportAsHtml': 'Izvezi kao HTML (Marp, izvanmrežno)',
+  'exportAsLatex': 'Izvezi kao LaTeX (Beamer)',
+
   'renderingSlides': 'Iscrtavanje slajdova…',
   'buildingHtml': 'Izrada HTML-a…',
   'buildingExport': 'izrada…',
@@ -1777,6 +1779,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML se otvara u bilo kojem pregledniku bez interneta i prikazuje blokove koda, matematiku i mermaid dijagrame. LaTeX (Beamer) kompilira se s pdflatex ili xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'LaTeX article dokument. Matematika prolazi izravno; slike se referenciraju relativnom putanjom. Kompilirajte s pdflatex ili xelatex.',
   'Afbeelding geplakt': 'Slika zalijepljena',
   'Bibliotheekmap niet bereikbaar': 'Mapa knjižnice nedostupna',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

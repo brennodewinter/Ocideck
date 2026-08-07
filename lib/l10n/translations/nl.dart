@@ -72,6 +72,7 @@ const _stringsNl = {
   'exportAsPdf': 'Exporteer als PDF',
   'exportAsPptx': 'Exporteer als PPTX',
   'exportAsHtml': 'Exporteer als HTML (Marp, offline)',
+  'exportAsLatex': 'Exporteer als LaTeX (Beamer)',
   'renderingSlides': 'Slides renderen…',
   'buildingHtml': 'HTML samenstellen…',
   'buildingExport': 'samenstellen…',

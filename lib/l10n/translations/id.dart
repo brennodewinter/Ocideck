@@ -72,6 +72,8 @@ const _stringsId = {
   'exportAsPdf': 'Ekspor sebagai PDF',
   'exportAsPptx': 'Ekspor sebagai PPTX',
   'exportAsHtml': 'Ekspor sebagai HTML (Marp, offline)',
+  'exportAsLatex': 'Ekspor sebagai LaTeX (Beamer)',
+
   'renderingSlides': 'Merender slide…',
   'buildingHtml': 'Menyusun HTML…',
   'buildingExport': 'menyusun…',
@@ -1771,6 +1773,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML terbuka di browser apa pun tanpa internet dan merender blok kode, matematika, dan diagram mermaid. LaTeX (Beamer) dikompilasi dengan pdflatex atau xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Dokumen LaTeX article. Matematika langsung masuk; gambar direferensikan dengan path relatif. Kompilasi dengan pdflatex atau xelatex.',
   'Afbeelding geplakt': 'Gambar ditempel',
   'Bibliotheekmap niet bereikbaar': 'Folder perpustakaan tidak dapat dijangkau',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

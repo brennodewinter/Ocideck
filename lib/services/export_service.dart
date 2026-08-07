@@ -29,11 +29,13 @@ import 'export_bundle.dart';
 import 'export_metadata.dart';
 import 'html_image_embedder.dart';
 import 'image_service.dart';
+import 'latex/beamer_slide_builder.dart';
+import 'latex/latex_preamble.dart';
 import 'quality_export_policy.dart';
 import 'marp_html_service.dart';
 import 'classification_policy.dart';
 
-enum ExportFormat { pdf, pptx, html }
+enum ExportFormat { pdf, pptx, html, latex }
 
 extension ExportFormatExtension on ExportFormat {
   String get label {
@@ -44,6 +46,8 @@ extension ExportFormatExtension on ExportFormat {
         return 'PowerPoint (PPTX)';
       case ExportFormat.html:
         return 'HTML (Marp, self-contained)';
+      case ExportFormat.latex:
+        return 'LaTeX (Beamer)';
     }
   }
 
@@ -55,6 +59,8 @@ extension ExportFormatExtension on ExportFormat {
         return '.pptx';
       case ExportFormat.html:
         return '.html';
+      case ExportFormat.latex:
+        return '.tex';
     }
   }
 }
@@ -196,6 +202,10 @@ class ExportService {
       if (markdown == null || markdown.trim().isEmpty) {
         return ExportResult.fail('Geen inhoud om te exporteren.');
       }
+    } else if (format == ExportFormat.latex) {
+      if (audience == null || audience.audience.slides.isEmpty) {
+        return ExportResult.fail('Geen inhoud om te exporteren.');
+      }
     } else if (images.isEmpty) {
       return ExportResult.fail('Geen slides om te exporteren.');
     }
@@ -255,6 +265,8 @@ class ExportService {
             fallbackTitle: fallbackTitle,
             interfaceLanguageCode: interfaceLanguageCode,
           );
+        case ExportFormat.latex:
+          bytes = utf8.encode(_buildLatex(audience!, metadata: docMeta));
       }
       if (kIsWeb) {
         // Web: geen bestandssysteem — file_picker maakt van de bytes een
@@ -292,6 +304,19 @@ class ExportService {
 
   /// Bouwt het HTML-document en levert het als bytes.
   ///
+  /// Bouwt een LaTeX Beamer-document uit het geprojecteerde deck. De body
+  /// komt uit [buildBeamerBody], de preamble uit [beamerPreamble]. Afbeeldingen
+  /// worden op relatief pad gereferentieerd — LaTeX kent geen data-URI-
+  /// inlining (ponytail: ceiling is single-file; upgrade path is een zip-bundel
+  /// met .tex + images).
+  String _buildLatex(
+    ExportBundle audience, {
+    required ExportDocumentMetadata metadata,
+  }) {
+    final body = buildBeamerBody(audience.audience.deck);
+    return '${beamerPreamble(metadata)}\n$body\n$beamerPostamble\n';
+  }
+
   /// De insluitfunctie voor afbeeldingen wordt hier gemaakt en niet in de
   /// bouwer: de projectmap is de map van het deck, en die begrenzing hoort bij
   /// de laag die het bestandssysteem kent — zodat een deck van een derde geen

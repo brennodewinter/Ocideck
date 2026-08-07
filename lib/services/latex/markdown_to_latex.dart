@@ -1,0 +1,496 @@
+// Markdown → LaTeX-kernconverter.
+//
+// Zet een GFM-Markdown-string om in een LaTeX-fragment (geen preamble, geen
+// \documentclass — dat leveren de wrappers in latex_preamble.dart). Deze kern
+// is gedeeld tussen de Document-export (article) en de Deck-export (beamer):
+// de ene gebruikt hem voor de body, de andere per-frame.
+//
+// Hergebruikt de `markdown`-package (pubspec: `markdown: ^7.3.1`) als
+// AST-parser — hetzelfde patroon als `lib/utils/markdown_quill_codec.dart`.
+// Geen nieuwe dependency.
+//
+// Wiskunde pass-through: `$...$` (inline) en `$$...$$` (display) zijn native
+// LaTeX. De `markdown`-package parseert `$` niet als markdown, dus de ruwe
+// tekst komt als `Text`-node door; de converter detecteert de math-delimiters
+// en laat de inhoud ongewijzigd staan, zodat LaTeX het zelf rendert.
+
+import 'package:markdown/markdown.dart' as md;
+
+/// Zet [markdown] (GFM) om in een LaTeX-fragment.
+///
+/// De uitvoer is platte LaTeX zonder preamble. Bedoeld om in een
+/// `\documentclass{article}`- of `beamer`-document ingebed te worden door de
+/// wrappers in `latex_preamble.dart`.
+String markdownToLatex(String markdown) {
+  if (markdown.trim().isEmpty) return '';
+  final protected = _MathProtector.protect(markdown);
+  final document = md.Document(
+    encodeHtml: false,
+    extensionSet: md.ExtensionSet.gitHubFlavored,
+  );
+  final nodes = document.parse(protected.text);
+  final visitor = _LatexNodeVisitor(mathBlocks: protected.blocks);
+  for (final node in nodes) {
+    node.accept(visitor);
+  }
+  return visitor.output.toString().trimRight();
+}
+
+/// Zet een inline-fragment [markdown] om in LaTeX (geen blok-elementen).
+///
+/// Gebruikt door de Beamer-slidebouwer voor titels en bullet-tekst waar een
+/// volledige blok-parse ongewenst is.
+String markdownInlineToLatex(String markdown) {
+  if (markdown.isEmpty) return '';
+  final protected = _MathProtector.protect(markdown);
+  final document = md.Document(
+    encodeHtml: false,
+    extensionSet: md.ExtensionSet.gitHubFlavored,
+  );
+  final nodes = document.parseInline(protected.text);
+  final visitor = _LatexNodeVisitor(mathBlocks: protected.blocks);
+  for (final node in nodes) {
+    node.accept(visitor);
+  }
+  return visitor.output.toString();
+}
+
+class _LatexNodeVisitor implements md.NodeVisitor {
+  _LatexNodeVisitor({this._mathBlocks = const {}});
+
+  final StringBuffer output = StringBuffer();
+
+  /// Placeholder → originele math-inhoud. De parser stript backslashes voor
+  /// leestekens (`\,` → `,`), dus we beschermen math vóór de parse en herstellen
+  /// hem hier.
+  final Map<String, String> _mathBlocks;
+
+  /// Stack van context-vlaggen per open element.
+  final List<_Ctx> _stack = [];
+
+  /// Tijdelijke buffer voor de huidige tabel-rij; cellen worden hierin
+  /// verzameld en bij het sluiten van de rij naar [output] gespoten.
+  final StringBuffer _rowBuf = StringBuffer();
+
+  /// Of we momenteel in een tabel bezig zijn — dan schrijven we naar
+  /// [_rowBuf] in plaats van [output].
+  bool get _inTable => _stack.any((c) => c == _Ctx.table);
+
+  /// Of we in een code-blok zitten (binnen <pre>) — dan geen tekst-escaping.
+  bool get _inCodeBlock => _stack.any((c) => c == _Ctx.codeBlock);
+
+  /// Of we in inline-code zitten — dan geen tekst-escaping.
+  bool get _inInlineCode => _stack.any((c) => c == _Ctx.inlineCode);
+
+  bool get _suppressEscape => _inCodeBlock || _inInlineCode;
+
+  /// De buffer waar we nu heen schrijven: [_rowBuf] binnen een tabel-cel,
+  /// anders [output].
+  StringBuffer get _buf => _inTable ? _rowBuf : output;
+
+  @override
+  void visitText(md.Text text) {
+    if (_suppressEscape) {
+      _buf.write(_restoreMath(text.text));
+      return;
+    }
+    _buf.write(_escapeText(_restoreMath(text.text)));
+  }
+
+  /// Vervang math-placeholders door de originele inhoud. Buiten code-blokken
+  /// wordt de herstelde tekst daarna door [_escapeText] gehaald, maar
+  /// `_escapeText` herkent `$...$` en `$$...$$` als math en laat ze staan.
+  String _restoreMath(String s) {
+    if (_mathBlocks.isEmpty) return s;
+    var result = s;
+    for (final entry in _mathBlocks.entries) {
+      result = result.replaceAll(entry.key, entry.value);
+    }
+    return result;
+  }
+
+  @override
+  bool visitElementBefore(md.Element element) {
+    switch (element.tag) {
+      // ── Koppen ──
+      case 'h1':
+        output.write('\\section{');
+        _stack.add(_Ctx.heading);
+      case 'h2':
+        output.write('\\subsection{');
+        _stack.add(_Ctx.heading);
+      case 'h3':
+        output.write('\\subsubsection{');
+        _stack.add(_Ctx.heading);
+      case 'h4':
+        output.write('\\paragraph{');
+        _stack.add(_Ctx.heading);
+      case 'h5':
+        output.write('\\subparagraph{');
+        _stack.add(_Ctx.heading);
+      case 'h6':
+        output.write('\\textbf{');
+        _stack.add(_Ctx.heading);
+
+      // ── Alinea's en blokken ──
+      case 'p':
+        _stack.add(_Ctx.paragraph);
+      case 'blockquote':
+        output.write('\\begin{quote}\n');
+        _stack.add(_Ctx.blockquote);
+      case 'hr':
+        output.write('\n\\noindent\\rule{\\textwidth}{0.4pt}\n');
+        return false;
+
+      // ── Lijsten ──
+      case 'ul':
+        output.write('\\begin{itemize}\n');
+        _stack.add(_Ctx.unorderedList);
+      case 'ol':
+        output.write('\\begin{enumerate}\n');
+        _stack.add(_Ctx.orderedList);
+      case 'li':
+        _visitListItem(element);
+        _stack.add(_Ctx.listItem);
+      case 'input':
+        return false;
+
+      // ── Code ──
+      case 'pre':
+        _stack.add(_Ctx.codeBlock);
+        return true;
+      case 'code':
+        return _visitCode(element);
+
+      // ── Inline-opmaak ──
+      case 'strong':
+      case 'b':
+        _buf.write('\\textbf{');
+        _stack.add(_Ctx.inline);
+      case 'em':
+      case 'i':
+        _buf.write('\\textit{');
+        _stack.add(_Ctx.inline);
+      case 'del':
+      case 's':
+        _buf.write('\\sout{');
+        _stack.add(_Ctx.inline);
+
+      // ── Links en afbeeldingen ──
+      case 'a':
+        final href = element.attributes['href'] ?? '';
+        _buf.write('\\href{${_escapeUrl(href)}}{');
+        _stack.add(_Ctx.link);
+      case 'img':
+        _visitImage(element);
+        return false;
+
+      // ── Regelonderbreking ──
+      case 'br':
+        _buf.write(
+          (_stack.contains(_Ctx.paragraph) || _stack.contains(_Ctx.heading))
+              ? ' \\\\\n'
+              : '\n',
+        );
+        return false;
+
+      // ── Tabellen (GFM) ──
+      case 'table':
+        _beginTable();
+        return true;
+      case 'thead':
+        _inTableHead = true;
+        _stack.add(_Ctx.passThrough);
+        return true;
+      case 'tbody':
+        _inTableHead = false;
+        _stack.add(_Ctx.passThrough);
+        return true;
+      case 'tr':
+        _beginTableRow(element);
+        return true;
+      case 'th':
+      case 'td':
+        _stack.add(_Ctx.tableCell);
+        if (_inTableHead) _rowBuf.write('\\textbf{');
+        return true;
+
+      default:
+        _stack.add(_Ctx.passThrough);
+    }
+    return true;
+  }
+
+  void _visitListItem(md.Element element) {
+    // GFM task-list: <li class="task-list-item"> met een <input>-kind.
+    final isTask =
+        element.attributes['class']?.contains('task-list-item') ?? false;
+    output.write(isTask ? r'\item[$\square$] ' : r'\item ');
+  }
+
+  bool _visitCode(md.Element element) {
+    if (_inCodeBlock) {
+      // De <code> binnen <pre>: open het listing-blok met de taal.
+      final lang =
+          element.attributes['class']?.replaceAll('language-', '') ?? '';
+      output.write('\\begin{lstlisting}');
+      if (lang.isNotEmpty) output.write('[language=$lang]');
+      output.write('\n');
+      _stack.add(_Ctx.codeBlockBody);
+    } else {
+      output.write(r'\texttt{');
+      _stack.add(_Ctx.inlineCode);
+    }
+    return true;
+  }
+
+  void _visitImage(md.Element element) {
+    final src = element.attributes['src'] ?? '';
+    final alt = element.attributes['alt'] ?? '';
+    // Relatief pad — LaTeX kent geen data-URI-inlining. ponytail: ceiling
+    // is single-file; upgrade path is een zip-bundel met .tex + images.
+    _buf.write(
+      r'\includegraphics[width=0.8\textwidth]{'
+      '${_escapeImagePath(src)}}',
+    );
+    if (alt.trim().isNotEmpty) {
+      _buf.write('\\\\\\small{${_escapeText(alt)}}');
+    }
+  }
+
+  void _beginTable() {
+    _stack.add(_Ctx.table);
+    _tableRows.clear();
+    _tableColCount = 0;
+    _inTableHead = false;
+    _tableHeadEmitted = false;
+  }
+
+  void _beginTableRow(md.Element element) {
+    _rowBuf.clear();
+    _stack.add(_Ctx.tableRow);
+    if (_tableColCount == 0) {
+      _tableColCount = element.children?.where(_isCell).length ?? 0;
+    }
+  }
+
+  @override
+  void visitElementAfter(md.Element element) {
+    final ctx = _stack.removeLast();
+    switch (element.tag) {
+      case 'h1':
+      case 'h2':
+      case 'h3':
+      case 'h4':
+      case 'h5':
+      case 'h6':
+        output.write('}\n\n');
+
+      case 'p':
+        if (ctx == _Ctx.paragraph) output.write('\n\n');
+
+      case 'blockquote':
+        output.write('\n\\end{quote}\n');
+
+      case 'ul':
+        output.write('\\end{itemize}\n');
+      case 'ol':
+        output.write('\\end{enumerate}\n');
+      case 'li':
+        output.write('\n');
+
+      case 'pre':
+        // Niets — de lstlisting wordt op <code>-niveau geopend/gesloten.
+        break;
+      case 'code':
+        if (ctx == _Ctx.codeBlockBody) {
+          output.write('\n\\end{lstlisting}\n');
+        } else if (ctx == _Ctx.inlineCode) {
+          output.write('}');
+        }
+
+      case 'strong':
+      case 'b':
+      case 'em':
+      case 'i':
+      case 'del':
+      case 's':
+      case 'a':
+        _buf.write('}');
+
+      case 'table':
+        // Spuit de tabel uit met de juiste kolomspecificatie.
+        final spec = 'l' * _tableColCount;
+        output.write('\\begin{tabular}{$spec}\n');
+        output.write('\\toprule\n');
+        output.write(_tableRows);
+        output.write('\\bottomrule\n');
+        output.write('\\end{tabular}\n');
+      case 'thead':
+        // Niets — de header/body-scheiding (\midrule) wordt bij de eerste
+        // tbody-rij geplaatst.
+        break;
+      case 'tbody':
+        break;
+      case 'tr':
+        // Ruim de trailing ' &' op en sluit de rij af.
+        final row = _rowBuf.toString();
+        final cleaned = row.replaceAll(RegExp(r' ?&$'), '');
+        if (_tableRows.isNotEmpty && _tableHeadEmitted == false) {
+          _tableRows.write('$cleaned \\\\\n\\midrule\n');
+          _tableHeadEmitted = true;
+        } else {
+          _tableRows.write('$cleaned \\\\\n');
+        }
+      case 'th':
+      case 'td':
+        if (_inTableHead) {
+          _rowBuf.write('}');
+        }
+        _rowBuf.write(' & ');
+
+      default:
+        break;
+    }
+  }
+
+  // ── Tabel-state ──
+  final StringBuffer _tableRows = StringBuffer();
+  int _tableColCount = 0;
+  bool _inTableHead = false;
+  bool _tableHeadEmitted = false;
+}
+
+bool _isCell(md.Node n) => n is md.Element && (n.tag == 'th' || n.tag == 'td');
+
+enum _Ctx {
+  passThrough,
+  heading,
+  paragraph,
+  blockquote,
+  unorderedList,
+  orderedList,
+  listItem,
+  codeBlock, // <pre>
+  codeBlockBody, // <code> binnen <pre>
+  inlineCode, // <code> buiten <pre>
+  inline,
+  link,
+  table,
+  tableRow,
+  tableCell,
+}
+
+/// Escape LaTeX-speciale tekens in platte tekst (buiten code en math).
+///
+/// Beschermt bestaande math-delimiters: laat `$...$` en `$$...$$` ongewijzigd
+/// staan, zodat LaTeX de wiskunde zelf rendert. De rest van de tekens wordt
+/// geëscaped.
+String _escapeText(String s) {
+  final result = StringBuffer();
+  var i = 0;
+  while (i < s.length) {
+    // Display-math $$...$$
+    if (i + 1 < s.length && s[i] == r'$' && s[i + 1] == r'$') {
+      final end = s.indexOf(r'$$', i + 2);
+      if (end != -1) {
+        result.write(s.substring(i, end + 2));
+        i = end + 2;
+        continue;
+      }
+    }
+    // Inline-math $...$
+    if (s[i] == r'$') {
+      final end = s.indexOf(r'$', i + 1);
+      if (end != -1 && end > i + 1) {
+        result.write(s.substring(i, end + 1));
+        i = end + 1;
+        continue;
+      }
+    }
+    result.write(_escapeChar(s[i]));
+    i++;
+  }
+  return result.toString();
+}
+
+String _escapeChar(String c) {
+  switch (c) {
+    case r'\':
+      return r'\textbackslash{}';
+    case '&':
+      return r'\&';
+    case '%':
+      return r'\%';
+    case '#':
+      return r'\#';
+    case '_':
+      return r'\_';
+    case '{':
+      return r'\{';
+    case '}':
+      return r'\}';
+    case '~':
+      return r'\textasciitilde{}';
+    case '^':
+      return r'\textasciicircum{}';
+    default:
+      return c;
+  }
+}
+
+/// Escape een URL voor `\href{...}`. `%` en `#` zijn problematisch in
+/// hyperref-argumenten.
+String _escapeUrl(String url) {
+  if (url.isEmpty) return '';
+  return url.replaceAll('%', r'\%').replaceAll('#', r'\#');
+}
+
+/// Normaliseer een afbeeldingspad voor `\includegraphics`. LaTeX gebruikt
+/// forward slashes. Data-URI's kunnen niet — ponytail: ceiling, zie
+/// header-comment.
+String _escapeImagePath(String src) {
+  if (src.isEmpty) return '';
+  return src.replaceAll(r'\', '/');
+}
+
+/// Beschermt LaTeX-math (`$$...$$` en `$...$`) tegen de markdown-parser, die
+/// backslashes voor leestekens stript (`\,` → `,`).
+///
+/// Vervangt elk math-blok door een unieke placeholder vóór de parse, en geeft
+/// de mapping terug zodat de visitor de placeholders kan herstellen. De
+/// placeholder bevat geen markdown-speciale tekens, zodat de parser hem
+/// ongemoeid laat.
+class _MathProtector {
+  final String text;
+  final Map<String, String> blocks;
+
+  _MathProtector._(this.text, this.blocks);
+
+  static _MathProtector protect(String input) {
+    final blocks = <String, String>{};
+    var result = input;
+    var i = 0;
+
+    // Eerst display-math $$...$$ (langste-match eerst, anders splitst $$ in
+    // twee losse $).
+    final displayMath = RegExp(r'\$\$(.*?)\$\$', dotAll: true);
+    result = result.replaceAllMapped(displayMath, (m) {
+      final key = '@@OCIDECKMATH$i@@';
+      blocks[key] = m[0]!;
+      i++;
+      return key;
+    });
+
+    // Dan inline-math $...$ — niet-gepaarde $ (zoals valuta) laten we staan.
+    final inlineMath = RegExp(r'\$([^\$\n]+?)\$');
+    result = result.replaceAllMapped(inlineMath, (m) {
+      final key = '@@OCIDECKMATH$i@@';
+      blocks[key] = m[0]!;
+      i++;
+      return key;
+    });
+
+    return _MathProtector._(result, blocks);
+  }
+}

@@ -70,6 +70,8 @@ const _stringsTlh = {
   'exportAsPdf': 'PDF ghaH \'e\' ngeH',
   'exportAsPptx': 'PPTX ghaH \'e\' ngeH',
   'exportAsHtml': 'HTML ghaH \'e\' ngeH (Marp, offline)',
+  'exportAsLatex': 'LaTeX (Beamer) buvmeH lo\'',
+
   'renderingSlides': '\'anghommey chenmoHlu\'…',
   'buildingHtml': 'HTML chenmoHlu\'…',
   'buildingExport': 'chenmoHlu\'…',
@@ -1746,6 +1748,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML browserDaq internet paghbe\'chugh \'ej code blocks, math, mermaid diagrams render. LaTeX (Beamer) pdflatex qo\' xelatex lo\' compile.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'LaTeX article narmev. mI\' narghchu\'; ngermey lo\'lu\'ta\'vIS nughHom. pdflatex qo\' xelatex lo\' Dalo\'taHvIS chovetlh.',
   'Afbeelding geplakt': 'nagh bej ghop',
   'Bibliotheekmap niet bereikbaar': 'De\' Qul mIw lughajbe\'',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

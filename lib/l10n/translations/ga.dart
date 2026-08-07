@@ -74,6 +74,8 @@ const _stringsGa = {
   'exportAsPdf': 'Easpórtáil mar PDF',
   'exportAsPptx': 'Easpórtáil mar PPTX',
   'exportAsHtml': 'Easpórtáil mar HTML (Marp, as líne)',
+  'exportAsLatex': 'Easpórtáil mar LaTeX (Beamer)',
+
   'renderingSlides': 'Sleamhnáin á rindreáil…',
   'buildingHtml': 'HTML á thógáil…',
   'buildingExport': 'á thógáil…',
@@ -1806,6 +1808,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'Osclaíonn HTML in aon bhrabhsálaí gan idirlíon agus renderálann sé blocanna cód, matamaitic agus léaráidí mermaid. Tiomsaítear LaTeX (Beamer) le pdflatex nó xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Cáipéis LaTeX article. Téann matamaitic díreach tríd; tagraítear íomhánna le cosán coibhneasta. Tiomsaigh le pdflatex nó xelatex.',
   'Afbeelding geplakt': 'Íomhá ghreamaithe',
   'Bibliotheekmap niet bereikbaar': 'Fillteán leabharlainne dodroch',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

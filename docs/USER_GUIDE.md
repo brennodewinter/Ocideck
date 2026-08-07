@@ -2937,6 +2937,18 @@ Export to:
 
 - **PDF** and **PPTX** (PPTX includes speaker notes) — rendered from the in-app
   slide renderer.
+- **LaTeX (Beamer)** — a `.tex` file with a Beamer preamble and one frame per
+  slide. Maths (`$...$` / `$$...$$`) passes through natively; images are
+  referenced by relative path (keep them next to the `.tex`). Compile with
+  `pdflatex` or `xelatex` using a standard TeX Live installation. All 32 slide
+  types have a dedicated handler: simple types get their own Beamer layout
+  (title, section, bullets, two-column, image, quote, code, table); table-backed
+  types (checklist, scorecard, scope matrix, findings summary, discoveries,
+  assets, Gantt, control status, improvement matrix) share a `tabular`
+  converter; canvas and finding go through the Markdown-to-LaTeX converter;
+  chart and cockpit show their data as a code listing; timeline uses a list
+  with markers; tree/flow/phase-gate use nested lists; video becomes a
+  hyperlink. *(Added 2026-08-07.)*
 - **HTML** — one file, with the JavaScript (marked, highlight.js, MathJax,
   mermaid), the CSS, the bundled EB Garamond font **and your images** inlined,
   and charts pre-rendered to inline SVG, so code highlighting, math, charts,
@@ -4215,7 +4227,11 @@ your source. The export dialog asks two things:
 - **Which format** — **Markdown (`.md`)** is a redacted copy of the plain text
   that opens in any Markdown reader; **HTML** is one self-contained, accessible
   HTML file that opens in any browser without internet, with its tables, maths,
-  Mermaid diagrams and charts rendered in place.
+  Mermaid diagrams and charts rendered in place; **LaTeX (`.tex`)** is a LaTeX
+  `article` document — maths (`$...$` / `$$...$$`) passes through natively, and
+  images are referenced by relative path (keep them next to the `.tex`). Compile
+  with `pdflatex` or `xelatex` using a standard TeX Live installation. *(Added
+  2026-08-07.)*
 
 There is no built-in PDF button. For a **PDF**, open the exported HTML and print
 it from your browser (*Save as PDF*). OciDeck makes no promise about the

@@ -73,6 +73,8 @@ const _stringsBg = {
   'exportAsPdf': 'Експортиране като PDF',
   'exportAsPptx': 'Експортиране като PPTX',
   'exportAsHtml': 'Експортиране като HTML (Marp, офлайн)',
+  'exportAsLatex': 'Експортирай като LaTeX (Beamer)',
+
   'renderingSlides': 'Рендиране на слайдове…',
   'buildingHtml': 'Съставяне на HTML…',
   'buildingExport': 'съставяне…',
@@ -1793,6 +1795,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML се отваря във всеки браузър без интернет и рендерира блокове код, математика и mermaid диаграми. LaTeX (Beamer) се компилира с pdflatex или xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Документ LaTeX article. Математиката преминава директно; изображенията се реферират с относителен път. Компилирайте с pdflatex или xelatex.',
   'Afbeelding geplakt': 'Изображението е поставено',
   'Bibliotheekmap niet bereikbaar': 'Папката на библиотеката е недостъпна',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
