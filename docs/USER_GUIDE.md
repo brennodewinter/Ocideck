@@ -2937,6 +2937,14 @@ Export to:
 
 - **PDF** and **PPTX** (PPTX includes speaker notes) — rendered from the in-app
   slide renderer.
+- **LaTeX (Beamer)** — a `.tex` file with a Beamer preamble and one frame per
+  slide. Maths (`$...$` / `$$...$$`) passes through natively; images are
+  referenced by relative path (keep them next to the `.tex`). Compile with
+  `pdflatex` or `xelatex` using a standard TeX Live installation. The simple
+  slide types (title, section, bullets, two-column, image, quote, code, table,
+  free Markdown) have their own Beamer layout; rich types (charts, timelines,
+  findings, checklists, …) fall back to the Markdown-to-LaTeX converter for
+  now. *(Added 2026-08-07.)*
 - **HTML** — one file, with the JavaScript (marked, highlight.js, MathJax,
   mermaid), the CSS, the bundled EB Garamond font **and your images** inlined,
   and charts pre-rendered to inline SVG, so code highlighting, math, charts,

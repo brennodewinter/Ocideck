@@ -111,6 +111,11 @@ const int maxFileLines = 1000;
 /// deliberate reason; the goal is fewer and smaller entries over time.
 /// `lib/l10n/translations/*` is exempt — those files grow with every UI string.
 const Map<String, int> fileSizeBaseline = {
+  // +19: LaTeX-Beamer-export — de enum-uitbreiding (label/extension), de
+  // latex-case in de switch, en _buildLatex (8 regels thin wrapper naar
+  // buildBeamerBody + beamerPreamble). Het gedrag zit in lib/services/latex/;
+  // dit is de chokepoint die elk formaat langskomt.
+  'lib/services/export_service.dart': 1023,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
