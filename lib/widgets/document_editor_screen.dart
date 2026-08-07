@@ -48,8 +48,6 @@ import 'editors/_editor_field.dart' show reportImageImportFailure;
 import 'editors/chart_editor.dart';
 import 'editors/table_editor.dart';
 import 'markdown_editor/markdown_editor.dart';
-import 'markdown_editor/markdown_editor_theme.dart';
-import 'markdown_editor/markdown_editor_toolbar.dart';
 import 'reader/document_markdown_view.dart';
 
 /// De schermvullende editor voor een documenttabblad: links de platte
