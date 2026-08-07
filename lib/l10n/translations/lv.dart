@@ -72,6 +72,8 @@ const _stringsLv = {
   'exportAsPdf': 'Eksportēt kā PDF',
   'exportAsPptx': 'Eksportēt kā PPTX',
   'exportAsHtml': 'Eksportēt kā HTML (Marp, bezsaistē)',
+  'exportAsLatex': 'Eksportēt kā LaTeX (Beamer)',
+
   'renderingSlides': 'Renderē slaidus…',
   'buildingHtml': 'Veido HTML…',
   'buildingExport': 'veido…',
@@ -1770,6 +1772,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML atveras jebkurā pārlūkā bez interneta un renderē koda blokus, matemātiku un mermaid diagrammas. LaTeX (Beamer) kompilē ar pdflatex vai xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'LaTeX article dokuments. Matemātika iet tieši cauri; attēli tiek atsaukti ar relatīvo ceļu. Kompilējiet ar pdflatex vai xelatex.',
   'Afbeelding geplakt': 'Attēls ielīmēts',
   'Bibliotheekmap niet bereikbaar': 'Bibliotēkas mape nav sasniedzama',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

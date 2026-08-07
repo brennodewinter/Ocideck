@@ -73,6 +73,8 @@ const _stringsCs = {
   'exportAsPdf': 'Exportovat jako PDF',
   'exportAsPptx': 'Exportovat jako PPTX',
   'exportAsHtml': 'Exportovat jako HTML (Marp, offline)',
+  'exportAsLatex': 'Exportovat jako LaTeX (Beamer)',
+
   'renderingSlides': 'Vykreslování snímků…',
   'buildingHtml': 'Sestavování HTML…',
   'buildingExport': 'sestavování…',
@@ -1774,6 +1776,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML se otevírá v jakémkoli prohlížeči bez internetu a renderuje bloky kódu, matematiku a mermaid diagramy. LaTeX (Beamer) zkompilujete pdflatex nebo xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Dokument LaTeX article. Matematika prochází přímo; obrázky jsou referencovány relativní cestou. Zkompilujte pomocí pdflatex nebo xelatex.',
   'Afbeelding geplakt': 'Obrázek vložen',
   'Bibliotheekmap niet bereikbaar': 'Složka knihovny nedostupná',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

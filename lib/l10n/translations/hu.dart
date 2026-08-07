@@ -72,6 +72,8 @@ const _stringsHu = {
   'exportAsPdf': 'Exportálás PDF-ként',
   'exportAsPptx': 'Exportálás PPTX-ként',
   'exportAsHtml': 'Exportálás HTML-ként (Marp, offline)',
+  'exportAsLatex': 'Exportálás LaTeX-ként (Beamer)',
+
   'renderingSlides': 'Diák renderelése…',
   'buildingHtml': 'HTML összeállítása…',
   'buildingExport': 'összeállítás…',
@@ -1775,6 +1777,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML bármely böngészőben megnyílik internet nélkül és rendereli a kódblokkokat, matematikát és mermaid diagramokat. A LaTeX (Beamer) pdflatex vagy xelatex segítségével fordítható.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Egy LaTeX article dokumentum. A matematika közvetlenül átmegy; a képek relatív útvonallal hivatkozott. Fordítsd pdflatex vagy xelatex segítségével.',
   'Afbeelding geplakt': 'Kép beillesztve',
   'Bibliotheekmap niet bereikbaar': 'A könyvtármappa nem érhető el',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

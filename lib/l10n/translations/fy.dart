@@ -72,6 +72,8 @@ const _stringsFy = {
   'exportAsPdf': 'Eksportearje as PDF',
   'exportAsPptx': 'Eksportearje as PPTX',
   'exportAsHtml': 'Eksportearje as HTML (Marp, offline)',
+  'exportAsLatex': 'Eksportearje as LaTeX (Beamer)',
+
   'renderingSlides': 'Slides renderje…',
   'buildingHtml': 'HTML bouwe…',
   'buildingExport': 'bouwe…',
@@ -731,6 +733,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML iepent yn elke browser sûnder ynternet en rendert koadeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) kompilearst mei pdflatex of xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'In LaTeX-artikeldokumint. Wiskunde giet streekrjocht troch; ôfbyldings wurde mei relatyf paad ferwiisd. Kompilearje mei pdflatex of xelatex.',
   'Afbeelding geplakt': 'Ofbylding plakt',
   'Bibliotheekmap niet bereikbaar': 'Biblioteekmap net berikber',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

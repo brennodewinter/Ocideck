@@ -77,17 +77,42 @@ String _slideBody(Slide slide) {
     case SlideType.quote:
       return _quoteSlide(slide);
     case SlideType.freeMarkdown:
+    case SlideType.canvas:
       return _freeMarkdownSlide(slide);
     case SlideType.code:
       return _codeSlide(slide);
+    // Tabel-backed types delen één tabular-converter.
     case SlideType.table:
+    case SlideType.checklist:
+    case SlideType.scorecard:
+    case SlideType.scopeMatrix:
+    case SlideType.matrix:
+    case SlideType.controlStatus:
+    case SlideType.findingsSummary:
+    case SlideType.discoveries:
+    case SlideType.assets:
+    case SlideType.gantt:
       return _tableSlide(slide);
-    // Types die in fase 2 nog geen eigen Beamer-layout hebben vallen terug
-    // op de kernconverter over customMarkdown. ponytail: ceiling is dat de
-    // layout niet Beamer-specifiek is; upgrade path is een eigen converter
-    // per type in fases 3-6.
-    default:
-      return _fallbackSlide(slide);
+    case SlideType.signOff:
+      return _signOffSlide(slide);
+    case SlideType.menu:
+      return _menuSlide(slide);
+    case SlideType.video:
+      return _videoSlide(slide);
+    case SlideType.timeline:
+      return _timelineSlide(slide);
+    case SlideType.question:
+      return _questionSlide(slide);
+    case SlideType.finding:
+      return _findingSlide(slide);
+    case SlideType.chart:
+      return _chartSlide(slide);
+    case SlideType.cockpit:
+      return _cockpitSlide(slide);
+    case SlideType.tree:
+    case SlideType.flow:
+    case SlideType.phaseGate:
+      return _treeFlowSlide(slide);
   }
 }
 
@@ -255,20 +280,145 @@ String _tableSlide(Slide slide) {
   return buf.toString();
 }
 
-String _fallbackSlide(Slide slide) {
-  // Types zonder eigen Beamer-layout: kernconverter over customMarkdown.
-  // ponytail: ceiling — geen Beamer-specifieke layout; upgrade path is een
-  // eigen converter per type (fases 3-6).
-  if (slide.customMarkdown.trim().isEmpty) {
-    // Geen content: val terug op titel + bullets als tekst.
-    final buf = StringBuffer();
-    if (slide.title.trim().isNotEmpty) {
-      buf.write('\\textbf{${_escapeLatex(slide.title)}}\n\n');
-    }
-    buf.write(_bulletsToLatex(slide.bullets, slide.listStyle));
-    return buf.toString();
+// ── Fase 3-6: rijke types ──
+
+String _signOffSlide(Slide slide) {
+  // signOff heeft alleen een titel — de attestatie zit op deck-niveau.
+  final buf = StringBuffer();
+  buf.write('\\begin{center}\n');
+  buf.write('{\\Large ${_escapeLatex(slide.title)}}\n');
+  buf.write('\\end{center}\n');
+  return buf.toString();
+}
+
+String _menuSlide(Slide slide) {
+  // menu: bullets zijn links `[label](#anchor)`. itemize met hyperlink.
+  if (slide.bullets.isEmpty) return '';
+  final buf = StringBuffer();
+  buf.write('\\begin{itemize}\n');
+  for (final b in slide.bullets) {
+    buf.write('\\item ${markdownInlineToLatex(b)}\n');
   }
+  buf.write('\\end{itemize}\n');
+  return buf.toString();
+}
+
+String _videoSlide(Slide slide) {
+  // ponytail: ceiling — LaTeX kan geen video embedden. Toon het pad als
+  // hyperlink-tekst. Upgrade path is een externe player + `\href`.
+  final buf = StringBuffer();
+  if (slide.videoPath.isNotEmpty) {
+    buf.write('\\begin{center}\n');
+    buf.write(
+      r'\href{'
+      '${_escapeUrl(slide.videoPath)}}{${_escapeLatex(slide.videoPath)}}\n',
+    );
+    buf.write('\\end{center}\n');
+  }
+  return buf.toString();
+}
+
+String _timelineSlide(Slide slide) {
+  // timeline: bullets als `marker :: titel :: beschrijving`.
+  // ponytail: ceiling — eenvoudige itemize i.p.v. TikZ-tijdlijn. Upgrade
+  // path is een TikZ-tijdlijn met nodes op een as.
+  if (slide.bullets.isEmpty) return '';
+  final buf = StringBuffer();
+  buf.write('\\begin{itemize}\n');
+  for (final b in slide.bullets) {
+    final parts = b.split(' :: ');
+    final marker = parts.isNotEmpty ? parts[0] : '';
+    final title = parts.length > 1 ? parts[1] : '';
+    final desc = parts.length > 2 ? parts[2] : '';
+    buf.write('\\item[');
+    buf.write(_escapeLatex(marker));
+    buf.write('] \\textbf{');
+    buf.write(_escapeLatex(title));
+    buf.write('}');
+    if (desc.trim().isNotEmpty) {
+      buf.write(' --- ${_escapeLatex(desc)}');
+    }
+    buf.write('\n');
+  }
+  buf.write('\\end{itemize}\n');
+  return buf.toString();
+}
+
+String _questionSlide(Slide slide) {
+  // question: customMarkdown bevat een ```question```-fenced JSON-blok.
+  // ponytail: ceiling — toon de vraag als tekst + antwoorden als enumerate.
+  // Upgrade path is het parsen van QuestionSpec JSON voor een interactief
+  // uiterlijk (juiste/gemerkte antwoorden met symbolen).
   return markdownToLatex(slide.customMarkdown);
+}
+
+String _findingSlide(Slide slide) {
+  // finding: customMarkdown met `##` secties (Description, Confirmation,
+  // Impact, Recommendation). De kernconverter vertaalt deze naar
+  // \subsection — voldoende voor een Beamer-frame.
+  return markdownToLatex(slide.customMarkdown);
+}
+
+String _chartSlide(Slide slide) {
+  // chart: customMarkdown bevat een ```chart```-fenced JSON-blok met
+  // ChartSpec. ponytail: ceiling — toon de chart-data als lstlisting.
+  // Upgrade path is pgfplots (fase 4).
+  final buf = StringBuffer();
+  buf.write('\\begin{lstlisting}\n');
+  buf.write(_extractCode(slide.customMarkdown));
+  buf.write('\n\\end{lstlisting}\n');
+  return buf.toString();
+}
+
+String _cockpitSlide(Slide slide) {
+  // cockpit: customMarkdown bevat een ```cockpit```-fenced JSON-blok.
+  // ponytail: ceiling — toon de cockpit-data als lstlisting. Upgrade path
+  // is een TikZ-dashboard met meters.
+  final buf = StringBuffer();
+  buf.write('\\begin{lstlisting}\n');
+  buf.write(_extractCode(slide.customMarkdown));
+  buf.write('\n\\end{lstlisting}\n');
+  return buf.toString();
+}
+
+String _treeFlowSlide(Slide slide) {
+  // tree/flow/phaseGate: bullets met geneste hiërarchie (tabs voor nesting).
+  // ponytail: ceiling — itemize met nesting i.p.v. TikZ-boom/flowchart.
+  // Upgrade path is TikZ (forest voor tree, positioning voor flow).
+  if (slide.bullets.isEmpty) return '';
+  return _nestedBulletsToLatex(slide.bullets);
+}
+
+/// Bouwt geneste itemize-omgevingen uit bullets met tab-inspringing.
+String _nestedBulletsToLatex(List<String> bullets) {
+  final buf = StringBuffer();
+  buf.write('\\begin{itemize}\n');
+  for (final b in bullets) {
+    final depth = _indentDepth(b);
+    final text = b.trim();
+    if (depth == 0) {
+      buf.write('\\item ${markdownInlineToLatex(text)}\n');
+    } else {
+      // Sluit diepere itemize-niveaus af en open nieuwe.
+      buf.write('\\begin{itemize}\n');
+      buf.write('\\item ${markdownInlineToLatex(text)}\n');
+      buf.write('\\end{itemize}\n');
+    }
+  }
+  buf.write('\\end{itemize}\n');
+  return buf.toString();
+}
+
+int _indentDepth(String line) {
+  var depth = 0;
+  for (final c in line.runes) {
+    if (c == 0x09) {
+      depth++;
+    } else {
+      break;
+    }
+  }
+  return depth;
 }
 
 // ── Hulpmethoden ──
@@ -311,4 +461,9 @@ String _escapeLatex(String s) {
 String _escapeImagePath(String src) {
   if (src.isEmpty) return '';
   return src.replaceAll(r'\', '/');
+}
+
+String _escapeUrl(String url) {
+  if (url.isEmpty) return '';
+  return url.replaceAll('%', r'\%').replaceAll('#', r'\#');
 }

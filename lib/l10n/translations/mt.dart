@@ -73,6 +73,8 @@ const _stringsMt = {
   'exportAsPdf': 'Esporta bħala PDF',
   'exportAsPptx': 'Esporta bħala PPTX',
   'exportAsHtml': 'Esporta bħala HTML (Marp, offline)',
+  'exportAsLatex': 'Esporta bħala LaTeX (Beamer)',
+
   'renderingSlides': 'Qed jiġu rrenderjati l-islides…',
   'buildingHtml': 'Qed jinbena l-HTML…',
   'buildingExport': 'qed jinbena…',
@@ -1793,6 +1795,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML jiftah f\'kwalunkwe browser bla internet u jrenderja blokki ta\' kodiċi, matematika u dijagrammi mermaid. LaTeX (Beamer) tiġi kkompilata b\'pdflatex jew xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Dokument LaTeX article. Il-matematika tgħaddi direttament; l-istampi jirreferenzjaw b\'peress relattiv. Kompila b\'pdflatex jew xelatex.',
   'Afbeelding geplakt': 'Stampa waħħla',
   'Bibliotheekmap niet bereikbaar':
       'Il-kartella tal-librerija mhix aċċessibbli',

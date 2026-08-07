@@ -2940,11 +2940,15 @@ Export to:
 - **LaTeX (Beamer)** — a `.tex` file with a Beamer preamble and one frame per
   slide. Maths (`$...$` / `$$...$$`) passes through natively; images are
   referenced by relative path (keep them next to the `.tex`). Compile with
-  `pdflatex` or `xelatex` using a standard TeX Live installation. The simple
-  slide types (title, section, bullets, two-column, image, quote, code, table,
-  free Markdown) have their own Beamer layout; rich types (charts, timelines,
-  findings, checklists, …) fall back to the Markdown-to-LaTeX converter for
-  now. *(Added 2026-08-07.)*
+  `pdflatex` or `xelatex` using a standard TeX Live installation. All 32 slide
+  types have a dedicated handler: simple types get their own Beamer layout
+  (title, section, bullets, two-column, image, quote, code, table); table-backed
+  types (checklist, scorecard, scope matrix, findings summary, discoveries,
+  assets, Gantt, control status, improvement matrix) share a `tabular`
+  converter; canvas and finding go through the Markdown-to-LaTeX converter;
+  chart and cockpit show their data as a code listing; timeline uses a list
+  with markers; tree/flow/phase-gate use nested lists; video becomes a
+  hyperlink. *(Added 2026-08-07.)*
 - **HTML** — one file, with the JavaScript (marked, highlight.js, MathJax,
   mermaid), the CSS, the bundled EB Garamond font **and your images** inlined,
   and charts pre-rendered to inline SVG, so code highlighting, math, charts,

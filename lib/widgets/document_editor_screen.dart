@@ -282,6 +282,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       DocumentExportFormat.md => 'md',
       DocumentExportFormat.html => 'html',
       DocumentExportFormat.latex => 'tex',
+      DocumentExportFormat.ocideck => 'ocideck',
     };
     final tag = profile == PrivacyExportProfile.redacted
         ? l10n.d('geredigeerd')

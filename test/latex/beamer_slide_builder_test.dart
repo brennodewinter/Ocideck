@@ -198,17 +198,17 @@ void main() {
     });
 
     test('fallback voor ongedekte types gebruikt customMarkdown', () {
+      // freeMarkdown is de fallback-route: kernconverter over customMarkdown.
       final deck = Deck(
         title: 'Test',
         slides: [
-          Slide.create(SlideType.checklist).copyWith(
-            title: 'Controlelijst',
+          Slide.create(SlideType.freeMarkdown).copyWith(
+            title: 'Vrij',
             customMarkdown: '# Checklist\n\n- [x] Eerste item',
           ),
         ],
       );
       final out = buildBeamerBody(deck);
-      // Fallback: kernconverter over customMarkdown
       expect(out, contains(r'\section{Checklist}'));
       expect(out, contains(r'\item'));
     });
@@ -239,6 +239,235 @@ void main() {
       final out = buildBeamerBody(deck);
       expect(out, contains(r'\%'));
       expect(out, contains(r'\&'));
+    });
+  });
+
+  group('buildBeamerBody rijke types', () {
+    test('checklist-slide wordt tabular', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.checklist).copyWith(
+            title: 'Controlelijst',
+            tableRows: const [
+              ['ID', 'Test', 'Status'],
+              ['1', 'TLS', 'OK'],
+            ],
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\begin{tabular}{lll}'));
+      expect(out, contains('Controlelijst'));
+    });
+
+    test('scorecard-slide wordt tabular', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.scorecard).copyWith(
+            title: 'Scorecard',
+            tableRows: const [
+              ['Label', 'Waarde'],
+              ['CPU', '90%'],
+            ],
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\begin{tabular}'));
+      expect(out, contains('CPU'));
+    });
+
+    test('signOff-slide wordt gecentreerde titel', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [Slide.create(SlideType.signOff).copyWith(title: 'Einde')],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\begin{center}'));
+      expect(out, contains('Einde'));
+    });
+
+    test('menu-slide wordt itemize met links', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.menu).copyWith(
+            title: 'Menu',
+            bullets: const [
+              '[Inleiding](#inleiding)',
+              '[Conclusie](#conclusie)',
+            ],
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\begin{itemize}'));
+      expect(out, contains('Inleiding'));
+      expect(out, contains('Conclusie'));
+    });
+
+    test('video-slide wordt hyperlink', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(
+            SlideType.video,
+          ).copyWith(title: 'Demo', videoPath: 'demo.mp4'),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\href{'));
+      expect(out, contains('demo.mp4'));
+    });
+
+    test('timeline-slide wordt itemize met marker', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.timeline).copyWith(
+            title: 'Tijdlijn',
+            bullets: const [
+              '2024 :: Start :: Project begon',
+              '2025 :: Live :: Productie',
+            ],
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\begin{itemize}'));
+      expect(out, contains(r'\item[2024]'));
+      expect(out, contains(r'\textbf{Start}'));
+      expect(out, contains('Project begon'));
+    });
+
+    test('canvas-slide gaat door kernconverter', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.canvas).copyWith(
+            title: 'Canvas',
+            customMarkdown: '## Regio A\n\nTekst hier.',
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\subsection{Regio A}'));
+      expect(out, contains('Tekst hier.'));
+    });
+
+    test('question-slide gaat door kernconverter', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.question).copyWith(
+            title: 'Vraag',
+            customMarkdown: '```question\n{"q":"Wat is 2+2?"}\n```',
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains('question'));
+      expect(out, contains('Wat is 2+2?'));
+    });
+
+    test('finding-slide gaat door kernconverter', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.finding).copyWith(
+            title: 'Bevinding',
+            customMarkdown: '## Description\n\nEen kwetsbaarheid.\n',
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\subsection{Description}'));
+      expect(out, contains('Een kwetsbaarheid'));
+    });
+
+    test('chart-slide wordt lstlisting met chart-data', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.chart).copyWith(
+            title: 'Grafiek',
+            customMarkdown: '```chart\n{"type":"bar"}\n```',
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\begin{lstlisting}'));
+      expect(out, contains('"type":"bar"'));
+    });
+
+    test('cockpit-slide wordt lstlisting', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.cockpit).copyWith(
+            title: 'Dashboard',
+            customMarkdown: '```cockpit\n{"meters":[]}\n```',
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\begin{lstlisting}'));
+      expect(out, contains('"meters":[]'));
+    });
+
+    test('tree-slide wordt geneste itemize', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.tree).copyWith(
+            title: 'Boom',
+            bullets: const ['Hoofd', '\tSub 1', '\tSub 2'],
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\begin{itemize}'));
+      expect(out, contains('Hoofd'));
+      expect(out, contains('Sub 1'));
+      expect(out, contains('Sub 2'));
+    });
+
+    test('gantt-slide wordt tabular', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.gantt).copyWith(
+            title: 'Planning',
+            tableRows: const [
+              ['Taak', 'Start', 'Duur'],
+              ['Ontwerp', '1', '5'],
+            ],
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\begin{tabular}'));
+      expect(out, contains('Ontwerp'));
+    });
+
+    test('scopeMatrix-slide wordt tabular', () {
+      final deck = Deck(
+        title: 'Test',
+        slides: [
+          Slide.create(SlideType.scopeMatrix).copyWith(
+            title: 'Scope',
+            tableRows: const [
+              ['Object', 'Type', 'Status'],
+              ['Server', 'Host', 'OK'],
+            ],
+          ),
+        ],
+      );
+      final out = buildBeamerBody(deck);
+      expect(out, contains(r'\begin{tabular}'));
+      expect(out, contains('Server'));
     });
   });
 }
