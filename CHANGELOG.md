@@ -1071,6 +1071,20 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Paginanummer staat weer rechtsonder, ook bij een gecentreerde footer
+  (#1330).** De instelling belooft "Paginanummers tonen (rechtsonder)", maar het
+  nummer reed mee in dezelfde `Row` als de footertekst en volgde daardoor de
+  footerpositie — bij *Midden* belandde het in het midden i.p.v. in de hoek.
+  Het paginanummer krijgt nu een eigen plek rechtsonder (die net als de
+  footertekst uitwijkt voor een logo of TLP-badge in die hoek), en de
+  footertekst reserveert er horizontaal ruimte voor zodat de twee elkaar nooit
+  overlappen. Getoetst op editor-voorvertoning, fullscreen en PDF-export, in
+  licht en donker, met en zonder logo/TLP-badge. De door de melder genoemde
+  overlap van de gecentreerde footer met de zwevende spelerbalk in
+  presentatiemodus verdwijnt hiermee grotendeels: die botsing kwam vooral
+  doordat het paginanummer zélf in het midden stond; de balk is bovendien
+  halftransparant en verdwijnt na drie seconden, dus de presentatie-chrome is
+  ongewijzigd gelaten. Regressietests in `test/footer_preview_test.dart`.
 - **Toolchain-pin van Flutter 3.44.8 naar 3.44.9 (stable, 2026-08-07).** De
   laatste stable uit het officiële kanaal (uitgebracht 2026-08-06), zodat de
   distributiebuilds op de nieuwste toolchain staan — een basaal

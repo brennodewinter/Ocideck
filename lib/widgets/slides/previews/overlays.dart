@@ -314,37 +314,48 @@ class _FooterOverlay extends StatelessWidget {
       _ => TextAlign.right,
     };
 
-    return Positioned(
-      left: left,
-      right: right,
-      bottom: w * 0.02,
-      child: Align(
-        alignment: alignment,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: w - left - right),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (footerText.isNotEmpty)
-                Flexible(
-                  child: Text(
-                    footerText,
-                    style: style,
-                    textAlign: textAlign,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              if (footerText.isNotEmpty && showPages) SizedBox(width: w * 0.02),
-              if (showPages)
-                Text(
-                  '$slideNumber / ${slideCount ?? slideNumber}',
+    // Het paginanummer staat áltijd rechtsonder — de instelling belooft
+    // "(rechtsonder)", ongeacht de footerpositie. Vroeger reed het mee met de
+    // footertekst en belandde het bij een gecentreerde footer in het midden
+    // i.p.v. in de hoek (#1330). Het krijgt daarom een eigen hoekplek, net
+    // binnen het logo/de TLP-badge, en de footertekst houdt er ruimte voor vrij
+    // zodat de twee elkaar niet overlappen.
+    final pageLabel = showPages
+        ? '$slideNumber / ${slideCount ?? slideNumber}'
+        : '';
+    // Geschatte breedte van het paginanummer, zodat de footertekst ervoor kan
+    // uitwijken (zelfde aanpak als de TLP-badge hierboven).
+    final pageWidth = showPages ? pageLabel.length * fontSize * 0.62 : 0.0;
+    final textRight = showPages ? right + pageWidth + w * 0.02 : right;
+
+    return Stack(
+      children: [
+        if (footerText.isNotEmpty)
+          Positioned(
+            left: left,
+            right: textRight,
+            bottom: w * 0.02,
+            child: Align(
+              alignment: alignment,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: w - left - textRight),
+                child: Text(
+                  footerText,
                   style: style,
+                  textAlign: textAlign,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-            ],
+              ),
+            ),
           ),
-        ),
-      ),
+        if (showPages)
+          Positioned(
+            right: right,
+            bottom: w * 0.02,
+            child: Text(pageLabel, style: style),
+          ),
+      ],
     );
   }
 }
