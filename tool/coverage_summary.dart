@@ -62,6 +62,13 @@ const Set<String> uncoveredBaseline = {
   // record for a file with nothing to execute. The values are exercised through
   // ImageLibraryScanner (image_library_scanner_test.dart).
   'lib/utils/library_scan_limits.dart',
+  // NO EXECUTABLE LINES: `language_registry.dart` holds only two consts — the
+  // interface-language map and the docs base language — kept Flutter-free so
+  // build tooling (`dart run tool/translate_docs.dart`) can read them without
+  // compiling Flutter. lcov emits no record for a const-only file. The data is
+  // exercised through `AppLocalizations.languageNames` across the widget suite,
+  // and asserted directly in language_registry_test.dart.
+  'lib/l10n/language_registry.dart',
   // NO EXECUTABLE LINES: `collab.dart` is the collaboration module's barrel —
   // pure `export` directives, nothing for a line counter to reach. The files it
   // re-exports (the codec, the log store, the async transport) each carry their
