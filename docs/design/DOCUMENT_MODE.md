@@ -166,7 +166,7 @@ ship.
 **Consequences to verify (open questions the gate must close):**
 
 - The truncation heuristic `_looksTruncated`
-  ([`file_service_open.dart`](../../lib/services/file_service_open.dart))
+  ([`file_service_open.dart`](../../lib/services/file/file_service_open.dart))
   assumes a front-matter header with a slide body; a plain document with no
   `---` must be shown, provably, not to trip it.
 - The identity gate widening keeps the existing order: size-cap → UTF-8 read →
