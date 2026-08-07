@@ -17,6 +17,7 @@ import '../services/document_export_service.dart';
 import '../services/export_metadata.dart';
 import '../services/file_service.dart';
 import '../services/html_image_embedder.dart';
+import '../services/markdown_table_codec.dart';
 import '../services/marp_html_service.dart';
 import '../services/privacy/privacy_own_identity.dart';
 import '../state/deck_provider.dart'
@@ -500,11 +501,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   /// Dubbelklik op een gerenderde tabel → de volwaardige [TableEditor] in een
   /// dialoog. De rauwe GFM-regels worden naar een celraster ontleed (via
-  /// [gfmTableCells]) en in een wegwerp-[Slide] gezet; 'Toepassen' serialiseert
+  /// [splitMarkdownTableRow]) en in een wegwerp-[Slide] gezet; 'Toepassen' serialiseert
   /// het raster terug naar een GFM-tabel en vervangt precies dat tabelblok in de
   /// bron. DOCUMENT_MODE.md §4.2.
   Future<void> _editTable(int tableOrdinal, List<String> rawRows) async {
-    final cells = gfmTableCells(rawRows);
+    final cells = rawRows.map(splitMarkdownTableRow).toList();
     var edited = cells;
     final slide = Slide.create(SlideType.table).copyWith(tableRows: cells);
     final apply = await _embedEditorDialog(
@@ -520,7 +521,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final next = replaceNthTableBlock(
       source,
       tableOrdinal,
-      rowsToGfmTable(edited),
+      encodeMarkdownTable(edited),
     );
     if (next != source) {
       ref.read(documentProvider.notifier).edit(next, coalesceKey: null);
@@ -585,7 +586,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       ),
     );
     if (apply != true || !mounted) return;
-    _insertBlock(rowsToGfmTable(rows));
+    _insertBlock(encodeMarkdownTable(rows));
   }
 
   /// Voeg een verse ```mermaid-fence in met een minimaal, taal-neutraal

@@ -5,9 +5,9 @@ import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../models/settings.dart' show ThemeProfile;
 import '../../services/marp_html_service.dart';
+import '../../services/markdown_table_codec.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/doc_link.dart' show headingSlug;
-import '../../utils/markdown_blocks.dart';
 import '../slides/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart' show MermaidRenderer;
 import 'doc_mermaid_view.dart';
@@ -150,11 +150,11 @@ class DocumentMarkdownView extends StatelessWidget {
         i = end < lines.length ? end + 1 : end;
         continue;
       }
-      if (looksLikeTableRow(lines[i]) &&
+      if (isMarkdownTableLine(lines[i]) &&
           i + 1 < lines.length &&
-          isTableDelimiter(lines[i + 1])) {
+          isMarkdownTableDelimiterRow(lines[i + 1])) {
         var j = i + 2;
-        while (j < lines.length && looksLikeTableRow(lines[j])) {
+        while (j < lines.length && isMarkdownTableLine(lines[j])) {
           j++;
         }
         if (seen == ordinal) return [i, j];
@@ -285,12 +285,12 @@ class DocumentMarkdownView extends StatelessWidget {
       }
 
       // GFM pipe table: a header row followed by a |---|:--:| delimiter row.
-      if (looksLikeTableRow(line) &&
+      if (isMarkdownTableLine(line) &&
           i + 1 < lines.length &&
-          isTableDelimiter(lines[i + 1])) {
+          isMarkdownTableDelimiterRow(lines[i + 1])) {
         final rows = <String>[line];
         var j = i + 2;
-        while (j < lines.length && looksLikeTableRow(lines[j])) {
+        while (j < lines.length && isMarkdownTableLine(lines[j])) {
           rows.add(lines[j]);
           j++;
         }
@@ -545,7 +545,7 @@ class DocumentMarkdownView extends StatelessWidget {
   );
 
   Widget _table(_Theme t, List<String> rows, int tableOrdinal) {
-    final cells = rows.map(splitTableRow).toList();
+    final cells = rows.map(splitMarkdownTableRow).toList();
     final columns = cells.isEmpty
         ? 0
         : cells.map((r) => r.length).reduce((a, b) => a > b ? a : b);
@@ -670,7 +670,7 @@ class DocumentMarkdownView extends StatelessWidget {
     if (_isHorizontalRule(trimmed)) return false;
     if (trimmed.startsWith('>')) return false;
     if (_listItem(line) != null) return false;
-    if (looksLikeTableRow(line)) return false;
+    if (isMarkdownTableLine(line)) return false;
     return true;
   }
 }

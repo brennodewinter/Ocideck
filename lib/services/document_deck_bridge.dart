@@ -1,6 +1,6 @@
 import '../models/deck.dart';
 import '../models/slide.dart';
-import '../utils/markdown_blocks.dart';
+import 'markdown_table_codec.dart';
 
 /// Converteert tussen een plat Markdown-**document** en een getypeerd
 /// [Deck]. Twee zuivere, headless functies — bewust hier en niet verspreid over
@@ -105,20 +105,20 @@ class DocumentDeckBridge {
       }
 
       // GFM-tabel: koprij gevolgd door een scheidingsrij.
-      if (looksLikeTableRow(trimmed) &&
+      if (isMarkdownTableLine(trimmed) &&
           i + 1 < lines.length &&
-          isTableDelimiter(lines[i + 1].trim())) {
+          isMarkdownTableDelimiterRow(lines[i + 1].trim())) {
         flushFlow();
         final rawRows = <String>[line];
         var j = i + 2; // sla de koprij en de scheidingsrij over
-        while (j < lines.length && looksLikeTableRow(lines[j].trim())) {
+        while (j < lines.length && isMarkdownTableLine(lines[j].trim())) {
           rawRows.add(lines[j]);
           j++;
         }
         slides.add(
           Slide.create(
             SlideType.table,
-          ).copyWith(tableRows: gfmTableCells(rawRows)),
+          ).copyWith(tableRows: rawRows.map(splitMarkdownTableRow).toList()),
         );
         i = j;
         continue;
@@ -159,7 +159,7 @@ class DocumentDeckBridge {
 String _slideBody(Slide slide) {
   switch (slide.type) {
     case SlideType.table:
-      return rowsToGfmTable(slide.tableRows);
+      return encodeMarkdownTable(slide.tableRows);
     case SlideType.chart:
       return '```chart\n${slide.customMarkdown}\n```';
     default:

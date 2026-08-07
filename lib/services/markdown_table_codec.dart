@@ -136,3 +136,35 @@ String markdownTableSeparatorRow(int colCount, [List<TableAlign>? alignments]) {
   }
   return '| ${cells.join(' | ')} |';
 }
+
+/// Of [line] de GFM-scheidingsrij ónder een tabelkop is (`| --- | :--: |`): een
+/// tabelregel waarvan élke cel `:?-+:?` is. Voor een parser die een tabel-*start*
+/// moet herkennen (koprij gevolgd door deze rij) zonder de hele tabel te
+/// decoderen — zie de documentmodus-weergave en `DocumentDeckBridge`.
+bool isMarkdownTableDelimiterRow(String line) {
+  if (!isMarkdownTableLine(line)) return false;
+  final cells = splitMarkdownTableRow(line);
+  return cells.isNotEmpty &&
+      cells.every((c) => _separatorCell.hasMatch(c.trim()));
+}
+
+/// Serialiseer een celraster (eerste rij = koppen) naar een volledige
+/// GFM-pijptabel: koprij, scheidingsrij (met optionele [alignments]) en de body.
+/// De cellen gaan door [encodeMarkdownTableCell], dus een `|`, een backslash of
+/// een regelovergang (`\n` → `<br>`) blijft behouden. Ragged rijen worden met
+/// lege cellen aangevuld tot de breedste. De omgekeerde van
+/// [decodeMarkdownTableRows].
+String encodeMarkdownTable(
+  List<List<String>> rows, {
+  List<TableAlign>? alignments,
+}) {
+  if (rows.isEmpty) return '';
+  final cols = rows.fold<int>(1, (m, r) => r.length > m ? r.length : m);
+  String rowLine(List<String> r) =>
+      '| ${List.generate(cols, (c) => encodeMarkdownTableCell(c < r.length ? r[c] : '')).join(' | ')} |';
+  return [
+    rowLine(rows.first),
+    markdownTableSeparatorRow(cols, alignments),
+    for (final r in rows.skip(1)) rowLine(r),
+  ].join('\n');
+}

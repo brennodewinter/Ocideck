@@ -194,7 +194,7 @@ ladder"):
 
 | Construct | On disk | Degrades outside OciDeck to | Re-use |
 |---|---|---|---|
-| **Tables** | GFM pipe table | a real table | `TableEditor` via a text-in/text-out adapter |
+| **Tables** | GFM pipe table | a real table | `TableEditor` via a text-in/text-out adapter, on the app-wide `markdown_table_codec` — so a document table is a full office table (per-column alignment, and multi-line cells via `<br>`), shared with the report slides / import / clipboard rather than a document-only copy |
 | **Images** | `![alt](images/x.png)` | a real image | shared block helper; asset copied into `images/` |
 | **Mermaid** | ` ```mermaid ` fence | rendered on GitHub/GitLab, else a labelled code block | `DocMermaidView` + `MermaidRenderService` (already works in the reader) |
 | **Gantt** | Markdown table (+ portable marker) | a readable table | `ganttTableToMermaid` (pure) → mermaid render |
