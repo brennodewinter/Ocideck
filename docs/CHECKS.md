@@ -225,6 +225,7 @@ now the only passing state.
 | [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ |
 | [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ |
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ |
+| [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists and is registered, no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — |
@@ -248,7 +249,7 @@ not what runs. That workflow does not execute: Forgejo reads
 is [`make check-no-coverage`](#make-check-no-coverage) on the Mac runner, on a
 `v*` tag (#790/#796/#797), plus
 [`make check-secrets`](#make-check-secrets) and [`make sast`](#make-sast) on
-every pull request (#778), and — since #1118 — the ten static gates
+every pull request (#778), and — since #1118 — the static gates
 (`$(STATIC_GATES)`) via [`make check-static`](#make-check-static) on every pull
 request too (`.forgejo/workflows/static-gate.yml`). Those are the checks in this
 table that a forge actually runs before a merge; the full test suite and the two
@@ -664,6 +665,33 @@ also declares them, but see the [CI note](#continuous-integration).)
   variant, keeping the node IDs and mermaid syntax intact; or, if the diagram
   genuinely carries no prose, add its body to `languageNeutralMermaidBlocks` in
   `tool/check_translated_mermaid.dart`.
+
+### `make translate-docs-check`
+- **Runs:** `dart run tool/translate_docs.dart --check`
+- **Covers:** the bundled user docs are shipped only in the languages listed in
+  `shippedDocLanguages` (the English base plus Dutch today), not machine-translated
+  into every interface language. The gate does *not* demand the other languages
+  exist; it enforces that what is shipped stays coherent — every
+  `shippedDocLanguages` variant exists and is registered in `pubspec.yaml`, no
+  variant file sits on disk for an unlisted language, no `pubspec.yaml`
+  registration dangles after its file is gone, and no excluded document
+  (`PRIVACY.md`, `SECURITY_DESIGN.md`) was translated.
+- **Why it exists:** the docs are *content*, and OciDeck ships content in Dutch +
+  English while translating only the interface into every language. The generator
+  (`tool/translate_docs.dart`) can machine-translate the manuals into any interface
+  language (#1181), but that is opt-in — a maintainer adds a language by generating
+  its variants (`make translate-docs`) and listing its code in `shippedDocLanguages`.
+  Until then the gate keeps the shipped set honest without forcing hundreds of
+  unreviewed machine translations, and it still fails on the real regressions: an
+  unbundled variant the app cannot load, a dangling registration, or a translated
+  privacy/security promise. The check also used to exit 0 silently — `main`
+  returned an `int` the Dart VM discards — until #1341 propagated it through
+  `exitCode` so the gate can actually fail.
+- **Failure means:** for a missing or unregistered shipped variant, run
+  `make translate-docs` and commit the result; for a variant on disk in an unlisted
+  language, either add that language to `shippedDocLanguages` or delete the file;
+  for a dangling registration, drop the `pubspec.yaml` line; for a translated
+  excluded document, remove the translation.
 
 ### `make test`
 - **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags golden`
