@@ -1071,6 +1071,20 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Toolchainpoort: `make translate-docs-check` compileert weer — taalregister
+  losgekoppeld van Flutter.** `dart run tool/translate_docs.dart` crashte op een
+  Dart FFI-compilerfout (`_FfiUseSiteTransformer`, `InvalidType`), omdat het via
+  `AppLocalizations` en `DocumentationService` de hele Flutter-graaf
+  (`material` + `dart:ui`) de standalone-VM-compilatie in trok — die kan dat
+  niet aan (en faalt onder deze toolchain niet netjes maar crasht). De tool
+  heeft alleen platte data nodig: de taalcodes en de docs-brontaal. Die staan nu
+  in een Flutter-vrij `lib/l10n/language_registry.dart` (`kLanguageNames`,
+  `kDocsBaseLanguage`), dat zowel de app (`AppLocalizations.languageNames`,
+  `DocumentationService.baseLanguage`) als de tool lezen — één bron. Alle andere
+  `dart run tool/*.dart`-poorten geauditeerd: alleen deze tool trok Flutter
+  binnen. Twee bestaande, door de crash gemaskeerde zaken apart gemeld: de
+  `--check` geeft zijn niet-nul-code niet door (`main` retourneert een int maar
+  roept `exit()` niet aan), en er ontbreken nog 270 vertaalde docsvarianten.
 - **Docs: de HTML-export laat de dia-overlays weg — nu vastgelegd als bekende
   beperking.** Bij het keuren van de paginanummer-fix (#1330) bleek dat de
   eigen footertekst en paginanummering niet in de single-file HTML-export komen.

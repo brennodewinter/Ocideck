@@ -1,5 +1,7 @@
 import 'package:flutter/services.dart' show AssetManifest, rootBundle;
 
+import '../l10n/language_registry.dart' show kDocsBaseLanguage;
+
 /// Loads bundled Markdown documentation for the in-app reader.
 ///
 /// Documents are shipped as assets under `docs/` (plus the root `LICENSE.md`).
@@ -20,7 +22,7 @@ class DocumentationService {
   /// `.<code>.md` translation and, when none is bundled, falls back to the base
   /// *and is told so*. Before #1181 this was assumed to be Dutch, which silently
   /// left Dutch readers on the English base with no notice — the exact report.
-  static const String baseLanguage = 'en';
+  static const String baseLanguage = kDocsBaseLanguage;
 
   /// Loads [baseAsset] (e.g. `docs/USER_GUIDE.md` or `LICENSE.md`), preferring a
   /// `.<languageCode>.md` sibling when it is bundled. [baseLanguage] and unknown

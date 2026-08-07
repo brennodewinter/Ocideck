@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'language_registry.dart';
+
 part 'translations/nl.dart';
 part 'translations/en.dart';
 part 'translations/it.dart';
@@ -74,40 +76,10 @@ class AppLocalizations {
     Locale('tr'),
   ];
 
-  static const languageNames = {
-    'nl': 'Nederlands',
-    'en': 'English',
-    'it': 'Italiano',
-    'de': 'Deutsch',
-    'fr': 'Français',
-    'es': 'Español',
-    'fy': 'Frysk',
-    'pap': 'Papiamento',
-    'la': 'Latina',
-    'id': 'Bahasa Indonesia',
-    'pl': 'Polski',
-    'uk': 'Українська',
-    'gsw': 'Schwiizerdütsch',
-    'el': 'Ελληνικά',
-    'da': 'Dansk',
-    'sv': 'Svenska',
-    'hr': 'Hrvatski',
-    'cs': 'Čeština',
-    'fi': 'Suomi',
-    'bg': 'Български',
-    'lv': 'Latviešu',
-    'lt': 'Lietuvių',
-    'mt': 'Malti',
-    'et': 'Eesti',
-    'hu': 'Magyar',
-    'ga': 'Gaeilge',
-    'pt': 'Português',
-    'ro': 'Română',
-    'sl': 'Slovenščina',
-    'sk': 'Slovenčina',
-    'tlh': 'tlhIngan Hol',
-    'tr': 'Türkçe',
-  };
+  /// Display name per interface-language code. The map itself lives in
+  /// [kLanguageNames] — a Flutter-free file so build tooling can read the set of
+  /// languages without compiling Flutter (see `language_registry.dart`).
+  static const languageNames = kLanguageNames;
 
   /// A country flag (emoji) per language, shown in the language pickers. Some
   /// choices are by convention: English → United Kingdom, Latin → Vatican City,

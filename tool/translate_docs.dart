@@ -44,8 +44,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ocideck/l10n/app_localizations.dart';
-import 'package:ocideck/services/documentation_service.dart';
+// Only the Flutter-free language registry — importing AppLocalizations or
+// DocumentationService would drag in `package:flutter/material.dart` and
+// `dart:ui`, which the standalone Dart VM this tool runs on cannot compile.
+import 'package:ocideck/l10n/language_registry.dart';
 
 /// The bundled, user-facing documents that get machine-translated. These are the
 /// "Gebruiker" section of the in-app reader minus the legally sensitive ones
@@ -75,11 +77,11 @@ const String bannerSourceLine =
 
 /// The target language codes: every app language except the English base and —
 /// defensively — any code that is not a plain language (none today). Read from
-/// [AppLocalizations] so a new app language is picked up automatically, per the
-/// project's "don't hardcode the language list" rule.
-List<String> targetLanguages() => AppLocalizations.languageNames.keys
-    .where((c) => c != DocumentationService.baseLanguage)
-    .toList();
+/// [kLanguageNames] so a new app language is picked up automatically, per the
+/// project's "don't hardcode the language list" rule. The registry is the same
+/// data `AppLocalizations.languageNames` exposes, minus the Flutter import.
+List<String> targetLanguages() =>
+    kLanguageNames.keys.where((c) => c != kDocsBaseLanguage).toList();
 
 /// `docs/USER_GUIDE.md` + `de` → `docs/USER_GUIDE.de.md`. Mirrors
 /// `DocumentationService._variantKey` so the app resolves exactly what this writes.
