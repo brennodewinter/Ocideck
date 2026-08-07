@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart' show compute;
 import 'package:path/path.dart' as p;
 
 import '../../models/git_settings.dart';
+import '../../utils/lru_cache.dart';
 import 'git_forge.dart';
 
 /// Isolate-werkfunctie: sha-256 over de bytes. Buiten de UI-isolate omdat een
@@ -45,7 +46,12 @@ class AssetPool {
   /// repo later leest. Daarom verifieert [resolve] de hash vóór het opslaan —
   /// zie [_verifyOrThrow]. Content-adressering die het adres niet controleert
   /// is niet meer dan een bestandsnaam.
-  static final Map<String, Uint8List> _cache = {};
+  ///
+  /// De cache is begrensd op 256 entries (LRU): een lange sessie met veel
+  /// verschillende assets zou anders het geheugen onbegrensd laten groeien.
+  /// Content-adressering maakt LRU veilig — een geëvicteerde entry wordt bij
+  /// de volgende resolve gewoon opnieuw opgehaald en geverifieerd.
+  static final LruCache<String, Uint8List> _cache = LruCache(256);
 
   /// De poolverwijzing voor [bytes], afgeleid van de inhoud plus de extensie van
   /// [name]. Null wanneer er geen bruikbare extensie te maken is.
