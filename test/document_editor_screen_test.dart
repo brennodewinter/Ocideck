@@ -193,7 +193,13 @@ void main() {
         .firstWhere((w) => w.bindings.containsKey(saveActivator));
     await tester.runAsync(() async {
       shortcuts.bindings[saveActivator]!();
-      for (var i = 0; i < 50 && n.currentState.isDirty; i++) {
+      // isDirty clear't pas ná de awaited atomic write (document_editor_screen
+      // roept markSaved aan ná `await saveDocument`), dus dit is het juiste
+      // wachtsignaal. Het budget moet wel ruim: op de Forgejo linux-gate draaien
+      // vier job-containers parallel op één dind, en onder die I/O-contentie
+      // haalde de write de oude 500ms niet → de lus las nog 'oud'. 5s vangt de
+      // last-piek af zonder een echte hang te verbergen (bounded).
+      for (var i = 0; i < 500 && n.currentState.isDirty; i++) {
         await Future<void>.delayed(const Duration(milliseconds: 10));
       }
     });
