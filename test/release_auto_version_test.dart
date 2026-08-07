@@ -19,6 +19,17 @@ import '../tool/check_version_bump.dart';
 void main() {
   const script = 'scripts/release_auto.sh';
 
+  // release_auto.sh is een macOS/Unix-maintainertool: hij leunt op de
+  // macOS-keychain (`security`), op `codesign`/`ditto` en op `/Applications`, en
+  // wordt alleen op de maintainer-Mac en de Linux-CI gedraaid. Onder Windows
+  // Git Bash (alleen de mirror-CI, alleen op een v*-tag) viel het script om met
+  // exit 1 terwijl macOS/Linux — waar de release écht draait — groen waren. Sla
+  // deze bash-toetsen op Windows over i.p.v. een niet-ondersteund draaipunt te
+  // toetsen; de Forgejo-poorten die merges gate'n draaien geen Windows.
+  final skipOnWindows = Platform.isWindows
+      ? 'release_auto.sh draait alleen op macOS/Linux, niet onder Windows Git Bash'
+      : null;
+
   String currentPubspecVersion() {
     for (final line in File('pubspec.yaml').readAsLinesSync()) {
       final m = RegExp(
@@ -60,6 +71,7 @@ void main() {
         reason: 'de menu-rekenkunde wijkt af van de canonieke één-as-regel',
       );
     },
+    skip: skipOnWindows,
   );
 
   test('elk niveau kiest de juiste as', () {
@@ -70,13 +82,13 @@ void main() {
     );
     expect(printVersion('minor'), 'v${current.major}.${current.minor + 1}.0');
     expect(printVersion('major'), 'v${current.major + 1}.0.0');
-  });
+  }, skip: skipOnWindows);
 
   test('zonder niveau weigert --print-version', () {
     final r = Process.runSync('bash', [script, '--print-version']);
     expect(r.exitCode, isNot(0));
     expect(r.stderr.toString(), contains('niveau'));
-  });
+  }, skip: skipOnWindows);
 
   // --resume (#9): al deze paden falen hermetisch — vóór git/netwerk — zodat de
   // test snel en zonder poort-neveneffecten blijft.
@@ -84,11 +96,11 @@ void main() {
     final r = Process.runSync('bash', [script, '--resume']);
     expect(r.exitCode, isNot(0));
     expect(r.stderr.toString(), contains('tag'));
-  });
+  }, skip: skipOnWindows);
 
   test('een losse tag zonder --resume weigert (typfout-vangnet)', () {
     final r = Process.runSync('bash', [script, 'v9.9.9']);
     expect(r.exitCode, isNot(0));
     expect(r.stderr.toString(), contains('resume'));
-  });
+  }, skip: skipOnWindows);
 }
