@@ -46,7 +46,7 @@ Drie dingen samen vormen vandaag een zwakke reproduceerbaarheid:
 
 - **De bronroute** is openbaar en de bouwstappen zijn leesbaar
   (`.forgejo/workflows/release.yml`, `docs/BUILD.md`).
-- **De toolchain is gepind** en bewaakt: Flutter 3.44.8 stable, afgedwongen door
+- **De toolchain is gepind** en bewaakt: Flutter 3.44.9 stable, afgedwongen door
   `make check-toolchain` (`tool/check_toolchain.dart`) tegen `.tool-versions` en
   beide workflow-bestanden.
 - **Eén bekende bron van niet-determinisme is al weggewerkt**:
@@ -139,7 +139,7 @@ was een artefact van een vervuilde meting en is hiermee ingetrokken.
 
 **Wat wél de eerlijke restrand is.** Reproduceerbaarheid geldt altijd ten opzichte
 van een vastgelegde bouwomgeving, nooit "op elke machine met elk gereedschap".
-Gepind/geborgd: de toolchain (Flutter 3.44.8, `make check-toolchain`), de
+Gepind/geborgd: de toolchain (Flutter 3.44.9, `make check-toolchain`), de
 afhankelijkheden (`pubspec.lock` + `--enforce-lockfile`), en de bron (gecommit) —
 zodat een herbouw op dezelfde machine uit dezelfde bron byte-identiek is
 (getoetst — drie cycli op één machine). *Niet* rechtstreeks getoetst is een
