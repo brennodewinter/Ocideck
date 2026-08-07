@@ -231,6 +231,12 @@ void main() {
   // lijsten lopen uiteen. De negen hierboven blijven — die dragen rijkere
   // inhoud (een TLP-markering, een ontbrekende afbeelding) dan een
   // standaardfixture kan.
+  // De mermaid-gedreven types (gantt, flow) tekenen hun diagram op een verborgen
+  // WebView die onder `flutter test` niet draait; hun golden legt daarom de
+  // scaffold (kader, titel, laadstaat) vast, niet het diagram zelf — dat wordt
+  // gedekt door `mermaid_diagram_test.dart` en de DSL-omzettoetsen. De golden
+  // blijft deterministisch (vaste pump), dus bewaakt nog steeds of de
+  // type-scaffold heel blijft.
   group('elk slidetype heeft een golden', () {
     for (final type in SlideType.values) {
       testWidgets(type.name, (tester) async {
