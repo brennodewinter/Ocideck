@@ -500,28 +500,41 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   }
 
   /// Dubbelklik op een gerenderde tabel → de volwaardige [TableEditor] in een
-  /// dialoog. De rauwe GFM-regels worden naar een celraster ontleed (via
-  /// [splitMarkdownTableRow]) en in een wegwerp-[Slide] gezet; 'Toepassen' serialiseert
-  /// het raster terug naar een GFM-tabel en vervangt precies dat tabelblok in de
-  /// bron. DOCUMENT_MODE.md §4.2.
+  /// dialoog. Kop + scheidingsrij + body worden via [decodeMarkdownTableWithAlignment]
+  /// ontleed tot een celraster mét per-kolomuitlijning en in een wegwerp-[Slide]
+  /// gezet; 'Toepassen' serialiseert raster én uitlijning terug naar een
+  /// GFM-tabel en vervangt precies dat tabelblok in de bron. DOCUMENT_MODE.md §4.2.
   Future<void> _editTable(int tableOrdinal, List<String> rawRows) async {
-    final cells = rawRows.map(splitMarkdownTableRow).toList();
-    var edited = cells;
-    final slide = Slide.create(SlideType.table).copyWith(tableRows: cells);
+    final source = ref.read(documentProvider).document?.source ?? '';
+    // rawRows draagt de scheidingsrij niet; die haalt de uitlijning. Lees daarom
+    // het volledige tabelblok (kop + scheiding + body) uit de bron.
+    final range = DocumentMarkdownView.nthTableBlockRange(source, tableOrdinal);
+    final tableLines = range == null
+        ? rawRows
+        : source.split('\n').sublist(range[0], range[1]);
+    final decoded = decodeMarkdownTableWithAlignment(tableLines);
+    var editedRows = decoded.rows;
+    var editedAligns = decoded.alignments;
+    final slide = Slide.create(SlideType.table).copyWith(
+      tableRows: decoded.rows,
+      tableColumnAlignments: decoded.alignments,
+    );
     final apply = await _embedEditorDialog(
       TableEditor(
         slide: slide,
         nestedInScrollView: true,
         documentContext: true,
-        onUpdate: (s) => edited = s.tableRows,
+        onUpdate: (s) {
+          editedRows = s.tableRows;
+          editedAligns = s.tableColumnAlignments;
+        },
       ),
     );
     if (apply != true || !mounted) return;
-    final source = ref.read(documentProvider).document?.source ?? '';
     final next = replaceNthTableBlock(
       source,
       tableOrdinal,
-      encodeMarkdownTable(edited),
+      encodeMarkdownTable(editedRows, alignments: editedAligns),
     );
     if (next != source) {
       ref.read(documentProvider.notifier).edit(next, coalesceKey: null);

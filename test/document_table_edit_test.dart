@@ -6,6 +6,7 @@ import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/editors/table_editor.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
+import 'package:ocideck/widgets/slides/inline_markdown.dart';
 
 /// Dubbelklik-bewerken van een tabel in de documentmodus (DOCUMENT_MODE.md
 /// §4.2): een gerenderde GFM-tabel dubbelklikken opent de volwaardige
@@ -143,5 +144,70 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 350));
     expect(find.byType(TableEditor), findsOneWidget);
+  });
+
+  testWidgets('de weergave past de per-kolomuitlijning toe', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: DocumentMarkdownView(
+              '| A | B |\n| :---: | ---: |\n| x | 9 |\n',
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    // De cellen in de tabel dragen de uitlijning uit de scheidingsrij: kolom 0
+    // gecentreerd, kolom 1 rechts — dus niet alles op de GFM-default (links).
+    final aligns = tester
+        .widgetList<InlineMarkdownText>(
+          find.descendant(
+            of: find.byType(Table),
+            matching: find.byType(InlineMarkdownText),
+          ),
+        )
+        .map((w) => w.textAlign)
+        .toSet();
+    expect(aligns.contains(TextAlign.center), isTrue);
+    expect(aligns.contains(TextAlign.end), isTrue);
+  });
+
+  testWidgets('Toepassen behoudt de uitlijning (geen stille strip, F3)', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1300, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse(
+          '# R\n\n| A | B | C |\n| :--- | :---: | ---: |\n| 1 | 2 | 3 |\n',
+        ),
+      );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [documentProvider.overrideWith((ref) => n)],
+        child: const MaterialApp(home: DocumentEditorScreen()),
+      ),
+    );
+    await tester.pump();
+
+    // Open de tabel-editor en pas toe zónder iets te wijzigen.
+    await tester.tap(find.byIcon(Icons.edit_outlined));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(find.byType(TableEditor), findsOneWidget);
+    await tester.tap(find.text('Toepassen'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 350));
+
+    // De scheidingsrij mag NIET gestript zijn naar | --- | --- | --- |.
+    expect(
+      n.currentState.document!.source,
+      contains('| :--- | :---: | ---: |'),
+    );
   });
 }

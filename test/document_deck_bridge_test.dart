@@ -165,5 +165,23 @@ void main() {
       final out = DocumentDeckBridge.deckToDocumentMarkdown(deck);
       expect(out.contains(r'x \| y'), isTrue);
     });
+
+    test(
+      'de per-kolomuitlijning overleeft de deconstructie én de round-trip',
+      () {
+        const doc = '| A | B | C |\n| :--- | :---: | ---: |\n| 1 | 2 | 3 |\n';
+        final deck = DocumentDeckBridge.documentToDeck(doc);
+        final table = deck.slides.firstWhere((s) => s.type == SlideType.table);
+        // De uitlijning uit de scheidingsrij landt op de dia.
+        expect(table.tableColumnAlignments, const [
+          TableAlign.left,
+          TableAlign.center,
+          TableAlign.right,
+        ]);
+        // En komt byte-getrouw terug in de scheidingsrij bij serialiseren.
+        final out = DocumentDeckBridge.deckToDocumentMarkdown(deck);
+        expect(out.contains('| :--- | :---: | ---: |'), isTrue);
+      },
+    );
   });
 }

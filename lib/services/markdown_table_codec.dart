@@ -160,11 +160,16 @@ String encodeMarkdownTable(
 }) {
   if (rows.isEmpty) return '';
   final cols = rows.fold<int>(1, (m, r) => r.length > m ? r.length : m);
+  // Alleen colons in de scheidingsrij zetten als er écht een niet-linkse kolom
+  // is; een tabel zonder uitlijning houdt de kale `---` (`:---` is semantisch
+  // gelijk aan links maar oogt als ruis in een gewone tabel).
+  final hasAlignment =
+      alignments != null && alignments.any((a) => a != TableAlign.left);
   String rowLine(List<String> r) =>
       '| ${List.generate(cols, (c) => encodeMarkdownTableCell(c < r.length ? r[c] : '')).join(' | ')} |';
   return [
     rowLine(rows.first),
-    markdownTableSeparatorRow(cols, alignments),
+    markdownTableSeparatorRow(cols, hasAlignment ? alignments : null),
     for (final r in rows.skip(1)) rowLine(r),
   ].join('\n');
 }

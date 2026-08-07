@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../models/settings.dart' show ThemeProfile;
+import '../../models/slide.dart' show TableAlign;
 import '../../services/marp_html_service.dart';
 import '../../services/markdown_table_codec.dart';
 import '../../theme/app_theme.dart';
@@ -227,7 +228,7 @@ class DocumentMarkdownView extends StatelessWidget {
     _Kind.code => _codeBlock(t, b.text),
     _Kind.mermaid => _mermaid(t, b.text),
     _Kind.chart => _chart(t, b.text, kindOrdinal),
-    _Kind.table => _table(t, b.rows, kindOrdinal),
+    _Kind.table => _table(t, b.rows, b.aligns, kindOrdinal),
     _Kind.rule => _bounded(_rule(t)),
   };
 
@@ -289,12 +290,18 @@ class DocumentMarkdownView extends StatelessWidget {
           i + 1 < lines.length &&
           isMarkdownTableDelimiterRow(lines[i + 1])) {
         final rows = <String>[line];
+        // De per-kolomuitlijning zit in de scheidingsrij (`:--`, `--:`, `:-:`);
+        // die halen we eruit voordat we hem overslaan.
+        final aligns = decodeMarkdownTableWithAlignment([
+          line,
+          lines[i + 1],
+        ]).alignments;
         var j = i + 2;
         while (j < lines.length && isMarkdownTableLine(lines[j])) {
           rows.add(lines[j]);
           j++;
         }
-        blocks.add(_Block(_Kind.table, rows: rows));
+        blocks.add(_Block(_Kind.table, rows: rows, aligns: aligns));
         i = j;
         continue;
       }
@@ -544,7 +551,12 @@ class DocumentMarkdownView extends StatelessWidget {
     child: Divider(height: 1, thickness: 1, color: t.border),
   );
 
-  Widget _table(_Theme t, List<String> rows, int tableOrdinal) {
+  Widget _table(
+    _Theme t,
+    List<String> rows,
+    List<TableAlign> aligns,
+    int tableOrdinal,
+  ) {
     final cells = rows.map(splitMarkdownTableRow).toList();
     final columns = cells.isEmpty
         ? 0
@@ -576,6 +588,7 @@ class DocumentMarkdownView extends StatelessWidget {
                         t,
                         c < cells[r].length ? cells[r][c] : '',
                         header: r == 0,
+                        textAlign: _columnTextAlign(aligns, c),
                       ),
                   ],
                 ),
@@ -593,20 +606,43 @@ class DocumentMarkdownView extends StatelessWidget {
     );
   }
 
-  Widget _tableCell(_Theme t, String text, {required bool header}) => Padding(
+  Widget _tableCell(
+    _Theme t,
+    String text, {
+    required bool header,
+    TextAlign textAlign = TextAlign.start,
+  }) => Padding(
     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     child: _inline(
       text,
       header ? t.body.copyWith(fontWeight: FontWeight.w700) : t.body,
       t,
+      textAlign: textAlign,
     ),
   );
 
-  Widget _inline(String text, TextStyle style, _Theme t) => InlineMarkdownText(
+  /// De horizontale uitlijning voor kolom [c] uit de GFM-scheidingsrij; buiten
+  /// bereik → links (de GFM-default).
+  static TextAlign _columnTextAlign(List<TableAlign> aligns, int c) {
+    if (c >= aligns.length) return TextAlign.start;
+    return switch (aligns[c]) {
+      TableAlign.left => TextAlign.start,
+      TableAlign.center => TextAlign.center,
+      TableAlign.right => TextAlign.end,
+    };
+  }
+
+  Widget _inline(
+    String text,
+    TextStyle style,
+    _Theme t, {
+    TextAlign textAlign = TextAlign.start,
+  }) => InlineMarkdownText(
     text,
     style: style,
     linkColor: t.link,
     onTapLink: onTapLink,
+    textAlign: textAlign,
   );
 
   // ── Line classification helpers ───────────────────────────────────────────
@@ -698,6 +734,7 @@ class _Block {
     this.level = 0,
     this.items = const [],
     this.rows = const [],
+    this.aligns = const [],
   });
 
   final _Kind kind;
@@ -711,8 +748,14 @@ class _Block {
   /// List item lines (for [_Kind.list]).
   final List<_ListLine> items;
 
-  /// Raw table rows including the delimiter row (for [_Kind.table]).
+  /// Raw table rows — header + body, *without* the delimiter row (for
+  /// [_Kind.table]). The per-column alignment from that delimiter is parsed out
+  /// into [aligns].
   final List<String> rows;
+
+  /// Per-column alignment from the GFM delimiter row (for [_Kind.table]); shorter
+  /// than the column count means the rest default to left (the GFM default).
+  final List<TableAlign> aligns;
 
   /// The plain text a find-in-page query matches against. Rules never match;
   /// tables and lists flatten their cells/items into one searchable string.
@@ -851,7 +894,12 @@ class _EditableEmbedState extends State<_EditableEmbed> {
                 opacity: _hover ? 1 : 0.6,
                 duration: const Duration(milliseconds: 120),
                 child: Material(
-                  color: scheme.surface.withValues(alpha: 0.9),
+                  // Volledig dekkend + een lichte schaduw: waar het potlood over
+                  // een cel valt (een smalle tabelkop) leest het als een knop
+                  // erbovenop in plaats van door de tekst heen te schemeren.
+                  color: scheme.surface,
+                  elevation: 2,
+                  shadowColor: Colors.black45,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6),
                     side: BorderSide(color: scheme.outlineVariant),

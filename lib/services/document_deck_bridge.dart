@@ -109,16 +109,21 @@ class DocumentDeckBridge {
           i + 1 < lines.length &&
           isMarkdownTableDelimiterRow(lines[i + 1].trim())) {
         flushFlow();
-        final rawRows = <String>[line];
-        var j = i + 2; // sla de koprij en de scheidingsrij over
+        // Koprij + scheidingsrij + body: de codec leest de per-kolomuitlijning
+        // uit de scheidingsrij (en laat die daarna weg), zodat een office-tabel
+        // zijn uitlijning door de deconstructie én de round-trip behoudt.
+        final tableLines = <String>[line, lines[i + 1]];
+        var j = i + 2;
         while (j < lines.length && isMarkdownTableLine(lines[j].trim())) {
-          rawRows.add(lines[j]);
+          tableLines.add(lines[j]);
           j++;
         }
+        final decoded = decodeMarkdownTableWithAlignment(tableLines);
         slides.add(
-          Slide.create(
-            SlideType.table,
-          ).copyWith(tableRows: rawRows.map(splitMarkdownTableRow).toList()),
+          Slide.create(SlideType.table).copyWith(
+            tableRows: decoded.rows,
+            tableColumnAlignments: decoded.alignments,
+          ),
         );
         i = j;
         continue;
@@ -159,7 +164,10 @@ class DocumentDeckBridge {
 String _slideBody(Slide slide) {
   switch (slide.type) {
     case SlideType.table:
-      return encodeMarkdownTable(slide.tableRows);
+      return encodeMarkdownTable(
+        slide.tableRows,
+        alignments: slide.tableColumnAlignments,
+      );
     case SlideType.chart:
       return '```chart\n${slide.customMarkdown}\n```';
     default:
