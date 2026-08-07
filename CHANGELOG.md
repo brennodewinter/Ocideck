@@ -1071,6 +1071,23 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **`translate-docs-check` bijt weer, en is nu écht een poort.** Twee gebreken
+  die de eerdere compilecrash had gemaskeerd. (1) `main` was `Future<int>` met
+  `return _runCheck()`, maar de Dart-VM negeert een teruggegeven int — zonder
+  `exit()`/`exitCode` eindigde de poort altijd 0. Nu zet een dunne `main`
+  `exitCode = await _run(args)`, dus een gevonden probleem faalt de poort echt.
+  (2) De poort eiste een variant in álle 31 talen (270 ontbraken) — niet wat
+  OciDeck wil: docs zijn Engels + Nederlands, andere talen vallen in de lezer
+  terug op de Engelse basis. De check controleert nu **consistentie** i.p.v.
+  volledigheid: elke verscheepte taal (`shippedDocLanguages = ['nl']`) bestaat en
+  is geregistreerd, er staat geen variant voor een niet-verscheepte taal, geen
+  `pubspec.yaml`-registratie is verweesd, en — een privacywaarborg — geen
+  uitgesloten document (PRIVACY, SECURITY_DESIGN) is ooit machinevertaald.
+  `shippedDocLanguages` is een korte expliciete lijst; een taal erbij = code
+  toevoegen en `make translate-docs` draaien. De poort hangt nu in
+  `STATIC_GATES`, dus hij draait per PR i.p.v. nergens. Een nieuwe naam op de
+  lijst wordt gevalideerd tegen `kLanguageNames`. Test:
+  `test/doc_translation_test.dart` draait de poortlogica tegen de repo.
 - **Toolchainpoort: `make translate-docs-check` compileert weer — taalregister
   losgekoppeld van Flutter.** `dart run tool/translate_docs.dart` crashte op een
   Dart FFI-compilerfout (`_FfiUseSiteTransformer`, `InvalidType`), omdat het via
