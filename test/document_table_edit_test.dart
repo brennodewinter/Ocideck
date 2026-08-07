@@ -159,6 +159,52 @@ void main() {
     expect(find.byType(TableEditor), findsOneWidget);
   });
 
+  testWidgets(
+    'Visueel: het potlood op de tabel-embed bewerkt en schrijft byte-getrouw terug',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1300, 900));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final n = DocumentNotifier()
+        ..loadDocument(
+          MarkdownDocument.parse(
+            '# Rapport\n\n| Naam | Waarde |\n| --- | ---: |\n| Alfa | 1 |\n',
+          ),
+        );
+      await tester.pumpWidget(editorApp(n));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+
+      // Standaard Visueel: de tabel is een bewerkbare Quill-embed (geen Bron),
+      // met hetzelfde potlood als de leesweergave.
+      expect(find.byType(QuillEditor), findsOneWidget);
+      final pencil = find.byIcon(Icons.edit_outlined);
+      expect(pencil, findsOneWidget);
+      await tester.tap(pencil);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 350));
+
+      // De volwaardige tabel-editor opent in de gedeelde embed-dialoog.
+      expect(find.byType(TableEditor), findsOneWidget);
+      final cellField = find.widgetWithText(TextField, 'Alfa');
+      expect(cellField, findsOneWidget);
+      await tester.enterText(cellField, 'Bravo');
+      await tester.pump();
+      await tester.tap(find.text('Toepassen'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 350));
+
+      // De embed schrijft via replaceText terug op de x-embed-table; de
+      // markdown-round-trip zet dat weer om naar een GFM-tabel in de bron.
+      final source = n.currentState.document!.source;
+      expect(source, contains('Bravo'));
+      expect(source, isNot(contains('Alfa')));
+      expect(source, contains('# Rapport'));
+      // De rechtse uitlijning van kolom 2 overleeft de bewerking.
+      expect(source, contains('---:'));
+    },
+  );
+
   testWidgets('de weergave past de per-kolomuitlijning toe', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
