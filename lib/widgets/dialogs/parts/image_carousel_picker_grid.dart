@@ -11,7 +11,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
     return Expanded(
       flex: 13,
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           border: Border(right: BorderSide(color: ImagePickerPalette.surface2)),
         ),
         child: GridView.builder(
@@ -91,7 +91,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) => Container(
                     color: ImagePickerPalette.surface1,
-                    child: const Icon(
+                    child: Icon(
                       Icons.broken_image_outlined,
                       color: ImagePickerPalette.border,
                       size: 32,
@@ -184,7 +184,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
     return Expanded(
       flex: 13,
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           // Subtiele verticale gloed voor de "podium"-look.
           gradient: RadialGradient(
             center: Alignment(0, -0.15),
@@ -331,7 +331,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) => Container(
                         color: ImagePickerPalette.surface1,
-                        child: const Icon(
+                        child: Icon(
                           Icons.broken_image_outlined,
                           color: ImagePickerPalette.border,
                           size: 48,
@@ -443,7 +443,7 @@ extension _CarouselGrid on _ImageCarouselPickerState {
           const SizedBox(height: 10),
           Text(
             '${pos + 1} / $total',
-            style: const TextStyle(
+            style: TextStyle(
               color: _muted,
               fontSize: 12,
               fontWeight: FontWeight.w500,

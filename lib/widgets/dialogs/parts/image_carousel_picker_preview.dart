@@ -16,7 +16,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.touch_app_outlined,
                       size: 40,
                       color: ImagePickerPalette.border,
@@ -25,7 +25,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                     Text(
                       l10n.d('Selecteer een\nafbeelding'),
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: ImagePickerPalette.textMuted,
                         fontSize: 13,
                         height: 1.5,
@@ -45,14 +45,13 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                         child: Image(
                           image: boundedFileImage(File(_selected!), 720),
                           fit: BoxFit.contain,
-                          errorBuilder: (context, error, stackTrace) =>
-                              const Center(
-                                child: Icon(
-                                  Icons.broken_image,
-                                  color: ImagePickerPalette.border,
-                                  size: 48,
-                                ),
-                              ),
+                          errorBuilder: (context, error, stackTrace) => Center(
+                            child: Icon(
+                              Icons.broken_image,
+                              color: ImagePickerPalette.border,
+                              size: 48,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -80,7 +79,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
           children: [
             Text(
               p.basename(_selected!),
-              style: const TextStyle(
+              style: TextStyle(
                 color: ImagePickerPalette.text,
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
@@ -91,7 +90,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
             const SizedBox(height: 6),
             Text(
               _formatPath(_selected!),
-              style: const TextStyle(
+              style: TextStyle(
                 color: ImagePickerPalette.textMuted,
                 fontSize: 10.5,
               ),
@@ -166,7 +165,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
     return Container(
       height: 64,
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border: Border(top: BorderSide(color: ImagePickerPalette.surface2)),
       ),
       child: Row(
@@ -180,7 +179,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
             child: OutlinedButton.icon(
               onPressed: _deduping || _images.length < 2 ? null : _dedupe,
               icon: _deduping
-                  ? const SizedBox(
+                  ? SizedBox(
                       width: 14,
                       height: 14,
                       child: CircularProgressIndicator(
@@ -196,7 +195,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
               ),
               style: OutlinedButton.styleFrom(
                 foregroundColor: ImagePickerPalette.textMuted,
-                side: const BorderSide(color: ImagePickerPalette.border),
+                side: BorderSide(color: ImagePickerPalette.border),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 14,
                   vertical: 10,
@@ -218,7 +217,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                     l10n.d(
                       '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert',
                     ),
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: ImagePickerPalette.textMuted,
                       fontSize: 11,
                     ),
@@ -290,7 +289,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
   List<Widget> _footerLibraryButtons(AppLocalizations l10n) {
     final style = OutlinedButton.styleFrom(
       foregroundColor: ImagePickerPalette.textMuted,
-      side: const BorderSide(color: ImagePickerPalette.border),
+      side: BorderSide(color: ImagePickerPalette.border),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
     );
     return [
@@ -335,29 +334,30 @@ Widget _metaField({
   required IconData icon,
   required ValueChanged<String> onChanged,
 }) {
+  // De prefix als eigen widget: houdt de (grafische) iconDim-kleur op een eigen
+  // regel, weg van de tekststijlen eronder — anders leest de contrast-bronwacht
+  // hem door nabijheid als tekstgebruik (proximity-heuristiek).
+  final prefix = Icon(icon, color: ImagePickerPalette.iconDim, size: 16);
   return TextField(
     controller: controller,
     minLines: 1,
     maxLines: 3,
     onChanged: onChanged,
-    style: const TextStyle(color: ImagePickerPalette.text, fontSize: 12),
+    style: TextStyle(color: ImagePickerPalette.text, fontSize: 12),
     decoration: InputDecoration(
       hintText: hint,
-      hintStyle: const TextStyle(
-        color: ImagePickerPalette.textMuted,
-        fontSize: 12,
-      ),
-      prefixIcon: Icon(icon, color: ImagePickerPalette.iconDim, size: 16),
+      hintStyle: TextStyle(color: ImagePickerPalette.textMuted, fontSize: 12),
+      prefixIcon: prefix,
       isDense: true,
       filled: true,
       fillColor: ImagePickerPalette.bg,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: ImagePickerPalette.border),
+        borderSide: BorderSide(color: ImagePickerPalette.border),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: ImagePickerPalette.border),
+        borderSide: BorderSide(color: ImagePickerPalette.border),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),

@@ -15,10 +15,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           const SizedBox(height: 16),
           Text(
             l10n.d('Afbeeldingen laden…'),
-            style: const TextStyle(
-              color: ImagePickerPalette.textMuted,
-              fontSize: 14,
-            ),
+            style: TextStyle(color: ImagePickerPalette.textMuted, fontSize: 14),
           ),
         ],
       ),
@@ -30,7 +27,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
     return Container(
       height: 60,
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: ImagePickerPalette.surface2)),
       ),
       child: Row(
@@ -52,8 +49,8 @@ extension _CarouselChrome on _ImageCarouselPickerState {
             widget.manageOnly
                 ? l10n.d('Afbeeldingen beheren')
                 : l10n.d('Afbeelding kiezen'),
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: ImagePickerPalette.text,
               fontSize: 17,
               fontWeight: FontWeight.w600,
               letterSpacing: -0.3,
@@ -70,7 +67,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
               _query.trim().isEmpty && !_untaggedOnly
                   ? '${_images.length}'
                   : '${_filtered.length} / ${_images.length}',
-              style: const TextStyle(
+              style: TextStyle(
                 color: ImagePickerPalette.textMuted,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
@@ -89,7 +86,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           _buildViewToggle(),
           const SizedBox(width: 12),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.close,
               color: ImagePickerPalette.iconDim,
               size: 20,
@@ -109,14 +106,14 @@ extension _CarouselChrome on _ImageCarouselPickerState {
       child: TextField(
         controller: _searchController,
         onChanged: _onSearchChanged,
-        style: const TextStyle(color: ImagePickerPalette.text, fontSize: 13),
+        style: TextStyle(color: ImagePickerPalette.text, fontSize: 13),
         decoration: InputDecoration(
           hintText: l10n.d('Zoek op naam of beschrijving…'),
-          hintStyle: const TextStyle(
+          hintStyle: TextStyle(
             color: ImagePickerPalette.textMuted,
             fontSize: 13,
           ),
-          prefixIcon: const Icon(
+          prefixIcon: Icon(
             Icons.search,
             color: ImagePickerPalette.iconDim,
             size: 18,
@@ -125,7 +122,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
               ? null
               : IconButton(
                   tooltip: l10n.d('Zoekopdracht wissen'),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.clear,
                     color: ImagePickerPalette.iconDim,
                     size: 16,
@@ -141,11 +138,11 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           contentPadding: const EdgeInsets.symmetric(vertical: 0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: ImagePickerPalette.border),
+            borderSide: BorderSide(color: ImagePickerPalette.border),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: ImagePickerPalette.border),
+            borderSide: BorderSide(color: ImagePickerPalette.border),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
@@ -174,16 +171,13 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           const SizedBox(width: 8),
           Text(
             _autoTagPhase ?? l10n.d('Afbeeldingen taggen…'),
-            style: const TextStyle(
-              color: ImagePickerPalette.textMuted,
-              fontSize: 12,
-            ),
+            style: TextStyle(color: ImagePickerPalette.textMuted, fontSize: 12),
           ),
         ],
       );
     }
     return IconButton(
-      icon: const Icon(
+      icon: Icon(
         Icons.auto_awesome_outlined,
         color: ImagePickerPalette.iconDim,
         size: 20,
@@ -286,7 +280,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
+              Icon(
                 Icons.verified_outlined,
                 size: 56,
                 color: ImagePickerPalette.success,
@@ -294,7 +288,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
               const SizedBox(height: 20),
               Text(
                 l10n.d('Alle afbeeldingen hebben tags.'),
-                style: const TextStyle(
+                style: TextStyle(
                   color: ImagePickerPalette.text,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -303,7 +297,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
               const SizedBox(height: 8),
               Text(
                 l10n.d('Zet het filter uit om alles weer te zien.'),
-                style: const TextStyle(
+                style: TextStyle(
                   color: ImagePickerPalette.textMuted,
                   fontSize: 13,
                 ),
@@ -326,7 +320,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
                 color: ImagePickerPalette.surface1,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.image_search_outlined,
                 size: 56,
                 color: ImagePickerPalette.border,
@@ -339,7 +333,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
                   : _rootsUnreachable
                   ? l10n.d('Bibliotheekmap niet bereikbaar')
                   : l10n.d('Geen afbeeldingen gevonden'),
-              style: const TextStyle(
+              style: TextStyle(
                 color: ImagePickerPalette.text,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -361,7 +355,7 @@ extension _CarouselChrome on _ImageCarouselPickerState {
                       'Voeg een map toe of gebruik "Bladeren" voor één bestand.',
                     ),
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 color: ImagePickerPalette.textMuted,
                 fontSize: 13,
               ),
