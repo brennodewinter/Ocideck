@@ -25,6 +25,7 @@ import '../state/document_provider.dart';
 import '../state/settings_provider.dart' show settingsProvider, SettingsTraces;
 import '../state/tabs_provider.dart';
 import '../utils/doc_link.dart' show headingSlug;
+import '../utils/markdown_blocks.dart';
 import 'dialogs/convert_to_presentation_dialog.dart';
 import 'dialogs/document_export_dialog.dart';
 import 'editors/_editor_field.dart' show pickImageWithFeedback;
@@ -499,11 +500,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   /// Dubbelklik op een gerenderde tabel → de volwaardige [TableEditor] in een
   /// dialoog. De rauwe GFM-regels worden naar een celraster ontleed (via
-  /// [DocumentMarkdownView.tableCells]) en in een wegwerp-[Slide] gezet;
-  /// 'Toepassen' serialiseert het raster terug naar een GFM-tabel en vervangt
-  /// precies dat tabelblok in de bron. DOCUMENT_MODE.md §4.2.
+  /// [gfmTableCells]) en in een wegwerp-[Slide] gezet; 'Toepassen' serialiseert
+  /// het raster terug naar een GFM-tabel en vervangt precies dat tabelblok in de
+  /// bron. DOCUMENT_MODE.md §4.2.
   Future<void> _editTable(int tableOrdinal, List<String> rawRows) async {
-    final cells = DocumentMarkdownView.tableCells(rawRows);
+    final cells = gfmTableCells(rawRows);
     var edited = cells;
     final slide = Slide.create(SlideType.table).copyWith(tableRows: cells);
     final apply = await _embedEditorDialog(
@@ -880,14 +881,6 @@ String _safeExportName(String title) {
   return cleaned.isEmpty ? 'document' : cleaned;
 }
 
-/// De fence van één ```chart-blok, om de `chartOrdinal`-de (vanaf 0) in de bron
-/// te vinden en te vervangen. Dezelfde vorm als [MarpHtmlService], zodat wat de
-/// weergave telt en wat de editor terugschrijft naar dezelfde blokken wijzen.
-final RegExp _documentChartFence = RegExp(
-  r'```chart[ \t]*\n([\s\S]*?)\n```',
-  multiLine: true,
-);
-
 /// Vervang de inhoud van het `chartOrdinal`-de ```chart-blok (vanaf 0) in
 /// [source] door [newContent] (de kale spec-tekst, zonder fence). Andere blokken
 /// — en alle tekst eromheen — blijven byte-getrouw staan; een `chartOrdinal`
@@ -899,29 +892,10 @@ String replaceNthChartBlock(
   String newContent,
 ) {
   var seen = 0;
-  return source.replaceAllMapped(_documentChartFence, (m) {
+  return source.replaceAllMapped(chartFencePattern, (m) {
     if (seen++ != chartOrdinal) return m.group(0)!;
     return '```chart\n$newContent\n```';
   });
-}
-
-/// Serialiseer een celraster (eerste rij = koppen) naar een GFM-pijptabel: een
-/// koprij, een scheidingsrij en de body. Cellen met een `|` worden ontsnapt naar
-/// `\|` zodat ze de kolomgrens niet breken. Ragged rijen worden met lege cellen
-/// aangevuld tot de breedste. Uitlijning wordt niet bewaard (de editor kent geen
-/// uitlijning); een bewuste vereenvoudiging bij het bewerken van een tabel.
-String rowsToGfmTable(List<List<String>> rows) {
-  if (rows.isEmpty) return '';
-  final cols = rows.fold<int>(1, (m, r) => r.length > m ? r.length : m);
-  String cell(List<String> r, int c) =>
-      (c < r.length ? r[c] : '').replaceAll('|', r'\|');
-  String line(List<String> r) =>
-      '| ${List.generate(cols, (c) => cell(r, c)).join(' | ')} |';
-  return [
-    line(rows.first),
-    '| ${List.filled(cols, '---').join(' | ')} |',
-    for (final r in rows.skip(1)) line(r),
-  ].join('\n');
 }
 
 /// Vervang het `tableOrdinal`-de GFM-tabelblok (vanaf 0) in [source] door

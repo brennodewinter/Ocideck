@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
+import 'package:ocideck/utils/markdown_blocks.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/editors/table_editor.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
@@ -93,11 +94,8 @@ void main() {
     });
   });
 
-  test('tableCells ontleedt de rauwe regels en ontsnapte pijpen', () {
-    final cells = DocumentMarkdownView.tableCells([
-      r'| a\|b | c |',
-      '| d | e |',
-    ]);
+  test('gfmTableCells ontleedt de rauwe regels en ontsnapte pijpen', () {
+    final cells = gfmTableCells([r'| a\|b | c |', '| d | e |']);
     expect(cells, [
       ['a|b', 'c'],
       ['d', 'e'],

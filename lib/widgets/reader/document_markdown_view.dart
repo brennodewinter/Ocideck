@@ -7,6 +7,7 @@ import '../../models/settings.dart' show ThemeProfile;
 import '../../services/marp_html_service.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/doc_link.dart' show headingSlug;
+import '../../utils/markdown_blocks.dart';
 import '../slides/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart' show MermaidRenderer;
 import 'doc_mermaid_view.dart';
@@ -149,11 +150,11 @@ class DocumentMarkdownView extends StatelessWidget {
         i = end < lines.length ? end + 1 : end;
         continue;
       }
-      if (_looksLikeTableRow(lines[i]) &&
+      if (looksLikeTableRow(lines[i]) &&
           i + 1 < lines.length &&
-          _isTableDelimiter(lines[i + 1])) {
+          isTableDelimiter(lines[i + 1])) {
         var j = i + 2;
-        while (j < lines.length && _looksLikeTableRow(lines[j])) {
+        while (j < lines.length && looksLikeTableRow(lines[j])) {
           j++;
         }
         if (seen == ordinal) return [i, j];
@@ -165,16 +166,6 @@ class DocumentMarkdownView extends StatelessWidget {
     }
     return null;
   }
-
-  /// De cellen van een GFM-tabelblok (koprij + body, zónder scheidingsrij),
-  /// ontdaan van pipe-ontsnapping — de vorm die de tabel-editor verwacht.
-  /// Spiegelt de splitsing die de weergave zelf gebruikt, zodat wat je ziet en
-  /// wat je bewerkt gelijk zijn.
-  static List<List<String>> tableCells(List<String> rawRows) => rawRows
-      .map(
-        (r) => _splitTableRow(r).map((c) => c.replaceAll(r'\|', '|')).toList(),
-      )
-      .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -294,12 +285,12 @@ class DocumentMarkdownView extends StatelessWidget {
       }
 
       // GFM pipe table: a header row followed by a |---|:--:| delimiter row.
-      if (_looksLikeTableRow(line) &&
+      if (looksLikeTableRow(line) &&
           i + 1 < lines.length &&
-          _isTableDelimiter(lines[i + 1])) {
+          isTableDelimiter(lines[i + 1])) {
         final rows = <String>[line];
         var j = i + 2;
-        while (j < lines.length && _looksLikeTableRow(lines[j])) {
+        while (j < lines.length && looksLikeTableRow(lines[j])) {
           rows.add(lines[j]);
           j++;
         }
@@ -554,7 +545,7 @@ class DocumentMarkdownView extends StatelessWidget {
   );
 
   Widget _table(_Theme t, List<String> rows, int tableOrdinal) {
-    final cells = rows.map(_splitTableRow).toList();
+    final cells = rows.map(splitTableRow).toList();
     final columns = cells.isEmpty
         ? 0
         : cells.map((r) => r.length).reduce((a, b) => a > b ? a : b);
@@ -642,43 +633,6 @@ class DocumentMarkdownView extends StatelessWidget {
     ).hasMatch(trimmed.replaceAll(' ', ''));
   }
 
-  static bool _looksLikeTableRow(String line) {
-    final t = line.trim();
-    return t.contains('|') && t.startsWith('|');
-  }
-
-  static bool _isTableDelimiter(String line) {
-    final t = line.trim();
-    if (!t.contains('-') || !t.contains('|')) return false;
-    return RegExp(r'^\|?[\s:|-]+\|?$').hasMatch(t) && t.contains('-');
-  }
-
-  static List<String> _splitTableRow(String row) {
-    var t = row.trim();
-    if (t.startsWith('|')) t = t.substring(1);
-    if (t.endsWith('|')) t = t.substring(0, t.length - 1);
-    // Split on unescaped pipes.
-    final cells = <String>[];
-    final buf = StringBuffer();
-    for (var i = 0; i < t.length; i++) {
-      final c = t[i];
-      if (c == r'\' && i + 1 < t.length) {
-        buf.write(c);
-        buf.write(t[i + 1]);
-        i++;
-        continue;
-      }
-      if (c == '|') {
-        cells.add(buf.toString().trim());
-        buf.clear();
-      } else {
-        buf.write(c);
-      }
-    }
-    cells.add(buf.toString().trim());
-    return cells;
-  }
-
   static _ListLine? _listItem(String line) {
     final m = RegExp(r'^(\s*)([-*+]|\d+\.)\s+(.*)$').firstMatch(line);
     if (m == null) return null;
@@ -716,7 +670,7 @@ class DocumentMarkdownView extends StatelessWidget {
     if (_isHorizontalRule(trimmed)) return false;
     if (trimmed.startsWith('>')) return false;
     if (_listItem(line) != null) return false;
-    if (_looksLikeTableRow(line)) return false;
+    if (looksLikeTableRow(line)) return false;
     return true;
   }
 }
