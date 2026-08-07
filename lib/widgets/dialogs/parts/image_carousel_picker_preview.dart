@@ -171,35 +171,7 @@ extension _CarouselPreview on _ImageCarouselPickerState {
       ),
       child: Row(
         children: [
-          // Bladeren knop — kiest een afbeelding van schijf in het deck; in de
-          // beheermodus is er geen deck om in te kiezen, dus die vervalt.
-          if (!widget.manageOnly) ...[
-            OutlinedButton.icon(
-              onPressed: _browse,
-              icon: const Icon(Icons.folder_open_outlined, size: 16),
-              label: Text(l10n.d('Bladeren…')),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: ImagePickerPalette.textMuted,
-                side: const BorderSide(color: ImagePickerPalette.border),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 10,
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-          ],
-          OutlinedButton.icon(
-            onPressed: _loading ? null : _addLibraryFolder,
-            icon: const Icon(Icons.create_new_folder_outlined, size: 16),
-            label: Text(l10n.d('Map toevoegen…')),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: ImagePickerPalette.textMuted,
-              side: const BorderSide(color: ImagePickerPalette.border),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-            ),
-          ),
-          const SizedBox(width: 8),
+          ..._footerLibraryButtons(l10n),
           // Duplicaten opruimen (md5)
           Tooltip(
             message: l10n.d(
@@ -311,6 +283,34 @@ extension _CarouselPreview on _ImageCarouselPickerState {
         ],
       ),
     );
+  }
+
+  /// Bladeren (één bestand) en Map toevoegen (zoekwortel) — uit [_buildFooter]
+  /// getild voor de methode-lengteratchet.
+  List<Widget> _footerLibraryButtons(AppLocalizations l10n) {
+    final style = OutlinedButton.styleFrom(
+      foregroundColor: ImagePickerPalette.textMuted,
+      side: const BorderSide(color: ImagePickerPalette.border),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+    );
+    return [
+      if (!widget.manageOnly) ...[
+        OutlinedButton.icon(
+          onPressed: _browse,
+          icon: const Icon(Icons.folder_open_outlined, size: 16),
+          label: Text(l10n.d('Bladeren…')),
+          style: style,
+        ),
+        const SizedBox(width: 8),
+      ],
+      OutlinedButton.icon(
+        onPressed: _loading ? null : _addLibraryFolder,
+        icon: const Icon(Icons.create_new_folder_outlined, size: 16),
+        label: Text(l10n.d('Map toevoegen…')),
+        style: style,
+      ),
+      const SizedBox(width: 8),
+    ];
   }
 
   String _formatPath(String path) {
