@@ -93,13 +93,13 @@ void main() {
     // net_guard.dart staat wél op de allowlist hierboven maar construeert zelf
     // geen client — het levert de `connectionFactory` die de andere gebruiken.
     'lib/utils/net_guard.dart': 0,
-    // De gedeelde pinning-helper: bouwt de HttpClient die de vijf transports
-    // (cve, git, matrix, webdav, s3) delen. De resolve + scheme-check +
-    // body-cap blijven per transport; alleen het recept staat hier.
+    // De gedeelde pinning-helper: bouwt de HttpClient die de transports
+    // delen. De resolve + scheme-check + body-cap blijven per transport; alleen
+    // het recept staat hier. Eerder stonden media_fetch_io,
+    // file_service_import, libreplan_client en openkat_rocky_client hier ook
+    // met elk hun eigen kopie — die zijn nu naar deze helper verplaatst.
     'lib/utils/pinned_http_client.dart': 1,
     // De gepinde fetch achter guardedNetworkImage.
-    'lib/utils/media_fetch_io.dart': 1,
-    'lib/services/file/file_service_import.dart': 1,
     'lib/services/webdav_service.dart': 0,
     'lib/services/s3/s3_service.dart': 0,
     'lib/services/ai_client_service.dart': 1,
@@ -115,12 +115,12 @@ void main() {
     // wss-endpoint-origin, resolveConfigured + connectPinned + een fail-closed
     // schema-assert; WebSocket.connect gebruikt deze customClient.
     'lib/xmpp/xmpp_frame_transport_io.dart': 1,
-    // LibrePlan-connector (desktop): één gepinde client op de server-origin,
-    // safeResolve(Trusted) + connectPinned + geen redirects + bytecap.
-    'lib/services/libreplan/libreplan_client.dart': 1,
-    // OpenKAT Rocky-client (desktop): één gepinde client op de server-origin,
-    // safeResolve(Trusted) + connectPinned + geen redirects + bytecap.
-    'lib/services/openkat/openkat_rocky_client.dart': 1,
+    // LibrePlan-connector (desktop): gebruikt buildPinnedClient — de enige
+    // uitgaande socket van lib/services/libreplan/.
+    'lib/services/libreplan/libreplan_client.dart': 0,
+    // OpenKAT Rocky-client (desktop): gebruikt buildPinnedClient — de enige
+    // uitgaande socket van de live OpenKAT-koppeling.
+    'lib/services/openkat/openkat_rocky_client.dart': 0,
   };
 
   test('media fetch sinks stay behind the NetGuard resolve gate', () {
@@ -149,16 +149,16 @@ void main() {
       sink: RegExp(r'HttpClient\('),
       allowedFiles: {
         'lib/utils/net_guard.dart',
-        // De gedeelde pinning-helper die de vijf transports delen. De resolve
+        // De gedeelde pinning-helper die de transports delen. De resolve
         // + scheme-check + body-cap blijven per transport; alleen het
         // HttpClient-bouw-recept staat hier.
         'lib/utils/pinned_http_client.dart',
         // guardedNetworkImage: haalt de bytes van een remote dia-afbeelding
-        // zélf op — safeResolve + connectPinned + geen redirects + bytecap —
-        // in plaats van NetworkImage de hostnaam nóg eens te laten opzoeken.
-        'lib/utils/media_fetch_io.dart',
-        // importFromUrl: safeResolve + pin (import-part van file_service).
-        'lib/services/file/file_service_import.dart',
+        // op via buildPinnedClient — safeResolve + pin + geen redirects +
+        // bytecap — in plaats van NetworkImage de hostnaam nóg eens te laten
+        // opzoeken.
+        // importFromUrl: safeResolve + pin via buildPinnedClient (import-part
+        // van file_service).
         'lib/services/webdav_service.dart', // safeResolveTrusted + pin
         // S3: safeResolveTrusted met de trustedInternal-opt-in van de bucket +
         // socket-pin + geen redirects + caps. Gepind wordt op de host die we
@@ -190,15 +190,14 @@ void main() {
         // fail-closed schema-assert die een ongepinde (niet-https) socket weigert
         // i.p.v. TLS te droppen. De enige uitgaande socket van lib/xmpp/.
         'lib/xmpp/xmpp_frame_transport_io.dart',
-        // LibrePlan-connector (desktop): safeResolve(Trusted) met de
-        // trustedInternal-opt-in van de server + socket-pin + geen redirects
-        // + bytecap. GET-only, Basic Auth. De enige uitgaande socket van
-        // lib/services/libreplan/.
+        // LibrePlan-connector (desktop): gebruikt buildPinnedClient —
+        // safeResolve(Trusted) + pin + geen redirects + bytecap. GET-only,
+        // Basic Auth. De enige uitgaande socket van lib/services/libreplan/.
         'lib/services/libreplan/libreplan_client.dart',
-        // OpenKAT Rocky-client (desktop): safeResolve(Trusted) met de
-        // trustedInternal-opt-in van de installatie + socket-pin + geen
-        // redirects + bytecap. GET-only, Knox Token-auth. De enige uitgaande
-        // socket van de live OpenKAT-koppeling.
+        // OpenKAT Rocky-client (desktop): gebruikt buildPinnedClient —
+        // safeResolve(Trusted) + pin + geen redirects + bytecap. GET-only,
+        // Knox Token-auth. De enige uitgaande socket van de live
+        // OpenKAT-koppeling.
         'lib/services/openkat/openkat_rocky_client.dart',
       },
       guidance:
