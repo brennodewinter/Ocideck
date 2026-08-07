@@ -18,6 +18,7 @@ import '../../services/secret_store.dart';
 import '../../state/consent_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../l10n/app_localizations.dart';
+import '../../platform/platform_features.dart';
 import '../../utils/log.dart';
 import '../../theme/app_theme.dart';
 import 'ai_image_outbound_dialog.dart';

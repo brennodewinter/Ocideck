@@ -164,7 +164,13 @@ const Map<String, int> fileSizeBaseline = {
   // mounted-guard. Onherleidbare plumbing: de wacht + guard horen in elk openpad
   // zelf, en beide paden delen al `_reportOpenFailure`. Het bestand stond exact op
   // zijn plafond.
-  'lib/widgets/shell/shell_actions.dart': 1005,
+  // +16: document-open via Bladeren (browseRequested + openFileByPath) en
+  // image-search-pad-helper (deckImageSearchPaths) naast bestaande open-routes.
+  'lib/widgets/shell/shell_actions.dart': 1021,
+  // Documentmodus: Visueel-editor, Overzicht-rail, slim plakken, undo/redo,
+  // carrousel-invoegen, Instellingen in ⋮, export als .ocideck. Verdere
+  // uitsplitsing naar parts volgt; tot die tijd bewust boven 1000.
+  'lib/widgets/document_editor_screen.dart': 1339,
   // Procesverbetering category tab + engine types in the add-slide picker.
   // +18 (#1162): de menu-wireframe (2×2 raster van keuzeblokken) als eigen helper
   // `_paintMenuWireframe` (uit `paint` getild voor de methode-ratchet) plus de
@@ -284,7 +290,7 @@ const Map<String, int> classSizeBaseline = {
   // +14: ocideck_table_num_cols directive schrijven + _parseNumCols-lezen.
   'lib/services/markdown_service.dart#MarkdownService': 2467,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
-      2145,
+      2209, // +64: Map toevoegen + onbereikbare-wortel-feedback in de carrousel
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
   // +7 (#1098): menu- en dialoogaanroepen voor het rechtenoverzicht; de scan en
   // beoordeling leven buiten de State in providers en services.

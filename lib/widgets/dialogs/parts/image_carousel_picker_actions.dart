@@ -616,7 +616,8 @@ extension _CarouselActions on _ImageCarouselPickerState {
   /// beelden er staan (bijv. wanneer `/Volumes/…` offline is).
   Future<void> _addLibraryFolder() async {
     final l10n = context.l10n;
-    // Zelfde poort als elders: op web bestaat getDirectoryPath niet.
+    // Zelfde poort als elders: op web bestaat getDirectoryPath niet (#150).
+    if (!supportsLocalProjectFolders) return;
     final picked = await FilePicker.getDirectoryPath(
       dialogTitle: l10n.d('Kies een map met afbeeldingen'),
     );
