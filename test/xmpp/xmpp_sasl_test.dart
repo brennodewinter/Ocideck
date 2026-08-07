@@ -53,6 +53,24 @@ void main() {
       expect(() => c.clientFinal('r=abcXYZ'), throwsFormatException);
     });
 
+    test('an iteration count of zero is refused', () {
+      final c = ScramClient(username: 'u', password: 'p', clientNonce: 'abc');
+      c.clientFirst();
+      expect(
+        () => c.clientFinal('r=abcxyz,s=QSXCR+Q6sek8bf92,i=0'),
+        throwsFormatException,
+      );
+    });
+
+    test('an absurdly high iteration count is refused (DoS guard)', () {
+      final c = ScramClient(username: 'u', password: 'p', clientNonce: 'abc');
+      c.clientFirst();
+      expect(
+        () => c.clientFinal('r=abcxyz,s=QSXCR+Q6sek8bf92,i=10000000'),
+        throwsFormatException,
+      );
+    });
+
     test('the username is SASL-name-escaped', () {
       final c = ScramClient(
         username: 'a,b=c',
