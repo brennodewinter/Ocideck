@@ -9,6 +9,15 @@
 /// importeren — een util lost dat op zonder die grens te schenden. Wat de
 /// weergave telt/toont en wat de bridge deconstrueert moet gelijk blijven, dus
 /// één definitie voorkomt dat de kopieën uit elkaar lopen.
+///
+/// **Bewust apart van `services/markdown_table_codec.dart`.** Die codec draagt
+/// de rijkere, app-interne conventie (`<br>` → een echte regelovergang, `\\` →
+/// backslash) voor de rapportagedia's, de import en het klembord. De
+/// documentmodus bewerkt echter *platte gebruikers-Markdown* met een
+/// byte-getrouwe round-trip als rode lijn: een `<br>` die een auteur letterlijk
+/// typt (geldige inline-HTML in GFM) mag níét stil een regelovergang worden.
+/// Daarom houdt de documentmodus de eenvoudige, alleen-`\|`-ontsnapping hier —
+/// een ander contract, geen toevallige kopie.
 library;
 
 /// De fence van één ` ```chart `-blok; de kale spec-tekst staat in groep 1.
