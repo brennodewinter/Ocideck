@@ -72,6 +72,8 @@ const _stringsPap = {
   'exportAsPdf': 'Eksportá komo PDF',
   'exportAsPptx': 'Eksportá komo PPTX',
   'exportAsHtml': 'Eksportá komo HTML (Marp, offline)',
+  'exportAsLatex': 'Eksportá komo LaTeX (Beamer)',
+
   'renderingSlides': 'Render slides…',
   'buildingHtml': 'Trahando HTML…',
   'buildingExport': 'trahando…',
@@ -730,6 +732,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML ta habri den kua browser sin internet i ta renderia blokinan di kódigo, matemátika i diagramnan mermaid. LaTeX (Beamer) ta kompilá ku pdflatex of xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Un dokumento di LaTeX article. Matematika ta pasa direkto; imágen ta referensiá pa kamino relativo. Kompilá ku pdflatex of xelatex.',
   'Afbeelding geplakt': 'Imagen pegá',
   'Bibliotheekmap niet bereikbaar': 'Karpeta di biblioteca no alcanzabel',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

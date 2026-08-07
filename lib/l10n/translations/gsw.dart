@@ -72,6 +72,8 @@ const _stringsGsw = {
   'exportAsPdf': 'Als PDF exportiere',
   'exportAsPptx': 'Als PPTX exportiere',
   'exportAsHtml': 'Als HTML exportiere (Marp, offline)',
+  'exportAsLatex': 'Als LaTeX (Beamer) exportiere',
+
   'renderingSlides': 'Slides rendere…',
   'buildingHtml': 'HTML zämestelle…',
   'buildingExport': 'zämestelle…',
@@ -1774,6 +1776,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML öffnet sich in jedem Browser ohni Internet und renderet Codeblöck, Mathematik und Mermaid-Diagramm. LaTeX (Beamer) kompilierisch mit pdflatex oder xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Es LaTeX-Article-Dokumänt. Mathematik gaht diräkt dure; Bilder wärded mit relativem Pfad referenziert. Mit pdflatex oder xelatex kompiliere.',
   'Afbeelding geplakt': 'Bild iifüegt',
   'Bibliotheekmap niet bereikbaar': 'Bibliotheksordner nöd erreichbar',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

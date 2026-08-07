@@ -280,7 +280,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
     // Kies een pad. De extensie én het profiel staan in de naam, zodat een
     // verwisseling (volledig ↔ geredigeerd) zichtbaar is.
-    final ext = format == DocumentExportFormat.md ? 'md' : 'html';
+    final ext = switch (format) {
+      DocumentExportFormat.md => 'md',
+      DocumentExportFormat.html => 'html',
+      DocumentExportFormat.latex => 'tex',
+      DocumentExportFormat.ocideck => 'ocideck',
+    };
     final tag = profile == PrivacyExportProfile.redacted
         ? l10n.d('geredigeerd')
         : l10n.d('volledig');

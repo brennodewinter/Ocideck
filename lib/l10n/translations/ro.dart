@@ -73,6 +73,8 @@ const _stringsRo = {
   'exportAsPdf': 'Exportă ca PDF',
   'exportAsPptx': 'Exportă ca PPTX',
   'exportAsHtml': 'Exportă ca HTML (Marp, offline)',
+  'exportAsLatex': 'Exportă ca LaTeX (Beamer)',
+
   'renderingSlides': 'Se randează diapozitivele…',
   'buildingHtml': 'Se construiește HTML…',
   'buildingExport': 'se construiește…',
@@ -1788,6 +1790,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML se deschide în orice browser fără internet și randează blocuri de cod, matematică și diagrame mermaid. LaTeX (Beamer) se compilează cu pdflatex sau xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Un document LaTeX article. Matematica trece direct; imaginile sunt referențiate cu cale relativă. Compilați cu pdflatex sau xelatex.',
   'Afbeelding geplakt': 'Imagine lipită',
   'Bibliotheekmap niet bereikbaar': 'Folderul bibliotecii nu poate fi accesat',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

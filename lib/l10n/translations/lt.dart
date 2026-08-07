@@ -72,6 +72,8 @@ const _stringsLt = {
   'exportAsPdf': 'Eksportuoti kaip PDF',
   'exportAsPptx': 'Eksportuoti kaip PPTX',
   'exportAsHtml': 'Eksportuoti kaip HTML (Marp, neprisijungus)',
+  'exportAsLatex': 'Eksportuoti kaip LaTeX (Beamer)',
+
   'renderingSlides': 'Atvaizduojamos skaidrės…',
   'buildingHtml': 'Kuriamas HTML…',
   'buildingExport': 'kuriama…',
@@ -1778,6 +1780,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML atsidaro bet kurioje naršyklėje be interneto ir renderuoja kodo blokus, matematiką ir mermaid diagramas. LaTeX (Beamer) kompiliuojamas su pdflatex arba xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'LaTeX article dokumentas. Matematika eina tiesiogiai; vaizdai rodomi santykiniu keliu. Kompiliuokite su pdflatex arba xelatex.',
   'Afbeelding geplakt': 'Vaizdas įklijuotas',
   'Bibliotheekmap niet bereikbaar': 'Bibliotekos aplankas nepasiekiamas',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

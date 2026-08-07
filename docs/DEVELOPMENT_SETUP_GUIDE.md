@@ -23,7 +23,7 @@ Setting up a proper development environment is crucial for contributing to OciDe
 
 ### Software Dependencies
 
-- **Flutter 3.44.8** (stable) — the pinned version. Use the `dart` that
+- **Flutter 3.44.9** (stable) — the pinned version. Use the `dart` that
   ships inside it (3.12.2) rather than a separately installed one.
   [BUILD.md](BUILD.md) is the authority here and explains why the exact version
   matters for `make format-check` but not for building.
@@ -41,7 +41,7 @@ Setting up a proper development environment is crucial for contributing to OciDe
 2. Extract to a permanent location:
    ```bash
    cd ~
-   tar xf flutter_macos_3.44.8-stable.tar.xz  # macOS example
+   tar xf flutter_macos_3.44.9-stable.tar.xz  # macOS example
    ```
 
 3. Add Flutter to PATH in your shell profile (.zshrc, .bash_profile):

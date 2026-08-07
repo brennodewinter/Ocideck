@@ -111,6 +111,15 @@ const int maxFileLines = 1000;
 /// deliberate reason; the goal is fewer and smaller entries over time.
 /// `lib/l10n/translations/*` is exempt — those files grow with every UI string.
 const Map<String, int> fileSizeBaseline = {
+  // +19: LaTeX-Beamer-export — de enum-uitbreiding (label/extension), de
+  // latex-case in de switch, en _buildLatex (8 regels thin wrapper naar
+  // buildBeamerBody + beamerPreamble). Het gedrag zit in lib/services/latex/;
+  // dit is de chokepoint die elk formaat langskomt.
+  'lib/services/export_service.dart': 1023,
+  // +5: LaTeX-export — de `ocideck`-case in de extensie-switch (de early-return
+  // hierboven voorkomt dat hij ooit bereikt wordt, maar de analyzer eist
+  // exhaustiveness). Eén regel toegevoegd; onherleidbare plumbing.
+  'lib/widgets/document_editor_screen.dart': 1344,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
@@ -167,10 +176,6 @@ const Map<String, int> fileSizeBaseline = {
   // +16: document-open via Bladeren (browseRequested + openFileByPath) en
   // image-search-pad-helper (deckImageSearchPaths) naast bestaande open-routes.
   'lib/widgets/shell/shell_actions.dart': 1021,
-  // Documentmodus: Visueel-editor, Overzicht-rail, slim plakken, undo/redo,
-  // carrousel-invoegen, Instellingen in ⋮, export als .ocideck. Verdere
-  // uitsplitsing naar parts volgt; tot die tijd bewust boven 1000.
-  'lib/widgets/document_editor_screen.dart': 1339,
   // Procesverbetering category tab + engine types in the add-slide picker.
   // +18 (#1162): de menu-wireframe (2×2 raster van keuzeblokken) als eigen helper
   // `_paintMenuWireframe` (uit `paint` getild voor de methode-ratchet) plus de

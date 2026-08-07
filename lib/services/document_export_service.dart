@@ -7,14 +7,17 @@ import 'document_chart_hydration.dart';
 import 'document_deck_bridge.dart';
 import 'export_bundle.dart';
 import 'export_metadata.dart';
+import 'latex/latex_preamble.dart';
+import 'latex/markdown_to_latex.dart';
 import 'markdown_service.dart';
 import 'marp_html_service.dart';
 import 'privacy/privacy_own_identity.dart';
 
-/// De twee uitvoervormen van een plat-Markdown-**document** (DOCUMENT_MODE.md
-/// §11.2): het geprojecteerde `.md` zelf, of één doorlopend HTML-document. Beide
-/// dragen de geredigeerde body — nooit de rauwe bron.
-enum DocumentExportFormat { md, html, ocideck }
+/// De uitvoervormen van een plat-Markdown-**document** (DOCUMENT_MODE.md
+/// §11.2): het geprojecteerde `.md` zelf, één doorlopend HTML-document, een
+/// LaTeX `article`, of een OciDeck-pakket. Alle vier dragen de geredigeerde
+/// body — nooit de rauwe bron.
+enum DocumentExportFormat { md, html, latex, ocideck }
 
 /// Bouwt de exportbundel voor een plat-Markdown-**document**, langs exact
 /// dezelfde privacygrens als het deck-exportpad.
@@ -81,6 +84,10 @@ String projectedDocumentBody(ExportBundle bundle) =>
 /// - [DocumentExportFormat.md] schrijft de geprojecteerde body atomisch weg.
 /// - [DocumentExportFormat.html] rendert die body als één doorlopend HTML-
 ///   document (`continuous: true`) en schrijft het resultaat atomisch weg.
+/// - [DocumentExportFormat.latex] zet de geprojecteerde body om naar een
+///   LaTeX `article`-document (preamble + body + postamble) en schrijft het
+///   resultaat atomisch weg. Afbeeldingen worden op relatief pad
+///   gereferentieerd — LaTeX kent geen data-URI-inlining.
 ///
 /// Geeft het geschreven pad terug.
 Future<String?> writeDocumentExport(
@@ -105,6 +112,12 @@ Future<String?> writeDocumentExport(
         embedImage: embedImage,
       );
       await writeStringAtomic(File(outputPath), out);
+      return outputPath;
+    case DocumentExportFormat.latex:
+      final meta = metadata ?? const ExportDocumentMetadata();
+      final body = markdownToLatex(projectedDocumentBody(bundle));
+      final tex = '${articlePreamble(meta)}\n$body\n$articlePostamble\n';
+      await writeStringAtomic(File(outputPath), tex);
       return outputPath;
     case DocumentExportFormat.ocideck:
       // Pakketexport loopt via FileService.exportPackage (versleuteling,

@@ -101,4 +101,55 @@ void main() {
       expect(releaseBody, contains('minisign -Vm SHA256SUMS'));
     },
   );
+
+  test(
+    'release_auto.sh tekent via een stdin-pipe, nooit via een expect/pty-race',
+    () {
+      // Regressie op de pty-race: release_auto.sh voerde het minisign-
+      // sleutelwachtwoord eerst via een expect-handoff aan `make sign-release`.
+      // expect `send`t het wachtwoord vóórdat minisigns readpassphrase() de tty
+      // in leesmodus zet, dus de tekens gingen verloren — de pre-flight sterf
+      // op `Password:` zonder handtekening (dat is precies waar deze release
+      // op vastliep). De fix voedt het wachtwoord via een stdin-pipe: minisign
+      // leest het van stdin zodra dat geen tty is, zonder race, en `%s` geeft
+      // het letterlijk door. Deze poort faalt zodra iemand het tekenen weer
+      // door expect laat lopen of de stdin-pipe eruit sloopt.
+      final auto = File('scripts/release_auto.sh');
+      expect(auto.existsSync(), isTrue);
+      // Regeleindes met een backslash-continuatie samenvoegen, zodat de pipe die
+      // over twee regels staat (`printf … \` <newline> `| make …`) als één regel
+      // te toetsen is.
+      final inhoud = auto.readAsStringSync().replaceAll(
+        RegExp(r'\\\n\s*'),
+        ' ',
+      );
+
+      // Beide tekenplekken (pre-flight én fase 3) voeden het wachtwoord via een
+      // stdin-pipe rechtstreeks aan `make sign-release`.
+      final pipeNaarSign = RegExp(
+        r'\$MINISIGN_PW"\s*\|\s*make sign-release',
+      ).allMatches(inhoud).length;
+      expect(
+        pipeNaarSign,
+        2,
+        reason:
+            'Beide tekenplekken horen het wachtwoord via een stdin-pipe aan '
+            '`make sign-release` te geven (pre-flight + fase 3).',
+      );
+
+      // De expect/pty-mechaniek mag nergens meer het wachtwoord versturen.
+      expect(
+        inhoud.contains('spawn make sign-release'),
+        isFalse,
+        reason:
+            'De expect-handoff naar `make sign-release` is de pty-race die de '
+            'pre-flight liet vastlopen; hij hoort weg te blijven.',
+      );
+      expect(
+        inhoud.contains(r'send -- "$env(MINISIGN_PW)'),
+        isFalse,
+        reason: 'Het wachtwoord mag niet via expect `send` gaan (pty-race).',
+      );
+    },
+  );
 }

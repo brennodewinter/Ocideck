@@ -72,6 +72,8 @@ const _stringsEl = {
   'exportAsPdf': 'Εξαγωγή ως PDF',
   'exportAsPptx': 'Εξαγωγή ως PPTX',
   'exportAsHtml': 'Εξαγωγή ως HTML (Marp, εκτός σύνδεσης)',
+  'exportAsLatex': 'Εξαγωγή ως LaTeX (Beamer)',
+
   'renderingSlides': 'Απόδοση διαφανειών…',
   'buildingHtml': 'Δημιουργία HTML…',
   'buildingExport': 'δημιουργία…',
@@ -1798,6 +1800,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'Το HTML ανοίγει σε οποιονδήποτε browser χωρίς ίντερνετ και αποδίδει μπλοκ κώδικα, μαθηματικά και διαγράμματα mermaid. Το LaTeX (Beamer) μεταγλωττίζεται με pdflatex ή xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Ένα έγγραφο LaTeX article. Τα μαθηματικά περνούν απευθείας; οι εικόνες αναφέρονται με σχετική διαδρομή. Μεταγλωττίστε με pdflatex ή xelatex.',
   'Afbeelding geplakt': 'Η εικόνα επικολλήθηκε',
   'Bibliotheekmap niet bereikbaar':
       'Ο φάκελος βιβλιοθήκης δεν είναι προσβάσιμος',

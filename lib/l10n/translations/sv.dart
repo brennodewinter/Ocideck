@@ -72,6 +72,8 @@ const _stringsSv = {
   'exportAsPdf': 'Exportera som PDF',
   'exportAsPptx': 'Exportera som PPTX',
   'exportAsHtml': 'Exportera som HTML (Marp, offline)',
+  'exportAsLatex': 'Exportera som LaTeX (Beamer)',
+
   'renderingSlides': 'Renderar bilder…',
   'buildingHtml': 'Bygger HTML…',
   'buildingExport': 'bygger…',
@@ -1770,6 +1772,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML öppnas i vilken browser som helst utan internet och renderar kodblock, matematik och mermaid-diagram. LaTeX (Beamer) kompileras med pdflatex eller xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Ett LaTeX article-dokument. Matematik går direkt igenom; bilder refereras med relativ sökväg. Kompilera med pdflatex eller xelatex.',
   'Afbeelding geplakt': 'Bild klistrad',
   'Bibliotheekmap niet bereikbaar': 'Biblioteksmapp kan inte nås',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':

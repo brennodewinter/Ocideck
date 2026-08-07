@@ -72,6 +72,8 @@ const _stringsIt = {
   'exportAsPdf': 'Esporta come PDF',
   'exportAsPptx': 'Esporta come PPTX',
   'exportAsHtml': 'Esporta come HTML (Marp, offline)',
+  'exportAsLatex': 'Esporta come LaTeX (Beamer)',
+
   'renderingSlides': 'Rendering delle slide…',
   'buildingHtml': 'Creazione HTML…',
   'buildingExport': 'creazione…',
@@ -726,6 +728,10 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
+      'HTML si apre in qualsiasi browser senza internet e renderizza blocchi di codice, matematica e diagrammi mermaid. LaTeX (Beamer) si compila con pdflatex o xelatex.',
+  'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
+      'Un documento LaTeX article. La matematica passa direttamente; le immagini sono referenziate con percorso relativo. Compila con pdflatex o xelatex.',
   'Afbeelding geplakt': 'Immagine incollata',
   'Bibliotheekmap niet bereikbaar': 'Cartella libreria non raggiungibile',
   'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
