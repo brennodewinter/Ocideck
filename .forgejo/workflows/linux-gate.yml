@@ -30,40 +30,69 @@
 # Op `continue-on-error`: valt de cache-API weg, dan compileert/haalt de stap
 # gewoon opnieuw, en de poort blijft de poort.
 #
-# **Waarom óók op `push` naar `main` (#1123).** `static-gate.yml` vangt de
-# statische poorten per PR, maar bewust niet de testsuite — precies de reden dat
-# een registratiepoort die *een test* is (bijv. `source_map_coverage_test`, of de
-# docs-registratie, SBOM- en l10n-invarianten) tóch stil op `main` kon landen.
-# Die klasse drift ziet geen enkele poort vóór de merge, en tussen releases
-# draait er niets de volle suite. Deze workflow vult dat gat: bij elke push naar
-# `main` draait `make check-no-coverage` — dezelfde volle suite als op afroep —
-# zodat een rood geworden `main` binnen ~een halfuur een gefaalde run (en mail)
-# oplevert in plaats van pas boven te komen als iemand er een fix op wil landen.
-# Het is een detectie-, geen preventievangnet: de merge wordt niet geblokkeerd
-# (dat zou de volle suite vóór élke PR eisen, wat op deze runner te traag is —
-# zie `static-gate.yml`), maar `main` kan niet meer stil rood blijven. De
-# dekkingsvloer blijft ook hier weg (`check-no-coverage`); die hoort op de
-# machine van de committer, zie docs/CHECKS.md.
+# **Per-PR (preventie) én op `push` naar `main` (detectie) — #1123 + de
+# serialisatie hieronder.** `static-gate.yml` vangt de statische poorten per PR,
+# maar bewust niet de testsuite — precies de reden dat een registratiepoort die
+# *een test* is (bijv. `source_map_coverage_test`, docs-registratie, SBOM- en
+# l10n-invarianten) én een reeks Linux-specifieke of load-gevoelige tests
+# (pad-separators, subproces-timeouts, I/O-races) tóch stil op `main` konden
+# landen: groen op de snelle maintainer-Mac, rood pas post-merge op deze runner.
+# Daarom draait deze poort nu óók **per PR** die `lib/**` of `test/**` (en de
+# directe afhankelijkheden daarvan) raakt — dezelfde volle `make
+# check-no-coverage`, nu vóór de merge. De push-naar-`main`-run blijft als
+# detectievangnet voor wat tussen PR's tóch op `main` verandert.
+#
+# **Waarom dit niet langer "te traag om te blokkeren" is.** De suite draaide ooit
+# alleen post-merge uit vrees voor overbelasting: tot vier zware jobs tegelijk op
+# één dind gaven I/O-contentie — precies wat de load-gevoelige tests deed
+# flakeren. De oplossing is serialiseren, niet weglaten: deze job draait op een
+# aparte runner **`linux-serial` met capacity 1** (runner-config op pawprint, zie
+# docs/CHECKS.md), terwijl `static-gate`/`scans` de capacity-4-baan houden. Zo
+# draait er nooit meer dan één zware gate tegelijk — elke PR komt aan de beurt, de
+# wachtrij-latency is de bewuste ruil, en de contentie die de flakiness
+# veroorzaakte is weg. De dekkingsvloer blijft ook hier weg
+# (`check-no-coverage`); die hoort op de machine van de committer, zie
+# docs/CHECKS.md.
 name: linux-gate
 
 on:
   workflow_dispatch:
   push:
     branches: [main]
+  # Preventie vóór de merge: alleen bij wijzigingen die de suite kunnen breken —
+  # code, tests, hun tooling, de deps/toolchain, de Linux-build en deze workflow
+  # zelf. Docs-only of pure CI-config-PR's slaan hem over (kunnen de suite niet
+  # breken) en betalen de wachtrij niet.
+  pull_request:
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'integration_test/**'
+      - 'tool/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.tool-versions'
+      - 'Makefile'
+      - 'analysis_options.yaml'
+      - 'linux/**'
+      - '.forgejo/workflows/linux-gate.yml'
 
-# Landen er snel achter elkaar merges, dan zet elke nieuwe de lopende
-# `main`-run opzij: de laatste run toetst de nieuwste tip, en dat is wat "staat
-# `main` groen?" vraagt. De handmatige (`workflow_dispatch`) run zit in een eigen
-# groep — via `github.event_name` — zodat een druk-op-de-knop en een merge elkaar
-# nooit afbreken. Een afgebroken run meldt zich als `failure` (kan mailen); dat
-# het er bijna geen zijn, is de bedoeling.
+# De serialisatie zit in de runner (`linux-serial`, capacity 1), niet hier: deze
+# `concurrency` zorgt er alleen voor dat een PR (of `main`) zijn eigen lopende run
+# opzij zet bij een nieuwere commit. Verschillende PR's zitten via `github.ref` in
+# verschillende groepen en breken elkaar dus níet af — ze wachten netjes op het
+# ene runner-slot. `workflow_dispatch` zit via `github.event_name` in een eigen
+# groep, zodat een druk-op-de-knop en een merge elkaar nooit afbreken.
 concurrency:
   group: linux-gate-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   gate-linux:
-    runs-on: docker
+    # `linux-serial`: een tweede runner op pawprint met capacity 1, zodat er nooit
+    # meer dan één zware gate tegelijk draait (zie de kop en docs/CHECKS.md).
+    # `static-gate`/`scans` blijven op `docker` (capacity 4).
+    runs-on: linux-serial
     # Voorgebakken CI-image (zie de kop van `static-gate.yml` en docs/CHECKS.md):
     # OS + node + build-toolchain + de gepinde, sha256-geverifieerde Flutter
     # (+ precache) zitten erin, dus de per-run-installatie vervalt. Het tag ís de
