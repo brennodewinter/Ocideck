@@ -1800,6 +1800,22 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Afbeelding geplakt': 'Imagem colada',
+  'Bibliotheekmap niet bereikbaar': 'Pasta da biblioteca inacessível',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'A pasta da biblioteca está inacessível. Escolha uma pasta abaixo ou ajuste Armazenamento em ⋮ → Definições.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'A pasta das Definições está offline ou foi movida. Escolha aqui uma pasta com imagens.',
+  'Kies een map met afbeeldingen': 'Escolher uma pasta com imagens',
+  'Map toevoegen…': 'Adicionar pasta…',
+  'Overzicht inklappen': 'Recolher visão geral',
+  'Overzicht uitklappen': 'Expandir visão geral',
+  'Pakket (.ocideck)': 'Pacote (.ocideck)',
+  'Tabel geplakt': 'Tabela colada',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Adicione uma pasta ou use "Procurar" para um único ficheiro.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Pacote autónomo com markdown e imagens — opcionalmente encriptado (AES-256), abre no OciDeck.',
   'dia\'s uit dit document.': 'slides deste documento.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'O logótipo deste perfil de estilo não foi encontrado e não é mostrado (caminho: {pad}). Escolha um logótipo nas definições de apresentação.',

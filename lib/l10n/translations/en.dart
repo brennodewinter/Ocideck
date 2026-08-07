@@ -911,6 +911,22 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Afbeelding geplakt': 'Image pasted',
+  'Bibliotheekmap niet bereikbaar': 'Library folder unreachable',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'The library folder is unreachable. Choose a folder below or adjust Storage under ⋮ → Settings.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'The folder from Settings is offline or moved. Choose a folder with images here.',
+  'Kies een map met afbeeldingen': 'Choose a folder with images',
+  'Map toevoegen…': 'Add folder…',
+  'Overzicht inklappen': 'Collapse outline',
+  'Overzicht uitklappen': 'Expand outline',
+  'Pakket (.ocideck)': 'Package (.ocideck)',
+  'Tabel geplakt': 'Table pasted',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Add a folder or use "Browse" for a single file.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Standalone package with markdown and images — optionally encrypted (AES-256), opens in OciDeck.',
   'dia\'s uit dit document.': 'slides from this document.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'The logo of this style profile was not found and is not shown (path: {pad}). Choose a logo in the presentation settings.',

@@ -1778,6 +1778,22 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Afbeelding geplakt': 'Obrázok vložený',
+  'Bibliotheekmap niet bereikbaar': 'Priečinok knižnice nedostupný',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Priečinok knižnice nie je dostupný. Vyberte priečinok nižšie alebo upravte Úložisko v ⋮ → Nastavenia.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Priečinok z Nastavení je offline alebo presunutý. Vyberte tu priečinok s obrázkami.',
+  'Kies een map met afbeeldingen': 'Vyberte priečinok s obrázkami',
+  'Map toevoegen…': 'Pridať priečinok…',
+  'Overzicht inklappen': 'Zbaliť prehľad',
+  'Overzicht uitklappen': 'Rozbaliť prehľad',
+  'Pakket (.ocideck)': 'Balík (.ocideck)',
+  'Tabel geplakt': 'Tabuľka vložená',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Pridajte priečinok alebo použite "Prehľadávať" pre jeden súbor.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Samostatný balík s markdownom a obrázkami — voliteľne šifrovaný (AES-256), otvorí sa v OciDeck.',
   'dia\'s uit dit document.': 'snímok z tohto dokumentu.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo tohto profilu štýlu sa nenašlo a nezobrazuje sa (cesta: {pad}). Vyberte logo v nastaveniach prezentácie.',

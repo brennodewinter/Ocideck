@@ -730,6 +730,22 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Afbeelding geplakt': 'Image collée',
+  'Bibliotheekmap niet bereikbaar': 'Dossier bibliothèque inaccessible',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Le dossier bibliothèque est inaccessible. Choisissez un dossier ci-dessous ou modifiez Stockage sous ⋮ → Paramètres.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Le dossier des Paramètres est hors ligne ou déplacé. Choisissez ici un dossier contenant des images.',
+  'Kies een map met afbeeldingen': 'Choisir un dossier contenant des images',
+  'Map toevoegen…': 'Ajouter un dossier…',
+  'Overzicht inklappen': 'Réduire l\'aperçu',
+  'Overzicht uitklappen': 'Développer l\'aperçu',
+  'Pakket (.ocideck)': 'Paquet (.ocideck)',
+  'Tabel geplakt': 'Tableau collé',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Ajoutez un dossier ou utilisez « Parcourir » pour un seul fichier.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Paquet autonome avec markdown et images — chiffrement optionnel (AES-256), s\'ouvre dans OciDeck.',
   'dia\'s uit dit document.': 'diapositives de ce document.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Le logo de ce profil de style est introuvable et n\'est pas affiché (chemin : {pad}). Choisissez un logo dans les paramètres de présentation.',

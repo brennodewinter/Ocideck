@@ -1798,6 +1798,23 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Afbeelding geplakt': 'Η εικόνα επικολλήθηκε',
+  'Bibliotheekmap niet bereikbaar':
+      'Ο φάκελος βιβλιοθήκης δεν είναι προσβάσιμος',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Ο φάκελος βιβλιοθήκης δεν είναι προσβάσιμος. Επιλέξτε φάκελο παρακάτω ή αλλάξτε την Αποθήκευση στο ⋮ → Ρυθμίσεις.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Ο φάκελος από τις Ρυθμίσεις είναι εκτός σύνδεσης ή μετακινήθηκε. Επιλέξτε εδώ φάκελο με εικόνες.',
+  'Kies een map met afbeeldingen': 'Επιλέξτε φάκελο με εικόνες',
+  'Map toevoegen…': 'Προσθήκη φακέλου…',
+  'Overzicht inklappen': 'Σύμπτυξη επισκόπησης',
+  'Overzicht uitklappen': 'Ανάπτυξη επισκόπησης',
+  'Pakket (.ocideck)': 'Πακέτο (.ocideck)',
+  'Tabel geplakt': 'Ο πίνακας επικολλήθηκε',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Προσθέστε φάκελο ή χρησιμοποιήστε "Περιήγηση" για ένα αρχείο.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Αυτόνομο πακέτο με markdown και εικόνες — προαιρετικά κρυπτογραφημένο (AES-256), ανοίγει στο OciDeck.',
   'dia\'s uit dit document.': 'διαφάνειες από αυτό το έγγραφο.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Το λογότυπο αυτού του προφίλ στυλ δεν βρέθηκε και δεν εμφανίζεται (διαδρομή: {pad}). Επιλέξτε ένα λογότυπο στις ρυθμίσεις παρουσίασης.',

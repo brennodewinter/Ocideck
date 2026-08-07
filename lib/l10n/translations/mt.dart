@@ -1793,6 +1793,23 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Afbeelding geplakt': 'Stampa waħħla',
+  'Bibliotheekmap niet bereikbaar':
+      'Il-kartella tal-librerija mhix aċċessibbli',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Il-kartella tal-librerija mhix aċċessibbli. Agħżel kartella hawn taħt jew aġġusta l-Ħażna taħt ⋮ → Settings.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Il-kartella minn Settings hija offline jew imċaqalqa. Agħżel hawn kartella bl-istampi.',
+  'Kies een map met afbeeldingen': 'Agħżel kartella bl-istampi',
+  'Map toevoegen…': 'Żid kartella…',
+  'Overzicht inklappen': 'Aqfel il-ħarsa ġenerali',
+  'Overzicht uitklappen': 'Iftaħ il-ħarsa ġenerali',
+  'Pakket (.ocideck)': 'Pakkett (.ocideck)',
+  'Tabel geplakt': 'Tabella waħħla',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Żid kartella jew uża "Fittex" għal fajl wieħed.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Pakkett indipendenti b\'markdown u stampi — opzonalment kriptat (AES-256), jinfetaħ f\'OciDeck.',
   'dia\'s uit dit document.': 'slajds minn dan id-dokument.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Il-logo ta\' dan il-profil tal-istil ma nstabx u mhux jintwera (triq: {pad}). Agħżel logo fl-issettjar tal-preżentazzjoni.',

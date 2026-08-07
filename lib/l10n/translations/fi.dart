@@ -1771,6 +1771,22 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afbeelding geplakt': 'Kuva liitetty',
+  'Bibliotheekmap niet bereikbaar': 'Kirjastokansio ei saavutettavissa',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Kirjastokansio ei ole saavutettavissa. Valitse kansio alta tai muokkaa Tallennusta kohdassa ⋮ → Asetukset.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Asetuksista valittu kansio on offline-tilassa tai siirretty. Valitse täältä kansio, jossa on kuvia.',
+  'Kies een map met afbeeldingen': 'Valitse kansio, jossa on kuvia',
+  'Map toevoegen…': 'Lisää kansio…',
+  'Overzicht inklappen': 'Tiivistä yleiskatsaus',
+  'Overzicht uitklappen': 'Laajenna yleiskatsaus',
+  'Pakket (.ocideck)': 'Paketti (.ocideck)',
+  'Tabel geplakt': 'Taulukko liitetty',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Lisää kansio tai käytä "Selaa" yhtä tiedostoa varten.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Erillinen paketti markdownilla ja kuvilla — valinnaisesti salattu (AES-256), avautuu OciDeckissä.',
   'dia\'s uit dit document.': 'diaa tästä asiakirjasta.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Tämän tyyliprofiilin logoa ei löytynyt eikä sitä näytetä (polku: {pad}). Valitse logo esityksen asetuksissa.',

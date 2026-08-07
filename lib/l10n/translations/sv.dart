@@ -1770,6 +1770,22 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afbeelding geplakt': 'Bild klistrad',
+  'Bibliotheekmap niet bereikbaar': 'Biblioteksmapp kan inte nås',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Biblioteksmappen kan inte nås. Välj en mapp nedan eller justera Lagring under ⋮ → Inställningar.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Mappen från Inställningar är offline eller flyttad. Välj en mapp med bilder här.',
+  'Kies een map met afbeeldingen': 'Välj en mapp med bilder',
+  'Map toevoegen…': 'Lägg till mapp…',
+  'Overzicht inklappen': 'Fäll ihop översikt',
+  'Overzicht uitklappen': 'Fäll ut översikt',
+  'Pakket (.ocideck)': 'Paket (.ocideck)',
+  'Tabel geplakt': 'Tabell klistrad',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Lägg till en mapp eller använd "Bläddra" för en enskild fil.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Fristående paket med markdown och bilder — valfritt krypterat (AES-256), öppnas i OciDeck.',
   'dia\'s uit dit document.': 'bilder från detta dokument.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logotypen för denna stilprofil hittades inte och visas inte (sökväg: {pad}). Välj en logotyp i presentationsinställningarna.',

@@ -1788,6 +1788,22 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Afbeelding geplakt': 'Зображення вставлено',
+  'Bibliotheekmap niet bereikbaar': 'Теку бібліотеки недоступно',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Теку бібліотеки недоступно. Оберіть теку нижче або змініть Сховище в ⋮ → Налаштування.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Теку з Налаштувань відключено або переміщено. Оберіть тут теку зі зображеннями.',
+  'Kies een map met afbeeldingen': 'Оберіть теку зі зображеннями',
+  'Map toevoegen…': 'Додати теку…',
+  'Overzicht inklappen': 'Згорнути огляд',
+  'Overzicht uitklappen': 'Розгорнути огляд',
+  'Pakket (.ocideck)': 'Пакет (.ocideck)',
+  'Tabel geplakt': 'Таблицю вставлено',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Додайте теку або скористайтеся "Огляд" для одного файлу.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Автономний пакет з markdown і зображеннями — за бажанням зашифрований (AES-256), відкривається в OciDeck.',
   'dia\'s uit dit document.': 'слайдів із цього документа.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Логотип цього профілю стилю не знайдено й не показано (шлях: {pad}). Виберіть логотип у налаштуваннях презентації.',

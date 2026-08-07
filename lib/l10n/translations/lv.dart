@@ -1770,6 +1770,22 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Afbeelding geplakt': 'Attēls ielīmēts',
+  'Bibliotheekmap niet bereikbaar': 'Bibliotēkas mape nav sasniedzama',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Bibliotēkas mape nav sasniedzama. Izvēlieties mapi zemāk vai pielāgojiet Krātuvi sadaļā ⋮ → Iestatījumi.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Mape no Iestatījumiem ir bezsaistē vai pārvietota. Šeit izvēlieties mapi ar attēliem.',
+  'Kies een map met afbeeldingen': 'Izvēlieties mapi ar attēliem',
+  'Map toevoegen…': 'Pievienot mapi…',
+  'Overzicht inklappen': 'Sakļaut pārskatu',
+  'Overzicht uitklappen': 'Izvērst pārskatu',
+  'Pakket (.ocideck)': 'Pakotne (.ocideck)',
+  'Tabel geplakt': 'Tabula ielīmēta',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Pievienojiet mapi vai izmantojiet "Pārlūkot" vienam failam.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Patstāvīga pakotne ar markdown un attēliem — pēc izvēles šifrēta (AES-256), atveras OciDeck.',
   'dia\'s uit dit document.': 'slaidi no šī dokumenta.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Šī stila profila logotips nav atrasts un netiek rādīts (ceļš: {pad}). Izvēlieties logotipu prezentācijas iestatījumos.',

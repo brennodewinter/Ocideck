@@ -727,6 +727,22 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Afbeelding geplakt': 'Imagen pegada',
+  'Bibliotheekmap niet bereikbaar': 'Carpeta de biblioteca inaccesible',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'La carpeta de biblioteca no es accesible. Elige una carpeta abajo o ajusta Almacenamiento en ⋮ → Ajustes.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'La carpeta de Ajustes está sin conexión o se ha movido. Elige aquí una carpeta con imágenes.',
+  'Kies een map met afbeeldingen': 'Elegir una carpeta con imágenes',
+  'Map toevoegen…': 'Añadir carpeta…',
+  'Overzicht inklappen': 'Contraer resumen',
+  'Overzicht uitklappen': 'Expandir resumen',
+  'Pakket (.ocideck)': 'Paquete (.ocideck)',
+  'Tabel geplakt': 'Tabla pegada',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Añade una carpeta o usa "Examinar" para un solo archivo.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Paquete independiente con markdown e imágenes — cifrado opcional (AES-256), se abre en OciDeck.',
   'dia\'s uit dit document.': 'diapositivas de este documento.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'El logotipo de este perfil de estilo no se ha encontrado y no se muestra (ruta: {pad}). Elija un logotipo en los ajustes de presentación.',

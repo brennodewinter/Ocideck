@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/models/settings.dart' show ThemeProfile;
@@ -21,7 +24,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// document opent in een eigen tabblad, en het eerste opslaan (nog geen pad)
 /// kiest een pad en schrijft het byte-getrouw weg — de maak→bewaar-cyclus rond.
 void main() {
-  setUp(() => SharedPreferences.setMockInitialValues({}));
+  setUp(() {
+    AppLocalizations.setActiveLanguageCode('nl');
+    SharedPreferences.setMockInitialValues({});
+  });
 
   /// Een FileService waarvan het bewaar-venster [dest] teruggeeft (of null bij
   /// wegklikken), zodat het opslag-pad onder `flutter test` te toetsen is.
@@ -83,7 +89,16 @@ void main() {
           documentProvider.overrideWith((ref) => n),
           fileServiceProvider.overrideWithValue(fileServiceReturning(target)),
         ],
-        child: const MaterialApp(home: DocumentEditorScreen()),
+        child: MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            FlutterQuillLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: const DocumentEditorScreen(),
+        ),
       ),
     );
 

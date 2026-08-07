@@ -1773,6 +1773,22 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Afbeelding geplakt': 'Slika prilepljena',
+  'Bibliotheekmap niet bereikbaar': 'Mapa knjižnice ni dosegljiva',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Mapa knjižnice ni dosegljiva. Izberite mapo spodaj ali prilagodite Shrambo v ⋮ → Nastavitve.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Mapa iz Nastavitev je brez povezave ali premaknjena. Izberite tukaj mapo s slikami.',
+  'Kies een map met afbeeldingen': 'Izberite mapo s slikami',
+  'Map toevoegen…': 'Dodaj mapo…',
+  'Overzicht inklappen': 'Strni pregled',
+  'Overzicht uitklappen': 'Razširi pregled',
+  'Pakket (.ocideck)': 'Paket (.ocideck)',
+  'Tabel geplakt': 'Tabela prilepljena',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Dodajte mapo ali uporabite "Prebrskaj" za eno datoteko.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Samostojni paket z markdownom in slikami — po želji šifriran (AES-256), se odpre v OciDeck.',
   'dia\'s uit dit document.': 'prosojnic iz tega dokumenta.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logotip tega profila stila ni bil najden in se ne prikazuje (pot: {pad}). Izberite logotip v nastavitvah predstavitve.',

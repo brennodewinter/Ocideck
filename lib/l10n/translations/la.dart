@@ -1787,6 +1787,22 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Afbeelding geplakt': 'Imago infixa',
+  'Bibliotheekmap niet bereikbaar': 'Plica bibliothecae non pervia',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Plica bibliothecae non pervia est. Elige fasciculum infra aut Mémoriam sub ⋮ → Configuratio muta.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Fasciculus ex Configuratio offline est aut motus. Elige hic fasciculum cum imaginibus.',
+  'Kies een map met afbeeldingen': 'Elige fasciculum cum imaginibus',
+  'Map toevoegen…': 'Plicam addere…',
+  'Overzicht inklappen': 'Conspectum contrahere',
+  'Overzicht uitklappen': 'Conspectum expandere',
+  'Pakket (.ocideck)': 'Fasciculus (.ocideck)',
+  'Tabel geplakt': 'Tabula infixa',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Plicam adde aut "Explorare" pro uno fasciculo utere.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Fasciculus independens cum markdown et imaginibus — optionaliter cryptatus (AES-256), in OciDeck aperitur.',
   'dia\'s uit dit document.': 'scidae ex hoc documento.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Huius stiliprofili insigne non inventum est et non ostenditur (via: {pad}). Elige insigne in praesentationis optionibus.',

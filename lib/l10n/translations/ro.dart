@@ -1788,6 +1788,22 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afbeelding geplakt': 'Imagine lipită',
+  'Bibliotheekmap niet bereikbaar': 'Folderul bibliotecii nu poate fi accesat',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Folderul bibliotecii nu poate fi accesat. Alege un folder mai jos sau ajustează Stocare în ⋮ → Setări.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Folderul din Setări este offline sau mutat. Alege aici un folder cu imagini.',
+  'Kies een map met afbeeldingen': 'Alege un folder cu imagini',
+  'Map toevoegen…': 'Adaugă folder…',
+  'Overzicht inklappen': 'Restrânge prezentarea generală',
+  'Overzicht uitklappen': 'Extinde prezentarea generală',
+  'Pakket (.ocideck)': 'Pachet (.ocideck)',
+  'Tabel geplakt': 'Tabel lipit',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Adaugă un folder sau folosește "Răsfoiește" pentru un singur fișier.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Pachet independent cu markdown și imagini — opțional criptat (AES-256), se deschide în OciDeck.',
   'dia\'s uit dit document.': 'diapozitive din acest document.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logo-ul acestui profil de stil nu a fost găsit și nu este afișat (cale: {pad}). Alegeți un logo în setările prezentării.',

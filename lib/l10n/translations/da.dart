@@ -1770,6 +1770,22 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Afbeelding geplakt': 'Billede indsat',
+  'Bibliotheekmap niet bereikbaar': 'Biblioteksmappe utilgængelig',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'Biblioteks mappen er utilgængelig. Vælg en mappe nedenfor, eller juster Lager under ⋮ → Indstillinger.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'Mappen fra Indstillinger er offline eller flyttet. Vælg en mappe med billeder her.',
+  'Kies een map met afbeeldingen': 'Vælg en mappe med billeder',
+  'Map toevoegen…': 'Tilføj mappe…',
+  'Overzicht inklappen': 'Skjul oversigt',
+  'Overzicht uitklappen': 'Udvid oversigt',
+  'Pakket (.ocideck)': 'Pakke (.ocideck)',
+  'Tabel geplakt': 'Tabel indsat',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Tilføj en mappe, eller brug "Gennemse" til én fil.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Selvstændig pakke med markdown og billeder — valgfrit krypteret (AES-256), åbnes i OciDeck.',
   'dia\'s uit dit document.': 'dias fra dette dokument.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Logoet for denne stilprofil blev ikke fundet og vises ikke (sti: {pad}). Vælg et logo i præsentationsindstillingerne.',

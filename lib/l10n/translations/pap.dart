@@ -730,6 +730,22 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Afbeelding geplakt': 'Imagen pegá',
+  'Bibliotheekmap niet bereikbaar': 'Karpeta di biblioteca no alcanzabel',
+  'De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.':
+      'E karpeta di biblioteca no ta alcanzabel. Skohe un karpeta abou of ajustá Almacenamentu bou di ⋮ → Konfigurashon.',
+  'De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.':
+      'E karpeta di Konfigurashon ta offline of moví. Skohe un karpeta ku imágenen aki.',
+  'Kies een map met afbeeldingen': 'Skohe un karpeta ku imágenen',
+  'Map toevoegen…': 'Agregá karpeta…',
+  'Overzicht inklappen': 'Sera resúmen',
+  'Overzicht uitklappen': 'Habri resúmen',
+  'Pakket (.ocideck)': 'Pakete (.ocideck)',
+  'Tabel geplakt': 'Tabla pegá',
+  'Voeg een map toe of gebruik "Bladeren" voor één bestand.':
+      'Agregá un karpeta of usa "Navegá" pa un solo archivo.',
+  'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
+      'Pakete independiente ku markdown i imágenen — opcionalmente enkriptá (AES-256), ta habri den OciDeck.',
   'dia\'s uit dit document.': 'slide di e dokumento aki.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'E logo di e perfil di estilo aki no a wòrdu hañá i no ta mustra (kaminda: {pad}). Skohe un logo den e settingnan di presentashon.',
