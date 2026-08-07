@@ -237,13 +237,7 @@ extension FileServiceImport on FileService {
 
     final List<int> bytes;
     try {
-      final client = HttpClient()
-        ..connectionTimeout = const Duration(seconds: 15)
-        // Pin the socket to the validated address so a DNS rebind between the
-        // check above and the actual connect can't point us at an internal IP.
-        // TLS (for https) still validates against the original hostname.
-        ..connectionFactory = (u, proxyHost, proxyPort) =>
-            NetGuard.connectPinned(pinned, u);
+      final client = buildPinnedClient(pinned);
       try {
         final request = await client.getUrl(uri);
         // Don't auto-follow redirects: a 3xx could point at a private host and

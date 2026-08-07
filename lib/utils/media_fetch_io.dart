@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
@@ -6,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'image_limits.dart';
 import 'log.dart';
 import 'net_guard.dart';
+import 'pinned_http_client.dart';
 
 /// Bovengrens op wat een remote afbeelding aan bytes mag opleveren.
 ///
@@ -43,10 +43,7 @@ Future<Uint8List> _fetchPinned(String url) async {
   }
   final pinned = addresses.first;
 
-  final client = HttpClient()
-    ..connectionTimeout = const Duration(seconds: 15)
-    ..connectionFactory = (u, proxyHost, proxyPort) =>
-        NetGuard.connectPinned(pinned, u);
+  final client = buildPinnedClient(pinned);
   try {
     final request = await client.getUrl(uri);
     // Een 3xx mag de hostcontrole hierboven niet omzeilen: dan wees de

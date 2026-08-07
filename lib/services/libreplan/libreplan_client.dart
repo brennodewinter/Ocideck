@@ -23,6 +23,7 @@ import '../../models/libreplan_settings.dart';
 import '../../platform/platform_features.dart';
 import '../../utils/log.dart';
 import '../../utils/net_guard.dart';
+import '../../utils/pinned_http_client.dart';
 
 /// Eén HTTP-uitwisseling over de transport-seam.
 class LibreplanHttpResult {
@@ -70,10 +71,7 @@ class PinnedLibreplanTransport implements LibreplanHttpTransport {
     Duration timeout = const Duration(seconds: 30),
   }) async {
     final pinned = await _resolvePinned(url.host, trustedInternal);
-    final client = HttpClient()
-      ..connectionTimeout = const Duration(seconds: 15)
-      ..connectionFactory = (u, proxyHost, proxyPort) =>
-          NetGuard.connectPinned(pinned, u);
+    final client = buildPinnedClient(pinned);
     try {
       final request = await client.openUrl('GET', url);
       request.followRedirects = false; // a 3xx must not bypass the host check
