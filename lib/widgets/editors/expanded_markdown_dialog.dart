@@ -9,10 +9,17 @@ import '../markdown_editor/markdown_editor.dart';
 
 /// Markdown that cannot round-trip losslessly through the visual editor, so the
 /// dialog opens (and stays) in raw source mode for it.
+///
+/// A GFM table is deliberately **absent**: it round-trips as an `x-embed-table`
+/// block embed (see `MarkdownQuillCodec` / `TableEmbedBuilder`), so it stays
+/// editable in the visual editor instead of forcing raw source.
 bool markdownNeedsSourceMode(String markdown) {
   final lines = markdown.split('\n');
-  return RegExp(r'^\s*\|.+\|\s*$', multiLine: true).hasMatch(markdown) ||
-      RegExp(r'^\[\^[^]]+\]:', multiLine: true).hasMatch(markdown) ||
+  // `[^\]]` = "niet een `]`". Zónder de backslash leest Dart's (JS-achtige)
+  // regex `[^]]` als "elk teken, gevolgd door een letterlijke `]`" en ving een
+  // echte voetnoot `[^1]:` nooit — die viel dan alsnog terug via de binnenste
+  // `markdownVisualLimitations`, maar deze poort hoort hem net zo te zien.
+  return RegExp(r'^\[\^[^\]]+\]:', multiLine: true).hasMatch(markdown) ||
       RegExp(r'^---\s*$', multiLine: true).allMatches(markdown).length >= 2 ||
       lines.any((line) => line.trimLeft().startsWith('<!--'));
 }

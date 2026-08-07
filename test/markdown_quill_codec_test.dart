@@ -1,4 +1,3 @@
-import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:markdown_quill/markdown_quill.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';

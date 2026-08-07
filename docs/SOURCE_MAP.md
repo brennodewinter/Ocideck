@@ -1207,6 +1207,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 ### `lib/widgets/editors/` — per-slide-type editors
 
 - `_editor_field.dart` — Shared layout helpers for slide editors.
+- `embed_editor_dialog.dart` — Shared dialog shell (`showEmbedEditorDialog`) for editing an embedded chart or table: the full editor in a viewport-clamped window with Cancel/Apply. Used by both the document source-preview (double-click embeds) and the visual editor's table embed, so both edit routes share one shell.
 - `ai_suggest_control.dart` — Shared "suggest text (AI)" control: confirmation, progress, error feedback and the AI-concept/Nagekeken provenance chrome.
 - `ai_suggest_field.dart` — Connects that shared control to finding free-text fields and their finding-specific AI service.
 - `improvement_ai_suggest_field.dart` — Connects the shared control to Procesverbetering canvas/tree/flow fields; gated on both AI and Procesverbetering modules (`improvement_ai_provider.dart`).
@@ -1272,6 +1273,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `notes_mode_toggle.dart` — Toggle between visual and markdown editing.
 - `wysiwyg_notes_field.dart` — WYSIWYG rich-text field (Flutter Quill).
 - `wysiwyg_notes_toolbar.dart` — Quill formatting toolbar.
+- `table_embed_builder.dart` — Renders a GFM table (an `x-embed-table` block embed) inside the visual editor as a real, editable table (pencil/double-click opens the full `TableEditor`, writes the result back byte-faithfully). This is why a table is no longer a `markdownVisualLimitations` fall-back to raw source.
 
 ### `lib/widgets/slides/` — slide rendering
 
