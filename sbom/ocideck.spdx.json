@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.3.6+13",
-  "documentNamespace": "https://ocideck.app/spdx/0fd689eb-e4e5-5033-8cbe-da0a54811330",
+  "documentNamespace": "https://ocideck.app/spdx/25176f72-d20d-5100-88fc-05c947726ede",
   "creationInfo": {
-    "created": "2026-08-07T13:54:35.583313Z",
+    "created": "2026-08-07T21:47:13.940731Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4714,22 +4714,22 @@
     {
       "SPDXID": "SPDXRef-209-dompurify",
       "name": "dompurify",
-      "versionInfo": "3.4.12",
-      "downloadLocation": "https://cdn.jsdelivr.net/npm/dompurify@3.4.12/dist/purify.min.js",
+      "versionInfo": "3.4.13",
+      "downloadLocation": "https://cdn.jsdelivr.net/npm/dompurify@3.4.13/dist/purify.min.js",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0 OR MPL-2.0",
       "licenseDeclared": "Apache-2.0 OR MPL-2.0",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "c45ba939765574f96cbf35ee9b6d89f73756a17921814425e74b82f7c54603ce"
+          "checksumValue": "9ab3d44d73c3e3947f9ab72e0f0bc15c7f1931d60b365ba261fc85fe59013c56"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/dompurify@3.4.12"
+          "referenceLocator": "pkg:npm/dompurify@3.4.13"
         }
       ],
       "comment": "Vendored into purify.min.js, inlined into the HTML export."
