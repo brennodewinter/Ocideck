@@ -208,6 +208,11 @@ class CveBulkIngest {
       final url = (asset['browser_download_url'] as String?) ?? '';
       final parsed = Uri.tryParse(url);
       if (parsed == null || !parsed.hasScheme) continue;
+      // Defence in depth: the transport layer already refuses non-https, but
+      // reject it here too so a crafted release asset never reaches the HTTP
+      // client.
+      final scheme = parsed.scheme.toLowerCase();
+      if (scheme != 'http' && scheme != 'https') continue;
       return (
         tag: tag.isEmpty ? name : tag,
         url: parsed,

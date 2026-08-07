@@ -84,7 +84,11 @@ class ScramClient {
       );
     }
     final count = int.tryParse(iterations);
-    if (count == null || count < 1) {
+    // Upper bound: a hostile server can send an absurd iteration count to
+    // pin the client in a PBKDF2 loop (DoS). RFC 5802 sets no maximum, but
+    // 100 000 is well above any legitimate server (RFC 7677 recommends
+    // 15 000 for SCRAM-SHA-256) and keeps the client responsive.
+    if (count == null || count < 1 || count > 100000) {
       throw const FormatException('invalid SCRAM iteration count');
     }
 

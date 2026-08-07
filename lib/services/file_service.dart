@@ -26,6 +26,7 @@ import '../utils/bundled_asset.dart';
 import '../utils/file_download.dart';
 import '../utils/log.dart';
 import '../utils/net_guard.dart';
+import '../utils/pinned_http_client.dart';
 import '../utils/project_path.dart';
 import '../utils/zip_encryption.dart';
 import 'annotation_codec.dart';

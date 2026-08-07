@@ -571,6 +571,12 @@ tag push, the signing and the web deploy. The password is held only in memory
 and fed to `minisign` via `expect`; the macOS notarisation leans on this Mac's
 keychain items and asks for nothing.
 
+Right after the password, a **pre-flight** checks everything the later,
+irreversible steps will need — the forge token, the `mirror` remote, the deploy
+host over ssh, and a throwaway `minisign` signature — so a wrong password or an
+unreachable host fails in seconds, before the long build and the tag, instead of
+after (which is exactly how a real release once stranded at the very end).
+
 The order is the three phases in one go: **Phase 1 (local)** an *outdatedness
 gate* over the bundled reference data (`make catalogs-outdated` — a newer upstream
 catalog stops the release with a message, because refreshing it changes what a
@@ -583,8 +589,11 @@ verification and the `/Applications` swap; **Phase 2** branch → *if the scanne
 were bumped, publish a new scans image first* (dispatch `ci-image-scans` on the
 branch and wait, so `scans.yml`'s new image tag exists before the PR scan runs) →
 PR → wait for the gate → merge → tag → push to origin **and** mirror → poll the
-release CI until every job is done; **Phase 3** sign `SHA256SUMS` and attach
-`SHA256SUMS.minisig`, watch the website-downloads job, and `make deploy-web`.
+release CI until every job is done; **Phase 3** `make deploy-web` *first* — the web
+demo depends only on the web bundle, so a signing or platform failure never leaves
+it on the old version — then sign `SHA256SUMS`, attach `SHA256SUMS.minisig`
+(waiting up to a few minutes for `publiceren` to attach it rather than dying on a
+404), and watch the website-downloads job.
 
 The standalone `make bump-scanner-pins` does the same edit outside a release
 (manifest + every workflow's `*_VERSION` env + the pre-baked scans image tag, in
@@ -595,10 +604,14 @@ can surface new findings, so the scan gate may still turn red and need addressin
 
 Fail-safe: `set -Eeuo pipefail` plus an `ERR` trap name *which* step failed on
 *which* line, and whether the tag was already pushed — before the push nothing
-went out and the release branch is cleaned up, after it the tag stays put and the
-fix becomes the next patch tag (never a re-tag). `--dry-run` shows the plan and
-the outdatedness gate without mutating anything; `--print-version LEVEL` prints
-just the computed tag (the hermetic guard-arithmetic that
+went out and the release branch is cleaned up. After it the tag stays put: if the
+failure was in Phase 3 (signing/deploy) or an upstream CI job, finish the **same**
+tag with `--resume vX.Y.Z` (skips phases 1–2, re-runs only the pre-flight and
+Phase 3); only when a released artifact is itself wrong do you cut the next patch
+tag — never a re-tag (that degrades the mirror Windows release to a draft and
+leaves `windows-ophalen` waiting forever). `--dry-run` shows the plan and the
+outdatedness gate without mutating anything; `--print-version LEVEL` prints just
+the computed tag (the hermetic guard-arithmetic that
 `test/release_auto_version_test.dart` pins against the canonical rule). This is
 the fully-unattended increment the guided `make release` deliberately left to a
 proven follow-up.
@@ -626,9 +639,22 @@ and <https://ocideck.librekat.nl/> is serving that same web bundle.
 The Windows artifact travels back as a **public GitHub release asset**, not as a
 build artifact. A GitHub artifact needs a token even on a public repository and
 expires after ninety days; a release asset is a plain public URL that keeps
-working. That is why the forge needs no GitHub credentials to collect it — the
-`windows-ophalen` job simply waits (up to 45 minutes) for the file to appear and
-`curl`s it.
+working. So *collecting* it needs no credentials — the `windows-ophalen` job just
+`curl`s the URL.
+
+*Starting* the build, however, is no longer left to chance. It used to rely on the
+tag push to the mirror triggering `.github/workflows/release.yml` there — but when
+the tag already exists on the mirror (an earlier attempt, or Forgejo's own push
+mirror) that push is a no-op and GitHub fires **no** `push` event, so the Windows
+build never starts and `windows-ophalen` waited out its 45-minute timeout (this
+stranded `v0.3.6`). The job now **actively dispatches** the mirror workflow via
+`workflow_dispatch` using the `GH_DISPATCH_TOKEN` secret (a fine-grained GitHub PAT
+with *Actions: read and write* + *Contents: read* on `brennodewinter/Ocideck`),
+regardless of whether the push event fired. It is idempotent — if the asset or a
+running build already exists it does not dispatch again — and it polls the run
+status so a failed build stops the job promptly (with the run URL) instead of
+after 45 empty minutes. Without the secret the job falls back to the old passive
+wait, so the chain keeps working until the secret is set.
 
 The **web and Linux jobs run on the prebaked `ocideck-ci:flutter-<pin>` image** —
 the same image the gates use (see the `ci-image.yml` section of

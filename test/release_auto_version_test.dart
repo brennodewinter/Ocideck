@@ -77,4 +77,18 @@ void main() {
     expect(r.exitCode, isNot(0));
     expect(r.stderr.toString(), contains('niveau'));
   });
+
+  // --resume (#9): al deze paden falen hermetisch — vóór git/netwerk — zodat de
+  // test snel en zonder poort-neveneffecten blijft.
+  test('--resume zonder tag weigert', () {
+    final r = Process.runSync('bash', [script, '--resume']);
+    expect(r.exitCode, isNot(0));
+    expect(r.stderr.toString(), contains('tag'));
+  });
+
+  test('een losse tag zonder --resume weigert (typfout-vangnet)', () {
+    final r = Process.runSync('bash', [script, 'v9.9.9']);
+    expect(r.exitCode, isNot(0));
+    expect(r.stderr.toString(), contains('resume'));
+  });
 }

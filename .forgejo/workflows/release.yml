@@ -5,7 +5,9 @@
 # Apple licenseert macOS alleen op Apple-hardware (vandaar de Mac-runner) en
 # voor Windows is er hier geen machine. Die build komt van de GitHub-spiegel en
 # wordt hier opgehaald en meeverpakt, zodat een bezoeker toch één vindplaats
-# heeft. Zie de job `windows-ophalen` voor waarom dat geen token vraagt.
+# heeft. Het OPHALEN vraagt geen token (een release-asset is een publieke URL);
+# het STARTEN wel — `windows-ophalen` dispatcht sinds v0.3.6 de spiegel-build
+# actief via `GH_DISPATCH_TOKEN` i.p.v. te hopen dat de tag-push hem triggert.
 #
 # Wat er ontstaat bij `git push origin v0.1.0`:
 #
@@ -373,46 +375,96 @@ jobs:
   windows-ophalen:
     name: Windows ophalen van de spiegel
     runs-on: docker
+    # Voorgebakken CI-image i.p.v. kaal ubuntu + per-run apt-get: dit image draagt
+    # al node/curl/ca-certificates/jq (zie .forgejo/ci-image/Dockerfile) en staat
+    # op de runner al warm van de bouw-jobs, dus de "Gereedschap installeren"-stap
+    # (4-6 min apt) vervalt. #11 van het releaseketen-verhardingsplan.
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.44.8
     steps:
-      - name: Gereedschap installeren
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends nodejs curl ca-certificates jq
-
       # Waarom een release-asset en niet het build-artifact van die run: een
       # GitHub-*artifact* vraagt een token, óók bij een publieke repo, en
       # verloopt na negentig dagen. Een release-*asset* van een publieke repo is
-      # een gewone publieke URL. Dat scheelt hier een geheim op de runner én
-      # betekent dat de Windows-download over drie jaar nog bestaat.
+      # een gewone publieke URL. Dat scheelt bij het OPHALEN een geheim op de
+      # runner én betekent dat de Windows-download over drie jaar nog bestaat.
       #
-      # De volgorde regelt zichzelf: de tag wordt naar de spiegel gepusht, daar
-      # start `.github/workflows/release.yml`, en zodra die klaar is staat het
-      # bestand er. Deze job wacht daarop, want een release die één platform
-      # mist is erger dan een release die een half uur later compleet is.
-      - name: Wachten op de Windows-build
+      # Het STARTEN gaat sinds v0.3.6 niet meer vanzelf. Eerder leunde deze job
+      # erop dat de tag-push naar de spiegel daar `release.yml` triggert — maar
+      # stond de tag al op de spiegel (eerdere poging / Forgejo's eigen mirror),
+      # dan is die push een no-op en vuurt GitHub géén Actions-run: de Windows-
+      # build startte nooit en deze job wachtte 45 min leeg (zie #1313-plan).
+      # Daarom dispatchen we nu ACTIEF via `workflow_dispatch`, ongeacht of het
+      # push-event afging. Zonder token valt de job terug op passief wachten, zodat
+      # de keten blijft werken tot het secret gezet is.
+      - name: Windows-build starten en ophalen
+        env:
+          GH_DISPATCH_TOKEN: ${{ secrets.GH_DISPATCH_TOKEN }}
+        shell: bash
         run: |
           set -u
           TAG="${GITHUB_REF_NAME}"
           VERSIE="${TAG#v}"
           BESTAND="ocideck-windows-x64-$VERSIE.zip"
-          URL="https://github.com/brennodewinter/Ocideck/releases/download/$TAG/$BESTAND"
-          echo "Wachten op $URL"
-          # 45 minuten: een Windows-build op de spiegel duurt ongeveer twintig,
-          # plus de tijd die de push-mirror nodig heeft. Ruim, maar begrensd —
-          # eeuwig wachten laat een job een runner bezet houden.
+          REPO="brennodewinter/Ocideck"
+          URL="https://github.com/$REPO/releases/download/$TAG/$BESTAND"
+          API="https://api.github.com/repos/$REPO"
+
+          have_asset() { curl -fsSLo "$BESTAND" "$URL" 2>/dev/null; }
+          gh_api() { curl -fsS -H "Authorization: Bearer $GH_DISPATCH_TOKEN" \
+            -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "$@"; }
+          dispatch() { gh_api -X POST "$API/actions/workflows/release.yml/dispatches" \
+            -d "{\"ref\":\"$TAG\"}"; }
+          # Laatste run van de Windows-workflow op DEZE tag: "status conclusion url".
+          run_status() { gh_api "$API/actions/workflows/release.yml/runs?per_page=10" \
+            | jq -r --arg t "$TAG" 'first(.workflow_runs[] | select(.head_branch==$t))
+                // {} | "\(.status // "") \(.conclusion // "") \(.html_url // "")"'; }
+
+          # #2 idempotent: staat het asset er al (push-event vuurde wél, of een
+          # eerdere run), dan zijn we meteen klaar.
+          if have_asset; then
+            echo "Asset stond er al: $(du -h "$BESTAND" | cut -f1)"; exit 0
+          fi
+
+          if [ -z "${GH_DISPATCH_TOKEN:-}" ]; then
+            echo "GH_DISPATCH_TOKEN niet gezet — passief wachten op de spiegel-build (minder robuust)."
+          else
+            info="$(run_status || true)"; st="$(printf '%s' "$info" | awk '{print $1}')"
+            # #2: draait er al een build op deze tag, dan niet nog eens dispatchen.
+            if [ -n "$st" ] && [ "$st" != "completed" ] && [ "$st" != "null" ]; then
+              echo "Er loopt al een Windows-build ($st) — niet opnieuw dispatchen."
+            else
+              echo "Windows-build dispatchen op $REPO@$TAG…"
+              dispatch || { echo "Dispatch faalde — controleer GH_DISPATCH_TOKEN (Actions: RW)." >&2; exit 1; }
+              sleep 10
+            fi
+          fi
+
+          # #5 poll op zowel het asset als de run-status; herdispatch als er na
+          # ~5 min geen run zichtbaar is; faal meteen (met run-URL) als de build faalt.
+          LAST_URL=""
           for POGING in $(seq 1 45); do
-            if curl -fsSLo "$BESTAND" "$URL"; then
-              echo "Opgehaald na $POGING minuut/minuten: $(du -h "$BESTAND" | cut -f1)"
-              exit 0
+            if have_asset; then
+              echo "Opgehaald na $POGING minuut/minuten: $(du -h "$BESTAND" | cut -f1)"; exit 0
+            fi
+            if [ -n "${GH_DISPATCH_TOKEN:-}" ]; then
+              info="$(run_status || true)"
+              st="$(printf '%s' "$info" | awk '{print $1}')"
+              cc="$(printf '%s' "$info" | awk '{print $2}')"
+              LAST_URL="$(printf '%s' "$info" | awk '{print $3}')"
+              echo "[$POGING] run: ${st:-<geen>} ${cc:-} ${LAST_URL:-}"
+              if [ "$POGING" -eq 5 ] && { [ -z "$st" ] || [ "$st" = "null" ]; }; then
+                echo "Nog geen run zichtbaar — opnieuw dispatchen."; dispatch || true
+              fi
+              if [ "${cc:-}" = "failure" ] || [ "${cc:-}" = "cancelled" ]; then
+                echo "De Windows-build faalde: ${LAST_URL:-zie GitHub Actions}." >&2
+                echo "Herstel dat en hertrigger deze release-workflow." >&2
+                exit 1
+              fi
             fi
             sleep 60
           done
-          echo "Na 45 minuten stond $URL er nog niet." >&2
-          echo "Kijk op https://github.com/brennodewinter/Ocideck/actions of die build" >&2
-          echo "is gestruikeld. De release wordt hierdoor niet gepubliceerd — hertrigger" >&2
-          echo "deze workflow zodra het bestand er staat." >&2
+          echo "Na 45 minuten stond $URL er nog niet (laatste run: ${LAST_URL:-onbekend})." >&2
+          echo "Hertrigger deze release-workflow zodra de Windows-build groen is." >&2
           exit 1
 
       - name: Artifact bewaren
@@ -425,14 +477,13 @@ jobs:
     name: Release publiceren
     needs: [web, linux, macos, windows-ophalen]
     runs-on: docker
+    # Voorgebakken CI-image i.p.v. kaal ubuntu + per-run apt-get: node/git/curl/
+    # ca-certificates/jq zitten er al in (zie .forgejo/ci-image/Dockerfile) en het
+    # image staat door de bouw-jobs al warm op de runner. #11 van het
+    # releaseketen-verhardingsplan.
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.44.8
     steps:
-      - name: Gereedschap installeren
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends nodejs git curl ca-certificates jq
-
       - uses: actions/checkout@v4
 
       # Downloaden naar `dist`, niet `assets`: de checkout hierboven brengt de
@@ -576,8 +627,10 @@ jobs:
     # (#1227), niet via deze cask.
     if: ${{ !contains(github.ref_name, '-') }}
     runs-on: docker
+    # Voorgebakken CI-image i.p.v. kaal ubuntu + per-run apt-get: node/git/curl/
+    # ca-certificates zitten er al in. #11 van het releaseketen-verhardingsplan.
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.44.8
     env:
       HOMEBREW_TAP_REPOSITORY: ${{ secrets.HOMEBREW_TAP_REPOSITORY }}
       HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
@@ -612,16 +665,9 @@ jobs:
             } >> "$GITHUB_STEP_SUMMARY"
           fi
 
-      # nodejs erbij: actions/checkout@v4 is een Node-actie en de kale
-      # ubuntu:24.04 heeft geen Node aan boord (net als 'Release publiceren' en
-      # 'Webversie live zetten'). Zonder deze regel faalt de checkout hieronder —
-      # dat brak de eerste echte cask-run (v0.3.1).
-      - name: Gereedschap installeren
-        if: steps.check.outputs.tap == 'true'
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends nodejs git curl ca-certificates
-
+      # actions/checkout@v4 is een Node-actie; het voorgebakken CI-image draagt
+      # node al (vroeger installeerde een aparte apt-get-stap dat op kaal ubuntu —
+      # zonder Node faalde de checkout, dat brak de eerste cask-run v0.3.1).
       - uses: actions/checkout@v4
         if: steps.check.outputs.tap == 'true'
 

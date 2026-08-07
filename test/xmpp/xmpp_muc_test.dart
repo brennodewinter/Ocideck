@@ -216,4 +216,35 @@ void main() {
     await muc.leave();
     expect(ch.sent.where((s) => s.type == 'unavailable'), isEmpty);
   });
+
+  test('an oversized nick is refused (DoS guard)', () async {
+    final ch = FakeChannel();
+    final muc = mucOf(ch);
+    final joining = muc.join();
+    ch.inject(_presence('me', codes: ['110']));
+    await joining;
+
+    final hugeNick = 'a' * 2000;
+    ch.inject(_presence(hugeNick));
+    await Future<void>.delayed(Duration.zero);
+
+    expect(muc.roster.map((o) => o.nick), isNot(contains(hugeNick)));
+    await muc.leave();
+  });
+
+  test('an oversized realJid is refused (DoS guard)', () async {
+    final ch = FakeChannel();
+    final muc = mucOf(ch);
+    final joining = muc.join();
+    ch.inject(_presence('me', codes: ['110']));
+    await joining;
+
+    final hugeJid = '${'a' * 4000}@example.org';
+    ch.inject(_presence('alice', realJid: hugeJid));
+    await Future<void>.delayed(Duration.zero);
+
+    final alice = muc.roster.firstWhere((o) => o.nick == 'alice');
+    expect(alice.realJid, isNull);
+    await muc.leave();
+  });
 }

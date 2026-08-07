@@ -133,6 +133,44 @@ void main() {
       expect(forge.blobReads, 1);
     });
 
+    test('the cache is bounded: evicting an entry re-fetches it', () async {
+      // A static cache without a cap would grow without limit over a long
+      // session with many different assets. The LRU cap keeps it bounded.
+      // Use 2-byte values to avoid Uint8List's 0-255 masking.
+      Uint8List bytesFor(int i) => Uint8List.fromList([i >> 8, i & 0xFF]);
+      final forge = _CountingForge(
+        FakeRepo(
+          branches: {'main': 'c'},
+          files: {
+            for (var i = 0; i < 300; i++)
+              GitRepoLayout.assetPathOf(
+                GitRepoLayout.assetRef(_sha(bytesFor(i)), 'png')!,
+              )!: bytesFor(
+                i,
+              ),
+          },
+        ),
+      );
+      final pool = AssetPool(forge: forge, branch: 'main');
+
+      // Vul de cache met 300 verschillende assets — meer dan de cap.
+      for (var i = 0; i < 300; i++) {
+        final ref = GitRepoLayout.assetRef(_sha(bytesFor(i)), 'png')!;
+        await pool.resolve(ref);
+      }
+
+      // De eerste asset (i=0) is geëvicteerd door de LRU-cap. Een nieuwe
+      // resolve moet hem opnieuw ophalen: blobReads stijgt.
+      final readsBefore = forge.blobReads;
+      final ref0 = GitRepoLayout.assetRef(_sha(bytesFor(0)), 'png')!;
+      await pool.resolve(ref0);
+      expect(
+        forge.blobReads,
+        greaterThan(readsBefore),
+        reason: 'evicted entry must be re-fetched',
+      );
+    });
+
     test('refuses a reference that climbs out of the pool', () async {
       final forge = _CountingForge(repoWithPool());
       final pool = AssetPool(forge: forge, branch: 'main');
