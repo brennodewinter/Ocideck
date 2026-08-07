@@ -1,4 +1,12 @@
 @TestOn('vm')
+// Elke test hier draait een reeks echte native `git`-subprocessen (clone, merge,
+// merge --abort). Onder de default 30s-timeout flakerde dit op de Forgejo
+// linux-gate wanneer de runner onder last stond (parallelle gates): de merge
+// haalde de 30s niet, waarna teardown de sandbox opruimde terwijl een async
+// `git merge --abort` nog liep → "ProcessException: No such file or directory"
+// ná testafronding. Een royale bestand-brede timeout vangt de last-piek af
+// zonder het echte gedrag te veranderen. Zie geheugen poortslot-en-machinelast.
+@Timeout(Duration(minutes: 3))
 library;
 
 import 'dart:convert';
