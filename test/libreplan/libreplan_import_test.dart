@@ -119,7 +119,17 @@ void main() {
         ),
       );
 
-      expect(result.warnings, anyElement(contains('2 projecten')));
+      final multiWarning = result.warnings.firstWhere(
+        (w) => w.contains('2 projecten'),
+      );
+      // De waarschuwing mag geen keuzemogelijkheid suggereren die niet
+      // bestaat: er is geen projectkeuze-veld, de import neemt altijd het
+      // eerste project.
+      expect(multiWarning, isNot(contains('projectcode')));
+      expect(multiWarning, isNot(contains('Selecteer een specifiek project')));
+      // Hij moet wél eerlijk zeggen dat alleen het eerste is geïmporteerd.
+      expect(multiWarning, contains('alleen het eerste'));
+      expect(multiWarning, contains('Project A'));
       expect(result.slides, isNotEmpty);
     });
 

@@ -94,9 +94,9 @@ class LibreplanImporter {
           order = orders.first;
           if (orders.length > 1) {
             warnings.add(
-              '${orders.length} projecten gevonden, importeer het eerste '
-              '("${order.name}"). Selecteer een specifiek project via de '
-              'projectcode voor de andere.',
+              '${orders.length} projecten gevonden; alleen het eerste is '
+              'geïmporteerd ("${order.name}"). Een ander project kiezen kan '
+              'nog niet.',
             );
           }
         }
