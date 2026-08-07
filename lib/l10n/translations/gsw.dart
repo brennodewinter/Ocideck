@@ -4534,4 +4534,14 @@ const _dutchSourceAddGsw = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Zentriere',
+  'Getalnotatie': 'Zahleformat',
+  'Kolom naar links': 'Spalte nach links',
+  'Kolom naar rechts': 'Spalte nach rechts',
+  'Kolom rechts invoegen': 'Spalte rechts yfüege',
+  'Koprij': 'Chopfzyle',
+  'Links uitlijnen': 'Links uusrichte',
+  'Rechts uitlijnen': 'Rechts uusrichte',
+  'Rij onder invoegen': 'Zile unten yfüege',
+  'Splits tabel': 'Tabelle teile',
 };

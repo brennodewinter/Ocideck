@@ -12,6 +12,7 @@ import '../../state/deck_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../utils/bullet_fixes.dart';
+import '../../utils/table_pagination.dart';
 import '../../utils/title_contrast.dart';
 
 /// De ontsnappingskleppen bij een privacymelding, van klein naar groot.
@@ -211,6 +212,24 @@ List<SlideQualityAction> buildSlideQualityActions({
         icon: Icons.call_split,
         run: () {
           ref.read(deckProvider.notifier).splitSlide(index);
+          ref.read(editorProvider.notifier).select(index + 1);
+        },
+      ),
+    );
+  }
+
+  // Lange tabel: splits over meerdere dias. Alleen wanneer de tabel meer
+  // data-rijen heeft dan de drempel — anders is de knop dood.
+  if (issue.kind == SlideQualityIssueKind.tableDensityMinimum &&
+      slide != null &&
+      splitTableSlidePages(slide) != null) {
+    final index = issue.slideIndex;
+    actions.add(
+      SlideQualityAction(
+        label: l10n.d('Splits tabel'),
+        icon: Icons.call_split,
+        run: () {
+          ref.read(deckProvider.notifier).splitTableSlide(index);
           ref.read(editorProvider.notifier).select(index + 1);
         },
       ),

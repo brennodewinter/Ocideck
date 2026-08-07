@@ -41,6 +41,10 @@ dependencies:
   flutter_math_fork: ^0.7.4
   highlight: ^0.7.0
   wakelock_plus: ^1.5.2
+  # Taalbewuste getalnotatie in tabelcellen (render-time, opt-in per kolom).
+  # Transitief al aanwezig via flutter_localizations; hier expliciet gemaakt
+  # zodat NumberFormat direct importeerbaar is.
+  intl: ^0.20.2
   # Vendored fork: adds native macOS window-geometry/fullscreen methods that
   # the published 0.3.0 dropped, needed for the dual-screen presenter mode.
   desktop_multi_window:

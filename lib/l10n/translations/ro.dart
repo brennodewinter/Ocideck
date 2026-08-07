@@ -4572,4 +4572,14 @@ const _dutchSourceAddRo = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Centrează',
+  'Getalnotatie': 'Format numere',
+  'Kolom naar links': 'Coloană la stânga',
+  'Kolom naar rechts': 'Coloană la dreapta',
+  'Kolom rechts invoegen': 'Inserează coloană la dreapta',
+  'Koprij': 'Rând antet',
+  'Links uitlijnen': 'Aliniază la stânga',
+  'Rechts uitlijnen': 'Aliniază la dreapta',
+  'Rij onder invoegen': 'Inserează rând dedesubt',
+  'Splits tabel': 'Împarte tabelul',
 };

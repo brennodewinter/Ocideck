@@ -4546,4 +4546,14 @@ const _dutchSourceAddLt = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Centruoti',
+  'Getalnotatie': 'Skaičių formatas',
+  'Kolom naar links': 'Stulpelis kairėn',
+  'Kolom naar rechts': 'Stulpelis dešinėn',
+  'Kolom rechts invoegen': 'Įterpti stulpelį dešinėje',
+  'Koprij': 'Antraštės eilutė',
+  'Links uitlijnen': 'Lygiuoti kairėje',
+  'Rechts uitlijnen': 'Lygiuoti dešinėje',
+  'Rij onder invoegen': 'Įterpti eilutę žemiau',
+  'Splits tabel': 'Padalinti lentelę',
 };

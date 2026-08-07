@@ -122,7 +122,12 @@ const Map<String, int> fileSizeBaseline = {
   // copyWith-doorvoer. Pure dataplumbing van een nieuw formaatveld; er valt geen
   // gedrag uit te tillen naar een part.
   // +9 (#1162): de `menu`-enumwaarde met haar doc + de slideTypeMeta-entry.
-  'lib/models/slide.dart': 1036,
+  // +18: de `TableAlign`-enum + het `tableColumnAlignments`-veld met doc,
+  // constructor-, duplicate- en copyWith-doorvoer. Pure dataplumbing van een
+  // nieuw formaatveld (GFM-scheidingsrij-uitlijning); er valt geen gedrag
+  // uit te tillen naar een part.
+  // +12: tableNumberColumns-veld + doc + constructor/duplicate/copyWith-doorvoer.
+  'lib/models/slide.dart': 1066,
   // Procesverbetering module card / reveal wiring in the shell.
   // +1 (#1037): the url_launcher_util import so the play-only landing can open
   // slide links in the browser, like every other presentation surface. The file
@@ -271,7 +276,13 @@ const Map<String, int> classSizeBaseline = {
   // + `ocideck_next`) in `_parseBlockDirectives` — typedef-veld, init en twee
   // parse-takken per veld. Onherleidbare parse-plumbing; de serialisatie zelf zit
   // al in de top-level `_writeSlideDirectives` en telt niet mee.
-  'lib/services/markdown_service.dart#MarkdownService': 2438,
+  // +15: `_decodeTableWithAlignment` (finding.dart) + `tableDecoded`/
+  // `tableAlignments` (parse.dart) + `_writeTable` alignments-parameter
+  // (markdown_service.dart). Onherleidbare codec-plumbing voor de nieuwe
+  // `tableColumnAlignments`-veld; de logica zelf staat in
+  // `markdown_table_codec.dart` en telt niet mee.
+  // +14: ocideck_table_num_cols directive schrijven + _parseNumCols-lezen.
+  'lib/services/markdown_service.dart#MarkdownService': 2467,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2145,
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
@@ -295,14 +306,15 @@ const Map<String, int> classSizeBaseline = {
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1328, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
+      1342, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
   // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
   // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
   // klasse. +16 (#1162): de even dunne setMenuBlockTarget-delegator (berekening
   // in slidesWithMenuTarget, menu_blocks.dart). +22 (#1235): revertSlidesById —
   // zet meerdere dia's in één _mutate terug (één undo-stap voor session-data-
   // edits na een presentatie). Onherleidbaar: de coalescing/undo-logica zit in
-  // _mutate, dus de batch-revert hoort bij de notifier.
+  // _mutate, dus de batch-revert hoort bij de notifier. +14: splitTableSlide —
+  // dezelfde dunne delegator als splitSlide, maar dan voor tabellen.
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
   // +10 (#1162): de `menu`-tak in de drie kwaliteitsswitches (contrast, alt-tekst,
   // ontbrekend bestand) + de dichtheidsswitch — menublokken zijn een raster, geen

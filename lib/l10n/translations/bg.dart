@@ -4572,4 +4572,14 @@ const _dutchSourceAddBg = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Центрирай',
+  'Getalnotatie': 'Формат на числата',
+  'Kolom naar links': 'Колона наляво',
+  'Kolom naar rechts': 'Колона надясно',
+  'Kolom rechts invoegen': 'Вмъкни колона надясно',
+  'Koprij': 'Заглавен ред',
+  'Links uitlijnen': 'Подравни наляво',
+  'Rechts uitlijnen': 'Подравни надясно',
+  'Rij onder invoegen': 'Вмъкни ред отдолу',
+  'Splits tabel': 'Раздели таблица',
 };

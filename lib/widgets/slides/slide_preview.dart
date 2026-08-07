@@ -92,6 +92,7 @@ import '../privacy_badge.dart' show privacyKatSvg;
 import '../../utils/inline_markdown.dart';
 import 'inline_markdown.dart';
 import 'image_zoom_dialog.dart';
+import '../../utils/table_number_format.dart';
 
 // Slide previews split by type; parts share this library's private scope.
 part 'previews/preview_scaffold.dart';
@@ -826,6 +827,7 @@ class SlidePreviewWidget extends StatelessWidget {
           w: w,
           font: fontFamily,
           profile: themeProfile,
+          reportLanguage: reportLanguage,
         );
       case SlideType.freeMarkdown:
         return _MarkdownPreview(

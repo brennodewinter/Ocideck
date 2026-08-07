@@ -4519,4 +4519,14 @@ const _dutchSourceAddEt = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Keskenda',
+  'Getalnotatie': 'Arvuvorming',
+  'Kolom naar links': 'Veerg vasakule',
+  'Kolom naar rechts': 'Veerg paremale',
+  'Kolom rechts invoegen': 'Lisa veerg paremale',
+  'Koprij': 'Päiserida',
+  'Links uitlijnen': 'Joonda vasakule',
+  'Rechts uitlijnen': 'Joonda paremale',
+  'Rij onder invoegen': 'Lisa rida allapoole',
+  'Splits tabel': 'Jaga tabel',
 };

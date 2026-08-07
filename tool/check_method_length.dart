@@ -36,9 +36,11 @@ const Map<String, int> methodLengthBaseline = {
   // +8 (#1162): de twee navigatie-takken (`ocideck_slide_anchor`/`ocideck_next`),
   // al gehalveerd via de top-level `_firstDirective`-helper.
   'lib/services/markdown_parse/markdown_service_parse_directives.dart::_MarkdownParseDirectives._parseBlockDirectives':
-      183,
+      188,
   // +2 (#1162): `anchor`/`nextAnchor` doorgeven aan de Slide-constructor.
-  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 162,
+  // +15: tableDecoded/tableAlignments voor GFM-scheidingsrij-uitlijning.
+  // +3: tableNumberColumns doorgeven aan Slide.
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 180,
   // Procesverbetering SVG export for statistical chart types.
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,
@@ -59,12 +61,19 @@ const Map<String, int> methodLengthBaseline = {
   // valt niet zinvol uit een type→widget-switch te tillen. +1: de
   // onMenuBlockTap-doorgifte voor de klik-om-te-springen.
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
-      162,
+      163,
   // +2 (#1238): ganttScale/ganttSections in copyWith — pure plumbing.
-  'lib/models/slide.dart::Slide.copyWith': 152,
+  // +3: tableColumnAlignments-parameter voor GFM-uitlijning.
+  // +2: tableNumberColumns-parameter.
+  'lib/models/slide.dart::Slide.copyWith': 157,
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
-      183,
+      188,
+  // +2: reportLanguage-parameter + getalnotatie in cell().
+  'lib/widgets/slides/previews/table_preview.dart::_TablePreview.build': 152,
+  // +8: tabel-split actie bij tableDensityMinimum-warning.
+  'lib/widgets/panels/slide_quality_actions.dart::buildSlideQualityActions':
+      158,
 };
 
 bool _isTranslationData(String path) =>

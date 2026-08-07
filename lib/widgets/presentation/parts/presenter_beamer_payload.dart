@@ -60,3 +60,19 @@ String buildBeamerMarkdown({
   ),
   inlineChartData: true,
 );
+
+/// Mermaid-kijkstand delen met het publieksvenster. Hoort bij [_sendMermaidView]
+/// hierboven; als extension op [_FullscreenPresenterState] omdat het de
+/// presentertoestand leest die in het hoofdbestand leeft.
+extension _PresenterMermaidBroadcast on _FullscreenPresenterState {
+  /// Listener op [_mermaidView]: deelt de kijkstand met het publieksvenster en
+  /// onthoudt de laatst verzonden waarde voor de throttle. Zie [_sendMermaidView].
+  void _broadcastMermaidView() {
+    _lastSentMermaidView = _sendMermaidView(
+      audience: widget.audience,
+      controller: _mermaidView,
+      index: _index,
+      lastSent: _lastSentMermaidView,
+    );
+  }
+}

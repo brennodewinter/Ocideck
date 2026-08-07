@@ -503,6 +503,95 @@ See `docs/FILE_FORMAT.md` §10 and `docs/USER_GUIDE.md` (Markdown mode).
 This service is heavily covered by the round-trip tests — treat it as the
 source-of-truth for the file format and keep `FILE_FORMAT.md` in sync.
 
+## Document mode
+
+OciDeck edits a second *kind* of `.md` next to the Marp deck: a **flowing
+Markdown document** — a report, a memo, a note. Where a `Deck` deconstructs its
+Markdown into typed slides and writes them back (losing whatever it cannot
+represent), a document *is* its source. The full design lives in
+[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md); this section is the
+part that has shipped.
+
+**The Document abstraction.** `models/markdown_document.dart`
+(`MarkdownDocument`) is the document counterpart of `Deck`. It is built on
+`MarkdownSourceDocument`, a byte-faithful source model: `toMarkdown()` returns
+exactly the bytes that were read — no `marp:` key, no slide separators, no
+normalisation of line endings or a missing trailing newline. The kind is not a
+key on disk. `models/markdown_kind.dart` (`MarkdownKind`: `presentation` |
+`document`) is derived from the **absence of `marp: true`** in the front matter,
+read through the same `MarkdownService.sniffFrontmatter` the deck open path
+already uses (`file_service.dart` refuses a non-Marp `.md` for a deck with
+`OpenFailure.notPresentation`; document mode is the path that accepts it). No
+second detection mechanism is introduced.
+
+**The seam is at tab level.** `state/tabs_provider_tab_info.dart` makes
+`TabContent` a sealed type — `DeckTabContent | DocumentTabContent` — so every
+place that must handle both kinds does so exhaustively. The shared tab fields
+(id, origin, collaboration session, dirty/open state) stay on `TabInfo`; only
+the notifier differs. A `DeckTabContent` carries the heavy `DeckNotifier` plus
+the per-slide `EditorNotifier`; a `DocumentTabContent` carries a single
+`DocumentNotifier` and no per-slide editor, because a document is the source
+itself. Deck-only paths (per-slide edits, git, S3, import) reach a document tab
+never: the compat getters (`deckNotifier`, `editorNotifier`) throw for a
+document tab, while the tab-wide loops (memory sweep, autosave) read the
+`…OrNull` getters that quietly skip it.
+
+**The export/conversion bridge.** A document must leave the app through the
+*same* privacy boundary as a deck. The load-bearing fact (DOCUMENT_MODE.md
+§11.1): OciWacht's `PrivacyProjection` scans and redacts **typed `Slide`
+fields**, not flat text — so before a document can be projected it has to be
+deconstructed into a deck. `services/document_deck_bridge.dart`
+(`DocumentDeckBridge.documentToDeck`) does that losslessly: it walks the body
+line by line and puts every non-empty line into a scanned, typed field. A
+heading (`#`..`######`) closes the running flow and starts a new
+`freeMarkdown` slide whose body begins with the heading verbatim — one slide
+per heading section, so the scanner's slide-wide escalation stays section-local
+and the heading level survives a round-trip. A ` ```chart ` fence becomes a
+separate `chart` slide (its bare inner spec), a GFM pipe table becomes a
+`table` slide with filled `tableRows`, and any other fence goes verbatim into
+the flow to be scanned as text. It builds slides directly rather than via
+`_inferSlideType`, which would drop a heading-led section into an empty
+`bullets` slide — precisely the dominant document shape (§11.3).
+
+```mermaid
+flowchart TB
+    doc["MarkdownDocument<br/>flowing .md, byte-faithful source"]
+    hyd["hydrateDocumentChartData<br/>folds external data/*.json inline<br/>containment-guarded"]
+    bridge["DocumentDeckBridge.documentToDeck<br/>heading section to freeMarkdown<br/>table to table slide · chart to chart slide"]
+    proj{{"buildExportBundle to AudienceDeck<br/>the shared privacy projection"}}
+    body["deckToDocumentMarkdown<br/>re-sews the projected slides into one flow"]
+    mdout["projected .md"]
+    htmlout["one continuous .html<br/>MarpHtmlService.build continuous:true"]
+
+    doc --> hyd --> bridge --> proj
+    proj --> body
+    body --> mdout
+    body --> htmlout
+```
+
+`services/document_chart_hydration.dart` (`hydrateDocumentChartData`) runs
+first: it folds each ` ```chart ` block's external `source: data/<name>.json`
+numbers back inline so the text carries the figures before the scan, under the
+same containment guard as the slide-side hydration (`resolveProjectRelative`
+refuses `../` and absolute paths; a missing or refused file leaves the block
+untouched). `services/document_export_service.dart` composes the two:
+`buildDocumentExportBundle` hydrates, deconstructs, and runs the deck through
+`buildExportBundle`, so from the bundle onward no output path touches the raw
+source — the redacted body comes out of `bundle.audience.deck`.
+`projectedDocumentBody` reads that back defensively over *every* projected slide
+(never `.single`) and `deckToDocumentMarkdown` re-sews them into one flowing
+document; `writeDocumentExport` is the audience surface that writes either the
+`.md` or one continuous HTML document. The HTML uses `MarpHtmlService.build`
+with `continuous: true`, which renders the body as one `<section class=
+"document">` flow instead of separate 16:9 slides, through the same inert
+`<script type="text/markdown">` gate as the deck path.
+
+`documentToDeckMarkdown` and `deckToDocumentMarkdown` are also the two
+directions of the **presentation ⇄ document** conversion (§11.3): the first
+serialises the deconstructed slides with the ordinary deck generator into a
+valid presentation `.md`; the second is the lossy-on-structure reverse that
+turns a deck's slide bodies back into one flowing document.
+
 ## The two rendering worlds
 
 ```mermaid

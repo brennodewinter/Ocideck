@@ -4566,4 +4566,14 @@ const _dutchSourceAddDe = {
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Zentrieren',
+  'Getalnotatie': 'Zahlenformat',
+  'Kolom naar links': 'Spalte nach links',
+  'Kolom naar rechts': 'Spalte nach rechts',
+  'Kolom rechts invoegen': 'Spalte rechts einfügen',
+  'Koprij': 'Kopfzeile',
+  'Links uitlijnen': 'Links ausrichten',
+  'Rechts uitlijnen': 'Rechts ausrichten',
+  'Rij onder invoegen': 'Zeile unten einfügen',
+  'Splits tabel': 'Tabelle aufteilen',
 };

@@ -5,7 +5,7 @@
   "name": "ocideck-0.3.6+13",
   "documentNamespace": "https://ocideck.app/spdx/6e339dcd-18f2-5aa5-87e4-1b9610c8ce0c",
   "creationInfo": {
-    "created": "2026-08-06T22:55:20.758272Z",
+    "created": "2026-08-06T23:27:33.589539Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -5065,6 +5065,11 @@
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-73-image"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-75-intl"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",

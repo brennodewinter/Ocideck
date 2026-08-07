@@ -4524,4 +4524,14 @@ const _dutchSourceAddSv = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Centrera',
+  'Getalnotatie': 'Talformat',
+  'Kolom naar links': 'Kolumn åt vänster',
+  'Kolom naar rechts': 'Kolumn åt höger',
+  'Kolom rechts invoegen': 'Infoga kolumn till höger',
+  'Koprij': 'Rubrikrad',
+  'Links uitlijnen': 'Vänsterjustera',
+  'Rechts uitlijnen': 'Högerjustera',
+  'Rij onder invoegen': 'Infoga rad under',
+  'Splits tabel': 'Dela tabell',
 };

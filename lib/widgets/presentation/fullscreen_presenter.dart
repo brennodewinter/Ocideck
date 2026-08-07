@@ -38,6 +38,7 @@ import '../../utils/log.dart';
 import '../../utils/page_scoped_notes.dart';
 import '../../utils/project_path.dart';
 import '../../utils/shortcut_label.dart';
+import '../../utils/table_cell_navigation.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/inline_markdown.dart';
@@ -838,18 +839,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           return null;
         });
     if (indexChanged) _pushInk();
-  }
-
-  /// Listener op [_mermaidView]: deelt de kijkstand met het publieksvenster en
-  /// onthoudt de laatst verzonden waarde voor de throttle. Zie
-  /// [_sendMermaidView].
-  void _broadcastMermaidView() {
-    _lastSentMermaidView = _sendMermaidView(
-      audience: widget.audience,
-      controller: _mermaidView,
-      index: _index,
-      lastSent: _lastSentMermaidView,
-    );
   }
 
   // ── Vraag-slides ───────────────────────────────────────────────────────────

@@ -4517,4 +4517,14 @@ const _dutchSourceAddCs = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Na střed',
+  'Getalnotatie': 'Formát čísel',
+  'Kolom naar links': 'Sloupec doleva',
+  'Kolom naar rechts': 'Sloupec doprava',
+  'Kolom rechts invoegen': 'Vložit sloupec vpravo',
+  'Koprij': 'Řádek záhlaví',
+  'Links uitlijnen': 'Zarovnat vlevo',
+  'Rechts uitlijnen': 'Zarovnat vpravo',
+  'Rij onder invoegen': 'Vložit řádek pod',
+  'Splits tabel': 'Rozdělit tabulku',
 };

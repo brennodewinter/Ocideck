@@ -4583,4 +4583,14 @@ const _dutchSourceAddPt = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Centralizar',
+  'Getalnotatie': 'Formato numérico',
+  'Kolom naar links': 'Coluna para a esquerda',
+  'Kolom naar rechts': 'Coluna para a direita',
+  'Kolom rechts invoegen': 'Inserir coluna à direita',
+  'Koprij': 'Linha de cabeçalho',
+  'Links uitlijnen': 'Alinhar à esquerda',
+  'Rechts uitlijnen': 'Alinhar à direita',
+  'Rij onder invoegen': 'Inserir linha abaixo',
+  'Splits tabel': 'Dividir tabela',
 };

@@ -4543,4 +4543,14 @@ const _dutchSourceAddLa = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Centrare',
+  'Getalnotatie': 'Forma numerorum',
+  'Kolom naar links': 'Columna ad sinistram',
+  'Kolom naar rechts': 'Columna ad dextram',
+  'Kolom rechts invoegen': 'Columnam ad dextram inserere',
+  'Koprij': 'Caput tabulae',
+  'Links uitlijnen': 'Ad sinistram ordinare',
+  'Rechts uitlijnen': 'Ad dextram ordinare',
+  'Rij onder invoegen': 'Row subter inserere',
+  'Splits tabel': 'Tabulam dividere',
 };

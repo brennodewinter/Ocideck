@@ -104,6 +104,7 @@ same answer `make licenses` and the SBOM give.
 | `webview_flutter`, `webview_flutter_web` | The HTML/Mermaid preview surface | BSD-3-Clause |
 | `web` | Browser interop in the web build | BSD-3-Clause |
 | `wakelock_plus` | Keeps the screen awake while presenting | BSD-3-Clause |
+| `intl` | Locale-aware number formatting in table cells | BSD-3-Clause |
 | `fl_chart` | Chart slides | MIT |
 | `cupertino_icons` | Icon set | MIT |
 | `desktop_multi_window` | The second (audience) window — vendored fork, see above | Apache-2.0 |

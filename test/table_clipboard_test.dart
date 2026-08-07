@@ -105,4 +105,34 @@ void main() {
       expect(parseClipboardTable('   '), isNull);
     });
   });
+
+  group('encodeClipboardTable', () {
+    test('produces TSV that round-trips through parseClipboardTable', () {
+      final rows = [
+        ['Naam', 'Score'],
+        ['Jan', '8'],
+        ['Piet', '9'],
+      ];
+      final tsv = encodeClipboardTable(rows);
+      expect(parseClipboardTable(tsv), rows);
+    });
+
+    test('quotes cells with tabs, newlines or quotes', () {
+      final rows = [
+        ['regel 1\nregel 2', 'met\ttab'],
+        ['a "quote"', 'gewoon'],
+      ];
+      final tsv = encodeClipboardTable(rows);
+      expect(parseClipboardTable(tsv), rows);
+    });
+
+    test('a single cell with no special chars is plain', () {
+      expect(
+        encodeClipboardTable([
+          ['hallo'],
+        ]),
+        'hallo',
+      );
+    });
+  });
 }

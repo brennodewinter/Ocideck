@@ -4587,4 +4587,14 @@ const _dutchSourceAddMt = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Iċċentra',
+  'Getalnotatie': 'Format tan-numri',
+  'Kolom naar links': 'Kolonna xellug',
+  'Kolom naar rechts': 'Kolonna lemin',
+  'Kolom rechts invoegen': 'Daħħal kolonna lemin',
+  'Koprij': 'Riga ta\' l-intestatura',
+  'Links uitlijnen': 'Allinea xellug',
+  'Rechts uitlijnen': 'Allinea lemin',
+  'Rij onder invoegen': 'Daħħal riga taħt',
+  'Splits tabel': 'Qasam it-tabella',
 };

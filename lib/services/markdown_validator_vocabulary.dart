@@ -118,4 +118,6 @@ const _supportedCommentDirectives = {
   // sprong-uit naar wijst, en de per-dia sprong-uit zelf.
   'ocideck_slide_anchor',
   'ocideck_next',
+  // Taalbewuste getalnotatie in tabelcellen (render-time, opt-in per kolom).
+  'ocideck_table_num_cols',
 };

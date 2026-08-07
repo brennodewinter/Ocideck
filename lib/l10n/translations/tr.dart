@@ -4517,4 +4517,14 @@ const _dutchSourceAddTr = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Ortala',
+  'Getalnotatie': 'Sayı biçimi',
+  'Kolom naar links': 'Sütun sola',
+  'Kolom naar rechts': 'Sütun sağa',
+  'Kolom rechts invoegen': 'Sağa sütun ekle',
+  'Koprij': 'Başlık satırı',
+  'Links uitlijnen': 'Sola hizala',
+  'Rechts uitlijnen': 'Sağa hizala',
+  'Rij onder invoegen': 'Altına satır ekle',
+  'Splits tabel': 'Tabloyu böl',
 };

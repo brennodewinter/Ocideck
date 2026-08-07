@@ -4527,4 +4527,14 @@ const _dutchSourceAddDa = <String, String>{
   'https://libreplan.example.org/libreplan/':
       'https://libreplan.example.org/libreplan/',
   'wsreader': 'wsreader',
+  'Centreren': 'Centrer',
+  'Getalnotatie': 'Talformat',
+  'Kolom naar links': 'Kolonne til venstre',
+  'Kolom naar rechts': 'Kolonne til højre',
+  'Kolom rechts invoegen': 'Indsæt kolonne til højre',
+  'Koprij': 'Overskriftsrække',
+  'Links uitlijnen': 'Venstrejuster',
+  'Rechts uitlijnen': 'Højrejuster',
+  'Rij onder invoegen': 'Indsæt række under',
+  'Splits tabel': 'Opdel tabel',
 };
