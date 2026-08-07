@@ -44,13 +44,29 @@ void main() {
     });
   });
 
-  group('translate_docs — doeltalen', () {
-    test('bevat elke app-taal behalve de Engelse basis', () {
-      final langs = targetLanguages();
-      expect(langs, isNot(contains(DocumentationService.baseLanguage)));
-      expect(langs, contains('nl')); // Nederlands is een doeltaal, geen basis
-      expect(langs, contains('de'));
-      expect(langs.length, greaterThan(20));
+  group('translate_docs — verscheepte doctalen', () {
+    test(
+      'is een korte, expliciete lijst met de Engelse basis buiten beeld',
+      () {
+        // OciDeck verscheept docs in Engels (basis) + Nederlands; andere talen
+        // vallen in de lezer terug op de Engelse basis. Dus géén lange lijst.
+        expect(shippedDocLanguages, contains('nl'));
+        expect(
+          shippedDocLanguages,
+          isNot(contains(DocumentationService.baseLanguage)),
+        );
+      },
+    );
+  });
+
+  group('translate_docs — variantconsistentie', () {
+    test('de verscheepte docvarianten in deze repo zijn consistent', () {
+      // Draait de echte poortlogica tegen de repo (cwd = pakketroot): elke
+      // verscheepte variant bestaat en is geregistreerd, er staat geen variant
+      // voor een niet-verscheepte taal, geen registratie is verweesd, en geen
+      // uitgesloten document is vertaald. Dit is óók de test die de poort
+      // beschermt: gaat hij rood, dan zou `make translate-docs-check` dat ook.
+      expect(docVariantProblems(), isEmpty);
     });
   });
 

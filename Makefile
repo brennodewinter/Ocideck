@@ -1082,7 +1082,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid
+STATIC_GATES := format-check analyze check-toolchain check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid translate-docs-check
 
 check: $(STATIC_GATES) coverage coverage-per-file
 	@echo "== OciDeck check complete =="

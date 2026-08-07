@@ -1,17 +1,22 @@
 // Generates machine-translated `.<lang>.md` variants of the bundled, user-facing
-// documentation, so a reader whose interface is not English gets the manual in
-// their own language instead of the English base (#1181).
+// documentation for the languages OciDeck ships docs in (#1181).
 //
-// The app already resolves `docs/NAME.<lang>.md` when it is bundled and falls
-// back to the English base otherwise (see [DocumentationService]); this tool
-// produces those variants. It does NOT ship a translation engine of its own —
-// OciDeck is local-first and network-free at runtime, so translation is a
-// build-time step with a *pluggable* engine you point at from the command line.
-// The generated files are committed artefacts, like the l10n overlays.
+// OciDeck's rule is "content is Dutch + English, the interface is every
+// language": the docs are authored in English and shipped in Dutch, and a reader
+// in any other interface language gets the English base with a "you are reading
+// the source" notice. So this tool targets a short, explicit set
+// ([shippedDocLanguages]), not all 31 languages. The app resolves
+// `docs/NAME.<lang>.md` when it is bundled and falls back to the English base
+// otherwise (see [DocumentationService]).
+//
+// It does NOT ship a translation engine of its own — OciDeck is local-first and
+// network-free at runtime, so translation is a build-time step with a *pluggable*
+// engine you point at from the command line. The generated files are committed
+// artefacts, like the l10n overlays.
 //
 //   dart run tool/translate_docs.dart --translator 'my-translator'   # generate
 //   dart run tool/translate_docs.dart --stub                         # identity, for tests/dry-runs
-//   dart run tool/translate_docs.dart --check                        # verify variants exist + are registered
+//   dart run tool/translate_docs.dart --check                        # verify shipped variants are consistent + registered
 //
 // The `--translator` command is run once per (document, language). The English
 // Markdown is written to its stdin; its stdout is taken as the translation. The
@@ -75,13 +80,18 @@ const Set<String> excludedDocs = {'docs/PRIVACY.md', 'docs/SECURITY_DESIGN.md'};
 const String bannerSourceLine =
     'Machine translation — the English source document is authoritative.';
 
-/// The target language codes: every app language except the English base and —
-/// defensively — any code that is not a plain language (none today). Read from
-/// [kLanguageNames] so a new app language is picked up automatically, per the
-/// project's "don't hardcode the language list" rule. The registry is the same
-/// data `AppLocalizations.languageNames` exposes, minus the Flutter import.
-List<String> targetLanguages() =>
-    kLanguageNames.keys.where((c) => c != kDocsBaseLanguage).toList();
+/// The languages OciDeck ships translated documentation for, besides the English
+/// base (`docs/NAME.md`).
+///
+/// OciDeck's rule is "content is Dutch + English, the interface is every
+/// language": the bundled docs are authored in English and shipped in Dutch, and
+/// a reader in any of the other interface languages gets the English base with a
+/// "you are reading the source" notice (see `DocumentationService`). So this is a
+/// short, explicit list — not every interface language. To ship one more, add its
+/// code here and generate the variants with `make translate-docs`; every code
+/// must be a real interface language, which [_runCheck] verifies against
+/// [kLanguageNames]. The English base is implicit and never appears here.
+const List<String> shippedDocLanguages = ['nl'];
 
 /// `docs/USER_GUIDE.md` + `de` → `docs/USER_GUIDE.de.md`. Mirrors
 /// `DocumentationService._variantKey` so the app resolves exactly what this writes.
@@ -128,7 +138,14 @@ String registerVariants(
   return out.join('\n');
 }
 
-Future<int> main(List<String> args) async {
+// A returned int from `main` is ignored by the Dart VM — only `exit()` or
+// `exitCode` sets the process status. This wrapper propagates `_run`'s code so
+// the `--check` gate can actually fail CI (it silently exited 0 before).
+Future<void> main(List<String> args) async {
+  exitCode = await _run(args);
+}
+
+Future<int> _run(List<String> args) async {
   final stub = args.contains('--stub');
   final check = args.contains('--check');
   final translator = _optionValue(args, '--translator');
@@ -143,7 +160,7 @@ Future<int> main(List<String> args) async {
     return 2;
   }
 
-  final languages = targetLanguages();
+  final languages = shippedDocLanguages;
   Future<String> translate(String text, String lang) async =>
       stub ? text : _runTranslator(translator!, text, lang);
 
@@ -183,50 +200,109 @@ Future<int> main(List<String> args) async {
   return 0;
 }
 
-/// Verifies every expected variant exists and is registered, and that no
-/// excluded document was translated. Returns a non-zero code listing gaps.
-int _runCheck() {
-  final languages = targetLanguages();
-  final pubspec = File('pubspec.yaml').readAsStringSync();
-  final missingFiles = <String>[];
-  final missingPubspec = <String>[];
+/// The `docs/NAME.<lang>.md` variant languages that actually sit on disk for a
+/// translatable [baseDoc] (`docs/NAME.md`), whatever their language.
+List<String> _variantLangsOnDisk(String baseDoc) {
+  const prefix = 'docs/';
+  final name = baseDoc.substring(prefix.length, baseDoc.length - '.md'.length);
+  final re = RegExp('^${RegExp.escape(name)}\\.([a-z]{2,3})\\.md\$');
+  final dir = Directory(prefix);
+  if (!dir.existsSync()) return const [];
+  return [
+    for (final entity in dir.listSync())
+      if (entity is File)
+        if (re.firstMatch(entity.uri.pathSegments.last) case final m?)
+          m.group(1)!,
+  ];
+}
+
+/// Consistency problems with the shipped documentation variants (empty = OK).
+///
+/// The gate no longer demands a variant in every interface language — OciDeck
+/// ships docs in English + Dutch (see [shippedDocLanguages]). It instead enforces
+/// that what is shipped is coherent: (1) every [shippedDocLanguages] variant
+/// exists and is registered; (2) no variant file sits on disk for a language we
+/// do not ship; (3) no `pubspec.yaml` registration is dangling (file gone);
+/// (4) no excluded document was translated. Public so a test can assert the repo
+/// stays consistent.
+List<String> docVariantProblems() {
+  final problems = <String>[];
+  final shipped = shippedDocLanguages;
+
+  final unknown = shipped.where((c) => !kLanguageNames.containsKey(c)).toList();
+  if (unknown.isNotEmpty) {
+    problems.add(
+      'shippedDocLanguages contains unknown language code(s): '
+      '${unknown.join(', ')}',
+    );
+  }
+
+  final pubspecLines = File('pubspec.yaml').readAsLinesSync();
+  bool registered(String path) =>
+      pubspecLines.any((l) => l.trim() == '- $path');
+
   for (final doc in translatableDocs) {
-    for (final lang in languages) {
+    // (1) every shipped variant must exist and be registered.
+    for (final lang in shipped) {
       final variant = variantPath(doc, lang);
-      if (!File(variant).existsSync()) missingFiles.add(variant);
-      if (!pubspec.contains('- $variant')) missingPubspec.add(variant);
+      if (!File(variant).existsSync()) {
+        problems.add(
+          'missing shipped variant $variant (run `make translate-docs`)',
+        );
+      } else if (!registered(variant)) {
+        problems.add(
+          'shipped variant not registered in pubspec.yaml: $variant',
+        );
+      }
+    }
+    // (2) a variant on disk for a language we do not ship is drift.
+    for (final lang in _variantLangsOnDisk(doc)) {
+      if (lang == kDocsBaseLanguage || shipped.contains(lang)) continue;
+      problems.add(
+        'untracked variant ${variantPath(doc, lang)}: add "$lang" to '
+        'shippedDocLanguages or remove the file',
+      );
     }
   }
-  final leakedExcluded = [
-    for (final doc in excludedDocs)
-      for (final lang in languages)
-        if (File(variantPath(doc, lang)).existsSync()) variantPath(doc, lang),
-  ];
-  if (missingFiles.isEmpty &&
-      missingPubspec.isEmpty &&
-      leakedExcluded.isEmpty) {
+
+  // (3) a `- docs/NAME.<lang>.md` registration whose file is gone.
+  final regLine = RegExp(r'^\s*-\s+(docs/.+?)\.([a-z]{2,3})\.md\s*$');
+  for (final line in pubspecLines) {
+    if (regLine.firstMatch(line) case final m?) {
+      final base = '${m.group(1)}.md';
+      final path = '${m.group(1)}.${m.group(2)}.md';
+      if (translatableDocs.contains(base) && !File(path).existsSync()) {
+        problems.add('registered in pubspec.yaml but missing on disk: $path');
+      }
+    }
+  }
+
+  // (4) excluded documents must never carry a translation.
+  for (final doc in excludedDocs) {
+    for (final lang in _variantLangsOnDisk(doc)) {
+      problems.add(
+        'excluded document was translated (remove): ${variantPath(doc, lang)}',
+      );
+    }
+  }
+
+  return problems;
+}
+
+/// Runs [docVariantProblems] and reports; non-zero (listing the problems) on any
+/// gap so the gate actually fails — `main` propagates this exit code.
+int _runCheck() {
+  final problems = docVariantProblems();
+  if (problems.isEmpty) {
     stdout.writeln(
-      'translate_docs --check: all variants present and registered.',
+      'translate_docs --check: shipped doc variants '
+      '(${shippedDocLanguages.join(', ')}) are consistent and registered.',
     );
     return 0;
   }
-  if (missingFiles.isNotEmpty) {
-    stderr.writeln(
-      'Missing variant files (${missingFiles.length}); run '
-      'translate_docs with a --translator. e.g. ${missingFiles.first}',
-    );
-  }
-  if (missingPubspec.isNotEmpty) {
-    stderr.writeln(
-      'Variants not registered in pubspec.yaml '
-      '(${missingPubspec.length}).',
-    );
-  }
-  if (leakedExcluded.isNotEmpty) {
-    stderr.writeln(
-      'Excluded documents were translated (remove): '
-      '${leakedExcluded.join(', ')}',
-    );
+  stderr.writeln('translate_docs --check found ${problems.length} problem(s):');
+  for (final problem in problems) {
+    stderr.writeln('  - $problem');
   }
   return 1;
 }
