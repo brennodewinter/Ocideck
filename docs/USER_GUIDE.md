@@ -4215,7 +4215,11 @@ your source. The export dialog asks two things:
 - **Which format** — **Markdown (`.md`)** is a redacted copy of the plain text
   that opens in any Markdown reader; **HTML** is one self-contained, accessible
   HTML file that opens in any browser without internet, with its tables, maths,
-  Mermaid diagrams and charts rendered in place.
+  Mermaid diagrams and charts rendered in place; **LaTeX (`.tex`)** is a LaTeX
+  `article` document — maths (`$...$` / `$$...$$`) passes through natively, and
+  images are referenced by relative path (keep them next to the `.tex`). Compile
+  with `pdflatex` or `xelatex` using a standard TeX Live installation. *(Added
+  2026-08-07.)*
 
 There is no built-in PDF button. For a **PDF**, open the exported HTML and print
 it from your browser (*Save as PDF*). OciDeck makes no promise about the
