@@ -477,14 +477,13 @@ jobs:
     name: Release publiceren
     needs: [web, linux, macos, windows-ophalen]
     runs-on: docker
+    # Voorgebakken CI-image i.p.v. kaal ubuntu + per-run apt-get: node/git/curl/
+    # ca-certificates/jq zitten er al in (zie .forgejo/ci-image/Dockerfile) en het
+    # image staat door de bouw-jobs al warm op de runner. #11 van het
+    # releaseketen-verhardingsplan.
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.44.8
     steps:
-      - name: Gereedschap installeren
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends nodejs git curl ca-certificates jq
-
       - uses: actions/checkout@v4
 
       # Downloaden naar `dist`, niet `assets`: de checkout hierboven brengt de
@@ -628,8 +627,10 @@ jobs:
     # (#1227), niet via deze cask.
     if: ${{ !contains(github.ref_name, '-') }}
     runs-on: docker
+    # Voorgebakken CI-image i.p.v. kaal ubuntu + per-run apt-get: node/git/curl/
+    # ca-certificates zitten er al in. #11 van het releaseketen-verhardingsplan.
     container:
-      image: ubuntu:24.04
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.44.8
     env:
       HOMEBREW_TAP_REPOSITORY: ${{ secrets.HOMEBREW_TAP_REPOSITORY }}
       HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
@@ -664,16 +665,9 @@ jobs:
             } >> "$GITHUB_STEP_SUMMARY"
           fi
 
-      # nodejs erbij: actions/checkout@v4 is een Node-actie en de kale
-      # ubuntu:24.04 heeft geen Node aan boord (net als 'Release publiceren' en
-      # 'Webversie live zetten'). Zonder deze regel faalt de checkout hieronder —
-      # dat brak de eerste echte cask-run (v0.3.1).
-      - name: Gereedschap installeren
-        if: steps.check.outputs.tap == 'true'
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends nodejs git curl ca-certificates
-
+      # actions/checkout@v4 is een Node-actie; het voorgebakken CI-image draagt
+      # node al (vroeger installeerde een aparte apt-get-stap dat op kaal ubuntu —
+      # zonder Node faalde de checkout, dat brak de eerste cask-run v0.3.1).
       - uses: actions/checkout@v4
         if: steps.check.outputs.tap == 'true'
 
