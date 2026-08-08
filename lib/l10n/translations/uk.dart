@@ -1790,6 +1790,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Pagina-einde': 'Розрив сторінки',
   'Stijl': 'Стиль',
   'Geen (platte tekst)': 'Немає (звичайний текст)',
   'Documentstijl': 'Стиль документа',

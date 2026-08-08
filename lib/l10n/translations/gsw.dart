@@ -1776,6 +1776,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Pagina-einde': 'Sytenumbruch',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Kes (reine Täxt)',
   'Documentstijl': 'Dokumäntstil',

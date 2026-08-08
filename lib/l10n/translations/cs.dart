@@ -1776,6 +1776,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Pagina-einde': 'Konec stránky',
   'Stijl': 'Styl',
   'Geen (platte tekst)': 'Žádné (prostý text)',
   'Documentstijl': 'Styl dokumentu',

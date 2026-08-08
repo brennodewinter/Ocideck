@@ -1764,6 +1764,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Pagina-einde': 'Leheküljepiir',
   'Stijl': 'Stiil',
   'Geen (platte tekst)': 'Puudub (lihttekst)',
   'Documentstijl': 'Dokumendi stiil',

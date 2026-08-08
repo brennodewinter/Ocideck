@@ -1800,6 +1800,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Pagina-einde': 'Αλλαγή σελίδας',
   'Stijl': 'Στυλ',
   'Geen (platte tekst)': 'Κανένα (απλό κείμενο)',
   'Documentstijl': 'Στυλ εγγράφου',

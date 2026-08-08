@@ -1789,6 +1789,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Pagina-einde': 'Interruptio paginae',
   'Stijl': 'Stilus',
   'Geen (platte tekst)': 'Nullum (textus simplex)',
   'Documentstijl': 'Stilus documenti',

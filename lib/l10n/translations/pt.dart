@@ -1802,6 +1802,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Pagina-einde': 'Quebra de página',
   'Stijl': 'Estilo',
   'Geen (platte tekst)': 'Nenhum (texto simples)',
   'Documentstijl': 'Estilo do documento',

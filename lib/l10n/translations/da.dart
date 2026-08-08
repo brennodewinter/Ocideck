@@ -1772,6 +1772,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Pagina-einde': 'Sideskift',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Ingen (almindelig tekst)',
   'Documentstijl': 'Dokumentstil',

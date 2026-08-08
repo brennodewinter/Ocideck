@@ -1785,6 +1785,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Pagina-einde': 'Podział strony',
   'Stijl': 'Styl',
   'Geen (platte tekst)': 'Brak (zwykły tekst)',
   'Documentstijl': 'Styl dokumentu',

@@ -1773,6 +1773,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Pagina-einde': 'Pemisah halaman',
   'Stijl': 'Gaya',
   'Geen (platte tekst)': 'Tidak ada (teks biasa)',
   'Documentstijl': 'Gaya dokumen',

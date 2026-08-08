@@ -728,6 +728,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Pagina-einde': 'Interruzione di pagina',
   'Stijl': 'Stile',
   'Geen (platte tekst)': 'Nessuno (testo semplice)',
   'Documentstijl': 'Stile del documento',

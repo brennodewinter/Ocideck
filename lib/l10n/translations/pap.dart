@@ -732,6 +732,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Pagina-einde': 'Salto di página',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Ningun (teksto simpel)',
   'Documentstijl': 'Stil di dokumento',

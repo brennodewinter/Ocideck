@@ -1780,6 +1780,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Pagina-einde': 'Puslapio lūžis',
   'Stijl': 'Stilius',
   'Geen (platte tekst)': 'Nėra (grynasis tekstas)',
   'Documentstijl': 'Dokumento stilius',

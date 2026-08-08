@@ -733,6 +733,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Pagina-einde': 'Sidebrek',
   'Stijl': 'Styl',
   'Geen (platte tekst)': 'Gjin (platte tekst)',
   'Documentstijl': 'Dokumintstyl',
