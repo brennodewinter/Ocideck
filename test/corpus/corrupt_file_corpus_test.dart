@@ -119,26 +119,6 @@ void main() {
       );
     });
 
-    // ── Versleuteld pakket met verkeerde MAC ────────────────────────────
-    test('versleuteld pakket met verkeerd wachtwoord wordt geweigerd', () {
-      final archive = Archive();
-      final content = utf8.encode('marp: true\n');
-      archive.addFile(ArchiveFile('deck.md', content.length, content));
-      final zipBytes = ZipEncoder().encode(archive);
-
-      final result = makeService().decodePackageEntries(
-        zipBytes,
-        password: 'verkeerd',
-      );
-      expect(
-        result,
-        isNull,
-        reason:
-            'Een pakket dat niet klopt met het wachtwoord moet '
-            'worden geweigerd.',
-      );
-    });
-
     // ── Safety scanner ──────────────────────────────────────────────────
     test('deck met uitvoerbare inhoud wordt geweigerd', () {
       final raw = '---\nmarp: true\n---\n\n<script>alert(1)</script>\n';

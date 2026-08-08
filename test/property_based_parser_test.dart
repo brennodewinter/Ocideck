@@ -84,9 +84,11 @@ void main() {
       for (var i = 0; i < 100; i++) {
         final depth = rng.nextInt(500);
         final json = '${'[' * depth}1${']' * depth}';
+        // jsonDecodeGuarded gooit FormatException boven de dieptelimiet —
+        // dat is graceful. Een StackOverflowError is dat niet.
         expect(
           () => jsonDecodeGuarded(json),
-          returnsNormally,
+          anyOf(returnsNormally, throwsA(isA<FormatException>())),
           reason: 'Diepte $depth',
         );
       }

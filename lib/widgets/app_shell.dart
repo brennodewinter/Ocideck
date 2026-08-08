@@ -575,8 +575,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
         ScaffoldMessenger.of(context),
         l10n,
         l10n.d(
-          'Het zegel van dit deck klopt niet meer met de inhoud — het is '
-          'bewerkt na het verzegelen.',
+          'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.',
         ),
       );
     });

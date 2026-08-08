@@ -142,6 +142,11 @@ const Map<String, int> fileSizeBaseline = {
   // uit te tillen naar een part.
   // +12: tableNumberColumns-veld + doc + constructor/duplicate/copyWith-doorvoer.
   'lib/models/slide.dart': 1066,
+  // +17 (#1355, #1360): SealTamperWarning-klasse + sealTamperWarningProvider
+  // voor de automatische zegelverificatie bij openen, en de diskFull-case in
+  // _packageOpenResult. Beide zijn tightly coupled aan de bestaande providers
+  // en _reportOpenOutcome in dit bestand — verplaatsen creëert indirectie.
+  'lib/state/tabs_provider.dart': 1017,
   // Procesverbetering module card / reveal wiring in the shell.
   // +1 (#1037): the url_launcher_util import so the play-only landing can open
   // slide links in the browser, like every other presentation surface. The file
@@ -267,7 +272,11 @@ const Map<String, int> classSizeBaseline = {
   // gebruikt `_advanceTo` en hoort dus in de state.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
       3349,
-  'lib/services/file_service.dart#FileService': 2747,
+  // +34 (#1350, #1351, #1355): truncatie-check in openDeckFromContent,
+  // versleutelde-zip-streaming via writeContent(capped), en automatische
+  // zegelverificatie bij openen. Security-fixes die in het open-pad landen
+  // — onherleidbaar aan dit chokepoint-bestand.
+  'lib/services/file_service.dart#FileService': 2781,
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on
   // this State via chart_preview_improvement.dart. Raising rather than a
