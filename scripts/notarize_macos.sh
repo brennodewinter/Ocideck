@@ -54,10 +54,12 @@ ZIP="$DIST_DIR/OciDeck.zip"
 
 SKIP_BUILD=0
 NO_PACKAGE=0
+PREFLIGHT=0
 for arg in "$@"; do
   case "$arg" in
     --skip-build) SKIP_BUILD=1 ;;
     --no-package) NO_PACKAGE=1 ;;
+    --preflight) PREFLIGHT=1 ;;
     *) echo "Onbekende optie: $arg" >&2; exit 2 ;;
   esac
 done
@@ -85,6 +87,20 @@ if ! security find-identity -v -p codesigning | grep -qF "$IDENTITY"; then
   echo "Aanwezige identiteiten:" >&2
   security find-identity -v -p codesigning >&2 || true
   exit 1
+fi
+
+# --preflight (voor scripts/release_auto.sh): de ondertekenidentiteit is hierboven
+# geverifieerd; toets nu óók het notary-profiel en stop. Zo faalt een verdwenen
+# profiel (bv. na een sessieherstart, zoals v0.1.3-rc1) vóór de ~10 min build i.p.v.
+# pas bij het inzenden. 'notarytool history' valideert profiel én Apple-verbinding.
+if [[ $PREFLIGHT -eq 1 ]]; then
+  section "Pre-flight — ondertekenidentiteit en notary-profiel"
+  if ! xcrun notarytool history --keychain "$KEYCHAIN" --keychain-profile "$PROFILE" --limit 1 >/dev/null 2>&1; then
+    echo "Notary-profiel '$PROFILE' in keychain '$KEYCHAIN' werkt niet — mogelijk na een sessieherstart verdwenen. Herstel met 'xcrun notarytool store-credentials' (zie de kop van dit script en docs/BUILD.md)." >&2
+    exit 1
+  fi
+  echo "Pre-flight OK: identiteit '$IDENTITY' aanwezig, notary-profiel '$PROFILE' geldig."
+  exit 0
 fi
 
 if [[ $SKIP_BUILD -eq 0 ]]; then

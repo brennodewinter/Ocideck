@@ -373,6 +373,13 @@ fi
 git remote get-url mirror >/dev/null 2>&1 \
   || die "geen 'mirror'-remote — die is nodig voor de Windows-build op de spiegel."
 
+# Een verse run mag niet bovenop een half-af gebleven release-branch bouwen: de
+# branch-push zou later botsen (non-fast-forward), en een lopende poging hoort met
+# --resume verder, niet met een tweede verse build. In --resume is de branch normaal.
+if [ -z "$RESUME_TAG" ] && git ls-remote --exit-code origin "refs/heads/$BRANCH" >/dev/null 2>&1; then
+  die "release-branch $BRANCH staat al op origin van een eerdere, afgebroken poging — maak die af met 'scripts/release_auto.sh --resume $TAG' i.p.v. een verse run."
+fi
+
 # De verouderingsgate hoort bij een échte build (fase 1); in resume bouwen we niet.
 [ -n "$RESUME_TAG" ] || outdated_gate
 
@@ -399,7 +406,19 @@ preflight() {
     die "minisign proef-tekening faalde — sleutelwachtwoord fout of sleutel ontbreekt. Niets gemuteerd."
   fi
   rm -rf "$t"
-  log "Pre-flight groen: forge-token, mirror, deploy-host en minisign kloppen."
+  if [ -z "$RESUME_TAG" ]; then
+    # macOS-ondertekening + notarisatie zijn alleen voor fase 1 (een verse build)
+    # nodig. Toets identiteit én notary-profiel nu, vóór de ~10 min build — niet pas
+    # bij het inzenden (v0.1.3-rc1: notary-profiel na sessieherstart weg).
+    local sigout
+    if ! sigout="$(scripts/notarize_macos.sh --preflight 2>&1)"; then
+      printf '%s\n' "$sigout" | sed 's/^/   /'
+      die "macOS-ondertekening/notarisatie niet gereed — repareer bovenstaande en draai opnieuw. Niets gemuteerd."
+    fi
+    log "Pre-flight groen: forge-token, mirror, deploy-host, minisign en macOS-ondertekening kloppen."
+  else
+    log "Pre-flight groen: forge-token, mirror, deploy-host en minisign kloppen."
+  fi
 }
 
 # ── FASE 3 — verspreiden (gedeeld door de normale keten én --resume) ────────────
@@ -566,14 +585,41 @@ merge_commit_of_pr() { # merge_commit_of_pr PR_NUMBER
   api GET "/pulls/$1" | jq -r '.merge_commit_sha // empty'
 }
 
-# Tag op de merge-commit en push naar origin + mirror. Idempotent: staat de tag al
-# op origin, dan is dit al gedaan. De 8-seconden-bail is het punt-van-geen-terugkeer.
+# De mirror-tag (GitHub-spiegel) is een eigen faalpunt naast origin: de origin-push
+# start de Forgejo-CI, maar de Windows-build op de spiegel start pas als de tag ÓÓK
+# op de mirror staat (windows-ophalen dispatcht met --ref $TAG). Idempotent: staat de
+# tag al op de mirror, dan doet dit niets — zo repareert --resume alsnog een mislukte
+# mirror-push, óók als origin de tag al heeft (waar de vroegere early-return de
+# mirror-push oversloeg en de Windows-build eeuwig liet wachten).
+ensure_mirror_tag() {
+  git remote get-url mirror >/dev/null 2>&1 || return 0
+  if git ls-remote --exit-code mirror "refs/tags/$TAG" >/dev/null 2>&1; then
+    return 0
+  fi
+  STEP="mirror-tag zetten"
+  # Zorg dat we de tag lokaal hebben: na een verse tag bestaat hij al; op een andere
+  # machine (of na opruiming) halen we 'm exact van origin.
+  if ! git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1; then
+    git fetch --quiet --force origin "refs/tags/$TAG:refs/tags/$TAG" \
+      || die "kon tag $TAG niet lokaal krijgen voor de mirror-push — is origin bereikbaar?"
+  fi
+  git push --quiet mirror "$TAG" \
+    || die "mirror-push van $TAG faalde — de Windows-build op de spiegel start pas mét de mirror-tag. Herstel de mirror en hervat: scripts/release_auto.sh --resume $TAG"
+  log "Tag $TAG naar de mirror gepusht — de Windows-build kan starten."
+}
+
+# Tag op de merge-commit en push naar origin + mirror. Idempotent per remote: staat
+# de tag al op een remote, dan slaat die push over. origin en mirror zijn LOS: een
+# geslaagde origin-push (die de release-CI start) mag niet verhullen dat de
+# mirror-push faalde, en --resume moet een ontbrekende mirror-tag alsnog kunnen
+# zetten. De 8-seconden-bail vóór de origin-push is het punt-van-geen-terugkeer.
 tag_and_push() { # tag_and_push MERGE_SHA
   local mergesha="$1" i
   STEP="tag pushen"
   if git ls-remote --exit-code origin "refs/tags/$TAG" >/dev/null 2>&1; then
     log "Tag $TAG stond al op origin — niet opnieuw taggen."
     TAG_PUSHED=1
+    ensure_mirror_tag
     return 0
   fi
   # De merge-commit is server-side gemaakt (REST-merge in merge_pr) en zit dus nog
@@ -591,9 +637,9 @@ tag_and_push() { # tag_and_push MERGE_SHA
   git tag -d "$TAG" >/dev/null 2>&1 || true   # een stale lokale tag van een vorige poging opruimen
   git tag -a "$TAG" -m "OciDeck $TAG" "$mergesha"
   git push --quiet origin "$TAG"
-  git push --quiet mirror "$TAG"
-  TAG_PUSHED=1
-  log "Tag $TAG gepusht naar origin en mirror."
+  TAG_PUSHED=1   # origin heeft de tag: de release-CI is gestart, ongeacht de mirror
+  log "Tag $TAG gepusht naar origin."
+  ensure_mirror_tag
 }
 
 # Volg de release-CI tot alle jobs klaar zijn. Zet 'snap' (globaal) voor phase3's
@@ -627,7 +673,8 @@ resume_release() {
   section "Hervatten — $TAG"
   if git ls-remote --exit-code origin "refs/tags/$TAG" >/dev/null 2>&1; then
     TAG_PUSHED=1
-    log "Tag $TAG staat al op origin — alleen fase 3 (deploy-web + tekenen) resteert."
+    log "Tag $TAG staat al op origin — mirror-tag borgen, dan fase 3 (deploy-web + tekenen)."
+    ensure_mirror_tag
     phase3; finish; return 0
   fi
   local st num merged headsha mergesha
