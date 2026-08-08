@@ -168,4 +168,102 @@ void main() {
           'merge-commit nog niet lokaal.',
     );
   });
+
+  // De mirror-tag (GitHub-spiegel) is een eigen faalpunt: de origin-push start de
+  // Forgejo-CI, maar de Windows-build op de spiegel start pas als de tag ÓÓK op de
+  // mirror staat (windows-ophalen dispatcht met --ref $TAG). Faalde de mirror-push,
+  // dan mag geen enkele tag-route 'm overslaan — óók --resume niet (die kwam bij een
+  // bestaande origin-tag nooit meer langs de mirror-push). Regressie voor die klasse,
+  // het zusje van de bad-object-type-bug.
+  test('ensure_mirror_tag is idempotent en pusht naar de mirror', () {
+    final body = functionBody('ensure_mirror_tag');
+    expect(
+      body,
+      matches(RegExp(r'ls-remote[^\n]*\bmirror\b')),
+      reason:
+          'ensure_mirror_tag moet eerst toetsen of de tag al op de mirror staat '
+          '(idempotent), anders is een tweede run niet veilig.',
+    );
+    expect(
+      body,
+      matches(RegExp(r'git\s+push[^\n]*\bmirror\b')),
+      reason: 'ensure_mirror_tag moet de tag naar de mirror pushen.',
+    );
+  });
+
+  test('elke tag-route borgt de mirror-tag', () {
+    // Zowel de normale keten (tag_and_push) als de "tag staat al op origin"-tak van
+    // --resume (resume_release) moeten de mirror-tag borgen; anders kan een
+    // ontbrekende mirror-tag de Windows-build blijvend blokkeren — ook na --resume.
+    for (final fn in ['tag_and_push', 'resume_release']) {
+      expect(
+        functionBody(fn),
+        contains('ensure_mirror_tag'),
+        reason:
+            '$fn moet ensure_mirror_tag aanroepen; zonder dat kan een gefaalde '
+            'mirror-push de Windows-build blokkeren zonder herstelroute.',
+      );
+    }
+  });
+
+  test('TAG_PUSHED wordt gezet zodra origin de tag heeft, niet pas na de mirror', () {
+    // De origin-push is het punt-van-geen-terugkeer (de release-CI start daar). Een
+    // falende mirror-push daarna mag de ERR-trap niet laten zeggen "niets naar
+    // buiten" — dus TAG_PUSHED=1 hoort vóór de mirror-stap (ensure_mirror_tag).
+    final body = functionBody('tag_and_push');
+    final pushedIdx = body.indexOf(
+      RegExp(r'^\s*TAG_PUSHED=1', multiLine: true),
+    );
+    final mirrorIdx = body.indexOf('ensure_mirror_tag');
+    expect(
+      pushedIdx,
+      isNonNegative,
+      reason: 'TAG_PUSHED=1 niet in tag_and_push',
+    );
+    expect(
+      mirrorIdx,
+      isNonNegative,
+      reason: 'ensure_mirror_tag niet aangeroepen in tag_and_push',
+    );
+    expect(
+      pushedIdx,
+      lessThan(mirrorIdx),
+      reason:
+          'TAG_PUSHED=1 moet vóór de mirror-stap staan, anders meldt de ERR-trap '
+          'ten onrechte "niets naar buiten" als de mirror-push faalt.',
+    );
+  });
+
+  // Lock voor de vroege macOS-ondertekencheck: een verdwenen notary-profiel
+  // (v0.1.3-rc1) moet vóór de ~10 min build falen, niet pas bij het inzenden ná
+  // de tag. preflight roept daarvoor notarize_macos.sh --preflight aan (verse run).
+  test('preflight toetst de macOS-ondertekening vóór de build', () {
+    expect(
+      functionBody('preflight'),
+      contains('notarize_macos.sh --preflight'),
+      reason:
+          'preflight moet "scripts/notarize_macos.sh --preflight" aanroepen zodat '
+          'identiteit én notary-profiel vóór de build getoetst worden.',
+    );
+    expect(
+      File('scripts/notarize_macos.sh').readAsStringSync(),
+      contains('--preflight'),
+      reason: 'notarize_macos.sh moet de --preflight-modus ondersteunen.',
+    );
+  });
+
+  // Lock voor de fail-fast op een half-af gebleven release-branch: een verse run
+  // hoort daar vroeg te stoppen met een --resume-advies, niet later te botsen op de
+  // branch-push (non-fast-forward).
+  test('een verse run stopt vroeg als de release-branch al op origin staat', () {
+    expect(
+      File(script).readAsStringSync(),
+      contains(
+        r'[ -z "$RESUME_TAG" ] && git ls-remote --exit-code origin "refs/heads/$BRANCH"',
+      ),
+      reason:
+          'verwacht een verse-run-guard die op een bestaande release-branch vroeg '
+          'faalt en naar --resume verwijst.',
+    );
+  });
 }
