@@ -17,6 +17,7 @@ class DeckOpenResult {
     this.failure,
     this.warnings = const <String>[],
     this.skippedSidecars = const <String>[],
+    this.integrity,
   });
 
   /// Het geopende deck, of null bij een weigering.
@@ -33,12 +34,17 @@ class DeckOpenResult {
   /// is niet aangeraakt. Zie [FileService.maxDeckSidecarBytes].
   final List<String> skippedSidecars;
 
+  /// Het resultaat van de automatische zegelverificatie bij het openen, of null
+  /// wanneer het deck niet verzegeld is of niet van schijf is geopend.
+  final IntegrityStatus? integrity;
+
   /// Een weigering, met de reden.
   const DeckOpenResult.failed(OpenFailure reason)
     : deck = null,
       failure = reason,
       warnings = const <String>[],
-      skippedSidecars = const <String>[];
+      skippedSidecars = const <String>[],
+      integrity = null;
 }
 
 /// Wat [FileServiceDocumentOpen.openDocumentDetailed] oplevert: het geopende

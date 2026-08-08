@@ -20,6 +20,7 @@ import '../models/storage_origin.dart';
 import '../services/annotation_codec.dart';
 import '../services/classification_enforcement_policy.dart';
 import '../services/duplicate_service.dart';
+import '../services/document_integrity.dart';
 import '../services/file_service.dart';
 import '../services/git/asset_pool.dart';
 import '../services/git/deck_mirror.dart';
@@ -873,6 +874,11 @@ OpenResult _packageOpenResult(Ref ref, bool alive, ImportFailure? failure) =>
         alive,
         OpenFailure.unreadable,
       ),
+      ImportFailure.diskFull => _openFailureResult(
+        ref,
+        alive,
+        OpenFailure.unreadable,
+      ),
     };
 
 /// Een zojuist geopend bestand blijkt elders een byte-identieke kopie te
@@ -972,6 +978,18 @@ final sidecarSkippedProvider = StateProvider<SidecarSkippedWarning?>(
   (ref) => null,
 );
 
+/// Het zegel van een geopend deck klopt niet meer met de inhoud — het deck is
+/// bewerkt ná het verzegelen. Read-only waarschuwing: het deck mag nog steeds
+/// openen, maar de gebruiker moet weten dat het zegel niet meer geldig is.
+class SealTamperWarning {
+  /// Niet-const, om dezelfde reden als [ChartDataWarning].
+  SealTamperWarning();
+}
+
+final sealTamperWarningProvider = StateProvider<SealTamperWarning?>(
+  (ref) => null,
+);
+
 final chartDataWarningProvider = StateProvider<ChartDataWarning?>(
   (ref) => null,
 );
@@ -992,5 +1010,8 @@ void _reportOpenOutcome(Ref ref, DeckOpenResult outcome) {
     ref.read(sidecarSkippedProvider.notifier).state = SidecarSkippedWarning(
       outcome.skippedSidecars,
     );
+  }
+  if (outcome.integrity == IntegrityStatus.changed) {
+    ref.read(sealTamperWarningProvider.notifier).state = SealTamperWarning();
   }
 }
