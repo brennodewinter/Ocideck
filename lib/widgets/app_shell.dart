@@ -141,6 +141,7 @@ import 'dialogs/storage_connection_picker.dart';
 import 'dialogs/s3_browser_dialog.dart';
 import 'dialogs/webdav_browser_dialog.dart';
 import '../services/trash_service.dart';
+import 'shell/document_save_actions.dart';
 import 'shell/openkat_import_action.dart';
 import 'shell/presentation_import_action.dart';
 import 'panels/editor_panel.dart';
@@ -402,11 +403,12 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   Future<bool> _saveAllDirtyTabs() async {
     for (final tab in ref.read(tabsProvider).tabs) {
       if (!tab.isDirty) continue;
-      final saved = await saveDeckWithDestination(
-        context,
-        ref,
-        tab.deckNotifier,
-      );
+      // A document tab saves through its own path (byte-faithful / "Save as…"),
+      // not the deck path — otherwise a dirty document blocks quit forever.
+      final document = tab.documentNotifier;
+      final saved = document != null
+          ? await saveDocumentWithDestination(context, ref, document)
+          : await saveDeckWithDestination(context, ref, tab.deckNotifier);
       if (!saved) return false;
     }
     return true;
@@ -415,10 +417,19 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   Future<void> _onCloseTab(int index) => requestCloseTab(context, ref, index);
 
   /// Sla het actieve tabblad op. App-breed zodat Ctrl/Cmd+S altijd werkt,
-  /// ongeacht waar de focus zit.
+  /// ongeacht waar de focus zit — én ongeacht de soort. Voor een documenttabblad
+  /// was dit stuk: het riep de deck-opslag aan, die een document niet kent, dus
+  /// in de visuele modus (waar de eigen sneltoets van de editor de toets niet
+  /// krijgt) sloeg er niets op. Nu routeert het per soort.
   void _saveActive() {
     final tab = ref.read(tabsProvider).current;
-    if (tab != null) saveDeckWithDestination(context, ref, tab.deckNotifier);
+    if (tab == null) return;
+    final document = tab.documentNotifier;
+    if (document != null) {
+      unawaited(saveDocumentWithDestination(context, ref, document));
+    } else {
+      unawaited(saveDeckWithDestination(context, ref, tab.deckNotifier));
+    }
   }
 
   /// Open een presentatie via de zoek-/kies-dialoog. App-breed zodat Ctrl/Cmd+O
@@ -777,6 +788,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     newDeck: () => ref.read(tabsProvider.notifier).newEmptyTab(),
     newDocument: () => ref.read(tabsProvider.notifier).newDocument(),
     open: _openActive,
+    save: _saveActive,
     settings: () => SettingsDialog.show(context),
     userGuide: () => DocumentReaderScreen.open(
       context,
