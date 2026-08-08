@@ -1777,6 +1777,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Pagina-einde': 'Oldaltörés',
   'Stijl': 'Stílus',
   'Geen (platte tekst)': 'Nincs (egyszerű szöveg)',
   'Documentstijl': 'Dokumentumstílus',

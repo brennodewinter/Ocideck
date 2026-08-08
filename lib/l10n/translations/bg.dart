@@ -1795,6 +1795,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Pagina-einde': 'Прекъсване на страница',
   'Stijl': 'Стил',
   'Geen (platte tekst)': 'Няма (обикновен текст)',
   'Documentstijl': 'Стил на документа',

@@ -732,6 +732,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Pagina-einde': 'Saut de page',
   'Stijl': 'Style',
   'Geen (platte tekst)': 'Aucun (texte brut)',
   'Documentstijl': 'Style du document',

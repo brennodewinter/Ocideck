@@ -1748,6 +1748,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Pagina-einde': 'nav chu\'',
   'Stijl': 'SEGH nab',
   'Geen (platte tekst)': 'pagh (mu\'ghom nap)',
   'Documentstijl': 'nav SEGH nab',

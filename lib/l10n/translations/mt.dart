@@ -1795,6 +1795,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Pagina-einde': 'Qsim tal-paġna',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'L-ebda (test sempliċi)',
   'Documentstijl': 'Stil tad-dokument',

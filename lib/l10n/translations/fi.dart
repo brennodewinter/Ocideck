@@ -1773,6 +1773,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Pagina-einde': 'Sivunvaihto',
   'Stijl': 'Tyyli',
   'Geen (platte tekst)': 'Ei mitään (pelkkä teksti)',
   'Documentstijl': 'Asiakirjan tyyli',

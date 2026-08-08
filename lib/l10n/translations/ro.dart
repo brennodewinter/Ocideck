@@ -1790,6 +1790,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Pagina-einde': 'Sfârșit de pagină',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Niciunul (text simplu)',
   'Documentstijl': 'Stilul documentului',

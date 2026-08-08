@@ -1779,6 +1779,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Pagina-einde': 'Prijelom stranice',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Nema (obični tekst)',
   'Documentstijl': 'Stil dokumenta',

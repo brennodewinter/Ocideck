@@ -1808,6 +1808,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Pagina-einde': 'Briseadh leathanaigh',
   'Stijl': 'Stíl',
   'Geen (platte tekst)': 'Gan aon (gnáth-théacs)',
   'Documentstijl': 'Stíl cháipéise',

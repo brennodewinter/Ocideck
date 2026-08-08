@@ -31,6 +31,35 @@ void main() {
       },
     );
 
+    test('a --- heading --- is two rules, not front matter', () {
+      const src = '---\n# Kop\n---\n\nTekst.';
+      final s = splitDocumentFrontMatter(src);
+      expect(s.block, '');
+      expect(s.body, src);
+    });
+
+    test('a leading --- page break with a later --- stays in the body', () {
+      // De reden voor de verharding: een pagina-einde bovenaan mag geen
+      // frontmatter-blok worden zodra er verderop nóg een --- staat.
+      const src = '---\n\n# Eerste\n\n---\n\n# Tweede\n';
+      final s = splitDocumentFrontMatter(src);
+      expect(s.block, '');
+      expect(s.body, src);
+      expect(documentStyleName(src), isNull);
+    });
+
+    test('an empty --- --- block is not front matter', () {
+      const src = '---\n\n---\n\nTekst.';
+      expect(splitDocumentFrontMatter(src).block, '');
+    });
+
+    test('real front matter (opens with a key) is still recognised', () {
+      const src = '---\ntheme: Europa\n---\n\n# Titel\n';
+      final s = splitDocumentFrontMatter(src);
+      expect(s.block, '---\ntheme: Europa\n---\n\n');
+      expect(documentStyleName(src), 'Europa');
+    });
+
     test('CRLF block splits and reassembles byte-exact', () {
       const src = '---\r\ntheme: Europa\r\n---\r\n\r\n# Titel\r\n';
       final s = splitDocumentFrontMatter(src);

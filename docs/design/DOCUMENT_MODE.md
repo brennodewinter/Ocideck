@@ -5,7 +5,7 @@ you edit like a word processor — headings, tables, images, charts, gantt,
 mermaid — where the file on disk stays a plain, maximally interchangeable `.md`
 that any Markdown reader opens.*
 
-> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-08 · **Published by:** Stichting LibreKAT
+> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12) — and an inserted **page break** (a plain `---` that renders as a rule in the visual editor and becomes a real page boundary on print/PDF/LaTeX export, §13). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-08 · **Published by:** Stichting LibreKAT
 
 > **This is a design doc, not shipping behaviour.** It is the *format-first*
 > gate: the disk contract and the shared-editor decision must be signed off
@@ -578,7 +578,10 @@ String projectedBody = DocumentDeckBridge.deckToDocumentMarkdown(bundle.audience
   HTML directly (security finding). The document CSS **MUST carry no external
   `url()`/`@font-face`**; the CSP is the net, not the licence. The marked/
   mermaid/mathjax/chart/highlight render layer is otherwise **unchanged** — no
-  third render path (red line §4). A document `---` becomes a real `<hr>`.
+  third render path (red line §4). A document `---` becomes a real `<hr>`, which on
+  screen reads as a rule but in `@media print` is a page break (§13):
+  `.document hr{page-break-after:always}` in
+  [`marp_html_service_css.dart`](../../lib/services/marp_html/marp_html_service_css.dart).
 - **The writing surface takes an `ExportBundle`** (never a raw `Deck`/
   `List<Slide>`), registered `SurfaceKind.audience` in
   `tool/check_audience_boundary.dart`. Note precisely what that gate proves: the
@@ -839,3 +842,75 @@ document with no style changes nothing about export.
   export path likewise reads `document.body`; the style reaches the output as the
   *resolved profile* handed to the renderer, never as a `theme:` line copied into
   the exported text.
+
+---
+
+## 13. Page break — the `---` thematic break (added 2026-08-08)
+
+*A document stays a continuous flow on screen, but an author needs to say "start
+the next part on a new sheet." Document mode expresses that with the **plainest
+portable thing** the format already has: a Markdown **thematic break** (`---`). No
+new marker, no OciDeck-only token — a foreign reader simply sees a horizontal
+rule, and OciDeck's own export turns it into a real page boundary. This keeps
+red line §8.1 (flat, maximally interchangeable `.md`) intact.*
+
+### 13.1 What it is on disk
+
+A page break is a literal `---` line in the body — the same thematic break any
+Markdown reader renders as a horizontal rule. The insert palette's **Page break**
+item (`_DocEditorToolbar`, `l10n.d('Pagina-einde')`) drops a plain `---` at the
+cursor via `DocumentEditorScreen._insertPageBreak`. It writes **no** new key and
+no OciDeck-specific syntax; recognition of the file as a document is unchanged
+(the *absence* of `marp: true`, §2). Because a document is **never** split on
+`---` (§3, red line §8.1), `escapeDeckMarkdownDashLines` is never called on a
+document body and the `---` stays a byte-clean thematic break.
+
+### 13.2 Where it takes effect — export and print, not the screen
+
+On the writing surface and in the continuous HTML the document stays continuous;
+the break is a **layout instruction for paged output**, applied at the edges:
+
+- **HTML / print-to-PDF** — the flow HTML renders the `---` as a real `<hr>`
+  (§11.2). On screen that is a rule; in `@media print` the rule becomes a page
+  boundary: `.document hr{page-break-after:always;border:0;height:0;margin:0}` in
+  [`marp_html_service_css.dart`](../../lib/services/marp_html/marp_html_service_css.dart),
+  so when the user prints (or *Save as PDF*) the content after each `---` starts on
+  a fresh sheet. This rides the same continuous-HTML path — no third render path.
+- **LaTeX** — [`markdown_to_latex.dart`](../../lib/services/latex/markdown_to_latex.dart)
+  maps the `hr` AST node to `\newpage` instead of a `\rule`, so a thematic break
+  is a page break in the compiled PDF, not a drawn line. Every thematic-break
+  form the parser recognises (`---`, `- - -`, `***`) yields the same `hr` node and
+  therefore the same page break.
+
+### 13.3 Rendering in the visual editor — and the latent crash it fixed
+
+In the visual (WYSIWYG) editor a `---` arrives through `MarkdownQuillCodec` as a
+`BlockEmbed('divider')`. Flutter Quill draws a **`RenderErrorBox`** for any embed
+type it has no builder for, so before this change *any* document containing a
+`---` — most visibly an inserted page break, but also one an author typed — broke
+the visual surface. [`divider_embed_builder.dart`](../../lib/widgets/markdown_editor/divider_embed_builder.dart)
+registers a `DividerEmbedBuilder` (added to `embedBuilders` in
+[`wysiwyg_notes_field.dart`](../../lib/widgets/markdown_editor/wysiwyg_notes_field.dart)
+beside the existing `TableEmbedBuilder`) that draws the block as a horizontal
+rule, so the surface stays intact and the rule reads as the page break the export
+will honour.
+
+### 13.4 Front-matter hardening — a leading `---` is a page break, not front matter
+
+A page break at the very top of a document collides with the front-matter reader
+of §12: `---\n…\n---` looks like a YAML front-matter block. `splitDocumentFrontMatter`
+([`document_front_matter.dart`](../../lib/utils/document_front_matter.dart)) now
+treats a fenced block as front matter **only when it actually opens with a YAML
+mapping key** (`_opensWithYamlKey`); a block whose first real line is a heading,
+prose or anything else is body, so a leading `---` page break — or a `---\n# Kop\n---`
+pair of rules — is never swallowed as a `theme:` block. This keeps §12.2's
+byte-faithfulness rule true in the presence of page breaks: an unstyled document
+carries no front matter, whatever `---` lines its body holds.
+
+### 13.5 What is not built yet
+
+The requested option to make **every new chapter (an `H1` heading) begin on a new
+page** — a document-wide toggle rather than a break the author places — is **not
+implemented**. It is noted here as a **planned follow-up**, deliberately kept out
+of this change so nothing is claimed that the code does not do. Today a page break
+is only the explicit `---` an author inserts.

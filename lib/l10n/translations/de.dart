@@ -732,6 +732,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Pagina-einde': 'Seitenumbruch',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Keine (reiner Text)',
   'Documentstijl': 'Dokumentstil',

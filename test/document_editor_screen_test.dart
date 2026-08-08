@@ -243,6 +243,26 @@ void main() {
     expect(source, startsWith('Tekst.'));
   });
 
+  testWidgets('het invoeg-palet schrijft een pagina-einde (---) in de bron', (
+    tester,
+  ) async {
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('Voor.'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    await tester.tap(find.text('Invoegen'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Pagina-einde'));
+    await tester.pump();
+
+    final source = n.currentState.document!.source;
+    // Een `---` op een eigen regel, met witregels eromheen zodat het een
+    // thematische breuk is (geen setext-kop) — draagbaar en geen frontmatter.
+    expect(source, startsWith('Voor.'));
+    expect(source, contains('\n---\n'));
+    expect(n.currentState.document!.styleName, isNull);
+  });
+
   testWidgets(
     'Invoegen → Afbeelding opent de carrousel, niet alleen Bladeren',
     (tester) async {

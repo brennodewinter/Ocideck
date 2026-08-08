@@ -1780,6 +1780,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Pagina-einde': 'Koniec strany',
   'Stijl': 'Štýl',
   'Geen (platte tekst)': 'Žiadne (obyčajný text)',
   'Documentstijl': 'Štýl dokumentu',

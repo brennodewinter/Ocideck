@@ -913,6 +913,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Pagina-einde': 'Page break',
   'Stijl': 'Style',
   'Geen (platte tekst)': 'None (plain text)',
   'Documentstijl': 'Document style',

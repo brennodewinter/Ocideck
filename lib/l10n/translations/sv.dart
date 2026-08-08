@@ -1772,6 +1772,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Pagina-einde': 'Sidbrytning',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Ingen (vanlig text)',
   'Documentstijl': 'Dokumentstil',

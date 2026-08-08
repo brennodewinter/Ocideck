@@ -1775,6 +1775,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Pagina-einde': 'Prelom strani',
   'Stijl': 'Slog',
   'Geen (platte tekst)': 'Brez (golo besedilo)',
   'Documentstijl': 'Slog dokumenta',

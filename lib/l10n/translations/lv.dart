@@ -1772,6 +1772,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Pagina-einde': 'Lappuses pārtraukums',
   'Stijl': 'Stils',
   'Geen (platte tekst)': 'Nav (vienkāršs teksts)',
   'Documentstijl': 'Dokumenta stils',

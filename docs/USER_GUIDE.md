@@ -4239,9 +4239,36 @@ A **formatting toolbar** for the common inline marks is always in reach — the
 rich-text toolbar in Visual, the Markdown one over the source in Source and in
 the Visual source fallback. An **insert palette** adds the richer blocks as
 portable Markdown: a **chart** (a ` ```chart ` fence with its data in
-`data/*.json`), a **table** (a GFM pipe table), a **Mermaid** diagram, or an
-**image** (copied into `images/`). Each stays plain, parseable text so the file
-keeps opening elsewhere.
+`data/*.json`), a **table** (a GFM pipe table), a **Mermaid** diagram, an
+**image** (copied into `images/`), or a **page break** (a `---` thematic break).
+Each stays plain, parseable text so the file keeps opening elsewhere. *(Page
+break added 2026-08-08 — see [Inserting a page break](#inserting-a-page-break)
+below.)*
+
+### Inserting a page break
+
+*(Added 2026-08-08.)* The insert palette has a **Page break** item that drops a
+`---` — an ordinary Markdown thematic break — at the cursor. It stays plain,
+portable text: a document keeps opening in any Markdown reader, where `---` shows
+as a horizontal rule. In OciDeck's own visual editor the same `---` is drawn as a
+horizontal line, so you can see where the break sits while you write.
+
+On screen a document stays **continuous** — a page break does not chop the
+writing surface into pages. Where it takes effect is **export and print**:
+
+- **HTML** (and the **PDF** you make by printing that HTML) reads continuously in
+  a browser, but when you actually print it — or choose *Save as PDF* — each `---`
+  forces the content after it onto a **new sheet**.
+- **LaTeX (`.tex`)** turns each thematic break into a `\newpage`, so the compiled
+  PDF starts a fresh page there rather than drawing a rule.
+
+Any thematic-break form the Markdown reader recognises (`---`, `- - -`, `***`)
+counts as a page break on export; the palette inserts the plain `---`.
+
+A related option — making every **new chapter (an `H1` heading) start on a new
+page** when you ask for it — is **not available yet**; it is planned as a separate
+follow-up. For now a page break is something you place yourself with the `---`
+item.
 
 ### Giving a document a style
 
@@ -4288,7 +4315,10 @@ your source. The export dialog asks two things:
 There is no built-in PDF button. For a **PDF**, open the exported HTML and print
 it from your browser (*Save as PDF*). OciDeck makes no promise about the
 accessibility of a PDF produced that way — that is the browser's doing — but the
-HTML it exports is built to be accessible.
+HTML it exports is built to be accessible. A `---`
+[page break](#inserting-a-page-break) you placed becomes a real new sheet at this
+print step (and a `\newpage` in the LaTeX export), while the on-screen HTML stays
+continuous.
 
 Every export runs through the same privacy projection (OciWacht) as a deck
 export, so what leaves is the redacted content, never the raw source.

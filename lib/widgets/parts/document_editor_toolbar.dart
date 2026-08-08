@@ -15,6 +15,7 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onInsertTable;
   final VoidCallback onInsertMermaid;
   final VoidCallback onInsertImage;
+  final VoidCallback onInsertPageBreak;
   final VoidCallback onPaste;
   final VoidCallback? onUndo;
   final VoidCallback? onRedo;
@@ -49,6 +50,7 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onInsertTable,
     required this.onInsertMermaid,
     required this.onInsertImage,
+    required this.onInsertPageBreak,
     required this.onPaste,
     required this.onUndo,
     required this.onRedo,
@@ -164,6 +166,7 @@ class _DocEditorToolbar extends StatelessWidget {
         1 => onInsertTable(),
         2 => onInsertMermaid(),
         3 => onInsertImage(),
+        5 => onInsertPageBreak(),
         _ => onPaste(),
       },
       itemBuilder: (context) => [
@@ -171,6 +174,12 @@ class _DocEditorToolbar extends StatelessWidget {
         _insertItem(1, Icons.table_chart_outlined, l10n.d('Tabel')),
         _insertItem(2, Icons.account_tree_outlined, l10n.d('Mermaid')),
         _insertItem(3, Icons.image_outlined, l10n.d('Afbeelding')),
+        _insertItem(
+          5,
+          Icons.insert_page_break_outlined,
+          l10n.d('Pagina-einde'),
+        ),
+        const PopupMenuDivider(),
         _insertItem(4, Icons.content_paste, l10n.d('Plakken')),
       ],
       child: Padding(
