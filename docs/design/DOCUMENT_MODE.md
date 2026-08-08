@@ -5,7 +5,7 @@ you edit like a word processor — headings, tables, images, charts, gantt,
 mermaid — where the file on disk stays a plain, maximally interchangeable `.md`
 that any Markdown reader opens.*
 
-> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-07 · **Published by:** Stichting LibreKAT
+> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-08 · **Published by:** Stichting LibreKAT
 
 > **This is a design doc, not shipping behaviour.** It is the *format-first*
 > gate: the disk contract and the shared-editor decision must be signed off
@@ -255,6 +255,21 @@ through the visual bridge; the blocks the bridge cannot round-trip losslessly
 **never touched by the bridge**. The source text (`MarkdownSourceDocument`) is
 **always** the truth. This is the rule that lets a WYSIWYG mode exist without
 ever silently corrupting a table.
+
+**When the bridge cannot round-trip, Visual stays editable (owner decision,
+2026-08-08).** An earlier build dropped the *whole* document to a read-only
+rendered view the moment any `markdownVisualLimitations` construct appeared
+(raw HTML, a footnote, an escaped punctuation mark) — no formatting toolbar, no
+editing, only a note. That decided *for* the user that the document was not
+theirs to edit. It now degrades instead of locking: Visual falls back to the
+shared editor's **editable source surface** with the **full formatting toolbar**
+and a short warning ([`markdownSourceModeHint`]), while the insert palette in
+`_DocEditorToolbar` stays available throughout. The rich possibilities are
+offered with a warning, never withheld. Source text is still the single truth —
+the bridge still never touches those constructs — so no round-trip guarantee is
+weakened; only the read-only wall is gone. (`DocumentEditorScreen._visualLayout`
+now always mounts `MarkdownNotesEditor`, which owns the WYSIWYG↔source
+degradation itself.)
 
 ---
 
