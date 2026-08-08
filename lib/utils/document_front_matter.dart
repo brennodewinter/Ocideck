@@ -42,6 +42,13 @@ DocumentSplit splitDocumentFrontMatter(String source) {
     final line = _stripCr(source.substring(i, lineEnd));
     final afterLine = lineEnd < source.length ? lineEnd + 1 : lineEnd;
     if (line == _fence) {
+      // A closing fence alone isn't enough: `---\n# Kop\n---` (or a lone `---`
+      // page break followed by a later `---`) is two horizontal rules, not front
+      // matter. Only treat it as front matter when the block actually opens with a
+      // YAML key — otherwise the whole source is body, so a `---` divider is safe.
+      if (!_opensWithYamlKey(source.substring(firstBreak + 1, i))) {
+        return (block: '', body: source);
+      }
       var blockEnd = afterLine;
       // Fold any blank (whitespace-only) lines after the closing fence into the
       // block, so the body begins at the first content line.
@@ -144,6 +151,24 @@ String? _removeThemeFromBlock(String block, String eol) {
 // --- small helpers -----------------------------------------------------------
 
 final _themeLine = RegExp(r'^\s*theme\s*:\s*(.*)$');
+
+/// A YAML mapping key: a name starting with a letter or underscore, then a colon.
+/// Deliberately excludes a leading digit (so a stray `12:30` line is not read as
+/// a key) and a Markdown heading (`# …`) or bullet.
+final _yamlKeyLine = RegExp(r'^\s*[A-Za-z_][\w.\-]*\s*:(\s|$)');
+
+/// Whether [inner] (the lines between the fences) opens like YAML front matter:
+/// its first non-blank line is a mapping key. A block whose first real line is a
+/// heading, prose or anything else is not front matter — it is `---`-delimited
+/// content (e.g. a page break), and must stay in the body verbatim.
+bool _opensWithYamlKey(String inner) {
+  for (final raw in inner.split('\n')) {
+    final line = _stripCr(raw);
+    if (line.trim().isEmpty) continue;
+    return _yamlKeyLine.hasMatch(line);
+  }
+  return false;
+}
 
 int _lineEnd(String s, int from) {
   final nl = s.indexOf('\n', from);
