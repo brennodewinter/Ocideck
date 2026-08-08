@@ -163,6 +163,9 @@ String importFailureMessage(AppLocalizations l10n, ImportFailure failure) {
     ),
     // Afbreken is geen fout; de aanroepers vangen dit al af vóór deze melding.
     ImportFailure.encryptedCancelled => '',
+    ImportFailure.diskFull => l10n.d(
+      'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.',
+    ),
   };
 }
 
