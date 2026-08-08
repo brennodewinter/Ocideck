@@ -796,6 +796,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   /// presentatie open is — dan staan ze uitgeschakeld in het menu in plaats van
   /// te verdwijnen.
   AppDeckMenuActions? _deckMenuActions() {
+    // Documenttabblad: geen deck-menu. `shellDeckCommandsProvider` blijft na een
+    // deck-tab 'stale', dus zonder poort routeert Cmd+S daarheen i.p.v. het document.
+    if (ref.watch(tabsProvider).current?.documentNotifier != null) return null;
     // `deckProvider` is per tabblad overschreven en op dit niveau dus leeg; de
     // werkruimte publiceert zelf wat ze kan zodra ze er is.
     final commands = ref.watch(shellDeckCommandsProvider);
