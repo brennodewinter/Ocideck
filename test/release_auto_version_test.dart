@@ -371,4 +371,32 @@ void main() {
       reason: 'api() moet een herprobeer-lus over \$tries hebben.',
     );
   });
+
+  // #8: verschijnt SHA256SUMS niet (publiceren faalde), dan dispatcht fase 3 de
+  // release-CI éénmalig opnieuw vóór het escaleren — geen directe dood meer.
+  test(
+    'fase 3 dispatcht de release-CI opnieuw als SHA256SUMS ontbreekt (#8)',
+    () {
+      final body = functionBody('phase3');
+      final redispatchIdx = body.indexOf('workflows/release.yml/dispatches');
+      final escalateIdx = body.indexOf('ook na een her-dispatch');
+      expect(
+        redispatchIdx,
+        isNonNegative,
+        reason:
+            'fase 3 moet release.yml opnieuw dispatchen als SHA256SUMS ontbreekt, '
+            'i.p.v. meteen te sterven.',
+      );
+      expect(
+        escalateIdx,
+        isNonNegative,
+        reason: 'verwacht een escalatie-melding ná de her-dispatch.',
+      );
+      expect(
+        redispatchIdx,
+        lessThan(escalateIdx),
+        reason: 'de her-dispatch moet vóór de escalatie staan.',
+      );
+    },
+  );
 }
