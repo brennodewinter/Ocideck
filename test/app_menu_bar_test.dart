@@ -78,19 +78,19 @@ void main() {
     // en sloeg er niets op (het duidelijkst in de visuele modus). Nu valt het
     // terug op de soort-agnostische app-opslag.
     final menus = buildAppMenus(l10n, appActions(), null);
-    final save = leaves(
-      menus,
-    ).firstWhere((i) => i.label == l10n.d('Opslaan'));
-    expect(save.onSelected, isNotNull, reason: 'ingeschakeld voor een document');
+    final save = leaves(menus).firstWhere((i) => i.label == l10n.d('Opslaan'));
+    expect(
+      save.onSelected,
+      isNotNull,
+      reason: 'ingeschakeld voor een document',
+    );
     save.onSelected!();
     expect(fired, contains('appSave'));
   });
 
   test('Opslaan gebruikt de deck-opslag zodra er een deck is', () {
     final menus = buildAppMenus(l10n, appActions(), deckActions());
-    final save = leaves(
-      menus,
-    ).firstWhere((i) => i.label == l10n.d('Opslaan'));
+    final save = leaves(menus).firstWhere((i) => i.label == l10n.d('Opslaan'));
     save.onSelected!();
     expect(fired, contains('save'));
     expect(fired, isNot(contains('appSave')));
