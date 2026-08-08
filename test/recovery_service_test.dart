@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/services/recovery_service.dart';
 
 void main() {
@@ -52,6 +53,32 @@ void main() {
     );
     final all = await service.loadAll();
     expect(all.single.userNotes, notesJson);
+  });
+
+  test('save round-trips de document-soort en byte-getrouwe bron', () async {
+    await service.save(
+      RecoverySnapshot(
+        id: 'doc',
+        savedAt: DateTime(2026, 8, 8),
+        filePath: '/tmp/memo.md',
+        label: 'Memo',
+        markdown: '---\ntheme: LibreKAT\n---\n\n# Memo\n',
+        kind: MarkdownKind.document,
+      ),
+    );
+    final restored = (await service.loadAll()).single;
+    expect(restored.kind, MarkdownKind.document);
+    expect(restored.markdown, '---\ntheme: LibreKAT\n---\n\n# Memo\n');
+  });
+
+  test('een oud herstelbestand zonder soort leest als presentatie', () {
+    // Backward compatible: bestanden van vóór deze functie dragen geen 'kind'.
+    final snap = RecoverySnapshot.fromJson({
+      'id': 'oud',
+      'savedAt': '2026-01-01T00:00:00.000',
+      'markdown': '# Deck\n',
+    });
+    expect(snap.kind, MarkdownKind.presentation);
   });
 
   test('save round-trips an unapplied Markdown draft', () async {

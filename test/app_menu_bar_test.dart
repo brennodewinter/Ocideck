@@ -20,6 +20,7 @@ void main() {
     newDeck: () => note('newDeck'),
     newDocument: () => note('newDocument'),
     open: () => note('open'),
+    save: () => note('appSave'),
     settings: () => note('settings'),
     userGuide: () => note('userGuide'),
     shortcuts: () => note('shortcuts'),
@@ -71,6 +72,30 @@ void main() {
     ]);
   });
 
+  test('Opslaan werkt óók voor een documenttabblad (geen deck)', () {
+    // De regressie: File → Opslaan (en Cmd+S) hing aan de deck-only opslag, dus
+    // op een documenttabblad — waar er geen deck is — was het item uitgeschakeld
+    // en sloeg er niets op (het duidelijkst in de visuele modus). Nu valt het
+    // terug op de soort-agnostische app-opslag.
+    final menus = buildAppMenus(l10n, appActions(), null);
+    final save = leaves(menus).firstWhere((i) => i.label == l10n.d('Opslaan'));
+    expect(
+      save.onSelected,
+      isNotNull,
+      reason: 'ingeschakeld voor een document',
+    );
+    save.onSelected!();
+    expect(fired, contains('appSave'));
+  });
+
+  test('Opslaan gebruikt de deck-opslag zodra er een deck is', () {
+    final menus = buildAppMenus(l10n, appActions(), deckActions());
+    final save = leaves(menus).firstWhere((i) => i.label == l10n.d('Opslaan'));
+    save.onSelected!();
+    expect(fired, contains('save'));
+    expect(fired, isNot(contains('appSave')));
+  });
+
   test('ongedaan maken en opnieuw staan in het menu en werken', () {
     // Ze bestonden alleen als icoontje in de werkbalk.
     final menus = buildAppMenus(l10n, appActions(), deckActions());
@@ -105,10 +130,12 @@ void main() {
   });
 
   test('zonder open presentatie blijven de deck-items staan, maar uit', () {
+    // Opslaan is bewust de uitzondering: dat valt terug op de app-brede opslag
+    // (een document heeft geen deck) — zie de aparte test hierboven. De écht
+    // deck-gebonden items blijven uit.
     final menus = buildAppMenus(l10n, appActions(), null);
     final items = leaves(menus);
     for (final label in [
-      l10n.d('Opslaan'),
       l10n.d('Presenteren'),
       l10n.d('Eigenschappen'),
       l10n.d('Opdrachten…'),

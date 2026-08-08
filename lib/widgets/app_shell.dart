@@ -141,6 +141,7 @@ import 'dialogs/storage_connection_picker.dart';
 import 'dialogs/s3_browser_dialog.dart';
 import 'dialogs/webdav_browser_dialog.dart';
 import '../services/trash_service.dart';
+import 'shell/document_save_actions.dart';
 import 'shell/openkat_import_action.dart';
 import 'shell/presentation_import_action.dart';
 import 'panels/editor_panel.dart';
@@ -402,12 +403,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   Future<bool> _saveAllDirtyTabs() async {
     for (final tab in ref.read(tabsProvider).tabs) {
       if (!tab.isDirty) continue;
-      final saved = await saveDeckWithDestination(
-        context,
-        ref,
-        tab.deckNotifier,
-      );
-      if (!saved) return false;
+      // saveTabWithDestination routes a document through its own byte-faithful /
+      // "Save as…" path — a dirty document would otherwise block quit forever.
+      if (!await saveTabWithDestination(context, ref, tab)) return false;
     }
     return true;
   }
@@ -415,10 +413,13 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   Future<void> _onCloseTab(int index) => requestCloseTab(context, ref, index);
 
   /// Sla het actieve tabblad op. App-breed zodat Ctrl/Cmd+S altijd werkt,
-  /// ongeacht waar de focus zit.
+  /// ongeacht waar de focus zit — én ongeacht de soort. Voor een documenttabblad
+  /// was dit stuk: het riep de deck-opslag aan, die een document niet kent, dus
+  /// in de visuele modus (waar de eigen sneltoets van de editor de toets niet
+  /// krijgt) sloeg er niets op. Nu routeert het per soort.
   void _saveActive() {
     final tab = ref.read(tabsProvider).current;
-    if (tab != null) saveDeckWithDestination(context, ref, tab.deckNotifier);
+    if (tab != null) unawaited(saveTabWithDestination(context, ref, tab));
   }
 
   /// Open een presentatie via de zoek-/kies-dialoog. App-breed zodat Ctrl/Cmd+O
@@ -777,6 +778,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     newDeck: () => ref.read(tabsProvider.notifier).newEmptyTab(),
     newDocument: () => ref.read(tabsProvider.notifier).newDocument(),
     open: _openActive,
+    save: _saveActive,
     settings: () => SettingsDialog.show(context),
     userGuide: () => DocumentReaderScreen.open(
       context,
@@ -794,6 +796,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   /// presentatie open is — dan staan ze uitgeschakeld in het menu in plaats van
   /// te verdwijnen.
   AppDeckMenuActions? _deckMenuActions() {
+    // Documenttabblad: geen deck-menu. `shellDeckCommandsProvider` blijft na een
+    // deck-tab 'stale', dus zonder poort routeert Cmd+S daarheen i.p.v. het document.
+    if (ref.watch(tabsProvider).current?.documentNotifier != null) return null;
     // `deckProvider` is per tabblad overschreven en op dit niveau dus leeg; de
     // werkruimte publiceert zelf wat ze kan zodra ze er is.
     final commands = ref.watch(shellDeckCommandsProvider);

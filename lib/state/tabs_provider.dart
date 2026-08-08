@@ -97,6 +97,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
   final Map<int, Deck> _lastAutosavedDeck = {};
   final Map<int, String?> _lastAutosavedMarkdownDraft = {};
 
+  /// Laatst weggeschreven documentbron per tabblad, zodat een tick die niets
+  /// nieuws vindt de schrijfbeurt overslaat — de documenttegenhanger van
+  /// [_lastAutosavedDeck].
+  final Map<int, String> _lastAutosavedDocument = {};
+
   /// Duplicaat-melding maximaal één keer per paar per sessie, anders wordt
   /// elke her-open van hetzelfde bestand een herhaalde snackbar.
   final Set<String> _noticedDuplicatePairs = {};
@@ -196,6 +201,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     _subs.remove(tab.id)?.cancel();
     _lastAutosavedDeck.remove(tab.id);
     _lastAutosavedMarkdownDraft.remove(tab.id);
+    _lastAutosavedDocument.remove(tab.id);
   }
 
   /// [recoveryId] hergebruikt de sleutel van een bestaande herstelkopie (zie
@@ -244,9 +250,16 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // Zelf-beperkend op een uur; zie [RecoveryService.pruneIfDue].
     unawaited(_recovery.pruneIfDue());
     for (final tab in state.tabs) {
+      // Een documenttabblad bewaart zijn eigen momentopname (byte-getrouwe bron,
+      // geen deck-sidecars), zodat een crash óók niet-opgeslagen documenten
+      // teruggeeft — net als een presentatie.
+      final doc = tab.documentNotifier;
+      if (doc != null) {
+        _autosaveDocument(tab, doc, _recovery, _lastAutosavedDocument);
+        continue;
+      }
       // Zie TabInfo.label: een tab kan kortstondig een al-gedisposede
-      // notifier dragen; die heeft niets meer te autosaven. Documenttabbladen
-      // krijgen hun eigen herstelpad later; nu slaan we ze over.
+      // notifier dragen; die heeft niets meer te autosaven.
       final dn = tab.deckNotifierOrNull;
       if (dn == null || !dn.mounted) continue;
       final st = dn.currentState;
@@ -276,8 +289,20 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final restored = <TabInfo>[];
     var unreadable = 0;
     for (final snap in snapshots) {
-      final parsed = _md.parseDeck(snap.markdown, filePath: snap.filePath);
-      if (parsed == null) {
+      // Een document *ís* zijn bron: geen deck-parse, geen sidecars. Byte-getrouw
+      // terug in een documenttabblad, gemarkeerd als (nog) niet opgeslagen.
+      if (snap.kind == MarkdownKind.document) {
+        final tab = _createDocumentTab(
+          MarkdownDocument.parse(snap.markdown),
+          filePath: snap.filePath,
+          recoveryId: snap.id,
+        );
+        tab.documentNotifier!.markDirty();
+        restored.add(tab);
+        continue;
+      }
+      final deck = _deckFromRecoverySnapshot(snap, _md);
+      if (deck == null) {
         // Niet weggooien. `parseDeck` vangt zijn eigen fouten af juist omdát hij
         // in de praktijk struikelt, en een crash ín de parser is een van de
         // waarschijnlijkere redenen dat deze momentopname er überhaupt ligt.
@@ -287,34 +312,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
         logWarning('restoreRecovered: momentopname onleesbaar', snap.filePath);
         continue;
       }
-      var deck = parsed;
-      if (snap.userNotes != null && snap.userNotes!.isNotEmpty) {
-        final notes = UserNotesCodec.decode(snap.userNotes!, deck.slides);
-        if (notes.isNotEmpty) {
-          deck = deck.copyWith(userNotes: notes);
-        }
-      }
-      if (snap.miauw != null && snap.miauw!.isNotEmpty) {
-        final d = MiauwCodec.decode(snap.miauw!);
-        if (!d.isEmpty) {
-          deck = deck.copyWith(miauw: d);
-        }
-      }
-      if (snap.seal != null && snap.seal!.isNotEmpty) {
-        final record = SealCodec.decode(snap.seal!);
-        if (record != null) deck = record.applyTo(deck);
-      }
-      final ink = snap.annotations;
-      if (ink != null && ink.isNotEmpty) {
-        try {
-          final strokes = AnnotationCodec.decode(ink, deck.slides);
-          if (strokes.isNotEmpty) deck = deck.copyWith(annotations: strokes);
-        } catch (e) {
-          // Een kapotte tekenlaag mag het herstel van de tekst nooit blokkeren;
-          // hetzelfde als bij een onleesbare sidecar op schijf.
-          logWarning('restoreRecovered: annotaties onleesbaar', e);
-        }
-      }
       // Hergebruik de sleutel van de momentopname. Het bestand dat er al ligt ís
       // daarmee meteen de herstelkopie van dit tabblad, in plaats van dat het
       // wordt weggegooid en de nieuwe pas bij de volgende autosave-tik ontstaat.
@@ -323,26 +320,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       final tab = _createTab(recoveryId: snap.id);
       tab.deckNotifier.loadDeck(deck, filePath: snap.filePath);
       tab.deckNotifier.markDirty(); // herstelde inhoud is nog niet opgeslagen
-      final draft = snap.markdownDraft;
-      if (draft != null) {
-        final scope = snap.markdownDraftScope == MarkdownScope.slide.name
-            ? MarkdownScope.slide
-            : MarkdownScope.deck;
-        final slideIndex = (snap.markdownDraftSlideIndex ?? 0).clamp(
-          0,
-          deck.slides.length - 1,
-        );
-        tab.editorNotifier.select(slideIndex);
-        tab.editorNotifier.setMarkdownScope(scope);
-        final baseline = scope == MarkdownScope.slide
-            ? tab.deckNotifier.generateSlideMarkdown(slideIndex)
-            : tab.deckNotifier.generateMarkdown();
-        tab.editorNotifier.setMode(
-          EditorMode.markdown,
-          initialMarkdown: baseline,
-        );
-        tab.editorNotifier.updateMarkdown(draft);
-      }
+      _applyRecoveredMarkdownDraft(tab, snap, deck);
       restored.add(tab);
     }
     if (restored.isEmpty) return unreadable;
@@ -521,8 +499,24 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// de kopie wist zodra het tabblad schoon is — gedeeld door het openen van een
   /// `.md` en het maken van een nieuw document.
   void _placeDocumentTab(MarkdownDocument document, {String? filePath}) {
+    final tab = _createDocumentTab(document, filePath: filePath);
+    state = state.copyWith(
+      tabs: [...state.tabs, tab],
+      selectedIndex: state.tabs.length,
+    );
+  }
+
+  /// Bouwt (zonder te plaatsen) een documenttabblad met zijn herstelabonnement
+  /// dat de kopie wist zodra het tabblad schoon is. [recoveryId] hergebruikt de
+  /// sleutel van een bestaande herstelkopie (zie [restoreRecovered]); zonder
+  /// krijgt het tabblad een verse. De deck-tegenhanger is [_createTab].
+  TabInfo _createDocumentTab(
+    MarkdownDocument document, {
+    String? filePath,
+    String? recoveryId,
+  }) {
     final id = _nextId++;
-    final key = _uuid.v4();
+    final key = recoveryId ?? _uuid.v4();
     final notifier = DocumentNotifier()
       ..loadDocument(document, filePath: filePath);
     _subs[id] = notifier.stream.listen((st) {
@@ -530,14 +524,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
       if (!(st.isOpen && st.isDirty)) _recovery.discard(key);
       state = state.copyWith(tabs: List.from(state.tabs));
     });
-    final tab = TabInfo(
+    return TabInfo(
       id: id,
       recoveryId: key,
       content: DocumentTabContent(notifier),
-    );
-    state = state.copyWith(
-      tabs: [...state.tabs, tab],
-      selectedIndex: state.tabs.length,
     );
   }
 

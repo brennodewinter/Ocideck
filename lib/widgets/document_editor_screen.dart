@@ -29,7 +29,7 @@ import '../platform/platform_features.dart';
 import '../state/deck_provider.dart'
     show fileServiceProvider, imageServiceProvider, markdownServiceProvider;
 import '../state/document_provider.dart';
-import '../state/settings_provider.dart' show settingsProvider, SettingsTraces;
+import '../state/settings_provider.dart' show settingsProvider;
 import '../state/tabs_provider.dart';
 import '../theme/app_theme.dart';
 import '../utils/doc_link.dart' show headingSlug;
@@ -51,6 +51,7 @@ import 'editors/embed_editor_dialog.dart';
 import 'editors/table_editor.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'reader/document_markdown_view.dart';
+import 'shell/document_save_actions.dart';
 
 part 'parts/document_editor_toolbar.dart';
 
@@ -199,32 +200,17 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     _setActiveOutlineIndex(active);
   }
 
-  /// Sla het document op. Cmd/Ctrl+S, net als een deck. Feedback is de dirty-stip
-  /// op het tabblad die verdwijnt — geen aparte melding nodig.
+  /// Sla het document op. Cmd/Ctrl+S én de Opslaan-knop in de werkbalk, net als
+  /// een deck. Feedback is de dirty-stip op het tabblad die verdwijnt.
   ///
-  /// Heeft het al een pad, dan byte-getrouw terug naar dat pad (alleen als er
-  /// iets veranderde). Een nog niet opgeslagen document (nieuw, geen pad) valt
-  /// terug op 'Opslaan als…': kies een pad, schrijf, en zet het in de recente
-  /// lijst — net als een deck.
-  Future<void> _save() async {
-    final state = ref.read(documentProvider);
-    final document = state.document;
-    if (document == null) return;
-    final path = state.filePath;
-    if (path != null) {
-      if (!state.isDirty) return;
-      if (await saveDocument(document, path) && mounted) {
-        ref.read(documentProvider.notifier).markSaved(filePath: path);
-      }
-      return;
-    }
-    final saved = await ref.read(fileServiceProvider).saveDocumentAs(document);
-    if (saved == null || !mounted) return;
-    ref.read(documentProvider.notifier).markSaved(filePath: saved);
-    await ref
-        .read(settingsProvider.notifier)
-        .addRecentFile(saved, kind: MarkdownKind.document);
-  }
+  /// Deelt één opslagweg met de app-brede Cmd/Ctrl+S ([saveDocumentWithDestination]):
+  /// byte-getrouw terug naar het pad, of — bij een nog niet opgeslagen document —
+  /// 'Opslaan als…' zodat werk altijd als kopie te bewaren is.
+  Future<void> _save() => saveDocumentWithDestination(
+    context,
+    ref,
+    ref.read(documentProvider.notifier),
+  );
 
   /// De titel van dit document: de eerste H1, anders de bestandsnaam, anders
   /// leeg. Bepaalt de voorgestelde exportnaam en de HTML-`<title>` — net als een

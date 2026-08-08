@@ -305,6 +305,19 @@ Small required changes:
   processor names a document after its heading.
 - **Web parity** stays deliberately weaker (save = `.md` download only; no
   sidecars/assets) — accepted for now, communicated honestly.
+- **Save and crash recovery are kind-agnostic (delivered 2026-08-08).** The
+  app-wide `Ctrl/Cmd+S` and the *File → Save* menu item route through
+  `saveDocumentWithDestination` for a document tab and `saveDeckWithDestination`
+  for a deck, so the shortcut saves a document identically in Visual and Source —
+  it previously reached the deck-only save and, in Visual, could not save at all.
+  A new or no-longer-writable file falls back to *Save as…*. Crash recovery no
+  longer skips document tabs: `RecoverySnapshot` carries a `kind`
+  (presentation | document) — an older snapshot without the key reads as a
+  presentation — and the autosave tick snapshots a dirty document as its own
+  byte-faithful source (including the `theme:` front matter, no sidecars), which
+  `restoreRecovered` puts back as an unsaved document tab. This realises the
+  "recovery / dirty-tracking as shared `TabInfo` fields" of §2 for documents; the
+  earlier code deferred it ("their own recovery path later").
 
 ---
 

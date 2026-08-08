@@ -10,6 +10,13 @@ class AppMenuActions {
   final VoidCallback newDeck;
   final VoidCallback newDocument;
   final VoidCallback open;
+
+  /// Sla het actieve tabblad op, ongeacht de soort. Dit is de soort-agnostische
+  /// opslag waar File → Opslaan op terugvalt wanneer er geen deck open is (een
+  /// documenttabblad): zo werkt Cmd+S óók voor een document — vroeger hing dat
+  /// aan de deck-only [AppDeckMenuActions.save], die er voor een document niet is.
+  final VoidCallback save;
+
   final VoidCallback settings;
   final VoidCallback userGuide;
   final VoidCallback shortcuts;
@@ -18,6 +25,7 @@ class AppMenuActions {
     required this.newDeck,
     required this.newDocument,
     required this.open,
+    required this.save,
     required this.settings,
     required this.userGuide,
     required this.shortcuts,
@@ -199,7 +207,10 @@ PlatformMenu _fileMenu(
         PlatformMenuItem(
           label: l10n.d('Opslaan'),
           shortcut: const SingleActivator(LogicalKeyboardKey.keyS, meta: true),
-          onSelected: deck?.save,
+          // Een deck slaat via zijn eigen opslag op; een documenttabblad (geen
+          // deck) valt terug op de soort-agnostische opslag, zodat Cmd+S en dit
+          // menu-item óók een document bewaren — in Visueel én Bron.
+          onSelected: deck?.save ?? actions.save,
         ),
         PlatformMenuItem(
           label: l10n.t('export'),

@@ -4195,7 +4195,20 @@ not, and why conversion is deliberately lossy — is written up in
   document and saving it again without editing yields a byte-identical file.
   OciDeck injects no front matter, forces no slide separators, and applies no
   normalisation of its own. This is the copy you keep, back up and eventually
-  clean.
+  clean. `Ctrl/Cmd + S` and the *File → Save* menu item save a document in
+  **every mode** — Visual as well as Source — exactly the way they save a
+  presentation. A document that has no file yet, or one whose file can no longer
+  be written (moved, read-only, no permission), falls back to *Save as…* so your
+  work is always kept as a copy rather than lost. *(Changed 2026-08-08: saving on
+  a document tab, most visibly in Visual, used to do nothing because the shortcut
+  only knew how to save a deck.)*
+- **Crash recovery covers documents too.** An unsaved document that was open when
+  OciDeck exited unexpectedly is offered back on the next start, exactly like a
+  presentation. The snapshot is the document's own source (including any style
+  front matter) and nothing else; a document you had already saved and not
+  changed since is not kept. As with a presentation, there is no crash recovery
+  in the browser build — there is no folder to write a snapshot to. *(Added
+  2026-08-08.)*
 - A document has a **working directory** exactly like a deck: images live in
   `images/` and chart data in `data/*.json` **beside** the `.md`. An image you
   insert before the first save lives in memory until you save, then materialises

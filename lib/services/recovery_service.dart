@@ -5,17 +5,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
+import '../models/markdown_kind.dart';
 import '../utils/atomic_file.dart';
 import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 
-/// Eén automatisch bewaard herstelbestand voor een (nog) niet-opgeslagen deck.
+/// Eén automatisch bewaard herstelbestand voor een (nog) niet-opgeslagen deck of
+/// document.
 class RecoverySnapshot {
   final String id;
   final DateTime savedAt;
   final String? filePath;
   final String label;
   final String markdown;
+
+  /// Of deze momentopname een presentatie of een document is, zodat het herstel
+  /// de juiste soort tabblad terugzet. Oude herstelbestanden dragen geen sleutel
+  /// en vallen terug op [MarkdownKind.presentation] — backward compatible.
+  final MarkdownKind kind;
 
   /// Unapplied source-editor text. Kept separate from [markdown], which must
   /// remain parseable so recovery can always reopen the last valid deck.
@@ -55,6 +62,7 @@ class RecoverySnapshot {
     required this.filePath,
     required this.label,
     required this.markdown,
+    this.kind = MarkdownKind.presentation,
     this.markdownDraft,
     this.markdownDraftScope,
     this.markdownDraftSlideIndex,
@@ -70,6 +78,7 @@ class RecoverySnapshot {
     'filePath': filePath,
     'label': label,
     'markdown': markdown,
+    'kind': kind.key,
     if (markdownDraft != null) 'markdownDraft': markdownDraft,
     if (markdownDraftScope != null) 'markdownDraftScope': markdownDraftScope,
     if (markdownDraftSlideIndex != null)
@@ -88,6 +97,7 @@ class RecoverySnapshot {
       filePath: json['filePath'] as String?,
       label: (json['label'] as String?) ?? 'Presentatie',
       markdown: (json['markdown'] as String?) ?? '',
+      kind: MarkdownKindX.fromKey(json['kind'] as String?),
       markdownDraft: json['markdownDraft'] as String?,
       markdownDraftScope: json['markdownDraftScope'] as String?,
       markdownDraftSlideIndex: json['markdownDraftSlideIndex'] as int?,
