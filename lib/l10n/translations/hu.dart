@@ -1777,6 +1777,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'A céllemez nem rendelkezik elegendő hellyel. Szabadítson fel helyet, és próbálja újra.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Ezen deck pecsétje már nem egyezik a tartalommal — a pecsételés után szerkesztették.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML bármely böngészőben megnyílik internet nélkül és rendereli a kódblokkokat, matematikát és mermaid diagramokat. A LaTeX (Beamer) pdflatex vagy xelatex segítségével fordítható.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

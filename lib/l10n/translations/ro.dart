@@ -1790,6 +1790,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Discul de destinație nu are suficient spațiu. Eliberați spațiu și încercați din nou.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Sigiliul acestui deck nu mai corespunde conținutului — a fost editat după sigilare.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML se deschide în orice browser fără internet și randează blocuri de cod, matematică și diagrame mermaid. LaTeX (Beamer) se compilează cu pdflatex sau xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

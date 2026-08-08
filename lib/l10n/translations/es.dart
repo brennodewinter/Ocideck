@@ -729,6 +729,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'El disco de destino no tiene espacio suficiente. Libere espacio e inténtelo de nuevo.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'El sello de este deck ya no coincide con su contenido — fue editado después del sellado.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML se abre en cualquier navegador sin internet y renderiza bloques de código, matemáticas y diagramas mermaid. LaTeX (Beamer) se compila con pdflatex o xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

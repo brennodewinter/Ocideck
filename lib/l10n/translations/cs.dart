@@ -1776,6 +1776,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Cílový disk nemá dostatek místa. Uvolněte místo a zkuste to znovu.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Pečeť tohoto decku se již neshoduje s obsahem — byla upravena po zapečetění.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML se otevírá v jakémkoli prohlížeči bez internetu a renderuje bloky kódu, matematiku a mermaid diagramy. LaTeX (Beamer) zkompilujete pdflatex nebo xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

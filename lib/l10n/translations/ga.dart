@@ -1808,6 +1808,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Níl go leor spás ar an diosca sprice. Déan spás a shaoradh agus bain triail as arís.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Níl séal an deck seo ag teacht lena ábhar a thuilleadh — cuireadh in eagar é tar éis an séala.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'Osclaíonn HTML in aon bhrabhsálaí gan idirlíon agus renderálann sé blocanna cód, matamaitic agus léaráidí mermaid. Tiomsaítear LaTeX (Beamer) le pdflatex nó xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

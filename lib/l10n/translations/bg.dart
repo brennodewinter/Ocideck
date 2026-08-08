@@ -1795,6 +1795,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Дестинационният диск няма достатъчно пространство. Освободете място и опитайте отново.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Печатът на това deck вече не съответства на съдържанието — редактиран е след запечатването.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML се отваря във всеки браузър без интернет и рендерира блокове код, математика и mermaid диаграми. LaTeX (Beamer) се компилира с pdflatex или xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

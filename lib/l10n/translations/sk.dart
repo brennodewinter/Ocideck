@@ -1780,6 +1780,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Cieľový disk nemá dostatok miesta. Uvoľnite miesto a skúste to znova.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Pečať tohto decku sa už nezhoduje s obsahom — bola upravená po pečatení.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML sa otvorí v akomkoľvek prehliadači bez internetu a renderuje bloky kódu, matematiku a mermaid diagramy. LaTeX (Beamer) skompilujete pomocou pdflatex alebo xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

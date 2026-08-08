@@ -1785,6 +1785,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Dysk docelowy ma niewystarczającą ilość miejsca. Zwolnij miejsce i spróbuj ponownie.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Pieczęć tej talii nie zgadza się już z treścią — była edytowana po zapieczętowaniu.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML otwiera się w każdej przeglądarce bez internetu i renderuje bloki kodu, matematykę i diagramy mermaid. LaTeX (Beamer) kompilujesz pdflatex lub xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

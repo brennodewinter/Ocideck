@@ -1772,6 +1772,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Måldisken har inte tillräckligt med utrymme. Frigör utrymme och försök igen.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Detta decks sigill matchar inte längre innehållet — det redigerades efter förseglingen.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML öppnas i vilken browser som helst utan internet och renderar kodblock, matematik och mermaid-diagram. LaTeX (Beamer) kompileras med pdflatex eller xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

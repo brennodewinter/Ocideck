@@ -1780,6 +1780,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Paskirties diskas neturi pakankamai vietos. Atlaisvinkite vietos ir bandykite dar kartą.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Šio deko antspaudas nebeatitinka turinio — jis buvo redaguotas po antspaudavimo.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML atsidaro bet kurioje naršyklėje be interneto ir renderuoja kodo blokus, matematiką ir mermaid diagramas. LaTeX (Beamer) kompiliuojamas su pdflatex arba xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

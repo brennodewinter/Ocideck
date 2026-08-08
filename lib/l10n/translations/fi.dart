@@ -1773,6 +1773,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Kohdelevyllä ei ole tarpeeksi tilaa. Vapauta tilaa ja yritä uudelleen.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Tämän deckin sinetti ei enää vastaa sisältöä — sitä muokattiin sinetöinnin jälkeen.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML avautuu missä tahansa selaimessa ilman internetiä ja renderöi koodilohkot, matematiikan ja mermaid-kaaviot. LaTeX (Beamer) käännetään pdflatex- tai xelatex-komennolla.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

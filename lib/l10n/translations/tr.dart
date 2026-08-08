@@ -2750,6 +2750,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Hedef diskte yeterli alan yok. Alan boşaltın ve tekrar deneyin.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Bu deckin mührü artık içeriğiyle eşleşmiyor — mühürlenmeden sonra düzenlendi.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML internet olmadan herhangi bir tarayıcıda açılır ve kod bloklarını, matematik ve mermaid diyagramlarını renderlar. LaTeX (Beamer) pdflatex veya xelatex ile derlenir.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
