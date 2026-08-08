@@ -12,6 +12,31 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.4.1] — 2026-08-08
+
+### Added
+
+- feat(documentmodus): documentbrede stijl via theme:-frontmatter
+
+### Changed
+
+- docs(design): XMPP CollabTransport v3 — verwerk v2-re-review
+- docs(design): XMPP CollabTransport v2 — verwerk security-architect + bewaker review
+- docs(design): XMPP CollabTransport — uitgewerkt implementatieplan (slice 2)
+- docs(native-calls): §7.1 build-status — wat is af, wat rest
+- docs: dank Jeroen Hermans in CONTRIBUTORS
+- docs(native-calls): §5.2-kop — beide chat-modes expliciet ondersteund
+- docs(native-calls): companion-kanaalnaamgeving + chat-E2E-keuze vastleggen
+- security: APT-resilience batch (#1366–#1370)
+- security: robustness-batch (#1350–#1360)
+
+### Fixed
+
+- fix(documentmodus): lijsttekst én bullet-marker in WYSIWYG volgen de body-kleur
+- fix(documentmodus): Visueel blijft bewerkbaar bij niet-verliesvrije opmaak
+- fix: verhoog polling-budget save-as-test van 500ms naar 5s (#1363)
+- fix(release): herstartbare release_auto.sh + royale poort-wachttijd
+
 ## [0.4.0] — 2026-08-07
 
 ### Added
