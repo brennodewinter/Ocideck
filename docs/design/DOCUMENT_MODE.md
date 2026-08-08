@@ -5,7 +5,7 @@ you edit like a word processor — headings, tables, images, charts, gantt,
 mermaid — where the file on disk stays a plain, maximally interchangeable `.md`
 that any Markdown reader opens.*
 
-> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-08 · **Published by:** Stichting LibreKAT
+> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-08 · **Published by:** Stichting LibreKAT
 
 > **This is a design doc, not shipping behaviour.** It is the *format-first*
 > gate: the disk contract and the shared-editor decision must be signed off
@@ -135,11 +135,15 @@ ship.
 
 **MUST:**
 
-- **No `marp: true`, no `theme:`, no `paginate:`** injected. (The deck
-  serialiser always writes these — see
+- **No `marp: true`, no `theme:`, no `paginate:`** injected *automatically*. (The
+  deck serialiser always writes these — see
   [`markdown_service.dart`](../../lib/services/markdown_service.dart) around the
   front-matter writer. The document path uses its **own** flat serialise route,
-  never `generateDeck`.)
+  never `generateDeck`.) One exception, added 2026-08-08, does **not** weaken
+  this: a user may deliberately pick a **document-wide style**, which writes a
+  single `theme:` key byte-surgically (§12) — never `marp:`/`paginate:` alongside
+  it, and never on its own accord. A document with no style still carries no front
+  matter, so §3.1's byte contract holds unchanged.
 - **No forced slide `---` separators** and **no `themes/`/`logos/` project
   scaffold** (`_writeProject` is presentation-only).
 - **No zero-width-space dash-escape.** `escapeDeckMarkdownDashLines`
@@ -712,3 +716,113 @@ The audience-boundary gate proves the **signature**, not the derivation (its
 documented blind spot); requirements 2 and 3 are the guarantees the compiler
 cannot give. Every export route (`.md`, HTML, the printed PDF) must carry the
 **already-projected** body — nothing un-scanned leaves the machine.
+
+---
+
+## 12. Document-wide style — the `theme:` front-matter key (added 2026-08-08)
+
+*A document may carry one **style**: a font-and-styling profile chosen
+document-wide and written into the source as a single YAML front-matter key. It
+is the only front-matter key the document path ever writes, it is written only on
+the user's explicit request, and it is written byte-surgically — so §3's disk
+contract stands unchanged. The picker in the toolbar owns it; the writer never
+types it as text.*
+
+### 12.1 What is on disk — the `theme:` key
+
+A styled document opens with a leading YAML front-matter block whose one owned key
+is `theme: <profile-name>`:
+
+```
+---
+theme: LibreKAT
+---
+
+# Rapport
+…
+```
+
+The value is the **name of a `ThemeProfile`** — the same profiles the slide side
+uses (the built-ins `LibreKAT`, `Standaard` and `Security`, plus any the user
+created), each carrying a font and styling. There is deliberately **no** new
+kind of profile for documents: a document reuses the deck's style profiles by
+name so a house style is defined once.
+
+The style key is a portable YAML key any Markdown reader hides; it is **not** a
+recognition marker. Recognition stays exactly what red line §8.2 says — the
+*absence* of `marp: true`. A document that carries only `theme:` (verified against
+[`markdown_service.dart`](../../lib/services/markdown_service.dart)
+`sniffFrontmatter`, which sets `marp` only for `marp: true`) opens as a **document**,
+never a deck. `theme:` never drags `marp:`/`paginate:` with it.
+
+### 12.2 Byte-faithfulness — the red line held
+
+The style lives behind
+[`document_front_matter.dart`](../../lib/utils/document_front_matter.dart), a pure
+byte-surgical string transform (`splitDocumentFrontMatter`, `documentStyleName`,
+`withDocumentStyleName`) that never re-serialises the whole document. The
+consequences that matter:
+
+- A document **without** a style carries **no** front matter, so open→save without
+  an edit is byte-identical — §3.1's zero-body-loss contract is untouched.
+- Choosing a style on a plain document **prepends** a minimal `---`/`theme:`/`---`
+  block; choosing **"Geen"** (none) removes it again. When `theme:` was the only
+  key, the whole block is dropped and the exact plain body returns; when the author
+  wrote other front-matter keys by hand, only the `theme:` line is touched and
+  every other key and the body stay verbatim. Set-a-style-then-clear-it therefore
+  round-trips to the original bytes.
+- CRLF/LF and existing quoting are preserved; an unusual custom profile name (a
+  colon, a leading dash, surrounding spaces) is YAML-quoted so it round-trips.
+
+`MarkdownDocument` exposes this as `body` (source minus the block), `frontMatter`
+(the verbatim block, or `''`), `styleName`, and the two producers `withBody` and
+`withStyleName`, with `frontMatter + body == source` always true.
+
+### 12.3 The editor edits the body; the picker owns the style
+
+[`document_editor_screen.dart`](../../lib/widgets/document_editor_screen.dart)
+binds the text surface to the document **body**, not the raw source: every
+write-back puts the front matter in front again, so `document.source` stays
+byte-faithful. The `theme:` line is therefore **never** shown as editable text —
+it is managed by the **Style** picker (`_DocEditorToolbar._styleMenu`), which lists
+"Geen (platte tekst)" plus every profile name and lands the choice byte-surgically
+as a discrete undo step. The resolved style's font colours the writing surface
+(Visual and Source alike) via `MarkdownEditorTheme.documentSurface(fontFamily:)`;
+with no style it falls back to the app font, so a plain document reads exactly as
+before.
+
+### 12.4 Resolver precedence
+
+[`document_style.dart`](../../lib/services/document_style.dart)
+(`resolveDocumentStyleProfile`) resolves the effective profile in this order:
+
+1. **Enforced house style** — when the settings switch `documentStyleEnforced` is
+   on *and* the settings default `documentDefaultStyle` resolves to a profile, it
+   wins and the per-document `theme:` is ignored.
+2. **The document's own `theme:`**, when it names a profile that exists.
+3. **The settings default** document style.
+4. **`null`** — no document style; the caller keeps its own default (the app font
+   in the editor; on export, the project's active profile), so a plain `.md`
+   behaves exactly as it did before this feature.
+
+A name that matches **no** known profile (an unknown or since-removed style) falls
+through to the next step rather than erroring — an absent profile never breaks a
+document. Export drives the same resolution:
+`resolveDocumentStyleProfile(settings, styleName) ?? activeProfileFor(project)`,
+so enforce → per-document `theme:` → settings default → project profile, and a
+document with no style changes nothing about export.
+
+### 12.5 Settings and conversion
+
+- **Settings → General → Document style** carries the two fields:
+  `documentDefaultStyle` (the default for documents without their own `theme:`,
+  or "Geen") and `documentStyleEnforced` (use the default everywhere as a house
+  style, ignoring each document's `theme:`). Both are display-and-export choices
+  only — they write **nothing** into any `.md`; only the per-document picker does
+  that. Enforce can be turned on only once a default is set.
+- **Conversion to a presentation** takes the document **body**, not the front
+  matter, so the style does **not** travel: the `theme:` line is an OciDeck styling
+  hint, not slide content, and a new presentation gets its own theme (§11.3). The
+  export path likewise reads `document.body`; the style reaches the output as the
+  *resolved profile* handed to the renderer, never as a `theme:` line copied into
+  the exported text.

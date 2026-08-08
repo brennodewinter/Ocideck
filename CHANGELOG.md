@@ -1119,6 +1119,28 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Documentmodus: een documentbrede stijl.** Een document kan nu één stijl kiezen
+  — een lettertype- en opmaakprofiel (`ThemeProfile`; de ingebouwde *LibreKAT*,
+  *Standaard*, *Security* of een eigen profiel) — via een **Stijl**-kiezer in de
+  werkbalk. De keuze landt als een enkele `theme:`-sleutel in de YAML-frontmatter
+  van het platte `.md`, byte-chirurgisch: een document zónder stijl draagt géén
+  frontmatter, dus openen+opslaan zonder wijziging blijft byte-identiek, en
+  stijl-zetten-en-weer-wissen levert exact de oorspronkelijke bytes (andere
+  handgeschreven frontmatter-sleutels en de body blijven verbatim). `theme:` zónder
+  `marp: true` blijft een document — herkenning leunt nog steeds op de *afwezigheid*
+  van `marp: true`, dus een enkel `theme:` maakt er nooit een deck van; een onbekende
+  of verwijderde profielnaam valt terug op de standaard/app in plaats van te falen.
+  De editor bewerkt de **body** (bron zonder frontmatter); de frontmatter wordt door
+  de kiezer beheerd, niet als tekst getypt. Het lettertype van de opgeloste stijl
+  kleurt het schrijfoppervlak, en de export gebruikt het opgeloste profiel
+  (afdwingen → per-document `theme:` → standaard → projectprofiel); conversie naar
+  een presentatie neemt de body, niet de frontmatter, dus de stijl reist niet mee.
+  In **Instellingen → Algemeen → Documentstijl** staan een standaard documentstijl
+  (voor documenten zonder eigen `theme:`) en een *afdwingen*-schakelaar (huisstijl;
+  negeert de per-document `theme:`); beide zijn puur weergave- en exportkeuzes en
+  schrijven niets in een bestand. Nieuwe bestanden `lib/utils/document_front_matter.dart`
+  (de byte-chirurgische helper) en `lib/services/document_style.dart` (de resolver).
+  Zie `DOCUMENT_MODE.md` §12, `FILE_FORMAT.md` §14.5 en de USER_GUIDE.
 - **Documentmodus: opsommingen in de WYSIWYG kregen de juiste tekstkleur.** In de
   Visuele (WYSIWYG) modus stonden opsommings- en genummerde-lijstitems in het
   lichte thema in een blauwe/link-achtige kleur, terwijl koppen en alinea's op

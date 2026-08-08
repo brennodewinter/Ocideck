@@ -4230,6 +4230,27 @@ portable Markdown: a **chart** (a ` ```chart ` fence with its data in
 **image** (copied into `images/`). Each stays plain, parseable text so the file
 keeps opening elsewhere.
 
+### Giving a document a style
+
+A **Style** button in the toolbar picks one document-wide style — a font-and-styling
+profile, the same profiles the slide side uses (*LibreKAT*, *Standaard*, *Security*,
+or one you made yourself). The chosen style colours the writing surface as you type
+and is what the export uses, so a memo can look like your house style rather than the
+default. Choosing a style writes a small `theme:` line into the file's front matter,
+and nothing else; **Geen (platte tekst)** ("None") takes that line back out. A
+document you never style stays a plain `.md` with no front matter at all — opening
+and saving it again is byte-for-byte the same file, and setting a style and then
+choosing *Geen* returns you to the original bytes. A style is only styling: it never
+turns a document into a presentation, and if it names a profile that no longer exists
+the document falls back to the default rather than failing. *(Added 2026-08-08.)*
+
+Under *Settings → General → Document style* you can set a **default document style**
+for documents that do not choose their own, and switch on **Deze stijl afdwingen**
+("Enforce this style") to use that one style everywhere as a house style, ignoring
+each document's own `theme:`. Both are display-and-export choices only — they write
+nothing into any file; only the per-document Style button in the editor does that.
+Enforcing is available once a default style is set.
+
 ### Exporting a document
 
 **Export is not Save.** Save writes your byte-faithful original; **Export** makes
