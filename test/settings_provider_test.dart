@@ -361,11 +361,14 @@ void main() {
       final n = await _loadedNotifier();
       await n.setDocumentDefaultStyle('Europa');
       await n.setDocumentStyleEnforced(true);
+      await n.setDocumentChapterPageBreak(true);
       expect(n.state.documentDefaultStyle, 'Europa');
       expect(n.state.documentStyleEnforced, isTrue);
+      expect(n.state.documentChapterPageBreak, isTrue);
       final prefs = await SharedPreferences.getInstance();
       expect(prefs.getString('documentDefaultStyle'), 'Europa');
       expect(prefs.getBool('documentStyleEnforced'), isTrue);
+      expect(prefs.getBool('documentChapterPageBreak'), isTrue);
 
       await n.setDocumentDefaultStyle(null);
       await n.setDocumentStyleEnforced(false);

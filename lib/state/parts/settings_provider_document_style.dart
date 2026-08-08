@@ -46,3 +46,18 @@ Future<void> _applyDocumentStyleEnforced(
     (prefs) => prefs.setBool('documentStyleEnforced', enforced),
   );
 }
+
+/// Documentmodus: laat elk hoofdstuk (H1) bij export/afdruk op een nieuwe pagina
+/// beginnen, of niet. Puur een export-/afdrukkeuze; raakt geen `.md`-bestand.
+Future<void> _applyDocumentChapterPageBreak(
+  SettingsNotifier notifier,
+  bool enabled,
+) {
+  notifier.currentState = notifier.currentState.copyWith(
+    documentChapterPageBreak: enabled,
+  );
+  return notifier._persist(
+    'documentChapterPageBreak',
+    (prefs) => prefs.setBool('documentChapterPageBreak', enabled),
+  );
+}

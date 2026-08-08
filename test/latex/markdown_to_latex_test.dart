@@ -103,6 +103,16 @@ void main() {
       expect(out, contains('Een citaat'));
     });
 
+    test('chapterPageBreak: elk hoofdstuk op een nieuwe pagina, behalve het eerste', () {
+      const doc = '# Een\n\ntekst\n\n# Twee\n\nmeer\n\n# Drie\n';
+      // Drie H1's → twee `\newpage` (het eerste hoofdstuk krijgt er geen, anders
+      // een leeg openingsblad).
+      final on = markdownToLatex(doc, chapterPageBreak: true);
+      expect(r'\newpage'.allMatches(on), hasLength(2));
+      // Uit (standaard): geen enkele pagina-breuk bij een hoofdstuk.
+      expect(markdownToLatex(doc), isNot(contains(r'\newpage')));
+    });
+
     test('een thematische breuk (---) wordt een pagina-einde (\\newpage)', () {
       // In een document is `---` een pagina-einde, niet een zichtbare lijn
       // (DOCUMENT_MODE.md). Elke thematische-breuk-vorm parseert naar `hr`.

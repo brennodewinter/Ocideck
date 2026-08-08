@@ -79,6 +79,13 @@ typedef HtmlImageResolver = Future<String?> Function(String source);
 /// export-plafonds (`FileService.maxPackageBytes`).
 const int kMaxHtmlEmbedTotalBytes = 512 * 1024 * 1024; // 512 MiB
 
+/// Print-CSS voor 'nieuw hoofdstuk op een nieuwe pagina': elke H1 breekt naar een
+/// nieuw blad, behalve de eerste (anders een leeg eerste blad). Alleen ingespoten
+/// wanneer de instelling aanstaat; op het scherm blijft het document doorlopend.
+const _chapterPageBreakCss =
+    '@media print{.document h1{page-break-before:always;break-before:page}'
+    '.document h1:first-child{page-break-before:auto;break-before:auto}}';
+
 /// Gegooid wanneer de ingesloten afbeeldingen samen [kMaxHtmlEmbedTotalBytes]
 /// zouden overschrijden. De UI vertaalt dit via `userFacingError`.
 class HtmlEmbedBudgetExceeded implements Exception {
@@ -184,6 +191,10 @@ class MarpHtmlService {
     // (`<section class="document">`) i.p.v. losse 16:9-dia's (§11.2). Loopt door
     // exact dezelfde inerte `<script type="text/markdown">`-poort als de dia's.
     bool continuous = false,
+    // Documentmodus: laat elk hoofdstuk (H1) bij afdrukken op een nieuwe pagina
+    // beginnen (instelling). Alleen zinvol met [continuous]; het eerste hoofdstuk
+    // krijgt geen breuk zodat er geen leeg eerste blad ontstaat.
+    bool chapterPageBreak = false,
   }) async {
     // De zes bundel-assets en de themed CSS zijn onafhankelijk.
     final [
@@ -273,7 +284,8 @@ class MarpHtmlService {
         '${_cspMeta(nonce)}'
         '<title>$title</title>'
         '$headMeta'
-        '<style>${exportBaseCss()}\n$css\n$hljsCss</style>'
+        '<style>${exportBaseCss()}\n$css\n$hljsCss'
+        '${chapterPageBreak ? _chapterPageBreakCss : ''}</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
         '${inline(marked, 'marked')}'
         '${inline(purify, 'dompurify')}'

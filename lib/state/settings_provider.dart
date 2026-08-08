@@ -264,6 +264,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           : 'Europa',
       documentDefaultStyle: prefs.getString('documentDefaultStyle'),
       documentStyleEnforced: prefs.getBool('documentStyleEnforced') ?? false,
+      documentChapterPageBreak:
+          prefs.getBool('documentChapterPageBreak') ?? false,
       cockpitColorSchemes: cockpit.schemes,
       selectedCockpitColorSchemeName: cockpit.selectedName,
       cockpitVisualStyle: cockpit.visualStyle,
@@ -537,6 +539,9 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
 
   Future<void> setDocumentStyleEnforced(bool enforced) =>
       _applyDocumentStyleEnforced(this, enforced);
+
+  Future<void> setDocumentChapterPageBreak(bool enabled) =>
+      _applyDocumentChapterPageBreak(this, enabled);
 
   Future<void> setClassificationWatermarkEnabled(bool enabled) async {
     state = state.copyWith(classificationWatermarkEnabled: enabled);

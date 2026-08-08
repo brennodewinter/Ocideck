@@ -64,6 +64,17 @@ void main() {
       expect(html, contains('.document hr{page-break-after:always'));
     });
 
+    test('chapterPageBreak spuit de hoofdstuk-print-CSS in', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final on = await service.build(_md, continuous: true, chapterPageBreak: true);
+      // Elke H1 breekt in print naar een nieuw blad; de eerste niet (geen leeg blad).
+      expect(on, contains('.document h1{page-break-before:always'));
+      expect(on, contains('.document h1:first-child{page-break-before:auto'));
+      // Uit (standaard): geen hoofdstuk-breuk-regel.
+      final off = await service.build(_md, continuous: true);
+      expect(off, isNot(contains('.document h1{page-break-before:always')));
+    });
+
     test('de renderroute-selector dekt de documentsectie', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final html = await service.build(_md, continuous: true);

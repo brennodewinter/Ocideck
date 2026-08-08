@@ -600,6 +600,11 @@ class AppSettings {
   /// staan maar wordt genegeerd zolang dit aanstaat.
   final bool documentStyleEnforced;
 
+  /// Documentmodus: laat elk hoofdstuk (een H1-kop) bij het exporteren/afdrukken
+  /// op een nieuwe pagina beginnen. Standaard uit. Puur een export-/afdrukkeuze;
+  /// het raakt de `.md` niet.
+  final bool documentChapterPageBreak;
+
   /// Named cockpit colour schemes and the globally selected one. The active
   /// scheme is applied to every cockpit slide (in preview and export); the
   /// colours are styling and live here, not in the deck `.md`.
@@ -799,6 +804,7 @@ class AppSettings {
     this.selectedAppAppearanceProfileName = 'Europa',
     this.documentDefaultStyle,
     this.documentStyleEnforced = false,
+    this.documentChapterPageBreak = false,
     this.cockpitColorSchemes = CockpitColorScheme.builtIns,
     this.selectedCockpitColorSchemeName = 'Standaard',
     this.cockpitVisualStyle = CockpitVisualStyle.authentic,
@@ -889,6 +895,7 @@ class AppSettings {
     String? selectedAppAppearanceProfileName,
     String? documentDefaultStyle,
     bool? documentStyleEnforced,
+    bool? documentChapterPageBreak,
     List<CockpitColorScheme>? cockpitColorSchemes,
     String? selectedCockpitColorSchemeName,
     CockpitVisualStyle? cockpitVisualStyle,
@@ -955,6 +962,8 @@ class AppSettings {
           : (documentDefaultStyle ?? this.documentDefaultStyle),
       documentStyleEnforced:
           documentStyleEnforced ?? this.documentStyleEnforced,
+      documentChapterPageBreak:
+          documentChapterPageBreak ?? this.documentChapterPageBreak,
       cockpitColorSchemes: cockpitColorSchemes ?? this.cockpitColorSchemes,
       selectedCockpitColorSchemeName:
           selectedCockpitColorSchemeName ?? this.selectedCockpitColorSchemeName,
