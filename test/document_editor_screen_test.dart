@@ -89,26 +89,42 @@ void main() {
     expect(find.text('| Team | Omzet |'), findsNothing);
   });
 
-  testWidgets('Visueel: rauwe HTML toont de leesweergave, geen broncode', (
-    tester,
-  ) async {
-    await tester.binding.setSurfaceSize(const Size(1200, 800));
-    addTearDown(() => tester.binding.setSurfaceSize(null));
+  testWidgets(
+    'Visueel: rauwe HTML blijft bewerkbaar met opmaakbalk en waarschuwing',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
 
-    final n = DocumentNotifier()
-      ..loadDocument(
-        MarkdownDocument.parse('# Kop\n\n<div>rauwe html</div>\n\nTekst.'),
+      final n = DocumentNotifier()
+        ..loadDocument(
+          MarkdownDocument.parse('# Kop\n\n<div>rauwe html</div>\n\nTekst.'),
+        );
+      await tester.pumpWidget(harness(n));
+      await tester.pump();
+
+      // Een constructie die de brug niet verliesvrij aankan valt níet terug op
+      // een read-only leesweergave (OciDeck beslist niet vóór de gebruiker dat
+      // een document onbewerkbaar is): de gedeelde notes-editor blijft, nu op de
+      // bewerkbare brontekst — geen Quill-WYSIWYG, geen gerenderde leesweergave.
+      expect(find.byType(MarkdownNotesEditor), findsOneWidget);
+      expect(find.byType(QuillEditor), findsNothing);
+      expect(find.byType(DocumentMarkdownView), findsNothing);
+      // De volledige opmaakknoppenbalk blijft binnen bereik...
+      expect(find.byTooltip('Vet'), findsOneWidget);
+      expect(find.byTooltip('Kop'), findsOneWidget);
+      // ...met een begrijpelijke waarschuwing dat je hier de brontekst bewerkt.
+      expect(find.textContaining('Bronmodus beschermt opmaak'), findsOneWidget);
+
+      // En het is écht bewerkbaar: typen stroomt live naar de notifier.
+      await tester.enterText(
+        find.byType(TextField),
+        '# Kop\n\n<div>rauwe html</div>\n\nGewijzigd.',
       );
-    await tester.pumpWidget(harness(n));
-    await tester.pump();
-
-    // Een constructie die de brug niet verliesvrij aankan → nette leesweergave,
-    // geen ruwe markdown en geen bewerkbare Quill.
-    expect(find.byType(MarkdownNotesEditor), findsNothing);
-    expect(find.byType(QuillEditor), findsNothing);
-    expect(find.byType(DocumentMarkdownView), findsOneWidget);
-    expect(find.textContaining('Bronmodus beschermt opmaak'), findsOneWidget);
-  });
+      await tester.pump();
+      expect(n.currentState.document!.source, contains('Gewijzigd.'));
+      expect(n.currentState.isDirty, isTrue);
+    },
+  );
 
   testWidgets('Bron toont rauwe bron én live weergave', (tester) async {
     final n = DocumentNotifier()
