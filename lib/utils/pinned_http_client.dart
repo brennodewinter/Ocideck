@@ -14,7 +14,10 @@ import 'net_guard.dart';
 /// niet meekomt bij een fix.
 ///
 /// De aanroeper zet per request `followRedirects = false` — een 3xx mag niet
-/// om de hostcontrole heen lopen (zie network_sink_guard_test).
+/// om de hostcontrole heen lopen (zie network_sink_guard_test). Een semgrep-regel
+/// (`ocideck-follow-redirects-op-gepinde-client`) vlagt een `openUrl`-aanroep
+/// zonder `followRedirects = false` in dezelfde functie, zodat een nieuwe
+/// aanroeper die de conventie mist niet onopgemerkt blijft.
 HttpClient buildPinnedClient(
   InternetAddress pinnedAddress, {
   Duration connectionTimeout = const Duration(seconds: 15),

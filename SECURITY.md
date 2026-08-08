@@ -90,6 +90,20 @@ SBOM. Where no upgrade is available, the mitigation and the residual are written
 down in [Vendored bundle currency](#vendored-bundle-currency) under the
 component's own name, so a reader can see it rather than infer it.
 
+**FFI-dependencies and the SBOM.** Two dependencies ship native code via FFI:
+`dartcv4` (OpenCV bindings, desktop-only face detection) and `flutter_webrtc`
+(libwebrtc, default-off video meetings). Native code runs outside Dart's
+sandbox, so a compromised package is a direct code-execution risk. The
+integrity guarantee here is the **SHA-256 of the pub.dev archive** recorded in
+`pubspec.lock` and carried into the SBOM by `tool/generate_sbom.dart`. CI runs
+`flutter pub get --enforce-lockfile`, so the locked hash is the hash that
+resolves — a tampered archive with a different hash fails the lockfile check.
+The residual is that the guarantee covers the archive, not the native binaries
+inside it: a compromise of the publisher's build pipeline (not the archive
+transport) would produce a different archive with a different hash, and the
+lockfile would catch that on the next `pub get` — but not on a machine that
+already cached the old archive.
+
 ## Keeping vulnerable third-party components out
 
 **This describes how the maintainers order their own work. It is not a service
@@ -409,6 +423,13 @@ OciDeck constrains what an opened deck can do:
   and if the guarded signalling fails, no media channel opens (the guard stays the
   gate one layer up). Media E2EE is off on iOS/macOS (a known `flutter_webrtc`
   frame-cryptor crash, flutter-webrtc#2135) and is reported as such, never claimed.
+
+  **libvpx-versie en CVE-2023-5217.** `flutter_webrtc` 1.6.0 bundelt
+  libwebrtc M144.7559.09, dat libvpx 1.15.2 meelevert. CVE-2023-5217 (heap
+  buffer overflow in VP8-decoding) is gepatcht in libvpx 1.13.1; 1.15.2 zit
+  ruim boven de fix. De module is dus niet kwetsbaar voor deze CVE.
+  Geverifieerd 2026-08-08 tegen de changelog op pub.dev en de
+  Chromium-M144-libvpx-roll.
 
 Known residual hardening: the render-path symlink cache is keyed by path for the
 session, so a symlink swapped *after* its first render isn't re-checked (a

@@ -3,6 +3,7 @@ import '../models/document_signature.dart';
 import '../models/redaction_manifest.dart';
 import '../models/seal_record.dart';
 import '../utils/content_hash.dart';
+import '../utils/secure_compare.dart';
 import 'markdown_service.dart';
 
 /// Result of verifying a deck's document seal (§8 A1).
@@ -120,11 +121,14 @@ class DocumentIntegrity {
     switch (deck.sealForm) {
       case SealForm.fileBytes:
         if (deck.fileHash.isEmpty) return IntegrityStatus.notVerifiable;
-        return deck.fileHash == deck.sealHash
+        return constantTimeEqualsString(deck.fileHash, deck.sealHash)
             ? IntegrityStatus.intact
             : IntegrityStatus.changed;
       case SealForm.canonical:
-        return computeCanonicalHash(deck) == deck.sealHash
+        return constantTimeEqualsString(
+              computeCanonicalHash(deck),
+              deck.sealHash,
+            )
             ? IntegrityStatus.intact
             : IntegrityStatus.changed;
     }

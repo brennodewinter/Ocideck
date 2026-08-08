@@ -17,6 +17,7 @@ import '../../models/privacy_disposition.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/redaction_manifest.dart';
 import '../../models/slide.dart';
+import '../../utils/secure_compare.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_regions.dart';
 import 'privacy_scanner.dart';
@@ -305,7 +306,10 @@ class RedactionManifestService {
     RedactionEntry entry, {
     required String salt,
     required String value,
-  }) => commitmentFor(salt: salt, value: value) == entry.commitment;
+  }) => constantTimeEqualsString(
+    commitmentFor(salt: salt, value: value),
+    entry.commitment,
+  );
 
   /// Controleert of [manifest] een eerlijke afleiding is van [source].
   ///
