@@ -3133,3 +3133,30 @@ automatically. Facts that matter on disk:
 The design — the resolver precedence (enforce → per-document `theme:` → settings
 default → project profile) and why the write is byte-surgical — is in
 [`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md) §12.
+
+### 14.6 Page break — a `---` thematic break *(added 2026-08-08)*
+
+A `---` line in a document body is a **page break**: a plain Markdown thematic
+break, the same construct any Markdown reader renders as a horizontal rule. There
+is **no** OciDeck-specific syntax and no new front-matter key — a foreign reader
+just sees a divider line, and the file stays maximally interchangeable. On disk it
+is a literal `---` in the body; on-disk recognition of the file as a document is
+unchanged (the *absence* of `marp: true`, §14.1). Because a document is **never**
+split on `---` (unlike a deck, §3), the break stays a byte-clean thematic break
+and never triggers the deck path's zero-width-space dash-escape.
+
+Where the break has an effect is **export**, not the byte layout:
+
+- The **continuous HTML** export renders each `---` as a real `<hr>`; on screen it
+  reads as a rule, but when the recipient prints it (or saves it as PDF) the
+  content after each break starts on a **new sheet** (`.document hr` carries
+  `page-break-after:always` under `@media print`).
+- The **LaTeX (`.tex`)** export maps every thematic break (`---`, `- - -`, `***`)
+  to `\newpage`, so the compiled PDF begins a fresh page there instead of drawing
+  a rule.
+
+Making every new `H1` chapter start on a new page automatically is a **planned
+follow-up and is not available yet**; a page break is only the explicit `---` the
+author inserts. The design is in
+[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md) §13, and the
+author-facing description is in the [User Guide](USER_GUIDE.md#inserting-a-page-break).

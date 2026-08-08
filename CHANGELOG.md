@@ -1168,6 +1168,27 @@ that before deciding whether this alpha fits what you are doing.
   document krijgt zo hetzelfde vangnet als een presentatie. In de browser is er,
   net als voor een presentatie, geen crashherstel. Zie `DOCUMENT_MODE.md` §5, de
   SOURCE_MAP en de USER_GUIDE (sectie *Documents*).
+- **Documentmodus: een pagina-einde (`---`).** Het invoeg-palet van de
+  documenteditor heeft een optie **Pagina-einde** die een `---` — een gewone
+  Markdown-thematische breuk — op de cursor invoegt. Draagbaar: elke Markdown-lezer
+  toont `---` als een scheidingslijn. Op het scherm blijft een document doorlopend;
+  bij export wordt de `---` een echt nieuw blad. In de HTML/PDF-export blijft de
+  weergave doorlopend, maar bij afdrukken (of *Opslaan als PDF* uit de browser)
+  breekt `.document hr` naar een nieuwe pagina (`@media print{…page-break-after:
+  always}` in `lib/services/marp_html/marp_html_service_css.dart`); de LaTeX-export
+  maakt van elke thematische-breuk-vorm (`---`, `- - -`, `***`) een `\newpage` in
+  plaats van een zichtbare lijn (`lib/services/latex/markdown_to_latex.dart`). In de
+  Visuele (WYSIWYG) editor wordt een `---` als horizontale lijn getekend door de
+  nieuwe `DividerEmbedBuilder`
+  (`lib/widgets/markdown_editor/divider_embed_builder.dart`); zonder die builder
+  tekende Quill er een `RenderErrorBox` voor — een latente crash voor élk document
+  met een `---`. En `splitDocumentFrontMatter`
+  (`lib/utils/document_front_matter.dart`) behandelt een `---…---`-blok voortaan
+  alleen als frontmatter wanneer het met een YAML-sleutel opent, zodat een leidend
+  `---`-pagina-einde nooit meer als `theme:`-blok wordt opgeslokt. Een kop op een
+  nieuwe pagina (een H1 die op een nieuw blad begint, als je dat zo instelt) is nog
+  **niet** beschikbaar; die volgt in een aparte follow-up. Zie `DOCUMENT_MODE.md`
+  §13, `FILE_FORMAT.md` §14.6 en de USER_GUIDE.
 - **Documentmodus: een documentbrede stijl.** Een document kan nu één stijl kiezen
   — een lettertype- en opmaakprofiel (`ThemeProfile`; de ingebouwde *LibreKAT*,
   *Standaard*, *Security* of een eigen profiel) — via een **Stijl**-kiezer in de
