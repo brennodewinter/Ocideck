@@ -1808,6 +1808,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Caibidil nua ar leathanach nua',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Cuir tús le gach caibidil (ceannteideal H1) ar leathanach nua le linn easpórtála agus priontála.',
   'Pagina-einde': 'Briseadh leathanaigh',
   'Stijl': 'Stíl',
   'Geen (platte tekst)': 'Gan aon (gnáth-théacs)',

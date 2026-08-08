@@ -1802,6 +1802,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Novo capítulo numa nova página',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Fazer com que cada capítulo (um título H1) comece numa nova página ao exportar e imprimir.',
   'Pagina-einde': 'Quebra de página',
   'Stijl': 'Estilo',
   'Geen (platte tekst)': 'Nenhum (texto simples)',

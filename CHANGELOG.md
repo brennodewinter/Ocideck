@@ -1182,6 +1182,25 @@ that before deciding whether this alpha fits what you are doing.
   identity-key-check in `ingest` — het rot-tekenen zit achter de
   ketenkeuring-xmpp-spine-chain-review en is in deze plak niet aangeraakt.
   Intern-plumbing, achter de standaard-uit Videovergaderingen-module.
+- **Documentmodus: instelling 'Nieuw hoofdstuk op een nieuwe pagina'.** De
+  follow-up op het pagina-einde. In *Instellingen → Algemeen → Documentstijl*
+  staat een schakelaar **Nieuw hoofdstuk op een nieuwe pagina**
+  (`AppSettings.documentChapterPageBreak`, standaard uit). Staat hij aan, dan
+  begint elk hoofdstuk — een H1-kop — bij het exporteren en afdrukken op een
+  nieuw blad, zónder dat je ergens een `---` hoeft te plaatsen. Het is puur een
+  export-/afdrukkeuze: op het scherm blijft het document doorlopend en de `.md`
+  verandert niet. In de HTML/PDF-export komt er alleen dan een print-CSS-regel
+  `.document h1{page-break-before:always}` bij, met het eerste hoofdstuk
+  uitgezonderd (anders een leeg openingsblad); de LaTeX-export zet een `\newpage`
+  vóór elke `\section` behalve de eerste. De vlag reist van de documenteditor via
+  `writeDocumentExport` naar `MarpHtmlService.build` en `markdownToLatex`
+  (`lib/models/settings.dart`, `lib/state/settings_provider.dart`,
+  `lib/state/parts/settings_provider_document_style.dart`,
+  `lib/services/document_export_service.dart`,
+  `lib/services/marp_html_service.dart`,
+  `lib/services/latex/markdown_to_latex.dart`,
+  `lib/widgets/dialogs/parts/settings_dialog_general.dart`). Zie `DOCUMENT_MODE.md`
+  §13.5, `FILE_FORMAT.md` §14.6 en de USER_GUIDE (sectie *Documents*).
 - **Documentmodus: opslaan en herstel werken nu ook voor een document.** Twee
   samenhangende reparaties. **Opslaan.** `Ctrl/Cmd+S` en *Bestand → Opslaan*
   hingen aan de deck-only opslag, die een document niet kent; op een
@@ -1223,10 +1242,10 @@ that before deciding whether this alpha fits what you are doing.
   met een `---`. En `splitDocumentFrontMatter`
   (`lib/utils/document_front_matter.dart`) behandelt een `---…---`-blok voortaan
   alleen als frontmatter wanneer het met een YAML-sleutel opent, zodat een leidend
-  `---`-pagina-einde nooit meer als `theme:`-blok wordt opgeslokt. Een kop op een
-  nieuwe pagina (een H1 die op een nieuw blad begint, als je dat zo instelt) is nog
-  **niet** beschikbaar; die volgt in een aparte follow-up. Zie `DOCUMENT_MODE.md`
-  §13, `FILE_FORMAT.md` §14.6 en de USER_GUIDE.
+  `---`-pagina-einde nooit meer als `theme:`-blok wordt opgeslokt. Elk hoofdstuk
+  (een H1) op een nieuw blad kan óók zónder een handmatige breuk, via de
+  instelling *Nieuw hoofdstuk op een nieuwe pagina* — zie de aparte vermelding
+  hierboven. Zie `DOCUMENT_MODE.md` §13, `FILE_FORMAT.md` §14.6 en de USER_GUIDE.
 - **Documentmodus: een documentbrede stijl.** Een document kan nu één stijl kiezen
   — een lettertype- en opmaakprofiel (`ThemeProfile`; de ingebouwde *LibreKAT*,
   *Standaard*, *Security* of een eigen profiel) — via een **Stijl**-kiezer in de

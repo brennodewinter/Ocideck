@@ -21,7 +21,7 @@ import 'package:markdown/markdown.dart' as md;
 /// De uitvoer is platte LaTeX zonder preamble. Bedoeld om in een
 /// `\documentclass{article}`- of `beamer`-document ingebed te worden door de
 /// wrappers in `latex_preamble.dart`.
-String markdownToLatex(String markdown) {
+String markdownToLatex(String markdown, {bool chapterPageBreak = false}) {
   if (markdown.trim().isEmpty) return '';
   final protected = _MathProtector.protect(markdown);
   final document = md.Document(
@@ -29,7 +29,10 @@ String markdownToLatex(String markdown) {
     extensionSet: md.ExtensionSet.gitHubFlavored,
   );
   final nodes = document.parse(protected.text);
-  final visitor = _LatexNodeVisitor(mathBlocks: protected.blocks);
+  final visitor = _LatexNodeVisitor(
+    mathBlocks: protected.blocks,
+    chapterPageBreak: chapterPageBreak,
+  );
   for (final node in nodes) {
     node.accept(visitor);
   }
@@ -56,9 +59,18 @@ String markdownInlineToLatex(String markdown) {
 }
 
 class _LatexNodeVisitor implements md.NodeVisitor {
-  _LatexNodeVisitor({this._mathBlocks = const {}});
+  _LatexNodeVisitor({
+    this._mathBlocks = const {},
+    this.chapterPageBreak = false,
+  });
 
   final StringBuffer output = StringBuffer();
+
+  /// Of elk hoofdstuk (H1) op een nieuwe pagina begint (instelling).
+  final bool chapterPageBreak;
+
+  /// Of we al een hoofdstuk zijn tegengekomen — het eerste krijgt geen `\newpage`.
+  bool _seenChapter = false;
 
   /// Placeholder → originele math-inhoud. De parser stript backslashes voor
   /// leestekens (`\,` → `,`), dus we beschermen math vóór de parse en herstellen
@@ -114,6 +126,10 @@ class _LatexNodeVisitor implements md.NodeVisitor {
     switch (element.tag) {
       // ── Koppen ──
       case 'h1':
+        // 'Nieuw hoofdstuk op een nieuwe pagina': elk hoofdstuk (H1) op een vers
+        // blad, behalve het eerste (anders een leeg openingsblad).
+        if (chapterPageBreak && _seenChapter) output.write('\\newpage\n');
+        _seenChapter = true;
         output.write('\\section{');
         _stack.add(_Ctx.heading);
       case 'h2':

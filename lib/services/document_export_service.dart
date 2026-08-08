@@ -97,6 +97,7 @@ Future<String?> writeDocumentExport(
   ThemeProfile? theme,
   ExportDocumentMetadata? metadata,
   HtmlImageResolver? embedImage,
+  bool chapterPageBreak = false,
   required String outputPath,
 }) async {
   switch (format) {
@@ -107,6 +108,7 @@ Future<String?> writeDocumentExport(
       final out = await html.build(
         projectedDocumentBody(bundle),
         continuous: true,
+        chapterPageBreak: chapterPageBreak,
         theme: theme,
         metadata: metadata,
         embedImage: embedImage,
@@ -115,7 +117,10 @@ Future<String?> writeDocumentExport(
       return outputPath;
     case DocumentExportFormat.latex:
       final meta = metadata ?? const ExportDocumentMetadata();
-      final body = markdownToLatex(projectedDocumentBody(bundle));
+      final body = markdownToLatex(
+        projectedDocumentBody(bundle),
+        chapterPageBreak: chapterPageBreak,
+      );
       final tex = '${articlePreamble(meta)}\n$body\n$articlePostamble\n';
       await writeStringAtomic(File(outputPath), tex);
       return outputPath;

@@ -1790,6 +1790,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Новий розділ на новій сторінці',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Починати кожен розділ (заголовок H1) з нової сторінки під час експорту та друку.',
   'Pagina-einde': 'Розрив сторінки',
   'Stijl': 'Стиль',
   'Geen (platte tekst)': 'Немає (звичайний текст)',

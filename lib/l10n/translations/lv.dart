@@ -1772,6 +1772,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Jauna nodaļa jaunā lappusē',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Sākt katru nodaļu (H1 virsrakstu) jaunā lappusē, eksportējot un drukājot.',
   'Pagina-einde': 'Lappuses pārtraukums',
   'Stijl': 'Stils',
   'Geen (platte tekst)': 'Nav (vienkāršs teksts)',

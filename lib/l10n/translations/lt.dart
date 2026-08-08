@@ -1780,6 +1780,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Naujas skyrius naujame puslapyje',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Kiekvieną skyrių (H1 antraštę) pradėti naujame puslapyje eksportuojant ir spausdinant.',
   'Pagina-einde': 'Puslapio lūžis',
   'Stijl': 'Stilius',
   'Geen (platte tekst)': 'Nėra (grynasis tekstas)',

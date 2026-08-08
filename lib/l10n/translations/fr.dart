@@ -732,6 +732,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Nieuw hoofdstuk op een nieuwe pagina':
+      'Nouveau chapitre sur une nouvelle page',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Faire commencer chaque chapitre (un titre H1) sur une nouvelle page lors de l\'exportation et de l\'impression.',
   'Pagina-einde': 'Saut de page',
   'Stijl': 'Style',
   'Geen (platte tekst)': 'Aucun (texte brut)',

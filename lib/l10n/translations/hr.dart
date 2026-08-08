@@ -1779,6 +1779,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Novo poglavlje na novoj stranici',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Neka svako poglavlje (naslov H1) počne na novoj stranici pri izvozu i ispisu.',
   'Pagina-einde': 'Prijelom stranice',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Nema (obični tekst)',

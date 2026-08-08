@@ -732,6 +732,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Neues Kapitel auf einer neuen Seite',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Jedes Kapitel (eine H1-Überschrift) beim Exportieren und Drucken auf einer neuen Seite beginnen lassen.',
   'Pagina-einde': 'Seitenumbruch',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Keine (reiner Text)',

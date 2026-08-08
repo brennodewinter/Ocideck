@@ -1773,6 +1773,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Uusi luku uudelle sivulle',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Aloita jokainen luku (H1-otsikko) uudelta sivulta vietäessä ja tulostettaessa.',
   'Pagina-einde': 'Sivunvaihto',
   'Stijl': 'Tyyli',
   'Geen (platte tekst)': 'Ei mitään (pelkkä teksti)',

@@ -18,6 +18,7 @@ import '../services/recovery_service.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
 
+part 'parts/settings_provider_classification.dart';
 part 'parts/settings_provider_connections.dart';
 part 'parts/settings_provider_document_style.dart';
 part 'parts/settings_provider_git.dart';
@@ -264,6 +265,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           : 'Europa',
       documentDefaultStyle: prefs.getString('documentDefaultStyle'),
       documentStyleEnforced: prefs.getBool('documentStyleEnforced') ?? false,
+      documentChapterPageBreak:
+          prefs.getBool('documentChapterPageBreak') ?? false,
       cockpitColorSchemes: cockpit.schemes,
       selectedCockpitColorSchemeName: cockpit.selectedName,
       cockpitVisualStyle: cockpit.visualStyle,
@@ -521,13 +524,11 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _persistNullableString(this, 'minRequiredExportTlp', key);
   }
 
-  Future<void> setRequireClassificationOnExport(bool enabled) async {
-    state = state.copyWith(requireClassificationOnExport: enabled);
-    await _persist(
-      'setRequireClassificationOnExport',
-      (prefs) => prefs.setBool('requireClassificationOnExport', enabled),
-    );
-  }
+  // Classificatie-op-export — het echte werk staat top-level in
+  // parts/settings_provider_classification.dart, zodat het niet meetelt voor
+  // het regelplafond van deze klasse.
+  Future<void> setRequireClassificationOnExport(bool enabled) =>
+      _applyRequireClassificationOnExport(this, enabled);
 
   // Documentmodus-stijl — het echte werk staat top-level in
   // parts/settings_provider_document_style.dart, zodat het niet meetelt voor
@@ -538,13 +539,11 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   Future<void> setDocumentStyleEnforced(bool enforced) =>
       _applyDocumentStyleEnforced(this, enforced);
 
-  Future<void> setClassificationWatermarkEnabled(bool enabled) async {
-    state = state.copyWith(classificationWatermarkEnabled: enabled);
-    await _persist(
-      'setClassificationWatermarkEnabled',
-      (prefs) => prefs.setBool('classificationWatermarkEnabled', enabled),
-    );
-  }
+  Future<void> setDocumentChapterPageBreak(bool enabled) =>
+      _applyDocumentChapterPageBreak(this, enabled);
+
+  Future<void> setClassificationWatermarkEnabled(bool enabled) =>
+      _applyClassificationWatermarkEnabled(this, enabled);
 
   Future<void> setUiTextScale(double scale) async {
     final clamped = scale.clamp(1.0, 2.0).toDouble();

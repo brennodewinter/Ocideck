@@ -5,7 +5,7 @@ you edit like a word processor — headings, tables, images, charts, gantt,
 mermaid — where the file on disk stays a plain, maximally interchangeable `.md`
 that any Markdown reader opens.*
 
-> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12) — and an inserted **page break** (a plain `---` that renders as a rule in the visual editor and becomes a real page boundary on print/PDF/LaTeX export, §13). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-08 · **Published by:** Stichting LibreKAT
+> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12) — and an inserted **page break** (a plain `---` that renders as a rule in the visual editor and becomes a real page boundary on print/PDF/LaTeX export, §13), with an opt-in **chapter page break** setting that starts every `H1` chapter on a new sheet on export (§13.5). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-08 · **Published by:** Stichting LibreKAT
 
 > **This is a design doc, not shipping behaviour.** It is the *format-first*
 > gate: the disk contract and the shared-editor decision must be signed off
@@ -907,10 +907,38 @@ pair of rules — is never swallowed as a `theme:` block. This keeps §12.2's
 byte-faithfulness rule true in the presence of page breaks: an unstyled document
 carries no front matter, whatever `---` lines its body holds.
 
-### 13.5 What is not built yet
+### 13.5 Chapter page break — an opt-in setting (added 2026-08-08)
 
-The requested option to make **every new chapter (an `H1` heading) begin on a new
-page** — a document-wide toggle rather than a break the author places — is **not
-implemented**. It is noted here as a **planned follow-up**, deliberately kept out
-of this change so nothing is claimed that the code does not do. Today a page break
-is only the explicit `---` an author inserts.
+Beside the author-placed `---`, a document can also start **every new chapter on a
+new page** without a break being typed anywhere. This is a setting, not a marker
+in the file: `AppSettings.documentChapterPageBreak`
+([`settings.dart`](../../lib/models/settings.dart)), a bool that defaults to
+**off**, persisted under the same key and set through
+`SettingsNotifier.setDocumentChapterPageBreak`
+([`settings_provider.dart`](../../lib/state/settings_provider.dart),
+[`parts/settings_provider_document_style.dart`](../../lib/state/parts/settings_provider_document_style.dart) —
+it mirrors `documentStyleEnforced`). The switch lives in **Settings → General →
+Document style** as *Nieuw hoofdstuk op een nieuwe pagina*
+([`settings_dialog_general.dart`](../../lib/widgets/dialogs/parts/settings_dialog_general.dart)).
+
+Like the `---` break, it changes **only the paged output** — the writing surface
+and the on-screen HTML stay continuous — and it never touches the `.md`. The flag
+travels from `DocumentEditorScreen` through `writeDocumentExport`
+([`document_export_service.dart`](../../lib/services/document_export_service.dart))
+into the two paged renderers:
+
+- **HTML / print-to-PDF** — when the setting is on, `MarpHtmlService.build`
+  injects a print-only rule that starts every chapter on a fresh sheet:
+  `@media print{.document h1{page-break-before:always;break-before:page}}`, with
+  `.document h1:first-child` reset to `auto` so the very first chapter does **not**
+  get a break (otherwise the export opens with a blank sheet)
+  ([`marp_html_service.dart`](../../lib/services/marp_html_service.dart)). The CSS
+  is only present when the flag is set; with it off the export is byte-for-byte
+  what it was.
+- **LaTeX** — `markdownToLatex` writes a `\newpage` before every `\section` except
+  the first (an `H1` becomes a `\section`), tracked with a "seen a chapter yet"
+  flag so the first heading opens the document rather than a blank page
+  ([`markdown_to_latex.dart`](../../lib/services/latex/markdown_to_latex.dart)).
+
+Both the `---` break and this setting can be in play at once: the `---` breaks
+where the author placed it, the setting adds a break before each chapter heading.

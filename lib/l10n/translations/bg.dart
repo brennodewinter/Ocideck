@@ -1795,6 +1795,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Нова глава на нова страница',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Всяка глава (заглавие H1) да започва на нова страница при експортиране и печат.',
   'Pagina-einde': 'Прекъсване на страница',
   'Stijl': 'Стил',
   'Geen (platte tekst)': 'Няма (обикновен текст)',

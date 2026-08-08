@@ -59,6 +59,7 @@ part 'marp_html/marp_html_service_css.dart';
 part 'marp_html/marp_html_service_render_script.dart';
 part 'marp_html/marp_html_service_images.dart';
 part 'marp_html/marp_html_service_markup.dart';
+part 'marp_html/marp_html_service_notices.dart';
 
 /// Maakt van een afbeeldingsverwijzing uit een deck een `data:`-URI, of geeft
 /// null wanneer de afbeelding niet in te sluiten is (niet gevonden, buiten de
@@ -79,46 +80,12 @@ typedef HtmlImageResolver = Future<String?> Function(String source);
 /// export-plafonds (`FileService.maxPackageBytes`).
 const int kMaxHtmlEmbedTotalBytes = 512 * 1024 * 1024; // 512 MiB
 
-/// Gegooid wanneer de ingesloten afbeeldingen samen [kMaxHtmlEmbedTotalBytes]
-/// zouden overschrijden. De UI vertaalt dit via `userFacingError`.
-class HtmlEmbedBudgetExceeded implements Exception {
-  const HtmlEmbedBudgetExceeded({
-    required this.usedBytes,
-    required this.limitBytes,
-  });
-
-  /// Bytes al gereserveerd voor ingesloten afbeeldingen toen de grens viel.
-  final int usedBytes;
-
-  /// Het cumulatieve plafond ([kMaxHtmlEmbedTotalBytes], tenzij overschreven).
-  final int limitBytes;
-
-  @override
-  String toString() =>
-      'HtmlEmbedBudgetExceeded(used: $usedBytes, limit: $limitBytes)';
-}
-
-/// The third-party notices for one HTML export: a licence banner per inlined
-/// script (keyed by npm package name) and the collapsible block that carries the
-/// full licence texts.
-///
-/// Both halves exist because an export makes the *user* the distributing party.
-/// MathJax and Mermaid ship minified without any banner at all, so an export
-/// used to hand someone 5 MB of third-party code with no way to tell what it
-/// was or under what terms — a duty the recipient cannot discharge because we
-/// removed the evidence of it.
-class ExportNotices {
-  const ExportNotices({required this.banners, required this.html});
-
-  /// npm package name → the `/*! @license … */` comment prepended to its
-  /// `<script>`, or an empty string for a bundle we have no entry for.
-  final Map<String, String> banners;
-
-  /// The `<details>` block appended to `<body>`, with every full licence text.
-  final String html;
-
-  String bannerFor(String npm) => banners[npm] ?? '';
-}
+/// Print-CSS voor 'nieuw hoofdstuk op een nieuwe pagina': elke H1 breekt naar een
+/// nieuw blad, behalve de eerste (anders een leeg eerste blad). Alleen ingespoten
+/// wanneer de instelling aanstaat; op het scherm blijft het document doorlopend.
+const _chapterPageBreakCss =
+    '@media print{.document h1{page-break-before:always;break-before:page}'
+    '.document h1:first-child{page-break-before:auto;break-before:auto}}';
 
 /// Builds a single, self-contained HTML file from a deck's Marp Markdown.
 ///
@@ -184,6 +151,10 @@ class MarpHtmlService {
     // (`<section class="document">`) i.p.v. losse 16:9-dia's (§11.2). Loopt door
     // exact dezelfde inerte `<script type="text/markdown">`-poort als de dia's.
     bool continuous = false,
+    // Documentmodus: laat elk hoofdstuk (H1) bij afdrukken op een nieuwe pagina
+    // beginnen (instelling). Alleen zinvol met [continuous]; het eerste hoofdstuk
+    // krijgt geen breuk zodat er geen leeg eerste blad ontstaat.
+    bool chapterPageBreak = false,
   }) async {
     // De zes bundel-assets en de themed CSS zijn onafhankelijk.
     final [
@@ -273,7 +244,8 @@ class MarpHtmlService {
         '${_cspMeta(nonce)}'
         '<title>$title</title>'
         '$headMeta'
-        '<style>${exportBaseCss()}\n$css\n$hljsCss</style>'
+        '<style>${exportBaseCss()}\n$css\n$hljsCss'
+        '${chapterPageBreak ? _chapterPageBreakCss : ''}</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
         '${inline(marked, 'marked')}'
         '${inline(purify, 'dompurify')}'

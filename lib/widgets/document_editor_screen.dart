@@ -319,6 +319,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         language: l10n.languageCode,
       ),
       embedImage: embed,
+      chapterPageBreak: settings.documentChapterPageBreak,
       outputPath: outputPath,
     );
   }

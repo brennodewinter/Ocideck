@@ -4265,10 +4265,17 @@ writing surface into pages. Where it takes effect is **export and print**:
 Any thematic-break form the Markdown reader recognises (`---`, `- - -`, `***`)
 counts as a page break on export; the palette inserts the plain `---`.
 
-A related option — making every **new chapter (an `H1` heading) start on a new
-page** when you ask for it — is **not available yet**; it is planned as a separate
-follow-up. For now a page break is something you place yourself with the `---`
-item.
+If you would rather **not** place breaks by hand, you can have every **new
+chapter (an `H1` heading) start on a new page** for you. *(Added 2026-08-08.)*
+Turn on **New chapter on a new page** (*Nieuw hoofdstuk op een nieuwe pagina*)
+under *Settings → General → Document style*. It is off by default and, like the
+`---` break, changes only what you export or print — the document still reads
+continuously on screen and the setting writes nothing into the file. With it on,
+each chapter heading begins a fresh sheet when you print the HTML or *Save as
+PDF*, and the LaTeX export starts a new page there; the very first chapter is left
+where it is, so the export does not open with a blank page. The two work together:
+the setting breaks before every chapter, and any `---` you place breaks where you
+put it.
 
 ### Giving a document a style
 
@@ -4318,7 +4325,8 @@ accessibility of a PDF produced that way — that is the browser's doing — but
 HTML it exports is built to be accessible. A `---`
 [page break](#inserting-a-page-break) you placed becomes a real new sheet at this
 print step (and a `\newpage` in the LaTeX export), while the on-screen HTML stays
-continuous.
+continuous; the same holds for each chapter heading when *New chapter on a new
+page* is on.
 
 Every export runs through the same privacy projection (OciWacht) as a deck
 export, so what leaves is the redacted content, never the raw source.

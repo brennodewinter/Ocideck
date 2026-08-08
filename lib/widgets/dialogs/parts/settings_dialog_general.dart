@@ -579,5 +579,22 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
         style: const TextStyle(fontSize: 11),
       ),
     ),
+    SwitchListTile(
+      contentPadding: EdgeInsets.zero,
+      dense: true,
+      value: settings.documentChapterPageBreak,
+      onChanged: (v) =>
+          ref.read(settingsProvider.notifier).setDocumentChapterPageBreak(v),
+      title: Text(
+        l10n.d('Nieuw hoofdstuk op een nieuwe pagina'),
+        style: const TextStyle(fontSize: 13),
+      ),
+      subtitle: Text(
+        l10n.d(
+          'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.',
+        ),
+        style: const TextStyle(fontSize: 11),
+      ),
+    ),
   ];
 }
