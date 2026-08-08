@@ -1802,6 +1802,17 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Stijl': 'Estilo',
+  'Geen (platte tekst)': 'Nenhum (texto simples)',
+  'Documentstijl': 'Estilo do documento',
+  'Standaard documentstijl': 'Estilo de documento predefinido',
+  'Deze stijl afdwingen': 'Forçar este estilo',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'O estilo do documento é imposto através das definições.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'O estilo predefinido para documentos que não escolhem um estilo próprio. Apenas apresentação e exportação — não escreve nada num ficheiro.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ignora o estilo próprio de um documento e usa em todo o lado o estilo predefinido (estilo institucional).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'O disco de destino não tem espaço suficiente. Liberte espaço e tente novamente.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

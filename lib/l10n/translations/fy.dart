@@ -733,6 +733,17 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Stijl': 'Styl',
+  'Geen (platte tekst)': 'Gjin (platte tekst)',
+  'Documentstijl': 'Dokumintstyl',
+  'Standaard documentstijl': 'Standert dokumintstyl',
+  'Deze stijl afdwingen': 'Dizze styl ôftwinge',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'De dokumintstyl wurdt fia de ynstellings ôftwongen.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'De standertstyl foar dokuminten dy\'t sels gjin styl kieze. Allinne werjefte en eksport — it skriuwt neat yn in bestân.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Negearje de eigen styl fan in dokumint en brûk oeral de standertstyl (hússtyl).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'De bestimmingsskiif hat net genôch romte. Meitsje romte frij en besykje it op \'e nij.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

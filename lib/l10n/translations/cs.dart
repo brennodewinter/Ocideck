@@ -1776,6 +1776,17 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Stijl': 'Styl',
+  'Geen (platte tekst)': 'Žádné (prostý text)',
+  'Documentstijl': 'Styl dokumentu',
+  'Standaard documentstijl': 'Výchozí styl dokumentu',
+  'Deze stijl afdwingen': 'Vynutit tento styl',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Styl dokumentu je vynucen prostřednictvím nastavení.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Výchozí styl pro dokumenty, které si samy nevyberou styl. Pouze zobrazení a export — do souboru se nic nezapisuje.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ignoruj vlastní styl dokumentu a všude použij výchozí styl (firemní styl).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Cílový disk nemá dostatek místa. Uvolněte místo a zkuste to znovu.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

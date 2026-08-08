@@ -1773,6 +1773,17 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Stijl': 'Tyyli',
+  'Geen (platte tekst)': 'Ei mitään (pelkkä teksti)',
+  'Documentstijl': 'Asiakirjan tyyli',
+  'Standaard documentstijl': 'Asiakirjan oletustyyli',
+  'Deze stijl afdwingen': 'Pakota tämä tyyli',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Asiakirjan tyyli pakotetaan asetusten kautta.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Oletustyyli asiakirjoille, jotka eivät itse valitse tyyliä. Vain näyttö ja vienti — mitään ei kirjoiteta tiedostoon.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ohita asiakirjan oma tyyli ja käytä kaikkialla oletustyyliä (talotyyliä).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Kohdelevyllä ei ole tarpeeksi tilaa. Vapauta tilaa ja yritä uudelleen.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

@@ -1790,6 +1790,17 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Stijl': 'Стиль',
+  'Geen (platte tekst)': 'Немає (звичайний текст)',
+  'Documentstijl': 'Стиль документа',
+  'Standaard documentstijl': 'Стандартний стиль документа',
+  'Deze stijl afdwingen': 'Примусово застосувати цей стиль',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Стиль документа примусово застосовано через налаштування.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Стандартний стиль для документів, які самі не обирають стиль. Лише відображення та експорт — нічого не записується у файл.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ігноруйте власний стиль документа й усюди використовуйте стандартний стиль (фірмовий стиль).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'На цільовому диску недостатньо місця. Звільніть місце і спробуйте знову.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

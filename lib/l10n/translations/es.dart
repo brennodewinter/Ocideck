@@ -729,6 +729,17 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Stijl': 'Estilo',
+  'Geen (platte tekst)': 'Ninguno (texto sin formato)',
+  'Documentstijl': 'Estilo del documento',
+  'Standaard documentstijl': 'Estilo de documento predeterminado',
+  'Deze stijl afdwingen': 'Forzar este estilo',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'El estilo del documento se aplica de forma forzada desde la configuración.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'El estilo predeterminado para los documentos que no eligen un estilo propio. Solo visualización y exportación — no escribe nada en un archivo.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ignora el estilo propio de un documento y usa en todas partes el estilo predeterminado (estilo corporativo).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'El disco de destino no tiene espacio suficiente. Libere espacio e inténtelo de nuevo.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

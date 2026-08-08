@@ -732,6 +732,17 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Stijl': 'Stil',
+  'Geen (platte tekst)': 'Ningun (teksto simpel)',
+  'Documentstijl': 'Stil di dokumento',
+  'Standaard documentstijl': 'Stil standard di dokumento',
+  'Deze stijl afdwingen': 'Fòrsa e stil aki',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'E stil di dokumento ta ser fòrsá via e konfigurashon.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'E stil standard pa dokumentonan ku no ta skohe un stil nan mes. Solamente mustrá i eksportá — e no ta skirbi nada den un archivo.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ignorá e stil propio di un dokumento i usa tur kaminda e stil standard (stil di kas).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Disco di destinashon no tin espasio sufisiente. Libera espasio i purba atrobe.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

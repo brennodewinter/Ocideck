@@ -1772,6 +1772,17 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Stijl': 'Stils',
+  'Geen (platte tekst)': 'Nav (vienkāršs teksts)',
+  'Documentstijl': 'Dokumenta stils',
+  'Standaard documentstijl': 'Noklusējuma dokumenta stils',
+  'Deze stijl afdwingen': 'Uzspiest šo stilu',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Dokumenta stils tiek uzspiests, izmantojot iestatījumus.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Noklusējuma stils dokumentiem, kas paši neizvēlas stilu. Tikai attēlojums un eksports — failā nekas netiek rakstīts.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ignorējiet dokumenta paša stilu un visur izmantojiet noklusējuma stilu (uzņēmuma stilu).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Mērķa diskam nav pietiekami daudz vietas. Atbrīvojiet vietu un mēģiniet vēlreiz.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

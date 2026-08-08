@@ -1785,6 +1785,17 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Stijl': 'Styl',
+  'Geen (platte tekst)': 'Brak (zwykły tekst)',
+  'Documentstijl': 'Styl dokumentu',
+  'Standaard documentstijl': 'Domyślny styl dokumentu',
+  'Deze stijl afdwingen': 'Wymuś ten styl',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Styl dokumentu jest wymuszany przez ustawienia.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Domyślny styl dla dokumentów, które same nie wybierają stylu. Tylko wyświetlanie i eksport — nic nie zapisuje w pliku.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ignoruj własny styl dokumentu i wszędzie używaj stylu domyślnego (stylu firmowego).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Dysk docelowy ma niewystarczającą ilość miejsca. Zwolnij miejsce i spróbuj ponownie.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

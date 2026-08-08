@@ -732,6 +732,17 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Stijl': 'Style',
+  'Geen (platte tekst)': 'Aucun (texte brut)',
+  'Documentstijl': 'Style du document',
+  'Standaard documentstijl': 'Style de document par défaut',
+  'Deze stijl afdwingen': 'Imposer ce style',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Le style du document est imposé via les paramètres.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Le style par défaut pour les documents qui ne choisissent pas eux-mêmes de style. Uniquement l\'affichage et l\'export — rien n\'est écrit dans un fichier.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ignorer le style propre d\'un document et utiliser partout le style par défaut (charte graphique).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Le disque de destination n\'a pas assez d\'espace. Libérez de l\'espace et réessayez.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

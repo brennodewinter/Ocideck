@@ -1780,6 +1780,17 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Stijl': 'Stilius',
+  'Geen (platte tekst)': 'Nėra (grynasis tekstas)',
+  'Documentstijl': 'Dokumento stilius',
+  'Standaard documentstijl': 'Numatytasis dokumento stilius',
+  'Deze stijl afdwingen': 'Priverstinai taikyti šį stilių',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Dokumento stilius priverstinai taikomas per nustatymus.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Numatytasis stilius dokumentams, kurie patys nepasirenka stiliaus. Tik rodymas ir eksportas — į failą nieko nerašoma.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Nepaisykite paties dokumento stiliaus ir visur naudokite numatytąjį stilių (įmonės stilių).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Paskirties diskas neturi pakankamai vietos. Atlaisvinkite vietos ir bandykite dar kartą.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

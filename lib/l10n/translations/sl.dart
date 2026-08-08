@@ -1775,6 +1775,17 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Stijl': 'Slog',
+  'Geen (platte tekst)': 'Brez (golo besedilo)',
+  'Documentstijl': 'Slog dokumenta',
+  'Standaard documentstijl': 'Privzeti slog dokumenta',
+  'Deze stijl afdwingen': 'Vsili ta slog',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Slog dokumenta je vsiljen prek nastavitev.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Privzeti slog za dokumente, ki sloga ne izberejo sami. Samo prikaz in izvoz — v datoteko ne zapiše ničesar.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Prezri lastni slog dokumenta in povsod uporabi privzeti slog (celostno grafično podobo).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Ciljni disk nima dovolj prostora. Sprostite prostor in poskusite znova.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

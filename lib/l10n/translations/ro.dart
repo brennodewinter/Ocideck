@@ -1790,6 +1790,17 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Stijl': 'Stil',
+  'Geen (platte tekst)': 'Niciunul (text simplu)',
+  'Documentstijl': 'Stilul documentului',
+  'Standaard documentstijl': 'Stilul implicit al documentului',
+  'Deze stijl afdwingen': 'Impune acest stil',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Stilul documentului este impus prin setări.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Stilul implicit pentru documentele care nu își aleg singure un stil. Doar afișare și export — nu scrie nimic într-un fișier.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ignoră stilul propriu al unui document și folosește peste tot stilul implicit (stilul instituțional).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Discul de destinație nu are suficient spațiu. Eliberați spațiu și încercați din nou.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

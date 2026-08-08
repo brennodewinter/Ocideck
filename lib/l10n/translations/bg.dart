@@ -1795,6 +1795,17 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Stijl': 'Стил',
+  'Geen (platte tekst)': 'Няма (обикновен текст)',
+  'Documentstijl': 'Стил на документа',
+  'Standaard documentstijl': 'Стандартен стил на документа',
+  'Deze stijl afdwingen': 'Наложи този стил',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Стилът на документа се налага чрез настройките.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Стандартният стил за документи, които сами не избират стил. Само показване и експортиране — нищо не се записва във файл.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Игнорирайте собствения стил на документа и използвайте навсякъде стандартния стил (фирмен стил).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Дестинационният диск няма достатъчно пространство. Освободете място и опитайте отново.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

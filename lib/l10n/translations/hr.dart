@@ -1779,6 +1779,17 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Stijl': 'Stil',
+  'Geen (platte tekst)': 'Nema (obični tekst)',
+  'Documentstijl': 'Stil dokumenta',
+  'Standaard documentstijl': 'Zadani stil dokumenta',
+  'Deze stijl afdwingen': 'Nametni ovaj stil',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Stil dokumenta nametnut je putem postavki.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Zadani stil za dokumente koji sami ne odaberu stil. Samo prikaz i izvoz — ništa se ne zapisuje u datoteku.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Zanemari vlastiti stil dokumenta i posvuda koristi zadani stil (kućni stil).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Odredišni disk nema dovoljno prostora. Oslobodite prostor i pokušajte ponovno.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

@@ -1795,6 +1795,17 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Stijl': 'Stil',
+  'Geen (platte tekst)': 'L-ebda (test sempliċi)',
+  'Documentstijl': 'Stil tad-dokument',
+  'Standaard documentstijl': 'Stil awtomatiku tad-dokument',
+  'Deze stijl afdwingen': 'Infurza dan l-istil',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'L-istil tad-dokument huwa infurzat permezz tas-settings.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'L-istil awtomatiku għal dokumenti li ma jagħżlux stil huma stess. Wiri u esportazzjoni biss — ma jikteb xejn f\'fajl.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Injora l-istil proprju ta\' dokument u uża kullimkien l-istil awtomatiku (l-istil tad-dar).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Id-disk ta\' destinazzjoni m\'għandux spazju biżżejjed. Ħallas spazju u erġa\' pprova.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

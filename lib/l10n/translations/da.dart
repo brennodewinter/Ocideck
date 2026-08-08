@@ -1772,6 +1772,17 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Stijl': 'Stil',
+  'Geen (platte tekst)': 'Ingen (almindelig tekst)',
+  'Documentstijl': 'Dokumentstil',
+  'Standaard documentstijl': 'Standard-dokumentstil',
+  'Deze stijl afdwingen': 'Gennemtving denne stil',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Dokumentets stil gennemtvinges via indstillingerne.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Standardstilen for dokumenter, der ikke selv vælger en stil. Kun visning og eksport — der skrives ikke noget til en fil.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ignorér et dokuments egen stil, og brug standardstilen (husstil) overalt.',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Destinationsdisken har ikke tilstrækkelig plads. Frigør plads og prøv igen.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
