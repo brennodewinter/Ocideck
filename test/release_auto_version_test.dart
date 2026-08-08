@@ -294,4 +294,81 @@ void main() {
       reason: '--status moet stoppen vóór de wachtwoordprompt (read-only).',
     );
   });
+
+  // Tag-veiligheid: de merge-commit moet de nieuwe versie dragen vóór we 'm taggen,
+  // zodat een verkeerd merge_commit_sha nooit een willekeurige commit als deze
+  // release tagt.
+  test(
+    'tag_and_push verifieert de versie van de merge-commit vóór het taggen',
+    () {
+      final body = functionBody('tag_and_push');
+      final verifyIdx = body.indexOf(
+        RegExp(r'git\s+show\b[^\n]*pubspec\.yaml'),
+      );
+      final annotateIdx = body.indexOf(
+        RegExp(r'^\s*git\s+tag\s+-a\b', multiLine: true),
+      );
+      expect(
+        verifyIdx,
+        isNonNegative,
+        reason:
+            'tag_and_push moet de versie van de merge-commit '
+            '(git show <sha>:pubspec.yaml) toetsen vóór het taggen.',
+      );
+      expect(annotateIdx, isNonNegative, reason: 'git tag -a niet gevonden.');
+      expect(
+        verifyIdx,
+        lessThan(annotateIdx),
+        reason:
+            'de versiecontrole moet vóór "git tag -a" staan, anders tag je mogelijk '
+            'de verkeerde commit.',
+      );
+    },
+  );
+
+  // Resume-netheid: de handtekening-upload moet idempotent zijn — een tweede
+  // fase-3-poging (--resume) mag geen 409 of duplicaat geven.
+  test(
+    'de handtekening-upload verwijdert eerst een bestaande (idempotent)',
+    () {
+      final body = functionBody('phase3');
+      final delIdx = body.indexOf(RegExp(r'api\s+DELETE[^\n]*assets'));
+      final postIdx = body.indexOf(
+        RegExp(r'api\s+POST[^\n]*assets\?name=SHA256SUMS\.minisig'),
+      );
+      expect(
+        delIdx,
+        isNonNegative,
+        reason:
+            'phase3 moet een bestaande SHA256SUMS.minisig eerst verwijderen '
+            '(api DELETE …assets) zodat --resume geen 409/duplicaat geeft.',
+      );
+      expect(
+        postIdx,
+        isNonNegative,
+        reason: 'de asset-upload (POST) niet gevonden.',
+      );
+      expect(
+        delIdx,
+        lessThan(postIdx),
+        reason: 'de DELETE moet vóór de POST staan.',
+      );
+    },
+  );
+
+  // Robuustheid: alleen idempotente GET's worden herprobeerd, POST/DELETE nooit.
+  test('api() herprobeert GET maar niet POST/DELETE', () {
+    final body = functionBody('api');
+    expect(
+      body,
+      contains(r'[ "$method" = "GET" ]'),
+      reason:
+          'api() moet alleen GET herproberen (niet POST/DELETE, die muteren).',
+    );
+    expect(
+      body,
+      contains(r'seq 1 "$tries"'),
+      reason: 'api() moet een herprobeer-lus over \$tries hebben.',
+    );
+  });
 }
