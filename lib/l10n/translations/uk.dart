@@ -1790,6 +1790,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'На цільовому диску недостатньо місця. Звільніть місце і спробуйте знову.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Печатка цієї презентації більше не відповідає вмісту — її було змінено після запечатування.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML відкривається в будь-якому браузері без інтернету та рендерить блоки коду, математику та діаграми mermaid. LaTeX (Beamer) компілюється pdflatex або xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

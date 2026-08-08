@@ -563,6 +563,24 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     });
   }
 
+  /// Het zegel van een geopend deck klopt niet meer met de inhoud — het deck
+  /// is bewerkt ná het verzegelen. Foutkleur: dit is precies de situatie die
+  /// het zegel zou moeten vangen, en zonder deze melding merkt niemand het op.
+  void _listenSealTamper(BuildContext context, WidgetRef ref) {
+    ref.listen<SealTamperWarning?>(sealTamperWarningProvider, (_, warning) {
+      if (warning == null) return;
+      ref.read(sealTamperWarningProvider.notifier).state = null;
+      final l10n = context.l10n;
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        l10n,
+        l10n.d(
+          'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.',
+        ),
+      );
+    });
+  }
+
   /// Of de eenmalige web-mededeling over crashherstel al is getoond. Per
   /// sessie, niet per tabblad: hij gaat over de omgeving, niet over dit deck.
   bool _toldAboutNoWebRecovery = false;
@@ -655,6 +673,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
 
     _listenChartDataWarning(context, ref);
     _listenSidecarSkipped(context, ref);
+    _listenSealTamper(context, ref);
 
     _listenUnsavedWork(context, ref);
 

@@ -1748,6 +1748,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'nargh chuQut Qav. chuQut narghmoH \'ej nIDqa\'.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'tamwI\' ngeDbe\'chuq Deckvam ngeD — ngeDlIjmoHpu\' tammoH.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML browserDaq internet paghbe\'chugh \'ej code blocks, math, mermaid diagrams render. LaTeX (Beamer) pdflatex qo\' xelatex lo\' compile.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

@@ -1789,6 +1789,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Discus destinationis spatium non sufficit. Fac spatium et rursus conare.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Sigillum huius deck non iam correspondet contentui — post signandum editum est.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML in quovis navigatro sine internet aperit et codicis fragmenta, mathematicam, mermaid diagrammata reddit. LaTeX (Beamer) cum pdflatex aut xelatex compilatur.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

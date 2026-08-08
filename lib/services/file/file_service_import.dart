@@ -181,7 +181,24 @@ extension FileServiceImport on FileService {
       if (outPath == null) continue; // skip path-traversal entries
       final out = File(outPath);
       await out.parent.create(recursive: true);
-      await writeBytesAtomic(out, entry.bytes);
+      try {
+        await writeBytesAtomic(out, entry.bytes);
+      } on FileSystemException catch (e) {
+        // Disk-exhaustie: een volle schijf geeft een FileSystemException met
+        // "No space left" (POSIX) of "disk full" — vertaal naar een gerichte
+        // melding in plaats van een generieke "import mislukt".
+        final msg = e.toString().toLowerCase();
+        if (msg.contains('no space left') ||
+            msg.contains('disk full') ||
+            msg.contains('enospc')) {
+          logWarning(
+            'FileService.importPackageBytes: disk full during extraction',
+            e,
+          );
+          return abortAndClean(ImportFailure.diskFull);
+        }
+        rethrow;
+      }
     }
 
     // The main markdown must itself resolve inside the extraction folder.

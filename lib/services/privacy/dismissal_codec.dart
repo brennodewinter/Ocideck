@@ -22,6 +22,7 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 
+import '../../utils/json_depth_guard.dart';
 import '../../utils/log.dart';
 import '../sidecar_format.dart';
 
@@ -204,7 +205,7 @@ class DismissalCodec {
   /// in plaats van stilletjes onderdrukt door een bestand dat we niet begrijpen.
   static DeckDismissals decode(String json, {required String fallbackSalt}) {
     try {
-      final data = jsonDecode(json);
+      final data = jsonDecodeGuarded(json);
       final fileVersion = declaredSidecarVersion(data);
       if (fileVersion > version) {
         logWarning(

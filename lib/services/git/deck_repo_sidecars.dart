@@ -10,6 +10,7 @@ import 'package:path/path.dart' as p;
 
 import '../../models/deck.dart';
 import '../../models/seal_record.dart';
+import '../../utils/json_depth_guard.dart';
 import '../../utils/log.dart';
 import '../annotation_codec.dart';
 import '../miauw_codec.dart';
@@ -559,7 +560,7 @@ Future<RepoSidecarState> _repoSidecarState(
   if (bytes == null || bytes.isEmpty) return RepoSidecarState.absent;
   if (bytes.length > maxBytes) return RepoSidecarState.untouchable;
   try {
-    final data = jsonDecode(utf8.decode(bytes));
+    final data = jsonDecodeGuarded(utf8.decode(bytes));
     // Geldige JSON is nog geen sidecar. `declaredSidecarVersion` valt bij alles
     // wat geen map is terug op versie 1 — een top-level array zou dus van ons
     // heten. Sinds FILE_FORMAT §6.3.1 uitnodigt dit bestand vanuit een ander

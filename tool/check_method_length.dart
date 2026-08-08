@@ -30,6 +30,10 @@ const int maxMethodLines = 150;
 /// lower the number) but never grow. Add a new entry only with a deliberate
 /// reason; the goal is fewer and smaller entries over time.
 const Map<String, int> methodLengthBaseline = {
+  // +1 (#1360): disk-full try/catch rond writeBytesAtomic — security-fix
+  // die in het extractie-pad landt. De methode stond al op de limiet.
+  'lib/services/file/file_service_import.dart::FileServiceImport.importPackageBytesDetailed':
+      151,
   // Procesverbetering VSM/swimlane scene builder — extract lane packing next.
   'lib/services/improvement/flow_layout.dart::buildFlowScene': 163,
   // Procesverbetering block directives (matrix/canvas/tree/flow/phaseGate).

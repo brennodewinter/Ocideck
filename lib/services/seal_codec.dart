@@ -3,6 +3,7 @@ import 'dart:convert';
 import '../models/document_signature.dart';
 import '../models/provenance_signature.dart';
 import '../models/seal_record.dart';
+import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 import 'sidecar_format.dart';
 
@@ -86,7 +87,7 @@ class SealCodec {
   /// er nooit op stuklopen, en half inlezen zou erger zijn dan niets inlezen.
   static SealRecord? decode(String json) {
     try {
-      final data = jsonDecode(json);
+      final data = jsonDecodeGuarded(json);
       final fileVersion = declaredSidecarVersion(data);
       if (fileVersion > version) {
         logWarning(

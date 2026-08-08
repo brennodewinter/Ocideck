@@ -1795,6 +1795,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Id-disk ta\' destinazzjoni m\'għandux spazju biżżejjed. Ħallas spazju u erġa\' pprova.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Is-sigill ta\' dan id-deck m\'għadux jikkorrispondi mal-kontenut — ġie editat wara s-sigillar.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML jiftah f\'kwalunkwe browser bla internet u jrenderja blokki ta\' kodiċi, matematika u dijagrammi mermaid. LaTeX (Beamer) tiġi kkompilata b\'pdflatex jew xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

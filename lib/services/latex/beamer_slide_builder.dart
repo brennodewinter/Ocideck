@@ -460,10 +460,30 @@ String _escapeLatex(String s) {
 
 String _escapeImagePath(String src) {
   if (src.isEmpty) return '';
-  return src.replaceAll(r'\', '/');
+  // Eerst backslash naar slash (pad-normalisatie), daarna de overige
+  // LaTeX-speciale tekens escapen. Een pad met `}` erin breekt anders uit het
+  // `\includegraphics{...}`-argument en injecteert willekeurige LaTeX-commando's.
+  return _escapeLatexArgs(src.replaceAll(r'\', '/'));
 }
 
 String _escapeUrl(String url) {
   if (url.isEmpty) return '';
-  return url.replaceAll('%', r'\%').replaceAll('#', r'\#');
+  return _escapeLatexArgs(url);
+}
+
+/// Escape de LaTeX-tekens die een argument kunnen verlaten: `{`, `}`, `%`,
+/// `#`, `&`, `_`, `$`, `~`, `^`. Backslash staat er niet bij — paden
+/// normaliseren die vóór deze aanroep naar `/`, en URL's gebruiken geen
+/// backslash.
+String _escapeLatexArgs(String s) {
+  return s
+      .replaceAll('&', r'\&')
+      .replaceAll('%', r'\%')
+      .replaceAll('#', r'\#')
+      .replaceAll('_', r'\_')
+      .replaceAll('{', r'\{')
+      .replaceAll('}', r'\}')
+      .replaceAll(r'$', r'\$')
+      .replaceAll('~', r'\textasciitilde{}')
+      .replaceAll('^', r'\textasciicircum{}');
 }

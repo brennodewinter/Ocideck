@@ -15,6 +15,14 @@ import 'package:flutter/widgets.dart';
 /// display or 4K export.
 const int kMaxImageDecodeDimension = 4096;
 
+/// Maximum aantal frames dat een animated image (GIF/WebP/APNG) mag hebben.
+///
+/// De dimensie-cap vangt één frame, niet de animatie als geheel: een GIF met
+/// 10.000 frames à 4096²×4 bytes is honderden GiB. Boven deze grens tonen we
+/// alleen het eerste frame — dezelfde trade-off als de dimensie-cap al maakt
+/// voor over-cap afbeeldingen.
+const int kMaxImageFrames = 256;
+
 /// The decode target for the memory cap. Returns `(null, null)` — i.e. decode at
 /// native resolution — whenever the image already fits within
 /// [kMaxImageDecodeDimension] on both axes, and only otherwise scales the
@@ -69,13 +77,26 @@ class CappedImage extends ImageProvider<CappedImage> {
   Future<ui.Codec> _decode(ImageDecoderCallback decode) async {
     final bytes = await loadBytes();
     final buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
-    return decode(
+    final codec = await decode(
       buffer,
       getTargetSize: (int intrinsicWidth, int intrinsicHeight) {
         final target = cappedDecodeTarget(intrinsicWidth, intrinsicHeight);
         return ui.TargetImageSize(width: target.width, height: target.height);
       },
     );
+    // Frame-count cap: een animated image met te veel frames her-decoderen met
+    // een concreet doel (gelijk aan de intrinsieke grootte), wat de engine naar
+    // het resize-pad stuurt en de animatie tot het eerste frame samenvat —
+    // dezelfde trade-off als bij over-cap dimensies.
+    if (codec.frameCount > kMaxImageFrames) {
+      final rebuf = await ui.ImmutableBuffer.fromUint8List(bytes);
+      return decode(
+        rebuf,
+        getTargetSize: (int w, int h) =>
+            ui.TargetImageSize(width: w, height: h),
+      );
+    }
+    return codec;
   }
 
   @override

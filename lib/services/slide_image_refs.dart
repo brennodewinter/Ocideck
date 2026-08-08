@@ -15,6 +15,7 @@ library;
 import 'dart:convert';
 
 import '../models/slide.dart';
+import '../utils/json_depth_guard.dart';
 
 /// Markdown-afbeelding: `![alt of directive](pad)`. Dezelfde vorm als
 /// `ImageReferenceService._imageRef` en `AssetIndex.referencesIn` gebruiken, en
@@ -190,7 +191,7 @@ String _rewriteQuestionAnswerImages(
 
 Map<String, dynamic>? _questionJson(String markdown) {
   try {
-    final decoded = jsonDecode(markdown.trim());
+    final decoded = jsonDecodeGuarded(markdown.trim());
     return decoded is Map<String, dynamic> ? decoded : null;
   } on FormatException {
     return null;

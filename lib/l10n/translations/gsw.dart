@@ -1776,6 +1776,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Ziil-Festplatte het zwenig Platz. Mach Platz und probier nomal.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'S Siegel vo dem Deck passt nüme zum Inhalt — es isch bearbeitet wore nachem Versigele.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML öffnet sich in jedem Browser ohni Internet und renderet Codeblöck, Mathematik und Mermaid-Diagramm. LaTeX (Beamer) kompilierisch mit pdflatex oder xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

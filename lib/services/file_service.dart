@@ -25,6 +25,7 @@ import '../utils/safe_filename.dart';
 import '../utils/bundled_asset.dart';
 import '../utils/file_download.dart';
 import '../utils/log.dart';
+import '../utils/json_depth_guard.dart';
 import '../utils/net_guard.dart';
 import '../utils/pinned_http_client.dart';
 import '../utils/project_path.dart';
@@ -192,6 +193,9 @@ enum ImportFailure {
   /// Pakket is versleuteld en de gebruiker brak de wachtwoordvraag af. Geen
   /// echte fout: de aanroeper toont hierbij géén foutmelding.
   encryptedCancelled,
+
+  /// De doelschijf heeft onvoldoende ruimte voor de extractie.
+  diskFull,
 }
 
 /// Vraagt (interactief) het wachtwoord van een versleuteld pakket. [retry] is
@@ -658,10 +662,26 @@ class FileService {
     if (content == null) {
       hydrated = await _attachSidecars(hydrated, filePath, skipped);
     }
+    // Automatische zegelverificatie bij het openen: na hydratatie van de
+    // seal-sidecar (die sealHash zet) de fileHash berekenen uit de raw bytes
+    // en verifiëren. Read-only — een veranderd deck mag nog steeds openen,
+    // maar de gebruiker moet weten dat het zegel niet meer klopt.
+    IntegrityStatus? integrity;
+    if (content == null) {
+      final fileHash = DocumentIntegrity.hashMarkdown(raw);
+      integrity = DocumentIntegrity(
+        _md,
+      ).verify(hydrated.copyWith(fileHash: fileHash));
+      if (integrity == IntegrityStatus.notSealed ||
+          integrity == IntegrityStatus.notVerifiable) {
+        integrity = null;
+      }
+    }
     return DeckOpenResult(
       deck: hydrated,
       warnings: chartWarnings,
       skippedSidecars: skipped,
+      integrity: integrity,
     );
   }
 
@@ -923,6 +943,16 @@ class FileService {
     }
     final parsed = _md.parseDeck(raw);
     if (parsed == null) return (deck: null, failure: OpenFailure.corrupt);
+    // Dezelfde truncatie-check als het schijf-pad: een afgebroken download
+    // (frontmatter wel, body niet) opent hier niet stil als een bijna-leeg deck.
+    if (_looksTruncated(raw, parsed)) {
+      logWarning(
+        'FileService.openDeckFromContent: frontmatter present but no slide '
+        'body',
+        sourceName,
+      );
+      return (deck: null, failure: OpenFailure.corrupt);
+    }
     // Inhoud draagt geen opmaak; pas het actieve stijlprofiel toe bij openen.
     return (
       deck: parsed.copyWith(themeProfile: activeProfileFor(projectPath: null)),

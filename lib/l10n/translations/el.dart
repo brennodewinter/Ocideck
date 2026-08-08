@@ -1800,6 +1800,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Ο προορισμός δίσκος δεν έχει επαρκή χώρο. Απελευθερώστε χώρο και δοκιμάστε ξανά.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Η σφραγίδα αυτής της παρουσίασης δεν ταιριάζει πια με το περιεχόμενο — τροποποιήθηκε μετά τη σφράγιση.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'Το HTML ανοίγει σε οποιονδήποτε browser χωρίς ίντερνετ και αποδίδει μπλοκ κώδικα, μαθηματικά και διαγράμματα mermaid. Το LaTeX (Beamer) μεταγλωττίζεται με pdflatex ή xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

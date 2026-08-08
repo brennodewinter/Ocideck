@@ -1773,6 +1773,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Disk tujuan tidak memiliki ruang cukup. Kosongkan ruang dan coba lagi.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Segel deck ini tidak lagi cocok dengan isinya — diedit setelah disegel.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML terbuka di browser apa pun tanpa internet dan merender blok kode, matematika, dan diagram mermaid. LaTeX (Beamer) dikompilasi dengan pdflatex atau xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

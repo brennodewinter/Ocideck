@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../utils/atomic_file.dart';
+import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 
 /// Eén automatisch bewaard herstelbestand voor een (nog) niet-opgeslagen deck.
@@ -264,7 +265,7 @@ class RecoveryService {
       for (final entry in dir.listSync()) {
         if (entry is File && entry.path.endsWith('.json')) {
           try {
-            final data = jsonDecode(await entry.readAsString());
+            final data = jsonDecodeGuarded(await entry.readAsString());
             if (data is! Map) {
               throw const FormatException('Recovery snapshot is not a map');
             }
@@ -276,8 +277,33 @@ class RecoveryService {
       }
       out.sort((a, b) => b.savedAt.compareTo(a.savedAt));
       return out;
-    } catch (e) {
-      logWarning('RecoveryService.loadAll: list recovery dir', e);
+    } catch (e, s) {
+      // Opstart-veilige fallback: een StackOverflowError ontsnapt aan de
+      // per-file try/catch (het is een Error, geen Exception) en kan de app
+      // laten crashen vóór de UI op staat. De recovery-map hernoemen naar een
+      // backup — niet verwijderen, de gebruiker wil misschien iets terughalen —
+      // en normaal opstarten met een lege lijst. Recovery is een
+      // gemaksfunctie, geen voorwaarde om te kunnen werken.
+      logError(
+        'RecoveryService.loadAll: fatal — quarantining recovery dir',
+        e,
+        s,
+      );
+      try {
+        final dir = await _dir();
+        final backup = Directory(
+          '${dir.path}-corrupt-${DateTime.now().millisecondsSinceEpoch}',
+        );
+        await dir.rename(backup.path);
+        logWarning(
+          'RecoveryService.loadAll: recovery map hernoemd naar ${backup.path}',
+        );
+      } catch (e2) {
+        logWarning(
+          'RecoveryService.loadAll: kon recovery map niet hernoemen',
+          e2,
+        );
+      }
       return const [];
     }
   }

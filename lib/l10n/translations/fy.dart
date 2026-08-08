@@ -733,6 +733,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'De bestimmingsskiif hat net genôch romte. Meitsje romte frij en besykje it op \'e nij.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'It segel fan dit deck kloppet net mear mei de ynhâld — it is bewurke nei it segeljen.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML iepent yn elke browser sûnder ynternet en rendert koadeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) kompilearst mei pdflatex of xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':

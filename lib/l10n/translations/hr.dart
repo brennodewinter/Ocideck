@@ -1779,6 +1779,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
+      'Odredišni disk nema dovoljno prostora. Oslobodite prostor i pokušajte ponovno.',
+  'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
+      'Pečat ovog decka više ne odgovara sadržaju — uređivan je nakon pečaćenja.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX (Beamer) compileer je met pdflatex of xelatex.':
       'HTML se otvara u bilo kojem pregledniku bez interneta i prikazuje blokove koda, matematiku i mermaid dijagrame. LaTeX (Beamer) kompilira se s pdflatex ili xelatex.',
   'Een LaTeX article-document. Wiskunde gaat rechtstreeks door; afbeeldingen worden op relatief pad gereferentieerd. Compileer met pdflatex of xelatex.':
