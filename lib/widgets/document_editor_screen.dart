@@ -496,6 +496,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                 mode: _viewMode,
                 onModeChanged: (m) => setState(() => _viewMode = m),
                 onInsertChart: _insertChart,
+                onInsertPageBreak: _insertPageBreak,
                 onInsertTable: _insertTable,
                 onInsertMermaid: _insertMermaid,
                 onInsertImage: _insertImage,
@@ -871,6 +872,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// bron — de dubbelklik is voor mermaid bewust overgeslagen (DOCUMENT_MODE.md).
   void _insertMermaid() =>
       _insertBlock('```mermaid\nflowchart TD\n  A --> B\n```');
+
+  /// Voeg een pagina-einde in: een `---`-scheiding (een gewone Markdown-thematische
+  /// breuk). Een document blijft doorlopend op het scherm; de export (HTML/PDF/
+  /// LaTeX) maakt er een echt nieuw blad van. Draagbaar: elke Markdown-lezer toont
+  /// `---` als scheidingslijn.
+  void _insertPageBreak() => _insertBlock('---');
 
   /// Voeg een afbeelding in via de carrousel (bibliotheken + open presentaties
   /// + Bladeren…). De gekozen file gaat door [ImageService.importIntoDeck]
