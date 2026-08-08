@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import '../models/slide.dart';
+import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 import '../utils/page_scoped_notes.dart';
 import 'annotation_codec.dart';
@@ -66,7 +67,7 @@ class UserNotesCodec {
   static Map<String, String> decode(String json, List<Slide> slides) {
     final result = <String, String>{};
     try {
-      final data = jsonDecode(json);
+      final data = jsonDecodeGuarded(json);
       final fileVersion = declaredSidecarVersion(data);
       // Een onbekende hogere versie werd tot nu toe als 2 gelezen: wél inladen,
       // en bij de eerstvolgende opslag terugschrijven als wat deze build ervan

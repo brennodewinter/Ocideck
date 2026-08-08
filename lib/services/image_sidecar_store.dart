@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 
 import '../utils/atomic_file.dart';
+import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 
 /// De grens waarboven een sidecar niet meer wordt gelezen.
@@ -51,7 +52,7 @@ class ImageSidecarStore {
     if (!file.existsSync()) return null;
     try {
       if (!await _withinCap(file)) return null;
-      final data = jsonDecode(await file.readAsString()) as Map;
+      final data = jsonDecodeGuarded(await file.readAsString()) as Map;
       final value = data[p.basename(resolvedImagePath)];
       return value is String ? value : null;
     } catch (e) {
@@ -73,7 +74,7 @@ class ImageSidecarStore {
         // beschrijft, alleen met een andere aanleiding.
         if (!await _withinCap(file)) return;
         data = Map<String, dynamic>.from(
-          jsonDecode(await file.readAsString()) as Map,
+          jsonDecodeGuarded(await file.readAsString()) as Map,
         );
       } catch (e, s) {
         // Niet dóórgaan met een lege map: die wordt hieronder over het bestand
@@ -108,7 +109,7 @@ class ImageSidecarStore {
     if (!file.existsSync()) return const {};
     try {
       if (!await _withinCap(file)) return const {};
-      final data = jsonDecode(await file.readAsString()) as Map;
+      final data = jsonDecodeGuarded(await file.readAsString()) as Map;
       return {
         for (final entry in data.entries)
           if (entry.value is String) entry.key as String: entry.value as String,

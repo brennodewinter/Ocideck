@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../utils/atomic_file.dart';
+import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 
 /// Eén automatisch bewaard herstelbestand voor een (nog) niet-opgeslagen deck.
@@ -264,7 +265,7 @@ class RecoveryService {
       for (final entry in dir.listSync()) {
         if (entry is File && entry.path.endsWith('.json')) {
           try {
-            final data = jsonDecode(await entry.readAsString());
+            final data = jsonDecodeGuarded(await entry.readAsString());
             if (data is! Map) {
               throw const FormatException('Recovery snapshot is not a map');
             }

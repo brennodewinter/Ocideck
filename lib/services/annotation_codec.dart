@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../models/annotation.dart';
 import '../models/slide.dart';
+import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 import 'sidecar_format.dart';
 
@@ -102,7 +103,7 @@ class AnnotationCodec {
   static Map<String, List<InkStroke>> decode(String json, List<Slide> slides) {
     final result = <String, List<InkStroke>>{};
     try {
-      final data = jsonDecode(json);
+      final data = jsonDecodeGuarded(json);
       // Een sidecar van later kent velden die deze build niet snapt; er iets
       // uit oppikken en dan opslaan wist de rest. Zie [sidecarIsFromNewerBuild];
       // de schrijfkant weigert hetzelfde bestand te overschrijven.

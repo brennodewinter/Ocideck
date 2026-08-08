@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 import 'sidecar_format.dart';
 
@@ -83,7 +84,7 @@ class MiauwCodec {
   /// dan elk versie-2-besluit.
   static MiauwDisposition decode(String json) {
     try {
-      final data = jsonDecode(json);
+      final data = jsonDecodeGuarded(json);
       final fileVersion = declaredSidecarVersion(data);
       if (fileVersion > version) {
         logWarning(
@@ -119,7 +120,9 @@ class MiauwCodec {
   /// op — een verhaspelde afspraak mag het hele deck niet onopenbaar maken.
   static Map<String, String> legacyFrontMatterMap(String value, String key) {
     try {
-      final decoded = jsonDecode(utf8.decode(base64Url.decode(value.trim())));
+      final decoded = jsonDecodeGuarded(
+        utf8.decode(base64Url.decode(value.trim())),
+      );
       return _stringMap(decoded);
     } catch (e, s) {
       logError('MiauwCodec.legacyFrontMatterMap: decode $key', e, s);

@@ -84,6 +84,11 @@ const Set<String> _quoteScannerHomes = {
   'lib/utils/csv.dart',
   'lib/services/markdown_service.dart',
   'lib/services/import/utils/xml_utils.dart',
+  // Not a CSV splitter: scans JSON string-literal boundaries to count bracket
+  // nesting depth without being fooled by brackets inside string values. The
+  // shape (walk chars, track "…" with backslash-escapes) is unavoidable for a
+  // string-aware scan, and the stdlib has no equivalent.
+  'lib/utils/json_depth_guard.dart',
 };
 
 /// UI imports inside `lib/services/`. RATCHET: may shrink, never grow.

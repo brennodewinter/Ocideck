@@ -276,7 +276,7 @@ extension FileServiceStyleProfile on FileService {
     }
     final Map<String, Object?> envelope;
     try {
-      final decoded = jsonDecode(utf8.decode(bytes));
+      final decoded = jsonDecodeGuarded(utf8.decode(bytes));
       if (decoded is! Map<String, Object?>) {
         return const StyleProfileImportOutcome.failed(
           StyleProfileImportFailure.invalid,

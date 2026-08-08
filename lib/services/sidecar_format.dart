@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import '../utils/json_depth_guard.dart';
 import '../utils/log.dart';
 
 /// Het versiecontract van de sidecars naast een `.md` (`.ink.json`,
@@ -38,7 +37,7 @@ int declaredSidecarVersion(Object? data) {
 /// aantoonbaar iets wat deze build niet kent.
 bool sidecarIsFromNewerBuild(String json, int supported) {
   try {
-    return declaredSidecarVersion(jsonDecode(json)) > supported;
+    return declaredSidecarVersion(jsonDecodeGuarded(json)) > supported;
   } on FormatException catch (e) {
     logWarning('sidecarIsFromNewerBuild: sidecar is not valid JSON', e);
     return false;

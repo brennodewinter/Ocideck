@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math' as math;
 
 import '../utils/csv.dart';
+import '../utils/json_depth_guard.dart';
 import '../utils/number_convention.dart';
 import '../utils/log.dart';
 
@@ -447,7 +448,7 @@ class ChartSpec {
   /// spec on any error so a malformed block never crashes rendering.
   factory ChartSpec.parse(String raw) {
     try {
-      final data = jsonDecode(raw.trim());
+      final data = jsonDecodeGuarded(raw.trim());
       if (data is! Map) return const ChartSpec();
       final src = (data['source'] as String?)?.trim();
       return ChartSpec(
@@ -699,7 +700,7 @@ String _csvUnguard(String cell) =>
 /// keep whatever it already has instead of silently becoming an empty plot.
 (List<String>, List<ChartSeries>)? parseChartDataJson(String json) {
   try {
-    final data = jsonDecode(json.trim());
+    final data = jsonDecodeGuarded(json.trim());
     if (data is! Map || data['x'] is! List) return null;
     return (
       [for (final v in (data['x'] as List)) v.toString()],
