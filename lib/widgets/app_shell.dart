@@ -403,13 +403,9 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   Future<bool> _saveAllDirtyTabs() async {
     for (final tab in ref.read(tabsProvider).tabs) {
       if (!tab.isDirty) continue;
-      // A document tab saves through its own path (byte-faithful / "Save as…"),
-      // not the deck path — otherwise a dirty document blocks quit forever.
-      final document = tab.documentNotifier;
-      final saved = document != null
-          ? await saveDocumentWithDestination(context, ref, document)
-          : await saveDeckWithDestination(context, ref, tab.deckNotifier);
-      if (!saved) return false;
+      // saveTabWithDestination routes a document through its own byte-faithful /
+      // "Save as…" path — a dirty document would otherwise block quit forever.
+      if (!await saveTabWithDestination(context, ref, tab)) return false;
     }
     return true;
   }
@@ -423,13 +419,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   /// krijgt) sloeg er niets op. Nu routeert het per soort.
   void _saveActive() {
     final tab = ref.read(tabsProvider).current;
-    if (tab == null) return;
-    final document = tab.documentNotifier;
-    if (document != null) {
-      unawaited(saveDocumentWithDestination(context, ref, document));
-    } else {
-      unawaited(saveDeckWithDestination(context, ref, tab.deckNotifier));
-    }
+    if (tab != null) unawaited(saveTabWithDestination(context, ref, tab));
   }
 
   /// Open een presentatie via de zoek-/kies-dialoog. App-breed zodat Ctrl/Cmd+O

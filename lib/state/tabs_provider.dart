@@ -255,7 +255,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       // teruggeeft — net als een presentatie.
       final doc = tab.documentNotifier;
       if (doc != null) {
-        _autosaveDocument(tab, doc);
+        _autosaveDocument(tab, doc, _recovery, _lastAutosavedDocument);
         continue;
       }
       // Zie TabInfo.label: een tab kan kortstondig een al-gedisposede
@@ -281,19 +281,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
   }
 
-  /// Bewaar een niet-opgeslagen documenttabblad naar zijn herstelbestand. Slaat
-  /// een schoon of ongewijzigd document over; de discard-abonnee in
-  /// [_placeDocumentTab] wist het bestand zodra het tabblad schoon is.
-  void _autosaveDocument(TabInfo tab, DocumentNotifier doc) {
-    if (!doc.mounted) return;
-    final st = doc.currentState;
-    if (!(st.isOpen && st.isDirty)) return;
-    final source = st.document!.source;
-    if (_lastAutosavedDocument[tab.id] == source) return; // niets nieuws
-    _recovery.save(_documentRecoverySnapshot(tab, st));
-    _lastAutosavedDocument[tab.id] = source;
-  }
-
   /// Open elke teruggehaalde snapshot als (gewijzigd) tabblad en ruim de oude
   /// herstelbestanden op. Aangeroepen vanuit het herstel-dialoog bij opstart.
   /// Zet de herstelde momentopnames terug in tabbladen. Geeft terug hoeveel er
@@ -314,8 +301,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
         restored.add(tab);
         continue;
       }
-      final parsed = _md.parseDeck(snap.markdown, filePath: snap.filePath);
-      if (parsed == null) {
+      final deck = _deckFromRecoverySnapshot(snap, _md);
+      if (deck == null) {
         // Niet weggooien. `parseDeck` vangt zijn eigen fouten af juist omdát hij
         // in de praktijk struikelt, en een crash ín de parser is een van de
         // waarschijnlijkere redenen dat deze momentopname er überhaupt ligt.
@@ -325,34 +312,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
         logWarning('restoreRecovered: momentopname onleesbaar', snap.filePath);
         continue;
       }
-      var deck = parsed;
-      if (snap.userNotes != null && snap.userNotes!.isNotEmpty) {
-        final notes = UserNotesCodec.decode(snap.userNotes!, deck.slides);
-        if (notes.isNotEmpty) {
-          deck = deck.copyWith(userNotes: notes);
-        }
-      }
-      if (snap.miauw != null && snap.miauw!.isNotEmpty) {
-        final d = MiauwCodec.decode(snap.miauw!);
-        if (!d.isEmpty) {
-          deck = deck.copyWith(miauw: d);
-        }
-      }
-      if (snap.seal != null && snap.seal!.isNotEmpty) {
-        final record = SealCodec.decode(snap.seal!);
-        if (record != null) deck = record.applyTo(deck);
-      }
-      final ink = snap.annotations;
-      if (ink != null && ink.isNotEmpty) {
-        try {
-          final strokes = AnnotationCodec.decode(ink, deck.slides);
-          if (strokes.isNotEmpty) deck = deck.copyWith(annotations: strokes);
-        } catch (e) {
-          // Een kapotte tekenlaag mag het herstel van de tekst nooit blokkeren;
-          // hetzelfde als bij een onleesbare sidecar op schijf.
-          logWarning('restoreRecovered: annotaties onleesbaar', e);
-        }
-      }
       // Hergebruik de sleutel van de momentopname. Het bestand dat er al ligt ís
       // daarmee meteen de herstelkopie van dit tabblad, in plaats van dat het
       // wordt weggegooid en de nieuwe pas bij de volgende autosave-tik ontstaat.
@@ -361,26 +320,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       final tab = _createTab(recoveryId: snap.id);
       tab.deckNotifier.loadDeck(deck, filePath: snap.filePath);
       tab.deckNotifier.markDirty(); // herstelde inhoud is nog niet opgeslagen
-      final draft = snap.markdownDraft;
-      if (draft != null) {
-        final scope = snap.markdownDraftScope == MarkdownScope.slide.name
-            ? MarkdownScope.slide
-            : MarkdownScope.deck;
-        final slideIndex = (snap.markdownDraftSlideIndex ?? 0).clamp(
-          0,
-          deck.slides.length - 1,
-        );
-        tab.editorNotifier.select(slideIndex);
-        tab.editorNotifier.setMarkdownScope(scope);
-        final baseline = scope == MarkdownScope.slide
-            ? tab.deckNotifier.generateSlideMarkdown(slideIndex)
-            : tab.deckNotifier.generateMarkdown();
-        tab.editorNotifier.setMode(
-          EditorMode.markdown,
-          initialMarkdown: baseline,
-        );
-        tab.editorNotifier.updateMarkdown(draft);
-      }
+      _applyRecoveredMarkdownDraft(tab, snap, deck);
       restored.add(tab);
     }
     if (restored.isEmpty) return unreadable;

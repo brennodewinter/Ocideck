@@ -68,6 +68,22 @@ void _webdavNotConfigured(BuildContext context) {
   );
 }
 
+/// Sla het tabblad [tab] op via het juiste pad: een documenttabblad byte-getrouw
+/// (of "Opslaan als…"), een presentatie via de deck-route. Gedeeld door de
+/// app-brede Ctrl/Cmd+S en de opslaan-bij-afsluiten-lus, zodat een vuil
+/// documenttabblad het afsluiten niet eeuwig blokkeert. Geeft terug of er
+/// daadwerkelijk is opgeslagen.
+Future<bool> saveTabWithDestination(
+  BuildContext context,
+  WidgetRef ref,
+  TabInfo tab,
+) {
+  final document = tab.documentNotifier;
+  return document != null
+      ? saveDocumentWithDestination(context, ref, document)
+      : saveDeckWithDestination(context, ref, tab.deckNotifier);
+}
+
 /// Sla [deckNotifier] op. Voor een nieuw deck (nog geen bestandspad) toont dit
 /// eerst een bestemmingsdialoog — kies een bibliotheek en zie waar de
 /// presentatie, afbeeldingen en media landen — en opent daarna het
