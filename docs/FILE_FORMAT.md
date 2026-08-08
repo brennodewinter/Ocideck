@@ -3155,8 +3155,15 @@ Where the break has an effect is **export**, not the byte layout:
   to `\newpage`, so the compiled PDF begins a fresh page there instead of drawing
   a rule.
 
-Making every new `H1` chapter start on a new page automatically is a **planned
-follow-up and is not available yet**; a page break is only the explicit `---` the
-author inserts. The design is in
-[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md) §13, and the
-author-facing description is in the [User Guide](USER_GUIDE.md#inserting-a-page-break).
+Making every new `H1` chapter start on a new page can also be turned on **without
+placing any break in the file**: the setting *Nieuw hoofdstuk op een nieuwe
+pagina* (Settings → General → Document style; `AppSettings.documentChapterPageBreak`,
+default off) *(added 2026-08-08)*. Like the `---` break it is purely an
+export/print choice and writes **nothing** to disk — the `.md` is unchanged
+whether the setting is on or off. When it is on, the HTML/PDF export carries a
+print-only `.document h1{page-break-before:always}` rule (the first chapter
+excepted, so the export does not open with a blank sheet) and the LaTeX export
+puts a `\newpage` before every `\section` but the first. The design is in
+[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md) §13 (the setting in
+§13.5), and the author-facing description is in the
+[User Guide](USER_GUIDE.md#inserting-a-page-break).
