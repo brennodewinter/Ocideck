@@ -93,7 +93,7 @@ void main() {
         userId: userId,
         deviceId: 'DEV-A',
       );
-      final aPub = await a.publicKeys();
+      final aPub = await a.publicKeys(rot: 0);
       final seedsA = await readDeviceSeeds(
         secretStore: secrets,
         homeserver: homeserver,
@@ -114,7 +114,7 @@ void main() {
         deviceId: 'DEV-B',
         recoveryKey: key,
       );
-      final bPub = await b.publicKeys();
+      final bPub = await b.publicKeys(rot: 0);
 
       // Same identity key (fingerprint), even though the device id differs.
       expect(bPub.identityKey, aPub.identityKey);
@@ -127,7 +127,7 @@ void main() {
         userId: userId,
         deviceId: 'DEV-B',
       );
-      expect((await bAgain.publicKeys()).identityKey, aPub.identityKey);
+      expect((await bAgain.publicKeys(rot: 0)).identityKey, aPub.identityKey);
     });
 
     test('importing a malformed key writes nothing', () async {

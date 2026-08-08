@@ -138,6 +138,16 @@ class CollabDeviceDirectory {
 
   /// Every known peer, for the verification UI to list and fingerprint.
   Iterable<PeerDevice> get peers => _peers.values;
+
+  /// The verified public keys of every device belonging to [peerAddress] — used
+  /// by the Matrix key exchange to resolve the sender of a blinded key-share
+  /// (the wrap carries no cleartext sender device-id, §5.1 N3; the to-device
+  /// event supplies the sender's Matrix user id, and the directory maps that to
+  /// candidate device keys for trial-install).
+  Iterable<DevicePublicKeys> devicesForAddress(String peerAddress) => _peers
+      .values
+      .where((p) => p.peerAddress == peerAddress)
+      .map((p) => p.keys);
 }
 
 /// Byte-for-byte comparison of two identity keys — the pin-on-first-use check.

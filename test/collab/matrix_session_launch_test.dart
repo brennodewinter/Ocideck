@@ -35,8 +35,8 @@ void main() {
     final guestKeys = await _device('guest');
     hostCrypto = CollabCrypto(hostKeys);
     guestCrypto = CollabCrypto(guestKeys);
-    hostPub = await hostKeys.publicKeys();
-    guestPub = await guestKeys.publicKeys();
+    hostPub = await hostKeys.publicKeys(rot: 0);
+    guestPub = await guestKeys.publicKeys(rot: 0);
     hostClient = await _login(hs, 'host');
     guestClient = await _login(hs, 'guest');
   });

@@ -145,8 +145,8 @@ void main() {
       deviceId: acct.deviceId,
     );
     expect(
-      (await reloaded.publicKeys()).identityKey,
-      (await first.publicKeys()).identityKey,
+      (await reloaded.publicKeys(rot: 0)).identityKey,
+      (await first.publicKeys(rot: 0)).identityKey,
     );
     await host.launch.dispose();
   });

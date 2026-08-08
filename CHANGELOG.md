@@ -1144,6 +1144,29 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **collab: §5.1 crypto-uitbreiding — signed rot + recipient-blinded wrap
+  (GEPOORT).** De minimale, geënumereerde crypto-uitbreiding uit
+  `XMPP_COLLAB_TRANSPORT.md` §5.1 die de veilige XMPP-key-exchange deblokkeert,
+  geland in `lib/collab/collab_crypto.dart` achter de
+  ketenkeuring-xmpp-spine-chain-review. Drie teeth: **(1) signed rot-epoch** — de
+  identity-gesigneerde device-binding is uitgebreid van `(deviceId,
+  agreementKey)` naar `(deviceId, agreementKey, rot)`, zodat `verifyBinding` rot
+  dekt en een `rot=MAX`-replay onmogelijk wordt (N2; binding-tag v1→v2); **(2)
+  recipient-blinded wrap** — `WrappedKey` zet geen `to`/`from` meer in cleartext
+  op de wire; de ontvanger is cryptografisch gebonden door ECDH (trial-decrypt),
+  de afzender door de Ed25519-signatuur (N3); **(3) mode-AAD** — de redenering
+  (uiteenlopende room-strings binden mode al voor records) en de open
+  reviewvraag (of de externe crypto-review een expliciete `mode`-tag eist, in
+  beide AADs) zijn vastgelegd in `collab_crypto.dart`. **GEDEELDE-KERN-BESLISSING:**
+  één gedeeld formaat, gecoördineerde bump — zowel Matrix- als XMPP-mode gebruiken
+  het v2-binding- en blinded-wrap-formaat (Matrix draagt `rot=0`; geen
+  compat-shim: het Matrix-pad is dormant, OciDeck is local-first). De
+  Matrix-callers (`matrix_key_exchange.dart`, `matrix_collab_launch.dart`) en
+  `collab_device_directory.dart` (`devicesForAddress` voor
+  sender-resolutie) zijn meegenomen. Nieuwe tests: preimage-bytes-pin,
+  rot-replay geweigerd, blinded-wrap onthult geen cleartext `to`/`from`,
+  trial-decrypt `bad-wrap`. `make check` groen, `make mutate` schoon.
+  Intern-plumbing, achter de standaard-uit Videovergaderingen-module.
 - **collab: protocol-neutrale device-directory geëxtraheerd.** De
   `MatrixDeviceDirectory` uit `matrix_key_exchange.dart` is geëxtraheerd naar
   `lib/collab/collab_device_directory.dart` als `CollabDeviceDirectory`, gedeeld
