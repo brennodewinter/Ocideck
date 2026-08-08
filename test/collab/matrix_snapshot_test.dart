@@ -9,9 +9,9 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/collab/collab_crypto.dart';
+import 'package:ocideck/collab/collab_device_directory.dart';
 import 'package:ocideck/collab/collab_snapshot.dart';
 import 'package:ocideck/collab/matrix_client.dart';
-import 'package:ocideck/collab/matrix_key_exchange.dart';
 import 'package:ocideck/collab/matrix_snapshot.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
@@ -23,7 +23,7 @@ void main() {
   late FakeHomeserver hs;
   late MatrixSnapshotChannel authorityChannel;
   late MatrixClient receiverClient;
-  late MatrixDeviceDirectory receiverDirectory;
+  late CollabDeviceDirectory receiverDirectory;
   late CollabCrypto receiverCrypto;
   late CollabSnapshot sent;
 
@@ -41,8 +41,11 @@ void main() {
     final rk = await authCrypto.rekey([recvPub]);
     await receiverCrypto.installEpochKey(rk.wraps.single, authPub);
 
-    receiverDirectory = MatrixDeviceDirectory();
-    await receiverDirectory.ingest(userId: '@auth:hs.example', keys: authPub);
+    receiverDirectory = CollabDeviceDirectory();
+    await receiverDirectory.ingest(
+      peerAddress: '@auth:hs.example',
+      keys: authPub,
+    );
 
     final authClient = MatrixClient(
       transport: hs,
@@ -60,7 +63,7 @@ void main() {
       client: authClient,
       crypto: authCrypto,
       roomId: room,
-      directory: MatrixDeviceDirectory(),
+      directory: CollabDeviceDirectory(),
       maxChunkChars: 200,
     );
 

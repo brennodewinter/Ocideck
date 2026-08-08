@@ -15,7 +15,7 @@
 import '../utils/log.dart';
 import 'collab_crypto.dart';
 import 'matrix_client.dart';
-import 'matrix_key_exchange.dart';
+import 'collab_device_directory.dart';
 
 /// Where one peer device is looking, for the presence UI.
 class PeerPresence {
@@ -50,7 +50,7 @@ class MatrixPresence {
   final MatrixClient _matrix;
   final CollabCrypto _e2ee;
   final String roomId;
-  final MatrixDeviceDirectory directory;
+  final CollabDeviceDirectory directory;
 
   final Map<String, PeerPresence> _peers = {};
 
@@ -131,7 +131,7 @@ class MatrixPresence {
       final slide = opened['slide'];
       if (slide is! String) return;
       _peers[device] = PeerPresence(
-        userId: directory.userOf(device) ?? '',
+        userId: directory.addressOf(device) ?? '',
         deviceId: device,
         slideId: slide,
       );

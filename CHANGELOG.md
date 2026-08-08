@@ -1144,6 +1144,21 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **collab: protocol-neutrale device-directory geëxtraheerd.** De
+  `MatrixDeviceDirectory` uit `matrix_key_exchange.dart` is geëxtraheerd naar
+  `lib/collab/collab_device_directory.dart` als `CollabDeviceDirectory`, gedeeld
+  door de Matrix- en de toekomstige XMPP-key-exchange (XMPP_COLLAB_TRANSPORT.md
+  §5 brick 8, §11 sub-plak 1). De hardening die de drie review-rondes eiste is
+  meegenomen en geldt nu ook voor de Matrix-kant: een cap op de pre-approval
+  pin-store die ≥ de occupant-cap is (500, NEW-2 — een cap eronder opent een
+  keying-denial-DoS), een per-nick device-id-grens (SA-F2 — pinnen stopt
+  overschrijven, niet aanmaken), en pin-on-first-use (SA-F3 — een bekende
+  deviceId mag niet stilletjes van identiteit wisselen). Het opgeslagen
+  peer-adres is protocol-neutraal (Matrix levert een userId, XMPP straks een
+  room/nick). De naad voor de signed-rot-extensie (§5.1, sub-plak 2) ligt in de
+  identity-key-check in `ingest` — het rot-tekenen zit achter de
+  ketenkeuring-xmpp-spine-chain-review en is in deze plak niet aangeraakt.
+  Intern-plumbing, achter de standaard-uit Videovergaderingen-module.
 - **Documentmodus: opslaan en herstel werken nu ook voor een document.** Twee
   samenhangende reparaties. **Opslaan.** `Ctrl/Cmd+S` en *Bestand → Opslaan*
   hingen aan de deck-only opslag, die een document niet kent; op een

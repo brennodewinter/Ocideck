@@ -25,8 +25,8 @@ import 'dart:convert';
 import '../utils/log.dart';
 import 'collab_crypto.dart';
 import 'collab_snapshot.dart';
+import 'collab_device_directory.dart';
 import 'matrix_client.dart';
-import 'matrix_key_exchange.dart';
 
 class MatrixSnapshotChannel {
   MatrixSnapshotChannel({
@@ -49,7 +49,7 @@ class MatrixSnapshotChannel {
   final MatrixClient _matrix;
   final CollabCrypto _e2ee;
   final String roomId;
-  final MatrixDeviceDirectory directory;
+  final CollabDeviceDirectory directory;
 
   /// Roughly the plaintext chars per chunk event — kept well under the ~64 KiB
   /// event cap after JSON + base64 overhead.
