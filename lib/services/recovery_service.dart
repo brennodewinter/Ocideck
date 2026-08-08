@@ -277,8 +277,26 @@ class RecoveryService {
       }
       out.sort((a, b) => b.savedAt.compareTo(a.savedAt));
       return out;
-    } catch (e) {
-      logWarning('RecoveryService.loadAll: list recovery dir', e);
+    } catch (e, s) {
+      // Opstart-veilige fallback: een StackOverflowError ontsnapt aan de
+      // per-file try/catch (het is een Error, geen Exception) en kan de app
+      // laten crashen vóór de UI op staat. De recovery-map hernoemen naar een
+      // backup — niet verwijderen, de gebruiker wil misschien iets terughalen —
+      // en normaal opstarten met een lege lijst. Recovery is een
+      // gemaksfunctie, geen voorwaarde om te kunnen werken.
+      logError('RecoveryService.loadAll: fatal — quarantining recovery dir', e, s);
+      try {
+        final dir = await _dir();
+        final backup = Directory(
+          '${dir.path}-corrupt-${DateTime.now().millisecondsSinceEpoch}',
+        );
+        await dir.rename(backup.path);
+        logWarning(
+          'RecoveryService.loadAll: recovery map hernoemd naar ${backup.path}',
+        );
+      } catch (e2) {
+        logWarning('RecoveryService.loadAll: kon recovery map niet hernoemen', e2);
+      }
       return const [];
     }
   }
