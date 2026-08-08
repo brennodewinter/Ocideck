@@ -284,7 +284,11 @@ class RecoveryService {
       // backup — niet verwijderen, de gebruiker wil misschien iets terughalen —
       // en normaal opstarten met een lege lijst. Recovery is een
       // gemaksfunctie, geen voorwaarde om te kunnen werken.
-      logError('RecoveryService.loadAll: fatal — quarantining recovery dir', e, s);
+      logError(
+        'RecoveryService.loadAll: fatal — quarantining recovery dir',
+        e,
+        s,
+      );
       try {
         final dir = await _dir();
         final backup = Directory(
@@ -295,7 +299,10 @@ class RecoveryService {
           'RecoveryService.loadAll: recovery map hernoemd naar ${backup.path}',
         );
       } catch (e2) {
-        logWarning('RecoveryService.loadAll: kon recovery map niet hernoemen', e2);
+        logWarning(
+          'RecoveryService.loadAll: kon recovery map niet hernoemen',
+          e2,
+        );
       }
       return const [];
     }

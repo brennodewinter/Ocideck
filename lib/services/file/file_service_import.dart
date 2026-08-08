@@ -188,7 +188,8 @@ extension FileServiceImport on FileService {
         // "No space left" (POSIX) of "disk full" — vertaal naar een gerichte
         // melding in plaats van een generieke "import mislukt".
         final msg = e.toString().toLowerCase();
-        if (msg.contains('no space left') || msg.contains('disk full') ||
+        if (msg.contains('no space left') ||
+            msg.contains('disk full') ||
             msg.contains('enospc')) {
           logWarning(
             'FileService.importPackageBytes: disk full during extraction',

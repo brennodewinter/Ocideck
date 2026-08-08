@@ -669,9 +669,9 @@ class FileService {
     IntegrityStatus? integrity;
     if (content == null) {
       final fileHash = DocumentIntegrity.hashMarkdown(raw);
-      integrity = DocumentIntegrity(_md).verify(
-        hydrated.copyWith(fileHash: fileHash),
-      );
+      integrity = DocumentIntegrity(
+        _md,
+      ).verify(hydrated.copyWith(fileHash: fileHash));
       if (integrity == IntegrityStatus.notSealed ||
           integrity == IntegrityStatus.notVerifiable) {
         integrity = null;
