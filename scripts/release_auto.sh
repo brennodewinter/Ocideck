@@ -576,6 +576,15 @@ tag_and_push() { # tag_and_push MERGE_SHA
     TAG_PUSHED=1
     return 0
   fi
+  # De merge-commit is server-side gemaakt (REST-merge in merge_pr) en zit dus nog
+  # niet in onze lokale objectdatabase; 'git tag -a' zou er anders op stuklopen met
+  # 'fatal: bad object type' — precies waarop de v0.4.1-release brak. Haal 'm op
+  # (bereikbaar via origin/main) en controleer 'm vóór de onherroepelijke stappen.
+  # Dit dekt zowel de verse keten als de --resume-route: beide taggen via deze fn.
+  git fetch --quiet origin \
+    || die "kon origin niet fetchen vóór het taggen — is de forge bereikbaar? Hervat later met: scripts/release_auto.sh --resume $TAG"
+  git cat-file -e "$mergesha^{commit}" 2>/dev/null \
+    || die "merge-commit $mergesha ontbreekt lokaal na 'git fetch origin' — controleer PR en origin. Hervat met: scripts/release_auto.sh --resume $TAG"
   section "Fase 2 — tag $TAG pushen (de publieke release-keten start hierna)"
   log "Ctrl-C binnen 8 seconden om af te breken (hierna is de tag onherroepelijk)."
   for i in 8 7 6 5 4 3 2 1; do printf '\r   %s… ' "$i"; sleep 1; done; printf '\r          \n'

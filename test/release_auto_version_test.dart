@@ -50,6 +50,29 @@ void main() {
     return (r.stdout as String).trim();
   }
 
+  // Trekt de body van een top-level bash-functie uit het script: de regels tussen
+  // 'naam() {' en de eerstvolgende regel die enkel '}' is. De functies in
+  // release_auto.sh sluiten met een kale '}' op kolom 0, dus dit is exact genoeg
+  // zonder een echte bash-parser.
+  String functionBody(String name) {
+    final lines = File(script).readAsStringSync().split('\n');
+    final open = RegExp('^${RegExp.escape(name)}\\(\\)\\s*\\{');
+    var start = -1;
+    for (var i = 0; i < lines.length; i++) {
+      if (open.hasMatch(lines[i])) {
+        start = i;
+        break;
+      }
+    }
+    if (start < 0) fail('functie $name() niet gevonden in $script');
+    for (var i = start + 1; i < lines.length; i++) {
+      if (RegExp(r'^\}\s*$').hasMatch(lines[i])) {
+        return lines.sublist(start + 1, i).join('\n');
+      }
+    }
+    fail('geen sluitende "}" voor $name() gevonden in $script');
+  }
+
   test(
     'de drie niveaus zijn exact de canonieke bumps van de huidige versie',
     () {
@@ -103,4 +126,46 @@ void main() {
     expect(r.exitCode, isNot(0));
     expect(r.stderr.toString(), contains('resume'));
   }, skip: skipOnWindows);
+
+  // Statische invariant (leest het script, draait geen bash — dus ook groen op de
+  // Windows-mirror-CI). Regressie voor de v0.4.1-release die brak op
+  // 'fatal: bad object type'.
+  test('tag_and_push fetcht de merge-commit vóór het annoteren van de tag', () {
+    // merge_pr merget de PR server-side via de REST-API; de merge-commit bestaat
+    // op dat moment alleen op origin. tag_and_push annoteerde daar een tag op
+    // ('git tag -a … "$mergesha"') zónder 'm eerst te fetchen, waardoor git tag
+    // viel op een object dat de lokale database niet had. De fix is een
+    // 'git fetch origin' vóór het taggen; deze poort borgt die volgorde — óók in
+    // de --resume-route, die door dezelfde functie loopt.
+    final body = functionBody('tag_and_push');
+    // Anker op regelbegin (multiline): pak het échte commando, niet het
+    // 'git tag -a' dat in de toelichtende comment of in een die-melding staat.
+    final fetchIdx = body.indexOf(
+      RegExp(r'^\s*git\s+fetch\b.*\borigin\b', multiLine: true),
+    );
+    final annotateIdx = body.indexOf(
+      RegExp(r'^\s*git\s+tag\s+-a\b', multiLine: true),
+    );
+
+    expect(
+      annotateIdx,
+      isNonNegative,
+      reason: 'git tag -a niet gevonden in tag_and_push',
+    );
+    expect(
+      fetchIdx,
+      isNonNegative,
+      reason:
+          'tag_and_push fetcht de server-side merge-commit niet met '
+          '"git fetch origin"; git tag -a faalt dan met "bad object type" '
+          '(zie de v0.4.1-release).',
+    );
+    expect(
+      fetchIdx,
+      lessThan(annotateIdx),
+      reason:
+          'de "git fetch origin" moet vóór "git tag -a" staan, anders is de '
+          'merge-commit nog niet lokaal.',
+    );
+  });
 }
