@@ -1276,7 +1276,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `markdown_editor_toolbar.dart` — Formatting toolbar for the markdown editor.
 - `notes_editor_mode.dart` — Enum: rendered vs raw editing surface.
 - `notes_mode_toggle.dart` — Toggle between visual and markdown editing.
-- `wysiwyg_notes_field.dart` — WYSIWYG rich-text field (Flutter Quill).
+- `wysiwyg_notes_field.dart` — WYSIWYG rich-text field (Flutter Quill). `defaultStylesFor` (`@visibleForTesting`) builds the Quill `DefaultStyles` from the `MarkdownEditorTheme` so every block honours the app theme. Quill *merges* these over its own ambient `DefaultStyles.getInstance(context)`, so any block type left unset inherits the surrounding `DefaultTextStyle` — a brand/link colour on the document surface in light (EU-blue under Europa). Every rendered block must therefore be pinned here; a list needs **two** fields — `lists.style` for the item text and `leading.style` for the marker (bullet dot / number, which the leading builder colours from `leading.style.color`) — both set to the body colour so items and markers match a paragraph.
 - `wysiwyg_notes_toolbar.dart` — Quill formatting toolbar.
 - `table_embed_builder.dart` — Renders a GFM table (an `x-embed-table` block embed) inside the visual editor as a real, editable table (pencil/double-click opens the full `TableEditor`, writes the result back byte-faithfully). This is why a table is no longer a `markdownVisualLimitations` fall-back to raw source.
 
