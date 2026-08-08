@@ -61,3 +61,38 @@ rules:
       - metavariable-regex:
           metavariable: $X
           regex: (?i).*(key|token|secret|nonce|salt|iv|seed|passw).*
+
+  - id: ocideck-non-constant-time-hash-vergelijking
+    languages: [dart]
+    severity: WARNING
+    message: >-
+      Een == op een hash/seal/commitment/imprint is niet constant-time en geeft
+      een timing-zijkanaal. Gebruik constantTimeEqualsString of
+      constantTimeEqualsBytes uit lib/utils/secure_compare.dart.
+    # Alleen de bestanden die veiligheidsverificatie doen — niet de hele lib/,
+    # want fileHash/sealHash worden ook in UI-code vergeleken voor change
+    # detection, en daar is == niet een timing-zijkanaal.
+    paths:
+      include:
+        - "**/lib/services/document_integrity.dart"
+        - "**/lib/services/rfc3161_timestamp.dart"
+        - "**/lib/services/privacy/redaction_manifest_service.dart"
+        - "**/lib/xmpp/xmpp_sasl.dart"
+      exclude:
+        - "**/lib/utils/secure_compare.dart"
+    patterns:
+      - pattern-either:
+          - pattern: $X == $Y
+          - pattern: $X != $Y
+      - pattern-not: $X == null
+      - pattern-not: $X != null
+      - metavariable-regex:
+          metavariable: $X
+          regex: (?i).*(sealHash|fileHash|messageImprint|redactionCommitment|manifestHash)$
+
+  # R-02 (#1367): followRedirects = false op gepinde clients.
+  # De Semgrep-regel voor openUrl-zonder-followRedirects is bewust niet
+  # opgenomen — de Dart-parser in Semgrep kan geen assignment-statements
+  # matchen in pattern-not-inside. De verplichting staat in de doc-comment
+  # van buildPinnedClient (lib/utils/pinned_http_client.dart) en in
+  # SECURITY_DESIGN.md §"redirects".

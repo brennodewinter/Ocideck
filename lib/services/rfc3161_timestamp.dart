@@ -1,43 +1,36 @@
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:cryptography/cryptography.dart';
+
 import '../utils/asn1_der.dart';
+import '../utils/secure_compare.dart';
 
 /// RFC 3161-tijdstempels voor het documentzegel (PENTEST_MIAUW §8-A2). OciDeck
 /// is hier een **producent van hashes**: het bouwt een TimeStampReq (`.tsq`) uit
 /// de SHA-512-zegelhash, de gebruiker laat OpenKAT of een TSA die buiten de app
 /// om tijdstempelen, en het teruggekomen token (`.tsr`) wordt geïmporteerd.
 ///
-/// **Wat dit bestand doet, en wat het niet doet.** Het ontleedt de TSTInfo uit
-/// het token en vergelijkt de message imprint met de zegelhash. Dat is één
-/// controle, en het is de enige: *hoort dit token bij dit document?*
+/// **Wat dit bestand doet.** Het ontleedt de TSTInfo uit het token, vergelijkt
+/// de message imprint met de zegelhash, en *sinds #1370* verifieert het de
+/// CMS-handtekening van de TSA tegen het in het token ingebedde certificaat
+/// ([verifyTimeStampSignature]). Dat bewijst dat het token niet is gewijzigd
+/// na ondertekening en dat de ondertekenaar de private key bij het ingebedde
+/// certificaat had.
 ///
-/// Niet gecontroleerd worden:
+/// **Wat dit bestand niet controleert.** De certificaatketen van de TSA — er
+/// wordt niet gecontroleerd of de ondertekenaar een TSA is (`id-kp-timeStamping`)
+/// of überhaupt te vertrouwen valt. Volledige X.509-padvalidatie tegen een
+/// vertrouwensanker staat op de roadmap als §8-A3; wie onweerlegbare
+/// tijdsverankering nodig heeft, verifieert het token bij de TSA. OciDeck
+/// bewaart het ongewijzigd zodat dat kan.
 ///
-/// - de **CMS-handtekening** van het token — er wordt niets geverifieerd van
-///   wat de TSA over de TSTInfo heeft ondertekend;
-/// - de **certificaatketen** van de TSA, en dus ook niet of de ondertekenaar
-///   een TSA is (`id-kp-timeStamping`) of überhaupt te vertrouwen valt;
 /// Wat OciDeck **sinds 2026-07-22 wél** doet (#563): de nonce van het uitstaande
 /// verzoek bewaren in de zegel-sidecar en de echo bij het importeren nakijken.
 /// Een ouder token voor dezelfde hash, opnieuw ingediend, wordt daardoor
 /// geweigerd zolang er een verzoek uitstaat. Staat er geen verzoek uit, dan is
 /// er niets te vergelijken en blijft de imprint het enige oordeel — zie
 /// [timeStampEchoesNonce] en [buildTimeStampRequest].
-///
-/// De praktische betekenis: `genTime` is een *bewering van het token*, geen
-/// vastgesteld feit. Wie het deck heeft, kan zelf een token maken met een
-/// willekeurige tijd en een kloppende imprint. Daarom heet dit hier geen
-/// "trusted timestamp" en toont de interface geen groen vinkje, maar een
-/// neutrale melding met de kanttekening erbij.
-///
-/// Waarom niet gebouwd: echte tokenverificatie vraagt X.509-padvalidatie tegen
-/// een vertrouwensanker. Dat is een afhankelijkheid erbij (met SBOM- en
-/// licentiegevolgen) plus een meegeleverde ankerlijst die per definitie
-/// veroudert — in een applicatie die verder geen netwerk op gaat en waarvan de
-/// belofte tamper-*evidence* is, niet tamper-*proof*. Wie onweerlegbare
-/// tijdsverankering nodig heeft, verifieert het token bij de TSA; OciDeck
-/// bewaart het ongewijzigd zodat dat kan.
 
 /// The hash algorithms whose OID this module recognises (for building a request
 /// and for locating the message imprint in a token).
@@ -345,7 +338,7 @@ bool timeStampEchoesNonce(Uint8List token, Uint8List nonce) {
     return hex.substring(i);
   }
 
-  return trim(parsed!.nonceHex!) == trim(_hex(nonce));
+  return constantTimeEqualsString(trim(parsed!.nonceHex!), trim(_hex(nonce)));
 }
 
 /// Of de **message imprint** van [token] gelijk is aan [sealHashHex]
@@ -359,7 +352,10 @@ bool timeStampEchoesNonce(Uint8List token, Uint8List nonce) {
 bool timeStampImprintMatchesHash(Uint8List token, String sealHashHex) {
   final parsed = parseTimeStampToken(token);
   return parsed != null &&
-      parsed.messageImprintHex.toLowerCase() == sealHashHex.toLowerCase();
+      constantTimeEqualsString(
+        parsed.messageImprintHex.toLowerCase(),
+        sealHashHex.toLowerCase(),
+      );
 }
 
 bool _isHashOid(Uint8List oid) {
@@ -369,13 +365,7 @@ bool _isHashOid(Uint8List oid) {
   return false;
 }
 
-bool _bytesEqual(List<int> a, List<int> b) {
-  if (a.length != b.length) return false;
-  for (var i = 0; i < a.length; i++) {
-    if (a[i] != b[i]) return false;
-  }
-  return true;
-}
+bool _bytesEqual(List<int> a, List<int> b) => constantTimeEqualsBytes(a, b);
 
 /// De hex-vorm waarin een nonce in de zegel-sidecar wordt bewaard.
 ///
@@ -402,4 +392,487 @@ DateTime? _parseGeneralizedTime(Uint8List content) {
     int.parse(m.group(5)!),
     int.parse(m.group(6)!),
   );
+}
+
+// ── CMS-signatuurverificatie (#1370) ─────────────────────────────────────────
+//
+// OciDeck verifieert de CMS-handtekening van de TSA tegen het certificaat dat
+// in het token zelf is ingebed. Dat bewijst dat het token niet is gewijzigd
+// na ondertekening en dat de ondertekenaar de private key had. Het bewijst
+// niet dat het certificaat te vertrouwen is — daarvoor is padvalidatie tegen
+// een vertrouwensanker nodig (roadmap §8-A3).
+//
+// Ondersteund: RSA-PKCS#1 v1.5 met SHA-256/384/512 (de meest voorkomende TSA-
+// configuratie). ECDSA is nog niet geïmplementeerd; een token met een ECDSA-
+// handtekening retourneert [TimeStampSignatureStatus.unsupportedAlgorithm].
+
+/// Uitslag van de CMS-signatuurverificatie.
+enum TimeStampSignatureStatus {
+  /// De handtekening klopt tegen het ingebedde certificaat.
+  verified,
+
+  /// De handtekening klopt niet — het token is gemanipuleerd.
+  invalid,
+
+  /// Geen SignedData-structuur of geen certificaat gevonden.
+  notSigned,
+
+  /// Het sleuteltype of algoritme wordt niet ondersteund (bijv. ECDSA).
+  unsupportedAlgorithm,
+}
+
+/// OID `1.2.840.113549.1.7.2` — `id-signedData`.
+const _oidSignedData = [0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x07, 0x02];
+
+/// OID `1.2.840.113549.1.1.1` — `rsaEncryption` (sleuteltype in het certificaat).
+const _oidRsaEncryption = [
+  0x2a,
+  0x86,
+  0x48,
+  0x86,
+  0xf7,
+  0x0d,
+  0x01,
+  0x01,
+  0x01,
+];
+
+/// OID `1.2.840.113549.1.9.4` — `id-messageDigest` (signedAttrs-attribuut).
+const _oidMessageDigest = [
+  0x2a,
+  0x86,
+  0x48,
+  0x86,
+  0xf7,
+  0x0d,
+  0x01,
+  0x09,
+  0x04,
+];
+
+/// SHA-256/384/512 OID-bodies voor digest-herkenning in SignerInfo.
+const _oidSha256 = [0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01];
+const _oidSha384 = [0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x02];
+const _oidSha512 = [0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03];
+
+/// RSA-handtekeningalgoritmen (signatureAlgorithm in SignerInfo).
+const _oidSha256WithRsa = [
+  0x2a,
+  0x86,
+  0x48,
+  0x86,
+  0xf7,
+  0x0d,
+  0x01,
+  0x01,
+  0x0b,
+];
+const _oidSha384WithRsa = [
+  0x2a,
+  0x86,
+  0x48,
+  0x86,
+  0xf7,
+  0x0d,
+  0x01,
+  0x01,
+  0x0c,
+];
+const _oidSha512WithRsa = [
+  0x2a,
+  0x86,
+  0x48,
+  0x86,
+  0xf7,
+  0x0d,
+  0x01,
+  0x01,
+  0x0d,
+];
+
+/// Verifieer de CMS-handtekening van [token] tegen het ingebedde TSA-certificaat.
+///
+/// Dit is een **zelfstandige** verificatie: het certificaat wordt uit het token
+/// zelf gehaald, niet uit een externe vertrouwenslijst. De garantie is dus dat
+/// het token intern consistent is (de handtekening past bij de ingebedde sleutel
+/// en bij de TSTInfo), niet dat de TSA te vertrouwen is.
+///
+/// De functie retourneert [TimeStampSignatureStatus.verified] wanneer:
+/// 1. het token een CMS SignedData-structuur bevat met ten minste één certificaat;
+/// 2. de handtekening in SignerInfo past bij de publieke sleutel in dat certificaat;
+/// 3. het message-digest-attribuut in signedAttrs overeenkomt met de hash van
+///    de TSTInfo.
+///
+/// Zie de kop van dit bestand voor wat deze controle wél en niet bewijst.
+Future<TimeStampSignatureStatus> verifyTimeStampSignature(
+  Uint8List token,
+) async {
+  final root = parseDer(token);
+  if (root == null) return TimeStampSignatureStatus.notSigned;
+
+  // Zoek de SignedData-structuur: de SEQUENCE na het id-signedData OID.
+  final signedData = _findSignedData(root);
+  if (signedData == null) return TimeStampSignatureStatus.notSigned;
+
+  // certificates: [0] IMPLICIT SET OF Certificate — de eerste volstaat
+  // (een RFC 3161-token bevat typisch alleen het TSA-certificaat).
+  final cert = _findFirstCertificate(signedData);
+  if (cert == null) return TimeStampSignatureStatus.notSigned;
+
+  // signerInfos: SET OF SignerInfo — de eerste volstaat.
+  final signerInfo = _findFirstSignerInfo(signedData);
+  if (signerInfo == null) return TimeStampSignatureStatus.notSigned;
+
+  // signedAttrs: [0] IMPLICIT SET OF Attribute — de DER-bytes met de [0]-tag
+  // moeten worden omgetagd naar SET OF (0x31) voor de handtekeningverificatie.
+  final signedAttrsNode = _findChildByTag(signerInfo, 0xa0);
+  if (signedAttrsNode == null) return TimeStampSignatureStatus.notSigned;
+
+  // signatureAlgorithm: SEQUENCE na signedAttrs.
+  final sigAlgNode = _findChildByTag(signerInfo, 0x30, afterTag: 0xa0);
+  if (sigAlgNode == null) return TimeStampSignatureStatus.notSigned;
+
+  // signature: OCTET STRING na signatureAlgorithm.
+  final sigNode = _findChildByTag(
+    signerInfo,
+    0x04,
+    afterTag: 0x30,
+    afterContent: sigAlgNode.content,
+  );
+  if (sigNode == null) return TimeStampSignatureStatus.notSigned;
+
+  // digestAlgorithm: SEQUENCE (vóór signedAttrs) — bepaalt de hash over eContent.
+  final digestAlgNode = _findDigestAlgorithm(signerInfo);
+  if (digestAlgNode == null) return TimeStampSignatureStatus.notSigned;
+
+  // eContent: de OCTET STRING met TSTInfo-bytes, uit encapContentInfo.
+  final eContent = _findEContent(signedData);
+  if (eContent == null) return TimeStampSignatureStatus.notSigned;
+
+  // 1. Hash de eContent met de digest-algoritme uit SignerInfo.
+  final digestOid = _algorithmOid(digestAlgNode);
+  final hasher = _hasherForOid(digestOid);
+  if (hasher == null) return TimeStampSignatureStatus.unsupportedAlgorithm;
+  final digest = await hasher.hash(eContent);
+  final digestBytes = Uint8List.fromList(digest.bytes);
+
+  // 2. Controleer het message-digest-attribuut in signedAttrs.
+  final msgDigestAttr = _findMessageDigest(signedAttrsNode);
+  if (msgDigestAttr == null) return TimeStampSignatureStatus.invalid;
+  if (!constantTimeEqualsBytes(msgDigestAttr, digestBytes)) {
+    return TimeStampSignatureStatus.invalid;
+  }
+
+  // 3. Bepaal het signatuuralgoritme en de bijbehorende hash.
+  //    Sommige TSA's (zoals openssl) zetten signatureAlgorithm op `rsaEncryption`
+  //    (1.2.840.113549.1.1.1) i.p.v. `sha256WithRSAEncryption` — in dat geval
+  //    komt de hash uit het digestAlgorithm-veld van SignerInfo.
+  final sigAlgOid = _algorithmOid(sigAlgNode);
+  final sigHasher = _hasherForSignatureOid(sigAlgOid) ?? hasher;
+  if (_isRsaEncryption(sigAlgOid)) {
+    // rsaEncryption zonder geëxpliciteerde hash — gebruik de digestAlgorithm-hash.
+  } else if (!_isRsaPkcs1v15(sigAlgOid)) {
+    return TimeStampSignatureStatus.unsupportedAlgorithm;
+  }
+
+  // 4. Extraheer de publieke sleutel uit het certificaat.
+  final pubKey = _extractRsaPublicKey(cert);
+  if (pubKey == null) return TimeStampSignatureStatus.unsupportedAlgorithm;
+
+  // 5. Re-encode signedAttrs met SET OF-tag (0x31) i.p.v. [0]-tag (0xA0).
+  //    RFC 5652 §5.4: "The IMPLICIT [0] tag ... is not used for the
+  //    DER encoding ... an encoding ... with the SET OF tag ... is used."
+  final signedAttrsReencoded = Uint8List.fromList(
+    derTlv(0x31, signedAttrsNode.content.toList()),
+  );
+
+  // 6. Hash de re-encoded signedAttrs met de signatuur-hash.
+  final sigDigest = await sigHasher.hash(signedAttrsReencoded);
+  final sigDigestBytes = Uint8List.fromList(sigDigest.bytes);
+
+  // 7. Verifieer de RSA PKCS#1 v1.5 handtekening.
+  //    De pure-Dart `cryptography`-package implementeert geen RSA verify,
+  //    dus doen we het met BigInt.modPow + PKCS#1 v1.5 padding-check.
+  final isCorrect = _verifyRsaPkcs1v15(
+    sigNode.content,
+    sigDigestBytes,
+    pubKey.n,
+    pubKey.e,
+  );
+  return isCorrect
+      ? TimeStampSignatureStatus.verified
+      : TimeStampSignatureStatus.invalid;
+}
+
+Asn1Node? _findSignedData(Asn1Node root) {
+  final nodes = root.descendantsAndSelf.toList();
+  for (var i = 0; i < nodes.length; i++) {
+    if (nodes[i].tag == 0x06 &&
+        constantTimeEqualsBytes(nodes[i].content, _oidSignedData)) {
+      // De [0] EXPLICIT wrapper na het OID bevat de SignedData SEQUENCE.
+      for (var j = i + 1; j < nodes.length; j++) {
+        if (nodes[j].tag == 0xa0) {
+          // Binnen de [0] EXPLICIT staat de SignedData SEQUENCE.
+          for (final child in nodes[j].children) {
+            if (child.tag == 0x30) return child;
+          }
+        }
+      }
+      break;
+    }
+  }
+  return null;
+}
+
+Asn1Node? _findFirstCertificate(Asn1Node signedData) {
+  // certificates: [0] IMPLICIT SET OF Certificate.
+  final certsNode = _findChildByTag(signedData, 0xa0);
+  if (certsNode == null) return null;
+  // De certificates-[0] is een SET OF Certificate — elk kind is een SEQUENCE.
+  for (final child in certsNode.children) {
+    if (child.tag == 0x30) return child;
+  }
+  return null;
+}
+
+Asn1Node? _findFirstSignerInfo(Asn1Node signedData) {
+  // signerInfos: SET OF SignerInfo — de laatste SET in SignedData.
+  // We onderscheiden van digestAlgorithms (ook een SET) door te checken dat
+  // het eerste kind een SEQUENCE is die begint met een INTEGER (SignerInfo
+  // version), terwijl AlgorithmIdentifier begint met een OID.
+  for (final child in signedData.children) {
+    if (child.tag == 0x31 && child.children.isNotEmpty) {
+      final first = child.children.first;
+      if (first.tag == 0x30 &&
+          first.children.isNotEmpty &&
+          first.children.first.tag == 0x02) {
+        return first;
+      }
+    }
+  }
+  return null;
+}
+
+Asn1Node? _findChildByTag(
+  Asn1Node parent,
+  int tag, {
+  int? afterTag,
+  List<int>? afterContent,
+}) {
+  var seenAfter = afterTag == null;
+  for (final child in parent.children) {
+    if (!seenAfter) {
+      if (child.tag == afterTag &&
+          (afterContent == null ||
+              constantTimeEqualsBytes(child.content, afterContent))) {
+        seenAfter = true;
+      }
+      continue;
+    }
+    if (child.tag == tag) return child;
+  }
+  return null;
+}
+
+Asn1Node? _findDigestAlgorithm(Asn1Node signerInfo) {
+  // digestAlgorithm is de SEQUENCE na sid (IssuerAndSerialNumber of [0] SKI).
+  // Volgorde in SignerInfo: version, sid, digestAlgorithm, signedAttrs, ...
+  // sid is SEQUENCE (IssuerAndSerialNumber) of [0] (SubjectKeyIdentifier).
+  var seenSid = false;
+  for (final child in signerInfo.children) {
+    if (!seenSid) {
+      // Sla version (INTEGER) over, dan is de volgende sid.
+      if (child.tag == 0x30 || child.tag == 0x80) {
+        seenSid = true;
+      }
+      continue;
+    }
+    if (child.tag == 0x30) return child; // digestAlgorithm SEQUENCE
+  }
+  return null;
+}
+
+List<int>? _algorithmOid(Asn1Node algId) {
+  for (final child in algId.children) {
+    if (child.tag == 0x06) return child.content.toList();
+  }
+  return null;
+}
+
+HashAlgorithm? _hasherForOid(List<int>? oid) {
+  if (oid == null) return null;
+  if (constantTimeEqualsBytes(oid, _oidSha256)) return Sha256();
+  if (constantTimeEqualsBytes(oid, _oidSha384)) return Sha384();
+  if (constantTimeEqualsBytes(oid, _oidSha512)) return Sha512();
+  return null;
+}
+
+HashAlgorithm? _hasherForSignatureOid(List<int>? oid) {
+  if (oid == null) return null;
+  if (constantTimeEqualsBytes(oid, _oidSha256WithRsa)) return Sha256();
+  if (constantTimeEqualsBytes(oid, _oidSha384WithRsa)) return Sha384();
+  if (constantTimeEqualsBytes(oid, _oidSha512WithRsa)) return Sha512();
+  // `rsaEncryption` (1.2.840.113549.1.1.1) zonder geëxpliciteerde hash:
+  // de hash komt uit digestAlgorithm. Retourneer null hier — de aanroeper
+  // valt terug op de digest-hash.
+  return null;
+}
+
+/// Of het OID `rsaEncryption` (1.2.840.113549.1.1.1) is — RSA PKCS#1 v1.5
+/// zonder geëxpliciteerde hash; de hash komt uit digestAlgorithm.
+bool _isRsaEncryption(List<int>? oid) =>
+    oid != null && constantTimeEqualsBytes(oid, _oidRsaEncryption);
+
+/// Of het OID een `shaXXXWithRSAEncryption` is — RSA PKCS#1 v1.5 met
+/// geëxpliciteerde hash.
+bool _isRsaPkcs1v15(List<int>? oid) =>
+    oid != null &&
+    (constantTimeEqualsBytes(oid, _oidSha256WithRsa) ||
+        constantTimeEqualsBytes(oid, _oidSha384WithRsa) ||
+        constantTimeEqualsBytes(oid, _oidSha512WithRsa));
+
+Uint8List? _findEContent(Asn1Node signedData) {
+  // encapContentInfo: SEQUENCE met eContentType (OID) en eContent ([0] EXPLICIT
+  // OCTET STRING). We zoeken de OCTET STRING die de TSTInfo bevat — dat is
+  // de eContent na het id-ct-TSTInfo OID.
+  final nodes = signedData.descendantsAndSelf.toList();
+  for (var i = 0; i < nodes.length; i++) {
+    if (nodes[i].tag == 0x06 &&
+        constantTimeEqualsBytes(nodes[i].content, _oidTstInfo)) {
+      // De [0] EXPLICIT wrapper bevat de OCTET STRING.
+      for (var j = i + 1; j < nodes.length; j++) {
+        if (nodes[j].tag == 0xa0) {
+          for (final child in nodes[j].children) {
+            if (child.tag == 0x04) return child.content;
+          }
+        }
+        if (nodes[j].tag == 0x04) return nodes[j].content;
+      }
+      break;
+    }
+  }
+  return null;
+}
+
+Uint8List? _findMessageDigest(Asn1Node signedAttrs) {
+  // messageDigest-attribuut: SEQUENCE { OID(id-messageDigest), SET { OCTET STRING } }
+  for (final attr in signedAttrs.children) {
+    if (attr.tag != 0x30) continue;
+    final children = attr.children;
+    if (children.length < 2) continue;
+    if (children[0].tag == 0x06 &&
+        constantTimeEqualsBytes(children[0].content, _oidMessageDigest)) {
+      // SET { OCTET STRING } — de hash.
+      final setNode = children[1];
+      for (final val in setNode.children) {
+        if (val.tag == 0x04) return val.content;
+      }
+    }
+  }
+  return null;
+}
+
+/// De publieke sleutel uit een X.509-certificaat — modulus en exponent.
+typedef RsaPubKey = ({List<int> n, List<int> e});
+
+RsaPubKey? _extractRsaPublicKey(Asn1Node certificate) {
+  // Certificate ::= SEQUENCE { tbsCertificate, signatureAlgorithm, signatureValue }
+  // TBSCertificate ::= SEQUENCE { ... subjectPublicKeyInfo ... }
+  // SubjectPublicKeyInfo ::= SEQUENCE { algorithm, subjectPublicKey BIT STRING }
+  if (certificate.children.isEmpty) return null;
+  final tbs = certificate.children[0];
+  if (tbs.tag != 0x30) return null;
+
+  // TBSCertificate kinderen: [0] version?, serialNumber, signature, issuer,
+  // validity, subject, subjectPublicKeyInfo, ...
+  // subjectPublicKeyInfo is het 7e kind (index 6) als version aanwezig is,
+  // anders het 6e (index 5). We zoeken de SEQUENCE met een RSA-OID erin.
+  for (final child in tbs.children) {
+    if (child.tag != 0x30) continue;
+    final algChildren = child.children;
+    if (algChildren.length < 2) continue;
+    // algorithm SEQUENCE met OID?
+    final algSeq = algChildren[0];
+    if (algSeq.tag != 0x30) continue;
+    final oidNode = algSeq.children.isNotEmpty ? algSeq.children[0] : null;
+    if (oidNode == null || oidNode.tag != 0x06) continue;
+    if (!constantTimeEqualsBytes(oidNode.content, _oidRsaEncryption)) continue;
+
+    // subjectPublicKey: BIT STRING — sla de eerste byte (unused bits) over.
+    final bitString = algChildren[1];
+    if (bitString.tag != 0x03) continue;
+    final bitContent = bitString.content;
+    if (bitContent.isEmpty || bitContent[0] != 0) continue; // 0 unused bits
+    final keyBytes = Uint8List.sublistView(bitContent, 1);
+
+    // RSAPublicKey ::= SEQUENCE { modulus INTEGER, publicExponent INTEGER }
+    final rsaKey = parseDer(keyBytes);
+    if (rsaKey == null || rsaKey.children.length < 2) return null;
+    final modulus = rsaKey.children[0];
+    final exponent = rsaKey.children[1];
+    if (modulus.tag != 0x02 || exponent.tag != 0x02) return null;
+
+    return (n: modulus.content.toList(), e: exponent.content.toList());
+  }
+  return null;
+}
+
+/// Verifieer een RSA PKCS#1 v1.5 handtekening met pure-Dart `BigInt.modPow`.
+///
+/// De `cryptography`-package implementeert RSA niet in pure Dart (alleen via
+/// `cryptography_flutter`), dus doen we de modular exponentiatie + padding-
+/// check zelf. Dit is ~15 regels en vermijdt een nieuwe afhankelijkheid.
+///
+/// PKCS#1 v1.5 signatuur: `s^e mod n` geeft `00 01 FF...FF 00 DigestInfo`,
+/// waarbij DigestInfo een DER SEQUENCE is met de hash-algoritme OID en de hash.
+bool _verifyRsaPkcs1v15(
+  Uint8List signature,
+  Uint8List expectedHash,
+  List<int> modulusBytes,
+  List<int> exponentBytes,
+) {
+  final n = _bytesToBigInt(modulusBytes);
+  final e = _bytesToBigInt(exponentBytes);
+  final s = _bytesToBigInt(signature);
+  if (n == BigInt.zero || s >= n) return false;
+
+  // RSA verification: m = s^e mod n
+  final m = s.modPow(e, n);
+  final keyLen = (n.bitLength + 7) ~/ 8;
+  final em = _bigIntToBytes(m, keyLen);
+
+  // PKCS#1 v1.5 padding: 00 01 FF...FF 00 DigestInfo
+  if (em.length < 11 || em[0] != 0x00 || em[1] != 0x01) return false;
+  var i = 2;
+  while (i < em.length && em[i] == 0xff) {
+    i++;
+  }
+  if (i < 10 || i >= em.length || em[i] != 0x00) return false; // min 8 FF's
+  i++; // skip the 00 separator
+
+  // DigestInfo ::= SEQUENCE { AlgorithmIdentifier, OCTET STRING }
+  final digestInfo = parseDer(Uint8List.fromList(em.sublist(i)));
+  if (digestInfo == null || digestInfo.children.length < 2) return false;
+  final hashOctetString = digestInfo.children[1];
+  if (hashOctetString.tag != 0x04) return false;
+
+  return constantTimeEqualsBytes(hashOctetString.content, expectedHash);
+}
+
+BigInt _bytesToBigInt(List<int> bytes) {
+  var result = BigInt.zero;
+  for (final b in bytes) {
+    result = (result << 8) | BigInt.from(b);
+  }
+  return result;
+}
+
+List<int> _bigIntToBytes(BigInt value, int length) {
+  final out = List<int>.filled(length, 0);
+  var v = value;
+  for (var i = length - 1; i >= 0 && v != BigInt.zero; i--) {
+    out[i] = (v & BigInt.from(0xff)).toInt();
+    v = v >> 8;
+  }
+  return out;
 }

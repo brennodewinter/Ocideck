@@ -202,7 +202,7 @@ give the reasoning where the verdict is anything other than "fixed".
 | ID | Finding | Severity | Verdict |
 |---|---|---|---|
 | AEG-01 | Redaction bypass on 7 scanned-but-unprojected fields | Critical | **Already closed** before the report landed — with the parity test the audit itself recommended |
-| AEG-02 | RFC 3161 TSA signature not verified | High | **Already degraded** — dialog, dossier and FILE_FORMAT all say so explicitly; full CMS verification stays §8-A3 |
+| AEG-02 | RFC 3161 TSA signature not verified | High | **Partly fixed** (#1370) — CMS signature now verified against the embedded certificate; full X.509 path validation remains §8-A3 |
 | AEG-03 | Fetch-proxy usable as an open relay when misconfigured | High | **Fixed** — release conditions in `docs/HOSTING.md` (#483); found an inverted claim in the proxy README on the way |
 | U-01 | New slide type is shotgun surgery over ~56 switch sites | High | **Partly fixed** (#473, #486); the rest is deliberate — see below |
 | X-02 | Redaction boundary thins below the entry points | Medium | **Fixed** (#472) — `export()` now takes an `ExportBundle`, `fromDeck` an `AudienceDeck` |
@@ -284,14 +284,23 @@ wireframe drawing, the help text, the writer, three fit-scale functions, contras
 pairs, media fields. Tabulating those yields an equally long table and nothing
 safer.
 
-## AEG-02 — degraded, deliberately and everywhere
+## AEG-02 — CMS signature verified against embedded certificate
 
 The audit offers "verify in full, or degrade the claim explicitly". The claim was
 already degraded, and consistently: the seal dialog states that the TSA signature
 is not verified in-app and deliberately shows no green "verified" badge; the
 audit dossier records `genTime` as a *claim*; `FILE_FORMAT.md` says the check is
-an imprint comparison only. Full CMS `SignedData` verification against the TSA
-certificate chain remains PENTEST_MIAUW §8-A3.
+an imprint comparison only.
+
+Sinds #1370 verifieert OciDeck de CMS-handtekening van de TSA tegen het
+certificaat dat in het token zelf is ingebed (`verifyTimeStampSignature` in
+`lib/services/rfc3161_timestamp.dart`). Dit bewijst dat het token niet is
+gewijzigd na ondertekening en dat de ondertekenaar de private key bij het
+ingebedde certificaat had. Ondersteund: RSA-PKCS#1 v1.5 met SHA-256/384/512.
+
+Wat nog niet is geïmplementeerd: X.509-padvalidatie tegen een vertrouwensanker
+— dat vereist een externe CA-lijst die per definitie veroudert, en blijft op
+de roadmap als PENTEST_MIAUW §8-A3.
 
 ## AEG-04 — closed for images, documented for video
 

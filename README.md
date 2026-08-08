@@ -246,6 +246,7 @@ and it also indexes the design documents. The current-state documents:
 | [Privacy](docs/PRIVACY.md) | What stays local, what leaves, and on whose action |
 | [SBOM](docs/SBOM.md) | The machine-readable Software Bill of Materials and its CRA mapping |
 | [Security design](docs/SECURITY_DESIGN.md) | The security design principles and the concrete mechanisms that enforce them |
+| [Security review (APT)](docs/SECURITY_REVIEW_APT.md) | The APT-resilience review findings and their status |
 | [Security policy](SECURITY.md) | How to report a vulnerability |
 | [Source availability](SOURCE.md) | The EUPL source indication shipped in the web build — where the source lives and how to build it |
 | [Source map](docs/SOURCE_MAP.md) | An index of the files under `lib/`, grouped per directory |

@@ -34,6 +34,7 @@ void main() {
     'docs/ARCHITECTURE.md',
     'docs/BUILD.md',
     'docs/CHECKS.md',
+    'docs/SECURITY_REVIEW_APT.md',
     'docs/SOURCE_MAP.md',
     'docs/API_DOCUMENTATION.md',
     'docs/CONTRIBUTING_GUIDELINES.md',

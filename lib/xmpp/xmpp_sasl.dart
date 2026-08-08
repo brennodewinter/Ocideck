@@ -16,6 +16,8 @@ import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
 
+import '../utils/secure_compare.dart';
+
 /// SASL PLAIN: `base64("\0" authcid "\0" password)`. The caller MUST have gated
 /// this behind `NetGuard.maySendReusableSecret` over a live TLS (wss) socket —
 /// PLAIN puts the password on the wire.
@@ -118,7 +120,7 @@ class ScramClient {
     }
     final serverKey = _hmac(_saltedPassword!, utf8.encode('Server Key'));
     final expected = _hmac(serverKey, utf8.encode(_authMessage!));
-    return _constantTimeEquals(base64.decode(signature), expected);
+    return constantTimeEqualsBytes(base64.decode(signature), expected);
   }
 
   Uint8List _hmac(List<int> key, List<int> data) =>
@@ -144,15 +146,6 @@ class ScramClient {
       out[i] = a[i] ^ b[i];
     }
     return out;
-  }
-
-  bool _constantTimeEquals(List<int> a, List<int> b) {
-    if (a.length != b.length) return false;
-    var diff = 0;
-    for (var i = 0; i < a.length; i++) {
-      diff |= a[i] ^ b[i];
-    }
-    return diff == 0;
   }
 
   /// RFC 5802 §5.1 SASL-name escaping: `=` → `=3D`, `,` → `=2C`.
