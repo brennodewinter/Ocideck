@@ -1,6 +1,6 @@
 # OciDeck — Native Calls: one interface, Jitsi + Matrix backends (Design)
 
-> **Status:** design proposal — unbuilt · **Status last reviewed:** 2026-08-02 · **Published by:** Stichting LibreKAT
+> **Status:** design proposal — partially built (F1–F3.4a landed; F3.4b next) · **Status last reviewed:** 2026-08-08 · **Published by:** Stichting LibreKAT
 
 > **A design proposal — not yet implemented.**
 > This document describes a *future* capability. It is kept separate from the
@@ -26,9 +26,11 @@
 > The **spine decision (§5) is taken** (2026-08-02): the single XMPP spine, with
 > **backend exclusivity** (§1). The maintainer also gave **GO to build** (2026-08-02),
 > with the sub-choices in §10: `lib/xmpp/` from scratch, and media E2EE uniform across
-> platforms until the upstream fix. The dependencies still land only after the
-> build-conditions; **F1** (the provider-neutral interface + a fake adapter, no
-> dependency) is under way.
+> platforms until the upstream fix. The dependencies landed only after the
+> build-conditions. **F1–F3.4a have since landed** — the provider-neutral interface, the
+> from-scratch XMPP core, MUC + companion pairing, and the `flutter_webrtc` media-core
+> seam; the next slice is **F3.4b**, the real Jitsi media join. A dated status (what is
+> built, what remains) is in **§7.1**.
 
 ---
 
@@ -362,6 +364,79 @@ proof-of-concept — the end state is the native client; no vendor UI ever appea
 Native Jitsi covers both joining and hosting: hosting = point at a Jitsi deployment
 you control. LiveKit/MatrixRTC remains the cleaner backend for a *pure* own SFU
 (COLLABORATION.md §7 says so) and arrives in F5 behind the same contract.
+
+### 7.1 Build status — landed vs. remaining (2026-08-08)
+
+The table above is the plan; this is where it actually stands. **F1–F3.4a have
+landed on `main`; the media join and everything after it are unbuilt.** The
+`lib/xmpp/` core and the provider-neutral `lib/meetings/` interface exist and are
+tested — but no real call has been joined yet, and the companion channel carries
+nothing yet.
+
+**Landed (on `main`, behind the default-off Videovergaderingen module):**
+
+- **F1 — provider-neutral interface + fake + module** (#1104). `lib/meetings/`:
+  `meeting_provider.dart` (`MeetingProvider`/`MeetingSession`/`MeetingPreflight` +
+  enums), `meeting_participant.dart`, `meeting_event.dart`; `FakeMeetingProvider`
+  in `test/`; `ModuleId.videoCalls` (default off), `CallPanel`.
+- **F2 — XMPP core** (#1125). `xmpp_stanza.dart` (XXE-safe, DTDs refused),
+  `xmpp_sasl.dart` (SCRAM-SHA-1/256 proven against RFC 5802, ANONYMOUS, PLAIN
+  wss-gated), `xmpp_frame_transport*` (NetGuard-pinned, fail-closed).
+- **F3.1 — persistent session + resource bind** (#1128). `xmpp_session.dart`
+  (RFC 6120 §7). It **supersedes and removes** the F2 `xmpp_connection.dart` — one
+  primitive, no duplicated auth.
+- **F3.2 — MUC** (#1132). `xmpp_muc.dart` (XEP-0045: presence-driven join + a live
+  occupant roster). Presence/roster only — no media, no OciDeck payload yet.
+- **F3.3 — companion pairing** (#1135). `companion_room.dart` — deterministic
+  one-way hash of the conference URL (§5.1), no central registry.
+- **F3.4a — media-core seam** (#1138). `flutter_webrtc` (`^1.5.2`) cleared its chain
+  review and is in `pubspec`; `meeting_media_core.dart` (the E2EE-fact seam) +
+  `meeting_media_core_webrtc.dart` (the thin libwebrtc binding — `selfTest()`
+  provably touches no network) + `MediaPreflightTile`. **Opens no real media** — it is
+  the foundation under the join.
+- Plus later XMPP hardening (#1316–1320, #1366–1370): bounded stanza sizes/counts and
+  resource-exhaustion limits.
+
+*(Heads-up for a cold reader: §9's "New files (proposed)" list predates this and is
+partly stale — e.g. `xmpp_connection.dart` was built and then removed in F3.1. The
+files listed here are the truth on disk.)*
+
+**Remaining, as concrete buildable slices:**
+
+1. **F3.4b — the real Jitsi media join** (the headline gap; nothing here exists yet —
+   there is no `lib/meetings/providers/`). Build the Jitsi `MeetingSession` adapter
+   (`lib/meetings/providers/jitsi/jitsi_signaling.dart` — Jingle + source signalling +
+   Colibri2; `jitsi_presence.dart`) driving `meeting_media_core_webrtc`; receive remote
+   tracks into OciDeck tiles; camera/mic uplink; **screen share**. Carry-over musts from
+   the F3.4a reviews: **pin the `flutter_webrtc` log level** once the stack is driven for
+   real; **derive unique nicks** (the test dialog's fixed `'ocideck'` nick makes two
+   anonymous clients collide with a 409); **disco the MUC component (XEP-0030)** instead
+   of hardcoding `conference.<domain>`. Testbed: `docker-jitsi-meet` + two clients.
+   Covers **joining**.
+2. **Companion data plane over XMPP — `XmppTransport implements CollabTransport`**
+   (net-new; `CollabTransport` today has only loopback / WebDAV / Matrix-relay). Wire
+   `xmpp_muc` + `companion_room` to actually carry ops/locks/presence/chat, so the
+   collaboration data plane runs on the XMPP spine — the "immediately usable standalone
+   channel" F2 promised but which is not yet connected to `CollabTransport`. This is also
+   the swap-in that lets `MatrixRelayTransport` be parked: the two are interchangeable
+   behind the seam. The chat-mode default (§5.2) is decided here.
+3. **F4 — presenting.** The slide as an own video track via `SlideRasterizer`
+   **through the projection boundary** (`AudienceDeck`; `tool/check_audience_boundary.dart`
+   breaks the build until it does — §8). Presenter layout (slide large + tiles);
+   presenter-sync over the data plane (slice 2).
+4. **F5 — hosting + Matrix mode + media E2EE.** Host an XMPP/Jitsi-mode session on a
+   Jitsi deployment you control (`meeting_provider_profile.dart`, bring-your-own-URL),
+   *or* a wholly-Matrix-mode session (`lib/meetings/providers/matrixrtc/…` behind the
+   same `MeetingSession`). **Media E2EE stays off until `flutter-webrtc#2135` is merged,
+   released and verified on Apple hardware** (§10.2; a daily watcher signals the merge).
+   Covers **hosting**.
+
+**Gates that bite when these land (from §8), not after:** the projection boundary
+(`check_audience_boundary`), NetGuard on the signalling origin + the documented
+media-egress hole, the honest `ARCHITECTURE.md` update (a second network stack exists),
+the two consent domains, and the usual ratchets + doc duty per shipped phase. Settled
+since §5 was written: companion naming is the opaque hash (§5.1); the chat
+interop-vs-E2E default is deferred to slice 2 (§5.2).
 
 ---
 
