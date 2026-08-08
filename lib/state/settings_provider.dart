@@ -261,6 +261,9 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           appearances.any((profile) => profile.name == selectedAppearance)
           ? selectedAppearance
           : 'Europa',
+      documentDefaultStyle: prefs.getString('documentDefaultStyle'),
+      documentStyleEnforced:
+          prefs.getBool('documentStyleEnforced') ?? false,
       cockpitColorSchemes: cockpit.schemes,
       selectedCockpitColorSchemeName: cockpit.selectedName,
       cockpitVisualStyle: cockpit.visualStyle,
@@ -535,6 +538,32 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _persist(
       'setRequireClassificationOnExport',
       (prefs) => prefs.setBool('requireClassificationOnExport', enabled),
+    );
+  }
+
+  /// Documentmodus: stel de standaard documentstijl in (een stijlprofielnaam),
+  /// of `null` voor geen (platte tekst). Puur weergave/export — het raakt geen
+  /// enkel `.md`-bestand.
+  Future<void> setDocumentDefaultStyle(String? styleName) async {
+    state = styleName == null
+        ? state.copyWith(clearDocumentDefaultStyle: true)
+        : state.copyWith(documentDefaultStyle: styleName);
+    await _persist('setDocumentDefaultStyle', (prefs) async {
+      if (styleName == null) {
+        await prefs.remove('documentDefaultStyle');
+      } else {
+        await prefs.setString('documentDefaultStyle', styleName);
+      }
+    });
+  }
+
+  /// Documentmodus: dwing de standaard documentstijl af als huisstijl (negeer
+  /// per-document `theme:`), of laat elk document zijn eigen stijl kiezen.
+  Future<void> setDocumentStyleEnforced(bool enforced) async {
+    state = state.copyWith(documentStyleEnforced: enforced);
+    await _persist(
+      'setDocumentStyleEnforced',
+      (prefs) => prefs.setBool('documentStyleEnforced', enforced),
     );
   }
 

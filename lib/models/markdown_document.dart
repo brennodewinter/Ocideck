@@ -1,3 +1,4 @@
+import '../utils/document_front_matter.dart';
 import 'markdown_kind.dart';
 import 'markdown_outline.dart';
 import 'markdown_source_document.dart';
@@ -30,6 +31,29 @@ class MarkdownDocument {
 
   /// De ruwe bron, byte-identiek aan wat is ingelezen.
   String get source => _source.source;
+
+  /// De inhoud zonder het leidende YAML-frontmatter-blok. De editor bewerkt en
+  /// toont dít — de frontmatter draagt alleen de stijl en wordt niet als tekst
+  /// getoond. Altijd geldt `frontMatter + body == source`.
+  String get body => documentBody(source);
+
+  /// Het verbatim frontmatter-blok (of `''`) dat de stijl draagt.
+  String get frontMatter => splitDocumentFrontMatter(source).block;
+
+  /// De gekozen documentstijl: de naam van een stijlprofiel uit de `theme:`-
+  /// sleutel in de frontmatter, of `null` bij een platte `.md` zonder stijl.
+  String? get styleName => documentStyleName(source);
+
+  /// Een nieuw document met dezelfde frontmatter maar een vervangen body. De
+  /// stijl blijft staan; alleen de inhoud verandert.
+  MarkdownDocument withBody(String nextBody) =>
+      withSource(frontMatter + nextBody);
+
+  /// Een nieuw document met de stijl gezet op [name] (of verwijderd bij `null`).
+  /// Byte-chirurgisch: een platte `.md` zonder stijl blijft byte-identiek als je
+  /// stijl zet en weer wist (zie [withDocumentStyleName]).
+  MarkdownDocument withStyleName(String? name) =>
+      withSource(withDocumentStyleName(source, name));
 
   /// Wat naar schijf gaat: exact de bron. Nooit her-serialiseren — dat is de
   /// rode lijn die een plat document plat en maximaal uitwisselbaar houdt.

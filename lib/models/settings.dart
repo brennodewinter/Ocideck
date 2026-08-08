@@ -588,6 +588,18 @@ class AppSettings {
   final List<AppAppearanceProfile> appAppearanceProfiles;
   final String selectedAppAppearanceProfileName;
 
+  /// Documentmodus: de standaard stijl (naam van een [ThemeProfile]) voor
+  /// documenten die zelf geen `theme:` in hun frontmatter dragen. `null` = geen
+  /// (platte tekst). Puur een weergave- en exportkeuze; het schrijft niets in de
+  /// `.md` — alleen een per-document keuze doet dat, byte-chirurgisch.
+  final String? documentDefaultStyle;
+
+  /// Documentmodus: dwing [documentDefaultStyle] af als huisstijl — negeer de
+  /// per-document `theme:` en render/exporteer elk document met de standaardstijl.
+  /// Standaard uit. Wist geen bestaande frontmatter; die blijft in het bestand
+  /// staan maar wordt genegeerd zolang dit aanstaat.
+  final bool documentStyleEnforced;
+
   /// Named cockpit colour schemes and the globally selected one. The active
   /// scheme is applied to every cockpit slide (in preview and export); the
   /// colours are styling and live here, not in the deck `.md`.
@@ -785,6 +797,8 @@ class AppSettings {
     this.selectedThemeProfileName = 'LibreKAT',
     this.appAppearanceProfiles = AppAppearanceProfile.builtIns,
     this.selectedAppAppearanceProfileName = 'Europa',
+    this.documentDefaultStyle,
+    this.documentStyleEnforced = false,
     this.cockpitColorSchemes = CockpitColorScheme.builtIns,
     this.selectedCockpitColorSchemeName = 'Standaard',
     this.cockpitVisualStyle = CockpitVisualStyle.authentic,
@@ -873,6 +887,8 @@ class AppSettings {
     String? selectedThemeProfileName,
     List<AppAppearanceProfile>? appAppearanceProfiles,
     String? selectedAppAppearanceProfileName,
+    String? documentDefaultStyle,
+    bool? documentStyleEnforced,
     List<CockpitColorScheme>? cockpitColorSchemes,
     String? selectedCockpitColorSchemeName,
     CockpitVisualStyle? cockpitVisualStyle,
@@ -904,6 +920,7 @@ class AppSettings {
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
     bool clearMinRequiredExportTlp = false,
+    bool clearDocumentDefaultStyle = false,
   }) {
     final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
@@ -933,6 +950,11 @@ class AppSettings {
       selectedAppAppearanceProfileName:
           selectedAppAppearanceProfileName ??
           this.selectedAppAppearanceProfileName,
+      documentDefaultStyle: clearDocumentDefaultStyle
+          ? null
+          : (documentDefaultStyle ?? this.documentDefaultStyle),
+      documentStyleEnforced:
+          documentStyleEnforced ?? this.documentStyleEnforced,
       cockpitColorSchemes: cockpitColorSchemes ?? this.cockpitColorSchemes,
       selectedCockpitColorSchemeName:
           selectedCockpitColorSchemeName ?? this.selectedCockpitColorSchemeName,
