@@ -577,10 +577,22 @@ when the owner returns.
   P-D/P-E; this carries the op/lock data plane with keys the session already holds.
   Two optional hooks (`onSystemEvent`, `onToDevice`) let the single sync loop feed
   non-op/lock room state and to-device messages to the key exchange (P-D).
+- `collab_device_directory.dart` — the protocol-neutral device directory
+  (design: `docs/design/XMPP_COLLAB_TRANSPORT.md` §5 brick 8, §7), extracted from
+  `matrix_key_exchange.dart` so the Matrix and future XMPP key exchanges share one
+  verified, pinned and capped peer-key store. `CollabDeviceDirectory` ingests
+  `DevicePublicKeys` (rejecting any whose identity→agreement binding does not
+  verify — §5.3), pins on first use (a known deviceId's identity fingerprint may
+  not change — SA-F3, with a clean seam for the signed-rot bump in sub-plak 2),
+  caps the pre-approval pin-store at ≥ the occupant cap (500 — NEW-2, so a public
+  room's legitimate devices are not denied keying; the scarcity gate belongs on
+  keying / the approved-set, not here), and bounds device-ids per peer address
+  (SA-F2 — pinning stops overwrite, not creation). The peer address is an opaque
+  string the transport supplies (a Matrix user id, an XMPP room/nick).
 - `matrix_key_exchange.dart` — establishes the session's keys over the room
   (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §4.3, §8, phase P-D), turning the
   relay from "keys pre-shared" into "keys established over the wire". Publishes this
-  device's public keys as `nl.ocideck.device` room state; `MatrixDeviceDirectory`
+  device's public keys as `nl.ocideck.device` room state; `CollabDeviceDirectory`
   ingests peers' device state (rejecting any whose identity→agreement binding does
   not verify — the relay-key-substitution defence, §5.3) and backs the transport's
   `resolvePeer`; the authority `distributeEpoch`s the epoch key to each member via

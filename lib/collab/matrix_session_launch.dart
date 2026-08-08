@@ -19,6 +19,7 @@ import 'dart:async';
 
 import '../models/deck.dart';
 import 'collab_crypto.dart';
+import 'collab_device_directory.dart';
 import 'collab_participant.dart';
 import 'collab_session.dart';
 import 'collab_snapshot.dart';
@@ -112,7 +113,7 @@ class MatrixCollabLaunch {
       for (final peer in keyExchange.peers)
         if (peer.keys.deviceId != own.deviceId)
           CollabParticipant(
-            userId: peer.userId,
+            userId: peer.peerAddress,
             deviceId: peer.keys.deviceId,
             identityKey: peer.keys.identityKey,
             fingerprint: deviceFingerprint(peer.keys.identityKey),
@@ -248,7 +249,7 @@ _SessionParts _wire({
   required String ownUserId,
   required String roomId,
 }) {
-  final directory = MatrixDeviceDirectory();
+  final directory = CollabDeviceDirectory();
   final keyExchange = MatrixKeyExchange(
     client: client,
     crypto: crypto,

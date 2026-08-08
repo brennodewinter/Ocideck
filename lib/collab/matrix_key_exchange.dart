@@ -4,7 +4,7 @@
 //
 //   • each device publishes its public keys as `nl.ocideck.device` room state, so
 //     peers can address key-shares to it and open its signed ops;
-//   • peers' device state is ingested into a [MatrixDeviceDirectory], which
+//   • peers' device state is ingested into a [CollabDeviceDirectory], which
 //     verifies the identity→agreement binding before trusting a key (a relay that
 //     swaps the agreement key breaks the signature and is refused — §5.3);
 //   • the authority hands the epoch key to each member with an encrypted to-device
@@ -20,51 +20,8 @@
 
 import '../utils/log.dart';
 import 'collab_crypto.dart';
+import 'collab_device_directory.dart';
 import 'matrix_client.dart';
-
-/// A peer's identity in a session: its Matrix user id (needed to address a
-/// to-device key-share) and its binding-verified public keys (needed to open its
-/// ops and verify its key-shares).
-class PeerDevice {
-  const PeerDevice({required this.userId, required this.keys});
-
-  final String userId;
-  final DevicePublicKeys keys;
-}
-
-/// Verifies and caches peer device public keys learned from `nl.ocideck.device`
-/// room state; backs the relay transport's `PeerResolver`.
-class MatrixDeviceDirectory {
-  final Map<String, PeerDevice> _peers = {};
-
-  /// Store [keys] for its device **only if** the identity key genuinely signs the
-  /// agreement key for that device id (§4.3). An unverifiable binding is dropped:
-  /// it is exactly what a relay substituting the agreement key would produce.
-  Future<void> ingest({
-    required String userId,
-    required DevicePublicKeys keys,
-  }) async {
-    if (!await keys.verifyBinding()) {
-      logWarning('collab.matrix.device.binding', keys.deviceId);
-      return;
-    }
-    _peers[keys.deviceId] = PeerDevice(userId: userId, keys: keys);
-  }
-
-  /// The verified public keys of [deviceId], or null if unknown — which drops the
-  /// event fail-closed at the transport.
-  DevicePublicKeys? resolve(String deviceId) => _peers[deviceId]?.keys;
-
-  /// The Matrix user id that owns [deviceId], for addressing a to-device
-  /// key-share, or null if unknown.
-  String? userOf(String deviceId) => _peers[deviceId]?.userId;
-
-  /// Every device id currently known — the authority walks this to key newcomers.
-  Iterable<String> get knownDevices => _peers.keys;
-
-  /// Every known peer, for the verification UI to list and fingerprint.
-  Iterable<PeerDevice> get peers => _peers.values;
-}
 
 /// Publishes this device's keys, ingests peers', and distributes/installs epoch
 /// keys over Matrix. Construct one per participant; wire [handleSystemEvent] and
@@ -86,7 +43,7 @@ class MatrixKeyExchange {
   final MatrixClient _matrix;
   final CollabCrypto _e2ee;
   final String roomId;
-  final MatrixDeviceDirectory directory;
+  final CollabDeviceDirectory directory;
   final DevicePublicKeys _own;
 
   /// This device's own public keys — the verification UI fingerprints them as the
@@ -137,7 +94,7 @@ class MatrixKeyExchange {
   /// Send one key-share to its recipient's user; returns whether it was sent
   /// (false when the recipient's user id is not yet known — retried next round).
   Future<bool> _sendWrap(WrappedKey wrap) async {
-    final userId = directory.userOf(wrap.recipientDevice);
+    final userId = directory.addressOf(wrap.recipientDevice);
     if (userId == null) {
       logWarning('collab.matrix.keyshare.unaddressable', wrap.recipientDevice);
       return false;
@@ -168,7 +125,7 @@ class MatrixKeyExchange {
       logWarning('collab.matrix.device.mismatch', '${event.stateKey}');
       return;
     }
-    await directory.ingest(userId: event.sender, keys: keys);
+    await directory.ingest(peerAddress: event.sender, keys: keys);
   }
 
   /// Wire to `MatrixRelayTransport.onToDevice`. Installs an epoch key from a

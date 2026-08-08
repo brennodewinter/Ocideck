@@ -15,7 +15,7 @@
 import '../utils/log.dart';
 import 'collab_crypto.dart';
 import 'matrix_client.dart';
-import 'matrix_key_exchange.dart';
+import 'collab_device_directory.dart';
 
 /// One chat line, as the panel shows it.
 class ChatMessage {
@@ -53,7 +53,7 @@ class MatrixChat {
   final MatrixClient _matrix;
   final CollabCrypto _e2ee;
   final String roomId;
-  final MatrixDeviceDirectory directory;
+  final CollabDeviceDirectory directory;
 
   /// This device's Matrix user id, to attribute a locally-echoed own message.
   final String ownUserId;
@@ -158,7 +158,7 @@ class MatrixChat {
   ChatMessage _messageFrom(Map<String, Object?> opened) {
     final device = opened['device'] as String;
     return ChatMessage(
-      userId: directory.userOf(device) ?? '',
+      userId: directory.addressOf(device) ?? '',
       deviceId: device,
       text: opened['text'] as String,
       isSelf: false,

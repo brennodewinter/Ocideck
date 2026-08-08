@@ -10,6 +10,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/collab/collab_crypto.dart';
+import 'package:ocideck/collab/collab_device_directory.dart';
 import 'package:ocideck/collab/collab_session.dart';
 import 'package:ocideck/collab/deck_op.dart';
 import 'package:ocideck/collab/matrix_client.dart';
@@ -89,8 +90,8 @@ void main() {
       agreementKey: other.agreementKey,
       agreementSignature: good.agreementSignature,
     );
-    final dir = MatrixDeviceDirectory();
-    await dir.ingest(userId: '@owner:hs.example', keys: swapped);
+    final dir = CollabDeviceDirectory();
+    await dir.ingest(peerAddress: '@owner:hs.example', keys: swapped);
     expect(dir.resolve(good.deviceId), isNull);
   });
 
@@ -107,7 +108,7 @@ void main() {
   });
 
   test('a device event filed under the wrong state key is ignored', () async {
-    final dir = MatrixDeviceDirectory();
+    final dir = CollabDeviceDirectory();
     final exchange = MatrixKeyExchange(
       client: owner.client,
       crypto: owner.crypto,
@@ -167,7 +168,7 @@ class _Party {
   final MatrixClient client;
   final CollabCrypto crypto;
   final DevicePublicKeys publicKeys;
-  final MatrixDeviceDirectory directory;
+  final CollabDeviceDirectory directory;
   final MatrixKeyExchange exchange;
   final MatrixRelayTransport transport;
   final CollabDeviceKeys keys;
@@ -189,7 +190,7 @@ class _Party {
     final keys = await _device(label);
     final crypto = CollabCrypto(keys);
     final publicKeys = await keys.publicKeys();
-    final directory = MatrixDeviceDirectory();
+    final directory = CollabDeviceDirectory();
     final exchange = MatrixKeyExchange(
       client: client,
       crypto: crypto,
