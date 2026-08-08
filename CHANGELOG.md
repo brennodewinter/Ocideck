@@ -1119,6 +1119,20 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Documentmodus: opsommingen in de WYSIWYG kregen de juiste tekstkleur.** In de
+  Visuele (WYSIWYG) modus stonden opsommings- en genummerde-lijstitems in het
+  lichte thema in een blauwe/link-achtige kleur, terwijl koppen en alinea's op
+  `onSurface` bleven (in donker klopte het wel). `defaultStylesFor` liet zowel
+  `lists` als `leading` ongezet, dus Quill viel voor die blokken terug op zijn
+  omgevingsdefault, die tekst kleurt met de omliggende `DefaultTextStyle` — op het
+  documentvlak een brand/link-kleur in licht (EU-blauw onder het Europa-thema). Een
+  lijst kleurt uit twee velden: de itemtekst uit `lists.style`, de marker
+  (bullet-dot/nummer) uit `leading.style`. Beide staan nu expliciet op de
+  body-tekstkleur, zodat itemtekst én marker dezelfde kleur als een alinea houden.
+  Bewaakt door een regressietoets (lijst- én markerkleur, licht + donker) plus een
+  widgettoets die met een fel afwijkende ambient bewijst dat de gerenderde
+  bullet-dot de body-kleur volgt. Opgevallen bij de beeldkeuring van de
+  bewerkbaar-Visueel-wijziging hierboven; bestond al langer.
 - **Documentmodus: Visueel blijft bewerkbaar bij niet-verliesvrije opmaak.** Een
   `.md` met rauwe HTML, een voetnoot of een ontsnapt leesteken viel in Visueel
   terug op een read-only leesweergave: geen opmaakknoppenbalk, geen standaard-
