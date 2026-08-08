@@ -52,6 +52,8 @@ import 'editors/table_editor.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'reader/document_markdown_view.dart';
 
+part 'parts/document_editor_toolbar.dart';
+
 /// De schermvullende editor voor een documenttabblad: links de platte
 /// Markdown-bron, rechts een live weergave. De bron *ís* de waarheid — elke
 /// toetsaanslag stroomt direct naar de [DocumentNotifier] (geen 'Toepassen'-muur,
@@ -106,7 +108,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   bool _applyingExternal = false;
 
   /// Het lettertype van de actieve documentstijl, of `null` voor het app-
-  /// lettertype. In [build] gezet uit de opgeloste stijl en door [_docTheme]
+  /// lettertype. In [build] gezet uit de opgeloste stijl en door [_docSurfaceTheme]
   /// toegepast op het schrijfoppervlak (Visueel én Bron).
   String? _styleFontFamily;
 
@@ -148,27 +150,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     ref
         .read(documentProvider.notifier)
         .edit(doc.frontMatter + body, coalesceKey: 'doc');
-  }
-
-  /// De stijl-frontmatter van het huidige document (leeg als er geen is). De
-  /// editor bewerkt alleen de body, dus elke terugschrijf zet dit er weer vóór.
-  String get _frontMatter =>
-      ref.read(documentProvider).document?.frontMatter ?? '';
-
-  /// Dien een nieuwe body in bij de notifier, met de stijl-frontmatter ervoor.
-  void _commitBody(String body, {String? coalesceKey}) => ref
-      .read(documentProvider.notifier)
-      .edit(_frontMatter + body, coalesceKey: coalesceKey);
-
-  /// Zet (of wis met `null`) de documentstijl. Een discrete ongedaan-stap;
-  /// [MarkdownDocument.withStyleName] raakt byte-chirurgisch alleen de `theme:`-
-  /// regel, dus 'Geen' op een document zonder stijl laat het byte-getrouw.
-  void _setStyle(String? name) {
-    final doc = ref.read(documentProvider).document;
-    if (doc == null) return;
-    ref
-        .read(documentProvider.notifier)
-        .edit(doc.withStyleName(name).source, coalesceKey: null);
   }
 
   void _setActiveOutlineIndex(int active) {
@@ -248,15 +229,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// De titel van dit document: de eerste H1, anders de bestandsnaam, anders
   /// leeg. Bepaalt de voorgestelde exportnaam en de HTML-`<title>` — net als een
   /// tekstverwerker een document naar zijn kop noemt.
-  String _documentTitle(String source, String? filePath) {
-    for (final line in source.split('\n')) {
-      final m = RegExp(r'^#\s+(.+)$').firstMatch(line.trim());
-      if (m != null) return m.group(1)!.trim();
-    }
-    if (filePath != null) return p.basenameWithoutExtension(filePath);
-    return '';
-  }
-
   /// Open de document-export-dialoog (DOCUMENT_MODE.md §11.2). De dialoog kiest
   /// profiel en formaat; het echte bouwen-en-wegschrijven gebeurt in de closure
   /// hieronder, die de bron langs `buildDocumentExportBundle → AudienceDeck`
@@ -549,14 +521,14 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                 onConvertToPresentation: _convertToPresentation,
                 controller: _controller,
                 editorFocus: _editorFocus,
-                docTheme: _docTheme(theme),
+                docTheme: _docSurfaceTheme(theme, _styleFontFamily),
                 styleNames: [for (final p in settings.themeProfiles) p.name],
                 currentStyleName: docStyleName,
                 styleEnforced: settings.documentStyleEnforced,
                 enforcedStyleName: settings.documentStyleEnforced
                     ? settings.documentDefaultStyle
                     : null,
-                onStyleChanged: _setStyle,
+                onStyleChanged: (name) => _setDocumentStyle(ref, name),
               ),
               Divider(
                 height: 1,
@@ -637,15 +609,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
   }
 
-  /// Het schrijfoppervlak-thema, met het lettertype van de actieve documentstijl
-  /// ([_styleFontFamily]) erin. Zonder stijl valt het terug op het app-lettertype,
-  /// zodat een plat document precies leest als voorheen.
-  MarkdownEditorTheme _docTheme(ThemeData theme) =>
-      MarkdownEditorTheme.documentSurface(
-        scheme: theme.colorScheme,
-        fontFamily: _styleFontFamily,
-      );
-
   /// Het bewerkbare oppervlak van de Visuele modus. De notes-editor toont zelf de
   /// passende opmaakbalk: de Quill-balk in de rijke-tekstweergave, of de
   /// markdown-opmaakbalk + waarschuwing wanneer de bron een niet-verliesvrije
@@ -653,7 +616,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   Widget _wysiwygEditor(ThemeData theme) => MarkdownNotesEditor(
     controller: _controller,
     focusNode: _editorFocus,
-    editorTheme: _docTheme(theme),
+    editorTheme: _docSurfaceTheme(theme, _styleFontFamily),
     hintText: '',
     expand: true,
     // Opmaakbalk zit al in [_DocEditorToolbar] voor de bron; hier toont de
@@ -748,7 +711,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     if (apply != true || !mounted) return;
     final body = ref.read(documentProvider).document?.body ?? '';
     final next = replaceNthChartBlock(body, chartOrdinal, edited);
-    if (next != body) _commitBody(next, coalesceKey: null);
+    if (next != body) _commitDocumentBody(ref, next, coalesceKey: null);
   }
 
   /// Dubbelklik op een gerenderde tabel → de volwaardige [TableEditor] in een
@@ -789,7 +752,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       tableOrdinal,
       encodeMarkdownTable(editedRows, alignments: editedAligns),
     );
-    if (next != body) _commitBody(next, coalesceKey: null);
+    if (next != body) _commitDocumentBody(ref, next, coalesceKey: null);
   }
 
   /// Voeg [block] als een verse alinea in op de cursorpositie (of achteraan als
@@ -814,7 +777,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       selection: TextSelection.collapsed(offset: cursor),
     );
     _applyingExternal = false;
-    _commitBody(next, coalesceKey: null);
+    _commitDocumentBody(ref, next, coalesceKey: null);
   }
 
   /// Slim plakken: herkent afbeelding → `![](…)`, spreadsheet/tabel → GFM-
@@ -872,7 +835,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       selection: TextSelection.collapsed(offset: start + text.length),
     );
     _applyingExternal = false;
-    _commitBody(next, coalesceKey: 'doc');
+    _commitDocumentBody(ref, next, coalesceKey: 'doc');
     return true;
   }
 
@@ -1095,320 +1058,52 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   );
 }
 
+/// De documenttitel voor export en conversie: de eerste `# `-kop, anders de
+/// bestandsnaam zonder extensie, anders leeg. Top-level zodat het bewerkscherm
+/// zelf onder zijn regelplafond blijft.
+String _documentTitle(String source, String? filePath) {
+  for (final line in source.split('\n')) {
+    final m = RegExp(r'^#\s+(.+)$').firstMatch(line.trim());
+    if (m != null) return m.group(1)!.trim();
+  }
+  if (filePath != null) return p.basenameWithoutExtension(filePath);
+  return '';
+}
+
+/// Het schrijfoppervlak-thema met het lettertype van de actieve documentstijl
+/// ([fontFamily]) erin. Zonder stijl valt het terug op het app-lettertype, zodat
+/// een plat document precies leest als voorheen.
+MarkdownEditorTheme _docSurfaceTheme(ThemeData theme, String? fontFamily) =>
+    MarkdownEditorTheme.documentSurface(
+      scheme: theme.colorScheme,
+      fontFamily: fontFamily,
+    );
+
+/// Dien een nieuwe body in bij de notifier, met de stijl-frontmatter ervoor. De
+/// editor bewerkt alleen de body; elke terugschrijf zet de frontmatter er weer
+/// vóór zodat `document.source` byte-getrouw blijft.
+void _commitDocumentBody(WidgetRef ref, String body, {String? coalesceKey}) {
+  final frontMatter = ref.read(documentProvider).document?.frontMatter ?? '';
+  ref
+      .read(documentProvider.notifier)
+      .edit(frontMatter + body, coalesceKey: coalesceKey);
+}
+
+/// Zet (of wis met `null`) de documentstijl. Een discrete ongedaan-stap;
+/// [MarkdownDocument.withStyleName] raakt byte-chirurgisch alleen de `theme:`-
+/// regel, dus 'Geen' op een document zonder stijl laat het byte-getrouw.
+void _setDocumentStyle(WidgetRef ref, String? name) {
+  final doc = ref.read(documentProvider).document;
+  if (doc == null) return;
+  ref
+      .read(documentProvider.notifier)
+      .edit(doc.withStyleName(name).source, coalesceKey: null);
+}
+
 /// De weergavemodus van de documenteditor. Twee manieren om naar hetzelfde
 /// document te kijken, nooit een derde renderpad (DOCUMENT_MODE.md §2.1): de bron
 /// als tekst, of de weergave als hoofdoppervlak.
 enum _DocViewMode { visual, source }
-
-/// De werkbalk bovenaan de documenteditor: links de segmentkeuze Visueel | Bron,
-/// rechts het invoeg-palet. Top-level widget zodat het bewerkscherm zelf slank
-/// blijft; de labels lopen via [l10n] mee met de langste taal (geen vaste
-/// breedte, DOCUMENT_MODE.md §8).
-class _DocEditorToolbar extends StatelessWidget {
-  final _DocViewMode mode;
-  final ValueChanged<_DocViewMode> onModeChanged;
-  final VoidCallback onInsertChart;
-  final VoidCallback onInsertTable;
-  final VoidCallback onInsertMermaid;
-  final VoidCallback onInsertImage;
-  final VoidCallback onPaste;
-  final VoidCallback? onUndo;
-  final VoidCallback? onRedo;
-  final VoidCallback onExport;
-  final VoidCallback onOpenSettings;
-  final VoidCallback onConvertToPresentation;
-  final TextEditingController controller;
-  final FocusNode editorFocus;
-
-  /// Het schrijfoppervlak-thema (met het stijl-lettertype), voor de opmaakbalk
-  /// in Bron zodat die met het gekozen lettertype meeloopt.
-  final MarkdownEditorTheme docTheme;
-
-  /// De namen van de beschikbare stijlprofielen, voor de Stijl-kiezer.
-  final List<String> styleNames;
-
-  /// De per-document gekozen stijl (of `null` = Geen/platte tekst).
-  final String? currentStyleName;
-
-  /// Of een huisstijl via de instellingen wordt afgedwongen; dan is de kiezer
-  /// vergrendeld en toont hij [enforcedStyleName].
-  final bool styleEnforced;
-  final String? enforcedStyleName;
-
-  /// Zet (of wist met `null`) de documentstijl.
-  final ValueChanged<String?> onStyleChanged;
-
-  const _DocEditorToolbar({
-    required this.mode,
-    required this.onModeChanged,
-    required this.onInsertChart,
-    required this.onInsertTable,
-    required this.onInsertMermaid,
-    required this.onInsertImage,
-    required this.onPaste,
-    required this.onUndo,
-    required this.onRedo,
-    required this.onExport,
-    required this.onOpenSettings,
-    required this.onConvertToPresentation,
-    required this.controller,
-    required this.editorFocus,
-    required this.docTheme,
-    required this.styleNames,
-    required this.currentStyleName,
-    required this.styleEnforced,
-    required this.enforcedStyleName,
-    required this.onStyleChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final scheme = Theme.of(context).colorScheme;
-    return Container(
-      color: scheme.surface,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      SegmentedButton<_DocViewMode>(
-                        segments: [
-                          ButtonSegment(
-                            value: _DocViewMode.visual,
-                            label: Text(l10n.d('Visueel')),
-                            icon: const Icon(
-                              Icons.visibility_outlined,
-                              size: 15,
-                            ),
-                          ),
-                          ButtonSegment(
-                            value: _DocViewMode.source,
-                            label: Text(l10n.d('Bron')),
-                            icon: const Icon(Icons.code, size: 15),
-                          ),
-                        ],
-                        selected: {mode},
-                        showSelectedIcon: false,
-                        style: const ButtonStyle(
-                          visualDensity: VisualDensity.compact,
-                        ),
-                        onSelectionChanged: (s) => onModeChanged(s.first),
-                      ),
-                      const SizedBox(width: 8),
-                      IconButton(
-                        tooltip: l10n.d('Ongedaan maken'),
-                        onPressed: onUndo,
-                        icon: const Icon(Icons.undo, size: 18),
-                        visualDensity: VisualDensity.compact,
-                      ),
-                      IconButton(
-                        tooltip: l10n.d('Opnieuw'),
-                        onPressed: onRedo,
-                        icon: const Icon(Icons.redo, size: 18),
-                        visualDensity: VisualDensity.compact,
-                      ),
-                      const SizedBox(width: 8),
-                      _insertMenu(l10n),
-                      const SizedBox(width: 4),
-                      _styleMenu(l10n),
-                      const SizedBox(width: 4),
-                      TextButton.icon(
-                        onPressed: onExport,
-                        icon: const Icon(Icons.ios_share, size: 16),
-                        label: Text(l10n.d('Exporteren…')),
-                      ),
-                      _moreMenu(l10n),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          // Opmaak-knoppenbalk alleen in bron-modus: in Visueel heeft
-          // MarkdownNotesEditor zijn eigen balk (Quill of markdown). Twee
-          // balkjes op één controller zouden uit de pas lopen.
-          if (mode == _DocViewMode.source)
-            MarkdownEditorToolbar(
-              controller: controller,
-              focusNode: editorFocus,
-              theme: docTheme,
-              bordered: false,
-              onInsertImage: onInsertImage,
-            ),
-        ],
-      ),
-    );
-  }
-
-  /// Het invoeg-palet: één menu dat een rijk blok op de cursorpositie invoegt.
-  /// Hergebruikt de bestaande labels (Grafiek/Tabel/Afbeelding); Mermaid is de
-  /// productnaam van de fence. Elke keuze schrijft een verse, draagbare
-  /// Markdown-constructie in de bron (DOCUMENT_MODE.md §4).
-  Widget _insertMenu(AppLocalizations l10n) {
-    return PopupMenuButton<int>(
-      tooltip: l10n.d('Invoegen'),
-      position: PopupMenuPosition.under,
-      onSelected: (value) => switch (value) {
-        0 => onInsertChart(),
-        1 => onInsertTable(),
-        2 => onInsertMermaid(),
-        3 => onInsertImage(),
-        _ => onPaste(),
-      },
-      itemBuilder: (context) => [
-        _insertItem(0, Icons.bar_chart, l10n.d('Grafiek')),
-        _insertItem(1, Icons.table_chart_outlined, l10n.d('Tabel')),
-        _insertItem(2, Icons.account_tree_outlined, l10n.d('Mermaid')),
-        _insertItem(3, Icons.image_outlined, l10n.d('Afbeelding')),
-        _insertItem(4, Icons.content_paste, l10n.d('Plakken')),
-      ],
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.add, size: 16),
-            const SizedBox(width: 4),
-            Text(l10n.d('Invoegen'), style: const TextStyle(fontSize: 13)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// De Stijl-kiezer: kies één documentbreed stijlprofiel (lettertype + opmaak),
-  /// of 'Geen' voor platte tekst. De keuze landt byte-chirurgisch als `theme:` in
-  /// de frontmatter en stuurt de weergave én de export (DOCUMENT_MODE.md). Onder
-  /// een via de instellingen afgedwongen huisstijl is de kiezer vergrendeld en
-  /// toont hij de afgedwongen stijl.
-  Widget _styleMenu(AppLocalizations l10n) {
-    final geen = l10n.d('Geen');
-    if (styleEnforced) {
-      return Tooltip(
-        message: l10n.d(
-          'De documentstijl wordt afgedwongen via de instellingen.',
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.lock_outline, size: 15),
-              const SizedBox(width: 4),
-              Text(
-                '${l10n.d('Stijl')}: ${enforcedStyleName ?? geen}',
-                style: const TextStyle(fontSize: 13),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-    return PopupMenuButton<String>(
-      tooltip: l10n.d('Documentstijl'),
-      position: PopupMenuPosition.under,
-      onSelected: (value) => onStyleChanged(value.isEmpty ? null : value),
-      itemBuilder: (context) => [
-        _styleItem('', l10n.d('Geen (platte tekst)'), currentStyleName == null),
-        const PopupMenuDivider(),
-        for (final name in styleNames)
-          _styleItem(name, name, currentStyleName == name),
-      ],
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.font_download_outlined, size: 16),
-            const SizedBox(width: 4),
-            Text(
-              '${l10n.d('Stijl')}: ${currentStyleName ?? geen}',
-              style: const TextStyle(fontSize: 13),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  PopupMenuItem<String> _styleItem(String value, String label, bool selected) {
-    return PopupMenuItem<String>(
-      value: value,
-      child: Row(
-        children: [
-          Icon(selected ? Icons.check : Icons.style_outlined, size: 17),
-          const SizedBox(width: 10),
-          Expanded(child: Text(label, overflow: TextOverflow.ellipsis)),
-        ],
-      ),
-    );
-  }
-
-  /// Het overloopmenu rechts: Instellingen (anders alleen via macOS-menubalk
-  /// bereikbaar in documentmodus) en conversie naar presentatie.
-  Widget _moreMenu(AppLocalizations l10n) {
-    return PopupMenuButton<int>(
-      tooltip: l10n.t('more'),
-      position: PopupMenuPosition.under,
-      icon: const Icon(Icons.more_vert, size: 18),
-      onSelected: (value) {
-        switch (value) {
-          case 0:
-            onOpenSettings();
-          case 1:
-            onConvertToPresentation();
-        }
-      },
-      itemBuilder: (context) => [
-        PopupMenuItem<int>(
-          value: 0,
-          child: Row(
-            children: [
-              const Icon(Icons.settings_outlined, size: 17),
-              const SizedBox(width: 10),
-              Expanded(child: Text(l10n.t('settings'))),
-            ],
-          ),
-        ),
-        PopupMenuItem<int>(
-          value: 1,
-          child: Row(
-            children: [
-              const Icon(Icons.slideshow_outlined, size: 17),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  l10n.d('Converteer naar presentatie…'),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  PopupMenuItem<int> _insertItem(int value, IconData icon, String label) {
-    return PopupMenuItem<int>(
-      value: value,
-      child: Row(
-        children: [
-          Icon(icon, size: 17),
-          const SizedBox(width: 10),
-          Text(label),
-        ],
-      ),
-    );
-  }
-}
 
 /// Voeg [block] in [source] in op het bereik [selStart]–[selEnd] (een negatieve
 /// start betekent 'geen cursor' → achteraan), omgeven door precies genoeg lege
