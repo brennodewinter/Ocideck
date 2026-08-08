@@ -1,6 +1,6 @@
 # OciDeck — XMPP CollabTransport: the collaboration data plane on the XMPP spine (Design)
 
-> **Status:** design proposal — unbuilt (slice 2 of NATIVE_CALLS §7.1) · **Reviewed & revised:** 2026-08-08 (v3) · **Published by:** Stichting LibreKAT
+> **Status:** design proposal — unbuilt (slice 2 of NATIVE_CALLS §7.1) · **Reviewed & revised:** 2026-08-08 (v3.1) · **Published by:** Stichting LibreKAT
 
 > **A design proposal — not yet implemented.**
 > This spells out **one buildable slice**: `XmppTransport implements CollabTransport`,
@@ -12,13 +12,12 @@
 > mapping, the security posture, the test harness, and the open questions are spelled
 > out against files that exist today.
 >
-> **Reviewed twice (2026-08-08).** A security-architect + kernwaardenbewaker pass on v1
-> (bewaker GO-with-changes; security-architect **HERZIEN**) produced v2; a **re-review** of
-> v2 (bewaker **GO**; security-architect **HERZIEN, narrowly**) surfaced that three v2 fixes
-> were themselves "as-written → hole" and that the premise was still too strong. This v3
-> folds those in (§12). The corrected premise: **the crypto *core* is reused, but XMPP's
-> weaker guarantees require a small, enumerated, chain-reviewed crypto extension** (§5.1) —
-> not "crypto unchanged".
+> **Reviewed three times (2026-08-08).** v1 → security-architect **HERZIEN** + bewaker
+> GO-with-changes → v2; a re-review → security-architect **HERZIEN (narrowly)** + bewaker **GO** → v3;
+> a **confirmation** re-review → security-architect **GO-with-changes** (*v3 clears the HERZIEN*; six
+> build-time refinements) + bewaker **GO** → this **v3.1**. The corrected premise across the rounds:
+> **the crypto *core* is reused, but XMPP's weaker guarantees require a small, enumerated,
+> chain-reviewed crypto extension** (§5.1) — not "crypto unchanged". Full trail in §12.
 >
 > **Siblings.** [`NATIVE_CALLS.md`](NATIVE_CALLS.md) §5 decides the single XMPP spine, §5.1 the
 > companion channel; this is that doc's remaining **slice 2** (§7.1).
@@ -43,7 +42,7 @@ Jitsi call, or standalone.
 
 **Is not:** the Jitsi media join (slice 1, F3.4b), a new session engine, or new crypto *primitives*.
 
-**The thesis, after two review rounds.** v1 said "only the carriage changes"; that was wrong twice
+**The thesis, after three review rounds.** v1 said "only the carriage changes"; that was wrong twice
 over. Accurately:
 
 > `CollabSession`, `CollabSnapshot`, the trust store, the device directory and the crypto
@@ -189,10 +188,11 @@ change is the minimal, enumerated §5.1 extension.
 6. **`xmpp_collab_launch.dart`** — `host`/`joinXmppSession`; enforces the **admission gate** and
    XMPP-mode exclusivity (NATIVE_CALLS §1).
 7. **`companion_demux.dart`** — one `channel.stanzas` subscription, fan-out by namespace.
-8. **Extract `CollabDeviceDirectory`** into `lib/collab/`; **cap** at a small explicit bound
-   (≤ `_maxDirectory = 128` devices, well below the 500-occupant cap) **and ≤ a few device-ids per
-   nick** (pinning stops *overwrite*, not *creation*, so a nick could otherwise mint unbounded
-   ids — SA-F2); **pin-on-first-use**. Shared by both key exchanges.
+8. **Extract `CollabDeviceDirectory`** into `lib/collab/`; the **pre-approval pin-store** is **capped
+   ≥ the occupant cap** (NEW-2 — a cap *below* it would deny keying to legitimate devices; the scarcity
+   gate belongs on **keying** / the approved-set, not the pin-store) **and ≤ a few device-ids per nick**
+   (pinning stops *overwrite*, not *creation*, so a nick could otherwise mint unbounded ids — SA-F2);
+   **pin-on-first-use**. Shared by both key exchanges.
 9. **`xmpp_session.dart`** — supervised reconnect/rejoin (§4 prerequisite).
 10. **`XmppMuc`** — optional `presenceExtensions` on `join()`.
 
@@ -220,19 +220,28 @@ plan states them rather than pretending the crypto is untouched. Each goes throu
 - **Signed rotation epoch (N2).** `verifyBinding` today signs only `(deviceId, agreementKey)`
   (`collab_crypto.dart:218`); a `rot` field carried unsigned in presence can be replayed with
   `rot=MAX` by any occupant, permanently freezing the real device's key rotation. Fix: extend the
-  identity-signed device binding to `(deviceId, agreementKey, rot)` so a rot bump is unforgeable.
+  identity-signed device binding to `(deviceId, agreementKey, rot)` so a rot bump is unforgeable, and
+  **persist the highest-seen `rot` per device across reconnect/resync** (NEW-5) — resetting it on
+  reconnect would let an older, validly-signed binding re-win "first presence".
 - **Recipient-blinded wrap (N3).** `WrappedKey.toJson` emits `to`/`from` device-ids in **cleartext**
   (`collab_crypto.dart:309-310`); broadcasting it to the MUC exposes the full admitted-device set,
   the authority's id, and rekey timing to every occupant (worse than the directed model, which
   showed it only to the server). Fix: a per-epoch **opaque recipient tag** (or trial-decryption)
   instead of a cleartext id; keep the wrap authority-signed and recipient-bound.
-- **Mode-bound associated data (BW-1).** The AAD binds `room`, and Matrix (`!local:server`) vs.
-  companion (`ocideck-<hash>@conference.<domain>`) room strings are structurally disjoint, so a
-  Matrix-mode ciphertext fails to open in XMPP mode already. This is stated as the reasoning **and
-  submitted to the external crypto review to confirm** — not assumed. If the reviewer wants belt-and-
-  suspenders, a `mode` tag in the AAD is the fallback.
+- **Mode-bound associated data (BW-1).** The **record** AAD (`_recordAad`) binds `room`, and Matrix
+  (`!local:server`) vs. companion (`ocideck-<hash>@conference.<domain>`) room strings are structurally
+  disjoint, so a Matrix-mode *record* ciphertext fails to open in XMPP mode already. But the **wrap**
+  AAD (`_wrapAad`) binds only `(epoch, recipient, sender)` — no `room` (NEW-3) — so a belt-and-
+  suspenders `mode` tag, if the external review wants one, must go in **both** AADs. Stated as the
+  reasoning **and submitted to the external crypto review to confirm** — not assumed.
 
-These are additive and minimal; the AEAD, signatures and key agreement are unchanged.
+**These touch a shared, already-landed core (NEW-2/B).** `collab_crypto.dart` also backs the built
+Matrix path (`matrix_relay_transport`/`matrix_key_exchange`/`matrix_chat`). Extending the signed
+binding from a 2-tuple to `(deviceId, agreementKey, rot)` is a **wire-format change to a shipped
+verifier** — a 3-field verifier will not verify a 2-field signature — not merely "additive". So it is
+a build-condition, not an afterthought: **decide whether Matrix mode adopts the new binding/wrap
+format (one shared format, a coordinated bump) or the core forks per mode, and write that decision
+down.** The AEAD, Ed25519 and X25519 primitives themselves are unchanged.
 
 ---
 
@@ -245,8 +254,10 @@ recipient-blinded `<keyshare>`; an unapproved occupant is **not** keyed (deny-by
 
 Join: join the MUC (unpredictable nick + device presence) → `publishDeviceKeys` → wait. The demux
 pins the authority's device key (signed rot), trial-opens the `<keyshare>` for it, then the snapshot;
-once keyed the baseline opens and `CollabSession(isAuthority:false)` starts. A mid-join stream drop
-triggers **reconnect + resync** (§4), not a silent hang.
+once keyed the baseline opens and `CollabSession(isAuthority:false)` starts. **Two distinct recovery
+paths — do not conflate them (NEW-6):** a drop **before keying** holds no epoch key to seal a resync
+with, so it recovers by **re-join + `ensureKeyed`**; a drop **after keying** uses the sealed **§4
+resync**. Both fail closed.
 
 Root-scoped, on the same guarded `XmppSession` as the Jitsi call, XMPP-mode only (§1 exclusivity).
 
@@ -255,16 +266,24 @@ Root-scoped, on the same guarded `XmppSession` as the Jitsi call, XMPP-mode only
 ## 7. Security posture
 
 - **Delivery reliability (SA-F1).** A gap resyncs, never freezes (§4); reconnect/rejoin is a
-  prerequisite; the resync request is sealed, admission-gated, rate-limited, coalesced (N1).
+  prerequisite; the resync request is sealed, rate-limited, coalesced (N1). **The authority gates it
+  on *current-approved-set membership*, not on decryptability (NEW-1)** — epoch keys are cumulative and
+  never evicted (`collab_crypto` `_epochKeys`), so a *departed* member still holds an old epoch key and
+  could seal a resync under it; an "opened, so act" gate would let an ex-member force deck-wide
+  broadcasts. Ties to rekey-on-leave (§10.7).
 - **Admission is the confidentiality boundary (SA-F4).** **Deny-by-default** keying — not the
   fail-open Matrix `ensureKeyed`; approve via TOFU/fingerprint; members-only where the deployment
   allows.
-- **Directory integrity & bounds (SA-F2, SA-F3).** `CollabDeviceDirectory` is **capped**
-  (`≤ 128`, plus a few ids per nick), keys only **approved** devices, and **pins on first use** with a
-  **signed** `rot` (§5.1). Unpredictable device-ids are required to close the first-presence race.
+- **Directory integrity & bounds (SA-F2, SA-F3).** The pin-store holds **pre-approval** bindings (it
+  must, to pin an identity *before* it is approved), so its cap must be **≥ the occupant cap** — not
+  `≤128 < 500` (NEW-2), which would let ~43 nicks × a few ids fill it and **deny keying to legitimate
+  devices** on a public room. Put the scarcity gate on **keying** (the approved-set), not on the
+  pin-store; keep the per-nick id limit; **pin on first use** with a **signed** `rot` (§5.1).
+  Unpredictable device-ids are required to close the first-presence race.
 - **Metadata (N3).** Bounded first by admission (only approved occupants see the room), then by the
-  recipient-blinded wrap (§5.1); any residual rekey-timing visibility within the approved group is
-  named in the threat model, not silent.
+  recipient-blinded wrap (§5.1). Residuals named in the threat model, not silent (NEW-4): rekey
+  **timing**, the admitted-set **cardinality** (the *number* of wrap elements), and **active senders**
+  (the cleartext `sender` field on each sealed record) all stay observable to occupants.
 - **Idempotency (SA-F5).** Chat dedups on `hash(sealed bytes)`, bounded set; not on `maxstanzas=0`.
 - **Fail-closed everywhere.** Malformed / unknown-sender / un-openable / bad-signature / oversized →
   log + drop, never applied. Reuse the caps (frame ≤ 512 KiB, queue ≤ 256, occupants ≤ 500) + add
@@ -315,7 +334,7 @@ lib/xmpp/xmpp_collab_launch.dart      host/joinXmppSession + admission gate
 lib/xmpp/companion_demux.dart         one channel.stanzas subscription → fan-out
 lib/xmpp/xmpp_session.dart            +supervised reconnect / MUC-rejoin (PREREQUISITE, shared w/ slice 1)
 lib/xmpp/xmpp_muc.dart                +optional presenceExtensions on join()
-lib/collab/collab_device_directory.dart  extracted; +cap (≤128, +per-nick) +pin-on-first-use +signed rot
+lib/collab/collab_device_directory.dart  extracted; +cap (pre-approval pin-store ≥ occupant-cap, +per-nick) +pin-on-first-use +signed rot; keying-scarcity on the approved-set
 lib/collab/collab_crypto.dart         MINIMAL, chain-reviewed extension: signed rot in binding; recipient-blinded wrap; (mode AAD if required)
 test/xmpp/fake_muc_hub.dart           in-memory N-party MUC with drop/rejoin
 ```
@@ -346,9 +365,11 @@ Reused unchanged: `collab_session.dart`, `collab_snapshot.dart`, `collab_trust_s
 8. **Standalone rendezvous.** A call-less session's shared identifier stays **out-of-band and
    client-side** (no OciDeck-run directory — P1), or scope it to a separate slice.
 9. **Crypto-extension scope (§5.1).** Signed rot + blinded wrap are minimal but do touch
-   `collab_crypto`; the ketenkeuring chain-review (its crypto red line) must approve them, and the
-   external crypto review confirms the mode-AAD reasoning. This is the one place v3 crosses into
-   crypto — flagged, not smuggled.
+   `collab_crypto` — a **shared, already-landed** core the Matrix path uses too, so the 2→3-field
+   binding is a coordinated wire-format bump (§5.1), not a private add. The ketenkeuring chain-review
+   (its crypto red line) must approve them, and the external crypto review is still **to confirm** the
+   mode-AAD reasoning (in both `_recordAad` and `_wrapAad` if a `mode` tag is required). The one place
+   v3 crosses into crypto — flagged, not smuggled.
 
 ---
 
@@ -391,6 +412,16 @@ XMPP spine, and `MatrixRelayTransport` becomes a dormant-but-maintained backend 
   required (§5), and the chat id pinned to the **sealed** bytes (§4). Crucially, N2 + the mode-AAD
   requirement mean the crypto is **not** unchanged — v3 states a minimal, enumerated, chain-reviewed
   crypto extension (§5.1) instead of denying it.
+- **Round 3 (v3 confirmation → v3.1).** A confirmation re-review on a separate branch. bewaker **GO**
+  (confirms the v2 GO; §5.1's crypto reframe is the more honest, chain-review-conforming posture, not
+  promise-erosion) — fixes: the lingering present-tense "confirms" (§10.9) and the shared-core ripple
+  named (§5.1). security-architect **GO-with-changes** — **v3 clears the v2 HERZIEN**; all six new
+  points are **build-time, not plan-blockers**: **NEW-1** gate resync on *approved-set membership*, not
+  decryptability, since epoch keys are cumulative (§4/§7/§10.7); **NEW-2** the pre-approval pin-store cap
+  must be **≥** the occupant cap, keying-scarcity on the approved-set (§5/§7); **NEW-3** only
+  `_recordAad` binds `room` (§5.1); **NEW-4** name the cardinality + active-sender residuals (§7);
+  **NEW-5** persist the rot high-water-mark (§5.1); **NEW-6** distinguish pre-key vs post-key recovery
+  (§6). All folded into this v3.1.
 
 Implementation still requires a fresh bewaker + security-architect review and the full
 `ketenkeuring-xmpp-spine.md` build-conditions — now including the §5.1 crypto extension as an explicit
