@@ -1773,6 +1773,17 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Stijl': 'Gaya',
+  'Geen (platte tekst)': 'Tidak ada (teks biasa)',
+  'Documentstijl': 'Gaya dokumen',
+  'Standaard documentstijl': 'Gaya dokumen default',
+  'Deze stijl afdwingen': 'Paksakan gaya ini',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Gaya dokumen dipaksakan melalui pengaturan.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Gaya default untuk dokumen yang tidak memilih gaya sendiri. Hanya tampilan dan ekspor — tidak menulis apa pun ke berkas.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Abaikan gaya dokumen sendiri dan gunakan gaya default (gaya perusahaan) di mana-mana.',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Disk tujuan tidak memiliki ruang cukup. Kosongkan ruang dan coba lagi.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

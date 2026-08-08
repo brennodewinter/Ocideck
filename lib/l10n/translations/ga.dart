@@ -1808,6 +1808,17 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Stijl': 'Stíl',
+  'Geen (platte tekst)': 'Gan aon (gnáth-théacs)',
+  'Documentstijl': 'Stíl cháipéise',
+  'Standaard documentstijl': 'Stíl réamhshocraithe cháipéise',
+  'Deze stijl afdwingen': 'Forfheidhmigh an stíl seo',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Cuirtear stíl na cáipéise i bhfeidhm go héigeantach trí na socruithe.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'An stíl réamhshocraithe do cháipéisí nach roghnaíonn stíl iad féin. Taispeáint agus easpórtáil amháin — ní scríobhtar aon rud i gcomhad.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Déan neamhaird de stíl féin cáipéise agus úsáid an stíl réamhshocraithe (stíl an chomhlachta) i ngach áit.',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Níl go leor spás ar an diosca sprice. Déan spás a shaoradh agus bain triail as arís.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

@@ -1800,6 +1800,17 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Stijl': 'Στυλ',
+  'Geen (platte tekst)': 'Κανένα (απλό κείμενο)',
+  'Documentstijl': 'Στυλ εγγράφου',
+  'Standaard documentstijl': 'Προεπιλεγμένο στυλ εγγράφου',
+  'Deze stijl afdwingen': 'Επιβολή αυτού του στυλ',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Το στυλ του εγγράφου επιβάλλεται μέσω των ρυθμίσεων.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Το προεπιλεγμένο στυλ για έγγραφα που δεν επιλέγουν δικό τους στυλ. Μόνο εμφάνιση και εξαγωγή — δεν γράφει τίποτα σε αρχείο.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Αγνόησε το ιδιαίτερο στυλ ενός εγγράφου και χρησιμοποίησε παντού το προεπιλεγμένο στυλ (εταιρικό στυλ).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Ο προορισμός δίσκος δεν έχει επαρκή χώρο. Απελευθερώστε χώρο και δοκιμάστε ξανά.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

@@ -19,6 +19,7 @@ import '../services/secret_store.dart';
 import '../utils/log.dart';
 
 part 'parts/settings_provider_connections.dart';
+part 'parts/settings_provider_document_style.dart';
 part 'parts/settings_provider_git.dart';
 part 'parts/settings_provider_matrix.dart';
 part 'parts/settings_provider_privacy.dart';
@@ -261,6 +262,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           appearances.any((profile) => profile.name == selectedAppearance)
           ? selectedAppearance
           : 'Europa',
+      documentDefaultStyle: prefs.getString('documentDefaultStyle'),
+      documentStyleEnforced: prefs.getBool('documentStyleEnforced') ?? false,
       cockpitColorSchemes: cockpit.schemes,
       selectedCockpitColorSchemeName: cockpit.selectedName,
       cockpitVisualStyle: cockpit.visualStyle,
@@ -507,13 +510,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = key == null
         ? state.copyWith(clearMaxReleaseExportTlp: true)
         : state.copyWith(maxReleaseExportTlpKey: key);
-    await _persist('setMaxReleaseExportTlp', (prefs) async {
-      if (key == null) {
-        await prefs.remove('maxReleaseExportTlp');
-      } else {
-        await prefs.setString('maxReleaseExportTlp', key);
-      }
-    });
+    await _persistNullableString(this, 'maxReleaseExportTlp', key);
   }
 
   /// Stel het vereiste minimumniveau voor export in, of `null` om uit te zetten.
@@ -521,13 +518,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = key == null
         ? state.copyWith(clearMinRequiredExportTlp: true)
         : state.copyWith(minRequiredExportTlpKey: key);
-    await _persist('setMinRequiredExportTlp', (prefs) async {
-      if (key == null) {
-        await prefs.remove('minRequiredExportTlp');
-      } else {
-        await prefs.setString('minRequiredExportTlp', key);
-      }
-    });
+    await _persistNullableString(this, 'minRequiredExportTlp', key);
   }
 
   Future<void> setRequireClassificationOnExport(bool enabled) async {
@@ -537,6 +528,15 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       (prefs) => prefs.setBool('requireClassificationOnExport', enabled),
     );
   }
+
+  // Documentmodus-stijl — het echte werk staat top-level in
+  // parts/settings_provider_document_style.dart, zodat het niet meetelt voor
+  // het regelplafond van deze klasse.
+  Future<void> setDocumentDefaultStyle(String? styleName) =>
+      _applyDocumentDefaultStyle(this, styleName);
+
+  Future<void> setDocumentStyleEnforced(bool enforced) =>
+      _applyDocumentStyleEnforced(this, enforced);
 
   Future<void> setClassificationWatermarkEnabled(bool enabled) async {
     state = state.copyWith(classificationWatermarkEnabled: enabled);

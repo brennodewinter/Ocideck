@@ -1748,6 +1748,17 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Stijl': 'SEGH nab',
+  'Geen (platte tekst)': 'pagh (mu\'ghom nap)',
+  'Documentstijl': 'nav SEGH nab',
+  'Standaard documentstijl': 'nav SEGH nab motlh',
+  'Deze stijl afdwingen': 'SEGH nabvam yIpoQ',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'SeHlawvo\' nav SEGH nab poQlu\'.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'SEGH nab motlh lo\'lu\' nav SEGH nab wIvbe\'bogh. cha\' ngeH neH — teywI\'Daq vay\' ghItlhbe\'.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'nav SEGH nab yIbuSHa\'; Hoch DaqDaq SEGH nab motlh yIlo\' (qorDu\' SEGH).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'nargh chuQut Qav. chuQut narghmoH \'ej nIDqa\'.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

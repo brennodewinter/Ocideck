@@ -1772,6 +1772,17 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Stijl': 'Stil',
+  'Geen (platte tekst)': 'Ingen (vanlig text)',
+  'Documentstijl': 'Dokumentstil',
+  'Standaard documentstijl': 'Standarddokumentstil',
+  'Deze stijl afdwingen': 'Framtvinga den här stilen',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Dokumentets stil framtvingas via inställningarna.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Standardstilen för dokument som inte själva väljer en stil. Endast visning och export — inget skrivs till en fil.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ignorera ett dokuments egen stil och använd standardstilen (grafisk profil) överallt.',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Måldisken har inte tillräckligt med utrymme. Frigör utrymme och försök igen.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

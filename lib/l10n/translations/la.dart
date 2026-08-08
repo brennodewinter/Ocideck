@@ -1789,6 +1789,17 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Stijl': 'Stilus',
+  'Geen (platte tekst)': 'Nullum (textus simplex)',
+  'Documentstijl': 'Stilus documenti',
+  'Standaard documentstijl': 'Stilus documenti praedefinitus',
+  'Deze stijl afdwingen': 'Hunc stilum imponere',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Stilus documenti per optiones imponitur.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Stilus praedefinitus documentis quae ipsa nullum stilum eligunt. Tantum ostensio et exportatio — nihil in plicam scribitur.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Neglege stilum proprium documenti et ubique stilo praedefinito (stilo domestico) utere.',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Discus destinationis spatium non sufficit. Fac spatium et rursus conare.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

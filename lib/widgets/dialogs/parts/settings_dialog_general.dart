@@ -58,6 +58,8 @@ extension _SettingsGeneralTab on _SettingsDialogState {
         const SizedBox(height: 16),
         ..._accessibilitySettings(),
         const SizedBox(height: 16),
+        ..._documentStyleSection(ref, l10n),
+        const SizedBox(height: 16),
         // Handhavingsbeleid is voor de meeste gebruikers niet aan de orde;
         // ingeklapt tenzij er al een regel actief is (die verstop je niet).
         AdvancedSection(
@@ -514,4 +516,68 @@ extension _SettingsGeneralTab on _SettingsDialogState {
       ],
     );
   }
+}
+
+/// Documentmodus-stijl: de standaardstijl voor documenten zonder eigen
+/// `theme:`, en of die als huisstijl wordt afgedwongen. Puur weergave en
+/// export — deze keuze raakt geen enkel `.md`-bestand (alleen een per-document
+/// keuze in de editor doet dat, byte-chirurgisch). Top-level zodat de sectie
+/// niet meetelt voor het regelplafond van [_SettingsDialogState].
+List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
+  final settings = ref.watch(settingsProvider);
+  final profileNames = [for (final p in settings.themeProfiles) p.name];
+  final defaultStyle = settings.documentDefaultStyle;
+  // Een sinds verwijderd profiel mag de kiezer niet laten crashen.
+  final value = profileNames.contains(defaultStyle) ? defaultStyle : null;
+  return [
+    SettingsSectionTitle(l10n.d('Documentstijl')),
+    Text(
+      l10n.d(
+        'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.',
+      ),
+      style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+    ),
+    const SizedBox(height: 8),
+    InputDecorator(
+      decoration: InputDecoration(
+        labelText: l10n.d('Standaard documentstijl'),
+        isDense: true,
+        prefixIcon: const Icon(Icons.style_outlined, size: 18),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: value,
+          isExpanded: true,
+          isDense: true,
+          items: [
+            DropdownMenuItem(child: Text(l10n.d('Geen (platte tekst)'))),
+            for (final name in profileNames)
+              DropdownMenuItem(value: name, child: Text(name)),
+          ],
+          onChanged: (name) =>
+              ref.read(settingsProvider.notifier).setDocumentDefaultStyle(name),
+        ),
+      ),
+    ),
+    const SizedBox(height: 8),
+    SwitchListTile(
+      contentPadding: EdgeInsets.zero,
+      dense: true,
+      value: settings.documentStyleEnforced,
+      onChanged: defaultStyle == null
+          ? null
+          : (v) =>
+                ref.read(settingsProvider.notifier).setDocumentStyleEnforced(v),
+      title: Text(
+        l10n.d('Deze stijl afdwingen'),
+        style: const TextStyle(fontSize: 13),
+      ),
+      subtitle: Text(
+        l10n.d(
+          'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).',
+        ),
+        style: const TextStyle(fontSize: 11),
+      ),
+    ),
+  ];
 }

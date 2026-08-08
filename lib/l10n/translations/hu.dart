@@ -1777,6 +1777,17 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Stijl': 'Stílus',
+  'Geen (platte tekst)': 'Nincs (egyszerű szöveg)',
+  'Documentstijl': 'Dokumentumstílus',
+  'Standaard documentstijl': 'Alapértelmezett dokumentumstílus',
+  'Deze stijl afdwingen': 'Ez a stílus kényszerítése',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'A dokumentum stílusát a beállítások kényszerítik ki.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Az alapértelmezett stílus azokhoz a dokumentumokhoz, amelyek maguk nem választanak stílust. Csak megjelenítés és exportálás — nem ír semmit fájlba.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Hagyd figyelmen kívül a dokumentum saját stílusát, és mindenhol az alapértelmezett stílust (arculati stílust) használd.',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'A céllemez nem rendelkezik elegendő hellyel. Szabadítson fel helyet, és próbálja újra.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

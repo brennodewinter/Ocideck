@@ -1764,6 +1764,17 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Stijl': 'Stiil',
+  'Geen (platte tekst)': 'Puudub (lihttekst)',
+  'Documentstijl': 'Dokumendi stiil',
+  'Standaard documentstijl': 'Dokumendi vaikestiil',
+  'Deze stijl afdwingen': 'Jõusta see stiil',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Dokumendi stiil jõustatakse seadete kaudu.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Vaikestiil dokumentidele, mis ise stiili ei vali. Ainult kuvamine ja eksport — faili ei kirjutata midagi.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Eira dokumendi enda stiili ja kasuta kõikjal vaikestiili (majastiili).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Sihtkettal pole piisavalt ruumi. Vabastage ruumi ja proovige uuesti.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

@@ -357,6 +357,28 @@ void main() {
       expect(n.state.minRequiredExportTlpKey, isNull);
     });
 
+    test('document style default and enforcement persist and clear', () async {
+      final n = await _loadedNotifier();
+      await n.setDocumentDefaultStyle('Europa');
+      await n.setDocumentStyleEnforced(true);
+      expect(n.state.documentDefaultStyle, 'Europa');
+      expect(n.state.documentStyleEnforced, isTrue);
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getString('documentDefaultStyle'), 'Europa');
+      expect(prefs.getBool('documentStyleEnforced'), isTrue);
+
+      await n.setDocumentDefaultStyle(null);
+      await n.setDocumentStyleEnforced(false);
+      expect(n.state.documentDefaultStyle, isNull);
+      expect(n.state.documentStyleEnforced, isFalse);
+      expect(
+        (await SharedPreferences.getInstance()).getString(
+          'documentDefaultStyle',
+        ),
+        isNull,
+      );
+    });
+
     test('classification and quality export toggles', () async {
       final n = await _loadedNotifier();
       await n.setRequireClassificationOnExport(true);

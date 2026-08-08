@@ -1776,6 +1776,17 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Stijl': 'Stil',
+  'Geen (platte tekst)': 'Kes (reine Täxt)',
+  'Documentstijl': 'Dokumäntstil',
+  'Standaard documentstijl': 'Standard-Dokumäntstil',
+  'Deze stijl afdwingen': 'Dää Stil erzwinge',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Dr Dokumäntstil wird über d Iistellige erzwunge.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Dr Standardstil für Dokumänt wo sälber kei Stil uswähle. Nume Aazeig und Export — s wird nüt in e Datei gschribe.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Ignorier dr eige Stil vom ene Dokumänt und bruuch überall dr Standardstil (Huusstil).',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Ziil-Festplatte het zwenig Platz. Mach Platz und probier nomal.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':

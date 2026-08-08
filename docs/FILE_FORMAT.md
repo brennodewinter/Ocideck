@@ -3067,12 +3067,18 @@ folder with `../` or an absolute path is refused, not followed.
 ### 14.3 Byte-faithful round-trip
 
 Open → (no edit) → Save yields a **byte-identical** file. Unlike the deck path,
-the document path injects **no** front matter, forces **no** slide `---`
-separators, builds **no** `themes/`/`logos/` scaffold, and applies **none** of
-the byte-changing normalisation (CRLF→LF, NBSP→space, invisible-character strip)
-that deck slide bodies go through. The `.md` you save is the byte-faithful master
-you keep, back up and eventually clean — the same role §9 describes for a deck's
-Markdown, held to a stricter no-normalisation rule.
+the document path injects **no** front matter of its own, forces **no** slide
+`---` separators, builds **no** `themes/`/`logos/` scaffold, and applies **none**
+of the byte-changing normalisation (CRLF→LF, NBSP→space, invisible-character
+strip) that deck slide bodies go through. The `.md` you save is the byte-faithful
+master you keep, back up and eventually clean — the same role §9 describes for a
+deck's Markdown, held to a stricter no-normalisation rule.
+
+The one thing the document path can write into the front matter is a document
+**style** (`theme:`), and only when you deliberately choose one — it is opt-in,
+byte-surgical, and does not touch the rest of the file (§14.5). A document you
+never style carries no front matter at all, so the byte-identity above holds
+unchanged.
 
 ### 14.4 Export is a derived, projected artefact — on a new file
 
@@ -3085,3 +3091,45 @@ rather than the raw source, along the same audience boundary as a deck export;
 the chosen privacy profile is written into the export's filename. There is no
 built-in PDF writer for a document — a PDF is made by printing the exported HTML
 from the browser (see the [User Guide](USER_GUIDE.md#documents)).
+
+### 14.5 Document style — the `theme:` front-matter key *(added 2026-08-08)*
+
+A document may carry one **style**: a `theme: <profile-name>` key in a leading
+YAML front-matter block of the plain `.md`. The name refers to a style profile
+(the built-ins `LibreKAT`, `Standaard`, `Security`, or a profile you made — the
+same profiles a deck uses, §3.2), which carries a font and styling. It looks like:
+
+```
+---
+theme: LibreKAT
+---
+
+# Report
+…
+```
+
+This is the **only** front-matter key the document path ever writes, and it is
+written **only on request** (the Style picker in the document editor), never
+automatically. Facts that matter on disk:
+
+- **It is not a recognition marker.** Recognition stays the *absence* of
+  `marp: true` (§14.1); a document that carries only `theme:` still opens as a
+  document, never a deck, and the `theme:` key never drags `marp:`/`paginate:`
+  along.
+- **Byte-surgical.** Choosing a style prepends a minimal `---`/`theme:`/`---`
+  block; choosing "Geen" ("None") removes it. When `theme:` was the only key, the
+  whole block is dropped and the exact plain body returns; any front-matter keys
+  you wrote by hand (Jekyll, Hugo, Obsidian) and the body are preserved verbatim,
+  and only the `theme:` line is touched. Setting a style and clearing it again
+  round-trips to the original bytes.
+- **A missing profile is not an error.** If the named profile does not exist
+  (renamed, removed, a typo), the document falls back to the default/app style
+  rather than failing.
+- **The style does not travel on conversion.** Converting a document to a
+  presentation (§14.4 / [User Guide](USER_GUIDE.md#documents)) reads the body, not
+  the front matter, so the `theme:` line is dropped; export likewise renders with
+  the resolved profile rather than copying `theme:` into the output.
+
+The design — the resolver precedence (enforce → per-document `theme:` → settings
+default → project profile) and why the write is byte-surgical — is in
+[`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md) §12.

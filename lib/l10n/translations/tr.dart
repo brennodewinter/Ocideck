@@ -2750,6 +2750,17 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Stijl': 'Stil',
+  'Geen (platte tekst)': 'Yok (düz metin)',
+  'Documentstijl': 'Belge stili',
+  'Standaard documentstijl': 'Varsayılan belge stili',
+  'Deze stijl afdwingen': 'Bu stili zorunlu kıl',
+  'De documentstijl wordt afgedwongen via de instellingen.':
+      'Belge stili ayarlar aracılığıyla zorunlu kılınır.',
+  'De standaardstijl voor documenten die zelf geen stijl kiezen. Puur weergave en export — het schrijft niets in een bestand.':
+      'Kendi stilini seçmeyen belgeler için varsayılan stil. Yalnızca görüntüleme ve dışa aktarma — bir dosyaya hiçbir şey yazmaz.',
+  'Negeer de eigen stijl van een document en gebruik overal de standaardstijl (huisstijl).':
+      'Bir belgenin kendi stilini yok say ve her yerde varsayılan stili (kurumsal stil) kullan.',
   'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.':
       'Hedef diskte yeterli alan yok. Alan boşaltın ve tekrar deneyin.',
   'Het zegel van dit deck klopt niet meer met de inhoud — het is bewerkt na het verzegelen.':
