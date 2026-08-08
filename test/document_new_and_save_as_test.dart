@@ -110,7 +110,15 @@ void main() {
         .firstWhere((w) => w.bindings.containsKey(saveActivator));
     await tester.runAsync(() async {
       shortcuts.bindings[saveActivator]!();
-      for (var i = 0; i < 50 && n.currentState.filePath == null; i++) {
+      // filePath staat pas ná de awaited atomic write + markSaved
+      // (document_editor_screen._save roept markSaved aan ná `await
+      // saveDocumentAs`), dus dit is het juiste wachtsignaal. Het budget moet
+      // ruim: op de Forgejo linux-gate draaien vier job-containers parallel op
+      // één dind, en onder die I/O-contentie haalde de write de oude 500ms niet
+      // → filePath bleef null (#1363). 5s vangt de last-piek af zonder een
+      // echte hang te verbergen (bounded) — zelfde budget als de zuster-test in
+      // document_editor_screen_test.dart.
+      for (var i = 0; i < 500 && n.currentState.filePath == null; i++) {
         await Future<void>.delayed(const Duration(milliseconds: 10));
       }
     });
