@@ -86,6 +86,7 @@ class MarkdownEditorTheme {
   factory MarkdownEditorTheme.documentSurface({
     required ColorScheme scheme,
     double fontSize = 15,
+    String? fontFamily,
   }) {
     return MarkdownEditorTheme(
       surface: scheme.surfaceContainerLowest,
@@ -97,6 +98,9 @@ class MarkdownEditorTheme {
       accent: scheme.primary,
       border: scheme.outlineVariant,
       fontSize: fontSize,
+      // Het lettertype van de gekozen documentstijl; `null` = het app-lettertype
+      // (dan leest een plat document precies als voorheen).
+      fontFamily: fontFamily,
     );
   }
 
