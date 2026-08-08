@@ -266,4 +266,32 @@ void main() {
           'faalt en naar --resume verwijst.',
     );
   });
+
+  // --status vX.Y.Z: read-only overzicht. De tag is verplicht (zoals bij --resume);
+  // deze weigering is hermetisch — vóór git/netwerk.
+  test('--status zonder tag weigert', () {
+    final r = Process.runSync('bash', [script, '--status']);
+    expect(r.exitCode, isNot(0));
+    expect(r.stderr.toString(), contains('tag'));
+  }, skip: skipOnWindows);
+
+  // Lock: --status is read-only. Het rapporteert en stopt (cmd_status; exit 0) vóór
+  // de wachtwoordprompt en de pre-flight — het mag nooit iets muteren of om het
+  // minisign-wachtwoord vragen. Statisch: leest het script.
+  test('--status rapporteert en stopt vóór het wachtwoord', () {
+    final src = File(script).readAsStringSync();
+    final dispatch = src.indexOf('cmd_status\n  exit 0');
+    final pw = src.indexOf('minisign-wachtwoord');
+    expect(
+      dispatch,
+      isNonNegative,
+      reason: 'verwacht een read-only --status-dispatch (cmd_status; exit 0).',
+    );
+    expect(pw, isNonNegative, reason: 'wachtwoordprompt niet gevonden.');
+    expect(
+      dispatch,
+      lessThan(pw),
+      reason: '--status moet stoppen vóór de wachtwoordprompt (read-only).',
+    );
+  });
 }

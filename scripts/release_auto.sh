@@ -63,6 +63,7 @@
 #   scripts/release_auto.sh --dry-run [niveau]   # toon het plan, muteer niets
 #   scripts/release_auto.sh --skip-install [..]  # sla /Applications-vervanging over
 #   scripts/release_auto.sh --resume vX.Y.Z      # hervat een onderbroken release
+#   scripts/release_auto.sh --status vX.Y.Z      # toon waar een release staat (read-only)
 
 set -Eeuo pipefail
 
@@ -90,7 +91,12 @@ LEVEL=""
 RESUME_TAG=""   # --resume vX.Y.Z: sla fase 1+2 over, maak alleen fase 3 af
 
 # ── Kleine hulpjes ──────────────────────────────────────────────────────────────
-section() { printf '\n== %s ==\n' "$1"; }
+# RUN_T0 stempelt de start; elke sectiekop toont sindsdien verstreken tijd, zodat je
+# tijdens de lange onbewaakte keten altijd ziet hoe ver je bent (en hoe lang een stap
+# duurt). date is hier toegestaan (geen Workflow-context).
+RUN_T0="$(date +%s)"
+elapsed() { local d=$(( $(date +%s) - RUN_T0 )); printf '%d:%02d' "$((d / 60))" "$((d % 60))"; }
+section() { printf '\n== [%s] %s ==\n' "$(elapsed)" "$1"; }
 log()     { printf '   %s\n' "$1"; }
 die()     { printf '\nrelease-auto: %s\n' "$1" >&2; exit 1; }
 need_cmd() { command -v "$1" >/dev/null 2>&1 || die "ontbrekend commando: $1"; }
@@ -127,18 +133,20 @@ trap 'on_err $LINENO' ERR
 
 # ── Argumenten ──────────────────────────────────────────────────────────────────
 RESUME=0
+STATUS=0
 for arg in "$@"; do
   case "$arg" in
     --dry-run) DRY_RUN=1 ;;
     --skip-install) SKIP_INSTALL=1 ;;
     --print-version) PRINT_VERSION=1 ;;
     --resume) RESUME=1 ;;
+    --status) STATUS=1 ;;
     patch|minor|major) LEVEL="$arg" ;;
     v[0-9]*.[0-9]*.[0-9]*) RESUME_TAG="$arg" ;;
     -h|--help)
-      sed -n '2,65p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
+      sed -n '2,66p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
       exit 0 ;;
-    *) die "onbekend argument: $arg (verwacht: --dry-run, --skip-install, --resume vX.Y.Z, patch, minor of major)" ;;
+    *) die "onbekend argument: $arg (verwacht: --dry-run, --skip-install, --status vX.Y.Z, --resume vX.Y.Z, patch, minor of major)" ;;
   esac
 done
 
@@ -150,8 +158,11 @@ done
 if [ "$RESUME" -eq 1 ] && [ -z "$RESUME_TAG" ]; then
   die "geef de tag mee: --resume vX.Y.Z"
 fi
-if [ -n "$RESUME_TAG" ] && [ "$RESUME" -eq 0 ]; then
-  die "een losse tag $RESUME_TAG hoort bij --resume; bedoelde je '--resume $RESUME_TAG'?"
+if [ "$STATUS" -eq 1 ] && [ -z "$RESUME_TAG" ]; then
+  die "geef de tag mee: --status vX.Y.Z"
+fi
+if [ -n "$RESUME_TAG" ] && [ "$RESUME" -eq 0 ] && [ "$STATUS" -eq 0 ]; then
+  die "een losse tag $RESUME_TAG hoort bij --resume of --status; bedoelde je '--resume $RESUME_TAG'?"
 fi
 
 # --print-version is een hermetische guard-toets (alleen rekenkunde uit pubspec);
@@ -176,6 +187,72 @@ api() { # api METHOD PATH [curl-args…]
   local method="$1" path="$2"; shift 2
   curl -sf -X "$method" "$FORGE_API/repos/$REPO_SLUG$path" \
     -H "Authorization: token $TOKEN" "$@"
+}
+
+mark() { if [ "$1" -eq 1 ]; then printf '   [x] %s\n' "$2"; else printf '   [ ] %s\n' "$2"; fi; }
+
+# --status vX.Y.Z: read-only overzicht van waar een release staat — geen mutatie,
+# geen wachtwoord, geen poort. Beantwoordt "waar ben ik?" na een afbreking en zegt
+# wat --resume nu zou doen. Leunt op TAG/NEW_VERSION/BRANCH die hierboven al bepaald
+# zijn, en op api(). Elke sonde faalt zacht (|| true): een hik mag geen fout melden.
+cmd_status() {
+  read_token
+  section "Status van $TAG"
+  local has_branch=0 has_pr=0 pr_merged=0 has_tag_o=0 has_mirror=0 has_tag_m=0
+  local has_rel=0 has_sums=0 has_sig=0 prnum="" prstate="" pr rel assets
+
+  git ls-remote --exit-code origin "refs/heads/$BRANCH" >/dev/null 2>&1 && has_branch=1
+
+  pr="$(api GET "/pulls?state=all&limit=50" 2>/dev/null \
+    | jq -r --arg t "chore(release): versie $NEW_VERSION" \
+        '[.[] | select(.title == $t)][0] // empty | "\(.number)|\(.state)|\(.merged)"' \
+    2>/dev/null || true)"
+  if [ -n "$pr" ]; then
+    has_pr=1
+    prnum="$(printf '%s' "$pr" | cut -d'|' -f1)"
+    prstate="$(printf '%s' "$pr" | cut -d'|' -f2)"
+    [ "$(printf '%s' "$pr" | cut -d'|' -f3)" = "true" ] && pr_merged=1
+  fi
+
+  git ls-remote --exit-code origin "refs/tags/$TAG" >/dev/null 2>&1 && has_tag_o=1
+  git remote get-url mirror >/dev/null 2>&1 && has_mirror=1
+  [ "$has_mirror" -eq 1 ] && git ls-remote --exit-code mirror "refs/tags/$TAG" >/dev/null 2>&1 && has_tag_m=1
+
+  rel="$(api GET "/releases/tags/$TAG" 2>/dev/null || true)"
+  [ -n "$(printf '%s' "$rel" | jq -r '.id // empty' 2>/dev/null || true)" ] && has_rel=1
+  if [ "$has_rel" -eq 1 ]; then
+    assets="$(printf '%s' "$rel" | jq -r '.assets[]?.name' 2>/dev/null || true)"
+    printf '%s\n' "$assets" | grep -qx 'SHA256SUMS' && has_sums=1
+    printf '%s\n' "$assets" | grep -qx 'SHA256SUMS.minisig' && has_sig=1
+  fi
+
+  local prdesc
+  if [ "$has_pr" -eq 0 ]; then prdesc="release-PR aangemaakt"
+  elif [ "$pr_merged" -eq 1 ]; then prdesc="release-PR #$prnum gemerged"
+  else prdesc="release-PR #$prnum ($prstate — nog niet gemerged)"; fi
+
+  mark "$has_branch" "release-branch $BRANCH op origin"
+  mark "$pr_merged" "$prdesc"
+  mark "$has_tag_o" "tag $TAG op origin (start de Forgejo-release-CI)"
+  [ "$has_mirror" -eq 1 ] && mark "$has_tag_m" "tag $TAG op mirror (start de Windows-build)"
+  mark "$has_rel" "release aangemaakt op de forge"
+  mark "$has_sums" "SHA256SUMS aanwezig (van de publiceren-job)"
+  mark "$has_sig" "handtekening SHA256SUMS.minisig aangehangen"
+
+  section "Advies"
+  if [ "$has_tag_o" -eq 1 ] && [ "$has_sig" -eq 1 ] && { [ "$has_mirror" -eq 0 ] || [ "$has_tag_m" -eq 1 ]; }; then
+    log "De release lijkt compleet. Controleer nog de live web-versie en de downloadpagina."
+    log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
+  elif [ "$has_tag_o" -eq 1 ]; then
+    log "De tag staat vast, maar de release is nog niet af (mirror-tag / tekenen / deploy)."
+    log "Maak DEZELFDE tag af met:  scripts/release_auto.sh --resume $TAG"
+  elif [ "$has_pr" -eq 1 ] || [ "$has_branch" -eq 1 ]; then
+    log "Er is een release-PR of -branch, maar nog geen tag."
+    log "Hervat met:  scripts/release_auto.sh --resume $TAG"
+  else
+    log "Geen lopende release voor $TAG gevonden."
+    log "Start een verse release met:  scripts/release_auto.sh patch|minor|major"
+  fi
 }
 
 # ── Versie bepalen ──────────────────────────────────────────────────────────────
@@ -249,6 +326,13 @@ fi
 
 # De release-branch hoort bij de tag; zowel de verse run als --resume gebruiken 'm.
 BRANCH="release/$TAG"
+
+# --status vX.Y.Z: alleen rapporteren waar de release staat, dan stoppen. Read-only,
+# dus vóór het plan, de voorwaarden, het wachtwoord en de pre-flight.
+if [ "$STATUS" -eq 1 ]; then
+  cmd_status
+  exit 0
+fi
 
 # Een verse run mag geen bestaande tag verplaatsen. --resume mág juist doorlopen
 # als de tag er al staat (dan resteert alleen fase 3) — resume_release beslist dat.
@@ -366,6 +450,15 @@ else
 fi
 
 # ── Harde voorwaarden vóór de mutaties (falen vóór het wachtwoord) ───────────────
+# Vanaf hier is dit een échte run (--dry-run/--status/--print-version zijn er al uit).
+# Spiegel alle uitvoer naar een tijdgestempeld logbestand onder build/ (git-genegeerd),
+# zodat een afgebroken release achteraf na te lezen is. Het wachtwoord komt via
+# 'read -s' binnen en staat dus niet in het log.
+LOGFILE="build/release-logs/release-${TAG}-$(date +%Y%m%d-%H%M%S).log"
+mkdir -p "$(dirname "$LOGFILE")"
+exec > >(tee -a "$LOGFILE") 2>&1
+log "Loguitvoer wordt bijgehouden in $LOGFILE"
+
 STEP="voorwaarden"
 if ! git diff --quiet || ! git diff --cached --quiet; then
   die "working tree niet schoon — commit eerst (nooit 'git stash' in deze repo delen)."
@@ -471,9 +564,13 @@ phase3() {
 
 finish() {
   STEP="klaar"
-  section "Klaar"
+  section "Klaar — $TAG in $(elapsed)"
   log "OciDeck $TAG is uitgebracht, getekend en live."
-  log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
+  log ""
+  log "Release-pagina : ${RELEASE_BASE_URL%/download}/tag/$TAG"
+  [ -n "${LOGFILE:-}" ] && log "Logboek        : $LOGFILE"
+  log ""
+  log "Volledige staat controleren:  scripts/release_auto.sh --status $TAG"
 }
 
 # ── FASE 2 — herbruikbare, idempotente stappen (verse run én --resume) ──────────
