@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/recovery_service.dart';
 import 'package:ocideck/state/tabs_provider.dart';
@@ -100,6 +101,48 @@ void main() {
       final back = restored.state.current!.deckNotifier.currentState.deck!;
       expect(back.annotations.values.expand((s) => s), hasLength(1));
       expect(back.annotations.values.first.single.points, hasLength(2));
+    });
+  });
+
+  test('een vuil documenttabblad wordt bewaard en hersteld (crash)', () {
+    fakeAsync((async) {
+      final recovery = _RecordingRecovery();
+      final tabs = _tabs(recovery);
+      addTearDown(tabs.dispose);
+
+      tabs.newDocument();
+      tabs.state.current!.documentNotifier!.edit('# Memo\n\nNiet opgeslagen.');
+
+      // De regressie: documenttabbladen werden overgeslagen bij autosave, dus een
+      // crash gooide niet-opgeslagen documenten weg. Nu belanden ze in een eigen
+      // momentopname (byte-getrouwe bron, gemarkeerd als document).
+      async.elapse(const Duration(seconds: 30));
+      expect(recovery.saved, isNotEmpty);
+      final snap = recovery.saved.last;
+      expect(snap.kind, MarkdownKind.document);
+      expect(snap.markdown, '# Memo\n\nNiet opgeslagen.');
+
+      // En terug: herstellen levert een documenttabblad op, byte-getrouw en vuil.
+      final restored = _tabs(_RecordingRecovery());
+      addTearDown(restored.dispose);
+      expect(restored.restoreRecovered([snap]), 0);
+      final doc = restored.state.current!.documentNotifier;
+      expect(doc, isNotNull);
+      expect(doc!.currentState.document!.source, '# Memo\n\nNiet opgeslagen.');
+      expect(doc.currentState.isDirty, isTrue);
+    });
+  });
+
+  test('een schoon documenttabblad wordt niet bewaard', () {
+    fakeAsync((async) {
+      final recovery = _RecordingRecovery();
+      final tabs = _tabs(recovery);
+      addTearDown(tabs.dispose);
+
+      tabs.newDocument(); // leeg en schoon (isDirty:false)
+
+      async.elapse(const Duration(seconds: 30));
+      expect(recovery.saved, isEmpty);
     });
   });
 

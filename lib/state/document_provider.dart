@@ -173,6 +173,15 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
     );
   }
 
+  /// Markeer het document als (nog) niet opgeslagen. Voor herstel na een crash:
+  /// [TabsNotifier.restoreRecovered] laadt de bron en markeert hem vuil, zodat de
+  /// herstelde inhoud niet als 'al opgeslagen' voorbijgaat — de tegenhanger van
+  /// `DeckNotifier.markDirty`.
+  void markDirty() {
+    if (state.document == null || state.isDirty) return;
+    state = state.copyWith(isDirty: true);
+  }
+
   /// Markeer het document als opgeslagen; onthoud waar het nu leeft.
   void markSaved({String? filePath}) {
     state = state.copyWith(

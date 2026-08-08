@@ -40,6 +40,21 @@ RecoverySnapshot _deckRecoverySnapshot(
   );
 }
 
+/// Bouwt de herstel-momentopname van een documenttabblad. Een document *ís* zijn
+/// bron, dus de momentopname is simpel: de ruwe `.md` (byte-getrouw, inclusief
+/// het stijl-frontmatter-blok), geen deck-sidecars. [RecoverySnapshot.kind]
+/// markeert hem als document zodat het herstel het juiste soort tabblad terugzet.
+/// Top-level (raakt geen [TabsNotifier]-veld) om de klassenratchet niet te tarten.
+RecoverySnapshot _documentRecoverySnapshot(TabInfo tab, DocumentState st) =>
+    RecoverySnapshot(
+      id: tab.recoveryId,
+      savedAt: DateTime.now(),
+      filePath: st.filePath,
+      label: tab.label,
+      markdown: st.document!.source,
+      kind: MarkdownKind.document,
+    );
+
 /// Niet-toegepaste bron die afwijkt van het laatste geldige deck. Alleen voor
 /// presentatietabbladen: een document kent geen aparte, ongetoepaste bron — het
 /// bewerkt zijn bron live. Top-level (raakt geen [TabsNotifier]-veld) om de
