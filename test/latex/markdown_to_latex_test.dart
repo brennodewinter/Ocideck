@@ -103,9 +103,15 @@ void main() {
       expect(out, contains('Een citaat'));
     });
 
-    test('horizontale lijn wordt rule', () {
-      final out = markdownToLatex('---\n');
-      expect(out, contains(r'\noindent\rule{\textwidth}{0.4pt}'));
+    test('een thematische breuk (---) wordt een pagina-einde (\\newpage)', () {
+      // In een document is `---` een pagina-einde, niet een zichtbare lijn
+      // (DOCUMENT_MODE.md). Elke thematische-breuk-vorm parseert naar `hr`.
+      expect(markdownToLatex('a\n\n---\n\nb'), contains(r'\newpage'));
+      expect(markdownToLatex('a\n\n- - -\n\nb'), contains(r'\newpage'));
+      expect(
+        markdownToLatex('---\n'),
+        isNot(contains(r'\rule{\textwidth}')),
+      );
     });
 
     test('task-list item krijgt checkbox-marker', () {

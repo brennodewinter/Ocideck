@@ -59,7 +59,7 @@ html,body{margin:0;padding:0}
 .document pre.mermaid{background:transparent;border:0;text-align:center}
 .document table{border-collapse:collapse;width:100%}
 .document hr{border:0;border-top:1px solid rgba(100,116,139,.35);margin:1.6em 0}
-@media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}.document{margin:0;max-width:100%;box-shadow:none;border-radius:0}}
+@media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}.document{margin:0;max-width:100%;box-shadow:none;border-radius:0}.document hr{page-break-after:always;border:0;height:0;margin:0}}
 ''';
 
 /// De kleuren en letters voor een export zonder [ThemeProfile] — de

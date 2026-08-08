@@ -139,7 +139,9 @@ class _LatexNodeVisitor implements md.NodeVisitor {
         output.write('\\begin{quote}\n');
         _stack.add(_Ctx.blockquote);
       case 'hr':
-        output.write('\n\\noindent\\rule{\\textwidth}{0.4pt}\n');
+        // Een thematische breuk (`---`) is in een document een pagina-einde
+        // (DOCUMENT_MODE.md): een nieuw blad, geen zichtbare lijn.
+        output.write('\n\\newpage\n');
         return false;
 
       // ── Lijsten ──

@@ -55,9 +55,13 @@ void main() {
       // rechtstreeks geïnjecteerde gerenderde HTML.
       expect(html, contains('<script type="text/markdown">'));
 
-      // De `---` in de body is geen paginabreuk: hij blijft in de payload staan
-      // (marked maakt er client-side een <hr> van), niet een tweede sectie.
+      // De `---` splitst het document niet in dia's: één document-sectie, de
+      // `---` blijft in de payload (marked maakt er client-side een <hr> van).
       expect('<section class='.allMatches(html), hasLength(1));
+
+      // Bij afdrukken/PDF is die <hr> wél een pagina-einde (DOCUMENT_MODE.md):
+      // op het scherm doorlopend, in print een nieuw blad.
+      expect(html, contains('.document hr{page-break-after:always'));
     });
 
     test('de renderroute-selector dekt de documentsectie', () async {
