@@ -543,8 +543,25 @@ phase3() {
     if curl -fsSLo "$TMP/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS"; then got=1; break; fi
     sleep 15
   done
+  # #8: verschijnt SHA256SUMS niet, dan faalde publiceren waarschijnlijk (vaak omdat
+  # een upstream-job als windows-ophalen struikelde). Dispatch de hele release-CI
+  # éénmalig opnieuw — de jobs zijn idempotent (uploads clobberen) — en wacht daarna
+  # ruimer, want een volledige herbouw duurt langer dan de eerste propagatie. Pas als
+  # dat óók niet lukt, escaleren we.
+  if [ "$got" -eq 0 ]; then
+    STEP="release-CI opnieuw dispatchen"
+    section "Fase 3 — SHA256SUMS ontbreekt; release-CI éénmalig opnieuw dispatchen (#8)"
+    api POST "/actions/workflows/release.yml/dispatches" -H 'Content-Type: application/json' \
+      -d "$(jq -n --arg r "$TAG" '{ref:$r}')" -o /dev/null \
+      || die "kon release.yml niet opnieuw dispatchen — ga de release-CI na en hervat: scripts/release_auto.sh --resume $TAG"
+    log "release.yml opnieuw gedispatcht op $TAG — wachten tot SHA256SUMS verschijnt (max ~30 min)…"
+    for _ in $(seq 1 60); do
+      if curl -fsSLo "$TMP/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS"; then got=1; break; fi
+      sleep 30
+    done
+  fi
   [ "$got" -eq 1 ] \
-    || die "SHA256SUMS staat na wachten niet op de release voor $TAG — waarschijnlijk faalde een upstream release-job (publiceren draaide niet). Ga de release-CI na en maak daarna DEZELFDE tag af: scripts/release_auto.sh --resume $TAG."
+    || die "SHA256SUMS staat ook na een her-dispatch niet op de release voor $TAG — een upstream release-job blijft falen (bv. windows-ophalen kan de mirror niet bereiken). Ga de release-CI na en maak daarna DEZELFDE tag af: scripts/release_auto.sh --resume $TAG."
   printf '%s\n' "$MINISIGN_PW" \
     | make sign-release SHA256SUMS="$TMP/SHA256SUMS" >/dev/null || true
   [ -f "$TMP/SHA256SUMS.minisig" ] || die "minisign leverde geen handtekening — controleer het sleutelwachtwoord."
