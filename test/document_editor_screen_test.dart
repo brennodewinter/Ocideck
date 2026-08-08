@@ -246,8 +246,7 @@ void main() {
   testWidgets('het invoeg-palet schrijft een pagina-einde (---) in de bron', (
     tester,
   ) async {
-    final n = DocumentNotifier()
-      ..loadDocument(MarkdownDocument.parse('Voor.'));
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('Voor.'));
     await tester.pumpWidget(harness(n));
     await tester.pump();
 

@@ -174,7 +174,11 @@ class _DocEditorToolbar extends StatelessWidget {
         _insertItem(1, Icons.table_chart_outlined, l10n.d('Tabel')),
         _insertItem(2, Icons.account_tree_outlined, l10n.d('Mermaid')),
         _insertItem(3, Icons.image_outlined, l10n.d('Afbeelding')),
-        _insertItem(5, Icons.insert_page_break_outlined, l10n.d('Pagina-einde')),
+        _insertItem(
+          5,
+          Icons.insert_page_break_outlined,
+          l10n.d('Pagina-einde'),
+        ),
         const PopupMenuDivider(),
         _insertItem(4, Icons.content_paste, l10n.d('Plakken')),
       ],

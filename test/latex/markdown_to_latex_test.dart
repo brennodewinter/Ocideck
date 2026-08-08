@@ -108,10 +108,7 @@ void main() {
       // (DOCUMENT_MODE.md). Elke thematische-breuk-vorm parseert naar `hr`.
       expect(markdownToLatex('a\n\n---\n\nb'), contains(r'\newpage'));
       expect(markdownToLatex('a\n\n- - -\n\nb'), contains(r'\newpage'));
-      expect(
-        markdownToLatex('---\n'),
-        isNot(contains(r'\rule{\textwidth}')),
-      );
+      expect(markdownToLatex('---\n'), isNot(contains(r'\rule{\textwidth}')));
     });
 
     test('task-list item krijgt checkbox-marker', () {
