@@ -37,7 +37,6 @@ import '../utils/image_search_paths.dart';
 import '../utils/log.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_paste_cleanup.dart';
-import '../utils/markdown_visual_compatibility.dart';
 import '../utils/table_clipboard.dart';
 import '../utils/user_facing_error.dart';
 import 'dialogs/convert_to_presentation_dialog.dart';
@@ -548,32 +547,37 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
   }
 
-  /// Visuele modus: een echt geïnterpreteerd oppervlak — nooit meer rauwe
-  /// markdown. Kan de bron verliesvrij door de WYSIWYG-laag (koppen, opmaak,
-  /// lijsten, links én tabellen-als-embed), dan is dat een bewerkbaar
-  /// schrijfoppervlak ([MarkdownNotesEditor]). Bevat de bron een constructie die
+  /// Visuele modus: één bewerkbaar schrijfoppervlak — nooit een leesmuur. De
+  /// gedeelde [MarkdownNotesEditor] past zich aan de bron aan: gaat die verliesvrij
+  /// door de WYSIWYG-laag (koppen, opmaak, lijsten, links én tabellen-als-embed),
+  /// dan schrijf je in de rijke-tekstweergave. Bevat de bron een constructie die
   /// de brug nog niet verliesvrij aankan (rauwe HTML, voetnoten, ontsnapte
-  /// leestekens), dan toont Visueel de nette **leesweergave** i.p.v. de tekst als
-  /// broncode; die tekst bewerk je dan in Bron (grafiek/tabel blijven met
-  /// dubbelklik bewerkbaar). Zo geeft Visueel altijd opmaak te zien.
+  /// leestekens), dan valt de editor terug op de **bewerkbare** brontekst mét de
+  /// volledige opmaakknoppenbalk en een waarschuwingsregel ([markdownSourceModeHint]).
+  ///
+  /// Bewust géén read-only leesweergave meer: OciDeck kiest niet vóór de gebruiker
+  /// dat een document niet te bewerken valt. De rijke mogelijkheden (opmaakbalk +
+  /// het invoeg-palet in [_DocEditorToolbar]) blijven altijd binnen bereik; alleen
+  /// de waarschuwing komt erbij. Wie liever de gerenderde weergave ernaast heeft,
+  /// schakelt naar Bron (broneditor + live weergave, grafiek/tabel met dubbelklik).
   Widget _visualLayout(ThemeData theme, String source, BoxConstraints c) {
     final divider = theme.colorScheme.outlineVariant;
     final showRail = c.maxWidth >= 940;
-    final editor = markdownVisualLimitations(source).isEmpty
-        ? _wysiwygEditor(theme)
-        : _renderedVisual(theme, source);
     return Row(
       children: [
         if (showRail) ...[
           _outlineRail(theme, source),
           VerticalDivider(width: 1, thickness: 1, color: divider),
         ],
-        Expanded(child: editor),
+        Expanded(child: _wysiwygEditor(theme)),
       ],
     );
   }
 
-  /// Het bewerkbare WYSIWYG-oppervlak van de Visuele modus.
+  /// Het bewerkbare oppervlak van de Visuele modus. De notes-editor toont zelf de
+  /// passende opmaakbalk: de Quill-balk in de rijke-tekstweergave, of de
+  /// markdown-opmaakbalk + waarschuwing wanneer de bron een niet-verliesvrije
+  /// constructie bevat en hij terugvalt op bewerkbare brontekst.
   Widget _wysiwygEditor(ThemeData theme) => MarkdownNotesEditor(
     controller: _controller,
     focusNode: _editorFocus,
@@ -581,7 +585,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     hintText: '',
     expand: true,
     // Opmaakbalk zit al in [_DocEditorToolbar] voor de bron; hier toont de
-    // notes-editor zijn eigen Quill-balk passend bij de modus.
+    // notes-editor zijn eigen balk passend bij de modus.
     showToolbar: true,
     showModeToggle: false,
     mode: NotesEditorMode.visual,
@@ -594,26 +598,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     tryConsumePaste: _smartPaste,
     // Afbeelding-knop → carrousel, geen `![beschrijving](pad-of-url)`-dump.
     onInsertImage: () => unawaited(_insertImage()),
-  );
-
-  /// De leesweergave-terugval van de Visuele modus: de nette gerenderde weergave
-  /// met een hint dat je de tekst in Bron bewerkt (dezelfde [markdownSourceModeHint]
-  /// als de notes-editor gebruikt). Grafiek en tabel blijven met dubbelklik
-  /// bewerkbaar (via [_preview]). Gebruikt wanneer de bron een constructie bevat
-  /// die de WYSIWYG-brug nog niet verliesvrij round-trip't.
-  Widget _renderedVisual(ThemeData theme, String source) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      Container(
-        color: theme.colorScheme.surfaceContainerHighest,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-        child: markdownSourceModeHint(
-          context,
-          MarkdownEditorTheme.documentSurface(scheme: theme.colorScheme),
-        ),
-      ),
-      Expanded(child: _preview(theme, source)),
-    ],
   );
 
   Widget _editor(ThemeData theme) => Shortcuts(

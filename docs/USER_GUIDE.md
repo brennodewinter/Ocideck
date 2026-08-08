@@ -4206,18 +4206,26 @@ not, and why conversion is deliberately lossy — is written up in
 
 A toggle at the top of the document editor chooses how you work:
 
-- **Visual** shows the rendered document — headings, prose, tables, code,
-  Mermaid diagrams, charts and images — the way a reader sees it. On a wide
-  enough window an **outline rail** of the document's headings appears beside it;
-  clicking a heading scrolls to it.
+- **Visual** is a rich-text writing surface — you type directly on the document
+  as it renders, with tables, charts, Mermaid diagrams and images shown as
+  editable blocks. On a wide enough window an **outline rail** of the document's
+  headings appears beside it; clicking a heading scrolls to it. If the file
+  contains a construct the visual bridge cannot round-trip losslessly (raw HTML,
+  footnotes, escaped punctuation), Visual does **not** lock you out: it keeps you
+  editing the source text directly, with the same formatting toolbar, and shows a
+  short note that this part is edited as source. The rich possibilities stay
+  within reach — OciDeck offers them and warns, rather than deciding the document
+  is read-only for you. *(Changed 2026-08-08.)*
 - **Source** puts the raw Markdown next to a live rendered preview (stacked when
-  the window is too narrow for two readable columns). Every keystroke flows
-  straight through — there is no separate "Apply" step, unlike the deck-oriented
+  the window is too narrow for two readable columns), with double-click editing of
+  charts and tables in the preview. Every keystroke flows straight through — there
+  is no separate "Apply" step, unlike the deck-oriented
   [Markdown mode](#markdown-mode) below.
 
-A **formatting toolbar** (the same one the notes editor uses) sits above the
-editor for the common inline marks. An **insert palette** adds the richer blocks
-as portable Markdown: a **chart** (a ` ```chart ` fence with its data in
+A **formatting toolbar** for the common inline marks is always in reach — the
+rich-text toolbar in Visual, the Markdown one over the source in Source and in
+the Visual source fallback. An **insert palette** adds the richer blocks as
+portable Markdown: a **chart** (a ` ```chart ` fence with its data in
 `data/*.json`), a **table** (a GFM pipe table), a **Mermaid** diagram, or an
 **image** (copied into `images/`). Each stays plain, parseable text so the file
 keeps opening elsewhere.

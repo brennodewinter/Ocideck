@@ -1119,6 +1119,18 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Documentmodus: Visueel blijft bewerkbaar bij niet-verliesvrije opmaak.** Een
+  `.md` met rauwe HTML, een voetnoot of een ontsnapt leesteken viel in Visueel
+  terug op een read-only leesweergave: geen opmaakknoppenbalk, geen standaard-
+  markdownfuncties, alleen een melding. Dat besliste vóór de gebruiker dat het
+  document niet te bewerken was. Visueel gebruikt nu altijd de gedeelde
+  `MarkdownNotesEditor`, die zichzelf aanpast: rijke-tekst-WYSIWYG waar dat
+  verliesvrij kan, en anders de **bewerkbare** brontekst mét de volledige
+  opmaakknoppenbalk en een korte waarschuwing (`markdownSourceModeHint`). Het
+  invoeg-palet blijft in alle standen bereikbaar. De read-only terugval
+  (`_renderedVisual`) verviel; de brontekst blijft de enige waarheid en de brug
+  raakt die constructies nog steeds niet aan, dus geen round-trip-garantie
+  verzwakt — alleen de leesmuur is weg. Zie `DOCUMENT_MODE.md` §4.3.
 - **Gebundelde DOMPurify 3.4.12 → 3.4.13 (OSV-advisory GHSA-55q2-fjhq-7xh7).**
   De bundled-JS-poort (`make deps-check`, #tool/check_bundled_js.dart) stopte de
   v0.4.0-release: DOMPurify 3.4.12 draagt een bekende XSS — *"IN_PLACE hook
