@@ -32,8 +32,8 @@ void main() {
 
     test('the same seeds rebuild the same identity (deterministic)', () async {
       final s = CollabDeviceSeeds.generate('dev');
-      final a = await (await s.toDeviceKeys()).publicKeys();
-      final b = await (await s.toDeviceKeys()).publicKeys();
+      final a = await (await s.toDeviceKeys()).publicKeys(rot: 0);
+      final b = await (await s.toDeviceKeys()).publicKeys(rot: 0);
       expect(b.identityKey, a.identityKey);
       expect(b.agreementKey, a.agreementKey);
       expect(await b.verifyBinding(), isTrue);
@@ -69,7 +69,7 @@ void main() {
         userId: '@a:hs.example',
         deviceId: 'DEV1',
       );
-      final firstPub = await first.publicKeys();
+      final firstPub = await first.publicKeys(rot: 0);
 
       final again = await loadOrCreateDeviceKeys(
         secretStore: store,
@@ -77,7 +77,7 @@ void main() {
         userId: '@a:hs.example',
         deviceId: 'DEV1',
       );
-      final againPub = await again.publicKeys();
+      final againPub = await again.publicKeys(rot: 0);
 
       expect(againPub.identityKey, firstPub.identityKey);
       expect(againPub.agreementKey, firstPub.agreementKey);
@@ -97,8 +97,8 @@ void main() {
         deviceId: 'DEV2',
       );
       expect(
-        (await two.publicKeys()).identityKey,
-        isNot((await one.publicKeys()).identityKey),
+        (await two.publicKeys(rot: 0)).identityKey,
+        isNot((await one.publicKeys(rot: 0)).identityKey),
       );
     });
   });

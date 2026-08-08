@@ -36,8 +36,8 @@ void main() {
     final recvKeys = await _device('recv');
     final authCrypto = CollabCrypto(authKeys);
     receiverCrypto = CollabCrypto(recvKeys);
-    final authPub = await authKeys.publicKeys();
-    final recvPub = await recvKeys.publicKeys();
+    final authPub = await authKeys.publicKeys(rot: 0);
+    final recvPub = await recvKeys.publicKeys(rot: 0);
     final rk = await authCrypto.rekey([recvPub]);
     await receiverCrypto.installEpochKey(rk.wraps.single, authPub);
 

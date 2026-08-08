@@ -589,6 +589,8 @@ when the owner returns.
   keying / the approved-set, not here), and bounds device-ids per peer address
   (SA-F2 — pinning stops overwrite, not creation). The peer address is an opaque
   string the transport supplies (a Matrix user id, an XMPP room/nick).
+  `devicesForAddress` resolves the candidate sender devices for a blinded
+  key-share (§5.1 N3 — the wrap carries no cleartext sender).
 - `matrix_key_exchange.dart` — establishes the session's keys over the room
   (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §4.3, §8, phase P-D), turning the
   relay from "keys pre-shared" into "keys established over the wire". Publishes this
@@ -596,10 +598,13 @@ when the owner returns.
   ingests peers' device state (rejecting any whose identity→agreement binding does
   not verify — the relay-key-substitution defence, §5.3) and backs the transport's
   `resolvePeer`; the authority `distributeEpoch`s the epoch key to each member via
-  an encrypted to-device key-share, and a member installs the one addressed to it —
-  verified against the sender's *directory-held* identity, never keys carried in the
-  message. The crypto (wrap/sign/unwrap) is `CollabCrypto`'s; this is only the
-  Matrix plumbing. `handleSystemEvent`/`handleToDevice` wire to the transport hooks.
+  an encrypted to-device key-share (the wrap is recipient-blinded, §5.1 N3 — no
+  cleartext `to`/`from` on the wire), and a member installs the one addressed to
+  it — the sender is resolved from the to-device event via
+  `devicesForAddress`, and `installEpochKey` trial-verifies the signature against
+  each candidate. The crypto (wrap/sign/unwrap) is `CollabCrypto`'s; this is only
+  the Matrix plumbing. `handleSystemEvent`/`handleToDevice` wire to the transport
+  hooks.
 - `matrix_snapshot.dart` — delivers the session baseline over Matrix (design:
   `docs/design/SELF_ENCRYPTED_RELAY.md` §6.3, phase P-D). A `CollabSnapshot` is
   sealed once (its AEAD tag covers the whole baseline) and then chunked across
@@ -690,17 +695,21 @@ when the owner returns.
   restore them on another device — bound there to that device's own id, so the
   fingerprint and provenance-signing key carry over (`collab_recovery_key.dart`).
 - `collab_crypto.dart` — the end-to-end encryption seam (design:
-  `docs/design/SELF_ENCRYPTED_RELAY.md` §4), the only file touching
-  `package:cryptography`. A minimal group **key-wrapping** scheme, *not* a ratchet:
-  each device has an Ed25519 identity key and an X25519 agreement key (the latter
-  signed by the former, so a relay cannot swap it); the authority mints one random
-  AEAD session key per **epoch** and wraps it to each member with an authenticated
-  ephemeral-ECDH sealed box; record payloads are sealed under the epoch key with
-  XChaCha20-Poly1305, the AAD binding room/type/epoch/sender. `seal`/`open` fail
-  closed (bad tag, wrong sender, AAD mismatch, missing-but-required signature,
-  unknown epoch); `rekey`/`wrapEpochTo`/`installEpochKey` manage epochs (a bump
-  locks out a removed member; a pure add reuses the epoch). Pure Dart, so it runs
-  under `flutter test` and on web alike.
+  `docs/design/SELF_ENCRYPTED_RELAY.md` §4, `XMPP_COLLAB_TRANSPORT.md` §5.1), the
+  only file touching `package:cryptography`. A minimal group **key-wrapping**
+  scheme, *not* a ratchet: each device has an Ed25519 identity key and an X25519
+  agreement key (the latter signed by the former over `(deviceId, agreementKey,
+  rot)`, so a relay cannot swap it and a `rot`-replay is unforgeable — §5.1 N2);
+  the authority mints one random AEAD session key per **epoch** and wraps it to
+  each member with an authenticated ephemeral-ECDH sealed box (the wrap carries
+  no cleartext `to`/`from` — recipient-blinded by ECDH trial-decrypt, §5.1 N3);
+  record payloads are sealed under the epoch key with XChaCha20-Poly1305, the AAD
+  binding room/type/epoch/sender (room strings are structurally disjoint across
+  Matrix/XMPP modes — §5.1 BW-1). `seal`/`open` fail closed (bad tag, wrong
+  sender, AAD mismatch, missing-but-required signature, unknown epoch);
+  `rekey`/`wrapEpochTo`/`installEpochKey` manage epochs (a bump locks out a
+  removed member; a pure add reuses the epoch). Pure Dart, so it runs under
+  `flutter test` and on web alike.
 - `collab_session.dart` — the authority state machine and lock table (§5.3–5.4).
   Exactly one session is the authority (P3); it assigns the monotonic version to
   every op — its own edits and the intents it receives — and rebroadcasts the

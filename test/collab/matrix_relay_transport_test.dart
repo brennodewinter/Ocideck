@@ -41,8 +41,8 @@ void main() {
     final peerKeys = await _device('peer');
     final ownerCrypto = CollabCrypto(ownerKeys);
     final peerCrypto = CollabCrypto(peerKeys);
-    final ownerPub = await ownerKeys.publicKeys();
-    final peerPub = await peerKeys.publicKeys();
+    final ownerPub = await ownerKeys.publicKeys(rot: 0);
+    final peerPub = await peerKeys.publicKeys(rot: 0);
     final rk = await ownerCrypto.rekey([peerPub]);
     await peerCrypto.installEpochKey(rk.wraps.single, ownerPub);
     final directory = {'owner': ownerPub, 'peer': peerPub};
@@ -257,8 +257,8 @@ void main() {
       final joinKeys = await _device('join');
       final authCrypto = CollabCrypto(authKeys);
       final joinCrypto = CollabCrypto(joinKeys);
-      final authPub = await authKeys.publicKeys();
-      final joinPub = await joinKeys.publicKeys();
+      final authPub = await authKeys.publicKeys(rot: 0);
+      final joinPub = await joinKeys.publicKeys(rot: 0);
       final rk = await authCrypto.rekey([joinPub]);
       await joinCrypto.installEpochKey(rk.wraps.single, authPub);
       final dir = {'auth': authPub, 'join': joinPub};

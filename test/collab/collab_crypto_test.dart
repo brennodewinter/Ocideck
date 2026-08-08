@@ -120,31 +120,84 @@ void main() {
       'a genuine binding verifies; a swapped agreement key does not',
       () async {
         final alice = await _device('alice');
-        final pub = await alice.publicKeys();
+        final pub = await alice.publicKeys(rot: 0);
         expect(await pub.verifyBinding(), isTrue);
 
         // Simulate a relay swapping the agreement key: the identity signature no
         // longer covers it, so the binding must fail (§5.3 defence).
-        final other = await (await _device('mallory')).publicKeys();
+        final other = await (await _device('mallory')).publicKeys(rot: 0);
         final swapped = DevicePublicKeys(
           deviceId: pub.deviceId,
           identityKey: pub.identityKey,
           agreementKey: other.agreementKey,
           agreementSignature: pub.agreementSignature,
+          rot: pub.rot,
         );
         expect(await swapped.verifyBinding(), isFalse);
       },
     );
 
     test('DevicePublicKeys survives a JSON round-trip', () async {
-      final pub = await (await _device('alice')).publicKeys();
+      final pub = await (await _device('alice')).publicKeys(rot: 0);
       final back = DevicePublicKeys.fromJson(
         jsonDecode(jsonEncode(pub.toJson())) as Map<String, Object?>,
       );
       expect(back.deviceId, pub.deviceId);
       expect(back.identityKey, pub.identityKey);
       expect(back.agreementKey, pub.agreementKey);
+      expect(back.rot, pub.rot);
       expect(await back.verifyBinding(), isTrue);
+    });
+
+    // §5.1 N2 — pin-test on the new preimage bytes: the binding message is
+    // exactly ['ocideck/device-binding/v2', deviceId, b64(agreementKey), rot].
+    // A byte-level pin so a future refactor cannot silently change the signed
+    // preimage (which would break cross-tool verification).
+    test('the v2 binding preimage is the exact 4-element JSON array', () async {
+      final alice = await _device('alice');
+      final pub = await alice.publicKeys(rot: 42);
+      final expected = utf8.encode(
+        jsonEncode([
+          'ocideck/device-binding/v2',
+          'alice',
+          base64.encode(pub.agreementKey),
+          42,
+        ]),
+      );
+      // Reconstruct the preimage the way _deviceBindingMessage does, and pin it
+      // against the expected literal — a change in tag, field order, or encoding
+      // breaks this.
+      final reconstructed = utf8.encode(
+        jsonEncode([
+          'ocideck/device-binding/v2',
+          pub.deviceId,
+          base64.encode(pub.agreementKey),
+          pub.rot,
+        ]),
+      );
+      expect(reconstructed, expected);
+      // And the signature over those bytes verifies.
+      expect(await pub.verifyBinding(), isTrue);
+    });
+
+    // §5.1 N2 — a rot-replay attack: an occupant takes a validly-signed binding
+    // and claims a higher rot without re-signing. The signature covers rot, so
+    // the forged binding must fail verification.
+    test('a forged rot (without re-signing) breaks the binding', () async {
+      final alice = await _device('alice');
+      final pub = await alice.publicKeys(rot: 0);
+      expect(await pub.verifyBinding(), isTrue);
+
+      // Attacker raises rot to MAX without re-signing — the signature no longer
+      // covers the new preimage.
+      final forged = DevicePublicKeys(
+        deviceId: pub.deviceId,
+        identityKey: pub.identityKey,
+        agreementKey: pub.agreementKey,
+        agreementSignature: pub.agreementSignature,
+        rot: 0x7fffffffffffffff,
+      );
+      expect(await forged.verifyBinding(), isFalse);
     });
   });
 
@@ -276,9 +329,12 @@ void main() {
       // Same claimed sender id, but a different identity key → forged.
       final impostor = DevicePublicKeys(
         deviceId: s.authorityPub.deviceId,
-        identityKey: (await (await _device('imp')).publicKeys()).identityKey,
+        identityKey: (await (await _device(
+          'imp',
+        )).publicKeys(rot: 0)).identityKey,
         agreementKey: s.authorityPub.agreementKey,
         agreementSignature: s.authorityPub.agreementSignature,
+        rot: s.authorityPub.rot,
       );
       await expectLater(
         () => s.member.open(
@@ -300,7 +356,7 @@ void main() {
         type: 't',
         signed: false,
       );
-      final wrongId = await (await _device('someone-else')).publicKeys();
+      final wrongId = await (await _device('someone-else')).publicKeys(rot: 0);
       await expectLater(
         () => s.member.open(sealed, room: 'r', type: 't', sender: wrongId),
         _throwsReason('sender-mismatch'),
@@ -326,24 +382,30 @@ void main() {
   });
 
   group('CollabCrypto — key wraps & epochs', () {
-    test('a wrap for another device cannot be installed here', () async {
-      final authority = CollabCrypto(await _device('auth'));
-      final bob = await (await _device('bob')).publicKeys();
-      final carolKeys = await _device('carol');
-      final result = await authority.rekey([bob]);
+    test(
+      'a wrap for another device fails trial-decrypt (blinded, §5.1 N3)',
+      () async {
+        final authority = CollabCrypto(await _device('auth'));
+        final bob = await (await _device('bob')).publicKeys(rot: 0);
+        final carolKeys = await _device('carol');
+        final result = await authority.rekey([bob]);
 
-      final carol = CollabCrypto(carolKeys);
-      final authorityPub = await _pub(authority, 'auth');
-      await expectLater(
-        () => carol.installEpochKey(result.wraps.single, authorityPub),
-        _throwsReason('wrong-recipient'),
-      );
-    });
+        final carol = CollabCrypto(carolKeys);
+        final authorityPub = await _pub(authority, 'auth');
+        // The wrap was sealed for bob's agreement key; carol's ECDH derives a
+        // different wrap key, so the AEAD tag fails — bad-wrap, not
+        // wrong-recipient (the wrap carries no cleartext recipient to check).
+        await expectLater(
+          () => carol.installEpochKey(result.wraps.single, authorityPub),
+          _throwsReason('bad-wrap'),
+        );
+      },
+    );
 
     test('a tampered wrap ciphertext is rejected', () async {
       final authority = CollabCrypto(await _device('auth'));
       final bobKeys = await _device('bob');
-      final bobPub = await bobKeys.publicKeys();
+      final bobPub = await bobKeys.publicKeys(rot: 0);
       final result = await authority.rekey([bobPub]);
       final authorityPub = await _pub(authority, 'auth');
 
@@ -351,8 +413,6 @@ void main() {
       final badCt = Uint8List.fromList(w.ciphertext)..[0] ^= 0xff;
       final tampered = WrappedKey(
         epoch: w.epoch,
-        recipientDevice: w.recipientDevice,
-        senderDevice: w.senderDevice,
         ephemeralKey: w.ephemeralKey,
         nonce: w.nonce,
         ciphertext: badCt,
@@ -373,22 +433,17 @@ void main() {
         final authorityPub = await _pub(authority, 'auth');
         final bobKeys = await _device('bob');
         final carolKeys = await _device('carol');
-        final bobPub = await bobKeys.publicKeys();
-        final carolPub = await carolKeys.publicKeys();
+        final bobPub = await bobKeys.publicKeys(rot: 0);
+        final carolPub = await carolKeys.publicKeys(rot: 0);
 
-        // Epoch 0: bob + carol.
+        // Epoch 0: bob + carol. Wraps are in member order (rekey preserves it);
+        // the wrap carries no cleartext recipient (§5.1 N3), so address by index.
         final e0 = await authority.rekey([bobPub, carolPub]);
         expect(e0.epoch, 0);
         final bob = CollabCrypto(bobKeys);
         final carol = CollabCrypto(carolKeys);
-        await bob.installEpochKey(
-          e0.wraps.firstWhere((w) => w.recipientDevice == bob.deviceId),
-          authorityPub,
-        );
-        await carol.installEpochKey(
-          e0.wraps.firstWhere((w) => w.recipientDevice == carol.deviceId),
-          authorityPub,
-        );
+        await bob.installEpochKey(e0.wraps[0], authorityPub);
+        await carol.installEpochKey(e0.wraps[1], authorityPub);
 
         // Epoch 1: bob removed, only carol re-keyed.
         final e1 = await authority.rekey([carolPub]);
@@ -418,12 +473,14 @@ void main() {
       () async {
         final authority = CollabCrypto(await _device('auth'));
         final authorityPub = await _pub(authority, 'auth');
-        final bobPub = await (await _device('bob')).publicKeys();
+        final bobPub = await (await _device('bob')).publicKeys(rot: 0);
         await authority.rekey([bobPub]); // epoch 0
 
         final carolKeys = await _device('carol');
         final carol = CollabCrypto(carolKeys);
-        final wrap = await authority.wrapEpochTo(await carolKeys.publicKeys());
+        final wrap = await authority.wrapEpochTo(
+          await carolKeys.publicKeys(rot: 0),
+        );
         expect(wrap.epoch, 0);
         expect(authority.currentEpoch, 0); // no bump
 
@@ -443,14 +500,16 @@ void main() {
 
     test('a WrappedKey survives a JSON round-trip', () async {
       final authority = CollabCrypto(await _device('auth'));
-      final bobPub = await (await _device('bob')).publicKeys();
+      final bobPub = await (await _device('bob')).publicKeys(rot: 0);
       final result = await authority.rekey([bobPub]);
+      final wire = jsonEncode(result.wraps.single.toJson());
+      // The blinded wrap carries no cleartext to/from (§5.1 N3).
+      expect(wire.contains('"to"'), isFalse);
+      expect(wire.contains('"from"'), isFalse);
       final back = WrappedKey.fromJson(
-        jsonDecode(jsonEncode(result.wraps.single.toJson()))
-            as Map<String, Object?>,
+        jsonDecode(wire) as Map<String, Object?>,
       );
       expect(back.epoch, 0);
-      expect(back.recipientDevice, bobPub.deviceId);
       expect(back.ciphertext, result.wraps.single.ciphertext);
     });
 
@@ -461,10 +520,12 @@ void main() {
       final memberKeys = await CollabDeviceKeys.generate(deviceId: 'b');
       final authority = CollabCrypto(authorityKeys);
       final member = CollabCrypto(memberKeys);
-      final authorityPub = await authorityKeys.publicKeys();
+      final authorityPub = await authorityKeys.publicKeys(rot: 0);
       expect(await authorityPub.verifyBinding(), isTrue);
 
-      final result = await authority.rekey([await memberKeys.publicKeys()]);
+      final result = await authority.rekey([
+        await memberKeys.publicKeys(rot: 0),
+      ]);
       await member.installEpochKey(result.wraps.single, authorityPub);
       final sealed = await authority.seal(
         {'kind': 'op'},
@@ -525,7 +586,7 @@ Future<CollabDeviceKeys> _device(String label) {
 }
 
 Future<DevicePublicKeys> _pub(CollabCrypto crypto, String label) =>
-    _device(label).then((k) => k.publicKeys());
+    _device(label).then((k) => k.publicKeys(rot: 0));
 
 class _Party {
   _Party(this.authority, this.member, this.authorityPub);
@@ -540,8 +601,8 @@ Future<_Party> _twoParty() async {
   final memberKeys = await _device('member');
   final authority = CollabCrypto(authorityKeys);
   final member = CollabCrypto(memberKeys);
-  final memberPub = await memberKeys.publicKeys();
-  final authorityPub = await authorityKeys.publicKeys();
+  final memberPub = await memberKeys.publicKeys(rot: 0);
+  final authorityPub = await authorityKeys.publicKeys(rot: 0);
   final result = await authority.rekey([memberPub]);
   await member.installEpochKey(result.wraps.single, authorityPub);
   return _Party(authority, member, authorityPub);

@@ -25,6 +25,41 @@
 // (P3). See the design's threat model (§4.1) for what this does and does not
 // defend.
 //
+// **§5.1 extension (XMPP_COLLAB_TRANSPORT.md, chain-reviewed):** three small
+// additions that unblock the safe XMPP key exchange without crossing the red
+// lines — no new primitives, no ratchet:
+//
+//   • **Signed rotation epoch (rot).** The identity-signed device binding now
+//     covers `(deviceId, agreementKey, rot)`, not just `(deviceId,
+//     agreementKey)`. A `rot` field carried unsigned in presence could be
+//     replayed with `rot=MAX` by any occupant, permanently freezing the real
+//     device's key rotation (N2). Signing it makes a rot bump unforgeable. The
+//     binding tag bumps `v1` → `v2` to mark the wire-format change.
+//   • **Recipient-blinded wrap.** `WrappedKey` no longer carries `to`/`from`
+//     device-ids in cleartext on the wire — broadcasting a cleartext-addressed
+//     wrap to a MUC would expose the full admitted-device set, the authority's
+//     id, and rekey timing to every occupant (N3). Instead the recipient is
+//     bound cryptographically by ECDH (trial-decrypt: only the holder of the
+//     recipient's agreement key can derive the wrap key and verify the AEAD
+//     tag), and the sender is bound by the authority's Ed25519 signature
+//     (verified against the caller-supplied sender identity from the directory).
+//   • **Mode-bound AAD.** See the comment on `_recordAad` / `_wrapAad` for the
+//     reasoning and the open review question.
+//
+// **GEDEELDE-KERN-BESLISSING — Matrix-mode migration (§5.1, NEW-2/B).**
+// `collab_crypto.dart` backs both the landed Matrix path and the future XMPP
+// path. The 2→3-field binding is a wire-format change to a shipped verifier — a
+// 3-field verifier will not verify a 2-field signature. Decision: **one shared
+// format, coordinated bump.** Both modes use the v2 binding and the blinded
+// wrap; the domain tag (`ocideck/device-binding/v2`) and the wrap-AAD structure
+// change are the bump. No compat shim: the Matrix path is dormant (no deployed
+// wire data), and OciDeck is local-first with no backend, so a version mismatch
+// is a user-visible "update required" rather than silent data loss. Matrix mode
+// carries `rot = 0` (it has power-gated ordered state, no presence-replay risk);
+// XMPP mode starts at 0 and increments on each key rotation. The directory's
+// rot-monotonicity enforcement is the XMPP key exchange's job (sub-plak 5), not
+// the crypto's — the crypto only signs and verifies rot.
+//
 // **Red lines** (do not cross without a new chain-review): no bespoke primitives,
 // no custom KDF beyond standard HKDF usage, no ratchet, one crypto file so review
 // has a single surface.
@@ -61,7 +96,7 @@ class CollabCryptoException implements Exception {
   const CollabCryptoException(this.reason);
 
   /// A short machine key (`bad-tag`, `unknown-epoch`, `sender-mismatch`,
-  /// `bad-signature`, `missing-signature`, `bad-wrap`, `wrong-recipient`).
+  /// `bad-signature`, `missing-signature`, `bad-wrap`).
   final String reason;
 
   @override
@@ -130,17 +165,21 @@ class CollabDeviceKeys {
   }
 
   /// The public half others need, with the X25519 key signed by the identity key
-  /// so a relay cannot swap it (§4.3, §5.3).
-  Future<DevicePublicKeys> publicKeys() async {
+  /// so a relay cannot swap it (§4.3, §5.3). [rot] is the signed rotation epoch
+  /// (§5.1): it is covered by the binding signature so a `rot` bump is
+  /// unforgeable. Matrix mode passes `0` (no presence-replay risk); XMPP mode
+  /// starts at `0` and increments on each key rotation.
+  Future<DevicePublicKeys> publicKeys({required int rot}) async {
     final identityPub = await _identity.extractPublicKey();
     final agreementPub = await _agreement.extractPublicKey();
-    final binding = _deviceBindingMessage(deviceId, agreementPub.bytes);
+    final binding = _deviceBindingMessage(deviceId, agreementPub.bytes, rot);
     final sig = await _ed25519.sign(binding, keyPair: _identity);
     return DevicePublicKeys(
       deviceId: deviceId,
       identityKey: identityPub.bytes,
       agreementKey: agreementPub.bytes,
       agreementSignature: sig.bytes,
+      rot: rot,
     );
   }
 }
@@ -192,20 +231,26 @@ Future<bool> verifyProvenance({
 }
 
 /// The public keys of a device, as published to a room. [agreementSignature] is
-/// the identity key's Ed25519 signature over the agreement key, binding the two
-/// (§4.3). Always [verifyBinding] before trusting the agreement key.
+/// the identity key's Ed25519 signature over the binding message — covering
+/// `(deviceId, agreementKey, rot)` (§5.1) — so a relay cannot swap the X25519
+/// key (§4.3) and a `rot` replay is unforgeable (N2). Always [verifyBinding]
+/// before trusting the agreement key.
 class DevicePublicKeys {
   const DevicePublicKeys({
     required this.deviceId,
     required this.identityKey,
     required this.agreementKey,
     required this.agreementSignature,
+    required this.rot,
   });
 
   final String deviceId;
   final List<int> identityKey; // Ed25519 public
   final List<int> agreementKey; // X25519 public
   final List<int> agreementSignature; // Ed25519 over the binding message
+  /// The signed rotation epoch (§5.1). Covered by [agreementSignature] so a
+  /// `rot` bump is unforgeable. Matrix mode uses `0`; XMPP mode increments.
+  final int rot;
 
   SimplePublicKey get _identityPub =>
       SimplePublicKey(identityKey, type: KeyPairType.ed25519);
@@ -213,9 +258,10 @@ class DevicePublicKeys {
       SimplePublicKey(agreementKey, type: KeyPairType.x25519);
 
   /// True when the agreement key is genuinely signed by the identity key for
-  /// **this** device id — the check that defeats a relay swapping the X25519 key.
+  /// **this** device id and [rot] — the check that defeats a relay swapping the
+  /// X25519 key (§4.3) and a `rot`-replay attack (N2, §5.1).
   Future<bool> verifyBinding() {
-    final binding = _deviceBindingMessage(deviceId, agreementKey);
+    final binding = _deviceBindingMessage(deviceId, agreementKey, rot);
     return _ed25519.verify(
       binding,
       signature: Signature(agreementSignature, publicKey: _identityPub),
@@ -227,6 +273,7 @@ class DevicePublicKeys {
     'ik': base64.encode(identityKey),
     'ak': base64.encode(agreementKey),
     'aksig': base64.encode(agreementSignature),
+    'rot': rot,
   };
 
   factory DevicePublicKeys.fromJson(Map<String, Object?> json) =>
@@ -235,6 +282,7 @@ class DevicePublicKeys {
         identityKey: _b64(json, 'ik'),
         agreementKey: _b64(json, 'ak'),
         agreementSignature: _b64(json, 'aksig'),
+        rot: _int(json, 'rot'),
       );
 }
 
@@ -285,11 +333,17 @@ class SealedEnvelope {
 /// [ephemeralKey] is a per-wrap X25519 public key, [ciphertext] is the wrapped
 /// key under the ECDH-derived wrap key, and [signature] is the authority's
 /// Ed25519 signature proving the wrap really came from it.
+///
+/// **Recipient-blinded (§5.1, N3).** The wire form carries no cleartext `to`/
+/// `from` device-ids — broadcasting a cleartext-addressed wrap to a MUC would
+/// expose the full admitted-device set, the authority's id, and rekey timing to
+/// every occupant. The recipient is bound cryptographically by ECDH: only the
+/// holder of the recipient's X25519 agreement key can derive the wrap key and
+/// verify the AEAD tag (trial-decrypt). The sender is bound by the signature,
+/// which the caller verifies against the directory-resolved sender identity.
 class WrappedKey {
   const WrappedKey({
     required this.epoch,
-    required this.recipientDevice,
-    required this.senderDevice,
     required this.ephemeralKey,
     required this.nonce,
     required this.ciphertext,
@@ -297,8 +351,6 @@ class WrappedKey {
   });
 
   final int epoch;
-  final String recipientDevice;
-  final String senderDevice;
   final List<int> ephemeralKey; // X25519 public, per wrap
   final List<int> nonce;
   final List<int> ciphertext; // wrapped session key with tag appended
@@ -306,8 +358,6 @@ class WrappedKey {
 
   Map<String, Object?> toJson() => {
     'epoch': epoch,
-    'to': recipientDevice,
-    'from': senderDevice,
     'epk': base64.encode(ephemeralKey),
     'nonce': base64.encode(nonce),
     'ct': base64.encode(ciphertext),
@@ -316,8 +366,6 @@ class WrappedKey {
 
   factory WrappedKey.fromJson(Map<String, Object?> json) => WrappedKey(
     epoch: _int(json, 'epoch'),
-    recipientDevice: _string(json, 'to'),
-    senderDevice: _string(json, 'from'),
     ephemeralKey: _b64(json, 'epk'),
     nonce: _b64(json, 'nonce'),
     ciphertext: _b64(json, 'ct'),
@@ -464,20 +512,15 @@ class CollabCrypto {
   }
 
   /// Member: install the epoch key unwrapped from [wrap], verifying it was sent
-  /// by [sender] to this device. Throws [CollabCryptoException] fail-closed on any
-  /// mismatch. Advances [currentEpoch] when the installed epoch is higher.
+  /// by [sender]. The wrap carries no cleartext recipient/sender (§5.1, N3) —
+  /// the sender is authenticated by the signature (verified against [sender]'s
+  /// identity key from the directory), and the recipient is bound by ECDH
+  /// (trial-decrypt: only the holder of the right agreement key can open the
+  /// box). Throws [CollabCryptoException] fail-closed on any failure — a bad
+  /// signature, a wrong sender, or a wrap that does not open for this device.
+  /// Advances [currentEpoch] when the installed epoch is higher.
   Future<void> installEpochKey(WrappedKey wrap, DevicePublicKeys sender) async {
-    if (wrap.recipientDevice != deviceId) {
-      throw const CollabCryptoException('wrong-recipient');
-    }
-    if (wrap.senderDevice != sender.deviceId) {
-      throw const CollabCryptoException('sender-mismatch');
-    }
-    final wrapAad = _wrapAad(
-      wrap.epoch,
-      wrap.recipientDevice,
-      wrap.senderDevice,
-    );
+    final wrapAad = _wrapAad(wrap.epoch);
     final signed = _concat([
       wrap.ephemeralKey,
       wrap.nonce,
@@ -524,7 +567,7 @@ class CollabCrypto {
       remotePublicKey: member._agreementPub,
     );
     final wrapKey = await _deriveWrapKey(shared, ephemeralPub.bytes);
-    final wrapAad = _wrapAad(epoch, member.deviceId, deviceId);
+    final wrapAad = _wrapAad(epoch);
     final nonce = _aead.newNonce();
     final box = await _aead.encrypt(
       _epochKeys[epoch]!,
@@ -539,8 +582,6 @@ class CollabCrypto {
     );
     return WrappedKey(
       epoch: epoch,
-      recipientDevice: member.deviceId,
-      senderDevice: deviceId,
       ephemeralKey: ephemeralPub.bytes,
       nonce: nonce,
       ciphertext: ciphertext,
@@ -613,6 +654,16 @@ class CollabCrypto {
 /// The AEAD associated data for a record: an unambiguous JSON encoding of the
 /// bound context. JSON (not raw concatenation) means a device id containing the
 /// delimiter cannot be smuggled across fields.
+///
+/// **Mode-AAD (§5.1, BW-1).** `room` is the mode discriminator: Matrix room ids
+/// (`!local:server`) and XMPP companion MUCs (`ocideck-<hash>@conference.<domain>`)
+/// are structurally disjoint, so a Matrix-mode record ciphertext already fails to
+/// open in XMPP mode (the AAD mismatch trips the AEAD tag). No explicit `mode`
+/// tag is needed today. **Open review question for the external crypto review:**
+/// if the review nonetheless demands a belt-and-suspenders `mode` tag, it must
+/// go in **both** `_recordAad` and `_wrapAad` — adding it to one but not the
+/// other would leave the wrap unbound to mode (NEW-3). Stated as reasoning +
+/// review question, not assumed.
 List<int> _recordAad(
   int version,
   String room,
@@ -621,21 +672,30 @@ List<int> _recordAad(
   String sender,
 ) => utf8.encode(jsonEncode(['rec', version, room, type, epoch, sender]));
 
-/// The AEAD associated data for a key wrap, binding it to one epoch and the
-/// exact sender/recipient pair.
-List<int> _wrapAad(int epoch, String recipient, String sender) =>
-    utf8.encode(jsonEncode(['wrap', epoch, recipient, sender]));
+/// The AEAD associated data for a key wrap, binding it to one epoch. The
+/// recipient is bound by ECDH (only the right agreement key derives the wrap
+/// key) and the sender by the signature — neither needs to appear in the AAD
+/// (§5.1, N3). **Mode-AAD (BW-1):** if the external crypto review demands a
+/// `mode` tag here too, add it in **both** AADs (see `_recordAad`).
+List<int> _wrapAad(int epoch) => utf8.encode(jsonEncode(['wrap', epoch]));
 
 /// The message the identity key signs to vouch for an agreement key, bound to the
-/// device id so a signed binding cannot be replayed under another device.
-List<int> _deviceBindingMessage(String deviceId, List<int> agreementKey) =>
-    utf8.encode(
-      jsonEncode([
-        'ocideck/device-binding/v1',
-        deviceId,
-        base64.encode(agreementKey),
-      ]),
-    );
+/// device id and the rotation epoch so a signed binding cannot be replayed under
+/// another device or with a forged `rot` (§5.1, N2). The tag `v2` marks the
+/// 3-field format; a v1 (2-field) verifier will not verify a v2 signature and
+/// vice versa — the coordinated wire-format bump (GEDEELDE-KERN-BESLISSING).
+List<int> _deviceBindingMessage(
+  String deviceId,
+  List<int> agreementKey,
+  int rot,
+) => utf8.encode(
+  jsonEncode([
+    'ocideck/device-binding/v2',
+    deviceId,
+    base64.encode(agreementKey),
+    rot,
+  ]),
+);
 
 Uint8List _concat(List<List<int>> parts) {
   var total = 0;

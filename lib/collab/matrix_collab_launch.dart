@@ -103,5 +103,5 @@ Future<_Device> _loadDevice(
     userId: account.userId,
     deviceId: account.deviceId,
   );
-  return _Device(CollabCrypto(keys), await keys.publicKeys());
+  return _Device(CollabCrypto(keys), await keys.publicKeys(rot: 0));
 }

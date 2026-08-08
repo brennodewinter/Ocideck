@@ -342,7 +342,7 @@ void main() {
         userId: '@u:hs.example',
         deviceId: 'DEV1',
       );
-      final originalKey = (await original.publicKeys()).identityKey;
+      final originalKey = (await original.publicKeys(rot: 0)).identityKey;
       await show(tester);
 
       await tester.tap(find.text('Identiteit herstellen'));
@@ -359,7 +359,7 @@ void main() {
         userId: '@u:hs.example',
       );
       final still = await seeds!.toDeviceKeys();
-      expect((await still.publicKeys()).identityKey, originalKey);
+      expect((await still.publicKeys(rot: 0)).identityKey, originalKey);
     });
 
     testWidgets('a mistyped key shows a plain checksum message', (

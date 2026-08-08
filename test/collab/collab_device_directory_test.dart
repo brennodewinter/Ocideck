@@ -34,6 +34,7 @@ void main() {
       identityKey: good.identityKey,
       agreementKey: other.agreementKey,
       agreementSignature: good.agreementSignature,
+      rot: good.rot,
     );
 
     final dir = CollabDeviceDirectory();
@@ -192,7 +193,7 @@ Future<DevicePublicKeys> _deviceKeys(String label, {int salt = 1}) async {
     ed25519Seed: _seed(label, salt),
     x25519Seed: _seed(label, salt + 1),
   );
-  return keys.publicKeys();
+  return keys.publicKeys(rot: 0);
 }
 
 Future<DevicePublicKeys> _deviceKeysWithSeeds(
@@ -205,7 +206,7 @@ Future<DevicePublicKeys> _deviceKeysWithSeeds(
     ed25519Seed: ed25519Seed,
     x25519Seed: x25519Seed,
   );
-  return keys.publicKeys();
+  return keys.publicKeys(rot: 0);
 }
 
 List<int> _seed(String label, int salt) {

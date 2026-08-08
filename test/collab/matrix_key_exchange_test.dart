@@ -89,6 +89,7 @@ void main() {
       identityKey: good.identityKey,
       agreementKey: other.agreementKey,
       agreementSignature: good.agreementSignature,
+      rot: good.rot,
     );
     final dir = CollabDeviceDirectory();
     await dir.ingest(peerAddress: '@owner:hs.example', keys: swapped);
@@ -189,7 +190,7 @@ class _Party {
     await client.login(user: label, password: password);
     final keys = await _device(label);
     final crypto = CollabCrypto(keys);
-    final publicKeys = await keys.publicKeys();
+    final publicKeys = await keys.publicKeys(rot: 0);
     final directory = CollabDeviceDirectory();
     final exchange = MatrixKeyExchange(
       client: client,
@@ -217,7 +218,7 @@ class _Party {
     );
   }
 
-  Future<DevicePublicKeys> publicKeysObject() => keys.publicKeys();
+  Future<DevicePublicKeys> publicKeysObject() => keys.publicKeys(rot: 0);
 
   void startSession(Deck deck, {required bool isAuthority}) {
     _session = CollabSession(

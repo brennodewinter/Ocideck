@@ -73,8 +73,13 @@ class MatrixKeyExchange {
   Future<void> distributeEpoch(List<DevicePublicKeys> members) async {
     final result = await _e2ee.rekey(members);
     _keyed.clear(); // a new epoch: everyone must be (re)keyed
-    for (final wrap in result.wraps) {
-      if (await _sendWrap(wrap)) _keyed.add(wrap.recipientDevice);
+    // Wraps are in the same order as [members] (CollabCrypto.rekey preserves
+    // order); the wrap itself carries no cleartext recipient (§5.1 N3), so we
+    // address by the member we asked for, not by a field on the wrap.
+    for (var i = 0; i < members.length; i++) {
+      if (await _sendWrap(result.wraps[i], members[i].deviceId)) {
+        _keyed.add(members[i].deviceId);
+      }
     }
   }
 
@@ -87,22 +92,24 @@ class MatrixKeyExchange {
       final member = directory.resolve(deviceId);
       if (member == null) continue;
       final wrap = await _e2ee.wrapEpochTo(member);
-      if (await _sendWrap(wrap)) _keyed.add(deviceId);
+      if (await _sendWrap(wrap, deviceId)) _keyed.add(deviceId);
     }
   }
 
   /// Send one key-share to its recipient's user; returns whether it was sent
   /// (false when the recipient's user id is not yet known — retried next round).
-  Future<bool> _sendWrap(WrappedKey wrap) async {
-    final userId = directory.addressOf(wrap.recipientDevice);
+  /// [recipientDeviceId] is the device id to address the to-device message to —
+  /// the wrap itself carries no cleartext recipient (§5.1 N3).
+  Future<bool> _sendWrap(WrappedKey wrap, String recipientDeviceId) async {
+    final userId = directory.addressOf(recipientDeviceId);
     if (userId == null) {
-      logWarning('collab.matrix.keyshare.unaddressable', wrap.recipientDevice);
+      logWarning('collab.matrix.keyshare.unaddressable', recipientDeviceId);
       return false;
     }
     await _matrix.sendToDevice(
       type: keyshareType,
       messages: {
-        userId: {wrap.recipientDevice: wrap.toJson()},
+        userId: {recipientDeviceId: wrap.toJson()},
       },
     );
     return true;
@@ -131,6 +138,12 @@ class MatrixKeyExchange {
   /// Wire to `MatrixRelayTransport.onToDevice`. Installs an epoch key from a
   /// key-share, verifying it against the sender's **directory-held** identity —
   /// never keys carried in the (relay-deliverable) message itself.
+  ///
+  /// The blinded wrap (§5.1 N3) carries no cleartext sender device-id, so the
+  /// sender is resolved from the to-device event's Matrix user id: the directory
+  /// supplies the candidate devices for that user, and `installEpochKey`
+  /// trial-verifies the signature against each — only the genuine sender's key
+  /// passes.
   Future<void> handleToDevice(MatrixToDeviceEvent event) async {
     if (event.type != keyshareType) return;
     final WrappedKey wrap;
@@ -140,15 +153,19 @@ class MatrixKeyExchange {
       logWarning('collab.matrix.keyshare.parse', e);
       return;
     }
-    final sender = directory.resolve(wrap.senderDevice);
-    if (sender == null) {
-      logWarning('collab.matrix.keyshare.unknownSender', wrap.senderDevice);
+    final candidates = directory.devicesForAddress(event.sender).toList();
+    if (candidates.isEmpty) {
+      logWarning('collab.matrix.keyshare.unknownSender', event.sender);
       return;
     }
-    try {
-      await _e2ee.installEpochKey(wrap, sender);
-    } on CollabCryptoException catch (e) {
-      logWarning('collab.matrix.keyshare.install', e);
+    for (final sender in candidates) {
+      try {
+        await _e2ee.installEpochKey(wrap, sender);
+        return; // installed successfully
+      } on CollabCryptoException {
+        continue; // wrong sender device or bad wrap — try next candidate
+      }
     }
+    logWarning('collab.matrix.keyshare.noMatchingDevice', event.sender);
   }
 }
