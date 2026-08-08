@@ -291,7 +291,7 @@ anyone who can enumerate the server's rooms, whereas the one-way hash is a clien
 guarantee that needs no Prosody configuration. So: `<naam>.ocideck` is how we *talk*
 about the channel; `ocideck-<hash>` is how clients *find* it.
 
-### 5.2 Chat: end-to-end encryption is orthogonal to the room (open at delivery)
+### 5.2 Chat: end-to-end encryption is orthogonal to the room (both modes explicitly supported)
 
 OciDeck's chat is sealed and signed at the app layer (`collab_crypto`; see
 `matrix_chat.dart` for the Matrix-mode precedent): each message is encrypted to the
@@ -311,12 +311,13 @@ That turns the real question from "encrypted or not" into **who may read it**:
 These are mutually exclusive by definition: "E2E *and* readable by a vanilla browser
 client" is a contradiction, not a missing feature.
 
-**Open at delivery.** The default is E2E, OciDeck-only chat in the companion room
-(sealed `nl.ocideck.chat`, the current model). If interop chat with non-OciDeck
-participants is later wanted, that thread is deliberately plaintext in the conference
-MUC — an interop choice, not a technical limit — and the two can coexist (an E2E
-OciDeck thread beside the plain Jitsi chat). Decide this when the XMPP
-`CollabTransport` chat path is built.
+**Both modes are explicitly supported — only the default is deferred.** The current
+model is E2E, OciDeck-only chat in the companion room (sealed `nl.ocideck.chat`).
+Interop chat with non-OciDeck participants is equally provided for: that thread is
+deliberately plaintext in the conference MUC — an interop choice, not a technical
+limit — and the two can coexist (an E2E OciDeck thread beside the plain Jitsi chat).
+Only *which* one ships as the default is decided when the XMPP `CollabTransport` chat
+path is built.
 
 ---
 
