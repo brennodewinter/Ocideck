@@ -732,6 +732,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Kapítulo nobo riba un página nobo',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Laga kada kapítulo (un título H1) kuminsá riba un página nobo ora di eksportá i imprimí.',
   'Pagina-einde': 'Salto di página',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Ningun (teksto simpel)',

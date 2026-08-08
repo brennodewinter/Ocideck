@@ -913,6 +913,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Nieuw hoofdstuk op een nieuwe pagina': 'New chapter on a new page',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Start each chapter (an H1 heading) on a new page when exporting and printing.',
   'Pagina-einde': 'Page break',
   'Stijl': 'Style',
   'Geen (platte tekst)': 'None (plain text)',

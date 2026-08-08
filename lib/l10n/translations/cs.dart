@@ -1776,6 +1776,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Nová kapitola na nové stránce',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Nechte každou kapitolu (nadpis H1) začínat na nové stránce při exportu a tisku.',
   'Pagina-einde': 'Konec stránky',
   'Stijl': 'Styl',
   'Geen (platte tekst)': 'Žádné (prostý text)',

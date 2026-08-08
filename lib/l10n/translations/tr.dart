@@ -2750,6 +2750,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Yeni bölüm yeni sayfada',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Dışa aktarırken ve yazdırırken her bölümü (bir H1 başlığı) yeni bir sayfada başlat.',
   'Pagina-einde': 'Sayfa sonu',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Yok (düz metin)',

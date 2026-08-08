@@ -1772,6 +1772,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Nyt kapitel på en ny side',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Lad hvert kapitel (en H1-overskrift) begynde på en ny side ved eksport og udskrivning.',
   'Pagina-einde': 'Sideskift',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Ingen (almindelig tekst)',

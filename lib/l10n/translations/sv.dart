@@ -1772,6 +1772,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Nytt kapitel på en ny sida',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Låt varje kapitel (en H1-rubrik) börja på en ny sida vid export och utskrift.',
   'Pagina-einde': 'Sidbrytning',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'Ingen (vanlig text)',

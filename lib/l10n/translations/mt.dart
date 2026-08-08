@@ -1795,6 +1795,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Nieuw hoofdstuk op een nieuwe pagina': 'Kapitlu ġdid f\'paġna ġdida',
+  'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
+      'Ħalli kull kapitlu (intestatura H1) jibda f\'paġna ġdida meta tesporta u tipprintja.',
   'Pagina-einde': 'Qsim tal-paġna',
   'Stijl': 'Stil',
   'Geen (platte tekst)': 'L-ebda (test sempliċi)',
