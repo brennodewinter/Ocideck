@@ -53,7 +53,9 @@ void main() {
     const scheme = ColorScheme.light();
     final editorTheme = MarkdownEditorTheme.documentSurface(scheme: scheme);
     final controller = QuillController(
-      document: MarkdownQuillCodec.documentFromMarkdown('- Punt een\n- Punt twee'),
+      document: MarkdownQuillCodec.documentFromMarkdown(
+        '- Punt een\n- Punt twee',
+      ),
       selection: const TextSelection.collapsed(offset: 0),
     );
     addTearDown(controller.dispose);
