@@ -583,9 +583,8 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
       contentPadding: EdgeInsets.zero,
       dense: true,
       value: settings.documentChapterPageBreak,
-      onChanged: (v) => ref
-          .read(settingsProvider.notifier)
-          .setDocumentChapterPageBreak(v),
+      onChanged: (v) =>
+          ref.read(settingsProvider.notifier).setDocumentChapterPageBreak(v),
       title: Text(
         l10n.d('Nieuw hoofdstuk op een nieuwe pagina'),
         style: const TextStyle(fontSize: 13),

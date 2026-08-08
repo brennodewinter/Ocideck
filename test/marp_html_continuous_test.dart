@@ -66,7 +66,11 @@ void main() {
 
     test('chapterPageBreak spuit de hoofdstuk-print-CSS in', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);
-      final on = await service.build(_md, continuous: true, chapterPageBreak: true);
+      final on = await service.build(
+        _md,
+        continuous: true,
+        chapterPageBreak: true,
+      );
       // Elke H1 breekt in print naar een nieuw blad; de eerste niet (geen leeg blad).
       expect(on, contains('.document h1{page-break-before:always'));
       expect(on, contains('.document h1:first-child{page-break-before:auto'));

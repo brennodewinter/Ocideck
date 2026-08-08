@@ -59,7 +59,10 @@ String markdownInlineToLatex(String markdown) {
 }
 
 class _LatexNodeVisitor implements md.NodeVisitor {
-  _LatexNodeVisitor({this._mathBlocks = const {}, this.chapterPageBreak = false});
+  _LatexNodeVisitor({
+    this._mathBlocks = const {},
+    this.chapterPageBreak = false,
+  });
 
   final StringBuffer output = StringBuffer();
 
