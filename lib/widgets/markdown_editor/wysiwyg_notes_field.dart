@@ -7,7 +7,27 @@ import '../../utils/markdown_quill_codec.dart';
 import 'markdown_editor_theme.dart';
 import 'table_embed_builder.dart';
 
-DefaultStyles _defaultStylesFor(MarkdownEditorTheme theme) {
+/// The Quill [DefaultStyles] for the document/notes WYSIWYG surface, derived
+/// entirely from [theme] so every block honours the app theme.
+///
+/// Every block type we render **must** be listed here. Quill merges these over
+/// its own `DefaultStyles.getInstance(context)`, so any field left unset falls
+/// back to that ambient default — and the ambient default colours text from the
+/// surrounding `DefaultTextStyle`, which on the document surface reads as a
+/// brand/link-like colour in the light theme (EU-blue under the Europa theme).
+/// That is exactly how bullet-list items once rendered blue while headings and
+/// prose stayed on-surface: `lists` was simply absent here.
+///
+/// A list has **two** coloured parts and Quill colours them from **two** style
+/// fields: the item text follows `lists.style`, but the marker (bullet dot /
+/// number) follows `leading.style` — the leading builder does
+/// `leading.style.copyWith(color: fontColor)` and `fontColor` is null unless the
+/// line carries an explicit colour attribute, so `copyWith` keeps
+/// `leading.style.color`. Setting `lists` alone fixed the text but left the
+/// marker on the ambient blue; both must be pinned to [MarkdownEditorTheme.bodyStyle]
+/// so item text *and* marker match a paragraph in light and dark.
+@visibleForTesting
+DefaultStyles defaultStylesFor(MarkdownEditorTheme theme) {
   final body = theme.bodyStyle;
   DefaultTextBlockStyle block(TextStyle style) => DefaultTextBlockStyle(
     style,
@@ -19,6 +39,27 @@ DefaultStyles _defaultStylesFor(MarkdownEditorTheme theme) {
 
   return DefaultStyles(
     paragraph: block(body),
+    // Bullet/numbered list **item text**: the body colour, not Quill's ambient
+    // default (a link/brand colour in the light theme). Spacing mirrors Quill's
+    // own list defaults.
+    lists: DefaultListBlockStyle(
+      body,
+      HorizontalSpacing.zero,
+      const VerticalSpacing(6, 0),
+      const VerticalSpacing(0, 6),
+      null,
+      null,
+    ),
+    // The list **marker** (bullet dot / number) is coloured from `leading`, not
+    // `lists`. Pin it to the body colour too, else the dot stays on the ambient
+    // blue while its own item text is on-surface (visible under Europa).
+    leading: DefaultTextBlockStyle(
+      body,
+      HorizontalSpacing.zero,
+      VerticalSpacing.zero,
+      VerticalSpacing.zero,
+      null,
+    ),
     h1: block(
       body.copyWith(fontSize: theme.fontSize + 8, fontWeight: FontWeight.bold),
     ),
@@ -140,7 +181,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
               expands: widget.expand,
               padding: widget.contentPadding,
               placeholder: widget.hintText,
-              customStyles: _defaultStylesFor(widget.editorTheme),
+              customStyles: defaultStylesFor(widget.editorTheme),
               // GFM-tabellen komen als `x-embed-table`-embed binnen (zie
               // MarkdownQuillCodec) en worden hier als gerenderde, bewerkbare
               // tabel getekend i.p.v. losse woorden.
