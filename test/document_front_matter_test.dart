@@ -10,20 +10,26 @@ void main() {
       expect(s.body, src);
     });
 
-    test('leading --- without a closing fence is a horizontal rule, not fm', () {
-      const src = '---\n\nEen scheidingslijn, geen front matter.';
-      final s = splitDocumentFrontMatter(src);
-      expect(s.block, '');
-      expect(s.body, src);
-    });
+    test(
+      'leading --- without a closing fence is a horizontal rule, not fm',
+      () {
+        const src = '---\n\nEen scheidingslijn, geen front matter.';
+        final s = splitDocumentFrontMatter(src);
+        expect(s.block, '');
+        expect(s.body, src);
+      },
+    );
 
-    test('valid block splits off, trailing blank line folded into the block', () {
-      const src = '---\ntheme: Europa\n---\n\n# Titel\n\nTekst.';
-      final s = splitDocumentFrontMatter(src);
-      expect(s.block, '---\ntheme: Europa\n---\n\n');
-      expect(s.body, '# Titel\n\nTekst.');
-      expect(s.block + s.body, src);
-    });
+    test(
+      'valid block splits off, trailing blank line folded into the block',
+      () {
+        const src = '---\ntheme: Europa\n---\n\n# Titel\n\nTekst.';
+        final s = splitDocumentFrontMatter(src);
+        expect(s.block, '---\ntheme: Europa\n---\n\n');
+        expect(s.body, '# Titel\n\nTekst.');
+        expect(s.block + s.body, src);
+      },
+    );
 
     test('CRLF block splits and reassembles byte-exact', () {
       const src = '---\r\ntheme: Europa\r\n---\r\n\r\n# Titel\r\n';

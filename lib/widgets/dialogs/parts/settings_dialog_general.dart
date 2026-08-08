@@ -104,14 +104,13 @@ extension _SettingsGeneralTab on _SettingsDialogState {
             isExpanded: true,
             isDense: true,
             items: [
-              DropdownMenuItem(
-                child: Text(l10n.d('Geen (platte tekst)')),
-              ),
+              DropdownMenuItem(child: Text(l10n.d('Geen (platte tekst)'))),
               for (final name in profileNames)
                 DropdownMenuItem(value: name, child: Text(name)),
             ],
-            onChanged: (name) =>
-                ref.read(settingsProvider.notifier).setDocumentDefaultStyle(name),
+            onChanged: (name) => ref
+                .read(settingsProvider.notifier)
+                .setDocumentDefaultStyle(name),
           ),
         ),
       ),
@@ -122,8 +121,9 @@ extension _SettingsGeneralTab on _SettingsDialogState {
         value: settings.documentStyleEnforced,
         onChanged: defaultStyle == null
             ? null
-            : (v) =>
-                  ref.read(settingsProvider.notifier).setDocumentStyleEnforced(v),
+            : (v) => ref
+                  .read(settingsProvider.notifier)
+                  .setDocumentStyleEnforced(v),
         title: Text(
           l10n.d('Deze stijl afdwingen'),
           style: const TextStyle(fontSize: 13),

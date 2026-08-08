@@ -262,8 +262,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           ? selectedAppearance
           : 'Europa',
       documentDefaultStyle: prefs.getString('documentDefaultStyle'),
-      documentStyleEnforced:
-          prefs.getBool('documentStyleEnforced') ?? false,
+      documentStyleEnforced: prefs.getBool('documentStyleEnforced') ?? false,
       cockpitColorSchemes: cockpit.schemes,
       selectedCockpitColorSchemeName: cockpit.selectedName,
       cockpitVisualStyle: cockpit.visualStyle,

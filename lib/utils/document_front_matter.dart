@@ -99,7 +99,9 @@ String withDocumentStyleName(String source, String? name) {
 
   final value = _yamlScalar(trimmed);
   if (split.block.isEmpty) {
-    return '$_fence$eol' 'theme: $value$eol' '$_fence$eol$eol${split.body}';
+    return '$_fence$eol'
+        'theme: $value$eol'
+        '$_fence$eol$eol${split.body}';
   }
   return _setThemeInBlock(split.block, value, eol) + split.body;
 }

@@ -550,9 +550,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                 controller: _controller,
                 editorFocus: _editorFocus,
                 docTheme: _docTheme(theme),
-                styleNames: [
-                  for (final p in settings.themeProfiles) p.name,
-                ],
+                styleNames: [for (final p in settings.themeProfiles) p.name],
                 currentStyleName: docStyleName,
                 styleEnforced: settings.documentStyleEnforced,
                 enforcedStyleName: settings.documentStyleEnforced
