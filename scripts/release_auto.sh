@@ -185,8 +185,18 @@ read_token() {
 
 api() { # api METHOD PATH [curl-args…]
   local method="$1" path="$2"; shift 2
-  curl -sf -X "$method" "$FORGE_API/repos/$REPO_SLUG$path" \
-    -H "Authorization: token $TOKEN" "$@"
+  # Alleen idempotente GET's herproberen bij een transiënte curl-fout (netwerkhik,
+  # 5xx): een losse hik hoort geen release af te breken. POST/DELETE (merge, dispatch,
+  # upload) zijn niet idempotent en worden NOOIT herhaald.
+  local tries=1 i rc=0
+  [ "$method" = "GET" ] && tries=4
+  for i in $(seq 1 "$tries"); do
+    curl -sf -X "$method" "$FORGE_API/repos/$REPO_SLUG$path" \
+      -H "Authorization: token $TOKEN" "$@" && return 0
+    rc=$?
+    [ "$i" -lt "$tries" ] && sleep "$(( i * 2 ))"
+  done
+  return "$rc"
 }
 
 mark() { if [ "$1" -eq 1 ]; then printf '   [x] %s\n' "$2"; else printf '   [ ] %s\n' "$2"; fi; }
@@ -538,8 +548,15 @@ phase3() {
   printf '%s\n' "$MINISIGN_PW" \
     | make sign-release SHA256SUMS="$TMP/SHA256SUMS" >/dev/null || true
   [ -f "$TMP/SHA256SUMS.minisig" ] || die "minisign leverde geen handtekening — controleer het sleutelwachtwoord."
-  local rid
+  local rid old_asset
   rid="$(api GET "/releases/tags/$TAG" | jq -r '.id')"
+  # Idempotent: hing er al een SHA256SUMS.minisig (van een eerdere --resume-poging),
+  # verwijder die eerst — anders geeft de upload een 409 of een duplicaat.
+  old_asset="$(api GET "/releases/$rid/assets" 2>/dev/null \
+    | jq -r '.[] | select(.name=="SHA256SUMS.minisig") | .id' 2>/dev/null | head -1 || true)"
+  if [ -n "$old_asset" ]; then
+    api DELETE "/releases/$rid/assets/$old_asset" -o /dev/null || true
+  fi
   api POST "/releases/$rid/assets?name=SHA256SUMS.minisig" \
     -F "attachment=@$TMP/SHA256SUMS.minisig" -o /dev/null
   log "SHA256SUMS.minisig aangehangen aan release $TAG."
@@ -728,6 +745,14 @@ tag_and_push() { # tag_and_push MERGE_SHA
     || die "kon origin niet fetchen vóór het taggen — is de forge bereikbaar? Hervat later met: scripts/release_auto.sh --resume $TAG"
   git cat-file -e "$mergesha^{commit}" 2>/dev/null \
     || die "merge-commit $mergesha ontbreekt lokaal na 'git fetch origin' — controleer PR en origin. Hervat met: scripts/release_auto.sh --resume $TAG"
+  # Zekerheid dat we de JUISTE commit taggen: de merge-commit moet de nieuwe versie
+  # dragen. Zo tagt een verkeerd merge_commit_sha (bv. een andere PR) nooit een
+  # willekeurige commit als deze release.
+  local tagged_version
+  tagged_version="$(git show "$mergesha:pubspec.yaml" 2>/dev/null \
+    | sed -n 's/^version:[[:space:]]*\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p')"
+  [ "$tagged_version" = "$NEW_VERSION" ] \
+    || die "merge-commit $mergesha draagt versie '${tagged_version:-onbekend}', niet $NEW_VERSION — dit is niet de release-commit. Niets getagd; controleer de PR."
   section "Fase 2 — tag $TAG pushen (de publieke release-keten start hierna)"
   log "Ctrl-C binnen 8 seconden om af te breken (hierna is de tag onherroepelijk)."
   for i in 8 7 6 5 4 3 2 1; do printf '\r   %s… ' "$i"; sleep 1; done; printf '\r          \n'
