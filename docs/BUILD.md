@@ -568,8 +568,8 @@ next SemVer level (patch/minor/major; there is no fourth digit, the project
 promises strict three-part SemVer) and one prompt takes the minisign key
 password — and then runs everything without another question, through the public
 tag push, the signing and the web deploy. The password is held only in memory
-and fed to `minisign` via `expect`; the macOS notarisation leans on this Mac's
-keychain items and asks for nothing.
+and fed to `minisign` on standard input; the macOS notarisation leans on this
+Mac's keychain items and asks for nothing.
 
 Right after the password, a **pre-flight** checks everything the later,
 irreversible steps will need — the forge token, the `mirror` remote, the deploy
@@ -588,8 +588,11 @@ own commit on the release branch; then the four-place version bump, `make sbom`,
 verification and the `/Applications` swap; **Phase 2** branch → *if the scanners
 were bumped, publish a new scans image first* (dispatch `ci-image-scans` on the
 branch and wait, so `scans.yml`'s new image tag exists before the PR scan runs) →
-PR → wait for the gate → merge → tag → push to origin **and** mirror → poll the
-release CI until every job is done; **Phase 3** `make deploy-web` *first* — the web
+PR → wait for the gate (up to `OCIDECK_GATE_TIMEOUT_MIN`, default 75 min: `linux-gate`
+runs the full suite per-PR on a capacity-1 serial runner and can queue, so the wait
+prints progress rather than giving up at 30) → merge → tag → push to origin **and**
+mirror → poll the release CI until every job is done; **Phase 3** `make deploy-web`
+*first* — the web
 demo depends only on the web bundle, so a signing or platform failure never leaves
 it on the old version — then sign `SHA256SUMS`, attach `SHA256SUMS.minisig`
 (waiting up to a few minutes for `publiceren` to attach it rather than dying on a
@@ -602,19 +605,29 @@ or commit — dispatch `ci-image-scans` (or `make ci-image-scans-publish`) and o
 a PR yourself, exactly as `release_auto.sh` does inside a release. A newer scanner
 can surface new findings, so the scan gate may still turn red and need addressing.
 
+Restartable: if the chain breaks — a gate time-out, a network blip, a failed
+upstream CI job — rerun `scripts/release_auto.sh --resume vX.Y.Z` and it picks up
+where it left off. It reads what already exists on the forge — tag pushed? the
+release PR merged, open, or only a branch? — and does *only* what remains,
+idempotently; the expensive Phase 1 (build/notarize) is never redone. So a pre-tag
+stall (the usual case — the gate simply took longer than the wait) resumes at the
+gate/merge; a post-tag stall (Phase 3 signing/deploy, or an upstream job) resumes
+at Phase 3. The PR is found by title, so it is still located after the branch is
+deleted on merge, and the tag is placed on the PR's exact merge commit.
+
 Fail-safe: `set -Eeuo pipefail` plus an `ERR` trap name *which* step failed on
 *which* line, and whether the tag was already pushed — before the push nothing
-went out and the release branch is cleaned up. After it the tag stays put: if the
-failure was in Phase 3 (signing/deploy) or an upstream CI job, finish the **same**
-tag with `--resume vX.Y.Z` (skips phases 1–2, re-runs only the pre-flight and
-Phase 3); only when a released artifact is itself wrong do you cut the next patch
-tag — never a re-tag (that degrades the mirror Windows release to a draft and
-leaves `windows-ophalen` waiting forever). `--dry-run` shows the plan and the
-outdatedness gate without mutating anything; `--print-version LEVEL` prints just
-the computed tag (the hermetic guard-arithmetic that
-`test/release_auto_version_test.dart` pins against the canonical rule). This is
-the fully-unattended increment the guided `make release` deliberately left to a
-proven follow-up.
+went out and the local release branch is cleaned up (rerun fresh, or `--resume`
+if the PR was already open). After the push the tag stays put: finish the **same**
+tag with `--resume vX.Y.Z`; only when a released artifact is itself wrong do you
+cut the next patch tag — never a re-tag (that degrades the mirror Windows release
+to a draft and leaves `windows-ophalen` waiting forever). `--dry-run` shows the
+plan and the outdatedness gate without mutating anything; `--print-version LEVEL`
+prints just the computed tag (the hermetic guard-arithmetic that
+`test/release_auto_version_test.dart` pins against the canonical rule). A fresh run
+bases the next version on `origin/main`, so re-running from a leftover release
+branch cannot miscompute the bump. This is the fully-unattended increment the
+guided `make release` deliberately left to a proven follow-up.
 
 ### The tag-driven chain
 

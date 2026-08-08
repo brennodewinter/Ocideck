@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Eén onbewaakte release van OciDeck — de automatiseringsslag van #1161.
+# Eén onbewaakte, HERSTARTBARE release van OciDeck — de automatiseringsslag van #1161.
 #
 # scripts/release.sh (iteratie 1, PR #1205) landde de monotone tag-guard + fase 1
 # en PRINTTE de onomkeerbare fase 2-3 als handleiding. Dít script is die volgende
@@ -36,15 +36,23 @@
 #     De webdemo gaat bewust EERST: ze hangt alleen aan de web-bundel, dus een
 #     teken- of platformfout laat de demo nooit op de oude versie staan.
 #
+# HERSTARTBAAR (--resume vX.Y.Z): breekt de keten af — een time-out op de poort,
+# een netwerkhik of een gefaalde upstream CI-job — dan hervat je met
+# `scripts/release_auto.sh --resume vX.Y.Z` vanaf precies het punt waar het bleef.
+# Het script kijkt wat er al op de forge staat (tag? gemergede PR? open PR? branch?)
+# en doet alleen wat nog resteert; de dure fase 1 (bouwen/notariseren) wordt niet
+# overgedaan. Elke fase-2-stap is idempotent, dus opnieuw draaien is veilig.
+#
 # FAIL-SAFE (elke faalstap stopt de keten, met de juiste informatie):
 #   * `set -Eeuo pipefail` + een ERR-trap melden WELKE stap op WELKE regel faalde.
-#   * Faalt er iets VÓÓR de tag-push, dan is er niets naar buiten gegaan: de
-#     release-branch wordt opgeruimd en je kunt na de fix veilig opnieuw draaien.
-#   * Faalt er iets NÁ de tag-push, dan staat de tag vast. Was het fase 3
-#     (tekenen/deploy) of een upstream CI-job, herstel dat en maak DEZELFDE tag af
-#     met `--resume vX.Y.Z`. Alleen als een uitgebracht artefact zélf fout is snijd
-#     je de VOLGENDE patch-tag; her-tag nooit (dat degradeert de mirror-Windows-
-#     release tot draft en laat `windows-ophalen` eeuwig wachten).
+#   * Faalt er iets VÓÓR de tag-push, dan is er niets naar buiten gegaan: de lokale
+#     release-branch wordt opgeruimd. Repareer en draai opnieuw — vers als fase 1
+#     nog niet af was, of `--resume vX.Y.Z` als de PR al open stond.
+#   * Faalt er iets NÁ de tag-push, dan staat de tag vast. Herstel de oorzaak en
+#     maak DEZELFDE tag af met `--resume vX.Y.Z`. Alleen als een uitgebracht
+#     artefact zélf fout is snijd je de VOLGENDE patch-tag; her-tag nooit (dat
+#     degradeert de mirror-Windows-release tot draft en laat `windows-ophalen`
+#     eeuwig wachten).
 #
 # --dry-run doet alle read-only stappen (versie bepalen, verouderingsgate,
 # CHANGELOG-preview, plan tonen) en STOPT vóór elke mutatie.
@@ -54,7 +62,7 @@
 #   scripts/release_auto.sh patch|minor|major    # niveau meegeven, sla het menu over
 #   scripts/release_auto.sh --dry-run [niveau]   # toon het plan, muteer niets
 #   scripts/release_auto.sh --skip-install [..]  # sla /Applications-vervanging over
-#   scripts/release_auto.sh --resume vX.Y.Z      # al-gepushte tag: alleen fase 3 afmaken
+#   scripts/release_auto.sh --resume vX.Y.Z      # hervat een onderbroken release
 
 set -Eeuo pipefail
 
@@ -70,6 +78,10 @@ APPLICATIONS_DIR="${OCIDECK_APPLICATIONS_DIR:-/Applications}"
 # Zelfde standaard-doel als scripts/deploy_web.sh; de pre-flight toetst dat het
 # bereikbaar is vóór de tag, zodat deploy-web niet ná de tag strandt.
 DEPLOY_HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@braniebananie.nl}"
+# De poort-wachttijd (minuten). Ruim boven linux-gate (~27 min, capacity-1
+# serial-runner, kan in de wachtrij staan); de oude 30 min liep daar precies op
+# stuk. Zie wait_gate. Overschrijfbaar via OCIDECK_GATE_TIMEOUT_MIN.
+GATE_TIMEOUT_MIN="${OCIDECK_GATE_TIMEOUT_MIN:-75}"
 
 DRY_RUN=0
 SKIP_INSTALL=0
@@ -88,7 +100,11 @@ STEP="init"
 TAG_PUSHED=0
 BRANCH=""
 cleanup_branch() {
+  # BRANCH wordt vroeg gezet (voor --resume), dus ruim alleen op wat fase 1 écht
+  # lokaal aanmaakte — anders zou een fout tijdens de pre-flight ongevraagd van
+  # branch wisselen.
   [ -n "$BRANCH" ] || return 0
+  git rev-parse -q --verify "refs/heads/$BRANCH" >/dev/null 2>&1 || return 0
   git checkout --quiet - 2>/dev/null || true
   git branch -D "$BRANCH" >/dev/null 2>&1 || true
 }
@@ -120,16 +136,17 @@ for arg in "$@"; do
     patch|minor|major) LEVEL="$arg" ;;
     v[0-9]*.[0-9]*.[0-9]*) RESUME_TAG="$arg" ;;
     -h|--help)
-      sed -n '2,57p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
+      sed -n '2,65p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
       exit 0 ;;
     *) die "onbekend argument: $arg (verwacht: --dry-run, --skip-install, --resume vX.Y.Z, patch, minor of major)" ;;
   esac
 done
 
-# --resume maakt een al-gepushte tag alleen fase 3 af (tekenen + deploy-web).
-# Directe aanleiding: struikelt de keten ná de tag-push (bv. een upstream
-# CI-job die faalde), dan staat de tag vast en is her-taggen verboden — de
-# herstelroute is DEZELFDE tag afmaken, niet de volgende snijden.
+# --resume hervat een onderbroken release vanaf het punt waar het bleef. Het kijkt
+# wat er al op de forge staat (tag, gemergede PR, open PR of branch) en doet alleen
+# de rest; fase 1 (bouwen/notariseren) wordt niet overgedaan. Struikelt de keten ná
+# de tag-push, dan staat de tag vast en is her-taggen verboden — ook dan is de
+# herstelroute DEZELFDE tag met --resume afmaken, niet de volgende snijden.
 if [ "$RESUME" -eq 1 ] && [ -z "$RESUME_TAG" ]; then
   die "geef de tag mee: --resume vX.Y.Z"
 fi
@@ -166,6 +183,19 @@ CUR_VERSION="$(sed -n 's/^version:[[:space:]]*\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p'
 CUR_BUILD="$(sed -n 's/^version:[[:space:]]*[0-9]*\.[0-9]*\.[0-9]*+\([0-9]*\).*/\1/p' pubspec.yaml)"
 [ -n "$CUR_VERSION" ] || die "kon version: niet uit pubspec.yaml lezen."
 [ -n "$CUR_BUILD" ] || CUR_BUILD=0
+
+# --print-version blijft hermetisch op de lokale pubspec (zie de guard-test). Een
+# échte, verse run baseert de bump op origin/main: sta je nog op een oude,
+# al-gebumpte release-branch, dan zou de menu-rekenkunde de volgende versie fout
+# berekenen (bv. 0.4.0→0.5.0 terwijl 0.4.0 nog niet uit is). Vang dat vóór het menu.
+if [ "$PRINT_VERSION" -eq 0 ] && [ -z "$RESUME_TAG" ]; then
+  git fetch origin --quiet 2>/dev/null || true
+  MAIN_VERSION="$(git show origin/main:pubspec.yaml 2>/dev/null \
+    | sed -n 's/^version:[[:space:]]*\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p')"
+  if [ -n "$MAIN_VERSION" ] && [ "$MAIN_VERSION" != "$CUR_VERSION" ]; then
+    die "pubspec staat op $CUR_VERSION maar origin/main op $MAIN_VERSION — waarschijnlijk sta je nog op een oude release-branch. Ga naar main ('git checkout main && git pull') voor een verse release, of hervat de lopende met 'scripts/release_auto.sh --resume v$CUR_VERSION'."
+  fi
+fi
 
 IFS='.' read -r MAJ MIN PAT <<<"$CUR_VERSION"
 PATCH_V="$MAJ.$MIN.$((PAT + 1))"
@@ -217,11 +247,12 @@ if [ "$PRINT_VERSION" -eq 1 ]; then
   exit 0
 fi
 
-if [ -n "$RESUME_TAG" ]; then
-  # In resume MOET de tag al bestaan én gepusht zijn; anders is er niets af te maken.
-  git ls-remote --exit-code origin "refs/tags/$TAG" >/dev/null 2>&1 \
-    || die "tag $TAG staat niet op origin — --resume maakt alleen een al-gepushte tag af."
-else
+# De release-branch hoort bij de tag; zowel de verse run als --resume gebruiken 'm.
+BRANCH="release/$TAG"
+
+# Een verse run mag geen bestaande tag verplaatsen. --resume mág juist doorlopen
+# als de tag er al staat (dan resteert alleen fase 3) — resume_release beslist dat.
+if [ -z "$RESUME_TAG" ]; then
   git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1 \
     && die "tag $TAG bestaat al — een uitgebrachte tag verplaats je nooit; kies het volgende niveau."
 fi
@@ -315,12 +346,13 @@ STEPS
 }
 
 if [ -n "$RESUME_TAG" ]; then
-  section "Plan — resume $TAG"
-  log "De tag $TAG staat al vast; alleen fase 3 wordt afgemaakt."
-  log "Stappen : pre-flight → make deploy-web → SHA256SUMS tekenen + aanhangen"
+  section "Plan — hervatten $TAG"
+  log "Het script hervat $TAG vanaf het punt waar het bleef (tag, gemergede PR,"
+  log "open PR of branch op origin) en doet alleen wat nog resteert; fase 1 (bouwen)"
+  log "wordt niet overgedaan."
   if [ "$DRY_RUN" -eq 1 ]; then
     section "Dry-run"
-    log "Niets gemuteerd. Laat --dry-run weg om fase 3 echt af te maken."
+    log "Niets gemuteerd. Laat --dry-run weg om de release echt te hervatten."
     exit 0
   fi
 else
@@ -425,6 +457,205 @@ finish() {
   log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
 }
 
+# ── FASE 2 — herbruikbare, idempotente stappen (verse run én --resume) ──────────
+# Elke stap detecteert of hij al gedaan is. Zo hervat --resume een onderbroken
+# release vanaf het punt waar het bleef, zonder de dure fase 1 over te doen.
+
+# De release-PR voor deze versie, gematcht op TITEL — niet op head-branch: na een
+# merge-met-branch-verwijdering wordt head.ref 'refs/pull/N/head', dus de
+# branchnaam is dan weg. Echoot "nummer|state|merged|head_sha|merge_commit_sha"
+# of niets als er (nog) geen PR is.
+find_release_pr() {
+  api GET "/pulls?state=all&limit=50" 2>/dev/null \
+    | jq -r --arg t "chore(release): versie $NEW_VERSION" \
+        '[.[] | select(.title == $t)][0] // empty
+         | "\(.number)|\(.state)|\(.merged)|\(.head.sha)|\(.merge_commit_sha // "")"' \
+    2>/dev/null || true
+}
+
+# Zorg dat er een open PR is en echoot het nummer; hergebruikt een bestaande i.p.v.
+# een duplicaat te maken.
+open_or_find_pr() {
+  local existing; existing="$(find_release_pr)"
+  if [ -n "$existing" ]; then
+    printf '%s\n' "$existing" | cut -d'|' -f1
+    return 0
+  fi
+  api POST /pulls -H 'Content-Type: application/json' \
+    -d "$(jq -n --arg b main --arg h "$BRANCH" --arg t "chore(release): versie $NEW_VERSION" \
+          '{base:$b, head:$h, title:$t, body:"Geautomatiseerde release-bump door scripts/release_auto.sh (#1161)."}')" \
+    | jq -r '.number'
+}
+
+# Scanner-pins gebumpt → scans.yml wijst naar een image-tag die nog niet bestaat.
+# Publiceer dat EERST (ci-image-scans op deze branch) vóór de PR-scan draait.
+# Zie [[scans-image-eerst-publiceren]].
+publish_scans_image() {
+  STEP="scans-image publiceren"
+  section "Fase 2 — nieuw scans-image publiceren (scanner-pins gebumpt)"
+  api POST "/actions/workflows/ci-image-scans.yml/dispatches" -H 'Content-Type: application/json' \
+    -d "$(jq -n --arg r "$BRANCH" '{ref:$r}')" -o /dev/null
+  log "ci-image-scans gedispatcht op $BRANCH — wachten tot het scans-image gepubliceerd is…"
+  sleep 10
+  local ist="" _
+  for _ in $(seq 1 60); do
+    ist="$(api GET '/actions/tasks?limit=20' \
+      | jq -r --arg ref "$BRANCH" '[(.workflow_runs // .tasks // [])[]
+          | select(.head_branch==$ref and .name=="build-publish") | .status][0] // "onbekend"')"
+    case "$ist" in
+      success) break ;;
+      failure|cancelled) die "ci-image-scans faalde op $BRANCH — het nieuwe scans-image is niet gepubliceerd; de PR-scan zou het niet vinden." ;;
+      *) sleep 20 ;;
+    esac
+  done
+  [ "$ist" = "success" ] || die "scans-image werd niet op tijd gepubliceerd — controleer de ci-image-scans-run."
+  log "Nieuw scans-image gepubliceerd."
+}
+
+# Wacht tot de PR-poort groen is. De combined status wordt pas 'success' als ÁLLE
+# contexts groen zijn — en linux-gate draait de volledige suite per-PR op een
+# capacity-1 serial-runner (~27 min, langer als er iets vóór in de wachtrij staat).
+# Vandaar GATE_TIMEOUT_MIN (75) mét voortgang i.p.v. de oude 30 min die precies op
+# linux-gate stuk liep. Curl-hikjes tellen niet als falen: dan blijven we pollen.
+wait_gate() { # wait_gate SHA PR_NUMBER
+  local sha="$1" pr="$2"
+  STEP="poort bewaken"
+  local polls=$(( GATE_TIMEOUT_MIN * 2 ))   # elke iteratie ~30s
+  log "Wachten op de poort (static-gate, scans, linux-gate) — max ${GATE_TIMEOUT_MIN} min."
+  log "linux-gate draait de volledige suite op de serial-runner; dat duurt het langst."
+  local st="" resp="" i
+  for i in $(seq 1 "$polls"); do
+    resp="$(api GET "/commits/$sha/status" 2>/dev/null || true)"
+    st="$(printf '%s' "$resp" | jq -r '.state' 2>/dev/null || true)"
+    [ -n "$st" ] || st="pending"
+    case "$st" in
+      success) break ;;
+      failure|error) die "poort faalde op $sha — zie PR #$pr. Niets getagd. Herstel en hervat met: scripts/release_auto.sh --resume $TAG" ;;
+    esac
+    if [ $(( (i - 1) % 6 )) -eq 0 ]; then
+      printf '%s' "$resp" \
+        | jq -r '.statuses[]? | select(.state!="success") | "     wacht op \(.context): \(.description // .state)"' \
+        2>/dev/null | sort -u || true
+      log "… $(( (i - 1) / 2 )) min verstreken"
+    fi
+    sleep 30
+  done
+  [ "$st" = "success" ] \
+    || die "poort werd niet groen binnen ${GATE_TIMEOUT_MIN} min — zie PR #$pr. Hervat later met: scripts/release_auto.sh --resume $TAG"
+  log "Poort groen."
+}
+
+# Merge de release-PR. Idempotent: al gemerged → niets doen. head_commit_id maakt de
+# merge exact (schone 200 i.p.v. 405, en nooit een stale/verkeerde head).
+merge_pr() { # merge_pr PR_NUMBER HEAD_SHA
+  local pr="$1" head="$2" st
+  STEP="mergen"
+  st="$(find_release_pr)"
+  if [ -n "$st" ] && [ "$(printf '%s' "$st" | cut -d'|' -f3)" = "true" ]; then
+    log "PR #$pr was al gemerged."
+    return 0
+  fi
+  api POST "/pulls/$pr/merge" -H 'Content-Type: application/json' \
+    -d "$(jq -n --arg h "$head" '{Do:"merge", head_commit_id:$h, delete_branch_after_merge:true}')" -o /dev/null
+  log "PR #$pr gemergd."
+}
+
+# De merge-commit van een (gemergede) PR — daar hangt de tag aan. Precieser dan
+# origin/main, dat inmiddels verder kan staan door een andere merge ertussen.
+merge_commit_of_pr() { # merge_commit_of_pr PR_NUMBER
+  api GET "/pulls/$1" | jq -r '.merge_commit_sha // empty'
+}
+
+# Tag op de merge-commit en push naar origin + mirror. Idempotent: staat de tag al
+# op origin, dan is dit al gedaan. De 8-seconden-bail is het punt-van-geen-terugkeer.
+tag_and_push() { # tag_and_push MERGE_SHA
+  local mergesha="$1" i
+  STEP="tag pushen"
+  if git ls-remote --exit-code origin "refs/tags/$TAG" >/dev/null 2>&1; then
+    log "Tag $TAG stond al op origin — niet opnieuw taggen."
+    TAG_PUSHED=1
+    return 0
+  fi
+  section "Fase 2 — tag $TAG pushen (de publieke release-keten start hierna)"
+  log "Ctrl-C binnen 8 seconden om af te breken (hierna is de tag onherroepelijk)."
+  for i in 8 7 6 5 4 3 2 1; do printf '\r   %s… ' "$i"; sleep 1; done; printf '\r          \n'
+  git tag -d "$TAG" >/dev/null 2>&1 || true   # een stale lokale tag van een vorige poging opruimen
+  git tag -a "$TAG" -m "OciDeck $TAG" "$mergesha"
+  git push --quiet origin "$TAG"
+  git push --quiet mirror "$TAG"
+  TAG_PUSHED=1
+  log "Tag $TAG gepusht naar origin en mirror."
+}
+
+# Volg de release-CI tot alle jobs klaar zijn. Zet 'snap' (globaal) voor phase3's
+# website-job-check. Een gefaalde job is een waarschuwing, geen harde stop: phase3
+# wacht daarna begrensd op SHA256SUMS en stopt met de juiste raad als 'publiceren'
+# echt niet groen werd.
+follow_ci() {
+  STEP="release-CI volgen"
+  section "Fase 2 — release-CI volgen (tot alle jobs klaar zijn)"
+  local prev="" running _
+  snap=""
+  for _ in $(seq 1 120); do
+    snap="$(api GET '/actions/tasks?limit=25' 2>/dev/null \
+      | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
+          | select(.head_branch==$ref) | "\(.status)|\(.name)"' 2>/dev/null | sort -u || true)"
+    running="$(printf '%s\n' "$snap" | grep -cE '^(running|waiting|pending)\|' || true)"
+    if [ "$snap" != "$prev" ] && [ -n "$snap" ]; then printf '%s\n' "$snap" | sed 's/^/   /'; prev="$snap"; fi
+    { [ -n "$snap" ] && [ "$running" -eq 0 ]; } && break
+    sleep 30
+  done
+  if printf '%s\n' "$snap" | grep -q '^failure|'; then
+    log "LET OP: minstens één release-job faalde (zie hierboven). De tag staat vast."
+    log "Herstel de upstream-job en maak DEZELFDE tag af met '--resume $TAG'; her-tag niet."
+  fi
+}
+
+# --resume: hervat een onderbroken release vanaf het punt waar het bleef. Kijkt wat
+# er al op de forge staat en doet alleen de rest; fase 1 (bouwen) wordt niet
+# overgedaan — die zit al in de gepushte branch/PR als we hier iets vinden.
+resume_release() {
+  section "Hervatten — $TAG"
+  if git ls-remote --exit-code origin "refs/tags/$TAG" >/dev/null 2>&1; then
+    TAG_PUSHED=1
+    log "Tag $TAG staat al op origin — alleen fase 3 (deploy-web + tekenen) resteert."
+    phase3; finish; return 0
+  fi
+  local st num merged headsha mergesha
+  st="$(find_release_pr)"
+  if [ -n "$st" ]; then
+    num="$(printf '%s' "$st" | cut -d'|' -f1)"
+    merged="$(printf '%s' "$st" | cut -d'|' -f3)"
+    headsha="$(printf '%s' "$st" | cut -d'|' -f4)"
+    mergesha="$(printf '%s' "$st" | cut -d'|' -f5)"
+    if [ "$merged" = "true" ]; then
+      log "PR #$num is gemerged, maar de tag ontbreekt — taggen en verder."
+      MERGE_SHA="$mergesha"
+    else
+      log "PR #$num staat open — poort afwachten, mergen en verder."
+      wait_gate "$headsha" "$num"
+      merge_pr "$num" "$headsha"
+      MERGE_SHA="$(merge_commit_of_pr "$num")"
+    fi
+  elif git ls-remote --exit-code origin "refs/heads/$BRANCH" >/dev/null 2>&1; then
+    headsha="$(git ls-remote origin "refs/heads/$BRANCH" | awk 'NR==1{print $1}')"
+    log "Branch $BRANCH staat gepusht zonder PR — PR openen en verder."
+    num="$(open_or_find_pr)"
+    [ -n "$num" ] && [ "$num" != "null" ] || die "PR openen mislukte tijdens hervatten."
+    wait_gate "$headsha" "$num"
+    merge_pr "$num" "$headsha"
+    MERGE_SHA="$(merge_commit_of_pr "$num")"
+  else
+    die "niets te hervatten voor $TAG (geen tag, PR of branch op origin). Draai een verse release met patch/minor/major."
+  fi
+  [ -n "${MERGE_SHA:-}" ] && [ "$MERGE_SHA" != "null" ] \
+    || die "kon de merge-commit voor $TAG niet bepalen."
+  tag_and_push "$MERGE_SHA"
+  follow_ci
+  phase3
+  finish
+}
+
 # ── De twee prompts (de enige interactie) ───────────────────────────────────────
 read_token
 section "Wachtwoord"
@@ -437,16 +668,15 @@ read -r -s -p "  minisign-wachtwoord: " MINISIGN_PW; echo
 # #7: faal vóór elke onherroepelijke stap; en in --resume is dit de enige gate.
 preflight
 
-# #9: is de tag al gepusht, dan is fase 1+2 al gebeurd — alleen fase 3 afmaken.
+# #9: --resume hervat een onderbroken release vanaf het punt waar het bleef
+# (tag? gemergede PR? open PR? branch?), zonder fase 1 (bouwen) over te doen.
 if [ -n "$RESUME_TAG" ]; then
-  TAG_PUSHED=1   # de tag staat al vast; de ERR-trap moet dat weten
-  phase3
-  finish
+  resume_release
   exit 0
 fi
 
 # ════════════════════════════ FASE 1 — lokaal ══════════════════════════════════
-BRANCH="release/$TAG"
+# BRANCH is hierboven al bepaald (release/$TAG), zodat --resume 'm ook kent.
 
 STEP="voorbereiden"
 section "Fase 1 — voorbereiden"
@@ -551,90 +781,20 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
 git push --quiet -u origin "$BRANCH"
 HEAD_SHA="$(git rev-parse HEAD)"
 
-# Zijn de scanner-pins gebumpt, dan wijst scans.yml naar een nieuw image-tag dat
-# nog niet bestaat. Publiceer dat EERST (ci-image-scans dispatchen op deze branch,
-# die de nieuwe manifest-versies leest) vóór we de PR openen — anders vindt de
-# PR-scan het image niet. Zie [[scans-image-eerst-publiceren]].
-if [ "$PINS_BUMPED" -eq 1 ]; then
-  STEP="scans-image publiceren"
-  section "Fase 2 — nieuw scans-image publiceren (scanner-pins gebumpt)"
-  api POST "/actions/workflows/ci-image-scans.yml/dispatches" -H 'Content-Type: application/json' \
-    -d "$(jq -n --arg r "$BRANCH" '{ref:$r}')" -o /dev/null
-  log "ci-image-scans gedispatcht op $BRANCH — wachten tot het scans-image gepubliceerd is…"
-  sleep 10
-  ist=""
-  for _ in $(seq 1 60); do
-    ist="$(api GET '/actions/tasks?limit=20' \
-      | jq -r --arg ref "$BRANCH" '[(.workflow_runs // .tasks // [])[]
-          | select(.head_branch==$ref and .name=="build-publish") | .status][0] // "onbekend"')"
-    case "$ist" in
-      success) break ;;
-      failure|cancelled) die "ci-image-scans faalde op $BRANCH — het nieuwe scans-image is niet gepubliceerd; de PR-scan zou het niet vinden." ;;
-      *) sleep 20 ;;
-    esac
-  done
-  [ "$ist" = "success" ] || die "scans-image werd niet op tijd gepubliceerd — controleer de ci-image-scans-run."
-  log "Nieuw scans-image gepubliceerd."
-fi
+# Scanner-pins gebumpt → eerst het nieuwe scans-image publiceren, anders vindt de
+# PR-scan het niet.
+[ "$PINS_BUMPED" -eq 1 ] && publish_scans_image
 
-PR_NUMBER="$(api POST /pulls -H 'Content-Type: application/json' \
-  -d "$(jq -n --arg b main --arg h "$BRANCH" --arg t "chore(release): versie $NEW_VERSION" \
-        '{base:$b, head:$h, title:$t, body:"Geautomatiseerde release-bump door scripts/release_auto.sh (#1161)."}')" \
-  | jq -r '.number')"
+PR_NUMBER="$(open_or_find_pr)"
 [ -n "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ] || die "PR aanmaken mislukte."
 log "PR #$PR_NUMBER geopend (head $HEAD_SHA)."
 
-STEP="poort bewaken"
-log "Wachten op de poort (static-gate + scans)…"
-ST=""
-for _ in $(seq 1 90); do
-  ST="$(api GET "/commits/$HEAD_SHA/status" | jq -r '.state')"
-  case "$ST" in
-    success) break ;;
-    failure|error) die "poort faalde op $HEAD_SHA — zie PR #$PR_NUMBER. Niets getagd." ;;
-    *) sleep 20 ;;
-  esac
-done
-[ "$ST" = "success" ] || die "poort werd niet groen binnen de tijd — zie PR #$PR_NUMBER."
-log "Poort groen."
-
-STEP="mergen"
-api POST "/pulls/$PR_NUMBER/merge" -H 'Content-Type: application/json' \
-  -d '{"Do":"merge","delete_branch_after_merge":true}' -o /dev/null
-log "PR #$PR_NUMBER gemergd."
-git fetch origin --quiet
-MERGE_SHA="$(git rev-parse origin/main)"
-
-# ── Punt-van-geen-terugkeer: onbewaakt, maar met een aftel-bail ─────────────────
-STEP="tag pushen"
-section "Fase 2 — tag $TAG pushen (de publieke release-keten start hierna)"
-log "Ctrl-C binnen 8 seconden om af te breken (hierna is de tag onherroepelijk)."
-for i in 8 7 6 5 4 3 2 1; do printf '\r   %s… ' "$i"; sleep 1; done; printf '\r          \n'
-
-git tag -a "$TAG" -m "OciDeck $TAG" "$MERGE_SHA"
-git push --quiet origin "$TAG"
-git push --quiet mirror "$TAG"
-TAG_PUSHED=1
-log "Tag $TAG gepusht naar origin en mirror."
-
-STEP="release-CI volgen"
-section "Fase 2 — release-CI volgen (tot alle jobs klaar zijn)"
-prev="" snap=""
-for _ in $(seq 1 120); do
-  snap="$(api GET '/actions/tasks?limit=25' \
-    | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
-        | select(.head_branch==$ref) | "\(.status)|\(.name)"' | sort -u)"
-  running="$(printf '%s\n' "$snap" | grep -cE '^(running|waiting|pending)\|' || true)"
-  if [ "$snap" != "$prev" ] && [ -n "$snap" ]; then printf '%s\n' "$snap" | sed 's/^/   /'; prev="$snap"; fi
-  { [ -n "$snap" ] && [ "$running" -eq 0 ]; } && break
-  sleep 30
-done
-if printf '%s\n' "$snap" | grep -q '^failure|'; then
-  log "LET OP: minstens één release-job faalde (zie hierboven). De tag staat vast."
-  log "Herstel de upstream-job en maak DEZELFDE tag af met '--resume $TAG'; her-tag niet."
-  log "phase3 wacht hieronder begrensd op SHA256SUMS en stopt met dezelfde raad als"
-  log "publiceren niet alsnog groen wordt."
-fi
+wait_gate "$HEAD_SHA" "$PR_NUMBER"
+merge_pr "$PR_NUMBER" "$HEAD_SHA"
+MERGE_SHA="$(merge_commit_of_pr "$PR_NUMBER")"
+[ -n "$MERGE_SHA" ] && [ "$MERGE_SHA" != "null" ] || die "kon de merge-commit van PR #$PR_NUMBER niet bepalen."
+tag_and_push "$MERGE_SHA"
+follow_ci
 
 # ════════════════════════════ FASE 3 — verspreiden ═════════════════════════════
 # Zelfde stappen als een --resume: eerst deploy-web (onafhankelijk), dan tekenen.
