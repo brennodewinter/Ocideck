@@ -10,7 +10,7 @@
 | --- | --- |
 | `Ctrl/Cmd + K` | Open the command palette (searchable list of actions) |
 | `Ctrl/Cmd + O` | Open a presentation |
-| `Ctrl/Cmd + S` | Save the active deck |
+| `Ctrl/Cmd + S` | Save the active tab — a presentation or a document (*corrected 2026-08-08: it saves a document too, in every mode, not only a deck*) |
 | `Ctrl/Cmd + Z` | Undo |
 | `Ctrl/Cmd + Shift + Z` | Redo |
 | `Ctrl + Y` | Redo (alternative) |

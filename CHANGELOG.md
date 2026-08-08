@@ -1119,6 +1119,30 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Documentmodus: opslaan en herstel werken nu ook voor een document.** Twee
+  samenhangende reparaties. **Opslaan.** `Ctrl/Cmd+S` en *Bestand → Opslaan*
+  hingen aan de deck-only opslag, die een document niet kent; op een
+  documenttabblad — het duidelijkst in de Visuele modus, waar de eigen sneltoets
+  van de editor de toets niet krijgt — sloeg er niets op. Er is nu één
+  soort-agnostische opslagweg `saveDocumentWithDestination`
+  (`lib/widgets/shell/document_save_actions.dart`, de tegenhanger van
+  `saveDeckWithDestination`): byte-getrouw terug naar het pad, of — bij een nieuw
+  of niet-schrijfbaar bestand — 'Opslaan als…', zodat werk altijd als kopie te
+  bewaren is en opslaan nooit doodloopt. De app-brede `AppMenuActions.save` erbij;
+  *Bestand → Opslaan* valt daarop terug als er geen deck is (`deck?.save ??
+  actions.save`), dus Cmd+S bewaart nu óók een document, in Visueel én Bron. De
+  app-brede opslag en de editor-`_save()` delen die ene weg. **Herstel na een
+  crash.** De autosave/herstel-lus sloeg documenttabbladen bewust over, dus een
+  crash gooide een niet-opgeslagen document weg. `RecoverySnapshot` draagt nu een
+  `kind` (presentatie | document); oude herstelbestanden zonder sleutel lezen als
+  presentatie (achterwaarts compatibel). De autosave-tik bewaart een vuil
+  documenttabblad als eigen momentopname — byte-getrouwe bron inclusief het
+  stijl-frontmatter, geen deck-sidecars — met dezelfde ontdubbeling als een deck,
+  en `restoreRecovered` zet het terug als documenttabblad, byte-getrouw en
+  gemarkeerd als (nog) niet opgeslagen (`DocumentNotifier.markDirty`). Een
+  document krijgt zo hetzelfde vangnet als een presentatie. In de browser is er,
+  net als voor een presentatie, geen crashherstel. Zie `DOCUMENT_MODE.md` §5, de
+  SOURCE_MAP en de USER_GUIDE (sectie *Documents*).
 - **Documentmodus: een documentbrede stijl.** Een document kan nu één stijl kiezen
   — een lettertype- en opmaakprofiel (`ThemeProfile`; de ingebouwde *LibreKAT*,
   *Standaard*, *Security* of een eigen profiel) — via een **Stijl**-kiezer in de
