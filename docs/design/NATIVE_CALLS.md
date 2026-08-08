@@ -278,6 +278,46 @@ room explicitly. The companion room is joined over the same guarded session, so 
 inherits the same `MeetingProviderProfile`/NetGuard posture as the signalling
 origin (§8).
 
+**Naming — the `.ocideck` side-channel (conceptual name; wire name stays opaque).**
+Every Jitsi conference `<naam>` has exactly one paired steering channel, which we
+call `<naam>.ocideck` in prose — "the `.ocideck` side-channel of `<naam>`", the
+dedicated home for OciDeck's control traffic (ops, locks, presence, presenter-sync)
+so it never crowds the conference or its chat. That readable name is a *label*, not
+the wire identity: the actual MUC localpart stays the opaque `ocideck-<hash>` derived
+above, **kept deliberately non-transparent (decided 2026-08-08)** so the room name
+reveals neither the conference nor that it uses OciDeck. A transparent `<naam>.ocideck`
+localpart was weighed and rejected — it would leak the conference↔OciDeck link to
+anyone who can enumerate the server's rooms, whereas the one-way hash is a client-side
+guarantee that needs no Prosody configuration. So: `<naam>.ocideck` is how we *talk*
+about the channel; `ocideck-<hash>` is how clients *find* it.
+
+### 5.2 Chat: end-to-end encryption is orthogonal to the room (open at delivery)
+
+OciDeck's chat is sealed and signed at the app layer (`collab_crypto`; see
+`matrix_chat.dart` for the Matrix-mode precedent): each message is encrypted to the
+session's epoch key and signed, and the transport — Matrix today, XMPP next — carries
+only ciphertext. E2E therefore travels with the *message*, not the *room*: chat is
+end-to-end encrypted wherever it rides, companion room or conference room alike.
+
+That turns the real question from "encrypted or not" into **who may read it**:
+
+- **E2E** means only holders of the epoch key — the OciDeck session members — can read
+  a message. That holds in any room.
+- **Letting a plain Jitsi/browser participant read the chat** requires the message to
+  be plaintext `<body>` groupchat in the conference MUC, because a vanilla client
+  speaks nothing else. Hand that participant the epoch key and they are no longer an
+  outsider but an OciDeck client.
+
+These are mutually exclusive by definition: "E2E *and* readable by a vanilla browser
+client" is a contradiction, not a missing feature.
+
+**Open at delivery.** The default is E2E, OciDeck-only chat in the companion room
+(sealed `nl.ocideck.chat`, the current model). If interop chat with non-OciDeck
+participants is later wanted, that thread is deliberately plaintext in the conference
+MUC — an interop choice, not a technical limit — and the two can coexist (an E2E
+OciDeck thread beside the plain Jitsi chat). Decide this when the XMPP
+`CollabTransport` chat path is built.
+
 ---
 
 ## 6. Design principles (inherited)
