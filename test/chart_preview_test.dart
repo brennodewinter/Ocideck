@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/utils/color_contrast.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 Widget _host(ChartSpec spec, {bool presentationMode = false}) {
@@ -141,6 +142,38 @@ void main() {
     await tester.pump();
     final hidden = tester.widget<PieChart>(find.byType(PieChart).first);
     expect(hidden.data.sections.every((s) => s.title.isEmpty), isTrue);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('slice percentages take a readable ink per slice', (
+    tester,
+  ) async {
+    // Slice 0 is EU-yellow (pale) and slice 1 is EU-navy (dark). The percentage
+    // is drawn on the slice, so a fixed white would be ~1.5:1 on the yellow.
+    const spec = ChartSpec(
+      type: ChartType.pie,
+      x: ['Pale', 'Dark'],
+      rowColors: ['#FFCC00', '#003399'],
+      series: [
+        ChartSeries(name: 'x', data: [50, 50]),
+      ],
+    );
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+
+    final pie = tester.widget<PieChart>(find.byType(PieChart).first);
+    for (final s in pie.data.sections) {
+      // Every slice's label clears the AA bar against its own fill.
+      expect(
+        contrastRatio(s.titleStyle!.color!, s.color),
+        greaterThanOrEqualTo(4.5),
+      );
+    }
+    // The pale slice specifically must have moved off white to get there.
+    expect(
+      pie.data.sections.first.titleStyle!.color,
+      isNot(equals(const Color(0xFFFFFFFF))),
+    );
     expect(tester.takeException(), isNull);
   });
 
