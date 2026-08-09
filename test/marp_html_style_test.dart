@@ -118,6 +118,59 @@ backgroundImage: 'url(https://example.invalid/beacon.png)'
     expect(html, isNot(contains('background-image:url(https://')));
   });
 
+  test('HTML and Flutter share the same normalized colour subset', () async {
+    const markdown = '''
+---
+marp: true
+color: red
+backgroundColor: 'rgb(1, 2, 3)'
+---
+
+# Veilig
+''';
+
+    final html = await service.build(markdown);
+
+    expect(html, contains('style="color:#ff0000"'));
+    expect(html, isNot(contains('background-color:rgb')));
+  });
+
+  test('HTML applies no more than 32 image filters', () async {
+    final filters = List.generate(40, (i) => 'brightness:${i + 1}').join(' ');
+    final html = await service.build(
+      '# Begrensd\n\n![bg $filters](images/bg.png)',
+    );
+    final attribute = RegExp(
+      r'data-marp-bg-filter="([^"]+)"',
+    ).firstMatch(html)!.group(1)!;
+
+    expect(RegExp(r'brightness\(').allMatches(attribute), hasLength(32));
+    expect(attribute, isNot(contains('brightness(33)')));
+  });
+
+  test('deck header and footer are represented once for many slides', () async {
+    final slides = List.generate(80, (i) => '# Dia $i').join('\n\n---\n\n');
+    final html = await service.build('''
+---
+marp: true
+header: '**Een forse gedeelde kop**'
+footer: 'Een forse gedeelde voet'
+---
+
+$slides
+''');
+
+    expect(
+      RegExp(r'\*\*Een forse gedeelde kop\*\*').allMatches(html),
+      hasLength(1),
+    );
+    expect(RegExp('Een forse gedeelde voet').allMatches(html), hasLength(1));
+    expect(
+      html,
+      contains("document.querySelector('main > .marp-'+position+'-source')"),
+    );
+  });
+
   test('HTML export expands supported emoji shortcodes offline', () async {
     final html = await service.build('# Lancering :rocket: :white_check_mark:');
 

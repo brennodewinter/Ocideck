@@ -1053,19 +1053,53 @@ void _imageEmbedTests() {
     expect(html, contains('var OCIDECK_IMG=[]'));
   });
 
-  test('een bron die al een data:-URI is blijft onaangeroerd', () async {
-    final service = MarpHtmlService(loadAsset: _diskLoader);
-    var calls = 0;
-    final html = await service.build(
-      '# A\n\n![Al ingesloten](data:image/gif;base64,R0lGOD)\n',
-      embedImage: (source) async {
-        calls++;
-        return 'data:image/png;base64,ZZZ';
-      },
-    );
+  test(
+    'een bron die al een data:image-URI is wordt eenmaal ingesloten',
+    () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      var calls = 0;
+      final html = await service.build(
+        '# A\n\n![Al ingesloten](data:image/gif;base64,R0lGOD)\n',
+        embedImage: (source) async {
+          calls++;
+          return 'data:image/png;base64,ZZZ';
+        },
+      );
 
-    expect(calls, 0);
-    expect(html, contains('data:image/gif;base64,R0lGOD'));
+      expect(calls, 0);
+      expect(
+        RegExp('data:image/gif;base64,R0lGOD').allMatches(html),
+        hasLength(1),
+      );
+      expect(html, contains('![Al ingesloten](#ocideck-img-0)'));
+    },
+  );
+
+  test(
+    'gelijke data:image-URI telt eenmaal, ook voor verschillende bronnen',
+    () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      const uri = 'data:image/png;base64,AAAA';
+      final html = await service.build(
+        '# A\n\n![een]($uri)\n\n![twee](images/twee.png)\n',
+        embedImage: (source) async => uri,
+        maxEmbedBytes: uri.length,
+      );
+
+      expect(RegExp(uri).allMatches(html), hasLength(1));
+      expect(html, contains('![een](#ocideck-img-0)'));
+      expect(html, contains('![twee](#ocideck-img-0)'));
+    },
+  );
+
+  test('een inline data:image-URI valt vroeg onder het cumulatieve budget', () {
+    final service = MarpHtmlService(loadAsset: _diskLoader);
+    const uri = 'data:image/png;base64,AAAA';
+
+    expect(
+      () => service.build('# A\n\n![een]($uri)', maxEmbedBytes: uri.length - 1),
+      throwsA(isA<HtmlEmbedBudgetExceeded>()),
+    );
   });
 
   test('de plaatshouder wordt alleen door onze eigen lijst ingevuld', () async {
@@ -1086,9 +1120,11 @@ void _imageEmbedTests() {
     final service = MarpHtmlService(loadAsset: _diskLoader);
     const md =
         '# A\n\n![one](images/a.png)\n\n---\n\n# B\n\n![two](images/b.png)\n';
-    const uri = 'data:image/png;base64,AAAA';
-    Future<String?> resolve(String s) async => uri;
-    final total = uri.length * 2; // twee verschillende bronnen
+    const uriA = 'data:image/png;base64,AAAA';
+    const uriB = 'data:image/png;base64,BBBB';
+    Future<String?> resolve(String s) async =>
+        s.endsWith('a.png') ? uriA : uriB;
+    final total = uriA.length + uriB.length; // twee unieke beelden
 
     // Precies op de grens: het hele document wordt gebouwd.
     final ok = await service.build(

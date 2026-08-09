@@ -42,6 +42,19 @@ void main() {
     expect(find.textContaining('Voet', findRichText: true), findsOneWidget);
   });
 
+  test('Flutter rejects the same unsupported CSS colour form as HTML', () {
+    final preview = SlidePreviewWidget(
+      slide: const Slide(
+        id: 'css-colour',
+        type: SlideType.bullets,
+        title: 'Kleur',
+        marpStyle: MarpStyle(color: 'rgb(1, 2, 3)'),
+      ),
+    );
+
+    expect(preview.themeProfile.textColor, isNot('rgb(1, 2, 3)'));
+  });
+
   testWidgets('fit and every scoped image filter use the shared renderer', (
     tester,
   ) async {
@@ -80,5 +93,31 @@ void main() {
       ),
       findsOneWidget,
     );
+  });
+
+  testWidgets('Flutter renders at most 32 filters without changing source', (
+    tester,
+  ) async {
+    final filters = List<String>.filled(40, 'brightness:1.1');
+    final slide = Slide(
+      id: 'bounded-filters',
+      type: SlideType.section,
+      title: 'Begrensd',
+      imagePath: 'asset:assets/images/librekat-logo.png',
+      marpStyle: MarpStyle(imageFilters: filters),
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: SizedBox(
+          width: 1280,
+          height: 720,
+          child: SlidePreviewWidget(slide: slide),
+        ),
+      ),
+    );
+
+    expect(find.byType(ColorFiltered), findsNWidgets(32));
+    expect(slide.marpStyle.imageFilters, hasLength(40));
   });
 }

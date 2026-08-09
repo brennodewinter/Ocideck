@@ -90,6 +90,7 @@ document.querySelectorAll('section.slide').forEach(function(sec){
 });
 function renderMarpChrome(sec,position){
   var source=sec.querySelector('.marp-'+position+'-source');
+  if(!source)source=document.querySelector('main > .marp-'+position+'-source');
   if(!source)return;
   var node=document.createElement(position);
   node.className='marp-'+position;
@@ -97,7 +98,8 @@ function renderMarpChrome(sec,position){
   var html=window.marked?marked.parseInline(markdown):markdown;
   if(window.DOMPurify){node.innerHTML=DOMPurify.sanitize(html);}
   else{node.textContent=markdown;}
-  source.replaceWith(node);
+  if(source.parentElement===sec||sec.contains(source))source.replaceWith(node);
+  else sec.appendChild(node);
 }
 function fitMarpHeading(sec){
   var heading=sec.querySelector('h1,h2,h3,h4,h5,h6');

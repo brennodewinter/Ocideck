@@ -26,6 +26,7 @@ import '../models/timeline.dart';
 import '../utils/log.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/marp_emoji.dart';
+import '../utils/marp_style_values.dart';
 import '../models/document_signature.dart';
 import 'bundled_licenses.dart';
 import 'cvss/cvss4.dart';

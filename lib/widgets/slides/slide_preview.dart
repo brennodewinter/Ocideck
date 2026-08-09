@@ -78,6 +78,7 @@ import '../../utils/bundled_asset.dart';
 import '../../utils/image_focal.dart';
 import '../../utils/mem_asset_blob.dart';
 import '../../utils/marp_emoji.dart';
+import '../../utils/marp_style_values.dart';
 import '../../utils/jaro_winkler.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/media_fetch.dart';
@@ -147,13 +148,13 @@ TextStyle _applyFont(String font, TextStyle base) {
 }
 
 ThemeProfile _themeWithMarpStyle(ThemeProfile base, MarpStyle style) {
-  final foreground = _flutterMarpColor(style.color);
+  final foreground = normalizeMarpColor(style.color);
   final hasBackgroundImage = marpBackgroundAssetPath(
     style.backgroundImage,
   ).isNotEmpty;
   final background = hasBackgroundImage
       ? '#00000000'
-      : _flutterMarpColor(style.backgroundColor);
+      : normalizeMarpColor(style.backgroundColor);
   return base.copyWith(
     slideBackgroundColor: background,
     titleBackgroundColor: background,
@@ -165,45 +166,6 @@ ThemeProfile _themeWithMarpStyle(ThemeProfile base, MarpStyle style) {
   );
 }
 
-String? _flutterMarpColor(String source) {
-  final value = source.trim().toLowerCase();
-  if (value.isEmpty) return null;
-  final hex = RegExp(r'^#(?:[0-9a-f]{6}|[0-9a-f]{8})$');
-  if (hex.hasMatch(value)) return value;
-  final shortHex = RegExp(
-    r'^#([0-9a-f])([0-9a-f])([0-9a-f])$',
-  ).firstMatch(value);
-  if (shortHex != null) {
-    final r = shortHex.group(1)!;
-    final g = shortHex.group(2)!;
-    final b = shortHex.group(3)!;
-    return '#$r$r$g$g$b$b';
-  }
-  return _cssNamedColors[value];
-}
-
-const _cssNamedColors = <String, String>{
-  'black': '#000000',
-  'blue': '#0000ff',
-  'cyan': '#00ffff',
-  'gray': '#808080',
-  'green': '#008000',
-  'grey': '#808080',
-  'lime': '#00ff00',
-  'magenta': '#ff00ff',
-  'maroon': '#800000',
-  'navy': '#000080',
-  'olive': '#808000',
-  'orange': '#ffa500',
-  'purple': '#800080',
-  'red': '#ff0000',
-  'silver': '#c0c0c0',
-  'teal': '#008080',
-  'transparent': '#00000000',
-  'white': '#ffffff',
-  'yellow': '#ffff00',
-};
-
 class _MarpFilteredImage extends StatelessWidget {
   final List<String> filters;
   final Widget child;
@@ -213,7 +175,12 @@ class _MarpFilteredImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget result = child;
-    for (final raw in filters.reversed) {
+    final renderedCount = math.min(
+      filters.length,
+      kMaxRenderedMarpImageFilters,
+    );
+    for (var i = renderedCount - 1; i >= 0; i--) {
+      final raw = filters[i];
       final parts = raw.toLowerCase().split(':');
       final name = parts.first;
       final value = parts.length > 1 ? _marpFilterAmount(parts[1]) : null;

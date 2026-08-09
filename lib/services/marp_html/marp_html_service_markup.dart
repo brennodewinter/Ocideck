@@ -31,9 +31,6 @@ String _slideAnchorIdAttr(String slideMarkdown) {
   return anchor == null ? '' : ' id="$anchor"';
 }
 
-final RegExp _safeCssColor = RegExp(
-  r'^(?:#[0-9a-fA-F]{3,8}|[a-zA-Z]+|(?:rgb|hsl)a?\([0-9.,%+\- ]+\))$',
-);
 final RegExp _safeCssGradient = RegExp(
   r'^(?:(?:repeating-)?(?:linear|radial|conic)-gradient)\([#(),.%a-zA-Z0-9+\- ]+\)$',
 );
@@ -51,7 +48,7 @@ String _marpBackgroundImage(String value) {
 
 String _marpCssFilters(List<String> filters) {
   final safe = <String>[];
-  for (final filter in filters) {
+  for (final filter in filters.take(kMaxRenderedMarpImageFilters)) {
     final parts = filter.toLowerCase().split(':');
     final name = parts.first;
     if ({'grayscale', 'sepia', 'invert'}.contains(name) && parts.length == 1) {
@@ -82,13 +79,13 @@ String _marpCssFilters(List<String> filters) {
   MarpStyle style,
 ) {
   final css = <String>[];
-  final color = style.color.trim();
-  final backgroundColor = style.backgroundColor.trim();
+  final color = normalizeMarpColor(style.color);
+  final backgroundColor = normalizeMarpColor(style.backgroundColor);
   final backgroundImage = _marpBackgroundImage(style.backgroundImage);
   final filter = _marpCssFilters(style.imageFilters);
   final titleColor = _titleColorComment.firstMatch(slideMarkdown)?.group(1);
-  if (_safeCssColor.hasMatch(color)) css.add('color:$color');
-  if (_safeCssColor.hasMatch(backgroundColor)) {
+  if (color != null) css.add('color:$color');
+  if (backgroundColor != null) {
     css.add('background-color:$backgroundColor');
   }
   if (backgroundImage.isNotEmpty) css.add('background-image:$backgroundImage');
@@ -259,6 +256,12 @@ String _renderSections(
         '</script></section>';
   }
   final sections = StringBuffer();
+  // Deckbrede chrome staat één keer naast de dia's. Een lokale override blijft
+  // in de eigen dia; zonder override valt het renderscript op deze bron terug.
+  // Zo vermenigvuldigt een grote deck-header/footer niet met het dia-aantal.
+  sections
+    ..write(_marpChromeSource('header', deckMarpStyle.header))
+    ..write(_marpChromeSource('footer', deckMarpStyle.footer));
   var slideIndex = 0;
   for (final slide in MarpHtmlService.marpSlides(markdown)) {
     final localStyle = slideIndex < slideMarpStyles.length
@@ -282,9 +285,9 @@ String _renderSections(
         '$anchorId${marpSection.attributes}>',
       )
       ..write('<script type="text/markdown">')
-      ..write(_guardMarkdown(_marpChromeSource('header', marpStyle.header)))
+      ..write(_guardMarkdown(_marpChromeSource('header', localStyle.header)))
       ..write(_guardMarkdown(renderedBlocks))
-      ..write(_guardMarkdown(_marpChromeSource('footer', marpStyle.footer)))
+      ..write(_guardMarkdown(_marpChromeSource('footer', localStyle.footer)))
       ..write('</script></section>');
   }
   return sections.toString();
