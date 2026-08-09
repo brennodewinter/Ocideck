@@ -16,6 +16,7 @@ import '../../platform/presenter_fullscreen.dart';
 import '../../models/annotation.dart';
 import '../../models/deck.dart';
 import '../../models/improvement_y01.dart';
+import '../../models/marp_style.dart';
 import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -124,6 +125,7 @@ class FullscreenPresenter extends StatefulWidget {
   final List<Slide> slides;
   final String? projectPath;
   final ThemeProfile themeProfile;
+  final MarpStyle marpStyle;
   final CockpitColorScheme cockpitColorScheme;
   final int initialIndex;
   final TlpLevel tlp;
@@ -192,6 +194,7 @@ class FullscreenPresenter extends StatefulWidget {
     required this.slides,
     required this.projectPath,
     required this.themeProfile,
+    this.marpStyle = const MarpStyle(),
     this.cockpitColorScheme = CockpitColorScheme.standard,
     required this.initialIndex,
     this.tlp = TlpLevel.none,
@@ -268,6 +271,7 @@ class FullscreenPresenter extends StatefulWidget {
         slides: slides,
         projectPath: projectPath,
         themeProfile: themeProfile,
+        marpStyle: deck.marpStyle,
         cockpitColorScheme: cockpitColorScheme,
         initialIndex: initialIndex,
         tlp: tlp,
@@ -293,6 +297,7 @@ class FullscreenPresenter extends StatefulWidget {
         slides: slides,
         projectPath: projectPath,
         themeProfile: themeProfile,
+        marpStyle: deck.marpStyle,
         cockpitColorScheme: cockpitColorScheme,
         initialIndex: initialIndex,
         tlp: tlp,
@@ -320,6 +325,7 @@ class FullscreenPresenter extends StatefulWidget {
     required List<Slide> slides,
     required String? projectPath,
     required ThemeProfile themeProfile,
+    MarpStyle marpStyle = const MarpStyle(),
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
@@ -355,6 +361,7 @@ class FullscreenPresenter extends StatefulWidget {
               slides: slides,
               projectPath: projectPath,
               themeProfile: themeProfile,
+              marpStyle: marpStyle,
               cockpitColorScheme: cockpitColorScheme,
               initialIndex: initialIndex,
               tlp: tlp,
@@ -395,6 +402,7 @@ class FullscreenPresenter extends StatefulWidget {
     required List<Slide> slides,
     required String? projectPath,
     required ThemeProfile themeProfile,
+    MarpStyle marpStyle = const MarpStyle(),
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
@@ -442,6 +450,7 @@ class FullscreenPresenter extends StatefulWidget {
       // het profiel nergens anders vandaan halen, maar de markdown zelf hoort
       // leesbaar te blijven. Hetzelfde geldt voor het cockpit-kleurenschema.
       beamerStyleProfileKey: themeProfile.toJson(),
+      'marpStyle': marpStyle.toJson(),
       'cockpitColorScheme': cockpitColorScheme.toJson(),
     });
 
@@ -473,6 +482,7 @@ class FullscreenPresenter extends StatefulWidget {
           slides: slides,
           projectPath: projectPath,
           themeProfile: themeProfile,
+          marpStyle: marpStyle,
           cockpitColorScheme: cockpitColorScheme,
           initialIndex: initialIndex,
           tlp: tlp,
@@ -507,6 +517,7 @@ class FullscreenPresenter extends StatefulWidget {
               slides: slides,
               projectPath: projectPath,
               themeProfile: themeProfile,
+              marpStyle: marpStyle,
               cockpitColorScheme: cockpitColorScheme,
               initialIndex: initialIndex,
               tlp: tlp,

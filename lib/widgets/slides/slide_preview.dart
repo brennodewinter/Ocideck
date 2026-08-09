@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ import '../../models/cockpit.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
 import '../../models/improvement_y01.dart';
+import '../../models/marp_style.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/document_signature.dart';
 import '../../models/finding_spec.dart';
@@ -75,6 +77,7 @@ import '../../services/web_asset_store.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/image_focal.dart';
 import '../../utils/mem_asset_blob.dart';
+import '../../utils/marp_emoji.dart';
 import '../../utils/jaro_winkler.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/media_fetch.dart';
@@ -143,6 +146,214 @@ TextStyle _applyFont(String font, TextStyle base) {
   return base.copyWith(fontFamily: font);
 }
 
+ThemeProfile _themeWithMarpStyle(ThemeProfile base, MarpStyle style) {
+  final foreground = _flutterMarpColor(style.color);
+  final hasBackgroundImage = marpBackgroundAssetPath(
+    style.backgroundImage,
+  ).isNotEmpty;
+  final background = hasBackgroundImage
+      ? '#00000000'
+      : _flutterMarpColor(style.backgroundColor);
+  return base.copyWith(
+    slideBackgroundColor: background,
+    titleBackgroundColor: background,
+    sectionBackgroundColor: background,
+    textColor: foreground,
+    tableTextColor: foreground,
+    titleTextColor: foreground,
+    footerText: style.footer.isEmpty ? null : style.footer,
+  );
+}
+
+String? _flutterMarpColor(String source) {
+  final value = source.trim().toLowerCase();
+  if (value.isEmpty) return null;
+  final hex = RegExp(r'^#(?:[0-9a-f]{6}|[0-9a-f]{8})$');
+  if (hex.hasMatch(value)) return value;
+  final shortHex = RegExp(
+    r'^#([0-9a-f])([0-9a-f])([0-9a-f])$',
+  ).firstMatch(value);
+  if (shortHex != null) {
+    final r = shortHex.group(1)!;
+    final g = shortHex.group(2)!;
+    final b = shortHex.group(3)!;
+    return '#$r$r$g$g$b$b';
+  }
+  return _cssNamedColors[value];
+}
+
+const _cssNamedColors = <String, String>{
+  'black': '#000000',
+  'blue': '#0000ff',
+  'cyan': '#00ffff',
+  'gray': '#808080',
+  'green': '#008000',
+  'grey': '#808080',
+  'lime': '#00ff00',
+  'magenta': '#ff00ff',
+  'maroon': '#800000',
+  'navy': '#000080',
+  'olive': '#808000',
+  'orange': '#ffa500',
+  'purple': '#800080',
+  'red': '#ff0000',
+  'silver': '#c0c0c0',
+  'teal': '#008080',
+  'transparent': '#00000000',
+  'white': '#ffffff',
+  'yellow': '#ffff00',
+};
+
+class _MarpFilteredImage extends StatelessWidget {
+  final List<String> filters;
+  final Widget child;
+
+  const _MarpFilteredImage({required this.filters, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    Widget result = child;
+    for (final raw in filters.reversed) {
+      final parts = raw.toLowerCase().split(':');
+      final name = parts.first;
+      final value = parts.length > 1 ? _marpFilterAmount(parts[1]) : null;
+      result = switch (name) {
+        'blur' => ImageFiltered(
+          imageFilter: ui.ImageFilter.blur(
+            sigmaX: value ?? 5,
+            sigmaY: value ?? 5,
+          ),
+          child: result,
+        ),
+        'brightness' => ColorFiltered(
+          colorFilter: ColorFilter.matrix(_brightnessMatrix(value ?? 1)),
+          child: result,
+        ),
+        'saturate' => ColorFiltered(
+          colorFilter: ColorFilter.matrix(_saturationMatrix(value ?? 1)),
+          child: result,
+        ),
+        'grayscale' => ColorFiltered(
+          colorFilter: ColorFilter.matrix(_saturationMatrix(0)),
+          child: result,
+        ),
+        'sepia' => ColorFiltered(
+          colorFilter: const ColorFilter.matrix(_sepiaMatrix),
+          child: result,
+        ),
+        'invert' => ColorFiltered(
+          colorFilter: const ColorFilter.matrix(_invertMatrix),
+          child: result,
+        ),
+        _ => result,
+      };
+    }
+    return result;
+  }
+}
+
+double? _marpFilterAmount(String source) => double.tryParse(
+  RegExp(r'^[-+]?(?:\d+\.?\d*|\.\d+)').firstMatch(source)?.group(0) ?? '',
+);
+
+List<double> _brightnessMatrix(double value) => <double>[
+  value,
+  0,
+  0,
+  0,
+  0,
+  0,
+  value,
+  0,
+  0,
+  0,
+  0,
+  0,
+  value,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  0,
+];
+
+List<double> _saturationMatrix(double value) {
+  const red = 0.213;
+  const green = 0.715;
+  const blue = 0.072;
+  final inverse = 1 - value;
+  return <double>[
+    inverse * red + value,
+    inverse * green,
+    inverse * blue,
+    0,
+    0,
+    inverse * red,
+    inverse * green + value,
+    inverse * blue,
+    0,
+    0,
+    inverse * red,
+    inverse * green,
+    inverse * blue + value,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+  ];
+}
+
+const _sepiaMatrix = <double>[
+  .393,
+  .769,
+  .189,
+  0,
+  0,
+  .349,
+  .686,
+  .168,
+  0,
+  0,
+  .272,
+  .534,
+  .131,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  0,
+];
+
+const _invertMatrix = <double>[
+  -1,
+  0,
+  0,
+  0,
+  255,
+  0,
+  -1,
+  0,
+  0,
+  255,
+  0,
+  0,
+  -1,
+  0,
+  255,
+  0,
+  0,
+  0,
+  1,
+  0,
+];
+
 /// Geeft de link-tap-handler door aan alle tekst in een slide, zonder die door
 /// elke sub-widget heen te hoeven sleuren. Draagt ook of er een TLP-markering
 /// rechtsonder staat, zodat bijschriften daarboven uitwijken.
@@ -178,6 +389,7 @@ class _SlideLinkScope extends InheritedWidget {
   /// ~180 px breed. Op desktop is dat een geheugengrafiek die niemand ziet, op
   /// web valt de tab om — en web is de demo-route (#612).
   final int? decodeMaxEdge;
+  final MarpStyle marpStyle;
 
   /// Wat er gebeurt als de gebruiker vanaf een geblokkeerde-online-media-
   /// placeholder online media wil aanzetten: een sprong naar de instelling.
@@ -192,6 +404,7 @@ class _SlideLinkScope extends InheritedWidget {
     this.allowRemoteMedia = false,
     this.mediaRedacted = false,
     this.decodeMaxEdge,
+    this.marpStyle = const MarpStyle(),
     this.onEnableOnlineMedia,
     required super.child,
   });
@@ -227,6 +440,12 @@ class _SlideLinkScope extends InheritedWidget {
       .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
       ?.decodeMaxEdge;
 
+  static MarpStyle marpStyleOf(BuildContext context) =>
+      context
+          .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
+          ?.marpStyle ??
+      const MarpStyle();
+
   static VoidCallback? onEnableOnlineMediaOf(BuildContext context) => context
       .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
       ?.onEnableOnlineMedia;
@@ -238,6 +457,7 @@ class _SlideLinkScope extends InheritedWidget {
       oldWidget.allowRemoteMedia != allowRemoteMedia ||
       oldWidget.mediaRedacted != mediaRedacted ||
       oldWidget.decodeMaxEdge != decodeMaxEdge ||
+      oldWidget.marpStyle != marpStyle ||
       oldWidget.onEnableOnlineMedia != onEnableOnlineMedia;
 }
 
@@ -255,7 +475,7 @@ Widget _md(
   InlineSpan? trailing,
 }) {
   return InlineMarkdownText(
-    normalizeRichTextMarkdown(text),
+    normalizeRichTextMarkdown(expandMarpEmojiShortcodes(text)),
     style: style,
     linkColor: linkColor,
     onTapLink: _SlideLinkScope.of(context),
@@ -323,7 +543,15 @@ EdgeInsets _bulletsPadding({
 class SlidePreviewWidget extends StatelessWidget {
   final Slide slide;
   final String? projectPath;
-  final ThemeProfile themeProfile;
+  final ThemeProfile baseThemeProfile;
+  final MarpStyle deckMarpStyle;
+
+  MarpStyle get marpStyle => slide.marpStyle.inherit(deckMarpStyle);
+
+  late final ThemeProfile themeProfile = _themeWithMarpStyle(
+    baseThemeProfile,
+    marpStyle,
+  );
 
   /// Actief cockpit-kleurschema (statuskleuren goed/waarschuwing/kritiek/koud).
   /// Globaal geselecteerd in de instellingen; alleen cockpit-slides gebruiken
@@ -500,11 +728,12 @@ class SlidePreviewWidget extends StatelessWidget {
   /// thumbnails, export, play-only) blijft het null en verschijnt er geen knop.
   final VoidCallback? onEnableOnlineMedia;
 
-  const SlidePreviewWidget({
+  SlidePreviewWidget({
     super.key,
     required this.slide,
     this.projectPath,
-    this.themeProfile = const ThemeProfile(),
+    ThemeProfile themeProfile = const ThemeProfile(),
+    this.deckMarpStyle = const MarpStyle(),
     this.cockpitColorScheme = CockpitColorScheme.standard,
     this.onLinkTap,
     this.slideNumber,
@@ -546,7 +775,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.improvementY01 = ImprovementY01Metric.empty,
     this.decodeMaxEdge,
     this.onEnableOnlineMedia,
-  });
+  }) : baseThemeProfile = themeProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -603,6 +832,7 @@ class SlidePreviewWidget extends StatelessWidget {
                   allowRemoteMedia: allowRemoteMedia,
                   mediaRedacted: slide.mediaRedacted,
                   decodeMaxEdge: decodeMaxEdge,
+                  marpStyle: marpStyle,
                   onEnableOnlineMedia: onEnableOnlineMedia,
                   child: _buildSlide(slide.projectionWithViewLimit()),
                 ),
@@ -624,7 +854,7 @@ class SlidePreviewWidget extends StatelessWidget {
   Widget _buildSlide(Slide slide) {
     final markingTlp = effectiveTlp(deckTlp: tlp, slideTlp: slide.tlp);
     return LayoutBuilder(
-      builder: (_, constraints) {
+      builder: (context, constraints) {
         final w = constraints.maxWidth;
         final splitImage = slide.type.splitWithImage;
         final richTextPages =
@@ -644,6 +874,21 @@ class SlidePreviewWidget extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
+                ColoredBox(
+                  color: AppTheme.parseHexColor(
+                    themeProfile.slideBackgroundColor,
+                  ),
+                ),
+                if (marpBackgroundAssetPath(
+                  marpStyle.backgroundImage,
+                ).isNotEmpty)
+                  _resolvedImage(
+                    context,
+                    marpBackgroundAssetPath(marpStyle.backgroundImage),
+                    projectPath,
+                    fit: BoxFit.cover,
+                    applyMarpStyle: false,
+                  ),
                 _buildContent(slide, w),
                 // Decoratieve overlays (watermerk, footer, TLP, logo)
                 // mogen geen muis/tikken afvangen: anders blokkeren ze de hover
@@ -666,10 +911,17 @@ class SlidePreviewWidget extends StatelessWidget {
                         slide: slide,
                         w: w,
                         profile: themeProfile,
+                        isMarpFooter: marpStyle.footer.isNotEmpty,
                         slideNumber: slideNumber,
                         slideCount: slideCount,
                         tlp: markingTlp,
                       ),
+                      if (marpStyle.header.isNotEmpty)
+                        _MarpHeaderOverlay(
+                          text: marpStyle.header,
+                          w: w,
+                          profile: themeProfile,
+                        ),
                       if (markingTlp != TlpLevel.none)
                         _TlpOverlay(
                           tlp: markingTlp,

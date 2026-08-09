@@ -580,6 +580,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
       hasUserNotes: slideHasUserNotes(deck.userNotes, slide.id),
       projectPath: deck.projectPath,
       themeProfile: deck.themeProfile,
+      deckMarpStyle: deck.marpStyle,
       slideCount: deck.slides.length,
       tlp: deck.tlp,
       organization: deck.organization,

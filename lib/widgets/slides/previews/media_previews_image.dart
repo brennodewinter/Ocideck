@@ -105,7 +105,20 @@ Widget _resolvedImage(
   Alignment alignment = Alignment.center,
   bool trustedAsset = false,
   String? semanticLabel,
+  bool applyMarpStyle = true,
 }) {
+  final marpStyle = applyMarpStyle
+      ? _SlideLinkScope.marpStyleOf(context)
+      : const MarpStyle();
+  if (fit == BoxFit.cover && marpStyle.imageFit == 'contain') {
+    fit = BoxFit.contain;
+  }
+
+  Widget styled(Widget child) =>
+      applyMarpStyle && !trustedAsset && marpStyle.imageFilters.isNotEmpty
+      ? _MarpFilteredImage(filters: marpStyle.imageFilters, child: child)
+      : child;
+
   Widget failed(ImagePlaceholderReason reason) =>
       _failedImage(context, trustedAsset, reason);
 
@@ -124,16 +137,18 @@ Widget _resolvedImage(
   // Méégebundelde asset (ingebouwde stijlprofielen, bv. het LibreKAT-logo):
   // rendert op elk platform, ook op web waar geen bestandssysteem bestaat.
   if (isBundledAssetPath(imagePath)) {
-    return Image(
-      image: cappedBundledAssetImage(bundledAssetKey(imagePath)),
-      fit: fit,
-      alignment: alignment,
-      width: double.infinity,
-      height: double.infinity,
-      gaplessPlayback: true,
-      semanticLabel: semanticLabel,
-      errorBuilder: (context, error, stackTrace) =>
-          failed(ImagePlaceholderReason.missing),
+    return styled(
+      Image(
+        image: cappedBundledAssetImage(bundledAssetKey(imagePath)),
+        fit: fit,
+        alignment: alignment,
+        width: double.infinity,
+        height: double.infinity,
+        gaplessPlayback: true,
+        semanticLabel: semanticLabel,
+        errorBuilder: (context, error, stackTrace) =>
+            failed(ImagePlaceholderReason.missing),
+      ),
     );
   }
 
@@ -144,16 +159,18 @@ Widget _resolvedImage(
       ? WebAssetStore.bytesFor(imagePath)
       : null;
   if (memBytes != null) {
-    return Image(
-      image: cappedMemoryImage(memBytes),
-      fit: fit,
-      alignment: alignment,
-      width: double.infinity,
-      height: double.infinity,
-      gaplessPlayback: true,
-      semanticLabel: semanticLabel,
-      errorBuilder: (context, error, stackTrace) =>
-          failed(ImagePlaceholderReason.missing),
+    return styled(
+      Image(
+        image: cappedMemoryImage(memBytes),
+        fit: fit,
+        alignment: alignment,
+        width: double.infinity,
+        height: double.infinity,
+        gaplessPlayback: true,
+        semanticLabel: semanticLabel,
+        errorBuilder: (context, error, stackTrace) =>
+            failed(ImagePlaceholderReason.missing),
+      ),
     );
   }
   if (WebAssetStore.isMemPath(imagePath)) {
@@ -180,16 +197,18 @@ Widget _resolvedImage(
         if (snapshot.data != true) {
           return _remoteBlockedPlaceholder(context, imagePath);
         }
-        return Image(
-          image: guardedNetworkImage(imagePath),
-          fit: fit,
-          alignment: alignment,
-          width: double.infinity,
-          height: double.infinity,
-          gaplessPlayback: true,
-          semanticLabel: semanticLabel,
-          errorBuilder: (context, error, stackTrace) =>
-              failed(ImagePlaceholderReason.missing),
+        return styled(
+          Image(
+            image: guardedNetworkImage(imagePath),
+            fit: fit,
+            alignment: alignment,
+            width: double.infinity,
+            height: double.infinity,
+            gaplessPlayback: true,
+            semanticLabel: semanticLabel,
+            errorBuilder: (context, error, stackTrace) =>
+                failed(ImagePlaceholderReason.missing),
+          ),
         );
       },
     );
@@ -224,21 +243,23 @@ Widget _resolvedImage(
   // een thumbnail van ~180 px breed, en op ware grootte kost één telefoonfoto
   // bijna 49 MiB (#612).
   final maxEdge = _SlideLinkScope.decodeMaxEdgeOf(context);
-  return Image(
-    image: maxEdge == null
-        ? cappedFileImage(File(resolved))
-        : boundedFileImage(File(resolved), maxEdge),
-    fit: fit,
-    alignment: alignment,
-    width: double.infinity,
-    height: double.infinity,
-    semanticLabel: semanticLabel,
-    // Keep showing the previous frame while the next image decodes. Without
-    // this the widget paints nothing for a frame on a source change, which
-    // shows up as a black flash between slides — fatal when recording video.
-    gaplessPlayback: true,
-    errorBuilder: (context, error, stackTrace) =>
-        failed(ImagePlaceholderReason.missing),
+  return styled(
+    Image(
+      image: maxEdge == null
+          ? cappedFileImage(File(resolved))
+          : boundedFileImage(File(resolved), maxEdge),
+      fit: fit,
+      alignment: alignment,
+      width: double.infinity,
+      height: double.infinity,
+      semanticLabel: semanticLabel,
+      // Keep showing the previous frame while the next image decodes. Without
+      // this the widget paints nothing for a frame on a source change, which
+      // shows up as a black flash between slides — fatal when recording video.
+      gaplessPlayback: true,
+      errorBuilder: (context, error, stackTrace) =>
+          failed(ImagePlaceholderReason.missing),
+    ),
   );
 }
 

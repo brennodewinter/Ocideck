@@ -86,7 +86,7 @@ class _TitlePreview extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomLeft,
         child: FittedBox(
-          fit: BoxFit.scaleDown,
+          fit: slide.marpStyle.headingFit ? BoxFit.contain : BoxFit.scaleDown,
           alignment: Alignment.bottomLeft,
           child: SizedBox(width: w - 2 * pad, child: _lockupColumn(context)),
         ),
@@ -264,7 +264,7 @@ class _SectionPreview extends StatelessWidget {
 
   /// De kop gecentreerd in het hele vlak — schaalt omlaag, snijdt nooit af.
   Widget _centred(BuildContext context, double pad) => FittedBox(
-    fit: BoxFit.scaleDown,
+    fit: slide.marpStyle.headingFit ? BoxFit.contain : BoxFit.scaleDown,
     alignment: Alignment.center,
     child: SizedBox(
       width: w,

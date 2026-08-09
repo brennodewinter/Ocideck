@@ -217,6 +217,7 @@ class _FooterOverlay extends StatelessWidget {
   final int? slideNumber;
   final int? slideCount;
   final TlpLevel tlp;
+  final bool isMarpFooter;
 
   const _FooterOverlay({
     required this.slide,
@@ -225,6 +226,7 @@ class _FooterOverlay extends StatelessWidget {
     this.slideNumber,
     this.slideCount,
     this.tlp = TlpLevel.none,
+    this.isMarpFooter = false,
   });
 
   String _applyTokens(String s) {
@@ -241,7 +243,7 @@ class _FooterOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!slide.showFooter) return const SizedBox.shrink();
-    if (slide.type.isHeading) {
+    if (slide.type.isHeading && !isMarpFooter) {
       return const SizedBox.shrink();
     }
 
@@ -339,9 +341,11 @@ class _FooterOverlay extends StatelessWidget {
               alignment: alignment,
               child: ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: w - left - textRight),
-                child: Text(
+                child: _md(
+                  context,
                   footerText,
-                  style: style,
+                  style,
+                  linkColor: style.color ?? Colors.black,
                   textAlign: textAlign,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -356,6 +360,45 @@ class _FooterOverlay extends StatelessWidget {
             child: Text(pageLabel, style: style),
           ),
       ],
+    );
+  }
+}
+
+class _MarpHeaderOverlay extends StatelessWidget {
+  final String text;
+  final double w;
+  final ThemeProfile profile;
+
+  const _MarpHeaderOverlay({
+    required this.text,
+    required this.w,
+    required this.profile,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final color = AppTheme.parseHexColor(
+      profile.textColor,
+    ).withValues(alpha: .7);
+    final style = TextStyle(
+      color: color,
+      fontSize: w * .0145,
+      shadows: [
+        Shadow(color: Colors.white.withValues(alpha: .5), blurRadius: w * .003),
+      ],
+    );
+    return Positioned(
+      left: w * .04,
+      right: w * .04,
+      top: w * .02,
+      child: _md(
+        context,
+        text,
+        style,
+        linkColor: color,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 }

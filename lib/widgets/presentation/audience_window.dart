@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../../models/annotation.dart';
 import '../../models/deck.dart';
 import '../../models/improvement_y01.dart';
+import '../../models/marp_style.dart';
 import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -60,6 +61,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   List<Slide> _slides = const [];
   String _reportLanguage = '';
   ThemeProfile _theme = const ThemeProfile();
+  MarpStyle _marpStyle = const MarpStyle();
   CockpitColorScheme _scheme = CockpitColorScheme.standard;
   TlpLevel _tlp = TlpLevel.none;
   String _organization = '';
@@ -107,6 +109,10 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     _theme = profileJson is Map
         ? ThemeProfile.fromJson(Map<String, Object?>.from(profileJson))
         : const ThemeProfile();
+    final marpStyleJson = widget.args['marpStyle'];
+    _marpStyle = marpStyleJson is Map
+        ? MarpStyle.fromJson(Map<String, Object?>.from(marpStyleJson))
+        : (deck?.marpStyle ?? const MarpStyle());
     final schemeJson = widget.args['cockpitColorScheme'];
     if (schemeJson is Map) {
       _scheme = CockpitColorScheme.fromJson(
@@ -364,6 +370,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   slide: slide,
                   projectPath: _projectPath,
                   themeProfile: _theme,
+                  deckMarpStyle: _marpStyle,
                   cockpitColorScheme: _scheme,
                   onLinkTap: openExternalUrl,
                   slideNumber: _index + 1,

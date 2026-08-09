@@ -127,3 +127,14 @@ bool _listEquals(List<String> a, List<String> b) {
   }
   return true;
 }
+
+/// Extracts a single `url(...)` asset from a Marp background directive.
+/// Gradients and other CSS remain preserved in Markdown but are not treated as
+/// local files by Flutter's image resolver.
+String marpBackgroundAssetPath(String value) {
+  final match = RegExp(
+    r'''^url\(\s*(["']?)(.*?)\1\s*\)$''',
+    caseSensitive: false,
+  ).firstMatch(value.trim());
+  return match?.group(2)?.trim() ?? '';
+}

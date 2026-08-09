@@ -9,6 +9,7 @@ import 'package:flutter/rendering.dart';
 import '../models/cvss_builder.dart';
 import '../models/deck.dart';
 import '../models/improvement_y01.dart';
+import '../models/marp_style.dart';
 import '../models/document_signature.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
@@ -315,6 +316,7 @@ class SlideRasterizer {
           initialSlide: slides.first,
           projectPath: deck.projectPath,
           themeProfile: deck.themeProfile,
+          deckMarpStyle: deck.marpStyle,
           cockpitColorScheme: cockpitColorScheme,
           slideCount: slides.length,
           signature: deck.signature,
@@ -438,6 +440,7 @@ class _RasterSlideHost extends StatefulWidget {
   final Slide initialSlide;
   final String? projectPath;
   final ThemeProfile themeProfile;
+  final MarpStyle deckMarpStyle;
   final CockpitColorScheme cockpitColorScheme;
   final int slideCount;
   final DocumentSignature? signature;
@@ -455,6 +458,7 @@ class _RasterSlideHost extends StatefulWidget {
     required this.initialSlide,
     required this.projectPath,
     required this.themeProfile,
+    required this.deckMarpStyle,
     required this.cockpitColorScheme,
     required this.slideCount,
     required this.signature,
@@ -523,6 +527,7 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           slide: _slide,
           projectPath: widget.projectPath,
           themeProfile: widget.themeProfile,
+          deckMarpStyle: widget.deckMarpStyle,
           cockpitColorScheme: widget.cockpitColorScheme,
           slideNumber: _slideNumber,
           slideCount: widget.slideCount,
