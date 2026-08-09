@@ -255,6 +255,89 @@ void main() {
       },
     );
   });
+
+  group('XMPP presence + chat over the wire (§5 sub-plak 7)', () {
+    test('a signed chat line arrives at the guest (§8 acceptance)', () async {
+      final env = await _LaunchEnv.create();
+      addTearDown(env.dispose);
+      env.host.keyExchange.approve(env.guestPub.deviceId);
+      await env.settle();
+      await env.host.syncNow();
+      await env.settle();
+      await env.guest.syncNow();
+      await env.settle();
+      expect(env.guest.isActive, isTrue);
+
+      // De host zendt een chat-regel; de guest ontvangt hem verzegeld +
+      // ondertekend over de draad.
+      await env.host.sendChat('hallo van de host');
+      await env.settle();
+
+      expect(env.guest.chatMessages, hasLength(1));
+      expect(env.guest.chatMessages.single.text, 'hallo van de host');
+      expect(env.guest.chatMessages.single.deviceId, env.hostPub.deviceId);
+      expect(env.guest.chatMessages.single.isSelf, isFalse);
+      // De host ziet enkel zijn lokale echo.
+      expect(env.host.chatMessages, hasLength(1));
+      expect(env.host.chatMessages.single.isSelf, isTrue);
+    });
+
+    test(
+      'a guest chat line arrives at the host, and back to the guest',
+      () async {
+        final env = await _LaunchEnv.create();
+        addTearDown(env.dispose);
+        env.host.keyExchange.approve(env.guestPub.deviceId);
+        await env.settle();
+        await env.host.syncNow();
+        await env.settle();
+        await env.guest.syncNow();
+        await env.settle();
+        expect(env.guest.isActive, isTrue);
+
+        await env.guest.sendChat('van de guest');
+        await env.settle();
+        await env.host.syncNow(); // drijft de host's chat-retryPending
+        await env.settle();
+
+        expect(
+          env.host.chatMessages.any((m) => m.text == 'van de guest'),
+          isTrue,
+        );
+        // De guest ziet enkel zijn lokale echo (geen duplicaat van de reflectie).
+        final guestOwn = env.guest.chatMessages.where((m) => m.isSelf).toList();
+        expect(guestOwn, hasLength(1));
+        expect(guestOwn.single.text, 'van de guest');
+      },
+    );
+
+    test(
+      'presence announces a slide position the peer sees (latest-per-sender)',
+      () async {
+        final env = await _LaunchEnv.create();
+        addTearDown(env.dispose);
+        env.host.keyExchange.approve(env.guestPub.deviceId);
+        await env.settle();
+        await env.host.syncNow();
+        await env.settle();
+        await env.guest.syncNow();
+        await env.settle();
+        expect(env.guest.isActive, isTrue);
+
+        // De host kondigt zijn slide aan; de guest ziet hem in zijn presence-lijst.
+        await env.host.announcePresence(env.hostSlide.id);
+        await env.settle();
+        await env.guest.syncNow(); // drijft presence-retryPending
+        await env.settle();
+
+        expect(env.guest.presencePeers, hasLength(1));
+        expect(env.guest.presencePeers.single.deviceId, env.hostPub.deviceId);
+        expect(env.guest.presencePeers.single.slideId, env.hostSlide.id);
+        // De host staat niet in zijn eigen presence-lijst (eigen echo gedropt).
+        expect(env.host.presencePeers, isEmpty);
+      },
+    );
+  });
 }
 
 // ── test helpers ─────────────────────────────────────────────────────────────
@@ -271,6 +354,7 @@ class _LaunchEnv {
     required this.host,
     required this.guest,
     required this.hostSlide,
+    required this.hostPub,
     required this.guestPub,
   });
 
@@ -281,6 +365,7 @@ class _LaunchEnv {
   final XmppCollabLaunch host;
   final XmppCollabLaunch guest;
   final Slide hostSlide;
+  final DevicePublicKeys hostPub;
   final DevicePublicKeys guestPub;
 
   static Future<_LaunchEnv> create() async {
@@ -313,6 +398,7 @@ class _LaunchEnv {
       ownKeys: hostPub,
       roomJid: room,
       deck: hostDeck,
+      ownUserId: '$room/host',
     );
     final guest = await joinXmppSession(
       stanzaChannel: guestChannel,
@@ -320,6 +406,7 @@ class _LaunchEnv {
       ownKeys: guestPub,
       roomJid: room,
       localDeck: guestLocal,
+      ownUserId: '$room/guest',
       onReconnected: guestChannel.onReconnected,
     );
 
@@ -331,6 +418,7 @@ class _LaunchEnv {
       host: host,
       guest: guest,
       hostSlide: hostSlide,
+      hostPub: hostPub,
       guestPub: guestPub,
     );
     // Herpubliceer de host's device-keys ná beide launches — de host

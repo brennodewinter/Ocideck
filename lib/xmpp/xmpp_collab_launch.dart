@@ -38,9 +38,11 @@
 //         — the gate tests current-approved-set membership, not
 //         decryptability.
 //
-//   • **No presence/chat bricks yet.** Those are later sub-planks; this launch
-//     wires the data-plane, keying and snapshot only — the minimum for two-
-//     party co-authorship over the wire.
+//   • **Presence + chat (sub-plak 7).** De resterende data-plane-kanalen rijden
+//     nu ook over de draad: [XmppPresenceBeacon] (verzegelde slide-position,
+//     latest-per-sender) en [XmppChat] (verzegeld + ondertekend + sealed-id-
+//     dedup, §4). [syncNow] retryt beide bricks' buffers elke ronde, voor host
+//     en guest — een joiner ziet presence/chat vóór zijn keyshare (§6).
 
 import 'dart:async';
 
@@ -51,7 +53,9 @@ import '../collab/collab_session.dart';
 import '../collab/collab_snapshot.dart';
 import '../models/deck.dart';
 import 'companion_demux.dart';
+import 'xmpp_chat.dart';
 import 'xmpp_key_exchange.dart';
+import 'xmpp_presence_beacon.dart';
 import 'xmpp_session.dart';
 import 'xmpp_snapshot.dart';
 import 'xmpp_transport.dart';
@@ -64,6 +68,8 @@ class XmppCollabLaunch {
     required this.transport,
     required this.keyExchange,
     required this.snapshotChannel,
+    required this.presence,
+    required this.chat,
     required this.demux,
     required this.isHost,
     required Deck deck,
@@ -76,6 +82,8 @@ class XmppCollabLaunch {
   final XmppTransport transport;
   final XmppKeyExchange keyExchange;
   final XmppSnapshotChannel snapshotChannel;
+  final XmppPresenceBeacon presence;
+  final XmppChat chat;
   final CompanionDemux demux;
   final bool isHost;
   final Deck _localDeck;
@@ -130,14 +138,38 @@ class XmppCollabLaunch {
     ];
   }
 
+  /// Announce dat dit device nu [slideId] bekijkt (§5 brick 4). Veilig te roepen
+  /// vóór de sessie volledig draait; een ongewijzigde slide is een no-op.
+  Future<void> announcePresence(String slideId) => presence.announce(slideId);
+
+  /// Elke peer's laatst bekende positie, voor de presence-UI.
+  List<PeerPresence> get presencePeers => presence.peers;
+
+  /// Zet de callback die vuurt als een peer's presence verandert.
+  set onPresenceChanged(void Function()? cb) => presence.onChanged = cb;
+
+  /// Zend een chat-bericht naar de sessie (§5 brick 5). Lokaal meteen geëchood.
+  Future<void> sendChat(String text) => chat.send(text);
+
+  /// Het gesprek tot nu toe, oudste eerst.
+  List<ChatMessage> get chatMessages => chat.messages;
+
+  /// Zet de callback die vuurt als de chat-lijst groeit.
+  set onChatChanged(void Function()? cb) => chat.onChanged = cb;
+
   /// Run one reactive round and its side-effects. The transport is push-driven
   /// (the demux routes stanzas as they arrive), so this does not poll — it
   /// drives the side-effects a Matrix poll would have triggered: the host keys
   /// any newcomer it has learned and re-sends the baseline to a just-keyed
   /// newcomer (§6); the guest retries a buffered snapshot and, once one opens,
-  /// starts its session on the authority's slide-id space (§5.5).
+  /// starts its session on the authority's slide-id space (§5.5). Presence en
+  /// chat retryen hun buffers elke ronde — een joiner ziet ze vóór zijn keyshare.
   Future<void> syncNow() async {
     if (_disposed) return;
+    // Presence/chat kunnen aankomen vóór de epoch-sleutel (zelfde stroom als de
+    // keyshare, of een eerdere) — retry de buffers elke ronde, host en guest.
+    await presence.retryPending();
+    await chat.retryPending();
     if (isHost) {
       await keyExchange.ensureKeyed();
       // A newcomer was just keyed — re-send the baseline so he can start (§6:
@@ -193,6 +225,8 @@ class XmppCollabLaunch {
       await transport.dispose();
     }
     await snapshotChannel.dispose();
+    await presence.dispose();
+    await chat.dispose();
     await keyExchange.dispose();
     await demux.dispose();
   }
@@ -208,12 +242,14 @@ Future<XmppCollabLaunch> hostXmppSession({
   required DevicePublicKeys ownKeys,
   required String roomJid,
   required Deck deck,
+  required String ownUserId,
 }) async {
   final parts = _wire(
     stanzaChannel: stanzaChannel,
     crypto: crypto,
     ownKeys: ownKeys,
     roomJid: roomJid,
+    ownUserId: ownUserId,
     onReconnected: null, // authority does not resync-request on reconnect
   );
   await parts.keyExchange.publishDeviceKeys();
@@ -238,6 +274,8 @@ Future<XmppCollabLaunch> hostXmppSession({
     transport: parts.transport,
     keyExchange: parts.keyExchange,
     snapshotChannel: parts.snapshotChannel,
+    presence: parts.presence,
+    chat: parts.chat,
     demux: parts.demux,
     isHost: true,
     deck: deck,
@@ -259,6 +297,7 @@ Future<XmppCollabLaunch> joinXmppSession({
   required DevicePublicKeys ownKeys,
   required String roomJid,
   required Deck localDeck,
+  required String ownUserId,
   Stream<void>? onReconnected,
 }) async {
   final parts = _wire(
@@ -266,6 +305,7 @@ Future<XmppCollabLaunch> joinXmppSession({
     crypto: crypto,
     ownKeys: ownKeys,
     roomJid: roomJid,
+    ownUserId: ownUserId,
     onReconnected: onReconnected,
   );
   await parts.keyExchange.publishDeviceKeys();
@@ -273,19 +313,23 @@ Future<XmppCollabLaunch> joinXmppSession({
     transport: parts.transport,
     keyExchange: parts.keyExchange,
     snapshotChannel: parts.snapshotChannel,
+    presence: parts.presence,
+    chat: parts.chat,
     demux: parts.demux,
     isHost: false,
     deck: localDeck,
   );
 }
 
-/// The directory, key exchange, snapshot channel, transport and demux, wired so
-/// the demux's single subscription fans out to each brick by namespace.
+/// The directory, key exchange, snapshot channel, presence beacon, chat,
+/// transport and demux, wired so the demux's single subscription fans out to
+/// each brick by namespace.
 _WireResult _wire({
   required XmppStanzaChannel stanzaChannel,
   required CollabCrypto crypto,
   required DevicePublicKeys ownKeys,
   required String roomJid,
+  required String ownUserId,
   Stream<void>? onReconnected,
 }) {
   final demux = CompanionDemux(channel: stanzaChannel);
@@ -305,6 +349,21 @@ _WireResult _wire({
     roomJid: roomJid,
     directory: directory,
   );
+  final presence = XmppPresenceBeacon(
+    stanzaChannel: stanzaChannel,
+    companionDemux: demux,
+    crypto: crypto,
+    roomJid: roomJid,
+    directory: directory,
+  );
+  final chat = XmppChat(
+    stanzaChannel: stanzaChannel,
+    companionDemux: demux,
+    crypto: crypto,
+    roomJid: roomJid,
+    directory: directory,
+    ownUserId: ownUserId,
+  );
   final transport = XmppTransport(
     stanzaChannel: stanzaChannel,
     companionDemux: demux,
@@ -318,6 +377,8 @@ _WireResult _wire({
     directory: directory,
     keyExchange: keyExchange,
     snapshotChannel: snapshotChannel,
+    presence: presence,
+    chat: chat,
     transport: transport,
   );
 }
@@ -328,6 +389,8 @@ class _WireResult {
     required this.directory,
     required this.keyExchange,
     required this.snapshotChannel,
+    required this.presence,
+    required this.chat,
     required this.transport,
   });
 
@@ -335,5 +398,7 @@ class _WireResult {
   final CollabDeviceDirectory directory;
   final XmppKeyExchange keyExchange;
   final XmppSnapshotChannel snapshotChannel;
+  final XmppPresenceBeacon presence;
+  final XmppChat chat;
   final XmppTransport transport;
 }
