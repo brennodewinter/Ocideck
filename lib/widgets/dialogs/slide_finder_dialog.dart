@@ -294,6 +294,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
       slide: h.slide,
       projectPath: h.source.deck.projectPath,
       themeProfile: h.source.deck.themeProfile,
+      deckMarpStyle: h.source.deck.marpStyle,
     );
 
     SlideDiffDialog.show(
@@ -584,6 +585,7 @@ class _SlideHitCard extends StatelessWidget {
                         slide: hit.slide,
                         projectPath: deck.projectPath,
                         themeProfile: deck.themeProfile,
+                        deckMarpStyle: deck.marpStyle,
                         improvementY01: deck.improvementY01Metric,
                       ),
                     ),

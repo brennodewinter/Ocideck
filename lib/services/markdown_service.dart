@@ -161,6 +161,25 @@ class MarkdownService {
     }
     out.add('theme: ${deck.theme}');
     if (deck.paginate) out.add('paginate: true');
+    if (deck.marpStyle.color.isNotEmpty) {
+      out.add('color: ${_yamlScalar(deck.marpStyle.color)}');
+    }
+    if (deck.marpStyle.backgroundColor.isNotEmpty) {
+      out.add(
+        'backgroundColor: ${_yamlScalar(deck.marpStyle.backgroundColor)}',
+      );
+    }
+    if (deck.marpStyle.backgroundImage.isNotEmpty) {
+      out.add(
+        'backgroundImage: ${_yamlScalar(deck.marpStyle.backgroundImage)}',
+      );
+    }
+    if (deck.marpStyle.header.isNotEmpty) {
+      out.add('header: ${_yamlScalar(deck.marpStyle.header)}');
+    }
+    if (deck.marpStyle.footer.isNotEmpty) {
+      out.add('footer: ${_yamlScalar(deck.marpStyle.footer)}');
+    }
     // General presentation metadata (also picked up by Marp where applicable).
     if (deck.title.isNotEmpty) {
       out.add('title: ${_yamlScalar(deck.title)}');

@@ -466,6 +466,7 @@ class _VersionDiffDialog extends StatelessWidget {
                   slide: change.after!,
                   projectPath: afterDeck.projectPath,
                   themeProfile: afterDeck.themeProfile,
+                  deckMarpStyle: afterDeck.marpStyle,
                 ),
                 others: [
                   SlideDiffRef(
@@ -473,6 +474,7 @@ class _VersionDiffDialog extends StatelessWidget {
                     slide: change.before!,
                     projectPath: beforeDeck.projectPath,
                     themeProfile: beforeDeck.themeProfile,
+                    deckMarpStyle: beforeDeck.marpStyle,
                   ),
                 ],
               ),

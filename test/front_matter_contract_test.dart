@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/document_signature.dart';
 import 'package:ocideck/models/improvement_y01.dart';
+import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/used_tool.dart';
@@ -32,9 +33,8 @@ String _openenEnOpslaan(String markdown) {
 
 void main() {
   group('onbekende front-matter-sleutels overleven het opslaan', () {
-    // Een met de hand geschreven Marp-bestand: gewone Marp-opties die OciDeck
-    // niet implementeert, een commentaarregel, een lege regel en een genest
-    // blok. Niets daarvan is van OciDeck.
+    // Een met de hand geschreven Marp-bestand: visuele Marp-opties die OciDeck
+    // begrijpt, plus onbekende opties, commentaar en een genest blok.
     const handgeschreven = '''
 ---
 marp: true
@@ -61,8 +61,6 @@ style: |
         opnieuw,
         containsAllInOrder([
           '# de kop en voet van dit rapport',
-          "header: 'Kwartaalrapport'",
-          'footer: "vertrouwelijk — niet verspreiden"',
           'size: 16:9',
           '',
           'style: |',
@@ -73,11 +71,12 @@ style: |
       );
     });
 
-    test('de aanhalingstekens blijven zoals de auteur ze zette', () {
-      // OciDeck citeert zelf met dubbele aanhalingstekens. Een enkel gequote
-      // waarde van iemand anders mag daar niet naar toe herschreven worden.
-      final opnieuw = _openenEnOpslaan(handgeschreven);
-      expect(opnieuw, contains("header: 'Kwartaalrapport'"));
+    test('ondersteunde visuele waarden blijven inhoudelijk gelijk', () {
+      final opnieuw = MarkdownService().parseDeck(
+        _openenEnOpslaan(handgeschreven),
+      )!;
+      expect(opnieuw.marpStyle.header, 'Kwartaalrapport');
+      expect(opnieuw.marpStyle.footer, 'vertrouwelijk — niet verspreiden');
     });
 
     test('een tweede ronde verandert er niets meer aan', () {
@@ -334,6 +333,13 @@ style: |
               true, // #607: true is nu de niet-standaard, dus geschreven
           playOnly: true,
           improvementFramework: 'dmaic',
+          marpStyle: const MarpStyle(
+            color: '#112233',
+            backgroundColor: '#fefefe',
+            backgroundImage: "url('achtergrond.png')",
+            header: 'Kop',
+            footer: 'Voet',
+          ),
           improvementY01Metric: const ImprovementY01Metric(
             name: 'Doorlooptijd orderintake',
             unit: 'dagen',

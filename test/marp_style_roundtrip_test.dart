@@ -52,8 +52,8 @@ Tekst
     );
 
     final saved = markdown.generateDeck(deck);
-    expect(saved, contains("color: '#112233'"));
-    expect(saved, contains("backgroundColor: '#fefefe'"));
+    expect(saved, contains('color: "#112233"'));
+    expect(saved, contains('backgroundColor: "#fefefe"'));
     expect(saved, contains('<!-- _color: #abcdef -->'));
     expect(saved, contains('<!-- _footer: Diavoet -->'));
     final reopened = markdown.parseDeck(saved)!;
@@ -100,5 +100,50 @@ Tekst
     expect(saved, contains('# Schaal mij\n<!-- fit -->'));
     final reopened = markdown.parseDeck(saved)!.slides.single;
     expect(reopened.marpStyle, slide.marpStyle);
+  });
+
+  test('edited deck style replaces preserved front matter values', () {
+    const source = '''
+---
+marp: true
+color: red
+backgroundColor: white
+backgroundImage: none
+header: Oud
+footer: Oude voet
+---
+
+# Kop
+''';
+
+    final deck = markdown.parseDeck(source)!;
+    final saved = markdown.generateDeck(
+      deck.copyWith(
+        marpStyle: const MarpStyle(
+          color: 'blue',
+          backgroundColor: 'black',
+          backgroundImage: "url('nieuw.png')",
+          header: 'Nieuw',
+          footer: 'Nieuwe voet',
+        ),
+      ),
+    );
+
+    final reopened = markdown.parseDeck(saved)!;
+    expect(
+      reopened.marpStyle,
+      const MarpStyle(
+        color: 'blue',
+        backgroundColor: 'black',
+        backgroundImage: "url('nieuw.png')",
+        header: 'Nieuw',
+        footer: 'Nieuwe voet',
+      ),
+    );
+    expect(RegExp(r'^color:', multiLine: true).allMatches(saved), hasLength(1));
+    expect(
+      RegExp(r'^header:', multiLine: true).allMatches(saved),
+      hasLength(1),
+    );
   });
 }
