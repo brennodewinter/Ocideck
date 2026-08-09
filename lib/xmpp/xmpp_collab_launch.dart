@@ -166,10 +166,19 @@ class XmppCollabLaunch {
   /// chat retryen hun buffers elke ronde — een joiner ziet ze vóór zijn keyshare.
   Future<void> syncNow() async {
     if (_disposed) return;
-    // Presence/chat kunnen aankomen vóór de epoch-sleutel (zelfde stroom als de
-    // keyshare, of een eerdere) — retry de buffers elke ronde, host en guest.
-    await presence.retryPending();
-    await chat.retryPending();
+    // Short-circuit: als geen brick pending-entries heeft, is er niets te
+    // retryen — sla de retry-calls over en bespaar CPU-wakeups op een idle
+    // sessie (#1423). De host's ensureKeyed + re-baseline logica loopt nog
+    // steeds (een newcomer kan tussentijds zijn goedgekeurd).
+    final anyPending =
+        presence.hasPending || chat.hasPending || snapshotChannel.hasPending;
+    if (anyPending) {
+      // Presence/chat kunnen aankomen vóór de epoch-sleutel (zelfde stroom als
+      // de keyshare, of een eerdere) — retry de buffers elke ronde, host en
+      // guest.
+      await presence.retryPending();
+      await chat.retryPending();
+    }
     if (isHost) {
       await keyExchange.ensureKeyed();
       // A newcomer was just keyed — re-send the baseline so he can start (§6:
@@ -184,7 +193,7 @@ class XmppCollabLaunch {
       }
       return;
     }
-    await snapshotChannel.retryPending();
+    if (snapshotChannel.hasPending) await snapshotChannel.retryPending();
     if (_session == null && snapshotChannel.hasSnapshot) {
       final snapshot = await snapshotChannel.firstSnapshot;
       _session = CollabSession(

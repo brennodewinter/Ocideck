@@ -115,6 +115,11 @@ class XmppChat {
   /// sleutel bekend waren; heropend in [retryPending] in aankomstvolgorde.
   final List<SealedEnvelope> _pending = [];
 
+  /// Of er gebufferde berichten wachten op retry — voor de syncNow short-circuit
+  /// (#1423). Als dit false is, is retryPending een no-op en hoeft syncNow de
+  /// call niet te doen.
+  bool get hasPending => _pending.isNotEmpty;
+
   /// De begrensde dedup-set: de sealed-id's van succesvol geopende berichten,
   /// oudste eerst (FIFO-verdrijving als [dedupCap] bereikt is).
   final List<String> _seenIds = [];

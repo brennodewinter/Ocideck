@@ -119,6 +119,11 @@ class XmppSnapshotChannel {
   /// Of al een snapshot is geopend — een non-blocking check voor een join-loop.
   bool get hasSnapshot => _first.isCompleted;
 
+  /// Of er gereassembleerde snapshots wachten op retry (openen met een
+  /// epoch-sleutel die nu beschikbaar kan zijn) — voor de syncNow short-circuit
+  /// (#1423).
+  bool get hasPending => _assembled.isNotEmpty;
+
   /// De re-baseline-stroom (§4). Emit elke geopende snapshot ná de eerste.
   Stream<CollabSnapshot> get rebaselines => _rebaselines.stream;
 

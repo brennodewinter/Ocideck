@@ -90,6 +90,10 @@ class XmppPresenceBeacon {
   /// Cap op de pending-map. Bij overflow verdrijft het oudste device (FIFO).
   final int pendingCap;
 
+  /// Of er gebufferde presence wacht op retry — voor de syncNow short-circuit
+  /// (#1423).
+  bool get hasPending => _pending.isNotEmpty;
+
   /// Vuurt nadat een peer's presence verandert, zodat de provider de UI verversen kan.
   void Function()? onChanged;
 
