@@ -186,6 +186,23 @@ class XmppSnapshotChannel {
         logWarning('xmpp.snapshot.badChunk', id);
         return;
       }
+      // Afzender-controle op chunk-niveau (#1411): het chunk-`id` bevat de
+      // afzender's deviceId (`snap-{deviceId}-{counter}`). Een MUC zet op elke
+      // groupchat-message een `from` (room@conf/nick); de directory kent de
+      // afzender's deviceId → peerAddress. Een chunk wiens `id` een bekend
+      // device claimt wiens adres niet met `from` overeenkomt, is gesmokkeld
+      // door een vijandige occupant — drop fail-closed, zodat hij de legitieme
+      // baseline niet kan corrumperen.
+      if (stanza.from != null) {
+        final claimed = _senderDeviceFromId(id);
+        if (claimed != null) {
+          final knownAddress = directory.addressOf(claimed);
+          if (knownAddress != null && knownAddress != stanza.from) {
+            logWarning('xmpp.snapshot.senderMismatch', id);
+            return;
+          }
+        }
+      }
       final parts = _pending.putIfAbsent(id, () => {});
       if (_pending.length > maxPendingSnapshots) {
         _pending.remove(id);
@@ -290,5 +307,16 @@ class XmppSnapshotChannel {
       out.add(s.substring(i, i + size > s.length ? s.length : i + size));
     }
     return out;
+  }
+
+  /// Haal de afzender's deviceId uit een chunk-`id` (`snap-{deviceId}-{counter}`).
+  /// De counter is het laatste `-`-segment; de deviceId is alles ertussen. Null
+  /// als het `id` niet aan het formaat voldoet.
+  String? _senderDeviceFromId(String id) {
+    if (!id.startsWith('snap-')) return null;
+    final rest = id.substring(5);
+    final lastDash = rest.lastIndexOf('-');
+    if (lastDash <= 0) return null;
+    return rest.substring(0, lastDash);
   }
 }
