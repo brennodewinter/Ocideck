@@ -1144,6 +1144,39 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **collab: XmppTransport + companion-demux + FakeMucHub (§4 sub-plak 4).**
+  De XMPP-collab-data-plane uit `XMPP_COLLAB_TRANSPORT.md` §3–5: `XmppTransport
+  implements CollabTransport` in `lib/xmpp/xmpp_transport.dart`, draagt ops/locks
+  verzegeld over de companion-MUC op dezelfde `CollabTransport`-naad waarop
+  `collab_session.dart` vandaag al tegen Loopback en Matrix praat. De
+  autoriteit/versie/lock-logica verandert niet, alleen de buis eronder. Wat deze
+  laag toevoegt boven de Matrix-relay (§4): een **gap→resync**-pad. Matrix's
+  `/sync` levert gap-vrij en hervatbaar; een MUC doet dat niet — een kortstondig
+  offline lid *mist* berichten zonder cursor om ze opnieuw te leveren, en de
+  follower-regel accepteert pas bij `version + 1`, dus een gat bevriest het deck.
+  De transport detecteert een gat (een op met `version > verwacht+1`, of een
+  reconnect-signaal van `XmppSession.onReconnected`) en emits een verzegeld
+  `<resync>`-verzoek; de autoriteit **coalesceert** gelijktijdige verzoeken tot
+  één re-baseline (§4 N1: een onbegrensd verzoek zou elke occupant een
+  deck-brede broadcast forceren, versterkt K× bij gelijktijdige reconnects).
+  **Sleutels vooraf gedeeld** in deze sub-plak — de key-exchange (sub-plak 5)
+  bouwt de admission-gated distributie; hier arriveert de crypto al gekoeld. De
+  verzegeling gebruikt de bestaande `CollabCrypto.seal/open` (mode-isolatie zit
+  al in de room-AAD). Seriële send-keten, own-echo-onderdrukking
+  (`senderDevice == participantId`), deferred-backlog voor stanzas die aankomen
+  voordat de key-state in huis is, en rate-limited resync-emissie spiegelen
+  `MatrixRelayTransport`. `lib/xmpp/companion_demux.dart` bezit het ene
+  `channel.stanzas`-abonnement en routeert per `nl.ocideck.*`-namespace —
+  fail-closed voor onbekende namespaces. `test/xmpp/fake_muc_hub.dart` is de
+  in-memory N-party MUC (groupchat-reflect, directed-route, drop/rejoin) die de
+  `LoopbackHub`-analoog is voor de stanza-laag. `test/collab/
+  collab_transport_contract.dart` is het gedeelde CollabTransport-contract dat
+  over Loopback, Matrix en XMPP draait (§8: "Contract (shared): one
+  CollabTransport conformance test over Loopback, Matrix and XMPP"). Nieuwe
+  tests: contract over XMPP (6), unit/adversarial (3: misvormd, onopenbaar,
+  deferred), gap→resync (3: drop→rejoin→re-baseline, resync-flood-coalesce,
+  rate-limit), two-party (2: autoriteit-edit+lock, follower-edit). Intern-
+  plumbing, achter de standaard-uit Videovergaderingen-module.
 - **collab: xmpp_session reconnect/rejoin (§4 sub-plak 3).** De
   delivery-reliability-vereiste uit `XMPP_COLLAB_TRANSPORT.md` §4: een bewaakte
   reconnect met MUC-rejoin in `lib/xmpp/xmpp_session.dart`. Vandaag sloot
