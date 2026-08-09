@@ -464,22 +464,57 @@ class _QuotePreview extends StatelessWidget {
   }
 }
 
+/// Bouwt de [_MarkdownPreview] met de paginering uit [_SlidePreviewWidget._effectivePage].
+/// Uitgelicht uit `_buildContent` (slide_preview.dart): de rich-text-path vraagt
+/// om `richTextPage` en `projectPath`, en die regels duwden zowel de switch als
+/// het bestand over hun ratchet-plafond. Hier staat ruimte, en de velden zijn
+/// library-breed bereikbaar (#1409).
+Widget _freeMarkdownPreview(SlidePreviewWidget widget, Slide slide, double w) =>
+    _MarkdownPreview(
+      slide: slide,
+      w: w,
+      font: widget.fontFamily,
+      profile: widget.themeProfile,
+      richTextPage: widget._effectivePage,
+      projectPath: widget.projectPath,
+    );
+
 class _MarkdownPreview extends StatelessWidget {
   final Slide slide;
   final double w;
   final String font;
   final ThemeProfile profile;
+  final int richTextPage;
+  final String? projectPath;
 
   const _MarkdownPreview({
     required this.slide,
     required this.w,
     required this.font,
     required this.profile,
+    this.richTextPage = 0,
+    this.projectPath,
   });
 
   @override
   Widget build(BuildContext context) {
+    // Sinds #1409 pagineert free-markdown: de body wordt opgesplitst in
+    // vervolgpagina's zodra hij niet meer op één 16:9-frame past, in plaats van
+    // als geheel te worden kromgetrokken door FittedBox(scaleDown) — de oorzaak
+    // van de piepkleine dia uit het issue.
+    //
+    // De shell (_PreviewScaffold) is bewust ongewijzigd: dezelfde marges en
+    // logo-safe-insets als voorheen, zodat een korte dia er identiek uitziet.
+    // Wat verandert is de inhoud: in plaats van de héle body geven we alleen de
+    // blokken van de huidige pagina mee. Past die pagina (gepland via
+    // planRichTextForSlide), dan schaalt de FittedBox op 1,0 — geen
+    // kromtrekking meer. De plan-availH komt uit richTextBodyAvailH (vPad 0,05),
+    // die iets ruimer is dan de scaffold (vPad 0,07); een volle pagina kan
+    // daardoor tot ~91 % schalen. Dat is een bewuste keuze: de alternatieven
+    // (eigen shell, of de plan-geometrie aanpassen voor één type) breken de
+    // gedeelde cache en de golden-pariteit voor korte dia's.
     final pad = w * 0.07;
+    final pageMarkdown = _freeMarkdownPage(slide, profile, richTextPage);
 
     return _PreviewScaffold(
       width: w,
@@ -489,14 +524,36 @@ class _MarkdownPreview extends StatelessWidget {
       verticalPadding: pad,
       children: _markdownBodyBlocks(
         context,
-        markdown: slide.customMarkdown,
+        markdown: pageMarkdown,
         w: w,
         font: font,
         profile: profile,
         headingColor: AppTheme.navy,
+        projectPath: projectPath,
       ),
     );
   }
+}
+
+/// De markdown voor pagina [pageIndex] van een free-markdown-dia, via dezelfde
+/// planRichTextForSlide-cache als de bullets-rich-text-path. Voor een korte
+/// body (1 pagina) is dat de volledige body — identiek aan het oude gedrag.
+String _freeMarkdownPage(Slide slide, ThemeProfile profile, int pageIndex) {
+  if (!slideUsesRichText(slide)) return slide.customMarkdown;
+  const w = kReferenceSlideWidth;
+  final hPad = w * 0.07;
+  final contentW = w - hPad * 2;
+  final contentH = richTextBodyAvailH(w, slide, profile, splitWithImage: false);
+  final plan = planRichTextForSlide(
+    slide: slide,
+    profile: profile,
+    w: w,
+    availW: contentW,
+    availH: contentH,
+    font: profile.fontFamily,
+    splitWithImage: false,
+  );
+  return plan.markdownForPage(pageIndex);
 }
 
 /// Shared markdown body renderer for free-markdown and bullets rich-text slides.
@@ -522,6 +579,14 @@ List<Widget> _markdownBodyBlocks(
   var i = 0;
   while (i < lines.length) {
     final line = lines[i];
+
+    // HTML-commentaar niet tekenen — de planner laat het al weg, maar de
+    // één-pagina-case geeft de ruwe markdown door, dus hier ook overslaan
+    // (#1409).
+    if (htmlCommentLine.hasMatch(line)) {
+      i++;
+      continue;
+    }
 
     final fence = RegExp(r'^\s*```(.*)$').firstMatch(line);
     if (fence != null) {

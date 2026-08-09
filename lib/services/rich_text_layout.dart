@@ -353,7 +353,14 @@ RichTextLayoutPlan _planRichTextForSlide({
   final titleSize = w * 0.042;
   final subtitleSize = w * 0.030;
   final spacing = splitWithImage ? vPad * 0.32 : pad * 0.5;
-  final bodySize = splitWithImage ? w * 0.031 : w * 0.026;
+  // Free-markdown houdt zijn eigen, iets kleinere bodymaat (w*0,024) en kapt
+  // op 1,0: een korte dia blijft op natuurlijke grootte staan i.p.v. te
+  // worden opgerekt om de slide te vullen, en alleen een body die echt
+  // overloopt pagineert (#1409). Bullets mogen wél meegroeien.
+  final isFreeMarkdown = slide.type == SlideType.freeMarkdown;
+  final bodySize = isFreeMarkdown
+      ? w * 0.024
+      : (splitWithImage ? w * 0.031 : w * 0.026);
   // [availH] komt bij elke aanroeper uit [bulletsSlideBottomInset]-geometrie,
   // die de footerband al reserveert — hier niet nogmaals aftrekken.
 
@@ -371,19 +378,21 @@ RichTextLayoutPlan _planRichTextForSlide({
     bodySize: bodySize,
     font: font,
     footerInset: 0,
-    maxScale: bulletScaleCap(
-      w,
-      bodySize,
-      splitWithImage ? kBulletsMaxScale : kSplitBulletsMaxScale,
-    ),
+    maxScale: isFreeMarkdown
+        ? 1.0
+        : bulletScaleCap(
+            w,
+            bodySize,
+            splitWithImage ? kBulletsMaxScale : kSplitBulletsMaxScale,
+          ),
   );
 }
 
 bool slideUsesRichText(Slide slide) =>
-    slide.listStyle == ListStyle.richText &&
-    (slide.type == SlideType.bullets ||
-        slide.type == SlideType.bulletsImage ||
-        slide.type == SlideType.freeMarkdown);
+    slide.type == SlideType.freeMarkdown ||
+    (slide.listStyle == ListStyle.richText &&
+        (slide.type == SlideType.bullets ||
+            slide.type == SlideType.bulletsImage));
 
 // Logo placement insets from the slide edge, as a fraction of the logo's own
 // size — the single source of truth shared by the logo overlay (which positions
@@ -509,12 +518,12 @@ int richTextPageCountForSlide({
 List<Slide> expandRichTextForRender(List<Slide> slides, ThemeProfile profile) {
   final out = <Slide>[];
   for (final slide in slides) {
-    // Alleen de twee typen die een pagina ook echt tonen. [slideUsesRichText]
-    // rekent `freeMarkdown` mee, maar diens preview kent geen paginabegrip en
-    // rendert altijd de hele body; uitklappen zou daar identieke kopieën
-    // opleveren in plaats van vervolgpagina's.
+    // Alleen de typen die een pagina ook echt tonen. Sinds #1409 pagineert
+    // free-markdown mee via dezelfde rich-text-machine, dus het hoort hier in
+    // de uitklap thuis — anders rasteriseert de export alleen pagina 1.
     if (slide.type != SlideType.bullets &&
-        slide.type != SlideType.bulletsImage) {
+        slide.type != SlideType.bulletsImage &&
+        slide.type != SlideType.freeMarkdown) {
       out.add(slide);
       continue;
     }
