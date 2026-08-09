@@ -22,7 +22,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/slide.dart';
-import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/used_tool.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/privacy/privacy_scanner.dart';
