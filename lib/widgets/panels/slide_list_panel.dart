@@ -78,9 +78,8 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     super.dispose();
   }
 
-  /// Thumbnails are 16:9, so when the rail is resized their heights change and
-  /// the scroll offset no longer points at the slide being edited. Once the
-  /// resize settles, bring the selected slide back to the top of the list.
+  /// A rail resize changes thumbnail heights; once it settles, bring the
+  /// selected slide back to the top of the list.
   @override
   void didUpdateWidget(covariant SlideListPanel oldWidget) {
     super.didUpdateWidget(oldWidget);

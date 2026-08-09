@@ -142,7 +142,7 @@ const Map<String, int> fileSizeBaseline = {
   // uit te tillen naar een part.
   // +12: tableNumberColumns-veld + doc + constructor/duplicate/copyWith-doorvoer.
   // +4 (#1407): imageTitleAbove-veld + constructor/copyFrom/copyWith-doorvoer.
-  'lib/models/slide.dart': 1095,
+  'lib/models/slide.dart': 1068,
   // +17 (#1355, #1360): SealTamperWarning-klasse + sealTamperWarningProvider
   // voor de automatische zegelverificatie bij openen, en de diskFull-case in
   // _packageOpenResult. Beide zijn tightly coupled aan de bestaande providers
@@ -208,7 +208,7 @@ const Map<String, int> fileSizeBaseline = {
   // chart_preview_touch) om chart_preview_extra.dart onder de 1000 te houden.
   // +1 (#1282): `fitScaleOverride` doorgeven aan `_FindingPreview`, zodat de
   // inhoud-bewuste header-fit te overschrijven is (o.a. voor de kostentoets).
-  'lib/widgets/slides/slide_preview.dart': 1077,
+  'lib/widgets/slides/slide_preview.dart': 1027,
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
   'lib/state/settings_provider.dart': 1057,
@@ -292,7 +292,7 @@ const Map<String, int> classSizeBaseline = {
   // chart_preview_touch.dart; wat resteert is de touch-configuratie die per
   // definitie ín de builder-methoden van deze State leeft (fl_chart
   // *TouchData, MouseRegion-omhulsels, het `_cellTooltip`-veld + setter).
-  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3002,
+  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3000,
   // Procesverbetering: improvement-slide discovery + save paths.
   // +4: Y-01/framework-args op newDeck + improvement-module-prompt.
   'lib/state/tabs_provider.dart#TabsNotifier': 2235,
@@ -309,7 +309,7 @@ const Map<String, int> classSizeBaseline = {
   // `markdown_table_codec.dart` en telt niet mee.
   // +14: ocideck_table_num_cols directive schrijven + _parseNumCols-lezen.
   // +4 (#1407): image-title-above class-token in de classes-lijst.
-  'lib/services/markdown_service.dart#MarkdownService': 2549,
+  'lib/services/markdown_service.dart#MarkdownService': 2447,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2437, // +228 (#1404): hernoem-actie + dialoog; testbare logica zit in
   // ImageRenameService, hier blijft alleen UI-orchestratie
