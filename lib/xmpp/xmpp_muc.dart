@@ -77,6 +77,9 @@ enum MucJoinFailure {
 
   /// The session dropped before the join completed.
   sessionClosed,
+
+  /// The join was cancelled by a leave() call while in progress (#1427).
+  cancelled,
 }
 
 /// The outcome of [XmppMuc.join].
@@ -293,13 +296,21 @@ class XmppMuc {
     if (!_roster.isClosed) _roster.add(roster);
   }
 
-  /// Leave the room (send `unavailable`) and tear down. Idempotent.
+  /// Leave the room (send `unavailable`) and tear down. Idempotent. Als een
+  /// join nog loopt, wordt die afgebroken met `cancelled` — de join-future
+  /// hangt niet tot de timeout (#1427).
   Future<void> leave() async {
     if (_left) {
       await _teardown();
       return;
     }
     _left = true;
+    // Als een join nog loopt, maak hem af — anders hangt de join-future tot
+    // de timeout (20s default). _finishJoin completeert de completer en
+    // roept _teardown aan (result.ok = false).
+    if (_joining != null && !_joining!.isCompleted) {
+      _finishJoin(const MucJoinResult.failed(MucJoinFailure.cancelled));
+    }
     channel.sendStanza(
       Stanza(kind: StanzaKind.presence, to: _selfInRoom, type: 'unavailable'),
     );

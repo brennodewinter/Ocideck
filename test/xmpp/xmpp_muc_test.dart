@@ -227,6 +227,24 @@ void main() {
   );
 
   test(
+    'leave during a pending join cancels the join future, not hang (#1427)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch, timeout: const Duration(seconds: 30));
+      final joining = muc.join();
+
+      // leave() terwijl de join nog loopt (geen self-presence ontvangen).
+      // De oude code liet de join-future hangen tot de 30s timeout.
+      await muc.leave();
+
+      // De join-future is voltooid met cancelled, niet hangend.
+      final result = await joining.timeout(const Duration(seconds: 1));
+      expect(result.ok, isFalse);
+      expect(result.failure, MucJoinFailure.cancelled);
+    },
+  );
+
+  test(
     'a presence without a resource/nick is dropped, not added to the roster (#1426)',
     () async {
       final ch = FakeChannel();
