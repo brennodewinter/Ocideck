@@ -42,6 +42,35 @@ void main() {
     expect(find.textContaining('Voet', findRichText: true), findsOneWidget);
   });
 
+  testWidgets('background colour stays behind a transparent background image', (
+    tester,
+  ) async {
+    final preview = SlidePreviewWidget(
+      slide: const Slide(
+        id: 'layered-background',
+        type: SlideType.bullets,
+        title: 'Lagen',
+        marpStyle: MarpStyle(
+          backgroundColor: '#fff3cf',
+          backgroundImage: "url('assets/images/librekat-logo.png')",
+        ),
+      ),
+    );
+
+    expect(preview.themeProfile.slideBackgroundColor, '#fff3cf');
+    await tester.pumpWidget(
+      MaterialApp(home: SizedBox(width: 1280, height: 720, child: preview)),
+    );
+
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is ColoredBox && widget.color == const Color(0xfffff3cf),
+      ),
+      findsWidgets,
+    );
+  });
+
   test('Flutter rejects the same unsupported CSS colour form as HTML', () {
     final preview = SlidePreviewWidget(
       slide: const Slide(

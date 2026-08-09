@@ -149,12 +149,7 @@ TextStyle _applyFont(String font, TextStyle base) {
 
 ThemeProfile _themeWithMarpStyle(ThemeProfile base, MarpStyle style) {
   final foreground = normalizeMarpColor(style.color);
-  final hasBackgroundImage = marpBackgroundAssetPath(
-    style.backgroundImage,
-  ).isNotEmpty;
-  final background = hasBackgroundImage
-      ? '#00000000'
-      : normalizeMarpColor(style.backgroundColor);
+  final background = normalizeMarpColor(style.backgroundColor);
   return base.copyWith(
     slideBackgroundColor: background,
     titleBackgroundColor: background,
