@@ -161,8 +161,12 @@ class XmppSession implements XmppStanzaChannel {
   final Future<XmppFrameTransport> Function()? reconnectTransportFactory;
 
   /// Called after a successful reconnect, so the higher layer can rejoin its
-  /// MUC room(s). Receives the session (now live again) as the channel.
-  final Future<void> Function(XmppStanzaChannel)? onRejoin;
+  /// MUC room(s). Receives the session (now live again) as the channel. Returns
+  /// `true` als de rejoin slaagde, `false` als de kamer niet betreden kon worden
+  /// (bijv. nick-conflict — de oude occupant is nog niet uitgelogd). Bij `false`
+  /// gaat `_reconnect` naar de volgende backoff-poging in plaats van succes te
+  /// claimen (#1416).
+  final Future<bool> Function(XmppStanzaChannel)? onRejoin;
 
   /// Max reconnect attempts before the session goes fail-closed.
   final int maxReconnectAttempts;
@@ -553,7 +557,15 @@ class XmppSession implements XmppStanzaChannel {
           _live = true;
           _startDispatch();
           // Rejoin de kamer(s), dan signaleer de transport-laag voor een resync.
-          if (onRejoin != null) await onRejoin!(this);
+          // Als onRejoin false retourneert (bijv. nick-conflict), claim geen
+          // succes — ga naar de volgende backoff-poging (#1416).
+          if (onRejoin != null) {
+            final rejoined = await onRejoin!(this);
+            if (!rejoined) {
+              _live = false;
+              continue; // rejoin faalde — backoff en opnieuw
+            }
+          }
           if (!_reconnected.isClosed) _reconnected.add(null);
           return; // success
         } on TimeoutException {

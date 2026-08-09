@@ -461,6 +461,7 @@ void main() {
         reconnectTransportFactory: factory,
         onRejoin: (_) async {
           rejoinCalled = true;
+          return true;
         },
         reconnectDelay: (_) => Duration.zero,
       );
@@ -524,6 +525,52 @@ void main() {
 
         expect(inbound, hasLength(1));
         expect(inbound.single.child('body')?.innerText, 'after-reconnect');
+
+        await session.close();
+      },
+    );
+
+    test(
+      'a failed rejoin (nick-conflict) triggers backoff, not silent success (#1416)',
+      () async {
+        final firstTransport = happyServer(
+          mechanisms: ['PLAIN'],
+          sasl: (_) => ['<success xmlns="$_sasl"/>'],
+        );
+        final (factory, created) = reconnectFactory();
+        var rejoinAttempts = 0;
+        final reconnected = Completer<void>();
+
+        final session = XmppSession(
+          transport: firstTransport,
+          settings: account(),
+          password: 'pencil',
+          reconnectTransportFactory: factory,
+          onRejoin: (_) async {
+            rejoinAttempts++;
+            // Eerste rejoin faalt (nick-conflict — de oude occupant is nog
+            // actief). Tweede rejoin slaagt (de timeout heeft gefuurd).
+            return rejoinAttempts > 1;
+          },
+          maxReconnectAttempts: 5,
+          reconnectDelay: (_) => Duration.zero,
+        );
+        session.onReconnected.listen((_) => reconnected.complete());
+
+        final result = await session.connect();
+        expect(result.ok, isTrue);
+
+        // Drop de stream — de sessie reconnect, rejoin faalt, backoff, opnieuw.
+        firstTransport.dropStream();
+        await reconnected.future.timeout(const Duration(seconds: 5));
+
+        // De factory is twee keer aangeroepen (twee reconnect-pogingen).
+        expect(created, hasLength(2));
+        // De rejoin is twee keer aangeroepen — de eerste faalde, de tweede
+        // slaagde. Met de oude code zou de rejoin eenmaal faalen en de sessie
+        // zou toch succes claimen.
+        expect(rejoinAttempts, 2);
+        expect(session.boundJid, isNotNull);
 
         await session.close();
       },
