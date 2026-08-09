@@ -10,6 +10,11 @@ part of '../marp_html_service.dart';
 /// schrijft. Geen haakjes of regeleindes in het pad — dat is ook wat Markdown
 /// zelf toestaat zonder aanhalingstekens.
 final RegExp _imageRef = RegExp(r'!\[([^\]]*)\]\(([^)\n]+)\)');
+final RegExp _backgroundImageLine = RegExp(
+  r'^(?:backgroundImage\s*:|\s*<!--\s*_backgroundImage\s*:).+$',
+  multiLine: true,
+);
+final RegExp _cssUrl = RegExp(r'''url\(\s*(['"]?)([^'"\)\n]+)\1\s*\)''');
 
 /// De plaatshouder die in de markdown komt te staan in plaats van het pad.
 ///
@@ -41,6 +46,9 @@ Future<({String markdown, List<String> dataUris})> _embedImages(
   if (resolve == null) return (markdown: markdown, dataUris: unchanged);
   final sources = {
     for (final m in _imageRef.allMatches(markdown)) m.group(2)!.trim(),
+    for (final line in _backgroundImageLine.allMatches(markdown))
+      for (final url in _cssUrl.allMatches(line.group(0)!))
+        url.group(2)!.trim(),
   };
   if (sources.isEmpty) return (markdown: markdown, dataUris: unchanged);
 
@@ -72,7 +80,7 @@ Future<({String markdown, List<String> dataUris})> _embedImages(
   final missing = MarpHtmlService._htmlAttr(
     l10n.d('Afbeelding niet ingesloten'),
   );
-  final rewritten = markdown.replaceAllMapped(_imageRef, (m) {
+  var rewritten = markdown.replaceAllMapped(_imageRef, (m) {
     final source = m.group(2)!.trim();
     if (source.isEmpty || source.startsWith('data:')) return m.group(0)!;
     final at = index[source];
@@ -84,6 +92,14 @@ Future<({String markdown, List<String> dataUris})> _embedImages(
           'aria-label="$missing">$missing</span>';
     }
     return '![${m.group(1)}]($_imagePlaceholder$at)';
+  });
+  rewritten = rewritten.replaceAllMapped(_backgroundImageLine, (line) {
+    return line.group(0)!.replaceAllMapped(_cssUrl, (url) {
+      final source = url.group(2)!.trim();
+      if (source.isEmpty || source.startsWith('data:')) return url.group(0)!;
+      final at = index[source];
+      return at == null ? 'none' : 'url($_imagePlaceholder$at)';
+    });
   });
   return (markdown: rewritten, dataUris: dataUris);
 }

@@ -75,6 +75,45 @@ document.querySelectorAll('img[src^="#ocideck-img-"]').forEach(function(el){
   if(typeof uri==='string'&&uri.indexOf('data:image/')===0){el.setAttribute('src',uri);}
   else{el.removeAttribute('src');}
 });
+document.querySelectorAll('section.slide').forEach(function(sec){
+  var bg=sec.style.backgroundImage||'';
+  var bgMatch=bg.match(/#ocideck-img-(\d+)/);
+  if(bgMatch){
+    var bgUri=OCIDECK_IMG[parseInt(bgMatch[1],10)];
+    if(typeof bgUri==='string'&&bgUri.indexOf('data:image/')===0){sec.style.backgroundImage='url("'+bgUri+'")';}
+    else{sec.style.backgroundImage='none';}
+  }
+  var img=sec.querySelector('img');
+  if(!img)return;
+  if(sec.dataset.marpBgFit==='contain')img.style.objectFit='contain';
+  if(sec.dataset.marpBgFilter)img.style.filter=sec.dataset.marpBgFilter;
+});
+function renderMarpChrome(sec,position){
+  var source=sec.querySelector('.marp-'+position+'-source');
+  if(!source)return;
+  var node=document.createElement(position);
+  node.className='marp-'+position;
+  var markdown=source.dataset.markdown||'';
+  var html=window.marked?marked.parseInline(markdown):markdown;
+  if(window.DOMPurify){node.innerHTML=DOMPurify.sanitize(html);}
+  else{node.textContent=markdown;}
+  source.replaceWith(node);
+}
+function fitMarpHeading(sec){
+  var heading=sec.querySelector('h1,h2,h3,h4,h5,h6');
+  if(!heading)return;
+  var size=parseFloat(getComputedStyle(heading).fontSize)||48;
+  var available=heading.parentElement?heading.parentElement.clientWidth:0;
+  var measured=heading.scrollWidth;
+  if(available>0&&measured>0){
+    size=Math.max(16,Math.min(240,size*available/measured));
+    heading.style.fontSize=size+'px';
+  }
+}
+document.querySelectorAll('section.slide').forEach(function(sec){
+  renderMarpChrome(sec,'header');renderMarpChrome(sec,'footer');
+  if(sec.classList.contains('marp-heading-fit'))fitMarpHeading(sec);
+});
 document.querySelectorAll('code.language-mermaid').forEach(function(code){
   var pre=code.closest('pre');if(!pre)return;
   var holder=document.createElement('pre');holder.className='mermaid';

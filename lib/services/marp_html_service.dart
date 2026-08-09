@@ -17,6 +17,7 @@ import '../models/findings_summary_spec.dart';
 import '../models/question.dart';
 import '../models/deck.dart';
 import '../models/improvement_y01.dart';
+import '../models/marp_style.dart';
 import '../models/scope_matrix_spec.dart';
 import '../models/scorecard_spec.dart';
 import '../models/settings.dart';
@@ -24,6 +25,7 @@ import '../models/slide.dart';
 import '../models/timeline.dart';
 import '../utils/log.dart';
 import '../utils/markdown_blocks.dart';
+import '../utils/marp_emoji.dart';
 import '../models/document_signature.dart';
 import 'bundled_licenses.dart';
 import 'cvss/cvss4.dart';
@@ -205,12 +207,18 @@ class MarpHtmlService {
     final signature = docMeta.signature != null
         ? signatureFieldsOf(docMeta.signature!, sealedAt: docMeta.sealedAt)
         : signatureFields(embedded.markdown);
+    final renderMarkdown = expandMarpEmojiShortcodes(embedded.markdown);
+    final parsedDeck = MarkdownService().parseDeck(renderMarkdown);
     final sections = _renderSections(
-      embedded.markdown,
+      renderMarkdown,
       theme: theme,
       cockpitColorScheme: cockpitColorScheme,
       signature: signature,
       continuous: continuous,
+      deckMarpStyle: parsedDeck?.marpStyle ?? const MarpStyle(),
+      slideMarpStyles:
+          parsedDeck?.slides.map((slide) => slide.marpStyle).toList() ??
+          const [],
     );
 
     // Elke ingesloten bundel krijgt een licentiebanner, ook als de geminificeerde

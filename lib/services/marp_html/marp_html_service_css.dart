@@ -26,6 +26,10 @@ html,body{margin:0;padding:0}
 .slide p,.slide li{font-size:24px;line-height:1.45}
 .slide pre.mermaid{background:transparent;border:0;text-align:center}
 .slide img{max-width:100%}
+.slide .marp-header,.slide .marp-footer{position:absolute;left:48px;right:48px;z-index:2;font-size:16px;line-height:1.25}
+.slide .marp-header{top:18px}.slide .marp-footer{bottom:18px}
+.slide .marp-header p,.slide .marp-footer p{font-size:inherit;line-height:inherit;margin:0}
+.slide.marp-heading-fit h1,.slide.marp-heading-fit h2,.slide.marp-heading-fit h3,.slide.marp-heading-fit h4,.slide.marp-heading-fit h5,.slide.marp-heading-fit h6{white-space:nowrap}
 .slide table{border-collapse:collapse;width:100%}
 .slide ol.timeline{list-style:none;margin:.6em 0;padding:0 0 0 24px;border-left:3px solid #ccc}
 .slide ol.timeline li{position:relative;margin:0 0 .9em;padding-left:16px}
