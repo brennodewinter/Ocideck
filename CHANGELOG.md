@@ -1144,6 +1144,37 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **collab: XmppKeyExchange — signed-rot presence + blinded keyshare +
+  deny-by-default admission (§5 sub-plak 5).** De XMPP-sleuteluitwisseling uit
+  `XMPP_COLLAB_TRANSPORT.md` §5 brick 2 + Admission gate, §5.1, §7:
+  `XmppKeyExchange` in `lib/xmpp/xmpp_key_exchange.dart` vestigt de
+  sessie-sleutels veilig over de companion-MUC — de XMPP-tegenhanger van
+  `MatrixKeyExchange`, met drie kritieke verschillen die voortvloeien uit wat
+  een MUC niet gratis geeft. **(1) Device-keys als signed-rot presence-
+  extensie** (`<x xmlns="nl.ocideck.device">`), niet als power-gated room-
+  state — presence is ongeordend en ongegated, dus de §5.1 signed-rot-epoch +
+  pin-on-first-use + **rot-monotoniciteit** (een replay met dezelfde of lagere
+  rot wordt geweigerd vóór de directory's same-identity update, NEW-5) betalen
+  de veiligheid. **(2) Deny-by-default admission-gated keying** — NIET de
+  fail-open Matrix-spiegel; `ensureKeyed` sleutelt alleen devices in een
+  expliciete approval-set (`approve`, de bestaande TOFU/fingerprint-flow),
+  omdat de kamer afleidbaar is uit de (vaak publieke) Jitsi-URL en
+  keying-on-presence iedereen met de link de epoch-sleutel zou geven (SA-F4).
+  **(3) Recipient-blinded broadcast `<keyshare>`** — niet directed to-device;
+  de wrap bevat geen cleartext `to`/`from` (§5.1 N3), elke occupant trial-
+  opent de zijne. `XmppMuc.join(presenceExtensions:)` laat de join-presence
+  de device-keys direct meedragen (§5 brick 10). `XmppTransport.resyncApprovalGate`
+  (NEW-1, §7) is de autoriteit-kant resync-poort die toetst op
+  current-approved-set-lidmaatschap, niet op decryptbaarheid — een vertrokken
+  lid behoudt zijn oude epoch-sleutel en kan anders een resync daaronder
+  verzegelen en deck-brede broadcasts forceren. Crypto is `CollabCrypto`
+  (+§5.1, sub-plak 2); fail-closed doorheen. Nieuwe tests (11): device-key
+  ingest met pin/rot, rot-replay geweigerd, rot-bump geaccepteerd,
+  identiteitswissel geweigerd, niet-goedgekeurde occupant nooit gesleuteld,
+  goedgekeurde occupant gesleuteld, ensureKeyed sleutelt alleen goedgekeurde,
+  keyshare trial-open, broadcast toont geen cleartext recipient, keyshare
+  niet voor dit device stil gedropt, end-to-end co-auteurschap over de draad.
+  Intern-plumbing, achter de standaard-uit Videovergaderingen-module.
 - **collab: XmppTransport + companion-demux + FakeMucHub (§4 sub-plak 4).**
   De XMPP-collab-data-plane uit `XMPP_COLLAB_TRANSPORT.md` §3–5: `XmppTransport
   implements CollabTransport` in `lib/xmpp/xmpp_transport.dart`, draagt ops/locks

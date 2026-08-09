@@ -97,6 +97,7 @@ class XmppTransport implements CollabTransport {
     required this.roomJid,
     required XmppPeerResolver peerResolver,
     this.onResyncRequested,
+    this.resyncApprovalGate,
     Stream<void>? onReconnected,
     this.resyncMinInterval = const Duration(seconds: 2),
     this.resyncCoalesceWindow = const Duration(seconds: 1),
@@ -125,6 +126,16 @@ class XmppTransport implements CollabTransport {
   /// launch wijst hem toe nadat de transport en de snapshot-channel zijn
   /// opgebouwd (de transport bestaat voor de snapshot-channel).
   Future<void> Function()? onResyncRequested;
+
+  /// Autoriteit-kant: de NEW-1 resync-poort (§7). Toetst of de afzender van
+  /// een `<resync>`-verzoek lid is van het **current-approved-set**, niet op
+  /// decryptbaarheid — epoch-sleutels zijn cumulatief en worden niet
+  /// verwijderd, dus een *vertrokken* lid behoudt nog een oude epoch-sleutel
+  /// en kan een resync daaronder verzegelen; een "geopend, dus handel"-poort
+  /// zou een ex-lid deck-brede broadcasts kunnen forceren. De gate krijgt de
+  /// afzender's device-id en retourneert of hij goedgekeurd is. Als null,
+  /// gedraagt de transport zich als sub-plak 4 (geen approved-set-check).
+  bool Function(String senderDevice)? resyncApprovalGate;
 
   /// Follower-kant: minimum-tussenpauze tussen twee `<resync>`-emissies,
   /// zodat één follower de kamer niet overstroomt (§4 N1). In tests op
@@ -367,6 +378,12 @@ class XmppTransport implements CollabTransport {
   /// verzegeld (alleen een gekoeld lid kan het verzenden) — openen bewijst
   /// keying. Coalesceer gelijktijdige verzoeken binnen [_resyncCoalesceWindow]
   /// tot één `onResyncRequested`, zodat N reconnects één re-baseline geven (§4 N1).
+  ///
+  /// **NEW-1 (§7):** als [resyncApprovalGate] is gezet, toetst de poort op
+  /// current-approved-set-lidmaatschap, niet alleen op decryptbaarheid. Een
+  /// vertrokken lid behoudt zijn oude epoch-sleutel en kan nog steeds
+  /// verzegelen — de approved-set-check is de echte poort die een ex-lid
+  /// deck-brede broadcasts blokkeert.
   Future<void> _onResyncStanza(Stanza stanza) async {
     if (_disposed) return;
     final child = _childByNs(stanza, OciDeckNamespace.resync);
@@ -393,6 +410,14 @@ class XmppTransport implements CollabTransport {
     } on Exception catch (e) {
       logWarning('xmpp.transport.resync.open', e);
       return; // niet-gekoeld / gesmeed — fail-closed
+    }
+    // NEW-1: de approved-set-check is de echte poort. Decryptbaarheid alleen
+    // bewijst dat de afzender ooit gesleuteld was — een vertrokken lid behoudt
+    // zijn oude epoch-sleutel. De gate toetst op huidige goedkeuring.
+    if (resyncApprovalGate != null &&
+        !resyncApprovalGate!(sealed.senderDevice)) {
+      logWarning('xmpp.transport.resync.notApproved', sealed.senderDevice);
+      return;
     }
     // Coalesceer: als er recent een re-baseline is afgehandeld, drop het
     // verzoek — de re-baseline dekt deze follower ook.

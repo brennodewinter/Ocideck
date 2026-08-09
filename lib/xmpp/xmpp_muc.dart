@@ -133,7 +133,12 @@ class XmppMuc {
   /// Enter the room. Resolves once our self-presence arrives (ok) or on an error
   /// presence / timeout / dropped session (failed). On success the roster stays
   /// live until [leave]; on failure everything is torn down.
-  Future<MucJoinResult> join() {
+  ///
+  /// [presenceExtensions] zijn extra child-elementen die op de join-presence
+  /// meereizen — bijv. de `<x xmlns="nl.ocideck.device">`-extensie die de
+  /// device-keys publiceert (§5 brick 10, `XMPP_COLLAB_TRANSPORT.md` §6).
+  /// De MUC-`<x>` blijft altijd het eerste child; de extensies komen erna.
+  Future<MucJoinResult> join({List<XmlElement>? presenceExtensions}) {
     if (_joining != null || _joined) {
       throw StateError('XmppMuc.join() called more than once');
     }
@@ -143,12 +148,15 @@ class XmppMuc {
       timeout,
       () => _finishJoin(const MucJoinResult.failed(MucJoinFailure.timeout)),
     );
-    // <presence to="room@service/nick"><x xmlns="…/muc"/></presence>
+    // <presence to="room@service/nick"><x xmlns="…/muc"/>…extensies…</presence>
     channel.sendStanza(
       Stanza(
         kind: StanzaKind.presence,
         to: _selfInRoom,
-        children: [xmppElement('x', namespace: _mucNs)],
+        children: [
+          xmppElement('x', namespace: _mucNs),
+          ...?presenceExtensions,
+        ],
       ),
     );
     return completer.future;
