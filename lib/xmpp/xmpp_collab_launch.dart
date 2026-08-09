@@ -202,14 +202,18 @@ class XmppCollabLaunch {
         isAuthority: false,
         initialVersion: snapshot.version,
       );
-      // §4 re-baseline: a later snapshot (after a post-keying drop+resync)
-      // re-bases the session forward-only.
+      if (!_ready.isCompleted) _ready.complete(_session);
+    }
+    // §4 re-baseline: a later snapshot (after a post-keying drop+resync)
+    // re-bases the session forward-only. De listener moet ook gezet worden als
+    // de sessie al bestaat (bijv. na een reconnect) — anders gaat een re-
+    // baseline snapshot stil verloren (#1428).
+    if (_session != null && _rebaselineSub == null) {
       _rebaselineSub = snapshotChannel.rebaselines.listen((snap) {
         if (_session != null) {
           _session!.rebaseTo(snap.applyTo(_session!.deck), snap.version);
         }
       });
-      if (!_ready.isCompleted) _ready.complete(_session);
     }
   }
 
