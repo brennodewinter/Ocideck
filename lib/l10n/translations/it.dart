@@ -728,6 +728,16 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Afbeeldingslay-out': 'Layout immagine',
+  'Beide': 'Entrambi',
+  'Volvlak': 'A piena pagina',
+  'Kolombreedte': 'Larghezza colonna',
+  'Linker kolomafbeelding': 'Immagine colonna sinistra',
+  'Rechter kolomafbeelding': 'Immagine colonna destra',
+  'Geen linker kolomafbeelding': 'Nessuna immagine colonna sinistra',
+  'Geen rechter kolomafbeelding': 'Nessuna immagine colonna destra',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'A piena pagina: l\'immagine come sfondo a schermo intero. Sinistra/Destra/Entrambi: una o due colonne di immagini accanto al testo del titolo.',
   'Hernoemen': 'Rinomina',
   'Naam wijzigen': 'Cambia nome',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

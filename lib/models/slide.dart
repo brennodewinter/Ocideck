@@ -115,6 +115,12 @@ enum FindingRole { header, detail, evidence }
 
 enum ListStyle { bullets, numbered, checklist, richText }
 
+/// Title-slide image-column layout (#1405): `none` is the classic full-bleed
+/// background; `left`/`right`/`both` place one or two image columns beside the
+/// title text using native Marp `![bg left:W%]` / `![bg right:W%]` syntax — no
+/// new OciDeck token. [Slide.titleColumnWidth] is the column width in percent.
+enum TitleColumnLayout { none, left, right, both }
+
 /// Per-kolomuitlijning van een tabel, opgeslagen in de GFM-scheidingsrij
 /// (`:---`, `:---:`, `---:`). Standaard-GFM, dus elk Marp-gereedschap eert
 /// het — geen OciDeck-token. `left` is de GFM-default bij afwezigheid van
@@ -486,6 +492,15 @@ class Slide {
   /// the deck-wide theme.
   final String titleTextColorOverride;
 
+  /// Title slides only: image-column layout (#1405). `none` = classic full-bleed
+  /// background; `left`/`right`/`both` = one or two image columns beside the title
+  /// text. Uses native Marp `![bg left:W%]` / `![bg right:W%]` — no OciDeck token.
+  final TitleColumnLayout titleColumnLayout;
+
+  /// Title slides only: column width in percent (10–40). Only meaningful when
+  /// [titleColumnLayout] is not [TitleColumnLayout.none].
+  final int titleColumnWidth;
+
   /// Bullet/twoBullets/bulletsImage slides only: overrides the theme's
   /// [ThemeProfile.bulletMarker] for this one slide. `null` = inherit the
   /// theme default. Lets a single slide turn cat-paws on or off without
@@ -704,6 +719,8 @@ class Slide {
     this.imageSize = 0,
     this.titleImageOverlay = true,
     this.titleTextColorOverride = '',
+    this.titleColumnLayout = TitleColumnLayout.none,
+    this.titleColumnWidth = 25,
     this.bulletMarkerOverride,
     this.showLogo = true,
     this.showFooter = true,
@@ -868,6 +885,8 @@ class Slide {
       imageSize: src.imageSize,
       titleImageOverlay: src.titleImageOverlay,
       titleTextColorOverride: src.titleTextColorOverride,
+      titleColumnLayout: src.titleColumnLayout,
+      titleColumnWidth: src.titleColumnWidth,
       bulletMarkerOverride: src.bulletMarkerOverride,
       showLogo: src.showLogo,
       showFooter: src.showFooter,
@@ -937,6 +956,8 @@ class Slide {
     int? imageSize,
     bool? titleImageOverlay,
     String? titleTextColorOverride,
+    TitleColumnLayout? titleColumnLayout,
+    int? titleColumnWidth,
     BulletMarker? bulletMarkerOverride,
     bool clearBulletMarkerOverride = false,
     bool? showLogo,
@@ -1015,6 +1036,8 @@ class Slide {
       titleImageOverlay: titleImageOverlay ?? this.titleImageOverlay,
       titleTextColorOverride:
           titleTextColorOverride ?? this.titleTextColorOverride,
+      titleColumnLayout: titleColumnLayout ?? this.titleColumnLayout,
+      titleColumnWidth: titleColumnWidth ?? this.titleColumnWidth,
       bulletMarkerOverride: clearBulletMarkerOverride
           ? null
           : (bulletMarkerOverride ?? this.bulletMarkerOverride),

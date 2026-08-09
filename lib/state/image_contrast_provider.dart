@@ -29,6 +29,7 @@ Future<List<SlideQualityIssue>> computeImageContrastIssues(Ref ref) async {
       if (!deck.slides[i].skipped &&
           (deck.slides[i].type == SlideType.title ||
               deck.slides[i].type == SlideType.section) &&
+          deck.slides[i].titleColumnLayout == TitleColumnLayout.none &&
           deck.slides[i].imagePath.isNotEmpty &&
           deck.slides[i].imageSize == 0 &&
           (deck.slides[i].title.isNotEmpty ||

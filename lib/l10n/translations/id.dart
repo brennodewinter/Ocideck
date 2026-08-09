@@ -1773,6 +1773,16 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Afbeeldingslay-out': 'Tata letak gambar',
+  'Beide': 'Keduanya',
+  'Volvlak': 'Penuh',
+  'Kolombreedte': 'Lebar kolom',
+  'Linker kolomafbeelding': 'Gambar kolom kiri',
+  'Rechter kolomafbeelding': 'Gambar kolom kanan',
+  'Geen linker kolomafbeelding': 'Tanpa gambar kolom kiri',
+  'Geen rechter kolomafbeelding': 'Tanpa gambar kolom kanan',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Penuh: gambar sebagai latar belakang layar penuh. Kiri/Kanan/Keduanya: satu atau dua kolom gambar di samping teks judul.',
   'Hernoemen': 'Ganti nama',
   'Naam wijzigen': 'Ubah nama',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

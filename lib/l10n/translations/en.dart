@@ -913,6 +913,16 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Afbeeldingslay-out': 'Image layout',
+  'Beide': 'Both',
+  'Volvlak': 'Full-bleed',
+  'Kolombreedte': 'Column width',
+  'Linker kolomafbeelding': 'Left column image',
+  'Rechter kolomafbeelding': 'Right column image',
+  'Geen linker kolomafbeelding': 'No left column image',
+  'Geen rechter kolomafbeelding': 'No right column image',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Full-bleed: the image as a screen-filling background. Left/Right/Both: one or two image columns beside the title text.',
   'Hernoemen': 'Rename',
   'Naam wijzigen': 'Change name',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

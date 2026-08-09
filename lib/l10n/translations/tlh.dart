@@ -1748,6 +1748,16 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Afbeeldingslay-out': 'mIl may\'',
+  'Beide': 'Hoch',
+  'Volvlak': 'naDev',
+  'Kolombreedte': 'nIq \'ab',
+  'Linker kolomafbeelding': 'nIq poS \'ej',
+  'Rechter kolomafbeelding': 'nIq nIq \'ej',
+  'Geen linker kolomafbeelding': 'nIq poS \'e\' be\'',
+  'Geen rechter kolomafbeelding': 'nIq nIq \'e\' be\'',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'naDev: mIl \'ej veQ naQ. poS/nIq/Hoch: wa\' \'ej cha\' nIq mIl \'ej teH \'ej tlhIH.',
   'Hernoemen': 'pong DIvI\' Hol',
   'Naam wijzigen': 'pong choH',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

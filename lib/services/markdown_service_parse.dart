@@ -25,6 +25,10 @@ final _reNumberedMark = RegExp(r'^\d+[.)]$');
 final _reBgImage = RegExp(r'!\[bg');
 final _reBgImageUrl = RegExp(r'!\[bg[^\]]*\]\(([^)]+)\)');
 final _reBgImageSize = RegExp(r'!\[bg[^\]]*?(\d+)%[^\]]*\]');
+// Title-column detection (#1405): `![bg left:W%]` / `![bg right:W%]`. Word
+// boundaries avoid matching "leftovers" or similar substrings.
+final _reBgSide = RegExp(r'!\[bg[^\]]*\b(left|right)\b');
+final _reBgSideWidth = RegExp(r'!\[bg[^\]]*?(?:left|right):(\d+)%');
 final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
 final _reHtmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
 final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
@@ -68,6 +72,11 @@ class _BodyParse {
   String imageCaption = '';
   String imageCaption2 = '';
   int imageSize = 0;
+  // Title-column side detection (#1405).
+  bool sawBgLeft = false;
+  bool sawBgRight = false;
+  int bgLeftWidth = 0;
+  int bgRightWidth = 0;
   String videoPath = '';
   bool videoAutoplay = false;
   int videoStartMs = 0;
@@ -400,6 +409,23 @@ extension _MarkdownParse on MarkdownService {
       paragraph: body.paragraph,
     );
 
+    // Derive title-column layout from bg-side detection (#1405), only for title
+    // slides. In column mode imageSize is forced to 0 (the columns ARE the
+    // background; the full-bleed zoom control does not apply).
+    var titleColumnLayout = TitleColumnLayout.none;
+    var titleColumnWidth = 25;
+    var effectiveImageSize = imageSize;
+    if (type == SlideType.title && (body.sawBgLeft || body.sawBgRight)) {
+      titleColumnLayout = body.sawBgLeft && body.sawBgRight
+          ? TitleColumnLayout.both
+          : body.sawBgLeft
+          ? TitleColumnLayout.left
+          : TitleColumnLayout.right;
+      titleColumnWidth = body.sawBgLeft ? body.bgLeftWidth : body.bgRightWidth;
+      if (titleColumnWidth == 0) titleColumnWidth = 25;
+      effectiveImageSize = 0;
+    }
+
     final showLogo = !classTokens.contains('no-logo');
     final showFooter = !classTokens.contains('no-footer');
 
@@ -445,9 +471,11 @@ extension _MarkdownParse on MarkdownService {
       imageFocalY: focus.fy,
       imageFocalX2: focus.fx2,
       imageFocalY2: focus.fy2,
-      imageSize: imageSize,
+      imageSize: effectiveImageSize,
       titleImageOverlay: d.titleImageOverlay,
       titleTextColorOverride: d.titleTextColorOverride,
+      titleColumnLayout: titleColumnLayout,
+      titleColumnWidth: titleColumnWidth,
       bulletMarkerOverride: d.bulletMarkerOverride,
       videoPath: body.videoPath,
       videoAutoplay: body.videoAutoplay,
@@ -599,6 +627,10 @@ extension _MarkdownParse on MarkdownService {
     String imageCaption,
     String imageCaption2,
     int imageSize,
+    bool sawBgLeft,
+    bool sawBgRight,
+    int bgLeftWidth,
+    int bgRightWidth,
     String videoPath,
     bool videoAutoplay,
     int videoStartMs,
@@ -660,6 +692,10 @@ extension _MarkdownParse on MarkdownService {
       imageCaption: b.imageCaption,
       imageCaption2: b.imageCaption2,
       imageSize: b.imageSize,
+      sawBgLeft: b.sawBgLeft,
+      sawBgRight: b.sawBgRight,
+      bgLeftWidth: b.bgLeftWidth,
+      bgRightWidth: b.bgRightWidth,
       videoPath: b.videoPath,
       videoAutoplay: b.videoAutoplay,
       videoStartMs: b.videoStartMs,
@@ -799,8 +835,26 @@ extension _MarkdownParse on MarkdownService {
       b.quoteAuthor = t.substring(2);
     } else if (_reBgImage.hasMatch(t)) {
       final m = _reBgImageUrl.firstMatch(t);
+      // Detect left/right side for title-column mode (#1405). Assign by side,
+      // not by order, so `![bg right:25%]` always lands in imagePath2.
+      final sideMatch = _reBgSide.firstMatch(t);
+      final side = sideMatch?.group(1);
       if (m != null) {
-        if (b.imagePath.isEmpty) {
+        if (side == 'left') {
+          b.sawBgLeft = true;
+          b.imagePath = m.group(1) ?? '';
+          final wMatch = _reBgSideWidth.firstMatch(t);
+          if (wMatch != null) {
+            b.bgLeftWidth = int.tryParse(wMatch.group(1)!) ?? 0;
+          }
+        } else if (side == 'right') {
+          b.sawBgRight = true;
+          b.imagePath2 = m.group(1) ?? '';
+          final wMatch = _reBgSideWidth.firstMatch(t);
+          if (wMatch != null) {
+            b.bgRightWidth = int.tryParse(wMatch.group(1)!) ?? 0;
+          }
+        } else if (b.imagePath.isEmpty) {
           b.imagePath = m.group(1) ?? '';
         } else {
           b.imagePath2 = m.group(1) ?? ''; // tweede afbeelding

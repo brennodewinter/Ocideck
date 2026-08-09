@@ -1772,6 +1772,16 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afbeeldingslay-out': 'Bildlayout',
+  'Beide': 'Båda',
+  'Volvlak': 'Fullbleed',
+  'Kolombreedte': 'Kolumnbredd',
+  'Linker kolomafbeelding': 'Vänster kolumnbild',
+  'Rechter kolomafbeelding': 'Höger kolumnbild',
+  'Geen linker kolomafbeelding': 'Ingen vänster kolumnbild',
+  'Geen rechter kolomafbeelding': 'Ingen höger kolumnbild',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Fullbleed: bilden som skärmfyllande bakgrund. Vänster/Höger/Båda: en eller två bildkolumner bredvid titeltexten.',
   'Hernoemen': 'Byt namn',
   'Naam wijzigen': 'Ändra namn',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

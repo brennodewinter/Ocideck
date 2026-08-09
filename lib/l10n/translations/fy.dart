@@ -733,6 +733,16 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Afbeeldingslay-out': 'Ofbyldingslay-out',
+  'Beide': 'Beide',
+  'Volvlak': 'Folslein fol',
+  'Kolombreedte': 'Kolombreedte',
+  'Linker kolomafbeelding': 'Lofter kolomafbylding',
+  'Rechter kolomafbeelding': 'Rjochter kolomafbylding',
+  'Geen linker kolomafbeelding': 'Gjin lofter kolomafbylding',
+  'Geen rechter kolomafbeelding': 'Gjin rjochter kolomafbylding',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Folslein fol: de ôfbylding as skermfoljende eftergrûn. Links/Rjochts/Beide: ien of twa byldkolommen njonken de titeltekst.',
   'Hernoemen': 'Werneame',
   'Naam wijzigen': 'Namme wizigje',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

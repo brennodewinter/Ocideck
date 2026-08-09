@@ -1776,6 +1776,16 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Afbeeldingslay-out': 'Rozvržení obrázku',
+  'Beide': 'Obě',
+  'Volvlak': 'Celá plocha',
+  'Kolombreedte': 'Šířka sloupce',
+  'Linker kolomafbeelding': 'Obrázek levého sloupce',
+  'Rechter kolomafbeelding': 'Obrázek pravého sloupce',
+  'Geen linker kolomafbeelding': 'Žádný obrázek levého sloupce',
+  'Geen rechter kolomafbeelding': 'Žádný obrázek pravého sloupce',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Celá plocha: obrázek jako pozadí vyplňující obrazovku. Vlevo/Vpravo/Obě: jeden nebo dva sloupce obrázků vedle textu nadpisu.',
   'Hernoemen': 'Přejmenovat',
   'Naam wijzigen': 'Změnit název',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

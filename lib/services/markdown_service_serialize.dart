@@ -71,7 +71,11 @@ extension _MarkdownSerialize on MarkdownService {
   }
 
   void _writeTitleSlide(StringBuffer buf, Slide slide) {
-    _writeSlideBackground(buf, slide);
+    if (slide.titleColumnLayout != TitleColumnLayout.none) {
+      _writeTitleColumns(buf, slide);
+    } else {
+      _writeSlideBackground(buf, slide);
+    }
     if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
     if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
     if (slide.titleTextColorOverride.isNotEmpty) {
@@ -79,6 +83,32 @@ extension _MarkdownSerialize on MarkdownService {
         '<!-- ocideck_title_text_color: ${slide.titleTextColorOverride} -->',
       );
     }
+  }
+
+  /// Emits one or two image columns beside the title text using native Marp
+  /// `![bg left:W%]` / `![bg right:W%]` syntax (#1405). No OciDeck token: any
+  /// Marp tool reads and writes the same columns. [imagePath] is the left
+  /// column, [imagePath2] the right; focal/alt/caption reuse the shared helpers.
+  void _writeTitleColumns(StringBuffer buf, Slide slide) {
+    final w = slide.titleColumnWidth.clamp(10, 40);
+    final layout = slide.titleColumnLayout;
+    if (layout == TitleColumnLayout.left || layout == TitleColumnLayout.both) {
+      if (slide.imagePath.isNotEmpty) {
+        buf.writeln('![bg left:$w%](${slide.imagePath})');
+      }
+    }
+    if (layout == TitleColumnLayout.right || layout == TitleColumnLayout.both) {
+      if (slide.imagePath2.isNotEmpty) {
+        buf.writeln('![bg right:$w%](${slide.imagePath2})');
+      }
+    }
+    _writeImageFocus(buf, slide);
+    _writeImageAlt(buf, slide);
+    _writeCaptionDiv(
+      buf,
+      _joinTwoCaptions(slide.imageCaption, slide.imageCaption2),
+    );
+    buf.writeln();
   }
 
   void _writeSectionSlide(StringBuffer buf, Slide slide) {

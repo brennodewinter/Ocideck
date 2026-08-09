@@ -1144,6 +1144,13 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **feat(titel): beeldkolommen naast de titeltekst (#1405).** De titeldia
+  ondersteunt nu één of twee afbeeldingskolommen links, rechts of aan beide
+  kanten van de titeltekst, via native Marp `![bg left:W%]` / `![bg right:W%]`
+  — geen nieuw OciDeck-token. De kolombreedte is instelbaar (10–40%, standaard
+  25%). Bugfix: niet-schermvullende titel/tussentitel-afbeeldingen ankeren
+  voortaan bovenaan in plaats van in het midden, tenzij de auteur een eigen
+  focuspunt heeft ingesteld.
 - **xmpp: vier bugs die een echte WebSocket-verbinding onmogelijk maakten
   (#1403).** De XMPP-client draaide groen tegen een in-memory fake transport,
   maar tegen een echte Prosody viel hij op vier dingen stil. (1)

@@ -1780,6 +1780,16 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Afbeeldingslay-out': 'Rozloženie obrázku',
+  'Beide': 'Obidve',
+  'Volvlak': 'Celá plocha',
+  'Kolombreedte': 'Šírka stĺpca',
+  'Linker kolomafbeelding': 'Obrázok ľavého stĺpca',
+  'Rechter kolomafbeelding': 'Obrázok pravého stĺpca',
+  'Geen linker kolomafbeelding': 'Žiaden obrázok ľavého stĺpca',
+  'Geen rechter kolomafbeelding': 'Žiaden obrázok pravého stĺpca',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Celá plocha: obrázok ako pozadie vyplňujúce obrazovku. Vľavo/Vpravo/Obidve: jeden alebo dva stĺpce obrázkov vedľa textu nadpisu.',
   'Hernoemen': 'Premenovať',
   'Naam wijzigen': 'Zmeniť názov',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

@@ -1789,6 +1789,16 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Afbeeldingslay-out': 'Imaginis dispositio',
+  'Beide': 'Uterque',
+  'Volvlak': 'Plena',
+  'Kolombreedte': 'Latitudo columnae',
+  'Linker kolomafbeelding': 'Imago columnae sinistrae',
+  'Rechter kolomafbeelding': 'Imago columnae dextrae',
+  'Geen linker kolomafbeelding': 'Nulla imago columnae sinistrae',
+  'Geen rechter kolomafbeelding': 'Nulla imago columnae dextrae',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Plena: imago ut fundus pleni schematis. Laeva/Dextra/Uterque: una aut duae columnae imaginum iuxta textum tituli.',
   'Hernoemen': 'Renominare',
   'Naam wijzigen': 'Nomen mutare',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
