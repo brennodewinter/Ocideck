@@ -118,10 +118,7 @@ void main() {
     });
 
     test('a JID without @ is invalid', () {
-      const s = XmppSettings(
-        serverUrl: 'wss://example.org/xmpp',
-        jid: 'alice',
-      );
+      const s = XmppSettings(serverUrl: 'wss://example.org/xmpp', jid: 'alice');
       expect(s.validate().any((e) => e.contains('localpart@domain')), isTrue);
     });
 
@@ -130,10 +127,7 @@ void main() {
         serverUrl: 'wss://example.org/xmpp',
         pinnedCertSha256: 'not-a-hash',
       );
-      expect(
-        s.validate().any((e) => e.contains('64 hex-tekens')),
-        isTrue,
-      );
+      expect(s.validate().any((e) => e.contains('64 hex-tekens')), isTrue);
     });
 
     test('a valid pinnedCertSha256 is accepted', () {
@@ -145,9 +139,7 @@ void main() {
     });
 
     test('an oversized serverUrl is invalid', () {
-      final s = XmppSettings(
-        serverUrl: 'wss://${'x' * 2100}.example.org/xmpp',
-      );
+      final s = XmppSettings(serverUrl: 'wss://${'x' * 2100}.example.org/xmpp');
       expect(s.validate().any((e) => e.contains('te lang')), isTrue);
     });
   });

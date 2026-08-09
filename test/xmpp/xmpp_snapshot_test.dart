@@ -106,93 +106,81 @@ void main() {
     expect(completed, isFalse);
   });
 
-  test(
-    'a snapshot with count=0 is dropped fail-closed (#1434)',
-    () async {
-      final env = await _SnapEnv.create();
-      addTearDown(env.dispose);
+  test('a snapshot with count=0 is dropped fail-closed (#1434)', () async {
+    final env = await _SnapEnv.create();
+    addTearDown(env.dispose);
 
-      // Een snapshot met n=0 is misvormd — geen geldige chunking.
-      final stanza = Stanza(
-        kind: StanzaKind.message,
-        type: 'groupchat',
-        from: env.room,
-        to: env.room,
-        children: [
-          xmppElement(
-            'snap',
-            namespace: OciDeckNamespace.snapshot,
-            text: jsonEncode({
-              'id': 'bad-snapshot',
-              'i': 0,
-              'n': 0,
-              'data': 'xxx',
-            }),
-          ),
-        ],
-      );
+    // Een snapshot met n=0 is misvormd — geen geldige chunking.
+    final stanza = Stanza(
+      kind: StanzaKind.message,
+      type: 'groupchat',
+      from: env.room,
+      to: env.room,
+      children: [
+        xmppElement(
+          'snap',
+          namespace: OciDeckNamespace.snapshot,
+          text: jsonEncode({
+            'id': 'bad-snapshot',
+            'i': 0,
+            'n': 0,
+            'data': 'xxx',
+          }),
+        ),
+      ],
+    );
 
-      var completed = false;
-      unawaited(env.receiver.firstSnapshot.then((_) => completed = true));
-      await env.receiver.handleSnapshot(stanza);
-      await env.settle();
-      expect(completed, isFalse, reason: 'count=0 is invalid, no snapshot');
-    },
-  );
+    var completed = false;
+    unawaited(env.receiver.firstSnapshot.then((_) => completed = true));
+    await env.receiver.handleSnapshot(stanza);
+    await env.settle();
+    expect(completed, isFalse, reason: 'count=0 is invalid, no snapshot');
+  });
 
-  test(
-    'a chunk spoofing another sender deviceId is dropped (#1411)',
-    () async {
-      final env = await _SnapEnv.create();
-      addTearDown(env.dispose);
-      final chunks = await _captureChunks(env: env);
+  test('a chunk spoofing another sender deviceId is dropped (#1411)', () async {
+    final env = await _SnapEnv.create();
+    addTearDown(env.dispose);
+    final chunks = await _captureChunks(env: env);
 
-      // Een vijandige occupant stuurt een chunk die de autoriteit's deviceId
-      // in het `id` claimt, maar vanuit een andere nick (`from`). De
-      // afzender-controle moet hem fail-closed droppen.
-      final first = chunks.first;
-      final child = first.children.firstWhere(
-        (c) =>
-            (c.getAttribute('xmlns') ?? c.name.namespaceUri) ==
-            OciDeckNamespace.snapshot,
-      );
-      final decoded = jsonDecode(child.innerText) as Map<String, Object?>;
-      final spoofed = Stanza(
-        kind: StanzaKind.message,
-        type: 'groupchat',
-        from: '${env.room}/hostile',
-        to: first.to,
-        id: first.id,
-        children: [
-          xmppElement(
-            'snap',
-            namespace: OciDeckNamespace.snapshot,
-            text: jsonEncode({
-              ...decoded,
-              'data': 'garbage',
-            }),
-          ),
-        ],
-      );
+    // Een vijandige occupant stuurt een chunk die de autoriteit's deviceId
+    // in het `id` claimt, maar vanuit een andere nick (`from`). De
+    // afzender-controle moet hem fail-closed droppen.
+    final first = chunks.first;
+    final child = first.children.firstWhere(
+      (c) =>
+          (c.getAttribute('xmlns') ?? c.name.namespaceUri) ==
+          OciDeckNamespace.snapshot,
+    );
+    final decoded = jsonDecode(child.innerText) as Map<String, Object?>;
+    final spoofed = Stanza(
+      kind: StanzaKind.message,
+      type: 'groupchat',
+      from: '${env.room}/hostile',
+      to: first.to,
+      id: first.id,
+      children: [
+        xmppElement(
+          'snap',
+          namespace: OciDeckNamespace.snapshot,
+          text: jsonEncode({...decoded, 'data': 'garbage'}),
+        ),
+      ],
+    );
 
-      var completed = false;
-      unawaited(env.receiver.firstSnapshot.then((_) => completed = true));
-      // De spoofed chunk eerst, dan de legitieme chunks — de spoofed moet
-      // gedropt zijn, zodat de legitieme baseline ongeschonden reassembleert.
-      await env.receiver.handleSnapshot(spoofed);
-      for (final s in chunks) {
-        await env.receiver.handleSnapshot(s);
-      }
-      await env.settle();
+    var completed = false;
+    unawaited(env.receiver.firstSnapshot.then((_) => completed = true));
+    // De spoofed chunk eerst, dan de legitieme chunks — de spoofed moet
+    // gedropt zijn, zodat de legitieme baseline ongeschonden reassembleert.
+    await env.receiver.handleSnapshot(spoofed);
+    for (final s in chunks) {
+      await env.receiver.handleSnapshot(s);
+    }
+    await env.settle();
 
-      expect(completed, isTrue);
-      final received = await env.receiver.firstSnapshot;
-      expect(
-        received.slides.map((s) => s.id),
-        env.sent.slides.map((s) => s.id),
-      );
-    },
-  );
+    expect(completed, isTrue);
+    final received = await env.receiver.firstSnapshot;
+    expect(received.slides.map((s) => s.id), env.sent.slides.map((s) => s.id));
+  });
 
   test(
     'a snapshot that arrives before its key is buffered, then opens',
@@ -309,10 +297,7 @@ void main() {
       for (var i = 0; i < 4; i++) {
         await env.authority.sendSnapshot(
           CollabSnapshot.capture(
-            Deck(
-              title: 't',
-              slides: env.sent.slides,
-            ).copyWith(
+            Deck(title: 't', slides: env.sent.slides).copyWith(
               slides: [
                 env.sent.slides.first.copyWith(title: 'v$i'),
                 ...env.sent.slides.skip(1),

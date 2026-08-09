@@ -200,7 +200,10 @@ class XmppTransport implements CollabTransport {
         if (d.rounds < _maxDeferralRounds) {
           _deferred.add(_DeferredStanza(d.stanza, d.namespace, d.rounds + 1));
         } else {
-          logWarning('xmpp.transport.deferred.expired', _stanzaKey(d.stanza, d.namespace));
+          logWarning(
+            'xmpp.transport.deferred.expired',
+            _stanzaKey(d.stanza, d.namespace),
+          );
         }
       }
     }
@@ -572,7 +575,8 @@ class XmppTransport implements CollabTransport {
   bool _rateAllow(String deviceId) {
     final now = DateTime.now();
     final bucket = _opBuckets[deviceId];
-    if (bucket == null || now.difference(bucket.windowStart) >= const Duration(seconds: 1)) {
+    if (bucket == null ||
+        now.difference(bucket.windowStart) >= const Duration(seconds: 1)) {
       _opBuckets[deviceId] = _RateBucket(windowStart: now, count: 1);
       return true;
     }

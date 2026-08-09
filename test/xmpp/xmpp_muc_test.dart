@@ -129,18 +129,15 @@ void main() {
     expect(result.failure, MucJoinFailure.membersOnly);
   });
 
-  test(
-    'join to a non-existent room fails with notAllowed (#1434)',
-    () async {
-      final ch = FakeChannel();
-      final muc = mucOf(ch);
-      final joining = muc.join();
-      ch.inject(_errorPresence('item-not-found'));
-      final result = await joining;
-      expect(result.ok, isFalse);
-      expect(result.failure, MucJoinFailure.notAllowed);
-    },
-  );
+  test('join to a non-existent room fails with notAllowed (#1434)', () async {
+    final ch = FakeChannel();
+    final muc = mucOf(ch);
+    final joining = muc.join();
+    ch.inject(_errorPresence('item-not-found'));
+    final result = await joining;
+    expect(result.ok, isFalse);
+    expect(result.failure, MucJoinFailure.notAllowed);
+  });
 
   test(
     'a presence with malformed MUC-user XML is dropped, not fatal (#1434)',
@@ -241,7 +238,8 @@ void main() {
       expect(join.kind, StanzaKind.presence);
       final history = join.children.firstWhere(
         (c) => c.getAttribute('maxstanzas') != null,
-        orElse: () => throw TestFailure('no <history> element in join presence'),
+        orElse: () =>
+            throw TestFailure('no <history> element in join presence'),
       );
       expect(history.getAttribute('maxstanzas'), '20');
       ch.drop();
@@ -309,29 +307,26 @@ void main() {
     },
   );
 
-  test(
-    'rejoin after leave succeeds — XmppMuc is reusable (#1421)',
-    () async {
-      final ch = FakeChannel();
-      final muc = mucOf(ch);
+  test('rejoin after leave succeeds — XmppMuc is reusable (#1421)', () async {
+    final ch = FakeChannel();
+    final muc = mucOf(ch);
 
-      // Eerste join — slaagt.
-      final firstJoin = muc.join();
-      ch.inject(_presence('me', codes: ['110']));
-      final firstResult = await firstJoin;
-      expect(firstResult.ok, isTrue);
-      await muc.leave();
+    // Eerste join — slaagt.
+    final firstJoin = muc.join();
+    ch.inject(_presence('me', codes: ['110']));
+    final firstResult = await firstJoin;
+    expect(firstResult.ok, isTrue);
+    await muc.leave();
 
-      // Re-join na een leave — de oude code gooide StateError; nu moet hij
-      // de kamer opnieuw betreden (de reconnect-machinery moet dit kunnen).
-      final secondJoin = muc.join();
-      ch.inject(_presence('me', codes: ['110']));
-      final secondResult = await secondJoin;
-      expect(secondResult.ok, isTrue);
-      expect(muc.roster.map((o) => o.nick), contains('me'));
-      await muc.leave();
-    },
-  );
+    // Re-join na een leave — de oude code gooide StateError; nu moet hij
+    // de kamer opnieuw betreden (de reconnect-machinery moet dit kunnen).
+    final secondJoin = muc.join();
+    ch.inject(_presence('me', codes: ['110']));
+    final secondResult = await secondJoin;
+    expect(secondResult.ok, isTrue);
+    expect(muc.roster.map((o) => o.nick), contains('me'));
+    await muc.leave();
+  });
 
   test(
     'rejoin after session drop succeeds — XmppMuc is reusable (#1421)',

@@ -187,7 +187,9 @@ class XmppChat {
       // Eigen echo — de MUC reflecteert de afzender zijn eigen bericht terug;
       // de lokale echo is al toegevoegd in [send].
       if (sealed.senderDevice == _e2ee.deviceId) return;
-      if (_pending.length >= pendingCap) _pending.removeAt(0); // FIFO-verdrijving
+      if (_pending.length >= pendingCap) {
+        _pending.removeAt(0); // FIFO-verdrijving
+      }
       _pending.add(sealed);
       await retryPending();
     } on Exception catch (e) {

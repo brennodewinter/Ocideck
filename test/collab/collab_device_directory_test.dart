@@ -191,12 +191,18 @@ void main() {
         final dir = CollabDeviceDirectory(perAddressDeviceCap: 3);
         for (var i = 0; i < 3; i++) {
           final keys = await _deviceKeys('dev$i', salt: i);
-          expect(await dir.ingest(peerAddress: '@alice:hs', keys: keys), isTrue);
+          expect(
+            await dir.ingest(peerAddress: '@alice:hs', keys: keys),
+            isTrue,
+          );
         }
 
         // De cap is bereikt — een 4e device wordt geweigerd.
         final fourth = await _deviceKeys('dev3', salt: 3);
-        expect(await dir.ingest(peerAddress: '@alice:hs', keys: fourth), isFalse);
+        expect(
+          await dir.ingest(peerAddress: '@alice:hs', keys: fourth),
+          isFalse,
+        );
 
         // Verwijder een device — de teller daalt.
         dir.remove('dev0');

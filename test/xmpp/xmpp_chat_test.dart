@@ -183,10 +183,7 @@ void main() {
           xmppElement(
             'chat',
             namespace: OciDeckNamespace.chat,
-            text: jsonEncode({
-              'id': 'ghost-id',
-              'sealed': ghost.toContent(),
-            }),
+            text: jsonEncode({'id': 'ghost-id', 'sealed': ghost.toContent()}),
           ),
         ],
       );

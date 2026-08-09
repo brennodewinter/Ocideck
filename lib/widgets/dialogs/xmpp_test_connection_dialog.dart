@@ -346,7 +346,5 @@ String _joinFailureText(AppLocalizations l10n, MucJoinFailure failure) =>
       MucJoinFailure.roomFull ||
       MucJoinFailure.notAllowed ||
       MucJoinFailure.sessionClosed ||
-      MucJoinFailure.cancelled => l10n.d(
-        'De kamer kon niet worden betreden.',
-      ),
+      MucJoinFailure.cancelled => l10n.d('De kamer kon niet worden betreden.'),
     };

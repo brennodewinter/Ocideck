@@ -346,7 +346,8 @@ void main() {
         expect(
           env.hostCrypto.currentEpoch,
           0,
-          reason: 'host still has its own epoch (own-echo dropped by empty candidates)',
+          reason:
+              'host still has its own epoch (own-echo dropped by empty candidates)',
         );
       },
     );
