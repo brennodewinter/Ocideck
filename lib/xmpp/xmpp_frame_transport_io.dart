@@ -12,6 +12,7 @@
 import 'dart:io';
 
 import '../models/xmpp_settings.dart';
+import '../utils/log.dart';
 import '../utils/net_guard.dart';
 import 'xmpp_frame_transport.dart';
 
@@ -115,14 +116,32 @@ class _WebSocketFrameTransport implements XmppFrameTransport {
 
   @override
   void send(String frame) {
-    if (!_closed) _socket.add(frame);
+    if (_closed) return;
+    try {
+      _socket.add(frame);
+    } catch (e) {
+      // De socket kan tussen de _closed-check en de send sluiten (race). Een
+      // onafgevangen uitzondering hier zou de app laten crashen (#1430).
+      _closed = true;
+      logWarning('xmpp.transport.send', e);
+    }
   }
 
   @override
   Future<void> close() async {
     if (_closed) return;
     _closed = true;
-    await _socket.close();
-    _client.close(force: true);
+    try {
+      await _socket.close();
+    } catch (e) {
+      // close() kan gooien als de socket al halverwege de sluiting is — niet
+      // fataal, maar mag niet crashen (#1430).
+      logWarning('xmpp.transport.close', e);
+    }
+    try {
+      _client.close(force: true);
+    } catch (e) {
+      logWarning('xmpp.transport.httpClientClose', e);
+    }
   }
 }
