@@ -732,6 +732,19 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Titel boven afbeelding': 'Título riba di e imagen',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Mustra e título riba di e imagen na lugá di riba dje',
+  'Afbeeldingslay-out': 'Layout di imagen',
+  'Beide': 'Ambos',
+  'Volvlak': 'Pancha komplet',
+  'Kolombreedte': 'Ancho di kolom',
+  'Linker kolomafbeelding': 'Imag di kolom na man robes',
+  'Rechter kolomafbeelding': 'Imag di kolom na man drechi',
+  'Geen linker kolomafbeelding': 'Sin imag di kolom na man robes',
+  'Geen rechter kolomafbeelding': 'Sin imag di kolom na man drechi',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Pancha komplet: e imagen como fondo di pantaya komplet. Na man robes/Na man drechi/Ambos: un of dos kolom di imagen banda di e tekst di titulo.',
   'Hernoemen': 'Kambia nòmber',
   'Naam wijzigen': 'Kambia nòmber',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

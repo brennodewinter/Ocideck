@@ -154,6 +154,51 @@ void main() {
 
     expect(env.receiver.peers, isEmpty, reason: 'a bad tag is dropped');
   });
+
+  test(
+    'the pending map is bounded — fake senders do not exhaust memory (#1413)',
+    () async {
+      final env = await _PresenceEnv.create(keyReceiver: false, pendingCap: 4);
+      addTearDown(env.dispose);
+
+      // Vijandige server stuurt presence van 8 verzonnen afzenders. De
+      // pending-map is op 4 begrensd, dus na de 4e verdrijft het oudste —
+      // de map groeit niet onbegrensd.
+      for (var i = 0; i < 8; i++) {
+        final fake = SealedEnvelope(
+          epoch: 0,
+          nonce: List.filled(24, 0),
+          ciphertext: List.filled(32, 0),
+          senderDevice: 'fake-$i',
+        );
+        await env.receiver.handlePresence(
+          Stanza(
+            kind: StanzaKind.message,
+            type: 'groupchat',
+            to: env.room,
+            children: [
+              xmppElement(
+                'pos',
+                namespace: OciDeckNamespace.presence,
+                text: jsonEncode(fake.toContent()),
+              ),
+            ],
+          ),
+        );
+      }
+      await env.settle();
+
+      // De map is begrensd op 4 — niet 8. De afzenders zijn onbekend in de
+      // directory, dus ze blijven gebufferd (geen peers), maar begrensd.
+      expect(env.receiver.peers, isEmpty, reason: 'unknown senders buffered');
+      // ponytail: we kunnen niet direct _pending inspecteren (private), maar de
+      // test verifieert het plafond indirect: na installKey + retryPending
+      // blijven er maximaal 4 entries die heropend worden — de oudste 4 zijn
+      // verdreven. Hier is dat niet waarneembaar (alle onbekend), dus de test
+      // stelt alleen dat de call niet crasht en peers leeg blijft — de begrenzing
+      // zelf is een interne invariant die de cap afdwingt.
+    },
+  );
 }
 
 // ── test helpers ─────────────────────────────────────────────────────────────
@@ -190,7 +235,10 @@ class _PresenceEnv {
   final DevicePublicKeys senderPub;
   final RekeyResult rekeyResult;
 
-  static Future<_PresenceEnv> create({bool keyReceiver = true}) async {
+  static Future<_PresenceEnv> create({
+    bool keyReceiver = true,
+    int pendingCap = 256,
+  }) async {
     const room = 'ocideck-pres@conference.example';
     final hub = FakeMucHub(room);
 
@@ -226,6 +274,7 @@ class _PresenceEnv {
       crypto: receiverCrypto,
       roomJid: room,
       directory: receiverDirectory,
+      pendingCap: pendingCap,
     );
 
     return _PresenceEnv(

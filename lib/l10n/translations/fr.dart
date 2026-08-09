@@ -732,6 +732,19 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Titel boven afbeelding': 'Titre au-dessus de l\'image',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Affiche le titre au-dessus de l\'image au lieu de superposé',
+  'Afbeeldingslay-out': 'Disposition de l\'image',
+  'Beide': 'Les deux',
+  'Volvlak': 'Pleine page',
+  'Kolombreedte': 'Largeur de colonne',
+  'Linker kolomafbeelding': 'Image colonne gauche',
+  'Rechter kolomafbeelding': 'Image colonne droite',
+  'Geen linker kolomafbeelding': 'Pas d\'image colonne gauche',
+  'Geen rechter kolomafbeelding': 'Pas d\'image colonne droite',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Pleine page : l\'image comme arrière-plan plein écran. Gauche/Droite/Les deux : une ou deux colonnes d\'images à côté du texte du titre.',
   'Hernoemen': 'Renommer',
   'Naam wijzigen': 'Changer le nom',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

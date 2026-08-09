@@ -8,7 +8,7 @@ import 'package:ocideck/xmpp/xmpp_stanza.dart';
 /// A scripted stanza channel: [inject] pushes a server presence, [sent] records
 /// what the MUC layer sends, [drop] simulates the session ending.
 class FakeChannel implements XmppStanzaChannel {
-  final _inbound = StreamController<Stanza>.broadcast();
+  StreamController<Stanza> _inbound = StreamController<Stanza>.broadcast();
   final sent = <Stanza>[];
 
   @override
@@ -26,6 +26,12 @@ class FakeChannel implements XmppStanzaChannel {
 
   void drop() {
     if (!_inbound.isClosed) _inbound.close();
+  }
+
+  /// Simuleer een reconnect: maak een verse inbound-stream. De MUC's
+  /// re-subscription in join() ziet een levende stream.
+  void reconnect() {
+    if (_inbound.isClosed) _inbound = StreamController<Stanza>.broadcast();
   }
 }
 
@@ -123,6 +129,42 @@ void main() {
     expect(result.failure, MucJoinFailure.membersOnly);
   });
 
+  test('join to a non-existent room fails with notAllowed (#1434)', () async {
+    final ch = FakeChannel();
+    final muc = mucOf(ch);
+    final joining = muc.join();
+    ch.inject(_errorPresence('item-not-found'));
+    final result = await joining;
+    expect(result.ok, isFalse);
+    expect(result.failure, MucJoinFailure.notAllowed);
+  });
+
+  test(
+    'a presence with malformed MUC-user XML is dropped, not fatal (#1434)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+      final joining = muc.join();
+      ch.inject(_presence('me', codes: ['110']));
+      await joining;
+
+      // Inject een presence met ongeldig MUC-user XML — de parser moet dit
+      // gracelijk afhandelen, niet crashen.
+      ch.inject(
+        Stanza.parse(
+          '<presence from="$_room/bob">'
+          '<x xmlns="$_mucUser">'
+          '<item affiliation="INVALID_ROLE" role=""/>'
+          '</x></presence>',
+        ),
+      );
+      await Future<void>.delayed(Duration.zero);
+      // De sessie is nog live — geen crash.
+      expect(muc.roster.any((o) => o.nick == 'bob'), isTrue);
+      await muc.leave();
+    },
+  );
+
   test('an occupant leaving is removed from the roster and emitted', () async {
     final ch = FakeChannel();
     final muc = mucOf(ch);
@@ -183,6 +225,136 @@ void main() {
     expect(muc.join, throwsStateError);
     ch.drop();
   });
+
+  test(
+    'join with historyLimit sends a <history maxstanzas=N/> element (#1425)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+      unawaited(muc.join(historyLimit: 20));
+
+      // De join-presence bevat een <history maxstanzas="20"/> child.
+      final join = ch.sent.single;
+      expect(join.kind, StanzaKind.presence);
+      final history = join.children.firstWhere(
+        (c) => c.getAttribute('maxstanzas') != null,
+        orElse: () =>
+            throw TestFailure('no <history> element in join presence'),
+      );
+      expect(history.getAttribute('maxstanzas'), '20');
+      ch.drop();
+    },
+  );
+
+  test(
+    'join without historyLimit sends no <history> element (#1425)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+      unawaited(muc.join());
+
+      final join = ch.sent.single;
+      expect(
+        join.children.any((c) => c.getAttribute('maxstanzas') != null),
+        isFalse,
+        reason: 'no <history> element when historyLimit is 0',
+      );
+      ch.drop();
+    },
+  );
+
+  test(
+    'leave during a pending join cancels the join future, not hang (#1427)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch, timeout: const Duration(seconds: 30));
+      final joining = muc.join();
+
+      // leave() terwijl de join nog loopt (geen self-presence ontvangen).
+      // De oude code liet de join-future hangen tot de 30s timeout.
+      await muc.leave();
+
+      // De join-future is voltooid met cancelled, niet hangend.
+      final result = await joining.timeout(const Duration(seconds: 1));
+      expect(result.ok, isFalse);
+      expect(result.failure, MucJoinFailure.cancelled);
+    },
+  );
+
+  test(
+    'a presence without a resource/nick is dropped, not added to the roster (#1426)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+      final joining = muc.join();
+      ch.inject(_presence('me', codes: ['110']));
+      await joining;
+
+      // Een presence van room@conf (zonder /nick) — misvormd, geen occupant.
+      ch.inject(
+        Stanza.parse(
+          '<presence from="$_room">'
+          '<x xmlns="$_mucUser">'
+          '<item affiliation="member" role="participant"/>'
+          '</x></presence>',
+        ),
+      );
+      await Future<void>.delayed(Duration.zero);
+
+      // Geen phantom-entry met nick "" in het roster.
+      expect(muc.roster.any((o) => o.nick.isEmpty), isFalse);
+      await muc.leave();
+    },
+  );
+
+  test('rejoin after leave succeeds — XmppMuc is reusable (#1421)', () async {
+    final ch = FakeChannel();
+    final muc = mucOf(ch);
+
+    // Eerste join — slaagt.
+    final firstJoin = muc.join();
+    ch.inject(_presence('me', codes: ['110']));
+    final firstResult = await firstJoin;
+    expect(firstResult.ok, isTrue);
+    await muc.leave();
+
+    // Re-join na een leave — de oude code gooide StateError; nu moet hij
+    // de kamer opnieuw betreden (de reconnect-machinery moet dit kunnen).
+    final secondJoin = muc.join();
+    ch.inject(_presence('me', codes: ['110']));
+    final secondResult = await secondJoin;
+    expect(secondResult.ok, isTrue);
+    expect(muc.roster.map((o) => o.nick), contains('me'));
+    await muc.leave();
+  });
+
+  test(
+    'rejoin after session drop succeeds — XmppMuc is reusable (#1421)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+
+      // Join slaagt, dan valt de sessie weg.
+      final firstJoin = muc.join();
+      ch.inject(_presence('me', codes: ['110']));
+      final firstResult = await firstJoin;
+      expect(firstResult.ok, isTrue);
+      ch.drop();
+      // Wacht tot de onDone-callback (_onSessionDropped → _teardown) heeft
+      // gevuuurd — anders is _left nog niet gezet en join() gooit.
+      await Future<void>.delayed(Duration.zero);
+
+      // Simuleer een reconnect: de sessie is hersteld met een verse stream.
+      ch.reconnect();
+
+      // Re-join na een session drop — de MUC moet opnieuw kunnen betreden.
+      final secondJoin = muc.join();
+      ch.inject(_presence('me', codes: ['110']));
+      final secondResult = await secondJoin;
+      expect(secondResult.ok, isTrue);
+      await muc.leave();
+    },
+  );
 
   test(
     'a stray error presence after join does not tear down the roster',

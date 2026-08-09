@@ -2750,6 +2750,19 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Titel boven afbeelding': 'Görselin üstündeki başlık',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Başlığı görselin üzerine yığılmış yerine üstünde gösterir',
+  'Afbeeldingslay-out': 'Görüntü düzeni',
+  'Beide': 'Her ikisi',
+  'Volvlak': 'Tam dolu',
+  'Kolombreedte': 'Sütun genişliği',
+  'Linker kolomafbeelding': 'Sol sütun görseli',
+  'Rechter kolomafbeelding': 'Sağ sütun görseli',
+  'Geen linker kolomafbeelding': 'Sol sütun görseli yok',
+  'Geen rechter kolomafbeelding': 'Sağ sütun görseli yok',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Tam dolu: görüntü ekranı dolduran arka plan olarak. Sol/Sağ/Her ikisi: başlık metninin yanında bir veya iki görüntü sütunu.',
   'Hernoemen': 'Yeniden adlandır',
   'Naam wijzigen': 'Adı değiştir',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

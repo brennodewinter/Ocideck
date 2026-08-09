@@ -1795,6 +1795,19 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Titel boven afbeelding': 'Titlu fuq l-istampa',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Juri t-titlu fuq l-istampa minflok ma jitpoġġa fuqha',
+  'Afbeeldingslay-out': 'Tqassim tal-istampa',
+  'Beide': 'It-tnejn',
+  'Volvlak': 'Sħiħ',
+  'Kolombreedte': 'Wisa\' tal-kolonna',
+  'Linker kolomafbeelding': 'Stampa tal-kolonna xellugija',
+  'Rechter kolomafbeelding': 'Stampa tal-kolonna leminija',
+  'Geen linker kolomafbeelding': 'L-ebda stampa tal-kolonna xellugija',
+  'Geen rechter kolomafbeelding': 'L-ebda stampa tal-kolonna leminija',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Sħiħ: l-istampa bħala sfond jimla l-iskrin. Xellug/Lemin/It-tnejn: waħda jew żewġ kolonni ta\' stampi ħdejn it-test tat-titlu.',
   'Hernoemen': 'Biddel isem',
   'Naam wijzigen': 'Biddel l-isem',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

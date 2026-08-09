@@ -37,6 +37,10 @@ _slideCases = {
     value: '#ff0000',
     read: (s) => s.titleTextColorOverride,
   ),
+  SlideField.titleColumnLayout: (
+    value: TitleColumnLayout.both,
+    read: (s) => s.titleColumnLayout,
+  ),
   SlideField.findingId: (value: 'F-1', read: (s) => s.findingId),
   SlideField.checklistScope: (value: 'web', read: (s) => s.checklistScope),
   SlideField.improvementTemplateId: (
@@ -65,6 +69,7 @@ _slideCases = {
     value: false,
     read: (s) => s.titleImageOverlay,
   ),
+  SlideField.imageTitleAbove: (value: true, read: (s) => s.imageTitleAbove),
   SlideField.showLogo: (value: false, read: (s) => s.showLogo),
   SlideField.showFooter: (value: false, read: (s) => s.showFooter),
   SlideField.skipped: (value: true, read: (s) => s.skipped),
@@ -74,6 +79,7 @@ _slideCases = {
   SlideField.videoStartMs: (value: 1500, read: (s) => s.videoStartMs),
   SlideField.videoEndMs: (value: 3000, read: (s) => s.videoEndMs),
   SlideField.imageSize: (value: 42, read: (s) => s.imageSize),
+  SlideField.titleColumnWidth: (value: 30, read: (s) => s.titleColumnWidth),
   SlideField.imageFocalX: (value: 0.25, read: (s) => s.imageFocalX),
   SlideField.imageFocalY: (value: 0.75, read: (s) => s.imageFocalY),
   SlideField.imageFocalX2: (value: 0.1, read: (s) => s.imageFocalX2),

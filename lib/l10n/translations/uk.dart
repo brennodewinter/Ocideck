@@ -1790,6 +1790,19 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Titel boven afbeelding': 'Заголовок над зображенням',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Показує заголовок над зображенням замість накладеного на нього',
+  'Afbeeldingslay-out': 'Розташування зображення',
+  'Beide': 'Обидва',
+  'Volvlak': 'На весь екран',
+  'Kolombreedte': 'Ширина стовпця',
+  'Linker kolomafbeelding': 'Зображення лівого стовпця',
+  'Rechter kolomafbeelding': 'Зображення правого стовпця',
+  'Geen linker kolomafbeelding': 'Немає зображення лівого стовпця',
+  'Geen rechter kolomafbeelding': 'Немає зображення правого стовпця',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'На весь екран: зображення як тло на весь екран. Ліво/Право/Обидва: одна або дві колонки зображень поруч із текстом заголовка.',
   'Hernoemen': 'Перейменувати',
   'Naam wijzigen': 'Змінити назву',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

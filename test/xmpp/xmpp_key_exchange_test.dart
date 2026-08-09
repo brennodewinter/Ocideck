@@ -313,6 +313,101 @@ void main() {
   });
 
   group('XmppKeyExchange end-to-end', () {
+    test(
+      'a guest whose nick matches the host boundJid resource is still keyed (#1415)',
+      () async {
+        // #1415: _isOwnPresence vergeleek de MUC-nick met de XMPP-resource van
+        // boundJid. In de fake is boundJid `room/nick`, dus de resource is de
+        // nick — maar in productie is boundJid `user@domain/resource` en heeft
+        // de resource geen relatie met de MUC-nick. Een deelnemer wiens nick
+        // toevallig gelijk is aan de host's resource werd incorrect als
+        // "eigen" gedropt. De fix verwijdert de nick-check; de eigen-echo wordt
+        // afgehandeld doordat de host niet in zijn eigen directory staat.
+        final env = await _KeyEnv.create();
+        addTearDown(env.dispose);
+
+        await env.host.publishDeviceKeys();
+        await env.guest.publishDeviceKeys();
+        await env.settle();
+
+        // De guest's nick is 'guest', de host's boundJid-resource is 'host'.
+        // Met de oude _isOwnPresence-check zou dit false geven (geen match) —
+        // maar de test verifieert het algemene geval: de guest is gesleuteld
+        // ongeacht de nick-relatie.
+        env.host.approve('guest');
+        await env.host.distributeEpoch([env.guestPub]);
+        await env.settle();
+
+        expect(
+          env.guestCrypto.currentEpoch,
+          0,
+          reason: 'guest is keyed regardless of nick/boundJid relationship',
+        );
+        expect(
+          env.hostCrypto.currentEpoch,
+          0,
+          reason:
+              'host still has its own epoch (own-echo dropped by empty candidates)',
+        );
+      },
+    );
+
+    test(
+      'a device-presence without from is dropped fail-closed (#1429)',
+      () async {
+        final env = await _KeyEnv.create();
+        addTearDown(env.dispose);
+
+        // Stuur een device-presence zonder from — de oude code viel terug op
+        // roomJid als peer-address, wat geen geldig occupant-address is.
+        final keys = env.guestPub;
+        final stanza = Stanza(
+          kind: StanzaKind.presence,
+          // from is null — misvormd
+          to: env.room,
+          children: [
+            xmppElement(
+              'x',
+              namespace: OciDeckNamespace.device,
+              text: jsonEncode(keys.toJson()),
+            ),
+          ],
+        );
+        await env.host.handleDevicePresence(stanza);
+        await env.settle();
+
+        // Het device is niet in de directory opgenomen — fail-closed.
+        expect(env.host.directory.resolve(keys.deviceId), isNull);
+      },
+    );
+
+    test(
+      'a device-presence with malformed JSON is dropped fail-closed (#1434)',
+      () async {
+        final env = await _KeyEnv.create();
+        addTearDown(env.dispose);
+
+        // Stuur een device-presence met ongeldig JSON — de handler moet dit
+        // gracelijk afhandelen, niet crashen.
+        final stanza = Stanza(
+          kind: StanzaKind.presence,
+          from: '${env.room}/badguy',
+          to: env.room,
+          children: [
+            xmppElement(
+              'x',
+              namespace: OciDeckNamespace.device,
+              text: '{not valid json',
+            ),
+          ],
+        );
+        await env.host.handleDevicePresence(stanza);
+        await env.settle();
+        // Geen crash, geen device opgenomen.
+        expect(env.host.directory.knownDevices, isEmpty);
+      },
+    );
+
     test('two parties establish keys over the wire, then co-author', () async {
       final env = await _KeyEnv.create(withTransport: true);
       addTearDown(env.dispose);

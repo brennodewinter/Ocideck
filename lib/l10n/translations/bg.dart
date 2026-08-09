@@ -1795,6 +1795,19 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Titel boven afbeelding': 'Заглавие над изображението',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Показва заглавието над изображението вместо върху него',
+  'Afbeeldingslay-out': 'Разположение на изображението',
+  'Beide': 'И двете',
+  'Volvlak': 'Цял екран',
+  'Kolombreedte': 'Ширина на колона',
+  'Linker kolomafbeelding': 'Изображение на лява колона',
+  'Rechter kolomafbeelding': 'Изображение на дясна колона',
+  'Geen linker kolomafbeelding': 'Няма изображение на лява колона',
+  'Geen rechter kolomafbeelding': 'Няма изображение на дясна колона',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Цял екран: изображението като фон, запълващ екрана. Ляво/Дясно/И двете: една или две колони с изображения до текста на заглавието.',
   'Hernoemen': 'Преименувай',
   'Naam wijzigen': 'Промяна на име',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

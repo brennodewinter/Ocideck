@@ -200,7 +200,10 @@ Map<String, Object?> slideToJson(Slide s) => {
   'advanceDuration': s.advanceDuration,
   'imageSize': s.imageSize,
   'titleImageOverlay': s.titleImageOverlay,
+  'imageTitleAbove': s.imageTitleAbove,
   'titleTextColorOverride': s.titleTextColorOverride,
+  'titleColumnLayout': s.titleColumnLayout.name,
+  'titleColumnWidth': s.titleColumnWidth,
   'bulletMarkerOverride': s.bulletMarkerOverride?.name,
   'showLogo': s.showLogo,
   'showFooter': s.showFooter,
@@ -273,7 +276,14 @@ Slide slideFromJson(Map<String, Object?> j) => Slide(
   advanceDuration: _double(j, 'advanceDuration'),
   imageSize: _int(j, 'imageSize'),
   titleImageOverlay: _bool(j, 'titleImageOverlay'),
+  imageTitleAbove: _bool(j, 'imageTitleAbove'),
   titleTextColorOverride: _str(j, 'titleTextColorOverride'),
+  titleColumnLayout: _enumByName(
+    TitleColumnLayout.values,
+    _str(j, 'titleColumnLayout'),
+    'titleColumnLayout',
+  ),
+  titleColumnWidth: _int(j, 'titleColumnWidth'),
   bulletMarkerOverride: _enumOrNull(
     BulletMarker.values,
     j['bulletMarkerOverride'],
@@ -364,6 +374,7 @@ enum _ValueKind {
   tlp,
   privacy,
   marpStyle,
+  titleColumnLayout,
 }
 
 _ValueKind _slideFieldKind(SlideField f) {
@@ -407,6 +418,7 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.cssClass: _ValueKind.str,
   SlideField.notes: _ValueKind.str,
   SlideField.titleTextColorOverride: _ValueKind.str,
+  SlideField.titleColumnLayout: _ValueKind.titleColumnLayout,
   SlideField.findingId: _ValueKind.str,
   SlideField.checklistScope: _ValueKind.str,
   SlideField.improvementTemplateId: _ValueKind.str,
@@ -420,6 +432,7 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.videoAutoplay: _ValueKind.boolean,
   SlideField.audioAutoplay: _ValueKind.boolean,
   SlideField.titleImageOverlay: _ValueKind.boolean,
+  SlideField.imageTitleAbove: _ValueKind.boolean,
   SlideField.showLogo: _ValueKind.boolean,
   SlideField.showFooter: _ValueKind.boolean,
   SlideField.skipped: _ValueKind.boolean,
@@ -429,6 +442,7 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.videoStartMs: _ValueKind.integer,
   SlideField.videoEndMs: _ValueKind.integer,
   SlideField.imageSize: _ValueKind.integer,
+  SlideField.titleColumnWidth: _ValueKind.integer,
   SlideField.imageFocalX: _ValueKind.real,
   SlideField.imageFocalY: _ValueKind.real,
   SlideField.imageFocalX2: _ValueKind.real,
@@ -482,6 +496,7 @@ Object? _encodeValue(_ValueKind kind, Object? value) {
     _ValueKind.tlp => _need<TlpLevel>(value).name,
     _ValueKind.privacy => _need<PrivacyDisposition>(value).name,
     _ValueKind.marpStyle => _need<MarpStyle>(value).toJson(),
+    _ValueKind.titleColumnLayout => _need<TitleColumnLayout>(value).name,
   };
 }
 
@@ -513,6 +528,11 @@ Object? _decodeValue(_ValueKind kind, Object? json, String where) {
       where,
     ),
     _ValueKind.marpStyle => MarpStyle.fromJson(_asMap(json, where)),
+    _ValueKind.titleColumnLayout => _enumByName(
+      TitleColumnLayout.values,
+      _asString(json, where),
+      where,
+    ),
   };
 }
 

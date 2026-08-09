@@ -1808,6 +1808,19 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Titel boven afbeelding': 'Teideal os cionn na híomhá',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Taispeánann an teideal os cionn na híomhá in ionad a bheith uirthi',
+  'Afbeeldingslay-out': 'Leagan amach íomhá',
+  'Beide': 'An dá cheann',
+  'Volvlak': 'Lánfhuil',
+  'Kolombreedte': 'Leithead colúin',
+  'Linker kolomafbeelding': 'Íomhá colúin chlé',
+  'Rechter kolomafbeelding': 'Íomhá colúin deise',
+  'Geen linker kolomafbeelding': 'Gan íomhá colúin chlé',
+  'Geen rechter kolomafbeelding': 'Gan íomhá colúin deise',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Lánfhuil: an íomhá mar chúlra a líonann an scáileán. Clé/Deas/An dá cheann: colún íomhá amháin nó dhá cheann in aice le téacs an teidil.',
   'Hernoemen': 'Athainmnigh',
   'Naam wijzigen': 'Athraigh an t-ainm',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

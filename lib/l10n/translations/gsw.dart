@@ -1776,6 +1776,19 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Titel boven afbeelding': 'Titel überem Bild',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Zeigt de Titel überem Bild statt drüber',
+  'Afbeeldingslay-out': 'Bild-Layout',
+  'Beide': 'Beidi',
+  'Volvlak': 'Vollflächig',
+  'Kolombreedte': 'Spalti-Breiti',
+  'Linker kolomafbeelding': 'Bild linggi Spalti',
+  'Rechter kolomafbeelding': 'Bild rächti Spalti',
+  'Geen linker kolomafbeelding': 'Kei Bild linggi Spalti',
+  'Geen rechter kolomafbeelding': 'Kei Bild rächti Spalti',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Vollflächig: s Bild als bildschirmfüllende Hindergrund. Linggs/Rächts/Beidi: ein oder zwei Bildspalte näbet em Titeltäxt.',
   'Hernoemen': 'Umbenenne',
   'Naam wijzigen': 'Name ändere',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

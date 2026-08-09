@@ -1785,6 +1785,19 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Titel boven afbeelding': 'Tytuł nad obrazem',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Wyświetla tytuł nad obrazem zamiast nałożony na niego',
+  'Afbeeldingslay-out': 'Układ obrazu',
+  'Beide': 'Oba',
+  'Volvlak': 'Pełnoekranowe',
+  'Kolombreedte': 'Szerokość kolumny',
+  'Linker kolomafbeelding': 'Obraz lewej kolumny',
+  'Rechter kolomafbeelding': 'Obraz prawej kolumny',
+  'Geen linker kolomafbeelding': 'Brak obrazu lewej kolumny',
+  'Geen rechter kolomafbeelding': 'Brak obrazu prawej kolumny',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Pełnoekranowe: obraz jako tło wypełniające ekran. Lewo/Prawo/Oba: jedna lub dwie kolumny obrazów obok tekstu tytułu.',
   'Hernoemen': 'Zmień nazwę',
   'Naam wijzigen': 'Zmień nazwę',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

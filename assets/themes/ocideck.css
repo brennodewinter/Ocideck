@@ -146,3 +146,9 @@ section.quote blockquote {
   text-align: right;
   z-index: 10;
 }
+
+section.image-title-above {
+  background-size: contain;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+}

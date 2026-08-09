@@ -62,6 +62,7 @@ class XmppSnapshotChannel {
     this.maxChunkChars = 48000,
     this.maxChunks = 512,
     this.maxPendingSnapshots = 4,
+    this.maxAssembledSnapshots = 4,
   }) : _channel = stanzaChannel,
        _demux = companionDemux,
        _e2ee = crypto {
@@ -89,6 +90,12 @@ class XmppSnapshotChannel {
   final int maxChunks;
   final int maxPendingSnapshots;
 
+  /// Cap op gereassembleerde snapshots die nog niet geopend konden worden —
+  /// een vijandige server kan _pending vullen, laten reassembleren (wat de
+  /// _pending-slot vrijmaakt), en herhalen, zodat _assembled onbegrensd groeit
+  /// (#1414). Bij overflow verdrijft het oudste (FIFO).
+  final int maxAssembledSnapshots;
+
   int _out = 0;
   final Map<String, Map<int, String>> _pending = {};
 
@@ -111,6 +118,11 @@ class XmppSnapshotChannel {
 
   /// Of al een snapshot is geopend — een non-blocking check voor een join-loop.
   bool get hasSnapshot => _first.isCompleted;
+
+  /// Of er gereassembleerde snapshots wachten op retry (openen met een
+  /// epoch-sleutel die nu beschikbaar kan zijn) — voor de syncNow short-circuit
+  /// (#1423).
+  bool get hasPending => _assembled.isNotEmpty;
 
   /// De re-baseline-stroom (§4). Emit elke geopende snapshot ná de eerste.
   Stream<CollabSnapshot> get rebaselines => _rebaselines.stream;
@@ -182,9 +194,27 @@ class XmppSnapshotChannel {
           count <= 0 ||
           count > maxChunks ||
           index < 0 ||
-          index >= count) {
+          index >= count ||
+          data.length > maxChunkChars) {
         logWarning('xmpp.snapshot.badChunk', id);
         return;
+      }
+      // Afzender-controle op chunk-niveau (#1411): het chunk-`id` bevat de
+      // afzender's deviceId (`snap-{deviceId}-{counter}`). Een MUC zet op elke
+      // groupchat-message een `from` (room@conf/nick); de directory kent de
+      // afzender's deviceId → peerAddress. Een chunk wiens `id` een bekend
+      // device claimt wiens adres niet met `from` overeenkomt, is gesmokkeld
+      // door een vijandige occupant — drop fail-closed, zodat hij de legitieme
+      // baseline niet kan corrumperen.
+      if (stanza.from != null) {
+        final claimed = _senderDeviceFromId(id);
+        if (claimed != null) {
+          final knownAddress = directory.addressOf(claimed);
+          if (knownAddress != null && knownAddress != stanza.from) {
+            logWarning('xmpp.snapshot.senderMismatch', id);
+            return;
+          }
+        }
       }
       final parts = _pending.putIfAbsent(id, () => {});
       if (_pending.length > maxPendingSnapshots) {
@@ -212,6 +242,12 @@ class XmppSnapshotChannel {
       return;
     }
     _assembled[id] = SealedEnvelope.fromContent(decoded);
+    // Begrens _assembled — een vijandige server kan _pending vullen en laten
+    // reassembleren (wat de _pending-slot vrijmaakt voor de volgende ronde),
+    // zodat _assembled onbegrensd groeit (#1414). Verdrijf het oudste (FIFO).
+    if (_assembled.length > maxAssembledSnapshots) {
+      _assembled.remove(_assembled.keys.first);
+    }
     await _tryOpen(id);
   }
 
@@ -290,5 +326,16 @@ class XmppSnapshotChannel {
       out.add(s.substring(i, i + size > s.length ? s.length : i + size));
     }
     return out;
+  }
+
+  /// Haal de afzender's deviceId uit een chunk-`id` (`snap-{deviceId}-{counter}`).
+  /// De counter is het laatste `-`-segment; de deviceId is alles ertussen. Null
+  /// als het `id` niet aan het formaat voldoet.
+  String? _senderDeviceFromId(String id) {
+    if (!id.startsWith('snap-')) return null;
+    final rest = id.substring(5);
+    final lastDash = rest.lastIndexOf('-');
+    if (lastDash <= 0) return null;
+    return rest.substring(0, lastDash);
   }
 }

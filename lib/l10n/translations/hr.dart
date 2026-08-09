@@ -1779,6 +1779,19 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Titel boven afbeelding': 'Naslov iznad slike',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Prikazuje naslov iznad slike umjesto preko nje',
+  'Afbeeldingslay-out': 'Raspored slike',
+  'Beide': 'Oboje',
+  'Volvlak': 'Puni krv',
+  'Kolombreedte': 'Širina stupca',
+  'Linker kolomafbeelding': 'Slika lijevog stupca',
+  'Rechter kolomafbeelding': 'Slika desnog stupca',
+  'Geen linker kolomafbeelding': 'Nema slike lijevog stupca',
+  'Geen rechter kolomafbeelding': 'Nema slike desnog stupca',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Puni krv: slika kao pozadina preko cijelog ekrana. Lijevo/Desno/Oboje: jedna ili dvije kolone slika pored teksta naslova.',
   'Hernoemen': 'Preimenuj',
   'Naam wijzigen': 'Promijeni naziv',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

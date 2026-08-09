@@ -94,6 +94,71 @@ class _TitlePreview extends StatelessWidget {
     );
   }
 
+  /// Title slide with one or two image columns beside the title text (#1405).
+  /// Uses native Marp `![bg left:W%]` / `![bg right:W%]` — the columns are real
+  /// background images, so the title text sits in the remaining centre space.
+  Widget _columnLayout(BuildContext context) {
+    final layout = slide.titleColumnLayout;
+    final frac = slide.titleColumnWidth.clamp(10, 40) / 100.0;
+    final bg = AppTheme.parseHexColor(profile.titleBackgroundColor);
+
+    Widget columnImage(String path, double fx, double fy) {
+      if (path.isEmpty) return ColoredBox(color: bg);
+      return _resolvedImage(
+        context,
+        path,
+        projectPath,
+        fit: BoxFit.cover,
+        alignment: focalAlignment(fx, fy),
+      );
+    }
+
+    final children = <Widget>[];
+    if (layout == TitleColumnLayout.left || layout == TitleColumnLayout.both) {
+      children.add(
+        SizedBox(
+          width: w * frac,
+          child: columnImage(
+            slide.imagePath,
+            slide.imageFocalX,
+            slide.imageFocalY,
+          ),
+        ),
+      );
+    }
+    children.add(
+      Expanded(
+        child: Center(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.center,
+            child: SizedBox(
+              width: w * (1 - 2 * frac) - w * 0.04,
+              child: _lockupColumn(context),
+            ),
+          ),
+        ),
+      ),
+    );
+    if (layout == TitleColumnLayout.right || layout == TitleColumnLayout.both) {
+      children.add(
+        SizedBox(
+          width: w * frac,
+          child: columnImage(
+            slide.imagePath2,
+            slide.imageFocalX2,
+            slide.imageFocalY2,
+          ),
+        ),
+      );
+    }
+
+    return Container(
+      color: bg,
+      child: Row(children: children),
+    );
+  }
+
   /// Title block in a solid band sized to its content — used below a
   /// non-full-bleed image so the picture stops at the band edge and text never
   /// crosses it.
@@ -133,6 +198,11 @@ class _TitlePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Column mode (#1405): one or two image columns beside the title text.
+    if (slide.titleColumnLayout != TitleColumnLayout.none) {
+      return _columnLayout(context);
+    }
+
     final hasBg = slide.imagePath.isNotEmpty;
 
     if (!hasBg) {
@@ -163,10 +233,10 @@ class _TitlePreview extends StatelessWidget {
                     bgColor: AppTheme.parseHexColor(
                       profile.titleBackgroundColor,
                     ),
-                    alignment: focalAlignment(
-                      slide.imageFocalX,
-                      slide.imageFocalY,
-                    ),
+                    alignment:
+                        hasCustomFocal(slide.imageFocalX, slide.imageFocalY)
+                        ? focalAlignment(slide.imageFocalX, slide.imageFocalY)
+                        : Alignment.topCenter,
                   ),
                   _captionOverlay(context, slide.imageCaption, w),
                 ],
@@ -308,10 +378,10 @@ class _SectionPreview extends StatelessWidget {
                     projectPath,
                     slide.imageSize,
                     bgColor: sectionBg,
-                    alignment: focalAlignment(
-                      slide.imageFocalX,
-                      slide.imageFocalY,
-                    ),
+                    alignment:
+                        hasCustomFocal(slide.imageFocalX, slide.imageFocalY)
+                        ? focalAlignment(slide.imageFocalX, slide.imageFocalY)
+                        : Alignment.topCenter,
                   ),
                   _captionOverlay(context, slide.imageCaption, w),
                 ],

@@ -87,10 +87,14 @@ bool _requiresWholeBlockPreservation(String block) {
       .map((line) => line.trim())
       .where(_reBgImage.hasMatch)
       .toList();
-  if (backgroundLines.length > 1) return true;
-  if (backgroundLines.length == 1 &&
-      !_hasOnlyTypedBackgroundOptions(backgroundLines.single)) {
-    return true;
+  if (backgroundLines.length > 2) return true;
+  for (var i = 0; i < backgroundLines.length; i++) {
+    if (!_hasOnlyTypedBackgroundOptions(
+      backgroundLines[i],
+      allowVisualStyle: i == 0,
+    )) {
+      return true;
+    }
   }
 
   final lines = block.split('\n');
@@ -128,18 +132,26 @@ bool _requiresWholeBlockPreservation(String block) {
   return false;
 }
 
-bool _hasOnlyTypedBackgroundOptions(String line) {
+bool _hasOnlyTypedBackgroundOptions(
+  String line, {
+  required bool allowVisualStyle,
+}) {
   final match = _reWholeBackground.firstMatch(line);
   if (match == null) return false;
   var options = match.group(1)!.trim();
   if (!RegExp(r'^bg(?:\s|$)').hasMatch(options)) return false;
   options = options.substring(2).trim();
+  if (allowVisualStyle) {
+    options = options
+        .replaceAll(_reMarpImageFilter, '')
+        // OciDeck's title overlay serialises to this standard Marp filter. Its
+        // value lives in titleImageOverlay, not MarpStyle.imageFilters.
+        .replaceAll(RegExp(r'\bopacity:\.45\b'), '')
+        .replaceAll(_reMarpContain, '');
+  }
   options = options
-      .replaceAll(_reMarpImageFilter, '')
-      // OciDeck's title overlay serialises to this standard Marp filter. Its
-      // value lives in titleImageOverlay, not MarpStyle.imageFilters.
-      .replaceAll(RegExp(r'\bopacity:[^\s\]]+'), '')
-      .replaceAll(_reMarpContain, '')
+      // Native Marp image columns used by title/two-image slides (#1405).
+      .replaceAll(RegExp(r'\b(?:left|right):\d+%'), '')
       .replaceAll(RegExp(r'\b\d+%'), '')
       .trim();
   return options.isEmpty;

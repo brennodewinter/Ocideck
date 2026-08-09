@@ -729,6 +729,19 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Titel boven afbeelding': 'Título sobre la imagen',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Muestra el título sobre la imagen en lugar de superpuesto',
+  'Afbeeldingslay-out': 'Disposición de imagen',
+  'Beide': 'Ambos',
+  'Volvlak': 'A sangre',
+  'Kolombreedte': 'Ancho de columna',
+  'Linker kolomafbeelding': 'Imagen columna izquierda',
+  'Rechter kolomafbeelding': 'Imagen columna derecha',
+  'Geen linker kolomafbeelding': 'Sin imagen columna izquierda',
+  'Geen rechter kolomafbeelding': 'Sin imagen columna derecha',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'A sangre: la imagen como fondo a pantalla completa. Izquierda/Derecha/Ambos: una o dos columnas de imágenes junto al texto del título.',
   'Hernoemen': 'Renombrar',
   'Naam wijzigen': 'Cambiar nombre',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

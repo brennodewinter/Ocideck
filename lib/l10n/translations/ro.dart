@@ -1790,6 +1790,19 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Titel boven afbeelding': 'Titlu deasupra imaginii',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Afișează titlul deasupra imaginii în loc de suprapus',
+  'Afbeeldingslay-out': 'Aranjare imagine',
+  'Beide': 'Ambele',
+  'Volvlak': 'Plin',
+  'Kolombreedte': 'Lățime coloană',
+  'Linker kolomafbeelding': 'Imagine coloană stângă',
+  'Rechter kolomafbeelding': 'Imagine coloană dreaptă',
+  'Geen linker kolomafbeelding': 'Fără imagine coloană stângă',
+  'Geen rechter kolomafbeelding': 'Fără imagine coloană dreaptă',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Plin: imaginea ca fundal care umple ecranul. Stânga/Dreapta/Ambele: una sau două coloane de imagini lângă textul titlului.',
   'Hernoemen': 'Redenumește',
   'Naam wijzigen': 'Schimbă numele',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

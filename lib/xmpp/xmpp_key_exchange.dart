@@ -72,6 +72,12 @@ class XmppKeyExchange {
   final CollabDeviceDirectory directory;
   DevicePublicKeys _own;
 
+  /// Callback nadat een nieuwe device-sleutel is geïnstalleerd in de directory.
+  /// De transport gebruikt dit om de deferred backlog te retryen (#1424).
+  /// Mutable: de launch wijst hem toe nadat de transport en de key-exchange
+  /// zijn opgebouwd (de transport bestaat voor de callback).
+  void Function()? onKeyInstalled;
+
   /// Dit device's eigen publieke sleutels — de verificatie-UI fingerprint
   /// ze als de "jij"-entry die co-auteurs out-of-band vergelijken.
   DevicePublicKeys get ownKeys => _own;
@@ -222,8 +228,17 @@ class XmppKeyExchange {
     // De peer-address is de in-room JID (room@conf/nick) — de server zet
     // deze op de presence. De directory gebruikt ze om een keyshare te
     // adresseren en om de afzender van een blinded keyshare te resolveren.
-    final peerAddress = stanza.from ?? roomJid;
-    await directory.ingest(peerAddress: peerAddress, keys: keys);
+    // De peer-address is de in-room JID (room@conf/nick) — de server zet
+    // deze op de presence. Een presence zonder from is misvormd of gehostile:
+    // de MUC reflecteert altijd met from. Drop fail-closed in plaats van
+    // fallback naar roomJid (dat geen geldig peer-address is, #1429).
+    final peerAddress = stanza.from;
+    if (peerAddress == null) {
+      logWarning('xmpp.keyexchange.missingFrom', keys.deviceId);
+      return;
+    }
+    final stored = await directory.ingest(peerAddress: peerAddress, keys: keys);
+    if (stored) onKeyInstalled?.call();
   }
 
   /// Verwerk een inbound keyshare: trial-open tegen elke kandidaat-afzender
@@ -248,10 +263,19 @@ class XmppKeyExchange {
       return;
     }
     // Eigen keyshare niet installeren — de MUC reflecteert de afzender zijn
-    // eigen bericht terug, en de autoriteit heeft de epoch-sleutel al.
-    if (stanza.from != null && _isOwnPresence(stanza.from!)) return;
-
-    final senderAddress = stanza.from ?? roomJid;
+    // eigen bericht terug, en de autoriteit heeft de epoch-sleutel al. De
+    // autoriteit staat niet in zijn eigen directory (handleDevicePresence slaat
+    // het eigen device over), dus candidates is leeg en de check hieronder dropt
+    // hem. Een nick-based check is onbetrouwbaar (#1415): de MUC-nick en de
+    // XMPP-resource hebben geen relatie, en een toevallige nick-botsing kan een
+    // andere deelnemer's keyshare incorrect droppen.
+    // De afzender wordt uit de stanza's from (room@conf/nick) afgeleid. Een
+    // keyshare zonder from is misvormd — drop fail-closed (#1429).
+    final senderAddress = stanza.from;
+    if (senderAddress == null) {
+      logWarning('xmpp.keyexchange.keyshare.missingFrom', null);
+      return;
+    }
     final candidates = directory.devicesForAddress(senderAddress).toList();
     if (candidates.isEmpty) {
       logWarning('xmpp.keyexchange.keyshare.unknownSender', senderAddress);
@@ -260,6 +284,7 @@ class XmppKeyExchange {
     for (final sender in candidates) {
       try {
         await _e2ee.installEpochKey(wrap, sender);
+        onKeyInstalled?.call(); // epoch-sleutel geïnstalleerd — retry backlog
         return; // geïnstalleerd — deze keyshare was voor ons
       } on CollabCryptoException {
         continue; // verkeerde afzender of niet-geopend — probeel de volgende
@@ -268,18 +293,6 @@ class XmppKeyExchange {
     // Geen matchende device — deze keyshare was niet voor ons. Niet een
     // fout: elke occupant trial-opent elke broadcast keyshare; alleen de
     // bedoelde ontvanger slaagt.
-  }
-
-  /// Of een `from`-adres (room@conf/nick) onze eigen nick is — de MUC
-  /// reflecteert de afzender zijn eigen bericht terug.
-  bool _isOwnPresence(String from) {
-    final slash = from.indexOf('/');
-    final nick = slash < 0 ? '' : from.substring(slash + 1);
-    final ownNick = _channel.boundJid;
-    final ownNickResource = ownNick == null
-        ? ''
-        : ownNick.substring(ownNick.indexOf('/') + 1);
-    return nick == ownNickResource && nick.isNotEmpty;
   }
 
   /// Ruim de demux-registraties op. Idempotent. De directory en de crypto

@@ -732,6 +732,19 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Titel boven afbeelding': 'Titel über dem Bild',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Zeigt den Titel über dem Bild statt darüber',
+  'Afbeeldingslay-out': 'Bildlayout',
+  'Beide': 'Beide',
+  'Volvlak': 'Vollflächig',
+  'Kolombreedte': 'Spaltenbreite',
+  'Linker kolomafbeelding': 'Bild linke Spalte',
+  'Rechter kolomafbeelding': 'Bild rechte Spalte',
+  'Geen linker kolomafbeelding': 'Kein Bild linke Spalte',
+  'Geen rechter kolomafbeelding': 'Kein Bild rechte Spalte',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Vollflächig: das Bild als bildschirmfüllender Hintergrund. Links/Rechts/Beide: eine oder zwei Bildspalten neben dem Titeltext.',
   'Hernoemen': 'Umbenennen',
   'Naam wijzigen': 'Namen ändern',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

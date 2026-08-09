@@ -77,6 +77,9 @@ enum MucJoinFailure {
 
   /// The session dropped before the join completed.
   sessionClosed,
+
+  /// The join was cancelled by a leave() call while in progress (#1427).
+  cancelled,
 }
 
 /// The outcome of [XmppMuc.join].
@@ -114,7 +117,8 @@ class XmppMuc {
   static const _maxNickLength = 1024;
 
   final _occupants = <String, MucOccupant>{};
-  final _roster = StreamController<List<MucOccupant>>.broadcast();
+  StreamController<List<MucOccupant>> _roster =
+      StreamController<List<MucOccupant>>.broadcast();
   StreamSubscription<Stanza>? _sub;
   Completer<MucJoinResult>? _joining;
   Timer? _joinTimer;
@@ -138,9 +142,32 @@ class XmppMuc {
   /// meereizen — bijv. de `<x xmlns="nl.ocideck.device">`-extensie die de
   /// device-keys publiceert (§5 brick 10, `XMPP_COLLAB_TRANSPORT.md` §6).
   /// De MUC-`<x>` blijft altijd het eerste child; de extensies komen erna.
-  Future<MucJoinResult> join({List<XmlElement>? presenceExtensions}) {
-    if (_joining != null || _joined) {
+  ///
+  /// [historyLimit] vraagt de laatste N chat-berichten uit de MUC-geschiedenis
+  /// op (XEP-0045 §7.2.16 `<history maxstanzas=N>`). De server honourneert dit
+  /// als onderdeel van de join-sequentie — een late joiner ziet dan recente
+  /// chat. 0 (default) vraagt geen geschiedenis. De server kan minder sturen
+  /// of de request negeren; dit is een hint, geen eis (#1425).
+  Future<MucJoinResult> join({
+    List<XmlElement>? presenceExtensions,
+    int historyLimit = 0,
+  }) {
+    // Sta een re-join toe na een teardown (_left = true) — de reconnect-
+    // machinery (onRejoin) moet de kamer opnieuw kunnen betreden zonder een
+    // nieuwe XmppMuc aan te maken (#1421). Een join terwijl er al één loopt
+    // of de kamer al live is, blijft een StateError.
+    if (_joining != null || (_joined && !_left)) {
       throw StateError('XmppMuc.join() called more than once');
+    }
+    // Reset de state voor een re-join: de oude roster is gesloten in
+    // _teardown, de occupants zijn stale, _left is gezet.
+    if (_left) {
+      _occupants.clear();
+      _joined = false;
+      _left = false;
+      if (_roster.isClosed) {
+        _roster = StreamController<List<MucOccupant>>.broadcast();
+      }
     }
     final completer = _joining = Completer<MucJoinResult>();
     _sub = channel.stanzas.listen(_onStanza, onDone: _onSessionDropped);
@@ -148,15 +175,18 @@ class XmppMuc {
       timeout,
       () => _finishJoin(const MucJoinResult.failed(MucJoinFailure.timeout)),
     );
-    // <presence to="room@service/nick"><x xmlns="…/muc"/>…extensies…</presence>
+    // <presence to="room@service/nick"><x xmlns="…/muc"/><history …/>…extensies…</presence>
+    final historyChildren = <XmlElement>[
+      xmppElement('x', namespace: _mucNs),
+      if (historyLimit > 0)
+        xmppElement('history', attributes: {'maxstanzas': '$historyLimit'}),
+      ...?presenceExtensions,
+    ];
     channel.sendStanza(
       Stanza(
         kind: StanzaKind.presence,
         to: _selfInRoom,
-        children: [
-          xmppElement('x', namespace: _mucNs),
-          ...?presenceExtensions,
-        ],
+        children: historyChildren,
       ),
     );
     return completer.future;
@@ -167,6 +197,10 @@ class XmppMuc {
     final from = stanza.from;
     if (from == null || _bareJid(from) != roomJid) return; // only this room
     final occNick = _resourceOf(from);
+    // Een MUC-presence zonder resource/nick is misvormd — de MUC stuurt altijd
+    // room@service/nick. Een presence zonder nick kan geen occupant zijn en
+    // zou een phantom-entry met key "" toevoegen aan het roster (#1426).
+    if (occNick.isEmpty) return;
 
     if (stanza.type == 'error') {
       // Only an error DURING join is a join failure. A stray error-presence
@@ -262,13 +296,21 @@ class XmppMuc {
     if (!_roster.isClosed) _roster.add(roster);
   }
 
-  /// Leave the room (send `unavailable`) and tear down. Idempotent.
+  /// Leave the room (send `unavailable`) and tear down. Idempotent. Als een
+  /// join nog loopt, wordt die afgebroken met `cancelled` — de join-future
+  /// hangt niet tot de timeout (#1427).
   Future<void> leave() async {
     if (_left) {
       await _teardown();
       return;
     }
     _left = true;
+    // Als een join nog loopt, maak hem af — anders hangt de join-future tot
+    // de timeout (20s default). _finishJoin completeert de completer en
+    // roept _teardown aan (result.ok = false).
+    if (_joining != null && !_joining!.isCompleted) {
+      _finishJoin(const MucJoinResult.failed(MucJoinFailure.cancelled));
+    }
     channel.sendStanza(
       Stanza(kind: StanzaKind.presence, to: _selfInRoom, type: 'unavailable'),
     );

@@ -1775,6 +1775,19 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Titel boven afbeelding': 'Naslov nad sliko',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Prikaže naslov nad sliko namesto čez njo',
+  'Afbeeldingslay-out': 'Razporeditev slike',
+  'Beide': 'Oboje',
+  'Volvlak': 'Polno',
+  'Kolombreedte': 'Širina stolpca',
+  'Linker kolomafbeelding': 'Slika levega stolpca',
+  'Rechter kolomafbeelding': 'Slika desnega stolpca',
+  'Geen linker kolomafbeelding': 'Brez slike levega stolpca',
+  'Geen rechter kolomafbeelding': 'Brez slike desnega stolpca',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Polno: slika kot ozadje, ki zapolnjuje zaslon. Levo/Desno/Oboje: ena ali dva stolpca slik ob besedilu naslova.',
   'Hernoemen': 'Preimenuj',
   'Naam wijzigen': 'Spremeni ime',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

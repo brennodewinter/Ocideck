@@ -1802,6 +1802,19 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Titel boven afbeelding': 'Título acima da imagem',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Mostra o título acima da imagem em vez de sobreposta',
+  'Afbeeldingslay-out': 'Disposição da imagem',
+  'Beide': 'Ambos',
+  'Volvlak': 'Sangria total',
+  'Kolombreedte': 'Largura da coluna',
+  'Linker kolomafbeelding': 'Imagem da coluna esquerda',
+  'Rechter kolomafbeelding': 'Imagem da coluna direita',
+  'Geen linker kolomafbeelding': 'Sem imagem da coluna esquerda',
+  'Geen rechter kolomafbeelding': 'Sem imagem da coluna direita',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Sangria total: a imagem como fundo que preenche a tela. Esquerda/Direita/Ambos: uma ou duas colunas de imagens ao lado do texto do título.',
   'Hernoemen': 'Renomear',
   'Naam wijzigen': 'Alterar nome',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

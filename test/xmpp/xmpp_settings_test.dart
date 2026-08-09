@@ -95,4 +95,52 @@ void main() {
       expect(a == a, isTrue);
     });
   });
+
+  group('XmppSettings.validate (#1432)', () {
+    test('a valid wss settings has no errors', () {
+      const s = XmppSettings(
+        serverUrl: 'wss://xmpp.example.org/xmpp-websocket',
+        jid: 'alice@example.org',
+      );
+      expect(s.validate(), isEmpty);
+      expect(s.isValid, isTrue);
+    });
+
+    test('an empty serverUrl is invalid', () {
+      const s = XmppSettings(serverUrl: '');
+      expect(s.validate(), contains('serverUrl is leeg'));
+      expect(s.isValid, isFalse);
+    });
+
+    test('a non-ws scheme is invalid', () {
+      const s = XmppSettings(serverUrl: 'https://example.org/xmpp');
+      expect(s.validate().any((e) => e.contains('ws:// of wss://')), isTrue);
+    });
+
+    test('a JID without @ is invalid', () {
+      const s = XmppSettings(serverUrl: 'wss://example.org/xmpp', jid: 'alice');
+      expect(s.validate().any((e) => e.contains('localpart@domain')), isTrue);
+    });
+
+    test('a malformed pinnedCertSha256 is invalid', () {
+      const s = XmppSettings(
+        serverUrl: 'wss://example.org/xmpp',
+        pinnedCertSha256: 'not-a-hash',
+      );
+      expect(s.validate().any((e) => e.contains('64 hex-tekens')), isTrue);
+    });
+
+    test('a valid pinnedCertSha256 is accepted', () {
+      final s = XmppSettings(
+        serverUrl: 'wss://example.org/xmpp',
+        pinnedCertSha256: 'a' * 64,
+      );
+      expect(s.validate(), isEmpty);
+    });
+
+    test('an oversized serverUrl is invalid', () {
+      final s = XmppSettings(serverUrl: 'wss://${'x' * 2100}.example.org/xmpp');
+      expect(s.validate().any((e) => e.contains('te lang')), isTrue);
+    });
+  });
 }

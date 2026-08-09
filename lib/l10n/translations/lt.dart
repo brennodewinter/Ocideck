@@ -1780,6 +1780,19 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Titel boven afbeelding': 'Antraštė virš paveikslėlio',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Rodo antraštę virš paveikslėlio vietoj uždėtos ant jo',
+  'Afbeeldingslay-out': 'Paveikslėlio išdėstymas',
+  'Beide': 'Abu',
+  'Volvlak': 'Visas plotas',
+  'Kolombreedte': 'Stulpelio plotis',
+  'Linker kolomafbeelding': 'Kairiojo stulpelio paveikslėlis',
+  'Rechter kolomafbeelding': 'Dešiniojo stulpelio paveikslėlis',
+  'Geen linker kolomafbeelding': 'Nėra kairiojo stulpelio paveikslėlio',
+  'Geen rechter kolomafbeelding': 'Nėra dešiniojo stulpelio paveikslėlio',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Visas plotas: paveikslėlis kaip visą ekraną užpildantis fonas. Kairėn/Dešinėn/Abu: vienas ar du paveikslėlių stulpeliai šalia pavadinimo teksto.',
   'Hernoemen': 'Pervadinti',
   'Naam wijzigen': 'Keisti pavadinimą',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
