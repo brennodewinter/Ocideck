@@ -1773,6 +1773,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Starthoek (graden)': 'Aloituskulma (astetta)',
   'Percentages op de taartpunten tonen': 'Näytä prosentit ympyrän sektoreilla',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Uusi luku uudelle sivulle',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':

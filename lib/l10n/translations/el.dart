@@ -1800,6 +1800,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Starthoek (graden)': 'Αρχική γωνία (μοίρες)',
   'Percentages op de taartpunten tonen':
       'Εμφάνιση ποσοστών στα κομμάτια της πίτας',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Νέο κεφάλαιο σε νέα σελίδα',

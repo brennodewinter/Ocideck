@@ -1789,6 +1789,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Starthoek (graden)': 'Angulus initialis (gradus)',
   'Percentages op de taartpunten tonen':
       'Centesimas in segmentis placentae monstrare',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Novum caput in nova pagina',

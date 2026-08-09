@@ -733,6 +733,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Starthoek (graden)': 'Begjinhoeke (graden)',
   'Percentages op de taartpunten tonen':
       'Persintaazjes op \'e taartpunten toane',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nij haadstik op in nije side',

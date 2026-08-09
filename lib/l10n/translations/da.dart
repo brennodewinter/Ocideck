@@ -1772,6 +1772,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Starthoek (graden)': 'Startvinkel (grader)',
   'Percentages op de taartpunten tonen': 'Vis procenter på cirkeludsnittene',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nyt kapitel på en ny side',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':

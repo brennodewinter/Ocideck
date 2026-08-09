@@ -326,6 +326,12 @@ class ChartSpec {
   /// as a drawing rather than a data read). Only meaningful for [isPieLike].
   final bool showSliceLabels;
 
+  /// Rotation of a pie/donut, in degrees clockwise from the top (12 o'clock).
+  /// `0` starts the first slice at the top, matching PowerPoint/Impress' "angle
+  /// of first slice"; a rotation lets a single slice sit where you want it (so
+  /// the sky need not be split in two to place a shape). Only for [isPieLike].
+  final double startAngle;
+
   const ChartSpec({
     this.type = ChartType.bar,
     this.title = '',
@@ -345,6 +351,7 @@ class ChartSpec {
     this.animateOnEnter = true,
     this.animationDurationMs,
     this.showSliceLabels = true,
+    this.startAngle = 0,
   });
 
   bool get hasInlineData => x.isNotEmpty && series.isNotEmpty;
@@ -427,6 +434,7 @@ class ChartSpec {
     int? animationDurationMs,
     bool inheritAnimationDuration = false,
     bool? showSliceLabels,
+    double? startAngle,
   }) => ChartSpec(
     type: type ?? this.type,
     title: title ?? this.title,
@@ -450,6 +458,7 @@ class ChartSpec {
         ? null
         : (animationDurationMs ?? this.animationDurationMs),
     showSliceLabels: showSliceLabels ?? this.showSliceLabels,
+    startAngle: startAngle ?? this.startAngle,
   );
 
   /// Parse the JSON content of a ```chart block. Tolerant: returns a default
@@ -489,6 +498,7 @@ class ChartSpec {
         animateOnEnter: data['animateOnEnter'] != false,
         animationDurationMs: (data['animationDurationMs'] as num?)?.round(),
         showSliceLabels: data['showSliceLabels'] != false,
+        startAngle: (data['startAngle'] as num?)?.toDouble() ?? 0,
         x: [for (final v in (data['x'] as List? ?? const [])) v.toString()],
         rowColors: [
           for (final value in (data['rowColors'] as List? ?? const []))
@@ -543,6 +553,9 @@ class ChartSpec {
     // just the author's "off" choice so a normal chart's block stays clean and
     // the flag never lingers after a type switch.
     if (isPieLike && !showSliceLabels) map['showSliceLabels'] = false;
+    // A non-zero rotation only means something for a pie/donut; keep it out of
+    // every other type's block so a type switch leaves nothing dangling.
+    if (isPieLike && startAngle != 0) map['startAngle'] = startAngle;
     final dropData = forStorage && source != null;
     if (rowColors.any((color) => color != null)) {
       map['rowColors'] = rowColors;

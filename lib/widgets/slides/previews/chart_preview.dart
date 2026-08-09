@@ -801,6 +801,10 @@ class _HoverPieChart extends StatefulWidget {
   /// Whether each slice prints its share as a percentage. Off = a clean circle.
   final bool showLabels;
 
+  /// Rotation in degrees clockwise from the top (12 o'clock). 0 = first slice
+  /// starts at the top, matching the HTML export.
+  final double startAngle;
+
   /// Slice index highlighted from outside (e.g. hovering the legend), combined
   /// with this chart's own touch hover.
   final int? externalHover;
@@ -819,6 +823,7 @@ class _HoverPieChart extends StatefulWidget {
     required this.titleStyle,
     required this.tooltipStyle,
     this.showLabels = true,
+    this.startAngle = 0,
     this.externalHover,
     this.centerLabel,
     this.centerLabelStyle,
@@ -860,6 +865,10 @@ class _HoverPieChartState extends State<_HoverPieChart> {
               ],
               sectionsSpace: widget.sectionSpace,
               centerSpaceRadius: widget.centerSpaceRadius,
+              // fl_chart's 0° is the right (3 o'clock); the -90 turns that to the
+              // top so a 0 startAngle matches the HTML export, then startAngle
+              // rotates clockwise from there.
+              startDegreeOffset: widget.startAngle - 90,
               pieTouchData: PieTouchData(
                 enabled: true,
                 mouseCursorResolver: (event, response) =>

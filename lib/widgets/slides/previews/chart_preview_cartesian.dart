@@ -349,29 +349,15 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
                                 radius: radius,
                                 centerSpaceRadius: _holeRadius(radius, donut),
                                 sectionSpace: w * 0.002,
-                                titleStyle: _applyFont(
-                                  font,
-                                  TextStyle(
-                                    fontSize: (radius * 0.18).clamp(
-                                      w * 0.009,
-                                      w * 0.013,
-                                    ),
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                startAngle: spec.startAngle,
+                                titleStyle: _pieTitleStyle(font, w, radius),
                                 tooltipStyle: _tooltipStyle(),
                                 centerLabel: donut ? _fmtNum(total) : null,
-                                centerLabelStyle: _applyFont(
+                                centerLabelStyle: _pieCenterLabelStyle(
                                   font,
-                                  TextStyle(
-                                    fontSize: (radius * 0.28).clamp(
-                                      w * 0.013,
-                                      w * 0.022,
-                                    ),
-                                    color: textColor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  w,
+                                  radius,
+                                  textColor,
                                 ),
                               ),
                             );
@@ -412,3 +398,28 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
 /// meet at a single point. (A pie used to carry a 0.42 hole too, which stopped
 /// the type from drawing a true, full circle; see issue #1395.)
 double _holeRadius(double radius, bool donut) => radius * (donut ? 0.62 : 0.0);
+
+/// The white on-slice percentage style for a pie/donut, sized to the radius.
+TextStyle _pieTitleStyle(String font, double w, double radius) => _applyFont(
+  font,
+  TextStyle(
+    fontSize: (radius * 0.18).clamp(w * 0.009, w * 0.013),
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+  ),
+);
+
+/// The centre-total style for a donut, sized to the radius, in the ink colour.
+TextStyle _pieCenterLabelStyle(
+  String font,
+  double w,
+  double radius,
+  Color textColor,
+) => _applyFont(
+  font,
+  TextStyle(
+    fontSize: (radius * 0.28).clamp(w * 0.013, w * 0.022),
+    color: textColor,
+    fontWeight: FontWeight.bold,
+  ),
+);

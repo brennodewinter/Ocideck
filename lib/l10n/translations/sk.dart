@@ -1780,6 +1780,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Starthoek (graden)': 'Počiatočný uhol (stupne)',
   'Percentages op de taartpunten tonen': 'Zobraziť percentá na výsekoch',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nová kapitola na novej strane',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':

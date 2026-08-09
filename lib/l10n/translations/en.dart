@@ -913,6 +913,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Starthoek (graden)': 'Start angle (degrees)',
   'Percentages op de taartpunten tonen': 'Show percentages on the pie slices',
   'Nieuw hoofdstuk op een nieuwe pagina': 'New chapter on a new page',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':

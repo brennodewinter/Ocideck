@@ -732,6 +732,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Starthoek (graden)': 'Angle de départ (degrés)',
   'Percentages op de taartpunten tonen':
       'Afficher les pourcentages sur les secteurs',
   'Nieuw hoofdstuk op een nieuwe pagina':

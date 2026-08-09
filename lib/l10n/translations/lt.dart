@@ -1780,6 +1780,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Starthoek (graden)': 'Pradinis kampas (laipsniai)',
   'Percentages op de taartpunten tonen':
       'Rodyti procentus skritulio sektoriuose',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Naujas skyrius naujame puslapyje',

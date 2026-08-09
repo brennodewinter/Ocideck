@@ -665,4 +665,34 @@ void main() {
       expect(ChartSpec.parse('{"type":"pie"}').showSliceLabels, isTrue);
     });
   });
+
+  group('taart-starthoek (startAngle, #1395)', () {
+    const pie = ChartSpec(
+      type: ChartType.pie,
+      x: ['Lucht', 'Zon'],
+      series: [
+        ChartSeries(name: 'Aandeel', data: [75, 25]),
+      ],
+    );
+
+    test('standaard 0; niet weggeschreven', () {
+      expect(pie.startAngle, 0);
+      expect(pie.toBlock(), isNot(contains('startAngle')));
+    });
+
+    test('een rotatie overleeft het blok', () {
+      final turned = pie.copyWith(startAngle: 135);
+      expect(turned.toBlock(), contains('"startAngle": 135'));
+      expect(ChartSpec.parse(turned.toBlock()).startAngle, 135);
+    });
+
+    test('alleen een taartachtige schrijft de hoek weg', () {
+      final bar = pie.copyWith(type: ChartType.bar, startAngle: 135);
+      expect(bar.toBlock(), isNot(contains('startAngle')));
+    });
+
+    test('een ontbrekende sleutel valt terug op 0', () {
+      expect(ChartSpec.parse('{"type":"pie"}').startAngle, 0);
+    });
+  });
 }

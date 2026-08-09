@@ -945,6 +945,7 @@ bounds — always stays in the block, never in the data file.
   "animateOnEnter": false,  // optional; only written when false
   "animationDurationMs": 600,  // optional; omitted = inherit the theme
   "showSliceLabels": false, // optional; pie/donut only, written only when off
+  "startAngle": 90,         // optional; pie/donut only, degrees clockwise from top
   "series": [ { "name": "2025", "data": [10, 14], "color": "#2563EB" } ]
 }
 ```
@@ -1055,6 +1056,11 @@ Fields:
   turned **off**, and only for a pie-like type (so the flag never lingers after a
   type switch). Off gives a clean, number-free circle — handy when the pie is
   used as a drawing rather than a data read.
+- `startAngle` — `pie`/`donut` only: the chart's rotation in degrees, clockwise
+  from the top (12 o'clock). `0` (default) starts the first slice at the top,
+  like PowerPoint/Impress' "angle of first slice"; written only when non-zero and
+  for a pie-like type. Lets you place a slice exactly without splitting a series
+  in two.
 - `source` — optional path to a data file holding `x` and `series` (§6.4). When
   present, the values are omitted from the block on save. `x` disappears
   entirely; `series` disappears too *unless* a series carries a `color`, in

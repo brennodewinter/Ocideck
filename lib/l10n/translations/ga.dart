@@ -1808,6 +1808,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Starthoek (graden)': 'Uillinn tosaigh (céimeanna)',
   'Percentages op de taartpunten tonen':
       'Taispeáin céatadáin ar shlisní na píóige',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Caibidil nua ar leathanach nua',

@@ -144,6 +144,50 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('startAngle rotates the pie; 0 starts at the top (#1395)', (
+    tester,
+  ) async {
+    const x = ['A', 'B', 'C'];
+    const series = [
+      ChartSeries(name: 'x', data: [1, 1, 1]),
+    ];
+
+    // Default 0 → the first slice starts at the top. fl_chart's zero is the
+    // right (3 o'clock), so that is -90, which is what the HTML export uses too.
+    await tester.pumpWidget(
+      _host(const ChartSpec(type: ChartType.pie, x: x, series: series)),
+    );
+    await tester.pump();
+    expect(
+      tester
+          .widget<PieChart>(find.byType(PieChart).first)
+          .data
+          .startDegreeOffset,
+      -90,
+    );
+
+    // A rotation adds clockwise from the top.
+    await tester.pumpWidget(
+      _host(
+        const ChartSpec(
+          type: ChartType.pie,
+          x: x,
+          series: series,
+          startAngle: 90,
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(
+      tester
+          .widget<PieChart>(find.byType(PieChart).first)
+          .data
+          .startDegreeOffset,
+      0,
+    );
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('bar chart uses most of the available vertical plot area', (
     tester,
   ) async {

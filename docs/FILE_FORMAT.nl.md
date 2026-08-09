@@ -945,6 +945,7 @@ grenzen — blijft altijd in het blok, nooit in het databestand.
   "animateOnEnter": false,  // optional; only written when false
   "animationDurationMs": 600,  // optional; omitted = inherit the theme
   "showSliceLabels": false, // optional; pie/donut only, written only when off
+  "startAngle": 90,         // optional; pie/donut only, degrees clockwise from top
   "series": [ { "name": "2025", "data": [10, 14], "color": "#2563EB" } ]
 }
 ```
@@ -1056,6 +1057,11 @@ Velden:
   de vlag niet hangen na een typewissel). Uit geeft een schone cirkel zonder
   getallen — handig wanneer de taart als tekening dient in plaats van als
   gegevensweergave.
+- `startAngle` — alleen `pie`/`donut`: de rotatie van de taart in graden,
+  kloksgewijs vanaf de bovenkant (12 uur). `0` (standaard) laat de eerste punt
+  bovenaan beginnen — als de "hoek van eerste segment" in PowerPoint/Impress.
+  Alleen weggeschreven wanneer niet-nul én het type pie-like. Waarmee je een punt
+  precies plaatst zonder een reeks in tweeën te hoeven splitsen.
 - `source` — optioneel pad naar een databestand met `x` en `series` (§6.4). Wanneer
   aanwezig, worden de waarden bij het opslaan uit het blok weggelaten. `x` verdwijnt
   helemaal; `series` verdwijnt ook *tenzij* een reeks een `color` draagt, in
