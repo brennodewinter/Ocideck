@@ -584,6 +584,38 @@ void main() {
     );
 
     test(
+      'an unanswered ping triggers stream drop (XEP-0199, #1418)',
+      () async {
+        final firstTransport = happyServer(
+          mechanisms: ['PLAIN'],
+          sasl: (_) => ['<success xmlns="$_sasl"/>'],
+        );
+
+        final session = XmppSession(
+          transport: firstTransport,
+          settings: account(),
+          password: 'pencil',
+          pingInterval: const Duration(milliseconds: 50),
+        );
+
+        await session.connect();
+
+        final stanzasDone = Completer<void>();
+        session.stanzas.listen((_) {}, onDone: () => stanzasDone.complete());
+
+        // De server antwoordt niet op pings. Na twee ping-intervallen (50ms
+        // × 2 = 100ms) is de eerste ping nog in-flight wanneer de tweede
+        // timer vuurt → _onStreamDropped → stanzas sluit.
+        await stanzasDone.future.timeout(const Duration(seconds: 2));
+        expect(stanzasDone.isCompleted, isTrue);
+        // De stanzas-stream is gesloten — de ping detecteerde de dode
+        // verbinding en triggerde _onStreamDropped.
+
+        await session.close();
+      },
+    );
+
+    test(
       'a failed rejoin (nick-conflict) triggers backoff, not silent success (#1416)',
       () async {
         final firstTransport = happyServer(

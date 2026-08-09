@@ -138,6 +138,7 @@ class XmppSession implements XmppStanzaChannel {
     this.onRejoin,
     this.maxReconnectAttempts = 5,
     this.reconnectDelay = xmppReconnectDelay,
+    this.pingInterval = const Duration(seconds: 60),
   }) : _nonce = nonceFactory ?? _defaultNonce;
 
   /// The active transport — replaced on each reconnect. Mutable because a
@@ -190,6 +191,14 @@ class XmppSession implements XmppStanzaChannel {
   /// fail-closed wordt de queue gewist.
   static const _outboundQueueCap = 64;
   final List<String> _outboundQueue = [];
+
+  /// XEP-0199 ping-interval. Elke [pingInterval] stuurt de sessie een
+  /// `<iq type=get><ping/></iq>` — houdt de NAT-tabel warm en detecteert een
+  /// dode verbinding als de server niet antwoordt binnen [timeout]. Bij null
+  /// of Duration.zero is ping uit (#1418).
+  final Duration pingInterval;
+  Timer? _pingTimer;
+  String? _pingInFlight; // id van de uitstaande ping, null als er geen is
 
   /// The full JID the server bound (`localpart@domain/resource`), or null before
   /// a successful [connect].
@@ -507,7 +516,10 @@ class XmppSession implements XmppStanzaChannel {
 
   /// Hand every remaining and future frame to [stanzas] as a parsed [Stanza].
   /// A frame that is not a valid stanza (or carries a DTD) is dropped, not fatal.
+  /// Ping-responses (XEP-0199) worden onderschept en niet doorgegeven — het is
+  /// een intern keepalive-protocol, geen collab-stanza.
   void _startDispatch() {
+    _startPing();
     _reader.drain((frame) {
       if (_closed) return;
       final Stanza stanza;
@@ -516,8 +528,45 @@ class XmppSession implements XmppStanzaChannel {
       } on FormatException {
         return; // not a stanza (or a DTD) — ignore, never fatal
       }
+      // XEP-0199 ping-response — ruim de in-flight flag op, niet doorgeven.
+      if (_pingInFlight != null &&
+          stanza.kind == StanzaKind.iq &&
+          stanza.id == _pingInFlight) {
+        _pingInFlight = null;
+        return;
+      }
       if (!_inbound.isClosed) _inbound.add(stanza);
     }, onClosed: _onStreamDropped);
+  }
+
+  /// Start de periodieke XEP-0199 ping (#1418). Elke [pingInterval] stuurt een
+  /// `<iq type=get><ping/></iq>`. Als de vorige ping nog niet beantwoord is
+  /// wanneer de timer opnieuw vuurt, is de verbinding dood → `_onStreamDropped`.
+  void _startPing() {
+    _stopPing();
+    if (pingInterval == Duration.zero || _closed) return;
+    _pingTimer = Timer.periodic(pingInterval, (_) {
+      if (_closed || !_live) return;
+      if (_pingInFlight != null) {
+        // De vorige ping is niet beantwoord binnen pingInterval — de verbinding
+        // is dood. Trigger reconnect (of tear down).
+        _stopPing();
+        _onStreamDropped();
+        return;
+      }
+      final id = 'ping-${DateTime.now().microsecondsSinceEpoch}';
+      _pingInFlight = id;
+      transport.send(
+        '<iq type="get" id="$id">'
+        '<ping xmlns="urn:xmpp:ping"/></iq>',
+      );
+    });
+  }
+
+  void _stopPing() {
+    _pingTimer?.cancel();
+    _pingTimer = null;
+    _pingInFlight = null;
   }
 
   /// The server ended the stream on a live session (EOF or error). Mark it
@@ -526,6 +575,7 @@ class XmppSession implements XmppStanzaChannel {
   /// (the MUC layer) learns the room is gone — the pre-reconnect behaviour.
   void _onStreamDropped() {
     _live = false;
+    _stopPing();
     if (reconnectTransportFactory != null && !_closed && !_reconnecting) {
       _reconnecting = true;
       unawaited(_reconnect());
@@ -641,6 +691,7 @@ class XmppSession implements XmppStanzaChannel {
     if (_closed) return;
     _closed = true;
     _live = false;
+    _stopPing();
     await _reader.cancel();
     await transport.close();
     if (!_inbound.isClosed) await _inbound.close();
