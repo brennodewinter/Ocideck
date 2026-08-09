@@ -228,7 +228,15 @@ class XmppKeyExchange {
     // De peer-address is de in-room JID (room@conf/nick) — de server zet
     // deze op de presence. De directory gebruikt ze om een keyshare te
     // adresseren en om de afzender van een blinded keyshare te resolveren.
-    final peerAddress = stanza.from ?? roomJid;
+    // De peer-address is de in-room JID (room@conf/nick) — de server zet
+    // deze op de presence. Een presence zonder from is misvormd of gehostile:
+    // de MUC reflecteert altijd met from. Drop fail-closed in plaats van
+    // fallback naar roomJid (dat geen geldig peer-address is, #1429).
+    final peerAddress = stanza.from;
+    if (peerAddress == null) {
+      logWarning('xmpp.keyexchange.missingFrom', keys.deviceId);
+      return;
+    }
     final stored = await directory.ingest(peerAddress: peerAddress, keys: keys);
     if (stored) onKeyInstalled?.call();
   }
@@ -261,7 +269,13 @@ class XmppKeyExchange {
     // hem. Een nick-based check is onbetrouwbaar (#1415): de MUC-nick en de
     // XMPP-resource hebben geen relatie, en een toevallige nick-botsing kan een
     // andere deelnemer's keyshare incorrect droppen.
-    final senderAddress = stanza.from ?? roomJid;
+    // De afzender wordt uit de stanza's from (room@conf/nick) afgeleid. Een
+    // keyshare zonder from is misvormd — drop fail-closed (#1429).
+    final senderAddress = stanza.from;
+    if (senderAddress == null) {
+      logWarning('xmpp.keyexchange.keyshare.missingFrom', null);
+      return;
+    }
     final candidates = directory.devicesForAddress(senderAddress).toList();
     if (candidates.isEmpty) {
       logWarning('xmpp.keyexchange.keyshare.unknownSender', senderAddress);

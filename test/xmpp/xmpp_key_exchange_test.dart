@@ -351,6 +351,35 @@ void main() {
       },
     );
 
+    test(
+      'a device-presence without from is dropped fail-closed (#1429)',
+      () async {
+        final env = await _KeyEnv.create();
+        addTearDown(env.dispose);
+
+        // Stuur een device-presence zonder from — de oude code viel terug op
+        // roomJid als peer-address, wat geen geldig occupant-address is.
+        final keys = env.guestPub;
+        final stanza = Stanza(
+          kind: StanzaKind.presence,
+          // from is null — misvormd
+          to: env.room,
+          children: [
+            xmppElement(
+              'x',
+              namespace: OciDeckNamespace.device,
+              text: jsonEncode(keys.toJson()),
+            ),
+          ],
+        );
+        await env.host.handleDevicePresence(stanza);
+        await env.settle();
+
+        // Het device is niet in de directory opgenomen — fail-closed.
+        expect(env.host.directory.resolve(keys.deviceId), isNull);
+      },
+    );
+
     test('two parties establish keys over the wire, then co-author', () async {
       final env = await _KeyEnv.create(withTransport: true);
       addTearDown(env.dispose);
