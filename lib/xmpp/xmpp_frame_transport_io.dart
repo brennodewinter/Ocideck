@@ -47,6 +47,12 @@ Future<XmppFrameTransport> openXmppFrameTransport(XmppSettings settings) async {
     );
   }
   final pinned = resolved.addresses!.first;
+  // dart:io rewrites ws→http and wss→https before calling the connection
+  // factory. For wss the factory must see https (fail closed on a downgrade
+  // that would strip TLS and leak the SASL password). For ws the factory sees
+  // http — only acceptable to a literal loopback address (checked above), where
+  // there is no TLS to strip and no wire for a listener to sit on.
+  final plainLoopback = scheme == 'ws';
 
   final client = HttpClient()
     ..connectionTimeout = const Duration(seconds: 15)
@@ -64,9 +70,12 @@ Future<XmppFrameTransport> openXmppFrameTransport(XmppSettings settings) async {
       // drops to a PLAIN (un-TLS'd) socket for any non-https scheme, which would
       // strip TLS and leak the SASL password. dart:io rewrites wss→https before
       // calling this factory; if it ever stops, refuse — never downgrade.
-      if (uri.scheme.toLowerCase() != 'https') {
+      // The one exception is ws→http to a literal loopback address (the local
+      // testbed): no TLS to strip, no wire to listen on.
+      final uriScheme = uri.scheme.toLowerCase();
+      if (uriScheme != 'https' && !(plainLoopback && uriScheme == 'http')) {
         throw XmppConnectException(
-          'refusing an unpinned XMPP socket (factory saw ${uri.scheme})',
+          'refusing an unpinned XMPP socket (factory saw $uriScheme)',
         );
       }
       return NetGuard.connectPinned(
