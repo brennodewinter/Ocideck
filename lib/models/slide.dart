@@ -25,6 +25,7 @@ import 'settings.dart';
 import 'timeline.dart';
 
 part 'slide_bullets.dart';
+part 'slide_taxonomy.dart';
 
 const _uuid = Uuid();
 
@@ -82,51 +83,6 @@ enum SlideType {
   // gantt-DSL uit af via `ganttTableToMermaid` — de DSL wordt nooit opgeslagen.
   gantt,
 }
-
-/// Broad grouping a [SlideType] belongs to, used by the add-slide picker to
-/// offer category tabs. The pentest-reporting layouts carry
-/// [SlideCategory.informationSecurity]; Procesverbetering engines carry
-/// [SlideCategory.procesverbetering]. The picker derives its tab bar from the
-/// categories actually present, so a tab appears only once the module reveals
-/// its types.
-enum SlideCategory {
-  general,
-  informationSecurity,
-  procesverbetering,
-  managementsysteem,
-}
-
-/// Hoeveel kolommen *doorlopende* bullettekst een [SlideType] toont — de vorm
-/// die zich over pagina's laat verdelen.
-///
-/// Nadrukkelijk niet "draagt iets in [Slide.bullets]": `timeline` bewaart zijn
-/// gebeurtenissen dáár ook, maar dat is gecodeerde gegevens, geen lopende
-/// lijst, en die knip je niet in tweeën. Vandaar [none] voor zulke types.
-enum BulletColumns { none, one, two }
-
-/// The part a slide plays inside a finding *group* (PENTEST_MIAUW §3.1). A real
-/// finding spans a header/summary card plus detail slides (description,
-/// reproduction, impact, recommendation) and evidence screenshots; every slide
-/// in the group shares one [Slide.findingId]. The `finding` slide type is always
-/// the [header]; [detail] and [evidence] ride on ordinary slide types (bullets,
-/// image) that opt into the group by carrying a finding id + role. Round-trips
-/// as `<!-- ocideck_finding_role: … -->` and is only meaningful when
-/// [Slide.findingId] is set.
-enum FindingRole { header, detail, evidence }
-
-enum ListStyle { bullets, numbered, checklist, richText }
-
-/// Title-slide image-column layout (#1405): `none` is the classic full-bleed
-/// background; `left`/`right`/`both` place one or two image columns beside the
-/// title text using native Marp `![bg left:W%]` / `![bg right:W%]` syntax — no
-/// new OciDeck token. [Slide.titleColumnWidth] is the column width in percent.
-enum TitleColumnLayout { none, left, right, both }
-
-/// Per-kolomuitlijning van een tabel, opgeslagen in de GFM-scheidingsrij
-/// (`:---`, `:---:`, `---:`). Standaard-GFM, dus elk Marp-gereedschap eert
-/// het — geen OciDeck-token. `left` is de GFM-default bij afwezigheid van
-/// colons, zodat een oud deck zonder uitlijning ongewijzigd opent.
-enum TableAlign { left, center, right }
 
 /// Pure-data metadata for a [SlideType], co-located with the enum so adding a
 /// type is one map entry instead of edits to several scattered switches. UI
