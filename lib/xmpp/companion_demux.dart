@@ -85,11 +85,14 @@ class CompanionDemux {
           return;
         }
       }
-      // Onbekende namespace — fail-closed: log + drop.
+      // Onbekende namespace — fail-closed: log + drop. Log alleen een safe
+      // summary (kind, from, to, child-namespace) — niet de volledige stanza
+      // XML, die chat-berichten, device-keys of andere payload kan bevatten
+      // (#1431).
       if (onUnknownNamespace != null) {
         onUnknownNamespace!(stanza);
       } else {
-        logWarning('xmpp.demux.unknownNamespace', stanza.toXmlString());
+        logWarning('xmpp.demux.unknownNamespace', _safeSummary(stanza));
       }
     });
   }
@@ -97,6 +100,18 @@ class CompanionDemux {
   void _onDone() {
     // De stroom is compleet (sessie gesloten). Geen actie nodig — de handlers
     // worden door hun eigenaars opgeruimd. De demux is inert na de stroom.
+  }
+
+  /// Een privacy-veilige samenvatting van een stanza voor logging — kind,
+  /// from, to, en de child-namespaces. Bevat NIET de inner XML of text content,
+  /// die chat-berichten of device-keys kan bevatten (#1431).
+  static String _safeSummary(Stanza stanza) {
+    final namespaces = stanza.children
+        .map((c) => _namespaceOf(c))
+        .whereType<String>()
+        .join(',');
+    return '${stanza.kind.name} from=${stanza.from ?? "?"} '
+        'to=${stanza.to ?? "?"} ns=[$namespaces]';
   }
 
   /// Zoek de namespace van een child-element — zowel de geserialiseerde

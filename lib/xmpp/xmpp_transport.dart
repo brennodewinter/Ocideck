@@ -542,7 +542,9 @@ class XmppTransport implements CollabTransport {
   }
 
   static String _stanzaKey(Stanza stanza, String namespace) =>
-      '${stanza.id ?? stanza.toXmlString()}:$namespace';
+      // Gebruik niet toXmlString() als fallback — dat logt de volledige stanza
+      // inclusief payload (#1431). Een safe samenvatting volstaat voor logging.
+      '${stanza.id ?? "${stanza.kind.name}:${stanza.from ?? "?"}"}:$namespace';
 
   static Map<String, Object?> _asObject(Object? value) {
     if (value is Map<String, Object?>) return value;
