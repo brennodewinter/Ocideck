@@ -1800,6 +1800,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Hernoemen': 'Μετονομασία',
+  'Naam wijzigen': 'Αλλαγή ονόματος',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Η επέκταση παραμένει σταθερή — η μετονομασία δεν αλλάζει τη μορφή του αρχείου.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Το όνομα δεν μπορεί να περιέχει φακέλους ή ειδικούς χαρακτήρες.',
+  'Hernoemd naar': 'Μετονομάστηκε σε',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Δεν ήταν δυνατή η μετονομασία της εικόνας. Υπάρχει ήδη αρχείο με αυτό το όνομα;',
   'Starthoek (graden)': 'Αρχική γωνία (μοίρες)',
   'Percentages op de taartpunten tonen':
       'Εμφάνιση ποσοστών στα κομμάτια της πίτας',

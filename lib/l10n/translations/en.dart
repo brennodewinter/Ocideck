@@ -913,6 +913,15 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Hernoemen': 'Rename',
+  'Naam wijzigen': 'Change name',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'The extension stays fixed — renaming does not change the file format.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'The name may not contain folders or special characters.',
+  'Hernoemd naar': 'Renamed to',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Could not rename the image. Does a file with that name already exist?',
   'Starthoek (graden)': 'Start angle (degrees)',
   'Percentages op de taartpunten tonen': 'Show percentages on the pie slices',
   'Nieuw hoofdstuk op een nieuwe pagina': 'New chapter on a new page',

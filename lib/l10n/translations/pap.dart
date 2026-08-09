@@ -732,6 +732,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Hernoemen': 'Kambia nòmber',
+  'Naam wijzigen': 'Kambia nòmber',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'E extencion ta kambia — kambia nòmber no ta kambia e formato di e archivo.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'E nòmber no por tene map of karakternan spesial.',
+  'Hernoemd naar': 'Kambia na',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'No por a kambia e nòmber di e imágen. Ta eksistí un archivo ku e nòmber ei?',
   'Starthoek (graden)': 'Angulo inicial (grado)',
   'Percentages op de taartpunten tonen':
       'Mustra porsentahe riba e pidanan di taart',

@@ -1773,6 +1773,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Hernoemen': 'Nimeä uudelleen',
+  'Naam wijzigen': 'Vaihda nimi',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Tiedostopääte pysyy kiinteänä — uudelleennimeäminen ei muuta tiedostomuotoa.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Nimi ei saa sisältää kansioita tai erikoismerkkejä.',
+  'Hernoemd naar': 'Nimetty uudelleen:',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Kuvaa ei voitu nimetä uudelleen. Onko olemassa tiedosto samalla nimellä?',
   'Starthoek (graden)': 'Aloituskulma (astetta)',
   'Percentages op de taartpunten tonen': 'Näytä prosentit ympyrän sektoreilla',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Uusi luku uudelle sivulle',

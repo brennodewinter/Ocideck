@@ -732,6 +732,15 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Hernoemen': 'Renommer',
+  'Naam wijzigen': 'Changer le nom',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'L\'extension reste fixe — renommer ne change pas le format du fichier.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Le nom ne peut pas contenir de dossiers ou de caractères spéciaux.',
+  'Hernoemd naar': 'Renommé en',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Impossible de renommer l\'image. Un fichier avec ce nom existe-t-il déjà ?',
   'Starthoek (graden)': 'Angle de départ (degrés)',
   'Percentages op de taartpunten tonen':
       'Afficher les pourcentages sur les secteurs',

@@ -309,7 +309,8 @@ const Map<String, int> classSizeBaseline = {
   // +14: ocideck_table_num_cols directive schrijven + _parseNumCols-lezen.
   'lib/services/markdown_service.dart#MarkdownService': 2467,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
-      2209, // +64: Map toevoegen + onbereikbare-wortel-feedback in de carrousel
+      2437, // +228 (#1404): hernoem-actie + dialoog; testbare logica zit in
+  // ImageRenameService, hier blijft alleen UI-orchestratie
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1604,
   // +7 (#1098): menu- en dialoogaanroepen voor het rechtenoverzicht; de scan en
   // beoordeling leven buiten de State in providers en services.

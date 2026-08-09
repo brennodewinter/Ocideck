@@ -1764,6 +1764,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Hernoemen': 'Nimeta ümber',
+  'Naam wijzigen': 'Muuda nime',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Laiend jääb paigale — ümbernimetamine ei muuda failivormingut.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Nimi ei tohi sisaldada kaustu ega erimärke.',
+  'Hernoemd naar': 'Nimetatud ümber:',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Pilti ei saanud ümber nimetada. Kas selle nimega fail on juba olemas?',
   'Starthoek (graden)': 'Algusnurk (kraadides)',
   'Percentages op de taartpunten tonen': 'Näita protsente sektoritel',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Uus peatükk uuel lehel',

@@ -1773,6 +1773,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Hernoemen': 'Ganti nama',
+  'Naam wijzigen': 'Ubah nama',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Ekstensi tetap — mengganti nama tidak mengubah format file.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Nama tidak boleh berisi folder atau karakter khusus.',
+  'Hernoemd naar': 'Diubah namanya menjadi',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Tidak dapat mengganti nama gambar. Apakah file dengan nama itu sudah ada?',
   'Starthoek (graden)': 'Sudut awal (derajat)',
   'Percentages op de taartpunten tonen': 'Tampilkan persentase pada irisan pai',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Bab baru pada halaman baru',

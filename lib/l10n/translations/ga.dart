@@ -1808,6 +1808,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Hernoemen': 'Athainmnigh',
+  'Naam wijzigen': 'Athraigh an t-ainm',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Fanann an iarmhír seasta — ní athraíonn athainmniú formáid an chomhaid.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Ní cheadaítear fillteáin nó carachtairí speisialta san ainm.',
+  'Hernoemd naar': 'Athainmnithe go',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Níorbh fhéidir an íomha a athainmniú. An bhfuil comhad leis an ainm sin ann cheana?',
   'Starthoek (graden)': 'Uillinn tosaigh (céimeanna)',
   'Percentages op de taartpunten tonen':
       'Taispeáin céatadáin ar shlisní na píóige',

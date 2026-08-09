@@ -1790,6 +1790,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Hernoemen': 'Перейменувати',
+  'Naam wijzigen': 'Змінити назву',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Розширення залишається фіксованим — перейменування не змінює формат файлу.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Назва не може містити папки чи спеціальні символи.',
+  'Hernoemd naar': 'Перейменовано на',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Не вдалося перейменувати зображення. Чи існує вже файл з такою назвою?',
   'Starthoek (graden)': 'Початковий кут (градуси)',
   'Percentages op de taartpunten tonen': 'Показувати відсотки на секторах',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Новий розділ на новій сторінці',

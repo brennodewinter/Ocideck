@@ -729,6 +729,15 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Hernoemen': 'Renombrar',
+  'Naam wijzigen': 'Cambiar nombre',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'La extensión permanece fija — renombrar no cambia el formato del archivo.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'El nombre no puede contener carpetas ni caracteres especiales.',
+  'Hernoemd naar': 'Renombrado a',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'No se pudo renombrar la imagen. ¿Ya existe un archivo con ese nombre?',
   'Starthoek (graden)': 'Ángulo inicial (grados)',
   'Percentages op de taartpunten tonen':
       'Mostrar los porcentajes en las porciones',

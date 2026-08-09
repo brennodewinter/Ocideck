@@ -1777,6 +1777,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Hernoemen': 'Átnevezés',
+  'Naam wijzigen': 'Név módosítása',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'A kiterjesztés rögzített marad — az átnevezés nem változtatja a fájlformátumot.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'A név nem tartalmazhat mappákat vagy speciális karaktereket.',
+  'Hernoemd naar': 'Átnevezve:',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Nem sikerült átnevezni a képet. Létezik már fájl ezzel a névvel?',
   'Starthoek (graden)': 'Kezdőszög (fok)',
   'Percentages op de taartpunten tonen':
       'Százalékok megjelenítése a körcikkeken',
