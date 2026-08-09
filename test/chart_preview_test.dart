@@ -74,6 +74,43 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('pie is solid to the centre; donut keeps its hole (#1395)', (
+    tester,
+  ) async {
+    const x = ['Lucht', 'Schaduw', 'Zon'];
+    const series = [
+      ChartSeries(name: 'Aandeel', data: [75, 10, 15]),
+    ];
+
+    // A pie draws a full circle: the slices meet at the centre (no hole), so a
+    // drawing built from wedges — a pyramid against the sky — closes to a point.
+    await tester.pumpWidget(
+      _host(const ChartSpec(type: ChartType.pie, x: x, series: series)),
+    );
+    await tester.pump();
+    expect(
+      tester
+          .widget<PieChart>(find.byType(PieChart).first)
+          .data
+          .centerSpaceRadius,
+      0,
+    );
+
+    // A donut keeps its hole (it prints the total there).
+    await tester.pumpWidget(
+      _host(const ChartSpec(type: ChartType.donut, x: x, series: series)),
+    );
+    await tester.pump();
+    expect(
+      tester
+          .widget<PieChart>(find.byType(PieChart).first)
+          .data
+          .centerSpaceRadius,
+      greaterThan(0),
+    );
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('bar chart uses most of the available vertical plot area', (
     tester,
   ) async {

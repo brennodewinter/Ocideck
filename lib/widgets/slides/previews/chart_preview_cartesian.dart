@@ -346,8 +346,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
                                     ),
                                 ],
                                 radius: radius,
-                                centerSpaceRadius:
-                                    radius * (donut ? 0.62 : 0.42),
+                                centerSpaceRadius: _holeRadius(radius, donut),
                                 sectionSpace: w * 0.002,
                                 titleStyle: _applyFont(
                                   font,
@@ -406,3 +405,9 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
     );
   }
 }
+
+/// The centre-space (hole) radius for a radial chart. A donut keeps a hole —
+/// its total prints there — while a pie is solid to the centre so its slices
+/// meet at a single point. (A pie used to carry a 0.42 hole too, which stopped
+/// the type from drawing a true, full circle; see issue #1395.)
+double _holeRadius(double radius, bool donut) => radius * (donut ? 0.62 : 0.0);

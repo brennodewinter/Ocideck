@@ -57,14 +57,13 @@ void _pieSvg(
       );
       angle += sweep;
     }
-    final holeColor = donut
-        ? (theme?.slideBackgroundColor ?? 'white')
-        : 'white';
-    b.write(
-      '<circle cx="$cx" cy="$cy" r="${radius * (donut ? 0.6 : 0.43)}" '
-      'fill="$holeColor"/>',
-    );
     if (donut) {
+      // Only a donut carries a hole; a pie stays solid to the centre so the
+      // slices meet at a single point. (A pie used to get a 0.43 hole too.)
+      b.write(
+        '<circle cx="$cx" cy="$cy" r="${radius * 0.6}" '
+        'fill="${theme?.slideBackgroundColor ?? 'white'}"/>',
+      );
       // The total, printed in the centre hole.
       b.write(
         '<text x="$cx" y="${cy + 6}" text-anchor="middle" font-size="18" '
