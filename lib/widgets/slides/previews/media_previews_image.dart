@@ -181,36 +181,14 @@ Widget _resolvedImage(
   // bestanden), maar alleen als de remote-media-gate open staat én de URL door
   // de SSRF-gate komt. Anders een placeholder met de URL.
   if (VideoSource.looksLikeUrl(imagePath)) {
-    if (!SlideLinkScope.allowRemoteMediaOf(context)) {
-      return _remoteBlockedPlaceholder(context, imagePath);
-    }
-    // Resolve the host before fetching: a remote image whose host maps to an
-    // internal address is an SSRF probe (NetGuard.isAllowedMediaUrlResolved),
-    // so gate the NetworkImage on the async result and show a placeholder
-    // while it resolves / when it is refused.
-    return FutureBuilder<bool>(
-      future: NetGuard.isAllowedMediaUrlResolved(imagePath),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          return _imagePlaceholder(context, ImagePlaceholderReason.noImage);
-        }
-        if (snapshot.data != true) {
-          return _remoteBlockedPlaceholder(context, imagePath);
-        }
-        return styled(
-          Image(
-            image: guardedNetworkImage(imagePath),
-            fit: fit,
-            alignment: alignment,
-            width: double.infinity,
-            height: double.infinity,
-            gaplessPlayback: true,
-            semanticLabel: semanticLabel,
-            errorBuilder: (context, error, stackTrace) =>
-                failed(ImagePlaceholderReason.missing),
-          ),
-        );
-      },
+    return _resolvedRemoteImage(
+      context,
+      imagePath,
+      fit: fit,
+      alignment: alignment,
+      semanticLabel: semanticLabel,
+      styled: styled,
+      failed: failed,
     );
   }
 
@@ -260,6 +238,46 @@ Widget _resolvedImage(
       errorBuilder: (context, error, stackTrace) =>
           failed(ImagePlaceholderReason.missing),
     ),
+  );
+}
+
+Widget _resolvedRemoteImage(
+  BuildContext context,
+  String imagePath, {
+  required BoxFit fit,
+  required Alignment alignment,
+  required String? semanticLabel,
+  required Widget Function(Widget child) styled,
+  required Widget Function(ImagePlaceholderReason reason) failed,
+}) {
+  if (!SlideLinkScope.allowRemoteMediaOf(context)) {
+    return _remoteBlockedPlaceholder(context, imagePath);
+  }
+  // Een host die naar een intern adres wijst is een SSRF-poging. Daarom wordt
+  // het netwerkbeeld pas gebouwd nadat de asynchrone DNS-controle slaagt.
+  return FutureBuilder<bool>(
+    future: NetGuard.isAllowedMediaUrlResolved(imagePath),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState != ConnectionState.done) {
+        return _imagePlaceholder(context, ImagePlaceholderReason.noImage);
+      }
+      if (snapshot.data != true) {
+        return _remoteBlockedPlaceholder(context, imagePath);
+      }
+      return styled(
+        Image(
+          image: guardedNetworkImage(imagePath),
+          fit: fit,
+          alignment: alignment,
+          width: double.infinity,
+          height: double.infinity,
+          gaplessPlayback: true,
+          semanticLabel: semanticLabel,
+          errorBuilder: (context, error, stackTrace) =>
+              failed(ImagePlaceholderReason.missing),
+        ),
+      );
+    },
   );
 }
 
