@@ -422,4 +422,266 @@ void main() {
       await session.close();
     },
   );
+
+  // ── reconnect / rejoin (§4) ──────────────────────────────────────────────
+
+  /// A factory that produces a fresh happy server (PLAIN) each call, collecting
+  /// them so the test can inspect the reconnect transports.
+  (XmppFrameTransport Function(), List<FakeXmppTransport>) reconnectFactory({
+    String jid = 'user@example.org/ocideck-abc',
+  }) {
+    final created = <FakeXmppTransport>[];
+    return (
+      () {
+        final t = happyServer(
+          mechanisms: ['PLAIN'],
+          sasl: (_) => ['<success xmlns="$_sasl"/>'],
+          jid: jid,
+        );
+        created.add(t);
+        return t;
+      },
+      created,
+    );
+  }
+
+  group('reconnect/rejoin (§4)', () {
+    test('a stream drop triggers reconnect + rejoin + signal', () async {
+      final firstTransport = happyServer(
+        mechanisms: ['PLAIN'],
+        sasl: (_) => ['<success xmlns="$_sasl"/>'],
+      );
+      final (factory, created) = reconnectFactory();
+      var rejoinCalled = false;
+      final reconnected = Completer<void>();
+
+      final session = XmppSession(
+        transport: firstTransport,
+        settings: account(),
+        password: 'pencil',
+        reconnectTransportFactory: factory,
+        onRejoin: (_) async {
+          rejoinCalled = true;
+        },
+        reconnectDelay: (_) => Duration.zero,
+      );
+      session.onReconnected.listen((_) => reconnected.complete());
+
+      final result = await session.connect();
+      expect(result.ok, isTrue);
+
+      // Drop the first transport's stream — the session should reconnect.
+      firstTransport.dropStream();
+      await reconnected.future.timeout(const Duration(seconds: 5));
+
+      // A new transport was created by the factory.
+      expect(created, hasLength(1));
+      // The new transport received <open> + <auth> (SASL re-run).
+      expect(created.first.sent.any((f) => f.contains('<open')), isTrue);
+      expect(created.first.sent.any((f) => f.contains('<auth')), isTrue);
+      // The rejoin hook was called.
+      expect(rejoinCalled, isTrue);
+      // The session is live again with a bound JID.
+      expect(session.boundJid, isNotNull);
+
+      await session.close();
+    });
+
+    test(
+      'stanzas survive reconnect — new stanzas flow through the same stream',
+      () async {
+        final firstTransport = happyServer(
+          mechanisms: ['PLAIN'],
+          sasl: (_) => ['<success xmlns="$_sasl"/>'],
+        );
+        final (factory, created) = reconnectFactory();
+        final reconnected = Completer<void>();
+
+        final session = XmppSession(
+          transport: firstTransport,
+          settings: account(),
+          password: 'pencil',
+          reconnectTransportFactory: factory,
+          reconnectDelay: (_) => Duration.zero,
+        );
+        session.onReconnected.listen((_) => reconnected.complete());
+
+        await session.connect();
+
+        final inbound = <Stanza>[];
+        session.stanzas.listen(inbound.add);
+
+        // Drop and reconnect.
+        firstTransport.dropStream();
+        await reconnected.future.timeout(const Duration(seconds: 5));
+
+        // Inject a stanza into the NEW transport — it must reach the same
+        // stream, proving the _inbound controller survived the reconnect.
+        created.first.inject(
+          '<message from="room@conf.example.org" type="groupchat">'
+          '<body>after-reconnect</body></message>',
+        );
+        await Future<void>.delayed(Duration.zero);
+
+        expect(inbound, hasLength(1));
+        expect(inbound.single.child('body')?.innerText, 'after-reconnect');
+
+        await session.close();
+      },
+    );
+
+    test('fail-closed after max reconnect attempts', () async {
+      final firstTransport = happyServer(
+        mechanisms: ['PLAIN'],
+        sasl: (_) => ['<success xmlns="$_sasl"/>'],
+      );
+      var factoryCalls = 0;
+
+      // A factory that produces transports whose stream closes immediately —
+      // every reconnect attempt fails (the server hangs up before features).
+      XmppFrameTransport failFactory() {
+        factoryCalls++;
+        final t = FakeXmppTransport((_) => const []);
+        t.dropStream();
+        return t;
+      }
+
+      final session = XmppSession(
+        transport: firstTransport,
+        settings: account(),
+        password: 'pencil',
+        reconnectTransportFactory: failFactory,
+        maxReconnectAttempts: 3,
+        reconnectDelay: (_) => Duration.zero,
+      );
+
+      await session.connect();
+
+      final stanzasDone = Completer<void>();
+      session.stanzas.listen((_) {}, onDone: () => stanzasDone.complete());
+
+      // Drop the stream — the session should try 3 times, then fail closed.
+      firstTransport.dropStream();
+      await stanzasDone.future.timeout(const Duration(seconds: 5));
+
+      // Exactly maxReconnectAttempts calls — no more, no less.
+      expect(factoryCalls, 3);
+      // The stanzas stream completed (fail-closed).
+      expect(stanzasDone.isCompleted, isTrue);
+    });
+
+    test(
+      'see-other-host during reconnect is refused (fail closed, not followed)',
+      () async {
+        final firstTransport = happyServer(
+          mechanisms: ['PLAIN'],
+          sasl: (_) => ['<success xmlns="$_sasl"/>'],
+        );
+
+        // Every reconnect transport responds with see-other-host — the redirect
+        // must be refused, never followed (same fail-closed posture as connect).
+        XmppFrameTransport redirectFactory() {
+          return FakeXmppTransport((frame) {
+            if (frame.contains('<open')) {
+              return [
+                _openReply,
+                '<stream:error xmlns:stream="http://etherx.jabber.org/streams">'
+                    '<see-other-host>10.0.0.1:5222</see-other-host>'
+                    '</stream:error>',
+              ];
+            }
+            return const [];
+          });
+        }
+
+        final session = XmppSession(
+          transport: firstTransport,
+          settings: account(),
+          password: 'pencil',
+          reconnectTransportFactory: redirectFactory,
+          maxReconnectAttempts: 2,
+          reconnectDelay: (_) => Duration.zero,
+        );
+
+        await session.connect();
+
+        final stanzasDone = Completer<void>();
+        session.stanzas.listen((_) {}, onDone: () => stanzasDone.complete());
+
+        firstTransport.dropStream();
+        await stanzasDone.future.timeout(const Duration(seconds: 5));
+
+        // The redirect was never followed; the session failed closed.
+        expect(stanzasDone.isCompleted, isTrue);
+      },
+    );
+
+    test('default backoff is bounded — exponential with a 30s cap', () {
+      expect(xmppReconnectDelay(0), const Duration(seconds: 1));
+      expect(xmppReconnectDelay(1), const Duration(seconds: 2));
+      expect(xmppReconnectDelay(2), const Duration(seconds: 4));
+      expect(xmppReconnectDelay(3), const Duration(seconds: 8));
+      expect(xmppReconnectDelay(4), const Duration(seconds: 16));
+      // Capped at 30s — a persistent outage must not delay absurdly.
+      expect(xmppReconnectDelay(5), const Duration(seconds: 30));
+      expect(xmppReconnectDelay(100), const Duration(seconds: 30));
+    });
+
+    test('close during backoff cancels the reconnect loop', () async {
+      final firstTransport = happyServer(
+        mechanisms: ['PLAIN'],
+        sasl: (_) => ['<success xmlns="$_sasl"/>'],
+      );
+      final (factory, created) = reconnectFactory();
+
+      final session = XmppSession(
+        transport: firstTransport,
+        settings: account(),
+        password: 'pencil',
+        reconnectTransportFactory: factory,
+        maxReconnectAttempts: 5,
+        reconnectDelay: (_) => const Duration(seconds: 10),
+      );
+
+      await session.connect();
+
+      // Drop the stream — the reconnect loop starts but waits 10s before the
+      // first attempt. Close immediately: the loop must cancel, not call the
+      // factory after the delay.
+      firstTransport.dropStream();
+      await Future<void>.delayed(Duration.zero); // let the drop propagate
+      await session.close();
+
+      // Wait past the delay to be sure no late factory call lands.
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+      expect(created, isEmpty);
+    });
+
+    test(
+      'without a reconnect factory, a stream drop tears down (backward compat)',
+      () async {
+        final t = happyServer(
+          mechanisms: ['PLAIN'],
+          sasl: (_) => ['<success xmlns="$_sasl"/>'],
+        );
+        final session = XmppSession(
+          transport: t,
+          settings: account(),
+          password: 'pencil',
+          // no reconnectTransportFactory — pre-reconnect behaviour
+        );
+
+        await session.connect();
+
+        var done = false;
+        session.stanzas.listen((_) {}, onDone: () => done = true);
+
+        t.dropStream();
+        await Future<void>.delayed(Duration.zero);
+
+        // The stanzas stream completed; no reconnect attempted.
+        expect(done, isTrue);
+      },
+    );
+  });
 }

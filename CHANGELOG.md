@@ -1144,6 +1144,27 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **collab: xmpp_session reconnect/rejoin (§4 sub-plak 3).** De
+  delivery-reliability-vereiste uit `XMPP_COLLAB_TRANSPORT.md` §4: een bewaakte
+  reconnect met MUC-rejoin in `lib/xmpp/xmpp_session.dart`. Vandaag sloot
+  `_onStreamDropped` de stroom zonder meer — een drop was permanent. Nu: bij een
+  stream-drop op een live sessie met een `reconnectTransportFactory` start een
+  supervised reconnect met **begrensde exponentiële backoff** (`xmppReconnectDelay`:
+  1s, 2s, 4s, 8s, 16s, gecapt op 30s), de volledige handshake opnieuw
+  (open→SASL→bind) op een verse transport naar **dezelfde host** (nooit een nieuwe
+  outbound host; `<see-other-host>` tijdens reconnect wordt geweigerd, net als bij
+  de initiële connect), dan `onRejoin` om de MUC-kamer(s) te herbetreden en
+  `onReconnected` als signaal naar de transport-laag voor een resync (§4 sub-plak
+  4). De `stanzas`-stroom **overleeft een reconnect** — een consument (de MUC-laag)
+  behoudt zijn abonnement en ontvangt stanzas van de nieuwe verbinding zonder
+  opnieuw te abonneren. Na `maxReconnectAttempts` (standaard 5) gaat de sessie
+  **fail-closed** (`stanzas` completeert, geen verdere pogingen). De
+  security-houding is ongewijzigd: see-other-host geweigerd, NetGuard-pin,
+  fail-closed, geen nieuwe outbound host. Gedeeld met slice 1 (media-join).
+  Nieuwe tests: drop→reconnect→rejoin + signaal, stanzas overleven reconnect,
+  fail-closed na herhaald falen, backoff-grens, see-other-host geweigerd tijdens
+  reconnect, close tijdens backoff, backward-compat zonder factory.
+  Intern-plumbing, achter de standaard-uit Videovergaderingen-module.
 - **collab: §5.1 crypto-uitbreiding — signed rot + recipient-blinded wrap
   (GEPOORT).** De minimale, geënumereerde crypto-uitbreiding uit
   `XMPP_COLLAB_TRANSPORT.md` §5.1 die de veilige XMPP-key-exchange deblokkeert,

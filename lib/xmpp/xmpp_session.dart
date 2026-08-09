@@ -104,9 +104,27 @@ abstract interface class XmppStanzaChannel {
   void sendStanza(Stanza stanza);
 }
 
+/// Begrensde exponentiële backoff voor reconnect-pogingen: 1s, 2s, 4s, 8s,
+/// 16s, gecapt op 30s. Een persistente storing mag niet eindeloos draaien of
+/// absurd lang uitstellen — na [XmppSession.maxReconnectAttempts] pogingen
+/// gaat de sessie fail-closed.
+Duration xmppReconnectDelay(int attempt) {
+  // Begrens de shift bij 5 (1<<5 = 32 ≥ 30) zodat een grote attempt-waarde
+  // geen int-overflow geeft (1<<64 wordt 0 op een 64-bit int).
+  final seconds = min(1 << min(attempt, 5), 30);
+  return Duration(seconds: seconds);
+}
+
 /// Drives one stream from open through SASL and resource binding to a live
 /// session. Call [connect] once; on success use [stanzas]/[sendStanza] until
 /// [close].
+///
+/// With a [reconnectTransportFactory], a stream drop on a live session triggers
+/// a supervised reconnect (§4): bounded backoff, re-authenticate, re-bind, then
+/// [onRejoin] re-enters the MUC room(s) and [onReconnected] signals the
+/// transport layer to resync. The factory always returns a transport to the
+/// same NetGuard-cleared host — never a new outbound host; a `<see-other-host>`
+/// during reconnect is refused just as on the initial connect.
 class XmppSession implements XmppStanzaChannel {
   XmppSession({
     required this.transport,
@@ -115,9 +133,15 @@ class XmppSession implements XmppStanzaChannel {
     this.resource,
     String Function()? nonceFactory,
     this.timeout = const Duration(seconds: 20),
+    this.reconnectTransportFactory,
+    this.onRejoin,
+    this.maxReconnectAttempts = 5,
+    this.reconnectDelay = xmppReconnectDelay,
   }) : _nonce = nonceFactory ?? _defaultNonce;
 
-  final XmppFrameTransport transport;
+  /// The active transport — replaced on each reconnect. Mutable because a
+  /// reconnect swaps in a fresh [XmppFrameTransport] to the same host.
+  XmppFrameTransport transport;
   final XmppSettings settings;
   final String password;
   final Duration timeout;
@@ -127,11 +151,29 @@ class XmppSession implements XmppStanzaChannel {
   final String? resource;
   final String Function() _nonce;
 
-  late final _FrameReader _reader = _FrameReader(transport.inbound);
+  /// A factory that produces a fresh transport for a reconnect, always to the
+  /// same NetGuard-cleared host — never a new outbound host. If null, a stream
+  /// drop tears down the session (the pre-reconnect behaviour).
+  final XmppFrameTransport Function()? reconnectTransportFactory;
+
+  /// Called after a successful reconnect, so the higher layer can rejoin its
+  /// MUC room(s). Receives the session (now live again) as the channel.
+  final Future<void> Function(XmppStanzaChannel)? onRejoin;
+
+  /// Max reconnect attempts before the session goes fail-closed.
+  final int maxReconnectAttempts;
+
+  /// Backoff delay before reconnect attempt *n* (0-indexed). Override for
+  /// tests; the default is [xmppReconnectDelay] (exponential, capped at 30s).
+  final Duration Function(int) reconnectDelay;
+
+  late _FrameReader _reader;
   final _inbound = StreamController<Stanza>.broadcast();
+  final _reconnected = StreamController<void>.broadcast();
   String? _boundJid;
   bool _live = false;
   bool _closed = false;
+  bool _reconnecting = false;
 
   /// The full JID the server bound (`localpart@domain/resource`), or null before
   /// a successful [connect].
@@ -141,14 +183,25 @@ class XmppSession implements XmppStanzaChannel {
   /// Inbound stanzas, once the session is live. Broadcast, so a late listener
   /// only sees stanzas from the moment it subscribes — subscribe before the work
   /// that expects replies (e.g. join a room, then read presence).
+  ///
+  /// Survives a reconnect: the stream stays open across a drop→reconnect cycle,
+  /// so a consumer (the MUC layer) keeps its subscription and receives stanzas
+  /// from the new connection without re-subscribing. Completes only when the
+  /// session goes fail-closed (max reconnect attempts exceeded) or [close].
   @override
   Stream<Stanza> get stanzas => _inbound.stream;
+
+  /// Fires once after each successful reconnect + [onRejoin], so the transport
+  /// layer can trigger a resync (§4 sub-plak 4). Completes when the session
+  /// closes for good.
+  Stream<void> get onReconnected => _reconnected.stream;
 
   /// Open the stream, authenticate, and bind a resource. Returns a failed result
   /// (never throws) for an ordinary failure or a policy refusal. On success the
   /// session is LIVE and the caller owns it until [close]; on failure the
   /// transport is already closed.
   Future<XmppSessionResult> connect() async {
+    _reader = _FrameReader(transport.inbound);
     try {
       final auth = await _authenticate();
       if (auth != null) return _fail(auth); // a SASL/stream failure
@@ -451,12 +504,81 @@ class XmppSession implements XmppStanzaChannel {
     }, onClosed: _onStreamDropped);
   }
 
-  /// The server ended the stream on a live session (EOF or error). Mark it dead
-  /// and let [stanzas] complete, so a consumer (the MUC layer) learns the room
-  /// is gone; the caller still owns the final [close].
+  /// The server ended the stream on a live session (EOF or error). Mark it
+  /// dead. With a [reconnectTransportFactory], keep [stanzas] open and start a
+  /// supervised reconnect (§4); without one, close [stanzas] so a consumer
+  /// (the MUC layer) learns the room is gone — the pre-reconnect behaviour.
   void _onStreamDropped() {
     _live = false;
-    if (!_inbound.isClosed) _inbound.close();
+    if (reconnectTransportFactory != null && !_closed && !_reconnecting) {
+      _reconnecting = true;
+      unawaited(_reconnect());
+    } else if (!_reconnecting) {
+      // No reconnect: tear down as before (pre-reconnect behaviour).
+      if (!_inbound.isClosed) _inbound.close();
+    }
+    // If _reconnecting is already true, the running reconnect loop will see
+    // _live is still false and retry — no need to start a second loop.
+  }
+
+  /// Supervised reconnect with bounded backoff (§4). Re-runs the full
+  /// handshake (open→SASL→bind) on a fresh transport from the factory — always
+  /// to the same NetGuard-cleared host, never a new outbound host. On success,
+  /// restarts dispatch, calls [onRejoin] so the higher layer re-enters its MUC
+  /// room(s), and fires [onReconnected] so the transport layer can resync. On
+  /// failure, backs off and retries; after [maxReconnectAttempts] the session
+  /// goes fail-closed (stanzas completes, no further attempts).
+  Future<void> _reconnect() async {
+    try {
+      for (var attempt = 0; attempt < maxReconnectAttempts; attempt++) {
+        if (_closed) return;
+        await Future<void>.delayed(reconnectDelay(attempt));
+        if (_closed) return;
+        try {
+          // Ruim de oude verbinding op en maak een verse transport aan — altijd
+          // naar dezelfde host, nooit een nieuwe outbound host.
+          await _reader.cancel();
+          await transport.close();
+          transport = reconnectTransportFactory!();
+          _reader = _FrameReader(transport.inbound);
+
+          final auth = await _authenticate();
+          if (auth != null) continue; // SASL-/stream-fout → backoff en opnieuw
+          final bound = await _bindResource();
+          _boundJid = bound;
+          _live = true;
+          _startDispatch();
+          // Rejoin de kamer(s), dan signaleer de transport-laag voor een resync.
+          if (onRejoin != null) await onRejoin!(this);
+          if (!_reconnected.isClosed) _reconnected.add(null);
+          return; // success
+        } on TimeoutException {
+          continue; // server reageerde niet — backoff en opnieuw
+        } on XmppConnectException {
+          continue; // transport weigerde of stream sloot — backoff en opnieuw
+        } on _BindException {
+          continue; // bind faalde — backoff en opnieuw
+        } catch (e) {
+          logWarning('XmppSession.reconnect poging $attempt faalde', e);
+          continue;
+        }
+      }
+      // Max pogingen bereikt — fail-closed: de sessie is dood.
+      _boundJid = null;
+      if (!_inbound.isClosed) await _inbound.close();
+    } finally {
+      _reconnecting = false;
+      // Viel de stream opnieuw tijdens onRejoin (nadat we _live = true zetten
+      // maar voordat de loop eindigde)? Dan zag _onStreamDropped _reconnecting
+      // = true en startte geen nieuwe loop. Start hem nu.
+      if (!_live &&
+          !_closed &&
+          !_inbound.isClosed &&
+          reconnectTransportFactory != null) {
+        _reconnecting = true;
+        unawaited(_reconnect());
+      }
+    }
   }
 
   /// Send a stanza on the live session. A no-op once closed.
@@ -473,6 +595,7 @@ class XmppSession implements XmppStanzaChannel {
     await _reader.cancel();
     await transport.close();
     if (!_inbound.isClosed) await _inbound.close();
+    if (!_reconnected.isClosed) await _reconnected.close();
   }
 
   // ── helpers ───────────────────────────────────────────────────────────────
