@@ -114,7 +114,8 @@ class XmppMuc {
   static const _maxNickLength = 1024;
 
   final _occupants = <String, MucOccupant>{};
-  final _roster = StreamController<List<MucOccupant>>.broadcast();
+  StreamController<List<MucOccupant>> _roster =
+      StreamController<List<MucOccupant>>.broadcast();
   StreamSubscription<Stanza>? _sub;
   Completer<MucJoinResult>? _joining;
   Timer? _joinTimer;
@@ -139,8 +140,22 @@ class XmppMuc {
   /// device-keys publiceert (§5 brick 10, `XMPP_COLLAB_TRANSPORT.md` §6).
   /// De MUC-`<x>` blijft altijd het eerste child; de extensies komen erna.
   Future<MucJoinResult> join({List<XmlElement>? presenceExtensions}) {
-    if (_joining != null || _joined) {
+    // Sta een re-join toe na een teardown (_left = true) — de reconnect-
+    // machinery (onRejoin) moet de kamer opnieuw kunnen betreden zonder een
+    // nieuwe XmppMuc aan te maken (#1421). Een join terwijl er al één loopt
+    // of de kamer al live is, blijft een StateError.
+    if (_joining != null || (_joined && !_left)) {
       throw StateError('XmppMuc.join() called more than once');
+    }
+    // Reset de state voor een re-join: de oude roster is gesloten in
+    // _teardown, de occupants zijn stale, _left is gezet.
+    if (_left) {
+      _occupants.clear();
+      _joined = false;
+      _left = false;
+      if (_roster.isClosed) {
+        _roster = StreamController<List<MucOccupant>>.broadcast();
+      }
     }
     final completer = _joining = Completer<MucJoinResult>();
     _sub = channel.stanzas.listen(_onStanza, onDone: _onSessionDropped);

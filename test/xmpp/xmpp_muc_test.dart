@@ -8,7 +8,7 @@ import 'package:ocideck/xmpp/xmpp_stanza.dart';
 /// A scripted stanza channel: [inject] pushes a server presence, [sent] records
 /// what the MUC layer sends, [drop] simulates the session ending.
 class FakeChannel implements XmppStanzaChannel {
-  final _inbound = StreamController<Stanza>.broadcast();
+  StreamController<Stanza> _inbound = StreamController<Stanza>.broadcast();
   final sent = <Stanza>[];
 
   @override
@@ -26,6 +26,12 @@ class FakeChannel implements XmppStanzaChannel {
 
   void drop() {
     if (!_inbound.isClosed) _inbound.close();
+  }
+
+  /// Simuleer een reconnect: maak een verse inbound-stream. De MUC's
+  /// re-subscription in join() ziet een levende stream.
+  void reconnect() {
+    if (_inbound.isClosed) _inbound = StreamController<Stanza>.broadcast();
   }
 }
 
@@ -183,6 +189,58 @@ void main() {
     expect(muc.join, throwsStateError);
     ch.drop();
   });
+
+  test(
+    'rejoin after leave succeeds — XmppMuc is reusable (#1421)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+
+      // Eerste join — slaagt.
+      final firstJoin = muc.join();
+      ch.inject(_presence('me', codes: ['110']));
+      final firstResult = await firstJoin;
+      expect(firstResult.ok, isTrue);
+      await muc.leave();
+
+      // Re-join na een leave — de oude code gooide StateError; nu moet hij
+      // de kamer opnieuw betreden (de reconnect-machinery moet dit kunnen).
+      final secondJoin = muc.join();
+      ch.inject(_presence('me', codes: ['110']));
+      final secondResult = await secondJoin;
+      expect(secondResult.ok, isTrue);
+      expect(muc.roster.map((o) => o.nick), contains('me'));
+      await muc.leave();
+    },
+  );
+
+  test(
+    'rejoin after session drop succeeds — XmppMuc is reusable (#1421)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+
+      // Join slaagt, dan valt de sessie weg.
+      final firstJoin = muc.join();
+      ch.inject(_presence('me', codes: ['110']));
+      final firstResult = await firstJoin;
+      expect(firstResult.ok, isTrue);
+      ch.drop();
+      // Wacht tot de onDone-callback (_onSessionDropped → _teardown) heeft
+      // gevuuurd — anders is _left nog niet gezet en join() gooit.
+      await Future<void>.delayed(Duration.zero);
+
+      // Simuleer een reconnect: de sessie is hersteld met een verse stream.
+      ch.reconnect();
+
+      // Re-join na een session drop — de MUC moet opnieuw kunnen betreden.
+      final secondJoin = muc.join();
+      ch.inject(_presence('me', codes: ['110']));
+      final secondResult = await secondJoin;
+      expect(secondResult.ok, isTrue);
+      await muc.leave();
+    },
+  );
 
   test(
     'a stray error presence after join does not tear down the roster',
