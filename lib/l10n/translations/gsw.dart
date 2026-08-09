@@ -1776,6 +1776,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Hernoemen': 'Umbenenne',
+  'Naam wijzigen': 'Name ändere',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'D Erwyterig bliibt fix — Umbenenne änderet s Dateiformat nöd.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Dr Name derf kei Ordner oder Sonderzeiche enthalte.',
+  'Hernoemd naar': 'Umbenennt i',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'S Bild cha nöd umbenennt wärde. Gits scho e Datei mit dem Name?',
   'Starthoek (graden)': 'Aafangswinkel (Grad)',
   'Percentages op de taartpunten tonen': 'Prozänt uf de Tortestücke azeige',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Neus Kapitel uf ere neue Site',

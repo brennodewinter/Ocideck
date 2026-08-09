@@ -728,6 +728,15 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Hernoemen': 'Rinomina',
+  'Naam wijzigen': 'Cambia nome',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'L\'estensione resta fissa — rinominare non cambia il formato del file.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Il nome non può contenere cartelle o caratteri speciali.',
+  'Hernoemd naar': 'Rinominato in',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Impossibile rinominare l\'immagine. Esiste già un file con quel nome?',
   'Starthoek (graden)': 'Angolo iniziale (gradi)',
   'Percentages op de taartpunten tonen': 'Mostra le percentuali sugli spicchi',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nuovo capitolo su una nuova pagina',

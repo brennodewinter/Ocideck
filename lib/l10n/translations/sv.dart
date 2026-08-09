@@ -1772,6 +1772,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Hernoemen': 'Byt namn',
+  'Naam wijzigen': 'Ändra namn',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Filändelsen förblir fast — att byta namn ändrar inte filformatet.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Namnet får inte innehålla mappar eller specialtecken.',
+  'Hernoemd naar': 'Bytt namn till',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Kunde inte byta namn på bilden. Finns det redan en fil med det namnet?',
   'Starthoek (graden)': 'Startvinkel (grader)',
   'Percentages op de taartpunten tonen': 'Visa procent på tårtbitarna',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nytt kapitel på en ny sida',

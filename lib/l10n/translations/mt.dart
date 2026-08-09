@@ -1795,6 +1795,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Hernoemen': 'Biddel isem',
+  'Naam wijzigen': 'Biddel l-isem',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'L-estensjoni tibqa\' fissi — bidla tal-isem tbiddilx il-format tal-fajl.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'L-isem ma jistax jikla folders jew karattri speċjali.',
+  'Hernoemd naar': 'Biddel isem għal',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Ma setax jibdel l-isem tal-istampa. Diġà jeżisti fajl b\'dak l-isem?',
   'Starthoek (graden)': 'Angolu tal-bidu (gradi)',
   'Percentages op de taartpunten tonen':
       'Uri l-persentaġġi fuq il-flieli tat-torta',

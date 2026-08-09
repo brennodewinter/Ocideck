@@ -2750,6 +2750,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Hernoemen': 'Yeniden adlandır',
+  'Naam wijzigen': 'Adı değiştir',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Uzantı sabit kalır — yeniden adlandırmak dosya biçimini değiştirmez.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Ad klasörler veya özel karakterler içeremez.',
+  'Hernoemd naar': 'Yeniden adlandırıldı:',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Görsel yeniden adlandırılamadı. Bu adda bir dosya zaten mevcut mu?',
   'Starthoek (graden)': 'Başlangıç açısı (derece)',
   'Percentages op de taartpunten tonen': 'Yüzdeleri pasta dilimlerinde göster',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Yeni bölüm yeni sayfada',

@@ -1775,6 +1775,15 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Hernoemen': 'Preimenuj',
+  'Naam wijzigen': 'Spremeni ime',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Končnica ostane fiksna — preimenovanje ne spremeni oblike datoteke.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Ime ne sme vsebovati map ali posebnih znakov.',
+  'Hernoemd naar': 'Preimenovano v',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Slike ni mogoče preimenovati. Ali že obstaja datoteka s tem imenom?',
   'Starthoek (graden)': 'Začetni kot (stopinje)',
   'Percentages op de taartpunten tonen': 'Prikaži odstotke na izsekih',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Novo poglavje na novi strani',

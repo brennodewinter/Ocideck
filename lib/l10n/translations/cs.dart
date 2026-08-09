@@ -1776,6 +1776,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Hernoemen': 'Přejmenovat',
+  'Naam wijzigen': 'Změnit název',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Přípona zůstává pevná — přejmenování nemění formát souboru.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Název nesmí obsahovat složky nebo speciální znaky.',
+  'Hernoemd naar': 'Přejmenováno na',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Obrázek nelze přejmenovat. Již existuje soubor s tímto názvem?',
   'Starthoek (graden)': 'Počáteční úhel (stupně)',
   'Percentages op de taartpunten tonen': 'Zobrazit procenta na výsečích',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nová kapitola na nové stránce',

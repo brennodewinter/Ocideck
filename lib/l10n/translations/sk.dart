@@ -1780,6 +1780,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Hernoemen': 'Premenovať',
+  'Naam wijzigen': 'Zmeniť názov',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Prípona zostáva pevná — premenovanie nemení formát súboru.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Názov nesmie obsahovať priečinky alebo špeciálne znaky.',
+  'Hernoemd naar': 'Premenované na',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Obrázok sa nepodarilo premenovať. Už existuje súbor s týmto názvom?',
   'Starthoek (graden)': 'Počiatočný uhol (stupne)',
   'Percentages op de taartpunten tonen': 'Zobraziť percentá na výsekoch',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nová kapitola na novej strane',

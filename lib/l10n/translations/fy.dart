@@ -733,6 +733,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Hernoemen': 'Werneame',
+  'Naam wijzigen': 'Namme wizigje',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'De taheak bliuwt fêst — werneamen feroaret it bestânsformaat net.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'De namme mei gjin mappen of bysûndere tekens befetsje.',
+  'Hernoemd naar': 'Werneamd ta',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Koe de ôfbylding net werneame. Bestiet der al in bestân mei dy namme?',
   'Starthoek (graden)': 'Begjinhoeke (graden)',
   'Percentages op de taartpunten tonen':
       'Persintaazjes op \'e taartpunten toane',

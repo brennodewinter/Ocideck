@@ -1790,6 +1790,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Hernoemen': 'Redenumește',
+  'Naam wijzigen': 'Schimbă numele',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Extensia rămâne fixă — redenumirea nu schimbă formatul fișierului.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Numele nu poate conține dosare sau caractere speciale.',
+  'Hernoemd naar': 'Redenumit în',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Nu s-a putut redenumi imaginea. Există deja un fișier cu acel nume?',
   'Starthoek (graden)': 'Unghi inițial (grade)',
   'Percentages op de taartpunten tonen': 'Afișează procentele pe felii',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Capitol nou pe o pagină nouă',

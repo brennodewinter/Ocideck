@@ -1780,6 +1780,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Hernoemen': 'Pervadinti',
+  'Naam wijzigen': 'Keisti pavadinimą',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Plėtinys lieka fiksuotas — pervadinimas nekeičia failo formato.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Pavadinimas negali turėti aplankų ar specialiųjų simbolių.',
+  'Hernoemd naar': 'Pervadinta į',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Nepavyko pervadinti paveikslėlio. Ar jau egzistuoja failas tokiu pavadinimu?',
   'Starthoek (graden)': 'Pradinis kampas (laipsniai)',
   'Percentages op de taartpunten tonen':
       'Rodyti procentus skritulio sektoriuose',

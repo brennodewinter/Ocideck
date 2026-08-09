@@ -1802,6 +1802,15 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Hernoemen': 'Renomear',
+  'Naam wijzigen': 'Alterar nome',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'A extensão permanece fixa — renomear não altera o formato do arquivo.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'O nome não pode conter pastas ou caracteres especiais.',
+  'Hernoemd naar': 'Renomeado para',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Não foi possível renomear a imagem. Já existe um arquivo com esse nome?',
   'Starthoek (graden)': 'Ângulo inicial (graus)',
   'Percentages op de taartpunten tonen': 'Mostrar percentagens nas fatias',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Novo capítulo numa nova página',

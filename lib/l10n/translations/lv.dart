@@ -1772,6 +1772,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Hernoemen': 'Pārsaukt',
+  'Naam wijzigen': 'Mainīt nosaukumu',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Paplašinājums paliek fiksēts — pārsaukšana nemaina faila formātu.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Nosaukums nedrīkst saturēt mapes vai īpašās rakstzīmes.',
+  'Hernoemd naar': 'Pārsaukts uz',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Nevarēja pārsaukt attēlu. Vai jau eksistē fails ar šādu nosaukumu?',
   'Starthoek (graden)': 'Sākuma leņķis (grādi)',
   'Percentages op de taartpunten tonen': 'Rādīt procentus riņķa sektoros',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Jauna nodaļa jaunā lappusē',

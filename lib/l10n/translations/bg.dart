@@ -1795,6 +1795,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Hernoemen': 'Преименувай',
+  'Naam wijzigen': 'Промяна на име',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Разширението остава фиксирано — преименуването не променя формата на файла.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Името не може да съдържа папки или специални знаци.',
+  'Hernoemd naar': 'Преименувано на',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Изображението не можа да бъде преименувано. Вече ли съществува файл с това име?',
   'Starthoek (graden)': 'Начален ъгъл (градуси)',
   'Percentages op de taartpunten tonen':
       'Показване на процентите върху секторите',

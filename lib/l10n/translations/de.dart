@@ -732,6 +732,15 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Hernoemen': 'Umbenennen',
+  'Naam wijzigen': 'Namen ändern',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Die Erweiterung bleibt fest — Umbenennen ändert nicht das Dateiformat.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Der Name darf keine Ordner oder Sonderzeichen enthalten.',
+  'Hernoemd naar': 'Umbenannt in',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Bild konnte nicht umbenannt werden. Existiert bereits eine Datei mit diesem Namen?',
   'Starthoek (graden)': 'Startwinkel (Grad)',
   'Percentages op de taartpunten tonen':
       'Prozentwerte auf den Tortensegmenten anzeigen',

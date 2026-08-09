@@ -1772,6 +1772,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Hernoemen': 'Omdøb',
+  'Naam wijzigen': 'Ændr navn',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Filtypenavnet forbliver fast — omdøbning ændrer ikke filformatet.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Navnet må ikke indeholde mapper eller specialtegn.',
+  'Hernoemd naar': 'Omdøbt til',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Kunne ikke omdøbe billedet. Findes der allerede en fil med det navn?',
   'Starthoek (graden)': 'Startvinkel (grader)',
   'Percentages op de taartpunten tonen': 'Vis procenter på cirkeludsnittene',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nyt kapitel på en ny side',

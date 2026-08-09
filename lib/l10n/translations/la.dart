@@ -1789,6 +1789,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Hernoemen': 'Renominare',
+  'Naam wijzigen': 'Nomen mutare',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Suffixum manet — renominare formam file non mutat.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Nomen folders vel caracteres speciales continere non potest.',
+  'Hernoemd naar': 'Renominatum ad',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Imago renominari non potuit. File eo nomine iam existitne?',
   'Starthoek (graden)': 'Angulus initialis (gradus)',
   'Percentages op de taartpunten tonen':
       'Centesimas in segmentis placentae monstrare',
