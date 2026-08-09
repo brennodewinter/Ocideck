@@ -25,11 +25,6 @@ final _reNumberedMark = RegExp(r'^\d+[.)]$');
 final _reBgImage = RegExp(r'!\[bg');
 final _reBgImageUrl = RegExp(r'!\[bg[^\]]*\]\(([^)]+)\)');
 final _reBgImageSize = RegExp(r'!\[bg[^\]]*?(\d+)%[^\]]*\]');
-final _reMarpImageFilter = RegExp(
-  r'\b(?:blur(?::[^\s\]]+)?|brightness(?::[^\s\]]+)?|saturate(?::[^\s\]]+)?|grayscale|sepia|invert)\b',
-  caseSensitive: false,
-);
-final _reMarpContain = RegExp(r'\b(?:fit|contain)\b', caseSensitive: false);
 // Title-column detection (#1405): `![bg left:W%]` / `![bg right:W%]`. Word
 // boundaries avoid matching "leftovers" or similar substrings.
 final _reBgSide = RegExp(r'!\[bg[^\]]*\b(left|right)\b');
@@ -348,7 +343,7 @@ extension _MarkdownParse on MarkdownService {
 
   Slide? _parseBlock(String block) {
     if (block.isEmpty) return null;
-    if (_requiresWholeBlockPreservation(block)) {
+    if (requiresWholeMarpBlockPreservation(block)) {
       return Slide(
         id: _uuid.v4(),
         type: SlideType.freeMarkdown,

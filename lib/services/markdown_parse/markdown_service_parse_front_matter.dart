@@ -90,7 +90,7 @@ extension _MarkdownParseFrontMatter on MarkdownService {
             fm.signature = _applySignatureField(
               fm.signature,
               key,
-              _parseScalar(value),
+              parseMarkdownYamlScalar(value),
             );
             continue;
           }
@@ -100,42 +100,48 @@ extension _MarkdownParseFrontMatter on MarkdownService {
             case 'paginate':
               fm.paginate = value == 'true';
             case 'color':
-              fm.marpStyle = fm.marpStyle.copyWith(color: _parseScalar(value));
+              fm.marpStyle = fm.marpStyle.copyWith(
+                color: parseMarkdownYamlScalar(value),
+              );
             case 'backgroundColor':
               fm.marpStyle = fm.marpStyle.copyWith(
-                backgroundColor: _parseScalar(value),
+                backgroundColor: parseMarkdownYamlScalar(value),
               );
             case 'backgroundImage':
               fm.marpStyle = fm.marpStyle.copyWith(
-                backgroundImage: _parseScalar(value),
+                backgroundImage: parseMarkdownYamlScalar(value),
               );
             case 'header':
-              fm.marpStyle = fm.marpStyle.copyWith(header: _parseScalar(value));
+              fm.marpStyle = fm.marpStyle.copyWith(
+                header: parseMarkdownYamlScalar(value),
+              );
             case 'footer':
-              fm.marpStyle = fm.marpStyle.copyWith(footer: _parseScalar(value));
+              fm.marpStyle = fm.marpStyle.copyWith(
+                footer: parseMarkdownYamlScalar(value),
+              );
             case 'title':
-              fm.presentationTitle = _parseScalar(value);
+              fm.presentationTitle = parseMarkdownYamlScalar(value);
             case 'author':
-              fm.author = _parseScalar(value);
+              fm.author = parseMarkdownYamlScalar(value);
             case 'organization':
-              fm.organization = _parseScalar(value);
+              fm.organization = parseMarkdownYamlScalar(value);
             case 'version':
-              fm.version = _parseScalar(value);
+              fm.version = parseMarkdownYamlScalar(value);
             case 'date':
-              fm.date = _parseScalar(value);
+              fm.date = parseMarkdownYamlScalar(value);
             case 'description':
-              fm.description = _parseScalar(value);
+              fm.description = parseMarkdownYamlScalar(value);
             case 'keywords':
-              fm.keywords = _parseScalar(value);
+              fm.keywords = parseMarkdownYamlScalar(value);
             case 'language':
-              fm.language = _parseScalar(value);
+              fm.language = parseMarkdownYamlScalar(value);
             case 'tool':
               // Meerdere `tool:`-regels stapelen in plaats van elkaar te
               // overschrijven — anders houdt een deck maar één hulpmiddel over.
-              final tool = UsedTool.parse(_parseScalar(value));
+              final tool = UsedTool.parse(parseMarkdownYamlScalar(value));
               if (tool != null) fm.toolsUsed.add(tool);
             case 'standards':
-              fm.standardsUsed = _parseScalar(value)
+              fm.standardsUsed = parseMarkdownYamlScalar(value)
                   .split(',')
                   .map((e) => e.trim())
                   .where((e) => e.isNotEmpty)
@@ -153,11 +159,11 @@ extension _MarkdownParseFrontMatter on MarkdownService {
             case 'ocideck_play_only':
               fm.playOnly = value == 'true';
             case 'ocideck_improvement_framework':
-              fm.improvementFramework = _parseScalar(value);
+              fm.improvementFramework = parseMarkdownYamlScalar(value);
             case 'ocideck_improvement_y01':
-              fm.improvementY01 = _parseScalar(value);
+              fm.improvementY01 = parseMarkdownYamlScalar(value);
             case 'ocideck_improvement_y01_unit':
-              fm.improvementY01Unit = _parseScalar(value);
+              fm.improvementY01Unit = parseMarkdownYamlScalar(value);
             case 'ocideck_improvement_y01_usl':
               fm.improvementY01Usl = double.tryParse(value.trim());
             case 'ocideck_improvement_y01_lsl':
@@ -171,11 +177,11 @@ extension _MarkdownParseFrontMatter on MarkdownService {
             case 'ocideck_finalized':
               fm.finalized = value == 'true';
             case 'ocideck_seal_hash':
-              fm.sealHash = _parseScalar(value);
+              fm.sealHash = parseMarkdownYamlScalar(value);
             case 'ocideck_seal_algo':
-              fm.sealAlgo = _parseScalar(value);
+              fm.sealAlgo = parseMarkdownYamlScalar(value);
             case 'ocideck_seal_at':
-              fm.sealAt = _parseScalar(value);
+              fm.sealAt = parseMarkdownYamlScalar(value);
             case 'ocideck_seal_tsr':
               fm.sealTsr = value;
             // Alleen lezen, nooit meer schrijven: het opwaardeerpad voor een

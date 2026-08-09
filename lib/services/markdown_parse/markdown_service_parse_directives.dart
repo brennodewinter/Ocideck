@@ -75,94 +75,6 @@ typedef _BlockDirectives = ({
 bool _isTailNote(String tail) =>
     tail.replaceAll(_reHtmlComment, '').trim().isEmpty;
 
-final _reMarpitDirective = RegExp(r'^[A-Za-z][A-Za-z0-9_-]*\s*:');
-final _reWholeBackground = RegExp(r'^!\[([^\]]*)\]\([^)]+\)$');
-
-/// Whether the typed slide model would have to move, merge or rewrite authored
-/// Marpit source. In those uncommon cases the whole block stays free Markdown:
-/// source fidelity wins while the representable #1437 subset remains typed.
-bool _requiresWholeBlockPreservation(String block) {
-  final backgroundLines = block
-      .split('\n')
-      .map((line) => line.trim())
-      .where(_reBgImage.hasMatch)
-      .toList();
-  if (backgroundLines.length > 2) return true;
-  for (var i = 0; i < backgroundLines.length; i++) {
-    if (!_hasOnlyTypedBackgroundOptions(
-      backgroundLines[i],
-      allowVisualStyle: i == 0,
-    )) {
-      return true;
-    }
-  }
-
-  final lines = block.split('\n');
-  final fitLines = <int>[];
-  for (var i = 0; i < lines.length; i++) {
-    if (lines[i].trim() == '<!-- fit -->') fitLines.add(i);
-  }
-  if (fitLines.length > 1) return true;
-  if (fitLines.length == 1) {
-    final fit = fitLines.single;
-    final firstHeading = lines.indexWhere(
-      (line) => RegExp(r'^#{1,6}\s+\S').hasMatch(line.trim()),
-    );
-    if (fit == 0 || fit - 1 != firstHeading) return true;
-  }
-  // Inline `fit` is valid Marpit too, but the bool model cannot put it back in
-  // the same heading without retaining the source.
-  final fitCommentCount = _reHtmlComment
-      .allMatches(block)
-      .where((match) => match.group(1)!.trim() == 'fit')
-      .length;
-  if (fitCommentCount != fitLines.length) {
-    return true;
-  }
-
-  for (final match in _reHtmlComment.allMatches(block)) {
-    final raw = match.group(1)!;
-    if (raw.contains('\n')) continue;
-    final content = raw.trim();
-    if (_reMarpitDirective.hasMatch(content) &&
-        !_isKnownOciDeckOrTypedDirective(content)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-bool _hasOnlyTypedBackgroundOptions(
-  String line, {
-  required bool allowVisualStyle,
-}) {
-  final match = _reWholeBackground.firstMatch(line);
-  if (match == null) return false;
-  var options = match.group(1)!.trim();
-  if (!RegExp(r'^bg(?:\s|$)').hasMatch(options)) return false;
-  options = options.substring(2).trim();
-  if (allowVisualStyle) {
-    options = options
-        .replaceAll(_reMarpImageFilter, '')
-        // OciDeck's title overlay serialises to this standard Marp filter. Its
-        // value lives in titleImageOverlay, not MarpStyle.imageFilters.
-        .replaceAll(RegExp(r'\bopacity:\.45\b'), '')
-        .replaceAll(_reMarpContain, '');
-  }
-  options = options
-      // Native Marp image columns used by title/two-image slides (#1405).
-      .replaceAll(RegExp(r'\b(?:left|right):\d+%'), '')
-      .replaceAll(RegExp(r'\b\d+%'), '')
-      .trim();
-  return options.isEmpty;
-}
-
-bool _isKnownOciDeckOrTypedDirective(String content) =>
-    content.startsWith('advance:') ||
-    content.startsWith('tlp:') ||
-    content.startsWith('ocideck_') ||
-    content.startsWith('_');
-
 String _takeNote(StringBuffer notes, String content) {
   notes.write(notes.isEmpty ? content : '\n$content');
   return '';
@@ -187,7 +99,7 @@ extension _MarkdownParseDirectives on MarkdownService {
     // Extract presenter notes and advance timing from HTML comments
     final notesBuffer = StringBuffer();
     final preservedMarpLines = <String>[];
-    var marpStyle = _marpImageStyleFromSource(remaining);
+    var marpStyle = marpImageStyleFromSource(remaining);
     double advanceDuration = 0;
     bool skipped = false;
     bool isDetail = false;
@@ -319,27 +231,33 @@ extension _MarkdownParseDirectives on MarkdownService {
         _collectViewComment(viewComments, content);
       } else if (content.startsWith('_color:')) {
         marpStyle = marpStyle.copyWith(
-          color: _parseScalar(content.substring('_color:'.length).trim()),
+          color: parseMarkdownYamlScalar(
+            content.substring('_color:'.length).trim(),
+          ),
         );
       } else if (content.startsWith('_backgroundColor:')) {
         marpStyle = marpStyle.copyWith(
-          backgroundColor: _parseScalar(
+          backgroundColor: parseMarkdownYamlScalar(
             content.substring('_backgroundColor:'.length).trim(),
           ),
         );
       } else if (content.startsWith('_backgroundImage:')) {
         marpStyle = marpStyle.copyWith(
-          backgroundImage: _parseScalar(
+          backgroundImage: parseMarkdownYamlScalar(
             content.substring('_backgroundImage:'.length).trim(),
           ),
         );
       } else if (content.startsWith('_header:')) {
         marpStyle = marpStyle.copyWith(
-          header: _parseScalar(content.substring('_header:'.length).trim()),
+          header: parseMarkdownYamlScalar(
+            content.substring('_header:'.length).trim(),
+          ),
         );
       } else if (content.startsWith('_footer:')) {
         marpStyle = marpStyle.copyWith(
-          footer: _parseScalar(content.substring('_footer:'.length).trim()),
+          footer: parseMarkdownYamlScalar(
+            content.substring('_footer:'.length).trim(),
+          ),
         );
       } else if (content == 'fit') {
         marpStyle = marpStyle.copyWith(headingFit: true);
@@ -354,7 +272,7 @@ extension _MarkdownParseDirectives on MarkdownService {
       }
       return '';
     }).trim();
-    final passThrough = _extractUnsupportedMarpImageLines(remaining);
+    final passThrough = unsupportedMarpImageLines(remaining);
     remaining = passThrough.remaining;
     preservedMarpLines.addAll(passThrough.preserved);
     final notes = _unescapeNotes(notesBuffer.toString().trim());
@@ -396,48 +314,6 @@ extension _MarkdownParseDirectives on MarkdownService {
       ganttSections: ganttSections,
       tableNumberColumns: tableNumberColumns,
     );
-  }
-
-  /// Keeps background syntax the typed image model cannot represent verbatim.
-  /// The first background may carry a fit keyword and filters; later extended
-  /// backgrounds and every third layer remain pass-through source data.
-  ({String remaining, List<String> preserved})
-  _extractUnsupportedMarpImageLines(String source) {
-    final preserved = <String>[];
-    var backgroundCount = 0;
-    final kept = <String>[];
-    for (final line in source.split('\n')) {
-      final trimmed = line.trim();
-      if (!_reBgImage.hasMatch(trimmed)) {
-        kept.add(line);
-        continue;
-      }
-      backgroundCount++;
-      final laterExtended =
-          backgroundCount > 1 &&
-          (_reMarpImageFilter.hasMatch(trimmed) ||
-              _reMarpContain.hasMatch(trimmed));
-      if (backgroundCount > 2 || laterExtended) {
-        preserved.add(line);
-      } else {
-        kept.add(line);
-      }
-    }
-    return (remaining: kept.join('\n').trim(), preserved: preserved);
-  }
-
-  MarpStyle _marpImageStyleFromSource(String source) {
-    for (final line in source.split('\n')) {
-      if (!_reBgImage.hasMatch(line)) continue;
-      final options = RegExp(r'!\[([^\]]*)\]').firstMatch(line)?.group(1) ?? '';
-      final fit = _reMarpContain.hasMatch(options) ? 'contain' : '';
-      final filters = _reMarpImageFilter
-          .allMatches(options)
-          .map((m) => m.group(0)!)
-          .toList();
-      return MarpStyle(imageFit: fit, imageFilters: filters);
-    }
-    return const MarpStyle();
   }
 
   /// De twee timeline-directives: animatieduur en het gemarkeerde event.
