@@ -1144,6 +1144,15 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Marp-opmaak blijft behouden én rendert overal (#1436, #1437).** Onbekende
+  body-directives, extra achtergrondlagen en niet-gemodelleerde beeldsyntax
+  overleven openen en opslaan voortaan als bron. De ondersteunde subset —
+  deck-/diakleuren en achtergrondafbeeldingen, `fit`/`contain`, zes
+  beeldfilters, passende koppen, offline emoji en Markdown-kop/voettekst — loopt
+  door dezelfde preview/presenter/rasterketen en de zelfstandige HTML-export.
+  De emoji-tabel is lokaal en compact; er kwam geen netwerkdienst of dependency
+  bij.
+
 - **xmpp: vier bugs die een echte WebSocket-verbinding onmogelijk maakten
   (#1403).** De XMPP-client draaide groen tegen een in-memory fake transport,
   maar tegen een echte Prosody viel hij op vier dingen stil. (1)
