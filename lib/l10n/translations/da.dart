@@ -1772,6 +1772,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Titel boven afbeelding': 'Titel over billedet',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Viser titlen over billedet i stedet for lagt ovenpå',
   'Afbeeldingslay-out': 'Billedlayout',
   'Beide': 'Begge',
   'Volvlak': 'Fuldside',

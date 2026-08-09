@@ -1772,6 +1772,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Titel boven afbeelding': 'Titel över bilden',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Visar titeln över bilden istället för ovanpå den',
   'Afbeeldingslay-out': 'Bildlayout',
   'Beide': 'Båda',
   'Volvlak': 'Fullbleed',

@@ -1775,6 +1775,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Titel boven afbeelding': 'Naslov nad sliko',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Prikaže naslov nad sliko namesto čez njo',
   'Afbeeldingslay-out': 'Razporeditev slike',
   'Beide': 'Oboje',
   'Volvlak': 'Polno',

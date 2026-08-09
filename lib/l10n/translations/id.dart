@@ -1773,6 +1773,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Titel boven afbeelding': 'Judul di atas gambar',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Menampilkan judul di atas gambar alih-alih menumpangnya',
   'Afbeeldingslay-out': 'Tata letak gambar',
   'Beide': 'Keduanya',
   'Volvlak': 'Penuh',

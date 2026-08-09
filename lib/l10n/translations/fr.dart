@@ -732,6 +732,9 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Titel boven afbeelding': 'Titre au-dessus de l\'image',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Affiche le titre au-dessus de l\'image au lieu de superposé',
   'Afbeeldingslay-out': 'Disposition de l\'image',
   'Beide': 'Les deux',
   'Volvlak': 'Pleine page',

@@ -428,6 +428,8 @@ extension _MarkdownParse on MarkdownService {
 
     final showLogo = !classTokens.contains('no-logo');
     final showFooter = !classTokens.contains('no-footer');
+    final imageTitleAbove =
+        type == SlideType.image && classTokens.contains('image-title-above');
 
     final effectiveClass = classTokens
         .where(
@@ -437,6 +439,7 @@ extension _MarkdownParse on MarkdownService {
               c != 'logo-safe' &&
               c != 'no-logo' &&
               c != 'no-footer' &&
+              c != 'image-title-above' &&
               c != 'table-editable' &&
               !isTimelineOptionToken(c),
         )
@@ -473,6 +476,7 @@ extension _MarkdownParse on MarkdownService {
       imageFocalY2: focus.fy2,
       imageSize: effectiveImageSize,
       titleImageOverlay: d.titleImageOverlay,
+      imageTitleAbove: imageTitleAbove,
       titleTextColorOverride: d.titleTextColorOverride,
       titleColumnLayout: titleColumnLayout,
       titleColumnWidth: titleColumnWidth,

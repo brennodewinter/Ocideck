@@ -733,6 +733,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Titel boven afbeelding': 'Titel boppe ôfbylding',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Toant de titel boppe de ôfbylding ynstee fan deroerhinne',
   'Afbeeldingslay-out': 'Ofbyldingslay-out',
   'Beide': 'Beide',
   'Volvlak': 'Folslein fol',

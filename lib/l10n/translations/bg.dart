@@ -1795,6 +1795,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Titel boven afbeelding': 'Заглавие над изображението',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Показва заглавието над изображението вместо върху него',
   'Afbeeldingslay-out': 'Разположение на изображението',
   'Beide': 'И двете',
   'Volvlak': 'Цял екран',

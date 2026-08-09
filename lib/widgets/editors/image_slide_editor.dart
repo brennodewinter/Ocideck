@@ -174,6 +174,24 @@ class _ImageSlideEditorState extends State<ImageSlideEditor>
           ),
         ],
         const SizedBox(height: 16),
+        CheckboxListTile(
+          contentPadding: EdgeInsets.zero,
+          controlAffinity: ListTileControlAffinity.leading,
+          dense: true,
+          title: Text(context.l10n.d('Titel boven afbeelding')),
+          subtitle: Text(
+            context.l10n.d(
+              'Toont de titel boven de afbeelding in plaats van eroverheen',
+            ),
+          ),
+          value: widget.slide.imageTitleAbove,
+          onChanged: widget.slide.imagePath.isEmpty
+              ? null
+              : (checked) => widget.onUpdate(
+                  widget.slide.copyWith(imageTitleAbove: checked ?? false),
+                ),
+        ),
+        const SizedBox(height: 16),
         EditorField(
           label: 'Titel overlay (optioneel)',
           controller: _title,

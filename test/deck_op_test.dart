@@ -60,6 +60,7 @@ _slideCases = {
     value: false,
     read: (s) => s.titleImageOverlay,
   ),
+  SlideField.imageTitleAbove: (value: true, read: (s) => s.imageTitleAbove),
   SlideField.showLogo: (value: false, read: (s) => s.showLogo),
   SlideField.showFooter: (value: false, read: (s) => s.showFooter),
   SlideField.skipped: (value: true, read: (s) => s.skipped),

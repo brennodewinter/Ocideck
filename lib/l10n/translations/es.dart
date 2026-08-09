@@ -729,6 +729,9 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Titel boven afbeelding': 'Título sobre la imagen',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Muestra el título sobre la imagen en lugar de superpuesto',
   'Afbeeldingslay-out': 'Disposición de imagen',
   'Beide': 'Ambos',
   'Volvlak': 'A sangre',

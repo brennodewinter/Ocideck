@@ -1748,6 +1748,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Titel boven afbeelding': 'pong nIq',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'pong nIq DungDaq \'ej nIq bIngDaq',
   'Afbeeldingslay-out': 'mIl may\'',
   'Beide': 'Hoch',
   'Volvlak': 'naDev',

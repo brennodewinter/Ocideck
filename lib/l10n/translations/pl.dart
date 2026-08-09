@@ -1785,6 +1785,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Titel boven afbeelding': 'Tytuł nad obrazem',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Wyświetla tytuł nad obrazem zamiast nałożony na niego',
   'Afbeeldingslay-out': 'Układ obrazu',
   'Beide': 'Oba',
   'Volvlak': 'Pełnoekranowe',

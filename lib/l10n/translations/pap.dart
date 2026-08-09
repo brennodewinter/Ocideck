@@ -732,6 +732,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Titel boven afbeelding': 'Título riba di e imagen',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Mustra e título riba di e imagen na lugá di riba dje',
   'Afbeeldingslay-out': 'Layout di imagen',
   'Beide': 'Ambos',
   'Volvlak': 'Pancha komplet',

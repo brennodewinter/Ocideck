@@ -202,6 +202,7 @@ enum SlideField {
   videoAutoplay,
   audioAutoplay,
   titleImageOverlay,
+  imageTitleAbove,
   showLogo,
   showFooter,
   skipped,
@@ -412,6 +413,9 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     ),
     SlideField.titleImageOverlay => slide.copyWith(
       titleImageOverlay: _cast<bool>(value, field),
+    ),
+    SlideField.imageTitleAbove => slide.copyWith(
+      imageTitleAbove: _cast<bool>(value, field),
     ),
     SlideField.showLogo => slide.copyWith(showLogo: _cast<bool>(value, field)),
     SlideField.showFooter => slide.copyWith(

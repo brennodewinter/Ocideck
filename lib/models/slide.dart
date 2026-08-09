@@ -486,6 +486,8 @@ class Slide {
   final double advanceDuration; // 0 = no auto-advance
   final int imageSize; // 0 = auto; image: bg %, bulletsImage: right panel %
   final bool titleImageOverlay; // darken title background image for readability
+  final bool
+  imageTitleAbove; // image slide: title at top, image below (not overlaid)
   /// Title slides only: overrides the theme's title text colour for this one
   /// slide (hex, e.g. `#FFFFFF`). Empty = use the theme colour. Lets the
   /// contrast auto-fix flip text light/dark on a single slide without touching
@@ -718,6 +720,7 @@ class Slide {
     this.advanceDuration = 0,
     this.imageSize = 0,
     this.titleImageOverlay = true,
+    this.imageTitleAbove = false,
     this.titleTextColorOverride = '',
     this.titleColumnLayout = TitleColumnLayout.none,
     this.titleColumnWidth = 25,
@@ -884,6 +887,7 @@ class Slide {
       advanceDuration: src.advanceDuration,
       imageSize: src.imageSize,
       titleImageOverlay: src.titleImageOverlay,
+      imageTitleAbove: src.imageTitleAbove,
       titleTextColorOverride: src.titleTextColorOverride,
       titleColumnLayout: src.titleColumnLayout,
       titleColumnWidth: src.titleColumnWidth,
@@ -955,6 +959,7 @@ class Slide {
     double? advanceDuration,
     int? imageSize,
     bool? titleImageOverlay,
+    bool? imageTitleAbove,
     String? titleTextColorOverride,
     TitleColumnLayout? titleColumnLayout,
     int? titleColumnWidth,
@@ -1034,6 +1039,7 @@ class Slide {
       advanceDuration: advanceDuration ?? this.advanceDuration,
       imageSize: imageSize ?? this.imageSize,
       titleImageOverlay: titleImageOverlay ?? this.titleImageOverlay,
+      imageTitleAbove: imageTitleAbove ?? this.imageTitleAbove,
       titleTextColorOverride:
           titleTextColorOverride ?? this.titleTextColorOverride,
       titleColumnLayout: titleColumnLayout ?? this.titleColumnLayout,

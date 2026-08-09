@@ -711,7 +711,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// doorheen, zodat je exporteert wat je ziet.
   ThemeProfile _editedProfile() {
     final name = _profileName.text.trim();
-    final size = int.tryParse(_logoSize.text)?.clamp(32, 240);
+    final size = int.tryParse(_logoSize.text)?.clamp(32, 480);
     return _themeProfile.copyWith(
       name: name.isEmpty ? 'Stijlprofiel' : name,
       logoSize: size,

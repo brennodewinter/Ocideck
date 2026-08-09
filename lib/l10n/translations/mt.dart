@@ -1795,6 +1795,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Titel boven afbeelding': 'Titlu fuq l-istampa',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Juri t-titlu fuq l-istampa minflok ma jitpoġġa fuqha',
   'Afbeeldingslay-out': 'Tqassim tal-istampa',
   'Beide': 'It-tnejn',
   'Volvlak': 'Sħiħ',
