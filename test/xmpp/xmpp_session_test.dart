@@ -683,4 +683,39 @@ void main() {
       },
     );
   });
+
+  // ── jabber:client namespace (RFC 7395) ───────────────────────────────────
+
+  test(
+    'stanzas carry xmlns=jabber:client — each WebSocket frame is standalone',
+    () async {
+      final t = happyServer(
+        mechanisms: ['PLAIN'],
+        sasl: (_) => ['<success xmlns="$_sasl"/>'],
+      );
+      final session = XmppSession(
+        transport: t,
+        settings: account(),
+        password: 'pencil',
+      );
+      await session.connect();
+
+      session.sendStanza(
+        Stanza(kind: StanzaKind.presence, to: 'room@conf.example.org'),
+      );
+
+      // In XMPP-over-WebSocket (RFC 7395) each frame is a standalone XML
+      // document — the jabber:client namespace is NOT inherited from the
+      // stream. Without it, Prosody rejects stanzas as "unhandled".
+      final presence = t.sent.firstWhere((f) => f.contains('<presence'));
+      expect(presence, contains('xmlns="jabber:client"'));
+
+      // Stream-level elements (open, auth) keep their own namespace.
+      final open = t.sent.firstWhere((f) => f.contains('<open'));
+      expect(open, contains('urn:ietf:params:xml:ns:xmpp-framing'));
+      expect(open, isNot(contains('jabber:client')));
+
+      await session.close();
+    },
+  );
 }

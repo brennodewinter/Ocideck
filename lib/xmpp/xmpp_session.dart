@@ -33,6 +33,7 @@ import 'xmpp_stanza.dart';
 const _framingNs = 'urn:ietf:params:xml:ns:xmpp-framing';
 const _saslNs = 'urn:ietf:params:xml:ns:xmpp-sasl';
 const _bindNs = 'urn:ietf:params:xml:ns:xmpp-bind';
+const _clientNs = 'jabber:client';
 
 /// Why bringing a session up did not succeed. Mapped to a translated message at
 /// the UI boundary.
@@ -603,7 +604,24 @@ class XmppSession implements XmppStanzaChannel {
 
   // ── helpers ───────────────────────────────────────────────────────────────
 
-  void _send(XmlElement element) => transport.send(element.toXmlString());
+  void _send(XmlElement element) {
+    // In XMPP-over-WebSocket (RFC 7395) each frame is a standalone XML
+    // document — the jabber:client default namespace is NOT inherited from
+    // the stream (the <open> frame carries the framing namespace, not
+    // jabber:client). Stanzas (iq/message/presence) sent without xmlns land
+    // in the empty namespace, which Prosody rejects as "unhandled". Add
+    // xmlns="jabber:client" when the element doesn't already carry one.
+    final hasNs = element.attributes.any((a) => a.name.local == 'xmlns');
+    if (hasNs) {
+      transport.send(element.toXmlString());
+    } else {
+      final withNs = XmlElement(element.name, [
+        XmlAttribute(XmlName.parts('xmlns'), _clientNs),
+        ...element.attributes,
+      ], element.children);
+      transport.send(withNs.toXmlString());
+    }
+  }
 
   XmlElement? _parse(String frame) {
     final XmlDocument document;
