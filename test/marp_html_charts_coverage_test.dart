@@ -207,6 +207,23 @@ void main() {
       expect(html, contains('fill="#0A0B0C"'));
     });
 
+    test('pie draws no centre hole — it is solid to the middle (#1395)', () {
+      // Same data, same theme as the donut above; the only slide-background
+      // fill in a radial chart is the donut's hole, so a pie must not paint it.
+      final html = _render(
+        const ChartSpec(
+          type: ChartType.pie,
+          x: ['A', 'B'],
+          series: [
+            ChartSeries(name: 'Aandeel', data: [40, 60]),
+          ],
+        ),
+        theme: _theme,
+      );
+      expect(html, contains('<path'));
+      expect(html, isNot(contains('fill="#0A0B0C"')));
+    });
+
     test('radar draws a polygon per series plus axis labels', () {
       final html = _render(
         const ChartSpec(
