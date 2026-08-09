@@ -108,7 +108,7 @@ Widget _resolvedImage(
   bool applyMarpStyle = true,
 }) {
   final marpStyle = applyMarpStyle
-      ? _SlideLinkScope.marpStyleOf(context)
+      ? SlideLinkScope.marpStyleOf(context)
       : const MarpStyle();
   if (fit == BoxFit.cover && marpStyle.imageFit == 'contain') {
     fit = BoxFit.contain;
@@ -116,7 +116,7 @@ Widget _resolvedImage(
 
   Widget styled(Widget child) =>
       applyMarpStyle && !trustedAsset && marpStyle.imageFilters.isNotEmpty
-      ? _MarpFilteredImage(filters: marpStyle.imageFilters, child: child)
+      ? MarpFilteredImage(filters: marpStyle.imageFilters, child: child)
       : child;
 
   Widget failed(ImagePlaceholderReason reason) =>
@@ -125,10 +125,10 @@ Widget _resolvedImage(
   if (imagePath.isEmpty) {
     // Een leeg pad heeft twee heel verschillende betekenissen, en alleen de
     // scope weet welke: de auteur heeft nog niets gekozen, óf de projectie
-    // heeft de afbeelding weggehaald. Zie `_SlideLinkScope.mediaRedacted`.
+    // heeft de afbeelding weggehaald. Zie `SlideLinkScope.mediaRedacted`.
     return _imagePlaceholder(
       context,
-      _SlideLinkScope.mediaRedactedOf(context)
+      SlideLinkScope.mediaRedactedOf(context)
           ? ImagePlaceholderReason.redacted
           : ImagePlaceholderReason.noImage,
     );
@@ -181,7 +181,7 @@ Widget _resolvedImage(
   // bestanden), maar alleen als de remote-media-gate open staat én de URL door
   // de SSRF-gate komt. Anders een placeholder met de URL.
   if (VideoSource.looksLikeUrl(imagePath)) {
-    if (!_SlideLinkScope.allowRemoteMediaOf(context)) {
+    if (!SlideLinkScope.allowRemoteMediaOf(context)) {
       return _remoteBlockedPlaceholder(context, imagePath);
     }
     // Resolve the host before fetching: a remote image whose host maps to an
@@ -242,7 +242,7 @@ Widget _resolvedImage(
   // slidestrook zet daarbovenop een veel lagere grens via de scope — daar is
   // een thumbnail van ~180 px breed, en op ware grootte kost één telefoonfoto
   // bijna 49 MiB (#612).
-  final maxEdge = _SlideLinkScope.decodeMaxEdgeOf(context);
+  final maxEdge = SlideLinkScope.decodeMaxEdgeOf(context);
   return styled(
     Image(
       image: maxEdge == null
@@ -274,7 +274,7 @@ Widget _captionOverlay(
   if (text.isEmpty) return const SizedBox.shrink();
   // Een copyright/bijschrift staat rechtsonder; als daar een TLP-markering
   // staat, schuift het bijschrift erboven zodat het niet wordt overschreven.
-  final lift = _SlideLinkScope.hasBottomTlpOf(context)
+  final lift = SlideLinkScope.hasBottomTlpOf(context)
       ? _tlpVerticalReserve(w)
       : 0.0;
   return Positioned(
@@ -342,7 +342,7 @@ RemoteBlockedReason remoteBlockedReasonFor({
 ///    dus geen knop; de melding benoemt het webspecifieke gedrag.
 ///  * **de instelling staat uit** — de gewone desktop-standaard, bewust uit voor
 ///    de privacy. Hier hoort de sprong naar Instellingen → Beveiliging, maar
-///    alleen in de editor-preview (daar zet [_SlideLinkScope.onEnableOnlineMedia]
+///    alleen in de editor-preview (daar zet [SlideLinkScope.onEnableOnlineMedia]
 ///    de callback; in presenter/thumbnails/export/play-only is hij null).
 ///  * **de instelling staat aan maar de URL is geweigerd** — de SSRF-gate wees
 ///    de bron af. Aanzetten is al gebeurd; het ligt aan de URL, dus geen knop.
@@ -350,7 +350,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
   final l10n = context.l10n;
   final reason = remoteBlockedReasonFor(
     isWeb: kIsWeb,
-    allowRemoteMedia: _SlideLinkScope.allowRemoteMediaOf(context),
+    allowRemoteMedia: SlideLinkScope.allowRemoteMediaOf(context),
   );
 
   final String title;
@@ -365,7 +365,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
     case RemoteBlockedReason.settingOff:
       title = l10n.d('Online media staat uit');
       // De sprong naar de instelling bestaat alleen in de editor-preview.
-      onEnable = _SlideLinkScope.onEnableOnlineMediaOf(context);
+      onEnable = SlideLinkScope.onEnableOnlineMediaOf(context);
     case RemoteBlockedReason.urlRejected:
       title = l10n.d('Bron niet toegestaan');
       detail = l10n.d('Deze URL is door de beveiliging geweigerd.');
@@ -447,7 +447,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
 /// krijgen als een geredigeerde foto. Zonder deze tak toont een geredigeerde
 /// videoslide een grijs vak met het woord "Video" — hetzelfde gat, andere naam.
 Widget _mediaPlaceholder(BuildContext context, IconData icon, String label) {
-  if (_SlideLinkScope.mediaRedactedOf(context)) {
+  if (SlideLinkScope.mediaRedactedOf(context)) {
     return _redactedMediaPlaceholder(context);
   }
   return Container(
