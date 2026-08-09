@@ -82,6 +82,12 @@ class S3File {
 enum S3Error {
   config,
 
+  /// Het endpoint gebruikt geen https (meestal een `http`-URL) en is niet als
+  /// vertrouwd intern gemarkeerd. Eigen soort omdat het advies gericht is —
+  /// "gebruik https of markeer als vertrouwd intern" — en anders in de
+  /// generieke [config]-melding verdween.
+  insecureScheme,
+
   /// De endpoint-naam bestaat niet of DNS antwoordde niet. Gescheiden van
   /// [blockedHost]: die twee vragen om tegengesteld advies.
   unknownHost,
@@ -90,6 +96,11 @@ enum S3Error {
   /// Het TLS-certificaat van het endpoint werd niet vertrouwd. Eigen soort
   /// omdat de gebruiker het kan bekijken en vertrouwen.
   tls,
+
+  /// Het endpoint stuurde een omleiding (3xx). Die volgen we niet (dat zou de
+  /// host-controle omzeilen); meestal wijst het op een verkeerde regio of
+  /// endpoint-URL — opnieuw proberen helpt daar niet tegen.
+  redirect,
   network,
   auth,
   notFound,
@@ -197,7 +208,7 @@ class S3Service {
     final scheme = bucket.origin?.scheme.toLowerCase();
     if (scheme != 'https' && !(scheme == 'http' && bucket.trustedInternal)) {
       throw S3Exception(
-        S3Error.config,
+        S3Error.insecureScheme,
         scheme == 'http'
             ? 'Gebruik https of markeer het endpoint als vertrouwd intern; '
                   'anders gaan je presentaties onversleuteld over het netwerk.'
@@ -262,6 +273,12 @@ class S3Service {
     }
     if (status == 404) {
       throw S3Exception(S3Error.notFound, 'Niet gevonden');
+    }
+    // 3xx wordt niet gevolgd (host-controle); een endpoint dat omleidt wijst
+    // meestal op een verkeerde regio/URL — een eigen soort, niet "serverfout,
+    // probeer later opnieuw".
+    if (status >= 300 && status < 400) {
+      throw S3Exception(S3Error.redirect, 'Omleiding ($status)');
     }
     if (status >= 500) {
       throw S3Exception(S3Error.server, 'Serverfout ($status)');
@@ -519,8 +536,11 @@ class S3Service {
     } on TimeoutException {
       throw S3Exception(S3Error.network, 'Time-out');
     } catch (e) {
-      logError('S3Service.upload: mislukt', e);
-      throw S3Exception(S3Error.network, 'Upload mislukt');
+      // Zoals download/list/probe: classificeer de transportfout zodat een
+      // afgewezen of vastgepind certificaat als [S3Error.tls] wordt gemeld en
+      // niet als generieke netwerkfout — de gebruiker kan het certificaat
+      // anders niet herkennen en vertrouwen.
+      _asFailure('upload', e, 'Upload mislukt');
     } finally {
       client.close(force: true);
     }

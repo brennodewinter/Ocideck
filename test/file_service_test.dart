@@ -97,6 +97,84 @@ void main() {
     },
   );
 
+  group('unwritable destination (ingestelde thuismap op weg-volume)', () {
+    // Regressie voor #open-ocideck-package: een ingestelde thuismap op een
+    // niet-aangekoppeld/alleen-lezen volume liet het uitpakken een niet-gevangen
+    // PathAccessException gooien die stil verdween — het deck opende niet en er
+    // kwam geen melding. Nu een gerichte weiger-reden, en géén worp.
+    //
+    // Een doelmap die niet aan te maken is, wordt hier nagebootst door hem ónder
+    // een gewoon bestand te leggen: `create(recursive: true)` faalt dan met een
+    // FileSystemException, net als op een weg-volume.
+    Future<String> unwritableParent() async {
+      final temp = await Directory.systemTemp.createTemp('ocideck_nowrite_');
+      addTearDown(() async {
+        if (await temp.exists()) await temp.delete(recursive: true);
+      });
+      final blocker = File(p.join(temp.path, 'blocker'));
+      await blocker.writeAsString('ik ben een bestand, geen map');
+      return p.join(blocker.path, 'eronder');
+    }
+
+    FileService service() => FileService(
+      MarkdownService(),
+      ImageService(),
+      () => const ThemeProfile(),
+    );
+
+    test('importPackageBytesDetailed meldt destinationUnavailable i.p.v. te '
+        'gooien', () async {
+      final archive = Archive();
+      final md = utf8.encode('---\nmarp: true\n---\n# Hi');
+      archive.addFile(ArchiveFile('deck.md', md.length, md));
+      final zipBytes = ZipEncoder().encode(archive);
+
+      final outcome = await service().importPackageBytesDetailed(
+        zipBytes,
+        await unwritableParent(),
+      );
+
+      expect(outcome.mdPath, isNull);
+      expect(outcome.failure, ImportFailure.destinationUnavailable);
+    });
+
+    test('importMarkdownBytesDetailed meldt destinationUnavailable i.p.v. te '
+        'gooien', () async {
+      final bytes = utf8.encode('---\nmarp: true\n---\n# Hi');
+
+      final outcome = await service().importMarkdownBytesDetailed(
+        bytes,
+        await unwritableParent(),
+        'deck.md',
+      );
+
+      expect(outcome.mdPath, isNull);
+      expect(outcome.failure, ImportFailure.destinationUnavailable);
+    });
+
+    test(
+      'een schrijfbare doelmap slaagt gewoon (geen valse terugval)',
+      () async {
+        final temp = await Directory.systemTemp.createTemp('ocideck_ok_');
+        addTearDown(() async {
+          if (await temp.exists()) await temp.delete(recursive: true);
+        });
+        final archive = Archive();
+        final md = utf8.encode('---\nmarp: true\n---\n# Hi');
+        archive.addFile(ArchiveFile('deck.md', md.length, md));
+
+        final outcome = await service().importPackageBytesDetailed(
+          ZipEncoder().encode(archive),
+          temp.path,
+        );
+
+        expect(outcome.failure, isNull);
+        expect(outcome.mdPath, isNotNull);
+        expect(await File(outcome.mdPath!).exists(), isTrue);
+      },
+    );
+  });
+
   test('importPackageBytes extracts a normal multi-file package', () async {
     final temp = await Directory.systemTemp.createTemp('ocideck_zip_ok_');
     addTearDown(() async {

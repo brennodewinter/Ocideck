@@ -836,41 +836,6 @@ bool _isPackagePath(String path) {
   return ext == '.${FileService.packageExtension}' || ext == '.zip';
 }
 
-/// Vertaalt de uitkomst van [TabsImport.importPackageFile] — aangeroepen vanuit
-/// [TabsNotifier.openFileByPath] voor een `.ocideck`/zip via "Openen" — naar een
-/// [OpenResult], en legt waar mogelijk de [OpenFailure] vast zodat de schil
-/// dezelfde gerichte melding toont als bij een losse markdown-open. `null`
-/// betekent: afgehandeld (geopend, geblokkeerd met alarm, of wachtwoord
-/// afgebroken); dan valt er niets te melden.
-OpenResult _packageOpenResult(Ref ref, bool alive, ImportFailure? failure) =>
-    switch (failure) {
-      null => OpenResult.opened,
-      ImportFailure.needsPassword ||
-      ImportFailure.encryptedCancelled => OpenResult.passwordCancelled,
-      ImportFailure.tooLarge || ImportFailure.limitExceeded =>
-        _openFailureResult(ref, alive, OpenFailure.tooLarge),
-      ImportFailure.corrupt => _openFailureResult(
-        ref,
-        alive,
-        OpenFailure.corrupt,
-      ),
-      ImportFailure.unsupported => _openFailureResult(
-        ref,
-        alive,
-        OpenFailure.notPresentation,
-      ),
-      ImportFailure.network => _openFailureResult(
-        ref,
-        alive,
-        OpenFailure.unreadable,
-      ),
-      ImportFailure.diskFull => _openFailureResult(
-        ref,
-        alive,
-        OpenFailure.unreadable,
-      ),
-    };
-
 /// Een zojuist geopend bestand blijkt elders een byte-identieke kopie te
 /// hebben. De shell toont hierop een snackbar met opruim-ingang (zelfde
 /// luister-patroon als [importSecurityAlarmProvider]).
@@ -883,6 +848,14 @@ class DuplicateCopyNotice {
 final duplicateCopyNoticeProvider = StateProvider<DuplicateCopyNotice?>(
   (ref) => null,
 );
+
+/// De ingestelde thuismap die bij de laatste import onbereikbaar bleek (bv. een
+/// niet-aangekoppeld of alleen-lezen volume), of null. Het importpad valt in dat
+/// geval terug op de documentenmap zodat de presentatie tóch opent
+/// ([TabsImport._importDestDir]); de shell leest dit en meldt de terugval
+/// niet-blokkerend, dan terug op null — zelfde patroon als
+/// [duplicateCopyNoticeProvider].
+final importHomeUnavailableProvider = StateProvider<String?>((ref) => null);
 
 /// One-shot signal that a deck carrying Informatieveiligheid slide types was
 /// just opened (see [Deck.hasSecuritySlides]). The shell listens on this and —

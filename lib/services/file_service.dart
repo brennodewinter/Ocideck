@@ -30,6 +30,7 @@ import '../utils/net_guard.dart';
 import '../utils/pinned_http_client.dart';
 import '../utils/project_path.dart';
 import '../utils/zip_encryption.dart';
+import 'net/transport_failure.dart';
 import 'annotation_codec.dart';
 import 'document_integrity.dart';
 import 'seal_codec.dart';
@@ -166,36 +167,6 @@ enum OpenFailure {
 
   /// The markdown is present but truncated or unparseable.
   corrupt,
-}
-
-/// Waarom een import (URL, pakket, WebDAV) geen deck opleverde — voor een
-/// gerichte melding in plaats van een generiek "kon niet importeren".
-enum ImportFailure {
-  /// Bestand of pakket is groter dan de toegestane limiet.
-  tooLarge,
-
-  /// ZIP of tekst is beschadigd/onleesbaar.
-  corrupt,
-
-  /// Wel opgehaald, maar geen Marp/OciDeck-presentatie.
-  unsupported,
-
-  /// Veiligheidslimiet geraakt (zip-bomb, te veel entries).
-  limitExceeded,
-
-  /// Ophalen zelf mislukte (URL, verbinding, statuscode).
-  network,
-
-  /// Pakket is versleuteld maar er kon niet om een wachtwoord worden gevraagd
-  /// (geen resolver geregistreerd — vooral in tests/headless).
-  needsPassword,
-
-  /// Pakket is versleuteld en de gebruiker brak de wachtwoordvraag af. Geen
-  /// echte fout: de aanroeper toont hierbij géén foutmelding.
-  encryptedCancelled,
-
-  /// De doelschijf heeft onvoldoende ruimte voor de extractie.
-  diskFull,
 }
 
 /// Vraagt (interactief) het wachtwoord van een versleuteld pakket. [retry] is

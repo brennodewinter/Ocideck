@@ -368,7 +368,13 @@ void main() {
       await tester.tap(find.text('rapport.md'));
       await settleUntil(
         tester,
-        () => find.text('Kon dit bestand niet openen.').evaluate().isNotEmpty,
+        // Sinds de open-reden meereist (importFailure → OpenFailure) toont de
+        // schil de specifieke reden i.p.v. het generieke "Kon dit bestand niet
+        // openen.": platte tekst zonder marp is geen presentatie.
+        () => find
+            .text('Dit is geen Marp/OciDeck-presentatie.')
+            .evaluate()
+            .isNotEmpty,
         reason: 'een geweigerd object bleef stil',
       );
 

@@ -17,11 +17,11 @@ extension TabsImport on TabsNotifier {
     }
   }
 
-  /// Map waarin geïmporteerde pakketten worden uitgepakt.
-  Future<String> _importDestDir(String? homeDir) async {
-    if (homeDir != null && homeDir.trim().isNotEmpty) return homeDir;
-    return (await getApplicationDocumentsDirectory()).path;
-  }
+  /// Map waarin geïmporteerde pakketten worden uitgepakt; zie
+  /// [_resolveImportDestDir] voor de terugval op de documentenmap wanneer de
+  /// ingestelde thuismap op een onbereikbaar volume staat.
+  Future<String> _importDestDir(String? homeDir) =>
+      _resolveImportDestDir(this, homeDir);
 
   /// Importeer een `.ocideck`-pakket (zip) en open het in een tab.
   ///
@@ -75,17 +75,28 @@ extension TabsImport on TabsNotifier {
   /// (CORS en de pagina-CSP bewaken het verkeer) en opent haar volledig in
   /// het geheugen — een `.ocideck`/zip-pakket wordt daarbij in het geheugen
   /// uitgepakt, met dezelfde omvangslimiet als de desktop-import.
-  Future<OpenResult> importFromUrlWeb(String url) async {
-    final bytes = await _file.fetchUrlBytes(
+  ///
+  /// Geeft naast het [OpenResult] de fetch-reden terug (te groot, 404, geen
+  /// http(s)-link, geweigerde host…) zodat de schil de juiste melding kiest in
+  /// plaats van standaard CORS de schuld te geven. `failure` is null zodra het
+  /// ophalen slaagde; wat er dáárna misging staat in [openFailureProvider].
+  Future<({OpenResult result, ImportFailure? failure})> importFromUrlWeb(
+    String url,
+  ) async {
+    final fetched = await _file.fetchUrlBytes(
       url,
       maxBytes: FileService.maxPackageBytes,
       onConfirmProxy: proxyFallbackConfirm,
     );
-    if (bytes == null || !mounted) return OpenResult.unreadable;
+    final bytes = fetched.bytes;
+    if (bytes == null || !mounted) {
+      return (result: OpenResult.unreadable, failure: fetched.failure);
+    }
     // Zelfde kern als de web-picker en drag-drop: [openDeckFromBytes]. De URL
     // reist mee als [remoteOrigin] zodat de statusbalk de privacy-badge toont:
     // deze presentatie is van buiten het apparaat opgehaald.
-    return openDeckFromBytes(bytes, url, remoteOrigin: url);
+    final result = await openDeckFromBytes(bytes, url, remoteOrigin: url);
+    return (result: result, failure: null);
   }
 
   /// Gedeelde staart van elke import-flow (pakket/URL/WebDAV): open het
@@ -122,21 +133,23 @@ extension TabsImport on TabsNotifier {
     );
     final bytes = downloaded.bytes;
     if (!mounted) return OpenResult.unreadable;
-    final String? mdPath;
-    if (entry.isMarkdown) {
-      mdPath = await _file.importMarkdownBytes(bytes, dest, entry.name);
-    } else {
-      final outcome = await _file.importPackageBytesDetailed(
-        bytes,
-        dest,
-        onPassword: packagePasswordResolver,
-      );
-      if (outcome.failure == ImportFailure.encryptedCancelled) {
-        return OpenResult.passwordCancelled;
-      }
-      mdPath = outcome.mdPath;
+    final ImportOutcome outcome = entry.isMarkdown
+        ? await _file.importMarkdownBytesDetailed(bytes, dest, entry.name)
+        : await _file.importPackageBytesDetailed(
+            bytes,
+            dest,
+            onPassword: packagePasswordResolver,
+          );
+    if (outcome.failure == ImportFailure.encryptedCancelled) {
+      return OpenResult.passwordCancelled;
     }
-    if (mdPath == null) return OpenResult.unreadable;
+    final mdPath = outcome.mdPath;
+    if (mdPath == null) {
+      // De reden vasthouden (te groot, beschadigd, doel onbereikbaar…) zodat de
+      // schil de specifieke melding toont i.p.v. het generieke "Kon dit bestand
+      // niet openen." — zelfde mapping als de lokale pakket-open.
+      return _packageOpenResult(_ref, mounted, outcome.failure);
+    }
     final result = await _openImported(mdPath);
     if (result != OpenResult.opened) return result;
     // De zojuist geopende deck zit in het huidige tabblad (zie openFileByPath).
@@ -183,36 +196,14 @@ extension TabsImport on TabsNotifier {
             origin.remotePath == targetPath)
         ? origin.etag
         : null;
-    String? savedEtag;
-    if (format == DeckSaveFormat.ocideck) {
-      final bytes = await _file.buildPackageBytes(deck);
-      savedEtag = await service.upload(targetPath, bytes, ifMatch: guard);
-    } else {
-      final members = await _file.buildPackageMembers(deck);
-      final dir = p.posix.dirname(targetPath);
-      final mdBase = p.posix.basename(targetPath);
-      // Het markdownbestand eerst; zie [saveToS3] voor waarom die volgorde telt.
-      final ordered = [
-        ...members.entries.where(_isRootMd),
-        ...members.entries.where((e) => !_isRootMd(e)),
-      ];
-      for (final entry in ordered) {
-        // Het pakket-markdownbestand heet naar de deck-titel; geef het op de
-        // server de naam die de gebruiker koos. Assets behouden hun submap.
-        final isRootMd = _isRootMd(entry);
-        final remote = isRootMd
-            ? p.posix.join(dir, mdBase)
-            : p.posix.join(dir, entry.key);
-        // Alleen het markdownbestand ís het deck; de assets ernaast hebben we
-        // nooit opgehaald, dus daar valt niets te toetsen.
-        final etag = await service.upload(
-          remote,
-          entry.value,
-          ifMatch: isRootMd ? guard : null,
-        );
-        if (isRootMd) savedEtag = etag;
-      }
-    }
+    final savedEtag = await _uploadDeckToWebdav(
+      _file,
+      service,
+      deck,
+      format: format,
+      targetPath: targetPath,
+      guard: guard,
+    );
     tab.webdavOrigin = WebdavOrigin(
       // Een leeg id bij opslaan zou de herkomst van een geopend deck wissen;
       // val dan terug op wat er al stond.
@@ -230,3 +221,146 @@ extension TabsImport on TabsNotifier {
     refreshTabs();
   }
 }
+
+/// Schrijft [deck] naar de WebDAV-bron in het gekozen [format] en geeft de etag
+/// terug die de server voor het markdownbestand teruggaf (of null). Pure I/O
+/// zonder toegang tot [TabsNotifier]-state, dus top-level — dat houdt de klasse
+/// onder haar plafond. Zie [TabsImport.saveToWebdav] voor de herkomst-bijwerking.
+Future<String?> _uploadDeckToWebdav(
+  FileService file,
+  WebdavService service,
+  Deck deck, {
+  required DeckSaveFormat format,
+  required String targetPath,
+  required String? guard,
+}) async {
+  if (format == DeckSaveFormat.ocideck) {
+    final bytes = await file.buildPackageBytes(deck);
+    return service.upload(targetPath, bytes, ifMatch: guard);
+  }
+  final members = await file.buildPackageMembers(deck);
+  final dir = p.posix.dirname(targetPath);
+  final mdBase = p.posix.basename(targetPath);
+  // Het markdownbestand eerst; zie [saveToS3] voor waarom die volgorde telt.
+  final ordered = [
+    ...members.entries.where(_isRootMd),
+    ...members.entries.where((e) => !_isRootMd(e)),
+  ];
+  String? savedEtag;
+  for (final entry in ordered) {
+    // Het pakket-markdownbestand heet naar de deck-titel; geef het op de server
+    // de naam die de gebruiker koos. Assets behouden hun submap.
+    final isRootMd = _isRootMd(entry);
+    final remote = isRootMd
+        ? p.posix.join(dir, mdBase)
+        : p.posix.join(dir, entry.key);
+    // Alleen het markdownbestand ís het deck; de assets ernaast hebben we nooit
+    // opgehaald, dus daar valt niets te toetsen.
+    final etag = await service.upload(
+      remote,
+      entry.value,
+      ifMatch: isRootMd ? guard : null,
+    );
+    if (isRootMd) savedEtag = etag;
+  }
+  return savedEtag;
+}
+
+/// Bepaalt de map waarin een import wordt uitgepakt: de ingestelde thuismap als
+/// die te beschrijven is, anders de documentenmap. Is er een thuismap ingesteld
+/// maar staat die op een niet-aangekoppeld of onbereikbaar volume, dan valt dit
+/// terug op de documentenmap zodat de import tóch slaagt in plaats van diep in de
+/// extractie op een niet-gevangen `PathAccessException` te stuiten die stil
+/// verdween (#open-ocideck-package). De terugval wordt niet-blokkerend gemeld via
+/// [importHomeUnavailableProvider].
+///
+/// Top-level (met toegang tot de private velden van [notifier], want dit is één
+/// library) zodat [TabsNotifier] onder haar klasseplafond blijft.
+Future<String> _resolveImportDestDir(
+  TabsNotifier notifier,
+  String? homeDir,
+) async {
+  // Zet (of wist) de melding dat de ingestelde thuismap onbereikbaar was. Na
+  // dispose is er geen container om in te schrijven, dus dan overslaan.
+  void reportUnavailable(String? path) {
+    if (!notifier.mounted) return;
+    notifier._ref.read(importHomeUnavailableProvider.notifier).state = path;
+  }
+
+  final configured = homeDir?.trim();
+  if (configured != null && configured.isNotEmpty) {
+    try {
+      // De thuismap aanmaken ís de toegankelijkheidstoets: op een losgekoppeld
+      // volume gooit `create` hier — vroeg en te vangen. Bestaat de map al, dan
+      // is dit een no-op.
+      await Directory(configured).create(recursive: true);
+      reportUnavailable(null);
+      return configured;
+    } on FileSystemException catch (e) {
+      logWarning(
+        'TabsNotifier._importDestDir: ingestelde thuismap onbereikbaar, '
+        'terugval op documentenmap',
+        e,
+      );
+      reportUnavailable(configured);
+    }
+  }
+  return (await getApplicationDocumentsDirectory()).path;
+}
+
+/// Vertaalt de uitkomst van [TabsImport.importPackageFile] — aangeroepen vanuit
+/// [TabsNotifier.openFileByPath] voor een `.ocideck`/zip via "Openen" — naar een
+/// [OpenResult], en legt waar mogelijk de [OpenFailure] vast zodat de schil
+/// dezelfde gerichte melding toont als bij een losse markdown-open. `null`
+/// betekent: afgehandeld (geopend, geblokkeerd met alarm, of wachtwoord
+/// afgebroken); dan valt er niets te melden.
+OpenResult _packageOpenResult(
+  Ref ref,
+  bool alive,
+  ImportFailure? failure,
+) => switch (failure) {
+  null => OpenResult.opened,
+  ImportFailure.needsPassword ||
+  ImportFailure.encryptedCancelled => OpenResult.passwordCancelled,
+  ImportFailure.tooLarge || ImportFailure.limitExceeded => _openFailureResult(
+    ref,
+    alive,
+    OpenFailure.tooLarge,
+  ),
+  ImportFailure.corrupt => _openFailureResult(ref, alive, OpenFailure.corrupt),
+  ImportFailure.unsupported => _openFailureResult(
+    ref,
+    alive,
+    OpenFailure.notPresentation,
+  ),
+  // Netwerk-oorzaken: ophalen mislukte (generiek), DNS onbekend, host
+  // geweigerd, geen http(s)-schema, certificaat niet vertrouwd, omleiding, of
+  // 404. Deze lokale/WebDAV-weg haalt geen URL op, dus ze kunnen hier niet
+  // écht ontstaan — maar de switch moet volledig zijn, en geen van hen heeft
+  // een fijnere OpenFailure, dus generiek onleesbaar.
+  ImportFailure.network ||
+  ImportFailure.unknownHost ||
+  ImportFailure.blockedHost ||
+  ImportFailure.insecureScheme ||
+  ImportFailure.tls ||
+  ImportFailure.redirect ||
+  ImportFailure.notFound => _openFailureResult(
+    ref,
+    alive,
+    OpenFailure.unreadable,
+  ),
+  ImportFailure.diskFull => _openFailureResult(
+    ref,
+    alive,
+    OpenFailure.unreadable,
+  ),
+  // Belandt hier alleen als zelfs de documentenmap-terugval van
+  // [TabsImport._importDestDir] faalde — een catastrofaal schrijfprobleem,
+  // zeldzaam genoeg voor de generieke melding. De drag-drop/Finder-weg toont
+  // via [importFailureMessage] wél de specifieke reden.
+  ImportFailure.destinationUnavailable => _openFailureResult(
+    ref,
+    alive,
+    OpenFailure.unreadable,
+  ),
+};

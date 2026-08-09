@@ -64,6 +64,7 @@ import '../services/git/asset_index.dart';
 import '../services/git/asset_rights_index.dart';
 import '../services/git/deck_merge.dart';
 import '../services/git/deck_search.dart';
+import '../services/git/git_cli.dart';
 import '../services/git/git_forge.dart';
 import '../services/git/version_diff.dart';
 import '../services/git/native_git_mirror_api.dart';
@@ -453,31 +454,47 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     final presentations = <PickedPresentation>[];
     for (final path in paths) {
       final ext = p.extension(path).toLowerCase();
-      if (ext == '.md') {
-        final result = await tabs.openFileByPath(path);
-        if (mounted) {
-          _reportOpenFailure(
-            ScaffoldMessenger.of(context),
-            context.l10n,
-            result,
-            reason: ref.read(openFailureProvider),
-          );
+      // Vangnet per bestand: deze open-weg is fire-and-forget (Finder-"Open met",
+      // sleep-neer, launch-arg), dus een onverwachte fout die geen gerichte
+      // weiger-reden kreeg zou anders stil in runZonedGuarded verdwijnen — precies
+      // het "opent niet, geen melding"-gedrag. Eén kapot bestand mag de rest ook
+      // niet afbreken.
+      try {
+        if (ext == '.md') {
+          final result = await tabs.openFileByPath(path);
+          if (mounted) {
+            _reportOpenFailure(
+              ScaffoldMessenger.of(context),
+              context.l10n,
+              result,
+              reason: ref.read(openFailureProvider),
+            );
+          }
+        } else if (ext == '.ocideck' || ext == '.zip') {
+          final failure = await tabs.importPackageFile(path, homeDir: homeDir);
+          if (failure != null && mounted) {
+            showErrorSnackBar(
+              ScaffoldMessenger.of(context),
+              context.l10n,
+              importFailureMessage(context.l10n, failure),
+            );
+          }
+        } else if (_imageExtensions.contains(ext)) {
+          final adopted = await _adoptDroppedImage(path);
+          if (adopted != null) images.add(adopted);
+        } else if (isImportablePresentationName(path)) {
+          final bytes = await File(path).readAsBytes();
+          presentations.add((bytes: bytes, name: p.basename(path)));
         }
-      } else if (ext == '.ocideck' || ext == '.zip') {
-        final failure = await tabs.importPackageFile(path, homeDir: homeDir);
-        if (failure != null && mounted) {
+      } catch (e, s) {
+        logError('AppShell._onFilesDropped: openen van $path mislukt', e, s);
+        if (mounted) {
           showErrorSnackBar(
             ScaffoldMessenger.of(context),
             context.l10n,
-            importFailureMessage(context.l10n, failure),
+            context.l10n.d('Kon dit bestand niet openen.'),
           );
         }
-      } else if (_imageExtensions.contains(ext)) {
-        final adopted = await _adoptDroppedImage(path);
-        if (adopted != null) images.add(adopted);
-      } else if (isImportablePresentationName(path)) {
-        final bytes = await File(path).readAsBytes();
-        presentations.add((bytes: bytes, name: p.basename(path)));
       }
     }
     if (images.isNotEmpty) _addImagesToActiveDeck(images);
@@ -678,39 +695,12 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
 
     _listenUnsavedWork(context, ref);
 
-    // Een zojuist geopend bestand heeft elders een byte-identieke kopie:
-    // niet-blokkerend melden (de gebruiker wilde gewoon openen), met de
-    // opruimdialoog als directe ingang.
-    ref.listen<DuplicateCopyNotice?>(duplicateCopyNoticeProvider, (_, notice) {
-      if (notice == null) return;
-      ref.read(duplicateCopyNoticeProvider.notifier).state = null;
-      final l10n = context.l10n;
-      final homeDir = ref.read(settingsProvider).homeDirectory;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: const Duration(seconds: 7),
-          content: Text(
-            '${l10n.d('Deze presentatie staat ook op een andere plek:')} '
-            '${displayFolder(notice.copyPath, homeDir: homeDir, osHome: osHomeDirectory)}',
-          ),
-          action: TrashService().isSupported
-              ? SnackBarAction(
-                  label: l10n.d('Opruimen…'),
-                  onPressed: () => DuplicateCleanupDialog.show(
-                    context,
-                    groups: [
-                      CleanupGroup(
-                        title: p.basenameWithoutExtension(notice.openedPath),
-                        paths: [notice.openedPath, notice.copyPath],
-                      ),
-                    ],
-                    homeDir: homeDir,
-                  ),
-                )
-              : null,
-        ),
-      );
-    });
+    // Twee post-open meldingen over wáár het bestand belandde — byte-identieke
+    // kopie elders, of terugval op de documentenmap toen de ingestelde thuismap
+    // onbereikbaar bleek. Ze delen het luister-patroon en wonen als top-level
+    // helpers naast [_listenChartDataWarning] om app_shell.dart klein te houden.
+    _listenDuplicateCopyNotice(context, ref);
+    _listenImportHomeUnavailable(context, ref);
 
     return AppPlatformMenuBar(
       actions: _menuActions(context.l10n),

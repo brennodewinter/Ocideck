@@ -3,6 +3,7 @@ import 'dart:io';
 
 import '../l10n/app_localizations.dart';
 import '../services/file_service.dart';
+import '../services/git/git_cli.dart';
 import '../services/git/git_forge.dart';
 // Geprefixt: `file_service.dart` heeft óók een `ImportFailure` (de enum voor de
 // pakket-import), en dat is een ander type dan deze klasse voor de
@@ -27,6 +28,13 @@ String userFacingError(AppLocalizations l10n, Object error) {
   if (error is WebdavException) return webdavErrorMessage(l10n, error);
   if (error is S3Exception) return s3ErrorMessage(l10n, error);
   if (error is GitForgeException) return gitForgeErrorMessage(l10n, error);
+  // De native-git-laag faalt met een [GitCliException] die git's stderr draagt.
+  // Classificeer die naar een bestaande forge-foutsoort, zodat een clone- of
+  // push-fout dezelfde begrijpelijke melding krijgt als de REST-weg in plaats
+  // van door te vallen naar "er ging onverwacht iets mis".
+  if (error is GitCliException) {
+    return gitForgeErrorMessage(l10n, classifyGitCliError(error));
+  }
   if (error is FileSystemException) {
     final code = error.osError?.errorCode;
     // EPERM(1) / EACCES(13): geen rechten; ENOENT(2): weg; ENOSPC(28): vol.
@@ -158,6 +166,24 @@ String importFailureMessage(AppLocalizations l10n, ImportFailure failure) {
     ImportFailure.network => l10n.d(
       'Kon van deze URL geen presentatie ophalen. Controleer de URL en je verbinding.',
     ),
+    ImportFailure.unknownHost => l10n.d(
+      'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.',
+    ),
+    ImportFailure.blockedHost => l10n.d(
+      'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.',
+    ),
+    ImportFailure.insecureScheme => l10n.d(
+      'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.',
+    ),
+    ImportFailure.tls => l10n.d(
+      'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.',
+    ),
+    ImportFailure.redirect => l10n.d(
+      'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.',
+    ),
+    ImportFailure.notFound => l10n.d(
+      'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.',
+    ),
     ImportFailure.needsPassword => l10n.d(
       'Dit pakket is versleuteld; er kon niet om een wachtwoord worden gevraagd.',
     ),
@@ -165,6 +191,9 @@ String importFailureMessage(AppLocalizations l10n, ImportFailure failure) {
     ImportFailure.encryptedCancelled => '',
     ImportFailure.diskFull => l10n.d(
       'De doelschijf heeft onvoldoende ruimte. Maak ruimte vrij en probeer het opnieuw.',
+    ),
+    ImportFailure.destinationUnavailable => l10n.d(
+      'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.',
     ),
   };
 }
@@ -178,6 +207,9 @@ String webdavErrorMessage(AppLocalizations l10n, WebdavException e) {
   return switch (e.kind) {
     WebdavError.config => l10n.d(
       'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.',
+    ),
+    WebdavError.insecureScheme => l10n.d(
+      'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.',
     ),
     WebdavError.unknownHost => l10n.d(
       'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.',
@@ -274,6 +306,9 @@ String s3ErrorMessage(AppLocalizations l10n, S3Exception e) {
     S3Error.config => l10n.d(
       'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.',
     ),
+    S3Error.insecureScheme => l10n.d(
+      'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.',
+    ),
     S3Error.unknownHost => l10n.d(
       'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.',
     ),
@@ -282,6 +317,9 @@ String s3ErrorMessage(AppLocalizations l10n, S3Exception e) {
     ),
     S3Error.tls => l10n.d(
       'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.',
+    ),
+    S3Error.redirect => l10n.d(
+      'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.',
     ),
     S3Error.network => l10n.d(
       'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.',
