@@ -189,7 +189,8 @@ class XmppSnapshotChannel {
           count <= 0 ||
           count > maxChunks ||
           index < 0 ||
-          index >= count) {
+          index >= count ||
+          data.length > maxChunkChars) {
         logWarning('xmpp.snapshot.badChunk', id);
         return;
       }

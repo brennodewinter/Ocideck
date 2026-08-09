@@ -219,6 +219,46 @@ void main() {
     },
   );
 
+  test('an oversized chunk-data is dropped fail-closed (#1419)', () async {
+    final env = await _SnapEnv.create(maxChunkChars: 200);
+    addTearDown(env.dispose);
+    final chunks = await _captureChunks(env: env);
+
+    // Vergroot de data van de eerste chunk tot boven maxChunkChars — de
+    // ontvanger moet hem weigeren, zodat de reassemblage nooit voltooit.
+    final first = chunks.first;
+    final child = first.children.firstWhere(
+      (c) =>
+          (c.getAttribute('xmlns') ?? c.name.namespaceUri) ==
+          OciDeckNamespace.snapshot,
+    );
+    final decoded = jsonDecode(child.innerText) as Map<String, Object?>;
+    decoded['data'] = '${decoded['data']}${'x' * 500}';
+    final oversized = Stanza(
+      kind: StanzaKind.message,
+      type: 'groupchat',
+      from: first.from,
+      to: first.to,
+      id: first.id,
+      children: [
+        xmppElement(
+          'snap',
+          namespace: OciDeckNamespace.snapshot,
+          text: jsonEncode(decoded),
+        ),
+      ],
+    );
+
+    var completed = false;
+    unawaited(env.receiver.firstSnapshot.then((_) => completed = true));
+    await env.receiver.handleSnapshot(oversized);
+    for (final s in chunks.skip(1)) {
+      await env.receiver.handleSnapshot(s);
+    }
+    await env.settle();
+    expect(completed, isFalse, reason: 'an oversized chunk is dropped');
+  });
+
   test(
     'the assembled map is bounded — overflow evicts the oldest (#1414)',
     () async {
