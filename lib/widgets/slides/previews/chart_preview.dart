@@ -792,6 +792,10 @@ class _HoverPieChart extends StatefulWidget {
   final List<double> values;
   final List<String> labels;
   final List<Color> colors;
+
+  /// Per-slice ink for the on-slice percentage, chosen to stay readable on that
+  /// slice's fill (white on a dark slice, a dark ink on a pale one).
+  final List<Color> labelColors;
   final double radius;
   final double centerSpaceRadius;
   final double sectionSpace;
@@ -817,6 +821,7 @@ class _HoverPieChart extends StatefulWidget {
     required this.values,
     required this.labels,
     required this.colors,
+    required this.labelColors,
     required this.radius,
     required this.centerSpaceRadius,
     required this.sectionSpace,
@@ -860,7 +865,9 @@ class _HoverPieChartState extends State<_HoverPieChart> {
                         ? '${(widget.values[i] / total * 100).round()}%'
                         : '',
                     radius: widget.radius * (hovered == i ? 1.08 : 1),
-                    titleStyle: widget.titleStyle,
+                    titleStyle: widget.titleStyle.copyWith(
+                      color: widget.labelColors[i],
+                    ),
                   ),
               ],
               sectionsSpace: widget.sectionSpace,

@@ -346,6 +346,18 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
                                       chartRowColor(spec, xi),
                                     ),
                                 ],
+                                // The on-slice percentage is drawn on the slice
+                                // itself, so its ink must contrast with that
+                                // slice — white is unreadable on a pale slice.
+                                labelColors: [
+                                  for (var xi = 0; xi < values.length; xi++)
+                                    AppTheme.parseHexColor(
+                                      readableChartInk(
+                                        '#FFFFFF',
+                                        chartRowColor(spec, xi),
+                                      ),
+                                    ),
+                                ],
                                 radius: radius,
                                 centerSpaceRadius: _holeRadius(radius, donut),
                                 sectionSpace: w * 0.002,

@@ -1144,6 +1144,13 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **grafiek: leesbare inkt voor taart-partjelabels.** De percentages op taart-/
+  donutpartjes stonden altijd in wit; op een licht partje (EU-geel `#FFCC00`,
+  lichtblauw) was dat ~1,5:1 contrast en dus onleesbaar (faalt WCAG). Ze kiezen
+  nu per partje hun inkt via `readableChartInk('#FFFFFF', partjekleur)` — wit op
+  een donker partje, een donkere inkt op een licht partje — precies zoals de
+  heatmap en de grafiektitel al deden. Alleen de Flutter-render (de HTML-export
+  tekent geen partjelabels). Opgemerkt tijdens de beeldkeuring van #1395.
 - **grafiek: taart als tekening — echte taart, verbergbare percentages,
   starthoek (#1395).** Een externe indiener probeerde met een taartdiagram een
   piramide tegen een lucht te tekenen en liep op drie dingen vast; alledrie
