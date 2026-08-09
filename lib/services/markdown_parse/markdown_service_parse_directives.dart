@@ -80,6 +80,35 @@ String _takeNote(StringBuffer notes, String content) {
   return '';
 }
 
+({String cssClass, String remaining}) _stripClassDirective(String block) {
+  final match = _reClassDirective.firstMatch(block);
+  if (match == null) return (cssClass: '', remaining: block);
+  return (
+    cssClass: match.group(1) ?? '',
+    remaining: block.replaceFirst(match.group(0)!, '').trim(),
+  );
+}
+
+double _parseAdvanceDuration(String content) {
+  // `tryParse` accepts Infinity/NaN/overflow, which would later throw in the
+  // auto-advance timer. Clamp to the deck target's fail-closed 24-hour bound.
+  final value = double.tryParse(content.substring(8).trim()) ?? 0;
+  return value.isFinite && value > 0 ? value.clamp(0, 86400) : 0;
+}
+
+({String remaining, String notes}) _finishDirectives(
+  String remaining,
+  List<String> preservedMarpLines,
+  StringBuffer notes,
+) {
+  final passThrough = unsupportedMarpImageLines(remaining);
+  preservedMarpLines.addAll(passThrough.preserved);
+  return (
+    remaining: passThrough.remaining,
+    notes: _unescapeNotes(notes.toString().trim()),
+  );
+}
+
 extension _MarkdownParseDirectives on MarkdownService {
   /// Parse the leading `<!-- _class -->` marker and every other `<!-- ... -->`
   /// directive comment (advance/skip/tlp/_style/two-bullets/timeline/list-style/
@@ -87,14 +116,9 @@ extension _MarkdownParseDirectives on MarkdownService {
   /// notes from any non-directive comment. Returns the stripped body plus all
   /// the decoded directive values.
   _BlockDirectives _parseBlockDirectives(String block) {
-    String cssClass = '';
-    String remaining = block;
-
-    final classMatch = _reClassDirective.firstMatch(block);
-    if (classMatch != null) {
-      cssClass = classMatch.group(1) ?? '';
-      remaining = block.replaceFirst(classMatch.group(0)!, '').trim();
-    }
+    final classDirective = _stripClassDirective(block);
+    final cssClass = classDirective.cssClass;
+    var remaining = classDirective.remaining;
 
     // Extract presenter notes and advance timing from HTML comments
     final notesBuffer = StringBuffer();
@@ -137,11 +161,7 @@ extension _MarkdownParseDirectives on MarkdownService {
       // Meerregelig is altijd een notitieblok — richtlijnen passen op één regel.
       if (raw.contains('\n')) return _takeNote(notesBuffer, content);
       if (content.startsWith('advance:')) {
-        // Clamp fail-closed: double.tryParse accepts Infinity/NaN/overflow
-        // literals, and `(Infinity * 1000).round()` throws in the auto-advance
-        // timer. Mirror the presentationTargetSeconds clamp (0..86400s).
-        final d = double.tryParse(content.substring(8).trim()) ?? 0;
-        advanceDuration = (d.isFinite && d > 0) ? d.clamp(0, 86400) : 0;
+        advanceDuration = _parseAdvanceDuration(content);
       } else if (content == 'skip') {
         skipped = true;
       } else if (content == 'ocideck_detail') {
@@ -229,41 +249,13 @@ extension _MarkdownParseDirectives on MarkdownService {
         tableNumberColumns = _parseNumCols(raw);
       } else if (content.startsWith('ocideck_view_')) {
         _collectViewComment(viewComments, content);
-      } else if (content.startsWith('_color:')) {
-        marpStyle = marpStyle.copyWith(
-          color: parseMarkdownYamlScalar(
-            content.substring('_color:'.length).trim(),
-          ),
-        );
-      } else if (content.startsWith('_backgroundColor:')) {
-        marpStyle = marpStyle.copyWith(
-          backgroundColor: parseMarkdownYamlScalar(
-            content.substring('_backgroundColor:'.length).trim(),
-          ),
-        );
-      } else if (content.startsWith('_backgroundImage:')) {
-        marpStyle = marpStyle.copyWith(
-          backgroundImage: parseMarkdownYamlScalar(
-            content.substring('_backgroundImage:'.length).trim(),
-          ),
-        );
-      } else if (content.startsWith('_header:')) {
-        marpStyle = marpStyle.copyWith(
-          header: parseMarkdownYamlScalar(
-            content.substring('_header:'.length).trim(),
-          ),
-        );
-      } else if (content.startsWith('_footer:')) {
-        marpStyle = marpStyle.copyWith(
-          footer: parseMarkdownYamlScalar(
-            content.substring('_footer:'.length).trim(),
-          ),
-        );
-      } else if (content == 'fit') {
-        marpStyle = marpStyle.copyWith(headingFit: true);
-      } else if (content.startsWith('_')) {
-        preservedMarpLines.add(m.group(0)!);
       } else {
+        final marp = parseMarpStyleDirective(content, marpStyle);
+        if (marp.handled) {
+          marpStyle = marp.style;
+          if (marp.preserve) preservedMarpLines.add(m.group(0)!);
+          return '';
+        }
         // Geen richtlijn die wij kennen: notitie of opmerking? Zie [_isTailNote].
         if (_isTailNote(source.substring(m.end))) {
           return _takeNote(notesBuffer, content);
@@ -272,15 +264,11 @@ extension _MarkdownParseDirectives on MarkdownService {
       }
       return '';
     }).trim();
-    final passThrough = unsupportedMarpImageLines(remaining);
-    remaining = passThrough.remaining;
-    preservedMarpLines.addAll(passThrough.preserved);
-    final notes = _unescapeNotes(notesBuffer.toString().trim());
-
+    final done = _finishDirectives(remaining, preservedMarpLines, notesBuffer);
     return (
       cssClass: cssClass,
-      remaining: remaining,
-      notes: notes,
+      remaining: done.remaining,
+      notes: done.notes,
       preservedMarpLines: preservedMarpLines,
       marpStyle: marpStyle,
       advanceDuration: advanceDuration,

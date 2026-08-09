@@ -1,5 +1,6 @@
 import '../models/marp_style.dart';
 import '../models/slide.dart';
+import 'markdown_front_matter_codec.dart';
 
 final _backgroundImage = RegExp(r'!\[bg');
 final _wholeBackground = RegExp(r'^!\[([^\]]*)\]\([^)]+\)$');
@@ -127,6 +128,66 @@ MarpStyle marpImageStyleFromSource(String source) {
     );
   }
   return const MarpStyle();
+}
+
+/// Applies one standard local Marp style directive.
+///
+/// Unknown underscore directives are marked for verbatim preservation so a
+/// newer Marp feature never disappears when an older OciDeck saves the slide.
+({bool handled, bool preserve, MarpStyle style}) parseMarpStyleDirective(
+  String content,
+  MarpStyle current,
+) {
+  String valueAfter(String prefix) =>
+      parseMarkdownYamlScalar(content.substring(prefix.length).trim());
+
+  if (content.startsWith('_color:')) {
+    return (
+      handled: true,
+      preserve: false,
+      style: current.copyWith(color: valueAfter('_color:')),
+    );
+  }
+  if (content.startsWith('_backgroundColor:')) {
+    return (
+      handled: true,
+      preserve: false,
+      style: current.copyWith(backgroundColor: valueAfter('_backgroundColor:')),
+    );
+  }
+  if (content.startsWith('_backgroundImage:')) {
+    return (
+      handled: true,
+      preserve: false,
+      style: current.copyWith(backgroundImage: valueAfter('_backgroundImage:')),
+    );
+  }
+  if (content.startsWith('_header:')) {
+    return (
+      handled: true,
+      preserve: false,
+      style: current.copyWith(header: valueAfter('_header:')),
+    );
+  }
+  if (content.startsWith('_footer:')) {
+    return (
+      handled: true,
+      preserve: false,
+      style: current.copyWith(footer: valueAfter('_footer:')),
+    );
+  }
+  if (content == 'fit') {
+    return (
+      handled: true,
+      preserve: false,
+      style: current.copyWith(headingFit: true),
+    );
+  }
+  return (
+    handled: content.startsWith('_'),
+    preserve: content.startsWith('_'),
+    style: current,
+  );
 }
 
 /// Serializes the standard Marp options for a slide background image.
