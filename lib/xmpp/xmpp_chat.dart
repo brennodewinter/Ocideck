@@ -74,6 +74,7 @@ class XmppChat {
     required this.ownUserId,
     this.maxMessageChars = 4000,
     this.dedupCap = 256,
+    this.pendingCap = 256,
   }) : _channel = stanzaChannel,
        _demux = companionDemux,
        _e2ee = crypto {
@@ -102,6 +103,11 @@ class XmppChat {
   /// server mag de set niet uitputten; de afruil is dat een id na verdrijving
   /// niet meer wordt onderdrukt (een oude herlevering kan terugkomen).
   final int dedupCap;
+
+  /// Cap op de pending-buffer — berichten die aankwamen vóór de afzender's
+  /// keys of de epoch-sleutel bekend waren. Een vijandige server mag de buffer
+  /// niet onbegrensd laten groeien; bij overflow verdrijft het oudste (FIFO).
+  final int pendingCap;
 
   final List<ChatMessage> _messages = [];
 
@@ -176,6 +182,7 @@ class XmppChat {
       // Eigen echo — de MUC reflecteert de afzender zijn eigen bericht terug;
       // de lokale echo is al toegevoegd in [send].
       if (sealed.senderDevice == _e2ee.deviceId) return;
+      if (_pending.length >= pendingCap) _pending.removeAt(0); // FIFO-verdrijving
       _pending.add(sealed);
       await retryPending();
     } on Exception catch (e) {
@@ -184,20 +191,24 @@ class XmppChat {
   }
 
   /// Heropen gebufferde berichten waarvan de sleutel of afzender nu bekend kan
-  /// zijn. Behoudt aankomstvolgorde; een nog-niet-openbaar bericht blijft staan.
+  /// zijn. Verwerkt de hele lijst in één pas — een nog-niet-openbaar bericht
+  /// (onbekende afzender of epoch) blokkeert niet de berichten erachter (geen
+  /// head-of-line blocking, #1412); het blijft voor de volgende ronde staan.
   Future<void> retryPending() async {
     var progressed = false;
+    final stillPending = <SealedEnvelope>[];
     while (_pending.isNotEmpty) {
-      final opened = await _open(_pending.first);
-      // Afzender of epoch nog niet klaar — houd deze en de rest voor de volgende
-      // ronde.
-      if (opened == null) break;
-      _pending.removeAt(0);
-      if (opened.isNotEmpty) {
+      final sealed = _pending.removeAt(0);
+      final opened = await _open(sealed);
+      if (opened == null) {
+        stillPending.add(sealed); // afzender/epoch nog niet — houd
+      } else if (opened.isNotEmpty) {
         _messages.add(_messageFrom(opened));
         progressed = true;
       }
+      // opened leeg → misvormd/dup/slechte handtekening — drop fail-closed
     }
+    _pending.addAll(stillPending);
     if (progressed) onChanged?.call();
   }
 

@@ -160,6 +160,50 @@ void main() {
   );
 
   test(
+    'an unknown sender does not block later messages (no head-of-line, #1412)',
+    () async {
+      final env = await _ChatEnv.create();
+      addTearDown(env.dispose);
+
+      // Een bericht van een onbekende afzender ('ghost') — niet in de
+      // directory, dus _open retourneert null en het blijft in _pending staan.
+      // Met de oude code blokkeerde dit alle latere berichten (head-of-line
+      // blocking); nu wordt het overgeslagen.
+      final ghost = SealedEnvelope(
+        epoch: 0,
+        nonce: List.filled(24, 0),
+        ciphertext: List.filled(32, 0),
+        senderDevice: 'ghost',
+      );
+      final ghostStanza = Stanza(
+        kind: StanzaKind.message,
+        type: 'groupchat',
+        to: env.room,
+        children: [
+          xmppElement(
+            'chat',
+            namespace: OciDeckNamespace.chat,
+            text: jsonEncode({
+              'id': 'ghost-id',
+              'sealed': ghost.toContent(),
+            }),
+          ),
+        ],
+      );
+      await env.receiver.handleChat(ghostStanza);
+      await env.settle();
+      expect(env.receiver.messages, isEmpty, reason: 'unknown sender buffered');
+
+      // Nu een legitiem bericht van de bekende afzender — dit moet door de
+      // gebufferde 'ghost' heen verschijnen, niet erachter vastlopen.
+      await env.sender.send('hallo');
+      await env.settle();
+      expect(env.receiver.messages, hasLength(1));
+      expect(env.receiver.messages.single.text, 'hallo');
+    },
+  );
+
+  test(
     'the dedup set is bounded — an evicted id is no longer suppressed',
     () async {
       // ponytail: de dedup-set is begrensd (§4 "like the message list"). De
