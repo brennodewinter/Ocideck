@@ -28,6 +28,7 @@ import 'dart:convert';
 
 import '../models/deck.dart';
 import '../models/display_window_spec.dart';
+import '../models/marp_style.dart';
 import '../models/privacy_disposition.dart';
 import '../models/quality_disposition.dart';
 import '../models/settings.dart';
@@ -195,6 +196,7 @@ Map<String, Object?> slideToJson(Slide s) => {
   'cssClass': s.cssClass,
   'notes': s.notes,
   'preservedMarpLines': s.preservedMarpLines,
+  'marpStyle': s.marpStyle.toJson(),
   'advanceDuration': s.advanceDuration,
   'imageSize': s.imageSize,
   'titleImageOverlay': s.titleImageOverlay,
@@ -262,7 +264,12 @@ Slide slideFromJson(Map<String, Object?> j) => Slide(
   codeLanguage: _str(j, 'codeLanguage'),
   cssClass: _str(j, 'cssClass'),
   notes: _str(j, 'notes'),
-  preservedMarpLines: _strList(j, 'preservedMarpLines'),
+  preservedMarpLines: j['preservedMarpLines'] == null
+      ? const []
+      : _strList(j, 'preservedMarpLines'),
+  marpStyle: j['marpStyle'] == null
+      ? const MarpStyle()
+      : MarpStyle.fromJson(_map(j, 'marpStyle')),
   advanceDuration: _double(j, 'advanceDuration'),
   imageSize: _int(j, 'imageSize'),
   titleImageOverlay: _bool(j, 'titleImageOverlay'),
@@ -356,6 +363,7 @@ enum _ValueKind {
   listStyle,
   tlp,
   privacy,
+  marpStyle,
 }
 
 _ValueKind _slideFieldKind(SlideField f) {
@@ -405,6 +413,7 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.bullets: _ValueKind.stringList,
   SlideField.bullets2: _ValueKind.stringList,
   SlideField.preservedMarpLines: _ValueKind.stringList,
+  SlideField.marpStyle: _ValueKind.marpStyle,
   SlideField.showChecklistProgress: _ValueKind.boolean,
   SlideField.continueNumbering: _ValueKind.boolean,
   SlideField.continuesSplit: _ValueKind.boolean,
@@ -447,6 +456,7 @@ const Map<DeckMetaField, _ValueKind> _deckMetaKinds = {
   DeckMetaField.playOnly: _ValueKind.boolean,
   DeckMetaField.presentationTargetSeconds: _ValueKind.integer,
   DeckMetaField.standardsUsed: _ValueKind.stringList,
+  DeckMetaField.marpStyle: _ValueKind.marpStyle,
 };
 
 /// The [SlideField]s the wire codec knows a value kind for. Test-only: a test
@@ -471,6 +481,7 @@ Object? _encodeValue(_ValueKind kind, Object? value) {
     _ValueKind.listStyle => _need<ListStyle>(value).name,
     _ValueKind.tlp => _need<TlpLevel>(value).name,
     _ValueKind.privacy => _need<PrivacyDisposition>(value).name,
+    _ValueKind.marpStyle => _need<MarpStyle>(value).toJson(),
   };
 }
 
@@ -501,6 +512,7 @@ Object? _decodeValue(_ValueKind kind, Object? json, String where) {
       _asString(json, where),
       where,
     ),
+    _ValueKind.marpStyle => MarpStyle.fromJson(_asMap(json, where)),
   };
 }
 
@@ -544,6 +556,16 @@ Map<String, Object?> _map(Map<String, Object?> j, String key) {
   if (v is Map<String, Object?>) return v;
   if (v is Map) return v.map((k, val) => MapEntry(k.toString(), val));
   throw FormatException('field "$key" is not an object (${v.runtimeType})');
+}
+
+Map<String, Object?> _asMap(Object? value, String where) {
+  if (value is Map<String, Object?>) return value;
+  if (value is Map) {
+    return value.map((key, val) => MapEntry(key.toString(), val));
+  }
+  throw FormatException(
+    'field "$where" is not an object (${value.runtimeType})',
+  );
 }
 
 List<List<String>> _rows(Map<String, Object?> j, String key) {

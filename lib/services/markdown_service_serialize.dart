@@ -6,6 +6,24 @@
 part of 'markdown_service.dart';
 
 extension _MarkdownSerialize on MarkdownService {
+  String _marpBackgroundOptions(
+    Slide slide, {
+    String positional = '',
+    bool overlay = false,
+  }) {
+    final options = <String>[
+      'bg',
+      if (positional.isNotEmpty) positional,
+      if (slide.marpStyle.imageFit == 'contain')
+        'contain'
+      else if (slide.imageSize > 0 && positional.isEmpty)
+        '${slide.imageSize}%',
+      ...slide.marpStyle.imageFilters,
+      if (overlay) 'opacity:.45',
+    ];
+    return options.join(' ');
+  }
+
   /// Emits the image crop focal point(s) as HTML comments Marp ignores, only
   /// when they differ from the centre default. `2` is the twoImages right image;
   /// on single-image slides its focal stays centred, so nothing extra is
@@ -55,11 +73,10 @@ extension _MarkdownSerialize on MarkdownService {
   /// a tussentitel is a heading slide too, and carries the same fields.
   void _writeSlideBackground(StringBuffer buf, Slide slide) {
     if (slide.imagePath.isEmpty) return;
-    final bgOptions = [
-      'bg',
-      if (slide.imageSize > 0) '${slide.imageSize}%',
-      if (slide.titleImageOverlay) 'opacity:.45',
-    ].join(' ');
+    final bgOptions = _marpBackgroundOptions(
+      slide,
+      overlay: slide.titleImageOverlay,
+    );
     buf.writeln('![$bgOptions](${slide.imagePath})');
     if (!slide.titleImageOverlay) {
       buf.writeln('<!-- ocideck_title_image_overlay: false -->');
@@ -203,7 +220,11 @@ extension _MarkdownSerialize on MarkdownService {
   void _writeTwoImagesSlide(StringBuffer buf, Slide slide) {
     final splitPct = slide.imageSize > 0 ? slide.imageSize : 50;
     if (slide.imagePath.isNotEmpty) {
-      buf.writeln('![bg left:$splitPct%](${slide.imagePath})');
+      final options = _marpBackgroundOptions(
+        slide,
+        positional: 'left:$splitPct%',
+      );
+      buf.writeln('![$options](${slide.imagePath})');
     }
     if (slide.imagePath2.isNotEmpty) {
       buf.writeln('![bg right:${100 - splitPct}%](${slide.imagePath2})');
@@ -222,8 +243,7 @@ extension _MarkdownSerialize on MarkdownService {
 
   void _writeImageSlide(StringBuffer buf, Slide slide) {
     if (slide.imagePath.isNotEmpty) {
-      final sizeSpec = slide.imageSize > 0 ? ' ${slide.imageSize}%' : '';
-      buf.writeln('![bg$sizeSpec](${slide.imagePath})');
+      buf.writeln('![${_marpBackgroundOptions(slide)}](${slide.imagePath})');
       _writeImageFocus(buf, slide);
       _writeImageAlt(buf, slide);
       _writeImageCaption(buf, slide.imageCaption);
@@ -246,8 +266,9 @@ extension _MarkdownSerialize on MarkdownService {
 
   void _writeQuoteSlide(StringBuffer buf, Slide slide) {
     if (slide.imagePath.isNotEmpty) {
-      final sizeSpec = slide.imageSize > 0 ? '${slide.imageSize}% ' : '';
-      buf.writeln('![bg ${sizeSpec}opacity:.45](${slide.imagePath})');
+      buf.writeln(
+        '![${_marpBackgroundOptions(slide, overlay: true)}](${slide.imagePath})',
+      );
       _writeImageCaption(buf, slide.imageCaption);
       buf.writeln();
     }

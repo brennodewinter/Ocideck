@@ -5,6 +5,7 @@ import '../models/chart.dart';
 import '../models/cockpit.dart';
 import '../models/deck.dart';
 import '../models/improvement_y01.dart';
+import '../models/marp_style.dart';
 import '../models/privacy_disposition.dart';
 import '../models/quality_disposition.dart';
 import '../models/display_window_spec.dart';
@@ -328,6 +329,9 @@ class MarkdownService {
     if (s.length >= 2 && s.startsWith('"') && s.endsWith('"')) {
       return _unescape(s.substring(1, s.length - 1));
     }
+    if (s.length >= 2 && s.startsWith("'") && s.endsWith("'")) {
+      return s.substring(1, s.length - 1).replaceAll("''", "'");
+    }
     return s;
   }
 
@@ -575,7 +579,12 @@ class MarkdownService {
     }
 
     buf.writeln();
-    return buf.toString();
+    final generated = buf.toString();
+    if (!slide.marpStyle.headingFit) return generated;
+    return generated.replaceFirstMapped(
+      RegExp(r'^(#{1,6}\s+.*)$', multiLine: true),
+      (match) => '${match.group(1)}\n<!-- fit -->',
+    );
   }
 
   // ── Parsing ─────────────────────────────────────────────────────────────────
@@ -710,6 +719,25 @@ void _writeSlideDirectives(
 ) {
   if (classes.isNotEmpty) {
     buf.writeln('<!-- _class: ${classes.join(' ')} -->');
+  }
+  if (slide.marpStyle.color.isNotEmpty) {
+    buf.writeln('<!-- _color: ${slide.marpStyle.color} -->');
+  }
+  if (slide.marpStyle.backgroundColor.isNotEmpty) {
+    buf.writeln(
+      '<!-- _backgroundColor: ${slide.marpStyle.backgroundColor} -->',
+    );
+  }
+  if (slide.marpStyle.backgroundImage.isNotEmpty) {
+    buf.writeln(
+      '<!-- _backgroundImage: ${slide.marpStyle.backgroundImage} -->',
+    );
+  }
+  if (slide.marpStyle.header.isNotEmpty) {
+    buf.writeln('<!-- _header: ${slide.marpStyle.header} -->');
+  }
+  if (slide.marpStyle.footer.isNotEmpty) {
+    buf.writeln('<!-- _footer: ${slide.marpStyle.footer} -->');
   }
   for (final line in slide.preservedMarpLines) {
     buf.writeln(line);

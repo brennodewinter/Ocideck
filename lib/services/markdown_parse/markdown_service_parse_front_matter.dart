@@ -10,6 +10,7 @@ part of '../markdown_service.dart';
 class _FrontMatter {
   String theme = 'ocideck';
   bool paginate = true;
+  MarpStyle marpStyle = const MarpStyle();
 
   /// De MIAUW-dispositie uit een bestand van vóór 0.1.0, toen ze nog als
   /// base64 in de front matter stond. Nieuwe bestanden dragen haar in de
@@ -98,6 +99,20 @@ extension _MarkdownParseFrontMatter on MarkdownService {
               fm.theme = value;
             case 'paginate':
               fm.paginate = value == 'true';
+            case 'color':
+              fm.marpStyle = fm.marpStyle.copyWith(color: _parseScalar(value));
+            case 'backgroundColor':
+              fm.marpStyle = fm.marpStyle.copyWith(
+                backgroundColor: _parseScalar(value),
+              );
+            case 'backgroundImage':
+              fm.marpStyle = fm.marpStyle.copyWith(
+                backgroundImage: _parseScalar(value),
+              );
+            case 'header':
+              fm.marpStyle = fm.marpStyle.copyWith(header: _parseScalar(value));
+            case 'footer':
+              fm.marpStyle = fm.marpStyle.copyWith(footer: _parseScalar(value));
             case 'title':
               fm.presentationTitle = _parseScalar(value);
             case 'author':

@@ -15,6 +15,7 @@ import 'display_window_spec.dart';
 import 'privacy_disposition.dart';
 import 'quality_disposition.dart';
 import 'finding_spec.dart';
+import 'marp_style.dart';
 import 'findings_summary_spec.dart';
 import 'question.dart';
 import 'control_status_spec.dart';
@@ -484,6 +485,7 @@ class Slide {
   /// forward-compatible spot directives and extended background syntax while
   /// the ordinary typed fields remain editable.
   final List<String> preservedMarpLines;
+  final MarpStyle marpStyle;
   final double advanceDuration; // 0 = no auto-advance
   final int imageSize; // 0 = auto; image: bg %, bulletsImage: right panel %
   final bool titleImageOverlay; // darken title background image for readability
@@ -708,6 +710,7 @@ class Slide {
     this.cssClass = '',
     this.notes = '',
     this.preservedMarpLines = const [],
+    this.marpStyle = const MarpStyle(),
     this.advanceDuration = 0,
     this.imageSize = 0,
     this.titleImageOverlay = true,
@@ -873,6 +876,7 @@ class Slide {
       cssClass: src.cssClass,
       notes: withoutOpenKatGeneratedOrigin(src.notes),
       preservedMarpLines: List<String>.from(src.preservedMarpLines),
+      marpStyle: src.marpStyle,
       advanceDuration: src.advanceDuration,
       imageSize: src.imageSize,
       titleImageOverlay: src.titleImageOverlay,
@@ -943,6 +947,7 @@ class Slide {
     String? cssClass,
     String? notes,
     List<String>? preservedMarpLines,
+    MarpStyle? marpStyle,
     double? advanceDuration,
     int? imageSize,
     bool? titleImageOverlay,
@@ -1021,6 +1026,7 @@ class Slide {
       cssClass: cssClass ?? this.cssClass,
       notes: notes ?? this.notes,
       preservedMarpLines: preservedMarpLines ?? this.preservedMarpLines,
+      marpStyle: marpStyle ?? this.marpStyle,
       advanceDuration: advanceDuration ?? this.advanceDuration,
       imageSize: imageSize ?? this.imageSize,
       titleImageOverlay: titleImageOverlay ?? this.titleImageOverlay,

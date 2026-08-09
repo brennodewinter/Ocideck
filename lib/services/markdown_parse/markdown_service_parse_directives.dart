@@ -18,6 +18,7 @@ typedef _BlockDirectives = ({
   String remaining,
   String notes,
   List<String> preservedMarpLines,
+  MarpStyle marpStyle,
   double advanceDuration,
   bool skipped,
   bool isDetail,
@@ -98,6 +99,7 @@ extension _MarkdownParseDirectives on MarkdownService {
     // Extract presenter notes and advance timing from HTML comments
     final notesBuffer = StringBuffer();
     final preservedMarpLines = <String>[];
+    var marpStyle = _marpImageStyleFromSource(remaining);
     double advanceDuration = 0;
     bool skipped = false;
     bool isDetail = false;
@@ -227,8 +229,32 @@ extension _MarkdownParseDirectives on MarkdownService {
         tableNumberColumns = _parseNumCols(raw);
       } else if (content.startsWith('ocideck_view_')) {
         _collectViewComment(viewComments, content);
+      } else if (content.startsWith('_color:')) {
+        marpStyle = marpStyle.copyWith(
+          color: _parseScalar(content.substring('_color:'.length).trim()),
+        );
+      } else if (content.startsWith('_backgroundColor:')) {
+        marpStyle = marpStyle.copyWith(
+          backgroundColor: _parseScalar(
+            content.substring('_backgroundColor:'.length).trim(),
+          ),
+        );
+      } else if (content.startsWith('_backgroundImage:')) {
+        marpStyle = marpStyle.copyWith(
+          backgroundImage: _parseScalar(
+            content.substring('_backgroundImage:'.length).trim(),
+          ),
+        );
+      } else if (content.startsWith('_header:')) {
+        marpStyle = marpStyle.copyWith(
+          header: _parseScalar(content.substring('_header:'.length).trim()),
+        );
+      } else if (content.startsWith('_footer:')) {
+        marpStyle = marpStyle.copyWith(
+          footer: _parseScalar(content.substring('_footer:'.length).trim()),
+        );
       } else if (content == 'fit') {
-        preservedMarpLines.add(m.group(0)!);
+        marpStyle = marpStyle.copyWith(headingFit: true);
       } else if (content.startsWith('_')) {
         preservedMarpLines.add(m.group(0)!);
       } else {
@@ -250,6 +276,7 @@ extension _MarkdownParseDirectives on MarkdownService {
       remaining: remaining,
       notes: notes,
       preservedMarpLines: preservedMarpLines,
+      marpStyle: marpStyle,
       advanceDuration: advanceDuration,
       skipped: skipped,
       isDetail: isDetail,
@@ -283,10 +310,9 @@ extension _MarkdownParseDirectives on MarkdownService {
     );
   }
 
-  /// Removes extended background lines the typed image model cannot represent
-  /// and returns them verbatim for pass-through. The first two ordinary Marp
-  /// backgrounds still use the existing typed fields; any extra layer, keyword
-  /// fit, or filter stays source data instead of being partially interpreted.
+  /// Keeps background syntax the typed image model cannot represent verbatim.
+  /// The first background may carry a fit keyword and filters; later extended
+  /// backgrounds and every third layer remain pass-through source data.
   ({String remaining, List<String> preserved})
   _extractUnsupportedMarpImageLines(String source) {
     final preserved = <String>[];
@@ -299,14 +325,31 @@ extension _MarkdownParseDirectives on MarkdownService {
         continue;
       }
       backgroundCount++;
-      final extended = _reUnsupportedMarpBg.hasMatch(trimmed);
-      if (backgroundCount > 2 || extended) {
+      final laterExtended =
+          backgroundCount > 1 &&
+          (_reMarpImageFilter.hasMatch(trimmed) ||
+              _reMarpContain.hasMatch(trimmed));
+      if (backgroundCount > 2 || laterExtended) {
         preserved.add(line);
       } else {
         kept.add(line);
       }
     }
     return (remaining: kept.join('\n').trim(), preserved: preserved);
+  }
+
+  MarpStyle _marpImageStyleFromSource(String source) {
+    for (final line in source.split('\n')) {
+      if (!_reBgImage.hasMatch(line)) continue;
+      final options = RegExp(r'!\[([^\]]*)\]').firstMatch(line)?.group(1) ?? '';
+      final fit = _reMarpContain.hasMatch(options) ? 'contain' : '';
+      final filters = _reMarpImageFilter
+          .allMatches(options)
+          .map((m) => m.group(0)!)
+          .toList();
+      return MarpStyle(imageFit: fit, imageFilters: filters);
+    }
+    return const MarpStyle();
   }
 
   /// De twee timeline-directives: animatieduur en het gemarkeerde event.

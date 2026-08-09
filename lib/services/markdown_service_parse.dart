@@ -25,10 +25,11 @@ final _reNumberedMark = RegExp(r'^\d+[.)]$');
 final _reBgImage = RegExp(r'!\[bg');
 final _reBgImageUrl = RegExp(r'!\[bg[^\]]*\]\(([^)]+)\)');
 final _reBgImageSize = RegExp(r'!\[bg[^\]]*?(\d+)%[^\]]*\]');
-final _reUnsupportedMarpBg = RegExp(
-  r'!\[bg[^\]]*(?:\bfit\b|\bcontain\b|\bblur(?::|\b)|\bbrightness(?::|\b)|\bsaturate(?::|\b)|\bgrayscale\b|\bsepia\b|\binvert\b)',
+final _reMarpImageFilter = RegExp(
+  r'\b(?:blur(?::[^\s\]]+)?|brightness(?::[^\s\]]+)?|saturate(?::[^\s\]]+)?|grayscale|sepia|invert)\b',
   caseSensitive: false,
 );
+final _reMarpContain = RegExp(r'\b(?:fit|contain)\b', caseSensitive: false);
 final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
 final _reHtmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
 final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
@@ -138,6 +139,7 @@ extension _MarkdownParse on MarkdownService {
       title: title,
       theme: fm.theme,
       paginate: fm.paginate,
+      marpStyle: fm.marpStyle,
       slides: slides.isEmpty ? [Slide.create(SlideType.title)] : slides,
       projectPath: projectPath,
       author: fm.author,
@@ -331,6 +333,7 @@ extension _MarkdownParse on MarkdownService {
       privacy: d.privacy,
       quality: d.quality,
       preservedMarpLines: d.preservedMarpLines,
+      marpStyle: d.marpStyle,
     );
   }
 
@@ -471,6 +474,7 @@ extension _MarkdownParse on MarkdownService {
       cssClass: effectiveClass,
       notes: d.notes,
       preservedMarpLines: d.preservedMarpLines,
+      marpStyle: d.marpStyle,
       advanceDuration: d.advanceDuration,
       showLogo: showLogo,
       showFooter: showFooter,

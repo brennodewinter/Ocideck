@@ -68,6 +68,11 @@ const _validListStyles = {'bullets', 'numbered', 'checklist', 'richText'};
 const _supportedCommentDirectives = {
   '_class',
   '_style',
+  '_color',
+  '_backgroundColor',
+  '_backgroundImage',
+  '_header',
+  '_footer',
   'tlp',
   'advance',
   'skip',

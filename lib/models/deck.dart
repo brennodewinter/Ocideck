@@ -6,6 +6,7 @@ import 'provenance_signature.dart';
 import 'improvement_y01.dart';
 import 'seal_record.dart';
 import 'slide.dart';
+import 'marp_style.dart';
 import 'used_tool.dart';
 import 'settings.dart';
 import '../services/miauw_codec.dart';
@@ -173,6 +174,7 @@ class Deck {
   final List<Slide> slides;
   final String? projectPath;
   final ThemeProfile themeProfile;
+  final MarpStyle marpStyle;
 
   // ── General presentation metadata (stored in the markdown front matter) ──
   final String author;
@@ -395,6 +397,7 @@ class Deck {
     this.slides = const [],
     this.projectPath,
     this.themeProfile = const ThemeProfile(),
+    this.marpStyle = const MarpStyle(),
     this.author = '',
     this.organization = '',
     this.version = '',
@@ -436,6 +439,7 @@ class Deck {
     List<Slide>? slides,
     String? projectPath,
     ThemeProfile? themeProfile,
+    MarpStyle? marpStyle,
     bool clearProjectPath = false,
     String? author,
     String? organization,
@@ -480,6 +484,7 @@ class Deck {
       slides: slides ?? this.slides,
       projectPath: clearProjectPath ? null : (projectPath ?? this.projectPath),
       themeProfile: themeProfile ?? this.themeProfile,
+      marpStyle: marpStyle ?? this.marpStyle,
       author: author ?? this.author,
       organization: organization ?? this.organization,
       version: version ?? this.version,
