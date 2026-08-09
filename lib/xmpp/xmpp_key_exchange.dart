@@ -248,9 +248,12 @@ class XmppKeyExchange {
       return;
     }
     // Eigen keyshare niet installeren — de MUC reflecteert de afzender zijn
-    // eigen bericht terug, en de autoriteit heeft de epoch-sleutel al.
-    if (stanza.from != null && _isOwnPresence(stanza.from!)) return;
-
+    // eigen bericht terug, en de autoriteit heeft de epoch-sleutel al. De
+    // autoriteit staat niet in zijn eigen directory (handleDevicePresence slaat
+    // het eigen device over), dus candidates is leeg en de check hieronder dropt
+    // hem. Een nick-based check is onbetrouwbaar (#1415): de MUC-nick en de
+    // XMPP-resource hebben geen relatie, en een toevallige nick-botsing kan een
+    // andere deelnemer's keyshare incorrect droppen.
     final senderAddress = stanza.from ?? roomJid;
     final candidates = directory.devicesForAddress(senderAddress).toList();
     if (candidates.isEmpty) {
@@ -268,18 +271,6 @@ class XmppKeyExchange {
     // Geen matchende device — deze keyshare was niet voor ons. Niet een
     // fout: elke occupant trial-opent elke broadcast keyshare; alleen de
     // bedoelde ontvanger slaagt.
-  }
-
-  /// Of een `from`-adres (room@conf/nick) onze eigen nick is — de MUC
-  /// reflecteert de afzender zijn eigen bericht terug.
-  bool _isOwnPresence(String from) {
-    final slash = from.indexOf('/');
-    final nick = slash < 0 ? '' : from.substring(slash + 1);
-    final ownNick = _channel.boundJid;
-    final ownNickResource = ownNick == null
-        ? ''
-        : ownNick.substring(ownNick.indexOf('/') + 1);
-    return nick == ownNickResource && nick.isNotEmpty;
   }
 
   /// Ruim de demux-registraties op. Idempotent. De directory en de crypto
