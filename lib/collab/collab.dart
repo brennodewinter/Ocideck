@@ -34,3 +34,5 @@ export 'matrix_session_launch.dart';
 export 'matrix_snapshot.dart';
 export 'handover_coordinator.dart';
 export 'webdav_async_transport.dart';
+export '../xmpp/companion_demux.dart';
+export '../xmpp/xmpp_transport.dart';
