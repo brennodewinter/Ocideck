@@ -913,6 +913,38 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Afbeelding niet opgehaald': 'Image not fetched',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'The destination folder could not be created or written to. Check that the configured location is available.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'The configured folder is not available; the presentation has been opened in the documents folder:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'The name in this URL does not exist, or cannot be looked up. Check the URL for a typo.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'This URL redirects to a different address. Enter that address directly — we do not follow redirects, because they can bypass the security check.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'This URL points to a private or LAN address. Such addresses are not fetched, for security reasons.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'This link is not an http(s) address. Paste a link that starts with http:// or https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'This server does not use https. Use an https address — your password is sent with every request and would otherwise go over the network unencrypted.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'This endpoint does not use https. Use an https endpoint, or mark it as trusted internal — otherwise your presentations go over the network unencrypted.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Use an https address — otherwise your password goes over the network unencrypted.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Use an https endpoint, or tick "Trusted internal endpoint" — otherwise your presentations go over the network unencrypted.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'This server’s security certificate is not trusted. Check the URL or try a different source.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'The endpoint redirects to a different address — usually a wrong region or endpoint URL. Check the region and the endpoint under Settings → Storage; retrying will not help here.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'The endpoint redirects — usually a wrong region or endpoint URL. Retrying will not help here.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Saved locally, but publishing to the forge failed:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'There is no presentation at this URL (not found). Check that the link is still correct.',
+  'Video kan niet worden geladen': 'Video cannot be loaded',
   'Starthoek (graden)': 'Start angle (degrees)',
   'Percentages op de taartpunten tonen': 'Show percentages on the pie slices',
   'Nieuw hoofdstuk op een nieuwe pagina': 'New chapter on a new page',

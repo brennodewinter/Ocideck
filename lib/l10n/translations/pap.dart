@@ -732,6 +732,38 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Afbeelding niet opgehaald': 'Imagen no a wòrdu haña',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'No por a krea ni skirbi den e karpeta di destino. Kontrolá si e lokashon konfigurá ta disponibel.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'E karpeta konfigurá no ta disponibel; e presentashon a wòrdu habrí den e karpeta di dokumento:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'E nòmber den e URL aki no ta eksistí, of no por wòrdu buskí. Kontrolá e URL pa un eror di tipeo.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'E URL aki ta redirigí na un otro adrès. Yena e adrès ei direktamente — nos no ta sigui redirekshon, pasobra nan por evitá e kontrol di siguridat.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'E URL aki ta apuntá na un adrès privá of di LAN. Pa motibu di siguridat, adresnan asina no ta wòrdu haña.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'E enlace aki no ta un adrès http(s). Pega un enlace ku ta kuminsá ku http:// of https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'E servidor aki no ta usa https. Usa un adrès https — bo kontraseña ta bai ku kada petishon i sino lo bai sin enkriptashon riba e red.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'E punto final aki no ta usa https. Usa un punto final https, of marké komo konfiá interno — sino bo presentashonnan ta bai sin enkriptashon riba e red.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Usa un adrès https — sino bo kontraseña ta bai sin enkriptashon riba e red.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Usa un punto final https, of marka "Punto final interno konfiabel" — sino bo presentashonnan ta bai sin enkriptashon riba e red.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'E sertifikado di siguridat di e servidor aki no ta konfiá. Kontrolá e URL of purba un otro fuente.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'E punto final ta redirigí na un otro adrès — generalmente un region of URL di punto final robes. Kontrolá e region i e punto final na Konfigurashon → Almasenamentu; purba di nobo no ta yuda akinan.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'E punto final ta redirigí — generalmente un region of URL di punto final robes. Purba di nobo no ta yuda akinan.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Wardá lokalmente, ma publiká na e forge no a lòk:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Riba e URL aki no tin ningun presentashon (no a wòrdu haña). Kontrolá si e enlace ta bon ainda.',
+  'Video kan niet worden geladen': 'No por karga e vidio',
   'Starthoek (graden)': 'Angulo inicial (grado)',
   'Percentages op de taartpunten tonen':
       'Mustra porsentahe riba e pidanan di taart',

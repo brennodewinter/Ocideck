@@ -2750,6 +2750,38 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Afbeelding niet opgehaald': 'Görsel alınamadı',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Hedef klasör oluşturulamadı veya içine yazılamadı. Ayarlanan konumun kullanılabilir olup olmadığını denetleyin.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Ayarlanan klasör kullanılamıyor; sunum belgeler klasöründe açıldı:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Bu URL’deki ad yok veya çözümlenemiyor. URL’de yazım hatası olup olmadığını denetleyin.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Bu URL başka bir adrese yönlendiriyor. O adresi doğrudan girin — yönlendirmeleri izlemiyoruz, çünkü güvenlik denetimini atlatabilirler.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Bu URL özel veya LAN adresine işaret ediyor. Güvenlik nedeniyle bu tür adresler alınmaz.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Bu bağlantı bir http(s) adresi değil. http:// veya https:// ile başlayan bir bağlantı yapıştırın.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Bu sunucu https kullanmıyor. Bir https adresi kullanın — parolanız her istekte gönderilir ve aksi hâlde ağ üzerinden şifresiz geçer.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Bu endpoint https kullanmıyor. Bir https endpoint kullanın veya güvenilir dahili olarak işaretleyin — aksi hâlde sunumlarınız ağ üzerinden şifresiz geçer.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Bir https adresi kullanın — aksi hâlde parolanız ağ üzerinden şifresiz geçer.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Bir https endpoint kullanın veya "Güvenilir dahili endpoint" seçeneğini işaretleyin — aksi hâlde sunumlarınız ağ üzerinden şifresiz geçer.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Bu sunucunun güvenlik sertifikasına güvenilmiyor. URL’yi denetleyin veya başka bir kaynak deneyin.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Endpoint başka bir adrese yönlendiriyor — genellikle yanlış bölge veya endpoint URL’si. Bölgeyi ve endpoint’i Ayarlar → Depolama bölümünde denetleyin; burada yeniden denemek yardımcı olmaz.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Endpoint yönlendiriyor — genellikle yanlış bölge veya endpoint URL’si. Burada yeniden denemek yardımcı olmaz.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Yerel olarak kaydedildi, ancak forge’a yayımlama başarısız oldu:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Bu URL’de sunum yok (bulunamadı). Bağlantının hâlâ doğru olduğunu denetleyin.',
+  'Video kan niet worden geladen': 'Video yüklenemiyor',
   'Starthoek (graden)': 'Başlangıç açısı (derece)',
   'Percentages op de taartpunten tonen': 'Yüzdeleri pasta dilimlerinde göster',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Yeni bölüm yeni sayfada',

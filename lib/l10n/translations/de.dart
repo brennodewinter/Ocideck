@@ -732,6 +732,38 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Afbeelding niet opgehaald': 'Bild nicht abgerufen',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Der Zielordner konnte nicht erstellt oder beschrieben werden. Prüfe, ob der eingestellte Speicherort verfügbar ist.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Der eingestellte Ordner ist nicht verfügbar; die Präsentation wurde im Dokumentenordner geöffnet:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Der Name in dieser URL existiert nicht oder ist nicht auflösbar. Prüfe die URL auf einen Tippfehler.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Diese URL leitet auf eine andere Adresse um. Gib diese Adresse direkt ein — Weiterleitungen folgen wir nicht, weil sie die Sicherheitsprüfung umgehen können.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Diese URL verweist auf eine private oder LAN-Adresse. Solche Adressen werden aus Sicherheitsgründen nicht abgerufen.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Dieser Link ist keine http(s)-Adresse. Füge einen Link ein, der mit http:// oder https:// beginnt.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Dieser Server verwendet kein https. Verwende eine https-Adresse — dein Passwort wird bei jeder Anfrage mitgesendet und ginge sonst unverschlüsselt über das Netzwerk.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Dieser Endpunkt verwendet kein https. Verwende einen https-Endpunkt oder markiere ihn als vertrauenswürdig intern — sonst gehen deine Präsentationen unverschlüsselt über das Netzwerk.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Verwende eine https-Adresse — sonst geht dein Passwort unverschlüsselt über das Netzwerk.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Verwende einen https-Endpunkt oder setze das Häkchen bei "Vertrauenswürdiger interner Endpunkt" — sonst gehen deine Präsentationen unverschlüsselt über das Netzwerk.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Dem Sicherheitszertifikat dieses Servers wird nicht vertraut. Prüfe die URL oder versuche eine andere Quelle.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Der Endpunkt leitet auf eine andere Adresse um — meist eine falsche Region oder Endpunkt-URL. Prüfe die Region und den Endpunkt unter Einstellungen → Speicher; erneutes Versuchen hilft hier nicht.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Der Endpunkt leitet um — meist eine falsche Region oder Endpunkt-URL. Erneutes Versuchen hilft hier nicht.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Lokal gespeichert, aber das Veröffentlichen auf der Forge ist fehlgeschlagen:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Unter dieser URL gibt es keine Präsentation (nicht gefunden). Prüfe, ob der Link noch stimmt.',
+  'Video kan niet worden geladen': 'Video kann nicht geladen werden',
   'Starthoek (graden)': 'Startwinkel (Grad)',
   'Percentages op de taartpunten tonen':
       'Prozentwerte auf den Tortensegmenten anzeigen',

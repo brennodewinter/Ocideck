@@ -1777,6 +1777,38 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Afbeelding niet opgehaald': 'A kép nem tölthető le',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'A célmappát nem sikerült létrehozni vagy írni. Ellenőrizd, hogy a beállított hely elérhető-e.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'A beállított mappa nem érhető el; a prezentáció a dokumentumok mappájában nyílt meg:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Az ebben az URL-ben szereplő név nem létezik, vagy nem kereshető ki. Ellenőrizd, nincs-e elgépelés az URL-ben.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Ez az URL másik címre irányít át. Add meg közvetlenül azt a címet — az átirányításokat nem követjük, mert megkerülhetik a biztonsági ellenőrzést.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Ez az URL privát vagy LAN-címre mutat. Biztonsági okokból az ilyen címeket nem tölti le a rendszer.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Ez a hivatkozás nem http(s)-cím. Illessz be egy http:// vagy https:// kezdetű hivatkozást.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Ez a kiszolgáló nem használ https-t. Használj https-címet — a jelszavad minden kéréssel elküldődik, és egyébként titkosítás nélkül haladna át a hálózaton.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Ez a végpont nem használ https-t. Használj https-végpontot, vagy jelöld megbízható belsőként — különben a prezentációid titkosítás nélkül haladnak át a hálózaton.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Használj https-címet — különben a jelszavad titkosítás nélkül halad át a hálózaton.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Használj https-végpontot, vagy jelöld be a "Megbízható belső végpont" lehetőséget — különben a prezentációid titkosítás nélkül haladnak át a hálózaton.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Ennek a kiszolgálónak a biztonsági tanúsítványa nem megbízható. Ellenőrizd az URL-t, vagy próbálj másik forrást.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'A végpont másik címre irányít át — általában rossz régió vagy végpont-URL miatt. Ellenőrizd a régiót és a végpontot a Beállítások → Tárhely alatt; az újrapróbálkozás itt nem segít.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'A végpont átirányít — általában rossz régió vagy végpont-URL miatt. Az újrapróbálkozás itt nem segít.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Helyileg mentve, de a közzététel a forge-ba nem sikerült:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Ezen az URL-en nincs prezentáció (nem található). Ellenőrizd, hogy a hivatkozás még helyes-e.',
+  'Video kan niet worden geladen': 'A videó nem tölthető be',
   'Starthoek (graden)': 'Kezdőszög (fok)',
   'Percentages op de taartpunten tonen':
       'Százalékok megjelenítése a körcikkeken',

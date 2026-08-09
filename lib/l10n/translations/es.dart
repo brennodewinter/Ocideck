@@ -729,6 +729,38 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Afbeelding niet opgehaald': 'Imagen no obtenida',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'No se pudo crear la carpeta de destino ni escribir en ella. Comprueba que la ubicación configurada está disponible.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'La carpeta configurada no está disponible; la presentación se ha abierto en la carpeta de documentos:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'El nombre de esta URL no existe o no se puede resolver. Comprueba si hay una errata en la URL.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Esta URL redirige a otra dirección. Introduce esa dirección directamente: no seguimos redirecciones, porque pueden eludir la comprobación de seguridad.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Esta URL apunta a una dirección privada o de LAN. Por razones de seguridad, esas direcciones no se obtienen.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Este enlace no es una dirección http(s). Pega un enlace que empiece por http:// o https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Este servidor no usa https. Usa una dirección https — tu contraseña se envía en cada solicitud y, de lo contrario, circularía sin cifrar por la red.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Este punto de conexión no usa https. Usa un punto de conexión https o márcalo como interno de confianza — de lo contrario, tus presentaciones circulan sin cifrar por la red.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Usa una dirección https — de lo contrario, tu contraseña circula sin cifrar por la red.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Usa un punto de conexión https o marca "Punto de conexión interno de confianza" — de lo contrario, tus presentaciones circulan sin cifrar por la red.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'El certificado de seguridad de este servidor no es de confianza. Comprueba la URL o prueba con otra fuente.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'El punto de conexión redirige a otra dirección — normalmente una región o una URL del punto de conexión incorrectas. Comprueba la región y el punto de conexión en Ajustes → Almacenamiento; reintentar no ayuda aquí.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'El punto de conexión redirige — normalmente una región o una URL del punto de conexión incorrectas. Reintentar no ayuda aquí.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Guardado localmente, pero la publicación en la forja falló:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'No hay ninguna presentación en esta URL (no encontrada). Comprueba que el enlace siga siendo correcto.',
+  'Video kan niet worden geladen': 'No se puede cargar el vídeo',
   'Starthoek (graden)': 'Ángulo inicial (grados)',
   'Percentages op de taartpunten tonen':
       'Mostrar los porcentajes en las porciones',

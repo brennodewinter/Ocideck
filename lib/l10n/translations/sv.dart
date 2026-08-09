@@ -1772,6 +1772,38 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afbeelding niet opgehaald': 'Bilden hämtades inte',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Målmappen kunde inte skapas eller skrivas till. Kontrollera att den inställda platsen är tillgänglig.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Den inställda mappen är inte tillgänglig; presentationen har öppnats i mappen Dokument:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Namnet i denna URL finns inte eller går inte att slå upp. Kontrollera URL:en för ett skrivfel.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Denna URL omdirigerar till en annan adress. Ange den adressen direkt — vi följer inte omdirigeringar, eftersom de kan kringgå säkerhetskontrollen.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Denna URL pekar på en privat adress eller LAN-adress. Av säkerhetsskäl hämtas sådana adresser inte.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Den här länken är inte en http(s)-adress. Klistra in en länk som börjar med http:// eller https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Den här servern använder inte https. Använd en https-adress — ditt lösenord skickas med vid varje begäran och skulle annars gå okrypterat över nätverket.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Den här slutpunkten använder inte https. Använd en https-slutpunkt eller markera den som betrodd intern — annars går dina presentationer okrypterat över nätverket.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Använd en https-adress — annars går ditt lösenord okrypterat över nätverket.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Använd en https-slutpunkt eller kryssa i "Betrodd intern slutpunkt" — annars går dina presentationer okrypterat över nätverket.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Den här serverns säkerhetscertifikat är inte betrott. Kontrollera URL:en eller prova en annan källa.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Slutpunkten omdirigerar till en annan adress — oftast fel region eller slutpunkts-URL. Kontrollera regionen och slutpunkten under Inställningar → Lagring; att försöka igen hjälper inte här.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Slutpunkten omdirigerar — oftast fel region eller slutpunkts-URL. Att försöka igen hjälper inte här.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Sparat lokalt, men publiceringen till forgen misslyckades:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Det finns ingen presentation på denna URL (hittades inte). Kontrollera att länken fortfarande stämmer.',
+  'Video kan niet worden geladen': 'Videon kan inte läsas in',
   'Starthoek (graden)': 'Startvinkel (grader)',
   'Percentages op de taartpunten tonen': 'Visa procent på tårtbitarna',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nytt kapitel på en ny sida',

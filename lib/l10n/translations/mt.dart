@@ -1795,6 +1795,38 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Afbeelding niet opgehaald': 'L-immaġni ma nġibitx',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Il-folder tad-destinazzjoni ma setax jinħoloq jew jinkiteb fih. Iċċekkja li l-post konfigurat huwa disponibbli.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Il-folder konfigurat mhuwiex disponibbli; il-preżentazzjoni nfetħet fil-folder tad-dokumenti:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'L-isem f’dan il-URL ma jeżistix, jew ma jistax jinstab. Iċċekkja l-URL għal żball tal-ittajpjar.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Dan il-URL jidderieġi lejn indirizz ieħor. Daħħal dak l-indirizz direttament — ma nsegwux ridirezzjonijiet, għax jistgħu jevitaw il-kontroll tas-sigurtà.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Dan il-URL jippunta lejn indirizz privat jew tal-LAN. Għal raġunijiet ta’ sigurtà, indirizzi bħal dawn ma jinġibux.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Din il-ħolqa mhijiex indirizz http(s). Waħħal ħolqa li tibda b’http:// jew https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Dan is-server ma jużax https. Uża indirizz https — il-password tiegħek tintbagħat ma’ kull talba u inkella tgħaddi mhux ikkriptata fuq in-netwerk.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Dan il-punt tat-tmiem ma jużax https. Uża punt tat-tmiem https, jew immarkah bħala intern fdat — inkella l-preżentazzjonijiet tiegħek jgħaddu mhux ikkriptati fuq in-netwerk.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Uża indirizz https — inkella l-password tiegħek tgħaddi mhux ikkriptata fuq in-netwerk.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Uża punt tat-tmiem https, jew immarka "Punt tat-tmiem intern fdat" — inkella l-preżentazzjonijiet tiegħek jgħaddu mhux ikkriptati fuq in-netwerk.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Iċ-ċertifikat tas-sigurtà ta’ dan is-server mhuwiex fdat. Iċċekkja l-URL jew ipprova sors ieħor.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Il-punt tat-tmiem jidderieġi lejn indirizz ieħor — ġeneralment reġjun jew URL tal-punt tat-tmiem żbaljati. Iċċekkja r-reġjun u l-punt tat-tmiem taħt Settings → Ħażna; li terġa’ tipprova ma jgħinx hawn.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Il-punt tat-tmiem jidderieġi — ġeneralment reġjun jew URL tal-punt tat-tmiem żbaljati. Li terġa’ tipprova ma jgħinx hawn.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Ġie salvat lokalment, iżda l-pubblikazzjoni fil-forge falliet:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'F’dan il-URL m’hemm l-ebda preżentazzjoni (ma nstabitx). Iċċekkja li l-ħolqa għadha korretta.',
+  'Video kan niet worden geladen': 'Il-vidjo ma jistax jitgħabba',
   'Starthoek (graden)': 'Angolu tal-bidu (gradi)',
   'Percentages op de taartpunten tonen':
       'Uri l-persentaġġi fuq il-flieli tat-torta',

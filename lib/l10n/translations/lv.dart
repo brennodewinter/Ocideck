@@ -1772,6 +1772,38 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Afbeelding niet opgehaald': 'Attēls nav iegūts',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Mērķa mapi neizdevās izveidot vai tajā ierakstīt. Pārbaudiet, vai iestatītā atrašanās vieta ir pieejama.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Iestatītā mape nav pieejama; prezentācija atvērta dokumentu mapē:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Šajā URL norādītais nosaukums neeksistē vai nav atrodams. Pārbaudiet, vai URL nav drukas kļūdas.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Šis URL novirza uz citu adresi. Ievadiet šo adresi tieši — mēs nesekojam novirzēm, jo tās var apiet drošības pārbaudi.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Šis URL norāda uz privātu vai LAN adresi. Drošības apsvērumu dēļ šādas adreses netiek iegūtas.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Šī saite nav http(s) adrese. Ielīmējiet saiti, kas sākas ar http:// vai https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Šis serveris neizmanto https. Izmantojiet https adresi — jūsu parole tiek nosūtīta ar katru pieprasījumu un citādi tīklā ietu nešifrēta.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Šis galapunkts neizmanto https. Izmantojiet https galapunktu vai atzīmējiet to kā uzticamu iekšējo — citādi jūsu prezentācijas tīklā ies nešifrētas.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Izmantojiet https adresi — citādi jūsu parole tīklā ies nešifrēta.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Izmantojiet https galapunktu vai atzīmējiet "Uzticams iekšējais galapunkts" — citādi jūsu prezentācijas tīklā ies nešifrētas.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Šī servera drošības sertifikāts nav uzticams. Pārbaudiet URL vai izmēģiniet citu avotu.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Galapunkts novirza uz citu adresi — parasti nepareizs reģions vai galapunkta URL. Pārbaudiet reģionu un galapunktu sadaļā Iestatījumi → Krātuve; atkārtošana šeit nepalīdzēs.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Galapunkts novirza — parasti nepareizs reģions vai galapunkta URL. Atkārtošana šeit nepalīdzēs.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Saglabāts lokāli, taču publicēšana forge neizdevās:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Šajā URL nav prezentācijas (nav atrasta). Pārbaudiet, vai saite joprojām ir pareiza.',
+  'Video kan niet worden geladen': 'Video nevar ielādēt',
   'Starthoek (graden)': 'Sākuma leņķis (grādi)',
   'Percentages op de taartpunten tonen': 'Rādīt procentus riņķa sektoros',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Jauna nodaļa jaunā lappusē',

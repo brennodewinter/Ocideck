@@ -1773,6 +1773,38 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Afbeelding niet opgehaald': 'Gambar tidak diambil',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Folder tujuan tidak dapat dibuat atau ditulisi. Periksa apakah lokasi yang diatur tersedia.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Folder yang diatur tidak tersedia; presentasi dibuka di folder dokumen:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Nama pada URL ini tidak ada, atau tidak dapat dicari. Periksa URL dari salah ketik.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'URL ini mengalihkan ke alamat lain. Masukkan alamat itu secara langsung — kami tidak mengikuti pengalihan, karena dapat melewati pemeriksaan keamanan.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'URL ini mengarah ke alamat privat atau LAN. Demi keamanan, alamat semacam itu tidak diambil.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Tautan ini bukan alamat http(s). Tempel tautan yang diawali http:// atau https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Server ini tidak menggunakan https. Gunakan alamat https — kata sandi Anda ikut terkirim pada setiap permintaan dan jika tidak akan melintasi jaringan tanpa enkripsi.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Endpoint ini tidak menggunakan https. Gunakan endpoint https, atau tandai sebagai internal tepercaya — jika tidak, presentasi Anda melintasi jaringan tanpa enkripsi.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Gunakan alamat https — jika tidak, kata sandi Anda melintasi jaringan tanpa enkripsi.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Gunakan endpoint https, atau centang "Titik akhir internal tepercaya" — jika tidak, presentasi Anda melintasi jaringan tanpa enkripsi.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Sertifikat keamanan server ini tidak tepercaya. Periksa URL atau coba sumber lain.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Endpoint mengalihkan ke alamat lain — biasanya region atau URL endpoint yang salah. Periksa region dan endpoint di Pengaturan → Penyimpanan; mencoba lagi tidak membantu di sini.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Endpoint mengalihkan — biasanya region atau URL endpoint yang salah. Mencoba lagi tidak membantu di sini.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Disimpan secara lokal, tetapi memublikasikan ke forge gagal:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Tidak ada presentasi di URL ini (tidak ditemukan). Periksa apakah tautannya masih benar.',
+  'Video kan niet worden geladen': 'Video tidak dapat dimuat',
   'Starthoek (graden)': 'Sudut awal (derajat)',
   'Percentages op de taartpunten tonen': 'Tampilkan persentase pada irisan pai',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Bab baru pada halaman baru',

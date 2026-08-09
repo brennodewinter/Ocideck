@@ -1748,6 +1748,38 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Afbeelding niet opgehaald': 'mIllogh Suqlu\'be\'',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'DoS pa\' chenmoHlu\'laHbe\' ghap ghItlhlu\'laHbe\'. wIvlu\'bogh Daq lo\'laH\'a\', yI\'ol.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'lo\'laHbe\' wIvlu\'bogh pa\'; De\' pa\'Daq presentation poSmoHlu\'pu\':',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'URLvamDaq pong tu\'lu\'be\', ghap nejlaHbe\'. URL yIlaD; qelI\'qam Do\'Ha\' yInej.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'URLvam latlh inscription-Daq ngeH. inscription yIchel — ngeHmeH mIw wItlha\'be\', \'ej Hung waw\' buSHa\'laH.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'privé ghap LAN inscription \'oS URLvam. Hung meqmey, inscriptionmey vam Suqlu\'be\'.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'http(s) inscription \'oSbe\' rarwI\'vam. http:// ghap https:// taghbogh rarwI\' yIlan.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'https lo\'be\' pat vam. https inscription yIlo\' — Hoch tlhobDaq ngeHlu\' mu\'wIjlIj, ngaQHa\'chugh net yorlaH.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'https lo\'be\' endpointvam. https endpoint yIlo\', ghap voqlu\'bogh qoDDaq yIper — ngaQHa\'chugh net yor cha\'navmeylIj.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'https inscription yIlo\' — ngaQHa\'chugh net yor mu\'wIjlIj.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'https endpoint yIlo\', ghap "vItlhorghqutlu\' internal Dech" yIwIv — ngaQHa\'chugh net yor cha\'navmeylIj.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'pat vam Hung teywI\' voqlu\'be\'. URL yIlaD ghap latlh Sommey yInej.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'latlh inscription-Daq ngeH endpoint — motlh Sep muvHa\' ghap endpoint URL muvHa\'. Settings → Storage-Daq Sep endpoint je yIlaD; wIvqa\'chugh QaHbe\'.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'ngeH endpoint — motlh Sep muvHa\' ghap endpoint URL muvHa\'. wIvqa\'chugh QaHbe\'.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'nIteb Savlu\'pu\', \'ach forge-Daq ngeHmeH luj:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'URLvamDaq presentation tu\'lu\'be\' (Sambe\'lu\'). rarwI\' lugh\'a\' yI\'ol.',
+  'Video kan niet worden geladen': 'HaSta laDlaHbe\'lu\'',
   'Starthoek (graden)': 'taghbogh jIrtaHghach (mI\')',
   'Percentages op de taartpunten tonen': '\'ay\'meyDaq vatlhvI\'mey \'ang',
   'Nieuw hoofdstuk op een nieuwe pagina': 'nav chu\'Daq \'ay\' chu\'',

@@ -1790,6 +1790,38 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afbeelding niet opgehaald': 'Imaginea nu a fost preluată',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Dosarul de destinație nu a putut fi creat sau scris. Verifică dacă locația configurată este disponibilă.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Dosarul configurat nu este disponibil; prezentarea a fost deschisă în dosarul de documente:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Numele din acest URL nu există sau nu poate fi căutat. Verifică dacă adresa URL conține o greșeală de tastare.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Acest URL redirecționează către o altă adresă. Introdu direct acea adresă — nu urmăm redirecționări, deoarece pot ocoli verificarea de securitate.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Acest URL indică o adresă privată sau de LAN. Din motive de securitate, astfel de adrese nu sunt preluate.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Acest link nu este o adresă http(s). Lipește un link care începe cu http:// sau https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Acest server nu folosește https. Folosește o adresă https — parola ta este trimisă la fiecare cerere și altfel ar circula necriptată prin rețea.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Acest punct final nu folosește https. Folosește un punct final https sau marchează-l ca intern de încredere — altfel prezentările tale circulă necriptate prin rețea.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Folosește o adresă https — altfel parola ta circulă necriptată prin rețea.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Folosește un punct final https sau bifează "Punct final intern de încredere" — altfel prezentările tale circulă necriptate prin rețea.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Certificatul de securitate al acestui server nu este de încredere. Verifică adresa URL sau încearcă altă sursă.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Punctul final redirecționează către o altă adresă — de obicei o regiune sau un URL al punctului final greșite. Verifică regiunea și punctul final în Setări → Stocare; reîncercarea nu ajută aici.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Punctul final redirecționează — de obicei o regiune sau un URL al punctului final greșite. Reîncercarea nu ajută aici.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Salvat local, dar publicarea pe forge a eșuat:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Nu există nicio prezentare la acest URL (nu a fost găsită). Verifică dacă linkul este încă valid.',
+  'Video kan niet worden geladen': 'Videoclipul nu poate fi încărcat',
   'Starthoek (graden)': 'Unghi inițial (grade)',
   'Percentages op de taartpunten tonen': 'Afișează procentele pe felii',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Capitol nou pe o pagină nouă',

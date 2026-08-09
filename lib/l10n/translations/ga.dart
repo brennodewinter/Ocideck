@@ -1808,6 +1808,38 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Afbeelding niet opgehaald': 'Íomhá gan aisghabháil',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Níorbh fhéidir an fillteán sprice a chruthú ná scríobh chuige. Seiceáil go bhfuil an suíomh cumraithe ar fáil.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Níl an fillteán cumraithe ar fáil; osclaíodh an cur i láthair i bhfillteán na ndoiciméad:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Níl an t-ainm san URL seo ann, nó ní féidir é a chuardach. Seiceáil an URL le haghaidh botúin chlóscríofa.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Atreoraíonn an URL seo chuig seoladh eile. Cuir an seoladh sin isteach go díreach — ní leanaimid atreoruithe, mar is féidir leo an tseiceáil slándála a sheachaint.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Díríonn an URL seo ar sheoladh príobháideach nó LAN. Ar chúiseanna slándála, ní aisghabhtar seoltaí den sórt sin.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Ní seoladh http(s) é an nasc seo. Greamaigh nasc a thosaíonn le http:// nó https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Ní úsáideann an freastalaí seo https. Úsáid seoladh https — seoltar do phasfhocal le gach iarratas agus rachadh sé thar an líonra gan chriptiú murach sin.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Ní úsáideann an críochphointe seo https. Úsáid críochphointe https, nó marcáil é mar inmheánach iontaofa — nó rachaidh do chuir i láthair thar an líonra gan chriptiú.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Úsáid seoladh https — nó rachaidh do phasfhocal thar an líonra gan chriptiú.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Úsáid críochphointe https, nó tic "Críochphointe inmheánach iontaofa" — nó rachaidh do chuir i láthair thar an líonra gan chriptiú.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Níl muinín as teastas slándála an fhreastalaí seo. Seiceáil an URL nó bain triail as foinse eile.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Atreoraíonn an críochphointe chuig seoladh eile — réigiún nó URL críochphointe mícheart de ghnáth. Seiceáil an réigiún agus an críochphointe faoi Socruithe → Stóráil; ní chabhraíonn atriail anseo.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Atreoraíonn an críochphointe — réigiún nó URL críochphointe mícheart de ghnáth. Ní chabhraíonn atriail anseo.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Sábháilte go logánta, ach theip ar an bhfoilsiú chuig an forge:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Níl aon chur i láthair ag an URL seo (gan aimsiú). Seiceáil an bhfuil an nasc fós ceart.',
+  'Video kan niet worden geladen': 'Ní féidir an físeán a lódáil',
   'Starthoek (graden)': 'Uillinn tosaigh (céimeanna)',
   'Percentages op de taartpunten tonen':
       'Taispeáin céatadáin ar shlisní na píóige',

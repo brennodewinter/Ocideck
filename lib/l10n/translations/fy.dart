@@ -733,6 +733,38 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Afbeelding niet opgehaald': 'Ofbylding net ophelle',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'De doelmap koe net oanmakke of beskreaun wurde. Kontrolearje oft de ynstelde lokaasje beskikber is.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'De ynstelde map is net beskikber; de presintaasje is iepene yn de dokumintemap:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'De namme yn dizze URL bestiet net, of is net op te sykjen. Kontrolearje de URL op in typflater.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Dizze URL stjoert troch nei in oar adres. Folje dat adres streekrjocht yn — in trochferwizing folgje wy net, want dy kin de feilichheidskontrôle omsile.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Dizze URL wiist nei in privee- of LAN-adres. Sokke adressen wurde om feilichheidsredenen net ophelle.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Dizze keppeling is gjin http(s)-adres. Plak in keppeling dy’t mei http:// of https:// begjint.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Dizze server brûkt gjin https. Brûk in https-adres — dyn wachtwurd giet by elk fersyk mei en soe oars ûnfersifere oer it netwurk gean.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Dit einpunt brûkt gjin https. Brûk in https-einpunt, of markearje it as fertroud yntern — oars geane dyn presintaasjes ûnfersifere oer it netwurk.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Brûk in https-adres — oars giet dyn wachtwurd ûnfersifere oer it netwurk.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Brûk in https-einpunt, of finkje "Fertroud yntern einpunt" oan — oars geane dyn presintaasjes ûnfersifere oer it netwurk.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'It befeiligingssertifikaat fan dizze server wurdt net fertroud. Kontrolearje de URL of probearje in oare boarne.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'It einpunt stjoert troch nei in oar adres — meastal in ferkearde regio of einpunt-URL. Kontrolearje de regio en it einpunt by Ynstellingen → Opslach; opnij besykje helpt hjir net.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'It einpunt stjoert troch — meastal in ferkearde regio of einpunt-URL. Opnij besykje helpt hjir net.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Lokaal bewarre, mar publisearjen nei de forge is mislearre:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Op dizze URL stiet gjin presintaasje (net fûn). Kontrolearje oft de keppeling noch kloppet.',
+  'Video kan niet worden geladen': 'Fideo kin net laden wurde',
   'Starthoek (graden)': 'Begjinhoeke (graden)',
   'Percentages op de taartpunten tonen':
       'Persintaazjes op \'e taartpunten toane',

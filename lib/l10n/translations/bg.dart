@@ -1795,6 +1795,38 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Afbeelding niet opgehaald': 'Изображението не е извлечено',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Целевата папка не можа да бъде създадена или записана. Проверете дали зададеното местоположение е налично.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Зададената папка не е налична; презентацията е отворена в папката с документи:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Името в този URL адрес не съществува или не може да бъде намерено. Проверете URL адреса за печатна грешка.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Този URL адрес пренасочва към друг адрес. Въведете този адрес директно — не следваме пренасочвания, защото могат да заобиколят проверката за сигурност.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Този URL адрес сочи към частен или LAN адрес. По съображения за сигурност такива адреси не се извличат.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Тази връзка не е http(s) адрес. Поставете връзка, която започва с http:// или https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Този сървър не използва https. Използвайте https адрес — паролата ви се изпраща при всяка заявка и иначе би преминала без криптиране през мрежата.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Тази крайна точка не използва https. Използвайте https крайна точка или я отбележете като доверена вътрешна — иначе презентациите ви преминават без криптиране през мрежата.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Използвайте https адрес — иначе паролата ви преминава без криптиране през мрежата.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Използвайте https крайна точка или отметнете "Надеждна вътрешна крайна точка" — иначе презентациите ви преминават без криптиране през мрежата.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Сертификатът за сигурност на този сървър не е доверен. Проверете URL адреса или опитайте друг източник.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Крайната точка пренасочва към друг адрес — обикновено грешен регион или URL на крайната точка. Проверете региона и крайната точка в Настройки → Хранилище; повторният опит тук не помага.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Крайната точка пренасочва — обикновено грешен регион или URL на крайната точка. Повторният опит тук не помага.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Запазено локално, но публикуването във форджа не бе успешно:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'На този URL адрес няма презентация (не е намерена). Проверете дали връзката все още е валидна.',
+  'Video kan niet worden geladen': 'Видеото не може да се зареди',
   'Starthoek (graden)': 'Начален ъгъл (градуси)',
   'Percentages op de taartpunten tonen':
       'Показване на процентите върху секторите',

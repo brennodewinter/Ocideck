@@ -1779,6 +1779,38 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Afbeelding niet opgehaald': 'Slika nije dohvaćena',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Odredišnu mapu nije bilo moguće stvoriti ni u nju zapisati. Provjerite je li postavljena lokacija dostupna.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Postavljena mapa nije dostupna; prezentacija je otvorena u mapi s dokumentima:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Naziv u ovom URL-u ne postoji ili se ne može pronaći. Provjerite ima li u URL-u tipfelera.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Ovaj URL preusmjerava na drugu adresu. Unesite tu adresu izravno — preusmjeravanja ne slijedimo jer mogu zaobići sigurnosnu provjeru.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Ovaj URL upućuje na privatnu ili LAN adresu. Iz sigurnosnih razloga takve se adrese ne dohvaćaju.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Ova poveznica nije http(s) adresa. Zalijepite poveznicu koja počinje s http:// ili https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Ovaj poslužitelj ne koristi https. Upotrijebite https adresu — vaša se lozinka šalje sa svakim zahtjevom i inače bi išla nešifrirano preko mreže.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Ova krajnja točka ne koristi https. Upotrijebite https krajnju točku ili je označite kao pouzdanu internu — inače vaše prezentacije idu nešifrirano preko mreže.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Upotrijebite https adresu — inače vaša lozinka ide nešifrirano preko mreže.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Upotrijebite https krajnju točku ili označite "Pouzdana interna krajnja točka" — inače vaše prezentacije idu nešifrirano preko mreže.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Sigurnosni certifikat ovog poslužitelja nije pouzdan. Provjerite URL ili pokušajte s drugim izvorom.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Krajnja točka preusmjerava na drugu adresu — obično pogrešna regija ili URL krajnje točke. Provjerite regiju i krajnju točku u Postavke → Pohrana; ponovni pokušaj ovdje ne pomaže.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Krajnja točka preusmjerava — obično pogrešna regija ili URL krajnje točke. Ponovni pokušaj ovdje ne pomaže.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Spremljeno lokalno, ali objava na forge nije uspjela:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Na ovom URL-u nema prezentacije (nije pronađena). Provjerite je li poveznica još ispravna.',
+  'Video kan niet worden geladen': 'Videozapis nije moguće učitati',
   'Starthoek (graden)': 'Početni kut (stupnjevi)',
   'Percentages op de taartpunten tonen': 'Prikaži postotke na isječcima',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Novo poglavlje na novoj stranici',
