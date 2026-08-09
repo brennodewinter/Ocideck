@@ -123,6 +123,12 @@ class FakeMucChannel implements XmppStanzaChannel {
   final _reconnected = StreamController<void>.broadcast();
   bool _closed = false;
 
+  /// Optionele onderschepping van uitgaande stanzas vóór routing — voor
+  /// tests die de wire-form willen inspecteren (bijv. de recipient-blinded
+  /// keyshare). De callback krijgt de stanza te zien; daarna gaat hij normaal
+  /// de hub in. Niet voor productie — test-only.
+  void Function(Stanza)? intercept;
+
   @override
   String? get boundJid => '${_hub.roomJid}/$nick';
 
@@ -136,6 +142,7 @@ class FakeMucChannel implements XmppStanzaChannel {
   @override
   void sendStanza(Stanza stanza) {
     if (_closed) return;
+    intercept?.call(stanza);
     _hub._routeOut(stanza, this);
   }
 
