@@ -227,6 +227,32 @@ void main() {
   );
 
   test(
+    'a presence without a resource/nick is dropped, not added to the roster (#1426)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+      final joining = muc.join();
+      ch.inject(_presence('me', codes: ['110']));
+      await joining;
+
+      // Een presence van room@conf (zonder /nick) — misvormd, geen occupant.
+      ch.inject(
+        Stanza.parse(
+          '<presence from="$_room">'
+          '<x xmlns="$_mucUser">'
+          '<item affiliation="member" role="participant"/>'
+          '</x></presence>',
+        ),
+      );
+      await Future<void>.delayed(Duration.zero);
+
+      // Geen phantom-entry met nick "" in het roster.
+      expect(muc.roster.any((o) => o.nick.isEmpty), isFalse);
+      await muc.leave();
+    },
+  );
+
+  test(
     'rejoin after leave succeeds — XmppMuc is reusable (#1421)',
     () async {
       final ch = FakeChannel();

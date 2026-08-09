@@ -194,6 +194,10 @@ class XmppMuc {
     final from = stanza.from;
     if (from == null || _bareJid(from) != roomJid) return; // only this room
     final occNick = _resourceOf(from);
+    // Een MUC-presence zonder resource/nick is misvormd — de MUC stuurt altijd
+    // room@service/nick. Een presence zonder nick kan geen occupant zijn en
+    // zou een phantom-entry met key "" toevoegen aan het roster (#1426).
+    if (occNick.isEmpty) return;
 
     if (stanza.type == 'error') {
       // Only an error DURING join is a join failure. A stray error-presence
