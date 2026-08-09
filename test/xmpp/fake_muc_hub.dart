@@ -27,15 +27,27 @@ class FakeMucHub {
 
   final List<FakeMucChannel> _members = [];
 
+  /// De laatste presence-stanza per nick — een echte MUC (XEP-0045 §7.2.2)
+  /// stuurt een newcomer de presence van alle bestaande occupants. De fake
+  /// houdt ze bij en replayt ze bij [join], zodat een test die de host vóór
+  /// de guest opzet (en de host zijn device-keys publiceert vóór de guest's
+  /// demux subscribeert) de host-presence alsnog aflevert.
+  final Map<String, Stanza> _lastPresence = {};
+
   /// Join de MUC als [nick] en krijg een kanaal gebonden aan dit lid. De
   /// `boundJid` is `roomJid/nick`. Twee joins met dezelfde nick zijn een
-  /// fout — een MUC handhaft unieke nicks.
+  /// fout — een MUC handhaft unieke nicks. Een newcomer krijgt de presence
+  /// van alle bestaande occupants geleverd (XEP-0045 §7.2.2).
   FakeMucChannel join(String nick) {
     if (_members.any((m) => m.nick == nick)) {
       throw StateError('FakeMucHub: nick "$nick" already joined');
     }
     final ch = FakeMucChannel._(this, nick);
     _members.add(ch);
+    // Replay bestaande occupants' presence naar de newcomer (XEP-0045 §7.2.2).
+    for (final existing in _lastPresence.entries) {
+      ch._deliver(existing.value);
+    }
     return ch;
   }
 
@@ -93,6 +105,7 @@ class FakeMucHub {
           id: stanza.id,
           children: stanza.children,
         );
+        _lastPresence[from.nick] = reflected;
         for (final m in _active.toList()) {
           m._deliver(reflected);
         }
