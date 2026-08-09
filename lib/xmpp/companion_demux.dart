@@ -42,6 +42,12 @@ class CompanionDemux {
   late final StreamSubscription<Stanza> _sub;
   bool _disposed = false;
 
+  /// Seriële verwerkings-queue — elke stanza's handler wordt pas gestart nadat
+  /// de vorige is voltooid. Voorkomt CPU-overspoiling door een vloed gelijktijdige
+  /// crypto-handlers (#1420). Een uitzondering in één handler breekt de chain
+  /// niet (catchError per stanza).
+  Future<void> _queue = Future<void>.value();
+
   /// Registreer [handler] voor [namespace]. Elke inbound stanza met een child
   /// in die namespace wordt ernaar gerouteerd. Eén namespace, één handler —
   /// een tweede registratie overschrijft de eerste (de laatste wint).
@@ -55,30 +61,37 @@ class CompanionDemux {
 
   void _onStanza(Stanza stanza) {
     if (_disposed) return;
-    // Vind het eerste child-element met een xmlns en routeer naar de handler.
-    // De stanza kan meerdere children hebben (bijv. een `body` naast de
-    // OciDeck-payload), maar de OciDeck-namespace is altijd het onderscheidende
-    // kenmerk — zoek het eerste child met een bekende namespace.
-    for (final child in stanza.children) {
-      final ns = _namespaceOf(child);
-      if (ns == null) continue;
-      final handler = _handlers[ns];
-      if (handler != null) {
-        // ponytail: een uitzondering in een handler mag de demux niet
-        // stilleggen — log en ga door, als een tweede namespace-brick niet
-        // mag blokkeren omdat de eerste een corrupte stanza kreeg.
-        handler(
-          stanza,
-        ).catchError((Object e) => logWarning('xmpp.demux.handler', e));
-        return;
+    // Seriële verwerking: keten elke stanza aan de vorige (#1420). Dit beperkt
+    // gelijktijdigheid tot 1 — een vloed stanzas start geen vloed gelijktijdige
+    // crypto-handlers (AEAD-decryptie, Ed25519-verificatie). De afruil is dat
+    // een trage handler (zware snapshot-reassemblage) latere stanzas vertraagt,
+    // maar dat is acceptabeler dan een onresponsieve app.
+    _queue = _queue.then((_) async {
+      if (_disposed) return;
+      // Vind het eerste child-element met een xmlns en routeer naar de handler.
+      for (final child in stanza.children) {
+        final ns = _namespaceOf(child);
+        if (ns == null) continue;
+        final handler = _handlers[ns];
+        if (handler != null) {
+          // ponytail: een uitzondering in een handler mag de demux niet
+          // stilleggen — log en ga door, als een tweede namespace-brick niet
+          // mag blokkeren omdat de eerste een corrupte stanza kreeg.
+          try {
+            await handler(stanza);
+          } catch (e) {
+            logWarning('xmpp.demux.handler', e);
+          }
+          return;
+        }
       }
-    }
-    // Onbekende namespace — fail-closed: log + drop.
-    if (onUnknownNamespace != null) {
-      onUnknownNamespace!(stanza);
-    } else {
-      logWarning('xmpp.demux.unknownNamespace', stanza.toXmlString());
-    }
+      // Onbekende namespace — fail-closed: log + drop.
+      if (onUnknownNamespace != null) {
+        onUnknownNamespace!(stanza);
+      } else {
+        logWarning('xmpp.demux.unknownNamespace', stanza.toXmlString());
+      }
+    });
   }
 
   void _onDone() {
