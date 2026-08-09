@@ -95,6 +95,12 @@ class XmppKeyExchange {
   /// Of [deviceId] in de approval-set staat.
   bool isApproved(String deviceId) => _approved.contains(deviceId);
 
+  /// Het aantal devices dat deze epoch al gesleuteld is. De launch leest dit
+  /// vóór en ná [ensureKeyed] om te weten of een newcomer net gesleuteld is —
+  /// zo ja, dan stuurt de autoriteit hem de baseline (§6: de snapshot komt ná
+  /// de keyshare bij een newcomer, want een MUC levert geen `/sync`-achtergrond).
+  int get keyedDeviceCount => _keyed.length;
+
   /// Werk de eigen publieke sleutels bij (na een key-rotatie) en herpubliceer.
   /// De nieuwe [ownKeys] moeten dezelfde identiteit hebben (pin-on-first-use
   /// geldt ook voor jezelf) met een hogere signed rot.

@@ -1144,6 +1144,34 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **collab: XmppSnapshotChannel + xmpp_collab_launch — end-to-end host/join
+  over de companion-MUC (§5 sub-plak 6).** De sessie-baseline en de
+  sessie-lifecycle uit `XMPP_COLLAB_TRANSPORT.md` §5 brick 3, §4, §6, §8:
+  `XmppSnapshotChannel` in `lib/xmpp/xmpp_snapshot.dart` levert de baseline
+  verzegeld en **gechunked** over `<snap>`-stanzas — één AEAD-tag over de
+  hele baseline, de ciphertext-blob verspreid over stanzas (een XMPP-stanza
+  is ≤ 512 KiB, §7), gereassembleerd en handtekening-geverifieerd aan de
+  andere kant. Twee uitgangen: `firstSnapshot` voor de join (een joiner
+  afwacht hem vóór zijn sessie start; een baseline die aankomt vóór de
+  epoch-sleutel wordt gebufferd en `retryPending` opent hem zodra een
+  keyshare de sleutel installeert — §6), en `rebaselines` voor de §4-resync-
+  re-baseline (na de eerste, elke geopende snapshot emit; de launch luistert
+  en roept `rebaseTo`, forward-only). `xmpp_collab_launch.dart` assembleert
+  de stenen — `hostXmppSession`/`joinXmppSession` + `XmppCollabLaunch` — de
+  XMPP-tegenhanger van `matrix_session_launch.dart`. Waar hij afwijkt:
+  **push, niet poll** (de demux routeert stanzas asynchroon, dus `syncNow`
+  drijft de reactieve side-effects: de host sleutelt newcomers en herzendt
+  de baseline, de guest retryt de buffer en start); **NEW-6: twee
+  herstelpaden** (drop vóór keying → re-join + `ensureKeyed`, geen resync;
+  drop ná keying → verzegelde §4-resync → re-baseline → `rebaseTo`). De
+  admission-gate (`resyncApprovalGate`, NEW-1 §7) weigert een vertrokken
+  lid dat nog een oude epoch-sleutel houdt. Nieuwe tests (11): chunk round-
+  trip met slide-id's behouden, single-stanza, tampered chunk fail-closed,
+  missing chunk fail-closed, buffer-tot-keyed, re-baseline na first,
+  host+guest launch over de draad, edit→guest, lock-round-trip, niet-
+  goedgekeurde guest nooit gesleuteld, drop-na-keying resync, drop-vóór-
+  keying re-keying, XMPP-mode exclusiviteit. Intern-plumbing, achter de
+  standaard-uit Videovergaderingen-module.
 - **collab: XmppKeyExchange — signed-rot presence + blinded keyshare +
   deny-by-default admission (§5 sub-plak 5).** De XMPP-sleuteluitwisseling uit
   `XMPP_COLLAB_TRANSPORT.md` §5 brick 2 + Admission gate, §5.1, §7:
