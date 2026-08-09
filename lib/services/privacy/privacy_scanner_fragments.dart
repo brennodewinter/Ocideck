@@ -30,6 +30,24 @@ extension PrivacyScannerFragments on PrivacyScanner {
     // ongezien mee in elke export.
     yield (field: 'version', index: 0, text: deck.version, context: '');
     yield (field: 'date', index: 0, text: deck.date, context: '');
+    yield (
+      field: 'marpHeader',
+      index: 0,
+      text: deck.marpStyle.header,
+      context: '',
+    );
+    yield (
+      field: 'marpFooter',
+      index: 0,
+      text: deck.marpStyle.footer,
+      context: '',
+    );
+    yield (
+      field: 'marpBackgroundImage',
+      index: 0,
+      text: deck.marpStyle.backgroundImage,
+      context: '',
+    );
     // De vrije tekst uit het informatievenster: losse regels, maar wel getypt.
     for (var i = 0; i < deck.standardsUsed.length; i++) {
       yield (
@@ -124,6 +142,32 @@ extension PrivacyScannerFragments on PrivacyScanner {
       context: '',
     );
     yield (field: 'notes', index: 0, text: slide.notes, context: '');
+    yield (
+      field: 'marpHeader',
+      index: 0,
+      text: slide.marpStyle.header,
+      context: '',
+    );
+    yield (
+      field: 'marpFooter',
+      index: 0,
+      text: slide.marpStyle.footer,
+      context: '',
+    );
+    yield (
+      field: 'marpBackgroundImage',
+      index: 0,
+      text: slide.marpStyle.backgroundImage,
+      context: '',
+    );
+    for (var i = 0; i < slide.preservedMarpLines.length; i++) {
+      yield (
+        field: 'preservedMarpLines',
+        index: i,
+        text: slide.preservedMarpLines[i],
+        context: '',
+      );
+    }
     // Het scope-object van een checklist/bevinding: vrije tekst die als
     // `ocideck_checklist_scope` mee round-trippt. In pentestwerk staat daar
     // routineus een URL met een gebruikersnaam of tenant in.

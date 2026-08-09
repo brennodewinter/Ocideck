@@ -226,7 +226,12 @@ class PrivacyProjection {
       final active = external || disposition == PrivacyDisposition.redact;
       final byFragment = _byFragment(scan.forSlide(i), active: active);
 
-      final projected = _projectSlide(slide, byFragment, active: active);
+      final projected = _projectSlide(
+        slide,
+        byFragment,
+        active: active,
+        deckBackgroundImage: deck.marpStyle.backgroundImage,
+      );
       count += projected.count;
       // De effectieve stand wordt op de geprojecteerde slide gezet. Zo reist het
       // shield mee mét de slide en kan geen renderoppervlak hem vergeten — een
@@ -268,6 +273,10 @@ class PrivacyProjection {
       // gebruiker met "redigeren" niet kón oplossen.
       version: deckField('version', deck.version),
       date: deckField('date', deck.date),
+      marpStyle: deck.marpStyle.copyWith(
+        header: deckField('marpHeader', deck.marpStyle.header),
+        footer: deckField('marpFooter', deck.marpStyle.footer),
+      ),
       standardsUsed: [
         for (var i = 0; i < deck.standardsUsed.length; i++)
           deckField('standardsUsed', deck.standardsUsed[i], i),
@@ -365,6 +374,7 @@ class PrivacyProjection {
     Slide slide,
     Map<String, List<_Range>> byFragment, {
     required bool active,
+    required String deckBackgroundImage,
   }) {
     var count = 0;
 
@@ -387,6 +397,14 @@ class PrivacyProjection {
       quoteAuthor: field('quoteAuthor', slide.quoteAuthor),
       customMarkdown: field('customMarkdown', slide.customMarkdown),
       notes: field('notes', slide.notes),
+      marpStyle: slide.marpStyle.copyWith(
+        header: field('marpHeader', slide.marpStyle.header),
+        footer: field('marpFooter', slide.marpStyle.footer),
+      ),
+      preservedMarpLines: [
+        for (var i = 0; i < slide.preservedMarpLines.length; i++)
+          field('preservedMarpLines', slide.preservedMarpLines[i], i),
+      ],
       // Het scope-object van een checklist. Het wordt gescand én het staat op
       // de dia (`checklist_preview.dart`), maar het werd nooit geredigeerd: een
       // scope-URL met een tenant- of gebruikersnaam erin ging mee in
@@ -409,7 +427,11 @@ class PrivacyProjection {
       ],
     );
 
-    final withMedia = _projectMedia(projected, active: active);
+    final withMedia = _projectMedia(
+      projected,
+      active: active,
+      deckBackgroundImage: deckBackgroundImage,
+    );
     count += withMedia.count;
 
     return (
@@ -465,6 +487,7 @@ class PrivacyProjection {
   static ({Slide slide, int count}) _projectMedia(
     Slide slide, {
     required bool active,
+    required String deckBackgroundImage,
   }) {
     if (!active) return (slide: slide, count: 0);
     // Ook de afbeeldingen ín de lopende tekst. Die staan niet in een veld maar
@@ -472,6 +495,9 @@ class PrivacyProjection {
     // dia gewoon met zijn foto mee naar het scherm en de export — het veld was
     // leeg, de tekst niet.
     final inline = inlineImagePaths(slide.customMarkdown);
+    final marpBackground = slide.marpStyle.backgroundImage.isNotEmpty
+        ? slide.marpStyle.backgroundImage
+        : deckBackgroundImage;
     final present =
         [
           slide.imagePath,
@@ -479,7 +505,8 @@ class PrivacyProjection {
           slide.videoPath,
           slide.audioPath,
         ].where((p) => p.isNotEmpty).length +
-        inline.length;
+        inline.length +
+        (marpBackground.isEmpty || marpBackground == 'none' ? 0 : 1);
     if (present == 0) return (slide: slide, count: 0);
     return (
       slide: slide.copyWith(
@@ -487,6 +514,9 @@ class PrivacyProjection {
         imagePath2: '',
         videoPath: '',
         audioPath: '',
+        // `none` is an explicit local override. An empty value would inherit
+        // the deck-wide background again and cross the projection boundary.
+        marpStyle: slide.marpStyle.copyWith(backgroundImage: 'none'),
         // Het pad eruit, de verwijzing laten staan: `![alt]()` houdt zijn plek
         // in de layout, zodat de tekst niet opschuift alsof er nooit iets stond
         // en de renderer er hetzelfde zwarte vlak van maakt als bij een veld.

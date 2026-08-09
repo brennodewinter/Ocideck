@@ -22,6 +22,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/used_tool.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/privacy/privacy_scanner.dart';
@@ -40,6 +41,12 @@ final Map<String, Deck Function(Deck)> _deckVelden = {
   'keywords': (d) => d.copyWith(keywords: _waarde),
   'version': (d) => d.copyWith(version: _waarde),
   'date': (d) => d.copyWith(date: _waarde),
+  'marpHeader': (d) =>
+      d.copyWith(marpStyle: d.marpStyle.copyWith(header: _waarde)),
+  'marpFooter': (d) =>
+      d.copyWith(marpStyle: d.marpStyle.copyWith(footer: _waarde)),
+  'marpBackgroundImage': (d) =>
+      d.copyWith(marpStyle: d.marpStyle.copyWith(backgroundImage: _waarde)),
   'standardsUsed': (d) => d.copyWith(standardsUsed: [_waarde]),
   'toolsUsed': (d) => d.copyWith(toolsUsed: [UsedTool(name: _waarde)]),
   // Additief op wat er al staat: de pariteitstest vult álle velden op één
@@ -77,6 +84,13 @@ final Map<String, Slide Function(Slide)> _slideVelden = {
   'quoteAuthor': (s) => s.copyWith(quoteAuthor: _waarde),
   'customMarkdown': (s) => s.copyWith(customMarkdown: _waarde),
   'notes': (s) => s.copyWith(notes: _waarde),
+  'marpHeader': (s) =>
+      s.copyWith(marpStyle: s.marpStyle.copyWith(header: _waarde)),
+  'marpFooter': (s) =>
+      s.copyWith(marpStyle: s.marpStyle.copyWith(footer: _waarde)),
+  'marpBackgroundImage': (s) =>
+      s.copyWith(marpStyle: s.marpStyle.copyWith(backgroundImage: _waarde)),
+  'preservedMarpLines': (s) => s.copyWith(preservedMarpLines: [_waarde]),
   'checklistScope': (s) => s.copyWith(checklistScope: _waarde),
   'imagePath': (s) => s.copyWith(imagePath: _waarde),
   'imagePath2': (s) => s.copyWith(imagePath2: _waarde),
@@ -102,6 +116,7 @@ const Set<String> _mediapaden = {
   'imagePath2',
   'videoPath',
   'audioPath',
+  'marpBackgroundImage',
 };
 
 void main() {
@@ -181,6 +196,7 @@ void main() {
 
   group('elk gescand deckveld wordt ook geredigeerd', () {
     for (final entry in _deckVelden.entries) {
+      if (_mediapaden.contains(entry.key)) continue;
       test(entry.key, () {
         final deck = deckMet(deckveld: entry.value);
         final projectie = PrivacyProjection.forAudience(deck);
@@ -219,6 +235,7 @@ void main() {
     }
 
     for (final entry in _deckVelden.entries) {
+      if (_mediapaden.contains(entry.key)) continue;
       test('deck.${entry.key}', () {
         final deck = deckMet(deckveld: entry.value);
         expect(
