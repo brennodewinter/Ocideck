@@ -1,4 +1,4 @@
-.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-improvement-templates check-version-bump check-sbom-version check-translated-mermaid coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -54,6 +54,7 @@ help:
 	@echo "  make test-state      Provider/state/recovery tests."
 	@echo "  make test-services   Caption/description/image service tests."
 	@echo "  make test-presenter  Fullscreen presenter interaction tests."
+	@echo "  make test-xmpp-integration  XMPP collab over real Prosody (needs Docker; not in check)."
 	@echo "  make deps-outdated   Advisory dependency freshness report."
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
 	@echo "  make dast            Advisory ZAP baseline over a served build (DAST_URL=… for a real host)."
@@ -299,6 +300,17 @@ test-presenter:
 	@echo "Covers: fullscreen presenter navigation, presenter view, keyboard shortcuts, grid navigation."
 	@echo "Failure means: inspect fullscreen presenter keyboard/focus/navigation behavior."
 	flutter test test/fullscreen_presenter_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
+
+# XMPP integration test against a local Prosody (testbed/docker-jitsi-meet).
+# NOT part of `make check` — requires a running Docker stack and the
+# OCIDECK_XMPP_INTEGRATION env var. See testbed/docker-jitsi-meet/README.md.
+test-xmpp-integration:
+	@echo "== OciDeck integration: XMPP over real Prosody =="
+	@echo "Command: OCIDECK_XMPP_INTEGRATION=1 flutter test test/xmpp/xmpp_docker_jitsi_integration_test.dart"
+	@echo "Covers: two clients join, edit, lock, chat, disconnect→resync over a real XMPP server."
+	@echo "Prerequisite: cd testbed/docker-jitsi-meet && docker compose up -d"
+	@echo "Failure means: the Prosody stack is not running, or a collab flow broke against a real server."
+	OCIDECK_XMPP_INTEGRATION=1 flutter test test/xmpp/xmpp_docker_jitsi_integration_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
 # Advisory dependency freshness report; not part of normal check because it can
 # depend on network availability and does not imply the current code is broken.

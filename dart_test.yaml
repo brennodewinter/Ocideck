@@ -5,5 +5,12 @@
 # default suite (which CI runs on Linux, macOS and Windows) and run on a single
 # platform with `make test-golden`. Declared here so `flutter test` doesn't warn
 # about an unknown tag.
+#
+# `integration` marks the docker-jitsi-meet integration test
+# (test/xmpp/xmpp_docker_jitsi_integration_test.dart). It is skipped unless
+# OCIDECK_XMPP_INTEGRATION=1 is set and the local stack is running —
+# `make test-xmpp-integration` sets the flag. Declared here so the default
+# suite doesn't warn about an unknown tag.
 tags:
   golden:
+  integration:
