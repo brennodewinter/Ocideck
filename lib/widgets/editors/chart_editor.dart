@@ -107,6 +107,7 @@ class _ChartEditorState extends State<ChartEditor> {
   late final TextEditingController _usl;
   late final TextEditingController _lsl;
   late final TextEditingController _processTarget;
+  late final TextEditingController _startAngle;
   late ChartType _type;
   String? _source;
   late bool _animateOnEnter;
@@ -155,6 +156,10 @@ class _ChartEditorState extends State<ChartEditor> {
     _usl.addListener(_emit);
     _lsl.addListener(_emit);
     _processTarget.addListener(_emit);
+    _startAngle = TextEditingController(
+      text: spec.startAngle == 0 ? '' : _fmt(spec.startAngle),
+    );
+    _startAngle.addListener(_emit);
     _loadFromSpec(spec);
   }
 
@@ -231,6 +236,7 @@ class _ChartEditorState extends State<ChartEditor> {
     _usl.dispose();
     _lsl.dispose();
     _processTarget.dispose();
+    _startAngle.dispose();
     super.dispose();
   }
 
@@ -272,6 +278,7 @@ class _ChartEditorState extends State<ChartEditor> {
       animateOnEnter: _animateOnEnter,
       animationDurationMs: _animationOverrideMs,
       showSliceLabels: _showSliceLabels,
+      startAngle: _isPieLike ? (_parseBound(_startAngle.text) ?? 0) : 0,
     );
   }
 
@@ -610,7 +617,7 @@ class _ChartEditorState extends State<ChartEditor> {
                     lsl: _lsl,
                     processTarget: _processTarget,
                   ),
-                if (_isPieLike)
+                if (_isPieLike) ...[
                   _chartToggleRow(
                     icon: Icons.percent,
                     label: l10n.d('Percentages op de taartpunten tonen'),
@@ -620,7 +627,29 @@ class _ChartEditorState extends State<ChartEditor> {
                       _emit();
                     },
                   ),
-                _animationControls(l10n),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: _boundField(
+                      key: const ValueKey('chart-start-angle'),
+                      controller: _startAngle,
+                      label: l10n.d('Starthoek (graden)'),
+                    ),
+                  ),
+                ],
+                _animationControls(
+                  l10n: l10n,
+                  animateOnEnter: _animateOnEnter,
+                  onAnimateChanged: (v) {
+                    setState(() => _animateOnEnter = v);
+                    _emit();
+                  },
+                  overrideMs: _animationOverrideMs,
+                  themeMs: widget.themeAnimationDurationMs,
+                  onDurationChanged: (v) {
+                    setState(() => _animationOverrideMs = v);
+                    _emit();
+                  },
+                ),
               ],
             ),
           ),
@@ -734,37 +763,6 @@ class _ChartEditorState extends State<ChartEditor> {
   }
 
   /// Animatie-schakelaar plus (indien aan) de duur-regelaar.
-  Widget _animationControls(AppLocalizations l10n) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _chartToggleRow(
-          icon: Icons.auto_awesome,
-          label: l10n.d('Animatie bij openen'),
-          value: _animateOnEnter,
-          onChanged: (v) {
-            setState(() => _animateOnEnter = v);
-            _emit();
-          },
-        ),
-        if (_animateOnEnter)
-          Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: AnimationDurationControl(
-              overrideMs: _animationOverrideMs,
-              themeMs: widget.themeAnimationDurationMs,
-              minMs: kThemeMinAnimationDurationMs,
-              maxMs: kThemeMaxAnimationDurationMs,
-              onChanged: (value) {
-                setState(() => _animationOverrideMs = value);
-                _emit();
-              },
-            ),
-          ),
-      ],
-    );
-  }
-
   /// Het datagrid in een tweerichtings-scroller.
   ///
   /// Ook bewerkbaar wanneer de data aan een los bestand is gekoppeld: bij
@@ -831,5 +829,40 @@ Widget _chartToggleRow({
         Switch(value: value, onChanged: onChanged),
       ],
     ),
+  );
+}
+
+/// The "animate on enter" toggle plus (when on) the per-slide duration control,
+/// for the editor's Advanced section. Top-level so the block stays out of
+/// _ChartEditorState's size budget.
+Widget _animationControls({
+  required AppLocalizations l10n,
+  required bool animateOnEnter,
+  required ValueChanged<bool> onAnimateChanged,
+  required int? overrideMs,
+  required int themeMs,
+  required ValueChanged<int?> onDurationChanged,
+}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      _chartToggleRow(
+        icon: Icons.auto_awesome,
+        label: l10n.d('Animatie bij openen'),
+        value: animateOnEnter,
+        onChanged: onAnimateChanged,
+      ),
+      if (animateOnEnter)
+        Padding(
+          padding: const EdgeInsets.only(top: 4),
+          child: AnimationDurationControl(
+            overrideMs: overrideMs,
+            themeMs: themeMs,
+            minMs: kThemeMinAnimationDurationMs,
+            maxMs: kThemeMaxAnimationDurationMs,
+            onChanged: onDurationChanged,
+          ),
+        ),
+    ],
   );
 }

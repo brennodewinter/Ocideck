@@ -1795,6 +1795,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Starthoek (graden)': 'Angolu tal-bidu (gradi)',
   'Percentages op de taartpunten tonen':
       'Uri l-persentaġġi fuq il-flieli tat-torta',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Kapitlu ġdid f\'paġna ġdida',

@@ -951,8 +951,12 @@ De beschikbare types:
   lijn op zijn eigen rechteras (bijv. omzetstaven + een groei-%-lijn). Met een
   enkele reeks valt hij terug op een gewone staafgrafiek.
 - **Taart** / **Ring** — proportionele partjes; de labels zijn de segmenten. Een
-  ring print het reekstotaal in het centrale gat. Beide tonen ten hoogste de eerste
-  twee reeksen.
+  ring print het reekstotaal in het centrale gat; een taart is dicht tot het
+  midden. Beide tonen ten hoogste de eerste twee reeksen. In **Geavanceerd** kun
+  je de percentages op de partjes verbergen (een schone cirkel) en een
+  **starthoek** in graden instellen — de taart draaien zodat een partje op de
+  gewenste plek komt, handig wanneer je een taart als tekening gebruikt in plaats
+  van als gegevensweergave.
 - **Spider/radar** — heeft minstens drie labels (assen) nodig; elke reeks is een
   gevuld vlak.
 - **Waterval** — gebruikt de **eerste** reeks; elke waarde is een op- of neerwaartse stap

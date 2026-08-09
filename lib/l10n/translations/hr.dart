@@ -1779,6 +1779,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Starthoek (graden)': 'Početni kut (stupnjevi)',
   'Percentages op de taartpunten tonen': 'Prikaži postotke na isječcima',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Novo poglavlje na novoj stranici',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':

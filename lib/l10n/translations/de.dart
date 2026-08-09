@@ -732,6 +732,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Starthoek (graden)': 'Startwinkel (Grad)',
   'Percentages op de taartpunten tonen':
       'Prozentwerte auf den Tortensegmenten anzeigen',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Neues Kapitel auf einer neuen Seite',

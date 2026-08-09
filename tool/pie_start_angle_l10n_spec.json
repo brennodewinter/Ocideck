@@ -1,0 +1,37 @@
+{
+  "additions": {
+    "Starthoek (graden)": {
+      "en": "Start angle (degrees)",
+      "it": "Angolo iniziale (gradi)",
+      "de": "Startwinkel (Grad)",
+      "fr": "Angle de départ (degrés)",
+      "es": "Ángulo inicial (grados)",
+      "fy": "Begjinhoeke (graden)",
+      "pap": "Angulo inicial (grado)",
+      "la": "Angulus initialis (gradus)",
+      "id": "Sudut awal (derajat)",
+      "pl": "Kąt początkowy (stopnie)",
+      "uk": "Початковий кут (градуси)",
+      "gsw": "Aafangswinkel (Grad)",
+      "el": "Αρχική γωνία (μοίρες)",
+      "da": "Startvinkel (grader)",
+      "sv": "Startvinkel (grader)",
+      "hr": "Početni kut (stupnjevi)",
+      "cs": "Počáteční úhel (stupně)",
+      "fi": "Aloituskulma (astetta)",
+      "bg": "Начален ъгъл (градуси)",
+      "lv": "Sākuma leņķis (grādi)",
+      "lt": "Pradinis kampas (laipsniai)",
+      "mt": "Angolu tal-bidu (gradi)",
+      "et": "Algusnurk (kraadides)",
+      "hu": "Kezdőszög (fok)",
+      "ga": "Uillinn tosaigh (céimeanna)",
+      "pt": "Ângulo inicial (graus)",
+      "ro": "Unghi inițial (grade)",
+      "sl": "Začetni kot (stopinje)",
+      "sk": "Počiatočný uhol (stupne)",
+      "tlh": "taghbogh jIrtaHghach (mI')",
+      "tr": "Başlangıç açısı (derece)"
+    }
+  }
+}

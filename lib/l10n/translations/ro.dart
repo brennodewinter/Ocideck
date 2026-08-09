@@ -1790,6 +1790,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Starthoek (graden)': 'Unghi inițial (grade)',
   'Percentages op de taartpunten tonen': 'Afișează procentele pe felii',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Capitol nou pe o pagină nouă',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':

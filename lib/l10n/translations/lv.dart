@@ -1772,6 +1772,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Starthoek (graden)': 'Sākuma leņķis (grādi)',
   'Percentages op de taartpunten tonen': 'Rādīt procentus riņķa sektoros',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Jauna nodaļa jaunā lappusē',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':

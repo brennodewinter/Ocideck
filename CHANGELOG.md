@@ -1144,6 +1144,26 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **grafiek: taart als tekening — echte taart, verbergbare percentages,
+  starthoek (#1395).** Een externe indiener probeerde met een taartdiagram een
+  piramide tegen een lucht te tekenen en liep op drie dingen vast; alledrie
+  weggewerkt. (1) `ChartType.pie` kreeg zowel in de Flutter-preview
+  (`centerSpaceRadius 0.42·r`) als in de HTML-export (gat-cirkel `0.43·r`) een
+  gat, terwijl de modeldoc de donut juist als "a pie with a hole" omschrijft —
+  een taart is nu dicht tot het midden, zodat wig-punten in het middelpunt
+  samenkomen; alleen de donut houdt zijn gat met het totaal. (2) Nieuwe
+  optionele blok-sleutel `showSliceLabels` (default `true`, alleen pie-like,
+  alleen weggeschreven wanneer uit) verbergt de percentages op de punten voor
+  een schone cirkel. (3) Nieuwe optionele sleutel `startAngle` (graden,
+  kloksgewijs vanaf de bovenkant) roteert de taart, zodat één punt op de
+  gewenste plek komt zonder een reeks in tweeën te splitsen; en passant staan de
+  Flutter-render en de HTML-export nu op dezelfde starthoek (top, `-90°` in
+  fl_chart-termen) in plaats van 90° uit elkaar. Editor: schakelaar + hoekveld
+  in "Geavanceerd"; de gedeelde schakelaar-rij en de animatie-regelaar zijn naar
+  top-level helpers gehaald zodat de editor- en previewklassen onder hun plafond
+  blijven. Drie kleine PR's (#1399/#1400/deze), elk met regressietests; l10n in
+  alle 31 talen; `FILE_FORMAT` (nl+en) bij. Bewaker akkoord: pure render-vlaggen,
+  de grafiekdata blijft volledig in de `.md`.
 - **collab: XmppPresenceBeacon + XmppChat — sealed-id-dedup chat + presence
   (§5 sub-plak 7).** De resterende data-plane-kanalen uit
   `XMPP_COLLAB_TRANSPORT.md` §5 bricks 4/5, §3, §4, §8: `XmppPresenceBeacon`

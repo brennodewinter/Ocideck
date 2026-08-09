@@ -1777,6 +1777,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Starthoek (graden)': 'Kezdőszög (fok)',
   'Percentages op de taartpunten tonen':
       'Százalékok megjelenítése a körcikkeken',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Új fejezet új oldalon',

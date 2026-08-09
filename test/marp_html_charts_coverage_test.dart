@@ -224,6 +224,36 @@ void main() {
       expect(html, isNot(contains('fill="#0A0B0C"')));
     });
 
+    test('startAngle rotates the slices in the export (#1395)', () {
+      const x = ['A', 'B'];
+      const series = [
+        ChartSeries(name: 'x', data: [1, 1]),
+      ];
+      final base = _render(
+        const ChartSpec(type: ChartType.pie, x: x, series: series),
+      );
+      final turned = _render(
+        const ChartSpec(
+          type: ChartType.pie,
+          x: x,
+          series: series,
+          startAngle: 90,
+        ),
+      );
+      // The rotation reaches the SVG: the slice geometry changes.
+      expect(turned, isNot(equals(base)));
+      // A zero rotation is a no-op — identical to leaving the key out.
+      final zero = _render(
+        const ChartSpec(
+          type: ChartType.pie,
+          x: x,
+          series: series,
+          startAngle: 0,
+        ),
+      );
+      expect(zero, equals(base));
+    });
+
     test('radar draws a polygon per series plus axis labels', () {
       final html = _render(
         const ChartSpec(

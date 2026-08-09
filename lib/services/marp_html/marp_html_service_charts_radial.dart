@@ -36,7 +36,8 @@ void _pieSvg(
             : 0.0,
     ];
     final total = values.fold<double>(0, (a, v) => a + v);
-    var angle = -90.0;
+    // -90 starts the first slice at the top; startAngle rotates clockwise.
+    var angle = -90.0 + spec.startAngle;
     for (var labelIndex = 0; labelIndex < values.length; labelIndex++) {
       final frac = total > 0 ? values[labelIndex] / total : 0;
       final sweep = frac * 360;

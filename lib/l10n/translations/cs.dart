@@ -1776,6 +1776,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Starthoek (graden)': 'Počáteční úhel (stupně)',
   'Percentages op de taartpunten tonen': 'Zobrazit procenta na výsečích',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nová kapitola na nové stránce',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':

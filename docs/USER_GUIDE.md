@@ -909,8 +909,11 @@ The available types:
   line on its own right-hand axis (e.g. revenue bars + a growth-% line). With a
   single series it falls back to a plain bar chart.
 - **Pie** / **Donut** — proportional slices; the labels are the segments. A
-  donut prints the series total in its centre hole. Both show at most the first
-  two series.
+  donut prints the series total in its centre hole; a pie is solid to the
+  centre. Both show at most the first two series. In **Geavanceerd** you can hide
+  the on-slice percentages (a clean circle) and set a **start angle** in degrees
+  — rotating the pie so a slice sits where you want it, handy when you use a pie
+  as a drawing rather than a data read.
 - **Spider/radar** — needs at least three labels (axes); each series is a
   filled area.
 - **Waterfall** — uses the **first** series; each value is an up or down step

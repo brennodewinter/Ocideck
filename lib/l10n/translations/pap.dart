@@ -732,6 +732,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Starthoek (graden)': 'Angulo inicial (grado)',
   'Percentages op de taartpunten tonen':
       'Mustra porsentahe riba e pidanan di taart',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Kapítulo nobo riba un página nobo',

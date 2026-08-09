@@ -1773,6 +1773,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Starthoek (graden)': 'Sudut awal (derajat)',
   'Percentages op de taartpunten tonen': 'Tampilkan persentase pada irisan pai',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Bab baru pada halaman baru',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':

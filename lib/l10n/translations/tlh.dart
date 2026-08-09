@@ -1748,6 +1748,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Starthoek (graden)': 'taghbogh jIrtaHghach (mI\')',
   'Percentages op de taartpunten tonen': '\'ay\'meyDaq vatlhvI\'mey \'ang',
   'Nieuw hoofdstuk op een nieuwe pagina': 'nav chu\'Daq \'ay\' chu\'',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':

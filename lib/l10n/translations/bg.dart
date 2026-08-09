@@ -1795,6 +1795,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Starthoek (graden)': 'Начален ъгъл (градуси)',
   'Percentages op de taartpunten tonen':
       'Показване на процентите върху секторите',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Нова глава на нова страница',
