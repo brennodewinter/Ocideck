@@ -439,20 +439,17 @@ class FullscreenPresenter extends StatefulWidget {
         inkByIndex['$i'] = encodeStrokes(strokes);
       }
     }
-    final argument = jsonEncode({
-      'markdown': markdown,
-      'projectPath': projectPath,
-      'index': initialIndex,
-      'ink': inkByIndex,
-      'classificationWatermarkEnabled': showClassificationWatermark,
-      'allowRemoteMedia': allowRemoteMedia,
-      // Styling reist naast de markdown mee, niet erin: het publieksvenster kan
-      // het profiel nergens anders vandaan halen, maar de markdown zelf hoort
-      // leesbaar te blijven. Hetzelfde geldt voor het cockpit-kleurenschema.
-      beamerStyleProfileKey: themeProfile.toJson(),
-      'marpStyle': marpStyle.toJson(),
-      'cockpitColorScheme': cockpitColorScheme.toJson(),
-    });
+    final argument = _audienceWindowArguments(
+      markdown: markdown,
+      projectPath: projectPath,
+      initialIndex: initialIndex,
+      inkByIndex: inkByIndex,
+      showClassificationWatermark: showClassificationWatermark,
+      allowRemoteMedia: allowRemoteMedia,
+      themeProfile: themeProfile,
+      marpStyle: marpStyle,
+      cockpitColorScheme: cockpitColorScheme,
+    );
 
     WindowController? audience;
     AudienceWindowHandle? audienceHandle;
@@ -554,6 +551,30 @@ class FullscreenPresenter extends StatefulWidget {
   @override
   State<FullscreenPresenter> createState() => _FullscreenPresenterState();
 }
+
+String _audienceWindowArguments({
+  required String markdown,
+  required String? projectPath,
+  required int initialIndex,
+  required Map<String, dynamic> inkByIndex,
+  required bool showClassificationWatermark,
+  required bool allowRemoteMedia,
+  required ThemeProfile themeProfile,
+  required MarpStyle marpStyle,
+  required CockpitColorScheme cockpitColorScheme,
+}) => jsonEncode({
+  'markdown': markdown,
+  'projectPath': projectPath,
+  'index': initialIndex,
+  'ink': inkByIndex,
+  'classificationWatermarkEnabled': showClassificationWatermark,
+  'allowRemoteMedia': allowRemoteMedia,
+  // Styling travels beside the readable Markdown because the audience window
+  // has no other source for the active profiles.
+  beamerStyleProfileKey: themeProfile.toJson(),
+  'marpStyle': marpStyle.toJson(),
+  'cockpitColorScheme': cockpitColorScheme.toJson(),
+});
 
 void _replaceSlide(List<Slide> slides, int index, Slide replacement) {
   slides[index] = replacement;
