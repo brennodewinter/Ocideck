@@ -321,6 +321,11 @@ class ChartSpec {
   /// ThemeProfile.animationDurationMs. Only serialised when set.
   final int? animationDurationMs;
 
+  /// Whether a pie/donut prints the per-slice percentage on each slice. Default
+  /// on; turn it off for a clean, number-free circle (e.g. when the pie is used
+  /// as a drawing rather than a data read). Only meaningful for [isPieLike].
+  final bool showSliceLabels;
+
   const ChartSpec({
     this.type = ChartType.bar,
     this.title = '',
@@ -339,6 +344,7 @@ class ChartSpec {
     this.yRef,
     this.animateOnEnter = true,
     this.animationDurationMs,
+    this.showSliceLabels = true,
   });
 
   bool get hasInlineData => x.isNotEmpty && series.isNotEmpty;
@@ -420,6 +426,7 @@ class ChartSpec {
     bool? animateOnEnter,
     int? animationDurationMs,
     bool inheritAnimationDuration = false,
+    bool? showSliceLabels,
   }) => ChartSpec(
     type: type ?? this.type,
     title: title ?? this.title,
@@ -442,6 +449,7 @@ class ChartSpec {
     animationDurationMs: inheritAnimationDuration
         ? null
         : (animationDurationMs ?? this.animationDurationMs),
+    showSliceLabels: showSliceLabels ?? this.showSliceLabels,
   );
 
   /// Parse the JSON content of a ```chart block. Tolerant: returns a default
@@ -480,6 +488,7 @@ class ChartSpec {
         maxBound: (data['maxBound'] as num?)?.toDouble(),
         animateOnEnter: data['animateOnEnter'] != false,
         animationDurationMs: (data['animationDurationMs'] as num?)?.round(),
+        showSliceLabels: data['showSliceLabels'] != false,
         x: [for (final v in (data['x'] as List? ?? const [])) v.toString()],
         rowColors: [
           for (final value in (data['rowColors'] as List? ?? const []))
@@ -530,6 +539,10 @@ class ChartSpec {
     if (animationDurationMs != null) {
       map['animationDurationMs'] = animationDurationMs;
     }
+    // On-slice percentages default on and only a pie/donut draws them; record
+    // just the author's "off" choice so a normal chart's block stays clean and
+    // the flag never lingers after a type switch.
+    if (isPieLike && !showSliceLabels) map['showSliceLabels'] = false;
     final dropData = forStorage && source != null;
     if (rowColors.any((color) => color != null)) {
       map['rowColors'] = rowColors;

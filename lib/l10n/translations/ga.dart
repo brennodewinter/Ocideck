@@ -1808,6 +1808,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Percentages op de taartpunten tonen':
+      'Taispeáin céatadáin ar shlisní na píóige',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Caibidil nua ar leathanach nua',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Cuir tús le gach caibidil (ceannteideal H1) ar leathanach nua le linn easpórtála agus priontála.',

@@ -729,6 +729,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Percentages op de taartpunten tonen':
+      'Mostrar los porcentajes en las porciones',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nuevo capítulo en una página nueva',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Haz que cada capítulo (un encabezado H1) empiece en una página nueva al exportar e imprimir.',

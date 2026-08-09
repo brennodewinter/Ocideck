@@ -1790,6 +1790,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Percentages op de taartpunten tonen': 'Показувати відсотки на секторах',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Новий розділ на новій сторінці',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Починати кожен розділ (заголовок H1) з нової сторінки під час експорту та друку.',

@@ -1777,6 +1777,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Percentages op de taartpunten tonen':
+      'Százalékok megjelenítése a körcikkeken',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Új fejezet új oldalon',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Minden fejezet (egy H1 címsor) új oldalon kezdődjön exportáláskor és nyomtatáskor.',

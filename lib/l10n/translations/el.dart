@@ -1800,6 +1800,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Percentages op de taartpunten tonen':
+      'Εμφάνιση ποσοστών στα κομμάτια της πίτας',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Νέο κεφάλαιο σε νέα σελίδα',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Να ξεκινά κάθε κεφάλαιο (μια επικεφαλίδα H1) σε νέα σελίδα κατά την εξαγωγή και την εκτύπωση.',

@@ -1785,6 +1785,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Percentages op de taartpunten tonen': 'Pokaż procenty na wycinkach koła',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nowy rozdział na nowej stronie',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Rozpoczynaj każdy rozdział (nagłówek H1) od nowej strony podczas eksportu i drukowania.',

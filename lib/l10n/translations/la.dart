@@ -1789,6 +1789,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Percentages op de taartpunten tonen':
+      'Centesimas in segmentis placentae monstrare',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Novum caput in nova pagina',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Omne caput (titulus H1) in nova pagina incipiat cum exportatur et imprimitur.',

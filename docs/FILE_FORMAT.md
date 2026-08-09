@@ -944,6 +944,7 @@ bounds — always stays in the block, never in the data file.
   "maxBound": 20,           // optional; cartesian/radar only
   "animateOnEnter": false,  // optional; only written when false
   "animationDurationMs": 600,  // optional; omitted = inherit the theme
+  "showSliceLabels": false, // optional; pie/donut only, written only when off
   "series": [ { "name": "2025", "data": [10, 14], "color": "#2563EB" } ]
 }
 ```
@@ -1049,6 +1050,11 @@ Fields:
   is only written to the block when turned **off**, so a clean chart stays clean.
 - `animationDurationMs` — per-slide override of that draw-in duration. Omitted
   means inherit the theme's `animationDurationMs`; it is only written when set.
+- `showSliceLabels` — `pie`/`donut` only: whether each slice prints its share as
+  a percentage on the slice. Defaults to `true`; written to the block only when
+  turned **off**, and only for a pie-like type (so the flag never lingers after a
+  type switch). Off gives a clean, number-free circle — handy when the pie is
+  used as a drawing rather than a data read.
 - `source` — optional path to a data file holding `x` and `series` (§6.4). When
   present, the values are omitted from the block on save. `x` disappears
   entirely; `series` disappears too *unless* a series carries a `color`, in

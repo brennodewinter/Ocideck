@@ -1776,6 +1776,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Percentages op de taartpunten tonen': 'Prozänt uf de Tortestücke azeige',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Neus Kapitel uf ere neue Site',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Jedes Kapitel (e H1-Titel) bim Exportiere und Drucke uf ere neue Site aafange.',

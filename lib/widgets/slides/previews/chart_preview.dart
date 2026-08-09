@@ -798,6 +798,9 @@ class _HoverPieChart extends StatefulWidget {
   final TextStyle titleStyle;
   final TextStyle tooltipStyle;
 
+  /// Whether each slice prints its share as a percentage. Off = a clean circle.
+  final bool showLabels;
+
   /// Slice index highlighted from outside (e.g. hovering the legend), combined
   /// with this chart's own touch hover.
   final int? externalHover;
@@ -815,6 +818,7 @@ class _HoverPieChart extends StatefulWidget {
     required this.sectionSpace,
     required this.titleStyle,
     required this.tooltipStyle,
+    this.showLabels = true,
     this.externalHover,
     this.centerLabel,
     this.centerLabelStyle,
@@ -847,7 +851,7 @@ class _HoverPieChartState extends State<_HoverPieChart> {
                   PieChartSectionData(
                     value: widget.values[i],
                     color: widget.colors[i],
-                    title: widget.values[i] / total >= 0.08
+                    title: widget.showLabels && widget.values[i] / total >= 0.08
                         ? '${(widget.values[i] / total * 100).round()}%'
                         : '',
                     radius: widget.radius * (hovered == i ? 1.08 : 1),

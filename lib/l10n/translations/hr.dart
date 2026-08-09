@@ -1779,6 +1779,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Percentages op de taartpunten tonen': 'Prikaži postotke na isječcima',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Novo poglavlje na novoj stranici',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Neka svako poglavlje (naslov H1) počne na novoj stranici pri izvozu i ispisu.',

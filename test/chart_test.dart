@@ -634,4 +634,35 @@ void main() {
       },
     );
   });
+
+  group('taart-percentages (showSliceLabels, #1395)', () {
+    const pie = ChartSpec(
+      type: ChartType.pie,
+      x: ['Lucht', 'Zon'],
+      series: [
+        ChartSeries(name: 'Aandeel', data: [75, 25]),
+      ],
+    );
+
+    test('standaard aan; het blok blijft schoon', () {
+      expect(pie.showSliceLabels, isTrue);
+      expect(pie.toBlock(), isNot(contains('showSliceLabels')));
+    });
+
+    test('uitgezet overleeft het blok', () {
+      final off = pie.copyWith(showSliceLabels: false);
+      expect(off.toBlock(), contains('"showSliceLabels": false'));
+      expect(ChartSpec.parse(off.toBlock()).showSliceLabels, isFalse);
+    });
+
+    test('alleen een taartachtige schrijft de vlag weg', () {
+      // Anders blijft de keuze hangen na een typewissel naar bijv. een staaf.
+      final bar = pie.copyWith(type: ChartType.bar, showSliceLabels: false);
+      expect(bar.toBlock(), isNot(contains('showSliceLabels')));
+    });
+
+    test('een ontbrekende sleutel valt terug op aan', () {
+      expect(ChartSpec.parse('{"type":"pie"}').showSliceLabels, isTrue);
+    });
+  });
 }

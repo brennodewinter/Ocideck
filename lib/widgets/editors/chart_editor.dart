@@ -111,6 +111,7 @@ class _ChartEditorState extends State<ChartEditor> {
   String? _source;
   late bool _animateOnEnter;
   late bool _useDeckY01;
+  late bool _showSliceLabels;
 
   /// Per-slide duration override; null = inherit the theme's duration.
   int? _animationOverrideMs;
@@ -136,6 +137,7 @@ class _ChartEditorState extends State<ChartEditor> {
     _source = spec.source;
     _animateOnEnter = spec.animateOnEnter;
     _animationOverrideMs = spec.animationDurationMs;
+    _showSliceLabels = spec.showSliceLabels;
     _title = TextEditingController(text: spec.title);
     _title.addListener(_emit);
     _targets = TextEditingController(text: _fmtList(spec.targets));
@@ -269,6 +271,7 @@ class _ChartEditorState extends State<ChartEditor> {
           : (_isYRefChart ? _parseBound(_processTarget.text) : null),
       animateOnEnter: _animateOnEnter,
       animationDurationMs: _animationOverrideMs,
+      showSliceLabels: _showSliceLabels,
     );
   }
 
@@ -607,6 +610,16 @@ class _ChartEditorState extends State<ChartEditor> {
                     lsl: _lsl,
                     processTarget: _processTarget,
                   ),
+                if (_isPieLike)
+                  _chartToggleRow(
+                    icon: Icons.percent,
+                    label: l10n.d('Percentages op de taartpunten tonen'),
+                    value: _showSliceLabels,
+                    onChanged: (v) {
+                      setState(() => _showSliceLabels = v);
+                      _emit();
+                    },
+                  ),
                 _animationControls(l10n),
               ],
             ),
@@ -725,27 +738,14 @@ class _ChartEditorState extends State<ChartEditor> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 12),
-          child: Row(
-            children: [
-              Icon(Icons.auto_awesome, size: 18, color: AppTheme.slate500),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  l10n.d('Animatie bij openen'),
-                  style: const TextStyle(fontSize: 13),
-                ),
-              ),
-              Switch(
-                value: _animateOnEnter,
-                onChanged: (v) {
-                  setState(() => _animateOnEnter = v);
-                  _emit();
-                },
-              ),
-            ],
-          ),
+        _chartToggleRow(
+          icon: Icons.auto_awesome,
+          label: l10n.d('Animatie bij openen'),
+          value: _animateOnEnter,
+          onChanged: (v) {
+            setState(() => _animateOnEnter = v);
+            _emit();
+          },
         ),
         if (_animateOnEnter)
           Padding(
@@ -810,4 +810,26 @@ class _ChartEditorState extends State<ChartEditor> {
     });
     _emit();
   }
+}
+
+/// A labelled on/off row for the chart editor's Advanced section: an icon, a
+/// caption, and a trailing switch. Top-level so the shared shape lives in one
+/// place and _ChartEditorState stays within its size ceiling.
+Widget _chartToggleRow({
+  required IconData icon,
+  required String label,
+  required bool value,
+  required ValueChanged<bool> onChanged,
+}) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 12),
+    child: Row(
+      children: [
+        Icon(icon, size: 18, color: AppTheme.slate500),
+        const SizedBox(width: 8),
+        Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
+        Switch(value: value, onChanged: onChanged),
+      ],
+    ),
+  );
 }
