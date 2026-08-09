@@ -1,0 +1,8 @@
+services:
+  prosody:
+    image: prosody/prosody:latest
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:${PROSODY_HTTP_PORT:-5280}:5280'
+    volumes:
+      - ./prosody.cfg.lua:/etc/prosody/prosody.cfg.lua:ro

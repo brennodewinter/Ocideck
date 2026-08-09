@@ -1144,6 +1144,31 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **xmpp: vier bugs die een echte WebSocket-verbinding onmogelijk maakten
+  (#1403).** De XMPP-client draaide groen tegen een in-memory fake transport,
+  maar tegen een echte Prosody viel hij op vier dingen stil. (1)
+  `reconnectTransportFactory` was sync, maar `openXmppFrameTransport` geeft een
+  `Future` — de reconnect-pad crashte bij de eerste drop. (2) De `ws://`-
+  loopback-pad in `xmpp_frame_transport_io.dart` faalde omdat de
+  `connectionFactory` alleen `https` accepteerde; nu mag `http` door op
+  loopback (dezelfde `plainLoopback`-regel als de rest). (3) Stanzas gingen de
+  deur uit zonder `xmlns="jabber:client"` — verplicht voor XMPP-over-WebSocket
+  (RFC 7395), en Prosody wees ze stil. (4) `XmppSettings` had geen
+  `domainOverride`: de WebSocket-host (`127.0.0.1`) en het XMPP-domain
+  (`meet.jitsi`) zijn niet hetzelfde, en de stream-open `to=` moest het domain
+  dragen, niet het IP. Elke fix heeft een regressietest; `make check` groen
+  (9137 tests, 87,2%).
+- **xmpp: integratietest tegen echte Prosody + lokaal testbed
+  (§8, §11 stap 8).** `test/xmpp/xmpp_docker_jitsi_integration_test.dart` zet
+  twee echte clients op tegen een lokale Prosody: join, edit, lock, chat,
+  disconnect→resync. Gated achter `OCIDECK_XMPP_INTEGRATION=1` (niet in
+  `make check`); draait via `make test-xmpp-integration`. Het testbed in
+  `testbed/docker-jitsi-meet/` is een plain `prosody/prosody` met anonymous
+  auth, MUC (`muc_room_locking = false` zodat een tweede client kan joinen),
+  en WebSocket — niet de volledige `docker-jitsi-meet`-stack, want Jitsi's
+  custom Prosody-modules (`muc_domain_mapper`, `muc_resource_validate`,
+  hardcoded `restrict_room_creation`) verstoren non-Jitsi clients. Zie
+  `testbed/docker-jitsi-meet/README.md`.
 - **grafiek: leesbare inkt voor taart-partjelabels.** De percentages op taart-/
   donutpartjes stonden altijd in wit; op een licht partje (EU-geel `#FFCC00`,
   lichtblauw) was dat ~1,5:1 contrast en dus onleesbaar (faalt WCAG). Ze kiezen
