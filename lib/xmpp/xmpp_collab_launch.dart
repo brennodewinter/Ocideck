@@ -166,10 +166,19 @@ class XmppCollabLaunch {
   /// chat retryen hun buffers elke ronde — een joiner ziet ze vóór zijn keyshare.
   Future<void> syncNow() async {
     if (_disposed) return;
-    // Presence/chat kunnen aankomen vóór de epoch-sleutel (zelfde stroom als de
-    // keyshare, of een eerdere) — retry de buffers elke ronde, host en guest.
-    await presence.retryPending();
-    await chat.retryPending();
+    // Short-circuit: als geen brick pending-entries heeft, is er niets te
+    // retryen — sla de retry-calls over en bespaar CPU-wakeups op een idle
+    // sessie (#1423). De host's ensureKeyed + re-baseline logica loopt nog
+    // steeds (een newcomer kan tussentijds zijn goedgekeurd).
+    final anyPending =
+        presence.hasPending || chat.hasPending || snapshotChannel.hasPending;
+    if (anyPending) {
+      // Presence/chat kunnen aankomen vóór de epoch-sleutel (zelfde stroom als
+      // de keyshare, of een eerdere) — retry de buffers elke ronde, host en
+      // guest.
+      await presence.retryPending();
+      await chat.retryPending();
+    }
     if (isHost) {
       await keyExchange.ensureKeyed();
       // A newcomer was just keyed — re-send the baseline so he can start (§6:
@@ -184,7 +193,7 @@ class XmppCollabLaunch {
       }
       return;
     }
-    await snapshotChannel.retryPending();
+    if (snapshotChannel.hasPending) await snapshotChannel.retryPending();
     if (_session == null && snapshotChannel.hasSnapshot) {
       final snapshot = await snapshotChannel.firstSnapshot;
       _session = CollabSession(
@@ -193,14 +202,18 @@ class XmppCollabLaunch {
         isAuthority: false,
         initialVersion: snapshot.version,
       );
-      // §4 re-baseline: a later snapshot (after a post-keying drop+resync)
-      // re-bases the session forward-only.
+      if (!_ready.isCompleted) _ready.complete(_session);
+    }
+    // §4 re-baseline: a later snapshot (after a post-keying drop+resync)
+    // re-bases the session forward-only. De listener moet ook gezet worden als
+    // de sessie al bestaat (bijv. na een reconnect) — anders gaat een re-
+    // baseline snapshot stil verloren (#1428).
+    if (_session != null && _rebaselineSub == null) {
       _rebaselineSub = snapshotChannel.rebaselines.listen((snap) {
         if (_session != null) {
           _session!.rebaseTo(snap.applyTo(_session!.deck), snap.version);
         }
       });
-      if (!_ready.isCompleted) _ready.complete(_session);
     }
   }
 
@@ -372,6 +385,11 @@ _WireResult _wire({
     peerResolver: (id) async => directory.resolve(id),
     onReconnected: onReconnected,
   );
+  // Wire de key-change callback: als een nieuwe device-sleutel of epoch-
+  // sleutel wordt geïnstalleerd, retry de transport zijn deferred backlog
+  // (#1424). Zonder deze callback zou de backlog alleen bij elke nieuwe
+  // op/lock-stanza worden gesweept — O(N²) bij een vloed stanzas.
+  keyExchange.onKeyInstalled = transport.notifyKeyChanged;
   return _WireResult(
     demux: demux,
     directory: directory,

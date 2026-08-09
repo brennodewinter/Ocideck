@@ -181,6 +181,49 @@ void main() {
         expect(dir.resolve('bobdev')?.deviceId, 'bobdev');
       },
     );
+
+    test(
+      'remove decrements the per-address count — cap is not permanent (#1422)',
+      () async {
+        // Na 8 device-rotaties per peer-address bereikte de oude code
+        // permanent de cap — remove() verlaagt de teller zodat een vertrokken
+        // device plaats maakt voor een nieuw.
+        final dir = CollabDeviceDirectory(perAddressDeviceCap: 3);
+        for (var i = 0; i < 3; i++) {
+          final keys = await _deviceKeys('dev$i', salt: i);
+          expect(
+            await dir.ingest(peerAddress: '@alice:hs', keys: keys),
+            isTrue,
+          );
+        }
+
+        // De cap is bereikt — een 4e device wordt geweigerd.
+        final fourth = await _deviceKeys('dev3', salt: 3);
+        expect(
+          await dir.ingest(peerAddress: '@alice:hs', keys: fourth),
+          isFalse,
+        );
+
+        // Verwijder een device — de teller daalt.
+        dir.remove('dev0');
+        expect(dir.resolve('dev0'), isNull);
+
+        // Nu kan een nieuw device worden toegevoegd — de cap is niet permanent.
+        final newKeys = await _deviceKeys('dev3', salt: 3);
+        expect(
+          await dir.ingest(peerAddress: '@alice:hs', keys: newKeys),
+          isTrue,
+          reason: 'after remove, the per-address count is decremented',
+        );
+      },
+    );
+
+    test('remove is a no-op for an unknown device', () async {
+      final dir = CollabDeviceDirectory();
+      // Geen crash, geen wijziging.
+      dir.remove('nonexistent');
+      expect(dir.knownDevices, isEmpty);
+    });
   });
 }
 

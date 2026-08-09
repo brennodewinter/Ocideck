@@ -60,6 +60,7 @@ class XmppPresenceBeacon {
     required CollabCrypto crypto,
     required this.roomJid,
     required this.directory,
+    this.pendingCap = 256,
   }) : _channel = stanzaChannel,
        _demux = companionDemux,
        _e2ee = crypto {
@@ -81,8 +82,17 @@ class XmppPresenceBeacon {
 
   /// Presence die aankwam vóór de epoch-sleutel of de afzender's device-keys
   /// bekend waren — een joiner ziet een peer's presence vóór zijn keyshare.
-  /// Keyed per device, laatste wint; [retryPending] heropent ze.
+  /// Keyed per device, laatste wint; [retryPending] heropent ze. Begrensd op
+  /// [pendingCap] — een vijandige server kan de map niet onbegrensd vullen met
+  /// nep-afzenders (#1413).
   final Map<String, SealedEnvelope> _pending = {};
+
+  /// Cap op de pending-map. Bij overflow verdrijft het oudste device (FIFO).
+  final int pendingCap;
+
+  /// Of er gebufferde presence wacht op retry — voor de syncNow short-circuit
+  /// (#1423).
+  bool get hasPending => _pending.isNotEmpty;
 
   /// Vuurt nadat een peer's presence verandert, zodat de provider de UI verversen kan.
   void Function()? onChanged;
@@ -137,6 +147,13 @@ class XmppPresenceBeacon {
       final sealed = SealedEnvelope.fromContent(decoded);
       // Eigen echo — de MUC reflecteert de afzender zijn eigen bericht terug.
       if (sealed.senderDevice == _e2ee.deviceId) return;
+      // Begrens de pending-map: een vijandige server die nep-afzenders stuurt
+      // mag het geheugen niet uitputten (#1413). Bij een nieuw device over de
+      // cap verdrijft het oudste (FIFO — de map behoudt invoegvolgorde).
+      if (!_pending.containsKey(sealed.senderDevice) &&
+          _pending.length >= pendingCap) {
+        _pending.remove(_pending.keys.first);
+      }
       _pending[sealed.senderDevice] = sealed; // laatste wint; _tryOpen verwerkt
       await _tryOpen(sealed.senderDevice);
     } on Exception catch (e) {

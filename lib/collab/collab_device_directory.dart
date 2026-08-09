@@ -129,6 +129,23 @@ class CollabDeviceDirectory {
   /// the event fail-closed at the transport.
   DevicePublicKeys? resolve(String deviceId) => _peers[deviceId]?.keys;
 
+  /// Verwijder een device uit de directory — bijv. als het device een
+  /// `unavailable`-presence stuurt (MUC-roster) of de sessie verlaat.
+  /// Verlaagt `_perAddressCount` zodat de cap niet permanent oploopt na
+  /// device-rotaties (#1422). No-op als het device niet bekend is.
+  void remove(String deviceId) {
+    final peer = _peers.remove(deviceId);
+    if (peer == null) return;
+    final count = _perAddressCount[peer.peerAddress];
+    if (count != null) {
+      if (count <= 1) {
+        _perAddressCount.remove(peer.peerAddress);
+      } else {
+        _perAddressCount[peer.peerAddress] = count - 1;
+      }
+    }
+  }
+
   /// The protocol-neutral address that owns [deviceId] (a Matrix user id, an
   /// XMPP room/nick), for addressing a key-share, or null if unknown.
   String? addressOf(String deviceId) => _peers[deviceId]?.peerAddress;

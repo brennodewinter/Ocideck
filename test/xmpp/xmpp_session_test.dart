@@ -461,6 +461,7 @@ void main() {
         reconnectTransportFactory: factory,
         onRejoin: (_) async {
           rejoinCalled = true;
+          return true;
         },
         reconnectDelay: (_) => Duration.zero,
       );
@@ -524,6 +525,136 @@ void main() {
 
         expect(inbound, hasLength(1));
         expect(inbound.single.child('body')?.innerText, 'after-reconnect');
+
+        await session.close();
+      },
+    );
+
+    test(
+      'stanzas sent during reconnect are buffered and flushed after (#1417)',
+      () async {
+        final firstTransport = happyServer(
+          mechanisms: ['PLAIN'],
+          sasl: (_) => ['<success xmlns="$_sasl"/>'],
+        );
+        final (factory, created) = reconnectFactory();
+        final reconnected = Completer<void>();
+
+        final session = XmppSession(
+          transport: firstTransport,
+          settings: account(),
+          password: 'pencil',
+          reconnectTransportFactory: factory,
+          onRejoin: (_) async => true,
+          reconnectDelay: (_) => Duration.zero,
+        );
+        session.onReconnected.listen((_) => reconnected.complete());
+
+        await session.connect();
+
+        // Drop de stream — de sessie gaat naar _live = false en start reconnect.
+        firstTransport.dropStream();
+        // Wacht tot de reconnect begint (de factory wordt aangeroepen).
+        await Future<void>.delayed(Duration.zero);
+
+        // Verzend een stanza TUSSEN de drop en de geslaagde reconnect — _live
+        // is false, dus de oude code dropt hem stil. De fix buffert hem.
+        session.sendStanza(
+          Stanza(
+            kind: StanzaKind.message,
+            type: 'groupchat',
+            to: 'room@conf.example.org',
+            children: [xmppElement('body', text: 'buffered-during-reconnect')],
+          ),
+        );
+
+        // Voltooi de reconnect.
+        await reconnected.future.timeout(const Duration(seconds: 5));
+
+        // De gebufferde stanza is gespoeld naar de nieuwe transport — hij
+        // staat in de sent-log.
+        expect(
+          created.first.sent.any(
+            (f) => f.contains('buffered-during-reconnect'),
+          ),
+          isTrue,
+          reason: 'a stanza sent during reconnect is flushed after',
+        );
+
+        await session.close();
+      },
+    );
+
+    test('an unanswered ping triggers stream drop (XEP-0199, #1418)', () async {
+      final firstTransport = happyServer(
+        mechanisms: ['PLAIN'],
+        sasl: (_) => ['<success xmlns="$_sasl"/>'],
+      );
+
+      final session = XmppSession(
+        transport: firstTransport,
+        settings: account(),
+        password: 'pencil',
+        pingInterval: const Duration(milliseconds: 50),
+      );
+
+      await session.connect();
+
+      final stanzasDone = Completer<void>();
+      session.stanzas.listen((_) {}, onDone: () => stanzasDone.complete());
+
+      // De server antwoordt niet op pings. Na twee ping-intervallen (50ms
+      // × 2 = 100ms) is de eerste ping nog in-flight wanneer de tweede
+      // timer vuurt → _onStreamDropped → stanzas sluit.
+      await stanzasDone.future.timeout(const Duration(seconds: 2));
+      expect(stanzasDone.isCompleted, isTrue);
+      // De stanzas-stream is gesloten — de ping detecteerde de dode
+      // verbinding en triggerde _onStreamDropped.
+
+      await session.close();
+    });
+
+    test(
+      'a failed rejoin (nick-conflict) triggers backoff, not silent success (#1416)',
+      () async {
+        final firstTransport = happyServer(
+          mechanisms: ['PLAIN'],
+          sasl: (_) => ['<success xmlns="$_sasl"/>'],
+        );
+        final (factory, created) = reconnectFactory();
+        var rejoinAttempts = 0;
+        final reconnected = Completer<void>();
+
+        final session = XmppSession(
+          transport: firstTransport,
+          settings: account(),
+          password: 'pencil',
+          reconnectTransportFactory: factory,
+          onRejoin: (_) async {
+            rejoinAttempts++;
+            // Eerste rejoin faalt (nick-conflict — de oude occupant is nog
+            // actief). Tweede rejoin slaagt (de timeout heeft gefuurd).
+            return rejoinAttempts > 1;
+          },
+          maxReconnectAttempts: 5,
+          reconnectDelay: (_) => Duration.zero,
+        );
+        session.onReconnected.listen((_) => reconnected.complete());
+
+        final result = await session.connect();
+        expect(result.ok, isTrue);
+
+        // Drop de stream — de sessie reconnect, rejoin faalt, backoff, opnieuw.
+        firstTransport.dropStream();
+        await reconnected.future.timeout(const Duration(seconds: 5));
+
+        // De factory is twee keer aangeroepen (twee reconnect-pogingen).
+        expect(created, hasLength(2));
+        // De rejoin is twee keer aangeroepen — de eerste faalde, de tweede
+        // slaagde. Met de oude code zou de rejoin eenmaal faalen en de sessie
+        // zou toch succes claimen.
+        expect(rejoinAttempts, 2);
+        expect(session.boundJid, isNotNull);
 
         await session.close();
       },
