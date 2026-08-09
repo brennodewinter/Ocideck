@@ -782,6 +782,13 @@ class SlideQualityAnalyzer {
           field: 'imagePath',
           label: 'Achtergrondafbeelding',
         );
+        if (slide.titleColumnLayout != TitleColumnLayout.none) {
+          missingFile(
+            path: slide.imagePath2,
+            field: 'imagePath2',
+            label: 'Rechter kolomafbeelding',
+          );
+        }
       case SlideType.video:
         missingFile(path: slide.videoPath, field: 'videoPath', label: 'Video');
       case SlideType.question:

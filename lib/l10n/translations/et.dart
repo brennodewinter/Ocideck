@@ -1764,6 +1764,16 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afbeeldingslay-out': 'Pildi paigutus',
+  'Beide': 'Mõlemad',
+  'Volvlak': 'Täisleht',
+  'Kolombreedte': 'Veeru laius',
+  'Linker kolomafbeelding': 'Vasaku veeru pilt',
+  'Rechter kolomafbeelding': 'Parema veeru pilt',
+  'Geen linker kolomafbeelding': 'Pole vasaku veeru pilti',
+  'Geen rechter kolomafbeelding': 'Pole parema veeru pilti',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Täisleht: pilt kui ekraani täitev taust. Vasak/Parem/Mõlemad: üks või kaks pildiveergu pealkirjateksti kõrval.',
   'Hernoemen': 'Nimeta ümber',
   'Naam wijzigen': 'Muuda nime',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

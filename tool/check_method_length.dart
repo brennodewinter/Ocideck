@@ -34,6 +34,12 @@ const Map<String, int> methodLengthBaseline = {
   // die in het extractie-pad landt. De methode stond al op de limiet.
   'lib/services/file/file_service_import.dart::FileServiceImport.importPackageBytesDetailed':
       151,
+  // +3 (#1405): missing-file check voor rechter kolomafbeelding in titel-
+  // kolommodus. De methode stond al op de limiet.
+  'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
+      153,
+  // +128 (#1405): layoutkeuze + beeldkolommen + kolombreedte in de titel-editor.
+  'lib/widgets/editors/title_editor.dart::_TitleEditorState.build': 278,
   // Procesverbetering VSM/swimlane scene builder — extract lane packing next.
   'lib/services/improvement/flow_layout.dart::buildFlowScene': 163,
   // Procesverbetering block directives (matrix/canvas/tree/flow/phaseGate).
@@ -44,7 +50,8 @@ const Map<String, int> methodLengthBaseline = {
   // +2 (#1162): `anchor`/`nextAnchor` doorgeven aan de Slide-constructor.
   // +15: tableDecoded/tableAlignments voor GFM-scheidingsrij-uitlijning.
   // +3: tableNumberColumns doorgeven aan Slide.
-  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 180,
+  // +19 (#1405): titel-kolommodus afleiding uit sawBgLeft/sawBgRight.
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 199,
   // Procesverbetering SVG export for statistical chart types.
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,
@@ -69,7 +76,8 @@ const Map<String, int> methodLengthBaseline = {
   // +2 (#1238): ganttScale/ganttSections in copyWith — pure plumbing.
   // +3: tableColumnAlignments-parameter voor GFM-uitlijning.
   // +2: tableNumberColumns-parameter.
-  'lib/models/slide.dart::Slide.copyWith': 157,
+  // +4 (#1405): titleColumnLayout/titleColumnWidth in copyWith.
+  'lib/models/slide.dart::Slide.copyWith': 161,
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
       188,

@@ -1800,6 +1800,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Afbeeldingslay-out': 'Διάταξη εικόνας',
+  'Beide': 'Και τα δύο',
+  'Volvlak': 'Πλήρης κάλυψη',
+  'Kolombreedte': 'Πλάτος στήλης',
+  'Linker kolomafbeelding': 'Εικόνα αριστερού στήλης',
+  'Rechter kolomafbeelding': 'Εικόνα δεξιού στήλης',
+  'Geen linker kolomafbeelding': 'Καμία εικόνα αριστερού στήλης',
+  'Geen rechter kolomafbeelding': 'Καμία εικόνα δεξιού στήλης',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Πλήρης κάλυψη: η εικόνα ως φόντο πλήρους οθόνης. Αριστερά/Δεξιά/Και τα δύο: μία ή δύο στήλες εικόνων δίπλα στο κείμενο του τίτλου.',
   'Hernoemen': 'Μετονομασία',
   'Naam wijzigen': 'Αλλαγή ονόματος',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

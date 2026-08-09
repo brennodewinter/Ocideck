@@ -1772,6 +1772,16 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Afbeeldingslay-out': 'Attēla izkārtojums',
+  'Beide': 'Abi',
+  'Volvlak': 'Pilnais',
+  'Kolombreedte': 'Kolonnas platums',
+  'Linker kolomafbeelding': 'Kreisās kolonnas attēls',
+  'Rechter kolomafbeelding': 'Labās kolonnas attēls',
+  'Geen linker kolomafbeelding': 'Nav kreisās kolonnas attēla',
+  'Geen rechter kolomafbeelding': 'Nav labās kolonnas attēla',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Pilnais: attēls kā ekrānu aizpildošs fons. Pa kreisi/Pa labi/Abi: viena vai divas attēlu kolonnas blakus virsraksta tekstam.',
   'Hernoemen': 'Pārsaukt',
   'Naam wijzigen': 'Mainīt nosaukumu',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

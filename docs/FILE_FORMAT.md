@@ -653,6 +653,17 @@ image.
 ## Subtitle
 ```
 
+**Title with image columns** (`title`, #1405) — one or two image columns beside
+the title text, using native Marp `![bg left:W%]` / `![bg right:W%]` syntax (no
+OciDeck token). `imagePath` is the left column, `imagePath2` the right. The
+column width `W` is a percentage (10–40, default 25).
+```markdown
+![bg left:25%](images/left.png)
+![bg right:25%](images/right.png)
+# Title
+## Subtitle
+```
+
 **Section** (`section`)
 ```markdown
 # Section title

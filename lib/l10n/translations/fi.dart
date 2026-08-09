@@ -1773,6 +1773,16 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afbeeldingslay-out': 'Kuvan asettelu',
+  'Beide': 'Molemmat',
+  'Volvlak': 'Täysi',
+  'Kolombreedte': 'Sarakkeen leveys',
+  'Linker kolomafbeelding': 'Vasemman sarakkeen kuva',
+  'Rechter kolomafbeelding': 'Oikean sarakkeen kuva',
+  'Geen linker kolomafbeelding': 'Ei vasemman sarakkeen kuvaa',
+  'Geen rechter kolomafbeelding': 'Ei oikean sarakkeen kuvaa',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Täysi: kuva näytön täyttävänä taustana. Vasen/Oikea/Molemmat: yksi tai kaksi kuvapalstaa otsikkotekstin vieressä.',
   'Hernoemen': 'Nimeä uudelleen',
   'Naam wijzigen': 'Vaihda nimi',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':

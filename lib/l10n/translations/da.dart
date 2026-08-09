@@ -1772,6 +1772,16 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Afbeeldingslay-out': 'Billedlayout',
+  'Beide': 'Begge',
+  'Volvlak': 'Fuldside',
+  'Kolombreedte': 'Kolonnebredde',
+  'Linker kolomafbeelding': 'Venstre kolonnebillede',
+  'Rechter kolomafbeelding': 'Højre kolonnebillede',
+  'Geen linker kolomafbeelding': 'Intet venstre kolonnebillede',
+  'Geen rechter kolomafbeelding': 'Intet højre kolonnebillede',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Fuldside: billedet som skærmfyldende baggrund. Venstre/Højre/Begge: en eller to billedkolonner ved siden af titelteksten.',
   'Hernoemen': 'Omdøb',
   'Naam wijzigen': 'Ændr navn',
   'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
