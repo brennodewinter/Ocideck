@@ -531,6 +531,59 @@ void main() {
     );
 
     test(
+      'stanzas sent during reconnect are buffered and flushed after (#1417)',
+      () async {
+        final firstTransport = happyServer(
+          mechanisms: ['PLAIN'],
+          sasl: (_) => ['<success xmlns="$_sasl"/>'],
+        );
+        final (factory, created) = reconnectFactory();
+        final reconnected = Completer<void>();
+
+        final session = XmppSession(
+          transport: firstTransport,
+          settings: account(),
+          password: 'pencil',
+          reconnectTransportFactory: factory,
+          onRejoin: (_) async => true,
+          reconnectDelay: (_) => Duration.zero,
+        );
+        session.onReconnected.listen((_) => reconnected.complete());
+
+        await session.connect();
+
+        // Drop de stream — de sessie gaat naar _live = false en start reconnect.
+        firstTransport.dropStream();
+        // Wacht tot de reconnect begint (de factory wordt aangeroepen).
+        await Future<void>.delayed(Duration.zero);
+
+        // Verzend een stanza TUSSEN de drop en de geslaagde reconnect — _live
+        // is false, dus de oude code dropt hem stil. De fix buffert hem.
+        session.sendStanza(
+          Stanza(
+            kind: StanzaKind.message,
+            type: 'groupchat',
+            to: 'room@conf.example.org',
+            children: [xmppElement('body', text: 'buffered-during-reconnect')],
+          ),
+        );
+
+        // Voltooi de reconnect.
+        await reconnected.future.timeout(const Duration(seconds: 5));
+
+        // De gebufferde stanza is gespoeld naar de nieuwe transport — hij
+        // staat in de sent-log.
+        expect(
+          created.first.sent.any((f) => f.contains('buffered-during-reconnect')),
+          isTrue,
+          reason: 'a stanza sent during reconnect is flushed after',
+        );
+
+        await session.close();
+      },
+    );
+
+    test(
       'a failed rejoin (nick-conflict) triggers backoff, not silent success (#1416)',
       () async {
         final firstTransport = happyServer(

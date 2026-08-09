@@ -183,6 +183,14 @@ class XmppSession implements XmppStanzaChannel {
   bool _closed = false;
   bool _reconnecting = false;
 
+  /// Outbound stanzas die tijdens een reconnect werden verzonden (_live =
+  /// false). Begrensd op 64 — een aanhoudende stroom tijdens een lange
+  /// reconnect mag het geheugen niet uitputten (#1417). Na een geslaagde
+  /// reconnect spoelt `_reconnect` de queue naar de nieuwe transport; bij
+  /// fail-closed wordt de queue gewist.
+  static const _outboundQueueCap = 64;
+  final List<String> _outboundQueue = [];
+
   /// The full JID the server bound (`localpart@domain/resource`), or null before
   /// a successful [connect].
   @override
@@ -567,6 +575,9 @@ class XmppSession implements XmppStanzaChannel {
             }
           }
           if (!_reconnected.isClosed) _reconnected.add(null);
+          // Spoel de outbound-queue — stanzas die tijdens de reconnect werden
+          // verzonden, gaan nu alsnog op de wire (#1417).
+          _flushOutboundQueue();
           return; // success
         } on TimeoutException {
           continue; // server reageerde niet — backoff en opnieuw
@@ -581,6 +592,7 @@ class XmppSession implements XmppStanzaChannel {
       }
       // Max pogingen bereikt — fail-closed: de sessie is dood.
       _boundJid = null;
+      _outboundQueue.clear();
       if (!_inbound.isClosed) await _inbound.close();
     } finally {
       _reconnecting = false;
@@ -597,11 +609,32 @@ class XmppSession implements XmppStanzaChannel {
     }
   }
 
-  /// Send a stanza on the live session. A no-op once closed.
+  /// Spoel de gebufferde outbound stanzas naar de huidige transport. Leegt de
+  /// queue ongeacht of de transport ze accepteert — een send-fout op één stanza
+  /// mag niet de hele queue laten hangen.
+  void _flushOutboundQueue() {
+    if (_outboundQueue.isEmpty) return;
+    for (final frame in _outboundQueue) {
+      if (!_closed && _live) transport.send(frame);
+    }
+    _outboundQueue.clear();
+  }
+
+  /// Send a stanza on the live session. A no-op once closed. Tijdens een
+  /// reconnect (_live = false met een reconnect-factory) wordt de stanza
+  /// gebufferd en na een geslaagde reconnect gespoeld (#1417) — in plaats van
+  /// stil gedropt te worden.
   @override
   void sendStanza(Stanza stanza) {
-    if (_closed || !_live) return;
-    transport.send(stanza.toXmlString());
+    if (_closed) return;
+    if (_live) {
+      transport.send(stanza.toXmlString());
+    } else if (reconnectTransportFactory != null) {
+      if (_outboundQueue.length < _outboundQueueCap) {
+        _outboundQueue.add(stanza.toXmlString());
+      }
+    }
+    // Geen reconnect-factory en niet live — pre-reconnect gedrag: drop stil.
   }
 
   Future<void> close() async {
