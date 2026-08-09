@@ -477,6 +477,13 @@ class Slide {
   codeLanguage; // highlight.js language id for code slides ('' = plain)
   final String cssClass;
   final String notes;
+
+  /// Marp body lines OciDeck does not model but must never destroy on save.
+  ///
+  /// They are kept verbatim and emitted before the typed body. This covers
+  /// forward-compatible spot directives and extended background syntax while
+  /// the ordinary typed fields remain editable.
+  final List<String> preservedMarpLines;
   final double advanceDuration; // 0 = no auto-advance
   final int imageSize; // 0 = auto; image: bg %, bulletsImage: right panel %
   final bool titleImageOverlay; // darken title background image for readability
@@ -700,6 +707,7 @@ class Slide {
     this.codeLanguage = '',
     this.cssClass = '',
     this.notes = '',
+    this.preservedMarpLines = const [],
     this.advanceDuration = 0,
     this.imageSize = 0,
     this.titleImageOverlay = true,
@@ -864,6 +872,7 @@ class Slide {
       codeLanguage: src.codeLanguage,
       cssClass: src.cssClass,
       notes: withoutOpenKatGeneratedOrigin(src.notes),
+      preservedMarpLines: List<String>.from(src.preservedMarpLines),
       advanceDuration: src.advanceDuration,
       imageSize: src.imageSize,
       titleImageOverlay: src.titleImageOverlay,
@@ -933,6 +942,7 @@ class Slide {
     String? codeLanguage,
     String? cssClass,
     String? notes,
+    List<String>? preservedMarpLines,
     double? advanceDuration,
     int? imageSize,
     bool? titleImageOverlay,
@@ -1010,6 +1020,7 @@ class Slide {
       codeLanguage: codeLanguage ?? this.codeLanguage,
       cssClass: cssClass ?? this.cssClass,
       notes: notes ?? this.notes,
+      preservedMarpLines: preservedMarpLines ?? this.preservedMarpLines,
       advanceDuration: advanceDuration ?? this.advanceDuration,
       imageSize: imageSize ?? this.imageSize,
       titleImageOverlay: titleImageOverlay ?? this.titleImageOverlay,

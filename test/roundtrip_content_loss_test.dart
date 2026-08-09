@@ -231,6 +231,45 @@ void main() {
   });
 
   group('notities en opmerkingen', () {
+    test(
+      'Marp-richtlijnen die OciDeck niet toepast blijven behouden (#1436)',
+      () {
+        const source = '''
+---
+marp: true
+---
+
+<!-- _class: section -->
+<!-- _header: Vertrouwelijk -->
+<!-- fit -->
+
+![bg 35%](images/laag-een.png)
+![bg contain blur:2px](images/laag-twee.png)
+![bg](images/laag-drie.png)
+
+# Kop
+
+Samenvatting
+
+<!-- Echte notitie -->
+''';
+        final parsed = md.parseDeck(source)!;
+
+        expect(parsed.slides.single.type, SlideType.section);
+        expect(parsed.slides.single.notes, 'Echte notitie');
+
+        final saved = md.generateDeck(parsed);
+        expect(saved, contains('<!-- _header: Vertrouwelijk -->'));
+        expect(saved, contains('<!-- fit -->'));
+        expect(saved, contains('![bg contain blur:2px](images/laag-twee.png)'));
+        expect(saved, contains('![bg](images/laag-drie.png)'));
+
+        final reopened = md.parseDeck(saved)!;
+        expect(reopened.slides.single.type, SlideType.section);
+        expect(reopened.slides.single.notes, 'Echte notitie');
+      },
+    );
+
     test('een opmerking van de auteur blijft in de tekst staan', () {
       final out = roundTrip(
         slideOf(

@@ -25,6 +25,10 @@ final _reNumberedMark = RegExp(r'^\d+[.)]$');
 final _reBgImage = RegExp(r'!\[bg');
 final _reBgImageUrl = RegExp(r'!\[bg[^\]]*\]\(([^)]+)\)');
 final _reBgImageSize = RegExp(r'!\[bg[^\]]*?(\d+)%[^\]]*\]');
+final _reUnsupportedMarpBg = RegExp(
+  r'!\[bg[^\]]*(?:\bfit\b|\bcontain\b|\bblur(?::|\b)|\bbrightness(?::|\b)|\bsaturate(?::|\b)|\bgrayscale\b|\bsepia\b|\binvert\b)',
+  caseSensitive: false,
+);
 final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
 final _reHtmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
 final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
@@ -326,6 +330,7 @@ extension _MarkdownParse on MarkdownService {
       aiAssistedFields: link.aiAssistedFields,
       privacy: d.privacy,
       quality: d.quality,
+      preservedMarpLines: d.preservedMarpLines,
     );
   }
 
@@ -465,6 +470,7 @@ extension _MarkdownParse on MarkdownService {
       ),
       cssClass: effectiveClass,
       notes: d.notes,
+      preservedMarpLines: d.preservedMarpLines,
       advanceDuration: d.advanceDuration,
       showLogo: showLogo,
       showFooter: showFooter,

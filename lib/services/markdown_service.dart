@@ -711,6 +711,9 @@ void _writeSlideDirectives(
   if (classes.isNotEmpty) {
     buf.writeln('<!-- _class: ${classes.join(' ')} -->');
   }
+  for (final line in slide.preservedMarpLines) {
+    buf.writeln(line);
+  }
   // Finding-group linkage (PENTEST_MIAUW §3.1): a shared id + role tie a
   // header card to its detail/evidence slides. Written for any slide that
   // joins a group — a `finding` header, but also a `bullets` detail or an

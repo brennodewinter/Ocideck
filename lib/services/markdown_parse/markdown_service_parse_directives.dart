@@ -17,6 +17,7 @@ typedef _BlockDirectives = ({
   String cssClass,
   String remaining,
   String notes,
+  List<String> preservedMarpLines,
   double advanceDuration,
   bool skipped,
   bool isDetail,
@@ -96,6 +97,7 @@ extension _MarkdownParseDirectives on MarkdownService {
 
     // Extract presenter notes and advance timing from HTML comments
     final notesBuffer = StringBuffer();
+    final preservedMarpLines = <String>[];
     double advanceDuration = 0;
     bool skipped = false;
     bool isDetail = false;
@@ -225,7 +227,11 @@ extension _MarkdownParseDirectives on MarkdownService {
         tableNumberColumns = _parseNumCols(raw);
       } else if (content.startsWith('ocideck_view_')) {
         _collectViewComment(viewComments, content);
-      } else if (!content.startsWith('_')) {
+      } else if (content == 'fit') {
+        preservedMarpLines.add(m.group(0)!);
+      } else if (content.startsWith('_')) {
+        preservedMarpLines.add(m.group(0)!);
+      } else {
         // Geen richtlijn die wij kennen: notitie of opmerking? Zie [_isTailNote].
         if (_isTailNote(source.substring(m.end))) {
           return _takeNote(notesBuffer, content);
@@ -234,12 +240,16 @@ extension _MarkdownParseDirectives on MarkdownService {
       }
       return '';
     }).trim();
+    final passThrough = _extractUnsupportedMarpImageLines(remaining);
+    remaining = passThrough.remaining;
+    preservedMarpLines.addAll(passThrough.preserved);
     final notes = _unescapeNotes(notesBuffer.toString().trim());
 
     return (
       cssClass: cssClass,
       remaining: remaining,
       notes: notes,
+      preservedMarpLines: preservedMarpLines,
       advanceDuration: advanceDuration,
       skipped: skipped,
       isDetail: isDetail,
@@ -271,6 +281,32 @@ extension _MarkdownParseDirectives on MarkdownService {
       ganttSections: ganttSections,
       tableNumberColumns: tableNumberColumns,
     );
+  }
+
+  /// Removes extended background lines the typed image model cannot represent
+  /// and returns them verbatim for pass-through. The first two ordinary Marp
+  /// backgrounds still use the existing typed fields; any extra layer, keyword
+  /// fit, or filter stays source data instead of being partially interpreted.
+  ({String remaining, List<String> preserved})
+  _extractUnsupportedMarpImageLines(String source) {
+    final preserved = <String>[];
+    var backgroundCount = 0;
+    final kept = <String>[];
+    for (final line in source.split('\n')) {
+      final trimmed = line.trim();
+      if (!_reBgImage.hasMatch(trimmed)) {
+        kept.add(line);
+        continue;
+      }
+      backgroundCount++;
+      final extended = _reUnsupportedMarpBg.hasMatch(trimmed);
+      if (backgroundCount > 2 || extended) {
+        preserved.add(line);
+      } else {
+        kept.add(line);
+      }
+    }
+    return (remaining: kept.join('\n').trim(), preserved: preserved);
   }
 
   /// De twee timeline-directives: animatieduur en het gemarkeerde event.

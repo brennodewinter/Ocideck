@@ -194,6 +194,7 @@ enum SlideField {
   // — List<String> —
   bullets,
   bullets2,
+  preservedMarpLines,
   // — bool —
   showChecklistProgress,
   continueNumbering,
@@ -389,6 +390,9 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     ),
     SlideField.bullets2 => slide.copyWith(
       bullets2: _castList<String>(value, field),
+    ),
+    SlideField.preservedMarpLines => slide.copyWith(
+      preservedMarpLines: _castList<String>(value, field),
     ),
     SlideField.showChecklistProgress => slide.copyWith(
       showChecklistProgress: _cast<bool>(value, field),

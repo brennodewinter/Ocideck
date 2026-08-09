@@ -695,7 +695,8 @@ marp: true
         result.issues.any(
           (i) =>
               i.severity == MarkdownValidationSeverity.warning &&
-              i.message.contains('_paginate'),
+              i.message.contains('_paginate') &&
+              i.message.contains('blijft bij opslaan behouden'),
         ),
         isTrue,
       );

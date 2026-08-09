@@ -44,6 +44,10 @@ _slideCases = {
   ),
   SlideField.bullets: (value: ['a', 'b'], read: (s) => s.bullets),
   SlideField.bullets2: (value: ['c', 'd'], read: (s) => s.bullets2),
+  SlideField.preservedMarpLines: (
+    value: ['<!-- _future: value -->'],
+    read: (s) => s.preservedMarpLines,
+  ),
   SlideField.showChecklistProgress: (
     value: true,
     read: (s) => s.showChecklistProgress,

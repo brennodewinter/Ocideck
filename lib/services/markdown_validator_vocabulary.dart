@@ -63,8 +63,8 @@ const _validListStyles = {'bullets', 'numbered', 'checklist', 'richText'};
 
 // Comment directives `_parseBlockDirectives` understands. A comment that looks
 // like a directive (`_key:` / `ocideck_key:`) but is not one of these is
-// dropped without effect — e.g. Marp's per-slide `_paginate`, `_header`,
-// `_footer`, `_color` — so the validator flags it.
+// passed through without visual effect — e.g. Marp's per-slide `_paginate`,
+// `_header`, `_footer`, `_color` — so the validator explains the limitation.
 const _supportedCommentDirectives = {
   '_class',
   '_style',
