@@ -94,6 +94,8 @@ typedef RedactedText = ({String text, int count});
 /// Een half-open bereik in een tekst.
 typedef _Range = ({int start, int end});
 
+typedef _ProjectedSlides = ({List<Slide> slides, int count, Set<int> shielded});
+
 /// Bouwt een [AudienceDeck] uit een bron-[Deck].
 class PrivacyProjection {
   const PrivacyProjection._();
@@ -198,8 +200,6 @@ class PrivacyProjection {
         ).scan(deck);
 
     var count = 0;
-    final shielded = <int>{};
-
     // Deckvelden voeden de documentmetadata (PDF-properties, PPTX-docProps):
     // leesbaar, ook al staat er op geen enkele slide iets van te zien.
     final deckRedact = external || deck.privacy == PrivacyDisposition.redact;
@@ -214,31 +214,8 @@ class PrivacyProjection {
       return result.text;
     }
 
-    final slides = <Slide>[];
-    for (var i = 0; i < deck.slides.length; i++) {
-      final slide = deck.slides[i];
-      final disposition = effectivePrivacyDisposition(
-        deck: deck.privacy,
-        slide: slide.privacy,
-      );
-      if (disposition == PrivacyDisposition.shield) shielded.add(i);
-
-      final active = external || disposition == PrivacyDisposition.redact;
-      final byFragment = _byFragment(scan.forSlide(i), active: active);
-
-      final projected = _projectSlide(
-        slide,
-        byFragment,
-        active: active,
-        deckBackgroundImage: deck.marpStyle.backgroundImage,
-      );
-      count += projected.count;
-      // De effectieve stand wordt op de geprojecteerde slide gezet. Zo reist het
-      // shield mee mét de slide en kan geen renderoppervlak hem vergeten — een
-      // extra parameter door elf aanroepplaatsen heen zou wél te vergeten zijn,
-      // en dan verdwijnt de waarschuwing voor de ontvanger stilletjes.
-      slides.add(projected.slide.copyWith(privacy: disposition));
-    }
+    final projectedSlides = _projectSlides(deck, scan, external: external);
+    count += projectedSlides.count;
 
     // Deck.userNotes staat er bewust NIET bij. Dat zijn de notities die de
     // ontvanger zélf typt; ze bereiken geen enkel exportartefact en geen
@@ -272,7 +249,7 @@ class PrivacyProjection {
       );
     }
     final projected = deck.copyWith(
-      slides: slides,
+      slides: projectedSlides.slides,
       title: deckField('deckTitle', deck.title),
       author: deckField('author', deck.author),
       organization: deckField('organization', deck.organization),
@@ -327,7 +304,7 @@ class PrivacyProjection {
       ),
     );
 
-    return AudienceDeck._(projected, count, shielded);
+    return AudienceDeck._(projected, count, projectedSlides.shielded);
   }
 
   /// Groepeert de te redigeren bevindingen per tekstfragment.
@@ -591,4 +568,39 @@ class PrivacyProjection {
   /// Vervangt elke `[[…]]`-markering door de blokken. Puur en zelfstandig
   /// testbaar.
   static RedactedText redactText(String source) => _redact(source, const []);
+}
+
+_ProjectedSlides _projectSlides(
+  Deck deck,
+  PrivacyScanResult scan, {
+  required bool external,
+}) {
+  var count = 0;
+  final slides = <Slide>[];
+  final shielded = <int>{};
+  for (var i = 0; i < deck.slides.length; i++) {
+    final slide = deck.slides[i];
+    final disposition = effectivePrivacyDisposition(
+      deck: deck.privacy,
+      slide: slide.privacy,
+    );
+    if (disposition == PrivacyDisposition.shield) shielded.add(i);
+
+    final active = external || disposition == PrivacyDisposition.redact;
+    final byFragment = PrivacyProjection._byFragment(
+      scan.forSlide(i),
+      active: active,
+    );
+    final projected = PrivacyProjection._projectSlide(
+      slide,
+      byFragment,
+      active: active,
+      deckBackgroundImage: deck.marpStyle.backgroundImage,
+    );
+    count += projected.count;
+    // De effectieve stand reist met de dia mee, zodat geen renderoppervlak het
+    // shield via een vergeten extra parameter kan kwijtraken.
+    slides.add(projected.slide.copyWith(privacy: disposition));
+  }
+  return (slides: slides, count: count, shielded: shielded);
 }
