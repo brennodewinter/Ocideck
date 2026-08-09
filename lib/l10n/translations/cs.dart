@@ -1776,6 +1776,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Titel boven afbeelding': 'Nadpis nad obrázkem',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Zobrazuje nadpis nad obrázkem místo přes něj',
   'Afbeeldingslay-out': 'Rozvržení obrázku',
   'Beide': 'Obě',
   'Volvlak': 'Celá plocha',

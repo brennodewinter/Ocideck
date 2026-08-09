@@ -197,6 +197,7 @@ Map<String, Object?> slideToJson(Slide s) => {
   'advanceDuration': s.advanceDuration,
   'imageSize': s.imageSize,
   'titleImageOverlay': s.titleImageOverlay,
+  'imageTitleAbove': s.imageTitleAbove,
   'titleTextColorOverride': s.titleTextColorOverride,
   'titleColumnLayout': s.titleColumnLayout.name,
   'titleColumnWidth': s.titleColumnWidth,
@@ -266,6 +267,7 @@ Slide slideFromJson(Map<String, Object?> j) => Slide(
   advanceDuration: _double(j, 'advanceDuration'),
   imageSize: _int(j, 'imageSize'),
   titleImageOverlay: _bool(j, 'titleImageOverlay'),
+  imageTitleAbove: _bool(j, 'imageTitleAbove'),
   titleTextColorOverride: _str(j, 'titleTextColorOverride'),
   titleColumnLayout: _enumByName(
     TitleColumnLayout.values,
@@ -418,6 +420,7 @@ const Map<SlideField, _ValueKind> _slideFieldKinds = {
   SlideField.videoAutoplay: _ValueKind.boolean,
   SlideField.audioAutoplay: _ValueKind.boolean,
   SlideField.titleImageOverlay: _ValueKind.boolean,
+  SlideField.imageTitleAbove: _ValueKind.boolean,
   SlideField.showLogo: _ValueKind.boolean,
   SlideField.showFooter: _ValueKind.boolean,
   SlideField.skipped: _ValueKind.boolean,

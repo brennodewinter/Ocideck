@@ -1780,6 +1780,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Titel boven afbeelding': 'Nadpis nad obrázkom',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Zobrazuje nadpis nad obrázkom namiesto cezeň',
   'Afbeeldingslay-out': 'Rozloženie obrázku',
   'Beide': 'Obidve',
   'Volvlak': 'Celá plocha',

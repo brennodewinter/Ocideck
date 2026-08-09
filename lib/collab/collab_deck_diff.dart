@@ -180,6 +180,7 @@ Object? slideFieldValue(Slide slide, SlideField field) {
     SlideField.videoAutoplay => slide.videoAutoplay,
     SlideField.audioAutoplay => slide.audioAutoplay,
     SlideField.titleImageOverlay => slide.titleImageOverlay,
+    SlideField.imageTitleAbove => slide.imageTitleAbove,
     SlideField.showLogo => slide.showLogo,
     SlideField.showFooter => slide.showFooter,
     SlideField.skipped => slide.skipped,

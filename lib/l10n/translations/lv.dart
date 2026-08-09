@@ -1772,6 +1772,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Titel boven afbeelding': 'Virsraksts virs attēla',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Rāda virsrakstu virs attēla nevis uzlikts uz tā',
   'Afbeeldingslay-out': 'Attēla izkārtojums',
   'Beide': 'Abi',
   'Volvlak': 'Pilnais',

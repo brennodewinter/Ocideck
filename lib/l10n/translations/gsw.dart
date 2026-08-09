@@ -1776,6 +1776,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Titel boven afbeelding': 'Titel überem Bild',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Zeigt de Titel überem Bild statt drüber',
   'Afbeeldingslay-out': 'Bild-Layout',
   'Beide': 'Beidi',
   'Volvlak': 'Vollflächig',

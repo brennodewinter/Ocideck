@@ -1780,6 +1780,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Titel boven afbeelding': 'Antraštė virš paveikslėlio',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Rodo antraštę virš paveikslėlio vietoj uždėtos ant jo',
   'Afbeeldingslay-out': 'Paveikslėlio išdėstymas',
   'Beide': 'Abu',
   'Volvlak': 'Visas plotas',

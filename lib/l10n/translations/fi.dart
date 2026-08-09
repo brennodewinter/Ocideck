@@ -1773,6 +1773,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Titel boven afbeelding': 'Otsikko kuvan yläpuolella',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Näyttää otsikon kuvan yläpuolella sen sijaan, että se olisi päällä',
   'Afbeeldingslay-out': 'Kuvan asettelu',
   'Beide': 'Molemmat',
   'Volvlak': 'Täysi',

@@ -732,6 +732,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Titel boven afbeelding': 'Titel über dem Bild',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Zeigt den Titel über dem Bild statt darüber',
   'Afbeeldingslay-out': 'Bildlayout',
   'Beide': 'Beide',
   'Volvlak': 'Vollflächig',

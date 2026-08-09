@@ -1790,6 +1790,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Titel boven afbeelding': 'Заголовок над зображенням',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Показує заголовок над зображенням замість накладеного на нього',
   'Afbeeldingslay-out': 'Розташування зображення',
   'Beide': 'Обидва',
   'Volvlak': 'На весь екран',

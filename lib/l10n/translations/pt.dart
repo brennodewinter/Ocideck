@@ -1802,6 +1802,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Titel boven afbeelding': 'Título acima da imagem',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Mostra o título acima da imagem em vez de sobreposta',
   'Afbeeldingslay-out': 'Disposição da imagem',
   'Beide': 'Ambos',
   'Volvlak': 'Sangria total',

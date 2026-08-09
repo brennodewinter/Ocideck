@@ -913,6 +913,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Titel boven afbeelding': 'Title above image',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Shows the title above the image instead of overlaid on it',
   'Afbeeldingslay-out': 'Image layout',
   'Beide': 'Both',
   'Volvlak': 'Full-bleed',

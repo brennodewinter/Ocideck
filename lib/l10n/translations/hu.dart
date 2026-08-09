@@ -1777,6 +1777,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Titel boven afbeelding': 'Cím a kép felett',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'A címet a kép felett mutatja ahelyett, hogy rálenne',
   'Afbeeldingslay-out': 'Kép elrendezés',
   'Beide': 'Mindkettő',
   'Volvlak': 'Teljes felület',

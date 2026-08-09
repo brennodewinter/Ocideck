@@ -744,6 +744,25 @@ void main() {
       expect(out.imageCaption, 'Foto');
     });
 
+    test('image slide round-trips imageTitleAbove via _class token', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.image).copyWith(
+          title: 'Bovenaan',
+          imagePath: 'images/top.png',
+          imageTitleAbove: true,
+        ),
+      );
+      expect(out.type, SlideType.image);
+      expect(out.imageTitleAbove, isTrue);
+    });
+
+    test('image slide without imageTitleAbove stays false', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.image).copyWith(imagePath: 'images/normal.png'),
+      );
+      expect(out.imageTitleAbove, isFalse);
+    });
+
     test('YouTube embed keeps its source and trim window', () {
       final out = _roundTrip(
         Slide.create(SlideType.video).copyWith(

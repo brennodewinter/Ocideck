@@ -466,6 +466,9 @@ class MarkdownService {
       // Mark slides that opt out of the footer. Older presentations lack this
       // token and therefore keep the existing default: footer shown.
       if (!slide.showFooter) 'no-footer',
+      // Image slide with the title above the image instead of overlaid on it.
+      if (slide.type == SlideType.image && slide.imageTitleAbove)
+        'image-title-above',
       // Table slides that may be edited live during a presentation. Absent by
       // default, so tables stay read-only unless the author opts in.
       if (slide.type == SlideType.table && slide.tableEditable)

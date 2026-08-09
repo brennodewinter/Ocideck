@@ -1789,6 +1789,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Titel boven afbeelding': 'Titulus supra imaginem',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Titulum supra imaginem ostendit potius quam superpositum',
   'Afbeeldingslay-out': 'Imaginis dispositio',
   'Beide': 'Uterque',
   'Volvlak': 'Plena',

@@ -1779,6 +1779,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Titel boven afbeelding': 'Naslov iznad slike',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Prikazuje naslov iznad slike umjesto preko nje',
   'Afbeeldingslay-out': 'Raspored slike',
   'Beide': 'Oboje',
   'Volvlak': 'Puni krv',

@@ -1800,6 +1800,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Titel boven afbeelding': 'Τίτλος πάνω από την εικόνα',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Δείχνει τον τίτλο πάνω από την εικόνα αντί επάνω της',
   'Afbeeldingslay-out': 'Διάταξη εικόνας',
   'Beide': 'Και τα δύο',
   'Volvlak': 'Πλήρης κάλυψη',

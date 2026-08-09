@@ -1790,6 +1790,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Titel boven afbeelding': 'Titlu deasupra imaginii',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Afișează titlul deasupra imaginii în loc de suprapus',
   'Afbeeldingslay-out': 'Aranjare imagine',
   'Beide': 'Ambele',
   'Volvlak': 'Plin',

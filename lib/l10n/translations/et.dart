@@ -1764,6 +1764,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Titel boven afbeelding': 'Pealkiri pildi kohal',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Näitab pealkirja pildi kohal selle asemel, et see oleks peal',
   'Afbeeldingslay-out': 'Pildi paigutus',
   'Beide': 'Mõlemad',
   'Volvlak': 'Täisleht',

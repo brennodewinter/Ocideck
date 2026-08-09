@@ -1808,6 +1808,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Titel boven afbeelding': 'Teideal os cionn na híomhá',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Taispeánann an teideal os cionn na híomhá in ionad a bheith uirthi',
   'Afbeeldingslay-out': 'Leagan amach íomhá',
   'Beide': 'An dá cheann',
   'Volvlak': 'Lánfhuil',
