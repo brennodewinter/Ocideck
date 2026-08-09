@@ -139,7 +139,16 @@ class XmppMuc {
   /// meereizen — bijv. de `<x xmlns="nl.ocideck.device">`-extensie die de
   /// device-keys publiceert (§5 brick 10, `XMPP_COLLAB_TRANSPORT.md` §6).
   /// De MUC-`<x>` blijft altijd het eerste child; de extensies komen erna.
-  Future<MucJoinResult> join({List<XmlElement>? presenceExtensions}) {
+  ///
+  /// [historyLimit] vraagt de laatste N chat-berichten uit de MUC-geschiedenis
+  /// op (XEP-0045 §7.2.16 `<history maxstanzas=N>`). De server honourneert dit
+  /// als onderdeel van de join-sequentie — een late joiner ziet dan recente
+  /// chat. 0 (default) vraagt geen geschiedenis. De server kan minder sturen
+  /// of de request negeren; dit is een hint, geen eis (#1425).
+  Future<MucJoinResult> join({
+    List<XmlElement>? presenceExtensions,
+    int historyLimit = 0,
+  }) {
     // Sta een re-join toe na een teardown (_left = true) — de reconnect-
     // machinery (onRejoin) moet de kamer opnieuw kunnen betreden zonder een
     // nieuwe XmppMuc aan te maken (#1421). Een join terwijl er al één loopt
@@ -163,15 +172,18 @@ class XmppMuc {
       timeout,
       () => _finishJoin(const MucJoinResult.failed(MucJoinFailure.timeout)),
     );
-    // <presence to="room@service/nick"><x xmlns="…/muc"/>…extensies…</presence>
+    // <presence to="room@service/nick"><x xmlns="…/muc"/><history …/>…extensies…</presence>
+    final historyChildren = <XmlElement>[
+      xmppElement('x', namespace: _mucNs),
+      if (historyLimit > 0)
+        xmppElement('history', attributes: {'maxstanzas': '$historyLimit'}),
+      ...?presenceExtensions,
+    ];
     channel.sendStanza(
       Stanza(
         kind: StanzaKind.presence,
         to: _selfInRoom,
-        children: [
-          xmppElement('x', namespace: _mucNs),
-          ...?presenceExtensions,
-        ],
+        children: historyChildren,
       ),
     );
     return completer.future;

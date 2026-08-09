@@ -191,6 +191,42 @@ void main() {
   });
 
   test(
+    'join with historyLimit sends a <history maxstanzas=N/> element (#1425)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+      unawaited(muc.join(historyLimit: 20));
+
+      // De join-presence bevat een <history maxstanzas="20"/> child.
+      final join = ch.sent.single;
+      expect(join.kind, StanzaKind.presence);
+      final history = join.children.firstWhere(
+        (c) => c.getAttribute('maxstanzas') != null,
+        orElse: () => throw TestFailure('no <history> element in join presence'),
+      );
+      expect(history.getAttribute('maxstanzas'), '20');
+      ch.drop();
+    },
+  );
+
+  test(
+    'join without historyLimit sends no <history> element (#1425)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+      unawaited(muc.join());
+
+      final join = ch.sent.single;
+      expect(
+        join.children.any((c) => c.getAttribute('maxstanzas') != null),
+        isFalse,
+        reason: 'no <history> element when historyLimit is 0',
+      );
+      ch.drop();
+    },
+  );
+
+  test(
     'rejoin after leave succeeds — XmppMuc is reusable (#1421)',
     () async {
       final ch = FakeChannel();
