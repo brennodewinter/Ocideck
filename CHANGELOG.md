@@ -1144,6 +1144,37 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **collab: XmppPresenceBeacon + XmppChat — sealed-id-dedup chat + presence
+  (§5 sub-plak 7).** De resterende data-plane-kanalen uit
+  `XMPP_COLLAB_TRANSPORT.md` §5 bricks 4/5, §3, §4, §8: `XmppPresenceBeacon`
+  in `lib/xmpp/xmpp_presence_beacon.dart` levert de slide-position verzegeld
+  in `<pos xmlns="nl.ocideck.presence">` op een `<message type=groupchat>` —
+  de XMPP-tegenhanger van `MatrixPresence`. Presence is een huidig feit, geen
+  historie, dus de **laatste per afzender wint** (vervangt, niet stapelt);
+  verzegeld zonder handtekening (niet-autoritair, als een op); eigen echo
+  gedropt; gebufferd vóór de epoch-sleutel/afzender en heropend in
+  `retryPending`. `XmppChat` in `lib/xmpp/xmpp_chat.dart` levert de sessie-chat
+  verzegeld + **ondertekend** in `<chat xmlns="nl.ocideck.chat">` — de XMPP-
+  tegenhanger van `MatrixChat`, met het §4-verschil: een MUC heeft geen
+  `/sync`-cursor, dus MAM/resync herleveren, en chat heeft geen eigen dedup,
+  dus elk bericht draagt een **id = hash van de verzegelde bytes**
+  (`sealed.toContent()`, met een verse per-seal nonce — een geforceerde
+  botsing is onmogelijk, een replay correct idempoot; een *plaintext* hash
+  zou ten onrechte identieke tekst onderdrukken). De dedup-set is **begrensd**
+  (FIFO). De dedup-beslissing valt **na** de geslaagde open +
+  handtekeningverificatie — een vervalser zonder de ondertekenende sleutel
+  produceert geen geldig bericht en kan de set niet vullen om echte berichten
+  te onderdrukken; een replay opent (geldige handtekening), treft zijn id in
+  de set, en wordt gedropt. Een slechte handtekening wordt fail-closed
+  gedropt. `xmpp_collab_launch.dart` bedraadt beide (velden +
+  `announcePresence`/`sendChat`-convenience + `retryPending` in `syncNow` +
+  `dispose`); `hostXmppSession`/`joinXmppSession` nemen een `ownUserId`
+  (room/nick) voor de lokale chat-echo. Nieuwe tests (15): presence round-
+  trip, latest-per-sender, own-echo, redundant-no-op, buffer-tot-keyed, bad-
+  tag fail-closed; chat round-trip, own-echo, sealed-id-replay-dedup, bad-
+  signature fail-closed, buffer-tot-keyed, bounded-dedup-evictie; launch
+  signed-chat→guest, guest-chat→host, presence round-trip over de draad.
+  Intern-plumbing, achter de standaard-uit Videovergaderingen-module.
 - **collab: XmppSnapshotChannel + xmpp_collab_launch — end-to-end host/join
   over de companion-MUC (§5 sub-plak 6).** De sessie-baseline en de
   sessie-lifecycle uit `XMPP_COLLAB_TRANSPORT.md` §5 brick 3, §4, §6, §8:
