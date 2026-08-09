@@ -75,6 +75,82 @@ typedef _BlockDirectives = ({
 bool _isTailNote(String tail) =>
     tail.replaceAll(_reHtmlComment, '').trim().isEmpty;
 
+final _reMarpitDirective = RegExp(r'^[A-Za-z][A-Za-z0-9_-]*\s*:');
+final _reWholeBackground = RegExp(r'^!\[([^\]]*)\]\([^)]+\)$');
+
+/// Whether the typed slide model would have to move, merge or rewrite authored
+/// Marpit source. In those uncommon cases the whole block stays free Markdown:
+/// source fidelity wins while the representable #1437 subset remains typed.
+bool _requiresWholeBlockPreservation(String block) {
+  final backgroundLines = block
+      .split('\n')
+      .map((line) => line.trim())
+      .where(_reBgImage.hasMatch)
+      .toList();
+  if (backgroundLines.length > 1) return true;
+  if (backgroundLines.length == 1 &&
+      !_hasOnlyTypedBackgroundOptions(backgroundLines.single)) {
+    return true;
+  }
+
+  final lines = block.split('\n');
+  final fitLines = <int>[];
+  for (var i = 0; i < lines.length; i++) {
+    if (lines[i].trim() == '<!-- fit -->') fitLines.add(i);
+  }
+  if (fitLines.length > 1) return true;
+  if (fitLines.length == 1) {
+    final fit = fitLines.single;
+    final firstHeading = lines.indexWhere(
+      (line) => RegExp(r'^#{1,6}\s+\S').hasMatch(line.trim()),
+    );
+    if (fit == 0 || fit - 1 != firstHeading) return true;
+  }
+  // Inline `fit` is valid Marpit too, but the bool model cannot put it back in
+  // the same heading without retaining the source.
+  final fitCommentCount = _reHtmlComment
+      .allMatches(block)
+      .where((match) => match.group(1)!.trim() == 'fit')
+      .length;
+  if (fitCommentCount != fitLines.length) {
+    return true;
+  }
+
+  for (final match in _reHtmlComment.allMatches(block)) {
+    final raw = match.group(1)!;
+    if (raw.contains('\n')) continue;
+    final content = raw.trim();
+    if (_reMarpitDirective.hasMatch(content) &&
+        !_isKnownOciDeckOrTypedDirective(content)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool _hasOnlyTypedBackgroundOptions(String line) {
+  final match = _reWholeBackground.firstMatch(line);
+  if (match == null) return false;
+  var options = match.group(1)!.trim();
+  if (!RegExp(r'^bg(?:\s|$)').hasMatch(options)) return false;
+  options = options.substring(2).trim();
+  options = options
+      .replaceAll(_reMarpImageFilter, '')
+      // OciDeck's title overlay serialises to this standard Marp filter. Its
+      // value lives in titleImageOverlay, not MarpStyle.imageFilters.
+      .replaceAll(RegExp(r'\bopacity:[^\s\]]+'), '')
+      .replaceAll(_reMarpContain, '')
+      .replaceAll(RegExp(r'\b\d+%'), '')
+      .trim();
+  return options.isEmpty;
+}
+
+bool _isKnownOciDeckOrTypedDirective(String content) =>
+    content.startsWith('advance:') ||
+    content.startsWith('tlp:') ||
+    content.startsWith('ocideck_') ||
+    content.startsWith('_');
+
 String _takeNote(StringBuffer notes, String content) {
   notes.write(notes.isEmpty ? content : '\n$content');
   return '';

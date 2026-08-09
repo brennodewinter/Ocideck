@@ -161,23 +161,23 @@ class MarkdownService {
     }
     out.add('theme: ${deck.theme}');
     if (deck.paginate) out.add('paginate: true');
-    if (deck.marpStyle.color.isNotEmpty) {
+    if (deck.marpStyle.hasColor) {
       out.add('color: ${_yamlScalar(deck.marpStyle.color)}');
     }
-    if (deck.marpStyle.backgroundColor.isNotEmpty) {
+    if (deck.marpStyle.hasBackgroundColor) {
       out.add(
         'backgroundColor: ${_yamlScalar(deck.marpStyle.backgroundColor)}',
       );
     }
-    if (deck.marpStyle.backgroundImage.isNotEmpty) {
+    if (deck.marpStyle.hasBackgroundImage) {
       out.add(
         'backgroundImage: ${_yamlScalar(deck.marpStyle.backgroundImage)}',
       );
     }
-    if (deck.marpStyle.header.isNotEmpty) {
+    if (deck.marpStyle.hasHeader) {
       out.add('header: ${_yamlScalar(deck.marpStyle.header)}');
     }
-    if (deck.marpStyle.footer.isNotEmpty) {
+    if (deck.marpStyle.hasFooter) {
       out.add('footer: ${_yamlScalar(deck.marpStyle.footer)}');
     }
     // General presentation metadata (also picked up by Marp where applicable).
@@ -739,23 +739,23 @@ void _writeSlideDirectives(
   if (classes.isNotEmpty) {
     buf.writeln('<!-- _class: ${classes.join(' ')} -->');
   }
-  if (slide.marpStyle.color.isNotEmpty) {
+  if (slide.marpStyle.hasColor) {
     buf.writeln('<!-- _color: ${slide.marpStyle.color} -->');
   }
-  if (slide.marpStyle.backgroundColor.isNotEmpty) {
+  if (slide.marpStyle.hasBackgroundColor) {
     buf.writeln(
       '<!-- _backgroundColor: ${slide.marpStyle.backgroundColor} -->',
     );
   }
-  if (slide.marpStyle.backgroundImage.isNotEmpty) {
+  if (slide.marpStyle.hasBackgroundImage) {
     buf.writeln(
       '<!-- _backgroundImage: ${slide.marpStyle.backgroundImage} -->',
     );
   }
-  if (slide.marpStyle.header.isNotEmpty) {
+  if (slide.marpStyle.hasHeader) {
     buf.writeln('<!-- _header: ${slide.marpStyle.header} -->');
   }
-  if (slide.marpStyle.footer.isNotEmpty) {
+  if (slide.marpStyle.hasFooter) {
     buf.writeln('<!-- _footer: ${slide.marpStyle.footer} -->');
   }
   for (final line in slide.preservedMarpLines) {

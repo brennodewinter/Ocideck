@@ -339,6 +339,13 @@ extension _MarkdownParse on MarkdownService {
 
   Slide? _parseBlock(String block) {
     if (block.isEmpty) return null;
+    if (_requiresWholeBlockPreservation(block)) {
+      return Slide(
+        id: _uuid.v4(),
+        type: SlideType.freeMarkdown,
+        customMarkdown: block,
+      );
+    }
 
     // Lift the crop focal points and finding-group link out first, so those
     // directives are stripped before the generic comment scan would otherwise

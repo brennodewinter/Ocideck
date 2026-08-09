@@ -260,6 +260,17 @@ class PrivacyProjection {
     // redactie op de motivering van een ándere eis.
     var waiverIndex = 0;
     var confirmationIndex = 0;
+    var projectedDeckMarpStyle = deck.marpStyle;
+    if (deck.marpStyle.hasHeader) {
+      projectedDeckMarpStyle = projectedDeckMarpStyle.copyWith(
+        header: deckField('marpHeader', deck.marpStyle.header),
+      );
+    }
+    if (deck.marpStyle.hasFooter) {
+      projectedDeckMarpStyle = projectedDeckMarpStyle.copyWith(
+        footer: deckField('marpFooter', deck.marpStyle.footer),
+      );
+    }
     final projected = deck.copyWith(
       slides: slides,
       title: deckField('deckTitle', deck.title),
@@ -273,10 +284,7 @@ class PrivacyProjection {
       // gebruiker met "redigeren" niet kón oplossen.
       version: deckField('version', deck.version),
       date: deckField('date', deck.date),
-      marpStyle: deck.marpStyle.copyWith(
-        header: deckField('marpHeader', deck.marpStyle.header),
-        footer: deckField('marpFooter', deck.marpStyle.footer),
-      ),
+      marpStyle: projectedDeckMarpStyle,
       standardsUsed: [
         for (var i = 0; i < deck.standardsUsed.length; i++)
           deckField('standardsUsed', deck.standardsUsed[i], i),
@@ -384,6 +392,17 @@ class PrivacyProjection {
       return result.text;
     }
 
+    var projectedMarpStyle = slide.marpStyle;
+    if (slide.marpStyle.hasHeader) {
+      projectedMarpStyle = projectedMarpStyle.copyWith(
+        header: field('marpHeader', slide.marpStyle.header),
+      );
+    }
+    if (slide.marpStyle.hasFooter) {
+      projectedMarpStyle = projectedMarpStyle.copyWith(
+        footer: field('marpFooter', slide.marpStyle.footer),
+      );
+    }
     final projected = slide.copyWith(
       title: field('title', slide.title),
       subtitle: field('subtitle', slide.subtitle),
@@ -397,10 +416,7 @@ class PrivacyProjection {
       quoteAuthor: field('quoteAuthor', slide.quoteAuthor),
       customMarkdown: field('customMarkdown', slide.customMarkdown),
       notes: field('notes', slide.notes),
-      marpStyle: slide.marpStyle.copyWith(
-        header: field('marpHeader', slide.marpStyle.header),
-        footer: field('marpFooter', slide.marpStyle.footer),
-      ),
+      marpStyle: projectedMarpStyle,
       preservedMarpLines: [
         for (var i = 0; i < slide.preservedMarpLines.length; i++)
           field('preservedMarpLines', slide.preservedMarpLines[i], i),

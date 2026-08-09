@@ -6,6 +6,62 @@ import 'package:ocideck/services/markdown_service.dart';
 void main() {
   final markdown = MarkdownService();
 
+  group('MarpStyle contract', () {
+    test('explicit empty overrides an inherited value', () {
+      const inherited = MarpStyle(header: 'Deckkop', color: '#123456');
+      const local = MarpStyle(header: '');
+      final effective = local.inherit(inherited);
+
+      expect(effective.header, isEmpty);
+      expect(effective.color, '#123456');
+      expect(local.hasHeader, isTrue);
+      expect(const MarpStyle().hasHeader, isFalse);
+      expect(MarpStyle.fromJson(local.toJson()), local);
+    });
+
+    test('present JSON fields are type checked instead of ignored', () {
+      expect(() => MarpStyle.fromJson({'header': 1}), throwsFormatException);
+      expect(
+        () => MarpStyle.fromJson({
+          'imageFilters': ['blur:2px', 1],
+        }),
+        throwsFormatException,
+      );
+      expect(
+        () => MarpStyle.fromJson({'headingFit': 'true'}),
+        throwsFormatException,
+      );
+    });
+
+    test('an explicitly empty local directive survives Markdown', () {
+      const source = '''
+---
+marp: true
+header: Deckkop
+---
+
+<!-- _header: -->
+
+# Kop
+''';
+
+      final deck = markdown.parseDeck(source)!;
+      expect(deck.slides.single.marpStyle.hasHeader, isTrue);
+      expect(deck.slides.single.marpStyle.header, isEmpty);
+      expect(
+        deck.slides.single.marpStyle.inherit(deck.marpStyle).header,
+        isEmpty,
+      );
+
+      final saved = markdown.generateDeck(deck);
+      expect(saved, contains('<!-- _header:  -->'));
+      expect(
+        markdown.parseDeck(saved)!.slides.single.marpStyle.hasHeader,
+        isTrue,
+      );
+    });
+  });
+
   test('deck and spot style directives round-trip as standard Marp', () {
     const source = '''
 ---
@@ -100,6 +156,72 @@ Tekst
     expect(saved, contains('# Schaal mij\n<!-- fit -->'));
     final reopened = markdown.parseDeck(saved)!.slides.single;
     expect(reopened.marpStyle, slide.marpStyle);
+  });
+
+  test('unknown valid Marpit directives stay in their authored position', () {
+    const source = '''
+---
+marp: true
+---
+
+# Voor
+
+<!-- transition: fade -->
+
+Na
+''';
+
+    final deck = markdown.parseDeck(source)!;
+    expect(deck.slides.single.type, SlideType.freeMarkdown);
+    final saved = markdown.generateDeck(deck);
+    expect(saved, contains('# Voor\n\n<!-- transition: fade -->\n\nNa'));
+    expect(markdown.generateDeck(markdown.parseDeck(saved)!), saved);
+  });
+
+  test('unsupported and layered backgrounds keep order and are idempotent', () {
+    const source = '''
+---
+marp: true
+---
+
+![bg left:33% opacity:.7](images/links.png)
+![bg right:67%](images/rechts.png)
+
+# Kop
+''';
+
+    final deck = markdown.parseDeck(source)!;
+    expect(deck.slides.single.type, SlideType.freeMarkdown);
+    final saved = markdown.generateDeck(deck);
+    expect(
+      saved.indexOf('images/links.png'),
+      lessThan(saved.indexOf('images/rechts.png')),
+    );
+    expect(saved, contains('![bg left:33% opacity:.7](images/links.png)'));
+    expect(markdown.generateDeck(markdown.parseDeck(saved)!), saved);
+  });
+
+  test('multiple and non-first heading fits keep exact placement', () {
+    const source = '''
+---
+marp: true
+---
+
+# Eerste
+
+## Tweede
+<!-- fit -->
+
+### Derde
+<!-- fit -->
+''';
+
+    final deck = markdown.parseDeck(source)!;
+    expect(deck.slides.single.type, SlideType.freeMarkdown);
+    final saved = markdown.generateDeck(deck);
+    expect(saved, contains('## Tweede\n<!-- fit -->'));
+    expect(saved, contains('### Derde\n<!-- fit -->'));
+    expect(markdown.generateDeck(markdown.parseDeck(saved)!), saved);
   });
 
   test('edited deck style replaces preserved front matter values', () {

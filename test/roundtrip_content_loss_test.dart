@@ -255,18 +255,22 @@ Samenvatting
 ''';
         final parsed = md.parseDeck(source)!;
 
-        expect(parsed.slides.single.type, SlideType.section);
-        expect(parsed.slides.single.notes, 'Echte notitie');
+        expect(parsed.slides.single.type, SlideType.freeMarkdown);
+        expect(
+          parsed.slides.single.customMarkdown,
+          contains('<!-- Echte notitie -->'),
+        );
 
         final saved = md.generateDeck(parsed);
         expect(saved, contains('<!-- _header: Vertrouwelijk -->'));
         expect(saved, contains('<!-- fit -->'));
         expect(saved, contains('![bg contain blur:2px](images/laag-twee.png)'));
         expect(saved, contains('![bg](images/laag-drie.png)'));
+        expect(saved, contains('<!-- Echte notitie -->'));
 
         final reopened = md.parseDeck(saved)!;
-        expect(reopened.slides.single.type, SlideType.section);
-        expect(reopened.slides.single.notes, 'Echte notitie');
+        expect(reopened.slides.single.type, SlideType.freeMarkdown);
+        expect(md.generateDeck(reopened), saved);
       },
     );
 
