@@ -733,6 +733,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Percentages op de taartpunten tonen':
+      'Persintaazjes op \'e taartpunten toane',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nij haadstik op in nije side',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Lit elk haadstik (in H1-kop) by it eksportearjen en printsjen op in nije side begjinne.',

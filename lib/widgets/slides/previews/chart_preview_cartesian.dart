@@ -337,6 +337,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
                             return ClipRect(
                               child: _HoverPieChart(
                                 externalHover: _hovered,
+                                showLabels: spec.showSliceLabels,
                                 values: values,
                                 labels: spec.x,
                                 colors: [

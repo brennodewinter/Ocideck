@@ -1795,6 +1795,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Percentages op de taartpunten tonen':
+      'Показване на процентите върху секторите',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Нова глава на нова страница',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Всяка глава (заглавие H1) да започва на нова страница при експортиране и печат.',

@@ -728,6 +728,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Percentages op de taartpunten tonen': 'Mostra le percentuali sugli spicchi',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nuovo capitolo su una nuova pagina',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Fai iniziare ogni capitolo (un titolo H1) su una nuova pagina durante l\'esportazione e la stampa.',

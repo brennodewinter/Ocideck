@@ -111,6 +111,39 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('showSliceLabels off hides the on-slice percentages (#1395)', (
+    tester,
+  ) async {
+    const x = ['Lucht', 'Schaduw', 'Zon'];
+    const series = [
+      ChartSeries(name: 'Aandeel', data: [75, 10, 15]),
+    ];
+
+    // Default: the big-enough slices print their share as a percentage.
+    await tester.pumpWidget(
+      _host(const ChartSpec(type: ChartType.pie, x: x, series: series)),
+    );
+    await tester.pump();
+    final shown = tester.widget<PieChart>(find.byType(PieChart).first);
+    expect(shown.data.sections.any((s) => s.title.contains('%')), isTrue);
+
+    // Off: a clean circle — every slice title is empty.
+    await tester.pumpWidget(
+      _host(
+        const ChartSpec(
+          type: ChartType.pie,
+          x: x,
+          series: series,
+          showSliceLabels: false,
+        ),
+      ),
+    );
+    await tester.pump();
+    final hidden = tester.widget<PieChart>(find.byType(PieChart).first);
+    expect(hidden.data.sections.every((s) => s.title.isEmpty), isTrue);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('bar chart uses most of the available vertical plot area', (
     tester,
   ) async {

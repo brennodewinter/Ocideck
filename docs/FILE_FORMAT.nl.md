@@ -944,6 +944,7 @@ grenzen — blijft altijd in het blok, nooit in het databestand.
   "maxBound": 20,           // optional; cartesian/radar only
   "animateOnEnter": false,  // optional; only written when false
   "animationDurationMs": 600,  // optional; omitted = inherit the theme
+  "showSliceLabels": false, // optional; pie/donut only, written only when off
   "series": [ { "name": "2025", "data": [10, 14], "color": "#2563EB" } ]
 }
 ```
@@ -1049,6 +1050,12 @@ Velden:
   wordt alleen naar het blok geschreven wanneer **uit**gezet, zodat een schone grafiek schoon blijft.
 - `animationDurationMs` — per-slide-override van die intekenduur. Weggelaten
   betekent de `animationDurationMs` van het thema erven; wordt alleen geschreven wanneer ingesteld.
+- `showSliceLabels` — alleen `pie`/`donut`: of elke punt zijn aandeel als
+  percentage op de punt afdrukt. Standaard `true`; wordt alleen naar het blok
+  geschreven wanneer **uit**gezet, en alleen voor een taartachtig type (zo blijft
+  de vlag niet hangen na een typewissel). Uit geeft een schone cirkel zonder
+  getallen — handig wanneer de taart als tekening dient in plaats van als
+  gegevensweergave.
 - `source` — optioneel pad naar een databestand met `x` en `series` (§6.4). Wanneer
   aanwezig, worden de waarden bij het opslaan uit het blok weggelaten. `x` verdwijnt
   helemaal; `series` verdwijnt ook *tenzij* een reeks een `color` draagt, in

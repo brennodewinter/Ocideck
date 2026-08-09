@@ -1764,6 +1764,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Percentages op de taartpunten tonen': 'Näita protsente sektoritel',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Uus peatükk uuel lehel',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Alusta iga peatükki (H1-pealkiri) uuelt lehelt eksportimisel ja printimisel.',

@@ -1795,6 +1795,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Percentages op de taartpunten tonen':
+      'Uri l-persentaġġi fuq il-flieli tat-torta',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Kapitlu ġdid f\'paġna ġdida',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
       'Ħalli kull kapitlu (intestatura H1) jibda f\'paġna ġdida meta tesporta u tipprintja.',

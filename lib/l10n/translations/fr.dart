@@ -732,6 +732,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Percentages op de taartpunten tonen':
+      'Afficher les pourcentages sur les secteurs',
   'Nieuw hoofdstuk op een nieuwe pagina':
       'Nouveau chapitre sur une nouvelle page',
   'Laat elk hoofdstuk (een H1-kop) bij het exporteren en afdrukken op een nieuwe pagina beginnen.':
