@@ -107,6 +107,40 @@ void main() {
   });
 
   test(
+    'a snapshot with count=0 is dropped fail-closed (#1434)',
+    () async {
+      final env = await _SnapEnv.create();
+      addTearDown(env.dispose);
+
+      // Een snapshot met n=0 is misvormd — geen geldige chunking.
+      final stanza = Stanza(
+        kind: StanzaKind.message,
+        type: 'groupchat',
+        from: env.room,
+        to: env.room,
+        children: [
+          xmppElement(
+            'snap',
+            namespace: OciDeckNamespace.snapshot,
+            text: jsonEncode({
+              'id': 'bad-snapshot',
+              'i': 0,
+              'n': 0,
+              'data': 'xxx',
+            }),
+          ),
+        ],
+      );
+
+      var completed = false;
+      unawaited(env.receiver.firstSnapshot.then((_) => completed = true));
+      await env.receiver.handleSnapshot(stanza);
+      await env.settle();
+      expect(completed, isFalse, reason: 'count=0 is invalid, no snapshot');
+    },
+  );
+
+  test(
     'a chunk spoofing another sender deviceId is dropped (#1411)',
     () async {
       final env = await _SnapEnv.create();

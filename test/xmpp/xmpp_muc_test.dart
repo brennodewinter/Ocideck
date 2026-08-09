@@ -129,6 +129,45 @@ void main() {
     expect(result.failure, MucJoinFailure.membersOnly);
   });
 
+  test(
+    'join to a non-existent room fails with notAllowed (#1434)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+      final joining = muc.join();
+      ch.inject(_errorPresence('item-not-found'));
+      final result = await joining;
+      expect(result.ok, isFalse);
+      expect(result.failure, MucJoinFailure.notAllowed);
+    },
+  );
+
+  test(
+    'a presence with malformed MUC-user XML is dropped, not fatal (#1434)',
+    () async {
+      final ch = FakeChannel();
+      final muc = mucOf(ch);
+      final joining = muc.join();
+      ch.inject(_presence('me', codes: ['110']));
+      await joining;
+
+      // Inject een presence met ongeldig MUC-user XML — de parser moet dit
+      // gracelijk afhandelen, niet crashen.
+      ch.inject(
+        Stanza.parse(
+          '<presence from="$_room/bob">'
+          '<x xmlns="$_mucUser">'
+          '<item affiliation="INVALID_ROLE" role=""/>'
+          '</x></presence>',
+        ),
+      );
+      await Future<void>.delayed(Duration.zero);
+      // De sessie is nog live — geen crash.
+      expect(muc.roster.any((o) => o.nick == 'bob'), isTrue);
+      await muc.leave();
+    },
+  );
+
   test('an occupant leaving is removed from the roster and emitted', () async {
     final ch = FakeChannel();
     final muc = mucOf(ch);

@@ -380,6 +380,33 @@ void main() {
       },
     );
 
+    test(
+      'a device-presence with malformed JSON is dropped fail-closed (#1434)',
+      () async {
+        final env = await _KeyEnv.create();
+        addTearDown(env.dispose);
+
+        // Stuur een device-presence met ongeldig JSON — de handler moet dit
+        // gracelijk afhandelen, niet crashen.
+        final stanza = Stanza(
+          kind: StanzaKind.presence,
+          from: '${env.room}/badguy',
+          to: env.room,
+          children: [
+            xmppElement(
+              'x',
+              namespace: OciDeckNamespace.device,
+              text: '{not valid json',
+            ),
+          ],
+        );
+        await env.host.handleDevicePresence(stanza);
+        await env.settle();
+        // Geen crash, geen device opgenomen.
+        expect(env.host.directory.knownDevices, isEmpty);
+      },
+    );
+
     test('two parties establish keys over the wire, then co-author', () async {
       final env = await _KeyEnv.create(withTransport: true);
       addTearDown(env.dispose);
