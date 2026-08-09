@@ -218,6 +218,56 @@ void main() {
       await sub.cancel();
     },
   );
+
+  test(
+    'the assembled map is bounded — overflow evicts the oldest (#1414)',
+    () async {
+      // Geen epoch-sleutel bij de receiver: elke snapshot reassembleert en
+      // blijft in _assembled staan (onopenbaar). De cap op _assembled voorkomt
+      // onbegrensde groei — een vijandige server kan niet cyclen.
+      final env = await _SnapEnv.create(
+        keyReceiver: false,
+        maxAssembledSnapshots: 2,
+      );
+      addTearDown(env.dispose);
+
+      // Stuur 4 snapshots; _assembled past er 2, dus de oudste worden verdreven.
+      for (var i = 0; i < 4; i++) {
+        await env.authority.sendSnapshot(
+          CollabSnapshot.capture(
+            Deck(
+              title: 't',
+              slides: env.sent.slides,
+            ).copyWith(
+              slides: [
+                env.sent.slides.first.copyWith(title: 'v$i'),
+                ...env.sent.slides.skip(1),
+              ],
+            ),
+            i + 1,
+            0,
+          ),
+        );
+        await env.settle();
+      }
+
+      // Installeer de sleutel en heropen — slechts 2 snapshots overleven de
+      // cap: 1 voltooit firstSnapshot, 1 emit op rebaselines.
+      final rebaselines = <CollabSnapshot>[];
+      final sub = env.receiver.rebaselines.listen(rebaselines.add);
+      await env.installKey();
+      await env.receiver.retryPending();
+      await env.settle();
+
+      expect(env.receiver.hasSnapshot, isTrue);
+      expect(
+        rebaselines,
+        hasLength(1),
+        reason: 'only maxAssembledSnapshots survive — 1 first + 1 re-baseline',
+      );
+      await sub.cancel();
+    },
+  );
 }
 
 // ── test helpers ─────────────────────────────────────────────────────────────
@@ -264,6 +314,7 @@ class _SnapEnv {
     int maxChunkChars = 200,
     bool keyReceiver = true,
     void Function(Stanza)? intercept,
+    int maxAssembledSnapshots = 4,
   }) async {
     const room = 'ocideck-snap@conference.example';
     final hub = FakeMucHub(room);
@@ -308,6 +359,7 @@ class _SnapEnv {
       roomJid: room,
       directory: receiverDirectory,
       maxChunkChars: maxChunkChars,
+      maxAssembledSnapshots: maxAssembledSnapshots,
     );
 
     final slides = [

@@ -62,6 +62,7 @@ class XmppSnapshotChannel {
     this.maxChunkChars = 48000,
     this.maxChunks = 512,
     this.maxPendingSnapshots = 4,
+    this.maxAssembledSnapshots = 4,
   }) : _channel = stanzaChannel,
        _demux = companionDemux,
        _e2ee = crypto {
@@ -88,6 +89,12 @@ class XmppSnapshotChannel {
   /// overstromen.
   final int maxChunks;
   final int maxPendingSnapshots;
+
+  /// Cap op gereassembleerde snapshots die nog niet geopend konden worden —
+  /// een vijandige server kan _pending vullen, laten reassembleren (wat de
+  /// _pending-slot vrijmaakt), en herhalen, zodat _assembled onbegrensd groeit
+  /// (#1414). Bij overflow verdrijft het oudste (FIFO).
+  final int maxAssembledSnapshots;
 
   int _out = 0;
   final Map<String, Map<int, String>> _pending = {};
@@ -229,6 +236,12 @@ class XmppSnapshotChannel {
       return;
     }
     _assembled[id] = SealedEnvelope.fromContent(decoded);
+    // Begrens _assembled — een vijandige server kan _pending vullen en laten
+    // reassembleren (wat de _pending-slot vrijmaakt voor de volgende ronde),
+    // zodat _assembled onbegrensd groeit (#1414). Verdrijf het oudste (FIFO).
+    if (_assembled.length > maxAssembledSnapshots) {
+      _assembled.remove(_assembled.keys.first);
+    }
     await _tryOpen(id);
   }
 
