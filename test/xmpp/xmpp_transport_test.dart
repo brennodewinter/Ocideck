@@ -90,10 +90,11 @@ void main() {
         await env.settle();
         expect(received, isEmpty); // uitgesteld, niet gedropt
 
-        // Nu kan de guest de host resolveren. Een nieuwe stanza triggert de
-        // backlog-replay, en de uitgestelde op wordt alsnog toegepast.
+        // Nu kan de guest de host resolveren. De key-change callback
+        // (notifyKeyChanged) triggert de backlog-replay, en de uitgestelde op
+        // wordt alsnog toegepast.
         env.knowsHost = true;
-        await env.hostTransport.setLock(slide.id, held: true);
+        env.guestTransport.notifyKeyChanged();
         await env.settle();
 
         expect(received, hasLength(1));

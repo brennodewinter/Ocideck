@@ -72,6 +72,12 @@ class XmppKeyExchange {
   final CollabDeviceDirectory directory;
   DevicePublicKeys _own;
 
+  /// Callback nadat een nieuwe device-sleutel is geïnstalleerd in de directory.
+  /// De transport gebruikt dit om de deferred backlog te retryen (#1424).
+  /// Mutable: de launch wijst hem toe nadat de transport en de key-exchange
+  /// zijn opgebouwd (de transport bestaat voor de callback).
+  void Function()? onKeyInstalled;
+
   /// Dit device's eigen publieke sleutels — de verificatie-UI fingerprint
   /// ze als de "jij"-entry die co-auteurs out-of-band vergelijken.
   DevicePublicKeys get ownKeys => _own;
@@ -223,7 +229,8 @@ class XmppKeyExchange {
     // deze op de presence. De directory gebruikt ze om een keyshare te
     // adresseren en om de afzender van een blinded keyshare te resolveren.
     final peerAddress = stanza.from ?? roomJid;
-    await directory.ingest(peerAddress: peerAddress, keys: keys);
+    final stored = await directory.ingest(peerAddress: peerAddress, keys: keys);
+    if (stored) onKeyInstalled?.call();
   }
 
   /// Verwerk een inbound keyshare: trial-open tegen elke kandidaat-afzender
@@ -263,6 +270,7 @@ class XmppKeyExchange {
     for (final sender in candidates) {
       try {
         await _e2ee.installEpochKey(wrap, sender);
+        onKeyInstalled?.call(); // epoch-sleutel geïnstalleerd — retry backlog
         return; // geïnstalleerd — deze keyshare was voor ons
       } on CollabCryptoException {
         continue; // verkeerde afzender of niet-geopend — probeel de volgende

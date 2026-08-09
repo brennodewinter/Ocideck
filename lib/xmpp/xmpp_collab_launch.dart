@@ -381,6 +381,11 @@ _WireResult _wire({
     peerResolver: (id) async => directory.resolve(id),
     onReconnected: onReconnected,
   );
+  // Wire de key-change callback: als een nieuwe device-sleutel of epoch-
+  // sleutel wordt geïnstalleerd, retry de transport zijn deferred backlog
+  // (#1424). Zonder deze callback zou de backlog alleen bij elke nieuwe
+  // op/lock-stanza worden gesweept — O(N²) bij een vloed stanzas.
+  keyExchange.onKeyInstalled = transport.notifyKeyChanged;
   return _WireResult(
     demux: demux,
     directory: directory,

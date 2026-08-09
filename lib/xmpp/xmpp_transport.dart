@@ -165,10 +165,46 @@ class XmppTransport implements CollabTransport {
   /// in huis was — de afzender's device-sleutels of de epoch-sleutel. Zonder
   /// deze backlog zou een geldige op als "onbekende afzender" worden gedropt
   /// en voor altijd verloren (#1041). Opnieuw geprobeerd in aankomst-volgorde
-  /// bij elke nieuwe stanza, begrensd op aantal en ronden.
+  /// als een key-change de backlog mogelijk ontgrendelt, begrensd op aantal
+  /// en ronden.
   final List<_DeferredStanza> _deferred = [];
   static const int _maxDeferred = 256;
   static const int _maxDeferralRounds = 16;
+
+  /// Of de key-state is veranderd sinds de laatste backlog-sweep. Alleen als
+  /// dit true is, retryt `_dispatch` de backlog — een nieuwe op/lock-stanza
+  /// zonder key-change maakt een uitgestelde stanza niet opeens openbaar.
+  /// Voorkomt O(N²) herverwerking bij elke inbound stanza (#1424).
+  bool _keysDirty = false;
+
+  /// Meld dat de key-state is veranderd (nieuwe device-sleutel of epoch-
+  /// sleutel geïnstalleerd). De key-exchange roept dit na `directory.ingest`
+  /// of `distributeEpoch`. De volgende `_dispatch` retryt de backlog.
+  void notifyKeyChanged() {
+    if (_deferred.isEmpty || _disposed) return;
+    _keysDirty = true;
+    unawaited(_retryDeferred());
+  }
+
+  /// Sweep de backlog zonder nieuwe stanzas. Alleen aangeroepen als
+  /// `_keysDirty` true is.
+  Future<void> _retryDeferred() async {
+    if (!_keysDirty || _disposed) return;
+    _keysDirty = false;
+    final backlog = List<_DeferredStanza>.from(_deferred);
+    _deferred.clear();
+    for (final d in backlog) {
+      if (_disposed) return;
+      final outcome = await _tryApply(d.stanza, d.namespace);
+      if (outcome == _ApplyOutcome.retryLater) {
+        if (d.rounds < _maxDeferralRounds) {
+          _deferred.add(_DeferredStanza(d.stanza, d.namespace, d.rounds + 1));
+        } else {
+          logWarning('xmpp.transport.deferred.expired', _stanzaKey(d.stanza, d.namespace));
+        }
+      }
+    }
+  }
 
   /// De hoogste op-versie die deze transport heeft gezien — voor
   /// gap-detectie. Een op met `version > _lastSeenVersion + 1` (en
@@ -275,31 +311,42 @@ class XmppTransport implements CollabTransport {
   Future<void> _onLockStanza(Stanza stanza) =>
       _dispatch([(stanza, OciDeckNamespace.lock)]);
 
-  /// Verwerk op/lock-stanzas: de uitgestelde backlog eerst (zodat
-  /// cross-stanza-volgorde bewaard blijft), dan de [fresh]. Een stanza die
-  /// nog steeds niet geopend kan worden wordt opnieuw uitgesteld, begrensd
-  /// op aantal en ronden. Spiegelt `MatrixRelayTransport._dispatchData`.
+  /// Verwerk op/lock-stanzas: de uitgestelde backlog eerst (alleen als de
+  /// key-state is veranderd — anders kan een uitgestelde stanza niet opeens
+  /// openbaar zijn, #1424), dan de [fresh]. Een stanza die nog steeds niet
+  /// geopend kan worden wordt opnieuw uitgesteld, begrensd op aantal en ronden.
   Future<void> _dispatch(List<(Stanza, String)> fresh) async {
     if (_disposed) return;
-    final backlog = List<_DeferredStanza>.from(_deferred);
-    _deferred.clear();
-    final queue = <(Stanza, String)>[
-      for (final d in backlog) (d.stanza, d.namespace),
-      ...fresh,
-    ];
-    final rounds = <String, int>{
-      for (final d in backlog) _stanzaKey(d.stanza, d.namespace): d.rounds,
-    };
-    for (final (stanza, ns) in queue) {
+    // Sweep de backlog alleen als de key-state is veranderd — een nieuwe
+    // op/lock-stanza zonder key-change maakt een uitgestelde stanza niet
+    // openbaar. Voorkomt O(N²) herverwerking (#1424).
+    if (_keysDirty) {
+      _keysDirty = false;
+      final backlog = List<_DeferredStanza>.from(_deferred);
+      _deferred.clear();
+      for (final d in backlog) {
+        if (_disposed) return;
+        final outcome = await _tryApply(d.stanza, d.namespace);
+        if (outcome == _ApplyOutcome.retryLater) {
+          if (d.rounds < _maxDeferralRounds) {
+            _deferred.add(_DeferredStanza(d.stanza, d.namespace, d.rounds + 1));
+          } else {
+            logWarning(
+              'xmpp.transport.deferred.expired',
+              _stanzaKey(d.stanza, d.namespace),
+            );
+          }
+        }
+      }
+    }
+    for (final (stanza, ns) in fresh) {
       if (_disposed) return;
       final outcome = await _tryApply(stanza, ns);
       if (outcome == _ApplyOutcome.retryLater) {
-        final key = _stanzaKey(stanza, ns);
-        final next = (rounds[key] ?? 0) + 1;
-        if (next <= _maxDeferralRounds) {
-          _deferred.add(_DeferredStanza(stanza, ns, next));
+        if (1 <= _maxDeferralRounds) {
+          _deferred.add(_DeferredStanza(stanza, ns, 1));
         } else {
-          logWarning('xmpp.transport.deferred.expired', key);
+          logWarning('xmpp.transport.deferred.expired', _stanzaKey(stanza, ns));
         }
       }
     }
