@@ -54,6 +54,7 @@ import 'privacy_eu_rules.dart';
 import 'privacy_bulk_lexicon.dart';
 import 'privacy_lexicon_data.dart';
 import 'privacy_location_rules.dart';
+import 'privacy_marp_fragments.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_regions.dart';
 import 'privacy_phone_rules.dart';
