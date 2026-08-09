@@ -57,11 +57,15 @@ class Stanza {
     return null;
   }
 
-  /// Serialise to an [XmlElement] named for the [kind]. The `jabber:client`
-  /// default namespace belongs to the stream, not the stanza, so it is not
-  /// repeated here; the connection layer writes it once on stream open.
+  /// Serialise to an [XmlElement] named for the [kind]. In XMPP-over-WebSocket
+  /// (RFC 7395) each frame is a standalone XML document — the `jabber:client`
+  /// default namespace is NOT inherited from the stream (the `<open>` frame
+  /// carries the framing namespace), so stanzas must carry it explicitly.
+  /// Without it, Prosody rejects stanzas as "unhandled c2s_unbound stream
+  /// element".
   XmlElement toXml() {
     final attributes = <XmlAttribute>[
+      XmlAttribute(XmlName.parts('xmlns'), 'jabber:client'),
       if (to != null) XmlAttribute(XmlName.parts('to'), to!),
       if (from != null) XmlAttribute(XmlName.parts('from'), from!),
       if (id != null) XmlAttribute(XmlName.parts('id'), id!),

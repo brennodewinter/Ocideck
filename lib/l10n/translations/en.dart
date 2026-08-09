@@ -945,6 +945,28 @@ const _dutchSourceAddEn = {
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'There is no presentation at this URL (not found). Check that the link is still correct.',
   'Video kan niet worden geladen': 'Video cannot be loaded',
+  'Titel boven afbeelding': 'Title above image',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Shows the title above the image instead of overlaid on it',
+  'Afbeeldingslay-out': 'Image layout',
+  'Beide': 'Both',
+  'Volvlak': 'Full-bleed',
+  'Kolombreedte': 'Column width',
+  'Linker kolomafbeelding': 'Left column image',
+  'Rechter kolomafbeelding': 'Right column image',
+  'Geen linker kolomafbeelding': 'No left column image',
+  'Geen rechter kolomafbeelding': 'No right column image',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Full-bleed: the image as a screen-filling background. Left/Right/Both: one or two image columns beside the title text.',
+  'Hernoemen': 'Rename',
+  'Naam wijzigen': 'Change name',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'The extension stays fixed — renaming does not change the file format.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'The name may not contain folders or special characters.',
+  'Hernoemd naar': 'Renamed to',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Could not rename the image. Does a file with that name already exist?',
   'Starthoek (graden)': 'Start angle (degrees)',
   'Percentages op de taartpunten tonen': 'Show percentages on the pie slices',
   'Nieuw hoofdstuk op een nieuwe pagina': 'New chapter on a new page',

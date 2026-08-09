@@ -361,7 +361,10 @@ Widget _richTextPaginatedContent({
   final titleSize = w * 0.042;
   final subtitleSize = w * 0.030;
   final spacing = splitWithImage ? vPad * 0.32 : pad * 0.5;
-  final bodySize = splitWithImage ? w * 0.031 : w * 0.026;
+  // Spiegel de planner: free-markdown houdt w*0,024 (#1409), bullets w*0,026.
+  final bodySize = slide.type == SlideType.freeMarkdown
+      ? w * 0.024
+      : (splitWithImage ? w * 0.031 : w * 0.026);
   final plan = planRichTextForSlide(
     slide: slide,
     profile: profile,

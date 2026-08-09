@@ -427,12 +427,11 @@ void main() {
 
   /// A factory that produces a fresh happy server (PLAIN) each call, collecting
   /// them so the test can inspect the reconnect transports.
-  (XmppFrameTransport Function(), List<FakeXmppTransport>) reconnectFactory({
-    String jid = 'user@example.org/ocideck-abc',
-  }) {
+  (Future<XmppFrameTransport> Function(), List<FakeXmppTransport>)
+  reconnectFactory({String jid = 'user@example.org/ocideck-abc'}) {
     final created = <FakeXmppTransport>[];
     return (
-      () {
+      () async {
         final t = happyServer(
           mechanisms: ['PLAIN'],
           sasl: (_) => ['<success xmlns="$_sasl"/>'],
@@ -462,6 +461,7 @@ void main() {
         reconnectTransportFactory: factory,
         onRejoin: (_) async {
           rejoinCalled = true;
+          return true;
         },
         reconnectDelay: (_) => Duration.zero,
       );
@@ -530,6 +530,136 @@ void main() {
       },
     );
 
+    test(
+      'stanzas sent during reconnect are buffered and flushed after (#1417)',
+      () async {
+        final firstTransport = happyServer(
+          mechanisms: ['PLAIN'],
+          sasl: (_) => ['<success xmlns="$_sasl"/>'],
+        );
+        final (factory, created) = reconnectFactory();
+        final reconnected = Completer<void>();
+
+        final session = XmppSession(
+          transport: firstTransport,
+          settings: account(),
+          password: 'pencil',
+          reconnectTransportFactory: factory,
+          onRejoin: (_) async => true,
+          reconnectDelay: (_) => Duration.zero,
+        );
+        session.onReconnected.listen((_) => reconnected.complete());
+
+        await session.connect();
+
+        // Drop de stream — de sessie gaat naar _live = false en start reconnect.
+        firstTransport.dropStream();
+        // Wacht tot de reconnect begint (de factory wordt aangeroepen).
+        await Future<void>.delayed(Duration.zero);
+
+        // Verzend een stanza TUSSEN de drop en de geslaagde reconnect — _live
+        // is false, dus de oude code dropt hem stil. De fix buffert hem.
+        session.sendStanza(
+          Stanza(
+            kind: StanzaKind.message,
+            type: 'groupchat',
+            to: 'room@conf.example.org',
+            children: [xmppElement('body', text: 'buffered-during-reconnect')],
+          ),
+        );
+
+        // Voltooi de reconnect.
+        await reconnected.future.timeout(const Duration(seconds: 5));
+
+        // De gebufferde stanza is gespoeld naar de nieuwe transport — hij
+        // staat in de sent-log.
+        expect(
+          created.first.sent.any(
+            (f) => f.contains('buffered-during-reconnect'),
+          ),
+          isTrue,
+          reason: 'a stanza sent during reconnect is flushed after',
+        );
+
+        await session.close();
+      },
+    );
+
+    test('an unanswered ping triggers stream drop (XEP-0199, #1418)', () async {
+      final firstTransport = happyServer(
+        mechanisms: ['PLAIN'],
+        sasl: (_) => ['<success xmlns="$_sasl"/>'],
+      );
+
+      final session = XmppSession(
+        transport: firstTransport,
+        settings: account(),
+        password: 'pencil',
+        pingInterval: const Duration(milliseconds: 50),
+      );
+
+      await session.connect();
+
+      final stanzasDone = Completer<void>();
+      session.stanzas.listen((_) {}, onDone: () => stanzasDone.complete());
+
+      // De server antwoordt niet op pings. Na twee ping-intervallen (50ms
+      // × 2 = 100ms) is de eerste ping nog in-flight wanneer de tweede
+      // timer vuurt → _onStreamDropped → stanzas sluit.
+      await stanzasDone.future.timeout(const Duration(seconds: 2));
+      expect(stanzasDone.isCompleted, isTrue);
+      // De stanzas-stream is gesloten — de ping detecteerde de dode
+      // verbinding en triggerde _onStreamDropped.
+
+      await session.close();
+    });
+
+    test(
+      'a failed rejoin (nick-conflict) triggers backoff, not silent success (#1416)',
+      () async {
+        final firstTransport = happyServer(
+          mechanisms: ['PLAIN'],
+          sasl: (_) => ['<success xmlns="$_sasl"/>'],
+        );
+        final (factory, created) = reconnectFactory();
+        var rejoinAttempts = 0;
+        final reconnected = Completer<void>();
+
+        final session = XmppSession(
+          transport: firstTransport,
+          settings: account(),
+          password: 'pencil',
+          reconnectTransportFactory: factory,
+          onRejoin: (_) async {
+            rejoinAttempts++;
+            // Eerste rejoin faalt (nick-conflict — de oude occupant is nog
+            // actief). Tweede rejoin slaagt (de timeout heeft gefuurd).
+            return rejoinAttempts > 1;
+          },
+          maxReconnectAttempts: 5,
+          reconnectDelay: (_) => Duration.zero,
+        );
+        session.onReconnected.listen((_) => reconnected.complete());
+
+        final result = await session.connect();
+        expect(result.ok, isTrue);
+
+        // Drop de stream — de sessie reconnect, rejoin faalt, backoff, opnieuw.
+        firstTransport.dropStream();
+        await reconnected.future.timeout(const Duration(seconds: 5));
+
+        // De factory is twee keer aangeroepen (twee reconnect-pogingen).
+        expect(created, hasLength(2));
+        // De rejoin is twee keer aangeroepen — de eerste faalde, de tweede
+        // slaagde. Met de oude code zou de rejoin eenmaal faalen en de sessie
+        // zou toch succes claimen.
+        expect(rejoinAttempts, 2);
+        expect(session.boundJid, isNotNull);
+
+        await session.close();
+      },
+    );
+
     test('fail-closed after max reconnect attempts', () async {
       final firstTransport = happyServer(
         mechanisms: ['PLAIN'],
@@ -539,7 +669,7 @@ void main() {
 
       // A factory that produces transports whose stream closes immediately —
       // every reconnect attempt fails (the server hangs up before features).
-      XmppFrameTransport failFactory() {
+      Future<XmppFrameTransport> failFactory() async {
         factoryCalls++;
         final t = FakeXmppTransport((_) => const []);
         t.dropStream();
@@ -580,7 +710,7 @@ void main() {
 
         // Every reconnect transport responds with see-other-host — the redirect
         // must be refused, never followed (same fail-closed posture as connect).
-        XmppFrameTransport redirectFactory() {
+        Future<XmppFrameTransport> redirectFactory() async {
           return FakeXmppTransport((frame) {
             if (frame.contains('<open')) {
               return [
@@ -684,4 +814,39 @@ void main() {
       },
     );
   });
+
+  // ── jabber:client namespace (RFC 7395) ───────────────────────────────────
+
+  test(
+    'stanzas carry xmlns=jabber:client — each WebSocket frame is standalone',
+    () async {
+      final t = happyServer(
+        mechanisms: ['PLAIN'],
+        sasl: (_) => ['<success xmlns="$_sasl"/>'],
+      );
+      final session = XmppSession(
+        transport: t,
+        settings: account(),
+        password: 'pencil',
+      );
+      await session.connect();
+
+      session.sendStanza(
+        Stanza(kind: StanzaKind.presence, to: 'room@conf.example.org'),
+      );
+
+      // In XMPP-over-WebSocket (RFC 7395) each frame is a standalone XML
+      // document — the jabber:client namespace is NOT inherited from the
+      // stream. Without it, Prosody rejects stanzas as "unhandled".
+      final presence = t.sent.firstWhere((f) => f.contains('<presence'));
+      expect(presence, contains('xmlns="jabber:client"'));
+
+      // Stream-level elements (open, auth) keep their own namespace.
+      final open = t.sent.firstWhere((f) => f.contains('<open'));
+      expect(open, contains('urn:ietf:params:xml:ns:xmpp-framing'));
+      expect(open, isNot(contains('jabber:client')));
+
+      await session.close();
+    },
+  );
 }

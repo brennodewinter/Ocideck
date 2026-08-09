@@ -1840,6 +1840,28 @@ const _dutchSourceAddGa = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Níl aon chur i láthair ag an URL seo (gan aimsiú). Seiceáil an bhfuil an nasc fós ceart.',
   'Video kan niet worden geladen': 'Ní féidir an físeán a lódáil',
+  'Titel boven afbeelding': 'Teideal os cionn na híomhá',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Taispeánann an teideal os cionn na híomhá in ionad a bheith uirthi',
+  'Afbeeldingslay-out': 'Leagan amach íomhá',
+  'Beide': 'An dá cheann',
+  'Volvlak': 'Lánfhuil',
+  'Kolombreedte': 'Leithead colúin',
+  'Linker kolomafbeelding': 'Íomhá colúin chlé',
+  'Rechter kolomafbeelding': 'Íomhá colúin deise',
+  'Geen linker kolomafbeelding': 'Gan íomhá colúin chlé',
+  'Geen rechter kolomafbeelding': 'Gan íomhá colúin deise',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Lánfhuil: an íomhá mar chúlra a líonann an scáileán. Clé/Deas/An dá cheann: colún íomhá amháin nó dhá cheann in aice le téacs an teidil.',
+  'Hernoemen': 'Athainmnigh',
+  'Naam wijzigen': 'Athraigh an t-ainm',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Fanann an iarmhír seasta — ní athraíonn athainmniú formáid an chomhaid.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Ní cheadaítear fillteáin nó carachtairí speisialta san ainm.',
+  'Hernoemd naar': 'Athainmnithe go',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Níorbh fhéidir an íomha a athainmniú. An bhfuil comhad leis an ainm sin ann cheana?',
   'Starthoek (graden)': 'Uillinn tosaigh (céimeanna)',
   'Percentages op de taartpunten tonen':
       'Taispeáin céatadáin ar shlisní na píóige',

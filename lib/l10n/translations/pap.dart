@@ -764,6 +764,28 @@ const _dutchSourceAddPap = {
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Riba e URL aki no tin ningun presentashon (no a wòrdu haña). Kontrolá si e enlace ta bon ainda.',
   'Video kan niet worden geladen': 'No por karga e vidio',
+  'Titel boven afbeelding': 'Título riba di e imagen',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Mustra e título riba di e imagen na lugá di riba dje',
+  'Afbeeldingslay-out': 'Layout di imagen',
+  'Beide': 'Ambos',
+  'Volvlak': 'Pancha komplet',
+  'Kolombreedte': 'Ancho di kolom',
+  'Linker kolomafbeelding': 'Imag di kolom na man robes',
+  'Rechter kolomafbeelding': 'Imag di kolom na man drechi',
+  'Geen linker kolomafbeelding': 'Sin imag di kolom na man robes',
+  'Geen rechter kolomafbeelding': 'Sin imag di kolom na man drechi',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Pancha komplet: e imagen como fondo di pantaya komplet. Na man robes/Na man drechi/Ambos: un of dos kolom di imagen banda di e tekst di titulo.',
+  'Hernoemen': 'Kambia nòmber',
+  'Naam wijzigen': 'Kambia nòmber',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'E extencion ta kambia — kambia nòmber no ta kambia e formato di e archivo.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'E nòmber no por tene map of karakternan spesial.',
+  'Hernoemd naar': 'Kambia na',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'No por a kambia e nòmber di e imágen. Ta eksistí un archivo ku e nòmber ei?',
   'Starthoek (graden)': 'Angulo inicial (grado)',
   'Percentages op de taartpunten tonen':
       'Mustra porsentahe riba e pidanan di taart',

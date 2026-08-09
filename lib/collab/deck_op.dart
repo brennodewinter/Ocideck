@@ -188,6 +188,7 @@ enum SlideField {
   cssClass,
   notes,
   titleTextColorOverride,
+  titleColumnLayout, // TitleColumnLayout
   findingId,
   checklistScope,
   improvementTemplateId,
@@ -201,6 +202,7 @@ enum SlideField {
   videoAutoplay,
   audioAutoplay,
   titleImageOverlay,
+  imageTitleAbove,
   showLogo,
   showFooter,
   skipped,
@@ -211,6 +213,7 @@ enum SlideField {
   videoStartMs,
   videoEndMs,
   imageSize,
+  titleColumnWidth,
   // — double —
   imageFocalX,
   imageFocalY,
@@ -375,6 +378,9 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     SlideField.titleTextColorOverride => slide.copyWith(
       titleTextColorOverride: _cast<String>(value, field),
     ),
+    SlideField.titleColumnLayout => slide.copyWith(
+      titleColumnLayout: _cast<TitleColumnLayout>(value, field),
+    ),
     SlideField.findingId => slide.copyWith(
       findingId: _cast<String>(value, field),
     ),
@@ -408,6 +414,9 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     SlideField.titleImageOverlay => slide.copyWith(
       titleImageOverlay: _cast<bool>(value, field),
     ),
+    SlideField.imageTitleAbove => slide.copyWith(
+      imageTitleAbove: _cast<bool>(value, field),
+    ),
     SlideField.showLogo => slide.copyWith(showLogo: _cast<bool>(value, field)),
     SlideField.showFooter => slide.copyWith(
       showFooter: _cast<bool>(value, field),
@@ -427,6 +436,9 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
       videoEndMs: _cast<int>(value, field),
     ),
     SlideField.imageSize => slide.copyWith(imageSize: _cast<int>(value, field)),
+    SlideField.titleColumnWidth => slide.copyWith(
+      titleColumnWidth: _cast<int>(value, field),
+    ),
     SlideField.imageFocalX => slide.copyWith(
       imageFocalX: _cast<double>(value, field),
     ),

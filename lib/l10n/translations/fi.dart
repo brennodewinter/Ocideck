@@ -1805,6 +1805,28 @@ const _dutchSourceAddFi = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Tässä URL-osoitteessa ei ole esitystä (ei löytynyt). Tarkista, että linkki on yhä oikein.',
   'Video kan niet worden geladen': 'Videota ei voi ladata',
+  'Titel boven afbeelding': 'Otsikko kuvan yläpuolella',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Näyttää otsikon kuvan yläpuolella sen sijaan, että se olisi päällä',
+  'Afbeeldingslay-out': 'Kuvan asettelu',
+  'Beide': 'Molemmat',
+  'Volvlak': 'Täysi',
+  'Kolombreedte': 'Sarakkeen leveys',
+  'Linker kolomafbeelding': 'Vasemman sarakkeen kuva',
+  'Rechter kolomafbeelding': 'Oikean sarakkeen kuva',
+  'Geen linker kolomafbeelding': 'Ei vasemman sarakkeen kuvaa',
+  'Geen rechter kolomafbeelding': 'Ei oikean sarakkeen kuvaa',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Täysi: kuva näytön täyttävänä taustana. Vasen/Oikea/Molemmat: yksi tai kaksi kuvapalstaa otsikkotekstin vieressä.',
+  'Hernoemen': 'Nimeä uudelleen',
+  'Naam wijzigen': 'Vaihda nimi',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Tiedostopääte pysyy kiinteänä — uudelleennimeäminen ei muuta tiedostomuotoa.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Nimi ei saa sisältää kansioita tai erikoismerkkejä.',
+  'Hernoemd naar': 'Nimetty uudelleen:',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Kuvaa ei voitu nimetä uudelleen. Onko olemassa tiedosto samalla nimellä?',
   'Starthoek (graden)': 'Aloituskulma (astetta)',
   'Percentages op de taartpunten tonen': 'Näytä prosentit ympyrän sektoreilla',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Uusi luku uudelle sivulle',

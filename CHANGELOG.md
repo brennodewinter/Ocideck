@@ -1193,6 +1193,45 @@ that before deciding whether this alpha fits what you are doing.
   Met regressietests (o.a. de doel-onbereikbaar-import, de git-stderr-classifier,
   de URL-status-classificatie en de "geen twee foutsoorten delen een melding"-
   invariant) en l10n voor alle nieuwe teksten in de 31 talen.
+- **feat(titel): beeldkolommen naast de titeltekst (#1405).** De titeldia
+  ondersteunt nu één of twee afbeeldingskolommen links, rechts of aan beide
+  kanten van de titeltekst, via native Marp `![bg left:W%]` / `![bg right:W%]`
+  — geen nieuw OciDeck-token. De kolombreedte is instelbaar (10–40%, standaard
+  25%). Bugfix: niet-schermvullende titel/tussentitel-afbeeldingen ankeren
+  voortaan bovenaan in plaats van in het midden, tenzij de auteur een eigen
+  focuspunt heeft ingesteld.
+- **xmpp: vier bugs die een echte WebSocket-verbinding onmogelijk maakten
+  (#1403).** De XMPP-client draaide groen tegen een in-memory fake transport,
+  maar tegen een echte Prosody viel hij op vier dingen stil. (1)
+  `reconnectTransportFactory` was sync, maar `openXmppFrameTransport` geeft een
+  `Future` — de reconnect-pad crashte bij de eerste drop. (2) De `ws://`-
+  loopback-pad in `xmpp_frame_transport_io.dart` faalde omdat de
+  `connectionFactory` alleen `https` accepteerde; nu mag `http` door op
+  loopback (dezelfde `plainLoopback`-regel als de rest). (3) Stanzas gingen de
+  deur uit zonder `xmlns="jabber:client"` — verplicht voor XMPP-over-WebSocket
+  (RFC 7395), en Prosody wees ze stil. (4) `XmppSettings` had geen
+  `domainOverride`: de WebSocket-host (`127.0.0.1`) en het XMPP-domain
+  (`meet.jitsi`) zijn niet hetzelfde, en de stream-open `to=` moest het domain
+  dragen, niet het IP. Elke fix heeft een regressietest; `make check` groen
+  (9137 tests, 87,2%).
+- **xmpp: integratietest tegen echte Prosody + lokaal testbed
+  (§8, §11 stap 8).** `test/xmpp/xmpp_docker_jitsi_integration_test.dart` zet
+  twee echte clients op tegen een lokale Prosody: join, edit, lock, chat,
+  disconnect→resync. Gated achter `OCIDECK_XMPP_INTEGRATION=1` (niet in
+  `make check`); draait via `make test-xmpp-integration`. Het testbed in
+  `testbed/docker-jitsi-meet/` is een plain `prosody/prosody` met anonymous
+  auth, MUC (`muc_room_locking = false` zodat een tweede client kan joinen),
+  en WebSocket — niet de volledige `docker-jitsi-meet`-stack, want Jitsi's
+  custom Prosody-modules (`muc_domain_mapper`, `muc_resource_validate`,
+  hardcoded `restrict_room_creation`) verstoren non-Jitsi clients. Zie
+  `testbed/docker-jitsi-meet/README.md`.
+- **grafiek: leesbare inkt voor taart-partjelabels.** De percentages op taart-/
+  donutpartjes stonden altijd in wit; op een licht partje (EU-geel `#FFCC00`,
+  lichtblauw) was dat ~1,5:1 contrast en dus onleesbaar (faalt WCAG). Ze kiezen
+  nu per partje hun inkt via `readableChartInk('#FFFFFF', partjekleur)` — wit op
+  een donker partje, een donkere inkt op een licht partje — precies zoals de
+  heatmap en de grafiektitel al deden. Alleen de Flutter-render (de HTML-export
+  tekent geen partjelabels). Opgemerkt tijdens de beeldkeuring van #1395.
 - **grafiek: taart als tekening — echte taart, verbergbare percentages,
   starthoek (#1395).** Een externe indiener probeerde met een taartdiagram een
   piramide tegen een lucht te tekenen en liep op drie dingen vast; alledrie

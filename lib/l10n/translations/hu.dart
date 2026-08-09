@@ -1809,6 +1809,28 @@ const _dutchSourceAddHu = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Ezen az URL-en nincs prezentáció (nem található). Ellenőrizd, hogy a hivatkozás még helyes-e.',
   'Video kan niet worden geladen': 'A videó nem tölthető be',
+  'Titel boven afbeelding': 'Cím a kép felett',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'A címet a kép felett mutatja ahelyett, hogy rálenne',
+  'Afbeeldingslay-out': 'Kép elrendezés',
+  'Beide': 'Mindkettő',
+  'Volvlak': 'Teljes felület',
+  'Kolombreedte': 'Oszlopszélesség',
+  'Linker kolomafbeelding': 'Bal oldali oszlop kép',
+  'Rechter kolomafbeelding': 'Jobb oldali oszlop kép',
+  'Geen linker kolomafbeelding': 'Nincs bal oldali oszlop kép',
+  'Geen rechter kolomafbeelding': 'Nincs jobb oldali oszlop kép',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Teljes felület: a kép képernyőt kitöltő háttérként. Balra/Jobbra/Mindkettő: egy vagy két képoszlop a címszöveg mellett.',
+  'Hernoemen': 'Átnevezés',
+  'Naam wijzigen': 'Név módosítása',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'A kiterjesztés rögzített marad — az átnevezés nem változtatja a fájlformátumot.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'A név nem tartalmazhat mappákat vagy speciális karaktereket.',
+  'Hernoemd naar': 'Átnevezve:',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Nem sikerült átnevezni a képet. Létezik már fájl ezzel a névvel?',
   'Starthoek (graden)': 'Kezdőszög (fok)',
   'Percentages op de taartpunten tonen':
       'Százalékok megjelenítése a körcikkeken',

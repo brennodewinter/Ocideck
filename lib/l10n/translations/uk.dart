@@ -1822,6 +1822,28 @@ const _dutchSourceAddUk = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'За цією URL-адресою немає презентації (не знайдено). Перевірте, чи посилання ще дійсне.',
   'Video kan niet worden geladen': 'Не вдається завантажити відео',
+  'Titel boven afbeelding': 'Заголовок над зображенням',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Показує заголовок над зображенням замість накладеного на нього',
+  'Afbeeldingslay-out': 'Розташування зображення',
+  'Beide': 'Обидва',
+  'Volvlak': 'На весь екран',
+  'Kolombreedte': 'Ширина стовпця',
+  'Linker kolomafbeelding': 'Зображення лівого стовпця',
+  'Rechter kolomafbeelding': 'Зображення правого стовпця',
+  'Geen linker kolomafbeelding': 'Немає зображення лівого стовпця',
+  'Geen rechter kolomafbeelding': 'Немає зображення правого стовпця',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'На весь екран: зображення як тло на весь екран. Ліво/Право/Обидва: одна або дві колонки зображень поруч із текстом заголовка.',
+  'Hernoemen': 'Перейменувати',
+  'Naam wijzigen': 'Змінити назву',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Розширення залишається фіксованим — перейменування не змінює формат файлу.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Назва не може містити папки чи спеціальні символи.',
+  'Hernoemd naar': 'Перейменовано на',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Не вдалося перейменувати зображення. Чи існує вже файл з такою назвою?',
   'Starthoek (graden)': 'Початковий кут (градуси)',
   'Percentages op de taartpunten tonen': 'Показувати відсотки на секторах',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Новий розділ на новій сторінці',

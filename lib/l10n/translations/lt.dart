@@ -1812,6 +1812,28 @@ const _dutchSourceAddLt = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Šiuo URL nėra pristatymo (nerasta). Patikrinkite, ar nuoroda vis dar teisinga.',
   'Video kan niet worden geladen': 'Nepavyksta įkelti vaizdo įrašo',
+  'Titel boven afbeelding': 'Antraštė virš paveikslėlio',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Rodo antraštę virš paveikslėlio vietoj uždėtos ant jo',
+  'Afbeeldingslay-out': 'Paveikslėlio išdėstymas',
+  'Beide': 'Abu',
+  'Volvlak': 'Visas plotas',
+  'Kolombreedte': 'Stulpelio plotis',
+  'Linker kolomafbeelding': 'Kairiojo stulpelio paveikslėlis',
+  'Rechter kolomafbeelding': 'Dešiniojo stulpelio paveikslėlis',
+  'Geen linker kolomafbeelding': 'Nėra kairiojo stulpelio paveikslėlio',
+  'Geen rechter kolomafbeelding': 'Nėra dešiniojo stulpelio paveikslėlio',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Visas plotas: paveikslėlis kaip visą ekraną užpildantis fonas. Kairėn/Dešinėn/Abu: vienas ar du paveikslėlių stulpeliai šalia pavadinimo teksto.',
+  'Hernoemen': 'Pervadinti',
+  'Naam wijzigen': 'Keisti pavadinimą',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Plėtinys lieka fiksuotas — pervadinimas nekeičia failo formato.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Pavadinimas negali turėti aplankų ar specialiųjų simbolių.',
+  'Hernoemd naar': 'Pervadinta į',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Nepavyko pervadinti paveikslėlio. Ar jau egzistuoja failas tokiu pavadinimu?',
   'Starthoek (graden)': 'Pradinis kampas (laipsniai)',
   'Percentages op de taartpunten tonen':
       'Rodyti procentus skritulio sektoriuose',

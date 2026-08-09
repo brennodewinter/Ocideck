@@ -2782,6 +2782,28 @@ const _dutchSourceAddTr = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Bu URL’de sunum yok (bulunamadı). Bağlantının hâlâ doğru olduğunu denetleyin.',
   'Video kan niet worden geladen': 'Video yüklenemiyor',
+  'Titel boven afbeelding': 'Görselin üstündeki başlık',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Başlığı görselin üzerine yığılmış yerine üstünde gösterir',
+  'Afbeeldingslay-out': 'Görüntü düzeni',
+  'Beide': 'Her ikisi',
+  'Volvlak': 'Tam dolu',
+  'Kolombreedte': 'Sütun genişliği',
+  'Linker kolomafbeelding': 'Sol sütun görseli',
+  'Rechter kolomafbeelding': 'Sağ sütun görseli',
+  'Geen linker kolomafbeelding': 'Sol sütun görseli yok',
+  'Geen rechter kolomafbeelding': 'Sağ sütun görseli yok',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Tam dolu: görüntü ekranı dolduran arka plan olarak. Sol/Sağ/Her ikisi: başlık metninin yanında bir veya iki görüntü sütunu.',
+  'Hernoemen': 'Yeniden adlandır',
+  'Naam wijzigen': 'Adı değiştir',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Uzantı sabit kalır — yeniden adlandırmak dosya biçimini değiştirmez.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Ad klasörler veya özel karakterler içeremez.',
+  'Hernoemd naar': 'Yeniden adlandırıldı:',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Görsel yeniden adlandırılamadı. Bu adda bir dosya zaten mevcut mu?',
   'Starthoek (graden)': 'Başlangıç açısı (derece)',
   'Percentages op de taartpunten tonen': 'Yüzdeleri pasta dilimlerinde göster',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Yeni bölüm yeni sayfada',

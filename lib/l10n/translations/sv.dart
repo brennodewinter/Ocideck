@@ -1804,6 +1804,28 @@ const _dutchSourceAddSv = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Det finns ingen presentation på denna URL (hittades inte). Kontrollera att länken fortfarande stämmer.',
   'Video kan niet worden geladen': 'Videon kan inte läsas in',
+  'Titel boven afbeelding': 'Titel över bilden',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Visar titeln över bilden istället för ovanpå den',
+  'Afbeeldingslay-out': 'Bildlayout',
+  'Beide': 'Båda',
+  'Volvlak': 'Fullbleed',
+  'Kolombreedte': 'Kolumnbredd',
+  'Linker kolomafbeelding': 'Vänster kolumnbild',
+  'Rechter kolomafbeelding': 'Höger kolumnbild',
+  'Geen linker kolomafbeelding': 'Ingen vänster kolumnbild',
+  'Geen rechter kolomafbeelding': 'Ingen höger kolumnbild',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Fullbleed: bilden som skärmfyllande bakgrund. Vänster/Höger/Båda: en eller två bildkolumner bredvid titeltexten.',
+  'Hernoemen': 'Byt namn',
+  'Naam wijzigen': 'Ändra namn',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Filändelsen förblir fast — att byta namn ändrar inte filformatet.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Namnet får inte innehålla mappar eller specialtecken.',
+  'Hernoemd naar': 'Bytt namn till',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Kunde inte byta namn på bilden. Finns det redan en fil med det namnet?',
   'Starthoek (graden)': 'Startvinkel (grader)',
   'Percentages op de taartpunten tonen': 'Visa procent på tårtbitarna',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nytt kapitel på en ny sida',

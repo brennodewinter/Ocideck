@@ -141,6 +141,18 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                   ),
                 ),
                 TextButton.icon(
+                  onPressed: _renameSelected,
+                  icon: const Icon(Icons.edit_outlined, size: 16),
+                  label: Text(l10n.d('Hernoemen')),
+                  style: TextButton.styleFrom(
+                    foregroundColor: ImagePickerPalette.textMuted,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                  ),
+                ),
+                TextButton.icon(
                   onPressed: _deleteSelected,
                   icon: const Icon(Icons.delete_outline, size: 16),
                   label: Text(l10n.d('Verwijderen')),

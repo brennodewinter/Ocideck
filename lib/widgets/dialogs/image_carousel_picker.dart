@@ -13,6 +13,7 @@ import '../../services/image_library_scanner.dart';
 import '../../services/image_alt_ai_service.dart';
 import '../../services/image_dedup_service.dart';
 import '../../services/image_reference_service.dart';
+import '../../services/image_rename_service.dart';
 import '../../services/image_service.dart';
 import '../../services/secret_store.dart';
 import '../../state/consent_provider.dart';
@@ -25,6 +26,7 @@ import 'ai_image_outbound_dialog.dart';
 
 part 'parts/image_carousel_picker_actions.dart';
 part 'parts/image_carousel_picker_delete.dart';
+part 'parts/image_carousel_picker_rename.dart';
 part 'parts/image_carousel_picker_chrome.dart';
 part 'parts/image_carousel_picker_grid.dart';
 part 'parts/image_carousel_picker_preview.dart';

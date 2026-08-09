@@ -116,6 +116,54 @@ mixin BgImageHandlers<T extends ConsumerStatefulWidget> on ConsumerState<T> {
       editorSlide.copyWith(imagePath: '', imageCaption: '', imageAltText: ''),
     );
   }
+
+  /// Mirror of [pickBgImage] for the right column image (title-column mode,
+  /// #1405): picks into [Slide.imagePath2] and clears its caption/alt.
+  Future<void> pickBgImage2() async {
+    final path = await pickImageWithFeedback(
+      context,
+      ref.read(imageServiceProvider),
+      projectPath: bgImageBasePath,
+    );
+    if (path != null) {
+      onSlideUpdate(
+        editorSlide.copyWith(
+          imagePath2: path,
+          imageCaption2: '',
+          imageAltText2: '',
+        ),
+      );
+    }
+  }
+
+  /// Mirror of [pasteBgImage] for the right column image (#1405).
+  Future<void> pasteBgImage2() async {
+    final path = await pasteImageWithFeedback(
+      context,
+      ref.read(imageServiceProvider),
+      projectPath: bgImageBasePath,
+    );
+    if (path != null) {
+      onSlideUpdate(
+        editorSlide.copyWith(
+          imagePath2: path,
+          imageCaption2: '',
+          imageAltText2: '',
+        ),
+      );
+    }
+  }
+
+  /// Mirror of [clearBgImage] for the right column image (#1405).
+  void clearBgImage2() {
+    onSlideUpdate(
+      editorSlide.copyWith(
+        imagePath2: '',
+        imageCaption2: '',
+        imageAltText2: '',
+      ),
+    );
+  }
 }
 
 class EditorField extends ConsumerStatefulWidget {

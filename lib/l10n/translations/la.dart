@@ -1821,6 +1821,28 @@ const _dutchSourceAddLa = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'In hac URL nulla praesentatio est (non inventa). Proba num nexus adhuc rectus sit.',
   'Video kan niet worden geladen': 'Pellicula onerari non potest',
+  'Titel boven afbeelding': 'Titulus supra imaginem',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Titulum supra imaginem ostendit potius quam superpositum',
+  'Afbeeldingslay-out': 'Imaginis dispositio',
+  'Beide': 'Uterque',
+  'Volvlak': 'Plena',
+  'Kolombreedte': 'Latitudo columnae',
+  'Linker kolomafbeelding': 'Imago columnae sinistrae',
+  'Rechter kolomafbeelding': 'Imago columnae dextrae',
+  'Geen linker kolomafbeelding': 'Nulla imago columnae sinistrae',
+  'Geen rechter kolomafbeelding': 'Nulla imago columnae dextrae',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Plena: imago ut fundus pleni schematis. Laeva/Dextra/Uterque: una aut duae columnae imaginum iuxta textum tituli.',
+  'Hernoemen': 'Renominare',
+  'Naam wijzigen': 'Nomen mutare',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Suffixum manet — renominare formam file non mutat.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Nomen folders vel caracteres speciales continere non potest.',
+  'Hernoemd naar': 'Renominatum ad',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Imago renominari non potuit. File eo nomine iam existitne?',
   'Starthoek (graden)': 'Angulus initialis (gradus)',
   'Percentages op de taartpunten tonen':
       'Centesimas in segmentis placentae monstrare',

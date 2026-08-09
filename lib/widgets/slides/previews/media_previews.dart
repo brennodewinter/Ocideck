@@ -429,6 +429,7 @@ class _ImagePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (slide.imageTitleAbove) return _titleAboveLayout(context);
     final hasTitle = slide.title.isNotEmpty;
     return Stack(
       fit: StackFit.expand,
@@ -484,6 +485,66 @@ class _ImagePreview extends StatelessWidget {
           ),
         _captionOverlay(context, slide.imageCaption, w),
       ],
+    );
+  }
+
+  Widget _titleAboveLayout(BuildContext context) {
+    return Container(
+      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+      child: Column(
+        children: [
+          if (slide.title.isNotEmpty)
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                w * 0.06,
+                w * 0.04,
+                w * 0.06,
+                w * 0.02,
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: _md(
+                  context,
+                  slide.title,
+                  _applyFont(
+                    font,
+                    TextStyle(
+                      color: AppTheme.parseHexColor(profile.textColor),
+                      fontSize: w * 0.045,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  linkColor: AppTheme.paleBlue2,
+                ),
+              ),
+            ),
+          Expanded(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                _resolvedImage(
+                  context,
+                  slide.imagePath,
+                  projectPath,
+                  fit: BoxFit.contain,
+                  alignment:
+                      hasCustomFocal(slide.imageFocalX, slide.imageFocalY)
+                      ? focalAlignment(slide.imageFocalX, slide.imageFocalY)
+                      : Alignment.center,
+                  semanticLabel: imageSemanticsLabel(
+                    context,
+                    slide.imageCaption,
+                    altText: slide.imageAltText,
+                  ),
+                ),
+                _captionOverlay(context, slide.imageCaption, w),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

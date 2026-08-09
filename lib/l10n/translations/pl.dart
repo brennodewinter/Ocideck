@@ -1817,6 +1817,28 @@ const _dutchSourceAddPl = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Pod tym adresem URL nie ma prezentacji (nie znaleziono). Sprawdź, czy link jest nadal poprawny.',
   'Video kan niet worden geladen': 'Nie można wczytać wideo',
+  'Titel boven afbeelding': 'Tytuł nad obrazem',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Wyświetla tytuł nad obrazem zamiast nałożony na niego',
+  'Afbeeldingslay-out': 'Układ obrazu',
+  'Beide': 'Oba',
+  'Volvlak': 'Pełnoekranowe',
+  'Kolombreedte': 'Szerokość kolumny',
+  'Linker kolomafbeelding': 'Obraz lewej kolumny',
+  'Rechter kolomafbeelding': 'Obraz prawej kolumny',
+  'Geen linker kolomafbeelding': 'Brak obrazu lewej kolumny',
+  'Geen rechter kolomafbeelding': 'Brak obrazu prawej kolumny',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Pełnoekranowe: obraz jako tło wypełniające ekran. Lewo/Prawo/Oba: jedna lub dwie kolumny obrazów obok tekstu tytułu.',
+  'Hernoemen': 'Zmień nazwę',
+  'Naam wijzigen': 'Zmień nazwę',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Rozszerzenie pozostaje stałe — zmiana nazwy nie zmienia formatu pliku.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Nazwa nie może zawierać folderów ani znaków specjalnych.',
+  'Hernoemd naar': 'Zmieniono nazwę na',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Nie można zmienić nazwy obrazu. Czy plik o tej nazwie już istnieje?',
   'Starthoek (graden)': 'Kąt początkowy (stopnie)',
   'Percentages op de taartpunten tonen': 'Pokaż procenty na wycinkach koła',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nowy rozdział na nowej stronie',

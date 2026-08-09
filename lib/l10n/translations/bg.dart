@@ -1827,6 +1827,28 @@ const _dutchSourceAddBg = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'На този URL адрес няма презентация (не е намерена). Проверете дали връзката все още е валидна.',
   'Video kan niet worden geladen': 'Видеото не може да се зареди',
+  'Titel boven afbeelding': 'Заглавие над изображението',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Показва заглавието над изображението вместо върху него',
+  'Afbeeldingslay-out': 'Разположение на изображението',
+  'Beide': 'И двете',
+  'Volvlak': 'Цял екран',
+  'Kolombreedte': 'Ширина на колона',
+  'Linker kolomafbeelding': 'Изображение на лява колона',
+  'Rechter kolomafbeelding': 'Изображение на дясна колона',
+  'Geen linker kolomafbeelding': 'Няма изображение на лява колона',
+  'Geen rechter kolomafbeelding': 'Няма изображение на дясна колона',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Цял екран: изображението като фон, запълващ екрана. Ляво/Дясно/И двете: една или две колони с изображения до текста на заглавието.',
+  'Hernoemen': 'Преименувай',
+  'Naam wijzigen': 'Промяна на име',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Разширението остава фиксирано — преименуването не променя формата на файла.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Името не може да съдържа папки или специални знаци.',
+  'Hernoemd naar': 'Преименувано на',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Изображението не можа да бъде преименувано. Вече ли съществува файл с това име?',
   'Starthoek (graden)': 'Начален ъгъл (градуси)',
   'Percentages op de taartpunten tonen':
       'Показване на процентите върху секторите',

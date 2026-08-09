@@ -764,6 +764,28 @@ const _dutchSourceAddFr = {
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Il n’y a aucune présentation à cette URL (introuvable). Vérifiez que le lien est toujours correct.',
   'Video kan niet worden geladen': 'Impossible de charger la vidéo',
+  'Titel boven afbeelding': 'Titre au-dessus de l\'image',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Affiche le titre au-dessus de l\'image au lieu de superposé',
+  'Afbeeldingslay-out': 'Disposition de l\'image',
+  'Beide': 'Les deux',
+  'Volvlak': 'Pleine page',
+  'Kolombreedte': 'Largeur de colonne',
+  'Linker kolomafbeelding': 'Image colonne gauche',
+  'Rechter kolomafbeelding': 'Image colonne droite',
+  'Geen linker kolomafbeelding': 'Pas d\'image colonne gauche',
+  'Geen rechter kolomafbeelding': 'Pas d\'image colonne droite',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Pleine page : l\'image comme arrière-plan plein écran. Gauche/Droite/Les deux : une ou deux colonnes d\'images à côté du texte du titre.',
+  'Hernoemen': 'Renommer',
+  'Naam wijzigen': 'Changer le nom',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'L\'extension reste fixe — renommer ne change pas le format du fichier.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Le nom ne peut pas contenir de dossiers ou de caractères spéciaux.',
+  'Hernoemd naar': 'Renommé en',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Impossible de renommer l\'image. Un fichier avec ce nom existe-t-il déjà ?',
   'Starthoek (graden)': 'Angle de départ (degrés)',
   'Percentages op de taartpunten tonen':
       'Afficher les pourcentages sur les secteurs',

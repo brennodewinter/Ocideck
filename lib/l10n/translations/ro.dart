@@ -1822,6 +1822,28 @@ const _dutchSourceAddRo = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Nu există nicio prezentare la acest URL (nu a fost găsită). Verifică dacă linkul este încă valid.',
   'Video kan niet worden geladen': 'Videoclipul nu poate fi încărcat',
+  'Titel boven afbeelding': 'Titlu deasupra imaginii',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Afișează titlul deasupra imaginii în loc de suprapus',
+  'Afbeeldingslay-out': 'Aranjare imagine',
+  'Beide': 'Ambele',
+  'Volvlak': 'Plin',
+  'Kolombreedte': 'Lățime coloană',
+  'Linker kolomafbeelding': 'Imagine coloană stângă',
+  'Rechter kolomafbeelding': 'Imagine coloană dreaptă',
+  'Geen linker kolomafbeelding': 'Fără imagine coloană stângă',
+  'Geen rechter kolomafbeelding': 'Fără imagine coloană dreaptă',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Plin: imaginea ca fundal care umple ecranul. Stânga/Dreapta/Ambele: una sau două coloane de imagini lângă textul titlului.',
+  'Hernoemen': 'Redenumește',
+  'Naam wijzigen': 'Schimbă numele',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Extensia rămâne fixă — redenumirea nu schimbă formatul fișierului.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Numele nu poate conține dosare sau caractere speciale.',
+  'Hernoemd naar': 'Redenumit în',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Nu s-a putut redenumi imaginea. Există deja un fișier cu acel nume?',
   'Starthoek (graden)': 'Unghi inițial (grade)',
   'Percentages op de taartpunten tonen': 'Afișează procentele pe felii',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Capitol nou pe o pagină nouă',

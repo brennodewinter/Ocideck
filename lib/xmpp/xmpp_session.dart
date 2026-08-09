@@ -33,6 +33,7 @@ import 'xmpp_stanza.dart';
 const _framingNs = 'urn:ietf:params:xml:ns:xmpp-framing';
 const _saslNs = 'urn:ietf:params:xml:ns:xmpp-sasl';
 const _bindNs = 'urn:ietf:params:xml:ns:xmpp-bind';
+const _clientNs = 'jabber:client';
 
 /// Why bringing a session up did not succeed. Mapped to a translated message at
 /// the UI boundary.
@@ -137,6 +138,7 @@ class XmppSession implements XmppStanzaChannel {
     this.onRejoin,
     this.maxReconnectAttempts = 5,
     this.reconnectDelay = xmppReconnectDelay,
+    this.pingInterval = const Duration(seconds: 60),
   }) : _nonce = nonceFactory ?? _defaultNonce;
 
   /// The active transport — replaced on each reconnect. Mutable because a
@@ -154,11 +156,18 @@ class XmppSession implements XmppStanzaChannel {
   /// A factory that produces a fresh transport for a reconnect, always to the
   /// same NetGuard-cleared host — never a new outbound host. If null, a stream
   /// drop tears down the session (the pre-reconnect behaviour).
-  final XmppFrameTransport Function()? reconnectTransportFactory;
+  ///
+  /// Async because the real transport ([openXmppFrameTransport]) opens a
+  /// WebSocket — a synchronous signature could only return a fake.
+  final Future<XmppFrameTransport> Function()? reconnectTransportFactory;
 
   /// Called after a successful reconnect, so the higher layer can rejoin its
-  /// MUC room(s). Receives the session (now live again) as the channel.
-  final Future<void> Function(XmppStanzaChannel)? onRejoin;
+  /// MUC room(s). Receives the session (now live again) as the channel. Returns
+  /// `true` als de rejoin slaagde, `false` als de kamer niet betreden kon worden
+  /// (bijv. nick-conflict — de oude occupant is nog niet uitgelogd). Bij `false`
+  /// gaat `_reconnect` naar de volgende backoff-poging in plaats van succes te
+  /// claimen (#1416).
+  final Future<bool> Function(XmppStanzaChannel)? onRejoin;
 
   /// Max reconnect attempts before the session goes fail-closed.
   final int maxReconnectAttempts;
@@ -174,6 +183,22 @@ class XmppSession implements XmppStanzaChannel {
   bool _live = false;
   bool _closed = false;
   bool _reconnecting = false;
+
+  /// Outbound stanzas die tijdens een reconnect werden verzonden (_live =
+  /// false). Begrensd op 64 — een aanhoudende stroom tijdens een lange
+  /// reconnect mag het geheugen niet uitputten (#1417). Na een geslaagde
+  /// reconnect spoelt `_reconnect` de queue naar de nieuwe transport; bij
+  /// fail-closed wordt de queue gewist.
+  static const _outboundQueueCap = 64;
+  final List<String> _outboundQueue = [];
+
+  /// XEP-0199 ping-interval. Elke [pingInterval] stuurt de sessie een
+  /// `<iq type=get><ping/></iq>` — houdt de NAT-tabel warm en detecteert een
+  /// dode verbinding als de server niet antwoordt binnen [timeout]. Bij null
+  /// of Duration.zero is ping uit (#1418).
+  final Duration pingInterval;
+  Timer? _pingTimer;
+  String? _pingInFlight; // id van de uitstaande ping, null als er geen is
 
   /// The full JID the server bound (`localpart@domain/resource`), or null before
   /// a successful [connect].
@@ -491,7 +516,10 @@ class XmppSession implements XmppStanzaChannel {
 
   /// Hand every remaining and future frame to [stanzas] as a parsed [Stanza].
   /// A frame that is not a valid stanza (or carries a DTD) is dropped, not fatal.
+  /// Ping-responses (XEP-0199) worden onderschept en niet doorgegeven — het is
+  /// een intern keepalive-protocol, geen collab-stanza.
   void _startDispatch() {
+    _startPing();
     _reader.drain((frame) {
       if (_closed) return;
       final Stanza stanza;
@@ -500,8 +528,45 @@ class XmppSession implements XmppStanzaChannel {
       } on FormatException {
         return; // not a stanza (or a DTD) — ignore, never fatal
       }
+      // XEP-0199 ping-response — ruim de in-flight flag op, niet doorgeven.
+      if (_pingInFlight != null &&
+          stanza.kind == StanzaKind.iq &&
+          stanza.id == _pingInFlight) {
+        _pingInFlight = null;
+        return;
+      }
       if (!_inbound.isClosed) _inbound.add(stanza);
     }, onClosed: _onStreamDropped);
+  }
+
+  /// Start de periodieke XEP-0199 ping (#1418). Elke [pingInterval] stuurt een
+  /// `<iq type=get><ping/></iq>`. Als de vorige ping nog niet beantwoord is
+  /// wanneer de timer opnieuw vuurt, is de verbinding dood → `_onStreamDropped`.
+  void _startPing() {
+    _stopPing();
+    if (pingInterval == Duration.zero || _closed) return;
+    _pingTimer = Timer.periodic(pingInterval, (_) {
+      if (_closed || !_live) return;
+      if (_pingInFlight != null) {
+        // De vorige ping is niet beantwoord binnen pingInterval — de verbinding
+        // is dood. Trigger reconnect (of tear down).
+        _stopPing();
+        _onStreamDropped();
+        return;
+      }
+      final id = 'ping-${DateTime.now().microsecondsSinceEpoch}';
+      _pingInFlight = id;
+      transport.send(
+        '<iq type="get" id="$id">'
+        '<ping xmlns="urn:xmpp:ping"/></iq>',
+      );
+    });
+  }
+
+  void _stopPing() {
+    _pingTimer?.cancel();
+    _pingTimer = null;
+    _pingInFlight = null;
   }
 
   /// The server ended the stream on a live session (EOF or error). Mark it
@@ -510,6 +575,7 @@ class XmppSession implements XmppStanzaChannel {
   /// (the MUC layer) learns the room is gone — the pre-reconnect behaviour.
   void _onStreamDropped() {
     _live = false;
+    _stopPing();
     if (reconnectTransportFactory != null && !_closed && !_reconnecting) {
       _reconnecting = true;
       unawaited(_reconnect());
@@ -539,7 +605,7 @@ class XmppSession implements XmppStanzaChannel {
           // naar dezelfde host, nooit een nieuwe outbound host.
           await _reader.cancel();
           await transport.close();
-          transport = reconnectTransportFactory!();
+          transport = await reconnectTransportFactory!();
           _reader = _FrameReader(transport.inbound);
 
           final auth = await _authenticate();
@@ -549,8 +615,19 @@ class XmppSession implements XmppStanzaChannel {
           _live = true;
           _startDispatch();
           // Rejoin de kamer(s), dan signaleer de transport-laag voor een resync.
-          if (onRejoin != null) await onRejoin!(this);
+          // Als onRejoin false retourneert (bijv. nick-conflict), claim geen
+          // succes — ga naar de volgende backoff-poging (#1416).
+          if (onRejoin != null) {
+            final rejoined = await onRejoin!(this);
+            if (!rejoined) {
+              _live = false;
+              continue; // rejoin faalde — backoff en opnieuw
+            }
+          }
           if (!_reconnected.isClosed) _reconnected.add(null);
+          // Spoel de outbound-queue — stanzas die tijdens de reconnect werden
+          // verzonden, gaan nu alsnog op de wire (#1417).
+          _flushOutboundQueue();
           return; // success
         } on TimeoutException {
           continue; // server reageerde niet — backoff en opnieuw
@@ -565,6 +642,7 @@ class XmppSession implements XmppStanzaChannel {
       }
       // Max pogingen bereikt — fail-closed: de sessie is dood.
       _boundJid = null;
+      _outboundQueue.clear();
       if (!_inbound.isClosed) await _inbound.close();
     } finally {
       _reconnecting = false;
@@ -581,17 +659,39 @@ class XmppSession implements XmppStanzaChannel {
     }
   }
 
-  /// Send a stanza on the live session. A no-op once closed.
+  /// Spoel de gebufferde outbound stanzas naar de huidige transport. Leegt de
+  /// queue ongeacht of de transport ze accepteert — een send-fout op één stanza
+  /// mag niet de hele queue laten hangen.
+  void _flushOutboundQueue() {
+    if (_outboundQueue.isEmpty) return;
+    for (final frame in _outboundQueue) {
+      if (!_closed && _live) transport.send(frame);
+    }
+    _outboundQueue.clear();
+  }
+
+  /// Send a stanza on the live session. A no-op once closed. Tijdens een
+  /// reconnect (_live = false met een reconnect-factory) wordt de stanza
+  /// gebufferd en na een geslaagde reconnect gespoeld (#1417) — in plaats van
+  /// stil gedropt te worden.
   @override
   void sendStanza(Stanza stanza) {
-    if (_closed || !_live) return;
-    transport.send(stanza.toXmlString());
+    if (_closed) return;
+    if (_live) {
+      transport.send(stanza.toXmlString());
+    } else if (reconnectTransportFactory != null) {
+      if (_outboundQueue.length < _outboundQueueCap) {
+        _outboundQueue.add(stanza.toXmlString());
+      }
+    }
+    // Geen reconnect-factory en niet live — pre-reconnect gedrag: drop stil.
   }
 
   Future<void> close() async {
     if (_closed) return;
     _closed = true;
     _live = false;
+    _stopPing();
     await _reader.cancel();
     await transport.close();
     if (!_inbound.isClosed) await _inbound.close();
@@ -600,7 +700,24 @@ class XmppSession implements XmppStanzaChannel {
 
   // ── helpers ───────────────────────────────────────────────────────────────
 
-  void _send(XmlElement element) => transport.send(element.toXmlString());
+  void _send(XmlElement element) {
+    // In XMPP-over-WebSocket (RFC 7395) each frame is a standalone XML
+    // document — the jabber:client default namespace is NOT inherited from
+    // the stream (the <open> frame carries the framing namespace, not
+    // jabber:client). Stanzas (iq/message/presence) sent without xmlns land
+    // in the empty namespace, which Prosody rejects as "unhandled". Add
+    // xmlns="jabber:client" when the element doesn't already carry one.
+    final hasNs = element.attributes.any((a) => a.name.local == 'xmlns');
+    if (hasNs) {
+      transport.send(element.toXmlString());
+    } else {
+      final withNs = XmlElement(element.name, [
+        XmlAttribute(XmlName.parts('xmlns'), _clientNs),
+        ...element.attributes,
+      ], element.children);
+      transport.send(withNs.toXmlString());
+    }
+  }
 
   XmlElement? _parse(String frame) {
     final XmlDocument document;

@@ -1832,6 +1832,28 @@ const _dutchSourceAddEl = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Δεν υπάρχει παρουσίαση σε αυτό το URL (δεν βρέθηκε). Ελέγξτε αν ο σύνδεσμος εξακολουθεί να ισχύει.',
   'Video kan niet worden geladen': 'Δεν είναι δυνατή η φόρτωση του βίντεο',
+  'Titel boven afbeelding': 'Τίτλος πάνω από την εικόνα',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Δείχνει τον τίτλο πάνω από την εικόνα αντί επάνω της',
+  'Afbeeldingslay-out': 'Διάταξη εικόνας',
+  'Beide': 'Και τα δύο',
+  'Volvlak': 'Πλήρης κάλυψη',
+  'Kolombreedte': 'Πλάτος στήλης',
+  'Linker kolomafbeelding': 'Εικόνα αριστερού στήλης',
+  'Rechter kolomafbeelding': 'Εικόνα δεξιού στήλης',
+  'Geen linker kolomafbeelding': 'Καμία εικόνα αριστερού στήλης',
+  'Geen rechter kolomafbeelding': 'Καμία εικόνα δεξιού στήλης',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Πλήρης κάλυψη: η εικόνα ως φόντο πλήρους οθόνης. Αριστερά/Δεξιά/Και τα δύο: μία ή δύο στήλες εικόνων δίπλα στο κείμενο του τίτλου.',
+  'Hernoemen': 'Μετονομασία',
+  'Naam wijzigen': 'Αλλαγή ονόματος',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Η επέκταση παραμένει σταθερή — η μετονομασία δεν αλλάζει τη μορφή του αρχείου.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Το όνομα δεν μπορεί να περιέχει φακέλους ή ειδικούς χαρακτήρες.',
+  'Hernoemd naar': 'Μετονομάστηκε σε',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Δεν ήταν δυνατή η μετονομασία της εικόνας. Υπάρχει ήδη αρχείο με αυτό το όνομα;',
   'Starthoek (graden)': 'Αρχική γωνία (μοίρες)',
   'Percentages op de taartpunten tonen':
       'Εμφάνιση ποσοστών στα κομμάτια της πίτας',

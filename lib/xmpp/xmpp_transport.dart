@@ -165,10 +165,49 @@ class XmppTransport implements CollabTransport {
   /// in huis was — de afzender's device-sleutels of de epoch-sleutel. Zonder
   /// deze backlog zou een geldige op als "onbekende afzender" worden gedropt
   /// en voor altijd verloren (#1041). Opnieuw geprobeerd in aankomst-volgorde
-  /// bij elke nieuwe stanza, begrensd op aantal en ronden.
+  /// als een key-change de backlog mogelijk ontgrendelt, begrensd op aantal
+  /// en ronden.
   final List<_DeferredStanza> _deferred = [];
   static const int _maxDeferred = 256;
   static const int _maxDeferralRounds = 16;
+
+  /// Of de key-state is veranderd sinds de laatste backlog-sweep. Alleen als
+  /// dit true is, retryt `_dispatch` de backlog — een nieuwe op/lock-stanza
+  /// zonder key-change maakt een uitgestelde stanza niet opeens openbaar.
+  /// Voorkomt O(N²) herverwerking bij elke inbound stanza (#1424).
+  bool _keysDirty = false;
+
+  /// Meld dat de key-state is veranderd (nieuwe device-sleutel of epoch-
+  /// sleutel geïnstalleerd). De key-exchange roept dit na `directory.ingest`
+  /// of `distributeEpoch`. De volgende `_dispatch` retryt de backlog.
+  void notifyKeyChanged() {
+    if (_deferred.isEmpty || _disposed) return;
+    _keysDirty = true;
+    unawaited(_retryDeferred());
+  }
+
+  /// Sweep de backlog zonder nieuwe stanzas. Alleen aangeroepen als
+  /// `_keysDirty` true is.
+  Future<void> _retryDeferred() async {
+    if (!_keysDirty || _disposed) return;
+    _keysDirty = false;
+    final backlog = List<_DeferredStanza>.from(_deferred);
+    _deferred.clear();
+    for (final d in backlog) {
+      if (_disposed) return;
+      final outcome = await _tryApply(d.stanza, d.namespace);
+      if (outcome == _ApplyOutcome.retryLater) {
+        if (d.rounds < _maxDeferralRounds) {
+          _deferred.add(_DeferredStanza(d.stanza, d.namespace, d.rounds + 1));
+        } else {
+          logWarning(
+            'xmpp.transport.deferred.expired',
+            _stanzaKey(d.stanza, d.namespace),
+          );
+        }
+      }
+    }
+  }
 
   /// De hoogste op-versie die deze transport heeft gezien — voor
   /// gap-detectie. Een op met `version > _lastSeenVersion + 1` (en
@@ -181,6 +220,12 @@ class XmppTransport implements CollabTransport {
   /// Wanneer de laatste re-baseline werd afgehandeld (autoriteit-kant
   /// coalesce-venster).
   DateTime? _lastResyncHandled;
+
+  /// Per-sender rate-limiter voor inbound ops (#1433). Een vijandige server
+  /// kan een vloed ops sturen; zonder rate-limit raakt de decryptie+emit-
+  /// pipeline overspoeld. Begrensd op _maxOpsPerSecondPerSender per sender.
+  static const _maxOpsPerSecondPerSender = 50;
+  final Map<String, _RateBucket> _opBuckets = {};
 
   @override
   String get participantId => _e2ee.deviceId;
@@ -275,31 +320,42 @@ class XmppTransport implements CollabTransport {
   Future<void> _onLockStanza(Stanza stanza) =>
       _dispatch([(stanza, OciDeckNamespace.lock)]);
 
-  /// Verwerk op/lock-stanzas: de uitgestelde backlog eerst (zodat
-  /// cross-stanza-volgorde bewaard blijft), dan de [fresh]. Een stanza die
-  /// nog steeds niet geopend kan worden wordt opnieuw uitgesteld, begrensd
-  /// op aantal en ronden. Spiegelt `MatrixRelayTransport._dispatchData`.
+  /// Verwerk op/lock-stanzas: de uitgestelde backlog eerst (alleen als de
+  /// key-state is veranderd — anders kan een uitgestelde stanza niet opeens
+  /// openbaar zijn, #1424), dan de [fresh]. Een stanza die nog steeds niet
+  /// geopend kan worden wordt opnieuw uitgesteld, begrensd op aantal en ronden.
   Future<void> _dispatch(List<(Stanza, String)> fresh) async {
     if (_disposed) return;
-    final backlog = List<_DeferredStanza>.from(_deferred);
-    _deferred.clear();
-    final queue = <(Stanza, String)>[
-      for (final d in backlog) (d.stanza, d.namespace),
-      ...fresh,
-    ];
-    final rounds = <String, int>{
-      for (final d in backlog) _stanzaKey(d.stanza, d.namespace): d.rounds,
-    };
-    for (final (stanza, ns) in queue) {
+    // Sweep de backlog alleen als de key-state is veranderd — een nieuwe
+    // op/lock-stanza zonder key-change maakt een uitgestelde stanza niet
+    // openbaar. Voorkomt O(N²) herverwerking (#1424).
+    if (_keysDirty) {
+      _keysDirty = false;
+      final backlog = List<_DeferredStanza>.from(_deferred);
+      _deferred.clear();
+      for (final d in backlog) {
+        if (_disposed) return;
+        final outcome = await _tryApply(d.stanza, d.namespace);
+        if (outcome == _ApplyOutcome.retryLater) {
+          if (d.rounds < _maxDeferralRounds) {
+            _deferred.add(_DeferredStanza(d.stanza, d.namespace, d.rounds + 1));
+          } else {
+            logWarning(
+              'xmpp.transport.deferred.expired',
+              _stanzaKey(d.stanza, d.namespace),
+            );
+          }
+        }
+      }
+    }
+    for (final (stanza, ns) in fresh) {
       if (_disposed) return;
       final outcome = await _tryApply(stanza, ns);
       if (outcome == _ApplyOutcome.retryLater) {
-        final key = _stanzaKey(stanza, ns);
-        final next = (rounds[key] ?? 0) + 1;
-        if (next <= _maxDeferralRounds) {
-          _deferred.add(_DeferredStanza(stanza, ns, next));
+        if (1 <= _maxDeferralRounds) {
+          _deferred.add(_DeferredStanza(stanza, ns, 1));
         } else {
-          logWarning('xmpp.transport.deferred.expired', key);
+          logWarning('xmpp.transport.deferred.expired', _stanzaKey(stanza, ns));
         }
       }
     }
@@ -331,6 +387,13 @@ class XmppTransport implements CollabTransport {
     }
     final sender = await _resolvePeer(sealed.senderDevice);
     if (sender == null) return _ApplyOutcome.retryLater;
+    // Rate-limit per sender: een vijandige server kan een vloed ops sturen
+    // die de decryptie-pipeline overspoelt (#1433). Drop als de sender boven
+    // de limiet zit.
+    if (!_rateAllow(sealed.senderDevice)) {
+      logWarning('xmpp.transport.rateLimited', sealed.senderDevice);
+      return _ApplyOutcome.permanentDrop;
+    }
     try {
       final envelope = await _e2ee.open(
         sealed,
@@ -495,11 +558,36 @@ class XmppTransport implements CollabTransport {
   }
 
   static String _stanzaKey(Stanza stanza, String namespace) =>
-      '${stanza.id ?? stanza.toXmlString()}:$namespace';
+      // Gebruik niet toXmlString() als fallback — dat logt de volledige stanza
+      // inclusief payload (#1431). Een safe samenvatting volstaat voor logging.
+      '${stanza.id ?? "${stanza.kind.name}:${stanza.from ?? "?"}"}:$namespace';
 
   static Map<String, Object?> _asObject(Object? value) {
     if (value is Map<String, Object?>) return value;
     if (value is Map) return value.map((k, v) => MapEntry('$k', v));
     throw const FormatException('expected an object in a sealed envelope');
   }
+
+  /// Token-bucket rate-limit check voor sender [deviceId]. Begrensd op
+  /// [_maxOpsPerSecondPerSender] per seconde — een eenvoudige sliding-window
+  /// teller die elke seconde reset. De bucket-map groeit met het aantal
+  /// unieke senders (begrensd door de MUC occupant cap, 500).
+  bool _rateAllow(String deviceId) {
+    final now = DateTime.now();
+    final bucket = _opBuckets[deviceId];
+    if (bucket == null ||
+        now.difference(bucket.windowStart) >= const Duration(seconds: 1)) {
+      _opBuckets[deviceId] = _RateBucket(windowStart: now, count: 1);
+      return true;
+    }
+    bucket.count++;
+    return bucket.count <= _maxOpsPerSecondPerSender;
+  }
+}
+
+/// Een sliding-window rate bucket voor één sender.
+class _RateBucket {
+  _RateBucket({required this.windowStart, required this.count});
+  DateTime windowStart;
+  int count;
 }

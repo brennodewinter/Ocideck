@@ -88,6 +88,57 @@ void main() {
       expect(out.titleTextColorOverride, '');
     });
 
+    test('title slide round-trips both-column layout', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.title).copyWith(
+          title: 'Welkom',
+          imagePath: 'images/left.png',
+          imagePath2: 'images/right.png',
+          imageCaption: 'Links',
+          imageCaption2: 'Rechts',
+          titleColumnLayout: TitleColumnLayout.both,
+          titleColumnWidth: 30,
+        ),
+      );
+      expect(out.type, SlideType.title);
+      expect(out.titleColumnLayout, TitleColumnLayout.both);
+      expect(out.titleColumnWidth, 30);
+      expect(out.imagePath, 'images/left.png');
+      expect(out.imagePath2, 'images/right.png');
+      expect(out.imageCaption, 'Links');
+      expect(out.imageCaption2, 'Rechts');
+      // Column mode forces imageSize to 0.
+      expect(out.imageSize, 0);
+    });
+
+    test('title slide round-trips left-only column layout', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.title).copyWith(
+          title: 'Welkom',
+          imagePath: 'images/left.png',
+          titleColumnLayout: TitleColumnLayout.left,
+          titleColumnWidth: 25,
+        ),
+      );
+      expect(out.titleColumnLayout, TitleColumnLayout.left);
+      expect(out.titleColumnWidth, 25);
+      expect(out.imagePath, 'images/left.png');
+    });
+
+    test('title slide round-trips right-only column layout', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.title).copyWith(
+          title: 'Welkom',
+          imagePath2: 'images/right.png',
+          titleColumnLayout: TitleColumnLayout.right,
+          titleColumnWidth: 20,
+        ),
+      );
+      expect(out.titleColumnLayout, TitleColumnLayout.right);
+      expect(out.titleColumnWidth, 20);
+      expect(out.imagePath2, 'images/right.png');
+    });
+
     test('section slide keeps title and subtitle', () {
       final out = _roundTrip(
         Slide.create(
@@ -691,6 +742,25 @@ void main() {
       expect(out.imagePath, 'images/big.png');
       expect(out.imageSize, 70);
       expect(out.imageCaption, 'Foto');
+    });
+
+    test('image slide round-trips imageTitleAbove via _class token', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.image).copyWith(
+          title: 'Bovenaan',
+          imagePath: 'images/top.png',
+          imageTitleAbove: true,
+        ),
+      );
+      expect(out.type, SlideType.image);
+      expect(out.imageTitleAbove, isTrue);
+    });
+
+    test('image slide without imageTitleAbove stays false', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.image).copyWith(imagePath: 'images/normal.png'),
+      );
+      expect(out.imageTitleAbove, isFalse);
     });
 
     test('YouTube embed keeps its source and trim window', () {

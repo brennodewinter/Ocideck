@@ -765,6 +765,28 @@ const _dutchSourceAddFy = {
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Op dizze URL stiet gjin presintaasje (net fûn). Kontrolearje oft de keppeling noch kloppet.',
   'Video kan niet worden geladen': 'Fideo kin net laden wurde',
+  'Titel boven afbeelding': 'Titel boppe ôfbylding',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Toant de titel boppe de ôfbylding ynstee fan deroerhinne',
+  'Afbeeldingslay-out': 'Ofbyldingslay-out',
+  'Beide': 'Beide',
+  'Volvlak': 'Folslein fol',
+  'Kolombreedte': 'Kolombreedte',
+  'Linker kolomafbeelding': 'Lofter kolomafbylding',
+  'Rechter kolomafbeelding': 'Rjochter kolomafbylding',
+  'Geen linker kolomafbeelding': 'Gjin lofter kolomafbylding',
+  'Geen rechter kolomafbeelding': 'Gjin rjochter kolomafbylding',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Folslein fol: de ôfbylding as skermfoljende eftergrûn. Links/Rjochts/Beide: ien of twa byldkolommen njonken de titeltekst.',
+  'Hernoemen': 'Werneame',
+  'Naam wijzigen': 'Namme wizigje',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'De taheak bliuwt fêst — werneamen feroaret it bestânsformaat net.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'De namme mei gjin mappen of bysûndere tekens befetsje.',
+  'Hernoemd naar': 'Werneamd ta',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Koe de ôfbylding net werneame. Bestiet der al in bestân mei dy namme?',
   'Starthoek (graden)': 'Begjinhoeke (graden)',
   'Percentages op de taartpunten tonen':
       'Persintaazjes op \'e taartpunten toane',

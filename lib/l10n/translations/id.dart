@@ -1805,6 +1805,28 @@ const _dutchSourceAddId = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Tidak ada presentasi di URL ini (tidak ditemukan). Periksa apakah tautannya masih benar.',
   'Video kan niet worden geladen': 'Video tidak dapat dimuat',
+  'Titel boven afbeelding': 'Judul di atas gambar',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Menampilkan judul di atas gambar alih-alih menumpangnya',
+  'Afbeeldingslay-out': 'Tata letak gambar',
+  'Beide': 'Keduanya',
+  'Volvlak': 'Penuh',
+  'Kolombreedte': 'Lebar kolom',
+  'Linker kolomafbeelding': 'Gambar kolom kiri',
+  'Rechter kolomafbeelding': 'Gambar kolom kanan',
+  'Geen linker kolomafbeelding': 'Tanpa gambar kolom kiri',
+  'Geen rechter kolomafbeelding': 'Tanpa gambar kolom kanan',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Penuh: gambar sebagai latar belakang layar penuh. Kiri/Kanan/Keduanya: satu atau dua kolom gambar di samping teks judul.',
+  'Hernoemen': 'Ganti nama',
+  'Naam wijzigen': 'Ubah nama',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Ekstensi tetap — mengganti nama tidak mengubah format file.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Nama tidak boleh berisi folder atau karakter khusus.',
+  'Hernoemd naar': 'Diubah namanya menjadi',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Tidak dapat mengganti nama gambar. Apakah file dengan nama itu sudah ada?',
   'Starthoek (graden)': 'Sudut awal (derajat)',
   'Percentages op de taartpunten tonen': 'Tampilkan persentase pada irisan pai',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Bab baru pada halaman baru',

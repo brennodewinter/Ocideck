@@ -1827,6 +1827,28 @@ const _dutchSourceAddMt = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'F’dan il-URL m’hemm l-ebda preżentazzjoni (ma nstabitx). Iċċekkja li l-ħolqa għadha korretta.',
   'Video kan niet worden geladen': 'Il-vidjo ma jistax jitgħabba',
+  'Titel boven afbeelding': 'Titlu fuq l-istampa',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Juri t-titlu fuq l-istampa minflok ma jitpoġġa fuqha',
+  'Afbeeldingslay-out': 'Tqassim tal-istampa',
+  'Beide': 'It-tnejn',
+  'Volvlak': 'Sħiħ',
+  'Kolombreedte': 'Wisa\' tal-kolonna',
+  'Linker kolomafbeelding': 'Stampa tal-kolonna xellugija',
+  'Rechter kolomafbeelding': 'Stampa tal-kolonna leminija',
+  'Geen linker kolomafbeelding': 'L-ebda stampa tal-kolonna xellugija',
+  'Geen rechter kolomafbeelding': 'L-ebda stampa tal-kolonna leminija',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Sħiħ: l-istampa bħala sfond jimla l-iskrin. Xellug/Lemin/It-tnejn: waħda jew żewġ kolonni ta\' stampi ħdejn it-test tat-titlu.',
+  'Hernoemen': 'Biddel isem',
+  'Naam wijzigen': 'Biddel l-isem',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'L-estensjoni tibqa\' fissi — bidla tal-isem tbiddilx il-format tal-fajl.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'L-isem ma jistax jikla folders jew karattri speċjali.',
+  'Hernoemd naar': 'Biddel isem għal',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Ma setax jibdel l-isem tal-istampa. Diġà jeżisti fajl b\'dak l-isem?',
   'Starthoek (graden)': 'Angolu tal-bidu (gradi)',
   'Percentages op de taartpunten tonen':
       'Uri l-persentaġġi fuq il-flieli tat-torta',

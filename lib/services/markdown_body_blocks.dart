@@ -101,6 +101,14 @@ MarkdownImageSpec? parseMarkdownImageBlock(String markdown) {
   return (width: width, height: height.clamp(1.0, refW * 9 / 16));
 }
 
+/// Een HTML-commentaarregel (`<!-- … -->`): volgens de markdown-spec levert die
+/// niets zichtbaars op. OciDeck rendert geen HTML, dus een commentaar als
+/// `<!-- _class: logo-safe -->` zou anders als lopende tekst op de dia komen te
+/// staan (#1409). Alleen de één-regelige variant — `_class`-aanwijzingen en
+/// vergelijkbare directive's zijn altijd één regel; een meerregelig commentaar
+/// in slidemarkdown is zeldzaam en valt buiten deze plafond.
+final htmlCommentLine = RegExp(r'^\s*<!--.*-->\s*$');
+
 /// Parses [markdown] into blocks (paragraphs, headings, lists, code, math).
 List<MarkdownBodyBlock> parseMarkdownBodyBlocks(String markdown) {
   if (markdown.trim().isEmpty) return const [];
@@ -111,6 +119,13 @@ List<MarkdownBodyBlock> parseMarkdownBodyBlocks(String markdown) {
 
   while (i < lines.length) {
     final line = lines[i];
+
+    // HTML-commentaar telt niet mee: het levert geen zichtbaar blok op en mag
+    // ook geen hoogte claimen in de paginering (#1409).
+    if (htmlCommentLine.hasMatch(line)) {
+      i++;
+      continue;
+    }
 
     final fence = RegExp(r'^\s*```(.*)$').firstMatch(line);
     if (fence != null) {

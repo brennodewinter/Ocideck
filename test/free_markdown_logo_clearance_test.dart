@@ -55,6 +55,14 @@ void main() {
     final slide = Slide.create(
       SlideType.freeMarkdown,
     ).copyWith(customMarkdown: tallBody, showLogo: true);
+    // Sinds #1409 pagineert free-markdown; de formule staat als laatste blok
+    // dus op de laatste pagina. De #931-regressie gaat over dat blok, dus
+    // renderen we de pagina waarop het staat.
+    final pages = richTextPageCountForSlide(
+      slide: slide,
+      profile: profile,
+      splitWithImage: false,
+    );
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -62,7 +70,11 @@ void main() {
             child: SizedBox(
               width: w,
               height: w / (16 / 9),
-              child: SlidePreviewWidget(slide: slide, themeProfile: profile),
+              child: SlidePreviewWidget(
+                slide: slide,
+                themeProfile: profile,
+                richTextPage: pages - 1,
+              ),
             ),
           ),
         ),

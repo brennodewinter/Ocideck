@@ -12,6 +12,7 @@
 import 'dart:io';
 
 import '../models/xmpp_settings.dart';
+import '../utils/log.dart';
 import '../utils/net_guard.dart';
 import 'xmpp_frame_transport.dart';
 
@@ -47,6 +48,12 @@ Future<XmppFrameTransport> openXmppFrameTransport(XmppSettings settings) async {
     );
   }
   final pinned = resolved.addresses!.first;
+  // dart:io rewrites ws→http and wss→https before calling the connection
+  // factory. For wss the factory must see https (fail closed on a downgrade
+  // that would strip TLS and leak the SASL password). For ws the factory sees
+  // http — only acceptable to a literal loopback address (checked above), where
+  // there is no TLS to strip and no wire for a listener to sit on.
+  final plainLoopback = scheme == 'ws';
 
   final client = HttpClient()
     ..connectionTimeout = const Duration(seconds: 15)
@@ -64,9 +71,12 @@ Future<XmppFrameTransport> openXmppFrameTransport(XmppSettings settings) async {
       // drops to a PLAIN (un-TLS'd) socket for any non-https scheme, which would
       // strip TLS and leak the SASL password. dart:io rewrites wss→https before
       // calling this factory; if it ever stops, refuse — never downgrade.
-      if (uri.scheme.toLowerCase() != 'https') {
+      // The one exception is ws→http to a literal loopback address (the local
+      // testbed): no TLS to strip, no wire to listen on.
+      final uriScheme = uri.scheme.toLowerCase();
+      if (uriScheme != 'https' && !(plainLoopback && uriScheme == 'http')) {
         throw XmppConnectException(
-          'refusing an unpinned XMPP socket (factory saw ${uri.scheme})',
+          'refusing an unpinned XMPP socket (factory saw $uriScheme)',
         );
       }
       return NetGuard.connectPinned(
@@ -106,14 +116,32 @@ class _WebSocketFrameTransport implements XmppFrameTransport {
 
   @override
   void send(String frame) {
-    if (!_closed) _socket.add(frame);
+    if (_closed) return;
+    try {
+      _socket.add(frame);
+    } catch (e) {
+      // De socket kan tussen de _closed-check en de send sluiten (race). Een
+      // onafgevangen uitzondering hier zou de app laten crashen (#1430).
+      _closed = true;
+      logWarning('xmpp.transport.send', e);
+    }
   }
 
   @override
   Future<void> close() async {
     if (_closed) return;
     _closed = true;
-    await _socket.close();
-    _client.close(force: true);
+    try {
+      await _socket.close();
+    } catch (e) {
+      // close() kan gooien als de socket al halverwege de sluiting is — niet
+      // fataal, maar mag niet crashen (#1430).
+      logWarning('xmpp.transport.close', e);
+    }
+    try {
+      _client.close(force: true);
+    } catch (e) {
+      logWarning('xmpp.transport.httpClientClose', e);
+    }
   }
 }

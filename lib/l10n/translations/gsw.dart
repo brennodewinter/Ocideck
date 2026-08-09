@@ -1808,6 +1808,28 @@ const _dutchSourceAddGsw = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Under dere URL git’s kei Präsentation (nid gfunde). Lueg, öb de Link no stimmt.',
   'Video kan niet worden geladen': 'S Video cha nid glade wärde',
+  'Titel boven afbeelding': 'Titel überem Bild',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Zeigt de Titel überem Bild statt drüber',
+  'Afbeeldingslay-out': 'Bild-Layout',
+  'Beide': 'Beidi',
+  'Volvlak': 'Vollflächig',
+  'Kolombreedte': 'Spalti-Breiti',
+  'Linker kolomafbeelding': 'Bild linggi Spalti',
+  'Rechter kolomafbeelding': 'Bild rächti Spalti',
+  'Geen linker kolomafbeelding': 'Kei Bild linggi Spalti',
+  'Geen rechter kolomafbeelding': 'Kei Bild rächti Spalti',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Vollflächig: s Bild als bildschirmfüllende Hindergrund. Linggs/Rächts/Beidi: ein oder zwei Bildspalte näbet em Titeltäxt.',
+  'Hernoemen': 'Umbenenne',
+  'Naam wijzigen': 'Name ändere',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'D Erwyterig bliibt fix — Umbenenne änderet s Dateiformat nöd.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Dr Name derf kei Ordner oder Sonderzeiche enthalte.',
+  'Hernoemd naar': 'Umbenennt i',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'S Bild cha nöd umbenennt wärde. Gits scho e Datei mit dem Name?',
   'Starthoek (graden)': 'Aafangswinkel (Grad)',
   'Percentages op de taartpunten tonen': 'Prozänt uf de Tortestücke azeige',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Neus Kapitel uf ere neue Site',

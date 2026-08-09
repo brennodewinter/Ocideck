@@ -1780,6 +1780,28 @@ const _dutchSourceAddTlh = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'URLvamDaq presentation tu\'lu\'be\' (Sambe\'lu\'). rarwI\' lugh\'a\' yI\'ol.',
   'Video kan niet worden geladen': 'HaSta laDlaHbe\'lu\'',
+  'Titel boven afbeelding': 'pong nIq',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'pong nIq DungDaq \'ej nIq bIngDaq',
+  'Afbeeldingslay-out': 'mIl may\'',
+  'Beide': 'Hoch',
+  'Volvlak': 'naDev',
+  'Kolombreedte': 'nIq \'ab',
+  'Linker kolomafbeelding': 'nIq poS \'ej',
+  'Rechter kolomafbeelding': 'nIq nIq \'ej',
+  'Geen linker kolomafbeelding': 'nIq poS \'e\' be\'',
+  'Geen rechter kolomafbeelding': 'nIq nIq \'e\' be\'',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'naDev: mIl \'ej veQ naQ. poS/nIq/Hoch: wa\' \'ej cha\' nIq mIl \'ej teH \'ej tlhIH.',
+  'Hernoemen': 'pong DIvI\' Hol',
+  'Naam wijzigen': 'pong choH',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'tlhegh luy chaqbe — pong choHbe\' tlhIngan Hol tey.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'pong mI\' DIvI\' Hol veHbe\' chaH tlhIngan.',
+  'Hernoemd naar': 'pong choHpu\'',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'pong choHlaHbe\' mI\' pong. pong tu\'lu\'\'a\'',
   'Starthoek (graden)': 'taghbogh jIrtaHghach (mI\')',
   'Percentages op de taartpunten tonen': '\'ay\'meyDaq vatlhvI\'mey \'ang',
   'Nieuw hoofdstuk op een nieuwe pagina': 'nav chu\'Daq \'ay\' chu\'',

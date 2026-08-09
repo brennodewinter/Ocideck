@@ -830,12 +830,7 @@ class SlidePreviewWidget extends StatelessWidget {
           reportLanguage: reportLanguage,
         );
       case SlideType.freeMarkdown:
-        return _MarkdownPreview(
-          slide: slide,
-          w: w,
-          font: fontFamily,
-          profile: themeProfile,
-        );
+        return _freeMarkdownPreview(this, slide, w);
       case SlideType.code:
         return _CodePreview(
           slide: slide,

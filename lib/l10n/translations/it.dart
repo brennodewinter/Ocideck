@@ -760,6 +760,28 @@ const _dutchSourceAddIt = {
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Non c’è alcuna presentazione a questo URL (non trovata). Controlla che il collegamento sia ancora corretto.',
   'Video kan niet worden geladen': 'Impossibile caricare il video',
+  'Titel boven afbeelding': 'Titolo sopra l\'immagine',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Mostra il titolo sopra l\'immagine invece che sovrapposto',
+  'Afbeeldingslay-out': 'Layout immagine',
+  'Beide': 'Entrambi',
+  'Volvlak': 'A piena pagina',
+  'Kolombreedte': 'Larghezza colonna',
+  'Linker kolomafbeelding': 'Immagine colonna sinistra',
+  'Rechter kolomafbeelding': 'Immagine colonna destra',
+  'Geen linker kolomafbeelding': 'Nessuna immagine colonna sinistra',
+  'Geen rechter kolomafbeelding': 'Nessuna immagine colonna destra',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'A piena pagina: l\'immagine come sfondo a schermo intero. Sinistra/Destra/Entrambi: una o due colonne di immagini accanto al testo del titolo.',
+  'Hernoemen': 'Rinomina',
+  'Naam wijzigen': 'Cambia nome',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'L\'estensione resta fissa — rinominare non cambia il formato del file.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Il nome non può contenere cartelle o caratteri speciali.',
+  'Hernoemd naar': 'Rinominato in',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Impossibile rinominare l\'immagine. Esiste già un file con quel nome?',
   'Starthoek (graden)': 'Angolo iniziale (gradi)',
   'Percentages op de taartpunten tonen': 'Mostra le percentuali sugli spicchi',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nuovo capitolo su una nuova pagina',

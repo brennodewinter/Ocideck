@@ -52,7 +52,10 @@ Slide maximalSlide() => Slide(
   advanceDuration: 3.5,
   imageSize: 42,
   titleImageOverlay: false,
+  imageTitleAbove: true,
   titleTextColorOverride: '#FFFFFF',
+  titleColumnLayout: TitleColumnLayout.both,
+  titleColumnWidth: 30,
   bulletMarkerOverride: BulletMarker.paw,
   showLogo: false,
   showFooter: false,
@@ -132,7 +135,10 @@ void main() {
       expect(r.advanceDuration, s.advanceDuration);
       expect(r.imageSize, s.imageSize);
       expect(r.titleImageOverlay, s.titleImageOverlay);
+      expect(r.imageTitleAbove, s.imageTitleAbove);
       expect(r.titleTextColorOverride, s.titleTextColorOverride);
+      expect(r.titleColumnLayout, s.titleColumnLayout);
+      expect(r.titleColumnWidth, s.titleColumnWidth);
       expect(r.bulletMarkerOverride, s.bulletMarkerOverride);
       expect(r.showLogo, s.showLogo);
       expect(r.showFooter, s.showFooter);

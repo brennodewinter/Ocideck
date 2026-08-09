@@ -1808,6 +1808,28 @@ const _dutchSourceAddCs = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Na této URL není žádná prezentace (nenalezena). Zkontrolujte, zda je odkaz stále platný.',
   'Video kan niet worden geladen': 'Video nelze načíst',
+  'Titel boven afbeelding': 'Nadpis nad obrázkem',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Zobrazuje nadpis nad obrázkem místo přes něj',
+  'Afbeeldingslay-out': 'Rozvržení obrázku',
+  'Beide': 'Obě',
+  'Volvlak': 'Celá plocha',
+  'Kolombreedte': 'Šířka sloupce',
+  'Linker kolomafbeelding': 'Obrázek levého sloupce',
+  'Rechter kolomafbeelding': 'Obrázek pravého sloupce',
+  'Geen linker kolomafbeelding': 'Žádný obrázek levého sloupce',
+  'Geen rechter kolomafbeelding': 'Žádný obrázek pravého sloupce',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Celá plocha: obrázek jako pozadí vyplňující obrazovku. Vlevo/Vpravo/Obě: jeden nebo dva sloupce obrázků vedle textu nadpisu.',
+  'Hernoemen': 'Přejmenovat',
+  'Naam wijzigen': 'Změnit název',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Přípona zůstává pevná — přejmenování nemění formát souboru.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Název nesmí obsahovat složky nebo speciální znaky.',
+  'Hernoemd naar': 'Přejmenováno na',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Obrázek nelze přejmenovat. Již existuje soubor s tímto názvem?',
   'Starthoek (graden)': 'Počáteční úhel (stupně)',
   'Percentages op de taartpunten tonen': 'Zobrazit procenta na výsečích',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nová kapitola na nové stránce',

@@ -360,11 +360,17 @@ void main() {
       ]);
     });
 
-    test('does not expand a freeMarkdown slide', () {
-      // Zijn preview kent geen paginabegrip en rendert altijd de hele body;
-      // uitklappen zou identieke kopieën opleveren in plaats van pagina's.
+    test('expands a freeMarkdown slide just like bullets-rich-text', () {
+      // Sinds #1409 pagineert free-markdown mee; de export-uitklap hoort elke
+      // pagina als eigen slide te rasteriseren, anders tekent hij alleen pagina
+      // 1. Eerdere aanname was dat free-markdown geen paginabegrip kende.
       final slide = richSlide(40).copyWith(type: SlideType.freeMarkdown);
-      expect(expandRichTextForRender([slide], profile), [slide]);
+      final expanded = expandRichTextForRender([slide], profile);
+      expect(expanded.length, greaterThan(1));
+      for (final page in expanded) {
+        expect(page.customMarkdown, slide.customMarkdown);
+        expect(page.id, slide.id);
+      }
     });
   });
 }

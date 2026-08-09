@@ -1804,6 +1804,28 @@ const _dutchSourceAddLv = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Šajā URL nav prezentācijas (nav atrasta). Pārbaudiet, vai saite joprojām ir pareiza.',
   'Video kan niet worden geladen': 'Video nevar ielādēt',
+  'Titel boven afbeelding': 'Virsraksts virs attēla',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Rāda virsrakstu virs attēla nevis uzlikts uz tā',
+  'Afbeeldingslay-out': 'Attēla izkārtojums',
+  'Beide': 'Abi',
+  'Volvlak': 'Pilnais',
+  'Kolombreedte': 'Kolonnas platums',
+  'Linker kolomafbeelding': 'Kreisās kolonnas attēls',
+  'Rechter kolomafbeelding': 'Labās kolonnas attēls',
+  'Geen linker kolomafbeelding': 'Nav kreisās kolonnas attēla',
+  'Geen rechter kolomafbeelding': 'Nav labās kolonnas attēla',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Pilnais: attēls kā ekrānu aizpildošs fons. Pa kreisi/Pa labi/Abi: viena vai divas attēlu kolonnas blakus virsraksta tekstam.',
+  'Hernoemen': 'Pārsaukt',
+  'Naam wijzigen': 'Mainīt nosaukumu',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Paplašinājums paliek fiksēts — pārsaukšana nemaina faila formātu.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Nosaukums nedrīkst saturēt mapes vai īpašās rakstzīmes.',
+  'Hernoemd naar': 'Pārsaukts uz',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Nevarēja pārsaukt attēlu. Vai jau eksistē fails ar šādu nosaukumu?',
   'Starthoek (graden)': 'Sākuma leņķis (grādi)',
   'Percentages op de taartpunten tonen': 'Rādīt procentus riņķa sektoros',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Jauna nodaļa jaunā lappusē',

@@ -1804,6 +1804,28 @@ const _dutchSourceAddDa = <String, String>{
   'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
       'Der er ingen præsentation på denne URL (ikke fundet). Tjek, om linket stadig er korrekt.',
   'Video kan niet worden geladen': 'Videoen kan ikke indlæses',
+  'Titel boven afbeelding': 'Titel over billedet',
+  'Toont de titel boven de afbeelding in plaats van eroverheen':
+      'Viser titlen over billedet i stedet for lagt ovenpå',
+  'Afbeeldingslay-out': 'Billedlayout',
+  'Beide': 'Begge',
+  'Volvlak': 'Fuldside',
+  'Kolombreedte': 'Kolonnebredde',
+  'Linker kolomafbeelding': 'Venstre kolonnebillede',
+  'Rechter kolomafbeelding': 'Højre kolonnebillede',
+  'Geen linker kolomafbeelding': 'Intet venstre kolonnebillede',
+  'Geen rechter kolomafbeelding': 'Intet højre kolonnebillede',
+  'Volvlak: de afbeelding als schermvullende achtergrond. Links/Rechts/Beide: één of twee beeldkolommen naast de titeltekst.':
+      'Fuldside: billedet som skærmfyldende baggrund. Venstre/Højre/Begge: en eller to billedkolonner ved siden af titelteksten.',
+  'Hernoemen': 'Omdøb',
+  'Naam wijzigen': 'Ændr navn',
+  'De extensie blijft vast — het bestandsformaat verandert niet door de naam.':
+      'Filtypenavnet forbliver fast — omdøbning ændrer ikke filformatet.',
+  'De naam mag geen mappen of bijzondere tekens bevatten.':
+      'Navnet må ikke indeholde mapper eller specialtegn.',
+  'Hernoemd naar': 'Omdøbt til',
+  'Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?':
+      'Kunne ikke omdøbe billedet. Findes der allerede en fil med det navn?',
   'Starthoek (graden)': 'Startvinkel (grader)',
   'Percentages op de taartpunten tonen': 'Vis procenter på cirkeludsnittene',
   'Nieuw hoofdstuk op een nieuwe pagina': 'Nyt kapitel på en ny side',
