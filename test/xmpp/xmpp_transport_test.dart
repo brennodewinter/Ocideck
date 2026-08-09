@@ -102,6 +102,46 @@ void main() {
         await sub.cancel();
       },
     );
+
+    test(
+      'a flood of ops from one sender is rate-limited (#1433)',
+      () async {
+        final env = await _XmppEnv.create();
+        addTearDown(env.dispose);
+        final received = <DeckOp>[];
+        final sub = env.guestTransport.ops.listen(received.add);
+
+        final slide = Slide.create(SlideType.bullets).copyWith(title: 's');
+        // Stuur 100 ops in één burst — de rate-limiter laat er max 50 door per
+        // seconde per sender.
+        for (var i = 1; i <= 100; i++) {
+          await env.hostTransport.sendOp(
+            SetSlideField(
+              version: i,
+              authorId: 'host',
+              slideId: slide.id,
+              field: SlideField.title,
+              value: 'op-$i',
+            ),
+          );
+        }
+        await env.settle();
+
+        // De eerste ~50 zijn doorgekomen (rate-limiter begrensd op 50/s).
+        // De rest is gedropt. We verwachten ≤ 60 (wat marge voor timing).
+        expect(
+          received.length,
+          lessThanOrEqualTo(60),
+          reason: 'a flood from one sender is rate-limited',
+        );
+        expect(
+          received.length,
+          greaterThanOrEqualTo(1),
+          reason: 'at least some ops get through before the limit',
+        );
+        await sub.cancel();
+      },
+    );
   });
 
   group('XmppTransport gap → resync (§4)', () {

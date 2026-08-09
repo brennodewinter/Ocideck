@@ -218,6 +218,12 @@ class XmppTransport implements CollabTransport {
   /// coalesce-venster).
   DateTime? _lastResyncHandled;
 
+  /// Per-sender rate-limiter voor inbound ops (#1433). Een vijandige server
+  /// kan een vloed ops sturen; zonder rate-limit raakt de decryptie+emit-
+  /// pipeline overspoeld. Begrensd op _maxOpsPerSecondPerSender per sender.
+  static const _maxOpsPerSecondPerSender = 50;
+  final Map<String, _RateBucket> _opBuckets = {};
+
   @override
   String get participantId => _e2ee.deviceId;
 
@@ -378,6 +384,13 @@ class XmppTransport implements CollabTransport {
     }
     final sender = await _resolvePeer(sealed.senderDevice);
     if (sender == null) return _ApplyOutcome.retryLater;
+    // Rate-limit per sender: een vijandige server kan een vloed ops sturen
+    // die de decryptie-pipeline overspoelt (#1433). Drop als de sender boven
+    // de limiet zit.
+    if (!_rateAllow(sealed.senderDevice)) {
+      logWarning('xmpp.transport.rateLimited', sealed.senderDevice);
+      return _ApplyOutcome.permanentDrop;
+    }
     try {
       final envelope = await _e2ee.open(
         sealed,
@@ -551,4 +564,26 @@ class XmppTransport implements CollabTransport {
     if (value is Map) return value.map((k, v) => MapEntry('$k', v));
     throw const FormatException('expected an object in a sealed envelope');
   }
+
+  /// Token-bucket rate-limit check voor sender [deviceId]. Begrensd op
+  /// [_maxOpsPerSecondPerSender] per seconde — een eenvoudige sliding-window
+  /// teller die elke seconde reset. De bucket-map groeit met het aantal
+  /// unieke senders (begrensd door de MUC occupant cap, 500).
+  bool _rateAllow(String deviceId) {
+    final now = DateTime.now();
+    final bucket = _opBuckets[deviceId];
+    if (bucket == null || now.difference(bucket.windowStart) >= const Duration(seconds: 1)) {
+      _opBuckets[deviceId] = _RateBucket(windowStart: now, count: 1);
+      return true;
+    }
+    bucket.count++;
+    return bucket.count <= _maxOpsPerSecondPerSender;
+  }
+}
+
+/// Een sliding-window rate bucket voor één sender.
+class _RateBucket {
+  _RateBucket({required this.windowStart, required this.count});
+  DateTime windowStart;
+  int count;
 }
