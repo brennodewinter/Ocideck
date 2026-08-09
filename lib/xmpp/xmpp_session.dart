@@ -154,7 +154,10 @@ class XmppSession implements XmppStanzaChannel {
   /// A factory that produces a fresh transport for a reconnect, always to the
   /// same NetGuard-cleared host — never a new outbound host. If null, a stream
   /// drop tears down the session (the pre-reconnect behaviour).
-  final XmppFrameTransport Function()? reconnectTransportFactory;
+  ///
+  /// Async because the real transport ([openXmppFrameTransport]) opens a
+  /// WebSocket — a synchronous signature could only return a fake.
+  final Future<XmppFrameTransport> Function()? reconnectTransportFactory;
 
   /// Called after a successful reconnect, so the higher layer can rejoin its
   /// MUC room(s). Receives the session (now live again) as the channel.
@@ -539,7 +542,7 @@ class XmppSession implements XmppStanzaChannel {
           // naar dezelfde host, nooit een nieuwe outbound host.
           await _reader.cancel();
           await transport.close();
-          transport = reconnectTransportFactory!();
+          transport = await reconnectTransportFactory!();
           _reader = _FrameReader(transport.inbound);
 
           final auth = await _authenticate();

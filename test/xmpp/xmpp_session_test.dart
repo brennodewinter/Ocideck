@@ -427,12 +427,11 @@ void main() {
 
   /// A factory that produces a fresh happy server (PLAIN) each call, collecting
   /// them so the test can inspect the reconnect transports.
-  (XmppFrameTransport Function(), List<FakeXmppTransport>) reconnectFactory({
-    String jid = 'user@example.org/ocideck-abc',
-  }) {
+  (Future<XmppFrameTransport> Function(), List<FakeXmppTransport>)
+  reconnectFactory({String jid = 'user@example.org/ocideck-abc'}) {
     final created = <FakeXmppTransport>[];
     return (
-      () {
+      () async {
         final t = happyServer(
           mechanisms: ['PLAIN'],
           sasl: (_) => ['<success xmlns="$_sasl"/>'],
@@ -539,7 +538,7 @@ void main() {
 
       // A factory that produces transports whose stream closes immediately —
       // every reconnect attempt fails (the server hangs up before features).
-      XmppFrameTransport failFactory() {
+      Future<XmppFrameTransport> failFactory() async {
         factoryCalls++;
         final t = FakeXmppTransport((_) => const []);
         t.dropStream();
@@ -580,7 +579,7 @@ void main() {
 
         // Every reconnect transport responds with see-other-host — the redirect
         // must be refused, never followed (same fail-closed posture as connect).
-        XmppFrameTransport redirectFactory() {
+        Future<XmppFrameTransport> redirectFactory() async {
           return FakeXmppTransport((frame) {
             if (frame.contains('<open')) {
               return [
