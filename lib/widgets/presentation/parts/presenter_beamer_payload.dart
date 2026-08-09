@@ -28,6 +28,30 @@ class AudienceWindowHandle {
   }
 }
 
+String _audienceWindowArguments({
+  required String markdown,
+  required String? projectPath,
+  required int initialIndex,
+  required Map<String, dynamic> inkByIndex,
+  required bool showClassificationWatermark,
+  required bool allowRemoteMedia,
+  required ThemeProfile themeProfile,
+  required MarpStyle marpStyle,
+  required CockpitColorScheme cockpitColorScheme,
+}) => jsonEncode({
+  'markdown': markdown,
+  'projectPath': projectPath,
+  'index': initialIndex,
+  'ink': inkByIndex,
+  'classificationWatermarkEnabled': showClassificationWatermark,
+  'allowRemoteMedia': allowRemoteMedia,
+  // Styling travels beside the readable Markdown because the audience window
+  // has no other source for the active profiles.
+  beamerStyleProfileKey: themeProfile.toJson(),
+  'marpStyle': marpStyle.toJson(),
+  'cockpitColorScheme': cockpitColorScheme.toJson(),
+});
+
 /// The markdown payload for the audience window: the slides and the TLP level.
 ///
 /// This payload never touches disk, so everything the beamer cannot look up for

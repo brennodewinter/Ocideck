@@ -129,7 +129,7 @@ const Map<String, int> fileSizeBaseline = {
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
   // dat uit te liften valt; de call-sites zitten in de part-bestanden.
-  'lib/widgets/presentation/fullscreen_presenter.dart': 1016,
+  'lib/widgets/presentation/fullscreen_presenter.dart': 1013,
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
   // +20 (#1162): de twee onherleidbare navigatievelden `anchor` + `nextAnchor`
   // (stabiel dia-anker en per-dia sprong-uit) met hun doc, constructor- en
@@ -142,7 +142,7 @@ const Map<String, int> fileSizeBaseline = {
   // uit te tillen naar een part.
   // +12: tableNumberColumns-veld + doc + constructor/duplicate/copyWith-doorvoer.
   // +4 (#1407): imageTitleAbove-veld + constructor/copyFrom/copyWith-doorvoer.
-  'lib/models/slide.dart': 1068,
+  'lib/models/slide.dart': 1063,
   // +17 (#1355, #1360): SealTamperWarning-klasse + sealTamperWarningProvider
   // voor de automatische zegelverificatie bij openen, en de diskFull-case in
   // _packageOpenResult. Beide zijn tightly coupled aan de bestaande providers
@@ -309,7 +309,7 @@ const Map<String, int> classSizeBaseline = {
   // `markdown_table_codec.dart` en telt niet mee.
   // +14: ocideck_table_num_cols directive schrijven + _parseNumCols-lezen.
   // +4 (#1407): image-title-above class-token in de classes-lijst.
-  'lib/services/markdown_service.dart#MarkdownService': 2447,
+  'lib/services/markdown_service.dart#MarkdownService': 2397,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2437, // +228 (#1404): hernoem-actie + dialoog; testbare logica zit in
   // ImageRenameService, hier blijft alleen UI-orchestratie
