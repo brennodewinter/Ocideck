@@ -423,4 +423,114 @@ void main() {
           'exit 64 elke release blokkeren.',
     );
   });
+
+  // Regressie voor het v0.4.2-incident: een afgebroken fase 1 mag de werkboom van
+  // main niet vervuilen. De versiebump (pubspec, kOciDeckVersion, CHANGELOG, SBOM)
+  // wordt op de release-branch GECOMMIT vóór 'make check-release' draait. Zo haalt de
+  // opruimroute (cleanup_branch → 'git branch -D') een afgebroken run VOLLEDIG weg.
+  // Bleef de bump een niet-gecommitte werkboom-edit, dan droeg de 'git checkout -' in
+  // cleanup_branch 'm mee naar main (dirty tree), waarna de volgende verse run op de
+  // versie-consistentiegate strandde ("pubspec staat op X maar origin/main op Y").
+  test('de versiebump wordt gecommit vóór make check-release', () {
+    final src = File(script).readAsStringSync();
+
+    // Exact één staging van de vier versiedragende paden. Een tweede (bv. per ongeluk
+    // ook nog in fase 2) zou daar op een lege 'git commit' vallen en de run afbreken.
+    final addMatches = RegExp(
+      r'git\s+add\s+pubspec\.yaml\s+lib/services/export_metadata\.dart\s+'
+      r'sbom/\s+CHANGELOG\.md',
+    ).allMatches(src).toList();
+    expect(
+      addMatches.length,
+      1,
+      reason:
+          'verwacht precies één release-commit-staging (git add pubspec.yaml '
+          'lib/services/export_metadata.dart sbom/ CHANGELOG.md).',
+    );
+
+    final commitIdx = src.indexOf(
+      RegExp(r'git\s+commit[^\n]*chore\(release\): versie'),
+    );
+    final checkIdx = src.indexOf(
+      RegExp(r'^make check-release\s*$', multiLine: true),
+    );
+    expect(
+      commitIdx,
+      isNonNegative,
+      reason: 'de release-commit (chore(release): versie …) niet gevonden.',
+    );
+    expect(
+      checkIdx,
+      isNonNegative,
+      reason: 'de kale "make check-release"-aanroep niet gevonden.',
+    );
+    expect(
+      addMatches.first.start,
+      lessThan(commitIdx),
+      reason: 'de staging (git add) moet vóór de commit staan.',
+    );
+    expect(
+      commitIdx,
+      lessThan(checkIdx),
+      reason:
+          'de versiebump moet vóór make check-release gecommit worden, zodat een '
+          'afgebroken fase 1 met "git branch -D" volledig opruimt en main schoon '
+          'blijft (v0.4.2-incident).',
+    );
+  });
+
+  // De poort mag niet in 'if ! make check-release; then die' zitten: die() doet
+  // 'exit 1', en dat slaat de ERR-trap (en dus cleanup_branch) over — dan bleef een
+  // afgebroken, half-gebumpte release-branch achter. Een kale aanroep valt via
+  // set -e in on_err, dat wél opruimt. (Empirisch geverifieerd: 'exit 1' triggert de
+  // ERR-trap niet; een bare command-fout wel.)
+  test('make check-release valt in de ERR-opruiming, niet in een die-bypass', () {
+    final src = File(script).readAsStringSync();
+    expect(
+      src.contains(RegExp(r'if\s*!\s*make check-release')),
+      isFalse,
+      reason:
+          "make check-release mag niet in 'if ! … then die' staan: die() slaat via "
+          'exit 1 de ERR-trap (cleanup_branch) over, waardoor een afgebroken '
+          'release-branch met de versiebump zou blijven staan.',
+    );
+    expect(
+      src.contains(RegExp(r'^make check-release\s*$', multiLine: true)),
+      isTrue,
+      reason:
+          'verwacht een kale "make check-release" die bij falen via set -e in '
+          'on_err (cleanup_branch) valt.',
+    );
+  });
+
+  // De abort-route zelf: on_err ruimt vóór de tag-push de branch op, en
+  // cleanup_branch verwijdert 'm met 'git branch -D'. Samen met de vervroegde commit
+  // haalt dat een afgebroken run volledig weg zonder main te raken. De revert is
+  // GERICHT (branch weg), nooit een blanket 'git reset --hard' — die zou het
+  // ongecommitte werk van parallelle sessies op deze gedeelde checkout wissen.
+  test('de pre-tag abort-route ruimt de release-branch op (geen reset --hard)', () {
+    final onErr = functionBody('on_err');
+    expect(
+      onErr,
+      contains('cleanup_branch'),
+      reason:
+          'on_err moet cleanup_branch aanroepen zolang de tag nog niet gepusht is '
+          '(TAG_PUSHED=0).',
+    );
+    final cleanup = functionBody('cleanup_branch');
+    expect(
+      cleanup,
+      matches(RegExp(r'git\s+branch\s+-D\b')),
+      reason:
+          'cleanup_branch moet de release-branch verwijderen (git branch -D); met '
+          'de vervroegde commit haalt dat de versiebump volledig weg.',
+    );
+    expect(
+      File(script).readAsStringSync().contains(RegExp(r'git\s+reset\s+--hard')),
+      isFalse,
+      reason:
+          'geen blanket "git reset --hard": deze checkout wordt gedeeld door '
+          'parallelle sessies; een reset zou hun ongecommitte werk wissen.',
+    );
+  });
 }

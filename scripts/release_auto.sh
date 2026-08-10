@@ -21,9 +21,9 @@
 # De keten (alles na de twee prompts, onbewaakt), volgens #1161:
 #   FASE 1 (lokaal, alles móét groen vóór de tag)
 #     verouderingsgate (referentiedata) → scanner-pins bumpen (idempotent)
-#     → bump (pubspec+kOciDeckVersion+CHANGELOG) → make sbom → make check-release
-#     → make build-release → make notarize-macos → zegel verifiëren → de nieuwe
-#       .app in /Applications zetten
+#     → bump (pubspec+kOciDeckVersion+CHANGELOG) → make sbom → committen
+#     → make check-release → make build-release → make notarize-macos
+#     → zegel verifiëren → de nieuwe .app in /Applications zetten
 #   PRE-FLIGHT (ná het wachtwoord, vóór elke mutatie): forge-token, mirror-remote,
 #     deploy-host (ssh) en een minisign proef-tekening — alles wat later
 #     onherroepelijk nodig is, faalt hier vroeg i.p.v. pas ná de tag.
@@ -46,8 +46,10 @@
 # FAIL-SAFE (elke faalstap stopt de keten, met de juiste informatie):
 #   * `set -Eeuo pipefail` + een ERR-trap melden WELKE stap op WELKE regel faalde.
 #   * Faalt er iets VÓÓR de tag-push, dan is er niets naar buiten gegaan: de lokale
-#     release-branch wordt opgeruimd. Repareer en draai opnieuw — vers als fase 1
-#     nog niet af was, of `--resume vX.Y.Z` als de PR al open stond.
+#     release-branch — mét de al vastgelegde versiebump — wordt VOLLEDIG opgeruimd,
+#     zodat main schoon blijft (de bump wordt gecommit vóór de poort, niet als losse
+#     werkboom-edit). Repareer en draai opnieuw — vers als fase 1 nog niet af was, of
+#     `--resume vX.Y.Z` als de PR al open stond.
 #   * Faalt er iets NÁ de tag-push, dan staat de tag vast. Herstel de oorzaak en
 #     maak DEZELFDE tag af met `--resume vX.Y.Z`. Alleen als een uitgebracht
 #     artefact zélf fout is snijd je de VOLGENDE patch-tag; her-tag nooit (dat
@@ -427,7 +429,7 @@ show_plan() {
   cat <<STEPS
 
   Keten (onbewaakt na het wachtwoord):
-    FASE 1  verouderingsgate → scanner-pins bumpen → bump → make sbom
+    FASE 1  verouderingsgate → scanner-pins bumpen → bump → make sbom → committen
             → make check-release → build + notarize → zegel → /Applications
     FASE 2  [scans-image publiceren als pins gebumpt] → PR → poort groen → merge
             → tag $TAG → push origin+mirror → CI volgen
@@ -937,11 +939,30 @@ PY
   log "CHANGELOG-sectie [$NEW_VERSION] ingevoegd."
 fi
 
+# De versiebump (pubspec, kOciDeckVersion, CHANGELOG, SBOM) wordt HIER — vóór de
+# poort — als één commit op de release-branch vastgelegd, niet pas in fase 2. Zo
+# haalt een afgebroken fase 1 de wijziging VOLLEDIG weg met 'git branch -D'
+# (cleanup_branch) en blijft main schoon. Bleef de bump een niet-gecommitte
+# werkboom-edit, dan droeg de 'git checkout -' in cleanup_branch die edits mee naar de
+# vorige branch (main) — het v0.4.2-incident: pubspec bleef op de nieuwe versie staan,
+# waarna de volgende verse run op de versie-consistentiegate strandde. make
+# check-release (en de build) lezen de bestanden ongeacht commit-status, dus
+# vervroegen is veilig.
+STEP="versiebump committen"
+git add pubspec.yaml lib/services/export_metadata.dart sbom/ CHANGELOG.md
+git commit --quiet -m "chore(release): versie $NEW_VERSION
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
+log "Versiebump vastgelegd op $BRANCH (pubspec, kOciDeckVersion, CHANGELOG, SBOM)."
+
 STEP="make check-release"
 section "Fase 1 — volledige poort (make check-release)"
-if ! make check-release; then
-  die "make check-release faalde — niets gepusht, release-branch wordt opgeruimd."
-fi
+# Kale aanroep, bewust géén 'if ! … then die': een gefaalde poort valt via set -e in
+# de ERR-trap (on_err), die vóór de tag-push de release-branch opruimt. die() doet
+# 'exit 1' en dat slaat de ERR-trap — en dus cleanup_branch — over; dan bleef de
+# half-gebumpte branch staan. on_err meldt zelf stap "make check-release" met
+# regelnummer, dus er gaat geen context verloren.
+make check-release
 log "make check-release groen."
 
 STEP="make build-release"
@@ -969,10 +990,8 @@ fi
 # ════════════════════════════ FASE 2 — CI-straat ═══════════════════════════════
 STEP="PR openen"
 section "Fase 2 — PR openen en laten landen"
-git add pubspec.yaml lib/services/export_metadata.dart sbom/ CHANGELOG.md
-git commit --quiet -m "chore(release): versie $NEW_VERSION
-
-Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
+# De versiebump is in fase 1 al gecommit (vóór de poort, voor een schone abort); hier
+# resteert alleen de push van de release-branch (scanner-pins-commit + versiebump).
 git push --quiet -u origin "$BRANCH"
 HEAD_SHA="$(git rev-parse HEAD)"
 
