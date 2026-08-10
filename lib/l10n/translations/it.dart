@@ -728,6 +728,38 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Afbeelding niet opgehaald': 'Immagine non recuperata',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Impossibile creare la cartella di destinazione o scrivervi. Verifica che la posizione configurata sia disponibile.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'La cartella configurata non è disponibile; la presentazione è stata aperta nella cartella dei documenti:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Il nome in questo URL non esiste o non è consultabile. Controlla che l’URL non contenga errori di battitura.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Questo URL reindirizza a un altro indirizzo. Inserisci direttamente quell’indirizzo: non seguiamo i reindirizzamenti, perché possono aggirare il controllo di sicurezza.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Questo URL punta a un indirizzo privato o LAN. Per motivi di sicurezza tali indirizzi non vengono recuperati.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Questo collegamento non è un indirizzo http(s). Incolla un collegamento che inizi con http:// o https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Questo server non usa https. Usa un indirizzo https — la password viene inviata a ogni richiesta e altrimenti viaggerebbe in chiaro sulla rete.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Questo endpoint non usa https. Usa un endpoint https oppure contrassegnalo come interno attendibile — altrimenti le tue presentazioni viaggiano in chiaro sulla rete.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Usa un indirizzo https — altrimenti la password viaggia in chiaro sulla rete.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Usa un endpoint https oppure spunta "Endpoint interno attendibile" — altrimenti le tue presentazioni viaggiano in chiaro sulla rete.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Il certificato di sicurezza di questo server non è attendibile. Controlla l’URL o prova un’altra origine.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'L’endpoint reindirizza a un altro indirizzo — di solito una regione o un URL dell’endpoint errati. Controlla la regione e l’endpoint in Impostazioni → Archiviazione; qui riprovare non serve.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'L’endpoint reindirizza — di solito una regione o un URL dell’endpoint errati. Qui riprovare non serve.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Salvato localmente, ma la pubblicazione sulla forge non è riuscita:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Non c’è alcuna presentazione a questo URL (non trovata). Controlla che il collegamento sia ancora corretto.',
+  'Video kan niet worden geladen': 'Impossibile caricare il video',
   'Titel boven afbeelding': 'Titolo sopra l\'immagine',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Mostra il titolo sopra l\'immagine invece che sovrapposto',

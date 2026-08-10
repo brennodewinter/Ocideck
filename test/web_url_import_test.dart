@@ -81,35 +81,34 @@ void main() {
 
     test('returns the body bytes on 200', () async {
       final client = MockClient((req) async => http.Response(_goodDeck, 200));
-      final bytes = await fileService().fetchUrlBytes(
+      final fetched = await fileService().fetchUrlBytes(
         'https://example.org/deck.md',
         client: client,
       );
-      expect(bytes, isNotNull);
-      expect(utf8.decode(bytes!), _goodDeck);
+      expect(fetched.bytes, isNotNull);
+      expect(utf8.decode(fetched.bytes!), _goodDeck);
+      expect(fetched.failure, isNull);
     });
 
-    test('returns null on a non-200 status', () async {
+    test('reports notFound on a 404 status', () async {
       final client = MockClient((req) async => http.Response('nee', 404));
-      expect(
-        await fileService().fetchUrlBytes(
-          'https://example.org/deck.md',
-          client: client,
-        ),
-        isNull,
+      final fetched = await fileService().fetchUrlBytes(
+        'https://example.org/deck.md',
+        client: client,
       );
+      expect(fetched.bytes, isNull);
+      expect(fetched.failure, ImportFailure.notFound);
     });
 
-    test('returns null when the body exceeds the cap', () async {
+    test('reports tooLarge when the body exceeds the cap', () async {
       final client = MockClient((req) async => http.Response('x' * 32, 200));
-      expect(
-        await fileService().fetchUrlBytes(
-          'https://example.org/deck.md',
-          maxBytes: 16,
-          client: client,
-        ),
-        isNull,
+      final fetched = await fileService().fetchUrlBytes(
+        'https://example.org/deck.md',
+        maxBytes: 16,
+        client: client,
       );
+      expect(fetched.bytes, isNull);
+      expect(fetched.failure, ImportFailure.tooLarge);
     });
 
     test('valt op web terug op het same-origin fetch-hulppunt', () async {
@@ -125,14 +124,14 @@ void main() {
         expect(req.url.queryParameters['url'], target);
         return http.Response(_goodDeck, 200);
       });
-      final bytes = await fileService().fetchUrlBytes(
+      final fetched = await fileService().fetchUrlBytes(
         target,
         client: client,
         viaProxyFallback: true,
         onConfirmProxy: _consent,
       );
-      expect(bytes, isNotNull);
-      expect(utf8.decode(bytes!), _goodDeck);
+      expect(fetched.bytes, isNotNull);
+      expect(utf8.decode(fetched.bytes!), _goodDeck);
     });
 
     test('terugval overleeft het sluiten van de eigen client', () async {
@@ -149,15 +148,15 @@ void main() {
         await Future<void>.delayed(const Duration(milliseconds: 20));
         return http.Response(_goodDeck, 200);
       });
-      final bytes = await fileService().fetchUrlBytes(
+      final fetched = await fileService().fetchUrlBytes(
         target,
         client: client,
         viaProxyFallback: true,
         onConfirmProxy: _consent,
         closeInjectedClient: true,
       );
-      expect(bytes, isNotNull);
-      expect(utf8.decode(bytes!), _goodDeck);
+      expect(fetched.bytes, isNotNull);
+      expect(utf8.decode(fetched.bytes!), _goodDeck);
       expect(client.closed, isTrue, reason: 'client hoort na afloop dicht');
     });
 
@@ -170,26 +169,30 @@ void main() {
         }
         return http.Response(_goodDeck, 200);
       });
-      final bytes = await fileService().fetchUrlBytes(
+      final fetched = await fileService().fetchUrlBytes(
         'https://example.org/deck.md',
         client: client,
         viaProxyFallback: true,
         onConfirmProxy: _consent,
       );
-      expect(bytes, isNotNull);
+      expect(fetched.bytes, isNotNull);
       expect(proxyCalls, 0);
     });
 
     test('refuses non-web schemes without fetching', () async {
       final client = MockClient((req) async => fail('mag niet fetchen'));
-      expect(
-        await fileService().fetchUrlBytes('file:///etc/passwd', client: client),
-        isNull,
+      final file = await fileService().fetchUrlBytes(
+        'file:///etc/passwd',
+        client: client,
       );
-      expect(
-        await fileService().fetchUrlBytes('geen url', client: client),
-        isNull,
+      expect(file.bytes, isNull);
+      expect(file.failure, ImportFailure.insecureScheme);
+      final garbage = await fileService().fetchUrlBytes(
+        'geen url',
+        client: client,
       );
+      expect(garbage.bytes, isNull);
+      expect(garbage.failure, ImportFailure.network);
     });
 
     // Het hulppunt haalt server-zijdig op en krijgt daarmee de hele URL in
@@ -213,24 +216,24 @@ void main() {
 
       test('zonder bevestiger gaat er niets naar het hulppunt', () async {
         final (client, seen) = proxyCounting();
-        final bytes = await fileService().fetchUrlBytes(
+        final fetched = await fileService().fetchUrlBytes(
           'https://elders.example/deck.md',
           client: client,
           viaProxyFallback: true,
         );
-        expect(bytes, isNull);
+        expect(fetched.bytes, isNull);
         expect(seen, isEmpty, reason: 'geen toestemming is geen toestemming');
       });
 
       test('een "nee" van de gebruiker houdt de URL binnen', () async {
         final (client, seen) = proxyCounting();
-        final bytes = await fileService().fetchUrlBytes(
+        final fetched = await fileService().fetchUrlBytes(
           'https://elders.example/deck.md',
           client: client,
           viaProxyFallback: true,
           onConfirmProxy: ({required String host}) async => false,
         );
-        expect(bytes, isNull);
+        expect(fetched.bytes, isNull);
         expect(seen, isEmpty);
       });
 
@@ -257,7 +260,7 @@ void main() {
         var asked = 0;
         const user = 'bram';
         const pw = 'hunter2';
-        final bytes = await fileService().fetchUrlBytes(
+        final fetched = await fileService().fetchUrlBytes(
           'https://$user:$pw@elders.example/deck.md',
           client: client,
           viaProxyFallback: true,
@@ -266,7 +269,7 @@ void main() {
             return true;
           },
         );
-        expect(bytes, isNull);
+        expect(fetched.bytes, isNull);
         expect(seen, isEmpty);
         expect(asked, 0, reason: 'dit is geen keuze van de gebruiker');
       });

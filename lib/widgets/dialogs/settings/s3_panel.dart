@@ -324,6 +324,14 @@ class _S3PanelState extends State<S3Panel> {
         return l10n.d(
           'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.',
         );
+      case S3Error.insecureScheme:
+        return l10n.d(
+          'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.',
+        );
+      case S3Error.redirect:
+        return l10n.d(
+          'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.',
+        );
       case S3Error.config:
         return l10n.d('Ongeldig endpoint');
       case S3Error.tooLarge:

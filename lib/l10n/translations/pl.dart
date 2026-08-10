@@ -1785,6 +1785,38 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Afbeelding niet opgehaald': 'Nie pobrano obrazu',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Nie udało się utworzyć folderu docelowego ani do niego zapisać. Sprawdź, czy ustawiona lokalizacja jest dostępna.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Ustawiony folder nie jest dostępny; prezentację otwarto w folderze dokumentów:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Nazwa w tym adresie URL nie istnieje lub nie można jej odnaleźć. Sprawdź, czy w adresie URL nie ma literówki.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Ten adres URL przekierowuje na inny adres. Wpisz ten adres bezpośrednio — nie podążamy za przekierowaniami, bo mogą ominąć kontrolę bezpieczeństwa.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Ten adres URL wskazuje na adres prywatny lub LAN. Ze względów bezpieczeństwa takie adresy nie są pobierane.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Ten link nie jest adresem http(s). Wklej link zaczynający się od http:// lub https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Ten serwer nie używa https. Użyj adresu https — hasło jest wysyłane przy każdym żądaniu i w przeciwnym razie przeszłoby przez sieć bez szyfrowania.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Ten punkt końcowy nie używa https. Użyj punktu końcowego https lub oznacz go jako zaufany wewnętrzny — w przeciwnym razie prezentacje przejdą przez sieć bez szyfrowania.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Użyj adresu https — w przeciwnym razie hasło przejdzie przez sieć bez szyfrowania.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Użyj punktu końcowego https lub zaznacz "Zaufany wewnętrzny punkt końcowy" — w przeciwnym razie prezentacje przejdą przez sieć bez szyfrowania.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Certyfikat zabezpieczeń tego serwera nie jest zaufany. Sprawdź adres URL lub wypróbuj inne źródło.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Punkt końcowy przekierowuje na inny adres — zwykle błędny region lub adres URL punktu końcowego. Sprawdź region i punkt końcowy w Ustawienia → Magazyn; ponawianie tu nie pomoże.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Punkt końcowy przekierowuje — zwykle błędny region lub adres URL punktu końcowego. Ponawianie tu nie pomoże.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Zapisano lokalnie, ale publikacja w forge nie powiodła się:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Pod tym adresem URL nie ma prezentacji (nie znaleziono). Sprawdź, czy link jest nadal poprawny.',
+  'Video kan niet worden geladen': 'Nie można wczytać wideo',
   'Titel boven afbeelding': 'Tytuł nad obrazem',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Wyświetla tytuł nad obrazem zamiast nałożony na niego',

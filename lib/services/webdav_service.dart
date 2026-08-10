@@ -71,6 +71,11 @@ class WebdavFile {
 enum WebdavError {
   config,
 
+  /// De ingestelde server gebruikt geen https (meestal een `http`-URL). Eigen
+  /// soort omdat het een gerichte, uitvoerbare fout is — "gebruik https" — die
+  /// anders in de generieke [config]-melding verdween.
+  insecureScheme,
+
   /// De hostnaam bestaat niet of DNS antwoordde niet. Bewust gescheiden van
   /// [blockedHost]: die twee vragen om tegengesteld advies.
   unknownHost,
@@ -217,7 +222,7 @@ class WebdavService {
     final scheme = server.origin?.scheme.toLowerCase();
     if (!NetGuard.maySendReusableSecret(scheme, host: host)) {
       throw WebdavException(
-        WebdavError.config,
+        WebdavError.insecureScheme,
         scheme == 'http'
             ? 'WebDAV vereist https: je wachtwoord gaat bij élk verzoek mee, '
                   'dus het zou onversleuteld over het netwerk gaan. Vertrouwd '

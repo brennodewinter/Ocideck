@@ -449,7 +449,7 @@ void main() {
         service.probe(),
         throwsA(
           isA<S3Exception>()
-              .having((e) => e.kind, 'kind', S3Error.config)
+              .having((e) => e.kind, 'kind', S3Error.insecureScheme)
               .having((e) => e.message, 'message', contains('vertrouwd')),
         ),
       );

@@ -1764,6 +1764,38 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afbeelding niet opgehaald': 'Pilti ei toodud',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Sihtkausta ei õnnestunud luua ega sinna kirjutada. Kontrolli, kas määratud asukoht on saadaval.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Määratud kaust pole saadaval; esitlus avati dokumentide kaustas:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Selles URL-is olevat nime ei ole olemas või seda ei õnnestu leida. Kontrolli URL-i trükivea suhtes.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'See URL suunab teisele aadressile. Sisesta see aadress otse — ümbersuunamisi me ei järgi, sest need võivad turvakontrollist mööda minna.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'See URL osutab privaat- või LAN-aadressile. Turvakaalutlustel selliseid aadresse ei laadita.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'See link ei ole http(s)-aadress. Kleebi link, mis algab http:// või https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'See server ei kasuta https-i. Kasuta https-aadressi — sinu parool saadetakse iga päringuga kaasa ja liiguks muidu üle võrgu krüptimata.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'See lõpp-punkt ei kasuta https-i. Kasuta https-lõpp-punkti või märgi see usaldusväärseks sisemiseks — muidu liiguvad su esitlused üle võrgu krüptimata.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Kasuta https-aadressi — muidu liigub su parool üle võrgu krüptimata.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Kasuta https-lõpp-punkti või märgi "Usaldusväärne sisemine lõpp-punkt" — muidu liiguvad su esitlused üle võrgu krüptimata.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Selle serveri turvasertifikaati ei usaldata. Kontrolli URL-i või proovi teist allikat.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Lõpp-punkt suunab teisele aadressile — tavaliselt on vale piirkond või lõpp-punkti URL. Kontrolli piirkonda ja lõpp-punkti jaotises Seaded → Salvestusruum; uuesti proovimine siin ei aita.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Lõpp-punkt suunab mujale — tavaliselt on vale piirkond või lõpp-punkti URL. Uuesti proovimine siin ei aita.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Salvestatud kohapeal, kuid forge’i avaldamine ebaõnnestus:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Sellel URL-il pole esitlust (ei leitud). Kontrolli, kas link on endiselt õige.',
+  'Video kan niet worden geladen': 'Videot ei saa laadida',
   'Titel boven afbeelding': 'Pealkiri pildi kohal',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Näitab pealkirja pildi kohal selle asemel, et see oleks peal',

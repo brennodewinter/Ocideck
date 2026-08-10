@@ -1776,6 +1776,38 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Afbeelding niet opgehaald': 'Obrázek se nepodařilo načíst',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Cílovou složku se nepodařilo vytvořit ani do ní zapsat. Zkontrolujte, zda je nastavené umístění dostupné.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Nastavená složka není dostupná; prezentace byla otevřena ve složce dokumentů:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Název v této URL neexistuje nebo jej nelze vyhledat. Zkontrolujte, zda v URL není překlep.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Tato URL přesměrovává na jinou adresu. Zadejte tuto adresu přímo — přesměrování nenásledujeme, protože může obejít bezpečnostní kontrolu.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Tato URL odkazuje na privátní nebo LAN adresu. Z bezpečnostních důvodů se takové adresy nenačítají.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Tento odkaz není adresa http(s). Vložte odkaz, který začíná http:// nebo https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Tento server nepoužívá https. Použijte adresu https — vaše heslo se posílá s každým požadavkem a jinak by šlo nešifrovaně přes síť.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Tento koncový bod nepoužívá https. Použijte koncový bod https nebo jej označte jako důvěryhodný interní — jinak vaše prezentace půjdou nešifrovaně přes síť.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Použijte adresu https — jinak vaše heslo půjde nešifrovaně přes síť.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Použijte koncový bod https nebo zaškrtněte "Důvěryhodný interní koncový bod" — jinak vaše prezentace půjdou nešifrovaně přes síť.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Bezpečnostní certifikát tohoto serveru není důvěryhodný. Zkontrolujte URL nebo zkuste jiný zdroj.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Koncový bod přesměrovává na jinou adresu — obvykle špatný region nebo URL koncového bodu. Zkontrolujte region a koncový bod v Nastavení → Úložiště; opakování zde nepomůže.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Koncový bod přesměrovává — obvykle špatný region nebo URL koncového bodu. Opakování zde nepomůže.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Uloženo lokálně, ale publikování do forge se nezdařilo:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Na této URL není žádná prezentace (nenalezena). Zkontrolujte, zda je odkaz stále platný.',
+  'Video kan niet worden geladen': 'Video nelze načíst',
   'Titel boven afbeelding': 'Nadpis nad obrázkem',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Zobrazuje nadpis nad obrázkem místo přes něj',

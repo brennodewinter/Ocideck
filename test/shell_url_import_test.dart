@@ -211,10 +211,10 @@ void main() {
     await tester.pump();
 
     expect(reached, isTrue, reason: 'een mislukte import bleef stil');
-    expect(
-      find.textContaining('Kon van deze URL geen presentatie ophalen'),
-      findsOneWidget,
-    );
+    // Een loopback-adres is een SSRF-weigering, geen tikfout of CORS: sinds de
+    // reden-splitsing toont de import dáár de specifieke melding over een
+    // privé/LAN-adres, in plaats van de generieke netwerk-/CORS-zin.
+    expect(find.textContaining('privé- of LAN-adres'), findsOneWidget);
     expect(find.textContaining('presentatiemedia is vol'), findsNothing);
     expect(
       container.read(tabsProvider).tabs,

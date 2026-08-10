@@ -273,8 +273,10 @@ Widget _resolvedRemoteImage(
           height: double.infinity,
           gaplessPlayback: true,
           semanticLabel: semanticLabel,
+          // De bron kwam door de SSRF-poort, maar ophalen mislukte. Dat is iets
+          // anders dan een lokaal bestand dat niet bestaat.
           errorBuilder: (context, error, stackTrace) =>
-              failed(ImagePlaceholderReason.missing),
+              failed(ImagePlaceholderReason.remoteUnavailable),
         ),
       );
     },
@@ -508,6 +510,12 @@ enum ImagePlaceholderReason {
   /// Er is een verwijzing, maar het bestand is er niet (meer).
   missing,
 
+  /// Een online afbeelding (http-URL) die de SSRF-poort wél passeerde, maar niet
+  /// kon worden opgehaald: 404, time-out, een TLS-fout, een omleiding of te
+  /// groot. Eigen reden omdat "bestand niet gevonden" hier misleidt — het
+  /// bestand kán bestaan; het ophalen lukte niet.
+  remoteUnavailable,
+
   /// Het pad wijst buiten de presentatiemap en wordt daarom niet geladen.
   outsideDeck,
 
@@ -585,6 +593,10 @@ Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
     ImagePlaceholderReason.missing => (
       Icons.broken_image_outlined,
       context.l10n.d('Bestand niet gevonden'),
+    ),
+    ImagePlaceholderReason.remoteUnavailable => (
+      Icons.cloud_off,
+      context.l10n.d('Afbeelding niet opgehaald'),
     ),
     ImagePlaceholderReason.outsideDeck => (
       Icons.link_off,

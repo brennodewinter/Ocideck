@@ -473,7 +473,7 @@ void main() {
           ),
         );
         expect(e, isA<WebdavException>());
-        expect((e as WebdavException).kind, WebdavError.config);
+        expect((e as WebdavException).kind, WebdavError.insecureScheme);
         expect(e.message.toLowerCase(), contains('wachtwoord'));
       },
     );
@@ -486,7 +486,7 @@ void main() {
         ),
       );
       expect(e, isA<WebdavException>());
-      expect((e as WebdavException).kind, WebdavError.config);
+      expect((e as WebdavException).kind, WebdavError.insecureScheme);
     });
 
     // Note: the "trusted-internal http is allowed past the TLS gate" case is

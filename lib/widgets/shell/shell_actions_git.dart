@@ -100,6 +100,22 @@ Future<void> _reportGitSaveResult(
           ),
         );
       }
+    case GitSaveStatus.pushFailed:
+      // Het werk staat lokaal (duurzaam) — maar publiceren lukte niet, en dat
+      // lost zichzelf niet op zoals offline. Stel eerst gerust (opgeslagen), en
+      // benoem dan de verhelpbare reden uit de foutsoort. Bewust een fout-
+      // snackbar (kopieerbaar), want er is een handeling nodig.
+      final reason = result.pushError;
+      final detail = reason != null
+          ? gitForgeErrorMessage(l10n, reason)
+          : l10n.d(
+              'Er ging onverwacht iets mis. Kijk in het logboek voor details.',
+            );
+      showErrorSnackBar(
+        messenger,
+        l10n,
+        '${l10n.d('Lokaal opgeslagen, maar publiceren naar de forge lukte niet:')} $detail',
+      );
     case GitSaveStatus.failed:
       showErrorSnackBar(
         messenger,
@@ -205,6 +221,28 @@ Future<void> _saveToGit(
     // lezen. De gebruiker krijgt de vertaalde melding per foutsoort.
     logWarning('shell_actions_git: opslaan mislukt', e);
     messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
+  } on GitCliException catch (e) {
+    // Het native plane faalt lokaal met git's stderr: een achtergebleven
+    // index.lock, een volle schijf, een kapotte index, een blijven staan
+    // MERGE_HEAD. De commit is dán niet gemaakt (de push-afhandeling zit in
+    // _push en gooit niet), dus dit is een echte mislukking — geen "gaat later
+    // mee". Zonder deze tak verdween ze stil in runZonedGuarded.
+    logWarning('shell_actions_git: native opslaan mislukt', e);
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      '${l10n.d('Opslaan mislukt:')} ${userFacingError(l10n, e)}',
+    );
+  } catch (e, s) {
+    // Vangnet: een niet-git-fout (een te groot pakket, een leesfout in een
+    // lokaal asset) mag niet stil verdwijnen — de spinner stopt, maar de
+    // gebruiker zou niet weten waaróm er niets opgeslagen is.
+    logError('shell_actions_git: opslaan mislukt', e, s);
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      '${l10n.d('Opslaan mislukt:')} ${userFacingError(l10n, e)}',
+    );
   }
 }
 
@@ -287,58 +325,85 @@ Future<void> _flushGitQueue(
   final l10n = context.l10n;
   final messenger = ScaffoldMessenger.of(context);
 
-  // Native: duw de lokale historie omhoog. Er is geen wachtrij — niet-gepushte
-  // commits zíjn de wachtrij.
-  final native = await ref.read(nativeGitMirrorProvider(connectionId).future);
-  if (!context.mounted) return;
-  if (native != null) {
-    final result = await ref.read(tabsProvider.notifier).syncGitNative(native);
-    if (!context.mounted || silent) return; // een stille flush meldt niets
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(switch (result.status) {
-          GitSaveStatus.committed ||
-          GitSaveStatus.merged => l10n.d('Gesynchroniseerd met git.'),
-          GitSaveStatus.queued => l10n.d(
-            'Nog geen verbinding — het gaat later mee.',
-          ),
-          GitSaveStatus.conflict => l10n.d(
-            'De branch is verzet; je commits staan lokaal klaar.',
-          ),
-          GitSaveStatus.failed => l10n.d('Synchroniseren mislukt.'),
-        }),
-      ),
-    );
-    return;
+  // Alles wat de lijn op gaat kan gooien: offline vertrekt de netwerk-poort al
+  // met een GitForgeException, en het native plane faalt met een
+  // GitCliException. Zonder deze wacht verdween dat stil in runZonedGuarded —
+  // en dan deed "Synchroniseren" niets zichtbaars. Een stille flush (na opslaan)
+  // meldt niets; een handmatige toont altijd iets.
+  try {
+    // Native: duw de lokale historie omhoog. Er is geen wachtrij — niet-gepushte
+    // commits zíjn de wachtrij.
+    final native = await ref.read(nativeGitMirrorProvider(connectionId).future);
+    if (!context.mounted) return;
+    if (native != null) {
+      final result = await ref
+          .read(tabsProvider.notifier)
+          .syncGitNative(native);
+      if (!context.mounted || silent) return; // een stille flush meldt niets
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(switch (result.status) {
+            GitSaveStatus.committed ||
+            GitSaveStatus.merged => l10n.d('Gesynchroniseerd met git.'),
+            GitSaveStatus.queued => l10n.d(
+              'Nog geen verbinding — het gaat later mee.',
+            ),
+            GitSaveStatus.conflict => l10n.d(
+              'De branch is verzet; je commits staan lokaal klaar.',
+            ),
+            // Lokaal bewaard, maar publiceren lukte niet en lost zichzelf niet
+            // op: toon de verhelpbare reden rechtstreeks (token, certificaat…).
+            GitSaveStatus.pushFailed =>
+              result.pushError != null
+                  ? gitForgeErrorMessage(l10n, result.pushError!)
+                  : l10n.d('Synchroniseren mislukt.'),
+            GitSaveStatus.failed => l10n.d('Synchroniseren mislukt.'),
+          }),
+        ),
+      );
+      return;
+    }
+
+    final engine = await ref.read(syncEngineProvider(connectionId).future);
+    if (engine == null) return;
+    if (silent && await ref.read(outboxProvider(connectionId)).isEmpty) return;
+
+    final outcomes = await ref
+        .read(tabsProvider.notifier)
+        .flushGit(engine, config);
+    // Ook bij een stille flush, en ook wanneer we hieronder vroegtijdig
+    // terugkeren: de teller moet kloppen, niet de melding volgen.
+    ref.invalidate(gitQueueCountProvider);
+    if (!context.mounted) return;
+
+    final settled = outcomes.where((o) => o.isSettled).length;
+    final stuck = outcomes.length - settled;
+    if (silent && settled == 0 && stuck == 0) return;
+
+    final String text;
+    if (outcomes.isEmpty) {
+      text = l10n.d('Niets in de wachtrij.');
+    } else if (stuck == 0) {
+      text = '${l10n.d('Gesynchroniseerd:')} $settled';
+    } else {
+      text =
+          '${l10n.d('Gesynchroniseerd:')} $settled — '
+          '${l10n.d('nog in de wachtrij:')} $stuck';
+    }
+    messenger.showSnackBar(SnackBar(content: Text(text)));
+  } on GitForgeException catch (e) {
+    logWarning('shell_actions_git: synchroniseren mislukt', e);
+    if (!context.mounted || silent) return;
+    showErrorSnackBar(messenger, l10n, userFacingError(l10n, e));
+  } on GitCliException catch (e) {
+    logWarning('shell_actions_git: native synchroniseren mislukt', e);
+    if (!context.mounted || silent) return;
+    showErrorSnackBar(messenger, l10n, userFacingError(l10n, e));
+  } catch (e, s) {
+    logError('shell_actions_git: synchroniseren mislukt', e, s);
+    if (!context.mounted || silent) return;
+    showErrorSnackBar(messenger, l10n, userFacingError(l10n, e));
   }
-
-  final engine = await ref.read(syncEngineProvider(connectionId).future);
-  if (engine == null) return;
-  if (silent && await ref.read(outboxProvider(connectionId)).isEmpty) return;
-
-  final outcomes = await ref
-      .read(tabsProvider.notifier)
-      .flushGit(engine, config);
-  // Ook bij een stille flush, en ook wanneer we hieronder vroegtijdig
-  // terugkeren: de teller moet kloppen, niet de melding volgen.
-  ref.invalidate(gitQueueCountProvider);
-  if (!context.mounted) return;
-
-  final settled = outcomes.where((o) => o.isSettled).length;
-  final stuck = outcomes.length - settled;
-  if (silent && settled == 0 && stuck == 0) return;
-
-  final String text;
-  if (outcomes.isEmpty) {
-    text = l10n.d('Niets in de wachtrij.');
-  } else if (stuck == 0) {
-    text = '${l10n.d('Gesynchroniseerd:')} $settled';
-  } else {
-    text =
-        '${l10n.d('Gesynchroniseerd:')} $settled — '
-        '${l10n.d('nog in de wachtrij:')} $stuck';
-  }
-  messenger.showSnackBar(SnackBar(content: Text(text)));
 }
 
 /// Toon de commit-historie van het huidige, uit-git-geopende deck (§9.5). Alleen

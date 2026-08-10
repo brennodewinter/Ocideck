@@ -1772,6 +1772,38 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Afbeelding niet opgehaald': 'Billedet blev ikke hentet',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Destinationsmappen kunne ikke oprettes eller skrives til. Tjek, at den indstillede placering er tilgængelig.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Den indstillede mappe er ikke tilgængelig; præsentationen er åbnet i mappen Dokumenter:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Navnet i denne URL findes ikke eller kan ikke slås op. Tjek URL’en for en tastefejl.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Denne URL omdirigerer til en anden adresse. Indtast den adresse direkte — vi følger ikke omdirigeringer, fordi de kan omgå sikkerhedskontrollen.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Denne URL peger på en privat- eller LAN-adresse. Af sikkerhedshensyn hentes sådanne adresser ikke.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Dette link er ikke en http(s)-adresse. Indsæt et link, der starter med http:// eller https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Denne server bruger ikke https. Brug en https-adresse — din adgangskode sendes med ved hver forespørgsel og ville ellers gå ukrypteret over netværket.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Dette slutpunkt bruger ikke https. Brug et https-slutpunkt, eller markér det som betroet internt — ellers går dine præsentationer ukrypteret over netværket.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Brug en https-adresse — ellers går din adgangskode ukrypteret over netværket.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Brug et https-slutpunkt, eller markér "Betroet internt slutpunkt" — ellers går dine præsentationer ukrypteret over netværket.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Denne servers sikkerhedscertifikat er ikke betroet. Tjek URL’en, eller prøv en anden kilde.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Slutpunktet omdirigerer til en anden adresse — som regel en forkert region eller slutpunkts-URL. Tjek regionen og slutpunktet under Indstillinger → Lagring; at prøve igen hjælper ikke her.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Slutpunktet omdirigerer — som regel en forkert region eller slutpunkts-URL. At prøve igen hjælper ikke her.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Gemt lokalt, men publicering til forgen mislykkedes:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Der er ingen præsentation på denne URL (ikke fundet). Tjek, om linket stadig er korrekt.',
+  'Video kan niet worden geladen': 'Videoen kan ikke indlæses',
   'Titel boven afbeelding': 'Titel over billedet',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Viser titlen over billedet i stedet for lagt ovenpå',

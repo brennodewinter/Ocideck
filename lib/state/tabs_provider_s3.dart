@@ -46,21 +46,23 @@ extension TabsNotifierS3 on TabsNotifier {
     );
     final bytes = downloaded.bytes;
     if (!mounted) return OpenResult.unreadable;
-    final String? mdPath;
-    if (entry.isMarkdown) {
-      mdPath = await _file.importMarkdownBytes(bytes, dest, entry.name);
-    } else {
-      final outcome = await _file.importPackageBytesDetailed(
-        bytes,
-        dest,
-        onPassword: packagePasswordResolver,
-      );
-      if (outcome.failure == ImportFailure.encryptedCancelled) {
-        return OpenResult.passwordCancelled;
-      }
-      mdPath = outcome.mdPath;
+    final ImportOutcome outcome = entry.isMarkdown
+        ? await _file.importMarkdownBytesDetailed(bytes, dest, entry.name)
+        : await _file.importPackageBytesDetailed(
+            bytes,
+            dest,
+            onPassword: packagePasswordResolver,
+          );
+    if (outcome.failure == ImportFailure.encryptedCancelled) {
+      return OpenResult.passwordCancelled;
     }
-    if (mdPath == null) return OpenResult.unreadable;
+    final mdPath = outcome.mdPath;
+    if (mdPath == null) {
+      // De reden vasthouden zodat de schil de specifieke melding toont i.p.v.
+      // het generieke "Kon dit bestand niet openen." — zelfde mapping als de
+      // lokale pakket-open.
+      return _packageOpenResult(_ref, mounted, outcome.failure);
+    }
     final result = await _openImported(mdPath);
     if (result != OpenResult.opened) return result;
     // Het zojuist geopende deck zit in het huidige tabblad (zie openFileByPath).

@@ -259,11 +259,14 @@ extension TabsNotifierGit on TabsNotifier {
     );
   }
 
-  /// Parkeert het werk in de wachtrij wanneer [e] een netwerkfout is en er een
+  /// Parkeert het werk in de wachtrij wanneer [e] een offline-fout is en er een
   /// wachtrij ís; anders null, en dan hoort de aanroeper de fout te laten staan.
   ///
-  /// Verbinding kwijt is uitstel, geen mislukking (§8.5). Auth- en vormfouten
-  /// zijn dat wél: opnieuw proberen lost die niet op.
+  /// Verbinding kwijt is uitstel, geen mislukking (§8.5). Naast [network] telt
+  /// ook [unknownHost] als offline: een op zichzelf correcte server-URL lost
+  /// óók niet op zodra de machine geen netwerk heeft (`InternetAddress.lookup`
+  /// mislukt → unknownHost, zie `NetGuard.resolveConfigured`). Auth-, forbidden-
+  /// en vormfouten zijn géén uitstel: opnieuw proberen lost die niet op.
   Future<GitSaveResult?> _queueIfOffline(
     GitForgeException e,
     DeckMirror? mirror,
@@ -279,7 +282,9 @@ extension TabsNotifierGit on TabsNotifier {
     queue, {
     List<String> warnings = const [],
   }) {
-    if (e.kind != GitForgeError.network || mirror == null || outbox == null) {
+    final offlineEligible =
+        e.kind == GitForgeError.network || e.kind == GitForgeError.unknownHost;
+    if (!offlineEligible || mirror == null || outbox == null) {
       return Future.value(null);
     }
     return _queueGitSave(
@@ -649,6 +654,12 @@ enum GitSaveStatus {
   /// te voegen — dat is gebeurd en meteen gecommit (§8.6).
   merged,
 
+  /// Native: lokaal gecommit (duurzaam), maar publiceren naar de forge lukte
+  /// niet om een reden die zichzelf niet oplost (token, rechten, certificaat).
+  /// Anders dan [queued] gaat dit niet vanzelf mee — de gebruiker moet iets
+  /// verhelpen. [GitSaveResult.pushError] draagt de reden voor de melding.
+  pushFailed,
+
   /// Auth of forge deed het niet — of er was geen deck om op te slaan.
   failed,
 }
@@ -661,6 +672,11 @@ class GitSaveResult {
 
   /// Uitlegbare tekst bij [GitSaveStatus.conflict] en [GitSaveStatus.failed].
   final String? message;
+
+  /// Bij [GitSaveStatus.pushFailed]: waaróm publiceren mislukte, zodat de UI de
+  /// verhelpbare reden kan tonen naast de geruststelling dat het werk lokaal
+  /// bewaard is.
+  final GitForgeException? pushError;
 
   /// Verwijzingen die niet mee-gecommit zijn: onleesbaar, zonder bruikbare
   /// extensie of buiten het project (zie `poolAsset` in
@@ -676,6 +692,7 @@ class GitSaveResult {
     required this.status,
     this.sha,
     this.message,
+    this.pushError,
     this.warnings = const [],
     this.conflicts = const [],
   });

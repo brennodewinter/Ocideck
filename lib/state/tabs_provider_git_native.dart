@@ -303,6 +303,15 @@ extension TabsNotifierGitNative on TabsNotifier {
         );
       case GitCommitOutcome.committedOffline:
         return GitSaveResult(status: GitSaveStatus.queued, warnings: warnings);
+      case GitCommitOutcome.committedButPushFailed:
+        // Lokaal bewaard, maar publiceren lukte niet en dat lost zichzelf niet
+        // op zoals offline. De reden reist mee zodat de UI hem verhelpbaar toont.
+        return GitSaveResult(
+          status: GitSaveStatus.pushFailed,
+          sha: result.sha,
+          pushError: result.pushError,
+          warnings: warnings,
+        );
       case GitCommitOutcome.committedConflict:
         return GitSaveResult(
           status: GitSaveStatus.conflict,

@@ -1790,6 +1790,38 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Afbeelding niet opgehaald': 'Зображення не отримано',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Не вдалося створити цільову теку або записати в неї. Перевірте, чи доступне налаштоване розташування.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Налаштована тека недоступна; презентацію відкрито в теці документів:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Ім’я в цій URL-адресі не існує або його не вдається знайти. Перевірте URL на друкарську помилку.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Ця URL-адреса перенаправляє на іншу адресу. Введіть цю адресу напряму — ми не переходимо за перенаправленнями, бо вони можуть обійти перевірку безпеки.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Ця URL-адреса вказує на приватну або LAN-адресу. З міркувань безпеки такі адреси не завантажуються.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Це посилання не є http(s)-адресою. Вставте посилання, що починається з http:// або https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Цей сервер не використовує https. Використайте https-адресу — ваш пароль надсилається з кожним запитом і інакше йшов би мережею незашифрованим.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Ця кінцева точка не використовує https. Використайте https-кінцеву точку або позначте її як довірену внутрішню — інакше ваші презентації йтимуть мережею незашифрованими.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Використайте https-адресу — інакше ваш пароль піде мережею незашифрованим.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Використайте https-кінцеву точку або позначте "Довірена внутрішня кінцева точка" — інакше ваші презентації йтимуть мережею незашифрованими.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Сертифікат безпеки цього сервера не є довіреним. Перевірте URL або спробуйте інше джерело.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Кінцева точка перенаправляє на іншу адресу — зазвичай через неправильний регіон або URL кінцевої точки. Перевірте регіон і кінцеву точку в Налаштування → Сховище; повторна спроба тут не допоможе.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Кінцева точка перенаправляє — зазвичай через неправильний регіон або URL кінцевої точки. Повторна спроба тут не допоможе.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Збережено локально, але опублікувати у форж не вдалося:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'За цією URL-адресою немає презентації (не знайдено). Перевірте, чи посилання ще дійсне.',
+  'Video kan niet worden geladen': 'Не вдається завантажити відео',
   'Titel boven afbeelding': 'Заголовок над зображенням',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Показує заголовок над зображенням замість накладеного на нього',

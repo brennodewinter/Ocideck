@@ -732,6 +732,38 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Afbeelding niet opgehaald': 'Image non récupérée',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Le dossier de destination n’a pas pu être créé ni écrit. Vérifiez que l’emplacement configuré est disponible.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Le dossier configuré n’est pas disponible ; la présentation a été ouverte dans le dossier des documents :',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Le nom dans cette URL n’existe pas ou ne peut pas être résolu. Vérifiez que l’URL ne contient pas de faute de frappe.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Cette URL redirige vers une autre adresse. Saisissez directement cette adresse : nous ne suivons pas les redirections, car elles peuvent contourner le contrôle de sécurité.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Cette URL pointe vers une adresse privée ou LAN. Pour des raisons de sécurité, ces adresses ne sont pas récupérées.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Ce lien n’est pas une adresse http(s). Collez un lien qui commence par http:// ou https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Ce serveur n’utilise pas https. Utilisez une adresse https — votre mot de passe est envoyé à chaque requête et circulerait sinon en clair sur le réseau.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Ce point de terminaison n’utilise pas https. Utilisez un point de terminaison https, ou marquez-le comme interne de confiance — sinon vos présentations circulent en clair sur le réseau.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Utilisez une adresse https — sinon votre mot de passe circule en clair sur le réseau.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Utilisez un point de terminaison https, ou cochez "Point de terminaison interne de confiance" — sinon vos présentations circulent en clair sur le réseau.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Le certificat de sécurité de ce serveur n’est pas approuvé. Vérifiez l’URL ou essayez une autre source.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Le point de terminaison redirige vers une autre adresse — le plus souvent une région ou une URL de point de terminaison erronée. Vérifiez la région et le point de terminaison dans Paramètres → Stockage ; réessayer n’aide pas ici.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Le point de terminaison redirige — le plus souvent une région ou une URL de point de terminaison erronée. Réessayer n’aide pas ici.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Enregistré localement, mais la publication sur la forge a échoué :',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Il n’y a aucune présentation à cette URL (introuvable). Vérifiez que le lien est toujours correct.',
+  'Video kan niet worden geladen': 'Impossible de charger la vidéo',
   'Titel boven afbeelding': 'Titre au-dessus de l\'image',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Affiche le titre au-dessus de l\'image au lieu de superposé',

@@ -1144,6 +1144,56 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **foutafhandeling: geen stille mislukkingen meer bij openen, importeren,
+  opslaan en synchroniseren.** Aanleiding: een `.ocideck` openen via dubbelklik
+  deed niets en gaf geen foutmelding. Oorzaak: de ingestelde thuismap stond op
+  een niet-aangekoppeld volume, waardoor het uitpakken een niet-gevangen
+  `PathAccessException` gooide die de top-level `runZonedGuarded` stil
+  inslikte. De reparatie én een audit van de hele data-toegangsrand (WebDAV,
+  S3, git, URL, live media) op dezelfde klasse fouten:
+  - **Pakket-/document-import.** `_importDestDir` valt terug op de documentenmap
+    wanneer de ingestelde thuismap onbereikbaar is (het aanmaken ervan ís de
+    toegankelijkheidstoets), met een niet-blokkerende melding
+    (`importHomeUnavailableProvider`) die de onbereikbare locatie noemt. Als
+    vangnet zetten `importPackageBytesDetailed` en `importMarkdownBytesDetailed`
+    elke IO-fout om in een gerichte `ImportFailure.destinationUnavailable`
+    (of `diskFull`) in plaats van te gooien; `_onFilesDropped` kreeg een
+    per-bestand vangnet zodat één kapot bestand nooit meer stil de hele
+    Finder-open afbreekt.
+  - **WebDAV/S3.** De vier open-/opslaan-handlers vingen alleen hun eigen
+    exception-soort; een te groot pakket (`PackageBudgetExceeded`) of een
+    onbeschikbare doelmap ontsnapte stil. Nu een trailing generiek vangnet
+    (`userFacingError`), en de open-weg toont de specifieke reden i.p.v. het
+    generieke "Kon dit bestand niet openen." Meldingen aangescherpt: S3-upload
+    classificeert TLS/cert-pin correct (niet meer "netwerk"), http-i.p.v.-https
+    krijgt een eigen `insecureScheme`-soort (WebDAV + S3), en een S3 3xx-omleiding
+    (verkeerde regio) wordt onderscheiden van een serverfout.
+  - **Git (native plane).** Het native pad ving git's stderr wél op maar gooide
+    het weg en ving `GitCliException` niet af in de UI — clone-, opslaan- en
+    sync-fouten verdwenen stil. Nieuwe `classifyGitCliError` mapt stderr naar de
+    bestaande `GitForgeError`-soorten (auth/forbidden/tls/unknownHost/notFound/
+    network); open/opslaan/synchroniseren vangen nu beide exception-families.
+    Een push die faalt op token/rechten/certificaat wordt niet langer als
+    "gaat later mee" gelabeld (dat synct nooit) maar als verhelpbare fout —
+    terwijl de commit lokaal duurzaam blijft; alleen echt offline
+    (`network`/`unknownHost`) gaat de wachtrij in. Offline openen werkt weer, en
+    de REST-wachtrij parkeert ook op `unknownHost` (offline lost een correcte
+    URL óók niet op).
+  - **URL-import en live media.** De desktop-URL-import splitste zeven oorzaken
+    naar één "netwerkfout"; nu via `NetGuard.resolveConfigured` en een
+    status-classifier onderscheiden in `unknownHost`/`blockedHost`/
+    `insecureScheme`/`tls`/`redirect`/`notFound`. De web-fetch (`fetchUrlBytes`)
+    geeft de reden terug zodat een 404 of te-groot deck niet meer standaard op
+    CORS wordt gegooid — dit raakt ook de `?deck=`-deeplink. Een remote video
+    die door de SSRF-poort wordt geweigerd of niet laadt, toont nu een gerichte
+    placeholder i.p.v. een leeg "Video"-vak; een remote afbeelding die wél door
+    de poort kwam maar niet opgehaald kon worden zegt "Afbeelding niet
+    opgehaald" i.p.v. het misleidende "Bestand niet gevonden".
+
+  Met regressietests (o.a. de doel-onbereikbaar-import, de git-stderr-classifier,
+  de URL-status-classificatie en de "geen twee foutsoorten delen een melding"-
+  invariant) en l10n voor alle nieuwe teksten in de 31 talen.
+
 - **Marp-opmaak blijft behouden én rendert overal (#1436, #1437).** Onbekende
   body-directives, extra achtergrondlagen en niet-gemodelleerde beeldsyntax
   overleven openen en opslaan voortaan als bron. De ondersteunde subset —
