@@ -1,6 +1,6 @@
 # OciDeck — Performance Guide
 
-> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-08-01 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-08-10 · **Published by:** Stichting LibreKAT
 
 This document describes OciDeck's performance characteristics using the **actual
 limits and sizes enforced in the codebase** (with `file:line` citations), plus a
@@ -56,6 +56,10 @@ optimisation.
   tiles lay out in **≤ 6 columns × 1–3 rows** (`marp_html_service_charts.dart`, `maxColumns`).
 - Mermaid diagrams render to sanitised inline SVG via a shared WebView.
 - Video plays through a shared media host so only one heavy player is live.
+- A Marp background may keep every authored image filter for lossless Markdown,
+  but Flutter and HTML apply at most **32 filters**. This bounds Flutter's
+  compositing-layer depth without rewriting the source
+  (`lib/utils/marp_style_values.dart`, `kMaxRenderedMarpImageFilters`).
 
 ## Export
 
@@ -71,6 +75,10 @@ optimisation.
   stay relative `<img src>` references and are not inlined. *Corrected 2026-07-22:
   this called the result "a self-contained file", the same overstatement corrected
   in ARCHITECTURE and USER_GUIDE on 2026-07-21.*
+- Repeated `data:image` values in HTML export are charged to the cumulative
+  embed budget once and referenced through one shared definition. Deck-wide
+  Marp headers and footers are likewise stored once instead of copied into
+  every slide section, so deck-level chrome cannot multiply the output size.
 
 ## Network limits
 

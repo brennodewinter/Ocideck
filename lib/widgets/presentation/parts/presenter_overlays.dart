@@ -557,6 +557,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                       slide: widget.slides[i],
                       projectPath: widget.projectPath,
                       themeProfile: widget.themeProfile,
+                      deckMarpStyle: widget.marpStyle,
                       cockpitColorScheme: widget.cockpitColorScheme,
                       allowRemoteMedia: widget.allowRemoteMedia,
                       tlp: widget.tlp,

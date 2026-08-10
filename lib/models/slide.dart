@@ -15,6 +15,7 @@ import 'display_window_spec.dart';
 import 'privacy_disposition.dart';
 import 'quality_disposition.dart';
 import 'finding_spec.dart';
+import 'marp_style.dart';
 import 'findings_summary_spec.dart';
 import 'question.dart';
 import 'control_status_spec.dart';
@@ -24,6 +25,7 @@ import 'settings.dart';
 import 'timeline.dart';
 
 part 'slide_bullets.dart';
+part 'slide_taxonomy.dart';
 
 const _uuid = Uuid();
 
@@ -81,51 +83,6 @@ enum SlideType {
   // gantt-DSL uit af via `ganttTableToMermaid` — de DSL wordt nooit opgeslagen.
   gantt,
 }
-
-/// Broad grouping a [SlideType] belongs to, used by the add-slide picker to
-/// offer category tabs. The pentest-reporting layouts carry
-/// [SlideCategory.informationSecurity]; Procesverbetering engines carry
-/// [SlideCategory.procesverbetering]. The picker derives its tab bar from the
-/// categories actually present, so a tab appears only once the module reveals
-/// its types.
-enum SlideCategory {
-  general,
-  informationSecurity,
-  procesverbetering,
-  managementsysteem,
-}
-
-/// Hoeveel kolommen *doorlopende* bullettekst een [SlideType] toont — de vorm
-/// die zich over pagina's laat verdelen.
-///
-/// Nadrukkelijk niet "draagt iets in [Slide.bullets]": `timeline` bewaart zijn
-/// gebeurtenissen dáár ook, maar dat is gecodeerde gegevens, geen lopende
-/// lijst, en die knip je niet in tweeën. Vandaar [none] voor zulke types.
-enum BulletColumns { none, one, two }
-
-/// The part a slide plays inside a finding *group* (PENTEST_MIAUW §3.1). A real
-/// finding spans a header/summary card plus detail slides (description,
-/// reproduction, impact, recommendation) and evidence screenshots; every slide
-/// in the group shares one [Slide.findingId]. The `finding` slide type is always
-/// the [header]; [detail] and [evidence] ride on ordinary slide types (bullets,
-/// image) that opt into the group by carrying a finding id + role. Round-trips
-/// as `<!-- ocideck_finding_role: … -->` and is only meaningful when
-/// [Slide.findingId] is set.
-enum FindingRole { header, detail, evidence }
-
-enum ListStyle { bullets, numbered, checklist, richText }
-
-/// Title-slide image-column layout (#1405): `none` is the classic full-bleed
-/// background; `left`/`right`/`both` place one or two image columns beside the
-/// title text using native Marp `![bg left:W%]` / `![bg right:W%]` syntax — no
-/// new OciDeck token. [Slide.titleColumnWidth] is the column width in percent.
-enum TitleColumnLayout { none, left, right, both }
-
-/// Per-kolomuitlijning van een tabel, opgeslagen in de GFM-scheidingsrij
-/// (`:---`, `:---:`, `---:`). Standaard-GFM, dus elk Marp-gereedschap eert
-/// het — geen OciDeck-token. `left` is de GFM-default bij afwezigheid van
-/// colons, zodat een oud deck zonder uitlijning ongewijzigd opent.
-enum TableAlign { left, center, right }
 
 /// Pure-data metadata for a [SlideType], co-located with the enum so adding a
 /// type is one map entry instead of edits to several scattered switches. UI
@@ -483,6 +440,14 @@ class Slide {
   codeLanguage; // highlight.js language id for code slides ('' = plain)
   final String cssClass;
   final String notes;
+
+  /// Marp body lines OciDeck does not model but must never destroy on save.
+  ///
+  /// They are kept verbatim and emitted before the typed body. This covers
+  /// forward-compatible spot directives and extended background syntax while
+  /// the ordinary typed fields remain editable.
+  final List<String> preservedMarpLines;
+  final MarpStyle marpStyle;
   final double advanceDuration; // 0 = no auto-advance
   final int imageSize; // 0 = auto; image: bg %, bulletsImage: right panel %
   final bool titleImageOverlay; // darken title background image for readability
@@ -717,6 +682,8 @@ class Slide {
     this.codeLanguage = '',
     this.cssClass = '',
     this.notes = '',
+    this.preservedMarpLines = const [],
+    this.marpStyle = const MarpStyle(),
     this.advanceDuration = 0,
     this.imageSize = 0,
     this.titleImageOverlay = true,
@@ -884,6 +851,8 @@ class Slide {
       codeLanguage: src.codeLanguage,
       cssClass: src.cssClass,
       notes: withoutOpenKatGeneratedOrigin(src.notes),
+      preservedMarpLines: List<String>.from(src.preservedMarpLines),
+      marpStyle: src.marpStyle,
       advanceDuration: src.advanceDuration,
       imageSize: src.imageSize,
       titleImageOverlay: src.titleImageOverlay,
@@ -956,6 +925,8 @@ class Slide {
     String? codeLanguage,
     String? cssClass,
     String? notes,
+    List<String>? preservedMarpLines,
+    MarpStyle? marpStyle,
     double? advanceDuration,
     int? imageSize,
     bool? titleImageOverlay,
@@ -997,92 +968,89 @@ class Slide {
     int? renderPage,
     String? anchor,
     String? nextAnchor,
-  }) {
-    return Slide(
-      id: id,
-      type: type ?? this.type,
-      title: title ?? this.title,
-      subtitle: subtitle ?? this.subtitle,
-      bullets: bullets ?? this.bullets,
-      bullets2: bullets2 ?? this.bullets2,
-      listStyle: listStyle ?? this.listStyle,
-      showChecklistProgress:
-          showChecklistProgress ?? this.showChecklistProgress,
-      continueNumbering: continueNumbering ?? this.continueNumbering,
-      continuesSplit: continuesSplit ?? this.continuesSplit,
-      columnTitle1: columnTitle1 ?? this.columnTitle1,
-      columnTitle2: columnTitle2 ?? this.columnTitle2,
-      imagePath: imagePath ?? this.imagePath,
-      imagePath2: imagePath2 ?? this.imagePath2,
-      imageCaption: imageCaption ?? this.imageCaption,
-      imageCaption2: imageCaption2 ?? this.imageCaption2,
-      imageAltText: imageAltText ?? this.imageAltText,
-      imageAltText2: imageAltText2 ?? this.imageAltText2,
-      imageFocalX: imageFocalX ?? this.imageFocalX,
-      imageFocalY: imageFocalY ?? this.imageFocalY,
-      imageFocalX2: imageFocalX2 ?? this.imageFocalX2,
-      imageFocalY2: imageFocalY2 ?? this.imageFocalY2,
-      videoPath: videoPath ?? this.videoPath,
-      videoAutoplay: videoAutoplay ?? this.videoAutoplay,
-      videoStartMs: videoStartMs ?? this.videoStartMs,
-      videoEndMs: videoEndMs ?? this.videoEndMs,
-      audioPath: audioPath ?? this.audioPath,
-      mediaRedacted: mediaRedacted ?? this.mediaRedacted,
-      contentRedacted: contentRedacted ?? this.contentRedacted,
-      audioAutoplay: audioAutoplay ?? this.audioAutoplay,
-      quote: quote ?? this.quote,
-      quoteAuthor: quoteAuthor ?? this.quoteAuthor,
-      customMarkdown: customMarkdown ?? this.customMarkdown,
-      codeLanguage: codeLanguage ?? this.codeLanguage,
-      cssClass: cssClass ?? this.cssClass,
-      notes: notes ?? this.notes,
-      advanceDuration: advanceDuration ?? this.advanceDuration,
-      imageSize: imageSize ?? this.imageSize,
-      titleImageOverlay: titleImageOverlay ?? this.titleImageOverlay,
-      imageTitleAbove: imageTitleAbove ?? this.imageTitleAbove,
-      titleTextColorOverride:
-          titleTextColorOverride ?? this.titleTextColorOverride,
-      titleColumnLayout: titleColumnLayout ?? this.titleColumnLayout,
-      titleColumnWidth: titleColumnWidth ?? this.titleColumnWidth,
-      bulletMarkerOverride: clearBulletMarkerOverride
-          ? null
-          : (bulletMarkerOverride ?? this.bulletMarkerOverride),
-      showLogo: showLogo ?? this.showLogo,
-      showFooter: showFooter ?? this.showFooter,
-      skipped: skipped ?? this.skipped,
-      tlp: tlp ?? this.tlp,
-      privacy: clearPrivacy ? null : (privacy ?? this.privacy),
-      quality: quality ?? this.quality,
-      tableRows: tableRows ?? this.tableRows,
-      tableColumnAlignments:
-          tableColumnAlignments ?? this.tableColumnAlignments,
-      tableNumberColumns: tableNumberColumns ?? this.tableNumberColumns,
-      tableEditable: tableEditable ?? this.tableEditable,
-      tableMarkOverdue: tableMarkOverdue ?? this.tableMarkOverdue,
-      ganttScale: ganttScale ?? this.ganttScale,
-      ganttSections: ganttSections ?? this.ganttSections,
-      viewLimit: clearViewLimit ? null : (viewLimit ?? this.viewLimit),
-      isDetail: isDetail ?? this.isDetail,
-      timelineLayout: timelineLayout ?? this.timelineLayout,
-      timelineReveal: timelineReveal ?? this.timelineReveal,
-      timelineAnimationMs: clearTimelineAnimation
-          ? null
-          : (timelineAnimationMs ?? this.timelineAnimationMs),
-      timelineCurrentIndex: clearTimelineCurrent
-          ? null
-          : (timelineCurrentIndex ?? this.timelineCurrentIndex),
-      findingId: findingId ?? this.findingId,
-      findingRole: findingRole ?? this.findingRole,
-      aiAssistedFields: aiAssistedFields ?? this.aiAssistedFields,
-      checklistScope: checklistScope ?? this.checklistScope,
-      improvementTemplateId:
-          improvementTemplateId ?? this.improvementTemplateId,
-      improvementLayout: improvementLayout ?? this.improvementLayout,
-      renderPage: renderPage ?? this.renderPage,
-      anchor: anchor ?? this.anchor,
-      nextAnchor: nextAnchor ?? this.nextAnchor,
-    );
-  }
+  }) => Slide(
+    id: id,
+    type: type ?? this.type,
+    title: title ?? this.title,
+    subtitle: subtitle ?? this.subtitle,
+    bullets: bullets ?? this.bullets,
+    bullets2: bullets2 ?? this.bullets2,
+    listStyle: listStyle ?? this.listStyle,
+    showChecklistProgress: showChecklistProgress ?? this.showChecklistProgress,
+    continueNumbering: continueNumbering ?? this.continueNumbering,
+    continuesSplit: continuesSplit ?? this.continuesSplit,
+    columnTitle1: columnTitle1 ?? this.columnTitle1,
+    columnTitle2: columnTitle2 ?? this.columnTitle2,
+    imagePath: imagePath ?? this.imagePath,
+    imagePath2: imagePath2 ?? this.imagePath2,
+    imageCaption: imageCaption ?? this.imageCaption,
+    imageCaption2: imageCaption2 ?? this.imageCaption2,
+    imageAltText: imageAltText ?? this.imageAltText,
+    imageAltText2: imageAltText2 ?? this.imageAltText2,
+    imageFocalX: imageFocalX ?? this.imageFocalX,
+    imageFocalY: imageFocalY ?? this.imageFocalY,
+    imageFocalX2: imageFocalX2 ?? this.imageFocalX2,
+    imageFocalY2: imageFocalY2 ?? this.imageFocalY2,
+    videoPath: videoPath ?? this.videoPath,
+    videoAutoplay: videoAutoplay ?? this.videoAutoplay,
+    videoStartMs: videoStartMs ?? this.videoStartMs,
+    videoEndMs: videoEndMs ?? this.videoEndMs,
+    audioPath: audioPath ?? this.audioPath,
+    mediaRedacted: mediaRedacted ?? this.mediaRedacted,
+    contentRedacted: contentRedacted ?? this.contentRedacted,
+    audioAutoplay: audioAutoplay ?? this.audioAutoplay,
+    quote: quote ?? this.quote,
+    quoteAuthor: quoteAuthor ?? this.quoteAuthor,
+    customMarkdown: customMarkdown ?? this.customMarkdown,
+    codeLanguage: codeLanguage ?? this.codeLanguage,
+    cssClass: cssClass ?? this.cssClass,
+    notes: notes ?? this.notes,
+    preservedMarpLines: preservedMarpLines ?? this.preservedMarpLines,
+    marpStyle: marpStyle ?? this.marpStyle,
+    advanceDuration: advanceDuration ?? this.advanceDuration,
+    imageSize: imageSize ?? this.imageSize,
+    titleImageOverlay: titleImageOverlay ?? this.titleImageOverlay,
+    imageTitleAbove: imageTitleAbove ?? this.imageTitleAbove,
+    titleTextColorOverride:
+        titleTextColorOverride ?? this.titleTextColorOverride,
+    titleColumnLayout: titleColumnLayout ?? this.titleColumnLayout,
+    titleColumnWidth: titleColumnWidth ?? this.titleColumnWidth,
+    bulletMarkerOverride: clearBulletMarkerOverride
+        ? null
+        : (bulletMarkerOverride ?? this.bulletMarkerOverride),
+    showLogo: showLogo ?? this.showLogo,
+    showFooter: showFooter ?? this.showFooter,
+    skipped: skipped ?? this.skipped,
+    tlp: tlp ?? this.tlp,
+    privacy: clearPrivacy ? null : (privacy ?? this.privacy),
+    quality: quality ?? this.quality,
+    tableRows: tableRows ?? this.tableRows,
+    tableColumnAlignments: tableColumnAlignments ?? this.tableColumnAlignments,
+    tableNumberColumns: tableNumberColumns ?? this.tableNumberColumns,
+    tableEditable: tableEditable ?? this.tableEditable,
+    tableMarkOverdue: tableMarkOverdue ?? this.tableMarkOverdue,
+    ganttScale: ganttScale ?? this.ganttScale,
+    ganttSections: ganttSections ?? this.ganttSections,
+    viewLimit: clearViewLimit ? null : (viewLimit ?? this.viewLimit),
+    isDetail: isDetail ?? this.isDetail,
+    timelineLayout: timelineLayout ?? this.timelineLayout,
+    timelineReveal: timelineReveal ?? this.timelineReveal,
+    timelineAnimationMs: clearTimelineAnimation
+        ? null
+        : (timelineAnimationMs ?? this.timelineAnimationMs),
+    timelineCurrentIndex: clearTimelineCurrent
+        ? null
+        : (timelineCurrentIndex ?? this.timelineCurrentIndex),
+    findingId: findingId ?? this.findingId,
+    findingRole: findingRole ?? this.findingRole,
+    aiAssistedFields: aiAssistedFields ?? this.aiAssistedFields,
+    checklistScope: checklistScope ?? this.checklistScope,
+    improvementTemplateId: improvementTemplateId ?? this.improvementTemplateId,
+    improvementLayout: improvementLayout ?? this.improvementLayout,
+    renderPage: renderPage ?? this.renderPage,
+    anchor: anchor ?? this.anchor,
+    nextAnchor: nextAnchor ?? this.nextAnchor,
+  );
 
   /// Add or remove [field] from [aiAssistedFields] (AI_ASSIST §16.3 provenance):
   /// an AI draft marks the field so the seal-gate blocks until reviewed; a manual

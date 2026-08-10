@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/marp_style.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/slide_dedup_service.dart';
@@ -15,12 +16,14 @@ class SlideDiffRef {
   final Slide slide;
   final String? projectPath;
   final ThemeProfile themeProfile;
+  final MarpStyle deckMarpStyle;
 
   const SlideDiffRef({
     required this.label,
     required this.slide,
     required this.projectPath,
     required this.themeProfile,
+    this.deckMarpStyle = const MarpStyle(),
   });
 }
 
@@ -158,6 +161,7 @@ class _SlideDiffDialogState extends State<SlideDiffDialog> {
                 slide: ref.slide,
                 projectPath: ref.projectPath,
                 themeProfile: ref.themeProfile,
+                deckMarpStyle: ref.deckMarpStyle,
               ),
             ),
           ),

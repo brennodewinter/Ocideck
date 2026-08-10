@@ -37,6 +37,7 @@ import '../../models/cockpit.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
 import '../../models/improvement_y01.dart';
+import '../../models/marp_style.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/document_signature.dart';
 import '../../models/finding_spec.dart';
@@ -75,6 +76,8 @@ import '../../services/web_asset_store.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/image_focal.dart';
 import '../../utils/mem_asset_blob.dart';
+import '../../utils/marp_emoji.dart';
+import '../../utils/marp_style_values.dart';
 import '../../utils/jaro_winkler.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/media_fetch.dart';
@@ -93,6 +96,7 @@ import '../../utils/inline_markdown.dart';
 import 'inline_markdown.dart';
 import 'image_zoom_dialog.dart';
 import '../../utils/table_number_format.dart';
+import 'previews/slide_preview_support.dart';
 
 // Slide previews split by type; parts share this library's private scope.
 part 'previews/preview_scaffold.dart';
@@ -143,102 +147,18 @@ TextStyle _applyFont(String font, TextStyle base) {
   return base.copyWith(fontFamily: font);
 }
 
-/// Geeft de link-tap-handler door aan alle tekst in een slide, zonder die door
-/// elke sub-widget heen te hoeven sleuren. Draagt ook of er een TLP-markering
-/// rechtsonder staat, zodat bijschriften daarboven uitwijken.
-class _SlideLinkScope extends InheritedWidget {
-  final void Function(String url)? onTapLink;
-  final bool hasBottomTlp;
-
-  /// Of online media (URL-afbeeldingen/-video's en embeds) live geladen mag
-  /// worden. Standaard uit; de media-renderers tonen anders een placeholder met
-  /// de URL i.p.v. naar buiten te bellen.
-  final bool allowRemoteMedia;
-
-  /// Of de media op deze slide door de privacyprojectie is weggehaald.
-  ///
-  /// Reist mee in de scope en niet als parameter langs de renderers, omdat het
-  /// anders precies dáár misgaat waar het al eens misging: er zijn negen
-  /// aanroepplekken van `_resolvedImage`, en een tiende die de vlag vergeet
-  /// levert stilzwijgend weer een grijs "Afbeelding"-vak op een geredigeerde
-  /// slide. Zie [Slide.mediaRedacted].
-  final bool mediaRedacted;
-
-  /// Bovengrens voor de decodeerresolutie van een dia-afbeelding, of null voor
-  /// de gewone cap.
-  ///
-  /// Reist mee in de scope om precies de reden die hierboven bij
-  /// [mediaRedacted] staat: er zijn negen aanroepplekken van `_resolvedImage`,
-  /// en een tiende die de parameter vergeet decodeert stilzwijgend weer op
-  /// volle resolutie.
-  ///
-  /// Alleen de slidestrook zet hem. Een telefoonfoto van 4032×3024 kost
-  /// gedecodeerd bijna 49 MiB; tien zichtbare thumbnails met verschillende
-  /// foto's zijn een halve gigabyte aan levende bitmaps voor een strook van
-  /// ~180 px breed. Op desktop is dat een geheugengrafiek die niemand ziet, op
-  /// web valt de tab om — en web is de demo-route (#612).
-  final int? decodeMaxEdge;
-
-  /// Wat er gebeurt als de gebruiker vanaf een geblokkeerde-online-media-
-  /// placeholder online media wil aanzetten: een sprong naar de instelling.
-  /// Alleen de editor-preview zet dit; in de presenter, thumbnails, export en de
-  /// play-only-webdemo is het null en verschijnt er geen knop — daar zijn de
-  /// instellingen niet te openen (#852).
-  final VoidCallback? onEnableOnlineMedia;
-
-  const _SlideLinkScope({
-    required this.onTapLink,
-    this.hasBottomTlp = false,
-    this.allowRemoteMedia = false,
-    this.mediaRedacted = false,
-    this.decodeMaxEdge,
-    this.onEnableOnlineMedia,
-    required super.child,
-  });
-
-  static void Function(String url)? of(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
-        ?.onTapLink;
-  }
-
-  static bool hasBottomTlpOf(BuildContext context) {
-    return context
-            .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
-            ?.hasBottomTlp ??
-        false;
-  }
-
-  static bool allowRemoteMediaOf(BuildContext context) {
-    return context
-            .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
-            ?.allowRemoteMedia ??
-        false;
-  }
-
-  static bool mediaRedactedOf(BuildContext context) {
-    return context
-            .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
-            ?.mediaRedacted ??
-        false;
-  }
-
-  static int? decodeMaxEdgeOf(BuildContext context) => context
-      .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
-      ?.decodeMaxEdge;
-
-  static VoidCallback? onEnableOnlineMediaOf(BuildContext context) => context
-      .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
-      ?.onEnableOnlineMedia;
-
-  @override
-  bool updateShouldNotify(_SlideLinkScope oldWidget) =>
-      oldWidget.onTapLink != onTapLink ||
-      oldWidget.hasBottomTlp != hasBottomTlp ||
-      oldWidget.allowRemoteMedia != allowRemoteMedia ||
-      oldWidget.mediaRedacted != mediaRedacted ||
-      oldWidget.decodeMaxEdge != decodeMaxEdge ||
-      oldWidget.onEnableOnlineMedia != onEnableOnlineMedia;
+ThemeProfile _themeWithMarpStyle(ThemeProfile base, MarpStyle style) {
+  final foreground = normalizeMarpColor(style.color);
+  final background = normalizeMarpColor(style.backgroundColor);
+  return base.copyWith(
+    slideBackgroundColor: background,
+    titleBackgroundColor: background,
+    sectionBackgroundColor: background,
+    textColor: foreground,
+    tableTextColor: foreground,
+    titleTextColor: foreground,
+    footerText: style.footer.isEmpty ? null : style.footer,
+  );
 }
 
 /// Tekst met inline-markdown (**vet**, *cursief*, `code`, ~~door~~, [link](url)).
@@ -255,10 +175,10 @@ Widget _md(
   InlineSpan? trailing,
 }) {
   return InlineMarkdownText(
-    normalizeRichTextMarkdown(text),
+    normalizeRichTextMarkdown(expandMarpEmojiShortcodes(text)),
     style: style,
     linkColor: linkColor,
-    onTapLink: _SlideLinkScope.of(context),
+    onTapLink: SlideLinkScope.of(context),
     maxLines: maxLines,
     textAlign: textAlign,
     overflow: overflow,
@@ -323,7 +243,15 @@ EdgeInsets _bulletsPadding({
 class SlidePreviewWidget extends StatelessWidget {
   final Slide slide;
   final String? projectPath;
-  final ThemeProfile themeProfile;
+  final ThemeProfile baseThemeProfile;
+  final MarpStyle deckMarpStyle;
+
+  MarpStyle get marpStyle => slide.marpStyle.inherit(deckMarpStyle);
+
+  late final ThemeProfile themeProfile = _themeWithMarpStyle(
+    baseThemeProfile,
+    marpStyle,
+  );
 
   /// Actief cockpit-kleurschema (statuskleuren goed/waarschuwing/kritiek/koud).
   /// Globaal geselecteerd in de instellingen; alleen cockpit-slides gebruiken
@@ -500,11 +428,12 @@ class SlidePreviewWidget extends StatelessWidget {
   /// thumbnails, export, play-only) blijft het null en verschijnt er geen knop.
   final VoidCallback? onEnableOnlineMedia;
 
-  const SlidePreviewWidget({
+  SlidePreviewWidget({
     super.key,
     required this.slide,
     this.projectPath,
-    this.themeProfile = const ThemeProfile(),
+    ThemeProfile themeProfile = const ThemeProfile(),
+    this.deckMarpStyle = const MarpStyle(),
     this.cockpitColorScheme = CockpitColorScheme.standard,
     this.onLinkTap,
     this.slideNumber,
@@ -546,7 +475,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.improvementY01 = ImprovementY01Metric.empty,
     this.decodeMaxEdge,
     this.onEnableOnlineMedia,
-  });
+  }) : baseThemeProfile = themeProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -597,12 +526,13 @@ class SlidePreviewWidget extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                   fontStyle: FontStyle.normal,
                 ),
-                child: _SlideLinkScope(
+                child: SlideLinkScope(
                   onTapLink: onLinkTap,
                   hasBottomTlp: hasBottomRightTlp,
                   allowRemoteMedia: allowRemoteMedia,
                   mediaRedacted: slide.mediaRedacted,
                   decodeMaxEdge: decodeMaxEdge,
+                  marpStyle: marpStyle,
                   onEnableOnlineMedia: onEnableOnlineMedia,
                   child: _buildSlide(slide.projectionWithViewLimit()),
                 ),
@@ -624,7 +554,7 @@ class SlidePreviewWidget extends StatelessWidget {
   Widget _buildSlide(Slide slide) {
     final markingTlp = effectiveTlp(deckTlp: tlp, slideTlp: slide.tlp);
     return LayoutBuilder(
-      builder: (_, constraints) {
+      builder: (context, constraints) {
         final w = constraints.maxWidth;
         final splitImage = slide.type.splitWithImage;
         final richTextPages =
@@ -644,6 +574,21 @@ class SlidePreviewWidget extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
+                ColoredBox(
+                  color: AppTheme.parseHexColor(
+                    themeProfile.slideBackgroundColor,
+                  ),
+                ),
+                if (marpBackgroundAssetPath(
+                  marpStyle.backgroundImage,
+                ).isNotEmpty)
+                  _resolvedImage(
+                    context,
+                    marpBackgroundAssetPath(marpStyle.backgroundImage),
+                    projectPath,
+                    fit: BoxFit.cover,
+                    applyMarpStyle: false,
+                  ),
                 _buildContent(slide, w),
                 // Decoratieve overlays (watermerk, footer, TLP, logo)
                 // mogen geen muis/tikken afvangen: anders blokkeren ze de hover
@@ -666,10 +611,17 @@ class SlidePreviewWidget extends StatelessWidget {
                         slide: slide,
                         w: w,
                         profile: themeProfile,
+                        isMarpFooter: marpStyle.footer.isNotEmpty,
                         slideNumber: slideNumber,
                         slideCount: slideCount,
                         tlp: markingTlp,
                       ),
+                      if (marpStyle.header.isNotEmpty)
+                        _MarpHeaderOverlay(
+                          text: marpStyle.header,
+                          w: w,
+                          profile: themeProfile,
+                        ),
                       if (markingTlp != TlpLevel.none)
                         _TlpOverlay(
                           tlp: markingTlp,

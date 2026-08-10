@@ -85,30 +85,30 @@ void main() {
     test('een eigen sleutel wordt op zijn eigen plek vervangen', () {
       expect(
         mergeFrontMatter(
-          original: const ['marp: true', 'theme: oud', 'footer: mijn voet'],
+          original: const ['marp: true', 'theme: oud', 'size: 16:9'],
           generated: const ['marp: true', 'theme: nieuw'],
         ),
-        ['marp: true', 'theme: nieuw', 'footer: mijn voet'],
+        ['marp: true', 'theme: nieuw', 'size: 16:9'],
       );
     });
 
     test('een eigen sleutel die niet meer geschreven wordt, verdwijnt', () {
       expect(
         mergeFrontMatter(
-          original: const ['marp: true', 'paginate: true', 'header: kop'],
+          original: const ['marp: true', 'paginate: true', 'size: 16:9'],
           generated: const ['marp: true'],
         ),
-        ['marp: true', 'header: kop'],
+        ['marp: true', 'size: 16:9'],
       );
     });
 
     test('een nieuwe eigen sleutel komt achteraan, in generatorvolgorde', () {
       expect(
         mergeFrontMatter(
-          original: const ['marp: true', 'header: kop'],
+          original: const ['marp: true', 'size: 16:9'],
           generated: const ['marp: true', 'title: T', 'author: A'],
         ),
-        ['marp: true', 'header: kop', 'title: T', 'author: A'],
+        ['marp: true', 'size: 16:9', 'title: T', 'author: A'],
       );
     });
 
@@ -120,7 +120,7 @@ void main() {
             'marp: true',
             '',
             '# hieronder staat mijn eigen kop',
-            'header: kop',
+            'size: 16:9',
           ],
           generated: const ['marp: true'],
         ),
@@ -129,7 +129,7 @@ void main() {
           'marp: true',
           '',
           '# hieronder staat mijn eigen kop',
-          'header: kop',
+          'size: 16:9',
         ],
       );
     });
@@ -160,20 +160,20 @@ void main() {
       // ingesprongen regel is geen geldige YAML meer.
       expect(
         mergeFrontMatter(
-          original: const ['title: |', '  Lange', '  titel', 'header: kop'],
+          original: const ['title: |', '  Lange', '  titel', 'size: 16:9'],
           generated: const ['title: Kort'],
         ),
-        ['title: Kort', 'header: kop'],
+        ['title: Kort', 'size: 16:9'],
       );
     });
 
     test('een sleutel die meermaals mag voorkomen landt op de eerste plek', () {
       expect(
         mergeFrontMatter(
-          original: const ['tool: Burp@1', 'header: kop', 'tool: Nmap@7'],
+          original: const ['tool: Burp@1', 'size: 16:9', 'tool: Nmap@7'],
           generated: const ['tool: Burp@2', 'tool: Nmap@8', 'tool: Zap@1'],
         ),
-        ['tool: Burp@2', 'tool: Nmap@8', 'tool: Zap@1', 'header: kop'],
+        ['tool: Burp@2', 'tool: Nmap@8', 'tool: Zap@1', 'size: 16:9'],
       );
     });
 

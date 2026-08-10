@@ -251,7 +251,7 @@ class MarkdownValidator {
 
   /// Flags HTML comments that *look* like a directive — they open with a
   /// reserved `_key:` or `ocideck_key:` token — but name a directive OciDeck
-  /// does not implement (so the parser drops them silently). Plain prose
+  /// does not render. Plain prose
   /// comments are speaker notes and are intentionally left alone, so genuine
   /// notes no longer trigger a spurious warning.
   void _validateCommentDirectives(
@@ -269,7 +269,8 @@ class MarkdownValidator {
         MarkdownValidationIssue(
           line: line,
           severity: MarkdownValidationSeverity.warning,
-          message: 'Directive `$key` wordt niet ondersteund en genegeerd.',
+          message:
+              'Directive `$key` wordt niet door OciDeck gemodelleerd, maar blijft bij opslaan behouden.',
         ),
       );
     }

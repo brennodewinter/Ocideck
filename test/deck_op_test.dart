@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/collab/deck_op.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/slide.dart';
 
 /// A distinctive, non-default value for each [SlideField], paired with a reader
@@ -48,6 +49,14 @@ _slideCases = {
   ),
   SlideField.bullets: (value: ['a', 'b'], read: (s) => s.bullets),
   SlideField.bullets2: (value: ['c', 'd'], read: (s) => s.bullets2),
+  SlideField.preservedMarpLines: (
+    value: ['<!-- _future: value -->'],
+    read: (s) => s.preservedMarpLines,
+  ),
+  SlideField.marpStyle: (
+    value: const MarpStyle(color: '#123456'),
+    read: (s) => s.marpStyle,
+  ),
   SlideField.showChecklistProgress: (
     value: true,
     read: (s) => s.showChecklistProgress,
@@ -111,6 +120,10 @@ _deckCases = {
   DeckMetaField.standardsUsed: (
     value: ['OWASP WSTG@4.2'],
     read: (d) => d.standardsUsed,
+  ),
+  DeckMetaField.marpStyle: (
+    value: const MarpStyle(footer: 'Voet'),
+    read: (d) => d.marpStyle,
   ),
 };
 

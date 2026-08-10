@@ -47,7 +47,7 @@ int persistedFormatVersion(int fileVersion) =>
 
 /// De front-matter-sleutels die OciDeck zelf schrijft en dus mag vervangen of
 /// weghalen. Alles daarbuiten is van iemand anders — een Marp-optie die OciDeck
-/// niet implementeert (`header`, `footer`, `size`, `style`), een sleutel van een
+/// niet implementeert (`size`, `style`), een sleutel van een
 /// nieuwere OciDeck-versie, of een aantekening van de auteur — en blijft bij het
 /// opslaan ongemoeid staan waar hij stond.
 ///
@@ -60,6 +60,11 @@ const Set<String> kOwnedFrontMatterKeys = {
   'marp',
   'theme',
   'paginate',
+  'color',
+  'backgroundColor',
+  'backgroundImage',
+  'header',
+  'footer',
   'title',
   'author',
   'organization',

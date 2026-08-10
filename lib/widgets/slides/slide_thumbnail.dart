@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
 import '../../models/improvement_y01.dart';
+import '../../models/marp_style.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/quality_disposition.dart';
 import '../../models/slide_quality.dart';
@@ -135,6 +136,7 @@ class SlideThumbnail extends ConsumerWidget {
   final int index;
   final String? projectPath;
   final ThemeProfile themeProfile;
+  final MarpStyle deckMarpStyle;
   final int slideCount;
   final TlpLevel tlp;
   final String organization;
@@ -186,6 +188,7 @@ class SlideThumbnail extends ConsumerWidget {
     this.hasUserNotes = false,
     this.projectPath,
     this.themeProfile = const ThemeProfile(),
+    this.deckMarpStyle = const MarpStyle(),
     this.slideCount = 1,
     this.tlp = TlpLevel.none,
     this.organization = '',
@@ -447,6 +450,7 @@ class SlideThumbnail extends ConsumerWidget {
                     slide: slide,
                     projectPath: projectPath,
                     themeProfile: themeProfile,
+                    deckMarpStyle: deckMarpStyle,
                     // Een thumbnail is ~180 px breed; op ware grootte
                     // decoderen kost per telefoonfoto bijna 49 MiB, en tien
                     // zichtbare stroken met verschillende foto's zijn een halve

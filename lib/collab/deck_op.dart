@@ -29,6 +29,7 @@
 // sufficient for v1. The enums are the seam where later fields are added.
 
 import '../models/deck.dart';
+import '../models/marp_style.dart';
 import '../models/privacy_disposition.dart';
 import '../models/slide.dart';
 
@@ -195,6 +196,8 @@ enum SlideField {
   // — List<String> —
   bullets,
   bullets2,
+  preservedMarpLines,
+  marpStyle, // MarpStyle
   // — bool —
   showChecklistProgress,
   continueNumbering,
@@ -246,6 +249,7 @@ enum DeckMetaField {
   presentationTargetSeconds,
   // — List<String> —
   standardsUsed,
+  marpStyle, // MarpStyle
 }
 
 /// Apply [op] to [deck] and return the resulting deck. Pure: [deck] is not
@@ -396,6 +400,12 @@ Slide _slideWithField(Slide slide, SlideField field, Object? value) {
     SlideField.bullets2 => slide.copyWith(
       bullets2: _castList<String>(value, field),
     ),
+    SlideField.preservedMarpLines => slide.copyWith(
+      preservedMarpLines: _castList<String>(value, field),
+    ),
+    SlideField.marpStyle => slide.copyWith(
+      marpStyle: _cast<MarpStyle>(value, field),
+    ),
     SlideField.showChecklistProgress => slide.copyWith(
       showChecklistProgress: _cast<bool>(value, field),
     ),
@@ -499,6 +509,9 @@ Deck _setDeckMeta(Deck deck, DeckMetaField field, Object? value) {
     ),
     DeckMetaField.standardsUsed => deck.copyWith(
       standardsUsed: _castList<String>(value, field),
+    ),
+    DeckMetaField.marpStyle => deck.copyWith(
+      marpStyle: _cast<MarpStyle>(value, field),
     ),
   };
 }

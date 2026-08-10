@@ -11,6 +11,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
@@ -81,6 +82,37 @@ void main() {
         deckWith(PrivacyDisposition.redact),
       );
       expect(audience.redactionCount, greaterThanOrEqualTo(4));
+    });
+
+    test('lokale en geerfde Marp-achtergronden worden onderdrukt', () {
+      final local = deckWith(PrivacyDisposition.redact).copyWith(
+        slides: [
+          deckWith(PrivacyDisposition.redact).slides.single.copyWith(
+            marpStyle: const MarpStyle(
+              backgroundImage: 'url(images/persoon.png)',
+            ),
+          ),
+        ],
+      );
+      final inherited = local.copyWith(
+        marpStyle: const MarpStyle(
+          backgroundImage: 'url(images/deck-persoon.png)',
+        ),
+        slides: [local.slides.single.copyWith(marpStyle: const MarpStyle())],
+      );
+
+      expect(
+        PrivacyProjection.forAudience(
+          local,
+        ).deck.slides.single.marpStyle.backgroundImage,
+        'none',
+      );
+      expect(
+        PrivacyProjection.forAudience(
+          inherited,
+        ).deck.slides.single.marpStyle.backgroundImage,
+        'none',
+      );
     });
   });
 

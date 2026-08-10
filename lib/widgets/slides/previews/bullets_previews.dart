@@ -22,7 +22,11 @@ Widget _titleWithSplitCounter(
   TextStyle style, {
   required Color linkColor,
   required ({int page, int total})? position,
+  bool fit = false,
 }) {
+  if (fit && style.fontSize != null) {
+    style = style.copyWith(fontSize: style.fontSize! * 1.6);
+  }
   if (position == null || position.total <= 1) {
     return _md(context, title, style, linkColor: linkColor);
   }
@@ -256,6 +260,7 @@ class _BulletsPreview extends StatelessWidget {
             ),
             linkColor: AppTheme.parseHexColor(profile.accentColor),
             position: splitRunPosition,
+            fit: slide.marpStyle.headingFit,
           ),
         if (hasSubtitle) ...[
           SizedBox(height: spacing * resolvedScale * 0.4),
@@ -642,6 +647,7 @@ class _TwoBulletsPreview extends StatelessWidget {
             ),
             linkColor: AppTheme.parseHexColor(profile.accentColor),
             position: splitRunPosition,
+            fit: slide.marpStyle.headingFit,
           ),
         if (hasTitle) SizedBox(height: spacing),
         if (slide.listStyle == ListStyle.checklist &&

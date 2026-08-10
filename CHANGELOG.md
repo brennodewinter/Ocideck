@@ -1193,6 +1193,16 @@ that before deciding whether this alpha fits what you are doing.
   Met regressietests (o.a. de doel-onbereikbaar-import, de git-stderr-classifier,
   de URL-status-classificatie en de "geen twee foutsoorten delen een melding"-
   invariant) en l10n voor alle nieuwe teksten in de 31 talen.
+
+- **Marp-opmaak blijft behouden én rendert overal (#1436, #1437).** Onbekende
+  body-directives, extra achtergrondlagen en niet-gemodelleerde beeldsyntax
+  overleven openen en opslaan voortaan als bron. De ondersteunde subset —
+  deck-/diakleuren en achtergrondafbeeldingen, `fit`/`contain`, zes
+  beeldfilters, passende koppen, offline emoji en Markdown-kop/voettekst — loopt
+  door dezelfde preview/presenter/rasterketen en de zelfstandige HTML-export.
+  De emoji-tabel is lokaal en compact; er kwam geen netwerkdienst of dependency
+  bij.
+
 - **feat(titel): beeldkolommen naast de titeltekst (#1405).** De titeldia
   ondersteunt nu één of twee afbeeldingskolommen links, rechts of aan beide
   kanten van de titeltekst, via native Marp `![bg left:W%]` / `![bg right:W%]`

@@ -349,6 +349,7 @@ class _BulletsImagePreview extends StatelessWidget {
               ),
               linkColor: AppTheme.parseHexColor(profile.accentColor),
               position: splitRunPosition,
+              fit: slide.marpStyle.headingFit,
             ),
           if (hasTitle && bullets.isNotEmpty) SizedBox(height: spacing * scale),
           if (slide.listStyle == ListStyle.checklist &&

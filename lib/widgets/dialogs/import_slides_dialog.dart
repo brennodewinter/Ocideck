@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
+import '../../models/marp_style.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../services/file_service.dart';
@@ -193,6 +194,7 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
       slide: o.slide,
       projectPath: o.pres.deck.projectPath,
       themeProfile: o.pres.deck.themeProfile,
+      deckMarpStyle: o.pres.deck.marpStyle,
     );
 
     SlideDiffDialog.show(
@@ -478,7 +480,12 @@ class _PresentationSection extends StatelessWidget {
             runSpacing: 10,
             children: [
               for (final slide in slides)
-                _slideCardFor(slide, deck.projectPath, deck.themeProfile),
+                _slideCardFor(
+                  slide,
+                  deck.projectPath,
+                  deck.themeProfile,
+                  deck.marpStyle,
+                ),
             ],
           ),
         ],
@@ -486,13 +493,19 @@ class _PresentationSection extends StatelessWidget {
     );
   }
 
-  Widget _slideCardFor(Slide slide, String? projectPath, ThemeProfile theme) {
+  Widget _slideCardFor(
+    Slide slide,
+    String? projectPath,
+    ThemeProfile theme,
+    MarpStyle deckMarpStyle,
+  ) {
     final group = groupByPrimaryId[slide.id];
     final similar = similarByPrimaryId[slide.id] ?? const [];
     return _SlideCard(
       slide: slide,
       projectPath: projectPath,
       themeProfile: theme,
+      deckMarpStyle: deckMarpStyle,
       selected: selectedIds.contains(slide.id),
       occurrences: group?.occurrences ?? const [],
       onTap: () => onToggle(slide),
@@ -509,6 +522,7 @@ class _SlideCard extends StatelessWidget {
   final Slide slide;
   final String? projectPath;
   final ThemeProfile themeProfile;
+  final MarpStyle deckMarpStyle;
   final bool selected;
 
   /// Every place this exact slide was found (length > 1 ⇒ a duplicate hidden
@@ -521,6 +535,7 @@ class _SlideCard extends StatelessWidget {
     required this.slide,
     required this.projectPath,
     required this.themeProfile,
+    required this.deckMarpStyle,
     required this.selected,
     required this.occurrences,
     required this.onTap,
@@ -556,6 +571,7 @@ class _SlideCard extends StatelessWidget {
                         slide: slide,
                         projectPath: projectPath,
                         themeProfile: themeProfile,
+                        deckMarpStyle: deckMarpStyle,
                       ),
                     ),
                   ),

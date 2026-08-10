@@ -55,11 +55,10 @@ extension _MarkdownSerialize on MarkdownService {
   /// a tussentitel is a heading slide too, and carries the same fields.
   void _writeSlideBackground(StringBuffer buf, Slide slide) {
     if (slide.imagePath.isEmpty) return;
-    final bgOptions = [
-      'bg',
-      if (slide.imageSize > 0) '${slide.imageSize}%',
-      if (slide.titleImageOverlay) 'opacity:.45',
-    ].join(' ');
+    final bgOptions = marpBackgroundOptions(
+      slide,
+      overlay: slide.titleImageOverlay,
+    );
     buf.writeln('![$bgOptions](${slide.imagePath})');
     if (!slide.titleImageOverlay) {
       buf.writeln('<!-- ocideck_title_image_overlay: false -->');
@@ -233,7 +232,11 @@ extension _MarkdownSerialize on MarkdownService {
   void _writeTwoImagesSlide(StringBuffer buf, Slide slide) {
     final splitPct = slide.imageSize > 0 ? slide.imageSize : 50;
     if (slide.imagePath.isNotEmpty) {
-      buf.writeln('![bg left:$splitPct%](${slide.imagePath})');
+      final options = marpBackgroundOptions(
+        slide,
+        positional: 'left:$splitPct%',
+      );
+      buf.writeln('![$options](${slide.imagePath})');
     }
     if (slide.imagePath2.isNotEmpty) {
       buf.writeln('![bg right:${100 - splitPct}%](${slide.imagePath2})');
@@ -252,8 +255,7 @@ extension _MarkdownSerialize on MarkdownService {
 
   void _writeImageSlide(StringBuffer buf, Slide slide) {
     if (slide.imagePath.isNotEmpty) {
-      final sizeSpec = slide.imageSize > 0 ? ' ${slide.imageSize}%' : '';
-      buf.writeln('![bg$sizeSpec](${slide.imagePath})');
+      buf.writeln('![${marpBackgroundOptions(slide)}](${slide.imagePath})');
       _writeImageFocus(buf, slide);
       _writeImageAlt(buf, slide);
       _writeImageCaption(buf, slide.imageCaption);
@@ -276,8 +278,9 @@ extension _MarkdownSerialize on MarkdownService {
 
   void _writeQuoteSlide(StringBuffer buf, Slide slide) {
     if (slide.imagePath.isNotEmpty) {
-      final sizeSpec = slide.imageSize > 0 ? '${slide.imageSize}% ' : '';
-      buf.writeln('![bg ${sizeSpec}opacity:.45](${slide.imagePath})');
+      buf.writeln(
+        '![${marpBackgroundOptions(slide, overlay: true)}](${slide.imagePath})',
+      );
       _writeImageCaption(buf, slide.imageCaption);
       buf.writeln();
     }

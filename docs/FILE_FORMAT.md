@@ -166,7 +166,10 @@ keys it owns (every key in the table below, `marp` included) are replaced,
 removed or appended; **every other line stays exactly where it was**, including
 `#` comments, blank lines, indented blocks, the original order and the original
 quoting. A hand-written `header:`, `footer:`, `size:` or `style:` therefore
-survives an OciDeck save unchanged. The implementation is in
+survives an OciDeck save unchanged. OciDeck now also *reads and renders*
+`header` and `footer` (plus the visual keys listed below), without taking
+ownership of their source lines; the author's spelling and quoting still win.
+The implementation is in
 `lib/services/front_matter_merge.dart`; the owned keys live there in one list,
 which the markdown checker (§10) reads as well.
 
@@ -257,15 +260,19 @@ whitespace, special characters such as `: # "`, or a YAML indicator at the
 start). OciDeck does not use a full YAML parser when reading; it uses a simple
 line-by-line parser, so keep front matter flat (one key per line).
 
-Only the keys above (plus `marp`) are read; any other front-matter key — a typo,
-or a Marp option OciDeck does not implement such as `header`, `footer`, `size` or
-`style` — has no effect inside OciDeck, but it is **kept on save** (§3.0, rule
-1). The in-app markdown checker flags such keys with a warning so they are not
-mistaken for having an effect. Likewise, a comment that
-looks like a directive (`<!-- _key: … -->` or `<!-- ocideck_key: … -->`) but is
-not one OciDeck understands — e.g. Marp's per-slide `_paginate`, `_header`,
-`_footer`, `_color` — is dropped and flagged; plain prose comments remain speaker
-notes.
+OciDeck additionally reads these standard Marp visual keys while leaving their
+front-matter lines byte-for-byte under rule 1: `color`, `backgroundColor`,
+`backgroundImage`, `header` and `footer`. Their local forms (`_color`,
+`_backgroundColor`, `_backgroundImage`, `_header`, `_footer`) are read from a
+slide comment and written back as standard Marp syntax. A Marp header/footer is
+the text source for OciDeck's overlay; it does not create a second competing
+footer. Inline Markdown is rendered in both.
+
+Other front-matter keys — a typo, or an option OciDeck does not implement such
+as `size` or `style` — have no effect inside OciDeck but are **kept on save**.
+Likewise, an unknown body directive is retained verbatim and the checker explains
+that it remains editable as source instead of claiming it was ignored. Plain
+prose comments remain speaker notes.
 
 ### 3.6 Retired keys — what moved out of the front matter, and where it went
 
@@ -637,6 +644,21 @@ Additional behavior classes:
 
 When reading, OciDeck recognizes and removes the type and behavior classes; what
 remains is preserved as the slide's custom `cssClass`.
+
+### 4.1 Standard Marp visual directives
+
+The structured renderer recognises `![bg fit]` and `![bg contain]` as contain
+fit, plus the image filters `blur:`, `brightness:`, `saturate:`, `grayscale`,
+`sepia` and `invert`. `<!-- fit -->` directly after a heading enlarges that
+heading. Common `:emoji_shortcodes:` are expanded from a compact, bundled
+Unicode table: rendering never calls an emoji CDN and unknown shortcodes remain
+literal text. These semantics are shared by the app preview, presenter, PDF and
+PPTX raster output; the self-contained HTML export applies the corresponding
+CSS/markup where the HTML path supports that image.
+
+OciDeck models the first background image. A later filtered/contained background
+and every third background layer remain verbatim source so saving cannot flatten
+or silently reinterpret a composition the typed editor cannot represent.
 
 ---
 

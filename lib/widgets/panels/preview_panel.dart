@@ -441,6 +441,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   slide: slide,
                   projectPath: deck.projectPath,
                   themeProfile: deck.themeProfile,
+                  deckMarpStyle: deck.marpStyle,
                   cockpitColorScheme: settings.cockpitColorScheme,
                   onLinkTap: openExternalUrl,
                   slideNumber: idx + 1,
@@ -651,6 +652,7 @@ class FullDeckPreview extends ConsumerWidget {
                     slide: renderSlides[i],
                     projectPath: deck.projectPath,
                     themeProfile: themeProfile,
+                    deckMarpStyle: deck.marpStyle,
                     cockpitColorScheme: ref
                         .watch(settingsProvider)
                         .cockpitColorScheme,

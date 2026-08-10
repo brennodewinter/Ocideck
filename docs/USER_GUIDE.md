@@ -4381,6 +4381,23 @@ switch slides or scope, and only what you **Apply** changes the deck. User notes
 and ink annotations re-anchor to the reparsed slide exactly as in whole-deck
 mode.
 
+### Marp visual directives
+
+Markdown mode is also where you can use standard Marp styling that has no
+separate visual control. OciDeck renders deck-wide `color`, `backgroundColor`,
+`backgroundImage`, `header` and `footer` front matter, and their per-slide local
+forms such as `<!-- _color: red -->`. Marp's `![bg contain blur:2px](image.png)`,
+`<!-- fit -->` after a heading, and common shortcodes such as `:smile:` work in
+the preview, presentation and PDF/PPTX. The self-contained HTML export applies
+contain and filters to its existing image element, but does not add a separate
+general Marpit `![bg]` layout engine.
+
+Headers and footers support inline Markdown. A Marp footer replaces the text of
+the OciDeck footer overlay instead of appearing beside it; `no-footer` still
+hides the overlay for that slide. Emoji are converted to local Unicode glyphs,
+so this feature makes no network request. Syntax OciDeck does not model stays in
+the Markdown unchanged and remains available for source editing.
+
 ### Find & replace
 
 Markdown mode has an **in-editor find bar** (IDE-style) that searches the live

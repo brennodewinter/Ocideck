@@ -174,6 +174,8 @@ Object? slideFieldValue(Slide slide, SlideField field) {
     SlideField.improvementTemplateId => slide.improvementTemplateId,
     SlideField.bullets => slide.bullets,
     SlideField.bullets2 => slide.bullets2,
+    SlideField.preservedMarpLines => slide.preservedMarpLines,
+    SlideField.marpStyle => slide.marpStyle,
     SlideField.showChecklistProgress => slide.showChecklistProgress,
     SlideField.continueNumbering => slide.continueNumbering,
     SlideField.continuesSplit => slide.continuesSplit,
@@ -219,5 +221,6 @@ Object? deckMetaValue(Deck deck, DeckMetaField field) {
     DeckMetaField.playOnly => deck.playOnly,
     DeckMetaField.presentationTargetSeconds => deck.presentationTargetSeconds,
     DeckMetaField.standardsUsed => deck.standardsUsed,
+    DeckMetaField.marpStyle => deck.marpStyle,
   };
 }

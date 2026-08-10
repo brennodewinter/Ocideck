@@ -57,7 +57,7 @@ const Map<String, int> methodLengthBaseline = {
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,
   // +1: Y-01 uit export-markdown voor resolve-at-draw in chart SVG.
-  'lib/services/marp_html_service.dart::MarpHtmlService.build': 132,
+  'lib/services/marp_html_service.dart::MarpHtmlService.build': 129,
   // Procesverbetering engine thumbnails in the add-slide picker.
   // +2 (#1162): de `menu`-case (de wireframe zelf zit in `_paintMenuWireframe`).
   'lib/widgets/dialogs/add_slide_dialog.dart::SlideTypePreviewPainter.paint':
@@ -73,13 +73,13 @@ const Map<String, int> methodLengthBaseline = {
   // valt niet zinvol uit een type→widget-switch te tillen. +1: de
   // onMenuBlockTap-doorgifte voor de klik-om-te-springen.
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
-      163,
+      158,
   // +2 (#1238): ganttScale/ganttSections in copyWith — pure plumbing.
   // +3: tableColumnAlignments-parameter voor GFM-uitlijning.
   // +2: tableNumberColumns-parameter.
   // +4 (#1405): titleColumnLayout/titleColumnWidth in copyWith.
   // +2 (#1407): imageTitleAbove-parameter + doorvoer in copyWith.
-  'lib/models/slide.dart::Slide.copyWith': 163,
+  'lib/models/slide.dart::Slide.copyWith': 162,
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
       188,

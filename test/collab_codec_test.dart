@@ -4,6 +4,7 @@ import 'package:ocideck/collab/collab_transport.dart';
 import 'package:ocideck/collab/deck_op.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/display_window_spec.dart';
+import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/quality_disposition.dart';
 import 'package:ocideck/models/settings.dart';
@@ -49,6 +50,17 @@ Slide maximalSlide() => Slide(
   codeLanguage: 'dart',
   cssClass: 'fancy',
   notes: 'speaker notes',
+  preservedMarpLines: const ['<!-- _unknown: keep -->'],
+  marpStyle: const MarpStyle(
+    color: '#123456',
+    backgroundColor: '#abcdef',
+    backgroundImage: "url('background.png')",
+    header: '**Header**',
+    footer: 'Footer',
+    imageFit: 'contain',
+    imageFilters: ['blur:2px'],
+    headingFit: true,
+  ),
   advanceDuration: 3.5,
   imageSize: 42,
   titleImageOverlay: false,
@@ -132,6 +144,8 @@ void main() {
       expect(r.codeLanguage, s.codeLanguage);
       expect(r.cssClass, s.cssClass);
       expect(r.notes, s.notes);
+      expect(r.preservedMarpLines, s.preservedMarpLines);
+      expect(r.marpStyle, s.marpStyle);
       expect(r.advanceDuration, s.advanceDuration);
       expect(r.imageSize, s.imageSize);
       expect(r.titleImageOverlay, s.titleImageOverlay);
@@ -283,6 +297,20 @@ void main() {
           field: SlideField.tlp,
           value: TlpLevel.green,
         ),
+        const SetSlideField(
+          version: 1,
+          authorId: 'p',
+          slideId: 's',
+          field: SlideField.preservedMarpLines,
+          value: ['<!-- _unknown: keep -->'],
+        ),
+        const SetSlideField(
+          version: 1,
+          authorId: 'p',
+          slideId: 's',
+          field: SlideField.marpStyle,
+          value: MarpStyle(color: '#123456', headingFit: true),
+        ),
       ];
       for (final op in cases) {
         final r = decodeDeckOp(encodeDeckOp(op)) as SetSlideField;
@@ -300,6 +328,17 @@ void main() {
       );
       final r = decodeDeckOp(encodeDeckOp(op)) as SetDeckMeta;
       expect(r.value, PrivacyDisposition.redact);
+    });
+
+    test('SetDeckMeta Marp style survives', () {
+      const op = SetDeckMeta(
+        version: 1,
+        authorId: 'p',
+        field: DeckMetaField.marpStyle,
+        value: MarpStyle(header: '**Header**', footer: 'Footer'),
+      );
+      final r = decodeDeckOp(encodeDeckOp(op)) as SetDeckMeta;
+      expect(r.value, op.value);
     });
 
     test('a decoded op applies to a deck exactly like the original', () {

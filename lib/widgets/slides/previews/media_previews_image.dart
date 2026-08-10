@@ -105,17 +105,30 @@ Widget _resolvedImage(
   Alignment alignment = Alignment.center,
   bool trustedAsset = false,
   String? semanticLabel,
+  bool applyMarpStyle = true,
 }) {
+  final marpStyle = applyMarpStyle
+      ? SlideLinkScope.marpStyleOf(context)
+      : const MarpStyle();
+  if (fit == BoxFit.cover && marpStyle.imageFit == 'contain') {
+    fit = BoxFit.contain;
+  }
+
+  Widget styled(Widget child) =>
+      applyMarpStyle && !trustedAsset && marpStyle.imageFilters.isNotEmpty
+      ? MarpFilteredImage(filters: marpStyle.imageFilters, child: child)
+      : child;
+
   Widget failed(ImagePlaceholderReason reason) =>
       _failedImage(context, trustedAsset, reason);
 
   if (imagePath.isEmpty) {
     // Een leeg pad heeft twee heel verschillende betekenissen, en alleen de
     // scope weet welke: de auteur heeft nog niets gekozen, óf de projectie
-    // heeft de afbeelding weggehaald. Zie `_SlideLinkScope.mediaRedacted`.
+    // heeft de afbeelding weggehaald. Zie `SlideLinkScope.mediaRedacted`.
     return _imagePlaceholder(
       context,
-      _SlideLinkScope.mediaRedactedOf(context)
+      SlideLinkScope.mediaRedactedOf(context)
           ? ImagePlaceholderReason.redacted
           : ImagePlaceholderReason.noImage,
     );
@@ -124,16 +137,18 @@ Widget _resolvedImage(
   // Méégebundelde asset (ingebouwde stijlprofielen, bv. het LibreKAT-logo):
   // rendert op elk platform, ook op web waar geen bestandssysteem bestaat.
   if (isBundledAssetPath(imagePath)) {
-    return Image(
-      image: cappedBundledAssetImage(bundledAssetKey(imagePath)),
-      fit: fit,
-      alignment: alignment,
-      width: double.infinity,
-      height: double.infinity,
-      gaplessPlayback: true,
-      semanticLabel: semanticLabel,
-      errorBuilder: (context, error, stackTrace) =>
-          failed(ImagePlaceholderReason.missing),
+    return styled(
+      Image(
+        image: cappedBundledAssetImage(bundledAssetKey(imagePath)),
+        fit: fit,
+        alignment: alignment,
+        width: double.infinity,
+        height: double.infinity,
+        gaplessPlayback: true,
+        semanticLabel: semanticLabel,
+        errorBuilder: (context, error, stackTrace) =>
+            failed(ImagePlaceholderReason.missing),
+      ),
     );
   }
 
@@ -144,16 +159,18 @@ Widget _resolvedImage(
       ? WebAssetStore.bytesFor(imagePath)
       : null;
   if (memBytes != null) {
-    return Image(
-      image: cappedMemoryImage(memBytes),
-      fit: fit,
-      alignment: alignment,
-      width: double.infinity,
-      height: double.infinity,
-      gaplessPlayback: true,
-      semanticLabel: semanticLabel,
-      errorBuilder: (context, error, stackTrace) =>
-          failed(ImagePlaceholderReason.missing),
+    return styled(
+      Image(
+        image: cappedMemoryImage(memBytes),
+        fit: fit,
+        alignment: alignment,
+        width: double.infinity,
+        height: double.infinity,
+        gaplessPlayback: true,
+        semanticLabel: semanticLabel,
+        errorBuilder: (context, error, stackTrace) =>
+            failed(ImagePlaceholderReason.missing),
+      ),
     );
   }
   if (WebAssetStore.isMemPath(imagePath)) {
@@ -164,37 +181,14 @@ Widget _resolvedImage(
   // bestanden), maar alleen als de remote-media-gate open staat én de URL door
   // de SSRF-gate komt. Anders een placeholder met de URL.
   if (VideoSource.looksLikeUrl(imagePath)) {
-    if (!_SlideLinkScope.allowRemoteMediaOf(context)) {
-      return _remoteBlockedPlaceholder(context, imagePath);
-    }
-    // Resolve the host before fetching: a remote image whose host maps to an
-    // internal address is an SSRF probe (NetGuard.isAllowedMediaUrlResolved),
-    // so gate the NetworkImage on the async result and show a placeholder
-    // while it resolves / when it is refused.
-    return FutureBuilder<bool>(
-      future: NetGuard.isAllowedMediaUrlResolved(imagePath),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          return _imagePlaceholder(context, ImagePlaceholderReason.noImage);
-        }
-        if (snapshot.data != true) {
-          return _remoteBlockedPlaceholder(context, imagePath);
-        }
-        return Image(
-          image: guardedNetworkImage(imagePath),
-          fit: fit,
-          alignment: alignment,
-          width: double.infinity,
-          height: double.infinity,
-          gaplessPlayback: true,
-          semanticLabel: semanticLabel,
-          // Toegestaan door de SSRF-poort, maar het ophalen zelf mislukte (404,
-          // time-out, TLS, omleiding, te groot). "Bestand niet gevonden" zou
-          // hier misleiden — de bron kán bestaan.
-          errorBuilder: (context, error, stackTrace) =>
-              failed(ImagePlaceholderReason.remoteUnavailable),
-        );
-      },
+    return _resolvedRemoteImage(
+      context,
+      imagePath,
+      fit: fit,
+      alignment: alignment,
+      semanticLabel: semanticLabel,
+      styled: styled,
+      failed: failed,
     );
   }
 
@@ -226,22 +220,66 @@ Widget _resolvedImage(
   // slidestrook zet daarbovenop een veel lagere grens via de scope — daar is
   // een thumbnail van ~180 px breed, en op ware grootte kost één telefoonfoto
   // bijna 49 MiB (#612).
-  final maxEdge = _SlideLinkScope.decodeMaxEdgeOf(context);
-  return Image(
-    image: maxEdge == null
-        ? cappedFileImage(File(resolved))
-        : boundedFileImage(File(resolved), maxEdge),
-    fit: fit,
-    alignment: alignment,
-    width: double.infinity,
-    height: double.infinity,
-    semanticLabel: semanticLabel,
-    // Keep showing the previous frame while the next image decodes. Without
-    // this the widget paints nothing for a frame on a source change, which
-    // shows up as a black flash between slides — fatal when recording video.
-    gaplessPlayback: true,
-    errorBuilder: (context, error, stackTrace) =>
-        failed(ImagePlaceholderReason.missing),
+  final maxEdge = SlideLinkScope.decodeMaxEdgeOf(context);
+  return styled(
+    Image(
+      image: maxEdge == null
+          ? cappedFileImage(File(resolved))
+          : boundedFileImage(File(resolved), maxEdge),
+      fit: fit,
+      alignment: alignment,
+      width: double.infinity,
+      height: double.infinity,
+      semanticLabel: semanticLabel,
+      // Keep showing the previous frame while the next image decodes. Without
+      // this the widget paints nothing for a frame on a source change, which
+      // shows up as a black flash between slides — fatal when recording video.
+      gaplessPlayback: true,
+      errorBuilder: (context, error, stackTrace) =>
+          failed(ImagePlaceholderReason.missing),
+    ),
+  );
+}
+
+Widget _resolvedRemoteImage(
+  BuildContext context,
+  String imagePath, {
+  required BoxFit fit,
+  required Alignment alignment,
+  required String? semanticLabel,
+  required Widget Function(Widget child) styled,
+  required Widget Function(ImagePlaceholderReason reason) failed,
+}) {
+  if (!SlideLinkScope.allowRemoteMediaOf(context)) {
+    return _remoteBlockedPlaceholder(context, imagePath);
+  }
+  // Een host die naar een intern adres wijst is een SSRF-poging. Daarom wordt
+  // het netwerkbeeld pas gebouwd nadat de asynchrone DNS-controle slaagt.
+  return FutureBuilder<bool>(
+    future: NetGuard.isAllowedMediaUrlResolved(imagePath),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState != ConnectionState.done) {
+        return _imagePlaceholder(context, ImagePlaceholderReason.noImage);
+      }
+      if (snapshot.data != true) {
+        return _remoteBlockedPlaceholder(context, imagePath);
+      }
+      return styled(
+        Image(
+          image: guardedNetworkImage(imagePath),
+          fit: fit,
+          alignment: alignment,
+          width: double.infinity,
+          height: double.infinity,
+          gaplessPlayback: true,
+          semanticLabel: semanticLabel,
+          // De bron kwam door de SSRF-poort, maar ophalen mislukte. Dat is iets
+          // anders dan een lokaal bestand dat niet bestaat.
+          errorBuilder: (context, error, stackTrace) =>
+              failed(ImagePlaceholderReason.remoteUnavailable),
+        ),
+      );
+    },
   );
 }
 
@@ -256,7 +294,7 @@ Widget _captionOverlay(
   if (text.isEmpty) return const SizedBox.shrink();
   // Een copyright/bijschrift staat rechtsonder; als daar een TLP-markering
   // staat, schuift het bijschrift erboven zodat het niet wordt overschreven.
-  final lift = _SlideLinkScope.hasBottomTlpOf(context)
+  final lift = SlideLinkScope.hasBottomTlpOf(context)
       ? _tlpVerticalReserve(w)
       : 0.0;
   return Positioned(
@@ -324,7 +362,7 @@ RemoteBlockedReason remoteBlockedReasonFor({
 ///    dus geen knop; de melding benoemt het webspecifieke gedrag.
 ///  * **de instelling staat uit** — de gewone desktop-standaard, bewust uit voor
 ///    de privacy. Hier hoort de sprong naar Instellingen → Beveiliging, maar
-///    alleen in de editor-preview (daar zet [_SlideLinkScope.onEnableOnlineMedia]
+///    alleen in de editor-preview (daar zet [SlideLinkScope.onEnableOnlineMedia]
 ///    de callback; in presenter/thumbnails/export/play-only is hij null).
 ///  * **de instelling staat aan maar de URL is geweigerd** — de SSRF-gate wees
 ///    de bron af. Aanzetten is al gebeurd; het ligt aan de URL, dus geen knop.
@@ -332,7 +370,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
   final l10n = context.l10n;
   final reason = remoteBlockedReasonFor(
     isWeb: kIsWeb,
-    allowRemoteMedia: _SlideLinkScope.allowRemoteMediaOf(context),
+    allowRemoteMedia: SlideLinkScope.allowRemoteMediaOf(context),
   );
 
   final String title;
@@ -347,7 +385,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
     case RemoteBlockedReason.settingOff:
       title = l10n.d('Online media staat uit');
       // De sprong naar de instelling bestaat alleen in de editor-preview.
-      onEnable = _SlideLinkScope.onEnableOnlineMediaOf(context);
+      onEnable = SlideLinkScope.onEnableOnlineMediaOf(context);
     case RemoteBlockedReason.urlRejected:
       title = l10n.d('Bron niet toegestaan');
       detail = l10n.d('Deze URL is door de beveiliging geweigerd.');
@@ -429,7 +467,7 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
 /// krijgen als een geredigeerde foto. Zonder deze tak toont een geredigeerde
 /// videoslide een grijs vak met het woord "Video" — hetzelfde gat, andere naam.
 Widget _mediaPlaceholder(BuildContext context, IconData icon, String label) {
-  if (_SlideLinkScope.mediaRedactedOf(context)) {
+  if (SlideLinkScope.mediaRedactedOf(context)) {
     return _redactedMediaPlaceholder(context);
   }
   return Container(

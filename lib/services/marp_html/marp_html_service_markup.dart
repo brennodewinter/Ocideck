@@ -31,15 +31,93 @@ String _slideAnchorIdAttr(String slideMarkdown) {
   return anchor == null ? '' : ' id="$anchor"';
 }
 
-/// Inline style carrying a title slide's per-slide title-text-colour override
-/// (`ocideck_title_text_color`) as a CSS custom property, or `''` when the
-/// slide sets none. The title `h1` reads this variable (with the theme's title
-/// colour as fallback), so a slide that dims or lightens its title for a busy
-/// background image keeps that choice in the HTML export — matching the app
-/// preview, presenter and PDF/PPTX, which already honour the override.
-String _titleColorSectionStyle(String slideMarkdown) {
-  final hex = _titleColorComment.firstMatch(slideMarkdown)?.group(1);
-  return hex == null ? '' : ' style="--ocideck-title-color:$hex"';
+final RegExp _safeCssGradient = RegExp(
+  r'^(?:(?:repeating-)?(?:linear|radial|conic)-gradient)\([#(),.%a-zA-Z0-9+\- ]+\)$',
+);
+final RegExp _safeCssLocalUrl = RegExp(r'''^url\((['"]?)([^'"\)]+)\1\)$''');
+
+String _marpBackgroundImage(String value) {
+  final trimmed = value.trim();
+  if (trimmed == 'none' || _safeCssGradient.hasMatch(trimmed)) return trimmed;
+  final url = _safeCssLocalUrl.firstMatch(trimmed)?.group(2)?.trim();
+  if (url == null || url.isEmpty || url.startsWith('//')) return '';
+  if (url.contains(':') && !url.startsWith('data:image/')) return '';
+  if (url.contains(';') && !url.startsWith('data:image/')) return '';
+  return trimmed;
+}
+
+String _marpCssFilters(List<String> filters) {
+  final safe = <String>[];
+  for (final filter in filters.take(kMaxRenderedMarpImageFilters)) {
+    final parts = filter.toLowerCase().split(':');
+    final name = parts.first;
+    if ({'grayscale', 'sepia', 'invert'}.contains(name) && parts.length == 1) {
+      safe.add('$name(1)');
+      continue;
+    }
+    if (parts.length != 2) continue;
+    final value = parts[1];
+    final cssValue =
+        name == 'blur' && RegExp(r'^\d+(?:\.\d+)?$').hasMatch(value)
+        ? '${value}px'
+        : value;
+    final valid = switch (name) {
+      'blur' => RegExp(
+        r'^(?:0|\d+(?:\.\d+)?(?:px|em|rem))$',
+      ).hasMatch(cssValue),
+      'brightness' ||
+      'saturate' => RegExp(r'^\d+(?:\.\d+)?%?$').hasMatch(cssValue),
+      _ => false,
+    };
+    if (valid) safe.add('$name($cssValue)');
+  }
+  return safe.join(' ');
+}
+
+({String classes, String attributes}) _marpSectionStyle(
+  String slideMarkdown,
+  MarpStyle style,
+) {
+  final css = <String>[];
+  final color = normalizeMarpColor(style.color);
+  final backgroundColor = normalizeMarpColor(style.backgroundColor);
+  final backgroundImage = _marpBackgroundImage(style.backgroundImage);
+  final filter = _marpCssFilters(style.imageFilters);
+  final titleColor = _titleColorComment.firstMatch(slideMarkdown)?.group(1);
+  if (color != null) css.add('color:$color');
+  if (backgroundColor != null) {
+    css.add('background-color:$backgroundColor');
+  }
+  if (backgroundImage.isNotEmpty) {
+    css.add('background-image:$backgroundImage');
+    css.add('background-repeat:no-repeat');
+    css.add('background-position:center');
+    css.add(
+      'background-size:${style.imageFit == 'contain' ? 'contain' : 'cover'}',
+    );
+  }
+  final effectiveTitleColor = titleColor ?? color;
+  if (effectiveTitleColor != null) {
+    css.add('--ocideck-title-color:$effectiveTitleColor');
+  }
+  final attrs = StringBuffer();
+  if (style.imageFit == 'contain') attrs.write(' data-marp-bg-fit="contain"');
+  if (filter.isNotEmpty) {
+    attrs.write(' data-marp-bg-filter="${MarpHtmlService._htmlAttr(filter)}"');
+  }
+  if (css.isNotEmpty) {
+    attrs.write(' style="${MarpHtmlService._htmlAttr(css.join(';'))}"');
+  }
+  return (
+    classes: style.headingFit ? ' marp-heading-fit' : '',
+    attributes: attrs.toString(),
+  );
+}
+
+String _marpChromeSource(String position, String markdown) {
+  if (markdown.isEmpty) return '';
+  return '<span hidden class="marp-$position-source" data-markdown="'
+      '${MarpHtmlService._htmlAttr(markdown)}"></span>\n';
 }
 
 /// Extra `<section>` class that turns this slide's plain bullets into cat-paw
@@ -170,6 +248,8 @@ String _renderSections(
   required CockpitColorScheme cockpitColorScheme,
   required Map<String, String> signature,
   bool continuous = false,
+  MarpStyle deckMarpStyle = const MarpStyle(),
+  List<MarpStyle> slideMarpStyles = const [],
 }) {
   final exportY01 = MarpHtmlService._y01FromExportMarkdown(markdown);
   if (continuous) {
@@ -186,7 +266,19 @@ String _renderSections(
         '</script></section>';
   }
   final sections = StringBuffer();
+  // Deckbrede chrome staat één keer naast de dia's. Een lokale override blijft
+  // in de eigen dia; zonder override valt het renderscript op deze bron terug.
+  // Zo vermenigvuldigt een grote deck-header/footer niet met het dia-aantal.
+  sections
+    ..write(_marpChromeSource('header', deckMarpStyle.header))
+    ..write(_marpChromeSource('footer', deckMarpStyle.footer));
+  var slideIndex = 0;
   for (final slide in MarpHtmlService.marpSlides(markdown)) {
+    final localStyle = slideIndex < slideMarpStyles.length
+        ? slideMarpStyles[slideIndex]
+        : const MarpStyle();
+    final marpStyle = localStyle.inherit(deckMarpStyle);
+    slideIndex++;
     final renderedBlocks = _renderBodyBlocks(
       slide,
       theme: theme,
@@ -195,12 +287,17 @@ String _renderSections(
       exportY01: exportY01,
     );
     final markerClass = _bulletMarkerSectionClass(slide);
-    final titleColorStyle = _titleColorSectionStyle(slide);
     final anchorId = _slideAnchorIdAttr(slide);
+    final marpSection = _marpSectionStyle(slide, marpStyle);
     sections
-      ..write('<section class="slide$markerClass"$anchorId$titleColorStyle>')
+      ..write(
+        '<section class="slide$markerClass${marpSection.classes}"'
+        '$anchorId${marpSection.attributes}>',
+      )
       ..write('<script type="text/markdown">')
+      ..write(_guardMarkdown(_marpChromeSource('header', localStyle.header)))
       ..write(_guardMarkdown(renderedBlocks))
+      ..write(_guardMarkdown(_marpChromeSource('footer', localStyle.footer)))
       ..write('</script></section>');
   }
   return sections.toString();

@@ -5,6 +5,7 @@ import '../models/chart.dart';
 import '../models/cockpit.dart';
 import '../models/deck.dart';
 import '../models/improvement_y01.dart';
+import '../models/marp_style.dart';
 import '../models/privacy_disposition.dart';
 import '../models/quality_disposition.dart';
 import '../models/display_window_spec.dart';
@@ -20,7 +21,9 @@ import '../models/used_tool.dart';
 import '../models/timeline.dart';
 import '../models/video_source.dart';
 import 'front_matter_merge.dart';
+import 'markdown_front_matter_codec.dart';
 import 'markdown_table_codec.dart';
+import 'marp_source_preservation.dart';
 import 'miauw_codec.dart';
 import '../utils/content_hash.dart';
 import '../utils/deck_markdown_dashes.dart';
@@ -37,30 +40,6 @@ part 'markdown_service_fenced.dart';
 part 'markdown_service_serialize.dart';
 
 const _uuid = Uuid();
-
-// Hoisted regexes (zie markdown_service_parse.dart voor het patroon): de
-// YAML-checks draaien per frontmatter-veld.
-//
-// `_reYamlSpecial` dekt naast `:`/`#`/`"` óók elk C0-controlteken (`\n`, `\r`,
-// `\t` en de rest): een kale `\r` in een waarde splitste bij het teruglezen in
-// twee regels — een extra sleutel uit het niets (#876).
-final _reYamlSpecial = RegExp('[:#"\u0000-\u001f]');
-final _reYamlLeadingSigil = RegExp(r'''^[\[\]{}>|*&!%@`,?-]''');
-
-// Woorden die een échte YAML-lezer (Marp, andere tooling) als boolean of null
-// interpreteert; als string bedoeld moeten ze gequote worden, anders leest een
-// geïmporteerde titel `true` als de waarde `true`. OciDeck's eigen parser las ze
-// altijd al als string, maar het bestand hoort ook buiten OciDeck te kloppen.
-final _reYamlReserved = RegExp(
-  r'^(?:true|false|null|yes|no|on|off|~)$',
-  caseSensitive: false,
-);
-
-// C0-controltekens die we niet als `\n`/`\r`/`\t` ontsnappen: die horen niet in
-// een frontmatter-waarde en zouden als rauwe bytes in het `.md` belanden.
-final _reYamlStrippableControl = RegExp(
-  '[\u0000-\u0008\u000b\u000c\u000e-\u001f]',
-);
 
 /// Converts between a [Deck] and the Marp Markdown on disk, in both directions.
 ///
@@ -104,7 +83,7 @@ class MarkdownService {
     // regel uit het geopende bestand blijft staan waar hij stond.
     for (final line in mergeFrontMatter(
       original: deck.frontMatterSource,
-      generated: _frontMatterLines(
+      generated: ownedFrontMatterLines(
         deck,
         includeFormatVersion: includeFormatVersion,
         legacySignatureLines: legacySignatureLines,
@@ -143,128 +122,6 @@ class MarkdownService {
     return buf.toString();
   }
 
-  /// De front-matter-regels die OciDeck zelf schrijft, in de volgorde waarin een
-  /// nieuw bestand ze krijgt. Alleen sleutels uit [kOwnedFrontMatterKeys] horen
-  /// hier thuis; [mergeFrontMatter] weeft ze in wat er al stond.
-  List<String> _frontMatterLines(
-    Deck deck, {
-    required bool includeFormatVersion,
-    bool legacySignatureLines = false,
-  }) {
-    final out = <String>[];
-    out.add('marp: true');
-    if (includeFormatVersion) {
-      out.add(
-        '$kFormatVersionKey: ${persistedFormatVersion(deck.formatVersion)}',
-      );
-    }
-    out.add('theme: ${deck.theme}');
-    if (deck.paginate) out.add('paginate: true');
-    // General presentation metadata (also picked up by Marp where applicable).
-    if (deck.title.isNotEmpty) {
-      out.add('title: ${_yamlScalar(deck.title)}');
-    }
-    if (deck.author.isNotEmpty) {
-      out.add('author: ${_yamlScalar(deck.author)}');
-    }
-    if (deck.organization.isNotEmpty) {
-      out.add('organization: ${_yamlScalar(deck.organization)}');
-    }
-    if (deck.version.isNotEmpty) {
-      out.add('version: ${_yamlScalar(deck.version)}');
-    }
-    if (deck.date.isNotEmpty) {
-      out.add('date: ${_yamlScalar(deck.date)}');
-    }
-    if (deck.description.isNotEmpty) {
-      out.add('description: ${_yamlScalar(deck.description)}');
-    }
-    if (deck.keywords.isNotEmpty) {
-      out.add('keywords: ${_yamlScalar(deck.keywords)}');
-    }
-    if (deck.standardsUsed.isNotEmpty) {
-      // Komma-gescheiden op één regel, net als keywords: de front matter blijft
-      // met het blote oog leesbaar en diff't per regel.
-      out.add('standards: ${_yamlScalar(deck.standardsUsed.join(', '))}');
-    }
-    for (final tool in deck.toolsUsed) {
-      // Eén regel per hulpmiddel: de front matter blijft leesbaar en een
-      // toegevoegde tool is één regel diff.
-      out.add('tool: ${_yamlScalar(tool.format())}');
-    }
-    if (deck.language.isNotEmpty) {
-      out.add('language: ${_yamlScalar(deck.language)}');
-    }
-    if (deck.tlp != TlpLevel.none) {
-      out.add('tlp: ${deck.tlp.key}');
-    }
-    if (deck.privacy != PrivacyDisposition.warn) {
-      out.add('privacy: ${deck.privacy.key}');
-    }
-    if (deck.presentationTargetSeconds > 0) {
-      out.add('ocideck_target_seconds: ${deck.presentationTargetSeconds}');
-    }
-    // Default (true) stays out of the front matter; only persist an opt-out.
-    if (deck.showRehearsalSummary) {
-      out.add('ocideck_show_rehearsal_summary: true'); // #607: opt-in only
-    }
-    // 'Alleen afspelen'-vergrendeling: default (false) blijft uit de front
-    // matter; enkel de opt-in wordt bewaard.
-    if (deck.playOnly) {
-      out.add('ocideck_play_only: true');
-    }
-    if (deck.improvementFramework.isNotEmpty) {
-      out.add(
-        'ocideck_improvement_framework: ${_yamlScalar(deck.improvementFramework)}',
-      );
-    }
-    final y01 = deck.improvementY01Metric;
-    if (y01.name.isNotEmpty) {
-      out.add('ocideck_improvement_y01: ${_yamlScalar(y01.name)}');
-    }
-    if (y01.unit.isNotEmpty) {
-      out.add('ocideck_improvement_y01_unit: ${_yamlScalar(y01.unit)}');
-    }
-    void yNum(String key, double? v) {
-      if (v != null) out.add('$key: $v');
-    }
-
-    yNum('ocideck_improvement_y01_usl', y01.usl);
-    yNum('ocideck_improvement_y01_lsl', y01.lsl);
-    yNum('ocideck_improvement_y01_target', y01.target);
-    yNum('ocideck_improvement_y01_baseline', y01.baseline);
-    yNum('ocideck_improvement_y01_goal', y01.goal);
-    // Het stijlprofiel, de MIAUW-dispositie, het zegel en de handtekening
-    // stonden hier tot 0.1.0. Zie [kRetiredFrontMatterKeys]: wat ondoorzichtig
-    // is of over het document gaat in plaats van erin, hoort ernaast. Voor het
-    // zegel is dat bovendien de voorwaarde om de hash over de bestandsbytes te
-    // laten gaan — zie [DocumentIntegrity].
-    if (legacySignatureLines) _addLegacySignature(out, deck.signature);
-    return out;
-  }
-
-  /// De `ocideck_sig_*`-regels zoals de generator ze tot 0.1.0 schreef.
-  ///
-  /// Nog uitsluitend in dienst van [canonicalContentForSeal]: een zegel van vóór
-  /// 0.1.0 dekte de zichtbare handtekening mee, dus zonder deze regels zou elk
-  /// bestaand verzegeld deck zich na de verhuizing als gemanipuleerd melden. Ze
-  /// komen daarom nooit in een bestand terecht — alleen in de tekst waarover een
-  /// oude hash opnieuw wordt uitgerekend.
-  void _addLegacySignature(List<String> out, DocumentSignature? sig) {
-    if (sig == null || sig.isEmpty) return;
-    void line(String key, String value) {
-      if (value.isNotEmpty) out.add('$key: ${_yamlScalar(value)}');
-    }
-
-    line('ocideck_sig_name', sig.name);
-    line('ocideck_sig_role', sig.role);
-    line('ocideck_sig_cert', sig.certification);
-    line('ocideck_sig_date', sig.date);
-    line('ocideck_sig_statement', sig.statement);
-    line('ocideck_sig_typed', sig.typedSignature);
-    line('ocideck_sig_image', sig.imagePath);
-  }
-
   /// De inhoudstekst waarover een zegel van vóór 0.1.0 werd gehasht: de
   /// markdown van het deck zonder de zegelvelden, zonder de formaatversie en
   /// zonder de front matter van de gebruiker.
@@ -298,67 +155,6 @@ class MarkdownService {
       legacySignatureLines: true,
       deck.copyWith(frontMatterSource: const []),
     );
-  }
-
-  /// Render a string as a YAML scalar, quoting/escaping only when needed so the
-  /// front matter stays readable.
-  String _yamlScalar(String v) {
-    // Strip eerst de controltekens die we niet ontsnappen (C0 behalve \t \n \r):
-    // ze horen niet in een frontmatter-waarde en zouden rauwe bytes worden.
-    final clean = v.replaceAll(_reYamlStrippableControl, '');
-    final needsQuote =
-        clean.isEmpty ||
-        clean != clean.trim() ||
-        _reYamlSpecial.hasMatch(clean) ||
-        _reYamlLeadingSigil.hasMatch(clean) ||
-        _reYamlReserved.hasMatch(clean);
-    if (!needsQuote) return clean;
-    final escaped = clean
-        .replaceAll('\\', r'\\')
-        .replaceAll('"', r'\"')
-        .replaceAll('\r', r'\r')
-        .replaceAll('\t', r'\t')
-        .replaceAll('\n', r'\n');
-    return '"$escaped"';
-  }
-
-  /// Inverse of [_yamlScalar] for the simple line-based front matter parser.
-  String _parseScalar(String raw) {
-    final s = raw.trim();
-    if (s.length >= 2 && s.startsWith('"') && s.endsWith('"')) {
-      return _unescape(s.substring(1, s.length - 1));
-    }
-    return s;
-  }
-
-  String _unescape(String s) {
-    final out = StringBuffer();
-    for (var i = 0; i < s.length; i++) {
-      if (s[i] == r'\'[0] && i + 1 < s.length) {
-        final next = s[i + 1];
-        if (next == 'n') {
-          out.write('\n');
-          i++;
-        } else if (next == 'r') {
-          out.write('\r');
-          i++;
-        } else if (next == 't') {
-          out.write('\t');
-          i++;
-        } else if (next == '"') {
-          out.write('"');
-          i++;
-        } else if (next == r'\'[0]) {
-          out.write(r'\');
-          i++;
-        } else {
-          out.write(s[i]);
-        }
-      } else {
-        out.write(s[i]);
-      }
-    }
-    return out.toString();
   }
 
   /// Write [rows] as a GitHub-flavoured markdown table (first row = header).
@@ -578,7 +374,12 @@ class MarkdownService {
     }
 
     buf.writeln();
-    return buf.toString();
+    final generated = buf.toString();
+    if (!slide.marpStyle.headingFit) return generated;
+    return generated.replaceFirstMapped(
+      RegExp(r'^(#{1,6}\s+.*)$', multiLine: true),
+      (match) => '${match.group(1)}\n<!-- fit -->',
+    );
   }
 
   // ── Parsing ─────────────────────────────────────────────────────────────────
@@ -694,7 +495,7 @@ class MarkdownService {
         case 'theme':
           theme = value;
         case 'title':
-          title = _parseScalar(value);
+          title = parseMarkdownYamlScalar(value);
       }
     }
     return (marp: marp, theme: theme, title: title);
@@ -713,6 +514,28 @@ void _writeSlideDirectives(
 ) {
   if (classes.isNotEmpty) {
     buf.writeln('<!-- _class: ${classes.join(' ')} -->');
+  }
+  if (slide.marpStyle.hasColor) {
+    buf.writeln('<!-- _color: ${slide.marpStyle.color} -->');
+  }
+  if (slide.marpStyle.hasBackgroundColor) {
+    buf.writeln(
+      '<!-- _backgroundColor: ${slide.marpStyle.backgroundColor} -->',
+    );
+  }
+  if (slide.marpStyle.hasBackgroundImage) {
+    buf.writeln(
+      '<!-- _backgroundImage: ${slide.marpStyle.backgroundImage} -->',
+    );
+  }
+  if (slide.marpStyle.hasHeader) {
+    buf.writeln('<!-- _header: ${slide.marpStyle.header} -->');
+  }
+  if (slide.marpStyle.hasFooter) {
+    buf.writeln('<!-- _footer: ${slide.marpStyle.footer} -->');
+  }
+  for (final line in slide.preservedMarpLines) {
+    buf.writeln(line);
   }
   // Finding-group linkage (PENTEST_MIAUW §3.1): a shared id + role tie a
   // header card to its detail/evidence slides. Written for any slide that

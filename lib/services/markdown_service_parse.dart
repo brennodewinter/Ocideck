@@ -120,6 +120,31 @@ class _BodyParse {
   bool inSplitImageDiv = false;
 }
 
+/// Title-column fields derived from native `bg left/right` Marp syntax.
+({TitleColumnLayout layout, int width, int imageSize}) _titleColumnFields(
+  SlideType type,
+  bool sawLeft,
+  bool sawRight,
+  int leftWidth,
+  int rightWidth,
+  int imageSize,
+) {
+  if (type != SlideType.title || (!sawLeft && !sawRight)) {
+    return (layout: TitleColumnLayout.none, width: 25, imageSize: imageSize);
+  }
+  final layout = sawLeft && sawRight
+      ? TitleColumnLayout.both
+      : sawLeft
+      ? TitleColumnLayout.left
+      : TitleColumnLayout.right;
+  final parsedWidth = sawLeft ? leftWidth : rightWidth;
+  return (
+    layout: layout,
+    width: parsedWidth == 0 ? 25 : parsedWidth,
+    imageSize: 0,
+  );
+}
+
 extension _MarkdownParse on MarkdownService {
   Deck _doParse(String markdown, {String? filePath, String fileHash = ''}) {
     final fm = _parseFrontMatter(markdown);
@@ -143,6 +168,7 @@ extension _MarkdownParse on MarkdownService {
       title: title,
       theme: fm.theme,
       paginate: fm.paginate,
+      marpStyle: fm.marpStyle,
       slides: slides.isEmpty ? [Slide.create(SlideType.title)] : slides,
       projectPath: projectPath,
       author: fm.author,
@@ -335,11 +361,20 @@ extension _MarkdownParse on MarkdownService {
       aiAssistedFields: link.aiAssistedFields,
       privacy: d.privacy,
       quality: d.quality,
+      preservedMarpLines: d.preservedMarpLines,
+      marpStyle: d.marpStyle,
     );
   }
 
   Slide? _parseBlock(String block) {
     if (block.isEmpty) return null;
+    if (requiresWholeMarpBlockPreservation(block)) {
+      return Slide(
+        id: _uuid.v4(),
+        type: SlideType.freeMarkdown,
+        customMarkdown: block,
+      );
+    }
 
     // Lift the crop focal points and finding-group link out first, so those
     // directives are stripped before the generic comment scan would otherwise
@@ -409,23 +444,14 @@ extension _MarkdownParse on MarkdownService {
       paragraph: body.paragraph,
     );
 
-    // Derive title-column layout from bg-side detection (#1405), only for title
-    // slides. In column mode imageSize is forced to 0 (the columns ARE the
-    // background; the full-bleed zoom control does not apply).
-    var titleColumnLayout = TitleColumnLayout.none;
-    var titleColumnWidth = 25;
-    var effectiveImageSize = imageSize;
-    if (type == SlideType.title && (body.sawBgLeft || body.sawBgRight)) {
-      titleColumnLayout = body.sawBgLeft && body.sawBgRight
-          ? TitleColumnLayout.both
-          : body.sawBgLeft
-          ? TitleColumnLayout.left
-          : TitleColumnLayout.right;
-      titleColumnWidth = body.sawBgLeft ? body.bgLeftWidth : body.bgRightWidth;
-      if (titleColumnWidth == 0) titleColumnWidth = 25;
-      effectiveImageSize = 0;
-    }
-
+    final titleColumns = _titleColumnFields(
+      type,
+      body.sawBgLeft,
+      body.sawBgRight,
+      body.bgLeftWidth,
+      body.bgRightWidth,
+      imageSize,
+    );
     final showLogo = !classTokens.contains('no-logo');
     final showFooter = !classTokens.contains('no-footer');
     final imageTitleAbove =
@@ -474,12 +500,12 @@ extension _MarkdownParse on MarkdownService {
       imageFocalY: focus.fy,
       imageFocalX2: focus.fx2,
       imageFocalY2: focus.fy2,
-      imageSize: effectiveImageSize,
+      imageSize: titleColumns.imageSize,
       titleImageOverlay: d.titleImageOverlay,
       imageTitleAbove: imageTitleAbove,
       titleTextColorOverride: d.titleTextColorOverride,
-      titleColumnLayout: titleColumnLayout,
-      titleColumnWidth: titleColumnWidth,
+      titleColumnLayout: titleColumns.layout,
+      titleColumnWidth: titleColumns.width,
       bulletMarkerOverride: d.bulletMarkerOverride,
       videoPath: body.videoPath,
       videoAutoplay: body.videoAutoplay,
@@ -497,6 +523,8 @@ extension _MarkdownParse on MarkdownService {
       ),
       cssClass: effectiveClass,
       notes: d.notes,
+      preservedMarpLines: d.preservedMarpLines,
+      marpStyle: d.marpStyle,
       advanceDuration: d.advanceDuration,
       showLogo: showLogo,
       showFooter: showFooter,

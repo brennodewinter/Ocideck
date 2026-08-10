@@ -37,6 +37,11 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // NO EXECUTABLE LINES: `slide_taxonomy.dart` is a `part` containing only
+  // public enum declarations. Their persisted names are asserted directly in
+  // slide_taxonomy_test.dart, but lcov emits no record for declaration-only
+  // parts.
+  'lib/models/slide_taxonomy.dart',
   // UNTESTABLE NATIVE BINDING (F3, ketenkeuring-flutter-webrtc.md; user-approved
   // new category, 2026-08-02): `meeting_media_core_webrtc.dart` is the one thin
   // binding to `flutter_webrtc` (libwebrtc). It differs from a platform half —
