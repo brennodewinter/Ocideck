@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.4.2+16",
-  "documentNamespace": "https://ocideck.app/spdx/150ef2d9-56bd-5ee8-8780-ed6dcf1338fd",
+  "documentNamespace": "https://ocideck.app/spdx/c8841ab6-d9d8-5404-81c9-aa144d1ff548",
   "creationInfo": {
-    "created": "2026-08-10T14:33:48.628099Z",
+    "created": "2026-08-10T19:13:00.684230Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -1262,23 +1262,23 @@
     {
       "SPDXID": "SPDXRef-56-flutter-secure-storage-linux",
       "name": "flutter_secure_storage_linux",
-      "versionInfo": "3.0.1",
+      "versionInfo": "3.0.2",
       "supplier": "Organization: mogol",
-      "downloadLocation": "https://pub.dev/packages/flutter_secure_storage_linux/versions/3.0.1",
+      "downloadLocation": "https://pub.dev/packages/flutter_secure_storage_linux/versions/3.0.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "a5f35ddab43cf5c8215d2feb4ce1957851f28c5c37e6f04335066a0602087bf5"
+          "checksumValue": "76fa9c841b3b1619fc5b5bc36efc7d158fa2356f223b6caeb1d0c80a54168546"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/flutter_secure_storage_linux@3.0.1"
+          "referenceLocator": "pkg:pub/flutter_secure_storage_linux@3.0.2"
         }
       ]
     },

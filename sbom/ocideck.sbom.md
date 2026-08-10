@@ -79,7 +79,7 @@ The JSON documents carry **734 dependency relations** between these components: 
 | flutter_riverpod _(direct main)_ | 3.4.2 | MIT | rrousselGit | `pkg:pub/flutter_riverpod@3.4.2` |
 | flutter_secure_storage _(direct main)_ | 10.3.1 | BSD-3-Clause | mogol | `pkg:pub/flutter_secure_storage@10.3.1` |
 | flutter_secure_storage_darwin _(transitive)_ | 0.3.2 | BSD-3-Clause | juliansteenbakker | `pkg:pub/flutter_secure_storage_darwin@0.3.2` |
-| flutter_secure_storage_linux _(transitive)_ | 3.0.1 | BSD-3-Clause | mogol | `pkg:pub/flutter_secure_storage_linux@3.0.1` |
+| flutter_secure_storage_linux _(transitive)_ | 3.0.2 | BSD-3-Clause | mogol | `pkg:pub/flutter_secure_storage_linux@3.0.2` |
 | flutter_secure_storage_platform_interface _(transitive)_ | 2.0.3 | BSD-3-Clause | mogol | `pkg:pub/flutter_secure_storage_platform_interface@2.0.3` |
 | flutter_secure_storage_web _(transitive)_ | 2.1.1 | BSD-3-Clause | mogol | `pkg:pub/flutter_secure_storage_web@2.1.1` |
 | flutter_secure_storage_windows _(transitive)_ | 4.1.0 | BSD-3-Clause | mogol | `pkg:pub/flutter_secure_storage_windows@4.1.0` |

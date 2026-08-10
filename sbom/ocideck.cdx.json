@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:e27f4f2a-4f3d-51c2-8672-a9b894dc4a39",
+  "serialNumber": "urn:uuid:dbb0d32b-e736-5430-82f1-7804b041f0b4",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-10T14:33:48.628099Z",
+    "timestamp": "2026-08-10T19:13:00.684230Z",
     "tools": {
       "components": [
         {
@@ -2346,7 +2346,7 @@
       ]
     },
     {
-      "bom-ref": "pkg:pub/flutter_secure_storage_linux@3.0.1",
+      "bom-ref": "pkg:pub/flutter_secure_storage_linux@3.0.2",
       "type": "library",
       "supplier": {
         "name": "mogol",
@@ -2355,8 +2355,8 @@
         ]
       },
       "name": "flutter_secure_storage_linux",
-      "version": "3.0.1",
-      "purl": "pkg:pub/flutter_secure_storage_linux@3.0.1",
+      "version": "3.0.2",
+      "purl": "pkg:pub/flutter_secure_storage_linux@3.0.2",
       "licenses": [
         {
           "license": {
@@ -2367,13 +2367,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "a5f35ddab43cf5c8215d2feb4ce1957851f28c5c37e6f04335066a0602087bf5"
+          "content": "76fa9c841b3b1619fc5b5bc36efc7d158fa2356f223b6caeb1d0c80a54168546"
         }
       ],
       "externalReferences": [
         {
           "type": "distribution",
-          "url": "https://pub.dev/packages/flutter_secure_storage_linux/versions/3.0.1"
+          "url": "https://pub.dev/packages/flutter_secure_storage_linux/versions/3.0.2"
         }
       ],
       "properties": [
@@ -9534,7 +9534,7 @@
       "ref": "pkg:pub/flutter_secure_storage@10.3.1",
       "dependsOn": [
         "pkg:pub/flutter_secure_storage_darwin@0.3.2",
-        "pkg:pub/flutter_secure_storage_linux@3.0.1",
+        "pkg:pub/flutter_secure_storage_linux@3.0.2",
         "pkg:pub/flutter_secure_storage_platform_interface@2.0.3",
         "pkg:pub/flutter_secure_storage_web@2.1.1",
         "pkg:pub/flutter_secure_storage_windows@4.1.0",
@@ -9550,7 +9550,7 @@
       ]
     },
     {
-      "ref": "pkg:pub/flutter_secure_storage_linux@3.0.1",
+      "ref": "pkg:pub/flutter_secure_storage_linux@3.0.2",
       "dependsOn": [
         "pkg:pub/flutter_secure_storage_platform_interface@2.0.3",
         "sdk:flutter@0.0.0"
