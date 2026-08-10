@@ -30,6 +30,48 @@ void main() {
     });
   });
 
+  group('role-aware contrast', () {
+    test('accepts a subtle checklist colour that clears non-text 3:1', () {
+      final deck = Deck(
+        title: 'T',
+        themeProfile: const ThemeProfile(checklistUncheckedColor: '#949494'),
+        slides: [
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(listStyle: ListStyle.checklist, bullets: const ['Taak']),
+        ],
+      );
+
+      expect(
+        const SlideQualityAnalyzer()
+            .analyze(deck)
+            .issues
+            .where((i) => i.field == 'checklistUncheckedColor'),
+        isEmpty,
+      );
+    });
+
+    test('still rejects a genuinely invisible checklist colour', () {
+      final deck = Deck(
+        title: 'T',
+        themeProfile: const ThemeProfile(checklistUncheckedColor: '#EEEEEE'),
+        slides: [
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(listStyle: ListStyle.checklist, bullets: const ['Taak']),
+        ],
+      );
+
+      expect(
+        const SlideQualityAnalyzer()
+            .analyze(deck)
+            .issues
+            .any((i) => i.field == 'checklistUncheckedColor'),
+        isTrue,
+      );
+    });
+  });
+
   group('configurable contrast threshold', () {
     // #808080 on white is ~3.9:1 — below WCAG AA (4.5) but above 3.0, exactly
     // the band a user might accept by relaxing the threshold.

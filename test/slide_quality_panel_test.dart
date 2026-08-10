@@ -226,8 +226,8 @@ void main() {
   );
 
   // #1280 — de knop mag alleen verschijnen als de motor op dít deck werkelijk
-  // iets wegwerkt, en het label mag niet "alle problemen" beloven terwijl
-  // contrast/privacy/alt-tekst menselijk oordeel vragen en blijven staan.
+  // iets wegwerkt. Privacy en alt-tekst blijven menselijk oordeel; veilig
+  // corrigeerbaar themacontrast hoort juist bij de automatische route.
   //
   // Het thema is de bron van de contrastmelding, en [DeckNotifier.loadDeck]
   // overschrijft het themaprofiel met het actieve profiel van de FileService —
@@ -248,8 +248,7 @@ void main() {
   }
 
   testWidgets(
-    'gemengd deck: de knop lost het structurele op, de contrastmelding blijft '
-    'staan en de knop verdwijnt (#1280)',
+    'gemengd deck: de knop lost structuur en themacontrast samen op (#1280)',
     (tester) async {
       final notifier = badThemeNotifier(overfullDeck());
       AppLocalizations.setActiveLanguageCode('nl');
@@ -296,10 +295,9 @@ void main() {
 
       // De te volle dia is gesplitst (structureel opgelost)...
       expect(container.read(deckProvider).deck!.slides.length, greaterThan(1));
-      // ...de contrastmelding blijft staan (vraagt om menselijk oordeel)...
-      expect(contrastVisible(), isTrue);
-      // ...en de knop is weg, want er valt niets structureels meer te doen: de
-      // knop belooft niet langer iets wat hij niet waarmaakt.
+      // ...en het themacontrast is met dezelfde ene ongedaan-stap gecorrigeerd.
+      expect(contrastVisible(), isFalse);
+      // Daarna is de knop weg: er valt niets automatisch meer te doen.
       expect(
         find.widgetWithText(TextButton, 'Los automatisch op wat kan'),
         findsNothing,

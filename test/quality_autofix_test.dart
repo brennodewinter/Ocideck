@@ -120,6 +120,36 @@ void main() {
       expect(identical(result.deck, deck), isTrue);
     });
 
+    test('corrigeert contrast met een minimale themakleurverschuiving', () {
+      final deck = Deck(
+        title: 'T',
+        themeProfile: const ThemeProfile(
+          textColor: '#F0F0F0',
+          accentColor: '#EEEEEE',
+        ),
+        slides: [
+          Slide.create(SlideType.bullets).copyWith(bullets: const ['Leesbaar']),
+        ],
+      );
+
+      final result = fixAllStructuralQualityIssues(deck);
+
+      expect(result.applied, 1);
+      expect(result.deck.themeProfile.textColor, isNot('#F0F0F0'));
+      expect(result.deck.themeProfile.accentColor, isNot('#EEEEEE'));
+      expect(
+        analyzer
+            .analyze(result.deck)
+            .issues
+            .where(
+              (i) =>
+                  i.isDeckWide && i.category == SlideQualityCategory.contrast,
+            ),
+        isEmpty,
+      );
+      expect(fixAllStructuralQualityIssues(result.deck).applied, 0);
+    });
+
     test('is idempotent: een tweede keer draaien doet niets meer', () {
       final deck = deckOf([
         Slide.create(

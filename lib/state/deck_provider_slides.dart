@@ -124,12 +124,12 @@ extension DeckNotifierSlides on DeckNotifier {
 
   /// Werkt alle automatisch én veilig oplosbare kwaliteitsproblemen in één keer
   /// weg (#915), met steeds de meest veilige oplossing: te volle dia's splitsen,
-  /// meerzins-bullets opknippen, meegesleepte pagina's losmaken. Nooit wordt
-  /// inhoud van een dia gehaald; wat menselijk oordeel vraagt blijft staan.
+  /// meerzins-bullets opknippen, pagina's losmaken en themakleuren minimaal naar
+  /// voldoende contrast verschuiven. Inhoud blijft behouden.
   ///
   /// Eén mutatie, dus één ongedaan-stap — wie de knop per ongeluk raakt draait
   /// alles met één keer terug. Geeft terug hoeveel structurele fixes zijn
-  /// toegepast (0 = niets automatisch op te lossen; het deck blijft dan gelijk).
+  /// toegepast (een kleurcorrectieronde telt als één; 0 = niets op te lossen).
   int fixAllStructuralIssues() {
     final deck = currentState.deck;
     if (deck == null) return 0;

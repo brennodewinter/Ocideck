@@ -227,9 +227,9 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
 
   /// De "wie niet wil nadenken"-knop (#915): werkt in één klik alle structureel
   /// en veilig oplosbare problemen weg, met steeds de veiligste keuze. Wat
-  /// overblijft (alt-tekst, themacontrast, privacy) vraagt om een menselijke
-  /// keuze en blijft gewoon in de lijst staan — daarom een terugkoppeling die
-  /// dat ook zegt in plaats van "alles opgelost".
+  /// overblijft (zoals alt-tekst en privacy) vraagt om een menselijke keuze en
+  /// blijft gewoon in de lijst staan — daarom een terugkoppeling die dat ook
+  /// zegt in plaats van "alles opgelost".
   void _fixAllProblems() {
     final applied = ref.read(deckProvider.notifier).fixAllStructuralIssues();
     if (!mounted) return;
@@ -319,7 +319,8 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                   // privacymeldingen — of een woord-melding op een dia die te
                   // weinig bullets heeft om te splitsen — heeft geen toepasbare
                   // fix, en dan zou de knop een belofte doen die hij niet
-                  // waarmaakt. [hasApplicableStructuralFix] spiegelt de echte
+                  // waarmaakt. Ook veilig corrigeerbaar themacontrast telt mee.
+                  // [hasApplicableStructuralFix] spiegelt de echte
                   // motorpoort, zodat knop zichtbaar ⇔ er wordt ook echt gefixt.
                   if (deck != null && hasApplicableStructuralFix(deck))
                     TextButton.icon(
