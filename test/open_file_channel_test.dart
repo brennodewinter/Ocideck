@@ -17,12 +17,16 @@ void main() {
   final opened = <List<String>>[];
   final pickCalls = <Map<Object?, Object?>>[];
   String? pickResult;
+  final saveCalls = <Map<Object?, Object?>>[];
+  String? saveResult;
 
   setUp(() {
     launchFiles = null;
     opened.clear();
     pickCalls.clear();
     pickResult = null;
+    saveCalls.clear();
+    saveResult = null;
     // De inbound-handler is globaal per kanaalnaam; zonder wissen luistert de
     // activate() van een vorig testgeval hier nog mee.
     channel.setMethodCallHandler(null);
@@ -33,6 +37,10 @@ void main() {
       if (call.method == 'pickFile') {
         pickCalls.add(Map<Object?, Object?>.from(call.arguments as Map));
         return pickResult;
+      }
+      if (call.method == 'saveFile') {
+        saveCalls.add(Map<Object?, Object?>.from(call.arguments as Map));
+        return saveResult;
       }
       return null;
     });
@@ -145,6 +153,53 @@ void main() {
       // onvoorwaardelijk een throw en viel de Linux-gate om terwijl macOS groen
       // bleef (main-drift: alleen de Linux-gate draait de suite op Linux).
       expect(await pickUnfilteredMacFile(dialogTitle: 'x'), isNull);
+    }
+  });
+
+  // saveMacFile is het opslaan-spiegelbeeld van pickUnfilteredMacFile: dezelfde
+  // kanaalroute, dezelfde contracten. Getest op elk platform — op niet-macOS
+  // short-circuit de functie naar null vóór het kanaal.
+  test('saveMacFile stuurt titel, bestandsnaam en startmap mee', () async {
+    saveResult = '/tmp/gekozen.md';
+    final path = await saveMacFile(
+      dialogTitle: 'Opslaan als',
+      fileName: 'Kwartaal_Update.md',
+      initialDirectory: '/tmp',
+    );
+    if (Platform.isMacOS) {
+      expect(path, '/tmp/gekozen.md');
+      expect(saveCalls, hasLength(1));
+      expect(saveCalls.single['dialogTitle'], 'Opslaan als');
+      expect(saveCalls.single['fileName'], 'Kwartaal_Update.md');
+      expect(saveCalls.single['initialDirectory'], '/tmp');
+    } else {
+      expect(path, isNull);
+      expect(saveCalls, isEmpty);
+    }
+  });
+
+  test('saveMacFile bij annuleren: null', () async {
+    saveResult = null;
+    final path = await saveMacFile(dialogTitle: 'x', fileName: 'demo.md');
+    expect(path, isNull);
+  });
+
+  test('saveMacFile bij MissingPluginException gooit door', () async {
+    binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, (
+      call,
+    ) async {
+      throw MissingPluginException('geen native handler');
+    });
+    if (Platform.isMacOS) {
+      await expectLater(
+        () => saveMacFile(dialogTitle: 'x', fileName: 'demo.md'),
+        throwsA(isA<MissingPluginException>()),
+      );
+    } else {
+      // Buiten macOS short-circuit saveMacFile naar null vóór het kanaal, dus
+      // de fout kan hem niet bereiken (zelfde splitsing als pickUnfilteredMacFile
+      // hierboven — anders valt de Linux-gate om).
+      expect(await saveMacFile(dialogTitle: 'x', fileName: 'demo.md'), isNull);
     }
   });
 }

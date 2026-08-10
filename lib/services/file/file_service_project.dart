@@ -4,6 +4,48 @@
 // into an extension on FileService, same library, no behaviour change.
 part of '../file_service.dart';
 
+/// Het opslaan-spiegelbeeld van `_pickPathGated` (file_service_import.dart):
+/// kies een bestemmingspad voor het opslaan van een deck, op macOS via de
+/// eigen `NSSavePanel`-kiezer.
+///
+/// `file_picker.saveFile` gebruikt op macOS `NSSavePanel.beginSheetModal` op
+/// het Flutter-venster. Die sheet erft de `CFBundleDocumentTypes`-filter van
+/// de app en verschijnt niet betrouwbaar — precies de reden dat
+/// `pickMarkdownFile` via `pickUnfilteredMacFile` gaat. Het opslaan-pad kreeg
+/// die behandeling voorheen niet, waardoor "Kies bestandsnaam…" na de
+/// bestemmingsdialoog niets deed: de sheet verscheen niet, `saveFile` keerde
+/// stil terug naar `null`, en `saveAs` rapporteerde `false` zonder melding.
+///
+/// [picker] is de injecteerbare systeem-kiezer (`FilePicker.saveFile` in
+/// productie), zodat dit onder test niet van het echte paneel afhangt.
+///
+/// null = de gebruiker annuleerde — níet doorvallen naar [picker], anders
+/// opent er een tweede kiezer (zelfde reden als `_pickPathGated`). Alleen een
+/// oude build zonder native handler (`MissingPluginException`) valt terug.
+Future<String?> _saveDestinationGated({
+  required SaveDestinationPicker picker,
+  required String dialogTitle,
+  required String fileName,
+  String? initialDirectory,
+}) async {
+  if (!kIsWeb && Platform.isMacOS) {
+    try {
+      return await saveMacFile(
+        dialogTitle: dialogTitle,
+        fileName: fileName,
+        initialDirectory: initialDirectory,
+      );
+    } on MissingPluginException {
+      // Oude build zonder native handler: val terug op file_picker.
+    }
+  }
+  return picker(
+    dialogTitle: dialogTitle,
+    fileName: fileName,
+    initialDirectory: initialDirectory,
+  );
+}
+
 extension _FileServiceProject on FileService {
   Future<({Deck deck, List<String> chartWarnings})> _writeProject(
     Deck deck,
