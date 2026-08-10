@@ -110,8 +110,8 @@ String nearestContrastingHex(
     return Color.lerp(fg, target, math.min(1, high + 1 / 255))!;
   }
 
-  final dark = candidate(const Color(0xFF000000));
-  final light = candidate(const Color(0xFFFFFFFF));
+  final dark = candidate(const Color.fromARGB(255, 0, 0, 0));
+  final light = candidate(const Color.fromARGB(255, 255, 255, 255));
   if (dark == null && light == null) return foreground;
   if (dark == null) return _hex(light!);
   if (light == null) return _hex(dark);
