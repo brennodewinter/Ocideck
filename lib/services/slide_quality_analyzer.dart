@@ -483,7 +483,10 @@ class SlideQualityAnalyzer {
     }) {
       final ratio = hexContrastRatio(foreground, theme.slideBackgroundColor);
       if (ratio == null) return;
-      final aaThreshold = minContrastRatio;
+      // Checkbox outlines/checkmarks are non-text UI graphics. WCAG 1.4.11
+      // requires 3:1 here; treating them as body copy (4.5:1) produced noisy
+      // warnings for intentionally subtle, but perfectly visible controls.
+      final aaThreshold = math.min(kWcagAaLargeText, minContrastRatio);
       if (ratio >= aaThreshold) return;
 
       issues.add(

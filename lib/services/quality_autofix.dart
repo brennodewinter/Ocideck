@@ -3,6 +3,7 @@ import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
 import '../utils/bullet_fixes.dart';
+import '../utils/color_contrast.dart';
 import 'slide_quality_analyzer.dart';
 
 /// Uitkomst van [fixAllStructuralQualityIssues]: het opgeschoonde deck en
@@ -43,8 +44,10 @@ bool isStructurallyAutofixable(SlideQualityIssueKind kind) =>
 ///  2. te volle dia's splitsen over pagina's;
 ///  3. een meegesleepte pagina uit zijn gesplitste reeks losmaken.
 ///
-/// Nooit wordt inhoud van een dia gehaald. Wat menselijk oordeel vraagt
-/// (alt-tekst, themacontrast, privacy) blijft staan en wordt gewoon gemeld.
+/// Nooit wordt inhoud van een dia gehaald. Contrastkleuren worden wel veilig
+/// gecorrigeerd: iedere kleur verschuift zo weinig mogelijk naar zwart of wit
+/// totdat zij voor haar werkelijke visuele rol aan de ingestelde norm voldoet.
+/// Wat echt menselijk oordeel vraagt (alt-tekst en privacy) blijft staan.
 ///
 /// De motor draait als een vast punt: analyseer, pas de eerste toepasbare fix
 /// toe, en herhaal tot er niets meer verandert. Eén fix per ronde, met een verse
@@ -66,6 +69,11 @@ QualityAutofixResult fixAllStructuralQualityIssues(
     current = next;
     applied++;
   }
+  final contrastFixed = _fixThemeContrast(current, analyzer);
+  if (contrastFixed != null) {
+    current = contrastFixed;
+    applied++;
+  }
   return (deck: current, applied: applied);
 }
 
@@ -81,7 +89,104 @@ QualityAutofixResult fixAllStructuralQualityIssues(
 bool hasApplicableStructuralFix(
   Deck deck, {
   SlideQualityAnalyzer analyzer = const SlideQualityAnalyzer(),
-}) => _applyNextFix(deck, analyzer) != null;
+}) =>
+    _applyNextFix(deck, analyzer) != null ||
+    _fixThemeContrast(deck, analyzer) != null;
+
+Deck? _fixThemeContrast(Deck deck, SlideQualityAnalyzer analyzer) {
+  var theme = deck.themeProfile;
+  var changed = false;
+  // Re-analyse after each field: textColor, for example, can clear both body
+  // and footer findings. This also keeps this routine aligned with custom user
+  // thresholds instead of duplicating the analyzer's decision logic.
+  for (var pass = 0; pass < 16; pass++) {
+    final issue = analyzer
+        .analyze(deck.copyWith(themeProfile: theme))
+        .issues
+        .where((i) => i.category == SlideQualityCategory.contrast)
+        .where((i) => i.isDeckWide && i.field != null)
+        .firstOrNull;
+    if (issue == null) break;
+    final threshold =
+        double.tryParse(issue.args['threshold'] ?? '') ??
+        analyzer.minContrastRatio;
+    final field = issue.field!;
+    String corrected(
+      String foreground,
+      String background, {
+      double alpha = 1,
+    }) => nearestContrastingHex(
+      foreground,
+      background,
+      minRatio: threshold,
+      foregroundAlpha: alpha,
+    );
+    final before = theme;
+    switch (field) {
+      case 'textColor':
+        theme = theme.copyWith(
+          textColor: corrected(
+            theme.textColor,
+            theme.slideBackgroundColor,
+            alpha: issue.kind == SlideQualityIssueKind.footerContrast
+                ? kFooterTextAlpha
+                : 1,
+          ),
+        );
+      case 'accentColor':
+        theme = theme.copyWith(
+          accentColor: corrected(theme.accentColor, theme.slideBackgroundColor),
+        );
+      case 'titleTextColor':
+        theme = theme.copyWith(
+          titleTextColor: corrected(
+            theme.titleTextColor,
+            theme.titleBackgroundColor,
+          ),
+        );
+      case 'tableTextColor':
+        theme = theme.copyWith(
+          tableTextColor: corrected(
+            theme.tableTextColor,
+            theme.slideBackgroundColor,
+          ),
+        );
+      case 'tableHeaderTextColor':
+        theme = theme.copyWith(
+          tableHeaderTextColor: corrected(
+            theme.tableHeaderTextColor,
+            theme.tableHeaderBackgroundColor,
+          ),
+        );
+      case 'codeTextColor':
+        theme = theme.copyWith(
+          codeTextColor: corrected(
+            theme.codeTextColor,
+            theme.codeBackgroundColor,
+          ),
+        );
+      case 'checklistCheckedColor':
+        theme = theme.copyWith(
+          checklistCheckedColor: corrected(
+            theme.checklistCheckedColor,
+            theme.slideBackgroundColor,
+          ),
+        );
+      case 'checklistUncheckedColor':
+        theme = theme.copyWith(
+          checklistUncheckedColor: corrected(
+            theme.checklistUncheckedColor,
+            theme.slideBackgroundColor,
+          ),
+        );
+      default:
+        return changed ? deck.copyWith(themeProfile: theme) : null;
+    }
+    if (theme == before) break;
+    changed = true;
+  }
+  return changed ? deck.copyWith(themeProfile: theme) : null;
+}
 
 int _totalBullets(Deck deck) => deck.slides.fold<int>(
   0,
