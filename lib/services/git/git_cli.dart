@@ -10,6 +10,8 @@
 /// niet bij de aanroeper. Zo is er één plek om te controleren.
 library;
 
+import 'git_forge.dart';
+
 /// De uitkomst van één git-aanroep.
 class GitResult {
   final int exitCode;
@@ -126,6 +128,84 @@ bool isPushRejection(String stderr) {
   // gevallen uit waarin git juist over een merge-conflict in de werkkopie
   // praat; dat is geen push-afwijzing.
   return lower.contains('rejected') && !lower.contains('resolve');
+}
+
+/// Vertaal de stderr van een mislukte git-aanroep naar een [GitForgeException]
+/// met een van de *bestaande* [GitForgeError]-soorten, zodat een native-git-fout
+/// dezelfde begrijpelijke melding krijgt (`gitForgeErrorMessage`) als de
+/// REST-weg — in plaats van als kale [GitCliException] stil in de top-level
+/// `runZonedGuarded` te verdwijnen.
+///
+/// Net als [isPushRejection] leunt dit op de taal van git: `GitCli` zet
+/// `LC_ALL=C` en leegt `LANGUAGE`, dus de Engelse zinnen hieronder matchen.
+/// Zonder die vastzetting is deze functie niet betrouwbaar.
+///
+/// De volgorde is bewust van bijzonder naar algemeen. Git meldt de échte reden
+/// (`403`, een certificaatprobleem, een naam die niet oploste) vaak sámen met
+/// het generieke `unable to access '…'`. Wie dat generieke eerst zou vangen,
+/// schreef elke fout als "netwerk" weg. De terugval is [GitForgeError.network]
+/// (transient): een onbekende stderr is meestal een storing onderweg, en dat is
+/// de soort die uitstel — de wachtrij — rechtvaardigt, niet een onherstelbare
+/// melding.
+///
+/// De ruwe [GitCliException.message] reist als [GitForgeException.message] mee
+/// voor het log; op het scherm komt `gitForgeErrorMessage(kind)`, niet die tekst.
+GitForgeException classifyGitCliError(GitCliException e) {
+  final s = e.stderr.toLowerCase();
+  bool has(String needle) => s.contains(needle);
+
+  // Aanmelden mislukt: het token deugt niet, of git kon er niet om vragen (de
+  // prompt staat uit, §10.2).
+  if (has('authentication failed') ||
+      has('could not read username') ||
+      has('could not read password') ||
+      has('invalid username or password') ||
+      has('permission denied (publickey)')) {
+    return GitForgeException(GitForgeError.auth, e.message);
+  }
+  // Aangemeld, maar niet toegestaan: te weinig scope, alleen-lezen, of een
+  // limiet. 403 hoort hier, nooit bij auth — een nieuw token helpt pas mét meer
+  // rechten.
+  if (has('403') ||
+      has('forbidden') ||
+      has('not allowed') ||
+      has('read-only') ||
+      has('read only')) {
+    return GitForgeException(GitForgeError.forbidden, e.message);
+  }
+  // Certificaat niet vertrouwd — eigen soort, want de gebruiker kan het bekijken
+  // en vertrouwen.
+  if (has('ssl certificate problem') ||
+      has('server certificate verification failed') ||
+      has('certificate')) {
+    return GitForgeException(GitForgeError.tls, e.message);
+  }
+  // Naam lost niet op: een tikfout — of (zie `_queueIfOffline`) domweg offline.
+  if (has('could not resolve host') ||
+      has('could not resolve hostname') ||
+      has('name or service not known') ||
+      has('name resolution')) {
+    return GitForgeException(GitForgeError.unknownHost, e.message);
+  }
+  // De repo of branch bestaat niet — of het token mag hem niet zien.
+  // "Remote branch <naam> not found" valt onder 'not found'.
+  if (has('repository not found') ||
+      has('not found') ||
+      has('does not exist')) {
+    return GitForgeException(GitForgeError.notFound, e.message);
+  }
+  // Verbinding weggevallen of geweigerd: uitstel, geen mislukking. `unable to
+  // access` staat bewust als laatste — het staat óók in de specifiekere gevallen
+  // hierboven, die vóórgaan.
+  if (has('connection refused') ||
+      has('connection timed out') ||
+      has('failed to connect') ||
+      has('could not connect') ||
+      has('unable to access')) {
+    return GitForgeException(GitForgeError.network, e.message, transient: true);
+  }
+  // Onbekende stderr: behandel als een voorbijgaande storing (zie de doc).
+  return GitForgeException(GitForgeError.network, e.message, transient: true);
 }
 
 /// De gehardde git-uitvoerder (§10.2). Eén implementatie per platform; op web is

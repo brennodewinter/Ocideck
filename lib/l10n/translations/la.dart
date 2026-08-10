@@ -1789,6 +1789,38 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Afbeelding niet opgehaald': 'Imago non recuperata',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Plica destinata creari vel scribi non potuit. Proba num locus constitutus praesto sit.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Plica constituta non praesto est; praesentatio in plica documentorum aperta est:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Nomen in hac URL non exstat, vel inveniri non potest. URL de mendo typographico inspice.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Haec URL ad aliam inscriptionem dirigit. Illam inscriptionem recta insere — deductiones non sequimur, quia custodiam securitatis circumire possunt.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Haec URL ad inscriptionem privatam vel LAN spectat. Tales inscriptiones ob securitatem non petuntur.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Hic nexus inscriptio http(s) non est. Nexum insere qui http:// vel https:// incipit.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Hic servitor https non adhibet. Inscriptione https utere — tessera tua cum omni petitione mittitur et aliter sine cifra per rete iret.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Hic terminus https non adhibet. Termino https utere, vel eum ut internum fidum nota — aliter praesentationes tuae sine cifra per rete ibunt.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Inscriptione https utere — aliter tessera tua sine cifra per rete ibit.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Termino https utere, vel "Terminus internus fidus" nota — aliter praesentationes tuae sine cifra per rete ibunt.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Testimonium securitatis huius servitoris non creditur. URL inspice vel aliam originem tempta.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Terminus ad aliam inscriptionem dirigit — plerumque regio falsa vel URL termini falsa. Regionem et terminum apud Optiones → Repositorium inspice; iterare hic non iuvat.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Terminus dirigit — plerumque regio falsa vel URL termini falsa. Iterare hic non iuvat.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Localiter servatum, sed in officinam edere non successit:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'In hac URL nulla praesentatio est (non inventa). Proba num nexus adhuc rectus sit.',
+  'Video kan niet worden geladen': 'Pellicula onerari non potest',
   'Titel boven afbeelding': 'Titulus supra imaginem',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Titulum supra imaginem ostendit potius quam superpositum',

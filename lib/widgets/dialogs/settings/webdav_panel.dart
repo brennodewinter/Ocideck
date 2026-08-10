@@ -408,6 +408,10 @@ class _WebdavPanelState extends State<WebdavPanel> {
         );
       case WebdavError.notFound:
         return l10n.d('Map niet gevonden op de server');
+      case WebdavError.insecureScheme:
+        return l10n.d(
+          'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.',
+        );
       case WebdavError.config:
         return l10n.d('Ongeldige server-URL');
       case WebdavError.tooLarge:

@@ -363,6 +363,11 @@ class _NativeGitMirror implements NativeGitMirror {
       await _run(['merge', '--ff-only'], operands: ['origin/$_branch']);
     } on GitCliException catch (e) {
       logWarning('NativeGitMirror: fetch/ff mislukt (offline of divergent)', e);
+    } on GitForgeException catch (e) {
+      // De netwerk-poort weigert offline al vóór git start (DNS mislukt →
+      // unknownHost). Offline openen mag: we werken met de lokale clone verder,
+      // een verse ophaal is niet de prijs van het openen.
+      logWarning('NativeGitMirror: fetch/ff overgeslagen (netwerk-poort)', e);
     }
   }
 
@@ -472,6 +477,18 @@ class _NativeGitMirror implements NativeGitMirror {
       await _run(['fetch', 'origin'], operands: [branch], network: true);
     } on GitCliException catch (e) {
       logWarning('mergeRemote: fetch mislukt (offline?)', e);
+      return GitCommitResult(
+        GitCommitOutcome.committedOffline,
+        sha: await headSha(),
+      );
+    } on GitForgeException catch (e) {
+      // Ook hier weigert de netwerk-poort offline vóór git start. De lokale
+      // commit staat er al; behandel het als de GitCliException-tak hierboven,
+      // zodat de merge niet stil als hard falen naar boven lekt.
+      logWarning(
+        'mergeRemote: fetch overgeslagen (netwerk-poort, offline?)',
+        e,
+      );
       return GitCommitResult(
         GitCommitOutcome.committedOffline,
         sha: await headSha(),
@@ -822,12 +839,38 @@ class _NativeGitMirror implements NativeGitMirror {
       return GitCommitResult(GitCommitOutcome.pushed, sha: sha);
     } on GitCliException catch (e) {
       logWarning('NativeGitMirror: push mislukt', e);
-      return GitCommitResult(
-        isPushRejection(e.stderr)
-            ? GitCommitOutcome.committedConflict
-            : GitCommitOutcome.committedOffline,
-        sha: sha,
-      );
+      // Een afwijzing is geen storing maar "iemand was je voor": dat blijft een
+      // conflict, ongeacht de rest van de stderr.
+      if (isPushRejection(e.stderr)) {
+        return GitCommitResult(GitCommitOutcome.committedConflict, sha: sha);
+      }
+      return _afterFailedPush(sha, classifyGitCliError(e));
+    } on GitForgeException catch (e) {
+      // De netwerk-poort (`_networkConfig`) weigert nog vóór git start: offline
+      // (DNS mislukt → unknownHost), een geweigerde host, of een verkeerd
+      // schema. De commit staat dan al lokaal — alleen publiceren lukte niet.
+      logWarning('NativeGitMirror: push geweigerd door de netwerk-poort', e);
+      return _afterFailedPush(sha, e);
     }
+  }
+
+  /// De commit staat lokaal (duurzaam, P2 — "verbinding kwijt is nooit werk
+  /// kwijt"); alleen de push mislukte. Kies de afloop op grond van [reason]: een
+  /// verbinding die wegviel of een naam die (offline) niet oploste, gaat de
+  /// wachtrij in en komt vanzelf mee. Een fout die zichzelf níét oplost —
+  /// verkeerd token, geen rechten, een afgewezen certificaat — wordt gemeld
+  /// zodat de gebruiker hem kan verhelpen; "gaat later mee" zou dan liegen.
+  GitCommitResult _afterFailedPush(String? sha, GitForgeException reason) {
+    final offline =
+        reason.kind == GitForgeError.network ||
+        reason.kind == GitForgeError.unknownHost;
+    if (offline) {
+      return GitCommitResult(GitCommitOutcome.committedOffline, sha: sha);
+    }
+    return GitCommitResult(
+      GitCommitOutcome.committedButPushFailed,
+      sha: sha,
+      pushError: reason,
+    );
   }
 }

@@ -1802,6 +1802,38 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Afbeelding niet opgehaald': 'Imagem não obtida',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Não foi possível criar a pasta de destino nem escrever nela. Verifica se a localização configurada está disponível.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'A pasta configurada não está disponível; a apresentação foi aberta na pasta de documentos:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'O nome neste URL não existe ou não pode ser consultado. Verifica se há uma gralha no URL.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Este URL redireciona para outro endereço. Introduz esse endereço diretamente — não seguimos redirecionamentos, porque podem contornar a verificação de segurança.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Este URL aponta para um endereço privado ou de LAN. Por razões de segurança, esses endereços não são obtidos.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Esta ligação não é um endereço http(s). Cola uma ligação que comece por http:// ou https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Este servidor não usa https. Usa um endereço https — a tua palavra-passe é enviada em cada pedido e, caso contrário, iria sem encriptação pela rede.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Este ponto de extremidade não usa https. Usa um ponto de extremidade https, ou marca-o como interno fidedigno — caso contrário, as tuas apresentações vão sem encriptação pela rede.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Usa um endereço https — caso contrário, a tua palavra-passe vai sem encriptação pela rede.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Usa um ponto de extremidade https, ou assinala "Ponto de extremidade interno fidedigno" — caso contrário, as tuas apresentações vão sem encriptação pela rede.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'O certificado de segurança deste servidor não é fidedigno. Verifica o URL ou tenta outra origem.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'O ponto de extremidade redireciona para outro endereço — normalmente uma região ou um URL do ponto de extremidade errados. Verifica a região e o ponto de extremidade em Definições → Armazenamento; tentar de novo não ajuda aqui.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'O ponto de extremidade redireciona — normalmente uma região ou um URL do ponto de extremidade errados. Tentar de novo não ajuda aqui.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Guardado localmente, mas a publicação na forge falhou:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Não há nenhuma apresentação neste URL (não encontrada). Verifica se a ligação ainda está correta.',
+  'Video kan niet worden geladen': 'Não é possível carregar o vídeo',
   'Titel boven afbeelding': 'Título acima da imagem',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Mostra o título acima da imagem em vez de sobreposta',

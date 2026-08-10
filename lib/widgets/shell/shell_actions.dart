@@ -297,12 +297,16 @@ Future<void> _importUrlWeb(
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
   OpenResult result;
+  ImportFailure? fetchFailure;
   try {
     ref.read(openFailureProvider.notifier).state = null;
-    result = await ref.read(tabsProvider.notifier).importFromUrlWeb(url);
+    final outcome = await ref.read(tabsProvider.notifier).importFromUrlWeb(url);
+    result = outcome.result;
+    fetchFailure = outcome.failure;
   } catch (e, s) {
     logError('_importUrlWeb: import failed', e, s);
     result = OpenResult.unreadable;
+    fetchFailure = null;
   }
   if (result == OpenResult.notAPresentation) {
     _reportOpenFailure(messenger, l10n, result);
@@ -313,8 +317,22 @@ Future<void> _importUrlWeb(
       result == OpenResult.passwordCancelled) {
     return;
   }
+  // Een concrete ophaalreden (te groot, 404, geen http(s)-link, geweigerde
+  // host, omleiding) is specifieker dan CORS: toon díe. Alleen de ondoorzichtige
+  // browserweigering ([ImportFailure.network]) valt door naar de CORS-uitleg
+  // hieronder, want dán klopt hij.
+  if (fetchFailure != null && fetchFailure != ImportFailure.network) {
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      importFailureMessage(l10n, fetchFailure),
+    );
+    return;
+  }
+  // Ophalen slaagde maar het openen niet (beschadigd deck, vol mediabudget):
+  // openDeckFromBytes legde de reden vast, en die is specifieker dan CORS.
   final reason = ref.read(openFailureProvider);
-  if (reason == OpenFailure.memoryBudgetExceeded) {
+  if (reason != null) {
     _reportOpenFailure(messenger, l10n, result, reason: reason);
     return;
   }
@@ -393,183 +411,20 @@ Future<void> _openFromGit(
     // De uitzondering draagt al een uitlegbare tekst; die is voor de gebruiker
     // bedoeld, dus toon hem in plaats van een eigen samenvatting.
     messenger.showSnackBar(SnackBar(content: Text(e.message)));
+  } on GitCliException catch (e) {
+    // Het native plane faalt met git's stderr in een GitCliException. Zonder
+    // deze tak verdween een clone-fout (verkeerd token, repo weg, foute of lege
+    // branch) stil in runZonedGuarded en opende er niets. Classificeer de stderr
+    // naar dezelfde begrijpelijke melding als de REST-weg.
+    logWarning('shell: git clone/openen mislukt', e);
+    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
+  } catch (e, s) {
+    // Vangnet: een niet-git-fout (een schrijffout in de clone, een te groot
+    // pakket) mag evenmin stil eindigen — dan opent er niets zonder reden.
+    logError('shell: git openen mislukt', e, s);
+    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
   }
 }
-
-/// Blader door de Nextcloud/WebDAV-bron, download het gekozen deck, haal het
-/// door de security-gate en open het in een tab. Toont waar nodig een melding.
-Future<void> _openFromNextcloud(
-  BuildContext context,
-  WidgetRef ref, {
-  WebdavConnection? connection,
-}) async {
-  final chosen = connection ?? await _pickWebdavConnection(context, ref);
-  if (chosen == null || !context.mounted) return;
-  final service = await ref.read(webdavServiceProvider(chosen.id).future);
-  if (!context.mounted) return;
-  if (service == null) {
-    _webdavNotConfigured(context);
-    return;
-  }
-  final entry = await WebdavBrowserDialog.show(
-    context,
-    connectionId: chosen.id,
-  );
-  if (entry == null || !context.mounted) return;
-  final messenger = ScaffoldMessenger.of(context);
-  final l10n = context.l10n;
-  try {
-    final result = await ref
-        .read(tabsProvider.notifier)
-        .openFromWebdav(
-          service,
-          entry,
-          connectionId: chosen.id,
-          homeDir: ref.read(settingsProvider).homeDirectory,
-        );
-    _reportOpenFailure(messenger, l10n, result);
-    // OpenResult.blocked toont al het veiligheidsalarm via de shell.
-  } on WebdavException catch (e) {
-    logWarning('shell: WebDAV-download mislukt', e);
-    showErrorSnackBar(
-      messenger,
-      l10n,
-      '${l10n.d('Downloaden mislukt:')} ${webdavErrorMessage(l10n, e)}',
-    );
-  }
-}
-
-/// Schrijf het deck van het huidige tabblad terug naar Nextcloud. Vraagt het
-/// formaat (pakket of platte bestanden) en het doelpad, en uploadt dan.
-/// Slaat het actieve deck op naar WebDAV. Geeft terug of er daadwerkelijk is
-/// opgeslagen.
-///
-/// Met [silent] slaat dit de naam- en formaatvraag over wanneer het deck van
-/// deze server kwam: dan gaat het terug naar exact hetzelfde pad, in hetzelfde
-/// formaat. Dat is wat de gewone opslaanknop doet — die hoort niet elke keer
-/// opnieuw te vragen waar iets heen moet dat al ergens vandaan komt. Een
-/// botsing met een nieuwere versie vraagt nog steeds, want dat is een keuze die
-/// alleen de gebruiker kan maken.
-Future<bool> _saveToNextcloud(
-  BuildContext context,
-  WidgetRef ref, {
-  bool silent = false,
-  WebdavConnection? connectionOverride,
-}) async {
-  final tab = ref.read(tabsProvider).current;
-  final deck = tab?.deckNotifier.currentState.deck;
-  if (tab == null || deck == null) return false;
-  // Kwam dit deck van een WebDAV-verbinding die nog bestaat, dan gaat het
-  // daarnaartoe terug zonder te vragen. Opnieuw laten kiezen zou de gebruiker
-  // elke keer de kans geven het bij de verkeerde klant te laten belanden.
-  final origin = tab.webdavOrigin;
-  final settings = ref.read(settingsProvider);
-  final known = settings.connectionById(origin?.connectionId);
-  // Een expliciet gekozen doel wint van de herkomst: dat is precies wat
-  // "Opslaan naar…" betekent.
-  final connection =
-      connectionOverride ??
-      (known is WebdavConnection && known.isConfigured
-          ? known
-          : await _pickWebdavConnection(context, ref));
-  if (connection == null || !context.mounted) return false;
-
-  final service = await ref.read(webdavServiceProvider(connection.id).future);
-  if (!context.mounted) return false;
-  if (service == null) {
-    _webdavNotConfigured(context);
-    return false;
-  }
-  // Standaardpad: hergebruik de herkomst als die van dezelfde server komt,
-  // anders een nette bestandsnaam uit de deck-titel in de wortelmap.
-  final reuse = origin != null && origin.matchesServer(service.server);
-  final defaultBase = reuse
-      ? origin.remotePath.replaceAll(RegExp(r'\.(ocideck|zip|md)$'), '')
-      : _safeRemoteName(deck.title);
-  var choice = silent && reuse
-      ? (format: _formatOfRemotePath(origin.remotePath), base: defaultBase)
-      : await _showRemoteSaveDialog(
-          context,
-          defaultBase: defaultBase,
-          title: context.l10n.d('Opslaan naar WebDAV'),
-        );
-  if (choice == null || !context.mounted) return false;
-
-  final messenger = ScaffoldMessenger.of(context);
-  final l10n = context.l10n;
-  // Blijft doorlopen zolang de gebruiker na een botsing een andere weg kiest:
-  // onder een nieuwe naam opslaan, of alsnog overschrijven.
-  var overwrite = false;
-  while (true) {
-    final ext = choice!.format == DeckSaveFormat.ocideck ? '.ocideck' : '.md';
-    final targetPath = '${choice.base}$ext';
-    try {
-      await withSaveProgress(
-        ref,
-        SaveTarget.webdav,
-        () => ref
-            .read(tabsProvider.notifier)
-            .saveToWebdav(
-              tab,
-              service,
-              connectionId: connection.id,
-              format: choice!.format,
-              targetPath: targetPath,
-              overwrite: overwrite,
-            ),
-      );
-      // Het opslaan is geslaagd; alleen de melding kan niet meer getoond worden.
-      if (!context.mounted) return true;
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text('${l10n.d('Opgeslagen op WebDAV:')} /$targetPath'),
-        ),
-      );
-      return true;
-    } on WebdavConflictException catch (e) {
-      logWarning('shell: WebDAV-opslaan botste met een nieuwere versie', e);
-      if (!context.mounted) return false;
-      final resolution = await _showRemoteConflictDialog(context);
-      if (resolution == null || !context.mounted) return false;
-      switch (resolution) {
-        case _RemoteConflict.overwrite:
-          overwrite = true;
-        case _RemoteConflict.saveAs:
-          final next = await _showRemoteSaveDialog(
-            context,
-            defaultBase: choice.base,
-            title: l10n.d('Opslaan naar WebDAV'),
-          );
-          if (next == null || !context.mounted) return false;
-          choice = next;
-          // Een ander doelpad wordt niet bewaakt (we haalden het nooit op),
-          // maar een ongewijzigd pad moet de guard hóuden.
-          overwrite = false;
-      }
-    } on WebdavException catch (e) {
-      logWarning('shell: WebDAV-opslaan mislukt', e);
-      showErrorSnackBar(
-        messenger,
-        l10n,
-        '${l10n.d('Opslaan mislukt:')} ${webdavErrorMessage(l10n, e)}',
-      );
-      return false;
-    }
-  }
-}
-
-/// Het opslagformaat dat bij [remotePath] hoort. Een deck dat als pakket op de
-/// server stond, gaat als pakket terug; een platte spiegel blijft plat.
-DeckSaveFormat _formatOfRemotePath(String remotePath) =>
-    remotePath.toLowerCase().endsWith('.ocideck')
-    ? DeckSaveFormat.ocideck
-    : DeckSaveFormat.flat;
-
-/// Wat de gebruiker doet als het bestand op de server inmiddels van iemand
-/// anders is. Bewust geen samenvoegkeuze zoals bij git: die leunt erop dat de
-/// basisversie nog opvraagbaar is, en bij WebDAV en S3 is die weg zodra de
-/// ander heeft geüpload.
-enum _RemoteConflict { saveAs, overwrite }
 
 Future<_RemoteConflict?> _showRemoteConflictDialog(BuildContext context) {
   final l10n = context.l10n;

@@ -1775,6 +1775,38 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Afbeelding niet opgehaald': 'Slika ni bila pridobljena',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Ciljne mape ni bilo mogoče ustvariti ali vanjo pisati. Preveri, ali je nastavljena lokacija na voljo.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Nastavljena mapa ni na voljo; predstavitev je bila odprta v mapi z dokumenti:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Ime v tem URL-ju ne obstaja ali ga ni mogoče poiskati. Preveri, ali je v URL-ju tipkarska napaka.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Ta URL preusmerja na drug naslov. Vnesi ta naslov neposredno — preusmeritvam ne sledimo, ker lahko obidejo varnostno preverjanje.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Ta URL kaže na zasebni ali LAN naslov. Iz varnostnih razlogov se takšni naslovi ne pridobivajo.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Ta povezava ni naslov http(s). Prilepi povezavo, ki se začne s http:// ali https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Ta strežnik ne uporablja https. Uporabi naslov https — tvoje geslo se pošlje z vsako zahtevo in bi sicer šlo nešifrirano prek omrežja.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Ta končna točka ne uporablja https. Uporabi končno točko https ali jo označi kot zaupanja vredno interno — sicer gredo tvoje predstavitve nešifrirano prek omrežja.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Uporabi naslov https — sicer gre tvoje geslo nešifrirano prek omrežja.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Uporabi končno točko https ali označi "Zaupanja vredna notranja končna točka" — sicer gredo tvoje predstavitve nešifrirano prek omrežja.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Varnostnemu potrdilu tega strežnika ni zaupanja. Preveri URL ali poskusi drug vir.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Končna točka preusmerja na drug naslov — običajno napačna regija ali URL končne točke. Preveri regijo in končno točko v Nastavitve → Shramba; ponovni poskus tukaj ne pomaga.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Končna točka preusmerja — običajno napačna regija ali URL končne točke. Ponovni poskus tukaj ne pomaga.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Shranjeno lokalno, vendar objava v forge ni uspela:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Na tem URL-ju ni predstavitve (ni najdena). Preveri, ali je povezava še pravilna.',
+  'Video kan niet worden geladen': 'Videa ni mogoče naložiti',
   'Titel boven afbeelding': 'Naslov nad sliko',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Prikaže naslov nad sliko namesto čez njo',

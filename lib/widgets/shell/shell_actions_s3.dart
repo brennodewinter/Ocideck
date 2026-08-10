@@ -61,7 +61,12 @@ Future<void> _openFromS3(
           connectionId: chosen.id,
           homeDir: ref.read(settingsProvider).homeDirectory,
         );
-    _reportOpenFailure(messenger, l10n, result);
+    _reportOpenFailure(
+      messenger,
+      l10n,
+      result,
+      reason: ref.read(openFailureProvider),
+    );
     // OpenResult.blocked toont al het veiligheidsalarm via de shell.
   } on S3Exception catch (e) {
     logWarning('shell: S3-download mislukt', e);
@@ -69,6 +74,15 @@ Future<void> _openFromS3(
       messenger,
       l10n,
       '${l10n.d('Downloaden mislukt:')} ${s3ErrorMessage(l10n, e)}',
+    );
+  } catch (e, s) {
+    // Vangnet: een niet-S3-fout (schrijffout in de doelmap, te groot pakket)
+    // mag niet stil in runZonedGuarded verdwijnen.
+    logError('shell: S3 openen mislukt', e, s);
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      '${l10n.d('Downloaden mislukt:')} ${userFacingError(l10n, e)}',
     );
   }
 }
@@ -178,6 +192,16 @@ Future<bool> _saveToS3(
         messenger,
         l10n,
         '${l10n.d('Opslaan mislukt:')} ${s3ErrorMessage(l10n, e)}',
+      );
+      return false;
+    } catch (e, s) {
+      // Vangnet: een te groot pakket (PackageBudgetExceeded) of een leesfout in
+      // een lokaal asset is geen S3Exception en zou anders stil verdwijnen.
+      logError('shell: S3-opslaan mislukt', e, s);
+      showErrorSnackBar(
+        messenger,
+        l10n,
+        '${l10n.d('Opslaan mislukt:')} ${userFacingError(l10n, e)}',
       );
       return false;
     }

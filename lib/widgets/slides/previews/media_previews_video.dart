@@ -147,6 +147,19 @@ class _VideoPreviewState extends State<_VideoPreview>
             else if (widget.source.kind == VideoSourceKind.remoteFile &&
                 !widget.allowRemoteMedia)
               _remoteBlockedPlaceholder(context, widget.slide.videoPath)
+            else if (mediaLoadFailure == MediaLoadFailure.remoteRefused)
+              // Online media staat aan, maar déze URL is door de SSRF-poort
+              // geweigerd (privé/LAN/loopback). Zelfde melding als bij een
+              // afbeelding — niet een neutraal "Video"-vak dat niets zegt.
+              _remoteBlockedPlaceholder(context, widget.slide.videoPath)
+            else if (mediaLoadFailure == MediaLoadFailure.loadError)
+              // Toegestaan maar niet te laden (404, time-out, TLS, codec): meld
+              // dat, in plaats van stil een leeg "Video"-vak te tonen.
+              _mediaPlaceholder(
+                context,
+                Icons.error_outline,
+                context.l10n.d('Video kan niet worden geladen'),
+              )
             else
               _mediaPlaceholder(
                 context,

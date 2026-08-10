@@ -1773,6 +1773,38 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afbeelding niet opgehaald': 'Kuvaa ei haettu',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Kohdekansiota ei voitu luoda eikä siihen voitu kirjoittaa. Tarkista, että määritetty sijainti on käytettävissä.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Määritetty kansio ei ole käytettävissä; esitys avattiin asiakirjakansiossa:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Tämän URL-osoitteen nimeä ei ole olemassa tai sitä ei voi hakea. Tarkista URL-osoitteen kirjoitusasu.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Tämä URL ohjaa toiseen osoitteeseen. Syötä se osoite suoraan — emme seuraa uudelleenohjauksia, koska ne voivat ohittaa turvatarkistuksen.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Tämä URL osoittaa yksityiseen tai LAN-osoitteeseen. Turvallisuussyistä tällaisia osoitteita ei haeta.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Tämä linkki ei ole http(s)-osoite. Liitä linkki, joka alkaa http:// tai https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Tämä palvelin ei käytä https:ää. Käytä https-osoitetta — salasanasi lähetetään jokaisen pyynnön mukana ja kulkisi muuten salaamattomana verkon yli.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Tämä päätepiste ei käytä https:ää. Käytä https-päätepistettä tai merkitse se luotetuksi sisäiseksi — muuten esityksesi kulkevat salaamattomina verkon yli.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Käytä https-osoitetta — muuten salasanasi kulkee salaamattomana verkon yli.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Käytä https-päätepistettä tai rastita "Luotettu sisäinen päätepiste" — muuten esityksesi kulkevat salaamattomina verkon yli.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Tämän palvelimen suojausvarmennetta ei luoteta. Tarkista URL-osoite tai kokeile toista lähdettä.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Päätepiste ohjaa toiseen osoitteeseen — yleensä väärä alue tai päätepisteen URL-osoite. Tarkista alue ja päätepiste kohdassa Asetukset → Tallennus; uudelleenyritys ei auta tässä.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Päätepiste ohjaa muualle — yleensä väärä alue tai päätepisteen URL-osoite. Uudelleenyritys ei auta tässä.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Tallennettu paikallisesti, mutta julkaiseminen forgeen epäonnistui:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Tässä URL-osoitteessa ei ole esitystä (ei löytynyt). Tarkista, että linkki on yhä oikein.',
+  'Video kan niet worden geladen': 'Videota ei voi ladata',
   'Titel boven afbeelding': 'Otsikko kuvan yläpuolella',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Näyttää otsikon kuvan yläpuolella sen sijaan, että se olisi päällä',

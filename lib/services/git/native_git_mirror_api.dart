@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'deck_mirror.dart';
 import 'deck_search.dart';
+import 'git_forge.dart';
 
 /// Welke van de drie kanten van een driewegs-merge bedoeld is.
 enum MergeSide {
@@ -36,6 +37,14 @@ enum GitCommitOutcome {
   /// werk is niet weg — het staat als echte commit klaar — maar samenvoegen
   /// vergt een merge (een latere fase). Tot dan blijft het lokaal.
   committedConflict,
+
+  /// Lokaal gecommit (duurzaam, P2), maar de push mislukte om een reden die
+  /// zichzelf níét oplost: een verkeerd token, geen rechten, een afgewezen
+  /// certificaat. Anders dan [committedOffline] gaat dit niet vanzelf mee bij de
+  /// volgende sync — de gebruiker moet eerst iets verhelpen. "Opgeslagen, gaat
+  /// later mee" zou hier een loze belofte zijn; de UI meldt de verhelpbare
+  /// reden. De reden staat in [GitCommitResult.pushError].
+  committedButPushFailed,
 
   /// Er was niets veranderd sinds de vorige commit, en niets ongepusht.
   unchanged,
@@ -73,7 +82,13 @@ class GitCommitResult {
   /// geen enkele commit is.
   final String? sha;
 
-  const GitCommitResult(this.outcome, {this.sha});
+  /// Waaróm de push mislukte — alleen gevuld bij
+  /// [GitCommitOutcome.committedButPushFailed]. De commit staat lokaal; dit is
+  /// de (geclassificeerde) reden dat publiceren niet lukte, zodat de UI een
+  /// verhelpbare melding kan tonen (het token, het certificaat, de rechten).
+  final GitForgeException? pushError;
+
+  const GitCommitResult(this.outcome, {this.sha, this.pushError});
 }
 
 /// De werkkopie als een échte lokale clone (§8.2): opslaan is een `git commit`,

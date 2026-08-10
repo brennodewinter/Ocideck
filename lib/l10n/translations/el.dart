@@ -1800,6 +1800,38 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Afbeelding niet opgehaald': 'Η εικόνα δεν ανακτήθηκε',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'Δεν ήταν δυνατή η δημιουργία ή η εγγραφή του φακέλου προορισμού. Ελέγξτε αν η ρυθμισμένη τοποθεσία είναι διαθέσιμη.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'Ο ρυθμισμένος φάκελος δεν είναι διαθέσιμος· η παρουσίαση άνοιξε στον φάκελο εγγράφων:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'Το όνομα σε αυτό το URL δεν υπάρχει ή δεν μπορεί να αναζητηθεί. Ελέγξτε το URL για τυπογραφικό λάθος.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Αυτό το URL ανακατευθύνει σε άλλη διεύθυνση. Εισαγάγετε απευθείας αυτή τη διεύθυνση — δεν ακολουθούμε ανακατευθύνσεις, γιατί μπορούν να παρακάμψουν τον έλεγχο ασφαλείας.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Αυτό το URL δείχνει σε ιδιωτική διεύθυνση ή διεύθυνση LAN. Για λόγους ασφαλείας τέτοιες διευθύνσεις δεν ανακτώνται.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Αυτός ο σύνδεσμος δεν είναι διεύθυνση http(s). Επικολλήστε έναν σύνδεσμο που ξεκινά με http:// ή https://.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Αυτός ο διακομιστής δεν χρησιμοποιεί https. Χρησιμοποιήστε μια διεύθυνση https — ο κωδικός σας στέλνεται σε κάθε αίτημα και διαφορετικά θα ταξίδευε χωρίς κρυπτογράφηση μέσω του δικτύου.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Αυτό το τελικό σημείο δεν χρησιμοποιεί https. Χρησιμοποιήστε ένα τελικό σημείο https ή σημειώστε το ως έμπιστο εσωτερικό — διαφορετικά οι παρουσιάσεις σας ταξιδεύουν χωρίς κρυπτογράφηση μέσω του δικτύου.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Χρησιμοποιήστε μια διεύθυνση https — διαφορετικά ο κωδικός σας ταξιδεύει χωρίς κρυπτογράφηση μέσω του δικτύου.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Χρησιμοποιήστε ένα τελικό σημείο https ή επιλέξτε "Αξιόπιστο εσωτερικό τελικό σημείο" — διαφορετικά οι παρουσιάσεις σας ταξιδεύουν χωρίς κρυπτογράφηση μέσω του δικτύου.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Το πιστοποιητικό ασφαλείας αυτού του διακομιστή δεν είναι έμπιστο. Ελέγξτε το URL ή δοκιμάστε άλλη πηγή.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'Το τελικό σημείο ανακατευθύνει σε άλλη διεύθυνση — συνήθως λάθος περιοχή ή URL τελικού σημείου. Ελέγξτε την περιοχή και το τελικό σημείο στις Ρυθμίσεις → Αποθήκευση· η επανάληψη δεν βοηθά εδώ.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'Το τελικό σημείο ανακατευθύνει — συνήθως λάθος περιοχή ή URL τελικού σημείου. Η επανάληψη δεν βοηθά εδώ.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Αποθηκεύτηκε τοπικά, αλλά η δημοσίευση στο forge απέτυχε:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Δεν υπάρχει παρουσίαση σε αυτό το URL (δεν βρέθηκε). Ελέγξτε αν ο σύνδεσμος εξακολουθεί να ισχύει.',
+  'Video kan niet worden geladen': 'Δεν είναι δυνατή η φόρτωση του βίντεο',
   'Titel boven afbeelding': 'Τίτλος πάνω από την εικόνα',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Δείχνει τον τίτλο πάνω από την εικόνα αντί επάνω της',

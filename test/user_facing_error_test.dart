@@ -98,6 +98,21 @@ void main() {
         }
       }
     });
+
+    test('no two failure kinds share a message', () {
+      // Een gedeelde melding betekent dat de UI twee oorzaken niet uit elkaar
+      // houdt — precies wat de reden-splitsing van de URL-import (blocked host,
+      // DNS-tikfout, 404, TLS, omleiding, geen https) wil voorkomen. De lege
+      // cancel-melding telt niet mee: dat is geen fout maar bewuste stilte.
+      final byMessage = <String, List<ImportFailure>>{};
+      for (final kind in ImportFailure.values) {
+        final msg = importFailureMessage(l10n, kind);
+        if (msg.isEmpty) continue; // encryptedCancelled is opzettelijk stil
+        byMessage.putIfAbsent(msg, () => []).add(kind);
+      }
+      final shared = byMessage.values.where((k) => k.length > 1).toList();
+      expect(shared, isEmpty, reason: 'delen dezelfde melding: $shared');
+    });
   });
 
   group('importFailureText (presentatie-import, #806)', () {

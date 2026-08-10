@@ -623,6 +623,65 @@ void _listenChartDataWarning(BuildContext context, WidgetRef ref) {
   });
 }
 
+/// Een zojuist geopend bestand heeft elders een byte-identieke kopie:
+/// niet-blokkerend melden (de gebruiker wilde gewoon openen), met de
+/// opruimdialoog als directe ingang. Top-level (net als [_listenChartDataWarning])
+/// zodat de listener-bedrading niet in `_AppShellState.build` of het
+/// hoofdbestand hoeft te wonen.
+void _listenDuplicateCopyNotice(BuildContext context, WidgetRef ref) {
+  ref.listen<DuplicateCopyNotice?>(duplicateCopyNoticeProvider, (_, notice) {
+    if (notice == null) return;
+    ref.read(duplicateCopyNoticeProvider.notifier).state = null;
+    final l10n = context.l10n;
+    final homeDir = ref.read(settingsProvider).homeDirectory;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 7),
+        content: Text(
+          '${l10n.d('Deze presentatie staat ook op een andere plek:')} '
+          '${displayFolder(notice.copyPath, homeDir: homeDir, osHome: osHomeDirectory)}',
+        ),
+        action: TrashService().isSupported
+            ? SnackBarAction(
+                label: l10n.d('Opruimen…'),
+                onPressed: () => DuplicateCleanupDialog.show(
+                  context,
+                  groups: [
+                    CleanupGroup(
+                      title: p.basenameWithoutExtension(notice.openedPath),
+                      paths: [notice.openedPath, notice.copyPath],
+                    ),
+                  ],
+                  homeDir: homeDir,
+                ),
+              )
+            : null,
+      ),
+    );
+  });
+}
+
+/// De ingestelde thuismap stond op een onbereikbaar volume (bv. een
+/// losgekoppelde netwerkschijf): de import viel terug op de documentenmap zodat
+/// de presentatie tóch opende. Niet-blokkerend melden zodat de gebruiker weet
+/// dat zijn locatie weg is — zelfde luister-patroon als [_listenDuplicateCopyNotice].
+void _listenImportHomeUnavailable(BuildContext context, WidgetRef ref) {
+  ref.listen<String?>(importHomeUnavailableProvider, (_, unavailable) {
+    if (unavailable == null) return;
+    ref.read(importHomeUnavailableProvider.notifier).state = null;
+    final l10n = context.l10n;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 8),
+        content: Text(
+          '${l10n.d('De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:')} '
+          '$unavailable',
+        ),
+      ),
+    );
+  });
+}
+
 /// OpenKAT-menu-items voor het …-menu. Top-level zodat `_MainLayoutState`
 /// onder het klasseplafond blijft.
 List<PopupMenuEntry<String>> openKatShellMenuEntries(

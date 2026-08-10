@@ -1776,6 +1776,38 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Afbeelding niet opgehaald': 'Bild nid abgrüeft',
+  'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
+      'De Zielornder het nid chönne aagleit oder bschribe wärde. Lueg, öb de igstellt Ort verfüegbar isch.',
+  'De ingestelde map is niet beschikbaar; de presentatie is in de documentenmap geopend:':
+      'De igstellt Ornder isch nid verfüegbar; d Präsentation isch im Dokumänteornder ufgmacht worde:',
+  'De naam in deze URL bestaat niet, of is niet op te zoeken. Controleer de URL op een typefout.':
+      'De Name i dere URL git’s nid, oder er lat sich nid uflöse. Lueg d URL uf en Tippfähler ah.',
+  'Deze URL stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Die URL leitet uf en anderi Adrässe um. Gib die Adrässe direkt ih — Wyterleitige folge mer nid, wil si d Sicherheitsprüefig umgah chöi.',
+  'Deze URL wijst naar een privé- of LAN-adres. Zulke adressen worden om veiligheidsredenen niet opgehaald.':
+      'Die URL zeigt uf e privati oder LAN-Adrässe. Sonigi Adrässe wärde us Sicherheitsgründ nid gholt.',
+  'Deze link is geen http(s)-adres. Plak een link die met http:// of https:// begint.':
+      'Dä Link isch kei http(s)-Adrässe. Füeg en Link ih, wo mit http:// oder https:// aafangt.',
+  'Deze server gebruikt geen https. Gebruik een https-adres — je wachtwoord gaat bij elk verzoek mee en zou anders onversleuteld over het netwerk gaan.':
+      'Dä Server bruucht kei https. Bruuch e https-Adrässe — dis Passwort wird bi jedere Aafrog mitgschickt und gieng susch unverschlüsslet übers Netz.',
+  'Dit endpoint gebruikt geen https. Gebruik een https-endpoint, of markeer het als vertrouwd intern — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Dä Ändpunkt bruucht kei https. Bruuch en https-Ändpunkt, oder markier ne als vertrouenswürdig intern — susch gönd dini Präsentatione unverschlüsslet übers Netz.',
+  'Gebruik een https-adres — anders gaat je wachtwoord onversleuteld over het netwerk.':
+      'Bruuch e https-Adrässe — susch gaht dis Passwort unverschlüsslet übers Netz.',
+  'Gebruik een https-endpoint, of vink "Vertrouwd intern endpoint" aan — anders gaan je presentaties onversleuteld over het netwerk.':
+      'Bruuch en https-Ändpunkt, oder setz s Häkli bi "Vertraute intärne Ändpunkt" — susch gönd dini Präsentatione unverschlüsslet übers Netz.',
+  'Het beveiligingscertificaat van deze server wordt niet vertrouwd. Controleer de URL of probeer een andere bron.':
+      'Em Sicherheitszertifikat vo däm Server wird nid vertrout. Lueg d URL aa oder probier e anderi Quelle.',
+  'Het endpoint stuurt door naar een ander adres — meestal een verkeerde regio of endpoint-URL. Controleer de regio en het endpoint bij Instellingen → Opslag; opnieuw proberen helpt hier niet.':
+      'De Ändpunkt leitet uf en anderi Adrässe um — meischtens e falschi Region oder Ändpunkt-URL. Prüef d Region und de Ändpunkt under Istellige → Spycher; nomol probiere hilft do nid.',
+  'Het endpoint stuurt door — meestal een verkeerde regio of endpoint-URL. Opnieuw proberen helpt hier niet.':
+      'De Ändpunkt leitet um — meischtens e falschi Region oder Ändpunkt-URL. Nomol probiere hilft do nid.',
+  'Lokaal opgeslagen, maar publiceren naar de forge lukte niet:':
+      'Lokal gspeicheret, aber s Veröffentliche uf de Forge het nid klappet:',
+  'Op deze URL staat geen presentatie (niet gevonden). Controleer of de link nog klopt.':
+      'Under dere URL git’s kei Präsentation (nid gfunde). Lueg, öb de Link no stimmt.',
+  'Video kan niet worden geladen': 'S Video cha nid glade wärde',
   'Titel boven afbeelding': 'Titel überem Bild',
   'Toont de titel boven de afbeelding in plaats van eroverheen':
       'Zeigt de Titel überem Bild statt drüber',

@@ -5,6 +5,73 @@
 // leeft in het hoofdbestand; hier staat de import-API met weiger-redenen.
 part of '../file_service.dart';
 
+/// Waarom een import (URL, pakket, WebDAV) geen deck opleverde — voor een
+/// gerichte melding in plaats van een generiek "kon niet importeren".
+enum ImportFailure {
+  /// Bestand of pakket is groter dan de toegestane limiet.
+  tooLarge,
+
+  /// ZIP of tekst is beschadigd/onleesbaar.
+  corrupt,
+
+  /// Wel opgehaald, maar geen Marp/OciDeck-presentatie.
+  unsupported,
+
+  /// Veiligheidslimiet geraakt (zip-bomb, te veel entries).
+  limitExceeded,
+
+  /// Ophalen mislukte op een manier die we niet fijner konden duiden: een
+  /// time-out, een geweigerde verbinding, of een andere transportfout. De
+  /// generieke terugval — de specifieke netwerk-oorzaken hieronder krijgen hun
+  /// eigen reden zodat een beveiligingsweigering en een tikfout niet meer op
+  /// dezelfde melding uitkomen.
+  network,
+
+  /// De hostnaam in de URL is niet op te zoeken (bestaat niet, of DNS zweeg).
+  /// Eigen reden: het advies ("controleer op een typefout") is het
+  /// tegenovergestelde van dat bij [blockedHost].
+  unknownHost,
+
+  /// De URL wijst naar een privé-, loopback- of LAN-adres en wordt om
+  /// SSRF-redenen niet opgehaald — een veiligheidsweigering, geen storing, dus
+  /// een eigen reden met een eigen uitleg.
+  blockedHost,
+
+  /// De URL gebruikt een ander schema dan http(s) (bv. `ftp:`/`file:`). Eigen
+  /// reden zodat de melding "plak een http(s)-link" kan zeggen in plaats van een
+  /// vage netwerkfout.
+  insecureScheme,
+
+  /// Het TLS-certificaat van de server werd niet vertrouwd — iets anders om op te
+  /// lossen dan een onbereikbare server, dus een eigen reden.
+  tls,
+
+  /// De server stuurde een 3xx-omleiding. Die volgen we niet (dat zou de
+  /// SSRF-hostcontrole omzeilen); een eigen reden vraagt het doeladres direct.
+  redirect,
+
+  /// De server antwoordde met 404 — op deze URL staat geen bestand. Eigen reden
+  /// zodat een verkeerde link niet als algemene netwerkfout leest.
+  notFound,
+
+  /// Pakket is versleuteld maar er kon niet om een wachtwoord worden gevraagd
+  /// (geen resolver geregistreerd — vooral in tests/headless).
+  needsPassword,
+
+  /// Pakket is versleuteld en de gebruiker brak de wachtwoordvraag af. Geen
+  /// echte fout: de aanroeper toont hierbij géén foutmelding.
+  encryptedCancelled,
+
+  /// De doelschijf heeft onvoldoende ruimte voor de extractie.
+  diskFull,
+
+  /// De doelmap kon niet worden aangemaakt of beschreven — bijvoorbeeld een
+  /// ingestelde thuismap op een niet-aangekoppeld of alleen-lezen volume. Zonder
+  /// deze reden gooide het uitpakken een niet-gevangen `PathAccessException` die
+  /// stil verdween: het bestand opende niet en er kwam geen melding.
+  destinationUnavailable,
+}
+
 extension FileServiceImport on FileService {
   /// Probeer een versleuteld pakket met [password] te ontgrendelen zonder het
   /// helemaal uit te pakken: de central directory lezen valideert de MAC nog
@@ -150,69 +217,12 @@ extension FileServiceImport on FileService {
       }
     }
     final destDir = _uniqueDir(destParentDir, folderName);
-    await destDir.create(recursive: true);
-
-    // Een afgebroken extractie laat geen half uitgepakte map achter: die zou
-    // stil schijfruimte opsnoepen en verweesde kopie-mappen achterlaten.
-    Future<ImportOutcome> abortAndClean(ImportFailure failure) async {
-      try {
-        await destDir.delete(recursive: true);
-      } catch (e) {
-        logWarning(
-          'FileService.importPackageBytes: partial extract cleanup failed',
-          e,
-        );
-      }
-      return ImportOutcome.failed(failure);
-    }
-
-    // Resolve an archive entry name to a path strictly inside [destDir], or
-    // null when it would escape (zip-slip: `../`, absolute paths, …).
-    String? safeOutPath(String entryName) {
-      final resolved = p.normalize(p.join(destDir.path, entryName));
-      if (resolved != destDir.path && !p.isWithin(destDir.path, resolved)) {
-        return null;
-      }
-      return resolved;
-    }
-
-    for (final entry in entries) {
-      final outPath = safeOutPath(entry.name);
-      if (outPath == null) continue; // skip path-traversal entries
-      final out = File(outPath);
-      await out.parent.create(recursive: true);
-      try {
-        await writeBytesAtomic(out, entry.bytes);
-      } on FileSystemException catch (e) {
-        // Disk-exhaustie: een volle schijf geeft een FileSystemException met
-        // "No space left" (POSIX) of "disk full" — vertaal naar een gerichte
-        // melding in plaats van een generieke "import mislukt".
-        final msg = e.toString().toLowerCase();
-        if (msg.contains('no space left') ||
-            msg.contains('disk full') ||
-            msg.contains('enospc')) {
-          logWarning(
-            'FileService.importPackageBytes: disk full during extraction',
-            e,
-          );
-          return abortAndClean(ImportFailure.diskFull);
-        }
-        rethrow;
-      }
-    }
-
-    // The main markdown must itself resolve inside the extraction folder.
-    final mdPath = safeOutPath(mdEntry.name);
-    if (mdPath == null) return abortAndClean(ImportFailure.unsupported);
-    return ImportOutcome.ok(mdPath);
+    return _extractPackageToDir(destDir, entries, mdEntry);
   }
 
   /// SSRF host/address guards live in [NetGuard] so the URL-import path and the
   /// live remote-media path share exactly the same rules.
   static bool _isBlockedHost(String host) => NetGuard.isBlockedHost(host);
-
-  static Future<List<InternetAddress>?> _safeResolve(String host) =>
-      NetGuard.safeResolve(host);
 
   /// Download een presentatie vanaf [url]. Een zip-pakket wordt uitgepakt;
   /// platte markdown wordt als losse `.md` opgeslagen. Geeft het pad naar het
@@ -235,22 +245,36 @@ extension FileServiceImport on FileService {
   }) async {
     final uri = Uri.tryParse(url.trim());
     if (uri == null || !uri.hasScheme) {
+      // Onparseerbaar of zonder schema: geen bruikbare URL. De generieke reden
+      // ("controleer de URL") past hier het best, en het invoervenster houdt
+      // zo'n adres bovendien al tegen vóór het hier komt.
       return const ImportOutcome.failed(ImportFailure.network);
     }
     // Only fetch over web schemes, and never reach private/loopback hosts.
     final scheme = uri.scheme.toLowerCase();
     if (scheme != 'http' && scheme != 'https') {
-      return const ImportOutcome.failed(ImportFailure.network);
+      return const ImportOutcome.failed(ImportFailure.insecureScheme);
     }
     if (_isBlockedHost(uri.host)) {
-      return const ImportOutcome.failed(ImportFailure.network);
+      return const ImportOutcome.failed(ImportFailure.blockedHost);
     }
-    // Resolve the hostname up front and reject internal addresses.
-    final safeAddrs = await _safeResolve(uri.host);
-    if (safeAddrs == null) {
-      return const ImportOutcome.failed(ImportFailure.network);
+    // Resolve de hostnaam vooraf en weiger interne adressen. De rijke variant
+    // ([NetGuard.resolveConfigured]) geeft de wéigeringsreden mee: een naam die
+    // niet oplost (unknownHost) vraagt om ander advies dan een naam die naar een
+    // intern adres wijst (blocked). `allowPrivate: false` — een import-URL is
+    // nooit "vertrouwd intern"; dat weigert exact dezelfde hosts als voorheen,
+    // nu alleen mét reden.
+    final resolved = await NetGuard.resolveConfigured(
+      uri.host,
+      allowPrivate: false,
+    );
+    if (!resolved.isOk) {
+      return ImportOutcome.failed(switch (resolved.refusal!) {
+        HostRefusal.unknownHost => ImportFailure.unknownHost,
+        HostRefusal.blocked => ImportFailure.blockedHost,
+      });
     }
-    final pinned = safeAddrs.first;
+    final pinned = resolved.addresses!.first;
 
     final List<int> bytes;
     try {
@@ -264,7 +288,11 @@ extension FileServiceImport on FileService {
           const Duration(seconds: 30),
         );
         if (response.statusCode != 200) {
-          return const ImportOutcome.failed(ImportFailure.network);
+          // 404 → niet gevonden, 3xx → een omleiding die we niet volgen, de rest
+          // (401/403/5xx) → generieke netwerkfout. Zie [_classifyUrlImportStatus].
+          return ImportOutcome.failed(
+            _classifyUrlImportStatus(response.statusCode),
+          );
         }
         if (response.contentLength > FileService.maxPackageBytes) {
           return const ImportOutcome.failed(ImportFailure.tooLarge);
@@ -281,8 +309,17 @@ extension FileServiceImport on FileService {
         client.close(force: true);
       }
     } catch (e) {
-      logError('FileService.importFromUrl: download failed', e);
-      return const ImportOutcome.failed(ImportFailure.network);
+      // Een afgewezen/onvertrouwd certificaat verdient een eigen melding in
+      // plaats van te verdwijnen in de generieke netwerkfout; de rest (time-out,
+      // geweigerd, weggevallen) blijft network. Zelfde indeling als de
+      // opslagtransports via [classifyTransportFailure].
+      final kind = classifyTransportFailure(e);
+      logTransportFailure('FileService.importFromUrl', kind, e);
+      return ImportOutcome.failed(
+        kind == TransportFailure.tls
+            ? ImportFailure.tls
+            : ImportFailure.network,
+      );
     }
 
     // Zip-magie → pakket; anders als markdown behandelen.
@@ -350,11 +387,154 @@ extension FileServiceImport on FileService {
       }
     }
     final destDir = _uniqueDir(destParentDir, base);
-    await destDir.create(recursive: true);
-    final mdPath = p.join(destDir.path, '$base.md');
-    await writeStringAtomic(File(mdPath), markdown);
-    return ImportOutcome.ok(mdPath);
+    return _writeFlatMarkdownDeck(destDir, base, markdown);
   }
+}
+
+/// Schrijft [markdown] als `<base>.md` in de (nieuwe) [destDir] en geeft het pad
+/// terug — of een weiger-reden bij een schrijffout, waarna een half aangemaakte
+/// map weer wordt opgeruimd. Buiten [FileService] om dezelfde reden als
+/// [_extractPackageToDir]: geen veldtoegang, en de klasse zit tegen haar plafond.
+Future<ImportOutcome> _writeFlatMarkdownDeck(
+  Directory destDir,
+  String base,
+  String markdown,
+) async {
+  final mdPath = p.join(destDir.path, '$base.md');
+  try {
+    await destDir.create(recursive: true);
+    await writeStringAtomic(File(mdPath), markdown);
+  } on FileSystemException catch (e, s) {
+    // Zelfde vangnet als de pakket-tak: een ingestelde thuismap op een
+    // niet-aangekoppeld of alleen-lezen volume laat create/write falen. Zonder
+    // deze vangst ontsnapte een PathAccessException stil (WebDAV/S3/URL openen
+    // een platte `.md` langs deze weg). Ruim een half aangemaakte map op.
+    final failure = _classifyWriteFailure(e);
+    logError(
+      'FileService.importMarkdownBytes: kan doelmap niet aanmaken/schrijven '
+      '($failure)',
+      e,
+      s,
+    );
+    try {
+      if (await destDir.exists()) await destDir.delete(recursive: true);
+    } catch (cleanupError) {
+      logWarning(
+        'FileService.importMarkdownBytes: opruimen na schrijffout mislukt',
+        cleanupError,
+      );
+    }
+    return ImportOutcome.failed(failure);
+  }
+  return ImportOutcome.ok(mdPath);
+}
+
+/// Pakt de gedecodeerde [entries] uit in [destDir] (elk lid zip-slip-veilig) en
+/// geeft het pad naar [mdEntry] terug — of een weiger-reden bij een schrijffout,
+/// waarna de half uitgepakte map weer wordt opgeruimd. Buiten [FileService]: het
+/// raakt geen enkel veld van de service, en de klasse zit tegen haar plafond.
+Future<ImportOutcome> _extractPackageToDir(
+  Directory destDir,
+  List<PackageEntry> entries,
+  PackageEntry mdEntry,
+) async {
+  try {
+    await destDir.create(recursive: true);
+  } on FileSystemException catch (e, s) {
+    // De doelmap zelf kon niet worden aangemaakt — bijvoorbeeld een ingestelde
+    // thuismap op een niet-aangekoppeld of alleen-lezen volume. Zonder deze
+    // vangst gooide dit een niet-gevangen PathAccessException die stil verdween
+    // (het bestand opende niet, geen melding). Nu een gerichte weiger-reden
+    // zodat de aanroeper kan terugvallen of het duidelijk kan melden.
+    final failure = _classifyWriteFailure(e);
+    logError(
+      'FileService.importPackageBytes: kan doelmap niet aanmaken ($failure)',
+      e,
+      s,
+    );
+    return ImportOutcome.failed(failure);
+  }
+
+  // Een afgebroken extractie laat geen half uitgepakte map achter: die zou
+  // stil schijfruimte opsnoepen en verweesde kopie-mappen achterlaten.
+  Future<ImportOutcome> abortAndClean(ImportFailure failure) async {
+    try {
+      await destDir.delete(recursive: true);
+    } catch (e) {
+      logWarning(
+        'FileService.importPackageBytes: partial extract cleanup failed',
+        e,
+      );
+    }
+    return ImportOutcome.failed(failure);
+  }
+
+  // Resolve an archive entry name to a path strictly inside [destDir], or
+  // null when it would escape (zip-slip: `../`, absolute paths, …).
+  String? safeOutPath(String entryName) {
+    final resolved = p.normalize(p.join(destDir.path, entryName));
+    if (resolved != destDir.path && !p.isWithin(destDir.path, resolved)) {
+      return null;
+    }
+    return resolved;
+  }
+
+  for (final entry in entries) {
+    final outPath = safeOutPath(entry.name);
+    if (outPath == null) continue; // skip path-traversal entries
+    final out = File(outPath);
+    try {
+      // Ook de submap-aanmaak binnen de try: een volume dat tijdens het
+      // uitpakken wegvalt laat ook `create` falen, niet alleen de schrijf.
+      await out.parent.create(recursive: true);
+      await writeBytesAtomic(out, entry.bytes);
+    } on FileSystemException catch (e) {
+      // Een volle schijf (diskFull) of een onbereikbaar/alleen-lezen doel
+      // (destinationUnavailable) — beide zouden anders als niet-gevangen
+      // exception stil verdwijnen. Ruim de half uitgepakte map op en meld het.
+      final failure = _classifyWriteFailure(e);
+      logWarning(
+        'FileService.importPackageBytes: schrijffout tijdens extractie ($failure)',
+        e,
+      );
+      return abortAndClean(failure);
+    }
+  }
+
+  // The main markdown must itself resolve inside the extraction folder.
+  final mdPath = safeOutPath(mdEntry.name);
+  if (mdPath == null) return abortAndClean(ImportFailure.unsupported);
+  return ImportOutcome.ok(mdPath);
+}
+
+/// Vertaalt een schrijffout tijdens extractie naar een gerichte weiger-reden:
+/// een volle schijf ([ImportFailure.diskFull]) of een onbereikbaar/alleen-lezen
+/// doel ([ImportFailure.destinationUnavailable]) — bijvoorbeeld een ingestelde
+/// thuismap op een niet-aangekoppeld volume. Zonder deze vertaling zou een
+/// [FileSystemException] als niet-gevangen exception stil verdwijnen: het
+/// bestand opende niet en er kwam geen melding. Gedeeld door de pakket- en de
+/// platte-markdown-tak zodat beide dezelfde reden geven.
+ImportFailure _classifyWriteFailure(FileSystemException e) {
+  final msg = e.toString().toLowerCase();
+  if (msg.contains('no space left') ||
+      msg.contains('disk full') ||
+      msg.contains('enospc')) {
+    return ImportFailure.diskFull;
+  }
+  return ImportFailure.destinationUnavailable;
+}
+
+/// Vertaalt een niet-200 HTTP-status bij de URL-import naar een weiger-reden.
+/// 404 is "staat er niet" ([ImportFailure.notFound]); een 3xx is een omleiding
+/// die we niet volgen ([ImportFailure.redirect] — `followRedirects=false` houdt
+/// een 3xx weg van de SSRF-controle); al het andere — 401/403/5xx — valt onder
+/// de generieke [ImportFailure.network], want een presentatie-URL hoort publiek
+/// leesbaar te zijn en 403 is te dubbelzinnig om apart te benoemen. Gedeeld door
+/// de desktop-import en de web-fetch ([FileServiceNet._fetchCapped]).
+ImportFailure _classifyUrlImportStatus(int status) {
+  if (status == 404) return ImportFailure.notFound;
+  if (status >= 300 && status < 400) return ImportFailure.redirect;
+  return ImportFailure.network;
 }
 
 // ── De bestandskiezers ──────────────────────────────────────────────────────

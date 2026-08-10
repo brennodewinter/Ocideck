@@ -15,6 +15,21 @@ Future<void> _stopAndDispose(VideoPlayerController? controller) async {
   await controller.dispose();
 }
 
+/// Waaróm een mediapreview geen (bruikbare) controller heeft, zodat hij een
+/// gerichte placeholder kan tonen in plaats van een neutraal, betekenisloos
+/// mediavak. `null` zolang er niets misging (geen media, of nog aan het laden).
+enum MediaLoadFailure {
+  /// De remote-URL is door de SSRF-poort geweigerd (privé/LAN/loopback-doel).
+  /// Zelfde geval als bij een afbeelding: "door de beveiliging geweigerd".
+  remoteRefused,
+
+  /// De media was toegestaan maar kon niet worden geladen: 404, time-out, een
+  /// TLS-fout, of een codec die het platform niet aankan. Zonder dit onderscheid
+  /// viel een mislukte remote-video stil terug op een leeg "Video"-vak, niet te
+  /// onderscheiden van "nog aan het laden".
+  loadError,
+}
+
 /// Gedeelde levenscyclus voor de audio- en videopreview. Beide spelen via een
 /// [VideoPlayerController] (video_player dekt op desktop ook audio) en delen
 /// exact dezelfde (her)initialisatie met generatie-bewaking tegen snelle
@@ -28,6 +43,13 @@ Future<void> _stopAndDispose(VideoPlayerController? controller) async {
 mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
   VideoPlayerController? _controller;
   bool _completed = false;
+
+  /// Waaróm er (nog) geen bruikbare controller is; `null` zolang er niets
+  /// misging. De videopreview leest dit om de juiste placeholder te kiezen —
+  /// zonder deze reden viel een geweigerde of mislukte remote-video stil terug
+  /// op een neutraal "Video"-vak.
+  MediaLoadFailure? _loadFailure;
+  MediaLoadFailure? get mediaLoadFailure => _loadFailure;
 
   /// Bumped on every (re)init so an in-flight run that has been superseded by a
   /// newer one (rapid slide switches) can bail and clean up its controller.
@@ -96,6 +118,7 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
     await _stopAndDispose(old);
     if (gen != _initGen) return; // superseded
     _completed = false;
+    _loadFailure = null; // verse poging: elke oude reden vervalt
     final path = resolveMediaPath();
     if (path == null) {
       if (mounted) setState(() {});
@@ -107,6 +130,7 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
     if (VideoSource.looksLikeUrl(path) &&
         !await NetGuard.isAllowedMediaUrlResolved(path)) {
       if (gen != _initGen) return;
+      _loadFailure = MediaLoadFailure.remoteRefused;
       if (mounted) setState(() {}); // keep the placeholder visible
       return;
     }
@@ -128,7 +152,10 @@ mixin _MediaPlaybackHost<T extends StatefulWidget> on State<T> {
       if (mediaAutoplay) await controller.play();
     } catch (e) {
       logWarning(mediaLogLabel, e);
-      // Keep the placeholder visible when the platform cannot open the file.
+      // Placeholder zichtbaar houden — met een reden, zodat een mislukte
+      // remote-video niet als een leeg "Video"-vak leest maar als "kan niet
+      // worden geladen".
+      _loadFailure = MediaLoadFailure.loadError;
     }
     if (gen != _initGen) {
       await _stopAndDispose(controller);
