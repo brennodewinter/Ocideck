@@ -12,6 +12,55 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.4.2] — 2026-08-10
+
+### Added
+
+- feat: groter logo + titel boven afbeelding (#1406, #1407) (#1440)
+- feat(titel): beeldkolommen naast de titeltekst (#1405) (#1439)
+- feat(afbeeldingen): afbeeldingsbestand hernoemen in de bibliotheek (#1404)
+- feat(grafiek): starthoek voor taart/donut + app-oriëntatie op top (#1395)
+- feat(grafiek): schakelaar om percentages op taartpunten te verbergen (#1395)
+- feat(xmpp): XmppPresenceBeacon + XmppChat — sealed-id-dedup chat + presence (§5 sub-plak 7)
+- feat(xmpp): XmppSnapshotChannel + xmpp_collab_launch — end-to-end host/join (§5 sub-plak 6)
+- feat(xmpp): XmppKeyExchange — signed-rot presence + blinded keyshare + deny-by-default admission (§5 sub-plak 5)
+- feat(xmpp): XmppTransport + companion-demux + gap→resync (§4 sub-plak 4)
+- feat(xmpp): sessie-reconnect met MUC-rejoin en resync-signaal (§4 sub-plak 3)
+- feat(documentmodus): instelling 'nieuw hoofdstuk op een nieuwe pagina'
+- feat(release): auto-redispatch the release-CI when SHA256SUMS is missing (plan #8)
+- feat(release): --status subcommand, live progress, run log, richer summary
+- feat(collab): §5.1 crypto-uitbreiding — signed rot + recipient-blinded wrap (GEPOORT)
+- feat(documentmodus): pagina-einde (---) — invoegen, render en export
+- feat(collab): extraheer CollabDeviceDirectory met pin/cap-hardening (#1386)
+
+### Changed
+
+- ci(linux-gate): draai de suite alleen post-merge, niet ook per PR (#1450)
+- FILE_FORMAT afstemmen op verliesvrije Marp-rondgang
+- Marp-opmaak verliesvrij behouden en overal renderen (#1436, #1437)
+- test(xmpp): integratietest tegen echte Prosody + lokaal testbed
+- docs(design): XMPP CollabTransport v3.1 — bevestigings-review verwerkt (wacht op akkoord)
+
+### Fixed
+
+- fix(welkom): begrens Vigilis-merk zodat een failed asset de voettekst niet laat overlopen
+- fix(save): macOS "Kies bestandsnaam…" deed niets — sheet verschijnt niet (#1449)
+- fix(release): commit de versiebump vóór de poort zodat een afgebroken run main schoon laat
+- fix(quality): improve contrast checks and autofix
+- fix(secrets): allowlist the local XMPP testbed's generated keys/env
+- fix(table): verwijder ongewenste 'Acties en besluiten'-presetknop
+- fix(release): drop invalid --limit from notary pre-flight (unblocked every release)
+- fix(open): geen stille mislukkingen meer bij openen/importeren/opslaan/synchroniseren
+- fix(xmpp): batch XMPP-bugfixes 1411-1434 (#1438)
+- fix(free-markdown): pagineer lange body in plaats van kromtrekken (#1409) (#1435)
+- fix(xmpp): vier bugs die een echte WebSocket-verbinding onmogelijk maakten
+- fix(grafiek): leesbare inkt voor taart-partjelabels i.p.v. vast wit
+- fix(grafiek): taart zonder gat — alleen de donut houdt er een (#1395)
+- fix(release): tag-safety + resume-cleanliness (version check, idempotent sign, GET retry)
+- fix(release): harden release_auto.sh against tag/mirror/branch/signing failure modes
+- fix(release): fetch merge-commit before tagging in release_auto.sh
+- fix(documentmodus): opslaan in élke modus + crashherstel voor documenten
+
 ## [0.4.1] — 2026-08-08
 
 ### Added
