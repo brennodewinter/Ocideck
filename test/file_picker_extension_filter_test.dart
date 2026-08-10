@@ -94,4 +94,69 @@ void main() {
           'the native panel is macOS-only; the gate must stay platform-aware',
     );
   });
+
+  // Spiegel van de _pickPathGated-poort hierboven, nu voor opslaan.
+  // file_picker.saveFile gebruikt op macOS een sheet (beginSheetModal) op het
+  // Flutter-venster, die de CFBundleDocumentTypes-filter erft en niet
+  // betrouwbaar verschijnt — "Kies bestandsnaam…" deed niets. De route zit in
+  // _saveDestinationGated (file_service_project.dart), die saveDeckAsDetailed
+  // aanroept. Deze source-gate voorkomt dat de route stilletjes terugkeert naar
+  // file_picker.saveFile.
+  test('saveDeckAsDetailed routes macOS saves through saveMacFile', () {
+    // saveDeckAsDetailed moet de routeerhelper aanroepen, niet zelf file_picker.
+    final service = File('lib/services/file_service.dart').readAsStringSync();
+    final start = service.indexOf('saveDeckAsDetailed(');
+    expect(start, isNot(-1), reason: 'saveDeckAsDetailed not found');
+    final end = service.indexOf('\n  }\n', start);
+    expect(
+      end,
+      isNot(-1),
+      reason: 'no method end found for saveDeckAsDetailed',
+    );
+    final body = service
+        .substring(start, end)
+        .split('\n')
+        .where((line) => !line.trimLeft().startsWith('//'))
+        .join('\n');
+    expect(
+      body,
+      contains('_saveDestinationGated'),
+      reason:
+          'saveDeckAsDetailed must resolve the destination through '
+          '_saveDestinationGated, not call file_picker.saveFile directly.',
+    );
+
+    // De routeerhelper zelf moet op macOS via saveMacFile gaan, met
+    // MissingPluginException-terugval voor oude builds.
+    final project = File(
+      'lib/services/file/file_service_project.dart',
+    ).readAsStringSync();
+    final gated = project
+        .split('\n')
+        .where((line) => !line.trimLeft().startsWith('//'))
+        .join('\n');
+    expect(
+      gated,
+      contains('saveMacFile'),
+      reason:
+          '_saveDestinationGated must call saveMacFile on macOS — '
+          'file_picker.saveFile uses a sheet that inherits the app '
+          'document-type filter and does not appear reliably, so "Kies '
+          'bestandsnaam…" did nothing.',
+    );
+    expect(
+      gated,
+      contains('Platform.isMacOS'),
+      reason:
+          'the native save panel is macOS-only; the route must stay '
+          'platform-aware',
+    );
+    expect(
+      gated,
+      contains('MissingPluginException'),
+      reason:
+          'old builds without the native handler must fall back to '
+          'file_picker.saveFile rather than fail silently',
+    );
+  });
 }

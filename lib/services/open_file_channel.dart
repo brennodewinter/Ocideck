@@ -39,6 +39,47 @@ Future<String?> pickUnfilteredMacFile({
   }
 }
 
+/// Opent op macOS een `NSSavePanel` zonder typefilter en levert het gekozen
+/// pad — het opslaan-spiegelbeeld van [pickUnfilteredMacFile].
+///
+/// `file_picker.saveFile` gebruikt op macOS `NSSavePanel.beginSheetModal` op
+/// het Flutter-venster. Die sheet erft de `CFBundleDocumentTypes`-filter van de
+/// app en verschijnt niet betrouwbaar — precies de reden dat [pickUnfilteredMacFile]
+/// een eigen `runModal`-kiezer gebruikt. Het opslaan-pad kreeg die behandeling
+/// voorheen niet, waardoor "Kies bestandsnaam…" na de bestemmingsdialoog niets
+/// deed: de sheet verscheen niet, `saveFile` keerde stil terug naar `null`, en
+/// `saveAs` rapporteerde `false` zonder melding.
+///
+/// De native kant schrijft geen bytes — net als `file_picker.saveFile` op
+/// desktop levert deze functie alleen het pad; de aanroeper schrijft zelf.
+///
+/// Belangrijk: de bestemmingsdialoog moet *vóór* deze call dicht zijn, om
+/// dezelfde reden als bij [pickUnfilteredMacFile].
+///
+/// Levert het gekozen pad, of `null` bij annuleren. Op niet-macOS altijd
+/// `null`. [MissingPluginException] (oude build zonder native handler) wordt
+/// doorgegeven — de aanroeper mag dan op `file_picker` terugvallen. Andere
+/// fouten worden gelogd en als annuleren behandeld.
+Future<String?> saveMacFile({
+  String? dialogTitle,
+  String? fileName,
+  String? initialDirectory,
+}) async {
+  if (kIsWeb || !Platform.isMacOS) return null;
+  try {
+    return await kOpenFileChannel.invokeMethod<String>('saveFile', {
+      'dialogTitle': dialogTitle,
+      'fileName': fileName,
+      'initialDirectory': initialDirectory,
+    });
+  } on MissingPluginException {
+    rethrow;
+  } catch (e) {
+    logWarning('saveMacFile failed', e);
+    return null;
+  }
+}
+
 /// Receives file paths from the macOS host when the user opens a `.md` or
 /// `.ocideck` file via Finder (double-click / "Open With"). See
 /// `macos/Runner/AppDelegate.swift` for the native side.

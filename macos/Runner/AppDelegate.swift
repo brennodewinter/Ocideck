@@ -26,6 +26,7 @@ final class OpenFileHandler {
   /// Sterke referentie zolang het paneel open is — anders ruimt ARC de
   /// delegate op en valt `shouldEnable` stil.
   private var pickDelegate: EnableAllFilesDelegate?
+  private var saveDelegate: EnableAllFilesDelegate?
 
   func register(messenger: FlutterBinaryMessenger) {
     let channel = FlutterMethodChannel(
@@ -47,6 +48,19 @@ final class OpenFileHandler {
         self.pickFile(
           title: args?["dialogTitle"] as? String,
           initialDirectory: args?["initialDirectory"] as? String,
+          result: result)
+      case "saveFile":
+        // Eigen opslaan-kiezer, om dezelfde reden als pickFile hierboven:
+        // file_picker.saveFile gebruikt beginSheetModal op het Flutter-venster,
+        // en die sheet erft de CFBundleDocumentTypes-filter van de app en
+        // verschijnt niet betrouwbaar. runModal + lege allowedContentTypes
+        // spiegelt de openen-kiezer. De Dart-kant sluit de bestemmingsdialoog
+        // vóór deze call, zodat er geen geneste modal is.
+        let saveArgs = call.arguments as? [String: Any]
+        self.saveFile(
+          title: saveArgs?["dialogTitle"] as? String,
+          fileName: saveArgs?["fileName"] as? String,
+          initialDirectory: saveArgs?["initialDirectory"] as? String,
           result: result)
       default:
         result(FlutterMethodNotImplemented)
@@ -88,6 +102,51 @@ final class OpenFileHandler {
     // Openen-dialoog vóór deze call, zodat er geen geneste modal is.
     let response = dialog.runModal()
     pickDelegate = nil
+    if response == .OK, let path = dialog.url?.path {
+      result(path)
+    } else {
+      result(nil)
+    }
+  }
+
+  /// Systeemvenster "bestand opslaan". Spiegel van [pickFile]: runModal i.p.v.
+  /// file_picker's sheet, met lege allowedContentTypes zodat de
+  /// CFBundleDocumentTypes-filter van de app het venster niet beperkt of
+  /// onzichtbaar maakt. De aanroeper schrijft de bytes zelf naar het gekozen
+  /// pad (file_picker.saveFile doet op desktop ook niet meer dan het pad
+  /// leveren).
+  private func saveFile(
+    title: String?,
+    fileName: String?,
+    initialDirectory: String?,
+    result: @escaping FlutterResult
+  ) {
+    let dialog = NSSavePanel()
+    dialog.title = title ?? ""
+    dialog.showsTagField = false
+    dialog.showsHiddenFiles = false
+    dialog.canCreateDirectories = true
+    dialog.nameFieldStringValue = fileName ?? ""
+    dialog.allowsOtherFileTypes = true
+    dialog.canSelectHiddenExtension = true
+    // Lege allowedContentTypes = alle typen (Apple). allowedFileTypes=nil voor
+    // pre-UTI-paden. De EnableAllFilesDelegate forceert shouldEnable=true.
+    if #available(macOS 11.0, *) {
+      dialog.allowedContentTypes = []
+    }
+    dialog.allowedFileTypes = nil
+    let delegate = EnableAllFilesDelegate()
+    saveDelegate = delegate
+    dialog.delegate = delegate
+    if let initialDirectory, !initialDirectory.isEmpty {
+      dialog.directoryURL = URL(fileURLWithPath: initialDirectory)
+    }
+
+    // runModal, geen sheet: dezelfde reden als bij pickFile — een sheet op het
+    // Flutter-venster erfde de CFBundleDocumentTypes-filter en verschijnt niet
+    // betrouwbaar. De Dart-kant sluit de bestemmingsdialoog vóór deze call.
+    let response = dialog.runModal()
+    saveDelegate = nil
     if response == .OK, let path = dialog.url?.path {
       result(path)
     } else {

@@ -668,7 +668,8 @@ class FileService {
     final safeName = deck.title
         .replaceAll(RegExp(r'[^\w\s-]'), '')
         .replaceAll(' ', '_');
-    final result = await _saveDestination(
+    final result = await _saveDestinationGated(
+      picker: _saveDestination,
       dialogTitle: _d('Opslaan als'),
       fileName: '$safeName.md',
       initialDirectory: initialDirectory,
