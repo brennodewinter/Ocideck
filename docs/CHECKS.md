@@ -20,22 +20,22 @@ is a required status check** (branch protection on `main`): a PR does not merge
 until it passes, via the web UI or the REST/`tea` merge API. That is the
 prevention layer — drift is stopped at the PR instead of landing. Two things it
 still does **not** hard-block, on purpose: the **coverage floors**. The **full
-test suite** now runs **per pull request** that touches `lib/**` or `test/**`
-(and their direct dependencies) — `linux-gate.yml`, `make check-no-coverage` —
-surfacing the failure on the PR *before* the merge. That closes a real gap: a
-Linux-specific or load-sensitive test (path separators, subprocess timeouts,
-I/O races) can be green on the fast maintainer Mac and red only on the Linux
-runner, and until now that only showed up post-merge. It **also** still runs
-post-merge on every push to `main` as a detection smoke alarm for anything that
-changes on `main` between PRs. To avoid the I/O contention that *caused* the
-load-sensitive flakiness, the heavy gate is **serialized**: it runs on a
-dedicated **`linux-serial` runner with capacity 1**, so never more than one
-full-suite run executes at once, while `static-gate`/`scans` keep the capacity-4
-lane. The queue latency is the deliberate trade. The coverage floors still run
+test suite** runs **post-merge on every push to `main`** — `linux-gate.yml`,
+`make check-no-coverage` — as a detection smoke alarm: a Linux-specific or
+load-sensitive test (path separators, subprocess timeouts, I/O races) can be
+green on the fast maintainer Mac and red only on the Linux runner, and this
+surfaces that within ~half an hour of the merge instead of only when someone
+tries to land a fix on top. It is **detection, not prevention**: the merge is
+not blocked. (#1123 also ran this gate per PR as prevention; that was reverted —
+the suite ran twice per change, on the PR and again post-merge, and the PR run
+was the expensive one on a runner that is already the bottleneck. The per-PR
+prevention layer that remains is `static-gate`, the required check.) The heavy
+gate is **serialized**: it runs on a dedicated **`linux-serial` runner with
+capacity 1**, so a manual dispatch and a merge never run at once, while
+`static-gate`/`scans` keep the capacity-4 lane. The coverage floors still run
 nowhere but in `make check` on your own machine. So: the per-PR static gate
-blocks, the per-PR full suite surfaces (serialized, not yet a required check),
-the main-push run alarms, the tag is the release gate, and you are still the
-coverage gate.
+blocks, the main-push run alarms, the tag is the release gate, and you are
+still the coverage gate.
 
 > **Escape hatch.** If the runner is down or saturated and a green PR cannot
 > merge because its required `static-gate` check never ran, a repo admin removes
@@ -1566,13 +1566,16 @@ that reaches beyond `build/test_cache`.
   the full suite. Now every merge to `main` runs `make check-no-coverage`, so a
   `main` that went red surfaces as a failed run (and mail) within ~half an hour
   instead of only when someone tries to land a fix on top of it. It is a
-  **detection** net, not prevention: the merge is not blocked (that would need
-  the full suite before every PR, too slow on this runner), but `main` can no
-  longer sit **silently** red. The coverage floor still stays out
-  (`check-no-coverage`); it belongs on the committer's machine (see above).
-  Concurrency is scoped by event, so a manual dispatch and a merge never cancel
-  each other; rapid merges do supersede one another (the latest run tests the
-  newest tip, which is what "is `main` green?" asks).
+  **detection** net, not prevention: the merge is not blocked. (#1123 also ran
+  this gate per PR as prevention; that was reverted — the suite ran twice per
+  change, on the PR and again post-merge, and the PR run was the expensive one on
+  a runner that is already the bottleneck. The per-PR prevention layer that
+  remains is `static-gate`, the required check.) `main` can no longer sit
+  **silently** red. The coverage floor still stays out (`check-no-coverage`); it
+  belongs on the committer's machine (see above). Concurrency is scoped by event,
+  so a manual dispatch and a merge never cancel each other; rapid merges do
+  supersede one another (the latest run tests the newest tip, which is what "is
+  `main` green?" asks).
 
 ### `.forgejo/workflows/ci-image.yml` — the prebaked Linux CI image (`workflow_dispatch` + on pin/Dockerfile change)
 
