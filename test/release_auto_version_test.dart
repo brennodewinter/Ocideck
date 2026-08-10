@@ -399,4 +399,28 @@ void main() {
       );
     },
   );
+
+  // Regressie: de notary-pre-flight gebruikte 'notarytool history --limit 1', maar
+  // notarytool kent geen --limit (exit 64 = usage error) — daardoor blokkeerde de
+  // pre-flight élke release met een vals "profiel verdwenen". Borg dat de
+  // history-aanroep die vlag niet terugkrijgt. (Een runtime-rooktest kan niet in CI:
+  // die heeft geen macOS-notary-credentials; daarom deze statische borg.)
+  test('de notary-pre-flight gebruikt geen ongeldige notarytool-vlag', () {
+    final src = File('scripts/notarize_macos.sh').readAsStringSync();
+    final historyLine = src
+        .split('\n')
+        .firstWhere((l) => l.contains('notarytool history'), orElse: () => '');
+    expect(
+      historyLine,
+      isNotEmpty,
+      reason: 'notarytool history-aanroep niet gevonden in notarize_macos.sh.',
+    );
+    expect(
+      historyLine.contains('--limit'),
+      isFalse,
+      reason:
+          "'notarytool history' kent geen --limit; die vlag liet de pre-flight met "
+          'exit 64 elke release blokkeren.',
+    );
+  });
 }
