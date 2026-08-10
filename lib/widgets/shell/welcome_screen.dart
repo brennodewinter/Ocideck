@@ -959,12 +959,22 @@ Widget _madePossibleByVigilis(AppLocalizations l10n, TextStyle style) {
           ),
         ),
         const SizedBox(width: 8),
-        Image.asset(
-          BrandLogo.vigilis.assetKey,
+        // Het merk in een vaste breedte wikkelen, zodat een failed asset load
+        // (stale build, corrupte installatie) de broken-image placeholder niet
+        // in een onbegrensd `Row`-slot kan laten groeien voorbij de
+        // `ConstrainedBox(maxWidth: 220)` — dat gaf een RenderFlex-overflow op
+        // de voettekst zodra `AssetManifest.bin` ontbrak. `BoxFit.contain` in
+        // een beperkte doos schaalt het logo tot zijn natuurlijke 76px en de
+        // fout-placeholder blijft binnen de 80×18.
+        SizedBox(
+          width: 80,
           height: 18,
-          fit: BoxFit.contain,
-          filterQuality: FilterQuality.high,
-          semanticLabel: l10n.d('Vigilis'),
+          child: Image.asset(
+            BrandLogo.vigilis.assetKey,
+            fit: BoxFit.contain,
+            filterQuality: FilterQuality.high,
+            semanticLabel: l10n.d('Vigilis'),
+          ),
         ),
       ],
     ),
