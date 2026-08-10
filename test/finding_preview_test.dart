@@ -336,7 +336,7 @@ void main() {
   );
 
   testWidgets(
-    'the continuation heading is far smaller than page 1 (#1198 follow-up)',
+    'the continuation heading remains smaller than page 1 (#1198 follow-up)',
     (tester) async {
       // The repeated heading on a continuation page is a compact reminder, not a
       // full title — a large one wasted half the slide on the finding's name. It
@@ -366,10 +366,10 @@ void main() {
 
       expect(
         continuation,
-        lessThan(page1 * 0.6),
+        lessThan(page1 * 0.7),
         reason:
-            'continuation heading ($continuation) should be about half of the '
-            'page-1 heading ($page1), not a full-size title',
+            'continuation heading ($continuation) should remain clearly smaller '
+            'than the page-1 heading ($page1)',
       );
     },
   );

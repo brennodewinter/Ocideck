@@ -40,12 +40,10 @@ void main() {
 
     test('a realistic finding packs denser since the smaller finding type '
         '(#1163)', () {
-      // The same four ~5-line sections that needed three pages before the
-      // #1163 type down-scale now fit two: page 1 carries the header plus the
-      // first section, page 2 the remaining three. This is the calibration
-      // guard for "more content per page" — if the font/pagination scaling
-      // drift apart, the packing here moves. (Page 1 stops at the first section
-      // by design so the header page stays readable, not sparse — #1198.)
+      // The same four ~5-line sections fit two balanced pages: page 1 uses the
+      // room below the compact header for two sections, page 2 carries the
+      // remaining two. This is the calibration guard for "more content per
+      // page" — if font and pagination scaling drift apart, the packing moves.
       final description = 'Beschrijving: ${_lorem(8)}';
       final confirmation = 'Bevestiging: ${_lorem(8)}';
       final impact = 'Impact: ${_lorem(8)}';
@@ -65,11 +63,11 @@ void main() {
 
       expect(pages, hasLength(2));
       expect(pages[0].description, description);
-      expect(pages[0].confirmation, isEmpty);
+      expect(pages[0].confirmation, confirmation);
       expect(pages[0].impact, isEmpty);
       expect(pages[0].recommendation, isEmpty);
       expect(pages[1].description, isEmpty);
-      expect(pages[1].confirmation, confirmation);
+      expect(pages[1].confirmation, isEmpty);
       expect(pages[1].impact, impact);
       expect(pages[1].recommendation, recommendation);
 
@@ -93,8 +91,45 @@ void main() {
       ]);
     });
 
+    test('fills page one before adding an avoidable continuation slide', () {
+      // Two short sections followed by two longer ones used to become three
+      // slides solely because page 1 stopped after the first section. With the
+      // compact header the two short sections share page 1 and the two longer
+      // sections share page 2, both above the readability floor.
+      final sections = [
+        'Beschrijving: ${_lorem(1)}',
+        'Bevestiging: ${_lorem(12)}',
+        'Impact: ${_lorem(12)}',
+        'Aanbeveling: ${_lorem(12)}',
+      ];
+      final spec = FindingSpec(
+        heading: heading,
+        description: sections[0],
+        confirmation: sections[1],
+        impact: sections[2],
+        recommendation: sections[3],
+      );
+
+      final pages = paginateFinding(spec);
+
+      expect(pages, hasLength(2));
+      expect(pages[0].description, sections[0]);
+      expect(pages[0].confirmation, sections[1]);
+      expect(pages[1].impact, sections[2]);
+      expect(pages[1].recommendation, sections[3]);
+      expect([
+        for (final page in pages)
+          ...[
+            page.description,
+            page.confirmation,
+            page.impact,
+            page.recommendation,
+          ].where((section) => section.isNotEmpty),
+      ], sections);
+    });
+
     test('a finding stays single until it would shrink past the scale floor', () {
-      // "Fits one page" means header + sections that still render at ≥0.70
+      // "Fits one page" means header + sections that still render at ≥0.80
       // width. A short finding stays single; growing it until the slide would
       // scale down past the floor splits it BETWEEN sections instead of
       // shrinking the whole thing (the bug that made a finding render at a third

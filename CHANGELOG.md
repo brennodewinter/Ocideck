@@ -43,6 +43,7 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(bevinding): grotere inhoudstekst, compacte headers en gemeten paginering die bevindingsslides vult zonder onnodige vervolgslides
 - fix(welkom): begrens Vigilis-merk zodat een failed asset de voettekst niet laat overlopen
 - fix(save): macOS "Kies bestandsnaam…" deed niets — sheet verschijnt niet (#1449)
 - fix(release): commit de versiebump vóór de poort zodat een afgebroken run main schoon laat

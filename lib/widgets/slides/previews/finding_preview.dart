@@ -96,6 +96,7 @@ class _FindingPreview extends StatelessWidget {
           extraVReserve: reserve,
         );
     final m = _findingFontScale * fit;
+    final headerM = m * kFindingHeaderTypeScale;
 
     return _PreviewScaffold(
       width: w,
@@ -107,7 +108,7 @@ class _FindingPreview extends StatelessWidget {
         if (continuation)
           _continuationHeading(spec, m)
         else ...[
-          _headerCard(context, spec, severityColor, ctxCvss, m),
+          _headerCard(context, spec, severityColor, ctxCvss, headerM),
           SizedBox(height: w * 0.03),
         ],
         ..._sectionBlocks(context, spec, m),
@@ -140,7 +141,7 @@ class _FindingPreview extends StatelessWidget {
             // full identity lives on page 1 — so the previously large repeated
             // title just wasted half the slide on the finding's beginning
             // (#1198 follow-up).
-            fontSize: w * 0.017 * m,
+            fontSize: w * 0.014 * m,
             fontWeight: FontWeight.w700,
             color: AppTheme.navy,
           ),

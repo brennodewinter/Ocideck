@@ -24,12 +24,15 @@ import 'text_measurement.dart';
 /// `finding_preview.dart` so the fit here and the render there cannot drift.
 const double kFindingBaseFontScale = 0.84;
 
-/// Fraction of the slide height a finding header page should aim to fill. Set
-/// below 1.0 on purpose: a header + its first section reads best with margin
-/// rather than edge-to-edge, which is the "renders far too large" of #1282. The
-/// fit never *enlarges* content to reach this (that is [maxScale]'s job); it only
-/// shrinks content that would otherwise exceed it.
-const double kFindingHeaderTargetFill = 0.6;
+/// The identity card is supporting context, not the slide's main prose. Keep
+/// its title, badges, scope and CVSS typography a third smaller than the body.
+const double kFindingHeaderTypeScale = 2 / 3;
+
+/// Fraction of the slide height a finding header page should aim to fill. The
+/// remaining eighth keeps the layout calm without reducing realistic text to
+/// thumbnail size. The fit never *enlarges* content to reach this (that is
+/// [maxScale]'s job); it only shrinks content that would otherwise exceed it.
+const double kFindingHeaderTargetFill = 0.875;
 
 /// The finding preview's side padding, mirrored from `_FindingPreview`.
 const double _findingHPadFraction = 0.045;
@@ -63,9 +66,10 @@ double findingHeaderFitScale({
   // Target a fraction of the height the scaffold actually gives the content: the
   // whole slide, less any logo strip the scaffold reserves *outside* the
   // [FittedBox] ([extraVReserve]). Aiming for a fraction — not all — of that keeps
-  // a dense header off the edges (the "renders far too large" of #1282); because
-  // the fraction already leaves margin, the scaffold's own vertical padding fits
-  // within it without a separate subtraction (which would double-count the logo).
+  // a dense header off the edges while using enough of the slide for readable
+  // type; because the fraction already leaves margin, the scaffold's own vertical
+  // padding fits within it without a separate subtraction (which would
+  // double-count the logo).
   final budget = ((slideHeight - extraVReserve) * kFindingHeaderTargetFill)
       .clamp(1.0, slideHeight);
 
@@ -106,7 +110,7 @@ double _findingContentHeight(
     if (spec.heading.isNotEmpty) {
       h += measureTextHeight(
         spec.heading,
-        w * 0.017 * m,
+        w * 0.014 * m,
         availW,
         bold: true,
         fontFamily: font,
@@ -114,7 +118,12 @@ double _findingContentHeight(
     }
     h += w * 0.02; // Padding.bottom under the continuation heading.
   } else {
-    h += _findingHeaderCardHeight(spec, m, availW, font);
+    h += _findingHeaderCardHeight(
+      spec,
+      m * kFindingHeaderTypeScale,
+      availW,
+      font,
+    );
     h += w * 0.03; // SizedBox between the card and the first section.
   }
   h += _findingSectionsHeight(spec, fit, availW, font);
