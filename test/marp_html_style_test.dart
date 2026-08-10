@@ -39,7 +39,9 @@ footer: 'Deck *voet*'
       contains(
         'class="slide" '
         'style="color:#112233;background-color:#fefefe;'
-        'background-image:linear-gradient(#0008, #0008)"',
+        'background-image:linear-gradient(#0008, #0008);'
+        'background-repeat:no-repeat;background-position:center;'
+        'background-size:cover;--ocideck-title-color:#112233"',
       ),
     );
     expect(
@@ -47,7 +49,9 @@ footer: 'Deck *voet*'
       contains(
         'class="slide" '
         'style="color:#abcdef;background-color:#101010;'
-        'background-image:linear-gradient(#123, #456)"',
+        'background-image:linear-gradient(#123, #456);'
+        'background-repeat:no-repeat;background-position:center;'
+        'background-size:cover;--ocideck-title-color:#abcdef"',
       ),
     );
     expect(
@@ -131,7 +135,10 @@ backgroundColor: 'rgb(1, 2, 3)'
 
     final html = await service.build(markdown);
 
-    expect(html, contains('style="color:#ff0000"'));
+    expect(
+      html,
+      contains('style="color:#ff0000;--ocideck-title-color:#ff0000"'),
+    );
     expect(html, isNot(contains('background-color:rgb')));
   });
 
@@ -196,6 +203,23 @@ backgroundImage: "url('images/bg.png')"
     expect(html, contains('background-image:url(#ocideck-img-0)'));
     expect(html, contains('data:image/png;base64,AA=='));
     expect(html, contains("sec.style.backgroundImage='url(\"'+bgUri+'\")'"));
+    expect(html, contains('background-repeat:no-repeat'));
+    expect(html, contains('background-position:center'));
+    expect(html, contains('background-size:cover'));
     expect(html, isNot(contains('images/bg.png')));
+  });
+
+  test('HTML export lets Marp text colour reach headings', () async {
+    final html = await service.build('''---
+marp: true
+color: '#f4f7fb'
+backgroundColor: '#0c2238'
+---
+
+# Leesbare titel
+''');
+
+    expect(html, contains('color:#f4f7fb'));
+    expect(html, contains('--ocideck-title-color:#f4f7fb'));
   });
 }

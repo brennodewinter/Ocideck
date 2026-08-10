@@ -88,8 +88,18 @@ String _marpCssFilters(List<String> filters) {
   if (backgroundColor != null) {
     css.add('background-color:$backgroundColor');
   }
-  if (backgroundImage.isNotEmpty) css.add('background-image:$backgroundImage');
-  if (titleColor != null) css.add('--ocideck-title-color:$titleColor');
+  if (backgroundImage.isNotEmpty) {
+    css.add('background-image:$backgroundImage');
+    css.add('background-repeat:no-repeat');
+    css.add('background-position:center');
+    css.add(
+      'background-size:${style.imageFit == 'contain' ? 'contain' : 'cover'}',
+    );
+  }
+  final effectiveTitleColor = titleColor ?? color;
+  if (effectiveTitleColor != null) {
+    css.add('--ocideck-title-color:$effectiveTitleColor');
+  }
   final attrs = StringBuffer();
   if (style.imageFit == 'contain') attrs.write(' data-marp-bg-fit="contain"');
   if (filter.isNotEmpty) {
