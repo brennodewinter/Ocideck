@@ -10,7 +10,11 @@ export 'text_measurement.dart' show measureTextHeight, measureTextWidth;
 // The finding-header auto-fit (#1282) lives in its own file to stay under the
 // size ceiling, but callers reach it alongside the other slide metrics here.
 export 'finding_header_metrics.dart'
-    show findingHeaderFitScale, kFindingBaseFontScale, kFindingHeaderTargetFill;
+    show
+        findingHeaderFitScale,
+        kFindingBaseFontScale,
+        kFindingHeaderTargetFill,
+        kFindingHeaderTypeScale;
 
 /// Caches a slide preview's fully-resolved layout result (a fit-scale, or a
 /// record of scale + column geometry), keyed by the slide's identity and the

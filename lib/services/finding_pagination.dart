@@ -5,12 +5,12 @@
 /// `.md` on disk is unchanged; only what the preview/presenter/export enumerate
 /// changes.
 ///
-/// Page 1 keeps the header card (severity badge, heading, scope) plus the
-/// finding's first section — placed unconditionally, so an overflowing finding
-/// never renders a header-only, near-empty first page (#1198). Each continuation
-/// page repeats the heading with a small "(i/N)" marker, drops the header card,
-/// and holds the next sections. A finding that fits one slide is returned
-/// unchanged (a single page).
+/// Page 1 keeps the header card (severity badge, heading, scope) and fills its
+/// remaining room with as many whole sections as stay comfortably readable.
+/// Each continuation page repeats the heading with a small "(i/N)" marker,
+/// drops the header card, and greedily fills the freed space with the next whole
+/// sections. A finding that fits one slide is returned unchanged (a single
+/// page).
 library;
 
 import 'package:flutter/foundation.dart';
@@ -30,39 +30,20 @@ final RegExp findingPageMarker = RegExp(r'\((\d+)/\d+\)\s*$');
 /// A finding section, in the fixed §3.1 order.
 enum _Section { description, confirmation, impact, recommendation }
 
-/// The page-budget model, in "line units" (one full-size body line of the
-/// finding preview). It exists so pagination — a pure, deck-non-mutating
-/// transform — can predict how tall a page renders WITHOUT a render context, and
-/// split a finding before the [FittedBox] in `_PreviewScaffold` has to scale it
-/// down (a too-tall finding scales down *uniformly*, so it also shrinks in width:
-/// the whole cause of "the finding only uses a third of the slide").
+/// The historical header-budget model, in body-line units. It remains as a
+/// calibration seam for the live header-card test; pagination now uses
+/// [findingHeaderFitScale], the same content measurement as the preview.
 ///
 /// The numbers below are **measured** against the live `_FindingPreview` at
-/// `SlidePreviewWidget` — a 16:9 slide, no logo — not eyeballed. At that width a
-/// slide is [_linesPerSlide] line-units tall. The compact CVSS score card leaves
-/// enough room for a normal first section below the finding header. A
-/// continuation page keeps the heading (its "(i/N)" marker) but drops the meta,
-/// costing [_contHeadingCost].
-/// A section adds [_sectionHeadingCost] for its `##` heading plus one unit per
-/// wrapped body line at [_charsPerLine] characters each.
+/// `SlidePreviewWidget` — a 16:9 slide, no logo — not eyeballed. The compact CVSS
+/// score card leaves enough room for a normal first section below the finding
+/// header.
 ///
 /// The previous calibration still described the removed cockpit-style CVSS
 /// meter. It reserved more than a page for the header and nearly a page for a
 /// continuation heading, producing five sparse pages for content that renders
 /// legibly on three. These values are calibrated against that real fixture.
 ///
-/// Since #1163 the finding preview draws its type ~0.84× (see
-/// [_findingFontScale] in `finding_preview.dart`), so a body line holds more
-/// characters and more lines fit per slide — both raised in step below so the
-/// smaller type actually buys fewer pages.
-const double _linesPerSlide = 23.0;
-
-/// A continuation page's repeated heading ("(i/N)" marker) plus its spacing. It
-/// is now a quiet half-size reminder rather than a large title (#1198 follow-up:
-/// the big heading wasted half a continuation slide on the finding's title), so
-/// this reserve dropped in step and continuation pages carry a little more.
-const double _contHeadingCost = 4.5;
-const double _sectionHeadingCost = 2.5;
 
 // ── Header-card cost, derived from the finding's identity content ────────────
 // The finding header card is NOT a fixed height: it grows with the heading's
@@ -77,20 +58,21 @@ const double _sectionHeadingCost = 2.5;
 // term measured at the reference width against the live `_FindingPreview` and
 // pinned by `finding_header_cost_test.dart`.
 
-/// Line-units per wrapped heading line.
-const double _headingLineCost = 1.35;
+/// Line-units per wrapped heading line. The identity card uses the compact
+/// `kFindingHeaderTypeScale`, so its title is about one body line tall.
+const double _headingLineCost = 0.9;
 
 /// Heading characters per line. The CVSS score card (right) narrows the text
 /// column, so the heading wraps sooner when a score is shown.
-const double _headingCharsPerLine = 22.0;
-const double _headingCharsPerLineWithScore = 16.0;
+const double _headingCharsPerLine = 33.0;
+const double _headingCharsPerLineWithScore = 24.0;
 
 /// The scope row (`my_location` icon + object) when present.
 const double _scopeRowCost = 1.7;
 
-/// One row of identity badges; chips wrap ~2.5 to a row at this width.
-const double _badgeRowCost = 2.1;
-const double _badgeChipsPerRow = 2.5;
+/// One row of compact identity badges; about 3.5 fit at this width.
+const double _badgeRowCost = 1.75;
+const double _badgeChipsPerRow = 3.5;
 
 /// The CVSS score card: a fixed-height block on the right. The header is as tall
 /// as the taller of its two columns, so a score sets a floor on the height.
@@ -140,44 +122,27 @@ double _headerCardCost(FindingSpec spec) {
 }
 
 /// The modelled header-card cost in line-units, exposed so a real-render test can
-/// pin the model against the live `_FindingPreview` (see #1198). Not for
-/// production use — pagination reads [_headerCardCost] directly.
+/// pin the historical model against the live `_FindingPreview` (see #1198).
 @visibleForTesting
 double debugHeaderCardCost(FindingSpec spec) => _headerCardCost(spec);
 
-/// One full-size body line holds this many characters at the reference width.
-const double _charsPerLine = 47.0;
-
 /// The lowest render scale at which a finding is still left on one slide. A
-/// finding whose content fits [_linesPerSlide] / this ratio stays single: it
-/// renders at ≥ this fraction of full width, which reads as (near-)full and is
-/// not worth spending extra slides on. Below it a finding shrinks far enough to
-/// look broken (F-01 rendered at ~0.3), so it is paginated. Derived from the
-/// (possibly logo-reduced) per-page budget rather than a fixed constant, so a
-/// logo — which lowers the budget — also lowers the split threshold.
-const double _minSinglePageScale = 0.70;
+/// measured finding at or above this multiplier stays single: a modest shrink
+/// is not worth spending another slide on. Below it, pagination wins over type
+/// that becomes too small at presentation distance.
+const double _minSinglePageScale = 0.80;
 
-/// Estimated line-cost of a section's body text, honouring hard line breaks.
-double _bodyCost(String text) {
-  final trimmed = text.trim();
-  if (trimmed.isEmpty) return 0;
-  var lines = 0.0;
-  for (final paragraph in trimmed.split('\n')) {
-    lines += (paragraph.length / _charsPerLine).ceilToDouble().clamp(1, 999);
-  }
-  return lines;
-}
+/// Use the same readability floor while greedily filling paginated pages, so a
+/// split never creates an extra continuation that the single-page rule itself
+/// considers avoidable.
+const double _pagedReadableScale = 0.80;
 
-double _sectionCost(FindingSpec spec, _Section s) {
-  final text = switch (s) {
-    _Section.description => spec.description,
-    _Section.confirmation => spec.confirmation,
-    _Section.impact => spec.impact,
-    _Section.recommendation => spec.recommendation,
-  };
-  if (text.trim().isEmpty) return 0;
-  return _sectionHeadingCost + _bodyCost(text);
-}
+String _sectionText(FindingSpec spec, _Section s) => switch (s) {
+  _Section.description => spec.description,
+  _Section.confirmation => spec.confirmation,
+  _Section.impact => spec.impact,
+  _Section.recommendation => spec.recommendation,
+};
 
 /// A finding restricted to [keep]'s sections (the others blanked). Continuation
 /// pages ([isFirst] false) also drop the header meta and mark the heading.
@@ -217,54 +182,56 @@ FindingSpec _page(
 /// Split [spec] into the finding pages that render at full size. Returns a
 /// single-element list (equal to [spec]) when it already fits one slide.
 ///
-/// [linesPerSlide] is the body-line budget per page; it is reduced by the
-/// caller when a logo reserves vertical space (see [expandFindingsForRender]).
 List<FindingSpec> paginateFinding(
   FindingSpec spec, {
-  double linesPerSlide = _linesPerSlide,
+  String font = 'Arial',
+  double extraVReserve = 0,
 }) {
   final present = [
     for (final s in _Section.values)
-      if (_sectionCost(spec, s) > 0) s,
+      if (_sectionText(spec, s).trim().isNotEmpty) s,
   ];
   if (present.isEmpty) return [spec];
 
   // A finding that renders close enough to full width already: leave it whole
   // rather than trade a small width gain for extra slides.
-  final total =
-      _headerCardCost(spec) +
-      present.fold<double>(0, (a, s) => a + _sectionCost(spec, s));
-  final pageCapacity = linesPerSlide / _minSinglePageScale;
-  if (total <= pageCapacity) return [spec];
+  if (findingHeaderFitScale(
+        spec: spec,
+        font: font,
+        extraVReserve: extraVReserve,
+      ) >=
+      _minSinglePageScale) {
+    return [spec];
+  }
 
-  // Page 1 carries the header card plus the FIRST section — placed
-  // unconditionally, so an overflowing finding never renders a header-only,
-  // mostly-empty page 1 (#1198). The header card is a tall fixed block whose
-  // height varies with the finding's identity content (see [_headerCardCost]);
-  // rather than pack further sections down toward the readability floor beneath
-  // it — where a list-heavy section can render smaller than its line-cost
-  // predicts — page 1 deliberately stops at the first section, which measures
-  // comfortably above the floor even with a logo. The remaining sections greedily
-  // fill continuation pages (no header card, only the repeated heading), which
-  // may hold several related sections each. A single-section finding cannot be
-  // split, so it is returned whole (and scaled) rather than stranding its header.
-  final pages = <List<_Section>>[
-    [present.first],
-  ];
+  // Greedily fill page 1 and its continuations using the exact same measured
+  // fit as the preview. Sections stay whole and in authored order. A section
+  // that cannot reach the floor by itself is still kept intact; splitting
+  // authored prose mid-section would be less predictable than one dense page.
+  final pages = <List<_Section>>[];
   var current = <_Section>[];
-  var budget = pageCapacity - _contHeadingCost;
-  for (final s in present.skip(1)) {
-    final cost = _sectionCost(spec, s);
-    if (cost > budget && current.isNotEmpty) {
-      // A section that on its own overflows a page still gets its own page (it
-      // renders slightly scaled rather than being dropped), but never shares an
-      // already-full page.
+  for (final s in present) {
+    final trial = [...current, s];
+    final isFirst = pages.isEmpty;
+    final candidate = _page(
+      spec,
+      trial.toSet(),
+      isFirst: isFirst,
+      pageNumber: isFirst ? 1 : 2,
+      pageCount: 2,
+    );
+    final readable = findingHeaderFitScale(
+      spec: candidate,
+      font: font,
+      continuation: !isFirst,
+      extraVReserve: extraVReserve,
+    );
+    if (readable < _pagedReadableScale && current.isNotEmpty) {
       pages.add(current);
-      current = <_Section>[];
-      budget = pageCapacity - _contHeadingCost;
+      current = [s];
+    } else {
+      current = trial;
     }
-    current.add(s);
-    budget -= cost;
   }
   if (current.isNotEmpty) pages.add(current);
   if (pages.length <= 1) return [spec];
@@ -286,10 +253,8 @@ List<FindingSpec> paginateFinding(
 /// a finding that fits one slide — passes through unchanged. Detail/evidence
 /// slides of a finding group are not the header and pass through as-is.
 ///
-/// When [profile] is given and a finding slide shows its logo, the per-page
-/// line budget is reduced proportionally to the logo's vertical reserve — so a
-/// finding that fits without a logo still splits when the logo eats into the
-/// available height, instead of overflowing under it.
+/// When [profile] is given, pagination measures with its font and reserves the
+/// shown logo's actual vertical strip, matching the preview.
 List<Slide> expandFindingsForRender(
   List<Slide> slides, {
   ThemeProfile? profile,
@@ -298,10 +263,11 @@ List<Slide> expandFindingsForRender(
   for (final slide in slides) {
     if (slide.type == SlideType.finding &&
         slide.findingRole == FindingRole.header) {
-      final linesPerSlide = _linesPerSlideFor(slide, profile);
+      final metrics = _findingRenderMetrics(slide, profile);
       final pages = paginateFinding(
         FindingSpec.parse(slide.customMarkdown),
-        linesPerSlide: linesPerSlide,
+        font: metrics.font,
+        extraVReserve: metrics.extraVReserve,
       );
       if (pages.length <= 1) {
         out.add(slide);
@@ -347,18 +313,22 @@ FindingSpec firstRenderPageSpec(Slide slide, {ThemeProfile? profile}) {
   // mangled, double-marked page — so leave any already-paginated page verbatim
   // and only split an un-split source finding.
   if (findingPageMarker.hasMatch(spec.heading)) return spec;
+  final metrics = _findingRenderMetrics(slide, profile);
   return paginateFinding(
     spec,
-    linesPerSlide: _linesPerSlideFor(slide, profile),
+    font: metrics.font,
+    extraVReserve: metrics.extraVReserve,
   ).first;
 }
 
-/// The per-page line budget for [slide], reduced when a shown logo reserves
-/// vertical space. Without a profile or logo, this is just [_linesPerSlide].
-double _linesPerSlideFor(Slide slide, ThemeProfile? profile) {
-  if (profile == null || !slide.showLogo) return _linesPerSlide;
+({String font, double extraVReserve}) _findingRenderMetrics(
+  Slide slide,
+  ThemeProfile? profile,
+) {
+  final font = profile?.fontFamily ?? 'Arial';
+  if (profile == null || !slide.showLogo) {
+    return (font: font, extraVReserve: 0);
+  }
   final reserve = logoSafeReserve(kReferenceSlideWidth, profile);
-  if (reserve <= 0) return _linesPerSlide;
-  final slideH = kReferenceSlideWidth * 9 / 16;
-  return _linesPerSlide * (slideH - reserve) / slideH;
+  return (font: font, extraVReserve: reserve);
 }

@@ -14,8 +14,9 @@ import 'package:ocideck/widgets/slides/slide_preview.dart';
 /// The content-aware header auto-fit (#1282). A dense finding header used to
 /// render at its fixed #1163 size — far too large, and (once it overflowed) shrunk
 /// and parked top-left by the scaffold's `BoxFit.scaleDown`. These tests pin the
-/// fix against a REAL render: a dense header now reflows to a bounded size that
-/// fits the slide, a sparse one is held at the ceiling, and pagination is intact.
+/// fit against a REAL render: a dense header stays presentation-readable while
+/// filling the slide, a sparse one is held at the ceiling, and pagination is
+/// intact.
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
@@ -82,9 +83,28 @@ void main() {
   // the slide width (base heading = w*0.038). This folds in BOTH the type
   // multiplier the preview applies and any residual scaffold scale-down, so it is
   // the size the reader actually sees — the "renders far too large" measure.
-  ({double effective, double scaleDown}) rendered(
+  TextStyle richTextStyle(WidgetTester tester, String text) {
+    TextStyle? findInSpan(InlineSpan span) {
+      if (span is! TextSpan) return null;
+      if (span.text == text) return span.style;
+      for (final child in span.children ?? const <InlineSpan>[]) {
+        final found = findInSpan(child);
+        if (found != null) return found;
+      }
+      return null;
+    }
+
+    for (final rich in tester.widgetList<RichText>(find.byType(RichText))) {
+      final found = findInSpan(rich.text);
+      if (found != null) return found;
+    }
+    throw TestFailure('No RichText style found for "$text"');
+  }
+
+  ({double bodyEffective, double headerToBody, double scaleDown}) rendered(
     WidgetTester tester,
     String headingNeedle,
+    String body,
   ) {
     final ro =
         tester.renderObject(find.byType(FittedBox))
@@ -100,9 +120,13 @@ void main() {
         matching: find.textContaining(headingNeedle),
       ),
     );
-    final applied = heading.style!.fontSize!;
-    final base = child.width * 0.038;
-    return (effective: applied * scaleDown / base, scaleDown: scaleDown);
+    final headingSize = heading.style!.fontSize!;
+    final bodySize = richTextStyle(tester, body).fontSize!;
+    return (
+      bodyEffective: bodySize * scaleDown / (child.width * 0.024),
+      headerToBody: headingSize / bodySize,
+      scaleDown: scaleDown,
+    );
   }
 
   testWidgets('a dense F-01 header reflows to a bounded size that fits (#1282)', (
@@ -111,28 +135,32 @@ void main() {
     await pump(tester, denseF01);
     expect(tester.takeException(), isNull);
 
-    final r = rendered(tester, 'F-01');
+    final r = rendered(tester, 'F-01', denseF01.description);
 
-    // (a) It fits the slide at full width: the scaffold no longer has to shrink
-    // and park it top-left (pre-fix this content overflowed and rendered at
-    // ~0.68 scale). scaleDown == 1.0 means the page fits as laid out.
+    // (a) It remains effectively full-width: the scaffold may absorb a few
+    // percent of font-metric drift, but must not shrink and park the page
+    // top-left (pre-fix this content rendered at ~0.68 scale).
     expect(
       r.scaleDown,
-      greaterThan(0.99),
-      reason: 'content should fit the slide at full width, not be parked',
+      greaterThan(0.95),
+      reason: 'content should stay effectively full-width, not be parked',
     );
 
-    // (b) It is no longer oversized: the header reads at roughly half the base
-    // size (the reporter's ~50%), an UPPER bound the pre-fix fixed 0.84 render
-    // (~0.57 on-screen for this content) violates. This is the guard the fixed
-    // scale lacked — not merely the existing "≥ 0.70" readability floor.
+    // (b) It stays large enough to read from a presentation screen. The first
+    // auto-fit aimed at only 60% of the slide and reduced this realistic page to
+    // roughly half-size type, leaving conspicuous whitespace below it.
     expect(
-      r.effective,
-      lessThanOrEqualTo(0.55),
-      reason: 'dense header should render at ~half size, was ${r.effective}',
+      r.bodyEffective,
+      greaterThanOrEqualTo(0.60),
+      reason:
+          'dense body should remain presentation-readable, was '
+          '${r.bodyEffective}',
     );
-    // …and not collapsed to nothing.
-    expect(r.effective, greaterThan(0.35));
+    expect(
+      r.headerToBody,
+      lessThanOrEqualTo(1.10),
+      reason: 'header should not dominate the body, was ${r.headerToBody}×',
+    );
   });
 
   testWidgets('a sparse header is held at the ceiling, not enlarged (#1282)', (
@@ -141,14 +169,14 @@ void main() {
     await pump(tester, sparse);
     expect(tester.takeException(), isNull);
 
-    final r = rendered(tester, 'F-9');
+    final r = rendered(tester, 'F-9', sparse.description);
     // Nothing to shrink: the fit is capped, so the type stays at the #1163
     // baseline (0.84) rather than blowing up to fill the slide.
     expect(r.scaleDown, greaterThan(0.99));
-    expect(r.effective, closeTo(kFindingBaseFontScale, 0.02));
+    expect(r.bodyEffective, closeTo(kFindingBaseFontScale, 0.02));
   });
 
-  test('the fit engages for a dense header and is capped for a sparse one', () {
+  test('the compact header keeps a packed first page comfortably readable', () {
     const font = 'Roboto';
     final densePage = firstRenderPageSpec(
       Slide.create(SlideType.finding).copyWith(
@@ -159,9 +187,10 @@ void main() {
     final denseFit = findingHeaderFitScale(spec: densePage, font: font);
     final sparseFit = findingHeaderFitScale(spec: sparse, font: font);
 
-    // A dense header is shrunk; a sparse one sits at the ceiling.
-    expect(denseFit, lessThan(0.8));
-    expect(denseFit, greaterThan(0.0));
+    // Page 1 may now use spare room for a second section, but the paginator
+    // keeps its measured type comfortably above the readability floor.
+    expect(denseFit, greaterThan(0.85));
+    expect(denseFit, lessThanOrEqualTo(1.0));
     expect(sparseFit, 1.0);
     // The ceiling is honoured whatever is passed.
     expect(
