@@ -95,8 +95,15 @@ fi
 # pas bij het inzenden. 'notarytool history' valideert profiel én Apple-verbinding.
 if [[ $PREFLIGHT -eq 1 ]]; then
   section "Pre-flight — ondertekenidentiteit en notary-profiel"
-  if ! xcrun notarytool history --keychain "$KEYCHAIN" --keychain-profile "$PROFILE" --limit 1 >/dev/null 2>&1; then
-    echo "Notary-profiel '$PROFILE' in keychain '$KEYCHAIN' werkt niet — mogelijk na een sessieherstart verdwenen. Herstel met 'xcrun notarytool store-credentials' (zie de kop van dit script en docs/BUILD.md)." >&2
+  # 'notarytool history' valideert het profiel én de Apple-verbinding read-only.
+  # Toon bij falen de ECHTE fout, niet een generieke tekst: een eerdere versie gaf
+  # '--limit 1' mee — dat kent notarytool niet (exit 64), waardoor élke release
+  # onterecht op "profiel verdwenen" strandde. De echte fout tonen maakt zo'n vals
+  # alarm meteen zichtbaar.
+  if ! NOTARY_OUT="$(xcrun notarytool history --keychain "$KEYCHAIN" --keychain-profile "$PROFILE" 2>&1)"; then
+    echo "Notary-profiel '$PROFILE' in keychain '$KEYCHAIN' werkt niet:" >&2
+    printf '%s\n' "$NOTARY_OUT" | sed 's/^/   /' >&2
+    echo "Mogelijk na een sessieherstart verdwenen — herstel met 'xcrun notarytool store-credentials' (zie de kop van dit script en docs/BUILD.md)." >&2
     exit 1
   fi
   echo "Pre-flight OK: identiteit '$IDENTITY' aanwezig, notary-profiel '$PROFILE' geldig."
