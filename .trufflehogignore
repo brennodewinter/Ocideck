@@ -19,6 +19,15 @@
 # Lokale werkinstellingen, gitignored.
 ^\.claude/
 
+# Lokaal XMPP-testbed (docker-jitsi-meet): gegenereerde, gitignored wegwerp-
+# infrastructuur — zelfondertekende TLS-sleutels in `.jitsi-config/` en een
+# docker-compose-`.env` met wachtwoorden. `trufflehog filesystem .` scant de
+# werkboom en negeert de geneste .gitignore; zonder deze regels valt élke
+# `make check-secrets`/release op een vals alarm. Zie .gitleaks.toml voor
+# dezelfde uitsluiting.
+^testbed/docker-jitsi-meet/\.jitsi-config/
+^testbed/docker-jitsi-meet/\.env$
+
 # Het detectiecorpus van OciWacht: bestaat om geheim-vormige waarden te dragen.
 ^lib/services/privacy/privacy_digital_rules\.dart$
 ^test/privacy_[a-z_]+_test\.dart$

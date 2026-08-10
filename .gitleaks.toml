@@ -30,6 +30,17 @@ paths = [
   # Lokale werkinstellingen, ook gitignored. Staan buiten de repo-inhoud.
   '''^\.claude/''',
 
+  # Het lokale XMPP-testbed (docker-jitsi-meet) genereert zijn eigen wegwerp-
+  # infrastructuur: zelfondertekende TLS-sleutels onder `.jitsi-config/` en een
+  # docker-compose-`.env` met wachtwoorden. Beide staan in
+  # testbed/docker-jitsi-meet/.gitignore en worden nooit gecommit — maar
+  # `gitleaks dir .` scant het bestandssysteem en negeert die geneste .gitignore.
+  # Wie het testbed opzette, zag daardoor élke `make check-secrets`/release rood
+  # staan op een vals alarm. `secret_scan_testbed_allowlist_test` bewaakt dat dit
+  # gelijk blijft met wat het testbed als gegenereerd bestempelt.
+  '''^testbed/docker-jitsi-meet/\.jitsi-config/''',
+  '''^testbed/docker-jitsi-meet/\.env$''',
+
   # ── Het detectiecorpus van OciWacht ────────────────────────────────────────
   # Dit is de kern van de afweging. De privacyscanner moet geheimen kúnnen
   # herkennen, en dat bewijs je alleen met strings die er echt uitzien. Deze
