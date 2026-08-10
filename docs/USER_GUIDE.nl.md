@@ -909,13 +909,6 @@ puntkomma-gescheiden), of een markdown-tabel vult het raster vanaf die cel,
 en voegt rijen en kolommen toe waar nodig. Gewone tekst — zelfs een zin met een komma
 erin — plakt nog steeds in slechts die ene cel.
 
-Zolang de tabel nog leeg is biedt de editor een **preset**: één klik legt
-de kolommen van een actielijst neer (Actie, Eigenaar, Deadline, Status) en schakelt
-de datummarkering hieronder in. De knop verdwijnt zodra de tabel iets bevat,
-zodat hij nooit kan overschrijven wat je typte. Dit vervangt het aparte
-*Acties en besluiten*-slidetype, dat je die kolommen gaf ten koste van
-al het andere dat een tabel kan.
-
 Vink **Verlopen datums markeren** aan in *Opties per slide* om elke cel met een
 datum vóór vandaag rood te kleuren. OciDeck berekent dit tegen de dag waarop je presenteert, zodat een
 deck dat drie maanden later terugkomt zijn eigen verlopen deadlines markeert in plaats
@@ -1386,8 +1379,7 @@ Hier is geen apart slidetype voor. Dat was er, en het was een
 vergissing: het was een tabel met vaste kolommen en een formulier eroverheen gebouwd, zodat je
 een tabel bewerkte zonder het gemak van een tabel te hebben. Gebruik een **tabel**-slide.
 
-De *Acties en besluiten*-preset geeft je de kolommen om mee te beginnen, en een
-tabel kan verlopen deadlines voor je markeren — zie [Tabellen](#tabellen). Wat je wint
+Een tabel kan verlopen deadlines voor je markeren — zie [Tabellen](#tabellen). Wat je wint
 ten opzichte van het oude type is alles wat de tabel al had: plak een blok rechtstreeks
 uit een spreadsheet, voeg kolommen toe en verwijder ze zoals het rapport ze nodig heeft, en bewerk
 cellen tijdens het presenteren.
