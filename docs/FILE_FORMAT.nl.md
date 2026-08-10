@@ -4,7 +4,7 @@
 
 # OciDeck — Bestandsformaat
 
-> **Status:** specificatie van het bestandsformaat op schijf — het stabiele contract · **Status laatst nagekeken:** 2026-07-22 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** specificatie van het bestandsformaat op schijf — het stabiele contract · **Status laatst nagekeken:** 2026-08-10 · **Uitgegeven door:** Stichting LibreKAT
 
 ## Inhoud
 
@@ -167,8 +167,15 @@ OciDeck de front matter niet opnieuw — het werkt de regels bij die er al stond
 sleutels die het bezit (elke sleutel in de tabel hieronder, `marp` inbegrepen) worden
 vervangen, verwijderd of toegevoegd; **elke andere regel blijft precies waar hij stond**,
 inclusief `#`-commentaren, lege regels, ingesprongen blokken, de oorspronkelijke volgorde
-en de oorspronkelijke aanhalingstekens. Een met de hand geschreven `header:`, `footer:`,
-`size:` of `style:` overleeft daardoor een OciDeck-opslag ongewijzigd. De implementatie
+en de oorspronkelijke aanhalingstekens. Een met de hand geschreven sleutel die OciDeck
+niet bezit, zoals `size:` of `style:`, overleeft daardoor een OciDeck-opslag
+ongewijzigd. De vijf ondersteunde visuele Marp-sleutels (`color`,
+`backgroundColor`, `backgroundImage`, `header`, `footer`) zijn wél eigendom van
+OciDeck: de app leest ze in het deckmodel en schrijft hun actuele waarde terug in
+standaard Marp-syntaxis. Hun betekenis blijft behouden, maar hun oorspronkelijke
+scalar-notatie of aanhalingstekens hoeven dat niet. *(Gecorrigeerd 2026-08-10:
+deze sleutels werden eigendom toen OciDeck ze ging bewerken en synchroniseren.)*
+De implementatie
 staat in `lib/services/front_matter_merge.dart`; de eigen sleutels staan daar in één lijst,
 die ook de markdown-controle (§10) leest.
 
@@ -219,6 +226,11 @@ het bestand. Zie §6.6 voor waarom dat veranderd is.)
 | `title` | string | Decktitel. Wordt geschreven en gelezen; ook gebruikt als de documenttitel bij export. |
 | `theme` | string | Themanaam; standaard `ocideck`. Verwijst naar `themes/<theme>.css`. |
 | `paginate` | `true`/afwezig | Alleen geschreven wanneer paginering is ingeschakeld. |
+| `color` | Marp-/CSS-kleur/afwezig | Deckbrede tekstkleur. Een expliciet lege scalar verschilt van een afwezige sleutel. |
+| `backgroundColor` | Marp-/CSS-kleur/afwezig | Deckbrede achtergrondkleur. Een expliciet lege scalar verschilt van een afwezige sleutel. |
+| `backgroundImage` | string/afwezig | Deckbrede achtergrondafbeelding in standaard Marp-/CSS-vorm. |
+| `header` | Markdown-string/afwezig | Deckbrede koptekst, gerenderd als inline Markdown. |
+| `footer` | Markdown-string/afwezig | Deckbrede voettekst, gerenderd als inline Markdown. |
 | `author` | string | Auteur. |
 | `organization` | string | Organisatie. |
 | `version` | string | Versie. |
@@ -232,7 +244,6 @@ het bestand. Zie §6.6 voor waarom dat veranderd is.)
 | `ocideck_target_seconds` | int | Doelduur voor het aftellen van de presentator, in seconden. Alleen geschreven wanneer `> 0`. |
 | `ocideck_show_rehearsal_summary` | `false`/afwezig | Afmelden voor de tijdsamenvatting na de presentatie. Standaard (getoond) blijft uit het bestand; alleen `false` wordt geschreven. Wordt overschreven door `ocideck_play_only`: een alleen-afspelen-deck toont de samenvatting nooit, wat deze sleutel ook zegt. |
 | `ocideck_play_only` | `true`/afwezig | Alleen-afspelen-vergrendeling. Wanneer `true`, opent het deck vergrendeld: geen editor, werkbalk, menu's of export — alleen de eerste slide met een afspeelknop, schermvullend gepresenteerd. Het deck sluiten herstelt het normale bewerken. Standaard (ontgrendeld) blijft uit het bestand; alleen `true` wordt geschreven. Deze sleutel verwijderen ontgrendelt het deck. |
-| `ocideck_improvement_framework` | string/afwezig | Procesverbeteringskader voor dit deck: `dmaic`, `dmadv`, `kaizen`, `a3` of `8d`. Leeg/afwezig = niet ingesteld. |
 | `ocideck_improvement_framework` | string/afwezig | Procesverbeteringskader voor dit deck: `dmaic`, `dmadv`, `kaizen`, `a3` of `8d`. Leeg/afwezig = niet ingesteld. |
 | `ocideck_improvement_y01` | string/afwezig | Vrije-tekstnaam/-beschrijving van de primaire Y-metriek (**Y-01**). Leeg/afwezig = niet ingesteld. |
 | `ocideck_improvement_y01_unit` | string/afwezig | Eenheid voor Y-01 (bijv. `days`). Leeg/afwezig = niet ingesteld. |
@@ -259,15 +270,21 @@ achterliggende witruimte, speciale tekens zoals `: # "`, of een YAML-indicator a
 begin). OciDeck gebruikt bij het lezen geen volledige YAML-parser; het gebruikt een eenvoudige
 parser die regel voor regel werkt, dus houd de front matter plat (één sleutel per regel).
 
-Alleen de sleutels hierboven (plus `marp`) worden gelezen; elke andere front-matter-sleutel — een typefout,
-of een Marp-optie die OciDeck niet implementeert zoals `header`, `footer`, `size` of
-`style` — heeft geen effect binnen OciDeck, maar wordt **bij opslaan behouden** (§3.0, regel
-1). De ingebouwde markdown-controle markeert zulke sleutels met een waarschuwing zodat men
-niet denkt dat ze effect hebben. Evenzo wordt een commentaar dat
-op een directive lijkt (`<!-- _key: … -->` of `<!-- ocideck_key: … -->`) maar er geen
-is die OciDeck begrijpt — bijv. Marps per-slide `_paginate`, `_header`,
-`_footer`, `_color` — weggelaten en gemarkeerd; gewone prozacommentaren blijven presentatie-
-notities.
+De lokale vormen van de vijf visuele Marp-sleutels (`_color`,
+`_backgroundColor`, `_backgroundImage`, `_header`, `_footer`) worden uit een
+slidecommentaar gelezen en als standaard Marp-syntaxis teruggeschreven. Hun
+aanwezigheid wordt los van hun waarde opgeslagen, zodat een expliciet lege lokale
+waarde een deckbrede waarde kan onderdrukken in plaats van die per ongeluk te
+erven. Een Marp-koptekst of -voettekst is de tekstbron voor OciDecks overlay; er
+ontstaat geen tweede concurrerende voettekst. Inline Markdown wordt in beide
+gerenderd.
+
+Andere front-matter-sleutels — een typefout of een Marp-optie die OciDeck niet
+implementeert, zoals `size` of `style` — hebben geen effect binnen OciDeck maar
+blijven **bij opslaan behouden**. Ook een onbekende bodydirective blijft
+letterlijk behouden; de controle legt uit dat die als bron bewerkbaar blijft in
+plaats van te beweren dat hij wordt genegeerd. Gewone prozacommentaren blijven
+presentatienotities.
 
 ### 3.6 Teruggetrokken sleutels — wat de front matter verliet, en waar het heen ging
 
@@ -637,6 +654,25 @@ Aanvullende gedragsklassen:
 
 Bij het lezen herkent en verwijdert OciDeck de type- en gedragsklassen; wat
 overblijft wordt bewaard als de eigen `cssClass` van de slide.
+
+### 4.1 Standaard visuele Marp-directives
+
+De gestructureerde renderer herkent `![bg fit]` en `![bg contain]` als
+contain-passend, plus de afbeeldingsfilters `blur:`, `brightness:`, `saturate:`,
+`grayscale`, `sepia` en `invert`. `<!-- fit -->` direct na een kop vergroot die
+kop. Veelgebruikte `:emoji_shortcodes:` worden uitgebreid vanuit een compacte,
+meegeleverde Unicode-tabel: renderen benadert nooit een emoji-CDN en onbekende
+shortcodes blijven letterlijke tekst. Deze semantiek wordt gedeeld door het
+appvoorbeeld, de presentator en de rasteruitvoer voor PDF en PPTX; de
+zelfstandige HTML-export past de overeenkomstige CSS/markup toe waar het
+HTML-pad die afbeelding ondersteunt.
+
+OciDeck modelleert de eerste achtergrondafbeelding. Bevat een compositie een
+latere gefilterde/contain-achtergrond, een derde achtergrondlaag of een ander
+fragment dat getypeerde serialisatie zou verplaatsen of herinterpreteren, dan
+blijft de hele getroffen slide vrije Markdown. Zo blijven de geschreven
+volgorde en syntaxis behouden in plaats van dat de compositie wordt afgevlakt
+tot onvolledige getypeerde velden.
 
 ---
 
@@ -2764,10 +2800,15 @@ Marp, behalve de sprekersnotities):
   front-matter-sleutels.
 - **Marp-compatibel ook andersom:** front-matter-sleutels die OciDeck niet kent —
   Marp-opties die het niet heeft geïmplementeerd, of een notitie die de auteur
-  daar plaatste — overleven een openen-en-opslaan ongewijzigd (§3.0). Wat *niet*
-  gedekt is, is de slide-body: alles buiten de front matter wordt in getypeerde
-  slides geparst en daaruit teruggeschreven, dus markup die OciDeck niet kan
-  weergeven wordt niet doorgegeven.
+  daar plaatste — overleven een openen-en-opslaan ongewijzigd (§3.0). Onbekende
+  lokale directives blijven behouden. Wanneer getypeerde serialisatie een
+  geschreven Marp-bodyconstructie niet kan bewaren zonder die te verplaatsen of
+  te veranderen — bijvoorbeeld een niet-ondersteunde achtergrondcompositie of
+  complexe `fit`-plaatsing — houdt OciDeck de hele getroffen slide als vrije
+  Markdown. Die blijft als bron bewerkbaar en gaat rond zonder de constructie
+  stilletjes weg te gooien. *(Gecorrigeerd 2026-08-10: het oude uitsluitend
+  getypeerde bodypad verloor niet-gemodelleerde markup; #1436 verving dat pad
+  door behoud.)*
 - **Voorwaartse migratie:** ontbrekende front-matter-velden en
   stijlprofielvelden vallen terug op standaardwaarden, en de afwezigheid van het
   token `no-footer` betekent (voor oudere bestanden) "footer zichtbaar". Een

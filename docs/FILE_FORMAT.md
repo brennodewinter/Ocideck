@@ -1,6 +1,6 @@
 # OciDeck — File Format
 
-> **Status:** specification of the on-disk format — the stable contract · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** specification of the on-disk format — the stable contract · **Status last reviewed:** 2026-08-10 · **Published by:** Stichting LibreKAT
 
 ## Contents
 
@@ -165,10 +165,13 @@ regenerate the front matter — it updates the lines that were already there. Th
 keys it owns (every key in the table below, `marp` included) are replaced,
 removed or appended; **every other line stays exactly where it was**, including
 `#` comments, blank lines, indented blocks, the original order and the original
-quoting. A hand-written `header:`, `footer:`, `size:` or `style:` therefore
-survives an OciDeck save unchanged. OciDeck now also *reads and renders*
-`header` and `footer` (plus the visual keys listed below), without taking
-ownership of their source lines; the author's spelling and quoting still win.
+quoting. A hand-written key OciDeck does not own, such as `size:` or `style:`,
+therefore survives an OciDeck save unchanged. The five supported Marp visual
+keys (`color`, `backgroundColor`, `backgroundImage`, `header`, `footer`) are
+owned: OciDeck reads them into the deck model and writes their current values
+back in standard Marp syntax. Their meaning survives, but their original scalar
+spelling or quoting need not. *(Corrected 2026-08-10: these keys became owned
+when OciDeck started editing and synchronising them.)*
 The implementation is in
 `lib/services/front_matter_merge.dart`; the owned keys live there in one list,
 which the markdown checker (§10) reads as well.
@@ -220,6 +223,11 @@ over the file. See §6.6 for why that changed.)
 | `title` | string | Deck title. Written and parsed; also used as the export document title. |
 | `theme` | string | Theme name; defaults to `ocideck`. Refers to `themes/<theme>.css`. |
 | `paginate` | `true`/absent | Written only when pagination is enabled. |
+| `color` | Marp/CSS color/absent | Deck-wide text color. An explicitly empty scalar is distinct from an absent key. |
+| `backgroundColor` | Marp/CSS color/absent | Deck-wide slide background color. An explicitly empty scalar is distinct from an absent key. |
+| `backgroundImage` | string/absent | Deck-wide background image in standard Marp/CSS form. |
+| `header` | Markdown string/absent | Deck-wide header rendered as inline Markdown. |
+| `footer` | Markdown string/absent | Deck-wide footer rendered as inline Markdown. |
 | `author` | string | Author. |
 | `organization` | string | Organization. |
 | `version` | string | Version. |
@@ -233,7 +241,6 @@ over the file. See §6.6 for why that changed.)
 | `ocideck_target_seconds` | int | Target duration for the presenter countdown, in seconds. Written only when `> 0`. |
 | `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. Overruled by `ocideck_play_only`: a play-only deck never shows the summary, whatever this key says. |
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
-| `ocideck_improvement_framework` | string/absent | Process-improvement framework for this deck: `dmaic`, `dmadv`, `kaizen`, `a3` or `8d`. Empty/absent = not set. |
 | `ocideck_improvement_framework` | string/absent | Process-improvement framework for this deck: `dmaic`, `dmadv`, `kaizen`, `a3` or `8d`. Empty/absent = not set. |
 | `ocideck_improvement_y01` | string/absent | Free-text name/description of the primary Y metric (**Y-01**). Empty/absent = not set. |
 | `ocideck_improvement_y01_unit` | string/absent | Unit for Y-01 (e.g. `days`). Empty/absent = not set. |
@@ -260,11 +267,11 @@ whitespace, special characters such as `: # "`, or a YAML indicator at the
 start). OciDeck does not use a full YAML parser when reading; it uses a simple
 line-by-line parser, so keep front matter flat (one key per line).
 
-OciDeck additionally reads these standard Marp visual keys while leaving their
-front-matter lines byte-for-byte under rule 1: `color`, `backgroundColor`,
-`backgroundImage`, `header` and `footer`. Their local forms (`_color`,
+The local forms of the five standard Marp visual keys (`_color`,
 `_backgroundColor`, `_backgroundImage`, `_header`, `_footer`) are read from a
-slide comment and written back as standard Marp syntax. A Marp header/footer is
+slide comment and written back as standard Marp syntax. Their presence is stored
+separately from their value, so an explicitly empty local value can suppress a
+deck-wide value instead of accidentally inheriting it. A Marp header/footer is
 the text source for OciDeck's overlay; it does not create a second competing
 footer. Inline Markdown is rendered in both.
 
@@ -656,9 +663,11 @@ literal text. These semantics are shared by the app preview, presenter, PDF and
 PPTX raster output; the self-contained HTML export applies the corresponding
 CSS/markup where the HTML path supports that image.
 
-OciDeck models the first background image. A later filtered/contained background
-and every third background layer remain verbatim source so saving cannot flatten
-or silently reinterpret a composition the typed editor cannot represent.
+OciDeck models the first background image. If a composition contains a later
+filtered/contained background, a third background layer, or another fragment
+that typed serialisation would move or reinterpret, the whole affected slide is
+kept as free Markdown. This preserves the authored order and syntax instead of
+flattening the composition into incomplete typed fields.
 
 ---
 
@@ -2790,10 +2799,14 @@ for presenter notes):
   live in ignored comments and custom front-matter keys.
 - **Marp-compatible the other way round too:** front-matter keys OciDeck does
   not know — Marp options it has not implemented, or a note the author put
-  there — survive an open-and-save unchanged (§3.0). What is *not* covered is
-  the slide body: everything outside the front matter is parsed into typed
-  slides and written back from them, so markup OciDeck cannot represent is not
-  passed through.
+  there — survive an open-and-save unchanged (§3.0). Unknown local directives
+  are retained. When typed serialisation cannot preserve an authored Marp body
+  construct without moving or changing it — for example an unsupported
+  background composition or complex `fit` placement — OciDeck keeps the whole
+  affected slide as free Markdown. It remains source-editable and round-trips
+  without silently discarding the construct. *(Corrected 2026-08-10: the old
+  typed-only body path did lose unmodelled markup; #1436 replaced that path with
+  preservation.)*
 - **Forward migration:** missing front-matter fields and style-profile fields
   fall back to defaults, and the absence of the `no-footer` token means (for
   older files) "footer visible". A file that declares a *newer* format version
