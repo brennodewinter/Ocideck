@@ -42,6 +42,7 @@ void main() {
       const profile = ThemeProfile(
         logoPath: 'asset:assets/images/vigilis-logo.png',
         documentLogoPosition: 'top-left',
+        documentLogoSize: 224,
         documentHeaderText: 'Bestuurlijk rapport',
         documentFooterText: 'Vigilis · Vertrouwelijk',
         documentShowPageNumbers: true,
@@ -51,6 +52,8 @@ void main() {
       final back = ThemeProfile.fromJson(profile.toJson());
       expect(back.effectiveDocumentLogoPath, profile.logoPath);
       expect(back.documentLogoPosition, 'top-left');
+      expect(back.documentLogoSize, 224);
+      expect(back.effectiveDocumentLogoSize, 224);
       expect(back.documentHeaderText, 'Bestuurlijk rapport');
       expect(back.documentFooterText, 'Vigilis · Vertrouwelijk');
       expect(back.documentShowPageNumbers, isTrue);
@@ -72,9 +75,17 @@ void main() {
       'logoPath': 'asset:assets/images/librekat-logo.png',
     });
     expect(legacy.effectiveDocumentLogoPath, legacy.logoPath);
+    expect(legacy.documentLogoSize, isNull);
+    expect(legacy.effectiveDocumentLogoSize, legacy.logoSize);
     expect(legacy.documentHeaderText, isEmpty);
     expect(legacy.documentFooterText, isEmpty);
     expect(legacy.documentShowPageNumbers, isFalse);
+    expect(
+      ThemeProfile.fromJson(const {
+        'documentLogoSize': 9999,
+      }).effectiveDocumentLogoSize,
+      480,
+    );
   });
 
   test('ThemeProfile round-trips and clamps the animation duration', () {

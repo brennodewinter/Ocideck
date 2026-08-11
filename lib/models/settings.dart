@@ -77,16 +77,14 @@ class ThemeProfile {
   /// Monospace font family for code slides. `monospace` uses the system default;
   /// e.g. `Courier New` for a typewriter look.
   final String codeFontFamily;
-
   final String? logoPath;
   final String logoPosition;
   final int logoSize;
 
-  /// Documenten gebruiken standaard hetzelfde merklogo als presentaties.
-  /// `null` betekent delen; een lege string is een bewuste keuze voor geen
-  /// documentlogo; een ander pad is een documentspecifieke afwijking.
+  /// Documenten delen standaard het presentatielogo; `null` deelt en leeg zet het uit.
   final String? documentLogoPath;
   final String documentLogoPosition;
+  final int? documentLogoSize;
   final String documentHeaderText;
   final String documentFooterText;
   final bool documentShowPageNumbers;
@@ -147,6 +145,7 @@ class ThemeProfile {
     this.logoSize = 96,
     this.documentLogoPath,
     this.documentLogoPosition = 'top-right',
+    this.documentLogoSize,
     this.documentHeaderText = '',
     this.documentFooterText = '',
     this.documentShowPageNumbers = false,
@@ -294,6 +293,7 @@ class ThemeProfile {
     int? logoSize,
     String? documentLogoPath,
     String? documentLogoPosition,
+    int? documentLogoSize,
     String? documentHeaderText,
     String? documentFooterText,
     bool? documentShowPageNumbers,
@@ -343,6 +343,7 @@ class ThemeProfile {
           ? null
           : (documentLogoPath ?? this.documentLogoPath),
       documentLogoPosition: documentLogoPosition ?? this.documentLogoPosition,
+      documentLogoSize: documentLogoSize ?? this.documentLogoSize,
       documentHeaderText: documentHeaderText ?? this.documentHeaderText,
       documentFooterText: documentFooterText ?? this.documentFooterText,
       documentShowPageNumbers:
@@ -389,6 +390,7 @@ class ThemeProfile {
       'logoSize': logoSize,
       'documentLogoPath': documentLogoPath,
       'documentLogoPosition': documentLogoPosition,
+      'documentLogoSize': documentLogoSize,
       'documentHeaderText': documentHeaderText,
       'documentFooterText': documentFooterText,
       'documentShowPageNumbers': documentShowPageNumbers,
@@ -467,6 +469,10 @@ class ThemeProfile {
       documentLogoPath: json['documentLogoPath'] as String?,
       documentLogoPosition:
           json['documentLogoPosition'] as String? ?? 'top-right',
+      documentLogoSize: (json['documentLogoSize'] as num?)?.round().clamp(
+        32,
+        480,
+      ),
       documentHeaderText: json['documentHeaderText'] as String? ?? '',
       documentFooterText: json['documentFooterText'] as String? ?? '',
       documentShowPageNumbers:
@@ -495,6 +501,8 @@ class ThemeProfile {
   }
 
   String? get effectiveDocumentLogoPath => documentLogoPath ?? logoPath;
+  int get effectiveDocumentLogoSize =>
+      (documentLogoSize ?? logoSize).clamp(32, 480);
 }
 
 class AppSettings {

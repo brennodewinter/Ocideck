@@ -4307,8 +4307,11 @@ preview. Presentation restores the complete font, colour, animation, logo, foote
 closing-slide controls beside a real 16:9 slide preview. A selected logo is shown next
 to the file chooser and is shared by presentations and documents by default. In the
 document controls you can unlink it and choose a different document logo, or deliberately
-use no document logo. The same controls set its position, the **header**, **footer text**
-and **page numbers**. The A4 preview updates immediately; the visual editor and live
+use no document logo. The document logo width can be set from 32 to 480 px and follows
+the presentation logo size until changed. The same controls set its position, the
+**header**, **footer text** and **page numbers**. Header and footer accept several lines
+and inline Markdown (`**bold**`, `*italic*`, `` `code` ``, `~~strike~~` and links).
+The A4 preview updates immediately; the visual editor and live
 preview show the same page furniture. HTML places it around the document and repeats it
 at the top and bottom when printing or saving as PDF. Markdown content stays unchanged:
 these values travel in the style profile, not in the document body. The presentation

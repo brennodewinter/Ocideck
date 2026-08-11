@@ -4268,7 +4268,10 @@ footer- en slotdia-instellingen naast een echte 16:9-diaweergave. Een gekozen lo
 staat ook als miniatuur naast de bestandskiezer en is standaard hetzelfde voor
 presentaties en documenten. In de documentinstellingen kun je die koppeling uitzetten
 en een ander documentlogo kiezen — of daar bewust geen logo gebruiken. Daar stel je
-ook de positie, **koptekst**, **footertekst** en **paginanummers** in. De A4-preview
+ook de breedte van het documentlogo in van 32 tot 480 px; tot je die wijzigt volgt deze
+de maat van het presentatielogo. Daarnaast stel je de positie, **koptekst**,
+**footertekst** en **paginanummers** in. Kop en footer ondersteunen meerdere regels en
+inline Markdown (`**vet**`, `*cursief*`, `` `code` ``, `~~doorhalen~~` en links). De A4-preview
 toont deze paginadelen meteen; dezelfde kop en footer staan rond het visuele
 schrijfoppervlak en de live preview. In HTML staan ze rond het document en bij
 afdrukken/opslaan als PDF herhalen ze boven- en onderaan de pagina. De Markdownbron

@@ -110,8 +110,9 @@ void main() {
       () async {
         final service = MarpHtmlService(loadAsset: _diskLoader);
         const theme = ThemeProfile(
-          documentHeaderText: 'Bestuurlijk rapport',
-          documentFooterText: 'Vigilis · Vertrouwelijk',
+          documentLogoSize: 240,
+          documentHeaderText: '**Bestuurlijk rapport**\nTweede regel',
+          documentFooterText: 'Vigilis · *Vertrouwelijk*',
           documentShowPageNumbers: true,
         );
 
@@ -121,10 +122,14 @@ void main() {
           theme: theme,
         );
         expect(document, contains('class="document-header"'));
-        expect(document, contains('Bestuurlijk rapport'));
+        expect(
+          document,
+          contains('<strong>Bestuurlijk rapport</strong><br>Tweede regel'),
+        );
         expect(document, contains('class="document-footer"'));
-        expect(document, contains('Vigilis · Vertrouwelijk'));
+        expect(document, contains('Vigilis · <em>Vertrouwelijk</em>'));
         expect(document, contains('class="document-page-number"'));
+        expect(document, contains('width:240px'));
         expect(document, contains('@media print'));
 
         final slides = await service.build(
@@ -136,6 +141,23 @@ void main() {
         expect(slides, isNot(contains('class="document-footer"')));
       },
     );
+
+    test('documentchrome laat onveilige Markdown-links niet door', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(
+        _md,
+        continuous: true,
+        theme: const ThemeProfile(
+          documentHeaderText:
+              '[veilig](https://example.test) '
+              '[onveilig](javascript:alert(1))',
+        ),
+      );
+
+      expect(html, contains('href="https://example.test"'));
+      expect(html, isNot(contains('href="javascript:')));
+      expect(html, contains('onveilig'));
+    });
 
     test(
       'blijft self-contained, met CSP en zonder externe url() in <style>',

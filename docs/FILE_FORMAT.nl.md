@@ -488,8 +488,9 @@ deze velden (met standaardwaarden):
 | `logoSize` | `96` | Logogrootte in px. |
 | `documentLogoPath` | `null` | Afwijkend documentlogo. `null` deelt `logoPath`; `""` schakelt het logo voor documenten bewust uit. |
 | `documentLogoPosition` | `top-right` | Positie van het effectieve documentlogo in de kop- of voettekst. |
-| `documentHeaderText` | `""` | Herhalende koptekst van documenten. |
-| `documentFooterText` | `""` | Herhalende voettekst van documenten. |
+| `documentLogoSize` | `null` | Breedte van het documentlogo in px (`32`–`480`). `null` volgt `logoSize`. |
+| `documentHeaderText` | `""` | Herhalende meerregelige documentkop met inline Markdown. |
+| `documentFooterText` | `""` | Herhalende meerregelige documentfooter met inline Markdown. |
 | `documentShowPageNumbers` | `false` | Toon het paginanummer rechtsonder op documentpagina's. |
 | `fontFamily` | `Arial` | Lettertypefamilie van de presentatie. |
 | `footerText` | `""` | Vrije voettekst; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |

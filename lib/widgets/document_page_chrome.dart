@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/settings.dart';
 import '../theme/app_theme.dart';
+import 'slides/inline_markdown.dart';
 import 'theme_profile_logo.dart';
 
 /// Een echte kop- of voettekstband voor documentoppervlakken.
@@ -43,9 +44,10 @@ class DocumentChromeBand extends StatelessWidget {
     final color = AppTheme.parseHexColor(
       profile.textColor,
     ).withValues(alpha: 0.68);
+    final documentLogoSize = profile.effectiveDocumentLogoSize.toDouble();
     final logoWidth = compact
-        ? 70.0
-        : (profile.logoSize * 0.6).clamp(48.0, 160.0);
+        ? (documentLogoSize * 0.45).clamp(36.0, 144.0)
+        : documentLogoSize;
     final row = Row(
       children: [
         if (logoInBand && !rightLogo) ...[
@@ -53,16 +55,18 @@ class DocumentChromeBand extends StatelessWidget {
           SizedBox(width: compact ? 10 : 16),
         ],
         Expanded(
-          child: Text(
+          child: InlineMarkdownText(
             text,
             key: Key(header ? 'document-header-text' : 'document-footer-text'),
-            maxLines: 1,
+            maxLines: compact ? 3 : 4,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
               color: color,
               fontFamily: profile.fontFamily,
               fontSize: compact ? 9 : 12,
+              height: 1.3,
             ),
+            linkColor: AppTheme.parseHexColor(profile.accentColor),
           ),
         ),
         if (showPage) ...[
@@ -107,7 +111,9 @@ class DocumentChromeBand extends StatelessWidget {
         logoPath: path,
         projectPath: projectPath,
         width: width,
-        height: compact ? 28 : (width * 0.5).clamp(32.0, 72.0),
+        height: compact
+            ? (width * 0.5).clamp(22.0, 72.0)
+            : (width * 0.5).clamp(32.0, 240.0),
         alignment: alignment,
       );
 }

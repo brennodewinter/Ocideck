@@ -48,6 +48,39 @@ Future<String?> _themeLogoDataUri(
   }
 }
 
+String _documentChromeMarkdownHtml(String markdown) => markdown
+    .trim()
+    .split('\n')
+    .map(
+      (line) => parseInlineRuns(line).map((run) {
+        var html = MarpHtmlService._htmlText(
+          run.math ? '\$${run.text}\$' : run.text,
+        );
+        if (run.code) html = '<code>$html</code>';
+        if (run.strike) html = '<del>$html</del>';
+        if (run.italic) html = '<em>$html</em>';
+        if (run.bold) html = '<strong>$html</strong>';
+        final link = _safeDocumentChromeLink(run.link);
+        if (link != null && link.isNotEmpty) {
+          html = '<a href="${MarpHtmlService._htmlAttr(link)}">$html</a>';
+        }
+        return html;
+      }).join(),
+    )
+    .join('<br>');
+
+String? _safeDocumentChromeLink(String? raw) {
+  final link = raw?.trim();
+  if (link == null || link.isEmpty) return null;
+  final uri = Uri.tryParse(link);
+  if (uri == null) return null;
+  if (uri.scheme.isEmpty ||
+      const {'http', 'https', 'mailto'}.contains(uri.scheme)) {
+    return link;
+  }
+  return null;
+}
+
 bool _hasDocumentChrome(ThemeProfile theme) =>
     theme.effectiveDocumentLogoPath?.trim().isNotEmpty == true ||
     theme.documentHeaderText.trim().isNotEmpty ||
@@ -98,7 +131,7 @@ Future<({String markdown, List<String> dataUris})> _withDocumentChrome(
         : '';
     return '<div class="document-$kind">'
         '${inBand && !logoAtRight ? logoHtml : ''}'
-        '<span class="document-$kind-text">${MarpHtmlService._htmlText(text)}</span>'
+        '<span class="document-$kind-text">${_documentChromeMarkdownHtml(text)}</span>'
         '$page${inBand && logoAtRight ? logoHtml : ''}</div>';
   }
 

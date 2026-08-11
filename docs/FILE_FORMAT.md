@@ -483,8 +483,9 @@ these fields (with defaults):
 | `logoSize` | `96` | Logo size in px. |
 | `documentLogoPath` | `null` | Document logo override. `null` shares `logoPath`; `""` deliberately disables the logo for documents. |
 | `documentLogoPosition` | `top-right` | Position of the effective document logo in its header/footer band. |
-| `documentHeaderText` | `""` | Repeating document header text. |
-| `documentFooterText` | `""` | Repeating document footer text. |
+| `documentLogoSize` | `null` | Document-logo width in px (`32`–`480`). `null` follows `logoSize`. |
+| `documentHeaderText` | `""` | Repeating, multi-line document header with inline Markdown. |
+| `documentFooterText` | `""` | Repeating, multi-line document footer with inline Markdown. |
 | `documentShowPageNumbers` | `false` | Show the page number at the bottom right of document pages. |
 | `fontFamily` | `Arial` | Presentation font family. |
 | `footerText` | `""` | Free footer text; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |

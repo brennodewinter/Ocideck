@@ -380,6 +380,27 @@ class _DocumentStyleBuilder {
           });
         },
       ),
+      const SizedBox(height: 12),
+      TextFormField(
+        key: Key('document-logo-size-${_themeProfile.name}'),
+        initialValue: _themeProfile.effectiveDocumentLogoSize.toString(),
+        decoration: InputDecoration(
+          labelText: l10n.d('Logo px'),
+          isDense: true,
+        ),
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        onChanged: (raw) {
+          final size = int.tryParse(raw);
+          if (size == null) return;
+          _rebuild(() {
+            _themeProfile = _themeProfile.copyWith(
+              documentLogoSize: size.clamp(32, 480),
+            );
+            _profileTouched = true;
+          });
+        },
+      ),
     ];
   }
 
@@ -387,7 +408,12 @@ class _DocumentStyleBuilder {
     TextFormField(
       key: Key('document-header-${_themeProfile.name}'),
       initialValue: _themeProfile.documentHeaderText,
-      decoration: InputDecoration(labelText: l10n.d('Koptekst'), isDense: true),
+      minLines: 2,
+      maxLines: 4,
+      decoration: InputDecoration(
+        labelText: '${l10n.d('Koptekst')} · ${l10n.t('markdownMode')}',
+        isDense: true,
+      ),
       onChanged: (value) => _rebuild(() {
         _themeProfile = _themeProfile.copyWith(documentHeaderText: value);
         _profileTouched = true;
@@ -397,8 +423,10 @@ class _DocumentStyleBuilder {
     TextFormField(
       key: Key('document-footer-${_themeProfile.name}'),
       initialValue: _themeProfile.documentFooterText,
+      minLines: 2,
+      maxLines: 4,
       decoration: InputDecoration(
-        labelText: l10n.d('Footertekst'),
+        labelText: '${l10n.d('Footertekst')} · ${l10n.t('markdownMode')}',
         isDense: true,
       ),
       onChanged: (value) => _rebuild(() {

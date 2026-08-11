@@ -48,6 +48,7 @@ void main() {
         textColor: '#FAFAFA',
         accentColor: '#FF8800',
         bulletMarker: BulletMarker.paw,
+        documentLogoSize: 224,
         footerText: 'Vertrouwelijk',
         footerShowPageNumbers: true,
         closingSlideEnabled: true,

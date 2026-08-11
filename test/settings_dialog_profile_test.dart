@@ -203,7 +203,47 @@ void main() {
     expect(find.byKey(const Key('document-footer-LibreKAT')), findsOneWidget);
     expect(find.byKey(const Key('document-page-numbers')), findsOneWidget);
     expect(find.byKey(const Key('document-logo-position')), findsOneWidget);
+    expect(
+      find.byKey(const Key('document-logo-size-LibreKAT')),
+      findsOneWidget,
+    );
+
+    final header = tester.widget<TextField>(
+      find.descendant(
+        of: find.byKey(const Key('document-header-LibreKAT')),
+        matching: find.byType(TextField),
+      ),
+    );
+    final footer = tester.widget<TextField>(
+      find.descendant(
+        of: find.byKey(const Key('document-footer-LibreKAT')),
+        matching: find.byType(TextField),
+      ),
+    );
+    expect(header.maxLines, greaterThan(1));
+    expect(footer.maxLines, greaterThan(1));
   });
+
+  testWidgets(
+    'meerregelige Markdown en documentlogomaat verversen de preview',
+    (tester) async {
+      final container = await openAppearanceTab(tester);
+      addTearDown(container.dispose);
+
+      final header = find.byKey(const Key('document-header-LibreKAT'));
+      await tester.enterText(header, '**Vertrouwelijk**\nTweede regel');
+      await tester.pump();
+      expect(find.text('Vertrouwelijk\nTweede regel'), findsOneWidget);
+
+      final size = find.byKey(const Key('document-logo-size-LibreKAT'));
+      await tester.enterText(size, '240');
+      await tester.pump();
+      final chrome = tester
+          .widgetList<DocumentChromeBand>(find.byType(DocumentChromeBand))
+          .first;
+      expect(chrome.profile.effectiveDocumentLogoSize, 240);
+    },
+  );
 
   testWidgets('een gekozen lokaal logo wordt als afbeelding getoond', (
     tester,
