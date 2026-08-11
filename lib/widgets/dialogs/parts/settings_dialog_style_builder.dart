@@ -203,7 +203,7 @@ class _DocumentStyleBuilder {
             ),
           ),
           _styleColorField(
-            l10n.d('Achtergrond slides'),
+            l10n.d('Achtergrond'),
             _themeProfile.slideBackgroundColor,
             (value) => _themeProfile = _themeProfile.copyWith(
               slideBackgroundColor: value,
