@@ -57,6 +57,7 @@ import '../language_flag.dart';
 import '../privacy_badge.dart';
 import '../privacy_statement_content.dart';
 import '../reader/document_reader_screen.dart';
+import '../reader/document_markdown_view.dart';
 import '../reader/documentation_search_tab.dart';
 import '../slides/image_zoom_dialog.dart';
 import 'hex_color_dialog.dart';
@@ -92,6 +93,7 @@ part 'parts/settings_dialog_general.dart';
 part 'parts/settings_dialog_storage.dart';
 part 'parts/settings_dialog_collaboration.dart';
 part 'parts/settings_dialog_presentation.dart';
+part 'parts/settings_dialog_style_builder.dart';
 part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
 part 'parts/settings_dialog_profile.dart';
@@ -222,6 +224,13 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// Whether the user changed the active profile in this session. Used to
   /// decide whether to apply the profile to the currently open presentation.
   bool _profileTouched = false;
+
+  /// Welk representatief documentvlak de live stijlpreview toont.
+  bool _stylePreviewShowsContent = true;
+
+  /// De uitgebreide presentatievelden zijn standaard uit beeld, maar blijven
+  /// open nadat de gebruiker (of een zoekresultaat) ze heeft onthuld.
+  bool _styleAdvancedExpanded = false;
 
   String? _highlightedThemeField;
   final _themeFieldKeys = <String, GlobalKey>{};
@@ -355,6 +364,11 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     final seen = <String>{};
     return [
       for (final profile in ref.watch(settingsProvider).themeProfiles)
+        if (seen.add(profile.name)) profile,
+      // Nieuwe ingebouwde stijlen blijven ook zichtbaar voor installaties met
+      // een al opgeslagen profielenlijst. De provider wordt pas gemuteerd als
+      // de gebruiker zo'n preset kiest en Opslaan indrukt.
+      for (final profile in ThemeProfile.builtIns)
         if (seen.add(profile.name)) profile,
     ];
   }
@@ -832,9 +846,15 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         : const EdgeInsets.symmetric(horizontal: 40, vertical: 28);
     final availableWidth = screen.width - dialogInset.horizontal;
     final availableHeight = screen.height - dialogInset.vertical;
+    final preferredWidth = _selectedTab == SettingsSection.presentation
+        ? 1240.0
+        : 920.0;
     final dialogWidth = math
         .min(
-          math.max(640.0, math.min(920.0 * scale, screen.width * 0.88)),
+          math.max(
+            640.0,
+            math.min(preferredWidth * scale, screen.width * 0.92),
+          ),
           availableWidth,
         )
         .toDouble();

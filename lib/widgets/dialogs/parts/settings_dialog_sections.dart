@@ -48,7 +48,7 @@ enum SettingsSection {
     SettingsSection.storage => l10n.d('Opslag'),
     SettingsSection.collaboration => l10n.d('Samenwerken'),
     SettingsSection.appearance => l10n.d('App-thema'),
-    SettingsSection.presentation => l10n.d('Presentatiestijl'),
+    SettingsSection.presentation => l10n.t('styleProfile'),
     SettingsSection.cockpit => l10n.d('Cockpit'),
     SettingsSection.privacy => l10n.d('Licentie en Privacy'),
     SettingsSection.security => l10n.d('Beveiliging'),

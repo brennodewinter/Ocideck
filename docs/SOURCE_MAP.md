@@ -1203,6 +1203,11 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
   a `.ocideckstyle` file is `parts/settings_dialog_profile.dart`; it mutates via
   `_adoptProfile` on the state class, since `setState` is protected and out of
   reach from an extension.
+  `parts/settings_dialog_presentation.dart` composes the presentation-style tab:
+  profile cards and the basic/advanced editor beside the document preview.
+  `parts/settings_dialog_style_builder.dart` supplies those cards, the compact
+  basic colour/font controls, presentation-only advanced controls, and the live
+  A4 title/content document preview.
   Anchors are free: every section heading is a `SettingsSectionTitle`
   (`settings/settings_section_title.dart`), which registers a `GlobalKey` under
   its own text, so a hit can scroll its section into view without any of the tab

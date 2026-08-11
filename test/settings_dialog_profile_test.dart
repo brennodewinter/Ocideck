@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,8 +14,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
-  Future<ProviderContainer> openAppearanceTab(WidgetTester tester) async {
-    await tester.binding.setSurfaceSize(const Size(1500, 1100));
+  Future<ProviderContainer> openAppearanceTab(
+    WidgetTester tester, {
+    Size surfaceSize = const Size(1500, 1100),
+  }) async {
+    await tester.binding.setSurfaceSize(surfaceSize);
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
     await tester.pumpWidget(
@@ -104,5 +109,48 @@ void main() {
       find.widgetWithIcon(IconButton, Icons.delete_outline).first,
     );
     expect(btn.onPressed, isNotNull);
+  });
+
+  testWidgets('Vigilis-profiel kleurt de documentpreview direct', (
+    tester,
+  ) async {
+    final container = await openAppearanceTab(tester);
+    addTearDown(container.dispose);
+
+    await tester.tap(find.byKey(const Key('style-profile-Vigilis')));
+    await tester.pump();
+
+    final rule = tester.widget<Container>(
+      find.byKey(const Key('document-style-accent-rule')),
+    );
+    final decorationColor = rule.color;
+    expect(
+      decorationColor,
+      AppTheme.parseHexColor(ThemeProfile.vigilis.accentColor),
+    );
+    expect(find.byKey(const Key('document-style-preview')), findsOneWidget);
+  });
+
+  testWidgets('stijlbouwer splitst breed en stapelt smal', (tester) async {
+    final container = await openAppearanceTab(tester);
+    addTearDown(container.dispose);
+
+    final wideEditor = tester.getTopLeft(
+      find.byKey(const Key('document-style-editor')),
+    );
+    final widePreview = tester.getTopLeft(
+      find.byKey(const Key('document-style-preview')),
+    );
+    expect(widePreview.dx, greaterThan(wideEditor.dx));
+
+    await tester.binding.setSurfaceSize(const Size(700, 1000));
+    await tester.pumpAndSettle();
+    final narrowEditor = tester.getTopLeft(
+      find.byKey(const Key('document-style-editor')),
+    );
+    final narrowPreview = tester.getTopLeft(
+      find.byKey(const Key('document-style-preview')),
+    );
+    expect(narrowPreview.dy, greaterThan(narrowEditor.dy));
   });
 }

@@ -3154,7 +3154,7 @@ from the browser (see the [User Guide](USER_GUIDE.md#documents)).
 
 A document may carry one **style**: a `theme: <profile-name>` key in a leading
 YAML front-matter block of the plain `.md`. The name refers to a style profile
-(the built-ins `LibreKAT`, `Standaard`, `Security`, or a profile you made — the
+(the built-ins `LibreKAT`, `Standaard`, `Security`, `Vigilis`, or a profile you made — the
 same profiles a deck uses, §3.2), which carries a font and styling. It looks like:
 
 ```

@@ -4284,9 +4284,11 @@ put it.
 
 A **Style** button in the toolbar picks one document-wide style — a font-and-styling
 profile, the same profiles the slide side uses (*LibreKAT*, *Standaard*, *Security*,
-or one you made yourself). The chosen style colours the writing surface as you type
-and is what the export uses, so a memo can look like your house style rather than the
-default. Choosing a style writes a small `theme:` line into the file's front matter,
+*Vigilis*, or one you made yourself). The chosen style colours the visual writing
+surface and the live document preview as you type, so a memo can look like your house
+style rather than the default. The **Source** editor deliberately stays neutral,
+monospaced Markdown: the source remains readable as text instead of pretending to be
+the finished document. Choosing a style writes a small `theme:` line into the file's front matter,
 and nothing else; **Geen (platte tekst)** ("None") takes that line back out. A
 document you never style stays a plain `.md` with no front matter at all — opening
 and saving it again is byte-for-byte the same file, and setting a style and then
@@ -4294,12 +4296,33 @@ choosing *Geen* returns you to the original bytes. A style is only styling: it n
 turns a document into a presentation, and if it names a profile that no longer exists
 the document falls back to the default rather than failing. *(Added 2026-08-08.)*
 
+### Building a document style
+
+Use *Settings → Presentation* to manage the profiles used by both documents and
+presentations. The built-in **Vigilis** profile is available there alongside the
+other built-in profiles. Profile cards select a profile or start a new one. The
+**Basis** controls set the slide/document surface colour, text colour, accent (also
+used for bullets) and font. A live A4 preview shows the selection immediately; switch
+it between a title sheet and content so you can judge the document treatment before
+using it.
+
+Presentation-specific choices remain under **Geavanceerd**: the more detailed font,
+colour, animation, logo and footer controls are available when needed, without making
+the basic document-style controls busier. This does not make the presentation editor
+into a document editor: that editor keeps its deliberately sober presentation-focused
+surface.
+
 Under *Settings → General → Document style* you can set a **default document style**
 for documents that do not choose their own, and switch on **Deze stijl afdwingen**
 ("Enforce this style") to use that one style everywhere as a house style, ignoring
 each document's own `theme:`. Both are display-and-export choices only — they write
 nothing into any file; only the per-document Style button in the editor does that.
 Enforcing is available once a default style is set.
+
+For an HTML export, OciDeck passes the resolved effective style (enforced style,
+document choice, then default) to the renderer. An `.ocideck` package export likewise
+contains the derived export deck with that effective profile. A Markdown export remains
+Markdown content rather than a style carrier.
 
 ### Exporting a document
 

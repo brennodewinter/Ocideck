@@ -10,20 +10,30 @@ extension _SettingsPresentationTab on _SettingsDialogState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _profileScopeBanner(),
-        _sectionTitle(l10n.t('styleProfile')),
-        _profileSelector(profiles),
-        const SizedBox(height: 20),
-        _sectionTitle(l10n.d('Lettertype')),
-        _fontSection(),
-        _presentationStyleDivider(l10n.t('settingsColors')),
-        ..._colorsSectionChildren(),
-        _presentationStyleDivider(l10n.d('Animatie')),
-        ..._animationSettings(),
-        _presentationStyleDivider(l10n.d('Logo en footer')),
-        ..._logoSectionChildren(),
+        _styleProfileCards(profiles),
         const SizedBox(height: 18),
-        _stylePreview(),
+        _profileSelector(profiles),
+        const SizedBox(height: 18),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final editor = _styleBasicsAndAdvanced(l10n);
+            final preview = _documentStylePreview(l10n);
+            if (constraints.maxWidth < 820) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [editor, const SizedBox(height: 18), preview],
+              );
+            }
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(width: 350, child: editor),
+                const SizedBox(width: 20),
+                Expanded(child: preview),
+              ],
+            );
+          },
+        ),
       ],
     );
   }

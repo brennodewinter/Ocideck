@@ -94,6 +94,13 @@ void main() {
       await tester.tap(find.text('open'));
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(find.text('Geavanceerd'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Geavanceerd'));
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('Logo positie'));
+      await tester.pumpAndSettle();
+
       // Positie en grootte horen bij de logokeuze en staan er dus alleen als de
       // poort openstaat. Het pad zelf is geen anker: standaard staat er al een
       // logo ingesteld, dus de "geen logo"-tekst verschijnt nooit.

@@ -8,7 +8,6 @@ import 'package:path/path.dart' as p;
 
 import '../l10n/app_localizations.dart';
 import '../models/chart.dart';
-import '../models/markdown_kind.dart';
 import '../models/markdown_outline.dart';
 import '../models/privacy_disposition.dart';
 import '../models/settings.dart';

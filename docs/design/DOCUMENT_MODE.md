@@ -759,7 +759,7 @@ theme: LibreKAT
 ```
 
 The value is the **name of a `ThemeProfile`** — the same profiles the slide side
-uses (the built-ins `LibreKAT`, `Standaard` and `Security`, plus any the user
+uses (the built-ins `LibreKAT`, `Standaard`, `Security` and `Vigilis`, plus any the user
 created), each carrying a font and styling. There is deliberately **no** new
 kind of profile for documents: a document reuses the deck's style profiles by
 name so a house style is defined once.
@@ -802,10 +802,12 @@ write-back puts the front matter in front again, so `document.source` stays
 byte-faithful. The `theme:` line is therefore **never** shown as editable text —
 it is managed by the **Style** picker (`_DocEditorToolbar._styleMenu`), which lists
 "Geen (platte tekst)" plus every profile name and lands the choice byte-surgically
-as a discrete undo step. The resolved style's font colours the writing surface
-(Visual and Source alike) via `MarkdownEditorTheme.documentSurface(fontFamily:)`;
-with no style it falls back to the app font, so a plain document reads exactly as
-before.
+as a discrete undo step. The resolved profile styles the Visual writing surface
+and rendered preview via `MarkdownEditorTheme.documentSurface(profile:)` and
+`DocumentMarkdownView(themeProfile:)`. The raw Source editor deliberately stays
+neutral and monospace: it edits Markdown rather than simulating the final page.
+With no style, the rendered document falls back to the app theme, so a plain
+document reads exactly as before.
 
 ### 12.4 Resolver precedence
 

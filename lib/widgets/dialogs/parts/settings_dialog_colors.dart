@@ -860,45 +860,4 @@ extension _SettingsColors on _SettingsDialogState {
       ),
     );
   }
-
-  Widget _stylePreview() {
-    final l10n = context.l10n;
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      decoration: BoxDecoration(
-        color: AppTheme.parseHexColor(_themeProfile.titleBackgroundColor),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            l10n.d('Voorvertoning'),
-            style: _fontStyle(
-              _themeProfile.fontFamily,
-              TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: AppTheme.parseHexColor(_themeProfile.titleTextColor),
-              ),
-            ),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            l10n.d('De snelle bruine vos springt over de luie hond.'),
-            style: _fontStyle(
-              _themeProfile.fontFamily,
-              TextStyle(
-                fontSize: 12,
-                color: AppTheme.parseHexColor(
-                  _themeProfile.titleTextColor,
-                ).withValues(alpha: 0.72),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

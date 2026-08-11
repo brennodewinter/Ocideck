@@ -4241,6 +4241,45 @@ data in `data/*.json`), een **tabel** (een GFM-pijptabel), een
 **Mermaid**-diagram of een **afbeelding** (gekopieerd naar `images/`). Elk blijft
 platte, parseerbare tekst zodat het bestand elders blijft openen.
 
+### Een document een stijl geven
+
+Met de knop **Stijl** in de werkbalk kies je één documentbrede stijl: hetzelfde
+soort profiel dat presentaties gebruiken, bijvoorbeeld *LibreKAT*, *Standaard*,
+*Security*, het ingebouwde *Vigilis* of een eigen profiel. De gekozen stijl kleurt
+het visuele schrijfoppervlak en de live documentweergave mee terwijl je werkt. De
+**Bron**-bewerker blijft bewust neutrale, monospaced Markdown: de bron blijft gewone,
+leesbare tekst en doet niet alsof hij het einddocument is.
+
+De keuze schrijft alleen een kleine `theme:`-regel in de front matter. **Geen
+(platte tekst)** haalt die regel weer weg. Een document zonder stijl blijft dus een
+gewone `.md` zonder front matter; een stijl maakt er nooit een presentatie van. Bestaat
+een genoemde profielnaam niet meer, dan valt OciDeck terug op de standaard in plaats
+van het document niet meer te openen.
+
+### Een documentstijl maken
+
+Onder *Instellingen → Presentatie* beheer je de profielen voor documenten én
+presentaties. De profielkaarten kiezen een bestaand profiel of maken een nieuw profiel.
+Daar staat ook het ingebouwde **Vigilis**-profiel. Onder **Basis** stel je de
+achtergrondkleur, tekstkleur, accentkleur (ook voor opsommingsmarkeringen) en het
+lettertype in. De live A4-voorvertoning volgt die keuze direct; je kunt wisselen tussen
+een titelblad en inhoud om de documentopmaak vooraf te beoordelen.
+
+Meer presentatiegerichte opties blijven onder **Geavanceerd**: de uitgebreide
+lettertype-, kleur-, animatie-, logo- en footerinstellingen zijn bereikbaar zonder de
+basiselementen voor documentopmaak te verdringen. De presentatiebewerker zelf blijft
+bewust sober en presentatiegericht.
+
+Onder *Instellingen → Algemeen → Documentstijl* kun je daarnaast een
+**standaard-documentstijl** kiezen en die desgewenst afdwingen als huisstijl. Dat zijn
+weergave- en exportkeuzes; alleen de knop **Stijl** in het document schrijft `theme:`
+naar het bestand.
+
+Bij HTML-export geeft OciDeck de effectieve stijl door aan de renderer (afgedwongen
+stijl, documentkeuze, daarna standaard). Een `.ocideck`-pakketexport bevat eveneens
+het afgeleide exportdeck met dat effectieve profiel. Een Markdown-export blijft alleen
+Markdown-inhoud en is geen stijldrager.
+
 ### Een document exporteren
 
 **Exporteren is niet Opslaan.** Opslaan schrijft je byte-getrouwe origineel;
