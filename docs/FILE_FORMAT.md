@@ -486,6 +486,8 @@ these fields (with defaults):
 | `documentLogoSize` | `null` | Document-logo width in px (`32`–`480`). `null` follows `logoSize`. |
 | `documentHeaderText` | `""` | Repeating, multi-line document header with inline Markdown. |
 | `documentFooterText` | `""` | Repeating, multi-line document footer with inline Markdown. |
+| `documentBandTextColor` | `null` | Header/footer text colour. `null` follows `textColor`. |
+| `documentBandBackgroundColor` | `null` | Header/footer background colour. `null` follows `slideBackgroundColor`. |
 | `documentShowPageNumbers` | `false` | Show the page number at the bottom right of document pages. |
 | `fontFamily` | `Arial` | Presentation font family. |
 | `footerText` | `""` | Free footer text; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |

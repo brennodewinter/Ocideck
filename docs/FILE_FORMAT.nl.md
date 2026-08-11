@@ -491,6 +491,8 @@ deze velden (met standaardwaarden):
 | `documentLogoSize` | `null` | Breedte van het documentlogo in px (`32`–`480`). `null` volgt `logoSize`. |
 | `documentHeaderText` | `""` | Herhalende meerregelige documentkop met inline Markdown. |
 | `documentFooterText` | `""` | Herhalende meerregelige documentfooter met inline Markdown. |
+| `documentBandTextColor` | `null` | Tekstkleur van kop en footer. `null` volgt `textColor`. |
+| `documentBandBackgroundColor` | `null` | Achtergrondkleur van kop en footer. `null` volgt `slideBackgroundColor`. |
 | `documentShowPageNumbers` | `false` | Toon het paginanummer rechtsonder op documentpagina's. |
 | `fontFamily` | `Arial` | Lettertypefamilie van de presentatie. |
 | `footerText` | `""` | Vrije voettekst; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |

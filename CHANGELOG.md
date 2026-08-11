@@ -22,7 +22,8 @@ in Dutch, and it keeps growing on `main` between releases.
   logo staat naast de kiezer en geldt standaard voor presentatie én document;
   een document kan bewust afwijken. Documentprofielen hebben echte kop- en
   voettekst met inline Markdown en meerdere regels, een afzonderlijk instelbare
-  logomaat, logopositie en paginanummering in voorbeeld, editor en HTML/print.
+  tekst- en achtergrondkleur voor beide banden, logomaat, logopositie en
+  paginanummering in voorbeeld, editor en HTML/print.
   De ruwe bron- en presentatiebewerker blijven sober.
 
 ## [0.4.2] — 2026-08-10

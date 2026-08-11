@@ -45,6 +45,8 @@ void main() {
         documentLogoSize: 224,
         documentHeaderText: 'Bestuurlijk rapport',
         documentFooterText: 'Vigilis · Vertrouwelijk',
+        documentBandTextColor: '#F8FAFC',
+        documentBandBackgroundColor: '#172033',
         documentShowPageNumbers: true,
       );
 
@@ -56,6 +58,8 @@ void main() {
       expect(back.effectiveDocumentLogoSize, 224);
       expect(back.documentHeaderText, 'Bestuurlijk rapport');
       expect(back.documentFooterText, 'Vigilis · Vertrouwelijk');
+      expect(back.documentBandTextColor, '#F8FAFC');
+      expect(back.documentBandBackgroundColor, '#172033');
       expect(back.documentShowPageNumbers, isTrue);
 
       final overridden = back.copyWith(documentLogoPath: 'ander-logo.png');
@@ -79,6 +83,13 @@ void main() {
     expect(legacy.effectiveDocumentLogoSize, legacy.logoSize);
     expect(legacy.documentHeaderText, isEmpty);
     expect(legacy.documentFooterText, isEmpty);
+    expect(legacy.documentBandTextColor, isNull);
+    expect(legacy.documentBandBackgroundColor, isNull);
+    expect(legacy.effectiveDocumentBandTextColor, legacy.textColor);
+    expect(
+      legacy.effectiveDocumentBandBackgroundColor,
+      legacy.slideBackgroundColor,
+    );
     expect(legacy.documentShowPageNumbers, isFalse);
     expect(
       ThemeProfile.fromJson(const {
@@ -202,6 +213,8 @@ void main() {
       'sectionBackgroundColor',
       'codeBackgroundColor',
       'codeTextColor',
+      'documentBandTextColor',
+      'documentBandBackgroundColor',
     ];
     const payloads = <String>[
       "red}</style><meta http-equiv='refresh' content='0;url=https://evil'>",

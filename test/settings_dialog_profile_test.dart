@@ -9,6 +9,7 @@ import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/document_page_chrome.dart';
+import 'package:ocideck/widgets/slides/inline_markdown.dart';
 import 'package:ocideck/widgets/theme_profile_logo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -202,6 +203,11 @@ void main() {
     expect(find.byKey(const Key('document-header-LibreKAT')), findsOneWidget);
     expect(find.byKey(const Key('document-footer-LibreKAT')), findsOneWidget);
     expect(find.byKey(const Key('document-page-numbers')), findsOneWidget);
+    expect(find.byKey(const Key('document-band-text-color')), findsOneWidget);
+    expect(
+      find.byKey(const Key('document-band-background-color')),
+      findsOneWidget,
+    );
     expect(find.byKey(const Key('document-logo-position')), findsOneWidget);
     expect(
       find.byKey(const Key('document-logo-size-LibreKAT')),
@@ -244,6 +250,32 @@ void main() {
       expect(chrome.profile.effectiveDocumentLogoSize, 240);
     },
   );
+
+  testWidgets('documentband gebruikt eigen tekst- en achtergrondkleur', (
+    tester,
+  ) async {
+    const profile = ThemeProfile(
+      documentHeaderText: 'Kop',
+      documentBandTextColor: '#F8FAFC',
+      documentBandBackgroundColor: '#172033',
+    );
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: DocumentChromeBand(profile: profile, header: true),
+        ),
+      ),
+    );
+
+    final text = tester.widget<InlineMarkdownText>(
+      find.byKey(const Key('document-header-text')),
+    );
+    expect(text.style.color, const Color(0xFFF8FAFC));
+    final band = tester.widget<ColoredBox>(
+      find.byKey(const Key('document-header-band')),
+    );
+    expect(band.color, const Color(0xFF172033));
+  });
 
   testWidgets('een gekozen lokaal logo wordt als afbeelding getoond', (
     tester,

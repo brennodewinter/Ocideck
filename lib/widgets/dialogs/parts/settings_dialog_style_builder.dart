@@ -434,6 +434,21 @@ class _DocumentStyleBuilder {
         _profileTouched = true;
       }),
     ),
+    _styleColorField(
+      l10n.d('Tekst'),
+      _themeProfile.effectiveDocumentBandTextColor,
+      (value) =>
+          _themeProfile = _themeProfile.copyWith(documentBandTextColor: value),
+      key: const Key('document-band-text-color'),
+    ),
+    _styleColorField(
+      l10n.d('Achtergrond'),
+      _themeProfile.effectiveDocumentBandBackgroundColor,
+      (value) => _themeProfile = _themeProfile.copyWith(
+        documentBandBackgroundColor: value,
+      ),
+      key: const Key('document-band-background-color'),
+    ),
     CheckboxListTile(
       key: const Key('document-page-numbers'),
       value: _themeProfile.documentShowPageNumbers,
@@ -507,10 +522,12 @@ class _DocumentStyleBuilder {
   Widget _styleColorField(
     String label,
     String value,
-    ValueChanged<String> onChanged,
-  ) {
+    ValueChanged<String> onChanged, {
+    Key? key,
+  }) {
     final color = AppTheme.parseHexColor(value);
     return InkWell(
+      key: key,
       onTap: () async {
         final picked = await _pickHexColor(value);
         if (picked == null || !mounted) return;

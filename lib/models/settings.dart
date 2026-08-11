@@ -54,8 +54,7 @@ class ThemeProfile {
   final String checklistUncheckedColor;
   final bool checklistStrikeThrough;
 
-  /// Default marker glyph for bullet lists across the deck. A slide can override
-  /// it per-slide. Defaults to [BulletMarker.dot].
+  /// Default marker glyph; a slide can override it.
   final BulletMarker bulletMarker;
   final String tableTextColor;
   final String tableHeaderTextColor;
@@ -64,18 +63,13 @@ class ThemeProfile {
   final String titleTextColor;
   final String sectionBackgroundColor;
 
-  /// Colours for code (broncode) slides. Defaults mirror the atom-one-dark
-  /// editor look. Set e.g. black background + bright green text with
-  /// [codeHighlightSyntax] off for a classic CRT terminal feel.
+  /// Colours for code (broncode) slides.
   final String codeBackgroundColor;
   final String codeTextColor;
 
-  /// When false, code is shown monochrome in [codeTextColor] (no per-token
-  /// syntax colours) — required for a believable single-colour CRT screen.
+  /// When false, code is shown monochrome in [codeTextColor].
   final bool codeHighlightSyntax;
 
-  /// Monospace font family for code slides. `monospace` uses the system default;
-  /// e.g. `Courier New` for a typewriter look.
   final String codeFontFamily;
   final String? logoPath;
   final String logoPosition;
@@ -87,34 +81,26 @@ class ThemeProfile {
   final int? documentLogoSize;
   final String documentHeaderText;
   final String documentFooterText;
+  final String? documentBandTextColor;
+  final String? documentBandBackgroundColor;
   final bool documentShowPageNumbers;
 
-  /// Lettertype van de presentatie — hoort bij de stijl, niet bij de app.
   final String fontFamily;
 
-  /// Vrije footertekst onderaan elke slide. Ondersteunt tokens: {page},
-  /// {total}, {date}, {title}. Leeg = geen footertekst.
+  /// Vrije footertekst onderaan elke slide; ondersteunt tokens.
   final String footerText;
 
-  /// Toon "pagina / totaal" rechtsonder op elke slide.
+  /// Toon pagina/totaal rechtsonder op elke slide.
   final bool footerShowPageNumbers;
-
-  /// Horizontale positie van de footer: left, center of right.
   final String footerPosition;
 
-  /// Optional markdown slide that is appended when presenting/exporting with
-  /// this theme profile. It stays out of the editable deck slide list.
+  /// Optionele afsluitslide bij presenteren en exporteren.
   final bool closingSlideEnabled;
   final String closingSlideMarkdown;
 
-  /// Default activation/animation duration (ms) for animated slide types
-  /// (timeline, cockpit). A slide may override it; null override = inherit this.
   final int animationDurationMs;
 
-  /// Severity colour tokens for finding / CVSS rendering (the five FIRST bands,
-  /// Critical→Informational). Defaults mirror the built-in
-  /// [FindingSeverityPalette] so every existing profile renders identically; the
-  /// security profile and the colours editor can retune them (PENTEST_MIAUW §11).
+  /// Severity-kleuren voor bevindingen (Critical→Informational).
   final String severityCriticalColor;
   final String severityHighColor;
   final String severityMediumColor;
@@ -148,6 +134,8 @@ class ThemeProfile {
     this.documentLogoSize,
     this.documentHeaderText = '',
     this.documentFooterText = '',
+    this.documentBandTextColor,
+    this.documentBandBackgroundColor,
     this.documentShowPageNumbers = false,
     this.fontFamily = 'Arial',
     this.footerText = '',
@@ -296,6 +284,8 @@ class ThemeProfile {
     int? documentLogoSize,
     String? documentHeaderText,
     String? documentFooterText,
+    String? documentBandTextColor,
+    String? documentBandBackgroundColor,
     bool? documentShowPageNumbers,
     String? fontFamily,
     String? footerText,
@@ -346,6 +336,10 @@ class ThemeProfile {
       documentLogoSize: documentLogoSize ?? this.documentLogoSize,
       documentHeaderText: documentHeaderText ?? this.documentHeaderText,
       documentFooterText: documentFooterText ?? this.documentFooterText,
+      documentBandTextColor:
+          documentBandTextColor ?? this.documentBandTextColor,
+      documentBandBackgroundColor:
+          documentBandBackgroundColor ?? this.documentBandBackgroundColor,
       documentShowPageNumbers:
           documentShowPageNumbers ?? this.documentShowPageNumbers,
       fontFamily: fontFamily ?? this.fontFamily,
@@ -393,6 +387,8 @@ class ThemeProfile {
       'documentLogoSize': documentLogoSize,
       'documentHeaderText': documentHeaderText,
       'documentFooterText': documentFooterText,
+      'documentBandTextColor': documentBandTextColor,
+      'documentBandBackgroundColor': documentBandBackgroundColor,
       'documentShowPageNumbers': documentShowPageNumbers,
       'fontFamily': fontFamily,
       'footerText': footerText,
@@ -409,13 +405,7 @@ class ThemeProfile {
     };
   }
 
-  /// Validates a deck-supplied colour to a strict `#RRGGBB` literal, falling
-  /// back to [fallback] for anything else. Theme profiles travel inside the
-  /// deck front matter (base64url JSON) and are interpolated raw into the
-  /// `<style>` block of the HTML export and the audience-window inline styles,
-  /// so an unvalidated value like `red}</style>…<style>` is a CSS/HTML
-  /// injection. The import-safety scanner never sees the base64 payload, so
-  /// this is the choke point.
+  /// Houdt profielkleuren veilig voor interpolatie in HTML en CSS.
   static String _color(Object? value, String fallback) =>
       normalizeChartColor(value is String ? value : null) ?? fallback;
 
@@ -475,6 +465,12 @@ class ThemeProfile {
       ),
       documentHeaderText: json['documentHeaderText'] as String? ?? '',
       documentFooterText: json['documentFooterText'] as String? ?? '',
+      documentBandTextColor: json['documentBandTextColor'] == null
+          ? null
+          : _color(json['documentBandTextColor'], '#222222'),
+      documentBandBackgroundColor: json['documentBandBackgroundColor'] == null
+          ? null
+          : _color(json['documentBandBackgroundColor'], '#FFFFFF'),
       documentShowPageNumbers:
           json['documentShowPageNumbers'] as bool? ?? false,
       fontFamily: _font(
@@ -503,6 +499,10 @@ class ThemeProfile {
   String? get effectiveDocumentLogoPath => documentLogoPath ?? logoPath;
   int get effectiveDocumentLogoSize =>
       (documentLogoSize ?? logoSize).clamp(32, 480);
+  String get effectiveDocumentBandTextColor =>
+      documentBandTextColor ?? textColor;
+  String get effectiveDocumentBandBackgroundColor =>
+      documentBandBackgroundColor ?? slideBackgroundColor;
 }
 
 class AppSettings {

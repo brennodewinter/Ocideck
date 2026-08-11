@@ -4311,6 +4311,8 @@ use no document logo. The document logo width can be set from 32 to 480 px and f
 the presentation logo size until changed. The same controls set its position, the
 **header**, **footer text** and **page numbers**. Header and footer accept several lines
 and inline Markdown (`**bold**`, `*italic*`, `` `code` ``, `~~strike~~` and links).
+Their shared text and background colours can be set independently; until changed,
+they follow the document text and paper colours.
 The A4 preview updates immediately; the visual editor and live
 preview show the same page furniture. HTML places it around the document and repeats it
 at the top and bottom when printing or saving as PDF. Markdown content stays unchanged:

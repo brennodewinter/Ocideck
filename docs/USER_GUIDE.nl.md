@@ -4271,7 +4271,9 @@ en een ander documentlogo kiezen — of daar bewust geen logo gebruiken. Daar st
 ook de breedte van het documentlogo in van 32 tot 480 px; tot je die wijzigt volgt deze
 de maat van het presentatielogo. Daarnaast stel je de positie, **koptekst**,
 **footertekst** en **paginanummers** in. Kop en footer ondersteunen meerdere regels en
-inline Markdown (`**vet**`, `*cursief*`, `` `code` ``, `~~doorhalen~~` en links). De A4-preview
+inline Markdown (`**vet**`, `*cursief*`, `` `code` ``, `~~doorhalen~~` en links).
+Voor beide banden kies je samen een eigen tekst- en achtergrondkleur; zolang je die
+niet wijzigt volgen ze de tekst- en papierkleur van het document. De A4-preview
 toont deze paginadelen meteen; dezelfde kop en footer staan rond het visuele
 schrijfoppervlak en de live preview. In HTML staan ze rond het document en bij
 afdrukken/opslaan als PDF herhalen ze boven- en onderaan de pagina. De Markdownbron

@@ -42,8 +42,11 @@ class DocumentChromeBand extends StatelessWidget {
     final rightLogo =
         logoInBand && profile.documentLogoPosition.endsWith('right');
     final color = AppTheme.parseHexColor(
-      profile.textColor,
-    ).withValues(alpha: 0.68);
+      profile.effectiveDocumentBandTextColor,
+    );
+    final background = AppTheme.parseHexColor(
+      profile.effectiveDocumentBandBackgroundColor,
+    );
     final documentLogoSize = profile.effectiveDocumentLogoSize.toDouble();
     final logoWidth = compact
         ? (documentLogoSize * 0.45).clamp(36.0, 144.0)
@@ -93,14 +96,18 @@ class DocumentChromeBand extends StatelessWidget {
       height: 1,
       color: AppTheme.parseHexColor(profile.accentColor),
     );
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: compact ? 0 : 24,
-        vertical: compact ? 6 : 10,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: header ? [row, divider] : [divider, row],
+    return ColoredBox(
+      key: Key(header ? 'document-header-band' : 'document-footer-band'),
+      color: background,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: compact ? 0 : 24,
+          vertical: compact ? 6 : 10,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: header ? [row, divider] : [divider, row],
+        ),
       ),
     );
   }

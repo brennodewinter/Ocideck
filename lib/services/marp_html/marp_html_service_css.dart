@@ -105,6 +105,8 @@ String exportBaseCss() => '$_structuralCss\n$_reportingCss\n$_menuCss';
 /// externe `url()`/`@font-face`: de CSP is het vangnet, niet de vergunning.
 String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
   final logoSize = t.effectiveDocumentLogoSize;
+  final bandText = t.effectiveDocumentBandTextColor;
+  final bandBackground = t.effectiveDocumentBandBackgroundColor;
   final logoHeight = (logoSize * 0.5).round().clamp(32, 240);
   final hasLogo = t.effectiveDocumentLogoPath?.trim().isNotEmpty == true;
   final headerPadding = math.max(
@@ -135,7 +137,7 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
       'color:${t.tableHeaderTextColor};border:1px solid #ccc;padding:6px 12px}'
       '.document td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px}'
       '.document-header,.document-footer{display:flex;align-items:center;gap:14px;'
-      'min-height:42px;color:${t.textColor}aa;font-size:12px}'
+      'min-height:42px;color:$bandText;background:$bandBackground;font-size:12px}'
       '.document-header{border-bottom:1px solid ${t.accentColor}8c;margin-bottom:24px}'
       '.document-footer{border-top:1px solid ${t.accentColor}8c;margin-top:24px}'
       '.document-header-text,.document-footer-text{flex:1;min-width:0}'
@@ -147,7 +149,7 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
       '@media print{.document{padding-top:${headerPadding}px;'
       'padding-bottom:${footerPadding}px}'
       '.document-header,.document-footer{position:fixed;left:40px;right:40px;'
-      'z-index:2;background:${t.slideBackgroundColor}}'
+      'z-index:2;background:$bandBackground}'
       '.document-header{top:0}.document-footer{bottom:0}'
       '.document-page-number::after{content:counter(page)}}';
 }

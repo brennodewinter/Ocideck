@@ -113,6 +113,8 @@ void main() {
           documentLogoSize: 240,
           documentHeaderText: '**Bestuurlijk rapport**\nTweede regel',
           documentFooterText: 'Vigilis · *Vertrouwelijk*',
+          documentBandTextColor: '#F8FAFC',
+          documentBandBackgroundColor: '#172033',
           documentShowPageNumbers: true,
         );
 
@@ -130,6 +132,8 @@ void main() {
         expect(document, contains('Vigilis · <em>Vertrouwelijk</em>'));
         expect(document, contains('class="document-page-number"'));
         expect(document, contains('width:240px'));
+        expect(document, contains('color:#F8FAFC'));
+        expect(document, contains('background:#172033'));
         expect(document, contains('@media print'));
 
         final slides = await service.build(
