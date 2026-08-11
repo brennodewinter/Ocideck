@@ -4301,16 +4301,13 @@ the document falls back to the default rather than failing. *(Added 2026-08-08.)
 Use *Settings → Presentation* to manage the profiles used by both documents and
 presentations. The built-in **Vigilis** profile is available there alongside the
 other built-in profiles. Profile cards select a profile or start a new one. The
-**Basis** controls set the slide/document surface colour, text colour, accent (also
-used for bullets) and font. A live A4 preview shows the selection immediately; switch
-it between a title sheet and content so you can judge the document treatment before
-using it.
-
-Presentation-specific choices remain under **Geavanceerd**: the more detailed font,
-colour, animation, logo and footer controls are available when needed, without making
-the basic document-style controls busier. This does not make the presentation editor
-into a document editor: that editor keeps its deliberately sober presentation-focused
-surface.
+Choose **Document** or **Presentation** above the editor. Document shows the compact
+surface-colour, text-colour, accent and font controls beside a live A4 title/content
+preview. Presentation restores the complete font, colour, animation, logo, footer and
+closing-slide controls beside a real 16:9 slide preview. A selected logo is shown next
+to the file chooser and appears in both previews, in the document editor and in HTML
+document export. The presentation editor itself remains deliberately sober and
+presentation-focused.
 
 Under *Settings → General → Document style* you can set a **default document style**
 for documents that do not choose their own, and switch on **Deze stijl afdwingen**

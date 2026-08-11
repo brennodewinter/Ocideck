@@ -52,6 +52,7 @@ import 'editors/table_editor.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'reader/document_markdown_view.dart';
 import 'shell/document_save_actions.dart';
+import 'theme_profile_logo.dart';
 
 part 'parts/document_editor_toolbar.dart';
 
@@ -298,10 +299,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // dezelfde regel als de deck-HTML-export: een pad buiten de map wordt
     // geweigerd, niet gevolgd.
     Future<String?> embed(String src) async {
-      final bytes = await imageService.readSlideImageBytes(
-        src,
-        projectPath: projectPath,
-      );
+      final bytes = src == effectiveTheme.logoPath
+          ? await readStyleLogoBytes(src, projectPath: projectPath)
+          : await imageService.readSlideImageBytes(
+              src,
+              projectPath: projectPath,
+            );
       if (bytes == null) return null;
       final encoded = encodeForHtmlEmbed(bytes, src);
       return encoded == null ? null : htmlImageDataUri(encoded);
@@ -599,7 +602,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
           _outlineRail(theme, source),
           VerticalDivider(width: 1, thickness: 1, color: divider),
         ],
-        Expanded(child: _wysiwygEditor(theme)),
+        Expanded(
+          child: _styledDocumentSurface(_styleProfile, _wysiwygEditor(theme)),
+        ),
       ],
     );
   }
@@ -676,15 +681,18 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         child: SingleChildScrollView(
           controller: _previewScroll,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-          child: DocumentMarkdownView(
-            source,
-            maxTextWidth: 720,
-            themeProfile: _styleProfile,
-            chartTheme: _styleProfile,
-            anchorBlockIndex: _anchorBlockIndex,
-            anchorKey: _anchorKey,
-            onEditChart: _editChart,
-            onEditTable: _editTable,
+          child: _styledDocumentBody(
+            _styleProfile,
+            DocumentMarkdownView(
+              source,
+              maxTextWidth: 720,
+              themeProfile: _styleProfile,
+              chartTheme: _styleProfile,
+              anchorBlockIndex: _anchorBlockIndex,
+              anchorKey: _anchorKey,
+              onEditChart: _editChart,
+              onEditTable: _editTable,
+            ),
           ),
         ),
       );
@@ -1059,6 +1067,58 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       ),
     ),
   );
+}
+
+Widget _styledDocumentSurface(ThemeProfile? profile, Widget editor) {
+  if (profile?.logoPath?.isNotEmpty != true) return editor;
+  final atTop = profile!.logoPosition.startsWith('top');
+  return ColoredBox(
+    color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+    child: Column(
+      children: [
+        if (atTop) _DocumentLogo(profile),
+        Expanded(child: editor),
+        if (!atTop) _DocumentLogo(profile),
+      ],
+    ),
+  );
+}
+
+Widget _styledDocumentBody(ThemeProfile? profile, Widget body) {
+  if (profile?.logoPath?.isNotEmpty != true) return body;
+  final atTop = profile!.logoPosition.startsWith('top');
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      if (atTop) _DocumentLogo(profile),
+      body,
+      if (!atTop) _DocumentLogo(profile),
+    ],
+  );
+}
+
+class _DocumentLogo extends StatelessWidget {
+  const _DocumentLogo(this.profile);
+
+  final ThemeProfile profile;
+
+  @override
+  Widget build(BuildContext context) {
+    final right = profile.logoPosition.endsWith('right');
+    final width = (profile.logoSize * 0.6).clamp(48.0, 160.0);
+    return Align(
+      alignment: right ? Alignment.centerRight : Alignment.centerLeft,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(right ? 16 : 24, 12, right ? 24 : 16, 8),
+        child: ThemeProfileLogo(
+          profile: profile,
+          width: width,
+          height: (width * 0.5).clamp(32.0, 72.0),
+          alignment: right ? Alignment.centerRight : Alignment.centerLeft,
+        ),
+      ),
+    );
+  }
 }
 
 /// De documenttitel voor export en conversie: de eerste `# `-kop, anders de

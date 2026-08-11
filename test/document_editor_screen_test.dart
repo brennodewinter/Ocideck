@@ -13,6 +13,7 @@ import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
+import 'package:ocideck/widgets/theme_profile_logo.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -161,6 +162,7 @@ void main() {
       expect(visual.editorTheme.surface, const Color(0xFFFFFFFF));
       expect(visual.editorTheme.text, const Color(0xFF111318));
       expect(visual.editorTheme.accent, const Color(0xFFFFB800));
+      expect(find.byType(ThemeProfileLogo), findsOneWidget);
 
       await openSource(tester);
       final preview = tester.widget<DocumentMarkdownView>(
@@ -168,6 +170,7 @@ void main() {
       );
       expect(preview.themeProfile?.name, 'Vigilis');
       expect(preview.chartTheme?.name, 'Vigilis');
+      expect(find.byType(ThemeProfileLogo), findsOneWidget);
 
       final source = tester.widget<TextField>(find.byType(TextField));
       expect(source.style?.fontFamily, 'monospace');

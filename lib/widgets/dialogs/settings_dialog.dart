@@ -226,7 +226,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   bool _profileTouched = false;
 
   bool _stylePreviewShowsContent = true;
-  bool _styleAdvancedExpanded = false;
+  bool _stylePreviewShowsPresentation = false;
 
   String? _highlightedThemeField;
   final _themeFieldKeys = <String, GlobalKey>{};

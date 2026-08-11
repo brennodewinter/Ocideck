@@ -120,7 +120,13 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) =>
     'padding-left:16px;opacity:.85}'
     '.document th{background:${t.tableHeaderBackgroundColor};'
     'color:${t.tableHeaderTextColor};border:1px solid #ccc;padding:6px 12px}'
-    '.document td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px}';
+    '.document td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px}'
+    '.document-logo{display:flex;margin:0 0 24px}'
+    '.document-logo.right{justify-content:flex-end}'
+    '.document-logo.left{justify-content:flex-start}'
+    '.document-logo img{display:block;width:${t.logoSize.clamp(32, 480)}px;'
+    'max-width:40%;max-height:120px;height:auto;object-fit:contain}'
+    '.document>*:last-child.document-logo{margin:24px 0 0}';
 
 /// De vorm van het keuze-menuraster (#1162). Thema-onafhankelijk, net als de
 /// rapportage-opmaak: alleen de layout staat hier, de kleuren (rand/vulling uit

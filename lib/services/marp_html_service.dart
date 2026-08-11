@@ -24,6 +24,7 @@ import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/timeline.dart';
 import '../utils/log.dart';
+import '../utils/bundled_asset.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/marp_emoji.dart';
 import '../utils/marp_style_values.dart';
@@ -190,15 +191,15 @@ class MarpHtmlService {
     // somehow survives DOMPurify can't execute when the file is opened. The
     // per-slide `<script type="text/markdown">` data holders are inert (never
     // executed) and intentionally carry no nonce.
-    final rng = math.Random.secure();
-    final nonce = base64.encode(
-      List<int>.generate(16, (_) => rng.nextInt(256)),
-    );
+    final nonce = _htmlNonce();
 
-    final embedded = await _embedImages(
+    final embedded = await _embedHtmlImages(
       deckMarkdown,
       embedImage,
       maxEmbedBytes,
+      continuous,
+      theme,
+      this,
     );
     // De ondertekening komt van het deck mee (het zegelblok staat sinds 0.1.0
     // niet meer in de front matter). Een `.md` van vóór die verhuizing draagt

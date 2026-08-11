@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -5,6 +8,7 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
+import 'package:ocideck/widgets/theme_profile_logo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Dekking voor `settings_dialog_profile.dart` — de stijlprofiel-kiezer en
@@ -129,6 +133,61 @@ void main() {
       AppTheme.parseHexColor(ThemeProfile.vigilis.accentColor),
     );
     expect(find.byKey(const Key('document-style-preview')), findsOneWidget);
+  });
+
+  testWidgets('document en presentatie hebben elk een echte preview', (
+    tester,
+  ) async {
+    final container = await openAppearanceTab(tester);
+    addTearDown(container.dispose);
+
+    expect(find.byKey(const Key('document-style-preview')), findsOneWidget);
+    expect(find.byKey(const Key('presentation-style-preview')), findsNothing);
+
+    await tester.tap(find.byKey(const Key('style-surface-presentation')));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('document-style-preview')), findsNothing);
+    expect(find.byKey(const Key('presentation-style-preview')), findsOneWidget);
+    expect(find.text('Opsommingsteken'), findsOneWidget);
+    expect(find.text('Activatieduur'), findsOneWidget);
+    expect(find.text('Logo positie'), findsOneWidget);
+  });
+
+  testWidgets('het gekozen logo staat naast de logokiezer', (tester) async {
+    final container = await openAppearanceTab(tester);
+    addTearDown(container.dispose);
+
+    await tester.tap(find.byKey(const Key('style-profile-Vigilis')));
+    await tester.tap(find.byKey(const Key('style-surface-presentation')));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('style-logo-preview')), findsOneWidget);
+  });
+
+  testWidgets('een gekozen lokaal logo wordt als afbeelding getoond', (
+    tester,
+  ) async {
+    final temp = Directory.systemTemp.createTempSync('style_logo_preview');
+    addTearDown(() => temp.deleteSync(recursive: true));
+    final logo = File('${temp.path}/logo.png')
+      ..writeAsBytesSync(
+        base64Decode(
+          'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=',
+        ),
+      );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ThemeProfileLogo(
+          profile: const ThemeProfile().copyWith(logoPath: logo.path),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.byType(Image), findsOneWidget);
+    expect(find.byIcon(Icons.broken_image_outlined), findsNothing);
   });
 
   testWidgets('stijlbouwer splitst breed en stapelt smal', (tester) async {

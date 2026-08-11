@@ -4260,15 +4260,14 @@ van het document niet meer te openen.
 
 Onder *Instellingen → Presentatie* beheer je de profielen voor documenten én
 presentaties. De profielkaarten kiezen een bestaand profiel of maken een nieuw profiel.
-Daar staat ook het ingebouwde **Vigilis**-profiel. Onder **Basis** stel je de
-achtergrondkleur, tekstkleur, accentkleur (ook voor opsommingsmarkeringen) en het
-lettertype in. De live A4-voorvertoning volgt die keuze direct; je kunt wisselen tussen
-een titelblad en inhoud om de documentopmaak vooraf te beoordelen.
-
-Meer presentatiegerichte opties blijven onder **Geavanceerd**: de uitgebreide
-lettertype-, kleur-, animatie-, logo- en footerinstellingen zijn bereikbaar zonder de
-basiselementen voor documentopmaak te verdringen. De presentatiebewerker zelf blijft
-bewust sober en presentatiegericht.
+Daar staat ook het ingebouwde **Vigilis**-profiel. Kies boven de bewerker tussen
+**Document** en **Presentatie**. Document toont de compacte instellingen voor
+achtergrond, tekst, accent en lettertype naast de live A4-voorvertoning met titelblad
+of inhoud. Presentatie toont alle bestaande lettertype-, kleur-, animatie-, logo-,
+footer- en slotdia-instellingen naast een echte 16:9-diaweergave. Een gekozen logo
+staat ook als miniatuur naast de bestandskiezer en verschijnt in beide voorbeelden,
+in de documentbewerker en in de HTML-documentexport. De presentatiebewerker zelf
+blijft bewust sober en presentatiegericht.
 
 Onder *Instellingen → Algemeen → Documentstijl* kun je daarnaast een
 **standaard-documentstijl** kiezen en die desgewenst afdwingen als huisstijl. Dat zijn

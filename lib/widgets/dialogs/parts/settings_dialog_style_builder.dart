@@ -1,6 +1,5 @@
 // Part of the settings_dialog library — see ../settings_dialog.dart.
-// De compacte stijlbouwer en zijn live documentpreview. Presentatievelden die
-// niet voor iedere gebruiker nodig zijn blijven bereikbaar onder Geavanceerd.
+// De compacte stijlbouwer met afzonderlijke document- en presentatievlakken.
 part of '../settings_dialog.dart';
 
 List<ThemeProfile> _availableStyleProfiles(List<ThemeProfile> stored) {
@@ -43,11 +42,11 @@ class _DocumentStyleBuilder {
   bool get _stylePreviewShowsContent => owner._stylePreviewShowsContent;
   set _stylePreviewShowsContent(bool value) =>
       owner._stylePreviewShowsContent = value;
-  bool get _styleAdvancedExpanded => owner._styleAdvancedExpanded;
-  set _styleAdvancedExpanded(bool value) =>
-      owner._styleAdvancedExpanded = value;
+  bool get _stylePreviewShowsPresentation =>
+      owner._stylePreviewShowsPresentation;
+  set _stylePreviewShowsPresentation(bool value) =>
+      owner._stylePreviewShowsPresentation = value;
   set _profileTouched(bool value) => owner._profileTouched = value;
-  SettingsSection get _selectedTab => owner._selectedTab;
   String? get _highlightedSection => owner._highlightedSection;
   TextEditingController get _footerText => owner._footerText;
   bool get mounted => owner.mounted;
@@ -64,6 +63,37 @@ class _DocumentStyleBuilder {
   List<Widget> _colorsSectionChildren() => owner._colorsSectionChildren();
   List<Widget> _animationSettings() => owner._animationSettings();
   List<Widget> _logoSectionChildren() => owner._logoSectionChildren();
+
+  bool _showsPresentation(AppLocalizations l10n) =>
+      _stylePreviewShowsPresentation ||
+      (_highlightedSection != null &&
+          _highlightedSection!.isNotEmpty &&
+          _highlightedSection != l10n.t('styleProfile'));
+
+  Widget _surfaceSelector(AppLocalizations l10n) => SegmentedButton<bool>(
+    segments: [
+      ButtonSegment(
+        value: false,
+        label: Text(
+          l10n.d('Document'),
+          key: const Key('style-surface-document'),
+        ),
+        icon: const Icon(Icons.description_outlined, size: 17),
+      ),
+      ButtonSegment(
+        value: true,
+        label: Text(
+          l10n.d('Presentatie'),
+          key: const Key('style-surface-presentation'),
+        ),
+        icon: const Icon(Icons.slideshow_outlined, size: 17),
+      ),
+    ],
+    selected: {_showsPresentation(l10n)},
+    showSelectedIcon: false,
+    onSelectionChanged: (value) =>
+        _rebuild(() => _stylePreviewShowsPresentation = value.first),
+  );
   Widget _styleProfileCards(List<ThemeProfile> profiles) {
     final l10n = context.l10n;
     return Column(
@@ -171,20 +201,7 @@ class _DocumentStyleBuilder {
     );
   }
 
-  Widget _styleBasicsAndAdvanced(AppLocalizations l10n) {
-    final revealForSearch =
-        _selectedTab == SettingsSection.presentation &&
-        _highlightedSection != null &&
-        _highlightedSection!.isNotEmpty &&
-        _highlightedSection != l10n.t('styleProfile');
-    if (revealForSearch && !_styleAdvancedExpanded) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted && !_styleAdvancedExpanded) {
-          _rebuild(() => _styleAdvancedExpanded = true);
-        }
-      });
-    }
-    final advancedExpanded = _styleAdvancedExpanded || revealForSearch;
+  Widget _documentStyleSettings(AppLocalizations l10n) {
     return Container(
       key: const Key('document-style-editor'),
       decoration: _boxDecoration(),
@@ -248,40 +265,38 @@ class _DocumentStyleBuilder {
               },
             ),
           ),
-          if (!advancedExpanded) _profileContrastSummary(),
-          const Divider(height: 1),
-          Material(
-            color: AppTheme.paper,
-            child: ExpansionTile(
-              key: ValueKey(advancedExpanded),
-              initiallyExpanded: advancedExpanded,
-              onExpansionChanged: (expanded) =>
-                  _rebuild(() => _styleAdvancedExpanded = expanded),
-              tilePadding: const EdgeInsets.symmetric(horizontal: 14),
-              childrenPadding: const EdgeInsets.fromLTRB(14, 0, 14, 18),
-              title: Text(
-                l10n.d('Geavanceerd'),
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              children: [
-                _sectionTitle(l10n.d('Lettertype')),
-                _fontSection(),
-                _presentationStyleDivider(l10n.d('Kleuren')),
-                ..._colorsSectionChildren(),
-                _presentationStyleDivider(l10n.d('Animatie')),
-                ..._animationSettings(),
-                _presentationStyleDivider(l10n.d('Logo en footer')),
-                ..._logoSectionChildren(),
-              ],
-            ),
-          ),
+          _profileContrastSummary(),
         ],
       ),
     );
   }
+
+  Widget _presentationStyleSettings(AppLocalizations l10n) => Material(
+    key: const Key('presentation-style-editor'),
+    color: AppTheme.paper,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(6),
+      side: BorderSide(color: AppTheme.slate300),
+    ),
+    clipBehavior: Clip.antiAlias,
+    child: Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _sectionTitle(l10n.d('Lettertype')),
+          const SizedBox(height: 8),
+          _fontSection(),
+          _presentationStyleDivider(l10n.d('Kleuren')),
+          ..._colorsSectionChildren(),
+          _presentationStyleDivider(l10n.d('Animatie')),
+          ..._animationSettings(),
+          _presentationStyleDivider(l10n.d('Logo en footer')),
+          ..._logoSectionChildren(),
+        ],
+      ),
+    ),
+  );
 
   Widget _profileContrastSummary() {
     final issues = owner._themeContrastByField().values;
@@ -406,6 +421,57 @@ class _DocumentStyleBuilder {
                       : _documentPreviewTitle(l10n, ink, accent),
                 ),
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _presentationStylePreview(AppLocalizations l10n) {
+    final profile = owner._editedProfile();
+    final slide = Slide.create(SlideType.bullets).copyWith(
+      title: l10n.d('Voorvertoning'),
+      bullets: [
+        l10n.d('De snelle bruine vos springt over de luie hond.'),
+        l10n.d('Besluit gevraagd'),
+        l10n.d('Voorbeeldtekst'),
+      ],
+    );
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: AppTheme.slate200,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppTheme.slate300),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            l10n.d('Voorvertoning'),
+            style: TextStyle(
+              color: AppTheme.slate700,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Container(
+            key: const Key('presentation-style-preview'),
+            decoration: const BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: AppTheme.shadow20,
+                  blurRadius: 12,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: SlidePreviewWidget(
+              slide: slide,
+              themeProfile: profile,
+              slideNumber: 2,
+              slideCount: 8,
             ),
           ),
         ],
@@ -551,19 +617,13 @@ ${l10n.d('De snelle bruine vos springt over de luie hond.')}
   }
 
   Widget _documentPreviewLogo(Color ink) {
-    final path = _themeProfile.logoPath;
-    if (path != null && path.startsWith('asset:')) {
-      return SizedBox(
-        width: 76,
-        height: 30,
-        child: Image.asset(
-          path.substring('asset:'.length),
-          fit: BoxFit.contain,
-          errorBuilder: (_, _, _) =>
-              Icon(Icons.description_outlined, color: ink, size: 24),
-        ),
-      );
-    }
-    return Icon(Icons.description_outlined, color: ink, size: 24);
+    return Theme(
+      data: Theme.of(context).copyWith(
+        colorScheme: Theme.of(
+          context,
+        ).colorScheme.copyWith(onSurfaceVariant: ink),
+      ),
+      child: ThemeProfileLogo(profile: _themeProfile, width: 76, height: 30),
+    );
   }
 }

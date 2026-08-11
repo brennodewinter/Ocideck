@@ -107,39 +107,39 @@ bool _withinLogoCap(Uint8List? bytes) =>
   }
 }
 
+/// Leest een door de gebruiker vertrouwd stijllogo voor een render/export.
+/// Anders dan documentafbeeldingen mag dit buiten de projectmap staan.
+Future<Uint8List?> readStyleLogoBytes(
+  String path, {
+  String? projectPath,
+}) async {
+  try {
+    if (WebAssetStore.isMemPath(path)) {
+      final bytes = WebAssetStore.bytesFor(path);
+      return _withinLogoCap(bytes) ? bytes : null;
+    }
+    if (kIsWeb) return null;
+    final resolved = resolveTrustedAssetPath(path, projectPath);
+    if (resolved == null) return null;
+    final file = File(resolved);
+    if (!await file.exists() ||
+        await file.length() > FileService.maxStyleProfileLogoBytes) {
+      return null;
+    }
+    final bytes = await file.readAsBytes();
+    return _withinLogoCap(bytes) ? bytes : null;
+  } catch (e) {
+    logWarning('FileService: logo voor stijlprofiel-export onleesbaar', e);
+    return null;
+  }
+}
+
 extension FileServiceStyleProfile on FileService {
   /// Bestandsnaam-veilige variant van een profielnaam. Gedeelde sanitizer uit
   /// `lib/utils/safe_filename.dart`; een profielnaam is vrije invoer, dus `/`
   /// en `..` moeten weg voordat hij een pad wordt.
   String _safeProfileFileName(String name) =>
       sanitizeFilename(name, fallback: 'stijlprofiel');
-
-  /// De bytes achter een eigen logo, of null wanneer ze niet te lezen zijn:
-  /// een verdwenen bestand, een lege mem:-store na een herlaad, of te groot.
-  /// Ingebouwde `asset:`-logo's komen hier nooit: die reizen als verwijzing.
-  Future<Uint8List?> _readLogoBytes(String path, String? projectPath) async {
-    try {
-      if (WebAssetStore.isMemPath(path)) {
-        final bytes = WebAssetStore.bytesFor(path);
-        return _withinLogoCap(bytes) ? bytes : null;
-      }
-      if (kIsWeb) return null; // Geen bestandssysteem.
-      // Een logo is vertrouwde stijl-config (geen deck-invoer), dus een
-      // absoluut pad buiten de projectmap mag — zie resolveTrustedAssetPath.
-      final resolved = resolveTrustedAssetPath(path, projectPath);
-      if (resolved == null) return null;
-      final file = File(resolved);
-      if (!await file.exists()) return null;
-      if (await file.length() > FileService.maxStyleProfileLogoBytes) {
-        return null;
-      }
-      final bytes = await file.readAsBytes();
-      return _withinLogoCap(bytes) ? bytes : null;
-    } catch (e) {
-      logWarning('FileService: logo voor stijlprofiel-export onleesbaar', e);
-      return null;
-    }
-  }
 
   /// Bouw de bytes van een `.ocideckstyle`-bestand: het profiel als JSON in een
   /// envelope met marker en versie.
@@ -158,7 +158,7 @@ extension FileServiceStyleProfile on FileService {
 
     final path = profile.logoPath?.trim();
     if (path != null && path.isNotEmpty && !isBundledAssetPath(path)) {
-      final bytes = await _readLogoBytes(path, projectPath);
+      final bytes = await readStyleLogoBytes(path, projectPath: projectPath);
       final mime = bytes == null
           ? null
           : ImageService.imageMimeFromBytes(bytes);

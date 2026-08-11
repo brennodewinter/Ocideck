@@ -4,6 +4,86 @@
 // functions they share the library and are called by bare name.
 part of '../marp_html_service.dart';
 
+Future<({String markdown, List<String> dataUris})> _embedHtmlImages(
+  String markdown,
+  HtmlImageResolver? embedImage,
+  int maxEmbedBytes,
+  bool continuous,
+  ThemeProfile? theme,
+  MarpHtmlService service,
+) async {
+  final embedded = await _embedImages(markdown, embedImage, maxEmbedBytes);
+  if (!continuous || theme?.logoPath?.trim().isNotEmpty != true) {
+    return embedded;
+  }
+  return _withDocumentLogo(
+    embedded,
+    theme!,
+    embedImage,
+    service.loadBytes,
+    maxEmbedBytes,
+  );
+}
+
+Future<String?> _themeLogoDataUri(
+  String path,
+  HtmlImageResolver? embedImage,
+  Future<Uint8List> Function(String asset) loadBytes,
+) async {
+  if (!isBundledAssetPath(path)) return embedImage?.call(path);
+  try {
+    final bytes = await loadBytes(bundledAssetKey(path));
+    final lower = path.toLowerCase();
+    final mime = lower.endsWith('.svg')
+        ? 'image/svg+xml'
+        : lower.endsWith('.jpg') || lower.endsWith('.jpeg')
+        ? 'image/jpeg'
+        : lower.endsWith('.gif')
+        ? 'image/gif'
+        : 'image/png';
+    return 'data:$mime;base64,${base64.encode(bytes)}';
+  } catch (e) {
+    logWarning('MarpHtmlService: documentlogo niet ingesloten', e);
+    return null;
+  }
+}
+
+Future<({String markdown, List<String> dataUris})> _withDocumentLogo(
+  ({String markdown, List<String> dataUris}) embedded,
+  ThemeProfile theme,
+  HtmlImageResolver? embedImage,
+  Future<Uint8List> Function(String asset) loadBytes,
+  int maxEmbedBytes,
+) async {
+  final logoUri = await _themeLogoDataUri(
+    theme.logoPath!,
+    embedImage,
+    loadBytes,
+  );
+  if (logoUri == null) return embedded;
+  final uris = [...embedded.dataUris];
+  var logoIndex = uris.indexOf(logoUri);
+  if (logoIndex < 0) {
+    final used = uris.fold<int>(logoUri.length, (sum, uri) => sum + uri.length);
+    if (used > maxEmbedBytes) {
+      throw HtmlEmbedBudgetExceeded(usedBytes: used, limitBytes: maxEmbedBytes);
+    }
+    logoIndex = uris.length;
+    uris.add(logoUri);
+  }
+  final right = theme.logoPosition.endsWith('right');
+  final logo =
+      '<div class="document-logo ${right ? 'right' : 'left'}">'
+      '<img src="$_imagePlaceholder$logoIndex" alt=""></div>';
+  final bottom = theme.logoPosition.startsWith('bottom');
+  return (
+    markdown: bottom
+        ? '${embedded.markdown}\n\n$logo'
+        : '$logo\n\n${embedded.markdown}',
+    dataUris: uris,
+  );
+}
+
 // ── Afbeeldingen → data:-URI ──────────────────────────────────────────────
 
 /// Een afbeeldingsverwijzing (`![alt](hier)`), zoals de serialiser hem

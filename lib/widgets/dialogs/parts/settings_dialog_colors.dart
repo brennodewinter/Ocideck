@@ -415,6 +415,23 @@ extension _SettingsColors on _SettingsDialogState {
           'logoPath',
           Row(
             children: [
+              Container(
+                key: const Key('style-logo-preview'),
+                width: 64,
+                height: 52,
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: AppTheme.slate100,
+                  borderRadius: BorderRadius.circular(7),
+                  border: Border.all(color: AppTheme.slate300),
+                ),
+                child: ThemeProfileLogo(
+                  profile: _themeProfile,
+                  width: 54,
+                  height: 42,
+                ),
+              ),
+              const SizedBox(width: 10),
               Expanded(
                 child: _pathBox(
                   _themeProfile.logoPath ?? l10n.d('Geen logo ingesteld'),
@@ -485,7 +502,7 @@ extension _SettingsColors on _SettingsDialogState {
             ),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            onChanged: (_) => _profileTouched = true,
+            onChanged: (_) => _rebuild(() => _profileTouched = true),
           ),
         ),
       ],
@@ -506,7 +523,7 @@ extension _SettingsColors on _SettingsDialogState {
           hintText: l10n.d('bijv. Vertrouwelijk · {title} · {date}'),
           isDense: true,
         ),
-        onChanged: (_) => _profileTouched = true,
+        onChanged: (_) => _rebuild(() => _profileTouched = true),
       ),
       const SizedBox(height: 6),
       Text(

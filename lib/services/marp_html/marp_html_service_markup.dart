@@ -4,6 +4,11 @@
 // functions they share the library and are called by bare name.
 part of '../marp_html_service.dart';
 
+String _htmlNonce() {
+  final rng = math.Random.secure();
+  return base64.encode(List<int>.generate(16, (_) => rng.nextInt(256)));
+}
+
 final RegExp _listStyleComment = RegExp(r'<!--\s*ocideck_list_style:\s*(\w+)');
 final RegExp _bulletMarkerComment = RegExp(
   r'<!--\s*ocideck_bullet_marker:\s*(\w+)',

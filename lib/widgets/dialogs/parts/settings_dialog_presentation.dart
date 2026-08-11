@@ -15,10 +15,17 @@ extension _SettingsPresentationTab on _SettingsDialogState {
         const SizedBox(height: 18),
         _profileSelector(profiles),
         const SizedBox(height: 18),
+        styleBuilder._surfaceSelector(l10n),
+        const SizedBox(height: 18),
         LayoutBuilder(
           builder: (context, constraints) {
-            final editor = styleBuilder._styleBasicsAndAdvanced(l10n);
-            final preview = styleBuilder._documentStylePreview(l10n);
+            final presentation = styleBuilder._showsPresentation(l10n);
+            final editor = presentation
+                ? styleBuilder._presentationStyleSettings(l10n)
+                : styleBuilder._documentStyleSettings(l10n);
+            final preview = presentation
+                ? styleBuilder._presentationStylePreview(l10n)
+                : styleBuilder._documentStylePreview(l10n);
             if (constraints.maxWidth < 820) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 
 /// Reads the vendored libraries straight from the repo (tests run at the root).
@@ -87,6 +89,22 @@ void main() {
       expect(html, contains('.document{'));
     });
 
+    test('het stijllogo reist zichtbaar en offline mee', () async {
+      final service = MarpHtmlService(
+        loadAsset: _diskLoader,
+        loadBytes: (_) async => Uint8List.fromList([1, 2, 3, 4]),
+      );
+      final html = await service.build(
+        _md,
+        continuous: true,
+        theme: ThemeProfile.vigilis,
+      );
+
+      expect(html, contains('class="document-logo right"'));
+      expect(html, contains('data:image/png;base64,AQIDBA=='));
+      expect(html, contains('.document-logo img{'));
+    });
+
     test(
       'blijft self-contained, met CSP en zonder externe url() in <style>',
       () async {
@@ -127,5 +145,6 @@ void main() {
     expect(html.contains('<section class="slide'), isTrue);
     expect('<section class="slide'.allMatches(html).length, greaterThan(1));
     expect(html, isNot(contains('<section class="document"')));
+    expect(html, isNot(contains('class="document-logo')));
   });
 }

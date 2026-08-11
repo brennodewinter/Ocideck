@@ -94,9 +94,7 @@ void main() {
       await tester.tap(find.text('open'));
       await tester.pumpAndSettle();
 
-      await tester.ensureVisible(find.text('Geavanceerd'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Geavanceerd'));
+      await tester.tap(find.byKey(const Key('style-surface-presentation')));
       await tester.pumpAndSettle();
       await tester.ensureVisible(find.text('Logo positie'));
       await tester.pumpAndSettle();
