@@ -1790,6 +1790,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Koptekst': 'Верхній колонтитул',
   'Afbeelding niet opgehaald': 'Зображення не отримано',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Не вдалося створити цільову теку або записати в неї. Перевірте, чи доступне налаштоване розташування.',

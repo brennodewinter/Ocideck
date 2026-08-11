@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math' as math;
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,6 +52,7 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
 import '../../models/privacy_disposition.dart';
 import '../editors/advanced_section.dart';
+import '../document_page_chrome.dart';
 import '../language_flag.dart';
 import '../privacy_badge.dart';
 import '../privacy_statement_content.dart';

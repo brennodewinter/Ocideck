@@ -728,6 +728,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Koptekst': 'Intestazione',
   'Afbeelding niet opgehaald': 'Immagine non recuperata',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Impossibile creare la cartella di destinazione o scrivervi. Verifica che la posizione configurata sia disponibile.',

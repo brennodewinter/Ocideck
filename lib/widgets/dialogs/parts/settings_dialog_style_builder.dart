@@ -48,7 +48,6 @@ class _DocumentStyleBuilder {
       owner._stylePreviewShowsPresentation = value;
   set _profileTouched(bool value) => owner._profileTouched = value;
   String? get _highlightedSection => owner._highlightedSection;
-  TextEditingController get _footerText => owner._footerText;
   bool get mounted => owner.mounted;
 
   void _rebuild(VoidCallback fn) => owner._rebuild(fn);
@@ -56,7 +55,6 @@ class _DocumentStyleBuilder {
   Future<void> _createProfile() => owner._createProfile();
   Future<String?> _pickHexColor(String value) => owner._pickHexColor(value);
   Widget _sectionTitle(String title) => owner._sectionTitle(title);
-  BoxDecoration _boxDecoration() => owner._boxDecoration();
   Widget _fontSection() => owner._fontSection();
   Widget _presentationStyleDivider(String title) =>
       owner._presentationStyleDivider(title);
@@ -202,9 +200,13 @@ class _DocumentStyleBuilder {
   }
 
   Widget _documentStyleSettings(AppLocalizations l10n) {
-    return Container(
+    return Material(
       key: const Key('document-style-editor'),
-      decoration: _boxDecoration(),
+      color: AppTheme.paper,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(6),
+        side: BorderSide(color: AppTheme.slate300),
+      ),
       clipBehavior: Clip.antiAlias,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -266,9 +268,176 @@ class _DocumentStyleBuilder {
             ),
           ),
           _profileContrastSummary(),
+          _presentationStyleDivider(l10n.d('Logo')),
+          ..._documentLogoSettings(l10n),
+          _presentationStyleDivider(l10n.d('Koptekst')),
+          ..._documentChromeSettings(l10n),
         ],
       ),
     );
+  }
+
+  List<Widget> _documentLogoSettings(AppLocalizations l10n) {
+    final shared = _themeProfile.documentLogoPath == null;
+    return [
+      SwitchListTile(
+        key: const Key('document-logo-shared'),
+        value: shared,
+        onChanged: (value) => _rebuild(() {
+          _themeProfile = value
+              ? _themeProfile.copyWith(clearDocumentLogoOverride: true)
+              : _themeProfile.copyWith(
+                  documentLogoPath: _themeProfile.logoPath ?? '',
+                );
+          _profileTouched = true;
+        }),
+        title: Text(
+          '${l10n.d('Logo')}: ${l10n.d('Presentatie')} + ${l10n.d('Document')}',
+          style: const TextStyle(fontSize: 13),
+        ),
+        contentPadding: EdgeInsets.zero,
+        dense: true,
+      ),
+      if (!shared && supportsLocalProjectFolders) ...[
+        Row(
+          children: [
+            Container(
+              key: const Key('document-logo-preview'),
+              width: 64,
+              height: 52,
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: AppTheme.slate100,
+                borderRadius: BorderRadius.circular(7),
+                border: Border.all(color: AppTheme.slate300),
+              ),
+              child: ThemeProfileLogo(
+                profile: _themeProfile,
+                logoPath: _themeProfile.documentLogoPath,
+                width: 54,
+                height: 42,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: owner._pathBox(
+                _themeProfile.documentLogoPath?.isNotEmpty == true
+                    ? _themeProfile.documentLogoPath!
+                    : l10n.d('Geen logo ingesteld'),
+                muted: _themeProfile.documentLogoPath?.isNotEmpty != true,
+              ),
+            ),
+            const SizedBox(width: 8),
+            ElevatedButton.icon(
+              onPressed: _pickDocumentLogo,
+              icon: const Icon(Icons.image_outlined, size: 16),
+              label: Text(l10n.d('Kiezen')),
+            ),
+            if (_themeProfile.documentLogoPath?.isNotEmpty == true)
+              IconButton(
+                onPressed: () => _rebuild(() {
+                  _themeProfile = _themeProfile.copyWith(documentLogoPath: '');
+                  _profileTouched = true;
+                }),
+                icon: const Icon(Icons.clear, size: 18),
+                tooltip: l10n.d('Verwijder logo'),
+              ),
+          ],
+        ),
+        const SizedBox(height: 14),
+      ],
+      DropdownButtonFormField<String>(
+        key: const Key('document-logo-position'),
+        isExpanded: true,
+        initialValue: _themeProfile.documentLogoPosition,
+        decoration: InputDecoration(
+          labelText: l10n.d('Logo positie'),
+          isDense: true,
+        ),
+        items: [
+          DropdownMenuItem(
+            value: 'top-left',
+            child: Text(l10n.d('Linksboven')),
+          ),
+          DropdownMenuItem(
+            value: 'top-right',
+            child: Text(l10n.d('Rechtsboven')),
+          ),
+          DropdownMenuItem(
+            value: 'bottom-left',
+            child: Text(l10n.d('Linksonder')),
+          ),
+          DropdownMenuItem(
+            value: 'bottom-right',
+            child: Text(l10n.d('Rechtsonder')),
+          ),
+        ],
+        onChanged: (value) {
+          if (value == null) return;
+          _rebuild(() {
+            _themeProfile = _themeProfile.copyWith(documentLogoPosition: value);
+            _profileTouched = true;
+          });
+        },
+      ),
+    ];
+  }
+
+  List<Widget> _documentChromeSettings(AppLocalizations l10n) => [
+    TextFormField(
+      key: Key('document-header-${_themeProfile.name}'),
+      initialValue: _themeProfile.documentHeaderText,
+      decoration: InputDecoration(labelText: l10n.d('Koptekst'), isDense: true),
+      onChanged: (value) => _rebuild(() {
+        _themeProfile = _themeProfile.copyWith(documentHeaderText: value);
+        _profileTouched = true;
+      }),
+    ),
+    const SizedBox(height: 12),
+    TextFormField(
+      key: Key('document-footer-${_themeProfile.name}'),
+      initialValue: _themeProfile.documentFooterText,
+      decoration: InputDecoration(
+        labelText: l10n.d('Footertekst'),
+        isDense: true,
+      ),
+      onChanged: (value) => _rebuild(() {
+        _themeProfile = _themeProfile.copyWith(documentFooterText: value);
+        _profileTouched = true;
+      }),
+    ),
+    CheckboxListTile(
+      key: const Key('document-page-numbers'),
+      value: _themeProfile.documentShowPageNumbers,
+      onChanged: (value) => _rebuild(() {
+        _themeProfile = _themeProfile.copyWith(
+          documentShowPageNumbers: value ?? false,
+        );
+        _profileTouched = true;
+      }),
+      title: Text(
+        l10n.d('Paginanummers tonen (rechtsonder)'),
+        style: const TextStyle(fontSize: 13),
+      ),
+      contentPadding: EdgeInsets.zero,
+      dense: true,
+      controlAffinity: ListTileControlAffinity.leading,
+    ),
+  ];
+
+  Future<void> _pickDocumentLogo() async {
+    if (!supportsLocalProjectFolders) return;
+    final result = await FilePicker.pickFiles(
+      dialogTitle: context.l10n.d('Logo kiezen'),
+      type: FileType.image,
+    );
+    if (!mounted) return;
+    final path = result?.files.single.path;
+    if (path == null) return;
+    _rebuild(() {
+      _themeProfile = _themeProfile.copyWith(documentLogoPath: path);
+      _profileTouched = true;
+    });
   }
 
   Widget _presentationStyleSettings(AppLocalizations l10n) => Material(
@@ -480,55 +649,51 @@ class _DocumentStyleBuilder {
   }
 
   Widget _documentPreviewTitle(AppLocalizations l10n, Color ink, Color accent) {
+    final profile = owner._editedProfile();
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: Container(
-                key: const Key('document-style-accent-rule'),
-                height: 3,
-                color: accent,
+        DocumentChromeBand(profile: profile, header: true, compact: true),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Spacer(),
+              Text(
+                l10n.d('Documentstijl'),
+                style: TextStyle(
+                  color: accent,
+                  fontSize: 12,
+                  letterSpacing: 1.1,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
-            const SizedBox(width: 18),
-            _documentPreviewLogo(ink),
-          ],
-        ),
-        const Spacer(),
-        Text(
-          l10n.d('Documentstijl'),
-          style: TextStyle(
-            color: accent,
-            fontSize: 12,
-            letterSpacing: 1.1,
-            fontWeight: FontWeight.w700,
+              const SizedBox(height: 10),
+              Text(
+                _themeProfile.name,
+                style: TextStyle(
+                  color: ink,
+                  fontSize: 30,
+                  height: 1.05,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                l10n.d('De snelle bruine vos springt over de luie hond.'),
+                style: TextStyle(
+                  color: ink.withValues(alpha: 0.72),
+                  height: 1.45,
+                ),
+              ),
+              const Spacer(flex: 2),
+            ],
           ),
         ),
-        const SizedBox(height: 10),
-        Text(
-          _themeProfile.name,
-          style: TextStyle(
-            color: ink,
-            fontSize: 30,
-            height: 1.05,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-        const SizedBox(height: 12),
-        Text(
-          l10n.d('De snelle bruine vos springt over de luie hond.'),
-          style: TextStyle(color: ink.withValues(alpha: 0.72), height: 1.45),
-        ),
-        const Spacer(flex: 2),
-        Container(height: 1, color: ink.withValues(alpha: 0.25)),
-        const SizedBox(height: 10),
-        Text(
-          _footerText.text,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: ink.withValues(alpha: 0.65), fontSize: 10),
+        DocumentChromeBand(
+          profile: profile,
+          header: false,
+          pageLabel: '1 / 8',
+          compact: true,
         ),
       ],
     );
@@ -565,22 +730,11 @@ ${l10n.d('De snelle bruine vos springt over de luie hond.')}
 - ${l10n.d('Voorbeeldtekst')}
 - ${l10n.d('Inhoud')}
 ''';
+    final profile = owner._editedProfile();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: Container(
-                key: const Key('document-style-accent-rule'),
-                height: 2,
-                color: accent,
-              ),
-            ),
-            const SizedBox(width: 18),
-            _documentPreviewLogo(ink),
-          ],
-        ),
+        DocumentChromeBand(profile: profile, header: true, compact: true),
         const SizedBox(height: 22),
         Expanded(
           child: SingleChildScrollView(
@@ -604,26 +758,13 @@ ${l10n.d('De snelle bruine vos springt over de luie hond.')}
             ),
           ),
         ),
-        Container(height: 1, color: ink.withValues(alpha: 0.25)),
-        const SizedBox(height: 8),
-        Text(
-          _footerText.text,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: ink.withValues(alpha: 0.65), fontSize: 10),
+        DocumentChromeBand(
+          profile: profile,
+          header: false,
+          pageLabel: '3 / 8',
+          compact: true,
         ),
       ],
-    );
-  }
-
-  Widget _documentPreviewLogo(Color ink) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        colorScheme: Theme.of(
-          context,
-        ).colorScheme.copyWith(onSurfaceVariant: ink),
-      ),
-      child: ThemeProfileLogo(profile: _themeProfile, width: 76, height: 30),
     );
   }
 }

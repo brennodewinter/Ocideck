@@ -1777,6 +1777,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Koptekst': 'Élőfej',
   'Afbeelding niet opgehaald': 'A kép nem tölthető le',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'A célmappát nem sikerült létrehozni vagy írni. Ellenőrizd, hogy a beállított hely elérhető-e.',

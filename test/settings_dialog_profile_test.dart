@@ -8,6 +8,7 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
+import 'package:ocideck/widgets/document_page_chrome.dart';
 import 'package:ocideck/widgets/theme_profile_logo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -163,6 +164,45 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const Key('style-logo-preview')), findsOneWidget);
+  });
+
+  testWidgets('document deelt standaard het presentatielogo en kan afwijken', (
+    tester,
+  ) async {
+    final container = await openAppearanceTab(tester);
+    addTearDown(container.dispose);
+
+    await tester.tap(find.byKey(const Key('style-profile-Vigilis')));
+    await tester.pumpAndSettle();
+
+    final shared = tester.widget<SwitchListTile>(
+      find.byKey(const Key('document-logo-shared')),
+    );
+    expect(shared.value, isTrue);
+    expect(find.byKey(const Key('document-logo-preview')), findsNothing);
+    expect(find.byKey(const Key('document-header-text')), findsOneWidget);
+    expect(find.byType(DocumentChromeBand), findsWidgets);
+    expect(find.text('Bestuurlijk rapport'), findsWidgets);
+    expect(find.byKey(const Key('document-footer-text')), findsOneWidget);
+    expect(find.byKey(const Key('document-page-number')), findsOneWidget);
+
+    await tester.ensureVisible(find.byKey(const Key('document-logo-shared')));
+    await tester.tap(find.byKey(const Key('document-logo-shared')));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('document-logo-preview')), findsOneWidget);
+  });
+
+  testWidgets('document biedt koptekst, voettekst en paginanummers aan', (
+    tester,
+  ) async {
+    final container = await openAppearanceTab(tester);
+    addTearDown(container.dispose);
+
+    expect(find.byKey(const Key('document-header-LibreKAT')), findsOneWidget);
+    expect(find.byKey(const Key('document-footer-LibreKAT')), findsOneWidget);
+    expect(find.byKey(const Key('document-page-numbers')), findsOneWidget);
+    expect(find.byKey(const Key('document-logo-position')), findsOneWidget);
   });
 
   testWidgets('een gekozen lokaal logo wordt als afbeelding getoond', (

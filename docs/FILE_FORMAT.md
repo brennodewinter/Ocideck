@@ -481,6 +481,11 @@ these fields (with defaults):
 | `logoPath` | `null` | Path to the logo (relative path in `logos/`). |
 | `logoPosition` | `bottom-right` | `top-left`/`top-right`/`bottom-left`/`bottom-right`. |
 | `logoSize` | `96` | Logo size in px. |
+| `documentLogoPath` | `null` | Document logo override. `null` shares `logoPath`; `""` deliberately disables the logo for documents. |
+| `documentLogoPosition` | `top-right` | Position of the effective document logo in its header/footer band. |
+| `documentHeaderText` | `""` | Repeating document header text. |
+| `documentFooterText` | `""` | Repeating document footer text. |
+| `documentShowPageNumbers` | `false` | Show the page number at the bottom right of document pages. |
 | `fontFamily` | `Arial` | Presentation font family. |
 | `footerText` | `""` | Free footer text; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |
 | `footerShowPageNumbers` | `false` | Show "page / total" at the bottom right. |
@@ -517,7 +522,8 @@ The file is plain UTF-8 JSON — an envelope around the same profile JSON as
   "ocideck": "style-profile",
   "version": 1,
   "profile": { "name": "…", "accentColor": "#2E7D64", "…": "…" },
-  "logo": { "mime": "image/png", "data": "<base64>" }
+  "logo": { "mime": "image/png", "data": "<base64>" },
+  "documentLogo": { "mime": "image/png", "data": "<base64>" }
 }
 ```
 
@@ -527,6 +533,7 @@ The file is plain UTF-8 JSON — an envelope around the same profile JSON as
 | `version` | Envelope version (currently `1`). A higher number is refused rather than half-read. |
 | `profile` | The profile, exactly the §3.2 field set. Unknown/missing fields fall back to defaults. |
 | `logo` | **Optional.** An embedded custom logo. `mime` is informational — the importer re-derives the type from the bytes themselves. |
+| `documentLogo` | **Optional.** The separately configured custom document logo, with the same validation and limits as `logo`. |
 
 Import accepts the `.ocideckstyle` and `.json` extensions. Caps: 16 MiB per
 file, 8 MiB per embedded logo.
@@ -541,8 +548,12 @@ receiver, so it is handled by kind:
   `profile.logoPath` is written as `null`. This keeps the file portable and
   avoids leaking the sender's local path (which contains their user name).
 
-On import the embedded bytes are written back to a real file and `logoPath`
-points at it: a `data:` URI is never left in `logoPath`, because none of the
+`documentLogoPath: null` means the document shares `logoPath`; an explicit empty
+string means no document logo. A custom override travels in `documentLogo` just
+like the presentation logo travels in `logo`.
+
+On import the embedded bytes are written back to real files and both path fields
+point at them: a `data:` URI is never left in either path, because none of the
 consumers (slide preview, rasterizer, presenter) resolve one.
 
 > **Web caveat.** On desktop the restored logo lands in a `style_logos/` folder

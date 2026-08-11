@@ -4265,9 +4265,15 @@ Daar staat ook het ingebouwde **Vigilis**-profiel. Kies boven de bewerker tussen
 achtergrond, tekst, accent en lettertype naast de live A4-voorvertoning met titelblad
 of inhoud. Presentatie toont alle bestaande lettertype-, kleur-, animatie-, logo-,
 footer- en slotdia-instellingen naast een echte 16:9-diaweergave. Een gekozen logo
-staat ook als miniatuur naast de bestandskiezer en verschijnt in beide voorbeelden,
-in de documentbewerker en in de HTML-documentexport. De presentatiebewerker zelf
-blijft bewust sober en presentatiegericht.
+staat ook als miniatuur naast de bestandskiezer en is standaard hetzelfde voor
+presentaties en documenten. In de documentinstellingen kun je die koppeling uitzetten
+en een ander documentlogo kiezen — of daar bewust geen logo gebruiken. Daar stel je
+ook de positie, **koptekst**, **footertekst** en **paginanummers** in. De A4-preview
+toont deze paginadelen meteen; dezelfde kop en footer staan rond het visuele
+schrijfoppervlak en de live preview. In HTML staan ze rond het document en bij
+afdrukken/opslaan als PDF herhalen ze boven- en onderaan de pagina. De Markdownbron
+blijft onveranderd; deze gegevens reizen in het stijlprofiel, niet in de inhoud.
+De presentatiebewerker zelf blijft bewust sober en presentatiegericht.
 
 Onder *Instellingen → Algemeen → Documentstijl* kun je daarnaast een
 **standaard-documentstijl** kiezen en die desgewenst afdwingen als huisstijl. Dat zijn

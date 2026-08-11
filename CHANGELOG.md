@@ -19,7 +19,9 @@ in Dutch, and it keeps growing on `main` between releases.
 - feat(documentstijl): volwassen profielbouwer met profielkaarten, basisvelden,
   afzonderlijke live A4- en 16:9-voorvertoningen; Vigilis is een ingebouwd
   profiel. Alle presentatievelden blijven rechtstreeks bereikbaar. Een gekozen
-  logo staat naast de kiezer en verschijnt in documentweergave en HTML-export.
+  logo staat naast de kiezer en geldt standaard voor presentatie én document;
+  een document kan bewust afwijken. Documentprofielen hebben echte kop- en
+  voettekst, logopositie en paginanummering in voorbeeld, editor en HTML/print.
   De ruwe bron- en presentatiebewerker blijven sober.
 
 ## [0.4.2] — 2026-08-10

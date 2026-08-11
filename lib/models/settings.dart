@@ -82,6 +82,15 @@ class ThemeProfile {
   final String logoPosition;
   final int logoSize;
 
+  /// Documenten gebruiken standaard hetzelfde merklogo als presentaties.
+  /// `null` betekent delen; een lege string is een bewuste keuze voor geen
+  /// documentlogo; een ander pad is een documentspecifieke afwijking.
+  final String? documentLogoPath;
+  final String documentLogoPosition;
+  final String documentHeaderText;
+  final String documentFooterText;
+  final bool documentShowPageNumbers;
+
   /// Lettertype van de presentatie — hoort bij de stijl, niet bij de app.
   final String fontFamily;
 
@@ -136,6 +145,11 @@ class ThemeProfile {
     this.logoPath,
     this.logoPosition = 'bottom-right',
     this.logoSize = 96,
+    this.documentLogoPath,
+    this.documentLogoPosition = 'top-right',
+    this.documentHeaderText = '',
+    this.documentFooterText = '',
+    this.documentShowPageNumbers = false,
     this.fontFamily = 'Arial',
     this.footerText = '',
     this.footerShowPageNumbers = false,
@@ -244,6 +258,10 @@ class ThemeProfile {
     fontFamily: 'Arial',
     footerText: 'Vigilis',
     footerShowPageNumbers: true,
+    documentLogoPosition: 'top-right',
+    documentHeaderText: 'Bestuurlijk rapport',
+    documentFooterText: 'Vigilis · Vertrouwelijk',
+    documentShowPageNumbers: true,
   );
 
   /// Ingebouwde stijlprofielen voor een verse installatie: LibreKAT voorop
@@ -274,6 +292,11 @@ class ThemeProfile {
     String? logoPath,
     String? logoPosition,
     int? logoSize,
+    String? documentLogoPath,
+    String? documentLogoPosition,
+    String? documentHeaderText,
+    String? documentFooterText,
+    bool? documentShowPageNumbers,
     String? fontFamily,
     String? footerText,
     bool? footerShowPageNumbers,
@@ -287,6 +310,7 @@ class ThemeProfile {
     String? severityLowColor,
     String? severityNoneColor,
     bool clearLogo = false,
+    bool clearDocumentLogoOverride = false,
   }) {
     return ThemeProfile(
       name: name ?? this.name,
@@ -315,6 +339,14 @@ class ThemeProfile {
       logoPath: clearLogo ? null : (logoPath ?? this.logoPath),
       logoPosition: logoPosition ?? this.logoPosition,
       logoSize: logoSize ?? this.logoSize,
+      documentLogoPath: clearDocumentLogoOverride
+          ? null
+          : (documentLogoPath ?? this.documentLogoPath),
+      documentLogoPosition: documentLogoPosition ?? this.documentLogoPosition,
+      documentHeaderText: documentHeaderText ?? this.documentHeaderText,
+      documentFooterText: documentFooterText ?? this.documentFooterText,
+      documentShowPageNumbers:
+          documentShowPageNumbers ?? this.documentShowPageNumbers,
       fontFamily: fontFamily ?? this.fontFamily,
       footerText: footerText ?? this.footerText,
       footerShowPageNumbers:
@@ -355,6 +387,11 @@ class ThemeProfile {
       'logoPath': logoPath,
       'logoPosition': logoPosition,
       'logoSize': logoSize,
+      'documentLogoPath': documentLogoPath,
+      'documentLogoPosition': documentLogoPosition,
+      'documentHeaderText': documentHeaderText,
+      'documentFooterText': documentFooterText,
+      'documentShowPageNumbers': documentShowPageNumbers,
       'fontFamily': fontFamily,
       'footerText': footerText,
       'footerShowPageNumbers': footerShowPageNumbers,
@@ -427,6 +464,13 @@ class ThemeProfile {
       logoPath: json['logoPath'] as String?,
       logoPosition: json['logoPosition'] as String? ?? 'bottom-right',
       logoSize: (json['logoSize'] as num?)?.round() ?? 96,
+      documentLogoPath: json['documentLogoPath'] as String?,
+      documentLogoPosition:
+          json['documentLogoPosition'] as String? ?? 'top-right',
+      documentHeaderText: json['documentHeaderText'] as String? ?? '',
+      documentFooterText: json['documentFooterText'] as String? ?? '',
+      documentShowPageNumbers:
+          json['documentShowPageNumbers'] as bool? ?? false,
       fontFamily: _font(
         json['fontFamily'],
         AppSettings.availableFonts,
@@ -449,6 +493,8 @@ class ThemeProfile {
       severityNoneColor: _color(json['severityNoneColor'], '#475569'),
     );
   }
+
+  String? get effectiveDocumentLogoPath => documentLogoPath ?? logoPath;
 }
 
 class AppSettings {

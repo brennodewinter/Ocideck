@@ -1764,6 +1764,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Koptekst': 'Päis',
   'Afbeelding niet opgehaald': 'Pilti ei toodud',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Sihtkausta ei õnnestunud luua ega sinna kirjutada. Kontrolli, kas määratud asukoht on saadaval.',

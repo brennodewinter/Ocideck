@@ -163,6 +163,10 @@ void main() {
       expect(visual.editorTheme.text, const Color(0xFF111318));
       expect(visual.editorTheme.accent, const Color(0xFFFFB800));
       expect(find.byType(ThemeProfileLogo), findsOneWidget);
+      expect(find.byKey(const Key('document-header-text')), findsOneWidget);
+      expect(find.text('Bestuurlijk rapport'), findsOneWidget);
+      expect(find.byKey(const Key('document-footer-text')), findsOneWidget);
+      expect(find.byKey(const Key('document-page-number')), findsOneWidget);
 
       await openSource(tester);
       final preview = tester.widget<DocumentMarkdownView>(
@@ -171,6 +175,8 @@ void main() {
       expect(preview.themeProfile?.name, 'Vigilis');
       expect(preview.chartTheme?.name, 'Vigilis');
       expect(find.byType(ThemeProfileLogo), findsOneWidget);
+      expect(find.byKey(const Key('document-header-text')), findsOneWidget);
+      expect(find.byKey(const Key('document-footer-text')), findsOneWidget);
 
       final source = tester.widget<TextField>(find.byType(TextField));
       expect(source.style?.fontFamily, 'monospace');

@@ -1808,6 +1808,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Koptekst': 'Ceanntásc',
   'Afbeelding niet opgehaald': 'Íomhá gan aisghabháil',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Níorbh fhéidir an fillteán sprice a chruthú ná scríobh chuige. Seiceáil go bhfuil an suíomh cumraithe ar fáil.',

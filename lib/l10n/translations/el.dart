@@ -1800,6 +1800,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Koptekst': 'Κεφαλίδα',
   'Afbeelding niet opgehaald': 'Η εικόνα δεν ανακτήθηκε',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Δεν ήταν δυνατή η δημιουργία ή η εγγραφή του φακέλου προορισμού. Ελέγξτε αν η ρυθμισμένη τοποθεσία είναι διαθέσιμη.',

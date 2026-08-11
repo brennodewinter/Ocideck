@@ -1780,6 +1780,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Koptekst': 'Antraštė',
   'Afbeelding niet opgehaald': 'Vaizdas negautas',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Nepavyko sukurti paskirties aplanko ar į jį įrašyti. Patikrinkite, ar nustatyta vieta pasiekiama.',

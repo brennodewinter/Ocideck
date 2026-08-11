@@ -4305,9 +4305,14 @@ Choose **Document** or **Presentation** above the editor. Document shows the com
 surface-colour, text-colour, accent and font controls beside a live A4 title/content
 preview. Presentation restores the complete font, colour, animation, logo, footer and
 closing-slide controls beside a real 16:9 slide preview. A selected logo is shown next
-to the file chooser and appears in both previews, in the document editor and in HTML
-document export. The presentation editor itself remains deliberately sober and
-presentation-focused.
+to the file chooser and is shared by presentations and documents by default. In the
+document controls you can unlink it and choose a different document logo, or deliberately
+use no document logo. The same controls set its position, the **header**, **footer text**
+and **page numbers**. The A4 preview updates immediately; the visual editor and live
+preview show the same page furniture. HTML places it around the document and repeats it
+at the top and bottom when printing or saving as PDF. Markdown content stays unchanged:
+these values travel in the style profile, not in the document body. The presentation
+editor itself remains deliberately sober and presentation-focused.
 
 Under *Settings → General → Document style* you can set a **default document style**
 for documents that do not choose their own, and switch on **Deze stijl afdwingen**

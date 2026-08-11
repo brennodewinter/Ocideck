@@ -733,6 +733,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Koptekst': 'Koptekst',
   'Afbeelding niet opgehaald': 'Ofbylding net ophelle',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'De doelmap koe net oanmakke of beskreaun wurde. Kontrolearje oft de ynstelde lokaasje beskikber is.',

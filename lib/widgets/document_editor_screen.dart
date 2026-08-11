@@ -45,6 +45,7 @@ import 'dialogs/document_export_dialog.dart';
 import 'dialogs/image_carousel_picker.dart';
 import 'dialogs/package_encrypt_dialog.dart';
 import 'dialogs/settings_dialog.dart';
+import 'document_page_chrome.dart';
 import 'editors/_editor_field.dart' show reportImageImportFailure;
 import 'editors/chart_editor.dart';
 import 'editors/embed_editor_dialog.dart';
@@ -52,7 +53,6 @@ import 'editors/table_editor.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'reader/document_markdown_view.dart';
 import 'shell/document_save_actions.dart';
-import 'theme_profile_logo.dart';
 
 part 'parts/document_editor_toolbar.dart';
 
@@ -1070,56 +1070,36 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 }
 
 Widget _styledDocumentSurface(ThemeProfile? profile, Widget editor) {
-  if (profile?.logoPath?.isNotEmpty != true) return editor;
-  final atTop = profile!.logoPosition.startsWith('top');
+  if (profile == null || !_hasDocumentChrome(profile)) return editor;
   return ColoredBox(
     color: AppTheme.parseHexColor(profile.slideBackgroundColor),
     child: Column(
       children: [
-        if (atTop) _DocumentLogo(profile),
+        DocumentChromeBand(profile: profile, header: true),
         Expanded(child: editor),
-        if (!atTop) _DocumentLogo(profile),
+        DocumentChromeBand(profile: profile, header: false),
       ],
     ),
   );
 }
 
 Widget _styledDocumentBody(ThemeProfile? profile, Widget body) {
-  if (profile?.logoPath?.isNotEmpty != true) return body;
-  final atTop = profile!.logoPosition.startsWith('top');
+  if (profile == null || !_hasDocumentChrome(profile)) return body;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      if (atTop) _DocumentLogo(profile),
+      DocumentChromeBand(profile: profile, header: true),
       body,
-      if (!atTop) _DocumentLogo(profile),
+      DocumentChromeBand(profile: profile, header: false),
     ],
   );
 }
 
-class _DocumentLogo extends StatelessWidget {
-  const _DocumentLogo(this.profile);
-
-  final ThemeProfile profile;
-
-  @override
-  Widget build(BuildContext context) {
-    final right = profile.logoPosition.endsWith('right');
-    final width = (profile.logoSize * 0.6).clamp(48.0, 160.0);
-    return Align(
-      alignment: right ? Alignment.centerRight : Alignment.centerLeft,
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(right ? 16 : 24, 12, right ? 24 : 16, 8),
-        child: ThemeProfileLogo(
-          profile: profile,
-          width: width,
-          height: (width * 0.5).clamp(32.0, 72.0),
-          alignment: right ? Alignment.centerRight : Alignment.centerLeft,
-        ),
-      ),
-    );
-  }
-}
+bool _hasDocumentChrome(ThemeProfile profile) =>
+    profile.effectiveDocumentLogoPath?.trim().isNotEmpty == true ||
+    profile.documentHeaderText.trim().isNotEmpty ||
+    profile.documentFooterText.trim().isNotEmpty ||
+    profile.documentShowPageNumbers;
 
 /// De documenttitel voor export en conversie: de eerste `# `-kop, anders de
 /// bestandsnaam zonder extensie, anders leeg. Top-level zodat het bewerkscherm

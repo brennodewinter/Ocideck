@@ -1779,6 +1779,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Koptekst': 'Zaglavlje',
   'Afbeelding niet opgehaald': 'Slika nije dohvaćena',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Odredišnu mapu nije bilo moguće stvoriti ni u nju zapisati. Provjerite je li postavljena lokacija dostupna.',

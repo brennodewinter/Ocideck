@@ -1773,6 +1773,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Koptekst': 'Header',
   'Afbeelding niet opgehaald': 'Gambar tidak diambil',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Folder tujuan tidak dapat dibuat atau ditulisi. Periksa apakah lokasi yang diatur tersedia.',

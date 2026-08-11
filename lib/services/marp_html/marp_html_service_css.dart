@@ -121,12 +121,21 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) =>
     '.document th{background:${t.tableHeaderBackgroundColor};'
     'color:${t.tableHeaderTextColor};border:1px solid #ccc;padding:6px 12px}'
     '.document td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px}'
-    '.document-logo{display:flex;margin:0 0 24px}'
-    '.document-logo.right{justify-content:flex-end}'
-    '.document-logo.left{justify-content:flex-start}'
+    '.document-header,.document-footer{display:flex;align-items:center;gap:14px;'
+    'min-height:42px;color:${t.textColor}aa;font-size:12px}'
+    '.document-header{border-bottom:1px solid ${t.accentColor}8c;margin-bottom:24px}'
+    '.document-footer{border-top:1px solid ${t.accentColor}8c;margin-top:24px}'
+    '.document-header-text,.document-footer-text{flex:1;min-width:0}'
+    '.document-page-number{white-space:nowrap;font-variant-numeric:tabular-nums}'
+    '.document-page-number::after{content:"1"}'
+    '.document-logo{display:inline-flex;align-items:center;flex:0 0 auto}'
     '.document-logo img{display:block;width:${t.logoSize.clamp(32, 480)}px;'
-    'max-width:40%;max-height:120px;height:auto;object-fit:contain}'
-    '.document>*:last-child.document-logo{margin:24px 0 0}';
+    'max-width:160px;max-height:64px;height:auto;object-fit:contain}'
+    '@media print{.document{padding-top:76px;padding-bottom:68px}'
+    '.document-header,.document-footer{position:fixed;left:40px;right:40px;'
+    'z-index:2;background:${t.slideBackgroundColor}}'
+    '.document-header{top:0}.document-footer{bottom:0}'
+    '.document-page-number::after{content:counter(page)}}';
 
 /// De vorm van het keuze-menuraster (#1162). Thema-onafhankelijk, net als de
 /// rapportage-opmaak: alleen de layout staat hier, de kleuren (rand/vulling uit

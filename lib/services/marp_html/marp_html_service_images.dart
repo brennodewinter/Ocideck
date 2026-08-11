@@ -13,12 +13,12 @@ Future<({String markdown, List<String> dataUris})> _embedHtmlImages(
   MarpHtmlService service,
 ) async {
   final embedded = await _embedImages(markdown, embedImage, maxEmbedBytes);
-  if (!continuous || theme?.logoPath?.trim().isNotEmpty != true) {
+  if (!continuous || theme == null || !_hasDocumentChrome(theme)) {
     return embedded;
   }
-  return _withDocumentLogo(
+  return _withDocumentChrome(
     embedded,
-    theme!,
+    theme,
     embedImage,
     service.loadBytes,
     maxEmbedBytes,
@@ -48,38 +48,72 @@ Future<String?> _themeLogoDataUri(
   }
 }
 
-Future<({String markdown, List<String> dataUris})> _withDocumentLogo(
+bool _hasDocumentChrome(ThemeProfile theme) =>
+    theme.effectiveDocumentLogoPath?.trim().isNotEmpty == true ||
+    theme.documentHeaderText.trim().isNotEmpty ||
+    theme.documentFooterText.trim().isNotEmpty ||
+    theme.documentShowPageNumbers;
+
+Future<({String markdown, List<String> dataUris})> _withDocumentChrome(
   ({String markdown, List<String> dataUris}) embedded,
   ThemeProfile theme,
   HtmlImageResolver? embedImage,
   Future<Uint8List> Function(String asset) loadBytes,
   int maxEmbedBytes,
 ) async {
-  final logoUri = await _themeLogoDataUri(
-    theme.logoPath!,
-    embedImage,
-    loadBytes,
-  );
-  if (logoUri == null) return embedded;
   final uris = [...embedded.dataUris];
-  var logoIndex = uris.indexOf(logoUri);
-  if (logoIndex < 0) {
-    final used = uris.fold<int>(logoUri.length, (sum, uri) => sum + uri.length);
-    if (used > maxEmbedBytes) {
-      throw HtmlEmbedBudgetExceeded(usedBytes: used, limitBytes: maxEmbedBytes);
+  String logo = '';
+  final logoPath = theme.effectiveDocumentLogoPath?.trim();
+  if (logoPath != null && logoPath.isNotEmpty) {
+    final logoUri = await _themeLogoDataUri(logoPath, embedImage, loadBytes);
+    if (logoUri != null) {
+      var logoIndex = uris.indexOf(logoUri);
+      if (logoIndex < 0) {
+        final used = uris.fold<int>(
+          logoUri.length,
+          (sum, uri) => sum + uri.length,
+        );
+        if (used > maxEmbedBytes) {
+          throw HtmlEmbedBudgetExceeded(
+            usedBytes: used,
+            limitBytes: maxEmbedBytes,
+          );
+        }
+        logoIndex = uris.length;
+        uris.add(logoUri);
+      }
+      logo = '<img src="$_imagePlaceholder$logoIndex" alt="">';
     }
-    logoIndex = uris.length;
-    uris.add(logoUri);
   }
-  final right = theme.logoPosition.endsWith('right');
-  final logo =
-      '<div class="document-logo ${right ? 'right' : 'left'}">'
-      '<img src="$_imagePlaceholder$logoIndex" alt=""></div>';
-  final bottom = theme.logoPosition.startsWith('bottom');
+  final logoAtTop =
+      logo.isNotEmpty && theme.documentLogoPosition.startsWith('top');
+  final logoAtRight = theme.documentLogoPosition.endsWith('right');
+  String band(String kind, String text, {required bool showPage}) {
+    final inBand = kind == 'header' ? logoAtTop : logo.isNotEmpty && !logoAtTop;
+    final logoHtml = inBand
+        ? '<span class="document-logo ${logoAtRight ? 'right' : 'left'}">$logo</span>'
+        : '';
+    final page = showPage
+        ? '<span class="document-page-number" aria-label="Pagina"></span>'
+        : '';
+    return '<div class="document-$kind">'
+        '${inBand && !logoAtRight ? logoHtml : ''}'
+        '<span class="document-$kind-text">${MarpHtmlService._htmlText(text)}</span>'
+        '$page${inBand && logoAtRight ? logoHtml : ''}</div>';
+  }
+
+  final header = band(
+    'header',
+    theme.documentHeaderText.trim(),
+    showPage: false,
+  );
+  final footer = band(
+    'footer',
+    theme.documentFooterText.trim(),
+    showPage: theme.documentShowPageNumbers,
+  );
   return (
-    markdown: bottom
-        ? '${embedded.markdown}\n\n$logo'
-        : '$logo\n\n${embedded.markdown}',
+    markdown: '$header\n\n${embedded.markdown}\n\n$footer',
     dataUris: uris,
   );
 }

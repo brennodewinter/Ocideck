@@ -1785,6 +1785,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Koptekst': 'Nagłówek',
   'Afbeelding niet opgehaald': 'Nie pobrano obrazu',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Nie udało się utworzyć folderu docelowego ani do niego zapisać. Sprawdź, czy ustawiona lokalizacja jest dostępna.',

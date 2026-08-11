@@ -1795,6 +1795,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Koptekst': 'Intestatura',
   'Afbeelding niet opgehaald': 'L-immaġni ma nġibitx',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Il-folder tad-destinazzjoni ma setax jinħoloq jew jinkiteb fih. Iċċekkja li l-post konfigurat huwa disponibbli.',

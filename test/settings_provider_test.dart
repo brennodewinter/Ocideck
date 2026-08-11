@@ -36,6 +36,47 @@ void main() {
     expect(back.codeFontFamily, 'Courier New');
   });
 
+  test(
+    'ThemeProfile bewaart volwassen documentchrome en deelt standaard het logo',
+    () {
+      const profile = ThemeProfile(
+        logoPath: 'asset:assets/images/vigilis-logo.png',
+        documentLogoPosition: 'top-left',
+        documentHeaderText: 'Bestuurlijk rapport',
+        documentFooterText: 'Vigilis · Vertrouwelijk',
+        documentShowPageNumbers: true,
+      );
+
+      expect(profile.effectiveDocumentLogoPath, profile.logoPath);
+      final back = ThemeProfile.fromJson(profile.toJson());
+      expect(back.effectiveDocumentLogoPath, profile.logoPath);
+      expect(back.documentLogoPosition, 'top-left');
+      expect(back.documentHeaderText, 'Bestuurlijk rapport');
+      expect(back.documentFooterText, 'Vigilis · Vertrouwelijk');
+      expect(back.documentShowPageNumbers, isTrue);
+
+      final overridden = back.copyWith(documentLogoPath: 'ander-logo.png');
+      expect(overridden.effectiveDocumentLogoPath, 'ander-logo.png');
+      expect(
+        overridden
+            .copyWith(clearDocumentLogoOverride: true)
+            .effectiveDocumentLogoPath,
+        profile.logoPath,
+      );
+    },
+  );
+
+  test('oud profiel krijgt veilige documentchrome-standaarden', () {
+    final legacy = ThemeProfile.fromJson(const {
+      'name': 'Legacy',
+      'logoPath': 'asset:assets/images/librekat-logo.png',
+    });
+    expect(legacy.effectiveDocumentLogoPath, legacy.logoPath);
+    expect(legacy.documentHeaderText, isEmpty);
+    expect(legacy.documentFooterText, isEmpty);
+    expect(legacy.documentShowPageNumbers, isFalse);
+  });
+
   test('ThemeProfile round-trips and clamps the animation duration', () {
     const profile = ThemeProfile(animationDurationMs: 7500);
     expect(ThemeProfile.fromJson(profile.toJson()).animationDurationMs, 7500);

@@ -1772,6 +1772,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Koptekst': 'Sidehoved',
   'Afbeelding niet opgehaald': 'Billedet blev ikke hentet',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Destinationsmappen kunne ikke oprettes eller skrives til. Tjek, at den indstillede placering er tilgængelig.',

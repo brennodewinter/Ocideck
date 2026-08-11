@@ -732,6 +732,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Koptekst': 'Kopfzeile',
   'Afbeelding niet opgehaald': 'Bild nicht abgerufen',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Der Zielordner konnte nicht erstellt oder beschrieben werden. Prüfe, ob der eingestellte Speicherort verfügbar ist.',

@@ -913,6 +913,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Koptekst': 'Header',
   'Afbeelding niet opgehaald': 'Image not fetched',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'The destination folder could not be created or written to. Check that the configured location is available.',

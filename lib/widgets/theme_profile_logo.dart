@@ -20,6 +20,7 @@ class ThemeProfileLogo extends StatelessWidget {
     this.width = 96,
     this.height = 48,
     this.alignment = Alignment.center,
+    this.logoPath,
   });
 
   final ThemeProfile profile;
@@ -27,10 +28,11 @@ class ThemeProfileLogo extends StatelessWidget {
   final double width;
   final double height;
   final Alignment alignment;
+  final String? logoPath;
 
   @override
   Widget build(BuildContext context) {
-    final path = profile.logoPath?.trim() ?? '';
+    final path = (logoPath ?? profile.logoPath)?.trim() ?? '';
     final image = _provider(path);
     return SizedBox(
       width: width,

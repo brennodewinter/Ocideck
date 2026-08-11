@@ -106,6 +106,38 @@ void main() {
     });
 
     test(
+      'kop- en voettekst reizen mee en gelden alleen voor documenten',
+      () async {
+        final service = MarpHtmlService(loadAsset: _diskLoader);
+        const theme = ThemeProfile(
+          documentHeaderText: 'Bestuurlijk rapport',
+          documentFooterText: 'Vigilis · Vertrouwelijk',
+          documentShowPageNumbers: true,
+        );
+
+        final document = await service.build(
+          _md,
+          continuous: true,
+          theme: theme,
+        );
+        expect(document, contains('class="document-header"'));
+        expect(document, contains('Bestuurlijk rapport'));
+        expect(document, contains('class="document-footer"'));
+        expect(document, contains('Vigilis · Vertrouwelijk'));
+        expect(document, contains('class="document-page-number"'));
+        expect(document, contains('@media print'));
+
+        final slides = await service.build(
+          _md,
+          continuous: false,
+          theme: theme,
+        );
+        expect(slides, isNot(contains('class="document-header"')));
+        expect(slides, isNot(contains('class="document-footer"')));
+      },
+    );
+
+    test(
       'blijft self-contained, met CSP en zonder externe url() in <style>',
       () async {
         final service = MarpHtmlService(loadAsset: _diskLoader);
