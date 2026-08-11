@@ -48,6 +48,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.maxTextWidth,
     this.mermaidRenderer,
     this.chartTheme,
+    this.themeProfile,
     this.onEditChart,
     this.onEditTable,
     this.searchTerm,
@@ -82,6 +83,10 @@ class DocumentMarkdownView extends StatelessWidget {
   /// standaardkleuren van de grafiek-SVG. Een document heeft geen deck-thema, dus
   /// de aanroeper geeft hier het actieve app-profiel of niets.
   final ThemeProfile? chartTheme;
+
+  /// Optionele documentstijl. `null` houdt de documentatielezer op het app-
+  /// thema; de documenteditor en stijlbouwer geven hier hun opgeloste profiel.
+  final ThemeProfile? themeProfile;
 
   /// Aangeroepen bij dubbelklik op een grafiek — alleen in de editor gezet (de
   /// docs-lezer is alleen-lezen). Geeft het volgnummer van de grafiek (de
@@ -170,21 +175,24 @@ class DocumentMarkdownView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final t = _Theme(Theme.of(context));
+    final t = _Theme(Theme.of(context), themeProfile);
     final blocks = _parse(markdown);
     final term = (searchTerm ?? '').trim().toLowerCase();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Grafieken en tabellen worden elk apart geteld, zodat een dubbelklik het
-        // juiste blok (de hoeveelheidste van zíjn soort) in de bron kan vervangen.
-        for (var i = 0, chart = 0, table = 0; i < blocks.length; i++)
-          _decorated(t, blocks[i], i, term, switch (blocks[i].kind) {
-            _Kind.chart => chart++,
-            _Kind.table => table++,
-            _ => -1,
-          }),
-      ],
+    return ColoredBox(
+      color: t.paper,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Grafieken en tabellen worden elk apart geteld, zodat een dubbelklik het
+          // juiste blok (de hoeveelheidste van zíjn soort) in de bron kan vervangen.
+          for (var i = 0, chart = 0, table = 0; i < blocks.length; i++)
+            _decorated(t, blocks[i], i, term, switch (blocks[i].kind) {
+              _Kind.chart => chart++,
+              _Kind.table => table++,
+              _ => -1,
+            }),
+        ],
+      ),
     );
   }
 
@@ -388,7 +396,7 @@ class DocumentMarkdownView extends StatelessWidget {
           fontSize: size,
           fontWeight: level <= 2 ? FontWeight.w800 : FontWeight.w700,
           height: 1.25,
-          color: t.heading,
+          color: level == 1 ? t.heading : t.subheading,
         ),
         t,
       ),
@@ -455,7 +463,7 @@ class DocumentMarkdownView extends StatelessWidget {
       child: Icon(
         checked ? Icons.check_box_outlined : Icons.check_box_outline_blank,
         size: 17,
-        color: checked ? t.marker : t.checkboxEmpty,
+        color: checked ? t.checkboxChecked : t.checkboxEmpty,
       ),
     ),
   );
@@ -530,7 +538,7 @@ class DocumentMarkdownView extends StatelessWidget {
         child: SvgPicture.string(
           MarpHtmlService.chartSpecSvg(
             spec,
-            chartTheme,
+            chartTheme ?? themeProfile,
             background: t.chartCardHex,
           ),
           fit: BoxFit.contain,
@@ -615,7 +623,12 @@ class DocumentMarkdownView extends StatelessWidget {
     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     child: _inline(
       text,
-      header ? t.body.copyWith(fontWeight: FontWeight.w700) : t.body,
+      header
+          ? t.body.copyWith(
+              fontWeight: FontWeight.w700,
+              color: t.tableHeaderText,
+            )
+          : t.body.copyWith(color: t.tableText),
       t,
       textAlign: textAlign,
     ),
@@ -797,40 +810,101 @@ String _hexRgb(Color color) {
   return '#${two(color.r)}${two(color.g)}${two(color.b)}'.toUpperCase();
 }
 
+Color _profileColor(String? value, Color fallback) => value == null
+    ? fallback
+    : AppTheme.parseHexColor(value, fallback: fallback);
+
 class _Theme {
-  _Theme(ThemeData theme)
+  _Theme(ThemeData theme, ThemeProfile? profile)
     : dark = theme.brightness == Brightness.dark,
+      paper = _profileColor(
+        profile?.slideBackgroundColor,
+        theme.colorScheme.surface,
+      ),
       body = TextStyle(
+        fontFamily: profile?.fontFamily,
         fontSize: 15.5,
         height: 1.55,
-        color: theme.colorScheme.onSurface,
+        color: _profileColor(profile?.textColor, theme.colorScheme.onSurface),
       ),
-      heading = theme.colorScheme.onSurface,
-      marker = AppPalette.of(theme).accentInk,
+      heading = _profileColor(profile?.textColor, theme.colorScheme.onSurface),
+      subheading = _profileColor(
+        profile?.accentColor,
+        theme.colorScheme.onSurface,
+      ),
+      marker = _profileColor(
+        profile?.accentColor,
+        AppPalette.of(theme).accentInk,
+      ),
       // Dimmer than the ticked box: an empty box is the absence of a fact, and
       // should not pull the eye harder than the items that are done.
-      checkboxEmpty = theme.colorScheme.onSurfaceVariant,
-      link = AppPalette.of(theme).accentInk,
-      border = theme.colorScheme.outlineVariant,
-      quoteBg = theme.colorScheme.surfaceContainerHighest.withValues(
-        alpha: 0.5,
+      checkboxEmpty = _profileColor(
+        profile?.checklistUncheckedColor,
+        theme.colorScheme.onSurfaceVariant,
       ),
-      quoteBar = AppPalette.of(theme).accentInk,
-      quoteText = theme.colorScheme.onSurfaceVariant,
-      codeBg = theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+      checkboxChecked = _profileColor(
+        profile?.checklistCheckedColor,
+        AppPalette.of(theme).accentInk,
+      ),
+      link = _profileColor(
+        profile?.accentColor,
+        AppPalette.of(theme).accentInk,
+      ),
+      border = profile == null
+          ? theme.colorScheme.outlineVariant
+          : _profileColor(
+              profile.textColor,
+              theme.colorScheme.onSurface,
+            ).withValues(alpha: 0.22),
+      quoteBg = profile == null
+          ? theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5)
+          : _profileColor(
+              profile.accentColor,
+              AppPalette.of(theme).accentInk,
+            ).withValues(alpha: 0.10),
+      quoteBar = _profileColor(
+        profile?.accentColor,
+        AppPalette.of(theme).accentInk,
+      ),
+      quoteText = _profileColor(
+        profile?.textColor,
+        theme.colorScheme.onSurfaceVariant,
+      ),
+      codeBg = _profileColor(
+        profile?.codeBackgroundColor,
+        theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+      ),
       // The opaque colour the code/chart card actually shows: the 0.6-alpha card
       // fill composited over the page surface. A chart SVG picks its title ink
       // against this, so a dark app theme doesn't drop a dark title on a dark
       // card. Kept as `#RRGGBB` because the SVG renderer speaks hex.
       chartCardHex = _hexRgb(
         Color.alphaBlend(
-          theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
-          theme.colorScheme.surface,
+          _profileColor(
+            profile?.codeBackgroundColor,
+            theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+          ),
+          _profileColor(
+            profile?.slideBackgroundColor,
+            theme.colorScheme.surface,
+          ),
         ),
       ),
-      codeText = theme.colorScheme.onSurface,
-      tableHeaderBg = theme.colorScheme.surfaceContainerHighest.withValues(
-        alpha: 0.7,
+      codeText = _profileColor(
+        profile?.codeTextColor,
+        theme.colorScheme.onSurface,
+      ),
+      tableHeaderBg = _profileColor(
+        profile?.tableHeaderBackgroundColor,
+        theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.7),
+      ),
+      tableHeaderText = _profileColor(
+        profile?.tableHeaderTextColor,
+        theme.colorScheme.onSurface,
+      ),
+      tableText = _profileColor(
+        profile?.tableTextColor,
+        theme.colorScheme.onSurface,
       ),
       // Find-in-page tints: a warm amber for a match, a stronger orange for the
       // active hit (semantic tokens, so a palette change touches one place).
@@ -838,10 +912,13 @@ class _Theme {
       findActive = AppTheme.findHighlightActive;
 
   final bool dark;
+  final Color paper;
   final TextStyle body;
   final Color heading;
+  final Color subheading;
   final Color marker;
   final Color checkboxEmpty;
+  final Color checkboxChecked;
   final Color link;
   final Color border;
   final Color quoteBg;
@@ -851,6 +928,8 @@ class _Theme {
   final String chartCardHex;
   final Color codeText;
   final Color tableHeaderBg;
+  final Color tableHeaderText;
+  final Color tableText;
   final Color findMatch;
   final Color findActive;
 }

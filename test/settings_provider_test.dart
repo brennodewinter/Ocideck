@@ -195,10 +195,10 @@ void main() {
 
   test('starts with the built-in profiles, LibreKAT selected', () async {
     final notifier = await _loadedNotifier();
-    expect(notifier.state.themeProfiles, hasLength(3));
+    expect(notifier.state.themeProfiles, hasLength(4));
     expect(
       notifier.state.themeProfiles.map((p) => p.name),
-      containsAll(['LibreKAT', 'Standaard', 'Security']),
+      containsAll(['LibreKAT', 'Standaard', 'Security', 'Vigilis']),
     );
     expect(notifier.state.selectedThemeProfileName, 'LibreKAT');
     // Het LibreKAT-logo is een gebundelde asset zodat het overal (ook web)
@@ -212,7 +212,7 @@ void main() {
   test('createThemeProfile adds and selects a new profile', () async {
     final notifier = await _loadedNotifier();
     final created = await notifier.createThemeProfile();
-    expect(notifier.state.themeProfiles, hasLength(4));
+    expect(notifier.state.themeProfiles, hasLength(5));
     expect(notifier.state.selectedThemeProfileName, created.name);
   });
 
@@ -232,7 +232,7 @@ void main() {
       isNot(contains(created.name)),
       reason: 'The old name should be replaced, not duplicated',
     );
-    expect(notifier.state.themeProfiles, hasLength(4));
+    expect(notifier.state.themeProfiles, hasLength(5));
     expect(notifier.state.selectedThemeProfileName, 'Mijn stijl');
   });
 
@@ -271,13 +271,13 @@ void main() {
   test('deleteThemeProfile removes it and selects another', () async {
     final notifier = await _loadedNotifier();
     final created = await notifier.createThemeProfile();
-    expect(notifier.state.themeProfiles, hasLength(4));
+    expect(notifier.state.themeProfiles, hasLength(5));
 
     await notifier.deleteThemeProfile(created.name);
 
     final names = notifier.state.themeProfiles.map((p) => p.name).toList();
     expect(names, isNot(contains(created.name)));
-    expect(notifier.state.themeProfiles, hasLength(3));
+    expect(notifier.state.themeProfiles, hasLength(4));
     expect(notifier.state.selectedThemeProfileName, names.first);
   });
 

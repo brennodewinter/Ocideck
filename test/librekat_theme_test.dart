@@ -18,6 +18,16 @@ Future<SettingsNotifier> _notifierWith(Map<String, Object> prefs) async {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
+  test('Vigilis is een volledig lokaal ingebouwd stijlprofiel', () {
+    expect(ThemeProfile.builtIns, contains(ThemeProfile.vigilis));
+    expect(ThemeProfile.vigilis.accentColor, '#FFB800');
+    expect(ThemeProfile.vigilis.textColor, '#111318');
+    expect(
+      ThemeProfile.vigilis.logoPath,
+      'asset:assets/images/vigilis-logo.png',
+    );
+  });
+
   test('bestaande installaties behouden hun eigen profielenlijst', () async {
     final notifier = await _notifierWith({
       'themeProfiles': jsonEncode([

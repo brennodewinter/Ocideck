@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor_theme.dart';
 import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
@@ -20,6 +21,23 @@ import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
 /// aparte velden. De marker bleef anders op de omgevingskleur (EU-blauw onder
 /// Europa) hangen terwijl zijn eigen itemtekst al on-surface was.
 void main() {
+  test('documentprofiel kleurt papier, tekst, accent en koppen', () {
+    const scheme = ColorScheme.dark();
+    final theme = MarkdownEditorTheme.documentSurface(
+      scheme: scheme,
+      profile: ThemeProfile.vigilis,
+      fontFamily: ThemeProfile.vigilis.fontFamily,
+    );
+    final styles = defaultStylesFor(theme);
+
+    expect(theme.surface, const Color(0xFFFFFFFF));
+    expect(theme.text, const Color(0xFF111318));
+    expect(theme.link, const Color(0xFFFFB800));
+    expect(theme.codeBackground, const Color(0xFF111318));
+    expect(styles.h1!.style.color, const Color(0xFF111318));
+    expect(styles.h2!.style.color, const Color(0xFFFFB800));
+  });
+
   for (final (label, scheme) in [
     ('licht', const ColorScheme.light()),
     ('donker', const ColorScheme.dark()),

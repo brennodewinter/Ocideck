@@ -62,13 +62,25 @@ DefaultStyles defaultStylesFor(MarkdownEditorTheme theme) {
       null,
     ),
     h1: block(
-      body.copyWith(fontSize: theme.fontSize + 8, fontWeight: FontWeight.bold),
+      body.copyWith(
+        fontSize: theme.fontSize + 8,
+        fontWeight: FontWeight.bold,
+        color: theme.heading,
+      ),
     ),
     h2: block(
-      body.copyWith(fontSize: theme.fontSize + 4, fontWeight: FontWeight.bold),
+      body.copyWith(
+        fontSize: theme.fontSize + 4,
+        fontWeight: FontWeight.bold,
+        color: theme.subheading,
+      ),
     ),
     h3: block(
-      body.copyWith(fontSize: theme.fontSize + 2, fontWeight: FontWeight.bold),
+      body.copyWith(
+        fontSize: theme.fontSize + 2,
+        fontWeight: FontWeight.bold,
+        color: theme.subheading,
+      ),
     ),
     bold: body.copyWith(fontWeight: FontWeight.bold),
     italic: body.copyWith(fontStyle: FontStyle.italic),
@@ -174,22 +186,28 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
               },
             ),
           },
-          child: QuillEditor.basic(
-            controller: widget.controller,
-            focusNode: widget.focusNode,
-            scrollController: widget.scrollController,
-            config: QuillEditorConfig(
-              expands: widget.expand,
-              padding: widget.contentPadding,
-              placeholder: widget.hintText,
-              customStyles: defaultStylesFor(widget.editorTheme),
-              // GFM-tabellen komen als `x-embed-table`-embed binnen (zie
-              // MarkdownQuillCodec) en worden hier als gerenderde, bewerkbare
-              // tabel getekend i.p.v. losse woorden. Een `---`-scheiding komt als
-              // `divider`-embed binnen en wordt een horizontale lijn — zonder deze
-              // builder tekent Quill er een RenderErrorBox voor.
-              embedBuilders: const [TableEmbedBuilder(), DividerEmbedBuilder()],
-              autoFocus: false,
+          child: DocumentStyleScope(
+            profile: widget.editorTheme.profile,
+            child: QuillEditor.basic(
+              controller: widget.controller,
+              focusNode: widget.focusNode,
+              scrollController: widget.scrollController,
+              config: QuillEditorConfig(
+                expands: widget.expand,
+                padding: widget.contentPadding,
+                placeholder: widget.hintText,
+                customStyles: defaultStylesFor(widget.editorTheme),
+                // GFM-tabellen komen als `x-embed-table`-embed binnen (zie
+                // MarkdownQuillCodec) en worden hier als gerenderde, bewerkbare
+                // tabel getekend i.p.v. losse woorden. Een `---`-scheiding komt als
+                // `divider`-embed binnen en wordt een horizontale lijn — zonder deze
+                // builder tekent Quill er een RenderErrorBox voor.
+                embedBuilders: const [
+                  TableEmbedBuilder(),
+                  DividerEmbedBuilder(),
+                ],
+                autoFocus: false,
+              ),
             ),
           ),
         ),

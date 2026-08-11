@@ -140,6 +140,41 @@ void main() {
     expect(view.markdown, '# Kop\n\nTekst.');
   });
 
+  testWidgets(
+    'Vigilis kleurt document en live preview maar niet de Markdownbron',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final n = DocumentNotifier()
+        ..loadDocument(
+          MarkdownDocument.parse(
+            '---\ntheme: Vigilis\n---\n\n# Rapport\n\n## Bevindingen\n\nTekst.',
+          ),
+        );
+      await tester.pumpWidget(harness(n));
+      await tester.pumpAndSettle();
+
+      final visual = tester.widget<MarkdownNotesEditor>(
+        find.byType(MarkdownNotesEditor),
+      );
+      expect(visual.editorTheme.surface, const Color(0xFFFFFFFF));
+      expect(visual.editorTheme.text, const Color(0xFF111318));
+      expect(visual.editorTheme.accent, const Color(0xFFFFB800));
+
+      await openSource(tester);
+      final preview = tester.widget<DocumentMarkdownView>(
+        find.byType(DocumentMarkdownView),
+      );
+      expect(preview.themeProfile?.name, 'Vigilis');
+      expect(preview.chartTheme?.name, 'Vigilis');
+
+      final source = tester.widget<TextField>(find.byType(TextField));
+      expect(source.style?.fontFamily, 'monospace');
+      expect(n.currentState.document!.body, contains('## Bevindingen'));
+    },
+  );
+
   testWidgets('typen in bron stroomt live naar de notifier', (tester) async {
     final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(''));
     await tester.pumpWidget(harness(n));

@@ -11,6 +11,7 @@ import '../models/chart.dart';
 import '../models/markdown_kind.dart';
 import '../models/markdown_outline.dart';
 import '../models/privacy_disposition.dart';
+import '../models/settings.dart';
 import '../models/slide.dart';
 import '../services/caption_service.dart';
 import '../services/description_service.dart';
@@ -108,10 +109,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// geven.
   bool _applyingExternal = false;
 
-  /// Het lettertype van de actieve documentstijl, of `null` voor het app-
-  /// lettertype. In [build] gezet uit de opgeloste stijl en door [_docSurfaceTheme]
-  /// toegepast op het schrijfoppervlak (Visueel én Bron).
-  String? _styleFontFamily;
+  /// De actieve documentstijl. Alleen documentoppervlakken lezen hem; de rauwe
+  /// Markdownbron en de presentatie-editor houden hun eigen sobere chrome.
+  ThemeProfile? _styleProfile;
 
   @override
   void initState() {
@@ -253,6 +253,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final markdownService = ref.read(markdownServiceProvider);
     final l10n = context.l10n;
     final title = _documentTitle(body, filePath);
+    final effectiveTheme =
+        resolveDocumentStyleProfile(settings, state.document?.styleName) ??
+        fileService.activeProfileFor(projectPath: projectPath);
 
     // Bouw de bundel langs de audited projectiegrens. Vanaf hier raakt geen
     // uitvoerpad de rauwe bron nog aan.
@@ -265,6 +268,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       disabledRules: settings.privacyDisabledRules,
       markdownService: markdownService,
       title: title,
+      theme: effectiveTheme,
     );
 
     if (format == DocumentExportFormat.ocideck) {
@@ -311,9 +315,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       // De documentstijl stuurt de export: het opgeloste profiel (afdwingen →
       // per-document `theme:` → standaard), en anders het projectprofiel zoals
       // voorheen — zo verandert een plat document zonder stijl niets.
-      theme:
-          resolveDocumentStyleProfile(settings, state.document?.styleName) ??
-          fileService.activeProfileFor(projectPath: projectPath),
+      theme: bundle.audience.deck.themeProfile,
       metadata: ExportDocumentMetadata(
         title: title,
         language: l10n.languageCode,
@@ -452,7 +454,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       documentProvider.select((s) => s.document?.styleName),
     );
     final styleProfile = resolveDocumentStyleProfile(settings, docStyleName);
-    _styleFontFamily = styleProfile?.fontFamily;
+    _styleProfile = styleProfile;
     final theme = Theme.of(context);
     return Actions(
       actions: {
@@ -505,13 +507,19 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                 onUndo: canUndo ? _undo : null,
                 onRedo: canRedo ? _redo : null,
                 onExport: _export,
-                onOpenSettings: () => SettingsDialog.show(context),
+                onOpenSettings: () => SettingsDialog.show(
+                  context,
+                  initialSection: SettingsSection.presentation,
+                ),
                 onConvertToPresentation: _convertToPresentation,
                 controller: _controller,
                 editorFocus: _editorFocus,
-                docTheme: _docSurfaceTheme(theme, _styleFontFamily),
+                docTheme: _docSurfaceTheme(theme, _styleProfile),
                 styleNames: [for (final p in settings.themeProfiles) p.name],
-                currentStyleName: docStyleName,
+                currentStyleName: effectiveDocumentStyleName(
+                  settings,
+                  docStyleName,
+                ),
                 styleEnforced: settings.documentStyleEnforced,
                 enforcedStyleName: settings.documentStyleEnforced
                     ? settings.documentDefaultStyle
@@ -604,7 +612,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   Widget _wysiwygEditor(ThemeData theme) => MarkdownNotesEditor(
     controller: _controller,
     focusNode: _editorFocus,
-    editorTheme: _docSurfaceTheme(theme, _styleFontFamily),
+    editorTheme: _docSurfaceTheme(theme, _styleProfile),
     hintText: '',
     expand: true,
     // Opmaakbalk zit al in [_DocEditorToolbar] voor de bron; hier toont de
@@ -672,6 +680,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
           child: DocumentMarkdownView(
             source,
             maxTextWidth: 720,
+            themeProfile: _styleProfile,
+            chartTheme: _styleProfile,
             anchorBlockIndex: _anchorBlockIndex,
             anchorKey: _anchorKey,
             onEditChart: _editChart,
@@ -1067,10 +1077,11 @@ String _documentTitle(String source, String? filePath) {
 /// Het schrijfoppervlak-thema met het lettertype van de actieve documentstijl
 /// ([fontFamily]) erin. Zonder stijl valt het terug op het app-lettertype, zodat
 /// een plat document precies leest als voorheen.
-MarkdownEditorTheme _docSurfaceTheme(ThemeData theme, String? fontFamily) =>
+MarkdownEditorTheme _docSurfaceTheme(ThemeData theme, ThemeProfile? profile) =>
     MarkdownEditorTheme.documentSurface(
       scheme: theme.colorScheme,
-      fontFamily: fontFamily,
+      fontFamily: profile?.fontFamily,
+      profile: profile,
     );
 
 /// Dien een nieuwe body in bij de notifier, met de stijl-frontmatter ervoor. De

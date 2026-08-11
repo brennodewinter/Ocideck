@@ -41,16 +41,20 @@ Future<ExportBundle> buildDocumentExportBundle(
   required Set<String> disabledRules,
   required MarkdownService markdownService,
   String title = '',
+  ThemeProfile? theme,
 }) async {
   final hydrated = await hydrateDocumentChartData(
     body,
     projectPath: projectPath,
   );
-  final deck = DocumentDeckBridge.documentToDeck(
+  final baseDeck = DocumentDeckBridge.documentToDeck(
     hydrated,
     projectPath: projectPath,
     title: title,
   );
+  final deck = theme == null
+      ? baseDeck
+      : baseDeck.copyWith(themeProfile: theme);
   return buildExportBundle(
     deck,
     deck.slides,

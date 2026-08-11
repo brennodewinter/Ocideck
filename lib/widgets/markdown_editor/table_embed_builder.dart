@@ -7,6 +7,7 @@ import '../../services/markdown_table_codec.dart';
 import '../editors/embed_editor_dialog.dart';
 import '../editors/table_editor.dart';
 import '../reader/document_markdown_view.dart';
+import 'markdown_editor_theme.dart';
 
 /// Tekent een `x-embed-table`-blok in de visuele (Quill) editor als een échte,
 /// gerenderde tabel — dezelfde weergave als de documentlezer, met potlood/
@@ -34,7 +35,14 @@ class TableEmbedBuilder extends EmbedBuilder {
     final onEdit = embedContext.readOnly
         ? null
         : (int _, List<String> _) => _editTable(context, embedContext, gfm);
-    return DocumentMarkdownView(gfm, maxTextWidth: null, onEditTable: onEdit);
+    final profile = DocumentStyleScope.maybeOf(context);
+    return DocumentMarkdownView(
+      gfm,
+      maxTextWidth: null,
+      themeProfile: profile,
+      chartTheme: profile,
+      onEditTable: onEdit,
+    );
   }
 
   /// Open de [TableEditor] op de huidige tabel en schrijf het resultaat terug in

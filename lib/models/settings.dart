@@ -216,11 +216,41 @@ class ThemeProfile {
     fontFamily: 'Arial',
   );
 
+  /// Ingebouwd Vigilis-profiel: sober zwart op wit, met het gele merkaccent.
+  /// De bestaande semantische kleurvelden dragen de documentstijl én de
+  /// presentatie-opmaak; er is bewust geen tweede, documentspecifiek formaat.
+  static const vigilis = ThemeProfile(
+    name: 'Vigilis',
+    slideBackgroundColor: '#FFFFFF',
+    textColor: '#111318',
+    accentColor: '#FFB800',
+    checklistCheckedColor: '#15803D',
+    checklistUncheckedColor: '#CBD5E1',
+    checklistStrikeThrough: true,
+    bulletMarker: BulletMarker.dot,
+    tableTextColor: '#111318',
+    tableHeaderTextColor: '#FFFFFF',
+    tableHeaderBackgroundColor: '#111318',
+    titleBackgroundColor: '#111318',
+    titleTextColor: '#FFFFFF',
+    sectionBackgroundColor: '#FFB800',
+    codeBackgroundColor: '#111318',
+    codeTextColor: '#F8FAFC',
+    codeHighlightSyntax: true,
+    codeFontFamily: 'monospace',
+    logoPath: 'asset:assets/images/vigilis-logo.png',
+    logoPosition: 'top-right',
+    logoSize: 112,
+    fontFamily: 'Arial',
+    footerText: 'Vigilis',
+    footerShowPageNumbers: true,
+  );
+
   /// Ingebouwde stijlprofielen voor een verse installatie: LibreKAT voorop
   /// (en dus de standaardselectie), met het neutrale 'Standaard' en het
   /// beveiligingsprofiel ernaast. Bestaande installaties behouden hun eigen
   /// opgeslagen profielenlijst.
-  static const builtIns = [libreKat, ThemeProfile(), security];
+  static const builtIns = [libreKat, ThemeProfile(), security, vigilis];
 
   ThemeProfile copyWith({
     String? name,
