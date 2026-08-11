@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../models/settings.dart';
 import '../../theme/app_theme.dart';
 
 /// Readable editor chrome independent of slide/panel background colors.
@@ -7,6 +8,8 @@ class MarkdownEditorTheme {
   final Color text;
   final Color hint;
   final Color link;
+  final Color heading;
+  final Color subheading;
   final Color codeBackground;
   final Color toolbarIcon;
   final Color accent;
@@ -14,12 +17,15 @@ class MarkdownEditorTheme {
   final double fontSize;
   final double lineHeight;
   final String? fontFamily;
+  final ThemeProfile? profile;
 
   const MarkdownEditorTheme({
     required this.surface,
     required this.text,
     required this.hint,
     required this.link,
+    required this.heading,
+    required this.subheading,
     required this.codeBackground,
     required this.toolbarIcon,
     required this.accent,
@@ -27,6 +33,7 @@ class MarkdownEditorTheme {
     this.fontSize = 14,
     this.lineHeight = 1.5,
     this.fontFamily,
+    this.profile,
   });
 
   TextStyle get bodyStyle => TextStyle(
@@ -67,6 +74,8 @@ class MarkdownEditorTheme {
       text: text,
       hint: text.withValues(alpha: 0.45),
       link: link,
+      heading: text,
+      subheading: text,
       codeBackground: codeBackground,
       toolbarIcon: text.withValues(alpha: 0.75),
       accent: accent,
@@ -87,20 +96,37 @@ class MarkdownEditorTheme {
     required ColorScheme scheme,
     double fontSize = 15,
     String? fontFamily,
+    ThemeProfile? profile,
   }) {
+    final paper = profile == null
+        ? scheme.surfaceContainerLowest
+        : AppTheme.parseHexColor(profile.slideBackgroundColor);
+    final text = profile == null
+        ? scheme.onSurface
+        : AppTheme.parseHexColor(profile.textColor);
+    final accent = profile == null
+        ? scheme.primary
+        : AppTheme.parseHexColor(profile.accentColor);
     return MarkdownEditorTheme(
-      surface: scheme.surfaceContainerLowest,
-      text: scheme.onSurface,
-      hint: scheme.onSurfaceVariant,
-      link: scheme.primary,
-      codeBackground: scheme.surfaceContainerHigh,
-      toolbarIcon: scheme.onSurfaceVariant,
-      accent: scheme.primary,
-      border: scheme.outlineVariant,
+      surface: paper,
+      text: text,
+      hint: text.withValues(alpha: 0.62),
+      link: accent,
+      heading: text,
+      subheading: accent,
+      codeBackground: profile == null
+          ? scheme.surfaceContainerHigh
+          : AppTheme.parseHexColor(profile.codeBackgroundColor),
+      toolbarIcon: text.withValues(alpha: 0.72),
+      accent: accent,
+      border: profile == null
+          ? scheme.outlineVariant
+          : text.withValues(alpha: 0.22),
       fontSize: fontSize,
       // Het lettertype van de gekozen documentstijl; `null` = het app-lettertype
       // (dan leest een plat document precies als voorheen).
       fontFamily: fontFamily,
+      profile: profile,
     );
   }
 
@@ -117,6 +143,8 @@ class MarkdownEditorTheme {
       text: darkPanel ? AppTheme.gray100 : AppTheme.slate800,
       hint: darkPanel ? AppTheme.gray400 : AppTheme.slate400,
       link: accent,
+      heading: panelText,
+      subheading: panelText,
       codeBackground: darkPanel ? AppTheme.gray700 : AppTheme.slate100,
       toolbarIcon: darkPanel ? AppTheme.gray300 : AppTheme.slate500,
       accent: accent,
@@ -125,4 +153,24 @@ class MarkdownEditorTheme {
       fontFamily: fontFamily,
     );
   }
+}
+
+/// Geeft document-embeds hetzelfde profiel als de omliggende WYSIWYG-editor.
+/// Alleen de documentfactory zet een profiel; notities bij presentaties blijven
+/// daardoor het sobere app-thema gebruiken.
+class DocumentStyleScope extends InheritedWidget {
+  const DocumentStyleScope({
+    super.key,
+    required this.profile,
+    required super.child,
+  });
+
+  final ThemeProfile? profile;
+
+  static ThemeProfile? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<DocumentStyleScope>()?.profile;
+
+  @override
+  bool updateShouldNotify(DocumentStyleScope oldWidget) =>
+      profile != oldWidget.profile;
 }

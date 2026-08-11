@@ -1802,6 +1802,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Koptekst': 'Cabeçalho',
   'Afbeelding niet opgehaald': 'Imagem não obtida',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Não foi possível criar a pasta de destino nem escrever nela. Verifica se a localização configurada está disponível.',

@@ -1795,6 +1795,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Koptekst': 'Горен колонтитул',
   'Afbeelding niet opgehaald': 'Изображението не е извлечено',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Целевата папка не можа да бъде създадена или записана. Проверете дали зададеното местоположение е налично.',

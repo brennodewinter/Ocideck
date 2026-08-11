@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/documentation_service.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/reader/doc_mermaid_view.dart';
@@ -34,6 +35,34 @@ void main() {
   }
 
   group('DocumentMarkdownView', () {
+    testWidgets('documentprofiel kleurt papier en koppen', (tester) async {
+      await pump(
+        tester,
+        const DocumentMarkdownView(
+          '# Hoofdkop\n\n## Accentkop\n',
+          themeProfile: ThemeProfile.vigilis,
+        ),
+      );
+
+      final paper = tester.widget<ColoredBox>(
+        find
+            .descendant(
+              of: find.byType(DocumentMarkdownView),
+              matching: find.byType(ColoredBox),
+            )
+            .first,
+      );
+      expect(paper.color, const Color(0xFFFFFFFF));
+
+      final main = tester.widget<Text>(find.text('Hoofdkop'));
+      final accent = tester.widget<Text>(find.text('Accentkop'));
+      final mainSpan = (main.textSpan! as TextSpan).children!.first as TextSpan;
+      final accentSpan =
+          (accent.textSpan! as TextSpan).children!.first as TextSpan;
+      expect(mainSpan.style?.color, const Color(0xFF111318));
+      expect(accentSpan.style?.color, const Color(0xFFFFB800));
+    });
+
     testWidgets('renders headings, paragraphs and bullets as text', (
       tester,
     ) async {

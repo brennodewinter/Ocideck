@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
+import '../../theme/app_theme.dart';
+import 'markdown_editor_theme.dart';
+
 /// Renders a `divider` block embed — a Markdown thematic break (`---`), which
 /// [MarkdownQuillCodec] turns into `BlockEmbed('divider')` — as a horizontal rule
 /// in the visual (Quill) editor.
@@ -23,13 +26,13 @@ class DividerEmbedBuilder extends EmbedBuilder {
 
   @override
   Widget build(BuildContext context, EmbedContext embedContext) {
+    final profile = DocumentStyleScope.maybeOf(context);
+    final color = profile == null
+        ? Theme.of(context).colorScheme.outlineVariant
+        : AppTheme.parseHexColor(profile.textColor).withValues(alpha: 0.22);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Divider(
-        height: 1,
-        thickness: 1,
-        color: Theme.of(context).colorScheme.outlineVariant,
-      ),
+      child: Divider(height: 1, thickness: 1, color: color),
     );
   }
 }

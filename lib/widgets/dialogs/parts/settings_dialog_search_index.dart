@@ -184,6 +184,12 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.presentation,
+    label: 'Koptekst',
+    section: 'Koptekst',
+    keywords: ['header', 'koptekst', 'document'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.presentation,
     label: 'Paginanummers tonen (rechtsonder)',
     section: 'Footer',
     keywords: ['paginanummer', 'nummering', 'footer'],

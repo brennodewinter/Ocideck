@@ -12,6 +12,21 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [Unreleased]
+
+### Added
+
+- feat(documentstijl): volwassen profielbouwer met profielkaarten, basisvelden,
+  afzonderlijke live A4- en 16:9-voorvertoningen; Vigilis is een ingebouwd
+  profiel. Profielkaarten tonen het logo wanneer dat is ingesteld. Alle
+  presentatievelden blijven rechtstreeks bereikbaar. Een gekozen
+  logo staat naast de kiezer en geldt standaard voor presentatie én document;
+  een document kan bewust afwijken. Documentprofielen hebben echte kop- en
+  voettekst met inline Markdown en meerdere regels, een afzonderlijk instelbare
+  tekst- en achtergrondkleur voor beide banden, logomaat, logopositie en
+  paginanummering in voorbeeld, editor en HTML/print.
+  De ruwe bron- en presentatiebewerker blijven sober.
+
 ## [0.4.2] — 2026-08-10
 
 ### Added

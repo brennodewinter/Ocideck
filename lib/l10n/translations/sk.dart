@@ -1780,6 +1780,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Koptekst': 'Hlavička',
   'Afbeelding niet opgehaald': 'Obrázok sa nenačítal',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Cieľový priečinok sa nepodarilo vytvoriť ani doň zapísať. Skontroluj, či je nastavené umiestnenie dostupné.',

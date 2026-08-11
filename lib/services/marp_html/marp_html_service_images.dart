@@ -4,6 +4,153 @@
 // functions they share the library and are called by bare name.
 part of '../marp_html_service.dart';
 
+Future<({String markdown, List<String> dataUris})> _embedHtmlImages(
+  String markdown,
+  HtmlImageResolver? embedImage,
+  int maxEmbedBytes,
+  bool continuous,
+  ThemeProfile? theme,
+  MarpHtmlService service,
+) async {
+  final embedded = await _embedImages(markdown, embedImage, maxEmbedBytes);
+  if (!continuous || theme == null || !_hasDocumentChrome(theme)) {
+    return embedded;
+  }
+  return _withDocumentChrome(
+    embedded,
+    theme,
+    embedImage,
+    service.loadBytes,
+    maxEmbedBytes,
+  );
+}
+
+Future<String?> _themeLogoDataUri(
+  String path,
+  HtmlImageResolver? embedImage,
+  Future<Uint8List> Function(String asset) loadBytes,
+) async {
+  if (!isBundledAssetPath(path)) return embedImage?.call(path);
+  try {
+    final bytes = await loadBytes(bundledAssetKey(path));
+    final lower = path.toLowerCase();
+    final mime = lower.endsWith('.svg')
+        ? 'image/svg+xml'
+        : lower.endsWith('.jpg') || lower.endsWith('.jpeg')
+        ? 'image/jpeg'
+        : lower.endsWith('.gif')
+        ? 'image/gif'
+        : 'image/png';
+    return 'data:$mime;base64,${base64.encode(bytes)}';
+  } catch (e) {
+    logWarning('MarpHtmlService: documentlogo niet ingesloten', e);
+    return null;
+  }
+}
+
+String _documentChromeMarkdownHtml(String markdown) => markdown
+    .trim()
+    .split('\n')
+    .map(
+      (line) => parseInlineRuns(line).map((run) {
+        var html = MarpHtmlService._htmlText(
+          run.math ? '\$${run.text}\$' : run.text,
+        );
+        if (run.code) html = '<code>$html</code>';
+        if (run.strike) html = '<del>$html</del>';
+        if (run.italic) html = '<em>$html</em>';
+        if (run.bold) html = '<strong>$html</strong>';
+        final link = _safeDocumentChromeLink(run.link);
+        if (link != null && link.isNotEmpty) {
+          html = '<a href="${MarpHtmlService._htmlAttr(link)}">$html</a>';
+        }
+        return html;
+      }).join(),
+    )
+    .join('<br>');
+
+String? _safeDocumentChromeLink(String? raw) {
+  final link = raw?.trim();
+  if (link == null || link.isEmpty) return null;
+  final uri = Uri.tryParse(link);
+  if (uri == null) return null;
+  if (uri.scheme.isEmpty ||
+      const {'http', 'https', 'mailto'}.contains(uri.scheme)) {
+    return link;
+  }
+  return null;
+}
+
+bool _hasDocumentChrome(ThemeProfile theme) =>
+    theme.effectiveDocumentLogoPath?.trim().isNotEmpty == true ||
+    theme.documentHeaderText.trim().isNotEmpty ||
+    theme.documentFooterText.trim().isNotEmpty ||
+    theme.documentShowPageNumbers;
+
+Future<({String markdown, List<String> dataUris})> _withDocumentChrome(
+  ({String markdown, List<String> dataUris}) embedded,
+  ThemeProfile theme,
+  HtmlImageResolver? embedImage,
+  Future<Uint8List> Function(String asset) loadBytes,
+  int maxEmbedBytes,
+) async {
+  final uris = [...embedded.dataUris];
+  String logo = '';
+  final logoPath = theme.effectiveDocumentLogoPath?.trim();
+  if (logoPath != null && logoPath.isNotEmpty) {
+    final logoUri = await _themeLogoDataUri(logoPath, embedImage, loadBytes);
+    if (logoUri != null) {
+      var logoIndex = uris.indexOf(logoUri);
+      if (logoIndex < 0) {
+        final used = uris.fold<int>(
+          logoUri.length,
+          (sum, uri) => sum + uri.length,
+        );
+        if (used > maxEmbedBytes) {
+          throw HtmlEmbedBudgetExceeded(
+            usedBytes: used,
+            limitBytes: maxEmbedBytes,
+          );
+        }
+        logoIndex = uris.length;
+        uris.add(logoUri);
+      }
+      logo = '<img src="$_imagePlaceholder$logoIndex" alt="">';
+    }
+  }
+  final logoAtTop =
+      logo.isNotEmpty && theme.documentLogoPosition.startsWith('top');
+  final logoAtRight = theme.documentLogoPosition.endsWith('right');
+  String band(String kind, String text, {required bool showPage}) {
+    final inBand = kind == 'header' ? logoAtTop : logo.isNotEmpty && !logoAtTop;
+    final logoHtml = inBand
+        ? '<span class="document-logo ${logoAtRight ? 'right' : 'left'}">$logo</span>'
+        : '';
+    final page = showPage
+        ? '<span class="document-page-number" aria-label="Pagina"></span>'
+        : '';
+    return '<div class="document-$kind">'
+        '${inBand && !logoAtRight ? logoHtml : ''}'
+        '<span class="document-$kind-text">${_documentChromeMarkdownHtml(text)}</span>'
+        '$page${inBand && logoAtRight ? logoHtml : ''}</div>';
+  }
+
+  final header = band(
+    'header',
+    theme.documentHeaderText.trim(),
+    showPage: false,
+  );
+  final footer = band(
+    'footer',
+    theme.documentFooterText.trim(),
+    showPage: theme.documentShowPageNumbers,
+  );
+  return (
+    markdown: '$header\n\n${embedded.markdown}\n\n$footer',
+    dataUris: uris,
+  );
+}
+
 // ── Afbeeldingen → data:-URI ──────────────────────────────────────────────
 
 /// Een afbeeldingsverwijzing (`![alt](hier)`), zoals de serialiser hem

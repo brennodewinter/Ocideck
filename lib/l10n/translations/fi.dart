@@ -1773,6 +1773,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Koptekst': 'Ylätunniste',
   'Afbeelding niet opgehaald': 'Kuvaa ei haettu',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Kohdekansiota ei voitu luoda eikä siihen voitu kirjoittaa. Tarkista, että määritetty sijainti on käytettävissä.',

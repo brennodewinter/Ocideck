@@ -415,6 +415,23 @@ extension _SettingsColors on _SettingsDialogState {
           'logoPath',
           Row(
             children: [
+              Container(
+                key: const Key('style-logo-preview'),
+                width: 64,
+                height: 52,
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: AppTheme.slate100,
+                  borderRadius: BorderRadius.circular(7),
+                  border: Border.all(color: AppTheme.slate300),
+                ),
+                child: ThemeProfileLogo(
+                  profile: _themeProfile,
+                  width: 54,
+                  height: 42,
+                ),
+              ),
+              const SizedBox(width: 10),
               Expanded(
                 child: _pathBox(
                   _themeProfile.logoPath ?? l10n.d('Geen logo ingesteld'),
@@ -485,7 +502,7 @@ extension _SettingsColors on _SettingsDialogState {
             ),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            onChanged: (_) => _profileTouched = true,
+            onChanged: (_) => _rebuild(() => _profileTouched = true),
           ),
         ),
       ],
@@ -506,7 +523,7 @@ extension _SettingsColors on _SettingsDialogState {
           hintText: l10n.d('bijv. Vertrouwelijk · {title} · {date}'),
           isDense: true,
         ),
-        onChanged: (_) => _profileTouched = true,
+        onChanged: (_) => _rebuild(() => _profileTouched = true),
       ),
       const SizedBox(height: 6),
       Text(
@@ -857,47 +874,6 @@ extension _SettingsColors on _SettingsDialogState {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _stylePreview() {
-    final l10n = context.l10n;
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      decoration: BoxDecoration(
-        color: AppTheme.parseHexColor(_themeProfile.titleBackgroundColor),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            l10n.d('Voorvertoning'),
-            style: _fontStyle(
-              _themeProfile.fontFamily,
-              TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: AppTheme.parseHexColor(_themeProfile.titleTextColor),
-              ),
-            ),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            l10n.d('De snelle bruine vos springt over de luie hond.'),
-            style: _fontStyle(
-              _themeProfile.fontFamily,
-              TextStyle(
-                fontSize: 12,
-                color: AppTheme.parseHexColor(
-                  _themeProfile.titleTextColor,
-                ).withValues(alpha: 0.72),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

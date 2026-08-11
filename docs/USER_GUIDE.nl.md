@@ -4241,6 +4241,56 @@ data in `data/*.json`), een **tabel** (een GFM-pijptabel), een
 **Mermaid**-diagram of een **afbeelding** (gekopieerd naar `images/`). Elk blijft
 platte, parseerbare tekst zodat het bestand elders blijft openen.
 
+### Een document een stijl geven
+
+Met de knop **Stijl** in de werkbalk kies je één documentbrede stijl: hetzelfde
+soort profiel dat presentaties gebruiken, bijvoorbeeld *LibreKAT*, *Standaard*,
+*Security*, het ingebouwde *Vigilis* of een eigen profiel. De gekozen stijl kleurt
+het visuele schrijfoppervlak en de live documentweergave mee terwijl je werkt. De
+**Bron**-bewerker blijft bewust neutrale, monospaced Markdown: de bron blijft gewone,
+leesbare tekst en doet niet alsof hij het einddocument is.
+
+De keuze schrijft alleen een kleine `theme:`-regel in de front matter. **Geen
+(platte tekst)** haalt die regel weer weg. Een document zonder stijl blijft dus een
+gewone `.md` zonder front matter; een stijl maakt er nooit een presentatie van. Bestaat
+een genoemde profielnaam niet meer, dan valt OciDeck terug op de standaard in plaats
+van het document niet meer te openen.
+
+### Een documentstijl maken
+
+Onder *Instellingen → Presentatie* beheer je de profielen voor documenten én
+presentaties. De profielkaarten tonen waar beschikbaar het logo en kiezen een
+bestaand profiel of maken een nieuw profiel.
+Daar staat ook het ingebouwde **Vigilis**-profiel. Kies boven de bewerker tussen
+**Document** en **Presentatie**. Document toont de compacte instellingen voor
+achtergrond, tekst, accent en lettertype naast de live A4-voorvertoning met titelblad
+of inhoud. Presentatie toont alle bestaande lettertype-, kleur-, animatie-, logo-,
+footer- en slotdia-instellingen naast een echte 16:9-diaweergave. Een gekozen logo
+staat ook als miniatuur naast de bestandskiezer en is standaard hetzelfde voor
+presentaties en documenten. In de documentinstellingen kun je die koppeling uitzetten
+en een ander documentlogo kiezen — of daar bewust geen logo gebruiken. Daar stel je
+ook de breedte van het documentlogo in van 32 tot 480 px; tot je die wijzigt volgt deze
+de maat van het presentatielogo. Daarnaast stel je de positie, **koptekst**,
+**footertekst** en **paginanummers** in. Kop en footer ondersteunen meerdere regels en
+inline Markdown (`**vet**`, `*cursief*`, `` `code` ``, `~~doorhalen~~` en links).
+Voor beide banden kies je samen een eigen tekst- en achtergrondkleur; zolang je die
+niet wijzigt volgen ze de tekst- en papierkleur van het document. De A4-preview
+toont deze paginadelen meteen; dezelfde kop en footer staan rond het visuele
+schrijfoppervlak en de live preview. In HTML staan ze rond het document en bij
+afdrukken/opslaan als PDF herhalen ze boven- en onderaan de pagina. De Markdownbron
+blijft onveranderd; deze gegevens reizen in het stijlprofiel, niet in de inhoud.
+De presentatiebewerker zelf blijft bewust sober en presentatiegericht.
+
+Onder *Instellingen → Algemeen → Documentstijl* kun je daarnaast een
+**standaard-documentstijl** kiezen en die desgewenst afdwingen als huisstijl. Dat zijn
+weergave- en exportkeuzes; alleen de knop **Stijl** in het document schrijft `theme:`
+naar het bestand.
+
+Bij HTML-export geeft OciDeck de effectieve stijl door aan de renderer (afgedwongen
+stijl, documentkeuze, daarna standaard). Een `.ocideck`-pakketexport bevat eveneens
+het afgeleide exportdeck met dat effectieve profiel. Een Markdown-export blijft alleen
+Markdown-inhoud en is geen stijldrager.
+
 ### Een document exporteren
 
 **Exporteren is niet Opslaan.** Opslaan schrijft je byte-getrouwe origineel;

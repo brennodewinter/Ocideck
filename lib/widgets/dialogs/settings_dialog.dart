@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math' as math;
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,10 +52,12 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
 import '../../models/privacy_disposition.dart';
 import '../editors/advanced_section.dart';
+import '../document_page_chrome.dart';
 import '../language_flag.dart';
 import '../privacy_badge.dart';
 import '../privacy_statement_content.dart';
 import '../reader/document_reader_screen.dart';
+import '../reader/document_markdown_view.dart';
 import '../reader/documentation_search_tab.dart';
 import '../slides/image_zoom_dialog.dart';
 import 'hex_color_dialog.dart';
@@ -92,6 +93,7 @@ part 'parts/settings_dialog_general.dart';
 part 'parts/settings_dialog_storage.dart';
 part 'parts/settings_dialog_collaboration.dart';
 part 'parts/settings_dialog_presentation.dart';
+part 'parts/settings_dialog_style_builder.dart';
 part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
 part 'parts/settings_dialog_profile.dart';
@@ -223,6 +225,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// decide whether to apply the profile to the currently open presentation.
   bool _profileTouched = false;
 
+  bool _stylePreviewShowsContent = true;
+  bool _stylePreviewShowsPresentation = false;
+
   String? _highlightedThemeField;
   final _themeFieldKeys = <String, GlobalKey>{};
 
@@ -351,13 +356,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// instance members of a State subclass), so they route through this wrapper.
   void _rebuild(VoidCallback fn) => setState(fn);
 
-  List<ThemeProfile> get _profiles {
-    final seen = <String>{};
-    return [
-      for (final profile in ref.watch(settingsProvider).themeProfiles)
-        if (seen.add(profile.name)) profile,
-    ];
-  }
+  List<ThemeProfile> get _profiles =>
+      _availableStyleProfiles(ref.watch(settingsProvider).themeProfiles);
 
   /// Alle lokale verbindingen, in lijstvolgorde — het startpunt voor de
   /// mapkiezers hieronder.
@@ -832,12 +832,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         : const EdgeInsets.symmetric(horizontal: 40, vertical: 28);
     final availableWidth = screen.width - dialogInset.horizontal;
     final availableHeight = screen.height - dialogInset.vertical;
-    final dialogWidth = math
-        .min(
-          math.max(640.0, math.min(920.0 * scale, screen.width * 0.88)),
-          availableWidth,
-        )
-        .toDouble();
+    final dialogWidth = _settingsDialogWidth(
+      scale: scale,
+      screenWidth: screen.width,
+      availableWidth: availableWidth,
+      styleBuilder: _selectedTab == SettingsSection.presentation,
+    );
     final dialogHeight = math
         .min(
           math.max(560.0, math.min(760.0 * scale, screen.height * 0.86)),

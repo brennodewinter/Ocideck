@@ -1748,6 +1748,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Koptekst': 'nav Dung ghItlh',
   'Afbeelding niet opgehaald': 'mIllogh Suqlu\'be\'',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'DoS pa\' chenmoHlu\'laHbe\' ghap ghItlhlu\'laHbe\'. wIvlu\'bogh Daq lo\'laH\'a\', yI\'ol.',

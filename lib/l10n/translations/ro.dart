@@ -1790,6 +1790,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Koptekst': 'Antet',
   'Afbeelding niet opgehaald': 'Imaginea nu a fost preluată',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Dosarul de destinație nu a putut fi creat sau scris. Verifică dacă locația configurată este disponibilă.',

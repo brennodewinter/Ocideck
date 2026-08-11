@@ -486,6 +486,14 @@ deze velden (met standaardwaarden):
 | `logoPath` | `null` | Pad naar het logo (relatief pad in `logos/`). |
 | `logoPosition` | `bottom-right` | `top-left`/`top-right`/`bottom-left`/`bottom-right`. |
 | `logoSize` | `96` | Logogrootte in px. |
+| `documentLogoPath` | `null` | Afwijkend documentlogo. `null` deelt `logoPath`; `""` schakelt het logo voor documenten bewust uit. |
+| `documentLogoPosition` | `top-right` | Positie van het effectieve documentlogo in de kop- of voettekst. |
+| `documentLogoSize` | `null` | Breedte van het documentlogo in px (`32`–`480`). `null` volgt `logoSize`. |
+| `documentHeaderText` | `""` | Herhalende meerregelige documentkop met inline Markdown. |
+| `documentFooterText` | `""` | Herhalende meerregelige documentfooter met inline Markdown. |
+| `documentBandTextColor` | `null` | Tekstkleur van kop en footer. `null` volgt `textColor`. |
+| `documentBandBackgroundColor` | `null` | Achtergrondkleur van kop en footer. `null` volgt `slideBackgroundColor`. |
+| `documentShowPageNumbers` | `false` | Toon het paginanummer rechtsonder op documentpagina's. |
 | `fontFamily` | `Arial` | Lettertypefamilie van de presentatie. |
 | `footerText` | `""` | Vrije voettekst; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |
 | `footerShowPageNumbers` | `false` | Toon "pagina / totaal" rechtsonder. |
@@ -522,7 +530,8 @@ Het bestand is platte UTF-8-JSON — een envelop rond dezelfde profiel-JSON als
   "ocideck": "style-profile",
   "version": 1,
   "profile": { "name": "…", "accentColor": "#2E7D64", "…": "…" },
-  "logo": { "mime": "image/png", "data": "<base64>" }
+  "logo": { "mime": "image/png", "data": "<base64>" },
+  "documentLogo": { "mime": "image/png", "data": "<base64>" }
 }
 ```
 
@@ -532,6 +541,7 @@ Het bestand is platte UTF-8-JSON — een envelop rond dezelfde profiel-JSON als
 | `version` | Envelopversie (momenteel `1`). Een hoger getal wordt geweigerd in plaats van half gelezen. |
 | `profile` | Het profiel, precies de veldenset uit §3.2. Onbekende/ontbrekende velden vallen terug op standaardwaarden. |
 | `logo` | **Optioneel.** Een ingebed eigen logo. `mime` is informatief — de importeur leidt het type opnieuw af uit de bytes zelf. |
+| `documentLogo` | **Optioneel.** Het afzonderlijk ingestelde eigen documentlogo, met dezelfde validatie en grenzen als `logo`. |
 
 De import aanvaardt de extensies `.ocideckstyle` en `.json`. Grenzen: 16 MiB per
 bestand, 8 MiB per ingebed logo.
@@ -546,8 +556,12 @@ ontvanger, dus het wordt per soort behandeld:
   `profile.logoPath` wordt als `null` geschreven. Dit houdt het bestand draagbaar en
   voorkomt dat het lokale pad van de afzender uitlekt (dat hun gebruikersnaam bevat).
 
-Bij de import worden de ingebedde bytes teruggeschreven naar een echt bestand en wijst `logoPath`
-daarnaar: een `data:`-URI blijft nooit in `logoPath` staan, omdat geen van de
+`documentLogoPath: null` betekent dat het document `logoPath` deelt; een expliciet
+lege string betekent geen documentlogo. Een eigen afwijking reist in `documentLogo`,
+zoals het presentatielogo in `logo` reist.
+
+Bij de import worden de ingebedde bytes teruggeschreven naar echte bestanden en wijzen
+beide padvelden daarnaar: een `data:`-URI blijft nooit in een van beide paden staan, omdat geen van de
 gebruikers (slidevoorbeeld, rasteraar, presentator) er een oplost.
 
 > **Webvoorbehoud.** Op desktop belandt het herstelde logo in een map `style_logos/`

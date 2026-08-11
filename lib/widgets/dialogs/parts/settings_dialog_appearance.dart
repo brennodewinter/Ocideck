@@ -424,39 +424,4 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
       ),
     );
   }
-
-  /// A banner shown on tabs that edit the active style profile, so it is clear
-  /// these settings belong to the loaded profile (and which one).
-  Widget _profileScopeBanner() {
-    final name = _themeProfile.name;
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: BoxDecoration(
-        color: AppTheme.accent.withValues(alpha: 0.08),
-        borderRadius: BorderRadius.circular(8),
-        border: Border(left: BorderSide(color: AppTheme.accentFg, width: 3)),
-      ),
-      child: Row(
-        children: [
-          Icon(Icons.style_outlined, size: 16, color: AppTheme.accentFg),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(text: context.l10n.d('Presentatiestijl: ')),
-                  TextSpan(
-                    text: '“$name”',
-                    style: const TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                ],
-              ),
-              style: TextStyle(fontSize: 12, color: AppTheme.slate700),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

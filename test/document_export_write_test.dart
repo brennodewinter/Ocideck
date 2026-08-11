@@ -7,6 +7,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/document_export_service.dart';
 import 'package:ocideck/services/export_bundle.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -59,6 +60,22 @@ void main() {
       // Geen deck-scaffold: een document-export draagt geen `marp:`-kop.
       expect(content.contains('marp: true'), isFalse);
     });
+  });
+
+  test('exportbundel bewaart de opgeloste documentstijl', () async {
+    final bundle = await buildDocumentExportBundle(
+      body,
+      projectPath: null,
+      profile: PrivacyExportProfile.full,
+      ownIdentity: OwnIdentity.empty,
+      regions: defaultPrivacyRegions,
+      disabledRules: const {},
+      markdownService: MarkdownService(),
+      theme: ThemeProfile.vigilis,
+    );
+
+    expect(bundle.audience.deck.themeProfile.name, 'Vigilis');
+    expect(bundle.audience.deck.themeProfile.accentColor, '#FFB800');
   });
 
   test('html-export schrijft één doorlopend document, geen dia', () async {

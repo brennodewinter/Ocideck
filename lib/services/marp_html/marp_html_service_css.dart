@@ -103,24 +103,56 @@ String exportBaseCss() => '$_structuralCss\n$_reportingCss\n$_menuCss';
 /// Top-level in dit part-bestand (en niet in `_themedCss` in de
 /// hoofdbibliotheek) zodat die onder de bestandsgrensratchet blijft. GÉÉN
 /// externe `url()`/`@font-face`: de CSP is het vangnet, niet de vergunning.
-String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) =>
-    '.document{max-width:46rem;margin:24px auto;padding:32px 40px;'
-    'background:${t.slideBackgroundColor};color:${t.textColor};'
-    'font-family:$family;line-height:1.65;border-radius:4px;'
-    'box-shadow:0 4px 24px rgba(0,0,0,.4)}'
-    '.document h1{color:var(--ocideck-title-color,${t.textColor})}'
-    '.document h2{color:${t.accentColor}}'
-    '.document a{color:${t.accentColor}}'
-    '.document pre{background:${t.codeBackgroundColor};color:${t.codeTextColor};'
-    'border:1px solid ${t.codeTextColor}38;border-radius:6px;padding:16px;'
-    'font-family:$codeFamily}'
-    '.document pre code{color:${t.codeTextColor};background:transparent}'
-    '.document code{font-family:$codeFamily}'
-    '.document blockquote{border-left:4px solid ${t.accentColor};margin:.6em 0;'
-    'padding-left:16px;opacity:.85}'
-    '.document th{background:${t.tableHeaderBackgroundColor};'
-    'color:${t.tableHeaderTextColor};border:1px solid #ccc;padding:6px 12px}'
-    '.document td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px}';
+String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
+  final logoSize = t.effectiveDocumentLogoSize;
+  final bandText = t.effectiveDocumentBandTextColor;
+  final bandBackground = t.effectiveDocumentBandBackgroundColor;
+  final logoHeight = (logoSize * 0.5).round().clamp(32, 240);
+  final hasLogo = t.effectiveDocumentLogoPath?.trim().isNotEmpty == true;
+  final headerPadding = math.max(
+    76,
+    hasLogo && t.documentLogoPosition.startsWith('top') ? logoHeight + 36 : 0,
+  );
+  final footerPadding = math.max(
+    68,
+    hasLogo && t.documentLogoPosition.startsWith('bottom')
+        ? logoHeight + 36
+        : 0,
+  );
+  return '.document{max-width:46rem;margin:24px auto;padding:32px 40px;'
+      'background:${t.slideBackgroundColor};color:${t.textColor};'
+      'font-family:$family;line-height:1.65;border-radius:4px;'
+      'box-shadow:0 4px 24px rgba(0,0,0,.4)}'
+      '.document h1{color:var(--ocideck-title-color,${t.textColor})}'
+      '.document h2{color:${t.accentColor}}'
+      '.document a{color:${t.accentColor}}'
+      '.document pre{background:${t.codeBackgroundColor};color:${t.codeTextColor};'
+      'border:1px solid ${t.codeTextColor}38;border-radius:6px;padding:16px;'
+      'font-family:$codeFamily}'
+      '.document pre code{color:${t.codeTextColor};background:transparent}'
+      '.document code{font-family:$codeFamily}'
+      '.document blockquote{border-left:4px solid ${t.accentColor};margin:.6em 0;'
+      'padding-left:16px;opacity:.85}'
+      '.document th{background:${t.tableHeaderBackgroundColor};'
+      'color:${t.tableHeaderTextColor};border:1px solid #ccc;padding:6px 12px}'
+      '.document td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px}'
+      '.document-header,.document-footer{display:flex;align-items:center;gap:14px;'
+      'min-height:42px;color:$bandText;background:$bandBackground;font-size:12px}'
+      '.document-header{border-bottom:1px solid ${t.accentColor}8c;margin-bottom:24px}'
+      '.document-footer{border-top:1px solid ${t.accentColor}8c;margin-top:24px}'
+      '.document-header-text,.document-footer-text{flex:1;min-width:0}'
+      '.document-page-number{white-space:nowrap;font-variant-numeric:tabular-nums}'
+      '.document-page-number::after{content:"1"}'
+      '.document-logo{display:inline-flex;align-items:center;flex:0 0 auto}'
+      '.document-logo img{display:block;width:${logoSize}px;max-width:70%;'
+      'max-height:${logoHeight}px;height:auto;object-fit:contain}'
+      '@media print{.document{padding-top:${headerPadding}px;'
+      'padding-bottom:${footerPadding}px}'
+      '.document-header,.document-footer{position:fixed;left:40px;right:40px;'
+      'z-index:2;background:$bandBackground}'
+      '.document-header{top:0}.document-footer{bottom:0}'
+      '.document-page-number::after{content:counter(page)}}';
+}
 
 /// De vorm van het keuze-menuraster (#1162). Thema-onafhankelijk, net als de
 /// rapportage-opmaak: alleen de layout staat hier, de kleuren (rand/vulling uit

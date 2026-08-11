@@ -2750,6 +2750,7 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Koptekst': 'Üstbilgi',
   'Afbeelding niet opgehaald': 'Görsel alınamadı',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Hedef klasör oluşturulamadı veya içine yazılamadı. Ayarlanan konumun kullanılabilir olup olmadığını denetleyin.',

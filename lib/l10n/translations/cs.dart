@@ -1776,6 +1776,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Koptekst': 'Záhlaví',
   'Afbeelding niet opgehaald': 'Obrázek se nepodařilo načíst',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Cílovou složku se nepodařilo vytvořit ani do ní zapsat. Zkontrolujte, zda je nastavené umístění dostupné.',

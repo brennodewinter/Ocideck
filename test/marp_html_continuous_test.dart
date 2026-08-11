@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 
 /// Reads the vendored libraries straight from the repo (tests run at the root).
@@ -87,6 +89,80 @@ void main() {
       expect(html, contains('.document{'));
     });
 
+    test('het stijllogo reist zichtbaar en offline mee', () async {
+      final service = MarpHtmlService(
+        loadAsset: _diskLoader,
+        loadBytes: (_) async => Uint8List.fromList([1, 2, 3, 4]),
+      );
+      final html = await service.build(
+        _md,
+        continuous: true,
+        theme: ThemeProfile.vigilis,
+      );
+
+      expect(html, contains('class="document-logo right"'));
+      expect(html, contains('data:image/png;base64,AQIDBA=='));
+      expect(html, contains('.document-logo img{'));
+    });
+
+    test(
+      'kop- en voettekst reizen mee en gelden alleen voor documenten',
+      () async {
+        final service = MarpHtmlService(loadAsset: _diskLoader);
+        const theme = ThemeProfile(
+          documentLogoSize: 240,
+          documentHeaderText: '**Bestuurlijk rapport**\nTweede regel',
+          documentFooterText: 'Vigilis · *Vertrouwelijk*',
+          documentBandTextColor: '#F8FAFC',
+          documentBandBackgroundColor: '#172033',
+          documentShowPageNumbers: true,
+        );
+
+        final document = await service.build(
+          _md,
+          continuous: true,
+          theme: theme,
+        );
+        expect(document, contains('class="document-header"'));
+        expect(
+          document,
+          contains('<strong>Bestuurlijk rapport</strong><br>Tweede regel'),
+        );
+        expect(document, contains('class="document-footer"'));
+        expect(document, contains('Vigilis · <em>Vertrouwelijk</em>'));
+        expect(document, contains('class="document-page-number"'));
+        expect(document, contains('width:240px'));
+        expect(document, contains('color:#F8FAFC'));
+        expect(document, contains('background:#172033'));
+        expect(document, contains('@media print'));
+
+        final slides = await service.build(
+          _md,
+          continuous: false,
+          theme: theme,
+        );
+        expect(slides, isNot(contains('class="document-header"')));
+        expect(slides, isNot(contains('class="document-footer"')));
+      },
+    );
+
+    test('documentchrome laat onveilige Markdown-links niet door', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(
+        _md,
+        continuous: true,
+        theme: const ThemeProfile(
+          documentHeaderText:
+              '[veilig](https://example.test) '
+              '[onveilig](javascript:alert(1))',
+        ),
+      );
+
+      expect(html, contains('href="https://example.test"'));
+      expect(html, isNot(contains('href="javascript:')));
+      expect(html, contains('onveilig'));
+    });
+
     test(
       'blijft self-contained, met CSP en zonder externe url() in <style>',
       () async {
@@ -127,5 +203,6 @@ void main() {
     expect(html.contains('<section class="slide'), isTrue);
     expect('<section class="slide'.allMatches(html).length, greaterThan(1));
     expect(html, isNot(contains('<section class="document"')));
+    expect(html, isNot(contains('class="document-logo')));
   });
 }

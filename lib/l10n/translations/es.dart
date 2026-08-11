@@ -729,6 +729,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Koptekst': 'Encabezado',
   'Afbeelding niet opgehaald': 'Imagen no obtenida',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'No se pudo crear la carpeta de destino ni escribir en ella. Comprueba que la ubicación configurada está disponible.',

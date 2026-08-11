@@ -1776,6 +1776,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Koptekst': 'Chopfziile',
   'Afbeelding niet opgehaald': 'Bild nid abgrüeft',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'De Zielornder het nid chönne aagleit oder bschribe wärde. Lueg, öb de igstellt Ort verfüegbar isch.',

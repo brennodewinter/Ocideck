@@ -1772,6 +1772,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Koptekst': 'Sidhuvud',
   'Afbeelding niet opgehaald': 'Bilden hämtades inte',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Målmappen kunde inte skapas eller skrivas till. Kontrollera att den inställda platsen är tillgänglig.',

@@ -13,6 +13,7 @@ import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
+import 'package:ocideck/widgets/theme_profile_logo.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -139,6 +140,49 @@ void main() {
     );
     expect(view.markdown, '# Kop\n\nTekst.');
   });
+
+  testWidgets(
+    'Vigilis kleurt document en live preview maar niet de Markdownbron',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final n = DocumentNotifier()
+        ..loadDocument(
+          MarkdownDocument.parse(
+            '---\ntheme: Vigilis\n---\n\n# Rapport\n\n## Bevindingen\n\nTekst.',
+          ),
+        );
+      await tester.pumpWidget(harness(n));
+      await tester.pumpAndSettle();
+
+      final visual = tester.widget<MarkdownNotesEditor>(
+        find.byType(MarkdownNotesEditor),
+      );
+      expect(visual.editorTheme.surface, const Color(0xFFFFFFFF));
+      expect(visual.editorTheme.text, const Color(0xFF111318));
+      expect(visual.editorTheme.accent, const Color(0xFFFFB800));
+      expect(find.byType(ThemeProfileLogo), findsOneWidget);
+      expect(find.byKey(const Key('document-header-text')), findsOneWidget);
+      expect(find.text('Bestuurlijk rapport'), findsOneWidget);
+      expect(find.byKey(const Key('document-footer-text')), findsOneWidget);
+      expect(find.byKey(const Key('document-page-number')), findsOneWidget);
+
+      await openSource(tester);
+      final preview = tester.widget<DocumentMarkdownView>(
+        find.byType(DocumentMarkdownView),
+      );
+      expect(preview.themeProfile?.name, 'Vigilis');
+      expect(preview.chartTheme?.name, 'Vigilis');
+      expect(find.byType(ThemeProfileLogo), findsOneWidget);
+      expect(find.byKey(const Key('document-header-text')), findsOneWidget);
+      expect(find.byKey(const Key('document-footer-text')), findsOneWidget);
+
+      final source = tester.widget<TextField>(find.byType(TextField));
+      expect(source.style?.fontFamily, 'monospace');
+      expect(n.currentState.document!.body, contains('## Bevindingen'));
+    },
+  );
 
   testWidgets('typen in bron stroomt live naar de notifier', (tester) async {
     final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse(''));

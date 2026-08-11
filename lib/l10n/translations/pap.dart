@@ -732,6 +732,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Koptekst': 'Kabesera',
   'Afbeelding niet opgehaald': 'Imagen no a wòrdu haña',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'No por a krea ni skirbi den e karpeta di destino. Kontrolá si e lokashon konfigurá ta disponibel.',

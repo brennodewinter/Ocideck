@@ -107,39 +107,100 @@ bool _withinLogoCap(Uint8List? bytes) =>
   }
 }
 
+/// Leest een door de gebruiker vertrouwd stijllogo voor een render/export.
+/// Anders dan documentafbeeldingen mag dit buiten de projectmap staan.
+Future<Uint8List?> readStyleLogoBytes(
+  String path, {
+  String? projectPath,
+}) async {
+  try {
+    if (WebAssetStore.isMemPath(path)) {
+      final bytes = WebAssetStore.bytesFor(path);
+      return _withinLogoCap(bytes) ? bytes : null;
+    }
+    if (kIsWeb) return null;
+    final resolved = resolveTrustedAssetPath(path, projectPath);
+    if (resolved == null) return null;
+    final file = File(resolved);
+    if (!await file.exists() ||
+        await file.length() > FileService.maxStyleProfileLogoBytes) {
+      return null;
+    }
+    final bytes = await file.readAsBytes();
+    return _withinLogoCap(bytes) ? bytes : null;
+  } catch (e) {
+    logWarning('FileService: logo voor stijlprofiel-export onleesbaar', e);
+    return null;
+  }
+}
+
+Future<({Map<String, Object?>? embedded, bool omitted})> _encodeStyleLogo(
+  String? path,
+  String? projectPath,
+) async {
+  final trimmed = path?.trim();
+  if (trimmed == null || trimmed.isEmpty || isBundledAssetPath(trimmed)) {
+    return (embedded: null, omitted: false);
+  }
+  final bytes = await readStyleLogoBytes(trimmed, projectPath: projectPath);
+  final mime = bytes == null ? null : ImageService.imageMimeFromBytes(bytes);
+  return (
+    embedded: bytes == null || mime == null
+        ? null
+        : {'mime': mime, 'data': base64.encode(bytes)},
+    omitted: bytes == null || mime == null,
+  );
+}
+
+Future<String?> _materializeStyleLogo(
+  Uint8List bytes,
+  String mime,
+  String profileName,
+  Directory? baseDir,
+) async {
+  final ext = ImageService.extensionForImageMime(mime);
+  if (kIsWeb) {
+    return WebAssetStore.put(
+      bytes,
+      name: '${sanitizeFilename(profileName, fallback: 'stijlprofiel')}.$ext',
+    );
+  }
+  try {
+    final base = baseDir ?? await getApplicationSupportDirectory();
+    final dir = Directory(p.join(base.path, 'style_logos'));
+    await dir.create(recursive: true);
+    final target = File(p.join(dir.path, '${const Uuid().v4()}.$ext'));
+    await writeBytesAtomic(target, bytes);
+    return target.path;
+  } catch (e) {
+    logWarning('FileService: logo van stijlprofiel niet weggeschreven', e);
+    return null;
+  }
+}
+
+StyleProfileBytes _encodeStyleProfileEnvelope(
+  Map<String, Object?> envelope, {
+  required bool logoOmitted,
+}) {
+  Uint8List encode() =>
+      Uint8List.fromList(utf8.encode(_styleProfileEncoder.convert(envelope)));
+
+  var bytes = encode();
+  if (bytes.length > FileService.maxStyleProfileBytes &&
+      envelope.remove('documentLogo') != null) {
+    (envelope['profile']! as Map<String, Object?>)['documentLogoPath'] = '';
+    logoOmitted = true;
+    bytes = encode();
+  }
+  return StyleProfileBytes(bytes, logoOmitted: logoOmitted);
+}
+
 extension FileServiceStyleProfile on FileService {
   /// Bestandsnaam-veilige variant van een profielnaam. Gedeelde sanitizer uit
   /// `lib/utils/safe_filename.dart`; een profielnaam is vrije invoer, dus `/`
   /// en `..` moeten weg voordat hij een pad wordt.
   String _safeProfileFileName(String name) =>
       sanitizeFilename(name, fallback: 'stijlprofiel');
-
-  /// De bytes achter een eigen logo, of null wanneer ze niet te lezen zijn:
-  /// een verdwenen bestand, een lege mem:-store na een herlaad, of te groot.
-  /// Ingebouwde `asset:`-logo's komen hier nooit: die reizen als verwijzing.
-  Future<Uint8List?> _readLogoBytes(String path, String? projectPath) async {
-    try {
-      if (WebAssetStore.isMemPath(path)) {
-        final bytes = WebAssetStore.bytesFor(path);
-        return _withinLogoCap(bytes) ? bytes : null;
-      }
-      if (kIsWeb) return null; // Geen bestandssysteem.
-      // Een logo is vertrouwde stijl-config (geen deck-invoer), dus een
-      // absoluut pad buiten de projectmap mag — zie resolveTrustedAssetPath.
-      final resolved = resolveTrustedAssetPath(path, projectPath);
-      if (resolved == null) return null;
-      final file = File(resolved);
-      if (!await file.exists()) return null;
-      if (await file.length() > FileService.maxStyleProfileLogoBytes) {
-        return null;
-      }
-      final bytes = await file.readAsBytes();
-      return _withinLogoCap(bytes) ? bytes : null;
-    } catch (e) {
-      logWarning('FileService: logo voor stijlprofiel-export onleesbaar', e);
-      return null;
-    }
-  }
 
   /// Bouw de bytes van een `.ocideckstyle`-bestand: het profiel als JSON in een
   /// envelope met marker en versie.
@@ -153,34 +214,30 @@ extension FileServiceStyleProfile on FileService {
     String? projectPath,
   }) async {
     final json = profile.toJson();
-    Map<String, Object?>? logo;
-    var logoOmitted = false;
-
-    final path = profile.logoPath?.trim();
-    if (path != null && path.isNotEmpty && !isBundledAssetPath(path)) {
-      final bytes = await _readLogoBytes(path, projectPath);
-      final mime = bytes == null
-          ? null
-          : ImageService.imageMimeFromBytes(bytes);
-      if (bytes != null && mime != null) {
-        // `mime` is informatief: de import leidt het type opnieuw uit de bytes
-        // af en vertrouwt dit veld niet.
-        logo = {'mime': mime, 'data': base64.encode(bytes)};
-      } else {
-        logoOmitted = true;
-      }
+    final logo = await _encodeStyleLogo(profile.logoPath, projectPath);
+    final documentLogo = await _encodeStyleLogo(
+      profile.documentLogoPath,
+      projectPath,
+    );
+    if (profile.logoPath?.trim().isNotEmpty == true &&
+        !isBundledAssetPath(profile.logoPath!.trim())) {
       json['logoPath'] = null;
+    }
+    if (profile.documentLogoPath?.trim().isNotEmpty == true &&
+        !isBundledAssetPath(profile.documentLogoPath!.trim())) {
+      json['documentLogoPath'] = '';
     }
 
     final envelope = <String, Object?>{
       'ocideck': _styleProfileMarker,
       'version': _styleProfileFormatVersion,
       'profile': json,
-      'logo': ?logo,
+      'logo': ?logo.embedded,
+      'documentLogo': ?documentLogo.embedded,
     };
-    return StyleProfileBytes(
-      Uint8List.fromList(utf8.encode(_styleProfileEncoder.convert(envelope))),
-      logoOmitted: logoOmitted,
+    return _encodeStyleProfileEnvelope(
+      envelope,
+      logoOmitted: logo.omitted || documentLogo.omitted,
     );
   }
 
@@ -221,43 +278,6 @@ extension FileServiceStyleProfile on FileService {
       saved: true,
       logoOmitted: built.logoOmitted,
     );
-  }
-
-  /// Zet ingesloten logo-bytes terug in opslag en geef het pad dat de renderlaag
-  /// aankan; null wanneer dat niet lukte.
-  ///
-  /// Een `data:`-URI in `logoPath` laten staan werkt niet: geen van de
-  /// consumenten (preview, rasterizer, presentator) rendert die. Desktop krijgt
-  /// daarom een echt bestand onder de app-support-map — een stijlprofiel is
-  /// globaal en moet een herstart overleven. Op web bestaat geen persistente
-  /// byte-opslag: daar gaat het logo de in-memory store in en is het ná een
-  /// herlaad weg (de rest van het profiel blijft intact).
-  Future<String?> _materializeLogo(
-    Uint8List bytes,
-    String mime,
-    String profileName,
-    Directory? baseDir,
-  ) async {
-    final ext = ImageService.extensionForImageMime(mime);
-    if (kIsWeb) {
-      return WebAssetStore.put(
-        bytes,
-        name: '${_safeProfileFileName(profileName)}.$ext',
-      );
-    }
-    try {
-      final base = baseDir ?? await getApplicationSupportDirectory();
-      final dir = Directory(p.join(base.path, 'style_logos'));
-      await dir.create(recursive: true);
-      // Een uuid-naam: twee profielen met dezelfde naam mogen elkaars logo
-      // niet overschrijven.
-      final target = File(p.join(dir.path, '${const Uuid().v4()}.$ext'));
-      await writeBytesAtomic(target, bytes);
-      return target.path;
-    } catch (e) {
-      logWarning('FileService: logo van stijlprofiel niet weggeschreven', e);
-      return null;
-    }
   }
 
   /// Lees een `.ocideckstyle`-envelope naar een profiel. Doet géén naam-uniek-
@@ -317,7 +337,7 @@ extension FileServiceStyleProfile on FileService {
     final embedded = _embeddedLogo(rawLogo);
     if (embedded != null) {
       final materialized = await _materializeStyleLogoSafely(
-        () => _materializeLogo(
+        () => _materializeStyleLogo(
           embedded.bytes,
           embedded.mime,
           profile.name,
@@ -348,6 +368,36 @@ extension FileServiceStyleProfile on FileService {
           logoPath.isNotEmpty &&
           !isBundledAssetPath(logoPath)) {
         profile = profile.copyWith(clearLogo: true);
+      }
+    }
+
+    final rawDocumentLogo = envelope['documentLogo'];
+    final embeddedDocumentLogo = _embeddedLogo(rawDocumentLogo);
+    if (embeddedDocumentLogo != null) {
+      final materialized = await _materializeStyleLogoSafely(
+        () => _materializeStyleLogo(
+          embeddedDocumentLogo.bytes,
+          embeddedDocumentLogo.mime,
+          '${profile.name}-document',
+          logoBaseDir,
+        ),
+      );
+      if (materialized.budgetExceeded) {
+        return const StyleProfileImportOutcome.failed(
+          StyleProfileImportFailure.memoryBudgetExceeded,
+        );
+      }
+      profile = profile.copyWith(documentLogoPath: materialized.path ?? '');
+      logoOmitted = logoOmitted || materialized.path == null;
+    } else if (rawDocumentLogo != null) {
+      profile = profile.copyWith(documentLogoPath: '');
+      logoOmitted = true;
+    } else {
+      final documentLogoPath = profile.documentLogoPath?.trim();
+      if (documentLogoPath != null &&
+          documentLogoPath.isNotEmpty &&
+          !isBundledAssetPath(documentLogoPath)) {
+        profile = profile.copyWith(documentLogoPath: '');
       }
     }
     return StyleProfileImportOutcome.success(profile, logoOmitted: logoOmitted);

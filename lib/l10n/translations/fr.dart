@@ -732,6 +732,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Koptekst': 'En-tête',
   'Afbeelding niet opgehaald': 'Image non récupérée',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Le dossier de destination n’a pas pu être créé ni écrit. Vérifiez que l’emplacement configuré est disponible.',

@@ -1772,6 +1772,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Koptekst': 'Galvene',
   'Afbeelding niet opgehaald': 'Attēls nav iegūts',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Mērķa mapi neizdevās izveidot vai tajā ierakstīt. Pārbaudiet, vai iestatītā atrašanās vieta ir pieejama.',

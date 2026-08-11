@@ -7,23 +7,41 @@ part of '../settings_dialog.dart';
 extension _SettingsPresentationTab on _SettingsDialogState {
   Widget _presentationStyleTab(List<ThemeProfile> profiles) {
     final l10n = context.l10n;
+    final styleBuilder = _DocumentStyleBuilder(this);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _profileScopeBanner(),
-        _sectionTitle(l10n.t('styleProfile')),
-        _profileSelector(profiles),
-        const SizedBox(height: 20),
-        _sectionTitle(l10n.d('Lettertype')),
-        _fontSection(),
-        _presentationStyleDivider(l10n.t('settingsColors')),
-        ..._colorsSectionChildren(),
-        _presentationStyleDivider(l10n.d('Animatie')),
-        ..._animationSettings(),
-        _presentationStyleDivider(l10n.d('Logo en footer')),
-        ..._logoSectionChildren(),
+        styleBuilder._styleProfileCards(profiles),
         const SizedBox(height: 18),
-        _stylePreview(),
+        _profileSelector(profiles),
+        const SizedBox(height: 18),
+        styleBuilder._surfaceSelector(l10n),
+        const SizedBox(height: 18),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final presentation = styleBuilder._showsPresentation(l10n);
+            final editor = presentation
+                ? styleBuilder._presentationStyleSettings(l10n)
+                : styleBuilder._documentStyleSettings(l10n);
+            final preview = presentation
+                ? styleBuilder._presentationStylePreview(l10n)
+                : styleBuilder._documentStylePreview(l10n);
+            if (constraints.maxWidth < 820) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [editor, const SizedBox(height: 18), preview],
+              );
+            }
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(width: 350, child: editor),
+                const SizedBox(width: 20),
+                Expanded(child: preview),
+              ],
+            );
+          },
+        ),
       ],
     );
   }

@@ -1789,6 +1789,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Koptekst': 'Caput paginae',
   'Afbeelding niet opgehaald': 'Imago non recuperata',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Plica destinata creari vel scribi non potuit. Proba num locus constitutus praesto sit.',

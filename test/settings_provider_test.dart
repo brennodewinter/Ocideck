@@ -36,6 +36,69 @@ void main() {
     expect(back.codeFontFamily, 'Courier New');
   });
 
+  test(
+    'ThemeProfile bewaart volwassen documentchrome en deelt standaard het logo',
+    () {
+      const profile = ThemeProfile(
+        logoPath: 'asset:assets/images/vigilis-logo.png',
+        documentLogoPosition: 'top-left',
+        documentLogoSize: 224,
+        documentHeaderText: 'Bestuurlijk rapport',
+        documentFooterText: 'Vigilis · Vertrouwelijk',
+        documentBandTextColor: '#F8FAFC',
+        documentBandBackgroundColor: '#172033',
+        documentShowPageNumbers: true,
+      );
+
+      expect(profile.effectiveDocumentLogoPath, profile.logoPath);
+      final back = ThemeProfile.fromJson(profile.toJson());
+      expect(back.effectiveDocumentLogoPath, profile.logoPath);
+      expect(back.documentLogoPosition, 'top-left');
+      expect(back.documentLogoSize, 224);
+      expect(back.effectiveDocumentLogoSize, 224);
+      expect(back.documentHeaderText, 'Bestuurlijk rapport');
+      expect(back.documentFooterText, 'Vigilis · Vertrouwelijk');
+      expect(back.documentBandTextColor, '#F8FAFC');
+      expect(back.documentBandBackgroundColor, '#172033');
+      expect(back.documentShowPageNumbers, isTrue);
+
+      final overridden = back.copyWith(documentLogoPath: 'ander-logo.png');
+      expect(overridden.effectiveDocumentLogoPath, 'ander-logo.png');
+      expect(
+        overridden
+            .copyWith(clearDocumentLogoOverride: true)
+            .effectiveDocumentLogoPath,
+        profile.logoPath,
+      );
+    },
+  );
+
+  test('oud profiel krijgt veilige documentchrome-standaarden', () {
+    final legacy = ThemeProfile.fromJson(const {
+      'name': 'Legacy',
+      'logoPath': 'asset:assets/images/librekat-logo.png',
+    });
+    expect(legacy.effectiveDocumentLogoPath, legacy.logoPath);
+    expect(legacy.documentLogoSize, isNull);
+    expect(legacy.effectiveDocumentLogoSize, legacy.logoSize);
+    expect(legacy.documentHeaderText, isEmpty);
+    expect(legacy.documentFooterText, isEmpty);
+    expect(legacy.documentBandTextColor, isNull);
+    expect(legacy.documentBandBackgroundColor, isNull);
+    expect(legacy.effectiveDocumentBandTextColor, legacy.textColor);
+    expect(
+      legacy.effectiveDocumentBandBackgroundColor,
+      legacy.slideBackgroundColor,
+    );
+    expect(legacy.documentShowPageNumbers, isFalse);
+    expect(
+      ThemeProfile.fromJson(const {
+        'documentLogoSize': 9999,
+      }).effectiveDocumentLogoSize,
+      480,
+    );
+  });
+
   test('ThemeProfile round-trips and clamps the animation duration', () {
     const profile = ThemeProfile(animationDurationMs: 7500);
     expect(ThemeProfile.fromJson(profile.toJson()).animationDurationMs, 7500);
@@ -150,6 +213,8 @@ void main() {
       'sectionBackgroundColor',
       'codeBackgroundColor',
       'codeTextColor',
+      'documentBandTextColor',
+      'documentBandBackgroundColor',
     ];
     const payloads = <String>[
       "red}</style><meta http-equiv='refresh' content='0;url=https://evil'>",
@@ -195,10 +260,10 @@ void main() {
 
   test('starts with the built-in profiles, LibreKAT selected', () async {
     final notifier = await _loadedNotifier();
-    expect(notifier.state.themeProfiles, hasLength(3));
+    expect(notifier.state.themeProfiles, hasLength(4));
     expect(
       notifier.state.themeProfiles.map((p) => p.name),
-      containsAll(['LibreKAT', 'Standaard', 'Security']),
+      containsAll(['LibreKAT', 'Standaard', 'Security', 'Vigilis']),
     );
     expect(notifier.state.selectedThemeProfileName, 'LibreKAT');
     // Het LibreKAT-logo is een gebundelde asset zodat het overal (ook web)
@@ -212,7 +277,7 @@ void main() {
   test('createThemeProfile adds and selects a new profile', () async {
     final notifier = await _loadedNotifier();
     final created = await notifier.createThemeProfile();
-    expect(notifier.state.themeProfiles, hasLength(4));
+    expect(notifier.state.themeProfiles, hasLength(5));
     expect(notifier.state.selectedThemeProfileName, created.name);
   });
 
@@ -232,7 +297,7 @@ void main() {
       isNot(contains(created.name)),
       reason: 'The old name should be replaced, not duplicated',
     );
-    expect(notifier.state.themeProfiles, hasLength(4));
+    expect(notifier.state.themeProfiles, hasLength(5));
     expect(notifier.state.selectedThemeProfileName, 'Mijn stijl');
   });
 
@@ -271,13 +336,13 @@ void main() {
   test('deleteThemeProfile removes it and selects another', () async {
     final notifier = await _loadedNotifier();
     final created = await notifier.createThemeProfile();
-    expect(notifier.state.themeProfiles, hasLength(4));
+    expect(notifier.state.themeProfiles, hasLength(5));
 
     await notifier.deleteThemeProfile(created.name);
 
     final names = notifier.state.themeProfiles.map((p) => p.name).toList();
     expect(names, isNot(contains(created.name)));
-    expect(notifier.state.themeProfiles, hasLength(3));
+    expect(notifier.state.themeProfiles, hasLength(4));
     expect(notifier.state.selectedThemeProfileName, names.first);
   });
 

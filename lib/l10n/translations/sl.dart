@@ -1775,6 +1775,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Koptekst': 'Glava',
   'Afbeelding niet opgehaald': 'Slika ni bila pridobljena',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
       'Ciljne mape ni bilo mogoče ustvariti ali vanjo pisati. Preveri, ali je nastavljena lokacija na voljo.',

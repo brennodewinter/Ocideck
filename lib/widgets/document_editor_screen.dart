@@ -8,9 +8,9 @@ import 'package:path/path.dart' as p;
 
 import '../l10n/app_localizations.dart';
 import '../models/chart.dart';
-import '../models/markdown_kind.dart';
 import '../models/markdown_outline.dart';
 import '../models/privacy_disposition.dart';
+import '../models/settings.dart';
 import '../models/slide.dart';
 import '../services/caption_service.dart';
 import '../services/description_service.dart';
@@ -45,6 +45,7 @@ import 'dialogs/document_export_dialog.dart';
 import 'dialogs/image_carousel_picker.dart';
 import 'dialogs/package_encrypt_dialog.dart';
 import 'dialogs/settings_dialog.dart';
+import 'document_page_chrome.dart';
 import 'editors/_editor_field.dart' show reportImageImportFailure;
 import 'editors/chart_editor.dart';
 import 'editors/embed_editor_dialog.dart';
@@ -108,10 +109,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// geven.
   bool _applyingExternal = false;
 
-  /// Het lettertype van de actieve documentstijl, of `null` voor het app-
-  /// lettertype. In [build] gezet uit de opgeloste stijl en door [_docSurfaceTheme]
-  /// toegepast op het schrijfoppervlak (Visueel én Bron).
-  String? _styleFontFamily;
+  /// De actieve documentstijl. Alleen documentoppervlakken lezen hem; de rauwe
+  /// Markdownbron en de presentatie-editor houden hun eigen sobere chrome.
+  ThemeProfile? _styleProfile;
 
   @override
   void initState() {
@@ -253,6 +253,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final markdownService = ref.read(markdownServiceProvider);
     final l10n = context.l10n;
     final title = _documentTitle(body, filePath);
+    final effectiveTheme =
+        resolveDocumentStyleProfile(settings, state.document?.styleName) ??
+        fileService.activeProfileFor(projectPath: projectPath);
 
     // Bouw de bundel langs de audited projectiegrens. Vanaf hier raakt geen
     // uitvoerpad de rauwe bron nog aan.
@@ -265,6 +268,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       disabledRules: settings.privacyDisabledRules,
       markdownService: markdownService,
       title: title,
+      theme: effectiveTheme,
     );
 
     if (format == DocumentExportFormat.ocideck) {
@@ -295,10 +299,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // dezelfde regel als de deck-HTML-export: een pad buiten de map wordt
     // geweigerd, niet gevolgd.
     Future<String?> embed(String src) async {
-      final bytes = await imageService.readSlideImageBytes(
-        src,
-        projectPath: projectPath,
-      );
+      final bytes = src == effectiveTheme.logoPath
+          ? await readStyleLogoBytes(src, projectPath: projectPath)
+          : await imageService.readSlideImageBytes(
+              src,
+              projectPath: projectPath,
+            );
       if (bytes == null) return null;
       final encoded = encodeForHtmlEmbed(bytes, src);
       return encoded == null ? null : htmlImageDataUri(encoded);
@@ -311,9 +317,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       // De documentstijl stuurt de export: het opgeloste profiel (afdwingen →
       // per-document `theme:` → standaard), en anders het projectprofiel zoals
       // voorheen — zo verandert een plat document zonder stijl niets.
-      theme:
-          resolveDocumentStyleProfile(settings, state.document?.styleName) ??
-          fileService.activeProfileFor(projectPath: projectPath),
+      theme: bundle.audience.deck.themeProfile,
       metadata: ExportDocumentMetadata(
         title: title,
         language: l10n.languageCode,
@@ -452,7 +456,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       documentProvider.select((s) => s.document?.styleName),
     );
     final styleProfile = resolveDocumentStyleProfile(settings, docStyleName);
-    _styleFontFamily = styleProfile?.fontFamily;
+    _styleProfile = styleProfile;
     final theme = Theme.of(context);
     return Actions(
       actions: {
@@ -505,13 +509,19 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                 onUndo: canUndo ? _undo : null,
                 onRedo: canRedo ? _redo : null,
                 onExport: _export,
-                onOpenSettings: () => SettingsDialog.show(context),
+                onOpenSettings: () => SettingsDialog.show(
+                  context,
+                  initialSection: SettingsSection.presentation,
+                ),
                 onConvertToPresentation: _convertToPresentation,
                 controller: _controller,
                 editorFocus: _editorFocus,
-                docTheme: _docSurfaceTheme(theme, _styleFontFamily),
+                docTheme: _docSurfaceTheme(theme, _styleProfile),
                 styleNames: [for (final p in settings.themeProfiles) p.name],
-                currentStyleName: docStyleName,
+                currentStyleName: effectiveDocumentStyleName(
+                  settings,
+                  docStyleName,
+                ),
                 styleEnforced: settings.documentStyleEnforced,
                 enforcedStyleName: settings.documentStyleEnforced
                     ? settings.documentDefaultStyle
@@ -592,7 +602,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
           _outlineRail(theme, source),
           VerticalDivider(width: 1, thickness: 1, color: divider),
         ],
-        Expanded(child: _wysiwygEditor(theme)),
+        Expanded(
+          child: _styledDocumentSurface(_styleProfile, _wysiwygEditor(theme)),
+        ),
       ],
     );
   }
@@ -604,7 +616,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   Widget _wysiwygEditor(ThemeData theme) => MarkdownNotesEditor(
     controller: _controller,
     focusNode: _editorFocus,
-    editorTheme: _docSurfaceTheme(theme, _styleFontFamily),
+    editorTheme: _docSurfaceTheme(theme, _styleProfile),
     hintText: '',
     expand: true,
     // Opmaakbalk zit al in [_DocEditorToolbar] voor de bron; hier toont de
@@ -669,13 +681,18 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         child: SingleChildScrollView(
           controller: _previewScroll,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-          child: DocumentMarkdownView(
-            source,
-            maxTextWidth: 720,
-            anchorBlockIndex: _anchorBlockIndex,
-            anchorKey: _anchorKey,
-            onEditChart: _editChart,
-            onEditTable: _editTable,
+          child: _styledDocumentBody(
+            _styleProfile,
+            DocumentMarkdownView(
+              source,
+              maxTextWidth: 720,
+              themeProfile: _styleProfile,
+              chartTheme: _styleProfile,
+              anchorBlockIndex: _anchorBlockIndex,
+              anchorKey: _anchorKey,
+              onEditChart: _editChart,
+              onEditTable: _editTable,
+            ),
           ),
         ),
       );
@@ -1052,6 +1069,38 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   );
 }
 
+Widget _styledDocumentSurface(ThemeProfile? profile, Widget editor) {
+  if (profile == null || !_hasDocumentChrome(profile)) return editor;
+  return ColoredBox(
+    color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+    child: Column(
+      children: [
+        DocumentChromeBand(profile: profile, header: true),
+        Expanded(child: editor),
+        DocumentChromeBand(profile: profile, header: false),
+      ],
+    ),
+  );
+}
+
+Widget _styledDocumentBody(ThemeProfile? profile, Widget body) {
+  if (profile == null || !_hasDocumentChrome(profile)) return body;
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      DocumentChromeBand(profile: profile, header: true),
+      body,
+      DocumentChromeBand(profile: profile, header: false),
+    ],
+  );
+}
+
+bool _hasDocumentChrome(ThemeProfile profile) =>
+    profile.effectiveDocumentLogoPath?.trim().isNotEmpty == true ||
+    profile.documentHeaderText.trim().isNotEmpty ||
+    profile.documentFooterText.trim().isNotEmpty ||
+    profile.documentShowPageNumbers;
+
 /// De documenttitel voor export en conversie: de eerste `# `-kop, anders de
 /// bestandsnaam zonder extensie, anders leeg. Top-level zodat het bewerkscherm
 /// zelf onder zijn regelplafond blijft.
@@ -1067,10 +1116,11 @@ String _documentTitle(String source, String? filePath) {
 /// Het schrijfoppervlak-thema met het lettertype van de actieve documentstijl
 /// ([fontFamily]) erin. Zonder stijl valt het terug op het app-lettertype, zodat
 /// een plat document precies leest als voorheen.
-MarkdownEditorTheme _docSurfaceTheme(ThemeData theme, String? fontFamily) =>
+MarkdownEditorTheme _docSurfaceTheme(ThemeData theme, ThemeProfile? profile) =>
     MarkdownEditorTheme.documentSurface(
       scheme: theme.colorScheme,
-      fontFamily: fontFamily,
+      fontFamily: profile?.fontFamily,
+      profile: profile,
     );
 
 /// Dien een nieuwe body in bij de notifier, met de stijl-frontmatter ervoor. De

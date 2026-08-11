@@ -124,7 +124,7 @@ const Map<String, int> fileSizeBaseline = {
   // +5: LaTeX-export — de `ocideck`-case in de extensie-switch (de early-return
   // hierboven voorkomt dat hij ooit bereikt wordt, maar de analyzer eist
   // exhaustiveness). Eén regel toegevoegd; onherleidbare plumbing.
-  'lib/widgets/document_editor_screen.dart': 1344,
+  'lib/widgets/document_editor_screen.dart': 1227,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
@@ -277,7 +277,7 @@ const Map<String, int> classSizeBaseline = {
   // versleutelde-zip-streaming via writeContent(capped), en automatische
   // zegelverificatie bij openen. Security-fixes die in het open-pad landen
   // — onherleidbaar aan dit chokepoint-bestand.
-  'lib/services/file_service.dart#FileService': 2781,
+  'lib/services/file_service.dart#FileService': 2742,
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on
   // this State via chart_preview_improvement.dart. Raising rather than a

@@ -48,6 +48,9 @@ void main() {
         textColor: '#FAFAFA',
         accentColor: '#FF8800',
         bulletMarker: BulletMarker.paw,
+        documentLogoSize: 224,
+        documentBandTextColor: '#F8FAFC',
+        documentBandBackgroundColor: '#172033',
         footerText: 'Vertrouwelijk',
         footerShowPageNumbers: true,
         closingSlideEnabled: true,
@@ -135,6 +138,37 @@ void main() {
     final out = await file.importStyleProfileBytes(built.bytes);
     expect(out.profile!.logoPath, 'asset:assets/images/librekat-logo.png');
   });
+
+  test(
+    'een afwijkend documentlogo reist naast het gedeelde logo mee',
+    () async {
+      final presentation = File(p.join(tmp.path, 'presentatie.png'))
+        ..writeAsBytesSync(_png);
+      final document = File(p.join(tmp.path, 'document.png'))
+        ..writeAsBytesSync(_png);
+      final profile = ThemeProfile(
+        name: 'Twee logo\'s',
+        logoPath: presentation.path,
+        documentLogoPath: document.path,
+      );
+
+      final built = await file.buildStyleProfileBytes(profile);
+      final envelope = envelopeOf(built.bytes);
+      expect(envelope['logo'], isA<Map<String, Object?>>());
+      expect(envelope['documentLogo'], isA<Map<String, Object?>>());
+      final profileJson = envelope['profile']! as Map<String, Object?>;
+      expect(profileJson['logoPath'], isNull);
+      expect(profileJson['documentLogoPath'], isEmpty);
+
+      final out = await file.importStyleProfileBytes(
+        built.bytes,
+        logoBaseDir: tmp,
+      );
+      expect(out.logoOmitted, isFalse);
+      expect(File(out.profile!.logoPath!).readAsBytesSync(), _png);
+      expect(File(out.profile!.documentLogoPath!).readAsBytesSync(), _png);
+    },
+  );
 
   test(
     'een verdwenen logobestand levert een profiel zonder logo plus een melding',
