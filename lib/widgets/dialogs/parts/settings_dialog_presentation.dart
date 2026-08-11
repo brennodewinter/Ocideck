@@ -7,17 +7,18 @@ part of '../settings_dialog.dart';
 extension _SettingsPresentationTab on _SettingsDialogState {
   Widget _presentationStyleTab(List<ThemeProfile> profiles) {
     final l10n = context.l10n;
+    final styleBuilder = _DocumentStyleBuilder(this);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _styleProfileCards(profiles),
+        styleBuilder._styleProfileCards(profiles),
         const SizedBox(height: 18),
         _profileSelector(profiles),
         const SizedBox(height: 18),
         LayoutBuilder(
           builder: (context, constraints) {
-            final editor = _styleBasicsAndAdvanced(l10n);
-            final preview = _documentStylePreview(l10n);
+            final editor = styleBuilder._styleBasicsAndAdvanced(l10n);
+            final preview = styleBuilder._documentStylePreview(l10n);
             if (constraints.maxWidth < 820) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

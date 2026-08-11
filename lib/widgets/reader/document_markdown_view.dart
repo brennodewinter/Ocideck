@@ -84,8 +84,6 @@ class DocumentMarkdownView extends StatelessWidget {
   /// de aanroeper geeft hier het actieve app-profiel of niets.
   final ThemeProfile? chartTheme;
 
-  /// Optionele documentstijl. `null` houdt de documentatielezer op het app-
-  /// thema; de documenteditor en stijlbouwer geven hier hun opgeloste profiel.
   final ThemeProfile? themeProfile;
 
   /// Aangeroepen bij dubbelklik op een grafiek — alleen in de editor gezet (de
@@ -836,8 +834,6 @@ class _Theme {
         profile?.accentColor,
         AppPalette.of(theme).accentInk,
       ),
-      // Dimmer than the ticked box: an empty box is the absence of a fact, and
-      // should not pull the eye harder than the items that are done.
       checkboxEmpty = _profileColor(
         profile?.checklistUncheckedColor,
         theme.colorScheme.onSurfaceVariant,
@@ -874,10 +870,6 @@ class _Theme {
         profile?.codeBackgroundColor,
         theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
       ),
-      // The opaque colour the code/chart card actually shows: the 0.6-alpha card
-      // fill composited over the page surface. A chart SVG picks its title ink
-      // against this, so a dark app theme doesn't drop a dark title on a dark
-      // card. Kept as `#RRGGBB` because the SVG renderer speaks hex.
       chartCardHex = _hexRgb(
         Color.alphaBlend(
           _profileColor(
@@ -906,8 +898,6 @@ class _Theme {
         profile?.tableTextColor,
         theme.colorScheme.onSurface,
       ),
-      // Find-in-page tints: a warm amber for a match, a stronger orange for the
-      // active hit (semantic tokens, so a palette change touches one place).
       findMatch = AppTheme.findHighlight,
       findActive = AppTheme.findHighlightActive;
 

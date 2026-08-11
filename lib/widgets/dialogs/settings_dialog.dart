@@ -225,11 +225,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// decide whether to apply the profile to the currently open presentation.
   bool _profileTouched = false;
 
-  /// Welk representatief documentvlak de live stijlpreview toont.
   bool _stylePreviewShowsContent = true;
-
-  /// De uitgebreide presentatievelden zijn standaard uit beeld, maar blijven
-  /// open nadat de gebruiker (of een zoekresultaat) ze heeft onthuld.
   bool _styleAdvancedExpanded = false;
 
   String? _highlightedThemeField;
@@ -360,18 +356,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// instance members of a State subclass), so they route through this wrapper.
   void _rebuild(VoidCallback fn) => setState(fn);
 
-  List<ThemeProfile> get _profiles {
-    final seen = <String>{};
-    return [
-      for (final profile in ref.watch(settingsProvider).themeProfiles)
-        if (seen.add(profile.name)) profile,
-      // Nieuwe ingebouwde stijlen blijven ook zichtbaar voor installaties met
-      // een al opgeslagen profielenlijst. De provider wordt pas gemuteerd als
-      // de gebruiker zo'n preset kiest en Opslaan indrukt.
-      for (final profile in ThemeProfile.builtIns)
-        if (seen.add(profile.name)) profile,
-    ];
-  }
+  List<ThemeProfile> get _profiles =>
+      _availableStyleProfiles(ref.watch(settingsProvider).themeProfiles);
 
   /// Alle lokale verbindingen, in lijstvolgorde — het startpunt voor de
   /// mapkiezers hieronder.
@@ -846,18 +832,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         : const EdgeInsets.symmetric(horizontal: 40, vertical: 28);
     final availableWidth = screen.width - dialogInset.horizontal;
     final availableHeight = screen.height - dialogInset.vertical;
-    final preferredWidth = _selectedTab == SettingsSection.presentation
-        ? 1240.0
-        : 920.0;
-    final dialogWidth = math
-        .min(
-          math.max(
-            640.0,
-            math.min(preferredWidth * scale, screen.width * 0.92),
-          ),
-          availableWidth,
-        )
-        .toDouble();
+    final dialogWidth = _settingsDialogWidth(
+      scale: scale,
+      screenWidth: screen.width,
+      availableWidth: availableWidth,
+      styleBuilder: _selectedTab == SettingsSection.presentation,
+    );
     final dialogHeight = math
         .min(
           math.max(560.0, math.min(760.0 * scale, screen.height * 0.86)),

@@ -3,7 +3,67 @@
 // niet voor iedere gebruiker nodig zijn blijven bereikbaar onder Geavanceerd.
 part of '../settings_dialog.dart';
 
-extension _SettingsStyleBuilder on _SettingsDialogState {
+List<ThemeProfile> _availableStyleProfiles(List<ThemeProfile> stored) {
+  final seen = <String>{};
+  return [
+    for (final profile in stored)
+      if (seen.add(profile.name)) profile,
+    // Toon nieuwe presets ook aan bestaande installaties, zonder de provider
+    // te muteren voordat de gebruiker Opslaan kiest.
+    for (final profile in ThemeProfile.builtIns)
+      if (seen.add(profile.name)) profile,
+  ];
+}
+
+double _settingsDialogWidth({
+  required double scale,
+  required double screenWidth,
+  required double availableWidth,
+  required bool styleBuilder,
+}) => math
+    .min(
+      math.max(
+        640.0,
+        math.min((styleBuilder ? 1240.0 : 920.0) * scale, screenWidth * 0.92),
+      ),
+      availableWidth,
+    )
+    .toDouble();
+
+/// Zelfstandige bouwer: houdt de omvang van de instellingen-State begrensd.
+class _DocumentStyleBuilder {
+  const _DocumentStyleBuilder(this.owner);
+
+  final _SettingsDialogState owner;
+
+  BuildContext get context => owner.context;
+  String get _originalName => owner._originalName;
+  ThemeProfile get _themeProfile => owner._themeProfile;
+  set _themeProfile(ThemeProfile value) => owner._themeProfile = value;
+  bool get _stylePreviewShowsContent => owner._stylePreviewShowsContent;
+  set _stylePreviewShowsContent(bool value) =>
+      owner._stylePreviewShowsContent = value;
+  bool get _styleAdvancedExpanded => owner._styleAdvancedExpanded;
+  set _styleAdvancedExpanded(bool value) =>
+      owner._styleAdvancedExpanded = value;
+  set _profileTouched(bool value) => owner._profileTouched = value;
+  SettingsSection get _selectedTab => owner._selectedTab;
+  String? get _highlightedSection => owner._highlightedSection;
+  TextEditingController get _footerText => owner._footerText;
+  bool get mounted => owner.mounted;
+
+  void _rebuild(VoidCallback fn) => owner._rebuild(fn);
+  void _selectProfile(String name) => owner._selectProfile(name);
+  Future<void> _createProfile() => owner._createProfile();
+  Future<String?> _pickHexColor(String value) => owner._pickHexColor(value);
+  Widget _sectionTitle(String title) => owner._sectionTitle(title);
+  BoxDecoration _boxDecoration() => owner._boxDecoration();
+  Widget _fontSection() => owner._fontSection();
+  Widget _presentationStyleDivider(String title) =>
+      owner._presentationStyleDivider(title);
+  List<Widget> _colorsSectionChildren() => owner._colorsSectionChildren();
+  List<Widget> _animationSettings() => owner._animationSettings();
+  List<Widget> _logoSectionChildren() => owner._logoSectionChildren();
   Widget _styleProfileCards(List<ThemeProfile> profiles) {
     final l10n = context.l10n;
     return Column(
