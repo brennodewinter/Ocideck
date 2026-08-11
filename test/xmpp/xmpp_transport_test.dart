@@ -28,6 +28,14 @@ import 'package:xml/xml.dart';
 import '../collab/collab_transport_contract.dart';
 import 'fake_muc_hub.dart';
 
+/// Het vensterplafond van de inbound-op-rate-limiter — gelijk aan de private
+/// `XmppTransport._maxOpsPerSecondPerSender` in lib/xmpp/xmpp_transport.dart.
+/// Bewust hier herhaald (de lib-constante is privé, en de transport blijft
+/// Flutter-vrij zodat er geen `@visibleForTesting`-import bij hoeft): wijzigt die
+/// cap, dan faalt de flood-test luid en werk je 'm hier bij — één plek om te
+/// controleren, geen stille drift.
+const _rateLimitCap = 50;
+
 void main() {
   runCollabTransportContract('XMPP', _createContractPair);
 
@@ -104,14 +112,22 @@ void main() {
     );
 
     test('a flood of ops from one sender is rate-limited (#1433)', () async {
-      final env = await _XmppEnv.create();
+      // Bevries de klok van de transport, zodat alle 100 ops in HETZELFDE
+      // rate-limit-venster vallen. Dan toetst de test de begrenzing exact —
+      // precies _maxOpsPerSecondPerSender (50) komen door — i.p.v. te leunen op
+      // een tijdmarge die onder CPU-belasting wegvalt. Zonder deze bevriezing
+      // kruiste de burst op de trage serial-runner een tweede venster (de
+      // klok liep tijdens de 100 seriële crypto-opens over de seconde-grens),
+      // liet >50 ops door en flakete de poort (#1433/linux-gate).
+      final frozen = DateTime.utc(2026);
+      final env = await _XmppEnv.create(now: () => frozen);
       addTearDown(env.dispose);
       final received = <DeckOp>[];
       final sub = env.guestTransport.ops.listen(received.add);
 
       final slide = Slide.create(SlideType.bullets).copyWith(title: 's');
       // Stuur 100 ops in één burst — de rate-limiter laat er max 50 door per
-      // seconde per sender.
+      // venster per sender.
       for (var i = 1; i <= 100; i++) {
         await env.hostTransport.sendOp(
           SetSlideField(
@@ -125,21 +141,19 @@ void main() {
       }
       await env.settle();
 
-      // De eerste ~50 zijn doorgekomen (rate-limiter begrensd op 50/s).
-      // De rest is gedropt. De marge is ruim: op een trage CI-runner kan de
-      // burst net over de seconde-grens duren, waardoor het window reset en
-      // er een tweede deel-doorgang ontstaat (geobserveerd: 64). 80 bewijst
-      // nog steeds dat de limiter werkt — zonder limiter zouden alle 100
-      // doorkomen.
+      // Precies de eerste 50 komen door (het vensterplafond); de staart wordt
+      // gedropt. De demux verwerkt strikt op volgorde (#1420), dus het zijn de
+      // versies 1..50. Deterministisch — zonder limiter zouden alle 100
+      // doorkomen, dus dit bewijst de begrenzing hard.
       expect(
         received.length,
-        lessThanOrEqualTo(80),
-        reason: 'a flood from one sender is rate-limited',
+        _rateLimitCap,
+        reason: 'de limiter laat precies één vensterplafond aan ops door',
       );
       expect(
-        received.length,
-        greaterThanOrEqualTo(1),
-        reason: 'at least some ops get through before the limit',
+        received.map((op) => op.version).toList(),
+        List<int>.generate(_rateLimitCap, (i) => i + 1),
+        reason: 'de doorgelaten ops zijn de eerste 50, op volgorde',
       );
       await sub.cancel();
     });
@@ -459,6 +473,7 @@ class _XmppEnv {
     Duration resyncMinInterval = const Duration(milliseconds: 50),
     Duration resyncCoalesceWindow = const Duration(milliseconds: 50),
     bool knowsHost = true,
+    DateTime Function()? now,
   }) async {
     const room = 'ocideck-test@conference.example';
     final hub = FakeMucHub(room);
@@ -494,6 +509,7 @@ class _XmppEnv {
       peerResolver: resolve,
       resyncMinInterval: resyncMinInterval,
       resyncCoalesceWindow: resyncCoalesceWindow,
+      now: now,
     );
     final guestTransport = XmppTransport(
       stanzaChannel: guestChannel,
@@ -504,6 +520,7 @@ class _XmppEnv {
       onReconnected: guestChannel.onReconnected,
       resyncMinInterval: resyncMinInterval,
       resyncCoalesceWindow: resyncCoalesceWindow,
+      now: now,
     );
 
     return _XmppEnv(

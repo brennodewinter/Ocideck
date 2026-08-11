@@ -101,10 +101,12 @@ class XmppTransport implements CollabTransport {
     Stream<void>? onReconnected,
     this.resyncMinInterval = const Duration(seconds: 2),
     this.resyncCoalesceWindow = const Duration(seconds: 1),
+    DateTime Function()? now,
   }) : _channel = stanzaChannel,
        _demux = companionDemux,
        _e2ee = crypto,
-       _resolvePeer = peerResolver {
+       _resolvePeer = peerResolver,
+       _now = now ?? DateTime.now {
     _demux.register(OciDeckNamespace.op, _onOpStanza);
     _demux.register(OciDeckNamespace.lock, _onLockStanza);
     _demux.register(OciDeckNamespace.resync, _onResyncStanza);
@@ -118,6 +120,14 @@ class XmppTransport implements CollabTransport {
   final CollabCrypto _e2ee;
   final String roomJid;
   final XmppPeerResolver _resolvePeer;
+
+  /// Wandklok voor de tijdgevoelige begrenzers van deze transport: de
+  /// inbound-op-rate-limiter (#1433) en de resync-timers. Injecteerbaar zodat
+  /// een test de tijd kan bevriezen en de begrenzing deterministisch toetst,
+  /// i.p.v. te leunen op een tijdmarge die onder CPU-belasting wegvalt (de
+  /// flood-test kruiste anders een tweede rate-limit-venster en liet >50 ops
+  /// door). Standaard de echte klok; alleen tests geven een eigen bron mee.
+  final DateTime Function() _now;
 
   /// Autoriteit-kant: een gecoalesceerd `<resync>`-verzoek kwam binnen. De
   /// caller (snapshot-channel in sub-plak 6, of de test) stuurt nu de
@@ -484,7 +494,7 @@ class XmppTransport implements CollabTransport {
     }
     // Coalesceer: als er recent een re-baseline is afgehandeld, drop het
     // verzoek — de re-baseline dekt deze follower ook.
-    final now = DateTime.now();
+    final now = _now();
     if (_lastResyncHandled != null &&
         now.difference(_lastResyncHandled!) < resyncCoalesceWindow) {
       return;
@@ -501,7 +511,7 @@ class XmppTransport implements CollabTransport {
   /// reconnect-signaal.
   void _requestResync() {
     if (_disposed) return;
-    final now = DateTime.now();
+    final now = _now();
     if (_lastResyncRequest != null &&
         now.difference(_lastResyncRequest!) < resyncMinInterval) {
       return; // rate-limited
@@ -573,7 +583,7 @@ class XmppTransport implements CollabTransport {
   /// teller die elke seconde reset. De bucket-map groeit met het aantal
   /// unieke senders (begrensd door de MUC occupant cap, 500).
   bool _rateAllow(String deviceId) {
-    final now = DateTime.now();
+    final now = _now();
     final bucket = _opBuckets[deviceId];
     if (bucket == null ||
         now.difference(bucket.windowStart) >= const Duration(seconds: 1)) {
