@@ -4259,7 +4259,8 @@ van het document niet meer te openen.
 ### Een documentstijl maken
 
 Onder *Instellingen → Presentatie* beheer je de profielen voor documenten én
-presentaties. De profielkaarten kiezen een bestaand profiel of maken een nieuw profiel.
+presentaties. De profielkaarten tonen waar beschikbaar het logo en kiezen een
+bestaand profiel of maken een nieuw profiel.
 Daar staat ook het ingebouwde **Vigilis**-profiel. Kies boven de bewerker tussen
 **Document** en **Presentatie**. Document toont de compacte instellingen voor
 achtergrond, tekst, accent en lettertype naast de live A4-voorvertoning met titelblad

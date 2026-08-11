@@ -4300,7 +4300,8 @@ the document falls back to the default rather than failing. *(Added 2026-08-08.)
 
 Use *Settings → Presentation* to manage the profiles used by both documents and
 presentations. The built-in **Vigilis** profile is available there alongside the
-other built-in profiles. Profile cards select a profile or start a new one. The
+other built-in profiles. Profile cards show the profile logo when available and
+select a profile or start a new one. The
 Choose **Document** or **Presentation** above the editor. Document shows the compact
 surface-colour, text-colour, accent and font controls beside a live A4 title/content
 preview. Presentation restores the complete font, colour, animation, logo, footer and

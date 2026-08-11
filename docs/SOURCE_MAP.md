@@ -1207,7 +1207,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
   `_adoptProfile` on the state class, since `setState` is protected and out of
   reach from an extension.
   `parts/settings_dialog_presentation.dart` composes the shared style tab:
-  profile cards plus a Document/Presentation surface selector beside its live
+  logo-aware profile cards plus a Document/Presentation surface selector beside its live
   preview. `parts/settings_dialog_style_builder.dart` supplies those cards, the
   compact document controls (shared/overridden logo, header/footer colours and page
   numbers) and A4 title/content preview, and the complete

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
@@ -135,6 +136,38 @@ void main() {
       AppTheme.parseHexColor(ThemeProfile.vigilis.accentColor),
     );
     expect(find.byKey(const Key('document-style-preview')), findsOneWidget);
+  });
+
+  testWidgets('profielkaart toont het logo en zonder logo een fallback', (
+    tester,
+  ) async {
+    final container = await openAppearanceTab(tester);
+    addTearDown(container.dispose);
+
+    final vigilis = find.byKey(const Key('style-profile-Vigilis'));
+    expect(
+      find.descendant(of: vigilis, matching: find.byType(ThemeProfileLogo)),
+      findsOneWidget,
+    );
+    final standard = find.byKey(const Key('style-profile-Standaard'));
+    expect(
+      find.descendant(
+        of: standard,
+        matching: find.byIcon(Icons.description_outlined),
+      ),
+      findsOneWidget,
+    );
+    final selectedLabel = find.descendant(
+      of: find.byKey(const Key('style-profile-LibreKAT')),
+      matching: find.text('LibreKAT'),
+    );
+    final paragraph = tester.renderObject<RenderParagraph>(selectedLabel);
+    expect(
+      paragraph.getBoxesForSelection(
+        const TextSelection(baseOffset: 0, extentOffset: 8),
+      ),
+      hasLength(1),
+    );
   });
 
   testWidgets('document en presentatie hebben elk een echte preview', (

@@ -111,7 +111,7 @@ class _DocumentStyleBuilder {
                 onTap: _createProfile,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
-                  width: 154,
+                  width: 216,
                   height: 66,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -143,6 +143,8 @@ class _DocumentStyleBuilder {
   Widget _styleProfileCard(ThemeProfile profile) {
     final selected = profile.name == _originalName;
     final accent = AppTheme.parseHexColor(profile.accentColor);
+    final shownProfile = selected ? owner._editedProfile() : profile;
+    final logoPath = shownProfile.logoPath?.trim() ?? '';
     return Semantics(
       button: true,
       selected: selected,
@@ -152,7 +154,7 @@ class _DocumentStyleBuilder {
         borderRadius: BorderRadius.circular(10),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 140),
-          width: 154,
+          width: 216,
           height: 66,
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
@@ -165,20 +167,37 @@ class _DocumentStyleBuilder {
           ),
           child: Row(
             children: [
-              Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                  color: accent.withValues(alpha: 0.13),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: accent, width: 2),
+              if (logoPath.isNotEmpty)
+                Container(
+                  width: 36,
+                  height: 36,
+                  padding: const EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                    color: AppTheme.paper,
+                    borderRadius: BorderRadius.circular(7),
+                    border: Border.all(color: accent),
+                  ),
+                  child: ThemeProfileLogo(
+                    profile: shownProfile,
+                    width: 30,
+                    height: 30,
+                  ),
+                )
+              else
+                Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    color: accent.withValues(alpha: 0.13),
+                    shape: BoxShape.circle,
+                    border: Border.all(color: accent, width: 2),
+                  ),
+                  child: Icon(
+                    Icons.description_outlined,
+                    color: accent,
+                    size: 17,
+                  ),
                 ),
-                child: Icon(
-                  Icons.description_outlined,
-                  color: accent,
-                  size: 17,
-                ),
-              ),
               const SizedBox(width: 9),
               Expanded(
                 child: Text(
