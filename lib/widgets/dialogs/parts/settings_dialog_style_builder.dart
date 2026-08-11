@@ -248,6 +248,7 @@ class _DocumentStyleBuilder {
               },
             ),
           ),
+          if (!advancedExpanded) _profileContrastSummary(),
           const Divider(height: 1),
           Material(
             color: AppTheme.paper,
@@ -279,6 +280,15 @@ class _DocumentStyleBuilder {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _profileContrastSummary() {
+    final issues = owner._themeContrastByField().values;
+    if (issues.isEmpty) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(14, 0, 14, 12),
+      child: owner._contrastWarning(issues.first),
     );
   }
 
@@ -342,15 +352,17 @@ class _DocumentStyleBuilder {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 12,
+            runSpacing: 8,
             children: [
-              Expanded(
-                child: Text(
-                  l10n.d('Voorvertoning'),
-                  style: TextStyle(
-                    color: AppTheme.slate700,
-                    fontWeight: FontWeight.w700,
-                  ),
+              Text(
+                l10n.d('Voorvertoning'),
+                style: TextStyle(
+                  color: AppTheme.slate700,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               SegmentedButton<bool>(
@@ -505,7 +517,8 @@ ${l10n.d('De snelle bruine vos springt over de luie hond.')}
         ),
         const SizedBox(height: 22),
         Expanded(
-          child: ClipRect(
+          child: SingleChildScrollView(
+            primary: false,
             child: Theme(
               data: ThemeData(
                 colorScheme: scheme,
