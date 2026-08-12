@@ -1773,6 +1773,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Groot bestand': 'Berkas besar',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Berkas ini berukuran {grootte}. Itu melebihi batas yang disarankan yaitu {limiet}. Mengimpor mungkin lambat dan menggunakan banyak memori — pada perangkat yang lebih kecil aplikasi bisa macet.',
+  'Toch importeren': 'Impor saja',
   'Koptekst': 'Header',
   'Afbeelding niet opgehaald': 'Gambar tidak diambil',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

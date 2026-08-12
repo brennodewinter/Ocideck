@@ -1772,6 +1772,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Groot bestand': 'Liels fails',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Šis fails ir {grootte} liels. Tas ir vairāk nekā ieteiktais limits {limiet}. Importēšana var būt lēna un patērēt daudz atmiņas — uz mazākas ierīces lietotne var sasalt.',
+  'Toch importeren': 'Importēt tik un tā',
   'Koptekst': 'Galvene',
   'Afbeelding niet opgehaald': 'Attēls nav iegūts',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

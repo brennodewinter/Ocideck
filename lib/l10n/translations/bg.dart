@@ -1795,6 +1795,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Groot bestand': 'Голям файл',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Този файл е с размер {grootte}. Това е повече от препоръчителния лимит от {limiet}. Импортирането може да е бавно и да използва много памет — на по-малко устройство приложението може да замръзне.',
+  'Toch importeren': 'Импортирай въпреки това',
   'Koptekst': 'Горен колонтитул',
   'Afbeelding niet opgehaald': 'Изображението не е извлечено',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

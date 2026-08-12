@@ -1790,6 +1790,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Groot bestand': 'Великий файл',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Цей файл має розмір {grootte}. Це більше за рекомендований ліміт {limiet}. Імпортування може бути повільним і використовувати багато пам\'яті — на меншому пристрої застосунок може зависнути.',
+  'Toch importeren': 'Імпортувати попри все',
   'Koptekst': 'Верхній колонтитул',
   'Afbeelding niet opgehaald': 'Зображення не отримано',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

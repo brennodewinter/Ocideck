@@ -1800,6 +1800,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Groot bestand': 'Μεγάλο αρχείο',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Αυτό το αρχείο έχει μέγεθος {grootte}. Είναι περισσότερο από το προτεινόμενο όριο {limiet}. Η εισαγωγή μπορεί να είναι αργή και να χρησιμοποιήσει πολλή μνήμη — σε μια μικρότερη συσκευή η εφαρμογή μπορεί να παγώσει.',
+  'Toch importeren': 'Εισαγωγή ούτως ή άλλως',
   'Koptekst': 'Κεφαλίδα',
   'Afbeelding niet opgehaald': 'Η εικόνα δεν ανακτήθηκε',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

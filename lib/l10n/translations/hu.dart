@@ -1777,6 +1777,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Groot bestand': 'Nagy fájl',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Ez a fájl {grootte} méretű. Ez több, mint a javasolt {limiet} határ. Az importálás lassú lehet és sok memóriát igényelhet — egy kisebb eszközön az alkalmazás lefagyhat.',
+  'Toch importeren': 'Importálás mindenképp',
   'Koptekst': 'Élőfej',
   'Afbeelding niet opgehaald': 'A kép nem tölthető le',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
