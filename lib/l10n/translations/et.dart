@@ -331,6 +331,8 @@ const _dutchSourceEt = {
   'AI-assistentie (ontwerp)': 'AI-abi (kavand)',
   'Agentisch bouwplan (ontwerp)': 'Agentne ehitusplaan (kavand)',
   'Bijsnijden': 'Kärbi',
+  'Linksom': 'Pööra vasakule',
+  'Rechtsom': 'Pööra paremale',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Lohista pilti, et valida, milline osa jääb nähtavaks.',
   'Git-opslag (ontwerp)': 'Git-salvestus (kavand)',

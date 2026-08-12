@@ -335,6 +335,8 @@ const _dutchSourceSk = {
   'AI-assistentie (ontwerp)': 'Asistencia AI (návrh)',
   'Agentisch bouwplan (ontwerp)': 'Agentný plán zostavenia (návrh)',
   'Bijsnijden': 'Orezať',
+  'Linksom': 'Otočiť doľava',
+  'Rechtsom': 'Otočiť doprava',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Potiahnutím obrázka vyberte, ktorá časť zostane viditeľná.',
   'Git-opslag (ontwerp)': 'Úložisko Git (návrh)',

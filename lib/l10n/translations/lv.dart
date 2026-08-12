@@ -333,6 +333,8 @@ const _dutchSourceLv = {
   'AI-assistentie (ontwerp)': 'MI palīdzība (dizains)',
   'Agentisch bouwplan (ontwerp)': 'Aģentisks veidošanas plāns (dizains)',
   'Bijsnijden': 'Apgriezt',
+  'Linksom': 'Pagriezt pa kreisi',
+  'Rechtsom': 'Pagriezt pa labi',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Velciet attēlu, lai izvēlētos, kura daļa paliek redzama.',
   'Git-opslag (ontwerp)': 'Git krātuve (dizains)',

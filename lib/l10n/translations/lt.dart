@@ -333,6 +333,8 @@ const _dutchSourceLt = {
   'AI-assistentie (ontwerp)': 'DI pagalba (projektas)',
   'Agentisch bouwplan (ontwerp)': 'Agentinis kūrimo planas (projektas)',
   'Bijsnijden': 'Apkarpyti',
+  'Linksom': 'Sukti kairėn',
+  'Rechtsom': 'Sukti dešinėn',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Vilkite paveikslėlį, kad pasirinktumėte, kuri dalis liks matoma.',
   'Git-opslag (ontwerp)': 'Git saugykla (projektas)',

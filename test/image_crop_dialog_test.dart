@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image/image.dart' as img;
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/widgets/slides/image_crop_dialog.dart';
 import 'package:path/path.dart' as p;
@@ -246,5 +247,59 @@ void main() {
 
     expect(find.text('Bijsnijden'), findsNothing);
     expect(uitkomst, [null]);
+  });
+
+  group('draaien', () {
+    setUp(() {
+      // Maak een asymmetrische 2x2 PNG zodat 90° rotatie meetbaar is.
+      final original = img.Image(width: 2, height: 2);
+      original.setPixelRgb(0, 0, 255, 0, 0);
+      original.setPixelRgb(1, 0, 0, 0, 0);
+      original.setPixelRgb(0, 1, 0, 0, 0);
+      original.setPixelRgb(1, 1, 0, 0, 255);
+      File(foto).writeAsBytesSync(img.encodePng(original));
+    });
+
+    testWidgets('Rechtsom draait de afbeelding 90° en schrijft terug', (
+      tester,
+    ) async {
+      final origBytes = File(foto).readAsBytesSync();
+      final uitkomst = await open(tester);
+
+      expect(find.byIcon(Icons.rotate_right), findsOneWidget);
+      await tester.tap(find.byIcon(Icons.rotate_right));
+      await tester.pumpAndSettle();
+      await klaar(tester);
+
+      // Het resultaat is teruggekomen.
+      expect(uitkomst.single, isNotNull);
+      // Het bestand op schijf moet zijn bijgewerkt met de geroteerde bytes.
+      final newBytes = File(foto).readAsBytesSync();
+      expect(newBytes, isNot(equals(origBytes)));
+      // En de geroteerde afbeelding moet decodeerbaar zijn met dezelfde
+      // afmetingen (2x2 blijft 2x2 bij 90°).
+      final rotated = img.decodeImage(newBytes);
+      expect(rotated, isNotNull);
+      expect(rotated!.width, 2);
+      expect(rotated.height, 2);
+    });
+
+    testWidgets('Herstel zet de rotatie terug naar het origineel', (
+      tester,
+    ) async {
+      final origBytes = File(foto).readAsBytesSync();
+      await open(tester);
+
+      await tester.tap(find.byIcon(Icons.rotate_right));
+      await tester.pumpAndSettle();
+      // Herstel zou de rotatie moeten terugdraaien.
+      await tester.tap(find.widgetWithText(TextButton, 'Herstel'));
+      await tester.pumpAndSettle();
+      await klaar(tester);
+
+      // Zonder rotatie wordt het bestand niet aangeraakt.
+      final newBytes = File(foto).readAsBytesSync();
+      expect(newBytes, equals(origBytes));
+    });
   });
 }

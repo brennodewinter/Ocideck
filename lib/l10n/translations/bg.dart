@@ -335,6 +335,8 @@ const _dutchSourceBg = {
   'AI-assistentie (ontwerp)': 'AI помощ (проект)',
   'Agentisch bouwplan (ontwerp)': 'Агентен план за изграждане (проект)',
   'Bijsnijden': 'Изрязване',
+  'Linksom': 'Завърти наляво',
+  'Rechtsom': 'Завърти надясно',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Плъзнете изображението, за да изберете коя част да остане видима.',
   'Git-opslag (ontwerp)': 'Git хранилище (проект)',

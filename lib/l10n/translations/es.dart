@@ -339,6 +339,8 @@ const _dutchSourceEs = {
   'AI-assistentie (ontwerp)': 'Asistencia de IA (diseño)',
   'Agentisch bouwplan (ontwerp)': 'Plan de construcción agéntico (diseño)',
   'Bijsnijden': 'Recortar',
+  'Linksom': 'Girar a la izquierda',
+  'Rechtsom': 'Girar a la derecha',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Arrastra la imagen para elegir qué parte permanece visible.',
   'Git-opslag (ontwerp)': 'Almacenamiento Git (diseño)',

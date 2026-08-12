@@ -334,6 +334,8 @@ const _dutchSourceGsw = {
   'AI-assistentie (ontwerp)': 'AI-Assistänz (Design)',
   'Agentisch bouwplan (ontwerp)': 'Agentische Bauplan (Design)',
   'Bijsnijden': 'Zueschniide',
+  'Linksom': 'Nach links drehä',
+  'Rechtsom': 'Nach rechts drehä',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Zieh s Bild, zum uswähle, weli Teil sichtbar bliibt.',
   'Git-opslag (ontwerp)': 'Git-Speicher (Design)',

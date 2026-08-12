@@ -335,6 +335,8 @@ const _dutchSourceRo = {
   'AI-assistentie (ontwerp)': 'Asistență AI (proiectare)',
   'Agentisch bouwplan (ontwerp)': 'Plan de construcție agentic (proiectare)',
   'Bijsnijden': 'Decupează',
+  'Linksom': 'Rotește la stânga',
+  'Rechtsom': 'Rotește la dreapta',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Trageți imaginea pentru a alege ce parte rămâne vizibilă.',
   'Git-opslag (ontwerp)': 'Stocare Git (proiectare)',

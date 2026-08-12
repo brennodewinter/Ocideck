@@ -335,6 +335,8 @@ const _dutchSourceUk = {
   'AI-assistentie (ontwerp)': 'Допомога ШІ (проєкт)',
   'Agentisch bouwplan (ontwerp)': 'Агентний план складання (проєкт)',
   'Bijsnijden': 'Обрізати',
+  'Linksom': 'Повернути ліворуч',
+  'Rechtsom': 'Повернути праворуч',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Перетягніть зображення, щоб вибрати, яка частина залишиться видимою.',
   'Git-opslag (ontwerp)': 'Сховище Git (проєкт)',

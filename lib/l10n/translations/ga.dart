@@ -338,6 +338,8 @@ const _dutchSourceGa = {
   'AI-assistentie (ontwerp)': 'Cúnamh AI (dearadh)',
   'Agentisch bouwplan (ontwerp)': 'Plean tógála gníomhaireach (dearadh)',
   'Bijsnijden': 'Bearr',
+  'Linksom': 'Rothlaigh ar chlé',
+  'Rechtsom': 'Rothlaigh ar dheis',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Tarraing an íomhá chun a roghnú cén chuid a fhanann le feiceáil.',
   'Git-opslag (ontwerp)': 'Stóráil Git (dearadh)',

@@ -336,6 +336,8 @@ const _dutchSourceLa = {
   'Agentisch bouwplan (ontwerp)':
       'Consilium aedificationis agenticum (designatio)',
   'Bijsnijden': 'Recidere',
+  'Linksom': 'Sinistrorsum',
+  'Rechtsom': 'Dextrorsum',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Trahe imaginem ut eligas quae pars visibilis maneat.',
   'Git-opslag (ontwerp)': 'Git repositio (designatio)',

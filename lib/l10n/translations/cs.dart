@@ -336,6 +336,8 @@ const _dutchSourceCs = {
   'AI-assistentie (ontwerp)': 'AI asistence (návrh)',
   'Agentisch bouwplan (ontwerp)': 'Agentní plán sestavení (návrh)',
   'Bijsnijden': 'Oříznout',
+  'Linksom': 'Otočit doleva',
+  'Rechtsom': 'Otočit doprava',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Přetažením obrázku vyberte, která část zůstane viditelná.',
   'Git-opslag (ontwerp)': 'Úložiště Git (návrh)',

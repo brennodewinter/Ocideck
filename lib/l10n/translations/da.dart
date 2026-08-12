@@ -333,6 +333,8 @@ const _dutchSourceDa = {
   'AI-assistentie (ontwerp)': 'AI-assistance (design)',
   'Agentisch bouwplan (ontwerp)': 'Agentisk byggeplan (design)',
   'Bijsnijden': 'Beskær',
+  'Linksom': 'Rotér til venstre',
+  'Rechtsom': 'Rotér til højre',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Træk billedet for at vælge, hvilken del der forbliver synlig.',
   'Git-opslag (ontwerp)': 'Git-lagring (design)',

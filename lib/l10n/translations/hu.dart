@@ -334,6 +334,8 @@ const _dutchSourceHu = {
   'AI-assistentie (ontwerp)': 'AI-asszisztencia (terv)',
   'Agentisch bouwplan (ontwerp)': 'Ágensalapú építési terv (terv)',
   'Bijsnijden': 'Levágás',
+  'Linksom': 'Forgatás balra',
+  'Rechtsom': 'Forgatás jobbra',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Húzza a képet, hogy kiválassza, melyik rész marad látható.',
   'Git-opslag (ontwerp)': 'Git-tárolás (terv)',

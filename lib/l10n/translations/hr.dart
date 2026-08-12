@@ -335,6 +335,8 @@ const _dutchSourceHr = {
   'AI-assistentie (ontwerp)': 'AI pomoć (dizajn)',
   'Agentisch bouwplan (ontwerp)': 'Agentski plan izgradnje (dizajn)',
   'Bijsnijden': 'Izreži',
+  'Linksom': 'Rotiraj lijevo',
+  'Rechtsom': 'Rotiraj desno',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Povucite sliku da odaberete koji dio ostaje vidljiv.',
   'Git-opslag (ontwerp)': 'Git pohrana (dizajn)',

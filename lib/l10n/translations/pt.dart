@@ -337,6 +337,8 @@ const _dutchSourcePt = {
   'AI-assistentie (ontwerp)': 'Assistência de IA (design)',
   'Agentisch bouwplan (ontwerp)': 'Plano de construção agêntico (design)',
   'Bijsnijden': 'Recortar',
+  'Linksom': 'Girar à esquerda',
+  'Rechtsom': 'Girar à direita',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Arraste a imagem para escolher que parte permanece visível.',
   'Git-opslag (ontwerp)': 'Armazenamento Git (design)',

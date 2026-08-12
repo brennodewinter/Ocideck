@@ -339,6 +339,8 @@ const _dutchSourceFr = {
   'AI-assistentie (ontwerp)': 'Assistance IA (conception)',
   'Agentisch bouwplan (ontwerp)': 'Plan de construction agentique (conception)',
   'Bijsnijden': 'Rogner',
+  'Linksom': 'Pivoter à gauche',
+  'Rechtsom': 'Pivoter à droite',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Faites glisser l\'image pour choisir la partie qui reste visible.',
   'Git-opslag (ontwerp)': 'Stockage Git (conception)',

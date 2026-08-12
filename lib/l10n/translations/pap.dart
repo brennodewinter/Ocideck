@@ -334,6 +334,8 @@ const _dutchSourcePap = {
   'AI-assistentie (ontwerp)': 'Asistensia AI (diseño)',
   'Agentisch bouwplan (ontwerp)': 'Plan di konstrukshon agéntiko (diseño)',
   'Bijsnijden': 'Korta',
+  'Linksom': 'Bira na man robes',
+  'Rechtsom': 'Bira na man drechi',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Lastra e imagen pa skohe ki parti ta keda visibel.',
   'Git-opslag (ontwerp)': 'Almasenamentu Git (diseño)',
