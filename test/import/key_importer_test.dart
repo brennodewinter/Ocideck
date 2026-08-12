@@ -71,6 +71,67 @@ void main() {
   );
 
   test(
+    'preserves bullet indent levels from Keynote paragraph styles',
+    () async {
+      // A body StorageArchive whose paragraphs alternate between two
+      // ParagraphStyleArchives: style A (listLevel 1 = top) and style B
+      // (listLevel 3 = sub). The importer must map these to levels 0 and 1.
+      final recordBytes = [
+        fx.recordWithRefs(
+          1,
+          1,
+          fx.slidePayload(titleRefIndex: 0, bodyRefIndex: 1),
+          [10, 11],
+        ),
+        fx.recordWithRefs(10, 2, fx.shapeInfoPayload(0), [12]),
+        fx.record(12, 3, fx.storagePayload(['Plan'])),
+        // Body shape → body storage. The storage's object_references list
+        // the two ParagraphStyleArchive objects (indices 0 and 1).
+        fx.recordWithRefs(
+          11,
+          2,
+          fx.shapeInfoPayload(0),
+          [13], // shape's containedStorage → storage id 13
+        ),
+        fx.recordWithRefs(
+          13,
+          3,
+          fx.storagePayloadWithLevels(
+            'Title\nTop\nSub\nTop2\nSub2',
+            [0, 0, 1, 0, 1], // style ref indices: 0=top, 1=sub
+          ),
+          [14, 15], // object_references: [styleA, styleB]
+        ),
+        fx.record(14, 2022, fx.paragraphStylePayload(1)), // top level
+        fx.record(15, 2022, fx.paragraphStylePayload(3)), // sub level
+      ].expand((e) => e).toList();
+      final stream = fx.iwaStream(recordBytes);
+      final bytes = fx.zip({'Index/slide-1.iwa': stream});
+
+      final deck = (await KeyImporter().importBytes(
+        bytes,
+        path: 'levels.key',
+      )).okValue!;
+      expect(deck.slides, hasLength(1));
+      expect(deck.slides.single.title, 'Plan');
+      final bullets = deck.slides.single.bodyBlocks
+          .where((b) => b.kind == BodyBlockKind.bullet)
+          .toList();
+      expect(bullets, hasLength(5));
+      expect(bullets[0].text, 'Title');
+      expect(bullets[0].level, 0);
+      expect(bullets[1].text, 'Top');
+      expect(bullets[1].level, 0);
+      expect(bullets[2].text, 'Sub');
+      expect(bullets[2].level, 1);
+      expect(bullets[3].text, 'Top2');
+      expect(bullets[3].level, 0);
+      expect(bullets[4].text, 'Sub2');
+      expect(bullets[4].level, 1);
+    },
+  );
+
+  test(
     'salvages text from a real IWA Snappy stream into a bullet slide',
     () async {
       // One IWA object whose payload holds a UTF-8 string "Revenue".

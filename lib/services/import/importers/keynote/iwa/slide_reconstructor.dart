@@ -105,7 +105,9 @@ class SlideReconstructor {
   })
   _slideContent(IwaObject o, int slideIndex) {
     final title =
-        _drawableReader.placeholderText(o, 5) ?? o.message.string(10) ?? '';
+        _drawableReader.placeholderTextWithLevels(o, 5) ??
+        o.message.string(10) ??
+        '';
     final body = <String>[];
     final images = <SourceImage>[];
     final localIssues = <ConversionIssue>[];
@@ -113,7 +115,7 @@ class SlideReconstructor {
     SourceChart? chart;
     SourceVideo? video;
     String? audioFileName;
-    final bodyPlaceholder = _drawableReader.placeholderText(o, 6);
+    final bodyPlaceholder = _drawableReader.placeholderTextWithLevels(o, 6);
     if (bodyPlaceholder != null) body.add(bodyPlaceholder);
     final (drawables, hadGroup) = _drawableReader.flattenDrawables(
       doc.resolveReferences(o, 7),
@@ -200,7 +202,7 @@ class SlideReconstructor {
           );
         }
       }
-      final t = _drawableReader.shapeText(drawable);
+      final t = _drawableReader.shapeTextWithLevels(drawable);
       if (t != null && t != title && t != bodyPlaceholder) body.add(t);
       if (_drawableReader.isUnhandledDrawable(
         drawable,
@@ -262,13 +264,19 @@ class SlideReconstructor {
     if (content.text != null) {
       var order = 0;
       for (final line in content.text!.split(RegExp(r'\r\n|\r|\n')).skip(1)) {
-        final t = line.trim();
+        // Leading tabs encode the bullet indent level (see
+        // DrawableReader.shapeTextWithLevels). Count them before trimming.
+        var level = 0;
+        while (level < line.length && line[level] == '\t') {
+          level++;
+        }
+        final t = line.substring(level).trim();
         if (t.isEmpty) continue;
         blocks.add(
           BodyBlock(
             kind: BodyBlockKind.bullet,
             text: t,
-            level: 0,
+            level: level,
             order: order++,
           ),
         );
