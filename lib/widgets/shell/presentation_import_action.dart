@@ -9,6 +9,7 @@ import '../../services/import/bulk_import_runner.dart';
 import '../../services/import/deck_builder.dart';
 import '../../services/import/importers/import_failure.dart';
 import '../../services/import/presentation_import_service.dart';
+import '../../services/import/utils/import_budget.dart';
 import '../../services/web_asset_store.dart';
 import '../../state/deck_provider.dart';
 import '../../state/import_module_provider.dart';
@@ -19,6 +20,7 @@ import '../../utils/log.dart';
 import '../../utils/user_facing_error.dart';
 import '../dialogs/settings_dialog.dart';
 import '../dialogs/import_presentation_warning_dialog.dart';
+import '../dialogs/oversized_import_warning_dialog.dart';
 import '../dialogs/import_decision_dialog.dart';
 import '../dialogs/import_security_alarm_dialog.dart';
 import '../dialogs/presentation_import_progress_dialog.dart';
@@ -71,6 +73,24 @@ Future<void> importPresentation(
   }
   final chosen = picked.first;
 
+  // De 512 MiB-bronlimiet is een zachte grens: een legitiem grote presentatie
+  // mag er niet op stuklopen. Overschrijdt het bestand hem, dan vraagt de
+  // waarschuwing of de gebruiker het zeker weet — en bij ja krijgt de import
+  // een budget met precies deze bestandsgrootte als bronlimiet. De harde
+  // grenzen (uitgepakt totaal, aantal onderdelen) blijven gehandhaafd: die
+  // beschermen tegen een zip-bom, en daar mag geen bevestiging overheen.
+  final standardBudget = ImportBudget.standard;
+  var budget = standardBudget;
+  if (chosen.bytes.length > standardBudget.maxSourceBytes) {
+    final proceed = await showOversizedImportWarning(
+      context,
+      fileSize: chosen.bytes.length,
+      limit: standardBudget.maxSourceBytes,
+    );
+    if (!proceed || !context.mounted) return;
+    budget = ImportBudget(maxSourceBytes: chosen.bytes.length);
+  }
+
   // Twee fasen, met de vraag ertussen: lezen en classificeren, dán pas
   // beslissen wát er met de probleemdia's gebeurt, dán pas bouwen. Zo hoeft
   // het bestand niet twee keer geparseerd te worden (#812). Het lezen draait op
@@ -87,6 +107,7 @@ Future<void> importPresentation(
         // op de bouwer; de service geeft hem door.
         return await PresentationImportService(
           builder: DeckBuilder(translate: l10n.d),
+          budget: budget,
         ).prepare(
           chosen.bytes,
           filename: chosen.name,
