@@ -220,12 +220,17 @@ Widget _resolvedImage(
   // slidestrook zet daarbovenop een veel lagere grens via de scope — daar is
   // een thumbnail van ~180 px breed, en op ware grootte kost één telefoonfoto
   // bijna 49 MiB (#612).
+  //
+  // De version-teller forceert een cache-miss nadat een afbeelding op schijf
+  // is herschreven (bv. na rotatie in de crop-dialoog) — zonder dit blijft de
+  // Image-widget de oude decode tonen omdat de provider `==` niet verandert.
   final maxEdge = SlideLinkScope.decodeMaxEdgeOf(context);
+  final version = imageVersionOf(resolved);
   return styled(
     Image(
       image: maxEdge == null
-          ? cappedFileImage(File(resolved))
-          : boundedFileImage(File(resolved), maxEdge),
+          ? cappedFileImage(File(resolved), version: version)
+          : boundedFileImage(File(resolved), maxEdge, version: version),
       fit: fit,
       alignment: alignment,
       width: double.infinity,

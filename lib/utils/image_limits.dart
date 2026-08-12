@@ -112,6 +112,39 @@ class CappedImage extends ImageProvider<CappedImage> {
   String toString() => 'CappedImage($cacheKey, scale: $scale)';
 }
 
+/// Process-local versie-teller per bestandspad. Wordt opgehoogd door
+/// [bumpImageVersion] nadat een afbeelding op schijf is herschreven (bv. na
+/// rotatie in de crop-dialoog). De renderlaag leest [imageVersionOf] en neemt
+/// de versie op in de [CappedImage]-cacheKey, zodat de `Image`-widget een
+/// nieuwe provider identiteit ziet en opnieuw decodeert in plaats van de
+/// verouderde cache-entry te tonen.
+final Map<String, int> _imageVersions = {};
+
+/// Huidige versie van [path], of 0 als hij nooit is bumped.
+int imageVersionOf(String path) => _imageVersions[path] ?? 0;
+
+/// Verhoog de versie van [path] zodat de volgende render een nieuwe cacheKey
+/// gebruikt en de afbeelding opnieuw van schijf leest.
+void bumpImageVersion(String path) =>
+    _imageVersions[path] = (_imageVersions[path] ?? 0) + 1;
+
+/// [FileImage] met een versienummer in `==`/`hashCode`, zodat [ResizeImage]
+/// een andere cache-key krijgt na [bumpImageVersion] en opnieuw decodeert.
+class _VersionedFileImage extends FileImage {
+  final int version;
+  const _VersionedFileImage(super.file, {this.version = 0});
+
+  @override
+  bool operator ==(Object other) =>
+      other is _VersionedFileImage &&
+      other.file.path == file.path &&
+      other.version == version &&
+      other.scale == scale;
+
+  @override
+  int get hashCode => Object.hash(file.path, version, scale);
+}
+
 /// Een miniatuur-provider die op béide assen begrensd is.
 ///
 /// `Image.file(cacheWidth: n)` begrenst alleen de breedte: de hoogte wordt
@@ -123,19 +156,28 @@ class CappedImage extends ImageProvider<CappedImage> {
 /// Béide meegeven aan `cacheWidth`/`cacheHeight` is niet de oplossing: dat
 /// gebruikt [ResizeImagePolicy.exact] en trekt de afbeelding scheef. Vandaar
 /// `fit`, dat binnen het vierkant past met behoud van verhouding.
-ImageProvider boundedFileImage(File file, int maxEdge) => ResizeImage(
-  FileImage(file),
-  width: maxEdge,
-  height: maxEdge,
-  policy: ResizeImagePolicy.fit,
-  allowUpscaling: false,
-);
+///
+/// [version] komt van [imageVersionOf] en forceert een cache-miss na
+/// [bumpImageVersion], zodat de miniatuur de nieuwe bytes toont.
+ImageProvider boundedFileImage(File file, int maxEdge, {int version = 0}) =>
+    ResizeImage(
+      _VersionedFileImage(file, version: version),
+      width: maxEdge,
+      height: maxEdge,
+      policy: ResizeImagePolicy.fit,
+      allowUpscaling: false,
+    );
 
 /// A capped-decode provider for a deck-supplied image **file**. Decodes at
 /// native resolution within [kMaxImageDecodeDimension] (so an animated GIF keeps
 /// animating) and only scales huge images down. Keyed by path like [FileImage].
-ImageProvider cappedFileImage(File file) =>
-    CappedImage(file.path, () => file.readAsBytes());
+///
+/// [version] komt van [imageVersionOf] en forceert een cache-miss na
+/// [bumpImageVersion].
+ImageProvider cappedFileImage(File file, {int version = 0}) => CappedImage(
+  version == 0 ? file.path : '${file.path}#$version',
+  () => file.readAsBytes(),
+);
 
 /// A capped-decode provider for in-memory image [bytes] (`mem:` paths from the
 /// WebAssetStore). Pass the *same* bytes object each time so the cache shares one

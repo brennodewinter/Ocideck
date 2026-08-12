@@ -182,6 +182,39 @@ void main() {
     expect(WebAssetStore.totalBytes, 3);
   });
 
+  test('replace vervangt bytes op hetzelfde pad en past het budget aan', () {
+    final path = WebAssetStore.put(
+      Uint8List.fromList([1, 2, 3, 4]),
+      name: 'foto.png',
+    );
+    expect(WebAssetStore.totalBytes, 4);
+
+    final replacement = Uint8List.fromList([10, 20, 30]);
+    WebAssetStore.replace(path, replacement);
+
+    expect(WebAssetStore.bytesFor(path), same(replacement));
+    expect(WebAssetStore.nameFor(path), 'foto.png');
+    expect(WebAssetStore.totalBytes, 3);
+  });
+
+  test('replace op een onbekend pad is een stille no-op', () {
+    WebAssetStore.replace('mem:bestaat-niet', Uint8List.fromList([1]));
+    expect(WebAssetStore.totalBytes, 0);
+  });
+
+  test('replace weigert wanneer de nieuwe bytes het budget overschrijden', () {
+    WebAssetStore.overrideTotalBudgetForTest(8);
+    final path = WebAssetStore.put(
+      Uint8List.fromList([1, 2, 3, 4]),
+      name: 'foto.png',
+    );
+    expect(
+      () => WebAssetStore.replace(path, Uint8List(9)),
+      throwsA(isA<WebAssetBudgetExceeded>()),
+    );
+    expect(WebAssetStore.bytesFor(path)!.length, 4, reason: 'origineel blijft');
+  });
+
   testWidgets('een slide met mem:-pad rendert uit de store', (tester) async {
     await tester.runAsync(() async {
       final bytes = await _redPngBytes();
