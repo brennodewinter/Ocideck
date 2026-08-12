@@ -51,9 +51,13 @@ void main() {
     );
     return (
       slides: built.deck.slides,
+      // Niet-overgenomen inhoud zit nu in de notities van de dia zelf, of —
+      // bij overslaan — in een aparte freeMarkdown-dia.
       notes: built.deck.slides
-          .where((s) => s.type == SlideType.freeMarkdown)
-          .map((s) => s.customMarkdown)
+          .map(
+            (s) =>
+                s.type == SlideType.freeMarkdown ? s.customMarkdown : s.notes,
+          )
           .join('\n'),
     );
   }

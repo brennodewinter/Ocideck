@@ -127,11 +127,12 @@ void main() {
       ),
     ]);
     final back = roundTrip(deck);
-    // Het tÿpe mag na het teruglezen verschuiven — een notitiedia met een kop
-    // en een lijst leest als bullets — maar de tékst moet er nog staan. Dat is
-    // wat de belofte waard maakt: de melding overleeft in het bestand zelf.
+    // De niet-overgenomen inhoud zit nu in de notities van de dia zelf. De
+    // tekst moet in het bestand overleven — dat is wat de belofte waard maakt.
     final all = back.slides
-        .map((s) => [s.title, s.customMarkdown, ...s.bullets].join(' '))
+        .map(
+          (s) => [s.title, s.customMarkdown, s.notes, ...s.bullets].join(' '),
+        )
         .join('\n');
     expect(all, contains('Alinea'));
   });
