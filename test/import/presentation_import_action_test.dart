@@ -150,36 +150,44 @@ void main() {
     container.dispose();
   });
 
-  testWidgets('een onleesbaar bestand meldt de fout en opent geen tab', (
-    tester,
-  ) async {
-    final (container, ctx, ref) = await pump(tester);
-    // Het voortgangsvenster (#875) verschijnt, de inline-import faalt op de
-    // onleesbare bytes, het venster sluit en de fout landt in een SnackBar.
-    final future = importPresentation(
-      ctx,
-      ref,
-      fileOverride: (
-        bytes: Uint8List.fromList([1, 2, 3, 4, 5]),
-        name: 'kapot.pptx',
-      ),
-    );
-    await tester.pumpAndSettle();
-    await future;
+  testWidgets(
+    'een onleesbaar bestand meldt de fout in het venster en opent geen tab',
+    (tester) async {
+      final (container, ctx, ref) = await pump(tester);
+      // Het voortgangsvenster (#875) verschijnt, de inline-import faalt op de
+      // onleesbare bytes, en het venster toont de fout met detail + Sluiten.
+      final future = importPresentation(
+        ctx,
+        ref,
+        fileOverride: (
+          bytes: Uint8List.fromList([1, 2, 3, 4, 5]),
+          name: 'kapot.pptx',
+        ),
+      );
+      await tester.pumpAndSettle();
 
-    // De leesstap zit in runAsync: het aanmaken van `TabsNotifier` start een
-    // periodieke timer, en een FakeTimer blijft na de test hangen.
-    var opened = true;
-    await tester.runAsync(() async {
-      opened = _openDeck(container) != null;
-    });
-    expect(
-      opened,
-      isFalse,
-      reason: 'geen half deck openen op een bestand dat niet te lezen is',
-    );
-    expect(find.byType(SnackBar), findsOneWidget);
-  });
+      // De fout staat in het voortgangsvenster, niet in een snackbar.
+      expect(find.text('Sluiten'), findsOneWidget);
+      expect(find.byType(SelectableText), findsOneWidget);
+
+      // Sluit het venster; de import-oproep voltooit zonder tab te openen.
+      await tester.tap(find.text('Sluiten'));
+      await tester.pumpAndSettle();
+      await future;
+
+      // De leesstap zit in runAsync: het aanmaken van `TabsNotifier` start een
+      // periodieke timer, en een FakeTimer blijft na de test hangen.
+      var opened = true;
+      await tester.runAsync(() async {
+        opened = _openDeck(container) != null;
+      });
+      expect(
+        opened,
+        isFalse,
+        reason: 'geen half deck openen op een bestand dat niet te lezen is',
+      );
+    },
+  );
 
   testWidgets('de waarschuwing afbreken houdt de hele import tegen', (
     tester,

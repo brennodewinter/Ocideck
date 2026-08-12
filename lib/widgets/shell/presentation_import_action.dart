@@ -128,16 +128,10 @@ Future<void> importPresentation(
   if (prep.wasCancelled) return;
 
   final prepared = prep.prepared;
-  if (prepared == null) {
-    showErrorSnackBar(
-      messenger,
-      l10n,
-      prep.failure == null
-          ? l10n.d('Importeren mislukt.')
-          : importFailureText(l10n, prep.failure!),
-    );
-    return;
-  }
+  // Faalt de import, dan toont het voortgangsvenster de foutmelding mét
+  // technische detail zelf (kopieerbaar, met Sluiten-knop) — hier hoeven we
+  // geen vage snackbar meer achteraan te zetten.
+  if (prepared == null) return;
 
   final decisions = await ImportDecisionDialog.ask(
     context,
