@@ -38,10 +38,12 @@ Future<Deck> _import(List<int> bytes, String filename) async {
   return result.deck!;
 }
 
-/// The free-Markdown note slides the import appends for what it could not map.
-Iterable<String> _notes(Deck deck) => deck.slides
-    .where((s) => s.type == SlideType.freeMarkdown)
-    .map((s) => s.customMarkdown);
+/// The "not converted" notes the import appends for what it could not map.
+/// Since #1466 these ride in the speaker notes of the slide itself, or — when
+/// the slide was skipped — in a standalone freeMarkdown slide.
+Iterable<String> _notes(Deck deck) => deck.slides.map(
+  (s) => s.type == SlideType.freeMarkdown ? s.customMarkdown : s.notes,
+);
 
 void main() {
   setUp(WebAssetStore.clear);

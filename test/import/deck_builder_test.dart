@@ -363,7 +363,7 @@ void main() {
     });
 
     test(
-      'a slide with audio yields a freeMarkdown note slide right after it',
+      'a slide with audio carries the not-converted note in its speaker notes',
       () {
         final built = _build([
           SourceSlide(
@@ -373,11 +373,11 @@ void main() {
             audioFileName: 'intro.mp3',
           ),
         ]);
-        expect(built.deck.slides.length, 2);
-        final note = built.deck.slides[1];
-        expect(note.type, SlideType.freeMarkdown);
-        expect(note.customMarkdown, contains('Niet overgenomen van slide 2'));
-        expect(note.customMarkdown, contains('intro.mp3'));
+        expect(built.deck.slides.length, 1);
+        final slide = built.deck.slides.single;
+        expect(slide.type, SlideType.bullets);
+        expect(slide.notes, contains('Niet overgenomen van slide 2'));
+        expect(slide.notes, contains('intro.mp3'));
         // A real (non-salvaged) loss surfaces as a problem slide.
         expect(built.problemSlides.single.sourceSlideNumber, 2);
         expect(built.problemSlides.single.hadImage, isFalse);

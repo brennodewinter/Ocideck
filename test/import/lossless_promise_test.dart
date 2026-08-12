@@ -32,9 +32,13 @@ void main() {
     final built = DeckBuilder().build(SourceDeck(slides: [s]), [
       classifySlide(s),
     ], title: 'Test');
+    // Niet-overgenomen inhoud zit nu in de notities van de dia zelf, of —
+    // bij overslaan — in een aparte freeMarkdown-dia.
     final notes = built.deck.slides
-        .where((sl) => sl.type == SlideType.freeMarkdown)
-        .map((sl) => sl.customMarkdown)
+        .map(
+          (sl) =>
+              sl.type == SlideType.freeMarkdown ? sl.customMarkdown : sl.notes,
+        )
         .join('\n');
     return (slide: built.deck.slides.first, notes: notes);
   }

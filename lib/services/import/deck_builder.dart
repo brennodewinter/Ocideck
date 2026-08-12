@@ -126,23 +126,42 @@ class DeckBuilder {
           ? SlideFailurePolicy.skip
           : policy;
 
+      var slideAdded = false;
       switch (effective) {
         case SlideFailurePolicy.bestEffort:
           slides.add(_factory.buildSlide(c));
+          slideAdded = true;
         case SlideFailurePolicy.imageOnly:
           slides.add(_factory.imageOnlySlide(c.source));
+          slideAdded = true;
         case SlideFailurePolicy.skip:
           break;
       }
 
       if (issues.isNotEmpty) {
-        slides.add(
-          _factory.noteSlide(
+        if (slideAdded) {
+          // Zet de niet-overgenomen inhoud in de notities van de dia zelf, niet
+          // op een aparte notitiedia. De gebruiker ziet direct wat wegviel bij
+          // de dia waar het bij hoort, in het notitiepaneel van de editor.
+          final noteText = UnconvertedTracker.buildNoteBody(
             c.source.index + 1,
             issues,
             heading: _factory.headingFor(effective, c.source.index + 1),
-          ),
-        );
+            translate: translate,
+          );
+          final last = slides.removeLast();
+          slides.add(last.copyWith(notes: noteText));
+        } else {
+          // De dia werd overgeslagen — er is niets om aan vast te hangen, dus
+          // behoud de aparte notitiedia.
+          slides.add(
+            _factory.noteSlide(
+              c.source.index + 1,
+              issues,
+              heading: _factory.headingFor(effective, c.source.index + 1),
+            ),
+          );
+        }
       }
       if (realLoss.isNotEmpty) {
         problemSlides.add(problemSlide(c.source, realLoss));
