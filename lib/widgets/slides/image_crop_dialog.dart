@@ -250,6 +250,12 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
       } on Object {
         // Een schrijffout mag de crop-keuze niet blokkeren.
       }
+      // Het bestand op schijf is veranderd, maar de image-cache heeft nog de
+      // oude decode voor dit pad. Zonder evict toont de slide de vorige
+      // (ongedraaide) afbeelding tot de cache leegloopt.
+      PaintingBinding.instance.imageCache.evict(
+        CappedImage(resolved, () async => Uint8List(0)),
+      );
     }
   }
 
@@ -406,7 +412,7 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
             Navigator.of(context).pop(),
       },
       child: AlertDialog(
-        title: Text(l10n.d('Bijsnijden')),
+        title: Text(l10n.d('Afbeelding aanpassen')),
         content: SizedBox(
           width: 560,
           child: Column(

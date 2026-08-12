@@ -332,6 +332,7 @@ const _dutchSourceEn = {
   'AI-assistentie (ontwerp)': 'AI assistance (design)',
   'Agentisch bouwplan (ontwerp)': 'Agentic build plan (design)',
   'Bijsnijden': 'Crop',
+  'Afbeelding aanpassen': 'Adjust image',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Drag the image to choose which part stays visible.',
   'Linksom': 'Rotate left',

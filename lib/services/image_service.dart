@@ -4,6 +4,7 @@ import 'package:crypto/crypto.dart' as crypto;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart' show MethodChannel;
+import 'package:image/image.dart' as img;
 import 'package:pasteboard/pasteboard.dart';
 import 'package:path/path.dart' as p;
 import '../l10n/app_localizations.dart';
@@ -507,7 +508,16 @@ class ImageService {
       src,
     );
     if (dest == null) return null;
-    if (!dest.alreadyPresent) await src.copy(dest.file.path);
+    if (!dest.alreadyPresent) {
+      // Bak EXIF-orientatie voor afbeeldingen, zodat een JPEG met orientatie-
+      // tag niet op de kop staat in Flutter (die EXIF negeert).
+      if (subdir == 'images') {
+        final bytes = await src.readAsBytes();
+        await writeBytesAtomic(dest.file, _bakeJpegOrientation(bytes));
+      } else {
+        await src.copy(dest.file.path);
+      }
+    }
     return '$subdir/${p.basename(dest.file.path)}';
   }
 
@@ -680,6 +690,34 @@ class ImageService {
     existingByHash: existingByHash,
   );
 
+  /// Bak de EXIF-orientatie van [bytes] in de pixels en wis de tag, zodat elke
+  /// renderer (Flutter, export, HTML) de afbeelding correct toont zonder EXIF
+  /// te hoeven interpreteren. Flutter's decoder negeert EXIF-orientatie, dus
+  /// een JPEG met orientatie 3 (180°) staat anders op de kop.
+  ///
+  /// Alleen JPEGs hebben in de praktijk een EXIF-orientatie-tag; andere
+  /// formaten gaan ongewijzigd terug. Decode + re-encode is een eenmalige
+  /// operatie bij import/opslaan — na het bakken is het bestand "correct" voor
+  /// elke weergave. De overige EXIF (GPS, cameramodel) blijft staan; die wordt
+  /// pas gestript bij de HTML-export ([encodeForHtmlEmbed]).
+  Uint8List _bakeJpegOrientation(Uint8List bytes) {
+    // Alleen JPEGs kunnen een EXIF-orientatie-tag dragen.
+    if (bytes.length < 4 || bytes[0] != 0xFF || bytes[1] != 0xD8) return bytes;
+    try {
+      final decoded = img.decodeImage(bytes);
+      if (decoded == null) return bytes;
+      if (!decoded.exif.imageIfd.hasOrientation ||
+          decoded.exif.imageIfd.orientation == 1) {
+        return bytes; // geen orientatie-tag → niets te bakken
+      }
+      final baked = img.bakeOrientation(decoded);
+      return Uint8List.fromList(img.encodeJpg(baked, quality: 95));
+    } on Object catch (e) {
+      logWarning('ImageService._bakeJpegOrientation: decode/encode failed', e);
+      return bytes; // bij een fout liever de originele bytes dan data verlies
+    }
+  }
+
   /// Schrijf een in-geheugen `mem:`-asset als echt bestand in [destDir] en geef
   /// het projectrelatieve pad terug.
   ///
@@ -696,8 +734,12 @@ class ImageService {
     required String fallbackExtension,
     Map<String, String>? existingByHash,
   }) async {
-    final bytes = WebAssetStore.bytesFor(memPath);
+    var bytes = WebAssetStore.bytesFor(memPath);
     if (bytes == null) return null;
+    // Bak EXIF-orientatie in de pixels voordat we de hash berekenen en
+    // wegschrijven — anders staat een JPEG met orientatie-tag op de kop in
+    // Flutter (die EXIF negeert) en in de export.
+    if (subdir == 'images') bytes = _bakeJpegOrientation(bytes);
     // Cross-import dedup: als er al een bestand met dezelfde inhoud in de
     // projectmap staat (onder een andere naam), hergebruik het dan.
     if (existingByHash != null) {

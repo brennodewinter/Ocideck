@@ -1775,6 +1775,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afbeelding aanpassen': 'Säädä kuva',
   'Groot bestand': 'Suuri tiedosto',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Tämä tiedosto on kooltaan {grootte}. Se ylittää suositellun rajan {limiet}. Tuonti voi olla hidas ja viedä paljon muistia — pienemmällä laitteella sovellus voi jumiutua.',

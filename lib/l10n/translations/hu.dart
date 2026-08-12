@@ -1779,6 +1779,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Afbeelding aanpassen': 'Kép beállítása',
   'Groot bestand': 'Nagy fájl',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Ez a fájl {grootte} méretű. Ez több, mint a javasolt {limiet} határ. Az importálás lassú lehet és sok memóriát igényelhet — egy kisebb eszközön az alkalmazás lefagyhat.',

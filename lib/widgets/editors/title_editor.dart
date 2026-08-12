@@ -69,7 +69,7 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
         alignment: Alignment.centerLeft,
         child: OutlinedButton.icon(
           icon: const Icon(Icons.crop, size: 18),
-          label: Text(context.l10n.d('Bijsnijden')),
+          label: Text(context.l10n.d('Afbeelding aanpassen')),
           onPressed: _openCrop,
         ),
       ),

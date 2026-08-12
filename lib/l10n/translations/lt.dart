@@ -1782,6 +1782,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Afbeelding aanpassen': 'Derinti paveikslėlį',
   'Groot bestand': 'Didelis failas',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Šis failas yra {grootte} dydžio. Tai daugiau nei rekomenduojamas limitas {limiet}. Importavimas gali būti lėtas ir naudoti daug atminties — mažesniame įrenginyje programa gali užstrigti.',

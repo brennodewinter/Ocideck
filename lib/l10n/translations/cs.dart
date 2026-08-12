@@ -1778,6 +1778,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Afbeelding aanpassen': 'Upravit obrázek',
   'Groot bestand': 'Velký soubor',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Tento soubor je velký {grootte}. To je více než doporučený limit {limiet}. Import může být pomalý a vyžadovat hodně paměti — na menším zařízení se aplikace může zaseknout.',

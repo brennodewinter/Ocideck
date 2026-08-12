@@ -1774,6 +1774,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Afbeelding aanpassen': 'Justér billede',
   'Groot bestand': 'Stor fil',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Denne fil er {grootte} stor. Det er mere end den anbefalede grænse på {limiet}. Import kan være langsom og kræve meget hukommelse — på en mindre enhed kan appen fryse.',

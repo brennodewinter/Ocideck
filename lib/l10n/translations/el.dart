@@ -1802,6 +1802,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Afbeelding aanpassen': 'Προσαρμογή εικόνας',
   'Groot bestand': 'Μεγάλο αρχείο',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Αυτό το αρχείο έχει μέγεθος {grootte}. Είναι περισσότερο από το προτεινόμενο όριο {limiet}. Η εισαγωγή μπορεί να είναι αργή και να χρησιμοποιήσει πολλή μνήμη — σε μια μικρότερη συσκευή η εφαρμογή μπορεί να παγώσει.',
