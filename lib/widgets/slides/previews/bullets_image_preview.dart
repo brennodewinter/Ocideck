@@ -80,15 +80,13 @@ class _BulletsImagePreview extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                _resolvedImage(
+                _panelImage(
                   context,
                   slide.imagePath,
                   projectPath,
-                  alignment: focalAlignment(
-                    slide.imageFocalX,
-                    slide.imageFocalY,
-                  ),
-                  semanticLabel: imageSemanticsLabel(
+                  slide.imageZoom,
+                  focalAlignment(slide.imageFocalX, slide.imageFocalY),
+                  imageSemanticsLabel(
                     context,
                     slide.imageCaption,
                     altText: slide.imageAltText,
@@ -253,15 +251,13 @@ class _BulletsImagePreview extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                _resolvedImage(
+                _panelImage(
                   context,
                   slide.imagePath,
                   projectPath,
-                  alignment: focalAlignment(
-                    slide.imageFocalX,
-                    slide.imageFocalY,
-                  ),
-                  semanticLabel: imageSemanticsLabel(
+                  slide.imageZoom,
+                  focalAlignment(slide.imageFocalX, slide.imageFocalY),
+                  imageSemanticsLabel(
                     context,
                     slide.imageCaption,
                     altText: slide.imageAltText,
@@ -498,4 +494,34 @@ class _BulletListColumn extends StatelessWidget {
 EdgeInsets _splitTextLogoSafeInsets(double w, ThemeProfile profile) {
   final (top, bottom) = logoSafeReserveEdges(w, profile, splitText: true);
   return EdgeInsets.only(top: top, bottom: bottom);
+}
+
+/// Rendert een paneelafbeelding (bulletsImage/twoImages) met optionele zoom.
+/// `zoom == 0` → cover (standaard, vult slot, snijdt bij). `zoom > 0` →
+/// hergebruikt [_zoomedImage] voor contain/zoom-in gedrag.
+Widget _panelImage(
+  BuildContext context,
+  String imagePath,
+  String? projectPath,
+  int zoom,
+  Alignment alignment,
+  String? semanticLabel,
+) {
+  if (zoom == 0) {
+    return _resolvedImage(
+      context,
+      imagePath,
+      projectPath,
+      alignment: alignment,
+      semanticLabel: semanticLabel,
+    );
+  }
+  return _zoomedImage(
+    context,
+    imagePath,
+    projectPath,
+    zoom,
+    alignment: alignment,
+    semanticLabel: semanticLabel,
+  );
 }

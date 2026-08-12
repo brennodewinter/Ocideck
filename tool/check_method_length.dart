@@ -52,7 +52,8 @@ const Map<String, int> methodLengthBaseline = {
   // +3: tableNumberColumns doorgeven aan Slide.
   // +19 (#1405): titel-kolommodus afleiding uit sawBgLeft/sawBgRight.
   // +4 (#1407): imageTitleAbove-afleiding + class-token-stripping + constructor-doorvoer.
-  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 203,
+  // +1: imageZoom-doorvoer in Slide-constructor.
+  'lib/services/markdown_service_parse.dart::_MarkdownParse._parseBlock': 204,
   // Procesverbetering SVG export for statistical chart types.
   'lib/services/marp_html/marp_html_service_charts.dart::_improvementChartSvg':
       203,
@@ -79,7 +80,8 @@ const Map<String, int> methodLengthBaseline = {
   // +2: tableNumberColumns-parameter.
   // +4 (#1405): titleColumnLayout/titleColumnWidth in copyWith.
   // +2 (#1407): imageTitleAbove-parameter + doorvoer in copyWith.
-  'lib/models/slide.dart::Slide.copyWith': 162,
+  // +2: imageZoom-parameter + doorvoer in copyWith.
+  'lib/models/slide.dart::Slide.copyWith': 164,
   // +2 (#1238): gantt scale/sections instellingen — twee _SettingRow's.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
       188,

@@ -142,7 +142,8 @@ const Map<String, int> fileSizeBaseline = {
   // uit te tillen naar een part.
   // +12: tableNumberColumns-veld + doc + constructor/duplicate/copyWith-doorvoer.
   // +4 (#1407): imageTitleAbove-veld + constructor/copyFrom/copyWith-doorvoer.
-  'lib/models/slide.dart': 1063,
+  // +8: imageZoom-veld + doc + constructor/duplicate/copyWith-doorvoer.
+  'lib/models/slide.dart': 1071,
   // +17 (#1355, #1360): SealTamperWarning-klasse + sealTamperWarningProvider
   // voor de automatische zegelverificatie bij openen, en de diskFull-case in
   // _packageOpenResult. Beide zijn tightly coupled aan de bestaande providers
@@ -309,7 +310,8 @@ const Map<String, int> classSizeBaseline = {
   // `markdown_table_codec.dart` en telt niet mee.
   // +14: ocideck_table_num_cols directive schrijven + _parseNumCols-lezen.
   // +4 (#1407): image-title-above class-token in de classes-lijst.
-  'lib/services/markdown_service.dart#MarkdownService': 2397,
+  // +12: ocideck_image_zoom directive schrijven + lezen.
+  'lib/services/markdown_service.dart#MarkdownService': 2409,
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2437, // +228 (#1404): hernoem-actie + dialoog; testbare logica zit in
   // ImageRenameService, hier blijft alleen UI-orchestratie

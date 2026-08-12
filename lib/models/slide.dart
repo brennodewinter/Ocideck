@@ -450,6 +450,10 @@ class Slide {
   final MarpStyle marpStyle;
   final double advanceDuration; // 0 = no auto-advance
   final int imageSize; // 0 = auto; image: bg %, bulletsImage: right panel %
+  /// Panel-image zoom for bulletsImage/twoImages: 0 = cover (vult slot, snijdt
+  /// bij), 100 = hele afbeelding zichtbaar (contain), >100 = inzoomen. Full-
+  /// bleed slots (image/title/section) gebruiken [imageSize] voor zoom.
+  final int imageZoom;
   final bool titleImageOverlay; // darken title background image for readability
   final bool
   imageTitleAbove; // image slide: title at top, image below (not overlaid)
@@ -686,6 +690,7 @@ class Slide {
     this.marpStyle = const MarpStyle(),
     this.advanceDuration = 0,
     this.imageSize = 0,
+    this.imageZoom = 0,
     this.titleImageOverlay = true,
     this.imageTitleAbove = false,
     this.titleTextColorOverride = '',
@@ -855,6 +860,7 @@ class Slide {
       marpStyle: src.marpStyle,
       advanceDuration: src.advanceDuration,
       imageSize: src.imageSize,
+      imageZoom: src.imageZoom,
       titleImageOverlay: src.titleImageOverlay,
       imageTitleAbove: src.imageTitleAbove,
       titleTextColorOverride: src.titleTextColorOverride,
@@ -929,6 +935,7 @@ class Slide {
     MarpStyle? marpStyle,
     double? advanceDuration,
     int? imageSize,
+    int? imageZoom,
     bool? titleImageOverlay,
     bool? imageTitleAbove,
     String? titleTextColorOverride,
@@ -1009,6 +1016,7 @@ class Slide {
     marpStyle: marpStyle ?? this.marpStyle,
     advanceDuration: advanceDuration ?? this.advanceDuration,
     imageSize: imageSize ?? this.imageSize,
+    imageZoom: imageZoom ?? this.imageZoom,
     titleImageOverlay: titleImageOverlay ?? this.titleImageOverlay,
     imageTitleAbove: imageTitleAbove ?? this.imageTitleAbove,
     titleTextColorOverride:

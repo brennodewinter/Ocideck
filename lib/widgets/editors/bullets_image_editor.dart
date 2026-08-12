@@ -474,8 +474,8 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   }
 
   Future<void> _openCrop() async {
-    // The image fills a fixed right-hand panel (cover); its width is the panel
-    // fraction, so crop here only repositions the cover — no zoom to change.
+    // The image fills a fixed right-hand panel; crop adjusts both the zoom
+    // (0=cover, 100=contain, >100=zoom in) and the focal point.
     final fraction =
         (widget.slide.imageSize > 0 ? widget.slide.imageSize / 100.0 : 0.40)
             .clamp(0.1, 0.70);
@@ -484,15 +484,17 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
       imagePath: widget.slide.imagePath,
       projectPath: widget.captionBasePath,
       frameAspect: fraction * 16 / 9,
-      imageSize: widget.slide.imageSize,
+      imageSize: widget.slide.imageZoom,
       focalX: widget.slide.imageFocalX,
       focalY: widget.slide.imageFocalY,
+      enableZoom: true,
     );
     if (result == null) return;
     widget.onUpdate(
       widget.slide.copyWith(
         imageFocalX: result.focalX,
         imageFocalY: result.focalY,
+        imageZoom: result.imageSize,
       ),
     );
   }

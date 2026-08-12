@@ -88,8 +88,9 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
   }
 
   Future<void> _openCrop(bool isSecond) async {
-    // Each picture covers its half-panel; the split (imageSize) sets the widths,
-    // so crop only repositions the cover crop of that one image.
+    // Each picture covers its half-panel; the split (imageSize) sets the widths.
+    // Crop adjusts both the zoom (0=cover, 100=contain, >100=zoom in) and the
+    // focal point of that one image.
     final leftFraction =
         (widget.slide.imageSize > 0 ? widget.slide.imageSize / 100.0 : 0.5)
             .clamp(0.1, 0.9);
@@ -99,21 +100,20 @@ class _TwoImagesEditorState extends ConsumerState<TwoImagesEditor> {
       imagePath: isSecond ? widget.slide.imagePath2 : widget.slide.imagePath,
       projectPath: widget.captionBasePath,
       frameAspect: fraction * 16 / 9,
-      imageSize: widget.slide.imageSize,
+      imageSize: widget.slide.imageZoom,
       focalX: isSecond ? widget.slide.imageFocalX2 : widget.slide.imageFocalX,
       focalY: isSecond ? widget.slide.imageFocalY2 : widget.slide.imageFocalY,
+      enableZoom: true,
     );
     if (result == null) return;
     widget.onUpdate(
-      isSecond
-          ? widget.slide.copyWith(
-              imageFocalX2: result.focalX,
-              imageFocalY2: result.focalY,
-            )
-          : widget.slide.copyWith(
-              imageFocalX: result.focalX,
-              imageFocalY: result.focalY,
-            ),
+      widget.slide.copyWith(
+        imageFocalX: isSecond ? null : result.focalX,
+        imageFocalY: isSecond ? null : result.focalY,
+        imageFocalX2: isSecond ? result.focalX : null,
+        imageFocalY2: isSecond ? result.focalY : null,
+        imageZoom: result.imageSize,
+      ),
     );
   }
 

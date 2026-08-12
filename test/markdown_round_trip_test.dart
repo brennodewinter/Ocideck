@@ -1859,6 +1859,48 @@ void main() {
       expect(out.imageFocalX, 0.5);
       expect(out.imageFocalY, 0.5);
     });
+
+    test('bullets+image keeps the panel zoom', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.bulletsImage).copyWith(
+          bullets: const ['Een', 'Twee'],
+          imagePath: 'images/side.png',
+          imageSize: 40,
+          imageZoom: 100,
+        ),
+      );
+      expect(out.type, SlideType.bulletsImage);
+      expect(out.imageZoom, 100);
+    });
+
+    test('two-images keeps the panel zoom', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.twoImages).copyWith(
+          imagePath: 'images/left.png',
+          imagePath2: 'images/right.png',
+          imageZoom: 150,
+        ),
+      );
+      expect(out.type, SlideType.twoImages);
+      expect(out.imageZoom, 150);
+    });
+
+    test('a zero zoom writes no comment and stays default', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(
+              SlideType.bulletsImage,
+            ).copyWith(bullets: const ['A'], imagePath: 'images/x.png'),
+          ],
+        ),
+      );
+      expect(markdown.contains('ocideck_image_zoom'), isFalse);
+      final out = service.parseDeck(markdown)!.slides.single;
+      expect(out.imageZoom, 0);
+    });
   });
 
   group('image alt-text round-trips (AI_ASSIST §6.1)', () {
