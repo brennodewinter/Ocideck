@@ -9,6 +9,7 @@ import '../key_context.dart';
 import '../key_text_salvage.dart';
 import 'iwa_archive.dart';
 import 'iwa_document.dart';
+import 'proto_wire.dart';
 
 /// Reconstructs the text and drawable structure of a Keynote slide from an
 /// iWork object graph: placeholder and note text, the text of an arbitrary
@@ -44,6 +45,15 @@ class DrawableReader {
   String? placeholderText(IwaObject o, int field) {
     for (final shape in doc.resolveReferences(o, field)) {
       final t = shapeText(shape);
+      if (t != null && t.isNotEmpty) return t;
+    }
+    return null;
+  }
+
+  /// Like [placeholderText] but preserves bullet levels via leading tabs.
+  String? placeholderTextWithLevels(IwaObject o, int field) {
+    for (final shape in doc.resolveReferences(o, field)) {
+      final t = shapeTextWithLevels(shape);
       if (t != null && t.isNotEmpty) return t;
     }
     return null;
@@ -169,6 +179,115 @@ class DrawableReader {
     }
     if (chunks.isEmpty) return null;
     return chunks.join();
+  }
+
+  /// The bullet indent level per paragraph in [storage]'s text, derived from
+  /// the ParagraphStyleArchive (typeId 2022) `listLevel` field (field 10)
+  /// referenced by the StorageArchive's paragraph-style map (field 5).
+  ///
+  /// Returns an empty list when no level info is available — callers fall back
+  /// to level 0. Levels are normalised so the shallowest paragraph is level 0.
+  List<int> _storageParagraphLevels(IwaObject storage) {
+    // Field 5 is a single submessage whose field 1 is a repeated list of
+    // paragraph entries: each has field 1 = char offset and optional field 2
+    // = a style-reference submessage (field 1 = object id/index).
+    final f5 = storage.message.bytesList(5);
+    if (f5.isEmpty) return const [];
+    final ProtoMessage paraMap;
+    try {
+      paraMap = ProtoWire().decode(f5.first);
+    } on Object {
+      return const [];
+    }
+    final entries = paraMap.bytesList(1);
+    if (entries.isEmpty) return const [];
+
+    // Walk the paragraph entries, resolving each style reference to a
+    // ParagraphStyleArchive and reading its field 10 (listLevel). Entries
+    // without an explicit style inherit the previous one.
+    final rawLevels = <int>[];
+    var currentLevel = 0;
+    for (final entry in entries) {
+      final ProtoMessage em;
+      try {
+        em = ProtoWire().decode(entry);
+      } on Object {
+        rawLevels.add(currentLevel);
+        continue;
+      }
+      final styleBytes = em.bytesList(2);
+      if (styleBytes.isNotEmpty) {
+        try {
+          final styleMsg = ProtoWire().decode(styleBytes.first);
+          final refId = styleMsg.varint(1);
+          if (refId != null) {
+            final style = doc.resolveReference(storage, refId);
+            if (style != null) {
+              final lvl = style.message.varint(10);
+              if (lvl != null) currentLevel = lvl;
+            }
+          }
+        } on Object {
+          // Keep the inherited level.
+        }
+      }
+      rawLevels.add(currentLevel);
+    }
+
+    // Normalise: map distinct listLevel values to sequential 0-based levels.
+    // iWork listLevel values are not always sequential (e.g. 1, 3, 5), so we
+    // sort the distinct values and map them to 0, 1, 2, …
+    if (rawLevels.isEmpty) return const [];
+    final distinct = rawLevels.toSet().toList()..sort();
+    final levelMap = {for (var i = 0; i < distinct.length; i++) distinct[i]: i};
+    return [for (final l in rawLevels) levelMap[l] ?? 0];
+  }
+
+  /// Like [shapeText] but encodes each paragraph's bullet level as leading
+  /// tabs, so the caller can recover the nesting by counting `\t` prefixes.
+  /// Used by the slide reconstructor to preserve bullet hierarchy (#1468).
+  String? shapeTextWithLevels(IwaObject o, {Set<int>? visited}) {
+    final seen = visited ?? <int>{};
+    if (!seen.add(o.id)) return null;
+
+    for (final target in doc.resolveReferences(o, 2)) {
+      if (_isStorage(target)) {
+        final t = _storageTextWithLevels(target);
+        if (t != null && t.isNotEmpty) return t;
+      }
+    }
+
+    final superMsg = o.message.message(1);
+    if (superMsg != null) {
+      for (final refField in const [2, 4]) {
+        for (final sub in superMsg.messages(refField)) {
+          final refId = sub.varint(1);
+          if (refId == null) continue;
+          final target = doc.resolveReference(o, refId);
+          if (target != null && _isStorage(target)) {
+            final t = _storageTextWithLevels(target);
+            if (t != null && t.isNotEmpty) return t;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  /// Like [_storageText] but prepends `\t` per paragraph level, using
+  /// [_storageParagraphLevels] to determine the depth of each line.
+  String? _storageTextWithLevels(IwaObject o) {
+    final text = _storageText(o);
+    if (text == null || text.isEmpty) return null;
+    final levels = _storageParagraphLevels(o);
+    if (levels.isEmpty) return text;
+    final lines = text.split(RegExp(r'\r\n|\r|\n'));
+    final out = <String>[];
+    for (var i = 0; i < lines.length; i++) {
+      final lvl = i < levels.length ? levels[i] : 0;
+      out.add('${'\t' * lvl}${lines[i]}');
+    }
+    return out.join('\n');
   }
 
   /// Flattens group drawables (`TSD.GroupArchive`) into their leaf children.

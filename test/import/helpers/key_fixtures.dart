@@ -73,6 +73,39 @@ List<int> storagePayload(List<String> texts) => [
   ],
 ];
 
+/// A ParagraphStyleArchive payload (typeId 2022) with a `listLevel` (field 10).
+List<int> paragraphStylePayload(int listLevel) => varintField(10, listLevel);
+
+/// A StorageArchive payload with text (field 3) and a paragraph-style map
+/// (field 5) that assigns a [styleRefIndex] per paragraph. [text] is a single
+/// string with `\n`-separated paragraphs; [styleRefIndices] has one entry per
+/// paragraph. Entries with a `null` style inherit the previous paragraph's
+/// style. [styleRefIndex]es are indices into the StorageArchive's
+/// `object_references` list.
+List<int> storagePayloadWithLevels(String text, List<int?> styleRefIndices) {
+  final out = storagePayload([text]);
+  // Build the paragraph-style map: field 5 → submessage → field 1 (repeated).
+  final lines = text.split('\n');
+  var offset = 0;
+  final entries = <List<int>>[];
+  for (var i = 0; i < styleRefIndices.length; i++) {
+    final entry = <int>[...varintField(1, offset)];
+    final refIdx = styleRefIndices[i];
+    if (refIdx != null) {
+      final styleRef = varintField(1, refIdx);
+      entry.addAll(bytesField(2, styleRef));
+    }
+    entries.add(entry);
+    offset += utf8.encode(lines[i]).length + 1; // +1 for the newline
+  }
+  final paraMap = <int>[];
+  for (final e in entries) {
+    paraMap.addAll(bytesField(1, e));
+  }
+  out.addAll(bytesField(5, paraMap));
+  return out;
+}
+
 /// A SlideArchive payload: title ref (5), body ref (6), optional drawables (7),
 /// optional note ref (27).
 List<int> slidePayload({
