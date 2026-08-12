@@ -3233,6 +3233,9 @@ const _dutchSourceAddLv = <String, String>{
   'Presentatie kiezen': 'Izvēlēties prezentāciju',
   'Importeren mislukt.': 'Imports neizdevās.',
   'Presentatie geïmporteerd.': 'Prezentācija importēta.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Saglabājiet prezentāciju ar savu vārdu. Virsrakstu varat pielāgot tagad.',
+  'Openen': 'Atvērt',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Prezentācija importēta; pārbaudiet uzmanības punktus.',
   'Presentaties geïmporteerd.': 'Prezentācijas importētas.',

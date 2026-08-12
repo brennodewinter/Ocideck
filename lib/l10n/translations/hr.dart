@@ -3238,6 +3238,9 @@ const _dutchSourceAddHr = <String, String>{
   'Presentatie kiezen': 'Odaberi prezentaciju',
   'Importeren mislukt.': 'Uvoz nije uspio.',
   'Presentatie geïmporteerd.': 'Prezentacija uvezena.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Spremite prezentaciju pod vlastitim imenom. Naslov možete sada prilagoditi.',
+  'Openen': 'Otvori',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Prezentacija uvezena; provjerite točke za pažnju.',
   'Presentaties geïmporteerd.': 'Prezentacije uvezene.',

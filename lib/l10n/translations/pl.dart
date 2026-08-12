@@ -3256,6 +3256,9 @@ const _dutchSourceAddPl = <String, String>{
   'Presentatie kiezen': 'Wybierz prezentację',
   'Importeren mislukt.': 'Import nie powiódł się.',
   'Presentatie geïmporteerd.': 'Zaimportowano prezentację.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Zapisz prezentację pod własną nazwą. Możesz teraz dostosować tytuł.',
+  'Openen': 'Otwórz',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Zaimportowano prezentację; sprawdź punkty wymagające uwagi.',
   'Presentaties geïmporteerd.': 'Zaimportowano prezentacje.',

@@ -3250,6 +3250,9 @@ const _dutchSourceAddUk = <String, String>{
   'Presentatie kiezen': 'Вибрати презентацію',
   'Importeren mislukt.': 'Не вдалося імпортувати.',
   'Presentatie geïmporteerd.': 'Презентацію імпортовано.',
+  "Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.":
+      "Збережіть презентацію під власним ім'ям. Ви можете змінити заголовок зараз.",
+  'Openen': 'Відкрити',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Презентацію імпортовано; перевірте зауваження.',
   'Presentaties geïmporteerd.': 'Презентації імпортовано.',

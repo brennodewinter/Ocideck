@@ -3230,6 +3230,9 @@ const _dutchSourceAddCs = <String, String>{
   'Presentatie kiezen': 'Zvolit prezentaci',
   'Importeren mislukt.': 'Import se nezdařil.',
   'Presentatie geïmporteerd.': 'Prezentace importována.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Uložte prezentaci pod vlastním názvem. Název můžete nyní upravit.',
+  'Openen': 'Otevřít',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Prezentace importována; zkontrolujte body k pozornosti.',
   'Presentaties geïmporteerd.': 'Prezentace importovány.',

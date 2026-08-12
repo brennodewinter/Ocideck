@@ -128,6 +128,9 @@ void main() {
       fileOverride: (bytes: pptx(titel: 'Kwartaal'), name: 'kwartaal.pptx'),
     );
     await tester.pumpAndSettle();
+    // De import-rename-dialoog verschijnt ná de conversie — bevestig de titel.
+    await tester.tap(find.text('Openen'));
+    await tester.pumpAndSettle();
     await future;
 
     final deck = container
@@ -145,8 +148,45 @@ void main() {
     );
     expect(find.textContaining('geïmporteerd'), findsOneWidget);
 
+    // Het geïmporteerde deck staat nog niet op schijf — de tab-stip en
+    // statusbalk moeten dat tonen.
+    final state = container
+        .read(tabsProvider)
+        .current
+        ?.deckNotifier
+        .currentState;
+    expect(state?.isDirty, isTrue, reason: 'import is nog niet bewaard');
+    expect(state?.filePath, isNull, reason: 'geen pad tot het is opgeslagen');
+
     // De nieuwe tab startte een periodieke autosave-timer; ruim de container op
     // binnen de fake-async-test zodat die timer niet als "pending" blijft staan.
+    container.dispose();
+  });
+
+  testWidgets('de naam is aan te passen in de dialoog na de import', (
+    tester,
+  ) async {
+    final (container, ctx, ref) = await pump(tester);
+    final future = importPresentation(
+      ctx,
+      ref,
+      fileOverride: (bytes: pptx(titel: 'Origineel'), name: 'orig.pptx'),
+    );
+    await tester.pumpAndSettle();
+    // Pas de titel aan en bevestig.
+    await tester.enterText(find.byType(TextField), 'Mijn nieuwe naam');
+    await tester.tap(find.text('Openen'));
+    await tester.pumpAndSettle();
+    await future;
+
+    final deck = container
+        .read(tabsProvider)
+        .current
+        ?.deckNotifier
+        .currentState
+        .deck;
+    expect(deck, isNotNull);
+    expect(deck!.title, 'Mijn nieuwe naam');
     container.dispose();
   });
 
@@ -225,6 +265,9 @@ void main() {
       (bytes: pptx(titel: 'Gesleept'), name: 'gesleept.pptx'),
     ]);
     await tester.pumpAndSettle();
+    // De import-rename-dialoog verschijnt ná de conversie — bevestig de titel.
+    await tester.tap(find.text('Openen'));
+    await tester.pumpAndSettle();
     await future;
 
     final deck = container
@@ -238,41 +281,43 @@ void main() {
     container.dispose();
   });
 
-  testWidgets(
-    'een sleep vlak na de start ziet de opgeslagen module-stand (#1209)',
-    (tester) async {
-      // De voorkeur zegt "aan", maar wordt asynchroon geladen. kwoot's bug: een
-      // sleep/open vlak na de start valt op de nog-ladende default (uit) en toont
-      // "zet de module aan" terwijl hij al aan staat. De race zit in de
-      // reveal-beslissing en is formaat-onafhankelijk; .odp deelt exact dit pad,
-      // dus de pptx-fixture toetst hem net zo goed.
-      SharedPreferences.setMockInitialValues({
-        dismissedKey: true,
-        'importModuleEnabled': true,
-      });
-      final (container, ctx, ref) = await pump(tester);
-      // Niets wat de module-provider vooraf laadt: importDroppedPresentations is
-      // het eerste dat hem raakt, precies zoals bij een verse start.
-      final future = importDroppedPresentations(ctx, ref, [
-        (bytes: pptx(titel: 'Verse start'), name: 'verse-start.pptx'),
-      ]);
-      await tester.pumpAndSettle();
-      await future;
+  testWidgets('een sleep vlak na de start ziet de opgeslagen module-stand (#1209)', (
+    tester,
+  ) async {
+    // De voorkeur zegt "aan", maar wordt asynchroon geladen. kwoot's bug: een
+    // sleep/open vlak na de start valt op de nog-ladende default (uit) en toont
+    // "zet de module aan" terwijl hij al aan staat. De race zit in de
+    // reveal-beslissing en is formaat-onafhankelijk; .odp deelt exact dit pad,
+    // dus de pptx-fixture toetst hem net zo goed.
+    SharedPreferences.setMockInitialValues({
+      dismissedKey: true,
+      'importModuleEnabled': true,
+    });
+    final (container, ctx, ref) = await pump(tester);
+    // Niets wat de module-provider vooraf laadt: importDroppedPresentations is
+    // het eerste dat hem raakt, precies zoals bij een verse start.
+    final future = importDroppedPresentations(ctx, ref, [
+      (bytes: pptx(titel: 'Verse start'), name: 'verse-start.pptx'),
+    ]);
+    await tester.pumpAndSettle();
+    // De import-rename-dialoog verschijnt ná de conversie — bevestig de titel.
+    await tester.tap(find.text('Openen'));
+    await tester.pumpAndSettle();
+    await future;
 
-      // De helper wachtte op het laden en zag de module aan: import, geen
-      // doodlopende "zet de module aan"-melding.
-      final deck = container
-          .read(tabsProvider)
-          .current
-          ?.deckNotifier
-          .currentState
-          .deck;
-      expect(deck, isNotNull);
-      expect(deck!.slides.any((s) => s.title.contains('Verse start')), isTrue);
-      expect(find.byType(SnackBarAction), findsNothing);
-      container.dispose();
-    },
-  );
+    // De helper wachtte op het laden en zag de module aan: import, geen
+    // doodlopende "zet de module aan"-melding.
+    final deck = container
+        .read(tabsProvider)
+        .current
+        ?.deckNotifier
+        .currentState
+        .deck;
+    expect(deck, isNotNull);
+    expect(deck!.slides.any((s) => s.title.contains('Verse start')), isTrue);
+    expect(find.byType(SnackBarAction), findsNothing);
+    container.dispose();
+  });
 
   testWidgets('een gesleepte presentatie zonder module wijst naar instellingen', (
     tester,

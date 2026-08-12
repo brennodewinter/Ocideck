@@ -3277,6 +3277,9 @@ const _dutchSourceAddMt = <String, String>{
   'Presentatie kiezen': 'Agħżel preżentazzjoni',
   'Importeren mislukt.': 'L-importazzjoni falliet.',
   'Presentatie geïmporteerd.': 'Il-preżentazzjoni ġiet importata.',
+  "Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.":
+      "Salva l-preżentazzjoni taħt ismek stess. Tista' taqbid it-titlu issa.",
+  'Openen': 'Open',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Il-preżentazzjoni ġiet importata; iċċekkja l-punti li jeħtieġu attenzjoni.',
   'Presentaties geïmporteerd.': 'Il-preżentazzjonijiet ġew importati.',

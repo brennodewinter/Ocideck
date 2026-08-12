@@ -3249,6 +3249,9 @@ const _dutchSourceAddLt = <String, String>{
   'Presentatie kiezen': 'Pasirinkti prezentaciją',
   'Importeren mislukt.': 'Importuoti nepavyko.',
   'Presentatie geïmporteerd.': 'Prezentacija importuota.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Išsaugokite pristatymą savo vardu. Pavadinimą galite koreguoti dabar.',
+  'Openen': 'Atidaryti',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Prezentacija importuota; patikrinkite dėmesio vertus punktus.',
   'Presentaties geïmporteerd.': 'Prezentacijos importuotos.',

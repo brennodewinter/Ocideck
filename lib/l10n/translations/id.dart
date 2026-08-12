@@ -3242,6 +3242,9 @@ const _dutchSourceAddId = <String, String>{
   'Presentatie kiezen': 'Pilih presentasi',
   'Importeren mislukt.': 'Impor gagal.',
   'Presentatie geïmporteerd.': 'Presentasi diimpor.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Simpan presentasi dengan nama Anda sendiri. Anda dapat menyesuaikan judul sekarang.',
+  'Openen': 'Open',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Presentasi diimpor; periksa hal-hal yang perlu diperhatikan.',
   'Presentaties geïmporteerd.': 'Semua presentasi diimpor.',

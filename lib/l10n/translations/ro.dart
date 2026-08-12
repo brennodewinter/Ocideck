@@ -3263,6 +3263,9 @@ const _dutchSourceAddRo = <String, String>{
   'Presentatie kiezen': 'Alege prezentarea',
   'Importeren mislukt.': 'Importul a eșuat.',
   'Presentatie geïmporteerd.': 'Prezentare importată.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Salvați prezentarea sub propriul nume. Puteți ajusta titlul acum.',
+  'Openen': 'Deschide',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Prezentare importată; verifică punctele de atenție.',
   'Presentaties geïmporteerd.': 'Prezentări importate.',

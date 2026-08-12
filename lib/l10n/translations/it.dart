@@ -2213,6 +2213,9 @@ const _dutchSourceAddIt = {
   'Presentatie kiezen': 'Scegli presentazione',
   'Importeren mislukt.': 'Importazione non riuscita.',
   'Presentatie geïmporteerd.': 'Presentazione importata.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Salva la presentazione con un nome personalizzato. Puoi modificare il titolo ora.',
+  'Openen': 'Apri',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Presentazione importata; controlla i punti di attenzione.',
   'Presentaties geïmporteerd.': 'Presentazioni importate.',

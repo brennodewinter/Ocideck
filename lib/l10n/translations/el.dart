@@ -3283,6 +3283,9 @@ const _dutchSourceAddEl = <String, String>{
   'Presentatie kiezen': 'Επιλογή παρουσίασης',
   'Importeren mislukt.': 'Η εισαγωγή απέτυχε.',
   'Presentatie geïmporteerd.': 'Η παρουσίαση εισήχθη.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Αποθηκεύστε την παρουσίαση με δικό σας όνομα. Μπορείτε να προσαρμόσετε τον τίτλο τώρα.',
+  'Openen': 'Άνοιγμα',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Η παρουσίαση εισήχθη· ελέγξτε τα σημεία προσοχής.',
   'Presentaties geïmporteerd.': 'Οι παρουσιάσεις εισήχθησαν.',

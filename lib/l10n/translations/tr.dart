@@ -4202,6 +4202,9 @@ const _dutchSourceAddTr = <String, String>{
   'Presentatie kiezen': 'Sunum seç',
   'Importeren mislukt.': 'İçe aktarma başarısız.',
   'Presentatie geïmporteerd.': 'Sunum içe aktarıldı.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Sunumu kendi adınızla kaydedin. Başlığı şimdi düzenleyebilirsiniz.',
+  'Openen': 'Aç',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Sunum içe aktarıldı; dikkat noktalarını kontrol edin.',
   'Presentaties geïmporteerd.': 'Sunumlar içe aktarıldı.',
