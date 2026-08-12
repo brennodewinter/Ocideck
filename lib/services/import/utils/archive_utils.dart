@@ -30,7 +30,7 @@ Archive safeDecodeZip(
   ImportBudget budget = ImportBudget.standard,
 }) {
   if (bytes.length > budget.maxSourceBytes) {
-    throw ImportBudgetException(_humanBytes(budget.maxSourceBytes));
+    throw ImportBudgetException(humanBytes(budget.maxSourceBytes));
   }
   // De local-file-header-magie, vóór het decoderen. Dit hoort hier en niet in
   // elke importer, want `archive` 4.x geeft op rommel géén fout meer maar een
@@ -56,13 +56,13 @@ Archive safeDecodeZip(
   for (final file in archive) {
     if (file.size > budget.maxUncompressedEntry) {
       throw ImportBudgetException(
-        '${_humanBytes(budget.maxUncompressedEntry)} per onderdeel',
+        '${humanBytes(budget.maxUncompressedEntry)} per onderdeel',
       );
     }
     total += file.size;
     if (total > budget.maxUncompressedTotal) {
       throw ImportBudgetException(
-        '${_humanBytes(budget.maxUncompressedTotal)} uitgepakt',
+        '${humanBytes(budget.maxUncompressedTotal)} uitgepakt',
       );
     }
   }
@@ -72,7 +72,7 @@ Archive safeDecodeZip(
 /// A byte count as a short human string for the grens-beschrijving: MiB for the
 /// production budget (whole MiB throughout), KiB or bytes for the tiny values a
 /// test uses. Rounds down.
-String _humanBytes(int bytes) {
+String humanBytes(int bytes) {
   const mib = 1024 * 1024;
   const kib = 1024;
   if (bytes >= mib) return '${bytes ~/ mib} MiB';

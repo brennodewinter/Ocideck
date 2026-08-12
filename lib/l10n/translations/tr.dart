@@ -2750,6 +2750,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Groot bestand': 'Büyük dosya',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Bu dosya {grootte} boyutunda. Bu, önerilen {limiet} sınırından daha fazla. İçe aktarma yavaş olabilir ve çok bellek kullanabilir — daha küçük bir cihazda uygulama donabilir.',
+  'Toch importeren': 'Yine de içe aktar',
   'Koptekst': 'Üstbilgi',
   'Afbeelding niet opgehaald': 'Görsel alınamadı',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

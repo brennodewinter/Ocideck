@@ -728,6 +728,10 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Groot bestand': 'File grande',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Questo file è grande {grootte}. È più del limite consigliato di {limiet}. L\'importazione potrebbe essere lenta e usare molta memoria — su un dispositivo più piccolo l\'app potrebbe bloccarsi.',
+  'Toch importeren': 'Importa comunque',
   'Koptekst': 'Intestazione',
   'Afbeelding niet opgehaald': 'Immagine non recuperata',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

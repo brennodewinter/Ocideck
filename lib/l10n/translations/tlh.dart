@@ -1748,6 +1748,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Groot bestand': 'tIn mIch',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'mIchvam {grootte} \'ab. {limiet} lunq Dotlh chIm. De\'Qo may qeylIS \'ej nIteQHa\' — DI\' veS nIH DI\' De\' Qup.',
+  'Toch importeren': 'De\'Qo qaS',
   'Koptekst': 'nav Dung ghItlh',
   'Afbeelding niet opgehaald': 'mIllogh Suqlu\'be\'',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

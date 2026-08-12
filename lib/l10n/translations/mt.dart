@@ -1795,6 +1795,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Groot bestand': 'Fajl kbir',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Dan il-fajl huwa {grootte} kbir. Dan huwa aktar mil-limitu rakkomandat ta\' {limiet}. L-importazzjoni tista\' tkun bil-mod u tuża ħafna memorja — fuq apparat iżgħar l-app tista\' tieqaf.',
+  'Toch importeren': 'Importa xorta',
   'Koptekst': 'Intestatura',
   'Afbeelding niet opgehaald': 'L-immaġni ma nġibitx',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

@@ -1776,6 +1776,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Groot bestand': 'Grossi Datei',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Die Datei isch {grootte} gross. Das isch meh als d empfohle Grenze vo {limiet}. Dr Import chann langsam sii und vill Speicher bruuche — uf em chliine Grät chann d App fricke.',
+  'Toch importeren': 'Trotzdem importiere',
   'Koptekst': 'Chopfziile',
   'Afbeelding niet opgehaald': 'Bild nid abgrüeft',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

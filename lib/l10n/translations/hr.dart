@@ -1779,6 +1779,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Groot bestand': 'Velika datoteka',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Ova datoteka je veličine {grootte}. To je više od preporučenog ograničenja od {limiet}. Uvoz može biti spor i zahtijevati puno memorije — na manjem uređaju aplikacija se može zamrznuti.',
+  'Toch importeren': 'Uvezi svejedno',
   'Koptekst': 'Zaglavlje',
   'Afbeelding niet opgehaald': 'Slika nije dohvaćena',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

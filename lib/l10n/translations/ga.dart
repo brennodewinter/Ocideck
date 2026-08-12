@@ -1808,6 +1808,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Groot bestand': 'Comhad mór',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Tá an comhad seo {grootte} ar méid. Tá sé níos mó ná an teorainn mholta de {limiet}. D\'fhéadfadh go mbeadh an iompórtú mall agus go n-úsáidfe sé go leor cuimhne — ar ghléas níos lú d\'fhéadfadh an aip reo.',
+  'Toch importeren': 'Iompórtáil ar aon nós',
   'Koptekst': 'Ceanntásc',
   'Afbeelding niet opgehaald': 'Íomhá gan aisghabháil',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

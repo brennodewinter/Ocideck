@@ -1789,6 +1789,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Groot bestand': 'File grande',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Hic file magnitudinem {grootte} habet. Quod limitem commendatam {limiet} excedit. Importatio lenta esse potest et multam memoriam consumere — in minore apparatu applicatio frigescere potest.',
+  'Toch importeren': 'Tamen importare',
   'Koptekst': 'Caput paginae',
   'Afbeelding niet opgehaald': 'Imago non recuperata',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

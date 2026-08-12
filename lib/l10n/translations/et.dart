@@ -1764,6 +1764,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Groot bestand': 'Suur fail',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'See fail on {grootte} suurune. See ületab soovitatud limiidi {limiet}. Importimine võib olla aeglane ja nõuda palju mälu — väiksemal seadmel võib rakendus hanguda.',
+  'Toch importeren': 'Impordi siiski',
   'Koptekst': 'Päis',
   'Afbeelding niet opgehaald': 'Pilti ei toodud',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

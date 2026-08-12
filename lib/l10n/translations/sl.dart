@@ -1775,6 +1775,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Groot bestand': 'Velika datoteka',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Ta datoteka je velika {grootte}. To je več kot priporočena omejitev {limiet}. Uvoz je lahko počasen in zahtevati veliko pomnilnika — na manjši napravi se aplikacija lahko zatakne.',
+  'Toch importeren': 'Uvozi vseeno',
   'Koptekst': 'Glava',
   'Afbeelding niet opgehaald': 'Slika ni bila pridobljena',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':

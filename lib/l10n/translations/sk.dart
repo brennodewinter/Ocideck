@@ -1780,6 +1780,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Groot bestand': 'Veľký súbor',
+  'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
+      'Tento súbor je veľký {grootte}. To je viac ako odporúčaný limit {limiet}. Importovanie môže byť pomalé a vyžadovať veľa pamäte — na menšom zariadení sa aplikácia môže zaseknúť.',
+  'Toch importeren': 'Importovať napriek tomu',
   'Koptekst': 'Hlavička',
   'Afbeelding niet opgehaald': 'Obrázok sa nenačítal',
   'De doelmap kon niet worden aangemaakt of beschreven. Controleer of de ingestelde locatie beschikbaar is.':
