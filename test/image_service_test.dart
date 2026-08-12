@@ -139,6 +139,59 @@ void main() {
         isTrue,
       );
     });
+
+    test(
+      'hergebruikt een bestaande afbeelding met dezelfde inhoud onder een andere naam',
+      () async {
+        // Cross-import dedup: een herimport of aanverwante presentatie met
+        // dezelfde afbeelding onder een andere naam mag geen duplicaat maken.
+        addTearDown(WebAssetStore.clear);
+        final bytes = Uint8List.fromList([10, 20, 30, 40]);
+        final project = Directory(p.join(tmp.path, 'project'))..createSync();
+        // Bestaande afbeelding in de projectmap, andere naam.
+        final existing =
+            File(p.join(project.path, 'images', 'logo_bedrijf.png'))
+              ..createSync(recursive: true)
+              ..writeAsBytesSync(bytes);
+
+        final mem = WebAssetStore.put(bytes, name: 'logo.png');
+        final out = await service.copyImagesToProject([
+          Slide.create(SlideType.image).copyWith(imagePath: mem),
+        ], project.path);
+
+        // Het pad wijst naar de bestaande afbeelding, niet naar een nieuw bestand.
+        expect(out.single.imagePath, 'images/logo_bedrijf.png');
+        // Er is geen nieuw bestand bijgekomen.
+        expect(Directory(p.join(project.path, 'images')).listSync().length, 1);
+        // Het bestaande bestand is ongemoeid.
+        expect(existing.readAsBytesSync(), bytes);
+      },
+    );
+
+    test(
+      'schrijft een nieuwe afbeelding als de inhoud verschilt ondanks dezelfde naam',
+      () async {
+        // Namen botsen maar de inhoud is anders: dan moet er een _1-kopie komen,
+        // niet een stille overschrijving van het bestaande bestand.
+        addTearDown(WebAssetStore.clear);
+        final project = Directory(p.join(tmp.path, 'project'))..createSync();
+        final imagesDir = Directory(p.join(project.path, 'images'))
+          ..createSync(recursive: true);
+        File(p.join(imagesDir.path, 'logo.png')).writeAsBytesSync([1, 1, 1]);
+
+        final newBytes = Uint8List.fromList([2, 2, 2]);
+        final mem = WebAssetStore.put(newBytes, name: 'logo.png');
+        final out = await service.copyImagesToProject([
+          Slide.create(SlideType.image).copyWith(imagePath: mem),
+        ], project.path);
+
+        expect(out.single.imagePath, 'images/logo_2.png');
+        expect(
+          File(p.join(project.path, 'images', 'logo_2.png')).readAsBytesSync(),
+          newBytes,
+        );
+      },
+    );
   });
 
   group('copyMediaToProject', () {

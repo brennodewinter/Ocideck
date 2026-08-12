@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:crypto/crypto.dart' as crypto;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart' show MethodChannel;
@@ -527,16 +528,53 @@ class ImageService {
     final imagesDir = Directory(p.join(projectPath, 'images'));
     await imagesDir.create(recursive: true);
 
+    // Bouw een SHA-256 → projectrelatief-pad index van bestaande afbeeldingen,
+    // zodat een herimport of aanverwante presentatie geen duplicaten maakt: een
+    // afbeelding met dezelfde inhoud maar een andere bestandsnaam wordt
+    // hergebruikt in plaats van opnieuw weggeschreven.
+    final existingByHash = await _indexExistingImages(imagesDir, projectPath);
+
     final updated = <Slide>[];
     for (final slide in slides) {
       final copied = <String, String>{};
       for (final path in slideImagePaths(slide).toSet()) {
-        final dest = await _copyImageToProject(path, imagesDir);
+        final dest = await _copyImageToProject(
+          path,
+          imagesDir,
+          existingByHash: existingByHash,
+        );
         if (dest != null) copied[path] = dest;
       }
       updated.add(rewriteSlideImagePaths(slide, (path) => copied[path]));
     }
     return updated;
+  }
+
+  /// Scan [imagesDir] en geef een kaart van SHA-256 → `images/<naam>` terug.
+  /// Eén scan per opslaan, niet per afbeelding — de lineaire kosten worden zo
+  /// één keer gemaakt, niet per `mem:`-pad opnieuw.
+  Future<Map<String, String>> _indexExistingImages(
+    Directory imagesDir,
+    String projectPath,
+  ) async {
+    final map = <String, String>{};
+    if (!imagesDir.existsSync()) return map;
+    try {
+      await for (final entry in imagesDir.list(followLinks: false)) {
+        if (entry is! File) continue;
+        try {
+          final bytes = await entry.readAsBytes();
+          final hash = crypto.sha256.convert(bytes).toString();
+          final rel = 'images/${p.basename(entry.path)}';
+          map.putIfAbsent(hash, () => rel);
+        } on Object {
+          // Een onleesbaar bestand overslaan — geen reden om opslaan te blokkeren.
+        }
+      }
+    } on Object {
+      // Map leest niet — terugval is de oude naam-gebaseerde route.
+    }
+    return map;
   }
 
   Future<List<Slide>> copyMediaToProject(
@@ -603,10 +641,15 @@ class ImageService {
 
   Future<String?> _copyImageToProject(
     String sourcePath,
-    Directory imagesDir,
-  ) async {
+    Directory imagesDir, {
+    Map<String, String>? existingByHash,
+  }) async {
     if (WebAssetStore.isMemPath(sourcePath)) {
-      return _materializeMemImage(sourcePath, imagesDir);
+      return _materializeMemImage(
+        sourcePath,
+        imagesDir,
+        existingByHash: existingByHash,
+      );
     }
     if (sourcePath.isEmpty ||
         sourcePath.startsWith('images/') ||
@@ -624,14 +667,18 @@ class ImageService {
   ///
   /// Null (het pad blijft ongemoeid) als de bytes weg zijn — bijvoorbeeld na een
   /// paginaherlaad op web, waar de store leeg is.
-  Future<String?> _materializeMemImage(String memPath, Directory imagesDir) =>
-      _materializeMemAsset(
-        memPath,
-        imagesDir,
-        subdir: 'images',
-        fallbackName: 'afbeelding.png',
-        fallbackExtension: '.png',
-      );
+  Future<String?> _materializeMemImage(
+    String memPath,
+    Directory imagesDir, {
+    Map<String, String>? existingByHash,
+  }) => _materializeMemAsset(
+    memPath,
+    imagesDir,
+    subdir: 'images',
+    fallbackName: 'afbeelding.png',
+    fallbackExtension: '.png',
+    existingByHash: existingByHash,
+  );
 
   /// Schrijf een in-geheugen `mem:`-asset als echt bestand in [destDir] en geef
   /// het projectrelatieve pad terug.
@@ -647,9 +694,17 @@ class ImageService {
     required String subdir,
     required String fallbackName,
     required String fallbackExtension,
+    Map<String, String>? existingByHash,
   }) async {
     final bytes = WebAssetStore.bytesFor(memPath);
     if (bytes == null) return null;
+    // Cross-import dedup: als er al een bestand met dezelfde inhoud in de
+    // projectmap staat (onder een andere naam), hergebruik het dan.
+    if (existingByHash != null) {
+      final hash = crypto.sha256.convert(bytes).toString();
+      final existing = existingByHash[hash];
+      if (existing != null) return existing;
+    }
     final rawName = WebAssetStore.nameFor(memPath) ?? fallbackName;
     // Namen uit de store dragen doorgaans een extensie (git-assets heten
     // `<sha256>.<ext>`); ontbreekt die, dan is de terugval veilig.
@@ -663,6 +718,14 @@ class ImageService {
     );
     if (dest == null) return null;
     if (!dest.alreadyPresent) await writeBytesAtomic(dest.file, bytes);
+    // Voeg de nieuwe hash toe aan de index, zodat een volgende afbeelding in
+    // dezelfde opslaactie ook deze kan hergebruiken.
+    if (existingByHash != null) {
+      existingByHash.putIfAbsent(
+        crypto.sha256.convert(bytes).toString(),
+        () => '$subdir/${p.basename(dest.file.path)}',
+      );
+    }
     return '$subdir/${p.basename(dest.file.path)}';
   }
 
