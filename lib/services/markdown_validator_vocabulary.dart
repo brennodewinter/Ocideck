@@ -125,4 +125,12 @@ const _supportedCommentDirectives = {
   'ocideck_next',
   // Taalbewuste getalnotatie in tabelcellen (render-time, opt-in per kolom).
   'ocideck_table_num_cols',
+  // Display-window directives (#672): de import schrijft deze op slides met
+  // meer dan kImportedBulletLimit/kImportedTableRowLimit items, en de editor
+  // kan ze per dia instellen. DisplayWindowSpec.toComments produceert ze.
+  'ocideck_view_limit',
+  'ocideck_view_mode',
+  'ocideck_view_key',
+  'ocideck_view_remainder',
+  'ocideck_view_show_count',
 };
