@@ -337,6 +337,8 @@ const _dutchSourceEl = {
   'AI-assistentie (ontwerp)': 'Βοήθεια AI (σχεδίαση)',
   'Agentisch bouwplan (ontwerp)': 'Πρακτορικό πλάνο κατασκευής (σχεδίαση)',
   'Bijsnijden': 'Περικοπή',
+  'Linksom': 'Περιστροφή αριστερά',
+  'Rechtsom': 'Περιστροφή δεξιά',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Σύρετε την εικόνα για να επιλέξετε ποιο μέρος παραμένει ορατό.',
   'Git-opslag (ontwerp)': 'Αποθήκευση Git (σχεδίαση)',

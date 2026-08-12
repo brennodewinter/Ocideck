@@ -334,6 +334,8 @@ const _dutchSourceFi = {
   'Agentisch bouwplan (ontwerp)':
       'Agenttinen rakennussuunnitelma (suunnitelma)',
   'Bijsnijden': 'Rajaa',
+  'Linksom': 'Kierrä vasemmalle',
+  'Rechtsom': 'Kierrä oikealle',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Vedä kuvaa valitaksesi, mikä osa jää näkyviin.',
   'Git-opslag (ontwerp)': 'Git-tallennus (suunnitelma)',

@@ -334,6 +334,8 @@ const _dutchSourceEn = {
   'Bijsnijden': 'Crop',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Drag the image to choose which part stays visible.',
+  'Linksom': 'Rotate left',
+  'Rechtsom': 'Rotate right',
   'Git-opslag (ontwerp)': 'Git storage (design)',
   'Zoek in documentatie…': 'Search in documentation…',
   'Geen documenten gevonden': 'No documents found',

@@ -333,6 +333,8 @@ const _dutchSourceSl = {
   'AI-assistentie (ontwerp)': 'Pomoč AI (zasnova)',
   'Agentisch bouwplan (ontwerp)': 'Agentni načrt gradnje (zasnova)',
   'Bijsnijden': 'Obreži',
+  'Linksom': 'Zavrti levo',
+  'Rechtsom': 'Zavrti desno',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Povlecite sliko, da izberete, kateri del ostane viden.',
   'Git-opslag (ontwerp)': 'Shramba Git (zasnova)',

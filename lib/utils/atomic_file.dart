@@ -84,3 +84,24 @@ Future<void> writeBytesAtomic(File target, List<int> bytes) async {
 Future<void> writeStringAtomic(File target, String contents) {
   return writeBytesAtomic(target, utf8.encode(contents));
 }
+
+/// Sync variant of [writeBytesAtomic] for callers that can't await (e.g. a
+/// dialog `onPressed` that must pop before the test framework pumps). Same
+/// temp-file + rename strategy; throws on failure.
+void writeBytesAtomicSync(File target, List<int> bytes) {
+  final tmp = File('${target.path}.${_tempCounter++}.tmp');
+  try {
+    tmp.writeAsBytesSync(bytes, flush: true);
+    tmp.renameSync(target.path);
+  } catch (e) {
+    logWarning('writeBytesAtomicSync: write failed', e);
+    if (tmp.existsSync()) {
+      try {
+        tmp.deleteSync();
+      } catch (e) {
+        logWarning('writeBytesAtomicSync: temp cleanup failed', e);
+      }
+    }
+    rethrow;
+  }
+}

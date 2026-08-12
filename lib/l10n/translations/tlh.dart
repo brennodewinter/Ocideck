@@ -326,6 +326,8 @@ const _dutchSourceTlh = {
   'AI-assistentie (ontwerp)': 'AI QaH (nab)',
   'Agentisch bouwplan (ontwerp)': 'agentic chenmoHmeH nab (nab)',
   'Bijsnijden': 'yISol',
+  'Linksom': 'yIveCh',
+  'Rechtsom': 'yIveCh',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'nagh beQ yInIH, \'ay\' legh laHbogh wIvmeH.',
   'Git-opslag (ontwerp)': 'Git So\' (nab)',

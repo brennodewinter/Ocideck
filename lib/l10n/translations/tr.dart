@@ -333,6 +333,8 @@ const _dutchSourceTr = {
   'AI-assistentie (ontwerp)': 'AI yardımı (tasarım)',
   'Agentisch bouwplan (ontwerp)': 'Ajan tabanlı yapım planı (tasarım)',
   'Bijsnijden': 'Kırp',
+  'Linksom': 'Sola döndür',
+  'Rechtsom': 'Sağa döndür',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Hangi bölümün görünür kalacağını seçmek için görseli sürükleyin.',
   'Git-opslag (ontwerp)': 'Git depolama (tasarım)',

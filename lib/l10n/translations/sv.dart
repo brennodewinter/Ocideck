@@ -332,6 +332,8 @@ const _dutchSourceSv = {
   'AI-assistentie (ontwerp)': 'AI-assistans (design)',
   'Agentisch bouwplan (ontwerp)': 'Agentisk byggplan (design)',
   'Bijsnijden': 'Beskär',
+  'Linksom': 'Rotera vänster',
+  'Rechtsom': 'Rotera höger',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Dra i bilden för att välja vilken del som förblir synlig.',
   'Git-opslag (ontwerp)': 'Git-lagring (design)',

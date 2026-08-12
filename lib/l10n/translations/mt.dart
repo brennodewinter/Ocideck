@@ -335,6 +335,8 @@ const _dutchSourceMt = {
   'AI-assistentie (ontwerp)': 'Assistenza AI (disinn)',
   'Agentisch bouwplan (ontwerp)': 'Pjan ta\' bini aġentiku (disinn)',
   'Bijsnijden': 'Aqta\'',
+  'Linksom': 'Dawwar lemin',
+  'Rechtsom': 'Dawmar lemin',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Iġbed l-immaġni biex tagħżel liema parti tibqa\' viżibbli.',
   'Git-opslag (ontwerp)': 'Ħażna Git (disinn)',

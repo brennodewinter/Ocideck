@@ -333,6 +333,8 @@ const _dutchSourceId = {
   'AI-assistentie (ontwerp)': 'Bantuan AI (desain)',
   'Agentisch bouwplan (ontwerp)': 'Rencana build agentik (desain)',
   'Bijsnijden': 'Pangkas',
+  'Linksom': 'Putar kiri',
+  'Rechtsom': 'Putar kanan',
   'Sleep de afbeelding om te kiezen welk deel zichtbaar blijft.':
       'Seret gambar untuk memilih bagian mana yang tetap terlihat.',
   'Git-opslag (ontwerp)': 'Penyimpanan Git (desain)',

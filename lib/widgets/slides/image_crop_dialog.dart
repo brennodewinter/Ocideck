@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image/image.dart' as img;
 
 import '../../l10n/app_localizations.dart';
 import '../../models/video_source.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/atomic_file.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/image_focal.dart';
 import '../../utils/image_limits.dart';
@@ -14,6 +16,7 @@ import '../../services/web_asset_store.dart';
 
 /// The crop choices the author made: the (possibly changed) zoom and the
 /// normalized focal point that decides which part of the picture stays in view.
+/// Rotation (if any) is written back to the file by the dialog itself.
 class ImageCropResult {
   final int imageSize;
   final double focalX;
@@ -120,11 +123,18 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
   ImageStream? _stream;
   ImageStreamListener? _listener;
   Size? _intrinsic;
+  int _rotationQuarterTurns = 0; // 0, 1, 2, 3 × 90°
+  Uint8List? _originalBytes;
 
   // In the panel slots (enableZoom == false) the image always covers its
   // column, so treat it as cover regardless of what `imageSize` (the column
   // width) happens to be. For image/title, cover is the explicit 0 zoom.
   bool get _cover => widget.enableZoom ? _size == 0 : true;
+
+  /// Kan draaien: geen bundled assets (die zijn read-only) en geen URL's.
+  bool get _canRotate =>
+      !isBundledAssetPath(widget.imagePath) &&
+      !VideoSource.looksLikeUrl(widget.imagePath);
 
   @override
   void initState() {
@@ -133,20 +143,109 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
     _fx = widget.focalX.clamp(0.0, 1.0);
     _fy = widget.focalY.clamp(0.0, 1.0);
     _provider = _cropProvider(widget.imagePath, widget.projectPath);
+    _loadOriginalBytes();
     final provider = _provider;
     if (provider != null) {
-      final stream = provider.resolve(ImageConfiguration.empty);
-      final listener = ImageStreamListener((info, _) {
-        final size = Size(
-          info.image.width.toDouble(),
-          info.image.height.toDouble(),
-        );
-        info.dispose();
-        if (mounted) setState(() => _intrinsic = size);
-      }, onError: (_, _) {});
-      stream.addListener(listener);
-      _stream = stream;
-      _listener = listener;
+      _listenToStream(provider);
+    }
+  }
+
+  void _listenToStream(ImageProvider provider) {
+    final stream = provider.resolve(ImageConfiguration.empty);
+    final listener = ImageStreamListener((info, _) {
+      final size = Size(
+        info.image.width.toDouble(),
+        info.image.height.toDouble(),
+      );
+      info.dispose();
+      if (mounted) setState(() => _intrinsic = size);
+    }, onError: (_, _) {});
+    stream.addListener(listener);
+    _stream = stream;
+    _listener = listener;
+  }
+
+  void _loadOriginalBytes() {
+    if (!_canRotate) return;
+    if (WebAssetStore.isMemPath(widget.imagePath)) {
+      _originalBytes = WebAssetStore.bytesFor(widget.imagePath);
+    } else {
+      final resolved = resolveSlideAssetPath(
+        widget.imagePath,
+        widget.projectPath,
+      );
+      if (resolved != null) {
+        try {
+          _originalBytes = File(resolved).readAsBytesSync();
+        } on Object {
+          _originalBytes = null;
+        }
+      }
+    }
+  }
+
+  void _rotate(int quarterTurns) {
+    final original = _originalBytes;
+    if (original == null) return;
+    setState(() {
+      _rotationQuarterTurns = (_rotationQuarterTurns + quarterTurns) % 4;
+      if (_rotationQuarterTurns < 0) _rotationQuarterTurns += 4;
+      // Decodeer, roteer, codeer opnieuw. Behoud het originele formaat.
+      final decoded = img.decodeImage(original);
+      if (decoded == null) return;
+      final rotated = img.copyRotate(decoded, angle: quarterTurns * 90.0);
+      final encoded =
+          widget.imagePath.endsWith('.jpg') ||
+              widget.imagePath.endsWith('.jpeg')
+          ? img.encodeJpg(rotated)
+          : widget.imagePath.endsWith('.gif')
+          ? img.encodeGif(rotated)
+          : img.encodePng(rotated);
+      final bytes = Uint8List.fromList(encoded);
+      // Ververs de preview met de geroteerde bytes.
+      _stream?.removeListener(_listener!);
+      _stream = null;
+      _listener = null;
+      _intrinsic = null;
+      _provider = cappedMemoryImage(bytes);
+      _listenToStream(_provider!);
+    });
+  }
+
+  /// Schrijf de geroteerde afbeelding terug naar het bestand (of `mem:`-pad).
+  /// Stille no-op als er niet is gedraaid of als schrijven niet kan. Synchroon
+  /// zodat de dialoog direct kan sluiten — de afbeelding is klein en lokaal.
+  void _writeRotatedBytes() {
+    if (_rotationQuarterTurns == 0 || _originalBytes == null) return;
+    final original = _originalBytes!;
+    final decoded = img.decodeImage(original);
+    if (decoded == null) return;
+    final rotated = img.copyRotate(
+      decoded,
+      angle: _rotationQuarterTurns * 90.0,
+    );
+    final encoded =
+        widget.imagePath.endsWith('.jpg') || widget.imagePath.endsWith('.jpeg')
+        ? img.encodeJpg(rotated)
+        : widget.imagePath.endsWith('.gif')
+        ? img.encodeGif(rotated)
+        : img.encodePng(rotated);
+    final bytes = Uint8List.fromList(encoded);
+    if (WebAssetStore.isMemPath(widget.imagePath)) {
+      final name = widget.imagePath.split(':').last;
+      WebAssetStore.put(bytes, name: name);
+      return;
+    }
+    final resolved = resolveSlideAssetPath(
+      widget.imagePath,
+      widget.projectPath,
+    );
+    if (resolved != null) {
+      try {
+        writeBytesAtomicSync(File(resolved), bytes);
+      } on Object {
+        // Een schrijffout mag de crop-keuze niet blokkeren.
+      }
     }
   }
 
@@ -158,10 +257,23 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
     super.dispose();
   }
 
-  void _reset() => setState(() {
-    _fx = 0.5;
-    _fy = 0.5;
-  });
+  void _reset() {
+    setState(() {
+      _fx = 0.5;
+      _fy = 0.5;
+      if (_rotationQuarterTurns != 0) {
+        _rotationQuarterTurns = 0;
+        // Reset naar originele afbeelding.
+        _stream?.removeListener(_listener!);
+        _stream = null;
+        _listener = null;
+        _intrinsic = null;
+        _provider = _cropProvider(widget.imagePath, widget.projectPath);
+        final provider = _provider;
+        if (provider != null) _listenToStream(provider);
+      }
+    });
+  }
 
   // Drag moves the picture with the finger: pulling it right reveals more of its
   // left edge, so the focal point shifts left. The overflow (how far the image
@@ -325,6 +437,25 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
                   ],
                 ),
               ],
+              if (_canRotate && _originalBytes != null) ...[
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton.icon(
+                      onPressed: () => _rotate(-1),
+                      icon: const Icon(Icons.rotate_left, size: 20),
+                      label: Text(l10n.d('Linksom')),
+                    ),
+                    const SizedBox(width: 16),
+                    TextButton.icon(
+                      onPressed: () => _rotate(1),
+                      icon: const Icon(Icons.rotate_right, size: 20),
+                      label: Text(l10n.d('Rechtsom')),
+                    ),
+                  ],
+                ),
+              ],
             ],
           ),
         ),
@@ -335,8 +466,10 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
             child: Text(l10n.d('Annuleren')),
           ),
           FilledButton(
-            onPressed: () =>
-                Navigator.of(context).pop(ImageCropResult(_size, _fx, _fy)),
+            onPressed: () {
+              _writeRotatedBytes();
+              Navigator.of(context).pop(ImageCropResult(_size, _fx, _fy));
+            },
             child: Text(l10n.d('Klaar')),
           ),
         ],
