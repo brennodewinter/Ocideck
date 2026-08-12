@@ -561,6 +561,80 @@ void main() {
     },
   );
 
+  test('skips adjusted-image thumbnail (field 16) and imports only the full '
+      'adjusted image (field 15)', () async {
+    // Een in Keynote aangepaste afbeelding draagt de volle aangepaste
+    // afbeelding op field 15 (`adjustedImageData`) én een kleine thumbnail
+    // daarvan op field 16 (`thumbnailAdjustedImageData`). Beide importeren
+    // geeft de "normaal + small"-dubbeling die de gebruiker zag (#1468).
+    const adjustedDataId = 52;
+    const thumbDataId = 53;
+    const adjustedFileName = 'photo-adjusted.png';
+    const thumbFileName = 'photo-adjusted-small.png';
+    const adjustedBytes = <int>[
+      0x89,
+      0x50,
+      0x4E,
+      0x47,
+      0x0D,
+      0x0A,
+      0x1A,
+      0x0A,
+      0x10,
+    ];
+    const thumbBytes = <int>[0x89, 0x50, 0x4E, 0x47, 0x02];
+    final recordBytes = [
+      fx.record(
+        2,
+        100,
+        fx.packageMetadataPayload(
+          dataInfos: [
+            fx.dataInfoPayload(
+              identifier: adjustedDataId,
+              preferredFileName: adjustedFileName,
+            ),
+            fx.dataInfoPayload(
+              identifier: thumbDataId,
+              preferredFileName: thumbFileName,
+            ),
+          ],
+        ),
+      ),
+      // Image (id 10) with adjusted full (field 15) + its thumbnail (16).
+      fx.record(10, 200, [
+        ...fx.varint(fx.key(1, 2)),
+        ...fx.varint(0), // empty DrawableArchive super
+        ...fx.bytesField(15, fx.varintField(1, adjustedDataId)),
+        ...fx.bytesField(16, fx.varintField(1, thumbDataId)),
+      ]),
+      fx.recordWithRefs(
+        1,
+        1,
+        fx.slidePayload(
+          titleRefIndex: 0,
+          bodyRefIndex: 0,
+          drawableRefIndices: [0],
+        ),
+        [10],
+      ),
+    ].expand((e) => e).toList();
+
+    final bytes = fx.zip({
+      'Index/slide-1.iwa': fx.iwaStream(recordBytes),
+      'Data/$adjustedFileName': adjustedBytes,
+      'Data/$thumbFileName': thumbBytes,
+    });
+
+    final deck = (await KeyImporter().importBytes(
+      bytes,
+      path: 'adjusted.key',
+    )).okValue!;
+    expect(deck.slides, hasLength(1));
+    // Only the full adjusted image, not its thumbnail.
+    expect(deck.slides.single.images, hasLength(1));
+    expect(deck.slides.single.images.single.bytes, adjustedBytes);
+  });
+
   test(
     'PackageMetadata components with TSP.Reference submessages give slide order',
     () async {
