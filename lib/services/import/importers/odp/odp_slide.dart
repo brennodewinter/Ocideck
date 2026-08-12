@@ -1,5 +1,7 @@
 import 'dart:typed_data';
+import 'dart:math' as math;
 
+import 'package:image/image.dart' as img;
 import 'package:xml/xml.dart';
 
 import '../../models/body_block.dart';
@@ -102,9 +104,16 @@ void _readFrames(
   double pageH,
   _PageParts parts,
 ) {
-  // Only consider direct child frames; this avoids speaker notes and animation
-  // nodes that are also descendants of the page.
+  // Only consider direct child frames and groups; this avoids speaker notes
+  // and animation nodes that are also descendants of the page. Groepen
+  // (`draw:g`) worden recursief uitgeklapt — een presentatieauteur groepeert
+  // vaak tekstvakken en afbeeldingen, en zonder recursie verdween de hele
+  // groep stil.
   for (final frame in page.children.whereType<XmlElement>()) {
+    if (frame.name.local == 'g') {
+      _readFrames(ctx, index, frame, pageW, pageH, parts);
+      continue;
+    }
     if (frame.name.local != 'frame') continue;
 
     final presClass = _attr(frame, 'class');
@@ -137,7 +146,7 @@ void _readFrames(
         feature: 'Afbeelding of media',
         description: 'kon niet worden gelezen en is overgeslagen',
         logOp: 'OdpImporter: dia ${index + 1} afbeelding',
-        body: () => _imageFromHref(ctx, img),
+        body: () => _imageFromHref(ctx, img, frame),
       );
       if (source != null) {
         parts.images.add(source);
@@ -255,17 +264,55 @@ SourceChart? _chartFromObject(OdpContext ctx, XmlElement obj) {
   return parseOdpChartXml(xml);
 }
 
-SourceImage? _imageFromHref(OdpContext ctx, XmlElement img) {
+SourceImage? _imageFromHref(OdpContext ctx, XmlElement img, XmlElement frame) {
   final href = xlinkHref(img);
   if (href == null) return null;
   final path = ctx.resolveHref(href);
   final bytes = ctx.readPartBytes(path);
   if (bytes == null) return null;
+
+  // ODF slaat rotatie op in `draw:transform="rotate (<radialen>)"` op het
+  // frame. Bak de rotatie in de bytes bij import, net als de PPTX-importer.
+  final transform = _attr(frame, 'transform');
+  final rotDegrees = _rotationFromTransform(transform);
+  final imageBytes = rotDegrees != 0 && rotDegrees % 360 != 0
+      ? _rotateImage(Uint8List.fromList(bytes), rotDegrees, path)
+      : Uint8List.fromList(bytes);
+
   return SourceImage(
-    bytes: Uint8List.fromList(bytes),
+    bytes: imageBytes,
     ext: _extFromPath(path),
     name: path.split('/').last,
   );
+}
+
+/// Parse `draw:transform="rotate (<radialen>)"` en return graden, of 0.
+double _rotationFromTransform(String? transform) {
+  if (transform == null) return 0;
+  final match = RegExp(r'rotate\s*\(\s*([-\d.]+)\s*\)').firstMatch(transform);
+  if (match == null) return 0;
+  final radians = double.tryParse(match.group(1)!);
+  if (radians == null) return 0;
+  return radians * 180 / math.pi;
+}
+
+/// Roteer [bytes] met [degrees] en codeer opnieuw. Geeft originele bytes terug
+/// bij een fout — een onleesbare afbeelding is beter dan geen.
+Uint8List _rotateImage(Uint8List bytes, double degrees, String path) {
+  try {
+    final decoded = img.decodeImage(bytes);
+    if (decoded == null) return bytes;
+    final rotated = img.copyRotate(decoded, angle: degrees);
+    final ext = _extFromPath(path);
+    final encoded = ext == 'jpg' || ext == 'jpeg'
+        ? img.encodeJpg(rotated)
+        : ext == 'gif'
+        ? img.encodeGif(rotated)
+        : img.encodePng(rotated);
+    return Uint8List.fromList(encoded);
+  } on Object {
+    return bytes;
+  }
 }
 
 PositionedText _positionedText(
