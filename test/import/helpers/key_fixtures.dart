@@ -128,6 +128,13 @@ List<int> slidePayload({
 /// A NoteArchive payload: `containedStorage` (field 1, Reference).
 List<int> notePayload(int storageRefIndex) => varintField(1, storageRefIndex);
 
+/// A SlideTreeArchive payload: repeated field 2 with SlideNode reference
+/// submessages. Each [nodeRefIndex] is an index into the enclosing object's
+/// `object_references` list.
+List<int> slideTreePayload(List<int> nodeRefIndices) => [
+  for (final idx in nodeRefIndices) ...bytesField(2, varintField(1, idx)),
+];
+
 /// A SlideNodeArchive payload: `children` (field 1, repeated Reference) and/or
 /// `slide` (field 2, single Reference). Each value is an index into the node's
 /// object_references.

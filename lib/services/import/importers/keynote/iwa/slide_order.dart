@@ -4,13 +4,17 @@ import 'iwa_document.dart';
 /// Recovers the slide objects of a Keynote document in their real presentation
 /// order from an iWork object graph.
 ///
-/// The order is discovered through four routes, tried in turn, because a
+/// The order is discovered through five routes, tried in turn, because a
 /// `.key` encodes it differently across versions and fixtures:
-/// 1. `TSP.PackageMetadata` Slide components (newer Keynote files).
-/// 2. A `TSP.ObjectContainer` (type id 10) whose objects list contains
+/// 1. `KN.ShowArchive.slideTree` — the authoritative slide order, walked
+///    depth-first through the SlideNode list (newer Keynote files).
+/// 2. `TSP.PackageMetadata` Slide components (fallback for files without a
+///    ShowArchive, but the component order is storage order, not presentation
+///    order — see #1471).
+/// 3. A `TSP.ObjectContainer` (type id 10) whose objects list contains
 ///    SlideArchive objects.
-/// 3. The SlideNode tree's depth-first traversal.
-/// 4. Every slide-like object in parse order.
+/// 4. The SlideNode tree's depth-first traversal.
+/// 5. Every slide-like object in parse order.
 ///
 /// Apple's runtime `TSPRegistry` (typeId -> class) is not available, so slide
 /// objects are detected **structurally** from their field shapes.
@@ -20,12 +24,16 @@ class SlideOrder {
   final IwaDocument doc;
 
   /// The slide objects in source order:
-  /// 1. `TSP.PackageMetadata` Slide components (newer Keynote files).
-  /// 2. A `TSP.ObjectContainer` (type id 10) whose objects list contains
+  /// 1. `KN.ShowArchive.slideTree` (authoritative, newer Keynote files).
+  /// 2. `TSP.PackageMetadata` Slide components (storage order, not presentation
+  ///    order — only used when no ShowArchive is available).
+  /// 3. A `TSP.ObjectContainer` (type id 10) whose objects list contains
   ///    SlideArchive objects.
-  /// 3. The SlideNode tree's depth-first traversal.
-  /// 4. Every slide-like object in parse order.
+  /// 4. The SlideNode tree's depth-first traversal.
+  /// 5. Every slide-like object in parse order.
   List<IwaObject> orderedSlideObjects() {
+    final show = _slidesFromShowArchive();
+    if (show != null) return show;
     final comps = _slidesFromPackageMetadata();
     if (comps != null) return comps;
     final container = _slidesFromObjectContainer();
@@ -33,6 +41,56 @@ class SlideOrder {
     final tree = _slidesFromTree();
     if (tree != null) return tree;
     return doc.all.values.where(_looksLikeSlide).toList();
+  }
+
+  /// Follow `KN.DocumentArchive.show` (field 2) → `KN.ShowArchive.slideTree`
+  /// (field 3) → `KN.SlideTreeArchive` → repeated field 2 (SlideNode refs) →
+  /// each SlideNode's `slide` (field 2) → `KN.SlideArchive`.
+  ///
+  /// This is the authoritative slide order — the SlideTree encodes the exact
+  /// sequence the presenter sees. The PackageMetadata component list is storage
+  /// order and may differ (#1471).
+  List<IwaObject>? _slidesFromShowArchive() {
+    // Find the ShowArchive via the DocumentArchive (typeId 1, field 2).
+    for (final doc1 in doc.all.values.where((o) => o.typeId == 1)) {
+      final show = doc.resolveReferences(doc1, 2).firstOrNull;
+      if (show == null) continue;
+
+      // ShowArchive.slideTree = field 3. This is a nested submessage
+      // (SlideTreeArchive), not a direct TSP.Reference — decode it.
+      final treeMsg = show.message.message(3);
+      if (treeMsg == null) continue;
+
+      // SlideTreeArchive stores SlideNode refs in repeated field 2 (newer
+      // files) or field 1 (rootSlideNode, older schema). Try both.
+      final out = <IwaObject>[];
+      for (final refField in const [2, 1]) {
+        for (final ref in treeMsg.messages(refField)) {
+          final refId = ref.varint(1);
+          if (refId == null) continue;
+          final node = doc.resolveReference(show, refId);
+          if (node == null) continue;
+          // Walk this SlideNode: it may be a leaf (slide ref on field 2)
+          // or a subtree (children on field 1).
+          _walkSlideNode(node, out);
+        }
+        if (out.isNotEmpty) break;
+      }
+      if (out.isNotEmpty) return out;
+    }
+    return null;
+  }
+
+  /// Walk a SlideNode depth-first: emit its slide (field 2) if it resolves to
+  /// a slide-like object, then recurse into children (field 1).
+  void _walkSlideNode(IwaObject node, List<IwaObject> out) {
+    final slide = doc.resolveReferences(node, 2).firstOrNull;
+    if (slide != null && _looksLikeSlide(slide)) {
+      out.add(slide);
+    }
+    for (final child in doc.resolveReferences(node, 1)) {
+      _walkSlideNode(child, out);
+    }
   }
 
   /// Use the `TSP.PackageMetadata` `components` list to find the actual slide
