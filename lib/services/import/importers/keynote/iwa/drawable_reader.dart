@@ -296,16 +296,21 @@ class DrawableReader {
     if (!seen.add(o.id)) return const {};
     final ids = <int>{};
 
-    // Try the canonical image data fields first.
-    for (final field in const [11, 12, 15, 16, 17]) {
+    // Try the canonical image data fields first. Field 12 is the thumbnail
+    // preview that Keynote stores alongside the full image (field 11);
+    // importing both creates duplicate entries in the image library (#1468).
+    for (final field in const [11, 15, 16, 17]) {
       final dataId = _dataReferenceId(o, field);
       if (dataId != null) {
         ids.add(doc.resolveDataReference(o, dataId));
       }
     }
 
-    // Fall back to following references to image-like objects.
+    // Fall back to following references to image-like objects. Skip field 12
+    // (thumbnail) here too — it's handled above as a canonical field and
+    // would otherwise be re-collected through this fallback path.
     for (final field in o.message.fields.keys) {
+      if (field == 12) continue;
       final sub = o.message.message(field);
       if (sub == null) continue;
       final refId = sub.varint(1);
