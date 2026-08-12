@@ -336,7 +336,7 @@ const Map<String, int> classSizeBaseline = {
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1349, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
+      1366, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
   // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
   // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
   // klasse. +16 (#1162): de even dunne setMenuBlockTarget-delegator (berekening
@@ -344,7 +344,10 @@ const Map<String, int> classSizeBaseline = {
   // zet meerdere dia's in één _mutate terug (één undo-stap voor session-data-
   // edits na een presentatie). Onherleidbaar: de coalescing/undo-logica zit in
   // _mutate, dus de batch-revert hoort bij de notifier. +14: splitTableSlide —
-  // dezelfde dunne delegator als splitSlide, maar dan voor tabellen.
+  // dezelfde dunne delegator als splitSlide, maar dan voor tabellen. +17
+  // (#1473): saveAs/_saveToPath vergelijken naast `identical` ook de
+  // undo-stapel-lengte, zodat een state-vervanging die geen inhoudswijziging
+  // is (bv. copyWith voor themeProfile) het deck niet onterecht vuil laat.
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
   // +10 (#1162): de `menu`-tak in de drie kwaliteitsswitches (contrast, alt-tekst,
   // ontbrekend bestand) + de dichtheidsswitch — menublokken zijn een raster, geen

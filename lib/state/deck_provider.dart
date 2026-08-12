@@ -359,6 +359,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
   Future<bool> saveAs({String? initialDirectory}) async {
     final deck = state.deck;
     if (deck == null) return false;
+    final undoLenBefore = _undoStack.length;
     final String? path;
     try {
       final written = await _file.saveDeckAsDetailed(
@@ -383,19 +384,30 @@ class DeckNotifier extends StateNotifier<DeckState> {
     final reopened = await _file.openDeck(path);
     // Dezelfde race als in [_saveToPath], nu over twee wachtpunten: nieuwer
     // getypt werk blijft staan en blijft vuil.
-    final edited = !identical(state.deck, deck);
-    final settled = edited ? state.deck : (reopened ?? deck);
+    //
+    // De identity-check (`identical`) is te streng: een state-vervanging die
+    // geen inhoudswijziging is (bv. een copyWith voor themeProfile) maakt hem
+    // false, waarna het deck onterecht vuil blijft. We vangen dat af door ook
+    // naar de undo-stapel te kijken: is die niet gegroeid, dan was er geen
+    // echte bewerking (#1473).
+    final deckChanged = !identical(state.deck, deck);
+    final userEdited = deckChanged && _undoStack.length > undoLenBefore;
+    final settled = userEdited ? state.deck : (reopened ?? deck);
     if (reopened == null) {
       logWarning('DeckNotifier.saveAs: saved file could not be re-read', path);
       state = state.copyWith(
         deck: settled,
         filePath: path,
-        isDirty: edited,
+        isDirty: userEdited,
         error:
             'Opgeslagen, maar het bestand kon niet opnieuw worden gelezen:\n$path',
       );
     } else {
-      state = state.copyWith(deck: settled, filePath: path, isDirty: edited);
+      state = state.copyWith(
+        deck: settled,
+        filePath: path,
+        isDirty: userEdited,
+      );
     }
     return true;
   }
@@ -409,6 +421,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
   Future<bool> _saveToPath(String path) async {
     final deck = state.deck;
     if (deck == null) return false;
+    final undoLenBefore = _undoStack.length;
     final Deck savedDeck;
     try {
       final written = await _file.saveDeckDetailed(deck, path);
@@ -423,7 +436,13 @@ class DeckNotifier extends StateNotifier<DeckState> {
     // Doorgetypt tijdens het schrijven? Dan is [state.deck] nieuwer dan wat er
     // zojuist op schijf belandde. Terugzetten gooit dat werk stil weg, en
     // "schoon" melden wist ook de herstelkopie — het bestaat dan nergens meer.
-    if (!identical(state.deck, deck)) return true;
+    //
+    // De identity-check is te streng voor state-vervangingen die geen
+    // inhoudswijziging zijn (bv. copyWith voor themeProfile); we vergelijken
+    // ook de undo-stapel (#1473).
+    final deckChanged = !identical(state.deck, deck);
+    final userEdited = deckChanged && _undoStack.length > undoLenBefore;
+    if (userEdited) return true;
     state = state.copyWith(deck: savedDeck, isDirty: false);
     return true;
   }
