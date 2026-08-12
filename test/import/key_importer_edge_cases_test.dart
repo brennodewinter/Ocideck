@@ -58,6 +58,44 @@ void main() {
     expect(deck.issues, isNotEmpty);
   });
 
+  test(
+    'een plist met ongeldige UTF-8 laat de import niet struikelen',
+    () async {
+      // Metadata/Properties.plist met bytes die geen geldige UTF-8 zijn
+      // (0xC0 start een 2-byte sequence, maar de volgende byte is geen
+      // continuation byte). Vroeger liet dit de hele import falen met
+      // "FormatException: Missing extension byte"; nu slaat readPart null
+      // terug en neemt deckMetadataFromPlist de graceful fallback.
+      const imageBytes = <int>[0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A];
+      final badPlist = <int>[
+        0x00,
+        0x01,
+        0x02,
+        0x03,
+        0x04,
+        0x05,
+        0x06,
+        0x07,
+        0x08,
+        0xC0,
+        0x41,
+      ];
+      final bytes = fx.zip({
+        'preview.jpg': imageBytes,
+        'Metadata/Properties.plist': badPlist,
+      });
+      final result = await KeyImporter().importBytes(
+        bytes,
+        path: 'bad_plist.key',
+      );
+      expect(result.isErr, isFalse);
+      final deck = result.okValue!;
+      expect(deck.slides, hasLength(1));
+      expect(deck.title, '');
+      expect(deck.author, '');
+    },
+  );
+
   test('falls back to text salvage when IWA is corrupt', () async {
     final iwaBytes = <int>[0x00, 0x01, 0x02, 0x03, 0x04, 0x05];
     final bytes = fx.zip({'Index/slide-1.iwa': iwaBytes});

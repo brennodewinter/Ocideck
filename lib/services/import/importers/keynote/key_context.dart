@@ -18,9 +18,17 @@ class KeyContext {
 
   String? readPart(String path) {
     final bytes = readPartBytes(path);
+    if (bytes == null) return null;
     // Keynote-plists en -XML onder Metadata/ zijn UTF-8; byte-voor-byte lezen
     // zou een meerbyte-teken tot mojibake uiteentrekken (zie #1194 voor .odp).
-    return bytes == null ? null : utf8.decode(bytes);
+    // Niet elke plist is geldige UTF-8 (binaire plists, beschadigde metadata);
+    // return `null` zodat de aanroeper dezelfde graceful fallback neemt als bij
+    // een ontbrekend bestand, in plaats van de hele import te laten struikelen.
+    try {
+      return utf8.decode(bytes);
+    } on FormatException {
+      return null;
+    }
   }
 
   List<int>? readPartBytes(String path) {
