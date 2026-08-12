@@ -78,11 +78,10 @@ void main() {
       final r = buildOne(
         SourceSlide(index: 0, images: [img(1), img(2), img(3)]),
       );
-      // Drie afbeeldingen vallen buiten elk beeld-type; de classifier maakt er
-      // vrije Markdown van, en die draagt géén afbeeldingen. Alle drie moeten
-      // dus gemeld worden — niet één.
-      expect(r.slide.type, SlideType.freeMarkdown);
-      expect(r.notes, contains('3 afbeeldingen'));
+      // Drie afbeeldingen zonder bullets worden twoImages (eerste twee getoond);
+      // de derde valt weg en wordt op de notitiedia gemeld.
+      expect(r.slide.type, SlideType.twoImages);
+      expect(r.notes, contains('1 afbeelding'));
     });
 
     test('maar twee afbeeldingen op een twoImages-dia melden niets', () {

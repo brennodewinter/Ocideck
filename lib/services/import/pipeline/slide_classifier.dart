@@ -73,19 +73,24 @@ ClassifiedSlide classifySlide(SourceSlide s) {
     return ClassifiedSlide(source: s, type: SlideType.quote, issues: issues);
   }
 
-  // Images drive the image-based layouts.
-  if (s.images.length == 2 && _bullets(s).isEmpty) {
-    return ClassifiedSlide(
-      source: s,
-      type: SlideType.twoImages,
-      issues: issues,
-    );
-  }
-  if (s.images.length == 1) {
-    if (_bullets(s).isNotEmpty) {
+  // Images drive the image-based layouts. Een bron-dia kan 3+ afbeeldingen
+  // dragen (Keynote-decks hebben er vaak 6+ door master-slide-logo's); de
+  // vaste layouts tonen er maximaal twee, dus de rest valt weg — maar de dia
+  // krijgt wél een image-type, in plaats van te degenereren naar `bullets`
+  // dat alle afbeeldingen stil wegdropt.
+  final hasBullets = _bullets(s).isNotEmpty;
+  if (s.images.isNotEmpty) {
+    if (hasBullets) {
       return ClassifiedSlide(
         source: s,
         type: SlideType.bulletsImage,
+        issues: issues,
+      );
+    }
+    if (s.images.length >= 2) {
+      return ClassifiedSlide(
+        source: s,
+        type: SlideType.twoImages,
         issues: issues,
       );
     }
