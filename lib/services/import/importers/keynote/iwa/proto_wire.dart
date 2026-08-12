@@ -206,6 +206,19 @@ class ProtoMessage {
     return null;
   }
 
+  /// The first fixed-32 value of [field] decoded as a float (single precision).
+  double? float32(int field) {
+    final vs = fields[field];
+    if (vs == null) return null;
+    for (final v in vs) {
+      if (v is Fixed32Value) {
+        final b = ByteData(4)..setInt32(0, v.value, Endian.little);
+        return b.getFloat32(0, Endian.little).toDouble();
+      }
+    }
+    return null;
+  }
+
   /// All valid UTF-8 strings of [field] (repeated bytes/string).
   List<String> strings(int field) {
     final out = <String>[];

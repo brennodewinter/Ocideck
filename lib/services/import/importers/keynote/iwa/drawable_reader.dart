@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import '../../../../../utils/image_resize.dart'
+    show bakeJpegOrientation, rotateImageBytes;
 import '../../../models/source_chart.dart';
 import '../../../models/source_image.dart';
 import '../../../models/source_table.dart';
@@ -410,21 +412,61 @@ class DrawableReader {
 
     final seen = visited ?? <int>{};
     final dataIds = _collectImageDataIds(o, seen);
+    // Keynote bewaart rotatie in de IWA-transform (niet in EXIF): drawable
+    // super (field 1) → transform (field 1) → rotation (field 4, float32
+    // in graden). Zonder dit staat een afbeelding die in Keynote 180° is
+    // gedraaid op de kop in OciDeck.
+    final rotation = _drawableRotation(o);
     for (final dataId in dataIds) {
       final fileName = doc.dataFileName(dataId);
       if (fileName == null) continue;
       final bytes = ctx!.readPartBytes('Data/$fileName');
       if (bytes != null && bytes.isNotEmpty) {
+        // Bak EXIF-orientatie in de pixels. Keynote bewaart de ruwe
+        // afbeeldingsbytes in Data/; een JPEG met orientatie-tag (bv. 3 =
+        // 180°) zou anders op de kop staan in Flutter, die EXIF negeert.
+        final baked = bakeJpegOrientation(Uint8List.fromList(bytes));
+        final rotated = rotation != 0
+            ? rotateImageBytes(baked, rotation)
+            : baked;
         images.add(
-          SourceImage(
-            bytes: Uint8List.fromList(bytes),
-            ext: _ext(fileName),
-            name: fileName,
-          ),
+          SourceImage(bytes: rotated, ext: _ext(fileName), name: fileName),
         );
       }
     }
     return images;
+  }
+
+  /// Lees de rotatie (in graden) uit de IWA-transform van [o]. De transform
+  /// zit in drawable super (field 1) → transform (field 1) → rotation
+  /// (field 4, float32). Geneste drawables (via referenties) worden ook
+  /// gecheckt. Geeft 0 bij afwezigheid of onleesbare rotatie.
+  double _drawableRotation(IwaObject o) {
+    // Direct op dit drawable.
+    final rot = _readRotationField(o);
+    if (rot != null) return rot;
+    // Via referenties naar geneste image-like objecten.
+    for (final f in o.message.fields.keys) {
+      final sub = o.message.message(f);
+      if (sub == null) continue;
+      final refId = sub.varint(1);
+      if (refId == null) continue;
+      final target = doc.resolveReference(o, refId);
+      if (target != null && _imageLikeTypeIds.contains(target.typeId)) {
+        final nested = _readRotationField(target);
+        if (nested != null) return nested;
+      }
+    }
+    return 0;
+  }
+
+  /// Lees field 1 → field 1 → field 4 (rotation) als float32, of null.
+  double? _readRotationField(IwaObject o) {
+    final superMsg = o.message.message(1);
+    if (superMsg == null) return null;
+    final transform = superMsg.message(1);
+    if (transform == null) return null;
+    return transform.float32(4);
   }
 
   /// Object types that may contain image `DataReference` data.
