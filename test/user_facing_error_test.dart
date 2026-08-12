@@ -181,6 +181,27 @@ void main() {
     });
   });
 
+  group('importFailureDetail', () {
+    test('bevat de technische message en de archiefreassurance', () {
+      final detail = importFailureDetail(
+        pres.ImportFailure('Kon het .key niet lezen (stap: IWA inlezen).'),
+      );
+      expect(detail, contains('Kon het .key niet lezen'));
+      expect(detail, contains('niets aan je archief toegevoegd'));
+    });
+
+    test('bevat de cause als die er is', () {
+      final detail = importFailureDetail(
+        pres.ImportFailure(
+          'Kon het .key niet lezen.',
+          cause: FormatException('snappy decode failed'),
+        ),
+      );
+      expect(detail, contains('Oorzaak:'));
+      expect(detail, contains('snappy decode failed'));
+    });
+  });
+
   group('webdavErrorMessage', () {
     test('every WebDAV error kind maps to a non-empty message', () {
       for (final kind in WebdavError.values) {

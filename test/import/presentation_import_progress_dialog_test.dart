@@ -77,7 +77,7 @@ void main() {
     expect(find.text('plan.pptx'), findsNothing);
   });
 
-  testWidgets('sluit zichzelf met de uitkomst zodra de taak klaar is', (
+  testWidgets('toont de foutmelding in het venster en sluit pas na Sluiten', (
     tester,
   ) async {
     PreparedImportResult? captured;
@@ -89,6 +89,16 @@ void main() {
         return const PreparedImportResult.failed(ImportFailure('nee'));
       },
     );
+    await tester.pumpAndSettle();
+
+    // Het venster sluit niet: het toont de fout met technische detail (in een
+    // SelectableText zodat de gebruiker kan kopiëren) en een Sluiten-knop.
+    expect(find.text('plan.pptx'), findsOneWidget);
+    expect(find.byType(SelectableText), findsOneWidget);
+    expect(find.text('Sluiten'), findsOneWidget);
+
+    // Sluiten sluit het venster met de mislukte uitkomst.
+    await tester.tap(find.text('Sluiten'));
     await tester.pumpAndSettle();
     expect(captured, isNotNull);
     expect(captured!.wasCancelled, isFalse);

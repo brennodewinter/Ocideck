@@ -27,6 +27,7 @@ import '../models/source_deck.dart';
 import '../models/source_format.dart';
 import '../utils/archive_utils.dart';
 import '../utils/import_budget.dart';
+import '../../../utils/log.dart';
 import 'format_detector.dart';
 import 'importer_registry.dart';
 import 'slide_classifier.dart';
@@ -106,12 +107,15 @@ final class ImportTaskCancelled extends ImportTaskResult {
 
 /// Een failure waarvan de [ImportFailure.cause] gegarandeerd verzendbaar is:
 /// een gevangen exception kan van alles zijn, dus we bewaren alleen zijn
-/// tekst. De reden en de args — waar de UI-melding op steunt — blijven intact.
+/// tekst — gesaneerd via [sanitizeError], zodat een `FormatException` niet
+/// per ongeluk de brontekst (en daarmee persoonsgegevens uit een dia-veld)
+/// meeneemt over de isolategrens en in de UI landt. De reden en de args —
+/// waar de UI-melding op steunt — blijven intact.
 ImportFailure _transportSafe(ImportFailure f) => f.cause == null
     ? f
     : ImportFailure(
         f.message,
-        cause: f.cause.toString(),
+        cause: sanitizeError(f.cause!).toString(),
         reason: f.reason,
         args: f.args,
       );

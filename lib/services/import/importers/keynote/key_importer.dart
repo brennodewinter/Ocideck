@@ -78,17 +78,24 @@ class KeyImporter extends Importer {
         ),
       );
     }
+    // Houd bij welke stap loopt, zodat een onverwachte uitzondering in de
+    // foutmelding kan zeggen wáár het misging — zonder dit is "Kon het .key
+    // niet lezen" een raadsel voor de gebruiker en voor ons.
+    var step = 'archief uitpakken';
     try {
       final archive = preDecoded ?? safeDecodeZip(bytes, budget: budget);
       final ctx = KeyContext(archive);
 
+      step = 'voorbeeldafbeelding zoeken';
       onProgress?.call(0.2, 'Voorbeeldafbeelding zoeken…');
       final preview = _readPreview(ctx);
 
+      step = 'IWA-objecten inlezen';
       onProgress?.call(0.4, 'IWA-objecten inlezen…');
       final doc = _loadDocument(ctx, budget);
 
       // Preferred path: schema-aware reconstruction (real slide text, ordered).
+      step = 'slides reconstrueren';
       onProgress?.call(0.6, 'Slides reconstrueren…');
       final reconstructor = doc == null
           ? null
@@ -107,6 +114,7 @@ class KeyImporter extends Importer {
         slides.addAll(reconstructed);
       } else {
         // Fallback: noisy UTF-8 text salvage + the preview render.
+        step = 'IWA-tekst salvage';
         onProgress?.call(0.6, 'IWA-tekst salvage…');
         final salvagedText = textSalvage.salvage(ctx, budget: budget);
         fallbackTextFound = salvagedText.isNotEmpty;
@@ -135,10 +143,13 @@ class KeyImporter extends Importer {
       }
 
       if (slides.isEmpty) {
-        return const Err(
+        // Geen preview én geen tekst: zeg wát er wel in het archief zat, zodat
+        // de gebruiker (en wij) kunnen zien of het een nieuw Keynote-formaat
+        // is, een leeg bestand, of iets anders.
+        return Err(
           ImportFailure(
             'Geen voorbeeldafbeelding en geen IWA-tekst gevonden — dit .key '
-            'kan (nog) niet worden geconverteerd.',
+            'kan (nog) niet worden geconverteerd. ${_archiveSummary(ctx)}',
             reason: ImportFailureReason.unreadable,
             args: {'formaat': 'key'},
           ),
@@ -181,10 +192,10 @@ class KeyImporter extends Importer {
         ),
       );
     } on Exception catch (e) {
-      logError('KeyImporter failed for ${path ?? 'bestand'}', e);
+      logError('KeyImporter failed for ${path ?? 'bestand'} (stap: $step)', e);
       return Err(
         ImportFailure(
-          'Kon het .key niet lezen.',
+          'Kon het .key niet lezen (stap: $step).',
           cause: e,
           reason: ImportFailureReason.unreadable,
           args: const {'formaat': 'key'},
@@ -200,6 +211,22 @@ class KeyImporter extends Importer {
       bytes[1] == 0x4B &&
       bytes[2] == 0x03 &&
       bytes[3] == 0x04;
+
+  /// Een korte samenvatting van wat er in het archief zat, voor de
+  /// diagnostische foutmelding wanneer noch preview noch IWA-tekst werd gevonden.
+  /// Vertelt de gebruiker (en ons) of het een nieuw formaat is, een leeg
+  /// bestand, of iets anders — zonder de bestandsinhoud zelf te onthullen.
+  String _archiveSummary(KeyContext ctx) {
+    final names = ctx.entryNames;
+    final iwaCount = names
+        .where((n) => n.startsWith('Index/') && n.endsWith('.iwa'))
+        .length;
+    final hasPreview = names.any((n) => n.toLowerCase().startsWith('preview'));
+    final hasMetadata = names.any((n) => n.startsWith('Metadata/'));
+    return 'Archief: ${names.length} bestanden, $iwaCount IWA-bestanden, '
+        'preview: ${hasPreview ? 'ja' : 'nee'}, '
+        'metadata: ${hasMetadata ? 'ja' : 'nee'}.';
+  }
 
   /// Decompress and parse every `Index/*.iwa` into a single [IwaDocument].
   /// Returns `null` when no IWA parts could be parsed.

@@ -149,6 +149,27 @@ String importFailureText(AppLocalizations l10n, pres.ImportFailure failure) {
   };
 }
 
+/// De technische detail-string bij een importfout: de ruime [ImportFailure.message]
+/// (Nederlands, voor het log) plus, als er een [ImportFailure.cause] is, de
+/// gevangen uitzondering. Dit is diagnostische tekst — geen vertaalde
+/// gebruikersinterface — bedoeld om te kopiëren en door te sturen zodat een
+/// ontwikkelaar de oorzaak kan opsporen. De gebruiker leest de vertaalde
+/// samenvatting uit [importFailureText]; dit is wat eronder staat.
+///
+/// De toevoeging over het archief is bewust in de bronstaal (Nederlands): net
+/// als [ImportFailure.message] is het technische context, geen interface.
+String importFailureDetail(pres.ImportFailure failure) {
+  final parts = <String>[failure.message];
+  if (failure.cause != null) {
+    parts.add('Oorzaak: ${failure.cause}');
+  }
+  parts.add(
+    'De import is afgebroken vóór de bouwfase; er is niets aan je archief '
+    'toegevoegd.',
+  );
+  return parts.join('\n');
+}
+
 /// Begrijpelijke melding per import-weigerreden, zodat de gebruiker weet of
 /// het bestand te groot, kapot, geen presentatie of onbereikbaar was.
 String importFailureMessage(AppLocalizations l10n, ImportFailure failure) {
