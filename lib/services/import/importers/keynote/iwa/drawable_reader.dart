@@ -290,9 +290,12 @@ class DrawableReader {
     return out.join('\n');
   }
 
-  /// Flattens group drawables (`TSD.GroupArchive`) into their leaf children.
-  /// Returns the flattened list plus a flag that is true when a group was
-  /// expanded.
+  /// Flattens group drawables (`TSD.GroupArchive`) and tree structures
+  /// (`TSD.TreeArchive`, typeId 3008) into their leaf children.
+  ///
+  /// Trees carry their content in a recursive field-2 reference structure:
+  /// t3008 nodes → t2011 text-content leaves → t2001 StorageArchive. Without
+  /// flattening, the text in these leaves is invisible to `shapeText` (#1471).
   (List<IwaObject>, bool) flattenDrawables(
     List<IwaObject> drawables, {
     Set<int>? visited,
@@ -311,11 +314,31 @@ class DrawableReader {
         );
         out.addAll(flattened);
         if (nestedGroup) hadGroup = true;
+      } else if (d.typeId == 3008) {
+        hadGroup = true;
+        out.addAll(_flattenTree(d, seen));
       } else {
         out.add(d);
       }
     }
     return (out, hadGroup);
+  }
+
+  /// Walks a `TSD.TreeArchive` (typeId 3008) depth-first, collecting its
+  /// text-content leaves (typeId 2011) as drawables. Tree nodes (t3008) are
+  /// traversed but not emitted; non-tree, non-text children are emitted as-is
+  /// so images or other content inside a tree are not lost.
+  List<IwaObject> _flattenTree(IwaObject node, Set<int> seen) {
+    final out = <IwaObject>[];
+    for (final child in doc.resolveReferences(node, 2)) {
+      if (!seen.add(child.id)) continue;
+      if (child.typeId == 3008) {
+        out.addAll(_flattenTree(child, seen));
+      } else {
+        out.add(child);
+      }
+    }
+    return out;
   }
 
   /// True when [o] is a `TSD.GroupArchive` rather than a shape, table, chart,

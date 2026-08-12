@@ -700,4 +700,78 @@ void main() {
       expect(deck.slides[2].title, 'Gamma');
     },
   );
+
+  test(
+    'ShowArchive SlideTree gives the real presentation order, not storage order',
+    () async {
+      // Real Keynote files store the authoritative slide order in
+      // KN.ShowArchive.slideTree (field 3), not in PackageMetadata components
+      // (which are storage order). Three slides where the ShowArchive order
+      // differs from the PackageMetadata order (#1471).
+      final recordBytes = [
+        // DocumentArchive (id 1, typeId 1) → field 2 refs ShowArchive (id 2).
+        fx.recordWithRefs(1, 1, fx.varintField(2, 0), [2]),
+        // ShowArchive (id 2, typeId 2) with field 3 = SlideTreeArchive.
+        // object_references = [SlideNode A, SlideNode B, SlideNode C].
+        fx.recordWithRefs(
+          2,
+          2,
+          [
+            // field 3 = SlideTreeArchive (nested submessage)
+            ...fx.bytesField(3, fx.slideTreePayload([0, 1, 2])),
+          ],
+          [10, 11, 12],
+        ),
+        // SlideNode A (id 10, typeId 4) → slide 20 ("Alpha").
+        fx.recordWithRefs(10, 4, fx.slideNodePayload(slideRefIndex: 0), [20]),
+        // SlideNode B (id 11, typeId 4) → slide 21 ("Beta").
+        fx.recordWithRefs(11, 4, fx.slideNodePayload(slideRefIndex: 0), [21]),
+        // SlideNode C (id 12, typeId 4) → slide 22 ("Gamma").
+        fx.recordWithRefs(12, 4, fx.slideNodePayload(slideRefIndex: 0), [22]),
+        // Slide 20 (typeId 5): title "Alpha".
+        fx.recordWithRefs(
+          20,
+          5,
+          fx.slidePayload(titleRefIndex: 0, bodyRefIndex: 1),
+          [23, 24],
+        ),
+        fx.recordWithRefs(23, 2, fx.shapeInfoPayload(0), [25]),
+        fx.record(25, 3, fx.storagePayload(['Alpha'])),
+        fx.recordWithRefs(24, 2, fx.shapeInfoPayload(0), [26]),
+        fx.record(26, 3, fx.storagePayload([''])),
+        // Slide 21 (typeId 5): title "Beta".
+        fx.recordWithRefs(
+          21,
+          5,
+          fx.slidePayload(titleRefIndex: 0, bodyRefIndex: 1),
+          [27, 28],
+        ),
+        fx.recordWithRefs(27, 2, fx.shapeInfoPayload(0), [29]),
+        fx.record(29, 3, fx.storagePayload(['Beta'])),
+        fx.recordWithRefs(28, 2, fx.shapeInfoPayload(0), [30]),
+        fx.record(30, 3, fx.storagePayload([''])),
+        // Slide 22 (typeId 5): title "Gamma".
+        fx.recordWithRefs(
+          22,
+          5,
+          fx.slidePayload(titleRefIndex: 0, bodyRefIndex: 1),
+          [31, 32],
+        ),
+        fx.recordWithRefs(31, 2, fx.shapeInfoPayload(0), [33]),
+        fx.record(33, 3, fx.storagePayload(['Gamma'])),
+        fx.recordWithRefs(32, 2, fx.shapeInfoPayload(0), [34]),
+        fx.record(34, 3, fx.storagePayload([''])),
+      ].expand((e) => e).toList();
+      final bytes = fx.zip({'Index/Document.iwa': fx.iwaStream(recordBytes)});
+
+      final deck = (await KeyImporter().importBytes(
+        bytes,
+        path: 'showtree.key',
+      )).okValue!;
+      expect(deck.slides, hasLength(3));
+      expect(deck.slides[0].title, 'Alpha');
+      expect(deck.slides[1].title, 'Beta');
+      expect(deck.slides[2].title, 'Gamma');
+    },
+  );
 }
