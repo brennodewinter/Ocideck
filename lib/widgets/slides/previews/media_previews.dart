@@ -333,15 +333,13 @@ class _TwoImagesPreview extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    _resolvedImage(
+                    _panelImage(
                       context,
                       slide.imagePath,
                       projectPath,
-                      alignment: focalAlignment(
-                        slide.imageFocalX,
-                        slide.imageFocalY,
-                      ),
-                      semanticLabel: imageSemanticsLabel(
+                      slide.imageZoom,
+                      focalAlignment(slide.imageFocalX, slide.imageFocalY),
+                      imageSemanticsLabel(
                         context,
                         slide.imageCaption,
                         altText: slide.imageAltText,
@@ -356,15 +354,13 @@ class _TwoImagesPreview extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    _resolvedImage(
+                    _panelImage(
                       context,
                       slide.imagePath2,
                       projectPath,
-                      alignment: focalAlignment(
-                        slide.imageFocalX2,
-                        slide.imageFocalY2,
-                      ),
-                      semanticLabel: imageSemanticsLabel(
+                      slide.imageZoom,
+                      focalAlignment(slide.imageFocalX2, slide.imageFocalY2),
+                      imageSemanticsLabel(
                         context,
                         slide.imageCaption2,
                         altText: slide.imageAltText2,

@@ -217,9 +217,10 @@ extension _MarkdownParse on MarkdownService {
   /// when absent). Handled here — not in [_parseBlockDirectives] — so the crop
   /// directive is stripped before the generic scan treats it as presenter notes,
   /// without lengthening that already-long method.
-  ({double fx, double fy, double fx2, double fy2, String block})
+  ({double fx, double fy, double fx2, double fy2, int zoom, String block})
   _parseImageFocus(String block) {
     double fx = 0.5, fy = 0.5, fx2 = 0.5, fy2 = 0.5;
+    int zoom = 0;
     final cleaned = block.replaceAllMapped(_reHtmlComment, (m) {
       final content = m.group(1)!.trim();
       if (content.startsWith('ocideck_image_focus:')) {
@@ -232,9 +233,13 @@ extension _MarkdownParse on MarkdownService {
         if (p != null) (fx2, fy2) = p;
         return '';
       }
+      if (content.startsWith('ocideck_image_zoom:')) {
+        zoom = int.tryParse(content.substring(19).trim()) ?? 0;
+        return '';
+      }
       return m.group(0)!;
     });
-    return (fx: fx, fy: fy, fx2: fx2, fy2: fy2, block: cleaned);
+    return (fx: fx, fy: fy, fx2: fx2, fy2: fy2, zoom: zoom, block: cleaned);
   }
 
   /// Parses an `x,y` image focal-point comment into a clamped (0..1) pair, or
@@ -500,6 +505,7 @@ extension _MarkdownParse on MarkdownService {
       imageFocalY: focus.fy,
       imageFocalX2: focus.fx2,
       imageFocalY2: focus.fy2,
+      imageZoom: focus.zoom,
       imageSize: titleColumns.imageSize,
       titleImageOverlay: d.titleImageOverlay,
       imageTitleAbove: imageTitleAbove,

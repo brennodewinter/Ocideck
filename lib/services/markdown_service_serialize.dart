@@ -25,6 +25,12 @@ extension _MarkdownSerialize on MarkdownService {
         ' -->',
       );
     }
+    // Panel-image zoom (bulletsImage/twoImages): 0 = cover, 100 = contain,
+    // >100 = zoom in. Only written when non-default so existing decks stay
+    // clean. Round-trips via `ocideck_image_zoom` in [_parseBlock].
+    if (slide.imageZoom != 0) {
+      buf.writeln('<!-- ocideck_image_zoom: ${slide.imageZoom} -->');
+    }
   }
 
   /// Focal points come from drag maths, so trim to 3 decimals and drop trailing
