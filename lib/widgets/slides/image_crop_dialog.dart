@@ -236,8 +236,10 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
         : img.encodePng(rotated);
     final bytes = Uint8List.fromList(encoded);
     if (WebAssetStore.isMemPath(widget.imagePath)) {
-      final name = widget.imagePath.split(':').last;
-      WebAssetStore.put(bytes, name: name);
+      // Vervang de bytes op hetzelfde pad. De renderlaag leest de nieuwe bytes
+      // via bytesFor() en krijgt een ander cacheKey-object, dus de Image-widget
+      // re-resolve automatisch.
+      WebAssetStore.replace(widget.imagePath, bytes);
       return;
     }
     final resolved = resolveSlideAssetPath(
@@ -250,12 +252,12 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
       } on Object {
         // Een schrijffout mag de crop-keuze niet blokkeren.
       }
-      // Het bestand op schijf is veranderd, maar de image-cache heeft nog de
-      // oude decode voor dit pad. Zonder evict toont de slide de vorige
-      // (ongedraaide) afbeelding tot de cache leegloopt.
-      PaintingBinding.instance.imageCache.evict(
-        CappedImage(resolved, () async => Uint8List(0)),
-      );
+      // Bump de versie zodat de renderlaag een nieuwe CappedImage-cacheKey
+      // gebruikt (path#N i.p.v. path#(N-1)). De Image-widget ziet een nieuwe
+      // provider identiteit en re-resolve, in plaats van de verouderde
+      // cache-entry te tonen. Werkt voor zowel cappedFileImage als
+      // boundedFileImage (thumbnails).
+      bumpImageVersion(resolved);
     }
   }
 

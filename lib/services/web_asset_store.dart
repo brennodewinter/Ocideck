@@ -175,6 +175,35 @@ class WebAssetStore {
   /// bv. na een herlaad van de pagina).
   static Uint8List? bytesFor(String path) => _bytes[path];
 
+  /// Vervang de bytes achter een bestaand `mem:`-pad in-place. Past het budget
+  /// aan met het verschil in grootte. Gebruikt door de crop-dialoog na rotatie,
+  /// zodat het pad op de slide niet verandert maar de bytes wel.
+  static void replace(String path, Uint8List bytes) {
+    final old = _bytes[path];
+    if (old == null) return;
+    final maximum = _totalBudgetOverride ?? (kIsWeb ? maxTotalBytes : null);
+    if (maximum != null && bytes.length > maximum - _totalBytes + old.length) {
+      throw WebAssetBudgetExceeded(
+        usedBytes: _totalBytes,
+        requestedBytes: bytes.length - old.length,
+        maximumBytes: maximum,
+      );
+    }
+    _bytes[path] = bytes;
+    _totalBytes += bytes.length - old.length;
+    final oldHash = _hashForPath[path];
+    final newHash = sha256.convert(bytes).toString();
+    if (oldHash != newHash) {
+      _hashForPath[path] = newHash;
+      if (oldHash != null) {
+        final paths = _pathsForHash[oldHash];
+        paths?.remove(path);
+        if (paths?.isEmpty ?? false) _pathsForHash.remove(oldHash);
+      }
+      _pathsForHash.putIfAbsent(newHash, () => <String>[]).add(path);
+    }
+  }
+
   /// De oorspronkelijke bestandsnaam achter een `mem:`-pad.
   static String? nameFor(String path) => _names[path];
 
