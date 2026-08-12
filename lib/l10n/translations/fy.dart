@@ -2198,6 +2198,9 @@ const _dutchSourceAddFy = {
   'Presentatie kiezen': 'Presintaasje kieze',
   'Importeren mislukt.': 'Ymportearjen mislearre.',
   'Presentatie geïmporteerd.': 'Presintaasje ymportearre.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Bewarje de presintaasje ûnder in eigen namme. Do kinst de titel no oanpasse.',
+  'Openen': 'Open',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Presintaasje ymportearre; kontrolearje de oandachtspunten.',
   'Presentaties geïmporteerd.': 'Presintaasjes ymportearre.',

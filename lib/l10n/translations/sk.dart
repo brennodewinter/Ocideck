@@ -3238,6 +3238,9 @@ const _dutchSourceAddSk = <String, String>{
   'Presentatie kiezen': 'Zvoliť prezentáciu',
   'Importeren mislukt.': 'Import zlyhal.',
   'Presentatie geïmporteerd.': 'Prezentácia importovaná.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Uložte prezentáciu pod vlastným názvom. Názov môžete teraz upraviť.',
+  'Openen': 'Otvoriť',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Prezentácia importovaná; skontrolujte body na pozornosť.',
   'Presentaties geïmporteerd.': 'Prezentácie importované.',

@@ -3269,6 +3269,9 @@ const _dutchSourceAddBg = <String, String>{
   'Presentatie kiezen': 'Избор на презентация',
   'Importeren mislukt.': 'Импортирането е неуспешно.',
   'Presentatie geïmporteerd.': 'Презентацията е импортирана.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Запазете презентацията под свое собствено име. Можете да коригирате заглавието сега.',
+  'Openen': 'Отваряне',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Презентацията е импортирана; проверете точките за внимание.',
   'Presentaties geïmporteerd.': 'Презентациите са импортирани.',

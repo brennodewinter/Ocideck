@@ -3252,6 +3252,9 @@ const _dutchSourceAddLa = <String, String>{
   'Presentatie kiezen': 'Praesentationem eligere',
   'Importeren mislukt.': 'Importatio defecit.',
   'Presentatie geïmporteerd.': 'Praesentatio importata.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Serva praesentationem sub nomine tuo. Titulum nunc mutare potes.',
+  'Openen': 'Open',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Praesentatio importata; puncta animadvertenda inspice.',
   'Presentaties geïmporteerd.': 'Praesentationes importatae.',

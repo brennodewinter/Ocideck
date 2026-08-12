@@ -3234,6 +3234,9 @@ const _dutchSourceAddFi = <String, String>{
   'Presentatie kiezen': 'Valitse esitys',
   'Importeren mislukt.': 'Tuonti epäonnistui.',
   'Presentatie geïmporteerd.': 'Esitys tuotu.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Tallenna esitys omalla nimelläsi. Voit muuttaa otsikkoa nyt.',
+  'Openen': 'Avaa',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Esitys tuotu; tarkista huomiokohdat.',
   'Presentaties geïmporteerd.': 'Esitykset tuotu.',

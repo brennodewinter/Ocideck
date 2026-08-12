@@ -3197,6 +3197,9 @@ const _dutchSourceAddTlh = <String, String>{
   'Presentatie kiezen': 'presentation yIwIv',
   'Importeren mislukt.': 'kII\'laHbe\'.',
   'Presentatie geïmporteerd.': 'presentation kII\'lu\'pu\'.',
+  "Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.":
+      "presentation nIv DapongDI', ngIqna' Dalo'. DaH tlh DachoHlaH.",
+  'Openen': 'Open',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'presentation kII\'lu\'pu\'; buS\'a\'mey yInuD.',
   'Presentaties geïmporteerd.': 'presentationmey kII\'lu\'pu\'.',

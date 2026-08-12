@@ -3290,6 +3290,9 @@ const _dutchSourceAddGa = <String, String>{
   'Presentatie kiezen': 'Roghnaigh láithreoireacht',
   'Importeren mislukt.': 'Theip ar an iompórtáil.',
   'Presentatie geïmporteerd.': 'Láithreoireacht iompórtáilte.',
+  "Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.":
+      "Sábháil an cur i láthair faoi d'ainm féin. Is féidir leat an teideal a athrú anois.",
+  'Openen': 'Open',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Láithreoireacht iompórtáilte; seiceáil na pointí aire.',
   'Presentaties geïmporteerd.': 'Láithreoireachtaí iompórtáilte.',

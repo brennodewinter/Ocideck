@@ -3243,6 +3243,9 @@ const _dutchSourceAddHu = <String, String>{
   'Presentatie kiezen': 'Prezentáció kiválasztása',
   'Importeren mislukt.': 'Az importálás nem sikerült.',
   'Presentatie geïmporteerd.': 'A prezentáció importálva.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Mentse a prezentációt saját néven. A címet most módosíthatja.',
+  'Openen': 'Megnyitás',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'A prezentáció importálva; nézze át a figyelmet igénylő pontokat.',
   'Presentaties geïmporteerd.': 'A prezentációk importálva.',

@@ -2203,6 +2203,9 @@ const _dutchSourceAddPap = {
   'Presentatie kiezen': 'Skohe presentashon',
   'Importeren mislukt.': 'Importashon a faya.',
   'Presentatie geïmporteerd.': 'Presentashon importá.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Warda e presentashon bou di bo propio nòmber. Bo por kambia e título awor.',
+  'Openen': 'Open',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Presentashon importá; kontrolá e puntonan di atenshon.',
   'Presentaties geïmporteerd.': 'Presentashonnan importá.',

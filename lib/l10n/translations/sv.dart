@@ -3231,6 +3231,9 @@ const _dutchSourceAddSv = <String, String>{
   'Presentatie kiezen': 'Välj presentation',
   'Importeren mislukt.': 'Importen misslyckades.',
   'Presentatie geïmporteerd.': 'Presentationen importerad.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Spara presentationen under ditt eget namn. Du kan justera titeln nu.',
+  'Openen': 'Öppna',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Presentationen importerad; kontrollera anmärkningarna.',
   'Presentaties geïmporteerd.': 'Presentationerna importerade.',

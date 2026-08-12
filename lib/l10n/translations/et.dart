@@ -3224,6 +3224,9 @@ const _dutchSourceAddEt = <String, String>{
   'Presentatie kiezen': 'Vali esitlus',
   'Importeren mislukt.': 'Import ebaõnnestus.',
   'Presentatie geïmporteerd.': 'Esitlus imporditud.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Salvestage esitlus oma nime all. Pealkirja saate nüüd kohandada.',
+  'Openen': 'Ava',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Esitlus imporditud; kontrolli tähelepanu vajavaid kohti.',
   'Presentaties geïmporteerd.': 'Esitlused imporditud.',

@@ -3232,6 +3232,9 @@ const _dutchSourceAddDa = <String, String>{
   'Presentatie kiezen': 'Vælg præsentation',
   'Importeren mislukt.': 'Importen mislykkedes.',
   'Presentatie geïmporteerd.': 'Præsentation importeret.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'Gem præsentationen under dit eget navn. Du kan justere titlen nu.',
+  'Openen': 'Åbn',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Præsentation importeret; kontrollér opmærksomhedspunkterne.',
   'Presentaties geïmporteerd.': 'Præsentationer importeret.',

@@ -3238,6 +3238,9 @@ const _dutchSourceAddGsw = <String, String>{
   'Presentatie kiezen': 'Präsentation uswähle',
   'Importeren mislukt.': 'Import isch fehlgschlage.',
   'Presentatie geïmporteerd.': 'Präsentation importiert.',
+  'Bewaar de presentatie onder een eigen naam. Je kunt de titel nu aanpassen.':
+      'D Präsentation under dim eigene Name spychere. Du chasch de Titel jetz aapasse.',
+  'Openen': 'Open',
   'Presentatie geïmporteerd; controleer de aandachtspunten.':
       'Präsentation importiert; lueg d Hiiwiis aa.',
   'Presentaties geïmporteerd.': 'Präsentatione importiert.',

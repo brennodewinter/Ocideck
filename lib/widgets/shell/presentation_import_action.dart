@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/deck.dart';
 import '../../services/import/bulk_import_runner.dart';
 import '../../services/import/deck_builder.dart';
 import '../../services/import/importers/import_failure.dart';
@@ -23,6 +24,7 @@ import '../dialogs/import_presentation_warning_dialog.dart';
 import '../dialogs/oversized_import_warning_dialog.dart';
 import '../dialogs/import_decision_dialog.dart';
 import '../dialogs/import_security_alarm_dialog.dart';
+import '../dialogs/import_rename_dialog.dart';
 import '../dialogs/presentation_import_progress_dialog.dart';
 import '../dialogs/presentation_import_queue_dialog.dart';
 
@@ -161,21 +163,53 @@ Future<void> importPresentation(
     return;
   }
   final deck = built.deck;
+  await _openImportedDeck(
+    context,
+    ref,
+    deck: deck,
+    problemCount: built.problemSlides.length,
+    messenger: messenger,
+    l10n: l10n,
+  );
+}
 
-  final tabs = ref.read(tabsProvider.notifier);
-  tabs.newEmptyTab();
-  ref.read(tabsProvider).current!.deckNotifier.loadDeck(deck);
+/// Zet het geïmporteerde deck in een nieuw tabblad: vraagt de titel, markeert
+/// als onopgeslagen, en toont de melding. Het deck staat nog nergens op schijf,
+/// dus de tab-stip en statusbalk moeten direct tonen dat bewaren nog moet.
+Future<void> _openImportedDeck(
+  BuildContext context,
+  WidgetRef ref, {
+  required Deck deck,
+  required int problemCount,
+  required ScaffoldMessengerState messenger,
+  required AppLocalizations l10n,
+}) async {
+  final slideCount = deck.slides.length;
+  final confirmedTitle = await ImportRenameDialog.show(
+    context,
+    initialTitle: deck.title,
+    slideCount: slideCount,
+  );
+  if (!context.mounted) return;
+  final finalDeck = confirmedTitle != null && confirmedTitle != deck.title
+      ? deck.copyWith(title: confirmedTitle)
+      : deck;
 
-  final slides = deck.slides.length;
-  final issues = built.problemSlides.length;
+  ref.read(tabsProvider.notifier).newEmptyTab();
+  ref
+      .read(tabsProvider)
+      .current!
+      .deckNotifier
+      .loadDeck(finalDeck, isDirty: true);
+
   messenger.showSnackBar(
     SnackBar(
       content: Text(
-        issues == 0
+        problemCount == 0
             ? '${l10n.d('Presentatie geïmporteerd.')} '
-                  '($slides ${l10n.d('dia’s')})'
+                  '($slideCount ${l10n.d('dia’s')})'
             : '${l10n.d('Presentatie geïmporteerd; controleer de aandachtspunten.')} '
-                  '($slides ${l10n.d('dia’s')}, $issues ${l10n.d('met verlies')})',
+                  '($slideCount ${l10n.d('dia’s')}, $problemCount ${l10n.d('met verlies')})',
       ),
     ),
   );

@@ -285,7 +285,12 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// Load a deck that was already parsed (used by the tab manager). Styling is
   /// not taken from the deck/markdown but from the active style profile, so an
   /// opened or recovered deck always picks up the current look.
-  void loadDeck(Deck deck, {String? filePath, String? remoteOrigin}) {
+  void loadDeck(
+    Deck deck, {
+    String? filePath,
+    String? remoteOrigin,
+    bool isDirty = false,
+  }) {
     final resolvedDeck = deck.copyWith(
       themeProfile: _file.activeProfileFor(projectPath: deck.projectPath),
     );
@@ -294,7 +299,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
       deck: resolvedDeck,
       filePath: filePath,
       remoteOrigin: remoteOrigin,
-      isDirty: false,
+      isDirty: isDirty,
     );
   }
 
