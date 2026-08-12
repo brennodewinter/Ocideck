@@ -1787,6 +1787,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Afbeelding aanpassen': 'Dostosuj obraz',
   'Groot bestand': 'Duży plik',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Ten plik ma rozmiar {grootte}. To więcej niż zalecany limit {limiet}. Importowanie może być wolne i wymagać dużo pamięci — na mniejszym urządzeniu aplikacja może się zawiesić.',

@@ -1804,6 +1804,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Afbeelding aanpassen': 'Ajustar imagem',
   'Groot bestand': 'Arquivo grande',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Este arquivo tem {grootte}. Isso é mais que o limite recomendado de {limiet}. A importação pode ser lenta e usar muita memória — em um dispositivo menor o aplicativo pode travar.',

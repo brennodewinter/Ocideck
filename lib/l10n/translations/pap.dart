@@ -734,6 +734,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Afbeelding aanpassen': 'Adjusta imagen',
   'Groot bestand': 'File grandi',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'E file aki ta {grootte} grandi. Esaki ta mas ku e limiti rekondá di {limiet}. Importashon por bira lentu i usa hopi memoria — riba un aparato mas chikito e app por keda hèlt.',

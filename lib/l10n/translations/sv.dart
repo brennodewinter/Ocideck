@@ -1774,6 +1774,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afbeelding aanpassen': 'Justera bild',
   'Groot bestand': 'Stor fil',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Denna fil är {grootte} stor. Det är mer än den rekommenderade gränsen på {limiet}. Import kan vara långsam och kräva mycket minne — på en mindre enhet kan appen frysa.',

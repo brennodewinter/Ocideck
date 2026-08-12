@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image/image.dart' as img;
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/web_asset_store.dart';
@@ -322,6 +323,77 @@ void main() {
         ]),
         isNull,
       );
+    });
+  });
+
+  group('EXIF-orientatie bakken bij import', () {
+    test('een JPEG met orientatie 3 (180°) wordt geroteerd en de tag wordt '
+        'gewist', () async {
+      // Maak een kleine afbeelding met een herkenbaar patroon: pixel (0,0)
+      // is rood, pixel (w-1,h-1) is blauw. Na 180° rotatie moet pixel (0,0)
+      // blauw zijn.
+      final original = img.Image(width: 4, height: 2);
+      original.setPixelRgb(0, 0, 255, 0, 0); // linksboven = rood
+      original.setPixelRgb(3, 1, 0, 0, 255); // rechtsonder = blauw
+      original.exif.imageIfd.orientation = 3; // 180°
+      final jpegBytes = Uint8List.fromList(img.encodeJpg(original));
+
+      // Sla op als tijdelijk bestand en importeer in het project.
+      final src = File(p.join(tmp.path, 'rotated.jpg'))
+        ..writeAsBytesSync(jpegBytes);
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+
+      final imported = await service.importIntoDeck(
+        src.path,
+        projectPath: project.path,
+      );
+
+      // De geïmporteerde afbeelding moet de orientatie-tag kwijt zijn.
+      final outBytes = File(p.join(project.path, imported)).readAsBytesSync();
+      final decoded = img.decodeImage(outBytes);
+      expect(decoded, isNotNull);
+      expect(
+        decoded!.exif.imageIfd.hasOrientation,
+        isFalse,
+        reason: 'de orientatie-tag moet zijn gewist na het bakken',
+      );
+      // Na 180° rotatie moet pixel (0,0) blauw zijn (was rood).
+      final px = decoded.getPixel(0, 0);
+      expect(px.r, 0);
+      expect(px.b, greaterThan(200), reason: 'pixel (0,0) moet blauw zijn');
+    });
+
+    test('een JPEG zonder orientatie-tag gaat ongewijzigd door', () async {
+      final original = img.Image(width: 2, height: 2);
+      final jpegBytes = Uint8List.fromList(img.encodeJpg(original));
+      final src = File(p.join(tmp.path, 'plain.jpg'))
+        ..writeAsBytesSync(jpegBytes);
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+
+      final imported = await service.importIntoDeck(
+        src.path,
+        projectPath: project.path,
+      );
+
+      // Zonder orientatie-tag mag de inhoud niet veranderen (geen re-encode).
+      final outBytes = File(p.join(project.path, imported)).readAsBytesSync();
+      expect(outBytes, jpegBytes);
+    });
+
+    test('een PNG gaat ongewijzigd door (geen EXIF-orientatie)', () async {
+      final pngBytes = Uint8List.fromList(
+        img.encodePng(img.Image(width: 2, height: 2)),
+      );
+      final src = File(p.join(tmp.path, 'pic.png'))..writeAsBytesSync(pngBytes);
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+
+      final imported = await service.importIntoDeck(
+        src.path,
+        projectPath: project.path,
+      );
+
+      final outBytes = File(p.join(project.path, imported)).readAsBytesSync();
+      expect(outBytes, pngBytes);
     });
   });
 }

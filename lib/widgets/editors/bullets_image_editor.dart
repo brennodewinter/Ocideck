@@ -464,7 +464,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
             alignment: Alignment.centerLeft,
             child: OutlinedButton.icon(
               icon: const Icon(Icons.crop, size: 18),
-              label: Text(l10n.d('Bijsnijden')),
+              label: Text(l10n.d('Afbeelding aanpassen')),
               onPressed: _openCrop,
             ),
           ),

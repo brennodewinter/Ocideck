@@ -735,6 +735,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Afbeelding aanpassen': 'Ofbylding oanpasse',
   'Groot bestand': 'Grut bestân',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Dit bestân is {grootte} grut. Dat is mear as de oanrikkemandearre limyt fan {limiet}. Ymportearje kin stadich wêze en in soad ûnthâld freegje — op in lytser apparaat kin de app fêstrinne.',

@@ -1792,6 +1792,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afbeelding aanpassen': 'Ajustează imaginea',
   'Groot bestand': 'Fișier mare',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Acest fișier are {grootte}. Asta este mai mult decât limita recomandată de {limiet}. Importul poate fi lent și poate folosi multă memorie — pe un dispozitiv mai mic aplicația se poate bloca.',

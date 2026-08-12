@@ -734,6 +734,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Afbeelding aanpassen': 'Ajuster l\'image',
   'Groot bestand': 'Fichier volumineux',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Ce fichier fait {grootte}. C\'est plus que la limite recommandée de {limiet}. L\'importation peut être lente et utiliser beaucoup de mémoire — sur un appareil plus petit, l\'application peut se figer.',

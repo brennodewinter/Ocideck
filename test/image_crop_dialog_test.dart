@@ -83,7 +83,7 @@ void main() {
     );
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
-    expect(find.text('Bijsnijden'), findsOneWidget);
+    expect(find.text('Afbeelding aanpassen'), findsOneWidget);
     return uitkomst;
   }
 
@@ -245,7 +245,7 @@ void main() {
     await tester.sendKeyEvent(LogicalKeyboardKey.escape);
     await tester.pumpAndSettle();
 
-    expect(find.text('Bijsnijden'), findsNothing);
+    expect(find.text('Afbeelding aanpassen'), findsNothing);
     expect(uitkomst, [null]);
   });
 

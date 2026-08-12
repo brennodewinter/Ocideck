@@ -1781,6 +1781,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Afbeelding aanpassen': 'Prilagodi sliku',
   'Groot bestand': 'Velika datoteka',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Ova datoteka je veličine {grootte}. To je više od preporučenog ograničenja od {limiet}. Uvoz može biti spor i zahtijevati puno memorije — na manjem uređaju aplikacija se može zamrznuti.',

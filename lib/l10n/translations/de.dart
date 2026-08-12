@@ -734,6 +734,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Afbeelding aanpassen': 'Bild anpassen',
   'Groot bestand': 'Große Datei',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Diese Datei ist {grootte} groß. Das überschreitet die empfohlene Grenze von {limiet}. Der Import kann langsam sein und viel Speicher benötigen — auf einem kleineren Gerät kann die App einfrieren.',

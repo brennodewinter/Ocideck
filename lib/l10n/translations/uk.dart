@@ -1792,6 +1792,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Afbeelding aanpassen': 'Налаштувати зображення',
   'Groot bestand': 'Великий файл',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'Цей файл має розмір {grootte}. Це більше за рекомендований ліміт {limiet}. Імпортування може бути повільним і використовувати багато пам\'яті — на меншому пристрої застосунок може зависнути.',
