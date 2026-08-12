@@ -167,9 +167,12 @@ SourceSlide _unreadableSlide(
   );
 }
 
-/// Lees de vormen (`p:sp`/`p:pic`/`p:graphicFrame`) van [spTree] in [parts],
-/// met per onderdeel een foutgrens (#877): een onleesbaar tekstvak, afbeelding,
-/// grafiek of tabel wordt overgeslagen en als verlies genoteerd, de rest blijft.
+/// Lees de vormen (`p:sp`/`p:pic`/`p:graphicFrame`/`p:grpSp`) van [spTree] in
+/// [parts], met per onderdeel een foutgrens (#877): een onleesbaar tekstvak,
+/// afbeelding, grafiek of tabel wordt overgeslagen en als verlies genoteerd,
+/// de rest blijft. Groepen (`p:grpSp`) worden recursief uitgeklapt — een
+/// presentatieauteur groepeert vaak tekstvakken en afbeeldingen, en zonder
+/// recursie verdween de hele groep stil.
 void _readShapeTree(
   XmlElement spTree,
   PptxContext ctx,
@@ -182,6 +185,19 @@ void _readShapeTree(
 ) {
   for (final child in spTree.children.whereType<XmlElement>()) {
     switch (child.name.local) {
+      case 'grpSp':
+        // Recurseer in de groep — de kinderen hebben dezelfde structuur
+        // (sp/pic/graphicFrame/grpSp) als de spTree zelf.
+        _readShapeTree(
+          child,
+          ctx,
+          rels,
+          slidePath,
+          index,
+          resolveLink,
+          parts,
+          slideHeight,
+        );
       case 'sp':
         // Eén onleesbaar tekstvak mag de rest van de dia niet meesleuren
         // (#877); `break` werd `return;` omdat de body nu een closure is.

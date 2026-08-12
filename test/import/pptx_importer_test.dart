@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image/image.dart' as img;
 import 'package:ocideck/services/import/core/result.dart';
 import 'package:ocideck/services/import/importers/pptx/pptx_importer.dart';
 import 'package:ocideck/services/import/models/body_block.dart';
@@ -450,5 +451,107 @@ void main() {
     expect(deck.theme!.accentColor, '#2E7D64');
     expect(deck.theme!.textColor, '#222222');
     expect(deck.theme!.fontFamily, 'Georgia');
+  });
+
+  // Een slide met een `p:grpSp` groep die een tekstvak en een afbeelding bevat.
+  // Vroeger werd de hele groep stil overgeslagen; nu recurseert _readShapeTree.
+  test('leest tekst en afbeeldingen uit een p:grpSp groep', () async {
+    final imageBytes = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A];
+    final groupSlideXml =
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<p:sld xmlns:a="$_a" xmlns:p="$_p" xmlns:r="$_r">'
+        '<p:cSld><p:spTree>'
+        '<p:sp>'
+        '<p:nvSpPr><p:cNvPr id="2" name="Title"/><p:cNvSpPr/><p:nvPr><p:ph type="title"/></p:nvPr></p:nvSpPr>'
+        '<p:spPr/><p:txBody><a:bodyPr/><a:lstStyle/><a:p><a:r><a:t>Groep</a:t></a:r></a:p></p:txBody>'
+        '</p:sp>'
+        '<p:grpSp>'
+        '<p:nvGrpSpPr><p:cNvPr id="10" name="Group"/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr>'
+        '<p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1" cy="1"/>'
+        '<a:chOff x="0" y="0"/><a:chExt cx="1" cy="1"/></a:xfrm></p:grpSpPr>'
+        '<p:sp>'
+        '<p:nvSpPr><p:cNvPr id="11" name="TextBox"/><p:cNvSpPr/><p:nvPr/></p:nvSpPr>'
+        '<p:spPr><a:xfrm><a:off x="4572000" y="4572000"/><a:ext cx="914400" cy="914400"/></a:xfrm></p:spPr>'
+        '<p:txBody><a:bodyPr/><a:lstStyle/><a:p><a:r><a:t>Tekst in groep</a:t></a:r></a:p></p:txBody>'
+        '</p:sp>'
+        '<p:pic>'
+        '<p:nvPicPr><p:cNvPr id="12" name="Photo"/><p:cNvPicPr/><p:nvPr/></p:nvPicPr>'
+        '<p:blipFill><a:blip r:embed="rId3"/></p:blipFill>'
+        '<p:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1" cy="1"/></a:xfrm></p:spPr>'
+        '</p:pic>'
+        '</p:grpSp>'
+        '</p:spTree></p:cSld></p:sld>';
+
+    final bytes = _zip({
+      'ppt/presentation.xml': _presentationXml(1),
+      'ppt/_rels/presentation.xml.rels': _presRels(1),
+      'ppt/slides/slide1.xml': groupSlideXml,
+      'ppt/slides/_rels/slide1.xml.rels': _slideRels(withImage: true),
+      'ppt/media/photo.png': imageBytes,
+    });
+
+    final result = await PptxImporter().importBytes(bytes, path: 'group.pptx');
+    expect(result.isOk, isTrue);
+    final slide = result.okValue!.slides.single;
+    expect(slide.title, 'Groep');
+    // De tekst uit de groep moet als positioned text of body block verschijnen.
+    expect(
+      slide.bodyBlocks.any((b) => b.text.contains('Tekst in groep')),
+      isTrue,
+      reason: 'tekst in een groep mag niet stil verdwijnen',
+    );
+    // De afbeelding uit de groep moet worden gelezen.
+    expect(slide.images, hasLength(1));
+    expect(slide.images.single.name, 'Photo');
+  });
+
+  test('bakt rotatie (rot=10800000 = 180°) in de afbeelding bij import', () async {
+    // Maak een 2x2 PNG met een asymmetrisch patroon zodat 180° rotatie
+    // meetbaar andere bytes oplevert.
+    final original = img.Image(width: 2, height: 2);
+    original.setPixelRgb(0, 0, 255, 0, 0);
+    original.setPixelRgb(1, 0, 0, 0, 0);
+    original.setPixelRgb(0, 1, 0, 0, 0);
+    original.setPixelRgb(1, 1, 0, 0, 255);
+    final pngBytes = Uint8List.fromList(img.encodePng(original));
+
+    final rotatedSlideXml =
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<p:sld xmlns:a="$_a" xmlns:p="$_p" xmlns:r="$_r">'
+        '<p:cSld><p:spTree>'
+        '<p:sp>'
+        '<p:nvSpPr><p:cNvPr id="2" name="Title"/><p:cNvSpPr/><p:nvPr><p:ph type="title"/></p:nvPr></p:nvSpPr>'
+        '<p:spPr/><p:txBody><a:bodyPr/><a:lstStyle/><a:p><a:r><a:t>Rotatie</a:t></a:r></a:p></p:txBody>'
+        '</p:sp>'
+        '<p:pic>'
+        '<p:nvPicPr><p:cNvPr id="5" name="Photo"/><p:cNvPicPr/><p:nvPr/></p:nvPicPr>'
+        '<p:blipFill><a:blip r:embed="rId3"/></p:blipFill>'
+        '<p:spPr><a:xfrm rot="10800000"><a:off x="0" y="0"/><a:ext cx="3048000" cy="3048000"/></a:xfrm></p:spPr>'
+        '</p:pic>'
+        '</p:spTree></p:cSld></p:sld>';
+
+    final bytes = _zip({
+      'ppt/presentation.xml': _presentationXml(1),
+      'ppt/_rels/presentation.xml.rels': _presRels(1),
+      'ppt/slides/slide1.xml': rotatedSlideXml,
+      'ppt/slides/_rels/slide1.xml.rels': _slideRels(withImage: true),
+      'ppt/media/photo.png': pngBytes,
+    });
+
+    final result = await PptxImporter().importBytes(
+      bytes,
+      path: 'rotated.pptx',
+    );
+    expect(result.isOk, isTrue);
+    final slide = result.okValue!.slides.single;
+    expect(slide.images, hasLength(1));
+    // De geroteerde bytes moeten verschillen van de originele bytes (180°
+    // roteert een asymmetrische afbeelding).
+    expect(slide.images.single.bytes, isNot(equals(pngBytes)));
+    // En de geroteerde afbeelding moet decodeerbaar zijn.
+    final rotated = img.decodeImage(slide.images.single.bytes);
+    expect(rotated, isNotNull);
+    expect(rotated!.width, 2);
+    expect(rotated.height, 2);
   });
 }
