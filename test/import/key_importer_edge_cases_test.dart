@@ -26,6 +26,23 @@ void main() {
     },
   );
 
+  test(
+    'de foutmelding bij een leeg .key bevat diagnostische info over het archief',
+    () async {
+      final bytes = fx.zip({
+        'readme.txt': 'hello',
+        'Metadata/Properties.plist': '<plist/>',
+      });
+      final result = await KeyImporter().importBytes(bytes, path: 'empty.key');
+      expect(result.isErr, isTrue);
+      final msg = result.errValue!.message;
+      expect(msg, contains('Archief:'));
+      expect(msg, contains('2 bestanden'));
+      expect(msg, contains('preview: nee'));
+      expect(msg, contains('metadata: ja'));
+    },
+  );
+
   test('salvages only preview.jpg when no IWA exists', () async {
     const imageBytes = <int>[0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A];
     final bytes = fx.zip({'preview.jpg': imageBytes});
