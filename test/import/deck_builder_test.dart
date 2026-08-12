@@ -119,6 +119,51 @@ void main() {
       expect(slide.imagePath, isNot(slide.imagePath2));
     });
 
+    test('drie of meer afbeeldingen met bullets worden bulletsImage', () {
+      // Een Keynote-dia met 6 afbeeldingen (inhoud + master-slide-logo's)
+      // plus bullets. Vroeger viel dit door naar `bullets` en dropte alle
+      // afbeeldingen stil; nu wordt het bulletsImage (eerste afbeelding).
+      final built = _build([
+        SourceSlide(
+          index: 1,
+          title: 'Overzicht',
+          bodyBlocks: [_bullet('Punt een'), _bullet('Punt twee')],
+          images: [
+            _img([1]),
+            _img([2]),
+            _img([3]),
+            _img([4]),
+            _img([5]),
+            _img([6]),
+          ],
+        ),
+      ]);
+      // De extra afbeeldingen genereren een notitiedia; de eerste is de inhoud.
+      final slide = built.deck.slides.first;
+      expect(slide.type, SlideType.bulletsImage);
+      expect(slide.imagePath, startsWith('mem:'));
+      expect(slide.bullets, ['Punt een', 'Punt twee']);
+    });
+
+    test('drie of meer afbeeldingen zonder bullets worden twoImages', () {
+      final built = _build([
+        SourceSlide(
+          index: 1,
+          title: 'Galerij',
+          images: [
+            _img([1]),
+            _img([2]),
+            _img([3]),
+          ],
+        ),
+      ]);
+      // De derde afbeelding wordt op de notitiedia gemeld; de eerste is de inhoud.
+      final slide = built.deck.slides.first;
+      expect(slide.type, SlideType.twoImages);
+      expect(slide.imagePath, startsWith('mem:'));
+      expect(slide.imagePath2, startsWith('mem:'));
+    });
+
     test('een budgetfout laat geen half gebouwd deck in de store achter', () {
       WebAssetStore.overrideTotalBudgetForTest(1);
 
