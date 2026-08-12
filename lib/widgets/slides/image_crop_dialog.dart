@@ -125,6 +125,7 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
   Size? _intrinsic;
   int _rotationQuarterTurns = 0; // 0, 1, 2, 3 × 90°
   Uint8List? _originalBytes;
+  double _scaleStart = 100; // zoom-niveau bij start van een pinch-gebaar
 
   // In the panel slots (enableZoom == false) the image always covers its
   // column, so treat it as cover regardless of what `imageSize` (the column
@@ -193,7 +194,10 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
       // Decodeer, roteer, codeer opnieuw. Behoud het originele formaat.
       final decoded = img.decodeImage(original);
       if (decoded == null) return;
-      final rotated = img.copyRotate(decoded, angle: quarterTurns * 90.0);
+      final rotated = img.copyRotate(
+        decoded,
+        angle: _rotationQuarterTurns * 90.0,
+      );
       final encoded =
           widget.imagePath.endsWith('.jpg') ||
               widget.imagePath.endsWith('.jpeg')
@@ -359,7 +363,23 @@ class _ImageCropDialogState extends State<_ImageCropDialog> {
           cursor: SystemMouseCursors.grab,
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onPanUpdate: (d) => _drag(d.delta, frameW, frameH),
+            // Eén scale-recognizer die zowel slepen (1 vinger) als pinch-zoom
+            // (2 vingers) afhandelt. onPanUpdate zou met onScaleUpdate botsen
+            // en nooit vuren — vandaar dat _drag via focalPointDelta loopt.
+            onScaleStart: (_) => _scaleStart = _size.toDouble(),
+            onScaleUpdate: (s) {
+              if (widget.enableZoom && s.scale != 1.0) {
+                setState(() {
+                  // Pinch past de zoom aan: van cover (0) naar inzoomen
+                  // (minZoom..maxZoom). De slider volgt同步.
+                  final next = (_scaleStart * s.scale).round();
+                  _size = next.clamp(widget.minZoom, widget.maxZoom);
+                });
+              }
+              if (s.focalPointDelta != Offset.zero) {
+                _drag(s.focalPointDelta, frameW, frameH);
+              }
+            },
             child: ClipRect(
               child: Stack(
                 fit: StackFit.expand,

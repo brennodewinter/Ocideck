@@ -251,7 +251,10 @@ Widget _tabScope(TabInfo tab) {
                 ref.read(fileServiceProvider),
               ),
       ),
-      editorProvider.overrideWith((ref) => tab.editorNotifier),
+      editorProvider.overrideWith(
+        (ref) =>
+            tab.editorNotifier.mounted ? tab.editorNotifier : EditorNotifier(),
+      ),
       collabSessionProvider.overrideWith(
         (ref) => CollabSessionNotifier(ref, tab),
       ),

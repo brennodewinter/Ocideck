@@ -54,6 +54,11 @@ class DrawableReader {
   /// references as `TSP.Reference` submessages, and newer files wrap the actual
   /// ShapeInfoArchive / StorageArchive in extra drawable objects, so we walk the
   /// reachable object graph (avoiding cycles) to find any StorageArchive text.
+  ///
+  /// We follow only the direct containedStorage path (field 2) and the
+  /// ShapeArchive super-message (field 1, subfields 2 and 4). Following
+  /// every reference field recursively reaches shared/template storages and
+  /// pulls their text into every slide — see #1468.
   String? shapeText(IwaObject o, {Set<int>? visited}) {
     final seen = visited ?? <int>{};
     if (!seen.add(o.id)) return null;
@@ -84,17 +89,6 @@ class DrawableReader {
       }
     }
 
-    // Otherwise, follow every reference field looking for a StorageArchive.
-    for (final field in o.message.fields.keys.toList()..sort()) {
-      for (final target in doc.resolveReferences(o, field)) {
-        if (_isStorage(target)) {
-          final t = _storageText(target);
-          if (t != null && t.isNotEmpty) return t;
-        }
-        final t = shapeText(target, visited: seen);
-        if (t != null && t.isNotEmpty) return t;
-      }
-    }
     return null;
   }
 
@@ -302,16 +296,21 @@ class DrawableReader {
     if (!seen.add(o.id)) return const {};
     final ids = <int>{};
 
-    // Try the canonical image data fields first.
-    for (final field in const [11, 12, 15, 16, 17]) {
+    // Try the canonical image data fields first. Field 12 is the thumbnail
+    // preview that Keynote stores alongside the full image (field 11);
+    // importing both creates duplicate entries in the image library (#1468).
+    for (final field in const [11, 15, 16, 17]) {
       final dataId = _dataReferenceId(o, field);
       if (dataId != null) {
         ids.add(doc.resolveDataReference(o, dataId));
       }
     }
 
-    // Fall back to following references to image-like objects.
+    // Fall back to following references to image-like objects. Skip field 12
+    // (thumbnail) here too — it's handled above as a canonical field and
+    // would otherwise be re-collected through this fallback path.
     for (final field in o.message.fields.keys) {
+      if (field == 12) continue;
       final sub = o.message.message(field);
       if (sub == null) continue;
       final refId = sub.varint(1);

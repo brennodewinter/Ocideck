@@ -38,6 +38,10 @@ class SlideOrder {
   /// Use the `TSP.PackageMetadata` `components` list to find the actual slide
   /// components. Each `Slide` component's first object is the root drawable for
   /// that slide and contains the real title/body text.
+  ///
+  /// The component's object reference (field 1) is a `TSP.Reference` submessage
+  /// in real iWork files (wire type 2), but some fixtures encode it as a raw
+  /// varint. Both are handled.
   List<IwaObject>? _slidesFromPackageMetadata() {
     final meta = doc.packageMetadata;
     if (meta == null) return null;
@@ -45,7 +49,9 @@ class SlideOrder {
     for (final comp in meta.messages(3)) {
       final locator = comp.string(3);
       if (locator == null || !locator.startsWith('Slide-')) continue;
-      final id = comp.varint(1);
+      // Field 1 is TSP.Reference: een submessage met object_id op veld 1,
+      // óf een raw varint in testfixtures.
+      final id = comp.varint(1) ?? comp.message(1)?.varint(1);
       if (id == null) continue;
       final obj = doc[id];
       if (obj == null || !_looksLikeSlide(obj)) continue;
@@ -83,9 +89,17 @@ class SlideOrder {
   static const _slideNodeTypeIds = {4, 5, 6005, 6006};
 
   List<IwaObject>? _slidesFromTree() {
-    // SlideNode-like objects: carry a `slide` ref (field 2) and/or children
-    // (repeated ref field 1). Newer files encode these as ObjectReference
-    // raw varints, so we use field-aware resolution.
+    // SlideNode-achtige objecten: hebben een slide-ref (veld 2) en/of
+    // children (repeated ref veld 1). Nieuwere bestanden encoderen deze
+    // als ObjectReference raw varints, dus we gebruiken field-aware
+    // resolutie.
+    //
+    // In echte Keynote-bestanden is typeId 5 de Slide zelf, geen SlideNode:
+    // hij heeft drawables als children (veld 1) maar geen slide-ref (veld 2).
+    // Testfixtures gebruiken typeId 5 wél voor leaf-SlideNodes (met slide-ref).
+    // Een echte SlideNode heeft of een slide-ref, of children die zelf weer
+    // SlideNodes zijn. Een Slide met drawable-children voldoet niet — zijn
+    // children zijn geen SlideNodes.
     final nodes = <IwaObject>[];
     final childIds = <int>{};
     for (final o in doc.all.values) {
@@ -93,9 +107,15 @@ class SlideOrder {
       final children = doc.resolveReferences(o, 1);
       final slide = doc.resolveReferences(o, 2).firstOrNull;
       if (children.isEmpty && slide == null) continue;
-      if (children.isEmpty && slide != null && !_looksLikeSlide(slide)) {
-        continue;
+      // Geen slide-ref en children zijn geen SlideNodes: dit is een Slide,
+      // geen SlideNode. Sla hem over.
+      if (slide == null && children.isNotEmpty) {
+        final hasNodeChildren = children.any(
+          (c) => _slideNodeTypeIds.contains(c.typeId),
+        );
+        if (!hasNodeChildren) continue;
       }
+      if (slide != null && !_looksLikeSlide(slide)) continue;
       nodes.add(o);
       for (final child in children) {
         childIds.add(child.id);

@@ -583,11 +583,27 @@ List<int> _doubleLE(double v) {
   return b.buffer.asUint8List().toList();
 }
 
-/// A PackageMetadata payload: `datas` (field 4) containing DataInfo submessages.
-List<int> packageMetadataPayload({List<List<int>> dataInfos = const []}) {
+/// A PackageMetadata payload: `datas` (field 4) containing DataInfo submessages,
+/// and optionally `components` (field 3) with ComponentMetadata submessages.
+List<int> packageMetadataPayload({
+  List<List<int>> dataInfos = const [],
+  List<({int objectId, String locator})> components = const [],
+}) {
   final out = <int>[
     ...varintField(1, 100), // last_object_identifier
   ];
+  for (final comp in components) {
+    // ComponentMetadata: field 1 = TSP.Reference submessage (wire type 2),
+    // field 3 = locator string.
+    final refPayload = varintField(1, comp.objectId);
+    final compPayload = [
+      ...bytesField(1, refPayload), // TSP.Reference as submessage
+      ...bytesField(3, comp.locator.codeUnits), // locator string
+    ];
+    out.addAll(varint(key(3, 2)));
+    out.addAll(varint(compPayload.length));
+    out.addAll(compPayload);
+  }
   for (final di in dataInfos) {
     out.addAll(varint(key(4, 2)));
     out.addAll(varint(di.length));

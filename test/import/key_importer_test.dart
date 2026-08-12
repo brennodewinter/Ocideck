@@ -433,4 +433,136 @@ void main() {
     expect(deck.slides.single.images.single.bytes, imageBytes);
     expect(deck.slides.single.images.single.ext, 'png');
   });
+
+  test(
+    'skips Keynote thumbnail (field 12) and imports only the full image',
+    () async {
+      // Keynote stores both a full-resolution image (field 11) and a small
+      // thumbnail preview (field 12) in each ImageArchive. The thumbnail
+      // must not be imported as a separate image — it creates duplicates
+      // in the image library (#1468).
+      const fullDataId = 42;
+      const thumbDataId = 43;
+      const fullFileName = 'photo.png';
+      const thumbFileName = 'photo-small.png';
+      const fullBytes = <int>[0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A];
+      const thumbBytes = <int>[0x89, 0x50, 0x4E, 0x47, 0x01];
+      final recordBytes = [
+        fx.record(
+          2,
+          100,
+          fx.packageMetadataPayload(
+            dataInfos: [
+              fx.dataInfoPayload(
+                identifier: fullDataId,
+                preferredFileName: fullFileName,
+              ),
+              fx.dataInfoPayload(
+                identifier: thumbDataId,
+                preferredFileName: thumbFileName,
+              ),
+            ],
+          ),
+        ),
+        // Image (id 10) with both full (field 11) and thumbnail (field 12).
+        fx.record(10, 200, [
+          ...fx.varint(fx.key(1, 2)),
+          ...fx.varint(0), // empty DrawableArchive super
+          ...fx.bytesField(11, fx.varintField(1, fullDataId)),
+          ...fx.bytesField(12, fx.varintField(1, thumbDataId)),
+        ]),
+        fx.recordWithRefs(
+          1,
+          1,
+          fx.slidePayload(
+            titleRefIndex: 0,
+            bodyRefIndex: 0,
+            drawableRefIndices: [0],
+          ),
+          [10],
+        ),
+      ].expand((e) => e).toList();
+
+      final bytes = fx.zip({
+        'Index/slide-1.iwa': fx.iwaStream(recordBytes),
+        'Data/$fullFileName': fullBytes,
+        'Data/$thumbFileName': thumbBytes,
+      });
+
+      final deck = (await KeyImporter().importBytes(
+        bytes,
+        path: 'thumb.key',
+      )).okValue!;
+      expect(deck.slides, hasLength(1));
+      // Only the full image, not the thumbnail.
+      expect(deck.slides.single.images, hasLength(1));
+      expect(deck.slides.single.images.single.bytes, fullBytes);
+    },
+  );
+
+  test(
+    'PackageMetadata components with TSP.Reference submessages give slide order',
+    () async {
+      // Real Keynote files encode the component's object reference (field 1)
+      // as a TSP.Reference submessage, not a raw varint. Three slides with
+      // distinct titles, ordered via PackageMetadata components.
+      final recordBytes = [
+        // PackageMetadata (id 2) with three Slide- components.
+        fx.record(
+          2,
+          100,
+          fx.packageMetadataPayload(
+            components: [
+              (objectId: 10, locator: 'Slide-1'),
+              (objectId: 20, locator: 'Slide-2'),
+              (objectId: 30, locator: 'Slide-3'),
+            ],
+          ),
+        ),
+        // Slide 1 (id 10): title "Alpha".
+        fx.recordWithRefs(
+          10,
+          1,
+          fx.slidePayload(titleRefIndex: 0, bodyRefIndex: 1),
+          [11, 12],
+        ),
+        fx.recordWithRefs(11, 2, fx.shapeInfoPayload(0), [13]),
+        fx.record(13, 3, fx.storagePayload(['Alpha'])),
+        fx.recordWithRefs(12, 2, fx.shapeInfoPayload(0), [14]),
+        fx.record(14, 3, fx.storagePayload([''])),
+        // Slide 2 (id 20): title "Beta".
+        fx.recordWithRefs(
+          20,
+          1,
+          fx.slidePayload(titleRefIndex: 0, bodyRefIndex: 1),
+          [21, 22],
+        ),
+        fx.recordWithRefs(21, 2, fx.shapeInfoPayload(0), [23]),
+        fx.record(23, 3, fx.storagePayload(['Beta'])),
+        fx.recordWithRefs(22, 2, fx.shapeInfoPayload(0), [24]),
+        fx.record(24, 3, fx.storagePayload([''])),
+        // Slide 3 (id 30): title "Gamma".
+        fx.recordWithRefs(
+          30,
+          1,
+          fx.slidePayload(titleRefIndex: 0, bodyRefIndex: 1),
+          [31, 32],
+        ),
+        fx.recordWithRefs(31, 2, fx.shapeInfoPayload(0), [33]),
+        fx.record(33, 3, fx.storagePayload(['Gamma'])),
+        fx.recordWithRefs(32, 2, fx.shapeInfoPayload(0), [34]),
+        fx.record(34, 3, fx.storagePayload([''])),
+      ].expand((e) => e).toList();
+      final bytes = fx.zip({'Index/Document.iwa': fx.iwaStream(recordBytes)});
+
+      final deck = (await KeyImporter().importBytes(
+        bytes,
+        path: 'ordered.key',
+      )).okValue!;
+      expect(deck.slides, hasLength(3));
+      expect(deck.slides[0].title, 'Alpha');
+      expect(deck.slides[1].title, 'Beta');
+      expect(deck.slides[2].title, 'Gamma');
+    },
+  );
 }
