@@ -42,6 +42,11 @@ Object _safeError(Object error) {
   return error;
 }
 
+/// Publieke wrapper om [_safeError] voor aanroepers buiten dit bestand —
+/// bijvoorbeeld `_transportSafe` in `import_task.dart`, dat de foutmelding
+/// saniteert vóór de `cause` de isolate-grens passeert en in de UI landt.
+Object sanitizeError(Object error) => _safeError(error);
+
 void logError(String op, Object error, [StackTrace? stack]) {
   developer.log(
     op,

@@ -55,6 +55,21 @@ void main() {
       final failure = (result as ImportTaskFailed).failure;
       expect(failure.reason, ImportFailureReason.notAPresentation);
     });
+
+    test('de cause wordt gesaneerd: geen brontekst in de foutmelding', () {
+      // Een FormatException plakt de ontlede bron in toString() — die bron kan
+      // persoonsgegevens bevatten. _transportSafe moet die bron strippen voordat
+      // de cause de isolate-grens passeert en in de UI landt.
+      final sensitive = 'Geheime data van Jan Jansen';
+      final failure = ImportTaskFailed(
+        ImportFailure(
+          'test',
+          cause: FormatException('syntax error', sensitive),
+        ),
+      ).failure;
+      expect(failure.cause, isNot(contains(sensitive)));
+      expect(failure.cause, contains('FormatException'));
+    });
   });
 
   group('runImportTask — de worker-isolate (desktop-pad)', () {
