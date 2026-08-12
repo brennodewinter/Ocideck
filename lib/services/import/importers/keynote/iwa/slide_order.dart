@@ -38,6 +38,10 @@ class SlideOrder {
   /// Use the `TSP.PackageMetadata` `components` list to find the actual slide
   /// components. Each `Slide` component's first object is the root drawable for
   /// that slide and contains the real title/body text.
+  ///
+  /// The component's object reference (field 1) is a `TSP.Reference` submessage
+  /// in real iWork files (wire type 2), but some fixtures encode it as a raw
+  /// varint. Both are handled.
   List<IwaObject>? _slidesFromPackageMetadata() {
     final meta = doc.packageMetadata;
     if (meta == null) return null;
@@ -45,7 +49,9 @@ class SlideOrder {
     for (final comp in meta.messages(3)) {
       final locator = comp.string(3);
       if (locator == null || !locator.startsWith('Slide-')) continue;
-      final id = comp.varint(1);
+      // Field 1 is TSP.Reference: een submessage met object_id op veld 1,
+      // óf een raw varint in testfixtures.
+      final id = comp.varint(1) ?? comp.message(1)?.varint(1);
       if (id == null) continue;
       final obj = doc[id];
       if (obj == null || !_looksLikeSlide(obj)) continue;

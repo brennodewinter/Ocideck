@@ -3,11 +3,13 @@ import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/slide.dart' show SlideType;
 import 'package:ocideck/services/import/core/result.dart';
 import 'package:ocideck/services/import/importers/import_failure.dart';
 import 'package:ocideck/services/import/importers/importer.dart';
 import 'package:ocideck/services/import/models/source_deck.dart';
 import 'package:ocideck/services/import/models/source_format.dart';
+import 'package:ocideck/services/import/models/source_image.dart';
 import 'package:ocideck/services/import/models/source_slide.dart';
 import 'package:ocideck/services/import/pipeline/import_runner.dart';
 import 'package:ocideck/services/import/pipeline/import_task.dart';
@@ -34,6 +36,48 @@ void main() {
         expect(parsed.deck.slides, isNotEmpty);
         expect(parsed.deck.slides.first.title, 'Plan');
         expect(parsed.classified, hasLength(parsed.deck.slides.length));
+      },
+    );
+
+    test(
+      'overflow-afbeeldingen worden uitgesplitst naar extra image-slides',
+      () async {
+        // Een bron-dia met 4 afbeeldingen wordt als twoImages geclassificeerd
+        // (2 getoond) + 2 extra image-slides voor de overflow.
+        final result = await parseAndClassify(
+          ImportRequest(bytes: pptxFixture(), filename: 'x.pptx'),
+          registry: ImporterRegistry(
+            importers: [
+              _CannedImporter(
+                SourceDeck(
+                  title: 'Galerij',
+                  slides: [
+                    SourceSlide(
+                      index: 0,
+                      title: 'Vier foto\'s',
+                      images: [
+                        SourceImage(bytes: Uint8List(1), ext: 'png'),
+                        SourceImage(bytes: Uint8List(2), ext: 'png'),
+                        SourceImage(bytes: Uint8List(3), ext: 'png'),
+                        SourceImage(bytes: Uint8List(4), ext: 'png'),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          report: (_) {},
+          isCancelled: () => false,
+        );
+        final parsed = (result as ImportTaskParsed).parsed;
+        expect(parsed.classified, hasLength(3));
+        expect(parsed.classified[0].type, SlideType.twoImages);
+        expect(parsed.classified[1].type, SlideType.image);
+        expect(parsed.classified[2].type, SlideType.image);
+        // De overflow-slides dragen elk één afbeelding.
+        expect(parsed.classified[1].source.images, hasLength(1));
+        expect(parsed.classified[2].source.images, hasLength(1));
       },
     );
 

@@ -301,5 +301,34 @@ void main() {
       final newBytes = File(foto).readAsBytesSync();
       expect(newBytes, equals(origBytes));
     });
+
+    testWidgets('twee keer rechtsom draait 180°, niet twee keer 90°', (
+      tester,
+    ) async {
+      // Een niet-vierkante 2x3 afbeelding: na 90° is ze 3x2, na 180° blijft
+      // ze 2x3 maar met de pixels gespiegeld. Zo onderscheiden we 90° van 180°.
+      final original = img.Image(width: 2, height: 3);
+      original.setPixelRgb(0, 0, 255, 0, 0); // linksboven: rood
+      original.setPixelRgb(1, 2, 0, 0, 255); // rechtsonder: blauw
+      File(foto).writeAsBytesSync(img.encodePng(original));
+
+      await open(tester);
+
+      await tester.tap(find.byIcon(Icons.rotate_right));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byIcon(Icons.rotate_right));
+      await tester.pumpAndSettle();
+      await klaar(tester);
+
+      final rotated = img.decodeImage(File(foto).readAsBytesSync())!;
+      // 180° houdt de afmetingen gelijk — 90° zou ze omwisselen.
+      expect(rotated.width, 2);
+      expect(rotated.height, 3);
+      // 180° spiegelt linksboven ↔ rechtsonder: rood ↔ blauw.
+      final tl = rotated.getPixel(0, 0);
+      final br = rotated.getPixel(1, 2);
+      expect([tl.r, tl.g, tl.b], [0, 0, 255]); // blauw
+      expect([br.r, br.g, br.b], [255, 0, 0]); // rood
+    });
   });
 }

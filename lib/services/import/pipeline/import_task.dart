@@ -25,8 +25,10 @@ import '../core/result.dart';
 import '../importers/import_failure.dart';
 import '../models/source_deck.dart';
 import '../models/source_format.dart';
+import '../models/source_slide.dart';
 import '../utils/archive_utils.dart';
 import '../utils/import_budget.dart';
+import '../../../models/slide.dart' show SlideType;
 import '../../../utils/log.dart';
 import 'format_detector.dart';
 import 'importer_registry.dart';
@@ -285,11 +287,41 @@ Future<ImportTaskResult> parseAndClassify(
   for (var i = 0; i < sourceDeck.slides.length; i++) {
     if (isCancelled()) return const ImportTaskCancelled();
     if (overDeadline()) return deadlineFailure();
-    classified.add(classifySlide(sourceDeck.slides[i]));
+    classified.addAll(_classifyWithImageOverflow(sourceDeck.slides[i]));
     if (i % _yieldEvery == _yieldEvery - 1) await _yield();
   }
 
   return ImportTaskParsed(ParsedPresentation(sourceDeck, classified));
+}
+
+/// Hoeveel afbeeldingen een [SlideType] toont. Komt overeen met
+/// `import_loss.dart`'s `shown`-berekening.
+int _imagesShownByType(SlideType t) => switch (t) {
+  SlideType.twoImages => 2,
+  SlideType.image || SlideType.bulletsImage || SlideType.title => 1,
+  _ => 0,
+};
+
+/// Classificeer een bron-dia en splits overflow-afbeeldingen uit naar extra
+/// image-slides. Een bron-dia met 5 afbeeldingen die als `twoImages` wordt
+/// geclassificeerd, levert drie `ClassifiedSlide`s: de origineel (2 foto's) plus
+/// twee extra `image`-slides (1 foto elk). De titel blijft op de eerste; de
+/// extra slides dragen alleen de afbeelding.
+List<ClassifiedSlide> _classifyWithImageOverflow(SourceSlide s) {
+  final main = classifySlide(s);
+  final shown = _imagesShownByType(main.type);
+  if (shown == 0 || s.images.length <= shown) return [main];
+
+  final overflow = <ClassifiedSlide>[];
+  for (var i = shown; i < s.images.length; i++) {
+    overflow.add(
+      ClassifiedSlide(
+        source: SourceSlide(index: s.index, title: '', images: [s.images[i]]),
+        type: SlideType.image,
+      ),
+    );
+  }
+  return [main, ...overflow];
 }
 
 /// Draai [parseAndClassify] gewoon hier, op de aanroepende isolate.
