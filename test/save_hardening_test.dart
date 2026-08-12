@@ -185,4 +185,37 @@ void main() {
       expect(n.state.deck!.slides.length, 2);
     });
   });
+
+  group('non-edit state replacement during save', () {
+    test('a state.deck replacement without a user edit (no undo step) still '
+        'lands clean after save', () async {
+      final gate = Completer<void>();
+      final md = MarkdownService();
+      final n = DeckNotifier(md, _BlockingFileService(gate, md));
+      n.loadDeck(_deck(), filePath: '/tmp/quiet.md');
+      n.addSlide(SlideType.bullets); // dirty
+      expect(n.state.isDirty, isTrue);
+
+      final saving = n.save();
+      // Simulate a non-edit state replacement (e.g. applyProvenance or a
+      // themeProfile copyWith) happening during the async save — it creates
+      // a new deck object without adding an undo step.
+      n.applyProvenance(null);
+      expect(
+        !identical(n.state.deck, n.state.deck),
+        isFalse,
+      ); // sanity: object exists
+      gate.complete();
+      final ok = await saving;
+
+      expect(ok, isTrue);
+      expect(
+        n.state.isDirty,
+        isFalse,
+        reason:
+            'state.deck was replaced but no user edit happened (no undo '
+            'step), so the deck should be clean after save',
+      );
+    });
+  });
 }
