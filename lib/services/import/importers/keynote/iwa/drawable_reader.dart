@@ -54,6 +54,11 @@ class DrawableReader {
   /// references as `TSP.Reference` submessages, and newer files wrap the actual
   /// ShapeInfoArchive / StorageArchive in extra drawable objects, so we walk the
   /// reachable object graph (avoiding cycles) to find any StorageArchive text.
+  ///
+  /// We follow only the direct containedStorage path (field 2) and the
+  /// ShapeArchive super-message (field 1, subfields 2 and 4). Following
+  /// every reference field recursively reaches shared/template storages and
+  /// pulls their text into every slide — see #1468.
   String? shapeText(IwaObject o, {Set<int>? visited}) {
     final seen = visited ?? <int>{};
     if (!seen.add(o.id)) return null;
@@ -84,17 +89,6 @@ class DrawableReader {
       }
     }
 
-    // Otherwise, follow every reference field looking for a StorageArchive.
-    for (final field in o.message.fields.keys.toList()..sort()) {
-      for (final target in doc.resolveReferences(o, field)) {
-        if (_isStorage(target)) {
-          final t = _storageText(target);
-          if (t != null && t.isNotEmpty) return t;
-        }
-        final t = shapeText(target, visited: seen);
-        if (t != null && t.isNotEmpty) return t;
-      }
-    }
     return null;
   }
 
