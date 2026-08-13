@@ -36,6 +36,11 @@ in Dutch, and it keeps growing on `main` between releases.
   ongesleutelde `Visibility`, waardoor Flutter bij het herschikken de scopes
   van de tabbladen erná herbouwde. Een stabiele `GlobalKey` per tab-scope laat
   Flutter de bestaande scope verplaatsen in plaats van opnieuw opbouwen.
+- fix(tabbladen): `DeckNotifier`/`EditorNotifier` disposen nu idempotent —
+  hardening bovenop het vorige punt. De per-tab notifiers hebben gedeelde
+  eigendom (TabsNotifier houdt ze, de ProviderScope disposet ze); mocht een
+  onvoorziene teardown-race ooit twee scopes op dezelfde instantie zetten, dan
+  is de tweede dispose een no-op in plaats van een crash-vloed.
 
 ## [0.4.2] — 2026-08-10
 

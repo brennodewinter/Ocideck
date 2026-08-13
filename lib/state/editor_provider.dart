@@ -99,6 +99,13 @@ class EditorState {
 class EditorNotifier extends StateNotifier<EditorState> {
   EditorNotifier() : super(const EditorState());
 
+  /// Idempotent, om dezelfde reden als [DeckNotifier.dispose] (#1478): een
+  /// tweede dispose van dezelfde notifier is een no-op, geen crash.
+  @override
+  void dispose() {
+    if (mounted) super.dispose();
+  }
+
   EditorState get currentState => state;
 
   /// Single-select [index] (clears any multi-selection).
