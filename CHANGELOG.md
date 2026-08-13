@@ -12,6 +12,50 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.4.3] — 2026-08-14
+
+### Added
+
+- feat(shell): geef de presentatie-eigenschappen-knop een label (#1479)
+- feat(grafiek): grafiek-hover spiegelen tussen presentator en beamer (#1482)
+- feat: import markeert deck als onopgeslagen en vraagt de naam
+- feat: niet-overgenomen inhoud op de slide zelf, niet op een aparte dia
+- feat: cross-import dedup — hergebruik bestaande afbeeldingen op inhoud
+- feat: afbeelding draaien in de crop-tool
+- feat: zoom inschakelen voor paneelafbeeldingen (bulletsImage/twoImages)
+- feat: waarschuwing bij grote presentatie-import (>512 MiB)
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- Volwassen documentstijlen met live voorvertoning
+- test(xmpp): maak de inbound-op-flood-test deterministisch (geen flaky linux-gate)
+- chore(deps): flutter_secure_storage_linux 3.0.1 → 3.0.2 (#1453)
+
+### Fixed
+
+- fix(html-export): presentatielogo op elke dia in de HTML-export (#1486)
+- fix(grafiek): donutgat-verhouding gelijk in app, PDF en HTML-export (#1485)
+- fix(grafiek): een taart vult nu dezelfde ruimte als een donut (#1483)
+- fix(tabbladen): idempotente dispose op Deck/EditorNotifier (hardening #1478) (#1481)
+- fix(keynote): style-referentie injecteerde template-afbeelding op elke slide
+- fix(tabbladen): dubbele dispose van buur-notifiers bij tab sluiten (#1478)
+- fix(image): rotatie in "Afbeelding aanpassen" blijft nu zichtbaar
+- fix(keynote): bak IWA-rotatie in afbeeldingspixels bij import
+- fix(image): bak EXIF-orientatie bij import en hernoem "Bijsnijden" (#1474)
+- fix(import): opslaan na import laat deck niet onterecht vuil (#1473)
+- fix(import): Keynote-import leest slide-volgorde uit ShowArchive SlideTree (#1472)
+- fix(import): Keynote-import slaat ook de aangepaste-thumbnail (field 16) over (#1471)
+- fix: ocideck_view_limit directives geven geen valse waarschuwing meer (#1470)
+- fix(import): Keynote-import behoudt bullet-inspringniveaus (#1469)
+- fix: import missing slides, image overflow, crop-rotatie en dispose-exception (#1468)
+- fix(pptx/odp): groepen en rotatie werden stil weggefilterd bij import
+- fix(classifier): slides met 3+ afbeeldingen kregen bullets-type en dropten alle beelden
+- fix(keynote): vang FormatException op in KeyContext.readPart
+- fix(import): Keynote-importfout zichtbaar, diagnostisch en sluitbaar
+- fix(finding): benut slides zonder leesbaarheid te verliezen (#1455)
+- fix(test): verhoog rate-limiter marge voor CI-runner timing (#1433) (#1454)
+
 ## [Unreleased]
 
 ### Added
