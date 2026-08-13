@@ -745,9 +745,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                       Expanded(
                         child: IndexedStack(
                           index: tabsState.clampedIndex,
-                          children: [
-                            for (final tab in tabsState.tabs) _tabScope(tab),
-                          ],
+                          children: _tabScopes(tabsState),
                         ),
                       ),
                     ],
