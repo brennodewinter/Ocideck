@@ -40,7 +40,6 @@ const _stringsGa = {
   'importUrl': 'Iompórtáil ó URL…',
   'findReplace': 'Aimsigh agus athsholáthar',
   'fullDeckPreview': 'Féach ar an deic iomlán',
-  'presentationProperties': 'Airíonna na láithreoireachta',
   'settings': 'Socruithe',
   'settingsGeneral': 'Ginearálta',
   'settingsColors': 'Dathanna',

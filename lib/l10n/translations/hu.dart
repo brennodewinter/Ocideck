@@ -38,7 +38,6 @@ const _stringsHu = {
   'importUrl': 'Importálás URL-ből…',
   'findReplace': 'Keresés és csere',
   'fullDeckPreview': 'Teljes diasor megtekintése',
-  'presentationProperties': 'Bemutató tulajdonságai',
   'settings': 'Beállítások',
   'settingsGeneral': 'Általános',
   'settingsColors': 'Színek',

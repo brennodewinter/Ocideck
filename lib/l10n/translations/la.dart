@@ -40,7 +40,6 @@ const _stringsLa = {
   'importUrl': 'Importare ex URL…',
   'findReplace': 'Quaerere et substituere',
   'fullDeckPreview': 'Totum acervum inspicere',
-  'presentationProperties': 'Proprietates praesentationis',
   'settings': 'Optiones',
   'settingsGeneral': 'Generalia',
   'settingsColors': 'Colores',

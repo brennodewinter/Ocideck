@@ -38,7 +38,6 @@ const _stringsEt = {
   'importUrl': 'Impordi URL-ist…',
   'findReplace': 'Otsi ja asenda',
   'fullDeckPreview': 'Vaata kogu esitlust',
-  'presentationProperties': 'Esitluse atribuudid',
   'settings': 'Seaded',
   'settingsGeneral': 'Üldine',
   'settingsColors': 'Värvid',

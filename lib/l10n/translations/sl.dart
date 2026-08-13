@@ -38,7 +38,6 @@ const _stringsSl = {
   'importUrl': 'Uvozi prek URL …',
   'findReplace': 'Poišči in zamenjaj',
   'fullDeckPreview': 'Ogled celotne predstavitve',
-  'presentationProperties': 'Lastnosti predstavitve',
   'settings': 'Nastavitve',
   'settingsGeneral': 'Splošno',
   'settingsColors': 'Barve',

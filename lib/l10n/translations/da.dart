@@ -38,7 +38,6 @@ const _stringsDa = {
   'importUrl': 'Importér fra URL…',
   'findReplace': 'Søg og erstat',
   'fullDeckPreview': 'Vis hele decket',
-  'presentationProperties': 'Præsentationsegenskaber',
   'settings': 'Indstillinger',
   'settingsGeneral': 'Generelt',
   'settingsColors': 'Farver',

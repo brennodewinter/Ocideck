@@ -38,7 +38,6 @@ const _stringsEl = {
   'importUrl': 'Εισαγωγή από URL…',
   'findReplace': 'Εύρεση και αντικατάσταση',
   'fullDeckPreview': 'Προβολή πλήρους deck',
-  'presentationProperties': 'Ιδιότητες παρουσίασης',
   'settings': 'Ρυθμίσεις',
   'settingsGeneral': 'Γενικά',
   'settingsColors': 'Χρώματα',

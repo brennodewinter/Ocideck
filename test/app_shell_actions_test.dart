@@ -118,12 +118,22 @@ void main() {
     expect(tab.editorNotifier.state.mode, EditorMode.visual);
   });
 
-  testWidgets('the info button opens the presentation properties dialog', (
+  testWidgets('the presentation-properties button opens the properties dialog', (
     tester,
   ) async {
     await pumpShell(tester);
 
-    await tester.tap(appBarIcon(Icons.info_outline));
+    // Sinds #1479 draagt de knop een zichtbaar label in de AppBar-titel in
+    // plaats van alleen een "i" — dat is de kern van de wijziging. Zoek 'm dáár
+    // (de dialoogtitel gebruikt dezelfde tekst, maar die verschijnt pas ná het
+    // openen).
+    final button = find.descendant(
+      of: find.byType(AppBar),
+      matching: find.widgetWithText(TextButton, 'Presentatie-eigenschappen'),
+    );
+    expect(button, findsOneWidget);
+
+    await tester.tap(button);
     await tester.pumpAndSettle();
 
     expect(find.byType(PresentationInfoDialog), findsOneWidget);

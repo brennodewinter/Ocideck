@@ -38,7 +38,6 @@ const _stringsLt = {
   'importUrl': 'Importuoti iš URL…',
   'findReplace': 'Rasti ir pakeisti',
   'fullDeckPreview': 'Peržiūrėti visą rinkinį',
-  'presentationProperties': 'Prezentacijos savybės',
   'settings': 'Nustatymai',
   'settingsGeneral': 'Bendra',
   'settingsColors': 'Spalvos',

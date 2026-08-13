@@ -39,7 +39,6 @@ const _stringsSk = {
   'importUrl': 'Importovať cez URL…',
   'findReplace': 'Nájsť a nahradiť',
   'fullDeckPreview': 'Zobraziť celý balík',
-  'presentationProperties': 'Vlastnosti prezentácie',
   'settings': 'Nastavenia',
   'settingsGeneral': 'Všeobecné',
   'settingsColors': 'Farby',

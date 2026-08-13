@@ -38,7 +38,6 @@ const _stringsFy = {
   'importUrl': 'Ymportearje fan URL…',
   'findReplace': 'Sykje en ferfange',
   'fullDeckPreview': 'Hiel deck besjen',
-  'presentationProperties': 'Presintaasje-eigenskippen',
   'settings': 'Ynstellingen',
   'settingsGeneral': 'Algemien',
   'settingsColors': 'Kleuren',

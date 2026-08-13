@@ -39,7 +39,6 @@ const _stringsRo = {
   'importUrl': 'Importă din URL…',
   'findReplace': 'Caută și înlocuiește',
   'fullDeckPreview': 'Vezi întregul deck',
-  'presentationProperties': 'Proprietăți prezentare',
   'settings': 'Setări',
   'settingsGeneral': 'General',
   'settingsColors': 'Culori',

@@ -38,7 +38,6 @@ const _stringsTlh = {
   'importUrl': 'URL lo\'taHvIS Suq…',
   'findReplace': 'yISam \'ej yInIH',
   'fullDeckPreview': '\'angmey naQ yIlegh',
-  'presentationProperties': '\'ang perghmey',
   'settings': 'cherlu\'bogh',
   'settingsGeneral': 'motlh',
   'settingsColors': 'rItlhmey',

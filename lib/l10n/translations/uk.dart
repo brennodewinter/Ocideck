@@ -39,7 +39,6 @@ const _stringsUk = {
   'importUrl': 'Імпортувати з URL…',
   'findReplace': 'Знайти та замінити',
   'fullDeckPreview': 'Переглянути всю презентацію',
-  'presentationProperties': 'Властивості презентації',
   'settings': 'Налаштування',
   'settingsGeneral': 'Загальні',
   'settingsColors': 'Кольори',

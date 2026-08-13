@@ -38,7 +38,6 @@ const _stringsFi = {
   'importUrl': 'Tuo URL-osoitteesta…',
   'findReplace': 'Etsi ja korvaa',
   'fullDeckPreview': 'Näytä koko diasarja',
-  'presentationProperties': 'Esityksen ominaisuudet',
   'settings': 'Asetukset',
   'settingsGeneral': 'Yleiset',
   'settingsColors': 'Värit',

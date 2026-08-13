@@ -38,7 +38,6 @@ const _stringsTr = {
   'importUrl': 'URL ile içe aktar…',
   'findReplace': 'Bul ve değiştir',
   'fullDeckPreview': 'Sunumun tamamını görüntüle',
-  'presentationProperties': 'Sunum özellikleri',
   'settings': 'Ayarlar',
   'settingsGeneral': 'Genel',
   'settingsColors': 'Renkler',

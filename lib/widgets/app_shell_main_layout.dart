@@ -322,11 +322,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             onSelected: (level) => deckNotifier.updateInfo(tlp: level),
           ),
           const SizedBox(width: 6),
-          IconButton(
-            tooltip: l10n.t('presentationProperties'),
-            icon: const Icon(Icons.info_outline, size: 18),
-            onPressed: _openProperties,
-          ),
+          _PresentationPropertiesButton(onPressed: _openProperties),
         ],
       ),
       actions: _appBarActions(deckState, editor, l10n, isMarkdownMode),

@@ -38,7 +38,6 @@ const _stringsIt = {
   'importUrl': 'Importa da URL…',
   'findReplace': 'Trova e sostituisci',
   'fullDeckPreview': 'Visualizza deck completo',
-  'presentationProperties': 'Proprietà presentazione',
   'settings': 'Impostazioni',
   'settingsGeneral': 'Generale',
   'settingsColors': 'Colori',

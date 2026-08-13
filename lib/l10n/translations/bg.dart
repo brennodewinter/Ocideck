@@ -39,7 +39,6 @@ const _stringsBg = {
   'importUrl': 'Импортиране от URL…',
   'findReplace': 'Търсене и замяна',
   'fullDeckPreview': 'Преглед на цялото деко',
-  'presentationProperties': 'Свойства на презентацията',
   'settings': 'Настройки',
   'settingsGeneral': 'Общи',
   'settingsColors': 'Цветове',

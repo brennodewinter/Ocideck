@@ -38,7 +38,6 @@ const _stringsGsw = {
   'importUrl': 'Über URL importiere…',
   'findReplace': 'Sueche und ersetze',
   'fullDeckPreview': 'Ganze Deck aaluege',
-  'presentationProperties': 'Präsentations-Eigeschafte',
   'settings': 'Istellige',
   'settingsGeneral': 'Allgemein',
   'settingsColors': 'Farbe',

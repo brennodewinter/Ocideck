@@ -168,8 +168,10 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
       onInvoke: _openFind,
     ),
     PaletteCommand(
+      // Zelfde instel-icoon als de knop in de AppBar-titel (#1479), zodat beide
+      // ingangen naar dezelfde presentatie-eigenschappen er hetzelfde uitzien.
       label: l10n.d('Eigenschappen'),
-      icon: Icons.info_outline,
+      icon: Icons.tune,
       keywords: const ['auteur', 'organisatie', 'metadata'],
       onInvoke: _openProperties,
     ),
