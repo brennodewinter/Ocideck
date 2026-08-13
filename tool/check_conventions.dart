@@ -336,7 +336,7 @@ const Map<String, int> classSizeBaseline = {
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1366, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
+      1374, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
   // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
   // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
   // klasse. +16 (#1162): de even dunne setMenuBlockTarget-delegator (berekening
@@ -348,6 +348,9 @@ const Map<String, int> classSizeBaseline = {
   // (#1473): saveAs/_saveToPath vergelijken naast `identical` ook de
   // undo-stapel-lengte, zodat een state-vervanging die geen inhoudswijziging
   // is (bv. copyWith voor themeProfile) het deck niet onterecht vuil laat.
+  // +8: idempotente dispose() (hardening #1478) — vangt een dubbele dispose
+  // bij een teardown-race fail-safe af; een dispose-override kan niet uit de
+  // klasse getild worden (roept super.dispose()).
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
   // +10 (#1162): de `menu`-tak in de drie kwaliteitsswitches (contrast, alt-tekst,
   // ontbrekend bestand) + de dichtheidsswitch — menublokken zijn een raster, geen

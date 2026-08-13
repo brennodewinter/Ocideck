@@ -196,6 +196,14 @@ class DeckNotifier extends StateNotifier<DeckState> {
 
   DeckNotifier(this._md, this._file) : super(const DeckState());
 
+  /// Idempotent: gedeelde eigendom (TabsNotifier houdt de notifier, de
+  /// ProviderScope disposet 'm) maakt een dubbele dispose mogelijk. #1478 nam
+  /// de trigger weg; deze no-op vangt elke resterende teardown-race fail-safe af.
+  @override
+  void dispose() {
+    if (mounted) super.dispose();
+  }
+
   DeckState get currentState => state;
 
   bool get canUndo => _undoStack.isNotEmpty;
