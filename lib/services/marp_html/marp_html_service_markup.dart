@@ -13,6 +13,7 @@ final RegExp _listStyleComment = RegExp(r'<!--\s*ocideck_list_style:\s*(\w+)');
 final RegExp _bulletMarkerComment = RegExp(
   r'<!--\s*ocideck_bullet_marker:\s*(\w+)',
 );
+final RegExp _slideClassComment = RegExp(r'<!--\s*_class:\s*([^>]*?)\s*-->');
 
 /// Strict hex so the matched value can never break out of the `style`
 /// attribute it is written into (see [_titleColorSectionStyle]).
@@ -123,6 +124,22 @@ String _marpChromeSource(String position, String markdown) {
   if (markdown.isEmpty) return '';
   return '<span hidden class="marp-$position-source" data-markdown="'
       '${MarpHtmlService._htmlAttr(markdown)}"></span>\n';
+}
+
+/// Extra `<section>` class (` logo-safe`) that shows the presentation logo on
+/// this slide and reserves room for it — the hook [_presentationLogoCss] styles.
+/// Or `''` when the deck has no logo, or the slide opts out.
+///
+/// [hasLogo] is the deck-wide fact (the theme carries a `logoPath`); the
+/// per-slide decision comes from the `no-logo` token the export serialiser
+/// writes for a slide with `showLogo: false` (see `MarkdownService`). Together
+/// they mirror `hasLogo && slide.showLogo` there, so the HTML shows the logo on
+/// exactly the slides the app, presenter and PDF/PPTX do.
+String _logoSectionClass(String slideMarkdown, bool hasLogo) {
+  if (!hasLogo) return '';
+  final raw = _slideClassComment.firstMatch(slideMarkdown)?.group(1) ?? '';
+  final optsOut = raw.split(RegExp(r'\s+')).contains('no-logo');
+  return optsOut ? '' : ' logo-safe';
 }
 
 /// Extra `<section>` class that turns this slide's plain bullets into cat-paw
@@ -277,6 +294,7 @@ String _renderSections(
   sections
     ..write(_marpChromeSource('header', deckMarpStyle.header))
     ..write(_marpChromeSource('footer', deckMarpStyle.footer));
+  final hasLogo = theme?.logoPath?.trim().isNotEmpty == true;
   var slideIndex = 0;
   for (final slide in MarpHtmlService.marpSlides(markdown)) {
     final localStyle = slideIndex < slideMarpStyles.length
@@ -292,11 +310,12 @@ String _renderSections(
       exportY01: exportY01,
     );
     final markerClass = _bulletMarkerSectionClass(slide);
+    final logoClass = _logoSectionClass(slide, hasLogo);
     final anchorId = _slideAnchorIdAttr(slide);
     final marpSection = _marpSectionStyle(slide, marpStyle);
     sections
       ..write(
-        '<section class="slide$markerClass${marpSection.classes}"'
+        '<section class="slide$markerClass$logoClass${marpSection.classes}"'
         '$anchorId${marpSection.attributes}>',
       )
       ..write('<script type="text/markdown">')

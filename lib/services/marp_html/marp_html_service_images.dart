@@ -48,6 +48,59 @@ Future<String?> _themeLogoDataUri(
   }
 }
 
+/// De breedte van een dia in de zelfstandige HTML-export, in px. Moet gelijk
+/// blijven aan `.slide{width:1280px}` in [_structuralCss]/[_themedCss]: de
+/// logo-inzet en de vrijgehouden strook worden op deze breedte berekend, zoals
+/// [logoSafeReserve] dat op de renderbreedte van een dia doet.
+const double _kSlidePxWidth = 1280;
+
+/// De opmaak die het presentatielogo op elke logo-dia van de zelfstandige
+/// HTML-export legt (dia-modus). De tegenhanger van [_withDocumentChrome], dat
+/// hetzelfde logo in de doorlopende documentmodus als kop/voetband meestuurt.
+///
+/// Leeg als het thema geen logo draagt, of als het niet ingesloten kan worden
+/// (ontbrekend bestand) — dan blijft de export zoals hij was. Anders spiegelt
+/// de opmaak [_LogoOverlay] (overlays.dart) en [logoSafeReserve]
+/// (rich_text_layout.dart): eenzelfde `logoSize`-vak met dezelfde fractionele
+/// hoekinzet, en dezelfde vrijgehouden strook, zodat de HTML precies het beeld
+/// toont dat de presentator, de beamer en de PDF/PPTX al gaven — de dia is er
+/// even breed (1280px) als het ijkbeeld van de overlay.
+///
+/// Via `::before` op de sectie en niet als `<img>` in de dia: het renderscript
+/// wist de `innerHTML` van elke sectie voordat het de markdown erin zet, dus een
+/// echt logo-element zou die reset niet overleven. Een pseudo-element wel. De
+/// data:-URI in `url(...)` valt binnen `img-src ... data:` van de CSP, net als
+/// de kattenpoot-opsommingstekens.
+Future<String> _presentationLogoCss(
+  ThemeProfile theme,
+  HtmlImageResolver? embedImage,
+  Future<Uint8List> Function(String asset) loadBytes,
+) async {
+  final path = theme.logoPath?.trim();
+  if (path == null || path.isEmpty) return '';
+  final uri = await _themeLogoDataUri(path, embedImage, loadBytes);
+  if (uri == null) return '';
+
+  final size = theme.logoSize;
+  final atTop = theme.logoPosition.startsWith('top');
+  final vertical = atTop ? 'top' : 'bottom';
+  final vInset =
+      (size * (atTop ? kLogoTopInsetFraction : kLogoBottomInsetFraction))
+          .round();
+  final horizontal = theme.logoPosition.endsWith('left') ? 'left' : 'right';
+  final hInset = (size * kLogoHorizontalInsetFraction).round();
+  // De dia is 1280px breed; op die breedte reserveert de app dezelfde strook.
+  final reserve = logoSafeReserve(_kSlidePxWidth, theme).round();
+  final safePad = atTop ? 'padding-top' : 'padding-bottom';
+
+  return '.slide.logo-safe::before{content:"";position:absolute;'
+      'width:${size}px;height:${size}px;'
+      'background:url("$uri") center/contain no-repeat;'
+      '$vertical:${vInset}px;$horizontal:${hInset}px;'
+      'pointer-events:none;z-index:1}'
+      '.slide.logo-safe{$safePad:${reserve}px}';
+}
+
 String _documentChromeMarkdownHtml(String markdown) => markdown
     .trim()
     .split('\n')

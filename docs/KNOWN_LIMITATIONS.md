@@ -62,17 +62,19 @@ position and the `N / total` page number), the logo, the diagonal
 classification watermark, the per-slide TLP badge and the personal-data
 (PrivacyKat) badge. The editor preview, the presenter and the **PDF/PPTX**
 exports all draw that layer, because they render through OciDeck's own slide
-renderer. The single-file **HTML** export does not. It embeds each slide's
-Markdown for an in-browser renderer together with the theme's colours and font,
-and carries the deck's classification as its own banner across the top of the
+renderer. The single-file **HTML** export reproduces only the logo among these:
+it is laid on each slide that shows it as an embedded image, in the same corner
+and size as in the app. The rest it leaves off — it embeds each slide's Markdown
+for an in-browser renderer together with the theme's colours and font, and
+carries the deck's classification as its own banner across the top of the
 document instead of the per-slide badge. So a footer such as
-`www.chateau-it.nl`, the page number, the logo and the watermark are simply
-absent from the `.html` — the overlay layer is a property of OciDeck's
-rendering, not of the deck Markdown, and there is nothing in the exported file
-to reproduce it from. When the recipient needs the footer or page numbers in a
-shared file, hand over the **PDF** (or **PPTX**) export, which keeps them.
-*(Added 2026-08-07 — the classification banner is the one exception that does
-travel; #1330.)*
+`www.chateau-it.nl`, the page number, the watermark and the TLP/PrivacyKat
+badges are simply absent from the `.html` — that overlay layer is a property of
+OciDeck's rendering, not of the deck Markdown, and there is nothing in the
+exported file to reproduce it from. When the recipient needs the footer or page
+numbers in a shared file, hand over the **PDF** (or **PPTX**) export, which
+keeps them. *(Added 2026-08-07 — the classification banner travels as a top
+banner; the logo now travels on each slide too, since 2026-08-13; #1330.)*
 
 ## Importing a presentation is a conversion, not a copy
 
