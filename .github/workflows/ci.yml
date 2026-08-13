@@ -212,7 +212,7 @@ jobs:
       # plaats van stil gelaten.
       - name: semgrep volgens de pin
         env:
-          SEMGREP_VERSION: 1.172.0
+          SEMGREP_VERSION: 1.173.0
         run: |
           set -euo pipefail
           python3 -m venv /opt/semgrep-venv
