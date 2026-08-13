@@ -61,8 +61,11 @@ void _pieSvg(
     if (donut) {
       // Only a donut carries a hole; a pie stays solid to the centre so the
       // slices meet at a single point. (A pie used to get a 0.43 hole too.)
+      // The hole fraction is shared with the Flutter render (chart.dart) so the
+      // same donut has the same proportions in the app, the PDF and here — this
+      // path used 0.6 (a thinner ring) until it was aligned to the app's 0.38.
       b.write(
-        '<circle cx="$cx" cy="$cy" r="${radius * 0.6}" '
+        '<circle cx="$cx" cy="$cy" r="${radius * kDonutHoleFraction}" '
         'fill="${theme?.slideBackgroundColor ?? 'white'}"/>',
       );
       // The total, printed in the centre hole.

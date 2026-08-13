@@ -1378,5 +1378,12 @@ void main() {
       expect(radialChartRadii(200, 800, donut: false).outer, 200 * 0.45);
       expect(radialChartRadii(4000, 800, donut: false).outer, 800 * 0.18);
     });
+
+    test('the donut hole uses the shared kDonutHoleFraction', () {
+      // The same constant the HTML/SVG export reads (see the marp test), so a
+      // donut keeps identical proportions in the app, the PDF and the HTML.
+      final donut = radialChartRadii(300, 800, donut: true);
+      expect(donut.hole / donut.outer, closeTo(kDonutHoleFraction, 1e-9));
+    });
   });
 }
