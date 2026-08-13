@@ -37,6 +37,13 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(grafiek): een taart (cirkel) rendeerde fors kleiner dan een donut met
+  dezelfde gegevens, terwijl de ruimte er was. fl_chart tekent de buitenrand van
+  een partje op `centerSpaceRadius + radius`; beide typen kregen dezelfde
+  `radius`, dus het donutgat duwde de buitenrand ~1,6× verder naar buiten dan bij
+  de solide taart. Nu bepaalt één gedeelde buiten-straal de grootte (die de box
+  vult) en wordt het donutgat daaruit gesneden — taart en donut zijn even groot
+  en benutten de beschikbare ruimte.
 - fix(tabbladen): een tabblad sluiten dat niet het laatste is, gooide een
   vloed van "Tried to use DeckNotifier/EditorNotifier after `dispose`" met
   render-corruptie, en disposede stilletjes de nog-levende notifiers van de
