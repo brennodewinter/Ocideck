@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/annotation.dart';
+import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/split_run.dart';
@@ -182,6 +183,105 @@ void main() {
     await forward(LogicalKeyboardKey.escape);
     await tester.pumpAndSettle();
     expect(find.text('Slide-overzicht'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('chart hover mirrors both ways with the audience window', (
+    tester,
+  ) async {
+    // Dual-screen: the presenter's slide preview and the beamer each render the
+    // chart; a hover on one must show on the other. The channel carries the
+    // hover exactly the way it carries a mermaid view.
+    tester.view.physicalSize = const Size(1400, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    const chartSpec = ChartSpec(
+      type: ChartType.bar,
+      title: 'Omzet',
+      x: ['Q1', 'Q2'],
+      series: [
+        ChartSeries(name: 'Noord', data: [10, 14]),
+        ChartSeries(name: 'Zuid', data: [8, 12]),
+      ],
+    );
+    final slides = [
+      Slide.create(
+        SlideType.chart,
+      ).copyWith(customMarkdown: chartSpec.toBlock()),
+    ];
+
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    final sentHovers = <Map<String, dynamic>>[];
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(bridge, (
+      call,
+    ) async {
+      if (call.method == 'invokeMethod') {
+        final args = Map<String, dynamic>.from(call.arguments as Map);
+        if (args['method'] == 'chartHover') {
+          sentHovers.add(Map<String, dynamic>.from(args['arguments'] as Map));
+        }
+      }
+      return null;
+    });
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FullscreenPresenter(
+          slides: slides,
+          projectPath: null,
+          themeProfile: const ThemeProfile(),
+          initialIndex: 0,
+          audience: AudienceWindowHandle(
+            WindowController.fromWindowId('test'),
+            closeImpl: (_) async {},
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    Future<void> fromBeamer(Object? hover) =>
+        tester.binding.defaultBinaryMessenger.handlePlatformMessage(
+          bridge.name,
+          bridge.codec.encodeMethodCall(
+            MethodCall('methodCall', {
+              'channel': 'ocideck/presenter',
+              'method': 'chartHover',
+              'arguments': {'index': 0, 'hover': hover},
+            }),
+          ),
+          (_) {},
+        );
+
+    // Receive: the beamer points at Q2 of the Noord series; the presenter shows
+    // the same tooltip (exercises _applyBeamerChartHover).
+    await fromBeamer({'s': 0, 'c': 1});
+    await tester.pump();
+    expect(find.byKey(const ValueKey('cell-hover-tooltip')), findsOneWidget);
+
+    // And it clears when the beamer's pointer leaves the chart.
+    await fromBeamer(null);
+    await tester.pump();
+    expect(find.byKey(const ValueKey('cell-hover-tooltip')), findsNothing);
+
+    // Send: hovering the presenter's legend broadcasts the series to the beamer
+    // (exercises _broadcastChartHover → _sendChartHover).
+    final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+    await gesture.addPointer(location: Offset.zero);
+    addTearDown(gesture.removePointer);
+    await tester.pump();
+    await gesture.moveTo(tester.getCenter(find.text('Zuid')));
+    await tester.pump();
+    expect(sentHovers.any((h) => (h['hover'] as Map?)?['s'] == 1), isTrue);
 
     await tester.pumpWidget(const SizedBox());
   });

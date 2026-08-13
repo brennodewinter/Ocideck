@@ -27,84 +27,94 @@ extension _PresenterViews on _FullscreenPresenterState {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                SlidePreviewWidget(
-                  slide: slide,
-                  projectPath: widget.projectPath,
-                  themeProfile: widget.themeProfile,
-                  deckMarpStyle: widget.marpStyle,
-                  cockpitColorScheme: widget.cockpitColorScheme,
-                  onLinkTap: openExternalUrl,
-                  slideNumber: _index + 1,
-                  slideCount: widget.slides.length,
-                  numberStart: numberedListStartFor(widget.slides, _index),
-                  scopeCia: deckScopeCiaIndex(widget.slides),
-                  fitScaleOverride: sharedSplitFitScale(
-                    widget.slides,
-                    _index,
-                    widget.themeProfile,
-                    widget.themeProfile.fontFamily,
+                // De huidige-dia-preview deelt zijn grafiek-hover met het
+                // publieksvenster (en volgt het andersom). De VOLGENDE-dia-preview
+                // in de zijbalk krijgt bewust géén scope, zodat die niet meespiegelt.
+                ChartHoverScope(
+                  controller: _chartHover,
+                  child: SlidePreviewWidget(
+                    slide: slide,
+                    projectPath: widget.projectPath,
+                    themeProfile: widget.themeProfile,
+                    deckMarpStyle: widget.marpStyle,
+                    cockpitColorScheme: widget.cockpitColorScheme,
+                    onLinkTap: openExternalUrl,
+                    slideNumber: _index + 1,
+                    slideCount: widget.slides.length,
+                    numberStart: numberedListStartFor(widget.slides, _index),
+                    scopeCia: deckScopeCiaIndex(widget.slides),
+                    fitScaleOverride: sharedSplitFitScale(
+                      widget.slides,
+                      _index,
+                      widget.themeProfile,
+                      widget.themeProfile.fontFamily,
+                    ),
+                    splitRunPosition: splitRunPositionFor(
+                      widget.slides,
+                      _index,
+                    ),
+                    richTextPage: _richTextPage,
+                    showRichTextPageControls:
+                        (_richTextPlanFor(slide)?.pageCount ?? 1) > 1,
+                    onRichTextPageChanged:
+                        (_richTextPlanFor(slide)?.pageCount ?? 1) > 1
+                        ? (page) => _setRichTextPage(page)
+                        : null,
+                    timelineRevealedCount: _timelineRevealedFor(slide),
+                    tlp: widget.tlp,
+                    organization: widget.organization,
+                    showClassificationWatermark:
+                        widget.showClassificationWatermark,
+                    presentationMode: true,
+                    // De presentatie-dia is groot genoeg om een fors diagram te
+                    // scrollen; de gedeelde controller spiegelt de positie naar het
+                    // publieksvenster (#872).
+                    scrollableMermaid: true,
+                    mermaidViewController: _mermaidView,
+                    onChecklistItemToggle: (column, itemIndex) =>
+                        _toggleChecklistItem(
+                          slideIndex: _index,
+                          column: column,
+                          itemIndex: itemIndex,
+                        ),
+                    // Tik op een keuze-menublok → spring naar zijn doeldia (#1162).
+                    onMenuBlockTap: _jumpToAnchor,
+                    questionView: _currentQuestionView,
+                    onAnswerSelected: (i) => _onAnswerSelected(i),
+                    onAnswerSubmit: () => _onAnswerSubmit(),
+                    // Typen gebeurt op het presentatorscherm; het beamervenster
+                    // spiegelt alleen mee (zie [SlidePreviewWidget.onAnswerTextChanged]).
+                    onAnswerTextChanged: _onAnswerTextChanged,
+                    tableEditMode:
+                        _tableEditMode && slide.type == SlideType.table,
+                    tableEditRow: _tableEditRow,
+                    tableEditCol: _tableEditCol,
+                    onTableCellSelected: (row, col) =>
+                        _selectTableCell(row, col),
+                    onTableCellChanged: (row, col, value) => _updateTableCell(
+                      slideIndex: _index,
+                      row: row,
+                      col: col,
+                      value: value,
+                    ),
+                    // Tijdens het presenteren speelt media en starten audio/video
+                    // vanzelf; het media-einde stuurt auto-advance aan. In dual-
+                    // schermmodus speelt de media op het beamervenster, niet hier,
+                    // anders zou het geluid dubbel klinken.
+                    enableMedia: !_dual,
+                    autoplayMedia: !_dual,
+                    allowRemoteMedia: widget.allowRemoteMedia,
+                    // Single-screen: de knop "Aanzetten in instellingen" mag op
+                    // de dia zelf verschijnen — er is geen apart privéscherm (#865).
+                    // Dual-screen: de dia staat op de beamer; de knop zit in de
+                    // presenter-cockpit (zie _buildPresenterView).
+                    onEnableOnlineMedia: !_dual
+                        ? () => _openSettingsFromPresenter(context)
+                        : null,
+                    onAudioComplete: () => _onMediaCompleted(kind: 'audio'),
+                    onVideoComplete: () => _onMediaCompleted(kind: 'video'),
+                    improvementY01: widget.improvementY01,
                   ),
-                  splitRunPosition: splitRunPositionFor(widget.slides, _index),
-                  richTextPage: _richTextPage,
-                  showRichTextPageControls:
-                      (_richTextPlanFor(slide)?.pageCount ?? 1) > 1,
-                  onRichTextPageChanged:
-                      (_richTextPlanFor(slide)?.pageCount ?? 1) > 1
-                      ? (page) => _setRichTextPage(page)
-                      : null,
-                  timelineRevealedCount: _timelineRevealedFor(slide),
-                  tlp: widget.tlp,
-                  organization: widget.organization,
-                  showClassificationWatermark:
-                      widget.showClassificationWatermark,
-                  presentationMode: true,
-                  // De presentatie-dia is groot genoeg om een fors diagram te
-                  // scrollen; de gedeelde controller spiegelt de positie naar het
-                  // publieksvenster (#872).
-                  scrollableMermaid: true,
-                  mermaidViewController: _mermaidView,
-                  onChecklistItemToggle: (column, itemIndex) =>
-                      _toggleChecklistItem(
-                        slideIndex: _index,
-                        column: column,
-                        itemIndex: itemIndex,
-                      ),
-                  // Tik op een keuze-menublok → spring naar zijn doeldia (#1162).
-                  onMenuBlockTap: _jumpToAnchor,
-                  questionView: _currentQuestionView,
-                  onAnswerSelected: (i) => _onAnswerSelected(i),
-                  onAnswerSubmit: () => _onAnswerSubmit(),
-                  // Typen gebeurt op het presentatorscherm; het beamervenster
-                  // spiegelt alleen mee (zie [SlidePreviewWidget.onAnswerTextChanged]).
-                  onAnswerTextChanged: _onAnswerTextChanged,
-                  tableEditMode:
-                      _tableEditMode && slide.type == SlideType.table,
-                  tableEditRow: _tableEditRow,
-                  tableEditCol: _tableEditCol,
-                  onTableCellSelected: (row, col) => _selectTableCell(row, col),
-                  onTableCellChanged: (row, col, value) => _updateTableCell(
-                    slideIndex: _index,
-                    row: row,
-                    col: col,
-                    value: value,
-                  ),
-                  // Tijdens het presenteren speelt media en starten audio/video
-                  // vanzelf; het media-einde stuurt auto-advance aan. In dual-
-                  // schermmodus speelt de media op het beamervenster, niet hier,
-                  // anders zou het geluid dubbel klinken.
-                  enableMedia: !_dual,
-                  autoplayMedia: !_dual,
-                  allowRemoteMedia: widget.allowRemoteMedia,
-                  // Single-screen: de knop "Aanzetten in instellingen" mag op
-                  // de dia zelf verschijnen — er is geen apart privéscherm (#865).
-                  // Dual-screen: de dia staat op de beamer; de knop zit in de
-                  // presenter-cockpit (zie _buildPresenterView).
-                  onEnableOnlineMedia: !_dual
-                      ? () => _openSettingsFromPresenter(context)
-                      : null,
-                  onAudioComplete: () => _onMediaCompleted(kind: 'audio'),
-                  onVideoComplete: () => _onMediaCompleted(kind: 'video'),
-                  improvementY01: widget.improvementY01,
                 ),
                 // Annotatielaag bovenop de dia. Laat klikken door wanneer er
                 // geen gereedschap actief is (zodat tikken blijft doorbladeren).

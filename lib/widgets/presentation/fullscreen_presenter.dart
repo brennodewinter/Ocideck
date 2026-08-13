@@ -44,6 +44,7 @@ import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart';
+import '../slides/chart_hover.dart';
 import '../slides/slide_preview.dart';
 import '../dialogs/settings_dialog.dart';
 import '../markdown_editor/markdown_editor.dart';
@@ -591,6 +592,13 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   final MermaidViewController _mermaidView = MermaidViewController();
   ({double scale, double fx, double fy})? _lastSentMermaidView;
 
+  /// Gedeelde grafiek-hover voor de huidige dia (#930-stijl, net als
+  /// [_mermaidView]): de presentator zweeft over een grafiek, en via
+  /// [_broadcastChartHover] licht dezelfde reeks/taartpunt op de beamer op — en
+  /// andersom. Alleen relevant in dual-screen; los daarvan een no-op.
+  final ChartHoverController _chartHover = ChartHoverController();
+  ChartHover? _lastSentChartHover;
+
   /// Oefenklok: verstreken tijd, aftelling en per-slide-tijd. Sessie-only,
   /// puur meten (geen pacing). Resetbaar met R.
   late RehearsalController _rehearsal;
@@ -717,6 +725,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     super.initState();
     _index = widget.initialIndex;
     _mermaidView.addListener(_broadcastMermaidView);
+    _chartHover.addListener(_broadcastChartHover);
     _rehearsal = RehearsalController(target: widget.targetDuration);
     _focusNode = FocusNode();
     _userNotesFocusNode = FocusNode();
@@ -776,6 +785,8 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           case 'answerSubmit':
             final args = Map<String, dynamic>.from(call.arguments as Map);
             _onAnswerSubmit(slideIndex: (args['slideIndex'] as num?)?.toInt());
+          case 'chartHover':
+            _applyBeamerChartHover(call.arguments);
         }
         return null;
       });
@@ -806,6 +817,8 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _questionTimer?.cancel();
     _gridScroll.dispose();
     _mermaidView.dispose();
+    _chartHover.removeListener(_broadcastChartHover);
+    _chartHover.dispose();
     _focusNode.dispose();
     _userNotesFocusNode.dispose();
     _userNoteCtrl?.dispose();
@@ -846,7 +859,14 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           logWarning('FullscreenPresenter: audience window sync failed', e);
           return null;
         });
-    if (indexChanged) _pushInk();
+    if (indexChanged) {
+      // Een hover hoort bij één dia. Wis bij het wisselen zowel de eigen hover
+      // (anders zendt hij met de nieuwe index door) als de van de beamer
+      // ontvangen hover, zodat er niets van de vorige dia blijft hangen.
+      _chartHover.setLocal(null);
+      _chartHover.setExternal(null);
+      _pushInk();
+    }
   }
 
   // ── Vraag-slides ───────────────────────────────────────────────────────────

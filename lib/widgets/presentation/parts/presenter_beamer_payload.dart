@@ -99,4 +99,49 @@ extension _PresenterMermaidBroadcast on _FullscreenPresenterState {
       lastSent: _lastSentMermaidView,
     );
   }
+
+  /// Listener op [_chartHover]: deelt de eigen hover met het publieksvenster.
+  /// Leest alleen [ChartHoverController.local] — een van de beamer ontvangen
+  /// hover (extern) verandert `local` niet, dus wordt hij niet teruggekaatst.
+  void _broadcastChartHover() {
+    _lastSentChartHover = _sendChartHover(
+      audience: widget.audience,
+      hover: _chartHover.local,
+      index: _index,
+      lastSent: _lastSentChartHover,
+    );
+  }
+
+  /// Een 'chartHover' van het beamervenster: toon dezelfde markering op de
+  /// presenter-dia, mits het venster nog op onze dia staat (een late hover mag
+  /// nooit op een andere dia belanden).
+  void _applyBeamerChartHover(Object? arguments) {
+    final args = Map<String, dynamic>.from(arguments as Map);
+    if ((args['index'] as num?)?.toInt() == _index) {
+      _chartHover.setExternal(ChartHover.fromJson(args['hover']));
+    }
+  }
+}
+
+/// Stuurt de huidige lokale grafiek-hover naar het publieksvenster (#930-stijl,
+/// naast [_sendMermaidView]). Alleen bij een echte wijziging: de hover verspringt
+/// pas als de aanwijzer een andere reeks/punt/taartpunt raakt, dus is geen
+/// tijd-throttle nodig. Geeft de verzonden hover terug voor de dedup. De index
+/// reist mee zodat het venster een late hover nooit op een andere dia zet.
+/// Top-level, net als [_sendMermaidView].
+ChartHover? _sendChartHover({
+  required AudienceWindowHandle? audience,
+  required ChartHover? hover,
+  required int index,
+  required ChartHover? lastSent,
+}) {
+  if (audience?.controller == null) return lastSent;
+  if (hover == lastSent) return lastSent;
+  audienceChannel
+      .invokeMethod('chartHover', {'index': index, 'hover': hover?.toJson()})
+      .catchError((Object e) {
+        logWarning('FullscreenPresenter: chart hover sync failed', e);
+        return null;
+      });
+  return hover;
 }
