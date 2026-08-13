@@ -48,6 +48,19 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
           mouseCursorResolver: (event, response) => response?.spot == null
               ? SystemMouseCursors.basic
               : SystemMouseCursors.click,
+          // Mirror the touched bar (group = category, rod = series) to the other
+          // screen so the audience sees the same tooltip the presenter points at.
+          touchCallback: (event, response) {
+            final spot = response?.spot;
+            _setLocalHover(
+              spot == null || !event.isInterestedForInteractions
+                  ? null
+                  : ChartHover(
+                      category: spot.touchedBarGroupIndex,
+                      series: spot.touchedRodDataIndex,
+                    ),
+            );
+          },
           touchTooltipData: BarTouchTooltipData(
             fitInsideHorizontally: true,
             fitInsideVertically: true,
@@ -127,6 +140,16 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
           mouseCursorResolver: (event, response) => response?.spot == null
               ? SystemMouseCursors.basic
               : SystemMouseCursors.click,
+          // One stacked rod per column: mirror the column (category) the pointer
+          // is over; the tooltip already lists every segment's value.
+          touchCallback: (event, response) {
+            final spot = response?.spot;
+            _setLocalHover(
+              spot == null || !event.isInterestedForInteractions
+                  ? null
+                  : ChartHover(category: spot.touchedBarGroupIndex),
+            );
+          },
           touchTooltipData: BarTouchTooltipData(
             fitInsideHorizontally: true,
             fitInsideVertically: true,
@@ -180,6 +203,21 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
               response?.touchedSpot == null
               ? SystemMouseCursors.basic
               : SystemMouseCursors.click,
+          // Recover the touched point's (series, x) from the parallel meta table
+          // and mirror it to the other screen.
+          touchCallback: (event, response) {
+            final idx = response?.touchedSpot?.spotIndex;
+            _setLocalHover(
+              idx == null ||
+                      !event.isInterestedForInteractions ||
+                      idx >= spotMeta.length
+                  ? null
+                  : ChartHover(
+                      category: spotMeta[idx].xi,
+                      series: spotMeta[idx].series,
+                    ),
+            );
+          },
           touchTooltipData: ScatterTouchTooltipData(
             fitInsideHorizontally: true,
             fitInsideVertically: true,
@@ -210,7 +248,7 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
               FlSpot(xi.toDouble(), spec.series[si].data[xi] * _grow),
           ],
           color: _seriesDisplayColor(spec.series[si], si),
-          barWidth: w * (_hovered == si ? 0.0065 : 0.0045),
+          barWidth: w * (_effectiveHoverSeries == si ? 0.0065 : 0.0045),
           isCurved: true,
           curveSmoothness: 0.22,
           dotData: FlDotData(
@@ -252,6 +290,17 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
               response?.lineBarSpots?.isEmpty ?? true
               ? SystemMouseCursors.basic
               : SystemMouseCursors.click,
+          // Mirror the nearest point (bar = series, spot = category) to the other
+          // screen.
+          touchCallback: (event, response) {
+            final spots = response?.lineBarSpots;
+            final spot = (spots == null || spots.isEmpty) ? null : spots.first;
+            _setLocalHover(
+              spot == null || !event.isInterestedForInteractions
+                  ? null
+                  : ChartHover(category: spot.spotIndex, series: spot.barIndex),
+            );
+          },
           touchTooltipData: LineTouchTooltipData(
             fitInsideHorizontally: true,
             fitInsideVertically: true,
@@ -336,7 +385,12 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
                             );
                             return ClipRect(
                               child: _HoverPieChart(
-                                externalHover: _hovered,
+                                externalHover: _effectivePieHover,
+                                onHovered: (slice) => _setLocalHover(
+                                  slice == null
+                                      ? null
+                                      : ChartHover(category: slice),
+                                ),
                                 showLabels: spec.showSliceLabels,
                                 values: values,
                                 labels: spec.x,
