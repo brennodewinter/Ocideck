@@ -27,6 +27,16 @@ in Dutch, and it keeps growing on `main` between releases.
   paginanummering in voorbeeld, editor en HTML/print.
   De ruwe bron- en presentatiebewerker blijven sober.
 
+### Fixed
+
+- fix(tabbladen): een tabblad sluiten dat niet het laatste is, gooide een
+  vloed van "Tried to use DeckNotifier/EditorNotifier after `dispose`" met
+  render-corruptie, en disposede stilletjes de nog-levende notifiers van de
+  buur-tabbladen. Oorzaak: de `IndexedStack` verpakt elk tab-scope in een
+  ongesleutelde `Visibility`, waardoor Flutter bij het herschikken de scopes
+  van de tabbladen erná herbouwde. Een stabiele `GlobalKey` per tab-scope laat
+  Flutter de bestaande scope verplaatsen in plaats van opnieuw opbouwen.
+
 ## [0.4.2] — 2026-08-10
 
 ### Added

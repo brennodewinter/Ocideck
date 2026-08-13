@@ -214,6 +214,33 @@ class _TabChipState extends State<_TabChip> {
 
 // ── Per-tab content ───────────────────────────────────────────────────────────
 
+/// Stabiele widget-identiteit per tabblad voor zijn [ProviderScope].
+///
+/// Waarom een [GlobalKey] en niet gewoon `ValueKey(tab.id)`: [IndexedStack]
+/// verpakt élk kind in een verse, *ongesleutelde* [Visibility] (zie
+/// `IndexedStack.build`). De directe kinderen die Flutter tegen elkaar legt
+/// zijn dus die wrappers, niet onze scopes — en zonder sleutel matcht Flutter
+/// ze puur op positie. Sluit je een tabblad in het midden, dan schuiven alle
+/// tabbladen erná een plek op: elke wrapper "werkt bij op zijn plek" maar zijn
+/// binnenste scope krijgt de identiteit van de buurman, waarop Flutter de oude
+/// scope ontmantelt en een nieuwe opbouwt. Die nieuwe scope adopteert dezelfde
+/// (nog levende) per-tab notifier die de oude scope net gaat disposen — twee
+/// eigenaren, twee disposes: "Tried to use DeckNotifier after `dispose`". Een
+/// [GlobalKey] dwingt Flutter de bestaande scope (met zijn container en state)
+/// te *verplaatsen* in plaats van te herbouwen, dwars door de positionele
+/// wrapper heen. Zo overleeft de notifier van een buur-tabblad het sluiten.
+///
+/// Per `tab.id`, en opgeruimd door [_tabScopes] zodra een tabblad weg is.
+final Map<int, GlobalKey> _tabScopeKeys = {};
+
+/// De per-tab scopes voor de [IndexedStack], plus opruiming van de sleutels van
+/// tabbladen die niet meer bestaan (anders groeit [_tabScopeKeys] onbeperkt).
+List<Widget> _tabScopes(TabsState tabsState) {
+  final liveIds = {for (final t in tabsState.tabs) t.id};
+  _tabScopeKeys.removeWhere((id, _) => !liveIds.contains(id));
+  return [for (final tab in tabsState.tabs) _tabScope(tab)];
+}
+
 /// Eén tab-paneel, met alle providers die het deck lezen per tab opnieuw
 /// gescoped.
 ///
@@ -223,12 +250,13 @@ class _TabChipState extends State<_TabChip> {
 /// `imageContrastIssuesProvider` ooit stuk. `provider_scope_test.dart` scant
 /// `lib/state` en faalt als er hier een mist.
 Widget _tabScope(TabInfo tab) {
+  final scopeKey = _tabScopeKeys.putIfAbsent(tab.id, () => GlobalKey());
   // Een documenttabblad krijgt een eigen, veel lichtere scope: het bewerkt de
   // platte bron via één DocumentNotifier, niet een deck met zijn afgeleide
   // privacy/kwaliteit-keten. De gedeelde tabbalk eromheen blijft soort-agnostisch.
   if (tab.content case DocumentTabContent(:final documentNotifier)) {
     return ProviderScope(
-      key: ValueKey(tab.id),
+      key: scopeKey,
       overrides: [
         documentProvider.overrideWith(
           (ref) =>
@@ -239,10 +267,12 @@ Widget _tabScope(TabInfo tab) {
     );
   }
   return ProviderScope(
-    key: ValueKey(tab.id),
+    key: scopeKey,
     overrides: [
       // Bij sluiten kan de DeckNotifier al disposed zijn terwijl _TabContent
-      // nog één rebuild doet (c542bf1e fixte TabInfo, niet de keten).
+      // nog één rebuild doet (c542bf1e fixte TabInfo, niet de keten). De
+      // GlobalKey op deze scope voorkomt de dubbele-dispose bij het herschikken
+      // van tabbladen; deze mounted-val vangt de resterende één-rebuild-race.
       deckProvider.overrideWith(
         (ref) => tab.deckNotifier.mounted
             ? tab.deckNotifier
