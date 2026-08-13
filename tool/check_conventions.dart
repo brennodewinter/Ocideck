@@ -129,7 +129,12 @@ const Map<String, int> fileSizeBaseline = {
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
   // dat uit te liften valt; de call-sites zitten in de part-bestanden.
-  'lib/widgets/presentation/fullscreen_presenter.dart': 1013,
+  // +20: grafiek-hover spiegelen naar het publieksvenster — het `_chartHover`-
+  // veld, de listener-registratie en de `chartHover`-tak in de presenterChannel-
+  // handler die in initState (dus in dit bestand) leeft. Het zendhulpje
+  // (`_sendChartHover`) en de ontvang-afhandeling (`_applyBeamerChartHover`)
+  // staan al in het part-bestand presenter_beamer_payload.dart.
+  'lib/widgets/presentation/fullscreen_presenter.dart': 1033,
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
   // +20 (#1162): de twee onherleidbare navigatievelden `anchor` + `nextAnchor`
   // (stabiel dia-anker en per-dia sprong-uit) met hun doc, constructor- en
@@ -272,8 +277,13 @@ const Map<String, int> classSizeBaseline = {
   // telt niet mee; wat rest gebruikt `_index`/`_rebuild` en hoort in de state.
   // +8 (#1162): `_jumpToAnchor` (klik op een menublok) + de onMenuBlockTap-wiring;
   // gebruikt `_advanceTo` en hoort dus in de state.
+  // +49: grafiek-hover spiegelen naar het publieksvenster — het `_chartHover`-
+  // veld, `_broadcastChartHover`/`_applyBeamerChartHover` (in het part-bestand
+  // presenter_beamer_payload.dart, maar leden van deze State) en het wissen van
+  // de hover bij diawissel in `_syncAudience`. Het pure zendhulpje
+  // `_sendChartHover` is top-level en telt niet mee.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3349,
+      3398,
   // +34 (#1350, #1351, #1355): truncatie-check in openDeckFromContent,
   // versleutelde-zip-streaming via writeContent(capped), en automatische
   // zegelverificatie bij openen. Security-fixes die in het open-pad landen
@@ -293,7 +303,15 @@ const Map<String, int> classSizeBaseline = {
   // chart_preview_touch.dart; wat resteert is de touch-configuratie die per
   // definitie ín de builder-methoden van deze State leeft (fl_chart
   // *TouchData, MouseRegion-omhulsels, het `_cellTooltip`-veld + setter).
-  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3000,
+  // +160: grafiek-hover spiegelen presentator↔beamer. Net als hierboven leeft de
+  // capture per definitie ín de builders: de `touchCallback`s op bar/gestapelde/
+  // lijn/scatter en de pie-`onHovered` melden welke reeks/punt/taartpunt onder de
+  // aanwijzer zit. Daarnaast de hover-spiegel-leden (legenda-setters,
+  // effectieve-hover-getters, `_withMirroredTooltip`, de controller-listener). De
+  // herbruikbare kern staat al buiten de State: het `ChartHover`-model +
+  // controller + scope in chart_hover.dart, `composedChartHoverText` en het
+  // verhuisde `_HoverPieChart` in chart_preview_touch.dart.
+  'lib/widgets/slides/slide_preview.dart#_ChartPreviewState': 3160,
   // Procesverbetering: improvement-slide discovery + save paths.
   // +4: Y-01/framework-args op newDeck + improvement-module-prompt.
   'lib/state/tabs_provider.dart#TabsNotifier': 2235,

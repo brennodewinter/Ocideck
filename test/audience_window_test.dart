@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/widgets/presentation/audience_window.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
@@ -116,6 +117,63 @@ void main() {
 
     await tester.pumpWidget(const SizedBox());
   });
+
+  testWidgets(
+    'a chartHover from the presenter highlights the slice on the beamer',
+    (tester) async {
+      // The beamer follows the presenter's chart hover the way it follows a
+      // mermaid view: a channel message, applied only when it is on that slide.
+      const chartSpec = ChartSpec(
+        type: ChartType.pie,
+        title: 'Verdeling',
+        x: ['Team A', 'Team B'],
+        series: [
+          ChartSeries(name: 'Gereed', data: [70, 40]),
+        ],
+      );
+      final chartDeck =
+          '---\n'
+          'title: Chart Demo\n'
+          'theme: ocideck\n'
+          '---\n'
+          '<!-- _class: chart -->\n'
+          '```chart\n'
+          '${chartSpec.toBlock()}\n'
+          '```\n';
+
+      _mockBridge(tester);
+      await _pumpAudience(tester, <String, dynamic>{
+        'markdown': chartDeck,
+        'index': 0,
+      });
+      // The chart slide is on screen, and idle: no hover tooltip yet.
+      expect(find.text('Verdeling'), findsOneWidget);
+      expect(find.byKey(const ValueKey('pie-hover-tooltip')), findsNothing);
+
+      // The presenter points at the first slice.
+      await _fromPresenter(tester, 'chartHover', {
+        'index': 0,
+        'hover': {'c': 0},
+      });
+      await tester.pump();
+      expect(find.byKey(const ValueKey('pie-hover-tooltip')), findsOneWidget);
+
+      // A hover meant for another slide is ignored — it must never land here.
+      await _fromPresenter(tester, 'chartHover', {
+        'index': 1,
+        'hover': {'c': 1},
+      });
+      await tester.pump();
+      expect(find.byKey(const ValueKey('pie-hover-tooltip')), findsOneWidget);
+
+      // The presenter's pointer leaves the chart: the highlight clears.
+      await _fromPresenter(tester, 'chartHover', {'index': 0, 'hover': null});
+      await tester.pump();
+      expect(find.byKey(const ValueKey('pie-hover-tooltip')), findsNothing);
+
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
 
   testWidgets('renders an empty (no-slides) deck as a blank surface', (
     tester,

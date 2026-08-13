@@ -16,6 +16,14 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- feat(grafiek): grafiek-hover spiegelt tussen presentatie- en publieksvenster.
+  Zweef je bij een presentatie met twee schermen over een staaf, lijnpunt of
+  taartpunt (of over een legenda-item), dan licht de beamer dezelfde reeks/punt
+  op en toont de bijbehorende tooltip — en andersom, dus het werkt op welk van
+  de twee schermen je ook wijst. Bij het wisselen van dia verdwijnt de markering.
+  Eerder reageerde elk venster alleen op zijn eigen aanwijzer; nu volgt het
+  publieksvenster de presentator zoals het al een groot mermaid-diagram volgde.
+
 - feat(documentstijl): volwassen profielbouwer met profielkaarten, basisvelden,
   afzonderlijke live A4- en 16:9-voorvertoningen; Vigilis is een ingebouwd
   profiel. Profielkaarten tonen het logo wanneer dat is ingesteld. Alle

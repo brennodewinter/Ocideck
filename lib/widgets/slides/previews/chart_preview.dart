@@ -47,6 +47,17 @@ class _ChartPreviewState extends State<_ChartPreview>
   /// so it introduces no new localised words.
   String? _cellTooltip;
 
+  /// This chart's own pointer hover, normalised to a [ChartHover] so the shared
+  /// [_hoverController] can forward it to the other screen (presenter ↔ beamer,
+  /// #930-style). Null when the pointer is off the chart.
+  ChartHover? _localHover;
+
+  /// The shared hover bus for this surface, or null in the editor preview /
+  /// thumbnails / export (no [ChartHoverScope] above → no mirroring). Resolved
+  /// in [didChangeDependencies]; we listen so an external hover from the other
+  /// screen repaints this chart.
+  ChartHoverController? _hoverController;
+
   /// Parsed chart spec, cached so the per-pointer-move hover rebuilds don't
   /// re-parse the chart JSON every frame. Re-parsed only when the slide's chart
   /// markdown actually changes.
@@ -104,7 +115,30 @@ class _ChartPreviewState extends State<_ChartPreview>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Join (or leave) the presenter↔beamer hover mirror. The controller lives in
+    // an inherited [ChartHoverScope]; only the current-slide canvas and the
+    // beamer provide one, so elsewhere this stays null and the chart is private.
+    final controller = ChartHoverScope.of(context);
+    if (controller != _hoverController) {
+      _hoverController?.removeListener(_onExternalHover);
+      _hoverController = controller;
+      _hoverController?.addListener(_onExternalHover);
+    }
+  }
+
+  /// The other screen moved its pointer: repaint so this chart shows the mirrored
+  /// highlight/tooltip. Only meaningful while this chart isn't hovered locally —
+  /// a local hover wins in [_effectiveHoverSeries]/[_effectivePieHover] and in
+  /// [_withMirroredTooltip].
+  void _onExternalHover() {
+    if (mounted) setState(() {});
+  }
+
+  @override
   void dispose() {
+    _hoverController?.removeListener(_onExternalHover);
     _entrance.dispose();
     super.dispose();
   }
@@ -158,8 +192,71 @@ class _ChartPreviewState extends State<_ChartPreview>
     );
   }
 
-  void _setHover(int? index) {
-    if (_hovered != index) setState(() => _hovered = index);
+  /// Hovering a series legend chip: dim the other series locally, and report the
+  /// series so the other screen mirrors the same emphasis.
+  void _hoverSeriesLegend(int? index) {
+    final next = index == null ? null : ChartHover(series: index);
+    if (_hovered == index && _localHover == next) return;
+    setState(() {
+      _hovered = index;
+      _localHover = next;
+    });
+    _hoverController?.setLocal(next);
+  }
+
+  /// Hovering a pie/donut legend chip: [index] is a slice (category), not a
+  /// series — mirror it as such so the other screen enlarges the same slice.
+  void _hoverSliceLegend(int? index) {
+    final next = index == null ? null : ChartHover(category: index);
+    if (_hovered == index && _localHover == next) return;
+    setState(() {
+      _hovered = index;
+      _localHover = next;
+    });
+    _hoverController?.setLocal(next);
+  }
+
+  /// Report a plot-level hover (a bar/point/slice under the cursor) to the shared
+  /// bus without touching [_hovered] — fl_chart and [_HoverPieChart] already draw
+  /// the local tooltip; this only feeds the mirror to the other screen.
+  void _setLocalHover(ChartHover? hover) {
+    final next = (hover?.isEmpty ?? true) ? null : hover;
+    if (_localHover == next) return;
+    setState(() => _localHover = next);
+    _hoverController?.setLocal(next);
+  }
+
+  /// Series index to emphasise (dim the rest / thicken the line): a local legend
+  /// hover, or the series mirrored from the other screen. A local *plot* hover
+  /// deliberately does not dim — matching what a lone pointer shows here.
+  int? get _effectiveHoverSeries =>
+      _hovered ?? _hoverController?.external?.series;
+
+  /// Slice index to enlarge in a pie/donut: a local legend/slice hover, or the
+  /// slice mirrored from the other screen.
+  int? get _effectivePieHover =>
+      _hovered ?? _hoverController?.external?.category;
+
+  /// When the other screen is hovering this chart (and the local pointer isn't),
+  /// float the same label/value tooltip here. Pie/donut mirror through
+  /// [_HoverPieChart.externalHover], which draws its own tooltip, so they opt
+  /// out. The text is composed from the data — no new localised words.
+  Widget _withMirroredTooltip(
+    BuildContext context,
+    ChartSpec spec,
+    Widget chart,
+  ) {
+    if (_localHover != null || spec.isPieLike) return chart;
+    final external = _hoverController?.external;
+    if (external == null) return chart;
+    final text = composedChartHoverText(context, spec, external);
+    if (text == null) return chart;
+    return _withCellTooltip(
+      chart: chart,
+      tooltip: text,
+      w: w,
+      style: _tooltipStyle(),
+    );
   }
 
   /// Set the hand-drawn charts' floating hover tooltip (see [_cellTooltip]).
@@ -175,7 +272,12 @@ class _ChartPreviewState extends State<_ChartPreview>
   void _rebuild(VoidCallback fn) => setState(fn);
 
   /// True when another legend entry is hovered, so [index] should fade back.
-  bool _dimmed(int index) => _hovered != null && _hovered != index;
+  /// Honours the hover mirrored from the other screen too, so the audience sees
+  /// the same series stand out that the presenter is pointing at.
+  bool _dimmed(int index) {
+    final active = _effectiveHoverSeries;
+    return active != null && active != index;
+  }
 
   /// Series colour with legend-hover feedback: non-hovered series fade out so
   /// the hovered one stands out in the plot.
@@ -326,7 +428,11 @@ class _ChartPreviewState extends State<_ChartPreview>
                   children: [
                     Expanded(
                       child: spec.hasInlineData
-                          ? _chart(spec, textColor)
+                          ? _withMirroredTooltip(
+                              context,
+                              spec,
+                              _chart(spec, textColor),
+                            )
                           : _placeholder(context),
                     ),
                     if (_legendWidget(spec, textColor) case final legend?) ...[
@@ -366,8 +472,8 @@ class _ChartPreviewState extends State<_ChartPreview>
             for (var i = 0; i < spec.series.length; i++) ...[
               if (i > 0) SizedBox(width: w * 0.01),
               MouseRegion(
-                onEnter: (_) => _setHover(i),
-                onExit: (_) => _setHover(null),
+                onEnter: (_) => _hoverSeriesLegend(i),
+                onExit: (_) => _hoverSeriesLegend(null),
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 120),
                   opacity: _dimmed(i) ? 0.4 : 1,
@@ -450,8 +556,8 @@ class _ChartPreviewState extends State<_ChartPreview>
             children: [
               for (var i = 0; i < itemCount; i++)
                 MouseRegion(
-                  onEnter: (_) => _setHover(i),
-                  onExit: (_) => _setHover(null),
+                  onEnter: (_) => _hoverSliceLegend(i),
+                  onExit: (_) => _hoverSliceLegend(null),
                   child: AnimatedOpacity(
                     duration: const Duration(milliseconds: 120),
                     opacity: _dimmed(i) ? 0.4 : 1,
@@ -786,160 +892,6 @@ class _ChartPreviewState extends State<_ChartPreview>
       ],
     ),
   );
-}
-
-class _HoverPieChart extends StatefulWidget {
-  final List<double> values;
-  final List<String> labels;
-  final List<Color> colors;
-
-  /// Per-slice ink for the on-slice percentage, chosen to stay readable on that
-  /// slice's fill (white on a dark slice, a dark ink on a pale one).
-  final List<Color> labelColors;
-  final double radius;
-  final double centerSpaceRadius;
-  final double sectionSpace;
-  final TextStyle titleStyle;
-  final TextStyle tooltipStyle;
-
-  /// Whether each slice prints its share as a percentage. Off = a clean circle.
-  final bool showLabels;
-
-  /// Rotation in degrees clockwise from the top (12 o'clock). 0 = first slice
-  /// starts at the top, matching the HTML export.
-  final double startAngle;
-
-  /// Slice index highlighted from outside (e.g. hovering the legend), combined
-  /// with this chart's own touch hover.
-  final int? externalHover;
-
-  /// Optional text drawn in the centre hole (the total, for a donut).
-  final String? centerLabel;
-  final TextStyle? centerLabelStyle;
-
-  const _HoverPieChart({
-    required this.values,
-    required this.labels,
-    required this.colors,
-    required this.labelColors,
-    required this.radius,
-    required this.centerSpaceRadius,
-    required this.sectionSpace,
-    required this.titleStyle,
-    required this.tooltipStyle,
-    this.showLabels = true,
-    this.startAngle = 0,
-    this.externalHover,
-    this.centerLabel,
-    this.centerLabelStyle,
-  });
-
-  @override
-  State<_HoverPieChart> createState() => _HoverPieChartState();
-}
-
-class _HoverPieChartState extends State<_HoverPieChart> {
-  int? _hovered;
-
-  @override
-  Widget build(BuildContext context) {
-    final total = widget.values.fold<double>(0, (a, b) => a + b);
-    final external = widget.externalHover;
-    final hovered =
-        _hovered ??
-        (external != null && external >= 0 && external < widget.values.length
-            ? external
-            : null);
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Positioned.fill(
-          child: PieChart(
-            PieChartData(
-              sections: [
-                for (var i = 0; i < widget.values.length; i++)
-                  PieChartSectionData(
-                    value: widget.values[i],
-                    color: widget.colors[i],
-                    title: widget.showLabels && widget.values[i] / total >= 0.08
-                        ? '${(widget.values[i] / total * 100).round()}%'
-                        : '',
-                    radius: widget.radius * (hovered == i ? 1.08 : 1),
-                    titleStyle: widget.titleStyle.copyWith(
-                      color: widget.labelColors[i],
-                    ),
-                  ),
-              ],
-              sectionsSpace: widget.sectionSpace,
-              centerSpaceRadius: widget.centerSpaceRadius,
-              // fl_chart's 0° is the right (3 o'clock); the -90 turns that to the
-              // top so a 0 startAngle matches the HTML export, then startAngle
-              // rotates clockwise from there.
-              startDegreeOffset: widget.startAngle - 90,
-              pieTouchData: PieTouchData(
-                enabled: true,
-                mouseCursorResolver: (event, response) =>
-                    response?.touchedSection == null
-                    ? SystemMouseCursors.basic
-                    : SystemMouseCursors.click,
-                touchCallback: (event, response) {
-                  final next = event.isInterestedForInteractions
-                      ? response?.touchedSection?.touchedSectionIndex
-                      : null;
-                  if (next != _hovered) setState(() => _hovered = next);
-                },
-              ),
-            ),
-            duration: Duration.zero,
-          ),
-        ),
-        if (widget.centerLabel != null)
-          Positioned.fill(
-            child: IgnorePointer(
-              child: Center(
-                child: Text(
-                  widget.centerLabel!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: widget.centerLabelStyle,
-                ),
-              ),
-            ),
-          ),
-        if (hovered != null && hovered >= 0 && hovered < widget.values.length)
-          Positioned(
-            top: 4,
-            left: 4,
-            right: 4,
-            child: IgnorePointer(
-              child: Center(
-                child: Container(
-                  key: const ValueKey('pie-hover-tooltip'),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppTheme.chartTooltipBg,
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: const [
-                      BoxShadow(color: AppTheme.shadow20, blurRadius: 6),
-                    ],
-                  ),
-                  child: Text(
-                    '${widget.labels[hovered]}: ${_formatChartValue(widget.values[hovered])}',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: widget.tooltipStyle,
-                  ),
-                ),
-              ),
-            ),
-          ),
-      ],
-    );
-  }
 }
 
 String _formatChartValue(double value) => value == value.roundToDouble()

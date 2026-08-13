@@ -15,6 +15,7 @@ import '../../services/finding_context_score.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../utils/url_launcher_util.dart';
 import '../slides/mermaid_diagram.dart';
+import '../slides/chart_hover.dart';
 import '../slides/slide_preview.dart';
 import 'annotation_overlay.dart';
 
@@ -78,6 +79,12 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   /// de presentatie-dia (#930): de presentator zoomt/scrolt, hier zetten we
   /// dezelfde stand.
   final MermaidViewController _mermaidView = MermaidViewController();
+
+  /// Spiegelt de grafiek-hover met het presentatorscherm: een hover hier stuurt
+  /// de presentator aan, en een hover daar licht hier dezelfde reeks/taartpunt
+  /// op. Dezelfde opzet als [_mermaidView].
+  final ChartHoverController _chartHover = ChartHoverController();
+  ChartHover? _lastSentChartHover;
   // Hoogst verwerkte 'update'-sequencenummer; oudere berichten worden genegeerd.
   int _lastUpdateSeq = -1;
 
@@ -134,13 +141,27 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
       });
     }
     audienceChannel.setMethodCallHandler(_onPresenterCall);
+    _chartHover.addListener(_broadcastChartHover);
   }
 
   @override
   void dispose() {
     audienceChannel.setMethodCallHandler(null);
     _mermaidView.dispose();
+    _chartHover.removeListener(_broadcastChartHover);
+    _chartHover.dispose();
     super.dispose();
+  }
+
+  /// Deelt een hover op het beamerbeeld met het presentatorscherm. Leest alleen
+  /// [ChartHoverController.local]; een van de presentator ontvangen hover (extern)
+  /// verandert `local` niet en wordt dus niet teruggekaatst. De index reist mee
+  /// zodat een late hover nooit op een andere dia belandt.
+  void _broadcastChartHover() {
+    final hover = _chartHover.local;
+    if (hover == _lastSentChartHover) return;
+    _lastSentChartHover = hover;
+    _send('chartHover', {'index': _index, 'hover': hover?.toJson()});
   }
 
   Future<dynamic> _onPresenterCall(MethodCall call) async {
@@ -166,6 +187,10 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
           // _questionIndex matches and the overlay is kept.
           if (_questionIndex != _index) _questionView = null;
         });
+        // Een hover hoort bij één dia: wis bij het wisselen wat er nog van de
+        // vorige lag (zowel de eigen als de van de presentator ontvangen hover).
+        _chartHover.setLocal(null);
+        _chartHover.setExternal(null);
       case 'mermaidView':
         // De presentator zoomt/scrolt een groot diagram; volg dezelfde kijkstand
         // (#930). Alleen als dit venster op dezelfde slide staat. De stand is
@@ -179,6 +204,14 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
             fx: (m['fx'] as num?)?.toDouble() ?? 0.0,
             fy: (m['fy'] as num?)?.toDouble() ?? 0.0,
           );
+        }
+      case 'chartHover':
+        // De presentator zweeft over de grafiek; toon dezelfde markering hier.
+        // Alleen als dit venster op dezelfde dia staat (net als 'mermaidView').
+        final m = Map<String, dynamic>.from(call.arguments as Map);
+        if (!mounted) return null;
+        if ((m['index'] as num?)?.toInt() == _index) {
+          _chartHover.setExternal(ChartHover.fromJson(m['hover']));
         }
       case 'question':
         final m = Map<String, dynamic>.from(call.arguments as Map);
@@ -366,64 +399,71 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                SlidePreviewWidget(
-                  slide: slide,
-                  projectPath: _projectPath,
-                  themeProfile: _theme,
-                  deckMarpStyle: _marpStyle,
-                  cockpitColorScheme: _scheme,
-                  onLinkTap: openExternalUrl,
-                  slideNumber: _index + 1,
-                  slideCount: _slides.length,
-                  numberStart: numberedListStartFor(_slides, _index),
-                  scopeCia: deckScopeCiaIndex(_slides),
-                  reportLanguage: _reportLanguage,
-                  fitScaleOverride: sharedSplitFitScale(
-                    _slides,
-                    _index,
-                    _theme,
-                    _theme.fontFamily,
+                // Spiegelt de grafiek-hover met het presentatorscherm (net als de
+                // mermaid-kijkstand hierboven).
+                ChartHoverScope(
+                  controller: _chartHover,
+                  child: SlidePreviewWidget(
+                    slide: slide,
+                    projectPath: _projectPath,
+                    themeProfile: _theme,
+                    deckMarpStyle: _marpStyle,
+                    cockpitColorScheme: _scheme,
+                    onLinkTap: openExternalUrl,
+                    slideNumber: _index + 1,
+                    slideCount: _slides.length,
+                    numberStart: numberedListStartFor(_slides, _index),
+                    scopeCia: deckScopeCiaIndex(_slides),
+                    reportLanguage: _reportLanguage,
+                    fitScaleOverride: sharedSplitFitScale(
+                      _slides,
+                      _index,
+                      _theme,
+                      _theme.fontFamily,
+                    ),
+                    splitRunPosition: splitRunPositionFor(_slides, _index),
+                    richTextPage: _richTextPage,
+                    showRichTextPageControls: false,
+                    timelineRevealedCount: _timelineRevealedFor(slide),
+                    tlp: _tlp,
+                    organization: _organization,
+                    showClassificationWatermark: _showClassificationWatermark,
+                    presentationMode: true,
+                    // Volgt de kijkstand van de presentator voor een groot diagram
+                    // (#930); die komt via 'mermaidView' binnen. Het publieksvenster
+                    // toont alleen mee — geen eigen gebaren of zoomknoppen.
+                    scrollableMermaid: true,
+                    mermaidViewController: _mermaidView,
+                    mermaidInteractive: false,
+                    onChecklistItemToggle: (column, itemIndex) =>
+                        _send('checklistToggle', {
+                          'slideIndex': _index,
+                          'column': column,
+                          'itemIndex': itemIndex,
+                        }),
+                    questionView: _questionIndex == _index
+                        ? _questionView
+                        : null,
+                    onAnswerSelected: (i) => _send('answerSelected', {
+                      'slideIndex': _index,
+                      'optionIndex': i,
+                    }),
+                    onAnswerSubmit: () =>
+                        _send('answerSubmit', {'slideIndex': _index}),
+                    enableMedia: true,
+                    autoplayMedia: true,
+                    allowRemoteMedia: _allowRemoteMedia,
+                    // Media finishing on the beamer drives auto-advance.
+                    onAudioComplete: () => _send('mediaComplete', {
+                      'index': _index,
+                      'kind': 'audio',
+                    }),
+                    onVideoComplete: () => _send('mediaComplete', {
+                      'index': _index,
+                      'kind': 'video',
+                    }),
+                    improvementY01: _improvementY01,
                   ),
-                  splitRunPosition: splitRunPositionFor(_slides, _index),
-                  richTextPage: _richTextPage,
-                  showRichTextPageControls: false,
-                  timelineRevealedCount: _timelineRevealedFor(slide),
-                  tlp: _tlp,
-                  organization: _organization,
-                  showClassificationWatermark: _showClassificationWatermark,
-                  presentationMode: true,
-                  // Volgt de kijkstand van de presentator voor een groot diagram
-                  // (#930); die komt via 'mermaidView' binnen. Het publieksvenster
-                  // toont alleen mee — geen eigen gebaren of zoomknoppen.
-                  scrollableMermaid: true,
-                  mermaidViewController: _mermaidView,
-                  mermaidInteractive: false,
-                  onChecklistItemToggle: (column, itemIndex) =>
-                      _send('checklistToggle', {
-                        'slideIndex': _index,
-                        'column': column,
-                        'itemIndex': itemIndex,
-                      }),
-                  questionView: _questionIndex == _index ? _questionView : null,
-                  onAnswerSelected: (i) => _send('answerSelected', {
-                    'slideIndex': _index,
-                    'optionIndex': i,
-                  }),
-                  onAnswerSubmit: () =>
-                      _send('answerSubmit', {'slideIndex': _index}),
-                  enableMedia: true,
-                  autoplayMedia: true,
-                  allowRemoteMedia: _allowRemoteMedia,
-                  // Media finishing on the beamer drives auto-advance.
-                  onAudioComplete: () => _send('mediaComplete', {
-                    'index': _index,
-                    'kind': 'audio',
-                  }),
-                  onVideoComplete: () => _send('mediaComplete', {
-                    'index': _index,
-                    'kind': 'video',
-                  }),
-                  improvementY01: _improvementY01,
                 ),
                 AnnotationLayer(
                   strokes: [

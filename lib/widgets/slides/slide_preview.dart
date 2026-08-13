@@ -14,6 +14,7 @@ import 'package:highlight/languages/all.dart' show allLanguages;
 import 'package:video_player/video_player.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'mermaid_diagram.dart';
+import 'chart_hover.dart';
 import 'video_playhead_bus.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';

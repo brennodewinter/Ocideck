@@ -2859,6 +2859,10 @@ mirrored) display. Notes:
   keys end up in the presentation. Click on the beamer image and `Esc`, the
   arrows and the rest keep working.
 - Clicking the beamer also advances.
+- Hovering a chart is mirrored between the two screens. Point at a bar, a line
+  point, or a pie slice — or a legend entry — and the beamer highlights the same
+  one and shows its tooltip; hovering on the beamer does the same on your laptop.
+  It works whichever screen you touch, and moving to another slide clears it.
 - On macOS the "external" screen is the one without the menu bar.
 
 ### Zooming a large diagram
