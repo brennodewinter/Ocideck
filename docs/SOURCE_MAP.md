@@ -1343,6 +1343,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 
 ### `lib/widgets/slides/` — slide rendering
 
+- `chart_hover.dart` — `ChartHover` (a series/category index pair), `ChartHoverController` (a `ChangeNotifier` bus holding a `local` and an `external` hover) and the inherited `ChartHoverScope`. The presenter's current-slide canvas and the beamer window each own a controller; a method-channel message copies one window's `local` hover into the other's `external`, so hovering a chart on one screen highlights the same series/slice/point on the other (#930-style, the chart twin of `MermaidViewController`). Applying `external` never touches `local`, so the two windows can't echo each other.
 - `image_crop_dialog.dart` — Interactive crop/reposition dialog: drag to set the focal point (and zoom for full-slide/title images), WYSIWYG in the slot's aspect ratio.
 - `image_zoom_dialog.dart` — Full-screen pan/zoom image viewer.
 - `inline_markdown.dart` — `InlineMarkdownText`: renders inline markdown with tappable links (and disposes their recognizers). The parsing and styling live in `lib/utils/inline_markdown.dart`.
