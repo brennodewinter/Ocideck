@@ -635,6 +635,79 @@ void main() {
     expect(deck.slides.single.images.single.bytes, adjustedBytes);
   });
 
+  test('style reference (field 3) whose id collides with a data id does not '
+      'inject a template image (#1478)', () async {
+    // Keynote drawables carry a style reference on field 3 that points at
+    // a TSD.MediaStyle (type 3016) object. Object-IDs en data-IDs delen
+    // een namespace, dus als het style-object id 111 heeft én data-ID 111
+    // naar een bestand (image51-111.png) mapt, interpreteerde de fallback
+    // path de style-referentie als een DataReference en injecteerde de
+    // template-afbeelding op elke slide. Op een slide met 180° IWA-rotatie
+    // werd die extra afbeelding meegeroteerd en verscheen op de kop.
+    const imageDataId = 42;
+    const styleObjId = 111;
+    const templateDataId = 111;
+    const imageFileName = 'photo.png';
+    const templateFileName = 'template.png';
+    const imageBytes = <int>[0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A];
+    const templateBytes = <int>[0x89, 0x50, 0x4E, 0x47, 0x01];
+    final recordBytes = [
+      fx.record(
+        2,
+        100,
+        fx.packageMetadataPayload(
+          dataInfos: [
+            fx.dataInfoPayload(
+              identifier: imageDataId,
+              preferredFileName: imageFileName,
+            ),
+            fx.dataInfoPayload(
+              identifier: templateDataId,
+              preferredFileName: templateFileName,
+            ),
+          ],
+        ),
+      ),
+      // Style object (id 111, type 3016) — not an image.
+      fx.record(styleObjId, 3016, [
+        ...fx.varint(fx.key(1, 2)),
+        ...fx.varint(0),
+      ]),
+      // Image (id 10) with field 11 → photo + field 3 → style obj 111.
+      fx.record(10, 200, [
+        ...fx.varint(fx.key(1, 2)),
+        ...fx.varint(0), // empty DrawableArchive super
+        ...fx.bytesField(11, fx.varintField(1, imageDataId)),
+        ...fx.bytesField(3, fx.varintField(1, styleObjId)),
+      ]),
+      fx.recordWithRefs(
+        1,
+        1,
+        fx.slidePayload(
+          titleRefIndex: 0,
+          bodyRefIndex: 0,
+          drawableRefIndices: [0],
+        ),
+        [10],
+      ),
+    ].expand((e) => e).toList();
+
+    final bytes = fx.zip({
+      'Index/slide-1.iwa': fx.iwaStream(recordBytes),
+      'Data/$imageFileName': imageBytes,
+      'Data/$templateFileName': templateBytes,
+    });
+
+    final deck = (await KeyImporter().importBytes(
+      bytes,
+      path: 'style-collision.key',
+    )).okValue!;
+    expect(deck.slides, hasLength(1));
+    // Only the slide's own image, not the template.
+    expect(deck.slides.single.images, hasLength(1));
+    expect(deck.slides.single.images.single.bytes, imageBytes);
+  });
+
   test(
     'PackageMetadata components with TSP.Reference submessages give slide order',
     () async {

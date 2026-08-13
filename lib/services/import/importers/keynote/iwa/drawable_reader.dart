@@ -502,13 +502,11 @@ class DrawableReader {
       if (sub == null) continue;
       final refId = sub.varint(1);
       if (refId == null) continue;
-      // If the first field is itself a valid DataReference, use it.
-      final resolvedDataId = doc.resolveDataReference(o, refId);
-      if (doc.dataFileName(resolvedDataId) != null) {
-        ids.add(resolvedDataId);
-        continue;
-      }
-      // Otherwise treat it as a reference when it points at an image object.
+      // Volg alleen referenties naar image-like objecten — behandel
+      // non-canonical fields NIET als DataReference. Object-IDs en data-IDs
+      // delen een namespace, dus een style-referentie (field 3 → obj 111,
+      // type 3016) kan colliden met een data-ID (111 → image51-111.png) en
+      // zo een template-afbeelding op elke dia injecteren (#1478).
       final target = doc.resolveReference(o, refId);
       if (target != null && _imageLikeTypeIds.contains(target.typeId)) {
         ids.addAll(_collectImageDataIds(target, seen));
