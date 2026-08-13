@@ -37,6 +37,16 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(html-export): het presentatielogo kwam niet mee in de zelfstandige
+  HTML-export. In de app, de beamer en de PDF/PPTX ligt het stijlprofiel-logo op
+  elke dia, maar de HTML-dia-export kende alleen het documentlogo van de
+  doorlopende documentmodus — een deck dat je als losse dia's exporteerde, opende
+  bij de ontvanger zonder logo. De export legt het logo nu als ingesloten
+  `data:`-URI op elke dia die het toont, in dezelfde hoek en maat als de
+  overlay (`_LogoOverlay`) en met dezelfde vrijgehouden strook (`logoSafeReserve`)
+  als de app; een dia met `no-logo` houdt hem net als daar weg. Het logo ligt via
+  `.slide.logo-safe::before` (een pseudo-element overleeft de innerHTML-reset van
+  het renderscript, een echt element niet) en blijft dus offline zichtbaar.
 - fix(grafiek): een taart (cirkel) rendeerde fors kleiner dan een donut met
   dezelfde gegevens, terwijl de ruimte er was. fl_chart tekent de buitenrand van
   een partje op `centerSpaceRadius + radius`; beide typen kregen dezelfde
