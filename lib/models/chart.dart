@@ -133,6 +133,16 @@ String chartRowColor(ChartSpec spec, int index) => index < spec.rowColors.length
           chartColorPalette[index % chartColorPalette.length]
     : chartColorPalette[index % chartColorPalette.length];
 
+/// A donut's centre hole as a fraction of its outer radius, so the same donut
+/// has identical proportions everywhere it is drawn. Both render worlds read
+/// this: the Flutter preview/presentation (and the PDF raster that shares that
+/// widget) via `radialChartRadii`, and the HTML/SVG export via `_pieSvg`. They
+/// drifted apart once — the app carved a 0.38 hole (a thicker ring) while the
+/// export used 0.6 (a thinner ring), so the same donut looked different per
+/// export. The app is the WYSIWYG surface, so the export follows it here. A pie
+/// keeps no hole (it stays solid to the centre); this is the donut alone.
+const double kDonutHoleFraction = 0.38;
+
 // ── Heatmap colour scale ─────────────────────────────────────────────────────
 // A [ChartType.heatmap] encodes MAGNITUDE, so — unlike the other charts — its
 // cells are not tinted with the deck's series/accent colours (which made every

@@ -478,7 +478,9 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
   // room for the 8% hover-enlarge without clipping. The cap keeps a lone pie on
   // a very wide plot from ballooning.
   final outer = (available * 0.45).clamp(w * 0.03, w * 0.18);
-  final hole = donut ? outer * 0.38 : 0.0;
+  // The donut hole fraction is shared with the HTML/SVG export (chart.dart), so
+  // the same donut keeps the same proportions in the app, the PDF and the HTML.
+  final hole = donut ? outer * kDonutHoleFraction : 0.0;
   return (outer: outer, ring: outer - hole, hole: hole);
 }
 

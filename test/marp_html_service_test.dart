@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
@@ -391,6 +392,34 @@ void main() {}
     expect(html, contains('Een'));
     expect(html, contains('Twee'));
     expect(html, isNot(contains('Drie')));
+  });
+
+  test('a donut hole matches the app render fraction (kDonutHoleFraction)', () {
+    // The export drew a thinner ring (0.6 hole) than the app (0.38); both now
+    // read the one shared constant so the same donut looks the same everywhere.
+    const slide = '''
+```chart
+{
+  "type": "donut",
+  "x": ["A", "B", "C"],
+  "series": [{"name": "Aandeel", "data": [50, 30, 20]}]
+}
+```
+''';
+
+    final html = MarpHtmlService.renderChartBlocks(slide);
+
+    // Slices arc out to the outer radius (`A r,r …`, all the same). The hole is a
+    // background circle; it is by far the largest circle (the legend swatches are
+    // r=5), so take the max radius rather than depend on element order.
+    final outer = double.parse(
+      RegExp(r'A([\d.]+),').firstMatch(html)!.group(1)!,
+    );
+    final hole = RegExp(r'<circle[^>]*\br="([\d.]+)"')
+        .allMatches(html)
+        .map((m) => double.parse(m.group(1)!))
+        .reduce((a, b) => a > b ? a : b);
+    expect(hole / outer, closeTo(kDonutHoleFraction, 1e-6));
   });
 
   test('cockpit SVG renders meters for portable HTML export', () {
