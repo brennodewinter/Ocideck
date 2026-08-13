@@ -38,7 +38,6 @@ const _stringsId = {
   'importUrl': 'Impor dari URL…',
   'findReplace': 'Cari dan ganti',
   'fullDeckPreview': 'Lihat seluruh deck',
-  'presentationProperties': 'Properti presentasi',
   'settings': 'Pengaturan',
   'settingsGeneral': 'Umum',
   'settingsColors': 'Warna',

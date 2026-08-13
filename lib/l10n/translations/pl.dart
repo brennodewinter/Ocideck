@@ -40,7 +40,6 @@ const _stringsPl = {
   'importUrl': 'Importuj z adresu URL…',
   'findReplace': 'Znajdź i zamień',
   'fullDeckPreview': 'Wyświetl całą prezentację',
-  'presentationProperties': 'Właściwości prezentacji',
   'settings': 'Ustawienia',
   'settingsGeneral': 'Ogólne',
   'settingsColors': 'Kolory',

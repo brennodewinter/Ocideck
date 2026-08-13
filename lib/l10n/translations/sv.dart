@@ -38,7 +38,6 @@ const _stringsSv = {
   'importUrl': 'Importera från URL…',
   'findReplace': 'Sök och ersätt',
   'fullDeckPreview': 'Visa hela decket',
-  'presentationProperties': 'Presentationsegenskaper',
   'settings': 'Inställningar',
   'settingsGeneral': 'Allmänt',
   'settingsColors': 'Färger',

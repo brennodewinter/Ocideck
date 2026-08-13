@@ -39,7 +39,6 @@ const _stringsCs = {
   'importUrl': 'Importovat z URL…',
   'findReplace': 'Najít a nahradit',
   'fullDeckPreview': 'Zobrazit celou prezentaci',
-  'presentationProperties': 'Vlastnosti prezentace',
   'settings': 'Nastavení',
   'settingsGeneral': 'Obecné',
   'settingsColors': 'Barvy',

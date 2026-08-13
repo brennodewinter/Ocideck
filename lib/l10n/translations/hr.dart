@@ -38,7 +38,6 @@ const _stringsHr = {
   'importUrl': 'Uvezi s URL-a…',
   'findReplace': 'Pronađi i zamijeni',
   'fullDeckPreview': 'Prikaži cijelu prezentaciju',
-  'presentationProperties': 'Svojstva prezentacije',
   'settings': 'Postavke',
   'settingsGeneral': 'Općenito',
   'settingsColors': 'Boje',

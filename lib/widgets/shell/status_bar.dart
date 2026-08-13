@@ -744,6 +744,39 @@ Color _onAppBar(BuildContext context) {
   return theme.appBarTheme.foregroundColor ?? AppPalette.of(theme).panelText;
 }
 
+/// Presentatie-eigenschappen als zichtbaar gelabelde knop in de AppBar-titel,
+/// naast de TLP-chip. Verving het losse "i"-icoontje (#1479): dat was te klein
+/// voor iets wat de metadata én het afspeelgedrag van de hele presentatie
+/// regelt, en een info-"i" leest als "hier valt iets te lézen" terwijl je hier
+/// juist instelt. Een tekstlabel plus een instel-icoon maakt de knop groter en
+/// meteen begrijpelijk; de kleur volgt _onAppBar zodat hij ook op een profiel
+/// met een lichte hoofdkleur leesbaar blijft (dezelfde reden als de chip, #780).
+class _PresentationPropertiesButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const _PresentationPropertiesButton({required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final onBar = _onAppBar(context);
+    return TextButton.icon(
+      onPressed: onPressed,
+      icon: const Icon(Icons.tune, size: 16),
+      label: Text(l10n.d('Presentatie-eigenschappen')),
+      style: TextButton.styleFrom(
+        foregroundColor: onBar,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        minimumSize: Size.zero,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+        side: BorderSide(color: onBar.withValues(alpha: 0.24)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+      ),
+    );
+  }
+}
+
 /// TLP-classificatie als altijd zichtbare, direct instelbare chip in de
 /// AppBar-titel. Toont de huidige status in de officiële TLP-kleur en opent
 /// bij klikken een keuzelijst met alle niveaus (incl. "Geen").

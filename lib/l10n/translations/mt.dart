@@ -39,7 +39,6 @@ const _stringsMt = {
   'importUrl': 'Importa minn URL…',
   'findReplace': 'Sib u ibdel',
   'fullDeckPreview': 'Ara d-deck sħiħ',
-  'presentationProperties': 'Proprjetajiet tal-preżentazzjoni',
   'settings': 'Settings',
   'settingsGeneral': 'Ġenerali',
   'settingsColors': 'Kuluri',

@@ -38,7 +38,6 @@ const _stringsPap = {
   'importUrl': 'Importá for di URL…',
   'findReplace': 'Busca i reemplasá',
   'fullDeckPreview': 'Mira henter e deck',
-  'presentationProperties': 'Propiedatnan di presentashon',
   'settings': 'Preferensianan',
   'settingsGeneral': 'General',
   'settingsColors': 'Kolónan',

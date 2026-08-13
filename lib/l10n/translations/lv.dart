@@ -38,7 +38,6 @@ const _stringsLv = {
   'importUrl': 'Importēt no URL…',
   'findReplace': 'Meklēt un aizstāt',
   'fullDeckPreview': 'Skatīt visu deku',
-  'presentationProperties': 'Prezentācijas rekvizīti',
   'settings': 'Iestatījumi',
   'settingsGeneral': 'Vispārīgi',
   'settingsColors': 'Krāsas',

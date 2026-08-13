@@ -39,7 +39,6 @@ const _stringsEs = {
   'importUrl': 'Importar desde URL…',
   'findReplace': 'Buscar y reemplazar',
   'fullDeckPreview': 'Ver deck completo',
-  'presentationProperties': 'Propiedades de presentación',
   'settings': 'Configuración',
   'settingsGeneral': 'General',
   'settingsColors': 'Colores',
