@@ -46,6 +46,7 @@ import 'improvement/flow_slide.dart';
 import 'improvement/flow_spec.dart';
 import 'markdown_table_codec.dart';
 import 'menu_blocks.dart';
+import 'rich_text_layout.dart';
 import 'scene/scene.dart';
 import 'markdown_service.dart';
 
@@ -161,24 +162,8 @@ class MarpHtmlService {
     // krijgt geen breuk zodat er geen leeg eerste blad ontstaat.
     bool chapterPageBreak = false,
   }) async {
-    // De zes bundel-assets en de themed CSS zijn onafhankelijk.
-    final [
-      marked,
-      purify,
-      hljs,
-      hljsCss,
-      mathjax,
-      mermaid,
-      css,
-    ] = await Future.wait([
-      loadAsset('$_assetDir/marked.min.js'),
-      loadAsset('$_assetDir/purify.min.js'),
-      loadAsset('$_assetDir/highlight.min.js'),
-      loadAsset('$_assetDir/highlight.css'),
-      loadAsset('$_assetDir/tex-svg.js'),
-      loadAsset('$_assetDir/mermaid.min.js'),
-      theme == null ? Future.value(_defaultThemeCss) : _themedCss(theme),
-    ]);
+    final [marked, purify, hljs, hljsCss, mathjax, mermaid, css] =
+        await _loadExportBundles(theme);
 
     // Wie een export doorstuurt, verspreidt vijf JavaScript-bundels en — als het
     // gebundelde lettertype is ingesloten — ook een font. Dat mag alleen mét de
@@ -249,6 +234,13 @@ class MarpHtmlService {
             : '<div class="tlp-export-banner">${_htmlAttr(meta.htmlClassification!)}</div>') +
         _aiBanner(meta);
 
+    // Het presentatielogo op elke logo-dia, zoals de app, de beamer en de
+    // PDF/PPTX het tonen. Alleen in de dia-modus: de doorlopende documentmodus
+    // draagt hetzelfde logo al als kop/voetband (zie [_withDocumentChrome]).
+    final logoCss = theme == null || continuous
+        ? ''
+        : await _presentationLogoCss(theme, embedImage, loadBytes);
+
     return '<!doctype html>\n'
         '<html lang="$htmlLang"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
@@ -256,7 +248,7 @@ class MarpHtmlService {
         '<title>$title</title>'
         '$headMeta'
         '<style>${exportBaseCss()}\n$css\n$hljsCss'
-        '${chapterPageBreak ? _chapterPageBreakCss : ''}</style>'
+        '${chapterPageBreak ? _chapterPageBreakCss : ''}$logoCss</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
         '${inline(marked, 'marked')}'
         '${inline(purify, 'dompurify')}'
@@ -272,6 +264,19 @@ class MarpHtmlService {
         '${notices.html}'
         '</body></html>';
   }
+
+  /// De zes gevendorde webbundels en de themed CSS voor één export. Ze zijn
+  /// onafhankelijk, dus ze laden samen. Uitgetild uit [build] zodat die methode
+  /// onder de lengte-ratchet blijft; de aanroeper ontbindt de lijst op volgorde.
+  Future<List<String>> _loadExportBundles(ThemeProfile? theme) => Future.wait([
+    loadAsset('$_assetDir/marked.min.js'),
+    loadAsset('$_assetDir/purify.min.js'),
+    loadAsset('$_assetDir/highlight.min.js'),
+    loadAsset('$_assetDir/highlight.css'),
+    loadAsset('$_assetDir/tex-svg.js'),
+    loadAsset('$_assetDir/mermaid.min.js'),
+    theme == null ? Future.value(_defaultThemeCss) : _themedCss(theme),
+  ]);
 
   /// De Content-Security-Policy voor één export, als `<meta>`-element met de
   /// per-export [nonce] erin gebakken.
