@@ -112,6 +112,45 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('a solid pie fills the same outer radius as a donut', (
+    tester,
+  ) async {
+    // The regression: a pie rendered ~62% the diameter of a donut, because
+    // fl_chart draws a section's outer edge at centerSpaceRadius + radius and the
+    // pie (no hole) only reached its section radius. Both must reach the same
+    // outer edge in the same box.
+    const x = ['A', 'B', 'C'];
+    const series = [
+      ChartSeries(name: 'Aandeel', data: [50, 30, 20]),
+    ];
+
+    double firstPieOuter() {
+      final data = tester.widget<PieChart>(find.byType(PieChart).first).data;
+      return data.centerSpaceRadius + data.sections.first.radius;
+    }
+
+    await tester.pumpWidget(
+      _host(const ChartSpec(type: ChartType.pie, x: x, series: series)),
+    );
+    await tester.pump();
+    final pieOuter = firstPieOuter();
+    final pieHole = tester
+        .widget<PieChart>(find.byType(PieChart).first)
+        .data
+        .centerSpaceRadius;
+
+    await tester.pumpWidget(
+      _host(const ChartSpec(type: ChartType.donut, x: x, series: series)),
+    );
+    await tester.pump();
+    final donutOuter = firstPieOuter();
+
+    expect(pieHole, 0); // still solid to the centre
+    expect(pieOuter, greaterThan(0));
+    expect(pieOuter, closeTo(donutOuter, 0.5));
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('showSliceLabels off hides the on-slice percentages (#1395)', (
     tester,
   ) async {
@@ -1310,5 +1349,34 @@ void main() {
     expect(find.byKey(const ValueKey('cell-hover-tooltip')), findsOneWidget);
     expect(find.text('SLA\n80'), findsOneWidget);
     expect(tester.takeException(), isNull);
+  });
+
+  group('radialChartRadii', () {
+    test('a pie and a donut fill the same outer radius', () {
+      for (final available in [100.0, 300.0, 1000.0]) {
+        final pie = radialChartRadii(available, 800, donut: false);
+        final donut = radialChartRadii(available, 800, donut: true);
+        // Same outer edge — the whole point: a solid pie is not smaller.
+        expect(pie.outer, donut.outer);
+        // fl_chart's outer edge is hole + ring for both.
+        expect(pie.hole + pie.ring, closeTo(pie.outer, 1e-9));
+        expect(donut.hole + donut.ring, closeTo(donut.outer, 1e-9));
+      }
+    });
+
+    test('a pie is solid to the centre; a donut keeps a hole', () {
+      final pie = radialChartRadii(300, 800, donut: false);
+      final donut = radialChartRadii(300, 800, donut: true);
+      expect(pie.hole, 0);
+      expect(pie.ring, pie.outer); // reaches the centre
+      expect(donut.hole, greaterThan(0));
+      expect(donut.ring, lessThan(donut.outer));
+    });
+
+    test('the outer radius grows with the box until it caps', () {
+      // Fill-driven in a small box, capped in a large one.
+      expect(radialChartRadii(200, 800, donut: false).outer, 200 * 0.45);
+      expect(radialChartRadii(4000, 800, donut: false).outer, 800 * 0.18);
+    });
   });
 }

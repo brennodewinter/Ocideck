@@ -377,11 +377,10 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
                         )
                       : LayoutBuilder(
                           builder: (context, pieConstraints) {
-                            final available =
-                                pieConstraints.biggest.shortestSide;
-                            final radius = (available * 0.42).clamp(
-                              w * 0.018,
-                              w * 0.075,
+                            final radii = radialChartRadii(
+                              pieConstraints.biggest.shortestSide,
+                              w,
+                              donut: donut,
                             );
                             return ClipRect(
                               child: _HoverPieChart(
@@ -412,17 +411,17 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
                                       ),
                                     ),
                                 ],
-                                radius: radius,
-                                centerSpaceRadius: _holeRadius(radius, donut),
+                                radius: radii.ring,
+                                centerSpaceRadius: radii.hole,
                                 sectionSpace: w * 0.002,
                                 startAngle: spec.startAngle,
-                                titleStyle: _pieTitleStyle(font, w, radius),
+                                titleStyle: _pieTitleStyle(font, w, radii.ring),
                                 tooltipStyle: _tooltipStyle(),
                                 centerLabel: donut ? _fmtNum(total) : null,
                                 centerLabelStyle: _pieCenterLabelStyle(
                                   font,
                                   w,
-                                  radius,
+                                  radii.ring,
                                   textColor,
                                 ),
                               ),
@@ -459,11 +458,29 @@ extension _ChartPreviewCartesian on _ChartPreviewState {
   }
 }
 
-/// The centre-space (hole) radius for a radial chart. A donut keeps a hole —
-/// its total prints there — while a pie is solid to the centre so its slices
-/// meet at a single point. (A pie used to carry a 0.42 hole too, which stopped
-/// the type from drawing a true, full circle; see issue #1395.)
-double _holeRadius(double radius, bool donut) => radius * (donut ? 0.62 : 0.0);
+/// Outer, ring and centre-hole radii for a pie/donut in a box whose shortest
+/// side is [available]. fl_chart draws a section's outer edge at
+/// `centerSpaceRadius + section.radius` (pie_chart_painter.dart), so both types
+/// are sized by their shared OUTER edge — which fills the box — and the donut's
+/// hole is carved out of it. Sizing the *section* radius directly (as before)
+/// let a solid pie draw ~1.6× smaller than a donut of the same setting: the pie
+/// has no hole to add to its outer edge, so its outer edge landed at the section
+/// radius while the donut's landed at ~1.62× that.
+///
+/// The donut keeps a hole that is 38% of its outer radius; a pie is solid to the
+/// centre so its slices meet at a single point (#1395).
+({double outer, double ring, double hole}) radialChartRadii(
+  double available,
+  double w, {
+  required bool donut,
+}) {
+  // Fill ~90% of the box (diameter 2·0.45·available); the small margin leaves
+  // room for the 8% hover-enlarge without clipping. The cap keeps a lone pie on
+  // a very wide plot from ballooning.
+  final outer = (available * 0.45).clamp(w * 0.03, w * 0.18);
+  final hole = donut ? outer * 0.38 : 0.0;
+  return (outer: outer, ring: outer - hole, hole: hole);
+}
 
 /// The white on-slice percentage style for a pie/donut, sized to the radius.
 TextStyle _pieTitleStyle(String font, double w, double radius) => _applyFont(
