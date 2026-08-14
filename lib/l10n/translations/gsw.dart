@@ -1777,6 +1777,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Opmaak': 'Gschtaltig',
   'Afbeelding aanpassen': 'Bild aapasse',
   'Groot bestand': 'Grossi Datei',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':

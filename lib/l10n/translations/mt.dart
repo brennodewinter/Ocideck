@@ -1796,6 +1796,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Opmaak': 'Disinn',
   'Afbeelding aanpassen': 'Aġġusta l-istampa',
   'Groot bestand': 'Fajl kbir',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
