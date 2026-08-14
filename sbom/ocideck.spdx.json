@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.4.3+17",
-  "documentNamespace": "https://ocideck.app/spdx/ca7d0ab9-fc4c-51f6-819e-4aa2ea0f35e4",
+  "documentNamespace": "https://ocideck.app/spdx/c978cfbb-e166-5185-816a-6208034d2278",
   "creationInfo": {
-    "created": "2026-08-13T22:32:17.958168Z",
+    "created": "2026-08-14T21:30:46.216557Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -1651,23 +1651,23 @@
     {
       "SPDXID": "SPDXRef-75-intl",
       "name": "intl",
-      "versionInfo": "0.20.2",
+      "versionInfo": "0.20.3",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/intl/versions/0.20.2",
+      "downloadLocation": "https://pub.dev/packages/intl/versions/0.20.3",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
+          "checksumValue": "1ca20c894b1717686a2319b8548763d812bc0aabdac580420a44c5178c57a867"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/intl@0.20.2"
+          "referenceLocator": "pkg:pub/intl@0.20.3"
         }
       ]
     },
@@ -2042,23 +2042,23 @@
     {
       "SPDXID": "SPDXRef-92-matcher",
       "name": "matcher",
-      "versionInfo": "0.12.19",
+      "versionInfo": "0.12.20",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/matcher/versions/0.12.19",
+      "downloadLocation": "https://pub.dev/packages/matcher/versions/0.12.20",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "dc0b7dc7651697ea4ff3e69ef44b0407ea32c487a39fff6a4004fa585e901861"
+          "checksumValue": "31bd099b47c10cd1aeb55146a2d46ce0277630ecef3f7dae54ad7873f36696cd"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/matcher@0.12.19"
+          "referenceLocator": "pkg:pub/matcher@0.12.20"
         }
       ]
     },
@@ -2088,23 +2088,23 @@
     {
       "SPDXID": "SPDXRef-94-meta",
       "name": "meta",
-      "versionInfo": "1.18.0",
+      "versionInfo": "1.19.0",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/meta/versions/1.18.0",
+      "downloadLocation": "https://pub.dev/packages/meta/versions/1.19.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "1741988757a65eb6b36abe716829688cf01910bbf91c34354ff7ec1c3de2b349"
+          "checksumValue": "307249ce4ff29d58a18e97f6345f539382eb9c9c29ecda628900f31de0443dd9"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/meta@1.18.0"
+          "referenceLocator": "pkg:pub/meta@1.19.0"
         }
       ]
     },
@@ -3334,8 +3334,8 @@
       "supplier": "Organization: flutter",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
-      "licenseConcluded": "BSL-1.0",
-      "licenseDeclared": "BSL-1.0",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
       "comment": "Source: sdk."
     },
     {
@@ -3571,69 +3571,69 @@
     {
       "SPDXID": "SPDXRef-159-test",
       "name": "test",
-      "versionInfo": "1.31.0",
+      "versionInfo": "1.31.1",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/test/versions/1.31.0",
+      "downloadLocation": "https://pub.dev/packages/test/versions/1.31.1",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "8d9ceddbab833f180fbefed08afa76d7c03513dfdba87ffcec2718b02bbcbf20"
+          "checksumValue": "ca578dc12bb8b2f40b67b7d3bd2fac4f31c01a6ff7130a14e2597b919934507f"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/test@1.31.0"
+          "referenceLocator": "pkg:pub/test@1.31.1"
         }
       ]
     },
     {
       "SPDXID": "SPDXRef-160-test-api",
       "name": "test_api",
-      "versionInfo": "0.7.11",
+      "versionInfo": "0.7.12",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/test_api/versions/0.7.11",
+      "downloadLocation": "https://pub.dev/packages/test_api/versions/0.7.12",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "949a932224383300f01be9221c39180316445ecb8e7547f70a41a35bf421fb9e"
+          "checksumValue": "2a122cbe059f8b610d3a5415f42e255b6c17b1f21eee1d960f31080237fb4f11"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/test_api@0.7.11"
+          "referenceLocator": "pkg:pub/test_api@0.7.12"
         }
       ]
     },
     {
       "SPDXID": "SPDXRef-161-test-core",
       "name": "test_core",
-      "versionInfo": "0.6.17",
+      "versionInfo": "0.6.18",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/test_core/versions/0.6.17",
+      "downloadLocation": "https://pub.dev/packages/test_core/versions/0.6.18",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "1991d4cfe85d5043241acac92962c3977c8d2f2add1ee73130c7b286417d1d34"
+          "checksumValue": "d2e98ec12998368dc59ddd47ab709f2cd55acd6b66dc7db764455a44082f4bc5"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/test_core@0.6.17"
+          "referenceLocator": "pkg:pub/test_core@0.6.18"
         }
       ]
     },
@@ -3985,23 +3985,23 @@
     {
       "SPDXID": "SPDXRef-177-vector-math",
       "name": "vector_math",
-      "versionInfo": "2.2.0",
-      "supplier": "Organization: google",
-      "downloadLocation": "https://pub.dev/packages/vector_math/versions/2.2.0",
+      "versionInfo": "2.4.2",
+      "supplier": "Organization: flutter",
+      "downloadLocation": "https://pub.dev/packages/vector_math/versions/2.4.2",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "d530bd74fea330e6e364cda7a85019c434070188383e1cd8d9777ee586914c5b"
+          "checksumValue": "f36f9f3be64c6198714492bb455c11056e33e2f85d9a0b676a48301e44fdcf47"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/vector_math@2.2.0"
+          "referenceLocator": "pkg:pub/vector_math@2.4.2"
         }
       ]
     },
@@ -4840,7 +4840,7 @@
     {
       "SPDXID": "SPDXRef-215-flutter",
       "name": "flutter",
-      "versionInfo": "3.44.9",
+      "versionInfo": "3.47.0",
       "supplier": "Organization: flutter",
       "downloadLocation": "https://flutter.dev",
       "filesAnalyzed": false,

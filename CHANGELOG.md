@@ -1293,6 +1293,35 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Toolchain-pin van Flutter 3.44.9 naar 3.47.0 (stable, 2026-08-14).** De
+  laatste stable, uit het officiële kanaal — een beveiligingsproduct hoort niet
+  op een verouderde toolchain te bouwen (zie de harde regel in `CONTRIBUTING.md`
+  en `docs/BUILD.md`). De gebundelde Dart schoof mee van 3.12.2 naar 3.13.0; de
+  `pubspec.yaml`-constraint blijft `^3.12.0`. Elke pin volgde in één commit:
+  `.tool-versions`, `README.md`, `CONTRIBUTING.md`, `CONTRIBUTING_GUIDELINES.md`,
+  `docs/BUILD.md`, `docs/CHECKS.md` (inclusief de *Toolchains of record*-tabel
+  waar `make check-toolchain` op leunt), `docs/DEVELOPMENT_SETUP_GUIDE.md`,
+  `docs/TROUBLESHOOTING_GUIDE(.nl).md`, de `flutter-version`-stappen in beide
+  `.github/workflows/*.yml`, de `ocideck-ci:flutter-<pin>`-imagetags in de drie
+  `.forgejo/workflows/*.yml`, en `assurance/reproduceerbare-builds.md`. Het
+  voorgebakken CI-image herbouwt op de nieuwe tag omdat het zijn Flutter uit
+  `.tool-versions` leest. De SDK pinde zeven pakketten mee — `intl` 0.20.2 →
+  0.20.3, `matcher`, `meta`, de `test`-familie en `vector_math` 2.2.0 → 2.4.2 —
+  dus de SBOM is opnieuw gegenereerd. `flutter pub get` op 3.47.0 schrijft
+  bovendien een `analyzer: exclude:` voor de build- en platformmappen in
+  `analysis_options.yaml`; dat is gedrag van de nieuwe toolchain en is behouden.
+  De Dart 3.13-analyzer bracht met `unawaited_return_in_try_block` vier plekken
+  aan het licht waar een `Future` zonder `await` uit een `try` werd geretourneerd
+  — waardoor de bijbehorende `catch`/`finally` de fout of het opruimen misliep.
+  Alle vier zijn `return await` geworden. De scherpste zat in `_fetchPinned`
+  (`media_fetch_io.dart`): daar draaide `client.close(force: true)` in de
+  `finally` al vóórdat de response-stream gelezen was; nu blijft de client open
+  tot `readCappedMedia` klaar is. Ook `image_service.copyImageToClipboard`
+  (fout werd niet meer tot de beloofde `false` gevangen),
+  `xmpp_session.connect` (`_fail` sloot de transport pas ná de return) en
+  `loadOrCreateDeviceKeys` zijn zo rechtgezet. `dart format` op 3.13 reflowde
+  twaalf bestanden; die staan in een aparte, puur mechanische commit.
+
 - **foutafhandeling: geen stille mislukkingen meer bij openen, importeren,
   opslaan en synchroniseren.** Aanleiding: een `.ocideck` openen via dubbelklik
   deed niets en gaf geen foutmelding. Oorzaak: de ingestelde thuismap stond op

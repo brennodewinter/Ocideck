@@ -74,7 +74,7 @@ Toolchain? parseToolchain(String machineJson) {
 
 /// De versie die `.tool-versions` pint, of null als er geen flutter-regel staat.
 ///
-/// Het formaat is `flutter 3.44.9-stable`; het achtervoegsel is het kanaal van
+/// Het formaat is `flutter 3.47.0-stable`; het achtervoegsel is het kanaal van
 /// asdf en hoort niet bij het versienummer.
 String? parsePin(String toolVersions) {
   for (final raw in const LineSplitter().convert(toolVersions)) {
