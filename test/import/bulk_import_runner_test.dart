@@ -50,15 +50,18 @@ void main() {
     () async {
       final rec = recorder();
       final summary = await runner(rec.write).run([
-        BulkImportItem(bytes: pptxFixture(), name: 'plan.pptx'),
         BulkImportItem(
-          bytes: pptxFixture(titel: 'Anders'),
+          bytes: pptxFixture(titel: 'Plan'),
+          name: 'plan.pptx',
+        ),
+        BulkImportItem(
+          bytes: pptxFixture(titel: 'Plan'),
           name: 'plan.pptx',
         ),
       ], targetDirectory: '/uit');
 
       expect(summary.succeeded, 2);
-      expect(rec.paths, [inUit('plan.md'), inUit('plan-2.md')]);
+      expect(rec.paths, [inUit('Plan.md'), inUit('Plan-2.md')]);
     },
   );
 
@@ -69,13 +72,16 @@ void main() {
       final summary =
           await runner(
             rec.write,
-            existing: {inUit('plan.md'), inUit('plan-2.md')},
+            existing: {inUit('Plan.md'), inUit('Plan-2.md')},
           ).run([
-            BulkImportItem(bytes: pptxFixture(), name: 'plan.pptx'),
+            BulkImportItem(
+              bytes: pptxFixture(titel: 'Plan'),
+              name: 'plan.pptx',
+            ),
           ], targetDirectory: '/uit');
 
       expect(summary.succeeded, 1);
-      expect(rec.paths, [inUit('plan-3.md')]);
+      expect(rec.paths, [inUit('Plan-3.md')]);
     },
   );
 
@@ -83,7 +89,10 @@ void main() {
     final rec = recorder();
     final summary = await runner(rec.write).run([
       BulkImportItem(bytes: corruptFixture(), name: 'kapot.pptx'),
-      BulkImportItem(bytes: pptxFixture(), name: 'goed.pptx'),
+      BulkImportItem(
+        bytes: pptxFixture(titel: 'Goed'),
+        name: 'goed.pptx',
+      ),
     ], targetDirectory: '/uit');
 
     expect(summary.outcomes, hasLength(2));
@@ -92,14 +101,20 @@ void main() {
     expect(summary.outcomes.last.isSuccess, isTrue);
     expect(summary.succeeded, 1);
     expect(summary.failed, 1);
-    expect(rec.paths, [inUit('goed.md')]);
+    expect(rec.paths, [inUit('Goed.md')]);
   });
 
   test('een schrijffout landt op dat ene bestand, niet op de rij', () async {
-    final rec = recorder(failOn: {inUit('een.md')});
+    final rec = recorder(failOn: {inUit('Een.md')});
     final summary = await runner(rec.write).run([
-      BulkImportItem(bytes: pptxFixture(), name: 'een.pptx'),
-      BulkImportItem(bytes: pptxFixture(), name: 'twee.pptx'),
+      BulkImportItem(
+        bytes: pptxFixture(titel: 'Een'),
+        name: 'een.pptx',
+      ),
+      BulkImportItem(
+        bytes: pptxFixture(titel: 'Twee'),
+        name: 'twee.pptx',
+      ),
     ], targetDirectory: '/uit');
 
     expect(summary.failed, 1);
@@ -108,7 +123,7 @@ void main() {
     // de technische message draagt de oorspronkelijke tekst voor het log.
     expect(summary.outcomes.first.failure?.message, contains('schijf vol'));
     expect(summary.outcomes.first.failure?.cause, isNotNull);
-    expect(rec.paths, [inUit('twee.md')]);
+    expect(rec.paths, [inUit('Twee.md')]);
   });
 
   test('stoppen laat de rest ongemoeid en telt hem apart', () async {
@@ -116,16 +131,25 @@ void main() {
     var done = 0;
     final summary = await runner(rec.write).run(
       [
-        BulkImportItem(bytes: pptxFixture(), name: 'een.pptx'),
-        BulkImportItem(bytes: pptxFixture(), name: 'twee.pptx'),
-        BulkImportItem(bytes: pptxFixture(), name: 'drie.pptx'),
+        BulkImportItem(
+          bytes: pptxFixture(titel: 'Een'),
+          name: 'een.pptx',
+        ),
+        BulkImportItem(
+          bytes: pptxFixture(titel: 'Twee'),
+          name: 'twee.pptx',
+        ),
+        BulkImportItem(
+          bytes: pptxFixture(titel: 'Drie'),
+          name: 'drie.pptx',
+        ),
       ],
       targetDirectory: '/uit',
       onFileDone: (_) => done++,
       shouldStop: () => done >= 1,
     );
 
-    expect(rec.paths, [inUit('een.md')]);
+    expect(rec.paths, [inUit('Een.md')]);
     expect(summary.outcomes, hasLength(1));
     // Niet-gedaan is iets anders dan mislukt; de samenvatting mag ze niet op
     // één hoop gooien.

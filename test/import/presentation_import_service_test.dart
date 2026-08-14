@@ -150,11 +150,37 @@ void main() {
     'the deck title falls back to the filename stem when the source is untitled',
     () async {
       final result = await _serviceFor(
-        const SourceDeck(slides: [SourceSlide(index: 0, title: 'X')]),
+        const SourceDeck(slides: [SourceSlide(index: 0, title: '')]),
       ).importBytes(_pptxEnvelope(), filename: 'road/Q3-cijfers.pptx');
       expect(result.deck!.title, 'Q3-cijfers');
     },
   );
+
+  // De zichtbare titel op de eerste dia is wat de gebruiker als de titel van de
+  // presentatie ziet — niet de onzichtbare core.xml-metadata, die vaak leeg is
+  // of een standaardwaarde zoals "PowerPoint Presentation" draagt. Als core.xml
+  // geen titel heeft, gebruiken we de titel van de eerste dia vóór de
+  // bestandsnaam: dat is de titel die de auteur zichtbaar op het titelscherm
+  // zette.
+  test(
+    'the deck title uses the first slide title when core.xml is empty',
+    () async {
+      final result = await _serviceFor(
+        const SourceDeck(slides: [SourceSlide(index: 0, title: 'Q3 Roadmap')]),
+      ).importBytes(_pptxEnvelope(), filename: 'roadmap.pptx');
+      expect(result.deck!.title, 'Q3 Roadmap');
+    },
+  );
+
+  test('core.xml title takes precedence over the first slide title', () async {
+    final result = await _serviceFor(
+      const SourceDeck(
+        title: 'Metadata titel',
+        slides: [SourceSlide(index: 0, title: 'Zichtbare titel')],
+      ),
+    ).importBytes(_pptxEnvelope(), filename: 'demo.pptx');
+    expect(result.deck!.title, 'Metadata titel');
+  });
 
   test('an importer failure is surfaced as the result failure', () async {
     final service = _serviceFor(

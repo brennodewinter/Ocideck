@@ -147,14 +147,14 @@ void main() {
           name: 'plan.pptx',
         ),
         BulkImportItem(
-          bytes: pptxFixture(titel: 'Ander'),
+          bytes: pptxFixture(titel: 'Plan'),
           name: 'plan.pptx',
         ),
       ]);
       await tester.tap(find.text('Importeren'));
       await tester.pumpAndSettle();
 
-      expect(writtenNames(), ['plan-2.md', 'plan.md']);
+      expect(writtenNames(), ['Plan-2.md', 'Plan.md']);
     },
   );
 
