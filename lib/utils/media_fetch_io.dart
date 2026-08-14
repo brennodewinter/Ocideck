@@ -53,7 +53,10 @@ Future<Uint8List> _fetchPinned(String url) async {
     if (response.statusCode != 200) {
       throw _RemoteMediaRefused('HTTP ${response.statusCode}');
     }
-    return readCappedMedia(response, contentLength: response.contentLength);
+    return await readCappedMedia(
+      response,
+      contentLength: response.contentLength,
+    );
   } catch (e) {
     // De aanroeper is een `Image`-widget: die vangt de fout en toont zijn
     // errorBuilder-placeholder. Loggen zodat een geweigerde host niet
