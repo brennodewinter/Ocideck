@@ -260,11 +260,30 @@ class PresentationImportService {
             _builder.analyse(parsed.classified),
             sourceDeck,
             parsed.classified,
-            sourceDeck.title.isNotEmpty ? sourceDeck.title : _stemOf(filename),
+            _deckTitle(sourceDeck, filename),
             _builder,
           ),
         );
     }
+  }
+
+  /// De deck-titel in volgorde van voorkeur: de metadata-titel uit core.xml
+  /// (door de auteur ingesteld, al dan niet), de zichtbare titel op de eerste
+  /// dia (wat de gebruiker als de presentatietitel ziet), of de bestandsnaam
+  /// zonder extensie.
+  ///
+  /// Core.xml is vaak leeg of draagt een standaardwaarde zoals "PowerPoint
+  /// Presentation" die de auteur nooit aanpaste. De zichtbare titel op de
+  /// eerste dia is wat de gebruiker écht als de titel ziet — die mag niet
+  /// stilletjes overgeslagen worden. Pas als ook die ontbreekt, valt de
+  /// bestandsnaam in.
+  String _deckTitle(SourceDeck sourceDeck, String filename) {
+    if (sourceDeck.title.isNotEmpty) return sourceDeck.title;
+    final firstSlideTitle = sourceDeck.slides.isNotEmpty
+        ? sourceDeck.slides.first.title
+        : '';
+    if (firstSlideTitle.isNotEmpty) return firstSlideTitle;
+    return _stemOf(filename);
   }
 
   /// The filename without its directory or extension — the deck-title fallback
