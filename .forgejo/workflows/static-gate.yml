@@ -29,7 +29,7 @@
 # er al in, dus de per-run-installatie vervalt. Alleen de repo-gekoppelde dingen
 # (pub-pakketten en de dartcv OpenCV-build) blijven op `actions/cache`.
 #
-# **Pin-koppeling.** Het image-tag ís de Flutter-pin (`flutter-3.44.9`). Loopt het
+# **Pin-koppeling.** Het image-tag ís de Flutter-pin (`flutter-3.47.0`). Loopt het
 # image achter op `.tool-versions`, dan draagt het een andere Flutter dan de pin
 # en valt `check-toolchain` (dat onverkort binnen `make check-static` meedraait)
 # om — fail-closed, geen stille drift. Een pin-bump werkt daarom `.tool-versions`
@@ -56,7 +56,7 @@ jobs:
   static-gate:
     runs-on: docker
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.44.9
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.0
     steps:
       - uses: actions/checkout@v4
 

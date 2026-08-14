@@ -229,7 +229,7 @@ class XmppSession implements XmppStanzaChannel {
     _reader = _FrameReader(transport.inbound);
     try {
       final auth = await _authenticate();
-      if (auth != null) return _fail(auth); // a SASL/stream failure
+      if (auth != null) return await _fail(auth); // a SASL/stream failure
       final bound = await _bindResource();
       _boundJid = bound;
       _live = true;

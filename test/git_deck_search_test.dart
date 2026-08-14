@@ -134,11 +134,9 @@ De dekking staat op 79 procent.
       // Twee treffers in dezelfde slide: de kop en de regel eronder.
       expect(result.hits, hasLength(2));
       expect(result.hits.every((h) => h.deck == 'jaarplan'), isTrue);
-      expect(
-        result.hits.map((h) => h.slideIndex).toSet(),
-        {1},
-        reason: 'de tweede slide, niet de eerste',
-      );
+      expect(result.hits.map((h) => h.slideIndex).toSet(), {
+        1,
+      }, reason: 'de tweede slide, niet de eerste');
       expect(result.hits.first.slideTitle, "Risico's");
     });
 

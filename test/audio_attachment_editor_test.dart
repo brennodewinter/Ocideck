@@ -88,11 +88,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(updates.single.audioPath, 'media/uitleg.mp3');
-    expect(
-      service.gevraagd,
-      ['/projecten/rapport'],
-      reason: 'de kiezer moet in de projectmap importeren, niet ernaast',
-    );
+    expect(service.gevraagd, [
+      '/projecten/rapport',
+    ], reason: 'de kiezer moet in de projectmap importeren, niet ernaast');
   });
 
   testWidgets('afbreken in het kiesvenster verandert de dia niet', (

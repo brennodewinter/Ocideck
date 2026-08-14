@@ -166,11 +166,9 @@ void main() {
 
       final conflict = result.conflicts.single;
       expect(conflict.mergedIndex, isNotNull);
-      expect(
-        result.merged.slides[conflict.mergedIndex!].bullets,
-        const ['onze tekst'],
-        reason: 'daar staat de voorlopige keuze',
-      );
+      expect(result.merged.slides[conflict.mergedIndex!].bullets, const [
+        'onze tekst',
+      ], reason: 'daar staat de voorlopige keuze');
       // En de andere kant erin wisselen levert een geldig deck op.
       final swapped = [...result.merged.slides];
       swapped[conflict.mergedIndex!] = conflict.theirs!;

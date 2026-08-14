@@ -383,7 +383,7 @@ class ImageService {
       if (path.isEmpty) return false;
       final file = File(path);
       if (!await file.exists()) return false;
-      return copyImageBytesToClipboard(await file.readAsBytes());
+      return await copyImageBytesToClipboard(await file.readAsBytes());
     } catch (e) {
       logWarning('ImageService.copyImageToClipboard: read image file', e);
       return false;

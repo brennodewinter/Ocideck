@@ -125,11 +125,10 @@ void main() {
         descriptors[OpenKatWizardScenarioId.cveExposure]!.inputs,
         contains(OpenKatWizardInputKind.cve),
       );
-      expect(
-        descriptors[OpenKatWizardScenarioId.dataQuality]!.inputs,
-        {OpenKatWizardInputKind.language, OpenKatWizardInputKind.title},
-        reason: 'datakwaliteit heeft geen verzonnen periode of scope nodig',
-      );
+      expect(descriptors[OpenKatWizardScenarioId.dataQuality]!.inputs, {
+        OpenKatWizardInputKind.language,
+        OpenKatWizardInputKind.title,
+      }, reason: 'datakwaliteit heeft geen verzonnen periode of scope nodig');
     });
   });
 

@@ -42,7 +42,7 @@ relies on when it says contributors keep copyright in their own work.)*
 
 ## Prerequisites
 
-- **Flutter 3.44.9** (stable), from the official channel, using the `dart`
+- **Flutter 3.47.0** (stable), from the official channel, using the `dart`
   bundled with it. `.tool-versions` pins it, `make check-toolchain` enforces it,
   and the rule is deliberately strict: the exact version, channel `stable`, and
   the SDK's repository must be `https://github.com/flutter/flutter.git`.

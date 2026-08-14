@@ -98,7 +98,7 @@ Future<CollabDeviceKeys> loadOrCreateDeviceKeys({
   if (stored != null) {
     try {
       final seeds = CollabDeviceSeeds.fromStored(stored);
-      if (seeds.deviceId == deviceId) return seeds.toDeviceKeys();
+      if (seeds.deviceId == deviceId) return await seeds.toDeviceKeys();
     } on FormatException {
       // Corrupt entry: fall through and regenerate.
     }
