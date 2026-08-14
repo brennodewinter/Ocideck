@@ -773,11 +773,11 @@ void main() {
           await host.session.submit(_edit('host', SlideField.title, 'v$i'));
         }
         await host.sync();
-        expect(
-          await store.listSequences(),
-          [4, 5, 6],
-          reason: 'records 1..3 (subsumed by the previous baseline) are gone',
-        );
+        expect(await store.listSequences(), [
+          4,
+          5,
+          6,
+        ], reason: 'records 1..3 (subsumed by the previous baseline) are gone');
       },
     );
 
@@ -902,11 +902,12 @@ void main() {
       }
       await host
           .sync(); // re-baseline #2 arms compaction of {1,2,3}; first pass
-      expect(
-        await store.listSequences(),
-        [3, 4, 5, 6],
-        reason: 'only 2 of the 3 subsumed records went in the first pass',
-      );
+      expect(await store.listSequences(), [
+        3,
+        4,
+        5,
+        6,
+      ], reason: 'only 2 of the 3 subsumed records went in the first pass');
 
       await host.sync(); // second pass clears the tail
       expect(await store.listSequences(), [4, 5, 6]);

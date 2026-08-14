@@ -156,11 +156,9 @@ void main() {
       throwsA(isA<S3ConflictException>()),
     );
 
-    expect(
-      s3.puts.map((put) => put.path),
-      ['decks/cijfers.md'],
-      reason: 'er ging al een asset overheen vóór de botsing',
-    );
+    expect(s3.puts.map((put) => put.path), [
+      'decks/cijfers.md',
+    ], reason: 'er ging al een asset overheen vóór de botsing');
     // En de herkomst mag niet stiekem naar de niet-geschreven versie springen.
     expect(t.tab.s3Origin!.etag, '"oud"');
   });

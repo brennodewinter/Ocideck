@@ -69,11 +69,11 @@ void main() {
       await b.poll();
       await pumpEventQueue();
 
-      expect(
-        bOps.map((o) => (o as RemoveSlide).slideId),
-        ['a', 'b', 'c'],
-        reason: 'delivered strictly in log order',
-      );
+      expect(bOps.map((o) => (o as RemoveSlide).slideId), [
+        'a',
+        'b',
+        'c',
+      ], reason: 'delivered strictly in log order');
 
       await a.dispose();
       await b.dispose();
@@ -172,11 +172,9 @@ void main() {
       await b.poll();
       await pumpEventQueue();
 
-      expect(
-        bOps.map((o) => (o as RemoveSlide).slideId),
-        ['good'],
-        reason: 'the poison record is skipped, the good one still arrives',
-      );
+      expect(bOps.map((o) => (o as RemoveSlide).slideId), [
+        'good',
+      ], reason: 'the poison record is skipped, the good one still arrives');
 
       await a.dispose();
       await b.dispose();

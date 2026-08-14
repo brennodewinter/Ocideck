@@ -355,12 +355,9 @@ void main() {
 
       // Nagekeken: het achtervoegsel hoort dan wég te zijn. Anders draagt elk
       // afgerond rapport voorgoed het stempel "concept" en betekent het niets.
-      final reviewed = await service.export(
-        deckPath(),
-        ExportFormat.pdf,
-        [_png()],
-        metadata: const ExportDocumentMetadata(title: 'Conceptrapport'),
-      );
+      final reviewed = await service.export(deckPath(), ExportFormat.pdf, [
+        _png(),
+      ], metadata: const ExportDocumentMetadata(title: 'Conceptrapport'));
       expect(reviewed.success, isTrue, reason: reviewed.error);
       expect(
         p.basename(reviewed.outputPath!),

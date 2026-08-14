@@ -27,93 +27,92 @@ class Cvss4BaseMetric {
 
 /// The 11 mandatory Base metrics in canonical serialisation order
 /// (AV → AC → AT → PR → UI → VC → VI → VA → SC → SI → SA).
-const List<Cvss4BaseMetric> kCvss4BaseMetrics =
+const List<Cvss4BaseMetric> kCvss4BaseMetrics = [
+  Cvss4BaseMetric('AV', 'Attack Vector', 'Aanvalsvector', [
+    (token: 'N', label: 'Network', dutchLabel: 'Netwerk'),
+    (token: 'A', label: 'Adjacent', dutchLabel: 'Aangrenzend'),
+    (token: 'L', label: 'Local', dutchLabel: 'Lokaal'),
+    (token: 'P', label: 'Physical', dutchLabel: 'Fysiek'),
+  ]),
+  Cvss4BaseMetric('AC', 'Attack Complexity', 'Aanvalscomplexiteit', [
+    (token: 'L', label: 'Low', dutchLabel: 'Laag'),
+    (token: 'H', label: 'High', dutchLabel: 'Hoog'),
+  ]),
+  Cvss4BaseMetric('AT', 'Attack Requirements', 'Aanvalsvereisten', [
+    (token: 'N', label: 'None', dutchLabel: 'Geen'),
+    (token: 'P', label: 'Present', dutchLabel: 'Aanwezig'),
+  ]),
+  Cvss4BaseMetric('PR', 'Privileges Required', 'Vereiste rechten', [
+    (token: 'N', label: 'None', dutchLabel: 'Geen'),
+    (token: 'L', label: 'Low', dutchLabel: 'Laag'),
+    (token: 'H', label: 'High', dutchLabel: 'Hoog'),
+  ]),
+  Cvss4BaseMetric('UI', 'User Interaction', 'Gebruikersinteractie', [
+    (token: 'N', label: 'None', dutchLabel: 'Geen'),
+    (token: 'P', label: 'Passive', dutchLabel: 'Passief'),
+    (token: 'A', label: 'Active', dutchLabel: 'Actief'),
+  ]),
+  Cvss4BaseMetric(
+    'VC',
+    'Confidentiality (Vulnerable System)',
+    'Vertrouwelijkheid (kwetsbaar systeem)',
     [
-      Cvss4BaseMetric('AV', 'Attack Vector', 'Aanvalsvector', [
-        (token: 'N', label: 'Network', dutchLabel: 'Netwerk'),
-        (token: 'A', label: 'Adjacent', dutchLabel: 'Aangrenzend'),
-        (token: 'L', label: 'Local', dutchLabel: 'Lokaal'),
-        (token: 'P', label: 'Physical', dutchLabel: 'Fysiek'),
-      ]),
-      Cvss4BaseMetric('AC', 'Attack Complexity', 'Aanvalscomplexiteit', [
-        (token: 'L', label: 'Low', dutchLabel: 'Laag'),
-        (token: 'H', label: 'High', dutchLabel: 'Hoog'),
-      ]),
-      Cvss4BaseMetric('AT', 'Attack Requirements', 'Aanvalsvereisten', [
-        (token: 'N', label: 'None', dutchLabel: 'Geen'),
-        (token: 'P', label: 'Present', dutchLabel: 'Aanwezig'),
-      ]),
-      Cvss4BaseMetric('PR', 'Privileges Required', 'Vereiste rechten', [
-        (token: 'N', label: 'None', dutchLabel: 'Geen'),
-        (token: 'L', label: 'Low', dutchLabel: 'Laag'),
-        (token: 'H', label: 'High', dutchLabel: 'Hoog'),
-      ]),
-      Cvss4BaseMetric('UI', 'User Interaction', 'Gebruikersinteractie', [
-        (token: 'N', label: 'None', dutchLabel: 'Geen'),
-        (token: 'P', label: 'Passive', dutchLabel: 'Passief'),
-        (token: 'A', label: 'Active', dutchLabel: 'Actief'),
-      ]),
-      Cvss4BaseMetric(
-        'VC',
-        'Confidentiality (Vulnerable System)',
-        'Vertrouwelijkheid (kwetsbaar systeem)',
-        [
-          (token: 'H', label: 'High', dutchLabel: 'Hoog'),
-          (token: 'L', label: 'Low', dutchLabel: 'Laag'),
-          (token: 'N', label: 'None', dutchLabel: 'Geen'),
-        ],
-      ),
-      Cvss4BaseMetric(
-        'VI',
-        'Integrity (Vulnerable System)',
-        'Integriteit (kwetsbaar systeem)',
-        [
-          (token: 'H', label: 'High', dutchLabel: 'Hoog'),
-          (token: 'L', label: 'Low', dutchLabel: 'Laag'),
-          (token: 'N', label: 'None', dutchLabel: 'Geen'),
-        ],
-      ),
-      Cvss4BaseMetric(
-        'VA',
-        'Availability (Vulnerable System)',
-        'Beschikbaarheid (kwetsbaar systeem)',
-        [
-          (token: 'H', label: 'High', dutchLabel: 'Hoog'),
-          (token: 'L', label: 'Low', dutchLabel: 'Laag'),
-          (token: 'N', label: 'None', dutchLabel: 'Geen'),
-        ],
-      ),
-      Cvss4BaseMetric(
-        'SC',
-        'Confidentiality (Subsequent System)',
-        'Vertrouwelijkheid (vervolgsysteem)',
-        [
-          (token: 'N', label: 'None', dutchLabel: 'Geen'),
-          (token: 'L', label: 'Low', dutchLabel: 'Laag'),
-          (token: 'H', label: 'High', dutchLabel: 'Hoog'),
-        ],
-      ),
-      Cvss4BaseMetric(
-        'SI',
-        'Integrity (Subsequent System)',
-        'Integriteit (vervolgsysteem)',
-        [
-          (token: 'N', label: 'None', dutchLabel: 'Geen'),
-          (token: 'L', label: 'Low', dutchLabel: 'Laag'),
-          (token: 'H', label: 'High', dutchLabel: 'Hoog'),
-        ],
-      ),
-      Cvss4BaseMetric(
-        'SA',
-        'Availability (Subsequent System)',
-        'Beschikbaarheid (vervolgsysteem)',
-        [
-          (token: 'N', label: 'None', dutchLabel: 'Geen'),
-          (token: 'L', label: 'Low', dutchLabel: 'Laag'),
-          (token: 'H', label: 'High', dutchLabel: 'Hoog'),
-        ],
-      ),
-    ];
+      (token: 'H', label: 'High', dutchLabel: 'Hoog'),
+      (token: 'L', label: 'Low', dutchLabel: 'Laag'),
+      (token: 'N', label: 'None', dutchLabel: 'Geen'),
+    ],
+  ),
+  Cvss4BaseMetric(
+    'VI',
+    'Integrity (Vulnerable System)',
+    'Integriteit (kwetsbaar systeem)',
+    [
+      (token: 'H', label: 'High', dutchLabel: 'Hoog'),
+      (token: 'L', label: 'Low', dutchLabel: 'Laag'),
+      (token: 'N', label: 'None', dutchLabel: 'Geen'),
+    ],
+  ),
+  Cvss4BaseMetric(
+    'VA',
+    'Availability (Vulnerable System)',
+    'Beschikbaarheid (kwetsbaar systeem)',
+    [
+      (token: 'H', label: 'High', dutchLabel: 'Hoog'),
+      (token: 'L', label: 'Low', dutchLabel: 'Laag'),
+      (token: 'N', label: 'None', dutchLabel: 'Geen'),
+    ],
+  ),
+  Cvss4BaseMetric(
+    'SC',
+    'Confidentiality (Subsequent System)',
+    'Vertrouwelijkheid (vervolgsysteem)',
+    [
+      (token: 'N', label: 'None', dutchLabel: 'Geen'),
+      (token: 'L', label: 'Low', dutchLabel: 'Laag'),
+      (token: 'H', label: 'High', dutchLabel: 'Hoog'),
+    ],
+  ),
+  Cvss4BaseMetric(
+    'SI',
+    'Integrity (Subsequent System)',
+    'Integriteit (vervolgsysteem)',
+    [
+      (token: 'N', label: 'None', dutchLabel: 'Geen'),
+      (token: 'L', label: 'Low', dutchLabel: 'Laag'),
+      (token: 'H', label: 'High', dutchLabel: 'Hoog'),
+    ],
+  ),
+  Cvss4BaseMetric(
+    'SA',
+    'Availability (Subsequent System)',
+    'Beschikbaarheid (vervolgsysteem)',
+    [
+      (token: 'N', label: 'None', dutchLabel: 'Geen'),
+      (token: 'L', label: 'Low', dutchLabel: 'Laag'),
+      (token: 'H', label: 'High', dutchLabel: 'Hoog'),
+    ],
+  ),
+];
 
 /// The importance of one CIA dimension for a scope object, mapped 1:1 onto a
 /// CVSS 4.0 Environmental Security Requirement token (`X`/`L`/`M`/`H`).

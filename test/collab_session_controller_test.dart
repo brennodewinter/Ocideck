@@ -212,13 +212,9 @@ void main() {
         'renamed',
         reason: 'remote applied',
       );
-      expect(
-        guest.deck.slides.single.tableRows,
-        [
-          ['cell'],
-        ],
-        reason: 'local non-syncable field preserved through the merge',
-      );
+      expect(guest.deck.slides.single.tableRows, [
+        ['cell'],
+      ], reason: 'local non-syncable field preserved through the merge');
 
       await host.dispose();
       await guest.dispose();
