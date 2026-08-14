@@ -748,9 +748,18 @@ Color _onAppBar(BuildContext context) {
 /// naast de TLP-chip. Verving het losse "i"-icoontje (#1479): dat was te klein
 /// voor iets wat de metadata én het afspeelgedrag van de hele presentatie
 /// regelt, en een info-"i" leest als "hier valt iets te lézen" terwijl je hier
-/// juist instelt. Een tekstlabel plus een instel-icoon maakt de knop groter en
-/// meteen begrijpelijk; de kleur volgt _onAppBar zodat hij ook op een profiel
-/// met een lichte hoofdkleur leesbaar blijft (dezelfde reden als de chip, #780).
+/// juist instelt.
+///
+/// De volledige term "Presentatie-eigenschappen" maakte er echter een lang blok
+/// van dat met de decktitel concurreerde. Het label is nu het korte "Opmaak" —
+/// de plek waar de gebruiker de look (kleuren, lettertype, logo) verwacht, zoals
+/// de nieuw-deck-dialoog het ook aankondigt — en de volledige naam staat in de
+/// tooltip, zodat de bredere lading (afspeelgedrag, metadata) vindbaar blijft.
+/// Vorm en maat volgen bewust de [_TlpChip] ernaast (rand op 24%, radius 6,
+/// dezelfde padding en teksthoogte): de twee worden zo één net paar in plaats
+/// van twee losse blokjes. Het tandwiel leest als "hier stel je in", en de kleur
+/// volgt _onAppBar zodat de knop ook op een profiel met een lichte hoofdkleur
+/// leesbaar blijft (dezelfde reden als de chip, #780).
 class _PresentationPropertiesButton extends StatelessWidget {
   final VoidCallback onPressed;
 
@@ -760,18 +769,42 @@ class _PresentationPropertiesButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final onBar = _onAppBar(context);
-    return TextButton.icon(
-      onPressed: onPressed,
-      icon: const Icon(Icons.tune, size: 16),
-      label: Text(l10n.d('Presentatie-eigenschappen')),
-      style: TextButton.styleFrom(
-        foregroundColor: onBar,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        minimumSize: Size.zero,
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-        side: BorderSide(color: onBar.withValues(alpha: 0.24)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+    return Tooltip(
+      message: l10n.d('Presentatie-eigenschappen'),
+      child: TextButton(
+        onPressed: onPressed,
+        style: TextButton.styleFrom(
+          foregroundColor: onBar,
+          // Dezelfde metriek als de TLP-chip ernaast, zodat ze even hoog zijn.
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+          minimumSize: Size.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          // De chip is een kale Container (dichtheid 0); een TextButton erft op
+          // desktop de compacte adaptivePlatformDensity en zou dan een paar pixel
+          // afwijken. Vastzetten op standaard maakt de hoogte puur padding-gedreven
+          // en daarmee gelijk aan de chip — precies de naad die dit paar sluit.
+          visualDensity: VisualDensity.standard,
+          side: BorderSide(color: onBar.withValues(alpha: 0.24)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // 16px, niet 14: de hoogte van een chip wordt door zijn hoogste kind
+            // bepaald, en de TLP-chip ernaast is 16px hoog door zijn dropdown-
+            // pijltje. Een 14px-tandwiel zou de knop ~2px lager maken en het
+            // paar net uit één lijn trekken.
+            Icon(Icons.settings, size: 16, color: onBar),
+            const SizedBox(width: 5),
+            Text(
+              l10n.d('Opmaak'),
+              style: const TextStyle(
+                fontSize: 11.5,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
