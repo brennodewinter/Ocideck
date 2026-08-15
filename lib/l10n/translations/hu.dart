@@ -1778,6 +1778,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Opmaak': 'Kinézet',
   'Afbeelding aanpassen': 'Kép beállítása',
   'Groot bestand': 'Nagy fájl',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':

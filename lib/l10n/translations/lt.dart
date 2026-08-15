@@ -1781,6 +1781,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Opmaak': 'Išvaizda',
   'Afbeelding aanpassen': 'Derinti paveikslėlį',
   'Groot bestand': 'Didelis failas',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':

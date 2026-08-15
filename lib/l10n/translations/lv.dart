@@ -1773,6 +1773,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Opmaak': 'Noformējums',
   'Afbeelding aanpassen': 'Pielāgot attēlu',
   'Groot bestand': 'Liels fails',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':

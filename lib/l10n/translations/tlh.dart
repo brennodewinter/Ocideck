@@ -1749,6 +1749,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Opmaak': 'nab',
   'Afbeelding aanpassen': 'nagh luch',
   'Groot bestand': 'tIn mIch',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':

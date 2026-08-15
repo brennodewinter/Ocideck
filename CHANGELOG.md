@@ -1293,6 +1293,16 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **bovenbalk: de presentatie-eigenschappen-knop heet nu kort "Opmaak".** De
+  volledige term "Presentatie-eigenschappen" maakte er een lang blok van dat met
+  de decktitel concurreerde. Het zichtbare label is ingekort tot "Opmaak" — de
+  plek waar de gebruiker de look (kleuren, lettertype, logo) verwacht, zoals de
+  nieuw-deck-dialoog het ook aankondigt — en de volledige naam staat nu in de
+  tooltip zodat de bredere lading (afspeelgedrag, metadata) vindbaar blijft. De
+  knop volgt in vorm en maat bewust de TLP-chip ernaast (tandwiel-icoon in plaats
+  van schuifjes, rand op 24%, radius 6), zodat de twee één net paar worden.
+  Vervolg op #1479.
+
 - **Toolchain-pin van Flutter 3.44.9 naar 3.47.0 (stable, 2026-08-14).** De
   laatste stable, uit het officiële kanaal — een beveiligingsproduct hoort niet
   op een verouderde toolchain te bouwen (zie de harde regel in `CONTRIBUTING.md`

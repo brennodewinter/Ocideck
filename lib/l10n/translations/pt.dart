@@ -1803,6 +1803,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Opmaak': 'Formato',
   'Afbeelding aanpassen': 'Ajustar imagem',
   'Groot bestand': 'Arquivo grande',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':

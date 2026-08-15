@@ -729,6 +729,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Opmaak': 'Formato',
   'Afbeelding aanpassen': 'Regola immagine',
   'Groot bestand': 'File grande',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':

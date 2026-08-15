@@ -1796,6 +1796,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Opmaak': 'Форматиране',
   'Afbeelding aanpassen': 'Настрой изображение',
   'Groot bestand': 'Голям файл',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':

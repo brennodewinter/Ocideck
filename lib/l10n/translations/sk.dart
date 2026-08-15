@@ -1781,6 +1781,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Opmaak': 'Vzhľad',
   'Afbeelding aanpassen': 'Upraviť obrázok',
   'Groot bestand': 'Veľký súbor',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':

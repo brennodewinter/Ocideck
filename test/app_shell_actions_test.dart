@@ -124,12 +124,12 @@ void main() {
     await pumpShell(tester);
 
     // Sinds #1479 draagt de knop een zichtbaar label in de AppBar-titel in
-    // plaats van alleen een "i" — dat is de kern van de wijziging. Zoek 'm dáár
-    // (de dialoogtitel gebruikt dezelfde tekst, maar die verschijnt pas ná het
-    // openen).
+    // plaats van alleen een "i" — dat is de kern van de wijziging. Het label is
+    // sindsdien ingekort tot "Opmaak" (de volledige naam staat in de tooltip).
+    // Zoek 'm dáár, aan het korte label.
     final button = find.descendant(
       of: find.byType(AppBar),
-      matching: find.widgetWithText(TextButton, 'Presentatie-eigenschappen'),
+      matching: find.widgetWithText(TextButton, 'Opmaak'),
     );
     expect(button, findsOneWidget);
 

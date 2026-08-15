@@ -915,6 +915,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Opmaak': 'Design',
   'Groot bestand': 'Large file',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':
       'This file is {grootte} in size. That is more than the recommended limit of {limiet}. Importing may be slow and use a lot of memory — on a smaller device the app may freeze.',
