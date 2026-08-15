@@ -81,6 +81,20 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(keynote-import): ook bij Keynote kwam een gespiegelde of bijgesneden
+  afbeelding onbewerkt binnen. Keynote bewaart het spiegelen als twee vlaggen in
+  de geometrie van de afbeelding, en het bijsnijden als een apart masker: de
+  afbeelding staat groter op de dia dan wat je ziet, en het masker is het gat
+  waar ze doorheen kijkt. Van geen van beide werd iets gelezen. Beide gaan nu
+  mee in dezelfde geometrie die de import in de pixels bakt, in dezelfde
+  volgorde als bij PPTX en ODP — het masker blijkt in het kader van de bron te
+  staan, niet in dat van het gespiegelde beeld. Eén ding wijkt af en dat is nu
+  ook een expliciete schakelaar in het recept: Keynote honoreert de
+  EXIF-orientatietag wél, dus daar telt de geometrie vanaf de rechtgezette foto
+  en mag de hoek die de decoder al inbakte er niet af. De veldnummers en de
+  volgorde komen uit een deck dat Keynote zelf schreef, vergeleken met de PDF
+  die Keynote van datzelfde deck exporteert; acht spiegel- en uitsnedevarianten
+  komen er kwadrant voor kwadrant hetzelfde uit.
 - fix(import): een gespiegelde of bijgesneden afbeelding kwam ongespiegeld en
   onbijgesneden binnen — bij PPTX en ODP. De import las tot nu toe alleen de
   rotatie van een afbeelding; het spiegelen (`flipH`/`flipV` bij PowerPoint,
