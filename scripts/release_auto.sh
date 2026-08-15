@@ -553,6 +553,9 @@ busy_workspace_procs() {
 }
 assert_workspace_idle() {
   STEP="werkboom vrij"
+  # Alleen fase 1 bouwt schoon. --resume slaat die fase over en is bovendien de
+  # herstelroute: daar een nieuwe drempel opwerpen helpt niemand.
+  [ -z "$RESUME_TAG" ] || return 0
   local busy
   busy="$(busy_workspace_procs || true)"
   [ -n "$busy" ] || return 0
