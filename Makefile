@@ -398,6 +398,16 @@ check-secrets:
 #
 # Override the target: `make dast DAST_URL=https://example.org/ocideck/`.
 # Without it, the local bundle is built, served on DAST_PORT, and torn down.
+#
+# DAST_WORKDIR: `/zap/wrk` does not exist in the image, so mounting the config
+# *into* it makes the daemon create that parent root-owned — after which ZAP,
+# which runs as uid 1000, cannot write its generated Automation Framework plan
+# and reports "Unable to copy yaml file to /zap/wrk/zap.yaml". The scan still
+# ran, but a red line at the top of a release run is exactly what teaches people
+# to skim past output. A tmpfs owned by the zap user gives it a writable working
+# directory; the read-only config mounts on top of it.
+DAST_WORKDIR = --tmpfs /zap/wrk:uid=1000,gid=1000,mode=0755 \
+	  -v "$(PWD)/zap:/zap/wrk/conf:ro"
 DAST_PORT ?= 8091
 DAST_URL ?=
 dast:
@@ -418,12 +428,12 @@ ifeq ($(strip $(DAST_URL)),)
 	@cd build/web && python3 -m http.server $(DAST_PORT) >/dev/null 2>&1 & echo $$! > /tmp/ocideck-dast.pid
 	@sleep 2
 	-docker run --rm --add-host=host.docker.internal:host-gateway \
-	  -v "$(PWD)/zap:/zap/wrk/conf:ro" zaproxy/zap-stable \
+	  $(DAST_WORKDIR) zaproxy/zap-stable \
 	  zap-baseline.py -t http://host.docker.internal:$(DAST_PORT) -c conf/baseline.conf -I
 	@kill $$(cat /tmp/ocideck-dast.pid) 2>/dev/null || true; rm -f /tmp/ocideck-dast.pid
 	@echo "-- local server stopped --"
 else
-	-docker run --rm -v "$(PWD)/zap:/zap/wrk/conf:ro" zaproxy/zap-stable \
+	-docker run --rm $(DAST_WORKDIR) zaproxy/zap-stable \
 	  zap-baseline.py -t "$(DAST_URL)" -c conf/baseline.conf -I
 endif
 
