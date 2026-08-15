@@ -131,15 +131,17 @@ SourceImage? parsePic(
   // graad (10800000 = 180°). Bak de rotatie in de bytes bij import, zodat de
   // rest van de pipeline (weergave, opslaan, dedup) de afbeelding correct ziet.
   final rot60000 = xfrm?.getAttribute('rot');
-  final rotDegrees = rot60000 == null
-      ? 0.0
-      : (int.tryParse(rot60000) ?? 0) / 60000.0;
-  final imageBytes = rotDegrees % 360 != 0
-      ? bakeImportRotation(Uint8List.fromList(bytes), rotDegrees, resolved)
-      : Uint8List.fromList(bytes);
+  final geometry = ImportImageGeometry(
+    clockwiseDegrees: rot60000 == null
+        ? 0
+        : (int.tryParse(rot60000) ?? 0) / 60000.0,
+  );
+  final imageBytes = Uint8List.fromList(bytes);
 
   return SourceImage(
-    bytes: imageBytes,
+    bytes: geometry.isIdentity
+        ? imageBytes
+        : bakeImportGeometry(imageBytes, geometry, resolved),
     ext: _extFromPath(resolved),
     name: name ?? p.url.basename(resolved),
   );

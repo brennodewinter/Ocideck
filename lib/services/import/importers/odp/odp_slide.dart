@@ -276,13 +276,15 @@ SourceImage? _imageFromHref(OdpContext ctx, XmlElement img, XmlElement frame) {
   // ODF telt tegen de klok in (getoetst tegen wat LibreOffice zelf rendert),
   // `copyRotate` met de klok mee — vandaar het minteken.
   final transform = _attr(frame, 'transform');
-  final rotDegrees = _rotationFromTransform(transform);
-  final imageBytes = rotDegrees % 360 != 0
-      ? bakeImportRotation(Uint8List.fromList(bytes), -rotDegrees, path)
-      : Uint8List.fromList(bytes);
+  final geometry = ImportImageGeometry(
+    clockwiseDegrees: -_rotationFromTransform(transform),
+  );
+  final imageBytes = Uint8List.fromList(bytes);
 
   return SourceImage(
-    bytes: imageBytes,
+    bytes: geometry.isIdentity
+        ? imageBytes
+        : bakeImportGeometry(imageBytes, geometry, path),
     ext: _extFromPath(path),
     name: path.split('/').last,
   );
