@@ -99,7 +99,7 @@ SPEC CHECKSUMS:
   file_picker: 7584aae6fa07a041af2b36a2655122d42f578c1a
   flutter_secure_storage_darwin: acdb3f316ed05a3e68f856e0353b133eec373a23
   flutter_webrtc: 7dd2a2ad0e9c96dad0ae96c42d9a7786d96d8be6
-  FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
+  FlutterMacOS: c232990155153907050900a2e175c7773903ba4e
   package_info_plus: f0052d280d17aa382b932f399edf32507174e870
   pasteboard: b594eaf838d930b276d7a35a44a32b4f489170cb
   quill_native_bridge_macos: 2b005cb56902bb740e0cd9620aa399dfac6b4882
@@ -112,6 +112,6 @@ SPEC CHECKSUMS:
   webview_flutter_wkwebview: 8ebf4fded22593026f7dbff1fbff31ea98573c8d
   window_manager: b729e31d38fb04905235df9ea896128991cad99e
 
-PODFILE CHECKSUM: add282c337a6743eb0524f0ff4c64e73f15f6ba2
+PODFILE CHECKSUM: 9df572969aeafbb94867b646fc4ebd2fde19abc9
 
 COCOAPODS: 1.16.2
