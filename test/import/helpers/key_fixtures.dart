@@ -189,6 +189,65 @@ List<int> rotatedImagePayload(int dataId, double degrees) => [
   ...bytesField(11, varintField(1, dataId)),
 ];
 
+/// A `TSD.GeometryArchive`: position (field 1), size (field 2), flags
+/// (field 3) and angle (field 4, degrees counter-clockwise).
+List<int> geometryPayload({
+  double x = 0,
+  double y = 0,
+  double width = 0,
+  double height = 0,
+  int flags = 3,
+  double degrees = 0,
+}) => [
+  ...bytesField(1, [...floatField(1, x), ...floatField(2, y)]),
+  ...bytesField(2, [...floatField(1, width), ...floatField(2, height)]),
+  ...varintField(3, flags),
+  ...floatField(4, degrees),
+];
+
+/// A `TSD.ImageArchive` payload: drawable super (field 1) → geometry
+/// (field 1), the mask reference (field 5) and the image data (field 11).
+///
+/// [flags] are the geometry flags — bit 1 and 2 mean "position and size are
+/// set", bit 4 mirrors horizontally and bit 8 vertically.
+List<int> geometryImagePayload({
+  required int dataId,
+  double degrees = 0,
+  int flags = 3,
+  double width = 0,
+  double height = 0,
+  int? maskObjectId,
+}) => [
+  ...bytesField(
+    1,
+    bytesField(
+      1,
+      geometryPayload(
+        width: width,
+        height: height,
+        flags: flags,
+        degrees: degrees,
+      ),
+    ),
+  ),
+  if (maskObjectId != null) ...bytesField(5, varintField(1, maskObjectId)),
+  ...bytesField(11, varintField(1, dataId)),
+];
+
+/// A `TSD.MaskArchive` payload: drawable super (field 1) → geometry (field 1)
+/// holding the visible window, measured inside the image's own frame.
+List<int> maskPayload({
+  required double x,
+  required double y,
+  required double width,
+  required double height,
+}) => [
+  ...bytesField(
+    1,
+    bytesField(1, geometryPayload(x: x, y: y, width: width, height: height)),
+  ),
+];
+
 /// A ChartDrawableArchive payload: empty DrawableArchive super (field 1) and
 /// the TSCH.ChartArchive extension (field 10000, length-delimited).
 List<int> chartDrawablePayload(List<int> chartArchive) => [
