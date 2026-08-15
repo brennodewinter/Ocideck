@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import '../../../../../utils/image_resize.dart' show rotateImageBytes;
+import '../../../../../utils/image_resize.dart'
+    show ImportCrop, ImportImageGeometry, bakeImportGeometry, importCrop;
 import '../../../models/source_chart.dart';
 import '../../../models/source_image.dart';
 import '../../../models/source_table.dart';
@@ -411,63 +412,121 @@ class DrawableReader {
 
     final seen = visited ?? <int>{};
     final dataIds = _collectImageDataIds(o, seen);
-    // Keynote bewaart rotatie in de IWA-transform (niet in EXIF): drawable
-    // super (field 1) → transform (field 1) → rotation (field 4, float32
-    // in graden). Zonder dit staat een afbeelding die in Keynote 180° is
-    // gedraaid op de kop in OciDeck.
-    final rotation = _drawableRotation(o);
+    // Keynote bewaart draaien, spiegelen en bijsnijden in de IWA-structuur en
+    // niet in de afbeelding zelf; bak ze in de pixels, want OciDeck zet een
+    // afbeelding zonder eigen geometrie op de dia.
+    final geometry = _drawableGeometry(o);
     for (final dataId in dataIds) {
       final fileName = doc.dataFileName(dataId);
       if (fileName == null) continue;
       final bytes = ctx!.readPartBytes('Data/$fileName');
       if (bytes != null && bytes.isNotEmpty) {
-        // Keynote telt zijn rotatie tégen de klok in en vanaf de foto zoals
-        // hij hem zelf toont — dus mét de EXIF-orientatie erin gebakken, want
-        // Keynote honoreert die tag (getoetst tegen een door Keynote zelf
-        // geëxporteerde PDF). `img.decodeImage` bakt die tag ook in, dus daar
-        // hoeft niets voor te gebeuren; alleen het teken moet om, want
-        // `copyRotate` draait met de klok mee.
         final raw = Uint8List.fromList(bytes);
-        final rotated = rotation != 0 ? rotateImageBytes(raw, -rotation) : raw;
         images.add(
-          SourceImage(bytes: rotated, ext: _ext(fileName), name: fileName),
+          SourceImage(
+            bytes: geometry.isIdentity
+                ? raw
+                : bakeImportGeometry(raw, geometry, fileName),
+            ext: _ext(fileName),
+            name: fileName,
+          ),
         );
       }
     }
     return images;
   }
 
-  /// Lees de rotatie (in graden) uit de IWA-transform van [o]. De transform
-  /// zit in drawable super (field 1) → transform (field 1) → rotation
-  /// (field 4, float32). Geneste drawables (via referenties) worden ook
-  /// gecheckt. Geeft 0 bij afwezigheid of onleesbare rotatie.
-  double _drawableRotation(IwaObject o) {
-    // Direct op dit drawable.
-    final rot = _readRotationField(o);
-    if (rot != null) return rot;
-    // Via referenties naar geneste image-like objecten.
-    for (final f in o.message.fields.keys) {
-      final sub = o.message.message(f);
-      if (sub == null) continue;
-      final refId = sub.varint(1);
-      if (refId == null) continue;
-      final target = doc.resolveReference(o, refId);
-      if (target != null && _imageLikeTypeIds.contains(target.typeId)) {
-        final nested = _readRotationField(target);
-        if (nested != null) return nested;
-      }
+  /// De geometrie die Keynote op de afbeelding(en) van [o] legt.
+  ///
+  /// Alles op één na zit in de IWA-transform: drawable super (field 1) →
+  /// geometry (field 1), met de hoek op field 4 (float32, graden tégen de klok
+  /// in) en het spiegelen in de vlaggen op field 3 — bit 4 horizontaal, bit 8
+  /// verticaal, naast de bits 1 en 2 die alleen zeggen dat positie en maat
+  /// gevuld zijn. De uitsnede staat apart, zie [_maskCrop].
+  ///
+  /// Keynote honoreert de EXIF-orientatietag, dus al deze maten tellen vanaf de
+  /// rechtgezette foto — precies wat `img.decodeImage` al oplevert.
+  ImportImageGeometry _drawableGeometry(IwaObject o) {
+    final holder = _geometryHolder(o);
+    final geometry = holder == null ? null : _readGeometry(holder);
+    if (holder == null || geometry == null) {
+      return const ImportImageGeometry(sourceHonoursExif: true);
     }
-    return 0;
+    final flags = geometry.varint(3) ?? 0;
+    return ImportImageGeometry(
+      crop: _maskCrop(holder, geometry),
+      flipHorizontal: flags & _flipHorizontalFlag != 0,
+      flipVertical: flags & _flipVerticalFlag != 0,
+      // Keynote telt tégen de klok in, `bakeImportGeometry` met de klok mee.
+      clockwiseDegrees: -(geometry.float32(4) ?? 0),
+      sourceHonoursExif: true,
+    );
   }
 
-  /// Lees field 1 → field 1 → field 4 (rotation) als float32, of null.
-  double? _readRotationField(IwaObject o) {
-    final superMsg = o.message.message(1);
-    if (superMsg == null) return null;
-    final transform = superMsg.message(1);
-    if (transform == null) return null;
-    return transform.float32(4);
+  /// De uitsnede uit het masker van [image], als fractie van de bron.
+  ///
+  /// `TSD.ImageArchive` field 5 wijst naar een `TSD.MaskArchive` (type 3006)
+  /// waarvan de geometrie het zichtbare venster is — positie en maat gemeten
+  /// binnen het kader van de afbeelding zelf, vóór spiegelen en draaien. De
+  /// afbeelding staat dus groter op de dia dan wat je ziet: het masker is het
+  /// gat waar ze doorheen kijkt.
+  ///
+  /// Een masker in een andere vorm dan een rechthoek (Keynote kan door een
+  /// figuur maskeren) levert hier zijn omhullende rechthoek op; die vorm valt
+  /// in een dia-afbeelding van OciDeck niet weer te geven.
+  ImportCrop? _maskCrop(IwaObject image, ProtoMessage geometry) {
+    final refId = image.message.message(_maskField)?.varint(1);
+    if (refId == null) return null;
+    final mask = doc.resolveReference(image, refId);
+    if (mask == null || mask.typeId != _maskTypeId) return null;
+    final window = _readGeometry(mask);
+    if (window == null) return null;
+
+    final width = geometry.message(2)?.float32(1) ?? 0;
+    final height = geometry.message(2)?.float32(2) ?? 0;
+    final visibleWidth = window.message(2)?.float32(1) ?? 0;
+    final visibleHeight = window.message(2)?.float32(2) ?? 0;
+    if (width <= 0 || height <= 0) return null;
+    if (visibleWidth <= 0 || visibleHeight <= 0) return null;
+
+    final left = window.message(1)?.float32(1) ?? 0;
+    final top = window.message(1)?.float32(2) ?? 0;
+    return importCrop(
+      left: left / width,
+      top: top / height,
+      right: (width - left - visibleWidth) / width,
+      bottom: (height - top - visibleHeight) / height,
+    );
   }
+
+  /// Het object waarvan de geometrie geldt voor de afbeelding(en) van [o]:
+  /// [o] zelf wanneer die er een draagt, anders het eerste geneste
+  /// image-achtige object dat er wel een heeft.
+  IwaObject? _geometryHolder(IwaObject o) {
+    if (_readGeometry(o) != null) return o;
+    for (final f in o.message.fields.keys) {
+      final refId = o.message.message(f)?.varint(1);
+      if (refId == null) continue;
+      final target = doc.resolveReference(o, refId);
+      if (target == null || !_imageLikeTypeIds.contains(target.typeId)) {
+        continue;
+      }
+      if (_readGeometry(target) != null) return target;
+    }
+    return null;
+  }
+
+  /// De `TSD.GeometryArchive` van [o]: drawable super (field 1) → geometry
+  /// (field 1), of `null` wanneer die ontbreekt.
+  ProtoMessage? _readGeometry(IwaObject o) => o.message.message(1)?.message(1);
+
+  /// `TSD.ImageArchive` field 5 → het masker; `TSD.MaskArchive` is type 3006.
+  static const _maskField = 5;
+  static const _maskTypeId = 3006;
+
+  /// Vlaggen in `TSD.GeometryArchive` field 3.
+  static const _flipHorizontalFlag = 4;
+  static const _flipVerticalFlag = 8;
 
   /// Object types that may contain image `DataReference` data.
   static const _imageLikeTypeIds = {2022, 2023, 3005, 6003, 6004, 6005, 6247};

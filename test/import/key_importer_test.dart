@@ -905,4 +905,230 @@ void main() {
     expect(imported.getPixel(10, 35).r, greaterThan(200));
     expect(imported.getPixel(10, 5).b, greaterThan(200));
   });
+
+  group('vormgeometrie op een TSD.ImageArchive', () {
+    // De verwachtingen komen uit een deck dat Keynote zelf schreef: een PPTX
+    // met acht spiegel- en uitsnedevarianten door Keynote laten openen en
+    // opslaan, en het resultaat vergelijken met de PDF die Keynote van datzelfde
+    // deck exporteert. Daaruit komen ook de veldnummers — geometry-vlaggen op
+    // field 3 (bit 4 horizontaal, bit 8 verticaal) en het masker op field 5.
+    const dataId = 42;
+    const fileName = 'photo.png';
+
+    Future<img.Image> importedImage(
+      List<int> imageArchive, {
+      List<int>? mask,
+      int maskId = 20,
+    }) async {
+      final records = [
+        fx.record(
+          2,
+          100,
+          fx.packageMetadataPayload(
+            dataInfos: [
+              fx.dataInfoPayload(
+                identifier: dataId,
+                preferredFileName: fileName,
+              ),
+            ],
+          ),
+        ),
+        fx.record(10, 3005, imageArchive),
+        if (mask != null) fx.record(maskId, 3006, mask),
+        fx.recordWithRefs(
+          1,
+          1,
+          fx.slidePayload(
+            titleRefIndex: 0,
+            bodyRefIndex: 0,
+            drawableRefIndices: [0],
+          ),
+          [10],
+        ),
+      ].expand((e) => e).toList();
+
+      final bytes = fx.zip({
+        'Index/slide-1.iwa': fx.iwaStream(records),
+        'Data/$fileName': _quadrantPng(8),
+      });
+
+      final deck = (await KeyImporter().importBytes(
+        bytes,
+        path: 'geometrie.key',
+      )).okValue!;
+      final decoded = img.decodeImage(deck.slides.single.images.single.bytes);
+      expect(decoded, isNotNull);
+      return decoded!;
+    }
+
+    test('vlag 4 spiegelt links en rechts, vlag 8 boven en onder', () async {
+      final mirrored = await importedImage(
+        fx.geometryImagePayload(dataId: dataId, flags: 3 | 4),
+      );
+      expect(_quadrantAt(mirrored, 0, 0), 'groen');
+      expect(_quadrantAt(mirrored, 1, 0), 'rood');
+      expect(_quadrantAt(mirrored, 0, 1), 'geel');
+      expect(_quadrantAt(mirrored, 1, 1), 'blauw');
+
+      final flipped = await importedImage(
+        fx.geometryImagePayload(dataId: dataId, flags: 3 | 8),
+      );
+      expect(_quadrantAt(flipped, 0, 0), 'blauw');
+      expect(_quadrantAt(flipped, 1, 0), 'geel');
+      expect(_quadrantAt(flipped, 0, 1), 'rood');
+      expect(_quadrantAt(flipped, 1, 1), 'groen');
+    });
+
+    test('het masker snijdt weg wat erbuiten valt', () async {
+      // De afbeelding staat 320x480 op de dia en het venster is de rechter-
+      // onderhoek daarvan: 25% van links en 50% van boven vallen weg. Precies
+      // wat Keynote van `srcRect l="25000" t="50000"` maakt.
+      final cropped = await importedImage(
+        fx.geometryImagePayload(
+          dataId: dataId,
+          width: 320,
+          height: 480,
+          maskObjectId: 20,
+        ),
+        mask: fx.maskPayload(x: 80, y: 240, width: 240, height: 240),
+      );
+      expect([cropped.width, cropped.height], [6, 4]);
+      expect(_pixelName(cropped, 4, 2), 'geel');
+      expect(_pixelName(cropped, 0, 2), 'blauw');
+    });
+
+    test('het masker telt vanaf de bron, vóór het spiegelen', () async {
+      // Keynote schrijft bij een gespiegelde uitsnede hetzelfde venster als bij
+      // een ongespiegelde — het masker zit dus in het kader van de bron. Van
+      // links een kwart weg laat rood 2px en groen 4px over; ná het spiegelen
+      // staat groen links en beslaat het twee derde.
+      final cropped = await importedImage(
+        fx.geometryImagePayload(
+          dataId: dataId,
+          width: 320,
+          height: 240,
+          flags: 3 | 4,
+          maskObjectId: 20,
+        ),
+        mask: fx.maskPayload(x: 80, y: 0, width: 240, height: 240),
+      );
+      expect([cropped.width, cropped.height], [6, 8]);
+      expect(_pixelName(cropped, 0, 0), 'groen');
+      expect(
+        _pixelName(cropped, 3, 0),
+        'groen',
+        reason: 'op de middelste kolom scheiden de twee volgordes zich',
+      );
+      expect(_pixelName(cropped, 5, 0), 'rood');
+    });
+
+    test('een masker dat de hele afbeelding toont snijdt niets weg', () async {
+      final untouched = await importedImage(
+        fx.geometryImagePayload(
+          dataId: dataId,
+          width: 240,
+          height: 240,
+          maskObjectId: 20,
+        ),
+        mask: fx.maskPayload(x: 0, y: 0, width: 240, height: 240),
+      );
+      expect([untouched.width, untouched.height], [8, 8]);
+      expect(_quadrantAt(untouched, 0, 0), 'rood');
+    });
+  });
+
+  test('Keynote honoreert de EXIF-tag, dus die telt niet dubbel', () async {
+    // Een natief in Keynote geplaatste foto van 80x160 met de tag "een
+    // kwartslag met de klok mee" krijgt daar natuurlijke maat 160x80: Keynote
+    // meet zijn geometrie in het rechtgezette kader. De decoder zet de foto ook
+    // recht, dus er mag niets van de hoek af — anders draait hij terug.
+    const dataId = 42;
+    const fileName = 'photo.jpg';
+    final original = img.Image(width: 40, height: 20);
+    for (var y = 0; y < 20; y++) {
+      for (var x = 0; x < 40; x++) {
+        original.setPixelRgb(x, y, x < 20 ? 255 : 0, 0, x < 20 ? 0 : 255);
+      }
+    }
+    original.exif.imageIfd.orientation = 6; // 90° met de klok mee
+    final jpegBytes = Uint8List.fromList(img.encodeJpg(original, quality: 100));
+
+    final records = [
+      fx.record(
+        2,
+        100,
+        fx.packageMetadataPayload(
+          dataInfos: [
+            fx.dataInfoPayload(identifier: dataId, preferredFileName: fileName),
+          ],
+        ),
+      ),
+      // Geen eigen draaiing: alleen de EXIF-hoek hoort te blijven staan.
+      fx.record(
+        10,
+        3005,
+        fx.geometryImagePayload(dataId: dataId, flags: 3 | 4),
+      ),
+      fx.recordWithRefs(
+        1,
+        1,
+        fx.slidePayload(
+          titleRefIndex: 0,
+          bodyRefIndex: 0,
+          drawableRefIndices: [0],
+        ),
+        [10],
+      ),
+    ].expand((e) => e).toList();
+
+    final bytes = fx.zip({
+      'Index/slide-1.iwa': fx.iwaStream(records),
+      'Data/$fileName': jpegBytes,
+    });
+
+    final deck = (await KeyImporter().importBytes(
+      bytes,
+      path: 'exif.key',
+    )).okValue!;
+    final imported = img.decodeImage(deck.slides.single.images.single.bytes);
+    expect(imported, isNotNull);
+    expect(
+      [imported!.width, imported.height],
+      [20, 40],
+      reason: 'de EXIF-kwartslag blijft staan; hem terugdraaien geeft 40x20',
+    );
+  });
+}
+
+/// Een afbeelding met vier herkenbare kwadranten: rood linksboven, groen
+/// rechtsboven, blauw linksonder, geel rechtsonder.
+Uint8List _quadrantPng(int size) {
+  final image = img.Image(width: size, height: size);
+  for (var y = 0; y < size; y++) {
+    for (var x = 0; x < size; x++) {
+      final left = x < size / 2;
+      final color = y < size / 2
+          ? (left ? const [255, 0, 0] : const [0, 255, 0])
+          : (left ? const [0, 0, 255] : const [255, 255, 0]);
+      image.setPixelRgb(x, y, color[0], color[1], color[2]);
+    }
+  }
+  return Uint8List.fromList(img.encodePng(image));
+}
+
+/// De kleurnaam midden in het kwadrant ([col], [row]) van een 2x2-indeling.
+String _quadrantAt(img.Image image, int col, int row) => _pixelName(
+  image,
+  (image.width * (2 * col + 1) / 4).floor(),
+  (image.height * (2 * row + 1) / 4).floor(),
+);
+
+String _pixelName(img.Image image, int x, int y) {
+  final pixel = image.getPixel(x, y);
+  final (r, g, b) = (pixel.r > 127, pixel.g > 127, pixel.b > 127);
+  if (r && g) return 'geel';
+  if (r) return 'rood';
+  if (g) return 'groen';
+  if (b) return 'blauw';
+  return 'onbekend (${pixel.r}, ${pixel.g}, ${pixel.b})';
 }

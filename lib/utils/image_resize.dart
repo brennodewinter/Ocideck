@@ -251,6 +251,7 @@ class ImportImageGeometry {
     this.flipHorizontal = false,
     this.flipVertical = false,
     this.clockwiseDegrees = 0,
+    this.sourceHonoursExif = false,
   });
 
   /// Wat er van de bron wegvalt, of `null` als de hele afbeelding meedoet.
@@ -264,6 +265,17 @@ class ImportImageGeometry {
 
   /// De draaiing met de klok mee, in graden, geteld vanaf de ruwe bron.
   final double clockwiseDegrees;
+
+  /// Of het bronprogramma de EXIF-orientatietag van een foto honoreert, en
+  /// deze geometrie dus telt vanaf de rechtgezette foto in plaats van vanaf de
+  /// ruwe pixels.
+  ///
+  /// PowerPoint en Impress honoreren de tag niet; Keynote wel — een natief
+  /// geplaatste foto van 80×160 met de tag "een kwartslag met de klok mee"
+  /// krijgt daar natuurlijke maat 160×80, en zijn masker en hoek worden in dat
+  /// rechtgezette kader gemeten. `img.decodeImage` zet de foto óók recht, dus
+  /// bij Keynote klopt precies wat de decoder al deed en hoeft er niets af.
+  final bool sourceHonoursExif;
 
   /// True wanneer er niets te bakken valt en de bronbytes ongemoeid kunnen
   /// blijven.
@@ -283,12 +295,14 @@ class ImportImageGeometry {
 /// spiegelen, dan draaien. Andersom draaien-dan-spiegelen levert bij een hoek
 /// die geen veelvoud van 180° is een zichtbaar ander beeld op.
 ///
-/// Zowel PowerPoint als Impress negeren de EXIF-orientatietag van een foto. Een
-/// auteur die zijn liggend opgeslagen cameraopname rechtop wilde hebben,
-/// draaide hem daar dus met de hand goed, en al zijn geometrie telt vanaf de
-/// ruwe pixels. `img.decodeImage` bakt de EXIF-orientatie juist wél alvast in,
-/// dus die gaat er hier eerst weer af — anders zou de uitsnede een gedraaide
-/// hoek van de foto wegsnijden en de foto twee keer draaien.
+/// PowerPoint en Impress negeren de EXIF-orientatietag van een foto. Een auteur
+/// die zijn liggend opgeslagen cameraopname rechtop wilde hebben, draaide hem
+/// daar dus met de hand goed, en al zijn geometrie telt vanaf de ruwe pixels.
+/// `img.decodeImage` bakt de EXIF-orientatie juist wél alvast in, dus die gaat
+/// er hier eerst weer af — anders zou de uitsnede een gedraaide hoek van de
+/// foto wegsnijden en de foto twee keer draaien. Voor een bron die de tag wél
+/// honoreert staat [ImportImageGeometry.sourceHonoursExif] aan en blijft de
+/// bake van de decoder staan.
 ///
 /// Er wordt altijd opnieuw gecodeerd, ook als er per saldo niets verandert:
 /// dan verdwijnt de EXIF-tag uit de bytes en tonen ook renderers die geen EXIF
@@ -303,7 +317,9 @@ Uint8List bakeImportGeometry(
   try {
     final decoded = img.decodeImage(bytes);
     if (decoded == null) return bytes;
-    final baked = jpegExifRotationDegrees(bytes);
+    final baked = geometry.sourceHonoursExif
+        ? 0
+        : jpegExifRotationDegrees(bytes);
     var image = baked == 0
         ? decoded
         : img.copyRotate(decoded, angle: 360 - baked);
@@ -349,26 +365,4 @@ Uint8List _encodeLike(img.Image image, String path) {
       ? img.encodeGif(image)
       : img.encodePng(image);
   return Uint8List.fromList(encoded);
-}
-
-/// Roteer [bytes] met [angleDegrees] en re-encodeer. Keynote bewaart de
-/// rotatie van een afbeelding in de IWA-transform (niet in EXIF), dus bij
-/// import staan afbeeldingen met een 180°-rotatie anders op de kop. Alleen
-/// veelvouden van 90° worden ondersteund — andere hoeken komen zelden voor
-/// in presentaties en OciDeck heeft geen vrij-rotatie-rendering.
-Uint8List rotateImageBytes(Uint8List bytes, double angleDegrees) {
-  final normalized = angleDegrees.round() % 360;
-  if (normalized == 0) return bytes;
-  try {
-    final decoded = img.decodeImage(bytes);
-    if (decoded == null) return bytes;
-    final rotated = img.copyRotate(decoded, angle: normalized);
-    final isJpeg = bytes.length > 1 && bytes[0] == 0xFF && bytes[1] == 0xD8;
-    return Uint8List.fromList(
-      isJpeg ? img.encodeJpg(rotated, quality: 95) : img.encodePng(rotated),
-    );
-  } on Object catch (e) {
-    logWarning('rotateImageBytes: rotate failed', e);
-    return bytes;
-  }
 }
