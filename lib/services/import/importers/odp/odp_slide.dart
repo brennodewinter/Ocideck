@@ -270,17 +270,11 @@ SourceImage? _imageFromHref(OdpContext ctx, XmlElement img, XmlElement frame) {
   final path = ctx.resolveHref(href);
   final bytes = ctx.readPartBytes(path);
   if (bytes == null) return null;
-
-  // ODF slaat rotatie op in `draw:transform="rotate (<radialen>)"` op het
-  // frame. Bak de rotatie in de bytes bij import, net als de PPTX-importer.
-  // ODF telt tegen de klok in (getoetst tegen wat LibreOffice zelf rendert),
-  // `copyRotate` met de klok mee — vandaar het minteken.
-  final transform = _attr(frame, 'transform');
-  final geometry = ImportImageGeometry(
-    clockwiseDegrees: -_rotationFromTransform(transform),
-  );
   final imageBytes = Uint8List.fromList(bytes);
 
+  // Bak wat Impress met de afbeelding doet in de bytes, net als de
+  // PPTX-importer: OciDeck zet hem zonder eigen geometrie op de dia.
+  final geometry = _geometry(ctx, frame, imageBytes);
   return SourceImage(
     bytes: geometry.isIdentity
         ? imageBytes
@@ -288,6 +282,91 @@ SourceImage? _imageFromHref(OdpContext ctx, XmlElement img, XmlElement frame) {
     ext: _extFromPath(path),
     name: path.split('/').last,
   );
+}
+
+/// De geometrie die Impress op [frame] legt: de draaiing uit `draw:transform`
+/// op het frame zelf, het spiegelen en bijsnijden uit zijn grafische stijl.
+///
+/// ODF telt zijn rotatie tegen de klok in (getoetst tegen wat LibreOffice zelf
+/// rendert) en `bakeImportGeometry` met de klok mee — vandaar het minteken.
+ImportImageGeometry _geometry(
+  OdpContext ctx,
+  XmlElement frame,
+  Uint8List bytes,
+) {
+  final props = ctx.graphicProperties(_drawStyleName(frame));
+  final mirror = (props == null ? null : _attr(props, 'mirror')) ?? '';
+  return ImportImageGeometry(
+    crop: _clipCrop(props, bytes),
+    // `horizontal` spiegelt om de verticale as, en de varianten
+    // `horizontal-on-odd`/`-on-even` doen dat afhankelijk van het paginanummer
+    // — een onderscheid dat een dia niet kent, dus die spiegelen gewoon mee.
+    flipHorizontal: mirror.contains('horizontal'),
+    flipVertical: mirror.contains('vertical'),
+    clockwiseDegrees: -_rotationFromTransform(_attr(frame, 'transform')),
+  );
+}
+
+/// De uitsnede uit `fo:clip="rect(boven, rechts, onder, links)"`.
+///
+/// ODF meet die vier lengtes af tegen de natuurlijke afmeting van de
+/// afbeelding — het pixelformaat gedeeld door haar eigen resolutie — en niet
+/// tegen het kader waarin ze staat. Zonder die maat valt de uitsnede niet te
+/// duiden, en dan snijden we liever niets weg.
+ImportCrop? _clipCrop(XmlElement? props, Uint8List bytes) {
+  final clip = props == null ? null : _attr(props, 'clip');
+  if (clip == null) return null;
+  final rect = RegExp(r'rect\s*\(([^)]*)\)').firstMatch(clip);
+  if (rect == null) return null;
+  final sides = rect
+      .group(1)!
+      .split(RegExp(r'[,\s]+'))
+      .where((s) => s.isNotEmpty)
+      .toList();
+  if (sides.length != 4) return null;
+  final natural = imageNaturalSizeCm(bytes);
+  if (natural == null) return null;
+  return importCrop(
+    top: _lengthCm(sides[0]) / natural.height,
+    right: _lengthCm(sides[1]) / natural.width,
+    bottom: _lengthCm(sides[2]) / natural.height,
+    left: _lengthCm(sides[3]) / natural.width,
+  );
+}
+
+/// De `draw:style-name` van [frame]. Een frame draagt vaak ook een
+/// `presentation:style-name`; alleen de eerste wijst naar de grafische stijl
+/// waarin het spiegelen en bijsnijden staat.
+String? _drawStyleName(XmlElement frame) {
+  for (final a in frame.attributes) {
+    if (a.name.local == 'style-name' && a.name.prefix == 'draw') {
+      return a.value;
+    }
+  }
+  return null;
+}
+
+/// Lees een ODF-lengte in centimeters.
+///
+/// LibreOffice schrijft cm, maar de norm staat elke XSL-eenheid toe — en juist
+/// bij `fo:clip` is het verschil tussen millimeters en centimeters het verschil
+/// tussen een nette uitsnede en een weggesneden afbeelding. Een waarde zonder
+/// eenheid, `auto` of iets onbekends levert 0 op: dan valt die zijde weg uit de
+/// uitsnede in plaats van er een verzonnen maat op los te laten.
+double _lengthCm(String value) {
+  final match = RegExp(r'^(-?[\d.]+)([a-z]*)$').firstMatch(value.trim());
+  if (match == null) return 0;
+  final number = double.tryParse(match.group(1)!) ?? 0;
+  return switch (match.group(2)) {
+    'cm' || '' => number,
+    'mm' => number / 10,
+    'in' => number * 2.54,
+    'pt' => number * 2.54 / 72,
+    'pc' => number * 2.54 / 6,
+    // ODF's pixel is een schermpixel; LibreOffice rekent hem als 1/96 inch.
+    'px' => number * 2.54 / 96,
+    _ => 0,
+  };
 }
 
 /// Parse `draw:transform="rotate (<radialen>)"` en return graden, of 0.

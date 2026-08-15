@@ -17,6 +17,8 @@ class OdpContext {
   final Archive archive;
 
   Map<String, (double, double)>? _pageSizes;
+  Map<String, XmlElement>? _graphicProperties;
+  final _parsed = <String, XmlDocument?>{};
 
   String? readPart(String path) {
     final bytes = readPartBytes(path);
@@ -33,10 +35,44 @@ class OdpContext {
     return null;
   }
 
+  /// Het geparseerde XML-onderdeel op [path], of `null` als het ontbreekt.
+  ///
+  /// De boom blijft bewaard: `content.xml` wordt tijdens één import door de
+  /// dia-lus, de stijlen en het thema opgevraagd, en dat mag geen tweede
+  /// volledige parse van het grootste onderdeel kosten.
   XmlDocument? readXml(String path) {
-    final src = readPart(path);
-    if (src == null) return null;
-    return parseXmlSafe(src);
+    return _parsed.putIfAbsent(path, () {
+      final src = readPart(path);
+      if (src == null) return null;
+      return parseXmlSafe(src);
+    });
+  }
+
+  /// De `style:graphic-properties` bij een `draw:style-name`, of `null`.
+  ///
+  /// Impress zet wat het met een afbeelding doet — spiegelen (`style:mirror`)
+  /// en bijsnijden (`fo:clip`) — niet op het `draw:frame` zelf maar in de
+  /// grafische stijl waar het frame naar wijst. Die staat als automatische
+  /// stijl in `content.xml`, of als benoemde stijl in `styles.xml`.
+  XmlElement? graphicProperties(String? styleName) {
+    if (styleName == null) return null;
+    _graphicProperties ??= _loadGraphicProperties();
+    return _graphicProperties![styleName];
+  }
+
+  Map<String, XmlElement> _loadGraphicProperties() {
+    final result = <String, XmlElement>{};
+    for (final part in const ['content.xml', 'styles.xml']) {
+      final doc = readXml(part);
+      if (doc == null) continue;
+      for (final style in descendantsLocal(doc, 'style')) {
+        final name = _attr(style, 'name');
+        if (name == null || result.containsKey(name)) continue;
+        final props = childLocal(style, 'graphic-properties');
+        if (props != null) result[name] = props;
+      }
+    }
+    return result;
   }
 
   /// Normalise an `xlink:href` to a package-root-relative path.
