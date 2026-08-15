@@ -174,7 +174,7 @@ The web build has limitations due to browser constraints:
 
 ### What are the system requirements for OciDeck?
 Desktop version:
-- macOS: Recent version with Apple Silicon or Intel support
+- macOS: 12 (Monterey) or newer, Apple Silicon or Intel
 - Windows: Windows 10 or newer
 - Linux: Modern distribution with GTK environment
 - Minimum RAM: 4GB (recommended 8GB+)

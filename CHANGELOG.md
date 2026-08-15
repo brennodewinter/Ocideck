@@ -183,6 +183,20 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- chore(macos): de ondergrens van de macOS-app gaat van 10.15 (Catalina) naar
+  12.0 (Monterey). Dat is geen eigen keuze maar de vloer van de vastgezette
+  toolchain: Flutter 3.47.0 draagt een migratie die `macos/Podfile` en
+  `Runner.xcodeproj` bij elke macOS-bouw zélf herschrijft en daarbij "Updating
+  minimum macOS deployment target to 12.0" meldt. Die drie bestanden stonden
+  daardoor onopgemerkt gewijzigd in de werkboom; niet meecommitten betekent dat
+  elke bouw ze opnieuw verandert en dat het ingecheckte Xcode-project niet meer
+  klopt met de toolchain waarop we bouwen. Geen enkele afhankelijkheid vraagt om
+  12.0 — de hoogste eis onder de pods is 10.15 — dus terugdraaien zou alleen
+  kunnen door de Flutter-pin te laten vervallen, en dat botst met de regel dat we
+  op de laatste stable bouwen. Gevolg voor gebruikers: wie nog op macOS 10.15 of
+  11 zit, kan de nieuwe macOS-app niet meer draaien. De systeemeisen in de FAQ en
+  de ontwikkelgids noemden tot nu toe alleen "een recente versie" en zijn nu
+  concreet gemaakt.
 - ci(linux-gate): draai de suite alleen post-merge, niet ook per PR (#1450)
 - FILE_FORMAT afstemmen op verliesvrije Marp-rondgang
 - Marp-opmaak verliesvrij behouden en overal renderen (#1436, #1437)

@@ -13,7 +13,7 @@ Setting up a proper development environment is crucial for contributing to OciDe
 ### System Requirements
 
 - **Operating System**: 
-  - macOS (recent versions with Apple Silicon or Intel support)
+  - macOS 12 (Monterey) or newer, Apple Silicon or Intel
   - Windows 10 or newer
   - Linux (modern distributions with GTK environment)
 
