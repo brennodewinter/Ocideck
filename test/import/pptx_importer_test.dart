@@ -606,7 +606,9 @@ void main() {
     // En de tag mag niet blijven staan, anders draait een EXIF-lezende
     // renderer er nog een kwartslag overheen.
     expect(
-      jpegExifRotationDegrees(result.okValue!.slides.single.images.single.bytes),
+      jpegExifRotationDegrees(
+        result.okValue!.slides.single.images.single.bytes,
+      ),
       0,
     );
   });

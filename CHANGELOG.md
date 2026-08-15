@@ -81,6 +81,22 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(pptx-import): foto's met een EXIF-orientatie kwamen een kwartslag naar
+  rechts gedraaid binnen. PowerPoint negeert de EXIF-tag van een cameraopname,
+  dus een auteur die zijn foto rechtop wilde hebben, draaide hem daar met de
+  hand goed — dat staat als `rot` op de `<a:xfrm>` van de afbeelding, geteld
+  vanaf de ruwe pixels. De decoder van de import bakt die EXIF-orientatie juist
+  wél alvast in, waarna de `rot` er nog eens overheen ging: twee kwartslagen in
+  plaats van één. De import trekt de al gebakken hoek nu weer af, en codeert bij
+  een `rot` altijd opnieuw zodat de tag uit de bytes verdwijnt en ook de PDF- en
+  HTML-export dezelfde afbeelding tonen.
+- fix(afbeeldingen): `bakeJpegOrientation` deed al die tijd niets. De functie
+  vroeg de orientatie op ná het decoderen, maar de decoder bakt die zelf al in
+  de pixels en wist de tag — de controle was dus altijd onwaar. Een JPEG met een
+  orientatie-tag ging daardoor ongewijzigd het project in: goed in de app en de
+  HTML-export (die lezen de tag), liggend in de PDF-export (die sluit de bytes
+  ongewijzigd in). De tag wordt nu uit de ruwe bytes gelezen. `ImageService` had
+  een eigen kopie van dezelfde functie met dezelfde fout; er is nog één plek.
 - fix(html-export): het presentatielogo kwam niet mee in de zelfstandige
   HTML-export. In de app, de beamer en de PDF/PPTX ligt het stijlprofiel-logo op
   elke dia, maar de HTML-dia-export kende alleen het documentlogo van de

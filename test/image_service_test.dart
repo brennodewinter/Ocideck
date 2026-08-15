@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
@@ -326,42 +327,50 @@ void main() {
     });
   });
 
-  group('EXIF-orientatie bakken bij import', () {
-    test('een JPEG met orientatie 3 (180°) wordt geroteerd en de tag wordt '
-        'gewist', () async {
-      // Maak een kleine afbeelding met een herkenbaar patroon: pixel (0,0)
-      // is rood, pixel (w-1,h-1) is blauw. Na 180° rotatie moet pixel (0,0)
-      // blauw zijn.
+  group('EXIF-orientatie bij import', () {
+    test('de renderer past de orientatie toe — daarom raakt de import de '
+        'bytes niet aan', () async {
+      // Dit is de aanname waarop staat dat de import een JPEG ongemoeid laat:
+      // de decoder van Flutter draait hem zelf recht. Zou dat ooit veranderen,
+      // dan valt deze test en niet stilletjes de weergave van elke staande
+      // telefoonfoto. (Alle exports rasteren via diezelfde decoder; de
+      // HTML-export decodeert met het image-pakket, dat de tag ook inbakt.)
       final original = img.Image(width: 4, height: 2);
-      original.setPixelRgb(0, 0, 255, 0, 0); // linksboven = rood
-      original.setPixelRgb(3, 1, 0, 0, 255); // rechtsonder = blauw
-      original.exif.imageIfd.orientation = 3; // 180°
+      original.exif.imageIfd.orientation = 6; // 90° met de klok mee
       final jpegBytes = Uint8List.fromList(img.encodeJpg(original));
 
-      // Sla op als tijdelijk bestand en importeer in het project.
-      final src = File(p.join(tmp.path, 'rotated.jpg'))
-        ..writeAsBytesSync(jpegBytes);
-      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+      final codec = await ui.instantiateImageCodec(jpegBytes);
+      final frame = await codec.getNextFrame();
 
-      final imported = await service.importIntoDeck(
-        src.path,
-        projectPath: project.path,
-      );
-
-      // De geïmporteerde afbeelding moet de orientatie-tag kwijt zijn.
-      final outBytes = File(p.join(project.path, imported)).readAsBytesSync();
-      final decoded = img.decodeImage(outBytes);
-      expect(decoded, isNotNull);
       expect(
-        decoded!.exif.imageIfd.hasOrientation,
-        isFalse,
-        reason: 'de orientatie-tag moet zijn gewist na het bakken',
+        [frame.image.width, frame.image.height],
+        [2, 4],
+        reason: 'een liggende 4x2 met orientatie 6 hoort staand te renderen',
       );
-      // Na 180° rotatie moet pixel (0,0) blauw zijn (was rood).
-      final px = decoded.getPixel(0, 0);
-      expect(px.r, 0);
-      expect(px.b, greaterThan(200), reason: 'pixel (0,0) moet blauw zijn');
     });
+
+    test(
+      'een JPEG met een orientatie-tag gaat byte-voor-byte het project in',
+      () async {
+        final original = img.Image(width: 4, height: 2);
+        original.setPixelRgb(0, 0, 255, 0, 0);
+        original.exif.imageIfd.orientation = 3; // 180°
+        final jpegBytes = Uint8List.fromList(img.encodeJpg(original));
+        final src = File(p.join(tmp.path, 'rotated.jpg'))
+          ..writeAsBytesSync(jpegBytes);
+        final project = Directory(p.join(tmp.path, 'project'))..createSync();
+
+        final imported = await service.importIntoDeck(
+          src.path,
+          projectPath: project.path,
+        );
+
+        // Het bestand van de gebruiker gaat ongewijzigd mee: geen hercodering,
+        // geen generatieverlies, en de EXIF blijft van hem.
+        final outBytes = File(p.join(project.path, imported)).readAsBytesSync();
+        expect(outBytes, jpegBytes);
+      },
+    );
 
     test('een JPEG zonder orientatie-tag gaat ongewijzigd door', () async {
       final original = img.Image(width: 2, height: 2);
