@@ -5,48 +5,45 @@ import 'package:image/image.dart' as img;
 import 'package:ocideck/utils/image_resize.dart';
 
 void main() {
-  group('bakeJpegOrientation', () {
-    test(
-      'een JPEG met orientatie 3 (180°) wordt geroteerd en de tag gewist',
-      () {
-        final original = img.Image(width: 4, height: 2);
-        original.setPixelRgb(0, 0, 255, 0, 0); // linksboven = rood
-        original.setPixelRgb(3, 1, 0, 0, 255); // rechtsonder = blauw
-        original.exif.imageIfd.orientation = 3; // 180°
-        final jpeg = Uint8List.fromList(img.encodeJpg(original));
+  group('jpegExifRotationDegrees', () {
+    Uint8List jpegWithOrientation(int orientation) {
+      final image = img.Image(width: 4, height: 2);
+      image.exif.imageIfd.orientation = orientation;
+      return Uint8List.fromList(img.encodeJpg(image));
+    }
 
-        final baked = bakeJpegOrientation(jpeg);
-        final decoded = img.decodeImage(baked);
-
-        expect(decoded, isNotNull);
-        expect(
-          decoded!.exif.imageIfd.hasOrientation,
-          isFalse,
-          reason: 'orientatie-tag moet zijn gewist',
-        );
-        final px = decoded.getPixel(0, 0);
-        expect(px.r, 0);
-        expect(px.b, greaterThan(200), reason: 'pixel (0,0) moet blauw zijn');
-      },
-    );
-
-    test('een JPEG zonder orientatie-tag gaat ongewijzigd door', () {
-      final jpeg = Uint8List.fromList(
-        img.encodeJpg(img.Image(width: 2, height: 2)),
-      );
-      expect(bakeJpegOrientation(jpeg), jpeg);
+    test('leest de rotatie uit de tag, ook al bakt de decoder hem weg', () {
+      expect(jpegExifRotationDegrees(jpegWithOrientation(1)), 0);
+      expect(jpegExifRotationDegrees(jpegWithOrientation(3)), 180);
+      expect(jpegExifRotationDegrees(jpegWithOrientation(6)), 90);
+      expect(jpegExifRotationDegrees(jpegWithOrientation(8)), 270);
     });
 
-    test('een PNG gaat ongewijzigd door', () {
-      final png = Uint8List.fromList(
-        img.encodePng(img.Image(width: 2, height: 2)),
-      );
-      expect(bakeJpegOrientation(png), png);
+    test('van een spiegel-orientatie telt alleen het rotatiedeel', () {
+      expect(jpegExifRotationDegrees(jpegWithOrientation(2)), 0);
+      expect(jpegExifRotationDegrees(jpegWithOrientation(4)), 180);
+      expect(jpegExifRotationDegrees(jpegWithOrientation(5)), 270);
+      expect(jpegExifRotationDegrees(jpegWithOrientation(7)), 90);
     });
 
-    test('geen afbeelding gaat ongewijzigd door', () {
-      final notImage = Uint8List.fromList([0, 1, 2, 3]);
-      expect(bakeJpegOrientation(notImage), notImage);
+    test('een JPEG zonder tag, een PNG en rommel geven 0', () {
+      expect(
+        jpegExifRotationDegrees(
+          Uint8List.fromList(img.encodeJpg(img.Image(width: 2, height: 2))),
+        ),
+        0,
+      );
+      expect(
+        jpegExifRotationDegrees(
+          Uint8List.fromList(img.encodePng(img.Image(width: 2, height: 2))),
+        ),
+        0,
+      );
+      expect(
+        jpegExifRotationDegrees(Uint8List.fromList([0xFF, 0xD8, 0, 1])),
+        0,
+      );
+      expect(jpegExifRotationDegrees(Uint8List(0)), 0);
     });
   });
 

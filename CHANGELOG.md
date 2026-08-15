@@ -81,6 +81,25 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(import): een gedraaide foto kwam scheef binnen — bij alle drie de
+  presentatieformaten. PowerPoint en Impress negeren de EXIF-orientatietag van
+  een cameraopname, dus een auteur die zijn foto rechtop wilde hebben, draaide
+  hem daar met de hand goed; die hoek telt vanaf de ruwe pixels. De decoder van
+  de import bakt de EXIF-orientatie juist wél alvast in, waarna die hoek er nog
+  eens overheen ging: twee kwartslagen in plaats van één. De import trekt de al
+  gebakken hoek nu weer af. Bij ODP kwam daar een tweede fout bovenop: ODF telt
+  zijn `rotate` tegen de klok in, de import draaide met de klok mee — dus een
+  halve slag verkeerd. Keynote had die tweede fout ook, met zijn eigen
+  IWA-rotatie. Alle drie zijn getoetst tegen wat het bronprogramma zélf van
+  hetzelfde bestand maakt: PowerPoint via een geëxporteerde PDF, Impress via
+  `soffice --convert-to pdf`, en Keynote via een deck dat Keynote zelf schreef.
+- refactor(afbeeldingen): `bakeJpegOrientation` is geschrapt. De functie vroeg
+  de orientatie op ná het decoderen, maar de decoder bakt die zelf al in de
+  pixels en wist de tag — de controle was dus altijd onwaar en de functie deed
+  nooit iets. Repareren zou het bestand van de gebruiker gaan hercoderen zonder
+  reden: de app rendert via Flutter, dat de tag zelf toepast, PDF- en
+  PPTX-export bouwen op gerasterde dia's uit diezelfde renderer, en de
+  HTML-export bakt de tag ook in. Een test pint die aanname nu vast.
 - fix(html-export): het presentatielogo kwam niet mee in de zelfstandige
   HTML-export. In de app, de beamer en de PDF/PPTX ligt het stijlprofiel-logo op
   elke dia, maar de HTML-dia-export kende alleen het documentlogo van de

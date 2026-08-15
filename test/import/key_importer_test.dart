@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image/image.dart' as img;
 import 'package:ocideck/services/import/core/result.dart';
 import 'package:ocideck/services/import/importers/keynote/key_importer.dart';
 import 'package:ocideck/services/import/models/body_block.dart';
@@ -847,4 +850,59 @@ void main() {
       expect(deck.slides[2].title, 'Gamma');
     },
   );
+
+  test('draait een afbeelding met de IWA-rotatie tegen de klok in', () async {
+    // Keynote telt zijn rotatie tegen de klok in — getoetst door een deck met
+    // Keynote zelf te maken, `rotation` op 90 te zetten en de door Keynote
+    // geëxporteerde PDF te vergelijken. Met de klok mee (de oude fout) staat
+    // de afbeelding een halve slag verkeerd.
+    const dataId = 42;
+    const fileName = 'photo.jpg';
+    final original = img.Image(width: 40, height: 20);
+    for (var y = 0; y < 20; y++) {
+      for (var x = 0; x < 40; x++) {
+        original.setPixelRgb(x, y, x < 20 ? 255 : 0, 0, x < 20 ? 0 : 255);
+      }
+    }
+    final jpegBytes = Uint8List.fromList(img.encodeJpg(original, quality: 100));
+
+    final recordBytes = [
+      fx.record(
+        2,
+        100,
+        fx.packageMetadataPayload(
+          dataInfos: [
+            fx.dataInfoPayload(identifier: dataId, preferredFileName: fileName),
+          ],
+        ),
+      ),
+      fx.record(10, 200, fx.rotatedImagePayload(dataId, 90)),
+      fx.recordWithRefs(
+        1,
+        1,
+        fx.slidePayload(
+          titleRefIndex: 0,
+          bodyRefIndex: 0,
+          drawableRefIndices: [0],
+        ),
+        [10],
+      ),
+    ].expand((e) => e).toList();
+
+    final bytes = fx.zip({
+      'Index/slide-1.iwa': fx.iwaStream(recordBytes),
+      'Data/$fileName': jpegBytes,
+    });
+
+    final deck = (await KeyImporter().importBytes(
+      bytes,
+      path: 'gedraaid.key',
+    )).okValue!;
+    final imported = img.decodeImage(deck.slides.single.images.single.bytes);
+    expect(imported, isNotNull);
+    expect([imported!.width, imported.height], [20, 40]);
+    // Een kwartslag tegen de klok in brengt de rode helft naar onderen.
+    expect(imported.getPixel(10, 35).r, greaterThan(200));
+    expect(imported.getPixel(10, 5).b, greaterThan(200));
+  });
 }

@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import '../../../../../utils/image_resize.dart'
-    show bakeJpegOrientation, rotateImageBytes;
+import '../../../../../utils/image_resize.dart' show rotateImageBytes;
 import '../../../models/source_chart.dart';
 import '../../../models/source_image.dart';
 import '../../../models/source_table.dart';
@@ -422,13 +421,14 @@ class DrawableReader {
       if (fileName == null) continue;
       final bytes = ctx!.readPartBytes('Data/$fileName');
       if (bytes != null && bytes.isNotEmpty) {
-        // Bak EXIF-orientatie in de pixels. Keynote bewaart de ruwe
-        // afbeeldingsbytes in Data/; een JPEG met orientatie-tag (bv. 3 =
-        // 180°) zou anders op de kop staan in Flutter, die EXIF negeert.
-        final baked = bakeJpegOrientation(Uint8List.fromList(bytes));
-        final rotated = rotation != 0
-            ? rotateImageBytes(baked, rotation)
-            : baked;
+        // Keynote telt zijn rotatie tégen de klok in en vanaf de foto zoals
+        // hij hem zelf toont — dus mét de EXIF-orientatie erin gebakken, want
+        // Keynote honoreert die tag (getoetst tegen een door Keynote zelf
+        // geëxporteerde PDF). `img.decodeImage` bakt die tag ook in, dus daar
+        // hoeft niets voor te gebeuren; alleen het teken moet om, want
+        // `copyRotate` draait met de klok mee.
+        final raw = Uint8List.fromList(bytes);
+        final rotated = rotation != 0 ? rotateImageBytes(raw, -rotation) : raw;
         images.add(
           SourceImage(bytes: rotated, ext: _ext(fileName), name: fileName),
         );

@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:image/image.dart' as img;
 import 'package:path/path.dart' as p;
 import 'package:xml/xml.dart';
 
+import '../../../../utils/image_resize.dart';
 import '../../models/source_image.dart';
 import '../../models/source_video.dart';
 import 'pptx_context.dart';
@@ -134,8 +134,8 @@ SourceImage? parsePic(
   final rotDegrees = rot60000 == null
       ? 0.0
       : (int.tryParse(rot60000) ?? 0) / 60000.0;
-  final imageBytes = rotDegrees != 0 && rotDegrees % 360 != 0
-      ? _rotateImage(Uint8List.fromList(bytes), rotDegrees, resolved)
+  final imageBytes = rotDegrees % 360 != 0
+      ? bakeImportRotation(Uint8List.fromList(bytes), rotDegrees, resolved)
       : Uint8List.fromList(bytes);
 
   return SourceImage(
@@ -190,24 +190,4 @@ String _extFromPath(String path) {
   if (dot < 0) return 'png';
   final ext = path.substring(dot + 1).toLowerCase();
   return ext.isEmpty ? 'png' : ext;
-}
-
-/// Roteer [bytes] met [degrees] en codeer opnieuw in het oorspronkelijke formaat.
-/// Geeft de originele bytes ongewijzigd terug als decoderen of roteren faalt —
-/// een onleesbare afbeelding is beter dan geen afbeelding.
-Uint8List _rotateImage(Uint8List bytes, double degrees, String path) {
-  try {
-    final decoded = img.decodeImage(bytes);
-    if (decoded == null) return bytes;
-    final rotated = img.copyRotate(decoded, angle: degrees);
-    final ext = _extFromPath(path);
-    final encoded = ext == 'jpg' || ext == 'jpeg'
-        ? img.encodeJpg(rotated)
-        : ext == 'gif'
-        ? img.encodeGif(rotated)
-        : img.encodePng(rotated);
-    return Uint8List.fromList(encoded);
-  } on Object {
-    return bytes;
-  }
 }

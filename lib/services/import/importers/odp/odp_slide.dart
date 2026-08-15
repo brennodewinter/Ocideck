@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 import 'dart:math' as math;
 
-import 'package:image/image.dart' as img;
 import 'package:xml/xml.dart';
 
+import '../../../../utils/image_resize.dart';
 import '../../models/body_block.dart';
 import '../../models/conversion_issue.dart';
 import '../../models/source_chart.dart';
@@ -273,10 +273,12 @@ SourceImage? _imageFromHref(OdpContext ctx, XmlElement img, XmlElement frame) {
 
   // ODF slaat rotatie op in `draw:transform="rotate (<radialen>)"` op het
   // frame. Bak de rotatie in de bytes bij import, net als de PPTX-importer.
+  // ODF telt tegen de klok in (getoetst tegen wat LibreOffice zelf rendert),
+  // `copyRotate` met de klok mee — vandaar het minteken.
   final transform = _attr(frame, 'transform');
   final rotDegrees = _rotationFromTransform(transform);
-  final imageBytes = rotDegrees != 0 && rotDegrees % 360 != 0
-      ? _rotateImage(Uint8List.fromList(bytes), rotDegrees, path)
+  final imageBytes = rotDegrees % 360 != 0
+      ? bakeImportRotation(Uint8List.fromList(bytes), -rotDegrees, path)
       : Uint8List.fromList(bytes);
 
   return SourceImage(
@@ -294,25 +296,6 @@ double _rotationFromTransform(String? transform) {
   final radians = double.tryParse(match.group(1)!);
   if (radians == null) return 0;
   return radians * 180 / math.pi;
-}
-
-/// Roteer [bytes] met [degrees] en codeer opnieuw. Geeft originele bytes terug
-/// bij een fout — een onleesbare afbeelding is beter dan geen.
-Uint8List _rotateImage(Uint8List bytes, double degrees, String path) {
-  try {
-    final decoded = img.decodeImage(bytes);
-    if (decoded == null) return bytes;
-    final rotated = img.copyRotate(decoded, angle: degrees);
-    final ext = _extFromPath(path);
-    final encoded = ext == 'jpg' || ext == 'jpeg'
-        ? img.encodeJpg(rotated)
-        : ext == 'gif'
-        ? img.encodeGif(rotated)
-        : img.encodePng(rotated);
-    return Uint8List.fromList(encoded);
-  } on Object {
-    return bytes;
-  }
 }
 
 PositionedText _positionedText(
