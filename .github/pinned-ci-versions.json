@@ -26,7 +26,7 @@
     {
       "name": "trufflehog",
       "env": "TRUFFLEHOG_VERSION",
-      "version": "3.96.0",
+      "version": "3.97.0",
       "workflows": [
         ".forgejo/workflows/scans.yml",
         ".github/workflows/ci.yml"
