@@ -12,6 +12,28 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.4.4] — 2026-08-15
+
+### Added
+
+- feat(shell): kort het presentatie-eigenschappen-knoplabel tot "Opmaak" (#1488)
+
+### Changed
+
+- chore(macos): ondergrens naar macOS 12, zoals de vastgezette Flutter eist (#1496)
+- ci: pin trufflehog 3.96.0 naar 3.97.0 (#1492)
+- chore(toolchain): pin Flutter 3.44.9 → 3.47.0 (stable) (#1490)
+
+### Fixed
+
+- fix(release): stop op een bezette werkboom, en lieg niet over de opruiming (#1498)
+- fix(dast): geef ZAP een schrijfbare werkmap (#1497)
+- fix(keynote-import): spiegelen en maskeren werden niet gelezen (#1495)
+- fix(import): een gespiegelde of bijgesneden afbeelding kwam onbewerkt binnen (#1494)
+- fix(import): gedraaide fotos kwamen scheef binnen bij PPTX, ODP en Keynote (#1493)
+- fix(dekking): laat de baseline-tip de per-bestandsvloer meewegen (#1491)
+- fix(import): gebruik de zichtbare titel op de eerste dia als deck-titel (#1489)
+
 ## [0.4.3] — 2026-08-14
 
 ### Added
