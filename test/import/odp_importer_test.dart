@@ -3,10 +3,12 @@ import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image/image.dart' as img;
 import 'package:ocideck/services/import/core/result.dart';
 import 'package:ocideck/services/import/importers/odp/odp_importer.dart';
 import 'package:ocideck/services/import/models/body_block.dart';
 import 'package:ocideck/services/import/models/source_chart.dart';
+import 'package:ocideck/utils/image_resize.dart';
 
 const _office = 'urn:oasis:names:tc:opendocument:xmlns:office:1.0';
 const _draw = 'urn:oasis:names:tc:opendocument:xmlns:drawing:1.0';
@@ -368,4 +370,61 @@ void main() {
     // Vang de specifieke regressie: geen mojibake-voorloopbyte.
     expect(texts.join(), isNot(contains('â')));
   });
+
+  test(
+    'draait een afbeelding tegen de klok in, met de EXIF-hoek verrekend',
+    () async {
+      // Een cameraopname: liggend opgeslagen, met een EXIF-tag die zegt dat hij
+      // een kwartslag met de klok mee moet. Impress negeert die tag net als
+      // PowerPoint, en telt zijn eigen `rotate` — tegen de klok in — vanaf de
+      // ruwe pixels. Getoetst tegen wat LibreOffice zelf van dit bestand maakt.
+      final original = img.Image(width: 40, height: 20);
+      for (var y = 0; y < 20; y++) {
+        for (var x = 0; x < 40; x++) {
+          original.setPixelRgb(x, y, x < 20 ? 255 : 0, 0, x < 20 ? 0 : 255);
+        }
+      }
+      original.exif.imageIfd.orientation = 6; // 90° met de klok mee
+      final jpegBytes = Uint8List.fromList(
+        img.encodeJpg(original, quality: 100),
+      );
+
+      final content =
+          '<?xml version="1.0" encoding="UTF-8"?>'
+          '<office:document-content xmlns:office="$_office" xmlns:draw="$_draw" '
+          'xmlns:text="$_text" xmlns:xlink="$_xlink" '
+          'xmlns:presentation="$_presentation" '
+          'xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0">'
+          '<office:body><office:presentation><draw:page draw:name="p1">'
+          '<draw:frame draw:name="Img" svg:width="8cm" svg:height="4cm" '
+          'draw:transform="rotate (1.5707963) translate (4cm 11cm)">'
+          '<draw:image xlink:href="Pictures/photo.jpg" xlink:type="simple"/>'
+          '</draw:frame>'
+          '</draw:page></office:presentation></office:body>'
+          '</office:document-content>';
+      final bytes = _zip({
+        'mimetype': _b('application/vnd.oasis.opendocument.presentation'),
+        'content.xml': _b(content),
+        'Pictures/photo.jpg': jpegBytes,
+      });
+
+      final deck = (await OdpImporter().importBytes(
+        bytes,
+        path: 'gedraaid.odp',
+      )).okValue!;
+      final imported = img.decodeImage(deck.slides.single.images.single.bytes);
+      expect(imported, isNotNull);
+      expect([imported!.width, imported.height], [20, 40]);
+      // Een kwartslag tegen de klok in brengt de blauwe helft naar boven; met de
+      // klok mee (de oude fout) zou rood boven staan.
+      expect(imported.getPixel(10, 5).b, greaterThan(200));
+      expect(imported.getPixel(10, 35).r, greaterThan(200));
+      // En de tag mag niet blijven staan, anders draait een EXIF-lezende
+      // renderer er nog een kwartslag overheen.
+      expect(
+        jpegExifRotationDegrees(deck.slides.single.images.single.bytes),
+        0,
+      );
+    },
+  );
 }

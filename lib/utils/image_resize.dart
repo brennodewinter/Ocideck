@@ -27,31 +27,6 @@ img.Image resizeLongestEdge(img.Image image, int maxEdge) {
         );
 }
 
-/// Bak de EXIF-orientatie van [bytes] in de pixels en wis de tag, zodat elke
-/// renderer (Flutter, export, HTML) de afbeelding correct toont zonder EXIF
-/// te hoeven interpreteren. Flutter's decoder negeert EXIF-orientatie, dus
-/// een JPEG met orientatie 3 (180°) staat anders op de kop.
-///
-/// Alleen JPEGs hebben in de praktijk een EXIF-orientatie-tag; andere
-/// formaten gaan ongewijzigd terug. De overige EXIF (GPS, cameramodel) blijft
-/// staan; die wordt pas gestript bij de HTML-export.
-Uint8List bakeJpegOrientation(Uint8List bytes) {
-  if (bytes.length < 4 || bytes[0] != 0xFF || bytes[1] != 0xD8) return bytes;
-  try {
-    final decoded = img.decodeImage(bytes);
-    if (decoded == null) return bytes;
-    if (!decoded.exif.imageIfd.hasOrientation ||
-        decoded.exif.imageIfd.orientation == 1) {
-      return bytes;
-    }
-    final baked = img.bakeOrientation(decoded);
-    return Uint8List.fromList(img.encodeJpg(baked, quality: 95));
-  } on Object catch (e) {
-    logWarning('bakeJpegOrientation: decode/encode failed', e);
-    return bytes;
-  }
-}
-
 /// De rotatie in graden (met de klok mee, altijd 0, 90, 180 of 270) die de
 /// EXIF-oriëntatietag van [bytes] voorschrijft. Andere formaten dan JPEG, een
 /// ontbrekende tag en een onleesbare tag geven 0.
@@ -92,7 +67,7 @@ int _jpegExifOrientation(Uint8List bytes) {
       offset += 2;
       continue;
     }
-    // Vanaf de scan volgt beelddata; een EXIF-blok komt daar niet meer.
+    // Vanaf de scan volgt beeldsdata; een EXIF-blok komt daar niet meer.
     if (marker == 0xDA) return 1;
     final length = (bytes[offset + 2] << 8) | bytes[offset + 3];
     if (length < 2 || offset + 2 + length > bytes.length) return 1;
@@ -124,6 +99,47 @@ int? _orientationFromApp1(Uint8List bytes, int start, int length) {
   } on Object catch (e) {
     logWarning('jpegExifRotationDegrees: EXIF unreadable', e);
     return null;
+  }
+}
+
+/// Bak de rotatie van een geïmporteerde afbeelding in de pixels:
+/// [clockwiseDegrees] geteld vanaf de rúwe bytes, en het resultaat draagt geen
+/// EXIF-orientatietag meer. [path] bepaalt alleen het uitvoerformaat.
+///
+/// Zowel PowerPoint als Impress negeren de EXIF-orientatietag van een foto. Een
+/// auteur die zijn liggend opgeslagen cameraopname rechtop wilde hebben,
+/// draaide hem daar dus met de hand goed, en die hoek telt vanaf de ruwe
+/// pixels. `img.decodeImage` bakt de EXIF-orientatie juist wél alvast in, dus
+/// die hoek gaat er hier weer af — anders draait de foto twee keer.
+///
+/// Er wordt altijd opnieuw gecodeerd, ook als er per saldo niets te draaien
+/// valt: dan verdwijnt de EXIF-tag uit de bytes en tonen ook renderers die geen
+/// EXIF lezen (de PDF-export) dezelfde afbeelding. Bij een onleesbare
+/// afbeelding komen de originele bytes ongewijzigd terug — een niet gedraaide
+/// afbeelding is beter dan geen afbeelding.
+Uint8List bakeImportRotation(
+  Uint8List bytes,
+  double clockwiseDegrees,
+  String path,
+) {
+  try {
+    final decoded = img.decodeImage(bytes);
+    if (decoded == null) return bytes;
+    final baked = jpegExifRotationDegrees(bytes);
+    final effective = ((clockwiseDegrees - baked) % 360 + 360) % 360;
+    final rotated = effective == 0
+        ? decoded
+        : img.copyRotate(decoded, angle: effective);
+    final ext = path.split('.').last.toLowerCase();
+    final encoded = ext == 'jpg' || ext == 'jpeg'
+        ? img.encodeJpg(rotated)
+        : ext == 'gif'
+        ? img.encodeGif(rotated)
+        : img.encodePng(rotated);
+    return Uint8List.fromList(encoded);
+  } on Object catch (e) {
+    logWarning('bakeImportRotation: rotate failed', e);
+    return bytes;
   }
 }
 

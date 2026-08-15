@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:image/image.dart' as img;
 import 'package:path/path.dart' as p;
 import 'package:xml/xml.dart';
 
@@ -136,7 +135,7 @@ SourceImage? parsePic(
       ? 0.0
       : (int.tryParse(rot60000) ?? 0) / 60000.0;
   final imageBytes = rotDegrees % 360 != 0
-      ? _rotateImage(Uint8List.fromList(bytes), rotDegrees, resolved)
+      ? bakeImportRotation(Uint8List.fromList(bytes), rotDegrees, resolved)
       : Uint8List.fromList(bytes);
 
   return SourceImage(
@@ -191,38 +190,4 @@ String _extFromPath(String path) {
   if (dot < 0) return 'png';
   final ext = path.substring(dot + 1).toLowerCase();
   return ext.isEmpty ? 'png' : ext;
-}
-
-/// Roteer [bytes] met [degrees] en codeer opnieuw in het oorspronkelijke formaat.
-/// Geeft de originele bytes ongewijzigd terug als decoderen of roteren faalt —
-/// een onleesbare afbeelding is beter dan geen afbeelding.
-///
-/// De `rot` uit het bestand telt vanaf de ruwe pixels: PowerPoint negeert de
-/// EXIF-oriëntatie van een foto, dus een auteur die zijn liggende cameraopname
-/// rechtop wilde hebben, draaide hem daar met de hand goed. `img.decodeImage`
-/// bakt die EXIF-oriëntatie juist wél in, en dan zou de foto twee keer draaien.
-/// Trek de gebakken hoek er daarom weer af.
-///
-/// Het resultaat wordt altijd opnieuw gecodeerd, ook als er per saldo niets te
-/// draaien valt: dan verdwijnt de EXIF-tag uit de bytes en tonen ook renderers
-/// die geen EXIF lezen (PDF-export, HTML-export) dezelfde afbeelding.
-Uint8List _rotateImage(Uint8List bytes, double degrees, String path) {
-  try {
-    final decoded = img.decodeImage(bytes);
-    if (decoded == null) return bytes;
-    final baked = jpegExifRotationDegrees(bytes);
-    final effective = ((degrees - baked) % 360 + 360) % 360;
-    final rotated = effective == 0
-        ? decoded
-        : img.copyRotate(decoded, angle: effective);
-    final ext = _extFromPath(path);
-    final encoded = ext == 'jpg' || ext == 'jpeg'
-        ? img.encodeJpg(rotated)
-        : ext == 'gif'
-        ? img.encodeGif(rotated)
-        : img.encodePng(rotated);
-    return Uint8List.fromList(encoded);
-  } on Object {
-    return bytes;
-  }
 }
