@@ -176,6 +176,19 @@ List<int> doubleField(int field, double value) => [
   ..._doubleLE(value),
 ];
 
+/// A fixed-32 (wire type 5) float field.
+List<int> floatField(int field, double value) => [
+  ...varint(key(field, 5)),
+  ...(ByteData(4)..setFloat32(0, value, Endian.little)).buffer.asUint8List(),
+];
+
+/// An ImageArchive payload carrying an IWA rotation: drawable super (field 1)
+/// → transform (field 1) → rotation (field 4, float32 in degrees).
+List<int> rotatedImagePayload(int dataId, double degrees) => [
+  ...bytesField(1, bytesField(1, floatField(4, degrees))),
+  ...bytesField(11, varintField(1, dataId)),
+];
+
 /// A ChartDrawableArchive payload: empty DrawableArchive super (field 1) and
 /// the TSCH.ChartArchive extension (field 10000, length-delimited).
 List<int> chartDrawablePayload(List<int> chartArchive) => [
