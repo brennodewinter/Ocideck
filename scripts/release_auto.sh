@@ -931,12 +931,18 @@ resume_release() {
 assert_workspace_idle
 
 # ── De twee prompts (de enige interactie) ───────────────────────────────────────
+STEP="wachtwoord"
 read_token
 section "Wachtwoord"
 log "Het minisign-sleutelwachtwoord wordt nu gevraagd en blijft alleen in het"
 log "geheugen van deze run (voor het tekenen van SHA256SUMS, geheel aan het eind)."
 MINISIGN_PW=""
-read -r -s -p "  minisign-wachtwoord: " MINISIGN_PW; echo
+# '|| true': zonder tty (stdin op /dev/null, een pipe) geeft read EOF en dus een
+# niet-nul status, waarna set -e in de ERR-trap viel en het scherm de vorige stap
+# als schuldige aanwees. De guard hieronder is de juiste melding; laat die 'm
+# geven in plaats van 'm onbereikbaar te maken.
+read -r -s -p "  minisign-wachtwoord: " MINISIGN_PW || true
+echo
 [ -n "$MINISIGN_PW" ] || die "leeg wachtwoord — afgebroken."
 
 # #7: faal vóór elke onherroepelijke stap; en in --resume is dit de enige gate.

@@ -647,6 +647,21 @@ void main() {
     );
   });
 
+  test('de wachtwoordprompt meldt zich als eigen stap', () {
+    // Een STEP-label blijft staan tot het volgende. Zonder eigen label kreeg een
+    // fout bij de prompt (bijvoorbeeld read op EOF, zonder tty) de naam van de
+    // vorige stap toegewezen — dezelfde verwarring als build-release/notarize.
+    final src = File(script).readAsStringSync();
+    final stepIdx = src.indexOf('STEP="wachtwoord"');
+    final promptIdx = src.indexOf('minisign-wachtwoord');
+    expect(
+      stepIdx,
+      isNonNegative,
+      reason: 'de promptsectie hoort een eigen STEP te zetten.',
+    );
+    expect(stepIdx, lessThan(promptIdx));
+  });
+
   test('bouwen en notariseren melden zich als aparte stap', () {
     // Onder één STEP-label meldde de ERR-trap "make build-release" terwijl het
     // notariseren viel; dat stuurt de diagnose naar de verkeerde stap.
