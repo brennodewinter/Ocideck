@@ -107,14 +107,41 @@ need_cmd() { command -v "$1" >/dev/null 2>&1 || die "ontbrekend commando: $1"; }
 STEP="init"
 TAG_PUSHED=0
 BRANCH=""
+# De branch waar de release vandaan vertrok; cleanup_branch keert hierheen terug.
+START_BRANCH="$(git branch --show-current 2>/dev/null || true)"
+cleanup_failed() {
+  printf '  LET OP: de release-branch %s is NIET opgeruimd:\n' "$BRANCH" >&2
+  printf '%s\n' "$1" | sed 's/^/    /' >&2
+  printf '  Hij draagt de versiebump. Ruim hem met de hand op vóórdat je verder werkt —\n' >&2
+  printf '  takt er een nieuwe branch van af, dan erft die de bump:\n' >&2
+  printf '      git checkout %s && git branch -D %s\n' "${START_BRANCH:-main}" "$BRANCH" >&2
+}
 cleanup_branch() {
   # BRANCH wordt vroeg gezet (voor --resume), dus ruim alleen op wat fase 1 écht
   # lokaal aanmaakte — anders zou een fout tijdens de pre-flight ongevraagd van
   # branch wisselen.
   [ -n "$BRANCH" ] || return 0
   git rev-parse -q --verify "refs/heads/$BRANCH" >/dev/null 2>&1 || return 0
-  git checkout --quiet - 2>/dev/null || true
-  git branch -D "$BRANCH" >/dev/null 2>&1 || true
+  # Hier niets stilhouden. Beide commando's stonden op '2>/dev/null || true', en
+  # dat maakte de opruiming een bewering in plaats van een feit: faalt de checkout
+  # (een werkboom die een bestand draagt dat tussen de branches verschilt is al
+  # genoeg), dan faalt 'branch -D' gegárandeerd óók — de branch staat dan immers
+  # nog uitgecheckt. De melding zei "wordt opgeruimd", de branch mét versiebump
+  # bleef staan, en de eerstvolgende 'git checkout -b' takte er ongemerkt van af.
+  # Zo kwam er op 15-08-2026 een versiebump in een PR terecht die een DAST-fix
+  # heette. Ga terug naar de branch waar we vandaan kwamen (niet '-': dat leunt op
+  # de HEAD-reflog en wijst na een tussentijdse checkout ergens anders heen).
+  local err
+  if ! err="$(git checkout --quiet "${START_BRANCH:-main}" 2>&1)"; then
+    cleanup_failed "$err"
+    return 0
+  fi
+  if ! err="$(git branch -D "$BRANCH" 2>&1)"; then
+    cleanup_failed "$err"
+    return 0
+  fi
+  printf '  Release-branch %s opgeruimd; je staat weer op %s.\n' \
+    "$BRANCH" "${START_BRANCH:-main}" >&2
 }
 on_err() {
   local ec=$? ln=${1:-?}
@@ -126,8 +153,9 @@ on_err() {
     printf '  Alleen als een uitgebracht artefact zelf fout is, snijd je de VOLGENDE patch-tag;\n' >&2
     printf '  verplaats deze tag nooit (dat breekt de mirror-Windows-release).\n' >&2
   else
-    printf '  Er is nog niets naar buiten gegaan. De release-branch wordt opgeruimd;\n' >&2
-    printf '  repareer het en draai het script opnieuw.\n' >&2
+    printf '  Er is nog niets naar buiten gegaan; repareer het en draai het script opnieuw.\n' >&2
+    # cleanup_branch meldt zélf wat het deed. Beweer hier dus niets vooraf: de
+    # opruiming kán mislukken, en dan moet dát op het scherm staan.
     cleanup_branch
   fi
 }
@@ -487,6 +515,51 @@ fi
 
 # De verouderingsgate hoort bij een échte build (fase 1); in resume bouwen we niet.
 [ -n "$RESUME_TAG" ] || outdated_gate
+
+# ── Werkboom vrij? Een tweede Flutter in dezelfde map sloopt de release ─────────
+# `make notarize-macos` bouwt schoon en begint met `flutter clean`. Draait er in
+# deze werkboom nóg een flutter-proces (een `flutter run` die je liet staan, een
+# IDE-sessie, een tweede `flutter test`), dan blijft `.dart_tool` staan doordat die
+# ander de map blijft aanvullen — en `flutter clean` meldt dat wél, maar eindigt
+# met exit 0. De eerstvolgende `dart run` valt dan over een half verdwenen
+# hooks_runner-cache (PathNotFoundException op stdout.txt) en de release strandt
+# tien minuten verderop op een fout die niets met tekenen te maken heeft. Zo brak
+# de v0.4.4-run van 15-08-2026. Toets het vóór het wachtwoord: dan kost het
+# dertig seconden in plaats van tien minuten.
+#
+# Twee ingangen, want geen van beide vangt alles: een `flutter run` draagt het pad
+# van de werkboom niet in zijn argumenten (alleen zijn cwd verraadt hem), terwijl
+# de compiler-daemon en flutter_tester het pad wél meedragen maar met een andere
+# cwd kunnen draaien. Bewust smal op de bouwketen: de analysis server van een
+# editor raakt `.dart_tool` niet en mag geen release blokkeren.
+#
+# 'ps -Ao pid=,command=' en niet 'pgrep -af': die -a drukt op macOS alléén pid's
+# af (hij bestaat daar met een andere betekenis), waardoor zowel de padvergelijking
+# als de melding leeg zou blijven — precies op de machine waar de release draait.
+busy_workspace_procs() {
+  local pid cmd cwd
+  # shellcheck disable=SC2009 # pgrep kan hier niet: zijn -a drukt op macOS alleen pid's af.
+  while read -r pid cmd; do
+    [ -n "$pid" ] && [ "$pid" != "$$" ] || continue
+    case "$cmd" in
+      *"$ROOT_DIR"/*) printf '%s %s\n' "$pid" "$cmd"; continue ;;
+    esac
+    command -v lsof >/dev/null 2>&1 || continue
+    cwd="$(lsof -a -d cwd -p "$pid" -Fn 2>/dev/null | sed -n 's/^n//p' | head -1)"
+    [ "$cwd" = "$ROOT_DIR" ] && printf '%s %s\n' "$pid" "$cmd"
+  done < <(ps -Ao pid=,command= \
+    | grep -E 'flutter_tools\.snapshot|frontend_server|flutter_tester' \
+    | grep -v ' grep ' || true)
+}
+assert_workspace_idle() {
+  STEP="werkboom vrij"
+  local busy
+  busy="$(busy_workspace_procs || true)"
+  [ -n "$busy" ] || return 0
+  printf '\nrelease-auto: er draait nog een flutter/dart-proces in deze werkboom:\n' >&2
+  printf '%s\n' "$busy" | cut -c1-140 | sed 's/^/    /' >&2
+  die "sluit dat af (flutter run, flutter test, een IDE-sessie) en draai opnieuw — een schone bouw kan anders niet. Niets gemuteerd."
+}
 
 # ── #7 Pre-flight: alles wat later onherroepelijk nodig is, nú toetsen ──────────
 # Vandaag brak de keten pas ná de tag op stappen die vooraf toetsbaar waren
@@ -853,6 +926,10 @@ resume_release() {
   finish
 }
 
+# Vóór de prompts: een bezette werkboom maakt de schone bouw in fase 1 onmogelijk,
+# en dat wil je weten vóór je een wachtwoord intikt.
+assert_workspace_idle
+
 # ── De twee prompts (de enige interactie) ───────────────────────────────────────
 read_token
 section "Wachtwoord"
@@ -968,6 +1045,10 @@ log "make check-release groen."
 STEP="make build-release"
 section "Fase 1 — bouwen, tekenen, notariseren"
 make build-release
+# Eigen STEP: notarize-macos is een andere stap met andere faaloorzaken (schone
+# bouw, zegel, notary-profiel). Onder één label meldde de trap "make
+# build-release" terwijl het notariseren viel — dat stuurt de diagnose verkeerd.
+STEP="make notarize-macos"
 make notarize-macos
 APP="$(find build/macos/Build/Products/Release -maxdepth 1 -name '*.app' 2>/dev/null | head -1)"
 [ -n "$APP" ] || die "geen gebouwde .app gevonden na notarize-macos."

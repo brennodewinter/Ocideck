@@ -115,6 +115,25 @@ if [[ $SKIP_BUILD -eq 0 ]]; then
   # waarna het tekenen of de notarisatie op een verwarrende plek faalt.
   section "Schoon bouwen"
   flutter clean
+  # `flutter clean` méldt een mislukte verwijdering ("Failed to remove …:
+  # Directory not empty") maar eindigt met exit 0. Blijft .dart_tool staan — het
+  # klassieke geval is een tweede flutter-proces in dezelfde werkboom dat de map
+  # blijft aanvullen — dan is de eerstvolgende dart-aanroep kansloos: de
+  # hooks_runner-cache is half weg en `dart run` valt met een PathNotFoundException
+  # op een stdout.txt die er niet meer is. Dat gebeurde in de v0.4.4-run van
+  # 15-08-2026: de release strandde op `sbom-verify`, een stap die niets met de
+  # oorzaak te maken had. Toets daarom de invariant zelf, niet de exitstatus.
+  if [[ -d .dart_tool ]]; then
+    echo "flutter clean liet .dart_tool staan — deze bouw is niet schoon." >&2
+    echo "Draait er nog een flutter/dart-proces in deze werkboom (flutter run," >&2
+    echo "flutter test, een IDE-sessie)? Sluit dat af en draai opnieuw." >&2
+    # ps, niet 'pgrep -af': die -a drukt op macOS alleen pid's af.
+    # shellcheck disable=SC2009 # zie hierboven; pgrep geeft hier geen commandoregel.
+    ps -Ao pid=,command= \
+      | grep -E 'flutter_tools\.snapshot|frontend_server|flutter_tester' \
+      | grep -v ' grep ' | cut -c1-140 | sed 's/^/   /' >&2 || true
+    exit 1
+  fi
   make build-macos
 else
   section "Herbouw overgeslagen (--skip-build) — bestaande build/-uitvoer wordt gebruikt"

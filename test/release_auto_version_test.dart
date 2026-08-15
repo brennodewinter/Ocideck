@@ -533,4 +533,133 @@ void main() {
           'parallelle sessies; een reset zou hun ongecommitte werk wissen.',
     );
   });
+
+  // Regressie voor de v0.4.4-run van 15-08-2026. cleanup_branch deed zijn twee
+  // git-commando's met '2>/dev/null || true'. Faalde de checkout (een werkboom die
+  // één bestand draagt dat tussen de branches verschilt is genoeg), dan faalde
+  // 'branch -D' gegarandeerd óók — de branch stond dan nog uitgecheckt — terwijl
+  // het scherm zei dat er was opgeruimd. De release-branch mét versiebump bleef
+  // staan, en de eerstvolgende 'git checkout -b' takte er ongemerkt van af: zo
+  // kwam die bump terecht in een PR die een DAST-fix heette.
+  test('een mislukte opruiming van de release-branch wordt gemeld, niet gesmoord', () {
+    final cleanup = functionBody('cleanup_branch');
+    for (final cmd in ['git checkout', 'git branch -D']) {
+      final line = cleanup
+          .split('\n')
+          .firstWhere(
+            (l) =>
+                l.contains(RegExp(RegExp.escape(cmd))) &&
+                !l.trimLeft().startsWith('#'),
+            orElse: () => fail('$cmd niet gevonden in cleanup_branch'),
+          );
+      expect(
+        line,
+        isNot(contains('|| true')),
+        reason:
+            '"$cmd" in cleanup_branch mag niet met "|| true" worden weggemoffeld: '
+            'dan blijft een release-branch mét versiebump staan terwijl de melding '
+            'zegt dat hij is opgeruimd.',
+      );
+    }
+    expect(
+      cleanup,
+      contains('cleanup_failed'),
+      reason:
+          'cleanup_branch moet een mislukte opruiming melden (cleanup_failed), '
+          'zodat de gebruiker weet dat de branch met de versiebump er nog staat.',
+    );
+    expect(
+      functionBody('cleanup_failed'),
+      matches(RegExp(r'git\s+branch\s+-D')),
+      reason:
+          'de melding moet het herstelcommando meegeven; zonder dat blijft de '
+          'gebruiker met een halve release-branch zitten.',
+    );
+
+    // En on_err mag de opruiming niet vooraf aankondigen als voldongen feit —
+    // cleanup_branch meldt zelf wat er werkelijk gebeurde.
+    expect(
+      functionBody('on_err'),
+      isNot(contains('wordt opgeruimd')),
+      reason:
+          'on_err beweerde "de release-branch wordt opgeruimd" vóórdat de '
+          'opruiming had plaatsgevonden; die uitkomst hoort van cleanup_branch '
+          'te komen.',
+    );
+  });
+
+  // Tweede helft van diezelfde run: een 'flutter run' die in deze werkboom bleef
+  // staan hield .dart_tool bezet. 'flutter clean' meldt dat wél maar eindigt met
+  // exit 0, waarna de eerstvolgende 'dart run' viel over een half verdwenen
+  // hooks_runner-cache — tien minuten en een wachtwoord verder, op een stap
+  // (sbom-verify) die niets met de oorzaak te maken had.
+  test('een bezette werkboom wordt getoetst vóór het wachtwoord', () {
+    final src = File(script).readAsStringSync();
+    final guardIdx = src.indexOf(
+      RegExp(r'^assert_workspace_idle\s*$', multiLine: true),
+    );
+    final promptIdx = src.indexOf('minisign-wachtwoord');
+    expect(
+      guardIdx,
+      isNonNegative,
+      reason:
+          'release_auto moet assert_workspace_idle aanroepen: een tweede '
+          'flutter-proces in deze werkboom maakt de schone bouw onmogelijk.',
+    );
+    expect(
+      guardIdx,
+      lessThan(promptIdx),
+      reason:
+          'de toets hoort vóór de wachtwoordprompt: anders tikt de gebruiker '
+          'een wachtwoord in voor een keten die tien minuten later alsnog valt.',
+    );
+  });
+
+  test('notarize_macos toetst dat flutter clean écht schoonmaakte', () {
+    const notarize = 'scripts/notarize_macos.sh';
+    final src = File(notarize).readAsStringSync();
+    final cleanIdx = src.indexOf(
+      RegExp(r'^\s*flutter clean\s*$', multiLine: true),
+    );
+    final checkIdx = src.indexOf(
+      RegExp(r'^\s*if \[\[ -d \.dart_tool \]\]', multiLine: true),
+    );
+    final buildIdx = src.indexOf(
+      RegExp(r'^\s*make build-macos\s*$', multiLine: true),
+    );
+    expect(
+      cleanIdx,
+      isNonNegative,
+      reason: 'geen "flutter clean" in $notarize',
+    );
+    expect(
+      checkIdx,
+      isNonNegative,
+      reason:
+          '"flutter clean" eindigt met exit 0 ook als het .dart_tool liet staan; '
+          '$notarize moet die invariant zelf toetsen vóór het bouwt.',
+    );
+    expect(cleanIdx, lessThan(checkIdx));
+    expect(
+      checkIdx,
+      lessThan(buildIdx),
+      reason: 'de toets hoort vóór "make build-macos", niet erna.',
+    );
+  });
+
+  test('bouwen en notariseren melden zich als aparte stap', () {
+    // Onder één STEP-label meldde de ERR-trap "make build-release" terwijl het
+    // notariseren viel; dat stuurt de diagnose naar de verkeerde stap.
+    final src = File(script).readAsStringSync();
+    final stepIdx = src.indexOf('STEP="make notarize-macos"');
+    final callIdx = src.indexOf(
+      RegExp(r'^make notarize-macos\s*$', multiLine: true),
+    );
+    expect(
+      stepIdx,
+      isNonNegative,
+      reason: 'notarize-macos hoort een eigen STEP-label te hebben.',
+    );
+    expect(stepIdx, lessThan(callIdx));
+  });
 }
