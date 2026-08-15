@@ -127,16 +127,12 @@ SourceImage? parsePic(
   final resolved = ctx.resolveRel(rels, rId, slidePath) ?? '';
   final name = descendantsLocal(pic, 'cNvPr').firstOrNull?.getAttribute('name');
 
-  // PowerPoint slaat rotatie op als `rot` op `<a:xfrm>` in 60000sten van een
-  // graad (10800000 = 180°). Bak de rotatie in de bytes bij import, zodat de
-  // rest van de pipeline (weergave, opslaan, dedup) de afbeelding correct ziet.
-  final rot60000 = xfrm?.getAttribute('rot');
-  final rotDegrees = rot60000 == null
-      ? 0.0
-      : (int.tryParse(rot60000) ?? 0) / 60000.0;
-  final imageBytes = rotDegrees % 360 != 0
-      ? bakeImportRotation(Uint8List.fromList(bytes), rotDegrees, resolved)
-      : Uint8List.fromList(bytes);
+  // Bak de vormgeometrie in de bytes bij import, zodat de rest van de pipeline
+  // (weergave, opslaan, dedup) de afbeelding ziet zoals de auteur hem neerzette.
+  final geometry = _geometry(pic, xfrm);
+  final imageBytes = geometry.isIdentity
+      ? Uint8List.fromList(bytes)
+      : bakeImportGeometry(Uint8List.fromList(bytes), geometry, resolved);
 
   return SourceImage(
     bytes: imageBytes,
@@ -144,6 +140,50 @@ SourceImage? parsePic(
     name: name ?? p.url.basename(resolved),
   );
 }
+
+/// De geometrie die PowerPoint op deze `p:pic` legt: de uitsnede uit
+/// `<a:srcRect>` in de `<p:blipFill>`, en het spiegelen en draaien uit [xfrm].
+///
+/// `rot` staat in 60000sten van een graad (10800000 = 180°) en telt met de klok
+/// mee; `flipH`/`flipV` zijn xsd:boolean, dus zowel `1` als `true`.
+ImportImageGeometry _geometry(XmlElement pic, XmlElement? xfrm) {
+  final rot60000 = xfrm?.getAttribute('rot');
+  return ImportImageGeometry(
+    crop: _srcRectCrop(pic),
+    flipHorizontal: _isTrue(xfrm?.getAttribute('flipH')),
+    flipVertical: _isTrue(xfrm?.getAttribute('flipV')),
+    clockwiseDegrees: rot60000 == null
+        ? 0
+        : (int.tryParse(rot60000) ?? 0) / 60000.0,
+  );
+}
+
+/// De uitsnede uit `<a:srcRect>`: per zijde hoeveel er van de bronafbeelding
+/// wegvalt, in duizendsten van een procent (25000 = 25%).
+ImportCrop? _srcRectCrop(XmlElement pic) {
+  final srcRect = descendantsLocal(pic, 'srcRect').firstOrNull;
+  if (srcRect == null) return null;
+  return importCrop(
+    left: _fractionAttr(srcRect, 'l'),
+    top: _fractionAttr(srcRect, 't'),
+    right: _fractionAttr(srcRect, 'r'),
+    bottom: _fractionAttr(srcRect, 'b'),
+  );
+}
+
+/// Een ST_Percentage-attribuut als fractie. De transitionele schrijfwijze is
+/// een geheel getal in duizendsten van een procent, de strikte een string met
+/// procentteken (`"25%"`) — beide komen in het wild voor.
+double _fractionAttr(XmlElement el, String name) {
+  final raw = el.getAttribute(name);
+  if (raw == null) return 0;
+  if (raw.endsWith('%')) {
+    return (double.tryParse(raw.substring(0, raw.length - 1)) ?? 0) / 100;
+  }
+  return (int.tryParse(raw) ?? 0) / 100000.0;
+}
+
+bool _isTrue(String? value) => value == '1' || value == 'true';
 
 /// True wanneer [pic] wél naar een ingesloten afbeelding verwijst maar de bytes
 /// ontbreken — echt verlies, geen weggefilterd logo (dat draagt zijn bytes wél).

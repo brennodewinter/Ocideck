@@ -427,4 +427,133 @@ void main() {
       );
     },
   );
+
+  group('grafische stijl van een draw:frame', () {
+    // De verwachtingen komen uit wat LibreOffice van dezelfde stijl rendert
+    // (`soffice --headless --convert-to pdf`), niet uit een redenering over de
+    // norm.
+    const style = 'urn:oasis:names:tc:opendocument:xmlns:style:1.0';
+    const fo = 'urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0';
+
+    Future<img.Image> importedImage(String graphicProps, int size) async {
+      final content =
+          '<?xml version="1.0" encoding="UTF-8"?>'
+          '<office:document-content xmlns:office="$_office" xmlns:draw="$_draw" '
+          'xmlns:text="$_text" xmlns:xlink="$_xlink" xmlns:style="$style" '
+          'xmlns:fo="$fo" xmlns:presentation="$_presentation" '
+          'xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0">'
+          '<office:automatic-styles>'
+          '<style:style style:name="gr1" style:family="graphic">'
+          '<style:graphic-properties $graphicProps/>'
+          '</style:style>'
+          '</office:automatic-styles>'
+          '<office:body><office:presentation><draw:page draw:name="p1">'
+          '<draw:frame draw:name="Img" draw:style-name="gr1" '
+          'svg:x="4cm" svg:y="2cm" svg:width="8cm" svg:height="8cm">'
+          '<draw:image xlink:href="Pictures/photo.png" xlink:type="simple"/>'
+          '</draw:frame>'
+          '</draw:page></office:presentation></office:body>'
+          '</office:document-content>';
+      final bytes = _zip({
+        'mimetype': _b('application/vnd.oasis.opendocument.presentation'),
+        'content.xml': _b(content),
+        'Pictures/photo.png': _quadrantPng(size),
+      });
+
+      final deck = (await OdpImporter().importBytes(
+        bytes,
+        path: 'geometrie.odp',
+      )).okValue!;
+      final decoded = img.decodeImage(deck.slides.single.images.single.bytes);
+      expect(decoded, isNotNull);
+      return decoded!;
+    }
+
+    test('style:mirror="horizontal" spiegelt links en rechts', () async {
+      final mirrored = await importedImage('style:mirror="horizontal"', 8);
+      expect(_quadrantAt(mirrored, 0, 0), 'groen');
+      expect(_quadrantAt(mirrored, 1, 0), 'rood');
+      expect(_quadrantAt(mirrored, 0, 1), 'geel');
+      expect(_quadrantAt(mirrored, 1, 1), 'blauw');
+    });
+
+    test('fo:clip snijdt bij, afgemeten aan de natuurlijke maat', () async {
+      // Zonder eigen resolutie is een pixel 0,2 mm, dus deze 100x100 meet
+      // 2x2 cm: 1cm van boven is de helft, 0,5cm van links een kwart.
+      final cropped = await importedImage(
+        'fo:clip="rect(1cm, 0cm, 0cm, 0.5cm)"',
+        100,
+      );
+      expect([cropped.width, cropped.height], [75, 50]);
+      expect(_pixelName(cropped, 10, 25), 'blauw');
+      expect(_pixelName(cropped, 50, 25), 'geel');
+    });
+
+    test('fo:clip in millimeters leest als millimeters', () async {
+      final cropped = await importedImage(
+        'fo:clip="rect(10mm, 0mm, 0mm, 5mm)"',
+        100,
+      );
+      expect([cropped.width, cropped.height], [75, 50]);
+    });
+
+    test('de uitsnede telt vanaf de bron, vóór het spiegelen', () async {
+      // Van links een kwart weg laat rood 25px en groen 50px over; ná het
+      // spiegelen staat groen links en beslaat het twee derde. In de omgekeerde
+      // volgorde zou groen maar een derde beslaan.
+      final cropped = await importedImage(
+        'style:mirror="horizontal" fo:clip="rect(0cm, 0cm, 0cm, 0.5cm)"',
+        100,
+      );
+      expect([cropped.width, cropped.height], [75, 100]);
+      expect(_pixelName(cropped, 0, 10), 'groen');
+      expect(
+        _pixelName(cropped, 37, 10),
+        'groen',
+        reason: 'in het midden scheiden de twee volgordes zich',
+      );
+      expect(_pixelName(cropped, 70, 10), 'rood');
+    });
+
+    test('een uitsnede die niets overlaat wordt genegeerd', () async {
+      final untouched = await importedImage(
+        'fo:clip="rect(0cm, 1cm, 0cm, 1cm)"',
+        100,
+      );
+      expect([untouched.width, untouched.height], [100, 100]);
+    });
+  });
+}
+
+/// Een afbeelding met vier herkenbare kwadranten: rood linksboven, groen
+/// rechtsboven, blauw linksonder, geel rechtsonder.
+Uint8List _quadrantPng(int size) {
+  final image = img.Image(width: size, height: size);
+  for (var y = 0; y < size; y++) {
+    for (var x = 0; x < size; x++) {
+      final left = x < size / 2;
+      final color = y < size / 2
+          ? (left ? const [255, 0, 0] : const [0, 255, 0])
+          : (left ? const [0, 0, 255] : const [255, 255, 0]);
+      image.setPixelRgb(x, y, color[0], color[1], color[2]);
+    }
+  }
+  return Uint8List.fromList(img.encodePng(image));
+}
+
+/// De kleurnaam midden in het kwadrant ([col], [row]) van een 2x2-indeling.
+String _quadrantAt(img.Image image, int col, int row) => _pixelName(
+  image,
+  (image.width * (2 * col + 1) / 4).floor(),
+  (image.height * (2 * row + 1) / 4).floor(),
+);
+
+String _pixelName(img.Image image, int x, int y) {
+  final pixel = image.getPixel(x, y);
+  final (r, g, b) = (pixel.r > 127, pixel.g > 127, pixel.b > 127);
+  if (r && g) return 'geel';
+  if (r) return 'rood';
+  if (g) return 'groen';
+  if (b) return 'blauw';
+  return 'onbekend (${pixel.r}, ${pixel.g}, ${pixel.b})';
 }

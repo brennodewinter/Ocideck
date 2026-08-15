@@ -612,4 +612,125 @@ void main() {
       0,
     );
   });
+
+  group('vormgeometrie op een p:pic', () {
+    // De verwachtingen komen uit wat LibreOffice van dezelfde geometrie
+    // rendert (`soffice --headless --convert-to pdf`), niet uit een redenering
+    // over de norm.
+    Future<img.Image> importedPic(String xfrmAttrs, String srcRect) async {
+      final slideXml =
+          '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+          '<p:sld xmlns:a="$_a" xmlns:p="$_p" xmlns:r="$_r">'
+          '<p:cSld><p:spTree>'
+          '<p:pic>'
+          '<p:nvPicPr><p:cNvPr id="5" name="Photo"/><p:cNvPicPr/><p:nvPr/></p:nvPicPr>'
+          '<p:blipFill><a:blip r:embed="rId3"/>$srcRect'
+          '<a:stretch><a:fillRect/></a:stretch></p:blipFill>'
+          '<p:spPr><a:xfrm$xfrmAttrs><a:off x="0" y="0"/>'
+          '<a:ext cx="3048000" cy="3048000"/></a:xfrm></p:spPr>'
+          '</p:pic>'
+          '</p:spTree></p:cSld></p:sld>';
+      final bytes = _zip({
+        'ppt/presentation.xml': _presentationXml(1),
+        'ppt/_rels/presentation.xml.rels': _presRels(1),
+        'ppt/slides/slide1.xml': slideXml,
+        'ppt/slides/_rels/slide1.xml.rels': _slideRels(withImage: true),
+        'ppt/media/photo.png': _quadrantPng(8),
+      });
+
+      final result = await PptxImporter().importBytes(
+        bytes,
+        path: 'geometrie.pptx',
+      );
+      expect(result.isOk, isTrue);
+      final decoded = img.decodeImage(
+        result.okValue!.slides.single.images.single.bytes,
+      );
+      expect(decoded, isNotNull);
+      return decoded!;
+    }
+
+    test('flipH spiegelt links en rechts, flipV boven en onder', () async {
+      final mirrored = await importedPic(' flipH="1"', '');
+      expect(_quadrantAt(mirrored, 0, 0), 'groen');
+      expect(_quadrantAt(mirrored, 1, 0), 'rood');
+      expect(_quadrantAt(mirrored, 0, 1), 'geel');
+      expect(_quadrantAt(mirrored, 1, 1), 'blauw');
+
+      final flipped = await importedPic(' flipV="1"', '');
+      expect(_quadrantAt(flipped, 0, 0), 'blauw');
+      expect(_quadrantAt(flipped, 1, 0), 'geel');
+      expect(_quadrantAt(flipped, 0, 1), 'rood');
+      expect(_quadrantAt(flipped, 1, 1), 'groen');
+    });
+
+    test('srcRect snijdt weg wat de auteur wegsneed', () async {
+      // l en t op 50% laten alleen het kwadrant rechtsonder over.
+      final cropped = await importedPic('', '<a:srcRect l="50000" t="50000"/>');
+      expect([cropped.width, cropped.height], [4, 4]);
+      expect(_quadrantAt(cropped, 0, 0), 'geel');
+      expect(_quadrantAt(cropped, 1, 1), 'geel');
+    });
+
+    test('de uitsnede telt vanaf de bron, vóór het spiegelen', () async {
+      // Van links 25% weg laat rood 2px en groen 4px over; ná het spiegelen
+      // staat groen dus links en beslaat het twee derde van de breedte. In de
+      // omgekeerde volgorde zou groen maar een derde beslaan — het verschil is
+      // op de middelste kolom te zien.
+      final cropped = await importedPic(' flipH="1"', '<a:srcRect l="25000"/>');
+      expect([cropped.width, cropped.height], [6, 8]);
+      expect(_pixelName(cropped, 0, 0), 'groen');
+      expect(
+        _pixelName(cropped, 3, 0),
+        'groen',
+        reason: 'op de middelste kolom scheiden de twee volgordes zich',
+      );
+      expect(_pixelName(cropped, 5, 0), 'rood');
+    });
+
+    test('srcRect met procenttekens leest hetzelfde als duizendsten', () async {
+      final cropped = await importedPic('', '<a:srcRect l="50%" t="50%"/>');
+      expect([cropped.width, cropped.height], [4, 4]);
+      expect(_quadrantAt(cropped, 0, 0), 'geel');
+    });
+
+    test('een negatieve srcRect vult aan en laat de bron dus heel', () async {
+      final untouched = await importedPic('', '<a:srcRect l="-25000"/>');
+      expect([untouched.width, untouched.height], [8, 8]);
+      expect(_quadrantAt(untouched, 0, 0), 'rood');
+    });
+  });
+}
+
+/// Een afbeelding met vier herkenbare kwadranten: rood linksboven, groen
+/// rechtsboven, blauw linksonder, geel rechtsonder.
+Uint8List _quadrantPng(int size) {
+  final image = img.Image(width: size, height: size);
+  for (var y = 0; y < size; y++) {
+    for (var x = 0; x < size; x++) {
+      final left = x < size / 2;
+      final color = y < size / 2
+          ? (left ? const [255, 0, 0] : const [0, 255, 0])
+          : (left ? const [0, 0, 255] : const [255, 255, 0]);
+      image.setPixelRgb(x, y, color[0], color[1], color[2]);
+    }
+  }
+  return Uint8List.fromList(img.encodePng(image));
+}
+
+/// De kleurnaam midden in het kwadrant ([col], [row]) van een 2x2-indeling.
+String _quadrantAt(img.Image image, int col, int row) => _pixelName(
+  image,
+  (image.width * (2 * col + 1) / 4).floor(),
+  (image.height * (2 * row + 1) / 4).floor(),
+);
+
+String _pixelName(img.Image image, int x, int y) {
+  final pixel = image.getPixel(x, y);
+  final (r, g, b) = (pixel.r > 127, pixel.g > 127, pixel.b > 127);
+  if (r && g) return 'geel';
+  if (r) return 'rood';
+  if (g) return 'groen';
+  if (b) return 'blauw';
+  return 'onbekend (${pixel.r}, ${pixel.g}, ${pixel.b})';
 }
