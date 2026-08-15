@@ -81,6 +81,18 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(dast): de ZAP-basisscan opende elke release-run met een rode regel,
+  `Unable to copy yaml file to /zap/wrk/zap.yaml [Errno 13] Permission denied`.
+  Oorzaak: `/zap/wrk` bestaat niet in het image, dus door de configuratie eróp te
+  monteren (`/zap/wrk/conf`) maakte de Docker-daemon die bovenliggende map zelf
+  aan — als root. ZAP draait als uid 1000 en kon zijn eigen
+  Automation-Framework-plan daar niet meer neerzetten. De scan liep er nog wel
+  doorheen en de bevindingen klopten, maar een rode regel bovenaan een
+  release-run is precies wat leert om over uitvoer heen te lezen; en de eerste de
+  beste `-r rapport.html` zou er wél op stukgelopen zijn. `/zap/wrk` is nu een
+  tmpfs van de zap-gebruiker met de alleen-lezen configuratie eroverheen.
+  Nagemeten tegen de live site: dezelfde uitkomst (3 waarschuwingen, 2 genegeerd,
+  62 geslaagd), zonder de foutregel.
 - fix(keynote-import): ook bij Keynote kwam een gespiegelde of bijgesneden
   afbeelding onbewerkt binnen. Keynote bewaart het spiegelen als twee vlaggen in
   de geometrie van de afbeelding, en het bijsnijden als een apart masker: de
