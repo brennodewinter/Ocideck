@@ -571,6 +571,15 @@ tag push, the signing and the web deploy. The password is held only in memory
 and fed to `minisign` on standard input; the macOS notarisation leans on this
 Mac's keychain items and asks for nothing.
 
+*Before* the password it refuses to start while another Flutter or Dart process is
+working in this same worktree. Phase 1 builds clean, and a clean build begins with
+`flutter clean`; a `flutter run` you left open keeps refilling `.dart_tool`, which
+`flutter clean` reports but survives with exit 0, so the next `dart run` dies on a
+half-deleted `hooks_runner` cache ten minutes later — as the v0.4.4 run did. Close
+the other process and start again. `scripts/notarize_macos.sh` checks the same
+invariant directly (is `.dart_tool` actually gone?) so it also holds when you run
+that script by hand.
+
 Right after the password, a **pre-flight** checks everything the later,
 irreversible steps will need — the forge token, the `mirror` remote, the deploy
 host over ssh, and a throwaway `minisign` signature — so a wrong password or an
@@ -618,7 +627,12 @@ deleted on merge, and the tag is placed on the PR's exact merge commit.
 Fail-safe: `set -Eeuo pipefail` plus an `ERR` trap name *which* step failed on
 *which* line, and whether the tag was already pushed — before the push nothing
 went out and the local release branch is cleaned up (rerun fresh, or `--resume`
-if the PR was already open). After the push the tag stays put: finish the **same**
+if the PR was already open). That clean-up reports what it actually did: if the
+working tree blocks the checkout back to the branch you started from, the release
+branch — carrying the version bump — is still there, and the script says so and
+hands you the two commands to remove it. It used to swallow both failures and
+claim success, which is how a version bump once ended up inherited by an unrelated
+branch. After the push the tag stays put: finish the **same**
 tag with `--resume vX.Y.Z`; only when a released artifact is itself wrong do you
 cut the next patch tag — never a re-tag (that degrades the mirror Windows release
 to a draft and leaves `windows-ophalen` waiting forever). `--dry-run` shows the

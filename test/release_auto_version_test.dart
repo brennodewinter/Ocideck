@@ -533,4 +533,235 @@ void main() {
           'parallelle sessies; een reset zou hun ongecommitte werk wissen.',
     );
   });
+
+  // Regressie voor de v0.4.4-run van 15-08-2026. cleanup_branch deed zijn twee
+  // git-commando's met '2>/dev/null || true'. Faalde de checkout (een werkboom die
+  // één bestand draagt dat tussen de branches verschilt is genoeg), dan faalde
+  // 'branch -D' gegarandeerd óók — de branch stond dan nog uitgecheckt — terwijl
+  // het scherm zei dat er was opgeruimd. De release-branch mét versiebump bleef
+  // staan, en de eerstvolgende 'git checkout -b' takte er ongemerkt van af: zo
+  // kwam die bump terecht in een PR die een DAST-fix heette.
+  test('een mislukte opruiming van de release-branch wordt gemeld, niet gesmoord', () {
+    final cleanup = functionBody('cleanup_branch');
+    for (final cmd in ['git checkout', 'git branch -D']) {
+      final line = cleanup
+          .split('\n')
+          .firstWhere(
+            (l) =>
+                l.contains(RegExp(RegExp.escape(cmd))) &&
+                !l.trimLeft().startsWith('#'),
+            orElse: () => fail('$cmd niet gevonden in cleanup_branch'),
+          );
+      expect(
+        line,
+        isNot(contains('|| true')),
+        reason:
+            '"$cmd" in cleanup_branch mag niet met "|| true" worden weggemoffeld: '
+            'dan blijft een release-branch mét versiebump staan terwijl de melding '
+            'zegt dat hij is opgeruimd.',
+      );
+    }
+    expect(
+      cleanup,
+      contains('cleanup_failed'),
+      reason:
+          'cleanup_branch moet een mislukte opruiming melden (cleanup_failed), '
+          'zodat de gebruiker weet dat de branch met de versiebump er nog staat.',
+    );
+    expect(
+      functionBody('cleanup_failed'),
+      matches(RegExp(r'git\s+branch\s+-D')),
+      reason:
+          'de melding moet het herstelcommando meegeven; zonder dat blijft de '
+          'gebruiker met een halve release-branch zitten.',
+    );
+
+    // En on_err mag de opruiming niet vooraf aankondigen als voldongen feit —
+    // cleanup_branch meldt zelf wat er werkelijk gebeurde.
+    expect(
+      functionBody('on_err'),
+      isNot(contains('wordt opgeruimd')),
+      reason:
+          'on_err beweerde "de release-branch wordt opgeruimd" vóórdat de '
+          'opruiming had plaatsgevonden; die uitkomst hoort van cleanup_branch '
+          'te komen.',
+    );
+  });
+
+  // Tweede helft van diezelfde run: een 'flutter run' die in deze werkboom bleef
+  // staan hield .dart_tool bezet. 'flutter clean' meldt dat wél maar eindigt met
+  // exit 0, waarna de eerstvolgende 'dart run' viel over een half verdwenen
+  // hooks_runner-cache — tien minuten en een wachtwoord verder, op een stap
+  // (sbom-verify) die niets met de oorzaak te maken had.
+  test('een bezette werkboom wordt getoetst vóór het wachtwoord', () {
+    final src = File(script).readAsStringSync();
+    final guardIdx = src.indexOf(
+      RegExp(r'^assert_workspace_idle\s*$', multiLine: true),
+    );
+    final promptIdx = src.indexOf('minisign-wachtwoord');
+    expect(
+      guardIdx,
+      isNonNegative,
+      reason:
+          'release_auto moet assert_workspace_idle aanroepen: een tweede '
+          'flutter-proces in deze werkboom maakt de schone bouw onmogelijk.',
+    );
+    expect(
+      guardIdx,
+      lessThan(promptIdx),
+      reason:
+          'de toets hoort vóór de wachtwoordprompt: anders tikt de gebruiker '
+          'een wachtwoord in voor een keten die tien minuten later alsnog valt.',
+    );
+  });
+
+  test('notarize_macos toetst dat flutter clean écht schoonmaakte', () {
+    const notarize = 'scripts/notarize_macos.sh';
+    final src = File(notarize).readAsStringSync();
+    final cleanIdx = src.indexOf(
+      RegExp(r'^\s*flutter clean\s*$', multiLine: true),
+    );
+    final checkIdx = src.indexOf(
+      RegExp(r'^\s*if \[\[ -d \.dart_tool \]\]', multiLine: true),
+    );
+    final buildIdx = src.indexOf(
+      RegExp(r'^\s*make build-macos\s*$', multiLine: true),
+    );
+    expect(
+      cleanIdx,
+      isNonNegative,
+      reason: 'geen "flutter clean" in $notarize',
+    );
+    expect(
+      checkIdx,
+      isNonNegative,
+      reason:
+          '"flutter clean" eindigt met exit 0 ook als het .dart_tool liet staan; '
+          '$notarize moet die invariant zelf toetsen vóór het bouwt.',
+    );
+    expect(cleanIdx, lessThan(checkIdx));
+    expect(
+      checkIdx,
+      lessThan(buildIdx),
+      reason: 'de toets hoort vóór "make build-macos", niet erna.',
+    );
+  });
+
+  // Gedragstoets, geen grep: speelt de opruiming na in een wegwerp-repo. De
+  // statische toets hierboven pint de vórm; deze pint wat er werkelijk gebeurt —
+  // en dat is wat op 15-08-2026 stilletjes misging.
+  test('cleanup_branch ruimt op, of zegt eerlijk dat het niet lukte', () {
+    final snippet =
+        'cleanup_failed() {\n${functionBody('cleanup_failed')}\n}\n'
+        'cleanup_branch() {\n${functionBody('cleanup_branch')}\n}\n';
+
+    ({String out, bool branchLeft, String head}) play({
+      required bool dirty,
+      required String startBranch,
+    }) {
+      final dir = Directory.systemTemp.createTempSync('ocideck-cleanup');
+      String git(List<String> args) {
+        final r = Process.runSync('git', args, workingDirectory: dir.path);
+        if (r.exitCode != 0) fail('git ${args.join(' ')}: ${r.stderr}');
+        return (r.stdout as String).trim();
+      }
+
+      git(['-c', 'init.defaultBranch=main', 'init', '-q', '.']);
+      git(['config', 'user.email', 'test@example.invalid']);
+      git(['config', 'user.name', 'test']);
+      git(['config', 'commit.gpgsign', 'false']);
+      File('${dir.path}/f.txt').writeAsStringSync('een\n');
+      git(['add', '.']);
+      git(['commit', '-qm', 'basis']);
+      // De release-branch met zijn versiebump, precies zoals fase 1 hem achterlaat.
+      git(['checkout', '-q', '-B', 'rel', 'main']);
+      File('${dir.path}/f.txt').writeAsStringSync('versiebump\n');
+      git(['commit', '-qam', 'bump']);
+      if (dirty) {
+        File('${dir.path}/f.txt').writeAsStringSync('ongecommit werk\n');
+      }
+      File('${dir.path}/run.sh').writeAsStringSync(
+        'set -Eeuo pipefail\n'
+        'START_BRANCH=$startBranch\nBRANCH=rel\nCLEANUP_BACK=""\n'
+        '$snippet\ncleanup_branch\n',
+      );
+      final r = Process.runSync('bash', [
+        '${dir.path}/run.sh',
+      ], workingDirectory: dir.path);
+      final left =
+          Process.runSync('git', [
+            'rev-parse',
+            '-q',
+            '--verify',
+            'refs/heads/rel',
+          ], workingDirectory: dir.path).exitCode ==
+          0;
+      final head = git(['branch', '--show-current']);
+      final out = '${r.stdout}${r.stderr}';
+      dir.deleteSync(recursive: true);
+      return (out: out, branchLeft: left, head: head);
+    }
+
+    final ok = play(dirty: false, startBranch: 'main');
+    expect(ok.branchLeft, isFalse, reason: 'schone werkboom: branch hoort weg');
+    expect(ok.head, 'main');
+    expect(ok.out, contains('opgeruimd'));
+
+    // De faalkant. Vroeger: beide git-fouten gesmoord, branch blijft staan, en
+    // niets op het scherm — waarna de volgende 'checkout -b' de bump erfde.
+    final blocked = play(dirty: true, startBranch: 'main');
+    expect(
+      blocked.branchLeft,
+      isTrue,
+      reason:
+          'de checkout kan hier niet slagen; dat is de premisse van de toets',
+    );
+    expect(
+      blocked.out,
+      contains('NIET opgeruimd'),
+      reason: 'een mislukte opruiming moet zichtbaar zijn, niet gesmoord',
+    );
+    expect(
+      blocked.out,
+      contains('git branch -D rel'),
+      reason: 'de melding hoort het herstelcommando mee te geven',
+    );
+
+    // Nasleep van een eerdere gefaalde run: je stáát al op de release-branch.
+    // Teruggaan naar jezelf zou 'branch -D' laten weigeren; val terug op main.
+    final fromRel = play(dirty: false, startBranch: 'rel');
+    expect(fromRel.branchLeft, isFalse);
+    expect(fromRel.head, 'main');
+  }, skip: skipOnWindows);
+
+  test('de wachtwoordprompt meldt zich als eigen stap', () {
+    // Een STEP-label blijft staan tot het volgende. Zonder eigen label kreeg een
+    // fout bij de prompt (bijvoorbeeld read op EOF, zonder tty) de naam van de
+    // vorige stap toegewezen — dezelfde verwarring als build-release/notarize.
+    final src = File(script).readAsStringSync();
+    final stepIdx = src.indexOf('STEP="wachtwoord"');
+    final promptIdx = src.indexOf('minisign-wachtwoord');
+    expect(
+      stepIdx,
+      isNonNegative,
+      reason: 'de promptsectie hoort een eigen STEP te zetten.',
+    );
+    expect(stepIdx, lessThan(promptIdx));
+  });
+
+  test('bouwen en notariseren melden zich als aparte stap', () {
+    // Onder één STEP-label meldde de ERR-trap "make build-release" terwijl het
+    // notariseren viel; dat stuurt de diagnose naar de verkeerde stap.
+    final src = File(script).readAsStringSync();
+    final stepIdx = src.indexOf('STEP="make notarize-macos"');
+    final callIdx = src.indexOf(
+      RegExp(r'^make notarize-macos\s*$', multiLine: true),
+    );
+    expect(
+      stepIdx,
+      isNonNegative,
+      reason: 'notarize-macos hoort een eigen STEP-label te hebben.',
+    );
+    expect(stepIdx, lessThan(callIdx));
+  });
 }

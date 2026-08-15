@@ -93,6 +93,25 @@ in Dutch, and it keeps growing on `main` between releases.
   tmpfs van de zap-gebruiker met de alleen-lezen configuratie eroverheen.
   Nagemeten tegen de live site: dezelfde uitkomst (3 waarschuwingen, 2 genegeerd,
   62 geslaagd), zonder de foutregel.
+- fix(release): de onbewaakte release-keten strandde op een tweede
+  flutter-proces, en ruimde daarna niet op wat ze beweerde op te ruimen. Twee
+  fouten die elkaar versterkten in de v0.4.4-run. (1) `make notarize-macos`
+  bouwt schoon en begint met `flutter clean`; draaide er in dezelfde werkboom
+  nog een `flutter run`, dan bleef `.dart_tool` staan — `flutter clean` méldt dat
+  wel maar eindigt met exit 0 — en viel de eerstvolgende `dart run` over een half
+  verdwenen hooks_runner-cache. De keten sneuvelde tien minuten en een wachtwoord
+  verder op `sbom-verify`, een stap die niets met de oorzaak te maken had. Het
+  notarisatiescript toetst nu de invariant zelf in plaats van de exitstatus, en
+  `release_auto.sh` weigert vóór de wachtwoordprompt te starten zolang er een
+  flutter-proces in deze werkboom draait. (2) De opruiming daarna deed haar twee
+  git-commando's met `|| true`: faalde de checkout terug naar de startbranch, dan
+  faalde het verwijderen gegarandeerd óók — de branch stond dan nog uitgecheckt —
+  terwijl het scherm zei dat er was opgeruimd. De release-branch mét versiebump
+  bleef staan en de eerstvolgende `git checkout -b` takte er ongemerkt van af, zo
+  belandde die bump in een PR die een DAST-fix heette. De opruiming meldt nu wat
+  ze werkelijk deed en geeft bij falen het herstelcommando mee. Bouwen en
+  notariseren melden zich voortaan als aparte stap, zodat de foutmelding de juiste
+  stap noemt.
 - fix(keynote-import): ook bij Keynote kwam een gespiegelde of bijgesneden
   afbeelding onbewerkt binnen. Keynote bewaart het spiegelen als twee vlaggen in
   de geometrie van de afbeelding, en het bijsnijden als een apart masker: de
