@@ -81,6 +81,22 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(import): een gespiegelde of bijgesneden afbeelding kwam ongespiegeld en
+  onbijgesneden binnen — bij PPTX en ODP. De import las tot nu toe alleen de
+  rotatie van een afbeelding; het spiegelen (`flipH`/`flipV` bij PowerPoint,
+  `style:mirror` bij Impress) en het bijsnijden (`<a:srcRect>` respectievelijk
+  `fo:clip`) ging verloren. Bij een bijgesneden foto betekende dat dat beeld
+  terugkwam dat de auteur bewust had weggesneden. Beide worden nu in de pixels
+  gebakken, in de volgorde die beide programma's zelf aanhouden: eerst
+  bijsnijden in de ruwe bron, dan spiegelen, dan draaien — een andere volgorde
+  levert bij een kwartslag een zichtbaar ander beeld op. Voor ODF telt daarbij
+  dat `fo:clip` niet in fracties maar in lengtes rekent, afgemeten tegen de
+  natuurlijke afmeting van de afbeelding (pixelformaat gedeeld door haar eigen
+  pHYs-/JFIF-resolutie, en 0,2 mm per pixel als ze die niet heeft) — tegen het
+  kader afmeten zou een geschaalde afbeelding fors verkeerd bijsnijden. Alle
+  gevallen zijn getoetst tegen wat LibreOffice zélf van hetzelfde bestand
+  rendert (`soffice --headless --convert-to pdf`), voor het PPTX en voor het
+  ODP dat LibreOffice daaruit maakt.
 - fix(import): een gedraaide foto kwam scheef binnen — bij alle drie de
   presentatieformaten. PowerPoint en Impress negeren de EXIF-orientatietag van
   een cameraopname, dus een auteur die zijn foto rechtop wilde hebben, draaide

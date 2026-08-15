@@ -2368,7 +2368,7 @@ without interruption.
 | Titles and subtitles; section slides. | Animations and slide transitions — OciDeck has neither. |
 | Bullet lists, including their nesting level. | Free positioning. Independently placed text boxes are merged in reading order, and the note slide says how many there were. |
 | Two text columns, recognised from how the text boxes sit side by side. | Merged table cells. GFM tables have no spans, so the cells are flattened and the merge is reported. |
-| One or two images per slide, with their captions. Identical images are stored once. | Audio. There is no audio slide type to put it on, so the file name ends up in the note. |
+| One or two images per slide, with their captions, as the author placed them: a picture rotated, mirrored or cropped in PowerPoint or Impress arrives that way, because the crop and the flip are baked into the pixels rather than dropped. Identical images are stored once. | Audio. There is no audio slide type to put it on, so the file name ends up in the note. |
 | Tables, first row as the header. | A table *and* a chart on the same slide: one of the two per slide, and the note says which one was dropped. |
 | Charts — type, categories and numeric series. | The source's colours and fonts. An imported deck takes OciDeck's own styling. |
 | Video (PowerPoint and Keynote), quotes, and timelines where the bullets read as `marker :: event`. | |
