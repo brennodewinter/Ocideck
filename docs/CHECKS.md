@@ -741,13 +741,20 @@ also declares them, but see the [CI note](#continuous-integration).)
   brand-new, wholly untested file and the percentage does not move a hair: the
   one case a coverage floor exists to catch is the one case it structurally
   cannot see. `--require-instrumented` enumerates `lib/` from disk instead and
-  fails on any file missing from the report. The 60 files legitimately absent
+  fails on any file missing from the report. The 84 files legitimately absent
   today are baselined in `uncoveredBaseline` with a reason each — platform
   halves / conditional-import facades (the VM test runner cannot load
   `dart:js_interop` code at all), files with no executable lines (`export`
-  barrels, enums, const data tables), and the per-language finding-template data
-  tables under `lib/services/finding_templates/`. It is a **ratchet**: it may shrink, and
-  the run prints a tip when a baselined file becomes covered.
+  barrels, enums, const data tables), the per-language finding-template data
+  tables under `lib/services/finding_templates/`, and one user-approved native
+  binding (`meeting_media_core_webrtc.dart`, which needs a real device).
+  *(Corrected 2026-08-15: this page still carried 60, the count from an earlier
+  stand of the list.)* It is a **ratchet**: it may shrink, and the run prints a
+  tip when a baselined file becomes covered — but only when that file also
+  clears the per-file floor. A baselined file can sit in the report and still
+  run almost none of its own lines; dropping *that* one from the list would trip
+  `--per-file-floor` on the next run, so the run names it separately as
+  something a test has to fix first.
 - Since this supersedes `make test` (same suite, one run, plus the floor),
   `make check` depends on **`coverage`** rather than `test`.
 
@@ -776,8 +783,11 @@ also declares them, but see the [CI note](#continuous-integration).)
   somebody can raise; a gate that fails on *every* file below the floor is not.
   So the budget is gone: anything that drops below the floor is a test to
   write, not a number to adjust. The only escape is `uncoveredBaseline`, and that is a list
-  with a reason per line — reserved for platform halves and files with no
-  executable lines at all.
+  with a reason per line — reserved for platform halves, files with no
+  executable lines at all, and the one user-approved native binding that cannot
+  run in a headless VM. This gate skips that list, so a file on it is not
+  floored; that is also why the leave-the-list tip refuses to recommend dropping
+  a baselined file that would land below the floor the moment it left.
 
 ### `make check-no-coverage`
 - **Runs:** every static gate that `make check` runs, then `make test` instead

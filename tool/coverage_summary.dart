@@ -48,20 +48,18 @@ const Set<String> uncoveredBaseline = {
   // it is present on every platform, not split io/web — but shares the reason
   // those sit here: it cannot run in a headless test VM. libwebrtc needs a real
   // device (camera/mic, ICE, a live peer), so this binding is verified LIVE, not
-  // by a unit test. No test imports this file at all — doing so would only cover
-  // the two trivial delegations (the constructor and the `mediaE2ee` getter, which
-  // just forwards to the pure, tested `mediaE2eeFor`) while `selfTest`'s libwebrtc
-  // call stays uncovered, landing the file at ~33% and tripping the per-file floor
-  // (which does not exempt this list). So the whole file is left un-instrumented,
-  // its only real decision — the E2EE fact — is proven directly on `mediaE2eeFor`
-  // in meeting_media_core_test.dart, and no decision logic hides here. Keep this
-  // list to genuine such bindings, not a hiding place for logic testable via a fake.
+  // by a unit test. The preflight tile imports it, so it does carry a report
+  // record — at 0 of 9 lines, because nothing here can run headless. Testing it
+  // would only cover the two trivial delegations (the constructor and the
+  // `mediaE2ee` getter, which just forwards to the pure, tested `mediaE2eeFor`)
+  // while `selfTest`'s libwebrtc call stays uncovered, leaving the file well
+  // under the per-file floor. That floor skips this list precisely so the
+  // approved exemption is not defeated by it, and `classifyBaselined` keeps the
+  // leave-the-list tip from recommending it. Its only real decision — the E2EE
+  // fact — is proven directly on `mediaE2eeFor` in meeting_media_core_test.dart,
+  // and no decision logic hides here. Keep this list to genuine such bindings,
+  // not a hiding place for logic testable via a fake.
   'lib/meetings/meeting_media_core_webrtc.dart',
-  // NO TEST YET: `gantt_dsl.dart` is een nieuwe pure-Dart converter
-  // (GANTT_SLIDETYPE §3.1) die op main is geland zonder test. Niet gerelateerd
-  // aan #1235; toegevoegd aan de baseline zodat een andere PR de poort niet
-  // blokkeert. Volgt: een test die tabel → DSL round-trip bewijst.
-  'lib/services/improvement/gantt_dsl.dart',
   // NO EXECUTABLE LINES: `library_scan_limits.dart` holds only two const upper
   // bounds shared by the deck scan and the image picker (#1049) — lcov emits no
   // record for a file with nothing to execute. The values are exercised through
@@ -260,13 +258,14 @@ const Set<String> uncoveredBaseline = {
   'lib/services/cve/local_cve_database_api.dart',
   // NO EXECUTABLE LINES: a single enum declaration.
   'lib/widgets/markdown_editor/notes_editor_mode.dart',
-  // NO EXECUTABLE LINES: the two stand-alone dark palettes — nothing but
-  // `static const Color` tokens. They used to hold one unreachable line each (a
-  // private constructor that existed only to block instantiation) and therefore
-  // sat at 0% forever, which no test could ever fix. They are now
-  // `abstract final class`, the way `finding_severity_palette.dart` already
-  // did it, which says the same thing without a statement to reach.
-  'lib/theme/image_picker_palette.dart',
+  // NO EXECUTABLE LINES: the stand-alone dark presenter palette — nothing but
+  // `static const Color` tokens. It used to hold one unreachable line (a private
+  // constructor that existed only to block instantiation) and therefore sat at
+  // 0% forever, which no test could ever fix. It is now `abstract final class`,
+  // the way `finding_severity_palette.dart` already did it, which says the same
+  // thing without a statement to reach. Its sibling
+  // `image_picker_palette.dart` sat here for the same reason until its tokens
+  // became mode-dependent getters; those are executable, so it left this list.
   'lib/theme/presenter_palette.dart',
   // NO EXECUTABLE LINES: `Importer` is de abstracte klasse die één
   // presentatieformaat moet invullen (#772) — drie leden zonder body en verder
@@ -388,16 +387,63 @@ bool _checkInstrumented(File report) {
   }
 
   // Ratchet the other way: a baselined file that got covered should leave.
-  final covered = uncoveredBaseline.where(instrumented.contains).toList()
-    ..sort();
-  if (covered.isNotEmpty) {
+  final verdict = classifyBaselined(
+    baseline: uncoveredBaseline,
+    tallies: {for (final f in _perFile(report)) f.path: f},
+  );
+  if (verdict.leavers.isNotEmpty) {
     stdout.writeln(
-      'Tip: ${covered.length} baselined file(s) are now instrumented — drop '
-      'them from uncoveredBaseline (tool/coverage_summary.dart) to lock in the '
-      'win:\n    ${covered.join('\n    ')}',
+      'Tip: ${verdict.leavers.length} baselined file(s) now run enough of '
+      'themselves to leave — drop them from uncoveredBaseline '
+      '(tool/coverage_summary.dart) to lock in the win:\n'
+      '    ${verdict.leavers.join('\n    ')}',
+    );
+  }
+  if (verdict.tooThin.isNotEmpty) {
+    stdout.writeln(
+      'Note: ${verdict.tooThin.length} baselined file(s) are in the report but '
+      'run less than $perFileFloorPercent% of their own lines. Keep them '
+      'baselined until a test covers them — dropping them now trips the '
+      'per-file floor:\n    ${verdict.tooThin.join('\n    ')}',
     );
   }
   return true;
+}
+
+/// What the report says about the files still sitting in [uncoveredBaseline]:
+/// which may leave the list, and which are in the report but too thinly run to
+/// survive outside it.
+typedef BaselineVerdict = ({List<String> leavers, List<String> tooThin});
+
+/// Sorts the baselined files that carry a report record into the two groups of
+/// [BaselineVerdict], each rendered as `path (hit/found)`.
+///
+/// Being in the report is not enough to leave. The per-file floor skips
+/// baselined files, so recommending one that lands under [perFileFloorPercent]
+/// hands the next reader a tip that breaks the gate the moment they follow it —
+/// which is exactly what the F3 native-media binding did: a preflight tile
+/// imports it, so it sits in the report at 0 of 9 lines. Those are named
+/// separately, because "instrumented but barely executed" is a different problem
+/// and its fix is a test, not a list edit.
+///
+/// A baselined file absent from [tallies] is not mentioned at all: either no
+/// test imports it, or it has no executable line for the floor to judge it by.
+/// In both cases its baseline reason still holds.
+BaselineVerdict classifyBaselined({
+  required Set<String> baseline,
+  required Map<String, ({String path, int hit, int found})> tallies,
+}) {
+  final leavers = <String>[];
+  final tooThin = <String>[];
+  for (final path in baseline.toList()..sort()) {
+    final tally = tallies[path];
+    if (tally == null) continue;
+    final clearsFloor = tally.hit * 100 >= perFileFloorPercent * tally.found;
+    (clearsFloor ? leavers : tooThin).add(
+      '$path (${tally.hit}/${tally.found})',
+    );
+  }
+  return (leavers: leavers, tooThin: tooThin);
 }
 
 /// One file's line tally, as lcov reports it.

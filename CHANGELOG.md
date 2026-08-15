@@ -1293,6 +1293,22 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **dekkingspoort: de tip om een bestand uit `uncoveredBaseline` te halen keek
+  niet naar de vloer.** `make coverage` meldde drie bestanden die "nu
+  geïnstrumenteerd" waren en dus uit de lijst konden. Twee klopten
+  (`gantt_dsl.dart` op 65/65, `image_picker_palette.dart` op 31/33 — die kregen
+  tokens als getters en dus uitvoerbare regels) en zijn eruit. De derde,
+  `meeting_media_core_webrtc.dart`, stond er wél in het rapport maar op 0 van 9
+  regels: een preflight-tegel importeert hem, meer kan er headless niet draaien.
+  Wie dat advies had opgevolgd, liet `--per-file-floor` meteen vallen, want die
+  vloer zondert baseline-bestanden juist uit. De tip weegt de vloer nu mee en
+  noemt zulke bestanden apart, als iets waar eerst een test voor nodig is. De
+  keuze zit in `classifyBaselined`, met een test die beide richtingen vastlegt.
+  Twee verouderde beweringen meegenomen: de toelichting bij de webrtc-binding
+  zei nog dat geen enkele test hem importeert en dat de vloer de lijst niet
+  uitzondert (beide niet meer waar), en `docs/CHECKS.md` telde 60 baseline-
+  bestanden waar het er 84 zijn.
+
 - **bovenbalk: de presentatie-eigenschappen-knop heet nu kort "Opmaak".** De
   volledige term "Presentatie-eigenschappen" maakte er een lang blok van dat met
   de decktitel concurreerde. Het zichtbare label is ingekort tot "Opmaak" — de
