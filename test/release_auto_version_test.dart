@@ -647,6 +647,93 @@ void main() {
     );
   });
 
+  // Gedragstoets, geen grep: speelt de opruiming na in een wegwerp-repo. De
+  // statische toets hierboven pint de vórm; deze pint wat er werkelijk gebeurt —
+  // en dat is wat op 15-08-2026 stilletjes misging.
+  test('cleanup_branch ruimt op, of zegt eerlijk dat het niet lukte', () {
+    final snippet =
+        'cleanup_failed() {\n${functionBody('cleanup_failed')}\n}\n'
+        'cleanup_branch() {\n${functionBody('cleanup_branch')}\n}\n';
+
+    ({String out, bool branchLeft, String head}) play({
+      required bool dirty,
+      required String startBranch,
+    }) {
+      final dir = Directory.systemTemp.createTempSync('ocideck-cleanup');
+      String git(List<String> args) {
+        final r = Process.runSync('git', args, workingDirectory: dir.path);
+        if (r.exitCode != 0) fail('git ${args.join(' ')}: ${r.stderr}');
+        return (r.stdout as String).trim();
+      }
+
+      git(['-c', 'init.defaultBranch=main', 'init', '-q', '.']);
+      git(['config', 'user.email', 'test@example.invalid']);
+      git(['config', 'user.name', 'test']);
+      git(['config', 'commit.gpgsign', 'false']);
+      File('${dir.path}/f.txt').writeAsStringSync('een\n');
+      git(['add', '.']);
+      git(['commit', '-qm', 'basis']);
+      // De release-branch met zijn versiebump, precies zoals fase 1 hem achterlaat.
+      git(['checkout', '-q', '-B', 'rel', 'main']);
+      File('${dir.path}/f.txt').writeAsStringSync('versiebump\n');
+      git(['commit', '-qam', 'bump']);
+      if (dirty) {
+        File('${dir.path}/f.txt').writeAsStringSync('ongecommit werk\n');
+      }
+      File('${dir.path}/run.sh').writeAsStringSync(
+        'set -Eeuo pipefail\n'
+        'START_BRANCH=$startBranch\nBRANCH=rel\nCLEANUP_BACK=""\n'
+        '$snippet\ncleanup_branch\n',
+      );
+      final r = Process.runSync('bash', [
+        '${dir.path}/run.sh',
+      ], workingDirectory: dir.path);
+      final left =
+          Process.runSync('git', [
+            'rev-parse',
+            '-q',
+            '--verify',
+            'refs/heads/rel',
+          ], workingDirectory: dir.path).exitCode ==
+          0;
+      final head = git(['branch', '--show-current']);
+      final out = '${r.stdout}${r.stderr}';
+      dir.deleteSync(recursive: true);
+      return (out: out, branchLeft: left, head: head);
+    }
+
+    final ok = play(dirty: false, startBranch: 'main');
+    expect(ok.branchLeft, isFalse, reason: 'schone werkboom: branch hoort weg');
+    expect(ok.head, 'main');
+    expect(ok.out, contains('opgeruimd'));
+
+    // De faalkant. Vroeger: beide git-fouten gesmoord, branch blijft staan, en
+    // niets op het scherm — waarna de volgende 'checkout -b' de bump erfde.
+    final blocked = play(dirty: true, startBranch: 'main');
+    expect(
+      blocked.branchLeft,
+      isTrue,
+      reason:
+          'de checkout kan hier niet slagen; dat is de premisse van de toets',
+    );
+    expect(
+      blocked.out,
+      contains('NIET opgeruimd'),
+      reason: 'een mislukte opruiming moet zichtbaar zijn, niet gesmoord',
+    );
+    expect(
+      blocked.out,
+      contains('git branch -D rel'),
+      reason: 'de melding hoort het herstelcommando mee te geven',
+    );
+
+    // Nasleep van een eerdere gefaalde run: je stáát al op de release-branch.
+    // Teruggaan naar jezelf zou 'branch -D' laten weigeren; val terug op main.
+    final fromRel = play(dirty: false, startBranch: 'rel');
+    expect(fromRel.branchLeft, isFalse);
+    expect(fromRel.head, 'main');
+  }, skip: skipOnWindows);
+
   test('de wachtwoordprompt meldt zich als eigen stap', () {
     // Een STEP-label blijft staan tot het volgende. Zonder eigen label kreeg een
     // fout bij de prompt (bijvoorbeeld read op EOF, zonder tty) de naam van de

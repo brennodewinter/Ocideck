@@ -109,12 +109,13 @@ TAG_PUSHED=0
 BRANCH=""
 # De branch waar de release vandaan vertrok; cleanup_branch keert hierheen terug.
 START_BRANCH="$(git branch --show-current 2>/dev/null || true)"
+CLEANUP_BACK=""
 cleanup_failed() {
   printf '  LET OP: de release-branch %s is NIET opgeruimd:\n' "$BRANCH" >&2
   printf '%s\n' "$1" | sed 's/^/    /' >&2
   printf '  Hij draagt de versiebump. Ruim hem met de hand op vóórdat je verder werkt —\n' >&2
   printf '  takt er een nieuwe branch van af, dan erft die de bump:\n' >&2
-  printf '      git checkout %s && git branch -D %s\n' "${START_BRANCH:-main}" "$BRANCH" >&2
+  printf '      git checkout %s && git branch -D %s\n' "${CLEANUP_BACK:-main}" "$BRANCH" >&2
 }
 cleanup_branch() {
   # BRANCH wordt vroeg gezet (voor --resume), dus ruim alleen op wat fase 1 écht
@@ -131,8 +132,13 @@ cleanup_branch() {
   # Zo kwam er op 15-08-2026 een versiebump in een PR terecht die een DAST-fix
   # heette. Ga terug naar de branch waar we vandaan kwamen (niet '-': dat leunt op
   # de HEAD-reflog en wijst na een tussentijdse checkout ergens anders heen).
+  CLEANUP_BACK="${START_BRANCH:-main}"
+  # Stond de run al ópstaand op deze release-branch — precies de nasleep van een
+  # eerdere gefaalde run — dan is teruggaan naar zichzelf zinloos: de branch blijft
+  # dan uitgecheckt en 'branch -D' weigert. Val in dat geval terug op main.
+  [ "$CLEANUP_BACK" != "$BRANCH" ] || CLEANUP_BACK="main"
   local err
-  if ! err="$(git checkout --quiet "${START_BRANCH:-main}" 2>&1)"; then
+  if ! err="$(git checkout --quiet "$CLEANUP_BACK" 2>&1)"; then
     cleanup_failed "$err"
     return 0
   fi
@@ -141,7 +147,7 @@ cleanup_branch() {
     return 0
   fi
   printf '  Release-branch %s opgeruimd; je staat weer op %s.\n' \
-    "$BRANCH" "${START_BRANCH:-main}" >&2
+    "$BRANCH" "$CLEANUP_BACK" >&2
 }
 on_err() {
   local ec=$? ln=${1:-?}
