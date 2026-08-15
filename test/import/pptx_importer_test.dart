@@ -8,6 +8,7 @@ import 'package:ocideck/services/import/importers/pptx/pptx_importer.dart';
 import 'package:ocideck/services/import/models/body_block.dart';
 import 'package:ocideck/services/import/models/source_chart.dart';
 import 'package:ocideck/services/import/models/source_video.dart';
+import 'package:ocideck/utils/image_resize.dart';
 
 const _a = 'http://schemas.openxmlformats.org/drawingml/2006/main';
 const _p = 'http://schemas.openxmlformats.org/presentationml/2006/main';
@@ -553,5 +554,60 @@ void main() {
     expect(rotated, isNotNull);
     expect(rotated!.width, 2);
     expect(rotated.height, 2);
+  });
+
+  test('verrekent de EXIF-orientatie met de rot uit het bestand', () async {
+    // Een cameraopname: liggend opgeslagen, met een EXIF-tag die zegt dat hij
+    // een kwartslag met de klok mee moet. PowerPoint negeert die tag, dus de
+    // auteur draaide de foto met de hand recht — vandaar rot=5400000 (90°).
+    // Samen moet dat één kwartslag opleveren, geen twee.
+    final original = img.Image(width: 40, height: 20);
+    for (var y = 0; y < 20; y++) {
+      for (var x = 0; x < 40; x++) {
+        original.setPixelRgb(x, y, x < 20 ? 255 : 0, 0, x < 20 ? 0 : 255);
+      }
+    }
+    original.exif.imageIfd.orientation = 6; // 90° met de klok mee
+    final jpegBytes = Uint8List.fromList(img.encodeJpg(original, quality: 100));
+
+    final slideXml =
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<p:sld xmlns:a="$_a" xmlns:p="$_p" xmlns:r="$_r">'
+        '<p:cSld><p:spTree>'
+        '<p:pic>'
+        '<p:nvPicPr><p:cNvPr id="5" name="Photo"/><p:cNvPicPr/><p:nvPr/></p:nvPicPr>'
+        '<p:blipFill><a:blip r:embed="rId3"/></p:blipFill>'
+        '<p:spPr><a:xfrm rot="5400000"><a:off x="0" y="0"/><a:ext cx="3048000" cy="3048000"/></a:xfrm></p:spPr>'
+        '</p:pic>'
+        '</p:spTree></p:cSld></p:sld>';
+
+    final bytes = _zip({
+      'ppt/presentation.xml': _presentationXml(1),
+      'ppt/_rels/presentation.xml.rels': _presRels(1),
+      'ppt/slides/slide1.xml': slideXml,
+      'ppt/slides/_rels/slide1.xml.rels': _slideRels(withImage: true),
+      'ppt/media/photo.png': jpegBytes,
+    });
+
+    final result = await PptxImporter().importBytes(bytes, path: 'exif.pptx');
+    expect(result.isOk, isTrue);
+    final imported = img.decodeImage(
+      result.okValue!.slides.single.images.single.bytes,
+    );
+    expect(imported, isNotNull);
+    expect(
+      [imported!.width, imported.height],
+      [20, 40],
+      reason: 'één kwartslag maakt 40x20 staand; twee zou weer 40x20 zijn',
+    );
+    // Na één kwartslag met de klok mee staat de rode helft boven.
+    expect(imported.getPixel(10, 5).r, greaterThan(200));
+    expect(imported.getPixel(10, 35).b, greaterThan(200));
+    // En de tag mag niet blijven staan, anders draait een EXIF-lezende
+    // renderer er nog een kwartslag overheen.
+    expect(
+      jpegExifRotationDegrees(result.okValue!.slides.single.images.single.bytes),
+      0,
+    );
   });
 }

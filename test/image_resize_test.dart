@@ -50,6 +50,45 @@ void main() {
     });
   });
 
+  group('jpegExifRotationDegrees', () {
+    Uint8List jpegWithOrientation(int orientation) {
+      final image = img.Image(width: 4, height: 2);
+      image.exif.imageIfd.orientation = orientation;
+      return Uint8List.fromList(img.encodeJpg(image));
+    }
+
+    test('leest de rotatie uit de tag, ook al bakt de decoder hem weg', () {
+      expect(jpegExifRotationDegrees(jpegWithOrientation(1)), 0);
+      expect(jpegExifRotationDegrees(jpegWithOrientation(3)), 180);
+      expect(jpegExifRotationDegrees(jpegWithOrientation(6)), 90);
+      expect(jpegExifRotationDegrees(jpegWithOrientation(8)), 270);
+    });
+
+    test('van een spiegel-orientatie telt alleen het rotatiedeel', () {
+      expect(jpegExifRotationDegrees(jpegWithOrientation(2)), 0);
+      expect(jpegExifRotationDegrees(jpegWithOrientation(4)), 180);
+      expect(jpegExifRotationDegrees(jpegWithOrientation(5)), 270);
+      expect(jpegExifRotationDegrees(jpegWithOrientation(7)), 90);
+    });
+
+    test('een JPEG zonder tag, een PNG en rommel geven 0', () {
+      expect(
+        jpegExifRotationDegrees(
+          Uint8List.fromList(img.encodeJpg(img.Image(width: 2, height: 2))),
+        ),
+        0,
+      );
+      expect(
+        jpegExifRotationDegrees(
+          Uint8List.fromList(img.encodePng(img.Image(width: 2, height: 2))),
+        ),
+        0,
+      );
+      expect(jpegExifRotationDegrees(Uint8List.fromList([0xFF, 0xD8, 0, 1])), 0);
+      expect(jpegExifRotationDegrees(Uint8List(0)), 0);
+    });
+  });
+
   group('rotateImageBytes', () {
     test('180° rotatie wisselt linkerboven en rechtonder', () {
       final original = img.Image(width: 4, height: 2);
