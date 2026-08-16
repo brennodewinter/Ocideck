@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/models/settings.dart' show ThemeProfile;
+import 'package:ocideck/widgets/document_page_chrome.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/widgets/reader/paged_document_view.dart';
 
@@ -133,6 +134,70 @@ void main() {
       reason:
           'de rand van het vel hoort hetzelfde papier te zijn als het midden',
     );
+  });
+
+  // De beeldkeuring vond dit: elk vel toonde onderaan de eerste regels van het
+  // blok dat juist naar de vólgende pagina was geschoven, doormidden gesneden.
+  // Het venster liep tot een volle paginahoogte in plaats van tot waar het
+  // volgende vel begint.
+  testWidgets('een vel toont niets van het blok dat is doorgeschoven', (
+    tester,
+  ) async {
+    final long = List.generate(
+      40,
+      (i) => 'Alinea $i met genoeg tekst om de pagina echt te vullen.',
+    ).join('\n\n');
+    await pumpDoc(tester, long);
+
+    final windows = find.byKey(const Key('document-page-window'));
+    expect(windows, findsWidgets);
+
+    // Geen venster is hoger dan het tekstvlak. Een venster dat een volle
+    // paginahoogte toonde terwijl het blok al was doorgeschoven, sneed dat
+    // blok doormidden onderaan het vel.
+    final textArea = (297 - 25 - 25) * kPxPerMm;
+    for (final element in windows.evaluate()) {
+      final h = (element.renderObject! as RenderBox).size.height;
+      expect(h, greaterThan(0));
+      expect(h, lessThanOrEqualTo(textArea + 0.5));
+    }
+  });
+
+  // En dit: met een kop-/voetband verdween er tekst. De banden stonden in
+  // dezelfde kolom als de tekst en aten hoogte op waar de paginaverdeling al
+  // over had beschikt.
+  testWidgets('een kop- en voetband kosten geen tekstvlak', (tester) async {
+    const profile = ThemeProfile(
+      name: 'Toets',
+      slideBackgroundColor: '#FFFFFF',
+      documentHeaderText: 'Kopregel',
+      documentFooterText: 'Voetregel',
+      documentShowPageNumbers: true,
+    );
+    await tester.binding.setSurfaceSize(const Size(1200, 1400));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: PagedDocumentView(
+            markdown: 'Een alinea.',
+            pageSize: PageSizeSpec.a4,
+            margins: const PageMargins(),
+            profile: profile,
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // De band staat er...
+    expect(find.byType(DocumentChromeBand), findsNWidgets(2));
+    // ...en het tekstvlak is nog steeds het volle tekstvlak: paginahoogte min
+    // de marges, zonder dat de banden er iets van afsnoepen.
+    final window = tester.getSize(
+      find.byKey(const Key('document-page-window')).first,
+    );
+    expect(window.height, closeTo((297 - 25 - 25) * kPxPerMm, 1));
   });
 
   testWidgets('drukkersafloop maakt het vel groter dan het snijformaat', (

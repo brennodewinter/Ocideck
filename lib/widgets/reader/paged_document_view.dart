@@ -118,7 +118,21 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
           children: [
             const SizedBox(height: 16),
             for (var i = 0; i < offsets.length; i++) ...[
-              _sheet(context, document, offsets[i], i + 1, offsets.length),
+              _sheet(
+                context,
+                document,
+                offsets[i],
+                // Waar dít vel ophoudt: bij het begin van het volgende, niet
+                // een volle paginahoogte verder. Een blok dat niet meer paste
+                // is doorgeschoven, en dan hoort de onderkant van dit vel wit
+                // te blijven in plaats van de eerste regels van dat blok
+                // doormidden te tonen.
+                i + 1 < offsets.length
+                    ? offsets[i + 1] - offsets[i]
+                    : _contentHeightPx,
+                i + 1,
+                offsets.length,
+              ),
               const SizedBox(height: 16),
             ],
           ],
@@ -175,6 +189,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     BuildContext context,
     Widget document,
     double offset,
+    double windowHeight,
     int pageNumber,
     int pageCount,
   ) {
@@ -202,49 +217,65 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       ),
       child: Stack(
         children: [
-          Positioned.fill(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                (widget.margins.leftMm * kPxPerMm) + bleedPx,
-                (widget.margins.topMm * kPxPerMm) + bleedPx,
-                (widget.margins.rightMm * kPxPerMm) + bleedPx,
-                (widget.margins.bottomMm * kPxPerMm) + bleedPx,
+          // De kop- en voetband staan ín de marge, niet in het tekstvlak.
+          // Zo hoort het op papier — en het is bovendien de enige plek waar ze
+          // kúnnen staan: hingen ze boven en onder de tekst in dezelfde kolom,
+          // dan aten ze hoogte op waar de paginaverdeling al over had beschikt,
+          // en verdween er onderaan elk vel een stuk tekst dat nergens meer
+          // terugkwam.
+          if (profile != null) ...[
+            Positioned(
+              left: bleedPx,
+              right: bleedPx,
+              top: bleedPx,
+              height: widget.margins.topMm * kPxPerMm,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: DocumentChromeBand(
+                  profile: profile,
+                  header: true,
+                  pageLabel: '$pageNumber',
+                  projectPath: widget.projectPath,
+                  compact: true,
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  if (profile != null)
-                    DocumentChromeBand(
-                      profile: profile,
-                      header: true,
-                      pageLabel: '$pageNumber',
-                      projectPath: widget.projectPath,
-                      compact: true,
-                    ),
-                  Expanded(
-                    child: ClipRect(
-                      child: OverflowBox(
-                        alignment: Alignment.topLeft,
-                        maxHeight: double.infinity,
-                        child: Transform.translate(
-                          offset: Offset(0, -offset),
-                          child: SizedBox(
-                            width: _contentWidthPx,
-                            child: document,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  if (profile != null)
-                    DocumentChromeBand(
-                      profile: profile,
-                      header: false,
-                      pageLabel: '$pageNumber',
-                      projectPath: widget.projectPath,
-                      compact: true,
-                    ),
-                ],
+            ),
+            Positioned(
+              left: bleedPx,
+              right: bleedPx,
+              bottom: bleedPx,
+              height: widget.margins.bottomMm * kPxPerMm,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: DocumentChromeBand(
+                  profile: profile,
+                  header: false,
+                  pageLabel: '$pageNumber',
+                  projectPath: widget.projectPath,
+                  compact: true,
+                ),
+              ),
+            ),
+          ],
+          Positioned(
+            left: (widget.margins.leftMm * kPxPerMm) + bleedPx,
+            top: (widget.margins.topMm * kPxPerMm) + bleedPx,
+            width: _contentWidthPx,
+            // Precies het stuk document dat op dit vel hoort: niet een volle
+            // paginahoogte, maar tot waar het volgende vel begint.
+            height: windowHeight,
+            child: ClipRect(
+              // Met een sleutel: dit is hét venster op het document, en een
+              // toets moet het kunnen aanwijzen zonder per ongeluk een van de
+              // andere clips in de boom te pakken.
+              key: const Key('document-page-window'),
+              child: OverflowBox(
+                alignment: Alignment.topLeft,
+                maxHeight: double.infinity,
+                child: Transform.translate(
+                  offset: Offset(0, -offset),
+                  child: SizedBox(width: _contentWidthPx, child: document),
+                ),
               ),
             ),
           ),
