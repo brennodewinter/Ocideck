@@ -1,3 +1,5 @@
+import '../services/table_of_contents.dart';
+
 /// Constructs that the current rich-text bridge cannot round-trip without
 /// changing the author's Markdown source.
 ///
@@ -5,6 +7,11 @@
 /// `x-embed-table` block embed (see `MarkdownQuillCodec` / `TableEmbedBuilder`),
 /// so it is rendered and editable in the visual editor instead of forcing a
 /// fall back to raw Markdown.
+///
+/// Om dezelfde reden is de inhoudsopgave-marker `<!-- toc -->` géén `rawHtml`:
+/// hij reist als `x-embed-toc`-blok mee (zie `MarkdownQuillCodec` /
+/// `TocEmbedBuilder`). Zonder die uitzondering wierp één ingevoegde
+/// inhoudsopgave het hele document terug in de brontekst.
 enum MarkdownVisualLimitation { rawHtml, escapedPunctuation, footnote }
 
 Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
@@ -18,7 +25,8 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
       continue;
     }
     if (fenced) continue;
-    if (RegExp(r'<!--|</?[A-Za-z][^>]*>').hasMatch(line)) {
+    if (!tocMarkerLinePattern.hasMatch(line) &&
+        RegExp(r'<!--|</?[A-Za-z][^>]*>').hasMatch(line)) {
       limitations.add(MarkdownVisualLimitation.rawHtml);
     }
     if (RegExp(r'\\[\\`*{}\[\]()#+.!_>-]').hasMatch(line)) {

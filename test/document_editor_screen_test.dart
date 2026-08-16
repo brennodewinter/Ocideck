@@ -90,6 +90,32 @@ void main() {
     expect(find.text('| Team | Omzet |'), findsNothing);
   });
 
+  testWidgets('Visueel: een inhoudsopgave valt niet terug op ruwe markdown', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse(
+          '# Rapport\n\n<!-- toc -->\n\n## Eerste deel\n\nTekst.\n',
+        ),
+      );
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    // De regressie: `<!-- toc -->` is HTML-commentaar, en dat wierp de hele
+    // visuele modus terug op brontekst — je zag ineens je ruwe markdown.
+    expect(find.byType(QuillEditor), findsOneWidget);
+    expect(find.textContaining('Bronmodus beschermt opmaak'), findsNothing);
+    // De marker wordt de inhoudsopgave-voorbeeldweergave, met de koppen van
+    // het document erin — niet de letterlijke markertekst.
+    expect(find.text('<!-- toc -->'), findsNothing);
+    expect(find.text('Inhoudsopgave'), findsOneWidget);
+    expect(find.text('Eerste deel'), findsWidgets);
+  });
+
   testWidgets(
     'Visueel: rauwe HTML blijft bewerkbaar met opmaakbalk en waarschuwing',
     (tester) async {

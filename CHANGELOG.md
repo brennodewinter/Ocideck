@@ -1409,6 +1409,19 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **de inhoudsopgave wierp de visuele modus terug op ruwe markdown.** Wie in
+  Visueel een inhoudsopgave invoegde, zag opeens zijn hele document als
+  brontekst; in Bron ging het wél goed, want daar staat de gerenderde weergave
+  ernaast. De marker `<!-- toc -->` is HTML-commentaar, en rauwe HTML gold als
+  constructie die de rijke-tekstbrug niet verliesvrij aankan — één marker zette
+  dus het hele document in de brontekst-terugval. De marker reist nu als
+  blok-embed (`x-embed-toc`) door de brug, net als de GFM-tabel, en wordt in de
+  visuele editor als dezelfde inhoudsopgave-voorbeeldweergave getekend die de
+  lezer toont, met de koppen van het document erin. Daarmee klopt ook wat de
+  gebruikersgids al beloofde: "in de visuele modus zie je de lijst meteen". De
+  uitzondering geldt alleen de kále markerregel — HTML-commentaar met inhoud, of
+  een marker met tekst ernaast, valt nog steeds terug.
+
 - **documentmodus: tabellen die passen, een inhoudsopgave, en een vel om op te
   schrijven.** Vijf dingen die bij elkaar horen, want ze gaan alle vijf over hoe
   een document er op papier uit komt te zien. (1) Een tabel die breder is dan de

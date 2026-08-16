@@ -7,6 +7,7 @@ import '../../utils/markdown_quill_codec.dart';
 import 'divider_embed_builder.dart';
 import 'markdown_editor_theme.dart';
 import 'table_embed_builder.dart';
+import 'toc_embed_builder.dart';
 
 /// The Quill [DefaultStyles] for the document/notes WYSIWYG surface, derived
 /// entirely from [theme] so every block honours the app theme.
@@ -201,10 +202,13 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                 // MarkdownQuillCodec) en worden hier als gerenderde, bewerkbare
                 // tabel getekend i.p.v. losse woorden. Een `---`-scheiding komt als
                 // `divider`-embed binnen en wordt een horizontale lijn — zonder deze
-                // builder tekent Quill er een RenderErrorBox voor.
+                // builder tekent Quill er een RenderErrorBox voor. De
+                // `<!-- toc -->`-marker komt als `x-embed-toc`-embed binnen en
+                // wordt de inhoudsopgave-voorbeeldweergave.
                 embedBuilders: const [
                   TableEmbedBuilder(),
                   DividerEmbedBuilder(),
+                  TocEmbedBuilder(),
                 ],
                 autoFocus: false,
               ),

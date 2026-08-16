@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:markdown_quill/markdown_quill.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
+import 'package:ocideck/utils/toc_embed_syntax.dart';
 
 void main() {
   test('markdown round-trips through quill for basic formatting', () {
@@ -58,5 +59,40 @@ Afsluiting.''';
     expect(restored, contains('| Ontwerp | 120 | 12% |'));
     expect(restored, contains('| Bouw | 340 | 8% |'));
     expect(restored, contains('Afsluiting.'));
+  });
+
+  test('de inhoudsopgave-marker wordt een embed en komt er weer uit', () {
+    // Regressie: `<!-- toc -->` viel als rauwe HTML uiteen, waardoor de visuele
+    // modus het hele document als brontekst toonde zodra iemand een
+    // inhoudsopgave invoegde.
+    const source = '''# Rapport
+
+<!-- toc -->
+
+## Eerste
+
+Tekst.''';
+
+    final document = MarkdownQuillCodec.documentFromMarkdown(source);
+
+    final embeds = document
+        .toDelta()
+        .toList()
+        .where((op) => op.data is Map)
+        .map((op) => (op.data as Map).keys.first)
+        .toList();
+    expect(
+      embeds,
+      contains(EmbeddableToc.tocType),
+      reason: 'de marker moet als embed in het document staan',
+    );
+
+    final restored = MarkdownQuillCodec.markdownFromDocument(document);
+
+    expect(restored, contains('<!-- toc -->'));
+    expect(restored, contains('# Rapport'));
+    expect(restored, contains('## Eerste'));
+    // De marker blijft één blok — geen losse `<!--`-brokken in de tekst.
+    expect(RegExp('<!--').allMatches(restored).length, 1);
   });
 }
