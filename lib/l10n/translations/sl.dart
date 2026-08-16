@@ -1776,6 +1776,36 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Boven (mm)': 'Zgoraj (mm)',
+  'Onder (mm)': 'Spodaj (mm)',
+  'Links (mm)': 'Levo (mm)',
+  'Rechts (mm)': 'Desno (mm)',
+  'Smal (860 px)': 'Ozko (860 px)',
+  'Standaard (1100 px)': 'Privzeto (1100 px)',
+  'Breed (1400 px)': 'Široko (1400 px)',
+  'Volledige breedte': 'Polna širina',
+  'Paginamaat': 'Velikost strani',
+  'Randstijl': 'Slog obrobe',
+  'Tabelstijl': 'Slog tabele',
+  'Geen randen': 'Brez obrob',
+  'Lijnen (horizontaal)': 'Črte (vodoravne)',
+  'Omrand (volledig)': 'Uokvirjeno (v celoti)',
+  'Zebrastrepen (om en om)': 'Zebraste proge (izmenično)',
+  'Accentlijn onder koprij': 'Poudarjena črta pod glavo',
+  'Tabel randkleur': 'Barva obrobe tabele',
+  'Tabel zebrakleur': 'Barva prog tabele',
+  'Celopvulling: {px} px': 'Zamik v celici: {px} px',
+  'Inhoudsopgave': 'Kazalo',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Kazalo — dodajte naslove, da ga zapolnite.',
+  'Schrijfbreedte editor': 'Širina pisanja v urejevalniku',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Kako široko je območje pisanja v vizualnem načinu. Ozko se bere umirjeno, široko uporabi več zaslona.',
+  'Pagina-instellingen export': 'Nastavitve strani za izvoz',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Velikost strani (ISO 216) in robovi za tiskanje HTML, LaTeX in izvoz PDF.',
+  '{maat} (liggend)': '{maat} (ležeče)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Oblikovanje',
   'Afbeelding aanpassen': 'Prilagodi sliko',
   'Groot bestand': 'Velika datoteka',

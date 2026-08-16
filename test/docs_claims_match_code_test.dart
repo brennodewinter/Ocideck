@@ -26,6 +26,23 @@ import '../tool/check_ratchet_trend.dart';
 void main() {
   String lees(String pad) => File(pad).readAsStringSync();
 
+  /// Een library mét zijn `part`-bestanden, als één tekst.
+  ///
+  /// Een meting die op één bestand grept, meet stilzwijgend niets meer zodra
+  /// dat bestand langs het regelplafond wordt gesplitst: de constante staat er
+  /// dan nog, maar in een part ernaast. Dat overkwam
+  /// `defaultCveApiBaseUrl` toen `AppSettings` naar
+  /// `models/parts/app_settings.dart` verhuisde.
+  String leesLibrary(String pad) {
+    final bron = lees(pad);
+    final map = File(pad).parent.path;
+    final parts = RegExp(
+      r"^part\s+'([^']+)';",
+      multiLine: true,
+    ).allMatches(bron).map((m) => m.group(1)!);
+    return [bron, for (final p in parts) lees('$map/$p')].join('\n');
+  }
+
   /// Constanten die in proza genoemd mogen worden, met de plek waar hun waarde
   /// werkelijk staat. De basislijnen komen uit `check_ratchet_trend.dart`, zodat
   /// er maar één lijst is die bijgewerkt moet worden als er een ratchet bij
@@ -269,7 +286,7 @@ void main() {
     // documenten die host noemen én mag de absolute claim er niet staan. Zet
     // iemand de standaard om naar een host die niet van de uitgever is, dan
     // vervalt de eis vanzelf — dan is er ook niets meer te melden.
-    final settings = lees('lib/models/settings.dart');
+    final settings = leesLibrary('lib/models/settings.dart');
     final standaard = RegExp(
       r"defaultCveApiBaseUrl\s*=\s*'([^']+)'",
     ).firstMatch(settings)?.group(1);
@@ -280,8 +297,7 @@ void main() {
       expect(
         standaard,
         isNotNull,
-        reason:
-            'defaultCveApiBaseUrl niet gevonden in lib/models/settings.dart',
+        reason: 'defaultCveApiBaseUrl niet gevonden in de settings-library',
       );
     });
 

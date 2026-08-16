@@ -1796,6 +1796,36 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Boven (mm)': 'Отгоре (mm)',
+  'Onder (mm)': 'Отдолу (mm)',
+  'Links (mm)': 'Ляво (mm)',
+  'Rechts (mm)': 'Дясно (mm)',
+  'Smal (860 px)': 'Тесен (860 px)',
+  'Standaard (1100 px)': 'По подразбиране (1100 px)',
+  'Breed (1400 px)': 'Широк (1400 px)',
+  'Volledige breedte': 'Пълна ширина',
+  'Paginamaat': 'Размер на страницата',
+  'Randstijl': 'Стил на рамката',
+  'Tabelstijl': 'Стил на таблицата',
+  'Geen randen': 'Без рамки',
+  'Lijnen (horizontaal)': 'Линии (хоризонтални)',
+  'Omrand (volledig)': 'В рамка (пълна)',
+  'Zebrastrepen (om en om)': 'Зебра ивици (през ред)',
+  'Accentlijn onder koprij': 'Акцентна линия под заглавния ред',
+  'Tabel randkleur': 'Цвят на рамката на таблицата',
+  'Tabel zebrakleur': 'Цвят на ивиците на таблицата',
+  'Celopvulling: {px} px': 'Отстъп в клетката: {px} px',
+  'Inhoudsopgave': 'Съдържание',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Съдържание — добавете заглавия, за да го попълните.',
+  'Schrijfbreedte editor': 'Ширина на писане в редактора',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Колко широка е областта за писане във визуален режим. Тясната се чете спокойно, широката използва повече от екрана.',
+  'Pagina-instellingen export': 'Настройки на страницата за експорт',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Размер на страницата (ISO 216) и полета за HTML печат, LaTeX и PDF експорт.',
+  '{maat} (liggend)': '{maat} (пейзаж)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Форматиране',
   'Afbeelding aanpassen': 'Настрой изображение',
   'Groot bestand': 'Голям файл',

@@ -1774,6 +1774,36 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Boven (mm)': 'Atas (mm)',
+  'Onder (mm)': 'Bawah (mm)',
+  'Links (mm)': 'Kiri (mm)',
+  'Rechts (mm)': 'Kanan (mm)',
+  'Smal (860 px)': 'Sempit (860 px)',
+  'Standaard (1100 px)': 'Bawaan (1100 px)',
+  'Breed (1400 px)': 'Lebar (1400 px)',
+  'Volledige breedte': 'Lebar penuh',
+  'Paginamaat': 'Ukuran halaman',
+  'Randstijl': 'Gaya batas',
+  'Tabelstijl': 'Gaya tabel',
+  'Geen randen': 'Tanpa batas',
+  'Lijnen (horizontaal)': 'Garis (horizontal)',
+  'Omrand (volledig)': 'Berbingkai (penuh)',
+  'Zebrastrepen (om en om)': 'Garis zebra (berselang)',
+  'Accentlijn onder koprij': 'Garis aksen di bawah baris kepala',
+  'Tabel randkleur': 'Warna batas tabel',
+  'Tabel zebrakleur': 'Warna zebra tabel',
+  'Celopvulling: {px} px': 'Padding sel: {px} px',
+  'Inhoudsopgave': 'Daftar isi',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Daftar isi — tambahkan judul untuk mengisinya.',
+  'Schrijfbreedte editor': 'Lebar penulisan editor',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Seberapa lebar area menulis dalam mode visual. Sempit terbaca tenang, lebar memakai lebih banyak layar.',
+  'Pagina-instellingen export': 'Pengaturan halaman untuk ekspor',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Ukuran halaman (ISO 216) dan margin untuk cetak HTML, LaTeX, dan ekspor PDF.',
+  '{maat} (liggend)': '{maat} (lanskap)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Desain',
   'Afbeelding aanpassen': 'Sesuaikan gambar',
   'Groot bestand': 'Berkas besar',

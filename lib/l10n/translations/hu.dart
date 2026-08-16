@@ -1778,6 +1778,36 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Boven (mm)': 'Fent (mm)',
+  'Onder (mm)': 'Lent (mm)',
+  'Links (mm)': 'Bal (mm)',
+  'Rechts (mm)': 'Jobb (mm)',
+  'Smal (860 px)': 'Keskeny (860 px)',
+  'Standaard (1100 px)': 'Alapértelmezett (1100 px)',
+  'Breed (1400 px)': 'Széles (1400 px)',
+  'Volledige breedte': 'Teljes szélesség',
+  'Paginamaat': 'Oldalméret',
+  'Randstijl': 'Szegélystílus',
+  'Tabelstijl': 'Táblázatstílus',
+  'Geen randen': 'Nincs szegély',
+  'Lijnen (horizontaal)': 'Vonalak (vízszintes)',
+  'Omrand (volledig)': 'Keretezett (teljes)',
+  'Zebrastrepen (om en om)': 'Zebracsíkok (felváltva)',
+  'Accentlijn onder koprij': 'Kiemelő vonal a fejlécsor alatt',
+  'Tabel randkleur': 'Táblázat szegélyszíne',
+  'Tabel zebrakleur': 'Táblázat zebraszíne',
+  'Celopvulling: {px} px': 'Cellakitöltés: {px} px',
+  'Inhoudsopgave': 'Tartalomjegyzék',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Tartalomjegyzék — adj hozzá címsorokat a kitöltéséhez.',
+  'Schrijfbreedte editor': 'Szerkesztő írásszélessége',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Milyen széles az írófelület vizuális módban. A keskeny nyugodtan olvasható, a széles több képernyőt használ.',
+  'Pagina-instellingen export': 'Oldalbeállítások exportáláshoz',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Oldalméret (ISO 216) és margók HTML-nyomtatáshoz, LaTeX- és PDF-exportáláshoz.',
+  '{maat} (liggend)': '{maat} (fekvő)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Kinézet',
   'Afbeelding aanpassen': 'Kép beállítása',
   'Groot bestand': 'Nagy fájl',

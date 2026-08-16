@@ -6,6 +6,7 @@
 // `xelatex` zonder extra packages te installeren.
 
 import '../export_metadata.dart';
+import '../../models/page_size.dart';
 
 /// Bouwt de preamble voor een LaTeX `article`-document.
 ///
@@ -13,12 +14,20 @@ import '../export_metadata.dart';
 /// `polyglossia` (voor xelatex/lualatex) of `babel` (voor pdflatex) gezet;
 /// we gebruiken `babel` met de BCP47-code als taalnaam, wat in de meeste
 /// TeX Live-installaties werkt.
-String articlePreamble(ExportDocumentMetadata meta) {
+///
+/// [pageSize] en [pageMargins] bepalen de papiermaat en marges (feature 3).
+/// Standaard A4 portret met de gedeelde [PageMargins]-standaard (25mm boven en
+/// onder, 20mm links en rechts) — dezelfde marges als de HTML-export en als de
+/// beginwaarde van de instelling. Dat is bewust géén 25mm rondom meer, de
+/// vorige vaste LaTeX-waarde: paginamaat en marges horen nu in één model, en
+/// twee standaarden die uiteenlopen leveren stil twee verschillende PDF's op.
+String articlePreamble(
+  ExportDocumentMetadata meta, {
+  PageSizeSpec pageSize = PageSizeSpec.a4,
+  PageMargins pageMargins = const PageMargins(),
+}) {
   final buf = StringBuffer();
-  buf.write(
-    r'\documentclass[11pt,a4paper]{article}'
-    '\n',
-  );
+  buf.write('\\documentclass[11pt,${pageSize.latexName}]{article}\n');
   // Encoding en lettertype
   buf.write(
     r'\usepackage[utf8]{inputenc}'
@@ -71,11 +80,8 @@ String articlePreamble(ExportDocumentMetadata meta) {
   if (lang != null) {
     buf.write('\\usepackage[$lang]{babel}\n');
   }
-  // Pagina-marges
-  buf.write(
-    r'\usepackage[margin=2.5cm]{geometry}'
-    '\n',
-  );
+  // Pagina-marges (feature 3: instelbaar)
+  buf.write('\\usepackage[${pageMargins.latexMargin}]{geometry}\n');
   buf.write('\n');
   // Metadata
   if (meta.title.trim().isNotEmpty) {

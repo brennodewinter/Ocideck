@@ -124,7 +124,11 @@ const Map<String, int> fileSizeBaseline = {
   // +5: LaTeX-export — de `ocideck`-case in de extensie-switch (de early-return
   // hierboven voorkomt dat hij ooit bereikt wordt, maar de analyzer eist
   // exhaustiveness). Eén regel toegevoegd; onherleidbare plumbing.
-  'lib/widgets/document_editor_screen.dart': 1227,
+  // +58 (#1500): documentmodus — de paginamaat-indicator in _visualLayout en
+  // _insertToc (het invoeg-palet dat de `<!-- toc -->`-marker plaatst). De
+  // ontleedde blokken en de weergave gingen wél naar aparte parts; dit is de
+  // schermklasse zelf, die zijn eigen invoegacties draagt.
+  'lib/widgets/document_editor_screen.dart': 1285,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
@@ -217,10 +221,12 @@ const Map<String, int> fileSizeBaseline = {
   'lib/widgets/slides/slide_preview.dart': 1027,
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
-  'lib/state/settings_provider.dart': 1057,
+  'lib/state/settings_provider.dart': 1073,
   // +31 (#1240): LibrePlan-connector — form-velden, init, dispose, save, import-
   // dialoog-import in de settings_dialog library-head.
-  'lib/widgets/dialogs/settings_dialog.dart': 1031,
+  // +2 (#1500): twee part-declaraties erbij (tabelstijl-controls) plus de
+  // import van de paginamaat-lokalisatie.
+  'lib/widgets/dialogs/settings_dialog.dart': 1034,
 };
 
 /// Een klasse mag niet groter worden dan dit, opgeteld over álle
@@ -257,7 +263,15 @@ const Map<String, int> classSizeBaseline = {
   // +1 (#1098): de uitbreidingskaart voor afbeeldingsrechten in de bestaande
   // modulelijst; de kaart zelf is een losse widget.
   'lib/widgets/dialogs/settings_dialog.dart#_SettingsDialogState':
-      6111, // +198 (#1240): LibrePlan-tab — form-velden, init, test-row, import-knop in settings_dialog_libreplan.dart part
+      // +78 (#1500): de tabelstijl-controls (randstijl, zebra, celopvulling,
+      // accentlijn) en de paginamaat-/margecontrols. Ze staan in eigen parts
+      // (settings_dialog_table_style.dart, settings_dialog_general.dart), maar
+      // blijven extensies op deze klasse — een part-splitsing verkleint het
+      // bestand, niet de klasse. De laatste +10 komt van het opsplitsen van
+      // `_checklistTableColorSettings`: met de zes stijlvelden erbij liep dat
+      // ene blok over de methodelengte-grens, dus staan de tabelkleuren nu in
+      // een eigen `_tableColorSettings` — twee onderwerpen, twee methodes.
+      6201,
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
@@ -345,7 +359,12 @@ const Map<String, int> classSizeBaseline = {
   // laadwerk (aiSettings + matrixAccount) ging in dezelfde wijziging naar
   // top-level helpers, wat de netto groei drukte.
   'lib/state/settings_provider.dart#SettingsNotifier':
-      1385, // +43 (#1240): LibrePlan password keychain-methodes (set/delete/read)
+      // +13 (#1500): setDocumentEditorMaxWidth, setDocumentPageSize en
+      // setDocumentPageMargins — drie zetters voor de documentmodus-instellingen.
+      1398,
+  // Nieuw plafond (#1500): de schermklasse van de documenteditor stond nog niet
+  // in deze lijst en kwam er met de paginamaat-indicator en _insertToc overheen.
+  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1053,
   // Bewust verhoogd van 1256 naar 1261 (#651): `setDismissals` is een nieuwe
   // openbare mogelijkheid, geen drift. In dezelfde wijziging ging er 24 regels
   // uit — de vier identieke regels die annotaties, notities en terzijdeleggingen

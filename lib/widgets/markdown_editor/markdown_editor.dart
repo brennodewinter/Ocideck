@@ -52,6 +52,11 @@ class MarkdownNotesEditor extends StatefulWidget {
   final NotesModeToggleStyle modeToggleStyle;
   final NotesSurfaceStyle surfaceStyle;
 
+  /// Documentmodus: maximale schrijfbreedte in px, of `null` voor volledige
+  /// breedte. Alleen van toepassing bij [NotesSurfaceStyle.document].
+  /// Feature 2.
+  final double? documentMaxWidth;
+
   /// Verhoog om de editor naar [revealMarkdownOffset] / [revealTitle] te laten
   /// springen (Overzicht-rail). Quill zoekt op titel in platte tekst; markdown-
   /// modus zet de controller-cursor op de bron-offset.
@@ -91,6 +96,7 @@ class MarkdownNotesEditor extends StatefulWidget {
     this.showModeToggle = true,
     this.modeToggleStyle = NotesModeToggleStyle.standard,
     this.surfaceStyle = NotesSurfaceStyle.panel,
+    this.documentMaxWidth,
     this.revealSignal = 0,
     this.revealMarkdownOffset,
     this.revealTitle,
@@ -620,11 +626,12 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     final field = _effectiveMode == NotesEditorMode.visual
         ? _buildVisualField()
         : _buildMarkdownField();
+    final maxW = widget.documentMaxWidth;
     return Padding(
       padding: const EdgeInsets.fromLTRB(6, 12, 6, 6),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 860),
+          constraints: BoxConstraints(maxWidth: maxW ?? double.infinity),
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: widget.editorTheme.surface,

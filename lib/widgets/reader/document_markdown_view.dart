@@ -3,15 +3,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
-import '../../models/settings.dart' show ThemeProfile;
+import '../../models/settings.dart' show ThemeProfile, TableBorderStyle;
 import '../../models/slide.dart' show TableAlign;
 import '../../services/marp_html_service.dart';
 import '../../services/markdown_table_codec.dart';
+import '../../services/table_layout_metrics.dart';
+import '../../services/table_of_contents.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/doc_link.dart' show headingSlug;
 import '../slides/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart' show MermaidRenderer;
 import 'doc_mermaid_view.dart';
+
+part 'parts/document_markdown_blocks.dart';
 
 /// Renders a full Markdown document as widgets — headings, paragraphs, bullet
 /// and numbered lists, GFM task lists, block quotes, fenced code, ```mermaid
@@ -184,7 +188,7 @@ class DocumentMarkdownView extends StatelessWidget {
           // Grafieken en tabellen worden elk apart geteld, zodat een dubbelklik het
           // juiste blok (de hoeveelheidste van zíjn soort) in de bron kan vervangen.
           for (var i = 0, chart = 0, table = 0; i < blocks.length; i++)
-            _decorated(t, blocks[i], i, term, switch (blocks[i].kind) {
+            _decorated(context, t, blocks[i], i, term, switch (blocks[i].kind) {
               _Kind.chart => chart++,
               _Kind.table => table++,
               _ => -1,
@@ -200,13 +204,14 @@ class DocumentMarkdownView extends StatelessWidget {
   /// returned untouched, so a non-searching, non-navigating reader gets exactly
   /// the old tree.
   Widget _decorated(
+    BuildContext context,
     _Theme t,
     _Block b,
     int index,
     String term,
     int kindOrdinal,
   ) {
-    var widget = _buildWidget(t, b, kindOrdinal);
+    var widget = _buildWidget(context, t, b, kindOrdinal);
     // The anchor target carries its own key (one moving key, like the search
     // scroll) so `#anchor` links land on the section.
     if (index == anchorBlockIndex && anchorKey != null) {
@@ -226,7 +231,12 @@ class DocumentMarkdownView extends StatelessWidget {
     );
   }
 
-  Widget _buildWidget(_Theme t, _Block b, int kindOrdinal) => switch (b.kind) {
+  Widget _buildWidget(
+    BuildContext context,
+    _Theme t,
+    _Block b,
+    int kindOrdinal,
+  ) => switch (b.kind) {
     _Kind.heading => _bounded(_heading(t, b.level, b.text)),
     _Kind.paragraph => _bounded(_paragraph(t, b.text)),
     _Kind.list => _bounded(_list(t, b.items)),
@@ -236,7 +246,92 @@ class DocumentMarkdownView extends StatelessWidget {
     _Kind.chart => _chart(t, b.text, kindOrdinal),
     _Kind.table => _table(t, b.rows, b.aligns, kindOrdinal),
     _Kind.rule => _bounded(_rule(t)),
+    _Kind.toc => _bounded(_tocPreview(context, t)),
   };
+
+  /// Feature 4: live preview van de inhoudsopgave. Genereert de TOC uit de
+  /// koppen in de huidige body en toont hem als een gestileerde nav-block.
+  Widget _tocPreview(BuildContext context, _Theme t) {
+    final l10n = context.l10n;
+    final toc = generateTocMarkdown(markdown);
+    if (toc.isEmpty) {
+      return Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: t.quoteBg,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: t.border),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.list_outlined, size: 16, color: t.subheading),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                l10n.d(
+                  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.',
+                ),
+                style: t.body.copyWith(
+                  fontSize: 13,
+                  color: t.quoteText,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+    final lines = toc.split('\n');
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: t.quoteBg,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: t.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.list_outlined, size: 16, color: t.subheading),
+              const SizedBox(width: 8),
+              Text(
+                l10n.d('Inhoudsopgave'),
+                style: t.body.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: t.heading,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          for (final line in lines) _tocLine(t, line),
+        ],
+      ),
+    );
+  }
+
+  Widget _tocLine(_Theme t, String line) {
+    final match = RegExp(r'^(\s*)- \[(.*?)\]\(#(.*)\)$').firstMatch(line);
+    if (match == null) return const SizedBox.shrink();
+    final indent = match.group(1)!.length;
+    final text = match.group(2)!;
+    return Padding(
+      padding: EdgeInsets.only(left: indent * 8.0, top: 2, bottom: 2),
+      child: Text(
+        text,
+        style: t.body.copyWith(
+          fontSize: 13,
+          color: t.link,
+          decoration: TextDecoration.underline,
+          decorationColor: t.link.withValues(alpha: 0.4),
+        ),
+      ),
+    );
+  }
 
   /// Keep prose within a readable measure; tables and code blocks skip this and
   /// use the full width available to the document.
@@ -315,6 +410,13 @@ class DocumentMarkdownView extends StatelessWidget {
       // Horizontal rule: ---, *** or ___ (three or more).
       if (_isHorizontalRule(trimmed)) {
         blocks.add(const _Block(_Kind.rule));
+        i++;
+        continue;
+      }
+
+      // Feature 4: TOC-marker `<!-- toc -->` op een eigen regel.
+      if (trimmed == '<!-- toc -->') {
+        blocks.add(const _Block(_Kind.toc));
         i++;
         continue;
       }
@@ -569,38 +671,54 @@ class DocumentMarkdownView extends StatelessWidget {
         : cells.map((r) => r.length).reduce((a, b) => a > b ? a : b);
     if (columns == 0) return const SizedBox.shrink();
 
+    // Feature 1: een tabel past binnen de beschikbare breedte met optimale
+    // kolomverdeling (hergebruik tableColumnWidths uit de slide-preview). Pas
+    // horizontaal scrollen toe wanneer de kolomminima samen breder zijn dan de
+    // beschikbare breedte — de inhoud past dan echt niet kleiner.
     final table = Padding(
       padding: const EdgeInsets.only(bottom: 14),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: t.border),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: Table(
-            defaultColumnWidth: const IntrinsicColumnWidth(),
-            border: TableBorder.symmetric(inside: BorderSide(color: t.border)),
-            children: [
-              for (var r = 0; r < cells.length; r++)
-                TableRow(
-                  decoration: BoxDecoration(
-                    color: r == 0 ? t.tableHeaderBg : null,
-                  ),
-                  children: [
-                    for (var c = 0; c < columns; c++)
-                      _tableCell(
-                        t,
-                        c < cells[r].length ? cells[r][c] : '',
-                        header: r == 0,
-                        textAlign: _columnTextAlign(aligns, c),
-                      ),
-                  ],
-                ),
-            ],
-          ),
-        ),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final avail = constraints.maxWidth;
+          // Document-tabellen lezen op een vaste, leesbare celmaat (geen
+          // slide-fitting): body 14px, kop 13px. Een document is geen 16:9-dia.
+          const cellSize = 14.0;
+          const headerCellSize = 13.0;
+          final font = t.body.fontFamily ?? 'sans-serif';
+          final minSum = tableColumnMinimumsWidth(
+            rows: cells,
+            colCount: columns,
+            cellSize: cellSize,
+            font: font,
+          );
+          final fits = avail.isFinite && avail > 0 && minSum <= avail * 0.95;
+          final colWidths = fits
+              ? tableColumnWidths(
+                  rows: cells,
+                  colCount: columns,
+                  tableWidth: avail,
+                  cellSize: cellSize,
+                  font: font,
+                )
+              : null;
+          final tableWidget = _styledTable(
+            t,
+            cells,
+            columns,
+            aligns,
+            colWidths,
+            cellSize,
+            headerCellSize,
+          );
+          // Past de tabel niet binnen de breedte, dan valt hij terug op
+          // horizontale scroll met intrinsieke kolombreedtes — de huidige
+          // gedrag, voor het uitzonderingsgeval dat de inhoud niet kleiner kan.
+          if (fits) return tableWidget;
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: tableWidget,
+          );
+        },
       ),
     );
     final onEdit = onEditTable;
@@ -612,21 +730,109 @@ class DocumentMarkdownView extends StatelessWidget {
     );
   }
 
+  /// De gestileerde tabel zelf, los van de breedte-beslissing. Feature 5:
+  /// zebrastrepen, randstijl (lined/boxed/none), celopvulling en een
+  /// accentkleurige onderrand onder de koprij — allemaal huisstijl uit het
+  /// ThemeProfile.
+  Widget _styledTable(
+    _Theme t,
+    List<List<String>> cells,
+    int columns,
+    List<TableAlign> aligns,
+    List<double>? colWidths,
+    double cellSize,
+    double headerCellSize,
+  ) {
+    final pad = t.tableCellPad;
+    final border = t.tableBorder;
+    final hasBox = t.tableBorderStyle == TableBorderStyle.boxed;
+    final hasLines = t.tableBorderStyle == TableBorderStyle.lined;
+    // Buitenrand alleen bij boxed; lined en none leunen op binnenlijnen of
+    // witruimte.
+    final outer = hasBox
+        ? Border.all(color: border)
+        : hasLines
+        ? Border(bottom: BorderSide(color: border))
+        : null;
+    final inside = switch (t.tableBorderStyle) {
+      TableBorderStyle.boxed => TableBorder.symmetric(
+        inside: BorderSide(color: border.withValues(alpha: 0.5)),
+      ),
+      TableBorderStyle.lined => TableBorder(
+        horizontalInside: BorderSide(color: border.withValues(alpha: 0.5)),
+        top: BorderSide(color: border),
+        // de koprij krijgt een eigen accentlijn hieronder; voorkom dubbel.
+        bottom: BorderSide(color: border),
+      ),
+      TableBorderStyle.none => TableBorder.all(
+        width: 0,
+        color: Colors.transparent,
+      ),
+    };
+    final accentHeaderLine = t.tableAccentHeaderBorder
+        ? Border(bottom: BorderSide(color: t.tableAccent, width: 2))
+        : null;
+    return Container(
+      decoration: BoxDecoration(
+        border: outer,
+        borderRadius: hasBox ? BorderRadius.circular(8) : null,
+      ),
+      clipBehavior: hasBox ? Clip.antiAlias : Clip.none,
+      child: Table(
+        defaultColumnWidth: const IntrinsicColumnWidth(),
+        columnWidths: colWidths == null
+            ? null
+            : {
+                for (var c = 0; c < columns; c++)
+                  c: FixedColumnWidth(colWidths[c]),
+              },
+        border: inside,
+        children: [
+          for (var r = 0; r < cells.length; r++)
+            TableRow(
+              decoration: BoxDecoration(
+                color: r == 0
+                    ? t.tableHeaderBg
+                    : t.tableZebraStriped && r.isEven
+                    ? t.tableZebraBg
+                    : null,
+                border: r == 0 ? accentHeaderLine : null,
+              ),
+              children: [
+                for (var c = 0; c < columns; c++)
+                  _tableCell(
+                    t,
+                    c < cells[r].length ? cells[r][c] : '',
+                    header: r == 0,
+                    textAlign: _columnTextAlign(aligns, c),
+                    pad: pad,
+                    cellSize: r == 0 ? headerCellSize : cellSize,
+                  ),
+              ],
+            ),
+        ],
+      ),
+    );
+  }
+
   Widget _tableCell(
     _Theme t,
     String text, {
     required bool header,
     TextAlign textAlign = TextAlign.start,
+    double pad = 8.0,
+    double cellSize = 14.0,
   }) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+    padding: EdgeInsets.symmetric(horizontal: pad + 4, vertical: pad * 0.6),
     child: _inline(
       text,
       header
           ? t.body.copyWith(
+              fontSize: cellSize,
               fontWeight: FontWeight.w700,
               color: t.tableHeaderText,
             )
-          : t.body.copyWith(color: t.tableText),
+          : t.body.copyWith(fontSize: cellSize, color: t.tableText),
       t,
       textAlign: textAlign,
     ),
@@ -719,281 +925,5 @@ class DocumentMarkdownView extends StatelessWidget {
     if (_listItem(line) != null) return false;
     if (isMarkdownTableLine(line)) return false;
     return true;
-  }
-}
-
-/// The kind of a parsed Markdown block.
-enum _Kind {
-  heading,
-  paragraph,
-  list,
-  quote,
-  code,
-  mermaid,
-  chart,
-  table,
-  rule,
-}
-
-/// One parsed block: its kind plus whatever that kind needs to render and to be
-/// searched. Kept as a plain data record so parsing is a pure step, decoupled
-/// from widget building.
-class _Block {
-  const _Block(
-    this.kind, {
-    this.text = '',
-    this.level = 0,
-    this.items = const [],
-    this.rows = const [],
-    this.aligns = const [],
-  });
-
-  final _Kind kind;
-
-  /// heading / paragraph / quote / code / mermaid content.
-  final String text;
-
-  /// Heading level 1–6 (0 otherwise).
-  final int level;
-
-  /// List item lines (for [_Kind.list]).
-  final List<_ListLine> items;
-
-  /// Raw table rows — header + body, *without* the delimiter row (for
-  /// [_Kind.table]). The per-column alignment from that delimiter is parsed out
-  /// into [aligns].
-  final List<String> rows;
-
-  /// Per-column alignment from the GFM delimiter row (for [_Kind.table]); shorter
-  /// than the column count means the rest default to left (the GFM default).
-  final List<TableAlign> aligns;
-
-  /// The plain text a find-in-page query matches against. Rules never match;
-  /// tables and lists flatten their cells/items into one searchable string.
-  String get searchText => switch (kind) {
-    _Kind.table => rows.join(' '),
-    _Kind.list => items.map((e) => e.text).join(' '),
-    _Kind.rule => '',
-    _ => text,
-  };
-}
-
-/// One parsed list line with its nesting depth and (for ordered lists) number.
-class _ListLine {
-  const _ListLine({
-    required this.text,
-    required this.ordered,
-    required this.number,
-    required this.depth,
-    this.checked,
-  });
-
-  final String text;
-  final bool ordered;
-  final int number;
-  final int depth;
-
-  /// Tick state of a GFM task item, or null when this is a plain list item.
-  /// Null and `false` mean different things here: "not a checklist at all"
-  /// versus "a box that is not ticked".
-  final bool? checked;
-}
-
-/// Resolved, theme-derived colours and the base text style, computed once so
-/// every block builder shares them.
-/// An opaque [color] as `#RRGGBB` for handing to the hex-based SVG renderer.
-String _hexRgb(Color color) {
-  String two(double channel) =>
-      (channel * 255).round().clamp(0, 255).toRadixString(16).padLeft(2, '0');
-  return '#${two(color.r)}${two(color.g)}${two(color.b)}'.toUpperCase();
-}
-
-Color _profileColor(String? value, Color fallback) => value == null
-    ? fallback
-    : AppTheme.parseHexColor(value, fallback: fallback);
-
-class _Theme {
-  _Theme(ThemeData theme, ThemeProfile? profile)
-    : dark = theme.brightness == Brightness.dark,
-      paper = _profileColor(
-        profile?.slideBackgroundColor,
-        theme.colorScheme.surface,
-      ),
-      body = TextStyle(
-        fontFamily: profile?.fontFamily,
-        fontSize: 15.5,
-        height: 1.55,
-        color: _profileColor(profile?.textColor, theme.colorScheme.onSurface),
-      ),
-      heading = _profileColor(profile?.textColor, theme.colorScheme.onSurface),
-      subheading = _profileColor(
-        profile?.accentColor,
-        theme.colorScheme.onSurface,
-      ),
-      marker = _profileColor(
-        profile?.accentColor,
-        AppPalette.of(theme).accentInk,
-      ),
-      checkboxEmpty = _profileColor(
-        profile?.checklistUncheckedColor,
-        theme.colorScheme.onSurfaceVariant,
-      ),
-      checkboxChecked = _profileColor(
-        profile?.checklistCheckedColor,
-        AppPalette.of(theme).accentInk,
-      ),
-      link = _profileColor(
-        profile?.accentColor,
-        AppPalette.of(theme).accentInk,
-      ),
-      border = profile == null
-          ? theme.colorScheme.outlineVariant
-          : _profileColor(
-              profile.textColor,
-              theme.colorScheme.onSurface,
-            ).withValues(alpha: 0.22),
-      quoteBg = profile == null
-          ? theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5)
-          : _profileColor(
-              profile.accentColor,
-              AppPalette.of(theme).accentInk,
-            ).withValues(alpha: 0.10),
-      quoteBar = _profileColor(
-        profile?.accentColor,
-        AppPalette.of(theme).accentInk,
-      ),
-      quoteText = _profileColor(
-        profile?.textColor,
-        theme.colorScheme.onSurfaceVariant,
-      ),
-      codeBg = _profileColor(
-        profile?.codeBackgroundColor,
-        theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
-      ),
-      chartCardHex = _hexRgb(
-        Color.alphaBlend(
-          _profileColor(
-            profile?.codeBackgroundColor,
-            theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
-          ),
-          _profileColor(
-            profile?.slideBackgroundColor,
-            theme.colorScheme.surface,
-          ),
-        ),
-      ),
-      codeText = _profileColor(
-        profile?.codeTextColor,
-        theme.colorScheme.onSurface,
-      ),
-      tableHeaderBg = _profileColor(
-        profile?.tableHeaderBackgroundColor,
-        theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.7),
-      ),
-      tableHeaderText = _profileColor(
-        profile?.tableHeaderTextColor,
-        theme.colorScheme.onSurface,
-      ),
-      tableText = _profileColor(
-        profile?.tableTextColor,
-        theme.colorScheme.onSurface,
-      ),
-      findMatch = AppTheme.findHighlight,
-      findActive = AppTheme.findHighlightActive;
-
-  final bool dark;
-  final Color paper;
-  final TextStyle body;
-  final Color heading;
-  final Color subheading;
-  final Color marker;
-  final Color checkboxEmpty;
-  final Color checkboxChecked;
-  final Color link;
-  final Color border;
-  final Color quoteBg;
-  final Color quoteBar;
-  final Color quoteText;
-  final Color codeBg;
-  final String chartCardHex;
-  final Color codeText;
-  final Color tableHeaderBg;
-  final Color tableHeaderText;
-  final Color tableText;
-  final Color findMatch;
-  final Color findActive;
-}
-
-/// Omhult een bewerkbare embed (grafiek of tabel) in de editor: hand-cursor,
-/// dubbelklik om te bewerken, én een zichtbaar potlood-knopje rechtsboven dat
-/// bij één klik dezelfde editor opent. Het potlood is altijd subtiel zichtbaar
-/// en licht op bij hover — zodat de bewerkbaarheid ontdekbaar is zonder dat je
-/// de dubbelklik hoeft te raden (vgl. #1210: een dubbelklik-alleen affordance
-/// vond niemand). Alleen in de editor gemonteerd; de docs-lezer geeft geen
-/// bewerk-callback en krijgt dus geen potlood.
-class _EditableEmbed extends StatefulWidget {
-  const _EditableEmbed({required this.child, required this.onEdit});
-
-  final Widget child;
-  final VoidCallback onEdit;
-
-  @override
-  State<_EditableEmbed> createState() => _EditableEmbedState();
-}
-
-class _EditableEmbedState extends State<_EditableEmbed> {
-  bool _hover = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _hover = true),
-      onExit: (_) => setState(() => _hover = false),
-      child: GestureDetector(
-        onDoubleTap: widget.onEdit,
-        child: Stack(
-          children: [
-            widget.child,
-            Positioned(
-              top: 6,
-              right: 6,
-              child: AnimatedOpacity(
-                opacity: _hover ? 1 : 0.6,
-                duration: const Duration(milliseconds: 120),
-                child: Material(
-                  // Volledig dekkend + een lichte schaduw: waar het potlood over
-                  // een cel valt (een smalle tabelkop) leest het als een knop
-                  // erbovenop in plaats van door de tekst heen te schemeren.
-                  color: scheme.surface,
-                  elevation: 2,
-                  shadowColor: Colors.black45,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    side: BorderSide(color: scheme.outlineVariant),
-                  ),
-                  child: Tooltip(
-                    message: context.l10n.d('Bewerken'),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(6),
-                      onTap: widget.onEdit,
-                      child: Padding(
-                        padding: const EdgeInsets.all(4),
-                        child: Icon(
-                          Icons.edit_outlined,
-                          size: 16,
-                          color: scheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

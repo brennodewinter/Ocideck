@@ -733,6 +733,36 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Boven (mm)': 'Haut (mm)',
+  'Onder (mm)': 'Bas (mm)',
+  'Links (mm)': 'Gauche (mm)',
+  'Rechts (mm)': 'Droite (mm)',
+  'Smal (860 px)': 'Étroit (860 px)',
+  'Standaard (1100 px)': 'Par défaut (1100 px)',
+  'Breed (1400 px)': 'Large (1400 px)',
+  'Volledige breedte': 'Pleine largeur',
+  'Paginamaat': 'Format de page',
+  'Randstijl': 'Style de bordure',
+  'Tabelstijl': 'Style de tableau',
+  'Geen randen': 'Aucune bordure',
+  'Lijnen (horizontaal)': 'Lignes (horizontales)',
+  'Omrand (volledig)': 'Encadré (complet)',
+  'Zebrastrepen (om en om)': 'Rayures zébrées (alternées)',
+  'Accentlijn onder koprij': 'Ligne d’accent sous l’en-tête',
+  'Tabel randkleur': 'Couleur de bordure du tableau',
+  'Tabel zebrakleur': 'Couleur des rayures du tableau',
+  'Celopvulling: {px} px': 'Marge intérieure : {px} px',
+  'Inhoudsopgave': 'Table des matières',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Table des matières — ajoutez des titres pour la remplir.',
+  'Schrijfbreedte editor': 'Largeur d’écriture de l’éditeur',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Largeur de la zone d’écriture en mode visuel. Étroite se lit calmement, large utilise plus d’écran.',
+  'Pagina-instellingen export': 'Paramètres de page pour l’export',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Format de page (ISO 216) et marges pour l’impression HTML, LaTeX et l’export PDF.',
+  '{maat} (liggend)': '{maat} (paysage)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Apparence',
   'Afbeelding aanpassen': 'Ajuster l\'image',
   'Groot bestand': 'Fichier volumineux',

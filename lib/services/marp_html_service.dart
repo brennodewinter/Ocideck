@@ -21,6 +21,7 @@ import '../models/marp_style.dart';
 import '../models/scope_matrix_spec.dart';
 import '../models/scorecard_spec.dart';
 import '../models/settings.dart';
+import '../models/page_size.dart';
 import '../models/slide.dart';
 import '../models/timeline.dart';
 import '../utils/log.dart';
@@ -161,6 +162,10 @@ class MarpHtmlService {
     // beginnen (instelling). Alleen zinvol met [continuous]; het eerste hoofdstuk
     // krijgt geen breuk zodat er geen leeg eerste blad ontstaat.
     bool chapterPageBreak = false,
+    // Feature 3: paginamaat en marges voor de @page-CSS (alleen zinvol met
+    // [continuous] — de documentmodus). `null` = geen @page-regel.
+    PageSizeSpec? pageSize,
+    PageMargins? pageMargins,
   }) async {
     final [marked, purify, hljs, hljsCss, mathjax, mermaid, css] =
         await _loadExportBundles(theme);
@@ -248,7 +253,8 @@ class MarpHtmlService {
         '<title>$title</title>'
         '$headMeta'
         '<style>${exportBaseCss()}\n$css\n$hljsCss'
-        '${chapterPageBreak ? _chapterPageBreakCss : ''}$logoCss</style>'
+        '${chapterPageBreak ? _chapterPageBreakCss : ''}'
+        '${_pageAtRuleCss(pageSize, pageMargins)}$logoCss</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
         '${inline(marked, 'marked')}'
         '${inline(purify, 'dompurify')}'

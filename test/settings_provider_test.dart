@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart' show TlpLevel;
 import 'package:ocideck/models/matrix_settings.dart';
+import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/storage_connection.dart';
 import 'package:ocideck/services/secret_store.dart';
@@ -445,6 +446,53 @@ void main() {
         ),
         isNull,
       );
+    });
+
+    test('paginamaat en marges overleven een herstart', () async {
+      final n = await _loadedNotifier();
+      const spec = PageSizeSpec(series: PaperSeries.b, number: 5);
+      const margins = PageMargins(
+        topMm: 30,
+        bottomMm: 18,
+        leftMm: 15,
+        rightMm: 15,
+      );
+      await n.setDocumentPageSize(spec);
+      await n.setDocumentPageMargins(margins);
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getString('documentPageSize'), 'B5');
+      expect(prefs.getString('documentPageMargins'), '30,18,15,15');
+
+      final reloaded = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(reloaded.state.documentPageSize, spec);
+      expect(reloaded.state.documentPageMargins, margins);
+    });
+
+    test('volledige schrijfbreedte overleeft een herstart', () async {
+      // De keuze werd als een verwijderde sleutel bewaard, en een ontbrekende
+      // sleutel leest terug als de standaard 1100: na een herstart stond de
+      // editor weer smal, zonder dat iemand daarom vroeg.
+      final n = await _loadedNotifier();
+      await n.setDocumentEditorMaxWidth(null);
+      expect(n.state.documentEditorMaxWidth, isNull);
+
+      final reloaded = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(reloaded.state.documentEditorMaxWidth, isNull);
+    });
+
+    test('een gekozen schrijfbreedte overleeft een herstart', () async {
+      final n = await _loadedNotifier();
+      await n.setDocumentEditorMaxWidth(1400);
+      final reloaded = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(reloaded.state.documentEditorMaxWidth, 1400);
+    });
+
+    test('zonder keuze staat de schrijfbreedte op 1100', () async {
+      final n = await _loadedNotifier();
+      expect(n.state.documentEditorMaxWidth, 1100);
     });
 
     test('classification and quality export toggles', () async {

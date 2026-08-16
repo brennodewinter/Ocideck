@@ -596,5 +596,166 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
         style: const TextStyle(fontSize: 11),
       ),
     ),
+    const SizedBox(height: 12),
+    // Feature 2: instelbare schrijfbreedte van de visuele editor.
+    Text(
+      l10n.d('Schrijfbreedte editor'),
+      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+    ),
+    const SizedBox(height: 4),
+    Text(
+      l10n.d(
+        'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.',
+      ),
+      style: const TextStyle(fontSize: 11),
+    ),
+    const SizedBox(height: 8),
+    DropdownButtonFormField<double?>(
+      initialValue: settings.documentEditorMaxWidth,
+      // Zonder isExpanded meet de dropdown zich op zijn breedste label en
+      // duwt dat een smalle kolom uit beeld.
+      isExpanded: true,
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      ),
+      items: [
+        DropdownMenuItem(value: 860, child: Text(l10n.d('Smal (860 px)'))),
+        DropdownMenuItem(
+          value: 1100,
+          child: Text(l10n.d('Standaard (1100 px)')),
+        ),
+        DropdownMenuItem(value: 1400, child: Text(l10n.d('Breed (1400 px)'))),
+        DropdownMenuItem(value: null, child: Text(l10n.d('Volledige breedte'))),
+      ],
+      onChanged: (v) =>
+          ref.read(settingsProvider.notifier).setDocumentEditorMaxWidth(v),
+    ),
+    const SizedBox(height: 16),
+    // Feature 3: paginamaat en marges voor export.
+    Text(
+      l10n.d('Pagina-instellingen export'),
+      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+    ),
+    const SizedBox(height: 4),
+    Text(
+      l10n.d(
+        'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.',
+      ),
+      style: const TextStyle(fontSize: 11),
+    ),
+    const SizedBox(height: 8),
+    DropdownButtonFormField<PageSizeSpec>(
+      initialValue: settings.documentPageSize,
+      isExpanded: true,
+      decoration: InputDecoration(
+        labelText: l10n.d('Paginamaat'),
+        border: const OutlineInputBorder(),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      ),
+      items: _pageSizeOptions(l10n),
+      onChanged: (v) {
+        if (v != null) {
+          ref.read(settingsProvider.notifier).setDocumentPageSize(v);
+        }
+      },
+    ),
+    const SizedBox(height: 8),
+    _pageMarginsControls(l10n, ref, settings),
   ];
 }
+
+/// De paginamaat-opties voor de dropdown — A/B/C-reeksen, nummers 0–10,
+/// portret en landschap. Beperkt tot de veelvoorkomende maten om de lijst
+/// hanteerbaar te houden.
+List<DropdownMenuItem<PageSizeSpec>> _pageSizeOptions(AppLocalizations l10n) {
+  const presets = [
+    PageSizeSpec.a4,
+    PageSizeSpec.a4Landscape,
+    PageSizeSpec(series: PaperSeries.a, number: 3),
+    PageSizeSpec(series: PaperSeries.a, number: 3, landscape: true),
+    PageSizeSpec(series: PaperSeries.a, number: 5),
+    PageSizeSpec(series: PaperSeries.a, number: 5, landscape: true),
+    PageSizeSpec(series: PaperSeries.b, number: 4),
+    PageSizeSpec(series: PaperSeries.b, number: 5),
+    PageSizeSpec(series: PaperSeries.c, number: 4),
+    PageSizeSpec(series: PaperSeries.c, number: 5),
+  ];
+  return [
+    for (final spec in presets)
+      DropdownMenuItem(value: spec, child: Text(pageSizeLabel(l10n, spec))),
+  ];
+}
+
+/// De marge-controls: vier tekstvelden (top/onder/links/rechts in mm).
+Widget _pageMarginsControls(
+  AppLocalizations l10n,
+  WidgetRef ref,
+  AppSettings settings,
+) {
+  final m = settings.documentPageMargins;
+  final notifier = ref.read(settingsProvider.notifier);
+  final fields = [
+    _marginField(
+      l10n.d('Boven (mm)'),
+      m.topMm,
+      (v) => notifier.setDocumentPageMargins(m.copyWith(topMm: v)),
+    ),
+    _marginField(
+      l10n.d('Onder (mm)'),
+      m.bottomMm,
+      (v) => notifier.setDocumentPageMargins(m.copyWith(bottomMm: v)),
+    ),
+    _marginField(
+      l10n.d('Links (mm)'),
+      m.leftMm,
+      (v) => notifier.setDocumentPageMargins(m.copyWith(leftMm: v)),
+    ),
+    _marginField(
+      l10n.d('Rechts (mm)'),
+      m.rightMm,
+      (v) => notifier.setDocumentPageMargins(m.copyWith(rightMm: v)),
+    ),
+  ];
+  // Vier velden naast elkaar passen alleen op een ruime kolom. Bij een smal
+  // tabblad of grote tekst gaan ze twee-bij-twee — de overflow-stresspoort
+  // vond hier 302 px die buiten beeld vielen bij 200% tekst.
+  return LayoutBuilder(
+    builder: (context, constraints) {
+      final perRow = constraints.maxWidth >= 420 ? 4 : 2;
+      final rows = <Widget>[];
+      for (var i = 0; i < fields.length; i += perRow) {
+        if (rows.isNotEmpty) rows.add(const SizedBox(height: 8));
+        rows.add(
+          Row(
+            children: [
+              for (var c = 0; c < perRow; c++) ...[
+                if (c > 0) const SizedBox(width: 8),
+                Expanded(child: fields[i + c]),
+              ],
+            ],
+          ),
+        );
+      }
+      return Column(mainAxisSize: MainAxisSize.min, children: rows);
+    },
+  );
+}
+
+Widget _marginField(
+  String label,
+  double value,
+  ValueChanged<double> onChanged,
+) => TextFormField(
+  initialValue: value.toStringAsFixed(0),
+  decoration: InputDecoration(
+    labelText: label,
+    border: const OutlineInputBorder(),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+  ),
+  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+  onChanged: (text) {
+    final v = double.tryParse(text);
+    if (v != null && v >= 0 && v <= 100) onChanged(v);
+  },
+);

@@ -733,6 +733,36 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Boven (mm)': 'Oben (mm)',
+  'Onder (mm)': 'Unten (mm)',
+  'Links (mm)': 'Links (mm)',
+  'Rechts (mm)': 'Rechts (mm)',
+  'Smal (860 px)': 'Schmal (860 px)',
+  'Standaard (1100 px)': 'Standard (1100 px)',
+  'Breed (1400 px)': 'Breit (1400 px)',
+  'Volledige breedte': 'Volle Breite',
+  'Paginamaat': 'Seitengröße',
+  'Randstijl': 'Rahmenstil',
+  'Tabelstijl': 'Tabellenstil',
+  'Geen randen': 'Keine Rahmen',
+  'Lijnen (horizontaal)': 'Linien (horizontal)',
+  'Omrand (volledig)': 'Umrandet (vollständig)',
+  'Zebrastrepen (om en om)': 'Zebrastreifen (abwechselnd)',
+  'Accentlijn onder koprij': 'Akzentlinie unter der Kopfzeile',
+  'Tabel randkleur': 'Tabellenrahmenfarbe',
+  'Tabel zebrakleur': 'Tabellen-Zebrafarbe',
+  'Celopvulling: {px} px': 'Zellenabstand: {px} px',
+  'Inhoudsopgave': 'Inhaltsverzeichnis',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Inhaltsverzeichnis — fügen Sie Überschriften hinzu, um es zu füllen.',
+  'Schrijfbreedte editor': 'Schreibbreite des Editors',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Wie breit die Schreibfläche im visuellen Modus ist. Schmal liest sich ruhig, breit nutzt mehr vom Bildschirm.',
+  'Pagina-instellingen export': 'Seiteneinstellungen für den Export',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Seitengröße (ISO 216) und Ränder für HTML-Druck, LaTeX und PDF-Export.',
+  '{maat} (liggend)': '{maat} (Querformat)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Gestaltung',
   'Afbeelding aanpassen': 'Bild anpassen',
   'Groot bestand': 'Große Datei',

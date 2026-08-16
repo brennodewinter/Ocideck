@@ -734,6 +734,36 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Boven (mm)': 'Boppe (mm)',
+  'Onder (mm)': 'Under (mm)',
+  'Links (mm)': 'Links (mm)',
+  'Rechts (mm)': 'Rjochts (mm)',
+  'Smal (860 px)': 'Smel (860 px)',
+  'Standaard (1100 px)': 'Standert (1100 px)',
+  'Breed (1400 px)': 'Breed (1400 px)',
+  'Volledige breedte': 'Folle breedte',
+  'Paginamaat': 'Sidegrutte',
+  'Randstijl': 'Rânestyl',
+  'Tabelstijl': 'Tabelstyl',
+  'Geen randen': 'Gjin rânen',
+  'Lijnen (horizontaal)': 'Linen (horizontaal)',
+  'Omrand (volledig)': 'Omrâne (folslein)',
+  'Zebrastrepen (om en om)': 'Sebrastreken (om en om)',
+  'Accentlijn onder koprij': 'Aksintline ûnder de koprige',
+  'Tabel randkleur': 'Tabelrânekleur',
+  'Tabel zebrakleur': 'Tabelsebrakleur',
+  'Celopvulling: {px} px': 'Selopfolling: {px} px',
+  'Inhoudsopgave': 'Ynhâldsopjefte',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Ynhâldsopjefte — foegje kopkes ta om it te foljen.',
+  'Schrijfbreedte editor': 'Skriuwbreedte editor',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Hoe breed it skriuwflak yn de fisuele modus is. Smel lêst rêstich, breed brûkt mear fan it skerm.',
+  'Pagina-instellingen export': 'Side-ynstellings eksport',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Sidegrutte (ISO 216) en marzjes foar HTML-print, LaTeX en PDF-eksport.',
+  '{maat} (liggend)': '{maat} (lizzend)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Foarmjouwing',
   'Afbeelding aanpassen': 'Ofbylding oanpasse',
   'Groot bestand': 'Grut bestân',

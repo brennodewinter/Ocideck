@@ -182,6 +182,11 @@ class _ExpandedMarkdownDialogState extends State<ExpandedMarkdownDialog> {
                     hintText: widget.hint,
                     expand: true,
                     surfaceStyle: NotesSurfaceStyle.document,
+                    // De schrijfbreedte-instelling geldt de documenteditor;
+                    // dit vergrote notitieveld houdt zijn eigen maat. Expliciet,
+                    // want het weglaten betekent sinds #1500 "volledige
+                    // breedte" — en dat is niet de maat die dit veld had.
+                    documentMaxWidth: 860,
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 28,
                       vertical: 22,

@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import '../models/privacy_disposition.dart';
-import '../models/settings.dart';
+import '../models/settings.dart' show ThemeProfile, TableBorderStyle;
+import '../models/page_size.dart';
+import 'table_of_contents.dart';
 import '../utils/atomic_file.dart';
 import 'document_chart_hydration.dart';
 import 'document_deck_bridge.dart';
@@ -102,20 +104,44 @@ Future<String?> writeDocumentExport(
   ExportDocumentMetadata? metadata,
   HtmlImageResolver? embedImage,
   bool chapterPageBreak = false,
+  PageSizeSpec? pageSize,
+  PageMargins? pageMargins,
   required String outputPath,
 }) async {
   switch (format) {
     case DocumentExportFormat.md:
-      await writeStringAtomic(File(outputPath), projectedDocumentBody(bundle));
+      // Feature 4: vervang de `<!-- toc -->`-marker door de gegenereerde
+      // GFM-lijst (zonder marker) — een platte `.md`-ontvanger krijgt een
+      // leesbare inhoudsopgave.
+      final mdBody = projectedDocumentBody(bundle);
+      final toc = generateTocMarkdown(mdBody);
+      // keepMarker: false laat de marker weg maar houdt de TOC op zijn plek.
+      // Eerder ging dat via een losse `replaceAll('<!-- toc -->\n\n', '')`, en
+      // die trof niets wanneer het document wél een marker draagt maar (nog)
+      // geen koppen: dan blijft de kale marker over, zónder de twee regeleindes,
+      // en lekte hij het geëxporteerde bestand in.
+      final mdOut = hasTocMarker(mdBody)
+          ? replaceTocMarker(mdBody, toc, keepMarker: false)
+          : mdBody;
+      await writeStringAtomic(File(outputPath), mdOut);
       return outputPath;
     case DocumentExportFormat.html:
+      // Feature 4: regenereer de TOC op de geprojecteerde body vóór renderen.
+      // De marker blijft staan; marked rendert de GFM-lijst als klikbare nav.
+      final htmlBody = projectedDocumentBody(bundle);
+      final toc = generateTocMarkdown(htmlBody);
+      final htmlBodyWithToc = hasTocMarker(htmlBody)
+          ? replaceTocMarker(htmlBody, toc)
+          : htmlBody;
       final out = await html.build(
-        projectedDocumentBody(bundle),
+        htmlBodyWithToc,
         continuous: true,
         chapterPageBreak: chapterPageBreak,
         theme: theme,
         metadata: metadata,
         embedImage: embedImage,
+        pageSize: pageSize,
+        pageMargins: pageMargins,
       );
       await writeStringAtomic(File(outputPath), out);
       return outputPath;
@@ -124,8 +150,10 @@ Future<String?> writeDocumentExport(
       final body = markdownToLatex(
         projectedDocumentBody(bundle),
         chapterPageBreak: chapterPageBreak,
+        tableBorderStyle: theme?.tableBorderStyle ?? TableBorderStyle.lined,
       );
-      final tex = '${articlePreamble(meta)}\n$body\n$articlePostamble\n';
+      final tex =
+          '${articlePreamble(meta, pageSize: pageSize ?? PageSizeSpec.a4, pageMargins: pageMargins ?? const PageMargins())}\n$body\n$articlePostamble\n';
       await writeStringAtomic(File(outputPath), tex);
       return outputPath;
     case DocumentExportFormat.ocideck:

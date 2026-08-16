@@ -1777,6 +1777,36 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Boven (mm)': 'Nahoře (mm)',
+  'Onder (mm)': 'Dole (mm)',
+  'Links (mm)': 'Vlevo (mm)',
+  'Rechts (mm)': 'Vpravo (mm)',
+  'Smal (860 px)': 'Úzké (860 px)',
+  'Standaard (1100 px)': 'Výchozí (1100 px)',
+  'Breed (1400 px)': 'Široké (1400 px)',
+  'Volledige breedte': 'Plná šířka',
+  'Paginamaat': 'Velikost stránky',
+  'Randstijl': 'Styl ohraničení',
+  'Tabelstijl': 'Styl tabulky',
+  'Geen randen': 'Bez ohraničení',
+  'Lijnen (horizontaal)': 'Linky (vodorovné)',
+  'Omrand (volledig)': 'Orámované (úplné)',
+  'Zebrastrepen (om en om)': 'Zebra pruhy (střídavě)',
+  'Accentlijn onder koprij': 'Zvýrazňovací linka pod záhlavím',
+  'Tabel randkleur': 'Barva ohraničení tabulky',
+  'Tabel zebrakleur': 'Barva pruhů tabulky',
+  'Celopvulling: {px} px': 'Odsazení buňky: {px} px',
+  'Inhoudsopgave': 'Obsah',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Obsah — přidejte nadpisy, aby se naplnil.',
+  'Schrijfbreedte editor': 'Šířka psaní v editoru',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Jak široká je psací plocha ve vizuálním režimu. Úzká se čte klidně, široká využije více obrazovky.',
+  'Pagina-instellingen export': 'Nastavení stránky pro export',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Velikost stránky (ISO 216) a okraje pro tisk HTML, LaTeX a export PDF.',
+  '{maat} (liggend)': '{maat} (na šířku)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Vzhled',
   'Afbeelding aanpassen': 'Upravit obrázek',
   'Groot bestand': 'Velký soubor',

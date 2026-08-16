@@ -1796,6 +1796,36 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Boven (mm)': 'Fuq (mm)',
+  'Onder (mm)': 'Isfel (mm)',
+  'Links (mm)': 'Xellug (mm)',
+  'Rechts (mm)': 'Lemin (mm)',
+  'Smal (860 px)': 'Dejjaq (860 px)',
+  'Standaard (1100 px)': 'Prestabbilit (1100 px)',
+  'Breed (1400 px)': 'Wiesa’ (1400 px)',
+  'Volledige breedte': 'Wisa’ sħiħ',
+  'Paginamaat': 'Daqs tal-paġna',
+  'Randstijl': 'Stil tal-bordura',
+  'Tabelstijl': 'Stil tat-tabella',
+  'Geen randen': 'Bla bordura',
+  'Lijnen (horizontaal)': 'Linji (orizzontali)',
+  'Omrand (volledig)': 'Inkwadrat (sħiħ)',
+  'Zebrastrepen (om en om)': 'Strixxi żebra (alternati)',
+  'Accentlijn onder koprij': 'Linja ta’ aċċent taħt ir-ringiela ta’ fuq',
+  'Tabel randkleur': 'Kulur tal-bordura tat-tabella',
+  'Tabel zebrakleur': 'Kulur tal-istrixxi tat-tabella',
+  'Celopvulling: {px} px': 'Imblank taċ-ċella: {px} px',
+  'Inhoudsopgave': 'Indiċi',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Indiċi — żid intestaturi biex timlih.',
+  'Schrijfbreedte editor': 'Wisa’ tal-kitba fl-editur',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Kemm hi wiesgħa ż-żona tal-kitba fil-modalità viżwali. Dejqa taqra bil-kalma, wiesgħa tuża aktar mill-iskrin.',
+  'Pagina-instellingen export': 'Issettjar tal-paġna għall-esportazzjoni',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Daqs tal-paġna (ISO 216) u marġini għall-istampar HTML, LaTeX u esportazzjoni PDF.',
+  '{maat} (liggend)': '{maat} (orizzontali)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Disinn',
   'Afbeelding aanpassen': 'Aġġusta l-istampa',
   'Groot bestand': 'Fajl kbir',

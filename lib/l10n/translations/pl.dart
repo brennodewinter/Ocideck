@@ -1786,6 +1786,36 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Boven (mm)': 'Góra (mm)',
+  'Onder (mm)': 'Dół (mm)',
+  'Links (mm)': 'Lewo (mm)',
+  'Rechts (mm)': 'Prawo (mm)',
+  'Smal (860 px)': 'Wąski (860 px)',
+  'Standaard (1100 px)': 'Domyślny (1100 px)',
+  'Breed (1400 px)': 'Szeroki (1400 px)',
+  'Volledige breedte': 'Pełna szerokość',
+  'Paginamaat': 'Rozmiar strony',
+  'Randstijl': 'Styl obramowania',
+  'Tabelstijl': 'Styl tabeli',
+  'Geen randen': 'Bez obramowania',
+  'Lijnen (horizontaal)': 'Linie (poziome)',
+  'Omrand (volledig)': 'W ramce (pełnej)',
+  'Zebrastrepen (om en om)': 'Pasy zebry (naprzemienne)',
+  'Accentlijn onder koprij': 'Linia akcentu pod wierszem nagłówka',
+  'Tabel randkleur': 'Kolor obramowania tabeli',
+  'Tabel zebrakleur': 'Kolor pasów tabeli',
+  'Celopvulling: {px} px': 'Wypełnienie komórki: {px} px',
+  'Inhoudsopgave': 'Spis treści',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Spis treści — dodaj nagłówki, aby go wypełnić.',
+  'Schrijfbreedte editor': 'Szerokość pisania w edytorze',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Jak szeroki jest obszar pisania w trybie wizualnym. Wąski czyta się spokojnie, szeroki wykorzystuje więcej ekranu.',
+  'Pagina-instellingen export': 'Ustawienia strony dla eksportu',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Rozmiar strony (ISO 216) i marginesy dla wydruku HTML, LaTeX-a i eksportu PDF.',
+  '{maat} (liggend)': '{maat} (poziomo)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Wygląd',
   'Afbeelding aanpassen': 'Dostosuj obraz',
   'Groot bestand': 'Duży plik',

@@ -4325,6 +4325,20 @@ at the top and bottom when printing or saving as PDF. Markdown content stays unc
 these values travel in the style profile, not in the document body. The presentation
 editor itself remains deliberately sober and presentation-focused.
 
+The profile's colours also carry the **table style**: the border style (*Lijnen
+(horizontaal)*, thin horizontal rules in the manner of a typeset book, *Omrand
+(volledig)* fully boxed, or *Geen randen* no borders at all), the border colour,
+**zebra striping** with a colour of its own, the **cell padding** in px, and an
+**accent rule under the header row**. It is a house style, not per-table
+formatting: every table in a document or presentation follows it, and because it
+sits in the style profile it travels with the file — the recipient sees the table
+you styled. The writing surface, the preview, the HTML export and the LaTeX
+export all draw it.
+
+A table wider than the space it is given is neither cut off nor allowed to run
+off the page: the columns take their natural widths as long as they fit, and are
+otherwise scaled down proportionally until the table sits inside the measure.
+
 Under *Settings → General → Document style* you can set a **default document style**
 for documents that do not choose their own, and switch on **Deze stijl afdwingen**
 ("Enforce this style") to use that one style everywhere as a house style, ignoring
@@ -4369,6 +4383,51 @@ page* is on.
 
 Every export runs through the same privacy projection (OciWacht) as a deck
 export, so what leaves is the redacted content, never the raw source.
+
+### Page size, margins and writing width
+
+Under *Settings → General → Pagina-instellingen export* ("Export page setup") you
+choose the **page size** (ISO 216: A3, A4 and A5 portrait or landscape, B4, B5,
+C4 and C5) and the four **margins** in millimetres. Together they decide the sheet
+the export lands on: the HTML gets an `@page` rule from them, so printing or
+*Save as PDF* from the browser comes out on the chosen format, and the LaTeX
+export puts the same size into `\documentclass` and `geometry`. The default is A4
+with 25 mm top and bottom and 20 mm left and right — as of 2026-08-16 those 20 mm
+apply to the LaTeX export too, which until then quietly kept 25 mm all round and
+so produced a different sheet than the HTML of the same document. In visual mode
+the chosen size shows in the bottom-right corner, so you can see what you are
+writing towards while you write. It is an awareness indicator: the real page
+breaks only fall at print time.
+
+The **writing width** beside it (*Schrijfbreedte editor*: narrow 860 px, standard
+1100 px, wide 1400 px, or full width) is not about the export but about your own
+screen — how wide the visual writing surface is. Narrow reads more calmly, wide
+uses a large screen. None of the three writes anything into your `.md`; they are
+display-and-export choices, like the default document style.
+
+### A table of contents
+
+The **Inhoudsopgave** ("Contents") button on the insert bar puts one line into
+your document at the cursor:
+
+```markdown
+<!-- toc -->
+```
+
+That is all — the list itself is not stored. Deliberately so: a contents list kept
+in the file goes stale the moment you rename a heading, and then the file no
+longer agrees with itself. OciDeck recognises the marker and builds the list anew
+every time, from the headings present at that moment (H1 through H3). The visual
+mode and the preview show it immediately; any other Markdown reader sees an HTML
+comment and ignores it.
+
+On export each format gets the shape that belongs there. **HTML** keeps the marker
+and renders a clickable list under it. The **Markdown** export drops the marker
+and writes the list in its place, since a recipient outside OciDeck has no use for
+a marker. **LaTeX** turns the marker into `\tableofcontents` and lets TeX build
+the contents itself, with page numbers. The list is generated *after* the privacy
+projection, so a heading removed from the redacted copy is absent from that copy's
+contents as well.
 
 ### Converting between a presentation and a document
 

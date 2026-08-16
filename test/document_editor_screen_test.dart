@@ -307,6 +307,50 @@ void main() {
     expect(n.currentState.document!.styleName, isNull);
   });
 
+  testWidgets('het invoeg-palet biedt elk item precies één keer', (
+    tester,
+  ) async {
+    // Pagina-einde stond er twee keer in — geen zichtbare fout in een test die
+    // op tekst zoekt, maar wél een dubbel item in het menu en een `tap()` die
+    // niet meer weet welke hij moet hebben.
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('Voor.'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    await tester.tap(find.text('Invoegen'));
+    await tester.pumpAndSettle();
+    for (final label in [
+      'Grafiek',
+      'Tabel',
+      'Mermaid',
+      'Afbeelding',
+      'Pagina-einde',
+      'Inhoudsopgave',
+      'Plakken',
+    ]) {
+      expect(find.text(label), findsOneWidget, reason: '$label in het palet');
+    }
+  });
+
+  testWidgets('het invoeg-palet schrijft een inhoudsopgave-marker', (
+    tester,
+  ) async {
+    final n = DocumentNotifier()..loadDocument(MarkdownDocument.parse('Voor.'));
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    await tester.tap(find.text('Invoegen'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Inhoudsopgave'));
+    await tester.pump();
+
+    // Alleen de marker: de lijst zelf wordt bij export gegenereerd, zodat een
+    // hernoemde kop geen verouderde inhoudsopgave in het bestand achterlaat.
+    final source = n.currentState.document!.source;
+    expect(source, contains('<!-- toc -->'));
+    expect(source, isNot(contains('- [')));
+  });
+
   testWidgets(
     'Invoegen → Afbeelding opent de carrousel, niet alleen Bladeren',
     (tester) async {

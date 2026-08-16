@@ -4281,6 +4281,20 @@ afdrukken/opslaan als PDF herhalen ze boven- en onderaan de pagina. De Markdownb
 blijft onveranderd; deze gegevens reizen in het stijlprofiel, niet in de inhoud.
 De presentatiebewerker zelf blijft bewust sober en presentatiegericht.
 
+Bij de kleuren van het profiel staat ook de **tabelstijl**: de randstijl (*Lijnen
+(horizontaal)* in de trant van een gezet boek, *Omrand (volledig)* of *Geen
+randen*), de randkleur, **zebrastrepen** met een eigen kleur, de **celopvulling**
+in px en een **accentlijn onder de koprij**. Het is huisstijl, geen opmaak per
+tabel: alle tabellen in een document of presentatie volgen hem, en omdat hij in
+het stijlprofiel zit, reist hij mee met het bestand — de ontvanger ziet dezelfde
+tabel als jij. De schrijfbewerker, de voorvertoning, de HTML-export en de
+LaTeX-export tekenen hem alle vier.
+
+Een tabel die breder is dan de ruimte die hij krijgt, wordt niet afgekapt en loopt
+ook niet buiten de pagina: de kolommen krijgen hun natuurlijke breedte zolang die
+past, en anders worden ze evenredig teruggeschaald tot de tabel binnen de maat
+valt.
+
 Onder *Instellingen → Algemeen → Documentstijl* kun je daarnaast een
 **standaard-documentstijl** kiezen en die desgewenst afdwingen als huisstijl. Dat zijn
 weergave- en exportkeuzes; alleen de knop **Stijl** in het document schrijft `theme:`
@@ -4316,6 +4330,51 @@ over de toegankelijkheid van een zo gemaakte PDF — dat is het werk van de brow
 
 Elke export loopt door dezelfde privacyprojectie (OciWacht) als een deck-export,
 zodat wat de deur uit gaat de geredigeerde inhoud is, nooit de rauwe bron.
+
+### Paginamaat, marges en schrijfbreedte
+
+Onder *Instellingen → Algemeen → Pagina-instellingen export* kies je de
+**paginamaat** (ISO-216: A3, A4 en A5 staand of liggend, B4, B5, C4 en C5) en de
+vier **marges** in millimeters. Die twee bepalen het vel waar de export op
+belandt: de HTML krijgt er een `@page`-regel van, zodat afdrukken of *Opslaan als
+PDF* vanuit de browser op het gekozen formaat uitkomt, en de LaTeX-export zet
+dezelfde maat in `\documentclass` en `geometry`. Standaard is A4 met 25 mm boven
+en onder en 20 mm links en rechts — die 20 mm geldt sinds 2026-08-16 ook voor de
+LaTeX-export, die daarvoor stilzwijgend 25 mm rondom aanhield en dus een ander vel
+opleverde dan de HTML van hetzelfde document. In de visuele modus staat de gekozen
+maat rechtsonder in beeld, zodat je tijdens het schrijven ziet waar je naartoe
+schrijft. Het is een bewustwordingsindicator: de echte pagina-einden vallen pas
+bij het afdrukken.
+
+De **schrijfbreedte** ernaast (*Schrijfbreedte editor*: smal 860 px, standaard
+1100 px, breed 1400 px, of volledige breedte) gaat níet over de export maar over
+je eigen scherm: hoe breed het visuele schrijfoppervlak is. Smal leest rustiger,
+breed benut een groot scherm. Geen van drieën schrijft iets in je `.md` — het
+zijn weergave- en exportkeuzes, net als de standaard documentstijl.
+
+### Een inhoudsopgave
+
+De knop **Inhoudsopgave** in de invoegbalk zet op de cursorpositie één regel in je
+document:
+
+```markdown
+<!-- toc -->
+```
+
+Meer niet — de opsomming zelf komt er niet in te staan. Dat is met opzet: een
+inhoudsopgave die in het bestand wordt opgeslagen, veroudert zodra je een kop
+hernoemt, en dan klopt het bestand niet meer met zichzelf. OciDeck herkent de
+marker en maakt de lijst elke keer opnieuw, uit de koppen die er op dát moment
+staan (H1 tot en met H3). In de visuele modus en het voorbeeld zie je de lijst
+meteen; een andere Markdown-lezer ziet een HTML-commentaar en negeert het.
+
+Bij export krijgt elk formaat de vorm die daar hoort. De **HTML** houdt de marker
+en zet er een klikbare lijst onder. De **Markdown**-export laat de marker weg en
+schrijft de opsomming op die plek, want een ontvanger buiten OciDeck heeft niets
+aan een marker. **LaTeX** vertaalt de marker naar `\tableofcontents` en laat TeX
+de inhoudsopgave zelf opbouwen, mét paginanummers. De lijst wordt gemaakt ná de
+privacyprojectie, dus een kop die uit de geredigeerde kopie is gehaald, staat ook
+niet in de inhoudsopgave van die kopie.
 
 ### Omzetten tussen een presentatie en een document
 
