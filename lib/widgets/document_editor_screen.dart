@@ -1061,91 +1061,18 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     return caption.replaceAll('[', '').replaceAll(']', '');
   }
 
-  /// De Overzicht-rail: de koppen van het document, live afgeleid, klikbaar om
-  /// naar die kop te springen. Europa-header (EU-blauw + geel). Inklapbaar tot
-  /// een smalle strook. Leeg document → lege rail.
-  Widget _outlineRail(ThemeData theme, String source) {
-    final outline = buildMarkdownOutline(source);
-    final l10n = context.l10n;
-    if (_outlineCollapsed) {
-      return SizedBox(
-        width: 40,
-        child: Material(
-          color: AppTheme.blueVivid,
-          child: InkWell(
-            onTap: () => setState(() => _outlineCollapsed = false),
-            child: Tooltip(
-              message: l10n.d('Overzicht uitklappen'),
-              child: Center(
-                child: Icon(
-                  Icons.chevron_right,
-                  color: AppTheme.amberVivid,
-                  size: 22,
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-    return SizedBox(
-      key: const Key('document-outline-rail'),
-      width: 216,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Material(
-            color: AppTheme.blueVivid,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(12, 10, 4, 10),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      l10n.d('Overzicht').toUpperCase(),
-                      style: const TextStyle(
-                        fontSize: 11,
-                        letterSpacing: 1.2,
-                        fontWeight: FontWeight.w700,
-                        color: AppTheme.amberVivid,
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    tooltip: l10n.d('Overzicht inklappen'),
-                    onPressed: () => setState(() => _outlineCollapsed = true),
-                    icon: const Icon(Icons.chevron_left, size: 18),
-                    color: AppTheme.amberVivid,
-                    padding: EdgeInsets.zero,
-                    visualDensity: VisualDensity.compact,
-                    constraints: const BoxConstraints(
-                      minWidth: 28,
-                      minHeight: 28,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              color: theme.colorScheme.surface,
-              child: ListView.builder(
-                padding: const EdgeInsets.only(top: 6, bottom: 12),
-                itemCount: outline.length,
-                itemBuilder: (context, i) => _outlineItem(
-                  theme,
-                  outline[i],
-                  active: i == _activeOutlineIndex,
-                  onTap: () => _scrollToHeading(outline[i]),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  /// De Overzicht-rail. De rail zelf staat top-level in dezelfde library
+  /// ([_documentOutlineRail]); het scherm levert alleen de stand en wat er bij
+  /// een tik moet gebeuren.
+  Widget _outlineRail(ThemeData theme, String source) => _documentOutlineRail(
+    context,
+    theme,
+    source,
+    collapsed: _outlineCollapsed,
+    activeIndex: _activeOutlineIndex,
+    onCollapsedChanged: (v) => setState(() => _outlineCollapsed = v),
+    onSelect: _scrollToHeading,
+  );
 }
 
 Widget _styledDocumentSurface(ThemeProfile? profile, Widget editor) {
