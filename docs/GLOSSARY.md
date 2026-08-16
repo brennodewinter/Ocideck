@@ -55,6 +55,18 @@ author sets the threshold per question.
 against an optional target, time per slide, and each answered question attempt.
 Session-only; nothing is written to disk or into the `.md`.
 
+**Trim size** — the page size a printed document ends up at after the printer
+cuts the sheet: the ISO 216 format chosen in the settings (A4, B5, C6 …). What
+the reader holds. *(Added 2026-08-16.)*
+
+**Bleed** (Dutch: *afloop*) — the strip by which the printed sheet is made larger
+than the trim size on every side, so ink that runs to the edge runs through the
+cut instead of leaving a white sliver when the cut lands a hair off. In OciDeck
+it is a document setting in millimetres (default 0) that enlarges the sheet in
+the HTML and LaTeX exports and shifts the text block along with it; **crop marks**
+— the corner lines that show a printer where the trim size lies — are not emitted
+by any output path. *(Added 2026-08-16.)*
+
 ## Files & storage
 
 **`.ocideck`** — a single-file package (zip) bundling a deck and its assets; can

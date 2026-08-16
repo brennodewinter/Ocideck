@@ -264,7 +264,24 @@ const _reportingCss = r'''
 String _pageAtRuleCss(PageSizeSpec? size, PageMargins? margins) {
   if (size == null && margins == null) return '';
   final parts = <String>[];
-  if (size != null) parts.add('size:${size.cssName}');
-  if (margins != null) parts.add('margin:${margins.cssMargin}');
+  if (size != null) {
+    parts.add(
+      'size:${margins == null ? size.cssName : size.cssSizeWith(margins)}',
+    );
+  }
+  if (margins != null) {
+    parts.add('margin:${margins.cssMargin}');
+    // De afloopdoos hoort bij CSS Paged Media. De vergrote `size` hierboven
+    // doet het werk dat élke afdrukmotor honoreert; dit is de aanvulling voor
+    // een motor die de standaard kent. Snijtekens (`marks`) staan er bewust
+    // niet bij — zie [PageMargins].
+    if (margins.hasBleed) {
+      parts.add('bleed:${_fmtBleedMm(margins.bleedMm)}mm');
+    }
+  }
   return '@page{${parts.join(';')}}';
 }
+
+/// Millimeters zonder overbodige nullen — `3` in plaats van `3.0`.
+String _fmtBleedMm(double mm) =>
+    mm == mm.roundToDouble() ? mm.toStringAsFixed(0) : mm.toString();

@@ -4221,9 +4221,10 @@ overleeft, en waarom conversie bewust verliesgevend is — staat beschreven in
   en verschijnt dan in `images/` — dezelfde waarschuwing "je verliest deze
   afbeelding" geldt als bij een deck.
 
-### De bewerker: Visueel en Bron
+### De bewerker: Visueel, Bron en Pagina's
 
-Een schakelaar boven aan de documentbewerker kiest hoe je werkt:
+Een schakelaar boven aan de documentbewerker kiest hoe je werkt. *(De derde
+stand, **Pagina's**, is toegevoegd op 2026-08-16.)*
 
 - **Visueel** toont het gerenderde document — koppen, prosa, tabellen, code,
   Mermaid-diagrammen, grafieken en afbeeldingen — zoals een lezer het ziet. Op een
@@ -4233,6 +4234,26 @@ Een schakelaar boven aan de documentbewerker kiest hoe je werkt:
   wanneer het venster te smal is voor twee leesbare kolommen). Elke toetsaanslag
   loopt meteen door — er is geen aparte "Toepassen"-stap, anders dan de
   deck-gerichte [Markdown-modus](#markdown-modus) hieronder.
+- **Pagina's** legt het document op echte vellen: de
+  [paginamaat en de marges](#paginamaat-marges-afloop-en-schrijfbreedte) die je
+  hebt gekozen, en — als het document een stijl draagt — de herhalende kop- en
+  voetband van die stijl, met het paginanummer in de voet wanneer de stijl
+  paginanummers toont. Een document zonder stijl krijgt een kaal vel. Dit is een
+  lees- en nakijkstand, geen derde schrijfoppervlak: typen doe je in Visueel of
+  Bron. De pagina-einden worden **gemeten** en niet geschat — het document wordt
+  één keer gerenderd en de hoogte van elk blok komt uit die render, zodat een
+  einde valt waar de tekst werkelijk ophoudt. Een blok dat nog past wordt nooit
+  doormidden gesneden; het schuift in zijn geheel door naar het volgende vel.
+  Alleen een blok dat op géén vel past (een tabel of afbeelding die hoger is dan
+  het tekstvlak) wordt gesneden, over zoveel vellen als het nodig heeft, en het
+  blok erna begint weer op een vers vel. *(Toegevoegd 2026-08-16.)*
+
+  **Wat het niet is:** een exacte voorvertoning van de export. Er zijn drie
+  motoren die pagina's breken — die van OciDeck zelf op het scherm hier, je
+  browser wanneer je de HTML-export afdrukt, en LaTeX wanneer je de `.tex`
+  compileert — en die breken niet noodzakelijk op dezelfde plek. Gebruik deze
+  stand om te zien hoe het document ongeveer op papier valt en waar een kop
+  ongelukkig terechtkomt, niet om op een einde tot op de regel te rekenen.
 
 Een **opmaak-knoppenbalk** (dezelfde als die van de notitiebewerker) staat boven
 de bewerker voor de gewone inline-opmaak. Een **invoeg-palet** voegt de rijkere
@@ -4331,26 +4352,55 @@ over de toegankelijkheid van een zo gemaakte PDF — dat is het werk van de brow
 Elke export loopt door dezelfde privacyprojectie (OciWacht) als een deck-export,
 zodat wat de deur uit gaat de geredigeerde inhoud is, nooit de rauwe bron.
 
-### Paginamaat, marges en schrijfbreedte
+### Paginamaat, marges, afloop en schrijfbreedte
 
 Onder *Instellingen → Algemeen → Pagina-instellingen export* kies je de
-**paginamaat** (ISO-216: A3, A4 en A5 staand of liggend, B4, B5, C4 en C5) en de
-vier **marges** in millimeters. Die twee bepalen het vel waar de export op
-belandt: de HTML krijgt er een `@page`-regel van, zodat afdrukken of *Opslaan als
-PDF* vanuit de browser op het gekozen formaat uitkomt, en de LaTeX-export zet
-dezelfde maat in `\documentclass` en `geometry`. Standaard is A4 met 25 mm boven
-en onder en 20 mm links en rechts — die 20 mm geldt sinds 2026-08-16 ook voor de
+**paginamaat** en de vier **marges** in millimeters. De maat kies je in drie
+delen — de **reeks** (A voor documenten, B voor posters en boeken, C voor
+enveloppen), het **nummer** (0 tot en met 10, met de afmeting erbij, dus
+`B7 — 88 × 125 mm` in plaats van een kaal `B7`) en de **richting** (staand of
+liggend). Daarmee zijn alle 66 ISO-216-maten bereikbaar; tot 2026-08-16 was het
+één keuzelijst met tien veelgebruikte formaten, zodat wie op B1 of C6 drukte er
+niet kwam. *(Gewijzigd 2026-08-16.)*
+
+Maat en marges bepalen het vel waar de export op belandt: de HTML krijgt er een
+`@page`-regel van, zodat afdrukken of *Opslaan als PDF* vanuit de browser op het
+gekozen formaat uitkomt, en de LaTeX-export zet dezelfde maat in
+`\documentclass` en `geometry`. Standaard is A4 met 25 mm boven en onder en
+20 mm links en rechts — die 20 mm geldt sinds 2026-08-16 ook voor de
 LaTeX-export, die daarvoor stilzwijgend 25 mm rondom aanhield en dus een ander vel
 opleverde dan de HTML van hetzelfde document. In de visuele modus staat de gekozen
 maat rechtsonder in beeld, zodat je tijdens het schrijven ziet waar je naartoe
-schrijft. Het is een bewustwordingsindicator: de echte pagina-einden vallen pas
-bij het afdrukken.
+schrijft; die hoek is een bewustwordingsindicator, en in de
+[Pagina's-stand](#de-bewerker-visueel-bron-en-paginas) zie je het document
+werkelijk op vellen vallen.
+
+**Afloop voor de drukker** is het millimeterveld onder de marges, en het staat op
+**0** tenzij je het zelf zet. Met een afloop wordt de pagina rondom zoveel groter
+dan het gekozen formaat, en schuift de tekstspiegel mee zodat hij zijn plek ten
+opzichte van de snijlijn houdt; inkt die tot de rand loopt gaat dan dóór waar de
+drukker snijdt, in plaats van een witte streep achter te laten wanneer de snede
+een haar naast zit. Drie millimeter is wat een drukker doorgaans vraagt. De
+afloop bereikt beide papieren uitvoerpaden: de HTML-export schrijft het vergrote
+vel in haar `@page`-regel (met een `bleed`-declaratie ernaast voor een motor die
+CSS Paged Media kent), en de LaTeX-export zet `paperwidth`/`paperheight` via
+`geometry`. In de Pagina's-stand wordt de afloop als een rand om het vel getekend
+met de snijlijn erin, zodat je ziet wat er wegvalt.
+
+Twee dingen om te weten. **Snijtekens zitten er niet in** — geen enkel
+uitvoerpad zet ze, dus biedt OciDeck ook geen schakelaar die drukwerk belooft dat
+niemand levert; zeg je drukker wat het snijformaat is. En de afloop is een
+**app-brede** instelling, geen eigenschap van het document: eenmaal gezet geldt
+hij voor élk volgend document dat je exporteert, tot je hem weer op 0 zet. Om te
+voorkomen dat dat stil gebeurt, staat een afloop die niet 0 is naast de
+paginamaat rechtsonder in de visuele bewerker. *(Toegevoegd 2026-08-16.)*
 
 De **schrijfbreedte** ernaast (*Schrijfbreedte editor*: smal 860 px, standaard
 1100 px, breed 1400 px, of volledige breedte) gaat níet over de export maar over
 je eigen scherm: hoe breed het visuele schrijfoppervlak is. Smal leest rustiger,
-breed benut een groot scherm. Geen van drieën schrijft iets in je `.md` — het
-zijn weergave- en exportkeuzes, net als de standaard documentstijl.
+breed benut een groot scherm. Geen van deze instellingen — maat, marges, afloop
+of schrijfbreedte — schrijft iets in je `.md`; het zijn weergave- en
+exportkeuzes, net als de standaard documentstijl.
 
 ### Een inhoudsopgave
 

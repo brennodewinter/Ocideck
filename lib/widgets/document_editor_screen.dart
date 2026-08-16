@@ -10,6 +10,7 @@ import '../l10n/app_localizations.dart';
 import '../l10n/page_size_localization.dart';
 import '../models/chart.dart';
 import '../models/markdown_outline.dart';
+import '../models/page_size.dart';
 import '../models/privacy_disposition.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
@@ -55,6 +56,7 @@ import 'editors/embed_editor_dialog.dart';
 import 'editors/table_editor.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'reader/document_markdown_view.dart';
+import 'reader/paged_document_view.dart';
 import 'shell/document_save_actions.dart';
 
 part 'parts/document_editor_toolbar.dart';
@@ -542,10 +544,19 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
               ),
               Expanded(
                 child: LayoutBuilder(
-                  builder: (context, constraints) =>
-                      _viewMode == _DocViewMode.visual
-                      ? _visualLayout(theme, source, constraints)
-                      : _sourceLayout(theme, source, constraints),
+                  builder: (context, constraints) => switch (_viewMode) {
+                    _DocViewMode.visual => _visualLayout(
+                      theme,
+                      source,
+                      constraints,
+                    ),
+                    _DocViewMode.source => _sourceLayout(
+                      theme,
+                      source,
+                      constraints,
+                    ),
+                    _DocViewMode.pages => _pagesLayout(theme, source),
+                  },
                 ),
               ),
             ],
@@ -587,6 +598,32 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
   }
 
+  /// De map waarin het document staat, voor het oplossen van een logo in de
+  /// kop- of voetband. `null` als het nog nergens is opgeslagen.
+  String? get _projectPath {
+    final path = ref.read(documentProvider).filePath;
+    return path == null ? null : p.dirname(path);
+  }
+
+  /// Pagina-modus: het document op echte vellen, met de paginamaat, de marges
+  /// en een eventuele drukkersafloop uit de instellingen. Hier zie je wat er op
+  /// welke bladzijde belandt — de vraag die een tekstverwerker beantwoordt en
+  /// een doorlopende rol niet. Lezen en nakijken, niet typen: bewerken doe je
+  /// in de visuele of de bron-stand.
+  Widget _pagesLayout(ThemeData theme, String source) {
+    final settings = ref.watch(settingsProvider);
+    return Container(
+      color: theme.colorScheme.surfaceContainerHighest,
+      child: PagedDocumentView(
+        markdown: source,
+        pageSize: settings.documentPageSize,
+        margins: settings.documentPageMargins,
+        profile: _styleProfile,
+        projectPath: _projectPath,
+      ),
+    );
+  }
+
   /// Visuele modus: één bewerkbaar schrijfoppervlak — nooit een leesmuur. De
   /// gedeelde [MarkdownNotesEditor] past zich aan de bron aan: gaat die verliesvrij
   /// door de WYSIWYG-laag (koppen, opmaak, lijsten, links én tabellen-als-embed),
@@ -621,40 +658,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
           child: Stack(
             children: [
               _styledDocumentSurface(_styleProfile, _wysiwygEditor(theme)),
-              Positioned(
-                right: 8,
-                bottom: 8,
-                child: IgnorePointer(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.surface.withValues(alpha: 0.85),
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                        color: theme.colorScheme.outlineVariant,
-                      ),
-                    ),
-                    child: Text(
-                      // Zelf samengesteld, niet door l10n.d(): de indicator draagt
-                      // alleen data — de maatnaam en vier getallen in mm. Door d()
-                      // halen zou een onvertaalbare sleutel per papiermaat-en-
-                      // margecombinatie opleveren. Het enige wóórd zit in
-                      // pageSizeLabel (de oriëntatie), en dat is wél vertaald.
-                      '${pageSizeLabel(context.l10n, pageSize)} · '
-                      '${margins.topMm.toStringAsFixed(0)}/'
-                      '${margins.bottomMm.toStringAsFixed(0)}/'
-                      '${margins.leftMm.toStringAsFixed(0)}/'
-                      '${margins.rightMm.toStringAsFixed(0)}mm',
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                        fontSize: 10,
-                      ),
-                    ),
-                  ),
-                ),
+              _documentPageIndicator(
+                context,
+                theme,
+                pageSize: pageSize,
+                margins: margins,
               ),
             ],
           ),
@@ -1025,91 +1033,18 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     return caption.replaceAll('[', '').replaceAll(']', '');
   }
 
-  /// De Overzicht-rail: de koppen van het document, live afgeleid, klikbaar om
-  /// naar die kop te springen. Europa-header (EU-blauw + geel). Inklapbaar tot
-  /// een smalle strook. Leeg document → lege rail.
-  Widget _outlineRail(ThemeData theme, String source) {
-    final outline = buildMarkdownOutline(source);
-    final l10n = context.l10n;
-    if (_outlineCollapsed) {
-      return SizedBox(
-        width: 40,
-        child: Material(
-          color: AppTheme.blueVivid,
-          child: InkWell(
-            onTap: () => setState(() => _outlineCollapsed = false),
-            child: Tooltip(
-              message: l10n.d('Overzicht uitklappen'),
-              child: Center(
-                child: Icon(
-                  Icons.chevron_right,
-                  color: AppTheme.amberVivid,
-                  size: 22,
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-    return SizedBox(
-      key: const Key('document-outline-rail'),
-      width: 216,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Material(
-            color: AppTheme.blueVivid,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(12, 10, 4, 10),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      l10n.d('Overzicht').toUpperCase(),
-                      style: const TextStyle(
-                        fontSize: 11,
-                        letterSpacing: 1.2,
-                        fontWeight: FontWeight.w700,
-                        color: AppTheme.amberVivid,
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    tooltip: l10n.d('Overzicht inklappen'),
-                    onPressed: () => setState(() => _outlineCollapsed = true),
-                    icon: const Icon(Icons.chevron_left, size: 18),
-                    color: AppTheme.amberVivid,
-                    padding: EdgeInsets.zero,
-                    visualDensity: VisualDensity.compact,
-                    constraints: const BoxConstraints(
-                      minWidth: 28,
-                      minHeight: 28,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              color: theme.colorScheme.surface,
-              child: ListView.builder(
-                padding: const EdgeInsets.only(top: 6, bottom: 12),
-                itemCount: outline.length,
-                itemBuilder: (context, i) => _outlineItem(
-                  theme,
-                  outline[i],
-                  active: i == _activeOutlineIndex,
-                  onTap: () => _scrollToHeading(outline[i]),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  /// De Overzicht-rail. De rail zelf staat top-level in dezelfde library
+  /// ([_documentOutlineRail]); het scherm levert alleen de stand en wat er bij
+  /// een tik moet gebeuren.
+  Widget _outlineRail(ThemeData theme, String source) => _documentOutlineRail(
+    context,
+    theme,
+    source,
+    collapsed: _outlineCollapsed,
+    activeIndex: _activeOutlineIndex,
+    onCollapsedChanged: (v) => setState(() => _outlineCollapsed = v),
+    onSelect: _scrollToHeading,
+  );
 }
 
 Widget _styledDocumentSurface(ThemeProfile? profile, Widget editor) {
@@ -1187,10 +1122,14 @@ void _setDocumentStyle(WidgetRef ref, String? name) {
       .edit(doc.withStyleName(name).source, coalesceKey: null);
 }
 
-/// De weergavemodus van de documenteditor. Twee manieren om naar hetzelfde
-/// document te kijken, nooit een derde renderpad (DOCUMENT_MODE.md §2.1): de bron
-/// als tekst, of de weergave als hoofdoppervlak.
-enum _DocViewMode { visual, source }
+/// De weergavemodus van de documenteditor. Manieren om naar hetzelfde document
+/// te kijken, nooit een extra renderpad (DOCUMENT_MODE.md §2.1): de bron als
+/// tekst, de weergave als hoofdoppervlak, of diezelfde weergave verdeeld over
+/// echte pagina's. [pages] gebruikt letterlijk dezelfde `DocumentMarkdownView`
+/// als de andere twee — alleen op vellen van de gekozen maat, met de marges en
+/// de pagina-einden erin. Een eigen tekenaar voor pagina's zou precies de
+/// afwijking opleveren die §2.1 verbiedt.
+enum _DocViewMode { visual, source, pages }
 
 /// Voeg [block] in [source] in op het bereik [selStart]–[selEnd] (een negatieve
 /// start betekent 'geen cursor' → achteraan), omgeven door precies genoeg lege

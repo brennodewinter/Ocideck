@@ -8,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/matrix_settings.dart';
-import '../../l10n/page_size_localization.dart';
 import '../../models/page_size.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';

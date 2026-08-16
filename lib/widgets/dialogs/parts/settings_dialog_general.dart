@@ -645,46 +645,150 @@ List<Widget> _documentStyleSection(WidgetRef ref, AppLocalizations l10n) {
       style: const TextStyle(fontSize: 11),
     ),
     const SizedBox(height: 8),
-    DropdownButtonFormField<PageSizeSpec>(
-      initialValue: settings.documentPageSize,
-      isExpanded: true,
-      decoration: InputDecoration(
-        labelText: l10n.d('Paginamaat'),
-        border: const OutlineInputBorder(),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      ),
-      items: _pageSizeOptions(l10n),
-      onChanged: (v) {
-        if (v != null) {
-          ref.read(settingsProvider.notifier).setDocumentPageSize(v);
-        }
-      },
-    ),
+    _pageSizeControls(l10n, ref, settings),
     const SizedBox(height: 8),
     _pageMarginsControls(l10n, ref, settings),
+    const SizedBox(height: 8),
+    _printBleedControls(l10n, ref, settings),
   ];
 }
 
-/// De paginamaat-opties voor de dropdown — A/B/C-reeksen, nummers 0–10,
-/// portret en landschap. Beperkt tot de veelvoorkomende maten om de lijst
-/// hanteerbaar te houden.
-List<DropdownMenuItem<PageSizeSpec>> _pageSizeOptions(AppLocalizations l10n) {
-  const presets = [
-    PageSizeSpec.a4,
-    PageSizeSpec.a4Landscape,
-    PageSizeSpec(series: PaperSeries.a, number: 3),
-    PageSizeSpec(series: PaperSeries.a, number: 3, landscape: true),
-    PageSizeSpec(series: PaperSeries.a, number: 5),
-    PageSizeSpec(series: PaperSeries.a, number: 5, landscape: true),
-    PageSizeSpec(series: PaperSeries.b, number: 4),
-    PageSizeSpec(series: PaperSeries.b, number: 5),
-    PageSizeSpec(series: PaperSeries.c, number: 4),
-    PageSizeSpec(series: PaperSeries.c, number: 5),
-  ];
-  return [
-    for (final spec in presets)
-      DropdownMenuItem(value: spec, child: Text(pageSizeLabel(l10n, spec))),
-  ];
+/// De paginamaat-keuze: reeks, nummer en oriëntatie apart.
+///
+/// Een vaste lijst met veelgebruikte maten dekte A3/A4/A5 en een handvol B en
+/// C, maar wie op B1 of C6 drukt kwam er niet. ISO 216 is een raster van drie
+/// reeksen maal elf nummers; die keuze uit elkaar trekken geeft alle 66 maten
+/// (met oriëntatie) zonder een dropdown van 66 regels.
+Widget _pageSizeControls(
+  AppLocalizations l10n,
+  WidgetRef ref,
+  AppSettings settings,
+) {
+  final spec = settings.documentPageSize;
+  final notifier = ref.read(settingsProvider.notifier);
+  void set(PageSizeSpec next) => notifier.setDocumentPageSize(next);
+
+  return LayoutBuilder(
+    builder: (context, constraints) {
+      final children = <Widget>[
+        Expanded(
+          child: DropdownButtonFormField<PaperSeries>(
+            initialValue: spec.series,
+            isExpanded: true,
+            decoration: _pageSizeDecoration(l10n.d('Reeks')),
+            items: [
+              for (final series in PaperSeries.values)
+                DropdownMenuItem(
+                  value: series,
+                  child: Text(_seriesLabel(l10n, series)),
+                ),
+            ],
+            onChanged: (v) => v == null
+                ? null
+                : set(
+                    PageSizeSpec(
+                      series: v,
+                      number: spec.number,
+                      landscape: spec.landscape,
+                    ),
+                  ),
+          ),
+        ),
+        Expanded(
+          child: DropdownButtonFormField<int>(
+            initialValue: spec.number,
+            isExpanded: true,
+            decoration: _pageSizeDecoration(l10n.d('Maat')),
+            items: [
+              for (var n = 0; n <= 10; n++)
+                DropdownMenuItem(
+                  value: n,
+                  child: Text(
+                    // De maatnaam plus zijn afmeting, want "B7" zegt niemand
+                    // iets en "88 × 125 mm" wel.
+                    _sizeItemLabel(
+                      PageSizeSpec(series: spec.series, number: n),
+                    ),
+                  ),
+                ),
+            ],
+            onChanged: (v) => v == null
+                ? null
+                : set(
+                    PageSizeSpec(
+                      series: spec.series,
+                      number: v,
+                      landscape: spec.landscape,
+                    ),
+                  ),
+          ),
+        ),
+        Expanded(
+          child: DropdownButtonFormField<bool>(
+            initialValue: spec.landscape,
+            isExpanded: true,
+            decoration: _pageSizeDecoration(l10n.d('Richting')),
+            items: [
+              DropdownMenuItem(value: false, child: Text(l10n.d('Staand'))),
+              DropdownMenuItem(value: true, child: Text(l10n.d('Liggend'))),
+            ],
+            onChanged: (v) => v == null
+                ? null
+                : set(
+                    PageSizeSpec(
+                      series: spec.series,
+                      number: spec.number,
+                      landscape: v,
+                    ),
+                  ),
+          ),
+        ),
+      ];
+      // Naast elkaar op een ruime kolom, onder elkaar op een smalle — dezelfde
+      // afweging als bij de margevelden.
+      if (constraints.maxWidth >= 420) {
+        return Row(
+          children: [
+            for (var i = 0; i < children.length; i++) ...[
+              if (i > 0) const SizedBox(width: 8),
+              children[i],
+            ],
+          ],
+        );
+      }
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (var i = 0; i < children.length; i++) ...[
+            if (i > 0) const SizedBox(height: 8),
+            Row(children: [children[i]]),
+          ],
+        ],
+      );
+    },
+  );
+}
+
+InputDecoration _pageSizeDecoration(String label) => InputDecoration(
+  labelText: label,
+  border: const OutlineInputBorder(),
+  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+);
+
+/// De reeks met waar ze voor bedoeld is — de letter alleen is een raadsel.
+String _seriesLabel(AppLocalizations l10n, PaperSeries series) =>
+    switch (series) {
+      PaperSeries.a => 'A — ${l10n.d('documenten')}',
+      PaperSeries.b => 'B — ${l10n.d('posters en boeken')}',
+      PaperSeries.c => 'C — ${l10n.d('enveloppen')}',
+    };
+
+/// Bijv. `"A4 — 210 × 297 mm"`. De maten komen uit het model, zodat de
+/// interface en de export het niet oneens kunnen zijn.
+String _sizeItemLabel(PageSizeSpec spec) {
+  final (w, h) = spec.dimensions;
+  return '${spec.sizeName} — ${w.toStringAsFixed(0)} × '
+      '${h.toStringAsFixed(0)} mm';
 }
 
 /// De marge-controls: vier tekstvelden (top/onder/links/rechts in mm).
@@ -739,6 +843,42 @@ Widget _pageMarginsControls(
       }
       return Column(mainAxisSize: MainAxisSize.min, children: rows);
     },
+  );
+}
+
+/// De drukkersafloop: hoeveel millimeter het vel groter wordt dan het
+/// snijformaat.
+///
+/// Standaard 0 — wie op kantoorpapier afdrukt heeft hier niets aan, en een
+/// stille afloop van 3 mm zou zijn A4 tot een raar formaat maken. Drie
+/// millimeter is wél wat een drukker doorgaans vraagt.
+///
+/// Bewust zonder snijtekens erbij: zie [PageMargins]. De uitleg noemt daarom
+/// alleen wat de afloop echt doet.
+Widget _printBleedControls(
+  AppLocalizations l10n,
+  WidgetRef ref,
+  AppSettings settings,
+) {
+  final m = settings.documentPageMargins;
+  final notifier = ref.read(settingsProvider.notifier);
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      _marginField(
+        l10n.d('Afloop voor de drukker (mm)'),
+        m.bleedMm,
+        (v) => notifier.setDocumentPageMargins(m.copyWith(bleedMm: v)),
+      ),
+      const SizedBox(height: 4),
+      Text(
+        l10n.d(
+          'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.',
+        ),
+        style: const TextStyle(fontSize: 11),
+      ),
+    ],
   );
 }
 

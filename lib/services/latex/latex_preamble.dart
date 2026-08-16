@@ -81,7 +81,13 @@ String articlePreamble(
     buf.write('\\usepackage[$lang]{babel}\n');
   }
   // Pagina-marges (feature 3: instelbaar)
-  buf.write('\\usepackage[${pageMargins.latexMargin}]{geometry}\n');
+  // Met drukkersafloop is het vel groter dan het snijformaat; dan bepaalt
+  // `geometry` de papiermaat in plaats van de papiernaam uit `documentclass`.
+  final paper = pageSize.latexPaperWith(pageMargins);
+  final geometry = paper == null
+      ? pageMargins.latexMargin
+      : '$paper,${pageMargins.latexMargin}';
+  buf.write('\\usepackage[$geometry]{geometry}\n');
   buf.write('\n');
   // Metadata
   if (meta.title.trim().isNotEmpty) {

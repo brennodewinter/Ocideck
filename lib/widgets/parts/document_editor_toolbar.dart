@@ -101,6 +101,14 @@ class _DocEditorToolbar extends StatelessWidget {
                             label: Text(l10n.d('Bron')),
                             icon: const Icon(Icons.code, size: 15),
                           ),
+                          ButtonSegment(
+                            value: _DocViewMode.pages,
+                            label: Text(l10n.d("Pagina's")),
+                            icon: const Icon(
+                              Icons.menu_book_outlined,
+                              size: 15,
+                            ),
+                          ),
                         ],
                         selected: {mode},
                         showSelectedIcon: false,
@@ -365,3 +373,145 @@ Widget _outlineItem(
     ),
   ),
 );
+
+/// De paginamaat-indicator rechtsonder in de Visuele modus: op welk formaat,
+/// met welke marges en — als hij aanstaat — met hoeveel afloop je schrijft.
+///
+/// Staat buiten de schermklasse omdat hij niets van het scherm nodig heeft
+/// behalve de maat en de marges, net als [_documentOutlineRail] hieronder.
+Widget _documentPageIndicator(
+  BuildContext context,
+  ThemeData theme, {
+  required PageSizeSpec pageSize,
+  required PageMargins margins,
+}) => Positioned(
+  right: 8,
+  bottom: 8,
+  child: IgnorePointer(
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface.withValues(alpha: 0.85),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: theme.colorScheme.outlineVariant),
+      ),
+      child: Text(
+        // Zelf samengesteld, niet door l10n.d(): de indicator draagt alleen
+        // data — de maatnaam en vier getallen in mm. Door d() halen zou een
+        // onvertaalbare sleutel per papiermaat-en-margecombinatie opleveren.
+        // Het enige wóórd zit in pageSizeLabel (de oriëntatie), en dat is wél
+        // vertaald.
+        '${pageSizeLabel(context.l10n, pageSize)} · '
+        '${margins.topMm.toStringAsFixed(0)}/'
+        '${margins.bottomMm.toStringAsFixed(0)}/'
+        '${margins.leftMm.toStringAsFixed(0)}/'
+        '${margins.rightMm.toStringAsFixed(0)}mm'
+        // De afloop geldt app-breed en werkt door op het volgende document;
+        // hem hier tonen houdt dat zichtbaar in plaats van stil.
+        '${margins.hasBleed ? ' · +${margins.bleedMm.toStringAsFixed(0)}mm' : ''}',
+        style: theme.textTheme.labelSmall?.copyWith(
+          color: theme.colorScheme.onSurfaceVariant,
+          fontSize: 10,
+        ),
+      ),
+    ),
+  ),
+);
+
+/// De Overzicht-rail: de koppen van het document, live afgeleid, klikbaar om
+/// naar die kop te springen. Europa-header (EU-blauw + geel). Inklapbaar tot
+/// een smalle strook. Leeg document → lege rail.
+///
+/// Staat buiten de schermklasse omdat hij niets van het scherm nodig heeft
+/// behalve de stand ([collapsed], [activeIndex]) en wat er bij een tik moet
+/// gebeuren — net als [_outlineItem] hierboven.
+Widget _documentOutlineRail(
+  BuildContext context,
+  ThemeData theme,
+  String source, {
+  required bool collapsed,
+  required int activeIndex,
+  required ValueChanged<bool> onCollapsedChanged,
+  required void Function(MarkdownOutlineEntry entry) onSelect,
+}) {
+  final outline = buildMarkdownOutline(source);
+  final l10n = context.l10n;
+  if (collapsed) {
+    return SizedBox(
+      width: 40,
+      child: Material(
+        color: AppTheme.blueVivid,
+        child: InkWell(
+          onTap: () => onCollapsedChanged(false),
+          child: Tooltip(
+            message: l10n.d('Overzicht uitklappen'),
+            child: Center(
+              child: Icon(
+                Icons.chevron_right,
+                color: AppTheme.amberVivid,
+                size: 22,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  return SizedBox(
+    key: const Key('document-outline-rail'),
+    width: 216,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Material(
+          color: AppTheme.blueVivid,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 10, 4, 10),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    l10n.d('Overzicht').toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 11,
+                      letterSpacing: 1.2,
+                      fontWeight: FontWeight.w700,
+                      color: AppTheme.amberVivid,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  tooltip: l10n.d('Overzicht inklappen'),
+                  onPressed: () => onCollapsedChanged(true),
+                  icon: const Icon(Icons.chevron_left, size: 18),
+                  color: AppTheme.amberVivid,
+                  padding: EdgeInsets.zero,
+                  visualDensity: VisualDensity.compact,
+                  constraints: const BoxConstraints(
+                    minWidth: 28,
+                    minHeight: 28,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            color: theme.colorScheme.surface,
+            child: ListView.builder(
+              padding: const EdgeInsets.only(top: 6, bottom: 12),
+              itemCount: outline.length,
+              itemBuilder: (context, i) => _outlineItem(
+                theme,
+                outline[i],
+                active: i == activeIndex,
+                onTap: () => onSelect(outline[i]),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}

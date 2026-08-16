@@ -19,7 +19,7 @@
 - [13. Accepted Files and Their Limits](#13-accepted-files-and-their-limits)
 - [14. Documents (Plain `.md`, Not a Deck)](#14-documents-plain-md-not-a-deck)
 
-*(Added 2026-07-22: this document is around 2,253 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not.)*
+*(Added 2026-07-22: this document had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not. The note used to give a line count — around 2,253 — which had quietly grown to roughly 3,280 by 2026-08-16; a figure nobody updates is better left out than left wrong.)*
 
 OciDeck stores presentations as **standard [Marp](https://marp.app/) Markdown**
 (`.md`). There is no custom binary format: a saved presentation is *designed* to
@@ -3239,3 +3239,45 @@ puts a `\newpage` before every `\section` but the first. The design is in
 [`docs/design/DOCUMENT_MODE.md`](design/DOCUMENT_MODE.md) §13 (the setting in
 §13.5), and the author-facing description is in the
 [User Guide](USER_GUIDE.md#inserting-a-page-break).
+
+### 14.7 Page size, margins and bleed — settings, not file content *(added 2026-08-16)*
+
+The sheet a document is laid out on — its **page size** (any of the 66 ISO 216
+formats: series A, B or C, number 0 through 10, portrait or landscape), its four
+**margins** and the printer's **bleed** — is an application setting
+(`AppSettings.documentPageSize` and `AppSettings.documentPageMargins`, the latter
+carrying `bleedMm`, default `0`), reached under *Settings → General →
+Pagina-instellingen export*. **None of it is written to the `.md`.** There is no
+`page-size:`, `margin:` or `bleed:` front-matter key; the only key the document
+path ever writes remains `theme:` (§14.5), so the byte-faithful round trip of
+§14.3 is unaffected by any of these choices.
+
+Two consequences follow from that, and both are deliberate:
+
+- **The sheet does not travel with the file.** Hand the `.md` to someone else, or
+  open it on another machine, and it is laid out on *their* settings, not yours.
+  A document that must be printed on a particular format carries that fact
+  outside the file — in the job description you give the printer, not in the
+  Markdown.
+- **The settings are app-wide, not per document.** A bleed set for one print job
+  keeps applying to every document exported afterwards until it is put back to 0.
+
+Where the settings *do* land is the paged outputs. The continuous HTML export
+writes them into a single `@page` rule — `size` (the format name, or an explicit
+millimetre sheet when there is a bleed, because a name can no longer describe an
+enlarged sheet), `margin` (with the bleed added to each side so the text block
+keeps its place relative to the trim line) and, with a bleed, a `bleed`
+declaration for an engine that implements CSS Paged Media. The LaTeX export puts
+the same figures into `geometry` (`paperwidth`/`paperheight` when there is a
+bleed, otherwise the paper name from `\documentclass`, plus the margins).
+**Crop marks are not emitted by any output path**, and OciDeck offers no setting
+for them: the documented PDF route is printing the exported HTML, and no browser
+implements the CSS `marks` property. A recipient who receives a bleed sheet is
+told the trim size out of band.
+
+On screen, the document editor's **Pagina's** view lays the document out on these
+sheets, measured against its own render. It is a view, not a promise about the
+export: three different engines paginate (OciDeck's renderer, the browser
+printing the HTML, LaTeX compiling the `.tex`) and they need not break in the
+same place. See the
+[User Guide](USER_GUIDE.md#page-size-margins-bleed-and-writing-width).
