@@ -28,4 +28,22 @@ void main() {
       );
     });
   });
+
+  group('markdownImageAlt', () {
+    test('laat een gewoon bijschrift staan', () {
+      expect(markdownImageAlt('Een kade bij avond'), 'Een kade bij avond');
+    });
+
+    test('strippen van blokhaken houdt de afbeeldingsverwijzing heel', () {
+      // Zonder strippen sluit de `]` de alt-tekst af en valt de rest van het
+      // bijschrift als losse tekst naast de afbeelding.
+      final alt = markdownImageAlt('Grafiek [2026] jaarcijfers');
+      expect(alt, 'Grafiek 2026 jaarcijfers');
+      expect('![$alt](foto.png)', '![Grafiek 2026 jaarcijfers](foto.png)');
+    });
+
+    test('een leeg bijschrift blijft leeg', () {
+      expect(markdownImageAlt(''), '');
+    });
+  });
 }
