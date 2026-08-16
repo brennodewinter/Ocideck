@@ -39,4 +39,26 @@ Prijs \\* letterlijk
 
     expect(limitations, isEmpty);
   });
+
+  test('de inhoudsopgave-marker is geen beperking meer', () {
+    // Regressie: één ingevoegde inhoudsopgave gooide de hele visuele modus
+    // terug naar brontekst, omdat `<!-- toc -->` als rauwe HTML telde.
+    expect(
+      markdownVisualLimitations('# Kop\n\n<!-- toc -->\n\n## Sectie\n'),
+      isEmpty,
+    );
+    expect(markdownVisualLimitations('  <!--   toc   -->  '), isEmpty);
+  });
+
+  test('ander HTML-commentaar blijft wel een beperking', () {
+    expect(
+      markdownVisualLimitations('<!-- _class: lead -->'),
+      contains(MarkdownVisualLimitation.rawHtml),
+    );
+    // Marker mét tekst ernaast is geen kale marker en round-trip't niet.
+    expect(
+      markdownVisualLimitations('<!-- toc --> en meer'),
+      contains(MarkdownVisualLimitation.rawHtml),
+    );
+  });
 }

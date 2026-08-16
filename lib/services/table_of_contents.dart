@@ -17,6 +17,11 @@ import 'package:markdown/markdown.dart' as md;
 /// negeert het.
 const tocMarker = '<!-- toc -->';
 
+/// Een regel die niets anders bevat dan de marker (inspringing en extra spaties
+/// toegestaan). Eén bron voor alle plekken die de marker als bijzonder geval
+/// moeten herkennen: de visuele-modus-poorten en de Quill-embed.
+final tocMarkerLinePattern = RegExp(r'^[ \t]*<!--\s*toc\s*-->[ \t]*$');
+
 /// Genereer een GFM-Markdown inhoudsopgave uit de koppen in [body].
 ///
 /// Parseert koppen `#` t/m `######` en produceert een GFM-lijst met

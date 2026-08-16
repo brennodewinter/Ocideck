@@ -3,6 +3,7 @@ import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_quill/markdown_quill.dart';
 
 import 'markdown_paste_cleanup.dart';
+import 'toc_embed_syntax.dart';
 
 /// Round-trip conversion between stored markdown and a Quill document.
 ///
@@ -11,6 +12,11 @@ import 'markdown_paste_cleanup.dart';
 /// woorden uiteen te vallen. Zo blijft een tabel in de visuele editor een
 /// getekend, byte-getrouw round-trippend blok — de reden dat de tabel niet meer
 /// als markdown-beperking hoeft terug te vallen (zie [markdownVisualLimitations]).
+///
+/// De inhoudsopgave-marker `<!-- toc -->` reist langs dezelfde weg als
+/// [EmbeddableToc] (`x-embed-toc`) — om dezelfde reden: hij is HTML, en zonder
+/// deze embed viel de hele visuele modus terug op brontekst zodra iemand een
+/// inhoudsopgave invoegde.
 class MarkdownQuillCodec {
   MarkdownQuillCodec._();
 
@@ -19,18 +25,22 @@ class MarkdownQuillCodec {
     extensionSet: md.ExtensionSet.gitHubFlavored,
     // Vóór de extensionSet toegevoegd → deze tabel-syntax wint van de standaard
     // en levert een `x-embed-table`-element met de rauwe tabel-markdown erin.
-    blockSyntaxes: const [EmbeddableTableSyntax()],
+    // De TOC-marker staat vóór de HTML-blokregel, anders slokt die hem als
+    // rauwe HTML op en valt hij als losse tekst uiteen.
+    blockSyntaxes: const [TocMarkerSyntax(), EmbeddableTableSyntax()],
   );
 
   static final _mdToDelta = MarkdownToDelta(
     markdownDocument: _mdDocument,
     customElementToEmbeddable: {
       EmbeddableTable.tableType: EmbeddableTable.fromMdSyntax,
+      EmbeddableToc.tocType: EmbeddableToc.fromMdSyntax,
     },
   );
   static final _deltaToMd = DeltaToMarkdown(
     customEmbedHandlers: {
       EmbeddableTable.tableType: EmbeddableTable.toMdSyntax,
+      EmbeddableToc.tocType: EmbeddableToc.toMdSyntax,
     },
     customTextAttrsHandlers: {
       Attribute.italic.key: CustomAttributeHandler(

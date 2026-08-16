@@ -60,9 +60,17 @@ class DocumentMarkdownView extends StatelessWidget {
     this.activeMatchKey,
     this.anchorBlockIndex = -1,
     this.anchorKey,
+    this.tocSource,
   });
 
   final String markdown;
+
+  /// De markdown waaruit de inhoudsopgave-voorbeeldweergave haar koppen haalt,
+  /// wanneer dat een ándere tekst is dan [markdown]. De visuele editor tekent de
+  /// marker als los embed-blok; die kent de koppen van het document niet, en
+  /// geeft ze hier mee. `null` → de koppen komen uit [markdown] zelf, zoals in
+  /// de lezer.
+  final String? tocSource;
   final void Function(String url)? onTapLink;
 
   /// Absolute block index the reader wants to scroll an `#anchor` link to (from
@@ -253,7 +261,7 @@ class DocumentMarkdownView extends StatelessWidget {
   /// koppen in de huidige body en toont hem als een gestileerde nav-block.
   Widget _tocPreview(BuildContext context, _Theme t) {
     final l10n = context.l10n;
-    final toc = generateTocMarkdown(markdown);
+    final toc = generateTocMarkdown(tocSource ?? markdown);
     if (toc.isEmpty) {
       return Container(
         padding: const EdgeInsets.all(16),
