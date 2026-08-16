@@ -1792,6 +1792,8 @@ const _dutchSourceAddPl = <String, String>{
   'Kolom links': 'Kolumna z lewej',
   'Kolom rechts': 'Kolumna z prawej',
   'Kolom weghalen': 'Usuń kolumnę',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Ze spadem strona staje się ze wszystkich stron większa niż wybrany format, dzięki czemu farba dochodząca do krawędzi wychodzi poza linię cięcia. Spad obowiązuje przy każdym eksporcie, dopóki nie ustawisz go z powrotem na 0. Do zwykłego drukowania pozostaw 0.',
   'Pagina\'s': 'Strony',
   'Maat': 'Rozmiar',
   'Staand': 'Pionowa',
@@ -1800,9 +1802,6 @@ const _dutchSourceAddPl = <String, String>{
   'posters en boeken': 'plakaty i książki',
   'enveloppen': 'koperty',
   'Afloop voor de drukker (mm)': 'Spad dla drukarni (mm)',
-  'Snijtekens': 'Znaczniki cięcia',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Ze spadem strona staje się ze wszystkich stron większa niż wybrany format, dzięki czemu farba dochodząca do krawędzi wychodzi poza linię cięcia. Do zwykłego drukowania pozostaw 0.',
   'Pagina {n} van {m}': 'Strona {n} z {m}',
   'Boven (mm)': 'Góra (mm)',
   'Onder (mm)': 'Dół (mm)',

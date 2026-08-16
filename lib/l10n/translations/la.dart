@@ -1796,6 +1796,8 @@ const _dutchSourceAddLa = <String, String>{
   'Kolom links': 'Columna ad sinistram',
   'Kolom rechts': 'Columna ad dextram',
   'Kolom weghalen': 'Columnam delere',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Cum excursu pagina undique maior fit quam forma electa, ut atramentum ad oram currens ultra lineam sectionis pergat. Excursus ad omnem exportationem valet, donec eum rursus ad 0 ponas. Hoc 0 relinque ad typographiam ordinariam.',
   'Pagina\'s': 'Paginae',
   'Maat': 'Mensura',
   'Staand': 'Erecta',
@@ -1804,9 +1806,6 @@ const _dutchSourceAddLa = <String, String>{
   'posters en boeken': 'tabulae et libri',
   'enveloppen': 'involucra',
   'Afloop voor de drukker (mm)': 'Excursus pro typographo (mm)',
-  'Snijtekens': 'Signa sectionis',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Cum excursu pagina undique maior fit quam forma electa, ut atramentum ad oram currens ultra lineam sectionis pergat. Hoc 0 relinque ad typographiam ordinariam.',
   'Pagina {n} van {m}': 'Pagina {n} ex {m}',
   'Boven (mm)': 'Supra (mm)',
   'Onder (mm)': 'Infra (mm)',

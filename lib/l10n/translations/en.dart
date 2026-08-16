@@ -921,6 +921,8 @@ const _dutchSourceAddEn = {
   'Kolom links': 'Column left',
   'Kolom rechts': 'Column right',
   'Kolom weghalen': 'Delete column',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'With bleed the page becomes larger than the chosen size all around, so that ink running to the edge continues past the trim line. The bleed applies to every export until you set it back to 0. Leave this at 0 for ordinary printing.',
   'Pagina\'s': 'Pages',
   'Maat': 'Size',
   'Staand': 'Portrait',
@@ -929,9 +931,6 @@ const _dutchSourceAddEn = {
   'posters en boeken': 'posters and books',
   'enveloppen': 'envelopes',
   'Afloop voor de drukker (mm)': 'Bleed for the printer (mm)',
-  'Snijtekens': 'Crop marks',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'With bleed the page becomes larger than the chosen size all around, so that ink running to the edge continues past the trim line. Leave this at 0 for ordinary printing.',
   'Pagina {n} van {m}': 'Page {n} of {m}',
   'Boven (mm)': 'Top (mm)',
   'Onder (mm)': 'Bottom (mm)',

@@ -735,6 +735,8 @@ const _dutchSourceAddIt = {
   'Kolom links': 'Colonna a sinistra',
   'Kolom rechts': 'Colonna a destra',
   'Kolom weghalen': 'Elimina colonna',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Con l\'abbondanza la pagina diventa più grande del formato scelto su tutti i lati, così l\'inchiostro che arriva al bordo prosegue oltre la linea di taglio. L\'abbondanza vale per ogni esportazione finché non la riporti a 0. Lascia 0 per la stampa normale.',
   'Pagina\'s': 'Pagine',
   'Maat': 'Formato',
   'Staand': 'Verticale',
@@ -743,9 +745,6 @@ const _dutchSourceAddIt = {
   'posters en boeken': 'poster e libri',
   'enveloppen': 'buste',
   'Afloop voor de drukker (mm)': 'Abbondanza per la stampa (mm)',
-  'Snijtekens': 'Crocini di taglio',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Con l\'abbondanza la pagina diventa più grande del formato scelto su tutti i lati, così l\'inchiostro che arriva al bordo prosegue oltre la linea di taglio. Lascia 0 per la stampa normale.',
   'Pagina {n} van {m}': 'Pagina {n} di {m}',
   'Boven (mm)': 'Sopra (mm)',
   'Onder (mm)': 'Sotto (mm)',

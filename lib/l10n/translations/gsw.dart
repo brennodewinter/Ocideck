@@ -1783,6 +1783,8 @@ const _dutchSourceAddGsw = <String, String>{
   'Kolom links': 'Spalte links',
   'Kolom rechts': 'Spalte rächts',
   'Kolom weghalen': 'Spalte lösche',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Mit em Aaschnitt wird d Siite rundume grösser as s gwählte Format, damit Farb, wo bis an Rand laufft, über d Schnittlinie usegoht. De Aaschnitt gilt für jede Export, bis me ne wider uf 0 stellt. Für s normale Drucke uf 0 la.',
   'Pagina\'s': 'Siite',
   'Maat': 'Grössi',
   'Staand': 'Hochformat',
@@ -1791,9 +1793,6 @@ const _dutchSourceAddGsw = <String, String>{
   'posters en boeken': 'Plakat und Bücher',
   'enveloppen': 'Couvert',
   'Afloop voor de drukker (mm)': 'Aaschnitt für d Druckerei (mm)',
-  'Snijtekens': 'Schnittmarke',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Mit em Aaschnitt wird d Siite rundume grösser as s gwählte Format, damit Farb, wo bis an Rand laufft, über d Schnittlinie usegoht. Für s normale Drucke uf 0 la.',
   'Pagina {n} van {m}': 'Siite {n} vo {m}',
   'Boven (mm)': 'Obe (mm)',
   'Onder (mm)': 'Une (mm)',

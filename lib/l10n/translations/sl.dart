@@ -1782,6 +1782,8 @@ const _dutchSourceAddSl = <String, String>{
   'Kolom links': 'Stolpec levo',
   'Kolom rechts': 'Stolpec desno',
   'Kolom weghalen': 'Izbriši stolpec',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Z dodatkom za porezavo je stran na vseh straneh večja od izbrane velikosti, tako da barva, ki sega do roba, seže čez linijo reza. Dodatek za porezavo velja za vsak izvoz, dokler ga znova ne nastavite na 0. Za običajno tiskanje pustite 0.',
   'Pagina\'s': 'Strani',
   'Maat': 'Velikost',
   'Staand': 'Pokončno',
@@ -1790,9 +1792,6 @@ const _dutchSourceAddSl = <String, String>{
   'posters en boeken': 'plakati in knjige',
   'enveloppen': 'ovojnice',
   'Afloop voor de drukker (mm)': 'Dodatek za porezavo (mm)',
-  'Snijtekens': 'Oznake za rez',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Z dodatkom za porezavo je stran na vseh straneh večja od izbrane velikosti, tako da barva, ki sega do roba, seže čez linijo reza. Za običajno tiskanje pustite 0.',
   'Pagina {n} van {m}': 'Stran {n} od {m}',
   'Boven (mm)': 'Zgoraj (mm)',
   'Onder (mm)': 'Spodaj (mm)',

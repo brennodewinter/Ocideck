@@ -1802,6 +1802,8 @@ const _dutchSourceAddBg = <String, String>{
   'Kolom links': 'Колона отляво',
   'Kolom rechts': 'Колона отдясно',
   'Kolom weghalen': 'Изтриване на колоната',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'С разлив страницата става по-голяма от избрания формат от всички страни, така че мастилото, което стига до ръба, продължава отвъд линията на рязане. Разливът важи за всеки експорт, докато не го върнете на 0. Оставете 0 за обикновено отпечатване.',
   'Pagina\'s': 'Страници',
   'Maat': 'Размер',
   'Staand': 'Вертикална',
@@ -1810,9 +1812,6 @@ const _dutchSourceAddBg = <String, String>{
   'posters en boeken': 'плакати и книги',
   'enveloppen': 'пликове',
   'Afloop voor de drukker (mm)': 'Разлив за печатницата (мм)',
-  'Snijtekens': 'Знаци за рязане',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'С разлив страницата става по-голяма от избрания формат от всички страни, така че мастилото, което стига до ръба, продължава отвъд линията на рязане. Оставете 0 за обикновено отпечатване.',
   'Pagina {n} van {m}': 'Страница {n} от {m}',
   'Boven (mm)': 'Отгоре (mm)',
   'Onder (mm)': 'Отдолу (mm)',

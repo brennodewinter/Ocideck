@@ -1783,6 +1783,8 @@ const _dutchSourceAddCs = <String, String>{
   'Kolom links': 'Sloupec vlevo',
   'Kolom rechts': 'Sloupec vpravo',
   'Kolom weghalen': 'Smazat sloupec',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Se spadávkou je stránka ze všech stran větší než zvolený formát, takže barva, která jde až k okraji, přesahuje přes linii ořezu. Spadávka platí pro každý export, dokud ji znovu nenastavíte na 0. Pro běžný tisk nechte 0.',
   'Pagina\'s': 'Stránky',
   'Maat': 'Velikost',
   'Staand': 'Na výšku',
@@ -1791,9 +1793,6 @@ const _dutchSourceAddCs = <String, String>{
   'posters en boeken': 'plakáty a knihy',
   'enveloppen': 'obálky',
   'Afloop voor de drukker (mm)': 'Spadávka pro tiskárnu (mm)',
-  'Snijtekens': 'Ořezové značky',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Se spadávkou je stránka ze všech stran větší než zvolený formát, takže barva, která jde až k okraji, přesahuje přes linii ořezu. Pro běžný tisk nechte 0.',
   'Pagina {n} van {m}': 'Stránka {n} z {m}',
   'Boven (mm)': 'Nahoře (mm)',
   'Onder (mm)': 'Dole (mm)',

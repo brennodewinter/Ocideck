@@ -1797,6 +1797,8 @@ const _dutchSourceAddUk = <String, String>{
   'Kolom links': 'Стовпець ліворуч',
   'Kolom rechts': 'Стовпець праворуч',
   'Kolom weghalen': 'Видалити стовпець',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'З вилетом сторінка стає більшою за обраний формат з усіх боків, щоб фарба, яка сягає краю, виходила за лінію обрізу. Виліт діє для кожного експорту, доки ви не повернете його на 0. Для звичайного друку залиште 0.',
   'Pagina\'s': 'Сторінки',
   'Maat': 'Розмір',
   'Staand': 'Книжкова',
@@ -1805,9 +1807,6 @@ const _dutchSourceAddUk = <String, String>{
   'posters en boeken': 'плакати та книжки',
   'enveloppen': 'конверти',
   'Afloop voor de drukker (mm)': 'Виліт для друкарні (мм)',
-  'Snijtekens': 'Мітки обрізу',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'З вилетом сторінка стає більшою за обраний формат з усіх боків, щоб фарба, яка сягає краю, виходила за лінію обрізу. Для звичайного друку залиште 0.',
   'Pagina {n} van {m}': 'Сторінка {n} з {m}',
   'Boven (mm)': 'Зверху (mm)',
   'Onder (mm)': 'Знизу (mm)',

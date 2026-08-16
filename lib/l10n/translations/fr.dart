@@ -739,6 +739,8 @@ const _dutchSourceAddFr = {
   'Kolom links': 'Colonne à gauche',
   'Kolom rechts': 'Colonne à droite',
   'Kolom weghalen': 'Supprimer la colonne',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Avec le fond perdu, la page devient plus grande que le format choisi sur tout le pourtour, afin que l\'encre qui atteint le bord dépasse le trait de coupe. Le fond perdu s\'applique à chaque exportation tant que vous ne le remettez pas à 0. Laissez 0 pour une impression ordinaire.',
   'Pagina\'s': 'Pages',
   'Maat': 'Format',
   'Staand': 'Portrait',
@@ -747,9 +749,6 @@ const _dutchSourceAddFr = {
   'posters en boeken': 'affiches et livres',
   'enveloppen': 'enveloppes',
   'Afloop voor de drukker (mm)': 'Fond perdu pour l\'imprimeur (mm)',
-  'Snijtekens': 'Traits de coupe',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Avec le fond perdu, la page devient plus grande que le format choisi sur tout le pourtour, afin que l\'encre qui atteint le bord dépasse le trait de coupe. Laissez 0 pour une impression ordinaire.',
   'Pagina {n} van {m}': 'Page {n} sur {m}',
   'Boven (mm)': 'Haut (mm)',
   'Onder (mm)': 'Bas (mm)',

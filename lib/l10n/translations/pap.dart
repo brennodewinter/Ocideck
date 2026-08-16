@@ -739,6 +739,8 @@ const _dutchSourceAddPap = {
   'Kolom links': 'Kolòm robes',
   'Kolom rechts': 'Kolòm drechi',
   'Kolom weghalen': 'Kita kolòm',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Ku sangrado e página ta bira mas grandi ku e formato skohí na tur banda, pa e enk ku ta yega te na rand pasa dor di e liña di korta. E sangrado ta konta pa tur eksportashon te ora bo pon\'é bèk riba 0. Laga esaki riba 0 pa imprimí normal.',
   'Pagina\'s': 'Páginanan',
   'Maat': 'Tamaño',
   'Staand': 'Vertikal',
@@ -747,9 +749,6 @@ const _dutchSourceAddPap = {
   'posters en boeken': 'poster i buki',
   'enveloppen': 'envelòpnan',
   'Afloop voor de drukker (mm)': 'Sangrado pa e imprenta (mm)',
-  'Snijtekens': 'Marka di korta',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Ku sangrado e página ta bira mas grandi ku e formato skohí na tur banda, pa e enk ku ta yega te na rand pasa dor di e liña di korta. Laga esaki riba 0 pa imprimí normal.',
   'Pagina {n} van {m}': 'Página {n} di {m}',
   'Boven (mm)': 'Ariba (mm)',
   'Onder (mm)': 'Abou (mm)',

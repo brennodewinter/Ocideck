@@ -1807,6 +1807,8 @@ const _dutchSourceAddEl = <String, String>{
   'Kolom links': 'Στήλη αριστερά',
   'Kolom rechts': 'Στήλη δεξιά',
   'Kolom weghalen': 'Διαγραφή στήλης',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Με τη διαφυγή η σελίδα γίνεται μεγαλύτερη από το επιλεγμένο μέγεθος σε όλες τις πλευρές, ώστε το μελάνι που φτάνει στην άκρη να περνά πέρα από τη γραμμή κοπής. Η διαφυγή ισχύει για κάθε εξαγωγή μέχρι να την επαναφέρετε στο 0. Αφήστε το στο 0 για κανονική εκτύπωση.',
   'Pagina\'s': 'Σελίδες',
   'Maat': 'Μέγεθος',
   'Staand': 'Κατακόρυφος',
@@ -1815,9 +1817,6 @@ const _dutchSourceAddEl = <String, String>{
   'posters en boeken': 'αφίσες και βιβλία',
   'enveloppen': 'φάκελοι',
   'Afloop voor de drukker (mm)': 'Διαφυγή για το τυπογραφείο (mm)',
-  'Snijtekens': 'Σημάδια κοπής',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Με τη διαφυγή η σελίδα γίνεται μεγαλύτερη από το επιλεγμένο μέγεθος σε όλες τις πλευρές, ώστε το μελάνι που φτάνει στην άκρη να περνά πέρα από τη γραμμή κοπής. Αφήστε το στο 0 για κανονική εκτύπωση.',
   'Pagina {n} van {m}': 'Σελίδα {n} από {m}',
   'Boven (mm)': 'Επάνω (mm)',
   'Onder (mm)': 'Κάτω (mm)',

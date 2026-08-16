@@ -736,6 +736,8 @@ const _dutchSourceAddEs = {
   'Kolom links': 'Columna a la izquierda',
   'Kolom rechts': 'Columna a la derecha',
   'Kolom weghalen': 'Eliminar columna',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Con sangrado la página se hace más grande que el formato elegido por todos los lados, de modo que la tinta que llega al borde sobrepasa la línea de corte. El sangrado se aplica a todas las exportaciones hasta que lo vuelvas a poner en 0. Deja esto en 0 para una impresión normal.',
   'Pagina\'s': 'Páginas',
   'Maat': 'Tamaño',
   'Staand': 'Vertical',
@@ -744,9 +746,6 @@ const _dutchSourceAddEs = {
   'posters en boeken': 'carteles y libros',
   'enveloppen': 'sobres',
   'Afloop voor de drukker (mm)': 'Sangrado para la imprenta (mm)',
-  'Snijtekens': 'Marcas de corte',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Con sangrado la página se hace más grande que el formato elegido por todos los lados, de modo que la tinta que llega al borde sobrepasa la línea de corte. Deja esto en 0 para una impresión normal.',
   'Pagina {n} van {m}': 'Página {n} de {m}',
   'Boven (mm)': 'Superior (mm)',
   'Onder (mm)': 'Inferior (mm)',

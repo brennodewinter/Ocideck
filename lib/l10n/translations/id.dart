@@ -1780,6 +1780,8 @@ const _dutchSourceAddId = <String, String>{
   'Kolom links': 'Kolom di kiri',
   'Kolom rechts': 'Kolom di kanan',
   'Kolom weghalen': 'Hapus kolom',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Dengan bleed, halaman menjadi lebih besar daripada ukuran yang dipilih di semua sisi, sehingga tinta yang mencapai tepi melewati garis potong. Bleed berlaku untuk setiap ekspor sampai Anda mengembalikannya ke 0. Biarkan 0 untuk pencetakan biasa.',
   'Pagina\'s': 'Halaman',
   'Maat': 'Ukuran',
   'Staand': 'Potret',
@@ -1788,9 +1790,6 @@ const _dutchSourceAddId = <String, String>{
   'posters en boeken': 'poster dan buku',
   'enveloppen': 'amplop',
   'Afloop voor de drukker (mm)': 'Bleed untuk percetakan (mm)',
-  'Snijtekens': 'Tanda potong',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Dengan bleed, halaman menjadi lebih besar daripada ukuran yang dipilih di semua sisi, sehingga tinta yang mencapai tepi melewati garis potong. Biarkan 0 untuk pencetakan biasa.',
   'Pagina {n} van {m}': 'Halaman {n} dari {m}',
   'Boven (mm)': 'Atas (mm)',
   'Onder (mm)': 'Bawah (mm)',

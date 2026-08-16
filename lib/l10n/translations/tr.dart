@@ -2757,6 +2757,8 @@ const _dutchSourceAddTr = <String, String>{
   'Kolom links': 'Sola sütun',
   'Kolom rechts': 'Sağa sütun',
   'Kolom weghalen': 'Sütunu sil',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Taşma payı ile sayfa, seçilen boyuttan her yönde daha büyük olur; böylece kenara kadar giden mürekkep kesim çizgisinin ötesine geçer. Taşma payı, siz yeniden 0 yapana kadar her dışa aktarmada geçerlidir. Normal yazdırma için 0 bırakın.',
   'Pagina\'s': 'Sayfalar',
   'Maat': 'Boyut',
   'Staand': 'Dikey',
@@ -2765,9 +2767,6 @@ const _dutchSourceAddTr = <String, String>{
   'posters en boeken': 'afişler ve kitaplar',
   'enveloppen': 'zarflar',
   'Afloop voor de drukker (mm)': 'Matbaa için taşma payı (mm)',
-  'Snijtekens': 'Kesim işaretleri',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Taşma payı ile sayfa, seçilen boyuttan her yönde daha büyük olur; böylece kenara kadar giden mürekkep kesim çizgisinin ötesine geçer. Normal yazdırma için 0 bırakın.',
   'Pagina {n} van {m}': '{m} sayfadan {n}. sayfa',
   'Boven (mm)': 'Üst (mm)',
   'Onder (mm)': 'Alt (mm)',

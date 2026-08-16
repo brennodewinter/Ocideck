@@ -1787,6 +1787,8 @@ const _dutchSourceAddLt = <String, String>{
   'Kolom links': 'Stulpelis kairėje',
   'Kolom rechts': 'Stulpelis dešinėje',
   'Kolom weghalen': 'Ištrinti stulpelį',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Su išleistimi puslapis iš visų pusių tampa didesnis už pasirinktą formatą, kad iki krašto einantys dažai peržengtų pjovimo liniją. Išleistis galioja kiekvienam eksportui, kol vėl nustatysite 0. Įprastam spausdinimui palikite 0.',
   'Pagina\'s': 'Puslapiai',
   'Maat': 'Dydis',
   'Staand': 'Stačias',
@@ -1795,9 +1797,6 @@ const _dutchSourceAddLt = <String, String>{
   'posters en boeken': 'plakatai ir knygos',
   'enveloppen': 'vokai',
   'Afloop voor de drukker (mm)': 'Išleistis spaustuvei (mm)',
-  'Snijtekens': 'Pjovimo žymos',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Su išleistimi puslapis iš visų pusių tampa didesnis už pasirinktą formatą, kad iki krašto einantys dažai peržengtų pjovimo liniją. Įprastam spausdinimui palikite 0.',
   'Pagina {n} van {m}': 'Puslapis {n} iš {m}',
   'Boven (mm)': 'Viršus (mm)',
   'Onder (mm)': 'Apačia (mm)',

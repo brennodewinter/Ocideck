@@ -1779,6 +1779,8 @@ const _dutchSourceAddDa = <String, String>{
   'Kolom links': 'Kolonne til venstre',
   'Kolom rechts': 'Kolonne til højre',
   'Kolom weghalen': 'Slet kolonne',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Med beskæring bliver siden større end det valgte format hele vejen rundt, så blæk der går helt ud til kanten, fortsætter forbi skærelinjen. Beskæringen gælder for hver eksport, indtil du sætter den tilbage til 0. Lad den stå på 0 til almindelig udskrivning.',
   'Pagina\'s': 'Sider',
   'Maat': 'Størrelse',
   'Staand': 'Stående',
@@ -1787,9 +1789,6 @@ const _dutchSourceAddDa = <String, String>{
   'posters en boeken': 'plakater og bøger',
   'enveloppen': 'konvolutter',
   'Afloop voor de drukker (mm)': 'Beskæring til trykkeriet (mm)',
-  'Snijtekens': 'Skæremærker',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Med beskæring bliver siden større end det valgte format hele vejen rundt, så blæk der går helt ud til kanten, fortsætter forbi skærelinjen. Lad den stå på 0 til almindelig udskrivning.',
   'Pagina {n} van {m}': 'Side {n} af {m}',
   'Boven (mm)': 'Top (mm)',
   'Onder (mm)': 'Bund (mm)',

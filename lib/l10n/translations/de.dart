@@ -739,6 +739,8 @@ const _dutchSourceAddDe = {
   'Kolom links': 'Spalte links',
   'Kolom rechts': 'Spalte rechts',
   'Kolom weghalen': 'Spalte löschen',
+  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.':
+      'Mit Anschnitt wird die Seite ringsum größer als das gewählte Format, damit Farbe, die bis an den Rand läuft, über die Schnittlinie hinausgeht. Der Anschnitt gilt für jeden Export, bis er wieder auf 0 gesetzt wird. Für normales Drucken auf 0 lassen.',
   'Pagina\'s': 'Seiten',
   'Maat': 'Größe',
   'Staand': 'Hochformat',
@@ -747,9 +749,6 @@ const _dutchSourceAddDe = {
   'posters en boeken': 'Poster und Bücher',
   'enveloppen': 'Umschläge',
   'Afloop voor de drukker (mm)': 'Anschnitt für die Druckerei (mm)',
-  'Snijtekens': 'Schnittmarken',
-  'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.':
-      'Mit Anschnitt wird die Seite ringsum größer als das gewählte Format, damit Farbe, die bis an den Rand läuft, über die Schnittlinie hinausgeht. Für normales Drucken auf 0 lassen.',
   'Pagina {n} van {m}': 'Seite {n} von {m}',
   'Boven (mm)': 'Oben (mm)',
   'Onder (mm)': 'Unten (mm)',
