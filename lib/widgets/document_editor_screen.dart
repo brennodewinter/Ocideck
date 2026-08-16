@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_quill/flutter_quill.dart' show EditorState;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
@@ -56,8 +57,6 @@ import 'editors/embed_editor_dialog.dart';
 import 'editors/table_editor.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'reader/document_markdown_view.dart';
-import 'package:flutter_quill/flutter_quill.dart' show EditorState;
-
 import 'reader/paged_document_view.dart';
 import 'reader/writing_page_breaks.dart';
 import 'shell/document_save_actions.dart';
@@ -614,15 +613,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
   }
 
-  /// De tekstbreedte van één pagina in beeldpunten: de paginabreedte min de
-  /// zijmarges.
-  double get _pageTextWidthPx {
-    final settings = ref.read(settingsProvider);
-    final (widthMm, _) = settings.documentPageSize.dimensions;
-    final margins = settings.documentPageMargins;
-    return (widthMm - margins.leftMm - margins.rightMm) * kPxPerMm;
-  }
-
   /// De map waarin het document staat, voor het oplossen van een logo in de
   /// kop- of voetband. `null` als het nog nergens is opgeslagen.
   String? get _projectPath {
@@ -727,7 +717,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     // dan op papier, en dan wijst de lijn nergens naar. Staan de einden uit,
     // dan geldt de ingestelde schrijfbreedte.
     documentMaxWidth: _showPageBreaks
-        ? _pageTextWidthPx
+        ? pageTextWidthPx(
+            ref.watch(settingsProvider).documentPageSize,
+            ref.watch(settingsProvider).documentPageMargins,
+          )
         : ref.watch(settingsProvider).documentEditorMaxWidth,
     editorKey: _visualEditorKey,
     bordered: false,
@@ -1064,15 +1057,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         .read(imageServiceProvider)
         .importIntoDeck(picked.path, projectPath: projectPath);
     if (!mounted) return;
-    final alt = _markdownImageAlt(picked.caption);
+    final alt = markdownImageAlt(picked.caption);
     _insertBlock('![$alt]($reference)');
-  }
-
-  /// Alt-tekst voor `![…](…)`: carrousel-bijschrift, met `[`/`]` gestript zodat
-  /// de markdown-syntaxis heel blijft.
-  String _markdownImageAlt(String caption) {
-    if (caption.isEmpty) return '';
-    return caption.replaceAll('[', '').replaceAll(']', '');
   }
 
   /// De Overzicht-rail. De rail zelf staat top-level in dezelfde library

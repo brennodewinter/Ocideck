@@ -14,6 +14,16 @@ import 'document_markdown_view.dart';
 /// A4 wordt hier net zo breed als daar.
 const double kPxPerMm = 96 / 25.4;
 
+/// De tekstbreedte van één pagina in beeldpunten: de paginabreedte min de
+/// zijmarges. Puur, en hier thuis omdat dit dezelfde paginameetkunde is als
+/// waarmee de vellen worden opgezet — de schrijfstand rekent er zijn
+/// tekstkolom mee uit, zodat een pagina-einde daar op dezelfde breedte valt
+/// als op papier.
+double pageTextWidthPx(PageSizeSpec size, PageMargins margins) {
+  final (widthMm, _) = size.dimensions;
+  return (widthMm - margins.leftMm - margins.rightMm) * kPxPerMm;
+}
+
 /// Toont een document als échte pagina's: op maat, met de gekozen marges, een
 /// kop- en voetband per pagina en een paginanummer.
 ///

@@ -19,3 +19,10 @@ final RegExp chartFencePattern = RegExp(
   r'```chart[ \t]*\n([\s\S]*?)\n```',
   multiLine: true,
 );
+
+/// Alt-tekst voor `![…](…)`: een bijschrift met `[`/`]` gestript, zodat de
+/// markdown-syntaxis van de afbeeldingsverwijzing heel blijft. Een blokhaak in
+/// een bijschrift zou de link anders vroegtijdig afsluiten en de rest van de
+/// regel als tekst laten staan.
+String markdownImageAlt(String caption) =>
+    caption.replaceAll('[', '').replaceAll(']', '');
