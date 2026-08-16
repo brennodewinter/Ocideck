@@ -1794,6 +1794,8 @@ const _dutchSourceAddCs = <String, String>{
   'enveloppen': 'obálky',
   'Afloop voor de drukker (mm)': 'Spadávka pro tiskárnu (mm)',
   'Pagina {n} van {m}': 'Stránka {n} z {m}',
+  'Pagina-einden tonen': 'Zobrazit konce stránek',
+  'Pagina-einden verbergen': 'Skrýt konce stránek',
   'Boven (mm)': 'Nahoře (mm)',
   'Onder (mm)': 'Dole (mm)',
   'Links (mm)': 'Vlevo (mm)',

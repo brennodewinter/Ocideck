@@ -1793,6 +1793,8 @@ const _dutchSourceAddSl = <String, String>{
   'enveloppen': 'ovojnice',
   'Afloop voor de drukker (mm)': 'Dodatek za porezavo (mm)',
   'Pagina {n} van {m}': 'Stran {n} od {m}',
+  'Pagina-einden tonen': 'Pokaži prelome strani',
+  'Pagina-einden verbergen': 'Skrij prelome strani',
   'Boven (mm)': 'Zgoraj (mm)',
   'Onder (mm)': 'Spodaj (mm)',
   'Links (mm)': 'Levo (mm)',

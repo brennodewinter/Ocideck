@@ -1798,6 +1798,8 @@ const _dutchSourceAddSk = <String, String>{
   'enveloppen': 'obálky',
   'Afloop voor de drukker (mm)': 'Spadávka pre tlačiareň (mm)',
   'Pagina {n} van {m}': 'Strana {n} z {m}',
+  'Pagina-einden tonen': 'Zobraziť konce strán',
+  'Pagina-einden verbergen': 'Skryť konce strán',
   'Boven (mm)': 'Hore (mm)',
   'Onder (mm)': 'Dole (mm)',
   'Links (mm)': 'Vľavo (mm)',

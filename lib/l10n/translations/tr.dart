@@ -2768,6 +2768,8 @@ const _dutchSourceAddTr = <String, String>{
   'enveloppen': 'zarflar',
   'Afloop voor de drukker (mm)': 'Matbaa için taşma payı (mm)',
   'Pagina {n} van {m}': '{m} sayfadan {n}. sayfa',
+  'Pagina-einden tonen': 'Sayfa sonlarını göster',
+  'Pagina-einden verbergen': 'Sayfa sonlarını gizle',
   'Boven (mm)': 'Üst (mm)',
   'Onder (mm)': 'Alt (mm)',
   'Links (mm)': 'Sol (mm)',

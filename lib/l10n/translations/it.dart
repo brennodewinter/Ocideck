@@ -746,6 +746,8 @@ const _dutchSourceAddIt = {
   'enveloppen': 'buste',
   'Afloop voor de drukker (mm)': 'Abbondanza per la stampa (mm)',
   'Pagina {n} van {m}': 'Pagina {n} di {m}',
+  'Pagina-einden tonen': 'Mostra interruzioni di pagina',
+  'Pagina-einden verbergen': 'Nascondi interruzioni di pagina',
   'Boven (mm)': 'Sopra (mm)',
   'Onder (mm)': 'Sotto (mm)',
   'Links (mm)': 'Sinistra (mm)',

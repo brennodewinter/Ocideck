@@ -751,6 +751,8 @@ const _dutchSourceAddFy = {
   'enveloppen': 'slûven',
   'Afloop voor de drukker (mm)': 'Ôfrin foar de drukker (mm)',
   'Pagina {n} van {m}': 'Side {n} fan {m}',
+  'Pagina-einden tonen': 'Sidebrekken sjen litte',
+  'Pagina-einden verbergen': 'Sidebrekken ferbergje',
   'Boven (mm)': 'Boppe (mm)',
   'Onder (mm)': 'Under (mm)',
   'Links (mm)': 'Links (mm)',

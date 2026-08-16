@@ -750,6 +750,8 @@ const _dutchSourceAddFr = {
   'enveloppen': 'enveloppes',
   'Afloop voor de drukker (mm)': 'Fond perdu pour l\'imprimeur (mm)',
   'Pagina {n} van {m}': 'Page {n} sur {m}',
+  'Pagina-einden tonen': 'Afficher les sauts de page',
+  'Pagina-einden verbergen': 'Masquer les sauts de page',
   'Boven (mm)': 'Haut (mm)',
   'Onder (mm)': 'Bas (mm)',
   'Links (mm)': 'Gauche (mm)',

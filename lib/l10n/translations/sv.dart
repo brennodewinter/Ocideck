@@ -1790,6 +1790,8 @@ const _dutchSourceAddSv = <String, String>{
   'enveloppen': 'kuvert',
   'Afloop voor de drukker (mm)': 'Utfall för tryckeriet (mm)',
   'Pagina {n} van {m}': 'Sida {n} av {m}',
+  'Pagina-einden tonen': 'Visa sidbrytningar',
+  'Pagina-einden verbergen': 'Dölj sidbrytningar',
   'Boven (mm)': 'Överkant (mm)',
   'Onder (mm)': 'Nederkant (mm)',
   'Links (mm)': 'Vänster (mm)',

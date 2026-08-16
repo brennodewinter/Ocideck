@@ -1782,6 +1782,8 @@ const _dutchSourceAddEt = <String, String>{
   'enveloppen': 'ümbrikud',
   'Afloop voor de drukker (mm)': 'Lõikevaru trükikojale (mm)',
   'Pagina {n} van {m}': 'Lehekülg {n} {m}-st',
+  'Pagina-einden tonen': 'Näita leheküljepiire',
+  'Pagina-einden verbergen': 'Peida leheküljepiirid',
   'Boven (mm)': 'Ülal (mm)',
   'Onder (mm)': 'All (mm)',
   'Links (mm)': 'Vasak (mm)',

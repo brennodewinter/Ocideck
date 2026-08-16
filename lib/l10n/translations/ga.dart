@@ -1826,6 +1826,8 @@ const _dutchSourceAddGa = <String, String>{
   'enveloppen': 'clúdaigh litreach',
   'Afloop voor de drukker (mm)': 'Fuiliú don chlódóir (mm)',
   'Pagina {n} van {m}': 'Leathanach {n} as {m}',
+  'Pagina-einden tonen': 'Taispeáin brisimh leathanaigh',
+  'Pagina-einden verbergen': 'Folaigh brisimh leathanaigh',
   'Boven (mm)': 'Barr (mm)',
   'Onder (mm)': 'Bun (mm)',
   'Links (mm)': 'Ar chlé (mm)',

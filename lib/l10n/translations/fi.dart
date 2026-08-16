@@ -1791,6 +1791,8 @@ const _dutchSourceAddFi = <String, String>{
   'enveloppen': 'kirjekuoret',
   'Afloop voor de drukker (mm)': 'Leikkuuvara painoa varten (mm)',
   'Pagina {n} van {m}': 'Sivu {n} / {m}',
+  'Pagina-einden tonen': 'Näytä sivunvaihdot',
+  'Pagina-einden verbergen': 'Piilota sivunvaihdot',
   'Boven (mm)': 'Ylä (mm)',
   'Onder (mm)': 'Ala (mm)',
   'Links (mm)': 'Vasen (mm)',

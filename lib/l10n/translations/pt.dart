@@ -1820,6 +1820,8 @@ const _dutchSourceAddPt = <String, String>{
   'enveloppen': 'envelopes',
   'Afloop voor de drukker (mm)': 'Sangria para a gráfica (mm)',
   'Pagina {n} van {m}': 'Página {n} de {m}',
+  'Pagina-einden tonen': 'Mostrar quebras de página',
+  'Pagina-einden verbergen': 'Ocultar quebras de página',
   'Boven (mm)': 'Superior (mm)',
   'Onder (mm)': 'Inferior (mm)',
   'Links (mm)': 'Esquerda (mm)',

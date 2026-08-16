@@ -1813,6 +1813,8 @@ const _dutchSourceAddMt = <String, String>{
   'enveloppen': 'envelopps',
   'Afloop voor de drukker (mm)': 'Bleed għall-istampar (mm)',
   'Pagina {n} van {m}': 'Paġna {n} minn {m}',
+  'Pagina-einden tonen': 'Uri l-qsim tal-paġni',
+  'Pagina-einden verbergen': 'Aħbi l-qsim tal-paġni',
   'Boven (mm)': 'Fuq (mm)',
   'Onder (mm)': 'Isfel (mm)',
   'Links (mm)': 'Xellug (mm)',

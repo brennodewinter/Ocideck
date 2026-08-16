@@ -1807,6 +1807,8 @@ const _dutchSourceAddLa = <String, String>{
   'enveloppen': 'involucra',
   'Afloop voor de drukker (mm)': 'Excursus pro typographo (mm)',
   'Pagina {n} van {m}': 'Pagina {n} ex {m}',
+  'Pagina-einden tonen': 'Interruptiones paginae monstrare',
+  'Pagina-einden verbergen': 'Interruptiones paginae celare',
   'Boven (mm)': 'Supra (mm)',
   'Onder (mm)': 'Infra (mm)',
   'Links (mm)': 'Sinistra (mm)',
