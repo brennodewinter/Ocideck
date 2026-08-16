@@ -1773,6 +1773,36 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Boven (mm)': 'Top (mm)',
+  'Onder (mm)': 'Bund (mm)',
+  'Links (mm)': 'Venstre (mm)',
+  'Rechts (mm)': 'Højre (mm)',
+  'Smal (860 px)': 'Smal (860 px)',
+  'Standaard (1100 px)': 'Standard (1100 px)',
+  'Breed (1400 px)': 'Bred (1400 px)',
+  'Volledige breedte': 'Fuld bredde',
+  'Paginamaat': 'Sidestørrelse',
+  'Randstijl': 'Kantstil',
+  'Tabelstijl': 'Tabelstil',
+  'Geen randen': 'Ingen kanter',
+  'Lijnen (horizontaal)': 'Linjer (vandrette)',
+  'Omrand (volledig)': 'Indrammet (fuld)',
+  'Zebrastrepen (om en om)': 'Zebrastriber (skiftevis)',
+  'Accentlijn onder koprij': 'Accentlinje under hovedrækken',
+  'Tabel randkleur': 'Tabelkantfarve',
+  'Tabel zebrakleur': 'Tabelzebrafarve',
+  'Celopvulling: {px} px': 'Cellepolstring: {px} px',
+  'Inhoudsopgave': 'Indholdsfortegnelse',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Indholdsfortegnelse — tilføj overskrifter for at fylde den.',
+  'Schrijfbreedte editor': 'Skrivebredde i editoren',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Hvor bredt skriveområdet er i visuel tilstand. Smalt læses roligt, bredt bruger mere af skærmen.',
+  'Pagina-instellingen export': 'Sideindstillinger til eksport',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Sidestørrelse (ISO 216) og margener til HTML-udskrift, LaTeX og PDF-eksport.',
+  '{maat} (liggend)': '{maat} (liggende)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Udformning',
   'Afbeelding aanpassen': 'Justér billede',
   'Groot bestand': 'Stor fil',

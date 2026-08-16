@@ -1781,6 +1781,36 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Boven (mm)': 'Hore (mm)',
+  'Onder (mm)': 'Dole (mm)',
+  'Links (mm)': 'Vľavo (mm)',
+  'Rechts (mm)': 'Vpravo (mm)',
+  'Smal (860 px)': 'Úzke (860 px)',
+  'Standaard (1100 px)': 'Predvolené (1100 px)',
+  'Breed (1400 px)': 'Široké (1400 px)',
+  'Volledige breedte': 'Plná šírka',
+  'Paginamaat': 'Veľkosť strany',
+  'Randstijl': 'Štýl orámovania',
+  'Tabelstijl': 'Štýl tabuľky',
+  'Geen randen': 'Bez orámovania',
+  'Lijnen (horizontaal)': 'Čiary (vodorovné)',
+  'Omrand (volledig)': 'Orámované (úplné)',
+  'Zebrastrepen (om en om)': 'Zebra pruhy (striedavo)',
+  'Accentlijn onder koprij': 'Zvýrazňovacia čiara pod hlavičkou',
+  'Tabel randkleur': 'Farba orámovania tabuľky',
+  'Tabel zebrakleur': 'Farba pruhov tabuľky',
+  'Celopvulling: {px} px': 'Odsadenie bunky: {px} px',
+  'Inhoudsopgave': 'Obsah',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Obsah — pridajte nadpisy, aby sa naplnil.',
+  'Schrijfbreedte editor': 'Šírka písania v editore',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Aká široká je plocha na písanie vo vizuálnom režime. Úzka sa číta pokojne, široká využije viac obrazovky.',
+  'Pagina-instellingen export': 'Nastavenia strany pre export',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Veľkosť strany (ISO 216) a okraje pre tlač HTML, LaTeX a export PDF.',
+  '{maat} (liggend)': '{maat} (na šírku)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Vzhľad',
   'Afbeelding aanpassen': 'Upraviť obrázok',
   'Groot bestand': 'Veľký súbor',

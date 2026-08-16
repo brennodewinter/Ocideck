@@ -1777,6 +1777,36 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Boven (mm)': 'Obe (mm)',
+  'Onder (mm)': 'Une (mm)',
+  'Links (mm)': 'Links (mm)',
+  'Rechts (mm)': 'Rächts (mm)',
+  'Smal (860 px)': 'Schmal (860 px)',
+  'Standaard (1100 px)': 'Standard (1100 px)',
+  'Breed (1400 px)': 'Breit (1400 px)',
+  'Volledige breedte': 'Volli Breiti',
+  'Paginamaat': 'Sitegrössi',
+  'Randstijl': 'Rahmestil',
+  'Tabelstijl': 'Tabällestil',
+  'Geen randen': 'Kei Rahme',
+  'Lijnen (horizontaal)': 'Linie (horizontal)',
+  'Omrand (volledig)': 'Iigrahmt (voll)',
+  'Zebrastrepen (om en om)': 'Zebrastreife (abwächslend)',
+  'Accentlijn onder koprij': 'Akzäntlinie under dr Chopfziile',
+  'Tabel randkleur': 'Tabällerahmefarb',
+  'Tabel zebrakleur': 'Tabällezebrafarb',
+  'Celopvulling: {px} px': 'Zällefüllig: {px} px',
+  'Inhoudsopgave': 'Inhaltsverzeichnis',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Inhaltsverzeichnis — füeg Überschrifte zue zum s fülle.',
+  'Schrijfbreedte editor': 'Schriibbreiti vom Editor',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Wie breit s Schriibfäld im visuelle Modus isch. Schmal liest sich ruhig, breit bruucht meh vom Bildschirm.',
+  'Pagina-instellingen export': 'Siteiistellige für dr Export',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Sitegrössi (ISO 216) und Ränder für HTML-Druck, LaTeX und PDF-Export.',
+  '{maat} (liggend)': '{maat} (Querformat)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Gschtaltig',
   'Afbeelding aanpassen': 'Bild aapasse',
   'Groot bestand': 'Grossi Datei',

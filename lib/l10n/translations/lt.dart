@@ -1781,6 +1781,36 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Boven (mm)': 'Viršus (mm)',
+  'Onder (mm)': 'Apačia (mm)',
+  'Links (mm)': 'Kairė (mm)',
+  'Rechts (mm)': 'Dešinė (mm)',
+  'Smal (860 px)': 'Siauras (860 px)',
+  'Standaard (1100 px)': 'Numatytasis (1100 px)',
+  'Breed (1400 px)': 'Platus (1400 px)',
+  'Volledige breedte': 'Visas plotis',
+  'Paginamaat': 'Puslapio dydis',
+  'Randstijl': 'Rėmelio stilius',
+  'Tabelstijl': 'Lentelės stilius',
+  'Geen randen': 'Be rėmelių',
+  'Lijnen (horizontaal)': 'Linijos (horizontalios)',
+  'Omrand (volledig)': 'Įrėminta (visiškai)',
+  'Zebrastrepen (om en om)': 'Zebro juostos (kas antra)',
+  'Accentlijn onder koprij': 'Akcento linija po antraštės eilute',
+  'Tabel randkleur': 'Lentelės rėmelio spalva',
+  'Tabel zebrakleur': 'Lentelės juostų spalva',
+  'Celopvulling: {px} px': 'Langelio užpildas: {px} px',
+  'Inhoudsopgave': 'Turinys',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Turinys — pridėkite antraščių, kad jį užpildytumėte.',
+  'Schrijfbreedte editor': 'Rašymo plotis redaktoriuje',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Koks platus rašymo laukas vaizdiniu režimu. Siauras skaitomas ramiai, platus naudoja daugiau ekrano.',
+  'Pagina-instellingen export': 'Puslapio nustatymai eksportui',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Puslapio dydis (ISO 216) ir paraštės HTML spausdinimui, LaTeX ir PDF eksportui.',
+  '{maat} (liggend)': '{maat} (gulsčias)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Išvaizda',
   'Afbeelding aanpassen': 'Derinti paveikslėlį',
   'Groot bestand': 'Didelis failas',

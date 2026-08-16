@@ -730,6 +730,36 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Boven (mm)': 'Superior (mm)',
+  'Onder (mm)': 'Inferior (mm)',
+  'Links (mm)': 'Izquierda (mm)',
+  'Rechts (mm)': 'Derecha (mm)',
+  'Smal (860 px)': 'Estrecho (860 px)',
+  'Standaard (1100 px)': 'Predeterminado (1100 px)',
+  'Breed (1400 px)': 'Ancho (1400 px)',
+  'Volledige breedte': 'Ancho completo',
+  'Paginamaat': 'Tamaño de página',
+  'Randstijl': 'Estilo de borde',
+  'Tabelstijl': 'Estilo de tabla',
+  'Geen randen': 'Sin bordes',
+  'Lijnen (horizontaal)': 'Líneas (horizontales)',
+  'Omrand (volledig)': 'Con marco (completo)',
+  'Zebrastrepen (om en om)': 'Rayas cebra (alternas)',
+  'Accentlijn onder koprij': 'Línea de acento bajo la fila de encabezado',
+  'Tabel randkleur': 'Color del borde de la tabla',
+  'Tabel zebrakleur': 'Color de las rayas de la tabla',
+  'Celopvulling: {px} px': 'Relleno de celda: {px} px',
+  'Inhoudsopgave': 'Índice',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Índice — añade encabezados para rellenarlo.',
+  'Schrijfbreedte editor': 'Ancho de escritura del editor',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Qué anchura tiene el área de escritura en modo visual. Estrecha se lee con calma, ancha usa más pantalla.',
+  'Pagina-instellingen export': 'Ajustes de página para exportar',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Tamaño de página (ISO 216) y márgenes para impresión HTML, LaTeX y exportación PDF.',
+  '{maat} (liggend)': '{maat} (horizontal)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Formato',
   'Afbeelding aanpassen': 'Ajustar imagen',
   'Groot bestand': 'Archivo grande',

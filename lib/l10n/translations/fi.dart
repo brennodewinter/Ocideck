@@ -1774,6 +1774,36 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Boven (mm)': 'Ylä (mm)',
+  'Onder (mm)': 'Ala (mm)',
+  'Links (mm)': 'Vasen (mm)',
+  'Rechts (mm)': 'Oikea (mm)',
+  'Smal (860 px)': 'Kapea (860 px)',
+  'Standaard (1100 px)': 'Oletus (1100 px)',
+  'Breed (1400 px)': 'Leveä (1400 px)',
+  'Volledige breedte': 'Täysi leveys',
+  'Paginamaat': 'Sivukoko',
+  'Randstijl': 'Reunatyyli',
+  'Tabelstijl': 'Taulukkotyyli',
+  'Geen randen': 'Ei reunoja',
+  'Lijnen (horizontaal)': 'Viivat (vaakasuorat)',
+  'Omrand (volledig)': 'Kehystetty (täysi)',
+  'Zebrastrepen (om en om)': 'Seeprajuovat (joka toinen)',
+  'Accentlijn onder koprij': 'Korostusviiva otsikkorivin alla',
+  'Tabel randkleur': 'Taulukon reunan väri',
+  'Tabel zebrakleur': 'Taulukon seepraväri',
+  'Celopvulling: {px} px': 'Solun täyte: {px} px',
+  'Inhoudsopgave': 'Sisällysluettelo',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Sisällysluettelo — lisää otsikoita täyttääksesi sen.',
+  'Schrijfbreedte editor': 'Editorin kirjoitusleveys',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Kuinka leveä kirjoitusalue on visuaalisessa tilassa. Kapea luetaan rauhassa, leveä käyttää enemmän näyttöä.',
+  'Pagina-instellingen export': 'Sivuasetukset vientiä varten',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Sivukoko (ISO 216) ja marginaalit HTML-tulostukseen, LaTeXiin ja PDF-vientiin.',
+  '{maat} (liggend)': '{maat} (vaaka)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Muotoilu',
   'Afbeelding aanpassen': 'Säädä kuva',
   'Groot bestand': 'Suuri tiedosto',

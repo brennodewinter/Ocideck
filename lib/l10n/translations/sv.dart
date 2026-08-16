@@ -1773,6 +1773,36 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Boven (mm)': 'Överkant (mm)',
+  'Onder (mm)': 'Nederkant (mm)',
+  'Links (mm)': 'Vänster (mm)',
+  'Rechts (mm)': 'Höger (mm)',
+  'Smal (860 px)': 'Smal (860 px)',
+  'Standaard (1100 px)': 'Standard (1100 px)',
+  'Breed (1400 px)': 'Bred (1400 px)',
+  'Volledige breedte': 'Full bredd',
+  'Paginamaat': 'Sidstorlek',
+  'Randstijl': 'Kantstil',
+  'Tabelstijl': 'Tabellstil',
+  'Geen randen': 'Inga kanter',
+  'Lijnen (horizontaal)': 'Linjer (vågräta)',
+  'Omrand (volledig)': 'Inramad (fullständig)',
+  'Zebrastrepen (om en om)': 'Zebrarandning (varannan)',
+  'Accentlijn onder koprij': 'Accentlinje under rubrikraden',
+  'Tabel randkleur': 'Tabellens kantfärg',
+  'Tabel zebrakleur': 'Tabellens zebrafärg',
+  'Celopvulling: {px} px': 'Cellutfyllnad: {px} px',
+  'Inhoudsopgave': 'Innehållsförteckning',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Innehållsförteckning — lägg till rubriker för att fylla den.',
+  'Schrijfbreedte editor': 'Skrivbredd i redigeraren',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Hur bred skrivytan är i visuellt läge. Smal läses lugnt, bred använder mer av skärmen.',
+  'Pagina-instellingen export': 'Sidinställningar för export',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Sidstorlek (ISO 216) och marginaler för HTML-utskrift, LaTeX och PDF-export.',
+  '{maat} (liggend)': '{maat} (liggande)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Formgivning',
   'Afbeelding aanpassen': 'Justera bild',
   'Groot bestand': 'Stor fil',

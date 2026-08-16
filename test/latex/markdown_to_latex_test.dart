@@ -2,6 +2,7 @@
 // de uitvoer klopt: koppen, lijsten, tabellen, code, wiskunde-pass-through,
 // inline-opmaak, links, en LaTeX-escaping.
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/settings.dart' show TableBorderStyle;
 import 'package:ocideck/services/latex/markdown_to_latex.dart';
 
 void main() {
@@ -39,6 +40,82 @@ void main() {
       expect(out, contains(r'\bottomrule'));
       expect(out, contains('Jan'));
       expect(out, contains('30'));
+    });
+
+    test('een rij houdt precies zoveel cellen als de kolomspec', () {
+      // De rij eindigde op ' & ' (elke cel schrijft die scheiding áchter zich)
+      // en het opruimpatroon ankerde op een `&` als láátste teken. Resultaat:
+      // `Naam & Leeftijd &  \\` — één cel te veel voor `{ll}`, wat LaTeX niet
+      // scheef rendert maar weigert ("Extra alignment tab"). De test hierboven
+      // stond al die tijd groen, want `contains` ziet het verschil niet.
+      final out = markdownToLatex(
+        '| Naam | Leeftijd |\n| --- | --- |\n| Jan | 30 |\n',
+      );
+      expect(out, contains('\\textbf{Naam} & \\textbf{Leeftijd} \\\\'));
+      expect(out, contains('Jan & 30 \\\\'));
+      expect(out, isNot(contains('& \\\\')));
+      for (final line in out.split('\n').where((l) => l.contains('&'))) {
+        expect(
+          '&'.allMatches(line).length,
+          1,
+          reason: 'rij "$line" hoort één scheiding te dragen bij twee kolommen',
+        );
+      }
+    });
+
+    test(
+      'de midrule staat onder de koprij, niet onder de eerste gegevensrij',
+      () {
+        final out = markdownToLatex(
+          '| Naam | Leeftijd |\n| --- | --- |\n| Jan | 30 |\n| Piet | 25 |\n',
+        );
+        final lines = out.split('\n');
+        expect(
+          lines.indexWhere((l) => l.contains(r'\midrule')),
+          lines.indexWhere((l) => l.contains(r'\textbf{Naam}')) + 1,
+          reason:
+              'de scheiding hing aan "de rij ná de eerste" en stond dus onder Jan',
+        );
+      },
+    );
+
+    test('boxed: verticale randen én een lijn onder elke rij', () {
+      final out = markdownToLatex(
+        '| A | B |\n| --- | --- |\n| 1 | 2 |\n| 3 | 4 |\n',
+        tableBorderStyle: TableBorderStyle.boxed,
+      );
+      expect(out, contains(r'\begin{tabular}{|l|l|}'));
+      // Boven de kop, onder de kop, en onder elk van de twee gegevensrijen.
+      expect(RegExp(r'\\hline').allMatches(out).length, 4);
+      expect(out, isNot(contains('\\hline\n\\hline')));
+      expect(out, isNot(contains(r'\toprule')));
+    });
+
+    test('none: een tabel zonder een enkele lijn', () {
+      final out = markdownToLatex(
+        '| A | B |\n| --- | --- |\n| 1 | 2 |\n',
+        tableBorderStyle: TableBorderStyle.none,
+      );
+      expect(out, contains(r'\begin{tabular}{ll}'));
+      for (final rule in [
+        r'\hline',
+        r'\toprule',
+        r'\midrule',
+        r'\bottomrule',
+      ]) {
+        expect(out, isNot(contains(rule)));
+      }
+    });
+
+    test('een `<!-- toc -->` wordt \\tableofcontents', () {
+      final out = markdownToLatex('<!-- toc -->\n\n# Een\n\n## Twee\n');
+      expect(out, contains(r'\tableofcontents'));
+      expect(out, isNot(contains('<!-- toc -->')));
+      // Niet als tekst: de escaper maakte er `\textbackslash{}tableofcontents`
+      // van, en de lezer kreeg dat woord op papier in plaats van een
+      // inhoudsopgave.
+      expect(out, isNot(contains(r'\textbackslash{}tableofcontents')));
+      expect(out, isNot(contains('OCIDECK')));
     });
 
     test('fenced code block wordt lstlisting', () {

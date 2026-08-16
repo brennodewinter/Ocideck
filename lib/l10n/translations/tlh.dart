@@ -1749,6 +1749,36 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Boven (mm)': 'Dung (mm)',
+  'Onder (mm)': 'bIng (mm)',
+  'Links (mm)': 'poS (mm)',
+  'Rechts (mm)': 'nIH (mm)',
+  'Smal (860 px)': '\'ob (860 px)',
+  'Standaard (1100 px)': 'motlh (1100 px)',
+  'Breed (1400 px)': '\'aD (1400 px)',
+  'Volledige breedte': '\'aD naQ',
+  'Paginamaat': 'nav \'aD',
+  'Randstijl': 'HeH Segh',
+  'Tabelstijl': 'romuS Segh',
+  'Geen randen': 'HeH Hutlh',
+  'Lijnen (horizontaal)': 'tlhegh (yor)',
+  'Omrand (volledig)': 'HeH naQ',
+  'Zebrastrepen (om en om)': 'tlhegh Hutlhbe\' (rIn\'a\')',
+  'Accentlijn onder koprij': 'nach tlhegh bIng',
+  'Tabel randkleur': 'romuS HeH rItlh',
+  'Tabel zebrakleur': 'romuS tlhegh rItlh',
+  'Celopvulling: {px} px': 'yotlh Sar: {px} px',
+  'Inhoudsopgave': 'meyQ',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'meyQ — nav tlhIHmey chel \'e\' yIchel.',
+  'Schrijfbreedte editor': 'ghItlhwI\' \'aD',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'nuq \'aD ghItlhmeH Daq visual mode. \'ob tam ja\'chuq, \'aD law\' jIH lo\'.',
+  'Pagina-instellingen export': 'nav choH ngeH',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'nav \'aD (ISO 216) je HeH ngeH HTML, LaTeX je PDF.',
+  '{maat} (liggend)': '{maat} (yor)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'nab',
   'Afbeelding aanpassen': 'nagh luch',
   'Groot bestand': 'tIn mIch',

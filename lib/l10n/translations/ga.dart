@@ -1809,6 +1809,36 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Boven (mm)': 'Barr (mm)',
+  'Onder (mm)': 'Bun (mm)',
+  'Links (mm)': 'Ar chlé (mm)',
+  'Rechts (mm)': 'Ar dheis (mm)',
+  'Smal (860 px)': 'Cúng (860 px)',
+  'Standaard (1100 px)': 'Réamhshocrú (1100 px)',
+  'Breed (1400 px)': 'Leathan (1400 px)',
+  'Volledige breedte': 'Lánleithead',
+  'Paginamaat': 'Méid an leathanaigh',
+  'Randstijl': 'Stíl imlíne',
+  'Tabelstijl': 'Stíl tábla',
+  'Geen randen': 'Gan imlíne',
+  'Lijnen (horizontaal)': 'Línte (cothrománach)',
+  'Omrand (volledig)': 'Faoi bhosca (iomlán)',
+  'Zebrastrepen (om en om)': 'Riabha séabra (gach re ceann)',
+  'Accentlijn onder koprij': 'Líne aibhsithe faoin gceanntásc',
+  'Tabel randkleur': 'Dath imlíne an tábla',
+  'Tabel zebrakleur': 'Dath riabha an tábla',
+  'Celopvulling: {px} px': 'Stuáil chille: {px} px',
+  'Inhoudsopgave': 'Clár ábhair',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Clár ábhair — cuir ceannteidil leis chun é a líonadh.',
+  'Schrijfbreedte editor': 'Leithead scríofa an eagarthóra',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Cé chomh leathan is atá an spás scríofa sa mhód amhairc. Léitear an ceann cúng go socair, úsáideann an ceann leathan níos mó den scáileán.',
+  'Pagina-instellingen export': 'Socruithe leathanaigh don easpórtáil',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Méid an leathanaigh (ISO 216) agus imill do phriontáil HTML, LaTeX agus easpórtáil PDF.',
+  '{maat} (liggend)': '{maat} (tírdhreach)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Dearadh',
   'Afbeelding aanpassen': 'Coigeartaigh íomhá',
   'Groot bestand': 'Comhad mór',

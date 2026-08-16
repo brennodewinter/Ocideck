@@ -1765,6 +1765,36 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Boven (mm)': 'Ülal (mm)',
+  'Onder (mm)': 'All (mm)',
+  'Links (mm)': 'Vasak (mm)',
+  'Rechts (mm)': 'Parem (mm)',
+  'Smal (860 px)': 'Kitsas (860 px)',
+  'Standaard (1100 px)': 'Vaikimisi (1100 px)',
+  'Breed (1400 px)': 'Lai (1400 px)',
+  'Volledige breedte': 'Täislaius',
+  'Paginamaat': 'Lehe suurus',
+  'Randstijl': 'Äärise stiil',
+  'Tabelstijl': 'Tabeli stiil',
+  'Geen randen': 'Ääristeta',
+  'Lijnen (horizontaal)': 'Jooned (horisontaalsed)',
+  'Omrand (volledig)': 'Raamitud (täielik)',
+  'Zebrastrepen (om en om)': 'Sebratriibud (üle rea)',
+  'Accentlijn onder koprij': 'Rõhujoon päiserea all',
+  'Tabel randkleur': 'Tabeli äärise värv',
+  'Tabel zebrakleur': 'Tabeli triipude värv',
+  'Celopvulling: {px} px': 'Lahtri polsterdus: {px} px',
+  'Inhoudsopgave': 'Sisukord',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Sisukord — lisa pealkirju, et see täita.',
+  'Schrijfbreedte editor': 'Redaktori kirjutuslaius',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Kui lai on kirjutusala visuaalses režiimis. Kitsas loeb rahulikult, lai kasutab rohkem ekraani.',
+  'Pagina-instellingen export': 'Lehe seaded ekspordiks',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Lehe suurus (ISO 216) ja veerised HTML-i printimiseks, LaTeXi ja PDF-ekspordiks.',
+  '{maat} (liggend)': '{maat} (rõhtpaigutus)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Kujundus',
   'Afbeelding aanpassen': 'Kohanda pilti',
   'Groot bestand': 'Suur fail',

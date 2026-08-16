@@ -95,6 +95,39 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 /// uit hoeveel stukken dit bestaat.
 String exportBaseCss() => '$_structuralCss\n$_reportingCss\n$_menuCss';
 
+/// De rand-CSS voor een document-tabelcel, afgeleid uit de
+/// [ThemeProfile.tableBorderStyle] en [ThemeProfile.tableBorderColor].
+/// Feature 5: lined → alleen horizontale lijnen, boxed → volledig omkaderd,
+/// none → geen randen.
+String _documentTableBorderCss(ThemeProfile t) {
+  final border = t.tableBorderColor;
+  return switch (t.tableBorderStyle) {
+    TableBorderStyle.boxed => 'border:1px solid $border;',
+    TableBorderStyle.lined => 'border-bottom:1px solid ${border}80;',
+    TableBorderStyle.none => '',
+  };
+}
+
+/// Celopvulling als CSS `padding`-waarde, afgeleid uit
+/// [ThemeProfile.tableCellPaddingPx].
+String _documentTableCellPadding(ThemeProfile t) {
+  final p = t.tableCellPaddingPx;
+  return '${(p * 0.6).toStringAsFixed(1)}px ${(p + 4).toStringAsFixed(1)}px';
+}
+
+/// Zebrastrepen voor oneven body-rijen, alleen wanneer
+/// [ThemeProfile.tableZebraStriped] aanstaat.
+String _documentTableZebraCss(ThemeProfile t) => t.tableZebraStriped
+    ? '.document tbody tr:nth-child(even){background:${t.tableZebraColor}}'
+    : '';
+
+/// Accentkleurige onderrand onder de koprij, alleen wanneer
+/// [ThemeProfile.tableAccentHeaderBorder] aanstaat.
+String _documentTableAccentHeaderCss(ThemeProfile t) =>
+    t.tableAccentHeaderBorder
+    ? '.document thead th{border-bottom:2px solid ${t.accentColor}}'
+    : '';
+
 /// De thema-afhankelijke opmaak van de doorlopende documentmodus
 /// (`<section class="document">`, §11.2): dezelfde kleuren en letter als een
 /// dia, maar als leesbare pagina — een redelijke kolombreedte, comfortabele
@@ -134,8 +167,12 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
       '.document blockquote{border-left:4px solid ${t.accentColor};margin:.6em 0;'
       'padding-left:16px;opacity:.85}'
       '.document th{background:${t.tableHeaderBackgroundColor};'
-      'color:${t.tableHeaderTextColor};border:1px solid #ccc;padding:6px 12px}'
-      '.document td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px}'
+      'color:${t.tableHeaderTextColor};${_documentTableBorderCss(t)}'
+      'padding:${_documentTableCellPadding(t)}}'
+      '.document td{color:${t.tableTextColor};${_documentTableBorderCss(t)}'
+      'padding:${_documentTableCellPadding(t)}}'
+      '${_documentTableZebraCss(t)}'
+      '${_documentTableAccentHeaderCss(t)}'
       '.document-header,.document-footer{display:flex;align-items:center;gap:14px;'
       'min-height:42px;color:$bandText;background:$bandBackground;font-size:12px}'
       '.document-header{border-bottom:1px solid ${t.accentColor}8c;margin-bottom:24px}'
@@ -220,3 +257,14 @@ const _reportingCss = r'''
 .slide .fs-count{font-size:26px;font-weight:700;margin:.25em 0 0}
 .slide .fs-band{font-size:19px;font-weight:600;opacity:.65;margin:0;text-align:center}
 ''';
+
+/// Feature 3: de `@page`-regel voor paginamaat en marges. Top-level CSS
+/// (buiten `@media print` — `@page` is zelf al een print-regel). Leeg wanneer
+/// geen van beide is gezet, zodat de browser-default geldt.
+String _pageAtRuleCss(PageSizeSpec? size, PageMargins? margins) {
+  if (size == null && margins == null) return '';
+  final parts = <String>[];
+  if (size != null) parts.add('size:${size.cssName}');
+  if (margins != null) parts.add('margin:${margins.cssMargin}');
+  return '@page{${parts.join(';')}}';
+}

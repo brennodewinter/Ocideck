@@ -729,6 +729,36 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Boven (mm)': 'Sopra (mm)',
+  'Onder (mm)': 'Sotto (mm)',
+  'Links (mm)': 'Sinistra (mm)',
+  'Rechts (mm)': 'Destra (mm)',
+  'Smal (860 px)': 'Stretto (860 px)',
+  'Standaard (1100 px)': 'Predefinito (1100 px)',
+  'Breed (1400 px)': 'Largo (1400 px)',
+  'Volledige breedte': 'Larghezza piena',
+  'Paginamaat': 'Formato pagina',
+  'Randstijl': 'Stile bordo',
+  'Tabelstijl': 'Stile tabella',
+  'Geen randen': 'Nessun bordo',
+  'Lijnen (horizontaal)': 'Linee (orizzontali)',
+  'Omrand (volledig)': 'Riquadrato (completo)',
+  'Zebrastrepen (om en om)': 'Righe zebrate (alternate)',
+  'Accentlijn onder koprij': 'Linea di accento sotto l’intestazione',
+  'Tabel randkleur': 'Colore bordo tabella',
+  'Tabel zebrakleur': 'Colore righe tabella',
+  'Celopvulling: {px} px': 'Spaziatura cella: {px} px',
+  'Inhoudsopgave': 'Indice',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Indice — aggiungi titoli per riempirlo.',
+  'Schrijfbreedte editor': 'Larghezza di scrittura dell’editor',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Quanto è larga l’area di scrittura in modalità visiva. Stretta si legge con calma, larga usa più schermo.',
+  'Pagina-instellingen export': 'Impostazioni di pagina per l’esportazione',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Formato pagina (ISO 216) e margini per stampa HTML, LaTeX ed esportazione PDF.',
+  '{maat} (liggend)': '{maat} (orizzontale)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Formato',
   'Afbeelding aanpassen': 'Regola immagine',
   'Groot bestand': 'File grande',

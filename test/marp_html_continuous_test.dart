@@ -3,13 +3,14 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 
 /// Reads the vendored libraries straight from the repo (tests run at the root).
 Future<String> _diskLoader(String asset) => File(asset).readAsString();
 
 /// Body met een uniek token in elke sectie, een `---`-thematische breuk en een
-/// GFM-tabel — genoeg om te bewijzen dat de hele stroom in één payload beландt.
+/// GFM-tabel — genoeg om te bewijzen dat de hele stroom in één payload belandt.
 const _md = '''
 ---
 marp: true
@@ -193,6 +194,75 @@ void main() {
         expect(style, isNot(contains('@font-face{font-family:\'X')));
       },
     );
+  });
+
+  group('paginamaat, marges en tabelstijl in de export-CSS', () {
+    test('zonder paginamaat en marges staat er geen @page-regel', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(_md, continuous: true);
+      expect(html, isNot(contains('@page{')));
+    });
+
+    test('paginamaat en marges landen in één @page-regel', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(
+        _md,
+        continuous: true,
+        pageSize: PageSizeSpec.a4Landscape,
+        pageMargins: const PageMargins(
+          topMm: 30,
+          bottomMm: 30,
+          leftMm: 15,
+          rightMm: 15,
+        ),
+      );
+      expect(
+        html,
+        contains('@page{size:A4 landscape;margin:30mm 15mm 30mm 15mm}'),
+      );
+    });
+
+    test('de tabelstijl van het profiel staat in de document-CSS', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      const profile = ThemeProfile(
+        name: 'Huisstijl',
+        tableZebraStriped: true,
+        tableZebraColor: '#EEF2FF',
+        tableBorderStyle: TableBorderStyle.lined,
+        tableBorderColor: '#1E293B',
+        tableCellPaddingPx: 10,
+        tableAccentHeaderBorder: true,
+        accentColor: '#003399',
+      );
+      final html = await service.build(_md, continuous: true, theme: profile);
+      // lined: alleen een onderlijn per cel, geen kader.
+      expect(html, contains('border-bottom:1px solid #1E293B80;'));
+      // Celopvulling: verticaal 0.6×, horizontaal +4 — dezelfde verhouding als
+      // de Flutter-weergave (`EdgeInsets.symmetric(horizontal: pad + 4,
+      // vertical: pad * 0.6)`), zodat beide werelden dezelfde tabel tekenen.
+      expect(html, contains('padding:6.0px 14.0px'));
+      // Zebra op elke tweede body-rij — `r.isEven` in de Flutter-tabel raakt
+      // dezelfde rijen (rij 0 is daar de koprij).
+      expect(
+        html,
+        contains('.document tbody tr:nth-child(even){background:#EEF2FF}'),
+      );
+      expect(
+        html,
+        contains('.document thead th{border-bottom:2px solid #003399}'),
+      );
+    });
+
+    test('een profiel zonder randen levert geen border-CSS op', () async {
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      const profile = ThemeProfile(
+        name: 'Kaal',
+        tableBorderStyle: TableBorderStyle.none,
+      );
+      final html = await service.build(_md, continuous: true, theme: profile);
+      final td = RegExp(r'\.document td\{[^}]*\}').firstMatch(html)!.group(0)!;
+      expect(td, isNot(contains('border')));
+    });
   });
 
   test('build(continuous: false) laat de dia-modus onaangetast', () async {

@@ -1791,6 +1791,36 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Boven (mm)': 'Зверху (mm)',
+  'Onder (mm)': 'Знизу (mm)',
+  'Links (mm)': 'Ліворуч (mm)',
+  'Rechts (mm)': 'Праворуч (mm)',
+  'Smal (860 px)': 'Вузький (860 px)',
+  'Standaard (1100 px)': 'Стандартний (1100 px)',
+  'Breed (1400 px)': 'Широкий (1400 px)',
+  'Volledige breedte': 'Повна ширина',
+  'Paginamaat': 'Розмір сторінки',
+  'Randstijl': 'Стиль рамки',
+  'Tabelstijl': 'Стиль таблиці',
+  'Geen randen': 'Без рамок',
+  'Lijnen (horizontaal)': 'Лінії (горизонтальні)',
+  'Omrand (volledig)': 'У рамці (повній)',
+  'Zebrastrepen (om en om)': 'Смуги зебри (через рядок)',
+  'Accentlijn onder koprij': 'Акцентна лінія під рядком заголовка',
+  'Tabel randkleur': 'Колір рамки таблиці',
+  'Tabel zebrakleur': 'Колір смуг таблиці',
+  'Celopvulling: {px} px': 'Відступ у комірці: {px} px',
+  'Inhoudsopgave': 'Зміст',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Зміст — додайте заголовки, щоб його заповнити.',
+  'Schrijfbreedte editor': 'Ширина письма в редакторі',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Наскільки широка область письма у візуальному режимі. Вузька читається спокійно, широка використовує більше екрана.',
+  'Pagina-instellingen export': 'Параметри сторінки для експорту',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Розмір сторінки (ISO 216) і поля для друку HTML, LaTeX і експорту PDF.',
+  '{maat} (liggend)': '{maat} (альбомна)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Оформлення',
   'Afbeelding aanpassen': 'Налаштувати зображення',
   'Groot bestand': 'Великий файл',

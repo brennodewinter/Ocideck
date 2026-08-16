@@ -1801,6 +1801,36 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Boven (mm)': 'Επάνω (mm)',
+  'Onder (mm)': 'Κάτω (mm)',
+  'Links (mm)': 'Αριστερά (mm)',
+  'Rechts (mm)': 'Δεξιά (mm)',
+  'Smal (860 px)': 'Στενό (860 px)',
+  'Standaard (1100 px)': 'Προεπιλογή (1100 px)',
+  'Breed (1400 px)': 'Πλατύ (1400 px)',
+  'Volledige breedte': 'Πλήρες πλάτος',
+  'Paginamaat': 'Μέγεθος σελίδας',
+  'Randstijl': 'Στυλ περιγράμματος',
+  'Tabelstijl': 'Στυλ πίνακα',
+  'Geen randen': 'Χωρίς περίγραμμα',
+  'Lijnen (horizontaal)': 'Γραμμές (οριζόντιες)',
+  'Omrand (volledig)': 'Με πλαίσιο (πλήρες)',
+  'Zebrastrepen (om en om)': 'Ρίγες ζέβρας (εναλλάξ)',
+  'Accentlijn onder koprij': 'Γραμμή τονισμού κάτω από την κεφαλίδα',
+  'Tabel randkleur': 'Χρώμα περιγράμματος πίνακα',
+  'Tabel zebrakleur': 'Χρώμα ριγών πίνακα',
+  'Celopvulling: {px} px': 'Εσωτερικό περιθώριο κελιού: {px} px',
+  'Inhoudsopgave': 'Πίνακας περιεχομένων',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Πίνακας περιεχομένων — προσθέστε επικεφαλίδες για να τον γεμίσετε.',
+  'Schrijfbreedte editor': 'Πλάτος γραφής του επεξεργαστή',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Πόσο πλατιά είναι η περιοχή γραφής στην οπτική λειτουργία. Η στενή διαβάζεται ήρεμα, η πλατιά χρησιμοποιεί περισσότερη οθόνη.',
+  'Pagina-instellingen export': 'Ρυθμίσεις σελίδας για εξαγωγή',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Μέγεθος σελίδας (ISO 216) και περιθώρια για εκτύπωση HTML, LaTeX και εξαγωγή PDF.',
+  '{maat} (liggend)': '{maat} (οριζόντια)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Μορφοποίηση',
   'Afbeelding aanpassen': 'Προσαρμογή εικόνας',
   'Groot bestand': 'Μεγάλο αρχείο',

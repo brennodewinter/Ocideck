@@ -244,6 +244,52 @@ extension _SettingsColors on _SettingsDialogState {
         contentPadding: EdgeInsets.zero,
         dense: true,
       ),
+      ..._tableColorSettings(contrast),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'titleBackgroundColor',
+        _colorSetting(
+          l10n.d('Titelachtergrond'),
+          _themeProfile.titleBackgroundColor,
+          (v) =>
+              _themeProfile = _themeProfile.copyWith(titleBackgroundColor: v),
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'titleTextColor',
+        _colorWithContrastWarning(
+          _colorSetting(
+            l10n.d('Titeltekst'),
+            _themeProfile.titleTextColor,
+            (v) => _themeProfile = _themeProfile.copyWith(titleTextColor: v),
+          ),
+          // The analyser checks the title colour against both the title band and
+          // (via a section probe slide) the section background; either failing
+          // surfaces here.
+          'titleTextColor',
+          contrast,
+        ),
+      ),
+      const SizedBox(height: 12),
+      _themeColorAnchor(
+        'sectionBackgroundColor',
+        _colorSetting(
+          l10n.d('Sectieachtergrond'),
+          _themeProfile.sectionBackgroundColor,
+          (v) =>
+              _themeProfile = _themeProfile.copyWith(sectionBackgroundColor: v),
+        ),
+      ),
+    ];
+  }
+
+  /// De tabelkleuren en de tabelstijl. Los van de checklistkleuren waar ze
+  /// eerst bij in stonden: met de zes stijlvelden erbij liep dat blok over de
+  /// methodelengte-grens heen, en het zijn twee onderwerpen.
+  List<Widget> _tableColorSettings(Map<String, SlideQualityIssue> contrast) {
+    final l10n = context.l10n;
+    return [
       const SizedBox(height: 12),
       _themeColorAnchor(
         'tableTextColor',
@@ -283,41 +329,27 @@ extension _SettingsColors on _SettingsDialogState {
         ),
       ),
       const SizedBox(height: 12),
+      // Feature 5: tabel look-and-feel — zebrastrepen, randstijl, celopvulling,
+      // accentkoprand. Huisstijl die voor alle tabellen geldt.
       _themeColorAnchor(
-        'titleBackgroundColor',
+        'tableBorderColor',
         _colorSetting(
-          l10n.d('Titelachtergrond'),
-          _themeProfile.titleBackgroundColor,
-          (v) =>
-              _themeProfile = _themeProfile.copyWith(titleBackgroundColor: v),
+          l10n.d('Tabel randkleur'),
+          _themeProfile.tableBorderColor,
+          (v) => _themeProfile = _themeProfile.copyWith(tableBorderColor: v),
         ),
       ),
       const SizedBox(height: 12),
       _themeColorAnchor(
-        'titleTextColor',
-        _colorWithContrastWarning(
-          _colorSetting(
-            l10n.d('Titeltekst'),
-            _themeProfile.titleTextColor,
-            (v) => _themeProfile = _themeProfile.copyWith(titleTextColor: v),
-          ),
-          // The analyser checks the title colour against both the title band and
-          // (via a section probe slide) the section background; either failing
-          // surfaces here.
-          'titleTextColor',
-          contrast,
+        'tableZebraColor',
+        _colorSetting(
+          l10n.d('Tabel zebrakleur'),
+          _themeProfile.tableZebraColor,
+          (v) => _themeProfile = _themeProfile.copyWith(tableZebraColor: v),
         ),
       ),
       const SizedBox(height: 12),
-      _themeColorAnchor(
-        'sectionBackgroundColor',
-        _colorSetting(
-          l10n.d('Sectieachtergrond'),
-          _themeProfile.sectionBackgroundColor,
-          (v) =>
-              _themeProfile = _themeProfile.copyWith(sectionBackgroundColor: v),
-        ),
-      ),
+      _tableStyleControls(l10n),
     ];
   }
 
@@ -877,4 +909,7 @@ extension _SettingsColors on _SettingsDialogState {
       ),
     );
   }
+
+  /// Feature 5: de niet-kleur tabelstijl-controls — randstijl (dropdown),
+  /// zebrastrepen (toggle), accentkoprand (toggle) en celopvulling (slider).
 }

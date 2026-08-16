@@ -915,6 +915,36 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Boven (mm)': 'Top (mm)',
+  'Onder (mm)': 'Bottom (mm)',
+  'Links (mm)': 'Left (mm)',
+  'Rechts (mm)': 'Right (mm)',
+  'Smal (860 px)': 'Narrow (860 px)',
+  'Standaard (1100 px)': 'Default (1100 px)',
+  'Breed (1400 px)': 'Wide (1400 px)',
+  'Volledige breedte': 'Full width',
+  'Paginamaat': 'Page size',
+  'Randstijl': 'Border style',
+  'Tabelstijl': 'Table style',
+  'Geen randen': 'No borders',
+  'Lijnen (horizontaal)': 'Lines (horizontal)',
+  'Omrand (volledig)': 'Boxed (full)',
+  'Zebrastrepen (om en om)': 'Zebra stripes (alternating)',
+  'Accentlijn onder koprij': 'Accent line under header row',
+  'Tabel randkleur': 'Table border colour',
+  'Tabel zebrakleur': 'Table zebra colour',
+  'Celopvulling: {px} px': 'Cell padding: {px} px',
+  'Inhoudsopgave': 'Table of contents',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Table of contents — add headings to fill it.',
+  'Schrijfbreedte editor': 'Editor writing width',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'How wide the writing area is in visual mode. Narrow reads calmly, wide uses more of the screen.',
+  'Pagina-instellingen export': 'Page settings for export',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Page size (ISO 216) and margins for HTML print, LaTeX and PDF export.',
+  '{maat} (liggend)': '{maat} (landscape)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Design',
   'Groot bestand': 'Large file',
   'Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.':

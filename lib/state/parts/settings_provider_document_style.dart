@@ -61,3 +61,60 @@ Future<void> _applyDocumentChapterPageBreak(
     (prefs) => prefs.setBool('documentChapterPageBreak', enabled),
   );
 }
+
+/// Documentmodus: stel de maximale schrijfbreedte van de visuele editor in
+/// (px), of `null` voor volledige breedte. Feature 2.
+Future<void> _applyDocumentEditorMaxWidth(
+  SettingsNotifier notifier,
+  double? width,
+) {
+  notifier.currentState = width == null
+      ? notifier.currentState.copyWith(clearDocumentEditorMaxWidth: true)
+      : notifier.currentState.copyWith(documentEditorMaxWidth: width);
+  // `null` (volledige breedte) wordt als 0 weggeschreven, niet als een
+  // verwijderde sleutel: een ontbrekende sleutel is "nooit gekozen" en leest bij
+  // het opstarten terug als de standaard 1100. Wie volledige breedte koos, kreeg
+  // na een herstart stilzwijgend weer een smalle editor.
+  return notifier._persist(
+    'documentEditorMaxWidth',
+    (prefs) => prefs.setDouble('documentEditorMaxWidth', width ?? 0),
+  );
+}
+
+/// De opgeslagen schrijfbreedte terug: `0` betekent volledige breedte (zie
+/// [_applyDocumentEditorMaxWidth]), een ontbrekende sleutel betekent "nog nooit
+/// gekozen" en krijgt de standaard van 1100 px.
+double? _readDocumentEditorMaxWidth(SharedPreferences prefs) =>
+    switch (prefs.getDouble('documentEditorMaxWidth')) {
+      null => 1100,
+      <= 0 => null,
+      final width => width,
+    };
+
+/// Documentmodus: stel de paginamaat voor export in (ISO-216). Feature 3.
+Future<void> _applyDocumentPageSize(
+  SettingsNotifier notifier,
+  PageSizeSpec spec,
+) {
+  notifier.currentState = notifier.currentState.copyWith(
+    documentPageSize: spec,
+  );
+  return notifier._persist(
+    'documentPageSize',
+    (prefs) => prefs.setString('documentPageSize', spec.id),
+  );
+}
+
+/// Documentmodus: stel de paginamarges voor export in. Feature 3.
+Future<void> _applyDocumentPageMargins(
+  SettingsNotifier notifier,
+  PageMargins margins,
+) {
+  notifier.currentState = notifier.currentState.copyWith(
+    documentPageMargins: margins,
+  );
+  return notifier._persist(
+    'documentPageMargins',
+    (prefs) => prefs.setString('documentPageMargins', margins.id),
+  );
+}

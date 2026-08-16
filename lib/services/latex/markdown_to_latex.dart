@@ -16,14 +16,38 @@
 
 import 'package:markdown/markdown.dart' as md;
 
+import '../../models/settings.dart' show TableBorderStyle;
+
 /// Zet [markdown] (GFM) om in een LaTeX-fragment.
 ///
 /// De uitvoer is platte LaTeX zonder preamble. Bedoeld om in een
 /// `\documentclass{article}`- of `beamer`-document ingebed te worden door de
 /// wrappers in `latex_preamble.dart`.
-String markdownToLatex(String markdown, {bool chapterPageBreak = false}) {
+///
+/// [tableBorderStyle] bepaalt de randvorm van tabellen (feature 5):
+/// [TableBorderStyle.lined] → booktabs (`\toprule`/`\midrule`/`\bottomrule`,
+/// de standaard), [TableBorderStyle.boxed] → volledig omkaderd
+/// (`|l|l|…|` + `\hline`), [TableBorderStyle.none] → geen regels.
+String markdownToLatex(
+  String markdown, {
+  bool chapterPageBreak = false,
+  TableBorderStyle tableBorderStyle = TableBorderStyle.lined,
+}) {
   if (markdown.trim().isEmpty) return '';
-  final protected = _MathProtector.protect(markdown);
+  // Feature 4: `<!-- toc -->` → `\tableofcontents` (LaTeX genereert zelf de
+  // inhoudsopgave bij compilatie). De marker wordt vóór de parse vervangen,
+  // zodat de markdown-package het commentaar niet als tekst stript — maar niet
+  // meteen door het commando zelf: dat komt als gewone tekst door de parser en
+  // wordt dan geëscaped tot `\textbackslash{}tableofcontents`, dus letterlijk
+  // die tekst in het document in plaats van een inhoudsopgave. Er gaat een
+  // sentinel zonder escape-gevoelige tekens doorheen, die na de conversie het
+  // commando wordt.
+  const tocSentinel = 'OCIDECKTABLEOFCONTENTSMARKER';
+  final withToc = markdown.replaceAll(
+    RegExp(r'^<!-- toc -->\s*$', multiLine: true),
+    tocSentinel,
+  );
+  final protected = _MathProtector.protect(withToc);
   final document = md.Document(
     encodeHtml: false,
     extensionSet: md.ExtensionSet.gitHubFlavored,
@@ -32,11 +56,15 @@ String markdownToLatex(String markdown, {bool chapterPageBreak = false}) {
   final visitor = _LatexNodeVisitor(
     mathBlocks: protected.blocks,
     chapterPageBreak: chapterPageBreak,
+    tableBorderStyle: tableBorderStyle,
   );
   for (final node in nodes) {
     node.accept(visitor);
   }
-  return visitor.output.toString().trimRight();
+  return visitor.output
+      .toString()
+      .replaceAll(tocSentinel, '\\tableofcontents')
+      .trimRight();
 }
 
 /// Zet een inline-fragment [markdown] om in LaTeX (geen blok-elementen).
@@ -62,12 +90,16 @@ class _LatexNodeVisitor implements md.NodeVisitor {
   _LatexNodeVisitor({
     this._mathBlocks = const {},
     this.chapterPageBreak = false,
+    this.tableBorderStyle = TableBorderStyle.lined,
   });
 
   final StringBuffer output = StringBuffer();
 
   /// Of elk hoofdstuk (H1) op een nieuwe pagina begint (instelling).
   final bool chapterPageBreak;
+
+  /// De randstijl van tabellen (feature 5).
+  final TableBorderStyle tableBorderStyle;
 
   /// Of we al een hoofdstuk zijn tegengekomen — het eerste krijgt geen `\newpage`.
   bool _seenChapter = false;
@@ -281,7 +313,6 @@ class _LatexNodeVisitor implements md.NodeVisitor {
     _tableRows.clear();
     _tableColCount = 0;
     _inTableHead = false;
-    _tableHeadEmitted = false;
   }
 
   void _beginTableRow(md.Element element) {
@@ -337,12 +368,24 @@ class _LatexNodeVisitor implements md.NodeVisitor {
         _buf.write('}');
 
       case 'table':
-        // Spuit de tabel uit met de juiste kolomspecificatie.
-        final spec = 'l' * _tableColCount;
+        // Spuit de tabel uit met de juiste kolomspecificatie en randstijl.
+        final spec = switch (tableBorderStyle) {
+          TableBorderStyle.boxed => '|${'l|' * _tableColCount}',
+          _ => 'l' * _tableColCount,
+        };
         output.write('\\begin{tabular}{$spec}\n');
-        output.write('\\toprule\n');
+        if (tableBorderStyle == TableBorderStyle.boxed) {
+          output.write('\\hline\n');
+        } else if (tableBorderStyle == TableBorderStyle.lined) {
+          output.write('\\toprule\n');
+        }
         output.write(_tableRows);
-        output.write('\\bottomrule\n');
+        // Bij `boxed` sluit elke rij zelf al met een `\hline` af (zie 'tr'),
+        // dus de onderrand staat er dan al — nog een regel geeft een dubbele
+        // lijn onder de tabel.
+        if (tableBorderStyle == TableBorderStyle.lined) {
+          output.write('\\bottomrule\n');
+        }
         output.write('\\end{tabular}\n');
       case 'thead':
         // Niets — de header/body-scheiding (\midrule) wordt bij de eerste
@@ -351,15 +394,29 @@ class _LatexNodeVisitor implements md.NodeVisitor {
       case 'tbody':
         break;
       case 'tr':
-        // Ruim de trailing ' &' op en sluit de rij af.
-        final row = _rowBuf.toString();
-        final cleaned = row.replaceAll(RegExp(r' ?&$'), '');
-        if (_tableRows.isNotEmpty && _tableHeadEmitted == false) {
-          _tableRows.write('$cleaned \\\\\n\\midrule\n');
-          _tableHeadEmitted = true;
-        } else {
-          _tableRows.write('$cleaned \\\\\n');
-        }
+        // Ruim de afsluitende celscheiding op en sluit de rij af. Elke cel
+        // schrijft ' & ' áchter zich, dus de rij eindigt op ' & ' — mét spatie.
+        // Het oude patroon (' ?&$') ankerde op de `&` als laatste teken en
+        // trof daardoor niets: elke rij hield een lege cel over (`A & B &  \\`),
+        // en dat is er één te veel voor de kolomspec. Geen scheve tabel maar
+        // een compileerfout ("Extra alignment tab") op elke geëxporteerde
+        // tabel.
+        final cleaned = _rowBuf.toString().replaceFirst(
+          RegExp(r'\s*&\s*$'),
+          '',
+        );
+        // De koprij is de rij die binnen `<thead>` sluit — niet "de rij ná de
+        // eerste". Op die aanname stond de `\midrule` een rij te laag: onder de
+        // eerste gegevensrij in plaats van onder de kop.
+        final rule = switch ((tableBorderStyle, _inTableHead)) {
+          // `boxed` betekent in CSS: elke cel een rand rondom. In LaTeX geven
+          // de `|` in de kolomspec alleen de verticale randen; zonder een
+          // `\hline` per rij kreeg de body geen enkele horizontale lijn.
+          (TableBorderStyle.boxed, _) => '\\hline\n',
+          (TableBorderStyle.lined, true) => '\\midrule\n',
+          _ => '',
+        };
+        _tableRows.write('$cleaned \\\\\n$rule');
       case 'th':
       case 'td':
         if (_inTableHead) {
@@ -376,7 +433,6 @@ class _LatexNodeVisitor implements md.NodeVisitor {
   final StringBuffer _tableRows = StringBuffer();
   int _tableColCount = 0;
   bool _inTableHead = false;
-  bool _tableHeadEmitted = false;
 }
 
 bool _isCell(md.Node n) => n is md.Element && (n.tag == 'th' || n.tag == 'td');

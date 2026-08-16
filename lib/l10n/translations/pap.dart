@@ -733,6 +733,36 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Boven (mm)': 'Ariba (mm)',
+  'Onder (mm)': 'Abou (mm)',
+  'Links (mm)': 'Robes (mm)',
+  'Rechts (mm)': 'Drechi (mm)',
+  'Smal (860 px)': 'Smal (860 px)',
+  'Standaard (1100 px)': 'Standard (1100 px)',
+  'Breed (1400 px)': 'Hanchu (1400 px)',
+  'Volledige breedte': 'Hanchura kompletu',
+  'Paginamaat': 'Tamaño di página',
+  'Randstijl': 'Stil di rand',
+  'Tabelstijl': 'Stil di tabel',
+  'Geen randen': 'Sin rand',
+  'Lijnen (horizontaal)': 'Liñanan (horizontal)',
+  'Omrand (volledig)': 'Ku rand (kompletu)',
+  'Zebrastrepen (om en om)': 'Rayanan zebra (alternando)',
+  'Accentlijn onder koprij': 'Liña di akséntu bou di e fila di kabes',
+  'Tabel randkleur': 'Koló di rand di tabel',
+  'Tabel zebrakleur': 'Koló di raya di tabel',
+  'Celopvulling: {px} px': 'Yenamentu di selda: {px} px',
+  'Inhoudsopgave': 'Indeks',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Indeks — agregá kabesnan pa yen’é.',
+  'Schrijfbreedte editor': 'Hanchura di skirbi den editor',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Kon hanchu e área di skirbi ta den modo visual. Estrecho ta lesa trankil, hanchu ta usa mas di e pantaya.',
+  'Pagina-instellingen export': 'Konfigurashon di página pa eksportá',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Tamaño di página (ISO 216) i marge pa imprimí HTML, LaTeX i eksportá PDF.',
+  '{maat} (liggend)': '{maat} (horizontal)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Formato',
   'Afbeelding aanpassen': 'Adjusta imagen',
   'Groot bestand': 'File grandi',

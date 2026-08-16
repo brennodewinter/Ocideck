@@ -2751,6 +2751,36 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Boven (mm)': 'Üst (mm)',
+  'Onder (mm)': 'Alt (mm)',
+  'Links (mm)': 'Sol (mm)',
+  'Rechts (mm)': 'Sağ (mm)',
+  'Smal (860 px)': 'Dar (860 px)',
+  'Standaard (1100 px)': 'Varsayılan (1100 px)',
+  'Breed (1400 px)': 'Geniş (1400 px)',
+  'Volledige breedte': 'Tam genişlik',
+  'Paginamaat': 'Sayfa boyutu',
+  'Randstijl': 'Kenarlık stili',
+  'Tabelstijl': 'Tablo stili',
+  'Geen randen': 'Kenarlık yok',
+  'Lijnen (horizontaal)': 'Çizgiler (yatay)',
+  'Omrand (volledig)': 'Çerçeveli (tam)',
+  'Zebrastrepen (om en om)': 'Zebra şeritleri (bir atlamalı)',
+  'Accentlijn onder koprij': 'Başlık satırının altında vurgu çizgisi',
+  'Tabel randkleur': 'Tablo kenarlık rengi',
+  'Tabel zebrakleur': 'Tablo zebra rengi',
+  'Celopvulling: {px} px': 'Hücre dolgusu: {px} px',
+  'Inhoudsopgave': 'İçindekiler',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'İçindekiler — doldurmak için başlık ekleyin.',
+  'Schrijfbreedte editor': 'Düzenleyici yazma genişliği',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Görsel modda yazma alanının genişliği. Dar sakin okunur, geniş ekranın daha fazlasını kullanır.',
+  'Pagina-instellingen export': 'Dışa aktarma için sayfa ayarları',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Sayfa boyutu (ISO 216) ve HTML yazdırma, LaTeX ve PDF dışa aktarma için kenar boşlukları.',
+  '{maat} (liggend)': '{maat} (yatay)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Tasarım',
   'Afbeelding aanpassen': 'Görseli ayarla',
   'Groot bestand': 'Büyük dosya',

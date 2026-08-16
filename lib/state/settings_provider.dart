@@ -11,6 +11,7 @@ import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
 import '../models/matrix_settings.dart';
 import '../models/settings.dart';
+import '../models/page_size.dart';
 import '../models/storage_connection.dart';
 import '../services/disk_traces.dart';
 import '../services/privacy/privacy_regions.dart';
@@ -267,6 +268,13 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       documentStyleEnforced: prefs.getBool('documentStyleEnforced') ?? false,
       documentChapterPageBreak:
           prefs.getBool('documentChapterPageBreak') ?? false,
+      documentEditorMaxWidth: _readDocumentEditorMaxWidth(prefs),
+      documentPageSize:
+          PageSizeSpec.fromId(prefs.getString('documentPageSize')) ??
+          PageSizeSpec.a4,
+      documentPageMargins:
+          PageMargins.fromId(prefs.getString('documentPageMargins')) ??
+          const PageMargins(),
       cockpitColorSchemes: cockpit.schemes,
       selectedCockpitColorSchemeName: cockpit.selectedName,
       cockpitVisualStyle: cockpit.visualStyle,
@@ -541,6 +549,15 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
 
   Future<void> setDocumentChapterPageBreak(bool enabled) =>
       _applyDocumentChapterPageBreak(this, enabled);
+
+  Future<void> setDocumentEditorMaxWidth(double? width) =>
+      _applyDocumentEditorMaxWidth(this, width);
+
+  Future<void> setDocumentPageSize(PageSizeSpec spec) =>
+      _applyDocumentPageSize(this, spec);
+
+  Future<void> setDocumentPageMargins(PageMargins margins) =>
+      _applyDocumentPageMargins(this, margins);
 
   Future<void> setClassificationWatermarkEnabled(bool enabled) =>
       _applyClassificationWatermarkEnabled(this, enabled);

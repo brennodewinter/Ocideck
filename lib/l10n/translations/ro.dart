@@ -1791,6 +1791,36 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Boven (mm)': 'Sus (mm)',
+  'Onder (mm)': 'Jos (mm)',
+  'Links (mm)': 'Stânga (mm)',
+  'Rechts (mm)': 'Dreapta (mm)',
+  'Smal (860 px)': 'Îngust (860 px)',
+  'Standaard (1100 px)': 'Implicit (1100 px)',
+  'Breed (1400 px)': 'Lat (1400 px)',
+  'Volledige breedte': 'Lățime completă',
+  'Paginamaat': 'Dimensiunea paginii',
+  'Randstijl': 'Stil de bordură',
+  'Tabelstijl': 'Stil de tabel',
+  'Geen randen': 'Fără borduri',
+  'Lijnen (horizontaal)': 'Linii (orizontale)',
+  'Omrand (volledig)': 'Încadrat (complet)',
+  'Zebrastrepen (om en om)': 'Dungi zebră (alternante)',
+  'Accentlijn onder koprij': 'Linie de accent sub rândul de antet',
+  'Tabel randkleur': 'Culoarea bordurii tabelului',
+  'Tabel zebrakleur': 'Culoarea dungilor tabelului',
+  'Celopvulling: {px} px': 'Spațiere celulă: {px} px',
+  'Inhoudsopgave': 'Cuprins',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Cuprins — adaugă titluri pentru a-l completa.',
+  'Schrijfbreedte editor': 'Lățimea de scriere a editorului',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Cât de lată este zona de scriere în modul vizual. Îngustă se citește liniștit, lată folosește mai mult ecran.',
+  'Pagina-instellingen export': 'Setări de pagină pentru export',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Dimensiunea paginii (ISO 216) și marginile pentru tipărire HTML, LaTeX și export PDF.',
+  '{maat} (liggend)': '{maat} (peisaj)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Format',
   'Afbeelding aanpassen': 'Ajustează imaginea',
   'Groot bestand': 'Fișier mare',

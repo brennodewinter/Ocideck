@@ -1780,6 +1780,36 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Boven (mm)': 'Gore (mm)',
+  'Onder (mm)': 'Dolje (mm)',
+  'Links (mm)': 'Lijevo (mm)',
+  'Rechts (mm)': 'Desno (mm)',
+  'Smal (860 px)': 'Usko (860 px)',
+  'Standaard (1100 px)': 'Zadano (1100 px)',
+  'Breed (1400 px)': 'Široko (1400 px)',
+  'Volledige breedte': 'Puna širina',
+  'Paginamaat': 'Veličina stranice',
+  'Randstijl': 'Stil ruba',
+  'Tabelstijl': 'Stil tablice',
+  'Geen randen': 'Bez rubova',
+  'Lijnen (horizontaal)': 'Crte (vodoravne)',
+  'Omrand (volledig)': 'Uokvireno (potpuno)',
+  'Zebrastrepen (om en om)': 'Zebraste pruge (naizmjenično)',
+  'Accentlijn onder koprij': 'Naglasna crta ispod retka zaglavlja',
+  'Tabel randkleur': 'Boja ruba tablice',
+  'Tabel zebrakleur': 'Boja pruga tablice',
+  'Celopvulling: {px} px': 'Razmak u ćeliji: {px} px',
+  'Inhoudsopgave': 'Sadržaj',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Sadržaj — dodajte naslove da biste ga popunili.',
+  'Schrijfbreedte editor': 'Širina pisanja u uređivaču',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Koliko je široko područje za pisanje u vizualnom načinu. Usko se čita mirno, široko koristi više zaslona.',
+  'Pagina-instellingen export': 'Postavke stranice za izvoz',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Veličina stranice (ISO 216) i margine za HTML ispis, LaTeX i PDF izvoz.',
+  '{maat} (liggend)': '{maat} (vodoravno)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Oblikovanje',
   'Afbeelding aanpassen': 'Prilagodi sliku',
   'Groot bestand': 'Velika datoteka',

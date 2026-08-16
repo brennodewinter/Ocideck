@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
 import '../l10n/app_localizations.dart';
+import '../l10n/page_size_localization.dart';
 import '../models/chart.dart';
 import '../models/markdown_outline.dart';
 import '../models/privacy_disposition.dart';
@@ -324,6 +325,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       ),
       embedImage: embed,
       chapterPageBreak: settings.documentChapterPageBreak,
+      pageSize: settings.documentPageSize,
+      pageMargins: settings.documentPageMargins,
       outputPath: outputPath,
     );
   }
@@ -502,6 +505,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                 onModeChanged: (m) => setState(() => _viewMode = m),
                 onInsertChart: _insertChart,
                 onInsertPageBreak: _insertPageBreak,
+                onInsertToc: _insertToc,
                 onInsertTable: _insertTable,
                 onInsertMermaid: _insertMermaid,
                 onInsertImage: _insertImage,
@@ -596,6 +600,14 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   Widget _visualLayout(ThemeData theme, String source, BoxConstraints c) {
     final divider = theme.colorScheme.outlineVariant;
     final showRail = c.maxWidth >= 940;
+    // Feature 3: paginamaat-indicator — toont de gekozen paginamaat en marge
+    // in de hoek van de visuele modus, zodat duidelijk is op welk formaat men
+    // schrijft. De echte pagina-einden komen pas bij afdrukken; dit is een
+    // bewustwordings-indicator, geen paginabreak-engine.
+    // ponytail: indicatieve paginabreak-schatting; exacte break bij afdrukken.
+    final settings = ref.watch(settingsProvider);
+    final pageSize = settings.documentPageSize;
+    final margins = settings.documentPageMargins;
     return Row(
       children: [
         if (showRail) ...[
@@ -603,7 +615,46 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
           VerticalDivider(width: 1, thickness: 1, color: divider),
         ],
         Expanded(
-          child: _styledDocumentSurface(_styleProfile, _wysiwygEditor(theme)),
+          child: Stack(
+            children: [
+              _styledDocumentSurface(_styleProfile, _wysiwygEditor(theme)),
+              Positioned(
+                right: 8,
+                bottom: 8,
+                child: IgnorePointer(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.surface.withValues(alpha: 0.85),
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                        color: theme.colorScheme.outlineVariant,
+                      ),
+                    ),
+                    child: Text(
+                      // Zelf samengesteld, niet door l10n.d(): de indicator draagt
+                      // alleen data — de maatnaam en vier getallen in mm. Door d()
+                      // halen zou een onvertaalbare sleutel per papiermaat-en-
+                      // margecombinatie opleveren. Het enige wóórd zit in
+                      // pageSizeLabel (de oriëntatie), en dat is wél vertaald.
+                      '${pageSizeLabel(context.l10n, pageSize)} · '
+                      '${margins.topMm.toStringAsFixed(0)}/'
+                      '${margins.bottomMm.toStringAsFixed(0)}/'
+                      '${margins.leftMm.toStringAsFixed(0)}/'
+                      '${margins.rightMm.toStringAsFixed(0)}mm',
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -625,6 +676,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     showModeToggle: false,
     mode: NotesEditorMode.visual,
     surfaceStyle: NotesSurfaceStyle.document,
+    documentMaxWidth: ref.watch(settingsProvider).documentEditorMaxWidth,
     bordered: false,
     revealSignal: _revealSignal,
     revealMarkdownOffset: _revealMarkdownOffset,
@@ -896,6 +948,12 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// LaTeX) maakt er een echt nieuw blad van. Draagbaar: elke Markdown-lezer toont
   /// `---` als scheidingslijn.
   void _insertPageBreak() => _insertBlock('---');
+
+  /// Feature 4: voeg een inhoudsopgave-marker in op de cursorpositie. De
+  /// marker `<!-- toc -->` is een HTML-commentaar dat elke vreemde
+  /// Markdown-lezer negeert; OciDeck regenereert de TOC op deze plek bij
+  /// export. De gegenereerde inhoud wordt niet in de `.md` opgeslagen.
+  void _insertToc() => _insertBlock('<!-- toc -->');
 
   /// Voeg een afbeelding in via de carrousel (bibliotheken + open presentaties
   /// + Bladeren…). De gekozen file gaat door [ImageService.importIntoDeck]

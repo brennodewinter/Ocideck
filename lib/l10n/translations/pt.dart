@@ -1803,6 +1803,36 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Boven (mm)': 'Superior (mm)',
+  'Onder (mm)': 'Inferior (mm)',
+  'Links (mm)': 'Esquerda (mm)',
+  'Rechts (mm)': 'Direita (mm)',
+  'Smal (860 px)': 'Estreito (860 px)',
+  'Standaard (1100 px)': 'Predefinição (1100 px)',
+  'Breed (1400 px)': 'Largo (1400 px)',
+  'Volledige breedte': 'Largura total',
+  'Paginamaat': 'Tamanho da página',
+  'Randstijl': 'Estilo de contorno',
+  'Tabelstijl': 'Estilo de tabela',
+  'Geen randen': 'Sem contornos',
+  'Lijnen (horizontaal)': 'Linhas (horizontais)',
+  'Omrand (volledig)': 'Com moldura (completa)',
+  'Zebrastrepen (om en om)': 'Riscas zebra (alternadas)',
+  'Accentlijn onder koprij': 'Linha de destaque sob o cabeçalho',
+  'Tabel randkleur': 'Cor do contorno da tabela',
+  'Tabel zebrakleur': 'Cor das riscas da tabela',
+  'Celopvulling: {px} px': 'Espaçamento da célula: {px} px',
+  'Inhoudsopgave': 'Índice',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Índice — adicione títulos para o preencher.',
+  'Schrijfbreedte editor': 'Largura de escrita do editor',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Que largura tem a área de escrita no modo visual. Estreita lê-se com calma, larga usa mais ecrã.',
+  'Pagina-instellingen export': 'Definições de página para exportação',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Tamanho da página (ISO 216) e margens para impressão HTML, LaTeX e exportação PDF.',
+  '{maat} (liggend)': '{maat} (horizontal)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Formato',
   'Afbeelding aanpassen': 'Ajustar imagem',
   'Groot bestand': 'Arquivo grande',

@@ -1773,6 +1773,36 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Boven (mm)': 'Augšā (mm)',
+  'Onder (mm)': 'Apakšā (mm)',
+  'Links (mm)': 'Pa kreisi (mm)',
+  'Rechts (mm)': 'Pa labi (mm)',
+  'Smal (860 px)': 'Šaurs (860 px)',
+  'Standaard (1100 px)': 'Noklusējums (1100 px)',
+  'Breed (1400 px)': 'Plats (1400 px)',
+  'Volledige breedte': 'Pilns platums',
+  'Paginamaat': 'Lapas izmērs',
+  'Randstijl': 'Apmales stils',
+  'Tabelstijl': 'Tabulas stils',
+  'Geen randen': 'Bez apmalēm',
+  'Lijnen (horizontaal)': 'Līnijas (horizontālas)',
+  'Omrand (volledig)': 'Ierāmēts (pilnībā)',
+  'Zebrastrepen (om en om)': 'Zebras svītras (pārmaiņus)',
+  'Accentlijn onder koprij': 'Akcenta līnija zem galvenes rindas',
+  'Tabel randkleur': 'Tabulas apmales krāsa',
+  'Tabel zebrakleur': 'Tabulas svītru krāsa',
+  'Celopvulling: {px} px': 'Šūnas atkāpe: {px} px',
+  'Inhoudsopgave': 'Satura rādītājs',
+  'Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.':
+      'Satura rādītājs — pievienojiet virsrakstus, lai to aizpildītu.',
+  'Schrijfbreedte editor': 'Redaktora rakstīšanas platums',
+  'Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.':
+      'Cik plata ir rakstīšanas zona vizuālajā režīmā. Šaura lasās mierīgi, plata izmanto vairāk ekrāna.',
+  'Pagina-instellingen export': 'Lapas iestatījumi eksportam',
+  'Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.':
+      'Lapas izmērs (ISO 216) un malas HTML drukai, LaTeX un PDF eksportam.',
+  '{maat} (liggend)': '{maat} (ainavorientācija)',
+  'Mermaid': 'Mermaid',
   'Opmaak': 'Noformējums',
   'Afbeelding aanpassen': 'Pielāgot attēlu',
   'Groot bestand': 'Liels fails',
