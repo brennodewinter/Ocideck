@@ -940,8 +940,8 @@ const _dutchSourceEt = {
   'Zoekopdracht wissen': 'Tühjenda otsing',
   'Bullet verwijderen': 'Eemalda täpp',
   'Kolom verwijderen': 'Eemalda veerg',
-  'Rij omhoog': 'Rida üles',
-  'Rij omlaag': 'Rida alla',
+  'Rij omhoog': 'Teisalda rida üles',
+  'Rij omlaag': 'Teisalda rida alla',
   'Optie verwijderen': 'Eemalda valik',
   'Optie toevoegen': 'Lisa valik',
   'Duur verkorten': 'Lühenda kestust',
@@ -1765,8 +1765,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
-  'Rij erboven': 'Rida ülale',
-  'Rij eronder': 'Rida alla',
+  'Rij erboven': 'Rida ülespoole',
+  'Rij eronder': 'Rida allapoole',
   'Rij weghalen': 'Kustuta rida',
   'Kolom links': 'Veerg vasakule',
   'Kolom rechts': 'Veerg paremale',
@@ -4665,8 +4665,8 @@ const _dutchSourceAddEt = <String, String>{
   'wsreader': 'wsreader',
   'Centreren': 'Keskenda',
   'Getalnotatie': 'Arvuvorming',
-  'Kolom naar links': 'Veerg vasakule',
-  'Kolom naar rechts': 'Veerg paremale',
+  'Kolom naar links': 'Teisalda veerg vasakule',
+  'Kolom naar rechts': 'Teisalda veerg paremale',
   'Kolom rechts invoegen': 'Lisa veerg paremale',
   'Koprij': 'Päiserida',
   'Links uitlijnen': 'Joonda vasakule',
