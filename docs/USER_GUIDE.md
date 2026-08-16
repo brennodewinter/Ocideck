@@ -4223,9 +4223,10 @@ not, and why conversion is deliberately lossy — is written up in
   into `images/` — the same "you will lose this image" warning applies as for a
   deck.
 
-### The editor: Visual and Source
+### The editor: Visual, Source and Pages
 
-A toggle at the top of the document editor chooses how you work:
+A toggle at the top of the document editor chooses how you work. *(A third
+setting, **Pagina's** ("Pages"), was added 2026-08-16.)*
 
 - **Visual** is a rich-text writing surface — you type directly on the document
   as it renders, with tables, charts, Mermaid diagrams and images shown as
@@ -4242,6 +4243,25 @@ A toggle at the top of the document editor chooses how you work:
   charts and tables in the preview. Every keystroke flows straight through — there
   is no separate "Apply" step, unlike the deck-oriented
   [Markdown mode](#markdown-mode) below.
+- **Pagina's** ("Pages") lays the document out on real sheets: the
+  [page size and margins](#page-size-margins-bleed-and-writing-width) you chose,
+  and — when the document carries a style — that style's repeating header and
+  footer band, with the page number in the footer if the style shows page
+  numbers. A document without a style shows a bare sheet. This is a reading and
+  checking view, not a third writing surface: you type in Visual or Source. The
+  page breaks are **measured**, not estimated — the document is rendered once
+  and the height of every block is taken from that render, so a break falls
+  where the text really ends. A block that still fits is never cut in half; it
+  moves on whole to the next sheet. Only a block that fits on no sheet at all (a
+  table or image taller than the text area) is cut, across as many sheets as it
+  needs, and the block after it starts fresh again. *(Added 2026-08-16.)*
+
+  **What it is not:** an exact preview of the export. Three different engines
+  break the pages — OciDeck's own on-screen renderer here, your browser when you
+  print the HTML export, and LaTeX when you compile the `.tex` — and they do not
+  necessarily break in the same place. Use this view to see roughly how the
+  document falls on paper and where a heading lands awkwardly, not to count on a
+  break to the line.
 
 A **formatting toolbar** for the common inline marks is always in reach — the
 rich-text toolbar in Visual, the Markdown one over the source in Source and in
@@ -4384,26 +4404,55 @@ page* is on.
 Every export runs through the same privacy projection (OciWacht) as a deck
 export, so what leaves is the redacted content, never the raw source.
 
-### Page size, margins and writing width
+### Page size, margins, bleed and writing width
 
 Under *Settings → General → Pagina-instellingen export* ("Export page setup") you
-choose the **page size** (ISO 216: A3, A4 and A5 portrait or landscape, B4, B5,
-C4 and C5) and the four **margins** in millimetres. Together they decide the sheet
-the export lands on: the HTML gets an `@page` rule from them, so printing or
-*Save as PDF* from the browser comes out on the chosen format, and the LaTeX
-export puts the same size into `\documentclass` and `geometry`. The default is A4
-with 25 mm top and bottom and 20 mm left and right — as of 2026-08-16 those 20 mm
-apply to the LaTeX export too, which until then quietly kept 25 mm all round and
-so produced a different sheet than the HTML of the same document. In visual mode
-the chosen size shows in the bottom-right corner, so you can see what you are
-writing towards while you write. It is an awareness indicator: the real page
-breaks only fall at print time.
+choose the **page size** and the four **margins** in millimetres. The size is
+picked in three parts — the **series** (A for documents, B for posters and books,
+C for envelopes), the **number** (0 through 10, listed with its dimensions, so
+`B7 — 88 × 125 mm` rather than a bare `B7`) and the **orientation** (portrait or
+landscape). That covers all 66 ISO 216 sizes; until 2026-08-16 the setting was a
+single dropdown with ten common formats, so anyone printing on B1 or C6 could not
+get there. *(Changed 2026-08-16.)*
+
+Size and margins decide the sheet the export lands on: the HTML gets an `@page`
+rule from them, so printing or *Save as PDF* from the browser comes out on the
+chosen format, and the LaTeX export puts the same size into `\documentclass` and
+`geometry`. The default is A4 with 25 mm top and bottom and 20 mm left and right
+— as of 2026-08-16 those 20 mm apply to the LaTeX export too, which until then
+quietly kept 25 mm all round and so produced a different sheet than the HTML of
+the same document. In visual mode the chosen size shows in the bottom-right
+corner, so you can see what you are writing towards while you write; that corner
+is an awareness indicator, and the
+[Pages view](#the-editor-visual-source-and-pages) is where you actually see the
+document fall onto sheets.
+
+**Afloop voor de drukker** ("Bleed for the printer") is the millimetre field
+below the margins, and it is **0** unless you set it. With a bleed the page
+becomes that much larger than the chosen format on every side, and the text block
+shifts along so it keeps its place relative to the trim line; ink that runs to
+the edge then runs *through* where the printer cuts, instead of leaving a white
+sliver when the cut lands a hair off. Three millimetres is what a printer usually
+asks for. It reaches both paged outputs: the HTML export writes the enlarged
+sheet into its `@page` rule (with a `bleed` declaration beside it for engines
+that know CSS Paged Media), and the LaTeX export sets `paperwidth`/`paperheight`
+through `geometry`. In the Pages view the bleed is drawn as a rim around the
+sheet with the trim line marked, so you can see what gets cut away.
+
+Two things to know about it. **There are no crop marks** — no output path emits
+them, so OciDeck does not offer a switch that would promise printing work nobody
+delivers; tell your printer what the trim size is. And the bleed is an
+**app-wide** setting, not a property of the document: once set it applies to
+every next document you export until you put it back to 0. To keep that from
+happening quietly, a non-zero bleed is shown beside the page size in the
+bottom-right corner of the visual editor. *(Added 2026-08-16.)*
 
 The **writing width** beside it (*Schrijfbreedte editor*: narrow 860 px, standard
 1100 px, wide 1400 px, or full width) is not about the export but about your own
 screen — how wide the visual writing surface is. Narrow reads more calmly, wide
-uses a large screen. None of the three writes anything into your `.md`; they are
-display-and-export choices, like the default document style.
+uses a large screen. None of these settings — size, margins, bleed or writing
+width — writes anything into your `.md`; they are display-and-export choices,
+like the default document style.
 
 ### A table of contents
 

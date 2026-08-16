@@ -5,7 +5,7 @@ you edit like a word processor — headings, tables, images, charts, gantt,
 mermaid — where the file on disk stays a plain, maximally interchangeable `.md`
 that any Markdown reader opens.*
 
-> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12) — and an inserted **page break** (a plain `---` that renders as a rule in the visual editor and becomes a real page boundary on print/PDF/LaTeX export, §13), with an opt-in **chapter page break** setting that starts every `H1` chapter on a new sheet on export (§13.5). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-08 · **Published by:** Stichting LibreKAT
+> **Status:** **implemented and merged** — document mode ships (open/edit/save, badge, Visueel\|Bron toggle, insert palette, formatting toolbar, document export to `.md` + flowing HTML via OciWacht, and presentation⇄document conversion including the zero-loss `documentToDeck` and its privacy gate, PR #1308). Since 2026-08-08 a document may also carry a **document-wide style** — a `theme:` front-matter key resolved against a `ThemeProfile`, written byte-surgically and opt-in only (§12) — and an inserted **page break** (a plain `---` that renders as a rule in the visual editor and becomes a real page boundary on print/PDF/LaTeX export, §13), with an opt-in **chapter page break** setting that starts every `H1` chapter on a new sheet on export (§13.5). Since 2026-08-16 the editor also has a third view, **Pagina's**, that lays the document out on real sheets with measured page breaks, the size setting reaches all 66 ISO 216 formats, and a printer's **bleed** can enlarge the exported sheet (§14). This design doc remains the "why" and the format contract; the contributor docs ([`USER_GUIDE.md`](../USER_GUIDE.md), [`ARCHITECTURE.md`](../ARCHITECTURE.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md)) carry the behaviour. · **Status last reviewed:** 2026-08-16 · **Published by:** Stichting LibreKAT
 
 > **This is a design doc, not shipping behaviour.** It is the *format-first*
 > gate: the disk contract and the shared-editor decision must be signed off
@@ -944,3 +944,133 @@ into the two paged renderers:
 
 Both the `---` break and this setting can be in play at once: the `---` breaks
 where the author placed it, the setting adds a break before each chapter heading.
+
+---
+
+## 14. Working on real pages (added 2026-08-16)
+
+*A document mode that only ever shows a continuous scroll answers "what does it
+say" but not "where does it fall". That second question is what a word processor
+is for, and it is why an author picks a page size at all. This section covers the
+third editor view, the widening of the size setting to the whole ISO 216 grid,
+and the printer's bleed.*
+
+### 14.1 The **Pagina's** view — a third *view*, not a third render path
+
+The document editor's toggle gains a third setting beside Visueel and Bron:
+**Pagina's** ([`document_editor_toolbar.dart`](../../lib/widgets/parts/document_editor_toolbar.dart),
+`_DocViewMode.pages`). It lays the document out on sheets of the chosen size,
+with the margins, the style's repeating header/footer band
+(`DocumentChromeBand` — so the page number appears exactly when the style shows
+page numbers, and a document without a style gets a bare sheet) and the bleed
+drawn as a rim with the trim line marked.
+
+§2.1's "no third render path" is not violated, and that is the load-bearing
+design point. `PagedDocumentView`
+([`paged_document_view.dart`](../../lib/widgets/reader/paged_document_view.dart))
+renders the document through the **same** `DocumentMarkdownView` the other two
+views use, once, and then shows a window on that single continuous render per
+sheet (a `Transform.translate` inside a clip). A dedicated page renderer would be
+a second layout engine, and a second engine is precisely the thing that drifts
+away from the first without anyone noticing.
+
+It is a **reading and checking** view: typing stays in Visueel or Bron. That is a
+deliberate scope limit rather than a missing feature — an editable paged surface
+would need a caret model that spans sheet boundaries, which is a different piece
+of work.
+
+### 14.2 Page breaks are measured, not estimated
+
+`documentPageOffsets`
+([`document_pagination.dart`](../../lib/services/document_pagination.dart)) is a
+pure function from *measured* block heights plus a page height to the vertical
+offset at which each sheet starts. The heights come from the real render: the
+`blockWrapper` hook on `DocumentMarkdownView` wraps every block in a render
+object that reports its own laid-out height
+(`_MeasuredBlock`/`_RenderMeasuredBlock`), and the view holds off drawing sheets
+until every block has reported.
+
+A rule of thumb that predicts how tall a paragraph becomes rots the moment the
+font, the text size or the line height changes, and a page break half a line off
+is immediately visible — so no estimate is used anywhere in this path. The rules
+the function applies:
+
+- a block that still **fits** on a page is never cut; it moves on whole to the
+  next sheet (widow-and-orphan behaviour an author expects from a word
+  processor);
+- only a block that fits on **no** page — a table or image taller than the text
+  area — starts on a fresh sheet and is cut across as many sheets as it needs,
+  because there is no alternative;
+- the block after such a run starts fresh again, so a stray line does not end up
+  glued under a half-cut table.
+
+### 14.3 It is a view, not a prediction of the export
+
+Three engines paginate a document, and they are genuinely different code: this
+Flutter render, the **browser** when the recipient prints the exported HTML, and
+**LaTeX** when the `.tex` is compiled. They need not break in the same place, and
+the docs say so rather than implying a WYSIWYG guarantee the architecture does
+not support. The honest claim is: this view shows how the document falls on paper
+well enough to spot an awkward break, and the export is authoritative for the
+export.
+
+### 14.4 The whole ISO 216 grid
+
+`PageSizeSpec` always covered series A, B and C, numbers 0 through 10, portrait
+and landscape ([`page_size.dart`](../../lib/models/page_size.dart)); the settings
+only listed ten of those in one dropdown, so B1 or C6 was unreachable even though
+the model and both exports handled them. The setting now picks **series**,
+**number** and **orientation** separately
+([`settings_dialog_general.dart`](../../lib/widgets/dialogs/parts/settings_dialog_general.dart)),
+which reaches all 66 combinations without a 66-line list. Each number is labelled
+with its dimensions read from the model (`A4 — 210 × 297 mm`), so the interface
+and the export cannot disagree about what a name means.
+
+### 14.5 Printer's bleed — and why there are no crop marks
+
+`PageMargins.bleedMm` (default `0`) is the printer's bleed: the sheet grows by
+that much on every side while the text block shifts along by the same amount, so
+it keeps its position relative to the **trim** size. Ink that runs to the edge
+then runs through where the printer cuts, instead of leaving a white sliver when
+the cut lands a hair off.
+
+It reaches both paged outputs:
+
+- **HTML** — `_pageAtRuleCss`
+  ([`marp_html_service_css.dart`](../../lib/services/marp_html/marp_html_service_css.dart))
+  writes `size` as an explicit millimetre sheet (`216mm 303mm` for A4 with 3 mm)
+  because the paper *name* can no longer describe an enlarged sheet, `margin`
+  with the bleed added per side, and a `bleed` declaration for an engine that
+  implements CSS Paged Media. The enlarged `size` is what does the work in every
+  print engine; the `bleed` declaration is the standards-conformant addition.
+- **LaTeX** — `articlePreamble`
+  ([`latex_preamble.dart`](../../lib/services/latex/latex_preamble.dart)) hands
+  `geometry` an explicit `paperwidth`/`paperheight` when there is a bleed, rather
+  than the paper name from `\documentclass`.
+
+**Crop marks are deliberately absent.** They belong with a bleed, and a switch
+for them briefly existed, but no output path emits them: the documented PDF route
+for a document is printing the exported HTML, and no browser implements the CSS
+`marks` property, while the LaTeX path would need the `crop` package, which is
+not in every TeX installation. A switch that does nothing in either path is worse
+than no switch — the printer would receive an enlarged sheet with no indication
+of where the trim size lies. The reasoning is recorded on `PageMargins` so the
+question does not have to be re-litigated; if an output path ever emits them,
+they come back with it.
+
+Two properties follow from where the bleed lives:
+
+- **Nothing is written to the `.md`.** Size, margins and bleed are `AppSettings`
+  (`documentPageSize`/`documentPageMargins`), the same kind of display-and-export
+  choice as §12.5's default style — the byte-faithful round trip of §3 is
+  untouched. `FILE_FORMAT.md` §14.7 states this on the format side.
+- **It is app-wide and persistent.** A bleed set for one print job applies to
+  every next document until it is set back to 0. Because that is exactly the kind
+  of setting that bites silently, a non-zero bleed is shown beside the page size
+  in the bottom-right corner of the visual editor.
+
+The serialised form of `PageMargins` gains an optional fifth field
+(`"25,25,20,20,3"`); a four-field value from before this change reads back
+unchanged with `bleedMm: 0`, and a six-field value from the short-lived crop-marks
+period still yields its margins and bleed rather than silently falling back to
+the defaults.

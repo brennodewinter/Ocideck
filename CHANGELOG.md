@@ -1409,6 +1409,42 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **werken op echte pagina's, alle ISO-maten en een drukkersafloop.** De
+  documentbewerker krijgt naast Visueel en Bron een derde stand, **Pagina's**:
+  het document op vellen van de gekozen maat, met de marges, de kop- en voetband
+  van de stijl en het paginanummer erin. Wat er niet bij zit is een tweede
+  tekenaar — de stand rendert het document één keer door dezelfde weergave die de
+  andere twee standen gebruiken, meet de hoogte van elk blok aan die echte render
+  en toont per vel een venster op dat ene doorlopende geheel. Een vuistregel die
+  voorspelt hoe hoog een alinea wordt, rot stil weg zodra het lettertype of de
+  regelafstand verandert, en een pagina-einde dat er een halve regel naast zit
+  valt meteen op. Een blok dat nog past wordt daarbij niet gesneden maar schuift
+  heel door; alleen een blok dat op géén vel past — een tabel of afbeelding die
+  hoger is dan het tekstvlak — wordt gesneden, en wat erna komt begint weer op
+  een vers vel. Eerlijk erbij: dit is een weergave, geen exacte voorspelling van
+  de export. Er zijn drie pagineerders (deze render, de browser die de
+  HTML-export afdrukt, en LaTeX) en die breken niet noodzakelijk op dezelfde
+  plek; de stand laat zien hoe het document ongeveer op papier valt, niet waar
+  het einde tot op de regel komt. Verder is de paginamaat-instelling opengebroken:
+  ze was een keuzelijst met tien vaste formaten terwijl het model altijd al de
+  hele ISO-216-tabel kende, dus wie op B1 of C6 drukte kwam er niet. Reeks,
+  nummer en richting zijn nu drie keuzes naast elkaar — alle 66 maten, elk met
+  zijn afmeting erbij, want "B7" zegt niemand iets en "88 × 125 mm" wel. En er is
+  een **afloop voor de drukker** (standaard 0): het vel wordt rondom groter dan
+  het snijformaat en de tekstspiegel schuift mee, zodat inkt die tot de rand loopt
+  dóór de snijlijn heen gaat in plaats van een witte streep achter te laten. De
+  HTML-export schrijft het vergrote vel in haar `@page`-regel, de LaTeX-export
+  zet `paperwidth`/`paperheight` via `geometry`. Snijtekens zitten er bewust
+  níet in: ze hebben kort als schakelaar bestaan, maar geen enkel uitvoerpad zet
+  ze — geen browser kent `marks`, en het LaTeX-pad zou het `crop`-pakket nodig
+  hebben dat niet overal staat. Een schakelaar die in beide paden niets doet is
+  erger dan geen schakelaar, want dan krijgt de drukker een vergroot vel zonder
+  te weten waar het snijformaat ligt. De afloop is een app-brede instelling en
+  werkt door op élk volgend document tot je hem op 0 zet; om te voorkomen dat dat
+  stil gebeurt staat een afloop die niet 0 is naast de paginamaat rechtsonder in
+  de visuele bewerker. Geen van deze keuzes schrijft iets in het `.md` — het zijn
+  weergave- en exportinstellingen, net als de standaard documentstijl.
+
 - **invoegen in de visuele modus landde onderaan het document.** De
   Invoegen-knoppen (inhoudsopgave, tabel, grafiek, mermaid, pagina-einde,
   afbeelding) schreven altijd in de bron-controller, op diens cursor. In de
