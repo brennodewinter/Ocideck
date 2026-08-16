@@ -172,7 +172,10 @@ double _columnWordWidth(
 /// het tekort, wat precies de kolom is waar de breuk toch onvermijdelijk is.
 List<double> _maxMinFill(List<double> needs, double free) {
   final grants = List<double>.filled(needs.length, 0);
-  final open = <int>[for (var i = 0; i < needs.length; i++) if (needs[i] > 0) i];
+  final open = <int>[
+    for (var i = 0; i < needs.length; i++)
+      if (needs[i] > 0) i,
+  ];
   var left = free;
   while (open.isNotEmpty && left > 1e-9) {
     final share = left / open.length;
