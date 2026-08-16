@@ -206,6 +206,31 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     });
   }
 
+  /// De kop- of voetband van één vel, in de marge geplaatst.
+  Widget _chromeBand(
+    ThemeProfile profile,
+    double bleedPx,
+    int pageNumber, {
+    required bool header,
+  }) => Positioned(
+    left: bleedPx,
+    right: bleedPx,
+    top: header ? bleedPx : null,
+    bottom: header ? null : bleedPx,
+    height:
+        (header ? widget.margins.topMm : widget.margins.bottomMm) * kPxPerMm,
+    child: Align(
+      alignment: header ? Alignment.bottomCenter : Alignment.topCenter,
+      child: DocumentChromeBand(
+        profile: profile,
+        header: header,
+        pageLabel: '$pageNumber',
+        projectPath: widget.projectPath,
+        compact: true,
+      ),
+    ),
+  );
+
   /// Eén vel: papier, afloopmarkering, kop- en voetband en het venster op het
   /// doorlopende document dat op deze pagina hoort.
   Widget _sheet(
@@ -248,38 +273,8 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
           // en verdween er onderaan elk vel een stuk tekst dat nergens meer
           // terugkwam.
           if (profile != null) ...[
-            Positioned(
-              left: bleedPx,
-              right: bleedPx,
-              top: bleedPx,
-              height: widget.margins.topMm * kPxPerMm,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: DocumentChromeBand(
-                  profile: profile,
-                  header: true,
-                  pageLabel: '$pageNumber',
-                  projectPath: widget.projectPath,
-                  compact: true,
-                ),
-              ),
-            ),
-            Positioned(
-              left: bleedPx,
-              right: bleedPx,
-              bottom: bleedPx,
-              height: widget.margins.bottomMm * kPxPerMm,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: DocumentChromeBand(
-                  profile: profile,
-                  header: false,
-                  pageLabel: '$pageNumber',
-                  projectPath: widget.projectPath,
-                  compact: true,
-                ),
-              ),
-            ),
+            _chromeBand(profile, bleedPx, pageNumber, header: true),
+            _chromeBand(profile, bleedPx, pageNumber, header: false),
           ],
           Positioned(
             left: (widget.margins.leftMm * kPxPerMm) + bleedPx,
@@ -325,7 +320,6 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         .d('Pagina {n} van {m}')
         .replaceAll('{n}', '$pageNumber')
         .replaceAll('{m}', '$pageCount');
-    final theme2 = Theme.of(context);
     return Semantics(
       label: label,
       child: Column(
@@ -351,8 +345,8 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
           ExcludeSemantics(
             child: Text(
               label,
-              style: theme2.textTheme.labelSmall?.copyWith(
-                color: theme2.colorScheme.onSurfaceVariant,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
               ),
             ),
           ),
