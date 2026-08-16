@@ -847,12 +847,14 @@ Widget _pageMarginsControls(
 }
 
 /// De drukkersafloop: hoeveel millimeter het vel groter wordt dan het
-/// snijformaat, en of er snijtekens bij moeten.
+/// snijformaat.
 ///
 /// Standaard 0 — wie op kantoorpapier afdrukt heeft hier niets aan, en een
 /// stille afloop van 3 mm zou zijn A4 tot een raar formaat maken. Drie
-/// millimeter is wél wat een drukker doorgaans vraagt, dus dat is de waarde die
-/// het aanzetten oplevert.
+/// millimeter is wél wat een drukker doorgaans vraagt.
+///
+/// Bewust zonder snijtekens erbij: zie [PageMargins]. De uitleg noemt daarom
+/// alleen wat de afloop echt doet.
 Widget _printBleedControls(
   AppLocalizations l10n,
   WidgetRef ref,
@@ -864,37 +866,15 @@ Widget _printBleedControls(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
     children: [
-      Row(
-        children: [
-          Expanded(
-            child: _marginField(
-              l10n.d('Afloop voor de drukker (mm)'),
-              m.bleedMm,
-              (v) => notifier.setDocumentPageMargins(m.copyWith(bleedMm: v)),
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: SwitchListTile(
-              contentPadding: EdgeInsets.zero,
-              value: m.cropMarks,
-              // Snijtekens zonder afloop wijzen nergens naar.
-              onChanged: m.hasBleed
-                  ? (v) => notifier.setDocumentPageMargins(
-                      m.copyWith(cropMarks: v),
-                    )
-                  : null,
-              title: Text(
-                l10n.d('Snijtekens'),
-                style: const TextStyle(fontSize: 12),
-              ),
-            ),
-          ),
-        ],
+      _marginField(
+        l10n.d('Afloop voor de drukker (mm)'),
+        m.bleedMm,
+        (v) => notifier.setDocumentPageMargins(m.copyWith(bleedMm: v)),
       ),
+      const SizedBox(height: 4),
       Text(
         l10n.d(
-          'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.',
+          'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. De afloop geldt voor élke export tot je hem weer op 0 zet. Laat dit op 0 voor gewoon afdrukken.',
         ),
         style: const TextStyle(fontSize: 11),
       ),

@@ -271,11 +271,12 @@ String _pageAtRuleCss(PageSizeSpec? size, PageMargins? margins) {
   }
   if (margins != null) {
     parts.add('margin:${margins.cssMargin}');
-    // Snijtekens en de afloopdoos horen bij CSS Paged Media; een browser
-    // negeert ze, een PDF-motor die de standaard kent zet ze wél.
+    // De afloopdoos hoort bij CSS Paged Media. De vergrote `size` hierboven
+    // doet het werk dat élke afdrukmotor honoreert; dit is de aanvulling voor
+    // een motor die de standaard kent. Snijtekens (`marks`) staan er bewust
+    // niet bij — zie [PageMargins].
     if (margins.hasBleed) {
       parts.add('bleed:${_fmtBleedMm(margins.bleedMm)}mm');
-      if (margins.cropMarks) parts.add('marks:crop cross');
     }
   }
   return '@page{${parts.join(';')}}';

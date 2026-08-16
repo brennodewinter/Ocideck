@@ -28,7 +28,7 @@ void main() {
   });
 
   group('met afloop', () {
-    const margins = PageMargins(bleedMm: 3, cropMarks: true);
+    const margins = PageMargins(bleedMm: 3);
 
     test('het vel groeit 3mm aan elke zijde', () {
       // A4 is 210 × 297; met 3mm rondom wordt dat 216 × 303.
@@ -53,7 +53,6 @@ void main() {
       final back = PageMargins.fromId(margins.id);
       expect(back, margins);
       expect(back!.bleedMm, 3);
-      expect(back.cropMarks, isTrue);
     });
   });
 
@@ -61,6 +60,17 @@ void main() {
     final back = PageMargins.fromId('25,25,20,20');
     expect(back, const PageMargins());
     expect(back!.hasBleed, isFalse);
+  });
+
+  // De snijtekens-schakelaar heeft kort bestaan en is er weer uit: geen enkel
+  // uitvoerpad zette ze, dus beloofde hij drukwerk dat niemand leverde. Een
+  // waarde die in die periode is opgeslagen mag niet stil terugvallen op de
+  // standaardmarges — de marges zelf stonden er immers gewoon in.
+  test('een marge uit de snijtekens-periode leest zijn afloop nog', () {
+    final back = PageMargins.fromId('25,25,20,20,3,1');
+    expect(back, isNotNull);
+    expect(back!.bleedMm, 3);
+    expect(back.topMm, 25);
   });
 
   test('alle ISO-reeksen en -nummers leveren een maat', () {

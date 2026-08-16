@@ -683,7 +683,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                       '${margins.topMm.toStringAsFixed(0)}/'
                       '${margins.bottomMm.toStringAsFixed(0)}/'
                       '${margins.leftMm.toStringAsFixed(0)}/'
-                      '${margins.rightMm.toStringAsFixed(0)}mm',
+                      '${margins.rightMm.toStringAsFixed(0)}mm'
+                      // De afloop geldt app-breed en werkt door op het
+                      // volgende document; hem hier tonen houdt dat zichtbaar
+                      // in plaats van stil.
+                      '${margins.hasBleed ? ' · +${margins.bleedMm.toStringAsFixed(0)}mm' : ''}',
                       style: theme.textTheme.labelSmall?.copyWith(
                         color: theme.colorScheme.onSurfaceVariant,
                         fontSize: 10,

@@ -203,6 +203,30 @@ void main() {
       expect(html, isNot(contains('@page{')));
     });
 
+    test('een afloop vergroot het vel en belooft geen snijtekens', () async {
+      // De vergrote `size` is wat élke afdrukmotor honoreert. `marks` staat er
+      // bewust niet bij: de gedocumenteerde PDF-route is afdrukken vanuit de
+      // browser, en geen browser kent die eigenschap — een schakelaar die niets
+      // doet is erger dan geen schakelaar.
+      final service = MarpHtmlService(loadAsset: _diskLoader);
+      final html = await service.build(
+        _md,
+        continuous: true,
+        pageSize: PageSizeSpec.a4,
+        pageMargins: const PageMargins(bleedMm: 3),
+      );
+      // Alleen de @page-regel zelf bekijken: de gebundelde mermaid-JS bevat
+      // het woord "marks" in heel andere betekenissen.
+      final rule = RegExp(r'@page\{([^}]*)\}').firstMatch(html)?.group(1);
+      expect(rule, isNotNull, reason: 'er hoort een @page-regel te staan');
+      // A4 (210×297) plus 3 mm rondom.
+      expect(rule, contains('size:216mm 303mm'));
+      expect(rule, contains('bleed:3mm'));
+      expect(rule, isNot(contains('marks')));
+      // De tekstspiegel schuift mee, zodat hij op zijn plek blijft.
+      expect(rule, contains('margin:28mm 23mm 28mm 23mm'));
+    });
+
     test('paginamaat en marges landen in één @page-regel', () async {
       final service = MarpHtmlService(loadAsset: _diskLoader);
       final html = await service.build(

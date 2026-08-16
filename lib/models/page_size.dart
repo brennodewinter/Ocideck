@@ -129,7 +129,16 @@ class PageSizeSpec {
 /// witte streep langs de rand. De pagina wordt daarom bij export
 /// `bleedMm` groter aan elke zijde, terwijl de tekstspiegel op zijn plek blijft
 /// ten opzichte van het *snijformaat*. 0 (de standaard) betekent gewoon
-/// afdrukken op kantoorpapier: geen afloop, geen snijtekens.
+/// afdrukken op kantoorpapier: geen afloop.
+///
+/// Snijtekens horen hier op het eerste gezicht bij, maar zitten er bewust
+/// niet in. De gedocumenteerde PDF-route van een document is het afdrukken van
+/// de HTML-export, en geen browser kent `marks` uit CSS Paged Media; het
+/// LaTeX-pad zou het `crop`-pakket nodig hebben, dat niet in elke TeX-opzet
+/// zit. Een schakelaar die in geen van beide paden iets doet is erger dan geen
+/// schakelaar: de drukker krijgt dan een vergroot vel zonder te weten waar het
+/// snijformaat ligt. Komt er een uitvoerpad dat ze wél zet, dan horen ze
+/// daarbij terug.
 class PageMargins {
   final double topMm;
   final double bottomMm;
@@ -137,18 +146,12 @@ class PageMargins {
   final double rightMm;
   final double bleedMm;
 
-  /// Snijtekens rondom de afloop, zodat de drukker ziet waar het snijformaat
-  /// ligt. Alleen zinvol met afloop, en alleen gehonoreerd door PDF-motoren die
-  /// CSS Paged Media kennen; een browser negeert `marks` stilzwijgend.
-  final bool cropMarks;
-
   const PageMargins({
     this.topMm = 25,
     this.bottomMm = 25,
     this.leftMm = 20,
     this.rightMm = 20,
     this.bleedMm = 0,
-    this.cropMarks = false,
   });
 
   /// Uniforme marge in mm rondom, zonder afloop.
@@ -157,8 +160,7 @@ class PageMargins {
       bottomMm = mm,
       leftMm = mm,
       rightMm = mm,
-      bleedMm = 0,
-      cropMarks = false;
+      bleedMm = 0;
 
   /// Of er een drukkersafloop is gevraagd.
   bool get hasBleed => bleedMm > 0;
@@ -179,16 +181,15 @@ class PageMargins {
       'top=${_fmtMm(topMm + bleedMm)}mm,bottom=${_fmtMm(bottomMm + bleedMm)}mm,'
       'left=${_fmtMm(leftMm + bleedMm)}mm,right=${_fmtMm(rightMm + bleedMm)}mm';
 
-  /// JSON-serialisatie als `"25,25,20,20"` (top,bottom,links,rechts), met bij
-  /// een gevraagde afloop twee velden erachter: `"25,25,20,20,3,1"`. De korte
-  /// vorm blijft leesbaar voor wie geen afloop gebruikt, en oudere opgeslagen
+  /// JSON-serialisatie als `"25,25,20,20"` (boven,onder,links,rechts), met bij
+  /// een gevraagde afloop een vijfde veld: `"25,25,20,20,3"`. De korte vorm
+  /// blijft leesbaar voor wie geen afloop gebruikt, en oudere opgeslagen
   /// waarden blijven gewoon werken.
   String get id {
     final base =
         '${_fmtMm(topMm)},${_fmtMm(bottomMm)},'
         '${_fmtMm(leftMm)},${_fmtMm(rightMm)}';
-    if (!hasBleed && !cropMarks) return base;
-    return '$base,${_fmtMm(bleedMm)},${cropMarks ? 1 : 0}';
+    return hasBleed ? '$base,${_fmtMm(bleedMm)}' : base;
   }
 
   PageMargins copyWith({
@@ -197,21 +198,23 @@ class PageMargins {
     double? leftMm,
     double? rightMm,
     double? bleedMm,
-    bool? cropMarks,
   }) => PageMargins(
     topMm: topMm ?? this.topMm,
     bottomMm: bottomMm ?? this.bottomMm,
     leftMm: leftMm ?? this.leftMm,
     rightMm: rightMm ?? this.rightMm,
     bleedMm: bleedMm ?? this.bleedMm,
-    cropMarks: cropMarks ?? this.cropMarks,
   );
 
   /// Parse een id terug naar PageMargins.
   static PageMargins? fromId(String? id) {
     if (id == null || id.isEmpty) return null;
     final parts = id.split(',');
-    if (parts.length != 4 && parts.length != 6) return null;
+    // Vier velden is de gewone vorm; vijf betekent dat er een afloop bij staat.
+    // Zes komt uit een korte periode waarin er ook een snijtekens-vlag stond —
+    // die lezen we nog wél, zodat een opgeslagen waarde niet stil terugvalt op
+    // de standaardmarges, maar het zesde veld doet niets meer.
+    if (parts.length < 4 || parts.length > 6) return null;
     final vals = parts.map((p) => double.tryParse(p)).toList();
     if (vals.any((v) => v == null)) return null;
     return PageMargins(
@@ -220,7 +223,6 @@ class PageMargins {
       leftMm: vals[2]!,
       rightMm: vals[3]!,
       bleedMm: vals.length > 4 ? vals[4]! : 0,
-      cropMarks: vals.length > 5 && vals[5] != 0,
     );
   }
 
@@ -231,12 +233,10 @@ class PageMargins {
       bottomMm == other.bottomMm &&
       leftMm == other.leftMm &&
       rightMm == other.rightMm &&
-      bleedMm == other.bleedMm &&
-      cropMarks == other.cropMarks;
+      bleedMm == other.bleedMm;
 
   @override
-  int get hashCode =>
-      Object.hash(topMm, bottomMm, leftMm, rightMm, bleedMm, cropMarks);
+  int get hashCode => Object.hash(topMm, bottomMm, leftMm, rightMm, bleedMm);
 
   @override
   String toString() => 'PageMargins($id)';
