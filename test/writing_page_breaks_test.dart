@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' show BoxParentData;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -137,6 +138,40 @@ void main() {
         isEmpty,
         reason: 'uit is uit — geen schilder in de boom',
       );
+    });
+
+    // De beeldkeuring vond dit: de lijn liep dwars door de letters van een kop
+    // in plaats van in de witruimte ervoor. Oorzaak was het optellen van alleen
+    // `size.height`, zonder de ruimte tússen de blokken — dan loopt de som met
+    // elk blok verder achter op de werkelijke y.
+    testWidgets('de hoogtes tellen de ruimte tussen de blokken mee', (
+      tester,
+    ) async {
+      await pump(tester, 'Een kop\n=======\n\nEen alinea.\n\nNog een.');
+
+      final editor = editorKey.currentState!.renderEditor;
+      final heights = writingBlockHeights(editor);
+      // De som tot en met het voorlaatste blok hoort exact de bovenkant van het
+      // laatste blok te zijn — anders zit er ergens ruimte niet in de telling.
+      final tops = <double>[];
+      editor.visitChildren((child) {
+        final data = (child as RenderBox).parentData;
+        if (data is BoxParentData) tops.add(data.offset.dy);
+      });
+      expect(tops.length, heights.length);
+      // De telling begint bij de bovenkant van het eerste blok, niet bij nul:
+      // de editor heeft een eigen binnenmarge, en die hoort niet als tekst mee
+      // te tellen.
+      var sum = writingContentTop(editor);
+      expect(sum, tops.first);
+      for (var i = 0; i < heights.length - 1; i++) {
+        sum += heights[i];
+        expect(
+          sum,
+          closeTo(tops[i + 1], 0.01),
+          reason: 'na blok $i loopt de telling uit de pas met de echte plek',
+        );
+      }
     });
 
     testWidgets('de einden komen uit die gemeten hoogtes', (tester) async {

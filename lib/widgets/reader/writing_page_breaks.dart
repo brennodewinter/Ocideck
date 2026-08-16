@@ -1,25 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' show BoxParentData;
 import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../services/document_pagination.dart';
 
 /// De hoogtes van de blokken in de schrijfstand, in de volgorde waarin ze
-/// staan.
+/// staan — inclusief de witruimte die er ónder elk blok zit.
 ///
 /// Dit is de enige eerlijke bron voor een pagina-einde tijdens het schrijven:
 /// het einde hoort te vallen waar het blok dat je aan het typen bent
 /// werkelijk eindigt, niet waar een schatting denkt dat het eindigt. Een
 /// alinea die één regel langer wordt verschuift het einde meteen mee.
 ///
+/// De hoogtes worden afgeleid uit de *posities* van de blokken, niet uit hun
+/// eigen maat. Alleen `size.height` optellen laat de tussenruimte weg, en dan
+/// loopt de som met elk blok verder achter op de werkelijke y: de lijn zakte
+/// zichtbaar weg van de grens die hij bedoelde, tot dwars door een kop heen.
+///
 /// Leeg wanneer de editor nog niet is uitgemeten — dan valt er niets te
 /// tekenen.
 List<double> writingBlockHeights(RenderEditor? editor) {
   if (editor == null || !editor.hasSize) return const [];
-  final heights = <double>[];
+  final tops = <double>[];
+  final ownHeights = <double>[];
   editor.visitChildren((child) {
-    if (child is RenderBox && child.hasSize) heights.add(child.size.height);
+    if (child is! RenderBox || !child.hasSize) return;
+    final data = child.parentData;
+    if (data is! BoxParentData) return;
+    tops.add(data.offset.dy);
+    ownHeights.add(child.size.height);
   });
-  return heights;
+  if (tops.isEmpty) return const [];
+  return <double>[
+    for (var i = 0; i < tops.length; i++)
+      // Tot aan de bovenkant van het volgende blok; het laatste blok telt
+      // alleen zijn eigen hoogte, want daaronder komt niets meer.
+      i + 1 < tops.length ? tops[i + 1] - tops[i] : ownHeights[i],
+  ];
+}
+
+/// De bovenkant van het eerste blok binnen de editor.
+///
+/// De inhoud begint niet op nul: de editor heeft een eigen binnenmarge. Reken
+/// je daar niet mee, dan staat élke lijn precies die marge te hoog.
+double writingContentTop(RenderEditor? editor) {
+  if (editor == null || !editor.hasSize) return 0;
+  var top = 0.0;
+  var found = false;
+  editor.visitChildren((child) {
+    if (found || child is! RenderBox || !child.hasSize) return;
+    final data = child.parentData;
+    if (data is! BoxParentData) return;
+    top = data.offset.dy;
+    found = true;
+  });
+  return top;
 }
 
 /// Waar de pagina's breken in de schrijfstand, in de coördinaten van de
@@ -71,9 +106,14 @@ class WritingPageBreakOverlay extends StatefulWidget {
 }
 
 class _WritingPageBreakOverlayState extends State<WritingPageBreakOverlay> {
-  /// De y-posities van de lijnen, in de coördinaten van dit omhulsel — dus
-  /// mét de schuifstand erin verrekend.
-  final ValueNotifier<List<double>> _lines = ValueNotifier(const []);
+  /// De zichtbare lijnen: hun y-positie in de coördinaten van dit omhulsel
+  /// (dus mét de schuifstand erin verrekend) én het nummer van de pagina die
+  /// erachter begint. Dat nummer moet meereizen: op een vel dat hoger is dan
+  /// het venster is er nooit meer dan één lijn in beeld, dus tellen vanaf de
+  /// zíchtbare lijnen gaf op elk einde "2".
+  final ValueNotifier<List<({double y, int page})>> _lines = ValueNotifier(
+    const [],
+  );
 
   /// De laatst gemeten pagina-einden in de inhoudscoördinaten van de editor.
   /// Bewaard omdat rollen ze niet verandert — alleen waar ze in beeld staan
@@ -135,26 +175,29 @@ class _WritingPageBreakOverlayState extends State<WritingPageBreakOverlay> {
     // Van de inhoudscoördinaten van de editor naar die van dit omhulsel: zo
     // schuiven de lijnen vanzelf mee met de schuifbalk, zonder dat dit
     // omhulsel weet hoe ver er gerold is.
-    final origin = box.globalToLocal(editor.localToGlobal(Offset.zero));
+    final origin = box.globalToLocal(
+      editor.localToGlobal(Offset(0, writingContentTop(editor))),
+    );
     final height = box.size.height;
-    final visible = <double>[
-      for (final y in breaks)
-        if (origin.dy + y >= 0 && origin.dy + y <= height) origin.dy + y,
+    final visible = <({double y, int page})>[
+      for (var i = 0; i < breaks.length; i++)
+        if (origin.dy + breaks[i] >= 0 && origin.dy + breaks[i] <= height)
+          // De eerste lijn sluit pagina 1 af, dus daarachter begint pagina 2.
+          (y: origin.dy + breaks[i], page: i + 2),
     ];
     if (!_sameLines(visible, _lines.value)) _lines.value = visible;
   }
 
-  static bool _sameLines(List<double> a, List<double> b) {
+  static bool _sameLines(
+    List<({double y, int page})> a,
+    List<({double y, int page})> b,
+  ) {
     if (a.length != b.length) return false;
     for (var i = 0; i < a.length; i++) {
-      if ((a[i] - b[i]).abs() > 0.5) return false;
+      if (a[i].page != b[i].page || (a[i].y - b[i].y).abs() > 0.5) return false;
     }
     return true;
   }
-
-  /// Het paginanummer dat ná lijn [index] begint. De eerste lijn sluit pagina
-  /// 1 af, dus daarachter begint pagina 2.
-  int _pageAfter(int index) => index + 2;
 
   @override
   Widget build(BuildContext context) {
@@ -170,15 +213,14 @@ class _WritingPageBreakOverlayState extends State<WritingPageBreakOverlay> {
           widget.child,
           Positioned.fill(
             child: IgnorePointer(
-              child: ValueListenableBuilder<List<double>>(
+              child: ValueListenableBuilder<List<({double y, int page})>>(
                 valueListenable: _lines,
                 builder: (context, lines, _) => CustomPaint(
                   painter: _PageBreakPainter(
-                    lines: lines,
+                    lines: [for (final line in lines) line.y],
                     color: theme.colorScheme.outline,
                     labels: [
-                      for (var i = 0; i < lines.length; i++)
-                        _pageLabel(theme, _pageAfter(i)),
+                      for (final line in lines) _pageLabel(theme, line.page),
                     ],
                   ),
                 ),
