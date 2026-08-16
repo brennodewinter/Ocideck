@@ -123,6 +123,12 @@ class WysiwygNotesField extends StatefulWidget {
   /// wanneer de plak is afgehandeld (bijv. klembord-afbeelding → markdown).
   final Future<bool> Function()? tryConsumePaste;
 
+  /// Sleutel op de Quill-editor, zodat de aanroeper zijn render-object kan
+  /// bereiken. De documentmodus leest daaruit waar de blokken staan en hoe hoog
+  /// ze zijn — de enige eerlijke bron voor een pagina-einde in de schrijfstand,
+  /// want dat einde hoort te vallen waar het geschreven blok werkelijk eindigt.
+  final GlobalKey<EditorState>? editorKey;
+
   const WysiwygNotesField({
     super.key,
     required this.controller,
@@ -134,6 +140,7 @@ class WysiwygNotesField extends StatefulWidget {
     this.contentPadding = const EdgeInsets.all(10),
     this.bordered = true,
     this.tryConsumePaste,
+    this.editorKey,
   });
 
   @override
@@ -194,6 +201,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
               focusNode: widget.focusNode,
               scrollController: widget.scrollController,
               config: QuillEditorConfig(
+                editorKey: widget.editorKey,
                 expands: widget.expand,
                 padding: widget.contentPadding,
                 placeholder: widget.hintText,

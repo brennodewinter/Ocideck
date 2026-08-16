@@ -11,6 +11,12 @@ part of '../document_editor_screen.dart';
 class _DocEditorToolbar extends StatelessWidget {
   final _DocViewMode mode;
   final ValueChanged<_DocViewMode> onModeChanged;
+
+  /// Staan de pagina-einden in de schrijfstand aan, en de schakelaar ervoor.
+  /// Alleen zichtbaar in de visuele stand: in de bron zijn er geen blokken om
+  /// aan te meten, en de Pagina's-stand ís al pagina's.
+  final bool showPageBreaks;
+  final ValueChanged<bool> onShowPageBreaksChanged;
   final VoidCallback onInsertChart;
   final VoidCallback onInsertTable;
   final VoidCallback onInsertMermaid;
@@ -47,6 +53,8 @@ class _DocEditorToolbar extends StatelessWidget {
   const _DocEditorToolbar({
     required this.mode,
     required this.onModeChanged,
+    required this.showPageBreaks,
+    required this.onShowPageBreaksChanged,
     required this.onInsertChart,
     required this.onInsertTable,
     required this.onInsertMermaid,
@@ -117,6 +125,23 @@ class _DocEditorToolbar extends StatelessWidget {
                         ),
                         onSelectionChanged: (s) => onModeChanged(s.first),
                       ),
+                      if (mode == _DocViewMode.visual) ...[
+                        const SizedBox(width: 8),
+                        IconButton(
+                          tooltip: showPageBreaks
+                              ? l10n.d('Pagina-einden verbergen')
+                              : l10n.d('Pagina-einden tonen'),
+                          onPressed: () =>
+                              onShowPageBreaksChanged(!showPageBreaks),
+                          icon: Icon(
+                            showPageBreaks
+                                ? Icons.horizontal_split
+                                : Icons.horizontal_split_outlined,
+                            size: 18,
+                          ),
+                          isSelected: showPageBreaks,
+                        ),
+                      ],
                       const SizedBox(width: 8),
                       IconButton(
                         tooltip: l10n.d('Ongedaan maken'),

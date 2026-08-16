@@ -56,7 +56,10 @@ import 'editors/embed_editor_dialog.dart';
 import 'editors/table_editor.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'reader/document_markdown_view.dart';
+import 'package:flutter_quill/flutter_quill.dart' show EditorState;
+
 import 'reader/paged_document_view.dart';
+import 'reader/writing_page_breaks.dart';
 import 'shell/document_save_actions.dart';
 
 part 'parts/document_editor_toolbar.dart';
@@ -103,6 +106,16 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// de brug niet aankan) als schrijfoppervlak. [_DocViewMode.source] toont de
   /// platte bron naast een live weergave.
   _DocViewMode _viewMode = _DocViewMode.visual;
+
+  /// Pagina-einden in de schrijfstand. Standaard aan: dat is de vraag waarvoor
+  /// je een paginamaat kiest — wat komt er nog op deze bladzijde. Uit zetten
+  /// kan, en dan geldt de ingestelde schrijfbreedte weer in plaats van de
+  /// tekstbreedte van de pagina.
+  bool _showPageBreaks = true;
+
+  /// Sleutel op de Quill-editor van de visuele stand, zodat de pagina-einden
+  /// aan de echte blokgeometrie gemeten kunnen worden.
+  final GlobalKey<EditorState> _visualEditorKey = GlobalKey<EditorState>();
 
   /// De focus van de rauwe editor. De opmaak-knoppenbalk geeft de focus hierheen
   /// terug na een klik, zodat je meteen verder typt.
@@ -536,6 +549,9 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                     ? settings.documentDefaultStyle
                     : null,
                 onStyleChanged: (name) => _setDocumentStyle(ref, name),
+                showPageBreaks: _showPageBreaks,
+                onShowPageBreaksChanged: (v) =>
+                    setState(() => _showPageBreaks = v),
               ),
               Divider(
                 height: 1,
@@ -598,6 +614,15 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     );
   }
 
+  /// De tekstbreedte van één pagina in beeldpunten: de paginabreedte min de
+  /// zijmarges.
+  double get _pageTextWidthPx {
+    final settings = ref.read(settingsProvider);
+    final (widthMm, _) = settings.documentPageSize.dimensions;
+    final margins = settings.documentPageMargins;
+    return (widthMm - margins.leftMm - margins.rightMm) * kPxPerMm;
+  }
+
   /// De map waarin het document staat, voor het oplossen van een logo in de
   /// kop- of voetband. `null` als het nog nergens is opgeslagen.
   String? get _projectPath {
@@ -640,14 +665,16 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   Widget _visualLayout(ThemeData theme, String source, BoxConstraints c) {
     final divider = theme.colorScheme.outlineVariant;
     final showRail = c.maxWidth >= 940;
-    // Feature 3: paginamaat-indicator — toont de gekozen paginamaat en marge
-    // in de hoek van de visuele modus, zodat duidelijk is op welk formaat men
-    // schrijft. De echte pagina-einden komen pas bij afdrukken; dit is een
-    // bewustwordings-indicator, geen paginabreak-engine.
-    // ponytail: indicatieve paginabreak-schatting; exacte break bij afdrukken.
+    // De paginamaat-indicator in de hoek toont op welk formaat en met welke
+    // marges je schrijft; de streepjeslijnen in het schrijfvlak tonen waar dat
+    // vel vol is. Die einden worden gemeten aan de blokken die er echt staan —
+    // zie [WritingPageBreakOverlay].
     final settings = ref.watch(settingsProvider);
     final pageSize = settings.documentPageSize;
     final margins = settings.documentPageMargins;
+    final (_, pageHeightMm) = pageSize.dimensions;
+    final pageContentHeight =
+        (pageHeightMm - margins.topMm - margins.bottomMm) * kPxPerMm;
     return Row(
       children: [
         if (showRail) ...[
@@ -657,7 +684,15 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         Expanded(
           child: Stack(
             children: [
-              _styledDocumentSurface(_styleProfile, _wysiwygEditor(theme)),
+              WritingPageBreakOverlay(
+                editorKey: _visualEditorKey,
+                pageContentHeight: pageContentHeight,
+                enabled: _showPageBreaks,
+                child: _styledDocumentSurface(
+                  _styleProfile,
+                  _wysiwygEditor(theme),
+                ),
+              ),
               _documentPageIndicator(
                 context,
                 theme,
@@ -687,7 +722,14 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     showModeToggle: false,
     mode: NotesEditorMode.visual,
     surfaceStyle: NotesSurfaceStyle.document,
-    documentMaxWidth: ref.watch(settingsProvider).documentEditorMaxWidth,
+    // Met pagina-einden aan schrijf je op de tekstbreedte van de pagina: een
+    // einde dat op een bredere kolom is uitgerekend zou ergens anders vallen
+    // dan op papier, en dan wijst de lijn nergens naar. Staan de einden uit,
+    // dan geldt de ingestelde schrijfbreedte.
+    documentMaxWidth: _showPageBreaks
+        ? _pageTextWidthPx
+        : ref.watch(settingsProvider).documentEditorMaxWidth,
+    editorKey: _visualEditorKey,
     bordered: false,
     insertSignal: _insertSignal,
     insertMarkdownBlock: _pendingInsertBlock,
