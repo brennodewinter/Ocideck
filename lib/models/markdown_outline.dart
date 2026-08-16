@@ -53,3 +53,41 @@ List<MarkdownOutlineEntry> buildMarkdownOutline(String markdown) {
   }
   return entries;
 }
+
+/// De kop waaronder [offset] in de markdownbron valt, als index in [outline],
+/// of `-1` boven de eerste kop. De koppen staan op bronvolgorde, dus de laatste
+/// kop die vóór de cursor begint wint.
+int activeOutlineIndexForOffset(
+  List<MarkdownOutlineEntry> outline,
+  int offset,
+) {
+  var active = -1;
+  for (var i = 0; i < outline.length; i++) {
+    if (outline[i].offset > offset) break;
+    active = i;
+  }
+  return active;
+}
+
+/// Hetzelfde, maar gemeten in de plátte tekst van de visuele editor: daar zijn
+/// de bron-offsets onbruikbaar (de opmaaktekens staan er niet meer in), dus de
+/// koppen worden op titel teruggezocht — elke volgende vanaf waar de vorige
+/// eindigde, zodat twee gelijknamige koppen niet allebei op de eerste treffer
+/// uitkomen. Een kop die niet in de platte tekst te vinden is, wordt
+/// overgeslagen in plaats van de rest te blokkeren.
+int activeOutlineIndexInPlainText(
+  List<MarkdownOutlineEntry> outline,
+  String plain,
+  int caret,
+) {
+  var active = -1;
+  var searchFrom = 0;
+  for (var i = 0; i < outline.length; i++) {
+    final at = plain.indexOf(outline[i].title, searchFrom);
+    if (at < 0) continue;
+    if (at > caret) break;
+    active = i;
+    searchFrom = at + outline[i].title.length;
+  }
+  return active;
+}

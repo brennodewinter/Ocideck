@@ -73,7 +73,7 @@ branches enriched the same line and the merge kept both copies.
 - `markdown_document.dart` — `MarkdownDocument`: a flowing Markdown document kept byte-for-byte (`toMarkdown` returns exactly what was read) over the lossless `MarkdownSourceDocument`; the plain-`.md` counterpart to `Deck` for the document mode (docs/design/DOCUMENT_MODE.md). Splits its source into `frontMatter` (the leading style block, or `''`) and `body` (the rest) via `document_front_matter.dart`, with `frontMatter + body == source` always true; `styleName` reads the `theme:` style, and `withBody`/`withStyleName` produce a new document that keeps the source byte-faithful (DOCUMENT_MODE.md §12).
 - `markdown_kind.dart` — `MarkdownKind` (presentation | document): the file-kind discriminator, derived from the absence of `marp: true` rather than any on-disk marker.
 - `marp_style.dart` — Standard Marp visual state at deck/slide scope (`color`, backgrounds, header/footer, image fit/filters and heading fit), including inheritance and collaboration JSON; unmodelled source remains outside this object so round-tripping never depends on reconstructing it.
-- `markdown_outline.dart` — Source-preserving heading index with slide, line and byte-offset coordinates; fenced code and front matter do not leak fake headings into the outline.
+- `markdown_outline.dart` — Source-preserving heading index with slide, line and byte-offset coordinates; fenced code and front matter do not leak fake headings into the outline. Daarnaast `activeOutlineIndexForOffset` en `activeOutlineIndexInPlainText`: welke kop actief is bij een cursor in de bron respectievelijk in de platte tekst van de visuele editor (die geen bron-offsets kent, dus op titel terugzoekt).
 - `markdown_source_document.dart` — Lossless Markdown source model: stable slide-block identities, exact source ranges and minimal block replacement without normalising unknown Markdown.
 - `markdown_writing_suggestion.dart` — Fast language-independent writing checks for repeated words, overlong source lines and generated placeholders, excluding fenced code.
 - `miauw_compliance.dart` — `MiauwComplianceResult`/`EisResult`/`EisStatus` for the compliance overview.
@@ -1350,7 +1350,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 
 ### `lib/widgets/markdown_editor/` — notes editor
 
-- `markdown_editor.dart` — Notes editor with side-by-side WYSIWYG and raw-markdown modes.
+- `markdown_editor.dart` — Notes editor with side-by-side WYSIWYG and raw-markdown modes. `insertSignal`/`insertMarkdownBlock` laten de ouder een blok op de *Quill*-cursor invoegen: in de visuele stand leeft de tekst in het Quill-document en staat de bron-cursor stil, waardoor een invoeging via de bron onderaan het document belandde.
 - `markdown_editor_actions.dart` — Selection-wrapping and line-prefix helpers.
 - `markdown_editor_theme.dart` — `MarkdownEditorTheme`: readable editor chrome (notes toolbar + field) independent of the surrounding slide/panel colours. The `editorPanel` factory's surface follows the theme (`AppTheme.paper`), not a hardcoded white — it was white, and since the text arrives mode-aware (light in dark mode) that made the notes field a white bar with near-invisible light text in dark mode: 1.1:1 for text, 1.4:1 for the toolbar icons (#821). The sister factory `presenterOverlay` already picked its surface by luminance; this one didn't. Measured by `test/markdown_editor_theme_contrast_test.dart`.
 - `markdown_editor_toolbar.dart` — Formatting toolbar for the markdown editor.

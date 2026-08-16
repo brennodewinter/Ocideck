@@ -39,6 +39,8 @@ import '../utils/image_search_paths.dart';
 import '../utils/log.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_paste_cleanup.dart';
+import '../utils/markdown_visual_compatibility.dart'
+    show markdownRoundTripsVisually;
 import '../utils/table_clipboard.dart';
 import '../utils/user_facing_error.dart';
 import 'dialogs/convert_to_presentation_dialog.dart';
@@ -110,6 +112,16 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// geven.
   bool _applyingExternal = false;
 
+  /// Signaal + inhoud voor een invoeging op de cursor van de visuele editor.
+  /// Zie [_insertBlock] voor waarom de invoeging daar niet via de bron loopt.
+  int _insertSignal = 0;
+  String? _pendingInsertBlock;
+
+  /// Waar tussen het aanvragen van zo'n invoeging en de controllerwijziging die
+  /// eruit volgt: die ene wijziging is een eigen bewerking, geen voortzetting
+  /// van het typen ervoor.
+  bool _expectVisualInsert = false;
+
   /// De actieve documentstijl. Alleen documentoppervlakken lezen hem; de rauwe
   /// Markdownbron en de presentatie-editor houden hun eigen sobere chrome.
   ThemeProfile? _styleProfile;
@@ -149,9 +161,11 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     final body = _controller.text;
     final doc = ref.read(documentProvider).document;
     if (doc == null || doc.body == body) return;
+    final ownStep = _expectVisualInsert;
+    _expectVisualInsert = false;
     ref
         .read(documentProvider.notifier)
-        .edit(doc.frontMatter + body, coalesceKey: 'doc');
+        .edit(doc.frontMatter + body, coalesceKey: ownStep ? null : 'doc');
   }
 
   void _setActiveOutlineIndex(int active) {
@@ -172,33 +186,22 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
 
   /// Quill-caret → actieve Overzicht-kop via titelvolgorde in de platte tekst.
   void _syncOutlineToVisualCaret(String plain, int plainOffset) {
-    final outline = buildMarkdownOutline(_controller.text);
-    var active = -1;
-    var searchFrom = 0;
-    for (var i = 0; i < outline.length; i++) {
-      final at = plain.indexOf(outline[i].title, searchFrom);
-      if (at < 0) continue;
-      if (at <= plainOffset) {
-        active = i;
-        searchFrom = at + outline[i].title.length;
-      } else {
-        break;
-      }
-    }
-    _setActiveOutlineIndex(active);
+    _setActiveOutlineIndex(
+      activeOutlineIndexInPlainText(
+        buildMarkdownOutline(_controller.text),
+        plain,
+        plainOffset,
+      ),
+    );
   }
 
   void _setActiveOutlineFromMarkdownOffset(int offset) {
-    final outline = buildMarkdownOutline(_controller.text);
-    var active = -1;
-    for (var i = 0; i < outline.length; i++) {
-      if (outline[i].offset <= offset) {
-        active = i;
-      } else {
-        break;
-      }
-    }
-    _setActiveOutlineIndex(active);
+    _setActiveOutlineIndex(
+      activeOutlineIndexForOffset(
+        buildMarkdownOutline(_controller.text),
+        offset,
+      ),
+    );
   }
 
   /// Sla het document op. Cmd/Ctrl+S én de Opslaan-knop in de werkbalk, net als
@@ -678,6 +681,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     surfaceStyle: NotesSurfaceStyle.document,
     documentMaxWidth: ref.watch(settingsProvider).documentEditorMaxWidth,
     bordered: false,
+    insertSignal: _insertSignal,
+    insertMarkdownBlock: _pendingInsertBlock,
     revealSignal: _revealSignal,
     revealMarkdownOffset: _revealMarkdownOffset,
     revealTitle: _revealTitle,
@@ -818,6 +823,20 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// cursor ná het blok, zodat je meteen verder kunt typen. Een expliciete
   /// bewerking (`coalesceKey: null`) — geen samenvoeging met eerder typen.
   void _insertBlock(String block) {
+    // In de visuele stand leeft de tekst in het Quill-document en staat de
+    // cursor van de bron-controller stil op waar hij toevallig het laatst was.
+    // Invoegen via de bron zette het blok daardoor onderaan het document in
+    // plaats van waar je stond — wat leest als "er gebeurt niets". Daar vraagt
+    // de editor het zelf, op zijn eigen cursor.
+    if (_viewMode == _DocViewMode.visual &&
+        markdownRoundTripsVisually(_controller.text)) {
+      _expectVisualInsert = true;
+      setState(() {
+        _pendingInsertBlock = block;
+        _insertSignal++;
+      });
+      return;
+    }
     final sel = _controller.selection;
     final (next, cursor) = insertBlockIntoSource(
       _controller.text,
@@ -1082,6 +1101,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                   theme,
                   outline[i],
                   active: i == _activeOutlineIndex,
+                  onTap: () => _scrollToHeading(outline[i]),
                 ),
               ),
             ),
@@ -1090,41 +1110,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
       ),
     );
   }
-
-  Widget _outlineItem(
-    ThemeData theme,
-    MarkdownOutlineEntry entry, {
-    required bool active,
-  }) => InkWell(
-    onTap: () => _scrollToHeading(entry),
-    child: Container(
-      color: active
-          ? AppTheme.blueVivid.withValues(alpha: 0.08)
-          : Colors.transparent,
-      padding: EdgeInsets.only(
-        left: 16 + (entry.level - 1).clamp(0, 5) * 12.0,
-        right: 10,
-        top: 5,
-        bottom: 5,
-      ),
-      child: Text(
-        entry.title,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontSize: entry.level <= 1 ? 13 : 12.5,
-          fontWeight: active || entry.level <= 1
-              ? FontWeight.w600
-              : FontWeight.w400,
-          color: active
-              ? AppTheme.blueVivid
-              : entry.level <= 1
-              ? theme.colorScheme.onSurface
-              : theme.colorScheme.onSurfaceVariant,
-        ),
-      ),
-    ),
-  );
 }
 
 Widget _styledDocumentSurface(ThemeProfile? profile, Widget editor) {

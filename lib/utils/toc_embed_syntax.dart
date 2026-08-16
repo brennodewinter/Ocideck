@@ -22,12 +22,11 @@ class EmbeddableToc extends BlockEmbed {
   static EmbeddableToc fromMdSyntax(Map<String, String> attributes) =>
       EmbeddableToc();
 
-  /// Terug naar markdown: exact de marker die de rest van de keten herkent,
-  /// gevolgd door een lege regel zodat hij een eigen blok blijft.
+  /// Terug naar markdown: exact de marker die de rest van de keten herkent.
+  /// Zonder eigen regelafsluiter — `DeltaToMarkdown` sluit de alinea zelf al
+  /// af; elke extra `writeln` hier werd een witregel méér bij elke invoeging.
   static void toMdSyntax(Embed embed, StringSink out) {
-    out
-      ..writeln(tocMarker)
-      ..writeln();
+    out.write(tocMarker);
   }
 }
 

@@ -128,7 +128,7 @@ const Map<String, int> fileSizeBaseline = {
   // _insertToc (het invoeg-palet dat de `<!-- toc -->`-marker plaatst). De
   // ontleedde blokken en de weergave gingen wél naar aparte parts; dit is de
   // schermklasse zelf, die zijn eigen invoegacties draagt.
-  'lib/widgets/document_editor_screen.dart': 1285,
+  'lib/widgets/document_editor_screen.dart': 1270,
   // +16 (#1235): de `onSessionEdit`-callback rijgt door vier lagen (present →
   // show/showDualScreen → constructor) — onherleidbare plumbing om session-data-
   // edits (checklist/tabel) apart van de live-fix terug te melden. Geen gedrag
@@ -364,7 +364,7 @@ const Map<String, int> classSizeBaseline = {
       1398,
   // Nieuw plafond (#1500): de schermklasse van de documenteditor stond nog niet
   // in deze lijst en kwam er met de paginamaat-indicator en _insertToc overheen.
-  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1053,
+  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 1036,
   // Bewust verhoogd van 1256 naar 1261 (#651): `setDismissals` is een nieuwe
   // openbare mogelijkheid, geen drift. In dezelfde wijziging ging er 24 regels
   // uit — de vier identieke regels die annotaties, notities en terzijdeleggingen

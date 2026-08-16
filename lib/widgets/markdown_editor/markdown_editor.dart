@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../theme/app_theme.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/quill_delta.dart';
 
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/markdown_paste_cleanup.dart';
@@ -69,6 +70,15 @@ class MarkdownNotesEditor extends StatefulWidget {
   /// [controller].
   final void Function(String plain, int offset)? onVisualCaret;
 
+  /// Verhoog om [insertMarkdownBlock] als eigen blok op de cursor in te voegen.
+  ///
+  /// Alleen voor de visuele stand: daar leeft de tekst in het Quill-document en
+  /// staat de bron-cursor van de ouder stil, waardoor een invoeging via de bron
+  /// altijd onderaan het document belandde in plaats van waar je stond. In de
+  /// markdown-stand doet de ouder de invoeging zelf op de bron-cursor.
+  final int insertSignal;
+  final String? insertMarkdownBlock;
+
   /// Optioneel: vang plakken af (afbeelding/tabel) vóór de standaard tekstplak.
   final Future<bool> Function()? tryConsumePaste;
 
@@ -101,6 +111,8 @@ class MarkdownNotesEditor extends StatefulWidget {
     this.revealMarkdownOffset,
     this.revealTitle,
     this.onVisualCaret,
+    this.insertSignal = 0,
+    this.insertMarkdownBlock,
     this.tryConsumePaste,
     this.onInsertImage,
   });
@@ -235,6 +247,16 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
         target == NotesEditorMode.visual) {
       _reloadVisualFromMarkdown();
     }
+    if (widget.insertSignal != oldWidget.insertSignal) {
+      // Na het build-frame: een documentwijziging tijdens didUpdateWidget mag
+      // niet (zelfde reden als bij het springen hieronder).
+      final block = widget.insertMarkdownBlock;
+      final signal = widget.insertSignal;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted || widget.insertSignal != signal || block == null) return;
+        _insertMarkdownBlockAtCaret(block);
+      });
+    }
     if (widget.revealSignal != oldWidget.revealSignal) {
       // Na het build-frame: caret-sync in de ouder mag geen setState/edit
       // tijdens didUpdateWidget doen.
@@ -244,6 +266,48 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
         _revealFromOutline(widget.revealMarkdownOffset, widget.revealTitle);
       });
     }
+  }
+
+  /// Voeg [block] als eigen blok in op de Quill-cursor.
+  ///
+  /// De regel waarin de cursor staat blijft heel: het blok komt eronder, of
+  /// óp de plek zelf als die regel leeg is. Zo landt een tabel niet halverwege
+  /// een zin. Het blok gaat eerst door dezelfde markdown→Quill-omzetting als de
+  /// rest, zodat een tabel of inhoudsopgave meteen als embed verschijnt.
+  void _insertMarkdownBlockAtCaret(String block) {
+    final quill = _quillController;
+    if (quill == null) return;
+    final blockDelta = MarkdownQuillCodec.documentFromMarkdown(block).toDelta();
+    if (blockDelta.isEmpty) return;
+    final (at, ownLine) = _blockInsertOffset(quill);
+    final change = Delta()..retain(at);
+    if (ownLine) change.insert('\n');
+    quill.compose(
+      change.concat(blockDelta),
+      TextSelection.collapsed(
+        offset: at + (ownLine ? 1 : 0) + blockDelta.length,
+      ),
+      ChangeSource.local,
+    );
+  }
+
+  /// Waar een nieuw blok mag landen, en of het zelf nog een regel moet openen.
+  ///
+  /// Op de laatste regel van het document kan dat niet met een regelgrens: het
+  /// document sluit af met een regelafsluiter en Quill weigert een invoeging
+  /// dáárachter. Dan landt het blok vlak vóór die afsluiter, met een eigen
+  /// regelafsluiter ervoor — anders plakt het aan de laatste zin vast.
+  (int, bool) _blockInsertOffset(QuillController quill) {
+    final end = quill.document.length - 1;
+    final caret = quill.selection.isValid
+        ? quill.selection.baseOffset.clamp(0, end)
+        : end;
+    final line = quill.document.queryChild(caret).node;
+    if (line == null) return (end, true);
+    // `length` telt de regelafsluiter mee: een lege regel is precies 1 lang.
+    if (line.length <= 1) return (line.documentOffset, false);
+    final next = line.documentOffset + line.length;
+    return next <= end ? (next, false) : (end, true);
   }
 
   /// Spring naar een Overzicht-kop: in markdown-modus de bron-cursor, in Quill
