@@ -247,6 +247,44 @@ void main() {
     );
   });
 
+  // De band hoort op dezelfde lijn te beginnen en eindigen als de tekst
+  // eronder. Tegen de papierrand geplakt liep het woordmerk er half af.
+  testWidgets('de kop- en voetband blijven binnen de zijmarges', (
+    tester,
+  ) async {
+    const profile = ThemeProfile(
+      name: 'Toets',
+      slideBackgroundColor: '#FFFFFF',
+      documentHeaderText: 'Kopregel',
+      documentFooterText: 'Voetregel',
+    );
+    await tester.binding.setSurfaceSize(const Size(1200, 1400));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: PagedDocumentView(
+            markdown: 'Een alinea.',
+            pageSize: PageSizeSpec.a4,
+            margins: PageMargins(),
+            profile: profile,
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final band = tester.getSize(find.byType(DocumentChromeBand).first);
+    final window = tester.getSize(
+      find.byKey(const Key('document-page-window')).first,
+    );
+    expect(
+      band.width,
+      closeTo(window.width, 1),
+      reason: 'de band hoort net zo breed te zijn als de tekstkolom',
+    );
+  });
+
   testWidgets('drukkersafloop maakt het vel groter dan het snijformaat', (
     tester,
   ) async {

@@ -213,8 +213,11 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     int pageNumber, {
     required bool header,
   }) => Positioned(
-    left: bleedPx,
-    right: bleedPx,
+    // Binnen de zijmarges, niet tegen de snijrand: een kop- of voetband hoort
+    // op dezelfde lijn te beginnen en eindigen als de tekst eronder. Tegen de
+    // papierrand geplakt liep het woordmerk er half af.
+    left: (widget.margins.leftMm * kPxPerMm) + bleedPx,
+    right: (widget.margins.rightMm * kPxPerMm) + bleedPx,
     top: header ? bleedPx : null,
     bottom: header ? null : bleedPx,
     height:
