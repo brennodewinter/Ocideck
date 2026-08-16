@@ -894,9 +894,7 @@ Widget _printBleedControls(
       ),
       Text(
         l10n.d(
-          'Met afloop wordt de pagina rondom groter dan het gekozen formaat, '
-          'zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat '
-          'dit op 0 voor gewoon afdrukken.',
+          'Met afloop wordt de pagina rondom groter dan het gekozen formaat, zodat inkt die tot de rand loopt dóór de snijlijn heen gaat. Laat dit op 0 voor gewoon afdrukken.',
         ),
         style: const TextStyle(fontSize: 11),
       ),
