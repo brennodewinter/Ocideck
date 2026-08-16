@@ -107,6 +107,66 @@ void main() {
     });
   });
 
+  // De klacht: de kolomverdeling koos een optimum op tekenaantal, en dan kwam
+  // een kolom een paar pixels tekort — net genoeg om één letter van het laatste
+  // woord naar de volgende regel te duwen. In een tabel leest dat slecht.
+  group('tableColumnWidths houdt woorden heel', () {
+    double bodyNeed(String word, {double hPad = _cellSize * 0.55}) =>
+        measureTextWordWidth(word, _cellSize, fontFamily: _font) + hPad * 2;
+
+    test('elke kolom is breed genoeg voor haar breedste inhoudswoord', () {
+      // Korte koppen boven lange inhoudswoorden: op tekenaantal verdeeld kreeg
+      // de kolom met "Verantwoordelijkheden" te weinig en brak het woord af.
+      const rows = <List<String>>[
+        ['Nr', 'Rol', 'Taak'],
+        ['1', 'Verwerkingsverantwoordelijke', 'Doelbinding'],
+        ['2', 'Functionarisgegevensbescherming', 'Toezicht'],
+      ];
+      final widths = _widths(rows, 3);
+      expect(widths[1], greaterThanOrEqualTo(bodyNeed(rows[2][1])));
+      expect(widths[2], greaterThanOrEqualTo(bodyNeed(rows[1][2])));
+    });
+
+    test('meten volgt de marge waarmee de cel getekend wordt', () {
+      // De documentweergave tekent met een vaste marge uit het stijlprofiel,
+      // niet met de van de letter afgeleide preview-marge. Meet je met de
+      // verkeerde, dan reken je de kolom rijker dan ze is.
+      const rows = <List<String>>[
+        ['Nr', 'Rol'],
+        ['1', 'Verwerkingsverantwoordelijke'],
+      ];
+      const hPad = 12.0;
+      final widths = tableColumnWidths(
+        rows: rows,
+        colCount: 2,
+        tableWidth: _tableWidth,
+        cellSize: _cellSize,
+        font: _font,
+        hPad: hPad,
+      );
+      expect(widths[1], greaterThanOrEqualTo(bodyNeed(rows[1][1], hPad: hPad)));
+    });
+
+    test('een onbreekbare uitschieter verhongert de buurkolom niet', () {
+      // Een URL die zelfs los breder is dan de tabel kán niet heel; hem tóch
+      // willen dienen zou alle woordruimte opslokken en de buurkolom weer
+      // midden in een woord laten breken. De uitschieter breekt, de rest niet.
+      const url =
+          'https://voorbeeld.nl/een/heel/lang/pad/zonder/enkele/breekplek/erin/'
+          'dat/breder/is/dan/de/hele/tabel/samen/en/dus/hoe/dan/ook/moet/breken';
+      const rows = <List<String>>[
+        ['Nr', 'Bron', 'Rol'],
+        ['1', url, 'Verwerkingsverantwoordelijke'],
+      ];
+      final widths = _widths(rows, 3);
+      expect(widths[2], greaterThanOrEqualTo(bodyNeed(rows[1][2])));
+      expect(
+        widths.fold<double>(0, (a, b) => a + b),
+        closeTo(_tableWidth, 1e-6),
+      );
+    });
+  });
+
   group('tableFit', () {
     const slideWidth = 1280.0;
     const availH = 440.0;

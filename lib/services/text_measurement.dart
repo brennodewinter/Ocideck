@@ -52,19 +52,35 @@ double measureTextWidth(
 /// Onder deze breedte breekt de regel middenin een woord — en zakt de kolom
 /// onder haar eigen celmarge, dan tekent de tekst zelfs buiten de cel, dwars
 /// over de tabellijnen heen. Vandaar de ondergrens per tabelkolom.
+///
+/// Gememoiseerd: de tabelmaatvoering meet élke cel, en doet dat opnieuw bij
+/// elke stap van de letterzoektocht en bij elke herbouw. De functie is zuiver,
+/// dus het geheugen is onzichtbaar; het loopt niet vol dankzij [_wordWidthCap].
 double measureTextWordWidth(
   String text,
   double fontSize, {
   bool bold = false,
   String? fontFamily,
 }) {
-  return _painterFor(
+  final key = '$fontFamily|$fontSize|$bold|$text';
+  final hit = _wordWidthCache[key];
+  if (hit != null) return hit;
+  final width = _painterFor(
     text,
     fontSize,
     bold: bold,
     fontFamily: fontFamily,
   ).minIntrinsicWidth;
+  // Bij overschrijding in één keer leeggooien in plaats van per element
+  // verdringen: een LRU-boekhouding kost hier meer dan de hermeting die hij
+  // bespaart, en een tabelherbouw vult de cache meteen weer met wat hij nodig
+  // heeft.
+  if (_wordWidthCache.length >= _wordWidthCap) _wordWidthCache.clear();
+  return _wordWidthCache[key] = width;
 }
+
+const int _wordWidthCap = 4096;
+final Map<String, double> _wordWidthCache = {};
 
 TextPainter _painterFor(
   String text,

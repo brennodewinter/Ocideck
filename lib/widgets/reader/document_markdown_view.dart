@@ -693,11 +693,17 @@ class DocumentMarkdownView extends StatelessWidget {
           const cellSize = 14.0;
           const headerCellSize = 13.0;
           final font = t.body.fontFamily ?? 'sans-serif';
+          // De marge waarmee de cel écht getekend wordt (zie [_tableCell]).
+          // Meten met de preview-marge rekende de kolom een paar pixels rijker
+          // dan ze is, en dan schoof er alsnog een letter naar de volgende
+          // regel.
+          final hPad = t.tableCellPad + 4;
           final minSum = tableColumnMinimumsWidth(
             rows: cells,
             colCount: columns,
             cellSize: cellSize,
             font: font,
+            hPad: hPad,
           );
           final fits = avail.isFinite && avail > 0 && minSum <= avail * 0.95;
           final colWidths = fits
@@ -707,6 +713,7 @@ class DocumentMarkdownView extends StatelessWidget {
                   tableWidth: avail,
                   cellSize: cellSize,
                   font: font,
+                  hPad: hPad,
                 )
               : null;
           final tableWidget = _styledTable(
