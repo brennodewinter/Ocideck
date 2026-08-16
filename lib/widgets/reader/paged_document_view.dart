@@ -73,6 +73,15 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     }
   }
 
+  /// De papierkleur van het vel: die van het stijlprofiel wanneer er een is —
+  /// dezelfde die `DocumentMarkdownView` op het tekstvlak zet — en anders de
+  /// themakleur, zodat het vel in donkere modus meedimt.
+  Color get _paperColor {
+    final background = widget.profile?.slideBackgroundColor;
+    if (background == null || background.isEmpty) return AppTheme.paper;
+    return AppTheme.parseHexColor(background, fallback: AppTheme.paper);
+  }
+
   (double width, double height) get _sheetPx {
     final (w, h) = widget.pageSize.dimensions;
     final bleed = widget.margins.bleedMm * 2;
@@ -177,9 +186,12 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       width: sheetW,
       height: sheetH,
       decoration: BoxDecoration(
-        // Papier, niet hardgecodeerd wit: in donkere modus wordt het vel mee
-        // gedimd, anders staat er een verblindend blok op een donker scherm.
-        color: AppTheme.paper,
+        // Hetzelfde papier als waar de tekst op staat. Niet hardgecodeerd wit
+        // (dan staat er in donkere modus een verblindend blok), maar ook niet
+        // blind de themakleur: is er een stijlprofiel, dan schildert de
+        // weergave het tekstvlak met de achtergrond daaruit, en een vel met een
+        // andere kleur rand dan midden is geen vel meer.
+        color: _paperColor,
         boxShadow: [
           BoxShadow(
             color: theme.colorScheme.shadow.withValues(alpha: 0.18),

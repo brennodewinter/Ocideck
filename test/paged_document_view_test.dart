@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/page_size.dart';
+import 'package:ocideck/models/settings.dart' show ThemeProfile;
+import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/widgets/reader/paged_document_view.dart';
 
 /// Werken met echte pagina's: het document wordt op maat gezet, met de gekozen
@@ -85,6 +87,52 @@ void main() {
     final size = sheetSizes(tester).single;
     expect(size.width, closeTo(148 * kPxPerMm, 1));
     expect(size.height, closeTo(210 * kPxPerMm, 1));
+  });
+
+  testWidgets('het vel heeft dezelfde papierkleur als het tekstvlak', (
+    tester,
+  ) async {
+    // Een vel met een andere kleur rand dan midden is geen vel meer. Dit is
+    // precies waar de twee uit elkaar konden lopen: de weergave schildert het
+    // tekstvlak met de profielachtergrond, het vel eromheen deed dat niet.
+    const profile = ThemeProfile(
+      name: 'Toets',
+      slideBackgroundColor: '#FFFFFF',
+    );
+    await tester.binding.setSurfaceSize(const Size(1200, 1400));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: ThemeData.dark(),
+        home: const Scaffold(
+          body: PagedDocumentView(
+            markdown: 'Kort.',
+            pageSize: PageSizeSpec.a4,
+            margins: PageMargins(),
+            profile: profile,
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final sheet = tester
+        .widgetList<Container>(find.byType(Container))
+        .firstWhere((c) => (c.decoration as BoxDecoration?)?.boxShadow != null);
+    final content = tester.widget<ColoredBox>(
+      find
+          .descendant(
+            of: find.byType(DocumentMarkdownView),
+            matching: find.byType(ColoredBox),
+          )
+          .first,
+    );
+    expect(
+      (sheet.decoration as BoxDecoration).color,
+      content.color,
+      reason:
+          'de rand van het vel hoort hetzelfde papier te zijn als het midden',
+    );
   });
 
   testWidgets('drukkersafloop maakt het vel groter dan het snijformaat', (
