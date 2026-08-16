@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' show RenderBox;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/models/settings.dart' show ThemeProfile;
@@ -33,15 +34,10 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  List<Size> sheetSizes(WidgetTester tester) => tester
-      .widgetList<Semantics>(
-        find.byWidgetPredicate(
-          (w) =>
-              w is Semantics &&
-              (w.properties.label ?? '').startsWith('Pagina '),
-        ),
-      )
-      .map((s) => tester.getSize(find.byWidget(s, skipOffstage: false)))
+  List<Size> sheetSizes(WidgetTester tester) => find
+      .byKey(const Key('document-sheet'))
+      .evaluate()
+      .map((e) => (e.renderObject! as RenderBox).size)
       .toList();
 
   testWidgets('een korte tekst wordt één vel op de gekozen maat', (
@@ -198,6 +194,58 @@ void main() {
       find.byKey(const Key('document-page-window')).first,
     );
     expect(window.height, closeTo((297 - 25 - 25) * kPxPerMm, 1));
+  });
+
+  // Zonder stijlprofiel draagt geen enkel vel een kop- of voetband, en dus ook
+  // geen paginanummer — terwijl je deze stand juist opent om te zien wat op
+  // welke bladzijde komt. Het nummer staat daarom onder het vel.
+  testWidgets('elk vel draagt een zichtbaar paginanummer', (tester) async {
+    final long = List.generate(
+      40,
+      (i) => 'Alinea $i met genoeg tekst om de pagina echt te vullen.',
+    ).join('\n\n');
+    await pumpDoc(tester, long);
+
+    final pages = find
+        .byWidgetPredicate(
+          (w) =>
+              w is Semantics &&
+              (w.properties.label ?? '').startsWith('Pagina '),
+        )
+        .evaluate()
+        .length;
+    expect(pages, greaterThan(1));
+    expect(find.text('Pagina 1 van $pages'), findsOneWidget);
+    expect(find.text('Pagina $pages van $pages'), findsOneWidget);
+  });
+
+  // A0 staat gewoon in de maatlijst, en de vellen staan in een verticale rol:
+  // zonder terugschalen zou de rechterhelft onbereikbaar zijn.
+  testWidgets('een vel dat breder is dan het venster wordt passend gemaakt', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(700, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: PagedDocumentView(
+            markdown: 'Kort.',
+            // A2: 420 × 594 mm, ruim breder dan 700 px.
+            pageSize: PageSizeSpec(series: PaperSeries.a, number: 2),
+            margins: PageMargins(),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final sheet = sheetSizes(tester).single;
+    expect(
+      sheet.width,
+      lessThanOrEqualTo(700),
+      reason: 'het vel hoort binnen het venster te passen',
+    );
   });
 
   testWidgets('drukkersafloop maakt het vel groter dan het snijformaat', (

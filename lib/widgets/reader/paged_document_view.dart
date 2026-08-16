@@ -112,32 +112,45 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       blockHeights: heights,
       pageHeight: _contentHeightPx,
     );
-    return SingleChildScrollView(
-      child: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 16),
-            for (var i = 0; i < offsets.length; i++) ...[
-              _sheet(
-                context,
-                document,
-                offsets[i],
-                // Waar dít vel ophoudt: bij het begin van het volgende, niet
-                // een volle paginahoogte verder. Een blok dat niet meer paste
-                // is doorgeschoven, en dan hoort de onderkant van dit vel wit
-                // te blijven in plaats van de eerste regels van dat blok
-                // doormidden te tonen.
-                i + 1 < offsets.length
-                    ? offsets[i + 1] - offsets[i]
-                    : _contentHeightPx,
-                i + 1,
-                offsets.length,
-              ),
-              const SizedBox(height: 16),
-            ],
-          ],
-        ),
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Een vel dat breder is dan het venster zou onbereikbaar zijn: de
+        // vellen staan in een verticale rol, dus er is geen horizontale
+        // schuifbalk om naar de rechterhelft te gaan. A0 staat gewoon in de
+        // maatlijst, dus dat geval is niet theoretisch — schaal terug tot het
+        // past, nooit verder omhoog dan ware grootte.
+        final (sheetW, _) = _sheetPx;
+        final room = constraints.maxWidth - 32;
+        final fit = room > 0 && sheetW > room ? room / sheetW : 1.0;
+        return SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                const SizedBox(height: 16),
+                for (var i = 0; i < offsets.length; i++) ...[
+                  _sheet(
+                    context,
+                    document,
+                    offsets[i],
+                    // Waar dít vel ophoudt: bij het begin van het volgende, niet
+                    // een volle paginahoogte verder. Een blok dat niet meer paste
+                    // is doorgeschoven, en dan hoort de onderkant van dit vel wit
+                    // te blijven in plaats van de eerste regels van dat blok
+                    // doormidden te tonen.
+                    i + 1 < offsets.length
+                        ? offsets[i + 1] - offsets[i]
+                        : _contentHeightPx,
+                    i + 1,
+                    offsets.length,
+                    fit,
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -192,6 +205,7 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
     double windowHeight,
     int pageNumber,
     int pageCount,
+    double fit,
   ) {
     final (sheetW, sheetH) = _sheetPx;
     final bleedPx = widget.margins.bleedMm * kPxPerMm;
@@ -297,15 +311,42 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
         ],
       ),
     );
+    final label = context.l10n
+        .d('Pagina {n} van {m}')
+        .replaceAll('{n}', '$pageNumber')
+        .replaceAll('{m}', '$pageCount');
+    final theme2 = Theme.of(context);
     return Semantics(
-      label: context.l10n
-          .d('Pagina {n} van {m}')
-          .replaceAll('{n}', '$pageNumber')
-          .replaceAll('{m}', '$pageCount'),
-      child: Transform.scale(
-        scale: widget.scale,
-        alignment: Alignment.topCenter,
-        child: page,
+      label: label,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // `scale` is de keuze van de aanroeper, `fit` de correctie die een
+          // vel dat breder is dan het venster binnen beeld houdt.
+          SizedBox(
+            // Met een sleutel: dit is het vel zoals het in beeld staat, de maat
+            // waar een toets over gaat.
+            key: const Key('document-sheet'),
+            width: sheetW * widget.scale * fit,
+            height: sheetH * widget.scale * fit,
+            child: FittedBox(fit: BoxFit.contain, child: page),
+          ),
+          const SizedBox(height: 4),
+          // Het nummer staat ónder het vel, niet erop: op het papier zou het
+          // doen alsof het meegedrukt wordt, en dat is het niet — een
+          // paginanummer in de uitvoer komt uit de voetband van het
+          // stijlprofiel. Zonder dit bijschrift had een document zonder
+          // profielband nergens een nummer, terwijl je deze stand juist
+          // opent om te zien wat op welke bladzijde komt.
+          ExcludeSemantics(
+            child: Text(
+              label,
+              style: theme2.textTheme.labelSmall?.copyWith(
+                color: theme2.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
