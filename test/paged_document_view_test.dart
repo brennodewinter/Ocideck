@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart' show RenderBox;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/models/settings.dart' show ThemeProfile;
