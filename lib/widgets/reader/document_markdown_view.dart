@@ -14,6 +14,9 @@ import '../../utils/doc_link.dart' show headingSlug;
 import '../slides/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart' show MermaidRenderer;
 import 'doc_mermaid_view.dart';
+import 'table_edit_controller.dart';
+import 'table_edit_scaffold.dart';
+import 'table_editable_cell.dart';
 
 part 'parts/document_markdown_blocks.dart';
 
@@ -55,6 +58,8 @@ class DocumentMarkdownView extends StatelessWidget {
     this.themeProfile,
     this.onEditChart,
     this.onEditTable,
+    this.tableEditController,
+    this.tableEditOrdinal = 0,
     this.searchTerm,
     this.activeMatchBlockIndex = -1,
     this.activeMatchKey,
@@ -110,6 +115,16 @@ class DocumentMarkdownView extends StatelessWidget {
   /// de editor precies dat tabelblok in de bron kan vervangen. `null` → geen
   /// bewerking.
   final void Function(int tableOrdinal, List<String> tableRows)? onEditTable;
+
+  /// Maakt de tabel ter plekke invulbaar: elke cel wordt een tekstveld binnen
+  /// dezelfde gerenderde tabel, zodat je typt in de vorm die je krijgt — de
+  /// kolomverdeling, randen en huisstijl zijn per definitie die van de gelezen
+  /// tabel, want het is dezelfde tekenaar. `null` → de tabel is alleen-lezen.
+  ///
+  /// Geldt voor de tabel met volgnummer [tableEditOrdinal]; de overige tabellen
+  /// in hetzelfde document blijven gewoon gerenderd.
+  final TableEditController? tableEditController;
+  final int tableEditOrdinal;
 
   /// Case-insensitive find-in-page term. When non-empty, every block whose text
   /// contains it is tinted. `null`/empty means no search is active and the tree
@@ -670,10 +685,48 @@ class DocumentMarkdownView extends StatelessWidget {
   Widget _table(
     _Theme t,
     List<String> rows,
-    List<TableAlign> aligns,
+    List<TableAlign> sourceAligns,
     int tableOrdinal,
   ) {
-    final cells = rows.map(splitMarkdownTableRow).toList();
+    // Wordt deze tabel ter plekke ingevuld, dan is de controller de bron van
+    // de waarheid: hij loopt voor op de Markdown-bron, want de bron wordt pas
+    // bijgewerkt nadat de cel is aangepast.
+    final editor = tableOrdinal == tableEditOrdinal
+        ? tableEditController
+        : null;
+    if (editor != null) {
+      // Ter plekke invulbaar: geen potlood-omhulsel eromheen — je klikt gewoon
+      // in de cel die je wilt wijzigen. De tabel wordt bij elke wijziging
+      // opnieuw opgebouwd, zodat de kolombreedtes meebewegen met wat je typt.
+      return TableEditScaffold(
+        editor: editor,
+        builder: (_) => _tableBody(t, editor.rows, editor.alignments, editor),
+      );
+    }
+    final table = _tableBody(
+      t,
+      rows.map(splitMarkdownTableRow).toList(),
+      sourceAligns,
+      null,
+    );
+    final onEdit = onEditTable;
+    if (onEdit == null) return table;
+    // In de editor: dubbelklik óf het potlood-knopje opent de tabel-editor.
+    return _EditableEmbed(
+      onEdit: () => onEdit(tableOrdinal, rows),
+      child: table,
+    );
+  }
+
+  /// Het tabelblok zelf: de kolomverdeling en de gestileerde tabel, los van de
+  /// vraag of hij invulbaar is. Eén opbouw voor lezen en voor invullen — zo
+  /// kán de invulbare tabel er niet anders uitzien dan de gelezen.
+  Widget _tableBody(
+    _Theme t,
+    List<List<String>> cells,
+    List<TableAlign> aligns,
+    TableEditController? editor,
+  ) {
     final columns = cells.isEmpty
         ? 0
         : cells.map((r) => r.length).reduce((a, b) => a > b ? a : b);
@@ -683,7 +736,7 @@ class DocumentMarkdownView extends StatelessWidget {
     // kolomverdeling (hergebruik tableColumnWidths uit de slide-preview). Pas
     // horizontaal scrollen toe wanneer de kolomminima samen breder zijn dan de
     // beschikbare breedte — de inhoud past dan echt niet kleiner.
-    final table = Padding(
+    return Padding(
       padding: const EdgeInsets.only(bottom: 14),
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -724,9 +777,10 @@ class DocumentMarkdownView extends StatelessWidget {
             colWidths,
             cellSize,
             headerCellSize,
+            editor,
           );
           // Past de tabel niet binnen de breedte, dan valt hij terug op
-          // horizontale scroll met intrinsieke kolombreedtes — de huidige
+          // horizontale scroll met intrinsieke kolombreedtes — het bestaande
           // gedrag, voor het uitzonderingsgeval dat de inhoud niet kleiner kan.
           if (fits) return tableWidget;
           return SingleChildScrollView(
@@ -735,13 +789,6 @@ class DocumentMarkdownView extends StatelessWidget {
           );
         },
       ),
-    );
-    final onEdit = onEditTable;
-    if (onEdit == null) return table;
-    // In de editor: dubbelklik óf het potlood-knopje opent de tabel-editor.
-    return _EditableEmbed(
-      onEdit: () => onEdit(tableOrdinal, rows),
-      child: table,
     );
   }
 
@@ -757,6 +804,7 @@ class DocumentMarkdownView extends StatelessWidget {
     List<double>? colWidths,
     double cellSize,
     double headerCellSize,
+    TableEditController? editor,
   ) {
     final pad = t.tableCellPad;
     final border = t.tableBorder;
@@ -815,20 +863,49 @@ class DocumentMarkdownView extends StatelessWidget {
               ),
               children: [
                 for (var c = 0; c < columns; c++)
-                  _tableCell(
-                    t,
-                    c < cells[r].length ? cells[r][c] : '',
-                    header: r == 0,
-                    textAlign: _columnTextAlign(aligns, c),
-                    pad: pad,
-                    cellSize: r == 0 ? headerCellSize : cellSize,
-                  ),
+                  if (editor != null)
+                    TableEditableCell(
+                      editor: editor,
+                      row: r,
+                      column: c,
+                      style: _cellStyle(
+                        t,
+                        header: r == 0,
+                        cellSize: r == 0 ? headerCellSize : cellSize,
+                      ),
+                      textAlign: _columnTextAlign(aligns, c),
+                      pad: pad,
+                      caretColor: t.tableAccent,
+                    )
+                  else
+                    _tableCell(
+                      t,
+                      c < cells[r].length ? cells[r][c] : '',
+                      header: r == 0,
+                      textAlign: _columnTextAlign(aligns, c),
+                      pad: pad,
+                      cellSize: r == 0 ? headerCellSize : cellSize,
+                    ),
               ],
             ),
         ],
       ),
     );
   }
+
+  /// De tekststijl van een cel — gedeeld door de gelezen cel en de invulbare,
+  /// zodat typen er precies zo uitziet als lezen.
+  TextStyle _cellStyle(
+    _Theme t, {
+    required bool header,
+    required double cellSize,
+  }) => header
+      ? t.body.copyWith(
+          fontSize: cellSize,
+          fontWeight: FontWeight.w700,
+          color: t.tableHeaderText,
+        )
+      : t.body.copyWith(fontSize: cellSize, color: t.tableText);
 
   Widget _tableCell(
     _Theme t,
@@ -841,13 +918,7 @@ class DocumentMarkdownView extends StatelessWidget {
     padding: EdgeInsets.symmetric(horizontal: pad + 4, vertical: pad * 0.6),
     child: _inline(
       text,
-      header
-          ? t.body.copyWith(
-              fontSize: cellSize,
-              fontWeight: FontWeight.w700,
-              color: t.tableHeaderText,
-            )
-          : t.body.copyWith(fontSize: cellSize, color: t.tableText),
+      _cellStyle(t, header: header, cellSize: cellSize),
       t,
       textAlign: textAlign,
     ),
