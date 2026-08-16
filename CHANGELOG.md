@@ -1409,6 +1409,67 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **documentmodus: tabellen die passen, een inhoudsopgave, en een vel om op te
+  schrijven.** Vijf dingen die bij elkaar horen, want ze gaan alle vijf over hoe
+  een document er op papier uit komt te zien. (1) Een tabel die breder is dan de
+  ruimte die hij krijgt, loopt niet meer buiten de pagina: de kolommen krijgen hun
+  natuurlijke breedte zolang die past en worden anders evenredig teruggeschaald.
+  (2) De schrijfbreedte van de visuele editor is instelbaar (860/1100/1400 px of
+  volledige breedte) — een lange regel leest slecht, en op een breed scherm was
+  dat precies wat je kreeg. (3) Paginamaat (ISO-216 A/B/C) en de vier marges zijn
+  instelbaar en landen in de HTML-`@page`-regel én in `\documentclass`/`geometry`
+  van de LaTeX-export; de visuele modus toont de gekozen maat rechtsonder.
+  (4) Een `<!-- toc -->`-marker op een eigen regel wordt bij export een
+  inhoudsopgave: HTML houdt de marker en zet er een klikbare lijst onder, de
+  `.md`-export laat de marker weg en houdt de lijst, LaTeX vertaalt hem naar
+  `\tableofcontents`. Het bestand bewaart alleen de marker, nooit de lijst — een
+  opgeslagen inhoudsopgave veroudert bij de eerste hernoemde kop. De lijst wordt
+  ná de OciWacht-projectie gemaakt, dus een weggeredigeerde kop staat er ook niet
+  in. (5) De tabelstijl (randstijl, randkleur, zebrastrepen, celopvulling,
+  accentlijn onder de koprij) is huisstijl in het stijlprofiel en reist dus mee
+  met het bestand; editor, voorvertoning, HTML en LaTeX tekenen dezelfde tabel.
+  Grondwerk van Devin; bij het landen is er het nodige rechtgezet. De
+  strip-regex voor de marker accepteerde geen inspringing en liet daardoor precies
+  de ingesprongen TOC-regels — twee spaties, een streepje, een koplink — als
+  losse lijstitems in het document
+  achter. De `.md`-export haalde de marker weg met een letterlijke
+  `replaceAll('<!-- toc -->\n\n', '')`, die niets trof wanneer een document wél een
+  marker draagt maar nog geen koppen — dan lekte de kale marker het geëxporteerde
+  bestand in; dat loopt nu via `keepMarker: false`. De LaTeX-preamble had een eigen
+  standaardmarge (25 mm rondom) naast de gedeelde `PageMargins()` (25/25/20/20) die
+  de export doorgeeft, met een test die de eerste vastlegde: groen, en toch een
+  ander vel dan de HTML van hetzelfde document. Eén standaard nu, en de test toetst
+  letterlijk `PageMargins().latexMargin`. "Volledige breedte" werd bewaard als
+  een verwijderde voorkeur, en een ontbrekende sleutel leest bij het opstarten
+  terug als de standaard 1100: de editor stond na een herstart weer smal. Nu gaat
+  er een 0 de opslag in, met een test die de herstart naspeelt. Het invoegpalet
+  droeg *Pagina-einde* twee keer — een dubbel menu-item, en een `tap()` die niet
+  meer wist welke hij moest hebben. En de nieuwe paginamaat- en breedtekeuzes
+  liepen bij 200% tekst 302 px buiten het smalle instellingentabblad: de
+  dropdowns krijgen `isExpanded`, en de vier margevelden gaan twee-bij-twee zodra
+  de kolom smal wordt.
+
+  Onderweg vielen ook drie oudere fouten in het LaTeX-tabelpad om, die geen enkele
+  test zag omdat ze allemaal met `contains` toetsten. Elke rij eindigde op een
+  lege cel (`Naam & Leeftijd &  \\`) — één cel te veel voor de kolomspec, dus geen
+  scheve tabel maar een *compileerfout* op elke geëxporteerde tabel. De `\midrule`
+  hing aan "de rij ná de eerste" en stond daardoor onder de eerste gegevensrij in
+  plaats van onder de kop. En de nieuwe `boxed`-stijl trok wel verticale randen
+  maar geen enkele horizontale lijn door de body, waar de HTML van hetzelfde
+  document elke cel omkadert. De nieuwe tests toetsen de rijen letterlijk, niet
+  op deelstring. De `<!-- toc -->` in LaTeX ging langs dezelfde meetlat: het
+  ingevoegde `\tableofcontents` liep door de escaper en kwam als de tékst
+  `\textbackslash{}tableofcontents` op papier.
+
+  En drie bestanden gingen over het
+  regelplafond van 1000: `AppSettings`, de blokweergave van de documentlezer en de
+  tabelstijl-instellingen zijn `part`-bestanden geworden in plaats van drie nieuwe
+  regels in de baseline. Die splitsing brak stil een meting: de poort die toetst
+  dat de proza-claim over de CVE-mirror nog bij de code hoort, grepte op
+  `models/settings.dart` en vond de constante daar niet meer. Die leest nu de
+  library mét haar parts — een meting die op één bestand ankert, meet niets meer
+  zodra dat bestand gesplitst wordt.
+
 - **dekkingspoort: de tip om een bestand uit `uncoveredBaseline` te halen keek
   niet naar de vloer.** `make coverage` meldde drie bestanden die "nu
   geïnstrumenteerd" waren en dus uit de lijst konden. Twee klopten
