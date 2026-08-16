@@ -91,6 +91,24 @@ class TableEditScaffold extends StatelessWidget {
               // De koprij blijft staan: een GFM-tabel zonder kop bestaat niet.
               at.row == 0 ? null : () => editor.removeRowAt(at.row),
             ),
+            // Verplaatsen hoort hier thuis, niet alleen in de tabel-editor:
+            // een rij een plek omhoog schuiven is bij het schrijven net zo
+            // gewoon als er een bijmaken.
+            _button(
+              context,
+              Icons.arrow_upward,
+              l10n.d('Rij omhoog'),
+              // De koprij blijft boven; een body-rij komt er niet overheen.
+              at.row <= 1 ? null : () => editor.moveRow(at.row, -1),
+            ),
+            _button(
+              context,
+              Icons.arrow_downward,
+              l10n.d('Rij omlaag'),
+              at.row == 0 || at.row >= editor.rowCount - 1
+                  ? null
+                  : () => editor.moveRow(at.row, 1),
+            ),
             _divider(theme),
             _button(
               context,
@@ -109,6 +127,20 @@ class TableEditScaffold extends StatelessWidget {
               Icons.remove,
               l10n.d('Kolom weghalen'),
               editor.colCount <= 1 ? null : () => editor.removeColumnAt(at.col),
+            ),
+            _button(
+              context,
+              Icons.arrow_back,
+              l10n.d('Kolom naar links'),
+              at.col == 0 ? null : () => editor.moveColumn(at.col, -1),
+            ),
+            _button(
+              context,
+              Icons.arrow_forward,
+              l10n.d('Kolom naar rechts'),
+              at.col >= editor.colCount - 1
+                  ? null
+                  : () => editor.moveColumn(at.col, 1),
             ),
             _divider(theme),
             _alignButton(

@@ -155,6 +155,53 @@ void main() {
     expect(find.byType(TextField), findsNWidgets(9));
   });
 
+  testWidgets('een rij verplaatsen kan zonder de tabel-editor erbij', (
+    tester,
+  ) async {
+    await pump(tester);
+    await tester.tap(find.byType(TextField).at(4)); // rij 2, kolom 0
+    await tester.pump();
+    await tester.tap(find.byTooltip('Rij omhoog'));
+    await tester.pump();
+
+    expect(editor.rows[1], ['Noot', 'Bouwer']);
+    expect(editor.rows[2], ['Aap', 'Tester']);
+    expect(editor.rows[0], ['Naam', 'Rol'], reason: 'de kop blijft de kop');
+  });
+
+  testWidgets('de koprij schuift niet omhoog en niet omlaag', (tester) async {
+    await pump(tester);
+    await tester.tap(find.byType(TextField).first);
+    await tester.pump();
+
+    for (final tip in ['Rij omhoog', 'Rij omlaag']) {
+      final button = tester.widget<IconButton>(
+        find.ancestor(
+          of: find.byTooltip(tip),
+          matching: find.byType(IconButton),
+        ),
+      );
+      expect(button.onPressed, isNull, reason: '$tip mag niet op de koprij');
+    }
+  });
+
+  testWidgets('een kolom verplaatsen neemt de uitlijning mee', (tester) async {
+    await pump(tester);
+    await tester.tap(find.byType(TextField).at(1)); // rij 0, kolom 1
+    await tester.pump();
+    await tester.tap(find.byTooltip('Rechts uitlijnen'));
+    await tester.pump();
+    await tester.tap(find.byTooltip('Kolom naar links'));
+    await tester.pump();
+
+    expect(editor.rows[1], ['Tester', 'Aap']);
+    expect(
+      editor.alignments[0],
+      TableAlign.right,
+      reason: 'de uitlijning hoort bij de kolom, niet bij de plek',
+    );
+  });
+
   testWidgets('uitlijning is een kolomeigenschap en wordt teruggegeven', (
     tester,
   ) async {
