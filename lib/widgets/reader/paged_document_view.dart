@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../models/page_size.dart';
 import '../../models/settings.dart' show ThemeProfile;
 import '../../services/document_pagination.dart';
@@ -251,7 +252,10 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       ),
     );
     return Semantics(
-      label: 'Pagina $pageNumber van $pageCount',
+      label: context.l10n
+          .d('Pagina {n} van {m}')
+          .replaceAll('{n}', '$pageNumber')
+          .replaceAll('{m}', '$pageCount'),
       child: Transform.scale(
         scale: widget.scale,
         alignment: Alignment.topCenter,
