@@ -55,6 +55,7 @@ import 'editors/embed_editor_dialog.dart';
 import 'editors/table_editor.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'reader/document_markdown_view.dart';
+import 'reader/paged_document_view.dart';
 import 'shell/document_save_actions.dart';
 
 part 'parts/document_editor_toolbar.dart';
@@ -542,10 +543,19 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
               ),
               Expanded(
                 child: LayoutBuilder(
-                  builder: (context, constraints) =>
-                      _viewMode == _DocViewMode.visual
-                      ? _visualLayout(theme, source, constraints)
-                      : _sourceLayout(theme, source, constraints),
+                  builder: (context, constraints) => switch (_viewMode) {
+                    _DocViewMode.visual => _visualLayout(
+                      theme,
+                      source,
+                      constraints,
+                    ),
+                    _DocViewMode.source => _sourceLayout(
+                      theme,
+                      source,
+                      constraints,
+                    ),
+                    _DocViewMode.pages => _pagesLayout(theme, source),
+                  },
                 ),
               ),
             ],
@@ -584,6 +594,32 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
         VerticalDivider(width: 1, thickness: 1, color: divider),
         Expanded(child: preview),
       ],
+    );
+  }
+
+  /// De map waarin het document staat, voor het oplossen van een logo in de
+  /// kop- of voetband. `null` als het nog nergens is opgeslagen.
+  String? get _projectPath {
+    final path = ref.read(documentProvider).filePath;
+    return path == null ? null : p.dirname(path);
+  }
+
+  /// Pagina-modus: het document op echte vellen, met de paginamaat, de marges
+  /// en een eventuele drukkersafloop uit de instellingen. Hier zie je wat er op
+  /// welke bladzijde belandt — de vraag die een tekstverwerker beantwoordt en
+  /// een doorlopende rol niet. Lezen en nakijken, niet typen: bewerken doe je
+  /// in de visuele of de bron-stand.
+  Widget _pagesLayout(ThemeData theme, String source) {
+    final settings = ref.watch(settingsProvider);
+    return Container(
+      color: theme.colorScheme.surfaceContainerHighest,
+      child: PagedDocumentView(
+        markdown: source,
+        pageSize: settings.documentPageSize,
+        margins: settings.documentPageMargins,
+        profile: _styleProfile,
+        projectPath: _projectPath,
+      ),
     );
   }
 
@@ -1187,10 +1223,14 @@ void _setDocumentStyle(WidgetRef ref, String? name) {
       .edit(doc.withStyleName(name).source, coalesceKey: null);
 }
 
-/// De weergavemodus van de documenteditor. Twee manieren om naar hetzelfde
-/// document te kijken, nooit een derde renderpad (DOCUMENT_MODE.md §2.1): de bron
-/// als tekst, of de weergave als hoofdoppervlak.
-enum _DocViewMode { visual, source }
+/// De weergavemodus van de documenteditor. Manieren om naar hetzelfde document
+/// te kijken, nooit een extra renderpad (DOCUMENT_MODE.md §2.1): de bron als
+/// tekst, de weergave als hoofdoppervlak, of diezelfde weergave verdeeld over
+/// echte pagina's. [pages] gebruikt letterlijk dezelfde `DocumentMarkdownView`
+/// als de andere twee — alleen op vellen van de gekozen maat, met de marges en
+/// de pagina-einden erin. Een eigen tekenaar voor pagina's zou precies de
+/// afwijking opleveren die §2.1 verbiedt.
+enum _DocViewMode { visual, source, pages }
 
 /// Voeg [block] in [source] in op het bereik [selStart]–[selEnd] (een negatieve
 /// start betekent 'geen cursor' → achteraan), omgeven door precies genoeg lege

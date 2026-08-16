@@ -101,6 +101,14 @@ class _DocEditorToolbar extends StatelessWidget {
                             label: Text(l10n.d('Bron')),
                             icon: const Icon(Icons.code, size: 15),
                           ),
+                          ButtonSegment(
+                            value: _DocViewMode.pages,
+                            label: Text(l10n.d("Pagina's")),
+                            icon: const Icon(
+                              Icons.menu_book_outlined,
+                              size: 15,
+                            ),
+                          ),
                         ],
                         selected: {mode},
                         showSelectedIcon: false,

@@ -264,7 +264,23 @@ const _reportingCss = r'''
 String _pageAtRuleCss(PageSizeSpec? size, PageMargins? margins) {
   if (size == null && margins == null) return '';
   final parts = <String>[];
-  if (size != null) parts.add('size:${size.cssName}');
-  if (margins != null) parts.add('margin:${margins.cssMargin}');
+  if (size != null) {
+    parts.add(
+      'size:${margins == null ? size.cssName : size.cssSizeWith(margins)}',
+    );
+  }
+  if (margins != null) {
+    parts.add('margin:${margins.cssMargin}');
+    // Snijtekens en de afloopdoos horen bij CSS Paged Media; een browser
+    // negeert ze, een PDF-motor die de standaard kent zet ze wél.
+    if (margins.hasBleed) {
+      parts.add('bleed:${_fmtBleedMm(margins.bleedMm)}mm');
+      if (margins.cropMarks) parts.add('marks:crop cross');
+    }
+  }
   return '@page{${parts.join(';')}}';
 }
+
+/// Millimeters zonder overbodige nullen — `3` in plaats van `3.0`.
+String _fmtBleedMm(double mm) =>
+    mm == mm.roundToDouble() ? mm.toStringAsFixed(0) : mm.toString();

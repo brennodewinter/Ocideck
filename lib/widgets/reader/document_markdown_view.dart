@@ -67,6 +67,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.anchorBlockIndex = -1,
     this.anchorKey,
     this.tocSource,
+    this.blockWrapper,
   });
 
   final String markdown;
@@ -77,6 +78,13 @@ class DocumentMarkdownView extends StatelessWidget {
   /// geeft ze hier mee. `null` → de koppen komen uit [markdown] zelf, zoals in
   /// de lezer.
   final String? tocSource;
+
+  /// Haakje om elk blok, in renderervolgorde. De pagina-weergave gebruikt het
+  /// om de hoogte van elk blok op te nemen: pagina-einden mogen alleen tussen
+  /// blokken vallen, dus moet iemand weten waar die grenzen liggen — en dan
+  /// gemeten aan de echte render, niet geschat. `null` → de boom is exact die
+  /// van een gewone lezer.
+  final Widget Function(int index, Widget block)? blockWrapper;
   final void Function(String url)? onTapLink;
 
   /// Absolute block index the reader wants to scroll an `#anchor` link to (from
@@ -212,15 +220,28 @@ class DocumentMarkdownView extends StatelessWidget {
           // Grafieken en tabellen worden elk apart geteld, zodat een dubbelklik het
           // juiste blok (de hoeveelheidste van zíjn soort) in de bron kan vervangen.
           for (var i = 0, chart = 0, table = 0; i < blocks.length; i++)
-            _decorated(context, t, blocks[i], i, term, switch (blocks[i].kind) {
-              _Kind.chart => chart++,
-              _Kind.table => table++,
-              _ => -1,
-            }),
+            _wrapped(
+              i,
+              _decorated(
+                context,
+                t,
+                blocks[i],
+                i,
+                term,
+                switch (blocks[i].kind) {
+                  _Kind.chart => chart++,
+                  _Kind.table => table++,
+                  _ => -1,
+                },
+              ),
+            ),
         ],
       ),
     );
   }
+
+  Widget _wrapped(int index, Widget block) =>
+      blockWrapper?.call(index, block) ?? block;
 
   /// Wraps a block in a search tint when it matches [term]; the active match
   /// carries [activeMatchKey] and the anchor target carries [anchorKey] so the
