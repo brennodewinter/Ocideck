@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/page_size.dart';
 import '../../models/settings.dart' show ThemeProfile;
 import '../../services/document_pagination.dart';
+import '../../theme/app_theme.dart';
 import '../document_page_chrome.dart';
 import 'document_markdown_view.dart';
 
@@ -176,7 +177,9 @@ class _PagedDocumentViewState extends State<PagedDocumentView> {
       width: sheetW,
       height: sheetH,
       decoration: BoxDecoration(
-        color: Colors.white,
+        // Papier, niet hardgecodeerd wit: in donkere modus wordt het vel mee
+        // gedimd, anders staat er een verblindend blok op een donker scherm.
+        color: AppTheme.paper,
         boxShadow: [
           BoxShadow(
             color: theme.colorScheme.shadow.withValues(alpha: 0.18),

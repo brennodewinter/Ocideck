@@ -362,9 +362,6 @@ const Map<String, int> classSizeBaseline = {
       // +13 (#1500): setDocumentEditorMaxWidth, setDocumentPageSize en
       // setDocumentPageMargins — drie zetters voor de documentmodus-instellingen.
       1398,
-  // Nieuw plafond (#1500): de schermklasse van de documenteditor stond nog niet
-  // in deze lijst en kwam er met de paginamaat-indicator en _insertToc overheen.
-  'lib/widgets/document_editor_screen.dart#_DocumentEditorScreenState': 998,
   // Bewust verhoogd van 1256 naar 1261 (#651): `setDismissals` is een nieuwe
   // openbare mogelijkheid, geen drift. In dezelfde wijziging ging er 24 regels
   // uit — de vier identieke regels die annotaties, notities en terzijdeleggingen
