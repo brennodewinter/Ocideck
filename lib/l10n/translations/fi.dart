@@ -1774,6 +1774,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Rij erboven': 'Rivi yläpuolelle',
+  'Rij eronder': 'Rivi alapuolelle',
+  'Rij weghalen': 'Poista rivi',
+  'Kolom links': 'Sarake vasemmalle',
+  'Kolom rechts': 'Sarake oikealle',
+  'Kolom weghalen': 'Poista sarake',
   'Boven (mm)': 'Ylä (mm)',
   'Onder (mm)': 'Ala (mm)',
   'Links (mm)': 'Vasen (mm)',
@@ -4675,8 +4681,8 @@ const _dutchSourceAddFi = <String, String>{
   'wsreader': 'wsreader',
   'Centreren': 'Keskitä',
   'Getalnotatie': 'Lukumuoto',
-  'Kolom naar links': 'Sarake vasemmalle',
-  'Kolom naar rechts': 'Sarake oikealle',
+  'Kolom naar links': 'Siirrä sarake vasemmalle',
+  'Kolom naar rechts': 'Siirrä sarake oikealle',
   'Kolom rechts invoegen': 'Lisää sarake oikealle',
   'Koprij': 'Otsikkorivi',
   'Links uitlijnen': 'Tasaa vasemmalle',

@@ -1773,6 +1773,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Rij erboven': 'Rad ovanför',
+  'Rij eronder': 'Rad nedanför',
+  'Rij weghalen': 'Radera rad',
+  'Kolom links': 'Kolumn till vänster',
+  'Kolom rechts': 'Kolumn till höger',
+  'Kolom weghalen': 'Radera kolumn',
   'Boven (mm)': 'Överkant (mm)',
   'Onder (mm)': 'Nederkant (mm)',
   'Links (mm)': 'Vänster (mm)',

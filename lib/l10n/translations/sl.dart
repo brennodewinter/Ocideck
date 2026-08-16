@@ -1776,6 +1776,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Rij erboven': 'Vrstica zgoraj',
+  'Rij eronder': 'Vrstica spodaj',
+  'Rij weghalen': 'Izbriši vrstico',
+  'Kolom links': 'Stolpec levo',
+  'Kolom rechts': 'Stolpec desno',
+  'Kolom weghalen': 'Izbriši stolpec',
   'Boven (mm)': 'Zgoraj (mm)',
   'Onder (mm)': 'Spodaj (mm)',
   'Links (mm)': 'Levo (mm)',
@@ -4670,8 +4676,8 @@ const _dutchSourceAddSl = <String, String>{
   'wsreader': 'wsreader',
   'Centreren': 'Centriraj',
   'Getalnotatie': 'Format številk',
-  'Kolom naar links': 'Stolpec levo',
-  'Kolom naar rechts': 'Stolpec desno',
+  'Kolom naar links': 'Premakni stolpec levo',
+  'Kolom naar rechts': 'Premakni stolpec desno',
   'Kolom rechts invoegen': 'Vstavi stolpec desno',
   'Koprij': 'Vrstica glave',
   'Links uitlijnen': 'Poravnaj levo',

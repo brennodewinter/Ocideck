@@ -1786,6 +1786,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Rij erboven': 'Wiersz powyżej',
+  'Rij eronder': 'Wiersz poniżej',
+  'Rij weghalen': 'Usuń wiersz',
+  'Kolom links': 'Kolumna z lewej',
+  'Kolom rechts': 'Kolumna z prawej',
+  'Kolom weghalen': 'Usuń kolumnę',
   'Boven (mm)': 'Góra (mm)',
   'Onder (mm)': 'Dół (mm)',
   'Links (mm)': 'Lewo (mm)',

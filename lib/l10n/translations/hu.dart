@@ -1778,6 +1778,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Rij erboven': 'Sor fölé',
+  'Rij eronder': 'Sor alá',
+  'Rij weghalen': 'Sor törlése',
+  'Kolom links': 'Oszlop balra',
+  'Kolom rechts': 'Oszlop jobbra',
+  'Kolom weghalen': 'Oszlop törlése',
   'Boven (mm)': 'Fent (mm)',
   'Onder (mm)': 'Lent (mm)',
   'Links (mm)': 'Bal (mm)',
@@ -4685,8 +4691,8 @@ const _dutchSourceAddHu = <String, String>{
   'wsreader': 'wsreader',
   'Centreren': 'Középre',
   'Getalnotatie': 'Számformátum',
-  'Kolom naar links': 'Oszlop balra',
-  'Kolom naar rechts': 'Oszlop jobbra',
+  'Kolom naar links': 'Oszlop mozgatása balra',
+  'Kolom naar rechts': 'Oszlop mozgatása jobbra',
   'Kolom rechts invoegen': 'Oszlop beszúrása jobbra',
   'Koprij': 'Fejlécsor',
   'Links uitlijnen': 'Balra igazítás',

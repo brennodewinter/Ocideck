@@ -14,8 +14,12 @@ import '../../utils/doc_link.dart' show headingSlug;
 import '../slides/inline_markdown.dart';
 import '../slides/mermaid_diagram.dart' show MermaidRenderer;
 import 'doc_mermaid_view.dart';
+import 'table_edit_controller.dart';
+import 'table_edit_scaffold.dart';
+import 'table_editable_cell.dart';
 
 part 'parts/document_markdown_blocks.dart';
+part 'parts/document_markdown_table.dart';
 
 /// Renders a full Markdown document as widgets — headings, paragraphs, bullet
 /// and numbered lists, GFM task lists, block quotes, fenced code, ```mermaid
@@ -55,6 +59,8 @@ class DocumentMarkdownView extends StatelessWidget {
     this.themeProfile,
     this.onEditChart,
     this.onEditTable,
+    this.tableEditController,
+    this.tableEditOrdinal = 0,
     this.searchTerm,
     this.activeMatchBlockIndex = -1,
     this.activeMatchKey,
@@ -110,6 +116,16 @@ class DocumentMarkdownView extends StatelessWidget {
   /// de editor precies dat tabelblok in de bron kan vervangen. `null` → geen
   /// bewerking.
   final void Function(int tableOrdinal, List<String> tableRows)? onEditTable;
+
+  /// Maakt de tabel ter plekke invulbaar: elke cel wordt een tekstveld binnen
+  /// dezelfde gerenderde tabel, zodat je typt in de vorm die je krijgt — de
+  /// kolomverdeling, randen en huisstijl zijn per definitie die van de gelezen
+  /// tabel, want het is dezelfde tekenaar. `null` → de tabel is alleen-lezen.
+  ///
+  /// Geldt voor de tabel met volgnummer [tableEditOrdinal]; de overige tabellen
+  /// in hetzelfde document blijven gewoon gerenderd.
+  final TableEditController? tableEditController;
+  final int tableEditOrdinal;
 
   /// Case-insensitive find-in-page term. When non-empty, every block whose text
   /// contains it is tinted. `null`/empty means no search is active and the tree
@@ -666,203 +682,6 @@ class DocumentMarkdownView extends StatelessWidget {
     padding: const EdgeInsets.symmetric(vertical: 14),
     child: Divider(height: 1, thickness: 1, color: t.border),
   );
-
-  Widget _table(
-    _Theme t,
-    List<String> rows,
-    List<TableAlign> aligns,
-    int tableOrdinal,
-  ) {
-    final cells = rows.map(splitMarkdownTableRow).toList();
-    final columns = cells.isEmpty
-        ? 0
-        : cells.map((r) => r.length).reduce((a, b) => a > b ? a : b);
-    if (columns == 0) return const SizedBox.shrink();
-
-    // Feature 1: een tabel past binnen de beschikbare breedte met optimale
-    // kolomverdeling (hergebruik tableColumnWidths uit de slide-preview). Pas
-    // horizontaal scrollen toe wanneer de kolomminima samen breder zijn dan de
-    // beschikbare breedte — de inhoud past dan echt niet kleiner.
-    final table = Padding(
-      padding: const EdgeInsets.only(bottom: 14),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final avail = constraints.maxWidth;
-          // Document-tabellen lezen op een vaste, leesbare celmaat (geen
-          // slide-fitting): body 14px, kop 13px. Een document is geen 16:9-dia.
-          const cellSize = 14.0;
-          const headerCellSize = 13.0;
-          final font = t.body.fontFamily ?? 'sans-serif';
-          // De marge waarmee de cel écht getekend wordt (zie [_tableCell]).
-          // Meten met de preview-marge rekende de kolom een paar pixels rijker
-          // dan ze is, en dan schoof er alsnog een letter naar de volgende
-          // regel.
-          final hPad = t.tableCellPad + 4;
-          final minSum = tableColumnMinimumsWidth(
-            rows: cells,
-            colCount: columns,
-            cellSize: cellSize,
-            font: font,
-            hPad: hPad,
-          );
-          final fits = avail.isFinite && avail > 0 && minSum <= avail * 0.95;
-          final colWidths = fits
-              ? tableColumnWidths(
-                  rows: cells,
-                  colCount: columns,
-                  tableWidth: avail,
-                  cellSize: cellSize,
-                  font: font,
-                  hPad: hPad,
-                )
-              : null;
-          final tableWidget = _styledTable(
-            t,
-            cells,
-            columns,
-            aligns,
-            colWidths,
-            cellSize,
-            headerCellSize,
-          );
-          // Past de tabel niet binnen de breedte, dan valt hij terug op
-          // horizontale scroll met intrinsieke kolombreedtes — de huidige
-          // gedrag, voor het uitzonderingsgeval dat de inhoud niet kleiner kan.
-          if (fits) return tableWidget;
-          return SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: tableWidget,
-          );
-        },
-      ),
-    );
-    final onEdit = onEditTable;
-    if (onEdit == null) return table;
-    // In de editor: dubbelklik óf het potlood-knopje opent de tabel-editor.
-    return _EditableEmbed(
-      onEdit: () => onEdit(tableOrdinal, rows),
-      child: table,
-    );
-  }
-
-  /// De gestileerde tabel zelf, los van de breedte-beslissing. Feature 5:
-  /// zebrastrepen, randstijl (lined/boxed/none), celopvulling en een
-  /// accentkleurige onderrand onder de koprij — allemaal huisstijl uit het
-  /// ThemeProfile.
-  Widget _styledTable(
-    _Theme t,
-    List<List<String>> cells,
-    int columns,
-    List<TableAlign> aligns,
-    List<double>? colWidths,
-    double cellSize,
-    double headerCellSize,
-  ) {
-    final pad = t.tableCellPad;
-    final border = t.tableBorder;
-    final hasBox = t.tableBorderStyle == TableBorderStyle.boxed;
-    final hasLines = t.tableBorderStyle == TableBorderStyle.lined;
-    // Buitenrand alleen bij boxed; lined en none leunen op binnenlijnen of
-    // witruimte.
-    final outer = hasBox
-        ? Border.all(color: border)
-        : hasLines
-        ? Border(bottom: BorderSide(color: border))
-        : null;
-    final inside = switch (t.tableBorderStyle) {
-      TableBorderStyle.boxed => TableBorder.symmetric(
-        inside: BorderSide(color: border.withValues(alpha: 0.5)),
-      ),
-      TableBorderStyle.lined => TableBorder(
-        horizontalInside: BorderSide(color: border.withValues(alpha: 0.5)),
-        top: BorderSide(color: border),
-        // de koprij krijgt een eigen accentlijn hieronder; voorkom dubbel.
-        bottom: BorderSide(color: border),
-      ),
-      TableBorderStyle.none => TableBorder.all(
-        width: 0,
-        color: Colors.transparent,
-      ),
-    };
-    final accentHeaderLine = t.tableAccentHeaderBorder
-        ? Border(bottom: BorderSide(color: t.tableAccent, width: 2))
-        : null;
-    return Container(
-      decoration: BoxDecoration(
-        border: outer,
-        borderRadius: hasBox ? BorderRadius.circular(8) : null,
-      ),
-      clipBehavior: hasBox ? Clip.antiAlias : Clip.none,
-      child: Table(
-        defaultColumnWidth: const IntrinsicColumnWidth(),
-        columnWidths: colWidths == null
-            ? null
-            : {
-                for (var c = 0; c < columns; c++)
-                  c: FixedColumnWidth(colWidths[c]),
-              },
-        border: inside,
-        children: [
-          for (var r = 0; r < cells.length; r++)
-            TableRow(
-              decoration: BoxDecoration(
-                color: r == 0
-                    ? t.tableHeaderBg
-                    : t.tableZebraStriped && r.isEven
-                    ? t.tableZebraBg
-                    : null,
-                border: r == 0 ? accentHeaderLine : null,
-              ),
-              children: [
-                for (var c = 0; c < columns; c++)
-                  _tableCell(
-                    t,
-                    c < cells[r].length ? cells[r][c] : '',
-                    header: r == 0,
-                    textAlign: _columnTextAlign(aligns, c),
-                    pad: pad,
-                    cellSize: r == 0 ? headerCellSize : cellSize,
-                  ),
-              ],
-            ),
-        ],
-      ),
-    );
-  }
-
-  Widget _tableCell(
-    _Theme t,
-    String text, {
-    required bool header,
-    TextAlign textAlign = TextAlign.start,
-    double pad = 8.0,
-    double cellSize = 14.0,
-  }) => Padding(
-    padding: EdgeInsets.symmetric(horizontal: pad + 4, vertical: pad * 0.6),
-    child: _inline(
-      text,
-      header
-          ? t.body.copyWith(
-              fontSize: cellSize,
-              fontWeight: FontWeight.w700,
-              color: t.tableHeaderText,
-            )
-          : t.body.copyWith(fontSize: cellSize, color: t.tableText),
-      t,
-      textAlign: textAlign,
-    ),
-  );
-
-  /// De horizontale uitlijning voor kolom [c] uit de GFM-scheidingsrij; buiten
-  /// bereik → links (de GFM-default).
-  static TextAlign _columnTextAlign(List<TableAlign> aligns, int c) {
-    if (c >= aligns.length) return TextAlign.start;
-    return switch (aligns[c]) {
-      TableAlign.left => TextAlign.start,
-      TableAlign.center => TextAlign.center,
-      TableAlign.right => TextAlign.end,
-    };
-  }
 
   Widget _inline(
     String text,

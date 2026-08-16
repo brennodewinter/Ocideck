@@ -730,6 +730,12 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Rij erboven': 'Fila arriba',
+  'Rij eronder': 'Fila abajo',
+  'Rij weghalen': 'Eliminar fila',
+  'Kolom links': 'Columna a la izquierda',
+  'Kolom rechts': 'Columna a la derecha',
+  'Kolom weghalen': 'Eliminar columna',
   'Boven (mm)': 'Superior (mm)',
   'Onder (mm)': 'Inferior (mm)',
   'Links (mm)': 'Izquierda (mm)',
@@ -4718,8 +4724,8 @@ const _dutchSourceAddEs = {
   'wsreader': 'wsreader',
   'Centreren': 'Centrar',
   'Getalnotatie': 'Formato numérico',
-  'Kolom naar links': 'Columna a la izquierda',
-  'Kolom naar rechts': 'Columna a la derecha',
+  'Kolom naar links': 'Mover columna a la izquierda',
+  'Kolom naar rechts': 'Mover columna a la derecha',
   'Kolom rechts invoegen': 'Insertar columna a la derecha',
   'Koprij': 'Fila de encabezado',
   'Links uitlijnen': 'Alinear a la izquierda',

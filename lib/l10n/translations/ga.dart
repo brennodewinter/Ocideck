@@ -1809,6 +1809,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Rij erboven': 'Ró thuas',
+  'Rij eronder': 'Ró thíos',
+  'Rij weghalen': 'Scrios an ró',
+  'Kolom links': 'Colún ar chlé',
+  'Kolom rechts': 'Colún ar dheis',
+  'Kolom weghalen': 'Scrios an colún',
   'Boven (mm)': 'Barr (mm)',
   'Onder (mm)': 'Bun (mm)',
   'Links (mm)': 'Ar chlé (mm)',
@@ -4740,8 +4746,8 @@ const _dutchSourceAddGa = <String, String>{
   'wsreader': 'wsreader',
   'Centreren': 'Lárnaithe',
   'Getalnotatie': 'Formáid uimhreach',
-  'Kolom naar links': 'Colún ar chlé',
-  'Kolom naar rechts': 'Colún ar dheis',
+  'Kolom naar links': 'Bog an colún ar chlé',
+  'Kolom naar rechts': 'Bog an colún ar dheis',
   'Kolom rechts invoegen': 'Ionsáigh colún ar dheis',
   'Koprij': 'Ró ceanntáisc',
   'Links uitlijnen': 'Ailínigh ar chlé',

@@ -1773,6 +1773,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Rij erboven': 'Rinda augšpusē',
+  'Rij eronder': 'Rinda lejpusē',
+  'Rij weghalen': 'Dzēst rindu',
+  'Kolom links': 'Kolonna pa kreisi',
+  'Kolom rechts': 'Kolonna pa labi',
+  'Kolom weghalen': 'Dzēst kolonnu',
   'Boven (mm)': 'Augšā (mm)',
   'Onder (mm)': 'Apakšā (mm)',
   'Links (mm)': 'Pa kreisi (mm)',
@@ -4666,8 +4672,8 @@ const _dutchSourceAddLv = <String, String>{
   'wsreader': 'wsreader',
   'Centreren': 'Centrēt',
   'Getalnotatie': 'Skaitļu formāts',
-  'Kolom naar links': 'Kolonna pa kreisi',
-  'Kolom naar rechts': 'Kolonna pa labi',
+  'Kolom naar links': 'Pārvietot kolonnu pa kreisi',
+  'Kolom naar rechts': 'Pārvietot kolonnu pa labi',
   'Kolom rechts invoegen': 'Ievietot kolonnu pa labi',
   'Koprij': 'Galvenes rinda',
   'Links uitlijnen': 'Līdzināt pa kreisi',

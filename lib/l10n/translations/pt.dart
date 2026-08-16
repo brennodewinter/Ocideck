@@ -1803,6 +1803,12 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Rij erboven': 'Linha acima',
+  'Rij eronder': 'Linha abaixo',
+  'Rij weghalen': 'Eliminar linha',
+  'Kolom links': 'Coluna à esquerda',
+  'Kolom rechts': 'Coluna à direita',
+  'Kolom weghalen': 'Eliminar coluna',
   'Boven (mm)': 'Superior (mm)',
   'Onder (mm)': 'Inferior (mm)',
   'Links (mm)': 'Esquerda (mm)',

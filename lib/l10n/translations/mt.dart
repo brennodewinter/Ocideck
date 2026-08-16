@@ -1796,6 +1796,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Rij erboven': 'Ringiela fuq',
+  'Rij eronder': 'Ringiela taħt',
+  'Rij weghalen': 'Ħassar ir-ringiela',
+  'Kolom links': 'Kolonna fuq ix-xellug',
+  'Kolom rechts': 'Kolonna fuq il-lemin',
+  'Kolom weghalen': 'Ħassar il-kolonna',
   'Boven (mm)': 'Fuq (mm)',
   'Onder (mm)': 'Isfel (mm)',
   'Links (mm)': 'Xellug (mm)',

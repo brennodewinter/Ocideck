@@ -1801,6 +1801,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Rij erboven': 'Γραμμή επάνω',
+  'Rij eronder': 'Γραμμή κάτω',
+  'Rij weghalen': 'Διαγραφή γραμμής',
+  'Kolom links': 'Στήλη αριστερά',
+  'Kolom rechts': 'Στήλη δεξιά',
+  'Kolom weghalen': 'Διαγραφή στήλης',
   'Boven (mm)': 'Επάνω (mm)',
   'Onder (mm)': 'Κάτω (mm)',
   'Links (mm)': 'Αριστερά (mm)',
@@ -4739,8 +4745,8 @@ const _dutchSourceAddEl = <String, String>{
   'wsreader': 'wsreader',
   'Centreren': 'Κεντράρισμα',
   'Getalnotatie': 'Μορφή αριθμών',
-  'Kolom naar links': 'Στήλη αριστερά',
-  'Kolom naar rechts': 'Στήλη δεξιά',
+  'Kolom naar links': 'Μετακίνηση στήλης αριστερά',
+  'Kolom naar rechts': 'Μετακίνηση στήλης δεξιά',
   'Kolom rechts invoegen': 'Εισαγωγή στήλης δεξιά',
   'Koprij': 'Γραμμή κεφαλίδας',
   'Links uitlijnen': 'Στοίχιση αριστερά',

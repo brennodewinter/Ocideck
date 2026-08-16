@@ -729,6 +729,12 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Rij erboven': 'Riga sopra',
+  'Rij eronder': 'Riga sotto',
+  'Rij weghalen': 'Elimina riga',
+  'Kolom links': 'Colonna a sinistra',
+  'Kolom rechts': 'Colonna a destra',
+  'Kolom weghalen': 'Elimina colonna',
   'Boven (mm)': 'Sopra (mm)',
   'Onder (mm)': 'Sotto (mm)',
   'Links (mm)': 'Sinistra (mm)',
@@ -4723,8 +4729,8 @@ const _dutchSourceAddIt = {
   'wsreader': 'wsreader',
   'Centreren': 'Centra',
   'Getalnotatie': 'Formato numerico',
-  'Kolom naar links': 'Colonna a sinistra',
-  'Kolom naar rechts': 'Colonna a destra',
+  'Kolom naar links': 'Sposta colonna a sinistra',
+  'Kolom naar rechts': 'Sposta colonna a destra',
   'Kolom rechts invoegen': 'Inserisci colonna a destra',
   'Koprij': 'Riga di intestazione',
   'Links uitlijnen': 'Allinea a sinistra',

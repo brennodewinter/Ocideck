@@ -1773,6 +1773,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Rij erboven': 'Række ovenfor',
+  'Rij eronder': 'Række nedenfor',
+  'Rij weghalen': 'Slet række',
+  'Kolom links': 'Kolonne til venstre',
+  'Kolom rechts': 'Kolonne til højre',
+  'Kolom weghalen': 'Slet kolonne',
   'Boven (mm)': 'Top (mm)',
   'Onder (mm)': 'Bund (mm)',
   'Links (mm)': 'Venstre (mm)',
@@ -4667,8 +4673,8 @@ const _dutchSourceAddDa = <String, String>{
   'wsreader': 'wsreader',
   'Centreren': 'Centrer',
   'Getalnotatie': 'Talformat',
-  'Kolom naar links': 'Kolonne til venstre',
-  'Kolom naar rechts': 'Kolonne til højre',
+  'Kolom naar links': 'Flyt kolonne til venstre',
+  'Kolom naar rechts': 'Flyt kolonne til højre',
   'Kolom rechts invoegen': 'Indsæt kolonne til højre',
   'Koprij': 'Overskriftsrække',
   'Links uitlijnen': 'Venstrejuster',

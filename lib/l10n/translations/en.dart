@@ -915,6 +915,12 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Rij erboven': 'Row above',
+  'Rij eronder': 'Row below',
+  'Rij weghalen': 'Delete row',
+  'Kolom links': 'Column left',
+  'Kolom rechts': 'Column right',
+  'Kolom weghalen': 'Delete column',
   'Boven (mm)': 'Top (mm)',
   'Onder (mm)': 'Bottom (mm)',
   'Links (mm)': 'Left (mm)',

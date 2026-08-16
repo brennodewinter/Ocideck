@@ -733,6 +733,12 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Rij erboven': 'Zeile darüber',
+  'Rij eronder': 'Zeile darunter',
+  'Rij weghalen': 'Zeile löschen',
+  'Kolom links': 'Spalte links',
+  'Kolom rechts': 'Spalte rechts',
+  'Kolom weghalen': 'Spalte löschen',
   'Boven (mm)': 'Oben (mm)',
   'Onder (mm)': 'Unten (mm)',
   'Links (mm)': 'Links (mm)',

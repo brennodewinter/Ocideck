@@ -1791,6 +1791,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Rij erboven': 'Rând deasupra',
+  'Rij eronder': 'Rând dedesubt',
+  'Rij weghalen': 'Șterge rândul',
+  'Kolom links': 'Coloană la stânga',
+  'Kolom rechts': 'Coloană la dreapta',
+  'Kolom weghalen': 'Șterge coloana',
   'Boven (mm)': 'Sus (mm)',
   'Onder (mm)': 'Jos (mm)',
   'Links (mm)': 'Stânga (mm)',
@@ -4712,8 +4718,8 @@ const _dutchSourceAddRo = <String, String>{
   'wsreader': 'wsreader',
   'Centreren': 'Centrează',
   'Getalnotatie': 'Format numere',
-  'Kolom naar links': 'Coloană la stânga',
-  'Kolom naar rechts': 'Coloană la dreapta',
+  'Kolom naar links': 'Mută coloana la stânga',
+  'Kolom naar rechts': 'Mută coloana la dreapta',
   'Kolom rechts invoegen': 'Inserează coloană la dreapta',
   'Koprij': 'Rând antet',
   'Links uitlijnen': 'Aliniază la stânga',

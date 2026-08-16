@@ -1781,6 +1781,12 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Rij erboven': 'Riadok nad',
+  'Rij eronder': 'Riadok pod',
+  'Rij weghalen': 'Zmazať riadok',
+  'Kolom links': 'Stĺpec vľavo',
+  'Kolom rechts': 'Stĺpec vpravo',
+  'Kolom weghalen': 'Zmazať stĺpec',
   'Boven (mm)': 'Hore (mm)',
   'Onder (mm)': 'Dole (mm)',
   'Links (mm)': 'Vľavo (mm)',
@@ -4672,8 +4678,8 @@ const _dutchSourceAddSk = <String, String>{
   'wsreader': 'wsreader',
   'Centreren': 'Na stred',
   'Getalnotatie': 'Formát čísel',
-  'Kolom naar links': 'Stĺec doľava',
-  'Kolom naar rechts': 'Stĺec doprava',
+  'Kolom naar links': 'Stĺpec doľava',
+  'Kolom naar rechts': 'Stĺpec doprava',
   'Kolom rechts invoegen': 'Vložiť stĺec vpravo',
   'Koprij': 'Riadok hlavičky',
   'Links uitlijnen': 'Zarovnať vľavo',
