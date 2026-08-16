@@ -19,6 +19,15 @@ double tableCellFontMinimum(double w) => w * 0.010;
 /// regels zichzelf tot koptekst opblazen.
 double tableCellFontMaximum(double w) => w * 0.028;
 
+/// De horizontale celmarge per zijde bij [cellSize].
+///
+/// De preview leidt haar marge af uit de letter ([kTableCellHPadFactor]); de
+/// documentweergave hanteert een vaste marge uit het stijlprofiel. Wie meet
+/// moet dezelfde marge hanteren als wie tekent — anders rekent de maatvoering
+/// zich rijker dan de cel is en breekt de tekst alsnog middenin een woord.
+double tableCellHPad(double cellSize, [double? hPadOverride]) =>
+    hPadOverride ?? cellSize * kTableCellHPadFactor;
+
 /// De ruimte die alle kolommen samen minstens opeisen bij [cellSize] — marge
 /// plus het breedste ondeelbare kopwoord per kolom. Zie [tableColumnWidths].
 double tableColumnMinimumsWidth({
@@ -26,12 +35,13 @@ double tableColumnMinimumsWidth({
   required int colCount,
   required double cellSize,
   required String font,
+  double? hPad,
 }) {
   if (rows.isEmpty || colCount <= 0) return 0;
   final header = rows.first;
   var total = 0.0;
   for (var c = 0; c < colCount; c++) {
-    total += _columnMinWidth(header, c, cellSize, font);
+    total += _columnMinWidth(header, c, cellSize, font, hPad);
   }
   return total;
 }
@@ -50,12 +60,14 @@ double tableWidthCappedCellSize({
   required double probeCellSize,
   required String font,
   double headroom = 0.8,
+  double? hPad,
 }) {
   final probe = tableColumnMinimumsWidth(
     rows: rows,
     colCount: colCount,
     cellSize: probeCellSize,
     font: font,
+    hPad: hPad,
   );
   if (probe <= 0) return double.infinity;
   return probeCellSize * tableWidth * headroom / probe;
@@ -107,26 +119,98 @@ double _columnMinWidth(
   List<String> header,
   int c,
   double cellSize,
-  String font,
-) {
+  String font, [
+  double? hPad,
+]) {
   final text = c < header.length ? header[c].trim() : '';
   final word = text.isEmpty
       ? 0.0
       : measureTextWordWidth(text, cellSize, bold: true, fontFamily: font);
-  return cellSize * kTableCellHPadFactor * 2 + math.max(cellSize, word);
+  return tableCellHPad(cellSize, hPad) * 2 + math.max(cellSize, word);
+}
+
+/// De breedte waarbij kolom [c] geen enkel woord meer hoeft te breken: marge
+/// plus het breedste ondeelbare woord over álle rijen.
+///
+/// Dit is een *wens*, geen ondergrens ([_columnMinWidth] is dat wel). De
+/// kolomverdeling verdeelde de vrije ruimte naar tekenaantal, en dat is net
+/// niet hetzelfde als breedte: een kolom kon een paar pixels tekortkomen en
+/// dan één letter van het laatste woord naar de volgende regel duwen. Precies
+/// dat leest slecht in een tabel, dus krijgt elke kolom eerst haar woordwens
+/// voordat de rest naar tekenaantal wordt verdeeld.
+double _columnWordWidth(
+  List<List<String>> rows,
+  int c,
+  double cellSize,
+  String font,
+  double? hPad,
+) {
+  var widest = 0.0;
+  for (var r = 0; r < rows.length; r++) {
+    final row = rows[r];
+    final text = c < row.length ? row[c].trim() : '';
+    if (text.isEmpty) continue;
+    final word = measureTextWordWidth(
+      text,
+      cellSize,
+      bold: r == 0,
+      fontFamily: font,
+    );
+    if (word > widest) widest = word;
+  }
+  return tableCellHPad(cellSize, hPad) * 2 + widest;
+}
+
+/// Verdeelt [free] pixels over de wensen in [needs] volgens max-min-eerlijkheid:
+/// iedereen krijgt een gelijk deel, wie minder nodig heeft dan dat neemt alleen
+/// wat hij nodig heeft, en wat hij laat liggen gaat naar wie nog tekortkomt.
+///
+/// Naar rato verdelen zou hier het verkeerde doen: één cel met een URL die
+/// sowieso niet heel kan, heeft een wens zo groot dat hij naar rato álles
+/// opslokt — en dan breekt de buurkolom met een doodgewoon woord alsnog. Zo
+/// worden juist de bescheiden wensen eerst ingewilligd en draagt de uitschieter
+/// het tekort, wat precies de kolom is waar de breuk toch onvermijdelijk is.
+List<double> _maxMinFill(List<double> needs, double free) {
+  final grants = List<double>.filled(needs.length, 0);
+  final open = <int>[for (var i = 0; i < needs.length; i++) if (needs[i] > 0) i];
+  var left = free;
+  while (open.isNotEmpty && left > 1e-9) {
+    final share = left / open.length;
+    // Niemand blijft onder zijn deel: dan is er niets meer te herverdelen en
+    // krijgt iedereen gewoon dat deel.
+    final satisfied = open.where((i) => needs[i] - grants[i] <= share).toList();
+    if (satisfied.isEmpty) {
+      for (final i in open) {
+        grants[i] += share;
+      }
+      return grants;
+    }
+    for (final i in satisfied) {
+      left -= needs[i] - grants[i];
+      grants[i] = needs[i];
+      open.remove(i);
+    }
+  }
+  return grants;
 }
 
 /// Kolombreedtes in pixels, samen precies [tableWidth] breed.
 ///
-/// Elke kolom krijgt eerst haar ondergrens ([_columnMinWidth]); wat overblijft
-/// wordt verdeeld naar [tableColumnFlexWeights], zodat een tekstrijke kolom nog
-/// steeds het leeuwendeel pakt zonder de smalle kolommen plat te drukken.
+/// In drie stappen: elke kolom krijgt haar ondergrens ([_columnMinWidth]),
+/// daarna zoveel mogelijk van haar woordwens ([_columnWordWidth]) zodat geen
+/// woord middenin hoeft te breken, en pas wat dán nog vrij is wordt verdeeld
+/// naar [tableColumnFlexWeights] — zodat een tekstrijke kolom nog steeds het
+/// leeuwendeel pakt zonder de smalle kolommen plat te drukken.
+///
+/// [hPad] is de horizontale celmarge per zijde; laat hem weg wanneer de
+/// tekenaar de marge uit de letter afleidt ([kTableCellHPadFactor]).
 List<double> tableColumnWidths({
   required List<List<String>> rows,
   required int colCount,
   required double tableWidth,
   required double cellSize,
   required String font,
+  double? hPad,
 }) {
   if (rows.isEmpty || colCount <= 0 || tableWidth <= 0) {
     return List<double>.filled(math.max(colCount, 0), 0);
@@ -134,7 +218,7 @@ List<double> tableColumnWidths({
   final header = rows.first;
   final minimums = <double>[
     for (var c = 0; c < colCount; c++)
-      _columnMinWidth(header, c, cellSize, font),
+      _columnMinWidth(header, c, cellSize, font, hPad),
   ];
   final minimumSum = minimums.fold<double>(0, (a, b) => a + b);
   // Meer koptekst dan er breedte is: dan wint de tabelbreedte. Een gebroken kop
@@ -142,19 +226,34 @@ List<double> tableColumnWidths({
   if (minimumSum >= tableWidth) {
     return _scaledToFit(minimums, minimumSum, tableWidth);
   }
+  final free = tableWidth - minimumSum;
+  final grants = _maxMinFill([
+    for (var c = 0; c < colCount; c++)
+      math.max(
+        0.0,
+        _columnWordWidth(rows, c, cellSize, font, hPad) - minimums[c],
+      ),
+  ], free);
+  final wanted = <double>[
+    for (var c = 0; c < colCount; c++) minimums[c] + grants[c],
+  ];
+  final wantedSum = wanted.fold<double>(0, (a, b) => a + b);
+  // Alle vrije ruimte ging al op aan het heel houden van woorden: dan is er
+  // niets meer om naar tekenaantal te verdelen.
+  if (wantedSum >= tableWidth - 1e-9) {
+    return _scaledToFitAll(wanted, tableWidth);
+  }
   final weights = tableColumnFlexWeights(rows, colCount);
   final weightSum = weights.fold<double>(0, (a, b) => a + b);
-  final free = tableWidth - minimumSum;
-  final widths = <double>[
+  final surplus = tableWidth - wantedSum;
+  return _scaledToFitAll([
     for (var c = 0; c < colCount; c++)
-      minimums[c] + free * weights[c] / weightSum,
-  ];
-  return _scaledToFit(
-    widths,
-    widths.fold<double>(0, (a, b) => a + b),
-    tableWidth,
-  );
+      wanted[c] + surplus * weights[c] / weightSum,
+  ], tableWidth);
 }
+
+List<double> _scaledToFitAll(List<double> widths, double tableWidth) =>
+    _scaledToFit(widths, widths.fold<double>(0, (a, b) => a + b), tableWidth);
 
 /// Schaalt de som exact terug naar [tableWidth]. De verdeling komt er al op uit;
 /// dit vangt de laatste afrondingsbits, want een Table met vaste kolommen die
@@ -181,6 +280,7 @@ double tableBlockHeight({
   required double cellSize,
   required String font,
   double extraVPad = 0,
+  double? hPadOverride,
 }) {
   if (rows.isEmpty || colCount <= 0) return 0;
   final colW = tableColumnWidths(
@@ -189,8 +289,9 @@ double tableBlockHeight({
     tableWidth: tableWidth,
     cellSize: cellSize,
     font: font,
+    hPad: hPadOverride,
   );
-  final hPad = cellSize * kTableCellHPadFactor;
+  final hPad = tableCellHPad(cellSize, hPadOverride);
   final vPad = cellSize * kTableCellVPadFactor + extraVPad;
   var height = 0.0;
   for (var i = 0; i < rows.length; i++) {
