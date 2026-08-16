@@ -10,6 +10,7 @@ import '../l10n/app_localizations.dart';
 import '../l10n/page_size_localization.dart';
 import '../models/chart.dart';
 import '../models/markdown_outline.dart';
+import '../models/page_size.dart';
 import '../models/privacy_disposition.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';

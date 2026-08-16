@@ -382,7 +382,7 @@ Widget _outlineItem(
 Widget _documentPageIndicator(
   BuildContext context,
   ThemeData theme, {
-  required PageSize pageSize,
+  required PageSizeSpec pageSize,
   required PageMargins margins,
 }) => Positioned(
   right: 8,
