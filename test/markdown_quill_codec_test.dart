@@ -95,4 +95,18 @@ Tekst.''';
     // De marker blijft één blok — geen losse `<!--`-brokken in de tekst.
     expect(RegExp('<!--').allMatches(restored).length, 1);
   });
+
+  test('een scheiding komt er als `---` uit, niet als `- - -`', () {
+    // `DeltaToMarkdown` schrijft `- - -`. Betekenis-identiek, maar OciDeck
+    // schrijft en documenteert `---` (het pagina-einde in de documentmodus);
+    // zonder de omzetting herschreef één visuele bewerking stilzwijgend elke
+    // scheiding in het bestand van de gebruiker.
+    final document = MarkdownQuillCodec.documentFromMarkdown(
+      'Voor.\n\n---\n\nNa.',
+    );
+    final restored = MarkdownQuillCodec.markdownFromDocument(document);
+
+    expect(restored, contains('---'));
+    expect(restored, isNot(contains('- - -')));
+  });
 }

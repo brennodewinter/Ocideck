@@ -326,3 +326,42 @@ class _DocEditorToolbar extends StatelessWidget {
     );
   }
 }
+
+/// Eén kop in de Overzicht-rail: inspringing per niveau, de actieve kop in
+/// EU-blauw. Buiten de schermklasse omdat hij niets van het scherm nodig heeft
+/// behalve wat er bij een tik moet gebeuren.
+Widget _outlineItem(
+  ThemeData theme,
+  MarkdownOutlineEntry entry, {
+  required bool active,
+  required VoidCallback onTap,
+}) => InkWell(
+  onTap: onTap,
+  child: Container(
+    color: active
+        ? AppTheme.blueVivid.withValues(alpha: 0.08)
+        : Colors.transparent,
+    padding: EdgeInsets.only(
+      left: 16 + (entry.level - 1).clamp(0, 5) * 12.0,
+      right: 10,
+      top: 5,
+      bottom: 5,
+    ),
+    child: Text(
+      entry.title,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: entry.level <= 1 ? 13 : 12.5,
+        fontWeight: active || entry.level <= 1
+            ? FontWeight.w600
+            : FontWeight.w400,
+        color: active
+            ? AppTheme.blueVivid
+            : entry.level <= 1
+            ? theme.colorScheme.onSurface
+            : theme.colorScheme.onSurfaceVariant,
+      ),
+    ),
+  ),
+);

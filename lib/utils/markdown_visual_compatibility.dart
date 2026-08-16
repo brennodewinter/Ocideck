@@ -38,3 +38,10 @@ Set<MarkdownVisualLimitation> markdownVisualLimitations(String markdown) {
   }
   return limitations;
 }
+
+/// Of [markdown] in zijn geheel door de rijke-tekstlaag kan — oftewel: of de
+/// visuele stand echt de WYSIWYG-editor toont in plaats van de brontekst-
+/// terugval. De aanroeper die moet weten *waar* de tekst leeft (Quill of de
+/// bron-controller) heeft aan die ja/nee genoeg.
+bool markdownRoundTripsVisually(String markdown) =>
+    markdownVisualLimitations(markdown).isEmpty;

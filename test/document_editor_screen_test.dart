@@ -326,10 +326,14 @@ void main() {
     await tester.pump();
 
     final source = n.currentState.document!.source;
-    // Een `---` op een eigen regel, met witregels eromheen zodat het een
+    // Een `---` op een eigen regel, met een witregel ervóór zodat het een
     // thematische breuk is (geen setext-kop) — draagbaar en geen frontmatter.
+    // Aan het eind van het document sluit er geen regel meer op: de visuele
+    // stand (de standaard) schrijft de bron via de rijke-tekstbrug terug, en
+    // die laat geen sluitende witruimte achter.
     expect(source, startsWith('Voor.'));
-    expect(source, contains('\n---\n'));
+    expect(source, contains('\n\n---'));
+    expect(source, isNot(contains('- - -')));
     expect(n.currentState.document!.styleName, isNull);
   });
 
@@ -375,6 +379,105 @@ void main() {
     final source = n.currentState.document!.source;
     expect(source, contains('<!-- toc -->'));
     expect(source, isNot(contains('- [')));
+  });
+
+  testWidgets('Visueel: invoegen landt op de cursor, niet onderaan', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse(
+          '# Kop een\n\nEerste alinea.\n\nTweede alinea.\n',
+        ),
+      );
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    // Cursor in de eerste alinea zetten, zoals een gebruiker doet.
+    await tester.tap(find.byType(QuillEditor));
+    await tester.pumpAndSettle();
+    tester
+        .widget<QuillEditor>(find.byType(QuillEditor))
+        .controller
+        .updateSelection(
+          const TextSelection.collapsed(offset: 12),
+          ChangeSource.local,
+        );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Invoegen'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Inhoudsopgave'));
+    await tester.pumpAndSettle();
+
+    // De regressie: de bron-cursor staat in Visueel stil, dus elke invoeging
+    // belandde onderaan het document — wat leest als "er gebeurt niets".
+    final source = n.currentState.document!.source;
+    expect(
+      source,
+      contains('Eerste alinea.\n\n<!-- toc -->\n\nTweede alinea.'),
+      reason: 'het blok hoort onder de regel van de cursor te landen',
+    );
+    // En één keer, zonder een gat van witregels eromheen.
+    expect(RegExp('<!-- toc -->').allMatches(source).length, 1);
+    expect(source, isNot(contains('\n\n\n')));
+  });
+
+  testWidgets('Visueel: een pagina-einde wordt een lijn, geen foutblok', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(MarkdownDocument.parse('Voor.\n\n---\n\nNa.\n'));
+    await tester.pumpWidget(harness(n));
+    await tester.pumpAndSettle();
+
+    // Zonder builder voor de `divider`-embed tekent Quill een RenderErrorBox
+    // over het hele schrijfoppervlak.
+    expect(find.byType(QuillEditor), findsOneWidget);
+    expect(find.byType(Divider), findsWidgets);
+    // En de scheiding blijft `---`: de brug schrijft hem niet als `- - -` terug.
+    expect(n.currentState.document!.source, contains('---'));
+    expect(n.currentState.document!.source, isNot(contains('- - -')));
+  });
+
+  testWidgets('Visueel: een tabel invoegen landt ook op de cursor', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse('Eerste alinea.\n\nTweede alinea.\n'),
+      );
+    await tester.pumpWidget(harness(n));
+    await tester.pump();
+
+    await tester.tap(find.byType(QuillEditor));
+    await tester.pumpAndSettle();
+    tester
+        .widget<QuillEditor>(find.byType(QuillEditor))
+        .controller
+        .updateSelection(
+          const TextSelection.collapsed(offset: 3),
+          ChangeSource.local,
+        );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Invoegen'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Tabel'));
+    await tester.pumpAndSettle();
+
+    // Niet alleen de inhoudsopgave: élke invoeging liep via de bron-cursor.
+    final body = n.currentState.document!.body;
+    expect(body.indexOf('|'), lessThan(body.indexOf('Tweede alinea.')));
   });
 
   testWidgets(

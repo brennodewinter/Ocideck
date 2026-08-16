@@ -1409,6 +1409,21 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **invoegen in de visuele modus landde onderaan het document.** De
+  Invoegen-knoppen (inhoudsopgave, tabel, grafiek, mermaid, pagina-einde,
+  afbeelding) schreven altijd in de bron-controller, op diens cursor. In de
+  visuele stand leeft de tekst echter in het Quill-document en staat die
+  bron-cursor stil op waar hij toevallig het laatst was — het blok kwam dus
+  onderaan het document terecht in plaats van waar je stond, wat leest als "er
+  gebeurt niets". De editor voegt nu zelf in, op zijn eigen cursor: het blok
+  gaat door dezelfde markdown→Quill-omzetting (dus een tabel of inhoudsopgave
+  verschijnt meteen als embed) en landt op de regel ónder de cursor, of op de
+  plek zelf als die regel leeg is. Zo'n invoeging is één eigen stap in
+  ongedaan maken, niet een voortzetting van het typen ervoor. Meegenomen:
+  `DeltaToMarkdown` schreef een scheiding als `- - -`, waardoor één visuele
+  bewerking stilzwijgend elke `---` in het bestand herschreef; die komt er nu
+  weer als `---` uit.
+
 - **de inhoudsopgave wierp de visuele modus terug op ruwe markdown.** Wie in
   Visueel een inhoudsopgave invoegde, zag opeens zijn hele document als
   brontekst; in Bron ging het wél goed, want daar staat de gerenderde weergave

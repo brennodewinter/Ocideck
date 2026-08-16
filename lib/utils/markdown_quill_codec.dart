@@ -67,8 +67,14 @@ class MarkdownQuillCodec {
 
   static String markdownFromDocument(Document document) {
     final raw = _deltaToMd.convert(document.toDelta()).trimRight();
-    return normalizeRichTextMarkdown(raw);
+    return normalizeRichTextMarkdown(raw).replaceAll(_writtenOutRule, '---');
   }
+
+  /// `DeltaToMarkdown` schrijft een scheiding als `- - -`. Betekenis-identiek,
+  /// maar OciDeck schrijft en documenteert `---` (het pagina-einde in de
+  /// documentmodus), en zonder deze omzetting herschreef één visuele bewerking
+  /// stilzwijgend elke scheiding in het bestand van de gebruiker.
+  static final _writtenOutRule = RegExp(r'^- - -$', multiLine: true);
 }
 
 bool _nodeHasAttr(Node? node, String attributeKey) {
