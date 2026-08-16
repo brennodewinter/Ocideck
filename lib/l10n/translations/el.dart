@@ -1801,6 +1801,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Rij erboven': 'Γραμμή επάνω',
+  'Rij eronder': 'Γραμμή κάτω',
+  'Rij weghalen': 'Διαγραφή γραμμής',
+  'Kolom links': 'Στήλη αριστερά',
+  'Kolom rechts': 'Στήλη δεξιά',
+  'Kolom weghalen': 'Διαγραφή στήλης',
   'Boven (mm)': 'Επάνω (mm)',
   'Onder (mm)': 'Κάτω (mm)',
   'Links (mm)': 'Αριστερά (mm)',

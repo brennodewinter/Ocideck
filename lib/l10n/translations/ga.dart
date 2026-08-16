@@ -1809,6 +1809,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Rij erboven': 'Ró thuas',
+  'Rij eronder': 'Ró thíos',
+  'Rij weghalen': 'Scrios an ró',
+  'Kolom links': 'Colún ar chlé',
+  'Kolom rechts': 'Colún ar dheis',
+  'Kolom weghalen': 'Scrios an colún',
   'Boven (mm)': 'Barr (mm)',
   'Onder (mm)': 'Bun (mm)',
   'Links (mm)': 'Ar chlé (mm)',

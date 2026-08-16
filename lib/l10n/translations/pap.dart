@@ -733,6 +733,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Rij erboven': 'Rei ariba',
+  'Rij eronder': 'Rei abou',
+  'Rij weghalen': 'Kita rei',
+  'Kolom links': 'Kolòm robes',
+  'Kolom rechts': 'Kolòm drechi',
+  'Kolom weghalen': 'Kita kolòm',
   'Boven (mm)': 'Ariba (mm)',
   'Onder (mm)': 'Abou (mm)',
   'Links (mm)': 'Robes (mm)',

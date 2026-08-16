@@ -1773,6 +1773,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Rij erboven': 'Række ovenfor',
+  'Rij eronder': 'Række nedenfor',
+  'Rij weghalen': 'Slet række',
+  'Kolom links': 'Kolonne til venstre',
+  'Kolom rechts': 'Kolonne til højre',
+  'Kolom weghalen': 'Slet kolonne',
   'Boven (mm)': 'Top (mm)',
   'Onder (mm)': 'Bund (mm)',
   'Links (mm)': 'Venstre (mm)',

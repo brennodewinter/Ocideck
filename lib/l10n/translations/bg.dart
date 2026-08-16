@@ -1796,6 +1796,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Rij erboven': 'Ред отгоре',
+  'Rij eronder': 'Ред отдолу',
+  'Rij weghalen': 'Изтриване на реда',
+  'Kolom links': 'Колона отляво',
+  'Kolom rechts': 'Колона отдясно',
+  'Kolom weghalen': 'Изтриване на колоната',
   'Boven (mm)': 'Отгоре (mm)',
   'Onder (mm)': 'Отдолу (mm)',
   'Links (mm)': 'Ляво (mm)',

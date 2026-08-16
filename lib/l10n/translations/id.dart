@@ -1774,6 +1774,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Rij erboven': 'Baris di atas',
+  'Rij eronder': 'Baris di bawah',
+  'Rij weghalen': 'Hapus baris',
+  'Kolom links': 'Kolom di kiri',
+  'Kolom rechts': 'Kolom di kanan',
+  'Kolom weghalen': 'Hapus kolom',
   'Boven (mm)': 'Atas (mm)',
   'Onder (mm)': 'Bawah (mm)',
   'Links (mm)': 'Kiri (mm)',

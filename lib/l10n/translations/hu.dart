@@ -1778,6 +1778,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Rij erboven': 'Sor fölé',
+  'Rij eronder': 'Sor alá',
+  'Rij weghalen': 'Sor törlése',
+  'Kolom links': 'Oszlop balra',
+  'Kolom rechts': 'Oszlop jobbra',
+  'Kolom weghalen': 'Oszlop törlése',
   'Boven (mm)': 'Fent (mm)',
   'Onder (mm)': 'Lent (mm)',
   'Links (mm)': 'Bal (mm)',

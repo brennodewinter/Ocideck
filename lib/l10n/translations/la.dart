@@ -1790,6 +1790,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Rij erboven': 'Ordo supra',
+  'Rij eronder': 'Ordo infra',
+  'Rij weghalen': 'Ordinem delere',
+  'Kolom links': 'Columna ad sinistram',
+  'Kolom rechts': 'Columna ad dextram',
+  'Kolom weghalen': 'Columnam delere',
   'Boven (mm)': 'Supra (mm)',
   'Onder (mm)': 'Infra (mm)',
   'Links (mm)': 'Sinistra (mm)',

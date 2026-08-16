@@ -734,6 +734,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Rij erboven': 'Rige derboppe',
+  'Rij eronder': 'Rige derûnder',
+  'Rij weghalen': 'Rige wiskje',
+  'Kolom links': 'Kolom lofts',
+  'Kolom rechts': 'Kolom rjochts',
+  'Kolom weghalen': 'Kolom wiskje',
   'Boven (mm)': 'Boppe (mm)',
   'Onder (mm)': 'Under (mm)',
   'Links (mm)': 'Links (mm)',

@@ -1780,6 +1780,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Rij erboven': 'Redak iznad',
+  'Rij eronder': 'Redak ispod',
+  'Rij weghalen': 'Izbriši redak',
+  'Kolom links': 'Stupac lijevo',
+  'Kolom rechts': 'Stupac desno',
+  'Kolom weghalen': 'Izbriši stupac',
   'Boven (mm)': 'Gore (mm)',
   'Onder (mm)': 'Dolje (mm)',
   'Links (mm)': 'Lijevo (mm)',

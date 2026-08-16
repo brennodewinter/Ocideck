@@ -1773,6 +1773,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Rij erboven': 'Rinda augšpusē',
+  'Rij eronder': 'Rinda lejpusē',
+  'Rij weghalen': 'Dzēst rindu',
+  'Kolom links': 'Kolonna pa kreisi',
+  'Kolom rechts': 'Kolonna pa labi',
+  'Kolom weghalen': 'Dzēst kolonnu',
   'Boven (mm)': 'Augšā (mm)',
   'Onder (mm)': 'Apakšā (mm)',
   'Links (mm)': 'Pa kreisi (mm)',

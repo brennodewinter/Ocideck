@@ -1777,6 +1777,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Rij erboven': 'Zile drüber',
+  'Rij eronder': 'Zile drunder',
+  'Rij weghalen': 'Zile lösche',
+  'Kolom links': 'Spalte links',
+  'Kolom rechts': 'Spalte rächts',
+  'Kolom weghalen': 'Spalte lösche',
   'Boven (mm)': 'Obe (mm)',
   'Onder (mm)': 'Une (mm)',
   'Links (mm)': 'Links (mm)',

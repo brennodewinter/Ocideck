@@ -1791,6 +1791,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Rij erboven': 'Rând deasupra',
+  'Rij eronder': 'Rând dedesubt',
+  'Rij weghalen': 'Șterge rândul',
+  'Kolom links': 'Coloană la stânga',
+  'Kolom rechts': 'Coloană la dreapta',
+  'Kolom weghalen': 'Șterge coloana',
   'Boven (mm)': 'Sus (mm)',
   'Onder (mm)': 'Jos (mm)',
   'Links (mm)': 'Stânga (mm)',

@@ -730,6 +730,12 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Rij erboven': 'Fila arriba',
+  'Rij eronder': 'Fila abajo',
+  'Rij weghalen': 'Eliminar fila',
+  'Kolom links': 'Columna a la izquierda',
+  'Kolom rechts': 'Columna a la derecha',
+  'Kolom weghalen': 'Eliminar columna',
   'Boven (mm)': 'Superior (mm)',
   'Onder (mm)': 'Inferior (mm)',
   'Links (mm)': 'Izquierda (mm)',

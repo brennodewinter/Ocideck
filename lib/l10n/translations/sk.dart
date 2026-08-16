@@ -1781,6 +1781,12 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Rij erboven': 'Riadok nad',
+  'Rij eronder': 'Riadok pod',
+  'Rij weghalen': 'Zmazať riadok',
+  'Kolom links': 'Stĺpec vľavo',
+  'Kolom rechts': 'Stĺpec vpravo',
+  'Kolom weghalen': 'Zmazať stĺpec',
   'Boven (mm)': 'Hore (mm)',
   'Onder (mm)': 'Dole (mm)',
   'Links (mm)': 'Vľavo (mm)',

@@ -1749,6 +1749,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Rij erboven': 'tlhoy\' Dung',
+  'Rij eronder': 'tlhoy\' bIng',
+  'Rij weghalen': 'tlhoy\' yIteq',
+  'Kolom links': '\'och poS',
+  'Kolom rechts': '\'och nIH',
+  'Kolom weghalen': '\'och yIteq',
   'Boven (mm)': 'Dung (mm)',
   'Onder (mm)': 'bIng (mm)',
   'Links (mm)': 'poS (mm)',

@@ -1774,6 +1774,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Rij erboven': 'Rivi yläpuolelle',
+  'Rij eronder': 'Rivi alapuolelle',
+  'Rij weghalen': 'Poista rivi',
+  'Kolom links': 'Sarake vasemmalle',
+  'Kolom rechts': 'Sarake oikealle',
+  'Kolom weghalen': 'Poista sarake',
   'Boven (mm)': 'Ylä (mm)',
   'Onder (mm)': 'Ala (mm)',
   'Links (mm)': 'Vasen (mm)',

@@ -1776,6 +1776,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Rij erboven': 'Vrstica zgoraj',
+  'Rij eronder': 'Vrstica spodaj',
+  'Rij weghalen': 'Izbriši vrstico',
+  'Kolom links': 'Stolpec levo',
+  'Kolom rechts': 'Stolpec desno',
+  'Kolom weghalen': 'Izbriši stolpec',
   'Boven (mm)': 'Zgoraj (mm)',
   'Onder (mm)': 'Spodaj (mm)',
   'Links (mm)': 'Levo (mm)',

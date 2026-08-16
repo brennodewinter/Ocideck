@@ -1781,6 +1781,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Rij erboven': 'Eilutė aukščiau',
+  'Rij eronder': 'Eilutė žemiau',
+  'Rij weghalen': 'Ištrinti eilutę',
+  'Kolom links': 'Stulpelis kairėje',
+  'Kolom rechts': 'Stulpelis dešinėje',
+  'Kolom weghalen': 'Ištrinti stulpelį',
   'Boven (mm)': 'Viršus (mm)',
   'Onder (mm)': 'Apačia (mm)',
   'Links (mm)': 'Kairė (mm)',

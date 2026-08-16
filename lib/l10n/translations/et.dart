@@ -1765,6 +1765,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Rij erboven': 'Rida ülale',
+  'Rij eronder': 'Rida alla',
+  'Rij weghalen': 'Kustuta rida',
+  'Kolom links': 'Veerg vasakule',
+  'Kolom rechts': 'Veerg paremale',
+  'Kolom weghalen': 'Kustuta veerg',
   'Boven (mm)': 'Ülal (mm)',
   'Onder (mm)': 'All (mm)',
   'Links (mm)': 'Vasak (mm)',

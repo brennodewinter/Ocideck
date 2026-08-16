@@ -733,6 +733,12 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Rij erboven': 'Ligne au-dessus',
+  'Rij eronder': 'Ligne en dessous',
+  'Rij weghalen': 'Supprimer la ligne',
+  'Kolom links': 'Colonne à gauche',
+  'Kolom rechts': 'Colonne à droite',
+  'Kolom weghalen': 'Supprimer la colonne',
   'Boven (mm)': 'Haut (mm)',
   'Onder (mm)': 'Bas (mm)',
   'Links (mm)': 'Gauche (mm)',

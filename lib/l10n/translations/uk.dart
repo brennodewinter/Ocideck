@@ -1791,6 +1791,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Rij erboven': 'Рядок вище',
+  'Rij eronder': 'Рядок нижче',
+  'Rij weghalen': 'Видалити рядок',
+  'Kolom links': 'Стовпець ліворуч',
+  'Kolom rechts': 'Стовпець праворуч',
+  'Kolom weghalen': 'Видалити стовпець',
   'Boven (mm)': 'Зверху (mm)',
   'Onder (mm)': 'Знизу (mm)',
   'Links (mm)': 'Ліворуч (mm)',

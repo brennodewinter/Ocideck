@@ -1777,6 +1777,12 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Rij erboven': 'Řádek nad',
+  'Rij eronder': 'Řádek pod',
+  'Rij weghalen': 'Smazat řádek',
+  'Kolom links': 'Sloupec vlevo',
+  'Kolom rechts': 'Sloupec vpravo',
+  'Kolom weghalen': 'Smazat sloupec',
   'Boven (mm)': 'Nahoře (mm)',
   'Onder (mm)': 'Dole (mm)',
   'Links (mm)': 'Vlevo (mm)',
