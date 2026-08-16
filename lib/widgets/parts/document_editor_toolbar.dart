@@ -374,6 +374,50 @@ Widget _outlineItem(
   ),
 );
 
+/// De paginamaat-indicator rechtsonder in de Visuele modus: op welk formaat,
+/// met welke marges en — als hij aanstaat — met hoeveel afloop je schrijft.
+///
+/// Staat buiten de schermklasse omdat hij niets van het scherm nodig heeft
+/// behalve de maat en de marges, net als [_documentOutlineRail] hieronder.
+Widget _documentPageIndicator(
+  BuildContext context,
+  ThemeData theme, {
+  required PageSize pageSize,
+  required PageMargins margins,
+}) => Positioned(
+  right: 8,
+  bottom: 8,
+  child: IgnorePointer(
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface.withValues(alpha: 0.85),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: theme.colorScheme.outlineVariant),
+      ),
+      child: Text(
+        // Zelf samengesteld, niet door l10n.d(): de indicator draagt alleen
+        // data — de maatnaam en vier getallen in mm. Door d() halen zou een
+        // onvertaalbare sleutel per papiermaat-en-margecombinatie opleveren.
+        // Het enige wóórd zit in pageSizeLabel (de oriëntatie), en dat is wél
+        // vertaald.
+        '${pageSizeLabel(context.l10n, pageSize)} · '
+        '${margins.topMm.toStringAsFixed(0)}/'
+        '${margins.bottomMm.toStringAsFixed(0)}/'
+        '${margins.leftMm.toStringAsFixed(0)}/'
+        '${margins.rightMm.toStringAsFixed(0)}mm'
+        // De afloop geldt app-breed en werkt door op het volgende document;
+        // hem hier tonen houdt dat zichtbaar in plaats van stil.
+        '${margins.hasBleed ? ' · +${margins.bleedMm.toStringAsFixed(0)}mm' : ''}',
+        style: theme.textTheme.labelSmall?.copyWith(
+          color: theme.colorScheme.onSurfaceVariant,
+          fontSize: 10,
+        ),
+      ),
+    ),
+  ),
+);
+
 /// De Overzicht-rail: de koppen van het document, live afgeleid, klikbaar om
 /// naar die kop te springen. Europa-header (EU-blauw + geel). Inklapbaar tot
 /// een smalle strook. Leeg document → lege rail.
