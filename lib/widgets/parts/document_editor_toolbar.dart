@@ -165,11 +165,15 @@ class _DocEditorToolbar extends StatelessWidget {
                         icon: const Icon(Icons.ios_share, size: 16),
                         label: Text(l10n.d('Exporteren…')),
                       ),
-                      _moreMenu(l10n),
                     ],
                   ),
                 ),
               ),
+              // Het overloopmenu staat buiten de schuivende rij: het is de
+              // enige route naar Instellingen in documentmodus, en meeschuiven
+              // maakte hem onbereikbaar zodra er een knop bij kwam en de rij
+              // breder werd dan het venster.
+              _moreMenu(l10n),
             ],
           ),
           // Opmaak-knoppenbalk alleen in bron-modus: in Visueel heeft
