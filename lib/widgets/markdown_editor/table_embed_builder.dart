@@ -63,7 +63,6 @@ class TableEmbedBuilder extends EmbedBuilder {
 /// en de focus kwijtraken.
 class _EditableTableEmbed extends StatefulWidget {
   const _EditableTableEmbed({
-    super.key,
     required this.gfm,
     required this.profile,
     required this.embedContext,
