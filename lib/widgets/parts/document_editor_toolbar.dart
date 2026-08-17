@@ -23,6 +23,11 @@ class _DocEditorToolbar extends StatelessWidget {
   final VoidCallback onInsertImage;
   final VoidCallback onInsertPageBreak;
   final VoidCallback onInsertToc;
+
+  /// Zet in één keer een `---` vóór elk hoofdstuk (`H1`) behalve het eerste.
+  /// Geen invoeging op de cursor maar een bewerking van het hele document —
+  /// daarom onder een eigen scheiding in het palet.
+  final VoidCallback onApplyChapterBreaks;
   final VoidCallback onPaste;
   final VoidCallback? onUndo;
   final VoidCallback? onRedo;
@@ -61,6 +66,7 @@ class _DocEditorToolbar extends StatelessWidget {
     required this.onInsertImage,
     required this.onInsertPageBreak,
     required this.onInsertToc,
+    required this.onApplyChapterBreaks,
     required this.onPaste,
     required this.onUndo,
     required this.onRedo,
@@ -207,6 +213,7 @@ class _DocEditorToolbar extends StatelessWidget {
         3 => onInsertImage(),
         5 => onInsertPageBreak(),
         6 => onInsertToc(),
+        7 => onApplyChapterBreaks(),
         _ => onPaste(),
       },
       itemBuilder: (context) => [
@@ -220,6 +227,12 @@ class _DocEditorToolbar extends StatelessWidget {
           l10n.d('Pagina-einde'),
         ),
         _insertItem(6, Icons.list_outlined, l10n.d('Inhoudsopgave')),
+        const PopupMenuDivider(),
+        _insertItem(
+          7,
+          Icons.auto_stories_outlined,
+          l10n.d('Hoofdstukken op nieuwe pagina'),
+        ),
         const PopupMenuDivider(),
         _insertItem(4, Icons.content_paste, l10n.d('Plakken')),
       ],
@@ -357,7 +370,10 @@ class _DocEditorToolbar extends StatelessWidget {
         children: [
           Icon(icon, size: 17),
           const SizedBox(width: 10),
-          Text(label),
+          // Buigzaam, niet vast: een popupmenu is op ~256px afgekapt en een
+          // langer label (een andere taal, of 200% tekstgrootte) liet de rij
+          // overlopen in plaats van netjes af te breken.
+          Expanded(child: Text(label, overflow: TextOverflow.ellipsis)),
         ],
       ),
     );

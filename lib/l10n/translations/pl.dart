@@ -1662,6 +1662,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Rozdziały na nowej stronie',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Każdy rozdział zaczyna się teraz od nowej strony',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Każdy rozdział już zaczynał się od nowej strony',
   'Snijtekens': 'Znaczniki cięcia',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Tylko w eksporcie LaTeX/PDF i tylko ze spadem. Wymaga pakietu crop w twojej instalacji TeX; wydruk eksportu HTML z przeglądarki ich nie doda.',

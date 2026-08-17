@@ -1678,6 +1678,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Capítulos em nova página',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Cada capítulo começa agora numa nova página',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Cada capítulo já começava numa nova página',
   'Snijtekens': 'Marcas de corte',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Apenas na exportação LaTeX/PDF e apenas com sangria. Requer o pacote crop na sua instalação do TeX; imprimir a exportação HTML a partir de um navegador não as adiciona.',

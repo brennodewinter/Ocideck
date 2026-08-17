@@ -1651,6 +1651,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Poglavja na novi strani',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Vsako poglavje se zdaj začne na novi strani',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Vsako poglavje se je že začelo na novi strani',
   'Snijtekens': 'Oznake za rez',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Samo pri izvozu LaTeX/PDF in samo z dodatkom za porezavo. Zahteva paket crop v vaši namestitvi TeX; tiskanje izvoza HTML iz brskalnika jih ne doda.',

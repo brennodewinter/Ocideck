@@ -1650,6 +1650,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Luvut uudelle sivulle',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Jokainen luku alkaa nyt uudelta sivulta',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Jokainen luku alkoi jo uudelta sivulta',
   'Snijtekens': 'Leikkuumerkit',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Vain LaTeX/PDF-viennissä ja vain leikkuuvaran kanssa. Vaatii crop-paketin TeX-asennukseesi; HTML-viennin tulostaminen selaimesta ei lisää niitä.',

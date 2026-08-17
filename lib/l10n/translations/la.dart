@@ -1665,6 +1665,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Capita in nova pagina',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Omne caput nunc in nova pagina incipit',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Omne caput iam in nova pagina incipiebat',
   'Snijtekens': 'Signa sectionis',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Tantum in exportatione LaTeX/PDF, et tantum cum excursu. Fasciculum crop in institutione TeX requirit; exportatio HTML e navigatro impressa ea non ponit.',

@@ -512,6 +512,8 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
                 onInsertChart: _insertChart,
                 onInsertPageBreak: _insertPageBreak,
                 onInsertToc: _insertToc,
+                onApplyChapterBreaks: () =>
+                    applyChapterBreaksToDocument(context, ref),
                 onInsertTable: _insertTable,
                 onInsertMermaid: _insertMermaid,
                 onInsertImage: _insertImage,

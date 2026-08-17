@@ -945,6 +945,37 @@ into the two paged renderers:
 Both the `---` break and this setting can be in play at once: the `---` breaks
 where the author placed it, the setting adds a break before each chapter heading.
 
+### 13.6 Writing the chapter breaks into the document (added 2026-08-17)
+
+The setting of §13.5 is app-wide and does **not** travel with the file, so a
+document that paginates by chapter here runs on at the recipient. The answer is
+not a fourth front-matter key — that would be an OciDeck-only spelling of
+something the format already expresses. FILE_FORMAT.md §14.6 has the portable
+form: a `---` in front of an `H1` is a page break every reader honours.
+
+**Hoofdstukken op nieuwe pagina** in the insert palette
+([`document_editor_toolbar.dart`](../../lib/widgets/parts/document_editor_toolbar.dart))
+is therefore a one-off *edit of the body*, not a stored preference:
+`applyChapterBreaksToDocument` → `applyChapterPageBreaks`
+([`document_source_rewrites.dart`](../../lib/widgets/parts/document_source_rewrites.dart))
+inserts a plain `---` before every `H1` but the first, and the screen commits it
+through the same `documentProvider.edit` route as every other source rewrite, so
+it is visible in **Bron** and one discrete undo step. Two properties make it safe
+to press twice:
+
+- **Idempotent** — a heading that already has a thematic break above it (blank
+  lines in between allowed) is skipped, so a second run returns the body
+  byte-for-byte and the snack bar says nothing changed.
+- **One grammar** — the `H1` positions come from
+  `DocumentMarkdownView.chapterHeadingLines` and the break test from
+  `DocumentMarkdownView.isThematicBreakLine`, the same fence-skipping
+  classification the view renders with. A `#` or `---` inside a fenced block is
+  code, never a heading or a break. The rewrite works on `document.body`, so the
+  front matter is untouched by construction.
+
+A break is written with a blank line in front of it: `---` directly under a text
+line is a setext `H2` of that line, not a rule.
+
 ---
 
 ## 14. Working on real pages (added 2026-08-16)

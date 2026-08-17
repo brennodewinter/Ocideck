@@ -1675,6 +1675,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Κεφάλαια σε νέα σελίδα',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Κάθε κεφάλαιο ξεκινά τώρα σε νέα σελίδα',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Κάθε κεφάλαιο ξεκινούσε ήδη σε νέα σελίδα',
   'Snijtekens': 'Σημάδια κοπής',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Μόνο στην εξαγωγή LaTeX/PDF και μόνο με διαφυγή. Απαιτεί το πακέτο crop στην εγκατάσταση TeX σας· η εκτύπωση της εξαγωγής HTML από το πρόγραμμα περιήγησης δεν τα προσθέτει.',

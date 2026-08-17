@@ -1652,6 +1652,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Fejezetek új oldalon',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Minden fejezet mostantól új oldalon kezdődik',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Minden fejezet már új oldalon kezdődött',
   'Snijtekens': 'Vágójelek',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Csak a LaTeX/PDF-exportban, és csak kifutóval. Szükséges hozzá a crop csomag a TeX-telepítésedben; a HTML-export böngészőből való nyomtatása nem teszi ki őket.',

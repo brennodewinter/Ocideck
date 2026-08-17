@@ -197,6 +197,39 @@ class DocumentMarkdownView extends StatelessWidget {
     return breaks;
   }
 
+  /// De regelnummers (vanaf 0) van elke hoofdstukkop (`H1`) in [source], geteld
+  /// met exact dezelfde grammatica als de weergave: een `#` binnen een fenced
+  /// blok is code en telt niet mee, en een kop heeft een spatie na de hekjes.
+  /// De editor gebruikt dit om hoofdstukafbrekingen in de bron te zetten zonder
+  /// een eigen kop-herkenning naast die van de weergave te bouwen.
+  static List<int> chapterHeadingLines(String source) {
+    final lines = source.split('\n');
+    final headings = <int>[];
+    var i = 0;
+    while (i < lines.length) {
+      final trimmed = lines[i].trim();
+      final marker = _fenceMarker(trimmed);
+      if (marker != null) {
+        var end = i + 1;
+        while (end < lines.length && lines[end].trim() != marker) {
+          end++;
+        }
+        i = end < lines.length ? end + 1 : end;
+        continue;
+      }
+      if (_headingLevel(trimmed) == 1) headings.add(i);
+      i++;
+    }
+    return headings;
+  }
+
+  /// Of [line] een thematische breuk is (`---`, `***`, `___`) — precies de regel
+  /// die de weergave als scheiding tekent en die de export (FILE_FORMAT.md
+  /// §14.6) als pagina-einde honoreert. Zegt niets over de context: de beller
+  /// moet zelf weten dat de regel buiten een fenced blok staat.
+  static bool isThematicBreakLine(String line) =>
+      _isHorizontalRule(line.trim());
+
   /// The absolute block index (into the same block list [build] renders) of the
   /// first heading whose [headingSlug] equals [slug], or `-1` when this document
   /// has no such heading. The reader uses it to point [anchorBlockIndex] at the

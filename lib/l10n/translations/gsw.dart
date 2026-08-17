@@ -1652,6 +1652,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Kapitel uf ere neue Site',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Jedes Kapitel faht jetz uf ere neue Site aa',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Jedes Kapitel het scho uf ere neue Site aagfange',
   'Snijtekens': 'Schnittmarke',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Nume im LaTeX/PDF-Export und nume mit Aaschnitt. Bruucht s Paket crop i de TeX-Installation; en Browser-Uusdruck vom HTML-Export setzt si nöd.',

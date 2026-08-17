@@ -673,6 +673,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Hoofdstukken op nieuwe pagina': 'Capítulos en página nueva',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Ahora cada capítulo empieza en una página nueva',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Cada capítulo ya empezaba en una página nueva',
   'Snijtekens': 'Marcas de corte',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Solo en la exportación LaTeX/PDF y solo con sangrado. Requiere el paquete crop en tu instalación de TeX; imprimir la exportación HTML desde el navegador no las añade.',

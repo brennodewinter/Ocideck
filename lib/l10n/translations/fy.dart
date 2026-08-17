@@ -675,6 +675,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Hoofdstukken op nieuwe pagina': 'Haadstikken op nije side',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Elk haadstik begjint no op in nije side',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Elk haadstik begûn al op in nije side',
   'Snijtekens': 'Snijtekens',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Allinne yn de LaTeX/PDF-eksport, en allinne mei ôfrin. Freget it crop-pakket yn dyn TeX-ynstallaasje; in browserprint fan de HTML-eksport set se net.',

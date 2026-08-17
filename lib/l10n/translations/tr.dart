@@ -2567,6 +2567,11 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Bölümler yeni sayfada',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Artık her bölüm yeni bir sayfada başlıyor',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Her bölüm zaten yeni bir sayfada başlıyordu',
   'Snijtekens': 'Kesim işaretleri',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Yalnızca LaTeX/PDF dışa aktarımında ve yalnızca taşma payı ile. TeX kurulumunuzda crop paketi gerekir; HTML dışa aktarımının tarayıcıdan yazdırılması bunları eklemez.',

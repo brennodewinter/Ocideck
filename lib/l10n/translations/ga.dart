@@ -1681,6 +1681,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Caibidlí ar leathanach nua',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Tosaíonn gach caibidil ar leathanach nua anois',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Thosaigh gach caibidil ar leathanach nua cheana féin',
   'Snijtekens': 'Marcanna bearrtha',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'San easpórtáil LaTeX/PDF amháin, agus le fuiliú amháin. Tá an pacáiste crop de dhíth i do shuiteáil TeX; ní chuireann priontáil na heaspórtála HTML ó bhrabhsálaí isteach iad.',

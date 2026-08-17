@@ -1652,6 +1652,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Kapitoly na nové stránce',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Každá kapitola nyní začíná na nové stránce',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Každá kapitola už začínala na nové stránce',
   'Snijtekens': 'Ořezové značky',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Pouze v exportu LaTeX/PDF a pouze se spadávkou. Vyžaduje balíček crop ve vaší instalaci TeX; tisk HTML exportu z prohlížeče je nepřidá.',

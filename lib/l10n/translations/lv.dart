@@ -1649,6 +1649,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Nodaļas jaunā lappusē',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Katra nodaļa tagad sākas jaunā lappusē',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Katra nodaļa jau sākās jaunā lappusē',
   'Snijtekens': 'Griešanas atzīmes',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Tikai LaTeX/PDF eksportā un tikai ar apgriešanas rezervi. Nepieciešama pakotne crop jūsu TeX instalācijā; HTML eksporta izdrukāšana no pārlūka tās nepievieno.',

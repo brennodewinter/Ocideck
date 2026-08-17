@@ -1643,6 +1643,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Peatükid uuele lehele',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Iga peatükk algab nüüd uuelt lehelt',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Iga peatükk algas juba uuelt lehelt',
   'Snijtekens': 'Lõikemärgid',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Ainult LaTeX/PDF-ekspordis ja ainult lõikevaruga. Nõuab paketti crop sinu TeX-i paigalduses; HTML-ekspordi printimine brauserist neid ei lisa.',

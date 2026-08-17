@@ -4305,6 +4305,22 @@ where it is, so the export does not open with a blank page. The two work togethe
 the setting breaks before every chapter, and any `---` you place breaks where you
 put it.
 
+**Writing those chapter breaks into the document.** *(Added 2026-08-17.)* The
+setting above lives in your app, not in your file: send the `.md` to someone else
+and their chapters run on. If you want the breaks to travel with the document,
+choose **Hoofdstukken op nieuwe pagina** ("Chapters on a new page") from the
+**Invoegen** (Insert) palette. It is a one-off edit of your text, not a
+setting: it writes a plain `---` in front of every chapter heading except the
+first, exactly where you would have typed one yourself. Because it is an ordinary
+break, every reader honours it — OciDeck, Pandoc, GitHub, and the printer of
+whoever you sent the file to.
+
+You can see the change in the **Source** view, and **Undo** takes it straight
+back. Running it a second time changes nothing: a chapter that already has a
+break in front of it is left alone, so you never end up with a double `---` (and
+the message says so). A `---` or a `#` inside a fenced code block is code, not a
+break or a heading, and is left untouched — as is the front matter.
+
 ### Giving a document a style
 
 A **Style** button in the toolbar picks one document-wide style — a font-and-styling

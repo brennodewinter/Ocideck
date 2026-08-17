@@ -1667,6 +1667,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Capitole pe pagină nouă',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Fiecare capitol începe acum pe o pagină nouă',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Fiecare capitol începea deja pe o pagină nouă',
   'Snijtekens': 'Marcaje de tăiere',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Doar în exportul LaTeX/PDF și doar cu bleed. Necesită pachetul crop în instalarea ta de TeX; tipărirea exportului HTML din browser nu le adaugă.',

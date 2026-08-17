@@ -1438,6 +1438,17 @@ that before deciding whether this alpha fits what you are doing.
   machine bestaat. Een maat kun je kopiëren, een verwijzing niet — dus wordt de
   stijl vóór export opgelost en in de uitvoer gerenderd. De bron blijft
   onaangeraakt; de export schrijft zoals altijd een nieuw bestand (§14.4).
+- **hoofdstukafbrekingen die met het bestand meereizen.** "Nieuw hoofdstuk op
+  een nieuwe pagina" stond app-breed in de instellingen: wie het document
+  doorstuurde, stuurde de pagina-indeling niet mee. Een vierde
+  frontmatter-sleutel zou dat oplossen in een vorm die alleen OciDeck begrijpt —
+  terwijl het formaat de juiste vorm al kent (FILE_FORMAT.md §14.6): een `---`
+  vóór een `H1` is een pagina-einde dat élke lezer honoreert. **Hoofdstukken op
+  nieuwe pagina** in het invoeg-palet zet die breuken er eenmalig in: zichtbaar
+  in de bron, ongedaan te maken als elke andere bewerking, en idempotent — een
+  kop met al een breuk ervoor blijft byte-getrouw. De kop- en breukherkenning
+  komt van `DocumentMarkdownView`, dezelfde grammatica als de weergave, dus een
+  `#` of `---` binnen een fenced blok telt niet mee. (#1535)
 
 - **een poort op vertalingen die de Nederlandse bron laten staan.** De
   vertaalwachters keken alle drie langs hetzelfde gat. `make l10n-check` vraagt

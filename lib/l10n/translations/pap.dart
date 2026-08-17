@@ -674,6 +674,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Hoofdstukken op nieuwe pagina': 'Kapítulo riba página nobo',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Awor kada kapítulo ta kuminsá riba un página nobo',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Kada kapítulo tabata kuminsá kaba riba un página nobo',
   'Snijtekens': 'Marka di korta',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Solamente den e eksportashon LaTeX/PDF, i solamente ku sangrado. Ta rekerí e paket crop den bo instalashon di TeX; imprimí e eksportashon HTML for di un browser no ta pone nan.',

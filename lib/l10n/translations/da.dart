@@ -1650,6 +1650,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Kapitler på ny side',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Hvert kapitel begynder nu på en ny side',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Hvert kapitel begyndte allerede på en ny side',
   'Snijtekens': 'Skæremærker',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Kun i LaTeX/PDF-eksporten og kun med beskæring. Kræver crop-pakken i din TeX-installation; en browserudskrift af HTML-eksporten tilføjer dem ikke.',

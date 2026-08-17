@@ -1657,6 +1657,11 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Skyriai naujame puslapyje',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Kiekvienas skyrius dabar prasideda naujame puslapyje',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Kiekvienas skyrius jau prasidėjo naujame puslapyje',
   'Snijtekens': 'Pjovimo žymos',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Tik LaTeX/PDF eksporte ir tik su išleistimi. Reikia paketo crop jūsų TeX diegime; HTML eksporto spausdinimas iš naršyklės jų neprideda.',

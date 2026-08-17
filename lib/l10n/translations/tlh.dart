@@ -1627,6 +1627,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'nav chu\'Daq Hoch \'ay\'',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'DaH nav chu\'Daq tagh Hoch \'ay\'',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'nav chu\'Daq taghpu\' Hoch \'ay\'',
   'Deze paginaopmaak staat in dit document': 'nav nabvam ghaj ghItlhvam',
   'Snijtekens': 'pe\'meH deghmey',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':

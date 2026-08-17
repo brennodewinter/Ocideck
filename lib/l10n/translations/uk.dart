@@ -1666,6 +1666,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Розділи з нової сторінки',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Тепер кожен розділ починається з нової сторінки',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Кожен розділ уже починався з нової сторінки',
   'Snijtekens': 'Мітки обрізу',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Лише в експорті LaTeX/PDF і лише з вилетом. Потребує пакет crop у вашій встановленій системі TeX; друк HTML-експорту з браузера їх не додає.',

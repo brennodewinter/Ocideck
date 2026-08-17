@@ -1649,6 +1649,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Bab di halaman baru',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Setiap bab kini dimulai pada halaman baru',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Setiap bab sudah dimulai pada halaman baru',
   'Snijtekens': 'Tanda potong',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Hanya pada ekspor LaTeX/PDF, dan hanya dengan bleed. Memerlukan paket crop pada instalasi TeX Anda; mencetak ekspor HTML dari browser tidak menambahkannya.',

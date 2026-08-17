@@ -610,4 +610,64 @@ void main() {
       expect(n.currentState.isDirty, isTrue);
     },
   );
+
+  testWidgets(
+    'het palet zet hoofdstukafbrekingen in de bron, ongedaan te maken',
+    (tester) async {
+      final n = DocumentNotifier()
+        ..loadDocument(
+          MarkdownDocument.parse(
+            '---\ntheme: Zakelijk\n---\n\n'
+            '# Een\n\nAlfa\n\n# Twee\n\nBeta\n',
+          ),
+        );
+      await tester.pumpWidget(harness(n));
+      await openSource(tester);
+
+      await tester.tap(find.text('Invoegen'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Hoofdstukken op nieuwe pagina'));
+      await tester.pumpAndSettle();
+
+      final source = n.currentState.document!.source;
+      expect(source, contains('Alfa\n\n---\n\n# Twee'));
+      // De frontmatter blijft staan: de bewerking raakt alleen de body.
+      expect(source, startsWith('---\ntheme: Zakelijk\n---\n'));
+      expect(
+        find.text('Elk hoofdstuk begint nu op een nieuwe pagina'),
+        findsOneWidget,
+      );
+
+      // Eén discrete stap in de geschiedenis: ongedaan maken brengt de bron
+      // precies terug.
+      expect(n.currentState.canUndo, isTrue);
+      n.undo();
+      expect(n.currentState.document!.source, isNot(contains('Alfa\n\n---')));
+    },
+  );
+
+  testWidgets('een tweede keer toepassen verandert de bron niet', (
+    tester,
+  ) async {
+    final n = DocumentNotifier()
+      ..loadDocument(
+        MarkdownDocument.parse('# Een\n\nAlfa\n\n---\n\n# Twee\n'),
+      );
+    await tester.pumpWidget(harness(n));
+    await openSource(tester);
+
+    await tester.tap(find.text('Invoegen'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Hoofdstukken op nieuwe pagina'));
+    await tester.pumpAndSettle();
+
+    expect(n.currentState.document!.source, '# Een\n\nAlfa\n\n---\n\n# Twee\n');
+    // Niets veranderd, dus ook geen bewerking in de geschiedenis — en de
+    // melding zegt eerlijk dat het al zo stond.
+    expect(n.currentState.isDirty, isFalse);
+    expect(
+      find.text('Elk hoofdstuk begon al op een nieuwe pagina'),
+      findsOneWidget,
+    );
+  });
 }

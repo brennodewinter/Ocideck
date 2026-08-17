@@ -1670,6 +1670,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Hoofdstukken op nieuwe pagina': 'Kapitli f\'paġna ġdida',
+  'Elk hoofdstuk begint nu op een nieuwe pagina':
+      'Kull kapitlu issa jibda f\'paġna ġdida',
+  'Elk hoofdstuk begon al op een nieuwe pagina':
+      'Kull kapitlu diġà kien jibda f\'paġna ġdida',
   'Snijtekens': 'Marki tal-qtugħ',
   'Alleen in de LaTeX/PDF-export, en alleen met afloop. Vereist het crop-pakket in je TeX-installatie; een browser-afdruk van de HTML-export zet ze niet.':
       'Biss fl-esportazzjoni LaTeX/PDF, u biss bil-bleed. Jeħtieġ il-pakkett crop fl-installazzjoni TeX tiegħek; l-istampar tal-esportazzjoni HTML minn browser ma jżidhomx.',
