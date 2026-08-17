@@ -1789,7 +1789,7 @@ const _dutchSourceAddTlh = <String, String>{
       'Daq yIchel pagh wa\' De\' vIneH yISam.',
   'Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.':
       'Hom tam je markdown \'ej nagh — vaj \'e\' rIn (AES-256), OciDeckDaq yIghaj.',
-  'dia\'s uit dit document.': 'ghItlhvamvo\' \'echletHommey.',
+  'dia\'s uit dit document.': '\'echletHommey ghItlhvamvo\'.',
   'Het logo van dit stijlprofiel is niet gevonden en wordt niet getoond (pad: {pad}). Kies een logo in de presentatie-instellingen.':
       'Deghvam Segh tu\'be\'lu\' \'ej \'angbe\'lu\' (HeH: {pad}). \'ang SeHlawDaq Degh yIwIv.',
   'Converteer naar document…': 'ghItlhDaq choH…',
@@ -4069,7 +4069,7 @@ const _dutchSourceAddTlh = <String, String>{
       'SamwI\' teHqu\' neH ghuHmoH; chaqqu\' chaq je ja\' neH. chut chu\'Ha\'lu\'bogh not vang.',
   'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
       'nuDlu\'be\': nuv De\', nuv De\' pIn, pegh je. Hubqu\'Daq chu\'Ha\'lu\' pegh ninSar.',
-  'Op deze slide': '\'echletHomvam',
+  'Op deze slide': '\'echletHomvamDaq',
   'Tijdens presenteren': '\'ang\'eghmeH poH',
   'Classificatie en privacy': 'Sup je peghmey',
   'Logo tonen': 'Degh \'ang',
