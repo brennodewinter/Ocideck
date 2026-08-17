@@ -2921,22 +2921,22 @@ const _dutchSourceAddPt = <String, String>{
       'não foi possível ler e foi ignorado',
   'ontbrak in het bestand en is overgeslagen':
       'faltava no ficheiro e foi ignorado',
-  'Hoofdeffecten': 'Main effects',
+  'Hoofdeffecten': 'Efeitos principais',
   'Interactie': 'Interaction',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Dados insuficientes para um gráfico de efeitos principais',
   'Te weinig gegevens voor een interactieplot':
       'Dados insuficientes para um gráfico de interação',
-  'DOE-proefopzet…': 'DOE design…',
-  'DOE-proefopzet': 'DOE design',
+  'DOE-proefopzet…': 'Desenho DOE…',
+  'DOE-proefopzet': 'Desenho DOE',
   'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
       'Gera uma tabela de desenho com fatores codificados (−1/+1) e uma coluna Y vazia na grelha.',
   'Aantal factoren': 'Número de fatores',
   'Volledig factorial (2^k)': 'Fatorial completo (2^k)',
-  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
-  'Fractie p': 'Fraction p',
+  'Fractioneel (2^(k−p))': 'Fracionário (2^(k−p))',
+  'Fractie p': 'Fração p',
   'runs in standaard Yates-volgorde': 'ensaios na ordem Yates padrão',
-  'In raster zetten': 'Fill grid',
+  'In raster zetten': 'Preencher grelha',
   'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
       'Uma série por fator com níveis codificados −1 e +1; a última série é a resposta (Y). As linhas são ensaios.',
   'Golden-thread-id': 'Id golden thread',
@@ -4458,7 +4458,7 @@ const _dutchSourceAddPt = <String, String>{
   'Resourcebelasting (grafiek)': 'Carga de recursos (gráfico)',
   'Ophalen uit LibrePlan…': 'A obter do LibrePlan…',
   'Geen slides gevonden.': 'Nenhum slide encontrado.',
-  "dia's geïmporteerd.": 'slides imported.',
+  "dia's geïmporteerd.": 'slides importados.',
   'Import mislukt: ': 'Falha na importação: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':

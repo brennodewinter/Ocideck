@@ -2783,15 +2783,15 @@ const _dutchSourceAddLv = <String, String>{
   'Berekenen': 'Calculate',
   'Gegevens': 'Data',
   'Hellingscoëfficiënt': 'Slope',
-  'Hypothesetoets': 'Hypothesis test',
-  'Hypothesetoets…': 'Hypothesis test…',
-  'Hypothetisch gemiddelde': 'Hypothesized mean',
-  'Lineaire regressie': 'Linear regression',
+  'Hypothesetoets': 'Hipotēzes tests',
+  'Hypothesetoets…': 'Hipotēzes tests…',
+  'Hypothetisch gemiddelde': 'Hipotētiskais vidējais',
+  'Lineaire regressie': 'Lineārā regresija',
   'Regressie…': 'Regression…',
-  'Meetdata': 'Measurement data',
+  'Meetdata': 'Mērījumu dati',
   'Toets': 'Test',
-  'Tolerantie (optioneel)': 'Tolerance (optional)',
-  'Eénsteeks t-toets': 'One-sample t-test',
+  'Tolerantie (optioneel)': 'Pielaide (neobligāti)',
+  'Eénsteeks t-toets': 'Viena parauga t tests',
   'Twee-steeks t-toets (Welch)': 'Zweistichproben-t-Test (Welch)',
   'Één kolom getallen (minimaal 2 waarnemingen).':
       'Viens skaitļu stabiņš (vismaz 2 novērojumi).',
@@ -2882,26 +2882,26 @@ const _dutchSourceAddLv = <String, String>{
   'kon niet worden gelezen en is overgeslagen':
       'nevarēja nolasīt un tika izlaists',
   'ontbrak in het bestand en is overgeslagen': 'trūka failā un tika izlaists',
-  'Hoofdeffecten': 'Main effects',
+  'Hoofdeffecten': 'Galvenie efekti',
   'Interactie': 'Interaction',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Nepietiekami dati galveno efektu diagrammai',
   'Te weinig gegevens voor een interactieplot':
       'Nepietiekami dati mijiedarbības diagrammai',
-  'DOE-proefopzet…': 'DOE design…',
-  'DOE-proefopzet': 'DOE design',
+  'DOE-proefopzet…': 'DOE plāns…',
+  'DOE-proefopzet': 'DOE plāns',
   'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
       'Izveido dizaina tabulu ar kodētiem faktoriem (−1/+1) un tukšu Y kolonnu režģī.',
   'Aantal factoren': 'Anzahl Faktoren',
   'Volledig factorial (2^k)': 'Vollständiges faktorielles Design (2^k)',
-  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
-  'Fractie p': 'Fraction p',
+  'Fractioneel (2^(k−p))': 'Frakcionāls (2^(k−p))',
+  'Fractie p': 'Frakcija p',
   'runs in standaard Yates-volgorde':
       'Läufe in standardmäßiger Yates-Reihenfolge',
-  'In raster zetten': 'Fill grid',
+  'In raster zetten': 'Aizpildīt režģi',
   'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
       'Viena sērija uz faktoru ar kodētiem līmeņiem −1 un +1; pēdējā sērija ir atbilde (Y). Rindas ir eksperimentālie gājieni.',
-  'Golden-thread-id': 'Golden-thread id',
+  'Golden-thread-id': 'Golden thread identifikators',
   'wordt ergens genoemd maar staat niet op een boom-dia — definieer hem op een CTQ- of Ishikawa-boom.':
       'kaut kur minēts, bet nav uz koka slaida — definējiet to CTQ vai Ishikawa kokā.',
   'staat op een boom-dia maar wordt nergens anders gebruikt — koppel hem aan een matrix, stroom of andere dia.':
@@ -4403,7 +4403,7 @@ const _dutchSourceAddLv = <String, String>{
   'Resourcebelasting (grafiek)': 'Resursu noslodze (diagramma)',
   'Ophalen uit LibrePlan…': 'Ielāde no LibrePlan…',
   'Geen slides gevonden.': 'Nav atrasts neviens slaids.',
-  "dia's geïmporteerd.": 'slides imported.',
+  "dia's geïmporteerd.": 'slaidi importēti.',
   'Import mislukt: ': 'Imports neizdevās: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':

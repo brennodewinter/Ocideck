@@ -3790,22 +3790,22 @@ const _dutchSourceAddTr = <String, String>{
   'Dia-inhoud': 'Slayt içeriği',
   'kon niet worden gelezen en is overgeslagen': 'okunamadı ve atlandı',
   'ontbrak in het bestand en is overgeslagen': 'dosyada eksikti ve atlandı',
-  'Hoofdeffecten': 'Main effects',
+  'Hoofdeffecten': 'Ana etkiler',
   'Interactie': 'Interaction',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Ana etkiler grafiği için yetersiz veri',
   'Te weinig gegevens voor een interactieplot':
       'Etkileşim grafiği için yetersiz veri',
-  'DOE-proefopzet…': 'DOE design…',
-  'DOE-proefopzet': 'DOE design',
+  'DOE-proefopzet…': 'DOE tasarımı…',
+  'DOE-proefopzet': 'DOE tasarımı',
   'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
       'Kodlanmış faktörler (−1/+1) ve ızgarada boş bir Y sütunu içeren bir tasarım tablosu oluşturur.',
   'Aantal factoren': 'Faktör sayısı',
   'Volledig factorial (2^k)': 'Tam faktöriyel (2^k)',
-  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
-  'Fractie p': 'Fraction p',
+  'Fractioneel (2^(k−p))': 'Kesirli (2^(k−p))',
+  'Fractie p': 'Kesir p',
   'runs in standaard Yates-volgorde': 'standart Yates sırasıyla denemeler',
-  'In raster zetten': 'Fill grid',
+  'In raster zetten': 'Izgaraya yerleştir',
   'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
       'Faktör başına kodlanmış −1 ve +1 düzeyleriyle bir dizi; son dizi yanıttır (Y). Satırlar deneysel koşulardır.',
   'Golden-thread-id': 'Golden thread kimliği',
@@ -4393,7 +4393,7 @@ const _dutchSourceAddTr = <String, String>{
   'Resourcebelasting (grafiek)': 'Kaynak yükü (grafik)',
   'Ophalen uit LibrePlan…': 'LibrePlan\'dan alınıyor…',
   'Geen slides gevonden.': 'Slayt bulunamadı.',
-  "dia's geïmporteerd.": 'slides imported.',
+  "dia's geïmporteerd.": 'slayt içe aktarıldı.',
   'Import mislukt: ': 'İçe aktarma başarısız: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':

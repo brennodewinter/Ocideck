@@ -4459,7 +4459,7 @@ const _dutchSourceAddDe = {
   'Resourcebelasting (grafiek)': 'Ressourcenauslastung (Diagramm)',
   'Ophalen uit LibrePlan…': 'Wird aus LibrePlan abgerufen…',
   'Geen slides gevonden.': 'Keine Folien gefunden.',
-  "dia's geïmporteerd.": 'slides imported.',
+  "dia's geïmporteerd.": 'Folien importiert.',
   'Import mislukt: ': 'Import fehlgeschlagen: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':

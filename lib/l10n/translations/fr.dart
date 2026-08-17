@@ -1823,7 +1823,7 @@ const _dutchSourceAddFr = {
   'USL (bovengrens, optioneel)': 'USL (limite supérieure, facultatif)',
   'LSL (ondergrens, optioneel)': 'LSL (limite inférieure, facultatif)',
   'Procesdoel (optioneel)': 'Cible de processus (facultatif)',
-  'Fasepoort': 'Phase gate',
+  'Fasepoort': 'Porte de phase',
   'Berekenen': 'Calculer',
   'Gegevens': 'Données',
   'Hellingscoëfficiënt': 'Pente',
@@ -4489,7 +4489,7 @@ const _dutchSourceAddFr = {
   'Resourcebelasting (grafiek)': 'Charge des ressources (graphique)',
   'Ophalen uit LibrePlan…': 'Récupération depuis LibrePlan…',
   'Geen slides gevonden.': 'Aucune diapositive trouvée.',
-  "dia's geïmporteerd.": 'slides imported.',
+  "dia's geïmporteerd.": 'diapositives importées.',
   'Import mislukt: ': 'Échec de l’import : ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':

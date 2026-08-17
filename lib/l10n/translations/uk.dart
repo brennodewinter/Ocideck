@@ -2899,22 +2899,22 @@ const _dutchSourceAddUk = <String, String>{
   'kon niet worden gelezen en is overgeslagen':
       'не вдалося прочитати й пропущено',
   'ontbrak in het bestand en is overgeslagen': 'бракувало у файлі й пропущено',
-  'Hoofdeffecten': 'Main effects',
+  'Hoofdeffecten': 'Основні ефекти',
   'Interactie': 'Interaction',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Замало даних для графіка головних ефектів',
   'Te weinig gegevens voor een interactieplot':
       'Замало даних для графіка взаємодії',
-  'DOE-proefopzet…': 'DOE design…',
-  'DOE-proefopzet': 'DOE design',
+  'DOE-proefopzet…': 'План DOE…',
+  'DOE-proefopzet': 'План DOE',
   'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
       'Створює таблицю плану з кодованими факторами (−1/+1) і порожнім стовпцем Y у сітці.',
   'Aantal factoren': 'Кількість факторів',
   'Volledig factorial (2^k)': 'Повний факторіальний (2^k)',
-  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
-  'Fractie p': 'Fraction p',
+  'Fractioneel (2^(k−p))': 'Дробовий (2^(k−p))',
+  'Fractie p': 'Частка p',
   'runs in standaard Yates-volgorde': 'прогони в стандартному порядку Єйтса',
-  'In raster zetten': 'Fill grid',
+  'In raster zetten': 'Заповнити сітку',
   'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
       'Один ряд на фактор із кодованими рівнями −1 і +1; останній ряд — відгук (Y). Рядки — експериментальні прогони.',
   'Golden-thread-id': 'Ідентифікатор golden thread',
@@ -4427,7 +4427,7 @@ const _dutchSourceAddUk = <String, String>{
   'Resourcebelasting (grafiek)': 'Завантаження ресурсів (діаграма)',
   'Ophalen uit LibrePlan…': 'Отримання з LibrePlan…',
   'Geen slides gevonden.': 'Слайдів не знайдено.',
-  "dia's geïmporteerd.": 'slides imported.',
+  "dia's geïmporteerd.": 'слайдів імпортовано.',
   'Import mislukt: ': 'Не вдалося імпортувати: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':

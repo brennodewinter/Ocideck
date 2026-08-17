@@ -2881,22 +2881,22 @@ const _dutchSourceAddSv = <String, String>{
       'kunde inte läsas och hoppades över',
   'ontbrak in het bestand en is overgeslagen':
       'saknades i filen och hoppades över',
-  'Hoofdeffecten': 'Main effects',
+  'Hoofdeffecten': 'Huvudeffekter',
   'Interactie': 'Interaction',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'För lite data för ett huvudeffektsdiagram',
   'Te weinig gegevens voor een interactieplot':
       'För lite data för ett interaktionsdiagram',
-  'DOE-proefopzet…': 'DOE design…',
-  'DOE-proefopzet': 'DOE design',
+  'DOE-proefopzet…': 'DOE-design…',
+  'DOE-proefopzet': 'DOE-design',
   'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
       'Skapar en designtabell med kodade faktorer (−1/+1) och en tom Y-kolumn i rutnätet.',
   'Aantal factoren': 'Antal faktorer',
   'Volledig factorial (2^k)': 'Full faktoriell (2^k)',
-  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
-  'Fractie p': 'Fraction p',
+  'Fractioneel (2^(k−p))': 'Fraktionell (2^(k−p))',
+  'Fractie p': 'Fraktion p',
   'runs in standaard Yates-volgorde': 'körningar i standard Yates-ordning',
-  'In raster zetten': 'Fill grid',
+  'In raster zetten': 'Fyll rutnätet',
   'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
       'En serie per faktor med kodade nivåer −1 och +1; sista serien är responsen (Y). Rader är försökskörningar.',
   'Golden-thread-id': 'Golden-thread-id',
@@ -4402,7 +4402,7 @@ const _dutchSourceAddSv = <String, String>{
   'Resourcebelasting (grafiek)': 'Resursbelastning (diagram)',
   'Ophalen uit LibrePlan…': 'Hämtar från LibrePlan…',
   'Geen slides gevonden.': 'Inga bilder hittades.',
-  "dia's geïmporteerd.": 'slides imported.',
+  "dia's geïmporteerd.": 'bilder importerade.',
   'Import mislukt: ': 'Importen misslyckades: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':

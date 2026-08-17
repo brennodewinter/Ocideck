@@ -18,13 +18,39 @@ import 'package:flutter_test/flutter_test.dart';
 /// woorden zijn massaal identiek zonder dat er iets mis is: `Logo`, `Design`,
 /// `Version`, `Classification` in het Frans. Een naïeve gelijkheidstoets vindt
 /// er 446 en heeft in 350 gevallen ongelijk; dat is geen poort maar ruis, en
-/// ruis wordt weggeklikt. Daarom telt alleen wat **drie woorden of meer** is:
-/// een hele zin die in twee talen identiek is, is geen toeval.
+/// ruis wordt weggeklikt. Daarom is er een woorddrempel: onder [minimumWords]
+/// woorden telt gelijkheid niet mee.
 ///
-/// Wat die keuze kost, staat er eerlijk bij: een onvertaalde string van één of
-/// twee woorden glipt hier doorheen. Dat is de prijs voor een poort die niet
-/// liegt, en hij is te betalen — de fout die dit issue opleverde bestond uit
-/// hele zinnen.
+/// ── Waarom die drempel van drie naar TWEE ging (#1534) ──────────────────────
+///
+/// Hij stond op drie toen deze poort de enige van zijn soort was. Inmiddels
+/// staan er twee poorten naast: `check-l10n-parity` (staat elke sleutel in elke
+/// taal?) en `check-l10n-passthrough` (draagt een taal de NEDERLANDSE bron
+/// letterlijk?). Die vangen een deel van de ruis nu elders af, dus is er
+/// opnieuw gemeten op de boom van #1534 — geteld op unieke (sleutel, waarde),
+/// niet op regels, want één onvertaalde string telt in dertig talen mee:
+///
+///   drempel 1 → 175 unieke waarden, 851 regels — onbruikbaar, vrijwel alles
+///               is `Logo`, `Audio`, `Status`, `OK`;
+///   drempel 2 →  38 unieke waarden, 350 regels;
+///   drempel 3 →   3 unieke waarden — de drie in [allowed] hieronder.
+///
+/// Van die 38 bij drempel twee waren er **22 echt onvertaald** en 16 een echt
+/// leenwoord of cognaat. Dat is een verhouding van bijna 60% raak, en 22
+/// bronstrings zijn op te ruimen — dat is gebeurd; ze zijn vertaald. De 16
+/// resterende staan hieronder in [allowed], elk met zijn reden.
+///
+/// Wat die verlaging goedkoop maakt en niet duur, is de VORM van de
+/// uitzondering hier: `allowed` gaat per (taal, waarde). Een Franse `Image 1`
+/// vrijstellen zegt niets over het Grieks, waar `Image 1` wél fout zou zijn.
+/// De zusterpoort in tool/check_l10n_dutch_passthrough.dart kan dat niet — daar
+/// gaat de uitzondering per sleutel en dekt ze meteen alle 31 talen — en dáárom
+/// blijft de drempel dáár op drie staan. Zie de kop van dat bestand voor die
+/// meting.
+///
+/// Wat de drempel nog steeds kost, staat er eerlijk bij: een onvertaalde string
+/// van één woord glipt hier doorheen. Dat is de prijs voor een poort die niet
+/// liegt.
 void main() {
   const allowed = <(String, String)>{
     // Een lettertypevoorbeeld. De pangram is het punt; vertalen zou hem breken.
@@ -33,7 +59,51 @@ void main() {
     ('tlh', 'CVSS 4.0 vector'),
     // Deense interfaceterm die letterlijk zo geleend is.
     ('da', 'Look and feel'),
+
+    // ── Cognaten: het Engelse woord ÍS het woord in deze taal ───────────────
+    //
+    // Hieronder staat geen enkele vrijstelling omdat vertalen lastig was. Elk
+    // paar is nagelopen tegen wat de taal elders in ditzelfde bestand doet.
+    //
+    // `Link` is het gewone woord in het Deens, Duits, Zwitserduits en Estisch;
+    // wat er verder in staat is een plaatshouder en aanhalingstekens.
+    ('da', 'Link "{tekst}"'),
+    ('de', 'Link "{tekst}"'),
+    ('gsw', 'Link "{tekst}"'),
+    ('et', 'Link "{tekst}"'),
+    // `System` is Deens en Zweeds; `monospace` is in elke taal de vakterm.
+    ('da', 'System (monospace)'),
+    ('sv', 'System (monospace)'),
+    // `Branch` is de Duitse git-term, en `optional` is gewoon Duits.
+    ('de', 'Branch (optional)'),
+    ('gsw', 'Branch (optional)'),
+    // Het Deens zegt zelf `Multiple choice`; de losse sleutel `Meerkeuze` doet
+    // dat in ditzelfde bestand ook. `Stop` en `Top` zijn eveneens Deens — vgl.
+    // `Stoppen` → `Stop` een paar duizend regels hoger.
+    ('da', 'Multiple choice'),
+    ('da', 'Stop (Esc)'),
+    ('da', 'Top (mm)'),
+    // Frans. `fraction`, `confirmation`, `reproduction`, `image` en `images`
+    // zijn stuk voor stuk Franse woorden; er valt niets aan te vertalen.
+    ('fr', 'Fraction p'),
+    ('fr', 'Confirmation (reproduction)'),
+    ('fr', '{n} image'),
+    ('fr', '{n} images'),
+    ('fr', 'Image 1'),
+    ('fr', 'Image 2'),
+    // Latijn. `e.g.` is de afkorting van *exempli gratia* en dus Latijn; het
+    // Engels heeft hem geleend, niet andersom. Wat erachter staat is een
+    // eigennaam, een datum of een versienummer.
+    ('la', 'E.g. Vigilis'),
+    ('la', 'E.g. 2026-05-30'),
+    ('la', 'e.g. 2024'),
+    ('la', 'E.g. 1.0'),
   };
+
+  /// Vanaf hoeveel woorden een gelijke waarde als onvertaald telt.
+  ///
+  /// Zie de kop van dit bestand voor de meting achter deze twee.
+  const minimumWords = 2;
 
   test('geen enkele taal draagt een Engelse zin als vertaling', () {
     final dir = Directory('lib/l10n/translations');
@@ -59,7 +129,7 @@ void main() {
         if (english[key] != value) return;
         // Een leenwoord dat in het Nederlands al zo is.
         if (value == key) return;
-        if (value.trim().split(RegExp(r'\s+')).length < 3) return;
+        if (value.trim().split(RegExp(r'\s+')).length < minimumWords) return;
         if (allowed.contains((lang, value))) return;
         problems.add('$lang: "$value"');
       });

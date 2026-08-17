@@ -2905,23 +2905,23 @@ const _dutchSourceAddPl = <String, String>{
   'kon niet worden gelezen en is overgeslagen':
       'nie udało się odczytać i pominięto',
   'ontbrak in het bestand en is overgeslagen': 'brakowało w pliku i pominięto',
-  'Hoofdeffecten': 'Main effects',
+  'Hoofdeffecten': 'Efekty główne',
   'Interactie': 'Interaction',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Za mało danych do wykresu efektów głównych',
   'Te weinig gegevens voor een interactieplot':
       'Za mało danych do wykresu interakcji',
-  'DOE-proefopzet…': 'DOE design…',
-  'DOE-proefopzet': 'DOE design',
+  'DOE-proefopzet…': 'Projekt DOE…',
+  'DOE-proefopzet': 'Projekt DOE',
   'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
       'Tworzy tabelę planu z zakodowanymi czynnikami (−1/+1) i pustą kolumną Y w siatce.',
   'Aantal factoren': 'Liczba czynników',
   'Volledig factorial (2^k)': 'Pełny faktorialny (2^k)',
-  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
-  'Fractie p': 'Fraction p',
+  'Fractioneel (2^(k−p))': 'Frakcyjny (2^(k−p))',
+  'Fractie p': 'Frakcja p',
   'runs in standaard Yates-volgorde':
       'przebiegi w standardowej kolejności Yatesa',
-  'In raster zetten': 'Fill grid',
+  'In raster zetten': 'Wypełnij siatkę',
   'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
       'Jedna seria na czynnik z zakodowanymi poziomami −1 i +1; ostatnia seria to odpowiedź (Y). Wiersze to przebiegi eksperymentalne.',
   'Golden-thread-id': 'Identyfikator golden thread',
@@ -4430,7 +4430,7 @@ const _dutchSourceAddPl = <String, String>{
   'Resourcebelasting (grafiek)': 'Obciążenie zasobów (wykres)',
   'Ophalen uit LibrePlan…': 'Pobieranie z LibrePlan…',
   'Geen slides gevonden.': 'Nie znaleziono slajdów.',
-  "dia's geïmporteerd.": 'slides imported.',
+  "dia's geïmporteerd.": 'slajdy zaimportowane.',
   'Import mislukt: ': 'Import nie powiódł się: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':

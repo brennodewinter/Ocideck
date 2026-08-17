@@ -2890,22 +2890,22 @@ const _dutchSourceAddHu = <String, String>{
       'nem sikerült beolvasni, ezért ki lett hagyva',
   'ontbrak in het bestand en is overgeslagen':
       'hiányzott a fájlból, ezért ki lett hagyva',
-  'Hoofdeffecten': 'Main effects',
+  'Hoofdeffecten': 'Főhatások',
   'Interactie': 'Interaction',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Túl kevés adat a főhatás ábrához',
   'Te weinig gegevens voor een interactieplot':
       'Túl kevés adat az interakciós ábrához',
-  'DOE-proefopzet…': 'DOE design…',
-  'DOE-proefopzet': 'DOE design',
+  'DOE-proefopzet…': 'DOE-terv…',
+  'DOE-proefopzet': 'DOE-terv',
   'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
       'Tervezési táblázatot készít kódolt tényezőkkel (−1/+1) és üres Y oszloppal a rácsban.',
   'Aantal factoren': 'Tényezők száma',
   'Volledig factorial (2^k)': 'Teljes faktoriális (2^k)',
-  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
-  'Fractie p': 'Fraction p',
+  'Fractioneel (2^(k−p))': 'Frakcionális (2^(k−p))',
+  'Fractie p': 'Frakció p',
   'runs in standaard Yates-volgorde': 'futások standard Yates-sorrendben',
-  'In raster zetten': 'Fill grid',
+  'In raster zetten': 'Rácsba rendezés',
   'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
       'Tényezőnként egy sorozat kódolt −1 és +1 szintekkel; az utolsó sorozat a válasz (Y). A sorok kísérleti futások.',
   'Golden-thread-id': 'Golden-thread azonosító',
@@ -4420,7 +4420,7 @@ const _dutchSourceAddHu = <String, String>{
   'Resourcebelasting (grafiek)': 'Erőforrás-terhelés (diagram)',
   'Ophalen uit LibrePlan…': 'Lehívás a LibrePlanből…',
   'Geen slides gevonden.': 'Nem található dia.',
-  "dia's geïmporteerd.": 'slides imported.',
+  "dia's geïmporteerd.": 'dia importálva.',
   'Import mislukt: ': 'Az importálás nem sikerült: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':

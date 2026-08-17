@@ -2910,22 +2910,22 @@ const _dutchSourceAddRo = <String, String>{
   'Dia-inhoud': 'Conținutul diapozitivului',
   'kon niet worden gelezen en is overgeslagen': 'nu s-a putut citi și s-a omis',
   'ontbrak in het bestand en is overgeslagen': 'lipsea din fișier și s-a omis',
-  'Hoofdeffecten': 'Main effects',
+  'Hoofdeffecten': 'Efecte principale',
   'Interactie': 'Interaction',
   'Te weinig gegevens voor een hoofdeffectenplot':
       'Prea puține date pentru un grafic de efecte principale',
   'Te weinig gegevens voor een interactieplot':
       'Prea puține date pentru un grafic de interacțiune',
-  'DOE-proefopzet…': 'DOE design…',
-  'DOE-proefopzet': 'DOE design',
+  'DOE-proefopzet…': 'Proiectare DOE…',
+  'DOE-proefopzet': 'Proiectare DOE',
   'Genereert een ontwerptabel met gecodeerde factoren (−1/+1) en een lege Y-kolom in het raster.':
       'Generează un tabel de design cu factori codificați (−1/+1) și o coloană Y goală în grilă.',
   'Aantal factoren': 'Număr de factori',
   'Volledig factorial (2^k)': 'Factorial complet (2^k)',
-  'Fractioneel (2^(k−p))': 'Fractional (2^(k−p))',
-  'Fractie p': 'Fraction p',
+  'Fractioneel (2^(k−p))': 'Fracționat (2^(k−p))',
+  'Fractie p': 'Fracție p',
   'runs in standaard Yates-volgorde': 'rulări în ordinea Yates standard',
-  'In raster zetten': 'Fill grid',
+  'In raster zetten': 'Umple grila',
   'Eén reeks per factor met gecodeerde niveaus −1 en +1; laatste reeks is de respons (Y). Rijen zijn proefruns.':
       'O serie pe factor cu niveluri codificate −1 și +1; ultima serie este răspunsul (Y). Rândurile sunt rulări experimentale.',
   'Golden-thread-id': 'Id golden thread',
@@ -4449,7 +4449,7 @@ const _dutchSourceAddRo = <String, String>{
   'Resourcebelasting (grafiek)': 'Încărcarea resurselor (grafic)',
   'Ophalen uit LibrePlan…': 'Se preia din LibrePlan…',
   'Geen slides gevonden.': 'Nu s-au găsit slide-uri.',
-  "dia's geïmporteerd.": 'slides imported.',
+  "dia's geïmporteerd.": 'slide-uri importate.',
   'Import mislukt: ': 'Importul a eșuat: ',
   'Checklists': 'Checklists',
   'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
