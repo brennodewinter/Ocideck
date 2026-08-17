@@ -602,10 +602,7 @@ const _dutchSourcePap = {
       'P públiko · H legenda · S pantalla · G resumen · B/W pretu/blanku · R tempu · Esc stop',
   'Akkoord gaan': 'Akuerdo',
   'Licentie (EUPL 1.2)': 'Lisencia (EUPL 1.2)',
-  'Toestemming ingetrokken': 'Aprobashon retirá',
   'Toestemming intrekken': 'Retirá Aprobashon',
-  'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.':
-      'Bo mester akseptá e termino di privacidad i uso antes bo por usa OciDeck.',
   'Volledige licentie online': 'Lisencia kompleto online',
   'Welkom bij OciDeck': 'Bienvenido na OciDeck',
   // Duplicaatdetectie & opruimen (open-lijsten).

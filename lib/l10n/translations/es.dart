@@ -600,10 +600,7 @@ const _dutchSourceEs = {
       'P público · H leyenda · S pantalla · G vista general · B/W negro/blanco · R tiempo · Esc detener',
   'Akkoord gaan': 'Aceptar',
   'Licentie (EUPL 1.2)': 'Licencia (EUPL 1.2)',
-  'Toestemming ingetrokken': 'Consentimiento revocado',
   'Toestemming intrekken': 'Revocar consentimiento',
-  'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.':
-      'Debe aceptar los términos de privacidad y uso antes de poder usar OciDeck.',
   'Volledige licentie online': 'Licencia completa en línea',
   'Welkom bij OciDeck': 'Bienvenido a OciDeck',
   // Duplicaatdetectie & opruimen (open-lijsten).

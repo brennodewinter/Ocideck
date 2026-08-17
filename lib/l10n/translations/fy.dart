@@ -603,10 +603,7 @@ const _dutchSourceFy = {
       'P publyk · H leginda · S skerm · G oersjoch · B/W swart/wyt · R tiid · Esc stop',
   'Akkoord gaan': 'Akseptyf gean',
   'Licentie (EUPL 1.2)': 'Lisintse (EUPL 1.2)',
-  'Toestemming ingetrokken': 'Tastimming yntrokken',
   'Toestemming intrekken': 'Tastimming yntrekke',
-  'U moet eerst de privacy- en gebruiksvoorwaarden accepteren voordat u OciDeck kunt gebruiken.':
-      'Jo moatte de privacy- en brûksbetingsten akseptyf gean foardat jo OciDeck brûke kûnne.',
   'Volledige licentie online': 'Folsleine lisintse online',
   'Welkom bij OciDeck': 'Wolkom by OciDeck',
   // Duplicaatdetectie & opruimen (open-lijsten).
