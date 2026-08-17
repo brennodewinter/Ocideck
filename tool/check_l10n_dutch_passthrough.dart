@@ -92,12 +92,13 @@ const int minimumWords = 3;
 /// Hoeveel doorgelaten bronzinnen er nog staan. RATCHET: mag dalen, nooit
 /// stijgen.
 ///
-/// Bij invoering gemeten op de boom van #1526. Nul is de bedoeling en de
-/// opruimronde daarna brengt hem daarheen; tot die tijd houdt dit getal tegen
-/// dat er nóg een taal of nóg een blok bijkomt. Zakt het getal, zet het dan
-/// meteen omlaag — een basislijn die boven de werkelijkheid blijft hangen is
-/// stille ruimte voor de volgende fout.
-const int passthroughBaseline = 385;
+/// Bij invoering gemeten op de boom van #1526: 385. De opruimronde daarna heeft
+/// ze alle 385 vertaald, dus staat hij nu waar hij hoort. Nul betekent dat elke
+/// nieuwe doorlaat meteen rood is — er is geen ruimte meer om er stilletjes één
+/// bij te leggen. Zakt het getal ooit toch, zet het dan meteen omlaag; een
+/// basislijn die boven de werkelijkheid blijft hangen is stille ruimte voor de
+/// volgende fout.
+const int passthroughBaseline = 0;
 
 /// Bronsleutels waarvoor een identieke waarde GOED is, niet fout.
 ///
@@ -119,12 +120,34 @@ const int passthroughBaseline = 385;
 /// wél zou translitereren. Dat is de prijs van een uitzondering die je kunt
 /// verdedigen zonder de tabel per taal te laten uitdijen.
 ///
-/// **Wat er bewust NIET in staat.** `Forgejo of Gitea`, `Nextcloud of
-/// ownCloud`, `Smal (860 px)` en `ISO 27001 · Annex A — Organisatorisch (A.5)`
-/// zijn voor de talen die ze nu raken (fy, pap, da, sv, de, gsw) waarschijnlijk
-/// correct — maar ze dragen een woord dat elders wél vertaald moet worden (`of`,
-/// `Smal`, `Organisatorisch`). Die blijven in de meting staan; de opruimronde
-/// beslist per geval.
+/// **Het tweede criterium: de cognaat.** De opruimronde van #1526 liep op drie
+/// bronzinnen vast waarop het eerste criterium geen antwoord geeft. `Smal (860
+/// px)`, `Forgejo of Gitea` en `Nextcloud of ownCloud` bestaan op één woord na
+/// uit eigennamen en een maat, en dát ene woord (`Smal`, `of`) heeft in het
+/// Deens, Zweeds en Fries dezelfde Germaanse vorm als in het Nederlands. Deens
+/// zegt "smal", Fries zegt "of"; er is geen andere idiomatische vorm om naar
+/// uit te wijken. Gelijkheid is daar dus geen bewijs van luiheid maar van de
+/// verwantschap van de talen, en de poort kan die twee niet uit elkaar houden.
+///
+/// Dus geldt hier: een bronzin waarin, naast eigennamen, getallen en eenheden,
+/// precies één gewoon woord staat, en waarvan de talen die hem doorlaten dat
+/// woord in dezelfde vorm kennen. De grens is bewust smal — hij dekt een label,
+/// geen zin. Een hele zin bevat altijd woorden die uiteenlopen, dus valt nooit
+/// onder dit criterium; dat is precies wat het van het eerste onderscheidt en
+/// wat voorkomt dat er ooit weer een LibrePlan-blok onder wegkruipt.
+///
+/// De prijs is dezelfde als hierboven en staat er eerlijk bij: `Smal (860 px)`
+/// is nu ook stil voor het Grieks en het Bulgaars, waar een Nederlandse waarde
+/// wél fout zou zijn. Voor een breedtekeuze van drie woorden is dat te betalen.
+/// De talen die hem wél vertalen staan goed in de boom (de: Schmal, fy: Smel,
+/// pap: Hanchu voor de tegenhanger) en blijven dat.
+///
+/// **Wat er ná die afweging nog steeds NIET in staat.** `ISO 27001 · Annex A —
+/// Organisatorisch (A.5)` haalt het criterium niet: `Organisatorisch` is een
+/// gewoon woord dat elke taal anders zegt (Organisatorisk, Organizativo,
+/// Organizacyjne). Het Duits en het Zwitserduits zeggen nu wat de norm zelf in
+/// het Duits zegt — "Organisatorische Maßnahmen" — en zijn daarmee vertaald in
+/// plaats van vrijgesteld.
 const Set<String> loanKeys = {
   // Alleen letters en plaatshouders — er staat geen woord in om te vertalen.
   'P {pitch}  B {bank}',
@@ -147,6 +170,12 @@ const Set<String> loanKeys = {
   'Business continuity / DR-test',
   'DPIA / privacy impact assessment',
   'Training / workshop',
+  // Tweede criterium (de cognaat): eigennamen of een maat plus één gewoon
+  // woord, dat in de talen die het doorlaten dezelfde vorm heeft. `Smal` is
+  // Deens en Zweeds voor smal, `of` is Fries voor of.
+  'Smal (860 px)',
+  'Forgejo of Gitea',
+  'Nextcloud of ownCloud',
 };
 
 /// Eén vertaalregel die de Nederlandse bron letterlijk doorliet.
