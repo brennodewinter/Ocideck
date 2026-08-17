@@ -56,6 +56,10 @@
 //   drempel 2 →  47 sleutels,   187 regels;
 //   drempel 3 →  17 sleutels,    70 regels — precies de [loanKeys] hieronder.
 //
+// Meet je nu na, dan kom je op 44 en 179 bij drempel twee: de vijf echt
+// onvertaalde sleutels hieronder zijn intussen vertaald. Dat is het verschil,
+// en het is het hele verschil.
+//
 // De 30 sleutels die drempel twee er bovenop legt, één voor één nagelopen:
 //
 //   * 25 zijn een ECHT leenwoord of cognaat. `Laser (X)`, `Logo px`,
@@ -78,7 +82,7 @@
 // SLEUTEL en dekt daarmee meteen alle 31 talen — zie de afweging daar. `Titel
 // (H1)` vrijstellen omdat het Deens toevallig `Titel` zegt, maakt diezelfde
 // sleutel ook stil voor het Grieks en het Bulgaars, waar een Nederlandse waarde
-// onmiskenbaar fout is. Verlagen naar twee zou de lijst van 18 naar 43 sleutels
+// onmiskenbaar fout is. Verlagen naar twee zou de lijst van 17 naar 44 sleutels
 // duwen, grotendeels met zulke cognaten, en dat kost meer dekking dan het
 // oplevert.
 //
